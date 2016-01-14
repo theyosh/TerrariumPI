@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example shows how to create a Grid from Observable Array data.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtagcloud.js"></script>
+    <script type="text/javascript" src="../sampledata/generatedata.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var array = generatedata(2);
+            var updateLog = function (observableArray) {
+                var rows = "";
+                for (var i = 0; i < observableArray.length; i++) {
+                    rows += observableArray.toJSON(["firstname", "lastname", "productname", "quantity", "price", "total"], observableArray[i]);
+                    rows += "<br/>";
+                }
+                $("#log").html(rows);
+            };
+            var observableArray = new $.jqx.observableArray(array, function (changed) {
+                dataAdapter.dataBind();
+                updateLog(this);
+            });
+            updateLog(observableArray);
+            var source =
+            {
+                localdata: observableArray,
+                datatype: "obserableArray",
+                datafields: [
+                    { name: 'firstname', type: 'string' },
+                    { name: 'lastname', type: 'string' },
+                    { name: 'productname', type: 'string' },
+                    { name: 'quantity', type: 'number' },
+                    { name: 'price', type: 'number' },
+                    { name: 'total', type: 'number' }
+                ]
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $('#tagCloud').jqxTagCloud({
+                width: '600px',
+                source: dataAdapter,
+                displayMember: 'productname',
+                valueMember: 'price'
+            });
+
+            $("#addItem").jqxButton();
+            $("#deleteItem").jqxButton();
+            $("#updateItem").jqxButton();
+            $("#addItem").click(function () {
+                var row = generatedata(1)[0];
+                observableArray.push(row);
+            });
+            $("#deleteItem").click(function () {
+                if (observableArray.length > 0) {
+                    observableArray.splice(0, 1);
+                }
+            });
+            $("#updateItem").click(function () {
+                if (observableArray.length > 0) {
+                    var row = generatedata(1)[0];
+                    observableArray.set(0, row);
+                }
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="tagCloud"></div>
+    <br />
+    <br />
+    <button id="addItem">Add Item</button>
+    <button id="deleteItem">Delete Item</button>
+    <button id="updateItem">Update Item</button>
+    <br />
+    <div id="log"></div>
+</body>
+</html>

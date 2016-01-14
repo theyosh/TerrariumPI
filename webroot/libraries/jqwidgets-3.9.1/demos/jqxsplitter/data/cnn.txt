@@ -1,0 +1,112 @@
+﻿{
+  "rss": {
+    "-xmlns:media": "http://search.yahoo.com/mrss/",
+    "-version": "2.0",
+    "channel": {
+      "title": "CNN.com",
+      "link": "http://edition.cnn.com/?eref=edition",
+      "description": "CNN.com delivers up-to-the-minute news and information on the latest top stories, weather, entertainment, politics and more.",
+      "language": "en-us",
+      "copyright": "© 2011 Cable News Network LP, LLLP.",
+      "pubDate": "Mon, 28 Nov 2011 02:18:02 EST",
+      "ttl": "10",
+      "image": {
+        "title": "CNN.com",
+        "link": "http://edition.cnn.com/?eref=edition",
+        "url": "http://i2.cdn.turner.com/cnn/.element/img/1.0/logo/cnn.logo.rss.gif",
+        "width": "144",
+        "height": "33",
+        "description": "CNN.com delivers up-to-the-minute news and information on the latest top stories, weather, entertainment, politics and more."
+      },
+      "atom10:link": [
+        {
+          "-xmlns:atom10": "http://www.w3.org/2005/Atom",
+          "-rel": "self",
+          "-type": "application/rss+xml",
+          "-href": "http://rss.cnn.com/rss/edition"
+        },
+        {
+          "-xmlns:atom10": "http://www.w3.org/2005/Atom",
+          "-rel": "hub",
+          "-href": "http://pubsubhubbub.appspot.com/"
+        }
+      ],
+      "feedburner:info": {
+        "-xmlns:feedburner": "http://rssnamespace.org/feedburner/ext/1.0",
+        "-uri": "rss/edition"
+      },
+      "item": [
+        {
+          "title": "Polls open for Egypt's historic vote",
+          "guid": "http://edition.cnn.com/2011/11/28/world/africa/egypt-elections/index.html?eref=edition",
+          "link": "http://edition.cnn.com/2011/11/28/world/africa/egypt-elections/index.html?eref=edition",
+          "description": "Amid worsening unrest, Egyptians head to the polls Monday to vote in the first election since an improbable revolt toppled one of the world's longest-serving rulers.",
+          "pubDate": "Mon, 28 Nov 2011 01:51:26 EST"
+        },
+        {
+          "title": "New trial for convicted Bahrain medics",
+          "guid": "http://edition.cnn.com/2011/11/28/world/meast/bahrain-medics-trial/index.html?eref=edition",
+          "link": "http://edition.cnn.com/2011/11/28/world/meast/bahrain-medics-trial/index.html?eref=edition",
+          "description": "Twenty medics, who were convicted of trying to overthrow the Bahraini government, face a retrial in civilian court Monday.",
+          "pubDate": "Mon, 28 Nov 2011 02:06:49 EST"
+        },
+        {
+          "title": "Islamists claim election win in Morocco",
+          "guid": "http://edition.cnn.com/2011/11/27/world/africa/morocco-election/index.html?eref=edition",
+          "link": "http://edition.cnn.com/2011/11/27/world/africa/morocco-election/index.html?eref=edition",
+          "description": "A moderate Islamist party claimed victory in Morocco&apos;s first parliamentary elections since constitutional reforms this summer.",
+          "pubDate": "Sun, 27 Nov 2011 18:05:58 EST"
+        },
+        {
+          "title": "Arab League backs sanctions on Syria",
+          "guid": "http://edition.cnn.com/2011/11/27/world/meast/syria-unrest/index.html?eref=edition",
+          "link": "http://edition.cnn.com/2011/11/27/world/meast/syria-unrest/index.html?eref=edition",
+          "description": "Foreign ministers from 19 Arab League countries vote to slap economic sanctions against Syria for its violent crackdown on civilian protesters, officials say.",
+          "pubDate": "Sun, 27 Nov 2011 15:56:41 EST"
+        },
+        {
+          "title": "Medics: Militants kill dozens in Yemen",
+          "guid": "http://edition.cnn.com/2011/11/27/world/meast/yemen-clashes/index.html?eref=edition",
+          "link": "http://edition.cnn.com/2011/11/27/world/meast/yemen-clashes/index.html?eref=edition",
+          "description": "At least 24 people were killed early Sunday when militants raided a Sunni town in northern Yemen, medics and witnesses said.",
+          "pubDate": "Sun, 27 Nov 2011 07:09:17 EST"
+        },
+        {
+          "title": "Congolese vote in landmark election",
+          "guid": "http://edition.cnn.com/2011/11/28/world/africa/congo-election-day/index.html?eref=edition",
+          "link": "http://edition.cnn.com/2011/11/28/world/africa/congo-election-day/index.html?eref=edition",
+          "description": "Voters in the Democratic Republic of Congo headed to the polls Monday as the giant mineral-rich country holds its second democratic presidential election in history following bloody weekend clashes.",
+          "pubDate": "Mon, 28 Nov 2011 00:37:42 EST"
+        },
+        {
+          "title": "Attack outside Iraq prison kills 11",
+          "guid": "http://edition.cnn.com/2011/11/28/world/meast/iraq-violence/index.html?eref=edition",
+          "link": "http://edition.cnn.com/2011/11/28/world/meast/iraq-violence/index.html?eref=edition",
+          "description": "At least 11 people were killed Monday and 20 injured when a car driven by a suicide attacker exploded at the main security checkpoint of al-Hout prison in Taji district, police said.",
+          "pubDate": "Mon, 28 Nov 2011 01:20:32 EST"
+        },
+        {
+          "title": "Pakistan: NATO attack inflames U.S. ties",
+          "guid": "http://edition.cnn.com/2011/11/27/world/asia/pakistan-nato-attack/index.html?eref=edition",
+          "link": "http://edition.cnn.com/2011/11/27/world/asia/pakistan-nato-attack/index.html?eref=edition",
+          "description": "Pakistan&apos;s foreign minister calls a NATO attack that killed 24 soldiers &quot;totally unacceptable,&quot; saying it plunges the nation&apos;s relationship with the U.S. into deeper crisis.",
+          "pubDate": "Sun, 27 Nov 2011 06:10:17 EST"
+        },
+        {
+          "title": "Afghanistan in 'phase two' of handover",
+          "guid": "http://edition.cnn.com/2011/11/27/world/asia/afghanistan-transition/index.html?eref=edition",
+          "link": "http://edition.cnn.com/2011/11/27/world/asia/afghanistan-transition/index.html?eref=edition",
+          "description": "Afghanistan&apos;s president announced Sunday a second group of areas where security operations would be handed over from NATO to Afghan troops, setting a potentially rapid timetable to put half of the country&apos;s population under Afghan control -- including some areas that until recently were undisputed insurgent hotbeds.",
+          "pubDate": "Sun, 27 Nov 2011 11:56:23 EST"
+        },
+        {
+          "title": "Iran: Lawmakers vote to expel UK envoy",
+          "guid": "http://edition.cnn.com/2011/11/27/world/meast/iran-britain-ties/index.html?eref=edition",
+          "link": "http://edition.cnn.com/2011/11/27/world/meast/iran-britain-ties/index.html?eref=edition",
+          "description": "The Iranian parliament Sunday voted to expel the British ambassador and reduce diplomatic relations with the nation in retaliation for newly-imposed Western sanctions, according to Iran&apos;s official news agency.",
+          "pubDate": "Sun, 27 Nov 2011 08:21:00 EST"
+        }
+      ]
+    }
+  }
+}

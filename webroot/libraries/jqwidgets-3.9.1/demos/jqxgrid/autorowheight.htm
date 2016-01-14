@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example demonstrates the Auto Row Height functionality of jqxGrid. The new feature enables the Grid Rows to automatically adjust their height depending on the cell values. In order to use the new functionality, you must set the Grid's "autoheight" and "autorowheight" properties to true.
+    </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.columnsresize.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.pager.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = "../sampledata/orders.xml";
+
+            // prepare the data
+            var source =
+            {
+                datatype: "xml",
+                datafields: [
+                    { name: 'ShippedDate', map: 'm\\:properties>d\\:ShippedDate', type: 'date' },
+                    { name: 'Freight', map: 'm\\:properties>d\\:Freight', type: 'float' },
+                    { name: 'ShipName', map: 'm\\:properties>d\\:ShipName', type: 'string' },
+                    { name: 'ShipAddress', map: 'm\\:properties>d\\:ShipAddress', type: 'string' },
+                    { name: 'ShipCity', map: 'm\\:properties>d\\:ShipCity', type: 'string' },
+                    { name: 'ShipCountry', map: 'm\\:properties>d\\:ShipCountry', type: 'string' }
+                ],
+                root: "entry",
+                record: "content",
+                id: 'm\\:properties>d\\:OrderID',
+                url: url
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            // create jqxgrid.
+            $("#grid").jqxGrid(
+            {
+                source: dataAdapter,
+                width: 850,
+                pageable: true,
+                autorowheight: true,
+                autoheight: true,
+                altrows: true,
+                columns: [
+                  { text: 'Ship Name', datafield: 'ShipName', width: 150 },
+                  { text: 'Freight', datafield: 'Freight', width: 100, cellsformat: 'F2', cellsalign: 'right' },
+                  { text: 'Ship Address', datafield: 'ShipAddress', width: 350 },
+                  { text: 'Ship City', datafield: 'ShipCity', width: 100 },
+                  { text: 'Ship Country', datafield: 'ShipCountry'}
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="grid">
+    </div>
+</body>
+</html>

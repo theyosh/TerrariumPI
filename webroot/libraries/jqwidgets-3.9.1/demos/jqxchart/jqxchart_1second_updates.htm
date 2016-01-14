@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxChart Live Updates</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxslider.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>    
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var data = [];
+
+            var max = 800;
+            var timestamp = new Date();
+            for (var i = 0; i < 60; i++) {
+                timestamp.setMilliseconds(0);
+                timestamp.setSeconds(timestamp.getSeconds() - 1);
+
+                data.push({ timestamp: new Date(timestamp.valueOf()), value: Math.max(100, (Math.random() * 1000) % max) });
+            }
+
+            data = data.reverse();
+
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "Live updates demo",
+                description: "Data changes every second",
+                enableAnimations: false,
+                animationDuration: 1000,
+                enableAxisTextAnimation: true,
+                showLegend: true,
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                source: data,
+                xAxis:
+                {
+                    dataField: 'timestamp',
+                    type: 'date',
+                    baseUnit: 'second',
+                    unitInterval: 5,
+                    formatFunction: function (value) {
+                        return $.jqx.dataFormat.formatdate(value, "hh:mm:ss", 'en-us');
+                    },
+                    gridLines: { step: 2 },
+                    valuesOnTicks: true,
+                    labels: { angle: -45, offset: { x: -17, y: 0} }
+                },
+                colorScheme: 'scheme03',
+                seriesGroups:
+                    [
+                        {
+                            type: 'line',
+                            columnsGapPercent: 50,
+                            alignEndPointsWithIntervals: true,
+                            valueAxis:
+                            {
+                                minValue: 0,
+                                maxValue: 1000,
+                                title: { text: 'Index Value' }
+                            },
+                            series: [
+                                    { dataField: 'value', displayText: 'value', opacity: 1, lineWidth: 2, symbolType: 'circle', fillColorSymbolSelected: 'white', symbolSize: 4 }
+                                ]
+                        }
+                    ]
+            };
+
+
+            // create the chart
+            $('#chartContainer').jqxChart(settings);
+
+            // get the chart's instance
+            var chart = $('#chartContainer').jqxChart('getInstance');
+
+            // color scheme drop down
+            var colorsSchemesList = ["scheme01", "scheme02", "scheme03", "scheme04", "scheme05", "scheme06", "scheme07", "scheme08"];
+            $("#dropDownColors").jqxDropDownList({ source: colorsSchemesList, selectedIndex: 2, width: '200', height: '25', dropDownHeight: 100 });
+
+            $('#dropDownColors').on('change', function (event) {
+                var value = event.args.item.value;
+                chart.colorScheme = value;
+                chart.update();
+            });
+
+            // series type drop down
+            var seriesList = ["line", "area", "stepline", "steparea", "splinearea", "spline", "column", "scatter", "stackedcolumn", "stackedsplinearea", "stackedspline"];
+            $("#dropDownSeries").jqxDropDownList({ source: seriesList, selectedIndex: 0, width: '200', height: '25', dropDownHeight: 100 });
+
+            $('#dropDownSeries').on('select', function (event) {
+                var args = event.args;
+                if (args) {
+                    var value = args.item.value;
+                    var group = chart.seriesGroups[0];
+                    chart.seriesGroups[0].type = value;
+                    chart.update();
+                }
+            });
+
+            // auto update timer
+            var ttimer = setInterval(function () {
+                var max = 800;
+                if (data.length >= 60)
+                    data.splice(0, 1);
+                var timestamp = new Date();
+                timestamp.setSeconds(timestamp.getSeconds());
+                timestamp.setMilliseconds(0);
+
+                data.push({ timestamp: timestamp, value: Math.max(100, (Math.random() * 1000) % max) });
+
+                $('#chartContainer').jqxChart('update');
+            }, 1000);
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='chartContainer' style="width: 850px; height: 500px;">
+    </div>
+    <table style="width: 680px">
+        <tr>
+            <td style="padding-left: 50px;">
+                <p style="font-family: Verdana; font-size: 12px;">Select the series type:
+                </p>
+                <div id='dropDownSeries'>
+                </div>
+            </td>
+            <td>
+                <p style="font-family: Verdana; font-size: 12px;">Select color scheme:
+                </p>
+                <div id='dropDownColors'>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxChart Spider chart example</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxslider.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var dataset = [
+                { City: 'London', SalesCountJan: 210, SalesRevenueJan: 123 },
+                { City: 'Madrid', SalesCountJan: 190, SalesRevenueJan: 114 },
+                { City: 'Munich', SalesCountJan: 201, SalesRevenueJan: 112 },
+                { City: 'Amsterdam', SalesCountJan: 110, SalesRevenueJan: 98 },
+                { City: 'Paris', SalesCountJan: 105, SalesRevenueJan: 93 },
+                { City: 'Prague', SalesCountJan: 54, SalesRevenueJan: 100 }
+            ];
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "Sales volume and revenue by city",
+                description: "(revenue in thousands)",
+                enableAnimations: false,
+                showLegend: true,
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 5 },
+                colorScheme: 'scheme01',
+                source: dataset,
+                xAxis:
+                {
+                    dataField: 'City',
+                    valuesOnTicks: true,
+                    labels: { autoRotate: true }
+                },
+                valueAxis:
+                {
+                    labels: {
+                        formatSettings: { decimalPlaces: 0 },
+                        autoRotate: true
+                    }
+                },
+                seriesGroups:
+                    [
+                        {
+                            spider: true,
+                            //startAngle: 90,
+                            endAngle: 270,
+                            radius: 120,
+                            type: 'line',
+                            series: [
+                                    { dataField: 'SalesCountJan', displayText: 'Sales count', opacity: 0.7, lineWidth: 1, radius: 2, lineWidth: 2, symbolType: 'circle' },
+                                    { dataField: 'SalesRevenueJan', displayText: 'Revenue', opacity: 0.7, lineWidth: 1, radius: 2, lineWidth: 2, symbolType: 'square' }
+                                ]
+                        }
+                    ]
+            };
+
+
+            // create the chart
+            $('#chartContainer').jqxChart(settings);
+
+            // get the chart's instance
+            var chart = $('#chartContainer').jqxChart('getInstance');
+
+            // start angle slider
+            $('#sliderStartAngle').jqxSlider({ width: 240, min: 0, max: 360, step: 1, ticksFrequency: 20, mode: 'fixed' })
+                .on('change', function (event) {
+                    var value = event.args.value;
+                    settings.seriesGroups[0].startAngle = value;
+                    chart.update();
+                });
+
+            // end angle slider
+            $('#sliderEndAngle').jqxSlider({ width: 240, min: 0, max: 360, value: 360 - 270, step: 1, ticksFrequency: 20, mode: 'fixed' })
+                .on('change', function (event) {
+                    var value = 360 - event.args.value;
+                    settings.seriesGroups[0].endAngle = value;
+                    chart.update();
+                });
+
+            // end angle slider
+            $('#sliderRotate').jqxSlider({ width: 240, min: 0, max: 360, step: 1, ticksFrequency: 20, mode: 'fixed' })
+            .on('change', function (event) {
+                var value = event.args.value;
+                var endAngle = chart.seriesGroups[0].endAngle;
+                if (isNaN(endAngle))
+                    endAngle = 360;
+                var startAngle = chart.seriesGroups[0].startAngle;
+                if (isNaN(startAngle))
+                    startAngle = 0;
+
+                var diff = endAngle - startAngle;
+
+                settings.seriesGroups[0].startAngle = value;
+                settings.seriesGroups[0].endAngle = value + diff;
+
+                chart.update();
+            });
+
+            // radius slider
+            $('#sliderRadius').jqxSlider({ width: 240, min: 80, max: 140, value: 120, step: 1, ticksFrequency: 20, mode: 'fixed' })
+                .on('change', function (event) {
+                    var value = event.args.value;
+                    settings.seriesGroups[0].radius = value;
+                    chart.update();
+                });
+
+
+            $("#checkBoxTicksBetween").jqxCheckBox({ width: 120, height: 25, hasThreeStates: false, checked: false });
+            $("#checkBoxTicksBetween").on('change', function (event) {
+                settings.xAxis.valuesOnTicks = !event.args.checked;
+                chart.update();
+            });
+
+            $("#checkBoxAutoRotate").jqxCheckBox({ width: 120, height: 25, hasThreeStates: false, checked: true });
+            $("#checkBoxAutoRotate").on('change', function (event) {
+                settings.xAxis.labels.autoRotate = event.args.checked;
+                settings.valueAxis.labels.autoRotate = event.args.checked;
+                chart.update();
+            });
+
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='chartContainer' style="width: 850px; height: 500px">
+    </div>
+    <table style="width: 850px">
+        <tr>
+            <td style="padding-left:50px">
+                <p style="font-family: Verdana; font-size: 12px;">Move the slider to change start angle:
+                </p>
+                <div id='sliderStartAngle'>
+                </div>
+            </td>
+            <td>
+                <p style="font-family: Verdana; font-size: 12px;">Move the slider to change end angle:
+                </p>
+                <div id='sliderEndAngle'>
+                </div>
+            </td>
+
+        </tr>
+        <tr>
+            <td style="padding-left:50px">
+                <p style="font-family: Verdana; font-size: 12px;">Move the slider to rotate:
+                </p>
+                <div id='sliderRotate'>
+                </div>
+            </td>
+            <td>
+                <p style="font-family: Verdana; font-size: 12px;">Move the slider to change the radius:
+                </p>
+                <div id='sliderRadius'>
+                </div>
+            </td>
+        </tr>
+        <tr style="height: 15px;">
+        </tr>
+        <tr>
+            <td style="padding-left:50px">
+                <div id='checkBoxTicksBetween'>
+                Tick marks between values
+                </div>
+            </td>
+            <td>
+                <div id='checkBoxAutoRotate'>
+                Auto rotate axis text
+                </div>
+            </td>
+        
+        </tr>
+    </table>
+</body>
+</html>

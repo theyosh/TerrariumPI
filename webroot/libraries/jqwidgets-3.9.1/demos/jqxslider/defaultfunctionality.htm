@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Slider, Slider Widget, RangeSlider" />
+    <meta name="description" content="jqxSlider represents a flexible jQuery Slider that lets the user select from a range of values by moving a thumb along a track. The widget is completely customizable in terms of appearance and offers numerous configuration options like mouse wheel and keyboard support, smooth or step-based slider and support for range sliders." />
+    <title id='Description'>jqxSlider represents a flexible jQuery Slider that lets the user select from a range of values by moving a thumb along a track. The widget is completely customizable in terms of appearance and offers numerous configuration options like mouse wheel and keyboard support, smooth or step-based slider and support for range sliders.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxslider.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var counter = 0;
+            $('#redLevel').jqxSlider({ min: 0, max: 255, ticksFrequency: 25.5, value: 0, step: 25.5});
+            $('#greenLevel').jqxSlider({ min: 0, max: 255, ticksFrequency: 25.5, value: 0, step: 25.5});
+            $('#blueLevel').jqxSlider({ min: 0, max: 255, ticksFrequency: 25.5, value: 255, step: 25.5});
+
+            $('#redLevel').on('change', function (event) {
+                setColor();
+            });
+            $('#greenLevel').on('change', function (event) {
+                setColor();
+            });
+            $('#blueLevel').on('change', function (event) {
+                setColor();
+            });
+
+            setColor();
+
+            $('#jqxcheckbox').jqxCheckBox({ checked: true, width: 200});
+            $('#jqxcheckbox').on('change', function (event) {
+                var checked = event.args.checked;
+                var value = 'default';
+                if (!checked) {
+                    value = 'fixed';
+                }
+                $('#redLevel').jqxSlider({ mode: value });
+                $('#greenLevel').jqxSlider({ mode: value });
+                $('#blueLevel').jqxSlider({ mode: value });
+            });
+        });
+        function setColor() {
+            var red = fixHex(Math.round($('#redLevel').jqxSlider('value')).toString(16)),
+                green = fixHex(Math.round($('#greenLevel').jqxSlider('value')).toString(16)),
+                blue = fixHex(Math.round($('#blueLevel').jqxSlider('value')).toString(16));
+            $('#colorBlock').css('background-color', '#' + red + green + blue);
+            $('#colorLabel').text(('#' + red + green + blue).toUpperCase());
+            var color = getTextElement({ r: parseInt(red, 16), g: parseInt(green, 16), b: parseInt(blue, 16) });
+            $('#colorLabel').css('color', color);
+        }
+
+        function fixHex(hex) {
+            return (hex.length < 2) ? '0' + hex : hex;
+        }
+
+        function getTextElement(color) {
+            var nThreshold = 105;
+            var bgDelta = (color.r * 0.299) + (color.g * 0.587) + (color.b * 0.114);
+            var foreColor = (255 - bgDelta < nThreshold) ? 'Black' : 'White';
+            return foreColor;
+        }
+    </script>
+    <style type="text/css">
+        .colorBlock
+        {
+            border: 1px solid #aaa;
+            width: 200px;
+            height: 200px;
+            float: right;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+        }
+        .colorLabel
+        {
+            padding: 6px;           
+        }
+    </style>
+</head>
+<body class='default'>
+    <div style="width: 550px">
+        <div style="height: 180px;">
+            <div style="float: left">
+                <span style="font-style: italic;">Red</span>
+                <div id='redLevel'>
+                </div>
+                <span style="font-style: italic;">Green</span>
+                <div id='greenLevel'>
+                </div>
+                <span style="font-style: italic;">Blue</span>
+                <div id='blueLevel'>
+                </div>
+            </div>
+            <div class="colorBlock jqx-rc-all" id="colorBlock">
+                <div class="colorLabel" id="colorLabel">
+                </div>
+            </div>
+        </div> 
+       <div id="jqxcheckbox">Smooth Thumb Drag</div>
+    </div>
+</body>
+</html>

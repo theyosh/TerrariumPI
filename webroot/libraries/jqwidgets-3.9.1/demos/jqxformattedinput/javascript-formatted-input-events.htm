@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">This demo showcases the jqxFormattedInput events - 'open', 'close',
+        'change' and 'radixChange'.</title>
+    <meta name="description" content="This demo showcases the jqxFormattedInput events - 'open', 'close', 'change' and 'radixChange'." />
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxformattedinput.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxFormattedInput").jqxFormattedInput({ width: 300, height: 25, radix: "decimal", value: "190", spinButtons: true, dropDown: true });
+
+            $("#eventsPanel").jqxPanel({ width: 300, height: 150 });
+
+            $("#jqxFormattedInput").on("open", function (event) {
+                $("#eventsPanel").jqxPanel("append", "<strong>" + event.type + "</strong><br />");
+            });
+            $("#jqxFormattedInput").on("close", function (event) {
+                $("#eventsPanel").jqxPanel("append", "<strong>" + event.type + "</strong><br />");
+            });
+            $("#jqxFormattedInput").on("change", function (event) {
+                var args = event.args;
+                var newValue = args.value;
+                var oldValue = args.oldValue;
+                var radix = args.radix;
+                $("#eventsPanel").jqxPanel("append", "<strong>" + event.type + "</strong><br />" +
+                    "value: " + newValue + ", old value: " + oldValue + ", radix: " + radix + "<br />");
+            });
+            $("#jqxFormattedInput").on("radixChange", function (event) {
+                var args = event.args;
+                var newRadix = args.radix;
+                var oldRadix = args.oldRadix;
+                var newValue = args.value;
+                var oldValue = args.oldValue;
+                $("#eventsPanel").jqxPanel("append", "<strong>" + event.type + "</strong><br />" +
+                    "radix: " + newRadix + ", old radix: " + oldRadix +
+                    "<br />value: " + newValue + ", old value: " + oldValue + "<br />");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="jqxFormattedInput">
+        <input type="text" />
+        <div>
+        </div>
+        <div>
+        </div>
+    </div>
+    <div style="margin-top: 150px;">
+        Events log:</div>
+    <div id="eventsPanel">
+    </div>
+</body>
+</html>

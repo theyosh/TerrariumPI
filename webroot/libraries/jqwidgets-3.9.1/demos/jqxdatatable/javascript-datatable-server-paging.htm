@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Server Paging with jqxDataTable</title>
+    <meta name="description" content="This sample demonstrates how we can bind jQWidgets DataTable widget to JSONP data and implement Server Paging">
+  <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script> 
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                dataType: "json",
+                dataFields: [
+                    { name: 'ShipCountry', type: 'string' },
+                    { name: 'ShipCity', type: 'string' },
+                    { name: 'ShipAddress', type: 'string' },
+                    { name: 'ShipName', type: 'string' },
+                    { name: 'Freight', type: 'number' },
+                    { name: 'ShippedDate', type: 'date' }
+                ],
+                root: 'value',
+                url: "http://services.odata.org/V3/Northwind/Northwind.svc/Orders?$format=json&$callback=?"
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source,
+                {
+                    formatData: function (data) {
+                        // update the $skip and $top params of the OData service.
+                        // data.pagenum - page number starting from 0.
+                        // data.pagesize - page size
+                        data.$skip = data.pagenum * data.pagesize;
+                        data.$top = data.pagesize;
+                        data.$inlinecount = "allpages";
+
+                        return data;
+                    },
+                    downloadComplete: function (data, status, xhr) {
+                        if (!source.totalRecords) {
+                            source.totalRecords = parseInt(data["odata.count"]);
+                        }
+                    },
+                    loadError: function (xhr, status, error) {
+                        throw new Error("http://services.odata.org: " + error.toString());
+                    }
+                }
+            );
+
+            $("#dataTable").jqxDataTable(
+            {
+                width: 850,
+                pageable: true,
+                pagerButtonsCount: 10,
+                serverProcessing: true,
+                source: dataAdapter,
+                altRows: true,
+                columnsResize: true,
+                columns: [
+                    { text: 'Ship Name', dataField: 'ShipName', width: 300 },
+                    { text: 'Ship Country', hidden: true, dataField: 'ShipCountry', width: 250 },
+                    { text: 'Ship City', dataField: 'ShipCity', width: 150 },
+                    { text: 'Ship Address', dataField: 'ShipAddress' }
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <h3 style="font-size: 16px; font-family: Verdana;">Data Source: "http://services.odata.org"</h3>
+    <div id="dataTable"></div>
+</body>
+</html>

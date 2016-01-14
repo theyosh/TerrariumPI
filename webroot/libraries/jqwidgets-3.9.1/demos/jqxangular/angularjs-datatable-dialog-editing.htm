@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS DataTable with Edit Dialog. Double-Click on a Row to Open the Edit dialog</title>
+    <meta name="description" content="This sample demonstrates how we can create Edit Dialog for editing rows in jqwidgets DataTable widget.">
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {     
+            var orderID, dataTable, shipCountry, freight, shipDate, editRow;
+            $scope.dataTableSettings =
+            {
+                width: 850,
+                disabled: false,
+                created: function(args)
+                {
+                    dataTable = args.instance;
+                },
+                source:    {
+                    dataFields: [
+                        { name: 'OrderID', type: 'int' },
+                        { name: 'Freight', type: 'float' },
+                        { name: 'ShipName', type: 'string' },
+                        { name: 'ShipAddress', type: 'string' },
+                        { name: 'ShipCity', type: 'string' },
+                        { name: 'ShipCountry', type: 'string' },
+                        { name: 'ShippedDate', type: 'date' }
+                    ],
+                    root: "Orders",
+                    record: "Order",
+                    dataType: "xml",
+                    id: 'OrderID',
+                    url: "../sampledata/orderdetails.xml",
+                    addRow: function (rowID, rowData, position, commit) {
+                        // synchronize with the server - send insert command
+                        // call commit with parameter true if the synchronization with the server is successful 
+                        // and with parameter false if the synchronization failed.
+                        // you can pass additional argument to the commit callback which represents the new ID if it is generated from a DB.
+                        commit(true);
+                    },
+                    updateRow: function (rowID, rowData, commit) {
+                        // synchronize with the server - send update command
+                        // call commit with parameter true if the synchronization with the server is successful 
+                        // and with parameter false if the synchronization failed.
+                        commit(true);
+                    },
+                    deleteRow: function (rowID, commit) {
+                        // synchronize with the server - send delete command
+                        // call commit with parameter true if the synchronization with the server is successful 
+                        // and with parameter false if the synchronization failed.
+                        commit(true);
+                    }
+                },
+                pageable: true,
+                sortable: true,
+                altRows: true,
+                ready: function () {
+                    $scope.orderIDSettings = {created: function(args){orderID = args.instance;}, disabled: true, width: 150, height: 30 };
+                    $scope.freightSettings = {created: function(args){freight = args.instance;}, spinButtons: true, inputMode: 'simple', width: 150, height: 30 };
+                    var countries = new Array("Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burma", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo, Democratic Republic", "Congo, Republic of the", "Costa Rica", "Cote d'Ivoire", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Greenland", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Mongolia", "Morocco", "Monaco", "Mozambique", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Samoa", "San Marino", " Sao Tome", "Saudi Arabia", "Senegal", "Serbia and Montenegro", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "Spain", "Sri Lanka", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe");
+                    $scope.shipCountrySettings = {created: function(args){shipCountry = args.instance;}, source: countries, width: 150, height: 30 };
+                    $scope.shipDateSettings = { created: function(args){shipDate = args.instance;}, formatString: 'd', width: 150, height: 30 };
+                    $scope.saveSettings = { height: 30, width: 80 };
+                    $scope.cancelSettings = { height: 30, width: 80 };
+                    $scope.cancel = function () {
+                        dialog.close();
+                    };
+                    $scope.save = function () {
+                        dialog.close();
+                        // update edited row.
+                        var rowData = {
+                            OrderID: orderID.val(), Freight: freight.val(),
+                            ShipCountry: shipCountry.val(), ShippedDate: shipDate.val()
+                        };
+                        dataTable.updateRow(editRow, rowData);
+                    };
+                    $scope.close = function()
+                    {
+                        $scope.dataTableSettings.disabled = false;
+                    };
+
+                    var table = document.getElementById("table");
+             
+                    $scope.dialogSettings =
+                    {
+                        created: function(args)
+                        {
+                            dialog = args.instance;
+                        },
+                        resizable: false,
+                        position: { left: table.offsetLeft + 75, top: table.offsetTop + 35 },
+                        width: 270, height: 230,
+                        autoOpen: false
+                    };
+                },
+                pagerButtonsCount: 8,
+                columns: [
+                  { text: 'Order ID', editable: false, dataField: 'OrderID', width: 200 },
+                  { text: 'Freight', dataField: 'Freight', cellsFormat: 'f2', cellsAlign: 'right', align: 'right', width: 200 },
+                  { text: 'Ship Country', dataField: 'ShipCountry', width: 150 },
+                  { text: 'Shipped Date', dataField: 'ShippedDate', cellsAlign: 'right', align: 'right', cellsFormat: 'd' }
+                ]
+            };
+            $scope.rowDoubleClick = function (event) {
+                var args = event.args;
+                var index = args.index;
+                var row = args.row;
+                // update the widgets inside jqxWindow.
+                dialog.setTitle("Edit Row: " + row.OrderID);
+                dialog.open();
+                editRow = index;
+                $scope.dataTableSettings.disabled = true;
+                orderID.val(row.OrderID);
+                freight.val(row.Freight);
+                shipCountry.val(row.ShipCountry);
+                shipDate.val(row.ShippedDate);
+            };
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+    <jqx-data-table jqx-watch="dataTableSettings.disabled" jqx-on-row-double-click="rowDoubleClick(event)" jqx-settings="dataTableSettings"></jqx-data-table>
+    <jqx-window jqx-on-close="close()" jqx-create="dialogSettings" jqx-settings="dialogSettings">
+        <div>Edit Dialog</div>
+        <div style="overflow: hidden;">
+            <table id="table" style="table-layout: fixed; border-style: none;">
+                <tr>
+                    <td align="right">Order ID:
+                    </td>
+                    <td align="left">
+                        <jqx-input jqx-disabled="true" jqx-settings="orderIDSettings" jqx-create="orderIDSettings"></jqx-input>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Freight:
+                    </td>
+                    <td align="left">
+                        <jqx-number-input jqx-settings="freightSettings" jqx-create="freightSettings"></jqx-number-input>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td align="right">Ship Country:
+                    </td>
+                    <td align="left">
+                        <jqx-input jqx-settings="shipCountrySettings" jqx-create="shipCountrySettings"></jqx-input>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Shipped Date:</td>
+                    <td align="left">
+                        <jqx-date-time-input jqx-settings="shipDateSettings" jqx-create="shipDateSettings"></jqx-date-time-input>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="right">
+                         <br />
+                         <jqx-button jqx-settings="saveSettings" jqx-create="saveSettings" jqx-on-click="save()">Save</jqx-button><jqx-button jqx-on-click="cancel()" style="margin-left: 5px;" jqx-settings="cancelSettings" jqx-create="cancelSettings">Cancel</jqx-button></td>                    
+                   </tr>
+            </table>
+        </div>
+    </jqx-window>
+</body>
+</html>

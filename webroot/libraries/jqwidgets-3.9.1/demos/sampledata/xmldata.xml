@@ -1,0 +1,32 @@
+﻿<orders>
+   <order>
+    <date>1/1/2011</date>
+    <quantity>10</quantity>
+    <description>Beverages</description>
+  </order>
+  <order>
+    <date>2/2/2011</date>
+    <quantity>15</quantity>
+    <description>Condiments</description>
+  </order>
+  <order>
+    <date>3/3/2011</date>
+    <quantity>20</quantity>
+    <description>Grains/Cereals</description>
+  </order>
+  <order>
+    <date>4/6/2011</date>
+    <quantity>30</quantity>
+    <description>Beverages</description>
+  </order>
+  <order>
+    <date>5/10/2011</date>
+    <quantity>40</quantity>
+    <description>Beverages</description>
+  </order>
+  <order>
+    <date>5/12/2011</date>
+    <quantity>50</quantity>
+    <description>Grains/Cereals</description>
+  </order>
+</orders> 

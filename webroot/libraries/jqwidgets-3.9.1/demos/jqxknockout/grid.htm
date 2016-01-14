@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example shows how to integrate jqxGrid with Knockout.js.
+    </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/json2.js"></script> 
+    <script type="text/javascript" src="../../scripts/knockout-3.0.0.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.edit.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxknockout.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var initialData = [
+                { name: "Well-Travelled Kitten", sales: 352, price: 75.95 },
+                { name: "Speedy Coyote", sales: 89, price: 190.00 },
+                { name: "Furious Lizard", sales: 152, price: 25.00 },
+                { name: "Indifferent Monkey", sales: 1, price: 99.95 },
+                { name: "Brooding Dragon", sales: 0, price: 6350 },
+                { name: "Ingenious Tadpole", sales: 39450, price: 0.35 },
+                { name: "Optimistic Snail", sales: 420, price: 1.50 }
+            ];
+
+            var GridModel = function (items) {
+                this.items = ko.observableArray(items);
+                this.disabled = ko.observable(false);
+
+                this.addItem = function () {
+                    // add a new item.
+                    if (this.items().length < 20) {
+                        this.items.push({ name: "New item", sales: Math.round(Math.random() * 100), price: Math.round(Math.random() * 100) });
+                    }
+                };
+
+                this.removeItem = function () {
+                    // remove the last item.
+                    this.items.pop();
+                };
+
+                this.updateItem = function () {
+                    // update the first item.
+                    var item = {};
+                    if (initialData.length > 0) {
+                        item.name = initialData[Math.floor(Math.random() * initialData.length)].name;
+                        item.sales = Math.floor(Math.random() * 500);
+                        item.price = Math.floor(Math.random() * 200);
+                        this.items.replace(this.items()[0], item);
+                    }
+                };
+            };
+
+            ko.applyBindings(new GridModel(initialData));
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div style="margin-bottom: 10px;">
+            <input id="addButton" type="button" data-bind="click: addItem, jqxButton: {}" value="Add Item" />
+            <input id="removeButton" type="button" data-bind="click: removeItem, jqxButton: {}" value="Remove Last Item" />
+            <input id="updateButton" type="button" data-bind="click: updateItem, jqxButton: {}" value="Update First Item" />
+            <div data-bind="jqxCheckBox: {checked: disabled}" style='margin-top: 5px;' id="checkBox">Disabled</div>
+        </div>
+        <div data-bind="jqxGrid: {source: items, disabled: disabled, autoheight: true,                
+                editable: true,
+                selectionmode: 'singlecell',
+                columns: [
+                    { text: 'Name', dataField: 'name', width: 200 },
+                    { text: 'Sales', dataField: 'sales', width: 200, cellsalign: 'right' },
+                    { text: 'Price', dataField: 'price', width: 200, cellsformat: 'c2', cellsalign: 'right' }
+                ]}" id="jqxgrid">
+        </div>
+        <table style="margin-top: 20px;">
+            <tbody data-bind="foreach: items">
+                <tr>
+                    <td data-bind="text: name"></td>
+                    <td data-bind="text: sales"></td>
+                    <td data-bind="text: price"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

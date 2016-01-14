@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">This demo shows the basic functionality of jqxRangeSelector.
+        By resizing or moving the slider, you can select a different range.</title>
+    <meta name="keywords" content="jQuery range selector, jQWidgets, jqxRangeSelector, range, range selector, range selector widget" />
+    <meta name="description" content="This demo shows the basic functionality of jqxRangeSelector. By resizing or moving
+        the slider, you can select a different range." />
+    <link type="text/css" rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxrangeselector.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // create jqxRangeSelector.
+            $("#rangeSelector").jqxRangeSelector({ width: 750, height: 100, min: 0, max: 200, range: { from: 10, to: 50 }, majorTicksInterval: 10, minorTicksInterval: 1 });
+
+            // create Set Range and Get Range buttons.
+            $("#setSelection").jqxButton();
+            $("#getSelection").jqxButton();
+            
+            $("#setSelection").click(function () {
+                // Set Range.
+                $("#rangeSelector").jqxRangeSelector("setRange", 30, 70);
+            });
+            $("#getSelection").click(function () {
+                // Get Range.
+                var range = $("#rangeSelector").jqxRangeSelector("getRange");
+                alert("The selected range is from " + range.from + " to " + range.to);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="rangeSelector">
+        <div id="rangeSelectorContent">
+        </div>
+    </div>
+    <div id="Div1" style="margin-left:30px; margin-top: 50px;">
+    <button id="setSelection">
+        Set range</button>
+    <button id="getSelection">
+        Get range</button>
+    </div>
+</body>
+</html>

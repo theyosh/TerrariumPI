@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example demonstrates the Custom rendering capabilities of jqxTreeMap. You can set the "color" property of each data field or customize the rendering of a sector by using the "renderCallbacks" function.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtreemap.js"></script>
+<script>
+$(function () {
+    var data = [
+        {
+            label: 'Chrome',
+            value: 44.06,
+            color: "#37c837"
+        },
+        {
+            label: 'Internet Explorer',
+            value: 22.08,
+            color: "#0066ff"
+        },
+        {
+            label: 'Firefox',
+            value: 18.17,
+            color: "#ed7b0f"
+        },
+        {
+            label: 'Others',
+            value: 9.07,
+            color: "#818181"
+        },
+        {
+            label: 'Opera',
+            value: 3.38,
+            color: "#9a0900"
+        },
+        {
+            label: 'Safari',
+            value: 3.24,
+            color: "#4dbff1"
+        }
+    ];
+    $('#treemap').jqxTreeMap({
+        width: 850,
+        height: 300,
+        source: data, 
+        renderCallbacks: {
+            '*': function (element, data) {
+                element.css({
+                    color: '#ffffff'
+                });
+                element.html('<span style="font-size: 11px;" class="jqx-treemap-label">' + data.label + ', ' + data.value + '%</span>');
+                return true;
+            }
+        }
+    });
+});
+</script>
+</head>
+<body>
+<div id="treemap"></div>
+<span style="font-size: 13px; font-family: Verdana;">Non-mobile web browser usage for Wikimedia visitors as of March 2014</span>
+</body>
+</html>

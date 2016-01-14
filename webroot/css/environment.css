@@ -1,0 +1,156 @@
+.jqx-item {
+  line-height: 20px!important;
+}
+
+/* Environment dashboard */
+#environment table {
+  width: 100%;
+}
+#environment table td {
+  text-align: center;
+  vertical-align: top;
+  white-space: nowrap;
+}
+#environment h1 {
+  font-size: 2em;
+  margin: 0.2em 0em;
+}
+#environment h2 {
+  font-size: 1.6em;
+  margin: 0.2em 0em;
+}
+#environment .animation{
+  width: 10em !important;
+  height: 12em !important;
+  position: relative;
+  margin: 0em auto;
+}
+#environment .animation div {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+#environment .loggedout {
+  filter: url('filters.svg#drop-shadow-red'); /* Firefox 10+, Firefox on Android */
+  -webkit-filter: drop-shadow(0px 0px 7px rgba(255,0,0,0.5));
+  -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=0, OffY=0, Color='#ff0000')";
+  filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=0, OffY=0, Color='#ff0000')";
+}
+#environment .loggedin {
+  filter: url('filters.svg#drop-shadow-green'); /* Firefox 10+, Firefox on Android */
+  -webkit-filter: drop-shadow(0px 0px 7px rgba(0,255,0,0.5));
+  -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=0, OffY=0, Color='#00ff00')";
+  filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=0, OffY=0, Color='#00ff00')";
+}
+/* End environment dashboard */
+
+/* Countdown timer */
+span.icon.counter {
+  position: absolute;
+  height: 3.5em;
+  width: 3.5em;
+  margin-top: 0.5em;
+}
+
+span.icon.counter tspan {
+  font-size: 0.6em;
+}
+
+/*
+div.icon.counter span {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  direction: block;
+}
+
+div.icon.counter span.status {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  text-align: center;
+  background-color: white;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+*/
+/* End countdown timer */
+
+
+#door_update.open {
+  color: red;
+}
+
+#door_update.closed {
+  color: green;
+}
+
+#door_update span.icon {
+  display: inline-flex;
+  height: 1.2em;
+  width: 1.2em;
+  top: 0.2em;
+  position: relative;
+  margin-right: 0.2em;
+}
+
+#door_update.closed span.icon {
+  background-image: url('../images/icons/enabled.png') !important;
+}
+
+#door_update.open span.icon {
+  background-image: url('../images/icons/error.png') !important;
+}
+
+
+/* Lights part */
+#environment .light_bulb,
+#environment .light_bulb.off {
+  background-image: url('../images/icons/switches/light_bulb_off.png');
+}
+#environment .light_bulb.on {
+  background-image: url('../images/icons/switches/light_bulb_on.png');
+}
+/* End lights part */
+
+/* Humidity part */
+#environment #env_humidity div.animation  {
+  height: 10em !important;
+}
+/* End humidity part */
+
+/* Heater part */
+#environment #env_heater span.value {
+  display: block;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  z-index: 19;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 1em 0em;
+}
+
+#environment #env_heater div.animation .flame1,
+#environment #env_heater div.animation .flame2,
+#environment #env_heater div.animation .flame3{
+  background-image: url('../images/heater/flame1.png');
+  background-size: auto 100%;
+  background-position: center bottom;
+}
+#environment #env_heater div.animation .flame2{
+  background-image: url('../images/heater/flame2.png');
+}
+#environment #env_heater div.animation .flame3{
+  background-image: url('../images/heater/flame3.png');
+}
+
+
+/* End heater part */

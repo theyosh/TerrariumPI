@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title id="Description">This demo showcases jqxBulletChart's right-to-left support.
+    </title>
+    <meta name="keywords" content="bullet chart, bullet graph, BulletChart, chart, jQuery bullet graph, jQuery bullet chart, jQWidgets, jqxBulletChart, right-to-left, rtl" />
+    <meta name="description" content="This demo showcases jqxBulletChart's right-to-left support." />
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbulletchart.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxBulletChart").jqxBulletChart({
+                width: 500,
+                height: 80,
+                barSize: "40%",
+                title: "Revenue 2014 YTD",
+                description: "(U.S. $ in thousands)",
+                ranges: [
+                    { startValue: 0, endValue: 200, color: "#000000", opacity: 0.5 },
+                    { startValue: 200, endValue: 250, color: "#000000", opacity: 0.3 },
+                    { startValue: 250, endValue: 300, color: "#000000", opacity: 0.1 }
+                ],
+                pointer: { value: 270, label: "Revenue 2014 YTD", size: "25%", color: "Black" },
+                target: { value: 260, label: "Revenue 2013 YTD", size: 4, color: "Black" },
+                ticks: { position: "far", interval: 50, size: 10 },
+                labelsFormat: "c",
+                showTooltip: true,
+                rtl: true
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="jqxBulletChart" style="margin-left: 15px;">
+    </div>
+</body>
+</html>

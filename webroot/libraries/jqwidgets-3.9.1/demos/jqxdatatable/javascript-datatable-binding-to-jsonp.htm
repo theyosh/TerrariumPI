@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">Data Binding to JSONP data in jqxDataTable</title>
+    <meta name="description" content="This sample demonstrates how we can bind jQWidgets DataTable widget to JSONP Data by using jQWidgets DataAdapter plugin.">
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script> 
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                dataType: "jsonp",
+                dataFields: [
+                    { name: 'countryName', type: 'string' },
+                    { name: 'name', type: 'string' },
+                    { name: 'population', type: 'float' },
+                    { name: 'continentCode', type: 'string' }
+                ],
+                url: "http://api.geonames.org/searchJSON"
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, 
+                {
+                    formatData: function (data) {
+                        $.extend(data, {
+                            featureClass: "P",
+                            style: "full",
+                            username: "jqwidgets",
+                            maxRows: 50
+                        });
+
+                        return data;
+                    }
+                }
+            );
+
+            $("#dataTable").jqxDataTable(
+            {
+                width: 850,
+                pageable: true,
+                pagerButtonsCount: 10,
+                source: dataAdapter,
+                columnsResize: true,
+                columns: [
+                    { text: 'Country Name', dataField: 'countryName', width: 200 },
+                    { text: 'City', dataField: 'name', width: 250 },
+                    { text: 'Population', dataField: 'population', cellsFormat: 'f', width: 250 },
+                    { text: 'Continent Code', dataField: 'continentCode' }
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="dataTable"></div>
+</body>
+</html>

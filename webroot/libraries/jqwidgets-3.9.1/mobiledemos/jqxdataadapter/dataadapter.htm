@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title id='Description'>jQWidgets DataAdapter - Mobile Example
+    </title>
+    <link rel="stylesheet" href="../styles/demo.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.windowsphone.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.blackberry.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.android.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.mobile.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../simulator.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="simulator.js"></script>
+    <style type="text/css">
+        table {
+            font-family: verdana,arial,sans-serif;
+            font-size: 11px;
+            color: #333333;
+            border-width: 1px;
+            border-color: #666666;
+            border-collapse: collapse;
+        }
+
+            table th {
+                border-width: 1px;
+                padding: 8px;
+                border-style: solid;
+                border-color: #666666;
+                background-color: #dedede;
+            }
+
+            table td {
+                border-width: 1px;
+                padding: 8px;
+                border-style: solid;
+                border-color: #666666;
+                background-color: #ffffff;
+            }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = prepareSimulator("adapter");
+
+            var source =
+            {
+                localdata: createArray(),
+                datatype: "array"
+            };
+
+            var culture = "en";
+
+            var availableCultures = ['Czech (Czech Republic)', 'German (Germany)', 'English (Canada)', 'English (United States)',
+             'French (France)', 'Italian (Italy)', 'Japanese (Japan)', 'Hebrew (Israel)', 'Russian (Russia)', 'Croatian (Croatia)', 'Sanskrit (India)'
+            ];
+
+            // create a DropDownList
+            $("#jqxDropDownList").jqxDropDownList({ theme: theme, source: availableCultures, selectedIndex: 3, width: '100%', height: '35px' });
+
+
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function (records) {
+                    // get data records.
+                    var length = records.length;
+                    // loop through the records and display them in a table.
+                    var html = "<table border='1'><tr><th align='left'>Ship Date</th><th align='right'>Price</th><th align='right'>Quantity</th></tr>";
+                    for (var i = 0; i < length; i++) {
+                        var record = records[i];
+                        html += "<tr>";
+                        var currentCulture = Globalize.cultures[culture];
+                        // create localization object.
+                        var localizationObject = currentCulture.calendar;
+                        // set percentage symbol.
+                        localizationObject.percentsymbol = currentCulture.numberFormat.percent.symbol;
+                        // set currency symbol.
+                        localizationObject.currencysymbol = currentCulture.numberFormat.currency.symbol;
+                        // set decimal separator.
+                        localizationObject.decimalseparator = currentCulture.numberFormat['.'];
+                        // set thousands separator.
+                        localizationObject.thousandsseparator = currentCulture.numberFormat[','];
+                        // set currency symbol position.
+                        localizationObject.currencysymbolposition = currentCulture.numberFormat.currency.pattern[1].substring(0, 1) == 'n' ? "after" : "before";
+
+                        html += "<td>" + dataAdapter.formatDate(record.date, 'D', localizationObject) + "</td>";
+                        html += "<td>" + dataAdapter.formatNumber(record.price, 'c2', localizationObject) + "</td>";
+                        html += "<td>" + dataAdapter.formatNumber(record.quantity, 'n', localizationObject) + "</td>";
+                        html += "</tr>";
+                    }
+                    html += "</table>";
+                    $("#table").html(html);
+                },
+                loadError: function (jqXHR, status, error) {
+                },
+                beforeLoadComplete: function (records) {
+
+                }
+            });
+            // perform data binding.
+            dataAdapter.dataBind();
+
+            $("#jqxDropDownList").on('select', function (event) {
+                var index = event.args.index;
+                switch (index) {
+                    case 0:
+                        $.getScript('../../jqwidgets/globalization/globalize.culture.cs-CZ.js', function () {
+                            culture = 'cs-CZ';
+                            // perform data binding.
+                            dataAdapter.dataBind();
+                        });
+                        break;
+                    case 1:
+                        $.getScript('../../jqwidgets/globalization/globalize.culture.de-DE.js', function () {
+                            culture = 'de-DE';
+                            // perform data binding.
+                            dataAdapter.dataBind();
+                        });
+                        break;
+                    case 2:
+                        $.getScript('../../jqwidgets/globalization/globalize.culture.en-CA.js', function () {
+                            culture = 'en-CA';
+                            // perform data binding.
+                            dataAdapter.dataBind();
+                        });
+                        break;
+                    case 3:
+                        $.getScript('../../jqwidgets/globalization/globalize.culture.en-US.js', function () {
+                            culture = 'en';
+                            // perform data binding.
+                            dataAdapter.dataBind();
+                        });
+                        break;
+                    case 4:
+                        $.getScript('../../jqwidgets/globalization/globalize.culture.fr-FR.js', function () {
+                            culture = 'fr-FR';
+                            // perform data binding.
+                            dataAdapter.dataBind();
+                        });
+                        break;
+                    case 5:
+                        $.getScript('../../jqwidgets/globalization/globalize.culture.it-IT.js', function () {
+                            culture = 'it-IT';
+                            // perform data binding.
+                            dataAdapter.dataBind();
+                        });
+                        break;
+                    case 6:
+                        $.getScript('../../jqwidgets/globalization/globalize.culture.ja-JP.js', function () {
+                            culture = 'ja-JP';
+                            // perform data binding.
+                            dataAdapter.dataBind();
+                        });
+                        break;
+                    case 7:
+                        $.getScript('../../jqwidgets/globalization/globalize.culture.he-IL.js', function () {
+                            culture = 'he-IL';
+                            // perform data binding.
+                            dataAdapter.dataBind();
+                        });
+                        break;
+                    case 8:
+                        $.getScript('../../jqwidgets/globalization/globalize.culture.ru-RU.js', function () {
+                            culture = 'ru-RU';
+                            // perform data binding.
+                            dataAdapter.dataBind();
+                        });
+                        break;
+                    case 9:
+                        $.getScript('../../jqwidgets/globalization/globalize.culture.hr-HR.js', function () {
+                            culture = 'hr-HR';
+                            // perform data binding.
+                            dataAdapter.dataBind();
+                        });
+                        break;
+                    case 10:
+                        $.getScript('../../jqwidgets/globalization/globalize.culture.sa-IN.js', function () {
+                            culture = 'sa-IN';
+                            // perform data binding.
+                            dataAdapter.dataBind();
+                        });
+                        break;
+                }
+            });
+            initSimulator("adapter");
+        });
+        function createArray() {
+            // prepare the data
+            var data = new Array();
+
+            var firstNames =
+            [
+                "Andrew", "Nancy", "Shelley", "Regina", "Yoshi", "Antoni", "Mayumi", "Ian", "Peter", "Lars", "Petra", "Martin", "Sven", "Elio", "Beate", "Cheryl", "Michael", "Guylene"
+            ];
+
+            var lastNames =
+            [
+                "Fuller", "Davolio", "Burke", "Murphy", "Nagase", "Saavedra", "Ohno", "Devling", "Wilson", "Peterson", "Winkler", "Bein", "Petersen", "Rossi", "Vileid", "Saylor", "Bjorn", "Nodier"
+            ];
+
+            var productNames =
+            [
+                "Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte", "White Chocolate Mocha", "Caramel Latte", "Caffe Americano", "Cappuccino", "Espresso Truffle", "Espresso con Panna", "Peppermint Mocha Twist"
+            ];
+
+            var priceValues =
+            [
+                 "2.25", "1.5", "3.0", "3.3", "4.5", "3.6", "3.8", "2.5", "5.0", "1.75", "3.25", "4.0"
+            ];
+
+            for (var i = 0; i < 6; i++) {
+                var row = {};
+                var productindex = Math.floor(Math.random() * productNames.length);
+                var price = parseFloat(priceValues[productindex]);
+                var quantity = 1 + Math.round(Math.random() * 10);
+
+                row["id"] = i;
+                row["firstname"] = firstNames[Math.floor(Math.random() * firstNames.length)];
+                row["lastname"] = lastNames[Math.floor(Math.random() * lastNames.length)];
+                row["name"] = row["firstname"] + " " + row["lastname"];
+                row["productname"] = productNames[productindex];
+                row["price"] = price;
+                row["quantity"] = quantity;
+                row["total"] = price * quantity;
+
+                var date = new Date();
+                date.setFullYear(2013, Math.floor(Math.random() * 11), Math.floor(Math.random() * 27));
+                date.setHours(0, 0, 0, 0);
+                row["date"] = date;
+
+                data[i] = row;
+            }
+            return data;
+        }
+    </script>
+</head>
+<body class='default'>
+    <div id="demoContainer" class="device-mobile">
+        <div id="container" class="device-mobile-container">
+            <div style="overflow: hidden; width: 90%; height: 100%; margin-left: 5%; margin-right: 5%;">
+                <div style="margin-top: 10px;" id='jqxDropDownList'>
+                </div>
+                <div style="clear: both;"></div>
+                <div style="margin-top: 15px;" id="table">
+                    Loading...
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

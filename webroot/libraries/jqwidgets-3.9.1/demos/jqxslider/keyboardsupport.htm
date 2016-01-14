@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title id='Description'>The jqxSlider provides keyboard navigation once it gains focus(either programmatically or as a result of a user click). When the widget is focused, you can use the keyboard to change its value.</title>
+     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxslider.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // create jqxSlider.
+            $('#jqxSlider').jqxSlider({ width: 300, ticksFrequency: 1,  mode: 'fixed' });
+            // focus the jqxSlider.
+            $('#jqxSlider').jqxSlider('focus');
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div id='jqxSlider'></div>
+        <div style="font-family: Verdana; font-size: 12px; width: 400px; margin-left: 20px; float: left;">
+            <ul>
+                <li><b>Tab</b> - Like other widgets, the jqxSlider widget receives focus by tabbing into it. Once focus is received, users will be able to use the keyboard to change the slider's value. A second tab will take the user out of the widget.</li>
+                <li><b>Shift+Tab</b> - reverses the direction of the tab order. Once in the widget, a Shift+Tab will take the user to the previous focusable element in the tab order.</li>
+                <li><b>Right Arrow</b> and <b>Up Arrow</b> - increase the value of the slider.</li>
+                <li><b>Left Arrow</b> and <b>Down Arrow</b> - decrease the value of the slider.</li>
+                <li><b>Home</b> - move to the minimum value of the slider.</li>
+                <li><b>End</b> - move to the maximum value of the slider.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

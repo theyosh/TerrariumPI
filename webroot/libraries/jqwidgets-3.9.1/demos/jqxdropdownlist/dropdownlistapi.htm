@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery DropDownList, List, ListBox, Popup List, jqxDropDownList, jqxListBox, List Widget, ListBox Widget, DropDownList Widget" />
+    <meta name="description" content="The jqxDropDownList represents a widget that contains a list of
+        selectable items displayed in a drop-down." />
+    <title id='Description'>In this demo, you can set the jqxDropDownList's Height or activate the auto-height functionality.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+</head>
+<body>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {                
+                var source = [
+                    "Affogato",
+                    "Americano",
+                    "Bicerin",
+                    "Breve",
+                    "Café Bombón",
+                    "Café au lait",
+                    "Caffé Corretto",
+                    "Café Crema",
+                    "Caffé Latte",
+                    "Caffé macchiato",
+                    "Café mélange",
+                    "Coffee milk",
+                    "Cafe mocha",
+                    "Cappuccino",
+                    "Carajillo",
+                    "Cortado"
+		        ];
+
+                // Create a jqxDropDownList
+                $("#jqxdropdownlist").jqxDropDownList({ source: source, selectedIndex: 0, width: '200', height: '25'});
+                $("#setheightbutton").jqxButton({ width: '100', height: '27'});
+                $("#jqxcheckbox").jqxCheckBox({ width: '100', height: '25'});
+
+                $("#setheightbutton").on('click', function () {
+                    var height = parseInt($("#heightinput").val());
+                    if (height < 50) height = 50;
+                    if (height > 400) height = 400;
+
+                    if (!isNaN(height)) {
+                        $("#jqxdropdownlist").jqxDropDownList({ dropDownHeight: height });
+                    }
+                });
+
+                $("#jqxcheckbox").on('change', function (event) {
+                    var checked = event.args.checked;
+                    $("#jqxdropdownlist").jqxDropDownList({ autoDropDownHeight: checked });
+                });
+            });
+        </script>
+        <div id='jqxWidget'>
+            <div style="float: left;" id='jqxdropdownlist'>
+            </div>
+            <div style="margin-left: 50px; float: left;">
+                <b>Settings</b>
+                <br />
+                <br />
+                <span style="margin-bottom: 3px; font-size: 0.8em;">Minimum: 50, Maximum: 400</span>
+                <div>
+                    <input style="float: left; width: 120px; height: 22px;" id="heightinput" type="text" />
+                    <input id='setheightbutton' style="margin-bottom: 10px; margin-left: 10px; float: left;" type="button"
+                        value="Set Height" />
+                </div>
+                <div style="clear: both;">
+                    <div id='jqxcheckbox'>Auto Height</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

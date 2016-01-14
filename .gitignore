@@ -1,0 +1,7 @@
+*.pyc
+terrariumSettings.cfg
+log/*
+reboot.log
+webroot/webcam/*
+webroot/rrd/*
+webroot/archive/*

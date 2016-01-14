@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace jQWidgetsMVCDemo.Controllers
+{
+	public class WidgetsController : Controller
+	{
+		// GET: /Widgets//TreeWithCheckboxes
+		public ActionResult TreeWithCheckboxes(string theme)
+		{
+			return View("TreeWithCheckboxes");
+		}
+
+		public ActionResult Tree()
+		{
+			var items = Request.Form["tree"];
+			if (null == items)
+				items = "";
+			ViewData["Tree Items"] = items;
+			return View();
+		}
+	}
+}

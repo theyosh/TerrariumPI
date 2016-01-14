@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id="Description">jqxBulletChart directive for AngularJS</title>
+    <link rel="stylesheet" type="text/css" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbulletchart.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            $scope.bulletChartSettings = {
+                width: 500,
+                height: 80,
+                barSize: "40%",
+                title: "Revenue 2015 YTD",
+                description: "(U.S. $ in thousands)",
+                ranges: [
+                    { startValue: 0, endValue: 200, color: "#000000", opacity: 0.5 },
+                    { startValue: 200, endValue: 250, color: "#000000", opacity: 0.3 },
+                    { startValue: 250, endValue: 300, color: "#000000", opacity: 0.1 }
+                ],
+                pointer: { value: 70, label: "Revenue 2015 YTD", size: "25%", color: "Black" },
+                target: { value: 260, label: "Revenue 2013 YTD", size: 4, color: "Black" },
+                ticks: { position: "both", interval: 50, size: 10 },
+                labelsFormat: "c",
+                showTooltip: true
+            };
+
+            // set bullet chart value.
+            $scope.setValue = function () {
+                $scope.bulletChartSettings.pointer.value = 270;
+            }
+        });
+    </script>
+</head>
+<body>
+    <div ng-controller="demoController">
+        <jqx-bullet-chart jqx-settings="bulletChartSettings" jqx-watch="bulletChartSettings.pointer"></jqx-bullet-chart>
+        <br />
+        <br />
+        <jqx-button jqx-on-click="setValue()">Set Value</jqx-button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,204 @@
+﻿/*jqxMenu Style*/
+.jqx-menu-web
+{
+    color: #fff;
+    border-color: #2e2e2e;
+}
+.jqx-menu-dropdown-column-web
+{
+}
+.jqx-menu-horizontal-web
+{
+    background: #535353;
+}
+.jqx-menu-dropdown-web
+{
+    background-color: #343434;
+    border-color: #000;
+    -moz-border-radius-bottomleft: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -webkit-border-top-right-radius: 5px;
+    border-top-right-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    right: -1px;
+}
+.jqx-menu-dropdown-web ul
+{
+    background-color: transparent;
+}
+.jqx-menu-demo ul
+{
+    background-color: transparent;
+}
+.jqx-menu-item-top-web
+{
+    border: 1px solid transparent;
+    margin: 0px;
+    margin-left: 2px;
+    color: inherit;
+    background-color: transparent;
+}
+.jqx-menu-item-web
+{
+    background-color: #343434;
+    border: 1px solid #343434;
+    color: #fff;
+}
+.jqx-menu-item-separator-web
+{
+    background-color: #aaa;
+    color: inherit;
+}
+.jqx-menu-item-hover-web
+{
+    background: #686868;
+    border: 1px solid #000;
+    color: #fff;
+}
+.jqx-menu-item-top-hover-web
+{
+    background: #343434;
+    border: 1px solid #000;
+    color: inherit;
+}
+.jqx-menu-item-selected-web
+{
+    background: #343434;
+    border: 1px solid #000;
+    color: #fff;
+}
+.jqx-menu-item-top-selected-web
+{
+    background: #343434;
+    border: 1px solid #000;
+    border-bottom: 1px solid transparent;
+    color: #fff;
+     -moz-border-radius-bottomleft: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    -moz-border-radius-bottomright: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.jqx-menu-item-disabled-web
+{
+    color: #ccc;
+}
+.jqx-menu-highlighteffect-web
+{
+    background-color: #ffffff;
+    margin: -2px;
+}
+.jqx-menu-item-arrow-right-web
+{
+    background-image: url(images/icon-right.png);
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+}
+.jqx-menu-item-arrow-top-right-web
+{
+    background-image: url(images/icon-right-white.png);
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+}
+.jqx-menu-item-arrow-down-web
+{
+    background-image: url(images/icon-down-white.png);
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+}
+.jqx-menu-item-arrow-up-web
+{
+    background-image: url(images/icon-up-white.png);
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+}
+.jqx-menu-item-arrow-left-web
+{
+    background-image: url(images/icon-left-white.png);
+    background-position: 0 50%;
+    background-repeat: no-repeat;
+}
+.jqx-menu-item-arrow-top-left-web
+{
+    background-image: url(images/icon-left-white.png);
+    background-position: 0 50%;
+    background-repeat: no-repeat;
+}
+.jqx-menu-item-arrow-right-selected-web
+{
+    background-image: url(images/icon-right-white.png);
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+}
+.jqx-menu-item-arrow-down-selected-web
+{
+    background-image: url(images/icon-down-white.png);
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+}
+.jqx-menu-item-arrow-up-selected-web
+{
+    background-image: url(images/icon-up-white.png);
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+}
+.jqx-menu-item-arrow-left-selected-web
+{
+    background-image: url(images/icon-left-white.png);
+    background-position: 0 50%;
+    background-repeat: no-repeat;
+}
+
+.jqx-menu-item-web a:link
+{
+    background-color: transparent;
+    color: #fff;
+}
+.jqx-menu-item-web a:visited
+{
+    background-color: transparent;
+    color: #fff;
+}
+.jqx-menu-item-web a:hover
+{
+    text-decoration: none;
+    color: #fff;
+    background-color: transparent;
+}
+
+.jqx-menu-item-top-web a:link
+{
+    background-color: transparent;
+    color: #fff;
+}
+.jqx-menu-item-top-web a:visited
+{
+    background-color: transparent;
+    color: #fff;
+}
+.jqx-menu-item-top-web a:hover
+{
+    text-decoration: none;
+    color: #fff;
+    background-color: transparent;
+}
+.jqx-menu-disabled-web
+{
+    color: #aaa;
+}
+.jqx-menu-disabled-web a:link
+{
+    color: #aaa;
+}
+.jqx-menu-disabled-web a:visited
+{
+    color: #aaa;
+}
+.jqx-menu-disabled-web a:hover
+{
+}

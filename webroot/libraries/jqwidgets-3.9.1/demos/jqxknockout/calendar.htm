@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">Integration of jqxCalendar with Knockout</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/json2.js"></script>
+    <script type="text/javascript" src="../../scripts/knockout-3.0.0.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxknockout.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {   
+             var viewModel = function (date) {
+                this.date = ko.observable(date);
+                this.disabled = ko.observable(false);
+                this.displayDate = function () {
+                    alert("Date: " + this.date());
+                }
+                this.setDate = function () {
+                    var date = new Date();
+                    date.setFullYear(2012, 11, 11);
+                    this.date(date);
+                }
+            };
+
+            var date = new Date();
+            date.setFullYear(2012, 10, 10);
+            ko.applyBindings(new viewModel(date));
+        });
+    </script>
+</head>
+<body class='default'>
+    <div data-bind="jqxCalendar: {value: date, disabled: disabled, width: '250px', height: '250px'}">
+    </div>
+    <div style="margin-top: 5px; clear: both;">
+        <input id="getButton" data-bind="click: displayDate, jqxButton: {}" type="button" value="Get Value" />
+        <input id="setButton" data-bind="click: setDate, jqxButton: {}" type="button" value="Set Value" />
+        <div data-bind="jqxCheckBox: {checked: disabled, width: '100px'}" style='margin-top: 5px;' id="checkBox">Disabled</div>
+   </div>
+</body>
+</html>

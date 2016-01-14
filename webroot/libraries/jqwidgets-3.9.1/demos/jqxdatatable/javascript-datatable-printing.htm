@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>The following example shows how to get the DataTable's HTML, add it to a new browser window and trigger printing.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.export.js"></script> 
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../sampledata/generatedata.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var data = generatedata(10);
+
+            var source =
+            {
+                localdata: data,
+                datatype: "array",
+                dataFields:
+                [
+                    { name: 'firstname', type: 'string' },
+                    { name: 'lastname', type: 'string' },
+                    { name: 'productname', type: 'string' },
+                    { name: 'available', type: 'bool' },
+                    { name: 'date', type: 'date' },
+                    { name: 'quantity', type: 'number' },
+                    { name: 'price', type: 'number' }
+                ]                     
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            // initialize jqxDataTable
+            $("#dataTable").jqxDataTable(
+            {
+                source: dataAdapter,                
+                altRows: true,
+                sortable: true,
+                exportSettings: { fileName: null },
+                columns: [
+                  { text: 'First Name', dataField: 'firstname', width: 150 },
+                  { text: 'Last Name', dataField: 'lastname', width: 150 },
+                  { text: 'Product', dataField: 'productname', width: 200 },
+                  { text: 'Ship Date', dataField: 'date', width: 150, align: 'right', cellsAlign: 'right', cellsFormat: 'd' },
+                  { text: 'Quantity', dataField: 'quantity', width: 100, align: 'right', cellsAlign: 'right' },
+                  { text: 'Price', dataField: 'price', width: 100, cellsalign: 'right', align: 'right', cellsFormat: 'c2' }
+                ]
+            });
+
+            $("#print").jqxButton({ width: 80 });
+         
+           $("#print").click(function () {
+                var gridContent = $("#dataTable").jqxDataTable('exportData', 'html');
+                var newWindow = window.open('', '', 'width=800, height=500'),
+                document = newWindow.document.open(),
+                pageContent =
+                    '<!DOCTYPE html>' +
+                    '<html>' +
+                    '<head>' +
+                    '<meta charset="utf-8" />' +
+                    '<title>jQWidgets DataTable</title>' +
+                    '</head>' +
+                    '<body>' + gridContent + '</body></html>';
+                document.write(pageContent);
+                document.close();
+                newWindow.print();
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="dataTable"></div>
+    <div style='margin-top: 20px;'>
+        <div style='margin-left: 10px; float: left;'>
+            <input type="button" value="Print" id='print' />
+        </div>
+    </div>
+</body>
+</html>

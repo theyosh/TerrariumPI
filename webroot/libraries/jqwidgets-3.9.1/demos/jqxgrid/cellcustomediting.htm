@@ -1,0 +1,183 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>In this sample is illustrated how to create custom editors for jqxGrid. The "First Name" and "Last Name" columns use the jqxInput widget as a cell editor. The "Products" column
+        use a jqxDropDownList widget with enabled Checkboxes  as an editor. The "Quantity" column's editor is jqxSlider.
+    </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.edit.js"></script>  
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxslider.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="generatedata.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var data = generatedata(200);
+
+            var source =
+            {
+                localdata: data,
+                datatype: "array",
+                updaterow: function (rowid, rowdata, commit) {
+                    // synchronize with the server - send update command
+                    // call commit with parameter true if the synchronization with the server is successful 
+                    // and with parameter false if the synchronization failder.
+                    commit(true);
+                },
+                datafields:
+                [
+                    { name: 'firstname', type: 'string' },
+                    { name: 'lastname', type: 'string' },
+                    { name: 'productname', type: 'string' },
+                    { name: 'available', type: 'bool' },
+                    { name: 'quantity', type: 'number' },
+                    { name: 'price', type: 'number' },
+                    { name: 'date', type: 'date' }
+                ]
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            var getEditorDataAdapter = function (datafield) {
+                var source =
+                 {
+                       localdata: data,
+                       datatype: "array",
+                       datafields:
+                       [
+                           { name: 'firstname', type: 'string' },
+                           { name: 'lastname', type: 'string' },
+                           { name: 'productname', type: 'string' },
+                           { name: 'available', type: 'bool' },
+                           { name: 'quantity', type: 'number' },
+                           { name: 'price', type: 'number' },
+                           { name: 'date', type: 'date' }
+                       ]
+                 };
+                var dataAdapter = new $.jqx.dataAdapter(source, { uniqueDataFields: [datafield] });
+                return dataAdapter;
+            }
+
+            // initialize jqxGrid
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 850,
+                source: dataAdapter,
+                editable: true,
+                selectionmode: 'singlecell',
+                columns: [
+                  {
+                      text: 'First Name', columntype: 'template', datafield: 'firstname', width: 80, createeditor: function (row, cellvalue, editor, cellText, width, height) {
+                          // construct the editor.
+                          var inputElement = $("<input/>").prependTo(editor);
+                          inputElement.jqxInput({ source: getEditorDataAdapter('firstname'), displayMember: "firstname", width: width, height: height});
+                      },
+                      initeditor: function (row, cellvalue, editor, celltext, pressedkey) {
+                          // set the editor's current value. The callback is called each time the editor is displayed.
+                          var inputField = editor.find('input');
+                          if (pressedkey) {
+                              inputField.val(pressedkey);
+                              inputField.jqxInput('selectLast');
+                          }
+                          else {
+                              inputField.val(cellvalue);
+                              inputField.jqxInput('selectAll');
+                          }
+                      },
+                      geteditorvalue: function (row, cellvalue, editor) {
+                          // return the editor's value.
+                          return editor.find('input').val();
+                      }
+                  },
+                  {
+                      text: 'Last Name', datafield: 'lastname', columntype: 'template', width: 80, createeditor: function (row, cellvalue, editor, cellText, width, height) {
+                          // construct the editor.
+                          var inputElement = $("<input/>").prependTo(editor);
+                          inputElement.jqxInput({ source: getEditorDataAdapter('lastname'), displayMember: "lastname", width: width, height: height});
+                      },
+                      initeditor: function (row, cellvalue, editor, celltext, pressedkey) {
+                          // set the editor's current value. The callback is called each time the editor is displayed.
+                          var inputField = editor.find('input');
+                          if (pressedkey) {
+                              inputField.val(pressedkey);
+                              inputField.jqxInput('selectLast');
+                          }
+                          else {
+                              inputField.val(cellvalue);
+                              inputField.jqxInput('selectAll');
+                          }
+                      },
+                      geteditorvalue: function (row, cellvalue, editor) {
+                          // return the editor's value.
+                          return editor.find('input').val();
+                      }
+                  },
+                  {
+                      text: 'Products', columntype: 'template', datafield: 'productname',
+                      createeditor: function (row, cellvalue, editor, cellText, width, height) {
+                          // construct the editor. 
+                          editor.jqxDropDownList({
+                              checkboxes: true, source: getEditorDataAdapter('productname'), displayMember: 'productname', valueMember: 'productname', width: width, height: height, 
+                              selectionRenderer: function () {
+                                  return "<span style='top:4px; position: relative;'>Please Choose:</span>";
+                              }
+                          });
+                      },
+                      initeditor: function (row, cellvalue, editor, celltext, pressedkey) {
+                          // set the editor's current value. The callback is called each time the editor is displayed.
+                          var items = editor.jqxDropDownList('getItems');
+                          editor.jqxDropDownList('uncheckAll');
+                          var values = cellvalue.split(/,\s*/);
+                          for (var j = 0; j < values.length; j++) {
+                              for (var i = 0; i < items.length; i++) {
+                                  if (items[i].label === values[j]) {
+                                      editor.jqxDropDownList('checkIndex', i);
+                                  }
+                              }
+                          }
+                      },
+                      geteditorvalue: function (row, cellvalue, editor) {
+                          // return the editor's value.
+                          return editor.val();
+                      }
+                  },
+                 {
+                     text: 'Quantity', width: 200, columntype: 'custom', datafield: 'quantity',
+                     createeditor: function (row, cellvalue, editor, cellText, width, height) {
+                         // construct the editor. 
+                         editor.css('margin-top', '2px');
+                         editor.jqxSlider({ step: 1, mode: 'fixed', showTicks: false, min: 0, max: 30, width: width, height: height });
+                     },
+                     initeditor: function (row, cellvalue, editor, celltext, pressedkey) {
+                         // set the editor's current value. The callback is called each time the editor is displayed.
+                         var value = parseInt(cellvalue);
+                         if (isNaN(value)) value = 0;
+                         editor.jqxSlider('setValue', value);
+                     },
+                     geteditorvalue: function (row, cellvalue, editor) {
+                         // return the editor's value.
+                           return editor.val();
+                     }
+                 }
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="jqxgrid"></div>
+</body>
+</html>

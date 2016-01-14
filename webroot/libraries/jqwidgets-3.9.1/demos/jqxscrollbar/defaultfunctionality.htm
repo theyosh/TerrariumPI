@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery ScrollBar, jqxScrollBar, Horizontal ScrollBar, Vertical ScrollBar, Scroll, Scrolling Bar, Scroller" /> 
+    <meta name="description" content="The jqxScrollBar represents a widget that provides a scroll bar that has a sliding thumb whose position corresponds to a value." />
+    <title id='Description'>The jqxScrollBar represents a widget that provides a scroll bar that has a sliding thumb whose position corresponds to a value.
+    </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Create jqxScrollBar
+            $("#jqxScrollBar").jqxScrollBar({ width: 280, height: 18, min: 0, max: 1000});
+            $("#jqxVerticalScrollBar").jqxScrollBar({ width: 18, height: 280, min: 0, max: 1000, vertical: true});
+
+            // Trigger the 'valuechanged' event.
+            $("#jqxScrollBar").on('valueChanged', function (event) {
+                $('#HorizontalDiv').text('Horizontal (' + parseInt(event.currentValue) + ')');
+            });
+
+            $("#jqxVerticalScrollBar").on('valueChanged', function (event) {
+                $('#VerticalDiv').text('Vertical (' + parseInt(event.currentValue) + ')');
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+        <div id='VerticalDiv' style='margin-top: 10px;'>Vertical</div>
+        <div style='margin-top: 10px;' id='jqxVerticalScrollBar'>
+     
+        </div>
+        <div id='HorizontalDiv' style='margin-top: 10px;'>Horizontal</div>
+        <div style='margin-top: 10px;' id='jqxScrollBar'>
+     
+        </div>
+    </div>
+</body>
+</html>

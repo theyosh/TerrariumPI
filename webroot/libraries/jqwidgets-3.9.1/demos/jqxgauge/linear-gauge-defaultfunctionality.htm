@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Linear Gauge</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxslider.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#gauge').jqxLinearGauge({
+                orientation: 'vertical',
+                width: 100,
+                height: 300,
+                ticksMajor: { size: '10%', interval: 10 },
+                ticksMinor: { size: '5%', interval: 2.5, style: { 'stroke-width': 1, stroke: '#aaaaaa'} },
+                max: 60,
+                pointer: { size: '5%' },
+                colorScheme: 'scheme05',
+                labels: { interval: 20, formatValue: function (value, position) {
+                    if (position === 'far') {
+                        value = (9 / 5) * value + 32;
+                        if (value === -76) {
+                            return '°F';
+                        }
+                        return value + '°';
+                    }
+                    if (value === -60) {
+                        return '°C';
+                    }
+                    return value + '°';
+                }
+                },
+                ranges: [
+                { startValue: -10, endValue: 10, style: { fill: '#FFF157', stroke: '#FFF157'} },
+                { startValue: 10, endValue: 35, style: { fill: '#FFA200', stroke: '#FFA200'} },
+                { startValue: 35, endValue: 60, style: { fill: '#FF4800', stroke: '#FF4800'}}],
+                animationDuration: 1500
+            });
+
+            $('#gauge').jqxLinearGauge('value', 40);
+        });
+    </script>
+</head>
+<body class='default'>
+      <div id="gauge"></div>
+ </body>
+</html>

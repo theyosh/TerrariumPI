@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>The sample illustrates how to add custom CSS styles to Grid cells under specific conditions.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.sort.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.pager.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.edit.js"></script> 
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = "../sampledata/products.xml";
+
+            // prepare the data
+            var source =
+            {
+                datatype: "xml",
+                datafields: [
+                    { name: 'ProductName', type: 'string' },
+                    { name: 'QuantityPerUnit', type: 'int' },
+                    { name: 'UnitPrice', type: 'float' },
+                    { name: 'UnitsInStock', type: 'float' },
+                    { name: 'Discontinued', type: 'bool' }
+                ],
+                root: "Products",
+                record: "Product",
+                id: 'ProductID',
+                url: url
+            };
+
+            var cellclass = function (row, columnfield, value) {
+                if (value < 20) {
+                    return 'red';
+                }
+                else if (value >= 20 && value < 50) {
+                    return 'yellow';
+                }
+                else return 'green';
+            }
+
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                downloadComplete: function (data, status, xhr) { },
+                loadComplete: function (data) { },
+                loadError: function (xhr, status, error) { }
+            });
+
+            // initialize jqxGrid
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 850,
+                source: dataAdapter,                
+                pageable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                editable: true,
+                selectionmode: 'multiplecellsadvanced',
+                columns: [
+                  { text: 'Product Name', datafield: 'ProductName', width: 250 },
+                  { text: 'Quantity per Unit', datafield: 'QuantityPerUnit', cellsalign: 'right', align: 'right', width: 120 },
+                  { text: 'Unit Price', datafield: 'UnitPrice', align: 'right', cellsalign: 'right', cellsformat: 'c2', width: 100 },
+                  { text: 'Units In Stock', datafield: 'UnitsInStock', cellsalign: 'right', cellclassname: cellclass, width: 100 },
+                  { text: 'Discontinued', columntype: 'checkbox', datafield: 'Discontinued' },
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+       <style>     
+        .green {
+            color: black\9;
+            background-color: #b6ff00\9;
+        }
+        .yellow {
+            color: black\9;
+            background-color: yellow\9;
+        }
+        .red {
+            color: black\9;
+            background-color: #e83636\9;
+        }
+
+        .green:not(.jqx-grid-cell-hover):not(.jqx-grid-cell-selected), .jqx-widget .green:not(.jqx-grid-cell-hover):not(.jqx-grid-cell-selected) {
+            color: black;
+            background-color: #b6ff00;
+        }
+        .yellow:not(.jqx-grid-cell-hover):not(.jqx-grid-cell-selected), .jqx-widget .yellow:not(.jqx-grid-cell-hover):not(.jqx-grid-cell-selected) {
+            color: black;
+            background-color: yellow;
+        }
+        .red:not(.jqx-grid-cell-hover):not(.jqx-grid-cell-selected), .jqx-widget .red:not(.jqx-grid-cell-hover):not(.jqx-grid-cell-selected) {
+            color: black;
+            background-color: #e83636;
+        }
+    </style>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+        <div id="jqxgrid">
+        </div>
+     </div>
+</body>
+</html>

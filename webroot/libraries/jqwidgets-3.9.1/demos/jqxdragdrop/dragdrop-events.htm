@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jqxDragDrop, jQuery Draggable, jQWidgets, Events Demo" /> 
+    <meta name="description" content="You can restrict draggables drag area in different ways. In this demo the dragging area of the draggable element is it's parent." />
+    <title id='Description'>In this demo is demonstrated how to use the jqxDragDrop plug-in events.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdragdrop.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {           
+            $('#events').jqxPanel({ width: 260, height: 330});
+            $('#draggable').jqxDragDrop({ restricter: 'parent',  dropTarget: '.drop-target' });
+
+            $('#draggable').bind('dragStart', function (event) {
+                addEvent(event.type, event.args.position);
+            });
+            $('#draggable').bind('dragEnd', function (event) {
+                addEvent(event.type, event.args.position);
+            });
+            $('#draggable').bind('dropTargetEnter', function (event) {
+                addEvent(event.type, event.args.position);
+            });
+            $('#draggable').bind('dropTargetLeave', function (event) {
+                addEvent(event.type, event.args.position);
+            });
+
+            function addEvent(type, position) {
+                $('#events').jqxPanel('prepend',
+                    '<div class="row">Event: ' + type + ', (' + position.left + ', ' + position.top + ')</div>'
+                );
+            }
+
+            (function centerLabels() {
+                var labels = $('.label');
+                labels.each(function (index, el) {
+                    el = $(el);
+                    var top = (el.parent().height() - el.height()) / 2;
+                    el.css('top', top + 'px');
+                });
+            } ());
+        });
+    </script>
+    <style type="text/css">
+    .row
+    {
+        padding: 1px;
+    }
+    .draggable
+    {
+        border: 1px solid #bbb;
+        background-color: #C9ECFF;
+        width: 100px;
+        height: 100px;
+        left: 30px;
+        top: 50px;
+        padding: 5px;
+        z-index: 2;
+    }
+    #draggable-parent
+    {
+        background-color: #eeffee;
+        width: 350px;
+        height: 350px;     
+        text-align: center;
+        border: 1px solid #eee;
+        float: left;
+    }
+    .main-container
+    {
+        width: 650px;
+        z-index: 0;
+    }
+    .events
+    {
+        float: right;
+        padding: 10px;
+        font-family: Tahoma;
+        font-size: 13px;
+    }    
+    .label
+    {
+        position: relative; 
+        font-family: Verdana;
+        font-size: 11px;
+        color: #000;
+    }
+    .drop-target
+    {
+        background-color: #FBFFB5;
+        width: 150px;
+        height: 150px;
+        border: 1px solid #ddd;
+        margin-left: 190px;
+        margin-top: 70px;        
+        z-index: 1;
+    }
+    </style>
+</head>
+<body class='default'>
+    <div class="main-container">
+        <div id="draggable-parent">
+            <div id="draggable" class="draggable">
+                <div class="label">I can be dragged only inside my parent</div>
+            </div>
+            <div class="drop-target"><div class="label">I'm a drop target</div></div>
+        </div>
+        <div id="events" class="events">
+        </div>
+    </div>
+</body>
+</html>

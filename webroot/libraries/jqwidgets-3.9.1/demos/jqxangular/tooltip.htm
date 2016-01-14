@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id='Description'>jqxTooltip Directive for AngularJS.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            $scope.toolTipContent = "The Amazing Spider-man";
+            // cancel button click handler.
+            $scope.changeTooltip = function () {
+                $scope.toolTipContent = "The Amazing Spider-man 2";
+            }
+        });
+    </script>
+</head>
+<body class='default'>
+    <div ng-controller="demoController">
+        <jqx-tooltip jqx-position="'mouse'" jqx-content="toolTipContent"> 
+          <img id="image1" style="margin: 8px;" src="../../images/The_Amazng_Spider_Man.jpeg" />
+        </jqx-tooltip>
+        <br /><br />
+        <jqx-button ng-click="changeTooltip()">Change Tooltip Content</jqx-button>
+    </div>
+</body>
+</html>

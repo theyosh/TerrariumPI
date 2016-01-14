@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxChart grid lines and tick marks dash style.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            // prepare chart data
+            var sampleData = [
+                { Country: 'Switzerland', Inflation2012: -0.95, Inflation2011: -0.72 },
+                { Country: 'USA', Inflation2012: 2.35, Inflation2011: 2.96 },
+                { Country: 'Germany', Inflation2012: 2.03, Inflation2011: 2.10 },
+                { Country: 'India', Inflation2012: 8.38, Inflation2011: 6.49 },
+                { Country: 'China', Inflation2012: 3.34, Inflation2011: 4.06 },
+                { Country: 'Canada', Inflation2012: 2.05, Inflation2011: 2.30}];
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "CPI inflation comparison by country",
+                description: "Years: 2011 vs 2012",
+                showLegend: true,
+                enableAnimations: true,
+                padding: { left: 20, top: 5, right: 20, bottom: 5 },
+                titlePadding: { left: 10, top: 0, right: 0, bottom: 10 },
+                source: sampleData,
+                xAxis:
+                {
+                    dataField: 'Country',
+                    gridLines: {
+                        visible: true,
+                        dashStyle: '2,2',
+                        color: 'grey'
+                    },
+                    tickMarks: {
+                        dashStyle: '2,2',
+                        color: 'grey'
+                    }
+                },
+                colorScheme: 'scheme02',
+                seriesGroups:
+                    [
+                        {
+                            type: 'column',
+                            orientation: 'horizontal', // render values on X-axis
+                            columnsGapPercent: 50,
+                            valueAxis:
+                            {
+                                visible: true,
+                                minValue: -5,
+                                maxValue: 10,
+                                unitInterval: 1,
+                                labels: {
+                                    formatSettings: { sufix: '%' }
+                                },
+                                gridLines: {
+                                    dashStyle: '2,2',
+                                    color: 'grey'
+                                },
+                                tickMarks:
+                                {
+                                    dashStyle: '2,2',
+                                    color: 'grey'
+                                }
+                            },
+                            toolTipFormatSettings: { sufix: '%' },
+                            series: [
+                                    { dataField: 'Inflation2012', displayText: 'Inflation 2012' },
+                                    { dataField: 'Inflation2011', displayText: 'Inflation 2011' }
+                                ]
+                        }
+                    ]
+            };
+
+            // setup the chart
+            $('#chartContainer').jqxChart(settings);
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='chartContainer' style="width:850px; height:500px;">
+	</div>
+</body>
+</html>

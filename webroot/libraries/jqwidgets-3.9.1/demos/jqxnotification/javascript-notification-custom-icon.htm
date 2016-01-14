@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title id='Description'>This demo shows how to display a custom icon in a jqxNotification.
+        The showcased notification uses the applied theme's styling and not a template.
+    </title>
+    <meta name="keywords" content="custom icon, icon, jQuery notification, jQWidgets, jqxNotification, notification, notification icon, notification styling, theme, unobtrusive notification" />
+    <meta name="description" content="This demo shows how to display a custom icon in a jqxNotification. The showcased notification uses the applied theme's styling and not a template." />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <style type="text/css">
+        .label
+        {
+            text-align: right;
+        }
+    </style>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxnotification.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxNotification").jqxNotification({ width: "auto", position: "top-left", opacity: 0.9, template: null, icon: { width: 25, height: 25, url: '../../images/smiley.png', padding: 5} });
+            $("#name, #email, #comment").jqxInput({ width: 150 });
+            $("#submit").jqxButton();
+            $("#submit").click(function () {
+                $("#name").val("");
+                $("#email").val("");
+                $("#comment").val("");
+                $("#jqxNotification").jqxNotification("open");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="jqxNotification">
+        <div>
+            Thank you for your feedback!</div>
+    </div>
+    <table style="margin-left: 15px; margin-top: 15px;">
+        <tr>
+            <td class="label">
+                Name:
+            </td>
+            <td>
+                <input id="name" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td class="label">
+                E-mail:
+            </td>
+            <td>
+                <input id="email" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td class="label" style="vertical-align: top;">
+                Comment:
+            </td>
+            <td>
+                <textarea id="comment" rows="10"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <button id="submit">
+                    Submit comment</button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

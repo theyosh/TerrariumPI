@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Tree, Tree Widget, Tree" />
+    <meta name="description" content="The jqxTree provides several built-in events triggered when the user selects, expands, collapses, adds, removes or checks an item." />
+    <title id='Description'>The jqxTree provides several built-in events triggered when the user selects, expands, collapses, adds, removes or checks an item.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtree.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Create jqxTree
+            var source = [
+                { icon: "../../images/mailIcon.png", label: "Mail", expanded: true, items: [
+                    { icon: "../../images/calendarIcon.png", label: "Calendar" },
+                    { icon: "../../images/contactsIcon.png", label: "Contacts", selected: true }
+                ]
+                },
+                { icon: "../../images/folder.png", label: "Inbox", expanded: true, items: [
+                   { icon: "../../images/folder.png", label: "Admin" },
+                   { icon: "../../images/folder.png", label: "Corporate" },
+                   { icon: "../../images/folder.png", label: "Finance" },
+                   { icon: "../../images/folder.png", label: "Other" },
+                ]
+                },
+                { icon: "../../images/recycle.png", label: "Deleted Items" },
+                { icon: "../../images/notesIcon.png", label: "Notes" },
+                { iconsize: 14, icon: "../../images/settings.png", label: "Settings" },
+                { icon: "../../images/favorites.png", label: "Favorites" }, 
+             ];
+
+            // create jqxTree
+            $('#jqxTree').jqxTree({ source: source, width: '250px'});
+            $('#Events').jqxPanel({  height: '250px', width: '200px' });
+            $('#Events').css('border', 'none');
+            // on to 'expand', 'collapse' and 'select' events.
+            $('#jqxTree').on('expand', function (event) {
+                var args = event.args;
+                var item = $('#jqxTree').jqxTree('getItem', args.element);
+                $('#Events').jqxPanel('prepend', '<div style="margin-top: 5px;">Expanded: ' + item.label + '</div>');
+            });
+            $('#jqxTree').on('collapse', function (event) {
+                var args = event.args;
+                var item = $('#jqxTree').jqxTree('getItem', args.element);
+                $('#Events').jqxPanel('prepend', '<div style="margin-top: 5px;">Collapsed: ' + item.label + '</div>');
+            });
+            $('#jqxTree').on('select', function (event) {
+                var args = event.args;
+                var item = $('#jqxTree').jqxTree('getItem', args.element);
+                $('#Events').jqxPanel('prepend', '<div style="margin-top: 5px;">Selected: ' + item.label + '</div>');
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div style='float: left;'>
+            <div id='jqxTree' style='float: left; margin-left: 60px;'>
+            </div>
+            <div style='margin-left: 20px; float: left;'>
+                <div>
+                    <span>
+                        Events:</span>
+                    <div id='Events'>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

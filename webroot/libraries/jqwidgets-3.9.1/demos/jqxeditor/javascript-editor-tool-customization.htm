@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">This demo illustrates how to customize a tool in jqxEditor.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownbutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcolorpicker.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxeditor.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#editor').jqxEditor({
+                height: 400,
+                width: 800,
+                tools: "bold italic underline | font size | left center right | outdent indent",
+                createCommand: function (name) {
+                    switch (name) {
+                        case "font":
+                            return {
+                                init: function (widget) {
+                                    widget.jqxDropDownList({
+                                        source: [{ label: 'Arial', value: 'Arial, Helvetica, sans-serif' },
+                                             { label: 'Comic Sans MS', value: '"Comic Sans MS", cursive, sans-serif' },
+                                             { label: 'Courier New', value: '"Courier New", Courier, monospace' },
+                                             { label: 'Georgia', value: "Georgia,serif" }]
+                                    });
+                                }
+                            }
+                        case "size":
+                            return {
+                                init: function (widget) {
+                                    widget.jqxDropDownList({
+                                        source: [
+                                            { label: "8pt", value: "xx-small" },
+                                            { label: "12pt", value: "small" },
+                                            { label: "18pt", value: "large" },
+                                            { label: "36pt", value: "xx-large" }
+                                        ]
+                                    });
+                                }
+                            }
+                    }
+                }
+            });
+        });
+    </script>
+    <textarea id="editor">
+        &lt;b&gt;jqxEditor&lt;/b&gt; is a HTML text editor designed to simplify web content creation. You can use it as a replacement of your Textarea or you can create it from a DIV element. 
+        &lt;br /&gt;
+        &lt;br /&gt;
+        Features include:
+        &lt;br /&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Text formatting&lt;/li&gt;
+            &lt;li&gt;Text alignment&lt;/li&gt;
+            &lt;li&gt;Hyperlink dialog&lt;/li&gt;
+            &lt;li&gt;Image dialog&lt;/li&gt;
+            &lt;li&gt;Bulleted list&lt;/li&gt;
+            &lt;li&gt;Numbered list&lt;/li&gt;
+        &lt;/ul&gt;
+    </textarea>
+</body>
+</html>

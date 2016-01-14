@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>With the jqxDropDownButton, you can display the jqxTree in a popup.
+    </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownbutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtree.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#dropDownButton").jqxDropDownButton({ width: 150, height: 25});
+            $('#jqxTree').on('select', function (event) {
+                var args = event.args;
+                var item = $('#jqxTree').jqxTree('getItem', args.element);
+
+                var dropDownContent = '<div style="position: relative; margin-left: 3px; margin-top: 5px;">' + item.label + '</div>';
+                $("#dropDownButton").jqxDropDownButton('setContent', dropDownContent);
+            });
+            $("#jqxTree").jqxTree({ width: 200, height: 220});
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div id="dropDownButton">
+          <div style="border: none;" id='jqxTree'>
+                <ul>
+                    <li item-selected='true'>Home</li>
+                    <li item-expanded='true'>Solutions
+                        <ul>
+                            <li>Education</li>
+                            <li>Financial services</li>
+                            <li>Government</li>
+                            <li>Manufacturing</li>
+                            <li>Solutions
+                                <ul>
+                                    <li>eLearning</li>
+                                    <li>Mobile</li>
+                                    <li>RIA</li>
+                                     <li>Training</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Products
+                        <ul>
+                            <li>PC products</li>
+                            <li>Mobile products</li>
+                            <li>All products</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+         </div>
+        </div>
+</body>
+</html>

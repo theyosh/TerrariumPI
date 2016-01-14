@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Input, Number Input, Currency Input, Percentage Input, Floating-Point Input, Decimal Input, jqxNumberInput" /> 
+    <meta name="description" content="In this jqxNumberInput demo the input is restricted from 0 to 1000. When the user enters a value which is not from 0 to 1000, the
+    jqxNumberInput displays a built-in popup prompt message." />
+    <title id='Description'>In this jqxNumberInput demo the input is restricted from 0 to 1000. When the user enters a value which is not from 0 to 1000, the
+    jqxNumberInput automatically updates the value to 0 or 1000 depending on the whether the value is below 0 or above 1000. That happens on blur event.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Create jqxNumberInput
+            $("#numericInput").jqxNumberInput({ width: '250px', height: '25px', min: 0, max: 1000});
+            // Create currency Input.
+            $("#currencyInput").jqxNumberInput({ width: '250px', height: '25px', min: 0, max: 1000, symbol: '$'});
+            // Create custom validation Input.
+            $("#validation").jqxNumberInput({ width: '250px', height: '25px', min: 0, max: 1000, value: 0});
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+        <div>The input is restricted from 0 to 1000</div>
+        <div style='margin-top: 10px;'>
+            Number</div>
+        <div style='margin-top: 3px;' id='numericInput'>
+        </div>
+        <div style='margin-top: 10px;'>
+            Currency</div>
+        <div style='margin-top: 3px;' id='currencyInput'>
+        </div>
+        <div style='margin-top: 10px;'>
+            Custom Validation Message</div>
+        <div style='margin-top: 3px;' id='validation'>
+        </div>
+    </div>
+</body>
+</html>

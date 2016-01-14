@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS Layout example
+    </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxribbon.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlayout.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtree.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxangular.js"></script>
+    <style type="text/css">
+        .jqx-layout-group-auto-hide-content-vertical
+        {
+            width: 200px;
+        }
+    </style>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            // the 'layout' JSON array defines the internal structure of the layout
+            var layout = [{
+                type: 'layoutGroup',
+                orientation: 'horizontal',
+                items: [{
+                    type: 'autoHideGroup',
+                    alignment: 'left',
+                    width: 80,
+                    unpinnedWidth: 200,
+                    items: [{
+                        type: 'layoutPanel',
+                        title: 'Toolbox',
+                        contentContainer: 'ToolboxPanel'
+                    }, {
+                        type: 'layoutPanel',
+                        title: 'Help',
+                        contentContainer: 'HelpPanel'
+                    }]
+                }, {
+                    type: 'layoutGroup',
+                    orientation: 'vertical',
+                    width: 500,
+                    items: [{
+                        type: 'documentGroup',
+                        height: 400,
+                        minHeight: 200,
+                        items: [{
+                            type: 'documentPanel',
+                            title: 'Document 1',
+                            contentContainer: 'Document1Panel'
+                        }, {
+                            type: 'documentPanel',
+                            title: 'Document 2',
+                            contentContainer: 'Document2Panel'
+                        }]
+                    }, {
+                        type: 'tabbedGroup',
+                        height: 200,
+                        pinnedHeight: 30,
+                        items: [{
+                            type: 'layoutPanel',
+                            title: 'Error List',
+                            contentContainer: 'ErrorListPanel'
+                        }, {
+                            type: 'layoutPanel',
+                            title: 'Output',
+                            contentContainer: 'OutputPanel',
+                            selected: true
+                        }]
+                    }]
+                }, {
+                    type: 'tabbedGroup',
+                    width: 220,
+                    minWidth: 200,
+                    items: [{
+                        type: 'layoutPanel',
+                        title: 'Solution Explorer',
+                        contentContainer: 'SolutionExplorerPanel',
+                        initContent: function () {
+                            // initialize a jqxTree inside the Solution Explorer Panel
+                            var source = [{
+                                icon: '../../images/earth.png',
+                                label: 'Project',
+                                expanded: true,
+                                items: [{
+                                    icon: '../../images/folder.png',
+                                    label: 'css',
+                                    expanded: true,
+                                    items: [{
+                                        icon: '../../images/nav1.png',
+                                        label: 'jqx.base.css'
+                                    }, {
+                                        icon: '../../images/nav1.png',
+                                        label: 'jqx.energyblue.css'
+                                    }, {
+                                        icon: '../../images/nav1.png',
+                                        label: 'jqx.orange.css'
+                                    }]
+                                }, {
+                                    icon: '../../images/folder.png',
+                                    label: 'scripts',
+                                    items: [{
+                                        icon: '../../images/nav1.png',
+                                        label: 'jqxcore.js'
+                                    }, {
+                                        icon: '../../images/nav1.png',
+                                        label: 'jqxdata.js'
+                                    }, {
+                                        icon: '../../images/nav1.png',
+                                        label: 'jqxgrid.js'
+                                    }]
+                                }, {
+                                    icon: '../../images/nav1.png',
+                                    label: 'index.htm'
+                                }]
+                            }];
+
+                            $('#solutionExplorerTree').jqxTree({ source: source, width: 190 });
+                        }
+                    }, {
+                        type: 'layoutPanel',
+                        title: 'Properties',
+                        contentContainer: 'PropertiesPanel'
+                    }]
+                }]
+            }];
+
+            $scope.settings = { width: 800, height: 600, layout: layout };
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+       <jqx-layout jqx-settings="settings" id="jqxLayout">
+        <!--The panel content divs can have a flat structure-->
+        <!--autoHideGroup-->
+        <div data-container="ToolboxPanel">
+            List of tools</div>
+        <div data-container="HelpPanel">
+            Help topics</div>
+        <!--documentGroup-->
+        <div data-container="Document1Panel">
+            Document 1 content</div>
+        <div data-container="Document2Panel">
+            Document 2 content</div>
+        <!--bottom tabbedGroup-->
+        <div data-container="ErrorListPanel">
+            List of errors</div>
+        <div data-container="OutputPanel">
+            Output</div>
+        <!--right tabbedGroup-->
+        <div data-container="SolutionExplorerPanel">
+            <div id="solutionExplorerTree" style="border: none;">
+            </div>
+        </div>
+        <div data-container="PropertiesPanel">
+            List of properties</div>
+    </jqx-layout>
+</body>
+</html>

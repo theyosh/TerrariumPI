@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>To switch an editor to a right-to-left representation, just enable a single property - "rtl". When this property is on, text flows from right to left in an editor and the editor itself is mirrored (the layout of its UI elements is reversed).</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+     <script type="text/javascript" src="../../scripts/demos.js"></script>
+   <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Create jqxNumberInput
+            $("#numericInput").jqxNumberInput({inputMode: 'simple', rtl: true, width: '250px', height: '25px',  spinButtons: true });
+            // Create Percentage Input.
+            $("#percentageInput").jqxNumberInput({ rtl: true, width: '250px', height: '25px', digits: 3, symbolPosition: 'right', symbol: '%',  spinButtons: true });
+            // Create Currency Input.
+            $("#currencyInput").jqxNumberInput({ rtl: true, width: '250px', height: '25px', symbol: '$',  spinButtons: true });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+        <div style='margin-top: 10px;'>
+            Number</div>
+        <div style='margin-top: 3px;' id='numericInput'>
+        </div>
+         <div style='margin-top: 10px;'>
+            Percentage</div>
+        <div style='margin-top: 3px;' id='percentageInput'>
+        </div>
+              <div style='margin-top: 10px;'>
+            Currency</div>
+        <div style='margin-top: 3px;' id='currencyInput'>
+        </div>
+    </div>
+</body>
+</html>

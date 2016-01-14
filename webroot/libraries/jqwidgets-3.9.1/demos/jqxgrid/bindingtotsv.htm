@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example shows how to create a Grid from Tab-delimited text also known as tab-separated values (TSV).</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.columnsresize.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = '../sampledata/homeprices.txt';
+            // prepare the data
+            var source =
+            {
+                datatype: "tab",
+                datafields: [
+                    { name: 'Year', type: 'int' },
+                    { name: 'HPI', type: 'float' },
+                    { name: 'BuildCost', type: 'float' },
+                    { name: 'Population', type: 'float' },
+                    { name: 'Rate', type: 'float' }
+                ],
+                url: url
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 850,
+                source: dataAdapter,
+                columnsresize: true,
+                columns: [
+                  { text: 'Year', datafield: 'Year', width: 200},
+                  { text: 'HPI', datafield: 'HPI', cellsformat: 'f2', width: 200 },
+                  { text: 'Build Cost', datafield: 'BuildCost', cellsformat: 'f2', width: 180 },
+                  { text: 'Population', datafield: 'Population', cellsformat: 'f2', width: 100 },
+                  { text: 'Rate', datafield: 'Rate', cellsformat: 'f5', minwidth: 100 }
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div id="jqxgrid"></div>
+    </div>
+</body>
+</html>

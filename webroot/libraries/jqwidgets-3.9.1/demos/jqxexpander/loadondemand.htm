@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Accordion, Expander, Toggle Bar, Expander Bar, Navigation Bar, Accordion, jqxNavigationBar, jqxExpander" />
+    <meta name="description" content="This demo demonstrates how to use the jqxExpander's API to dynamically load its header and content elements by 
+    invoking its setHeaderContent and setContent methods." />
+    <title id='Description'>This demo demonstrates how to use the jqxExpander's API to dynamically
+        load its header and content elements by invoking its setHeaderContent and setContent
+        methods. </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxexpander.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            $("#jqxWidget").jqxExpander({ width: '350px', height: '350px'});
+            var url = 'jqxexpanderxmldata.xml';
+            var parentsLength = $("#jqxWidget").parents().length;
+            if (parentsLength > 2) url = 'demos/jqxexpander/jqxexpanderxmldata.xml';
+
+            setTimeout(function () {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (data) {
+                        var items = $(data).find('li');
+                        var content = $('<ul></ul>');
+                        var index = 0;
+                        for (i = 0; i < items.length; i++) {
+                            var text = $(data).find('li:eq(' + i + ')').text();
+                            var item = $('<li>' + text + '</li>');
+                            item.appendTo(content);
+                        }
+
+                        $("#jqxWidget").jqxExpander('setContent', content);
+                        $("#jqxWidget").jqxExpander('setHeaderContent', $(data).find('header').text());
+                    }
+                });
+            }, 500);
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div id='expanderHeader'>
+            Loading Header...</div>
+        <div id='expanderContent'>
+            Loading Content...</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title id='Description'>JavaScript DataTable - Mobile Example
+    </title>
+    <link rel="stylesheet" href="../styles/demo.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.windowsphone.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.blackberry.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.mobile.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.android.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../simulator.js"></script>
+    <script type="text/javascript" src="../../demos/jqxgrid/generatedata.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepares the simulator. 
+            var theme = prepareSimulator("dataTable");
+
+            var data = generatedata(20);
+
+            var source =
+            {
+                localData: data,
+                dataType: "array",
+                dataFields:
+                [
+                    { name: 'name', type: 'string' },
+                    { name: 'firstname', type: 'string' },
+                    { name: 'lastname', type: 'string' },
+                    { name: 'productname', type: 'string' },
+                    { name: 'available', type: 'bool' },
+                    { name: 'quantity', type: 'number' },
+                    { name: 'price', type: 'number' },
+                    { name: 'total', type: 'number' },
+                    { name: 'date', type: 'date' }
+                ]
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $("#dataTable").jqxDataTable(
+            {
+                width: '100%',
+                height: '100%',
+                source: dataAdapter,
+                theme: theme,
+                columnsHeight: 40,
+                columns: [
+                  { text: 'Product', dataField: 'productname', width: '40%' },
+                  { text: 'Quantity', dataField: 'quantity', width: '30%', align: 'right', cellsAlign: 'right' },
+                  { text: 'Unit Price', dataField: 'price', width: '30%', cellsAlign: 'right', align: 'right', cellsFormat: 'c2' }
+                ]
+            });
+            initSimulator("dataTable");
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="demoContainer" class="device-mobile">
+        <div id="container" class="device-mobile-container">
+            <div style="border: none;" id='dataTable'>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

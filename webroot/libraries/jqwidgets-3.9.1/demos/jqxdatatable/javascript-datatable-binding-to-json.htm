@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">Data Binding to JSON data in jqxDataTable</title>
+    <meta name="description" content="This sample demonstrates how we can bind jQWidgets DataTable widget to JSON Data by using jQWidgets DataAdapter plugin.">
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script> 
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = "../sampledata/beverages.txt";
+
+            // prepare the data
+            var source =
+            {
+                dataType: "json",
+                dataFields: [
+                    { name: 'name', type: 'string' },
+                    { name: 'type', type: 'string' },
+                    { name: 'calories', type: 'int' },
+                    { name: 'totalfat', type: 'string' },
+                    { name: 'protein', type: 'string' }
+                ],
+                id: 'id',
+                url: url
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $("#dataTable").jqxDataTable(
+            {
+                width: 850,
+                pageable: true,
+                pagerButtonsCount: 10,
+                source: dataAdapter,
+                columnsResize: true,
+                columns: [
+                  { text: 'Name', dataField: 'name', width: 300 },
+                  { text: 'Beverage Type', dataField: 'type', width: 300 },
+                  { text: 'Calories', dataField: 'calories', width: 180 },
+                  { text: 'Total Fat', dataField: 'totalfat', width: 120 },
+                  { text: 'Protein', dataField: 'protein' }
+              ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+     <div id="dataTable"></div>
+</body>
+</html>

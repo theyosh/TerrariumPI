@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example illustrates how to customize the filtering conditions available in the columns popup menu.
+    </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.filter.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="generatedata.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var data = generatedata(500);
+            var source =
+            {
+                localdata: data,
+                datafields:
+                [
+                    { name: 'firstname', type: 'string' },
+                    { name: 'lastname', type: 'string' },
+                    { name: 'productname', type: 'string' },
+                    { name: 'date', type: 'date' },
+                    { name: 'quantity', type: 'number' }
+                ],
+                datatype: "array"
+            };
+
+            var addfilter = function () {
+                var filtergroup = new $.jqx.filter();
+
+                var filter_or_operator = 1;
+                var filtervalue = 'Beate';
+                var filtercondition = 'contains';
+                var filter1 = filtergroup.createfilter('stringfilter', filtervalue, filtercondition);
+
+                filtervalue = 'Andrew';
+                filtercondition = 'contains';
+                var filter2 = filtergroup.createfilter('stringfilter', filtervalue, filtercondition);
+
+                filtergroup.addfilter(filter_or_operator, filter1);
+                filtergroup.addfilter(filter_or_operator, filter2);
+                // add the filters.
+                $("#jqxgrid").jqxGrid('addfilter', 'firstname', filtergroup);
+                // apply the filters.
+                $("#jqxgrid").jqxGrid('applyfilters');
+            }
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 850,
+                source: dataAdapter,
+                filterable: true,
+                sortable: true,
+                autoshowfiltericon: true,
+                ready: function () {
+                    addfilter();
+                    var localizationObject = {
+                        filterstringcomparisonoperators: ['contains', 'does not contain'],
+                        // filter numeric comparison operators.
+                        filternumericcomparisonoperators: ['less than', 'greater than'],
+                        // filter date comparison operators.
+                        filterdatecomparisonoperators: ['less than', 'greater than'],
+                        // filter bool comparison operators.
+                        filterbooleancomparisonoperators: ['equal', 'not equal']
+                    }
+                    $("#jqxgrid").jqxGrid('localizestrings', localizationObject);
+                },
+                updatefilterconditions: function (type, defaultconditions) {
+                    var stringcomparisonoperators = ['CONTAINS', 'DOES_NOT_CONTAIN'];
+                    var numericcomparisonoperators = ['LESS_THAN', 'GREATER_THAN'];
+                    var datecomparisonoperators = ['LESS_THAN', 'GREATER_THAN'];
+                    var booleancomparisonoperators = ['EQUAL', 'NOT_EQUAL'];
+                    switch (type) {
+                        case 'stringfilter':
+                            return stringcomparisonoperators;
+                        case 'numericfilter':
+                            return numericcomparisonoperators;
+                        case 'datefilter':
+                            return datecomparisonoperators;
+                        case 'booleanfilter':
+                            return booleancomparisonoperators;
+                    }
+                },
+                updatefilterpanel: function (filtertypedropdown1, filtertypedropdown2, filteroperatordropdown, filterinputfield1, filterinputfield2, filterbutton, clearbutton,
+                 columnfilter, filtertype, filterconditions) {
+                    var index1 = 0;
+                    var index2 = 0;
+                    if (columnfilter != null) {
+                        var filter1 = columnfilter.getfilterat(0);
+                        var filter2 = columnfilter.getfilterat(1);
+                        if (filter1) {
+                            index1 = filterconditions.indexOf(filter1.comparisonoperator);
+                            var value1 = filter1.filtervalue;
+                            filterinputfield1.val(value1);
+                        }
+
+                        if (filter2) {
+                            index2 = filterconditions.indexOf(filter2.comparisonoperator);
+                            var value2 = filter2.filtervalue;
+                            filterinputfield2.val(value2);
+                        }
+                    }
+
+                    filtertypedropdown1.jqxDropDownList({ autoDropDownHeight: true, selectedIndex: index1 });
+                    filtertypedropdown2.jqxDropDownList({ autoDropDownHeight: true, selectedIndex: index2 });
+                },
+                columns: [
+                  { text: 'First Name', datafield: 'firstname', width: 200 },
+                  { text: 'Last Name', datafield: 'lastname', width: 200 },
+                  { text: 'Product', datafield: 'productname', width: 180 },
+                  { text: 'Order Date', datafield: 'date', width: 160, cellsformat: 'dd-MMMM-yyyy' },
+                  { text: 'Quantity', datafield: 'quantity', cellsalign: 'right' }
+                ]
+            });
+
+            $('#events').jqxPanel({ width: 300, height: 80});
+
+            $("#jqxgrid").on("filter", function (event) {
+                $("#events").jqxPanel('clearcontent');
+                var filterinfo = $("#jqxgrid").jqxGrid('getfilterinformation');
+
+                var eventData = "Triggered 'filter' event";
+                for (i = 0; i < filterinfo.length; i++) {
+                    var eventData = "Filter Column: " + filterinfo[i].filtercolumntext;
+                    $('#events').jqxPanel('prepend', '<div style="margin-top: 5px;">' + eventData + '</div>');
+                }
+            });
+
+            $('#clearfilteringbutton').jqxButton({ theme: theme });
+            $('#filterbackground').jqxCheckBox({ checked: true, height: 25});
+            $('#filtericons').jqxCheckBox({ checked: false, height: 25});
+            // clear the filtering.
+            $('#clearfilteringbutton').click(function () {
+                $("#jqxgrid").jqxGrid('clearfilters');
+            });
+            // show/hide filter background
+            $('#filterbackground').on('change', function (event) {
+                $("#jqxgrid").jqxGrid({ showfiltercolumnbackground: event.args.checked });
+            });
+            // show/hide filter icons
+            $('#filtericons').on('change', function (event) {
+                $("#jqxgrid").jqxGrid({ autoshowfiltericon: !event.args.checked });
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+        <div id="jqxgrid">
+        </div>
+        <div id="eventslog" style="margin-top: 30px;">
+            <div style="width: 200px; float: left; margin-right: 10px;">
+            <input value="Remove Filter" id="clearfilteringbutton" type="button" />
+            <div style="margin-top: 10px;" id='filterbackground'>Filter Background</div>
+            <div style="margin-top: 10px;" id='filtericons'>Show All Filter Icons</div>
+            </div>
+            <div style="float: left;">
+                Event Log:
+                <div style="border: none;" id="events">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

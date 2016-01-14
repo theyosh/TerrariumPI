@@ -1,0 +1,427 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title id='Description'>JavaScript Ribbon - Mobile Example</title>
+    <link rel="stylesheet" href="../styles/demo.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.windowsphone.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.blackberry.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.android.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.mobile.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../simulator.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxribbon.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <style type="text/css">
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+            a:hover {
+                color: #DC1F26;
+            }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 0px 3px;
+            width: 142px;
+        }
+
+        .promo {
+            display:none;
+        }
+        .promo, .price {
+            height: 25px;
+            background-color: #DC1F26;
+            color: White;
+            text-align: center;
+            font-size: 17px;
+        }
+
+        .promo {
+            font-weight: bold;
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
+        }
+
+        .price {
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
+            border: 1px solid pink;
+            padding: 5px 5px;
+            border-radius: 22px;
+        }
+
+        .name {
+            height: 35px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .image {
+            height: 200px;
+            text-align: center;
+        }
+
+        .container {
+            width: 45%;
+            float: left;
+            margin-left:2%;
+            color: #333;
+            background: #fff;
+        }
+        .jqx-ribbon-content-section {
+            background: #fff !important;
+        }
+        .jqx-ribbon-header-vertical {
+            border:none;
+        }
+        hr {
+            width: 75%;
+            float: left;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = prepareSimulator("ribbon");
+            $("#jqxRibbon").jqxRibbon({ height: '100%', width: '100%', position: "left", mode: 'popup', theme: theme, selectionMode: "click", animationType: "fade" });
+            $('#jqxRibbon').jqxRibbon('setPopupLayout', 0, "default", '100%', '100%');
+            $('#jqxRibbon').jqxRibbon('setPopupLayout', 1, "default", '100%', '100%');
+            $('#jqxRibbon').jqxRibbon('setPopupLayout', 2, "default", '100%', '100%');
+            $('#jqxRibbon').jqxRibbon('setPopupLayout', 3, "default", '100%', '100%');
+            initSimulator("ribbon");
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="demoContainer" class="device-mobile-tablet">
+        <div id="container" class="device-mobile-tablet-container">
+            <div id="jqxRibbon">
+                <ul id="header" style="width: 125px;">
+                    <li>TV and Players</li>
+                    <li>Cell phones</li>
+                    <li>Cameras</li>
+                    <li>Computers</li>
+                </ul>
+                <div>
+                    <div>
+                        <div class="container">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="list">
+                                        <b><a href="#">TV</a></b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">LED</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">LCD</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">Plasma</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <hr />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <b><a href="#">PLAYERS</a></b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">DVD</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">Blu-Ray</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">CD</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="container">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="promo">PROMO
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="image">
+                                        <img src="../../images/tv.png" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">
+                                        <a href="#">LG 22MN43D-PZ</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="price">Price: $1583
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="container">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="list">
+                                        <b><a href="#">PHONES</a></b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">By Brand</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">By Display size</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <hr />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <b><a href="#">SMARTPHONES</a></b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">By Brand</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">By OS</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">By Display size</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">By CPU</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="container">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="promo">PROMO
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="image">
+                                        <img height="200" src="../../images/Samsung-Galaxy-S4.png" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">
+                                        <a href="#">Samsung I9505 Galaxy S4</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="price">Price: $569
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="container">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="list">
+                                        <b><a href="#">DIGITAL<br />
+                                            CAMERAS</a></b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">Hybrid</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">Compact</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">Digital SLR</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <hr />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <b><a href="#">CAMCORDERS</a></b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">FLASH</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">HDD</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">HD Flash</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">HD HDD</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">HD Extreme</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="container">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="promo">PROMO
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="image">
+                                        <img src="../../images/camera.png" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">
+                                        <a href="#">Nikon COOLPIX L330</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="price">Price: $358
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="container">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="list">
+                                        <b><a href="#">LAPTOPS</a></b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">By Processor Type</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">By RAM Capacity</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">By HDD Capacity</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">By Display Size</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <hr />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <b><a href="#">DESKTOPS</a></b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">By Processor Type</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">By RAM Capacity</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list">
+                                        <a href="#">By HDD Capacity</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="container">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="promo">PROMO
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="image">
+                                        <img src="../../images/l-25.jpg" style="width: 140px; height: 105px;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">
+                                        <a href="#">Toshiba Qosmio X70-A-114</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="price">Price: $2199
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

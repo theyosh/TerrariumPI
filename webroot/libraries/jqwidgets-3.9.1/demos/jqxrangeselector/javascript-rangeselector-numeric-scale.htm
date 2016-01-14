@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">RangeSelector - Numeric Scale</title>
+    <link type="text/css" rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxrangeselector.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // create jqxRangeSelector.
+            $("#rangeSelector").jqxRangeSelector({
+                width: 750,
+                height: 100,
+                min: 1000,
+                max: 10000,
+                minorTicksInterval: 100,
+                majorTicksInterval: 1500,
+                labelsFormat: "c0",
+                markersFormat: "c0",
+                range: { from: 3000, to: 5000 }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="rangeSelector">
+    </div>
+</body>
+</html>

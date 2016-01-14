@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">jqxFormattedInput can also display negative numbers in the four
+        supported numeral systems. Negative binary, octal and hexadecimal numbers are represented
+        as 64-bit numbers using the two's complement method.</title>
+    <meta name="description" content="jqxFormattedInput can also display negative numbers in the four supported numeral systems. Negative binary, octal and hexadecimal numbers are represented as 64-bit numbers using the two's complement method." />
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxformattedinput.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxFormattedInput").jqxFormattedInput({ width: 600, height: 25, radix: "binary", value: "1111111111111111111111111111111111111111111111111111111111110110", spinButtons: true, dropDown: true });
+        });
+    </script>
+</head>
+<body>
+    <div id="jqxFormattedInput">
+        <input type="text" />
+        <div>
+        </div>
+        <div>
+        </div>
+    </div>
+</body>
+</html>

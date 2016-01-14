@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">The sample demonstrates how to navigate through the numeral
+        system options using the Keyboard.</title>
+    <meta name="description" content="The sample demonstrates how to navigate through the numeral system options using the Keyboard." />
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxformattedinput.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxFormattedInput").jqxFormattedInput({ width: 250, height: 25, radix: "hexadecimal", value: "a1", spinButtons: false, dropDown: true });
+        });
+    </script>
+</head>
+<body>
+    <div id="jqxFormattedInput" style="float: left;">
+        <input type="text" />
+        <div>
+        </div>
+    </div>
+    <div style="font-family: Verdana; font-size: 12px; width: 400px; margin-left: 20px;
+        float: left;">
+        <ul>
+            <li><b>Tab</b> - Like other widgets, the jqxFormattedInput widget receives focus by
+                tabbing into it. Once focus is received, users will be able to use the keyboard
+                to change the selection. A second tab will take the user out of the widget.</li>
+            <li><b>Shift+Tab</b> - reverses the direction of the tab order. Once in the widget,
+                a Shift+Tab will take the user to the previous focusable element in the tab order.</li>
+            <li><b>Up/Down</b> arrow keys - select previous or next displayFormat option.</li>
+            <li><b>Alt Up/Down</b> arrow keys - opens or closes the popup.</li>
+            <li><b>Esc</b> - closes the popup.</li>
+            <li><b>Enter</b> - selects an item.</li>
+        </ul>
+    </div>
+</body>
+</html>

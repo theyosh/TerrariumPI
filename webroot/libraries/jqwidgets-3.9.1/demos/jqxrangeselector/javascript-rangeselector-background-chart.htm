@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">RangeSelector - Chart as Background</title>
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxrangeselector.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "json",
+                datafields: [
+                    { name: 'month' },
+                    { name: 'min' },
+                    { name: 'max' },
+                ],
+                url: '../sampledata/weather_geneva.txt'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                async: false, autoBind: true,
+                loadComplete: function(data, status, xhr, records)
+                {
+                    // create jqxRangeSelector.
+                    $("#rangeSelector").jqxRangeSelector({
+                        width: 750, height: 200, min: 0, max: 12,
+                        range: {from: 3, to: 9}, labelsOnTicks: false,
+                        majorTicksInterval: 1, minorTicksInterval: 1,
+                        labelsFormatFunction: function (data) {
+                            if (records[data]) {
+                                return "1 " + records[data].month;
+                            }
+                            else return "31 " + records[data - 1].month;
+                        },
+                        markersFormatFunction: function (data) {
+                            if (records[data]) {
+                                return "1 " + records[data].month;
+                            }
+                            else return "31 " + records[data - 1].month;
+                        }
+                    });
+                },
+                loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); }
+            });
+ 
+            // prepare jqxChart settings
+            var settings = {                
+                enableAnimations: true,
+                showLegend: false,
+                showBorderLine: false,
+                title: "",
+                description: "",
+                padding: { left: 5, top: 0, right: 0, bottom: 0 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 0 },
+                source: dataAdapter,
+                xAxis:
+                    {
+                        text: 'Category Axis',
+                        textRotationAngle: 0,
+                        dataField: 'month',
+                        showTickMarks: false,
+                        showLabels: false,
+                        tickMarksInterval: 1,
+                        tickMarksColor: '#888888',
+                        valuesOnTicks: true,
+                        unitInterval: 1,
+                        visible: false,
+                        showGridLines: false,
+                        gridLinesInterval: 3,
+                        gridLinesColor: '#888888',
+                        axisSize: 'auto'
+                    },
+                colorScheme: 'scheme05',
+                seriesGroups:
+                    [
+                        {
+                            type: 'line',
+                            showLabels: false,
+                            valueAxis:
+                            {
+                                unitInterval: 5,
+                                visible: false,
+                                description: 'Temperature [C]',
+                                axisSize: 'auto',
+                                tickMarksColor: '#888888'
+                            },
+                            series: [
+                                    { dataField: 'max', lineColor: "green", displayText: 'Max Temperature' },
+                                    { dataField: 'min', lineColor: "red", displayText: 'Min Temperature' }
+                            ]
+                        }
+                    ]
+            };
+
+            // setup the chart
+            $('#jqxChart').jqxChart(settings);
+        });
+    </script>
+</head>
+<body>
+    <label style="margin-left: 250px; font-size: 18px; font-weight: bold;">Weather in Geneva, Switzerland</label>
+    <br /><label style="margin-left: 250px; font-size: 14px; font-weight: bold;">Climatological Information about Geneva</label>
+    <div id="rangeSelector">
+        <div id="jqxRangeSelectorContent">
+            <div id='jqxChart' style="width: 750px; height: 200px; position: relative; left: 0px; top: 0px;">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

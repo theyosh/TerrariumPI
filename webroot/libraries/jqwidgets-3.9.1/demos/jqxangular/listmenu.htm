@@ -1,0 +1,292 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id="Description">jqxListMenu Directive for AngularJS</title>
+    <link rel="stylesheet" type="text/css" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            var data = new Array();
+
+            var firstNames = ["Nancy", "Andrew", "Janet", "Margaret", "Steven", "Michael", "Robert", "Laura", "Anne"];
+            var lastNames = ["Davolio", "Fuller", "Leverling", "Peacock", "Buchanan", "Suyama", "King", "Callahan", "Dodsworth"];
+            var titles = ["Sales Representative", "Vice President, Sales", "Sales Representative", "Sales Representative", "Sales Manager", "Sales Representative", "Sales Representative", "Inside Sales Coordinator", "Sales Representative"];
+            var titleofcourtesy = ["Ms.", "Dr.", "Ms.", "Mrs.", "Mr.", "Mr.", "Mr.", "Ms.", "Ms."];
+            var birthdate = ["08-Dec-48", "19-Feb-52", "30-Aug-63", "19-Sep-37", "04-Mar-55", "02-Jul-63", "29-May-60", "09-Jan-58", "27-Jan-66"];
+            var hiredate = ["01-May-92", "14-Aug-92", "01-Apr-92", "03-May-93", "17-Oct-93", "17-Oct-93", "02-Jan-94", "05-Mar-94", "15-Nov-94"];
+            var address = ["507 - 20th Ave. E. Apt. 2A", "908 W. Capital Way", "722 Moss Bay Blvd.", "4110 Old Redmond Rd.", "14 Garrett Hill", "Coventry House", "Miner Rd.", "Edgeham Hollow", "Winchester Way", "4726 - 11th Ave. N.E.", "7 Houndstooth Rd."];
+            var city = ["Seattle", "Tacoma", "Kirkland", "Redmond", "London", "London", "London", "Seattle", "London"];
+            var postalcode = ["98122", "98401", "98033", "98052", "SW1 8JR", "EC2 7JR", "RG1 9SP", "98105", "WG2 7LT"];
+            var country = ["USA", "USA", "USA", "USA", "UK", "UK", "UK", "USA", "UK"];
+            var homephone = ["(206) 555-9857", "(206) 555-9482", "(206) 555-3412", "(206) 555-8122", "(71) 555-4848", "(71) 555-7773", "(71) 555-5598", "(206) 555-1189", "(71) 555-4444"];
+
+            for (var i = 0; i < firstNames.length; i++) {
+                var row = {};
+                row["firstname"] = firstNames[i];
+                row["lastname"] = lastNames[i];
+                row["title"] = titles[i];
+                row["titleofcourtesy"] = titleofcourtesy[i];
+                row["birthdate"] = birthdate[i];
+                row["hiredate"] = hiredate[i];
+                row["address"] = address[i];
+                row["city"] = city[i];
+                row["postalcode"] = postalcode[i];
+                row["country"] = country[i];
+                row["homephone"] = homephone[i];
+                row["url"] = "../../images/" + firstNames[i].toLowerCase() + ".png";
+                data[i] = row;
+            }
+
+            $scope.people = data;
+        });
+    </script>
+</head>
+<body>
+    <div ng-controller="demoController">
+        <jqx-list-menu jqx-width="'600px'" jqx-height="'auto'">
+                <li>{{people[0].firstname}}
+                    <ul data-role="listmenu">
+                        <li>
+                             <div data-role="content">
+                                    <div style="clear:none; float: left; width: 15%;">
+                                        <div class='jqx-rc-all' style='margin: 10px;'><b>Photo:</b></div>
+                                        <div style='margin-top: 10px;'>
+                                            <img height="60" ng-src={{people[0].url}}>
+                                        </div>
+                                    </div>
+                                    <div style="clear:none;float: left; width: 40%;">
+                                        <div style='margin: 10px;'><b>First Name:</b>{{people[0].firstname}}</div>
+                                        <div style='margin: 10px;'><b>Last Name:</b>{{people[0].lastname}}</div>
+                                        <div style='margin: 10px;'><b>Title:</b>{{people[0].title}}</div>
+                                        <div style='margin: 10px;'><b>Address:</b>{{people[0].address}}</div>
+                                    </div>
+                                    <div style="clear:none;float: left; width: 40%;">
+                                        <div style='margin: 10px;'><b>Postal Code:</b>{{people[0].postalcode}}</div>
+                                        <div style='margin: 10px;'><b>City:</b>{{people[0].city}}</div>
+                                        <div style='margin: 10px;'><b>Phone:</b>{{people[0].homephone}}</div>
+                                        <div style='margin: 10px;'><b>Hire Date:</b>{{people[0].hiredate}}</div>
+                                    </div>
+                                </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>{{people[1].firstname}}
+                    <ul data-role="listmenu">
+                        <li>
+                             <div data-role="content">
+                                    <div style="clear:none; float: left; width: 15%;">
+                                        <div class='jqx-rc-all' style='margin: 10px;'><b>Photo:</b></div>
+                                        <div style='margin-top: 10px;'>
+                                            <img height="60" ng-src={{people[1].url}}>
+                                        </div>
+                                    </div>
+                                    <div style="clear:none;float: left; width: 40%;">
+                                        <div style='margin: 10px;'><b>First Name:</b>{{people[1].firstname}}</div>
+                                        <div style='margin: 10px;'><b>Last Name:</b>{{people[1].lastname}}</div>
+                                        <div style='margin: 10px;'><b>Title:</b>{{people[1].title}}</div>
+                                        <div style='margin: 10px;'><b>Address:</b>{{people[1].address}}</div>
+                                    </div>
+                                    <div style="clear:none;float: left; width: 40%;">
+                                        <div style='margin: 10px;'><b>Postal Code:</b>{{people[1].postalcode}}</div>
+                                        <div style='margin: 10px;'><b>City:</b>{{people[1].city}}</div>
+                                        <div style='margin: 10px;'><b>Phone:</b>{{people[1].homephone}}</div>
+                                        <div style='margin: 10px;'><b>Hire Date:</b>{{people[1].hiredate}}</div>
+                                    </div>
+                                </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>{{people[2].firstname}}
+                    <ul data-role="listmenu">
+                        <li>
+                             <div data-role="content">
+                                    <div style="clear:none; float: left; width: 15%;">
+                                        <div class='jqx-rc-all' style='margin: 10px;'><b>Photo:</b></div>
+                                        <div style='margin-top: 10px;'>
+                                            <img height="60" ng-src={{people[2].url}}>
+                                        </div>
+                                    </div>
+                                    <div style="clear:none;float: left; width: 40%;">
+                                        <div style='margin: 10px;'><b>First Name:</b>{{people[2].firstname}}</div>
+                                        <div style='margin: 10px;'><b>Last Name:</b>{{people[2].lastname}}</div>
+                                        <div style='margin: 10px;'><b>Title:</b>{{people[2].title}}</div>
+                                        <div style='margin: 10px;'><b>Address:</b>{{people[2].address}}</div>
+                                    </div>
+                                    <div style="clear:none;float: left; width: 40%;">
+                                        <div style='margin: 10px;'><b>Postal Code:</b>{{people[2].postalcode}}</div>
+                                        <div style='margin: 10px;'><b>City:</b>{{people[2].city}}</div>
+                                        <div style='margin: 10px;'><b>Phone:</b>{{people[2].homephone}}</div>
+                                        <div style='margin: 10px;'><b>Hire Date:</b>{{people[2].hiredate}}</div>
+                                    </div>
+                                </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>{{people[3].firstname}}
+                    <ul data-role="listmenu">
+                        <li>
+                             <div data-role="content">
+                                    <div style="clear:none; float: left; width: 15%;">
+                                        <div class='jqx-rc-all' style='margin: 10px;'><b>Photo:</b></div>
+                                        <div style='margin-top: 10px;'>
+                                            <img height="60" ng-src={{people[3].url}}>
+                                        </div>
+                                    </div>
+                                    <div style="clear:none;float: left; width: 40%;">
+                                        <div style='margin: 10px;'><b>First Name:</b>{{people[3].firstname}}</div>
+                                        <div style='margin: 10px;'><b>Last Name:</b>{{people[3].lastname}}</div>
+                                        <div style='margin: 10px;'><b>Title:</b>{{people[3].title}}</div>
+                                        <div style='margin: 10px;'><b>Address:</b>{{people[3].address}}</div>
+                                    </div>
+                                    <div style="clear:none;float: left; width: 40%;">
+                                        <div style='margin: 10px;'><b>Postal Code:</b>{{people[3].postalcode}}</div>
+                                        <div style='margin: 10px;'><b>City:</b>{{people[3].city}}</div>
+                                        <div style='margin: 10px;'><b>Phone:</b>{{people[3].homephone}}</div>
+                                        <div style='margin: 10px;'><b>Hire Date:</b>{{people[3].hiredate}}</div>
+                                    </div>
+                                </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>{{people[4].firstname}}
+                    <ul data-role="listmenu">
+                        <li>
+                             <div data-role="content">
+                                    <div style="clear:none; float: left; width: 15%;">
+                                        <div class='jqx-rc-all' style='margin: 10px;'><b>Photo:</b></div>
+                                        <div style='margin-top: 10px;'>
+                                            <img height="60" ng-src={{people[4].url}}>
+                                        </div>
+                                    </div>
+                                    <div style="clear:none;float: left; width: 40%;">
+                                        <div style='margin: 10px;'><b>First Name:</b>{{people[4].firstname}}</div>
+                                        <div style='margin: 10px;'><b>Last Name:</b>{{people[4].lastname}}</div>
+                                        <div style='margin: 10px;'><b>Title:</b>{{people[4].title}}</div>
+                                        <div style='margin: 10px;'><b>Address:</b>{{people[4].address}}</div>
+                                    </div>
+                                    <div style="clear:none;float: left; width: 40%;">
+                                        <div style='margin: 10px;'><b>Postal Code:</b>{{people[4].postalcode}}</div>
+                                        <div style='margin: 10px;'><b>City:</b>{{people[4].city}}</div>
+                                        <div style='margin: 10px;'><b>Phone:</b>{{people[4].homephone}}</div>
+                                        <div style='margin: 10px;'><b>Hire Date:</b>{{people[4].hiredate}}</div>
+                                    </div>
+                                </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>{{people[5].firstname}}
+                    <ul data-role="listmenu">
+                        <li>
+                             <div data-role="content">
+                                    <div style="clear:none; float: left; width: 15%;">
+                                        <div class='jqx-rc-all' style='margin: 10px;'><b>Photo:</b></div>
+                                        <div style='margin-top: 10px;'>
+                                            <img height="60" ng-src={{people[5].url}}>
+                                        </div>
+                                    </div>
+                                    <div style="clear:none;float: left; width: 40%;">
+                                        <div style='margin: 10px;'><b>First Name:</b>{{people[5].firstname}}</div>
+                                        <div style='margin: 10px;'><b>Last Name:</b>{{people[5].lastname}}</div>
+                                        <div style='margin: 10px;'><b>Title:</b>{{people[5].title}}</div>
+                                        <div style='margin: 10px;'><b>Address:</b>{{people[5].address}}</div>
+                                    </div>
+                                    <div style="clear:none;float: left; width: 40%;">
+                                        <div style='margin: 10px;'><b>Postal Code:</b>{{people[5].postalcode}}</div>
+                                        <div style='margin: 10px;'><b>City:</b>{{people[5].city}}</div>
+                                        <div style='margin: 10px;'><b>Phone:</b>{{people[5].homephone}}</div>
+                                        <div style='margin: 10px;'><b>Hire Date:</b>{{people[5].hiredate}}</div>
+                                    </div>
+                                </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>{{people[6].firstname}}
+                    <ul data-role="listmenu">
+                        <li>
+                             <div data-role="content">
+                                    <div style="clear:none; float: left; width: 15%;">
+                                        <div class='jqx-rc-all' style='margin: 10px;'><b>Photo:</b></div>
+                                        <div style='margin-top: 10px;'>
+                                            <img height="60" ng-src={{people[6].url}}>
+                                        </div>
+                                    </div>
+                                    <div style="clear:none;float: left; width: 40%;">
+                                        <div style='margin: 10px;'><b>First Name:</b>{{people[6].firstname}}</div>
+                                        <div style='margin: 10px;'><b>Last Name:</b>{{people[6].lastname}}</div>
+                                        <div style='margin: 10px;'><b>Title:</b>{{people[6].title}}</div>
+                                        <div style='margin: 10px;'><b>Address:</b>{{people[6].address}}</div>
+                                    </div>
+                                    <div style="clear:none;float: left; width: 40%;">
+                                        <div style='margin: 10px;'><b>Postal Code:</b>{{people[6].postalcode}}</div>
+                                        <div style='margin: 10px;'><b>City:</b>{{people[6].city}}</div>
+                                        <div style='margin: 10px;'><b>Phone:</b>{{people[6].homephone}}</div>
+                                        <div style='margin: 10px;'><b>Hire Date:</b>{{people[6].hiredate}}</div>
+                                    </div>
+                                </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>{{people[7].firstname}}
+                    <ul data-role="listmenu">
+                        <li>
+                             <div data-role="content">
+                                    <div style="clear:none; float: left; width: 15%;">
+                                        <div class='jqx-rc-all' style='margin: 10px;'><b>Photo:</b></div>
+                                        <div style='margin-top: 10px;'>
+                                            <img height="60" ng-src={{people[7].url}}>
+                                        </div>
+                                    </div>
+                                    <div style="clear:none;float: left; width: 40%;">
+                                        <div style='margin: 10px;'><b>First Name:</b>{{people[7].firstname}}</div>
+                                        <div style='margin: 10px;'><b>Last Name:</b>{{people[7].lastname}}</div>
+                                        <div style='margin: 10px;'><b>Title:</b>{{people[7].title}}</div>
+                                        <div style='margin: 10px;'><b>Address:</b>{{people[7].address}}</div>
+                                    </div>
+                                    <div style="clear:none;float: left; width: 40%;">
+                                        <div style='margin: 10px;'><b>Postal Code:</b>{{people[7].postalcode}}</div>
+                                        <div style='margin: 10px;'><b>City:</b>{{people[7].city}}</div>
+                                        <div style='margin: 10px;'><b>Phone:</b>{{people[7].homephone}}</div>
+                                        <div style='margin: 10px;'><b>Hire Date:</b>{{people[7].hiredate}}</div>
+                                    </div>
+                                </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>{{people[8].firstname}}
+                    <ul data-role="listmenu">
+                        <li>
+                             <div data-role="content">
+                                    <div style="clear:none; float: left; width: 15%;">
+                                        <div class='jqx-rc-all' style='margin: 10px;'><b>Photo:</b></div>
+                                        <div style='margin-top: 10px;'>
+                                            <img height="60" ng-src={{people[8].url}}>
+                                        </div>
+                                    </div>
+                                    <div style="clear:none;float: left; width: 40%;">
+                                        <div style='margin: 10px;'><b>First Name:</b>{{people[8].firstname}}</div>
+                                        <div style='margin: 10px;'><b>Last Name:</b>{{people[8].lastname}}</div>
+                                        <div style='margin: 10px;'><b>Title:</b>{{people[8].title}}</div>
+                                        <div style='margin: 10px;'><b>Address:</b>{{people[8].address}}</div>
+                                    </div>
+                                    <div style="clear:none;float: left; width: 40%;">
+                                        <div style='margin: 10px;'><b>Postal Code:</b>{{people[8].postalcode}}</div>
+                                        <div style='margin: 10px;'><b>City:</b>{{people[8].city}}</div>
+                                        <div style='margin: 10px;'><b>Phone:</b>{{people[8].homephone}}</div>
+                                        <div style='margin: 10px;'><b>Hire Date:</b>{{people[8].hiredate}}</div>
+                                    </div>
+                                </div>
+                        </li>
+                    </ul>
+                </li>
+         </jqx-list-menu>
+    </div>
+</body>
+</html>

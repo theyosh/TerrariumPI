@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>In this example is demonstrated how to create cascading ComboBox. The data source of the "Orders" Combobox is updated dynamically depending on the selected Customer.</title> 
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script> 
+    <script type="text/javascript">
+	$(document).ready(function () {
+		
+		// prepare the data
+		var customersSource =
+		{
+		    dataType: "json",
+			dataFields: [
+				{ name: 'CompanyName'},
+				{ name: 'CustomerID'}
+			],
+			url: '../sampledata/customers.txt'
+		};
+
+		var customersAdapter = new $.jqx.dataAdapter(customersSource);
+
+		$("#customers").jqxComboBox(
+		{
+			source: customersAdapter,	
+			width: 300,
+			height: 25,
+			promptText: "Select customer...",
+			displayMember: 'CompanyName',
+			valueMember: 'CustomerID'
+		});    
+
+		var ordersSource =
+		{
+		    dataType: "json",
+			dataFields: [
+				{ name: 'CustomerID'},
+				{ name: 'OrderID'},
+				{ name: 'ShipCity'},
+				{ name: 'OrderDate'},
+				{ name: 'ShipName'},
+				{ name: 'ShipCountry'},
+				{ name: 'ShipAddress'}
+			],
+			url: '../sampledata/orders.txt'
+		};
+		var ordersAdapter = new $.jqx.dataAdapter(ordersSource);
+		
+		$("#orders").jqxComboBox(
+		{
+			
+		    width: 300,
+			height: 25,
+			disabled: true,
+			promptText: "Select order...",
+			displayMember: 'OrderID',
+			valueMember: 'CustomerID'
+		});   
+		
+		$("#customers").bind('select', function(event)
+		{
+			if (event.args)
+			{
+				$("#orders").jqxComboBox({ disabled: false, selectedIndex: -1});		
+				var value = event.args.item.value;
+				ordersSource.data = {CustomerID: value};
+				ordersAdapter = new $.jqx.dataAdapter(ordersSource, {
+				    beforeLoadComplete: function (records) {
+				        var filteredRecords = new Array();
+				        for (var i = 0; i < records.length; i++) {
+				            if (records[i].CustomerID == value)
+				                filteredRecords.push(records[i]);
+				        }
+				        return filteredRecords;
+				    }
+				});
+				$("#orders").jqxComboBox({ source: ordersAdapter, autoDropDownHeight: ordersAdapter.records.length > 10 ? false : true});
+			}
+		});   
+		
+		$("#orders").bind('select', function(event) 
+		{
+			if (event.args)
+			{
+				var index = $("#orders").jqxComboBox('selectedIndex');		
+				if (index != -1)
+				{
+				    var record = ordersAdapter.records[index];
+				    var detailsSource =
+                    {
+                        dataType: "json",
+                        dataFields: [
+                            { name: 'CustomerID' },
+                            { name: 'OrderID' },
+                            { name: 'ShipCity' },
+                            { name: 'OrderDate' },
+                            { name: 'ShipName' },
+                            { name: 'ShipCountry' },
+                            { name: 'ShipAddress' }
+                        ],
+                        localData: record
+                    };
+				    var detailsAdapter = new $.jqx.dataAdapter(detailsSource);
+
+				    $("#orderInfo").jqxDataTable({
+				        source: detailsAdapter,
+                        width: 500,
+					    columns: [{ text: "Order Date", dataField: "OrderDate", cellsFormat: 'd' }, { text: "Ship Country", dataField: "ShipCountry" },
+                            { text: "Ship Address", dataField: "ShipAddress" }, { text: "Ship Name", dataField: "ShipName" }]
+					});
+				}
+			}
+		});
+	});
+    </script>
+</head>
+<body class='default'>
+  <div>
+    <span style="margin-top: 6px; font-size: 12px; font-family: verdana; float: left;">Customers:</span><div style="margin-left: 5px; float: left;" id="customers"></div>
+	<div style='clear: both;'></div>
+  <div style='margin-top: 20px;'>
+    <span style="margin-top: 6px; font-size: 12px; font-family: verdana; float: left;">Orders:</span><div style="margin-left: 5px; float: left;" id="orders"></div>
+   <br />
+  <div style="margin-top: 25px; font-size: 12px;" id="orderInfo"></div>
+   </div>
+
+    </div>
+</body>
+</html>

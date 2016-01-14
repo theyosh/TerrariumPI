@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title id="Description">This demo shows how to add a Google Map in jqxTabs.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <style type="text/css">
+        #map-canvas
+        {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function initialize() {
+                var mapCanvas = document.getElementById('map-canvas');
+                var mapOptions = {
+                    center: new google.maps.LatLng(29.979234, 31.134202),
+                    zoom: 17,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                }
+                var map = new google.maps.Map(mapCanvas, mapOptions)
+            }
+
+            $('#jqxtabs').jqxTabs({ width: 600, height: 400,
+                initTabContent: function (tab) {
+                    if (tab === 0) {
+                        google.maps.event.addDomListener(window, 'load', initialize);
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <p style="font-family: Verdana;">
+        Great Pyramid of Giza</p>
+    <div id='jqxtabs'>
+        <ul style='margin-left: 20px;'>
+            <li>Map</li>
+            <li>Information</li>
+        </ul>
+        <div>
+            <div id="map-canvas">
+            </div>
+        </div>
+        <div>
+            The Great Pyramid of Giza (also known as the Pyramid of Khufu or the Pyramid of
+            Cheops) is the oldest and largest of the three pyramids in the Giza Necropolis bordering
+            what is now El Giza, Egypt. It is the oldest of the Seven Wonders of the Ancient
+            World, and the only one to remain largely intact.</div>
+    </div>
+</body>
+</html>

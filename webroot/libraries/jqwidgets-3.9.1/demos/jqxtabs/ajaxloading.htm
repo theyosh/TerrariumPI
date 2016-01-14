@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Tabs, Tabs Widget, TabView, jqxTabs" />
+    <meta name="description" content="In this sample, the Tab Contents will be loaded with Ajax when
+        a Tab is selected." />
+    <title id='Description'>In this sample, Tabs are dynamically loaded with Ajax when
+        a Tab is selected. </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+     <script type="text/javascript" src="../../scripts/demos.js"></script>
+   <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Create jqxTabs.
+            $('#jqxTabs').jqxTabs({ width: 580, height: 200});
+
+            var loadPage = function (url, tabIndex) {
+                $.get(url, function (data) {
+                    $('#content' + tabIndex).text(data);
+                });
+            }
+
+            loadPage('pages/ajax1.htm', 1);
+            $('#jqxTabs').on('selected', function (event) {
+                var pageIndex = event.args.item + 1;
+                loadPage('pages/ajax' + pageIndex + '.htm', pageIndex);
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div id='jqxTabs'>
+            <ul>
+                <li style="margin-left: 30px;">Node.js</li>
+                <li>JavaServer Pages</li>
+                <li>Active Server Pages</li>
+            </ul>
+            <div id="content1">
+                <img src='../../images/ajax-loader.gif' />
+            </div>
+            <div id="content2">
+                <img src='../../images/ajax-loader.gif' />
+            </div>
+            <div id="content3">
+                <img src='../../images/ajax-loader.gif' />
+            </div>
+        </div>
+    </div>
+</body>
+</html>

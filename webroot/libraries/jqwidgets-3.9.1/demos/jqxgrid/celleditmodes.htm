@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>In order to enter in edit mode, 'click' on a Grid cell. The sample illustrates how to enable/disable the editing and the jqxGrid edit modes.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.edit.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="generatedata.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {           
+            // prepare the data
+            var data = generatedata(200);
+
+            var source =
+            {
+                localdata: data,
+                datatype: "array",
+                updaterow: function (rowid, rowdata, commit) {
+                    // synchronize with the server - send update command
+                    // call commit with parameter true if the synchronization with the server is successful 
+                    // and with parameter false if the synchronization failed.
+                    commit(true);
+                },
+                datafields:
+                [
+                    { name: 'firstname', type: 'string' },
+                    { name: 'lastname', type: 'string' },
+                    { name: 'productname', type: 'string' },
+                    { name: 'available', type: 'bool' },
+                    { name: 'quantity', type: 'number' },
+                    { name: 'price', type: 'number' }
+                ]
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            // initialize jqxGrid
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 850,
+                source: dataAdapter,
+                editable: true,
+                selectionmode: 'singlecell',
+                editmode: 'click',
+                columns: [
+                  { text: 'First Name', columntype: 'textbox', datafield: 'firstname', width: 90 },
+                  { text: 'Last Name', datafield: 'lastname', width: 90 },
+                  { text: 'Product', datafield: 'productname' },
+                  { text: 'Quantity', datafield: 'quantity', width: 70, cellsalign: 'right' },
+                  { text: 'Available', datafield: 'available', columntype: 'checkbox', width: 67 }
+               ]
+            });
+
+            var editModes = ['Click', 'Double-Click', 'Selected Cell Click'];
+            $("#editmodes").jqxDropDownList({  autoDropDownHeight: true, dropDownWidth: 150, width: 150, height: 25, selectedIndex: 0, source: editModes });
+            $("#firstname").jqxCheckBox({  checked: true });
+            $("#lastname").jqxCheckBox({  checked: true });
+            $("#productname").jqxCheckBox({  checked: true });
+            $("#available").jqxCheckBox({  checked: true });
+            $("#quantity").jqxCheckBox({  checked: true });
+
+            // change the Edit mode.
+            $("#editmodes").on('select', function (event) {
+                var index = event.args.index;
+                var editMode = index == 0 ? 'click' : index == 1 ? 'dblclick' : 'selectedcell';
+                $("#jqxgrid").jqxGrid({ editmode: editMode });
+            });
+
+            // change the Columns Editable state.
+            $("#firstname, #lastname, #productname, #available, #quantity").on('change', function (event) {
+                var datafield = event.target.id;
+                $("#jqxgrid").jqxGrid('setcolumnproperty', datafield, 'editable', event.args.checked);
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+        <div id="jqxgrid">
+        </div>
+        <div style="margin-top: 20px;">
+            <div style="float: left; margin-top: 10px;">
+                <span>Edit Mode:</span>
+                <div style="margin-top: 5px;" id="editmodes">
+                </div>
+            </div>
+            <div style="float: left; margin-left: 20px; margin-top: 10px;">
+                <span>Editable Columns:</span>
+                <div>
+                    <div style="float: left;">
+                        <div style="margin-top: 5px;" id="firstname">
+                            First Name</div>
+                        <div style="margin-top: 5px;" id="lastname">
+                            Last Name</div>
+                        <div style="margin-top: 5px;" id="quantity">
+                            Quantity</div>
+                    </div>
+                    <div style="float: left; margin-left: 20px;">
+                        <div style="margin-top: 5px;" id="productname">
+                            Product</div>
+                        <div style="margin-top: 5px;" id="available">
+                            Available</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

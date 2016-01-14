@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example shows how to create a Grid from JSON data. For binding to MySQL Database using PHP and server-side sorting, filtering, editing or paging, please visit our Help Documentation.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.columnsresize.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = "../sampledata/data.php";
+
+            // prepare the data
+            var source =
+            {
+                datatype: "json",
+                datafields: [
+                    { name: 'firstname' },
+                    { name: 'lastname' },
+                    { name: 'productname'},
+                    { name: 'quantity', type: 'int' },
+                    { name: 'price', type: 'float' },
+                    { name: 'total', type: 'float' }
+                ],
+                id: 'id',
+                url: url,
+                root: 'data'
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 850,
+                source: dataAdapter,
+                columnsresize: true,
+                columns: [
+                  { text: 'First Name', dataField: 'firstname', width: 200 },
+                  { text: 'Last Name', dataField: 'lastname', width: 200 },
+                  { text: 'Product', dataField: 'productname', width: 180 },
+                  { text: 'Quantity', dataField: 'quantity', width: 80, cellsalign: 'right' },
+                  { text: 'Unit Price', dataField: 'price', width: 90, cellsalign: 'right', cellsformat: 'c2' },
+                  { text: 'Total', dataField: 'total', cellsalign: 'right', minwidth: 100, cellsformat: 'c2' }
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+        <div id="jqxgrid"></div>
+    </div>
+</body>
+</html>
+
+<!--data.php
+<?php
+	$firstNames = array("Andrew", "Nancy", "Shelley", "Regina", "Yoshi", "Antoni", "Mayumi", "Ian","Peter", "Lars", "Petra", "Martin", "Sven", "Elio", "Beate", "Cheryl", "Michael", "Guylene");
+
+	$lastNames = array("Fuller", "Davolio", "Burke", "Murphy", "Nagase", "Saavedra", "Ohno", "Devling","Wilson", "Peterson", "Winkler", "Bein", "Petersen", "Rossi", "Vileid", "Saylor", "Bjorn", "Nodier");
+
+	$productNames = array("Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte", "White Chocolate Mocha", "Cramel Latte", "Caffe Americano", "Cappuccino", "Espresso Truffle", "Espressocon Panna", "Peppermint Mocha Twist", "Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte", "White Chocolate Mocha");
+
+	$priceValues = array("2.25", "1.5", "3.0", "3.3", "4.5", "3.6", "3.8", "2.5", "5.0","1.75","3.25","4.0", "2.25", "1.5", "3.0", "3.3", "4.5", "3.6");
+
+	$data = array();
+	$i=0;
+	while($i < count($productNames))
+	{    
+	  $row = array();
+	  $productindex = $i;
+	  $price = $priceValues[$productindex];
+	  $quantity = rand(1, 10);
+	  $row["firstname"] = $firstNames[$i];
+	  $row["lastname"] = $lastNames[$i];
+	  $row["productname"] = $productNames[$productindex];
+	  $row["price"] = $price;
+	  $row["quantity"] = $quantity;
+	  $row["total"] = $price * $quantity;
+
+	  $data[$i] = $row;
+	  $i++;
+	}
+	 
+	header("Content-type: application/json"); 
+	echo "{\"data\":" .json_encode($data). "}";
+?>
+-->

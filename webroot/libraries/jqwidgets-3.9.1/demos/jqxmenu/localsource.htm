@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Load menu from Local Data</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Create jqxMenu
+            var source = [
+                { html: "<img src='../../images/mailIcon.png'/><span style='position: relative; left: 3px; top: -2px;'>Mail</span>", items: [
+                    { html: "<img src='../../images/calendarIcon.png'/><span style='position: relative; left: 3px; top: -2px;'>Calendar</span>" },
+                    { html: "<img src='../../images/contactsIcon.png'/><span style='position: relative; left: 3px; top: -2px;'>Contacts</span>" }
+                ]
+                },
+                { html: "<img src='../../images/folder.png'/><span style='position: relative; left: 3px; top: -2px;'>Inbox</span>", items: [
+                    { html: "<img src='../../images/folder.png'/><span style='position: relative; left: 3px; top: -2px;'>Admin</span>" },
+                    { html: "<img src='../../images/folder.png'/><span style='position: relative; left: 3px; top: -2px;'>Corporate</span>" },
+                    { html: "<img src='../../images/folder.png'/><span style='position: relative; left: 3px; top: -2px;'>Finance</span>" },
+                    { html: "<img src='../../images/folder.png'/><span style='position: relative; left: 3px; top: -2px;'>Other</span>"}]
+                },
+                    { html: "<img src='../../images/recycle.png'/><span style='position: relative; left: 3px; top: -2px;'>Deleted Items</span>" },
+                    { html: "<img src='../../images/notesIcon.png'/><span style='position: relative; left: 3px; top: -2px;'>Notes</span>" },
+                    { html: "<img src='../../images/settings.png'/><span style='position: relative; left: 3px; top: -2px;'>Settings</span>" },
+                    { html: "<img src='../../images/favorites.png'/><span style='position: relative; left: 3px; top: -2px;'>Favorites</span>" }
+                ];
+
+            // create jqxMenu
+            $("#jqxMenu").jqxMenu({ source: source, width: '180px', height: '180px', mode: 'vertical'});
+            $("#jqxMenu").css('visibility', 'visible');
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div id='jqxMenu' style='visibility: hidden; float: left;'>
+        </div>
+    </div>
+</body>
+</html>

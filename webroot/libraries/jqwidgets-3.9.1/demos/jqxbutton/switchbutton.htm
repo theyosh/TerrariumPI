@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery SwitchButton, SwitchButton Widget, jqxSwitchButton" />
+    <meta name="description" content="jqxSwitchButton is jQuery widget with functionality similar to checkbox. It has two states - check and uncheck (on/off). The user can switch between the different states using mouse clicks or drag and drop." />
+    <title id='Description'>jqxSwitchButton is jQuery widget with behavior similar to the jqxCheckBox. It has two states - checked and unchecked (on/off). The user can switch between the different states using mouse clicks or by drag and drop of the thumb.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxswitchbutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var label = {
+                    'button1': 'New Mail',
+                    'button2': 'Sent Mail',
+                    'button3': 'Calendar Alerts',
+                    'button4': 'Lock Sounds',
+                    'button5': 'Keyboard clicks'
+                };
+            $('#button1').jqxSwitchButton({ height: 27, width: 81,  checked: true });
+            $('#button2').jqxSwitchButton({ height: 27, width: 81,  checked: true });
+            $('#button3').jqxSwitchButton({ height: 27, width: 81,  checked: true });
+            $('#button4').jqxSwitchButton({ height: 27, width: 81,  checked: true });
+            $('#button5').jqxSwitchButton({ height: 27, width: 81,  checked: false });
+ 
+            $('.jqx-switchbutton').on('checked', function (event) {
+                $('#events').text(label[event.target.id] + ': Checked');
+            });
+            $('.jqx-switchbutton').on('unchecked', function (event) {
+                $('#events').text(label[event.target.id] + ': Unchecked');
+            });
+        });
+    </script>
+    <style type="text/css">     
+        #settings-panel
+        {
+            background-color: #fff;
+            padding: 20px;
+            display: inline-block;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            position: relative;
+        }
+        .settings-section
+        {
+            background-color: #f7f7f7;
+            height: 45px;
+            width: 500px;
+            border: 1px solid #b4b7bc;
+            border-bottom-width: 0px;
+        }
+        .settings-section-top
+        {
+            border-bottom-width: 0px;
+            -moz-border-radius-topleft: 10px;
+            -webkit-border-top-left-radius: 10px;
+            border-top-left-radius: 10px;
+            -moz-border-radius-topright: 10px;
+            -webkit-border-top-right-radius: 10px;
+            border-top-right-radius: 10px;            
+        }
+        .sections-section-bottom
+        {
+            border-bottom-width: 1px;
+            -moz-border-radius-bottomleft: 10px;
+            -webkit-border-bottom-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            -moz-border-radius-bottomright: 10px;
+            -webkit-border-bottom-right-radius: 10px;
+            border-bottom-right-radius: 10px;            
+        }
+        .sections-top-shadow
+        {
+            width: 500px;
+            height: 1px;
+            position: absolute;
+            top: 21px;
+            left: 21px;
+            height: 30px;
+            border-top: 1px solid #e4e4e4;
+            -moz-border-radius-topleft: 10px;
+            -webkit-border-top-left-radius: 10px;
+            border-top-left-radius: 10px;
+            -moz-border-radius-topright: 10px;
+            -webkit-border-top-right-radius: 10px;
+            border-top-right-radius: 10px;  
+        }
+        .settings-label
+        {
+            font-weight: bold;
+            font-family: Sans-Serif;
+            font-size: 14px;
+            margin-left: 14px;
+            margin-top: 15px;
+            float: left;
+        }
+        .settings-melody
+        {
+            color: #385487;
+            font-family: Sans-Serif;
+            font-size: 14px;
+            display: inline-block;
+            margin-top: 7px;
+        }
+        .settings-setter
+        {
+            float: right;
+            margin-right: 14px;
+            margin-top: 8px;
+        }
+        .events-container
+        {
+            margin-left: 20px;
+        }
+        #theme
+        {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body class='default'>
+    <div id="settings-panel">
+        <div class="sections-top-shadow"></div>
+        <div class="settings-section-top settings-section">
+            <div class="settings-label">Ringtone</div>
+            <div class="settings-setter">
+                <div class="settings-melody">Marimba</div>
+            </div>
+        </div>
+        <div class="settings-section">
+            <div class="settings-label">New Mail</div>
+            <div class="settings-setter">
+                <div id="button1"></div>
+            </div>
+        </div>
+        <div class="settings-section">
+            <div class="settings-label">Sent Mail</div>
+            <div class="settings-setter">
+                <div id="button2"></div>
+            </div>
+        </div>
+        <div class="settings-section">
+            <div class="settings-label">Calendar Alerts</div>
+            <div class="settings-setter">
+                <div id="button3"></div>
+            </div>
+        </div>
+        <div class="settings-section">
+            <div class="settings-label">Lock Sounds</div>
+            <div class="settings-setter">
+                <div id="button4"></div>
+            </div>
+        </div>
+        <div class="sections-section-bottom settings-section">
+            <div class="settings-label">Keyboard Clicks</div>
+            <div class="settings-setter">
+                <div id="button5"></div>
+            </div>
+        </div>
+    </div>
+    <div class="events-container">
+        <div>Events:</div>
+        <div id="events"></div>
+    </div>
+</body>
+</html>

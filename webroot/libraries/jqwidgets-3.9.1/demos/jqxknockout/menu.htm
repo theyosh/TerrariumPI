@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">Integration of jqxMenu with Knockout</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/json2.js"></script> 
+    <script type="text/javascript" src="../../scripts/knockout-3.0.0.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxknockout.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () { 
+            // Define a "Person" class that tracks its own name and children, and has a method to add a new child
+            var Person = function (name, items) {
+                this.label = name;
+                this.items = items != undefined ? ko.observableArray(items) : ko.observableArray();
+                this.visible = ko.observable(true);
+
+                this.addSubItem = function () {
+                    if (this.items().length < 1) {
+                        this.items.push(new Person("New Item"));
+                    }
+                    else if (this.items().length == 1) {
+                        this.items.push(new Person("Last Item"));
+                        this.visible(false);
+                    }
+                }
+            }
+
+            // The view model is an abstract description of the state of the UI, but without any knowledge of the UI technology (HTML)
+            var viewModel = {
+                people: [
+                    new Person("Annabelle", [new Person("Arnie"), new Person("Anders"), new Person("Apple")]),
+                    new Person("Bertie", [new Person("Boutros-Boutros"), new Person("Brianna"), new Person("Barbie"), new Person("Bee-bop")]),
+                    new Person("Charles", [new Person("Cayenne"), new Person("Cleopatra")])
+                ],
+                disabled: ko.observable(false)
+            };
+
+            ko.applyBindings(viewModel);
+        });
+    </script>
+</head>
+<body style='font-size: 13px; font-family: Verdana;' class='default'>
+    <div>
+        <div style="float: left; margin-left: 50px;">
+            <div data-bind="jqxMenu: {source: people, disabled: disabled, width: 240, height: 30}" id="menu">
+            </div>
+            <div data-bind="jqxCheckBox: {checked: disabled}" style='margin-top: 5px;' id="checkBox">Disabled</div>
+        </div>
+        <div style="float: left;">
+            <ul data-bind="foreach: people">
+                <li>
+                    <div>
+                        <span data-bind="text: label"></span>
+                    </div>
+                    <ul data-bind="foreach: items">
+                        <li><span data-bind="text: label"></span><a style="margin-left: 3px;" href='#' data-bind='click: addSubItem, visible: visible'>Add Item</a>
+                            <ul data-bind="foreach: items">
+                                <li><span data-bind="text: label"></span>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

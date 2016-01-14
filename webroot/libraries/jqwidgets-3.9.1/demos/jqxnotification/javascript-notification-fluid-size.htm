@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title id="Description">jqxNotification Fluid Size Example. The width of the Notification
+        in this demo is in Percentages.</title>
+    <meta name="keywords" content="fluid height, fluid size, fluid width, jQuery notification, jQWidgets, jqxNotification, notification, percent, percentage, unobtrusive notification" />
+    <meta name="description" content="jqxNotification Fluid Size Example. The width of the Notification in this demo is in Percentages." />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxnotification.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxNotification").jqxNotification({ width: "80%", position: "top-left", opacity: 0.9,
+                autoOpen: true, animationOpenDelay: 800, autoClose: false, template: "success"
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="jqxNotification">
+        This notification's width is 80%.</div>
+</body>
+</html>

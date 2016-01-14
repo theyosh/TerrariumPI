@@ -1,0 +1,511 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../Styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="jQuery, Radio Button, RadioButton, CheckInput, RadioInput, Button" />
+    <meta name="description" content="This page represents the help documentation of the jqxRadioButton and jqxRadioButton widgets." />
+    <title>jqxRadioButton and jqxRadioButton API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="properties">
+        <h2 class="documentation-top-header">Properties</h2>
+        <table class="documentation-table">
+            <tr>
+                <th>Name
+                </th>
+                <th>Description
+                </th>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span1'>browser</span>
+                </td>
+                <td>
+                    <span>Returns information about the Browser.</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        Returns an object with the following fields:
+                        <ul>
+                            <li>name - Browser Name. Possible values: "Internet Explorer", "Webkit", "Chrome", "Safari", "Opera", "Opera Mobile", "Dolphin", "Chrome Mobile", "webOSBrowser", "Silk", "Firefox".</li>
+                            <li>accessName - "msie", "webkit", "chrome", "safari", "opera", "operamobile", "dolphin", "chromemobile", "webosbrowser", "silk", "firefox".</li>
+                            <li>version - Browser Version.</li>
+                            <li>canvas - Boolean field which determines whether Canvas is supported.</li>
+                            <li>svg - Boolean field which determines whether SVG is supported.</li>
+                            <li>vml - Boolean field which determines whether VML is supported.</li>
+                        </ul>
+                        <h4>Code example</h4>
+                        Get the <code>browser</code> property.
+                        <pre><code>
+var response = new $.jqx.response();
+var browser = response.browser;
+// gets the current browser's name.
+var name = browser.name;
+// gets the current browser's version.
+var version = browser.version;
+</code></pre>
+                        <p>Run code only for a specific browser</p>
+                        <pre><code>
+var response = new $.jqx.response();
+var browser = response.browser;
+if (browser.msie)
+{
+    // add code specific for Internet Explorer.
+    if (browser.version == 7)
+    {
+        // add code specific for Internet Explorer 7 
+    }
+}
+else if (browser.firefox)
+{
+    // add code specific for Firefox 
+}
+</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/Luu4C/">browser is set to a custom function</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span2'>device</span>
+                </td>
+                <td>
+                    <span>Returns information about the Device.</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        Returns an object with the following fields:
+                        <ul>
+                            <li>type - Device Type. Possible values: "Desktop", "Tablet", "Phone".</li>
+                            <li>touch - Boolean field which determines whether the device is touch enabled.</li>
+                            <li>width - screen width.</li>
+                            <li>height - screen height.</li>
+                            <li>availWidth - screen's usable width.</li>
+                            <li>availHeight - screen's usable height i.e minus UI headers and/or footers.</li>
+                        </ul>
+                        *Device size is static and does not change when the page is resized or rotated.
+                            <h4>Code example</h4>
+                        Get the <code>device</code> property.
+                        <pre><code>
+var response = new $.jqx.response();
+var device = response.device;
+var type = device.type;
+var isTouchDevice = device.touch;
+var screenWidth = device.width;
+var screenHeight = device.height; 
+</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/xW8fX/">device is set to a custom function</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span4'>document</span>
+                </td>
+                <td>
+                    <span>Returns information about the document.</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        Returns an object with the following fields:
+                        <ul>
+                            <li>width - document's width.</li>
+                            <li>height - document's height.</li>
+                        </ul>
+                        *document's size changes when the page is resized.
+                            <h4>Code example</h4>
+                        Get the <code>document</code> property.
+                        <pre><code>
+var response = new $.jqx.response();
+var document = response.document;
+var width = document.width;
+var height = document.height;
+</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/tMZDL/">document is set to a custom function</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span13'>destroy</span>
+                </td>
+                <td>
+                    <span>Destroys the plug-in.
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <h4>Code example</h4>
+                        <pre><code>
+var response = new $.jqx.response();
+response.destroy();
+</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/V7J9R/">destroy is set to a custom function</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span6'>resize</span>
+                </td>
+                <td>
+                    <span>Callback function or functions called when the browser's window is resized.</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <h4>Code example</h4>
+                        <pre><code>
+var response = new $.jqx.response();
+response.resize(function (event) {
+    // your code here.
+});
+</code></pre>
+                        <h4>Code example with multiple callbacks</h4>
+                        <pre>
+<code>
+var response = new $.jqx.response();
+
+var resizeFunction1 = function () {
+    console.log("resizeFunction1 is called");
+}
+var resizeFunction2 = function () {
+    console.log("resizeFunction2 is called");
+}
+
+response.resize([resizeFunction1, resizeFunction2]);
+</code>
+</pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/W5wsX/">resize is set to a custom function</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span10'>isHidden</span>
+                </td>
+                <td>
+                    <span>Checks whether a HTML Element is hidden.
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        The function accepts HTML Element as parameter and returns true, if the element is hidden or false if not.                      
+                          <h4>Code example</h4>
+                        <pre><code>
+var response = new $.jqx.response();
+var hidden = response.isHidden($("#someID")[0]);
+</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/dyuLA/">isHidden is set to a custom function</a>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span11'>inViewPort</span>
+                </td>
+                <td>
+                    <span>Checks whether a HTML Element is in the view port.
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        The function accepts HTML Element as parameter and returns true, if the element is in the view port or false if not.                      
+                          <h4>Code example</h4>
+                        <pre><code>
+var response = new $.jqx.response();
+var inViewPort = response.inViewPort($("#someID")[0]);
+</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/CuKFC/">inViewPort is set to a custom function</a>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='property-name-disabled'>os</span>
+                </td>
+                <td>
+                    <span>Returns information about the OS.</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        Returns an object with the following fields:
+                        <ul>
+                            <li>name - OS Name. Possible values: "iOS", "Android", "webOS", "BlackBerry", "RIMTablet", "MacOS", "Windows", "Linux", "Bada".</li>
+                            <li>version - OS Version.</li>
+                            <li>platform - OS Platform.</li>
+                        </ul>
+                        <h4>Code example</h4>
+                        Get the <code>os</code> property.
+                        <pre><code>
+var response = new $.jqx.response();
+var os = response.os;
+</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/Rymgz/">os is set to a custom function</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span7'>pointerDown</span>
+                </td>
+                <td>
+                    <span>Event handler for mouse and touch events that works across browsers. "pointerDown" automatically handles the "mousedown", "MSPointerDown" and "touchstart" events on an element and calls a callback function with 3 parameters(original event, pointer position and pointer type).
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        The function has 2 parameters:
+                        <ul>
+                            <li>HTML Element - the element that will receive events.</li>
+                            <li>Callback function that is called when the mouse pointer is over the element and the mouse button is pressed or a contact touches the screen on element.
+                            <ul>
+                                <li>event - the original Event object.</li>
+                                <li>position - object with the following fields:
+                                    <ul>
+                                        <li>left - X position relative to the top-left edge of the document.</li>
+                                        <li>top - Y position relative to the top-left edge of the document.</li>
+                                    </ul>
+                                </li>
+                                <li>pointerType - the pointer's type - "touch" or "mouse".</li>
+                            </ul>
+                            </li>
+                        </ul>
+                        <h4>Code example</h4>
+                        <pre><code>
+var response = new $.jqx.response();
+response.pointerDown($(document), function (event, position, pointerType) {
+  
+});
+</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/6NhSJ/">pointerDown is set to a custom function</a>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span8'>pointerMove</span>
+                </td>
+                <td>
+                    <span>Event handler for mouse and touch events that works across browsers. "pointerMove" automatically handles the "mousemove", "MSPointerMove" and "touchmove" events on an element and calls a callback function with 3 parameters(original event, pointer position and pointer type).
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        The function has 2 parameters:
+                        <ul>
+                            <li>HTML Element - the element that will receive events.</li>
+                            <li>Callback function that is called when the mouse pointer is over the element and is moved or a contact moves on the screen while over an element.
+                            <ul>
+                                <li>event - the original Event object.</li>
+                                <li>position - object with the following fields:
+                                    <ul>
+                                        <li>left - X position relative to the top-left edge of the document.</li>
+                                        <li>top - Y position relative to the top-left edge of the document.</li>
+                                    </ul>
+                                </li>
+                                <li>pointerType - the pointer's type - "touch" or "mouse".</li>
+                            </ul>
+                            </li>
+                        </ul>
+                        <h4>Code example</h4>
+                        <pre><code>
+var response = new $.jqx.response();
+response.pointerMove($(document), function (event, position, pointerType) {
+  
+});
+</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/fYzw6/">pointerMove is set to a custom function</a>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span9'>pointerUp</span>
+                </td>
+                <td>
+                    <span>Event handler for mouse and touch events that works across browsers. "pointerUp" automatically handles the "mouseup", "MSPointerUp" and "touchend" events on an element and calls a callback function with 3 parameters(original event, pointer position and pointer type).
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        The function has 2 parameters:
+                        <ul>
+                            <li>HTML Element - the element that will receive events.</li>
+                            <li>Callback function that is called when the mouse pointer is over the element and the mouse button is released or a contact is raised off of the screen over an element.
+                            <ul>
+                                <li>event - the original Event object.</li>
+                                <li>position - object with the following fields:
+                                    <ul>
+                                        <li>left - X position relative to the top-left edge of the document.</li>
+                                        <li>top - Y position relative to the top-left edge of the document.</li>
+                                    </ul>
+                                </li>
+                                <li>pointerType - the pointer's type - "touch" or "mouse".</li>
+                            </ul>
+                            </li>
+                        </ul>
+                        <h4>Code example</h4>
+                        <pre><code>
+var response = new $.jqx.response();
+response.pointerUp($(document), function (event, position, pointerType) {
+  
+});
+</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/g6bYY/">pointerUp is set to a custom function</a>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span12'>refresh</span>
+                </td>
+                <td>
+                    <span>Refreshes the plug-in properties.
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <h4>Code example</h4>
+                        <pre><code>
+var response = new $.jqx.response();
+response.refresh();
+</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/jwjpY/">refresh is set to a custom function</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span5'>scroll</span>
+                </td>
+                <td>
+                    <span>Returns information about the Scrollbars position.</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        Returns an object with the following fields:
+                        <ul>
+                            <li>left - horizontal scrollbar's position.</li>
+                            <li>top - vertical scrollbar's position.</li>
+                        </ul>
+                        <h4>Code example</h4>
+                        Get the <code>scroll</code> property.
+                        <pre><code>
+var response = new $.jqx.response();
+var scroll = response.scroll;
+var left = scroll.left;
+var top = scroll.top;
+</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/Pk73P/">scroll is set to a custom function</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span3'>viewPort</span>
+                </td>
+                <td>
+                    <span>Returns information about the view port.</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        Returns an object with the following fields:
+                        <ul>
+                            <li>width - view port's width.</li>
+                            <li>height - view port's height.</li>
+                        </ul>
+                        *viewPort's size changes when the page is resized.
+                            <h4>Code example</h4>
+                        Get the <code>viewPort</code> property.
+                        <pre><code>
+var response = new $.jqx.response();
+var viewPort = response.viewPort;
+var width = viewPort.width;
+var height = viewPort.height;
+</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/wTdtP/">viewPort is set to a custom function</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+
+
+
+
+        </table>
+        <br />
+    </div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="keywords" content="jQuery Calendar, Month Calendar, MonthCalendar, DateTimeInput, DateTimePicker, Date Picker" /> 
+<meta name="description" content="The jqxCalendar can hide the other days of the month. To hide the other month days, you need set the showOtherMonthDays property to false. By default, the jqxCalendar displays 42 days which represent the days from the main month and some of the days from the previous and next months."/>
+<title id='Description'>
+The jqxCalendar can hide the other days of the month. To hide the other month days, you need set the showOtherMonthDays property to false. By default, the jqxCalendar displays 42 days which represent the days from the main month and some of the days from the previous and next months. 
+</title>
+<link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css"/>
+<script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../scripts/demos.js"></script>
+<script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+<script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+<script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+<script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+ </head>
+<body>
+<div id='content'>
+  <script type="text/javascript">
+      $(document).ready(function () {
+          // Create the Calendar.
+          $("#jqxWidget").jqxCalendar({ width: '220px', height: '220px'});
+          // set the showWeekNumbers property to true.
+          $("#jqxWidget").jqxCalendar({ showOtherMonthDays: false });
+      });
+  </script>  
+  <div id='jqxWidget'></div>
+</div>
+</body>
+</html>

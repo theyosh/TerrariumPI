@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">In virtual mode, the Tree Grid is created on demand. In this case, Child records are created and initialized when the parent record is expanded. For example when you expand a record, jqxTreeGrid makes an Ajax request to http://services.odata.org. The request contains the expanded record's EmployeeID and as a result we get all sub records whose "ReportsTo" data field match the "EmployeeID" data field. </title>
+    <meta name="description" content="Load nodes on demand through Ajax - JavaScript Tree Grid Demo | jQWidgets">     
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxtreegrid.js"></script> 
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <style>
+        body, html {
+        height:100%;
+        padding:0;
+        margin:0;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                dataType: "json",
+                dataFields: [
+                    { name: 'EmployeeID', type: 'number' },
+                    { name: 'ReportsTo', type: 'number' },
+                    { name: 'FirstName', type: 'string' },
+                    { name: 'LastName', type: 'string' },
+                    { name: 'Country', type: 'string' },
+                    { name: 'City', type: 'string' },
+                    { name: 'Address', type: 'string' },
+                    { name: 'Title', type: 'string' },
+                    { name: 'HireDate', type: 'date' },
+                    { name: 'BirthDate', type: 'date' }
+                ],
+                timeout: 10000,
+                hierarchy:
+                {
+                    keyDataField: { name: 'EmployeeID' },
+                    parentDataField: { name: 'ReportsTo' }
+                },
+                id: 'EmployeeID',
+                root: 'value',
+                url: "http://services.odata.org/V3/Northwind/Northwind.svc/Employees?$format=json&$callback=?"
+            };
+
+            // create Tree Grid
+            $("#treeGrid").jqxTreeGrid(
+            {
+                virtualModeCreateRecords: function (expandedRecord, done) {
+                    var dataAdapter = new $.jqx.dataAdapter(source,
+                        {
+                            formatData: function (data) {
+                                if (expandedRecord == null) {
+                                    data.$filter = "(ReportsTo eq null)"
+                                }
+                                else {
+                                    data.$filter = "(ReportsTo eq " + expandedRecord.EmployeeID + ")"
+                                }
+                                return data;
+                            },
+                            loadComplete: function()
+                            {
+                                done(dataAdapter.records);
+                            },
+                            loadError: function (xhr, status, error) {
+                                done(false);
+                                throw new Error("http://services.odata.org: " + error.toString());
+                            }
+                        }
+                    );   
+                    dataAdapter.dataBind();
+                },
+                virtualModeRecordCreating: function (record) {
+                    // record is creating.
+                },
+                columns: [
+                  { text: 'FirstName', columnGroup: 'Name', dataField: 'FirstName', width: 150 },
+                  { text: 'LastName', columnGroup: 'Name', dataField: 'LastName', width: 150 },
+                  { text: 'Title', dataField: 'Title', width: 200 },
+                  { text: 'Birth Date', dataField: 'BirthDate', cellsFormat: 'd' }
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <h3 style="font-size: 16px; font-family: Verdana;">Data Source: "http://services.odata.org"</h3>
+    <div id="treeGrid"></div>
+</body>
+</html>

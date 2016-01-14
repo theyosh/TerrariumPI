@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">The sample illustrates the basic functionality of the jqxTextArea
+        widget. The jqxTextArea widget provides suggestions while you type into the field.
+        The datasource is a simple JavaScript array, provided to the widget using the "source"
+        property.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtextarea.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var quotes = [];
+            quotes.push('Life is a dream for the wise, a game for the fool, a comedy for the rich, a tragedy for the poor.');
+            quotes.push('Yesterday is not ours to recover, but tomorrow is ours to win or lose.');
+            quotes.push('It does not matter how slowly you go as long as you do not stop.');
+            quotes.push('Success depends upon previous preparation, and without such preparation there is sure to be failure.');
+            quotes.push('Better a diamond with a flaw than a pebble without.');
+            quotes.push('To succeed in life, you need two things: ignorance and confidence.');
+            quotes.push('A successful man is one who can lay a firm foundation with the bricks others have thrown at him.');
+            quotes.push('Sleep is the best meditation.');
+
+            $('#jqxTextArea').jqxTextArea({ placeHolder: 'Enter a sentence', height: 90, width: 300, minLength: 1, source: quotes });
+        });
+    </script>
+</head>
+<body class="default">
+    <textarea id="jqxTextArea"></textarea>
+</body>
+</html>

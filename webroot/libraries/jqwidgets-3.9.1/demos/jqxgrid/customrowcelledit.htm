@@ -1,0 +1,127 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>The example shows how to assign custom editors to cells depending on the row's index.
+    </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.edit.js"></script>  
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxslider.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="generatedata.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+
+            // prepare the data
+            var data = new Array();
+            data.push({ "Name": "Population", "Berlin": "3560154", "Boston": "3406829", "London": "8174100" });
+            data.push({ "Name": "Country", "Berlin": "Germany", "Boston": "United States", "London": "United Kingdom" });
+            data.push({ "Name": "Capital", "Berlin": "true", "Boston": "false", "London": "true" });
+
+            var source =
+            {
+                localdata: data,
+                datatype: "array",
+                updaterow: function (rowid, rowdata, commit) {
+                    // synchronize with the server - send update command
+                    // call commit with parameter true if the synchronization with the server is successful 
+                    // and with parameter false if the synchronization failder.
+                    commit(true);
+                },
+                datafields:
+                [
+                    { name: 'Name', type: 'string' },
+                    { name: 'Berlin', type: 'string' },
+                    { name: 'Boston', type: 'string' },
+                    { name: 'London', type: 'string' }
+                ]
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            var createGridEditor = function(row, cellValue, editor, cellText, width, height)
+            {
+                // construct the editor.
+                if (row == 0) {
+                    editor.jqxNumberInput({ decimalDigits: 0, inputMode: 'simple',  width: width, height: height, spinButtons: true });
+                }
+                else if (row == 1) {
+                    editor.jqxDropDownList({autoDropDownHeight: true,  width: width, height: height, source: ['United States', 'Germany', 'United Kingdom']});
+                }
+                else if (row == 2) {
+                    var element = $('<div tabIndex=0 style="position: absolute; top: 50%; left: 50%; margin-top: -7px; margin-left: -10px;"></div>');
+                    editor.append(element);
+                    element.jqxCheckBox({ animationShowDelay: 0, animationHideDelay: 0, width: 16, height: 16});
+                }
+            }
+
+            var initGridEditor = function (row, cellValue, editor, cellText, width, height) {
+                // set the editor's current value. The callback is called each time the editor is displayed.
+                if (row == 0) {
+                    editor.jqxNumberInput({ decimal: parseInt(cellValue)});
+                }
+                else if (row == 1) {
+                    editor.jqxDropDownList('selectItem', cellValue);
+                }
+                else if (row == 2) {
+                    var checkBoxHTMLElement = editor.find('div:first');
+                    checkBoxHTMLElement.jqxCheckBox({ checked: cellValue.toString() == "true" });
+                }
+            }
+
+            var gridEditorValue = function (row, cellValue, editor) {
+                if (row == 2) {
+                    var checkBoxHTMLElement = editor.find('div:first');
+                    return checkBoxHTMLElement.val();
+                }
+
+                return editor.val();
+            }
+
+            // initialize jqxGrid
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 850,
+                autoheight: true,
+                source: dataAdapter,
+                editable: true,
+                
+                selectionmode: 'singlecell',
+                columns: [
+                  {
+                      text: 'Name', pinned: true, editable: false,  datafield: 'Name', width: 150
+                  },
+                  {
+                      text: 'Boston', columntype: 'custom', datafield: 'Boston', width: 150,
+                      createeditor: createGridEditor, initeditor: initGridEditor, geteditorvalue: gridEditorValue
+                  },
+                  {
+                      text: 'Berlin', columntype: 'custom', datafield: 'Berlin', width: 150,
+                      createeditor: createGridEditor, initeditor: initGridEditor, geteditorvalue: gridEditorValue
+                      },
+                  {
+                      text: 'London', columntype: 'custom', datafield: 'London',
+                      createeditor: createGridEditor, initeditor: initGridEditor, geteditorvalue: gridEditorValue
+                  }
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="jqxgrid"></div>
+</body>
+</html>

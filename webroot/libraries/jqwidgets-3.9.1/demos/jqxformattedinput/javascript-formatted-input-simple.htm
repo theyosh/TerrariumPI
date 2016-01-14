@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">This demo shows a jqxFormattedInput initialized from an HTML
+        input.</title>
+    <meta name="description" content="This demo shows a jqxFormattedInput initialized from an HTML input." />
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxformattedinput.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxFormattedInput").jqxFormattedInput({ width: 250, height: 25, radix: "binary", value: "100001" });
+
+            $("#getOctal, #getDecimal, #getHexadecimal").jqxButton({ width: 175 });
+
+            $("#getOctal").click(function () {
+                var octalValue = $("#jqxFormattedInput").jqxFormattedInput("val", "octal");
+                alert("Octal value: " + octalValue);
+            });
+
+            $("#getDecimal").click(function () {
+                var decimalValue = $("#jqxFormattedInput").jqxFormattedInput("val", "decimal");
+                alert("Decimal value: " + decimalValue);
+            });
+
+            $("#getHexadecimal").click(function () {
+                var hexadecimalValue = $("#jqxFormattedInput").jqxFormattedInput("val", "hexadecimal");
+                alert("Hexadecimal value: " + hexadecimalValue);
+            });
+        });
+    </script>
+</head>
+<body>
+    <input id="jqxFormattedInput" type="text" />
+    <div style="margin-top: 20px;">
+        <button id="getOctal">
+            Get octal value</button>
+        <button id="getDecimal" style="margin-left: 5px;">
+            Get decimal value</button>
+        <button id="getHexadecimal" style="margin-left: 5px;">
+            Get hexadecimal value</button></div>
+</body>
+</html>

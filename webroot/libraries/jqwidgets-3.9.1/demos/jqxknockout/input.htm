@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">Integration of jqxInput with Knockout.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/json2.js"></script>
+    <script type="text/javascript" src="../../scripts/knockout-3.0.0.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxknockout.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Here's my data model
+            var ViewModel = function (first, last) {
+                this.firstName = ko.observable(first);
+                this.lastName = ko.observable(last);
+
+                this.fullName = ko.computed(function () {
+                    // Knockout tracks dependencies automatically. It knows that fullName depends on firstName and lastName, because these get called when evaluating fullName.
+                    return this.firstName() + " " + this.lastName();
+                }, this);
+            };
+
+            ko.applyBindings(new ViewModel("Planet", "Earth")); // This makes Knockout get to work
+        });
+    </script>
+</head>
+<body style='font-size: 13px; font-family: Verdana;' class='default'>
+    <div>
+        <p>First name:
+            <input id="firstName" data-bind="jqxInput: {width: 200, height: 25, value: firstName}" /></p>
+        <p>Last name:
+            <input id="lastName" data-bind="jqxInput: {width: 200, height: 25, value: lastName}" /></p>
+        <h2>Hello, <span data-bind='text: fullName'></span>!</h2>
+    </div>
+</body>
+</html>

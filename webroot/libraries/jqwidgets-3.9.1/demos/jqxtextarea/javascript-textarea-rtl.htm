@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>To switch an editor to a right-to-left representation, just
+        enable a single property - "rtl". When this property is on, text flows from right
+        to left in an editor and the editor itself is mirrored (the layout of its UI elements
+        is reversed).</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtextarea.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#jqxTextArea').jqxTextArea({ rtl: true, height: 100, width: 300 });
+
+            var text = 'jQWidgets is a comprehensive and innovative widget library built on top of the jQuery JavaScript Library. It empowers developers to deliver professional, cross-browser compatible web applications, while significantly minimizing their development time. jQWidgets contains more than 60 UI widgets and is one of the fastest growing JavaScript UI frameworks on the Web.';
+            $('#jqxTextArea').jqxTextArea('val', text);
+        });
+    </script>
+</head>
+<body class="default">
+    <textarea id="jqxTextArea"></textarea>
+</body>
+</html>

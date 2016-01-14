@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">TreeGrid Data Grouping.</title>
+    <meta name="description" content="Data Grouping - JavaScript Tree Grid Demo | jQWidgets">     
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtreegrid.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <style>
+        .jqx-tree-grid-icon, .jqx-tree-grid-icon-size {
+            height: 16px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "xml",
+                datafields: [
+                    { name: 'CompanyName', map: 'm\\:properties>d\\:CompanyName' },
+                    { name: 'ContactName', map: 'm\\:properties>d\\:ContactName' },
+                    { name: 'ContactTitle', map: 'm\\:properties>d\\:ContactTitle' },
+                    { name: 'City', map: 'm\\:properties>d\\:City' },
+                    { name: 'PostalCode', map: 'm\\:properties>d\\:PostalCode' },
+                    { name: 'Country', map: 'm\\:properties>d\\:Country' }
+                ],
+                hierarchy:
+                    {
+                        groupingDataFields:
+                            [
+                                {
+                                    name: "Country"
+                                }
+                            ]
+                    },
+                root: "entry",
+                record: "content",
+                id: { name: "CustomerID", map: "m\\:properties>d\\:CustomerID" },
+                url: "../sampledata/customers.xml"
+            };
+            // create data adapter.
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            // create Tree Grid
+            $("#treeGrid").jqxTreeGrid(
+            {
+                width: 850,
+                source: dataAdapter,
+                pageable: true,
+                columnsResize: true,
+                altRows: true,
+                icons: function (rowKey, rowData) {
+                    var level = rowData.level;
+                    if (level == 0) {
+                        // each group row has a label member that contains the information displayed on the group row.
+                        var country = rowData.label;
+                        return "../../images/" + $.trim(country.toLowerCase()) + ".png";
+                    }
+                    return false;
+                },
+                ready: function () {
+                    $("#treeGrid").jqxTreeGrid('expandRow', "0");
+                },
+                columns: [
+                  { text: 'City', dataField: 'City', width: 250 },
+                  { text: 'Company Name', dataField: 'CompanyName', minWidth: 100, width: 200 },
+                  { text: 'Contact Name', dataField: 'ContactName', width: 150 },
+                  { text: 'Contact Title', dataField: 'ContactTitle', width: 300 },
+                  { text: 'Postal Code', dataField: 'PostalCode', width: 120 }
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="treeGrid">
+    </div>
+</body>
+</html>

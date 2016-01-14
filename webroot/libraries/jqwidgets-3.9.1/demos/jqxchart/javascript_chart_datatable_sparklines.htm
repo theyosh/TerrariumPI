@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">Sparklines with jqxChart</title>
+    <meta name="description" content="This example demonstrates sparklines created with jqxChart">
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var data = [
+                { city: 'London', count: 24, monthlySales: 1128430, dailyTrend: [12,8,9,3,4,5,6,2,3,4,5,6,12,4,11,4,13,9,10,12,12,8,13,7,15,9,11,12,9,8] },
+                { city: 'New York', count: 35, monthlySales: 1434650, dailyTrend: [11,7,3,8,6,2,2,4,3,8,5,11,7,11,11,4,5,6,5,9,9,5,11,2,8,9,14,12,9,8]},
+                { city: 'Berlin', count: 11, monthlySales: 498430, dailyTrend: [11,7,3,8,6,2,2,4,3,8,5,11,7,11,11,4,5,6,5,9,9,5,11,2,8,9,14,12,9,8] },
+                { city: 'Madrid', count: 4, monthlySales: 181760, dailyTrend: [11,7,3,8,6,2,2,4,3,8,5,11,7,11,11,4,5,6,5,9,9,5,11,2,8,9,14,12,9,8] },
+                { city: 'Paris', count: 9, monthlySales: 381760, dailyTrend: [11,7,3,8,6,2,2,4,3,8,5,11,7,11,11,4,5,6,5,9,9,5,11,2,8,9,14,12,9,8] },
+            ];       
+
+            var source =
+            {
+                localData: data,
+                dataType: "array"
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            $("#dataTable").jqxDataTable(
+            {
+                width: 850,
+                source: dataAdapter,
+                selectionMode: 'none',
+                enableHover: false,
+                sortable: true,
+                columns: [
+                      {
+                          text: 'City', align: 'center', dataField: 'city', width:250,
+                      },
+                      {
+                          text: 'Store locations', align: 'center', dataField: 'count', width: 200
+                      },
+                      {
+                          text: 'Monthly sales', align: 'center', dataField: 'monthlySales'
+                      },
+                      {
+                          text: 'Daily sales trend', align: 'center', dataField: 'dailyTrend',
+                          // row - row's index.
+                          // column - column's data field.
+                          // value - cell's value.
+                          // rowData - rendered row's object.
+                          cellsRenderer: function (row, column, value, rowData) {
+                              var div = "<div id=sparklineContainer" + row + " style='margin: 0px; margin-bottom: 0px; width: 100%; height: 40px;'></div>";
+                              return div;
+                          }
+                      }
+                ],
+                rendering: function () {
+                    if ($(".jqx-chart").length > 0) {
+                        $(".jqx-chart").jqxChart('destroy');
+                    }
+                }                ,
+                rendered: function () {
+                    for (var i = 0; i < data.length; i++) {
+                        createSparkline('#sparklineContainer' + i, data[i].dailyTrend, i % 2 == 0 ? 'column' : 'line');
+                    }
+                }
+            });
+
+       
+            function createSparkline(selector, data, type)
+            {
+                var settings = {
+                    title: '',
+                    description: '',
+                    showLegend: false,
+                    enableAnimations: false,
+                    showBorderLine: false,
+                    showToolTips: false,
+                    backgroundColor: 'transparent',
+                    padding: { left: 0, top: 0, right: 0, bottom: 0 },
+                    titlePadding: { left: 0, top: 0, right: 0, bottom: 0 },
+                    source: data,
+                    xAxis:
+                    {
+                        visible: false,
+                        valuesOnTicks: false
+                    },
+                    colorScheme: 'scheme01',
+                    seriesGroups:
+                        [
+                           {
+                               type: type,
+                                columnsGapPercent: 0,
+                                columnsMaxWidth: 2,
+
+                                valueAxis:
+                                {
+                                    minValue: 0,
+                                    visible: false
+                                },
+                                series: [
+                                        {
+                                            linesUnselectMode: 'click',
+                                            //lineWidth: 1,
+                                            colorFunction: function (value, itemIndex, serie, group) {
+                                                return (value < 10) ? '#307DD7' : '#AA4643';
+                                            }
+                                        }
+                                    ]
+                            }
+                        ]
+                };
+
+                $(selector).jqxChart(settings);
+            } // createSparkline
+        });
+    </script>
+</head>
+<body class='default'>
+      <div id="dataTable"></div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Registration Form";
+}
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#submitButton').jqxButton({height: 25 });
+            $('#acceptInput').jqxCheckBox({width: 130 });
+            var date = new Date();
+            date.setFullYear(1990, 0, 1);
+            $("input").jqxInput({ width: 200, height: 22})
+            $('#birthDate').jqxDateTimeInput({ width: 200, height: 22, value: date });
+            $('#title').jqxDropDownList({autoDropDownHeight: true, width: 200, height: 22, source: ['Sales Representative', 'Sales Coordinator', 'Sales Manager'] });
+            // initialize validator.
+            $('#form').jqxValidator({
+                rules: [
+                { input: '#firstName', message: 'First Name is required!', action: 'keyup, blur', rule: 'required' },
+                { input: '#firstName', message: 'Your first name must contain only letters!', action: 'keyup', rule: 'notNumber' },
+                { input: '#firstName', message: 'Your first name must be between 3 and 12 characters!', action: 'keyup', rule: 'length=3,12' },
+                { input: '#lastName', message: 'Last Name is required!', action: 'keyup, blur', rule: 'required' },
+                { input: '#lastName', message: 'Your last name must contain only letters!', action: 'keyup', rule: 'notNumber' },
+                { input: '#lastName', message: 'Your last name must be between 3 and 12 characters!', action: 'keyup', rule: 'length=3,12' },
+                {
+                    input: '#birthDate', message: 'Your birth date must be between 1/1/1900 and 1/1/2015.', action: 'change', rule: function (input, commit) {
+                        // validate Birth Date.
+                        var date = $('#birthDate').jqxDateTimeInput('getDate');
+                        $.ajax({
+                            url: "/Employee/Register",
+                            type: 'POST',
+                            data: { birthDateValidate: date.toISOString() },
+                            success: function (data) {
+                                commit(true);
+                            },
+                            error: function () {
+                                commit(false);
+                            }
+                        });
+                    }
+                }]
+            });
+            // validate form.
+            $("#submitButton").click(function () {
+                var validationResult = function (isValid) {
+                    if (isValid) {
+                        // Submit the Form.
+                        $("#form").submit();
+                    }
+                }
+                // Validate the Form.
+                $('#form').jqxValidator('validate', validationResult);
+            });
+            $("#form").on('validationSuccess', function () {
+                // Display the Server's Response which came as result of the Form Submit.
+                $("#form-iframe").fadeIn('fast');
+            });
+        });
+    </script>
+}
+<form class="form" id="form" target="form-iframe" method="post" action="/Employee/Register" style="font-size: 13px; font-family: Verdana; width: 650px;">
+    <div>
+        <h2>Add a new Employee</h2>
+    </div>
+    <table>
+        <tr>
+            <td>First Name:</td>
+            <td><input name="firstName" type="text" id="firstName"/></td>
+        </tr>
+        <tr>
+            <td>Last Name:</td>
+            <td><input name="lastName" type="text" id="lastName" /></td>
+        </tr>
+        <tr>
+            <td>Title:</td>
+            <td><div name="title" type="text" id="title"></div></td>
+        </tr>
+        <tr>
+            <td>Birth Date:</td>
+            <td><div name="birthDate" type="text" id="birthDate" /></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding: 5px;"><div name="acceptTerms" id="acceptInput" style="margin-left: 50px;">I accept terms</div></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;"><button type="button" id="submitButton">Submit</button></td>
+        </tr>
+    </table>
+    <div class="prompt">*For successful registration, birth date should be before 1-1-2015</div>
+</form>
+<iframe id="form-iframe" name="form-iframe" style="width: 800px; height: 400px;" frameborder="0"></iframe>

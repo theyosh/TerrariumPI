@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script type="text/javascript">
+      // Needed for getting the SVG filters of justgague to work
+      if (window.location.href.indexOf('/index.html') == -1) {
+	window.location = '/index.html';
+      }
+    </script>
+    <title>Terrarium Control v0.9</title>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="/images/icons/enabled.png">
+    <meta name=author content="Joshua (TheYOSH) Rubingh"/>
+    <meta name=copyright content="2013 - 2015 TheYOSH"/>
+    <meta name=keywords content="Environment, Lights, Temperature, Control, Web, Management, Timers, Sensors, Humidity"/>
+    <meta name=description content="Complete environmental control system. Based on Raspberry PI and other sensor hardware. Control the power switches based on events or timers."/>
+    <style>
+      .loading {
+        position: fixed;
+        z-index: 9999;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+        filter: alpha(opacity=90);
+        -moz-opacity:0.90;
+        -khtml-opacity: 0.90;
+        opacity: 0.90;
+      }
+      .loading span{
+        display: block;
+        margin: 10em auto;
+        color: white;
+        position: relative;
+        text-align: center;
+        font-weight: bold;
+        font-size: 2em;
+      }
+      body{
+        overflow:hidden;
+      }
+    </style>
+   <!--  <meta name="viewport" content="width=device-width"/> -->
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/terrarium.css" />
+    <link rel="stylesheet" href="/css/weather.css" />
+    <link rel="stylesheet" href="/css/sensors.css" />
+    <link rel="stylesheet" href="/css/switch.css" />
+    <link rel="stylesheet" href="/css/webcam.css" />
+    <link rel="stylesheet" href="/css/environment.css" />
+    <link rel="stylesheet" href="/libraries/jqwidgets/jqwidgets/styles/jqx.base.css" />
+    <link rel="stylesheet" href="/libraries/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="/libraries/Leaflet.fullscreen/dist/leaflet.fullscreen.css" />
+    <link rel="stylesheet" href="/libraries/Leaflet.loading/src/Control.Loading.css" />
+  </head>
+  <body>
+    <div class="loading"><span>Loading</span></div>
+    <div id="weather"></div>
+    <div id="system"></div>
+    <div id="environment"></div>
+    <div class="sensors"></div>
+    <div class="switches"></div>
+    <div class="webcams"></div>
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="/libraries/jquery/jquery.min.js"></script>
+
+    <!-- jQWidgets -->
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxgauge.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxprogressbar.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxswitchbutton.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxbuttongroup.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="/libraries/jqwidgets/jqwidgets/jqxtooltip.js"></script>
+
+    <!-- Different -->
+    <script type="text/javascript" src="/libraries/waitForImages/dist/jquery.waitforimages.min.js"></script>
+    <script type="text/javascript" src="/libraries/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="/libraries/jquery.passstrength.min.js"></script>
+
+    <script type="text/javascript" src="/libraries/leaflet/leaflet.js"></script>
+    <script type="text/javascript" src="/libraries/Leaflet.fullscreen/dist/Leaflet.fullscreen.min.js"></script>
+    <script type="text/javascript" src="/libraries/Leaflet.loading/src/Control.Loading.js"></script>
+
+    <script type="text/javascript" src="/libraries/raphael/raphael-min.js"></script> 
+    <script type="text/javascript" src="/libraries/justgage/justgage.js"></script>
+
+    <!-- Terrarium libraries -->
+    <script type="text/javascript" src="/js/sensors.js"></script>
+    <script type="text/javascript" src="/js/switch.js"></script>
+    <script type="text/javascript" src="/js/webcam.js"></script>
+    <script type="text/javascript" src="/js/weather.js"></script>
+    <script type="text/javascript" src="/js/environment.js"></script>
+    <script type="text/javascript" src="/js/system.js"></script>
+    <script type="text/javascript" src="/js/terrarium.js"></script>
+<!--
+    <script type="text/javascript" src="/js/snow.js"></script>
+-->
+    <div class="footer"><script type="text/javascript">document.write(document.title);</script> - <a href="http://theyosh.nl" target="_blank" title="The YOSH Website">Made by The YOSH</a> - Copyright 2013 - <script type="text/javascript">document.write(new Date().getFullYear());</script></div>
+  </body>
+</html>

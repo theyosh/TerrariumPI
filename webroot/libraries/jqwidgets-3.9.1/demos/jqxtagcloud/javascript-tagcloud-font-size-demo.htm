@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>TagCloud font settings</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtagcloud.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script>
+        $(document).ready(function () {
+            var unemploymentRate = [
+                { "country": "Namibia", "rate": 37.6 },
+                { "country": "Macedonia, FYR", "rate": 32.0 },
+                { "country": "Latvia", "rate": 18.7 },
+                { "country": "Lithuania", "rate": 17.8 },
+                { "country": "Estonia", "rate": 16.9 },
+                { "country": "Serbia", "rate": 16.6 },
+                { "country": "Georgia", "rate": 16.5 },
+                { "country": "Yemen, Rep.", "rate": 14.6 },
+                { "country": "Slovak Republic", "rate": 14.4 },
+                { "country": "Dominican Republic", "rate": 14.2 },
+                { "country": "Tunisia", "rate": 14.2 },
+                { "country": "Armenia", "rate": 28.6 },
+                { "country": "Bosnia and Herzegovina", "rate": 27.2 },
+                { "country": "Lesotho", "rate": 25.3 },
+                { "country": "South Africa", "rate": 24.7 },
+                { "country": "Spain", "rate": 20.1 },
+                { "country": "Albania", "rate": 13.8 },
+                { "country": "Ireland", "rate": 13.6 },
+                { "country": "Jordan", "rate": 12.9 },
+                { "country": "Greece", "rate": 12.5 }
+            ];
+            var source =
+            {
+                datatype: "array",
+                localdata: unemploymentRate,
+                datafields: [
+                    { name: 'country' },
+                    { name: 'rate' }
+                ]
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {});
+            $('#tagCloud').jqxTagCloud({
+                width: '600px',
+                source: dataAdapter,
+                fontSizeUnit: 'px',
+                minFontSize: 12,
+                maxFontSize: 20,
+                displayMember: 'country',
+                valueMember: 'rate',
+                urlBase: 'http://localhost/',
+                minColor: '#00AA99',
+                maxColor: '#FF0000'
+            });
+
+            $("#minFontSize").jqxInput({ placeHolder: "MinFontSize", height: 25, width: 200 });
+            $("#minFontSize").jqxInput('val', 12);
+            $("#maxFontSize").jqxInput({ placeHolder: "MaxFontSize", height: 25, width: 200 });
+            $("#maxFontSize").jqxInput('val', 20);
+            $("#fontSizeUnit").jqxInput({
+                placeHolder: "em/px/%",
+                height: 25,
+                width: 200,
+                minLength: 1,
+                source: ['em', 'px', '%']
+            });
+            $("#fontSizeUnit").jqxInput('val', 'px');
+            $('#setFontSize').jqxButton();
+            $('#setFontSize').click(function () {
+                $('#tagCloud').jqxTagCloud({
+                    minFontSize: $("#minFontSize").jqxInput('val'),
+                    maxFontSize: $("#maxFontSize").jqxInput('val'),
+                    fontSizeUnit: $("#fontSizeUnit").jqxInput('val')
+                });
+            })
+        });
+    </script>
+</head>
+
+<body>
+    <div id="tagCloud"></div>
+    minFontSize:<input id='minFontSize' />
+    maxFontSize:<input id='maxFontSize' />
+    fontSizeUnit:<input id='fontSizeUnit' />
+    <button id='setFontSize'>Set Font</button>
+</body>
+</html>

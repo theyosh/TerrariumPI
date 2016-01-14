@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title id='Description'>JavaScript DropDown Button - Mobile Example </title>
+    <link rel="stylesheet" href="../styles/demo.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.windowsphone.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.blackberry.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.android.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.mobile.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownbutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtree.js"></script>
+    <script type="text/javascript" src="../simulator.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = prepareSimulator("dropDownButton");
+
+            $("#dropDownButton").jqxDropDownButton({
+                initContent: function()
+                {
+                    $("#tree").jqxTree({ theme: theme, width: '100%', height: 220 });
+                    $('#tree').on('select', function (event) {
+                        var args = event.args;
+                        var item = $('#tree').jqxTree('getItem', args.element);
+
+                        var dropDownContent = '<div style="margin-left: 3px; line-height: 40px; font-size: 16px; vertical-align: middle;"><span>' + item.label + '</span></div>';
+                        $("#dropDownButton").jqxDropDownButton('setContent', dropDownContent);
+                    });
+                    $('#tree').jqxTree('selectItem', $("#home")[0]);
+                    initSimulator("dropDownButton");
+                    $("#tree").css('visibility', 'visible');
+                },
+                width: '80%', height: 40,
+                theme: theme
+            });
+            var dropDownContent = '<div style="margin-left: 3px; line-height: 40px; font-size: 16px; vertical-align: middle;"><span>Home</span></div>';
+            $("#dropDownButton").jqxDropDownButton('setContent', dropDownContent);
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="demoContainer" class="device-mobile">
+        <div id="container" class="device-mobile-container">
+             <h3 style="margin-left: 10%; margin-top: 20px;">Select an item:</h3>
+             <div style='margin-left: 10%;' id="dropDownButton">
+                <div style="height: 220px; visibility: hidden; border: none;" id='tree'>
+                    <ul>
+                        <li id="home">Home</li>
+                        <li item-expanded='true'>Solutions
+                        <ul>
+                            <li>Education</li>
+                            <li>Financial services</li>
+                            <li>Government</li>
+                            <li>Manufacturing</li>
+                            <li>Solutions
+                                <ul>
+                                    <li>eLearning</li>
+                                    <li>Mobile</li>
+                                    <li>RIA</li>
+                                    <li>Training</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        </li>
+                        <li>Products
+                        <ul>
+                            <li>PC products</li>
+                            <li>Mobile products</li>
+                            <li>All products</li>
+                        </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

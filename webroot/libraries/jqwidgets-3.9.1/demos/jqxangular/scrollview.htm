@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id="Description">jqxScrollView directive for AngularJS</title>
+    <link rel="stylesheet" type="text/css" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollview.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            $scope.slideShow = false;
+            $scope.start = function () {
+                $scope.slideShow = true;
+            }
+            $scope.stop = function () {
+                $scope.slideShow = false;
+            }
+        });
+    </script>
+    <style type="text/css">
+        .photo {
+            width: 600px;
+            height: 450px;
+            background-color: #000;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body class="default">
+    <div ng-controller="demoController">
+        <jqx-scroll-view jqx-width="600" jqx-height="450" jqx-buttons-offset="[0, 0]" jqx-slide-show="slideShow" id="photoGallery">
+        <div><div class="photo" style="background-image: url(../../images/imageNature1.jpg)"></div></div>
+        <div><div class="photo" style="background-image: url(../../images/imageNature2.jpg)"></div></div>
+        <div><div class="photo" style="background-image: url(../../images/imageNature3.jpg)"></div></div>
+        <div><div class="photo" style="background-image: url(../../images/imageNature4.jpg)"></div></div>
+        <div><div class="photo" style="background-image: url(../../images/imageNature5.jpg)"></div></div>
+    </jqx-scroll-view>
+        <div style='margin-top: 20px;'>
+            <br />
+            <div>
+                <jqx-button jqx-on-click="start()">Start Slideshow</jqx-button>
+                <jqx-button jqx-on-click="stop()">Stop Slideshow</jqx-button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

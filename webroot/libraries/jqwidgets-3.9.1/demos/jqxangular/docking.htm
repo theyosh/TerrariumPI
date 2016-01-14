@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id='Description'>jqxDocking Directive for AngularJS.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdocking.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxsplitter.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            $scope.listSource = [
+                     'JavaScript Certification - Welcome to our network',
+                     'Business Challenges via Web take a part',
+                     'jQWidgets better web, less time. Take a tour',
+                     'Facebook - you have 7 new notifications',
+                     'Twitter - John Doe is following you. Look at his profile',
+                     'New videos, take a look at YouTube.com'
+            ];
+        });
+    </script>
+</head>
+<body class='default'>
+    <div ng-controller="demoController">
+           <jqx-docking jqx-width="800" jqx-orientation="'horizontal'" jqx-mode="'docked'" id="docking">
+            <div>
+                <div id="window1" style="height: 220px;">
+                    <div>
+                        Date and Time
+                    </div>
+                    <div style="overflow: hidden;">
+                        <jqx-calendar jqx-width="180" jqx-height="180" id="calendar" style="float: left; margin-right: 10px;">
+                        </jqx-calendar>
+                        <h3 style="text-align: center; color: #787878;">Sunny</h3>
+                        <div style="float: left; margin-left: 30px; text-align: center;">
+                            <img src="../../images/sun-icon.png" alt="Sunny" />
+                        </div>
+                        <div style="text-align: left; margin-left: 5px; margin-top: 10px; font-size: 10px; float: right; margin-right: 20px;">
+                            Mo: 23 °C<br />
+                            To 25 °C<br />
+                            We: 27 °C
+                        </div>
+                    </div>
+                </div>
+                <div id="window2" style="height: 220px">
+                    <div>
+                        News
+                    </div>
+                    <div style="overflow: hidden;">
+                        <jqx-tabs jqx-width="375" jqx-height="181" jqx-selected-item="1" id="newsTbs">
+                            <ul style="margin-left: 30px">
+                                <li>World</li>
+                                <li>Local</li>
+                                <li>Sports</li>
+                            </ul>
+                            <div>
+                                <div style="padding: 3px; margin: 10px; width: 150px; height: 84px; float: left;">
+                                    <img src="../../images/news_ie6.jpg" alt="IE6" title="IE6" />
+                                </div>
+                                <span style="font-size: 11px;">Microsoft is set to get a little more pushy ensuring
+                                    you have an up-to-date browser and will automatically update Internet Explorer...
+                                    <span style="font-size: 8px;">(BBC)</span> </span>
+                            </div>
+                            <div>
+                                <div style="padding: 3px; margin: 10px; width: 144px; height: 81px; float: left;">
+                                    <img src="../../images/local.jpg" alt="Tennis" title="Tennis" />
+                                </div>
+                                <span style="font-size: 11px;">The High Court has dismissed a challenge to laws that
+                                    require immigrant spouses to be able to speak English in order to live in the UK...
+                                    <span style="font-size: 8px;">(BBC)</span> </span>
+                            </div>
+                            <div>
+                                <div style="padding: 3px; margin: 10px; width: 130px; height: 73px; float: left;">
+                                    <img src="../../images/tennis.jpg" alt="Tennis" title="Tennis" />
+                                </div>
+                                <span style="font-size: 11px;">British number one Elena Baltacha says Judy Murray is
+                                    a "fantastic" appointment as Great Britain's new Fed Cup captain... <span style="font-size: 8px;">(BBC)</span> </span>
+                            </div>
+                        </jqx-tabs>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div id="window3" style="height: 220px">
+                    <div>
+                        Zodiac
+                    </div>
+                    <div style="overflow: hidden;">
+                        <jqx-panel jqx-width="375" jqx-height="180">
+                            <div style="padding-right: 20px;">
+                                <div style="padding: 3px; width: 150px; height: 110px; float: left; margin: 10px;">
+                                    <img src="../../images/leo.jpg" alt="Leo" title="Leo" />
+                                </div>
+                                <h3 style="text-align: center; color: #787878;">Leo</h3>
+                                <span style="font-size: 11px">Individuals born under the zodiac sign of Leo are very
+                                good looking and have a healthy physique, with a broad forehead. Leo are very intelligent,
+                                extremely courageous, love their freedom and live by their own rules. Indulgence
+                                and extravagance is like second nature to them and they love to... </span>
+                            </div>
+                        </jqx-panel>
+                    </div>
+                </div>
+                <div id="window4" style="height: 220px;">
+                    <div>
+                        E-mail
+                    </div>
+                    <div style="overflow: hidden;">
+                        <jqx-list-box jqx-source="listSource" jqx-width="375" jqx-height="181">
+                        </jqx-list-box>
+                    </div>
+                </div>
+            </div>
+        </jqx-docking>
+    </div>
+</body>
+</html>

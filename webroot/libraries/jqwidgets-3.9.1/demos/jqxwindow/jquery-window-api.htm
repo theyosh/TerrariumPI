@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Window, Window Widget, Window" />
+    <meta name="description" content="Show, Hide, Pin, Unpin or Open and Close the jqxWindow through its API functions." />
+    <title id='Description'>Show, Hide, Pin, Unpin or Open and Close the jqxWindow through its API functions.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript">
+        var customButtonsDemo = (function () {
+            var _collapsed = false;
+
+            function _addEventListeners() {
+                $('#showWindowButton').mousedown(function () {
+                    $('#customWindow').jqxWindow('open');
+                });
+                $('#hideWindowButton').mousedown(function () {
+                    $('#customWindow').jqxWindow('close');
+                });
+                $('#pinWindowButton').mousedown(function () {
+                    $('#customWindow').jqxWindow('draggable', false);
+                });
+                $('#unpinWindowButton').mousedown(function () {
+                    $('#customWindow').jqxWindow('draggable', true);
+                });
+                _addCustomButtonsHandlers();
+                _addSearchInputEventHandlers();
+            };
+
+            function _addCustomButtonsHandlers() {
+                $('#pinButton').mousedown(function () {
+                    if ($('#customWindow').jqxWindow('draggable')) {
+                        $('#customWindow').jqxWindow('draggable', false);
+                    } else {
+                        $('#customWindow').jqxWindow('draggable', true);
+                    }
+                });
+                $('#collapseWindowButton').mousedown(function () {
+                    $('#customWindow').jqxWindow('collapse');
+                });
+                $('#expandWindowButton').mousedown(function () {
+                    $('#customWindow').jqxWindow('expand');
+                });
+            };
+
+            function _addSearchInputEventHandlers() {
+                $('#searchTextInput').keydown(function () {
+                    _searchButtonHandle();
+                });
+                $('#searchTextInput').change(function () {
+                    _searchButtonHandle();
+                });
+                $('#searchTextInput').keyup(function () {
+                    _searchButtonHandle();
+                });
+                $(document).mousemove(function () {
+                    _searchButtonHandle();
+                });
+            };
+
+            function _searchButtonHandle() {
+                if ($('#searchTextButton').length > 0) {
+                    if ($('#searchTextInput').val() !== '') {
+                        $('#searchTextButton').jqxButton('disabled', false);
+                    } else {
+                        $('#searchTextButton').jqxButton('disabled', true);
+                    }
+                    $('#cancelButton').jqxButton('disabled', false);
+                }
+            };
+
+            function _createElements() {
+                $('#showWindowButton').jqxButton({ width: '80px'});
+                $('#hideWindowButton').jqxButton({ width: '80px' });
+                $('#pinWindowButton').jqxButton({ width: '80px' });
+                $('#unpinWindowButton').jqxButton({ width: '80px' });
+                $('#collapseWindowButton').jqxButton({ width: '80px' });
+                $('#expandWindowButton').jqxButton({ width: '80px' });
+                $('#customWindow').jqxWindow({  width: 400,
+                    height: 110, resizable: false,
+                    cancelButton: $('#cancelButton'),
+                    initContent: function () {
+                        $('#searchTextButton').jqxButton({ width: '80px', disabled: true });
+                        $('#cancelButton').jqxButton({ width: '80px', disabled: false });
+                        $('#matchCaseCheckBox').jqxCheckBox({ width: '150px' });
+                    }
+                });
+            };
+
+            return {
+                init: function () {
+                    _createElements();
+                    _addEventListeners();
+                }
+            };
+        } ());
+
+        $(document).ready(function () {
+            customButtonsDemo.init();
+        });
+    </script>
+</head>
+<body class='default'>
+    <div style="width: 100%; height: 650px;" id="jqxWidget">
+        <input type="button" value="Open" id="showWindowButton" />
+        <input type="button" value="Close" id="hideWindowButton" style="margin-left: 3px" />
+        <input type="button" value="Pin" id="pinWindowButton" style="margin-left: 3px" />
+        <input type="button" value="Unpin" id="unpinWindowButton" style="margin-left: 3px" />
+        <input type="button" value="Collapse" id="collapseWindowButton" style="margin-left: 3px" />
+        <input type="button" value="Expand" id="expandWindowButton" style="margin-left: 3px" />
+        <div
+            id="mainDemoContainer">
+            <div id="customWindow">
+                <div id="customWindowHeader">
+                    <span id="captureContainer" style="float: left">Find </span>
+                </div>
+                <div id="customWindowContent" style="overflow: hidden">
+                    <div style="margin: 10px">
+                        Fi<u>n</u>d what:
+                        <input type="text" style="width: 175px; border: 1px solid #aaa" id="searchTextInput" />
+                        <div style="float: right">
+                            <input type="button" value="Find Next" style="margin-bottom: 5px;" id="searchTextButton" /><br />
+                            <input type="button" value="Cancel" id="cancelButton" />
+                        </div>
+                        <br />
+                        <br />
+                        <div id="matchCaseCheckBox">
+                        Match case</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

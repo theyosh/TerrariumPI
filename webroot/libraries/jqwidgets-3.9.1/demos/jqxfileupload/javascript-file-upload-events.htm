@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">This demo showcases the jqxFileUpload events - 'select', 'cancel',
+        'uploadStart' and 'uploadEnd'. The 'uploadEnd' event returns the server response
+        after an upload attempt as an argument. For uploading files, you should set the
+        "uploadUrl" property to point to a Web Server file that will handle the actual Upload
+        proces.</title>
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxfileupload.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#jqxFileUpload').jqxFileUpload({ width: 300, uploadUrl: 'upload.php', fileInputName: 'fileToUpload' });
+
+            $('#eventsPanel').jqxPanel({ width: 300, height: 150 });
+
+            $('#jqxFileUpload').on('select', function (event) {
+                var args = event.args;
+                var fileName = args.file;
+                var fileSize = args.size;
+                $('#eventsPanel').jqxPanel('append', '<strong>' + event.type + ':</strong> ' +
+                    fileName + ';<br />' + 'size: ' + fileSize + '<br />');
+            });
+
+            $('#jqxFileUpload').on('remove', function (event) {
+                var fileName = event.args.file;
+                $('#eventsPanel').jqxPanel('append', '<strong>' + event.type + ':</strong> ' + fileName + '<br />');
+            });
+
+            $('#jqxFileUpload').on('uploadStart', function (event) {
+                var fileName = event.args.file;
+                $('#eventsPanel').jqxPanel('append', '<strong>' + event.type + ':</strong> ' + fileName + '<br />');
+            });
+
+            $('#jqxFileUpload').on('uploadEnd', function (event) {
+                var args = event.args;
+                var fileName = args.file;
+                var serverResponce = args.response;
+                $('#eventsPanel').jqxPanel('append', '<strong>' + event.type + ':</strong> ' +
+                    fileName + ';<br />' + 'server response: ' + serverResponce + '<br />');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="jqxFileUpload" style="float: left;">
+    </div>
+    <div style="float: left; margin-left: 50px;">
+        <div style="margin-bottom: 10px; font-family: Verdana; font-size: smaller;">
+            Events log:</div>
+        <div id="eventsPanel">
+        </div>
+    </div>
+</body>
+</html>

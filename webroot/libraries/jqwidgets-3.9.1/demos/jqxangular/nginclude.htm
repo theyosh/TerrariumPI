@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <link rel="stylesheet" type="text/css" href="../../jqwidgets/styles/jqx.base.css" />
+    <link rel="stylesheet" type="text/css" href="../../jqwidgets/styles/jqx.darkblue.css" />
+    <script type="text/javascript" src="../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var DemoApp = angular.module("demoApp", ["jqwidgets"]);
+
+        DemoApp.controller("MainController",  ['$scope', function($scope) {
+            $scope.width = 100;
+            $scope.height = 50;
+            $scope.buttonText = "Click to Resize";
+            $scope.resize = function () {
+                $scope.width = 150;
+                $scope.height = 75;
+                $scope.buttonText = "Resized";
+            };
+            $scope.windowTitle = "My Title";
+            $scope.windowSettings =
+                {
+                    height: 200,
+                    created: function () {
+                        var instance = $scope.instance;
+                    }
+                }
+            $scope.instance = {};
+        }]);
+    </script>
+</head>
+<body ng-controller="MainController">
+	<ng-include src="'nginclude-page.htm'"></ng-include>
+</body>
+</html>
