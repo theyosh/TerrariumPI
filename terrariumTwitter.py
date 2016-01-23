@@ -32,7 +32,7 @@ class terrariumTwitter:
         media_ids[data[0]] = data[1]
 
     self.__tiwtter_images = {'sunrise' : [], 'moonrise' : [], 'humidity' :[], 'heater':[] , 'lights_off' : [], 'lights_on' : []}
-    print 'list files in ' + terrariumTwitter.TWITTER_IMAGES
+    #print 'list files in ' + terrariumTwitter.TWITTER_IMAGES
     for file in os.listdir(terrariumTwitter.TWITTER_IMAGES):
       fullpath = os.path.join(terrariumTwitter.TWITTER_IMAGES,file)
       media_id = (media_ids[file] if file in media_ids else -1)
@@ -56,7 +56,7 @@ class terrariumTwitter:
       if twitter_image_type is not None:
         self.__tiwtter_images[twitter_image_type].append(twitter_image)
 
-    print self.__tiwtter_images
+    #print self.__tiwtter_images
 
   def __upload_new_media(self):
     pass
