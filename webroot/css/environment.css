@@ -59,31 +59,9 @@ span.icon.counter {
 span.icon.counter tspan {
   font-size: 0.6em;
 }
-
-/*
-div.icon.counter span {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  direction: block;
-}
-
-div.icon.counter span.status {
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  width: 80%;
-  height: 80%;
-  text-align: center;
-  background-color: white;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
-}
-*/
 /* End countdown timer */
 
-
+/* Door indicator */
 #door_update.open {
   color: red;
 }
@@ -108,7 +86,7 @@ div.icon.counter span.status {
 #door_update.open span.icon {
   background-image: url('../images/icons/error.png') !important;
 }
-
+/* End Door indicator */
 
 /* Lights part */
 #environment .light_bulb,
@@ -151,6 +129,4 @@ div.icon.counter span.status {
 #environment #env_heater div.animation .flame3{
   background-image: url('../images/heater/flame3.png');
 }
-
-
 /* End heater part */

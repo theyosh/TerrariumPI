@@ -2,7 +2,6 @@ div.power {
   width: 10em;
   float:left;
   position: relative;
-/*  overflow: hidden;*/
 }
 div.power.on div.light_bulb,
 div.power.off div.light_bulb {
@@ -19,11 +18,9 @@ div.power.on div.light_bulb span {
   margin: 5em 40%;
   position: absolute;
 }
-
 div.power.off div.light_bulb span {
   display: none;
 }
-
 div.power.on div.switch,
 div.power.off div.switch {
   height: 9em;
@@ -36,7 +33,6 @@ div.power.off div.switch {
 div.power.off div.switch {
   background-image: url('../images/icons/switches/switch_power_off.png');
 }
-
 div.power span.name {
   color: black;
   display: block;
@@ -53,7 +49,6 @@ div.power span.name {
   -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
   transform: rotate(90deg);
 }
-
 div.power span.name svg {
   height: 1.3em;
   width: 11em;

@@ -5,7 +5,6 @@
 .webcam {
   width: 33%;
   height: 280px;
-
   float: left;
   position: relative;
   background-color: black !important;

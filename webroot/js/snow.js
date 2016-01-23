@@ -1,10 +1,11 @@
 // Source: http://jakearchibald.github.io/canvas-snow/5.html
-
 (function() {
-  var requestAnimationFrame = window.requestAnimationFrame       ||
-                              window.webkitRequestAnimationFrame ||
-                              window.mozRequestAnimationFrame    ||
-                              function(func) { setTimeout(func, 17); };
+  var requestAnimationFrame = window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    function(func) {
+      setTimeout(func, 17);
+    };
 
   var html = document.documentElement;
 
@@ -30,8 +31,6 @@
 
     // side-to-side movement
     this.sideVel = (0.5 - Math.random()) * this.vel;
-
-
     return this;
   };
 
@@ -45,7 +44,7 @@
     var windowResized;
     var activeFlakes = [];
     var snowflakesPerPixelPerSecond = 0.05;
-    var PIx2 = Math.PI*2;
+    var PIx2 = Math.PI * 2;
     var assumedFps = 60;
     var settlePoint;
     var snowflakePool = [];
@@ -71,12 +70,13 @@
       }
 
       for (var i = 0; i < range; i++) {
-        newY = flake.y - (size * Math.cos( (i/range) * Math.PI - (Math.PI/2) ));
+        newY = flake.y - (size * Math.cos((i / range) * Math.PI - (Math.PI / 2)));
         settlePoint[i + xStart] = Math.min(settlePoint[i + xStart] || Infinity, newY);
       }
     }
 
     var flakesToCreate = 0;
+
     function frame() {
       flakesToCreate += (snowflakesPerPixelPerSecond / assumedFps) * canvas.width;
       var flakesThisFrame = Math.floor(flakesToCreate);
@@ -86,18 +86,16 @@
       if (windowResized) {
         resizeCanvas();
         windowResized = false;
-      }
-      else {
+      } else {
         context.clearRect(0, 0, canvas.width, canvas.height);
       }
 
       // add new flake?
-      while ( flakesThisFrame-- ) {
+      while (flakesThisFrame--) {
         if (snowflakePool.length) {
-          activeFlakes.push( snowflakePool.pop().reset(canvas.width) );
-        }
-        else {
-          activeFlakes.push( new Snowflake(canvas.width) );
+          activeFlakes.push(snowflakePool.pop().reset(canvas.width));
+        } else {
+          activeFlakes.push(new Snowflake(canvas.width));
         }
       }
 
@@ -116,7 +114,7 @@
           if (flake.alpha > 0.8) {
             updateSettlePoints(flake);
           }
-          settleContext.fillStyle='rgba(255, 255, 255, ' + flake.alpha + ')';
+          settleContext.fillStyle = 'rgba(255, 255, 255, ' + flake.alpha + ')';
           settleContext.beginPath();
           settleContext.arc(flake.x, flake.y, flake.size, 0, PIx2, true);
           settleContext.closePath();
@@ -125,7 +123,7 @@
         }
 
         // render to canvas
-        context.fillStyle='rgba(255, 255, 255, ' + flake.alpha + ')';
+        context.fillStyle = 'rgba(255, 255, 255, ' + flake.alpha + ')';
         context.beginPath();
         context.arc(flake.x, flake.y, flake.size, 0, PIx2, true);
         context.closePath();

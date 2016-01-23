@@ -102,7 +102,6 @@ function showLoginForm() {
       }
       loginWindow.jqxWindow('destroy');
     });
-
   }
 }
 
@@ -339,7 +338,6 @@ function showEditForm(title, fields, post, callback) {
       fieldsCanvas.append(data.label + ':');
     }
     var formElement = null;
-
     var fieldType = 'text';
     switch (data.type) {
       case 'radio':
@@ -538,14 +536,31 @@ function timeFormat(duration) {
   return value.substr(0, value.trim().length - 1);
 }
 
-
 var powerHistoryData = {};
 function showPowerHistoryGraph(id, title, type) {
-  powerHistoryData = {'datafields':[{name: 'timestamp',type: 'date'},{name: 'sRPI', type:'int'}],'dataLines':[ {dataField: 'sRPI', displayText: 'Raspberry PI'}]};
+  powerHistoryData = {
+    'datafields': [{
+      name: 'timestamp',
+      type: 'date'
+    }, {
+      name: 'sRPI',
+      type: 'int'
+    }],
+    'dataLines': [{
+      dataField: 'sRPI',
+      displayText: 'Raspberry PI'
+    }]
+  };
   jQuery.get('/switch/list', function(data) {
     jQuery.each(data.value, function(index, obj) {
-      powerHistoryData['dataLines'].push({dataField: 's' + obj.id, displayText: obj.name});
-      powerHistoryData['datafields'].push({name: 's' + obj.id, type: 'int'});
+      powerHistoryData['dataLines'].push({
+        dataField: 's' + obj.id,
+        displayText: obj.name
+      });
+      powerHistoryData['datafields'].push({
+        name: 's' + obj.id,
+        type: 'int'
+      });
     });
     showGraph(id, title, type);
   });
@@ -657,7 +672,7 @@ function showGraph(id, title, type) {
 }
 
 function loadGraph(id, title, type, period) {
-  $('#rrdgraph').html('<br /><br /><br />Loading...');
+  jQuery('#rrdgraph').html('<br /><br /><br />Loading...');
 
   var graphTitle = (type == 'temperature' ? 'Temperature' : 'Humidity') + ' sensor ' + title;
   var graphDescription = (type == 'temperature' ? 'Temperature in degrees' : 'Humidity in percentage');
@@ -678,7 +693,7 @@ function loadGraph(id, title, type, period) {
     lineWidth: 2
   }];
 
-  if (jQuery.inArray(type,['temperature','humidity','environment_humidity']) > -1) { // Exclude switches
+  if (jQuery.inArray(type, ['temperature', 'humidity', 'environment_humidity']) > -1) { // Exclude switches
     dataLines.push({
       dataField: 'high',
       displayText: 'High ' + (type == 'temperature' ? 'temperature' : 'humidity'),
@@ -689,7 +704,7 @@ function loadGraph(id, title, type, period) {
   }
 
   // Exlude powerswitches and weather temperature (Nasty hack)
-  if (jQuery.inArray(type,['temperature','humidity','environment_humidity']) > -1 && title.indexOf('Weather in city:') == -1) {
+  if (jQuery.inArray(type, ['temperature', 'humidity', 'environment_humidity']) > -1 && title.indexOf('Weather in city:') == -1) {
     dataLines.push({
       dataField: 'limitlow',
       displayText: 'Limit low ' + (type == 'temperature' ? 'temperature' : 'humidity'),
@@ -717,25 +732,24 @@ function loadGraph(id, title, type, period) {
   var source = {
     datatype: "json",
     datafields: [{
-        name: 'high',
-        type: 'float'
-      }, {
-        name: 'limithigh',
-        type: 'float'
-      }, {
-        name: 'timestamp',
-        type: 'date'
-      }, {
-        name: 'current',
-        type: 'float'
-      }, {
-        name: 'low',
-        type: 'float'
-      }, {
-        name: 'limitlow',
-        type: 'float'
-      },
-    ],
+      name: 'high',
+      type: 'float'
+    }, {
+      name: 'limithigh',
+      type: 'float'
+    }, {
+      name: 'timestamp',
+      type: 'date'
+    }, {
+      name: 'current',
+      type: 'float'
+    }, {
+      name: 'low',
+      type: 'float'
+    }, {
+      name: 'limitlow',
+      type: 'float'
+    }, ],
     url: '/rrd/' + id + '/get/' + period,
     root: 'value'
   };
@@ -785,7 +799,7 @@ function loadGraph(id, title, type, period) {
     source['url'] = '/system/wattage/graph';
   }
 
-  var dataAdapter = new $.jqx.dataAdapter(source, {
+  var dataAdapter = new jQuery.jqx.dataAdapter(source, {
     autoBind: true,
     async: false,
     downloadComplete: function() {},
@@ -819,7 +833,7 @@ function loadGraph(id, title, type, period) {
       type: 'date',
       baseUnit: baseUnitValue,
       dataField: 'timestamp',
-//      text: 'Time',
+      //      text: 'Time',
       textRotationAngle: -45,
       textRotationPoint: 'topright',
       textOffset: {
@@ -839,7 +853,7 @@ function loadGraph(id, title, type, period) {
       seriesGapPercent: 0,
       toolTipFormatFunction: function(value, itemIndex, serie, group, xAxisValue, xAxis) {
         return moment(xAxisValue).format('dddd D MMMM YYYY [at] HH:mm') + '<br />' +
-               serie.displayText + ': ' + value + graphToolTipsuffix;
+          serie.displayText + ': ' + value + graphToolTipsuffix;
       },
       valueAxis: {
         displayValueAxis: true,
