@@ -1,5 +1,6 @@
 var environmentTimerTimeOut = 30; // In seconds
 var environment_counter = null;
+var timer = null;
 
 function loadEnvironment() {
   loadEnvironmentDashboard();
@@ -228,8 +229,6 @@ function updateEnvironment(runonce) {
   }
 }
 
-var timer = null;
-
 function environmentCounter() {
   var currentvalue = environment_counter.config.value;
   currentvalue--;
@@ -257,7 +256,6 @@ function animateLights() {
 
 function animateHeater() {
   if (!jQuery('#env_heater div.animation').hasClass('inactive')) {
-
     var frame = jQuery('#env_heater div.animation').attr('frame');
     if (frame == undefined) {
       // Initialize
@@ -283,7 +281,6 @@ function loadEnvironmentLights(data) {
   jQuery('#environment #env_lights .inactive:not(.options)').removeClass('inactive');
   jQuery('#environment #env_lights .trigger').toggleClass('inactive', data.active != true);
   jQuery('#environment #env_lights .trigger').attr('title', 'Trigger is ' + (data.active == true ? 'active' : 'disabled'));
-
   jQuery('#environment #env_lights .enabled').toggleClass('on', data.enabled == true);
   jQuery('#environment #env_lights .enabled').toggleClass('off', data.enabled != true);
   jQuery('#environment #env_lights .enabled').attr('title', 'Lights control is ' + (data.enabled ? 'enabled' : 'disabled'));
@@ -449,9 +446,7 @@ function showEnvironmentHeaterSettingsForm() {
     url: '/environment/heater/settings',
     dataType: 'json'
   }).done(function(result) {
-
     var fields = [];
-
     fields.push({
       'name': 'id',
       'type': 'hidden',
