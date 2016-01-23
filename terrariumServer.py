@@ -299,12 +299,18 @@ class terrariumServer:
     return {'current': current, 'max': max}
 
   def __getWattageHistory(self,period = 'day'):
+    interval = 5 * 60 # 300 seconds or 5 minutes
     total_wattage = {}
     switches = []
 
     for switchid,switch in self.__powerswitches.iteritems():
       switches.append('s' + switch.getID())
       for timestamp,wattage_data in (switch.get_wattage_usage()).iteritems():
+        # Shift to every 5 minutes
+        timestamp = int(timestamp)
+        timestamp -= timestamp % interval
+        timestamp = str(timestamp)
+
         if timestamp not in total_wattage:
           total_wattage[timestamp] = {}
           total_wattage[timestamp]['timestamp'] = int(timestamp) * 1000
@@ -324,7 +330,7 @@ class terrariumServer:
         total_wattage[loopstamp] = dict(data)
         total_wattage[loopstamp]['timestamp'] = loopstamp * 1000
 
-      loopstamp += 5 * 60
+      loopstamp += interval
 
     returndata = []
     laststamp = 0
@@ -344,8 +350,6 @@ class terrariumServer:
       returndata.append(data)
 
     return returndata
-#    return sorted(total_wattage.items(), key=operator.itemgetter(0))
-#    return total_wattage
 
   def __getWaterflow(self):
     current = 0

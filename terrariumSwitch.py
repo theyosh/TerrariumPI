@@ -4,6 +4,7 @@ from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
 from hashlib import md5
 from datetime import datetime, timedelta
 from time import sleep
+import thread
 
 import logging
 terrarium_log = logging.getLogger('root')
@@ -34,8 +35,12 @@ class terrariumSwitch:
     self.__waterflow      = int(switchConfig['waterflow'] if 'waterflow' in switchConfig and switchConfig['waterflow'] else 0)
 
     self.__state          = -1
-    self.__lastChange     = datetime.now()
     self.__lastUpdate     = datetime.fromtimestamp(0)
+
+
+
+    self.__lastUsageChange     = datetime.now()
+    self.__usageUpdateTimeout = 300
 
     # Serial device does not have an status indicator
     # Force to 'out' state
@@ -43,6 +48,7 @@ class terrariumSwitch:
       self.off()
 
     self.update()
+    thread.start_new_thread(self.__usage_updater, ())
 
   def __testBit(self,int_type, offset):
     mask = 1 << offset
@@ -85,7 +91,7 @@ class terrariumSwitch:
               device.close()
 
           self.__lastUpdate = datetime.now()
-          self.__wattage_stats(True)
+          self.__update_usage_stats()
           self.__state = True if 'on' == state else False
           terrarium_log.info('Switched switch %s(%s) from %s',self.getName(),self.getID(),('off to on' if 'on' == state else 'on to off')) 
           newstate = 1
@@ -101,40 +107,40 @@ class terrariumSwitch:
 
     return newstate
 
-  def __wattage_stats(self,force=False):
+  def __update_usage_stats(self):
     now = datetime.now()
-    last_check = (now - self.__lastChange).total_seconds()
-    if force or last_check >= 300:
+    logfile = 'log/wattage.' + self.getID() + '.log.' + now.strftime('%d-%m-%Y')
+    duration = (now - self.__lastUsageChange).total_seconds()
+    with open(logfile, 'a') as file:
+      file.write(now.strftime('%s') + ',' + now.strftime('%d-%m-%Y %H:%M:%S') + ',' + str(self.getState()) + ',' + str(duration) + ',' + str(self.getCurrentWattage()) + ',' + str(self.getCurrentWaterflow()) + '\n')
 
-      logfile = 'log/wattage.' + self.getID() + '.log.' + now.strftime('%d-%m-%Y')
-      duration = (now - self.__lastChange).total_seconds()
-      with open(logfile, 'a') as file:
-        file.write(now.strftime('%s') + ',' + now.strftime('%d-%m-%Y %H:%M:%S') + ',' + str(self.getState()) + ',' + str(duration) + ',' + str(self.getCurrentWattage()) + ',' + str(self.getCurrentWaterflow()) + '\n')
+    self.__lastUsageChange = now
 
-      self.__lastChange = now
+
+  def __usage_updater(self):
+    while True:
+      terrarium_log.debug('Update wattage usage for switch %s ...', self.getName())
+      self.__update_usage_stats()
+
+      now = datetime.now()
+      waittime = self.__usageUpdateTimeout - (int(now.strftime('%s')) % self.__usageUpdateTimeout)
+      sleep(int(waittime))
 
   def get_wattage_usage(self,period = 'day'):
-    timeinterval = 300
     total_wattage = {}
 
     logfile = 'log/wattage.' + self.getID() + '.log.' + (datetime.now()).strftime('%d-%m-%Y')
-#    print 'open file: ' + logfile
     with open(logfile, 'rb') as file:
       for line in file.readlines():
-#        line = file.readline().split(',')
-#        print line
         line = line.split(',')
         if int(line[2]) == 1 and int(float(line[3])) > 0:
           endtime   = datetime.fromtimestamp(float(line[0]))
-          starttime = endtime - timedelta(seconds=int(float(line[3])))
-          logtime   = starttime - timedelta(seconds=(int(starttime.strftime('%s')) % timeinterval))
-
+#          starttime = endtime - timedelta(seconds=int(float(line[3])))
+#          logtime   = starttime + timedelta(seconds=(int(starttime.strftime('%s')) % timeinterval))
+          logtime = endtime
           total_wattage[logtime.strftime('%s')] = int(line[4])
-#          total_wattage[logtime.strftime('%s')][label] = int(line[4])
 
-#    print total_wattage
     return total_wattage
-
 
   def __setLogging(self,on):
     self.__loggingActive = bool(on)
@@ -194,7 +200,7 @@ class terrariumSwitch:
     return self.__name
 
   def update(self):
-    self.__wattage_stats()
+    #self.__wattage_stats()
     now = datetime.now()
     if now - self.__lastUpdate >= self.__cacheTimeOut:
       if self.getDeviceLock():

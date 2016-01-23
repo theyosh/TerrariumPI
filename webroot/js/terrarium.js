@@ -661,6 +661,7 @@ function loadGraph(id, title, type, period) {
 
   var graphTitle = (type == 'temperature' ? 'Temperature' : 'Humidity') + ' sensor ' + title;
   var graphDescription = (type == 'temperature' ? 'Temperature in degrees' : 'Humidity in percentage');
+  var graphToolTipsuffix = (type == 'temperature' ? 'C' : '%');
   var graphType = 'spline';
 
   var dataLines = [{
@@ -778,6 +779,7 @@ function loadGraph(id, title, type, period) {
     graphTitle = 'Power usage for day ' + moment().format('ll');
     graphType = 'stackedcolumn';
     graphDescription = 'Power usage in Watt';
+    graphToolTipsuffix = 'W';
     source['datafields'] = powerHistoryData['datafields'];
     dataLines = powerHistoryData['dataLines'];
     source['url'] = '/system/wattage/graph';
@@ -817,20 +819,14 @@ function loadGraph(id, title, type, period) {
       type: 'date',
       baseUnit: baseUnitValue,
       dataField: 'timestamp',
-      text: 'Time',
+//      text: 'Time',
       textRotationAngle: -45,
       textRotationPoint: 'topright',
       textOffset: {
         x: 0,
         y: (baseUnitValue == 'minute' ? -20 : -35)
       },
-      formatFunction: function(value) {
-        return $.jqx.dataFormat.formatdate(new Date(value), dateFormatxAxis);
-      },
-      toolTipFormatFunction: function(value) {
-        return '<br />' + $.jqx.dataFormat.formatdate(value, 'dd-MMM-yyyy HH:mm') + '<br />Value ';
-      },
-
+      dateFormat: dateFormatxAxis,
       showTickMarks: true,
       tickMarksColor: '#E0E0E0',
       unitInterval: unitInterval,
@@ -841,6 +837,10 @@ function loadGraph(id, title, type, period) {
       type: graphType,
       columnsGapPercent: 0,
       seriesGapPercent: 0,
+      toolTipFormatFunction: function(value, itemIndex, serie, group, xAxisValue, xAxis) {
+        return moment(xAxisValue).format('dddd D MMMM YYYY [at] HH:mm') + '<br />' +
+               serie.displayText + ': ' + value + graphToolTipsuffix;
+      },
       valueAxis: {
         displayValueAxis: true,
         description: graphDescription,
