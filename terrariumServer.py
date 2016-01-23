@@ -52,7 +52,7 @@ class terrariumServer:
 
     self.__app.route('/', method="GET", callback=self.__staticfile)
     self.__app.route('/index.html', method="GET", callback=self.__staticfile)
-    self.__app.route('/<filename:re:.*\.(png|jpg|gif|js|css|ico|svg|html|rrd)>', method="GET", callback=self.__staticfile)
+    self.__app.route('/<filename:re:.*\.(png|jpg|gif|js|css|ico|svg|html|rrd|txt)>', method="GET", callback=self.__staticfile)
 
     self.__app.route('/rrd/<rrdid>/<action:re:(get)>/<period:re:(day|week|month|year)>', method="GET", callback=self.__statsinfo)
 
