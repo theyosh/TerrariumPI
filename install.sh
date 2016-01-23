@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Basic config:
 raspi-config
 
@@ -26,10 +28,6 @@ pip install pylibftdi
 echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", GROUP="users", MODE="0660"' > /etc/udev/rules.d/99-libftdi.rules
 echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", GROUP="users", MODE="0660"' >> /etc/udev/rules.d/99-libftdi.rules
 
-# Install extra softwre for MJPEG-Streamer
-# Enable RPI cam with raspi-config tool
-aptitude -y install libjpeg-dev cmake
-
 # Install 1 Wire stuff
 aptitude -y install i2c-tools owfs ow-shell
 sed -i.bak 's/^server: FAKE = DS18S20,DS2405/#server: FAKE = DS18S20,DS2405/' /etc/owfs.conf
@@ -39,17 +37,6 @@ sed -i.bak 's/^blacklist i2c-bcm2708/#blacklist i2c-bcm2708/' /etc/modprobe.d/ra
 echo "i2c-dev" >> /etc/modules
 modprobe i2c-bcm2708
 modprobe i2c-dev
-
-#RPI Cam streaming
-cd  ..
-git clone https://github.com/jacksonliam/mjpg-streamer.git rpicam
-cd rpicam/mjpg-streamer-experimental/
-make clean all
-cd ..
-cp ../terrarium/start_webcam.sh start.sh
-chmod +x start.sh
-
-chown pi rpicam/* -R
 
 # Remove unneeded OWS services
 update-rc.d -f owftpd remove
