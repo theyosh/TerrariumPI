@@ -676,12 +676,12 @@ function loadGraph(id, title, type, period) {
 
   var graphTitle = (type == 'temperature' ? 'Temperature' : 'Humidity') + ' sensor ' + title;
   var graphDescription = (type == 'temperature' ? 'Temperature in degrees' : 'Humidity in percentage');
-  var graphToolTipsuffix = (type == 'temperature' ? 'C' : '%');
+  var graphToolTipsuffix = (type == 'temperature' ? '°C' : '%');
   var graphType = 'spline';
 
   var dataLines = [{
     dataField: 'current',
-    displayText: 'Current ' + (type == 'temperature' ? 'temperature' : 'humidity'),
+    displayText: 'Average ' + (type == 'temperature' ? 'temperature' : 'humidity'),
     lineColor: 'orange',
     fillColor: 'orange',
     lineWidth: 2
@@ -725,12 +725,13 @@ function loadGraph(id, title, type, period) {
     dataLines[0].displayText = 'Switch On';
     dataLines[1].displayText = 'Switch Off';
     graphTitle = 'Power switch ' + title;
-  } else if (title.indexOf('Weather in city:') == -1) {
-    graphTitle = 'Weater ' + title;
+    graphToolTipsuffix = '';
+  } else if (title.indexOf('Weather in city:') != -1) {
+    graphTitle = title.replace('in city','temperature in city');
   }
 
   var source = {
-    datatype: "json",
+    datatype: 'json',
     datafields: [{
       name: 'high',
       type: 'float'
@@ -853,7 +854,7 @@ function loadGraph(id, title, type, period) {
       seriesGapPercent: 0,
       toolTipFormatFunction: function(value, itemIndex, serie, group, xAxisValue, xAxis) {
         return moment(xAxisValue).format('dddd D MMMM YYYY [at] HH:mm') + '<br />' +
-          serie.displayText + ': ' + value + graphToolTipsuffix;
+          serie.displayText + ': ' + (value + '').replace('.',',') + graphToolTipsuffix;
       },
       valueAxis: {
         displayValueAxis: true,
