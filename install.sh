@@ -6,7 +6,7 @@ raspi-config
 # Clean up
 aptitude -y remove wolfram-engine sonic-pi oracle-java8-jdk desktop-base gnome-desktop3-data libgnome-desktop-3-10 epiphany-browser-data epiphany-browser nuscratch scratch wiringpi
 apt-get -y remove "^libreoffice.*"
-apt-get -y auto-remove
+apt-get -y autoremove
 
 # Install required packages to get the terrarium software running
 aptitude -y update
