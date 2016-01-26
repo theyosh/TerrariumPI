@@ -40,6 +40,7 @@ then
          message "To manny error (${RESTART_ATTEMPTS}). Final result is reboting!!!"
          sync
          reboot
+         exit 0
       fi
 
     else
