@@ -51,7 +51,7 @@ function loadWeatherLandScape() {
             'label': 'XML Url',
             'help': 'Enter the full XML url from yo.nr'
           });
-          showEditForm('Weather xml url', fields, '/weather/save', 'updateWeather()');
+          showEditForm('Weather xml url', fields, '/weather/set', 'updateWeather()');
         }).fail(function() {});
       }));
     }

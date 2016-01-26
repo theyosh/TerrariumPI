@@ -60,7 +60,7 @@ class terrariumServer:
     # Read only urls
     self.__app.route('/weather/<action:re:(all|sunrise|sunset|city|country|temperature|lastupdate|credits|day|night)>', method="GET", callback=self.__weatherinfo)
     # Edit urls (needs authentication)
-    self.__app.route('/weather/<action:re:(save)>', method="POST", callback=self.__weatherinfo,apply=auth_basic(self.__check))
+    self.__app.route('/weather/<action:re:(set)>', method="POST", callback=self.__weatherinfo,apply=auth_basic(self.__check))
 
     # Sensor urls
     # Read only urls
@@ -614,7 +614,7 @@ class terrariumServer:
                                   'indicator'    : self.__weather.getIndicator()
                                   }
               }
-    elif'set' == action:
+    elif 'set' == action:
       if request.forms.get('xmlsource'):
         self.__weather.setXMLUrl(request.forms.get('xmlsource'))
       if request.forms.get('limit_max'):
