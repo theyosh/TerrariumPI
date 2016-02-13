@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id='Description'>jqxListBox Fluid Size Example. The width and height of the ListBox in this demo are in Percentages.</title>
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> 
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            var source = [
+                "Affogato",
+                "Americano",
+                "Bicerin",
+                "Breve",
+                "Café Bombón",
+                "Café au lait",
+                "Caffé Corretto",
+                "Café Crema",
+                "Caffé Latte",
+                "Caffé macchiato",
+                "Café mélange",
+                "Coffee milk",
+                "Cafe mocha",
+                "Cappuccino",
+                "Carajillo",
+                "Cortado",
+                "Cuban espresso",
+                "Espresso",
+                "Eiskaffee",
+                "The Flat White",
+                "Frappuccino",
+                "Galao",
+                "Greek frappé coffee",
+                "Iced Coffee﻿",
+                "Indian filter coffee",
+                "Instant coffee",
+                "Irish coffee",
+                "Liqueur coffee"
+            ];
+
+            // Create a jqxListBox
+            $scope.listBoxSettings = { selectedIndex: 3, source: source, width: '30%', height: '35%' };
+        });
+    </script>
+</head>
+<style>
+    body, html {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+    }
+</style>
+<body ng-controller="demoController">
+    <jqx-list-box jqx-settings="listBoxSettings">
+    </jqx-list-box>
+</body>
+</html>

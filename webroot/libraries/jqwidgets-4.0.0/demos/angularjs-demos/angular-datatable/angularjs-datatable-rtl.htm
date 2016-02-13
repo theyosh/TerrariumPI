@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>To switch to a right-to-left representation, just enable a single property - "rtl". When this property is on, the layout of AngularJS DataTable's UI elements is reversed.</title>
+    <meta name="description" content="Right-To-Left Layout - AngularJS Grid | jqwidgets">
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../../sampledata/generatedata.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]); 
+        demoApp.controller("demoController", function ($scope) {           
+            $scope.gridSettings =
+            {
+                width: 850,
+                source: new $.jqx.dataAdapter({
+                    localData: generateData(200),
+                    dataType: "array",
+                    datafields:
+                    [
+                        { name: 'firstname', type: 'string' },
+                        { name: 'lastname', type: 'string' },
+                        { name: 'productname', type: 'string' },
+                        { name: 'quantity', type: 'number' },
+                        { name: 'price', type: 'number' },
+                        { name: 'total', type: 'number' }
+                    ]
+                }),
+                pageable: true,
+                altRows: true,
+                sortable: true,
+                rtl: true,
+                columns: [
+                  { text: 'Name', dataField: 'firstname', align: 'right', cellsAlign: 'right', width: 150 },
+                  { text: 'Last Name', dataField: 'lastname', align: 'right', cellsAlign: 'right', width: 150 },
+                  { text: 'Product', editable: false, dataField: 'productname', align: 'right', cellsAlign: 'right', width: 180 },
+                  { text: 'Quantity', dataField: 'quantity', width: 180, cellsAlign: 'left', align: 'left' },
+                  { text: 'Unit Price', dataField: 'price', width: 180, cellsAlign: 'left', align: 'left' },
+                  { text: 'Total', dataField: 'total', width: 180, cellsAlign: 'left', align: 'left', cellsformat: 'c2' }
+                ]
+            }
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+    <jqx-data-table jqx-settings="gridSettings"></jqx-data-table>
+</body>
+</html>

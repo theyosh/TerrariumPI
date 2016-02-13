@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id="Description">jqxButtonGroup directive for AngularJS</title>
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttongroup.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+
+        demoApp.controller("demoController", function ($scope) {
+            $scope.buttonGroupMode = 'default';
+            $scope.clickedButton = "";
+
+            $scope.checkboxMode = function()
+            {
+                $scope.buttonGroupMode = 'checkbox';
+            };
+
+            $scope.defaultMode = function()
+            {
+                $scope.buttonGroupMode = 'default';
+            };
+
+            $scope.radioMode = function()
+            {
+                $scope.buttonGroupMode = 'radio';
+            };
+
+            $scope.buttonClick = function (event) {
+                var clickedButton = event.args.button;
+                $scope.clickedButton = clickedButton.text();
+            };
+        });
+    </script>
+</head>
+<body>
+    <div ng-controller="demoController">
+        <jqx-button-group jqx-on-buttonclick="buttonClick(event)" jqx-mode="buttonGroupMode">
+            <button style="padding:4px 16px;">Left</button>
+            <button style="padding:4px 16px;">Center</button>
+            <button style="padding:4px 16px;">Right</button>
+        </jqx-button-group>
+        <div style="margin-top: 10px;">
+            <h4>
+                Modes</h4>
+            <jqx-radio-button jqx-on-checked="defaultMode()" jqx-checked="true" style="margin: 3px;">
+                Default</jqx-radio-button>
+            <jqx-radio-button jqx-on-checked="radioMode()" style="margin: 3px;">
+                RadioButtons</jqx-radio-button>
+            <jqx-radio-button jqx-on-checked="checkboxMode()" style="margin: 3px;">
+                CheckBoxes</jqx-radio-button>
+        </div>
+        <div id="eventsLog" style="margin-top: 10px;">
+            Clicked: {{clickedButton}}
+        </div>
+    </div>
+</body>
+</html>

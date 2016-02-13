@@ -1,0 +1,693 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../Styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="jQuery, Button, Toggle Button, Repeat Button, Link Button, Help Documentation" />
+    <meta name="description" content="This page represents the help documentation of the jqxButton, jqxToggleButton, jqxRepeatButton and jqxLinkButton widgets." />
+    <title>jqxButton, jqxToggleButton, jqxRepeatButton and jqxLinkButton API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+            <div id='buttongroup"'>
+                <div style="margin: 5px;" id="properties4">
+                    <h2 class="documentation-top-header">Properties</h2>
+                    <table class="documentation-table">
+                        <tr>
+                            <th>Name
+                            </th>
+                            <th>Type
+                            </th>
+                            <th>Default
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span33'>disabled</span>
+                            </td>
+                            <td>
+                                <span>Boolean</span>
+                            </td>
+                            <td>false
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Enables or disables the jqxButtonGroup.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>disabled</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxButtonGroup').jqxButtonGroup({disabled: false });</code></pre>
+                                    <p>
+                                        Get the <code>disabled</code> property.
+                                    </p>
+                                    <pre><code>var disabled = $('#jqxButtonGroup').jqxButtonGroup('disabled');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/9zNH5/">disabled is set to true</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span35'>enableHover</span>
+                            </td>
+                            <td>
+                                <span>Boolean</span>
+                            </td>
+                            <td>false
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Enables or disabled the highlight state.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>enableHover</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxButtonGroup').jqxButtonGroup({enableHover: true });</code></pre>
+                                    <p>
+                                        Get the <code>enableHover</code> property.
+                                    </p>
+                                    <pre><code>var enableHover = $('#jqxButtonGroup').jqxButtonGroup('enableHover');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/kZuup/">enableHover is set to false</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span34'>mode</span>
+                            </td>
+                            <td>
+                                <span>String</span>
+                            </td>
+                            <td>'default'
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets the jqxButtonGroup's mode.
+                                    </p>
+                                    <b>Possible Values:</b>
+                                    <br />
+                                    <pre><code>'checkbox'</code></pre>
+                                    <pre><code>'radio'</code></pre>
+                                    <pre><code>'default'</code></pre>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>mode</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxButtonGroup').jqxButtonGroup({mode: 'radio' });</code></pre>
+                                    <p>
+                                        Get the <code>mode</code> property.
+                                    </p>
+                                    <pre><code>var mode = $('#jqxButtonGroup').jqxButtonGroup('mode');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/zMkHN/">mode is set to 'radio'</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span36'>rtl</span>
+                            </td>
+                            <td>
+                                <span>Boolean</span>
+                            </td>
+                            <td>false
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>Sets or gets a value indicating whether widget's elements are aligned to support locales using right-to-left fonts.</p>
+                                    <h4>Code example</h4>
+                                    <p>
+                                        Set the <code>rtl</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxButtonGroup').jqxButtonGroup({rtl : true}); </code></pre>
+                                    <p>
+                                        Get the <code>rtl</code> property.
+                                    </p>
+                                    <pre><code>var rtl = $('#jqxButtonGroup').jqxButtonGroup('rtl'); </code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/psfcr/">rtl is set to true</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span38'>theme</span>
+                            </td>
+                            <td>
+                                <span>String</span>
+                            </td>
+                            <td>''
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets the widget's theme.
+                                    </p>
+                                    jQWidgets uses a pair of css files - jqx.base.css and jqx.[theme name].css. The base stylesheet creates the styles related to the widget's layout like margin, padding, border-width, position. The second css file applies the widget's colors and backgrounds. The jqx.base.css should be included before the second CSS file.
+                                                                                            In order to set a theme, you need to do the following:
+                                                                                            <ul>
+                                                                                                <li>Include the theme's CSS file after jqx.base.css.<br />
+                                                                                                    The following code example adds the 'energyblue' theme.
+                                                                                                    <pre><code>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.base.css&quot; type=&quot;text/css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.energyblue.css&quot; type=&quot;text/css&quot; /&gt;
+</code></pre>
+</code></pre>
+                                                                                                </li>
+                                                                                                <li>Set the widget's theme property to 'energyblue' when you initialize it.
+                                                                                                </li>
+                                                                                            </ul>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/ECGMZ/">theme is set to 'energyblue'</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <h2 class="documentation-top-header">Events</h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span41'>buttonclick</span>
+                            </td>
+                            <td>
+                                <span>Event</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        This event is triggered when a button is clicked.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Bind to the<code> buttonclick</code> event by type: jqxButtonGroup.
+                                    </p>
+                                    <pre><code>$('#jqxButtonGroup').on('buttonclick', function () { // Some code here. }); </code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/LDNJw/">Bind to the buttonclick event by type: jqxButtonGroup.</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span39'>selected</span>
+                            </td>
+                            <td>
+                                <span>Event</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        This event is triggered when a button is selected - in checkboxes or radio buttons mode.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Bind to the <code>selected</code> event by type: jqxButtonGroup.
+                                    </p>
+                                    <pre><code>$('#jqxButtonGroup').on('selected', function () { // Some code here. }); </code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/EgyGK/">Bind to the selected event by type: jqxButtonGroup.</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span40'>unselected</span>
+                            </td>
+                            <td>
+                                <span>Event</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        This event is triggered when a button is unselected - in checkbox or radio buttons mode.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Bind to the <code>unselected</code> event by type: jqxButtonGroup.
+                                    </p>
+                                    <pre><code>$('#jqxButtonGroup').on('unselected', function () { // Some code here. }); </code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/xchxP/">Bind to the unselected event by type: jqxButtonGroup.</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <h2 class="documentation-top-header">Methods</h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span45'>disableAt</span>
+                            </td>
+                            <td>
+                                <span>Method</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Disables a button at specific index.
+                                    </p>
+                                    <div class="methodArgs">
+                                        <table class="arguments">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Parameter</th>
+                                                    <th>Type</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                                <tr>
+                                                    <td><em>index</em></td>
+                                                    <td>Number</td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <strong>Return Value</strong><br />
+                                        <em>None</em>
+                                    </div>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Invoke the <code>disableAt</code> method.
+                                    </p>
+                                    <pre><code>$('#jqxButtonGroup').jqxButtonGroup('disableAt', 0); </code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/v8upb/">disables a button of the ButtonGroup</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span52'>disable</span>
+                            </td>
+                            <td>
+                                <span>Method</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Disables jqxButtonGroup.
+                                    </p>
+                                    <div class="methodArgs">
+                                        <table class="arguments">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Parameter</th>
+                                                    <th>Type</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                                <tr>
+                                                    <td><em>None</em></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <strong>Return Value</strong><br />
+                                        <em>None</em>
+                                    </div>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Invoke the <code>disable</code> method.
+                                    </p>
+                                    <pre><code>$('#jqxButtonGroup').jqxButtonGroup('disable'); </code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/EDFm7/">disables the ButtonGroup</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span55'>destroy</span>
+                            </td>
+                            <td>
+                                <span>Method</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Destroys the widget.
+                                    </p>
+                                    <div class="methodArgs">
+                                        <table class="arguments">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Parameter</th>
+                                                    <th>Type</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                                <tr>
+                                                    <td><em>None</em></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <strong>Return Value</strong><br />
+                                        <em>None</em>
+                                    </div>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Invoke the <code>destroy</code> method.
+                                    </p>
+                                    <pre><code>$('#jqxButtonGroup').jqxButtonGroup('destroy'); </code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/Gbmr4/">destroys the buttonGroup</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span48'>enable</span>
+                            </td>
+                            <td>
+                                <span>Method</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Enables the jqxButtonGroup.
+                                    </p>
+                                    <div class="methodArgs">
+                                        <table class="arguments">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Parameter</th>
+                                                    <th>Type</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                                <tr>
+                                                    <td><em>None</em></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <strong>Return Value</strong><br />
+                                        <em>None</em>
+                                    </div>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Invoke the <code>enable</code> method.
+                                    </p>
+                                    <pre><code>$('#jqxButtonGroup').jqxButtonGroup('enable'); </code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/S9TqH/">enables the ButtonGroup</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span44'>enableAt</span>
+                            </td>
+                            <td>
+                                <span>Method</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Enables a button at specific index.
+                                    </p>
+                                    <div class="methodArgs">
+                                        <table class="arguments">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Parameter</th>
+                                                    <th>Type</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                                <tr>
+                                                    <td><em>index</em></td>
+                                                    <td>Number</td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <strong>Return Value</strong><br />
+                                        <em>None</em>
+                                    </div>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Invoke the <code>enableAt</code> method.
+                                    </p>
+                                    <pre><code>$('#jqxButtonGroup').jqxButtonGroup('enableAt', 0); </code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/xwBkH/">enables a button of the ButtonGroup</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span53'>focus</span>
+                            </td>
+                            <td>
+                                <span>Method</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Focuses the widget.
+                                    </p>
+                                    <div class="methodArgs">
+                                        <table class="arguments">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Parameter</th>
+                                                    <th>Type</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                                <tr>
+                                                    <td><em>None</em></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <strong>Return Value</strong><br />
+                                        <em>None</em>
+                                    </div>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Invoke the <code>focus</code> method.
+                                    </p>
+                                    <pre><code>$('#jqxButtonGroup').jqxButtonGroup('focus'); </code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/BtBQb/">focus the buttonGroup</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span43'>getSelection</span>
+                            </td>
+                            <td>
+                                <span>Method</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Gets the index or indexes of the selected button(s).
+                                                                                                <br />
+                                        <ul>
+                                            <li>Returns undefined when the "mode" property is "default".
+                                            </li>
+                                            <li>Returns the index of the selected button when the "mode" property is set the "radio". For example, if the first button is selected, the retuned value is 0.
+                                            </li>
+                                            <li>Returns an array of the selected buttons when the "mode" property is set to "checkbox". For example, if you have a group of three buttons and the first and third buttons are selected, the returned value will be [0, 2]
+                                            </li>
+                                        </ul>
+                                    </p>
+                                    <div class="methodArgs">
+                                        <table class="arguments">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Parameter</th>
+                                                    <th>Type</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                                <tr>
+                                                    <td><em>None</em></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <strong>Return Value</strong><br />
+                                        <em>Number/Array</em>
+                                    </div>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Invoke the <code>getSelection</code> method.
+                                    </p>
+                                    <pre><code>var jqxButtonGroup = $('#jqxButtonGroup').jqxButtonGroup('getSelection'); </code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/dbkHp/">gets the selection of the ButtonGroup</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span54'>render</span>
+                            </td>
+                            <td>
+                                <span>Method</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Renders the widget.
+                                    </p>
+                                    <div class="methodArgs">
+                                        <table class="arguments">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Parameter</th>
+                                                    <th>Type</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                                <tr>
+                                                    <td><em>None</em></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <strong>Return Value</strong><br />
+                                        <em>None</em>
+                                    </div>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Invoke the <code>render</code> method.
+                                    </p>
+                                    <pre><code>$('#jqxButtonGroup').jqxButtonGroup('render'); </code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/fcpMh/">render the buttonGroup</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span42'>setSelection</span>
+                            </td>
+                            <td>
+                                <span>Method</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Selects a button in checkbox or radio buttons mode
+                                    </p>
+                                    <div class="methodArgs">
+                                        <table class="arguments">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Parameter</th>
+                                                    <th>Type</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                                <tr>
+                                                    <td><em>index</em></td>
+                                                    <td>Number</td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <strong>Return Value</strong><br />
+                                        <em>None</em>
+                                    </div>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Invoke the <code>setSelection</code> method. The index is zero-based. For selecting the first button, call the method with 0.
+                                    </p>
+                                    <pre><code>$('#jqxButtonGroup').jqxButtonGroup('setSelection', 0);</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/xzd7M/">sets the selection of the ButtonGroup</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+                    <br />
+                </div>
+            </div>
+</body>
+</html>

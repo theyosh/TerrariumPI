@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS Chart Custom x-Axis Range example</title>
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.core.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+
+            // prepare chart data as an array
+            var sampleData = [
+                    { Hour: 1, Sales: 135 },
+                    { Hour: 3, Sales: 145 },
+                    { Hour: 5, Sales: 90 },
+                    { Hour: 15, Sales: 66 },
+                    { Hour: 17, Sales: 43 },
+                    { Hour: 18, Sales: 122 },
+                    { Hour: 22, Sales: 59 },
+                    { Hour: 23, Sales: 70 }
+                ];
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "Sales per hour",
+                description: "",
+                enableAnimations: true,
+                showLegend: true,
+                padding: { left: 5, top: 5, right: 10, bottom: 5 },
+                titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                source: sampleData,
+                xAxis:
+                    {
+                        textRotationAngle: 0,
+                        dataField: 'Hour',
+                        formatFunction: function (value) {
+                            return value.toString();
+                        },
+
+                        showTickMarks: true,
+                        tickMarksStartInterval: 0,
+                        tickMarksInterval: 1,
+                        tickMarksColor: '#888888',
+                        unitInterval: 1,
+                        showGridLines: true,
+                        gridLinesStartInterval: 0,
+                        gridLinesInterval: 3,
+                        gridLinesColor: '#888888',
+                        axisSize: 'auto',
+                        minValue: 0,
+                        maxValue: 23,
+                        valuesOnTicks: false
+                    },
+                colorScheme: 'scheme02',
+                seriesGroups:
+                    [
+                        {
+                            type: 'column',
+                            valueAxis:
+                            {
+                                unitInterval: 50,
+                                minValue: 0,
+                                maxValue: 200,
+                                displayValueAxis: true,
+                                description: 'Sales ($)',
+                                axisSize: 'auto',
+                                tickMarksColor: '#888888'
+                            },
+                            series: [
+                                    { dataField: 'Sales', displayText: 'Sales', showLabels: true }
+                                ]
+                        }
+                    ]
+            };
+
+
+            $scope.chartSettings = settings;
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-chart id='chartContainer' jqx-settings="chartSettings" style="width: 850px; height: 500px"></jqx-chart>
+</body>
+</html>

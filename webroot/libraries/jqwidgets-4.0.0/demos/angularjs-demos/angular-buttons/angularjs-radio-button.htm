@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>With the AngularJS Radio Button, users make a choice among a set of
+        mutually exclusive, related options. Users can choose one and only one option.
+    </title>
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+     <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            $scope.log = "";
+            $scope.change = function (event) {
+                $scope.log = "Duration: " + $(event.target).text();
+            }
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <div style='font-family: Verdana Arial; font-size: 12px; width: 400px;'>
+        <h3>
+            House Contract</h3>
+        <jqx-radio-button jqx-on-change="change(event)" jqx-width="250" jqx-checked="true" jqx-height="25" style='margin-top: 10px;'>
+            12 Months Contract</jqx-radio-button>
+        <jqx-radio-button jqx-on-change="change(event)" jqx-width="250" jqx-height="25" style='margin-top: 10px;'>
+            <span>6 Months Contract</span></jqx-radio-button>
+        <jqx-radio-button jqx-on-change="change(event)" jqx-width="250" jqx-height="25" style='margin-top: 10px;'>
+            <span>3 Months Contract</span></jqx-radio-button>
+        <jqx-radio-button jqx-on-change="change(event)" jqx-disabled="true" jqx-width="250" jqx-height="25" style='margin-top: 10px;'>
+            <span>1 Month Contract</span></jqx-radio-button>
+        {{log}}
+    </div>
+</body>
+</html>

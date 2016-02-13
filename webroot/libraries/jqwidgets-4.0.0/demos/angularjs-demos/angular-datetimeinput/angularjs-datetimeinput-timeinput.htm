@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <meta name="keywords" content="AngularJS Calendar, Month Calendar, MonthCalendar, DateTimeInput, DateTimePicker, Date Picker" />
+    <meta name="description" content="Edit time values by setting the jqxDateTimeInput's formatString property to a time format like: 't', 'T' or any custom format.
+Set the showCalendarButton option to hide the calendar button." />
+    <title id='Description'>Edit time values by setting the jqxDateTimeInput's formatString property to a time format like: 't', 'T' or any custom format.
+Set the showCalendarButton option to hide the calendar button. 
+    </title>
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-date-time-input jqx-format-string="'T'" jqx-show-time-button="true" jqx-width="250" jqx-height="25" jqx-show-calendar-button="false"></jqx-date-time-input>
+</body>
+</html>

@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS Chart Bar Series Example</title>
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.core.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+
+            // prepare chart data
+            var sampleData = [
+                { Country: 'China', Population: 1347350000, Percent: 19.18},
+                { Country: 'India', Population: 1210193422, Percent: 17.22},
+                { Country: 'USA', Population: 313912000, Percent: 4.47},
+                { Country: 'Indonesia', Population: 237641326, Percent: 3.38},
+                { Country: 'Brazil', Population: 192376496, Percent: 2.74}];
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "Top 5 most populated countries",
+                description: "Statistics for 2011",
+                showLegend: true,
+                enableAnimations: true,
+                padding: { left: 20, top: 5, right: 20, bottom: 5 },
+                titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                source: sampleData,
+                xAxis:
+                    {
+                        dataField: 'Country',
+                        showGridLines: true,
+                        flip: false
+                    },
+                colorScheme: 'scheme01',
+                seriesGroups:
+                    [
+                        {
+                            type: 'column',
+                            orientation: 'horizontal',
+                            columnsGapPercent: 100,
+                            toolTipFormatSettings: { thousandsSeparator: ',' },
+                            valueAxis:
+                            {
+                                flip: true,
+                                unitInterval: 100000000,
+                                maxValue: 1500000000,
+                                displayValueAxis: true,
+                                description: '',
+                                formatFunction: function (value) {
+                                    return parseInt(value / 1000000);
+                                }
+                            },
+                            series: [
+                                    { dataField: 'Population', displayText: 'Population (millions)' }
+                                ]
+                        }
+                    ]
+            };
+
+
+            $scope.chartSettings = settings;
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-chart id='chartContainer' jqx-settings="chartSettings" style="width: 850px; height: 500px"></jqx-chart>
+</body>
+</html>

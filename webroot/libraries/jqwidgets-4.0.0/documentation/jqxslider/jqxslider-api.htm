@@ -1,0 +1,1502 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../Styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="jQuery, Slider, RangeSlider, jQuery Slider, Slider Widget, jqxSlider, jquery mobile slider, javascript mobile slider" />
+    <meta name="description" content="This page represents the help documentation of the jqxSlider widget." />
+    <title>jqxSlider API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+      <div id="properties">
+            <h2 class="documentation-top-header">Properties</h2>
+            <table class="documentation-table">
+                <tr>
+                    <th>Name
+                    </th>
+                    <th>Type
+                    </th>
+                    <th>Default
+                    </th>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span10'>buttonsPosition</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>both
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets scroll buttons position.
+                            </p>
+                            <b>Possible Values:</b>
+                            <br />
+                            <pre><code>'both'</code></pre>
+                            <pre><code>'left'</code></pre>
+                            <pre><code>'right'</code></pre>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>buttonsPosition</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ buttonsPosition: 'left' }); </code></pre>
+                            <p>
+                                Get the <code>buttonsPosition</code> property.
+                            </p>
+                            <pre><code>var buttonsPosition = $('#jqxSlider').jqxSlider('buttonsPosition'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/trxyj/">buttonsPosition is set to 'left'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span2'>disabled</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>Sets or gets whether the slider is disabled.</p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>disabled</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ disabled:true }); </code></pre>
+                            <p>
+                                Get the <code>disabled</code> property.
+                            </p>
+                            <pre><code>var disabled = $('#jqxSlider').jqxSlider('disabled');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/Ftadc/">disabled is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span1'>height</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>35
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the slider's height.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>height</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ height:"15px" });</code></pre>
+                            <p>
+                                Get the <code>height</code> property.
+                            </p>
+                            <pre><code>var height = $('#jqxSlider').jqxSlider('height');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/FXhTQ/">height is set to 50</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span17'>layout</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>"normal"
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the slider's layout.
+                            </p>
+                            <b>Possible Values:</b>
+                            <br />
+                            <pre><code>'normal'</code></pre>
+                            <pre><code>'reverse'-the slider is filled from right-to-left(horizontal slider) and from top-to-bottom(vertical slider)</code></pre>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>layout</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ layout: "reverse" }); </code></pre>
+                            <p>
+                                Get the <code>layout</code> property.
+                            </p>
+                            <pre><code>var layout = $('#jqxSlider').jqxSlider('layout'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/K8x3H/">layout is set to 'reverse'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span12'>mode</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>default
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets slider's mode.
+                            </p>
+                            <b>Possible Values:</b>
+                            <br />
+                            <pre><code>'default'- the slider's thumb can be dragged smoothly ( like a scrollbar )</code></pre>
+                            <pre><code>'fixed'- the thumb is dragged with a 'step' specified by the 'step' property.</code></pre>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>mode</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ mode: 'fixed' }); </code></pre>
+                            <p>
+                                Get the <code>mode</code> property.
+                            </p>
+                            <pre><code>var mode = $('#jqxSlider').jqxSlider('mode'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/7WRAL/">mode is set to 'fixed'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span29'>minorTicksFrequency</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>1
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets slider's minor ticks frequency.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>minorTicksFrequency</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ minorTicksFrequency: 1 });</code></pre>
+                            <p>
+                                Get the <code>minorTicksFrequency</code> property.
+                            </p>
+                            <pre><code>var minorTicksFrequency = $('#jqxSlider').jqxSlider('minorTicksFrequency');</code></pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span30'>minorTickSize</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>4
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets slider's minor ticks size.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>minorTickSize</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ minorTickSize: 5 }); </code></pre>
+                            <p>
+                                Get the <code>minorTickSize</code> property.
+                            </p>
+                            <pre><code>var minorTickSize = $('#jqxSlider').jqxSlider('minorTickSize'); </code></pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span3'>max</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>10
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets slider's maximum value.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>max</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ max: 100 }); </code></pre>
+                            <p>
+                                Get the <code>max</code> property.
+                            </p>
+                            <pre><code>var max = $('#jqxSlider').jqxSlider('max'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/RckuM/">max is set to 15</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span4'>min</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>0
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets slider's minimum value.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>min</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ min: 5}); </code></pre>
+                            <p>
+                                Get the <code>min</code> property.
+                            </p>
+                            <pre><code>var min= $('#jqxSlider').jqxSlider('min'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/bqm5n/">min is set to 5</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span34'>rangeSlider</span>
+                    </td>
+                    <td>
+                        <span>Bool</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether the slider is displayed as a range slider and has 2 thumbs. This allows the user to select a range of values. By default, end-users can select only a single value.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>rangeSlider</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ rangeSlider: true }); </code></pre>
+                            <p>
+                                Get the <code>rangeSlider</code> property.
+                            </p>
+                            <pre><code>var rangeSlider = $('#jqxSlider').jqxSlider('rangeSlider'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/LDVjx/">rangeSlider is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span51'>rtl</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>Sets or gets a value indicating whether widget's elements are aligned to support locales using right-to-left fonts.</p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>rtl</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({rtl : true}); </code></pre>
+                            <p>
+                                Get the <code>rtl</code> property.
+                            </p>
+                            <pre><code>var rtl = $('#jqxSlider').jqxSlider('rtl'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/39KaU/">rtl is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span5'>step</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>1
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the slider's step when the user is using the keyboard arrows, slider increment and decrement buttons or the mouse wheel for changing the slider's value.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>step</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ step: 2 }); </code></pre>
+                            <p>
+                                Get the <code>step</code> property.
+                            </p>
+                            <pre><code>var step = $('#jqxSlider').jqxSlider('step'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/jenPC/">step is set to 2</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span6'>showTicks</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether ticks will be shown.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>showTicks</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ showTicks: false }); </code></pre>
+                            <p>
+                                Get the <code>showTicks</code> property.
+                            </p>
+                            <pre><code>var showTicks = $('#jqxSlider').jqxSlider('showTicks'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/4H83s/">showTicks is set to false</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span28'>showMinorTicks</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether minor ticks will be shown.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>showMinorTicks</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ showMinorTicks: true }); </code></pre>
+                            <p>
+                                Get the <code>showMinorTicks</code> property.
+                            </p>
+                            <pre><code>var showMinorTicks = $('#jqxSlider').jqxSlider('showMinorTicks'); </code></pre>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span32'>showTickLabels</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether major tick labels will be shown.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>showTickLabels</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ showTickLabels: true });</code></pre>
+                            <p>
+                                Get the <code>showTickLabels</code> property.
+                            </p>
+                            <pre><code>var showTickLabels = $('#jqxSlider').jqxSlider('showTickLabels'); </code></pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span9'>showButtons</span>
+                    </td>
+                    <td>
+                        <span>Bool</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether the scroll buttons will be shown.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>showButtons</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ showButtons: false });</code></pre>
+                            <p>
+                                Get the <code>showButtons</code> property.
+                            </p>
+                            <pre><code>var showButtons = $('#jqxSlider').jqxSlider('showButtons'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/MduKV/">showButtons is set to false</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span33'>showRange</span>
+                    </td>
+                    <td>
+                        <span>Bool</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether the slider range background is displayed. This is the fill between the slider's left button and the slider's thumb to indicate the selected value.
+                            In range slider mode, the space between the handles is filled to indicate the selected values.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>showRange</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ showRange: false }); </code></pre>
+                            <p>
+                                Get the <code>showRange</code> property.
+                            </p>
+                            <pre><code>var showRange = $('#jqxSlider').jqxSlider('showRange'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/z8yaj/">showRange is set to false</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span63'>theme</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>''
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets the widget's theme.
+                            </p>
+                            jQWidgets uses a pair of css files - jqx.base.css and jqx.[theme name].css. The base stylesheet creates the styles related to the widget's layout like margin, padding, border-width, position. The second css file applies the widget's colors and backgrounds. The jqx.base.css should be included before the second CSS file.
+                        In order to set a theme, you need to do the following:
+                        <ul>
+                            <li>Include the theme's CSS file after jqx.base.css.<br />
+                                The following code example adds the 'energyblue' theme.
+                                <pre><code>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.base.css&quot; type=&quot;text/css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.energyblue.css&quot; type=&quot;text/css&quot; /&gt;
+</code></pre>
+</code></pre>
+                            </li>
+                            <li>Set the widget's theme property to 'energyblue' when you initialize it.
+                            </li>
+                        </ul>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/Z2544/">theme is set to 'energyblue'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span7'>ticksPosition</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>both
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets slider's ticks position.
+                            </p>
+                            <b>Possible Values:</b>
+                            <br />
+                            <pre><code>'top'</code></pre>
+                            <pre><code>'bottom'</code></pre>
+                            <pre><code>'both'</code></pre>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>ticksPosition</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ ticksPosition: 'top' }); </code></pre>
+                            <p>
+                                Get the <code>ticksPosition</code> property.
+                            </p>
+                            <pre><code>var ticksPosition = $('#jqxSlider').jqxSlider('ticksPosition'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/RSDje/">ticksPosition is set to 'bottom'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span8'>ticksFrequency</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>2
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets slider's major ticks frequency.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>ticksFrequency</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ ticksFrequency: 1 }); </code></pre>
+                            <p>
+                                Get the <code>ticksFrequency</code> property.
+                            </p>
+                            <pre><code>var ticksFrequency = $('#jqxSlider').jqxSlider('ticksFrequency'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/2P7VC/">ticksFrequency is set to 1</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span31'>tickSize</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>7
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets slider's major ticks size.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>tickSize</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ tickSize: 10 }); </code></pre>
+                            <p>
+                                Get the <code>tickSize</code> property.
+                            </p>
+                            <pre><code>var tickSize = $('#jqxSlider').jqxSlider('tickSize'); </code></pre>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span39'>tickLabelFormatFunction</span>
+                    </td>
+                    <td>
+                        <span>Function</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the major ticks labels formatting function.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>tickLabelFormatFunction</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ tickLabelFormatFunction: function (value) {
+    return new $.jqx.math().getDecimalNotation(value, 'exponential');
+}
+});</code></pre>
+                            <p>
+                                Get the <code>tickLabelFormatFunction</code> property.
+                            </p>
+                            <pre><code>var tickLabelFormatFunction = $('#jqxSlider').jqxSlider('tickLabelFormatFunction');
+                        </code></pre>
+                        </div>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span35'>tooltip</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether the slider tooltip will be shown.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>tooltip</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ tooltip: false }); </code></pre>
+                            <p>
+                                Get the <code>tooltip</code> property.
+                            </p>
+                            <pre><code>var tooltip = $('#jqxSlider').jqxSlider('tooltip'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/fbPsv/">tooltip is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span18'>tooltipHideDelay</span>
+                    </td>
+                    <td>
+                        <span>Numer</span>
+                    </td>
+                    <td>500
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the tooltip's hide delay.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>tooltipHideDelay</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ tooltipHideDelay: 2000 }); </code></pre>
+                            <p>
+                                Get the <code>tooltipHideDelay</code> property.
+                            </p>
+                            <pre><code>var tooltipHideDelay = $('#jqxSlider').jqxSlider('tooltipHideDelay'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/Lyoh02wo/">tooltipHideDelay is set to 2000</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span24'>tooltipPosition</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>"near"
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the tooltip's position. Possible values: "near", "far"
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>tooltipPosition</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ tooltipPosition: "far" }); </code></pre>
+                            <p>
+                                Get the <code>tooltipPosition</code> property.
+                            </p>
+                            <pre><code>var tooltipPosition = $('#jqxSlider').jqxSlider('tooltipPosition'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/tqeLgh63/">tooltipPosition is set to "far"</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span25'>tooltipFormatFunction</span>
+                    </td>
+                    <td>
+                        <span>Function</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the tooltip's tooltip formatting.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>tooltipFormatFunction</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ tooltipFormatFunction: function(value){return new Number(value).toPrecision(2); }}); </code></pre>
+                            <p>
+                                Get the <code>tooltipFormatFunction</code> property.
+                            </p>
+                            <pre><code>var tooltipFormatFunction = $('#jqxSlider').jqxSlider('tooltipFormatFunction'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/tn3pv9fn/">tooltipFormatFunction is set to custom function</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span36'>value</span>
+                    </td>
+                    <td>
+                        <span>Number/Object</span>
+                    </td>
+                    <td>0
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets slider's value. This poperty will be an object with the following structure { rangeStart: range_start, rangeEnd: range_end } if the
+                            slider is range slider otherwise it's going to be a number.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>value</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ value: 5 }); </code></pre>
+                            <p>
+                                Get the <code>value</code> property.
+                            </p>
+                            <pre><code>var value = $('#jqxSlider').jqxSlider('value'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/r5Gu2/">value is set to 5</a>
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span38'>values</span>
+                    </td>
+                    <td>
+                        <span>Array</span>
+                    </td>
+                    <td>[0, 10]
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets range slider's values.The 'rangeSlider' property should be set to true.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>values</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ values: [2, 3] }); </code></pre>
+                            <p>
+                                Get the <code>values</code> property.
+                            </p>
+                            <pre><code>var values = $('#jqxSlider').jqxSlider('values'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/tUAyj/">values is set to [5,15]</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='property-name-disabled'>width</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>300
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the slider's width.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>width</code> property.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider({ width:"300px" });</code></pre>
+                            <p>
+                                Get the <code>width</code> property.
+                            </p>
+                            <pre><code>var width = $('#jqxSlider').jqxSlider('width');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/FYE4c/">width is set to 300</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Events</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span27'>change</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the value of the slider is changed.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Bind to the <code>change</code> event by type: jqxSlider.
+                            </p>
+                            <pre><code>$('#jqxSlider').on('change', function (event) {var value = event.args.value;});</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/3WdNd/">Bind to the change event by type: jqxSlider.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span11'>created</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the jqxSlider is created.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Bind to the <code>created</code> event by type: jqxSlider.
+                            </p>
+                            <pre><code>$('#jqxSlider').on('created', function (event) { // Some code here. }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/XBGtK/">Bind to the created event by type: jqxSlider.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span13'>slide</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the user is dragging the sliders thumb.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Bind to the <code>slide</code> event by type: jqxSlider.
+                            </p>
+                            <pre><code>$('#jqxSlider').on('slide', function (event) {  var value = event.args.value; }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/SFNDS/">Bind to the slide event by type: jqxSlider.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span14'>slideStart</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the user start dragging slider's thumb.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Bind to the <code>slideStart</code> event by type: jqxSlider.
+                            </p>
+                            <pre><code>$('#jqxSlider').on('slideStart', function (event) { var value = event.args.value; }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/VngpP/">Bind to the slideStart event by type: jqxSlider.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span15'>slideEnd</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the user have dragged the slider's thumb and drop it.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Bind to the <code>slideEnd</code> event by type: jqxSlider.
+                            </p>
+                            <pre><code>$('#jqxSlider').on('slideEnd', function (event) { var value = event.args.value; }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/fRdK8/">Bind to the slideEnd event by type: jqxSlider.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Methods</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span68'>destroy</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Destroys the widget.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples</h4>
+                            <p>
+                                Invoke the <code>destroy</code> method.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider('destroy'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/3h6xX/">destroy the jqxSlider.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span19'>decrementValue</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>Decreases the jqxSlider's value with the value of the 'step' property.</p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>decrementValue</code> method.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider('decrementValue');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/4C72r/">invoke the decrementValue method of the  jqxSlider.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span22'>disable</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>Disabling the slider.</p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>disable</code> method.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider('disable');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/hge5c/">disables the jqxSlider.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span23'>enable</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>Enables the slider.</p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>enable</code> method.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider('enable', element);</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/pfF53/">enables the jqxSlider.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span16'>focus</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Focuses the widget.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples</h4>
+                            <p>
+                                Invoke the <code>focus</code> method.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider('focus'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/p5kSW/">focuses  the jqxSlider.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span21'>getValue</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>Gets the slider's value. The returned value is a Number or an Object. If the Slider is a range slider, the method returns an Object with the following fields: rangeStart - the range's start value and rangeEnd - the range's end value..</p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>Number</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>getValue</code> method.
+                            </p>
+                            <pre><code>var value = $('#jqxSlider').jqxSlider('getValue');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/FxYXf/">gets the value in the jqxSlider.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span37'>incrementValue</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Increases the jqxSlider's value with the value of the 'step' property.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>incrementValue</code> method.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider('incrementValue');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/WFRCp/">invoke the incrementValue method of the  jqxSlider.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span20'>setValue</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets the jqxSlider's value. When the slider is not in range slider mode, the required parameter for the value is a number which should be in the 'min' - 'max' range.
+                            Possible value types in range slider mode- array, object or two numbers.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>index</em></td>
+                                            <td>Number</td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>setValue</code> method.
+                            </p>
+                            <pre><code>$('#jqxSlider').jqxSlider('setValue', 3);</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/4HeeJ/">sets the value in the jqxSlider.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span59'>val</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the value.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>value</em></td>
+                                            <td>String</td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>String</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>val</code> method.
+                            </p>
+                            // Get the value.
+                        <pre><code>var value = $("#jqxSlider").jqxSlider('val');</code></pre>
+                            // Get the value using jQuery's val()
+                        <pre><code>var value = $("#jqxSlider").val();</code></pre>
+                            // Set value.
+                        <pre><code>$("#jqxSlider").jqxSlider('val', 40);</code></pre>
+                            // Set value using jQuery's val().
+                        <pre><code>$("#jqxSlider").val(40);</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/xZjfX/">sets the value in the jqxSlider.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br />
+        </div>
+   </body>
+</html>

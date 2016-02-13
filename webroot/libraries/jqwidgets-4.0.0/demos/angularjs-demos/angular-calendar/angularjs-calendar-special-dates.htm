@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <meta name="keywords" content="AngularJS Calendar, Month Calendar, MonthCalendar, DateTimeInput, DateTimePicker, Date Picker" />
+    <meta name="description" content="In this demo is demonstrated how to add special dates to the jqxCalendar widget. You can add any special date to the jqxCalendar by using the 
+addSpecialDate method. When you invoke the method, you need to pass three parameters to it - Date object( the special date ), class (optional parameter which represents the css class name) and tooltip (optional parameter
+which displayes additional information about the special date when the user hovers it)." />
+    <title id='Description'>In this demo is demonstrated how to add special dates to the AngularJS Calendar widget. 
+    </title>
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            $scope.calendarSettings = {
+                enableTooltips: true, width: 220, height: 220,
+                created: function (args) {
+                    // Create Date objects.
+                    var date1 = new Date();
+                    var date2 = new Date();
+                    var date3 = new Date();
+                    date1.setDate(5);
+                    date2.setDate(15);
+                    date3.setDate(16);
+                    // Add special dates by invoking the addSpecialDate method.
+                    args.instance.addSpecialDate(date1, '', 'Special Date1');
+                    args.instance.addSpecialDate(date2, '', 'Special Date1');
+                    args.instance.addSpecialDate(date3, '', 'Special Date1');
+                }
+            };
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-calendar jqx-settings="calendarSettings"></jqx-calendar>
+</body>
+</html>

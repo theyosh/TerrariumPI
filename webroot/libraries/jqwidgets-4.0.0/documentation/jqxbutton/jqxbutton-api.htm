@@ -1,0 +1,700 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="jQuery, Button, Toggle Button, Repeat Button, Link Button, Help Documentation, jQuery Button, JavaScript Button, jQuery Mobile Button" />
+    <meta name="description" content="This page represents the help documentation of the jqxButton, jqxToggleButton, jqxRepeatButton and jqxLinkButton widgets." />
+    <title>jqxButton, jqxToggleButton, jqxRepeatButton and jqxLinkButton API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+	 <div style="margin: 5px;" id="properties">
+		<h2 class="documentation-top-header">Properties</h2>
+		<table class="documentation-table">
+			<tr>
+				<th>Name
+				</th>
+				<th>Type
+				</th>
+				<th>Default
+				</th>
+			</tr>
+			<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span5'>delay</span>
+				</td>
+				<td>
+					<span>Number</span>
+				</td>
+				<td>50
+				</td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<div class="documentation-option-description property-content" style="display: none;">
+						<p>
+							Specifies the interval between two Click events. This property is available only
+																				in the jqxRepeatButton. The jqxRepeatButton raises Click events repeatedly when
+																				the button is pressed.
+						</p>
+						<h4>Code examples</h4>
+						<p>
+							Set the <code>delay</code> property.
+						</p>
+						<pre><code>$("#jqxButton").jqxRepeatButton({ delay: 25});</code></pre>
+
+						<p>
+							Get the <code>delay</code> property.
+						</p>
+						<pre><code>var delayed = $('#jqxButton').jqxRepeatButton('delay');</code></pre>
+						<div style="padding-bottom: 5px;">
+							<em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/ty7tZ/">delay is set to 50</a>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span2'>disabled</span>
+				</td>
+				<td>
+					<span>Boolean</span>
+				</td>
+				<td>false
+				</td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<div class="documentation-option-description property-content" style="display: none;">
+						<p>
+							Enables or disables the button.
+						</p>
+						<h4>Code examples</h4>
+						<p>
+							Set the <code>disabled</code> property.
+						</p>
+						<pre><code>$('#jqxButton').jqxButton({disabled: false });</code></pre>
+						<p>
+							Get the <code>disable</code> property.
+						</p>
+						<pre><code>var disabled = $('#jqxButton').jqxButton('disabled');</code></pre>
+						<div style="padding-bottom: 5px;">
+							<em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/ZJB27/">disable is set to true</a>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span3'>height</span>
+				</td>
+				<td>
+					<span>Number/String</span>
+				</td>
+				<td>null
+				</td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<div class="documentation-option-description property-content" style="display: none;">
+						<p>
+							Sets or gets the button's height.
+						</p>
+						<h4>Code examples</h4>
+						<p>
+							Set the <code>height</code> property.
+						</p>
+						<pre><code>$('#jqxButton').jqxButton({ height: '25px' }); </code></pre>
+						<p>
+							Get the <code>height</code> property.
+						</p>
+						<pre><code>var height = $('#jqxButton').jqxButton('height');</code></pre>
+						<div style="padding-bottom: 5px;">
+							<em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/3fHqg/">height is set to '40px'</a>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span1'>roundedCorners</span>
+				</td>
+				<td>
+					<span>String</span>
+				</td>
+				<td>'jqx-rc-all'
+				</td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<div class="documentation-option-description property-content" style="display: none;">
+						<p>
+							Enables or disables the rounded corners functionality. This property setting has
+																				effect in browsers which support CSS border-radius.
+						</p>
+						<b>Possible Values:</b>
+						<br />
+						<pre><code>'all' - for all corners</code></pre>
+						<pre><code>'top'- for top corners</code></pre>
+						<pre><code>'bottom' - for bottom corners</code></pre>
+						<pre><code>'left' - for left corners</code></pre>
+						<pre><code>'right' - for right corners</code></pre>
+						<pre><code>'top-right' - for top right corners</code></pre>
+						<pre><code>'top-left' - for top left corners</code></pre>
+						<pre><code>'bottom-right' - for bottom right corners</code></pre>
+						<pre><code>'bottom-left' - for bottom left corners</code></pre>
+						<h4>Code examples</h4>
+						<p>
+							Set the <code>roundedCorners</code> property.
+						</p>
+						<pre><code>$("#jqxButton").jqxButton({ roundedCorners: 'jqx-rc-t'});</code></pre>
+
+						<p>
+							Get the <code>roundedCorners</code> property.
+						</p>
+						<pre><code>var roundedCourners = $('#jqxButton').jqxButton('roundedCorners');</code></pre>
+						<div style="padding-bottom: 5px;">
+							<em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/6e4sC/">roundedCorners is set to 'all'</a>
+						</div>
+
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span51'>rtl</span>
+				</td>
+				<td>
+					<span>Boolean</span>
+				</td>
+				<td>false
+				</td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<div class="documentation-option-description property-content" style="display: none;">
+						<p>Sets or gets a value indicating whether widget's elements are aligned to support locales using right-to-left fonts.</p>
+						<h4>Code example</h4>
+						<p>
+							Set the <code>rtl</code> property.
+						</p>
+						<pre><code>$('#jqxButton').jqxButton({rtl : true}); </code></pre>
+						<p>
+							Get the <code>rtl</code> property.
+						</p>
+						<pre><code>var rtl = $('#jqxButton').jqxButton('rtl'); </code></pre>
+						<div style="padding-bottom: 5px;">
+							<em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/Mu2AS/">rtl is set to true</a>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span63'>theme</span>
+				</td>
+				<td>
+					<span>String</span>
+				</td>
+				<td>''
+				</td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<div class="documentation-option-description property-content" style="display: none;">
+						<p>
+							Sets the widget's theme.
+						</p>
+						jQWidgets uses a pair of css files - jqx.base.css and jqx.[theme name].css. The base stylesheet creates the styles related to the widget's layout like margin, padding, border-width, position. The second css file applies the widget's colors and backgrounds. The jqx.base.css should be included before the second CSS file.
+																			In order to set a theme, you need to do the following:
+																			<ul>
+																				<li>Include the theme's CSS file after jqx.base.css.<br />
+																					The following code example adds the 'energyblue' theme.
+																					<pre><code>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.base.css&quot; type=&quot;text/css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.energyblue.css&quot; type=&quot;text/css&quot; /&gt;
+</code></pre>
+</code></pre>
+																				</li>
+																				<li>Set the widget's theme property to 'energyblue' when you initialize it.
+																				</li>
+																			</ul>
+						<div style="padding-bottom: 5px;">
+							<em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/yEFBC/">theme is set to 'energyblue'</a>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span12'>template</span>
+				</td>
+				<td>
+					<span>String</span>
+				</td>
+				<td>'default'
+				</td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<div class="documentation-option-description property-content" style="display: none;">
+						<p>
+							Determines the button's template as an alternative of the default styles.
+						</p>
+						<b>Possible Values:</b>
+						<br />
+						<pre><code>'default' - the default button's template. The button's style depends only on its "theme" property value.</code></pre>
+						<pre><code>'primary' - dark blue button for extra visual weight.</code></pre>
+						<pre><code>'success' - green button for successful or positive action.</code></pre>
+						<pre><code>'warning' - orange button which indicates caution.</code></pre>
+						<pre><code>'danger' - red button which indicates a dangerous or negative action.</code></pre>
+						<pre><code>'inverse' - dark gray button, not tied to a semantic action or use.</code></pre>
+						<pre><code>'info' - blue button, not tied to a semantic action or use.</code></pre>
+						<pre><code>'link' - making it look like a link .</code></pre>
+						<h4>Code examples</h4>
+						<p>
+							Set the <code>template</code> property.
+						</p>
+						<pre><code>$("#jqxButton").jqxButton({ template: 'primary'});</code></pre>
+
+						<p>
+							Get the <code>template</code> property.
+						</p>
+						<pre><code>var template = $('#jqxButton').jqxButton('template');</code></pre>
+						<div style="padding-bottom: 5px;">
+							<em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/CpVnv/">template is set to 'success'</a>
+						</div>
+
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span11'>toggled</span>
+				</td>
+				<td>
+					<span>Boolean</span>
+				</td>
+				<td>false
+				</td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<div class="documentation-option-description property-content" style="display: none;">
+						<p>
+							Sets or gets the button's toggle state. ( available in jqxToggleButton ).
+						</p>
+						<h4>Code examples</h4>
+						<p>
+							Set the <code>toggled</code> property.
+						</p>
+						<pre><code>$('#jqxButton').jqxToggleButton({ toggled: true }); </code></pre>
+						<p>
+							Get the <code>toggled</code> property.
+						</p>
+						<pre><code>var toggled = $('#jqxButton').jqxToggleButton('toggled');</code></pre>
+						<div style="padding-bottom: 5px;">
+							<em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/AX35A/">toggled is set to true</a>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span4'>width</span>
+				</td>
+				<td>
+					<span>Number/String</span>
+				</td>
+				<td>null
+				</td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<div class="documentation-option-description property-content" style="display: none;">
+						<p>
+							Sets ot gets the button's width.
+						</p>
+						<h4>Code examples</h4>
+						<p>
+							Set the <code>width</code> property.
+						</p>
+						<pre><code>$('#jqxButton').jqxButton({ width: '250px'}); </code></pre>
+						<p>
+							Get the <code>width</code> property.
+						</p>
+						<pre><code>var width = $('#jqxButton').jqxButton('width');</code></pre>
+						<div style="padding-bottom: 5px;">
+							<em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/KwyHe/">width is set to '240px'</a>
+						</div>
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<h2 class="documentation-top-header">Events</h2>
+				</td>
+			</tr>
+			<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span27'>click</span>
+				</td>
+				<td>
+					<span>Event</span>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<div class="documentation-option-description property-content" style="display: none;">
+						<p>
+							This event is triggered when the button is clicked.
+						</p>
+						<h4>Code examples</h4>
+						<p>
+							Bind to the <code>click</code> event by type: jqxButton.
+						</p>
+						<pre><code>$('#jqxButton').on('click', function () { // Some code here. }); </code></pre>
+						<div style="padding-bottom: 5px;">
+							<em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/qKcBU/">Bind to the click event by type: jqxButton.</a>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<h2 class="documentation-top-header">Methods</h2>
+				</td>
+			</tr>
+			<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span9'>check</span>
+				</td>
+				<td>
+					<span>Method</span>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<div class="documentation-option-description property-content" style="display: none;">
+						<p>
+							Checks the button. ( available in jqxToggleButton ).
+						</p>
+						<div class="methodArgs">
+							<table class="arguments">
+								<tbody>
+									<tr>
+										<th>Parameter</th>
+										<th>Type</th>
+										<th>Description</th>
+									</tr>
+									<tr>
+										<td><em>None</em></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+							<strong>Return Value</strong><br />
+							<em>None</em>
+						</div>
+						<h4>Code examples</h4>
+						<p>
+							Invoke the <code>check</code> method.
+						</p>
+						<pre><code>$('#jqxButton').jqxToggleButton('check'); </code></pre>
+						<div style="padding-bottom: 5px;">
+							<em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/tb2fM/">check the button</a>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span8'>destroy</span>
+				</td>
+				<td>
+					<span>Method</span>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<div class="documentation-option-description property-content" style="display: none;">
+						<p>
+							Destroys the widget.
+						</p>
+						<div class="methodArgs">
+							<table class="arguments">
+								<tbody>
+									<tr>
+										<th>Parameter</th>
+										<th>Type</th>
+										<th>Description</th>
+									</tr>
+									<tr>
+										<td><em>None</em></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+							<strong>Return Value</strong><br />
+							<em>None</em>
+						</div>
+						<h4>Code examples</h4>
+						<p>
+							Invoke the <code>destroy</code> method.
+						</p>
+						<pre><code>$('#jqxButton').jqxButton('destroy'); </code></pre>
+						<div style="padding-bottom: 5px;">
+							<em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/z2R6N/">destroys the button</a>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span6'>focus</span>
+				</td>
+				<td>
+					<span>Method</span>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<div class="documentation-option-description property-content" style="display: none;">
+						<p>
+							Focuses the widget.
+						</p>
+						<div class="methodArgs">
+							<table class="arguments">
+								<tbody>
+									<tr>
+										<th>Parameter</th>
+										<th>Type</th>
+										<th>Description</th>
+									</tr>
+									<tr>
+										<td><em>None</em></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+							<strong>Return Value</strong><br />
+							<em>None</em>
+						</div>
+						<h4>Code examples</h4>
+						<p>
+							Invoke the <code>focus</code> method.
+						</p>
+						<pre><code>$('#jqxButton').jqxButton('focus'); </code></pre>
+						<div style="padding-bottom: 5px;">
+							<em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/SAVNh/">focus the button</a>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span7'>render</span>
+				</td>
+				<td>
+					<span>Method</span>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<div class="documentation-option-description property-content" style="display: none;">
+						<p>
+							Renders the widget.
+						</p>
+						<div class="methodArgs">
+							<table class="arguments">
+								<tbody>
+									<tr>
+										<th>Parameter</th>
+										<th>Type</th>
+										<th>Description</th>
+									</tr>
+									<tr>
+										<td><em>None</em></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+							<strong>Return Value</strong><br />
+							<em>None</em>
+						</div>
+						<h4>Code examples</h4>
+						<p>
+							Invoke the <code>render</code> method.
+						</p>
+						<pre><code>$('#jqxButton').jqxButton('render'); </code></pre>
+						<div style="padding-bottom: 5px;">
+							<em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/vr3kw/">render the button</a>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span37'>toggle</span>
+				</td>
+				<td>
+					<span>Method</span>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<div class="documentation-option-description property-content" style="display: none;">
+						<p>
+							Toggles the button's checked state. ( available in jqxToggleButton ).
+						</p>
+						<div class="methodArgs">
+							<table class="arguments">
+								<tbody>
+									<tr>
+										<th>Parameter</th>
+										<th>Type</th>
+										<th>Description</th>
+									</tr>
+									<tr>
+										<td><em>None</em></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+							<strong>Return Value</strong><br />
+							<em>None</em>
+						</div>
+						<h4>Code examples</h4>
+						<p>
+							Invoke the <code>toggle</code> method.
+						</p>
+						<pre><code>$('#jqxButton').jqxToggleButton('toggle'); </code></pre>
+						<div style="padding-bottom: 5px;">
+							<em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/XFk7T/">toggle the button</a>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span10'>unCheck</span>
+				</td>
+				<td>
+					<span>Method</span>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<div class="documentation-option-description property-content" style="display: none;">
+						<p>
+							Unchecks the button. ( available in jqxToggleButton ).
+						</p>
+						<div class="methodArgs">
+							<table class="arguments">
+								<tbody>
+									<tr>
+										<th>Parameter</th>
+										<th>Type</th>
+										<th>Description</th>
+									</tr>
+									<tr>
+										<td><em>None</em></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+							<strong>Return Value</strong><br />
+							<em>None</em>
+						</div>
+						<h4>Code examples</h4>
+						<p>
+							Invoke the <code>unCheck</code> method.
+						</p>
+						<pre><code>$('#jqxButton').jqxToggleButton('unCheck'); </code></pre>
+						<div style="padding-bottom: 5px;">
+							<em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/uUCcE/">uncheck the button</a>
+						</div>
+					</div>
+				</td>
+			</tr>
+
+
+
+			<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span59'>val</span>
+				</td>
+				<td>
+					<span>Method</span>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<div class="documentation-option-description property-content" style="display: none;">
+						<p>
+							Sets or gets the value.
+						</p>
+						<div class="methodArgs">
+							<table class="arguments">
+								<tbody>
+									<tr>
+										<th>Parameter</th>
+										<th>Type</th>
+										<th>Description</th>
+									</tr>
+									<tr>
+										<td><em>value(optional)</em></td>
+										<td>String</td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+							<strong>Return Value</strong><br />
+							<em>String</em>
+						</div>
+						<h4>Code example</h4>
+						<p>
+							Invoke the <code>val</code> method.
+						</p>
+						// Get the value.
+																			<pre><code>var value = $("#jqxButton").jqxButton('val');</code></pre>
+						// Get the value using jQuery's val()
+																			<pre><code>var value = $("#jqxButton").val();</code></pre>
+						// Set value.
+																			<pre><code>$("#jqxButton").jqxButton('val', "New Value");</code></pre>
+						// Set value using jQuery's val().
+																			<pre><code>$("#jqxButton").val("New Value");</code></pre>
+						<div style="padding-bottom: 5px;">
+							<em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/mTqtr/">invoke the val method</a>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<br />
+	</div>
+</body>
+</html>

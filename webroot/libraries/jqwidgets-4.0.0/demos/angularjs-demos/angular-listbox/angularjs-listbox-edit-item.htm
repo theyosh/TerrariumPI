@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id="Description">jqxListBox directive for AngularJS</title>
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            $scope.people = ["Pedro", "Clara", "John", "Pier"];
+
+            // init ListBox's settings object.
+            $scope.listBoxSettings =
+            {
+                width: 200,
+                height: 200,
+                source: $scope.people
+            }
+        });
+    </script>
+</head>
+<body>
+    <div ng-controller="demoController">
+        <jqx-list-box jqx-settings="listBoxSettings"></jqx-list-box>
+        <br />
+        <h4>Edit First Item</h4>
+        <jqx-input jqx-height="30" ng-model="people[0]"></jqx-input>
+    </div>
+</body>
+</html>

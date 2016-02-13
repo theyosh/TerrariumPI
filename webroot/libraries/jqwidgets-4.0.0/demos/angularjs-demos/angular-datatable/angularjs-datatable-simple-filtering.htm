@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>An end-user can easily search through a AngularJS DataTable's data via the built-in Search Input field. The Grid automatically filters records and displays only those that match the user's search string.
+    </title>
+    <meta name="description" content="An end-user can easily search through a Grid's data via the built-in Search Input field. When searching via the Search Input Field, the JavaScript Grid automatically filters records and displays only those that match the user's search string">     
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> 
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {            
+            // create AngularJS DataTable.
+            $scope.gridSettings =
+            {
+                source:  new $.jqx.dataAdapter({
+                    datatype: "xml",
+                    dataFields: [
+                         { name: 'SupplierName', type: 'string' },
+                         { name: 'Quantity', type: 'number' },
+                         { name: 'OrderDate', type: 'date' },
+                         { name: 'OrderAddress', type: 'string' },
+                         { name: 'Freight', type: 'number' },
+                         { name: 'Price', type: 'number' },
+                         { name: 'City', type: 'string' },
+                         { name: 'ProductName', type: 'string' },
+                         { name: 'Address', type: 'string' }
+                    ], 
+                    url: '../../sampledata/orderdetailsextended.xml',
+                    root: 'DATA',
+                    record: 'ROW'
+                }),
+                pageable: true,
+                pagerButtonsCount: 10,
+                altRows: true,
+                filterable: true,
+                height: 400,
+                filterMode: 'simple',
+                width: 850,
+                columns: [
+                  { text: 'Supplier Name', cellsAlign: 'center', align: 'center', dataField: 'SupplierName', width: 250 },
+                  { text: 'Name', columngroup: 'ProductDetails', cellsAlign: 'center', align: 'center', dataField: 'ProductName', width: 250 },
+                  { text: 'Quantity', columngroup: 'ProductDetails', dataField: 'Quantity', cellsformat: 'd', cellsAlign: 'center', align: 'center', width: 80 },
+                  { text: 'Price', columngroup: 'ProductDetails', dataField: 'Price', cellsformat: 'c2', align: 'center', cellsAlign: 'center', width: 70 },
+                  { text: 'Address', columngroup: 'Location', cellsAlign: 'center', align: 'center', dataField: 'Address', width: 120 },
+                  { text: 'City', columngroup: 'Location', cellsAlign: 'center', align: 'center', dataField: 'City' }
+                ]
+            };
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+    <jqx-data-table jqx-settings="gridSettings"></jqx-data-table>
+</body>
+</html>

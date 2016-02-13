@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>This sample illustrates the Multi Select feature of jqxComboBox. That feature allows the selection of multiple values from jqxComboBox.
+    </title>
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> 
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            var countries = new Array("Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burma", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo, Democratic Republic", "Congo, Republic of the", "Costa Rica", "Cote d'Ivoire", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Greenland", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Mongolia", "Morocco", "Monaco", "Mozambique", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Samoa", "San Marino", " Sao Tome", "Saudi Arabia", "Senegal", "Serbia and Montenegro", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "Spain", "Sri Lanka", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe");
+            $scope.comboBox = {};
+            $scope.comboBoxSettings = {
+                source: countries, showArrow: true, multiSelect: true, width: 350, height: 25,
+                created: function (args) {
+                    $scope.comboBox = args.instance;
+                    $scope.comboBox.selectItem('United States');
+                }
+            };
+
+            $scope.buttonClick = function()
+            {
+                $scope.comboBoxSettings.showArrow = false;
+            };
+            // trigger selection changes.
+            $scope.changeHandler = function (event) {
+                var items = $scope.comboBox.getSelectedItems();
+                var selectedItems = "Selected Items: ";
+                $.each(items, function (index) {
+                    selectedItems += this.label;
+                    if (items.length - 1 != index) {
+                        selectedItems += ", ";
+                    }
+                });
+                $scope.log = selectedItems;
+            };
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <span style="font-size: 13px; font-family: Verdana;">Select countries</span>
+    <jqx-combo-box jqx-settings="comboBoxSettings" jqx-watch="comboBoxSettings.showArrow" jqx-on-change="changeHandler(event)" style="margin-top: 5px;"></jqx-combo-box>
+    <jqx-button jqx-on-click="buttonClick(event)" style="margin-top: 20px;">Hide DropDown Button</jqx-button>
+    {{log}}
+</body>
+</html>

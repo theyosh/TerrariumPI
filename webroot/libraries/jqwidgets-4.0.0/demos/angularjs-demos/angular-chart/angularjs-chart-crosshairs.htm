@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS Chart Crosshairs Example</title>
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            // prepare the data
+            var source =
+            {
+                datatype: "csv",
+                datafields: [
+                    { name: 'Date' },
+                    { name: 'S&P 500' },
+                    { name: 'NASDAQ' }
+                ],
+                url: '../../sampledata/nasdaq_vs_sp500.txt'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "U.S. Stock Market Index Performance",
+                description: "NASDAQ Composite compared to S&P 500",
+                enableAnimations: true,
+                showLegend: true,
+                enableCrosshairs: true,
+                crosshairsDashStyle: '2,2',
+                crosshairsLineWidth: 1.0,
+                crosshairsColor: '#888888',
+                padding: { left: 10, top: 5, right: 30, bottom: 5 },
+                titlePadding: { left: 10, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                xAxis:
+                    {
+                        dataField: 'Date',
+                        formatFunction: function (value) {
+                            return value.getDate() + '-' + months[value.getMonth()] + '-' + value.getFullYear();
+                        },
+                        type: 'date',
+                        baseUnit: 'month',
+                        showTickMarks: true,
+                        tickMarksInterval: 1,
+                        tickMarksColor: '#888888',
+                        unitInterval: 1,
+                        showGridLines: true,
+                        gridLinesInterval: 3,
+                        gridLinesColor: '#888888',
+                        valuesOnTicks: true,
+                        textRotationAngle: -45
+                    },
+                colorScheme: 'scheme01',
+                seriesGroups:
+                    [
+                        {
+                            type: 'line',
+                            valueAxis:
+                            {
+                                displayValueAxis: true,
+                                description: 'Daily Closing Price',
+                                axisSize: 'auto',
+                                tickMarksColor: '#888888'
+                            },
+                            series: [
+                                    { dataField: 'S&P 500', displayText: 'S&P 500' },
+                                    { dataField: 'NASDAQ', displayText: 'NASDAQ' }
+                                ]
+                        }
+                    ]
+            };
+
+
+            $scope.chartSettings = settings;
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-chart id='chartContainer' jqx-settings="chartSettings" style="width: 850px; height: 500px"></jqx-chart>
+</body>
+</html>
+

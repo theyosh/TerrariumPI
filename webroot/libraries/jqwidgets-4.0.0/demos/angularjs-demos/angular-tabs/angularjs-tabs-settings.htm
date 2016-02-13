@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <meta name="keywords" content="AngularJS Tabs, Tabs Widget, TabView" />
+    <meta name="description" content="The jqxTabs is breaking the content into multiple sections. You
+        can populate it from 'UL' for the tab titles and 'DIV' for it's contents." />
+    <title id='Description'>The demo shows how to use the AngularJS Tabs  API to add, remove, enable and disable tabs.</title>
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            var tabs = {};
+            $scope.tabsSettings = {
+                height: 220, width: 1000,
+                created: function (args) {
+                    tabs = args.instance;
+                }
+            };
+
+            $scope.add = (function () {
+                tabs.addLast('Sample title', 'Sample content');
+                tabs.ensureVisible(-1);
+            });
+
+            $scope.remove = function () {
+                var selectedItem = tabs.selectedItem;
+                var disabledItems = tabs.getDisabledTabsCount();
+                var items = tabs.length();
+                if (items > disabledItems + 1) {
+                    tabs.removeAt(selectedItem);
+                }
+            };
+
+            $scope.disable = function () {
+                var selectedItem = tabs.selectedItem;
+                tabs.disableAt(selectedItem);
+            };
+
+            $scope.enable = function () {
+                var selectedItem = tabs.selectedItem;
+                tabs.enableAt(selectedItem);
+            };
+
+            $scope.enableAll = function () {
+                tabs.enable();
+            };
+
+            $scope.disableAll = function () {
+                tabs.disable();
+            };
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-tabs jqx-settings="tabsSettings">
+        <ul style='margin-left: 10px;'>
+            <li>Node.js</li>
+            <li>JavaServer Pages</li>
+            <li>Active Server Pages</li>
+        </ul>
+        <div>
+            Node.js is an event-driven I/O server-side JavaScript environment based on V8. It is intended for writing scalable network programs such as web servers.
+            It was created by Ryan Dahl in 2009, and its growth is sponsored by Joyent, which employs Dahl.
+            Similar environments written in other programming languages include Twisted for Python, Perl Object Environment for Perl, libevent for C and EventMachine for Ruby.
+            Unlike most JavaScript, it is not executed in a web browser, but is instead a form of server-side JavaScript. Node.js implements some CommonJS specifications.
+            Node.js includes a REPL environment for interactive testing.
+        </div>
+        <div>
+            JavaServer Pages (JSP) is a Java technology that helps software developers serve dynamically generated web pages based on HTML, XML, or other document types.
+            Released in 1999 as Sun's answer to ASP and PHP,[citation needed] JSP was designed to address the perception that the Java programming environment didn't provide developers with enough support for the Web.
+            To deploy and run, a compatible web server with servlet container is required. The Java Servlet and the JavaServer Pages (JSP) specifications from Sun Microsystems and the JCP
+            (Java Community Process) must both be met by the container.
+        </div>
+        <div>
+            ASP.NET is a web application framework developed and marketed by Microsoft to allow programmers to build dynamic web sites, web applications and web services.
+            It was first released in January 2002 with version 1.0 of the .NET Framework, and is the successor to Microsoft's Active Server Pages (ASP) technology.
+            ASP.NET is built on the Common Language Runtime (CLR), allowing programmers to write ASP.NET code using any supported .NET language.
+            The ASP.NET SOAP extension framework allows ASP.NET components to process SOAP messages.
+        </div>           
+    </jqx-tabs>
+    <jqx-button jqx-on-click="add()" style="margin-top: 10px;">Add</jqx-button>
+    <jqx-button jqx-on-click="remove()" style="margin-top: 10px;">Remove</jqx-button>
+    <jqx-button jqx-on-click="enable()" style="margin-top: 10px;">Enable</jqx-button>
+    <jqx-button jqx-on-click="disable()" style="margin-top: 10px;">Disable</jqx-button>
+    <jqx-button jqx-on-click="enableAll()" style="margin-top: 10px;">Enable All</jqx-button>
+    <jqx-button jqx-on-click="disableAll()" style="margin-top: 10px;">Disable All</jqx-button>
+</body>
+</html>

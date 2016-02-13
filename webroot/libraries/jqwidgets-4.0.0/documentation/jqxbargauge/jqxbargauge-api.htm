@@ -1,0 +1,1351 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../Styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="jQuery, Kanban, jqxKanban, Kanban method" />
+    <meta name="description" content="This page represents the help documentation of the jqxKanban widget." />
+    <title>jqxKanban API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="properties">
+        <h2 class="documentation-top-header">
+            Properties
+        </h2>
+        <table class="documentation-table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Default
+                </th>
+            </tr>
+         <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span13'>columns</span>
+                </td>
+                <td>
+                    <span>Array</span>
+                </td>
+                <td>
+                   null
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the kanban columns.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <pre><code>
+$("#jqxKanban").jqxKanban(
+{
+    source: source,
+    columns: [
+                    { text: "Backlog", dataField: "new", restrictions: "none", maxItems: 5 },
+                    { text: "In Progress", dataField: "work", restrictions: "none", maxItems: 5 },
+                    { text: "Testing", dataField: "test", restrictions: "none", maxItems: 5 },
+                    { text: "Done", dataField: "done", restrictions: "none", maxItems: 5 }
+    ]
+});                        
+                        </code></pre>
+                        <br />
+                        Column Properties:
+
+                        <ul>
+                            <li>text - sets the text in column's header.</li>
+                            <li>datafield - sets the column datafield.</li>
+                            <li>restrictions - sets restrictions to column. // not yet included
+                                <br />
+                                <ul>
+                                    <li>'none' - default value. There is no restrictions about this column.</li>
+                                    <li>'dragOnly' - user can only drag cards from this column.</li>
+                                    <li>'dropOnly' - user can only drop cards in this column.</li>
+                                    <li>'restricted' - this column can't be used for drag/drop cards.</li>
+                                </ul>
+                            </li>
+                            <li>maxItems - sets maximum number of items per column. // not yet included</li>
+                        </ul>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/ER6hn/">columns is set to a custom array</a>
+                        </div>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/6X3EZ/">columns is set dynamically</a>
+                        </div>
+</div>
+                </td>
+            </tr>
+           <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span5'>connectWith</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    null
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets connection with another jqxKanban widget. As a selector is used id of the widget.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>connectWith</code> property.
+                        </p>
+                        <pre><code>$('#jqxKanban').jqxKanban({connectWith: '#jqxKanban2'});</code></pre>
+                        <p>
+                            Get the <code>connectWith</code> property.
+                        </p>
+                        <pre><code>var connectWith = $('#jqxKanban').jqxKanban('connectWith'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-animation-settings">connectWith is set to '#jqxKanban2'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span2'>handle</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    null
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets an element with particular CSS class, where the items can be handled.
+                            If this property is not sett, the items can be handled with their whole surface.
+                        </p>
+                        <b>Possible Values:</b>
+                        <br />
+
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>handle</code> property.
+                        </p>
+                        <pre><code>$('#jqxKanban').jqxKanban({ handle:'jqx-kanban-item-text'}); </code></pre>
+                        <p>
+                            Get the <code>handle</code> property.
+                        </p>
+                        <pre><code>var handle = $('#jqxKanban').jqxKanban('handle'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-animation-settings">handle is set to 'jqx-kanban-item-text'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span8'>headerHeight</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    30
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the height of the jqxKanban column headers when columns are expanded.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>headerHeight</code> property.
+                        </p>
+                        <pre><code>$('#jqxKanban').jqxKanban({ headerHeight: 50 }); </code></pre>
+                        <p>
+                            Get the <code>autoClose</code> property.
+                        </p>
+                        <pre><code>var headerHeight = $('#jqxKanban').jqxKanban('headerHeight'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-autoclose-1">headerHeight is set to 50</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span63'>headerWidth</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    30
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the width of the jqxKanban column headers when columns are collapsed.
+                        </p>
+                        <b>Possible Values:</b>
+                        <br />
+
+                        <h4>
+                            Code example
+                        </h4>
+                        <p>
+                            Set the <code>headerWidth</code> property.
+                        </p>
+                        <pre><code>$('#jqxKanban').jqxKanban({headerWidth : 50}); </code></pre>
+                        <p>
+                            Get the <code>headerWidth</code> property.
+                        </p>
+                        <pre><code>var headerWidth = $('#jqxKanban').jqxKanban('headerWidth'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-animation-settings">headerWidth is set to 50</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span1'>height</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    400
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the kanban's height.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>height</code> property.
+                        </p>
+                        <pre><code>$('#jqxKanban').jqxKanban({height: 500});</code></pre>
+                        <p>
+                            Get the <code>height</code> property.
+                        </p>
+                        <pre><code>var height = $('#jqxKanban').jqxKanban('height');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-initcontent-1">height is set to 500</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span3'>ready</span>
+                </td>
+                <td>
+                    <span>Function</span>
+                </td>
+                <td>
+                    null
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This function is called when the kanban is initialized and the binding is complete.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>ready</code> property.
+                        </p>
+                        <pre><code>$('#jqxKanban').jqxKanban({ ready: function(){ // Some code here. } }); </code></pre>
+                        <p>
+                            Get the <code>ready</code> property.
+                        </p>
+                        <pre><code>var ready = $('#jqxKanban').jqxKanban('ready'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-initcontent-1">ready is set to 'function(){...}'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span3'>rtl</span>
+                </td>
+                <td>
+                    <span>Boolean</span>
+                </td>
+                <td>
+                    false
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets a value indicating whether widget's elements are aligned to support locales using right-to-left fonts.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>rtl</code> property.
+                        </p>
+                        <pre><code>$('#jqxKanban').jqxKanban({ rtl: true }); </code></pre>
+                        <p>
+                            Get the <code>rtl</code> property.
+                        </p>
+                        <pre><code>var rtl = $('#jqxKanban').jqxKanban('rtl'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-ismodal-1">rtl is set to true</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+           <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span12'>source</span>
+                </td>
+                <td>
+                    <span>Array</span>
+                </td>
+                <td>
+                    null
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>The source object represents a set of key/value pairs. Every set is kanban item.</p>
+                        
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>source</code> property.
+                        </p>
+                        <pre><code>
+$("#jqxKanban").jqxKanban(
+{
+    columns: columns,
+    source: [
+                    { id: 0, status: "new", text: "Cookies", content: "Content", tags: "cookies", color: "lightgreen", personId: 1, $css: "standard" },
+                    { id: 1, status: "done", text: "Kitchen adventurer caramel", tags: "kitchen, adv, caramel", color: "lightgreen", content: "content", personId: 2, $css: "standard" }
+    ]
+});                        
+                        </code></pre>
+                        <br />
+                        Source item Properties:
+
+                        <ul>
+                            <li>id - unique identifier of the item. This property is required!</li>
+                            <li>status - sets the column where the item will be stored. Associated to column's dataField property. This property is required!</li>
+                            <li>text - sets the text area. Could be used as text or headline.</li>
+                            <li>content - sets the content area. Could be filled with text/images/widgets etc.</li>
+                            <li>tags - sets taggs stored in item footer div.</li>
+                            <li>color - sets unique status color of the item.</li>
+                            <li>personId - contains person id, associated to some person from staff.</li>
+                            <li>$css - sets individual css class about item.</li>
+                        </ul>
+                        <p>
+                            Get the <code>source</code> property.
+                        </p>
+                        <pre><code>var source = $('#jqxKanban').jqxKanban('source'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-offset">source is set</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+           <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span4'>staff</span>
+                </td>
+                <td>
+                    <span>Array</span>
+                </td>
+                <td>
+                    null
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            The staff object represents a set of key/value pairs.
+                            It contains information about persons, associated to the kanban cards.
+                        </p>
+
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>staff</code> property.
+                        </p>
+                        <pre><code>
+$("#jqxKanban").jqxKanban(
+{
+    columns: columns,
+    source: source,
+    staff:[                                                      
+            { id: 0, name: "Andrew Fuller", image: "../../images/andrew.png" },
+            { id: 1, name: "Janet Leverling", image: "../../images/janet.png" },
+    ]
+});                        
+                        </code></pre>
+                        <br />
+                        Source item Properties:
+
+                        <ul>
+                            <li>id - unique identifier of the person.</li>
+                            <li>name - name of the person.</li>
+                            <li>image - image of the person.</li>
+                        </ul>
+                        <p>
+                            Get the <code>staff</code> property.
+                        </p>
+                        <pre><code>var staff = $('#jqxKanban').jqxKanban('staff'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-position-1">staff is set to []</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+         <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span51'>template</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    false
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>Sets or gets new HTML structure about kanban's cards.</p>
+                        <h4>
+                            Code example
+                        </h4>
+                        <p>
+                            Set the <code>template</code> property.
+                        </p>
+                        <pre><code>
+$('#jqxKanban').jqxKanban({template : "&lt;div class='jqx-kanban-item' id=''&gt;"
+        + "&lt;div class='jqx-kanban-item-color-status'&gt;&lt;/div&gt;"
+        + "&lt;div class='jqx-kanban-item-avatar'&gt;&lt;/div&gt;"
+        + "&lt;div class='jqx-kanban-item-text'&gt;&lt;/div&gt;"
+        + "&lt;div class='jqx-kanban-item-footer'&gt;&lt;/div&gt;"
+        + "&lt;/div&gt;";
+}); 
+                            </code></pre>
+                        <p>
+                            Get the <code>template</code> property.
+                        </p>
+                        <pre><code>var template = $('#jqxKanban').jqxKanban('template'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-rtl-1">template is set to true</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span16'>templateContent</span>
+                </td>
+                <td>
+                    <span>Object</span>
+                </td>
+                <td>
+                    null
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the default values about kanban's cards. 
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>templateContent</code> property.
+                        </p>
+                        <pre><code>
+                            var templateContent = { status: "new", text: "New text", content: "New content", tags: "New, taggs", color: "green", personId: 0, $css: ""},
+                            $('#jqxKanban').jqxKanban({ templateContent: templateContent }); 
+                            </code></pre>
+                        <p>
+                            Get the <code>templateContent</code> property.
+                        </p>
+                        <pre><code>var selector = $('#jqxKanban').jqxKanban('templateContent'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-selector">templateContent is set</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span3'>theme</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    ''
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets the widget's theme.
+                        </p>
+                        jQWidgets uses a pair of css files - jqx.base.css and jqx.[theme name].css. The base stylesheet creates the styles related to the widget's layout like margin, padding, border-width, position. The second css file applies the widget's colors and backgrounds. The jqx.base.css should be included before the second CSS file.
+                        In order to set a theme, you need to do the following:
+                        <ul>
+                            <li>
+                                Include the theme's CSS file after jqx.base.css.<br />
+                                The following code example adds the 'energyblue' theme.
+                                <pre><code>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.base.css&quot; type=&quot;text/css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.energyblue.css&quot; type=&quot;text/css&quot; /&gt;
+</code></pre>
+</code></pre>
+                            </li>
+                            <li>
+                                Set the widget's theme property to 'energyblue' when you initialize it.
+                            </li>
+                        </ul>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/HgGqs/">theme is set to 'energyblue'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+           <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span11'>verticalTextOrientation</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    'topToBottom'
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the vertical orientation of the text in collapsed columns.
+                        </p>
+                        <b>Possible Values:</b>
+                        <br />
+                        <pre><code>'topToBottom'</code></pre>
+                        <pre><code>'bottomToTop'</code></pre>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>verticalTextOrientation</code> property.
+                        </p>
+                        <pre><code>$('#jqxKanban').jqxKanban({ verticalTextOrientation: "bottomToTop" }); </code></pre>
+                        <p>
+                            Get the <code>verticalTextOrientation</code> property.
+                        </p>
+                        <pre><code>var verticalTextOrientation = $('#jqxKanban').jqxKanban('verticalTextOrientation'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-showclosebutton">verticalTextOrientation is set to "bottomToTop"</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+          <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span14'>width</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    600
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the kanban's width.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>width</code> property.
+                        </p>
+                        <pre><code>$('#jqxKanban').jqxKanban({width:850});</code></pre>
+                        <p>
+                            Get the <code>width</code> property.
+                        </p>
+                        <pre><code>var width = $('#jqxKanban').jqxKanban('width');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-showclosebutton">width is set to 850</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <h2 class="documentation-top-header">
+                        Events
+                    </h2>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span6'>columnCollapsed</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when kanban's column is collapsed.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>columnCollapsed</code> event by type: jqxKanban.
+                        </p>
+                        <pre><code>$('#jqxKanban').on('columnCollapsed', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-events">Bind to the columnCollapsed event by type: jqxKanban.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>columnExpanded</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when kanban's column is expanded.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>columnExpanded</code> event by type: jqxKanban.
+                        </p>
+                        <pre><code>$('#jqxKanban').on('columnExpanded', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-events">Bind to the columnExpanded event by type: jqxKanban.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>columnSelected</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when kanban's column is selected.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>columnSelected</code> event by type: jqxKanban.
+                        </p>
+                        <pre><code>$('#jqxKanban').on('columnSelected', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-events">Bind to the columnSelected event by type: jqxKanban.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>columnUnselected</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when kanban's column is unselected.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>columnUnselected</code> event by type: jqxKanban.
+                        </p>
+                        <pre><code>$('#jqxKanban').on('columnUnselected', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-events">Bind to the columnUnselected event by type: jqxKanban.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>initialized</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when the widget is initialized.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>initialized</code> event by type: jqxKanban.
+                        </p>
+                        <pre><code>$('#jqxKanban').on('initialized', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-events">Bind to the initialized event by type: jqxKanban.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>itemAttrClicked</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when some element of an item is clicked.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>itemAttrClicked</code> event by type: jqxKanban.
+                        </p>
+                        <pre><code>$('#jqxKanban').on('itemAttrClicked', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-events">Bind to the itemAttrClicked event by type: jqxKanban.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>itemCreated</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when new item is created.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>itemCreated</code> event by type: jqxKanban.
+                        </p>
+                        <pre><code>$('#jqxKanban').on('itemCreated', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-events">Bind to the itemCreated event by type: jqxKanban.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>itemMoved</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when an item is moved from one kanban to another. Event is raised only between connected jqxKanban widgets.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>itemMoved</code> event by type: jqxKanban.
+                        </p>
+                        <pre><code>$('#jqxKanban').on('itemMoved', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-events">Bind to the itemMoved event by type: jqxKanban.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>itemReceived</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when an item is received from one kanban to another. Event is raised only between connected jqxKanban widgets.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>itemReceived</code> event by type: jqxKanban.
+                        </p>
+                        <pre><code>$('#jqxKanban').on('itemReceived', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-events">Bind to the itemReceived event by type: jqxKanban.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>itemSelected</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when an item is selected.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>itemSelected</code> event by type: jqxKanban.
+                        </p>
+                        <pre><code>$('#jqxKanban').on('itemSelected', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-events">Bind to the itemSelected event by type: jqxKanban.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <h2 class="documentation-top-header">
+                        Methods
+                    </h2>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span28'>addItem</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Add new item in widget.
+                        </p>
+
+                        <div class="methodArgs">
+                            <table class="arguments">
+                                <tbody>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td><em>newItem</em></td>
+                                        <td><em>Object</em></td>
+                                        <td><em>
+                                            The content of the new kanban's card.<br />
+                                            newItem.status - String, newItem.text - String, newItem.content - String, newItem.tags - String, newItem.color - String, newItem.personId - Number, newItem.$css - String,</em></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <strong>Return Value</strong><br />
+                            <em>None</em>
+                        </div>
+
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>addItem</code> method.
+                        </p>
+                        <pre><code>
+                            var newItem = { status: "new", text: "Cookies", content: "Content", tags: "cookies", color: "lightgreen", personId: 1, $css: "standard" };
+                            $('#jqxKanban').jqxKanban('addItem', newItem); 
+                            </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-methods">add new item</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>        
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span9'>exportColumn</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Export particular column.
+                        </p>
+
+                        <div class="methodArgs">
+                            <table class="arguments">
+                                <tbody>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td><em>dataField</em></td>
+                                        <td><em>String</em></td>
+                                        <td><em>The name of the exported column</em></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <strong>Return Value</strong><br />
+                            <em>Array</em>
+                        </div>
+
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>exportColumn</code> method.
+                        </p>
+                        <pre><code>
+                            var dataField = 'new';
+                            var columnExport = $("#kanban").jqxKanban('exportColumn', dataField);
+                            </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-methods">export selected column</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span10'>getItems</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Returs all items as an array of objects.
+                        </p>
+
+                        <div class="methodArgs">
+                            <table class="arguments">
+                                <tbody>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td><em>None</em></td>
+                                        <td><em></em></td>
+                                        <td><em></em></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <strong>Return Value</strong><br />
+                            <em>Array</em>
+                        </div>
+
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>getItems</code> method.
+                        </p>
+                        <pre><code>
+                            var kanbanExport = $('#jqxKanban').jqxKanban('getItems'); 
+                            </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-methods">get the items</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span10'>getSelectedColumn</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Get the name of the selected column.
+                        </p>
+
+                        <div class="methodArgs">
+                            <table class="arguments">
+                                <tbody>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td><em>None</em></td>
+                                        <td><em></em></td>
+                                        <td><em></em></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <strong>Return Value</strong><br />
+                            <em>String</em>
+                        </div>
+
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>getSelectedColumn</code> method.
+                        </p>
+                        <pre><code>
+                            var selectedColumnName = $('#jqxKanban').jqxKanban('getSelectedColumn'); 
+                            </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-methods">get the name of the selected column</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span10'>getSelectedId</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Get the id of the selected item.
+                        </p>
+
+                        <div class="methodArgs">
+                            <table class="arguments">
+                                <tbody>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td><em>None</em></td>
+                                        <td><em></em></td>
+                                        <td><em></em></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <strong>Return Value</strong><br />
+                            <em>String</em>
+                        </div>
+
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>getSelectedId</code> method.
+                        </p>
+                        <pre><code>
+                            var selectedItemsId = $('#jqxKanban').jqxKanban('getSelectedId'); 
+                            </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-methods">get the id of the selected item</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span10'>getSelectedItem</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Get selected item as array.
+                        </p>
+
+                        <div class="methodArgs">
+                            <table class="arguments">
+                                <tbody>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td><em>None</em></td>
+                                        <td><em></em></td>
+                                        <td><em></em></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <strong>Return Value</strong><br />
+                            <em>Object</em>
+                        </div>
+
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>getSelectedItem</code> method.
+                        </p>
+                        <pre><code>
+                            var selectedItem = $('#jqxKanban').jqxKanban('getSelectedItem'); 
+                            </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-methods">get selected item</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span10'>removeItem</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Remove an item.
+                        </p>
+
+                        <div class="methodArgs">
+                            <table class="arguments">
+                                <tbody>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td><em>itemId</em></td>
+                                        <td><em>Stirng</em></td>
+                                        <td><em>Id of the item, which must be removed </em></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <strong>Return Value</strong><br />
+                            <em>None</em>
+                        </div>
+
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>removeItem</code> method.
+                        </p>
+                        <pre><code>
+                            var itemId = 'jqxKanban_5';
+                            $('#jqxKanban').jqxKanban('removeItem', itemId);
+                            </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-methods">remove an item</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span10'>updateItem</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Update an item.
+                        </p>
+
+                        <div class="methodArgs">
+                            <table class="arguments">
+                                <tbody>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td><em>itemId</em></td>
+                                        <td><em>Stirng</em></td>
+                                        <td><em>Id of the item which content must be replaced</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><em>newContent</em></td>
+                                        <td><em>Object</em></td>
+                                        <td><em>
+                                            The new content of the updated kanban's card.<br/>
+                                            newContent.status - String, newContent.text - String, newContent.content - String, newContent.tags - String, newContent.color - String, newContent.personId - Number, newContent.$css - String</em></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <strong>Return Value</strong><br />
+                            <em>None</em>
+                        </div>
+
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>updateItem</code> method.
+                        </p>
+                        <pre><code>
+                            var itemId = 'jqxKanban';
+                            var newContent = { text: "Cookies", content: "Content", tags: "cookies", color: "lightgreen", personId: 1, $css: "standard" };
+                            $('#jqxKanban').jqxKanban('updateItem', itemId, newContent); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-methods">update an item</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+        <br />
+    </div>
+</body>
+</html>

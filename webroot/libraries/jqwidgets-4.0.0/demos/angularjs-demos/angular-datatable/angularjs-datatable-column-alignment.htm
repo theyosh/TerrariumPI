@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id="Description">Column and Cells Alignment in AngularJS DataTable</title>
+    <meta name="description" content="This sample demonstrates how we can Align Columns and Cells in jqwidgets Grid.">
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> 
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]); 
+        demoApp.controller("demoController", function ($scope) {           
+            var grid;
+            $scope.gridSettings =
+            {
+                width: 850,
+                source:  new $.jqx.dataAdapter({
+                    datatype: "xml",
+                    datafields: [
+                        { name: 'ShippedDate', map: 'm\\:properties>d\\:ShippedDate', type: 'date' },
+                        { name: 'Freight', map: 'm\\:properties>d\\:Freight', type: 'float' },
+                        { name: 'ShipName', map: 'm\\:properties>d\\:ShipName' },
+                        { name: 'ShipAddress', map: 'm\\:properties>d\\:ShipAddress' },
+                        { name: 'ShipCity', map: 'm\\:properties>d\\:ShipCity' },
+                        { name: 'ShipCountry', map: 'm\\:properties>d\\:ShipCountry' }
+                    ],
+                    root: "entry",
+                    record: "content",
+                    id: 'm\\:properties>d\\:OrderID',
+                    url: "../../sampledata/orders.xml",
+                    pager: function (pagenum, pagesize, oldpagenum) {
+                        // callback called when a page or page size is changed.
+                    }
+                }),
+                created: function(args)
+                {
+                    grid = args.instance;
+                },
+                sortable: true,
+                pageable: true,
+                columnsResize: true,
+                columns: [
+                  { text: 'Shipped Date', datafield: 'ShippedDate', width: '50%', cellsFormat: 'D' },
+                  { text: 'Freight', datafield: 'Freight', width: '50%', cellsFormat: 'F2' }
+                ]
+            };
+
+            $scope.columnAlignmentDropDownListSettings = {selectedIndex: 0, autoDropDownHeight: true, source: ['Left', 'Center', 'Right'], height: 25 };
+            $scope.columnAlignmentChange = function (event) {
+                var index = event.args.index;
+                switch (index) {
+                    case 0:
+                        grid.setColumnProperty('ShippedDate', 'align', 'left');
+                        grid.setColumnProperty('Freight', 'align', 'left');
+                        break;
+                    case 1:
+                        grid.setColumnProperty('ShippedDate', 'align', 'center');
+                        grid.setColumnProperty('Freight', 'align', 'center');
+                        break;
+                    case 2:
+                        grid.setColumnProperty('ShippedDate', 'align', 'right');
+                        grid.setColumnProperty('Freight', 'align', 'right');
+                        break;
+                }
+            };
+            $scope.cellsAlignmentDropDownListSettings = { selectedIndex: 0, autoDropDownHeight: true, source: ['Left', 'Center', 'Right'], height: 25 };
+            $scope.cellsAlignmentChange = function (event) {
+                var index = event.args.index;
+                switch (index) {
+                    case 0:
+                        grid.setColumnProperty('ShippedDate', 'cellsAlign', 'left');
+                        grid.setColumnProperty('Freight', 'cellsAlign', 'left');
+                        break;
+                    case 1:
+                        grid.setColumnProperty('ShippedDate', 'cellsAlign', 'center');
+                        grid.setColumnProperty('Freight', 'cellsAlign', 'center');
+                        break;
+                    case 2:
+                        grid.setColumnProperty('ShippedDate', 'cellsAlign', 'right');
+                        grid.setColumnProperty('Freight', 'cellsAlign', 'right');
+                        break;
+                }
+            };
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+    <jqx-data-table jqx-settings="gridSettings"></jqx-data-table>
+    <div style="font-size: 13px; font-family: Verdana; width: 600px; margin-top: 10px;">
+        <div style="float: left; width: 300px;">
+            <h4>Column Alignment</h4>
+            <jqx-drop-down-list jqx-settings="columnAlignmentDropDownListSettings" jqx-on-change="columnAlignmentChange(event)"></jqx-drop-down-list>
+        </div>
+        <div style="float: left; width: 300px;">
+            <h4>Cells Alignment</h4>
+            <jqx-drop-down-list jqx-settings="cellsAlignmentDropDownListSettings" jqx-on-change="cellsAlignmentChange(event)"></jqx-drop-down-list>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>The AngularJS Toggle Button represents a button widget that switches its checked state after a click.</title>
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+     <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            $scope.toggled = true;
+            $scope.buttonValue = "Toggled On";
+            $scope.change = function (event) {
+                $scope.toggled == true ? $scope.buttonValue = "Toggled On" : $scope.buttonValue = "Toggled Off";
+            }
+        });
+        </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-toggle-button ng-change="change(event)" ng-model="toggled">{{buttonValue}}</jqx-toggle-button>
+</body>
+</html>

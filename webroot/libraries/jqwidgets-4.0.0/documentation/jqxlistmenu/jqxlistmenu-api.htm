@@ -1,0 +1,825 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <title>jqxListMenu API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+       <div id="properties">
+            <h2 class="documentation-top-header">Properties</h2>
+            <table class="documentation-table">
+                <tr>
+                    <th>Name
+                    </th>
+                    <th>Type
+                    </th>
+                    <th>Default
+                    </th>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span9'>alwaysShowNavigationArrows</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the jqxListMenu's alwaysShowNavigationArrows property. The alwaysShowNavigationArrows specifies whether navigation arrows are displayed for all items.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>alwaysShowNavigationArrows</code> property.
+                            </p>
+                            <pre><code>$("#jqxListMenu").jqxListMenu({ alwaysShowNavigationArrows: true }); </code></pre>
+                            <p>
+                                Get the <code>alwaysShowNavigationArrows</code> property.
+                            </p>
+                            <pre><code>var alwaysShowNavigationArrows = $('#jqxListMenu').jqxListMenu('alwaysShowNavigationArrows'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/EVsjy/">alwaysShowNavigationArrows is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span49'>animationType</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>"slide"
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the animation's type.
+                            </p>
+                            <b>Possible Values:</b>
+                            <br />
+                            <pre><code>'slide'</code></pre>
+                            <pre><code>'fade'</code></pre>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>animationType</code> property.
+                            </p>
+                            <pre><code>$("#jqxListMenu").jqxListMenu({animationType: 'fade'});</code></pre>
+                            <p>
+                                Get the <code>animationType</code> property.
+                            </p>
+                            <pre><code>var animationType = $('#jqxListMenu').jqxListMenu('animationType'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/v3BSd/">animationType is set to "fade"</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span50'>animationDuration</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>250
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the animation duration in milliseconds.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>animationDuration</code> property.
+                            </p>
+                            <pre><code>$("#jqxListMenu").jqxListMenu({animationDuration: 130});</code></pre>
+                            <p>
+                                Get the <code>animationDuration</code> property.
+                            </p>
+                            <pre><code>var animationDuration = $('#jqxListMenu').jqxListMenu('animationDuration'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/gKF87/">animationDuration is set to 500</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span52'>autoSeparators</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether auto separators will be generated.
+                            Separator is generated for a sequence of list items with equal start character.
+                            The property is possible to be set through the attribute data-auto-separators="true".
+                            Code Example:
+                            <pre>
+                            <code>
+                            <pre style='margin: 10px;' class='code'><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;ul data-role=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"listmenu" data-auto-separators="true"</span>&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span>Item 1<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span>Item 2<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div /><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/ul&gt;</span><div /></pre>
+                                </code>
+                            </pre>
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>autoSeparators</code> property.
+                            </p>
+                            <pre><code>$("#jqxListMenu").jqxListMenu({ autoSeparators: true });</code></pre>
+                            <p>
+                                Get the <code>autoSeparators</code> property.
+                            </p>
+                            <pre><code>var autoSeparators = $('#jqxListMenu').jqxListMenu('autoSeparators'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/HjsVS/">autoSeparators is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span36'>backLabel</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>"Back"
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the BackButton's label.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>backLabel</code> property.
+                            </p>
+                            <pre><code>$("#jqxListMenu").jqxListMenu({backLabel: 'Back'});</code></pre>
+                            <p>
+                                Get the <code>backLabel</code> property.
+                            </p>
+                            <pre><code>var backLabel = $('#jqxListMenu').jqxListMenu('backLabel'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/DJFed/">backLabel is set to "Back"</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span6'>disabled</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the jqxListMenu's disabled property.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>disabled</code> property.
+                            </p>
+                            <pre><code>$("#jqxListMenu").jqxListMenu({ disabled: true }); </code></pre>
+                            <p>
+                                Get the <code>disabled</code> property.
+                            </p>
+                            <pre><code>var disabled = $('#jqxListMenu').jqxListMenu('disabled'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/fKtTA/">disabled is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span10'>enableScrolling</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                When the jqxListMenu is created with the enableScrolling property set to true, vertical scrollbar automatically appears, if the items overflow the visible area.
+                            In order to use this feature, the following files should be included: jqxpanel.js and jqxscrollbar.js.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>enableScrolling</code> property.
+                            </p>
+                            <pre><code>$("#jqxListMenu").jqxListMenu({ enableScrolling: false });</code></pre>
+                            <p>
+                                Get the <code>enableScrolling</code> property.
+                            </p>
+                            <pre><code>var enableScrolling = $('#jqxListMenu').jqxListMenu('enableScrolling'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/MJEDM/">enableScrolling is set to false</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='property-name-disabled'>filterCallback</span>
+                    </td>
+                    <td>
+                        <span>Function</span>
+                    </td>
+                    <td>function (text, searchValue){return text.toString().toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;};
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Used for filtering the jqxListMenu using the filter input.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>filterCallback</code> property.
+                            </p>
+                            <pre><code>$('#jqxListMenu').jqxListMenu({ filterCallback: function (text, searchValue) { return text.toString().toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;}});
+                        </code></pre>
+                            <p>
+                                Get the <code>filterCallback</code> property.
+                            </p>
+                            <pre><code>var filterCallback = $('#jqxListMenu').jqxListMenu('filterCallback');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/vNfQ7/">filterCallback is set to a custom function</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span2'>height</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>auto
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the jqxListMenu's height.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>height</code> property.
+                            </p>
+                            <pre><code>$("#jqxListMenu").jqxListMenu({ height: '250px' }); </code></pre>
+                            <p>
+                                Get the <code>height</code> property.
+                            </p>
+                            <pre><code>var height = $('#jqxListMenu').jqxListMenu('height');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/cJFQz/">height is set to 500</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span51'>headerAnimationDuration</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>0
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the animation duration of the header. Header of a listmenu could be set whether the data-role attribute of a list item is set to 'header'.
+                            Example:
+                            <pre>
+                            <code>
+<pre style='margin: 10px;' class='code'>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;ul data-role=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"listmenu"</span>&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li data-role=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"header"</span>&gt;</span>Header<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span>Item<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/ul&gt;</span><div /></pre>
+                                    </code>
+                                </pre>
+                                This property is setting the duration of the animation used for changing the header when different nested listviews are switched.
+                            Fade animation is used for switching through different headers.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>headerAnimationDuration</code> property.
+                            </p>
+                            <pre><code>$("#jqxListMenu").jqxListMenu({ headerAnimationDuration: 250 });</code></pre>
+                            <p>
+                                Get the <code>headerAnimationDuration</code> property.
+                            </p>
+                            <pre><code>var headerAnimationDuration = $('#jqxListMenu').jqxListMenu('headerAnimationDuration'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/r9E4u/">headerAnimationDuration is set to 500</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span3'>placeHolder</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'Filter list items...'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the filter input field's place holder.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>placeHolder</code> property.
+                            </p>
+                            <pre><code>$("#jqxListMenu").jqxListMenu({ placeHolder: 'Search items...' }); </code></pre>
+                            <p>
+                                Get the <code>placeHolder</code> property.
+                            </p>
+                            <pre><code>var placeHolder = $('#jqxListMenu').jqxListMenu('placeHolder'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/6hcz4/">placeHolder is set to "Search items..."</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span53'>readOnly</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether the list will be read-only.
+                            In readOnly mode, items are not clickable.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>readOnly</code> property.
+                            </p>
+                            <pre><code>$("#jqxListMenu").jqxListMenu({ readOnly: false });</code></pre>
+                            <p>
+                                Get the <code>readOnly</code> property.
+                            </p>
+                            <pre><code>var readOnly = $('#jqxListMenu').jqxListMenu('readOnly'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/Pz4my/">readOnly is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span11'>rtl</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>Sets or gets a value indicating whether widget's elements are aligned to support locales using right-to-left fonts.</p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>rtl</code> property.
+                            </p>
+                            <pre><code>$('#jqxListMenu').jqxListMenu({rtl : true}); </code></pre>
+                            <p>
+                                Get the <code>rtl</code> property.
+                            </p>
+                            <pre><code>var rtl = $('#jqxListMenu').jqxListMenu('rtl'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/CWuEY/">rtl is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span7'>roundedCorners</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the jqxListMenu's roundedCorners property.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>roundedCorners</code> property.
+                            </p>
+                            <pre><code>$("#jqxListMenu").jqxListMenu({ roundedCorners: false }); </code></pre>
+                            <p>
+                                Get the <code>roundedCorners</code> property.
+                            </p>
+                            <pre><code>var roundedCorners = $('#jqxListMenu').jqxListMenu('roundedCorners'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/tHpJH/">roundedCorners is set to false</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span8'>showNavigationArrows</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the jqxListMenu's showNavigationArrows property. The showNavigationArrows specifies whether navigation arrows are displayed only for list items with nested Lists
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>showNavigationArrows</code> property.
+                            </p>
+                            <pre><code>$("#jqxListMenu").jqxListMenu({ showNavigationArrows: false }); </code></pre>
+                            <p>
+                                Get the <code>showNavigationArrows</code> property.
+                            </p>
+                            <pre><code>var showNavigationArrows = $('#jqxListMenu').jqxListMenu('showNavigationArrows'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/RFeFv/">showNavigationArrows is set to false</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span4'>showFilter</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether the filter input field is visible.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>showFilter</code> property.
+                            </p>
+                            <pre><code>$("#jqxListMenu").jqxListMenu({ showFilter: true }); </code></pre>
+                            <p>
+                                Get the <code>showFilter</code> property.
+                            </p>
+                            <pre><code>var showFilter = $('#jqxListMenu').jqxListMenu('showFilter'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/ZuL3x/">showFilter is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span5'>showHeader</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether the header will be visible.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>showHeader</code> property.
+                            </p>
+                            <pre><code>$("#jqxListMenu").jqxListMenu({showHeader: false});</code></pre>
+                            <p>
+                                Get the <code>showHeader</code> property.
+                            </p>
+                            <pre><code>var showHeader = $('#jqxListMenu').jqxListMenu('showHeader'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/4f4CS/">showHeader is set to false</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span35'>showBackButton</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Indicates whether the back button will be visible.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>showBackButton</code> property.
+                            </p>
+                            <pre><code>$("#jqxListMenu").jqxListMenu({showBackButton: true});</code></pre>
+                            <p>
+                                Get the <code>showBackButton</code> property.
+                            </p>
+                            <pre><code>var showBackButton = $('#jqxListMenu').jqxListMenu('showBackButton'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/a3Q3V/">showBackButton is set to false</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span63'>theme</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>''
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets the widget's theme.
+                            </p>
+                            jQWidgets uses a pair of css files - jqx.base.css and jqx.[theme name].css. The base stylesheet creates the styles related to the widget's layout like margin, padding, border-width, position. The second css file applies the widget's colors and backgrounds. The jqx.base.css should be included before the second CSS file.
+                        In order to set a theme, you need to do the following:
+                        <ul>
+                            <li>Include the theme's CSS file after jqx.base.css.<br />
+                                The following code example adds the 'energyblue' theme.
+                                <pre><code>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.base.css&quot; type=&quot;text/css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.energyblue.css&quot; type=&quot;text/css&quot; /&gt;
+</code></pre>
+</code></pre>
+                            </li>
+                            <li>Set the widget's theme property to 'energyblue' when you initialize it.
+                            </li>
+                        </ul>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/NQM36/">theme is set to 'energyblue'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span1'>width</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>100%
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the jqxListMenu's width.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>width</code> property.
+                            </p>
+                            <pre><code>$("#jqxListMenu").jqxListMenu({ width: '250px' }); </code></pre>
+                            <p>
+                                Get the <code>width</code> property.
+                            </p>
+                            <pre><code>var width = $('#jqxListMenu').jqxListMenu('width');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/p5zxH/">width is set to 300</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Methods
+                        </h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span37'>back</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Navigates to the previous page.
+                            </p>
+                                <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>back</code> method.
+                            </p>
+                            <pre><code>$("#jqxListMenu").jqxListMenu('back'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/NHxSd/">goes back in the jqxListMenu</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span31'>changePage</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets the displayed page. The page could be set using a selector or object.
+                            The page must be a child of the current list and it's data-role must be set to "listmenu".
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>Item</em></td>
+                                            <td>Object/String</td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>changePage</code> method.
+                            </p>
+                            <pre><code>// @param String</code></pre>
+                            <pre><code>$("#jqxListMenu").jqxListMenu('changePage', '#newPage' ); </code></pre>
+                            <h4>Code example</h4>
+                            <pre style='margin: 10px;' class='code'><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;!DOCTYPE html&gt;</span><div /><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;html lang=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"en"</span>&gt;</span><div /><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;head&gt;</span><div />    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css"</span> /&gt;</span><div />    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;script type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text/javascript" src="../../scripts/jquery-1.11.1.min.js"</span>&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/script&gt;</span><div />    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;script type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text/javascript" src="../../jqwidgets/jqxcore.js"</span>&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/script&gt;</span><div />    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;script type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text/javascript" src="../../jqwidgets/jqxListMenu.js"</span>&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/script&gt;</span><div />    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;script type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text/javascript" src="../../jqwidgets/jqxbuttons.js"</span>&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/script&gt;</span><div />    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;script type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text/javascript"</span>&gt;</span><div />        $(document).ready(function () {<div />            $(<span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'#list').jqxListMenu({ autoSeparators: true, showHeader: true, width: '600px', placeholder: 'Find contact...'</span> });<div />            $(<span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'#list').jqxListMenu('changePage', '#content'</span>);<div />        });<div />    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/script&gt;</span><div />    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;style type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text/css"</span>&gt;</span><div />        html, body<div />        {<div />            margin: 0px;<div />            padding: 0px;<div />            width: 100%;<div />            height: 100%;<div />        }<div />        #list img<div />        {<div />            width: 50px;<div />            height: 55px;<div />        }<div />        #list div<div />        {<div />            margin-top: -35px;<div />            margin-left: 80px;<div />        }<div />        .jqx-listmenu-item<div />        {<div />            padding: 0px;<div />            min-height: 57px;<div />        }<div />        div td<div />        {<div />            padding-top: 5px;<div />            padding-bottom: 5px;<div />        }<div />    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/style&gt;</span><div /><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/head&gt;</span><div /><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;body class=<span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'default'</span>&gt;</span><div />    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;ul id=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"list" data-role="listmenu"</span>&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;img src=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"../../images/andrew.png" alt=""</span> /&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div&gt;</span><div />                Andrew Fuller<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;ul id=<span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'content'</span> data-role=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"listmenu"</span>&gt;</span><div />                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span><div />                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div style=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"padding: 5px;" data-role="content"</span>&gt;</span><div />                        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;table&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;img width=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"50" height="50" src="../../images/andrew.png" alt=""</span> /&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;b&gt;</span>Andrew Fuller<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/b&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Title<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Sales Representative<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Notes<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    "Andrew received his BTS commercial in 1974 and a Ph.D. in international marketing<div />                                    from the University of Dallas in 1981. He is fluent in French and Italian and reads<div />                                    German. He joined the company as a sales representative, was promoted to sales manager<div />                                    in January 1992 and to vice president of sales in March 1993. Andrew is a member<div />                                    of the Sales Management Roundtable, the Seattle Chamber of Commerce, and the Pacific<div />                                    Rim Importers Association.<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Birth Date<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    19-Feb-52<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Hire Date<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    14-Aug-92<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Home Phone<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    (206) 555-9482<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Address<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    908 W. Capital Way.<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Postal Code<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    98401<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    City<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Tacoma<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Country<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    USA<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/table&gt;</span><div />                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div />                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/ul&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;img src=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"../../images/anne.png" alt=""</span> /&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div&gt;</span><div />                Anne Dodsworth<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;ul data-role=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"listmenu"</span>&gt;</span><div />                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span><div />                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div style=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"padding: 5px;" data-role="content"</span>&gt;</span><div />                        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;table&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;img width=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"50" height="50" src="../../images/anne.png" alt=""</span> /&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;b&gt;</span>Anne Dodsworth<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/b&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Title<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Inside Sales Coordinator<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Notes<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Anne has a BA degree in English from St. Lawrence College. She is fluent in French<div />                                    and German.<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Birth Date<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    27-Jan-66<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Hire Date<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    15-Nov-94<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Home Phone<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    (71) 555-5598<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Address<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    7 Houndstooth Rd.<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Postal Code<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    WG2 7LT<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    City<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    London<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Country<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    UK<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/table&gt;</span><div />                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div />                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/ul&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;img src=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"../../images/janet.png" alt=""</span> /&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div&gt;</span><div />                Janet Leverling<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;ul data-role=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"listmenu"</span>&gt;</span><div />                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span><div />                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div style=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"padding: 5px;" data-role="content"</span>&gt;</span><div />                        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;table&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;img width=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"50" height="50" src="../../images/janet.png" alt=""</span> /&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;b&gt;</span>Janet Leverling<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/b&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Title<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Sales Representative<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Notes<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Janet has a BS degree in chemistry from Boston College (1984). She has also completed<div />                                    a certificate program in food retailing management. Janet was hired as a sales associate<div />                                    in 1991 and promoted to sales representative in February 1992.<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Birth Date<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    27-Jan-69<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Hire Date<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    15-Nov-94<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Home Phone<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    (71) 555-4444<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Address<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Miner Rd.<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Postal Code<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    WG2 7LT<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    City<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    London<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Country<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    UK<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/table&gt;</span><div />                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div />                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/ul&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;img src=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"../../images/laura.png" alt=""</span> /&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div&gt;</span><div />                Laura Callahan<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;ul data-role=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"listmenu"</span>&gt;</span><div />                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span><div />                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div style=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"padding: 5px;" data-role="content"</span>&gt;</span><div />                        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;table&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;img width=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"50" height="50" src="../../images/laura.png" alt=""</span> /&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;b&gt;</span>Laura Callahan<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/b&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Title<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Sales Representative<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Notes<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Laura received a BA in psychology from the University of Washington. She has also<div />                                    completed a course in business French. She reads and writes French.<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Birth Date<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    27-Jan-66<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Hire Date<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    15-Nov-94<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Home Phone<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    (71) 555-4444<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Address<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    7 Houndstooth Rd.<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Postal Code<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    WG2 7LT<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    City<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    London<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Country<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    UK<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/table&gt;</span><div />                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div />                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/ul&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;img src=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"../../images/margaret.png" alt=""</span> /&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div&gt;</span><div />                Margaret Peacock<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;ul data-role=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"listmenu"</span>&gt;</span><div />                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span><div />                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div style=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"padding: 5px;" data-role="content"</span>&gt;</span><div />                        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;table&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;img width=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"50" height="50" src="../../images/margaret.png" alt=""</span> /&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;b&gt;</span>Margaret Peacock<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/b&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Title<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Vice President, Sales<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Notes<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Margaret holds a BA in English literature from Concordia College (1958) and an MA<div />                                    from the American Institute of Culinary Arts (1966). She was assigned to the London<div />                                    office temporarily from July through November 1992.<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Birth Date<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    19-Sep-37<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Hire Date<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    17-Oct-93<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Home Phone<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    (206) 555-8122<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Address<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    4110 Old Redmond Rd.<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Postal Code<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    98052<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    City<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Redmond<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Country<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    USA<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/table&gt;</span><div />                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div />                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/ul&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;img src=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"../../images/michael.png" alt=""</span> /&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div&gt;</span><div />                Michael Suyama<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;ul data-role=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"listmenu"</span>&gt;</span><div />                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span><div />                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div style=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"padding: 5px;" data-role="content"</span>&gt;</span><div />                        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;table&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;img width=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"50" height="50" src="../../images/michael.png" alt=""</span> /&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;b&gt;</span>Michael Suyama<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/b&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Title<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Sales Representative<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Notes<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Michael is a graduate of Sussex University (MA, economics, 1983) and the University<div />                                    of California at Los Angeles (MBA, marketing, 1986). He has also taken the courses<div />                                    <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'Multi-Cultural Selling' and 'Time Management for the Sales Professional.'</span> He is<div />                                    fluent in Japanese and can read and write French, Portuguese, and Spanish.<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Birth Date<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    02-Jul-63<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Hire Date<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    05-June-96<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Home Phone<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    (71) 555-4848<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Address<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Coventry House<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Postal Code<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    EC2 7JR<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    City<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    London<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Country<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    UK<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/table&gt;</span><div />                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div />                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/ul&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;img src=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"../../images/nancy.png" alt=""</span> /&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div&gt;</span><div />                Nancy Divolio<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;ul data-role=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"listmenu"</span>&gt;</span><div />                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span><div />                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div style=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"padding: 5px;" data-role="content"</span>&gt;</span><div />                        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;table&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;img width=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"50" height="50" src="../../images/nancy.png" alt=""</span> /&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;b&gt;</span>Nancy Davolio<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/b&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Title<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Sales Representative<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Notes<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Education includes a BA in psychology from Colorado State University in 1970. She<div />                                    also completed <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'The Art of the Cold Call.'</span> Nancy is a member of Toastmasters International.<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Birth Date<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    08-Dec-48<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Hire Date<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    01-May-92<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Home Phone<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    (206) 555-9857<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Address<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    507 - 20th Ave. E. Apt. 2A<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Postal Code<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    98122<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    City<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Seattle<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Country<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    USA<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/table&gt;</span><div />                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div />                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/ul&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;img src=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"../../images/robert.png" alt=""</span> /&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div&gt;</span><div />                Robert King<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;ul data-role=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"listmenu"</span>&gt;</span><div />                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span><div />                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div style=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"padding: 5px;" data-role="content"</span>&gt;</span><div />                        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;table&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;img width=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"50" height="50" src="../../images/robert.png" alt=""</span> /&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;b&gt;</span>Robert King<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/b&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Title<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Sales Representative<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Notes<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Robert King served in the Peace Corps and traveled extensively before completing<div />                                    his degree in English at the University of Michigan in 1992, the year he joined<div />                                    the company. After completing a course entitled <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'Selling in Europe,'</span> he was transferred<div />                                    to the London office in March 1993.<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Birth Date<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    29-May-60<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Hire Date<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    02-Jan-94<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Home Phone<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    (71) 555-5598<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Address<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Winchester Way<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Postal Code<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    RG1 9SP<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    City<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    London<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Country<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    UK<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/table&gt;</span><div />                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div />                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/ul&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;img src=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"../../images/steven.png" alt=""</span> /&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div&gt;</span><div />                Steven Buchanan<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;ul data-role=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"listmenu"</span>&gt;</span><div />                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;li&gt;</span><div />                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div style=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"padding: 5px;" data-role="content"</span>&gt;</span><div />                        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;table&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;img width=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"50" height="50" src="../../images/steven.png" alt=""</span> /&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;b&gt;</span>Steven Buchanan<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/b&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Title<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Sales Manager<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Notes<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Steven Buchanan graduated from St. Andrews University, Scotland, with a BSC degree<div />                                    in 1976. Upon joining the company as a sales representative in 1992, he spent 6<div />                                    months in an orientation program at the Seattle office and then returned to his<div />                                    permanent post in London. He was promoted to sales manager in March 1993. Mr. Buchanan<div />                                    has completed the courses <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'Successful Telemarketing' and 'International Sales Management.'</span><div />                                    He is fluent in French.<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Birth Date<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    04-Mar-55<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Hire Date<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    02-May-94<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Home Phone<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    (71) 555-5598<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Address<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    908 W. Capital Way<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Postal Code<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    98052<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    City<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Redmond<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    Country<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span><div />                                    USA<div />                                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span><div />                            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span><div />                        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/table&gt;</span><div />                    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div />                <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />            <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/ul&gt;</span><div />        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/li&gt;</span><div />    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/ul&gt;</span><div /><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/body&gt;</span><div /><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/html&gt;</span><div /><div /></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/hane8/">changes the page in the jqxListMenu</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span68'>destroy</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Destroys the widget.
+                            </p>
+                                <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples</h4>
+                            <p>
+                                Invoke the <code>destroy</code> method.
+                            </p>
+                            <pre><code>$('#jqxListMenu').jqxListMenu('destroy'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/ujgQH/">destroys the jqxListMenu</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br />
+        </div>
+  </body>
+</html>

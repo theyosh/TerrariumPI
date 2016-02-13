@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS DataTable - Data Paging</title>
+    <meta name="description" content="This sample demonstrates how to enable Data Paging with JavaScript Grid">
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../../sampledata/generatedata.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]); 
+        demoApp.controller("demoController", function ($scope) {           
+            $scope.gridSettings =
+            {
+                width: 850,
+                source: new $.jqx.dataAdapter({
+                    localData: generateData(10),
+                    datatype: "array",
+                    dataFields:
+                    [
+                        { name: 'firstname', type: 'string' },
+                        { name: 'lastname', type: 'string' },
+                        { name: 'productname', type: 'string' },
+                        { name: 'available', type: 'bool' },
+                        { name: 'date', type: 'date' },
+                        { name: 'quantity', type: 'number' },
+                        { name: 'price', type: 'number' }
+                    ]
+                }),
+                pageable: true,
+                pagerMode: 'advanced',
+                altRows: true,
+                columns: [
+                  { text: 'Name', dataField: 'firstname', width: 150 },
+                  { text: 'Last Name', dataField: 'lastname', width: 150 },
+                  { text: 'Product', editable: false, dataField: 'productname', width: 250 },
+                  { text: 'Quantity', dataField: 'quantity', width: 80, cellsalign: 'right' },
+                  { text: 'Unit Price', dataField: 'price', width: 80, cellsalign: 'right', cellsformat: 'c2' },
+                  { text: 'Total', dataField: 'total', cellsalign: 'right', cellsformat: 'c2' }
+                ]
+            }; 
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+    <jqx-data-table jqx-settings="gridSettings"></jqx-data-table>
+</body>
+</html>

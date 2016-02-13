@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id="Description">AngularJS DataTable with Custom Cell Template</title>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../sampledata/generatedata.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        angular.module('simpleDirective', [])
+        .directive('jqxName', function () {
+            return {
+                replace: true,
+                template: "<a style='color: orange;'></a>",
+                link: function link(scope, element, attrs) {
+                    element.html(attrs.value);
+                    element[0].href = "www.jqwidgets.com";
+                }
+            }
+        });
+        var demoApp = angular.module("demoApp", ["jqwidgets", "simpleDirective"]);
+        demoApp.controller("demoController", function ($scope) {
+            var dataTable;
+            $scope.data = generatedata(85);
+
+
+            $scope.dataTableSettings =
+            {
+                source:   new $.jqx.dataAdapter({
+                    localdata: $scope.data,
+                    datatype: "array",
+                    datafields:
+                    [
+                        { name: 'firstname', type: 'string' },
+                        { name: 'lastname', type: 'string' },
+                        { name: 'productname', type: 'string' },
+                        { name: 'quantity', type: 'number' },
+                        { name: 'price', type: 'number' },
+                        { name: 'total', type: 'number' }
+                    ],
+                    sortcolumn: 'firstname',
+                    sortdirection: 'asc'
+                }),
+                pageable: true,
+                altRows: true,
+                width: 650,
+                editable: true,
+                created: function(args)
+                {
+                    dataTable = args.instance;
+                },
+                columns: [
+                  {
+                      text: 'First Name', datafield: 'firstname', width: 180, cellsRenderer: function (row, columnDataField, value) {
+                          return "<jqx-name data-value=" + value + "><jqx-name>";
+                      }
+                  },
+                  { text: 'Last Name', dataField: 'lastname', width: 200 },
+                  { text: 'Product', dataField: 'productname', width: 180 },
+                  { text: 'Quantity', dataField: 'quantity', align: 'right', cellsalign: 'right' },
+                ]
+            };
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+    <jqx-data-table jqx-settings="dataTableSettings"></jqx-data-table><br />
+</body>
+</html>

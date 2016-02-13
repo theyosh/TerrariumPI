@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS DateTimeInput Fluid Size Example. The width of the DateTimeInput in this demo is in Percentages.</title>
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-date-time-input jqx-width="'60%'" jqx-height="25">
+    </jqx-date-time-input>
+</body>
+</html>

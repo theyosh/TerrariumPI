@@ -1,0 +1,741 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../Styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="jQuery, jqxNavBar Help Documentation" />
+    <title>jqxNavBar API Documentation</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+        <div id="properties">
+            <h2 class="documentation-top-header">Properties</h2>
+            <table class="documentation-table">
+                <tr>
+                    <th>Name
+                    </th>
+                    <th>Type
+                    </th>
+                    <th>Default
+                    </th>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span3'>columns</span>
+                    </td>
+                    <td>
+                        <span>Array</span>
+                    </td>
+                    <td>[]
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Defines the layout of the widget's elements. Each Array item should be a Percentage Value and the total should be "100%".
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>columns</code> property.
+                            </p>
+                            <pre><code>$("#jqxNavBar").jqxNavBar({ columns: ['30%', '70%'});</code></pre>
+                            <p>
+                                Get the <code>columns</code> property.
+                            </p>
+                            <pre><code>var columns = $('#jqxNavBar').jqxNavBar('columns');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/fh7wpo7a/">columns is set to ['30%', '40%', '30%']</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span13'>disabled</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Enables/disables the navbar.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>disabled</code> property.
+                            </p>
+                            <pre><code>$("#jqxNavBar").jqxNavBar({ disabled: false });</code></pre>
+                            <p>
+                                Get the <code>disabled</code> property.
+                            </p>
+                            <pre><code>var disabled = $('#jqxNavBar').jqxNavBar('disabled');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/ymvnb1uk/">disabled is set to false</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span2'>height</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the NavBar's height.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>height</code> property.
+                            </p>
+                            <pre><code>$("#jqxNavBar").jqxNavBar({ height: 30 });</code></pre>
+                            <p>
+                                Get the <code>height</code> property.
+                            </p>
+                            <pre><code>var height = $('#jqxNavBar').jqxNavBar('height');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/3hr03zcm/">height is set to 40</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span4'>minimized</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Defines whether the NavBar is minimized.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>minimized</code> property.
+                            </p>
+                            <pre><code>$("#jqxNavBar").jqxNavBar({ minimized: true);</code></pre>
+                            <p>
+                                Get the <code>minimized</code> property.
+                            </p>
+                            <pre><code>var minimized = $('#jqxNavBar').jqxNavBar('minimized');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/gt3cp95w/">minimized is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span7'>minimizeButtonPosition</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'left'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Defines the position of the Toggle Button in the minimized state.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>minimizeButtonPosition</code> property.
+                            </p>
+                            <pre><code>$("#jqxNavBar").jqxNavBar({ minimizeButtonPosition: "right");</code></pre>
+                            <p>
+                                Get the <code>minimizeButtonPosition</code> property.
+                            </p>
+                            <pre><code>var minimizeButtonPosition = $('#jqxNavBar').jqxNavBar('minimizeButtonPosition');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/f4wv2hsj/">minimizeButtonPosition is set to "right"</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span8'>minimizedHeight</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>30
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Defines the NavBar's height in minimized state.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>minimizedHeight</code> property.
+                            </p>
+                            <pre><code>$("#jqxNavBar").jqxNavBar({ minimizedHeight: 40);</code></pre>
+                            <p>
+                                Get the <code>minimizedHeight</code> property.
+                            </p>
+                            <pre><code>var minimizedHeight = $('#jqxNavBar').jqxNavBar('minimizedHeight');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/toev1mh9/">minimizedHeight is set to 40</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span10'>minimizedTitle</span>
+                    </td>
+                    <td>
+                        <span>String/HTML Element</span>
+                    </td>
+                    <td>""
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Defines the NavBar's Title in minimized state.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>minimizedTitle</code> property.
+                            </p>
+                            <pre><code>$("#jqxNavBar").jqxNavBar({ minimizedTitle: 'Title');</code></pre>
+                            <p>
+                                Get the <code>minimizedTitle</code> property.
+                            </p>
+                            <pre><code>var minimizedTitle = $('#jqxNavBar').jqxNavBar('minimizedTitle');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/wm40g9bj/">minimizedTitle is set to custom element.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span11'>orientation</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>"horizontal"
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Defines the NavBar's orientation. Possible values: "horizontal", "vertical".
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>orientation</code> property.
+                            </p>
+                            <pre><code>$("#jqxNavBar").jqxNavBar({ orientation: 'vertical');</code></pre>
+                            <p>
+                                Get the <code>orientation</code> property.
+                            </p>
+                            <pre><code>var orientation = $('#jqxNavBar').jqxNavBar('orientation');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/kx87dw55/">orientation is set to "vertical".</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span9'>popupAnimationDelay</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>250
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Defines the animation speed of the NavBar's Popup in minimized state.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>popupAnimationDelay</code> property.
+                            </p>
+                            <pre><code>$("#jqxNavBar").jqxNavBar({ popupAnimationDelay: 400);</code></pre>
+                            <p>
+                                Get the <code>minimized</code> property.
+                            </p>
+                            <pre><code>var popupAnimationDelay = $('#jqxNavBar').jqxNavBar('popupAnimationDelay');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/se8fowet/">popupAnimationDelay is set to 400</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span14'>rtl</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets a value indicating whether widget's elements are aligned to support
+                                                                                    locales using right-to-left fonts.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>rtl</code> property.
+                            </p>
+                            <pre><code>$("#jqxNavBar").jqxNavBar({ rtl: false});</code></pre>
+                            <p>
+                                Get the <code>rtl</code> property.
+                            </p>
+                            <pre><code>var rtl = $('#jqxNavBar').jqxNavBar('rtl');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/jb6tfjnm/">rtl is set to false</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span12'>selection</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether the items can be selected.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>selection</code> property.
+                            </p>
+                            <pre><code>$("#jqxNavBar").jqxNavBar({ selection: false });</code></pre>
+                            <p>
+                                Get the <code>selection</code> property.
+                            </p>
+                            <pre><code>var selection = $('#jqxNavBar').jqxNavBar('selection');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/04ezy8p5/">selection is set to false</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span6'>selectedItem</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>0
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the selected item. The property is taken into account when <code>selection</code> is true.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>selectedItem</code> property.
+                            </p>
+                            <pre><code>$("#jqxNavBar").jqxNavBar({ selectedItem: 0 });</code></pre>
+                            <p>
+                                Get the <code>selectedItem</code> property.
+                            </p>
+                            <pre><code>var selectedItem = $('#jqxNavBar').jqxNavBar('selectedItem');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/pbrh1m6y/">selectedItem is set to 1</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span63'>theme</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>''
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets the widget's theme.
+                            </p>
+                            jQWidgets uses a pair of css files - jqx.base.css and jqx.[theme name].css. The
+                                                                                base stylesheet creates the styles related to the widget's layout like margin, padding,
+                                                                                border-width, position. The second css file applies the widget's colors and backgrounds.
+                                                                                The jqx.base.css should be included before the second CSS file. In order to set
+                                                                                a theme, you need to do the following:
+                                                                                <ul>
+                                                                                    <li>Include the theme's CSS file after jqx.base.css.<br />
+                                                                                        The following code example adds the 'fresh' theme.
+                                                                                        <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.base.css&quot;type=&quot;text/css&quot;/&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.fresh.css&quot; type=&quot;text/css&quot; /&gt;</code></pre>
+                                                                                    </li>
+                                                                                    <li>Set the widget's theme property to 'fresh' when you initialize it.
+                                                                                        <pre><code>$('#jqxNavBar').jqxNavBar({ theme: 'fresh' });</code></pre>
+                                                                                    </li>
+                                                                                </ul>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/768archp/">theme
+                                                                                        is set to 'fresh'
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span1'>width</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>'100%'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the NavBar's width.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>width</code> property.
+                            </p>
+                            <pre><code>$("#jqxNavBar").jqxNavBar({ width: '90%' });</code></pre>
+                            <p>
+                                Get the <code>width</code> property.
+                            </p>
+                            <pre><code>var width = $('#jqxNavBar').jqxNavBar('width');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/2pq9rvk0/">width is set to '90%'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Events</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span27'>change</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the user selects an item.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Bind to the <code>change</code> event by type: jqxNavBar.
+                            </p>
+                            <pre><code>$('#jqxNavBar').on('change', function () { // Some code here. }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/4j8cvhso/">Bind to the change event by type: jqxNavBar.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Methods</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span15'>close</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                When NavBar is minimized, closes the popup.
+                            </p>
+                             <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples</h4>
+                            <p>
+                                Invoke the <code>close</code> method.
+                            </p>
+                            <pre><code>$("#jqxNavBar").jqxNavBar('close'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/eyxc62h5/">closes the popup of minimized NavBar.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span21'>destroy</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Destroys the jqxNavBar widget.
+                            </p>
+                               <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples</h4>
+                            <p>
+                                Invoke the <code>destroy</code> method.
+                            </p>
+                            <pre><code>$('#jqxNavBar').jqxNavBar('destroy'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/g0h9x1tL/">destroys the jqxNavBar.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span29'>getSelectedIndex</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Gets the index of the selected item. The returned value is the index of the selected item. If there's no selected item, -1 is returned.
+                            </p>
+                                                        <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>Number</em>
+                            </div>
+                            <h4>Code examples</h4>
+                            <p>
+                                Invoke the <code>getSelectedIndex</code> method.
+                            </p>
+                            <p>
+                                // @param Number
+                            </p>
+                            <pre><code>var index = $("#jqxNavBar").jqxNavBar('getSelectedIndex'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/3t2t04y8/">returns the selected item's index and displays it</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span5'>open</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                When NavBar is minimized, opens the popup.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples</h4>
+                            <p>
+                                Invoke the <code>open</code> method.
+                            </p>
+                            <pre><code>$("#jqxNavBar").jqxNavBar('open'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/egaqu8p0/">opens the popup of minimized NavBar.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span16'>selectAt</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Selects the item with indicated index. Index is a number.
+                            </p>
+                               <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>index</em></td>
+                                            <td>Number</td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples</h4>
+                            <p>
+                                Invoke the <code>selectAt</code> method.
+                            </p>
+                            <p>
+                                // @param index - Number
+                            </p>
+                            <pre><code>$('#jqxNavBar').jqxNavBar('selectAt', 1); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/chw01tqh/">selects item in the jqxNavBar</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+
+            </table>
+            <br />
+        </div>
+ </body>
+</html>

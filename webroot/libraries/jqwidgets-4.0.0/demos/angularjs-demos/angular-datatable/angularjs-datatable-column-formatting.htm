@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id="Description">Column Formatting in AngularJS DataTable</title>
+    <meta name="description" content="This sample demonstrates how we can Format Columns in jqwidgets Grid.">
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]); 
+        demoApp.controller("demoController", function ($scope) {     
+            var grid;
+            $scope.gridSettings =
+            {
+                width: 850,
+                created: function(args)
+                {
+                    grid = args.instance;
+                },
+                source:  new $.jqx.dataAdapter({
+                    datatype: "xml",
+                    datafields: [
+                        { name: 'ShippedDate', map: 'm\\:properties>d\\:ShippedDate', type: 'date' },
+                        { name: 'Freight', map: 'm\\:properties>d\\:Freight', type: 'float' },
+                        { name: 'ShipName', map: 'm\\:properties>d\\:ShipName' },
+                        { name: 'ShipAddress', map: 'm\\:properties>d\\:ShipAddress' },
+                        { name: 'ShipCity', map: 'm\\:properties>d\\:ShipCity' },
+                        { name: 'ShipCountry', map: 'm\\:properties>d\\:ShipCountry' }
+                    ],
+                    root: "entry",
+                    record: "content",
+                    id: "m\\:properties>d\\:OrderID",
+                    url: "../../sampledata/orders.xml",
+                    pager: function (pagenum, pagesize, oldpagenum) {
+                        // callback called when a page or page size is changed.
+                    }
+                }),
+                sortable: true,
+                pageable: true,
+                columnsResize: true,
+                columns: [
+                  { text: 'Shipped Date', datafield: 'ShippedDate', width: '50%', cellsFormat: 'D' },
+                  { text: 'Freight', datafield: 'Freight', width: '50%', cellsFormat: 'F2', cellsalign: 'right' }
+                ]
+            };
+
+            $scope.dateFormatsDropDownListSettings = {selectedIndex: 1, autoDropDownHeight: true, source: ['Short Date', 'Long Date', 'Long date, Short Time', 'Long date, Long Time', 'Month/Year', 'Month/Day', 'Custom'], height: 25 };
+            $scope.dateFormatsChange = function (event) {
+                var index = event.args.index;
+                switch (index) {
+                    case 0:
+                        grid.setColumnProperty('ShippedDate', 'cellsFormat', 'd');
+                        break;
+                    case 1:
+                        grid.setColumnProperty('ShippedDate', 'cellsFormat', 'D');
+                        break;
+                    case 2:
+                        grid.setColumnProperty('ShippedDate', 'cellsFormat', 'f');
+                        break;
+                    case 3:
+                        grid.setColumnProperty('ShippedDate', 'cellsFormat', 'F');
+                        break;
+                    case 4:
+                        grid.setColumnProperty('ShippedDate', 'cellsFormat', 'Y');
+                        break;
+                    case 5:
+                        grid.setColumnProperty('ShippedDate', 'cellsFormat', 'M');
+                        break;
+                    case 6:
+                        grid.setColumnProperty('ShippedDate', 'cellsFormat', 'yyyy-MM-dd HH:mm:ss');
+                        break;
+                }
+            };
+           
+            $scope.numberFormatsDropDownListSettings = { selectedIndex: 1, autoDropDownHeight: true, source: ['n', 'f', 'f2', 'f3', 'c', 'c2', 'c3', 'p', 'p2', 'p3'], height: 25 };
+            $scope.numberFormatsChange = function (event) {
+                var index = event.args.index;
+                switch (index) {
+                    case 0:
+                        grid.setColumnProperty('Freight', 'cellsFormat', 'n');
+                        break;
+                    case 1:
+                        grid.setColumnProperty('Freight', 'cellsFormat', 'f');
+                        break;
+                    case 2:
+                        grid.setColumnProperty('Freight', 'cellsFormat', 'f2');
+                        break;
+                    case 3:
+                        grid.setColumnProperty('Freight', 'cellsFormat', 'f3');
+                        break;
+                    case 4:
+                        grid.setColumnProperty('Freight', 'cellsFormat', 'c');
+                        break;
+                    case 5:
+                        grid.setColumnProperty('Freight', 'cellsFormat', 'c2');
+                        break;
+                    case 6:
+                        grid.setColumnProperty('Freight', 'cellsFormat', 'c3');
+                        break;
+                    case 7:
+                        grid.setColumnProperty('Freight', 'cellsFormat', 'p');
+                        break;
+                    case 8:
+                        grid.setColumnProperty('Freight', 'cellsFormat', 'p2');
+                        break;
+                    case 9:
+                        grid.setColumnProperty('Freight', 'cellsFormat', 'p3');
+                        break;
+                }
+            };
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+    <jqx-data-table jqx-settings="gridSettings"></jqx-data-table>
+    <div style="font-size: 13px; font-family: Verdana; width: 600px; margin-top: 10px;">
+        <div style="float: left; width: 300px;">
+            <h4>Shipped Date</h4>
+            <jqx-drop-down-list jqx-settings="dateFormatsDropDownListSettings" jqx-on-change="dateFormatsChange(event)"></jqx-drop-down-list>
+        </div>
+        <div style="float: left; width: 300px;">
+            <h4>Freight</h4>
+            <jqx-drop-down-list jqx-settings="numberFormatsDropDownListSettings" jqx-on-change="numberFormatsChange(event)"></jqx-drop-down-list>
+        </div>
+    </div>
+</body>
+</html>

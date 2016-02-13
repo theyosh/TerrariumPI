@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>This demo demonstrates the AngularJS Calendar's range selection mode. Click on a date to select the start date and then click on another cell to select the end date.</title>
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+         <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script><script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/globalization/globalize.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp",
+            ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+
+            $scope.selectionChange = function (event) {
+                var selection = event.args.range;
+                $scope.log = "From: " + selection.from.toLocaleDateString() + ", To: " + selection.to.toLocaleDateString();
+            };
+
+            $scope.calendarReady = function (args) {
+                var date1 = new Date();
+                date1.setFullYear(2012, 7, 7);
+
+                var date2 = new Date();
+                date2.setFullYear(2012, 7, 15);
+                args.instance.setRange(date1, date2);
+            }
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-calendar jqx-width="220" jqx-created="calendarReady" jqx-height="220" jqx-selection-mode="'range'" jqx-on-change="selectionChange(event)">
+        </jqx-calendar>
+    {{log}}
+</body>
+</html>

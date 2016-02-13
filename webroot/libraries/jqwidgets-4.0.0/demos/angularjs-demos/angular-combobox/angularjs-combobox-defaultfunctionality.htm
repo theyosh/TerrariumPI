@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>The jqxComboBox represents a widget that contains a list of
+        selectable items displayed in a drop-down. Users can enter information in the text
+        box portion and search for a specific item. The widget comes with built-in auto-complete
+        support.</title>
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            var source = new Array();
+            for (i = 0; i < 10; i++) {
+                var movie = 'avatar.png';
+                var label = 'Avatar';
+                var year = 2009;
+
+                switch (i) {
+                    case 1:
+                        movie = 'endgame.png';
+                        label = 'End Game';
+                        year = 2006;
+                        break;
+                    case 2:
+                        movie = 'priest.png';
+                        label = 'Priest';
+                        year = 2011;
+                        break;
+                    case 3:
+                        movie = 'unknown.png';
+                        label = 'Unknown';
+                        year = 2011;
+                        break;
+                    case 4:
+                        movie = 'unstoppable.png';
+                        label = 'Unstoppable';
+                        year = 2010;
+                        break;
+                    case 5:
+                        movie = 'twilight.png';
+                        label = 'Twilight';
+                        year = 2008;
+                        break;
+                    case 6:
+                        movie = 'kungfupanda.png';
+                        label = 'Kung Fu Panda';
+                        year = 2008;
+                        break;
+                    case 7:
+                        movie = 'knockout.png';
+                        label = 'Knockout';
+                        year = 2011
+                        break;
+                    case 8:
+                        movie = 'theplane.png';
+                        label = 'The Plane';
+                        year = 2010;
+                        break;
+                    case 9:
+                        movie = 'bigdaddy.png';
+                        label = 'Big Daddy';
+                        year = 1999;
+                        break;
+                }
+                var html = "<div style='padding: 0px; margin: 0px; height: 95px; float: left;'><img width='60' style='float: left; margin-top: 4px; margin-right: 15px;' src='../../images/" + movie + "'/><div style='margin-top: 10px; font-size: 13px;'>"
+            + "<b>Title</b><div>" + label + "</div><div style='margin-top: 10px;'><b>Year</b><div>" + year.toString() + "</div></div></div>";
+                source[i] = { html: html, label: label };
+            }
+
+            // Create a jqxComboBox
+            $scope.comboBoxSettings = { source: source, selectedIndex: 0, width: '250', height: '25px' };
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-combo-box jqx-settings="comboBoxSettings"></jqx-combo-box>
+</body>
+</html>

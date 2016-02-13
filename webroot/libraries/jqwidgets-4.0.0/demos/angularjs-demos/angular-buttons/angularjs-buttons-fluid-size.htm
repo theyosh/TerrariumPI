@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS Buttons and Checkboxes Fluid Size Example. The width of the widgets in this demo is in Percentages.</title>
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttongroup.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownbutton.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+     <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+   <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+
+        demoApp.controller("demoController", function ($scope) {
+            $scope.created = function (args) {
+                var dropDownContent = '<div style="position: relative; margin-left: 3px; margin-top: 5px;">DropDownButton</div>';
+                args.instance.setContent(dropDownContent);
+            }
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <b>Button</b>
+    <br />
+    <jqx-button style="margin-top: 10px;" jqx-height="25" jqx-width="'30%'">Button</jqx-button>
+    <br />
+    <b>Checkbox</b>
+    <jqx-check-box jqx-width="'30%'" style="margin-top: 10px;" id="checkBox1">eLearning</jqx-check-box>
+    <jqx-check-box jqx-width="'30%'" style="margin-top: 5px; margin-bottom: 10px;" id="checkBox2">Mobile</jqx-check-box>
+    <b>Radio Button</b>
+    <jqx-radio-button jqx-width="'30%'" style="margin-top: 10px;" id="radioButton1">On</jqx-radio-button>
+    <jqx-radio-button jqx-width="'30%'" style="margin-bottom: 10px; margin-top: 5px;" id="radioButton2">Off</jqx-radio-button>
+    <b>DropDown Button</b>
+    <jqx-drop-down-button jqx-created="created" jqx-width="'50%'" jqx-height="25" style="margin-top: 10px; margin-bottom: 10px;" id="dropDownButton">
+                <div>
+                    <ul>
+                        <li>Education</li>
+                        <li>Financial services</li>
+                        <li>Government</li>
+                        <li>Manufacturing</li>
+                        <li>Solutions
+                                <ul>
+                                    <li>eLearning</li>
+                                    <li>Mobile</li>
+                                    <li>RIA</li>
+                                    <li>Training</li>
+                                </ul>
+                        </li>
+                    </ul>
+                </div>
+            </jqx-drop-down-button>
+</body>
+</html>

@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id="Description">To sort data against a AngularJS DataTable column or to change the column's sort order, click a column header.</title>
+    <meta name="description" content="This sample demonstrates how we can bind jqwidgets Grid widget to Array data and implement Sorting and Paging">
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> 
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../sampledata/generatedata.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);  
+        demoApp.controller("demoController", function ($scope) {               
+            $scope.gridSettings =
+            {
+                source: new $.jqx.dataAdapter( {
+                    localData: generateData(85),
+                    dataType: "array",
+                    dataFields:
+                    [
+                        { name: 'firstname', type: 'string' },
+                        { name: 'lastname', type: 'string' },
+                        { name: 'productname', type: 'string' },
+                        { name: 'quantity', type: 'number' },
+                        { name: 'price', type: 'number' },
+                        { name: 'total', type: 'number' }
+                    ],
+                    sortcolumn: 'firstname',
+                    sortdirection: 'asc'
+                })
+                ,
+                sortable: true,
+                pageable: true,
+                altRows: true,
+                columns: [
+                  { text: 'Name', dataField: 'firstname', width: 200 },
+                  { text: 'Last Name', dataField: 'lastname', width: 200 },
+                  { text: 'Product', editable: false, dataField: 'productname', width: 180 },
+                  { text: 'Quantity', dataField: 'quantity', width: 80, align: 'right', cellsalign: 'right' },
+                  { text: 'Unit Price', dataField: 'price', width: 90, align: 'right', cellsalign: 'right', cellsFormat: 'c2' },
+                  { text: 'Total', dataField: 'total', width: 100, align: 'right', cellsalign: 'right', cellsFormat: 'c2' }
+                ]
+            };
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+    <jqx-data-table jqx-settings="gridSettings"></jqx-data-table>
+</body>
+</html>

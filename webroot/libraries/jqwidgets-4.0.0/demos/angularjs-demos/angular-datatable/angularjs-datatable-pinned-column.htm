@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id="Description">Pinned Columns in AngularJS DataTable</title>
+    <meta name="description" content="This sample demonstrates how we can Pin Columns in jqwidgets Grid.">
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]); 
+        demoApp.controller("demoController", function ($scope) {           
+            $scope.gridSettings =
+            {
+                width: 850,
+                source:  new $.jqx.dataAdapter({
+                    dataType: "xml",
+                    dataFields: [
+                        { name: 'ShippedDate', map: 'm\\:properties>d\\:ShippedDate', type: 'date' },
+                        { name: 'Freight', map: 'm\\:properties>d\\:Freight', type: 'float' },
+                        { name: 'ShipName', map: 'm\\:properties>d\\:ShipName' },
+                        { name: 'ShipAddress', map: 'm\\:properties>d\\:ShipAddress' },
+                        { name: 'ShipCity', map: 'm\\:properties>d\\:ShipCity' },
+                        { name: 'ShipCountry', map: 'm\\:properties>d\\:ShipCountry' }
+                    ],
+                    root: "entry",
+                    record: "content",
+                    id: 'm\\:properties>d\\:OrderID',
+                    url: "../../sampledata/orders.xml",
+                    pager: function (pagenum, pagesize, oldpagenum) {
+                        // callback called when a page or page size is changed.
+                    }
+                }),
+                sortable: true,
+                pageable: true,
+                pagerButtonsCount: 10,
+                columnsResize: true,
+                columns: [
+                  { text: 'Ship Name', dataField: 'ShipName', pinned: true, width: 300 },
+                  { text: 'Ship City', dataField: 'ShipCity', width: 250 },
+                  { text: 'Ship Address', dataField: 'ShipAddress', width: 350 },
+                  { text: 'Ship Country', dataField: 'ShipCountry', width: 150},
+                  { text: 'Shipped Date', dataField: 'ShippedDate', width: 250, cellsFormat: 'D' },
+                  { text: 'Freight', dataField: 'Freight', width: 100, cellsFormat: 'f2', cellsalign: 'right' }
+                ]
+            };   
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+    <jqx-data-table jqx-settings="gridSettings"></jqx-data-table>
+</body>
+</html>

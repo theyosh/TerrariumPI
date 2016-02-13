@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id="Description">AngularJS Grid with DropDownButton</title>
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.columnsresize.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.edit.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownbutton.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../sampledata/generatedata.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+
+        demoApp.controller("demoController", function ($scope) {
+            $scope.dropDownButton = {};
+            var initWidgets = false;
+            var url = "../../sampledata/products.xml";
+
+            // prepare the data
+            var source =
+            {
+                datatype: "xml",
+                datafields: [
+                    { name: 'ProductName', type: 'string' },
+                    { name: 'QuantityPerUnit', type: 'int' },
+                    { name: 'UnitPrice', type: 'float' },
+                    { name: 'UnitsInStock', type: 'float' },
+                    { name: 'Discontinued', type: 'bool' }
+                ],
+                root: "Products",
+                record: "Product",
+                async: false,
+                id: 'ProductID',
+                url: url
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                downloadComplete: function (data, status, xhr) { },
+                loadComplete: function (data) { },
+                loadError: function (xhr, status, error) { },
+                autoBind: true
+            });
+
+            $scope.dropDownSettings = {
+                width: 200,
+                height: 25,
+                created: function (args) {
+                    $scope.dropDownButton = args.instance;
+                    var dropDownContent = '<div style="position: relative; margin-left: 3px; margin-top: 5px;">' + dataAdapter.records[0]['ProductName'] + '</div>';
+                    args.instance.setContent(dropDownContent);
+                }
+            }
+
+            $scope.initWidgets = function () {
+                if (initWidgets)
+                    return;
+
+                initWidgets = true;
+            
+
+                var cellsrenderer = function (row, columnfield, value, defaulthtml, columnproperties, rowdata) {
+                    if (value < 20) {
+                        return '<span style="margin: 4px; float: ' + columnproperties.cellsalign + '; color: #ff0000;">' + value + '</span>';
+                    }
+                    else {
+                        return '<span style="margin: 4px; float: ' + columnproperties.cellsalign + '; color: #008000;">' + value + '</span>';
+                    }
+                }
+
+          
+                // initialize jqxGrid
+                $scope.gridSettings =
+                   {
+                       width: 800,
+                       source: dataAdapter,
+                       pageable: true,
+                       autoheight: true,
+                       sortable: true,
+                       created: function(args)
+                       {
+                           $scope.gridSettings.apply('selectrow', 0);
+                       },
+                       altrows: true,
+                       enabletooltips: true,
+                       columns: [
+                         { text: 'Product Name', columngroup: 'ProductDetails', datafield: 'ProductName', width: 250 },
+                         { text: 'Quantity per Unit', columngroup: 'ProductDetails', datafield: 'QuantityPerUnit', cellsalign: 'right', align: 'right', width: 200 },
+                         { text: 'Unit Price', columngroup: 'ProductDetails', datafield: 'UnitPrice', align: 'right', cellsalign: 'right', cellsformat: 'c2', width: 200 },
+                         { text: 'Units In Stock', datafield: 'UnitsInStock', cellsalign: 'right', cellsrenderer: cellsrenderer }
+                       ]
+                   };
+
+                $scope.rowSelect = function (event) {
+                    var args = event.args;
+                    var row = $scope.gridSettings.apply('getrowdata', args.rowindex);
+                    if (row) {
+                        var dropDownContent = '<div style="position: relative; margin-left: 3px; margin-top: 5px;">' + row['ProductName'] + '</div>';
+                        $scope.dropDownButton.setContent(dropDownContent);
+                    }
+                };
+            }
+        });
+    </script>
+</head>
+<body>
+    <div ng-controller="demoController">
+        <jqx-drop-down-button jqx-on-opening="initWidgets()" jqx-settings="dropDownSettings">
+             <jqx-grid jqx-create="gridSettings" jqx-settings="gridSettings" jqx-on-rowselect="rowSelect(event)"></jqx-grid>
+        </jqx-drop-down-button>
+    </div>
+</body>
+</html>

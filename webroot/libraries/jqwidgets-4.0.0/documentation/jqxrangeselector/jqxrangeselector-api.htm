@@ -1,0 +1,1260 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../Styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="API, documentation, help, jQuery range selector, jQWidgets, jqxRangeSelector, range, range selector, range selector widget" />
+    <meta name="description" content="jqxRangeSelector API Reference" />
+    <title>jqxRangeSelector API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+        <div id="properties">
+            <h2 class="documentation-top-header">Properties</h2>
+            <table class="documentation-table">
+                <tr>
+                    <th>Name
+                    </th>
+                    <th>Type
+                    </th>
+                    <th>Default
+                    </th>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span38'>animationDuration</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>100
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the snap to ticks and move on click animation duration in milliseconds.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>animationDuration</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ animationDuration: 50 });</code></pre>
+                            <p>
+                                Get the <code>animationDuration</code> property.
+                            </p>
+                            <pre><code>var animationDuration = $("jqxRangeSelector").jqxRangeSelector("animationDuration");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/Vy9ns/">animationDuration is set to 1000</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span3'>disabled</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether the range selector is disabled.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>disabled</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ disabled: true });</code></pre>
+                            <p>
+                                Get the <code>disabled</code> property.
+                            </p>
+                            <pre><code>var disabled = $("jqxRangeSelector").jqxRangeSelector("disabled");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/KDxmv/">disabled is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span1'>height</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>100
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the range selector's height.<br />
+                                Possible values:
+                            </p>
+                            <ul>
+                                <li>"Npx", where N is a number;</li>
+                                <li>numeric value in pixels.</li>
+                            </ul>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>height</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ height: 75 });</code></pre>
+                            <p>
+                                Get the <code>height</code> property.
+                            </p>
+                            <pre><code>var height = $("jqxRangeSelector").jqxRangeSelector("height");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/jvH69/">height is set to 100</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span11'>labelFormat</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the format of the labels.<br />
+                                Possible number formats:
+                            </p>
+                            <ul>
+                                <li>'d' - decimal numbers;</li>
+                                <li>'f'- floating-point numbers;</li>
+                                <li>'n' - integer numbers;</li>
+                                <li>'c' - currency numbers;</li>
+                                <li>'p' - percentage numbers.</li>
+                            </ul>
+                            <p>
+                                Possible date formats:
+                            </p>
+                            <p>
+                                <i>Note</i>: When the data type is date, the <code>labelFormat</code> property must
+                                                                                        always be set.
+                            </p>
+                            <ul>
+                                <li>'d' - the day of the month;</li>
+                                <li>'dd' - the day of the month;</li>
+                                <li>'ddd' - the abbreviated name of the day of the week;</li>
+                                <li>'dddd' - the full name of the day of the week;</li>
+                                <li>'h' - the hour, using a 12-hour clock from 1 to 12;</li>
+                                <li>'hh' - the hour, using a 12-hour clock from 01 to 12;</li>
+                                <li>'H' - the hour, using a 24-hour clock from 0 to 23;</li>
+                                <li>'HH' - the hour, using a 24-hour clock from 00 to 23;</li>
+                                <li>'m' - the minute, from 0 through 59;</li>
+                                <li>'mm' - the minutes,from 00 though 59;</li>
+                                <li>'M' - the month, from 1 through 12;</li>
+                                <li>'MM' - the month, from 01 through 12;</li>
+                                <li>'MMM' - the abbreviated name of the month;</li>
+                                <li>'MMMM' - the full name of the month;</li>
+                                <li>'s' - the second, from 0 through 59;</li>
+                                <li>'ss' - the second, from 00 through 59;</li>
+                                <li>'t' - the first character of the AM/PM designator;</li>
+                                <li>'tt' - the AM/PM designator;</li>
+                                <li>'y' - the year, from 0 to 99;</li>
+                                <li>'yy' - the year, from 00 to 99;</li>
+                                <li>'yyy' - the year, with a minimum of three digits;</li>
+                                <li>'yyyy' - the year as a four-digit number.</li>
+                            </ul>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>labelFormat</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ labelFormat: 'c' });</code></pre>
+                            <p>
+                                Get the <code>labelFormat</code> property.
+                            </p>
+                            <pre><code>var labelFormat = $("jqxRangeSelector").jqxRangeSelector("labelFormat");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/q549Q/">labelFormat is set to 'p'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span26'>labelPrecision</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>0
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                If <code>labelRenderer</code> and <code>labelFormat</code> are not defined, sets
+                                                                                        the precision of the displayed numbers in the labels.
+                            </p>
+                            <p>
+                                <i>Note</i>: <code>labelPrecision</code> applies only when the data type is numeric.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>labelPrecision</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ labelPrecision: 1 });</code></pre>
+                            <p>
+                                Get the <code>labelPrecision</code> property.
+                            </p>
+                            <pre><code>var labelPrecision = $("jqxRangeSelector").jqxRangeSelector("labelPrecision");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/UmpzM/">labelPrecision is set to 1</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span29'>labelRenderer</span>
+                    </td>
+                    <td>
+                        <span>callback function</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                A custom callback function for rendering the labels. Has one argument - the value
+                                                                                        of the label.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>labelRenderer</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ labelRenderer: function (value){
+                            return "&lt;span style='color: red;'&gt;" + value + "&lt;span&gt;"; } });</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/tM6KS/">labelRenderer is set to a custom function</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span35'>moveOnClick</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether the position of the slider can be changed by clicking on the
+                                                                                        range selector.<br />
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>moveOnClick</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ moveOnClick: false });</code></pre>
+                            <p>
+                                Get the <code>moveOnClick</code> property.
+                            </p>
+                            <pre><code>var moveOnClick = $("jqxRangeSelector").jqxRangeSelector("moveOnClick");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/2gDq7/">moveOnClick is set to false</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span31'>markerRenderer</span>
+                    </td>
+                    <td>
+                        <span>callback function</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                A custom callback function for rendering the markers. Has two arguments - the value
+                                                                                        of the marker and the position of the marker - either <i>"left"</i> or <i>"right"</i>.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>markerRenderer</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ markerRenderer: function (value,
+                            position) { var position; if (position == "left") { position = "From"; } else if
+                            (position == "right") { position = "To"; }; return position + ": <span style='font-style: italic;'>
+                                " + value + "</span>"; } });</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/Yhz9a/">markerRenderer is set to a custom function</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span28'>markerPrecision</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>2
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                If <code>markerRenderer</code> and <code>markerFormat</code> are not defined, sets
+                                                                                        the precision of the displayed numbers in the markers.
+                            </p>
+                            <p>
+                                <i>Note</i>: <code>markerPrecision</code> applies only when the data type is numeric.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>markerPrecision</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ markerPrecision: 3 });</code></pre>
+                            <p>
+                                Get the <code>markerPrecision</code> property.
+                            </p>
+                            <pre><code>var markerPrecision = $("jqxRangeSelector").jqxRangeSelector("markerPrecision");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/d5RqF/">markerPrecision is set to 1</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span30'>majorLabelRenderer</span>
+                    </td>
+                    <td>
+                        <span>callback function</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                A custom callback function for rendering the major labels. Has two arguments - the
+                                                                                        value of the major label and the date object.
+                            </p>
+                            <p>
+                                <i>Note</i>: major labels are applied only if the data type is date.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>majorLabelRenderer</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ majorLabelRenderer: function (value,
+                            date) { return "&lt;span style='font-style: italic;'&gt;" + value + "&lt;span&gt;";
+                            } });</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/fHKZ9/">majorLabelRenderer is set to a custom function</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span22'>markerFormat</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the format of the markers.<br />
+                                Possible number formats:
+                            </p>
+                            <ul>
+                                <li>'d' - decimal numbers;</li>
+                                <li>'f'- floating-point numbers;</li>
+                                <li>'n' - integer numbers;</li>
+                                <li>'c' - currency numbers;</li>
+                                <li>'p' - percentage numbers.</li>
+                            </ul>
+                            <p>
+                                Possible date formats:
+                            </p>
+                            <p>
+                                <i>Note</i>: When the data type is date, the <code>markerFormat</code> property
+                                                                                        must always be set.
+                            </p>
+                            <ul>
+                                <li>'d' - the day of the month;</li>
+                                <li>'dd' - the day of the month;</li>
+                                <li>'ddd' - the abbreviated name of the day of the week;</li>
+                                <li>'dddd' - the full name of the day of the week;</li>
+                                <li>'h' - the hour, using a 12-hour clock from 1 to 12;</li>
+                                <li>'hh' - the hour, using a 12-hour clock from 01 to 12;</li>
+                                <li>'H' - the hour, using a 24-hour clock from 0 to 23;</li>
+                                <li>'HH' - the hour, using a 24-hour clock from 00 to 23;</li>
+                                <li>'m' - the minute, from 0 through 59;</li>
+                                <li>'mm' - the minutes,from 00 though 59;</li>
+                                <li>'M' - the month, from 1 through 12;</li>
+                                <li>'MM' - the month, from 01 through 12;</li>
+                                <li>'MMM' - the abbreviated name of the month;</li>
+                                <li>'MMMM' - the full name of the month;</li>
+                                <li>'s' - the second, from 0 through 59;</li>
+                                <li>'ss' - the second, from 00 through 59;</li>
+                                <li>'t' - the first character of the AM/PM designator;</li>
+                                <li>'tt' - the AM/PM designator;</li>
+                                <li>'y' - the year, from 0 to 99;</li>
+                                <li>'yy' - the year, from 00 to 99;</li>
+                                <li>'yyy' - the year, with a minimum of three digits;</li>
+                                <li>'yyyy' - the year as a four-digit number.</li>
+                            </ul>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>markerFormat</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ markerFormat: "MMMM" });</code></pre>
+                            <p>
+                                Get the <code>markerFormat</code> property.
+                            </p>
+                            <pre><code>var markerFormat = $("jqxRangeSelector").jqxRangeSelector("markerFormat");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/h366N/">markerFormat is set to 'p'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span6'>majorTicksInterval</span>
+                    </td>
+                    <td>
+                        <span>Number/Object/String</span>
+                    </td>
+                    <td>10
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the interval between major ticks.
+                                                                                        <br />
+                                Possible values:
+                            </p>
+                            <ul>
+                                <li>number;</li>
+                                <li>object with one of the properties: { milliseconds, seconds, minutes, hours, days,
+                                                                                            weeks, months, years };
+                                </li>
+                                <li>one of the following strings: "millisecond", "second", "minute", "hour", "day",
+                                                                                            "week", "month", "year".
+                                </li>
+                            </ul>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>majorTicksInterval</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ majorTicksInterval: { days: 2}
+                            });</code></pre>
+                            <p>
+                                Get the <code>majorTicksInterval</code> property.
+                            </p>
+                            <pre><code>var majorTicksInterval = $("jqxRangeSelector").jqxRangeSelector("majorTicksInterval");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/Lf6AN/">majorTicksInterval is set to 10</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span7'>minorTicksInterval</span>
+                    </td>
+                    <td>
+                        <span>Number/Object/String</span>
+                    </td>
+                    <td>5
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the interval between minor ticks.
+                                                                                        <br />
+                                Possible values:
+                            </p>
+                            <ul>
+                                <li>number;</li>
+                                <li>object with one of the properties: { milliseconds, seconds, minutes, hours, days,
+                                                                                            weeks, months, years };
+                                </li>
+                                <li>one of the following strings: "millisecond", "second", "minute", "hour", "day",
+                                                                                            "week", "month", "year".
+                                </li>
+                            </ul>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>minorTicksInterval</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ minorTicksInterval: "hour" });</code></pre>
+                            <p>
+                                Get the <code>minorTicksInterval</code> property.
+                            </p>
+                            <pre><code>var minorTicksInterval = $("jqxRangeSelector").jqxRangeSelector("minorTicksInterval");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/NZEcV/">minorTicksInterval is set to 1</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span4'>max</span>
+                    </td>
+                    <td>
+                        <span>Number/Date object/Date string</span>
+                    </td>
+                    <td>100
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the maximum value of the range selector scale.<br />
+                                Possible values:
+                            </p>
+                            <ul>
+                                <li>number;</li>
+                                <li>date object;</li>
+                                <li>date string.</li>
+                            </ul>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>max</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ max: 300 });</code></pre>
+                            <p>
+                                Get the <code>max</code> property.
+                            </p>
+                            <pre><code>var max = $("jqxRangeSelector").jqxRangeSelector("max");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/mUAbZ/">max is set to 95</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span2'>min</span>
+                    </td>
+                    <td>
+                        <span>Number/Date object/Date string</span>
+                    </td>
+                    <td>0
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the minimum value of the range selector scale.<br />
+                                Possible values:
+                            </p>
+                            <ul>
+                                <li>number;</li>
+                                <li>date object;</li>
+                                <li>date string.</li>
+                            </ul>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>min</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ min: "August 17, 2013" });</code></pre>
+                            <p>
+                                Get the <code>min</code> property.
+                            </p>
+                            <pre><code>var min = $("jqxRangeSelector").jqxRangeSelector("min");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/692MC/">min is set to 5</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span12'>padding</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>"auto"
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the range selector's padding.<br />
+                                Possible values:
+                            </p>
+                            <ul>
+                                <li>"auto";</li>
+                                <li>"Npx", where N is a number;</li>
+                                <li>numeric value in pixels.</li>
+                            </ul>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>padding</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ padding: "0px" });</code></pre>
+                            <p>
+                                Get the <code>padding</code> property.
+                            </p>
+                            <pre><code>var padding = $("jqxRangeSelector").jqxRangeSelector("padding");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/kumWj/">padding is set to "0px"</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span5'>range</span>
+                    </td>
+                    <td>
+                        <span>Object</span>
+                    </td>
+                    <td>{ from: 0, to: Infinity, min: 0, max: Infinity }
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                An object containing the following properties:
+                            </p>
+                            <ul>
+                                <li>
+                                    <b>from</b> - the start of the initially selected range.<br />
+                                    Possible values: number, date object, date string;
+                                </li>
+                                <li>
+                                    <b>to</b> - the end of the initially selected range;<br />
+                                    Possible values: number, date object, date string;
+                                </li>
+                                <li>
+                                    <b>min</b> - the minimum value of the selection.
+                                                                                            <br />
+                                    Possible values: number, object with one of the properties: { milliseconds, seconds,
+                                                                                            minutes, hours, days, weeks } or one of the following strings: "millisecond", "second",
+                                                                                            "minute", "hour", "day", "week"
+                                </li>
+                                <li>
+                                    <b>max</b> - the maximum value of the selection.
+                                                                                            <br />
+                                    Possible values: number, object with one of the properties: { milliseconds, seconds,
+                                                                                            minutes, hours, days, weeks } or one of the following strings: "millisecond", "second",
+                                                                                            "minute", "hour", "day", "week"
+                                </li>
+                            </ul>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>range</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ range: { from: "01 October, 2013",
+                            to: "10 October, 2013", min: "day", max: { days: 10}} });</code></pre>
+                            <p>
+                                Get the <code>range</code> property.
+                            </p>
+                            <pre><code>var range = $("jqxRangeSelector").jqxRangeSelector("range");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/N2WuY/">range is set to from 10 to 50</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span34'>resizable</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether the range selector's slider can be resized.
+                            </p>
+                            <p>
+                                <i>Note</i>: If <code>resizable</code> is set to <i>false</i>, the slider can only
+                                                                                        be resized programmatically with the method <code>setValue</code>.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>resizable</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ resizable: false });</code></pre>
+                            <p>
+                                Get the <code>resizable</code> property.
+                            </p>
+                            <pre><code>var resizable = $("jqxRangeSelector").jqxRangeSelector("resizable");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/zCZj3/">resizable is set to false</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span39'>rtl</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether the jqxRangeSelector's right-to-left support is enabled.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>rtl</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ rtl: true });</code></pre>
+                            <p>
+                                Get the <code>rtl</code> property.
+                            </p>
+                            <pre><code>var rtl = $("jqxRangeSelector").jqxRangeSelector("rtl");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/wb5ZU/">rtl is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span8'>showMinorTicks</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether minor ticks will be displayed.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>showMinorTicks</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ showMinorTicks: true });</code></pre>
+                            <p>
+                                Get the <code>showMinorTicks</code> property.
+                            </p>
+                            <pre><code>var showMinorTicks = $("jqxRangeSelector").jqxRangeSelector("showMinorTicks");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/6h78H/">showMinorTicks is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span9'>snapToTicks</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether the slider will snap to the major and minor ticks.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>snapToTicks</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ snapToTicks: false });</code></pre>
+                            <p>
+                                Get the <code>snapToTicks</code> property.
+                            </p>
+                            <pre><code>var snapToTicks = $("jqxRangeSelector").jqxRangeSelector("snapToTicks");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/veCx3/">snapToTicks is set to false</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span32'>showMajorLabels</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether the major labels will be shown.
+                            </p>
+                            <p>
+                                <i>Note</i>: major labels are applied only if the data type is date.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>showMajorLabels</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ showMajorLabels: false });</code></pre>
+                            <p>
+                                Get the <code>showMajorLabels</code> property.
+                            </p>
+                            <pre><code>var showMajorLabels = $("jqxRangeSelector").jqxRangeSelector("showMajorLabels");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/4R7pq/">showMajorLabels is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span33'>showMarkers</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether the markers will be shown.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>showMarkers</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ showMarkers: false });</code></pre>
+                            <p>
+                                Get the <code>showMarkers</code> property.
+                            </p>
+                            <pre><code>var showMarkers = $("jqxRangeSelector").jqxRangeSelector("showMarkers");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/Lh7X5/">showMarkers is set to false</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span63'>theme</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>""
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets the widget's theme.
+                            </p>
+                            jQWidgets uses a pair of css files - jqx.base.css and jqx.[theme name].css. The
+                                                                                    base stylesheet creates the styles related to the widget's layout like margin, padding,
+                                                                                    border-width, position. The second css file applies the widget's colors and backgrounds.
+                                                                                    The jqx.base.css should be included before the second CSS file. In order to set
+                                                                                    a theme, you need to do the following:
+                                                                                    <ul>
+                                                                                        <li>Include the theme's CSS file after jqx.base.css.<br />
+                                                                                            The following code example adds the 'energyblue' theme.
+                                                                                            <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.base.css&quot;type=&quot;text/css&quot;
+                                    /&gt; &lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.energyblue.css&quot;
+                                    type=&quot;text/css&quot; /&gt;</code></pre>
+                                                                                        </li>
+                                                                                        <li>Set the widget's theme property to 'energyblue' when you initialize it.
+                                                                                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ theme: 'energyblue' });</code></pre>
+                                                                                        </li>
+                                                                                    </ul>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/RJNcR/">theme is set to 'energyblue'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='property-name-disabled'>width</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>400
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the range selector's width.<br />
+                                Possible values:
+                            </p>
+                            <ul>
+                                <li>"Npx", where N is a number;</li>
+                                <li>numeric value in pixels.</li>
+                            </ul>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>width</code> property.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector({ width: "200px" });</code></pre>
+                            <p>
+                                Get the <code>width</code> property.
+                            </p>
+                            <pre><code>var width = $("jqxRangeSelector").jqxRangeSelector("width");</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/nQrQp/">width is set to 500</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Events</h2>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span10'>change</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the slected range is changed.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Bind to the <code>change</code> event by type: jqxRangeSelector.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').on('change', function () { // Some code here. });
+                        </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/J7yLJ/">Bind to the change event by type: jqxRangeSelector.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Methods</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span25'>destroy</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Removes the range selector from the DOM.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>destroy</code> method.
+                            </p>
+                            <pre><code>var header = $('#jqxRangeSelector').jqxRangeSelector('destroy');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/ZvWmQ/">destroy the jqxRangeSelector.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span14'>getRange</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Gets the selected range. Returns an object with two fields.
+                            </p>
+                            <p>
+                                Range object fields:
+                            </p>
+                            <ul>
+                                <li>from - the start of the selection - number or date object;</li>
+                                <li>to - the end of the selection - number or date object.</li>
+                            </ul>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>Object</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>getRange</code> method.
+                            </p>
+                            <pre><code>var range = $('#jqxRangeSelector').jqxRangeSelector('getRange');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/zD9qm/">gets the  range of the jqxRangeSelector.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span24'>render</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Renders the range selector.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>render</code> method.
+                            </p>
+                            <pre><code>$('#jqxRangeSelector').jqxRangeSelector('render');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/Mbh4q/">renders the jqxRangeSelector.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span23'>refresh</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Refreshes the range selector.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>refresh</code> method.
+                            </p>
+                            <pre><code>var header = $('#jqxRangeSelector').jqxRangeSelector('refresh');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/9teEE/">refreshes the jqxRangeSelector.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span37'>setRange</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets the selected range.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>from</em></td>
+                                            <td>Number/Date</td>
+                                            <td></td>
+                                        </tr>       
+                                         <tr>
+                                            <td><em>to</em></td>
+                                            <td>Number/Date</td>
+                                            <td></td>
+                                        </tr>                                     
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>setRange</code> method.
+                            </p>
+                            <pre><code>// @param from - new value of the start of the selection (number, date string
+                            or date object); // @param to - new value of the end of the selection (number, date
+                            string or date object). $('#jqxRangeSelector').jqxRangeSelector('setRange', 30,
+                            70);</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/qXXkC/">sets a new range of the jqxRangeSelector.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br />
+        </div>
+</body>
+</html>

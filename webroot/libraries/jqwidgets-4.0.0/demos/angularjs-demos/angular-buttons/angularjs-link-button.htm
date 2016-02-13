@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>The AngularJS jqxLinkButton widget represents a button created from anchor element.</title>
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-link-button jqx-width="200" jqx-height="30">
+        <div>
+            <a style='margin-left: 25px;' target="_blank" href="http://www.jqwidgets.com">Link Button</a>
+        </div>
+     </jqx-link-button>
+</body>
+</html>

@@ -1,0 +1,92 @@
+﻿<!DOCTYPE HTML>
+<html ng-app="demoApp">
+<head>
+    <title id='Description'>AngularJS Chart line series with missing data points example</title>  
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.core.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            var sampleData = [undefined, 10, 15, 10, undefined, NaN, 30, 25, undefined, 33, 19, 11];
+            var chart;
+
+            var settings = {
+                created: function(args)
+                {
+                    chart = args.instance;
+                },
+                title: "Line serie with missing points",
+                description: 'Sample line serie with missing and invalid values',
+                showLegend: true,
+                padding: { left: 5, top: 5, right: 15, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                source: sampleData,
+                xAxis:
+                    {
+                        text: 'x',
+                        showTickMarks: true,
+                        tickMarksColor: '#888888',
+                        valuesOnTicks: false
+                    },
+                colorScheme: 'scheme05',
+                seriesGroups:
+                    [
+                        {
+                            type: 'line',
+                            source: sampleData,
+                            toolTipFormatFunction: function (value, itemIndex, serie, group, categoryValue, categoryAxis) {
+                                var dataItem = sampleData[itemIndex];
+                                return '<DIV style="text-align:left"><b>Index:</b> ' +
+                                        itemIndex + '<br /><b>Value:</b> ' +
+                                        value + '<br /></DIV>';
+                            },                                                      
+                            valueAxis:
+                            {
+                                showTickMarks: true,
+                                description: 'Value'
+                            },
+                            series:
+                                [
+                                    { emptyPointsDisplay: 'skip', displayText: 'Value', lineWidth: 2, symbolSize: 8, symbolType: 'circle' }
+                                ]
+                        }
+                    ]
+            };
+
+            // create the chart
+            $scope.chartSettings = settings;
+
+            // series type drop down
+            var modes = ["skip", "zero", "connect"];
+            $scope.dropDownListSettings = { source: modes, selectedIndex: 0, width: '220', height: '25', dropDownHeight: 77 };
+
+            $scope.dropDownMissingPointsMode = function (event) {
+                var args = event.args;
+                if (args) {
+                    var value = args.item.value;
+
+                    chart.seriesGroups[0].series[0].emptyPointsDisplay = value;
+                    chart.update();
+                }
+            };
+        });
+</script>
+</head>
+<body ng-controller="demoController">
+    <jqx-chart jqx-settings="chartSettings" style="width:800px; height:500px"></jqx-chart>
+    <p style="font-family: Verdana; font-size: 12px;">Select missing points display mode:
+    </p>
+    <jqx-drop-down-list jqx-on-select="dropDownMissingPointsMode(event)" jqx-settings="dropDownListSettings" id='dropDownMissingPointsMode'>
+    </jqx-drop-down-list>
+
+</body>
+</html>

@@ -1,0 +1,806 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../Styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="jQuery, Popover, jqxPopover, Popover container" />
+    <meta name="description" content="This page represents the help documentation of the jqxopover widget." />
+    <title>jqxPopover API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+        <div id="properties">
+            <h2 class="documentation-top-header">Properties
+            </h2>
+            <table class="documentation-table">
+                <tr>
+                    <th>Name
+                    </th>
+                    <th>Type
+                    </th>
+                    <th>Default
+                    </th>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span13'>arrowOffsetValue</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>0
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the arrow's offset from its default position.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>arrowOffsetValue</code> property.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover({arrowOffsetValue: 10});</code></pre>
+                            <p>
+                                Get the <code>arrowOffsetValue</code> property.
+                            </p>
+                            <pre><code>var arrowOffsetValue = $('#jqxPopover').jqxPopover('arrowOffsetValue'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-arrowoffsetvalue">arrowOffsetValue is set to 10</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span5'>animationOpenDelay</span>
+                    </td>
+                    <td>
+                        <span>String/Number</span>
+                    </td>
+                    <td>'fast'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                The time for showing of the widget.
+                            </p>
+                            <b>Possible Values:</b>
+                            <br />
+                            <pre><code>'fast'</code></pre>
+                            <pre><code>'slow'</code></pre>
+                            <pre><code>time in milliseconds e.g. 1000</code></pre>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>animationOpenDelay</code> property.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover({animationOpenDelay: 'slow'});</code></pre>
+                            <p>
+                                Get the <code>animationOpenDelay</code> property.
+                            </p>
+                            <pre><code>var animationOpenDelay = $('#jqxPopover').jqxPopover('animationOpenDelay'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-animation-settings">animationOpenDelay is set to 100</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span2'>animationCloseDelay</span>
+                    </td>
+                    <td>
+                        <span>String/Number</span>
+                    </td>
+                    <td>'fast'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                The time for showing of the widget.
+                            </p>
+                            <b>Possible Values:</b>
+                            <br />
+                            <pre><code>'fast'</code></pre>
+                            <pre><code>'slow'</code></pre>
+                            <pre><code>time in milliseconds e.g. 1000</code></pre>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>animationCloseDelay</code> property.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover({ animationCloseDelay:'fast'}); </code></pre>
+                            <p>
+                                Get the <code>animationCloseDelay</code> property.
+                            </p>
+                            <pre><code>var animationCloseDelay = $('#jqxPopover').jqxPopover('animationCloseDelay'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-animation-settings">animationCloseDelay is set to 50</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span8'>autoClose</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the closing of the widget after click outside of the popover.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>autoClose</code> property.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover({ autoClose: true }); </code></pre>
+                            <p>
+                                Get the <code>autoClose</code> property.
+                            </p>
+                            <pre><code>var autoClose = $('#jqxPopover').jqxPopover('autoClose'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-autoclose-1">autoClose is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span63'>animationType</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'none'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets the type of animation.
+                            </p>
+                            <b>Possible Values:</b>
+                            <br />
+                            <pre><code>'none'</code></pre>
+                            <pre><code>'fade'</code></pre>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>animationType</code> property.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover({animationType : 'fade'}); </code></pre>
+                            <p>
+                                Get the <code>animationType</code> property.
+                            </p>
+                            <pre><code>var animationType = $('#jqxPopover').jqxPopover('animationType'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-animation-settings">animationType is set to 'fade'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span1'>height</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the popover's height.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>height</code> property.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover({height:50});</code></pre>
+                            <p>
+                                Get the <code>height</code> property.
+                            </p>
+                            <pre><code>var height = $('#jqxPopover').jqxPopover('height');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-initcontent-1">height is set to 50</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span3'>initContent</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Initializes the popover's content.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>initContent</code> property.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover({ initContent: function(){ // Some code here. } }); </code></pre>
+                            <p>
+                                Get the <code>initContent</code> property.
+                            </p>
+                            <pre><code>var initContent = $('#jqxPopover').jqxPopover('initContent'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-initcontent-1">initContent is set to 'function(){...}'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span3'>isModal</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether the popover is displayed as a modal dialog.
+                            If the jqxPopover's mode is set to modal, the popover blocks user interaction with the underlying user interface.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>isModal</code> property.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover({ isModal: true }); </code></pre>
+                            <p>
+                                Get the <code>isModal</code> property.
+                            </p>
+                            <pre><code>var isModal = $('#jqxPopover').jqxPopover('isModal'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-ismodal-1">isModal is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span12'>offset</span>
+                    </td>
+                    <td>
+                        <span>Object</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>Sets or gets the Popover's offset from its position.</p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>offset</code> property.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover({offset : {left: 10, top: 10}}); </code></pre>
+                            <p>
+                                Get the <code>offset</code> property.
+                            </p>
+                            <pre><code>var offset = $('#jqxPopover').jqxPopover('offset'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-offset">offset is set</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span4'>position</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'left'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the position of the popover. The position presents the orientation of the popover compared to the selector element
+                            </p>
+                            <b>Possible Values:</b>
+                            <br />
+                            <pre><code>'top'</code></pre>
+                            <pre><code>'right'</code></pre>
+                            <pre><code>'bottom'</code></pre>
+                            <pre><code>'left'</code></pre>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>position</code> property.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover({position: "left"});</code></pre>
+                            <p>
+                                Get the <code>position</code> property.
+                            </p>
+                            <pre><code>var position = $('#jqxPopover').jqxPopover('position'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-position-1">position is set to 'left'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span51'>rtl</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>Sets or gets a value indicating whether widget's elements are aligned to support locales using right-to-left fonts.</p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>rtl</code> property.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover({rtl : true}); </code></pre>
+                            <p>
+                                Get the <code>rtl</code> property.
+                            </p>
+                            <pre><code>var rtl = $('#jqxPopover').jqxPopover('rtl'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-rtl-1">rtl is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span16'>selector</span>
+                    </td>
+                    <td>
+                        <span>Id/jQuery Selector</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the Popover's selector. The selector is the element where the Popover is displayed.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>selector</code> property.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover({ selector: "id1" }); </code></pre>
+                            <p>
+                                Get the <code>showArrow</code> property.
+                            </p>
+                            <pre><code>var selector = $('#jqxPopover').jqxPopover('selector'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-selector">selector is set</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span3'>showArrow</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the displaying of the popover's arrow.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>showArrow</code> property.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover({ showArrow: true }); </code></pre>
+                            <p>
+                                Get the <code>showArrow</code> property.
+                            </p>
+                            <pre><code>var showArrow = $('#jqxPopover').jqxPopover('showArrow'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-showarrow-1">showArrow is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span11'>showCloseButton</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether the close button is displayed.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>showCloseButton</code> property.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover({ showCloseButton: true }); </code></pre>
+                            <p>
+                                Get the <code>showCloseButton</code> property.
+                            </p>
+                            <pre><code>var showCloseButton = $('#jqxPopover').jqxPopover('showCloseButton'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-showclosebutton">showCloseButton is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span14'>width</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the popover's width.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>width</code> property.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover({width:50});</code></pre>
+                            <p>
+                                Get the <code>width</code> property.
+                            </p>
+                            <pre><code>var width = $('#jqxPopover').jqxPopover('width');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-showclosebutton">width is set to 200</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span7'>title</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>""
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the popover's title.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>title</code> property.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover({title: "Title"});</code></pre>
+                            <p>
+                                Get the <code>title</code> property.
+                            </p>
+                            <pre><code>var title = $('#jqxPopover').jqxPopover('title');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-title">title is set to "Title"</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span15'>theme</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>''
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets the widget's theme.
+                            </p>
+                            jQWidgets uses a pair of css files - jqx.base.css and jqx.[theme name].css. The
+                        base stylesheet creates the styles related to the widget's layout like margin, padding,
+                        border-width, position. The second css file applies the widget's colors and backgrounds.
+                        The jqx.base.css should be included before the second CSS file. In order to set
+                        a theme, you need to do the following:
+                        <ul>
+                            <li>Include the theme's CSS file after jqx.base.css.<br />
+                                The following code example adds the 'energyblue' theme.
+                                <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.base.css&quot;
+                                    type=&quot;text/css&quot; /&gt; &lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.energyblue.css&quot;
+                                    type=&quot;text/css&quot; /&gt; </code></pre>
+                            </li>
+                            <li>Set the widget's theme property to 'energyblue' when you initialize it.
+                                <pre><code>$('#jqxPopover').jqxPopover({ theme: "energyblue" });</code></pre>
+                            </li>
+                        </ul>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-theme">theme is set to 'energyblue'</a>
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Events
+                        </h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span6'>close</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the popover is closed.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Bind to the <code>close</code> event by type: jqxPopover.
+                            </p>
+                            <pre><code>$('#jqxPopover').on('close', function () { // Some code here. }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-events">Bind to the close event by type: jqxPopover.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span26'>open</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the popover is opened.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Bind to the <code>open</code> event by type: jqxPopover.
+                            </p>
+                            <pre><code>$('#jqxPopover').on('open', function () { // Some code here. }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-events">Bind to the open event by type: jqxPopover.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Methods
+                        </h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span28'>close</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Closes the popover.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Invoke the <code>close</code> method.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover('close'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-methods">closes the popover</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span9'>destroy</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Destroy the widget.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Invoke the <code>destroy</code> method.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover('destroy'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-methods">destroy the widget</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span10'>open</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Open the popover.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Invoke the <code>open</code> method.
+                            </p>
+                            <pre><code>$('#jqxPopover').jqxPopover('open'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqwidgets-popover-methods">opens the widget</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br />
+        </div>
+  </body>
+</html>

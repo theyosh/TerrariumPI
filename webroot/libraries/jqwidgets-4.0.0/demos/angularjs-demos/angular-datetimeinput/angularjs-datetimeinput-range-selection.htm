@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>This demo demonstrates the AngularJS DateTimeInput's range selection mode. Click on a date to select the start date and then click on another cell to select the end date.</title>
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            var dateTimeInput = null;
+            $scope.settings = {
+                width: 250, height: 25, selectionMode: 'range',
+                created: function (args) {
+                    dateTimeInput = args.instance;
+                    var date1 = new Date();
+                    date1.setFullYear(2014, 7, 7);
+
+                    var date2 = new Date();
+                    date2.setFullYear(2014, 7, 15);
+                    dateTimeInput.setRange(date1, date2);
+                },
+                change: function (event) {
+                    var selection = dateTimeInput.getRange();
+                    if (selection.from != null) {
+                        $scope.log = "From: " + selection.from.toLocaleDateString() + ", To: " + selection.to.toLocaleDateString();
+                    }
+                }
+            };
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-date-time-input jqx-on-change="change(event)" jqx-settings="settings"></jqx-date-time-input>
+    <br />
+    <br />
+    {{log}}
+</body>
+</html>

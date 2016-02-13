@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>The jqxRepeatButton represents a button widget derived from
+        the jqxButton. However, jqxRepeatButton give you control over when and how the 'click'
+        event occurs. The jqxRepeatButton raises the 'click' event repeatedly from the time
+        it is pressed until it is released.</title>
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            $scope.value = 1;
+            $scope.clickFunc = function () {
+                $scope.value++;
+            }
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-repeat-button jqx-width="200" jqx-delay="10" jqx-on-click="clickFunc(event)" style='margin-left: 25px;'>Click Me!</jqx-repeat-button>
+    <br /><br />
+    <span ng-bind="value"></span>
+</body>
+</html>

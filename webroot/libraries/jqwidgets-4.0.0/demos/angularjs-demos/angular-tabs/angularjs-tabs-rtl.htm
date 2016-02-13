@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id='Description'>To switch the widget to a right-to-left representation, just enable a single property - "rtl". When this property is on, the AngularJS widget itself is mirrored (the layout of its UI elements is reversed).</title> 
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> 
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+        <jqx-tabs jqx-rtl="true" jqx-width="1000" jqx-height="250">
+            <ul style="margin-left: 10px;">
+                <li>Avatar</li>
+                <li>End Game</li>
+                <li>Twilight</li>
+                <li>Unstoppable</li>
+                <li>Priest</li>
+            </ul>
+            <div style="text-align: right;  direction: rtl;">
+                <img src="../../../images/avatar.png" style="float: right; margin: 10px;" alt="" />
+                Avatar is a 2009 American[6][7] epic science fiction film written and directed by
+                                                                        James Cameron, and starring Sam Worthington, Zoe Saldana, Stephen Lang, Michelle
+                                                                        Rodriguez, Joel David Moore, Giovanni Ribisi and Sigourney Weaver. The film is set
+                                                                        in the mid-22nd century, when humans are mining a precious mineral called unobtanium
+                                                                        on Pandora , a lush habitable moon of a gas giant in the Alpha Centauri star system.
+                                                                        The expansion of the mining colony threatens the continued existence of a local
+                                                                        tribe of Na'vi—a humanoid species indigenous to Pandora. The film's title refers
+                                                                        to the genetically engineered Na'vi-human hybrid bodies used by a team of researchers
+                                                                        to interact with the natives of Pandora.
+            </div>
+            <div style="text-align: right;  direction: rtl;">
+                <img src="../../../images/endgame.png" style="float: right; margin: 10px;" alt="" />
+                End Game is a 2006 action/thriller film, written and directed by Andy Cheng. The
+                                                                        film stars Cuba Gooding, Jr. as Secret Service agent Alex Thomas, who is shot in
+                                                                        the hand, while unsuccessfully trying to protect the President (played by Jack Scalia)
+                                                                        from an assassin's bullet. Later, with the help of a persistent newspaper reporter
+                                                                        named Kate Crawford (played by Angie Harmon), he uncovers a vast conspiracy behind
+                                                                        what initially appeared to be a lone gunman. James Woods, Burt Reynolds, and Anne
+                                                                        Archer co–star in this film that was originally set to be shown in cinemas by MGM
+                                                                        in 2005, but was delayed by the takeover from Sony and eventually sent direct to
+                                                                        DVD.
+            </div>
+            <div style="text-align: right;  direction: rtl;">
+                <img src="../../../images/twilight.png" style="float: right; margin: 10px;" alt="" />
+                The project was in development for approximately three years at Paramount Pictures,
+                                                                        during which time a screen adaptation that differed significantly from the novel
+                                                                        was written. Summit Entertainment acquired the rights to the novel after three years
+                                                                        of the project's stagnant development. Melissa Rosenberg wrote a new adaptation
+                                                                        of the novel shortly before the 2007–2008 Writers Guild of America strike and sought
+                                                                        to be faithful to the novel's storyline. Principal photography took 44 days, and
+                                                                        completed on May 2, 2008; the film was primarily shot in Oregon
+            </div>
+            <div style="text-align: right;  direction: rtl;">
+                <img src="../../../images/unstoppable.png" style="float: right; margin: 10px;" alt="" />
+                Meanwhile, in a rail yard within the northern town of Fuller, two AWVR hostlers,
+                                                                        Dewey (Ethan Suplee) and Gilleece (T.J. Miller), are ordered by Fuller operations
+                                                                        dispatcher Bunny (Kevin Chapman) to move a freight train led by locomotive #777
+                                                                        (nicknamed "Triple Seven") off its current track to clear the track for an excursion
+                                                                        train carrying schoolchildren. Dewey attempts to take shortcuts, instructing Gilleece
+                                                                        to leave the hoses for the air brakes disconnected for the short trip. Dewey later
+                                                                        leaves the moving cab to throw a misaligned rail switch along the train's path,
+                                                                        but is unable to climb back on, as the train's throttle jumps from idle, to full
+                                                                        power. He is forced to report the train as a "coaster" to Fuller yardmaster Connie
+                                                                        Hooper (Rosario Dawson)...
+            </div>
+            <div style="text-align: right; direction: rtl;">
+                <img src="../../../images/priest.png" style="float: right; margin: 10px;" alt="" />
+                Priest is a 2011 American post-apocalyptic sci-fi western and supernatural action
+                                                                        film starring Paul Bettany as the title character. The film, directed by Scott Stewart,
+                                                                        is based on the Korean comic of the same name. In an alternate world, humanity and
+                                                                        vampires have warred for centuries. After the last Vampire War, the veteran Warrior
+                                                                        Priest (Bettany) lives in obscurity with other humans inside one of the Church's
+                                                                        walled cities. When the Priest's niece (Lily Collins) is kidnapped by vampires,
+                                                                        the Priest breaks his vows to hunt them down. He is accompanied by the niece's boyfriend
+                                                                        (Cam Gigandet), who is a wasteland sheriff, and a former Warrior Priestess (Maggie
+                                                                        Q).
+            </div>
+        </jqx-tabs>
+</body>
+</html>

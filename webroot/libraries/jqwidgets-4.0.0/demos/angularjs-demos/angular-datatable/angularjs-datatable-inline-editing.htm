@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>Grid with Create, Remove and Update commands.</title>
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script> 
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script> 
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script> 
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../../jqwidgets/jqxtooltip.js"></script> 
+    <script type="text/javascript" src="../../../jqwidgets/jqxinput.js"></script> 
+    <script type="text/javascript" src="../../../scripts/demos.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]); 
+        demoApp.controller("demoController", function ($scope) {                
+            var grid;
+            $scope.gridSettings =
+            {
+                width: 850,
+                source:   new $.jqx.dataAdapter({
+                    dataFields: [
+                        { name: 'OrderID', type: 'int' },
+                        { name: 'Freight', type: 'float' },
+                        { name: 'ShipName', type: 'string' },
+                        { name: 'ShipAddress', type: 'string' },
+                        { name: 'ShipCity', type: 'string' },
+                        { name: 'ShipCountry', type: 'string' },
+                        { name: 'ShippedDate', type: 'date' }
+                    ],
+                    root: "Orders",
+                    record: "Order",
+                    dataType: "xml",
+                    id: 'OrderID',
+                    url:  "../../sampledata/orderdetails.xml",
+                    addRow: function (rowID, rowData, position, commit) {
+                        // synchronize with the server - send insert command
+                        // call commit with parameter true if the synchronization with the server is successful 
+                        // and with parameter false if the synchronization failed.
+                        // you can pass additional argument to the commit callback which represents the new ID if it is generated from a DB.
+                        commit(true);
+                    },
+                    updateRow: function (rowID, rowData, commit) {
+                        // synchronize with the server - send update command
+                        // call commit with parameter true if the synchronization with the server is successful 
+                        // and with parameter false if the synchronization failed.
+                        commit(true);
+                    },
+                    deleteRow: function (rowID, commit) {
+                        // synchronize with the server - send delete command
+                        // call commit with parameter true if the synchronization with the server is successful 
+                        // and with parameter false if the synchronization failed.
+                        commit(true);
+                    }
+                }),               
+                pageable: true,
+                editable: true,
+                showToolbar: true,
+                altRows: true,
+                created: function(args)
+                {
+                    grid = args.instance;
+                },
+                pagerButtonsCount: 8,
+                toolbarHeight: 35,
+                renderToolbar: function(toolBar)
+                {
+                    var toTheme = function (className) {
+                        if (theme == "") return className;
+                        return className + " " + className + "-" + theme;
+                    }
+
+                    // appends buttons to the status bar.
+                    var containerElement = $("<div style='overflow: hidden; position: relative; height: 100%; width: 100%;'></div>");
+                    var buttonTemplate = "<div style='float: left; padding: 3px; margin: 2px;'><div style='margin: 4px; width: 16px; height: 16px;'></div></div>";
+                    var addButtonElement = $(buttonTemplate);
+                    var editButtonElement = $(buttonTemplate);
+                    var deleteButtonElement = $(buttonTemplate);
+                    var cancelButtonElement = $(buttonTemplate);
+                    var updateButtonElement = $(buttonTemplate);
+                    containerElement.append(addButtonElement);
+                    containerElement.append(editButtonElement);
+                    containerElement.append(deleteButtonElement);
+                    containerElement.append(cancelButtonElement);
+                    containerElement.append(updateButtonElement);
+
+                    toolBar.append(containerElement);
+                    var addBtn = new jqxButton(addButtonElement, {cursor: "pointer", enableDefault: false,  height: 25, width: 25 });
+                    addButtonElement.find('div:first').addClass(toTheme('jqx-icon-plus'));
+                    new jqxTooltip(addButtonElement, { position: 'bottom', content: "Add"});
+
+                    var editBtn = new jqxButton(editButtonElement, { cursor: "pointer", disabled: true, enableDefault: false,  height: 25, width: 25 });
+                    editButtonElement.find('div:first').addClass(toTheme('jqx-icon-edit'));
+                    new jqxTooltip(editButtonElement, { position: 'bottom', content: "Edit"});
+
+                    var deleteBtn = new jqxButton(deleteButtonElement, { cursor: "pointer", disabled: true, enableDefault: false,  height: 25, width: 25 });
+                    deleteButtonElement.find('div:first').addClass(toTheme('jqx-icon-delete'));
+                    new jqxTooltip(deleteButtonElement, { position: 'bottom', content: "Delete"});
+
+                    var updateBtn = new jqxButton(updateButtonElement, { cursor: "pointer", disabled: true, enableDefault: false,  height: 25, width: 25 });
+                    updateButtonElement.find('div:first').addClass(toTheme('jqx-icon-save'));
+                    new jqxTooltip(updateButtonElement, { position: 'bottom', content: "Save Changes"});
+
+                    var cancelBtn = new jqxButton({ cursor: "pointer", disabled: true, enableDefault: false,  height: 25, width: 25 });
+                    cancelButtonElement.find('div:first').addClass(toTheme('jqx-icon-cancel'));
+                    cancelButtonElement.jqxTooltip({ position: 'bottom', content: "Cancel"});
+
+                    $scope.updateButtonElements = function (action) {
+                        switch (action) {
+                            case "Select":
+                                addBtn.disabled = false;
+                                deleteBtn.disabled = false;
+                                editBtn.disabled = false;
+                                cancelBtn.disabled = true;
+                                updateBtn.disabled = true;
+                                break;
+                            case "Unselect":
+                                addBtn.disabled = false;
+                                deleteBtn.disabled = true;
+                                editBtn.disabled = true;
+                                cancelBtn.disabled = true;
+                                updateBtn.disabled = true;
+                                break;
+                            case "Edit":
+                                addBtn.disabled = true
+                                deleteBtn.disabled = true;
+                                editBtn.disabled = true;
+                                cancelBtn.disabled = false;
+                                updateBtn.disabled = false;
+                      
+                                break;
+                            case "End Edit":
+                                addBtn.disabled = false;
+                                deleteBtn.disabled = false;
+                                editBtn.disabled = false;
+                                cancelBtn.disabled = true;
+                                updateBtn.disabled = true;
+                                break;
+
+                        }
+                    }
+
+                    var rowIndex = null;
+                    $scope.rowSelect = function (event) {
+                        var args = event.args;
+                        rowIndex = args.index;
+                        $scope.updateButtonElements('Select');
+                    };
+                    $scope.rowUnselect = function (event) {
+                        $scope.updateButtonElements('Unselect');
+                    };
+                    $scope.rowEndEdit = function (event) {
+                        $scope.updateButtonElements('End Edit');
+                    };
+                    $scope.rowBeginEdit = function (event) {
+                        $scope.updateButtonElements('Edit');
+                    };
+                    addBtn.on("click", function (event) {
+                        if (!addButtonElement.disabled) {
+                            // add new empty row.
+                            grid.addRow(null, {}, 'first');
+                            // select the first row and clear the selection.
+                            grid.clearSelection();
+                            grid.selectRow(0);
+                            // edit the new row.
+                            grid.beginRowEdit(0);
+                            $scope.updateButtonElements('Add');
+                        }
+                    });
+
+                    cancelBtn.on("click", function (event) {
+                        if (!cancelBtn.disabled) {
+                            // cancel changes.
+                            grid.endRowEdit(rowIndex, true);
+                        }
+                    });
+
+                    updateBtn.on("click", function (event) {
+                        if (!updateBtn.disabled) {
+                            // save changes.
+                            grid.endRowEdit(rowIndex, false);
+                        }
+                    });
+
+                    editBtn.on("click", function () {
+                        if (!editBtn.disabled) {
+                            grid.beginRowEdit(rowIndex);
+                            $scope.updateButtonElements('edit');
+                        }
+                    });
+                    deleteBtn.on("click", function () {
+                        if (!deleteBtn.disabled) {
+                            grid.deleteRow(rowIndex);
+                            $scope.updateButtonElements('delete');
+                        }
+                    });
+                },
+                columns: [
+                  { text: 'Order ID', editable: false, dataField: 'OrderID', width: 200 },
+                  { text: 'Freight', dataField: 'Freight', cellsFormat: 'f', cellsAlign: 'right', align: 'right', width: 200},
+                  {
+                      text: 'Ship Country', dataField: 'ShipCountry', width: 250,
+                      columnType: 'custom',
+                      createEditor: function (row, cellValue, editor, width, height) {
+                          // create jqxInput editor.
+                          var inputElement = $("<input style='padding-left: 4px; box-sizing: border-box; -moz-box-sizing: border-box; border: none;'/>").appendTo(editor);;
+                          var countries = new Array("Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burma", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo, Democratic Republic", "Congo, Republic of the", "Costa Rica", "Cote d'Ivoire", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Greenland", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Mongolia", "Morocco", "Monaco", "Mozambique", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Samoa", "San Marino", " Sao Tome", "Saudi Arabia", "Senegal", "Serbia and Montenegro", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "Spain", "Sri Lanka", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe");
+                          var input = new jqxInput(inputElement, { source: countries, width: '100%', height: '100%' });
+                          if (!cellValue) cellValue = "";
+                          input.val(cellValue);
+                      },
+                      initEditor: function (row, cellValue, editor) {
+                          // set jqxInput editor's initial value.
+                          editor.find('input').val(cellValue);
+                      },
+                      getEditorValue: function (index, value, editor) {
+                          // get jqxInput editor's value.
+                          return editor.find('input').val();
+                      }
+                  },
+                  { text: 'Shipped Date', dataField: 'ShippedDate', cellsAlign: 'right', align: 'right', cellsFormat: 'dd/MM/yyyy'}
+              ]
+            };
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+      <jqx-data-table jqx-on-row-begin-edit="rowBeginEdit(edit)" jqx-on-row-select="rowSelect(event)" jqx-on-row-un-select="rowUnselect(event)" jqx-on-row-end-edit="rowEndEdit(event)" jqx-settings="gridSettings"></jqx-data-table>
+</body>
+</html>

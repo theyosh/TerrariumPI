@@ -1,0 +1,86 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jqxSortable, jQuery Sortable, jQWidgets, Default Functionality" />
+    <meta name="description" content="jqxSortable is a plug-in..." />
+    <title id='Description'>This demo demonstrates how to connect multiple elements used jqxSortable plugin.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxsortable.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <style>
+        .sortable {
+            margin: 2px;
+            padding: 5px;
+            width: 200px;
+            border: lightblue solid 1px;
+        }
+
+        .sortable-container{;
+            float: left;
+            width: 220px;
+        }
+
+        .sortable-container span {
+            font-weight: bold;
+        }
+
+        .sortable div {
+            border-radius: 5px;
+            padding: 5px;
+            background-color: white;
+            color: black;
+            border: 1px solid transparent;
+         }
+
+         .sortable div:hover {
+            border: 1px solid #356AA0;
+          }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var firstNames = ["Nancy", "Andrew", "Janet", "Margaret", "Steven", "Michael", "Robert", "Laura", "Anne"];
+            var lastNames = ["Davolio", "Fuller", "Leverling", "Peacock", "Buchanan", "Suyama", "King", "Callahan", "Dodsworth"];
+            var titles = ["Sales Representative", "Vice President, Sales", "Sales Representative", "Sales Representative", "Sales Manager", "Sales Representative", "Sales Representative", "Inside Sales Coordinator", "Sales Representative"];
+
+            var sortableList1 = '',
+                sortableList2 = '',
+                firstNamesLength = firstNames.length,
+                firstNamesHalf = Math.floor(firstNamesLength/2);
+
+            for (var i = 0; i < firstNames.length; i++) {
+                var imgurl = '../../images/' + firstNames[i].toLowerCase() + '.png';
+                var img = '<img height="50" width="40" src="' + imgurl + '"/>';
+                var element = '<div><table style="min-width: 130px;"><tr><td style="width: 40px;" rowspan="2">' + img + '</td><td>' + firstNames[i] + " " + lastNames[i] + '</td></tr><tr><td>' + titles[i] + '</td></tr></table></div>';
+
+                if (i < firstNamesHalf) {
+                    sortableList1 = sortableList1 + element;
+                } else {
+                    sortableList2 = sortableList2 + element;
+                }
+            }
+
+            $("#sortable1").html(sortableList1);
+            $("#sortable2").html(sortableList2);
+
+            $("#sortable1, #sortable2").jqxSortable({
+                connectWith: ".sortable",
+                opacity: 0.5,
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="sortable-container">
+        <span>Team A</span>
+        <div id="sortable1" class="sortable"></div>
+    </div>
+    <div class="sortable-container">
+        <span>Team B</span>
+        <div id="sortable2" class="sortable"></div>
+    </div>
+</body>
+</html>

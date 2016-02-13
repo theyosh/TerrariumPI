@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS jqxCheckBox widget displays a check box that allows the end-user to select a true, false or indeterminate condition.</title>
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+      <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+     <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+   <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+
+        demoApp.controller("demoController", function ($scope) {
+         
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <div style='font-family: Verdana Arial; font-size: 12px; width: 400px;'>
+        <div style='float: left; width: 400px;'>
+            <h3 style='margin-left: 15px;'>Categories</h3>
+            <jqx-check-box style='margin-left: 10px; float: left;'>
+                Entertainment</jqx-check-box>
+            <jqx-check-box style='margin-left: 10px; float: left;'>
+                <span>Computers</span></jqx-check-box>
+            <jqx-check-box style='margin-left: 10px; float: left;'>
+                <span>Sports</span></jqx-check-box>
+        </div>
+        <div style='float: left; width: 400px; margin-top: 10px;'>
+            <jqx-check-box style='margin-left: 10px; float: left;'>
+                Health</jqx-check-box>
+            <jqx-check-box style='margin-left: 10px; float: left;'>
+                <span>Finance</span></jqx-check-box>
+            <jqx-check-box style='margin-left: 10px; float: left;'>
+                <span>Travel</span></jqx-check-box>
+        </div>
+        <div style='float: left; width: 400px; margin-top: 10px;'>
+            <jqx-check-box style='margin-left: 10px; float: left;'>
+                Music</jqx-check-box>
+            <jqx-check-box style='margin-left: 10px; float: left;'>
+                <span>Technology</span></jqx-check-box>
+            <jqx-check-box style='margin-left: 10px; float: left;'>
+                <span>Publishing</span></jqx-check-box>
+        </div>
+        <br />
+        <div style='float: left; width: 400px; margin-top: 10px;'>
+            <h3 style='margin-left: 15px;'>States</h3>
+            <jqx-check-box jqx-checked="true" style='margin-left: 10px; float: left;'>
+                <span>Checked</span></jqx-check-box>
+            <jqx-check-box style='margin-left: 10px; float: left;'>
+                <span>Unchecked</span></jqx-check-box>
+        </div>
+           <div style='float: left; width: 400px; margin-top: 10px;'>
+            <jqx-check-box jqx-checked="null" style='margin-left: 10px; float: left;'>
+                <span>Indeterminate</span></jqx-check-box>
+            <jqx-check-box ng-disabled="true" style='margin-left: 10px; float: left;'>
+                <span>Disabled</span></jqx-check-box>
+        </div>
+    </div>
+</body>
+</html>
