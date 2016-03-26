@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS Button Templates</title>
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-button>Default</jqx-button>
+    <jqx-button jqx-template="'primary'">Primary</jqx-button>
+    <jqx-button jqx-template="'info'">Info</jqx-button>
+    <jqx-button jqx-template="'success'">Success</jqx-button>
+    <jqx-button jqx-template="'warning'">Warning</jqx-button>
+    <jqx-button jqx-template="'danger'">Danger</jqx-button>
+    <jqx-button jqx-template="'inverse'">Inverse</jqx-button>
+    <jqx-button jqx-template="'link'">Link</jqx-button>
+</body>
+</html>

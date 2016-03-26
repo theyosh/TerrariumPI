@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxChart logarithmic axis offset to value mapping</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var sampleData = [
+                { a: 1.1535, b: 0.5 },
+                { a: 4.48, b: 20.5 },
+                { a: 10, b: 60 },
+                { a: 100, b: 80 },
+                { a: 200, b: 90 },
+                { a: 245.11, b: 100.13 },
+                { a: 300.13, b: 150.13 },
+                { a: 340, b: 200 }
+               ];
+
+            var settings = {
+                title: "Logarithmic Scale Offset to Value Mappying",
+                description: "Move the mouse to see the respective x and y values",
+                padding: { left: 15, top: 5, right: 15, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                source: sampleData,
+                enableAnimations: true,
+                xAxis:
+                {
+                    dataField: 'a',
+                    logarithmicScale: true,
+                    logarithmicScaleBase: 2,
+                    valuesOnTicks: true
+                },
+                valueAxis: {
+                    padding: { right: 0 },
+                    flip: false,
+                    logarithmicScale: true,
+                    logarithmicScaleBase: 2,
+                    title: { text: 'Value' },
+                    labels: {
+                        horizontalAlignment: 'right'
+                    }
+                },
+                seriesGroups:
+                        [
+                            {
+                                type: 'line',
+                                radius: 200,
+                                series: [
+                                        { dataField: 'a', displayText: 'A', symbolType: 'square', symbolSize: 6, dashStyle: '4,4', lineWidth: 1 },
+                                        { dataField: 'b', displayText: 'B', symbolType: 'circle', symbolSize: 6, lineWidth: 1 }
+                                    ]
+                            }
+                        ]
+            };
+
+            $('#chartContainer').jqxChart(settings);
+
+            var instance = $('#chartContainer').jqxChart('getInstance');
+
+            function cursorPositionRelativeToChart(event) {
+                // get the x/y coordinates of the mouse cursor relative to the chart element
+                var x = event.pageX || event.clientX || event.screenX;
+                var y = event.pageY || event.clientY || event.screenY;
+                var pos = $('#chartContainer').offset();
+
+                if (self._isTouchDevice) {
+                    var cursorPos = $.jqx.position(event);
+                    x = cursorPos.left;
+                    y = cursorPos.top;
+                }
+
+                x -= pos.left;
+                y -= pos.top;
+
+                return { x: x, y: y };
+            }
+
+            var cursorRedDotElement = null;
+            $('#chartContainer').on('mousemove', function (event) {
+                var position = cursorPositionRelativeToChart(event);
+
+                // get the xAxis value
+                var xvalue = instance.getXAxisValue(position.x, 0);
+
+                // get the valueAxis value
+                var yvalue = instance.getValueAxisValue(position.y, 0);
+
+                // prepare event data text
+                var eventData = "x: " + position.x + "; y: " + position.y + "; xValue: " + xvalue + "; yValue: " + yvalue;
+
+                // display the event data text
+                $('#eventText').html(eventData);
+
+                // display a small dot at the cursor position 
+                var renderer = instance.renderer;
+                if (cursorRedDotElement)
+                    renderer.attr(cursorRedDotElement, { cx: position.x, cy: position.y });
+                else
+                    cursorRedDotElement = renderer.circle(position.x, position.y, 1, { fill: 'red', stroke: 'red' });
+            });
+
+            // add click event handler
+            $('#chartContainer').on('click', function (event) {
+                var position = cursorPositionRelativeToChart(event);
+
+                // get the xAxis value
+                var xvalue = instance.getXAxisValue(position.x, 0);
+
+                // get the valueAxis value
+                var yvalue = instance.getValueAxisValue(position.y, 0);
+
+                // prepare event data text
+                var eventData = "x: " + position.x + "; y: " + position.y + "; xValue: " + xvalue + "; yValue: " + yvalue;
+
+                alert(eventData);
+            });
+
+        });
+</script>
+</head>
+<body>
+    <div id='chartContainer' style="width:800px; height: 500px;"></div>
+    <br />
+    <div id='eventText' style="width:600px; height: 30px"></div>
+
+</body>
+</html>

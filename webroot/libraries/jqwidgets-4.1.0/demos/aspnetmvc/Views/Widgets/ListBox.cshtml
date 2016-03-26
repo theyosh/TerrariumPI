@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "jQWidgets ListBox";
+}
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "json",
+                datafields: [
+                    { name: 'EmployeeID', type: 'number' },
+                    { name: 'ManagerID', type: 'number' },
+                    { name: 'FirstName', type: 'string' },
+                    { name: 'LastName', type: 'string' },
+                    { name: 'Country', type: 'string' },
+                    { name: 'City', type: 'string' },
+                    { name: 'Address', type: 'string' },
+                    { name: 'Title', type: 'string' },
+                    { name: 'HireDate', type: 'date' },
+                    { name: 'BirthDate', type: 'date' }
+                ],
+                async: false,
+                id: 'EmployeeID',
+                url: '/Employee/GetEmployees'
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            
+            $("#listbox").jqxListBox(
+            {
+                source: dataAdapter,
+                width: 200,
+                height: 200,
+                selectedIndex: 0,
+                displayMember: 'FirstName',
+                valueMember: 'EmployeeID'
+            });
+            $('#sendButton').jqxButton({ width: 110 });
+        });
+    </script>
+}
+<form class="form" id="form" target="form-iframe" method="post" action="/Employee/Details" style="margin-top: 20px; font-size: 13px; font-family: Verdana; width: 250px; float: left;">
+    <div name="employeeID" id="listbox"></div>
+    <input style="margin-top: 10px;" type="submit" value="Show Details" id="sendButton" />
+</form>
+<iframe style="float: left; width: 400px; height: 700px;" id="form-iframe" name="form-iframe" class="demo-iframe" frameborder="0"></iframe>

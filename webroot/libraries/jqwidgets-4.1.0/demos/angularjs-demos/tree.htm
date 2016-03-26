@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id="Description">jqxTree directive for AngularJS</title>
+    <meta name="description" content="AngularJS Tree example. This example demonstrates a Tree built with Angular." /> 
+    <link rel="stylesheet" type="text/css" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtree.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+
+        });
+    </script>
+</head>
+<body>
+    <div ng-controller="demoController">
+        <jqx-tree jqx-width="'300px'" jqx-height="'300px'">
+                <ul>
+                    <li id='home'>Home</li>
+                    <li item-expanded='true'>Solutions
+                        <ul>
+                            <li>Education</li>
+                            <li>Financial services</li>
+                            <li>Government</li>
+                            <li>Manufacturing</li>
+                            <li>Solutions
+                                <ul>
+                                    <li>Consumer photo and video</li>
+                                    <li>Mobile</li>
+                                    <li>Rich Internet applications</li>
+                                    <li>Technical communication</li>
+                                    <li>Training and eLearning</li>
+                                    <li>Web conferencing</li>
+                                </ul>
+                            </li>
+                            <li>All industries and solutions</li>
+                        </ul>
+                    </li>
+                    <li>Products
+                        <ul>
+                            <li>PC products</li>
+                            <li>Mobile products</li>
+                            <li>All products</li>
+                        </ul>
+                    </li>
+                    <li>Support
+                        <ul>
+                            <li>Support home</li>
+                            <li>Customer Service</li>
+                            <li>Knowledge base</li>
+                            <li>Books</li>
+                            <li>Training and certification</li>
+                            <li>Support programs</li>
+                            <li>Forums</li>
+                            <li>Documentation</li>
+                            <li>Updates</li>
+                        </ul>
+                    </li>
+                    <li>Communities
+                        <ul>
+                            <li>Designers</li>
+                            <li>Developers</li>
+                            <li>Educators and students</li>
+                            <li>Partners</li>
+                            <li>By resource
+                                <ul>
+                                    <li>Labs</li>
+                                    <li>TV</li>
+                                    <li>Forums</li>
+                                    <li>Exchange</li>
+                                    <li>Blogs</li>
+                                    <li>Experience Design</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Company
+                        <ul>
+                            <li>About Us</li>
+                            <li>Press</li>
+                            <li>Investor Relations</li>
+                            <li>Corporate Affairs</li>
+                            <li>Careers</li>
+                            <li>Showcase</li>
+                            <li>Events</li>
+                            <li>Contact Us</li>
+                            <li>Become an affiliate</li>
+                        </ul>
+                    </li>
+                </ul>   
+        </jqx-tree>
+    </div>
+</body>
+</html>

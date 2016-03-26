@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title id="Description">This demo shows how to display notifications in a custom container.
+    </title>
+    <meta name="keywords" content="container, jQuery notification, jQWidgets, jqxNotification, notification, notification container, unobtrusive notification" />
+    <meta name="description" content="This demo shows how to display notifications in a custom container." />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxnotification.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var quotes = ["I'm gonna make him an offer he can't refuse.", "Toto, I've got a feeling we're not in Kansas anymore.", "You talkin' to me?", "Bond. James Bond.", "I'll be back.", "Round up the usual suspects.", "I'm the king of the world!", "A martini. Shaken, not stirred.", "May the Force be with you.", "Well, nobody's perfect."];
+
+            $("#jqxNotification").jqxNotification({ width: "100%", appendContainer: "#container", opacity: 0.9, autoClose: true, template: "info" });
+
+            $("#openNotification").jqxButton();
+
+            $("#openNotification").click(function () {
+                $("#notificationContent").html(quotes[Math.round(Math.random() * quotes.length)]);
+                $("#jqxNotification").jqxNotification("open");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="jqxNotification">
+        <div id="notificationContent">
+        </div>
+    </div>
+    <button id="openNotification">
+        Open notification</button>
+    <div id="container" style="width: 300px; height: 400px; margin-top: 15px; background-color: #F2F2F2;
+        border: 1px dashed #AAAAAA; overflow: auto;">
+    </div>
+</body>
+</html>

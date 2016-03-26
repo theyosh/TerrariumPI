@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "jQWidgets DropDownList";
+}
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {            
+            var getPrice = function (shirtName) {
+                var price = "0.00";
+                $.ajax({
+                    url: "/Widgets/Store",
+                    async: false,
+                    type: 'POST',
+                    data: { shirt: shirtName },
+                    success: function (data) {
+                        price = data;
+                    },
+                    error: function () {
+                    }
+                });
+                return price;
+            }
+
+            // init the Colors DropDownList.
+            $("#shirtDropDownList").on('change', function (event) {
+                var tshirt = event.args.item.label;
+                $("#TShirt")[0].src = "/Content/images/" + tshirt.toLowerCase() + ".png";
+                var price = getPrice(tshirt);
+                var priceString = "Price: $" + price;
+                $("#price").html(priceString);
+                $("#priceInput").val(price);
+            });
+
+            $("#shirtDropDownList").jqxDropDownList(
+            {
+                autoDropDownHeight: true,
+                width: 200,
+                height: 30,
+                theme: 'arctic',
+                source: ["Brown", "Green", "Red", "Black", "White"]
+            });
+
+            // select the first index.
+            $("#shirtDropDownList").jqxDropDownList('selectIndex', 0);
+
+            // init the Sizes DropDownList.
+            $("#shirtDropDownListSize").jqxDropDownList(
+            {
+                  autoDropDownHeight: true,
+                  width: 200,
+                  height: 30,
+                  selectedIndex: 2,
+                  theme: 'arctic',
+                  source: ["XS", "S", "M", "L", "XL", "XXL"]
+            });
+            $('#sendButton').jqxButton({height: 30, width: 80, theme: 'arctic' });
+        });
+    </script>
+}
+<form class="form" id="form" target="form-iframe" method="post" action="/Widgets/Store" style="margin-top: 20px; font-size: 13px; font-family: Verdana; width: 750px;">
+    <div style="float: left;">
+        <h3>Color</h3>
+        <div name="shirtDropdownList" id="shirtDropDownList"></div>
+        <h3>Size</h3>
+        <div style="margin-top: 20px;" name="shirtDropDownListSize" id="shirtDropDownListSize"></div>
+        <div style="font-weight: bold; font-size: 16px; margin-top: 10px;" id="price"></div>
+        <input type="hidden" id="priceInput" name="priceInput" />
+        <button style="margin-top: 10px;" type="submit" id="sendButton">Buy</button>
+    </div>
+    <div style=" margin-left: 50px; float: left;">
+        <h3>Buy this Shirt</h3>
+        <img style="margin-left: 10px;" id="TShirt" src="/Content/images/brown.png" />
+    </div>
+    <div style="clear: both;"></div>
+</form>
+<br /><br />
+<iframe style="width: 400px; height: 700px;" id="form-iframe" name="form-iframe" class="demo-iframe" frameborder="0"></iframe>

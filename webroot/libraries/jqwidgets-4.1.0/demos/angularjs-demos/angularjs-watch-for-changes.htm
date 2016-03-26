@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id="Description">Watching for changes in the Settings objects.</title>
+    <link rel="stylesheet" type="text/css" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            // define available cultures
+            var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+            // create a calendar.
+            $scope.calendarSettings = { firstDayOfWeek: 0, width: '220px', height: '220px', enableTooltips: false };
+
+            $scope.dropDownListSettings = { source: days, selectedIndex: 6, width: '200px', autoDropDownHeight: true, height: '25px' };
+            $scope.dropDownListSelect = function (event) {
+                var index = event.args.index;
+                if (index == 6) {
+                    index = -1;
+                }
+                $scope.calendarSettings.firstDayOfWeek = index + 1;
+            };
+            $scope.setDropDownListWidth = function (event) {
+                $scope.dropDownListSettings.width = 300;
+            }
+            $scope.setCalendarWidth = function (event) {
+                $scope.calendarSettings.width = 300;
+            }
+        });
+    </script>
+</head>
+<body>
+    <div ng-controller="demoController">
+        <div style='float: left; width: 250px;' id='ngxWidget'>
+            <jqx-calendar jqx-watch="[calendarSettings.firstDayOfWeek, calendarSettings.width]" jqx-settings="calendarSettings">
+            </jqx-calendar>
+            <br />
+            <div>
+                <br />
+                <div style='float: left; font-family: "Verdana", "sans-serif"; font-size: 13px;'>
+                    Choose the first day of the week. 
+                </div>
+                <br />
+                <br />
+                <jqx-drop-down-list jqx-watch="dropDownListSettings.width" jqx-on-select="dropDownListSelect(event)" jqx-settings="dropDownListSettings" style='float: left;'>
+                </jqx-drop-down-list>
+            </div>
+            <br />
+            <br />
+            <jqx-button jqx-on-click="setDropDownListWidth(event)">Set DropDownList Width</jqx-button>
+            <br />
+            <br />
+            <jqx-button jqx-on-click="setCalendarWidth(event)">Set Calendar Width</jqx-button>
+        </div>
+    </div>
+</body>
+</html>

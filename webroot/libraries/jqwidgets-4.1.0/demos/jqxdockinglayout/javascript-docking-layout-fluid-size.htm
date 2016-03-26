@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">jqxDockingLayout Fluid Size Example. The width of the docking
+        layout and both dimensions of its groups in this demo are in Percentages.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <style type="text/css">
+        .jqx-layout-group-auto-hide-content-vertical
+        {
+            width: 200px;
+        }
+    </style>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxribbon.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlayout.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdockinglayout.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // the 'layout' JSON array defines the internal structure of the docking layout
+            var layout = [{
+                type: 'layoutGroup',
+                orientation: 'horizontal',
+                items: [{
+                    type: 'layoutGroup',
+                    orientation: 'vertical',
+                    width: '60%',
+                    items: [{
+                        type: 'documentGroup',
+                        height: '50%',
+                        minHeight: '25%',
+                        items: [{
+                            type: 'documentPanel',
+                            title: 'Document 1',
+                            contentContainer: 'Document1Panel'
+                        }, {
+                            type: 'documentPanel',
+                            title: 'Document 2',
+                            contentContainer: 'Document2Panel'
+                        }]
+                    }, {
+                        type: 'tabbedGroup',
+                        height: '50%',
+                        pinnedHeight: '10%',
+                        items: [{
+                            type: 'layoutPanel',
+                            title: 'Error List',
+                            contentContainer: 'ErrorListPanel'
+                        }, {
+                            type: 'layoutPanel',
+                            title: 'Output',
+                            contentContainer: 'OutputPanel',
+                            selected: true
+                        }]
+                    }]
+                }, {
+                    type: 'tabbedGroup',
+                    width: '40%',
+                    items: [{
+                        type: 'layoutPanel',
+                        title: 'Solution Explorer',
+                        contentContainer: 'SolutionExplorerPanel'
+                    }, {
+                        type: 'layoutPanel',
+                        title: 'Properties',
+                        contentContainer: 'PropertiesPanel'
+                    }]
+                }]
+            }];
+
+            $('#jqxDockingLayout').jqxDockingLayout({ width: '80%', height: 600, layout: layout });
+        });
+    </script>
+</head>
+<body>
+    <div id="jqxDockingLayout">
+        <!--The panel content divs can have a flat structure-->
+        <!--documentGroup-->
+        <div data-container="Document1Panel">
+            Document 1 content</div>
+        <div data-container="Document2Panel">
+            Document 2 content</div>
+        <!--bottom tabbedGroup-->
+        <div data-container="ErrorListPanel">
+            List of errors</div>
+        <div data-container="OutputPanel">
+            Output</div>
+        <!--right tabbedGroup-->
+        <div data-container="SolutionExplorerPanel">
+            Solution structure</div>
+        <div data-container="PropertiesPanel">
+            List of properties</div>
+    </div>
+</body>
+</html>

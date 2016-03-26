@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title id='Description'>JavaScript ScrollView - Mobile Example</title>
+    <link rel="stylesheet" href="../styles/demo.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.windowsphone.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.blackberry.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.android.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.mobile.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../simulator.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollview.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = prepareSimulator("photoGallery");
+            $('#photoGallery').jqxScrollView({ theme: theme, width: '100%', height: '100%', buttonsOffset: [0, 0] });
+            initSimulator("photoGallery");
+        });
+    </script>
+    <style type="text/css">
+        .photo {
+            width: 100%;
+            height: 100%;
+            background-color: inherit;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
+    <script type="text/javascript" src="simulator.js"></script>
+</head>
+<body class='default'>
+     <div id="demoContainer" class="device-mobile-tablet">
+        <div id="container" class="device-mobile-tablet-container">
+            <div id="scrollview" style="overflow: hidden; width: 100%; height: 100%; background: #222;">
+                <div id="photoGallery">
+                    <div>
+                        <div class="photo" style="background-image: url(../../images/imageNature3.jpg)">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="photo" style="background-image: url(../../images/imageNature2.jpg)">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="photo" style="background-image: url(../../images/imageNature1.jpg)">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="photo" style="background-image: url(../../images/imageNature4.jpg)">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="photo" style="background-image: url(../../images/imageNature5.jpg)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

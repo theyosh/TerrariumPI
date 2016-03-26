@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Using jqxTree  with JSP and MySQL.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtree.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <style type="text/css">
+        .demo-iframe {
+            border: none;
+            width: 600px;
+            height: 400px;
+            clear: both;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var source = {
+                datatype: "json",
+                datafields: [{
+                    name: 'EmployeeID'
+                }, {
+                    name: 'FirstName'
+                }, {
+                    name: 'Title'
+                }, {
+                    name: 'ReportsTo'
+                }],
+                id: 'EmployeeID',
+                url: 'jsp/select-tree-data.jsp',
+                async: false
+            };
+            // create data adapter.
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            // perform Data Binding.
+            dataAdapter.dataBind();
+            // get the tree items. The first parameter is the item's id. The second parameter is the parent item's id. The 'items' parameter represents 
+            // the sub items collection name. Each jqxTree item has a 'label' property, but in the JSON data, we have a 'text' field. The last parameter 
+            // specifies the mapping between the 'text' and 'label' fields.  
+            var records = dataAdapter.getRecordsHierarchy('EmployeeID',
+                'ReportsTo', 'items', [{
+                    name: 'EmployeeID',
+                    map: 'id'
+                }, {
+                    name: 'FirstName',
+                    map: 'label'
+                }, {
+                    name: 'Title',
+                    map: 'value'
+                }, {
+                    name: 'ReportsTo',
+                    map: 'parentid'
+                }]);
+
+            // create jqxTree
+            $('#jqxTree').jqxTree({
+                source: records,
+                width: '200px',
+                height: '300px',
+                submitCheckedItems: true,
+                checkboxes: true
+            });
+            $('#checkedItemsBtn').jqxRadioButton({
+                width: '200px',
+                height: '25px',
+                checked: true
+            });
+            $('#selectedItemBtn').jqxRadioButton({
+                width: '200px',
+                height: '25px',
+                checked: false
+            });
+            $('#checkedItemsBtn').bind('checked', function (event) {
+                $('#jqxTree').jqxTree({
+                    submitCheckedItems: true
+                });
+            });
+            $('#selectedItemBtn').bind('checked', function (event) {
+                $('#jqxTree').jqxTree({
+                    submitCheckedItems: false
+                });
+            });
+            $('#sendButton').jqxButton({
+                width: 70
+            });
+            $('#jqxTree').jqxTree('expandAll');
+        });
+    </script>
+</head>
+<body class='default'>
+    <form class="form" id="form" target="form-iframe" method="post" action="jsp/submit.jsp" style="font-size: 13px; font-family: Verdana; width: 650px;">
+        <div style='float: left;'>
+            <div name="widget" id='jqxTree' style='float: left; margin-left: 20px;'></div>
+            <div style='margin-left: 60px; float: left;'>
+                <div style='margin-top: 10px;'>
+                    <div id='checkedItemsBtn'>Submit Checked Items</div>
+                    <div id='selectedItemBtn'>Submit Selected Item</div>
+                </div>
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+        <input style="margin-top: 10px;" type="submit" value="Submit" id="sendButton" />
+    </form>
+    <div style="font-size: 13px; font-family: Verdana;">
+        <iframe id="form-iframe" name="form-iframe" class="demo-iframe" frameborder="0"></iframe>
+    </div>
+</body>
+</html>

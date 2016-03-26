@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Gauge, Gauge, Radial Gauge, jqxGauge" />
+    <meta name="description" content="jqxGauge allows the users to quickly and easy check the current value
+    in a specific range using pointer inside a radial gauge. In this demo " />
+    <title id='Description'>In this sample is illustrated how to dynamically update the Gauge's value.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgauge.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxslider.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {         
+            $('#gauge').jqxGauge({
+                ranges: [{ startValue: 0, endValue: 130, style: { fill: '#4cb848', stroke: '#4cb848' }, startDistance: 0, endDistance: 0 },
+                         { startValue: 130, endValue: 180, style: { fill: '#fad00b', stroke: '#fad00b' }, startDistance: 0, endDistance: 0 },
+                         { startValue: 180, endValue: 220, style: { fill: '#e53d37', stroke: '#e53d37' }, startDistance: 0, endDistance: 0}],
+                cap: { size: '5%', style: { fill: '#2e79bb', stroke: '#2e79bb'} },
+                border: { style: { fill: '#8e9495', stroke: '#7b8384', 'stroke-width': 1 } },
+                ticksMinor: { interval: 5, size: '5%' },
+                ticksMajor: { interval: 20, size: '10%' },       
+                labels: { position: 'outside', interval: 20 },
+                pointer: { style: { fill: '#2e79bb' }, width: 5 },
+                animationDuration: 1500
+            });
+            $('#slider').jqxSlider({ min: 0, max: 220, mode: 'fixed', ticksFrequency: 20, width: 150, value: 120,  showButtons: false });
+
+            $('#slider').mousedown(function () {
+                $('#gauge').jqxGauge('value', $('#slider').jqxSlider('value'));
+            });
+            $('#slider').on('slideEnd', function (e) {
+                $('#gauge').jqxGauge('value', e.args.value);
+            });
+            $('#slider').on('mousewheel', function () {
+                $('#gauge').jqxGauge('value', $('#slider').jqxSlider('value'));
+            });
+            $('#gauge').jqxGauge('value', 120);
+        });
+    </script>
+</head>
+<body class='default'>
+    <div class="demo-gauge" style="position: relative; height: 380px;">
+        <div id='gauge' style="position: absolute; top: 0px; left: 0px;">
+        </div>
+        <div id='slider' style="position: absolute; top: 250px; left: 93px">
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>DataTable with Locked Rows. The 2nd, 4th and 6th rows are locked(non editable).</title>
+    <meta name="description" content="This sample demonstrates how we can lock rows in jQWidgets DataTable widget.">
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var that = this;
+        $(document).ready(function () {
+            var orderdetailsurl = "../sampledata/orderdetails.xml";
+
+            var ordersSource =
+            {
+                dataFields: [
+                    { name: 'OrderID', type: 'int' },
+                    { name: 'Freight', type: 'float' },
+                    { name: 'ShipName', type: 'string' },
+                    { name: 'ShipAddress', type: 'string' },
+                    { name: 'ShipCity', type: 'string' },
+                    { name: 'ShipCountry', type: 'string' },
+                    { name: 'ShippedDate', type: 'date' }
+                ],
+                root: "Orders",
+                record: "Order",
+                dataType: "xml",
+                id: 'OrderID',
+                url: orderdetailsurl,
+                addRow: function (rowID, rowData, position, commit) {
+                    // synchronize with the server - send insert command
+                    // call commit with parameter true if the synchronization with the server is successful 
+                    // and with parameter false if the synchronization failed.
+                    // you can pass additional argument to the commit callback which represents the new ID if it is generated from a DB.
+                    commit(true);
+                },
+                updateRow: function (rowID, rowData, commit) {
+                    // synchronize with the server - send update command
+                    // call commit with parameter true if the synchronization with the server is successful 
+                    // and with parameter false if the synchronization failed.
+                    commit(true);
+                },
+                deleteRow: function (rowID, commit) {
+                    // synchronize with the server - send delete command
+                    // call commit with parameter true if the synchronization with the server is successful 
+                    // and with parameter false if the synchronization failed.
+                    commit(true);
+                }
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(ordersSource, {
+                loadComplete: function () {
+                    // data is loaded.
+                }
+            });
+        
+            $("#dataTable").jqxDataTable(
+            {
+                width: 850,
+                source: dataAdapter,
+                pageable: true,
+                sortable: true,
+                ready: function()
+                {
+                    $("#dataTable").jqxDataTable('beginUpdate');
+                    $("#dataTable").jqxDataTable('lockRow', 1);
+                    $("#dataTable").jqxDataTable('lockRow', 3);
+                    $("#dataTable").jqxDataTable('lockRow', 5);
+                    $("#dataTable").jqxDataTable('endUpdate');
+                },
+                altRows: true,
+                editable: true,
+                pagerButtonsCount: 8,
+                columns: [
+                  { text: 'Order ID', editable: false, dataField: 'OrderID', width: 250 },
+                  { text: 'Freight', dataField: 'Freight', cellsFormat: 'f2', cellsAlign: 'right', align: 'right', width: 250 },
+                  { text: 'Ship Country', dataField: 'ShipCountry', width: 150},
+                  { text: 'Shipped Date', dataField: 'ShippedDate', cellsAlign: 'right', align: 'right', cellsFormat: 'dd/MM/yyyy' }
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="dataTable">
+    </div>
+</body>
+</html>

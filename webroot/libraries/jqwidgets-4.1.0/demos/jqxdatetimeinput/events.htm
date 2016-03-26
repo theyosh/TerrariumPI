@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Calendar, jqxCalendar" />
+    <meta name="description" content="This demo demonstrates how to trigger the jqxCalendar's valuechanged
+        and nextButtonClick and backButtonClick events." />
+    <title id='Description'>This demo demonstrates how to trigger the jqxCalendar's valuechanged
+        and nextButtonClick and backButtonClick events.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Create jqxDateTimeInput
+            $("#jqxDateTimeInput").jqxDateTimeInput({ width: '270px', height: '25px'});
+
+            $('#Events').css('border', 'none');
+            $('#Events').jqxPanel({  height: '250px', width: '300px' });
+
+            $('#jqxDateTimeInput').on('valueChanged', function (event) {
+                $('#Events').jqxPanel('clearcontent');
+                var date = event.args.date;
+                $('#Events').jqxPanel('prepend', '<div style="margin-top: 5px;">New Value: ' + date + '</div>');
+            });
+            $('#jqxDateTimeInput').on('open', function (event) {
+                var date = event.args.date;
+                $('#Events').jqxPanel('prepend', '<div style="margin-top: 5px;">Popup Opened</div>');
+            });
+            $('#jqxDateTimeInput').on('close', function (event) {
+                var date = event.args.date;
+                $('#Events').jqxPanel('prepend', '<div style="margin-top: 5px;">Popup Closed</div>');
+            });
+
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div style='float: left;'>
+            <div style='float: left; margin-top: 3px;' id='jqxDateTimeInput'>
+            </div>
+            <div style='margin-left: 20px; float: left;'>
+                <div>
+                    <span>Events:</span>
+                    <div id='Events'>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

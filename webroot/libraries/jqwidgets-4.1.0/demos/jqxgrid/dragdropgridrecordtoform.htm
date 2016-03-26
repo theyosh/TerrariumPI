@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example shows how to setup a one way drag and drop from a Grid to a Form.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.filter.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.grouping.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.columnsresize.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.edit.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.columnsreorder.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxexpander.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdragdrop.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="generatedata.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var source =
+            {
+                localdata: generatedata(10),
+                datafields:
+                [
+                    { name: 'firstname', type: 'string' },
+                    { name: 'lastname', type: 'string' },
+                    { name: 'productname', type: 'string' }
+                ],
+                datatype: "array"
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            var columns = [
+                  { text: 'First Name', dataField: 'firstname', width: 100 },
+                  { text: 'Last Name', dataField: 'lastname', width: 100 },
+                  { text: 'Product', dataField: 'productname' }
+                ];
+
+            $("#grid").on('rowclick', function () {
+                // put the focus back to the Grid. Otherwise, the focus goes to the drag feedback element.
+                $("#grid").jqxGrid('focus');
+            });
+       
+            // create data grids.
+            $("#grid").jqxGrid(
+            {
+                width: 600,
+                source: dataAdapter,
+                autoheight: true,
+                pageable: true,
+                sortable: true,
+                columns: columns,
+                rendered: function () {
+                    // select all grid cells.
+                    var gridCells = $('#grid').find('.jqx-grid-cell');
+                    if ($('#grid').jqxGrid('groups').length > 0) {
+                        gridCells = $('#grid').find('.jqx-grid-group-cell');
+                    }
+
+
+                    // initialize the jqxDragDrop plug-in. Set its drop target to the second Grid.
+                    gridCells.jqxDragDrop({
+                        appendTo: 'body',  dragZIndex: 99999,
+                        dropAction: 'none',
+                        initFeedback: function (feedback) {
+                            feedback.height(70);
+                            feedback.width(220);
+                        }
+                    });
+
+                    // initialize the dragged object.
+                    gridCells.off('dragStart');
+                    gridCells.on('dragStart', function (event) {
+                        var value = $(this).text();
+                        var position = $.jqx.position(event.args);
+                        var cell = $("#grid").jqxGrid('getcellatposition', position.left, position.top);
+                        $(this).jqxDragDrop('data', $("#grid").jqxGrid('getrowdata', cell.row));
+                        var groupslength = $('#grid').jqxGrid('groups').length;
+                        // update feedback's display value.
+                        var feedback = $(this).jqxDragDrop('feedback');
+                        var feedbackContent = $(this).parent().clone();
+                        var table = '<table>';
+                        $.each(feedbackContent.children(), function (index) {
+                            if (index < groupslength)
+                                return true;
+
+                                table += '<tr>';
+                                table += '<td>';
+                                table += columns[index - groupslength].text + ': ';
+                                table += '</td>';
+                                table += '<td>';
+                                table += $(this).text();
+                                table += '</td>';
+                                table += '</tr>';                           
+                        });
+
+                        table += '</table>';
+                        feedback.html(table);
+                    });
+                    gridCells.off('dragEnd');
+                    gridCells.on('dragEnd', function (event) {
+                        var value = $(this).jqxDragDrop('data');
+                        var position = $.jqx.position(event.args);
+                        var pageX = position.left;
+                        var pageY = position.top;
+                        var $form = $("#form");
+
+                        var targetX = $form.offset().left;
+                        var targetY = $form.offset().top;
+                        var width = $form.width();
+                        var height = $form.height();
+
+                        // fill the form if the user dropped the dragged item over it.
+                        if (pageX >= targetX && pageX <= targetX + width) {
+                            if (pageY >= targetY && pageY <= targetY + height) {
+                                $("#firstName").val(value.firstname);
+                                $("#lastName").val(value.lastname);
+                                $("#product").val(value.productname);
+                            }
+                        }
+                    });
+                }
+            });
+
+    
+            $("#form").jqxExpander({ width: 250,  toggleMode: 'none', showArrow: false });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div style="float: left;" id="grid">
+        </div>
+        <div style="margin-left: 20px; float: left;" id="form">
+            <div>
+                Form Panel
+            </div>
+            <div>
+                <form>
+                <table>
+                    <tr>
+                        <td>
+                            First Name:
+                        </td>
+                        <td>
+                            <input id="firstName" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Last Name:
+                        </td>
+                        <td>
+                            <input id="lastName" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Product:
+                        </td>
+                        <td>
+                            <input id="product" />
+                        </td>
+                    </tr>
+                </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

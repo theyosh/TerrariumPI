@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery ComboBox, jqxListBox, DropDownList, List, ListBox, Popup List, jqxDropDownList, jqxListBox, List Widget, ListBox Widget, DropDownList Widget" /> 
+    <meta name="description" content="The jqxListBox comes with several useful events. When the user selects an item, the 'select' and 'unselect' events are triggered.   "/>
+    <title id='Description'>The jqxListBox comes with several useful events. When the user selects an item, the 'select' and 'unselect' events are triggered.    
+    </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+</head>
+<body>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var source = [
+                    "Affogato",
+                    "Americano",
+                    "Bicerin",
+                    "Breve",
+                    "Café Bombón",
+                    "Café au lait",
+                    "Caffé Corretto",
+                    "Café Crema",
+                    "Caffé Latte",
+                    "Caffé macchiato",
+                    "Café mélange",
+                    "Coffee milk",
+                    "Cafe mocha",
+                    "Cappuccino",
+                    "Carajillo",
+                    "Cortado",
+                    "Cuban espresso",
+                    "Espresso",
+                    "Eiskaffee",
+                    "The Flat White",
+                    "Frappuccino",
+                    "Galao",
+                    "Greek frappé coffee",
+                    "Iced Coffee﻿",
+                    "Indian filter coffee",
+                    "Instant coffee",
+                    "Irish coffee",
+                    "Liqueur coffee"
+		        ];
+                // Create a jqxListBox
+                $("#jqxListBox").jqxListBox({ source: source, width: 200, height: 250});
+                // disable the sixth item.
+                $("#jqxListBox").jqxListBox('disableAt', 5);
+                $('#Events').jqxPanel({  height: 250, width: 200 });
+                $('#Events').css('border', 'none');
+                // on to 'unselect' and 'select' events.
+
+                $('#jqxListBox').on('select', function (event) {
+                    var args = event.args;
+                    var item = $('#jqxListBox').jqxListBox('getItem', args.index);
+                    if (item != null) {
+                        $('#Events').jqxPanel('prepend', '<div style="margin-top: 5px;">Selected: ' + item.label + '</div>');
+                    }
+                });
+                $('#jqxListBox').on('unselect', function (event) {
+                    var args = event.args;
+                    var item = $('#jqxListBox').jqxListBox('getItem', args.index);
+                    if (item != null) {
+                        $('#Events').jqxPanel('prepend', '<div style="margin-top: 5px;">Unselected: ' + item.label + '</div>');
+                    }
+                });
+            });
+        </script>
+        <div style='float: left; width: 500px;' id='jqxWidget'>
+            <div style='float: left; margin-top: 10px;' id='jqxListBox'>
+            </div>
+          <div style='margin-left: 20px; margin-top: 10px; float: left;'>
+                <div>
+                    <span>
+                        Events:</span>
+                    <div id='Events'>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

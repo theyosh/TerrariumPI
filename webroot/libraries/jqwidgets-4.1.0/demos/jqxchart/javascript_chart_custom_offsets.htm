@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">jqxChart custom label, grid line and tick marks offsets</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var sampleData = [
+                { a: 0.1535, b: 0.5 },
+                { a: 0.48, b: 20.5 },
+                { a: 10, b: 60 },
+                { a: 100, b: 80 },
+                { a: 200, b: 90 },
+                { a: 245.11, b: 100.13 },
+                { a: 300.13, b: 150.13 },
+                { a: 340, b: 200 }
+               ];
+
+            var settings = {
+                title: "Custom labels, grid lines and tick marks offsets",
+                description: "This example demonstrates how to add labels, tick marks and grid lines at custom offsets",
+                padding: { left: 5, top: 5, right: 15, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                source: sampleData,
+                enableAnimations: false,
+                xAxis:
+                {
+                    dataField: "a",
+                    logarithmicScale: true,
+                    logarithmicScaleBase: 2,
+                    labels: {
+                        visible: true,
+                        custom: [{ value: 10 }, { value: 20}]
+                    },
+                    gridLines:
+                    {
+                        visible: true,
+                        custom: [{ value: 10 }, { value: 20}]
+                    },
+                    tickMarks:
+                    {
+                        visible: true,
+                        custom: [{ value: 10 }, { value: 20}]
+                    },
+                    flip: false
+                },
+                valueAxis: {
+                    logarithmicScale: true,
+                    logarithmicScaleBase: 2,
+                    title: { text: "" },
+                    labels: {
+                        horizontalAlignment: "right",
+                        custom: [{ value: 10 }, { value: 20}]
+                    },
+                    gridLines: {
+                        custom: [{ value: 10 }, { value: 20}]
+                    },
+                    tickMarks: {
+                        custom: [{ value: 10 }, { value: 20}]
+                    },
+                    flip: false
+                },
+                seriesGroups:
+                        [
+                            {
+                                type: "scatter",
+                                series: [
+                                        { dataField: "a", displayText: "A", symbolType: "diamond", symbolSize: 10 },
+                                        { dataField: "b", displayText: "B", symbolType: "triangle_up", symbolSize: 10 }
+                                    ]
+                            }
+                        ]
+            };
+
+            // setup chart settings
+            $("#chartContainer").jqxChart(settings);
+
+            var chartInstance = $("#chartContainer").jqxChart("getInstance");
+
+            function addAxisSettingsHandlers(axis) {
+                var visibilityOptions = [true, false, "custom"];
+                $("#dropDownLabelsVisibility_" + axis).jqxDropDownList({ source: visibilityOptions, selectedIndex: 0, width: "235", height: "25", dropDownHeight: 80 });
+
+                $("#dropDownLabelsVisibility_" + axis).on("change", function (event) {
+                    var value = event.args.item.value;
+
+                    chartInstance[axis].labels.visible = value == "false" ? false : value;
+                    chartInstance[axis].gridLines.visible = value == "false" ? false : value;
+                    chartInstance[axis].tickMarks.visible = value == "false" ? false : value;
+
+                    chartInstance.refresh();
+                });
+
+                $("#listboxCustomPositions_" + axis).jqxListBox({ source: [10, 20], height: 80, width: 235 });
+
+                $("#inputCustomPosition_" + axis).jqxInput({ height: 22 });
+
+                $("#btnAddCustomPosition_" + axis).jqxButton().on("click", function () {
+                    var value = $("#inputCustomPosition_" + axis).val();
+                    if (!isNaN(parseFloat(value))) {
+                        $("#listboxCustomPositions_" + axis).jqxListBox("addItem", parseFloat(value));
+                        var items = $("#listboxCustomPositions_" + axis).jqxListBox("getItems");
+                        var customOffsets = [];
+                        for (var i = 0; i < items.length; i++)
+                            customOffsets.push({ value: parseFloat(items[i].value) });
+
+                        chartInstance[axis].labels.custom = customOffsets;
+                        chartInstance[axis].gridLines.custom = customOffsets;
+                        chartInstance[axis].tickMarks.custom = customOffsets;
+
+                        chartInstance.refresh();
+                    }
+                });
+
+                $("#btnRemoveCustomPosition_" + axis).jqxButton().on("click", function () {
+                    var idx = $("#listboxCustomPositions_" + axis).jqxListBox("selectedIndex");
+                    if (idx == -1)
+                        return;
+
+                    $("#listboxCustomPositions_" + axis).jqxListBox("removeAt", idx);
+                    var items = $("#listboxCustomPositions_" + axis).jqxListBox("getItems");
+                    var customOffsets = [];
+                    for (var i = 0; i < items.length; i++)
+                        customOffsets.push({ value: parseFloat(items[i].value) });
+
+                    chartInstance[axis].labels.custom = customOffsets;
+                    chartInstance[axis].gridLines.custom = customOffsets;
+                    chartInstance[axis].tickMarks.custom = customOffsets;
+
+                    chartInstance.refresh();
+                });
+            }
+
+            addAxisSettingsHandlers('xAxis');
+            addAxisSettingsHandlers('valueAxis');
+
+        });
+</script>
+</head>
+<body>
+    <div id="chartContainer" style="width:800px; height: 500px;"></div>
+    <table>
+        <tr>
+            <td style="width:300px;"><b>xAxis settings</b></td>
+            <td style="width:300px;"><b>valueAxis settings</b></td>
+        </tr>
+        <tr>
+            <td>
+                <p style="font-family: Verdana; font-size: 12px;">Label, tick marks & grid lines visibility:</p>
+                <div id="dropDownLabelsVisibility_xAxis">
+                </div>
+            </td>       
+            <td>
+                <p style="font-family: Verdana; font-size: 12px;">Label, tick marks & grid lines visibility:</p>
+                <div id="dropDownLabelsVisibility_valueAxis">
+                </div>
+            </td>       
+        </tr>
+        <tr>
+            <td>
+                <p style="font-family: Verdana; font-size: 12px;">Custom positions:</p>
+                <input type="text" id="inputCustomPosition_xAxis" style="width: 50px" />
+                <input type="button" value="Add" id="btnAddCustomPosition_xAxis" />
+                <input type="button" value="Remove" id="btnRemoveCustomPosition_xAxis" />
+                <div style="margin-top:10px" id="listboxCustomPositions_xAxis">
+                </div>
+            </td>       
+            <td>
+                <p style="font-family: Verdana; font-size: 12px;">Custom positions:</p>
+                <input type="text" id="inputCustomPosition_valueAxis" style="width: 50px" />
+                <input type="button" value="Add" id="btnAddCustomPosition_valueAxis" />
+                <input type="button" value="Remove" id="btnRemoveCustomPosition_valueAxis" />
+                <div style="margin-top:10px" id="listboxCustomPositions_valueAxis">
+                </div>
+            </td>       
+        </tr>
+    </table>
+</body>
+</html>

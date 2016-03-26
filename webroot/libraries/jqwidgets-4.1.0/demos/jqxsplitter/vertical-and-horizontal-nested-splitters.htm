@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxsplitter.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#container').jqxSplitter({  width: '100%', height: '100%', orientation: 'horizontal', panels: [{ size: 200 }] });
+            $('#nested').jqxSplitter({  orientation: 'vertical', panels: [{ size: 150}] });
+        });
+    </script>
+    <style type="text/css">
+        html, body
+        {
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class='default'>
+    <div id="container">
+        <div>
+            Panel 1
+        </div>
+        <div>
+            <div id="nested">
+                <div>
+                    Panel 2
+                </div>
+                <div>
+                    Panel 3
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

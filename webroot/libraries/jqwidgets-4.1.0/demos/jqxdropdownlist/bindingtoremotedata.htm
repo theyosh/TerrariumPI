@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>In this example the ComboBox is bound to a Remote Data.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {           
+            // prepare the data
+            var source =
+            {
+                datatype: "jsonp",
+                datafields: [
+                    { name: 'countryName' },
+                    { name: 'name' },
+                    { name: 'population', type: 'float' },
+                    { name: 'continentCode' }
+                ],
+                url: "http://api.geonames.org/searchJSON",
+                data: {
+                    featureClass: "P",
+                    style: "full",
+                    maxRows: 50,
+                    username: "jqwidgets"
+                }
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $("#jqxdropdownlist").jqxDropDownList(
+            {
+                width: 250,
+                height: 25,
+                source: dataAdapter, 
+                selectedIndex: 0,
+                displayMember: "countryName",
+                valueMember: "name"
+            });
+
+            $("#jqxdropdownlist").on('select', function (event) {
+                if (event.args) {
+                    var item = event.args.item;
+                    if (item) {
+                        var valueelement = $("<div></div>");
+                        valueelement.text("Value: " + item.value);
+                        var labelelement = $("<div></div>");
+                        labelelement.text("Label: " + item.label);
+
+                        $("#selectionlog").children().remove();
+                        $("#selectionlog").append(labelelement);
+                        $("#selectionlog").append(valueelement);
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+        <div id="jqxdropdownlist"></div>
+        <div id="selectionlog"></div>
+    </div>
+</body>
+</html>

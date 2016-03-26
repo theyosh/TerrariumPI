@@ -1,0 +1,1126 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="jQuery, Chart, Chart plugin, Data Visualization, Help Documentation" />
+    <meta name="description" content="This page represents the help documentation of the jqxLinearGauge widget." />
+    <title>jqxLinearGauge API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+                <div>
+                    <h2 class="documentation-top-header">Properties</h2>
+                    <table class="documentation-table">
+                        <tr>
+                            <th>Name
+                            </th>
+                            <th>Type
+                            </th>
+                            <th>Default
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span6'>animationDuration</span>
+                            </td>
+                            <td>
+                                <span>Number</span>
+                            </td>
+                            <td>1000
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets jqxLinearGauge's animation duration [ms].
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>animationDuration</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({animationDuration: 300 });</code></pre>
+                                    <p>
+                                        Get the <code>animationDuration</code> property.
+                                    </p>
+                                    <pre><code>var animationDuration = $('#jqxLinearGauge').jqxLinearGauge('animationDuration');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/55VYY/">animationDuration is set to 3000</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span>background</span>
+                            </td>
+                            <td>
+                                <span>Object</span>
+                            </td>
+                            <td>{ borderRadius: 15, style: { stroke: '#cccccc', fill: 'default-gradient'}, visible: true, backgroundType: 'roundedRectangle', showGradient: true }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>Sets or gets the gauge's properties for it's background. </p>
+                                    <b>Possible Values:</b>
+                                    <br />
+                                    <pre><code>'borderType' - specifies the border type. Possible values are 'rectangle' and 'roundedRectangle'</code></pre>
+                                    <pre><code>'borderRadius' - sets the border radius</code></pre>
+                                    <pre><code>'visible' - indicates if the border will be visible</code></pre>
+                                    <pre><code>'style' - sets border style (color and thickness</code></pre>
+                                    <pre><code>'showGradient' - whether a gradient background will be used</code></pre>
+                                    <pre><code></code></pre>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>background</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({ background: { style: { stroke: '#cccccc', fill: '#cccccc'}, visible: true, backgroundType: 'rectangle' }});</code></pre>
+                                    <p>
+                                        Get the <code>background</code> property.
+                                    </p>
+                                    <pre><code>var background = $('#jqxLinearGauge').jqxLinearGauge('background');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/GXLC5/">background is set to {  style: { stroke: '#ffaaaa',fill: '#ffaaaa' }, visible: true, backgroundType: 'rectangle' }</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span>colorScheme</span>
+                            </td>
+                            <td>
+                                <span>String</span>
+                            </td>
+                            <td>'scheme01'
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets the gauge's color pallete. jqxLinearGauge suppports 11 color schemes from 'scheme01'
+                                                                                            to 'scheme11'.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>colorScheme</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({colorScheme: 'scheme06' });</code></pre>
+
+                                    <p>
+                                        Get the <code>colorScheme</code> property.
+                                    </p>
+                                    <pre><code>var colorScheme = $('#jqxLinearGauge').jqxLinearGauge('colorScheme');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/qWatn/">colorScheme is set to 'scheme06'</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span>disabled</span>
+                            </td>
+                            <td>
+                                <span>Boolean</span>
+                            </td>
+                            <td>false
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets whether the jqxLinearGauge is disabled.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>disabled</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({disabled: true });</code></pre>
+                                    <p>
+                                        Get the <code>disabled</code> property.
+                                    </p>
+                                    <pre><code>var disabled = $('#jqxLinearGauge').jqxLinearGauge('disabled');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/C5cfm/">disabled is set to true</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span>easing</span>
+                            </td>
+                            <td>
+                                <span>String</span>
+                            </td>
+                            <td>'linear'
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets jqxLinearGauge's animation easing.
+                                    </p>
+                                    <b>Possible Values:</b>
+                                    <br />
+                                    <pre><code>'linear'</code></pre>
+                                    <pre><code>'easeOutBack'</code></pre>
+                                    <pre><code>'easeInQuad'</code></pre>
+                                    <pre><code>'easeInOutCirc'</code></pre>
+                                    <pre><code>'easeInOutSine'</code></pre>
+                                    <pre><code>'easeOutCubic'</code></pre>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>easing</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({easing: 'easeInOutSine' });</code></pre>
+                                    <p>
+                                        Get the <code>easing</code> property.
+                                    </p>
+                                    <pre><code>var easing = $('#jqxLinearGauge').jqxLinearGauge('easing');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/p9PCK/">easing is set to 'easeInQuad'</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span>height</span>
+                            </td>
+                            <td>
+                                <span>Number</span>
+                            </td>
+                            <td>300
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets the gauge's height. This property accepts size in pixels and percentage.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>height</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({height: 400 });</code></pre>
+                                    <p>
+                                        Get the <code>height</code> property.
+                                    </p>
+                                    <pre><code>var width = $('#jqxLinearGauge').jqxLinearGauge('height');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/UyyTx/">height is set to 300</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span1'>int64</span>
+                            </td>
+                            <td>
+                                <span>Boolean</span>
+                            </td>
+                            <td>false
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Enables the jqxLinearGauge 64-bit number support.
+                                    </p>
+                                    <p>
+                                        <em>Note:</em> If this property is set to true, the properties <strong>value</strong>,
+                                                                                            <strong>min</strong>, <strong>max</strong>, ranges.<strong>startValue</strong>,
+                                                                                            ranges.<strong>endValue</strong>, ticksMinor.<strong>interval</strong>, ticksMajor.<strong>interval</strong>
+                                        and labels.<strong>interval</strong> should be set to <em>string</em> values.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>int64</code> property.
+                                    </p>
+                                    <pre>
+<code>$('#jqxLinearGauge').jqxLinearGauge({ int64: true });</code></pre>
+                                    <p>
+                                        Get the <code>int64</code> property.
+                                    </p>
+                                    <pre><code>var int64 = $('#jqxLinearGauge').jqxLinearGauge('int64');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/xtu8ybkc/">int64
+                                                                                                is set to true
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span>labels</span>
+                            </td>
+                            <td>
+                                <span>Object</span>
+                            </td>
+                            <td>{ position: 'both', interval: 20, offset: 0, visible: true, formatValue: function (value, position) {
+                                                                                    return value;
+                                                                                    }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets the gauge's properties for it's labels.
+                                    </p>
+                                    <b>Possible Values:</b>
+                                    <br />
+                                    <pre><code>position - specifies the gauge's labels position. Possible values for this property are 'far', 'near' and 'both'. If 'near' is used labels will be visible only in the left hand side of the ticks. If the 'far' value is set ticks will be visible only in the right hand side of the ticks. Otherwise, if the 'both' value is used the labels will be shown in both sides of the ticks</code></pre>
+                                    <pre><code>style - specifies the gauge's pointer style. Here you can set it's fill or stroke color</code></pre>
+                                    <pre><code>interval - specifies labels's frequency</code></pre>
+                                    <pre><code>offset - specifies labels's offset from the ticks</code></pre>
+                                    <pre><code>formatValue - callback used for formatting the label. This function accepts two parameters. The first one is the label's value and the second one is the label's position</code></pre>
+                                    <pre><code>visible - indicates whether the labels will be visible</code></pre>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>labels</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({ labels: { position: 'far', interval: 20, offset: 3, visible: true }});</code></pre>
+                                    <p>
+                                        Get the <code>labels</code> property.
+                                    </p>
+                                    <pre><code>var labels = $('#jqxLinearGauge').jqxLinearGauge('labels');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/AehGF/">labels is set to { position: 'far', interval: 20, offset: 3, visible: true }</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span>min</span>
+                            </td>
+                            <td>
+                                <span>Number</span>
+                            </td>
+                            <td>-60
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets gauge's minimum value.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>min</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({min: 10 });</code></pre>
+                                    <p>
+                                        Get the <code>min</code> property.
+                                    </p>
+                                    <pre><code>var min = $('#jqxLinearGauge').jqxLinearGauge('min');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/u994u/">min is set to 0</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span>max</span>
+                            </td>
+                            <td>
+                                <span>Number</span>
+                            </td>
+                            <td>40
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets jqxLinearGauge's max value.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>max</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({max: 200 });</code></pre>
+                                    <p>
+                                        Get the <code>max</code> property.
+                                    </p>
+                                    <pre><code>var max = $('#jqxLinearGauge').jqxLinearGauge('max');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/9DVTA/">max is set to 70</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span12'>orientation</span>
+                            </td>
+                            <td>
+                                <span>String</span>
+                            </td>
+                            <td>'vertical'
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets jqxLineaerGauge's orientation.
+                                    </p>
+                                    <b>Possible Values:</b>
+                                    <br />
+                                    <pre><code>'vertical'</code></pre>
+                                    <pre><code>'horizontal'</code></pre>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>orientation</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({orientation: 'horizontal' });</code></pre>
+                                    <p>
+                                        Get the <code>orientation</code> property.
+                                    </p>
+                                    <pre><code>var orientation = $('#jqxLinearGauge').jqxLinearGauge('orientation');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/JmTjY/">orientation is set to 'horizontal' </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span>pointer</span>
+                            </td>
+                            <td>
+                                <span>Object</span>
+                            </td>
+                            <td>{ pointerType: 'default', style: { fill: 'theme-specific-color', stroke: 'theme-specific-color' }, size: '7%', visible: true, offset: 0 }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets the gauge's properties for it's pointer.
+                                    </p>
+                                    <b>Possible Values:</b>
+                                    <br />
+                                    <pre><code>'pointerType' - specifies the pointer type. Possible values for this property are  - 'default' and 'rectangle'. If it's value is 'default' the pointer will be column otherwise it'll be an arrow</code></pre>
+                                    <pre><code>'style' - specifies the gauge's pointer style. Here you can set it's fill or stroke color</code></pre>
+                                    <pre><code>'size' - specifies pointer's size. This property can be set in percents ('0%' - '100%') or in pixels</code></pre>
+                                    <pre><code>'visible' - indicates whether the pointer will be visible</code></pre>
+                                    <pre><code>'offset' - indicates the left offset of the pointer</code></pre>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>pointer</code> property.
+                                    </p>
+
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({ pointer: { pointerType: 'arrow', size: '3%', visible: true, offset: 10 }});</code></pre>
+                                    <p>
+                                        Get the <code>pointer</code> property.
+                                    </p>
+                                    <pre><code>var pointer = $('#jqxLinearGauge').jqxLinearGauge('pointer');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/VCk84/">pointer is set to { pointerType: 'arrow', size: '5%', visible: true, offset: 10 }</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span8'>rangesOffset</span>
+                            </td>
+                            <td>
+                                <span>Number</span>
+                            </td>
+                            <td>0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets ranges offset from the ticks.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>rangesOffset</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({rangesOffset: 5 });</code></pre>
+                                    <p>
+                                        Get the <code>rangesOffset</code> property.
+                                    </p>
+                                    <pre><code>var rangesOffset = $('#jqxLinearGauge').jqxLinearGauge('rangesOffset');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/kpsC4/">rangesOffset is set to 2</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span9'>rangeSize</span>
+                            </td>
+                            <td>
+                                <span>Number/String</span>
+                            </td>
+                            <td>'5%'
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets the size of the ranges. This property can be set in percentage or in pixels.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>rangeSize</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({rangeSize: '15%' });</code></pre>
+                                    <p>
+                                        Get the <code>rangeSize</code> property.
+                                    </p>
+                                    <pre><code>var rangeSize = $('#jqxLinearGauge').jqxLinearGauge('rangeSize');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/8WtkJ/">rangeSize is set to '7%'</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span>ranges</span>
+                            </td>
+                            <td>
+                                <span>Array</span>
+                            </td>
+                            <td>[]
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        This property is array from objects. Each object is different range. The range is colored area with specified size.
+                                    </p>
+                                    <b>Possible Values:</b>
+                                    <br />
+                                    <pre><code>'startValue' - the value from which the range will start</code></pre>
+                                    <pre><code>'endValue' - the value where the current range will end</code></pre>
+                                    <pre><code>'style' - this property is object containing style information for the range. It accepts properties like 'fill', 'stroke', etc (typical for SVG/VML)</code></pre>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>ticksPosition</code> property.
+                                    </p>
+                                    <pre><code>
+var ranges = [{
+    startValue: 0,
+    endValue: 35,
+    style: {
+        fill: '#dddddd',
+        stroke: '#dddddd'
+    }
+},
+{
+    startValue: 35,
+    endValue: 55,
+    style: {
+        fill: '#dddddd',
+        stroke: '#dddddd'
+    }
+}];
+$('#jqxLinearGauge').jqxLinearGauge({ ranges: ranges });
+</code></pre>
+                                    <p>
+                                        Get the <code>ranges</code> property.
+                                    </p>
+                                    <pre><code>var ranges = $('#jqxLinearGauge').jqxLinearGauge('ranges');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/7dSdW/">ranges is set to a custom array </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span7'>showRanges</span>
+                            </td>
+                            <td>
+                                <span>Boolean</span>
+                            </td>
+                            <td>true
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        This property indicates whether the gauge's ranges will be visible.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>showRanges</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({showRanges: false });</code></pre>
+                                    <p>
+                                        Get the <code>showRanges</code> property.
+                                    </p>
+                                    <pre><code>var showRanges = $('#jqxLinearGauge').jqxLinearGauge('showRanges');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/L3HbV/">showRanges is set to false</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span16'>scaleStyle</span>
+                            </td>
+                            <td>
+                                <span>Object</span>
+                            </td>
+                            <td>{ stroke: '#A1A1A1', 'stroke-width': 1 }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets the style of the line connecting all the ticks.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>scaleStyle</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({scaleStyle: { stroke: '#000000', 'stroke-width': 3 } });</code></pre>
+                                    <p>
+                                        Get the <code>scaleStyle</code> property.
+                                    </p>
+                                    <pre><code>var scaleStyle = $('#jqxLinearGauge').jqxLinearGauge('scaleStyle');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/kt5N5/">scaleStyle is set to  { stroke: '#000000', 'stroke-width': 3 }</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span11'>scaleLength</span>
+                            </td>
+                            <td>
+                                <span>Number/String</span>
+                            </td>
+                            <td>'90%'
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets the length of the scale. This property could be set in percentage or in pixels.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>scaleLength</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({scaleLength: '100px' });</code></pre>
+                                    <p>
+                                        Get the <code>scaleLength</code> property.
+                                    </p>
+                                    <pre><code>var scaleLength = $('#jqxLinearGauge').jqxLinearGauge('scaleLength');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/Gd29b/">scaleLength is set to '80%' </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span10'>ticksOffset</span>
+                            </td>
+                            <td>
+                                <span>Array</span>
+                            </td>
+                            <td>['36%', '5%']
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets the offset of the ticks. The first element of the array is the left offset and the second one is the top offset.
+                                                                                            This property can be set in pixels or percentage.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>ticksOffset</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({rangeSize: [0,3] });</code></pre>
+                                    <p>
+                                        Get the <code>ticksOffset</code> property.
+                                    </p>
+                                    <pre><code>var ticksOffset = $('#jqxLinearGauge').jqxLinearGauge('ticksOffset');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/N3KGS/">ticksOffset is set to [50,10]</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+
+
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span13'>ticksPosition</span>
+                            </td>
+                            <td>
+                                <span>String</span>
+                            </td>
+                            <td>'both'
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets jqxLineaerGauge's ticks position.
+                                    </p>
+                                    <b>Possible Values:</b>
+                                    <br />
+                                    <pre><code>'near'-ticks will be visible only in the left side of the scale</code></pre>
+                                    <pre><code>'far'-ticks will be visible only in the right side of the scale</code></pre>
+                                    <pre><code>'both'-ticks will be visible in both sides</code></pre>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>ticksPosition</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({ticksPosition: 'far' });</code></pre>
+                                    <p>
+                                        Get the <code>ticksPosition</code> property.
+                                    </p>
+                                    <pre><code>var ticksPosition = $('#jqxLinearGauge').jqxLinearGauge('ticksPosition');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/vpwq6/">ticksPosition is set to 'far' </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span>ticksMinor</span>
+                            </td>
+                            <td>
+                                <span>Object</span>
+                            </td>
+                            <td>{ size: '10%', interval: 5, style: { stroke: '#A1A1A1', 'stroke-width': 1 }, visible: true }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets the gauge's properties for it's minor ticks.
+                                    </p>
+                                    <b>Possible Values:</b>
+                                    <br />
+                                    <pre><code>'size' - specifies the length of the tick. This property can be set in pixels or in percentage</code></pre>
+                                    <pre><code>'interval' - specifies the ticks frequency. With interval equals to 5 each fifth value of the gauge will have a minor tick</code></pre>
+                                    <pre><code>'visible' - indicates if the minor ticks will be visible</code></pre>
+                                    <pre><code>'style' - sets ticks style (color and thickness)</code></pre>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>ticksPosition</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({ ticksMinor: { size: '5%', interval: 15, style: { stroke: '#898989'}, visible: true }});</code></pre>
+                                    <p>
+                                        Get the <code>ticksMinor</code> property.
+                                    </p>
+                                    <pre><code>var ticksMinor = $('#jqxLinearGauge').jqxLinearGauge('ticksMinor');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/6ZU5p/">ticksMinor is set to a custom object </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span>ticksMajor</span>
+                            </td>
+                            <td>
+                                <span>Object</span>
+                            </td>
+                            <td>{ size: '10%', interval: 5, style: { stroke: '#A1A1A1', 'stroke-width': 1 }, visible: true }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets the gauge's properties for it's major ticks.
+                                    </p>
+                                    <b>Possible Values:</b>
+                                    <br />
+                                    <pre><code>'size' - specifies the length of the tick. This property is measured in pixels or percentage</code></pre>
+                                    <pre><code>'interval' - specifies the ticks frequency. With interval equals to 5 each fifth value of the gauge will have a major tick</code></pre>
+                                    <pre><code>'visible' - indicates if the major ticks will be visible</code></pre>
+                                    <pre><code>'style' - sets ticks style (color and thickness)</code></pre>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>ticksMajor</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({ ticksMajor: { size: '10px', interval: 15, style: { stroke: '#898989'}, visible: true }});</code></pre>
+                                    <p>
+                                        Get the <code>ticksMajor</code> property.
+                                    </p>
+                                    <pre><code>var ticksMajor = $('#jqxLinearGauge').jqxLinearGauge('ticksMajor');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/w949L/">ticksMajor is set to a custom object </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span>value</span>
+                            </td>
+                            <td>
+                                <span>Number</span>
+                            </td>
+                            <td>-50
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets gauge's value.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>value</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({value: 15 });</code></pre>
+                                    <p>
+                                        Get the <code>value</code> property.
+                                    </p>
+                                    <pre><code>var value = $('#jqxLinearGauge').jqxLinearGauge('value');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/ZKYyw/">value is set to 50</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span>width</span>
+                            </td>
+                            <td>
+                                <span>Number</span>
+                            </td>
+                            <td>100
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets the gauge's width. This property accepts size in pixels and percentage.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Set the <code>width</code> property.
+                                    </p>
+                                    <pre><code>$('#jqxLinearGauge').jqxLinearGauge({width: 400 });</code></pre>
+                                    <p>
+                                        Get the <code>width</code> property.
+                                    </p>
+                                    <pre><code>var width = $('#jqxLinearGauge').jqxLinearGauge('width');</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/STcPu/">width is set to 100</a>
+                                    </div>
+
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                    <h2 class="documentation-top-header">Events</h2>
+                    <table class="documentation-table">
+                        <tr>
+                            <th>Name
+                            </th>
+                            <th>Arguments
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span>valueChanging</span>
+                            </td>
+                            <td>
+                                <span>Object</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        The event is raised when the gauge's value is changing.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Bind to the <code>valueChanging</code> event by type: jqxLinearGauge.
+                                    </p>
+                                    <pre>
+<code>
+    $('#jqxLinearGauge').bind('valueChanging', function (e) {
+        alert('Value changed: ' + e.args.value);
+    });
+    $('#jqxLinearGauge').jqxLinearGauge('value', 220);
+</code>
+</pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/rCTcm/">Bind to the valueChanging event by type: jqxLinearGauge.</a>
+                                    </div>
+
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span>valueChanged</span>
+                            </td>
+                            <td>
+                                <span>Object</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        The event is raised when the gauge's value is changed.
+                                    </p>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Bind to the <code>valueChanged</code> event by type: jqxLinearGauge.
+                                    </p>
+                                    <pre>
+<code>
+    $('#jqxLinearGauge').bind('valueChanged', function (e) {
+        alert('Value changed: ' + e.args.value);
+    });
+    $('#jqxLinearGauge').jqxLinearGauge('value', 220);
+</code>
+</pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/uqsGp/">Bind to the valueChanged event by type: jqxLinearGauge.</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <h2 class="documentation-top-header">Methods</h2>
+                    <table class="documentation-table">
+                        <tr>
+                            <th>Name
+                            </th>
+                            <th>Arguments
+                            </th>
+                            <th>Return Value
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span44'>disable</span>
+                            </td>
+                            <td>
+                                <span>None</span>
+                            </td>
+                            <td>None
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        This method disables the gauge.
+                                    </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Invoke the <code>disable</code> method.
+                                    </p>
+                                    <pre>
+<code>
+    $('#jqxLinearGauge').jqxLinearGauge('disable');
+</code>
+</pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/dLYv6/">disables the  jqxLinearGauge.</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span45'>enable</span>
+                            </td>
+                            <td>
+                                <span>None</span>
+                            </td>
+                            <td>None
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        This method enables the gauge.
+                                    </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                                    <h4>Code examples</h4>
+                                    <p>
+                                        Invoke the <code>enable</code> method.
+                                    </p>
+                                    <pre>
+<code>
+    $('#jqxLinearGauge').jqxLinearGauge('enable');
+</code>
+</pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/Ynucu/">enables the  jqxLinearGauge.</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="documentation-option-type-click">
+                                <span id='Span59'>val</span>
+                            </td>
+                            <td>
+                                <span>Method</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' style='width: 100%'>
+                                <div class="documentation-option-description property-content" style="display: none;">
+                                    <p>
+                                        Sets or gets the value.
+                                    </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>value</em></td>
+                                            <td>Number</td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>Number</em>
+                            </div>
+                                    <h4>Code example</h4>
+                                    <p>
+                                        Invoke the <code>val</code> method.
+                                    </p>
+                                    // Get the value.
+                                                                                        <pre><code>var value = $("#jqxLinearGauge").jqxLinearGauge('val');</code></pre>
+                                    // Get the value using jQuery's val()
+                                                                                        <pre><code>var value = $("#jqxLinearGauge").val();</code></pre>
+                                    // Set value.
+                                                                                        <pre><code>$("#jqxLinearGauge").jqxLinearGauge('val', 40);</code></pre>
+                                    // Set value using jQuery's val().
+                                                                                        <pre><code>$("#jqxLinearGauge").val(40);</code></pre>
+                                    <div style="padding-bottom: 5px;">
+                                        <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/avNXG/">sets new value of the  jqxLinearGauge.</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                </div>
+ </body>
+</html>

@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title id='Description'>JavaScript Slider - Mobile Example
+    </title>
+    <link rel="stylesheet" href="../styles/demo.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.windowsphone.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.blackberry.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.android.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.mobile.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../simulator.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxslider.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = prepareSimulator("slider");
+
+            $('#redLevel').jqxSlider({ theme: theme, width: "94%", showButtons: false, sliderButtonSize: 20, min: 0, max: 255, ticksFrequency: 25.5, value: 120, step: 25.5 });
+            $('#greenLevel').jqxSlider({ theme: theme, width: "94%", showButtons: false, sliderButtonSize: 20, min: 0, max: 255, ticksFrequency: 25.5, value: 140, step: 25.5 });
+            $('#blueLevel').jqxSlider({ theme: theme, width: "94%", showButtons: false, sliderButtonSize: 20, min: 0, max: 255, ticksFrequency: 25.5, value: 255, step: 25.5 });
+            $('#redLevel').on('change', function (event) {
+                setColor();
+            });
+            $('#greenLevel').on('change', function (event) {
+                setColor();
+            });
+            $('#blueLevel').on('change', function (event) {
+                setColor();
+            });
+
+            setColor();
+
+            initSimulator("slider");
+        });
+        function setColor() {
+            var red = fixHex(Math.round($('#redLevel').jqxSlider('value')).toString(16)),
+                green = fixHex(Math.round($('#greenLevel').jqxSlider('value')).toString(16)),
+                blue = fixHex(Math.round($('#blueLevel').jqxSlider('value')).toString(16));
+            $('#colorBlock').css('background-color', '#' + red + green + blue);
+            $('#colorLabel').text(('#' + red + green + blue).toUpperCase());
+            var color = getTextElement({ r: parseInt(red, 16), g: parseInt(green, 16), b: parseInt(blue, 16) });
+            $('#colorLabel').css('color', color);
+        }
+
+        function fixHex(hex) {
+            return (hex.length < 2) ? '0' + hex : hex;
+        }
+
+        function getTextElement(color) {
+            var nThreshold = 105;
+            var bgDelta = (color.r * 0.299) + (color.g * 0.587) + (color.b * 0.114);
+            var foreColor = (255 - bgDelta < nThreshold) ? 'Black' : 'White';
+            return foreColor;
+        }
+    </script>
+    <style type="text/css">
+        .colorBlock {
+            border: 1px solid #aaa;
+            width: 100%;
+            height: 200px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            margin-top: 50px;
+        }
+
+        .colorLabel {
+            padding: 6px;
+        }
+    </style>
+    <script type="text/javascript" src="simulator.js"></script>
+</head>
+<body>
+    <div id="demoContainer" class="device-mobile">
+        <div id="container" class="device-mobile-container">
+            <div style="margin-left: 10%; width: 80%; margin-top: 20px; position: relative;">
+                <div style="font-size: 16px; margin-bottom: 5px; margin-top: 50px; font-style: italic;">Red</div>
+                <div style="margin-left: 3%;" id='redLevel'>
+                </div>
+                <div style="font-size: 16px; margin-bottom: 5px; margin-top: 20px; font-style: italic;">Green</div>
+                <div style="margin-left: 3%;" id='greenLevel'>
+                </div>
+                <div style="font-size: 16px; margin-bottom: 5px; margin-top: 20px; font-style: italic;">Blue</div>
+                <div style="margin-left: 3%;" id='blueLevel'>
+                </div>
+                <div class="colorBlock jqx-rc-all" id="colorBlock">
+                    <div class="colorLabel" id="colorLabel">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

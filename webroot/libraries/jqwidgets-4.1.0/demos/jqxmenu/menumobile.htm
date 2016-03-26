@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Menu, Menu widget, Vertical Menu, Context Menu" />
+    <meta name="description" content="The jqxMenu provides several built-in events triggered when the user clicks an item, opens or closes a sub menu." />
+    <title id='Description'>In this demo is simulated the touch-device behavior of the jqxMenu.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Create jqxMenu
+            $("#jqxMenu").jqxMenu({ width: 350, height: 30, touchMode: true, showTopLevelArrows: true});
+            $("#jqxMenu").css('visibility', 'visible');
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <img src="../../images/tablet.png" />
+        <div id='jqxMenu' style='visibility: hidden; top: 90px; left: 120px; position: absolute;'>
+            <ul>
+                <li><a href="#Home">Home</a></li>
+                <li><a href="#Solutions">Solutions</a>
+                    <ul style='width: 180px;'>
+                        <li><a href="#Education">Education</a></li>
+                        <li><a href="#Government">Government</a></li>
+                        <li><a href="#Manufacturing">Manufacturing</a></li>
+                        <li type='separator'></li>
+                        <li>Software Solutions
+                            <ul style='width: 100px;'>
+                                <li><a href="#Mobile">Mobile</a></li>
+                                <li><a href="#RIA">RIA</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#Products">Products</a>
+                    <ul>
+                        <li><a href="#PCProducts">PC products</a></li>
+                        <li><a href="#MobileProducts">Mobile products</a></li>
+                        <li><a href="#AllProducts">All products</a></li>
+                    </ul>
+                </li>
+                <li><a href="#Company">Company</a>
+                    <ul style='width: 100px;'>
+                        <li><a href="#About">About Us</a></li>
+                        <li><a href="#Press">Press</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

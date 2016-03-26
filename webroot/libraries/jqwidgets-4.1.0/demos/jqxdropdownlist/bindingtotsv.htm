@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>In this demo the DropDownList is bound to TSV data.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+</head>
+<body>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {               
+                var url = '../sampledata/homeprices.txt';
+                // prepare the data
+                var source =
+                {
+                    datatype: "tab",
+                    datafields: [
+                        { name: 'Year', type: 'int' },
+                        { name: 'HPI', type: 'float' },
+                        { name: 'BuildCost', type: 'float' },
+                        { name: 'Population', type: 'float' },
+                        { name: 'Rate', type: 'float' }
+                    ],
+                    url: url
+                };
+
+                var dataAdapter = new $.jqx.dataAdapter(source);
+
+                // Create a jqxDropDownList
+                $("#jqxWidget").jqxDropDownList({ selectedIndex: 0, source: dataAdapter, displayMember: "Year", valueMember: "Population", width: 200, height: 25});
+
+                // subscribe to the select event.
+                $("#jqxWidget").on('select', function (event) {
+                    if (event.args) {
+                        var item = event.args.item;
+                        if (item) {
+                            var valueelement = $("<div></div>");
+                            valueelement.text("Value: " + item.value);
+                            var labelelement = $("<div></div>");
+                            labelelement.text("Label: " + item.label);
+
+                            $("#selectionlog").children().remove();
+                            $("#selectionlog").append(labelelement);
+                            $("#selectionlog").append(valueelement);
+                        }
+                    }
+                });
+            });
+        </script>
+        <div id='jqxWidget'>
+        </div>
+        <div style="font-size: 12px; font-family: Verdana;" id="selectionlog">
+        </div>
+    </div>
+</body>
+</html>

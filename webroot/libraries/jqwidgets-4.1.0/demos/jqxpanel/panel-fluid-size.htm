@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxPanel Fluid Size Example. The width and height of the Panel in this demo are in Percentages.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 minimum-scale=1" />  
+    <meta name="description" content="JavaScript Panel with Responsive Layout" />   
+     <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            padding: 3px;
+            box-sizing: border-box;
+            margin: 0;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Create jqxPanel
+            $("#jqxWidget").jqxPanel({ width: '50%', height: '50%'});
+        });
+    </script>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style=" font-size: 13px; font-family: Verdana;">
+        <div style='margin: 10px;'>
+            <h3>Early History of the Internet</h3></div>
+        <!--Content-->
+        <div style='white-space: nowrap;'>
+            <ul>
+                <li>1961 First packet-switching papers</li>
+                <li>1966 Merit Network founded</li>
+                <li>1966 ARPANET planning starts</li>
+                <li>1969 ARPANET carries its first packets</li>
+                <li>1970 Mark I network at NPL (UK)</li>
+                <li>1970 Network Information Center (NIC)</li>
+                <li>1971 Merit Network's packet-switched network operational</li>
+                <li>1971 Tymnet packet-switched network</li>
+                <li>1972 Internet Assigned Numbers Authority (IANA) established</li>
+                <li>1973 CYCLADES network demonstrated</li>
+                <li>1974 Telenet packet-switched network</li>
+                <li>1976 X.25 protocol approved</li>
+                <li>1979 Internet Activities Board (IAB)</li>
+                <li>1980 USENET news using UUCP</li>
+                <li>1980 Ethernet standard introduced</li>
+                <li>1981 BITNET established</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

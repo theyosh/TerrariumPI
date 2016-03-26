@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title id='Description'>JavaScript Layout - Mobile Example</title>
+    <link rel="stylesheet" href="../styles/demo.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.windowsphone.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.blackberry.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.android.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.mobile.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../simulator.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxribbon.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlayout.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = prepareSimulator("layout");
+
+            var layout = [{
+                type: 'layoutGroup',
+                orientation: 'horizontal',
+                items: [{
+                    type: 'layoutGroup',
+                    orientation: 'vertical',
+                    width: '60%',
+                    items: [{
+                        type: 'documentGroup',
+                        height: '50%',
+                        minHeight: '20%',
+                        items: [{
+                            type: 'documentPanel',
+                            title: 'Document 1',
+                            contentContainer: 'Document1Panel'
+                        }, {
+                            type: 'documentPanel',
+                            title: 'Document 2',
+                            contentContainer: 'Document2Panel'
+                        }]
+                    }, {
+                        type: 'tabbedGroup',
+                        height: '50%',
+                        pinnedHeight: '10%',
+                        items: [{
+                            type: 'layoutPanel',
+                            title: 'Error List',
+                            contentContainer: 'ErrorListPanel'
+                        }, {
+                            type: 'layoutPanel',
+                            title: 'Output',
+                            contentContainer: 'OutputPanel',
+                            selected: true
+                        }]
+                    }]
+                }, {
+                    type: 'tabbedGroup',
+                    width: '40%',
+                    items: [{
+                        type: 'layoutPanel',
+                        title: 'Solution Explorer',
+                        contentContainer: 'SolutionExplorerPanel'
+                    }]
+                }]
+            }];
+
+            $('#jqxLayout').jqxLayout({ theme: theme, width: '100%', height: '100%', layout: layout });
+            initSimulator("layout");
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="demoContainer" class="device-mobile-tablet">
+        <div id="container" class="device-mobile-tablet-container">
+            <div id="jqxLayout">
+                <!--The panel content divs can have a flat structure-->
+                <!--documentGroup-->
+                <div data-container="Document1Panel">
+                    Document 1 content
+                </div>
+                <div data-container="Document2Panel">
+                    Document 2 content
+                </div>
+                <!--bottom tabbedGroup-->
+                <div data-container="ErrorListPanel">
+                    List of errors
+                </div>
+                <div data-container="OutputPanel">
+                    Output
+                </div>
+                <!--right tabbedGroup-->
+                <div data-container="SolutionExplorerPanel">
+                    Solution structure
+                </div>
+                <div data-container="PropertiesPanel">
+                    List of properties
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

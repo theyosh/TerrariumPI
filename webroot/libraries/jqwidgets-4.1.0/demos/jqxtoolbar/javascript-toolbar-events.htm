@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">This demo shows how to bind to tool events in jqxToolBar.
+    </title>
+    <meta name="description" content="This demo shows how to bind to tool events in jqxToolBar." />
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcolorpicker.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownbutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtoolbar.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxToolBar").jqxToolBar({ width: 670, height: 35, tools: 'input | input | dropdownlist | custom',
+                initTools: function (type, index, tool, menuToolIninitialization) {
+                    switch (index) {
+                        case 0:
+                            tool.jqxInput({ width: 130, placeHolder: "Enter width..." });
+                            tool.on("change", function () {
+                                $("#shape").width(tool.val());
+                            });
+                            break;
+                        case 1:
+                            tool.jqxInput({ width: 130, placeHolder: "Enter height..." });
+                            tool.on("change", function () {
+                                $("#shape").height(tool.val());
+                            });
+                            break;
+                        case 2:
+                            tool.jqxDropDownList({ width: 130, source: ["square", "circle"], placeHolder: "Choose shape..." });
+                            tool.on("change", function (event) {
+                                var args = event.args;
+                                if (args) {
+                                    var label = args.item.label;
+                                    if (label == "square") {
+                                        $("#shape").css("border-radius", 0);
+                                    } else {
+                                        $("#shape").css("border-radius", "50%");
+                                    }
+                                }
+                            });
+                            break;
+                        case 3:
+                            tool.append("<div style='padding: 3px;'><div></div></div>");
+                            var colorPicker = tool.children().children();
+
+                            function getTextElementByColor(color) {
+                                if (color == 'transparent' || color.hex == "") {
+                                    return $("<div style='text-shadow: none; position: relative; padding-bottom: 2px; margin-top: 2px;'>transparent</div>");
+                                }
+                                var element = $("<div style='text-shadow: none; position: relative; padding-bottom: 2px; margin-top: 2px;'>#" + color.hex + "</div>");
+                                var nThreshold = 105;
+                                var bgDelta = (color.r * 0.299) + (color.g * 0.587) + (color.b * 0.114);
+                                var foreColor = (255 - bgDelta < nThreshold) ? 'Black' : 'White';
+                                element.css('color', foreColor);
+                                element.css('background', "#" + color.hex);
+                                element.addClass('jqx-rc-all');
+                                return element;
+                            }
+
+                            colorPicker.on('colorchange', function (event) {
+                                tool.jqxDropDownButton('setContent', getTextElementByColor(event.args.color));
+                                $("#shape").css("background-color", "#" + event.args.color.hex);
+                            });
+                            colorPicker.jqxColorPicker({ color: "0F2B70", colorMode: 'hue', width: 220, height: 220 });
+                            tool.jqxDropDownButton({ width: 130, height: 21 });
+                            tool.jqxDropDownButton('setContent', getTextElementByColor(new $.jqx.color({ hex: "0F2B70" })));
+                            break;
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="jqxToolBar">
+    </div>
+    <div style="margin-top: 20px; margin-bottom: 50px; font-size: small; font-family: Verdana;">
+        Modify the shape by changing the options in the toolbar.</div>
+    <div id="shape" style="width: 200px; height: 200px; border: 1px solid #222222; border-radius: 50%;
+        background-color: #0F2B70;">
+    </div>
+</body>
+</html>

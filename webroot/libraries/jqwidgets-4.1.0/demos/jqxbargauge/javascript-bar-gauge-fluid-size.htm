@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxBarGauge Fluid Size Example. The width and height of the jqxBarGauge in this demo are in percentages.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbargauge.js"></script>
+    <style>
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+    <script>
+        $(document).ready(function myfunction()
+        {
+            $('#jqxbargauge').jqxBarGauge({
+                width: '75%',
+                height: '75%',
+                colorScheme: 'scheme11',
+                values: [32, 11, 100, 49, 69, 20]
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='jqxbargauge'></div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This sample illustrates how to create a Splitter with Nested
+        Side Splitters</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxsplitter.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#splitContainer').jqxSplitter({ height: 850, width: 850, orientation: 'vertical', panels: [{ size: '50%' }, { size: '50%' }] });
+            $('#leftSplitter').jqxSplitter({ height: '100%', width: '100%', orientation: 'horizontal',  panels: [{ size: '50%' }, { size: '50%'}] });
+            $('#rightSplitter').jqxSplitter({ height: '100%', width: '100%', orientation: 'horizontal',  panels: [{ size: '50%' }, { size: '50%'}] });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="splitContainer">
+        <div>
+            <div id="leftSplitter">
+                <div>
+                    West - North
+                </div>
+                <div>
+                    West - South
+                </div>
+            </div>
+        </div>
+        <div>
+            <div id="rightSplitter">
+                <div>
+                    East - North
+                </div>
+                <div>
+                    East - South
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

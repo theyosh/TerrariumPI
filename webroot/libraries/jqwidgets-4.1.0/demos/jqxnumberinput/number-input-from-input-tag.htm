@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Input, Number Input, Currency Input, Percentage Input, Floating-Point Input, Decimal Input, jqxNumberInput" /> 
+    <meta name="description" content="Javascript Numeric Input widget" />
+    <title id='Description'>Create jqxNumberInput from Input tag</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#numericInput").jqxNumberInput({ width: '250px', height: '25px', spinButtons: true });
+
+        });
+    </script>
+</head>
+<body class='default'>
+        <input type="number" value="55.55" min="10" max="100" id='numericInput' />
+</body>
+</html>

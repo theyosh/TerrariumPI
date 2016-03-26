@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example shows how to integrate jqxDataTable using jqxDataAdapter with Knockout.js.
+    </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/json2.js"></script> 
+    <script type="text/javascript" src="../../scripts/knockout-3.0.0.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxknockout.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var initialData = [
+                { name: "Well-Travelled Kitten", sales: 352, price: 75.95 },
+                { name: "Speedy Coyote", sales: 89, price: 190.00 },
+                { name: "Furious Lizard", sales: 152, price: 25.00 },
+                { name: "Indifferent Monkey", sales: 1, price: 99.95 },
+                { name: "Brooding Dragon", sales: 0, price: 6350 },
+                { name: "Ingenious Tadpole", sales: 39450, price: 0.35 },
+                { name: "Optimistic Snail", sales: 420, price: 1.50 }
+            ];
+
+            var GridModel = function (items) {
+                this.items = ko.observableArray(items);
+                this.disabled = ko.observable(false);
+
+                this.addItem = function () {
+                    // add a new item.
+                    if (this.items().length < 20) {
+                        this.items.push({ name: "New item", sales: Math.round(Math.random() * 100), price: Math.round(Math.random() * 100) });
+                    }
+                };
+
+                this.removeItem = function () {
+                    var element = "#jqxDataTable";
+                    var selectedRows = $(element).jqxDataTable('getSelection');
+                    if (selectedRows && selectedRows.length > 0) {
+                        var selectedRow = selectedRows[0];
+                        var id = selectedRow.uid;
+                        try {
+                            this.items.splice(id, 1);
+                        }
+                        catch (e) {
+                        }
+                    }
+                };
+
+                this.updateItem = function () {
+                    // update the first item.
+                    if (initialData.length) {
+                        var item = {};
+                        item.name = initialData[Math.floor(Math.random() * initialData.length)].name;
+                        item.sales = Math.floor(Math.random() * 500);
+                        item.price = Math.floor(Math.random() * 200);
+                        var selectedRows =$("#jqxDataTable").jqxDataTable('getSelection');
+                        if (selectedRows && selectedRows.length > 0) {
+                            var selectedRow = selectedRows[0];
+                            var id = selectedRow.uid;
+                            this.items.replace(this.items()[id], item);
+                            $("#jqxDataTable").jqxDataTable('selectRow', id);
+                        }
+                        else {
+                            this.items.replace(this.items()[0], item);
+                        }
+                    };
+                }
+            };
+
+            var model = new GridModel(initialData);
+            var source = {
+                localdata: model.items,
+                datatype: 'observablearray'
+            }
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            $("#jqxDataTable").jqxDataTable({
+                source: dataAdapter,
+                sortable: true,
+                editable: true,
+                columns: [
+                    { text: 'Name' , dataField: 'name', width: 200 },
+                    { text: 'Sales', dataField: 'sales', width: 200, cellsAlign: 'right' },
+                    { text: 'Price', dataField: 'price', width: 200, cellsFormat: 'c2', cellsAlign: 'right' }
+                ]
+            });
+
+            ko.applyBindings(model);
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div style="margin-bottom: 10px;">
+            <input id="addButton" type="button" data-bind="click: addItem, jqxButton: {}" value="Add Item" />
+            <input id="removeButton" type="button" data-bind="click: removeItem, jqxButton: {}" value="Remove Item" />
+            <input id="updateButton" type="button" data-bind="click: updateItem, jqxButton: {}" value="Update Item" />
+            <div data-bind="jqxCheckBox: {checked: disabled}" style='margin-top: 5px;' id="checkBox">Disabled</div>
+        </div>
+        <div data-bind="jqxDataTable: {disabled: disabled}" id="jqxDataTable">
+        </div>
+        <table style="margin-top: 20px;">
+            <tbody data-bind="foreach: items">
+                <tr>
+                    <td data-bind="text: name"></td>
+                    <td data-bind="text: sales"></td>
+                    <td data-bind="text: price"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

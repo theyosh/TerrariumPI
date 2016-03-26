@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Input, Number Input, Currency Input, Percentage Input, Floating-Point Input, Decimal Input, jqxMaskedInput" />
+    <meta name="description" content="This demo demonstrates how to trigger the jqxMaskedInput's valuechanged and textchanged events." />
+    <title id='Description'>This demo demonstrates how to trigger the jqxMaskedInput's valuechanged and textchanged events.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmaskedinput.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Create jqxMaskedInput
+            $("#numericInput").jqxMaskedInput({ width: '250px', height: '25px', mask: '(###)###-####'});
+            
+            $('#Events').css('border', 'none');
+            $('#Events').jqxPanel({  height: '250px', width: '300px' });
+
+            $('#numericInput').on('change', function (event) {
+                var value = $("#numericInput").val();
+                $('#Events').jqxPanel('clearContent');
+                $('#Events').jqxPanel('prepend', '<div style="margin-top: 5px;">Value: ' + value + '</div>');
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div>
+         <div style='font-size: 13px; font-family: verdana; margin-top: 10px;'>
+            Phone Number</div>
+              <input style='margin-top: 3px;' id='numericInput'/>
+           <div style='margin-left: 0px; margin-top: 20px;'>
+                <div>
+                    <span>
+                        Events:</span>
+                    <div id='Events'>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

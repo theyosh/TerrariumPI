@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id="Description">Show or Hide columns in AngularJS DataTable</title>
+    <meta name="description" content="This sample demonstrates how we can Show or Hide Columns in jqwidgets DataTable." />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> 
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            var grid;
+            $scope.gridSettings =
+            {
+                source: new $.jqx.dataAdapter({
+                    dataType: "json",
+                    dataFields: [
+                        { name: 'name' },
+                        { name: 'type' },
+                        { name: 'calories', type: 'int' },
+                        { name: 'totalfat' },
+                        { name: 'protein' }
+                    ],
+                    id: 'id',
+                    url: "../../sampledata/beverages.txt"
+                }),
+                created: function(args)
+                {
+                    grid = args.instance;
+                },
+                pageable: true,
+                pagerButtonsCount: 10,
+                ready: function () {
+                    // callback function which is called by AngularJS DataTable when the widget is initialized and the binding is completed.
+                },
+                columnsResize: true,
+                columns: [
+                  { text: 'Name', datafield: 'name', width: 200 },
+                  { text: 'Beverage Type', dataField: 'type', width: 200 },
+                  { text: 'Calories', dataField: 'calories', width: 200 }
+                ]
+            };
+
+            $scope.listBoxSettings = { source: [{ label: 'Beverage Type', value: 'type', checked: true }, { label: 'Calories', value: 'calories', checked: true }], width: 150, height: 200, checkboxes: true };
+            $scope.checkChange = function (event) {
+                grid.beginUpdate();
+                if (event.args.checked) {
+                    grid.showColumn(event.args.value);
+                }
+                else {
+                    grid.hideColumn(event.args.value);
+                }
+                grid.endUpdate();
+            };
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <div id='jqxWidget'>
+        <jqx-list-box style="float: left;" jqx-settings="listBoxSettings" jqx-on-check-change="checkChange(event)"></jqx-list-box>
+        <jqx-data-table style="margin-left: 20px; float: left;" jqx-settings="gridSettings"></jqx-data-table>
+    </div>
+</body>
+</html>

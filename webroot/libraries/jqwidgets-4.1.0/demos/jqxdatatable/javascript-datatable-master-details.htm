@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Master Details with 2 Data Tables</title>
+    <meta name="description" content="This sample demonstrates how we can implement Master-Details using 2 jQWidgets DataTable instances.">
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = "../sampledata/employees.xml";
+
+            // create Employees source object.
+            var source =
+            {
+                dataFields: [
+                    { name: 'EmployeeID', type: 'number' },
+                    { name: 'FirstName', type: 'string' },
+                    { name: 'LastName', type: 'string' },
+                    { name: 'Title', type: 'string' },
+                    { name: 'Address', type: 'string' },
+                    { name: 'City', type: 'string' }
+                ],
+                root: "Employees",
+                record: "Employee",
+                id: 'EmployeeID',
+                dataType: "xml",
+                url: url,
+                async: false
+            };
+
+            var employeesAdapter = new $.jqx.dataAdapter(source, {
+                autoBind: true,
+                beforeLoadComplete: function (records) {
+                    // add "EmployeeName" data field.
+                    for (var i = 0; i < records.length; i++) {
+                        records[i]["EmployeeName"] = records[i].FirstName + " " + records[i].LastName;
+                    }
+                    return records;
+                }
+            });
+
+            var orderdetailsurl = "../sampledata/orderdetails.xml";
+
+            // create Orders source object.
+            var ordersSource =
+            {
+                dataFields: [
+                    { name: 'EmployeeID', type: 'number' },
+                    { name: 'EmployeeName', value: 'EmployeeID', type: 'string', values: { source: employeesAdapter.records, value: 'EmployeeID', name: 'EmployeeName' } },
+                    { name: 'ShipName', type: 'string' },
+                    { name: 'ShipAddress', type: 'string' },
+                    { name: 'ShipCity', type: 'string' },
+                    { name: 'ShipCountry', type: 'string' },
+                    { name: 'ShippedDate', type: 'date' }
+                ],
+                root: "Orders",
+                record: "Order",
+                dataType: "xml",
+                url: orderdetailsurl,
+                async: false
+            };
+
+            // create orders DataAdapter.
+            var ordersDataAdapter = new $.jqx.dataAdapter(ordersSource, { autoBind: true });
+            orders = ordersDataAdapter.records;
+
+            // create details DataTable.
+            $("#detailsDataTable").jqxDataTable({
+                pageable: true,
+                pageSize: 5,
+                width: 850,
+                pageable: true,
+                columns: [
+                  { text: 'Employee Name', dataField: 'EmployeeName', width: 300 },
+                  { text: 'Ship Name', dataField: 'ShipName', width: 300 },
+                  { text: 'Ship Address', dataField: 'ShipAddress', width: 300 },
+                  { text: 'Ship City', dataField: 'ShipCity', width: 150 },
+                  { text: 'Ship Country', dataField: 'ShipCountry', width: 150 },
+                  { text: 'Shipped Date', dataField: 'ShippedDate', cellsFormat: 'd', width: 200 }
+                ]
+            });
+
+            // update details DataTable when the selection of the master DataTable is changed.
+            $("#masterDataTable").on('rowSelect', function (event) {
+                // event.args
+                // row key - event.args.key
+                // row index - event.args.index
+                // row data - event.args.row
+
+                // key === Employee ID
+                var key = event.args.key;
+                var filterGroup = new $.jqx.filter();
+                var filter_or_operator = 1;
+                var filterValue = key;
+                var filterCondition = 'equal';
+                // create string filter
+                var filter = filterGroup.createfilter('stringfilter', filterValue, filterCondition);
+                // fill the orders depending on the id.
+                var ordersbyid = [];
+                // filter all orders by EmployeeID.
+                for (var m = 0; m < orders.length; m++) {
+                    var result = filter.evaluate(orders[m]["EmployeeID"]);
+                    if (result)
+                        ordersbyid.push(orders[m]);
+                }
+
+                var ordersSource = {
+                    dataFields: [
+                        { name: 'EmployeeID', type: 'number' },
+                        { name: 'EmployeeName', type: 'string' },
+                        { name: 'ShipName', type: 'string' },
+                        { name: 'ShipAddress', type: 'string' },
+                        { name: 'ShipCity', type: 'string' },
+                        { name: 'ShipCountry', type: 'string' },
+                        { name: 'ShippedDate', type: 'date' }
+                    ],
+                    id: 'OrderID',
+                    localdata: ordersbyid
+                }
+                // update the details DataTable.
+                var detailsAdapter = new $.jqx.dataAdapter(ordersSource);
+                $("#detailsDataTable").jqxDataTable({ source: detailsAdapter });
+            });
+
+            // create master DataTable.
+            $("#masterDataTable").jqxDataTable(
+            {
+                width: 850,
+                source: employeesAdapter,
+                pageable: true,
+                pageSize: 5,
+                ready: function()
+                {
+                    $("#masterDataTable").jqxDataTable('selectRow', 0);
+                },
+                columns: [
+                      { text: 'First Name', dataField: 'FirstName', width: 250 },
+                      { text: 'Last Name', dataField: 'LastName', width: 250 },
+                      { text: 'Title', dataField: 'Title' }
+                  ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <h3>Employees</h3>
+    <div id="masterDataTable">
+    </div>
+    <h3>Orders by Employee</h3>
+    <div id="detailsDataTable"></div>
+</body>
+</html>

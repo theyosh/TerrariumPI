@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Button Templates</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+</head>
+<body class='default'>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                // Create jqxButton widgets.
+                $("#defaultButton").jqxButton();
+                $("#primaryButton").jqxButton({ template: "primary" });
+                $("#infoButton").jqxButton({ template: "info" });
+                $("#successButton").jqxButton({ template: "success" });
+                $("#warningButton").jqxButton({ template: "warning" });
+                $("#dangerButton").jqxButton({ template: "danger" });
+                $("#inverseButton").jqxButton({ template: "inverse" });
+                $("#linkButton").jqxButton({ template: "link" });
+            });
+        </script>
+        <button id="defaultButton">Default</button>
+        <button id="primaryButton">Primary</button>
+        <button id="infoButton">Info</button>
+        <button id="successButton">Success</button>
+        <button id="warningButton">Warning</button>
+        <button id="dangerButton">Danger</button>
+        <button id="inverseButton">Inverse</button>
+        <button id="linkButton">Link</button>
+    </div>
+</body>
+</html>

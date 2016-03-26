@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>In this example is demonstrated how to create cascading Angular ComboBox. The data source of the "Orders" Combobox is updated dynamically depending on the selected Customer.</title>
+    <meta name="description" content="AngularJS ComboBox example. This example demonstrates a Cascading ComboBoxes built with Angular JS." /> 
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+
+            // prepare the data
+            var customersSource =
+            {
+                dataType: "json",
+                dataFields: [
+                    { name: 'CompanyName' },
+                    { name: 'CustomerID' }
+                ],
+                url: '../../sampledata/customers.txt'
+            };
+
+            var customersAdapter = new $.jqx.dataAdapter(customersSource);
+
+            $scope.customersComboBoxSettings =
+            {
+                source: customersAdapter,
+                width: 300,
+                height: 25,
+                promptText: "Select customer...",
+                displayMember: 'CompanyName',
+                valueMember: 'CustomerID'
+            };
+
+            var ordersSource =
+            {
+                dataType: "json",
+                dataFields: [
+                    { name: 'CustomerID' },
+                    { name: 'OrderID' },
+                    { name: 'ShipCity' },
+                    { name: 'OrderDate' },
+                    { name: 'ShipName' },
+                    { name: 'ShipCountry' },
+                    { name: 'ShipAddress' }
+                ],
+                url: '../../sampledata/orders.txt'
+            };
+            var ordersAdapter = new $.jqx.dataAdapter(ordersSource);
+            $scope.ordersComboBox = {};
+            var s = {};
+            $scope.ordersComboBoxSettings =
+            {
+                created: function (args) {
+                    s = args.scope;
+                    $scope.ordersComboBox = args.instance;
+                },
+                width: 300,
+                height: 25,
+                disabled: true,
+                promptText: "Select order...",
+                displayMember: 'OrderID',
+                valueMember: 'CustomerID',
+                selectedIndex: -1,
+                source: []
+            };
+
+            $scope.customersSelectHandler = function (event) {
+                if (event.args) {
+                    $scope.ordersComboBoxSettings.disabled = false;
+                    $scope.ordersComboBoxSettings.selectedIndex = -1;
+                    var value = event.args.item.value;
+                    ordersSource.data = { CustomerID: value };
+                    ordersAdapter = new $.jqx.dataAdapter(ordersSource);
+                    $scope.ordersComboBoxSettings.source = ordersAdapter;
+                }
+            };
+            $scope.ordersSelectHandler = function (event) {
+                if (event.args) {
+                    var index = $scope.ordersComboBox.selectedIndex;
+                    if (index != -1) {
+                        var record = ordersAdapter.records[index];
+                        var detailsSource =
+                        {
+                            dataType: "json",
+                            dataFields: [
+                                { name: 'CustomerID' },
+                                { name: 'OrderID' },
+                                { name: 'ShipCity' },
+                                { name: 'OrderDate' },
+                                { name: 'ShipName' },
+                                { name: 'ShipCountry' },
+                                { name: 'ShipAddress' }
+                            ],
+                            localData: record
+                        };
+                        var detailsAdapter = new $.jqx.dataAdapter(detailsSource);
+
+                        $scope.detailsGridSettings = {
+                            source: detailsAdapter,
+                            width: 500,
+                            columns: [{ text: "Order Date", dataField: "OrderDate", cellsFormat: 'd' }, { text: "Ship Country", dataField: "ShipCountry" },
+                                { text: "Ship Address", dataField: "ShipAddress" }, { text: "Ship Name", dataField: "ShipName" }]
+                        };
+                    }
+                }
+            }
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <br />
+    <div>
+        <span style="margin-top: 6px; font-size: 12px; font-family: verdana; float: left;">Customers:</span><jqx-combo-box jqx-on-select="customersSelectHandler(event)" jqx-settings="customersComboBoxSettings" style="margin-left: 5px; float: left;" id="customers"></jqx-combo-box>
+        <div style='clear: both;'></div>
+        <div style='margin-top: 20px;'>
+            <span style="margin-top: 6px; font-size: 12px; font-family: verdana; float: left;">Orders:</span><jqx-combo-box jqx-watch-settings jqx-on-select="ordersSelectHandler(event)" jqx-settings="ordersComboBoxSettings" style="margin-left: 5px; float: left;" id="orders"></jqx-combo-box>
+            <br />
+            <jqx-data-table jqx-create="detailsGridSettings" jqx-settings="detailsGridSettings" style="margin-top: 25px;"></jqx-data-table>
+        </div>
+    </div>
+</body>
+</html>

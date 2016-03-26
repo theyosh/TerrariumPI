@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxChart Color Bands on Polar Chart</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxslider.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "tab",
+                datafields: [
+                    { name: 'Year' },
+                    { name: 'HPI' },
+                    { name: 'BuildCost' },
+                    { name: 'Population' },
+                    { name: 'Rate' }
+                ],
+                url: '../sampledata/homeprices.txt'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+
+            var recessions =
+            [
+                { from: 1969.91, to: 1970.83 },
+                { from: 1973.83, to: 1975.25 },
+                { from: 1980, to: 1980.58 },
+                { from: 1981.58, to: 1982.83 },
+                { from: 1990.58, to: 1991.25 },
+                { from: 2001.25, to: 2001.83 },
+                { from: 2007.91, to: 2009.5 }
+            ];
+
+            var bands = [];
+            for (var i = 0; i < recessions.length; i++)
+                bands.push({ minValue: recessions[i].from, maxValue: recessions[i].to, fillColor: 'red', opacity: 0.2 });
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "U.S. Real Home Price vs Building Cost Indeces (1950-2010)",
+                description: "Source: http://www.econ.yale.edu/~shiller/data.htm",
+                enableAnimations: true,
+                showLegend: true,
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 5 },
+                source: dataAdapter,
+                xAxis:
+                {
+                    dataField: 'Year',
+                    unitInterval: 10,
+                    maxValue: 2010,
+                    valuesOnTicks: true,
+                    labels: { autoRotate: true },
+                    bands: bands
+                },
+                colorScheme: 'scheme01',
+                seriesGroups:
+                    [
+                        {
+                            polar: true,
+                            radius: 160,
+                            type: 'spline',
+                            enableSeriesToggle: false,
+                            valueAxis:
+                            {
+                                labels: {
+                                    formatSettings: { decimalPlaces: 0 },
+                                    autoRotate: true
+                                },
+                                bands:
+                                [
+                                    { minValue: 50, maxValue: 130, color: '#00FF00', opacity: 0.2, dashStyle: '2,2', lineWidth: 1 },
+                                    { minValue: 131, maxValue: 160, color: '#FCD537', opacity: 0.2, dashStyle: '2,2', lineWidth: 1 },
+                                    { minValue:  161, maxValue: 200, color: '#FF0000', opacity: 0.2, dashStyle: '2,2', lineWidth: 1 }
+                                ]
+                            },
+                            series: [
+                                    { dataField: 'HPI', displayText: 'Real Home Price Index', opacity: 0.9, lineWidth: 3 },
+                                    { dataField: 'BuildCost', displayText: 'Building Cost Index', opacity: 0.9, lineWidth: 3 }
+                                ]
+                        }
+                    ]
+            };
+
+
+            // create the chart
+            $('#chartContainer').jqxChart(settings);
+
+            // get the chart's instance
+            var chart = $('#chartContainer').jqxChart('getInstance');
+
+            // start angle slider
+            $('#sliderStartAngle').jqxSlider({ width: 240, min: 0, max: 360, step: 1, ticksFrequency: 20, mode: 'fixed' });
+
+            $('#sliderStartAngle').on('change', function (event) {
+                var value = event.args.value;
+                chart.seriesGroups[0].startAngle = value;
+                chart.seriesGroups[0].endAngle = value + 360;
+                chart.update();
+            });
+
+            // radius slider
+            $('#sliderRadius').jqxSlider({ width: 240, min: 80, max: 180, value: 160, step: 1, ticksFrequency: 20, mode: 'fixed' });
+
+            $('#sliderRadius').on('change', function (event) {
+                var value = event.args.value;
+                chart.seriesGroups[0].radius = value;
+                chart.update();
+            });
+
+            // color scheme drop down
+            var colorsSchemesList = ["scheme01", "scheme02", "scheme03", "scheme04", "scheme05", "scheme06", "scheme07", "scheme08"];
+            $("#dropDownColors").jqxDropDownList({ source: colorsSchemesList, selectedIndex: 2, width: '200', height: '25', dropDownHeight: 100 });
+
+            $('#dropDownColors').on('change', function (event) {
+                var value = event.args.item.value;
+                chart.colorScheme = value;
+                chart.update();
+            });
+
+            // series type drop down
+            var seriesList = ["splinearea", "spline", "column", "scatter", "stackedcolumn", "stackedsplinearea", "stackedspline"];
+            $("#dropDownSeries").jqxDropDownList({ source: seriesList, selectedIndex: 1, width: '200', height: '25', dropDownHeight: 100 });
+
+            $('#dropDownSeries').on('select', function (event) {
+                var args = event.args;
+                if (args) {
+                    var value = args.item.value;
+
+                    chart.seriesGroups[0].type = value;
+                    chart.update();
+                }
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='chartContainer' style="width: 850px; height: 500px">
+    </div>
+    <table style="width: 850px">
+        <tr>
+            <td style="padding-left:50px">
+                <p style="font-family: Verdana; font-size: 12px;">Move the slider to rotate:
+                </p>
+                <div id='sliderStartAngle'>
+                </div>
+            </td>
+            <td>
+                <p style="font-family: Verdana; font-size: 12px;">Select the series type:
+                </p>
+                <div id='dropDownSeries'>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-left:50px">
+                <p style="font-family: Verdana; font-size: 12px;">Move the slider to change the radius:
+                </p>
+                <div id='sliderRadius'>
+                </div>
+            </td>
+            <td>
+                <p style="font-family: Verdana; font-size: 12px;">Select color scheme:
+                </p>
+                <div id='dropDownColors'>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id='Description'>The AngularJS ComboBox can display checkboxes next to its items. You can enable this feature by setting the 'checkboxes' property to true. </title>
+    <meta name="description" content="AngularJS ComboBox example. This example demonstrates a ComboBox with CheckBoxes built with Angular JS." /> 
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> 
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            var source = [
+                "Affogato",
+                "Americano",
+                "Bicerin",
+                "Breve",
+                "Café Bombón",
+                "Café au lait",
+                "Caffé Corretto",
+                "Café Crema",
+                "Caffé Latte",
+                "Caffé macchiato",
+                "Café mélange",
+                "Coffee milk",
+                "Cafe mocha",
+                "Cappuccino",
+                "Carajillo",
+                "Cortado",
+                "Cuban espresso",
+                "Espresso",
+                "Eiskaffee",
+                "The Flat White",
+                "Frappuccino",
+                "Galao",
+                "Greek frappé coffee",
+                "Iced Coffee﻿",
+                "Indian filter coffee",
+                "Instant coffee",
+                "Irish coffee",
+                "Liqueur coffee"
+            ];
+            $scope.dropDownListInstance = {};
+            $scope.checkedItems = "";
+            $scope.eventData = "";
+
+            // Create a jqxListBox
+            $scope.settings = {
+                width: 300, source: source, checkboxes: true, height: 25,
+                created: function (args) {
+                    var instance = args.instance;
+                    instance.checkIndex(0);
+                    instance.checkIndex(1);
+                    instance.checkIndex(2);
+                    instance.checkIndex(5);
+                    $scope.dropDownListInstance = instance;
+                }
+            };
+
+            $scope.checkChange = function (event) {
+                var args = event.args;
+                if (args.checked) {
+                    $scope.eventData = "Checked: " + args.label;
+                }
+                else {
+                    $scope.eventData = "Unchecked: " + args.label;
+                }
+
+                var items = $scope.dropDownListInstance.getCheckedItems();
+                var checkedItems = "";
+                $.each(items, function (index) {
+                    if (index < items.length - 1) {
+                        checkedItems += this.label + ", ";
+                    }
+                    else checkedItems += this.label;
+                });
+                $scope.checkedItems = checkedItems;
+            };
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-combo-box jqx-settings="settings"></jqx-combo-box>
+    <div style="font-size: 13px; font-family: Verdana; margin-top: 20px;">{{eventData}}</div>
+    <div style="font-size: 13px; font-family: Verdana; margin-top: 10px;">{{checkedItems}}</div>
+</body>
+</html>

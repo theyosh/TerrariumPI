@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">This demo shows how to use jqxDockingLayout and other jQWidgets
+        components to create a dashboard.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <style type="text/css">
+        .jqx-layout-group-auto-hide-content-vertical
+        {
+            width: 200px;
+        }
+        .no-border
+        {
+            border-left-width: 0;
+            border-right-width: 0;
+        }
+        .jqx-ribbon-content-section {
+            overflow: hidden;
+        }
+    </style>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxribbon.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlayout.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdockinglayout.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtree.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="initdashboard.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Note: the initialization code for the other widgets in the dashboard is in the file initdashboard.js
+
+            // the 'layout' JSON array defines the internal structure of the docking layout
+            var layout = [{
+                type: 'layoutGroup',
+                orientation: 'horizontal',
+                items: [{
+                    type: 'layoutGroup',
+                    orientation: 'vertical',
+                    allowPin: false,
+                    width: 300,
+                    items: [{
+                        type: 'tabbedGroup',
+                        height: 300,
+                        pinnedHeight: 30,
+                        items: [{
+                            type: 'layoutPanel',
+                            title: 'Teams',
+                            contentContainer: 'TeamsPanel',
+                            initContent: function () {
+                                initTeamDataTable();
+                            }
+                        }]
+                    }, {
+                        type: 'tabbedGroup',
+                        height: 300,
+                        allowPin: false,
+                        pinnedHeight: 30,
+                        items: [{
+                            type: 'layoutPanel',
+                            title: 'Team Projects',
+                            contentContainer: 'ProjectsPanel',
+                            initContent: function () {
+                                initProjectsListBox();
+                            }
+                        }, {
+                            type: 'layoutPanel',
+                            title: 'Projects Timeline',
+                            contentContainer: 'ProjectsTimelinePanel',
+                            initContent: function () {
+                                if (team === 'Sales') {
+                                    $('#projectsTimelineDiv').html(teamSalesProjectsTimeline);
+                                } else {
+                                    $('#projectsTimelineDiv').html(teamSupportProjectsTimeline);
+                                }
+                            }
+                        }]
+                    }]
+                }, {
+                    type: 'layoutGroup',
+                    orientation: 'vertical',
+                    allowPin: false,
+                    width: 500,
+                    pinnedWidth: 80,
+                    items: [{
+                        type: 'tabbedGroup',
+                        height: 200,
+                        pinnedHeight: 30,
+                        items: [{
+                            type: 'layoutPanel',
+                            title: 'Contacts',
+                            contentContainer: 'ContactsPanel',
+                            initContent: function () {
+                                $('#contactsTable').html(teamSalesContacts);
+                            }
+                        }, {
+                            type: 'layoutPanel',
+                            title: 'Staff',
+                            contentContainer: 'StaffPanel',
+                            initContent: function () {
+                                if (team === 'Sales') {
+                                    $('#staffDiv').html(teamSalesStaff);
+                                } else {
+                                    $('#staffDiv').html(teamSupportStaff);
+                                }
+                            }
+                        }]
+                    }, {
+                        type: 'tabbedGroup',
+                        allowPin: false,
+                        height: 400,
+                        pinnedHeight: 30,
+                        items: [{
+                            type: 'layoutPanel',
+                            title: 'Project History',
+                            contentContainer: 'ProjectHistoryPanel',
+                            initContent: function () {
+                                initProjectHistoryChart();
+                            }
+                        }]
+                    }]
+                }]
+            }];
+
+            $('#jqxDockingLayout').jqxDockingLayout({ width: 800, height: 600, layout: layout, contextMenu: true });
+        });
+    </script>
+</head>
+<body>
+    <div id="jqxDockingLayout">
+        <div data-container="TeamsPanel">
+            <div id="teamsDataTable" class="no-border">
+            </div>
+        </div>
+        <div data-container="ProjectsPanel">
+            <div id="projectsListBox" class="no-border">
+            </div>
+        </div>
+        <div data-container="ProjectsTimelinePanel">
+            <div id="projectsTimelineDiv" style="margin: 5px 0 0 5px;">
+            </div>
+        </div>
+        <div data-container="ContactsPanel">
+            <table id="contactsTable" style="margin:20px;">
+            </table>
+        </div>
+        <div data-container="StaffPanel">
+            <div id="staffDiv" class="no-border" style="margin-left: 5px; margin: 20px;">
+            </div>
+        </div>
+        <div data-container="ProjectHistoryPanel">
+            <div id="projectHistoryChart" style="width: 99.9%; height: 100%;">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

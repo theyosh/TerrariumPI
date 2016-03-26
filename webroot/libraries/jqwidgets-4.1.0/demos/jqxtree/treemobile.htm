@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>In this demo is simulated the touch-device behavior of the jqxTree</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtree.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Create jqxTree
+            var source = [
+                { icon: "../../images/mailIcon.png", label: "Mail", expanded: true, items: [
+                    { icon: "../../images/calendarIcon.png", label: "Calendar" },
+                    { icon: "../../images/contactsIcon.png", label: "Contacts", selected: true }
+                ]
+                },
+                { icon: "../../images/folder.png", label: "Inbox", expanded: true, items: [
+                   { icon: "../../images/folder.png", label: "Admin" },
+                   { icon: "../../images/folder.png", label: "Corporate" },
+                   { icon: "../../images/folder.png", label: "Finance" },
+                   { icon: "../../images/folder.png", label: "Support" },
+                   { icon: "../../images/folder.png", label: "Drafts" },
+                   { icon: "../../images/folder.png", label: "Other" },
+                ]
+                },
+                { icon: "../../images/notesIcon.png", label: "Notes" },
+                { iconsize: 14, icon: "../../images/settings.png", label: "Settings" },
+                { icon: "../../images/favorites.png", label: "Favorites" },
+             ];
+
+            // create jqxTree
+            $('#jqxTree').jqxTree({ source: source, touchMode: true, width: '160px', height: '300px'});
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+        <img src="../../images/smarthphone.png" />
+        <div id='jqxTree' style='top: 90px; left: 80px; position: absolute;'>
+        </div>
+    </div>
+</body>
+</html>

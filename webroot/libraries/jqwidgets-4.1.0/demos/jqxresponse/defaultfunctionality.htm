@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxResponse is a plug-in which provides information about the OS, Browser, View Port, Device Type and common features of the Device like Touch Support, Size, SVG, Canvas and VML support, etc. jqxResponse also enables you to trigger Window Resize and provides
+        cross-browser compatible triggering for Mouse and Touch events.
+    </title>
+    <script src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script src="../../jqwidgets/jqxcore.js"></script>
+    <script src="../../jqwidgets/jqxresponse.js"></script>
+    <script>
+        $(function () {
+            var response = new $.jqx.response();
+          
+            var displayInformation = function () {
+                var os = response.os;
+                var browser = response.browser;
+                var device = response.device;
+                var viewPort = response.viewPort;
+                var documentInfo = response.document;
+
+                $("#os").html("OS: " + os.name + " " + os.version);
+                $("#osPlatform").html("Platform: " + os.platform);
+                $("#browser").html("Browser: " + browser.name + " " + browser.version + ", Access name: " + browser.accessName);
+                $("#device").html("Device Type: " + device.type);
+                $("#deviceSize").html("Device Width: " + device.width + ", Height: " + device.height);
+                $("#deviceAvailSize").html("Device AvailWidth: " + device.availWidth + ", AvailHeight: " + device.availHeight);
+                $("#deviceSupport").html("Supports Touch Events:" + device.touch + ", VML:" + browser.vml + ", SVG: " + browser.svg + ", Canvas:" + browser.canvas);
+                $("#viewPort").html("Viewport Width: " + viewPort.width + ", Height: " + viewPort.height);
+                $("#documentInfo").html("Document Width: " + documentInfo.width + ", Height: " + documentInfo.height);
+            }
+
+            displayInformation();
+
+            response.pointerDown($(document), function (event, position, pointerType) {
+                // event is a "touchstart" or "mousedown" event object depending on whether the device is touch-enabled.
+                $("#pointerInfoDown").html("Pointer Down: " + position.left + ", " + position.top + ", Type: " + pointerType);
+            });
+            response.pointerUp($(document), function (event, position, pointerType) {
+                // event is a "touchend" or "mouseup" event object depending on whether the device is touch-enabled.
+                $("#pointerInfoUp").html("Pointer Up: " + position.left + ", " + position.top + ", Type: " + pointerType);
+            });
+            response.pointerMove($(document), function (event, position, pointerType) {
+                // event is a "mousemove" or "touchmove" event object depending on whether the device is touch-enabled.
+                $("#pointerInfoMove").html("Pointer Move: " + position.left + ", " + position.top + ", Type: " + pointerType);
+                if (device.touch) {
+                    // stops the default action of the event. 
+                    event.preventDefault();
+                    return false;
+                }
+            });
+
+        });
+</script>
+</head>
+<body style="font-family: Verdana; font-size: 13px;">
+    <div id="os"></div>
+    <div id="osPlatform"></div>    
+    <div id="browser"></div>   
+    <div id="device"></div>
+    <div id="deviceSize"></div>
+    <div id="deviceAvailSize"></div>
+    <div id="deviceSupport"></div>
+    <div id="viewPort"></div>
+    <div id="documentInfo"></div>
+    <div id="pointerInfoDown"></div>
+    <div id="pointerInfoMove"></div>
+    <div id="pointerInfoUp"></div>
+</body>
+</html>

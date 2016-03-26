@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxKnob with 2 pointers. The minimum range in the sample is 10, the maximum is 90</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxknob.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {     
+            $('#knob').jqxKnob({
+                value: [60, 80],
+                min: 0,
+                max: 100,
+                startAngle: 150,
+                endAngle: 510,
+                snapToStep: true,
+                rotation: 'clockwise',
+                style: { fill: '#ebeced' },
+                marks: {
+                    colorRemaining: '#333',
+                    colorProgress: '#66707e',
+                    style: 'line',
+                    offset: '71%',
+                    thickness: 1,
+                    size: '6%',
+                    majorSize: '9%',
+                    majorInterval: 10,
+                    minorInterval: 2
+                },
+                labels: {
+                    offset: '88%',
+                    step: 10
+                },
+                changing: function(oldValues, newValues)
+                {
+                    var range = newValues[1] - newValues[0];
+                    if (range < 10)
+                        return false;
+                    if (range > 90)
+                        return false;
+                },
+                progressBar: {
+                    style: [{ fill: '#66707e', stroke: '#66707e', strokeWidth: 0 },
+                            { fill: '#66707e', stroke: '#66707e', strokeWidth: 0 }],
+                    size: '9%',
+                    offset: '58%',
+                    background: { fill: '#a2da39', stroke: '#a2da39', strokeWidth: 0 }
+                },
+                spinner: {
+                    style: { fill: '#66707e', stroke: '#66707e' },
+                    innerRadius: '0%', // specifies the inner Radius of the dial
+                    outerRadius: '58%', // specifies the outer Radius of the dial
+                    marks: {
+                        colorRemaining: '#a2da39',
+                        colorProgress: '#a2da39',
+                        type: 'circle',
+                        offset: '55%',
+                        thickness: 3,
+                        size: '1%',
+                        majorSize: '1%',
+                        majorInterval: 10,
+                        minorInterval: 10
+                    }
+                },
+                pointer: [{ type: 'circle', style: { fill: '#a2da39', stroke: '#a2da39' }, size: '5%', offset: '38%', thickness: 20 },
+                          { type: 'circle', style: { fill: '#a2da39', stroke: '#a2da39' }, size: '5%', offset: '38%', thickness: 20 }]
+            });
+
+            $('#knob').on('change', function (event) {
+                $("#change").html("Values: " + event.args.value);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='knob'></div>
+    <br /><br />
+    <div id="change"></div>
+</body>
+</html>

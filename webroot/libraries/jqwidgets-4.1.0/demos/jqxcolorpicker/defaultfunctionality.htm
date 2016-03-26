@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>The jqxColorPicker widget allows you to easily pick a color.
+    </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcolorpicker.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownbutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollview.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <style type="text/css">
+        .photo {
+            width: 500px;
+            height: 350px;
+            background-color: #000;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .gallery {
+            border: 15px solid #ffaabb;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class='default'>
+    <div id='content'>
+        <script type="text/javascript">
+            function getTextElementByColor(color) {
+                if (color == 'transparent' || color.hex == "") {
+                    return $("<div style='text-shadow: none; position: relative; padding-bottom: 2px; margin-top: 2px;'>transparent</div>");
+                }
+
+                var element = $("<div style='text-shadow: none; position: relative; padding-bottom: 2px; margin-top: 2px;'>#" + color.hex + "</div>");
+                var nThreshold = 105;
+                var bgDelta = (color.r * 0.299) + (color.g * 0.587) + (color.b * 0.114);
+                var foreColor = (255 - bgDelta < nThreshold) ? 'Black' : 'White';
+                element.css('color', foreColor);
+                element.css('background', "#" + color.hex);
+                element.addClass('jqx-rc-all');
+                return element;
+            }
+
+            $(document).ready(function () {
+                $("#colorPicker").on('colorchange', function (event) {
+                    $("#dropDownButton").jqxDropDownButton('setContent', getTextElementByColor(event.args.color));
+                    $('#photoGallery').css('border-color', "#" + event.args.color.hex);
+                });
+
+                $("#colorPicker").jqxColorPicker({ color: "ffaabb", colorMode: 'hue', width: 220, height: 220});
+                $("#dropDownButton").jqxDropDownButton({ width: 150, height: 22});
+                $("#dropDownButton").jqxDropDownButton('setContent', getTextElementByColor(new $.jqx.color({ hex: "ffaabb" })));
+                $('#photoGallery').jqxScrollView({ slideShow: true, width: 500, height: 350, showButtons: false});
+            });
+        </script>
+        <div id='jqxWidget'>
+            <div class="gallery" id="photoGallery">
+                <div>
+                    <div class="photo" style="background-image: url(../../images/imageNature1.jpg)"></div>
+                </div>
+                <div>
+                    <div class="photo" style="background-image: url(../../images/imageNature2.jpg)"></div>
+                </div>
+                <div>
+                    <div class="photo" style="background-image: url(../../images/imageNature3.jpg)"></div>
+                </div>
+                <div>
+                    <div class="photo" style="background-image: url(../../images/imageNature4.jpg)"></div>
+                </div>
+                <div>
+                    <div class="photo" style="background-image: url(../../images/imageNature5.jpg)"></div>
+                </div>
+            </div>
+            <br />
+            <label style="margin-left: 5px; font-size: 12px; font-family: Verdana;">Select Frame color</label>
+            <br />
+            <div style="margin: 3px; float: left;" id="dropDownButton">
+                <div style="padding: 3px;">
+                    <div id="colorPicker">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

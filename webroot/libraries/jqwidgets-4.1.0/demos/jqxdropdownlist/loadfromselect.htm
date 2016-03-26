@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery DropDownList, List, ListBox, Popup List, jqxDropDownList, jqxListBox, List Widget, ListBox Widget, DropDownList Widget" /> 
+    <meta name="description" content="The jqxDropDownList can be populated with data from an existing
+        select element making it easier to upgrade your pages using jqxDropDownList."/>
+    <title id='Description'>The jqxDropDownList can be populated with data from an existing
+        select element making it easier to upgrade your pages using jqxDropDownList.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+</head>
+<body>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {               
+                var updating = false;
+                // Create a jqxDropDownList
+                $("#jqxDropDownList").jqxDropDownList({ width: '200px', height: '25px'});
+                // Load the data from the Select html element.
+                $("#jqxDropDownList").jqxDropDownList('loadFromSelect', 'select');
+                
+                // updates the select's selection.
+                $("#jqxDropDownList").on('select', function (event) {
+                    if (event.args && !updating) {
+                        var args = event.args;
+                        // select the item in the 'select' tag.
+                        var index = args.item.index;
+                        $("#select").val(args.item.value);
+                    }
+                });
+                // updates the dropdownlist's selection.
+                $("#select").on('change', function (event) {
+                    updating = true;
+                    var index = $("#select")[0].selectedIndex;
+                    $("#jqxDropDownList").jqxDropDownList('selectIndex', index);
+                    $("#jqxDropDownList").jqxDropDownList('ensureVisible', index);
+                    updating = false;
+                });
+                // selects the first item.
+                $("#jqxDropDownList").jqxDropDownList('selectedIndex', '0');
+            });
+        </script>
+        <div style='float: left; width: 500px;' id='jqxWidget'>
+            <div style='float: left;' id='jqxDropDownList'>
+            </div>
+            <div style='float: left;'>
+                <select style='height: 25px; width: 200px; margin-left: 30px;' id='select'>
+                    <option>Affogato</option>
+                    <option>Americano</option>
+                    <option>Bicerin</option>
+                    <option>Breve</option>
+                    <option>Café Bombón</option>
+                    <option>Caffé Corretto</option>
+                    <option>Café Crema</option>
+                    <option>Caffé Latte</option>
+                    <option>Caffé macchiato</option>
+                    <option>Café mélange</option>
+                    <option>Coffee milk</option>
+                    <option>Cafe mocha</option>
+                    <option>Cappuccino</option>
+                    <option>Carajillo</option>
+                    <option>Cuban espresso</option>
+                    <option>Espresso</option>
+                    <option>The Flat White</option>
+                    <option>Frappuccino</option>
+                    <option>Galao</option>
+                    <option>Greek frappé coffee</option>
+                    <option>Iced Coffee﻿</option>
+                    <option>Indian filter coffee</option>
+                    <option>Instant coffee</option>
+                    <option>Irish coffee</option>
+                    <option>Liqueur coffee</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

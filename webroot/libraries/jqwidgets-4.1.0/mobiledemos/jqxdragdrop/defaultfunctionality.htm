@@ -1,0 +1,295 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title id='Description'>JavaScript DragDrop - Mobile Example</title>
+    <link rel="stylesheet" href="../styles/demo.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.windowsphone.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.blackberry.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.android.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.mobile.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../simulator.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.columnsresize.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdragdrop.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <style type="text/css">
+        .draggable-demo-cart {
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .draggable-demo-shop {
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+        .draggable-demo-catalog {
+            position: relative;
+            width: 50%;
+            height: 100%;
+            float: left;
+            border: none;
+            background: #fff;
+        }
+        .draggable-demo-product {
+            border: none;
+            width: 50%;
+            height: 33.33%;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            float: left;
+            overflow: hidden;
+            vertical-align: middle;
+            text-align: center;
+         }
+
+        .draggable-demo-product-header {
+            border: none;
+            height: 35px;
+            z-index: 999;
+            line-height: 35px;
+            font-size: 16px;
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+            white-space:nowrap;
+        }
+        .draggable-demo-cart-wrapper {
+            float: right;
+            border: none;
+            height: 100%;
+            width: 50%;
+            overflow: hidden;
+        }
+    </style>
+    <script type="text/javascript">
+        var cart = (function ($) {
+
+            var productsOffset = 3,
+                products = {
+                    'Retro Rock T-shirt': {
+                        pic: 'black-retro-rock-band-guitar-controller.png',
+                        price: 15
+                    },
+                    'Lucky T-shirt': {
+                        pic: 'bright-green-gettin-lucky-in-kentucky.png',
+                        price: 18
+                    },
+                    'Loading T-shirt': {
+                        pic: 'brown-loading-bar-computer-geek.png',
+                        price: 25
+                    },
+                    'Cool Story T-shirt': {
+                        pic: 'cool-story-bro.png',
+                        price: 20
+                    },
+                    'The beard T-shirt': {
+                        pic: 'fear-the-beard.png',
+                        price: 17
+                    },
+                    'Don\'t care T-shirt': {
+                        pic: 'honey-badger-don-t-care.png',
+                        price: 19
+                    }
+                },
+            theme, onCart = false, cartItems = [];
+
+            function render() {
+                productsRendering();
+                gridRendering();
+            };
+
+            function addClasses() {
+                $('.draggable-demo-catalog').addClass('jqx-scrollbar-state-normal-' + theme);
+            };
+
+            function productsRendering() {
+                var catalog = $('#catalog'),
+                    imageContainer = $('</div>'),
+                    image, product, left = 0, top = 0, counter = 0;
+                for (var name in products) {
+                    product = products[name];
+                    image = createProduct(name, product);
+                    image.appendTo(catalog);
+                    counter += 1;
+                }
+                $('.draggable-demo-product').jqxDragDrop({ dropTarget: $('#cart'), revert: true });
+            };
+
+            function createProduct(name, product) {
+                return $('<div class="draggable-demo-product">' +
+                        '<div class="draggable-demo-product-header jqx-widget-header-' + theme + '">' +
+                        '<div class="draggable-demo-product-header-label"> ' + name + '</div></div>' +
+                        '<div style="width: 100%; height: 100%; margin-top: -17px; position: relative; background:url(../../images/t-shirts/' + product.pic + ') no-repeat center center; background-size:80px 70px;"'+
+                        '</div>');
+            };
+
+            function gridRendering() {
+                $("#grid").jqxGrid(
+                {
+                    height: "100%",
+                    width: "100%",
+                    rowsheight: 34,
+                    columnsheight: 34,
+                    theme: theme,
+                    keyboardnavigation: false,
+                    selectionmode: 'none',
+                    columns: [
+                      { text: 'Item', dataField: 'name', width: '50%' },
+                      { text: 'Count', dataField: 'count', width: '25%' },
+                      { text: 'Remove', dataField: 'remove', width: '25%'}
+                    ]
+                });
+                $("#grid").bind('cellclick', function (event) {
+                    var index = event.args.rowindex;
+                    if (event.args.datafield == 'remove') {
+                        var item = cartItems[index];
+                        if (item.count > 1) {
+                            item.count -= 1;
+                            updateGridRow(index, item);
+                        }
+                        else {
+                            cartItems.splice(index, 1);
+                            removeGridRow(index);
+                        }
+                    }
+                });
+            };
+
+            function init(t) {
+                theme = t;
+                render();
+                addClasses();
+                addEventListeners();
+            };
+
+            function addItem(item) {
+                var index = getItemIndex(item.name);
+                if (index >= 0) {
+                    cartItems[index].count += 1;
+                    updateGridRow(index, cartItems[index]);
+                } else {
+                    var id = cartItems.length,
+                        item = {
+                            name: item.name,
+                            count: 1,
+                            price: item.price,
+                            index: id,
+                            remove: '<div style="text-align: center; cursor: pointer; width: 53px;"' +
+                         'id="draggable-demo-row-' + id + '">X</div>'
+                        };
+                    cartItems.push(item);
+                    addGridRow(item);
+                }
+            };
+
+            function addGridRow(row) {
+                $("#grid").jqxGrid('addrow', null, row);
+            };
+
+            function updateGridRow(id, row) {
+                var rowID = $("#grid").jqxGrid('getrowid', id);
+                $("#grid").jqxGrid('updaterow', rowID, row);
+            };
+
+            function removeGridRow(id) {
+                var rowID = $("#grid").jqxGrid('getrowid', id);
+                $("#grid").jqxGrid('deleterow', rowID);
+            };
+
+            function getItemIndex(name) {
+                for (var i = 0; i < cartItems.length; i += 1) {
+                    if (cartItems[i].name === name) {
+                        return i;
+                    }
+                }
+                return -1;
+            };
+
+            function toArray(obj) {
+                var item, array = [], counter = 1;
+                for (var key in obj) {
+                    item = {};
+                    item = {
+                        name: key,
+                        price: obj[key].count,
+                        count: obj[key].price,
+                        number: counter
+                    }
+                    array.push(item);
+                    counter += 1;
+                }
+                return array;
+            };
+
+            function addEventListeners() {
+                $('.draggable-demo-product').bind('dropTargetEnter', function (event) {
+                    $(this).jqxDragDrop('dropAction', 'none');
+                });
+                $('.draggable-demo-product').bind('dropTargetLeave', function (event) {
+                    $(this).jqxDragDrop('dropAction', 'default');
+                });
+                $('.draggable-demo-product').bind('dragEnd', function (event) {
+                    var position = $.jqx.position(event.args);
+                    var pageX = position.left;
+                    var pageY = position.top;
+                    var cart = $("#cart");
+
+                    var targetX = cart.offset().left;
+                    var targetY = cart.offset().top;
+                    var width = cart.width();
+                    var height = cart.height();
+
+                    // fill the form if the user dropped the dragged item over it.
+                    if (pageX >= targetX && pageX <= targetX + width) {
+                        if (pageY >= targetY && pageY <= targetY + height) {
+                            addItem({ price: event.args.price, name: event.args.name });
+                        }
+                    }
+                });
+                $('.draggable-demo-product').bind('dragStart', function (event) {
+                    var tshirt = $(this).find('.draggable-demo-product-header').text();
+                    $(this).jqxDragDrop('data', {
+                        name: tshirt
+                    });
+                });
+            };
+
+            return {
+                init: init
+            }
+        }($));
+
+        $(document).ready(function () {
+            var theme = prepareSimulator("grid");
+            cart.init(theme);
+            initSimulator("grid");
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="demoContainer" class="device-mobile-tablet">
+        <div id="container" class="device-mobile-tablet-container">
+            <div id="shop" class="draggable-demo-shop">
+                <div id="catalog" class="draggable-demo-catalog"></div>
+                <div id="cart" class="draggable-demo-cart-wrapper">
+                     <div style="border: none;" id="grid"></div>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

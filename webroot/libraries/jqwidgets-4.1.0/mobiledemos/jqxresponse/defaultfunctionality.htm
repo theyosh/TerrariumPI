@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title>JavaScript Response - Mobile Example</title>
+    <link rel="stylesheet" href="../styles/demo.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.windowsphone.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.blackberry.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.android.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.mobile.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../simulator.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbulletchart.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxresponse.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = prepareSimulator("response");
+            var response = new $.jqx.response();
+
+            var displayInformation = function () {
+                var os = response.os;
+                var browser = response.browser;
+                var device = response.device;
+                var viewPort = response.viewPort;
+                var documentInfo = response.document;
+
+                $("#os").html("OS: " + os.name + " " + os.version);
+                $("#osPlatform").html("Platform: " + os.platform);
+                $("#browser").html("Browser: " + browser.name + " " + browser.version + ", Access name: " + browser.accessName);
+            }
+
+            displayInformation();
+            initSimulator("response");
+        });
+    </script>
+</head>
+<body style="background: white;">
+    <div id="demoContainer" class="device-mobile">
+        <div id="container" class="device-mobile-container">
+            <div style="height: 100%; background: #eee;">
+                <div id="os"></div>
+                <div id="osPlatform"></div>
+                <div id="browser"></div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

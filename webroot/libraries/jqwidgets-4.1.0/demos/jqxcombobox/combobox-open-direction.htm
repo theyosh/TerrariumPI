@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>In this demo is demonstrated how to change the ComboBox's DropDown vertical alignment.
+    </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxradiobutton.js"></script>
+</head>
+<body>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {               
+                var url = "../sampledata/customers.txt";
+
+                // prepare the data
+                var source =
+                {
+                    datatype: "json",
+                    datafields: [
+                        { name: 'CompanyName' },
+                        { name: 'ContactName' }
+                    ],
+                    id: 'id',
+                    url: url,
+                    async: false
+                };
+                var dataAdapter = new $.jqx.dataAdapter(source);
+
+                // Create a jqxComboBox
+                $("#jqxWidget").jqxComboBox({ selectedIndex: 0, source: dataAdapter, dropDownVerticalAlignment: 'top', displayMember: "ContactName", valueMember: "CompanyName", dropDownWidth: 200, width: 150, height: 25});
+                $("#topAlign").jqxRadioButton();
+                $("#bottomAlign").jqxRadioButton();
+                $("#bottomAlign").on('checked', function () {
+                    $("#jqxWidget").jqxComboBox({ dropDownVerticalAlignment: 'bottom' });
+                });
+
+                $("#topAlign").on('checked', function () {
+                    $("#jqxWidget").jqxComboBox({ dropDownVerticalAlignment: 'top' });
+                });
+            });
+        </script>
+        <div>
+            <div style='float: left; margin-top: 270px;' id='jqxWidget'>
+            </div>
+            <div style="float: left; margin-left: 100px; margin-top:270px; font-size: 13px; font-family: Verdana;" id="selectionlog">
+                <h3>
+                    Alignment</h3>
+                <input type="radio" id='topAlign' checked />Top
+                <input type="radio" id="bottomAlign" />Bottom
+            </div>
+        </div>
+    </div>
+</body>
+</html>

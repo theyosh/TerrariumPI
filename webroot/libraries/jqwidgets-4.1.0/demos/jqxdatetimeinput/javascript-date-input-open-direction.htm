@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery DateTimeInput, Month DateTimeInput, DateTimeInput widget, JavasCript DateTimeInput, DateTimePicker, Date Picker" />
+    <meta name="description" content="DateTimeInput's DropDown position can be changed by setting the dropDownVerticalAlignment property." />
+    <title id='Description'>DropDowns are opened above the DateTimeInputs</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+</head>
+<body>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {               
+               $("#date").jqxDateTimeInput({ dropDownVerticalAlignment: "top", width: '300px', height: '25px' });
+               $("#time").jqxDateTimeInput({ dropDownVerticalAlignment: "top", width: '300px', height: '25px' });
+               $("#datetime").jqxDateTimeInput({ dropDownVerticalAlignment: "top", width: '300px', height: '25px' });
+            });
+        </script>
+        <br /><br /><br /><br />
+        <br /><br /><br /><br />
+        <br /><br /><br /><br />
+        <label>Date Input</label>
+        <input type="date" id='date' />
+        <label>Time Input</label>
+        <input type="time" id='time' />
+        <label>Date/Time Input</label>
+        <input type="datetime" id='datetime' />
+    </div>
+</body>
+</html>

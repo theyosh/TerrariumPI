@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id="Description">Customized Aggregates in AngularJS DataTable</title>
+    <meta name="description" content="AngularJS DataTable with Aggregates that can be customized."/>		
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> 
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../sampledata/generatedata.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {           
+            // initialize AngularJS DataTable
+            $scope.gridSettings =
+            {
+                width: 850,
+                source:   new $.jqx.dataAdapter({
+                    localData: generateData(200),
+                    dataType: "array",
+                    datafields:
+                    [
+                        { name: 'firstname', type: 'string' },
+                        { name: 'lastname', type: 'string' },
+                        { name: 'productname', type: 'string' },
+                        { name: 'quantity', type: 'number' },
+                        { name: 'price', type: 'number' }
+                    ],
+                    updateRow: function (rowid, rowdata, commit) {
+                        // synchronize with the server - send update command   
+                        commit(true);
+                    }
+                }),
+                altRows: true,
+                pageable: true,
+                pagerButtonsCount: 10,
+                aggregatesHeight: 25,
+                showAggregates: true,
+                columns: [
+                  { text: 'First Name', columntype: 'textbox', datafield: 'firstname', width: 90 },
+                  { text: 'Last Name', datafield: 'lastname', columntype: 'textbox', width: 90 },
+                  { text: 'Product', datafield: 'productname', width: 170 },
+                  { text: 'Quantity', datafield: 'quantity', width: 100, align: 'right', cellsAlign: 'right', cellsFormat: 'n2' },
+                  {
+                      text: 'Price', datafield: 'price', cellsAlign: 'right', align: 'right', cellsFormat: 'c2', aggregates: [{
+                          'Total':
+                            function (aggregatedValue, currentValue, column, record) {
+                                var total = currentValue * parseInt(record['quantity']);
+                                return aggregatedValue + total;
+                            }
+                      }],
+                      aggregatesRenderer: function (aggregates, column, element) {    
+                          var renderString = "<div style='margin: 4px; float: right;  height: 100%;'>";
+                          renderString += "<strong>Total: </strong>" + aggregates.Total + "</div>";
+                          return renderString;
+                      }
+                  }
+                ]
+            };
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+    <jqx-data-table jqx-settings="gridSettings"></jqx-data-table>
+</body>
+</html>

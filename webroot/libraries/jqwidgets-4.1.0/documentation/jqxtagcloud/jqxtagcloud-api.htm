@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../Styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="jQuery, jQWidgets, jqxTagCloud, Help Documentation, tag cloud, tagCloud, cloudTag" />
+    <meta name="description" content="This page represents the help documentation of the jqxTagCloud widget." />
+    <title>jqxTagCloud API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+     <div id="properties">
+            <h2 class="documentation-top-header">Properties
+            </h2>
+            <table class="documentation-table">
+                <tr>
+                    <th>Name
+                    </th>
+                    <th>Type
+                    </th>
+                    <th>Default
+                    </th>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span118'>alterTextCase</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'none'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the alterTextCase property used to specify the field by which tags should be sorted.
+                                                                                    <br />
+                                Possible values are 'none', 'allLower', 'allUpper', 'firstUpper', 'titleCase'
+                            </p>
+                            <p>
+                                Set the <code>alterTextCase</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ alterTextCase: 'firstUpper' });</code></pre>
+                            <p>
+                                Get the <code>alterTextCase</code> property.
+                            </p>
+                            <pre><code>var value = $('#jqxTagCloud').jqxTagCloud({ 'alterTextCase' });</code></pre>
+                    
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-altertextcase-1">alterTextCase is set to 'titleCase'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span2'>disabled</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Enables or disables the ability to follow tag links in jqxTagCloud.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>disabled</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ disabled: false });</code></pre>
+                            <p>
+                                Get the <code>disabled</code> property.
+                            </p>
+                            <pre><code>var disabled = $('#jqxTagCloud').jqxTagCloud('disabled');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-disabled">disabled is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span12'>displayLimit</span>
+                    </td>
+                    <td>
+                        <span>Integer</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the displayLimit property used to filter highest values tags up to the number specified.
+                            </p>
+                            <p>
+                                Set the <code>displayLimit</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ displayLimit: 10 });</code></pre>
+                            <p>
+                                Get the <code>displayLimit</code> property.
+                            </p>
+         <pre><code>var value = $('#jqxTagCloud').jqxTagCloud({ 'displayLimit' });</code></pre>
+                   
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-displaylimit">displayLimit is set to 3</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span7'>displayMember</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'label'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the field name used for the tag label.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>displayMember</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ displayMember: 'tagLabel' });</code></pre>
+                            <p>
+                                Get the <code>displayMember</code> property.
+                            </p>
+                            <pre><code>var displayMember = $('#jqxTagCloud').jqxTagCloud('displayMember');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-displaylimit">displayMember is set to 'name'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span17'>displayValue</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the displayValue property used to specify whether to add the tag value field after the text.
+                            </p>
+                            <p>
+                                Set the <code>displayValue</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ displayValue: true });</code></pre>
+                            <p>
+                                Get the <code>displayValue</code> property.
+                            </p>
+                                     <pre><code>var value = $('#jqxTagCloud').jqxTagCloud({ 'displayValue' });</code></pre>
+                   
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-displayvalue">displayValue is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span16'>fontSizeUnit</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'px'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the fontSizeUnit property used to set the font size unit
+                                                                                    possible values 'px', 'em', '%'
+                            </p>
+                            <p>
+                                Set the <code>fontSizeUnit</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ fontSizeUnit: 'em' });</code></pre>
+                            <p>
+                                Get the <code>fontSizeUnit</code> property.
+                            </p>
+                                     <pre><code>var value = $('#jqxTagCloud').jqxTagCloud({ 'fontSizeUnit' });</code></pre>
+                   
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-font-sizes">fontSizeUnit is set to 'em'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span3'>height</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the jqxTagCloud's height.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>height</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ height: 35 });</code></pre>
+                            <p>
+                                Get the <code>height</code> property.
+                            </p>
+                            <pre><code>var height = $('#jqxTagCloud').jqxTagCloud('height');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-height">height is set to 50</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span22'>maxColor</span>
+                    </td>
+                    <td>
+                        <span>Color String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the maxColor property used to specify color of the tags for the elements with highest value attribute.
+                                                                                    <br />
+                                Together with minColor property will set color of tags in a gradient fashion depending on their value attribute towards the highest value.
+                                                                                    <br />
+                                Possible values: all browser supported colors including rgba.
+                            </p>
+                            <p>
+                                Set the <code>maxColor</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ maxColor: 'red' });</code></pre>
+                            <p>
+                                Get the <code>maxColor</code> property.
+                            </p>
+                                     <pre><code>var value = $('#jqxTagCloud').jqxTagCloud({ 'maxColor' });</code></pre>
+                   
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-colors">maxColor is set to 'darkgreen'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span15'>maxFontSize</span>
+                    </td>
+                    <td>
+                        <span>Integer</span>
+                    </td>
+                    <td>24
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the maxFontSize property used to set the font size of the tags with the highest value attribute.
+                            </p>
+                            <p>
+                                Set the <code>maxFontSize</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ maxFontSize: 30 });</code></pre>
+                            <p>
+                                Get the <code>maxFontSize</code> property.
+                            </p>
+                                     <pre><code>var value = $('#jqxTagCloud').jqxTagCloud({ 'maxFontSize' });</code></pre>
+                   
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-font-sizes">maxFontSize is set to 5</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span39'>maxValueToDisplay</span>
+                    </td>
+                    <td>
+                        <span>Integer</span>
+                    </td>
+                    <td>0
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the maxValueToDisplay property used to filter tags with value higher than the specified.
+                            </p>
+                            <p>
+                                Set the <code>maxValueToDisplay</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ maxValueToDisplay: 10 });</code></pre>
+                            <p>
+                                Get the <code>maxValueToDisplay</code> property.
+                            </p>
+                                     <pre><code>var value = $('#jqxTagCloud').jqxTagCloud({ 'maxValueToDisplay' });</code></pre>
+                   
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-filter-values">maxValueToDisplay is set to 50</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span21'>minColor</span>
+                    </td>
+                    <td>
+                        <span>Color String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the minColor property used to specify color of the tags for the elements with lowest value attribute.
+                                                                                    <br />
+                                Together with maxColor property will set color of tags in a gradient fashion depending on their value attribute towards the highest value.
+                                                                                    <br />
+                                Possible values: all browser supported colors including rgba.
+                            </p>
+                            <p>
+                                Set the <code>minColor</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ minColor: 'green' });</code></pre>
+                            <p>
+                                Get the <code>minColor</code> property.
+                            </p>
+                                     <pre><code>var value = $('#jqxTagCloud').jqxTagCloud({ 'minColor' });</code></pre>
+                   
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-colors">minColor is set to 'lime'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span14'>minFontSize</span>
+                    </td>
+                    <td>
+                        <span>Integer</span>
+                    </td>
+                    <td>10
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the minFontSize property used to set the font size of the tags with the lowest value attribute.
+                            </p>
+                            <p>
+                                Set the <code>minFontSize</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ minFontSize: 10 });</code></pre>
+                            <p>
+                                Get the <code>minFontSize</code> property.
+                            </p>
+                                     <pre><code>var value = $('#jqxTagCloud').jqxTagCloud({ 'minFontSize' });</code></pre>
+                   
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-font-sizes">minFontSize is set to 1</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span13'>minValueToDisplay</span>
+                    </td>
+                    <td>
+                        <span>Integer</span>
+                    </td>
+                    <td>0
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the minValueToDisplay property used to filter tags with value lower than the specified.
+                            </p>
+                            <p>
+                                Set the <code>minValueToDisplay</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ minValueToDisplay: 10 });</code></pre>
+                            <p>
+                                Get the <code>minValueToDisplay</code> property.
+                            </p>
+                                     <pre><code>var value = $('#jqxTagCloud').jqxTagCloud({ 'minValueToDisplay' });</code></pre>
+                   
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-filter-values">minValueToDisplay is set to 30</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span5'>rtl</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>Sets or gets a value indicating whether widget's elements are aligned to support locales using right-to-left fonts.</p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>rtl</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ rtl : true }); </code></pre>
+                            <p>
+                                Get the <code>rtl</code> property.
+                            </p>
+                            <pre><code>var rtl = $('#jqxTagCloud').jqxTagCloud('rtl'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-right-to-left">rtl is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span18'>sortBy</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'none'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the sortBy property used to specify the field by which tags should be sorted.
+                                                                                    <br />
+                                Possible values are 'none', 'label', 'value'
+                            </p>
+                            <p>
+                                Set the <code>sortBy</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ sortBy: 'value' });</code></pre>
+                            <p>
+                                Get the <code>sortBy</code> property.
+                            </p>
+                                     <pre><code>var value = $('#jqxTagCloud').jqxTagCloud({ 'sortBy' });</code></pre>
+                   
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-sort">sortBy is set to 'label'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span19'>sortOrder</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'ascending'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the sortOrder property used to specify the direction in which tags should be sorted.
+                                                                                    <br />
+                                Possible values are 'ascending', 'descending'
+                            </p>
+                            <p>
+                                Set the <code>sortOrder</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ sortOrder: 'descending' });</code></pre>
+                            <p>
+                                Get the <code>sortOrder</code> property.
+                            </p>
+                                     <pre><code>var value = $('#jqxTagCloud').jqxTagCloud({ 'sortOrder' });</code></pre>
+                   
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-sort-order">sortOrder is set to 'descending'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span4'>source</span>
+                    </td>
+                    <td>
+                        <span>Object</span>
+                    </td>
+                    <td>{}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>(requires jqxdata.js)</p>
+                            <br />
+                            The source object represents a set of key/value pairs.
+                                                                                <br />
+                            url: A string containing the URL to which the request is sent.
+                                                                                <br />
+                            data: Data to be sent to the server.
+                                                                                <br />
+                            localdata: data array or data string pointing to a local data source.
+                                                                                <br />
+                            datatype: the data's type. Possible values: 'xml', 'json', 'jsonp', 'tsv', 'csv', 'local', 'array', 'observablearray'.
+                                                                                <br />
+                            type: The type of request to make ("POST" or "GET"), default is "GET".
+                                                                                <br />
+                            id: A string containing the Id data field.
+                                                                                <br />
+                            root: A string describing where the data begins and all other loops begin from this element.
+                                                                                <br />
+                            record: A string describing the information for a particular record.
+                                                                                <br />
+                            <br />
+
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-sort-order">jqxTagCloud with data source</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span23'>tagRenderer</span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                A callback function used for custom tags rendering.
+                            </p>
+                            <p>
+                                function tagRenderer (itemData, minValue, valueRange)
+                            </p>
+                            <p>
+                                itemData - the record information of the current tag
+                            </p>
+                            <p>
+                                minValue - the lowest value attribute of all elements in the cloud
+                            </p>
+                            <p>
+                                valueRange - the difference between the lowest and highest value attributes in the cloud ( can be used for custom logic )
+                            </p>
+                            <p>
+                                The function must return valid content for an anchor tag, usually a string but can be also be a jquery element object.
+                            </p>
+                            <p>
+                                Set the <code>tagRenderer</code> callback function.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ tagRenderer: function () {
+                        var el = $('<span>' + record.countryName + '</span>');
+                        var img = $('<img src="../../jqwidgets/styles/images/close.png" style="position: relative; top: 2px">');
+                        img.on('click', function (event) {
+                        var id = $(event.target).closest('li').index();
+                        var index = $('#tagCloud').jqxTagCloud('getRenderedTags')[id].index;
+                        $('#tagCloud').jqxTagCloud('removeAt', index);
+                        event.preventDefault();
+                        event.stopPropagation();
+                        });
+                        el.append(img);
+                        return el;
+                        }
+                        });</code></pre>
+
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-tagrenderer">Use a custom tagRenderer function</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span11'>takeTopWeightedItems</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the takeTopWeightedItems property.
+                                                                                    Property indicates if <strong>displayLimit</strong> will prioritize highest value members
+                            </p>
+                            <p>
+                                Set the <code>takeTopWeightedItems</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ takeTopWeightedItems: true });</code></pre>
+                            <p>
+                                Get the <code>takeTopWeightedItems</code> property.
+                            </p>
+                                     <pre><code>var value = $('#jqxTagCloud').jqxTagCloud({ 'takeTopWeightedItems' });</code></pre>
+                   
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-taketopweighteditems">takeTopWeightedItems is set to 'true'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span20'>textColor</span>
+                    </td>
+                    <td>
+                        <span>Color String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the textColor property used to specify color of the tags in the case where the minColor and maxColor properties are not set.
+                                                                                    <br />
+                                Possible values: all browser supported colors including rgba.
+                            </p>
+                            <p>
+                                Set the <code>textColor</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ textColor: 'red' });</code></pre>
+                            <p>
+                                Get the <code>textColor</code> property.
+                            </p>
+                                          <pre><code>var value = $('#jqxTagCloud').jqxTagCloud({ 'textColor' });</code></pre>
+                   
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-textcolor">textColor is set to 'red'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span9'>urlBase</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>''
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the field name used for common base URL path for all tags.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>urlBase</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ urlBase: 'http://wikipedia.com/' });</code></pre>
+                            <p>
+                                Get the <code>urlBase</code> property.
+                            </p>
+                            <pre><code>var urlBase = $('#jqxTagCloud').jqxTagCloud('urlBase');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-urlbase-and-urlmember">urlBase is set to 'http://jqwidgets.com/'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span8'>urlMember</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'url'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the field name used by the anchor element.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>urlMember</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ urlMember: 'tagHref' });</code></pre>
+                            <p>
+                                Get the <code>urlMember</code> property.
+                            </p>
+                            <pre><code>var urlMember = $('#jqxTagCloud').jqxTagCloud('urlMember');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-urlbase-and-urlmember">urlMember is set to "url"</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span6'>valueMember</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'value'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the field name used for value/weight.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>valueMember</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ valueMember: 'postCount' });</code></pre>
+                            <p>
+                                Get the <code>valueMember</code> property.
+                            </p>
+                            <pre><code>var valueMember = $('#jqxTagCloud').jqxTagCloud('valueMember');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-urlbase-and-urlmember">valueMember is set to 'rating'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span1'>width</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the jqxTagCloud's width.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>width</code> property.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud({ width: '200px' });</code></pre>
+                            <p>
+                                Get the <code>width</code> property.
+                            </p>
+                            <pre><code>var width = $('#jqxTagCloud').jqxTagCloud('width');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-urlbase-and-urlmember">width is set to 600</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Events
+                        </h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span25'>bindingComplete</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the widget has completed binding to a dataAdapter.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Bind to the <code>bindingComplete</code> event.
+                            </p>
+                            <pre><code> $('#jqxTagCloud').on('bindingComplete', function (event) { // Some code here. }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-bindingcomplete">Bind to the bindingComplete event</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span24'>itemClick</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when a tag element is clicked.
+                                                                                    Event Arguments:
+                            </p>
+                            <ul>
+                                <li>label - item's label.</li>
+                                <li>value - item's value.</li>
+                                <li>url - item's url.</li>
+                                <li>visibleIndex - item's visible index.</li>
+                                <li>index - item's index.</li>
+                                <li>originalEvent - the Click event object.</li>
+                                <li>target - item's html element.</li>
+                            </ul>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Bind to the <code>itemClick</code> event.
+                            </p>
+                            <pre><code> $('#jqxTagCloud').on('itemClick', function (event) { var args = event.args; }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-itemclick-event">Bind to the itemClick event</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Methods
+                        </h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span28'>destroy</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Calls the widget's destroy function.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Invoke the <code>destroy</code> method.
+                            </p>
+                            <pre><code>$('#jqxTagCloud').jqxTagCloud('destroy'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-destroy-method">destroy widget</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span29'>findTagIndex</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Returns the index of the first tag with the specified label (displayMember).
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>tag</em></td>
+                                            <td>String</td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>Number</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Get index of a tag with label 'USA' with <code>findTagIndex</code> method.
+                            </p>
+                            <pre><code>var index = $('#jqxTagCloud').jqxTagCloud('findTagIndex', 'USA'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-findtagindex-method">Get tagIndex by label</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span30'>getHiddenTagsList</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Returns an array with indices of all hidden tags.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>Array</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Get hidden indices with <code>getHiddenTagsList</code> method.
+                            </p>
+                            <pre><code>var hidden = $('#jqxTagCloud').jqxTagCloud('getHiddenTagsList'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-hide-items">Get hidden list</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span31'>getRenderedTags</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Returns an array with a copy of all tags that have been rendered in the order that they have been rendered.
+                                                                                    <br />
+                                This array excludes filtered values. But includes hidden ones.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>Array</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Get rendered tags list with <code>getRenderedTags</code> method.
+                            </p>
+                            <pre><code>var rendered = $('#jqxTagCloud').jqxTagCloud('getRenderedTags'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-getrenderedtags-and-gettagslist">Get rendered tags list</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span32'>getTagsList</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Returns an array with a copy of all tags.
+                                                                                    <br>
+                                This list is used before any filtering/sorting/hiding is done.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>Array</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Get all tags list with <code>getTagsList</code> method.
+                            </p>
+                            <pre><code>var tagsList = $('#jqxTagCloud').jqxTagCloud('getTagsList'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-getrenderedtags-and-gettagslist">Get all tags list</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span36'>hideItem</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Hides an element with specified index.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>index</em></td>
+                                            <td>Number</td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Hide the the first visible record of the cloud with <code>hideItem</code> method.
+                            </p>
+
+
+                            <pre><code>
+                        var tagItem = $('#jqxTagCloud').jqxTagCloud('getRenderedTags')[0];
+                        var index = tagItem.index;
+                        $('#jqxTagCloud').jqxTagCloud('hideItem', index);
+                        // Note: getRenderedTags will include hidden tags, so doing this repeatedly will have no effect.
+                    </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-hide-items">hideItem example</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span33'>insertAt</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Inserts an element before an element with specified index
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>index</em></td>
+                                            <td>Number</td>
+                                            <td></td>
+                                        </tr>     
+                                        <tr>
+                                            <td><em>item</em></td>
+                                            <td>Object</td>
+                                            <td></td>
+                                        </tr>                                    
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Add an item at the front of the cloud with <code>insertAt</code> method.
+                            </p>
+
+                            <pre><code>
+    var index = 0;
+    var tagItem = { label: 'hardware', value: 215, url: '/categiries/hardware' };
+    // label, value and url fields need to match the respective value of the displayMember, valueMember and urlMember fields of your cloud.
+    $('#jqxTagCloud').jqxTagCloud('insertAt', index, tagItem); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-crud">insertAt example</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span35'>removeAt</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Deletes an element with specified index.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>index</em></td>
+                                            <td>Number</td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Delete the the first visible record of the cloud with <code>removeAt</code> method.
+                            </p>
+
+
+                            <pre><code>
+                        var tagItem = $('#jqxTagCloud').jqxTagCloud('getRenderedTags')[0];
+                        var index = tagItem.index;
+                        $('#jqxTagCloud').jqxTagCloud('removeAt', index); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-crud">removeAt example</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span34'>updateAt</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Updates an element with specified index.
+                            </p>
+                             <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>index</em></td>
+                                            <td>Number</td>
+                                            <td></td>
+                                        </tr>     
+                                        <tr>
+                                            <td><em>item</em></td>
+                                            <td>Object</td>
+                                            <td></td>
+                                        </tr>                                    
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Update the the first visible record of the cloud with <code>updateAt</code> method.
+                            </p>
+
+
+                            <pre><code>
+    var tagItem = $('#jqxTagCloud').jqxTagCloud('getRenderedTags')[0];
+    var index = tagItem.index;
+    tagItem.label = 'Improved' + tagItem.label;
+    // label, value and url fields need to match the respective value of the displayMember, valueMember and urlMember fields of your cloud.
+    $('#jqxTagCloud').jqxTagCloud('updateAt', index, tagItem); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-crud">updateAt example</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span37'>showItem</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Reveals a hidden element with specified index.
+                            </p>
+                             <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>index</em></td>
+                                            <td>Number</td>
+                                            <td></td>
+                                        </tr>     
+                                                                         
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Reveal the the last hidden record of the cloud with <code>showItem</code> method.
+                            </p>
+
+
+                            <pre><code>
+    var hiddenItems = $('#jqxTagCloud').jqxTagCloud('getHiddenTagsList');
+    var len = hiddenItems.length;
+    if (len > 0) {
+        var index = hiddenItems[len - 1];
+        $('#jqxTagCloud').jqxTagCloud('showItem', index);
+    }
+                    </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxtagcloud-showitem-method">showItem example</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+            <br />
+        </div>
+  </body>
+</html>

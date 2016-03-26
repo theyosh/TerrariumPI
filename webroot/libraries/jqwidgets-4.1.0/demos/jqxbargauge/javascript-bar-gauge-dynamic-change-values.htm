@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This demo demonstrates how to set dynamically values in jqxBarGauge from a list.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbargauge.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            var data = [{
+                "id": "1",
+                "name": "Hot Chocolate",
+                "calories": "370"
+            }, {
+                "id": "2",
+                "name": "Peppermint Hot Chocolate",
+                "calories": "440"
+            }, {
+                "id": "3",
+                "name": "Salted Caramel Hot Chocolate",
+                "calories": "450"
+            }, {
+                "id": "4",
+                "name": "White Hot Chocolate",
+                "calories": "420"
+            }, {
+                "id": "5",
+                "name": "Caffe Americano",
+                "calories": "15"
+            }, {
+                "id": "6",
+                "name": "Caffe Latte",
+                "calories": "190"
+            }, {
+                "id": "7",
+                "name": "Caffe Mocha",
+                "calories": "330"
+            }];
+
+            var source = {
+                datatype: "json",
+                datafields: [
+                    { name: 'name' },
+                    { name: 'calories', type: 'int' }
+                ],
+                id: 'id',
+                localdata: data
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $("#jqxlistbox").jqxListBox({
+                width: 230,
+                source: dataAdapter,
+                displayMember: "name",
+                valueMember: "calories",
+                checkboxes: true
+            });
+            $("#jqxlistbox").jqxListBox('checkIndex', 2);
+            $("#jqxlistbox").jqxListBox('checkIndex', 5);
+            $("#jqxlistbox").jqxListBox('checkIndex', 6);
+
+            var getValues = function ()
+            {
+                var items = $("#jqxlistbox").jqxListBox('getCheckedItems');
+                var array = convertToArray(items);
+
+                return array;
+            };
+
+            var convertToArray = function (items)
+            {
+                var preparedArray = new Array(items.length);
+                for (var i = 0; i < items.length; i += 1)
+                {
+                    preparedArray[i] = items[i].value;
+                }
+
+                return preparedArray;
+            }
+
+            $('#jqxbargauge').jqxBarGauge({
+                width: 600,
+                height: 600,
+                title: 'Nutritional Values',
+                values: getValues(),
+                baseValue: 50,
+                max: 500,
+                barSpacing: 9,
+                animationDuration: 0,
+                relativeInnerRadius: 0.2,
+                startAngle: 0,
+                endAngle: 360,
+                colorScheme: 'scheme05',
+                tooltip: {
+                    visible: true,
+                    formatFunction: function (value, index)
+                    {
+                        var items = $("#jqxlistbox").jqxListBox('getCheckedItems');
+                        var item = items[index];
+                        return item.label + ": " + value + ' cal.';
+                    }
+                },
+                labels: { formatFunction: function (value) { return value + ' cal.'; }, precision: 0, indent: 15, connectorWidth: 1 }
+            });
+
+            var getSum = function (array)
+            {
+                array = array || [];
+                var sum = 0;
+                if (!!array.length)
+                {
+                    for (var i = 0; i < array.length; i += 1)
+                    {
+                        sum += array[i];
+                    }
+                }
+
+                return sum;
+            };
+
+            $('#log').html('<strong>Summary calories: ' + 970 + '</strong>');
+
+            $("#jqxlistbox").on('checkChange', function (event)
+            {
+                var items = $("#jqxlistbox").jqxListBox('getCheckedItems');
+                var arrayOfItems = convertToArray(items);
+                $('#log').html('<strong>Summary calories: ' + getSum(arrayOfItems) + '</strong>');
+                $('#jqxbargauge').jqxBarGauge('val', arrayOfItems);
+            });
+
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxbargauge' style='float: left;'></div>
+    <div style="margin-left: 50px; margin-top: 150px; float: left;">
+        <div id='jqxlistbox'></div>
+        <br />
+        <br />
+        <div id='log'></div>
+    </div>
+</body>
+</html>

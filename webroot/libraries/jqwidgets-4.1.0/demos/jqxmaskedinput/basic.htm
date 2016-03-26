@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Basic MaskedInput Configuration</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmaskedinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Create jqxMaskedInputs
+            $("#currencyInput").jqxMaskedInput({ value: "333333", mask: "$####.##", width: '250px', height: '25px'});
+            
+            $("#currencyInputButton").jqxButton();
+            $("#currencyInputButton").click(function () {
+                var value = $("#currencyInput")[0].value;
+                alert(value);
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <input id="currencyInput"/>
+     <input style="margin-top: 10px;" type="button" id="currencyInputButton" value="Get Value" />
+</body>
+</html>

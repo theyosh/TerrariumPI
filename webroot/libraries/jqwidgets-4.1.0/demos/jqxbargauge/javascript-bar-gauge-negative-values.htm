@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This demo displays jqxBarGauge with negative values.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbargauge.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#jqxbargauge').jqxBarGauge({
+                width: 600,
+                height: 600,
+                values: [12, -35, -14.78, 29.5, 23.124, 41],
+                relativeInnerRadius: 0.2,
+                min: -45,
+                baseValue: 0,
+                max: 45,
+                startAngle: 270,
+                endAngle: 90,
+                colorScheme: 'scheme02',
+                labels: {
+                    formatFunction: function (value) {
+                        return value + ' m';
+                    }, precision: 1, indent: 15
+                },
+                animationDuration: 0
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxbargauge'></div>
+</body>
+</html>

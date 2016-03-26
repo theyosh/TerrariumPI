@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxChart Export to JPEG, PNG or PDF. In order to export the Chart you will need a browser which supports HTML5.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.export.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            function getExportServer() {
+                return 'http://www.jqwidgets.com/export_server/export.php';
+            }
+
+            // prepare data source
+            var source =
+            {
+                datatype: "csv",
+                datafields: [
+                    { name: 'Country' },
+                    { name: 'GDP' },
+                    { name: 'DebtPercent' },
+                    { name: 'Debt' }
+                ],
+                url: '../sampledata/gdp_dept_2010.txt'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "Economic comparison",
+                description: "GDP and Debt in 2010",
+                showLegend: true,
+                enableAnimations: true,
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                xAxis:
+                {
+                    dataField: 'Country'
+                },
+                colorScheme: 'scheme01',
+                seriesGroups:
+                    [
+                        {
+                            type: 'column',
+                            columnsGapPercent: 50,
+                            valueAxis:
+                            {
+                                unitInterval: 5000,
+                                title: { text: 'GDP & Debt per Capita($)<br>' }
+                            },
+                            series: [
+                                    { dataField: 'GDP', displayText: 'GDP per Capita' },
+                                    { dataField: 'Debt', displayText: 'Debt per Capita' }
+                                ]
+                        },
+                        {
+                            type: 'line',
+                            valueAxis:
+                            {
+                                unitInterval: 10,
+                                title: { text: 'Debt (% of GDP)<br>' },
+                                position: 'right',
+                                gridLines: { visible: false }
+                            },
+                            series: [
+                                    { dataField: 'DebtPercent', displayText: 'Debt (% of GDP)' }
+                                ]
+                        }
+
+                    ]
+            };
+
+            // setup the chart
+            $('#chartContainer').jqxChart(settings);
+
+            $("#jpegButton").jqxButton({});
+            $("#pngButton").jqxButton({});
+            $("#pdfButton").jqxButton({});
+
+            $("#jpegButton").click(function () {
+                // call the export server to create a JPEG image
+                $('#chartContainer').jqxChart('saveAsJPEG', 'myChart.jpeg', getExportServer());
+            });
+            $("#pngButton").click(function () {
+                // call the export server to create a PNG image
+                $('#chartContainer').jqxChart('saveAsPNG', 'myChart.png', getExportServer());
+            });
+            $("#pdfButton").click(function () {
+                // call the export server to create a PNG image
+                $('#chartContainer').jqxChart('saveAsPDF', 'myChart.pdf', getExportServer());
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div style='height: 600px; width: 852px;'>
+        <div id='host'>
+            <div id='chartContainer' style="width: 850px; height: 500px;">
+            </div>
+            <div style='margin-top: 10px;'>
+                <input style='float: left;' id="jpegButton" type="button" value="Save As JPEG" />
+                <input style='float: left; margin-left: 5px;' id="pngButton" type="button" value="Save As PNG" />
+                <input style='float: left; margin-left: 5px;' id="pdfButton" type="button" value="Save As PDF" />
+            </div>
+        </div>
+    </div>
+</body>
+</html>

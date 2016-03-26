@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example shows how to use the Grid API to customize a column's rendering.</title>
+	<meta name="description" content="JavaScript Grid API Customization" /> 	
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.pager.js"></script>    
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script>      
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var url = "../sampledata/feed.xml";
+
+            var source =
+            {
+                datatype: "xml",
+                datafields: [
+                    { name: 'title', type: 'string' },
+                    { name: 'link', type: 'string' },
+                    { name: 'pubDate', type: 'date' },
+                    { name: 'creator', map: 'dc\\:creator', type: 'string' },
+               ],
+                root: "channel",
+                record: "item",
+                url: url
+            };
+
+            var linkrenderer = function (row, column, value) {
+                if (value.indexOf('#') != -1) {
+                    value = value.substring(0, value.indexOf('#'));
+                }
+                var format = { target: '"_blank"' };
+                var html = $.jqx.dataFormat.formatlink(value, format);
+                return html;
+            }
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            // Create jqxGrid.
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 850,
+                source: dataAdapter,
+                pageable: true,
+                autoheight: true,
+                columns: [
+                  { text: 'Link', datafield: 'link', width: 550, cellsrenderer: linkrenderer },
+                  { text: 'Title', datafield: 'title', width: 200 },
+                  { text: 'Publish Date', datafield: 'pubDate', width: 250, cellsformat: "D" },
+                  { text: 'Creator', datafield: 'creator', width: 200 }
+               ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+        <div id="jqxgrid">
+        </div>
+    </div>
+</body>
+</html>

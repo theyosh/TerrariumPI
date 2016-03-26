@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">This demo showcases jqxComplexInput's right-to-left support.
+    </title>
+    <meta name="description" content="This demo showcases jqxComplexInput's right-to-left support." />
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcomplexinput.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxComplexInput").jqxComplexInput({ width: 250, height: 25, value: "15 + 7.2i", spinButtons: true, rtl: true });
+        });
+    </script>
+</head>
+<body>
+    <div id="jqxComplexInput">
+        <input type="text" />
+        <div>
+        </div>
+    </div>
+</body>
+</html>

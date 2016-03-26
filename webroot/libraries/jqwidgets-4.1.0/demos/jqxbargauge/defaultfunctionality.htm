@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery BarGauge, BarGauge, Radial BarGauge, jqxBarGauge" />
+    <meta name="description" content="In the following demo you can see how to initialize basic jqxBarGauge with default settings. You can set range's start and end width, start and end distance from the gauge's bundaries and custom style." />
+    <title id='Description'>jqxBarGauge displays an indicator within a range of values. Gauges
+        can be used in a table or matrix to show the relative value of a field in a range
+        of values in the data region.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbargauge.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            $('#barGauge').jqxBarGauge({colorScheme: "scheme02", width: 600, height: 600,
+                values: [102, 115, 130, 137], max: 150, tooltip: {
+                    visible: true, formatFunction: function (value)
+                    {
+                        var realVal = parseInt(value);
+                        return ('Year: 2016<br/>Price Index:' + realVal);
+                    },
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="barGauge"></div>
+</body>
+</html>

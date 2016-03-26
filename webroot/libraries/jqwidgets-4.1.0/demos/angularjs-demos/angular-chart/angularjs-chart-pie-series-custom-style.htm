@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS Chart Pie Series Example</title>
+   <meta name="description" content="This is an example of AngularJS Chart. Chart Pie Series." />		
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.core.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            // prepare chart data as an array
+            var source =
+            {
+                datatype: "csv",
+                datafields: [
+                    { name: 'Browser' },
+                    { name: 'Share' }
+                ],
+                url: '../../sampledata/desktop_browsers_share_dec2011.txt'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+            jqwidgets.jqx._jqxChart.prototype.colorSchemes.push({ name: 'myScheme', colors: ['#ffff00', '#ff0000', '#ccff00', '#00ffff', '#aaaaaa'] });
+          
+            // prepare jqxChart settings
+            var settings = {
+                title: "Desktop browsers share",
+                description: "(source: wikipedia.org)",
+                enableAnimations: true,
+                showLegend: false,
+                legendPosition: { left: 520, top: 140, width: 100, height: 100 },
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                colorScheme: 'myScheme',
+                seriesGroups:
+                    [
+                        {
+                            type: 'pie',
+                            showLabels: true,
+                            series:
+                                [
+                                    { 
+                                        dataField: 'Share',
+                                        displayText: 'Browser',
+                                        labelRadius: 100,
+                                        initialAngle: 15,
+                                        radius: 130,
+                                        centerOffset: 0,
+                                        formatSettings: { sufix: '%', decimalPlaces: 1 }
+                                    }
+                                ]
+                        }
+                    ]
+            };
+
+
+            $scope.chartSettings = settings;
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-chart id='chartContainer' jqx-settings="chartSettings" style="width: 850px; height: 500px"></jqx-chart>
+</body>
+</html>

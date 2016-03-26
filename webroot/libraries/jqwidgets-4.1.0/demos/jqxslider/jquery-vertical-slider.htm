@@ -1,0 +1,328 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Slider, Slider Widget, RangeSlider" />
+    <meta name="description" content="jqxSlider represents a flexible jQuery Slider that lets the user select from a range of values by moving a thumb along a track. The widget is completely customizable in terms of appearance and offers numerous configuration options like mouse wheel and keyboard support, smooth or step-based slider and support for range sliders." />
+    <title id='Description'>jqxSlider represents a flexible jQuery Slider that lets the
+        user select from a range of values by moving a thumb along a track. The widget is
+        completely customizable in terms of appearance and offers numerous configuration
+        options like mouse wheel and keyboard support, smooth or step-based slider and support
+        for range sliders.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxslider.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            $('#jqxSlider').jqxSlider({ orientation: 'vertical', 
+                height: 250, width: 36, mode: 'fixed',
+                min: 0, max: 3, ticksFrequency: 1,
+                tooltip: false, value: 0
+            });
+
+            var carPreview = (function ($) {
+
+                var config = {
+                    timeOut: null,
+                    currentSlide: 0,
+                    navigationContainer: $('#navigationContainer'),
+                    nextButton: $('#nextButton'),
+                    previousButton: $('#previousButton'),
+                    playButton: $('#playButton'),
+                    stopButton: $('#stopButton'),
+                    slider: $('#jqxSlider'),
+                    contentContainerSelector: '#slider-demo-content-',
+                    locked: false
+                };
+
+                var attachEventListeners = function () {
+                    config.navigationContainer.on('mouseenter', function () {
+                        config.navigationContainer.stop();
+                        $(this).fadeTo(150, 1);
+                    });
+                    config.navigationContainer.on('mouseleave', function () {
+                        config.navigationContainer.stop();
+                        $(this).fadeTo(150, 0.1);
+                    });
+                    config.nextButton.on('click', function () {
+                        config.slider.jqxSlider('incrementValue');
+                    });
+                    config.previousButton.on('click', function () {
+                        config.slider.jqxSlider('decrementValue');
+                    });
+                    config.playButton.on('click', function () {
+                        if (!config.timeOut) {
+                            startSlideShow();
+                        }
+                    });
+                    config.stopButton.on('click', function () {
+                        stopSlideShow();
+                    });
+                    config.slider.on('change', function (event) {
+                        loadSlide(event.args.value);
+                    });
+                };
+
+                var startupConfig = function () {
+                    config.navigationContainer.fadeTo(0, 0.1);
+                };
+
+                var startSlideShow = function () {
+                    config.timeOut = setTimeout(function () {
+                        startSlideShow();
+                        var slider = config.slider,
+                            currentValue = slider.jqxSlider('value'),
+                            max = slider.jqxSlider('max'),
+                            min = slider.jqxSlider('min');
+                        if (currentValue < max) {
+                            slider.jqxSlider('incrementValue');
+                        } else {
+                            slider.jqxSlider('setValue', min);
+                        }
+                    }, 2000);
+                };
+
+                var stopSlideShow = function () {
+                    clearTimeout(config.timeOut);
+                    config.timeOut = null;
+                };
+
+                var loadSlide = function (id) {
+                    showSlide(id);
+                };
+
+                var hideCurrentSlide = function () {
+                    $(config.contentContainerSelector + config.currentSlide).css('display', 'none');
+                };
+
+                var showSlide = function (id) {
+                    hideCurrentSlide();
+                    $(config.contentContainerSelector + id).fadeIn(300, function () {
+                     
+                    });
+                    config.currentSlide = id;
+                };
+
+                return {
+                    init: function () {
+                        attachEventListeners();
+                        startupConfig();
+                    }
+                };
+            } (jQuery));
+
+            carPreview.init();
+        });
+    </script>
+    <style type="text/css">
+        .slider-demo-navigation-item
+        {
+            margin-left: 3px;
+            cursor: pointer;
+        }
+        .slider-demo-info-header
+        {
+            font-size: 20px;
+            font-family: Impact;
+            color: #aaa;
+        }
+        .slider-demo-info-content
+        {
+            padding-top: 5px;
+            font-size: 11px;
+            width: 210px;
+            text-align: left;
+            font-family: Verdana, Arial;
+        }
+        .slider-demo-main
+        {
+            width: 665px;
+            text-align: center;
+            border: 1px solid #ccc;
+            height: 376px;
+            padding: 3px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            background: #332f2f;
+        }
+        .slider-demo-header
+        {
+            background-image: url(../../images/slider-demo-header-background.png);
+            width: 665px;
+            height: 76px;
+        }
+        .slider-demo-header-content
+        {
+            position: relative;
+            right: 25px;
+            top: 15px;
+            color: #eee;
+            font-family: Times New Roman, Verdana;
+            font-size: 35px;
+            text-align: right;
+        }
+        .slider-demo-content
+        {
+            width: 663px;
+            height: 300px;
+            border: 1px solid #fbfbfb;
+            border-top-width: 0px;
+            background: #fafafa;
+            position: relative;
+        }
+        .slider-demo-content-inner
+        {
+            position: relative;
+            width: 550px;
+            background-color: #fff;
+            height: 250px;
+            float: right;
+            right: 25px;
+            top: 25px;
+            border: 1px solid #ccc;
+            background-color: #fbfbfb;
+        }
+        .slider-demo-content-container
+        {
+            position: relative;
+            left: 9px;
+            top: 9px;
+            width: 530px;
+            background-color: #fff;
+            height: 230px;
+            border: 1px solid #F5F5F5;
+        }
+        .slider-demo-content-navigation
+        {
+            z-index: 50;
+            position: absolute;
+            top: 200px;
+            left: 200px;
+            height: 26px;
+            width: 130px;
+            background-color: #555;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+        .slider-demo-content-image-border
+        {
+            background-color: #eee;
+            padding: 5px;
+            border: 1px solid #ccc;
+            width: 231px;
+            height: 154px;
+            position: relative;
+            top: 30px;
+            left: 15px;
+            float: left;
+        }
+        .slider-demo-content-info
+        {
+            position: relative;
+            top: 30px;
+            left: 50px;
+            float: left;
+        }
+        .slider-demo-slider-container
+        {
+            position: relative;
+            top: 25px;
+            left: 20px;
+            text-align:left;
+            float: left;
+        }
+    </style>
+</head>
+<body class='default'>
+    <div class="jqx-rc-all slider-demo-main">
+        <div id="slider-demo-header" class="jqx-rc-t slider-demo-header">
+            <div class="slider-demo-header-content">
+                Precious Cars
+            </div>
+        </div>
+        <div class="jqx-rc-b slider-demo-content">
+            <div class="jqx-rc-all slider-demo-content-inner">
+                <div class="jqx-rc-all slider-demo-content-container">
+                    <div id="navigationContainer" class="slider-demo-content-navigation">
+                        <img src="../../images/previous.png" class="slider-demo-navigation-item" alt="Previous"
+                            title="Previous" id="previousButton" />
+                        <img src="../../images/play.png" class="slider-demo-navigation-item" alt="Play" title="Play"
+                            id="playButton" />
+                        <img src="../../images/stop.png" class="slider-demo-navigation-item" alt="Stop" title="Stop"
+                            id="stopButton" />
+                        <img src="../../images/next.png" class="slider-demo-navigation-item" alt="Next" title="Next"
+                            style="margin-right: 3px" id="nextButton" />
+                    </div>
+                    <div id="slider-demo-content-0" style="display: block">
+                        <div class="slider-demo-content-image-border">
+                            <img src="../../images/mercedes.jpg" alt="Mercedes" />
+                        </div>
+                        <div class="slider-demo-content-info">
+                            <span class="slider-demo-info-header">Brabus Black Baron</span>
+                            <div class="slider-demo-info-content">
+                                Brabus will show its Black Baron E V12, based on the 2010 Mercedes-Benz E63 AMG,
+                                at the 2009 Frankfurt Motor Show next week. Visually, Brabus’ Black Baron E V12
+                                gets a new engine ventilation system, new front quarter panels, an upgraded front
+                                bumper, new side skirts, a trunk mounted spoiler, new front quarter panels and awkward
+                                looking rear-wheel covers.
+                            </div>
+                        </div>
+                    </div>
+                    <div id="slider-demo-content-1" style="display: none">
+                        <div class="slider-demo-content-image-border">
+                            <img src="../../images/jaguar.jpg" alt="Jaguar" />
+                        </div>
+                        <div class="slider-demo-content-info">
+                            <span class="slider-demo-info-header">Jaguar XFR</span>
+                            <div class="slider-demo-info-content">
+                                The Jaguar XF (type (X250) is a mid-size luxury car / sports saloon produced by
+                                British car manufacturer Jaguar. The car, which replaced the Jaguar S-Type, was
+                                launched at the 2007 Frankfurt Motor Show following the public showing of the C-XF
+                                concept in January 2007 at the North American International Auto Show.
+                            </div>
+                        </div>
+                    </div>
+                    <div id="slider-demo-content-2" style="display: none">
+                        <div class="slider-demo-content-image-border">
+                            <img src="../../images/ferrari.jpg" alt="Ferrari" />
+                        </div>
+                        <div class="slider-demo-content-info">
+                            <span class="slider-demo-info-header">Ferrari Enzo</span>
+                            <div class="slider-demo-info-content">
+                                The Enzo was designed by Japanese Pininfarina head Ken Okuyama was initially introduced
+                                at the 2002 Motor Show in Paris and had a limited number of units priced at $ 659,330.
+                                Pininfarina wanted a car the will be entirely different from the usual approach
+                                used for its predecessors (GTO, F40 and 50).
+                            </div>
+                        </div>
+                    </div>
+                    <div id="slider-demo-content-3" style="display: none">
+                        <div class="slider-demo-content-image-border">
+                            <img src="../../images/lamborgini.jpg" alt="Lamborgini" />
+                        </div>
+                        <div class="slider-demo-content-info">
+                            <span class="slider-demo-info-header">Lamborghini Gallardo</span>
+                            <div class="slider-demo-info-content">
+                                The Lamborghini Gallardo is a sports car built by Lamborghini. The Gallardo is Lamborghini's
+                                most-produced model to date, with over 10,000 built in its first seven years of
+                                production. The Gallardo offers two choices of transmissions, H-Box and an advanced
+                                six-speed electro-hydraulically controlled semi-automatic robotized manual.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-demo-slider-container">
+                <div id="jqxSlider">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

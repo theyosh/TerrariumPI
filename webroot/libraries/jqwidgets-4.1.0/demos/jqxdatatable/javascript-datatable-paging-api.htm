@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxDataTable - Data Paging API</title>
+    <meta name="description" content="This sample demonstrates how to implement Data Paging with JavaScript DataTable">
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../sampledata/generatedata.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var source =
+            {
+                localData: generatedata(200),
+                dataType: "array",
+                datafields:
+                [
+                    { name: 'firstname', type: 'string' },
+                    { name: 'lastname', type: 'string' },
+                    { name: 'productname', type: 'string' },
+                    { name: 'quantity', type: 'number' },
+                    { name: 'price', type: 'number' },
+                    { name: 'total', type: 'number' }
+                ]
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $("#table").jqxDataTable(
+            {
+                width: 650,
+                source: dataAdapter,                
+                pagerPosition: 'both',
+                pageable: true,
+                altRows: true,
+                columns: [
+                  { text: 'Name', dataField: 'firstname', width: 200 },
+                  { text: 'Last Name', dataField: 'lastname', width: 200 },
+                  { text: 'Product', editable: false, dataField: 'productname', width: 180 },
+                  { text: 'Quantity', dataField: 'quantity', width: 80, cellsalign: 'right' },
+                  { text: 'Unit Price', dataField: 'price', width: 80, cellsalign: 'right', cellsFormat: 'c2' },
+                  { text: 'Total', dataField: 'total', width: 80, cellsalign: 'right', cellsFormat: 'c2' }
+                ]
+            });
+
+            // Settings
+            $("#pagerModeDropDownList").jqxDropDownList({ height: 25,  width: 120, selectedIndex: 0, source: ["default", "advanced"], autoDropDownHeight: true });
+            $("#pagerModeDropDownList").on('select', function (event) {
+                if (event.args.index == 0) {
+                    $("#table").jqxDataTable({ pagerMode: "default" });
+                }
+                else {
+                    $("#table").jqxDataTable({ pagerMode: "advanced" });
+                }
+            });
+            $("#pagerPositionDropDownList").jqxDropDownList({ height: 25,  width: 120, selectedIndex: 2, source: ["top", "bottom", "both"], autoDropDownHeight: true });
+            $("#pagerPositionDropDownList").on('select', function (event) {
+                if (event.args.index == 0) {
+                    $("#table").jqxDataTable({ pagerPosition: "top" });
+                }
+                else if (event.args.index == 1) {
+                    $("#table").jqxDataTable({ pagerPosition: "bottom" });
+                }
+                else {
+                    $("#table").jqxDataTable({ pagerPosition: "both" });
+                }
+            });
+
+            $('#events').jqxPanel({ width: 150, height: 150});
+
+            $("#gotopage").jqxInput({ height: 25, width: 120 });
+            $("#applyPage").jqxButton({ height: 25});
+            $("#applyPage").click(function () {
+                var page = parseInt($("#gotopage").val());
+                if (!isNaN(page)) {
+                    page--;
+                    if (page < 0) page = 0;
+                    $("#table").jqxDataTable('goToPage', page);
+                }
+            });
+
+            $("#table").on("pageChanged", function (event) {
+                $("#eventslog").css('display', 'block');
+                if ($("#events").find('.logged').length >= 5) {
+                    $("#events").jqxPanel('clearcontent');
+                }
+
+                var args = event.args;
+                var eventData = "<div>Page:" + (1+args.pagenum) + ", Page Size: " + args.pagesize + "</div>";
+                $('#events').jqxPanel('prepend', '<div class="logged" style="margin-top: 5px;">' + eventData + '</div>');
+            });
+
+            $("#table").on("pageSizeChanged", function (event) {
+                $("#eventslog").css('display', 'block');
+                $("#events").jqxPanel('clearcontent');
+
+                var args = event.args;
+                var eventData = "<div>Page:" + (1+args.pagenum) + ", Page Size: " + args.pagesize + ", Old Page Size: " + args.oldpagesize + "</div>";
+                $('#events').jqxPanel('prepend', '<div style="margin-top: 5px;">' + eventData + '</div>');
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div style="float: left;" id="table">
+    </div>
+    <div style="font-size: 13px; font-family: verdana; float: left; margin-left: 30px;">
+        <div><strong>Settings</strong></div>
+        <div style="margin-top: 10px;">
+            <div>Pager Mode:</div>
+            <div id="pagerModeDropDownList" style="margin-top: 5px;"></div>
+            <div  style="margin-top: 10px;">Pager Position:</div>
+            <div id="pagerPositionDropDownList" style="margin-top: 5px;"></div>
+            <div  style="margin-top: 10px;">Go to Page:</div>
+            <input id="gotopage" value="1" style="margin-top: 5px;"/>
+            <button id="applyPage">Apply</button>
+        </div>
+        <div style="margin-top: 10px;">
+            <div>Event Log:</div>
+            <div id="events" style="margin-top: 5px;"></div>
+        </div>    
+    </div>
+</body>
+</html>

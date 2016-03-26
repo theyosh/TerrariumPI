@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>The sample illustrates how to add custom CSS styles to DataTable cells under specific conditions.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = "../sampledata/products.xml";
+
+            // prepare the data
+            var source =
+            {
+                dataType: "xml",
+                dataFields: [
+                    { name: 'ProductName', type: 'string' },
+                    { name: 'QuantityPerUnit', type: 'int' },
+                    { name: 'UnitPrice', type: 'float' },
+                    { name: 'UnitsInStock', type: 'float' },
+                    { name: 'Discontinued', type: 'bool' }
+                ],
+                root: "Products",
+                record: "Product",
+                id: 'ProductID',
+                url: url
+            };
+
+            var cellClass = function (row, dataField, cellText, rowData) {
+                var cellValue = rowData[dataField];
+                switch (dataField) {
+                    case "QuantityPerUnit":
+                        if (cellValue < 11) {
+                            return "min";
+                        }
+                        if (cellValue < 14) {
+                            return "minavg";
+                        }
+                        if (cellValue < 50) {
+                            return "avg";
+                        }
+                        return "max";
+                    case "UnitPrice":
+                        if (cellValue < 20) {
+                            return "min";
+                        }
+                        if (cellValue < 30) {
+                            return "minavg";
+                        }
+                        if (cellValue < 50) {
+                            return "avg";
+                        }
+                        return "max";
+                    case "UnitsInStock":
+                        if (cellValue < 20) {
+                            return "min";
+                        }
+                        if (cellValue < 30) {
+                            return "minavg";
+                        }
+                        if (cellValue < 50) {
+                            return "avg";
+                        }
+                        return "max";
+                }
+            }
+
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                downloadComplete: function (data, status, xhr) { },
+                loadComplete: function (data) { },
+                loadError: function (xhr, status, error) { }
+            });
+
+            // initialize jqxDataTable
+            $("#dataTable").jqxDataTable(
+            {
+                source: dataAdapter,                
+                pageable: true,
+                sortable: true,
+                altRows: true,
+                selectionMode: 'none',
+                enableHover: false,
+                columns: [
+                  { text: 'Product Name', dataField: 'ProductName', width: 200 },
+                  { text: 'Quantity per Unit', dataField: 'QuantityPerUnit', cellClassName: cellClass, cellsAlign: 'right', align: 'right', width: 200 },
+                  { text: 'Unit Price', dataField: 'UnitPrice', align: 'right', cellClassName: cellClass, cellsAlign: 'right', cellsformat: 'c2', width: 200 },
+                  { text: 'Units In Stock', dataField: 'UnitsInStock', cellsAlign: 'right', width: 250, align: 'right', cellClassName: cellClass}
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+       <style>
+        .max {
+            color: black\9;
+            background-color: #63be7b\9;
+        }
+        .avg {
+            color: black\9;
+            background-color: #f8e984\9;
+        }
+        .minavg {
+            color: black\9;
+            background-color: #f9806f\9;
+        }
+        .min {
+            color: black\9;
+            background-color: #f8696b\9;
+        }
+
+        .max:not(.jqx-grid-cell-hover):not(.jqx-grid-cell-selected), .jqx-widget .max:not(.jqx-grid-cell-hover):not(.jqx-grid-cell-selected) {
+            color: black;
+            background-color: #63be7b;
+        }
+        .avg:not(.jqx-grid-cell-hover):not(.jqx-grid-cell-selected), .jqx-widget .avg:not(.jqx-grid-cell-hover):not(.jqx-grid-cell-selected) {
+            color: black;
+            background-color: #f8e984;
+        }
+        .minavg:not(.jqx-grid-cell-hover):not(.jqx-grid-cell-selected), .jqx-widget .minavg:not(.jqx-grid-cell-hover):not(.jqx-grid-cell-selected) {
+            color: black;
+            background-color: #f9806f;
+        } 
+        .min:not(.jqx-grid-cell-hover):not(.jqx-grid-cell-selected), .jqx-widget .min:not(.jqx-grid-cell-hover):not(.jqx-grid-cell-selected) {
+            color: black;
+            background-color: #f8696b;
+        }
+    </style>
+    <div id="dataTable">
+    </div>
+</body>
+</html>

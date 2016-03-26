@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example illustrates how to create and apply a custom filter to jqxGrid.
+    </title>
+	<meta name="description" content="jQuery Grid data filtering" /> 	
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.filter.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="generatedata.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {           
+            var data = generatedata(200);
+            var source =
+            {
+                localdata: data,
+                datafields:
+                [
+                    { name: 'firstname', type: 'string' },
+                    { name: 'lastname', type: 'string' },
+                    { name: 'productname', type: 'string' },
+                    { name: 'date', type: 'date' },
+                    { name: 'quantity', type: 'number' },
+                    { name: 'price', type: 'number' }
+                ],
+                datatype: "array"
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            // create grid.
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 600,
+                source: dataAdapter,
+                filterable: false,
+                sortable: true,
+                autoshowfiltericon: false,
+                columns: [
+                  { text: 'First Name', datafield: 'firstname', width: 100 },
+                  { text: 'Last Name', datafield: 'lastname', width: 100 },
+                  { text: 'Product', datafield: 'productname', width: 180 },
+                  { text: 'Order Date', datafield: 'date', width: 100, cellsformat: 'd' },
+                  { text: 'Quantity', datafield: 'quantity', width: 80, cellsalign: 'right' },
+                  { text: 'Unit Price', datafield: 'price', width: 100, cellsalign: 'right', cellsformat: 'c2' }
+                ]
+            });
+
+            // create buttons, listbox and the columns chooser dropdownlist.
+            $("#applyfilter").jqxButton({ theme: theme });
+            $("#clearfilter").jqxButton({ theme: theme });
+            $("#filterbox").jqxListBox({ checkboxes: true,  width: 200, height: 250 });
+            $("#columnchooser").jqxDropDownList({ autoDropDownHeight: true, selectedIndex: 0,  width: 200, height: 25,
+                source: [{ label: 'First Name', value: 'firstname' },
+                  { label: 'Last Name', value: 'lastname' },
+                  { label: 'Product', value: 'productname' },
+                  { label: 'Order Date', value: 'date' },
+                  { label: 'Quantity', value: 'quantity' },
+                  { label: 'Unit Price', value: 'price' }
+                ]
+            });
+
+            // updates the listbox with unique records depending on the selected column.
+            var updateFilterBox = function (datafield) {
+                var filterBoxAdapter = new $.jqx.dataAdapter(source,
+                {
+                    uniqueDataFields: [datafield],
+                    autoBind: true
+                });
+                var uniqueRecords = filterBoxAdapter.records;
+                uniqueRecords.splice(0, 0, '(Select All)');
+                $("#filterbox").jqxListBox({ source: uniqueRecords, displayMember: datafield });
+                $("#filterbox").jqxListBox('checkAll');
+            }
+
+            updateFilterBox('firstname');
+
+            // handle select all item.
+            var handleCheckChange = true;
+            $("#filterbox").on('checkChange', function (event) {
+                if (!handleCheckChange)
+                    return;
+
+                if (event.args.label != '(Select All)') {
+                    handleCheckChange = false;
+                    $("#filterbox").jqxListBox('checkIndex', 0);
+                    var checkedItems = $("#filterbox").jqxListBox('getCheckedItems');
+                    var items = $("#filterbox").jqxListBox('getItems');
+
+                    if (checkedItems.length == 1) {
+                        $("#filterbox").jqxListBox('uncheckIndex', 0);
+                    }
+                    else if (items.length != checkedItems.length) {
+                        $("#filterbox").jqxListBox('indeterminateIndex', 0);
+                    }
+                    handleCheckChange = true;
+                }
+                else {
+                    handleCheckChange = false;
+                    if (event.args.checked) {
+                        $("#filterbox").jqxListBox('checkAll');
+                    }
+                    else {
+                        $("#filterbox").jqxListBox('uncheckAll');
+                    }
+
+                    handleCheckChange = true;
+                }
+            });
+
+            // handle columns selection.
+            $("#columnchooser").on('select', function (event) {
+                updateFilterBox(event.args.item.value);
+            });
+
+            // builds and applies the filter.
+            var applyFilter = function (datafield) {
+                $("#jqxgrid").jqxGrid('clearfilters');
+                var filtertype = 'stringfilter';
+                if (datafield == 'date') filtertype = 'datefilter';
+                if (datafield == 'price' || datafield == 'quantity') filtertype = 'numericfilter';
+
+                var filtergroup = new $.jqx.filter();
+                var checkedItems = $("#filterbox").jqxListBox('getCheckedItems');
+                if (checkedItems.length == 0) {
+                    var filter_or_operator = 1;
+                    var filtervalue = "Empty";
+                    var filtercondition = 'equal';
+                    var filter = filtergroup.createfilter(filtertype, filtervalue, filtercondition);
+                    filtergroup.addfilter(filter_or_operator, filter);
+                }
+                else {
+                    for (var i = 0; i < checkedItems.length; i++) {
+                        var filter_or_operator = 1;
+                        var filtervalue = checkedItems[i].label;
+                        var filtercondition = 'equal';
+                        var filter = filtergroup.createfilter(filtertype, filtervalue, filtercondition);
+                        filtergroup.addfilter(filter_or_operator, filter);
+                    }
+                }
+
+                // add the filters.
+                $("#jqxgrid").jqxGrid('addfilter', datafield, filtergroup);
+                // apply the filters.
+                $("#jqxgrid").jqxGrid('applyfilters');
+            }
+
+            // clears the filter.
+            $("#clearfilter").click(function () {
+                $("#jqxgrid").jqxGrid('clearfilters');
+            });
+
+            // applies the filter.
+            $("#applyfilter").click(function () {
+                var dataField = $("#columnchooser").jqxDropDownList('getSelectedItem').value;
+                applyFilter(dataField);
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+        <div style="float: left">
+            <div>Choose Column:</div>
+            <div id="columnchooser"></div>
+            <div style="margin-top: 10px;" id="filterbox"></div>
+            <div style="margin-top: 10px;">
+                <input type="button" id="applyfilter" value="Apply Filter" />
+                <input type="button" id="clearfilter" value="Clear Filter" />
+            </div>
+        </div>
+        <div style="margin-left: 20px; float: left" id="jqxgrid">
+        </div>
+    </div>
+</body>
+</html>

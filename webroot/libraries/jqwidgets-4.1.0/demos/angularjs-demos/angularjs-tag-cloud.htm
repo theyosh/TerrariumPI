@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id="Description">AngularJS TagCloud Example</title>
+    <link rel="stylesheet" type="text/css" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtagcloud.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+
+        demoApp.controller("demoController", function ($scope) {
+            var data = [
+                       { countryName: "Australia", technologyRating: 35 },
+                       { countryName: "United States", technologyRating: 60 },
+                       { countryName: "Germany", technologyRating: 55 },
+                       { countryName: "Brasil", technologyRating: 20 },
+                       { countryName: "United Kingdom", technologyRating: 50 },
+                       { countryName: "Japan", technologyRating: 80 }
+            ];
+            var source =
+            {
+                localdata: data,
+                datatype: "array",
+                datafields: [
+                    { name: 'countryName' },
+                    { name: 'technologyRating' }
+                ]
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {});
+            $scope.settings = {
+                width: '600px',
+                source: dataAdapter,
+                displayMember: 'countryName',
+                valueMember: 'technologyRating'
+            };
+        });
+    </script>
+</head>
+<body>
+    <div ng-controller="demoController">
+        <jqx-tag-cloud jqx-settings="settings"></jqx-tag-cloud>
+    </div>
+</body>
+</html>

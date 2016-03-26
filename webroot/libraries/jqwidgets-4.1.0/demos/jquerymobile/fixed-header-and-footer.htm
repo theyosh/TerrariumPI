@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title id="Description">jQuery Mobile Fixed Header and Footer</title>
+    <link rel="stylesheet" href="../../styles/jquery.mobile-1.4.3.min.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery.mobile-1.4.3.min.js"></script>
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <style>
+        body, html {
+            padding: 0;
+            margin: 0;
+            overflow: hidden !important;
+            width: 100%;
+            height: 100%;
+        }
+
+        .ui-content {
+            padding: 0;
+            position: absolute !important;
+            top: 42px !important;
+            right: 0;
+            bottom: 42px !important;
+            left: 0 !important;
+            overflow: hidden !important;
+        }
+
+        .ui-header {
+            height: 40px;
+        }
+
+        .ui-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .ui-mobile .ui-page {
+            min-height: 100% !important;
+            overflow: hidden !important;
+        }
+
+        .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
+            background: #fff;
+            border: none;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // jqxGrid data source
+            var data = new Array();
+            var firstNames =
+            [
+                "Andrew", "Nancy", "Shelley", "Regina", "Yoshi", "Antoni", "Mayumi", "Ian", "Peter", "Lars", "Petra", "Martin", "Sven", "Elio", "Beate", "Cheryl", "Michael", "Guylene"
+            ];
+            var lastNames =
+            [
+                "Fuller", "Davolio", "Burke", "Murphy", "Nagase", "Saavedra", "Ohno", "Devling", "Wilson", "Peterson", "Winkler", "Bein", "Petersen", "Rossi", "Vileid", "Saylor", "Bjorn", "Nodier"
+            ];
+            var productNames =
+            [
+                "Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte", "White Chocolate Mocha", "Cramel Latte", "Caffe Americano", "Cappuccino", "Espresso Truffle", "Espresso con Panna", "Peppermint Mocha Twist"
+            ];
+            var priceValues =
+            [
+                "2.25", "1.5", "3.0", "3.3", "4.5", "3.6", "3.8", "2.5", "5.0", "1.75", "3.25", "4.0"
+            ];
+            for (var i = 0; i < 120; i++) {
+                var row = {};
+                var productindex = Math.floor(Math.random() * productNames.length);
+                var price = parseFloat(priceValues[productindex]);
+                var quantity = 1 + Math.round(Math.random() * 10);
+                row["firstname"] = firstNames[Math.floor(Math.random() * firstNames.length)];
+                row["lastname"] = lastNames[Math.floor(Math.random() * lastNames.length)];
+                row["productname"] = productNames[productindex];
+                row["price"] = price;
+                row["quantity"] = quantity;
+                row["total"] = price * quantity;
+                data[i] = row;
+            }
+            var source =
+            {
+                localData: data,
+                dataFields:
+                [
+                    { name: 'firstname', type: 'string' },
+                    { name: 'lastname', type: 'string' },
+                    { name: 'productname', type: 'string' },
+                    { name: 'quantity', type: 'number' },
+                    { name: 'price', type: 'number' },
+                    { name: 'total', type: 'number' }
+                ],
+                dataType: "array"
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function (data) { },
+                loadError: function (xhr, status, error) { }
+            });
+
+            // jqxDataTable initialization
+            $("#jqxDataTable").jqxDataTable(
+            {
+                width: "100%",
+                height: "100%",
+                pageable: true,
+                pageSize: 30,
+                source: dataAdapter,
+                columns: [
+                  { text: 'First Name', dataField: 'firstname', width: "20%" },
+                  { text: 'Last Name', dataField: 'lastname', width: "20%" },
+                  { text: 'Product', dataField: 'productname', width: "20%" },
+                  { text: 'Quantity', dataField: 'quantity', width: "10%", cellsAlign: 'right' },
+                  { text: 'Unit Price', dataField: 'price', width: "10%", cellsAlign: 'right', cellsFormat: 'c2' },
+                  { text: 'Total', dataField: 'total', cellsAlign: 'right', cellsFormat: 'c2' }
+                ]
+            });
+        });
+    </script>
+</head>
+<body>
+    <div style="height: 100%; border: none; position: relative; margin: 5px;">
+
+    <div data-role="page">
+        <div data-role="header">
+            <h1>Page Header</h1>
+        </div>
+
+        <div data-role="main" class="ui-content">
+            <div style="border: none;" id="jqxDataTable"></div>
+        </div>
+
+        <div data-role="footer">
+            <h1>Page Footer</h1>
+        </div>
+    </div>
+        </div>
+</body>
+</html>

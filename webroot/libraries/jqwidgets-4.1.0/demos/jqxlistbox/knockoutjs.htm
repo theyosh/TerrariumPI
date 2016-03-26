@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript">
+        (function ($, ko) {
+            ko.jqwidgets = ko.jqwidgets || {};
+
+            ko.jqwidgets.dataBinding = function (settings) {
+                var me = this;
+                var binding = {},
+                name = settings.name;
+                var updating = false;
+                var updatingFromObservable = false;
+
+                binding.init = function (element, valueAccessor, allBindingAccessor, viewModel) {
+                    var unwrappedValue = ko.utils.unwrapObservable(valueAccessor());
+                    var modelOptions = ko.toJS(unwrappedValue);
+                    widget = $.data(element)[name].instance;
+
+                    if (settings.events) {
+                        $.each(settings.events, function () {
+                            var eventName = this;
+                            $(element).on(eventName + '.' + element.id, function (event) {
+                                if (!updatingFromObservable) {
+                                    updating = true;
+                                    var val = valueAccessor();
+                                    var property = settings.getProperty(widget, event, eventName);
+                                    if (val[property.name] && $.isFunction(val[property.name])) {
+                                        val[property.name](property.value);
+                                    }
+                                    else if (val[property.name]) {
+                                        valueAccessor(property.value);
+                                    }
+
+                                    updating = false;
+                                }
+                            });
+                        });
+                    }
+                };
+
+                binding.update = function (element, valueAccessor, allBindingAccessor, viewModel) {
+                    var unwrappedValue = ko.utils.unwrapObservable(valueAccessor());
+                    var modelOptions = ko.toJS(unwrappedValue);
+                    widget = $.data(element)[name].instance;
+                    if (updating)
+                        return;
+
+                    $.each(settings, function (name, value) {
+                        if (modelOptions[name]) {
+                            if (!updating) {
+                                updatingFromObservable = true;
+                                settings.setProperty(widget, name, widget[name], modelOptions[name]);
+                                updatingFromObservable = false;
+                            }
+                        }
+                    });
+                };
+
+                ko.bindingHandlers[settings.name] = binding;
+            };
+
+            ko.jqwidgets.dataBinding = new ko.jqwidgets.dataBinding({
+                name: "jqxListBox",
+                checkboxes: false,
+                events: ['select'],
+                selectedItemsCount: 0,
+                getProperty: function (object, event, eventName) {
+                    if (eventName == 'select') {
+                        // update the selectedItemsCount when the selection is changed.
+                        return { name: "selectedItemsCount", value: object.getSelectedItems().length };
+                    }
+                },
+                setProperty: function (object, key, value, newValue) {
+                    if (key == 'checkboxes') {
+                        object.checkboxes = newValue;
+                        object.refresh();
+                    }
+                }
+            });
+
+        }(jQuery, ko));
+
+        $(document).ready(function () {
+
+
+            var data = [
+                { name: "Well-Travelled Kitten", sales: 352, price: 75.95 },
+                { name: "Speedy Coyote", sales: 89, price: 190.00 },
+                { name: "Furious Lizard", sales: 152, price: 25.00 },
+                { name: "Indifferent Monkey", sales: 1, price: 99.95 },
+                { name: "Brooding Dragon", sales: 0, price: 6350 },
+                { name: "Ingenious Tadpole", sales: 39450, price: 0.35 },
+                { name: "Optimistic Snail", sales: 420, price: 1.50 }
+            ];
+
+            var viewModel = function (items) {
+                this.items = ko.observableArray(items);
+                this.showBoxes = ko.observable(true);
+                this.sltCount = ko.observable(0);
+            };
+
+            var vm = new viewModel(data);
+
+            // create listbox
+            var source = {
+                localdata: vm.items,
+                datatype: 'local'
+            }
+            $("#listbox").jqxListBox({ multiple: true, displayMember: 'name', width: 200, height: 200 });
+            ko.applyBindings(vm);
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            $("#listbox").jqxListBox({ source: dataAdapter });
+
+            $("#Button").jqxButton({ theme: theme });
+            $("#Button").click(function () {
+                alert("Value: " + vm.sltCount());
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div style='margin-top: 10px;'>
+            <div data-bind="jqxListBox: { checkboxes: showBoxes, selectedItemsCount: sltCount }" style='margin-top: 3px;' id='listbox'>
+            </div>
+            <input type="button" value="Get Value" style="margin-top: 10px;" id="Button" />
+        </div>
+    </div>
+</body>
+</html>

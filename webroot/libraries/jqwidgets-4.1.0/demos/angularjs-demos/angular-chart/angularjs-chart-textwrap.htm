@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS Chart Text Wrapping Example</title>
+   <meta name="description" content="This is an example of AngularJS Chart. Chart Text Wrapping." />	
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            // prepare chart data as an array            
+            var source =
+            {
+                datatype: "csv",
+                datafields: [
+                    { name: 'Country' },
+                    { name: 'GDP' },
+                    { name: 'DebtPercent' },
+                    { name: 'Debt' }
+                ],
+                url: '../../sampledata/gdp_dept_2010.txt'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                async: false, autoBind: true, loadError: function (xhr, status, error) {
+                    alert('Error loading "' + source.url + '" : ' + error);
+                }
+            });
+
+
+             var legendFormatFunction = function (value) {
+                if (value == "Debt per Capita")
+                    return "Debt per<br>Capita";
+                if (value == "GDP per Capita")
+                    return "GDP per<br>Capita";
+                if (value == "Debt (% of GDP)")
+                    return "Debt<br>(% of GDP)";
+                return value;
+            };
+            // prepare jqxChart settings
+            var settings = {
+                title: "Economic comparison",
+                description: "GDP and Debt in 2010",
+                showLegend: true,
+                enableAnimations: true,
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 90, top: 0, right: 0, bottom: 0 },
+                source: dataAdapter,
+                xAxis:
+                {
+                    dataField: 'Country',
+                    title: { verticalAlignment: 'center' },
+                    formatFunction: function (value, dataIndex) {
+                        if (value == "USA")
+                            return "United<br>States";
+                        return value;
+                    }
+                },
+                colorScheme: 'scheme01',
+                seriesGroups:
+                    [
+                        {
+                            type: 'column',
+                            columnsGapPercent: 50,
+                            valueAxis:
+                            {
+                                unitInterval: 5000,
+                                title: { text: 'GDP & Debt per Capita($)' }
+                            },
+                            series: [
+                                    { dataField: 'GDP', displayText: 'GDP per Capita' },
+                                    { dataField: 'Debt', displayText: 'Debt per Capita' }
+                            ],
+                            legendFormatFunction: legendFormatFunction,
+                            verticalTextAlignment: "center"
+                        },
+                        {
+                            type: 'line',
+                            valueAxis:
+                            {
+                                unitInterval: 10,
+                                visible: false,
+                                title: { text: 'Debt (% of GDP)' }
+                            },
+                            legendFormatFunction: legendFormatFunction,
+                            verticalTextAlignment: "center",
+                            series: [
+                                    { dataField: 'DebtPercent', displayText: 'Debt (% of GDP)' }
+                            ]
+                        }
+                    ]
+            };
+
+            $scope.chartSettings = settings;
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-chart id='chartContainer' jqx-settings="chartSettings" style="width: 850px; height: 500px"></jqx-chart>
+</body>
+</html>

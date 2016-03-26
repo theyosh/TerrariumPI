@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Data Filtering</title>
+    <meta name="description" content="Filtering allows you to display a subset of the records in the data source that meet a particular criteria. When filtering is applied to a TreeGrid, displayed records are restricted to those that meet the current filter criteria. 
+        You can filter data against single or multiple columns. End-users can apply filtering by selecting a column's value from the filter dropdown, typing a filter value into the search field and clicking the search button.">
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtreegrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            // prepare the data
+            var source =
+            {
+                dataType: "csv",
+                dataFields: [
+                    { name: 'EmployeeKey', type: 'number' },
+                    { name: 'ParentEmployeeKey', type: 'number' },
+                    { name: 'FirstName', type: 'string' },
+                    { name: 'LastName', type: 'string' },
+                    { name: 'Title', type: 'string' },
+                    { name: 'HireDate', type: 'date' },
+                    { name: 'BirthDate', type: 'date' },
+                    { name: 'Phone', type: 'string' },
+                    { name: 'Gender', type: 'string' },
+                    { name: 'DepartmentName', type: 'string' }
+                ],
+                hierarchy:
+                {
+                    keyDataField: { name: 'EmployeeKey' },
+                    parentDataField: { name: 'ParentEmployeeKey' }
+                },
+                id: 'EmployeeKey',
+                url: '../sampledata/employeesadv.csv'
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            // create Tree Grid
+            $("#treeGrid").jqxTreeGrid(
+            {
+                width: 850,
+                source: dataAdapter,
+                pageable: true,
+                columnsResize: true,
+                sortable: true,
+                filterable: true,
+                ready: function () {
+                    // expand row with 'EmployeeKey = 32'
+                    $("#treeGrid").jqxTreeGrid('expandRow', 32);
+                    $("#treeGrid").jqxTreeGrid('expandRow', 112);
+                },
+                columns: [
+                  { text: 'FirstName', dataField: 'FirstName', minWidth: 100, width: 200 },
+                  { text: 'LastName', dataField: 'LastName', width: 200 },
+                  { text: 'Department Name', dataField: 'DepartmentName', width: 150 },
+                  { text: 'Title', dataField: 'Title', width: 300 },
+                  { text: 'Birth Date', dataField: 'BirthDate', cellsFormat: 'd', width: 120 },
+                  { text: 'Hire Date', dataField: 'HireDate', cellsFormat: 'd', width: 120 },
+                  { text: 'Phone', dataField: 'Phone', cellsFormat: 'd', width: 120 }
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="treeGrid">
+    </div>
+</body>
+</html>

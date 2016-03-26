@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example illustrates how to load external stylesheet into the jqxEditor.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownbutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcolorpicker.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxeditor.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#editor').jqxEditor({
+                height: "400px",
+                width: '800px',
+                stylesheets: ['editor.css'],
+                createCommand: function (name) {
+                    switch (name) {
+                        case "font":
+                            return {
+                                init: function (widget) {
+                                    var source =
+                                        [{ label: 'Arial', value: 'Arial, Helvetica, sans-serif' },
+                                        { label: 'Comic Sans MS', value: '"Comic Sans MS", cursive, sans-serif' },
+                                        { label: 'Courier New', value: '"Courier New", Courier, monospace' },
+                                        { label: 'Georgia', value: "Georgia,serif" },
+                                        { label: 'Helvetica', value: "HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica" },
+                                        { label: "Impact", value: "Impact,Charcoal,sans-serif" },
+                                        { label: "Lucida Console", value: "'Lucida Console',Monaco,monospace" },
+                                        { label: 'Tahoma', value: 'Tahoma,Geneva,sans-serif' },
+                                        { label: "Times New Roman", value: "'Times New Roman',Times,serif" },
+                                        { label: 'Trebuchet MS', value: '"Trebuchet MS",Helvetica,sans-serif' },
+                                        { label: 'Verdana', value: "Verdana,Geneva,sans-serif" }];
+
+                                    this.value = source;
+                                    widget.jqxDropDownList({
+                                        source: source
+                                    });
+                                }
+                            }
+                    }
+                }
+            });
+        });
+    </script>
+    <textarea id="editor">
+        &lt;b&gt;jqxEditor&lt;/b&gt; is a HTML text editor designed to simplify web content creation. You can use it as a replacement of your Textarea or you can create it from a DIV element. 
+        &lt;br /&gt;
+        &lt;br /&gt;
+        Features include:
+        &lt;br /&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Text formatting&lt;/li&gt;
+            &lt;li&gt;Text alignment&lt;/li&gt;
+            &lt;li&gt;Hyperlink dialog&lt;/li&gt;
+            &lt;li&gt;Image dialog&lt;/li&gt;
+            &lt;li&gt;Bulleted list&lt;/li&gt;
+            &lt;li&gt;Numbered list&lt;/li&gt;
+        &lt;/ul&gt;
+    </textarea>
+</body>
+</html>

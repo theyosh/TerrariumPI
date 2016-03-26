@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <title id="Description">jqxDropDownList directive for Angular UI Router</title>
+    <link rel="stylesheet" type="text/css" href="../../jqwidgets/styles/jqx.base.css" />
+  <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+       <script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+   </head>
+ <body ng-controller="MainCtrl" class="container">
+    
+    <div ui-view></div>
+    
+    <!-- App Script -->
+    <script>
+        var myapp = angular.module('myapp', ["ui.router", "jqwidgets"])
+        myapp.config(function ($stateProvider, $urlRouterProvider) {
+
+            // For any unmatched url, send to /route1
+            $urlRouterProvider.otherwise("/route1")
+
+            $stateProvider
+            .state('contacts', {
+                templateUrl: 'contacts.html',
+                controller: 'ContactCtrl',
+                controllerAs: 'dropDwn'
+            })
+
+        });
+        myapp.controller('MainCtrl', function ($state) {
+            $state.transitionTo('contacts');
+        })
+
+        myapp.controller('ContactCtrl', function ($state, $scope) {
+            var dropDwn = this;
+
+            dropDwn.people = [{
+                id: 1,
+                name: "Pedro",
+                age: 13
+            }, {
+                id: 2,
+                name: "Clara",
+                age: 22
+            }, {
+                id: 3,
+                name: "John",
+                age: 33
+            }, {
+                id: 4,
+                name: "Pier",
+                age: 27
+            }];
+            // init DropDownList's settings object.
+            dropDwn.dropDownListSettings =
+            {
+                width: 200,
+                height: 30,
+                autoDropDownHeight: true,
+                displayMember: "name",
+                valueMember: "id",
+                source: dropDwn.people
+            }
+
+            $scope.change = function (event)
+            {
+                var args = event.args;
+            };
+
+            dropDwn.menuSettings =
+                {
+                    width: 300,
+                    height:30
+                }
+            $scope.itemclick = function (event)
+            {
+                alert("Item clicked");
+            }
+        })
+  </script>
+  </body>
+</html>

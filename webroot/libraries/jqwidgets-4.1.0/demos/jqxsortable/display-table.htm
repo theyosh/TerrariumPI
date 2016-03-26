@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This demo demonstrates jqxSortable displayed as grid.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxsortable.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <style>
+        #sortable {
+            list-style-type: none;
+            margin: 2px;
+            padding: 5px;
+            float: left;
+            width: 312px;
+            border: lightblue solid 2px;
+        }
+
+        #sortable div {
+                margin: 1px;
+                background-color: lightblue;
+                border: DodgerBlue solid 1px;
+                padding: 0;
+                float: left;
+                padding-left: 0;
+                text-align: center;
+                cursor: pointer;
+                font-size: 5.8em;
+                width: 100px;
+                height: 100px;
+            }
+
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sortable").jqxSortable();
+        });
+    </script>
+</head>
+<body>
+        <div id="sortable">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+        </div>
+</body>
+</html>

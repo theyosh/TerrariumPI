@@ -1,0 +1,3 @@
+﻿<div>
+    <h4>Registration Failed. Please, check whether the Birth Date is correct and you have accepted the terms.</h4>
+</div>

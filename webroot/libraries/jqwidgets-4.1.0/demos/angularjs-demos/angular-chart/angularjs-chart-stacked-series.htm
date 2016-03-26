@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS Chart Stacked Series Example</title>
+   <meta name="description" content="This is an example of AngularJS Chart. Chart Stacked Series." />
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.core.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            // prepare chart data as an array
+            var sampleData = [
+                    { Day: 'Monday', Running: 30, Swimming: 5, Cycling: 25, Riding: 10 },
+                    { Day: 'Tuesday', Running: 25, Swimming: 25, Cycling: 0, Riding: 15 },
+                    { Day: 'Wednesday', Running: 30, Swimming: 5, Cycling: 25, Riding: 25 },
+                    { Day: 'Thursday', Running: 35, Swimming: 25, Cycling: 45, Riding: 15 },
+                    { Day: 'Friday', Running: 5, Swimming: 20, Cycling: 25, Riding: 5 },
+                    { Day: 'Saturday', Running: 30, Swimming: 0, Cycling: 30, Riding: 30 },
+                    { Day: 'Sunday', Running: 60, Swimming: 45, Cycling: 5, Riding: 20 }
+            ];
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "Fitness & exercise weekly scorecard",
+                description: "Time spent in vigorous exercise by activity",
+                enableAnimations: true,
+                showLegend: true,
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                source: sampleData,
+                xAxis:
+                    {
+                        dataField: 'Day',
+                        showTickMarks: true,
+                        tickMarksInterval: 1,
+                        tickMarksColor: '#888888',
+                        unitInterval: 1,
+                        showGridLines: false,
+                        gridLinesInterval: 1,
+                        gridLinesColor: '#888888',
+                        axisSize: 'auto'
+                    },
+                colorScheme: 'scheme06',
+                seriesGroups:
+                    [
+                        {
+                            type: 'stackedcolumn',
+                            columnsGapPercent: 100,
+                            seriesGapPercent: 5,
+                            valueAxis:
+                            {
+                                unitInterval: 10,
+                                minValue: 0,
+                                maxValue: 120,
+                                displayValueAxis: true,
+                                description: 'Time in minutes',
+                                tickMarksColor: '#888888'
+                            },
+                            series: [
+                                    { dataField: 'Running', displayText: 'Running' },
+                                    { dataField: 'Swimming', displayText: 'Swimming' }
+                            ]
+                          },
+                          {
+                              type: 'stackedcolumn',
+                              columnsGapPercent: 100,
+                              seriesGapPercent: 5,
+                              valueAxis:
+                              {
+                                  unitInterval: 10,
+                                  minValue: 0,
+                                  maxValue: 120,
+                                  visible: false,
+                                  displayValueAxis: true,
+                                  description: 'Time in minutes',
+                                  tickMarksColor: '#888888'
+                              },
+                              series: [
+                                      { dataField: 'Riding', displayText: 'Riding' },
+                                      { dataField: 'Cycling', displayText: 'Cycling' }
+                              ]
+                          }
+                    ]
+            };
+
+
+            $scope.chartSettings = settings;
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-chart id='chartContainer' jqx-settings="chartSettings" style="width: 850px; height: 500px"></jqx-chart>
+</body>
+</html>

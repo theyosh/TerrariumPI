@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title id='Description'>jqxChart line series with conditional colors</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var source =
+            {
+                datatype: "csv",
+                datafields: [
+                    { name: 'Quarter' },
+                    { name: 'Change' }
+                ],
+                url: '../sampledata/us_gdp_2008-2013.csv'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(
+                source,
+                {
+                    async: false,
+                    autoBind: true,
+                    loadError: function (xhr, status, error) {
+                        alert('Error loading "' + source.url + '" : ' + error);
+                    }
+                }
+            );
+
+            settings = {
+                title: "U.S. GDP Percentage Change",
+                borderLineWidth: 1,
+                showBorderLine: true,
+                enableAnimations: true,
+                description: '(source: Bureau of Economic Analysis)',
+                showLegend: false,
+                padding: { left: 5, top: 5, right: 10, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                categoryAxis:
+                {
+                    //description: 'Year and quarter',
+                    dataField: 'Quarter',
+                    unitInterval: 1,
+                    textRotationAngle: -75,
+                    formatFunction: function (value, itemIndex, serie, group) {
+                        return value;
+                    },
+                    valuesOnTicks: false
+                },
+                colorScheme: 'scheme05',
+                seriesGroups:
+                [
+                    {
+                        type: 'line',
+                        valueAxis:
+                        {
+                            description: 'Percentage Change',
+                            formatFunction: function (value) {
+                                return value + '%';
+                            }
+                        },
+                        series:
+						    [
+                                {
+                                    dataField: 'Change',
+                                    displayText: 'Change',
+
+                                    // Modify this function to return desired colors.
+                                    // jqxChart will call the function for each data point.
+                                    // Sequential points that have the same color will be
+                                    // grouped automatically in a line segment
+                                    colorFunction: function (value, itemIndex, serie, group) {
+                                        return (value < 0) ? '#FF0000' : '#00FF00';
+                                    }
+                                }
+                            ]
+                    }
+
+                ]
+            };
+
+            $("#chart1").jqxChart(settings);
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="chart1" style="width:800px; height:500px"></div>
+</body>
+</html>

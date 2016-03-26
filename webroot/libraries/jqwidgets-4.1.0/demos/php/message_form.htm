@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxexpander.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxvalidator.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxmaskedinput.js"></script> 
+    <script type="text/javascript" src="../../scripts/demos.js"></script> 
+    <style type="text/css">
+        .demo-iframe {
+            border: none;
+            width: 600px;
+            height: 400px;
+            clear: both;
+            display: none;
+        }
+       .text-input
+        {
+            height: 24px;
+            width: 150px;
+        }
+        .register-table
+        {
+            margin-bottom: 10px;
+			table-layout:fixed;
+        }
+        .register-table td, 
+        .register-table tr
+        {
+            margin: 0px;
+            border-spacing: 0px;
+            border-collapse: collapse;
+            font-family: Verdana;
+        }
+        h3 
+        {
+            display: inline-block;
+            margin: 0px;
+        }
+		.required
+		{
+			vertical-align: baseline;
+			color: red;
+			font-size: 10px;
+		}
+		.form-label
+		{
+			vertical-align: baseline;
+			font-weight: bold;
+			font-size: 13px;
+			margin-top: 10px;
+		}
+    </style>
+</head>
+<body style='overflow: hidden;'>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+         $('#sendButton').jqxButton({ width: 70});
+       
+            $('.text-input').addClass('jqx-input');
+            $('.text-input').addClass('jqx-rc-all');
+            if (theme.length > 0) {
+                $('.text-input').addClass('jqx-input-' + theme);
+                $('.text-input').addClass('jqx-widget-content-' + theme);
+                $('.text-input').addClass('jqx-rc-all-' + theme);
+            }
+    
+            // initialize validator.
+            $('#form').jqxValidator({
+		     rules: [
+                    { input: '#firstname', hintPositionRelativeElement: $("#nameGroup"), message: 'First Name is required!', action: 'keyup, blur', rule: 'required' },
+                    { input: '#lastname', hintPositionRelativeElement: $("#nameGroup"), message: 'Last Name is required!', action: 'keyup, blur', rule: 'required' },
+                    { input: '#email', message: 'E-mail is required!', action: 'keyup, blur', rule: 'required' },
+                    { input: '#email', message: 'Invalid E-mail!', action: 'keyup, blur', rule: 'email' },
+                    { input: '#subject', message: 'Subject is required!', action: 'keyup, blur', rule: 'required' },
+                    { input: '#message', message: 'Message is required!', action: 'keyup, blur', rule: 'required' }
+                    ]
+            });
+
+            // validate form.
+            $("#sendButton").click(function () {
+                var validationResult = function (isValid) {
+                    if (isValid) {
+                        $("#form").submit();
+                    }
+                }
+                $('#form').jqxValidator('validate', validationResult);
+            });
+
+            $("#form").on('validationSuccess', function () {
+                $("#form-iframe").fadeIn('fast');
+            });
+        });
+    </script>
+
+<div>  
+    <form class="form" id="form" target="form-iframe"  method="post" action="message.php" style="font-size: 13px; font-family: Verdana; width: 650px;">
+		<div>
+			<h2>Contact Us</h2>
+		</div>
+			<table align="left" class="register-table">
+				<tr>
+					<td colspan="3"><label class='form-label'>Name:<span class="required">*</span></label></td>
+				</tr>
+				<tr id='nameGroup'>
+					<td><input placeHolder="First Name" name="firstname" type="text" id="firstname" style='width: 100px;' class="text-input" /></td>
+					<td><input placeHolder="MI" name="middlename" type="text" id="middlename" style='width: 37px;' class="text-input" /></td>
+					<td><input placeHolder="Last Name" name="lastname" type="text" id="lastname" style='width: 140px;' class="text-input" /></td>
+				</tr>
+				<tr>
+					<td colspan="3"><label class='form-label'>E-mail address:<span class="required">*</span></label></td>
+				</tr>
+				<tr>
+					<td colspan="3"><input placeHolder="E-mail" name="email" type="text" id="email" style='width: 90%;' class="text-input" /></td>
+				</tr>
+				<tr>
+					<td colspan="3"><label class='form-label'>Subject:<span class="required">*</span></label></td>
+				</tr>
+				<tr>
+					<td colspan="3"><input placeHolder="Subject" name="subject" type="text" id="subject" style='width: 110%;' class="text-input" /></td>
+				</tr>
+				<tr>
+					<td colspan="3"><label class='form-label'>Message:<span class="required">*</span></label></td>
+				</tr>
+				<tr>
+					<td colspan="3"><textarea placeHolder="Enter your message here" name="message" type="text" id="message" rows="10" style='height: 150px; width: 150%;' class="text-input"></textarea></td>
+				</tr>
+				<tr>
+					<td colspan="3"><input type="button" id="sendButton" value="Send"/></td>            
+				</tr>
+			</table>
+	</form>
+</div>
+<br/>
+<div>
+     <iframe id="form-iframe" name="form-iframe" class="demo-iframe" frameborder="0"></iframe>
+</div>
+</body>
+</html>
+<!--message.php
+$formData = array(
+	"firstname" => $_POST["firstname"],
+	"middlename" => $_POST["middlename"],
+	"lastname" => $_POST["lastname"],
+	"email" => $_POST["email"],
+	"subject" => $_POST["subject"],
+	"message" => $_POST["message"] 
+);	   
+$response = "<p><h1>Thanks for Contacting Us!</h1></p><p></p>";
+$response .= "Your message has been successfully sent!";
+
+echo $response;
+-->

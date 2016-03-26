@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS Chart Live Updates</title>
+   <meta name="description" content="This is an example of AngularJS Chart. Chart with Live Updates." />	
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.core.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope, $interval) {
+            var chart;
+            var data = [];
+
+            var max = 800;
+            var timestamp = new Date();
+            for (var i = 0; i < 60; i++) {
+                timestamp.setMilliseconds(0);
+                timestamp.setSeconds(timestamp.getSeconds() - 1);
+
+                data.push({ timestamp: new Date(timestamp.valueOf()), value: Math.max(100, (Math.random() * 1000) % max) });
+            }
+
+            data = data.reverse();
+
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "Live updates demo",
+                description: "Data changes every second",
+                enableAnimations: false,
+                animationDuration: 1000,
+                enableAxisTextAnimation: true,
+                created: function (args) {
+                    chart = args.instance;
+                },
+                showLegend: true,
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                source: data,
+                xAxis:
+                    {
+                        dataField: 'timestamp',
+                        type: 'date',
+                        baseUnit: 'second',
+                        unitInterval: 5,
+                        formatFunction: function (value) {
+                            return $.jqx.formatDate(value, "hh:mm:ss", 'en-us');
+                        },
+                        gridLinesInterval: 200,
+                        valuesOnTicks: true,
+                        textRotationAngle: -45,
+                        textOffset: { x: -17, y: 0 }
+                    },
+                colorScheme: 'scheme03',
+                seriesGroups:
+                    [
+                        {
+                            type: 'line',
+                            columnsGapPercent: 50,
+                            alignEndPointsWithIntervals: true,
+                            valueAxis:
+                            {
+                                minValue: 0,
+                                maxValue: 1000,
+                                description: 'Index Value'
+                            },
+                            series: [
+                                    { dataField: 'value', displayText: 'value', opacity: 1, lineWidth: 2, symbolType: 'circle', fillColorSymbolSelected: 'white', symbolSize: 4 }
+                            ]
+                        }
+                    ]
+            };
+
+
+            // create the chart
+            $scope.chartSettings = settings;
+
+            // color scheme drop down
+            var colorsSchemesList = ["scheme01", "scheme02", "scheme03", "scheme04", "scheme05", "scheme06", "scheme07", "scheme08"];
+            $scope.dropDownColorsSettings = {
+                source: colorsSchemesList, selectedIndex: 2, width: '200', height: '25', dropDownHeight: 100, change: function (event) {
+                    var value = event.args.item.value;
+                    chart.colorScheme = value;
+                    chart.update();
+                }
+            };
+
+
+            // series type drop down
+            var seriesList = ["line", "area", "stepline", "steparea", "splinearea", "spline", "column", "scatter", "stackedcolumn", "stackedsplinearea", "stackedspline"];
+            $scope.dropDownSeriesSettings = {
+                source: seriesList, selectedIndex: 0, width: '200', height: '25', dropDownHeight: 100,
+                select: function (event) {
+                    var args = event.args;
+                    if (args) {
+                        var value = args.item.value;
+                        var group = chart.seriesGroups[0];
+                        chart.seriesGroups[0].type = value;
+                        chart.update();
+                    }
+                }
+            };
+
+            // auto update timer
+            $interval(function()
+            {
+                var max = 800;
+                if (data.length >= 60)
+                    data.splice(0, 1);
+                var timestamp = new Date();
+                timestamp.setSeconds(timestamp.getSeconds());
+                timestamp.setMilliseconds(0);
+
+                data.push({ timestamp: timestamp, value: Math.max(100, (Math.random() * 1000) % max) });
+
+                chart.update();
+            }, 1000);
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-chart jqx-settings="chartSettings" style="width: 850px; height: 500px;">
+    </jqx-chart>
+    <table style="width: 680px">
+        <tr>
+            <td style="padding-left: 50px;">
+                <p style="font-family: Verdana; font-size: 12px;">
+                    Select the series type:
+                </p>
+                <jqx-drop-down-list jqx-settings="dropDownSeriesSettings">
+                </jqx-drop-down-list>
+            </td>
+            <td>
+                <p style="font-family: Verdana; font-size: 12px;">
+                    Select color scheme:
+                </p>
+                <jqx-drop-down-list jqx-settings="dropDownColorsSettings"></jqx-drop-down-list>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

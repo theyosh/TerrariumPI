@@ -1,0 +1,899 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="jQuery, Layout, Help Documentation, jQuery Layout, JavaScript Layout, jQuery Mobile Layout, jqxLayout" />
+    <meta name="description" content="This page represents the help documentation of the jqxLayout widget." />
+    <title>jqxLayout API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+       <div id="properties">
+            <h2 class="documentation-top-header">Properties
+            </h2>
+            <table class="documentation-table">
+                <tr>
+                    <th>Name
+                    </th>
+                    <th>Type
+                    </th>
+                    <th>Default
+                    </th>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span14'>contextMenu</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                (Requires jqxmenu.js.)
+                            </p>
+                            <p>
+                                Sets or gets wheter a custom context menu will appear when certain elements of the
+                                                                                    widget are right-clicked.
+                            </p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>contextMenu</code> property.
+                            </p>
+                            <pre><code>$('#jqxLayout').jqxLayout({ contextMenu : true }); </code></pre>
+                            <p>
+                                Get the <code>contextMenu</code> property.
+                            </p>
+                            <pre><code>var contextMenu = $('#jqxLayout').jqxLayout('contextMenu'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxlayout-contextmenu-property">contextMenu is set to true
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span5'>height</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the layout's height.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>height</code> property.
+                            </p>
+                            <pre><code>$("#jqxLayout").jqxLayout({ height: 800 });</code></pre>
+                            <p>
+                                Get the <code>height</code> property.
+                            </p>
+                            <pre><code>var height = $('#jqxLayout').jqxLayout('height');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxlayout-height-property">height
+                                                                                        is set to 800
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span4'>layout</span>
+                    </td>
+                    <td>
+                        <span>Array</span>
+                    </td>
+                    <td>[]
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the layout. This property determines the position of the layout elements
+                                                                                    and their characteristics. The layout array always contains one root item of type
+                                                                                    'layoutGroup'.
+                            </p>
+                            <p>
+                                Each object in the layout array can have the following properties, with <span style="text-decoration: underline;">some restrictions based on the type
+                                </span>:
+                            </p>
+                            <ul>
+                                <li>
+                                    <strong>type</strong>. Possible values:
+                                                                                        <ul>
+                                                                                            <li>'layoutGroup' - container for other groups. It has no visual features. The root
+                                                                                                item is always of this type.
+                                                                                            </li>
+                                                                                            <li>'tabbedGroup' - a group that contains layoutPanels. It is represented by a jqxWindow-like
+                                                                                                panel with a bottom-aligned jqxRibbon inside.
+                                                                                            </li>
+                                                                                            <li>'documentGroup' - a group that contains documentPanels. It is represented by a top-aligned
+                                                                                                jqxRibbon.
+                                                                                            </li>
+                                                                                            <li>'autoHideGroup' - a group that contains layoutPanels. It is represented by a jqxRibbon
+                                                                                                with <code>mode: 'popup'</code>. Each ribbon item has a jqxWindow-like panel in
+                                                                                                its content. This group has to be either the first or the last child item of its
+                                                                                                parent layoutGroup.
+                                                                                            </li>
+                                                                                            <li>'layoutPanel' - a panel that can be inserted in a tabbedGroup or autoHideGroup.
+                                                                                                When it is in a tabbedGroup it is represented by a ribbon item and in an autoHideGroup
+                                                                                                - by a jqxWindow-like panel inside a ribbon item.
+                                                                                            </li>
+                                                                                            <li>'documentPanel' - a panel that can be inserted in a documentGroup. It is represented
+                                                                                                by a ribbon item.
+                                                                                            </li>
+                                                                                        </ul>
+                                </li>
+                                <li>
+                                    <strong>alignment</strong> - sets the alignment of an autoHideGroup. Possible values:
+                                                                                        <ul>
+                                                                                            <li>'left'</li>
+                                                                                            <li>'right'</li>
+                                                                                            <li>'top'</li>
+                                                                                            <li>'bottom'</li>
+                                                                                        </ul>
+                                </li>
+                                <li>
+                                    <strong>allowClose</strong> - applicable to tabbedGroups, layoutPanels and documentPanels.
+                                                                                        If set to <em>true</em>, the group/panel can be closed.
+                                </li>
+                                <li>
+                                    <strong>allowPin</strong> - applicable only to tabbedGroups. If set to <em>false</em>,
+                                                                                        the group cannot be pinned.
+                                </li>
+                                <li>
+                                    <strong>allowUnpin</strong> - applicable only to autoHideGroups. If set to <em>false</em>,
+                                                                                        the group cannot be unpinned.
+                                </li>
+                                <li>
+                                    <strong>contentContainer</strong> - indicates which HTML element has the content
+                                                                                        of the panel. The required value is the value of an existing HTML element's data-container
+                                                                                        attribute. N/A to groups.
+                                </li>
+                                <li>
+                                    <strong>height</strong> - sets the height of a group (N/A to panels). Used only
+                                                                                        if the parent group's orientation is 'vertical'. The heights of all such groups
+                                                                                        have to be set either in pixels or percents (not a mix of both).
+                                </li>
+                                <li>
+                                    <strong>initContent</strong> - a callback function to be called when a panel is
+                                                                                        opened for the first time. Useful for initializing widgets in panels. N/A to groups.
+                                </li>
+                                <li>
+                                    <strong>minHeight</strong> - sets the minimumn height (in pixels) of a group which
+                                                                                        is vertically aligned within its parent group. Disregards the value of the <strong>minGroupHeight</strong>
+                                    property.
+                                </li>
+                                <li>
+                                    <strong>minWidth</strong> - sets the minimumn width (in pixels) of a group which
+                                                                                        is horizontally aligned within its parent group. Disregards the value of the <strong>minGroupWidth
+                                                                                        </strong>property.
+                                </li>
+                                <li>
+                                    <strong>orientation</strong> - orients child items either horizontally or vertically.
+                                                                                        Applicable only to layoutGroups. Possible values:
+                                                                                        <ul>
+                                                                                            <li>'horizontal'</li>
+                                                                                            <li>'vertical'</li>
+                                                                                        </ul>
+                                </li>
+                                <li>
+                                    <strong>pinnedHeight</strong> - sets what the height of a tabbedGroup will be after
+                                                                                        it is pinned.
+                                </li>
+                                <li>
+                                    <strong>pinnedWidth</strong> - sets what the width of a tabbedGroup will be after
+                                                                                        it is pinned.
+                                </li>
+                                <li><strong>selected</strong> - sets whether a panel is initially selected. N/A to groups.</li>
+                                <li>
+                                    <strong>title</strong> - sets the title of a panel. Represented by the corresponding
+                                                                                        ribbon item's title. N/A to groups.
+                                </li>
+                                <li>
+                                    <strong>unpinnedHeight</strong> - sets what the height of an autoHideGroup will
+                                                                                        be after it is unpinned.
+                                </li>
+                                <li>
+                                    <strong>unpinnedWidth</strong> - sets what the width of an autoHideGroup will be
+                                                                                        after it is unpinned.
+                                </li>
+                                <li>
+                                    <strong>width</strong> - sets the width of a group (N/A to panels). Used only if
+                                                                                        the parent group's orientation is 'horizontal'. The widths of all such groups have
+                                                                                        to be set either in pixels or percents (not a mix of both).
+                                </li>
+                                <li>
+                                    <strong>items</strong> - an array of item objects with the fields described above.
+                                                                                        N/A to panels.
+                                </li>
+                            </ul>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>layout</code> property.
+                            </p>
+                            <pre><code>var layout = [{
+    type: 'layoutGroup',
+    orientation: 'horizontal',
+    items: [{
+        type: 'autoHideGroup',
+        alignment: 'left',
+        width: 80,
+        unpinnedWidth: 200,
+        items: [{
+            type: 'layoutPanel',
+            title: 'Toolbox',
+            contentContainer: 'ToolboxPanel'
+        }, {
+            type: 'layoutPanel',
+            title: 'Help',
+            contentContainer: 'HelpPanel'
+        }]
+    }, {
+        type: 'layoutGroup',
+        orientation: 'vertical',
+        width: 500,
+        items: [{
+            type: 'documentGroup',
+            height: 400,
+            minHeight: 200,
+            items: [{
+                type: 'documentPanel',
+                title: 'Document 1',
+                contentContainer: 'Document1Panel'
+            }, {
+                type: 'documentPanel',
+                title: 'Document 2',
+                contentContainer: 'Document2Panel'
+            }]
+        }, {
+            type: 'tabbedGroup',
+            height: 200,
+            pinnedHeight: 30,
+            items: [{
+                type: 'layoutPanel',
+                title: 'Error List',
+                contentContainer: 'ErrorListPanel'
+            }, {
+                type: 'layoutPanel',
+                title: 'Output',
+                contentContainer: 'OutputPanel',
+                selected: true
+            }]
+        }]
+    }]
+}];
+$('#jqxLayout').jqxLayout({ width: 580, height: 600, layout: layout });
+</code></pre>
+                            <p>
+                                Get the <code>layout</code> property.
+                            </p>
+                            <pre><code>var layout = $('#jqxLayout').jqxLayout('layout');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxlayout-layout-property">layout
+                                                                                        is set to a custom array
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span3'>minGroupHeight</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>100
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets the default minimumn height for groups which are vertically aligned within
+                                                                                    their parent group.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>minGroupHeight</code> property.
+                            </p>
+                            <pre><code>$('#jqxLayout').jqxLayout({ minGroupHeight: 200 }); </code></pre>
+                            <p>
+                                Get the <code>minGroupHeight</code> property.
+                            </p>
+                            <pre><code>var minGroupHeight = $('#jqxLayout').jqxLayout('minGroupHeight');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxlayout-mingroupheight-property">minGroupHeight
+                                                                                        is set to 200
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span2'>minGroupWidth</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>100
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets the default minimumn width for groups which are horizontally aligned within
+                                                                                    their parent group.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>minGroupWidth</code> property.
+                            </p>
+                            <pre><code>$('#jqxLayout').jqxLayout({ minGroupWidth: 150 });</code></pre>
+                            <p>
+                                Get the <code>minGroupWidth</code> property.
+                            </p>
+                            <pre><code>var minGroupWidth = $('#jqxLayout').jqxLayout('minGroupWidth');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxlayout-mingroupwidth-property">minGroupWidth
+                                                                                        is set to 150
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span13'>resizable</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets wheter panels can be dynamically resized.
+                            </p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>resizable</code> property.
+                            </p>
+                            <pre><code>$('#jqxLayout').jqxLayout({ resizable : false }); </code></pre>
+                            <p>
+                                Get the <code>resizable</code> property.
+                            </p>
+                            <pre><code>var resizable = $('#jqxLayout').jqxLayout('resizable'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxlayout-resizable-property">resizable is set to false
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span51'>rtl</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets a value indicating whether widget's elements are aligned to support
+                                                                                    locales using right-to-left fonts.
+                            </p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>rtl</code> property.
+                            </p>
+                            <pre><code>$('#jqxLayout').jqxLayout({ rtl : true }); </code></pre>
+                            <p>
+                                Get the <code>rtl</code> property.
+                            </p>
+                            <pre><code>var rtl = $('#jqxLayout').jqxLayout('rtl'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxlayout-rtl-property">rtl
+                                                                                        is set to true
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span63'>theme</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>''
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets the widget's theme.
+                            </p>
+                            jQWidgets uses a pair of css files - jqx.base.css and jqx.[theme name].css. The
+                                                                                base stylesheet creates the styles related to the widget's layout like margin, padding,
+                                                                                border-width, position. The second css file applies the widget's colors and backgrounds.
+                                                                                The jqx.base.css should be included before the second CSS file. In order to set
+                                                                                a theme, you need to do the following:
+                                                                                <ul>
+                                                                                    <li>Include the theme's CSS file after jqx.base.css.<br />
+                                                                                        The following code example adds the 'energyblue' theme.
+                                                                                        <pre><code>
+                                                                                        <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.base.css&quot; type=&quot;text/css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.energyblue.css&quot; type=&quot;text/css&quot; /&gt;</code></pre>
+                                </code></pre>
+                                                                                    </li>
+                                                                                    <li>Set the widget's theme property to 'energyblue' when you initialize it. </li>
+                                                                                </ul>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxlayout-theme-property">theme
+                                                                                        is set to 'energyblue'
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span1'>width</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the layout's width.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>width</code> property.
+                            </p>
+                            <pre><code>$("#jqxLayout").jqxLayout({ width: 800 });</code></pre>
+                            <p>
+                                Get the <code>width</code> property.
+                            </p>
+                            <pre><code>var width = $('#jqxLayout').jqxLayout('width');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxlayout-width-property">width
+                                                                                        is set to 800
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Events
+                        </h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span27'>create</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the widget is created.
+                            </p>
+                            <p>
+                                <em>Note:</em> The <strong>create</strong> event binding has to be made before the
+                                                                                    jqxLayout's initialization.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Bind to the <code>create</code> event by type: jqxLayout.
+                            </p>
+                            <pre><code>$('#jqxLayout').on('create', function () { // Some code here. });</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxlayout-create-event">Bind
+                                                                                        to the create event by type: jqxLayout.
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span11'>pin</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when a group has been pinned.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Bind to the <code>pin</code> event by type: jqxLayout.
+                            </p>
+                            <pre><code>$('#jqxLayout').on('pin', function (event) {
+    var pinnedItem = event.args.item;
+    // Some code here.
+}); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxlayout-pin-event">Bind
+                                                                                        to the pin event by type: jqxLayout.
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span8'>resize</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when a group has been resized (when the group has been resized
+                                                                                    with the mouse or when an adjacent group has been pinned, unpinned or closed).
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Bind to the <code>resize</code> event by type: jqxLayout.
+                            </p>
+                            <pre><code>$('#jqxLayout').on('resize', function (event) {
+    var resizedItem = event.args.item;
+    // Some code here.
+});</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxlayout-resize-event">Bind
+                                                                                        to the resize event by type: jqxLayout.
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span12'>unpin</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when a group has been unpinned.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Bind to the <code>unpin</code> event by type: jqxLayout.
+                            </p>
+                            <pre><code>$('#jqxLayout').on('unpin', function (event) {
+    var unpinnedItem = event.args.item;
+    // Some code here.
+});</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxlayout-unpin-event">Bind
+                                                                                        to the unpin event by type: jqxLayout.
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Methods
+                        </h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span9'>destroy</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Destroys the widget.
+                            </p>
+                           <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Invoke the <code>destroy</code> method.
+                            </p>
+                            <pre><code>$('#jqxLayout').jqxLayout('destroy'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxlayout-destroy-method">destroy
+                                                                                        the widget
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span28'>loadLayout</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Loads a previously saved layout.
+                            </p>
+                               <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>Layout</em></td>
+                                            <td>Object</td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Invoke the <code>loadLayout</code> method.
+                            </p>
+                            <pre><code>// @param layout - an object returned by the method saveLayout
+$('#jqxLayout').jqxLayout('loadLayout', layout);</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxlayout-loadlayout-method">load
+                                                                                        a previously saved layout
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span6'>refresh</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Refreshes the widget.
+                            </p>
+                               <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Invoke the <code>refresh</code> method.
+                            </p>
+                            <pre><code>$('#jqxLayout').jqxLayout('refresh');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxlayout-refresh-method">refresh
+                                                                                        the widget
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span7'>render</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Renders the widget.
+                            </p>
+                          <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Invoke the <code>render</code> method.
+                            </p>
+                            <pre><code>$('#jqxLayout').jqxLayout('render');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxlayout-render-method">render
+                                                                                        the widget
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span10'>saveLayout</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Saves the current layout of the widget. The object returned by this method can be
+                                                                                    passed to the method <strong>loadLayout</strong>.
+                            </p>
+                                                        <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>Object</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Invoke the <code>saveLayout</code> method.
+                            </p>
+                            <pre><code>var layout = $('#jqxLayout').jqxLayout('saveLayout');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxlayout-savelayout-method">saves
+                                                                                        the widget's layout
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br />
+        </div>
+  </body>
+</html>

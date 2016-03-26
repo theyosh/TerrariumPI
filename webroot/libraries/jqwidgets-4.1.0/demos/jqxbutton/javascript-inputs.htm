@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery CheckBox, Check Input, CheckBox" /> 
+    <meta name="description" content="The jqxCheckBox widget displays a check box that allows the end-user to select a true, false or indeterminate condition." />
+    <title id='Description'>The jqxCheckBox widget displays a check box that allows the end-user to select a true, false or indeterminate condition.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+     <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxswitchbutton.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {            
+            // Create jqxCheckBox
+            $("#checkBox").jqxCheckBox({ width: 120, height: 25 });
+            $("#radio").jqxRadioButton({ width: 120, height: 25 });
+            $("#radio2").jqxRadioButton({ width: 120, height: 25 });
+            $("#switchButton").jqxSwitchButton({ width: 60, height: 25 });
+
+        });
+    </script>
+</head>
+<body class='default'>
+    <input id="checkBox" checked type="checkbox"/>Check me
+    <input id="radio" style="margin-top:10px;" checked type="radio" value="true"/>Radio 1
+    <input id="radio2" style="margin-top:10px;" type="radio" value="true"/>Radio 2
+    <input id="switchButton" style="margin-top:10px;" />
+</body>
+</html>

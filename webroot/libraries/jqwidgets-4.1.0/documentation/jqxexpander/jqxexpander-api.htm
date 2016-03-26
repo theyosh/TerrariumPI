@@ -1,0 +1,1196 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../Styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <title>jqxExpander API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+        <div id="properties">
+            <h2 class="documentation-top-header">Properties</h2>
+            <table class="documentation-table">
+                <tr>
+                    <th>Name
+                    </th>
+                    <th>Type
+                    </th>
+                    <th>Default
+                    </th>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span4'>animationType</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'slide'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the animation type.
+                            </p>
+                            <b>Possible Values:</b>
+                            <br />
+                            <pre><code>'slide'</code></pre>
+                            <pre><code>'fade'</code></pre>
+                            <pre><code>'none'</code></pre>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>animationType</code> property.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander({animationType: "none" });
+                        </code></pre>
+                            <p>
+                                Get the <code>animationType</code> property.
+                            </p>
+                            <pre><code>var animationType = $('#jqxExpander').jqxExpander('animationType');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/4vanz/">animationType is set to 'fade'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span7'>arrowPosition</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'left'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets header's arrow position.
+                            </p>
+                            <b>Possible Values:</b>
+                            <br />
+                            <pre><code>'left'</code></pre>
+                            <pre><code>'right'</code></pre>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>arrowPosition</code> property.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander({arrowPosition: "right" });
+                        </code></pre>
+                            <p>
+                                Get the <code>arrowPosition</code> property.
+                            </p>
+                            <pre><code>var arrowPosition = $('#jqxExpander').jqxExpander('arrowPosition');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/23ZVn/">arrowPosition is set to 'left'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span1'>collapseAnimationDuration</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>400
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the collapsing animation duration.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>collapseAnimationDuration</code> property.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander({ width: '200px', collapseAnimationDuration:350}); </code></pre>
+                            <p>
+                                Get the <code>collapseAnimationDuration</code> property.
+                            </p>
+                            <pre><code>var collapseAnimationDuration = $('#jqxExpander').jqxExpander('collapseAnimationDuration');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/b5gJU/">collapseAnimationDuration is set to 3000</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span3'>disabled</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether the expander is disabled.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>disabled</code> property.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander({disabled: true }); </code></pre>
+                            <p>
+                                Get the <code>disabled</code> property.
+                            </p>
+                            <pre><code>var disabled = $('#jqxExpander').jqxExpander('disabled');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/r4gML/">disabled is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span2'>expanded</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets expander's state (collapsed or expanded).
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>expanded</code> property.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander({expanded: true }); </code></pre>
+                            <p>
+                                Get the <code>expanded</code> property.
+                            </p>
+                            <pre><code>var expanded = $('#jqxExpander').jqxExpander('expanded');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/N2EuL/">expanded is set to false</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='property-name-disabled'>expandAnimationDuration</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>400
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the expanding animation duration.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>expandAnimationDuration</code> property.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander({expandAnimationDuration:350 });</code></pre>
+                            <p>
+                                Get the <code>expandAnimationDuration</code> property.
+                            </p>
+                            <pre><code>var expandAnimationDuration = $('#jqxExpander').jqxExpander('expandAnimationDuration');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/h9xTz/">expandAnimationDuration is set to 3000</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span9'>height</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>'auto'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets expander's height. Possible values - 'auto' or string like this 'Npx'
+                            where N is any Number or a numeric value in pixels.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>height</code> property.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander({ height: 200 }); </code></pre>
+                            <p>
+                                Get the <code>height</code> property.
+                            </p>
+                            <pre><code>var height = $('#jqxExpander').jqxExpander('height');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/TbMgj/">height is set to 100</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span5'>headerPosition</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'top'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets header's position.
+                            </p>
+                            <b>Possible Values:</b>
+                            <br />
+                            <pre><code>'top'</code></pre>
+                            <pre><code>'bottom'</code></pre>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>headerPosition</code> property.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander({headerPosition: "bottom"}); </code></pre>
+                            <p>
+                                Get the <code>headerPosition</code> property.
+                            </p>
+                            <pre><code>var headerPosition = $('#jqxExpander').jqxExpander('headerPosition');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/e645D/">headerPosition is set to 'bottom'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span22'>initContent</span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Callback function called when the item's content needs to be initialized. Useful
+                            for initializing other widgets within the content of jqxExpander.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>initContent</code> property.
+                            </p>
+                            <pre><code>$("#jqxExpander").jqxExpander({ initContent: function () { $("#jqxButton").jqxButton({width: 100, height: 50 }); } });</code></pre>
+                            <p>
+                                Get the <code>initContent</code> property.
+                            </p>
+                            <pre><code>var initContent = $('#jqxExpander').jqxExpander('initContent');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/QwLqr/">initContent is set to </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span26'>rtl</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Determines whether the right-to-left support is enabled.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>rtl</code> property.
+                            </p>
+                            <pre><code>$("#jqxExpander").jqxExpander({ rtl: true }); </code></pre>
+                            <p>
+                                Get the <code>rtl</code> property.
+                            </p>
+                            <pre><code>var rtl = $('#jqxExpander').jqxExpander('rtl');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/QAP8E/">rtl is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span8'>showArrow</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets whether header's arrow is going to be shown.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>showArrow</code> property.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander({showArrow: false }); </code></pre>
+                            <p>
+                                Get the <code>showArrow</code> property.
+                            </p>
+                            <pre><code>var showArrow = $('#jqxExpander').jqxExpander('showArrow');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/aRtd9/">showArrow is set to false</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span63'>theme</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>''
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets the widget's theme.
+                            </p>
+                            jQWidgets uses a pair of css files - jqx.base.css and jqx.[theme name].css. The
+                        base stylesheet creates the styles related to the widget's layout like margin, padding,
+                        border-width, position. The second css file applies the widget's colors and backgrounds.
+                        The jqx.base.css should be included before the second CSS file. In order to set
+                        a theme, you need to do the following:
+                        <ul>
+                            <li>Include the theme's CSS file after jqx.base.css.<br />
+                                The following code example adds the 'energyblue' theme.
+                                <pre><code>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.base.css&quot; type=&quot;text/css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.energyblue.css&quot; type=&quot;text/css&quot; /&gt; </code></pre>
+                                </code></pre>
+                            </li>
+                            <li>Set the widget's theme property to 'energyblue' when you initialize it. </li>
+                        </ul>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/wjFab/">theme is set to 'energyblue'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span6'>toggleMode</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'click'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets user interaction used for expanding or collapsing the content.
+                            </p>
+                            <b>Possible Values:</b>
+                            <br />
+                            <pre><code>'click'</code></pre>
+                            <pre><code>'dblclick'</code></pre>
+                            <pre><code>'none'</code></pre>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>toggleMode</code> property.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander({toggleMode: "none" }); </code></pre>
+                            <p>
+                                Get the <code>toggleMode</code> property.
+                            </p>
+                            <pre><code>var toggleMode = $('#jqxExpander').jqxExpander('toggleMode');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/unCKh/">toggleMode is set to 'dblclick'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span11'>width</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>'auto'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets expander's width.Possible values - 'auto' or string like this 'Npx' where N is any Number or a numeric
+                            value in pixels.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>width</code> property.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander({ width: 'auto' }); </code></pre>
+                            <p>
+                                Get the <code>width</code> property.
+                            </p>
+                            <pre><code>var width = $('#jqxExpander').jqxExpander('width');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/bFLWq/">width is set to 200</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Events</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span12'>collapsing</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the jqxExpander is going to be collapsed.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Bind to the <code>collapsing</code> event by type: jqxExpander.
+                            </p>
+                            <pre><code>$('#jqxExpander').on('collapsing', function () { // Some code here. }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/AxvVy/">Bind to the collapsing event by type:jqxExpander </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span13'>collapsed</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the jqxExpander is collapsed.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Bind to the <code>collapsed</code> event by type: jqxExpander.
+                            </p>
+                            <pre><code>$('#jqxExpander').on('collapsed', function () { // Some code here. }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/GLkqz/">Bind to the collapsed event by type:jqxExpander </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span27'>expanding</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the jqxExpander is going to be expanded.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Bind to the expanding <code>expanding</code> event by type: jqxExpander.
+                            </p>
+                            <pre><code>$('#jqxExpander').on('expanding', function () { // Some code here. }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/AfYqF/">Bind to the expanding event by type:jqxExpander </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span10'>expanded</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the jqxExpander is expanded.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Bind to the <code>expanded</code> event by type: jqxExpander.
+                            </p>
+                            <pre><code>$('#jqxExpander').on('expanded', function () { // Some code here. }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/sLjwh/">Bind to the expanded event by type:jqxExpander </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Methods</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span37'>collapse</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Method which is collapsing the expander.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>collapse</code> method.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander('collapse'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/vsqZ9/">collapse the jqxExpander </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span20'>disable</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This method is disabling the expander.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>disable</code> method.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander('disable'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/FxWF2/">disables the jqxExpander </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span25'>destroy</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This method destroys the expander.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>destroy</code> method.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander('destroy'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/wTwZF/">destroys the jqxExpander </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span21'>enable</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This method is enabling the expander.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>enable</code> method.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander('enable'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/RV2wa/">enables the jqxExpander </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span14'>expand</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Method used for expanding the expander's content.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>expand</code> method.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander('expand'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/8w2ZB/">expands the jqxExpander </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span36'>focus</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This method focuses on the expander. When the widget is focused, keyboard navigation
+                            can be used. Here is a list of the keys, supported by jqxExpander and their function:
+                            </p>
+                            <ul>
+                                <li>
+                                    <b>Enter</b>/<b>Spacebar</b> - if the focus is on the header, collapses or expands
+                                the widget.
+                                </li>
+                                <li><b>Tab</b> - focuses on the header or the next element in the DOM.</li>
+                                <li><b>Ctrl</b>+<b>Up arrow</b> - if the focus is on the content, focuses on the header.</li>
+                                <li><b>Ctrl</b>+<b>Down arrow</b> - if the focus is on the header, focuses on the content.</li>
+                            </ul>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>focus</code> method.
+                            </p>
+                            <pre><code>var header = $('#jqxExpander').jqxExpander('focus'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/RyRSM/">focuses the jqxExpander </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span18'>getContent</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Getting expander's content. Returns a string with the content's HTML.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>String</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>getContent</code> method.
+                            </p>
+                            <pre><code>var content = $('#jqxExpander').jqxExpander('getContent'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/6mDmT/">gets the content of the jqxExpander </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span19'>getHeaderContent</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Getting expander's header content. Returns a string with the header's HTML.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>String</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>getHeaderContent</code> method.
+                            </p>
+                            <pre><code>var header = $('#jqxExpander').jqxExpander('getHeaderContent'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/c7nXG/">gets the header content of the jqxExpander </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span15'>invalidate</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This method refreshes the expander.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>invalidate</code> method.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander('invalidate'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/5ChEk/">invalidates the jqxExpander </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span23'>refresh</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This method refreshes the expander.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>refresh</code> method.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander('refresh'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/E7YHG/">refresh the jqxExpander </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span24'>render</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This method renders the expander.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>render</code> method.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander('render'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/3NjaL/">renders the jqxExpander </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span16'>setHeaderContent</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This method is setting specific content to the expander's header.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>headerContent</em></td>
+                                            <td>String</td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>setHeaderContent</code> method.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander('setHeaderContent', 'Header'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/F2jG9/">sets the header of the jqxExpander </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span17'>setContent</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This method is setting specific content to the expander.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>content</em></td>
+                                            <td>String</td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code example</h4>
+                            <p>
+                                Invoke the <code>setContent</code> method.
+                            </p>
+                            <pre><code>$('#jqxExpander').jqxExpander('setContent', 'Content'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/VysHf/">sets the content of the jqxExpander </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+
+            </table>
+            <br />
+        </div>
+ </body>
+</html>

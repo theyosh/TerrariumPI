@@ -1,0 +1,1120 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../Styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="jQuery, jQWidgets, jqxTextArea, Help Documentation, text area, textarea" />
+    <meta name="description" content="This page represents the help documentation of the jqxTextArea widget." />
+    <title>jqxTextArea API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+       <div id="properties">
+            <h2 class="documentation-top-header">Properties
+            </h2>
+            <table class="documentation-table">
+                <tr>
+                    <th>Name
+                    </th>
+                    <th>Type
+                    </th>
+                    <th>Default
+                    </th>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span2'>disabled</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Enables or disables the jqxTextArea.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>disabled</code> property.
+                            </p>
+                            <pre><code>$('#jqxTextArea').jqxTextArea({ disabled: false });</code></pre>
+                            <p>
+                                Get the <code>disabled</code> property.
+                            </p>
+                            <pre><code>var disabled = $('#jqxTextArea').jqxTextArea('disabled');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/7j7xvxps/">disabled is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span35'>displayMember</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>''
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the displayMember of the Items. The displayMember specifies the name of an object property to display. The name is contained in the collection specified by the 'source' property.
+                            </p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>displayMember</code> property.
+                            </p>
+                            <pre><code>$("#jqxTextArea").jqxTextArea({ displayMember: 'firstName' });</code></pre>
+                            <p>
+                                Get the <code>displayMember</code> property.
+                            </p>
+                            <pre><code>var displayMember = $('#jqxTextArea').jqxTextArea('displayMember'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/pqsha39g/">displayMember is set to "ContactName"</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span22'>dropDownWidth</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the jqxTextArea's dropdown (pop-up) width.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>dropDownWidth</code> property.
+                            </p>
+                            <pre><code>$('#jqxTextArea').jqxTextArea({ dropDownWidth: 200 });</code></pre>
+                            <p>
+                                Get the <code>dropDownWidth</code> property.
+                            </p>
+                            <pre><code>var dropDownWidth = $('#jqxTextArea').jqxTextArea('dropDownWidth');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/eq5z2juf/">dropDownWidth is set to 300</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span3'>height</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the jqxTextArea's height.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>height</code> property.
+                            </p>
+                            <pre><code>$('#jqxTextArea').jqxTextArea({ height: 35 });</code></pre>
+                            <p>
+                                Get the <code>height</code> property.
+                            </p>
+                            <pre><code>var height = $('#jqxTextArea').jqxTextArea('height');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/8z1Lynv2/">height is set to 100</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span6'>items</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>8
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the maximum number of items to display in the popup menu.
+                            </p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>items</code> property.
+                            </p>
+                            <pre><code>$("#jqxTextArea").jqxTextArea({ items: 10 });</code></pre>
+                            <p>
+                                Get the <code>items</code> property.
+                            </p>
+                            <pre><code>var items = $('#jqxTextArea').jqxTextArea('items'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/4jjums1o/">items is set to 10</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span19'>maxLength</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the maximum character length of the textarea.
+                            </p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>maxLength</code> property.
+                            </p>
+                            <pre><code>$("#jqxTextArea").jqxTextArea({ maxLength: 10 });</code></pre>
+                            <p>
+                                Get the <code>maxLength</code> property.
+                            </p>
+                            <pre><code>var maxLength = $('#jqxTextArea').jqxTextArea('maxLength'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/k7v9wzeg/">maxLength is set to 10</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span7'>minLength</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>1
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the minimum character length needed before triggering auto-complete suggestions.
+                            </p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>minLength</code> property.
+                            </p>
+                            <pre><code>$("#jqxTextArea").jqxTextArea({ minLength: 2 });</code></pre>
+                            <p>
+                                Get the <code>minLength</code> property.
+                            </p>
+                            <pre><code>var minLength = $('#jqxTextArea').jqxTextArea('minLength'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/6ogdg365/">minLength is set to 1</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span17'>opened</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Gets a value indicating whether the auto-suggest popup is opened.
+                            </p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Get the <code>opened</code> property.
+                            </p>
+                            <pre><code>var opened = $('#jqxTextArea').jqxTextArea('opened'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/dsco19q4/">get
+                                                                                        the value of opened
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span8'>placeHolder</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>''
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the textarea's placeholder.
+                            </p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>placeHolder</code> property.
+                            </p>
+                            <pre><code>$("#jqxTextArea").jqxTextArea({ placeHolder: "Enter text" });</code></pre>
+                            <p>
+                                Get the <code>placeHolder</code> property.
+                            </p>
+                            <pre><code>var placeHolder = $('#jqxTextArea').jqxTextArea('placeHolder'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/27xe0wha/">placeHolder is set to "Enter Your Country of Origin"</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span16'>popupZIndex</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>20000
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the auto-suggest popup's z-index.
+                            </p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>popupZIndex</code> property.
+                            </p>
+                            <pre><code>$("#jqxTextArea").jqxTextArea({ popupZIndex: 999999 });</code></pre>
+                            <p>
+                                Get the <code>popupZIndex</code> property.
+                            </p>
+                            <pre><code>var zIndex = $('#jqxTextArea').jqxTextArea('popupZIndex'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/tf39484m/">popupZIndex is set to 99999</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span10'>query</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>''
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Determines the textarea's query.
+                            </p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>query</code> property.
+                            </p>
+                            <pre><code>$("#jqxTextArea").jqxTextArea({ query: "un" });</code></pre>
+                            <p>
+                                Get the <code>query</code> property.
+                            </p>
+                            <pre><code>var query = $("#jqxTextArea").jqxTextArea('query');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/f07vahd4/">query is set to item</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span9'>renderer</span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Enables you to update the textarea's value, after a selection from the auto-complete popup.
+                            </p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>renderer</code> property.
+                            </p>
+                            <pre><code>
+var countries = new Array("Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burma", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo, Democratic Republic", "Congo, Republic of the", "Costa Rica", "Cote d'Ivoire", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Greenland", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Mongolia", "Morocco", "Monaco", "Mozambique", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Samoa", "San Marino", " Sao Tome", "Saudi Arabia", "Senegal", "Serbia and Montenegro", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "Spain", "Sri Lanka", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe");
+$("#jqxTextArea").jqxTextArea({ placeHolder: "Enter a Country", height: 25, width: 250, 
+    source: function (query, response) {
+        var item = query.split(/,\s*/).pop();
+        // update the search query.
+        $("#jqxTextArea").jqxTextArea({ query: item });
+        response(countries);
+    },
+    renderer: function (itemValue, inputValue) {
+        var terms = inputValue.split(/,\s*/);
+        // remove the current input
+        terms.pop();
+        // add the selected item
+        terms.push(itemValue);
+        // add placeholder to get the comma-and-space at the end
+        terms.push("");
+        var value = terms.join(", ");
+        return value;
+    }
+});                        
+                        </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/vhd1p8ad/">renderer is set to a custom function </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span21'>roundedCorners</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Enables or disables the rounded corners functionality. This property setting has
+                                                                                    effect in browsers which support CSS border-radius.
+                            </p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>roundedCorners</code> property.
+                            </p>
+                            <pre><code>$("#jqxTextArea").jqxTextArea({ roundedCorners: false }); </code></pre>
+                            <p>
+                                Get the <code>roundedCorners</code> property.
+                            </p>
+                            <pre><code>var roundedCorners = $('#jqxTextArea').jqxTextArea('roundedCorners'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/d6f1z2m6/">roundedCorners
+                                                                                        is set to false
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span51'>rtl</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>Sets or gets a value indicating whether widget's elements are aligned to support locales using right-to-left fonts.</p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>rtl</code> property.
+                            </p>
+                            <pre><code>$('#jqxTextArea').jqxTextArea({ rtl : true }); </code></pre>
+                            <p>
+                                Get the <code>rtl</code> property.
+                            </p>
+                            <pre><code>var rtl = $('#jqxTextArea').jqxTextArea('rtl'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/dednheqt/">rtl is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span20'>scrollBarSize</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>15
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the size of the scrollbar.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>scrollBarSize</code> property.
+                            </p>
+                            <pre><code>$('#jqxTextArea').jqxTextArea({ scrollBarSize: 20 });</code></pre>
+                            <p>
+                                Get the <code>scrollBarSize</code> property.
+                            </p>
+                            <pre><code>var scrollBarSize = $('#jqxTextArea').jqxTextArea('scrollBarSize');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/829tqnop/">scrollBarSize is set to 20</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span4'>searchMode</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'default'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the search mode. When the user types into the textarea,
+                                                                                    the widget tries to find the searched item using the entered text and the selected search mode.
+                            </p>
+                            <b>Possible Values:</b>
+                            <br />
+                            <pre><code>'none'</code></pre>
+                            <pre><code>'contains'</code></pre>
+                            <pre><code>'containsignorecase'</code></pre>
+                            <pre><code>'equals'</code></pre>
+                            <pre><code>'equalsignorecase'</code></pre>
+                            <pre><code>'startswithignorecase'</code></pre>
+                            <pre><code>'startswith'</code></pre>
+                            <pre><code>'endswithignorecase'</code></pre>
+                            <pre><code>'endswith'</code></pre>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>searchMode</code> property .
+                            </p>
+                            <pre><code>$("#jqxTextArea").jqxTextArea({ searchMode: 'contains' }); </code></pre>
+                            <p>
+                                Get the <code>searchMode</code> property.
+                            </p>
+                            <pre><code>var searchMode = $('#jqxTextArea').jqxTextArea('searchMode'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/14s2s56x/">searchMode is set to 'containsignorecase'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span5'>source</span>
+                    </td>
+                    <td>
+                        <span>Array, function</span>
+                    </td>
+                    <td>[]
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets the widget's data source. The 'source' function is passed two arguments, the textarea's value and a callback function. The 'source' function may be used synchronously by returning an array of items or asynchronously via the callback.
+                            </p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Initialize a jqxTextArea with the <code>source</code> property specified.
+                            </p>
+                            <pre><code>
+var countries = new Array("Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burma", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo, Democratic Republic", "Congo, Republic of the", "Costa Rica", "Cote d'Ivoire", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Greenland", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Mongolia", "Morocco", "Monaco", "Mozambique", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Samoa", "San Marino", " Sao Tome", "Saudi Arabia", "Senegal", "Serbia and Montenegro", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "Spain", "Sri Lanka", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe");
+$("#jqxTextArea").jqxTextArea({ placeHolder: "Enter a Country", height: 25, width: 200, minLength: 1,  source: countries });
+                    </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/6ogdg365/">source is set to a custom array</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span63'>theme</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>''
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets the widget's theme.
+                            </p>
+                            jQWidgets uses a pair of css files - jqx.base.css and jqx.[theme name].css. The base stylesheet creates the styles related to the widget's layout like margin, padding, border-width, position. The second css file applies the widget's colors and backgrounds. The jqx.base.css should be included before the second CSS file.
+                                                                                In order to set a theme, you need to do the following:
+                                                                                <ul>
+                                                                                    <li>Include the theme's CSS file after jqx.base.css.<br />
+                                                                                        The following code example adds the 'energyblue' theme.
+                                                                                        <pre><code>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.base.css&quot; type=&quot;text/css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.energyblue.css&quot; type=&quot;text/css&quot; /&gt;
+</code></pre>
+</code></pre>
+                                                                                    </li>
+                                                                                    <li>Set the widget's theme property to 'energyblue' when you initialize it.
+                                                                                    </li>
+                                                                                </ul>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/r2n1dpcL/">theme is set to 'energyblue'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span36'>valueMember</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>''
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the valueMember of the Items. The valueMember specifies the name of an object property to set as a 'value' of the list items. The name is contained in the collection specified by the 'source' property.
+                            </p>
+                            <h4>Code example
+                            </h4>
+                            <p>
+                                Set the <code>valueMember</code> property.
+                            </p>
+                            <pre><code>$("#jqxTextArea").jqxTextArea({ valueMember: 'lastName' });</code></pre>
+                            <p>
+                                Get the <code>valueMember</code> property.
+                            </p>
+                            <pre><code>var valueMember = $('#jqxTextArea').jqxTextArea('valueMember'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/wedv1vyv/">valueMember is set to "CompanyName"</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span1'>width</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the jqxTextArea's width.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Set the <code>width</code> property.
+                            </p>
+                            <pre><code>$('#jqxTextArea').jqxTextArea({ width: 200 });</code></pre>
+                            <p>
+                                Get the <code>width</code> property.
+                            </p>
+                            <pre><code>var width = $('#jqxTextArea').jqxTextArea('width');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/s9h7Lxgs/">width is set to 150</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Events
+                        </h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span27'>change</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the value is changed.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Bind to the <code>change</code> event by type: jqxTextArea.
+                            </p>
+                            <pre><code>
+$('#jqxTextArea').on('change', function(event) {
+    var value = $('#jqxTextArea').val();
+    var type = event.args.type; // keyboard, mouse or null depending on how the value was changed.
+});
+                         </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/ve4x5u39/">Bind to the change event by type: jqxTextArea.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span15'>close</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the auto-suggest popup is closed.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Bind to the <code>close</code> event by type: jqxTextArea.
+                            </p>
+                            <pre><code>$('#jqxTextArea').on('close', function (event) {
+    var popup = event.args.popup;
+});
+                        </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/wqdcsq43/">Bind to the close event by type: jqxTextArea.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span14'>open</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the auto-suggest popup is opened.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Bind to the <code>open</code> event by type: jqxTextArea.
+                            </p>
+                            <pre><code>$('#jqxTextArea').on('open', function (event) {
+    var popup = event.args.popup;
+});
+                        </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/rwtxas96/">Bind to the open event by type: jqxTextArea.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span13'>select</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when an item is selected from the auto-suggest popup.
+                            </p>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Bind to the <code>select</code> event by type: jqxTextArea.
+                            </p>
+                            <pre><code>$('#jqxTextArea').on('select', function (event) {
+    if (event.args) {
+        var item = event.args.item;
+        var label = item.label;
+        var value = item.value;
+    }
+});
+                        </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/pg3j2f1n/">Bind to the select event by type: jqxTextArea.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Methods
+                        </h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span68'>destroy</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Destroys the widget.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Invoke the <code>destroy</code> method.
+                            </p>
+                            <pre><code>$('#jqxTextArea').jqxTextArea('destroy'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/4v0Lwxkd/">destroys the jqxTextArea</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span24'>focus</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Focuses the widget.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Invoke the <code>focus</code> method.
+                            </p>
+                            <pre><code>$('#jqxTextArea').jqxTextArea('focus'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/t25k2Lch/">focuses the jqxTextArea</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span23'>refresh</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Refreshes the widget.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Invoke the <code>refresh</code> method.
+                            </p>
+                            <pre><code>$('#jqxTextArea').jqxTextArea('refresh');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/6pcc7g6b/">refreshes the jqxTextArea</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span11'>render</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Renders the widget.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Invoke the <code>render</code> method.
+                            </p>
+                            <pre><code>$('#jqxTextArea').jqxTextArea('render');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/edzvgfeg/">renders the jqxTextArea</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span18'>selectAll</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Selects the text in the textarea.
+                            </p>
+                              <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Invoke the <code>selectAll</code> method.
+                            </p>
+                            <pre><code>$('#jqxTextArea').jqxTextArea('selectAll'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/4nh5zjby/">selects all of the items in the jqxTextArea</a>
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span12'>val</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the value.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>value</em></td>
+                                            <td>String</td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>String</em>
+                            </div>
+                            <h4>Code examples
+                            </h4>
+                            <p>
+                                Get the <code>value</code>:
+                            </p>
+                            <pre><code>var value = $('#jqxTextArea').jqxTextArea('val'); or var value = $('#jqxTextArea').val();</code></pre>
+                            <p>
+                                Set the <code>value</code>:
+                            </p>
+                            <pre><code>$('#jqxTextArea').jqxTextArea('val', 'New Value'); or $('#jqxTextArea').val('New Value');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/qpq7s65x/">sets the jqxTextArea value</a>
+                            </div>
+                            <pre><code>$('#jqxTextArea').jqxTextArea('val', {label: "Item 1", value: "1"});</code></pre>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br />
+        </div>
+ </body>
+</html>

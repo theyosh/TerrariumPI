@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxChart waterfall series with logarithmic axis</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.waterfall.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var sampleData = [
+                { a: 3, b: 9 },
+                { a: 5, b: 7 },
+                { a: 2, b: 9 },
+                { a: 10, b: 15 },
+                { a: 9, b: 7 },
+                { a: 15, b: 10 },
+                { a: 7, b: 5 },
+                { total: true }
+            ];
+
+            var settings = {
+                title: "Waterfall series with logarithmic axis",
+                description: "Logarithmic base 2",
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                source: sampleData,
+                xAxis:
+                {
+                    gridLines: { visible: true },
+                    tickMarks: { visible: true }
+                },
+                valueAxis: {
+                    logarithmicScale: true,
+                    logarithmicScaleBase: 2,
+                    title: { text: 'Value<br>' },
+                    labels:
+                    {
+                        formatSettings: { decimalPlaces: 2 },
+                        horizontalAlignment: 'right'
+                    }
+                },
+                seriesGroups:
+                [
+                    {
+                        type: 'waterfall',
+                        columnsMaxWidth: 50,
+                        series: 
+                        [
+                            { dataField: 'a', displayText: 'A' },
+                            { dataField: 'b', displayText: 'B', summary: 'total' }
+                        ]
+                    }
+                ]
+            };
+
+            $('#chartContainer').jqxChart(settings);
+
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='chartContainer' style="width:850px; height:500px">
+    </div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Button Group Templates</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttongroup.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxradiobutton.js"></script>
+</head>
+<body class='default'>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {                
+                // Create jqxButton widgets.
+                $("#Default").jqxButtonGroup({ mode: 'checkbox' });
+                $("#Primary").jqxButtonGroup({ template: "primary", mode: 'checkbox' });
+                $("#Success").jqxButtonGroup({ template: "success", mode: 'checkbox' });
+                $("#Info").jqxButtonGroup({ template: "info", mode: 'checkbox' });
+                $("#Warning").jqxButtonGroup({ template: "warning", mode: 'checkbox' });
+                $("#Danger").jqxButtonGroup({ template: "danger", mode: 'checkbox' });
+            });
+        </script>
+        Default
+        <div id='Default'>
+            <button style="padding:4px 16px;" id="Left">
+                Left</button>
+            <button style="padding:4px 16px;" id="Center">
+                Center</button>
+            <button style="padding:4px 16px;" id="Right">
+                Right</button>
+        </div><br />
+        <div>Primary</div>
+        <div id='Primary'>
+            <button style="padding:4px 16px;" id="Button1">
+                Left</button>
+            <button style="padding:4px 16px;" id="Button2">
+                Center</button>
+            <button style="padding:4px 16px;" id="Button3">
+                Right</button>
+        </div><br />
+       <div>Success</div>
+        <div id='Success'>
+            <button style="padding:4px 16px;" id="Button4">
+                Left</button>
+            <button style="padding:4px 16px;" id="Button5">
+                Center</button>
+            <button style="padding:4px 16px;" id="Button6">
+                Right</button>
+        </div><br />
+         <div>Info</div>
+   
+        <div id='Info'>
+            <button style="padding:4px 16px;" id="Button7">
+                Left</button>
+            <button style="padding:4px 16px;" id="Button8">
+                Center</button>
+            <button style="padding:4px 16px;" id="Button9">
+                Right</button>
+        </div><br />
+          <div>Warning</div>
+   
+        <div id='Warning'>
+            <button style="padding:4px 16px;" id="Button10">
+                Left</button>
+            <button style="padding:4px 16px;" id="Button11">
+                Center</button>
+            <button style="padding:4px 16px;" id="Button12">
+                Right</button>
+        </div><br />
+    <div>Danger</div>
+   
+        <div id='Danger'>
+            <button style="padding:4px 16px;" id="Button13">
+                Left</button>
+            <button style="padding:4px 16px;" id="Button14">
+                Center</button>
+            <button style="padding:4px 16px;" id="Button15">
+                Right</button>
+        </div>
+
+    </div>
+</body>
+</html>

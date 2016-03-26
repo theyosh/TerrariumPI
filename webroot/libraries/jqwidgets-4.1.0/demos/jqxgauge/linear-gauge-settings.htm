@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Gauge, Gauge, Linear Gauge, Vertical Gauge, Horizontal Gauge" />
+    <title id='Description'>This sample demonstrates the basic Linear Gauge settings.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxexpander.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgauge.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxslider.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var majorTicks = { size: '10%', interval: 10 },
+                minorTicks = { size: '5%', interval: 2.5, style: { 'stroke-width': 1, stroke: '#aaaaaa'} },
+                labels = { interval: 20 };
+            $('#gauge').jqxLinearGauge({
+                orientation: 'vertical',
+                labels: labels,
+                ticksMajor: majorTicks,
+                ticksMinor: minorTicks,
+                max: 60,
+                value: -60,
+                pointer: { size: '6%' },
+                colorScheme: 'scheme05',
+                ranges: [
+                { startValue: -10, endValue: 10, style: { fill: '#FFF157', stroke: '#FFF157'} },
+                { startValue: 10, endValue: 35, style: { fill: '#FFA200', stroke: '#FFA200'} },
+                { startValue: 35, endValue: 60, style: { fill: '#FF4800', stroke: '#FF4800'}}]
+            });
+            $('#gauge').jqxLinearGauge('value', 50);
+
+            $('#panel').jqxExpander({ width: 120, width: 280, height: 310, toggleMode: 'none', showArrow: false});
+            $('#showAnimationButton').jqxButton({ width: 85});
+
+            $('#isVerticalCheckbox').jqxCheckBox({ checked: true});
+            $('#showTicksCheckbox').jqxCheckBox({ checked: true});
+            $('#showLabelsCheckbox').jqxCheckBox({ checked: true});
+            $('#showRangesCheckbox').jqxCheckBox({ checked: true});
+            $('#showBackgroundCheckbox').jqxCheckBox({ checked: true});
+
+            $('#labelsNearRadio').jqxRadioButton({  groupName: 'labels-position' });
+            $('#labelsFarRadio').jqxRadioButton({  groupName: 'labels-position' });
+            $('#labelsBothRadio').jqxRadioButton({ checked: true,  groupName: 'labels-position' });
+            $('#ticksNearRadio').jqxRadioButton({  groupName: 'ticks-position' });
+            $('#ticksFarRadio').jqxRadioButton({  groupName: 'ticks-position' });
+            $('#ticksBothRadio').jqxRadioButton({ checked: true,  groupName: 'ticks-position' });
+
+            $('#isVerticalCheckbox').on('change', function (e) {
+                if (e.args.checked) {
+                    $('#gauge').jqxLinearGauge('width', '100px');
+                    $('#gauge').jqxLinearGauge('height', '300px');
+                    $('#gauge').jqxLinearGauge('orientation', 'vertical');
+                } else {
+                    $('#gauge').jqxLinearGauge('height', '100px');
+                    $('#gauge').jqxLinearGauge('width', '300px');
+                    $('#gauge').jqxLinearGauge('orientation', 'horizontal');
+                }
+            });
+
+            $('#showTicksCheckbox').on('change', function (e) {
+                if (e.args.checked) {
+                    majorTicks.visible = true;
+                    minorTicks.visible = true;
+                } else {
+                    majorTicks.visible = false;
+                    minorTicks.visible = false;
+                }
+                $('#gauge').jqxLinearGauge('ticksMajor', majorTicks);
+                $('#gauge').jqxLinearGauge('ticksMinor', minorTicks);
+            });
+
+            $('#showLabelsCheckbox').on('change', function (e) {
+                if (e.args.checked) {
+                    labels.visible = true;
+                } else {
+                    labels.visible = false;
+                }
+                $('#gauge').jqxLinearGauge('labels', labels);
+            });
+
+            $('#showRangesCheckbox').on('change', function (e) {
+                if (e.args.checked) {
+                    $('#gauge').jqxLinearGauge('showRanges', true);
+                } else {
+                    $('#gauge').jqxLinearGauge('showRanges', false);
+                }
+            });
+
+            $('#showBackgroundCheckbox').on('change', function (e) {
+                if (e.args.checked) {
+                    $('#gauge').jqxLinearGauge('background', { visible: true });
+                } else {
+                    $('#gauge').jqxLinearGauge('background', { visible: false });
+                }
+            });
+
+            $('#labelsNearRadio').on('checked', function () {
+                labels.position = 'near';
+                $('#gauge').jqxLinearGauge('labels', labels);
+            });
+            $('#labelsFarRadio').on('checked', function () {
+                labels.position = 'far';
+                $('#gauge').jqxLinearGauge('labels', labels);
+            });
+            $('#labelsBothRadio').on('checked', function () {
+                labels.position = 'both';
+                $('#gauge').jqxLinearGauge('labels', labels);
+            });
+            $('#ticksNearRadio').on('checked', function () {
+                $('#gauge').jqxLinearGauge('ticksPosition', 'near');
+            });
+            $('#ticksFarRadio').on('checked', function () {
+                $('#gauge').jqxLinearGauge('ticksPosition', 'far');
+            });
+            $('#ticksBothRadio').on('checked', function () {
+                $('#gauge').jqxLinearGauge('ticksPosition', 'both');
+            });
+            $('#showAnimationButton').on('click', function () {
+                $('#gauge').jqxLinearGauge('animationDuration', 0);
+                $('#gauge').jqxLinearGauge('value', -60);
+                $('#gauge').jqxLinearGauge('animationDuration', 1000);
+                $('#gauge').jqxLinearGauge('value', 50);
+            });
+        });
+    </script>
+    <style type="text/css">
+    .demo-options
+    {
+        list-style: none;
+        padding: 0px;
+        margin: 10px;
+    }
+    .demo-options li
+    {
+        padding: 3px;
+        font-family: Verdana;
+        font-size: 12px;        
+    }
+    </style>
+</head>
+<body class='default'>
+        <div class="demo-gauge">
+        <div id="gauge" style="margin-left: 20px; float: left;"></div>
+        <div id="panel" style="margin-left: 330px;">
+            <div class="demo-options-header">
+                Options
+            </div>
+            <div>
+                <div id="isVerticalCheckbox" style="margin-bottom: 4px; margin-left: 10px; margin-top: 10px;">Is vertical</div>
+                <br />
+                <div>
+                    <table style="float:left; margin-left: 10px;">
+                        <tr>
+                            <td>Labels position:</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="labelsNearRadio">Near</div>                                
+                            </td>
+                        </tr>   
+                        <tr>
+                            <td>
+                                <div id="labelsFarRadio">Far</div>
+                            </td>
+                        </tr>   
+                        <tr>
+                            <td>
+                                <div id="labelsBothRadio">Both</div>
+                            </td>
+                        </tr>                            
+                    </table>
+                    <table style="float: right; margin-right: 10px;">
+                        <tr>
+                            <td>Ticks position:</td>
+                        </tr>                        
+                        <tr>
+                            <td>
+                                <div id="ticksNearRadio">Near</div>
+                            </td>
+                        </tr>   
+                        <tr>
+                            <td>
+                                <div id="ticksFarRadio">Far</div>
+                            </td>
+                        </tr>   
+                        <tr>
+                            <td>
+                                <div id="ticksBothRadio">Both</div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="clear: both;"></div>
+                </div>
+                <br />
+                <div id="showTicksCheckbox" style="margin-bottom: 4px; margin-left: 10px;">Show ticks</div>
+                <div id="showLabelsCheckbox" style="margin-bottom: 4px; margin-left: 10px;">Show labels</div>
+                <div id="showRangesCheckbox" style="margin-bottom: 4px; margin-left: 10px;">Show ranges</div>
+                <div id="showBackgroundCheckbox" style="margin-bottom: 4px; margin-left: 10px;">Show background</div>
+                <br />
+                <div id="showAnimationButton" style="margin: auto; text-align: center;">Reset value</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

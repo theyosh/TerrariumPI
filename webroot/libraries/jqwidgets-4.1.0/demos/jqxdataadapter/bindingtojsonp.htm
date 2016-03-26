@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example shows how to bind the jqxDataAdapter to Remote Data.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <style type="text/css">
+        table {
+            font-family: verdana,arial,sans-serif;
+            font-size: 11px;
+            color: #333333;
+            border-width: 1px;
+            border-color: #666666;
+            border-collapse: collapse;
+        }
+
+            table th {
+                border-width: 1px;
+                padding: 8px;
+                border-style: solid;
+                border-color: #666666;
+                background-color: #dedede;
+            }
+
+            table td {
+                border-width: 1px;
+                padding: 8px;
+                border-style: solid;
+                border-color: #666666;
+                background-color: #ffffff;
+            }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "jsonp",
+                datafields: [
+                    { name: 'countryName', type: 'string' },
+                    { name: 'name', type: 'string' },
+                    { name: 'population', type: 'float' },
+                    { name: 'continentCode', type: 'string' }
+                ],
+                url: "http://api.geonames.org/searchJSON",
+                data: {
+                    featureClass: "P",
+                    style: "full",
+                    maxRows: 50,
+                    username: "jqwidgets"
+                }
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                    // get data records.
+                    var records = dataAdapter.records;
+                    // get the length of the records array.
+                    var length = records.length;
+                    // loop through the records and display them in a table.
+                    var html = "<table border='1'><tr>"
+                    html += "<th>Country Name</th>"
+                    html += "<th>Name</th>"
+                    html += "<th>Population</th>"
+                    html += "<th>Continent Code</th>"
+                    html += "</tr>";
+
+                    for (var i = 0; i < 20; i++) {
+                        var record = records[i];
+                        html += "<tr>";
+                        html += "<td>" + record['countryName'] + "</td>";
+                        html += "<td>" + record["name"] + "</td>";
+                        html += "<td>" + record["population"] + "</td>";
+                        html += "<td>" + record["continentCode"] + "</td>";
+                        html += "</tr>";
+                    }
+                    html += "</table>";
+                    $("#table").html(html);
+                },
+                loadError: function (jqXHR, status, error) {
+                },
+                beforeLoadComplete: function (records) {
+
+                }
+            });
+            // perform data binding.
+            dataAdapter.dataBind();
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="table">
+        Loading...
+    </div>
+</body>
+</html>

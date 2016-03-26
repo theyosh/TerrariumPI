@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxChart Line Series Example</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source = {
+                datafields: [{ name: 'date' }, { name: 'quantity' }, { name: 'description' }],
+                root: "orders",
+                record: "order",
+                datatype: "xml",
+                url: '../sampledata/xmldata.xml'
+            }
+            var dataAdapter = new $.jqx.dataAdapter(source);
+			
+            // prepare jqxChart settings
+            var settings = {
+                title: "Orders for January - May",
+                showLegend: true,
+                enableAnimations: true,
+                source: dataAdapter,
+                xAxis: {
+                    dataField: 'date',
+                    formatFunction: function (value) {
+                        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                        return months[new Date(value).getMonth()];
+                    },
+                    showGridLines: true
+                },
+                colorScheme: 'scheme04',
+                seriesGroups: [{
+                    type: 'column',
+                    valueAxis: {
+                        displayValueAxis: true,
+                        axisSize: 'auto',
+                        tickMarksColor: '#888888'
+                    },
+                    series: [{ dataField: 'quantity', displayText: 'Quantity' }]
+                }]
+            };
+			
+            // setup the chart
+            $('#chartContainer').jqxChart(settings);
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='chartContainer' style="width: 850px; height: 500px">
+    </div>
+</body>
+</html>

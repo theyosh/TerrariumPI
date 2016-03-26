@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Login Form";
+}
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#submitButton').jqxButton({height: 25 });
+            $('#rememberMe').jqxCheckBox({ width: 130 });
+            $('#username').jqxInput({ width: 130, height: 25 });
+            $('#password').jqxPasswordInput({ width: 130, height: 25 });
+        
+            // add validation rules.
+            $('#form').jqxValidator({
+                rules: [
+                       { input: '#username', message: 'Username is required!', action: 'keyup, blur', rule: 'required' },
+                       { input: '#username', message: 'Your username must start with a letter!', action: 'keyup, blur', rule: 'startWithLetter' },
+                       { input: '#username', message: 'Your username must be between 3 and 12 characters!', action: 'keyup, blur', rule: 'length=3,12' },
+                       { input: '#password', message: 'Password is required!', action: 'keyup, blur', rule: 'required' },
+                       { input: '#password', message: 'Your password must be between 4 and 12 characters!', action: 'keyup, blur', rule: 'length=4,12' }
+                ]
+            });
+            // validate form.
+            $("#submitButton").click(function () {
+                var validationResult = function (isValid) {
+                    if (isValid) {
+                        // Submit the Form.
+                        $("#form").submit();
+                    }
+                }
+                // Validate the Form.
+                $('#form').jqxValidator('validate', validationResult);
+            });
+            $("#form").on('validationSuccess', function () {
+                // Display the Server's Response which came as result of the Form Submit.
+                $("#form-iframe").fadeIn('fast');
+            });
+        });
+    </script>
+}
+<form class="form" id="form" target="form-iframe" method="post" action="/Widgets/Login" style="font-size: 13px; font-family: Verdana; width: 650px;">
+    <table>
+        <tr>
+            <td>Username:</td>
+            <td><input name="username" type="text" id="username" /></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input name="password" type="password" id="password" /></td>
+        </tr>
+  <tr>
+            <td colspan="2" style="padding: 5px;"><div name="rememberMe" id="rememberMe" style="margin-left: 50px;">Keep me logged in on this computer</div></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;"><button type="button" id="submitButton">Login</button></td>
+        </tr>
+    </table>
+    <div class="prompt">*For successful login, username=admin, password=admin123</div>
+</form>
+<iframe id="form-iframe" name="form-iframe" style="width: 800px; height: 400px;" frameborder="0"></iframe>

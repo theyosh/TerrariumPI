@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Window, Window Widget, Window" />
+    <meta name="description" content="This demo demonstrates how to trigger some of the jqxWindow events like open, closed and moved." />
+    <title id='Description'>This demo demonstrates how to trigger some of the jqxWindow events like open, closed and moved.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript">
+        function capitaliseFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+        function displayEvent(event) {
+            var eventData = 'Event: ' + capitaliseFirstLetter(event.type);
+            if (event.type === 'moved') {
+                eventData += ', X: ' + event.args.x + ', Y: ' + event.args.y;
+            }
+            if (event.type === 'close') {
+                eventData += ', Dialog result: ';
+                if (event.args.dialogResult.OK) {
+                    eventData += 'OK';
+                } else if (event.args.dialogResult.Cancel) {
+                    eventData += 'Cancel';
+                } else {
+                    eventData += 'None';
+                }
+            }
+            $('#events').jqxPanel('prepend', '<div style="margin-top: 5px;">' + eventData + '</div>');
+        }
+        function addEventListeners() {
+            //Closed event
+            $('#eventWindow').on('close', function (event) {
+                displayEvent(event);
+            });
+            //Dragstarted event
+            $('#eventWindow').on('moved', function (event) {
+                displayEvent(event);
+            });
+            //Open event
+            $('#eventWindow').on('open', function (event) {
+                displayEvent(event);
+            });
+            $('#showWindowButton').mousedown(function () {
+                $('#eventWindow').jqxWindow('open');
+            });
+        }
+        function createElements() {
+            var jqxWidget = $('#jqxWidget');
+            var offset = jqxWidget.offset();
+
+            $('#eventWindow').jqxWindow({
+                position: { x: offset.left + 50, y: offset.top + 50} ,
+                maxHeight: 150, maxWidth: 280, minHeight: 30, minWidth: 250, height: 145, width: 270,
+                resizable: false, isModal: true, modalOpacity: 0.3,
+                okButton: $('#ok'), cancelButton: $('#cancel'),
+                initContent: function () {
+                    $('#ok').jqxButton({ width: '65px' });
+                    $('#cancel').jqxButton({ width: '65px' });
+                    $('#ok').focus();
+                }
+            });
+            $('#events').jqxPanel({ height: '250px', width: '450px' });
+            $('#showWindowButton').jqxButton({ width: '100px' });
+        }
+        $(document).ready(function () {
+            addEventListeners();
+            createElements();
+            $("#jqxWidget").css('visibility', 'visible');
+        });
+    </script>
+</head>
+<body class='default'>
+    <div style="visibility: hidden;" id="jqxWidget">
+        <input type="button" value="Show" id="showWindowButton" />
+        <div style="width: 100%; height: 650px; border: 0px solid #ccc; margin-top: 10px;"
+            id="mainDemoContainer">
+            <div>Events Log:</div>
+            <div id="events" style="width: 300px; height: 200px; border-width: 0px;">
+            </div>
+            <div id="eventWindow">
+                <div>
+                    <img width="14" height="14" src="../../images/help.png" alt="" />
+                    Modal Window</div>
+                <div>
+                    <div>
+                        Please click "OK", "Cancel" or the close button to close the modal window. The dialog
+                        result will be displayed in the events log.
+                    </div>
+                    <div>
+                    <div style="float: right; margin-top: 15px;">
+                        <input type="button" id="ok" value="OK" style="margin-right: 10px" />
+                        <input type="button" id="cancel" value="Cancel" />
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

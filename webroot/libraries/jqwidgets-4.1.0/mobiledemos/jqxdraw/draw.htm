@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title id='Description'>jQWidgets Draw - Mobile Example
+    </title>
+    <link rel="stylesheet" href="../styles/demo.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.windowsphone.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.blackberry.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.android.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.mobile.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../simulator.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = prepareSimulator("draw");
+            $('#drawContainer').jqxDraw();
+
+            var renderer = $('#drawContainer').jqxDraw('getInstance');
+            var size = renderer.getSize();
+
+            // create a circle
+            // params: cx, cy, radius, params
+            var circleElement = renderer.circle(250, 150, 50, {});
+
+            // set the fill color and border color of the circle
+            // params: element, attributes
+            renderer.attr(circleElement, { fill: 'lightblue', stroke: 'darkblue' });
+
+            // draw a rectangle around the entire area
+            // params: x, y, width, height, attributes
+            var borderElement = renderer.rect(0, 0, size.width, size.height, { stroke: '#777777', fill: 'transparent' });
+
+            // draw a path
+            // params: line command, attributes
+            var pathElement = renderer.path("M 100,100 L 150, 130 C 130,130 180,190 150,150", { stroke: '#777777', fill: 'red' });
+
+            // draw a line
+            // params: x1, y1, x2, y2, attributes
+            renderer.line(400, 100, 400, 200, { stroke: 'blue', 'stroke-width': 6 });
+            renderer.line(250, 50, 250, 90, { stroke: 'green', 'stroke-width': 6 });
+
+            // draw text
+            // params: text, x, y, width, height, angle, params, clip, halign, valign, rotateAround
+            renderer.text("Drawing shapes", 50, 20, undefined, undefined, 0, { 'class': 'largeText', fill: 'yellow', stroke: 'orange' }, false, 'center', 'center', 'centermiddle');
+            renderer.text("This is rotated text", 400, 200, undefined, undefined, 45, { 'class': 'smallText' }, false, 'center', 'center', 'centermiddle');
+
+
+            renderer.refresh();
+            initSimulator("draw");
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="demoContainer" class="device-mobile">
+        <div id="container" class="device-mobile-container">
+            <div id='drawContainer' style="background: #fff; width: 100%; height: 100%">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

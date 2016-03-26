@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="Javascript Button, jQuery Button, CheckBox, Toggle Button, Repeat Button, Radio Button, Link Button, Button" />
+    <meta name="description" content="Javascript Button Text Positioning." />
+    <title id='Description'>Button Image Positioning</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            // Create jqxButton widgets.
+            $("#Button1").jqxButton({ imgSrc: "../../images/twitter.png", imgPosition: "top", width: 120, height: 50 });
+            $("#Button2").jqxButton({ imgSrc: "../../images/twitter.png", imgPosition: "topLeft", width: 120, height: 50 });
+            $("#Button3").jqxButton({ imgSrc: "../../images/twitter.png", imgPosition: "topRight", width: 120, height: 50 });
+            $("#Button4").jqxButton({ imgSrc: "../../images/twitter.png", imgPosition: "center", width: 120, height: 50 });
+            $("#Button5").jqxButton({ imgSrc: "../../images/twitter.png", imgPosition: "left", width: 120, height: 50 });
+            $("#Button6").jqxButton({ imgSrc: "../../images/twitter.png", imgPosition: "right", width: 120, height: 50 });
+            $("#Button7").jqxButton({ imgSrc: "../../images/twitter.png", imgPosition: "bottom", width: 120, height: 50 });
+            $("#Button8").jqxButton({ imgSrc: "../../images/twitter.png", imgPosition: "bottomLeft", width: 120, height: 50 });
+            $("#Button9").jqxButton({ imgSrc: "../../images/twitter.png", imgPosition: "bottomRight", width: 120, height: 50 });
+        });
+    </script>
+</head>
+<body class='default'>
+    <table>
+        <tr>
+            <td>Top</td>
+            <td>Top Left</td>
+            <td>Top Right</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" id='Button1' />
+            </td>
+            <td>
+                <input type="button" id='Button2' />
+            </td>
+            <td>
+                <input type="button" id='Button3' />
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>Center</td>
+            <td>Left</td>
+            <td>Right</td>
+        </tr>
+         <tr>
+            <td>
+                <input type="button" id='Button4' />
+            </td>
+            <td>
+                <input type="button" id='Button5' />
+            </td>
+            <td>
+                <input type="button" id='Button6' />
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>Bottom</td>
+            <td>Bottom Left</td>
+            <td>Bottom Right</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" id='Button7' />
+            </td>
+            <td>
+                <input type="button" id='Button8' />
+            </td>
+            <td>
+                <input type="button" id='Button9' />
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

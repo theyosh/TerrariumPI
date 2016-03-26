@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>In this sample is demonstrated how to display aggregates in jqxGrid.</title>
+	<meta name="description" content="JavaScript Grid which has multiple built-in aggregates" /> 	
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.edit.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.aggregates.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="generatedata.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var data = generatedata(200);
+
+            var source =
+            {
+                localdata: data,
+                datatype: "array",
+                datafields:
+                [
+                    { name: 'firstname', type: 'string' },
+                    { name: 'lastname', type: 'string' },
+                    { name: 'productname', type: 'string' },
+                    { name: 'available', type: 'bool' },
+                    { name: 'quantity', type: 'number' },
+                    { name: 'price', type: 'number' }
+                ],
+                updaterow: function (rowid, rowdata) {
+                    // synchronize with the server - send update command   
+                }
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            // initialize jqxGrid
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 850,
+                source: dataAdapter,     
+                showstatusbar: true,
+                statusbarheight: 50,
+                editable: true,
+                showaggregates: true,
+                selectionmode: 'singlecell',
+                columns: [
+                  { text: 'First Name', columntype: 'textbox', datafield: 'firstname', width: 170 },
+                  { text: 'Last Name', datafield: 'lastname', columntype: 'textbox', width: 170 },
+                  { text: 'Product', datafield: 'productname', width: 170,
+                      aggregates: ['count',
+                          { 'Cappuccino Items':
+                            function (aggregatedValue, currentValue) {
+                                if (currentValue == "Cappuccino") {
+                                    return aggregatedValue + 1;
+                                }
+
+                                return aggregatedValue;
+                            }
+                          }
+                      ]
+                  },
+                  { text: 'In Stock', datafield: 'available', columntype: 'checkbox', width: 125,
+                      aggregates: [{ 'In Stock':
+                          function (aggregatedValue, currentValue) {
+                              if (currentValue) {
+                                  return aggregatedValue + 1;
+                              }
+
+                              return aggregatedValue;
+                          }
+                      },
+                      { 'Not In Stock':
+                          function (aggregatedValue, currentValue) {
+                              if (!currentValue) {
+                                  return aggregatedValue + 1;
+                              }
+
+                              return aggregatedValue;
+                          }
+                      }
+                     ]
+                  },
+                  { text: 'Quantity', datafield: 'quantity', width: 85, cellsalign: 'right', cellsformat: 'n2', aggregates: ['min', 'max'],
+                      aggregatesrenderer: function (aggregates) {
+                          var renderstring = "";
+                          $.each(aggregates, function (key, value) {
+                              var name = key == 'min' ? 'Min' : 'Max';
+                              renderstring += '<div style="position: relative; margin: 4px; overflow: hidden;">' + name + ': ' + value +'</div>';
+                          });
+                          return renderstring;
+                      }
+                  },
+                  { text: 'Price', datafield: 'price', cellsalign: 'right', cellsformat: 'c2', aggregates: ['sum', 'avg'] }
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div id="jqxgrid"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">This demo shows the default functionality of jqxComplexInput.
+        This widget can be used for inputting complex numbers and getting their real and
+        imaginary parts.</title>
+    <meta name="description" content="This demo shows the default functionality of jqxComplexInput. This widget can be used for inputting complex numbers and getting their real and imaginary parts." />
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcomplexinput.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxComplexInput").jqxComplexInput({ width: 250, height: 25, value: "15 + 7.2i" });
+
+            $("#getReal, #getImaginary").jqxButton({ width: 150 });
+
+            $("#getReal").click(function () {
+                var realPart = $("#jqxComplexInput").jqxComplexInput("getReal");
+                alert("Real part is " + realPart);
+            });
+            $("#getImaginary").click(function () {
+                var imaginaryPart = $("#jqxComplexInput").jqxComplexInput("getImaginary");
+                alert("Imaginary part is " + imaginaryPart);
+            });
+        });
+    </script>
+</head>
+<body>
+    <input id="jqxComplexInput" type="text" />
+    <div style="margin-top: 20px;">
+        <button id="getReal">
+            Get real part</button>
+        <button id="getImaginary">
+            Get imaginary part</button></div>
+</body>
+</html>

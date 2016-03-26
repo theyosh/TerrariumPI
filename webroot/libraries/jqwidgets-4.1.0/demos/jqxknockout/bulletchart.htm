@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">Integration of jqxBulletChart with Knockout</title>
+    <meta name="keywords" content="bullet chart, bullet chart Knockout integration, bullet graph, BulletChart, chart, jQuery bullet graph, jQuery bullet chart, jQWidgets, jqxBulletChart, jqxBulletChart Knockout integration, Knockout, Knockout integration" />
+    <meta name="description" content="Integration of jqxBulletChart with Knockout" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/json2.js"></script>
+    <script type="text/javascript" src="../../scripts/knockout-3.0.0.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbulletchart.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxknockout.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var viewModel = function (value, target) {
+                this.value = ko.observable(value);
+                this.setValue = ko.computed({
+                    read: this.value,
+                    write: function (value) {
+                        if (!isNaN(value))
+                            this.value(parseFloat(value)); // Write to underlying storage
+                    },
+                    owner: this
+                });
+
+                this.target = ko.observable(target);
+                this.setTarget = ko.computed({
+                    read: this.target,
+                    write: function (target) {
+                        if (!isNaN(target))
+                            this.target(parseFloat(target)); // Write to underlying storage
+                    },
+                    owner: this
+                });
+
+                this.disabled = ko.observable(false);
+            };
+            ko.applyBindings(new viewModel(29, 46));
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="gaugeContainer" data-bind="jqxBulletChart: {
+                width: 500,
+                height: 100,
+                title: 'Gold medals won<br />by Great Britain',
+                description: 'in the 2012 Summer Olympics',
+                ranges: [
+                    { startValue: 0, endValue: 25, color: '#FFD700' },
+                    { startValue: 25, endValue: 40, color: '#FFD700' },
+                    { startValue: 40, endValue: 50, color: '#FFD700' }
+                ],
+                pointer: { value: value, label: 'Won by Great Britain', size: '25%', color: '#A57164' },
+                target: { value: target, label: 'Won by the U.S.', size: 4, color: '#A57164' },
+                ticks: { position: 'far', interval: 10, size: 10 },
+                disabled: disabled}">
+    </div>
+    <table style='margin-top: 30px; margin-bottom: 10px;'>
+        <tr>
+            <td>
+                Value:
+            </td>
+            <td>
+                <input data-bind="value: setValue" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Target:
+            </td>
+            <td>
+                <input data-bind="value: setTarget" />
+            </td>
+        </tr>
+    </table>
+    <div data-bind="jqxCheckBox: {checked: disabled, width: '100px'}" style='margin-top: 10px;
+        margin-bottom: 10px;'>
+        Disabled</div>
+</body>
+</html>

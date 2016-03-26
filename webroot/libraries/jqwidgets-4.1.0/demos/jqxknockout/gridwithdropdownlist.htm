@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Click on a cell from the "Employee Name" column to begin an edit operation through a DropDownList editor.
+    </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/json2.js"></script>
+    <script type="text/javascript" src="../../scripts/knockout-3.0.0.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.edit.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxknockout.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            var GridModel = function () {
+                this.items = ko.observableArray();
+                var me = this;
+                var employeesSource =
+                   {
+                       datatype: "xml",
+                       datafields: [
+                           { name: 'FirstName', type: 'string' },
+                           { name: 'LastName', type: 'string' }
+                       ],
+                       root: "Employees",
+                       record: "Employee",
+                       id: 'EmployeeID',
+                       url: "../sampledata/employees.xml",
+                       async: false
+                   };
+
+                var employeesAdapter = new $.jqx.dataAdapter(employeesSource, {
+                    autoBind: true,
+                    beforeLoadComplete: function (records) {
+                        var data = new Array();
+                        // update the loaded records. Dynamically add EmployeeName and EmployeeID fields. 
+                        for (var i = 0; i < records.length; i++) {
+                            var employee = records[i];
+                            employee.EmployeeName = employee.FirstName + " " + employee.LastName;
+                            employee.EmployeeID = employee.uid;
+                            data.push(employee);
+                        }
+                        return data;
+                    }
+                });
+
+                // prepare the data
+                var ordersSource =
+                {
+                    datatype: "xml",
+                    datafields: [
+                        // name - determines the field's name.
+                        // value - the field's value in the data source.
+                        // values - specifies the field's values.
+                        // values.source - specifies the foreign source. The expected value is an array.
+                        // values.value - specifies the field's name in the foreign source. 
+                        // values.name - specifies the field's value in the foreign source. 
+                        // When the ordersAdapter is loaded, each record will have a field called "EmployeeName". The "EmployeeName" for each record comes from the employeesAdapter where the record's "EmployeeID" from orders.xml matches to the "EmployeeID" from employees.xml. 
+                        { name: 'EmployeeName', value: 'EmployeeID', values: { source: employeesAdapter.records, value: 'EmployeeID', name: 'EmployeeName' } },
+                        { name: 'EmployeeID', map: 'm\\:properties>d\\:EmployeeID' },
+                        { name: 'ShippedDate', map: 'm\\:properties>d\\:ShippedDate', type: 'date' },
+                        { name: 'Freight', map: 'm\\:properties>d\\:Freight', type: 'float' },
+                        { name: 'ShipName', map: 'm\\:properties>d\\:ShipName' },
+                        { name: 'ShipAddress', map: 'm\\:properties>d\\:ShipAddress' },
+                        { name: 'ShipCity', map: 'm\\:properties>d\\:ShipCity' },
+                        { name: 'ShipCountry', map: 'm\\:properties>d\\:ShipCountry' }
+                    ],
+                    root: "entry",
+                    record: "content",
+                    id: 'm\\:properties>d\\:OrderID',
+                    url: "../sampledata/orders.xml",
+                    pager: function (pagenum, pagesize, oldpagenum) {
+                        // callback called when a page or page size is changed.
+                    }
+                };
+                var ordersAdapter = new $.jqx.dataAdapter(ordersSource, {
+                    autoBind: true,
+                    loadComplete: function (records) {
+                        me.items(ordersAdapter.records);
+                    }
+                }
+                );
+            };
+
+            var model = new GridModel();
+
+            var source = {
+                localdata: model.items,
+                datatype: 'observablearray',
+                datafields: [
+                    { name: 'EmployeeID', type: 'number' },
+                    { name: 'EmployeeName', type: 'string' },
+                    { name: 'ShippedDate', type: 'date' },
+                    { name: 'Freight', type: 'float' },
+                    { name: 'ShipName', type: 'string' },
+                    { name: 'ShipAddress', type: 'string' },
+                    { name: 'ShipCity', type: 'string' },
+                    { name: 'ShipCountry', type: 'string' }]
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 670,
+                source: dataAdapter,
+                selectionmode: 'singlecell',
+                editable: true,
+                columns: [
+                    { text: 'Employee Name', datafield: 'EmployeeID', displayfield: 'EmployeeName', columntype: 'dropdownlist', width: 150 },
+                    { text: 'Ship City', datafield: 'ShipCity', width: 150 },
+                    { text: 'Ship Country', datafield: 'ShipCountry', width: 150 },
+                    { text: 'Ship Name', datafield: 'ShipName' }
+                ]
+            });
+
+
+            ko.applyBindings(model);
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="jqxgrid"></div>
+    <div style="overflow: auto; width: 670px; max-height: 300px; margin-top: 20px;">
+        <table>
+            <tbody data-bind="foreach: items">
+                <tr>
+                    <td data-bind="text: EmployeeID"></td>
+                    <td data-bind="text: EmployeeName"></td>
+                    <td data-bind="text: ShipCity"></td>
+                    <td data-bind="text: ShipCountry"></td>
+                    <td data-bind="text: ShipName"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

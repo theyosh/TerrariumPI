@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxChart Printing.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            // prepare data source
+            var source =
+            {
+                datatype: "csv",
+                datafields: [
+                    { name: 'Country' },
+                    { name: 'GDP' },
+                    { name: 'DebtPercent' },
+                    { name: 'Debt' }
+                ],
+                url: '../sampledata/gdp_dept_2010.txt'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "Economic comparison",
+                description: "GDP and Debt in 2010",
+                showLegend: true,
+                enableAnimations: true,
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                xAxis:
+                {
+                    dataField: 'Country'
+                },
+                colorScheme: 'scheme01',
+                seriesGroups:
+                    [
+                        {
+                            type: 'column',
+                            columnsGapPercent: 50,
+                            valueAxis:
+                            {
+                                unitInterval: 5000,
+                                title: { text: 'GDP & Debt per Capita($)<br>' }
+                            },
+                            series: [
+                                    { dataField: 'GDP', displayText: 'GDP per Capita' },
+                                    { dataField: 'Debt', displayText: 'Debt per Capita' }
+                                ]
+                        },
+                        {
+                            type: 'line',
+                            valueAxis:
+                            {
+                                unitInterval: 10,
+                                title: { text: 'Debt (% of GDP)' },
+                                gridLines: { visible: false },
+                                position: 'right'
+                            },
+                            series: [
+                                    { dataField: 'DebtPercent', displayText: 'Debt (% of GDP)' }
+                                ]
+                        }
+
+                    ]
+            };
+
+            // setup the chart
+            $('#chartContainer').jqxChart(settings);
+
+            $("#print").click(function () {
+                var content = $('#chartContainer')[0].outerHTML;
+                var newWindow = window.open('', '', 'width=800, height=500'),
+                document = newWindow.document.open(),
+                pageContent =
+                    '<!DOCTYPE html>' +
+                    '<html>' +
+                    '<head>' +
+                    '<meta charset="utf-8" />' +
+                    '<title>jQWidgets Chart</title>' +
+                    '</head>' +
+                    '<body>' + content + '</body></html>';
+                try
+                {
+                    document.write(pageContent);
+                    document.close();
+                    newWindow.print();
+                    newWindow.close();
+                }
+                catch (error) {
+                }
+            });
+
+            $("#print").jqxButton({});
+        });
+    </script>
+</head>
+<body class='default'>
+	<div id='host' style="margin: 0 auto; width: 850px;">
+		<div id='chartContainer' style="width: 850px; height: 500px;">
+		</div>
+		<div style='margin-top: 10px;'>
+			<input style='float: left;' id="print" type="button" value="Print" />
+		</div>
+	</div>
+</body>
+</html>

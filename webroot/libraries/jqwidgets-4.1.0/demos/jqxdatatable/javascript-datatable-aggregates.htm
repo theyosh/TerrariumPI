@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">Aggregates in jqxDataTable</title>
+    <meta name="description" content="This sample demonstrates how we can display aggregates in jQWidgets DataTable.">
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            // prepare the data
+            var source =
+            {
+                dataType: "xml",
+                dataFields: [
+                     { name: 'SupplierName', type: 'string' },
+                     { name: 'Quantity', type: 'number' },
+                     { name: 'OrderDate', type: 'date' },
+                     { name: 'OrderAddress', type: 'string' },
+                     { name: 'Freight', type: 'number' },
+                     { name: 'Price', type: 'number' },
+                     { name: 'City', type: 'string' },
+                     { name: 'ProductName', type: 'string' },
+                     { name: 'Address', type: 'string' }
+                ], 
+                url: '../sampledata/orderdetailsextended.xml',
+                root: 'DATA',
+                record: 'ROW'
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                    // data is loaded.
+                }
+            });
+            // create jqxDataTable.
+            $("#dataTable").jqxDataTable(
+            {
+                source: dataAdapter,
+                pageable: true,
+                altRows: true,
+                width: 850,
+                editable: true,
+                columnsResize: true,
+                showAggregates: true,
+                aggregatesHeight: 70,
+                autoRowHeight: false,
+                columns: [
+                  { text: 'Supplier Name', cellsAlign: 'center', align: 'center', dataField: 'SupplierName', width: 300 },
+                  { text: 'Product', cellsAlign: 'center', align: 'center', dataField: 'ProductName', width: 300 },
+                  { text: 'Quantity', dataField: 'Quantity', cellsFormat: 'd2', aggregates: ['avg', 'min', 'max'], cellsAlign: 'center', align: 'center', width: 120 },
+                  { text: 'Price', dataField: 'Price', cellsFormat: 'c2', align: 'center', cellsAlign: 'center', aggregates: ['sum', 'min', 'max'] }
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="dataTable">
+    </div>
+</body>
+</html>

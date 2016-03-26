@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">This demo shows a jqxFormattedInput which displays hexadecimal
+        numbers with upper case letters.</title>
+    <meta name="description" content="This demo shows a jqxFormattedInput which displays hexadecimal numbers with upper case letters." />
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxformattedinput.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxFormattedInput").jqxFormattedInput({ width: 250, height: 25, radix: 16, value: "1CF", upperCase: true });
+        });
+    </script>
+</head>
+<body>
+    <div id="jqxFormattedInput">
+        <input type="text" />
+        <div>
+        </div>
+    </div>
+</body>
+</html>

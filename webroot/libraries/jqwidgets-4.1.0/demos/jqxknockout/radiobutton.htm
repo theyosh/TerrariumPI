@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">Integration of jqxRadioButton with Knockout</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/json2.js"></script> 
+    <script type="text/javascript" src="../../scripts/knockout-3.0.0.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxknockout.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var viewModel = function () {
+                this.count = 0;
+                this.checked1 = ko.observable(true);
+                this.checked2 = ko.observable(false);
+                this.checked3 = ko.observable(false);
+                this.disabled = ko.observable(false);
+
+                // check checkbox.
+                this.check = function () {
+                    this.checked1(true);
+                }
+            };
+
+            ko.applyBindings(new viewModel());
+        });
+    </script>
+</head>
+<body class='default'>
+    <div data-bind="jqxRadioButton: {checked: checked1, disabled: disabled, width: '120px'}" style='margin-bottom: 10px;'>Radio Button 1</div>
+    <div data-bind="jqxRadioButton: {checked: checked2, disabled: disabled, width: '120px'}" style='margin-bottom: 10px;'>Radio Button 2</div>
+    <div data-bind="jqxRadioButton: {checked: checked3, disabled: disabled, width: '120px'}" style='margin-bottom: 10px;'>Radio Button 3</div>
+    <input data-bind="click: check, jqxButton: {}" type="button" value="Check First Item" />
+    <div data-bind="jqxCheckBox: {checked: disabled}" style='margin-top: 5px;' id="checkBox">Disabled</div>
+    <div style="margin-top: 10px;">
+        <span>Radio Button 1:</span><span data-bind="text: checked1"></span>
+    </div>
+    <div>
+        <span>Radio Button 2:</span><span data-bind="text: checked2"></span>
+    </div>
+    <div>
+        <span>Radio Button 3:</span><span data-bind="text: checked3"></span>
+    </div>
+</body>
+</html>

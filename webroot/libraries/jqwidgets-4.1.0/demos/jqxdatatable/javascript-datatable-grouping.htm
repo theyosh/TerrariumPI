@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title id="Description">Data Grouping in jqxDataTable</title>
+    <meta name="description" content="This sample demonstrates how we can Group Data by using jQWidgets DataTable.">
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script> 
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            // prepare the data
+            var source =
+            {
+                dataType: "xml",
+                dataFields: [
+                     { name: 'SupplierName', type: 'string' },
+                     { name: 'Quantity', type: 'number' },
+                     { name: 'OrderDate', type: 'date' },
+                     { name: 'OrderAddress', type: 'string' },
+                     { name: 'Freight', type: 'number' },
+                     { name: 'Price', type: 'number' },
+                     { name: 'City', type: 'string' },
+                     { name: 'ProductName', type: 'string' },
+                     { name: 'Address', type: 'string' }
+                ],
+                url: '../sampledata/orderdetailsextended.xml',
+                root: 'DATA',
+                record: 'ROW'
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                    // data is loaded.
+                }
+            });
+            // create jqxDataTable.
+            $("#dataTable").jqxDataTable(
+            {
+                source: dataAdapter,
+                pageable: true,
+                altRows: true,
+                sortable: true,
+                groups: ['SupplierName'],
+                width: 850,
+                groupsRenderer: function(value, rowData, level)
+                {
+                    return "Supplier Name: " + value;
+                },
+                columns: [
+                  { text: 'Supplier Name', hidden: true, cellsAlign: 'left', align: 'left', dataField: 'SupplierName', width: 280},
+                  { text: 'Product Name', cellsAlign: 'left', align: 'left', dataField: 'ProductName', width: 250 },
+                  { text: 'Quantity', dataField: 'Quantity', cellsformat: 'd', cellsAlign: 'right', align: 'right', width: 80 },
+                  { text: 'Price', dataField: 'Price', cellsformat: 'c2', align: 'right', cellsAlign: 'right', width: 70 },
+                  { text: 'Address', cellsAlign: 'center', align: 'center', dataField: 'Address', width: 250 },
+                  { text: 'City', cellsAlign: 'center', align: 'center', dataField: 'City' }
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="dataTable"></div>
+</body>
+</html>

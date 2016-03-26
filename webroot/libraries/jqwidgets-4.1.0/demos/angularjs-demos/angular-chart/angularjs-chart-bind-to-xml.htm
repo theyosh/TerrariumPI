@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS Chart Line Series Example</title>
+    <meta name="description" content="This is an example of AngularJS Chart. Line Chart Series are displayed." />	
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.core.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            // prepare the data
+            var source = {
+                datafields: [{ name: 'date' }, { name: 'quantity' }, { name: 'description' }],
+                root: "orders",
+                record: "order",
+                datatype: "xml",
+                url: '../../sampledata/xmldata.xml'
+            }
+            var dataAdapter = new $.jqx.dataAdapter(source);
+			
+            // prepare jqxChart settings
+            var settings = {
+                title: "Orders for January - May",
+                showLegend: true,
+                enableAnimations: true,
+                source: dataAdapter,
+                xAxis: {
+                    dataField: 'date',
+                    formatFunction: function (value) {
+                        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                        return months[new Date(value).getMonth()];
+                    },
+                    showGridLines: true
+                },
+                colorScheme: 'scheme04',
+                seriesGroups: [{
+                    type: 'line',
+                    valueAxis: {
+                        displayValueAxis: true,
+                        axisSize: 'auto',
+                        tickMarksColor: '#888888'
+                    },
+                    series: [{ dataField: 'quantity', displayText: 'Quantity' }]
+                }]
+            };
+			
+
+            $scope.chartSettings = settings;
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-chart id='chartContainer' jqx-settings="chartSettings" style="width: 850px; height: 500px"></jqx-chart>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">In jqxFormattedInput, decimal numbers can be displayed in exponential
+        notation. Furthermore, the val method can get the scientific and engineering notations
+        of the decimal number.</title>
+    <meta name="description" content="In jqxFormattedInput, decimal numbers can be displayed in exponential notation. Furthermore, the val method can get the scientific and engineering notations of the decimal number." />
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxformattedinput.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxFormattedInput").jqxFormattedInput({ width: 250, height: 25, radix: "decimal", decimalNotation: "exponential", value: "330000" });
+
+            $("#getDecimal, #getExponential, #getScientific, #getEngineering").jqxButton({ width: 175 });
+
+            $("#getDecimal").click(function () {
+                var decimalValue = $("#jqxFormattedInput").jqxFormattedInput("val", "decimal");
+                alert("Decimal value: " + decimalValue);
+            });
+
+            $("#getExponential").click(function () {
+                var exponentialValue = $("#jqxFormattedInput").jqxFormattedInput("val", "exponential");
+                alert("Exponential notation: " + exponentialValue);
+            });
+
+            $("#getScientific").click(function () {
+                var scientificValue = $("#jqxFormattedInput").jqxFormattedInput("val", "scientific");
+                alert("Scientific notation: " + scientificValue);
+            });
+
+            $("#getEngineering").click(function () {
+                var engineeringValue = $("#jqxFormattedInput").jqxFormattedInput("val", "engineering");
+                alert("Engineering notation: " + engineeringValue);
+            });
+        });
+    </script>
+</head>
+<body>
+    <input id="jqxFormattedInput" type="text" />
+    <div style="margin-top: 20px;">
+        <button id="getDecimal">
+            Get decimal value</button>
+        <button id="getExponential" style="margin-left: 5px;">
+            Get exponential notation</button><br />
+        <br />
+        <button id="getScientific">
+            Get scientific notation</button>
+        <button id="getEngineering" style="margin-left: 5px;">
+            Get engineering notation</button></div>
+</body>
+</html>

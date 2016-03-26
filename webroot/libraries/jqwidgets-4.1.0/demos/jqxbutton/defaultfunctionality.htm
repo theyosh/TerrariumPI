@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Button, CheckBox, Toggle Button, Repeat Button, Radio Button, Link Button, Button" />
+    <meta name="description" content="The jqxButton widget allows you to display a button on the Web page." />
+    <title id='Description'>The jqxButton widget allows you to display a button on the Web
+        page.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+
+            // Create jqxButton widgets.
+            $("#jqxButton").jqxButton({ width: 120, height: 40 });
+            $("#jqxSubmitButton").jqxButton({ width: 120, height: 40 });
+            $("#jqxDisabledButton").jqxButton({ disabled: true, width: 120, height: 40 });
+            $("#jqxImageButton").jqxButton({ width: 120, height: 40, imgSrc: "../../images/facebook.png" });
+            $("#jqxTextImageButton").jqxButton({ width: 120, height: 40, textImageRelation: "imageBeforeText", textPosition: "left", imgSrc: "../../images/twitter.png" });
+            $("#jqxHTMLButton").jqxButton({ width: 120, height: 40 });
+
+            // Subscribe to Click events.
+            $("#jqxButton").on('click', function ()
+            {
+                $("#events").find('span').remove();
+                $("#events").append('<span>Button Clicked</span');
+            });
+
+            $("#jqxImageButton").on('click', function ()
+            {
+                $("#events").find('span').remove();
+                $("#events").append('<span>Image Button Clicked</span');
+            });
+
+            $("#jqxHTMLButton").on('click', function ()
+            {
+                $("#events").find('span').remove();
+                $("#events").append('<span>HTML Button Clicked</span');
+                $("#jqxHTMLButton").jqxButton({ value: "<span style='font-style: italic;'>Thanks for clicking me!</span>" });
+            });
+
+            $("#jqxTextImageButton").on('click', function ()
+            {
+                $("#events").find('span').remove();
+                $("#jqxTextImageButton").jqxButton({ textImageRelation: "textBeforeImage", imgPosition: "left", textPosition: "center" });
+                $("#events").append('<span>Text/Image Button Clicked</span');
+            });
+
+            $("#jqxSubmitButton").on('click', function ()
+            {
+                $("#events").find('span').remove();
+                $("#events").append('<span>Submit Button Clicked</span');
+            });
+
+        });
+    </script>
+</head>
+<body class='default'>
+    <div>
+        <input type="button" value="Button" id='jqxButton' />
+    </div>
+    <div>
+        <input style='margin-top: 20px;' type="submit" value="Submit" id='jqxSubmitButton' />
+    </div>
+    <div>
+        <input style='margin-top: 20px;' type="button" id='jqxImageButton' />
+    </div>
+    <div>
+        <input style='margin-top: 20px;' value="Button" type="button" id='jqxTextImageButton' />
+    </div>
+    <div>
+        <input style='margin-top: 20px;' value="<span style='font-weight: bold;'>HTML Button</span>" type="button" id='jqxHTMLButton' />
+    </div>
+    <div>
+        <input style='margin-top: 20px;' type="Button" value="Disabled" id='jqxDisabledButton' />
+    </div>
+    <div style='font-size: 12px; font-family: Verdana; margin-top: 10px;'>
+        <div>Events:</div>
+        <div id='events'>
+        </div>
+    </div>
+</body>
+</html>

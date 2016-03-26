@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example shows how to use the Grid Cells Selection API.
+    </title>
+	<meta name="description" content="JavaScript Grid with Cells Selection" /> 	
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="generatedata.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var data = generatedata(200);
+
+            var source =
+            {
+                localdata: data,
+                datafields:
+                [
+                    { name: 'id', type: 'number'},
+                    { name: 'firstname', type: 'string' },
+                    { name: 'lastname', type: 'string' },
+                    { name: 'productname', type: 'string' },
+                    { name: 'available', type: 'bool' },
+                    { name: 'quantity', type: 'number' },
+                    { name: 'price', type: 'number' },
+                    { name: 'total', type: 'number' }
+                ],
+                datatype: "array"
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            // initialize jqxGrid
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 850,
+                source: dataAdapter,
+                selectionmode: 'singlecell',
+                columns: [
+                  { text: 'First Name', datafield: 'firstname', width: 200 },
+                  { text: 'Last Name', datafield: 'lastname', width: 200 },
+                  { text: 'Product', datafield: 'productname', width: 180 },
+                  { text: 'Quantity', datafield: 'quantity', width: 80, cellsalign: 'right' },
+                  { text: 'Unit Price', datafield: 'price', cellsalign: 'right', cellsformat: 'c2' },
+                ]
+            });
+
+            // initialize buttons and checkboxes.
+            $("#selectcellbutton").jqxButton({ theme: theme });
+            $("#scrolltobutton").jqxButton({ theme: theme });
+            $("#clearselectionbutton").jqxButton({ theme: theme });
+            $("#enableselection").jqxDropDownList({  autoDropDownHeight: true, dropDownWidth: 200, width: 120, height: 25, selectedIndex: 1, source: ['none', 'single cell', 'multiple cells', 'multiple cells extended', 'multiple cells advanced'] });
+
+            var columns = ['First Name', 'Last Name', 'Product Name', 'Quantity', "Unit Price", "Total"];
+            $("#columnchooser").jqxDropDownList({  autoDropDownHeight: true, width: 120, height: 25, selectedIndex: 1, source: columns });
+
+            $("#enablehover").jqxCheckBox({  checked: true });
+
+            // select a row.
+            $("#selectcellbutton").click(function () {
+                var index = parseInt($("#rowindexinput").val());
+                var columnindex = $("#columnchooser").jqxDropDownList('getSelectedIndex');
+                var columndatafield = $("#jqxgrid").jqxGrid('getcolumnat', columnindex).datafield;
+
+                if (!isNaN(index)) {
+                    $("#jqxgrid").jqxGrid('selectcell', index, columndatafield);
+                }
+            });
+
+            // clears the selection.
+            $("#clearselectionbutton").click(function () {
+                $("#jqxgrid").jqxGrid('clearselection');
+            });
+
+            // scroll to a row.
+            $("#scrolltobutton").click(function () {
+                var index = parseInt($("#rowindexinput2").val());
+                if (!isNaN(index)) {
+                    $("#jqxgrid").jqxGrid('ensurerowvisible', index);
+                }
+            });
+
+            // enable or disable the selection.
+            $("#enableselection").on('select', function (event) {
+                var index = event.args.index;
+                switch (index) {
+                    case 0:
+                        $("#jqxgrid").jqxGrid('selectionmode', 'none');
+                        break;
+                    case 1:
+                        $("#jqxgrid").jqxGrid('selectionmode', 'singlecell');
+                        break;
+                    case 2:
+                        $("#jqxgrid").jqxGrid('selectionmode', 'multiplecells');
+                        break;
+                    case 3:
+                        $("#jqxgrid").jqxGrid('selectionmode', 'multiplecellsextended');
+                        break;
+                    case 4:
+                        $("#jqxgrid").jqxGrid('selectionmode', 'multiplecellsadvanced');
+                        break;
+                }
+            });
+
+            // enable or disable the hover state.
+            $("#enablehover").on('change', function (event) {
+                $("#jqxgrid").jqxGrid('enablehover', event.args.checked);
+            });
+
+            // display selected row index.
+            $("#jqxgrid").on('cellselect', function (event) {
+                var columnheader = $("#jqxgrid").jqxGrid('getcolumn', event.args.datafield).text;
+                $("#selectedcell").text("Row: " + event.args.rowindex + ", Column: " + columnheader);
+            });
+
+            // display unselected row index.
+            $("#jqxgrid").on('cellunselect', function (event) {
+                var columnheader = $("#jqxgrid").jqxGrid('getcolumn', event.args.datafield).text;
+                $("#unselectedcell").text("Row: " + event.args.rowindex + ", Column: " + columnheader);
+            });
+
+            // select a cell in the second row in the 'Last Name' column.
+            $("#jqxgrid").jqxGrid('selectcell', 2, "lastname");
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+        <div id="jqxgrid">
+        </div>
+        <div style="margin-top: 20px;">
+            <div style="float: left;">
+                <div>
+                    <input value="100" style="width: 50px;" maxlength="4" id="rowindexinput2" type="text" />
+                    <input id="scrolltobutton" type="button" value="Scroll to Row" />
+                </div>
+                <div style="margin-top: 10px;" id="enablehover">
+                    Enable Hover</div>
+                <div style="margin-top: 10px;">
+                    <span>Selection Mode</span>
+                    <div style="margin-top: 5px;" id="enableselection">
+                    </div>
+                </div>
+            </div>
+            <div style="float: left; margin-left: 20px;">
+                <div>
+                    <div>
+                        <table>
+                            <tr>
+                                <td align="right">
+                                    Row:
+                                </td>
+                                <td>
+                                    <input value="0" style="float: left; width: 50px;" maxlength="4" id="rowindexinput"
+                                        type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">
+                                    Column:
+                                </td>
+                                <td>
+                                    <div id="columnchooser">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">
+                                    <input id="clearselectionbutton" type="button" value="Clear Selection" />
+                                </td>
+                                <td>
+                                    <input id="selectcellbutton" type="button" value="Select Cell" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div style="float: left; margin-left: 20px;">
+                <span>Selection Log:</span>
+                <div style="margin-top: 10px;">
+                    <span>Selected Cell:</span> <span id="selectedcell"></span>
+                    <br />
+                    <span>Unselected Cell:</span> <span id="unselectedcell"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>In this sample is demonstrated how to add a Vertical Splitter
+        inside a split panel of a Horizontal Splitter</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxsplitter.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#splitContainer').jqxSplitter({ height: 850, width: 850, orientation: 'horizontal', panels: [{ size: '20%' }, { size: '80%' }] });
+            $('#nestedSplitter').jqxSplitter({ height: '100%', width: '100%',  panels: [{ size: '30%' }, { size: '60%'}] });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="splitContainer">
+        <div>
+            North
+        </div>
+        <div>
+            <div id="nestedSplitter">
+                <div>
+                    West
+                </div>
+                <div>
+                    East
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

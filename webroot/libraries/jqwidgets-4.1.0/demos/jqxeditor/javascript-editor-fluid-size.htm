@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxEditor Fluid Size Example. The width and height of the Editor in this demo are in Percentages.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownbutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcolorpicker.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxeditor.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 minimum-scale=1" />  
+    <meta name="description" content="JavaScript Editor with Responsive Layout" />   
+     <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            padding: 3px;
+            box-sizing: border-box;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#editor').jqxEditor({
+                height: "100%",
+                tools: 'bold italic underline | left center right',       
+                width: '100%'
+            });
+        });
+    </script>
+    <textarea id="editor">
+        &lt;b&gt;jqxEditor&lt;/b&gt; is a HTML text editor designed to simplify web content creation. You can use it as a replacement of your Textarea or you can create it from a DIV element. 
+        &lt;br /&gt;
+        &lt;br /&gt;
+        Features include:
+        &lt;br /&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Text formatting&lt;/li&gt;
+            &lt;li&gt;Text alignment&lt;/li&gt;
+            &lt;li&gt;Hyperlink dialog&lt;/li&gt;
+            &lt;li&gt;Image dialog&lt;/li&gt;
+            &lt;li&gt;Bulleted list&lt;/li&gt;
+            &lt;li&gt;Numbered list&lt;/li&gt;
+        &lt;/ul&gt;
+    </textarea>
+</body>
+</html>

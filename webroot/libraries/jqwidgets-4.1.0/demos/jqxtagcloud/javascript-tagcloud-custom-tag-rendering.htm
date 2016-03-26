@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>TagCloud custom tag rendering</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtagcloud.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script>
+        $(document).ready(function () {
+            var data = [
+                { countryName: "Australia", technologyRating: 35, url: "test" },
+                { countryName: "United States", technologyRating: 60 },
+                { countryName: "Germany", technologyRating: 55 },
+                { countryName: "Brasil", technologyRating: 20 },
+                { countryName: "United Kingdom", technologyRating: 50 },
+                { countryName: "Japan", technologyRating: 80 }
+            ];
+            var source =
+            {
+                localdata: data,
+                datatype: "array",
+                datafields: [
+                    { name: 'countryName' },
+                    { name: 'technologyRating' }
+                ]
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {});
+            $('#tagCloud').jqxTagCloud({
+                width: '600px',
+                tagRenderer: function (record, minValue, range) {
+                    var el = $('<span>' + record.countryName + '</span>');
+                    var img = $('<img src="../../jqwidgets/styles/images/close.png" style=" width: auto; height: auto; vertical-align: middle;">');
+                    img.on('click', function (event) {
+                        var id = $(event.target).closest('li').index();
+                        var index = $('#tagCloud').jqxTagCloud('getRenderedTags')[id].index;
+                        $('#tagCloud').jqxTagCloud('removeAt', index);
+                        event.preventDefault();
+                        event.stopPropagation();
+                    });
+                    el.append(img);
+                    return el;
+                },
+                source: dataAdapter,
+                displayMember: 'countryName',
+                valueMember: 'technologyRating'
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="tagCloud"></div>
+</body>
+</html>

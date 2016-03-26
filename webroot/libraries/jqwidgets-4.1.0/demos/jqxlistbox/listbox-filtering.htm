@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxListBox Filtering</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {           
+            var shirtFileNames = ["2-sided-dodgers-bankrupt-t-shirt-ash", "black-retro-rock-band-guitar-controller",
+                "bright-green-gettin-lucky-in-kentucky", "brown-loading-bar-computer-geek", "cool-story-bro",
+                "fear-the-beard", "honey-badger-don-t-care", "misfits-sf-giants-white", "scott-pilgrim-red-rock-band"];
+            var shirts = ["2 sided dodgers<br>bankrupt<br>t shirt ash", "black retro<br>rock band<br>guitar controller",
+                "bright green<br>gettin lucky<br>in kentucky", "brown loading<br>bar computer geek", "cool story bro",
+                "fear the beard", "honey badger<br>don t care", "misfits sf<br>giants white", "scott pilgrim<br>red rock<br>band"];
+
+            // Create jqxListBox
+            $('#listbox').jqxListBox({
+                filterable: true, selectedIndex: 0, source: shirts, itemHeight: 90, height: 300, width: 250,
+                renderer: function (index, label, value) {
+                    var datarecord = shirtFileNames[index];
+                    var imgurl = '../../images/t-shirts/' + datarecord.toLowerCase() + '.png';
+                    var img = '<img height="70" width="70" src="' + imgurl + '"/>';
+                    var table = '<table style="min-width: 130px;"><tr><td style="width: 80px;">' + img + '</td><td>' + label + '</td></tr></table>';
+                    return table;
+                }
+            });
+            $("#clearFilter").jqxButton();
+            $("#clearFilter").click(function () {
+                $('#listbox').jqxListBox('clearFilter');
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="listbox">
+    </div>
+    <br />
+    <button id="clearFilter">Clear Filter</button>
+</body>
+</html>

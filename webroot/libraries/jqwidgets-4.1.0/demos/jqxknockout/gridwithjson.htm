@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example shows how to populate jqxGrid with JSON data using jqxDataAdapter and Knockout.
+    </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/json2.js"></script> 
+    <script type="text/javascript" src="../../scripts/knockout-3.0.0.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.edit.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxknockout.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var url = "../sampledata/beverages.txt";
+
+            var GridModel = function () {
+                this.items = ko.observableArray();
+                var me = this;
+                $.ajax({
+                    datatype: 'json',
+                    url: "../sampledata/beverages.txt"
+                }).done(function (data) {
+                    var jsonData = $.parseJSON(data);
+                    me.items(jsonData);
+                });
+            };
+
+            var model = new GridModel();
+
+            // prepare the data
+            var source =
+            {
+                datatype: "observablearray",
+                datafields: [
+                    { name: 'name' },
+                    { name: 'type' },
+                    { name: 'calories', type: 'int' },
+                    { name: 'totalfat' },
+                    { name: 'protein' },
+                ],
+                id: 'id',
+                localdata: model.items
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $("#grid").jqxGrid(
+            {
+                width: 670,
+                source: dataAdapter,
+                columns: [
+                  { text: 'Name', datafield: 'name', width: 250 },
+                  { text: 'Beverage Type', datafield: 'type', width: 250 },
+                  { text: 'Calories', datafield: 'calories', width: 180 },
+                  { text: 'Total Fat', datafield: 'totalfat', width: 120 },
+                  { text: 'Protein', datafield: 'protein', minwidth: 120 }
+                ]
+            });
+
+            ko.applyBindings(model);
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+
+        <div id="grid">
+        </div>
+
+    </div>
+</body>
+</html>

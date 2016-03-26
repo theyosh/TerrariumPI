@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS Chart Line Series Example</title>
+    <meta name="description" content="This is an example of AngularJS Chart. Area Spline Chart is displayed in the sample." />	
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.core.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            // prepare the data
+            var source =
+            {
+                datatype: "tab",
+                datafields: [
+                    { name: 'Year' },
+                    { name: 'HPI' },
+                    { name: 'BuildCost' },
+                    { name: 'Population' },
+                    { name: 'Rate' }
+                ],
+                url: '../../sampledata/homeprices.txt'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+               
+            // prepare jqxChart settings
+            var settings = {
+                title: "U.S. History Home Prices (1950-2011)",
+                description: "Source: http://www.econ.yale.edu/~shiller/data.htm",
+                enableAnimations: true,
+                showLegend: true,
+                padding: { left: 15, top: 5, right: 20, bottom: 5 },
+                titlePadding: { left: 10, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                categoryAxis:
+                    {
+                        text: 'Category Axis',
+                        textRotationAngle: 0,
+                        dataField: 'Year',
+                        showTickMarks: true,
+                        tickMarksInterval: 1,
+                        tickMarksColor: '#888888',
+                        unitInterval: 5,
+                        showGridLines: true,
+                        gridLinesInterval: 5,
+                        gridLinesColor: '#888888',
+                        axisSize: 'auto',
+                        minValue: 1948,
+                        maxValue: 2013,
+                        valuesOnTicks: true
+                    },
+                colorScheme: 'scheme05',
+                seriesGroups:
+                    [
+                        {
+                            alignEndPointsWithIntervals: false,
+                            type: 'splinearea',
+                            valueAxis:
+                            {
+                                visible: true,
+                                unitInterval: 20,
+                                maxValue: 200,
+                                description: 'Index Value'
+                            },
+                            series: [
+                                    { dataField: 'HPI', displayText: 'Real Home Price Index', opacity: 0.7 },
+                                    { dataField: 'BuildCost', displayText: 'Building Cost Index', opacity: 0.9 }
+                                ]
+                        },
+                        {
+                            type: 'spline',
+                            alignEndPointsWithIntervals: false,
+                            valueAxis:
+                            {
+                                unitInterval: 0.01,
+                                maxValue: 0.2,
+                                formatSettings: { decimalPlaces: 2},
+                                visible: true,
+                                showTickMarks: true,
+                                tickMarksInterval: 0.005,
+                                tickMarksColor: '#888888',
+                                showGridLines: true,
+                                gridLinesInterval: 0.01,
+                                description: 'Interest Rate',
+                                position: 'right'
+                            },
+                            series: [
+                                    { dataField: 'Rate', displayText: 'Interest Rate', opacity: 1.0, lineWidth: 4, dashStyle: '4,4' }
+                                ]
+                        }
+                    ]
+            };
+
+
+            $scope.chartSettings = settings;
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-chart id='chartContainer' jqx-settings="chartSettings" style="width: 850px; height: 500px"></jqx-chart>
+</body>
+</html>
+

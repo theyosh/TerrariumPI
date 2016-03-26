@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<Table>
+<Record id="1" firstName="Nancy" lastName="Davolio" title="Sales Representative" />
+<Record id="2" firstName="Andrew" lastName="Fuller" title="Vice President" />
+<Record id="3" firstName="Janet" lastName="Leverling" title="Sales Representative" />
+<Record id="4" firstName="Margaret" lastName="Peacock" title="Sales Representative" />
+<Record id="5" firstName="Steven" lastName="Buchanan" title="Sales Representative" />
+<Record id="6" firstName="Michael" lastName="Suyama" title="Sales Manager" />
+<Record id="7" firstName="Robert" lastName="King" title="Sales Representative" />
+<Record id="8" firstName="Laura" lastName="Callahan" title="Sales Coordinator" />
+<Record id="9" firstName="Anne" lastName="Dodsworth" title="Sales Representative" />
+</Table>   

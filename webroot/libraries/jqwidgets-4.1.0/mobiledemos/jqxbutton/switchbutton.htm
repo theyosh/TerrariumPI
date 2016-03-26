@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title>JavaScript Switch Button - Mobile Example</title>
+    <link rel="stylesheet" href="../styles/demo.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.windowsphone.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.blackberry.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.android.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.mobile.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxswitchbutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../simulator.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = prepareSimulator("switchbutton");
+            var width = 100;
+            var thumbSize = "40%";
+            var animationEnabled = false;
+            if (theme === "mobile") {
+                thumbSize = "55%";
+                width = 60;
+            }
+            else if (theme === "windowsphone") {
+                $(".settings-section").addClass('win8');
+                $(".settings-melody").addClass('win8');
+                $(".settings-section td").addClass('win8');
+            }
+
+            $('#button1').jqxSwitchButton({ theme: theme, toggleMode: 'click', animationEnabled: animationEnabled, height: 32, width: width, thumbSize: thumbSize, checked: true });
+            $('#button2').jqxSwitchButton({ theme: theme, toggleMode: 'click', animationEnabled: animationEnabled, height: 32, width: width, thumbSize: thumbSize, checked: true });
+            $('#button3').jqxSwitchButton({ theme: theme, toggleMode: 'click', animationEnabled: animationEnabled, height: 32, width: width, thumbSize: thumbSize, checked: true });
+            $('#button4').jqxSwitchButton({ theme: theme, toggleMode: 'click', animationEnabled: animationEnabled, height: 32, width: width, thumbSize: thumbSize, checked: true });
+            $('#button5').jqxSwitchButton({ theme: theme, toggleMode: 'click', animationEnabled: animationEnabled, height: 32, width: width, thumbSize: thumbSize, checked: false });
+            $('#button6').jqxSwitchButton({ theme: theme, toggleMode: 'click', animationEnabled: animationEnabled, height: 32, width: width, thumbSize: thumbSize, checked: true });
+            $('#button7').jqxSwitchButton({ theme: theme, toggleMode: 'click', animationEnabled: animationEnabled, height: 32, width: width, thumbSize: thumbSize, checked: true });
+            initSimulator("switchbutton");
+        });
+    </script>
+    <style type="text/css">
+        .settings-section td {
+            height: 11.11%;
+            border-left: 0px solid transparent;
+            border-right: 0px solid transparent;
+            border-top: 1px solid #b4b7bc;
+            border-bottom-width: 0px;
+            color: #000;
+            background-color: #fefefe;
+            max-width: 200px;
+        }
+        .settings-section {
+            background-color: #fefefe;
+            width: 100%;
+            height: 100%;
+            border: none;
+            color: #808080;
+            overflow: hidden;
+            table-layout: fixed;
+            margin: 0;
+            padding: 0;
+        }
+        .settings-label {
+            font-size: 16px;
+            margin-left: 14px;
+            float: left;
+        }
+
+        .settings-melody {
+            color: #808080;
+            font-size: 16px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .win8 {
+            background: #000 !important;
+            border-color: #000 !important;
+            color: #fff !important;
+        }
+        .buttons {
+            width: 30%;
+        }
+    </style>
+</head>
+<body class='default'>
+    <div id="demoContainer" class="device-mobile">
+        <div id="container" class="device-mobile-container">
+            <div style="height: 100%;" id="switchbutton">
+                <table class="settings-section">
+                    <tr>
+                        <td style="text-align: left;">
+                            <div class="settings-label">
+                                Ringtone
+                            </div>
+                        </td>
+                        <td style="text-align: right;">
+                            <div class="settings-melody">
+                                Marimba
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <div class="settings-label">
+                                Text Tone
+                            </div>
+                        </td>
+                        <td style="text-align: right;">
+                            <div class="settings-melody">
+                                Tri-tone
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <div class="settings-label">
+                                New Mail
+                            </div>
+                        </td>
+                        <td class="buttons" style="text-align: right;">
+                            <div style="float: right;" id="button1">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <div class="settings-label">
+                                Sent Mail
+                            </div>
+                        </td>
+                        <td class="buttons" style="text-align: right;">
+                            <div style="float: right;"id="button2">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <div class="settings-label">
+                                Tweet
+                            </div>
+                        </td>
+                        <td class="buttons" style="text-align: right;">
+                            <div style="float: right;" id="button3">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <div class="settings-label">
+                                Calendar Alerts
+                            </div>
+                        </td>
+                        <td style="text-align: right;">
+                            <div style="float: right;" id="button4">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <div class="settings-label">
+                                Lock Sounds
+                            </div>
+                        </td>
+                        <td class="buttons" style="text-align: right;">
+                            <div style="float: right;" id="button5">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <div class="settings-label">
+                                Multitasking Gestures
+                            </div>
+                        </td>
+                        <td class="buttons" style="text-align: right;">
+                            <div style="float: right;" id="button6">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <div class="settings-label">
+                                Keyboard Clicks
+                            </div>
+                        </td>
+                        <td class="buttons" style="text-align: right;">
+                            <div style="float: right;" id="button7">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

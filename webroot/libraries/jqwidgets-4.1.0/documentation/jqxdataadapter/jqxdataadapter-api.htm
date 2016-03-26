@@ -1,0 +1,1145 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../Styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="jQuery, Button, Toggle Button, Repeat Button, Link Button, Help Documentation" />
+    <meta name="description" content="This page represents the help documentation of the jqxButton, jqxToggleButton, jqxRepeatButton and jqxLinkButton widgets." />
+    <title>jqxButton, jqxToggleButton, jqxRepeatButton and jqxLinkButton API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='buttongroup"'>
+        <div id="properties">
+            <h2 class="documentation-top-header">Create jqxDataAdapter</h2>
+            <pre><code>var dataAdapter = new $.jqx.dataAdapter(source, settings);</code></pre>
+            <h2 class="documentation-top-header">source</h2>
+            <table class="documentation-table">
+                <tr>
+                    <th>Name
+                    </th>
+                    <th>Type
+                    </th>
+                    <th>Default
+                    </th>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span19'>columnDelimiter</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>"\t" when datatype is "tab" and "," when datatype is "csv" 
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Determines the column delimiter when the data source is 'tab' or 'csv'. The default value for 'tab' is '\t' and the default value for 'csv' is ','.
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span7'>datafields</span>
+                    </td>
+                    <td>
+                        <span>Array</span>
+                    </td>
+                    <td>[]
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                An array describing the fields in a particular record. Each datafield must define the following members:
+                            </p>
+                            <ul>
+                                <li>name - A string containing the data field's name.</li>
+                                <li>type - A string containing the data field's type. Possible values: 'string', 'date', 'number', 'int', 'float', 'bool'.</li>
+                                <li>map(optional) - A mapping to the data field.</li>
+                                <li>format(optional) - Sets the data formatting. By setting the format, the jqxDataAdapter plug-in will try to format the data before loading it. 
+Example: { name: 'SubmitDate', type: 'date', format: "yyyy-MM-ddTHH:mm:ss-HH:mm" }</li>
+                                <li>values(optional) - determines a foreign collection of values for a datafield.
+                                    <h4>Code example</h4>
+                                    <pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'>            var employeesSource =<div/>             {<div/>                 datatype: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"xml"</span>,<div/>                 datafields: [<div/>                     { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'FirstName', type: 'string'</span> },<div/>                     { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'LastName', type: 'string'</span> }<div/>                 ],<div/>                 root: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Employees"</span>,<div/>                 record: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Employee"</span>,<div/>                 id: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'EmployeeID'</span>,<div/>                 url: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"../sampledata/employees.xml"</span>,<div/>                 async: false<div/>             };<div/><div/>             var employeesAdapter = new $.jqx.dataAdapter(employeesSource, {<div/>                autoBind: true,<div/>                beforeLoadComplete: function (records) {<div/>                    var data = new Array();<div/>                    // update the loaded records. Dynamically add EmployeeName and EmployeeID fields. <div/>                    for (var i = 0; i &lt; records.length; i++) {<div/>                        var employee = records[i];<div/>                        employee.EmployeeName = employee.FirstName + <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">" "</span> + employee.LastName;<div/>                        employee.EmployeeID = employee.uid;<div/>                        data.push(employee);<div/>                    }<div/>                    return data;<div/>                }<div/>            });<div/><div/>            // prepare the data<div/>            var ordersSource =<div/>            {<div/>                datatype: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"xml"</span>,<div/>                datafields: [<div/>                    // name - determines the field's name.<div/>                    // value - the field's value in the data source.<div/>                    // values - specifies the field's values.<div/>                    // values.source - specifies the foreign source. The expected value is an array.<div/>                    // values.value - specifies the field's name in the foreign source. <div/>                    // values.name - specifies the field's value in the foreign source. <div/>                    // When the ordersAdapter is loaded, each record will have a field called <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"EmployeeName". The "EmployeeName" for each record comes from the employeesAdapter where the record's "EmployeeID" from orders.xml matches to the "EmployeeID"</span> from employees.xml. <div/>                    { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'EmployeeName', value: 'EmployeeID', values: { source: employeesAdapter.records, value: 'EmployeeID', name: 'EmployeeName'</span> } },<div/>                    { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'EmployeeID', map: 'm\\:properties&gt;d\\:EmployeeID'</span> },<div/>                    { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ShippedDate', map: 'm\\:properties&gt;d\\:ShippedDate', type: 'date'</span> },<div/>                    { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'Freight', map: 'm\\:properties&gt;d\\:Freight', type: 'float'</span> },<div/>                    { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ShipName', map: 'm\\:properties&gt;d\\:ShipName'</span> },<div/>                    { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ShipAddress', map: 'm\\:properties&gt;d\\:ShipAddress'</span> },<div/>                    { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ShipCity', map: 'm\\:properties&gt;d\\:ShipCity'</span> },<div/>                    { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ShipCountry', map: 'm\\:properties&gt;d\\:ShipCountry'</span> }<div/>                ],<div/>                root: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"entry"</span>,<div/>                record: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"content"</span>,<div/>                id: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'m\\:properties&gt;d\\:OrderID'</span>,<div/>                url: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"../sampledata/orders.xml"</span>,<div/>                pager: function (pagenum, pagesize, oldpagenum) {<div/>                    // callback called when a page or page size is changed.<div/>                }<div/>            };<div/>            var ordersAdapter = new $.jqx.dataAdapter(ordersSource);<div/></pre>
+                                    <h5>employees.xml</h5>
+                                    <pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;?xml version=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"1.0"</span>?&gt;</span><div/><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;Employees&gt;</span><div/>  <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;Employee EmployeeID=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"5"</span>&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;LastName&gt;</span>Buchanan<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/LastName&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;FirstName&gt;</span>Steven<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/FirstName&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;Title&gt;</span>Sales Manager<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/Title&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;TitleOfCourtesy&gt;</span>Mr.<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/TitleOfCourtesy&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;BirthDate&gt;</span>1955-03-04<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/BirthDate&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;HireDate&gt;</span>1993-10-17<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/HireDate&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;Address&gt;</span>14 Garrett Hill<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/Address&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;City&gt;</span>London<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/City&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;Region/&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;PostalCode&gt;</span>SW1 8JR<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/PostalCode&gt;</span><div/>  <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/Employee&gt;</span><div/><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;Employees&gt;</span><div/></pre>
+                                    <h5>orders.xml</h5>
+                                    <pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;?xml version=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"1.0" encoding="iso-8859-1" standalone="yes"</span>?&gt;</span><div/><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;feed xml:base=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://services.odata.org/Northwind/Northwind.svc/" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://www.w3.org/2005/Atom"</span>&gt;</span><div/>  <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;title type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text"</span>&gt;</span>Orders<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/title&gt;</span><div/>  <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;id&gt;</span>http://services.odata.org/Northwind/Northwind.svc/Orders<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/id&gt;</span><div/>  <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;updated&gt;</span>2011-12-01T11:55:06Z<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/updated&gt;</span><div/>  <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"self" title="Orders" href="Orders"</span> /&gt;</span><div/>  <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;entry&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;id&gt;</span>http://services.odata.org/Northwind/Northwind.svc/Orders(10248)<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/id&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;title type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text"</span>&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/title&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;updated&gt;</span>2011-12-01T11:55:06Z<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/updated&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;author&gt;</span><div/>      <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;name /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/author&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"edit" title="Order" href="Orders(10248)"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Customer" type="application/atom+xml;type=entry" title="Customer" href="Orders(10248)/Customer"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Employee" type="application/atom+xml;type=entry" title="Employee" href="Orders(10248)/Employee"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Order_Details" type="application/atom+xml;type=feed" title="Order_Details" href="Orders(10248)/Order_Details"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Shipper" type="application/atom+xml;type=entry" title="Shipper" href="Orders(10248)/Shipper"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;category term=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"NorthwindModel.Order" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;content type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"application/xml"</span>&gt;</span><div/>      <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;m:properties&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:OrderID m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Int32"</span>&gt;</span>10248<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:OrderID&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:CustomerID&gt;</span>VINET<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:CustomerID&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:EmployeeID m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Int32"</span>&gt;</span>5<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:EmployeeID&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:OrderDate m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.DateTime"</span>&gt;</span>1996-07-04T00:00:00<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:OrderDate&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:RequiredDate m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.DateTime"</span>&gt;</span>1996-08-01T00:00:00<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:RequiredDate&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShippedDate m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.DateTime"</span>&gt;</span>1996-07-16T00:00:00<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShippedDate&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipVia m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Int32"</span>&gt;</span>3<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipVia&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:Freight m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Decimal"</span>&gt;</span>32.3800<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:Freight&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipName&gt;</span>Vins et alcools Chevalier<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipName&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipAddress&gt;</span>59 rue de l'Abbaye<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipAddress&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipCity&gt;</span>Reims<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipCity&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipRegion m:null=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"true"</span> /&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipPostalCode&gt;</span>51100<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipPostalCode&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipCountry&gt;</span>France<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipCountry&gt;</span><div/>      <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/m:properties&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/content&gt;</span><div/>  <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/entry&gt;</span><div/><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/feed&gt;</span><div/></pre>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span1'>data</span>
+                    </td>
+                    <td>
+                        <span>Object</span>
+                    </td>
+                    <td>{}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Data to be sent to the server. The expected value is JSON Object.
+                            </p>
+                            <h4>Code example</h4>
+                            <pre><code>
+var source =
+{
+    datatype: "jsonp",
+    datafields: [
+        { name: 'countryName' },
+        { name: 'name' },
+        { name: 'population', type: 'float' },
+        { name: 'continentCode' }
+    ],
+    url: "http://api.geonames.org/searchJSON",
+    data: {
+        featureClass: "P",
+        style: "full",
+        maxRows: 50,
+        username: "jqwidgets"
+    }
+};
+</code></pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span2'>datatype</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>String
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                The data's type. Possible values: 'xml', 'json', 'jsonp', 'tsv', 'csv', 'local', 'array', 'observablearray'.
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span3'>type</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>"GET"
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                The type of request to make ("POST" or "GET"), default is "GET".
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span4'>id</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>""
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                A string containing the Id data field.
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span31'>localdata</span>
+                    </td>
+                    <td>
+                        <span>Array or String</span>
+                    </td>
+                    <td>[] 
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                You can set the <code>localdata</code> to a Javascript Array or String of data. Use the <code>localdata</code> only when you want to load local data. If you want to load data from a File or Remote data source, use <code>url</code> instead.  
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span18'>mapChar</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>">"
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Determines the mapping char used to specify the data field's mapping. By default it is '>'. In the following code, if the mapChar was set to '.', we should use '.' instead of '>' to specify the fields map.
+                            </p>
+                            <h4>Code example</h4>
+                            <pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'>var data = [{ <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"empName": "test", "age": "67", "department": { "id": "1234", "name": "Sales" }, "author": "ravi"</span>}];<div/><div/>// prepare the data<div/>var source =<div/>{<div/>    datatype: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"json"</span>,<div/>    datafields: [<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'empName'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'age'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'id', map: 'department&gt;id'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'name', map: 'department&gt;name'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'author'</span> }<div/>    ],<div/>    localdata: data<div/>};<div/>var dataAdapter = new $.jqx.dataAdapter(source);<div/></pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span20'>rowDelimiter</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>"\n"
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Determines the rows delimiter when the data source is 'tab' or 'csv'. The default value is '\n'.
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span5'>root</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>""
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                A string describing where the data begins and all other loops begin from this element.
+                            </p>
+                            <h4>Code example
+                            </h4>
+                            <pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'>var source =<div/>{<div/>    datatype: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"xml"</span>,<div/>    datafields: [<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ShippedDate', map: 'm\\:properties&gt;d\\:ShippedDate', type: 'date'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'Freight', map: 'm\\:properties&gt;d\\:Freight', type: 'float'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ShipName', map: 'm\\:properties&gt;d\\:ShipName'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ShipAddress', map: 'm\\:properties&gt;d\\:ShipAddress'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ShipCity', map: 'm\\:properties&gt;d\\:ShipCity'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ShipCountry', map: 'm\\:properties&gt;d\\:ShipCountry'</span> }<div/>    ],<div/>    root: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"entry"</span>,<div/>    record: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"content"</span>,<div/>    id: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'m\\:properties&gt;d\\:OrderID'</span>,<div/>    url: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'orders.xml'</span><div/>};<div/><div/>XML<div/>  <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;entry&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;id&gt;</span>http://services.odata.org/Northwind/Northwind.svc/Orders(10248)<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/id&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;title type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text"</span>&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/title&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;updated&gt;</span>2011-12-01T11:55:06Z<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/updated&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;author&gt;</span><div/>      <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;name /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/author&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"edit" title="Order" href="Orders(10248)"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Customer" type="application/atom+xml;type=entry" title="Customer" href="Orders(10248)/Customer"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Employee" type="application/atom+xml;type=entry" title="Employee" href="Orders(10248)/Employee"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Order_Details" type="application/atom+xml;type=feed" title="Order_Details" href="Orders(10248)/Order_Details"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Shipper" type="application/atom+xml;type=entry" title="Shipper" href="Orders(10248)/Shipper"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;category term=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"NorthwindModel.Order" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;content type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"application/xml"</span>&gt;</span><div/>      <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;m:properties&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:OrderID m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Int32"</span>&gt;</span>10248<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:OrderID&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:CustomerID&gt;</span>VINET<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:CustomerID&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:EmployeeID m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Int32"</span>&gt;</span>5<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:EmployeeID&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:OrderDate m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.DateTime"</span>&gt;</span>1996-07-04T00:00:00<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:OrderDate&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:RequiredDate m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.DateTime"</span>&gt;</span>1996-08-01T00:00:00<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:RequiredDate&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShippedDate m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.DateTime"</span>&gt;</span>1996-07-16T00:00:00<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShippedDate&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipVia m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Int32"</span>&gt;</span>3<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipVia&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:Freight m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Decimal"</span>&gt;</span>32.3800<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:Freight&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipName&gt;</span>Vins et alcools Chevalier<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipName&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipAddress&gt;</span>59 rue de l'Abbaye<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipAddress&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipCity&gt;</span>Reims<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipCity&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipRegion m:null=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"true"</span> /&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipPostalCode&gt;</span>51100<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipPostalCode&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipCountry&gt;</span>France<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipCountry&gt;</span><div/>      <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/m:properties&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/content&gt;</span><div/>  <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/entry&gt;</span><div/>  <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;entry&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;id&gt;</span>http://services.odata.org/Northwind/Northwind.svc/Orders(10249)<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/id&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;title type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text"</span>&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/title&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;updated&gt;</span>2011-12-01T11:55:06Z<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/updated&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;author&gt;</span><div/>      <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;name /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/author&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"edit" title="Order" href="Orders(10249)"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Customer" type="application/atom+xml;type=entry" title="Customer" href="Orders(10249)/Customer"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Employee" type="application/atom+xml;type=entry" title="Employee" href="Orders(10249)/Employee"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Order_Details" type="application/atom+xml;type=feed" title="Order_Details" href="Orders(10249)/Order_Details"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Shipper" type="application/atom+xml;type=entry" title="Shipper" href="Orders(10249)/Shipper"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;category term=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"NorthwindModel.Order" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;content type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"application/xml"</span>&gt;</span><div/>      <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;m:properties&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:OrderID m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Int32"</span>&gt;</span>10249<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:OrderID&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:CustomerID&gt;</span>TOMSP<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:CustomerID&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:EmployeeID m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Int32"</span>&gt;</span>6<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:EmployeeID&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:OrderDate m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.DateTime"</span>&gt;</span>1996-07-05T00:00:00<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:OrderDate&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:RequiredDate m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.DateTime"</span>&gt;</span>1996-08-16T00:00:00<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:RequiredDate&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShippedDate m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.DateTime"</span>&gt;</span>1996-07-10T00:00:00<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShippedDate&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipVia m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Int32"</span>&gt;</span>1<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipVia&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:Freight m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Decimal"</span>&gt;</span>11.6100<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:Freight&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipName&gt;</span>Toms Spezialitäten<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipName&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipAddress&gt;</span>Luisenstr. 48<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipAddress&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipCity&gt;</span>Münster<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipCity&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipRegion m:null=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"true"</span> /&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipPostalCode&gt;</span>44087<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipPostalCode&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipCountry&gt;</span>Germany<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipCountry&gt;</span><div/>      <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/m:properties&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/content&gt;</span><div/>  <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/entry&gt;</span><div/></pre>
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span6'>record</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>""
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                A string describing the information for a particular record.
+                            </p>
+                            <h4>Code example
+                            </h4>
+                            <pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'>var source =<div/>{<div/>    datatype: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"xml"</span>,<div/>    datafields: [<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ShippedDate', map: 'm\\:properties&gt;d\\:ShippedDate', type: 'date'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'Freight', map: 'm\\:properties&gt;d\\:Freight', type: 'float'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ShipName', map: 'm\\:properties&gt;d\\:ShipName'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ShipAddress', map: 'm\\:properties&gt;d\\:ShipAddress'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ShipCity', map: 'm\\:properties&gt;d\\:ShipCity'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ShipCountry', map: 'm\\:properties&gt;d\\:ShipCountry'</span> }<div/>    ],<div/>    root: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"entry"</span>,<div/>    record: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"content"</span>,<div/>    id: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'m\\:properties&gt;d\\:OrderID'</span>,<div/>    url: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'orders.xml'</span><div/>};<div/><div/>XML<div/>  <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;entry&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;id&gt;</span>http://services.odata.org/Northwind/Northwind.svc/Orders(10248)<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/id&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;title type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text"</span>&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/title&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;updated&gt;</span>2011-12-01T11:55:06Z<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/updated&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;author&gt;</span><div/>      <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;name /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/author&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"edit" title="Order" href="Orders(10248)"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Customer" type="application/atom+xml;type=entry" title="Customer" href="Orders(10248)/Customer"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Employee" type="application/atom+xml;type=entry" title="Employee" href="Orders(10248)/Employee"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Order_Details" type="application/atom+xml;type=feed" title="Order_Details" href="Orders(10248)/Order_Details"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Shipper" type="application/atom+xml;type=entry" title="Shipper" href="Orders(10248)/Shipper"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;category term=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"NorthwindModel.Order" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;content type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"application/xml"</span>&gt;</span><div/>      <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;m:properties&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:OrderID m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Int32"</span>&gt;</span>10248<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:OrderID&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:CustomerID&gt;</span>VINET<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:CustomerID&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:EmployeeID m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Int32"</span>&gt;</span>5<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:EmployeeID&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:OrderDate m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.DateTime"</span>&gt;</span>1996-07-04T00:00:00<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:OrderDate&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:RequiredDate m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.DateTime"</span>&gt;</span>1996-08-01T00:00:00<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:RequiredDate&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShippedDate m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.DateTime"</span>&gt;</span>1996-07-16T00:00:00<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShippedDate&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipVia m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Int32"</span>&gt;</span>3<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipVia&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:Freight m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Decimal"</span>&gt;</span>32.3800<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:Freight&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipName&gt;</span>Vins et alcools Chevalier<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipName&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipAddress&gt;</span>59 rue de l'Abbaye<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipAddress&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipCity&gt;</span>Reims<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipCity&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipRegion m:null=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"true"</span> /&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipPostalCode&gt;</span>51100<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipPostalCode&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipCountry&gt;</span>France<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipCountry&gt;</span><div/>      <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/m:properties&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/content&gt;</span><div/>  <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/entry&gt;</span><div/>  <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;entry&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;id&gt;</span>http://services.odata.org/Northwind/Northwind.svc/Orders(10249)<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/id&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;title type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text"</span>&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/title&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;updated&gt;</span>2011-12-01T11:55:06Z<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/updated&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;author&gt;</span><div/>      <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;name /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/author&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"edit" title="Order" href="Orders(10249)"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Customer" type="application/atom+xml;type=entry" title="Customer" href="Orders(10249)/Customer"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Employee" type="application/atom+xml;type=entry" title="Employee" href="Orders(10249)/Employee"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Order_Details" type="application/atom+xml;type=feed" title="Order_Details" href="Orders(10249)/Order_Details"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;link rel=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Shipper" type="application/atom+xml;type=entry" title="Shipper" href="Orders(10249)/Shipper"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;category term=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"NorthwindModel.Order" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"</span> /&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;content type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"application/xml"</span>&gt;</span><div/>      <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;m:properties&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:OrderID m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Int32"</span>&gt;</span>10249<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:OrderID&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:CustomerID&gt;</span>TOMSP<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:CustomerID&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:EmployeeID m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Int32"</span>&gt;</span>6<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:EmployeeID&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:OrderDate m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.DateTime"</span>&gt;</span>1996-07-05T00:00:00<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:OrderDate&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:RequiredDate m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.DateTime"</span>&gt;</span>1996-08-16T00:00:00<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:RequiredDate&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShippedDate m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.DateTime"</span>&gt;</span>1996-07-10T00:00:00<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShippedDate&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipVia m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Int32"</span>&gt;</span>1<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipVia&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:Freight m:type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Edm.Decimal"</span>&gt;</span>11.6100<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:Freight&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipName&gt;</span>Toms Spezialitäten<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipName&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipAddress&gt;</span>Luisenstr. 48<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipAddress&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipCity&gt;</span>Münster<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipCity&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipRegion m:null=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"true"</span> /&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipPostalCode&gt;</span>44087<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipPostalCode&gt;</span><div/>        <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;d:ShipCountry&gt;</span>Germany<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/d:ShipCountry&gt;</span><div/>      <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/m:properties&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/content&gt;</span><div/>  <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/entry&gt;</span><div/></pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span33'>url</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>""
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                A string containing the URL to which the request is sent.
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">settings</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span42'>async</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                By default, all requests are sent asynchronously (i.e. this is set to true by default). If you need synchronous requests, set this option to false. When the binding is "asynchronous", the data binding operation occurs in parallel and the order of completion is not guaranteed.
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span16'>autoBind</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Determines whether the jqxDataAdapter's dataBind method is called automatically when the dataAdapter is initialized.
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span11'>beforeSend</span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                A pre-request callback function that can be used to modify the jqXHR.
+                            <br />
+                                Function arguments: jqXHR, settings
+                            <br />
+                                *The jQuery XMLHttpRequest (jqXHR) object is a superset of the browser's native XMLHttpRequest object. For example, it contains responseText and responseXML properties, as well as a getResponseHeader() method. When the transport mechanism is something other than XMLHttpRequest (for example, a script tag for a JSONP request) the jqXHR object simulates native XHR functionality where possible 
+                            </p>
+                            <h4>Code example</h4>
+                            <pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'>var dataAdapter = new $.jqx.dataAdapter(source,<div/>    {<div/>        beforeSend: function (xhr) {<div/>            xhr.overrideMimeType(<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text/plain; charset=x-user-defined"</span>);<div/>        }<div/>    }<div/>);<div/></pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span13'>beforeLoadComplete</span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                A callback function which is called before the data is fully loaded. The function gets passed two arguments: The loaded records. The second argument is the original data. If the function returns an array, the dataAdapter's records field will be set to it.
+                         <br />
+                                Function arguments: records(Array)
+                            </p>
+                            <br />
+                            <h4>Code example</h4>
+                            <pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'><div/>// prepare the data<div/>var data = new Array();<div/><div/>var firstNames =<div/>[<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Andrew", "Nancy", "Shelley", "Regina", "Yoshi", "Antoni", "Mayumi", "Ian", "Peter", "Lars", "Petra", "Martin", "Sven", "Elio", "Beate", "Cheryl", "Michael", "Guylene"</span><div/>];<div/><div/>var lastNames =<div/>[<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Fuller", "Davolio", "Burke", "Murphy", "Nagase", "Saavedra", "Ohno", "Devling", "Wilson", "Peterson", "Winkler", "Bein", "Petersen", "Rossi", "Vileid", "Saylor", "Bjorn", "Nodier"</span><div/>];<div/><div/>var productNames =<div/>[<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte", "White Chocolate Mocha", "Cramel Latte", "Caffe Americano", "Cappuccino", "Espresso Truffle", "Espresso con Panna", "Peppermint Mocha Twist"</span><div/>];<div/><div/>var priceValues =<div/>[<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"2.25", "1.5", "3.0", "3.3", "4.5", "3.6", "3.8", "2.5", "5.0", "1.75", "3.25", "4.0"</span><div/>];<div/><div/>for (var i = 0; i &lt; 200; i++) {<div/>    var row = {};<div/>    var productindex = Math.floor(Math.random() * productNames.length);<div/>    var price = parseFloat(priceValues[productindex]);<div/>    var quantity = 1 + Math.round(Math.random() * 10);<div/><div/>    row[<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"firstname"</span>] = firstNames[Math.floor(Math.random() * firstNames.length)];<div/>    row[<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"lastname"</span>] = lastNames[Math.floor(Math.random() * lastNames.length)];<div/>    row[<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"productname"</span>] = productNames[productindex];<div/>    row[<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"price"</span>] = price;<div/>    row[<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"quantity"</span>] = quantity;<div/>    row[<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"total"</span>] = price * quantity;<div/><div/>    data[i] = row;<div/>}<div/><div/>var source =<div/>{<div/>    localdata: data,<div/>    datatype: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"array"</span><div/>};<div/><div/>var dataAdapter = new $.jqx.dataAdapter(source,<div/>    {<div/>        beforeLoadComplete: function (records) {<div/>            records[0][<span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'firstname'</span>] = <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"Michael"</span>;<div/>            return records;<div/>        }<div/>    }<div/>);<div/></pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span8'>contentType</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>"application/x-www-form-urlencoded"
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Use this option, If you want to explicitly pass in a content-type.
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span10'>formatData</span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                A callback function which is called before the data is sent to the server. You can use it to fully override the data sent to the server. If you define a <code>formatData</code> function, the result that the function returns will be sent to the server. The expected result is JSON object(jQuery will format it automatically calling the jQuery.param() function) or String(ex: width=300&height=300).
+                            </p>
+                            <h4>Code example</h4>
+                            <pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'>// prepare the data<div/>var source =<div/>{<div/>    datatype: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"jsonp"</span>,<div/>    datafields: [<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'countryName', type: 'string'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'name', type: 'string'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'population', type: 'float'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'continentCode', type: 'string'</span> }<div/>    ],<div/>    url: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://api.geonames.org/searchJSON"</span><div/>};<div/><div/>var dataAdapter = new $.jqx.dataAdapter(source,<div/>    {<div/>        formatData: function (data) {<div/>            data.featureClass = <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"P"</span>;<div/>            data.style = <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"full"</span>;<div/>            data.maxRows = 50;data.username = "jqwidgets";<div/>            return data;<div/>        }<div/>    }<div/>);<div/></pre>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span12'>loadError</span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                A callback function called when the request has failed.
+                            <br />
+                                Function arguments: jqXHR, status, error
+                            <br />
+                                - jqXHR - The jQuery XMLHttpRequest (jqXHR) object is a superset of the browser's native XMLHttpRequest object. For example, it contains responseText and responseXML properties, as well as a getResponseHeader() method. When the transport mechanism is something other than XMLHttpRequest (for example, a script tag for a JSONP request) the jqXHR object simulates native XHR functionality where possible 
+                            <br />
+                                - status -  Possible values null, "timeout", "error", "abort", and "parsererror"
+                            <br />
+                                - error - When an HTTP error occurs, error receives the textual portion of the HTTP status, such as "Not Found" or "Internal Server Error."   
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span14'>loadComplete</span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                A callback function which is called when the data is fully loaded. 
+                            </p>
+                            <br />
+                            Function arguments: records(Array)                           
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span15'>loadServerData</span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                A callback function which allows you to manually handle the ajax calls through the jqxDataAdapter. The function gets passed three arguments: The data to be sent to the server, the source object which initializes the jqxDataAdapter plug-in and a callback function to be called when the ajax call is handled.
+                            </p>
+                            <br />
+                            <h4>Code example</h4>
+                            <pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'>var dataAdapter = new $.jqx.dataAdapter(source,<div/>{<div/>    loadServerData: function (serverdata, source, callback) {<div/>        $.ajax({<div/>            dataType: source.datatype,<div/>            url: url,<div/>            data: serverdata,<div/>            success: function (data, status, xhr) {<div/>                var xmldata = xmldata || $(source.root + <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">" "</span> + source.record, data);<div/>                if (!xmldata) {<div/>                    xmldata = [];<div/>                }<div/>                var dataArray = new Array();<div/>                for (var i = 0; i &lt; xmldata.length; i++) {<div/>                    var record = xmldata[i];<div/>                    var datarow = {};<div/>                    for (var j = 0; j &lt; source.datafields.length; j++) {<div/>                        var datafield = source.datafields[j];<div/>                        var value = '';<div/>                        if (undefined == datafield || datafield == null) {<div/>                            continue;<div/>                        }<div/><div/>                        if (datafield.map) {<div/>                            value = $(datafield.map, record).text();<div/>                        }<div/>                        // searches by both selectors when necessary.<div/>                        if (value == '') {<div/>                            value = $(datafield.name, record).text();<div/>                        }<div/>                        datarow[datafield.name] = value;<div/>                    }<div/>                    dataArray[dataArray.length] = datarow;<div/>                }<div/>                // send the loaded records to the jqxDataAdapter plug-in.<div/>                callback({ records: dataArray });<div/>            }<div/>        });<div/>    }<div/>}<div/>);<div/></pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span9'>processData</span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                A callback function which allows you to modify the default data object sent to the server.
+                            </p>
+                            <h4>Code example</h4>
+                            <pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'>// prepare the data<div/>var source =<div/>{<div/>    datatype: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"jsonp"</span>,<div/>    datafields: [<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'countryName', type: 'string'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'name', type: 'string'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'population', type: 'float'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'continentCode', type: 'string'</span> }<div/>    ],<div/>    url: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"http://api.geonames.org/searchJSON"</span><div/>};<div/><div/>var dataAdapter = new $.jqx.dataAdapter(source,<div/>    {<div/>        processData: function (data) {<div/>            data.featureClass = <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"P"</span>;<div/>            data.style = <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"full"</span>;<div/>            data.maxRows = 50; data.username = "jqwidgets";<div/>        }<div/>    }<div/>);<div/></pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Methods and Properties</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span22'>beginUpdate </span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Begins data update operation and prevents any future data binding operations.
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span17'>dataBind</span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Performs a data bind operation.
+                            </p>
+                            <br />
+                            <h4>Code example</h4>
+                            <pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;!DOCTYPE html&gt;</span><div/><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;html lang=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"en"</span>&gt;</span><div/><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;head&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;title id=<span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'Description'</span>&gt;</span>Data Adapter bound to XML data.<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/title&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;script type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text/javascript" src="../../scripts/jquery-1.11.1.min.js"</span>&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/script&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;script type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text/javascript" src="../../jqwidgets/jqxcore.js"</span>&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/script&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;script type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text/javascript" src="../../jqwidgets/jqxdata.js"</span>&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/script&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;script type=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text/javascript"</span>&gt;</span><div/>        $(document).ready(function () {<div/>            var url = <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"customers.xml"</span>;<div/>            // prepare the data<div/>            var source =<div/>            {<div/>                datatype: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"xml"</span>,<div/>                datafields: [<div/>                    { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'CompanyName', map: 'm\\:properties&gt;d\\:CompanyName'</span> },<div/>                    { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ContactName', map: 'm\\:properties&gt;d\\:ContactName'</span> },<div/>                    { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ContactTitle', map: 'm\\:properties&gt;d\\:ContactTitle'</span> },<div/>                    { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'City', map: 'm\\:properties&gt;d\\:City'</span> },<div/>                    { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'PostalCode', map: 'm\\:properties&gt;d\\:PostalCode'</span> },<div/>                    { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'Country', map: 'm\\:properties&gt;d\\:Country'</span> }<div/>                ],<div/>                root: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"entry"</span>,<div/>                record: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"content"</span>,<div/>                id: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'m\\:properties&gt;d\\:CustomerID'</span>,<div/>                url: url<div/>            };<div/>            var dataAdapter = new $.jqx.dataAdapter(source, {<div/>                loadComplete: function () {<div/>                    // get data records.<div/>                    var records = dataAdapter.records;<div/>                    var length = records.length;<div/>                    // loop through the records and display them in a table.<div/>                    var html = <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;table border=<span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'1'&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;th align='left'&gt;</span>Company<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/th&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;th align='left'&gt;</span>Contact<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/th&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;th align='left'&gt;</span>City<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/th&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;th align='left'</span>&gt;</span>Country<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/th&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span>"</span>;<div/>                    for (var i = 0; i &lt; length; i++) {<div/>                        var record = records[i];<div/>                        html += <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;tr&gt;</span>"</span>;<div/>                        html += <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span>" + record.CompanyName + "<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span>"</span>;<div/>                        html += <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span>" + record.ContactName + "<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span>"</span>;<div/>                        html += <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span>" + record.City + "<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span>"</span>;<div/>                        html += <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;td&gt;</span>" + record.Country + "<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/td&gt;</span>"</span>;<div/>                        html += <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"<span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/tr&gt;</span>"</span>;<div/>                    }<div/>                    html += <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"&lt;/table"</span>;<div/>                    $(<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"#jqxWidget"</span>).html(html);<div/>                }<div/>            });<div/>            dataAdapter.dataBind();<div/>        });<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/script&gt;</span><div/><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/head&gt;</span><div/><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;body class=<span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'default'</span>&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;div id=<span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'jqxWidget'</span> style=<span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"font-size: 13px; font-family: Verdana;"</span>&gt;</span><div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/div&gt;</span><div/><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/body&gt;</span><div/><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/html&gt;</span><div/></pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span23'>endUpdate </span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Ends data update operation. You can call the method passing <code>true</code> or <code>false</code>. Pass <code>true</code> when you call the method in case you wish to make an automatic dataBind method call.
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Returns <code>true</code>, if called after <code>beginUpdate</code> method call. Otherwise returns <code>false</code>.
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span29'>formatDate</span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Returns a Formatted JavaScript Date object as a String. 
+                            </p>
+                            Function arguments: value(JavaScript Date object), format(String) and calendar(Object)
+                        <ul>
+                            <li>format<br />
+                                Possible Date formats:
+                                <br />
+                                <br />
+                                // short date pattern d: "M/d/yyyy",
+                                <br />
+                                // long date pattern D: "dddd, MMMM dd, yyyy",
+                                <br />
+                                // short time pattern t: "h:mm tt",
+                                <br />
+                                // long time pattern T: "h:mm:ss tt",
+                                <br />
+                                // long date, short time pattern f: "dddd, MMMM dd, yyyy h:mm tt",
+                                <br />
+                                // long date, long time pattern F: "dddd, MMMM dd, yyyy h:mm:ss tt",
+                                <br />
+                                // month/day pattern M: "MMMM dd",
+                                <br />
+                                // month/year pattern Y: "yyyy MMMM",
+                                <br />
+                                // S is a sortable format that does not vary by culture S: "yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss"
+                                <br />
+                                <br />
+                                Possible Date format strings: 
+                                <br />
+                                "d"-the day of the month;<br />
+                                "dd"-the day of the month;
+                                <br />
+                                "ddd"-the abbreviated name of the day of the week;<br />
+                                "dddd"- the full name of the day of the week;<br />
+                                "h"-the hour, using a 12-hour clock from 1 to 12;
+                                <br />
+                                "hh"-the hour, using a 12-hour clock from 01 to 12;
+                                <br />
+                                "H"-the hour, using a 24-hour clock from 0 to 23;<br />
+                                "HH"- the hour, using a 24-hour clock from 00 to 23;
+                                <br />
+                                "m"-the minute, from 0 through 59;<br />
+                                "mm"-the minutes,from 00 though59;<br />
+                                "M"- the month, from 1 through 12;<br />
+                                "MM"- the month, from 01 through 12;<br />
+                                "MMM"-the abbreviated name of the month;<br />
+                                "MMMM"-the full name of the month;<br />
+                                "s"-the second, from 0 through 59;
+                                <br />
+                                "ss"-the second, from 00 through 59;
+                                <br />
+                                "t"- the first character of the AM/PM designator;<br />
+                                "tt"-the AM/PM designator;
+                                <br />
+                                "y"- the year, from 0 to 99;
+                                <br />
+                                "yy"- the year, from 00 to 99;
+                                <br />
+                                "yyy"-the year, with a minimum of three digits;
+                                <br />
+                                "yyyy"-the year as a four-digit number;
+                                <br />
+                            </li>
+                            <li>calendar<br />
+                                The structure of the expected calendar object is shown below:
+var calendar = {<br />
+                                // separator of parts of a date (e.g. '/' in 11/05/1955)<br />
+                                '/': "/",<br />
+                                // separator of parts of a time (e.g. ':' in 05:44 PM)<br />
+                                ':': ":",<br />
+                                // the first day of the week (0 = Sunday, 1 = Monday, etc)<br />
+                                firstDay: 0,<br />
+                                days: {<br />
+                                // full day names<br />
+                                names: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],<br />
+                                // abbreviated day names<br />
+                                namesAbbr: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],<br />
+                                // shortest day names<br />
+                                namesShort: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]<br />
+                                },<br />
+                                months: {<br />
+                                // full month names (13 months for lunar calendards -- 13th month should be "" if not lunar)<br />
+                                names: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", ""],<br />
+                                // abbreviated month names<br />
+                                namesAbbr: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", ""]<br />
+                                },<br />
+                                // AM and PM designators in one of these forms:<br />
+                                // The usual view, and the upper and lower case versions<br />
+                                //      [standard,lowercase,uppercase]<br />
+                                // The culture does not use AM or PM (likely all standard date formats use 24 hour time)<br />
+                                //      null<br />
+                                AM: ["AM", "am", "AM"],<br />
+                                PM: ["PM", "pm", "PM"],<br />
+                                eras: [<br />
+                                // eras in reverse chronological order.<br />
+                                // name: the name of the era in this culture (e.g. A.D., C.E.)<br />
+                                // start: when the era starts in ticks (gregorian, gmt), null if it is the earliest supported era.<br />
+                                // offset: offset in years from gregorian calendar<br />
+                                {"name": "A.D.", "start": null, "offset": 0 }<br />
+                                ],<br />
+                                twoDigitYearMax: 2029,<br />
+                                patterns: {<br />
+                                // short date pattern<br />
+                                d: "M/d/yyyy",<br />
+                                // long date pattern<br />
+                                D: "dddd, MMMM dd, yyyy",<br />
+                                // short time pattern<br />
+                                t: "h:mm tt",<br />
+                                // long time pattern<br />
+                                T: "h:mm:ss tt",<br />
+                                // long date, short time pattern<br />
+                                f: "dddd, MMMM dd, yyyy h:mm tt",<br />
+                                // long date, long time pattern<br />
+                                F: "dddd, MMMM dd, yyyy h:mm:ss tt",<br />
+                                // month/day pattern
+        M: "MMMM dd",<br />
+                                // month/year pattern<br />
+                                Y: "yyyy MMMM",<br />
+                                // S is a sortable format that does not vary by culture<br />
+                                S: "yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss",<br />
+                                // formatting of dates in MySQL DataBases<br />
+                                ISO: "yyyy-MM-dd hh:mm:ss",<br />
+                                d1: "dd.MM.yyyy",<br />
+                                d2: "dd-MM-yyyy"<br />
+                                },<br />
+                                percentsymbol: "%",<br />
+                                currencysymbol: "$",<br />
+                                currencysymbolposition: "before",<br />
+                                decimalseparator: '.',<br />
+                                thousandsseparator: ','<br />
+                                }<br />
+                            </li>
+                        </ul>
+                            <h4>Code example</h4>
+                            <pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'>dataAdapter.formatDate(new Date(), <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'D'</span>)<div/></pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span30'>formatNumber</span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Returns a Formatted Number as a String. The <code>formatNumber</code> function can be used for formatting integer, float, decimal, currency and percentage values.
+                            </p>
+                            Function arguments: value(Number), format(String) and calendar(Object)
+                        <ul>
+                            <li>format<br />
+                                Possible Numeric formats:
+                                <br />
+                                "d" - decimal numbers.
+                                <br />
+                                "f" - floating-point numbers.
+                                <br />
+                                "n" - integer numbers.
+                                <br />
+                                "c" - currency numbers.
+                                <br />
+                                "p" - percentage numbers.
+                                <br />
+                                <br />
+                                For adding decimal places to the numbers, add a number after the formatting string.
+                                <br />
+                                For example: "c3" displays a number in this format $25.256
+                                <br />
+                            </li>
+                            <li>calendar<br />
+                                The structure of the expected calendar object is shown below:
+var calendar = {<br />
+                                // separator of parts of a date (e.g. '/' in 11/05/1955)<br />
+                                '/': "/",<br />
+                                // separator of parts of a time (e.g. ':' in 05:44 PM)<br />
+                                ':': ":",<br />
+                                // the first day of the week (0 = Sunday, 1 = Monday, etc)<br />
+                                firstDay: 0,<br />
+                                days: {<br />
+                                // full day names<br />
+                                names: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],<br />
+                                // abbreviated day names<br />
+                                namesAbbr: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],<br />
+                                // shortest day names<br />
+                                namesShort: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]<br />
+                                },<br />
+                                months: {<br />
+                                // full month names (13 months for lunar calendards -- 13th month should be "" if not lunar)<br />
+                                names: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", ""],<br />
+                                // abbreviated month names<br />
+                                namesAbbr: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", ""]<br />
+                                },<br />
+                                // AM and PM designators in one of these forms:<br />
+                                // The usual view, and the upper and lower case versions<br />
+                                //      [standard,lowercase,uppercase]<br />
+                                // The culture does not use AM or PM (likely all standard date formats use 24 hour time)<br />
+                                //      null<br />
+                                AM: ["AM", "am", "AM"],<br />
+                                PM: ["PM", "pm", "PM"],<br />
+                                eras: [<br />
+                                // eras in reverse chronological order.<br />
+                                // name: the name of the era in this culture (e.g. A.D., C.E.)<br />
+                                // start: when the era starts in ticks (gregorian, gmt), null if it is the earliest supported era.<br />
+                                // offset: offset in years from gregorian calendar<br />
+                                {"name": "A.D.", "start": null, "offset": 0 }<br />
+                                ],<br />
+                                twoDigitYearMax: 2029,<br />
+                                patterns: {<br />
+                                // short date pattern<br />
+                                d: "M/d/yyyy",<br />
+                                // long date pattern<br />
+                                D: "dddd, MMMM dd, yyyy",<br />
+                                // short time pattern<br />
+                                t: "h:mm tt",<br />
+                                // long time pattern<br />
+                                T: "h:mm:ss tt",<br />
+                                // long date, short time pattern<br />
+                                f: "dddd, MMMM dd, yyyy h:mm tt",<br />
+                                // long date, long time pattern<br />
+                                F: "dddd, MMMM dd, yyyy h:mm:ss tt",<br />
+                                // month/day pattern
+        M: "MMMM dd",<br />
+                                // month/year pattern<br />
+                                Y: "yyyy MMMM",<br />
+                                // S is a sortable format that does not vary by culture<br />
+                                S: "yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss",<br />
+                                // formatting of dates in MySQL DataBases<br />
+                                ISO: "yyyy-MM-dd hh:mm:ss",<br />
+                                d1: "dd.MM.yyyy",<br />
+                                d2: "dd-MM-yyyy"<br />
+                                },<br />
+                                percentsymbol: "%",<br />
+                                currencysymbol: "$",<br />
+                                currencysymbolposition: "before",<br />
+                                decimalseparator: '.',<br />
+                                thousandsseparator: ','<br />
+                                }<br />
+                            </li>
+                        </ul>
+                            <h4>Code example</h4>
+                            <pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'>dataAdapter.formatNumber(10, <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'c2'</span>)<div/></pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span25'>getRecordsHierarchy</span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Returns a hierarchical array from a set ot flat data. The method has 4 parameters, the last 2 of which are optional. The first parameter is the field’s id. The second parameter represents the parent field’s id. These parameters should point to a valid ‘datafield’ from the Data Source. The third parameter which is optional specifies the name of the ‘children’ collection. The last parameter specifies the mapping between the Data Source fields and custom data fields.
+                            </p>
+                            <h4>Code example</h4>
+                            <pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'>var data = [<div/>{ <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"id": "2"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"parentid": "1"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text": "Hot Chocolate"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"value": "$2.3"</span><div/>}, {<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"id": "3"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"parentid": "1"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text": "Peppermint Hot Chocolate"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"value": "$2.3"</span><div/>}, {<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"id": "4"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"parentid": "1"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text": "Salted Caramel Hot Chocolate"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"value": "$2.3"</span><div/>}, {<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"id": "5"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"parentid": "1"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text": "White Hot Chocolate"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"value": "$2.3"</span><div/>}, {<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text": "Chocolate Beverage"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"id": "1"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"parentid": "-1"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"value": "$2.3"</span><div/>}, {<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"id": "6"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text": "Espresso Beverage"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"parentid": "-1"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"value": "$2.3"</span><div/>}, {<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"id": "7"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"parentid": "6"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text": "Caffe Americano"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"value": "$2.3"</span><div/>    }, {<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"id": "8"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text": "Caffe Latte"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"parentid": "6"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"value": "$2.3"</span><div/>}, {<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"id": "9"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text": "Caffe Mocha"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"parentid": "6"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"value": "$2.3"</span><div/>    }, {<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"id": "10"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text": "Cappuccino"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"parentid": "6"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"value": "$2.3"</span><div/>}, {<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"id": "11"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text": "Pumpkin Spice Latte"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"parentid": "6"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"value": "$2.3"</span><div/>    }, {<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"id": "12"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text": "Frappuccino"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"parentid": "-1"</span><div/>}, {<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"id": "13"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text": "Caffe Vanilla Frappuccino"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"parentid": "12"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"value": "$2.3"</span><div/>    }, {<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"id": "15"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text": "450 calories"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"parentid": "13"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"value": "$2.3"</span><div/>}, {<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"id": "16"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text": "16g fat"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"parentid": "13"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"value": "$2.3"</span><div/>    }, {<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"id": "17"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text": "13g protein"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"parentid": "13"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"value": "$2.3"</span><div/>}, {<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"id": "14"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"text": "Caffe Vanilla Frappuccino Light"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"parentid": "12"</span>,<div/>    <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"value": "$2.3"</span><div/>    }]<div/><div/>// prepare the data<div/>var source =<div/>{<div/>    datatype: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"json"</span>,<div/>    datafields: [<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'id'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'parentid'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'text'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'value'</span> }<div/>    ],<div/>    id: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'id'</span>,<div/>    localdata: data<div/>};<div/><div/>// create data adapter.<div/>var dataAdapter = new $.jqx.dataAdapter(source);<div/>// perform Data Binding.<div/>dataAdapter.dataBind();<div/>var records = dataAdapter.getRecordsHierarchy(<span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'id', 'parentid', 'items', [{ name: 'text', map: 'label'</span>}]);<div/></pre>
+                            The above code returns an Array object which has 3 items. Each item has <code>id</code>, <code>parentid</code>, <code>label</code>, <code>value</code> and <code>items</code> fields. The sub-items are stored in the <code>items</code> array.
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span26'>getGroupedRecords</span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Returns a hierarchical array from a set ot flat data. The method has 4 parameters. The first parameter is an array of grouping fields. The second parameter is the sub items collection name. The third parameter is the group's name. The last parameter specifies the mapping between the Data Source fields and custom data fields.
+                            </p>
+                            <h4>Code example</h4>
+                            <pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'>var source =<div/>{<div/>    datatype: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"xml"</span>,<div/>    datafields: [<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'CompanyName', map: 'm\\:properties&gt;d\\:CompanyName'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ContactName', map: 'm\\:properties&gt;d\\:ContactName'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ContactTitle', map: 'm\\:properties&gt;d\\:ContactTitle'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'City', map: 'm\\:properties&gt;d\\:City'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'PostalCode', map: 'm\\:properties&gt;d\\:PostalCode'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'Country', map: 'm\\:properties&gt;d\\:Country'</span> }<div/>    ],<div/>    root: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"entry"</span>,<div/>    record: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"content"</span>,<div/>    id: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'m\\:properties&gt;d\\:CustomerID'</span>,<div/>    url: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"../sampledata/customers.xml"</span>,<div/>    async: false<div/>};<div/>// create data adapter.<div/>var dataAdapter = new $.jqx.dataAdapter(source);<div/>// perform Data Binding.<div/>dataAdapter.dataBind();<div/><div/>var records = dataAdapter.getGroupedRecords([<span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'Country', 'City'], 'items', 'label', [{ name: 'CompanyName', map: 'label'</span> }]);<div/> <div/></pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span27'>getGroupedRecords</span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Returns a hierarchical array from a set ot flat data. The method has 4 parameters. The first parameter is an array of grouping fields. The second parameter is the sub items collection name. The third parameter is the group's name. The last parameter specifies the mapping between the Data Source fields and custom data fields.
+                            </p>
+                            <h4>Code example</h4>
+                            <pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'>var source =<div/>{<div/>    datatype: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"xml"</span>,<div/>    datafields: [<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'CompanyName', map: 'm\\:properties&gt;d\\:CompanyName'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ContactName', map: 'm\\:properties&gt;d\\:ContactName'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'ContactTitle', map: 'm\\:properties&gt;d\\:ContactTitle'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'City', map: 'm\\:properties&gt;d\\:City'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'PostalCode', map: 'm\\:properties&gt;d\\:PostalCode'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'Country', map: 'm\\:properties&gt;d\\:Country'</span> }<div/>    ],<div/>    root: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"entry"</span>,<div/>    record: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"content"</span>,<div/>    id: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'m\\:properties&gt;d\\:CustomerID'</span>,<div/>    url: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"../sampledata/customers.xml"</span>,<div/>    async: false<div/>};<div/>// create data adapter.<div/>var dataAdapter = new $.jqx.dataAdapter(source);<div/>// perform Data Binding.<div/>dataAdapter.dataBind();<div/><div/>var records = dataAdapter.getGroupedRecords([<span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'Country', 'City'], 'items', 'label', [{ name: 'CompanyName', map: 'label'</span> }]);<div/> <div/></pre>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span28'>getAggregatedData</span>
+                    </td>
+                    <td>
+                        <span>function</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Returns an Array of Aggregated data.
+                            </p>
+                            var dataAdapter = new $.jqx.dataAdapter(source);<br />
+                            dataAdapter.dataBind();<br />
+                            var summaryData = dataAdapter.getAggregatedData([<br />
+                            { name: 'quantity', aggregates: ['min', 'max', 'sum'] },<br />
+                            { name: 'price', aggregates: ['avg', 'product', 'count'] }<br />
+                            ]);<br />
+                            The getAggregatedData method accepts 3 params. The first parameter is an array which defines the data fields, type of functions and format strings.
+                            <br />
+                            Possible Numeric formats:
+                            <br />
+                            "d" - decimal numbers.
+                            <br />
+                            "f" - floating-point numbers.
+                            <br />
+                            "n" - integer numbers.
+                            <br />
+                            "c" - currency numbers.
+                            <br />
+                            "p" - percentage numbers.
+                            <br />
+                            <br />
+                            For adding decimal places to the numbers, add a number after the formatting string.
+                            <br />
+                            For example: "c3" displays a number in this format $25.256
+                            <br />
+                            Possible Date formats:
+                            <br />
+                            <br />
+                            // short date pattern d: "M/d/yyyy",
+                            <br />
+                            // long date pattern D: "dddd, MMMM dd, yyyy",
+                            <br />
+                            // short time pattern t: "h:mm tt",
+                            <br />
+                            // long time pattern T: "h:mm:ss tt",
+                            <br />
+                            // long date, short time pattern f: "dddd, MMMM dd, yyyy h:mm tt",
+                            <br />
+                            // long date, long time pattern F: "dddd, MMMM dd, yyyy h:mm:ss tt",
+                            <br />
+                            // month/day pattern M: "MMMM dd",
+                            <br />
+                            // month/year pattern Y: "yyyy MMMM",
+                            <br />
+                            // S is a sortable format that does not vary by culture S: "yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss"
+                            <br />
+                            <br />
+                            Possible Date format strings: 
+                            <br />
+                            "d"-the day of the month;<br />
+                            "dd"-the day of the month;
+                            <br />
+                            "ddd"-the abbreviated name of the day of the week;<br />
+                            "dddd"- the full name of the day of the week;<br />
+                            "h"-the hour, using a 12-hour clock from 1 to 12;
+                            <br />
+                            "hh"-the hour, using a 12-hour clock from 01 to 12;
+                            <br />
+                            "H"-the hour, using a 24-hour clock from 0 to 23;<br />
+                            "HH"- the hour, using a 24-hour clock from 00 to 23;
+                            <br />
+                            "m"-the minute, from 0 through 59;<br />
+                            "mm"-the minutes,from 00 though59;<br />
+                            "M"- the month, from 1 through 12;<br />
+                            "MM"- the month, from 01 through 12;<br />
+                            "MMM"-the abbreviated name of the month;<br />
+                            "MMMM"-the full name of the month;<br />
+                            "s"-the second, from 0 through 59;
+                            <br />
+                            "ss"-the second, from 00 through 59;
+                            <br />
+                            "t"- the first character of the AM/PM designator;<br />
+                            "tt"-the AM/PM designator;
+                            <br />
+                            "y"- the year, from 0 to 99;
+                            <br />
+                            "yy"- the year, from 00 to 99;
+                            <br />
+                            "yyy"-the year, with a minimum of three digits;
+                            <br />
+                            "yyyy"-the year as a four-digit number;
+                            <br />
+                            The supported aggregates are:<br />
+                            'avg' - Average aggregate<br />
+                            'count' - Count aggregate<br />
+                            'min' - Min aggregate<br />
+                            'max' - Max aggregate<br />
+                            'sum' - Sum aggregate<br />
+                            'product' - Product aggregate<br />
+                            'stdev' - Standard deviation on a sample<br />
+                            'stdevp' - Standard deviation on a population<br />
+                            'var' - Variance on an a sample<br />
+                            'varp' - Variance on an entire population.<br />
+                            <br />
+                            The following code shows how to specify the data formatting when calling the getAggregatedData method.<br />
+                            <br />
+                            var dataAdapter = new $.jqx.dataAdapter(source);<br />
+                            dataAdapter.dataBind();<br />
+                            var summaryData = dataAdapter.getAggregatedData([<br />
+                            { name: 'quantity', aggregates: ['min', 'max', 'sum'], formatStrings: ['n', 'n', 'n' ]},<br />
+                            { name: 'price', aggregates: ['avg', 'sum', 'count'], formatStrings: ['c2', 'c2', 'n'] }<br />
+                            ]);<br />
+                            <br />
+                            The second parameter is optional and represents a localization object specified in this format:<br />
+                            <br />
+                            var calendar = {<br />
+                            // separator of parts of a date (e.g. '/' in 11/05/1955)<br />
+                            '/': "/",<br />
+                            // separator of parts of a time (e.g. ':' in 05:44 PM)<br />
+                            ':': ":",<br />
+                            // the first day of the week (0 = Sunday, 1 = Monday, etc)<br />
+                            firstDay: 0,<br />
+                            days: {<br />
+                            // full day names<br />
+                            names: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],<br />
+                            // abbreviated day names<br />
+                            namesAbbr: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],<br />
+                            // shortest day names<br />
+                            namesShort: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]<br />
+                            },<br />
+                            months: {<br />
+                            // full month names (13 months for lunar calendards -- 13th month should be "" if not lunar)<br />
+                            names: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", ""],<br />
+                            // abbreviated month names<br />
+                            namesAbbr: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", ""]<br />
+                            },<br />
+                            // AM and PM designators in one of these forms:<br />
+                            // The usual view, and the upper and lower case versions<br />
+                            //      [standard,lowercase,uppercase]<br />
+                            // The culture does not use AM or PM (likely all standard date formats use 24 hour time)<br />
+                            //      null<br />
+                            AM: ["AM", "am", "AM"],<br />
+                            PM: ["PM", "pm", "PM"],<br />
+                            eras: [<br />
+                            // eras in reverse chronological order.<br />
+                            // name: the name of the era in this culture (e.g. A.D., C.E.)<br />
+                            // start: when the era starts in ticks (gregorian, gmt), null if it is the earliest supported era.<br />
+                            // offset: offset in years from gregorian calendar<br />
+                            {"name": "A.D.", "start": null, "offset": 0 }<br />
+                            ],<br />
+                            twoDigitYearMax: 2029,<br />
+                            patterns: {<br />
+                            // short date pattern<br />
+                            d: "M/d/yyyy",<br />
+                            // long date pattern<br />
+                            D: "dddd, MMMM dd, yyyy",<br />
+                            // short time pattern<br />
+                            t: "h:mm tt",<br />
+                            // long time pattern<br />
+                            T: "h:mm:ss tt",<br />
+                            // long date, short time pattern<br />
+                            f: "dddd, MMMM dd, yyyy h:mm tt",<br />
+                            // long date, long time pattern<br />
+                            F: "dddd, MMMM dd, yyyy h:mm:ss tt",<br />
+                            // month/day pattern
+        M: "MMMM dd",<br />
+                            // month/year pattern<br />
+                            Y: "yyyy MMMM",<br />
+                            // S is a sortable format that does not vary by culture<br />
+                            S: "yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss",<br />
+                            // formatting of dates in MySQL DataBases<br />
+                            ISO: "yyyy-MM-dd hh:mm:ss",<br />
+                            d1: "dd.MM.yyyy",<br />
+                            d2: "dd-MM-yyyy"<br />
+                            },<br />
+                            percentsymbol: "%",<br />
+                            currencysymbol: "$",<br />
+                            currencysymbolposition: "before",<br />
+                            decimalseparator: '.',<br />
+                            thousandsseparator: ','<br />
+                            }<br />
+                            <br />
+                            The last parameter is optional, too. It allows you to pass an array of records to the method. By default, the method aggregates the data loaded via the data adapter.
+                         <br />
+                            <h4>Code example</h4>
+                            <pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'>var data = generatedata(200);<div/><div/>var source =<div/>{<div/>    localdata: data,<div/>    datatype: <span style="clear: both; padding: 0px; margin: 0px; color: #a24;">"array"</span>,<div/>    datafields:<div/>    [<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'firstname', type: 'string'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'lastname', type: 'string'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'productname', type: 'string'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'available', type: 'bool'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'quantity', type: 'number'</span> },<div/>        { name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'price', type: 'number'</span> }<div/>    ],<div/>    updaterow: function (rowid, rowdata) {<div/>        // synchronize with the server - send update command   <div/>    }<div/>};<div/><div/>var dataAdapter = new $.jqx.dataAdapter(source);<div/>dataAdapter.dataBind();<div/><div/>var aggregate = dataAdapter.getAggregatedData([{ name: <span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'price', aggregates: ['min', 'max', 'sum', 'avg'], formatStrings: ['c2', 'c2', 'c2', 'c2'</span>]}]);<div/>var avg = aggregate.price.avg;<div/>var min = aggregate.price.min;<div/>var max = aggregate.price.max;<div/>var sum = aggregate.price.sum;<div/></pre>
+                            <br />
+                            The <code>generatedata</code> function used in the above sample is part of generatedata.js which is in the demos/jqxgrid folder of the download package.
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span21'>records</span>
+                    </td>
+                    <td>
+                        <span>Array</span>
+                    </td>
+                    <td>[]
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Gets the array of the loaded data records when the data binding is completed. Note: For Async calls, make sure to use "records" in the loadComplete callback function.
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br />
+        </div>
+    </div>
+</body>
+</html>

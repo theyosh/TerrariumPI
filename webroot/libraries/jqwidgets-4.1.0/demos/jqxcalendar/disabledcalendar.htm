@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="keywords" content="jQuery Calendar, Month Calendar, MonthCalendar, DateTimeInput, DateTimePicker, Date Picker" /> 
+<meta name="description" content="In this demo the jqxCalendar is disabled. In order to disable the widget, set its disabled property to true." />
+<title id='Description'>
+In this demo the jqxCalendar is disabled. In order to disable the widget, set its disabled property to true.
+</title>
+<link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css"/>
+<script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../scripts/demos.js"></script>
+<script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+<script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+<script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+<script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+ </head>
+<body class='default'>
+<div id='content'>
+  <script type="text/javascript">
+      $(document).ready(function () {
+          // Create jqxCalendar.
+          $("#jqxWidget").jqxCalendar({ width: '220px', height: '220px'});
+          // Disable jqxCalendar.
+          $("#jqxWidget").jqxCalendar({ disabled: true });
+      });
+  </script>  
+  <div id='jqxWidget'></div>
+</div>
+</body>
+</html>

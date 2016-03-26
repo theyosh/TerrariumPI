@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">jqxChart custom labels, grid lines and tick marks offsets</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var sampleData = [
+                { a: 0.1535, b: 0.5 },
+                { a: 0.48, b: 20.5 },
+                { a: 10, b: 60 },
+                { a: 100, b: 80 },
+                { a: 200, b: 90 },
+                { a: 245.11, b: 100.13 },
+                { a: 300.13, b: 150.13 },
+                { a: 340, b: 200 }
+               ];
+
+            var settings = {
+                title: "Custom labels, grid lines and tick marks offsets",
+                description: "This example demonstrates how to use labels, tick marks and grid lines at custom offsets",
+                padding: { left: 5, top: 5, right: 15, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                source: sampleData,
+                enableAnimations: false,
+                xAxis:
+                {
+                    dataField: "a",
+                    logarithmicScale: true,
+                    logarithmicScaleBase: 2,
+                    labels: {
+                        visible: 'custom', // show only custom labels. Change to true to show all labels or false to hide all
+                        custom: [{ value: 10 }, { value: 20 }, { value: 'custom label at offset 100', offset: 100}], // an array of items representing custom labels
+                        // if the item has an offset property, the item is rendered at that offset, otherwise the value is mapped to an offset
+                        // corresponding to its position on the axis scale. If an item has both a value and an offset property, the value
+                        // property is not mappped to an offset, and instead it's just used to display the label
+
+
+                        // the format function shows how to format the labels before they are displayed
+                        formatFunction: function (value) {
+                            return "{" + value + "}";
+                        }
+                    },
+                    gridLines:
+                    {
+                        visible: 'custom', // show only custom grid lines. Change to true to show all grid lines or false to hide all
+                        custom: [{ value: 10 }, { value: 20 }, { offset: 100}]
+                    },
+                    tickMarks:
+                    {
+                        visible: 'custom', // show only custom tick marks. Change to true to show all tick marks or false to hide all
+                        custom: [{ value: 10 }, { value: 20 }, { offset: 100}]
+                    },
+                    flip: true
+                },
+                valueAxis: {
+                    logarithmicScale: true,
+                    logarithmicScaleBase: 2,
+                    title: { text: "Value" },
+                    labels: {
+                        visible: true,
+                        horizontalAlignment: "right",
+                        custom: [{ value: 10 }, { value: 20 }, { offset: 90, value: 'custom'}]
+                    },
+                    gridLines: {
+                        custom: [{ value: 10 }, { value: 20 }, { offset: 90}]
+                    },
+                    tickMarks: {
+                        custom: [{ value: 10 }, { value: 20 }, { offset: 90}]
+                    },
+                    flip: false
+                },
+                seriesGroups:
+                        [
+                            {
+                                //   orientation: 'horizontal',
+                                type: "scatter",
+                                series: [
+                                        { dataField: "a", displayText: "A", symbolType: "diamond", symbolSize: 10 },
+                                        { dataField: "b", displayText: "B", symbolType: "triangle_up", symbolSize: 10 }
+                                    ],
+
+                                bands: [{ from: 64, to: 256, color: 'red', opacity: 0.2}]
+                            }
+                        ]
+            };
+
+            // setup chart settings
+            $("#chartContainer").jqxChart(settings);
+        });
+</script>
+</head>
+<body">
+    <div id='chartContainer' style="width:850px; height:500px">
+    </div>
+</body>
+</html>

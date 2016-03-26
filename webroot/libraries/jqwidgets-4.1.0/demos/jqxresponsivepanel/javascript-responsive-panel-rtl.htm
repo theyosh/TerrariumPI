@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">This demo showcases jqxResponsivePanel's right-to-left support.
+        To collapse or expand the responsive panel, resize the browser window. Best viewed
+        in a separate window.</title>
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <style type="text/css">
+        #header {
+            box-sizing: border-box;
+            margin-bottom: 2px;
+            width: 100%;
+            height: 50px;
+            padding: 10px 0 0 10px;
+        }
+
+        #jqxResponsivePanel, #toggleResponsivePanel {
+            float: right;
+        }
+
+        #toggleResponsivePanel {
+            margin-right: 10px;
+        }
+
+        #jqxResponsivePanel {
+            padding: 5px;
+            direction: rtl !important;
+        }
+    </style>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxresponsivepanel.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#jqxResponsivePanel').jqxResponsivePanel({
+                width: 250,
+                height: 'auto',
+                collapseBreakpoint: 800,
+                toggleButton: $('#toggleResponsivePanel'),
+                animationType: 'slide',
+                animationDirection: 'right',
+                autoClose: false
+            });
+        });
+    </script>
+</head>
+<body>
+    <div style="float: right; width: 600px;">
+        <div id="header">
+            <div id="toggleResponsivePanel">
+            </div>
+        </div>
+        <div id="jqxResponsivePanel">
+            <img src="../../images/leo.jpg" /><br />
+            <strong>Leo</strong> the Lion is one of the earliest recognized constellations.
+        The Mesopotamians are known to have documented the "lion" constellation. The Persians
+        called it Ser or Shir; the Turks, Artan; the Syrians, Aryo; the Jewish, Arye; the
+        Indians, Simha. These are all translated as "lion."
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">jqxNavBar is a simple widget which arranges html elements horizontally or vertically</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.arctic.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxnavbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#navBar1, #navBar2, #navBar3, #navBar4").jqxNavBar({
+                height: 40, selectedItem: 0
+            });
+            $("#navBar5").jqxNavBar({ height: 160, selectedItem: 0 });
+            $("#navBar6").jqxNavBar({ height: 40, columns: ['30%', '50%', '20%'], selectedItem: 0 });
+        });
+    </script>
+</head>
+<body class='default'>
+    NavBar with 2 Items. Each item is with 50% width.
+    <br />
+    <div id="navBar1">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+        </ul>
+    </div>
+    <br />
+    NavBar with 3 Items. Each item is with 33.33% width.
+    <br />
+    <div id="navBar2">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+    </div>
+    <br />
+    NavBar with 4 Items. Each item is with 25% width.
+      <br />
+    <div id="navBar3">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+    <br />
+    NavBar with 5 Items. Each item is with 20% width.
+    <br />
+    <div id="navBar4">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+    </div>
+    <br />
+    NavBar with more than 5 Items. Items are displayed in 2 columns and each item is with 50% width.
+    <br />
+    <div id="navBar5">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+        </ul>
+    </div>
+    <br />
+    NavBar with "columns" set to ['30%', '50%', '20%'].
+    <br />
+    <div id="navBar6">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+    </div>
+</body>
+</html>

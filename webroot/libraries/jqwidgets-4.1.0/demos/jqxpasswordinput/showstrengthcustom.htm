@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">This demo illustrates how to customize the rendering of the Strength Tooltip.</title>
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpasswordinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxPasswordInput").jqxPasswordInput({
+                width: 200, height: 25,  placeHolder: "Enter password:", showStrength: true, showStrengthPosition: "right",
+                // The passwordStrength enables you to override the built-in strength calculation.
+                passwordStrength: function (password, characters, defaultStrength) {
+                    var length = password.length;
+                    var letters = characters.letters;
+                    var numbers = characters.numbers;
+                    var specialKeys = characters.specialKeys;
+                    var strengthCoefficient = letters + numbers + 2 * specialKeys + letters * numbers * specialKeys;
+                    var strengthValue;
+                    if (length < 4) {
+                        strengthValue = "Too short";
+                    } else if (strengthCoefficient < 10) {
+                        strengthValue = "Weak";
+                    } else if (strengthCoefficient < 20) {
+                        strengthValue = "Fair";
+                    } else if (strengthCoefficient < 30) {
+                        strengthValue = "Good";
+                    } else {
+                        strengthValue = "Strong";
+                    };
+                    return strengthValue;
+                },
+                // The strengthTypeRenderer enables you to override the built-in rendering of the Strength tooltip.
+                strengthTypeRenderer: function (password, characters, defaultStrength) {
+                var length = password.length;
+                var letters = characters.letters;
+                var numbers = characters.numbers;
+                var specialKeys = characters.specialKeys;
+                var strengthCoefficient = letters + numbers + 2 * specialKeys + letters * numbers / 2 + length;
+                var strengthValue;
+                var color;
+                if (length < 8) {
+                    strengthValue = "Too short";
+                    color = "rgb(170, 0, 51)";
+                } else if (strengthCoefficient < 20) {
+                    strengthValue = "Weak";
+                    color = "rgb(170, 0, 51)";
+                } else if (strengthCoefficient < 30) {
+                    strengthValue = "Fair";
+                    color = "rgb(255, 204, 51)";
+                } else if (strengthCoefficient < 40) {
+                    strengthValue = "Good";
+                    color = "rgb(45, 152, 243)";
+                } else {
+                    strengthValue = "Strong";
+                    color = "rgb(118, 194, 97)";
+                };
+                return "<div style='font-style: italic; font-weight: bold; color: " + color + ";'>" + strengthValue + "</div>";
+            }
+            });
+        });
+    </script>
+</head>
+<body>
+    <input id="jqxPasswordInput" type="password" style="margin-top: 5px;" />
+</body>
+</html>

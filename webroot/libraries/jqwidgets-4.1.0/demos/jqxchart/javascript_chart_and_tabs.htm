@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This demo shows how to integrate jqxChart with jqxTabs.
+    </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var initFinancialChart = function () {
+              var source =
+              {
+                  datatype: "tsv",
+                  datafields: [
+                      { name: 'Date' },
+                      { name: 'SPOpen' },
+                      { name: 'SPHigh' },
+                      { name: 'SPLow' },
+                      { name: 'SPClose' },
+                      { name: 'SPVolume' },
+                      { name: 'SPAdjClose' }
+                  ],
+                  url: '../sampledata/nasdaq_vs_sp500_detailed.txt'
+              };
+
+                var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+                var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+                var toolTipCustomFormatFn = function (value, itemIndex, serie, group, categoryValue, categoryAxis) {
+                    var dataItem = dataAdapter.records[itemIndex];
+                    var volume = dataItem.SPVolume;
+
+                    return '<DIV style="text-align:left"><b>Date: ' +
+                            categoryValue.getDate() + '-' + months[categoryValue.getMonth()] + '-' + categoryValue.getFullYear() +
+                            '</b><br />Open price: $' + value.open +
+                            '</b><br />Close price: $' + value.close +
+                            '</b><br />Low price: $' + value.low +
+                            '</b><br />High price: $' + value.high +
+                            '</b><br />Daily volume: ' + volume
+                    '</DIV>';
+                };
+
+                // prepare jqxChart settings
+                var settings = {
+                    title: "S&P 500 Candlestick Chart",
+                    description: "(January 2014 - November 2014)",
+                    enableAnimations: true,
+                    animationDuration: 1500,
+                    enableCrosshairs: true,
+                    padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                    source: dataAdapter,
+                    xAxis:
+                    {
+                        dataField: 'Date',
+                        formatFunction: function (value) {
+                            return value.getDate() + '-' + months[value.getMonth()] + '\'' + value.getFullYear().toString().substring(2);
+                        },
+                        type: 'date',
+                        valuesOnTicks: true,
+                        minValue: new Date(2014, 0, 1),
+                        maxValue: new Date(2014, 11, 1)
+                    },
+                    colorScheme: 'scheme17',
+                    seriesGroups:
+                        [
+                            {
+                                type: 'candlestick',
+                                columnsMinWidth: 4,
+                                //skipOverlappingPoints: false,
+                                toolTipFormatFunction: toolTipCustomFormatFn,
+                                valueAxis:
+                                {
+                                    title: { text: 'S&P 500<br>' },
+                                    minValue: 1500
+                                },
+                                series: [
+                                    {
+                                        dataFieldClose: 'SPClose',
+                                        displayTextClose: 'S&P Close price',
+                                        dataFieldOpen: 'SPOpen',
+                                        displayTextOpen: 'S&P Open price',
+                                        dataFieldHigh: 'SPHigh',
+                                        displayTextHigh: 'S&P High price',
+                                        dataFieldLow: 'SPLow',
+                                        displayTextLow: 'S&P Low price',
+                                        displayText: 'S&P 500',
+                                        lineWidth: 1
+                                    }
+                                ]
+                            },
+                            {
+                                type: 'line',
+                                valueAxis:
+                                {
+                                    position: 'right',
+                                    title: { text: '<br>Daily Volume' },
+                                    gridLines: { visible: false },
+                                    tickMarks: { visible: false },
+                                    labels: {
+                                        formatFunction: function (value) {
+                                            return value / 1000000 + 'M';
+                                        }
+                                    }
+                                },
+                                series: [
+                                    {
+                                        dataField: 'SPVolume',
+                                        displayText: 'Volume',
+                                        lineWidth: 1
+                                    }
+                                ]
+                            }
+                        ]
+                };
+
+                $('#financialChart').jqxChart(settings);
+            }
+
+            var initChart = function () {
+                // prepare the data
+                var source =
+               {
+                   datatype: "csv",
+                   datafields: [
+                        { name: 'Date' },
+                        { name: 'S&P 500' },
+                        { name: 'NASDAQ' }
+                   ],
+                   url: '../sampledata/nasdaq_vs_sp500.txt'
+               };
+
+                var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+                var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+                // prepare jqxChart settings
+                var settings = {
+                    title: "U.S. Stock Market Index Performance (2014)",
+                    description: "NASDAQ Composite compared to S&P 500",
+                    enableAnimations: true,
+                    showLegend: true,
+                    padding: { left: 10, top: 5, right: 10, bottom: 5 },
+                    titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                    source: dataAdapter,
+                    xAxis:
+                    {
+                        dataField: 'Date',
+                        type: 'date',
+                        baseUnit: 'month',
+                        unitInterval: 1,
+                        valuesOnTicks: true,
+                        labels: {
+                            formatFunction: function (value) {
+                                return months[value.getMonth()];
+                            }
+                        },
+                        toolTipFormatFunction: function (value) {
+                            return value.getDate() + '-' + months[value.getMonth()] + '-' + value.getFullYear();
+                        },
+                        tickMarks: { visible: true, unitInterval: 1 },
+                        gridLines: { visible: true, unitInterval: 3 }
+                    },
+                    colorScheme: 'scheme04',
+                    seriesGroups:
+                    [
+                        {
+                            type: 'line',
+                            valueAxis:
+                            {
+                                unitInterval: 500,
+                                visible: true,
+                                title: { text: 'Daily Closing Price' }
+                            },
+                            series: [
+                                    { dataField: 'S&P 500', displayText: 'S&P 500' },
+                                    { dataField: 'NASDAQ', displayText: 'NASDAQ' }
+                            ]
+                        }
+                    ]
+                };
+
+                // setup the chart
+                $('#chart').jqxChart(settings);
+            }
+
+            // init widgets.
+            var initWidgets = function (tab) {
+                switch (tab) {
+                    case 0:
+                        initFinancialChart();
+                        break;
+                    case 1:
+                        initChart();
+                        break;
+                }
+            }
+
+            $('#jqxTabs').jqxTabs({ width: 750, height: 560, initTabContent: initWidgets });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxTabs'>
+        <ul>
+            <li style="margin-left: 30px;">
+                <div style="height: 20px; margin-top: 5px;">
+                    <div style="margin-left: 4px; vertical-align: middle; text-align: center; float: left;">
+                        Candlestick Chart
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="height: 20px; margin-top: 5px;">
+                    <div style="margin-left: 4px; vertical-align: middle; text-align: center; float: left;">
+                        Line Chart
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div style="overflow: hidden;">
+            <div id='financialChart' style="width: 100%; height: 100%">
+            </div>
+        </div>
+        <div style="overflow: hidden;">
+            <div id='chart' style="width: 100%; height: 100%">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

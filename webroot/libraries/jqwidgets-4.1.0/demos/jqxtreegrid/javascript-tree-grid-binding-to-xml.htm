@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">Data Binding to XML data in jqxTreeGrid.</title>
+    <meta name="description" content="This sample demonstrates how we can bind jQWidgets TreeGrid widget to XML Data by using jQWidgets DataAdapter plugin.">
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtreegrid.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {          
+            // prepare the data
+            var url = "../sampledata/employees.xml";
+
+            var source =
+            {
+                dataType: "xml",
+                dataFields: [
+                    { name: 'EmployeeID', type: 'number' },
+                    { name: 'ReportsTo', type: 'number' },
+                    { name: 'FirstName', type: 'string' },
+                    { name: 'LastName', type: 'string' },
+                    { name: 'City', type: 'string' },
+                    { name: 'Address', type: 'string' },
+                    { name: 'Title', type: 'string' },
+                    { name: 'HireDate', type: 'date' },
+                    { name: 'BirthDate', type: 'date' }
+                ],
+                hierarchy:
+                {
+                    keyDataField: { name: 'EmployeeID' },
+                    parentDataField: { name: 'ReportsTo' }
+                },
+                id: 'EmployeeID',
+                root: 'Employees',
+                record: 'Employee',
+                url: url
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            // create Tree Grid
+            $("#treeGrid").jqxTreeGrid(
+            {
+                width: 850,
+                source: dataAdapter,
+                pageable: true,
+                columnsResize: true,
+                ready: function()
+                {
+                    // expand row with 'EmployeeKey = 2'
+                    $("#treeGrid").jqxTreeGrid('expandRow', 2);
+                },
+                columns: [
+                  { text: 'FirstName', dataField: 'FirstName', minWidth: 100, width: 200 },
+                  { text: 'LastName', dataField: 'LastName', width: 200 },
+                  { text: 'Title', dataField: 'Title', width: 300 },
+                  { text: 'Address', dataField: 'Address', width: 200 },
+                  { text: 'City', dataField: 'City', width: 150 },
+                  { text: 'Birth Date', dataField: 'BirthDate', cellsFormat: 'd', width: 120 },
+                  { text: 'Hire Date', dataField: 'HireDate', cellsFormat: 'd', width: 120 }
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="treeGrid">
+    </div>
+</body>
+</html>

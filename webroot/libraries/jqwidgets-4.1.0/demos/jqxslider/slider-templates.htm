@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This demo demonstrates the Slider's Templates.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxslider.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            $('#jqxSlider').jqxSlider({ tooltip: true, mode: 'fixed' });
+            $('#jqxSlider2').jqxSlider({ template: "primary", tooltip: true, mode: 'fixed' });
+            $('#jqxSlider3').jqxSlider({ template: "success", tooltip: true, mode: 'fixed' });
+            $('#jqxSlider4').jqxSlider({ template: "info", tooltip: true, mode: 'fixed' });
+            $('#jqxSlider5').jqxSlider({ template: "warning", tooltip: true, mode: 'fixed' });
+            $('#jqxSlider6').jqxSlider({ template: "danger", tooltip: true, mode: 'fixed' });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div style='margin-top: 10px;'>Default</div>
+    <div style='margin-top: 10px;' id='jqxSlider'></div>
+    <div style='margin-top: 10px;'>Primary</div>
+    <div style='margin-top: 10px;' id='jqxSlider2'></div>
+    <div style='margin-top: 10px;'>Success</div>
+    <div style='margin-top: 10px;' id='jqxSlider3'></div>
+    <div style='margin-top: 10px;'>Info</div>
+    <div style='margin-top: 10px;' id='jqxSlider4'></div>
+    <div style='margin-top: 10px;'>Warning</div>
+    <div style='margin-top: 10px;' id='jqxSlider5'></div>
+    <div style='margin-top: 10px;'>Danger</div>
+    <div style='margin-top: 10px;' id='jqxSlider6'></div>
+</body>
+</html>

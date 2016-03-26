@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>jqxComboBox has built-in auto complete functionality which enables users to quickly find and select from a pre-populated list of values as they type.
+    </title>
+    <meta name="description" content="AngularJS ComboBox example. This example demonstrates a ComboBox auto-complete feature." /> 
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> 
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxexpander.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            var source = [
+                "Affogato",
+                "Americano",
+                "Bicerin",
+                "Breve",
+                "Café Bombón",
+                "Café au lait",
+                "Caffé Corretto",
+                "Café Crema",
+                "Caffé Latte",
+                "Caffé macchiato",
+                "Café mélange",
+                "Coffee milk",
+                "Cafe mocha",
+                "Cappuccino",
+                "Carajillo",
+                "Cortado",
+                "Cuban espresso",
+                "Espresso",
+                "Eiskaffee",
+                "The Flat White",
+                "Frappuccino",
+                "Galao",
+                "Greek frappé coffee",
+                "Iced Coffee",
+                "Indian filter coffee",
+                "Instant coffee",
+                "Irish coffee",
+                "Liqueur coffee"
+            ];
+            $scope.comboBoxInstance = {};
+            $scope.comboBoxSettings = {created: function(args){$scope.comboBoxInstance = args.instance;}, autoComplete: false, disabled: false, source: source, selectedIndex: 0, width: '200', height: '25' };
+            
+            $scope.dropDownListSelect = function (event) {
+                // set search mode.
+                var searchType = '';
+                switch (event.args.index) {
+                    case 0:
+                        searchType = 'startswithignorecase';
+                        break;
+                    case 1:
+                        searchType = 'startswith';
+                        break;
+                    case 2:
+                        searchType = 'endswithignorecase';
+                        break;
+                    case 3:
+                        searchType = 'endswith';
+                        break;
+                    case 4:
+                        searchType = 'containsignorecase';
+                        break;
+                    case 5:
+                        searchType = 'contains';
+                        break;
+                    case 6:
+                        searchType = 'equalsignorecase';
+                        break;
+                    case 7:
+                        searchType = 'equals';
+                        break;
+                }
+                $scope.comboBoxInstance.searchMode = searchType;
+            };
+            $scope.open = function (event) {
+                $scope.comboBoxInstance.open();
+                return false;
+            }
+            $scope.close = function (event) {
+                $scope.comboBoxInstance.close();
+                return false;
+            }
+        });
+    </script>
+
+</head>
+<body ng-controller="demoController">
+    <jqx-combo-box style='float: left; margin-top: 10px;' jqx-settings="comboBoxSettings"></jqx-combo-box>
+    <div jqx-data="inherit" jqx-show-arrow="false" jqx-toggle-mode="'none'" style='float: left; margin-left: 100px; margin-top: 10px;'>
+        <div style="font-family: 'segoe ui', arial, sans-serif;">
+            Settings
+        </div>
+        <div>
+            <div style="padding: 10px;">
+                <span style="font-family: 'segoe ui', arial, sans-serif;">Search Type:</span>
+                <jqx-drop-down-list jqx-on-select="data.dropDownListSelect(event)" jqx-height="25" style='margin-top: 10px;' jqx-source="['Starts with','Starts with(Case Sensitive)','Ends with','Ends with(Case Sensitive)','Contains','Contains(Case Sensitive)','Equal','Equal(Case Sensitive)']">
+                </jqx-drop-down-list>
+                <div style='margin-top: 10px;'>
+                    <jqx-button jqx-on-mousedown="data.open()">Open</jqx-button>
+                    <jqx-button jqx-on-mousedown="data.close()">Close</jqx-button>
+                </div>
+                <div>
+                    <jqx-check-box ng-model="data.comboBoxSource.autoComplete" style='margin-top: 10px;'>
+                        Auto complete</jqx-check-box>
+                    <jqx-check-box jqx-watch="comboBoxSource.disabled" ng-model="comboBoxSource.disabled" style='margin-top: 10px;'>
+                        Disabled</jqx-check-box>
+                </div>
+            </div>
+        </div>
+     </div>
+</body>
+</html>
