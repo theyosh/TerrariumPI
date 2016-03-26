@@ -1,4 +1,0 @@
-﻿[
-{"month": "Jan", "min":	"-1.9", "max": "3.7", "rain": "true"},
-{"month": "Feb", "min": "-0.9", "max": "5.9", "rain": "false"}
-]

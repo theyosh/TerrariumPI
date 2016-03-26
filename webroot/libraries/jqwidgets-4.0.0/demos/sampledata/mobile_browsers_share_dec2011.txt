@@ -1,6 +1,0 @@
-Safari, 51.2
-Opera, 10.0
-Nokia browser, 0.3
-Android browser, 23.0
-BlackBerry browser, 2.7
-Other, 12.8
