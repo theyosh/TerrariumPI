@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title id='Description'>jQWidgets Chart Donut Series Legend Mobile Example</title>
+    <link rel="stylesheet" href="../styles/demo.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.windowsphone.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.blackberry.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.android.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.mobile.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../simulator.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = prepareSimulator("chart");
+            var data_source_desktop =
+            {
+                datatype: "csv",
+                datafields: [
+                    { name: 'Browser' },
+                    { name: 'Share' }
+                ],
+                url: '../../demos/sampledata/desktop_browsers_share_dec2011.txt'
+            };
+
+            var dataAdapter_desktop = new $.jqx.dataAdapter(data_source_desktop, { async: false, autoBind: true, beforeLoadComplete: function (records) { return records.splice(0, 4);}, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "Desktop browsers share",
+                description: "(source: wikipedia.org)",
+                enableAnimations: true,
+                showLegend: true,
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                seriesGroups:
+                    [                      
+                        {
+                            type: 'donut',
+                            source: dataAdapter_desktop,
+                            colorScheme: 'scheme01',
+                            categoryAxis:
+                            {
+                                formatSettings: { prefix: 'Desktop ' }
+                            },
+                            series:
+                                [
+                                    {
+                                        dataField: 'Share',
+                                        displayText: 'Browser',
+                                        labelRadius: 120,
+                                        initialAngle: 10,
+                                        innerRadius: 40,
+                                        centerOffset: 0,
+                                        formatSettings: { sufix: '%', decimalPlaces: 1 }
+                                    }
+                                ]
+                        }
+                    ]
+            };
+
+            // setup the chart
+            $('#chart').jqxChart(settings);
+            initSimulator("chart");
+
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="demoContainer" class="device-mobile-tablet">
+        <div id="container" class="device-mobile-tablet-container">
+            <div id='chart' style="width: 100%; height: 100%">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id="Description">jqxButton directive for AngularJS</title>
+    <meta name="description" content="AngularJS Button example. This example demonstrates a Button built with Angular JS." /> 
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+
+        demoApp.controller("demoController", function ($scope) {
+            $scope.buttonInstance = {};
+
+            $scope.settings =
+            {
+                width: 150,
+                height: 30
+            }
+
+            // called when a button is clicked. 
+            $scope.onClick = function (event) {
+                $scope.buttonData.text = "Clicked";
+            };
+   
+            $scope.buttonData = {
+                text: "Click me"
+            }
+
+            $scope.checked = true;
+        });
+    </script>
+</head>
+<body>
+    <div ng-controller="demoController">
+        <jqx-button jqx-instance="buttonInstance" jqx-height="settings.height" jqx-width="settings.width">Button</jqx-button>
+        <jqx-toggle-button jqx-settings="settings">Toggle Button</jqx-toggle-button>
+        <br />
+        <br>
+        <jqx-check-box ng-model="checked">Click me to toggle the disabled state</jqx-check-box>
+        <br />
+        <br />
+        <jqx-button jqx-on-click="onClick(event)" ng-disabled="checked" jqx-settings="settings"><span>{{buttonData.text}}</span></jqx-button>
+    </div>
+</body>
+</html>

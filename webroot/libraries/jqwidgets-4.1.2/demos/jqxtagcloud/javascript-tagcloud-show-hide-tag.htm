@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>TagCloud hide and show demo</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtagcloud.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script>
+        $(document).ready(function () {
+            var data = [
+                { countryName: "Australia", technologyRating: 35 },
+                { countryName: "United States", technologyRating: 60 },
+                { countryName: "Germany", technologyRating: 55 },
+                { countryName: "Brasil", technologyRating: 20 },
+                { countryName: "United Kingdom", technologyRating: 50 },
+                { countryName: "Japan", technologyRating: 80 }
+            ];
+            var source =
+            {
+                localdata: data,
+                datatype: "array",
+                datafields: [
+                    { name: 'countryName' },
+                    { name: 'technologyRating' }
+                ]
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {});
+            $('#tagCloud').jqxTagCloud({
+                width: '600px',
+                source: dataAdapter,
+                displayMember: 'countryName',
+                valueMember: 'technologyRating'
+            });
+
+            $('#tagCloud').jqxTagCloud('hideItem', 1);
+            $("#hideItem").jqxButton();
+            $("#showItem").jqxButton();
+            $("#hideItem").click(function () {
+                var records = $('#tagCloud').jqxTagCloud('getTagsList');
+                var hiddenTagsList = $('#tagCloud').jqxTagCloud('getHiddenTagsList');
+                for (var i = 0; i < records.length; i++) {
+                    if (hiddenTagsList.indexOf(records[i].index) == -1) {
+                        $('#tagCloud').jqxTagCloud('hideItem', records[i].index);
+                        return;
+                    }
+                }
+            });
+            $("#showItem").click(function () {
+                var hiddenTagsList = $('#tagCloud').jqxTagCloud('getHiddenTagsList');
+                if (hiddenTagsList[0] !== undefined) {
+                    var tagId = hiddenTagsList[0];
+                    $('#tagCloud').jqxTagCloud('showItem', tagId);
+                }
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <div id="tagCloud"></div>
+    <br />
+    <br />
+    <button id="hideItem">Hide Item</button>
+    <button id="showItem">Show Item</button>
+</body>
+</html>

@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>To switch the widget to a right-to-left representation, just enable a single property - "rtl". When this property is on, the widget itself is mirrored (the layout of its UI elements is reversed).</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <style type="text/css">
+        .big-image {
+            float: left;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #999;
+            background: #fff;
+            padding: 3px;
+        }
+
+        .important-text {
+            font-size: 13px;
+            font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
+            direction: rtl;
+            text-align: right;
+        }
+
+        .more-text {
+            font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
+            direction: rtl;
+            color: #444;
+            font-size: 11px;
+            font-style: italic;
+            text-align: right;
+        }
+    </style>
+    <script type="text/javascript">
+        function addEventListeners() {
+            $('#showWindowButton').mousedown(function () {
+                $('#window').jqxWindow('open');
+            });
+        }
+        function createElements() {
+            var jqxWidget = $('#jqxWidget');
+            var offset = jqxWidget.offset();
+            $('#window').jqxWindow({
+                position: { x: offset.left + 50, y: offset.top + 50 },
+                rtl: true,
+                resizable: false,
+                width: 500,
+                height: 400
+            });
+            $('#showWindowButton').jqxButton({ width: '100px' });
+        }
+        $(document).ready(function () {
+            addEventListeners();
+            createElements();
+            $("#jqxWidget").css('visibility', 'visible');
+        });
+    </script>
+</head>
+<body class='default'>
+    <div style="visibility: hidden;" id="jqxWidget">
+        <input type="button" value="Show" id="showWindowButton" />
+        <div id="window">
+            <div>
+                About 30 St Mary Axe
+            </div>
+            <div>
+                <div style="direction: rtl;">
+                    <img src="../../images/building_big.jpg" alt="" class="big-image" />
+                    <div>
+                        <h3 style="text-align: right; direction: rtl;">30 St Mary Axe</h3>
+                        <p class="important-text">
+                            the Swiss Re Building (colloquially referred to as the Gherkin), is a skyscraper
+                            in London's main financial district, the City of London, completed in December 2003
+                            and opened at the end of May 2004. With 40 floors, the tower is 180 metres (591
+                            ft) tall, and stands on the former site of the Baltic Exchange building, which was
+                            severely damaged on 10 April 1992 by the explosion of a bomb placed by the Provisional
+                            IRA.
+                        </p>
+                        <div class="more-text">
+                            The building is on the former site of the Baltic Exchange building, the headquarters
+                            of a global marketplace for ship sales and shipping information. On 10 April 1992
+                            the Provisional IRA detonated a bomb close to the Exchange, severely damaging the
+                            historic Exchange building and neighbouring structures. The UK government's statutory
+                            adviser on the historic environment, English Heritage, and the City of London governing
+                            body, the City of London Corporation, were keen that any redevelopment must restore
+                            the building's old façade onto St Mary Axe. The Exchange Hall was a celebrated fixture
+                            of the ship trading company.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

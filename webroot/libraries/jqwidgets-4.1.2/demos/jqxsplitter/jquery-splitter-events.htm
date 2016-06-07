@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Splitter, Splitter Widget, Splitter, jqxSplitter" />
+    <meta name="description" content="This page demonstrates splitter's events" />
+    <title id='Description'>This demonstration shows how to trigger the jqxSplitter events.
+    </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxsplitter.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#mainSplitter').jqxSplitter({ width: 850, height: 480, panels: [{ size: 200 }] });
+
+            $('#mainSplitter').on('resize', function (event) {
+                displayEvent(event);
+            });
+            $('#mainSplitter').on('expanded', function (event) {
+                displayEvent(event);
+            });
+            $('#mainSplitter').on('collapsed', function (event) {
+                displayEvent(event);
+            });
+
+            function capitaliseFirstLetter(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+
+            function displayEvent(event) {
+                var eventData ="Event:" + capitaliseFirstLetter(event.type);
+                eventData += ", Panel 1: " + event.args.panels[0].size;
+                eventData += ", Panel 2: " + event.args.panels[1].size;
+
+                $('#events').jqxPanel('prepend', '<div class="item" style="margin-top: 5px;">' + eventData + '</div>');
+             }
+
+            $('#events').jqxPanel({  height: '250px', width: '450px' });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div id="container" style="float: left">
+            <div id="mainSplitter">
+                <div class="splitter-panel" style="background-color:#F5FFF2;"><span style="margin: 5px;">Panel 1</span></div>
+                <div class="splitter-panel" style="background-color:#F5FFF2;"><span style="margin: 5px;">Panel 2</span></div>
+            </div>
+            <br />
+            <div style="font-family: Verdana; font-size: 13;">
+                Events:</div>
+            <div id="events" style="border-width: 0px;">
+            </div>
+        </div>     
+    </div>
+</body>
+</html>

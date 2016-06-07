@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>jqxMenu Fluid Size Example. The width of the Menu in this demo is in Percentages.</title>
+    <meta name="description" content="AngularJS Menu example. This example demonstrates a Responsive Menu built with Angular." /> 
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> 
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets", "jqwidgets-amd"]);
+        demoApp.controller("demoController", function ($scope) {
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-menu jqx-width="'100%'" jqx-height="'30px'">
+       <ul>
+            <li><a href="#Home">Home</a></li>
+            <li>Solutions
+                    <ul style='width: 250px;'>
+                        <li><a href="#Education">Education</a></li>
+                        <li><a href="#Financial">Financial services</a></li>
+                        <li><a href="#Government">Government</a></li>
+                        <li><a href="#Manufacturing">Manufacturing</a></li>
+                        <li type='separator'></li>
+                        <li>Software Solutions
+                            <ul style='width: 220px;'>
+                                <li><a href="#ConsumerPhoto">Consumer photo and video</a></li>
+                                <li><a href="#Mobile">Mobile</a></li>
+                                <li><a href="#RIA">Rich Internet applications</a></li>
+                                <li><a href="#TechnicalCommunication">Technical communication</a></li>
+                                <li><a href="#Training">Training and eLearning</a></li>
+                                <li><a href="#WebConferencing">Web conferencing</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">All industries and solutions</a></li>
+                    </ul>
+            </li>
+            <li>Products
+                    <ul>
+                        <li><a href="#PCProducts">PC products</a></li>
+                        <li><a href="#MobileProducts">Mobile products</a></li>
+                        <li><a href="#AllProducts">All products</a></li>
+                    </ul>
+            </li>
+            <li>Support
+                    <ul style='width: 200px;'>
+                        <li><a href="#SupportHome">Support home</a></li>
+                        <li><a href="#CustomerService">Customer Service</a></li>
+                        <li><a href="#KB">Knowledge base</a></li>
+                        <li><a href="#Books">Books</a></li>
+                        <li><a href="#Training">Training and certification</a></li>
+                        <li><a href="#SupportPrograms">Support programs</a></li>
+                        <li><a href="#Forums">Forums</a></li>
+                        <li><a href="#Documentation">Documentation</a></li>
+                        <li><a href="#Updates">Updates</a></li>
+                    </ul>
+            </li>
+            <li>Communities
+                    <ul style='width: 200px;'>
+                        <li><a href="#Designers">Designers</a></li>
+                        <li><a href="#Developers">Developers</a></li>
+                        <li><a href="#Educators">Educators and students</a></li>
+                        <li><a href="#Partners">Partners</a></li>
+                        <li type='separator'></li>
+                        <li>By resource</li>
+                    </ul>
+            </li>
+            <li>Company
+                    <ul style='width: 180px;'>
+                        <li><a href="#About">About Us</a></li>
+                        <li><a href="#Press">Press</a></li>
+                        <li><a href="#Investor">Investor Relations</a></li>
+                        <li><a href="#CorporateAffairs">Corporate Affairs</a></li>
+                        <li><a href="#Careers">Careers</a></li>
+                        <li><a href="#Showcase">Showcase</a></li>
+                        <li><a href="#Events">Events</a></li>
+                        <li><a href="#ContactUs">Contact Us</a></li>
+                        <li><a href="#Become an affiliate">Become an affiliate</a></li>
+                    </ul>
+            </li>
+        </ul>
+    </jqx-menu>
+</body>
+</html>

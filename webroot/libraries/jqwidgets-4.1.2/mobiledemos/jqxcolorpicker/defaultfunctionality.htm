@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title id='Description'>jQWidgets ColorPicker - Mobile Example
+    </title>
+    <link rel="stylesheet" href="../styles/demo.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.windowsphone.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.blackberry.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.android.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.mobile.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcolorpicker.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownbutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollview.js"></script>
+    <script type="text/javascript" src="../simulator.js"></script>
+    <style type="text/css">
+        .photo {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .gallery {
+            border: 15px solid #ffaabb;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body class='default'>
+    <div id='content'>
+        <script type="text/javascript">
+            function getTextElementByColor(color) {
+                if (color == 'transparent' || color.hex == "") {
+                    return $("<div style='text-shadow: none; position: relative; margin: 2px; height: 26px;'><span style='top: 2px; position: relative; font-size: 16px;'>transparent</span></div>");
+                }
+
+                var element = $("<div style='text-shadow: none; height: 26px; margin: 2px; position: relative;'><span style='top: 2px; position: relative; font-size: 16px;'>#" + color.hex + "</span></div>");
+                var nThreshold = 105;
+                var bgDelta = (color.r * 0.299) + (color.g * 0.587) + (color.b * 0.114);
+                var foreColor = (255 - bgDelta < nThreshold) ? 'Black' : 'White';
+                element.css('color', foreColor);
+                element.css('background', "#" + color.hex);
+                element.addClass('jqx-rc-all');
+                return element;
+            }
+
+            $(document).ready(function () {
+                var theme = prepareSimulator("colorpicker");
+
+                $("#colorPicker").on('colorchange', function (event) {
+                    $("#dropDownButton").jqxDropDownButton('setContent', getTextElementByColor(event.args.color));
+                    $('#photoGallery').css('border-color', "#" + event.args.color.hex);
+                });
+
+                $("#dropDownButton").jqxDropDownButton({ theme: theme, animationType: 'none', width: '80%', dropDownHeight: 250, height: 30 });
+                $("#colorPicker").jqxColorPicker({ theme: theme, color: "ffaabb", colorMode: 'hue', width: '100%', height: 242 });
+                $("#dropDownButton").jqxDropDownButton('setContent', getTextElementByColor(new $.jqx.color({ hex: "ffaabb" })));
+                $('#photoGallery').jqxScrollView({ theme: theme, slideShow: true, width: '80%', height: '60%', showButtons: false });
+                initSimulator("colorpicker");
+            });
+        </script>
+        <div id="demoContainer" class="device-mobile">
+            <div id="container" class="device-mobile-container">
+                <div style="position: relative; margin-top: 30px; margin-left: 10%;">Select Frame color</div>
+                <div style="margin-left: 10%;" id="dropDownButton">
+                    <div id="colorPicker">
+                    </div>
+                </div>
+                <div style="margin-top: 20px; margin-left: 10%;" class="gallery" id="photoGallery">
+                    <div>
+                        <div class="photo" style="background-image: url(../../images/imageNature1.jpg)"></div>
+                    </div>
+                    <div>
+                        <div class="photo" style="background-image: url(../../images/imageNature2.jpg)"></div>
+                    </div>
+                    <div>
+                        <div class="photo" style="background-image: url(../../images/imageNature3.jpg)"></div>
+                    </div>
+                    <div>
+                        <div class="photo" style="background-image: url(../../images/imageNature4.jpg)"></div>
+                    </div>
+                    <div>
+                        <div class="photo" style="background-image: url(../../images/imageNature5.jpg)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

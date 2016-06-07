@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>To switch the widget to a right-to-left representation, just enable a single property - "rtl". When this property is on, the horizontal slider is mirrored.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxslider.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function displayEvent(event) {
+                var eventData = event.type;
+                eventData += ': ' + event.args.value;
+                $('#events').jqxPanel('clearContent');
+                $('#events').jqxPanel('prepend', '<div style="margin-top: 5px;">' + eventData + '</div>');
+            }
+
+            $('#events').jqxPanel({ height: 400, width: 300 });
+
+            //change event
+            $('#jqxSlider').on('change', function (event) {
+                displayEvent(event);
+            });
+
+            // create jqxSlider.
+            $('#jqxSlider').jqxSlider({width: 300, rtl: true,  mode: 'fixed' });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div id="container">
+            <div id='jqxSlider'></div>
+            <br />
+            <div id="events" style="margin-top: 5px; margin-right: 20px; border-width: 0px;">
+            </div>
+        </div>     
+    </div>
+</body>
+</html>

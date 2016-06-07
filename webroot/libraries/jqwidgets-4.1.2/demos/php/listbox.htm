@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>In this example is demonstrated how to populate the jqxListBox with data from MySQL Database. Each item in the list has label and value fields. The label is displayed to the user. When you click on the Submit button, the selected item's value will be displayed.</title> 
+	<link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+	<script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+	<script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+	<script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+	<script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+	<script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script> 
+	<style type="text/css">
+	.demo-iframe {
+		border: none;
+		width: 600px;
+		height: 400px;
+		clear: both;
+	}
+	</style>
+	<script type="text/javascript">
+	$(document).ready(function () {
+		
+		// prepare the data
+		var source =
+		{
+			datatype: "json",
+			datafields: [
+			{ name: 'CompanyName'},
+			{ name: 'ContactName'},
+			{ name: 'ContactTitle'},
+			{ name: 'Address'},
+			{ name: 'City'},
+			],
+			url: 'listboxdata.php',
+			async: false
+		};
+
+		var dataAdapter = new $.jqx.dataAdapter(source);
+			
+		$("#listbox").jqxListBox(
+		{
+			source: dataAdapter,
+			
+			width: 300,
+			height: 300,
+			selectedIndex: 0,
+			displayMember: 'CompanyName',
+			valueMember: 'ContactName'
+		});        
+		$('#sendButton').jqxButton({ width: 70});
+		$("#listbox").bind('select', function(event)
+		{
+			if (event.args)
+			{
+				$("#eventLog").html("label:" + event.args.item.label + "<br/>value:" + event.args.item.value);
+				$("#hiddenLabel").val(event.args.item.label);
+				$("#hiddenValue").val(event.args.item.value);
+			}
+		});	
+	});
+	</script>
+</head>
+<body class='default'>
+   <form class="form" id="form" target="form-iframe"  method="POST" action="list.php" style="font-size: 13px; font-family: Verdana; width: 650px;">
+     <div>
+		<div style="float: left;" name="list" id="listbox"></div>
+   		<div style="margin-left: 20px; float: left;" id="eventLog"></div>
+	 </div>
+	 <div style="clear: both;"/>
+	 <input  type="hidden" id="hiddenLabel" name="hiddenLabel" value="" />
+	 <input  type="hidden" id="hiddenValue" name="hiddenValue" value="" />
+	 <input style="margin-top: 10px;" type="submit" value="Submit" id="sendButton" />
+   </form>
+   <div>
+     <iframe id="form-iframe" name="form-iframe" class="demo-iframe" frameborder="0"></iframe>
+   </div>
+</body>
+</html>
+<!--listboxdata.php
+#Include the connect.php file
+include ('connect.php');
+
+// Connect to the database
+// connection String
+$mysqli = new mysqli($hostname, $username, $password, $database);
+/* check connection */
+if (mysqli_connect_errno())
+	{
+	printf("Connect failed: %s\n", mysqli_connect_error());
+	exit();
+	}
+// get data and store in a json array
+$from = 0;
+$to = 30;
+$query = "SELECT CompanyName, ContactName, ContactTitle, Address, City FROM customers LIMIT ?,?";
+$result = $mysqli->prepare($query);
+$result->bind_param('ii', $from, $to);
+$result->execute();
+/* bind result variables */
+$result->bind_result($CompanyName, $ContactName, $ContactTitle, $Address, $City);
+/* fetch values */
+while ($result->fetch())
+	{
+	$customers[] = array(
+		'CompanyName' => $CompanyName,
+		'ContactName' => $ContactName,
+		'ContactTitle' => $ContactTitle,
+		'Address' => $Address,
+		'City' => $City
+	);
+	}
+echo json_encode($customers);
+/* close statement */
+$result->close();
+/* close connection */
+$mysqli->close();
+
+--list.php--
+echo $_POST["hiddenLabel"]."<br />";
+	echo $_POST["hiddenValue"];
+-->

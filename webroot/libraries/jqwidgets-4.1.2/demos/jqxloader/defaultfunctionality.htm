@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title id="Description">This demo shows the default functionality of jqxLoader.</title>
+    <meta name="keywords" content="jQuery loader, jQWidgets, jqxLoader, loader" />
+    <meta name="description" content="This demo shows the default functionality of jqxLoader." />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxloader.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#openLoader").jqxButton({
+                width: 150
+            });
+            $("#jqxLoader").jqxLoader({ width: 100, height: 60, imagePosition: 'top' });
+            $('#openLoader').on('click', function () {
+                $('#jqxLoader').jqxLoader('open');
+            });
+
+            $("#closeLoader").jqxButton({
+                width: 100
+            });
+            $('#closeLoader').on('click', function () {
+                $('#jqxLoader').jqxLoader('close');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="jqxLoader">
+    </div>
+    <input type="button" value="Open Loader" id="openLoader" />
+    <input type="button" value="Close" id="closeLoader" />
+</body>
+</html>
+

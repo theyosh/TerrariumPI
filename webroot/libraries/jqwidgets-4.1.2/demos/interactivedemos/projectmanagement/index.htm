@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Project Management example by jQWidgets.</title>
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.office.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.energyblue.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.metro.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.metrodark.css" type="text/css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 minimum-scale=1" />
+
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+
+    <link href="../../../styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../../styles/bootstrap-theme.min.css" rel="stylesheet" />
+    <script src="../../../scripts/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbargauge.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.filter.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.edit.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxrangeselector.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdragdrop.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxrating.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxribbon.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlayout.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttongroup.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.aggregates.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/globalization/globalize.js"></script>
+
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+
+    <script type="text/javascript" src="main.js"></script>
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body style="overflow: initial;">
+            <div id='jqxTabs'>
+                <ul>
+                    <li style="margin-left: 30px;">
+                        <div style="height: 20px; margin-top: 5px;">
+                            <div style="margin-left: 4px; vertical-align: middle; text-align: center; float: left;">
+                                Issues
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="height: 20px; margin-top: 5px;">
+                            <div style="margin-left: 4px; vertical-align: middle; text-align: center; float: left;">
+                                Milestones
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div style="overflow: hidden;">
+                    <div id="jqxLayout1">
+                        <div data-container="IssuesPanelLeft">
+                            <button id="buttonAllIssues" class="issues-buttons-group" style="margin-top:20px;">All issues</button>
+                            <button id="buttonAssignedToYou" class="issues-buttons-group" >Assigned to you</button>
+                            <button id="buttonNotAssigned" class="issues-buttons-group" >Not assigned ones</button>
+
+                            <ul style="margin-top:20px; box-sizing:border-box;" id="featuresList">
+                                <li>Bug</li>
+                                <li>Feature</li>
+                                <li>Enhancement</li>
+                                <li>Invalid</li>
+                                <li>Question</li>
+                                <li>Duplicate</li>
+                                <li>Not Confirmed</li>           
+                            </ul>
+                        </div>
+                        <div data-container="IssuesPanelRight">
+                            <div id='jqxButtonGroup' style="margin-top:20px; margin-left:20px;">
+                                <button style="padding:15px 25px;" id="Left">
+                                    Open (8)
+                                </button>
+                                <button style="padding:15px 25px;" id="Right">
+                                    Closed (5)
+                                </button>
+                            </div>
+                            <div id='jqxFirstPanelGrid' style="margin-top:20px; margin-left:20px;"></div>
+                         </div>
+                    </div>
+                </div>
+                <div style="overflow: hidden;">
+                    <div id="jqxLayout2">
+                        <div data-container="MilestonesPanelLeft">
+                            <button id="buttonAllMilestones" class="milestones-button-group" style="margin-top:20px;">All milestones</button>
+                            <button id="buttonOpenMilestones" class="milestones-button-group">Open milestones</button>
+                            <button id="buttonClosedMilestones" class="milestones-button-group">Closed milestones</button>
+                        </div>
+                        <div data-container="MilestonesPanelRight">
+                            <div id='jqxSecondPanelGrid' style="margin-top:20px; margin-left:20px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</body>
+</html>

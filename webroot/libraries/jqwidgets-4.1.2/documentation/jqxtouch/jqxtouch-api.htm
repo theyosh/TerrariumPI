@@ -1,0 +1,405 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../Styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="jQuery, Tooltip, jqxTooltip, tool tip, tip, title, popup" />
+    <meta name="description" content="This page represents the help documentation of the jqxTooltip widget." />
+    <title>jqxTouch API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+      <div id="properties">
+            <h2 class="documentation-top-header">Properties</h2>
+            <table class="documentation-table">
+                <tr>
+                    <th>Name
+                    </th>
+                    <th>Type
+                    </th>
+                    <th>Default
+                    </th>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span4'>orientationChangeEnabled</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Indicates whether the orientationchange event is enabled.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>orientationChangeEnabled</code> property.
+                            </p>
+                            <pre><code>$('#jqxTouch').jqxTouch({orientationChangeEnabled: false});</code></pre>
+                            <p>
+                                Get the <code>orientationChangeEnabled</code> property.
+                            </p>
+                            <pre><code>var orientationChangeEnabled = $('#jqxTouch').jqxTouch('orientationChangeEnabled');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/nRCqg/">orientationChangeEnabled is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='property-name-disabled'>swipeMin</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>50
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Defines the minimum swipe distance required by the plugin.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>swipeMin</code> property.
+                            </p>
+                            <pre><code>$('#jqxTouch').jqxTouch({swipeMin: 20});</code></pre>
+                            <p>
+                                Get the <code>swipeMin</code> property.
+                            </p>
+                            <pre><code>var swipeMin = $('#jqxTouch').jqxTouch('swipeMin');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/QxH7c/">swipeMin is set to 20</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span1'>swipeMax</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>500
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Defines the maximum swipe distance. After it is passed the propagation of the touch event will be restored, therefore the scrolling will be available.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>swipeMax</code> property.
+                            </p>
+                            <pre><code>$('#jqxTouch').jqxTouch({swipeMax: 200});</code></pre>
+                            <p>
+                                Get the <code>swipeMax</code> property.
+                            </p>
+                            <pre><code>var swipeMax = $('#jqxTouch').jqxTouch('swipeMax');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/7X9Le/">swipeMax is set to 200</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span2'>swipeDelay</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>1000
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                The swipe delay. After it is passed swipe event won't be fired.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                ISet the <code>swipeDelay</code> property.
+                            </p>
+                            <pre><code>$('#jqxTouch').jqxTouch({swipeDelay: 800});</code></pre>
+                            <p>
+                                Get the <code>swipeDelay</code> property.
+                            </p>
+                            <pre><code>var swipeDelay = $('#jqxTouch').jqxTouch('swipeDelay');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/u4NBb/">swipeDelay is set to 2000</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span3'>tapHoldDelay</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>750
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                The taphold delay. If this delay is passed then taphold event will be fired.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>tapHoldDelay</code> property.
+                            </p>
+                            <pre><code>$('#jqxTouch').jqxTouch({tapHoldDelay: 600});</code></pre>
+                            <p>
+                                Get the <code>tapHoldDelay</code> property.
+                            </p>
+                            <pre><code>var tapHoldDelay = $('#jqxTouch').jqxTouch('tapHoldDelay');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/ZEFkC/">tapHoldDelay is set to 1000</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Events</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span11'>orientationchange</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the device's orientation is changed. 
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Bind to the <code>orientationchange</code> event by type: jqxTouch.
+                            </p>
+                            <pre><code>$('#jqxTouch').on('orientationchange', function () { // Some code here. }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/n2rjw/">Bind to the orientationchange event by type: jqxTouch.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span6'>swipe</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the user swipes left, right, up or down.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Bind to the swipe event by type: jqxTouch.
+                            </p>
+                            <pre><code>$('#jqxTouch').on('swipe', function () { // Some code here. }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/bw4wf/">Bind to the swipe event by type: jqxTouch.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span7'>swipeleft</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the user swipes left.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Bind to the swipe<code>swipeleft</code> event by type: jqxTouch.
+                            </p>
+                            <pre><code>$('#jqxTouch').on('swipeleft', function () { // Some code here. }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/t5Ujt/">Bind to the swipeleft event by type: jqxTouch.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span8'>swiperight</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the user swipes right.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Bind to the <code>swiperight</code> event by type: jqxTouch.
+                            </p>
+                            <pre><code>$('#jqxTouch').on('swiperight', function () { // Some code here. }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/pB5zd/">Bind to the swiperight event by type: jqxTouch.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span9'>swipetop</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the user swipes top.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Bind to the <code>swipetop</code> event by type: jqxTouch.
+                            </p>
+                            <pre><code>$('#jqxTouch').on('swipetop', function () { // Some code here. }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/bpBsK/">Bind to the swipetop event by type: jqxTouch.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span10'>swipebottom</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the user swipes bottom.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Bind to the <code>swipebottom</code> event by type: jqxTouch.
+                            </p>
+                            <pre><code>$('#jqxTouch').on('swipebottom', function () { // Some code here. }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/4ncVE/">Bind to the swipebottom event by type: jqxTouch.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span27'>tap</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the user taps an element.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Bind to the <code>tap</code> event by type: jqxTouch.
+                            </p>
+                            <pre><code>$('#jqxTouch').on('tap', function () { // Some code here. }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/TCURd/">Bind to the tap event by type: jqxTouch.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span5'>taphold</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the user taps an element and holds a specific amount of time specified by the 'tapHoldDelay' property.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Bind to the <code>taphold</code> event by type: jqxTouch.
+                            </p>
+                            <pre><code>$('#jqxTouch').on('taphold', function () { // Some code here. }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/9krFZ/">Bind to the taphold event by type: jqxTouch.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+
+            </table>
+            <br />
+        </div>
+   </body>
+</html>

@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id="Description">jqxSplitter directive for AngularJS</title>
+    <link rel="stylesheet" type="text/css" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxsplitter.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+
+        demoApp.controller("demoController", function ($scope) {
+            $scope.splitterSettings = { width: 700, height: 600, orientation: 'horizontal', panels: [{ size: 200 }] };
+            $scope.nestedSplitterSettings = { width: '100%', height: '100%', orientation: 'vertical', panels: [{ size: 150 }] };
+
+        });
+    </script>
+</head>
+<body>
+    <div ng-controller="demoController">
+        <jqx-splitter jqx-settings="splitterSettings">
+            <div>Panel 1</div>
+            <div>
+                <jqx-splitter jqx-settings="nestedSplitterSettings">
+                    <div>Panel 2</div>
+                    <div>Panel 3</div>
+                </jqx-splitter></div>
+       </jqx-splitter>
+    </div>
+</body>
+</html>

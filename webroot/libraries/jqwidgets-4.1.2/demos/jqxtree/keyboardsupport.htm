@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>In this sample is demonstrated the jqxTree's built-in keyboard support.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtree.js"></script>
+</head>
+<body>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var source = [
+                 {
+                     icon: "../../images/mailIcon.png", label: "Mail", expanded: true, items: [
+                       { icon: "../../images/calendarIcon.png", label: "Calendar" },
+                       { icon: "../../images/contactsIcon.png", label: "Contacts", selected: true }
+                     ]
+                 },
+                 {
+                     icon: "../../images/folder.png", label: "Inbox", expanded: true, items: [
+                      { icon: "../../images/folder.png", label: "Admin" },
+                      { icon: "../../images/folder.png", label: "Corporate" },
+                      { icon: "../../images/folder.png", label: "Finance" },
+                      { icon: "../../images/folder.png", label: "Other" },
+                     ]
+                 },
+                 { icon: "../../images/recycle.png", label: "Deleted Items" },
+                 { icon: "../../images/notesIcon.png", label: "Notes" },
+                 { iconsize: 14, icon: "../../images/settings.png", label: "Settings" },
+                 { icon: "../../images/favorites.png", label: "Favorites" },
+                ];
+
+                // create jqxTree
+                $('#tree').jqxTree({ width: 250, height: 350, source: source});
+                // focus the jqxTree.
+                $("#tree").jqxTree('focus');
+            });
+        </script>
+        <div id='jqxWidget'v>
+            <div tabIndex="1" style="float:left;" id='tree'>
+            </div>
+             <div style="font-family: Verdana; font-size: 12px; width: 400px; margin-left: 20px; float: left;">
+              <ul>
+                <li><b>Tab</b> - Like other widgets, the jqxTree widget receives focus by tabbing into it. Once focus is received, users will be able to use the keyboard to change the selection. A second tab will take the user out of the widget.</li>
+                <li><b>Shift+Tab</b> - reverses the direction of the tab order. Once in the widget, a Shift+Tab will take the user to the previous focusable element in the tab order.</li>
+                <li><b>Up and Down</b> arrow keys - move between visible items.</li>
+                <li><b>Left Arrow</b> key - on an expanded item, collapses the item.</li>
+                <li><b>Left Arrow</b> key - on a collapsed or end item moves focus to the item's parent item.</li>
+                <li><b>Right Arrow</b> key - on a collapsed item expands the item.</li>
+                <li><b>Right Arrow</b> key - on an expanded item, moves to the first child item, or does nothing on an end item.</li>
+                <li><b>Home</b> key - moves to the top item in the tree view.</li>
+                <li><b>End</b> key - moves to the last item in the tree view.</li>   
+             </ul>
+            </div>
+         </div>
+    </div>
+</body>
+</html>

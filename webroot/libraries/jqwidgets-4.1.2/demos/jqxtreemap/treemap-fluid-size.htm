@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxTreeMap Fluid Size Example. The width and height of the TreeMap in this demo are in Percentages.</title>
+    <script src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script src="../../jqwidgets/jqxcore.js"></script>
+    <script src="../../jqwidgets/jqxdata.js"></script>
+    <script src="../../jqwidgets/jqxtooltip.js"></script>
+    <script src="../../jqwidgets/jqxtreemap.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script>
+        $(function () {
+
+            var data = [
+             {
+                 label: 'USA',
+                 value: 104
+             },
+             {
+                 label: 'People\'s Republic of China',
+                 value: 88
+             },
+             {
+                 label: 'Great Britain',
+                 value: 65
+             },
+             {
+                 label: 'Russian Federation',
+                 value: 82
+             },
+             {
+                 label: 'Germany',
+                 value: 44
+             },
+             {
+                 label: 'Republic of Korea',
+                 value: 28
+             },
+             {
+                 label: 'France',
+                 value: 34
+             },
+             {
+                 label: 'Italy',
+                 value: 28
+             },
+             {
+                 label: 'Hungary',
+                 value: 17
+             },
+             {
+                 label: 'Australia',
+                 value: 35
+             },
+             {
+                 label: 'Japan',
+                 value: 38
+             },
+             {
+                 label: 'Kazakhstan',
+                 value: 13
+             },
+             {
+                 label: 'Netherlands',
+                 value: 20
+             },
+             {
+                 label: 'Ukraine',
+                 value: 20
+             },
+             {
+                 label: 'New Zealand',
+                 value: 13
+             },
+             {
+                 label: 'Cuba',
+                 value: 14
+             }
+
+            ];
+            $('#treemap').jqxTreeMap({
+                width: '75%',
+                height: '75%',
+                source: data,
+                colorRange: 100,
+                colorMode: 'autoColors',
+                baseColor: '#52CBFF',
+                legendScaleCallback: function (v) {
+                    v = v.toFixed(1);
+                    return v;
+                },
+                legendLabel: 'Olympic medal count - London 2012'
+            });
+        });
+    </script>
+    <style>
+        .jqx-treemap-legend {
+            width: 75%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="treemap"></div>
+</body>
+</html>

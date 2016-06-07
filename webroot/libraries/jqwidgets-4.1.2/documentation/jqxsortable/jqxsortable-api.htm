@@ -1,0 +1,1642 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../Styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="jQuery, Sortable, jqxSortable, Sortable plugin" />
+    <meta name="description" content="This page represents the help documentation of the jqxSortable plugin." />
+    <title>jqxSortable API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="properties">
+        <h2 class="documentation-top-header">
+            Properties
+        </h2>
+        <table class="documentation-table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Default
+                </th>
+            </tr>
+         <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span13'>appendTo</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    'parent'
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Defines where the helper that moves with the mouse is being appended to during the drag (for example, to resolve overlap/zIndex issues).
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>appendTo</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({appendTo: 'document.body'});</code></pre>
+                        <p>
+                            Get the <code>appendTo</code> property.
+                        </p>
+                        <pre><code>var appendTo = $('#jqxSortable').jqxSortable('appendTo'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-appendto-property">appendTo is set to 'document.body'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+           <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span5'>axis</span>
+                </td>
+                <td>
+                    <span>String/Number</span>
+                </td>
+                <td>
+                    null
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            If defined, the items can be dragged only horizontally or vertically.
+                        </p>
+                        <b>Possible Values:</b>
+                        <br />
+                        <pre><code>'x'</code></pre>
+                        <pre><code>'y'</code></pre>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>axis</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({axis: 'y'});</code></pre>
+                        <p>
+                            Get the <code>axis</code> property.
+                        </p>
+                        <pre><code>var axis = $('#jqxSortable').jqxSortable('axis'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-axis-property">axis is set to 'y'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span2'>cancel</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    'input,textarea,button,select,option'
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Prevents sorting if you start on elements matching the selector.
+                        </p>
+
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>cancel</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({ cancel: '.not-sortable-item'}); </code></pre>
+                        <p>
+                            Get the <code>cancel</code> property.
+                        </p>
+                        <pre><code>var cancel = $('#jqxSortable').jqxSortable('cancel'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-cancel-property">cancel is set to '.not-sortable-item'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span8'>connectWith</span>
+                </td>
+                <td>
+                    <span>String/Boolean</span>
+                </td>
+                <td>
+                    true
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            A selector of other sortable elements that the items from this list should be connected to. 
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>connectWith</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({ connectWith: '#sortable1, #sortable2' }); </code></pre>
+                        <p>
+                            Get the <code>connectWith</code> property.
+                        </p>
+                        <pre><code>var connectWith = $('#jqxSortable').jqxSortable('connectWith'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-connectwith-property">connectWith is set to '#sortable1, #sortable2'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span63'>containment</span>
+                </td>
+                <td>
+                    <span>String/Boolean</span>
+                </td>
+                <td>
+                    false
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Defines a bounding box that the sortable items are constrained to while dragging.
+                        </p>
+                        
+                        <h4>
+                            Code example
+                        </h4>
+                        <p>
+                            Set the <code>containment</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({containment : '.sortable-container'}); </code></pre>
+                        <p>
+                            Get the <code>containment</code> property.
+                        </p>
+                        <pre><code>var containment = $('#jqxSortable').jqxSortable('containment'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-containment-property">containment is set to '.sortable-container'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span1'>cursor</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    'auto'
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Defines the cursor that is being shown while sorting.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>cursor</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({cursor: 'move'});</code></pre>
+                        <p>
+                            Get the <code>cursor</code> property.
+                        </p>
+                        <pre><code>var cursor = $('#jqxSortable').jqxSortable('cursor');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-cursor-property">cursor is set to 'move'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span3'>cursorAt</span>
+                </td>
+                <td>
+                    <span>Object</span>
+                </td>
+                <td>
+                    false
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Moves the sorting element or helper so the cursor always appears to drag from the same position. Coordinates can be given as a hash using a combination of one or two keys: { top, left, right, bottom }.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>initContent</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({ cursorAt: { left: 5, top:5 } }); </code></pre>
+                        <p>
+                            Get the <code>cursorAt</code> property.
+                        </p>
+                        <pre><code>var cursorAt = $('#jqxSortable').jqxSortable('cursorAt'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-cursorat-property">cursorAt is set to { left: 5, top:5 }</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span3'>delay</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    0
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Time in milliseconds to define when the sorting should start. Adding a delay helps preventing unwanted drags when clicking on an element.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>delay</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({ delay: 500 }); </code></pre>
+                        <p>
+                            Get the <code>delay</code> property.
+                        </p>
+                        <pre><code>var delay = $('#jqxSortable').jqxSortable('delay'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-delay-property">delay is set to 500</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+           <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span12'>disabled</span>
+                </td>
+                <td>
+                    <span>Boolean</span>
+                </td>
+                <td>
+                    false
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>Disables the widget if set to true.</p>
+                        <h4>
+                            Code example
+                        </h4>
+                        <p>
+                            Set the <code>disabled</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({disabled : true}); </code></pre>
+                        <p>
+                            Get the <code>disabled</code> property.
+                        </p>
+                        <pre><code>var disabled = $('#jqxSortable').jqxSortable('disabled'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-disabled-property">disabled is set to true</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+           <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span4'>distance</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    1
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Tolerance, in pixels, for when sorting should start. If specified, sorting will not start until after mouse is dragged beyond distance. Can be used to allow for clicks on elements within a handle.
+                        </p>
+
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>distance</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({distance: 10});</code></pre>
+                        <p>
+                            Get the <code>distance</code> property.
+                        </p>
+                        <pre><code>var distance = $('#jqxSortable').jqxSortable('distance'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-distance-property">distance is set to 10</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+         <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span51'>dropOnEmpty</span>
+                </td>
+                <td>
+                    <span>Boolean</span>
+                </td>
+                <td>
+                    true
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>If false, items from this sortable can't be dropped on an empty connect sortable.</p>
+                        <h4>
+                            Code example
+                        </h4>
+                        <p>
+                            Set the <code>dropOnEmpty</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({dropOnEmpty : false}); </code></pre>
+                        <p>
+                            Get the <code>dropOnEmpty</code> property.
+                        </p>
+                        <pre><code>var dropOnEmpty = $('#jqxSortable').jqxSortable('dropOnEmpty'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-droponempty-property">dropOnEmpty is set to false</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span16'>forceHelperSize</span>
+                </td>
+                <td>
+                    <span>Boolean</span>
+                </td>
+                <td>
+                    false
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            If true, forces the helper to have a size.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>forceHelperSize</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({ forceHelperSize: true }); </code></pre>
+                        <p>
+                            Get the <code>forceHelperSize</code> property.
+                        </p>
+                        <pre><code>var forceHelperSize = $('#jqxSortable').jqxSortable('forceHelperSize'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-forcehelpersize-property">forceHelperSize is set to true</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span3'>forcePlaceholderSize</span>
+                </td>
+                <td>
+                    <span>Boolean</span>
+                </td>
+                <td>
+                    false
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the displaying of the popover's arrow.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>forcePlaceholderSize</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({ forcePlaceholderSize: true }); </code></pre>
+                        <p>
+                            Get the <code>forcePlaceholderSize</code> property.
+                        </p>
+                        <pre><code>var forcePlaceholderSize = $('#jqxSortable').jqxSortable('forcePlaceholderSize'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-forceplaceholdersize-property">forcePlaceholderSize is set to true</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+           <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span11'>grid</span>
+                </td>
+                <td>
+                    <span>Array</span>
+                </td>
+                <td>
+                    false
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Snaps the sorting element or helper to a grid, every x and y pixels. 
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>grid</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({ "grid", [ 50, 50 ] }); </code></pre>
+                        <p>
+                            Get the <code>grid</code> property.
+                        </p>
+                        <pre><code>var grid = $('#jqxSortable').jqxSortable('grid'); </code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-grid-property">grid is set to [ 50, 50 ]</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+          <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span14'>handle</span>
+                </td>
+                <td>
+                    <span>String/Boolean</span>
+                </td>
+                <td>
+                    false
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Restricts sort start click to the specified element.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>handle</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({handle:'.handle'});</code></pre>
+                        <p>
+                            Get the <code>handle</code> property.
+                        </p>
+                        <pre><code>var handle = $('#jqxSortable').jqxSortable('handle');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-handle-property">handle is set to '.handle'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+         <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span7'>helper</span>
+                </td>
+                <td>
+                    <span>String/Function</span>
+                </td>
+                <td>
+                    'original'
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Allows for a helper element to be used for dragging display.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>helper</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({helper: 'clone'});</code></pre>
+                        <p>
+                            Get the <code>helper</code> property.
+                        </p>
+                        <pre><code>var helper = $('#jqxSortable').jqxSortable('helper');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-helper-property">helper is set to 'clone'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span7'>items</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    '> *'
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Specifies which items inside the element should be sortable.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>items</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({items: '> div.sortable-item'});</code></pre>
+                        <p>
+                            Get the <code>items</code> property.
+                        </p>
+                        <pre><code>var items = $('#jqxSortable').jqxSortable('items');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-items-property">items is set to '> div.sortable-item'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span7'>opacity</span>
+                </td>
+                <td>
+                    <span>Number/Boolean</span>
+                </td>
+                <td>
+                    false
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Defines the opacity of the helper while sorting. From 0.01 to 1.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>opacity</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({opacity: 0.5});</code></pre>
+                        <p>
+                            Get the <code>opacity</code> property.
+                        </p>
+                        <pre><code>var opacity = $('#jqxSortable').jqxSortable('opacity');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-opacity-property">opacity is set to 0.5</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span7'>placeholderShow</span>
+                </td>
+                <td>
+                    <span>String/Boolean</span>
+                </td>
+                <td>
+                    "original"
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            A class name that gets applied to the otherwise white space.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>placeholderShow</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({placeholderShow: 'sortable-placeholder'});</code></pre>
+                        <p>
+                            Get the <code>placeholderShow</code> property.
+                        </p>
+                        <pre><code>var placeholder = $('#jqxSortable').jqxSortable('placeholderShow');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-placeholdershow-property">placeholderShow is set to 'sortable-placeholder'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span7'>revert</span>
+                </td>
+                <td>
+                    <span>Boolean/Number</span>
+                </td>
+                <td>
+                    false
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Whether the sortable items should revert to their new positions using a smooth animation.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>revert</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({revert: 300});</code></pre>
+                        <p>
+                            Get the <code>revert</code> property.
+                        </p>
+                        <pre><code>var revert = $('#jqxSortable').jqxSortable('revert');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-revert-property">revert is set to true</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span7'>scroll</span>
+                </td>
+                <td>
+                    <span>Boolean</span>
+                </td>
+                <td>
+                    true
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            If set to true, the page scrolls when coming to an edge.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>scroll</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({scroll: false});</code></pre>
+                        <p>
+                            Get the <code>scroll</code> property.
+                        </p>
+                        <pre><code>var scroll = $('#jqxSortable').jqxSortable('scroll');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-scroll-property">scroll is set to false</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span7'>scrollSensitivity</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    20
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Defines how near the mouse must be to an edge to start scrolling.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>scrollSensitivity</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({scrollSensitivity: 10});</code></pre>
+                        <p>
+                            Get the <code>scrollSensitivity</code> property.
+                        </p>
+                        <pre><code>var scrollSensitivity = $('#jqxSortable').jqxSortable('scrollSensitivity');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-scrollsensitivity-property">scrollSensitivity is set to 10</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span7'>scrollSpeed</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    20
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Allows for a helper element to be used for dragging display.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>scrollSpeed</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({scrollSpeed: 10});</code></pre>
+                        <p>
+                            Get the <code>scrollSpeed</code> property.
+                        </p>
+                        <pre><code>var scrollSpeed = $('#jqxSortable').jqxSortable('scrollSpeed');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-scrollspeed-property">scrollSpeed is set to 40</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span7'>tolerance</span>
+                </td>
+                <td>
+                    <span>String/Function</span>
+                </td>
+                <td>
+                    'intersect'
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Specifies which mode to use for testing whether the item being moved is hovering over another item.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>tolerance</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({tolerance: 'pointer'});</code></pre>
+                        <p>
+                            Get the <code>tolerance</code> property.
+                        </p>
+                        <pre><code>var tolerance = $('#jqxSortable').jqxSortable('tolerance');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-tolerance-property">tolerance is set to 'pointer'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span7'>zIndex</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    1000
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Allows for a helper element to be used for dragging display.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>zIndex</code> property.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable({zIndex: 9999});</code></pre>
+                        <p>
+                            Get the <code>zIndex</code> property.
+                        </p>
+                        <pre><code>var zIndex = $('#jqxSortable').jqxSortable('zIndex');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-zindex-property">zIndex is set to 9999</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <h2 class="documentation-top-header">
+                        Events
+                    </h2>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span6'>activate</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered on drag start when are used connected lists.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>activate</code> event by type: jqxSortable.
+                        </p>
+                        <pre><code>$('.jqxSortable').on('activate', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-events">Bind to the activate event by type: jqxSortable.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>beforeStop</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when sorting stops, but when the placeholder/helper is still available.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>beforeStop</code> event by type: jqxSortable.
+                        </p>
+                        <pre><code>$('#jqxSortable').on('beforeStop', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-events">Bind to the beforeStop event by type: jqxSortable.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>change</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when the DOM position of an item is changed.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>change</code> event by type: jqxSortable.
+                        </p>
+                        <pre><code>$('#jqxSortable').on('change', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-events">Bind to the change event by type: jqxSortable.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>create</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when the sortable is created.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>create</code> event by type: jqxSortable.
+                        </p>
+                        <pre><code>$('#jqxSortable').on('create', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-events">Bind to the create event by type: jqxSortable.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>deactivate</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when sorting was stopped, is propagated to all possible connected lists.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>deactivate</code> event by type: jqxSortable.
+                        </p>
+                        <pre><code>$('#jqxSortable').on('deactivate', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-events">Bind to the deactivate event by type: jqxSortable.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>out</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when a sortable item is moved away from a sortable list.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>out</code> event by type: jqxSortable.
+                        </p>
+                        <pre><code>$('#jqxSortable').on('out', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-events">Bind to the out event by type: jqxSortable.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>over</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when a sortable item is moved into a sortable list.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>over</code> event by type: jqxSortable.
+                        </p>
+                        <pre><code>$('#jqxSortable').on('over', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-events">Bind to the over event by type: jqxSortable.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>receive</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when an item from a connected sortable list has been dropped into another list.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>receive</code> event by type: jqxSortable.
+                        </p>
+                        <pre><code>$('#jqxSortable').on('receive', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-events">Bind to the receive event by type: jqxSortable.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>remove</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when a sortable item from the list has been dropped into another. 
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>remove</code> event by type: jqxSortable.
+                        </p>
+                        <pre><code>$('#jqxSortable').on('remove', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-events">Bind to the remove event by type: jqxSortable.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>sort</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered during sorting.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>sort</code> event by type: jqxSortable.
+                        </p>
+                        <pre><code>$('#jqxSortable').on('sort', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-events">Bind to the sort event by type: jqxSortable.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>start</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when sorting starts.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>start</code> event by type: jqxSortable.
+                        </p>
+                        <pre><code>$('#jqxSortable').on('start', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-events">Bind to the start event by type: jqxSortable.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>stop</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when sorting has stopped.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>stop</code> event by type: jqxSortable.
+                        </p>
+                        <pre><code>$('#jqxSortable').on('stop', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-events">Bind to the stop event by type: jqxSortable.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>update</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This event is triggered when the user stopped sorting and the DOM position has changed.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>update</code> event by type: jqxSortable.
+                        </p>
+                        <pre><code>$('#jqxSortable').on('update', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-events">Bind to the update event by type: jqxSortable.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <h2 class="documentation-top-header">
+                        Methods
+                    </h2>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span28'>cancel</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Cancels a change in the current sortable and reverts it to the state prior to when the current sort was started.
+                        </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>cancel</code> method.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable('cancel'); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-cancel-method">cancel the changes</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>        
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span9'>destroy</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Removes the sortable functionality.
+                        </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>destroy</code> method.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable('destroy'); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-destroy-method">destroy the widget</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span10'>disable</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Disables the widget.
+                        </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>disable</code> method.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable('disable'); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-disable-method">disable the widget</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span10'>enable</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Enable the widget.
+                        </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>enable</code> method.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable('enable'); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-enable-method">enable the widget</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span10'>refresh</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Refresh the items.
+                        </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>refresh</code> method.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable('refresh'); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-refresh-method">refresh the items</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span10'>refreshPositions</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Refresh the cached positions of the sortable items.
+                        </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>refreshPositions</code> method.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable('refreshPositions'); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-refreshpositions-method">refresh the positions of the items</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span10'>serialize</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Serializes the jqxSortable item ids into a form/ajax submittable string. Calling this method produces a hash that can be appended to any url to easily submit a new item order back to the server.
+                        </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>serialize</code> method.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable('serialize'); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-serialize-method">serialize the items</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span10'>toArray</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Serializes the jqxSortable item ids into an array of strings.
+                        </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>toArray</code> method.
+                        </p>
+                        <pre><code>$('#jqxSortable').jqxSortable('toArray'); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxsortable-toarray-method">serialize the id's</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <br />
+    </div>
+</body>
+</html>

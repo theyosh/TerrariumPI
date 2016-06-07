@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Login Details";
+}
+<div>
+    <h3>Welcome @Html.Label("", ViewData["username"].ToString())</h3>
+    <h4>Login Details:</h4>
+    <table>
+        <tr>
+            <td>@Html.Label("", "Username: ")</td>
+            <td>@Html.Label("", ViewData["username"].ToString())</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("", "Password: ")</td>
+            <td>@Html.Label("", ViewData["password"].ToString())</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("", "Remember me: ")</td>
+            <td>@Html.Label("", ViewData["rememberme"].ToString())</td>
+        </tr>
+   </table>
+</div>
+

@@ -1,0 +1,240 @@
+﻿html, body {
+    margin: 0px;
+    padding: 0px;
+    height:100%;
+    background-color:#383838;
+}
+
+.container-base {
+    background-color: #383838;
+}
+
+.left-floated {
+    float: left;
+}
+
+.clearing {
+    clear: both;
+}
+
+.col-xs-12, .col-xs-6, .col-md-3, .col-lg-3 {
+    padding: 0px;
+    margin: 0px;
+}
+
+.ptiles.bargauge {
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: #EEEFEF;
+}
+
+#fitnessTrackerHeader {
+    width: 100%;
+    height: 65px;
+    background-color: #222;
+    color: white;
+}
+
+#header {
+    float: left;
+    color: white;
+    font-weight: 500;
+    font-size: 30px;
+    font-family: Calibri, segoe ui;
+    padding: 11px 0px 0px 0px;
+}
+
+#person {
+    float: right;
+}
+
+#buy-tickets-button{
+    margin:30px 0px 10px 0px;
+}
+
+.drop-target{
+    background-color:green;
+}
+
+#buy-tickets-window-button{
+    margin-top:20px;
+    margin-bottom:10px;
+    margin-left:2.5%;
+}
+
+.filter-widget{
+    margin-bottom:10px;
+    margin-left:5px;
+}
+
+.filter-button{
+    margin-top:10px;
+}
+
+.buy-tickets-input-label{
+    width:75px;
+}
+
+#screen{
+    background-color:#00548D; 
+    margin-top:10px; 
+    padding-top:5px;
+    padding-bottom: 5px;
+    font-size:18px;
+	line-height:18px;
+    text-align:center; 
+    color:white;
+}
+
+.buy-tickets-placeholder{
+    width:22px;
+    height:22px;
+    background-color:white;
+    margin-left:5px;
+    border:lightgray solid 1px;
+}
+
+#seats{
+    margin-top:10px;
+    width:300px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.seat{
+    width:20px;
+    height:20px;
+    border:lightgray solid 1px;
+    background-color:white;
+    margin:5px 0px 0px 5px;
+}
+
+.occupied{
+    background-color:red;
+}
+
+.person{
+    background-color:lightblue;
+    width:20px;
+    height:20px;
+}
+
+.adult{
+    background-color:blue;
+}
+
+.floating-left{
+    float:left;
+}
+
+.clearing{
+    clear:both;
+}
+
+.window-header{
+    padding: 15px 5px 13px 5px;
+    /*color:#eee;
+    background-color: #383838;
+    background: -webkit-linear-gradient(#383838, gray);
+    background: -o-linear-gradient(#383838, gray);
+    background: -moz-linear-gradient(#383838, gray);
+    background: linear-gradient(#383838, gray);
+    font-weight:bold;*/
+}
+
+.labels{
+    color:#ccc;
+}
+
+.grid-wrapper{
+    padding-right:0%;
+}
+
+.jqx-popover .jqx-popover-arrow,
+.jqx-popover .jqx-popover-arrow:after {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+
+.jqx-popover .jqx-popover-arrow {
+  border-width: 11px;
+}
+
+.jqx-popover .jqx-popover-arrow:after {
+  border-width: 10px;
+  content: "";
+}
+
+.jqx-popover.top .jqx-popover-arrow {
+  bottom: -11px;
+  left: 50%;
+  margin-left: -11px;
+  border-top-color: inherit;
+  border-bottom-width: 0;
+}
+
+.jqx-popover.top .jqx-popover-arrow:after {
+  bottom: 1px;
+  margin-left: -10px;
+  border-top-color: #333;
+  border-bottom-width: 0;
+}
+
+.jqx-popover.right .jqx-popover-arrow {
+  top: 50%;
+  left: -11px;
+  margin-top: -11px;
+  border-right-color: inherit;
+  border-left-width: 0;
+}
+
+.jqx-popover.right .jqx-popover-arrow:after {
+  bottom: -10px;
+  left: 1px;
+  border-right-color: #333;
+  border-left-width: 0;
+}
+
+.jqx-popover.bottom .jqx-popover-arrow {
+  top: -11px;
+  left: 50%;
+  margin-left: -11px;
+  border-bottom-color:inherit;
+  border-top-width: 0;
+}
+
+.jqx-popover.bottom .jqx-popover-arrow:after {
+  top: 1px;
+  margin-left: -10px;
+  border-bottom-color: #333;
+  border-top-width: 0;
+}
+
+.jqx-popover.left .jqx-popover-arrow {
+  top: 50%;
+  right: -11px;
+  margin-top: -11px;
+  border-right-width: 0; border-left-color: inherit;
+}
+
+.jqx-popover.left .jqx-popover-arrow:after {
+  right: 1px;
+  bottom: -10px;
+  border-left-color: #333;
+  border-right-width: 0;
+}
+
+@media screen and (max-width: 970px) {
+    .controls-wrapper{
+         padding-left:4% !important;
+    }
+
+    .grid-wrapper {
+         padding-left:2% !important;
+         padding-right:2% !important;
+    }
+}

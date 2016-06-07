@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Multiple Knob widgets</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxknob.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxnumberinput.js"></script>
+
+    <style type="text/css">
+        #knobContainer {
+            position: relative;
+        }
+
+        .inputField {
+            left: 110px;
+            top: 180px;
+            width: 180px;
+            height: 40px;
+            color: black;
+            font-size: 30px;
+            position: absolute;
+            background: transparent;
+            text-align: center;
+            border: none;
+        }
+
+        .inputField2 {
+            left: 60px;
+            top: 60px;
+            width: 180px;
+            height: 80px;
+            color: black;
+            font-size: 20px;
+            position: absolute;
+            background: transparent;
+            text-align: center;
+            border: none;
+        }
+
+        .inputField3 {
+            left: 60px;
+            top: 190px;
+            width: 180px;
+            height: 40px;
+            color: black;
+            font-size: 20px;
+            position: absolute;
+            background: transparent;
+            text-align: center;
+            border: none;
+        }
+
+        text.jqx-knob-label {
+            font-weight: bold;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 20px;
+        }
+
+        .inputField .jqx-input-content {
+            background: transparent;
+            font-size: 30px;
+            color: black;
+        }
+
+        #knob2 {
+            position: absolute !important;
+            top: 50px;
+            left: 50px;
+        }
+
+        #knob3 {
+            position: absolute !important;
+            top: 0;
+            left: 0;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var startValue1, startValue2, startValue3;
+            startValue1 = startValue2 = startValue3 = 60;
+            $('#knobContainer').jqxKnob({
+                value: startValue1,
+                min: 0,
+                max: 100,
+                startAngle: 180,
+                endAngle: 540,
+                snapToStep: true,
+                pointerGrabAction: 'progressBar',
+                rotation: 'clockwise',
+                style: { fill: '#FFFFFF' },
+                marks: {
+                    drawAboveProgressBar: true,
+                    colorRemaining: 'white',
+                    colorProgress: 'white',
+                    style: 'line',
+                    offset: '78%',
+                    thickness: 3,
+                    size: '18%',
+                    minorInterval: 5
+                },
+                progressBar: {
+                    style: { fill: '#407ec3', stroke: '#407ec3' },
+                    size: '18%',
+                    offset: '78%',
+                    background: { fill: '#cfd0d4', stroke: '#cfd0d4' }
+                },
+                pointer: { type: 'line', visible: false, style: { fill: '#407ec3' }, size: '18%', offset: '78%', thickness: 0 }
+            });
+            var input = $('<div class="inputField">');
+            var input2 = $('<div class="inputField2">');
+            var input3 = $('<div class="inputField3">');
+            var knob2 = $('<div id="knob2">');
+            var knob3 = $('<div id="knob3">');
+            $('#knobContainer').append(knob2);
+
+            $('#knob2').jqxKnob({
+                value: startValue2,
+                min: 0,
+                max: 100,
+                startAngle: 190,
+                width: 300,
+                height: 300,
+                endAngle: 350,
+                snapToStep: true,
+                pointerGrabAction: 'progressBar',
+                rotation: 'clockwise',
+                style: { fill: 'transparent' },
+                progressBar: {
+                    style: { fill: '#ef6100', stroke: '#ef6100' },
+                    size: '18%',
+                    offset: '78%',
+                    background: { fill: '#cfd0d4', stroke: '#cfd0d4' }
+                },
+                pointer: { type: 'line', visible: false, style: { fill: '#33AADD' }, size: '18%', offset: '78%', thickness: 0 }
+            });
+
+            $(knob2).append(knob3);
+
+            $('#knob3').jqxKnob({
+                value: startValue3,
+                min: 0,
+                max: 100,
+                startAngle: 10,
+                width: 300,
+                height: 300,
+                endAngle: 170,
+                snapToStep: true,
+                pointerGrabAction: 'progressBar',
+                rotation: 'clockwise',
+                style: { fill: 'transparent' },
+                progressBar: {
+                    style: { fill: '#18a25e', stroke: '#18a25e' },
+                    size: '18%',
+                    offset: '78%',
+                    background: { fill: '#cfd0d4', stroke: '#cfd0d4' }
+                },
+                pointer: { type: 'line', visible: false, style: { fill: '#00a4e1' }, size: '18%', offset: '78%', thickness: 0 }
+            });
+
+
+            // Add label element to the Knob widget and attach event handlers to update them when the widget value updates.
+            // Note that labels need not be sub elements of the knobs, and they are there just to display that they can be.
+            $('#knobContainer').append(input);
+            $('#knob2').append(input2);
+            $('#knob3').append(input3);
+
+            $('#knobContainer').on('change', function (event) {
+                var html = '<span style="font-size: 14px; width: 33%; display:inline-block; color: #407ec3">All</span><span style="width:33%; display:inline-block;">' + event.args.value + '</span><span style="width:33%; font-size: 14px; color: #407ec3; display:inline-block;">Calls</span>';
+                $(input).html(html);
+            });
+            $('#knob2').on('change', function (event) {
+                var html = '<div style="font-size: 14px; color: #ef6100">Resolved Issues</div><div>' + event.args.value + '</div>';
+                $(input2).html(html);
+                event.stopPropagation();
+            });
+            $('#knob3').on('change', function (event) {
+                var html = '<div>' + event.args.value + '</div><div style="font-size: 14px; color: #18a25e">Pending Issues</div>';
+                $(input3).html(html);
+                event.stopPropagation();
+            });
+
+            $(input).html('<span style="font-size: 14px; width: 33%; display:inline-block; color: #407ec3">All</span><span style="width:33%; display:inline-block;">' + startValue1 + '</span><span style="width:33%; font-size: 14px; color: #00a4e1; display:inline-block;">Calls</span>');
+            $(input2).html('<div style="font-size: 14px; color: #ef6100">Resolved Issues</div><div>' + startValue2 + '</div>');
+            $(input3).html('<div>' + startValue3 + '</div><div style="font-size: 14px; color: #18a25e">Pending Issues</div>');
+        });
+    </script>
+</head>
+<body>
+    <div id='knobContainer'>
+    </div>
+</body>
+</html>

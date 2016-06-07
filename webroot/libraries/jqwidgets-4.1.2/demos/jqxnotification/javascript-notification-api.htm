@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title id="Description">This demo shows some of the settings available in jqxNotification's
+        API. Note that changes are applied to new notification instances only.</title>
+    <meta name="keywords" content="API, jQuery notification, jQWidgets, jqxNotification, jqxNotification API, jqxNotification settings, method, notification, properties, property, settings, template, unobtrusive notification" />
+    <meta name="description" content="This demo shows some of the settings available in jqxNotification's API. Note that changes are applied to new notification instances only." />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxnotification.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxexpander.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxNotification").jqxNotification({ width: "auto", position: "top-right", opacity: 0.9,
+                autoOpen: false, closeOnClick: true, autoClose: true, template: "info", blink: false,
+                icon: { width: 25, height: 25, url: '../../images/smiley.png', padding: 5 }
+            });
+
+            $("#openNotification, #closeLastNotification, #closeNotifications").jqxButton({ width: 150 });
+            $("#settingsExpander").jqxExpander({ width: 200, height: 385, toggleMode: "none", showArrow: false });
+
+            $("#topLeft, #bottomLeft, #bottomRight").jqxRadioButton({ checked: false, groupName: "position" });
+            $("#topRight").jqxRadioButton({ checked: true, groupName: "position" });
+
+            $("#templateDropDownList").jqxDropDownList({ source: ["info", "warning", "success", "error", "mail", "time", "null"], selectedIndex: 0, width: "100%", height: 25, autoDropDownHeight: true });
+
+            $("#closeOnClickCheckbox, #autoCloseCheckBox").jqxCheckBox({ checked: true });
+            $("#blinkCheckbox").jqxCheckBox({ checked: false });
+
+            $("#openNotification").click(function () {
+                $("#jqxNotification").jqxNotification("open");
+            });
+            $("#closeLastNotification").click(function () {
+                $("#jqxNotification").jqxNotification("closeLast");
+            });
+            $("#closeNotifications").click(function () {
+                $("#jqxNotification").jqxNotification("closeAll");
+            });
+
+            $("#topLeft").on("checked", function (event) {
+                $("#jqxNotification").jqxNotification({ position: "top-left" });
+            });
+            $("#topRight").on("checked", function (event) {
+                $("#jqxNotification").jqxNotification({ position: "top-right" });
+            });
+            $("#bottomLeft").on("checked", function (event) {
+                $("#jqxNotification").jqxNotification({ position: "bottom-left" });
+            });
+            $("#bottomRight").on("checked", function (event) {
+                $("#jqxNotification").jqxNotification({ position: "bottom-right" });
+            });
+
+            $("#templateDropDownList").on("change", function (event) {
+                var choice = event.args.item.label;
+                var newTemplate;
+                if (choice != "null") {
+                    newTemplate = choice;
+                } else {
+                    newTemplate = null;
+                }
+                $("#jqxNotification").jqxNotification({ template: newTemplate });
+            });
+
+            $("#closeOnClickCheckbox").on("change", function (event) {
+                var checked = event.args.checked;
+                $("#jqxNotification").jqxNotification({ closeOnClick: checked });
+            });
+            $("#autoCloseCheckBox").on("change", function (event) {
+                var checked = event.args.checked;
+                $("#jqxNotification").jqxNotification({ autoClose: checked });
+            });
+            $("#blinkCheckbox").on("change", function (event) {
+                var checked = event.args.checked;
+                $("#jqxNotification").jqxNotification({ blink: checked });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="jqxNotification">
+        Sample notification</div>
+    <div style="float: left; margin-left: 25%;">
+        <button id="openNotification" style="margin-bottom: 10px;">
+            Open notification</button><br />
+        <button id="closeLastNotification" style="margin-bottom: 10px;">
+            Close last notification</button><br />
+        <button id="closeNotifications">
+            Close all notifications</button></div>
+    <div id="settingsExpander" style="float: left; margin-left: 15px;">
+        <div>
+            jqxNotification settings</div>
+        <div style="padding: 5px;">
+            <div>
+                Position:</div>
+            <ul style="list-style: none; padding: 0px; margin-top: 10px; margin-left: 20px; font-family: Verdana;
+                font-size: 12px;">
+                <li>
+                    <div id="topLeft">
+                        Top-left</div>
+                </li>
+                <li>
+                    <div style="margin-top: 5px;" id="topRight">
+                        Top-right</div>
+                </li>
+                <li>
+                    <div style="margin-top: 5px;" id="bottomLeft">
+                        Bottom-left</div>
+                </li>
+                <li>
+                    <div style="margin-top: 5px;" id="bottomRight">
+                        Bottom-right</div>
+                </li>
+            </ul>
+            <br />
+            <div>
+                Template:</div>
+            <div id="templateDropDownList">
+            </div>
+            <br />
+            <div id="closeOnClickCheckbox">
+                Close on click</div>
+            <div id="autoCloseCheckBox">
+                Auto close</div>
+            <div id="blinkCheckbox">
+                Blink</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxChart Area Series Example</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "csv",
+                datafields: [
+                    { name: 'Date' },
+                    { name: 'S&P 500' },
+                    { name: 'NASDAQ' }
+                ],
+                url: '../sampledata/nasdaq_vs_sp500.txt'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "U.S. Stock Market Index Performance",
+                description: "NASDAQ Composite compared to S&P 500",
+                enableAnimations: true,
+                showLegend: true,
+                enableCrosshairs: true,
+                padding: { left: 10, top: 5, right: 10, bottom: 5 },
+                titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                xAxis:
+                    {
+                        dataField: 'Date',
+                        type: 'date',
+                        baseUnit: 'month',
+                        minValue: new Date(2014, 0, 1),
+                        maxValue: new Date(2014, 11, 1),
+                        valuesOnTicks: true,
+                        labels: {
+                            angle: -45,
+                            rotationPoint: 'topright',
+                            offset: {x: 0, y: -15},
+                            formatFunction: function (value) {
+                                return months[value.getMonth()] + '\'' + value.getFullYear().toString().substring(2);
+                            },
+                        },
+                        toolTipFormatFunction: function (value) {
+                            return value.getDate() + '-' + months[value.getMonth()] + '-' + value.getFullYear();
+                        }
+                    },
+                valueAxis:
+                {
+                    title: { text: 'Daily Closing Price<br>' }
+                },
+                colorScheme: 'scheme05',
+                seriesGroups:
+                    [
+                        {
+                            type: 'area',
+                            alignEndPointsWithIntervals: true,
+                            series: [
+                                    { dataField: 'NASDAQ', displayText: 'NASDAQ', opacity: 0.7 },
+                                    { dataField: 'S&P 500', displayText: 'S&P 500', opacity: 0.8 }
+                                ]
+                        }
+                    ]
+            };
+
+            // setup the chart
+            $('#chartContainer').jqxChart(settings);
+
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='chartContainer' style="width:850px; height:500px">
+    </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>To switch a widget to a right-to-left representation, just enable a single property - "rtl".</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownbutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxswitchbutton.js"></script>
+</head>
+<body>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#checkBox1").jqxCheckBox({ width: 85, rtl: true});
+                $("#checkBox2").jqxCheckBox({ width: 85, rtl: true});
+                $("#radioButton1").jqxRadioButton({ width: 85, rtl: true});
+                $("#radioButton2").jqxRadioButton({ width: 85, rtl: true});
+                $("#switchButton").jqxSwitchButton({ width: 100, rtl: true});
+                $("#dropDownButton").jqxDropDownButton({ width: 180, dropDownWidth: 180, height: 25, rtl: true});
+                var dropDownContent = '<div style="position: relative; margin-left: 3px; margin-top: 5px;">DropDownButton</div>';
+                $("#dropDownButton").jqxDropDownButton('setContent', dropDownContent);
+            });
+        </script>
+        <div id='jqxWidget'>
+            <b>Checkbox</b>
+            <div style="margin-top: 10px;" id="checkBox1">eLearning</div>
+            <div style="margin-top: 5px; margin-bottom: 10px;" id="checkBox2">Mobile</div>
+            <b>Radio Button</b>
+            <div style="margin-top: 10px;" id="radioButton1">On</div>
+            <div style="margin-bottom: 10px; margin-top: 5px;" id="radioButton2">Off</div>
+            <b>DropDown Button</b>
+            <div style="margin-top: 10px; margin-bottom: 10px;" id="dropDownButton">
+                <div style="direction: rtl;">
+                    <ul>
+                        <li>Education</li>
+                        <li>Financial services</li>
+                        <li>Government</li>
+                        <li>Manufacturing</li>
+                        <li>Solutions
+                                <ul>
+                                    <li>eLearning</li>
+                                    <li>Mobile</li>
+                                    <li>RIA</li>
+                                    <li>Training</li>
+                                </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <b>Switch Button</b>
+            <div style="margin-top: 10px;" id="switchButton"></div>
+        </div>
+    </div>
+</body>
+</html>

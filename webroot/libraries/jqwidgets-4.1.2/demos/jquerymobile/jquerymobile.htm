@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">jQuery Mobile Integration</title>
+    <link rel="stylesheet" href="../../styles/jquery.mobile-1.4.3.min.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery.mobile-1.4.3.min.js"></script>
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <style type="text/css">
+        .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
+            background: #fff;
+        }
+
+        @media all and (max-width: 62em) {
+            .my-breakpoint .ui-block-a, .my-breakpoint .ui-block-b {
+                width: 100%;
+                float: none;
+            }
+        }
+
+        @media all and (min-width: 72em) {
+            .my-breakpoint .ui-block-a {
+                width: 64.95%;
+            }
+
+            .my-breakpoint .ui-block-b {
+                width: 34.95%;
+            }
+        }
+    </style>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // jqxGrid data source
+            var data = new Array();
+            var firstNames =
+            [
+                "Andrew", "Nancy", "Shelley", "Regina", "Yoshi", "Antoni", "Mayumi", "Ian", "Peter", "Lars", "Petra", "Martin", "Sven", "Elio", "Beate", "Cheryl", "Michael", "Guylene"
+            ];
+            var lastNames =
+            [
+                "Fuller", "Davolio", "Burke", "Murphy", "Nagase", "Saavedra", "Ohno", "Devling", "Wilson", "Peterson", "Winkler", "Bein", "Petersen", "Rossi", "Vileid", "Saylor", "Bjorn", "Nodier"
+            ];
+            var productNames =
+            [
+                "Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte", "White Chocolate Mocha", "Cramel Latte", "Caffe Americano", "Cappuccino", "Espresso Truffle", "Espresso con Panna", "Peppermint Mocha Twist"
+            ];
+            var priceValues =
+            [
+                "2.25", "1.5", "3.0", "3.3", "4.5", "3.6", "3.8", "2.5", "5.0", "1.75", "3.25", "4.0"
+            ];
+            for (var i = 0; i < 100; i++) {
+                var row = {};
+                var productindex = Math.floor(Math.random() * productNames.length);
+                var price = parseFloat(priceValues[productindex]);
+                var quantity = 1 + Math.round(Math.random() * 10);
+                row["firstname"] = firstNames[Math.floor(Math.random() * firstNames.length)];
+                row["lastname"] = lastNames[Math.floor(Math.random() * lastNames.length)];
+                row["productname"] = productNames[productindex];
+                row["price"] = price;
+                row["quantity"] = quantity;
+                row["total"] = price * quantity;
+                data[i] = row;
+            }
+            var source =
+            {
+                localData: data,
+                dataFields:
+                [
+                    { name: 'firstname', type: 'string' },
+                    { name: 'lastname', type: 'string' },
+                    { name: 'productname', type: 'string' },
+                    { name: 'quantity', type: 'number' },
+                    { name: 'price', type: 'number' },
+                    { name: 'total', type: 'number' }
+                ],
+                dataType: "array"
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function (data) { },
+                loadError: function (xhr, status, error) { }
+            });
+
+            // jqxDataTable initialization
+            $("#jqxDataTable").jqxDataTable(
+            {
+                width: "100%",
+                height: 400,
+                pageSize: 20,
+                pageable: true,
+                source: dataAdapter,
+                columns: [
+                  { text: 'First Name', dataField: 'firstname', width: "20%" },
+                  { text: 'Last Name', dataField: 'lastname', width: "20%" },
+                  { text: 'Product', dataField: 'productname', width: "20%" },
+                  { text: 'Quantity', dataField: 'quantity', width: "10%", cellsAlign: 'right' },
+                  { text: 'Unit Price', dataField: 'price', width: "10%", cellsAlign: 'right', cellsFormat: 'c2' },
+                  { text: 'Total', dataField: 'total', cellsAlign: 'right', cellsFormat: 'c2' }
+                ]
+            });
+
+            // jqxChart data source
+            var source =
+              {
+                  datatype: "csv",
+                  datafields: [
+                      { name: 'Country' },
+                      { name: 'GDP' },
+                      { name: 'DebtPercent' },
+                      { name: 'Debt' }
+                  ],
+                  url: '../sampledata/gdp_dept_2010.txt'
+              };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "Economic comparison",
+                description: "GDP and Debt in 2010",
+                showLegend: true,
+                enableAnimations: true,
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                xAxis:
+                    {
+                        dataField: 'Country',
+                        showGridLines: true
+                    },
+                colorScheme: 'scheme01',
+                seriesGroups:
+                    [
+                        {
+                            type: 'column',
+                            columnsGapPercent: 50,
+                            valueAxis:
+                            {
+                                unitInterval: 5000,
+                                displayValueAxis: true,
+                                description: 'GDP & Debt per Capita($)'
+                            },
+                            series: [
+                                    { dataField: 'GDP', displayText: 'GDP per Capita' },
+                                    { dataField: 'Debt', displayText: 'Debt per Capita' }
+                            ]
+                        },
+                        {
+                            type: 'line',
+                            valueAxis:
+                            {
+                                unitInterval: 10,
+                                displayValueAxis: false,
+                                description: 'Debt (% of GDP)'
+                            },
+                            series: [
+                                    { dataField: 'DebtPercent', displayText: 'Debt (% of GDP)' }
+                            ]
+                        }
+
+                    ]
+            };
+
+            // setup the chart
+            $('#jqxChart').jqxChart(settings);
+        });
+    </script>
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="header">
+            <h1>Integration with jQuery Mobile</h1>
+        </div>
+        <div class="ui-grid-a my-breakpoint">
+            <div class="ui-block-a" style="padding: 10px;">
+                <div id="jqxDataTable">
+                </div>
+            </div>
+            <div class="ui-block-b" style="padding: 10px;">
+                <div id="jqxChart" style="width: 100%; height: 402px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

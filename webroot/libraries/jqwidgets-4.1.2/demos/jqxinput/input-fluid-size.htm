@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxInput Fluid Size Example. The width of the Input in this demo is in Percentages.</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 minimum-scale=1" />  
+    <meta name="description" content="JavaScript Input with Responsive Layout" />   
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxinput.js"></script>
+</head>
+<body>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var url = "../sampledata/customers.txt";
+
+                // prepare the data
+                var source =
+                {
+                    datatype: "json",
+                    datafields: [
+                        { name: 'CompanyName' },
+                        { name: 'ContactName' }
+                    ],
+                    url: url
+                };
+                var dataAdapter = new $.jqx.dataAdapter(source);
+
+                // Create a jqxInput
+                $("#jqxInput").jqxInput({ source: dataAdapter, placeHolder: "Contact Name:", displayMember: "ContactName", valueMember: "CompanyName", width: '30%', height: 35 });
+            });
+        </script>
+        <input id="jqxInput" />
+        <br />
+        <label style="font-family: Verdana; font-size: 10px;">ex: Ana</label>
+    </div>
+</body>
+</html>

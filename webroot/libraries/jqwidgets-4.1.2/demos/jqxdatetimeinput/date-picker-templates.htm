@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Calendar, Month Calendar, MonthCalendar, DateTimeInput, DateTimePicker, Date Picker" />
+    <meta name="description" content="DateTimePicker Templates and Styling" />
+    <title id='Description'>This demo demonstrates the jqxDateTimeInput template options</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+</head>
+<body>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function ()
+            {
+                $("#dateInput").jqxDateTimeInput({ showTimeButton: true, template: "default", width: 300, height: 30 });
+                $("#dateInput2").jqxDateTimeInput({ showTimeButton: true, template: "primary", width: 300, height: 30 });
+                $("#dateInput3").jqxDateTimeInput({ showTimeButton: true, template: "success", width: 300, height: 30 });
+                $("#dateInput4").jqxDateTimeInput({ showTimeButton: true, template: "info", width: 300, height: 30 });
+                $("#dateInput5").jqxDateTimeInput({ showTimeButton: true, template: "warning", width: 300, height: 30 });
+                $("#dateInput6").jqxDateTimeInput({ showTimeButton: true, template: "danger", width: 300, height: 30 });
+            });
+        </script>
+        <div>Default</div>
+        <div id="dateInput"></div>
+        <br />
+        <div>Primary</div>
+        <div id="dateInput2"></div>
+        <br />
+        <div>Success</div>
+        <div id="dateInput3"></div>
+        <br />
+        <div>Info</div>
+        <div id="dateInput4"></div>
+        <br />
+        <div>Warning</div>
+        <div id="dateInput5"></div>
+        <br />
+        <div>Danger</div>
+        <div id="dateInput6"></div>
+        <br />
+    </div>
+</body>
+</html>

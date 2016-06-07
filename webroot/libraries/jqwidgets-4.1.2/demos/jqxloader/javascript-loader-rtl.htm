@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title id="Description">The sample demonstrates how to enable the jqxLoader's Right-to-Left support. When rtl property is true, the text in jqxLoader's UI is reversed.</title>
+    <meta name="keywords" content="jQuery loader, jQWidgets, jqxLoader, loader" />
+    <meta name="description" content="The sample demonstrates how to enable the jqxLoader's Right-to-Left support. When rtl property is true, the text in jqxLoader's UI is reversed" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxloader.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#openLoader").jqxButton({
+                width: 150
+            });
+            $("#jqxLoader").jqxLoader({ rtl: true, width: 100, height: 60, imagePosition: 'top' });
+            $('#openLoader').on('click', function () {
+                $('#jqxLoader').jqxLoader('open');
+            });
+
+            $("#closeLoader").jqxButton({
+                width: 100
+            });
+            $('#closeLoader').on('click', function () {
+                $('#jqxLoader').jqxLoader('close');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="jqxLoader">
+    </div>
+    <input type="button" value="Open Loader" id="openLoader" />
+    <input type="button" value="Close" id="closeLoader" />
+</body>
+</html>
+

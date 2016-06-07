@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxDropDownList Fluid Size Example. The width of the DropDownList in this demo is in Percentages.</title>
+    <meta name="description" content="Responsive DropDownList Example. In this example, the DropDownList is with fluid size" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 minimum-scale=1" /> 
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            padding: 3px;
+            box-sizing: border-box;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var source = [
+                    "Affogato",
+                    "Americano",
+                    "Bicerin",
+                    "Breve",
+                    "Café Bombón",
+                    "Café au lait",
+                    "Caffé Corretto",
+                    "Café Crema",
+                    "Caffé Latte",
+                    "Caffé macchiato",
+                    "Café mélange",
+                    "Coffee milk",
+                    "Cafe mocha",
+                    "Cappuccino",
+                    "Carajillo",
+                    "Cortado",
+                    "Cuban espresso",
+                    "Espresso",
+                    "Eiskaffee",
+                    "The Flat White",
+                    "Frappuccino",
+                    "Galao",
+                    "Greek frappé coffee",
+                    "Iced Coffee﻿",
+                    "Indian filter coffee",
+                    "Instant coffee",
+                    "Irish coffee",
+                    "Liqueur coffee"
+                ];
+                // Create a jqxDropDownList
+                $("#jqxWidget").jqxDropDownList({ source: source, selectedIndex: 1, width: '100%', height: '35' });
+            });
+        </script>
+        <div id='jqxWidget'>
+        </div>
+    </div>
+</body>
+</html>

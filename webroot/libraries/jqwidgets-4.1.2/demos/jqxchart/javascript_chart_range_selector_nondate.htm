@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxChart Range Selector Example</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.rangeselector.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "csv",
+                datafields: [
+                    { name: 'Date' },
+                    { name: 'Open' },
+                    { name: 'High' },
+                    { name: 'Low' },
+                    { name: 'Close' },
+                    { name: 'Volume' },
+                    { name: 'AdjClose' }
+                    ],
+                url: '../sampledata/TSLA_stockprice.csv'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            var toolTipCustomFormatFn = function (value, itemIndex, serie, group, categoryValue, categoryAxis) {
+                return 'Index: ' + itemIndex + ", Value: " + value;
+            };
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "Range selector with regular x-axis",
+                description: "In this example the range selector works with (non-date) axis",
+                enableAnimations: true,
+                showLegend: false,
+                animationDuration: 1500,
+                enableCrosshairs: true,
+                padding: { left: 5, top: 5, right: 20, bottom: 5 },
+                colorScheme: 'scheme02',
+                source: dataAdapter,
+                xAxis:
+                    {
+                        minValue: 175,
+                        maxValue: 550,
+                        flip: false,
+                        valuesOnTicks: true,
+                        rangeSelector: {
+                            serieType: 'area',
+                            padding: { /*left: 0, right: 0,*/ top: 20, bottom: 0 },
+                            // Uncomment the line below to render the selector in a separate container
+                            //renderTo: $('#selectorContainer'),
+                            backgroundColor: 'white',
+                            size: 110,
+                            gridLines: {visible: false},
+                        }
+                    },
+                seriesGroups:
+                    [
+                        {
+                            type: 'line',
+                            toolTipFormatFunction: toolTipCustomFormatFn,
+                            valueAxis:
+                            {
+                                flip: false,
+                                title: {text: 'Value<br><br>'}
+                            },
+                            series: [
+                                { dataField: 'Close', lineWidth: 1, lineWidthSelected: 1 }
+                            ]
+                        }
+
+                    ]
+            };
+
+            $('#chartContainer').jqxChart(settings);
+        });
+    </script>
+</head>
+<body class='default'>
+    <p>
+        <div id='chartContainer' style="width:800px; height:500px;">
+        </div>
+    </p>
+    <p>
+        <!-- you can optionally render the selecor in this container -->
+        <div id='selectorContainer' style="width:500px; height:100px;">
+        </div>
+    </p>
+</body>
+</html>

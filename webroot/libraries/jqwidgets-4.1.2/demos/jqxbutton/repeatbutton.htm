@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Button, CheckBox, Toggle Button, Repeat Button, Radio Button, Link Button, Button" /> 
+    <meta name="description" content="The jqxRepeatButton represents a button widget derived from
+        the jqxButton. However, jqxRepeatButton give you control over when and how the 'click'
+        event occurs. The jqxRepeatButton raises the 'click' event repeatedly from the time
+        it is pressed until it is released." />
+    <title id='Description'>The jqxRepeatButton represents a button widget derived from
+        the jqxButton. However, jqxRepeatButton give you control over when and how the 'click'
+        event occurs. The jqxRepeatButton raises the 'click' event repeatedly from the time
+        it is pressed until it is released.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxprogressbar.js"></script>
+</head>
+<body>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                
+
+                // Create a jqxRepeatButton widget.
+                $("#jqxButton").jqxRepeatButton({ delay: 10, width: '200'});
+
+                // Create a jqxProgressBar widget.
+                $("#jqxProgressBar").jqxProgressBar({ width: '250', height: '25', max: 30});
+
+                $("#jqxButton").on('click', function () {
+                    var currentValue = $("#jqxProgressBar").jqxProgressBar('value');
+                    currentValue += 1;
+                    $("#jqxProgressBar").jqxProgressBar({ animationDuration: 0, value: currentValue });
+                });
+            });
+        </script>
+        <div style='width:250px;' id='jqxWidget'>
+            <div>
+                <input style='margin-left: 25px;' type="button" value="Click Me!" id='jqxButton' />
+            </div>
+            <div style='margin-top: 10px;'>
+                <div id='jqxProgressBar'>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

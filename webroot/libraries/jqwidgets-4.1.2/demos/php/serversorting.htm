@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+	<script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+	<script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+	<script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+	<script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+	<script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+	<script type="text/javascript" src="../../jqwidgets/jqxgrid.grouping.js"></script>
+	<script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script>	
+	<script type="text/javascript" src="../../jqwidgets/jqxgrid.sort.js"></script>		
+	<script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>	
+	<script type="text/javascript" src="../../scripts/demos.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			// prepare the data
+			
+      
+			var source =
+			{
+				datatype: "json",
+				datafields: [
+					{ name: 'ShippedDate', type: 'date'},
+					{ name: 'ShipName'},
+					{ name: 'ShipAddress'},
+					{ name: 'ShipCity'},
+					{ name: 'ShipCountry'}
+				],
+				url: 'serversorting_data.php',
+				sort: function()
+				{
+					// update the grid and send a request to the server.
+					$("#jqxgrid").jqxGrid('updatebounddata', 'sort');
+				}
+			};	
+				
+			var dataAdapter = new $.jqx.dataAdapter(source);
+	
+			// initialize jqxGrid
+			$("#jqxgrid").jqxGrid(
+			{		
+				source: dataAdapter,
+				
+				sortable: true,
+				groupable: true,
+				columns: [
+					{ text: 'Shipped Date', datafield: 'ShippedDate', cellsformat: 'd', width: 100 },
+					{ text: 'Ship Name', datafield: 'ShipName', width: 200 },
+					{ text: 'Address', datafield: 'ShipAddress', width: 180 },
+					{ text: 'City', datafield: 'ShipCity', width: 100 },
+					{ text: 'Country', datafield: 'ShipCountry', width: 140 }
+				]
+			});
+		});
+		</script>
+	</head>
+	<body class='default'>
+	<div id="jqxgrid"></div>
+	</body>
+</html>
+<!--serversorting_data.php
+#Include the connect.php file
+include ('connect.php');
+
+// Connect to the database
+// connection String
+$mysqli = new mysqli($hostname, $username, $password, $database);
+/* check connection */
+if (mysqli_connect_errno())
+	{
+	printf("Connect failed: %s\n", mysqli_connect_error());
+	exit();
+	}
+$query = "SELECT OrderDate, ShippedDate, ShipName, ShipAddress, ShipCity, ShipCountry FROM orders";
+// sort data.
+if (isset($_GET['sortdatafield']))
+	{
+	$sortfields = array(
+		"OrderDate",
+		"ShippedDate",
+		"ShipName",
+		"ShipAddress",
+		"ShipCity",
+		"ShipCountry"
+	);
+	$sortfield = $_GET['sortdatafield'];
+	$sortorder = $_GET['sortorder'];
+	if (($sortfield != NULL) && (in_array($sortfield, $sortfields)))
+		{
+		if ($sortorder == "desc")
+			{
+			$query = "SELECT OrderDate, ShippedDate, ShipName, ShipAddress, ShipCity, ShipCountry FROM orders ORDER BY " . $sortfield . " DESC";
+			}
+		  else if ($sortorder == "asc")
+			{
+			$query = "SELECT OrderDate, ShippedDate, ShipName, ShipAddress, ShipCity, ShipCountry FROM orders ORDER BY " . $sortfield . " ASC";
+			}
+		}
+	}
+$result = $mysqli->prepare($query);
+$result->execute();
+/* bind result variables */
+$result->bind_result($OrderDate, $ShippedDate, $ShipName, $ShipAddress, $ShipCity, $ShipCountry);
+/* fetch values */
+while ($result->fetch())
+	{
+	$orders[] = array(
+		'OrderDate' => $OrderDate,
+		'ShippedDate' => $ShippedDate,
+		'ShipName' => $ShipName,
+		'ShipAddress' => $ShipAddress,
+		'ShipCity' => $ShipCity,
+		'ShipCountry' => $ShipCountry
+	);
+	}
+echo json_encode($orders);
+/* close statement */
+$result->close();
+/* close connection */
+$mysqli->close();
+-->

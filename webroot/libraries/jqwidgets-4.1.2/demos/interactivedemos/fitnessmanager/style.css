@@ -1,0 +1,261 @@
+﻿html, body {
+    margin: 0px;
+    padding: 0px;
+    background: white;
+}
+
+.big>div {
+    max-width:1200px;
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.small>div {
+    width:100%;
+    max-width:1200px;
+    margin-left:0px;
+    margin-right:0px;
+}
+
+.page{
+    height:80vh;
+}
+
+.page-hidden{
+    display:none;
+}
+
+.jqx-kanban-item-color-status {
+            width: 100%;
+            height: 25px;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            position:relative;
+            margin-top:0px;
+            overflow: hidden;
+            top: 0px;
+        }
+        .jqx-kanban-item {
+            padding-top: 0px;
+            padding-bottom:0px;
+        }
+        .jqx-kanban-item-text {
+            padding-top: 6px;
+            padding-bottom: 6px;
+        }
+        .jqx-kanban-item-avatar {
+            top: 9px;
+        }
+        .jqx-kanban-template-icon {
+            position: absolute;
+            right: 3px;
+            top:12px;
+        }
+
+ #container {
+            position: relative;
+        }
+        .inputField {
+            left: 110px;
+            top: 323px;
+            position: absolute;
+            background: transparent;
+            border: none;
+        }
+        text.jqx-knob-label {
+            font-size: 20px;
+        }
+        .inputField .jqx-input-content {
+            background: transparent;
+            font-size: 20px;
+            color: grey;
+        }
+
+.demo-options
+    {
+        list-style: none;
+        padding: 0px;
+        width:300px;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .demo-options li
+    {
+        padding: 3px;
+        font-family: Verdana;
+        font-size: 12px;        
+    }
+
+.linear-gauge-selected{
+    background-color:#eeeeff;
+    border-radius:5px;
+}
+
+.itemicon{
+    width:50px;
+    height:50px;
+}
+
+.jqx-tree-item{
+    font-size:14px;
+    font-weight:800;
+}
+
+.logo{
+    float:left;
+    width:273px;
+    height:69px;
+}
+
+.logo-top{
+    width:273px;
+    height:69px;
+    display:none;
+}
+
+.logo-top2{
+    width:273px;
+    height:69px;
+    display:none;
+}
+
+@media screen and (max-width: 1300px) {
+    .logo {
+        margin-top:20px;
+        width:136px;
+        height:35px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .logo-top {
+        display:block;
+        margin:0px auto 0px auto;
+    }
+
+    .logo-top2 {
+        display:block;
+        position:absolute !important;
+        top:0px !important;
+        right:10px !important;
+        max-width:70% !important;
+        z-index:0;
+    }
+
+    .logo {
+        display:none;
+    }
+
+   .jqx-menu{
+        margin-top:20px;
+    }
+
+    .jqx-menu-minimized{
+        width:200px !important;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .logo-top-containter{
+        background-color:#f8f8f8;
+    }
+
+    .jqx-menu {
+        margin-left: 0px!important;
+    } 
+
+    .jqx-menu-minimized{
+        width:200px !important;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .jqx-menu {
+        float:left !important;
+        margin-left: 50px;
+    }
+
+    .breadcrumb{
+       width:90% !important;
+       padding-left:10px;
+    }
+}
+
+.jqx-menu{
+    height:80px;
+    background-color:white;
+    border:0px;
+    float:right;
+}
+
+.headline{
+    background-color: #25A0DA;
+    text-align: center;
+    font-size: 30px;
+    height: 50px;
+    padding-top: 20px;
+    font-family: impact;
+    color: white;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.breadcrumb-containter{
+   background-color: #36B1EB;
+   font-size: 13px;
+   height: 35px;
+   color: white;
+   font-family: sans-serif;
+   padding-top: 20px;
+   margin-bottom:5px;
+}
+
+.breadcrumb{
+   width:1200px;
+   margin-left:auto;
+   margin-right:auto;
+}
+
+.jqx-menu ul{
+    margin:22px 0px 0px auto;
+    width:680px;
+}
+
+.instructors-grid-cell{
+    font-size:16px;
+}
+
+.jqx-widget-content-light:hover{
+    border-color:lightgray !important;
+}
+
+#instructorsJqxExpander{
+    border:0px !important;
+}
+
+#jqxListBox{
+    border:0px !important;
+}
+
+#paneljqxTree{
+    border:0px !important;
+}
+
+.jqx-expander-content-bottom{
+    border:0px !important;
+}
+
+.jqx-tree{
+    border:0px !important;
+}
+
+.jqx-expander-header-expanded {
+    background-color:lightblue;
+    border-color:lightblue;
+    border-radius: 3px;
+}
+
+.jqx-menu-ul{
+    border:0px !important;
+}

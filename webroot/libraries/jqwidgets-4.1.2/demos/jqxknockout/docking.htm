@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Integration of jqxDocking with Knockout. Type something in the text fields and
+        press the Add button.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/json2.js"></script> 
+    <script type="text/javascript" src="../../scripts/knockout-3.0.0.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdocking.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+</head>
+<body class='default'>
+    <div id="content">
+        <script type="text/javascript">
+            $(document).ready(function () {
+                PeopleModel = function () {
+                    //We define observable variable for the name
+                    this.personName = ko.observable();
+                    //We define observable variable for the credits
+                    this.personCredits = ko.observable();
+                    //We define observable array for the pairs (name, credits)
+                    this.people = ko.observableArray([{ name: 'Franklin', credits: 250 }, { name: 'Mario', credits: 5800}]);
+
+                    var self = this,
+                sectionsCount = 0,
+                windowsCount = 0,
+                maxSections;
+                    //This method will handle the new added sections
+                    function handleSection(el) {
+                        var id = 'knockout-section-' + sectionsCount;
+                        sectionsCount += 1;
+                        el.id = id;
+                        $(el).appendTo($('#docking'));
+                        $(el).css('width', '47%');
+                    }
+                    //This method will handle the new added windows
+                    function handleWindow(el) {
+                        var id = 'knockout-window-' + windowsCount,
+                    section = windowsCount % sectionsCount;
+                        windowsCount += 1;
+                        $(el).attr('id', id);
+                        $('#docking').jqxDocking('addWindow', id, 'docked', section, windowsCount);
+                    }
+                    function getDOMElement(args) {
+                        for (var i = 0; i < args.length; i += 1) {
+                            if (args[i].tagName && args[i].tagName.toUpperCase() === 'DIV') {
+                                return args[i];
+                            }
+                        }
+                        return null;
+                    }
+                    //We define the docking's sections count to be equal to the startup count of the objects in the
+                    //people array. This is not mandatory but it's important to create all different sections before the docking initialization
+                    maxSections = this.people().length;
+                    //This method handles adding a new person (when the user click on the Add button)
+                    this.addPerson = function () {
+                        if (this.people().length < 10) {
+                            if (this.personName() && this.personCredits()) {
+                                this.people.push({
+                                    name: this.personName(),
+                                    credits: this.personCredits()
+                                });
+                            }
+                        }
+                    }
+                    //This custom render takes care of adding new windows
+                    this.buildWindow = function (element) {
+                        var el = getDOMElement(element);
+                        if (sectionsCount < maxSections) {
+                            handleSection(el);
+                            handleWindow($(el).children('.knockout-window'));
+                        } else {
+                            handleWindow($(el).children('.knockout-window'));
+                            $(el).remove();
+                        }
+                    }
+                };
+
+                ko.applyBindings(new PeopleModel());
+                $('#docking').jqxDocking({  orientation: 'horizontal', width: 380, mode: 'docked' });
+                $('#Add').jqxButton({ theme: theme });
+            });
+        </script>
+        <div id='jqxWidget'>
+            <input type="text" data-bind="value: personName" />
+            <input type="text" data-bind="value: personCredits" />
+            <input id="Add" type="button" data-bind="click: addPerson" value="Add" />
+            <div id="docking" data-bind="template: { foreach: people, afterRender: buildWindow }">
+                <div class="knockout-section">
+                    <div class="knockout-window">
+                        <div>
+                            Name: <span data-bind="text: name"></span>
+                        </div>
+                        <div>
+                            Credits count: <span data-bind="text: credits"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

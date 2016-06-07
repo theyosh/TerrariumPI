@@ -1,0 +1,95 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using System.Globalization;
+using jQWidgetsMVCDemo.Models;
+
+namespace jQWidgetsMVCDemo.Controllers
+{
+	public class EmployeeController : Controller
+	{
+		private EmployeesDBEntities db = new EmployeesDBEntities();
+
+		// GET: /Employee/Details/5
+		public ActionResult Details(int? employeeId)
+		{
+			if (employeeId == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			Employee employee = db.Employees.Find(employeeId);
+			if (employee == null)
+			{
+				return HttpNotFound();
+			}
+			return View(employee);
+		}
+
+
+		[HttpPost]
+		public ActionResult Register()
+		{
+			DateTime maxDate = new DateTime(2015, 1, 1);
+
+			if (Request.Form["birthDateValidate"] != null)
+			{
+				var birthDateValidate = DateTime.Parse(Request.Form["birthDateValidate"], CultureInfo.CurrentCulture);
+				if (birthDateValidate > maxDate)
+				{
+					return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+				}
+				else
+				{
+					return new HttpStatusCodeResult(HttpStatusCode.Accepted);
+				}
+			}
+
+			if (Request.Form["birthDate"] != null)
+			{
+				var birthDate = DateTime.Parse(Request.Form["birthDate"], CultureInfo.CurrentCulture);
+				if (birthDate > maxDate)
+				{
+					return RedirectToAction("RegisterFailed");
+				}
+			}
+			var terms = Request.Form["acceptTerms"];
+			if (terms != null)
+			{
+				if (terms == "false")
+				{
+					return RedirectToAction("RegisterFailed");
+				}
+			}
+			Employee employee = new Employee();
+			employee.FirstName = Request.Form["FirstName"];
+			employee.LastName = Request.Form["LastName"];
+			employee.Title = Request.Form["Title"];
+			if (Request.Form["birthDate"] != null)
+			{
+				employee.BirthDate = DateTime.Parse(Request.Form["birthDate"]);
+			}
+			else employee.BirthDate = new DateTime(1900, 1, 1);
+
+			return View(employee);
+		}
+
+		public ActionResult RegisterFailed()
+		{
+			return View();
+		}
+
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				db.Dispose();
+			}
+			base.Dispose(disposing);
+		}
+	}
+}

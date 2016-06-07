@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title id='Description'>jQWidgets Chart Area Series Mobile Example</title>
+    <link rel="stylesheet" href="../styles/demo.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.windowsphone.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.blackberry.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.android.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.mobile.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../simulator.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = prepareSimulator("chart");
+            // prepare the data
+            var source =
+            {
+                datatype: "csv",
+                datafields: [
+                    { name: 'Date' },
+                    { name: 'S&P 500' },
+                    { name: 'NASDAQ' }
+                ],
+                url: '../../demos/sampledata/nasdaq_vs_sp500.txt'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "U.S. Stock Market Index",
+                description: "NASDAQ Composite compared to S&P 500",
+                enableAnimations: true,
+                showLegend: true,
+                padding: { left: 10, top: 5, right: 10, bottom: 5 },
+                titlePadding: { left: 20, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                categoryAxis:
+                    {
+                        text: 'Category Axis',
+                        textRotationAngle: 0,
+                        dataField: 'Date',
+                        formatFunction: function (value) {
+                            return months[value.getMonth()];
+                        },
+                        toolTipFormatFunction: function (value) {
+                            return value.getDate() + '-' + months[value.getMonth()];
+                        },
+                        type: 'date',
+                        baseUnit: 'month',
+                        showTickMarks: true,
+                        tickMarksInterval: 3,
+                        tickMarksColor: '#888888',
+                        unitInterval: 3,
+                        showGridLines: true,
+                        gridLinesInterval: 3,
+                        gridLinesColor: '#888888',
+                        valuesOnTicks: false
+                    },
+                colorScheme: 'scheme05',
+                seriesGroups:
+                    [
+                        {
+                            type: 'area',
+                            valueAxis:
+                            {
+                                displayValueAxis: true,
+                                description: 'Daily Closing Price',
+                                //descriptionClass: 'css-class-name',
+                                axisSize: 'auto',
+                                tickMarksColor: '#888888'
+                            },
+                            series: [
+                                    { dataField: 'NASDAQ', displayText: 'NASDAQ' },
+                                    { dataField: 'S&P 500', displayText: 'S&P 500' }
+                            ]
+                        }
+                    ]
+            };
+
+            // setup the chart
+            $('#chart').jqxChart(settings);
+            initSimulator("chart");
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="demoContainer" class="device-mobile-tablet">
+        <div id="container" class="device-mobile-tablet-container">
+            <div id='chart' style="width: 100%; height: 100%">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

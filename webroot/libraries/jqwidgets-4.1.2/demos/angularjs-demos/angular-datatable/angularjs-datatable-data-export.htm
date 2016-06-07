@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>With AngularJS DataTable, you can export your data to Excel, XML, CSV, TSV, JSON and HTML.</title>
+    <meta name="description" content="AngularJS DataTable with Data Export example. Data is exported to Excel, XML, JSON, HTML, CSV and TSV" />		
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> 
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.export.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../sampledata/generatedata.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {             
+            var grid;
+            $scope.gridSettings =
+            {
+                width: 850,
+                created: function(args)
+                {
+                    grid = args.instance;
+                },
+                pageable: true,
+                source:    new $.jqx.dataAdapter(  {
+                    localData: generateData(100),
+                    dataType: "array",
+                    dataFields:
+                    [
+                        { name: 'firstname', type: 'string' },
+                        { name: 'lastname', type: 'string' },
+                        { name: 'productname', type: 'string' },
+                        { name: 'available', type: 'bool' },
+                        { name: 'date', type: 'date' },
+                        { name: 'quantity', type: 'number' },
+                        { name: 'price', type: 'number' }
+                    ]
+                }),
+                altRows: true,
+                sortable: true,
+                columns: [
+                  { text: 'First Name', dataField: 'firstname', width: 190 },
+                  { text: 'Last Name', dataField: 'lastname', width: 190 },
+                  { text: 'Product', dataField: 'productname', width: 177 },
+                  { text: 'Available', dataField: 'available', width: 67, cellsAlign: 'center', align: 'center' },
+                  { text: 'Ship Date', dataField: 'date', width: 90, align: 'right', cellsAlign: 'right', cellsFormat: 'd' },
+                  { text: 'Quantity', dataField: 'quantity', width: 70, align: 'right', cellsAlign: 'right' },
+                  { text: 'Price', dataField: 'price', cellsAlign: 'right', align: 'right', cellsFormat: 'c2' }
+                ]
+            };
+
+            $scope.excelExportClick = function () {
+               grid.exportData('xls');
+            };
+            $scope.xmlExportClick = function () {
+                grid.exportData('xml');
+            };
+            $scope.csvExportClick = function () {
+                grid.exportData('csv');
+            };
+            $scope.tsvExportClick = function () {
+                grid.exportData('tsv');
+            };
+            $scope.htmlExportClick = function () {
+                grid.exportData('html');
+            };
+            $scope.jsonExportClick = function () {
+                grid.exportData('json');
+            };
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+    <jqx-data-table jqx-settings="gridSettings"></jqx-data-table>
+    <div style='margin-top: 20px;'>
+        <div style='float: left;'>
+            <jqx-button jqx-on-click="excelExportClick()">Export to Excel</jqx-button>
+            <br />
+            <br />
+            <jqx-button jqx-on-click="xmlExportClick()">Export to XML</jqx-button>
+        </div>
+        <div style='margin-left: 10px; float: left;'>
+            <jqx-button jqx-on-click="csvExportClick()">Export to CSV</jqx-button>
+            <br />
+            <br />
+            <jqx-button jqx-on-click="tsvExportClick()">Export to TSV</jqx-button>
+        </div>
+        <div style='margin-left: 10px; float: left;'>
+            <jqx-button jqx-on-click="htmlExportClick()">Export to HTML</jqx-button>
+            <br />
+            <br />
+            <jqx-button jqx-on-click="jsonExportClick()">Export to JSON</jqx-button>
+        </div>
+    </div>
+</body>
+</html>

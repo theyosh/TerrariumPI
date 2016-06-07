@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Order & Details example</title>
+	<meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 minimum-scale=1" />
+    <link rel="stylesheet" href="../../../styles/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../styles/bootstrap-theme.min.css" />
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script type="text/javascript">
+
+        $(document).ready(function ()
+        {
+           
+            $('#navBar ul li').click(function (event)
+            {
+                $('#navBar').find('.active').removeClass('active');
+                $(this).addClass("active");
+                
+                $('.navbar-collapse').collapse('hide');
+
+                switch (event.target.id)
+                {
+                    case "dashboardTab":
+                        $('.iframeContainer').height(1300);
+                        $('#iframe').attr('src', 'Dashboard.htm');
+                        break;
+                    case "ordersTab":
+                        $('.iframeContainer').height(700);
+                        $('#iframe').attr('src', 'Orders.htm');
+                        break;
+                    case "productsTab":
+                        $('.iframeContainer').height(700);
+                        $('#iframe').attr('src', 'Products.htm');
+                        break;
+                    case "customersTab":
+                        $('.iframeContainer').height(700);
+                        $('#iframe').attr('src', 'Customers.htm');
+                        break;
+                    case "staffTab":
+                        $('.iframeContainer').height(700);
+                        $('#iframe').attr('src', 'Staff.htm');
+                        break;
+                    case "tasksTab":
+                        $('.iframeContainer').height(700);
+                        $('#iframe').attr('src', 'Tasks.htm');
+                        break;
+                    case "reportsTab":
+                        $('.iframeContainer').height(700);
+                        $('#iframe').attr('src', 'Reports.htm');
+                        break;
+                    default:
+                        console.log("Something went wrong!");
+                }
+            });
+
+            $('.topBar li').on('click', function (e)
+            {
+                if (e.currentTarget.textContent)
+                {
+                    alert(e.currentTarget.textContent);
+                } else
+                {
+                    alert('Logging Out')
+                }
+            });
+        });
+
+    </script>
+    <style>
+        html, body {
+            min-width:495px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bar"></div>
+
+    <div class="header-wrap">
+        <div class="container">
+            <div class="row" style="padding-top:1.2em;">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <ul class="list-inline pull-right topBar">
+                        <li style="margin-left:1.4em"><p><span class="glyphicon glyphicon-envelope" aria-hidden="true" style="margin-right:0.3em"></span>Help</p></li>
+                        <li style="margin-left:1.4em"><p><span class="glyphicon glyphicon-wrench" aria-hidden="true" style="margin-right:0.3em"></span>Settings</p></li>
+                        <li style="margin-left:1.4em"><p><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-right:0.3em"></span>Admin</p></li>
+                        <li style="margin-left:1.4em"><p><span class="glyphicon glyphicon-off" aria-hidden="true" style="margin-right:0.3em"></span></p></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <div class="nav" id="navDiv">
+        <div class="container">
+            <nav class="navbar navbar-default ">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navBar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar top-bar"></span>
+                        <span class="icon-bar middle-bar"></span>
+                        <span class="icon-bar bottom-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse" id="navBar">
+                    <ul class="nav navbar-nav">
+                        <li class="active navLi" id="dashboardTab" style="margin-left:0.5em;"><small><span class="glyphicon glyphicon-dashboard" style="margin-right:0.3em;"></span></small>Dashboard</li>
+                        <li class="navLi" id="ordersTab"><small><span class="glyphicon glyphicon-book" style="margin-right:0.3em;"></span></small>Orders</li>
+                        <li class="navLi" id="productsTab"><small><span class="glyphicon glyphicon-folder-open" style="margin-right:0.5em;"></span></small>Products</li>
+                        <li class="navLi" id="customersTab"><small><span class="glyphicon glyphicon-user" style="margin-right:0.3em;"></span></small>Customers</li>
+                        <li class="navLi" id="staffTab"><small><span class="glyphicon glyphicon-tower" style="margin-right:0.3em;"></span></small>Staff</li>
+                        <li class="navLi" id="tasksTab"><small><span class="glyphicon glyphicon-tasks" style="margin-right:0.3em;"></span></small>Tasks</li>
+                        <li class="navLi" id="reportsTab"><small><span class="glyphicon glyphicon-share" style="margin-right:0.3em;"></span></small>Reports</li>
+                    </ul>
+                </div>
+            </nav>  
+        </div>
+    </div>
+
+    <div class="iframeContainer">
+       <iframe id="iframe" src="Dashboard.htm"></iframe>
+    </div>
+
+</body>
+</html>

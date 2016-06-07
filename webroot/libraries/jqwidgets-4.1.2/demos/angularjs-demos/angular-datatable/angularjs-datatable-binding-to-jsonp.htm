@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id="Description">Data Binding to JSONP data in AngularJS DataTable</title>
+    <meta name="description" content="This sample demonstrates how we can bind jqwidgets Grid widget to JSONP Data by using jqwidgets DataAdapter plugin.">
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script> 
+    <script type="text/javascript" src="../../../scripts/demos.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]); 
+        demoApp.controller("demoController", function ($scope) {           
+            $scope.gridSettings =
+            {
+                width: 850,
+                pageable: true,
+                pagerButtonsCount: 10,
+                source:  new $.jqx.dataAdapter({
+                    dataType: "jsonp",
+                    dataFields: [
+                        { name: 'countryName', type: 'string' },
+                        { name: 'name', type: 'string' },
+                        { name: 'population', type: 'float' },
+                        { name: 'continentCode', type: 'string' }
+                    ],
+                    url: "http://api.geonames.org/searchJSON",
+                    formatData: function (data) {
+                        $.extend(data, {
+                            featureClass: "P",
+                            style: "full",
+                            username: "jqwidgets",
+                            maxRows: 50
+                        });
+
+                        return data;
+                    }
+                }),
+                columnsResize: true,
+                columns: [
+                    { text: 'Country Name', dataField: 'countryName', width: 200 },
+                    { text: 'City', dataField: 'name', width: 250 },
+                    { text: 'Population', dataField: 'population', cellsFormat: 'f', width: 250 },
+                    { text: 'Continent Code', dataField: 'continentCode' }
+                ]
+            };
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+    <jqx-data-table jqx-settings="gridSettings"></jqx-data-table>
+</body>
+</html>

@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxChart unit intervals, grid lines, tick marks and label steps example</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var data = [12, 3, 16, 12, 24, 15, 17, 9, 31, 25, 15, 5, 8, 19, 23, 15, 31, 26, 11, 19, 5, 1, 8, 18, 12, 3, 16, 12, 24, 15, 17, 9, 31, 25, 15, 5, 8, 19, 23, 15, 31, 26, 11, 19, 5, 1, 8, 18, 5, 12, 11];
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "jqxChart unit interval and steps example",
+                description: "Change the unitInterval and step properties to see their effect",
+                enableAnimations: false,
+                showLegend: true,
+                enableCrosshairs: false,
+                padding: { left: 10, top: 5, right: 10, bottom: 5 },
+                titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                source: data,
+                xAxis:
+                {
+                    unitInterval: 1,
+                    gridLines: { step: 1 },
+                    tickMarks: { step: 1 },
+                    labels: { step: 2 }
+                },
+                valueAxis:
+                {
+                    title: { text: 'Value<br>' },
+                    unitInterval: 5,
+                    gridLines: { step: 1 },
+                    tickMarks: { step: 1 },
+                    labels: { step: 1 },
+                    minValue: 0
+                },
+                colorScheme: 'scheme05',
+                seriesGroups:
+                    [
+                        {
+                            type: 'line',
+                            series:
+                            [
+                                { displayText: 'value', opacity: 0.7 }
+                            ]
+                        }
+                    ]
+            };
+
+            // setup the chart
+            $('#chartContainer').jqxChart(settings);
+            var chartInstance = $('#chartContainer').jqxChart('getInstance');
+
+
+            // xAxis settigns inputs
+            $("#inputXAxisUnitInterval").jqxNumberInput({ width: '50px', height: '25px', inputMode: 'simple', min: 1, max: 10, value: 1, decimalDigits: 0, digits: 2, spinButtons: true })
+                .on('valueChanged', function (event) {
+                    var value = event.args.value;
+                    chartInstance.xAxis.unitInterval = parseInt(value);
+                    chartInstance.refresh();
+                });
+
+            $("#inputXAxisLabelsStep").jqxNumberInput({ width: '50px', height: '25px', inputMode: 'simple', min: 1, max: 10, value: 2, decimalDigits: 0, digits: 2, spinButtons: true })
+                .on('valueChanged', function (event) {
+                    var value = event.args.value;
+                    chartInstance.xAxis.labels.step = parseInt(value);
+                    chartInstance.refresh();
+                });
+
+            $("#inputXAxisTickMarksStep").jqxNumberInput({ width: '50px', height: '25px', inputMode: 'simple', min: 1, max: 10, value: 1, decimalDigits: 0, digits: 2, spinButtons: true })
+            .on('valueChanged', function (event) {
+                var value = event.args.value;
+                chartInstance.xAxis.tickMarks.step = parseInt(value);
+                chartInstance.refresh();
+            });
+
+            $("#inputXAxisGridLinesStep").jqxNumberInput({ width: '50px', height: '25px', inputMode: 'simple', min: 1, max: 10, value: 1, decimalDigits: 0, digits: 2, spinButtons: true })
+            .on('valueChanged', function (event) {
+                var value = event.args.value;
+                chartInstance.xAxis.gridLines.step = parseInt(value);
+                chartInstance.refresh();
+            });
+
+            $("#btnValuesBetweenTicks").jqxCheckBox({ width: 120, height: 25, hasThreeStates: false, checked: false });
+            $("#btnValuesBetweenTicks").on('change', function (event) {
+                chartInstance.xAxis.valuesOnTicks = !event.args.checked;
+                chartInstance.refresh();
+            });
+
+            // valueAxis settigns inputs
+            $("#inputValueAxisUnitInterval").jqxNumberInput({ width: '50px', height: '25px', inputMode: 'simple', min: 1, max: 10, value: 5, decimalDigits: 0, digits: 2, spinButtons: true })
+                .on('valueChanged', function (event) {
+                    var value = event.args.value;
+                    chartInstance.valueAxis.unitInterval = parseInt(value);
+                    chartInstance.refresh();
+                });
+
+            $("#inputValueAxisLabelsStep").jqxNumberInput({ width: '50px', height: '25px', inputMode: 'simple', min: 1, max: 10, value: 1, decimalDigits: 0, digits: 2, spinButtons: true })
+                .on('valueChanged', function (event) {
+                    var value = event.args.value;
+                    chartInstance.valueAxis.labels.step = parseInt(value);
+                    chartInstance.refresh();
+                });
+
+            $("#inputValueAxisTickMarksStep").jqxNumberInput({ width: '50px', height: '25px', inputMode: 'simple', min: 1, max: 10, value: 1, decimalDigits: 0, digits: 2, spinButtons: true })
+            .on('valueChanged', function (event) {
+                var value = event.args.value;
+                chartInstance.valueAxis.tickMarks.step = parseInt(value);
+                chartInstance.refresh();
+            });
+
+            $("#inputValueAxisGridLinesStep").jqxNumberInput({ width: '50px', height: '25px', inputMode: 'simple', min: 1, max: 10, value: 1, decimalDigits: 0, digits: 2, spinButtons: true })
+            .on('valueChanged', function (event) {
+                var value = event.args.value;
+                chartInstance.valueAxis.gridLines.step = parseInt(value);
+                chartInstance.refresh();
+            });
+
+            $("#btnValueAxisValuesBetweenTicks").jqxCheckBox({ width: 120, height: 25, hasThreeStates: false, checked: false });
+            $("#btnValueAxisValuesBetweenTicks").on('change', function (event) {
+                chartInstance.valueAxis.valuesOnTicks = !event.args.checked;
+                chartInstance.refresh();
+            });
+
+
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='chartContainer' style="width:850px; height:500px">
+    </div>
+    <table>
+    <tr>
+    <td>
+        <table>
+            <tr style="height: 50px"><td colspan="2"><b>xAxis settings:</b></td></tr>
+            <tr>
+                <td>Labels step</td><td><div id='inputXAxisLabelsStep'></div></td>
+            </tr>
+            <tr>
+                <td>Grid lines step</td><td><div id='inputXAxisGridLinesStep'></div></td>
+            </tr>
+            <tr>
+                <td>Tick marks step</td><td><div id='inputXAxisTickMarksStep'></div></td>
+            </tr>
+            <tr>
+                <td>Unit interval</td><td><div id='inputXAxisUnitInterval'></div></td>
+            </tr>
+            <tr style="height: 40px">
+                <td colspan="2"><div id="btnValuesBetweenTicks">Values between ticks</div></td>
+            </tr>
+        </table>
+    
+    </td>
+    <td>
+        <table style="padding-left: 100px;">
+            <tr style="height: 50px"><td colspan="2"><b>valueAxis settings:</b></td></tr>
+            <tr>
+                <td>Labels step</td><td><div id='inputValueAxisLabelsStep'></div></td>
+            </tr>
+            <tr>
+                <td>Grid lines step</td><td><div id='inputValueAxisGridLinesStep'></div></td>
+            </tr>
+            <tr>
+                <td>Tick marks step</td><td><div id='inputValueAxisTickMarksStep'></div></td>
+            </tr>
+            <tr>
+                <td>Unit interval</td><td><div id='inputValueAxisUnitInterval'></div></td>
+            </tr>
+            <tr style="height: 40px">
+                <td colspan="2"><div id="btnValueAxisValuesBetweenTicks">Values between ticks</div></td>
+            </tr>
+        </table>
+    
+    </td>
+    </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>To switch the AngularJS DropDownButton widget to a right-to-left representation, just enable a single property - "rtl".</title>
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+     <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+   <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttongroup.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownbutton.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            $scope.dropDownButtonCreated = function (args) {
+                var dropDownContent = '<div style="position: relative; margin-left: 3px; margin-top: 5px;">DropDownButton</div>';
+                args.instance.setContent(dropDownContent);
+            }
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <b>Checkbox</b>
+    <jqx-check-box jqx-checked="true" jqx-width="85" jqx-rtl="true" style="margin-top: 10px;">eLearning</jqx-check-box>
+    <jqx-check-box jqx-width="85" jqx-rtl="true" style="margin-top: 5px; margin-bottom: 10px;">Mobile</jqx-check-box>
+    <b>Radio Button</b>
+    <jqx-radio-button jqx-width="85" jqx-checked="true" jqx-rtl="true" style="margin-top: 10px;">On</jqx-radio-button>
+    <jqx-radio-button jqx-width="85" jqx-checked="false" jqx-rtl="true" style="margin-bottom: 10px; margin-top: 5px;">Off</jqx-radio-button>
+    <b>DropDown Button</b>
+    <jqx-drop-down-button jqx-width="180" jqx-height="25" jqx-rtl="true" jqx-created="dropDownButtonCreated" style="margin-top: 10px; margin-bottom: 10px;">
+        <div style="direction: rtl;">
+            <ul>
+                <li>Education</li>
+                <li>Financial services</li>
+                <li>Government</li>
+                <li>Manufacturing</li>
+                <li>Solutions
+                        <ul>
+                            <li>eLearning</li>
+                            <li>Mobile</li>
+                            <li>RIA</li>
+                            <li>Training</li>
+                        </ul>
+                </li>
+            </ul>
+        </div>
+    </jqx-drop-down-button>
+</body>
+</html>

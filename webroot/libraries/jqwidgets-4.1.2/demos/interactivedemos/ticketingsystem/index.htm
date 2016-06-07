@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Interactive Demo. Ticketing System.</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 minimum-scale=1" />
+
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.office.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.energyblue.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.metro.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.metrodark.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.arctic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.light.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.dark.css" type="text/css" />
+
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+
+    <link href="../../../styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../../styles/bootstrap-theme.min.css" rel="stylesheet" />
+    <script src="../../../scripts/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbargauge.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.filter.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.edit.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxrangeselector.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdragdrop.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxrating.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxpopover.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxvalidator.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlayout.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxribbon.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtextarea.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtreegrid.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxnotification.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.aggregates.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <link href="style.css" rel="stylesheet" />
+    <style>
+        .jqx-layout-group-auto-hide-content-vertical
+        {
+            width: 400px;
+        }
+        .jqx-validator-error-label {
+            font-size:11px;
+        }
+    </style>
+</head>
+<body style="overflow: initial; overflow-y: hidden;">
+    <!--Notifications-->
+    <div id="messageNotification">
+        <div><span id="ticketInfo"></span></div>
+    </div>
+    <div class="container-fluid">
+        <div class="row headers-container">
+        </div>
+        <div class="row containers-container" style="height: 95vh;">
+        </div>
+    </div>
+
+    <!-- WINDOW Login container -->
+    <div id='loginWindow'>
+        <div>Login - Please enter your user data</div>
+        <div>
+            <div><div class="login-label">Username:</div><div type="text" id="loginUserNameInput" value="Peter"></div></div>
+            <div id="loginPasswordContent"><div class="login-label">Password:</div><input type="password" id="loginUserPasswordInput" value="" /></div>
+            <div class="login-password-hint">Enter any non-blank password</div>
+
+            <div>
+                <div class="login-label">Organization: </div>
+                <select id="loginOrganizationDropDown">
+                    <option value="jqWidgets">jQWidgets</option>
+                    <option selected value="other">other</option>
+                </select>
+            </div>
+            <div><input type="button" class="login-button" id="loginSubmitButton" value="Submit" /></div>
+        </div>
+    </div>
+
+    <!-- WINDOW Edit User container -->
+    <div id='editUserWindow'>
+        <div style="color: gray;"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit User: <span id="editUserUserName" style="color:#333; font-weight:600;">Peter</span></div>
+        <div id="editUserWindowContent">
+            <div id="editUserName"><div class="login-label">Name:</div><input type="text" id="editUserNameInput" /></div>
+            <div id="add"><button style="margin-top: 10px; margin-bottom: 10px; text-align: right;" id="editUserAddGroupButton">Add &nbsp;<span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></div>
+            <div id="editUserGroupsGrid"></div>
+            <div id="listboxGroups"></div>
+            <div id="buttonsGroupsClose" style="position: absolute; top: 270px; height: 24px;"><button id="editUserAddGroupButtonGroups">Groups</button><button id="editUserAddGroupButtonClose">Close</button><span class="clearing"></span></div>
+        </div>
+    </div>
+
+    <!-- WINDOW Edit Groups container -->
+    <div id='editGroupsWindow'>
+        <div style="color: gray;"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit Groups</div>
+        <div>
+            <div>
+                <div id="groupsGrid" style="float: left"></div>
+                <div id="usersGrid" style="float: left; margin-left: 1%;"></div>
+                <div id="listboxUsernames" style="float: left; margin-left: 1%;"></div>
+            </div>
+            
+            <div id="editGroupsWindowContainerButtons">
+                <button id="editGroupsButtonNewGroup">New Group</button><button id="editGroupsButtonClose">Close</button><span class="clearing"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- WINDOW Add Group container -->
+    <div id='addGroupWindow'>
+        <div>Add Group</div>
+        <div>
+            <div><div class="login-label">Group Name:</div><input type="text" id="addGroupNameInput" /></div>
+            <div id="listboxGroups" style="float: left; margin-left: 1%;"></div>
+            <div class="ok-cancel"><button id="addGroupButtonOk">Ok</button><button id="addGroupWindowCancel">Cancel</button><span class="clearing"></span></div>
+        </div>
+    </div>
+
+</body>
+</html>

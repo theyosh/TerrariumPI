@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS Calendar Fluid Size Example. The width and height of the Calendar in this demo are in Percentages.</title>
+ <meta name="description" content="AngularJS Calendar example. This example demonstrates a Calendar with responsive layout." /> 
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+         <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script><script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/globalization/globalize.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+        });
+    </script>
+    <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+            padding: 0; margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body ng-controller="demoController">
+   <jqx-calendar jqx-title-height="40" jqx-width="'50%'" jqx-height="'50%'"></jqx-calendar>
+</body>
+</html>

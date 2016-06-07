@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxEditor Events.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownbutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcolorpicker.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxeditor.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#editor').jqxEditor({
+                height: "400px",
+                width: '800px'   
+            });
+
+            // bind to the "change" event.
+            $('#editor').on('change', function (event) {
+                $("#log").html("change is raised<br/><br/>Editor Value:<br/><br/>" + $('#editor').val());
+            });
+        });
+    </script>
+    <textarea id="editor">
+        &lt;b&gt;jqxEditor&lt;/b&gt; is a HTML text editor designed to simplify web content creation. You can use it as a replacement of your Textarea or you can create it from a DIV element. 
+        &lt;br /&gt;
+        &lt;br /&gt;
+        Features include:
+        &lt;br /&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Text formatting&lt;/li&gt;
+            &lt;li&gt;Text alignment&lt;/li&gt;
+            &lt;li&gt;Hyperlink dialog&lt;/li&gt;
+            &lt;li&gt;Image dialog&lt;/li&gt;
+            &lt;li&gt;Bulleted list&lt;/li&gt;
+            &lt;li&gt;Numbered list&lt;/li&gt;
+        &lt;/ul&gt;
+    </textarea>
+    <br />
+    Event Log:
+    <div id="log">
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id="Description">jqxGrid Binding to JSON using AngularJS</title>
+    <link rel="stylesheet" type="text/css" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.columnsresize.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+
+        demoApp.controller("demoController", function ($scope, $http) {
+            $scope.createWidget = false;
+            $http({
+                method: 'get',
+                url: '../sampledata/beverages.txt'
+            }).success(function (data, status) {
+                // prepare the data
+                var source =
+                {
+                    datatype: "json",
+                    datafields: [
+                        { name: 'name', type: 'string' },
+                        { name: 'type', type: 'string' },
+                        { name: 'calories', type: 'int' },
+                        { name: 'totalfat', type: 'string' },
+                        { name: 'protein', type: 'string' }
+                    ],
+                    id: 'id',
+                    localdata: data
+                };
+
+                var dataAdapter = new $.jqx.dataAdapter(source);
+
+                $scope.gridSettings =
+                {
+                    width: 850,
+                    source: dataAdapter,
+                    columnsresize: true,
+                    columns: [
+                      { text: 'Name', datafield: 'name', width: 250 },
+                      { text: 'Beverage Type', datafield: 'type', width: 250 },
+                      { text: 'Calories', datafield: 'calories', width: 180 },
+                      { text: 'Total Fat', datafield: 'totalfat', width: 120 },
+                      { text: 'Protein', datafield: 'protein', minwidth: 120 }
+                    ]
+                };
+
+                // now create the widget.
+                $scope.createWidget = true;
+            }).error(function (data, status) {
+                // Some error occurred
+            });
+        });
+    </script>
+</head>
+<body>
+    <div ng-controller="demoController">
+        <jqx-grid jqx-create="createWidget" jqx-settings="gridSettings"></jqx-grid>
+    </div>
+</body>
+</html>

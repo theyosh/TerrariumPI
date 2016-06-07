@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title id="Description">AngularJS Grid directive example</title>
+    <meta name="description" content="This is an example of AngularJS Grid. Grid is bound to Array data.">
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+
+        demoApp.controller("demoController", function ($scope) {
+            // Grid data.
+            var data = new Array();
+
+            var firstNames = ["Nancy", "Andrew", "Janet", "Margaret", "Steven", "Michael", "Robert", "Laura", "Anne"];
+            var lastNames = ["Davolio", "Fuller", "Leverling", "Peacock", "Buchanan", "Suyama", "King", "Callahan", "Dodsworth"];
+            var titles = ["Sales Representative", "Vice President, Sales", "Sales Representative", "Sales Representative", "Sales Manager", "Sales Representative", "Sales Representative", "Inside Sales Coordinator", "Sales Representative"];
+            var address = ["507 - 20th Ave. E. Apt. 2A", "908 W. Capital Way", "722 Moss Bay Blvd.", "4110 Old Redmond Rd.", "14 Garrett Hill", "Coventry House", "Miner Rd.", "Edgeham Hollow", "Winchester Way", "4726 - 11th Ave. N.E.", "7 Houndstooth Rd."];
+            var city = ["Seattle", "Tacoma", "Kirkland", "Redmond", "London", "London", "London", "Seattle", "London"];
+            var country = ["USA", "USA", "USA", "USA", "UK", "UK", "UK", "USA", "UK"];
+      
+            for (var i = 0; i < firstNames.length; i++) {
+                var row = {};
+                row["firstname"] = firstNames[i];
+                row["lastname"] = lastNames[i];
+                row["title"] = titles[i];
+                row["address"] = address[i];
+                row["city"] = city[i];
+                row["country"] = country[i];
+                data[i] = row;
+            }
+
+            $scope.people = data;
+            $scope.columns =
+            [
+                { text: 'Name', datafield: 'firstname', width: 120 },
+                { text: 'Last Name', datafield: 'lastname', width: 120 },
+                { text: 'Title', datafield: 'title', width: 180 },
+                { text: 'Address', datafield: 'address', width: 180},
+                { text: 'City', datafield: 'city', width: 90 },
+                { text: 'Country', datafield: 'country' }
+            ];
+        });
+    </script>
+</head>
+<body>
+    <div ng-controller="demoController">
+        <jqx-grid jqx-columns="columns" jqx-sortable="true" jqx-source="people" jqx-width="800"  jqx-height="200" jqx-alt-rows="true"></jqx-grid>
+    </div>
+</body>
+</html>

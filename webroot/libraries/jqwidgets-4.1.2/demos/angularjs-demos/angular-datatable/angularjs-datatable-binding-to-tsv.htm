@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id="Description">Data Binding to TSV data in AngularJS DataTable</title>
+    <meta name="description" content="This sample demonstrates how we can bind jqwidgets Grid widget to TSV Data by using jqwidgets DataAdapter plugin.">
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {           
+            $scope.gridSettings =
+            {
+                width: 850,
+                pageable: true,
+                pagerButtonsCount: 10,
+                source:  new $.jqx.dataAdapter({
+                    datatype: "tab",
+                    datafields: [
+                        { name: 'Year', type: 'int' },
+                        { name: 'HPI', type: 'float' },
+                        { name: 'BuildCost', type: 'float' },
+                        { name: 'Population', type: 'float' },
+                        { name: 'Rate', type: 'float' }
+                    ],
+                    url: "../../sampledata/homeprices.txt"
+                }),
+                columnsResize: true,
+                columns: [
+                  { text: 'Year', dataField: 'Year', width: 200 },
+                  { text: 'HPI', dataField: 'HPI', cellsFormat: 'f2', width: 200 },
+                  { text: 'Build Cost', dataField: 'BuildCost', cellsFormat: 'f2', width: 180 },
+                  { text: 'Population', dataField: 'Population', cellsFormat: 'f2', width: 100 },
+                  { text: 'Rate', dataField: 'Rate', cellsFormat: 'f5'}
+                ]
+            };
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+    <jqx-data-table jqx-settings="gridSettings"></jqx-data-table>
+</body>
+</html>

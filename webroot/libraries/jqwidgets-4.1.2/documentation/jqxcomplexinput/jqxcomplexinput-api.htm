@@ -1,0 +1,802 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../Styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="API, API documentation, complex input, complex number, documentation, Help Documentation, imaginary number, imaginary unit, input, jQuery, jQWidgets, jqxComplexInput" />
+    <meta name="description" content="This page represents the help documentation of the jqxComplexInput widget." />
+    <title>jqxComplexInput API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+      <div id="properties">
+            <h2 class="documentation-top-header">Properties</h2>
+            <table class="documentation-table">
+                <tr>
+                    <th>Name
+                    </th>
+                    <th>Type
+                    </th>
+                    <th>Default
+                    </th>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span9'>decimalNotation</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'default'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the notation in which to display the real and imaginary parts of the
+                            complex number.
+                            </p>
+                            <b>Possible Values:</b>
+                            <br />
+                            <pre><code>'default'</code> - decimal notation, e.g. '330000 - 200i'</pre>
+                            <pre><code>'exponential'</code>, e.g. '3.3e+5 - 2e+2i'</pre>
+                            <pre><code>'scientific'</code>, e.g. '3.3×10⁵ - 2×10²i'</pre>
+                            <pre><code>'engineering'</code>, e.g. '330×10³ - 200×10⁰i'</pre>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>decimalNotation</code> property.
+                            </p>
+                            <pre><code>$("#jqxComplexInput").jqxComplexInput({ decimalNotation: "exponential" });</code></pre>
+                            <p>
+                                Get the <code>decimalNotation</code> property.
+                            </p>
+                            <pre><code>var decimalNotation = $('#jqxComplexInput').jqxComplexInput('decimalNotation');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/e3z30bom/">decimalNotation is set to "exponential"</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span2'>disabled</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Enables or disables the jqxComplexInput.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>disabled</code> property.
+                            </p>
+                            <pre><code>$('#jqxComplexInput').jqxComplexInput({ disabled: false });</code></pre>
+                            <p>
+                                Get the <code>disabled</code> property.
+                            </p>
+                            <pre><code>var disabled = $('#jqxComplexInput').jqxComplexInput('disabled');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/f1LLhjcq/">disabled
+                                is set to true
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span3'>height</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the jqxComplexInput's height.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>height</code> property.
+                            </p>
+                            <pre><code>$('#jqxComplexInput').jqxComplexInput({ height: "35px" });</code></pre>
+                            <p>
+                                Get the <code>height</code> property.
+                            </p>
+                            <pre><code>var height = $('#jqxComplexInput').jqxComplexInput('height');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/fqc8fqgy/">height
+                                is set to 35
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span8'>placeHolder</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>''
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the jqxComplexInput's placeholder.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>placeHolder</code> property.
+                            </p>
+                            <pre><code>$("#jqxComplexInput").jqxComplexInput({ placeHolder: "Enter a complex number" });</code></pre>
+                            <p>
+                                Get the <code>placeHolder</code> property.
+                            </p>
+                            <pre><code>var placeHolder = $('#jqxComplexInput').jqxComplexInput('placeHolder'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/kb4auhye/">placeHolder
+                                is set to "Enter a complex number"
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span5'>roundedCorners</span>
+                    </td>
+                    <td>
+                        <span>boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Enables or disables the rounded corners functionality. This property setting has
+                            effect in browsers which support CSS border-radius.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>roundedCorners</code> property.
+                            </p>
+                            <pre><code>$("#jqxComplexInput").jqxComplexInput({ roundedCorners: false });</code></pre>
+                            <p>
+                                Get the <code>roundedCorners</code> property.
+                            </p>
+                            <pre><code>var roundedCorners = $("#jqxComplexInput").jqxComplexInput('roundedCorners');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/hv0ym9ta/">roundedCorners
+                                is set to false
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span51'>rtl</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets a value indicating whether widget's elements are aligned to support
+                            locales using right-to-left fonts.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>rtl</code> property.
+                            </p>
+                            <pre><code>$('#jqxComplexInput').jqxComplexInput({ rtl : true });</code></pre>
+                            <p>
+                                Get the <code>rtl</code> property.
+                            </p>
+                            <pre><code>var rtl = $('#jqxComplexInput').jqxComplexInput('rtl');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/9gvhsdd4/">rtl
+                                is set to true
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span10'>spinButtons</span>
+                    </td>
+                    <td>
+                        <span>boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Shows or hides the spin buttons.
+                            </p>
+                            <p>
+                                <em>Note:</em> the spin buttons require an additional empty div element in the initialization
+                            div of jqxComplexInput.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>spinButtons</code> property.
+                            </p>
+                            <pre><code>$("#jqxComplexInput").jqxComplexInput({ spinButtons: true });</code></pre>
+                            <p>
+                                Get the <code>spinButtons</code> property.
+                            </p>
+                            <pre><code>var spinButtons = $('#jqxComplexInput').jqxComplexInput('spinButtons');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/nw4s6ztb/">spinButtons
+                                is set to true
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span11'>spinButtonsStep</span>
+                    </td>
+                    <td>
+                        <span>Number</span>
+                    </td>
+                    <td>1
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the increase/decrease step.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>spinButtonsStep</code> property.
+                            </p>
+                            <pre><code>$("#jqxComplexInput").jqxComplexInput({ spinButtonsStep: 10 });</code></pre>
+                            <p>
+                                Get the <code>spinButtonsStep</code> property.
+                            </p>
+                            <pre><code>var spinButtonsStep = $('#jqxComplexInput').jqxComplexInput('spinButtonsStep');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/527yg9mL/">spinButtonsStep
+                                is set to 10
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+	     	<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span86'>template</span>
+				</td>
+				<td>
+					<span>String</span>
+				</td>
+				<td>'default'
+				</td>
+			</tr>
+			<tr>
+				<td colspan='3' style='width: 100%'>
+					<div class="documentation-option-description property-content" style="display: none;">
+						<p>
+							Determines the template as an alternative of the default styles.
+						</p>
+						<b>Possible Values:</b>
+						<br />
+						<pre><code>'default' - the default template. The style depends only on the "theme" property value.</code></pre>
+						<pre><code>'primary' - dark blue style for extra visual weight.</code></pre>
+						<pre><code>'success' - green style for successful or positive action.</code></pre>
+						<pre><code>'warning' - orange style which indicates caution.</code></pre>
+						<pre><code>'danger' - red style which indicates a dangerous or negative action.</code></pre>
+						<pre><code>'info' - blue button, not tied to a semantic action or use.</code></pre>
+						<h4>Code examples</h4>
+						<p>
+							Set the <code>template</code> property.
+						</p>
+						<pre><code>$("#jqxComplexInput").jqxComplexInput({ template: 'primary'});</code></pre>
+
+						<p>
+							Get the <code>template</code> property.
+						</p>
+						<pre><code>var template = $('#jqxComplexInput').jqxComplexInput('template');</code></pre>
+						<div style="padding-bottom: 5px;">
+							<em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/4c2L8ejd/">template is set to 'primary'</a>
+						</div>
+
+					</div>
+				</td>
+			</tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span63'>theme</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>''
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets the widget's theme.
+                            </p>
+                            jQWidgets uses a pair of css files - jqx.base.css and jqx.[theme name].css. The
+                        base stylesheet creates the styles related to the widget's layout like margin, padding,
+                        border-width, position. The second css file applies the widget's colors and backgrounds.
+                        The jqx.base.css should be included before the second CSS file. In order to set
+                        a theme, you need to do the following:
+                        <ul>
+                            <li>Include the theme's CSS file after jqx.base.css.<br />
+                                The following code example adds the 'energyblue' theme.
+                                <pre><code>
+                                <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.base.css&quot; type=&quot;text/css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;../../jqwidgets/styles/jqx.energyblue.css&quot; type=&quot;text/css&quot; /&gt; </code></pre>
+                                </code></pre>
+                            </li>
+                            <li>Set the widget's theme property to 'energyblue' when you initialize it.</li>
+                        </ul>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/p7oL6eqv/">theme
+                                is set to 'energyblue'
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span4'>value</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>''
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the value of the jqxComplexInput widget.
+                            </p>
+                            <h4>Code example</h4>
+                            <p>
+                                Set the <code>value</code> property.
+                            </p>
+                            <pre><code>$("#jqxComplexInput").jqxComplexInput({ value: "190 - 17i" });</code></pre>
+                            <p>
+                                Get the <code>value</code> property.
+                            </p>
+                            <pre><code>var value = $('#jqxComplexInput').jqxComplexInput('value');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/pqtd913s/">value
+                                is set to "190 - 17i"
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span1'>width</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the jqxComplexInput's width.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>width</code> property.
+                            </p>
+                            <pre><code>$('#jqxComplexInput').jqxComplexInput({ width: 200 });</code></pre>
+                            <p>
+                                Get the <code>width</code> property.
+                            </p>
+                            <pre><code>var width = $('#jqxComplexInput').jqxComplexInput('width');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/p7oL6eqv/">width
+                                is set to 200
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Events</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span27'>change</span>
+                    </td>
+                    <td>
+                        <span>Event</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the value is changed.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Bind to the <code>change</code> event by type: jqxComplexInput.
+                            </p>
+                            <pre><code>$("#jqxComplexInput").on("change", function (event) {
+    // event arguments
+    var args = event.args;
+    if (args) {
+        // new value
+        var value = args.value;
+        // old value
+        var oldValue = args.oldValue;
+        // real part
+        var realPart = args.realPart;
+        // imaginary part
+        var imaginaryPart = args.imaginaryPart;
+        // type
+        var type = args.type; // keyboard, mouse or null depending on how the value was changed.                      
+    }
+});</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/apwvwgj8/">Bind
+                                to the change event by type: jqxComplexInput.
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Methods</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span68'>destroy</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Destroys the widget.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples</h4>
+                            <p>
+                                Invoke the <code>destroy</code> method.
+                            </p>
+                            <pre><code>$('#jqxComplexInput').jqxComplexInput('destroy'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/w1d1zo8n/">destroys
+                                the complex input
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span17'>getReal</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Gets the real part of the entered number.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>complexNumber</em></td>
+                                            <td>Number(optional)</td>
+                                            <td>if passed, gets the real part of the passed complex number</td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples</h4>
+                            <p>
+                                Invoke the <code>getReal</code> method.
+                            </p>
+                            <pre><code>// @param complexNumber (optional) - if passed, gets the real part of the passed complex number
+var realPart = $('#jqxComplexInput').jqxComplexInput('getReal');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/ywo2w443/">gets
+                                the real part
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span19'>getImaginary</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Gets the imaginary part of the entered number.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>complexNumber</em></td>
+                                            <td>Number(optional)</td>
+                                            <td>if passed, gets the imaginary part of the passed complex number</td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>Number</em>
+                            </div>
+                            <h4>Code examples</h4>
+                            <p>
+                                Invoke the <code>getImaginary</code> method.
+                            </p>
+                            <pre><code>// @param complexNumber (optional) - if passed, gets the imaginary part of the passed complex number
+var imaginaryPart = $('#jqxComplexInput').jqxComplexInput('getImaginary');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/btqdrjpn/">gets
+                                the imaginary part
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span6'>render</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Renders the widget.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples</h4>
+                            <p>
+                                Invoke the <code>render</code> method.
+                            </p>
+                            <pre><code>$('#jqxComplexInput').jqxComplexInput('render');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/d3mmcndo/">renders
+                                the complex input
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span7'>refresh</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Refreshes the widget.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples</h4>
+                            <p>
+                                Invoke the <code>refresh</code> method.
+                            </p>
+                            <pre><code>$('#jqxComplexInput').jqxComplexInput('refresh'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/fsnodhL7/">refreshes
+                                the complex input
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span12'>val</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the value.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td>String/Object</td>
+                                            <td>If object is passed, it should be with object.real and object.imaginary properties.</td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>String</em>
+                            </div>
+                            <h4>Code examples</h4>
+                            <p>
+                                Get the <code>value</code>:
+                            </p>
+                            <pre><code>var value = $('#jqxComplexInput').jqxComplexInput('val');
+or
+var value = $('#jqxComplexInput').val();</code></pre>
+                            <p>
+                                Set the <code>value</code>:
+                            </p>
+                            <pre><code>// @param complexNumber - a string with the value of the complex number to set or an object with the fields "real" and "imaginary", representing the real and imaginary parts of the number to set
+$('#jqxComplexInput').jqxComplexInput('val', '1 - 99i');
+or
+$('#jqxComplexInput').val('1 - 99i');
+or
+$('#jqxComplexInput').jqxComplexInput('val', { real: 1, imaginary: -99 });
+or
+$('#jqxComplexInput').val({ real: 1, imaginary: -99 });</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/aqsr0bc2/">sets
+                                the jqxComplexInput value
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br />
+        </div>
+  </body>
+</html>

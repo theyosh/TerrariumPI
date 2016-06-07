@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">Show or Hide columns in jqxDataTable</title>
+    <meta name="description" content="This sample demonstrates how we can Show or Hide Columns in jQWidgets DataTable.">
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script> 
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = "../sampledata/beverages.txt";
+
+            // prepare the data
+            var source =
+            {
+                dataType: "json",
+                dataFields: [
+                    { name: 'name' },
+                    { name: 'type' },
+                    { name: 'calories', type: 'int' },
+                    { name: 'totalfat' },
+                    { name: 'protein' }
+                ],
+                id: 'id',
+                url: url
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $("#dataTable").jqxDataTable(
+            {
+                source: dataAdapter,
+                pageable: true,
+                pagerButtonsCount: 10,
+                ready: function () {
+                    // callback function which is called by jqxGrid when the widget is initialized and the binding is completed.
+                },
+                columnsResize: true,
+                columns: [
+                  { text: 'Name', datafield: 'name', width: 200 },
+                  { text: 'Beverage Type', dataField: 'type', width: 200 },
+                  { text: 'Calories', dataField: 'calories', width: 200 }
+              ]
+            });
+
+            var listSource = [{ label: 'Beverage Type', value: 'type', checked: true }, { label: 'Calories', value: 'calories', checked: true }];
+
+            $("#jqxlistbox").jqxListBox({ source: listSource, width: 150, height: 200,  checkboxes: true });
+            $("#jqxlistbox").on('checkChange', function (event) {
+                $("#dataTable").jqxDataTable('beginUpdate');
+                if (event.args.checked) {
+                    $("#dataTable").jqxDataTable('showColumn', event.args.value);
+                }
+                else {
+                    $("#dataTable").jqxDataTable('hideColumn', event.args.value);
+                }
+                $("#dataTable").jqxDataTable('endUpdate');
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div style="float: left;" id="jqxlistbox"></div>
+        <div style="margin-left: 20px; float: left;" id="dataTable"></div>
+    </div>
+</body>
+</html>

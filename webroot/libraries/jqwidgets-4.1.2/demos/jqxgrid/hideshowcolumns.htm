@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example illustrates how to show and hide Grid columns.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.columnsresize.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script> 
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = "../sampledata/beverages.txt";
+
+            // prepare the data
+            var source =
+            {
+                datatype: "json",
+                datafields: [
+                    { name: 'name' },
+                    { name: 'type' },
+                    { name: 'calories', type: 'int' },
+                    { name: 'totalfat' },
+                    { name: 'protein' }
+                ],
+                id: 'id',
+                url: url
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 600,
+                source: dataAdapter, 
+                ready: function () {
+                    // callback function which is called by jqxGrid when the widget is initialized and the binding is completed.
+                },
+                columnsresize: true,
+                columns: [
+                  { text: 'Name', datafield: 'name', width: 100, hidden: true },
+                  { text: 'Beverage Type', datafield: 'type' },
+                  { text: 'Calories', datafield: 'calories' },
+                  { text: 'Total Fat', datafield: 'totalfat' },
+                  { text: 'Protein', datafield: 'protein'}
+              ]
+            });
+
+            var listSource = [{ label: 'Name', value: 'name', checked: false }, { label: 'Beverage Type', value: 'type', checked: true }, { label: 'Calories', value: 'calories', checked: true }, { label: 'Total Fat', value: 'totalfat', checked: true }, { label: 'Protein', value: 'protein', checked: true}];
+
+            $("#jqxlistbox").jqxListBox({ source: listSource, width: 200, height: 200,  checkboxes: true });
+            $("#jqxlistbox").on('checkChange', function (event) {
+                $("#jqxgrid").jqxGrid('beginupdate');
+                if (event.args.checked) {
+                    $("#jqxgrid").jqxGrid('showcolumn', event.args.value);
+                }
+                else {
+                    $("#jqxgrid").jqxGrid('hidecolumn', event.args.value);
+                }
+                $("#jqxgrid").jqxGrid('endupdate');
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div style="float: left;" id="jqxlistbox"></div>
+        <div style="margin-left: 20px; float: left;" id="jqxgrid"></div>
+    </div>
+</body>
+</html>

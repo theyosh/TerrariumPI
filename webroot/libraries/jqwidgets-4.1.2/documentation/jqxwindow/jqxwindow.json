@@ -1,0 +1,626 @@
+{
+  "widget": {
+    "name": "jqxwindow"
+  },
+  "properties": [
+    {
+      "name": "autoOpen",
+      "defaultValue": "true",
+      "description": "<P>Sets or gets whether the window will be shown after it's creation. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>autoOpen</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ autoOpen: true }); </CODE></PRE>\n\r\n<P>Get the <CODE>autoOpen</CODE> property. </P>\n<PRE><CODE>var autoOpen = $('#jqxWindow').jqxWindow('autoOpen'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/Em9wE/",
+      "exampleDescription": "autoOpen is set to false",
+      "dataType": "Boolean"
+    },
+    {
+      "name": "animationType",
+      "defaultValue": "fade",
+      "description": "<P>Sets or gets window's close and show animation type. </P>\n<B>Possible Values:</B>\n<PRE><CODE>'none'</CODE></PRE>\n<PRE><CODE>'fade'</CODE></PRE>\n<PRE><CODE>'slide'</CODE></PRE>\n<PRE><CODE>'combined'</CODE></PRE>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>animationType</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ animationType: 'combined' }); </CODE></PRE>\n\r\n<P>Get the <CODE>animationType</CODE> property: </P>\n<PRE><CODE>var animationType = $('#jqxWindow').jqxWindow('animationType'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/uyK6G/",
+      "exampleDescription": "animationType is set to 'slide'",
+      "dataType": "String"
+    },
+    {
+      "name": "collapsed",
+      "defaultValue": "false",
+      "description": "<P>Determines whether the window is collapsed. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>collapsed</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ collapsed:true }); </CODE></PRE>\n\r\n<P>Get the <CODE>collapsed</CODE> property. </P>\n<PRE><CODE>var collapsed = $('#jqxWindow').jqxWindow('collapsed'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/TNFG9/",
+      "exampleDescription": "collapsed is set to true",
+      "dataType": "Boolean"
+    },
+    {
+      "name": "collapseAnimationDuration",
+      "defaultValue": "150",
+      "description": "<P>Determines the duration in milliseconds of the expand/collapse animation. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>collapseAnimationDuration</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ collapseAnimationDuration:500 }); </CODE></PRE>\n\r\n<P>Get the <CODE>collapseAnimationDuration</CODE> property. </P>\n<PRE><CODE>var duration = $('#jqxWindow').jqxWindow('collapseAnimationDuration'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/rp8wZ/",
+      "exampleDescription": "collapseAnimationDuration is set to 3000",
+      "dataType": "Number"
+    },
+    {
+      "name": "content",
+      "defaultValue": "''",
+      "description": "<P>Sets or gets window's content's html content. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>content</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ content: 'foobar' }); </CODE></PRE>\n\r\n<P>Get the <CODE>content</CODE> property: </P>\n<PRE><CODE>var content = $('#jqxWindow').jqxWindow('content'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/6zRnz/",
+      "exampleDescription": "content is set to 'New content'",
+      "dataType": "String"
+    },
+    {
+      "name": "closeAnimationDuration",
+      "defaultValue": "350",
+      "description": "<P>Sets or gets window's close animation duration. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>closeAnimationDuration</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ closeAnimationDuration: 200 }); </CODE></PRE>\n\r\n<P>Get the <CODE>closeAnimationDuration</CODE> property: </P>\n<PRE><CODE>var closeAnimationDuration = $('#jqxWindow').jqxWindow('closeAnimationDuration'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/QDB2M/",
+      "exampleDescription": "closeAnimationDuration is set to 3000",
+      "dataType": "Number"
+    },
+    {
+      "name": "closeButtonSize",
+      "defaultValue": "16",
+      "description": "<P>Sets or gets window's close button size. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>closeButtonSize</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ closeButtonSize: 32}); </CODE></PRE>\n\r\n<P>Get the <CODE>closeButtonSize</CODE> property: </P>\n<PRE><CODE>var closeButtonSize = $('#jqxWindow').jqxWindow('closeButtonSize'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/5LLay/",
+      "exampleDescription": "closeButtonSize is set to 20",
+      "dataType": "Number"
+    },
+    {
+      "name": "closeButtonAction",
+      "defaultValue": "hide",
+      "description": "<P>This setting specifies what happens when the user clicks the jqxWindow's close button. </P>\n<B>Possible Values:</B>\n<PRE><CODE>'hide'</CODE></PRE>\n<PRE><CODE>'close'-clicking the close button removes the window from the DOM</CODE></PRE>\n\r\n<H4>Code examples</H4>\n\r\n<P>set the <CODE>closeButtonAction</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ closeButtonAction: 'close'}); </CODE></PRE>\n\r\n<P>Get the <CODE>closeButtonAction</CODE> property: </P>\n<PRE><CODE>var closeButtonAction = $('#jqxWindow').jqxWindow('closeButtonAction'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/J3KGa/",
+      "exampleDescription": "closeButtonAction is set to 'close'",
+      "dataType": "String"
+    },
+    {
+      "name": "cancelButton",
+      "defaultValue": "null",
+      "description": "<P>Sets or gets cancel button. When a cancel button is specified you can use this button to interact with the user. When any user press the cacel button window is going to be closed and the dialog result will be in the following format: { OK: false, Cancel: true, None: false }. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>cancelButton</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ cancelButton: $('#cancelButton')}); </CODE></PRE>\n\r\n<P>Get the <CODE>cancelButton</CODE> property: </P>\n<PRE><CODE>var cancelButton = $('#jqxWindow').jqxWindow('cancelButton'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/py5PD/",
+      "exampleDescription": "cancelButton is set to $('#cancel')",
+      "dataType": "Object"
+    },
+    {
+      "name": "dragArea",
+      "defaultValue": "null",
+      "description": "<P>Sets or gets the screen area which is available for dragging(moving) the jqxWindow. Example value: { left: 300, top: 300, width: 600, height: 600 }. By default, the dragArea is null which means that the users will be able to drag the window in the document's body bounds. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>dragArea</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ dragArea: { left: 300, top: 300, width: 600, height: 600 }}); </CODE></PRE>\n\r\n<P>Get the <CODE>dragArea</CODE> property: </P>\n<PRE><CODE>var dragArea = $('#jqxWindow').jqxWindow('dragArea'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/n5Fwc/",
+      "exampleDescription": "dragArea is set to {left: 50, top: 50,width: 400,height: 400}",
+      "dataType": "Object"
+    },
+    {
+      "name": "draggable",
+      "defaultValue": "true",
+      "description": "<P>Sets or gets whether the window is draggable. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>draggable</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ draggable: falde }); </CODE></PRE>\n\r\n<P>Get the <CODE>draggable</CODE> property: </P>\n<PRE><CODE>var draggable = $('#jqxWindow').jqxWindow('draggable'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/a92dW/",
+      "exampleDescription": "draggable is set to false",
+      "dataType": "Boolean"
+    },
+    {
+      "name": "disabled",
+      "defaultValue": "false",
+      "description": "<P>Sets or gets whether the window is disabled. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>disabled</CODE> property . </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ disabled:true }); </CODE></PRE>\n\r\n<P>Get the <CODE>disabled</CODE> property. </P>\n<PRE><CODE>var disabled = $('#jqxWindow').jqxWindow('disabled');</CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/rXVQZ/",
+      "exampleDescription": "disabled is set to true",
+      "dataType": "Boolean"
+    },
+    {
+      "name": "height",
+      "defaultValue": "null",
+      "description": "<P>Sets or gets the window's height. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>height</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({height:\"400px\"});</CODE></PRE>\n\r\n<P>Get the <CODE>height</CODE> property. </P>\n<PRE><CODE>var height = $('#jqxWindow').jqxWindow('height');</CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/UuWCD/",
+      "exampleDescription": "height is set to 100",
+      "dataType": "Number"
+    },
+    {
+      "name": "initContent",
+      "defaultValue": "",
+      "description": "<P>Initializes the jqxWindow's content.</P>",
+      "example": "<pre><CODE>$('#jqxWindow').jqxWindow({initContent: function() {// code for widgets initialization here.}});\r\n                        </CODE></pre>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/STCPV/",
+      "exampleDescription": "initContent is set to a custom function",
+      "dataType": "Function"
+    },
+    {
+      "name": "isModal",
+      "defaultValue": "false",
+      "description": "<P>Sets or gets whether the window is displayed as a modal dialog. If the jqxWindow's mode is set to modal, the window blocks user interaction with the underlying user interface. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>isModal</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ isModal: true }); </CODE></PRE>\n\r\n<P>Get the <CODE>isModal</CODE> property: </P>\n<PRE><CODE>var isModal = $('#jqxWindow').jqxWindow('isModal'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/P927Z/",
+      "exampleDescription": "isModal is set to true",
+      "dataType": "Boolean"
+    },
+    {
+      "name": "keyboardCloseKey",
+      "defaultValue": "'esc'",
+      "description": "<P>Sets or gets the key which could be used for closing the window when it's on focus. Possible value is every keycode and the 'esc' strig (for the escape key). </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>keyboardCloseKey</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ keyboardCloseKey: 13 }); </CODE></PRE>\n\r\n<P>Get the <CODE>keyboardCloseKey</CODE> property. </P>\n<PRE><CODE>var keyboardCloseKey = $('#jqxWindow').jqxWindow('keyboardCloseKey'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/9y5t6/",
+      "exampleDescription": "keyboardCloseKey is set to 32",
+      "dataType": "Number"
+    },
+    {
+      "name": "keyboardNavigation",
+      "defaultValue": "true",
+      "description": "<P>Determines whether the keyboard navigation is enabled or disabled. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>keyboardNavigation</CODE> property: </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ keyboardNavigation: false }); </CODE></PRE>\n\r\n<P>Get the <CODE>keyboardNavigation</CODE> property: </P>\n<PRE><CODE>var keyboardNavigation = $('#jqxWindow').jqxWindow('keyboardNavigation'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/z7eHw/",
+      "exampleDescription": "keyboardNavigation is set to false",
+      "dataType": "Boolean"
+    },
+    {
+      "name": "minHeight",
+      "defaultValue": "50",
+      "description": "<P>Sets or gets window's minimum height. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>minHeight</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ minHeight: '65px' }); </CODE></PRE>\n\r\n<P>Get the <CODE>minHeight</CODE> property. </P>\n<PRE><CODE>var minHeight = $('#jqxWindow').jqxWindow('minHeight'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/QACxk/",
+      "exampleDescription": "minHeight is set to '100px'",
+      "dataType": "Number"
+    },
+    {
+      "name": "maxHeight",
+      "defaultValue": "600",
+      "description": "<P>Sets or gets window's maximum height. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>maxHeight</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ maxHeight: 1000 }); </CODE></PRE>\n\r\n<P>Get the <CODE>maxHeight</CODE> property. </P>\n<PRE><CODE>var maxHeight = $('#jqxWindow').jqxWindow('maxHeight'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/2czFt/",
+      "exampleDescription": "maxHeight is set to 300",
+      "dataType": "Number"
+    },
+    {
+      "name": "minWidth",
+      "defaultValue": "50",
+      "description": "<P>Sets or gets window's minimum width. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>minWidth</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ minWidth: '65px' }); </CODE></PRE>\n\r\n<P>Get the <CODE>minWidth</CODE> property. </P>\n<PRE><CODE>var minWidth = $('#jqxWindow').jqxWindow('minWidth'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/mdB6K/",
+      "exampleDescription": "minWidth is set to '100px'",
+      "dataType": "Number"
+    },
+    {
+      "name": "maxWidth",
+      "defaultValue": "600",
+      "description": "<P>Sets or gets window's maximum width. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Initialize a jqxWindow with the <CODE>maxWidth</CODE> property specified. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ maxWidth: 1000 }); </CODE></PRE>\n\r\n<P>Get the <CODE>maxWidth</CODE> property. </P>\n<PRE><CODE>var maxWidth = $('#jqxWindow').jqxWindow('maxWidth'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/PfCje/",
+      "exampleDescription": "maxWidth is set to 300",
+      "dataType": "Number"
+    },
+    {
+      "name": "modalOpacity",
+      "defaultValue": "0.3",
+      "description": "<P>Sets or gets the jqxWindow's background displayed over the underlying user interface when the window is in modal dialog mode. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>modalOpacity</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ modalOpacity: 0.9}); </CODE></PRE>\n\r\n<P>Get the <CODE>modalOpacity</CODE> property: </P>\n<PRE><CODE>var modalOpacity = $('#jqxWindow').jqxWindow('modalOpacity'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/nE9A7/",
+      "exampleDescription": "modalOpacity is set to 0.5",
+      "dataType": "Number"
+    },
+    {
+      "name": "modalZIndex",
+      "defaultValue": "18000",
+      "description": "<P>Sets or gets the jqxWindow's z-index when it is displayed as a modal dialog. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>modalZIndex</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ modalZIndex: 99999}); </CODE></PRE>\n\r\n<P>Get the <CODE>modalZIndex</CODE> property: </P>\n<PRE><CODE>var modalZIndex = $('#jqxWindow').jqxWindow('modalZIndex'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/g4w4n/",
+      "exampleDescription": "modalZIndex is set to 9999",
+      "dataType": "Number"
+    },
+    {
+      "name": "modalBackgroundZIndex",
+      "defaultValue": "12990",
+      "description": "<P>Sets or gets the jqxWindow overlay's z-index when it is displayed as a modal dialog. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>modalBackgroundZIndex</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ modalBackgroundZIndex: 99999}); </CODE></PRE>\n\r\n<P>Get the <CODE>modalBackgroundZIndex</CODE> property: </P>\n<PRE><CODE>var modalBackgroundZIndex = $('#jqxWindow').jqxWindow('modalBackgroundZIndex'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/du7Kd/",
+      "exampleDescription": "modalBackgroundZIndex is set to 9999",
+      "dataType": "Number"
+    },
+    {
+      "name": "okButton",
+      "defaultValue": "null",
+      "description": "<P>Sets or gets submit button. When a ok/submit button is specified you can use this button to interact with the user. When any user press the submit button window is going to be closed and the dialog result will be in the following format: { OK: true, Cancel: false, None: false }. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>okButton</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ okButton: $('#okButton')}); </CODE></PRE>\n\r\n<P>Get the <CODE>okButton</CODE> property: </P>\n<PRE><CODE>var okButton = $('#jqxWindow').jqxWindow('okButton'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/py5PD/",
+      "exampleDescription": "okButton is set to $('#ok')",
+      "dataType": "Object"
+    },
+    {
+      "name": "position",
+      "defaultValue": "center",
+      "description": "<P>Sets or gets window's position. The value could be in the following formats: 'center', 'top, left', '{ x: 300, y: 500 }', '[300, 500]'. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>position</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ position: { x: 300, y: 400 }}); </CODE></PRE>\n\r\n<P>Get the <CODE>position</CODE> property: </P>\n<PRE><CODE>var position = $('#jqxWindow').jqxWindow('position'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/5LLay/",
+      "exampleDescription": "position is set to 'top,left'",
+      "dataType": "Object"
+    },
+    {
+      "name": "rtl",
+      "defaultValue": "false",
+      "description": "<P>Sets or gets a value indicating whether widget's elements are aligned to support locales using right-to-left fonts.</P>",
+      "example": "<pre><CODE>$('#jqxWindow').jqxWindow({rtl : true}); </CODE></pre>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/e3Q87/",
+      "exampleDescription": "rtl is set to true",
+      "dataType": "Boolean"
+    },
+    {
+      "name": "resizable",
+      "defaultValue": "true",
+      "description": "<P>Enables or disables whether the end-user can resize the window. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>resizable</CODE> property . </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ resizable: false }); </CODE></PRE>\n\r\n<P>Get the <CODE>resizable</CODE> property: </P>\n<PRE><CODE>var resizable = $('#jqxWindow').jqxWindow('resizable'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/JFWz6/",
+      "exampleDescription": "resizable is set to false",
+      "dataType": "Boolean"
+    },
+    {
+      "name": "showAnimationDuration",
+      "defaultValue": "350",
+      "description": "<P>Sets or gets window's show animation duration. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>showAnimationDuration</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ showAnimationDuration: 200 }); </CODE></PRE>\n\r\n<P>Get the <CODE>showAnimationDuration</CODE> property: </P>\n<PRE><CODE>var showAnimationDuration = $('#jqxWindow').jqxWindow('showAnimationDuration'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/N3Mq5/",
+      "exampleDescription": "showAnimationDuration is set to 3000",
+      "dataType": "Number"
+    },
+    {
+      "name": "showCloseButton",
+      "defaultValue": "true",
+      "description": "<P>Sets or gets whether a close button will be visible. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>showCloseButton</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ showCloseButton: true }); </CODE></PRE>\n\r\n<P>Get the <CODE>showCloseButton</CODE> property. </P>\n<PRE><CODE>var showCloseButton = $('#jqxWindow').jqxWindow('showCloseButton'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/s8aq3/",
+      "exampleDescription": "showCloseButton is set to false",
+      "dataType": "Boolean"
+    },
+    {
+      "name": "showCollapseButton",
+      "defaultValue": "false",
+      "description": "<P>Sets or gets whether the collapse button will be visible. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>showCollapseButton</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ showCollapseButton: true }); </CODE></PRE>\n\r\n<P>Get the <CODE>showCollapseButton</CODE> property. </P>\n<PRE><CODE>var showCollapseButton = $('#jqxWindow').jqxWindow('showCollapseButton'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/LVaJn/",
+      "exampleDescription": "showCollapseButton is set to true",
+      "dataType": "Boolean"
+    },
+    {
+      "name": "theme",
+      "defaultValue": "''",
+      "description": "<P>Sets the widget's theme. </P>\n\r\n<UL><LI>Include the theme's CSS file after jqx.base.css.<BR>The following code example adds the 'energyblue' theme. <PRE><CODE>\r\n<PRE><CODE>&lt;link rel=\"stylesheet\" href=\"../../jqwidgets/styles/jqx.base.css\" type=\"text/css\" /&gt;\r\n&lt;link rel=\"stylesheet\" href=\"../../jqwidgets/styles/jqx.energyblue.css\" type=\"text/css\" /&gt;\r\n</CODE></PRE>\r\n</CODE></PRE>\r\n<LI>Set the widget's theme property to 'energyblue' when you initialize it. </LI></UL>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/mTvjp/",
+      "exampleDescription": "theme is set to 'energyblue'",
+      "dataType": "String"
+    },
+    {
+      "name": "title",
+      "defaultValue": "''",
+      "description": "<P>Sets or gets window's title content. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set with the <CODE>title</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ title: '42' }); </CODE></PRE>\n\r\n<P>Get the <CODE>title</CODE> property: </P>\n<PRE><CODE>var title = $('#jqxWindow').jqxWindow('title'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/LRvy3/",
+      "exampleDescription": "title is set to 'Title'",
+      "dataType": "String"
+    },
+    {
+      "name": "width",
+      "defaultValue": "null",
+      "description": "<P>Sets or gets the window's width. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>width</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({width:\"200px\"});</CODE></PRE>\n\r\n<P>Get the <CODE>width</CODE> property. </P>\n<PRE><CODE>var width = $('#jqxWindow').jqxWindow('width');</CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/YSpgs/",
+      "exampleDescription": "width is set to 300",
+      "dataType": "Number"
+    },
+    {
+      "name": "zIndex",
+      "defaultValue": "9001",
+      "description": "<P>Sets or gets the jqxWindow z-index. </P>\n\r\n<H4>Code examples</H4>\n\r\n<P>Set the <CODE>zIndex</CODE> property. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow({ zIndex: 99999}); </CODE></PRE>\n\r\n<P>Get the <CODE>zIndex</CODE> property: </P>\n<PRE><CODE>var zIndex = $('#jqxWindow').jqxWindow('zIndex'); </CODE></PRE>",
+      "example": "",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/yf3fU/",
+      "exampleDescription": "zIndex is set to 9999",
+      "dataType": "Number"
+    }
+  ],
+  "events": [
+    {
+      "name": "close",
+      "description": "<P>This event is triggered when the window is closed. </P>\n<H4>Code examples</H4>\n<P>Bind to the <CODE>close</CODE> event by type: jqxWindow. </P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/VKHkX/",
+      "exampleDescription": "Bind to the close event by type: jqxWindow.",
+      "example": "<PRE><CODE>$('#jqxWindow').on('close', function (event) { // Some code here. }); </CODE></PRE>"
+    },
+    {
+      "name": "collapse",
+      "description": "<P>This event is triggered when the window is collapsed. </P>\n<H4>Code examples</H4>\n<P>Bind to the <CODE>collapse</CODE> event by type: jqxWindow. </P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/HWGnB/",
+      "exampleDescription": "Bind to the collapse event by type: jqxWindow.",
+      "example": "<PRE><CODE>$('#jqxWindow').on('collapse', function (event) { // Some code here. }); </CODE></PRE>"
+    },
+    {
+      "name": "created",
+      "description": "<P>This event is triggered when the user create new window. </P>\n<H4>Code examples</H4>\n<P>Bind to the <CODE>created</CODE> event by type: jqxWindow. </P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/nCkec/",
+      "exampleDescription": "Bind to the created event by type: jqxWindow.",
+      "example": "<PRE><CODE>$('#jqxWindow').on('created', function (event) { // Some code here. }); </CODE></PRE>"
+    },
+    {
+      "name": "expand",
+      "description": "<P>This event is triggered when the window is expanded. </P>\n<H4>Code examples</H4>\n<P>Bind to the <CODE>expand</CODE> event by type: jqxWindow. </P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/KBJ3Y/",
+      "exampleDescription": "Bind to the expand event by type: jqxWindow.",
+      "example": "<PRE><CODE>$('#jqxWindow').on('expand', function (event) { // Some code here. }); </CODE></PRE>"
+    },
+    {
+      "name": "moving",
+      "description": "<P>This event is triggered when the window is dragging by the user. </P>\n<H4>Code examples</H4>\n<P>Bind to the <CODE>moving</CODE> event by type: jqxWindow. </P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/JDTvQ/",
+      "exampleDescription": "Bind to the moving event by type: jqxWindow.",
+      "example": "<PRE><CODE>$('#jqxWindow').on('moving', function (event) { // Some code here. }); </CODE></PRE>"
+    },
+    {
+      "name": "moved",
+      "description": "<P>This event is triggered when the window is dropped by the user. </P>\n<H4>Code examples</H4>\n<P>Bind to the <CODE>moved</CODE> event by type: jqxWindow. </P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/CzAch/",
+      "exampleDescription": "Bind to the moved event by type: jqxWindow.",
+      "example": "<PRE><CODE>$('#jqxWindow').on('moved', function (event) { // Some code here. }); </CODE></PRE>"
+    },
+    {
+      "name": "open",
+      "description": "<P>This event is triggered when the window is displayed. </P>\n<H4>Code examples</H4>\n<P>Bind to the <CODE>open</CODE> event by type: jqxWindow. </P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/CzAch/",
+      "exampleDescription": "Bind to the open event by type: jqxWindow.",
+      "example": "<PRE><CODE>$('#jqxWindow').on('open', function (event) { // Some code here. }); </CODE></PRE>"
+    },
+    {
+      "name": "resizing",
+      "description": "<P>This event is triggered when the end-user is resizing the window. </P>\n<H4>Code examples</H4>\n<P>Bind to the <CODE>resizing</CODE> event by type: jqxWindow. </P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/P3mYy/",
+      "exampleDescription": "Bind to the resizing event by type: jqxWindow.",
+      "example": "<PRE><CODE>$('#jqxWindow').on('resizing', function (event) { // Some code here. }); </CODE></PRE>"
+    },
+    {
+      "name": "resized",
+      "description": "<P>This event is triggered when the end-user has resized the window. </P>\n<H4>Code examples</H4>\n<P>Bind to the <CODE>resized</CODE> event by type: jqxWindow. </P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/Dbcm2/",
+      "exampleDescription": "Bind to the resized event by type: jqxWindow.",
+      "example": "<PRE><CODE>$('#jqxWindow').on('resized', function (event) { // Some code here. }); </CODE></PRE>"
+    }
+  ],
+  "methods": [
+    {
+      "name": "bringToFront",
+      "description": "<P>Bringing the window to the front.</P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/6xyHE/",
+      "exampleDescription": "Invoke the bringToFront method of the jqxWindow.",
+      "returnDataType": "None",
+      "arguments": [
+        {
+          "name": "None",
+          "dataType": null,
+          "description": "",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "close",
+      "description": "<P>Hiding/closing the current window (the action - hide or close depends on the closeButtonAction).</P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/rQ9xj/",
+      "exampleDescription": "closes the jqxWindow.",
+      "returnDataType": "None",
+      "arguments": [
+        {
+          "name": "None",
+          "dataType": null,
+          "description": "",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "collapse",
+      "description": "<P>Collapse the current window.</P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/8qhcP/",
+      "exampleDescription": "collapses the jqxWindow.",
+      "returnDataType": "None",
+      "arguments": [
+        {
+          "name": "None",
+          "dataType": null,
+          "description": "",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "closeAll",
+      "description": "<P>Closing all open windows which are not modal. </P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/zQULd/",
+      "exampleDescription": "closes all open windows in the jqxWindow.",
+      "returnDataType": "None",
+      "arguments": [
+        {
+          "name": "None",
+          "dataType": null,
+          "description": "",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "disable",
+      "description": "<P>Disabling the window.</P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/HRFLF/",
+      "exampleDescription": "disables the jqxWindow.",
+      "returnDataType": "None",
+      "arguments": [
+        {
+          "name": "None",
+          "dataType": null,
+          "description": "",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "destroy",
+      "description": "<P>Destroys the widget. </P>\n<H4>Code examples</H4>\n<P>Invoke the <CODE>destroy</CODE> method. </P>\n<PRE><CODE>$('#jqxWindow').jqxWindow('destroy'); </CODE></PRE>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/jA9Xp/",
+      "exampleDescription": "destroy the jqxWindow.",
+      "returnDataType": "None",
+      "arguments": [
+        {
+          "name": "None",
+          "dataType": null,
+          "description": "",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "enable",
+      "description": "<P>Enabling the window</P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/NAAj4/",
+      "exampleDescription": "enables the jqxWindow.",
+      "returnDataType": "None",
+      "arguments": [
+        {
+          "name": "None",
+          "dataType": null,
+          "description": "",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "expand",
+      "description": "<P>Expand the current window.</P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/gRFKM/",
+      "exampleDescription": "expand the jqxWindow.",
+      "returnDataType": "None",
+      "arguments": [
+        {
+          "name": "None",
+          "dataType": null,
+          "description": "",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "focus",
+      "description": "<P>Focuses the window.</P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/FKQcW/",
+      "exampleDescription": "focus the jqxWindow.",
+      "returnDataType": "None",
+      "arguments": [
+        {
+          "name": "None",
+          "dataType": null,
+          "description": "",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "isOpen",
+      "description": "<P>Returns true when jqxWindow is opened and false when the jqxWindow is closed</P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/f6ZAA/",
+      "exampleDescription": "Invoke the isOpen method of the jqxWindow.",
+      "returnDataType": "Boolean",
+      "arguments": [
+        {
+          "name": "None",
+          "dataType": null,
+          "description": "",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "move",
+      "description": "<P>Moving the current window.</P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/mF7KQ/",
+      "exampleDescription": "moves the jqxWindow.",
+      "returnDataType": "None",
+      "arguments": [
+        {
+          "name": "top",
+          "dataType": "Number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "left",
+          "dataType": "Number",
+          "description": "",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "open",
+      "description": "<P>Opening/showing the current window.</P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/Rns4L/",
+      "exampleDescription": "opens the jqxWindow.",
+      "returnDataType": "None",
+      "arguments": [
+        {
+          "name": "None",
+          "dataType": null,
+          "description": "",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "resize",
+      "description": "<P>Resizes the window. The 'resizable' property is expected to be set to \"true\".</P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/tzwQX/",
+      "exampleDescription": "resizes the jqxWindow.",
+      "returnDataType": "None",
+      "arguments": [
+        {
+          "name": "top",
+          "dataType": "Number",
+          "description": "",
+          "optional": false
+        },
+        {
+          "name": "left",
+          "dataType": "Number",
+          "description": "",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "setTitle",
+      "description": "<P>Setting window's title</P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/g4zfu/",
+      "exampleDescription": "sets title in the jqxWindow.",
+      "returnDataType": "None",
+      "arguments": [
+        {
+          "name": "title",
+          "dataType": "String",
+          "description": "",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "name": "setContent",
+      "description": "<P>Setting window's content.</P>",
+      "exampleURL": "http://jsfiddle.net/jqwidgets/fxNU5/",
+      "exampleDescription": "sets content in the jqxWindow.",
+      "returnDataType": "None",
+      "arguments": [
+        {
+          "name": "content",
+          "dataType": "String",
+          "description": "",
+          "optional": false
+        }
+      ]
+    }
+  ]
+}

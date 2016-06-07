@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Three Column Grid Layout with jqxTabs inside each column.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../styles/jquery.mobile-1.4.3.min.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery.mobile-1.4.3.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <style>
+        .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
+            background: #fff;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+        }
+
+        .ui-block-a, .ui-block-b, .ui-block-c {
+            padding: 10px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#tabs1").jqxTabs({ height: 200, width: '100%' });
+            $("#tabs2").jqxTabs({ height: 200, width: '100%' });
+            $("#tabs3").jqxTabs({ height: 200, width: '100%' });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div class="ui-grid-b">
+        <div class="ui-block-a">
+            <div id="tabs1">
+                <ul>
+                    <li style="margin-left: 30px;">Tab 1</li>
+                    <li>Tab 2</li>
+                </ul>
+                <div>
+                    Content 1
+                </div>
+                <div>
+                    Content 2
+                </div>
+            </div>
+        </div>
+        <div class="ui-block-b">
+            <div id="tabs2">
+                <ul>
+                    <li style="margin-left: 30px;">Tab 1</li>
+                    <li>Tab 2</li>
+                </ul>
+                <div>
+                    Content 1
+                </div>
+                <div>
+                    Content 2
+                </div>
+            </div>
+
+        </div>
+        <div class="ui-block-c">
+            <div id="tabs3">
+                <ul>
+                    <li style="margin-left: 30px;">Tab 1</li>
+                    <li>Tab 2</li>
+                </ul>
+                <div>
+                    Content 1
+                </div>
+                <div>
+                    Content 2
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

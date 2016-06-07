@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>The jqxButton widget allows you to display a button on the Web
+        page.</title>
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+
+        demoApp.controller("demoController", function ($scope) {
+            $scope.submitClick = function (event) {
+                alert('Submit Button Clicked')
+            }
+            $scope.click = function (event) {
+                alert('Button Clicked');
+            }
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-button jqx-width="150" jqx-on-click="click(event)">Button</jqx-button>
+    <br /><br />
+    <jqx-button jqx-width="150" jqx-on-click="submitClick(event)" type="submit">Submit</jqx-button>
+    <br /><br />
+    <jqx-button jqx-width="150" jqx-disabled="true">Disabled</jqx-button>
+</body>
+</html>

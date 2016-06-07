@@ -1,0 +1,744 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../Styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="jQuery, jQuery Validation, Validator, Vlidation Widget, jqxValidator" />
+    <meta name="description" content="This page represents the help documentation of the jqxValidator widget." />
+    <title>jqxValidator API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+           <div id="properties">
+                <h2 class="documentation-top-header">Properties</h2>
+                <table class="documentation-table">
+                    <tr>
+                        <th>Name
+                        </th>
+                        <th>Type
+                        </th>
+                        <th>Default
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="documentation-option-type-click">
+                            <span id='Span6'>arrow</span>
+                        </td>
+                        <td>
+                            <span>Boolean</span>
+                        </td>
+                        <td>true
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <div class="documentation-option-description property-content" style="display: none;">
+                                <p>
+                                    Sets or gets whether the arrow of the hints will be shown.
+                                </p>
+                                <h4>Code examples</h4>
+                                <p>
+                                    Set the <code>arrow</code> property.
+                                </p>
+                                <pre><code>$('#jqxValidator').jqxValidator( { arrow: false } ); </code></pre>
+                                <p>
+                                    Get the <code>arrow</code> property.
+                                </p>
+                                <pre><code>var arrow = $('#jqxValidator').jqxValidator('arrow'); </code></pre>
+                                <div style="padding-bottom: 5px;">
+                                    <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/qeXG7/">arrow is set to false</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="documentation-option-type-click">
+                            <span id='Span7'>animation</span>
+                        </td>
+                        <td>
+                            <span>String</span>
+                        </td>
+                        <td>'fade'
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <div class="documentation-option-description property-content" style="display: none;">
+                                <p>
+                                    Sets or gets the animation of showing, hiding the hints.
+                                </p>
+                                <br />
+                                <b>Possible Values:</b>
+                                <br />
+                                <pre><code>'fade'</code></pre>
+                                <pre><code>'none'</code></pre>
+                                <h4>Code examples</h4>
+                                <p>
+                                    Initialize a jqxValidator with the <code>animation</code> property specified.
+                                </p>
+                                <pre><code>$('#jqxValidator').jqxValidator({ animation: 'none' }); </code></pre>
+                                <p>
+                                    Get the <code>animation</code> property.
+                                </p>
+                                <pre><code>var animation = $('#jqxValidator').jqxValidator('animation'); </code></pre>
+                                <div style="padding-bottom: 5px;">
+                                    <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/zUafx/">animation is set to 'none'</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="documentation-option-type-click">
+                            <span id='Span8'>animationDuration</span>
+                        </td>
+                        <td>
+                            <span>Number</span>
+                        </td>
+                        <td>150
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <div class="documentation-option-description property-content" style="display: none;">
+                                <p>
+                                    Sets or gets the duration of the animation used for showing/hiding the hints.
+                                </p>
+                                <h4>Code examples</h4>
+                                <p>
+                                    Set the <code>animationDuration</code> property.
+                                </p>
+                                <pre><code>$('#jqxValidator').jqxValidator({ animationDuration: 300 }); </code></pre>
+                                <p>
+                                    Get the <code>animationDuration</code> property.
+                                </p>
+                                <pre><code>var animationDuration = $('#jqxValidator').jqxValidator('animationDuration'); </code></pre>
+                                <div style="padding-bottom: 5px;">
+                                    <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/WWbn6/">animationDuration is set to 3000</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="documentation-option-type-click">
+                            <span id='Span9'>closeOnClick</span>
+                        </td>
+                        <td>
+                            <span>Boolean</span>
+                        </td>
+                        <td>true
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <div class="documentation-option-description property-content" style="display: none;">
+                                <p>
+                                    Sets or gets whether the hints will be closed when the user click on them.
+                                </p>
+                                <h4>Code examples</h4>
+                                <p>
+                                    Set the <code>closeOnClick</code> property.
+                                </p>
+                                <pre><code>$('#jqxValidator').jqxValidator({ closeOnClick: false });
+                        </code></pre>
+                                <p>
+                                    Get the <code>closeOnClick</code> property.
+                                </p>
+                                <pre><code>var closeOnClick = $('#jqxValidator').jqxValidator('closeOnClick'); </code></pre>
+                                <div style="padding-bottom: 5px;">
+                                    <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/n4cRJ/">closeOnClick is set to false</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="documentation-option-type-click">
+                            <span id='Span2'>focus</span>
+                        </td>
+                        <td>
+                            <span>Boolean</span>
+                        </td>
+                        <td>true
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <div class="documentation-option-description property-content" style="display: none;">
+                                <p>
+                                    Sets or gets whether the jqxValidator will focus the first invalid input.
+                                </p>
+                                <h4>Code examples</h4>
+                                <p>
+                                    Set the <code>focus</code> property.
+                                </p>
+                                <pre><code>$('#jqxValidator').jqxValidator( { focus: false } ); </code></pre>
+                                <p>
+                                    Get the <code>focus</code> property.
+                                </p>
+                                <pre><code>var focus = $('#jqxValidator').jqxValidator('focus'); </code></pre>
+                                <div style="padding-bottom: 5px;">
+                                    <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/hnVmz/">focus is set to false</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="documentation-option-type-click">
+                            <span id='Span12'>hintType</span>
+                        </td>
+                        <td>
+                            <span>String</span>
+                        </td>
+                        <td>"tooltip"
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <div class="documentation-option-description property-content" style="display: none;">
+                                <p>Sets or gets the hint type. Possible values: 'tooltip' and 'label'.</p>
+                                <h4>Code example</h4>
+                                <p>
+                                    Set the <code>hintType</code> property.
+                                </p>
+                                <pre><code>$('#jqxValidator').jqxValidator({hintType : 'label'}); </code></pre>
+                                <p>
+                                    Get the <code>hintType</code> property.
+                                </p>
+                                <pre><code>var hintType = $('#jqxValidator').jqxValidator('hintType'); </code></pre>
+                                <div style="padding-bottom: 5px;">
+                                    <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/FrpxJ/">hintType is set to 'label'</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="documentation-option-type-click">
+                            <span id='Span10'>onError</span>
+                        </td>
+                        <td>
+                            <span>Function</span>
+                        </td>
+                        <td>null
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <div class="documentation-option-description property-content" style="display: none;">
+                                <p>
+                                    Sets or gets callback which will be called on validation error.
+                                </p>
+                                <h4>Code examples</h4>
+                                <p>
+                                    Set the <code>onError</code> property .
+                                </p>
+                                <pre><code>$('#jqxValidator').jqxValidator({ onError: function () { alert('You havent filled the form correctly!'); } }); </code></pre>
+                                <p>
+                                    Get the <code>onError</code> property.
+                                </p>
+                                <pre><code>var onError = $('#jqxValidator').jqxValidator('onError'); </code></pre>
+                                <div style="padding-bottom: 5px;">
+                                    <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/mGqWD/">onError is set to a custom function</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="documentation-option-type-click">
+                            <span id='Span11'>onSuccess</span>
+                        </td>
+                        <td>
+                            <span>Function</span>
+                        </td>
+                        <td>null
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <div class="documentation-option-description property-content" style="display: none;">
+                                <p>
+                                    Sets or gets the callback which will be executed on success.
+                                </p>
+                                <h4>Code examples</h4>
+                                <p>
+                                    Set the <code>onSuccess</code> property.
+                                </p>
+                                <pre><code>$('#jqxValidator').jqxValidator({ onSuccess: function () { alert('Success!'); } }); </code></pre>
+                                <p>
+                                    Get the <code>onSuccess</code> property.
+                                </p>
+                                <pre><code>var onSuccess = $('#jqxValidator').jqxValidator('onSuccess'); </code></pre>
+                                <div style="padding-bottom: 5px;">
+                                    <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/8CtQU/">onSuccess is set to a custom function</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="documentation-option-type-click">
+                            <span id='Span5'>position</span>
+                        </td>
+                        <td>
+                            <span>String</span>
+                        </td>
+                        <td>'right'
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <div class="documentation-option-description property-content" style="display: none;">
+                                <p>
+                                    Sets or gets the default position of the hints.
+                                </p>
+                                <h4>Code examples</h4>
+                                <p>
+                                    Set the <code>position</code> property.
+                                </p>
+                                <pre><code>$('#jqxValidator').jqxValidator({ position: 'topcenter' }); </code></pre>
+                                <p>
+                                    Get the <code>position</code> property.
+                                </p>
+                                <pre><code>var position = $('#jqxValidator').jqxValidator('position'); </code></pre>
+                                <div style="padding-bottom: 5px;">
+                                    <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/d3TyU/">position is set to 'left'</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="documentation-option-type-click">
+                            <span id='property-name-disabled'>rules</span>
+                        </td>
+                        <td>
+                            <span>Array</span>
+                        </td>
+                        <td>[]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <div class="documentation-option-description property-content" style="display: none;">
+                                <p>
+                                    Sets jqxValidator rules. Format of a single rule is as follows: 
+                            <p>
+                                <pre><code>
+{ input: 'selector-of-the-input', 
+    message: 'Custom message on error', 
+    action: 'Custom action (keyup, change...etc)', 
+    rule: 'Build rule (ssn, phone, email...) or custom function', 
+    position: 'Position of the hint (format pos:x,y)', 
+    hintRender: 'Function for hint rendering' }
+                                </code></pre>
+                            </p>
+                                    Let's look at all different properties of a single rule.
+                            <br />
+                                    The input property must be selector of the input you want to validate (we recommend to use ids - example: '#userInput').
+                            <br />
+                                    The message property is the custom
+                            message which will popup, on validation error, for the current rule.
+                            <br />
+                                    Action is a string which is the event on which you want to validate the input (for example click, mouseup, blur, keyup...).
+                            <br />
+                                    The rule property is defining the way you want to validate the input.
+                            <br />
+                                    <br />
+                                    In jqxValidator there are 
+                            built in rules like: 'ssn', 'email', 'required', 'phone', 'zipCode', 'maxLength=len', 'minLength=len', 'length=max,min'. In the last three validation rules the strings after the "=" are the rule parameters, for example: 'maxLength=13'. You can also write a function
+                            for a custom rule.<br />
+                                    <br />
+                                    'ssn' - 'Social Security Number' Requires input like: ___-__-____<br />
+                                    'email' - requires valid e-mail address.<br />
+                                    'required' - requires a CheckBox or Radio Button to be checked or any value to be entered in an Input.<br />
+                                    'phone' - requires input like: (___)___-____<br />
+                                    'zipCode' - requires a valid zip code like: ___-__-____<br />
+                                    'maxLength=len' - restricts the maximum input characters to 'len'.<br />
+                                    'minLength=len' - restricts the minimum input characters to 'len'<br />
+                                    'length=min,max' - restricts the input length to a specific range.<br />
+
+                                    <br />
+                                    <br />
+                                    Hint positions are as follows: 'left', 'right', 'top', 'bottom', 'bottomcenter', 'topcenter', 'topleft', 'topright', 'bottomleft', 'bottomright'. If you wish to set also an offset you can pass the position like: 'topleft:15,3'. This is going to position your
+                            message popup in top-left of the input with offset: left - 15px, top - 3px.<br />
+                                    <br />
+                                    The last property is hintRender. This is function used for hint rendering. If you don't pass one the default is going to be used. Notice that the position and hintRender are optional. If you don't set them the default values are going to be used.
+                                </p>
+                                <h4>Code examples</h4>
+                                <p>
+                                    Initialize a jqxValidator with the <code>rules</code> property specified.
+                                </p>
+                                <pre><code>
+$('#form').jqxValidator( { rules: [{ input: '#passwordInput', 
+                                        message: 'The password is required!',
+                                        action: 'keyup', 
+                                        rule: 'required' },
+                                    { input: '#passwordInput', 
+                                        message: 'Your password must be between 4 and 12 characters!', 
+                                        action: 'keyup', 
+                                        rule: 'length=4,12' }] } );</code></pre>
+                                <br />
+                                Custom Rule Definition. The function returns true or false depending on whether the input is correct or not.
+                        <pre><code>
+{ input: '#birthInput', message: 'Your birth date must be between 1/1/1900 and 1/1/2012.', action: 'valuechanged', rule: function () {
+    var date = $('#birthInput').jqxDateTimeInput('value');
+    var result = date.dateTime.getFullYear() >= 1900 && date.dateTime.getFullYear() <= 2012;
+    return result;
+}
+                        </code></pre>
+                                <p>
+                                    Set the hintRender property of a rule.
+                                </p>
+                                <pre><code>
+$('#sendButton').on('click', function () {
+    $('#testForm').jqxValidator('validate');
+});
+
+var that = this;
+var render = function (message, input) {
+    if (that._message) {
+        that._message.remove();
+    }
+    that._message = $("<pre style='width: 700px; max-width: 700px; margin: 10px;' class='code'><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;span style=<span style=" clear: both; padding: 0px; margin: 0px; color: #a24;">'background: red; color: white;'</span>&gt;</span><span style="clear: both; padding: 0px; margin: 0px; color: #a24;">" + message + "</span><span style="clear: both; padding: 0px; margin: 0px; color: #11a;">&lt;/span&gt;</span><div/></pre>")
+    that._message.appendTo($(document.body));
+    return that._message;
+}
+
+    $('#testForm').jqxValidator({
+    rules: [
+        { input: '#userInput', message: 'Username is required!', action: 'keyup, blur', rule: 'required', hintRender: render },
+        { input: '#userInput', message: 'Your username must be between 3 and 12 characters!', action: 'keyup, blur', rule: 'length=3,12', hintRender: render }
+]});
+                        </code></pre>
+                                <div style="padding-bottom: 5px;">
+                                    <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/GQAfe/">rules is set to a custom function</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="documentation-option-type-click">
+                            <span id='Span51'>rtl</span>
+                        </td>
+                        <td>
+                            <span>Boolean</span>
+                        </td>
+                        <td>false
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <div class="documentation-option-description property-content" style="display: none;">
+                                <p>Sets or gets a value indicating whether the validation messages are displayed from the left side instead of the right.</p>
+                                <h4>Code example</h4>
+                                <p>
+                                    Set the <code>rtl</code> property.
+                                </p>
+                                <pre><code>$('#jqxValidator').jqxValidator({rtl : true}); </code></pre>
+                                <p>
+                                    Get the <code>rtl</code> property.
+                                </p>
+                                <pre><code>var rtl = $('#jqxValidator').jqxValidator('rtl'); </code></pre>
+                                <div style="padding-bottom: 5px;">
+                                    <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/dvhSq/">rtl is set to true</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <h2 class="documentation-top-header">Events</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="documentation-option-type-click">
+                            <span id='Span27'>validationError</span>
+                        </td>
+                        <td>
+                            <span>Event</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <div class="documentation-option-description property-content" style="display: none;">
+                                <p>
+                                    This is triggered when the form is validated with some errors.
+                                </p>
+                                <h4>Code examples</h4>
+                                <p>
+                                    Bind to the <code>validationError</code> event.
+                                </p>
+                                <pre><code>$('#jqxValidator').on('validationError', function (event) { // Some code here. }); </code></pre>
+                                <div style="padding-bottom: 5px;">
+                                    <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/AUGwP/">Bind to the validationError event by type jqxValidator.</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="documentation-option-type-click">
+                            <span id='Span13'>validationSuccess</span>
+                        </td>
+                        <td>
+                            <span>Event</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <div class="documentation-option-description property-content" style="display: none;">
+                                <p>
+                                    This is triggered when the form is validated whithout any errors.
+                                </p>
+                                <h4>Code examples</h4>
+                                <p>
+                                    Bind to the <code>validationSuccess</code> event.
+                                </p>
+                                <pre><code>$('#jqxValidator').on('validationSuccess', function (event) { // Some code here. }); </code></pre>
+                                <div style="padding-bottom: 5px;">
+                                    <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/tkUmx/">Bind to the validationSuccess event by type jqxValidator.</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <h2 class="documentation-top-header">Methods</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="documentation-option-type-click">
+                            <span id='Span20'>hideHint</span>
+                        </td>
+                        <td>
+                            <span>Method</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <div class="documentation-option-description property-content" style="display: none;">
+                                <p>Hide all hints for a specific input.</p>
+                                  <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>id</em></td>
+                                            <td>String</td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                                <h4>Code example</h4>
+                                <p>
+                                    Invoke the <code>hideHint</code> method.
+                                </p>
+                                <pre><code>$('#jqxValidator').jqxValidator('hideHint', '#passwordInput');
+                        </code></pre>
+                                <div style="padding-bottom: 5px;">
+                                    <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/9WgYa/">hides all hints for a specific input in the jqxValidator.</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="documentation-option-type-click">
+                            <span id='Span21'>hide</span>
+                        </td>
+                        <td>
+                            <span>Method</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <div class="documentation-option-description property-content" style="display: none;">
+                                <p>Hiding all hints for the current form.</p>
+                                  <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                                <h4>Code example</h4>
+                                <p>
+                                    Invoke the <code>hide</code> method.
+                                </p>
+                                <pre><code>$('#jqxValidator').jqxValidator('hide');
+                        </code></pre>
+                                <div style="padding-bottom: 5px;">
+                                    <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/uA6Gt/">hides all hints in the jqxValidator.</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="documentation-option-type-click">
+                            <span id='Span22'>updatePosition</span>
+                        </td>
+                        <td>
+                            <span>Method</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <div class="documentation-option-description property-content" style="display: none;">
+                                <p>Updating the positions of all hints. This is useful for example on window resize.</p>
+                                  <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                                <h4>Code example</h4>
+                                <p>
+                                    Invoke the <code>checkItem</code> method.
+                                </p>
+                                <pre><code>$('#jqxValidator').jqxValidator('updatePosition');
+                              
+                         </code></pre>
+                                <div style="padding-bottom: 5px;">
+                                    <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/9Xpzn/">updates a position of all hints in the jqxValidator.</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="documentation-option-type-click">
+                            <span id='Span37'>validate</span>
+                        </td>
+                        <td>
+                            <span>Method</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <div class="documentation-option-description property-content" style="display: none;">
+                                <p>
+                                    Validating the whole form.
+                                </p>
+                                  <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>html element</em></td>
+                                            <td>Object</td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                                <h4>Code example</h4>
+                                <p>
+                                    Invoke the <code>validate</code> method.
+                                </p>
+                                <pre><code>$('#jqxValidator').jqxValidator('validate', element);
+                        </code></pre>
+                                <div style="padding-bottom: 5px;">
+                                    <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/hQwmm/">validates the jqxValidator.</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="documentation-option-type-click">
+                            <span id='Span19'>validateInput</span>
+                        </td>
+                        <td>
+                            <span>Method</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan='3' style='width: 100%'>
+                            <div class="documentation-option-description property-content" style="display: none;">
+                                <p>
+                                    Validates a single input. This method accepts a single parameter which is selector of the input you want to validate.
+                         Notice that this selector should be the same like the one you've passed in the rules array.
+                                </p>
+                                   <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>id</em></td>
+                                            <td>String</td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                                <h4>Code example</h4>
+                                <p>
+                                    Invoke the <code>validateInput</code> method.
+                                </p>
+                                <pre><code>$('#jqxValidator').jqxValidator('validateInput', '#passwordInput');
+                        </code></pre>
+                                <div style="padding-bottom: 5px;">
+                                    <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/hQwmm/">validates an input the jqxValidator.</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+                <br />
+            </div>
+        </div>
+    </div>
+  
+</body>
+</html>

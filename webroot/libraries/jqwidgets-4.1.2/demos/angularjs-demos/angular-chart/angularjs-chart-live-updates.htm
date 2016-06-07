@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS Chart Live Updates</title>
+   <meta name="description" content="This is an example of AngularJS Chart. Chart Live Updates." />	
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.core.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope, $interval) {
+
+            $scope.data = [
+                { a: 100, b: 200, c: 1 },
+                { a: 120, b: 140, c: 2 },
+                { a: 100, b: 110, c: 3 },
+                { a: 90, b: 135, c: 4 },
+                { a: 70, b: 210, c: 5 },
+                { a: 170, b: 210, c: 5 },
+                { a: 270, b: 350, c: 5 },
+                { a: 710, b: 410, c: 5 },
+                { a: 230, b: 305, c: 5 }
+            ];
+
+            $scope.chart = "";
+            // prepare jqxChart settings
+            var settings = {
+                created: function(args)
+                {
+                    $scope.chart = args.instance;
+                },
+                title: "Live updates demo",
+                description: "Data changes every 3 seconds",
+                enableAnimations: true,
+                animationDuration: 1000,
+                enableAxisTextAnimation: true,
+                showLegend: true,
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                source: $scope.data,
+                xAxis:
+                    {
+                        unitInterval: 1,
+                        gridLinesInterval: 2,
+                        valuesOnTicks: false
+                    },
+                colorScheme: 'scheme03',
+                seriesGroups:
+                    [
+                        {
+                            type: 'column',
+                            columnsGapPercent: 50,
+                            alignEndPointsWithIntervals: true,
+                            valueAxis:
+                            {
+                                minValue: 0,
+                                maxValue: 1000,
+                                description: 'Index Value'
+                            },
+                            series: [
+                                    { dataField: 'a', displayText: 'a', opacity: 1, lineWidth: 1, symbolType: 'circle', fillColorSymbolSelected: 'white', radius: 15 },
+                                    { dataField: 'b', displayText: 'b', opacity: 1, lineWidth: 1, symbolType: 'circle', fillColorSymbolSelected: 'white', radius: 15 }
+                                ]
+                        }
+                    ]
+            };
+
+
+            // create the chart
+            $scope.chartSettings = settings;
+
+            // color scheme drop down
+            var colorsSchemesList = ["scheme01", "scheme02", "scheme03", "scheme04", "scheme05", "scheme06", "scheme07", "scheme08"];
+            $scope.dropDownColorsSettings = { source: colorsSchemesList, selectedIndex: 2, width: '200', height: '25', dropDownHeight: 100 };
+
+            $scope.dropDownColorsSelect = function (event) {
+                var value = event.args.item.value;
+                if (!$scope.chart)
+                    return;
+
+                $scope.chart.colorScheme = value;
+                $scope.chart.update();
+            };
+
+            // series type drop down
+            var seriesList = ["splinearea", "spline", "column", "scatter", "stackedcolumn", "stackedsplinearea", "stackedspline"];
+            $scope.dropDownSeriesSettings = { source: seriesList, selectedIndex: 2, width: '200', height: '25', dropDownHeight: 100 };
+
+            $scope.dropDownSeriesSelect = function (event) {
+                if (!$scope.chart)
+                    return;
+
+                var args = event.args;
+                if (args) {
+                    var value = args.item.value;
+
+                    var isLine = value.indexOf('line') != -1;
+                    var isArea = value.indexOf('area') != -1;
+
+                    //chart.categoryAxis.valuesOnTicks = isLine || isArea;
+                    var group = $scope.chart.seriesGroups[0];
+                    group.series[0].opacity = group.series[1].opacity = isArea ? 0.7 : 1;
+                    group.series[0].lineWidth = group.series[1].lineWidth = isLine ? 2 : 1;
+
+                    $scope.chart.seriesGroups[0].type = value;
+                    $scope.chart.update();
+                }
+            };
+
+            // auto update timer
+             $interval(function () {
+                var max = 800;
+                for (var i = 0; i < $scope.data.length; i++) {
+                    $scope.data[i].a = Math.max(100, (Math.random() * 1000) % max);
+                    $scope.data[i].b = Math.max(100, (Math.random() * 1000) % max);
+                }
+                if ($scope.chart) {
+                    $scope.chart.update();
+                }
+            }, 3000);
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <p>
+        <jqx-chart jqx-settings="chartSettings" style="width: 850px; height: 500px">
+        </jqx-chart>
+    </p>
+    <table style="width: 680px">
+        <tr>
+            <td style="padding-left: 50px;">
+                <p style="font-family: Verdana; font-size: 12px;">Select the series type:
+                </p>
+                <jqx-drop-down-list jqx-settings="dropDownSeriesSettings" jqx-on-select="dropDownSeriesSelect(event)">
+                </jqx-drop-down-list>
+            </td>
+            <td>
+                <p style="font-family: Verdana; font-size: 12px;">Select color scheme:
+                </p>
+                <jqx-drop-down-list jqx-settings="dropDownColorsSettings" jqx-on-select="dropDownColorsSelect(event)">
+                </jqx-drop-down-list>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

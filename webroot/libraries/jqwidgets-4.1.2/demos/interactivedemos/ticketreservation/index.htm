@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 minimum-scale=1" />
+    <title id='Description'>Cinema Ticket Reservation example.</title>
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.office.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.energyblue.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.metro.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.metrodark.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <link href="../../../styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../../styles/bootstrap-theme.min.css" rel="stylesheet" />
+    <script src="../../../scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.filter.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.edit.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxrangeselector.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdragdrop.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxrating.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxpopover.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.aggregates.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <link href="style.css" rel="stylesheet" />
+    <script type="text/javascript" src="main.js"></script>
+</head>
+<body style="overflow: initial;">
+    <div id="fitnessTrackerHeader">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+                    <div id="header">
+                        <div style="padding:5px 10px 0px 0px; float:left;"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span></div>
+                        <div style="float: left;">Ticket Reservation</div>
+                        <div style="clear:both;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid container-base">
+        <div class="row">
+            <div class="col-md-7 col-md-offset-1">
+
+            </div>
+            <div class="col-md-3 text-right">
+                <input style="margin-right:10px;" type="button" id="buy-tickets-button" value="Buy tickets" />
+            </div>
+        </div>
+        <div class="row" style="border:0px;">
+            <div class=" col-md-1 col-lg-1 ">
+                <div> </div>
+            </div>
+            <div class=" col-md-3  controls-wrapper">
+                <div id="filter-geanre-combobox" class="filter-widget"></div>
+                <div id="filter-movies-combobox" class="filter-widget"></div>
+                <div id="filter-cinema-combobox" class="filter-widget"></div>
+                <div id="filter-promo-checkbox" class="filter-widget"><span class="labels">Promo tickets only</span></div>
+                <div id="filter-date-dateinput" class="filter-widget"></div>
+                <span class="labels"><i>Select price range</i></span>
+                <div id="filter-price-rangeselector" class="filter-widget"></div>
+                <button id="filter-filter-button" class="filter-widget filter-button">Filter</button>
+                <button id="filter-filter-remove-button" class="filter-widget filter-button">Clear all filters</button>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 grid-wrapper">
+                <div id="movies-list-grid"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id='buy-tickets-window'>
+        <div class="window-header">Buy tickets and choose seats with drag/drop to the seat</div>
+        <div style="overflow:hidden;">
+            <div id="adult-tickets">
+                <div class="buy-tickets-input-label floating-left">Adult</div>
+                <div class="floating-left" id='buy-tickets-adult-numberinput'></div>
+                <div class="floating-left buy-tickets-placeholder"><div class="person"></div></div>
+                <div class="floating-left buy-tickets-placeholder"></div>
+                <div class="floating-left buy-tickets-placeholder"></div>
+                <div class="floating-left buy-tickets-placeholder"></div>
+                <div class="floating-left buy-tickets-placeholder"></div>
+                <div class="clearing"></div>
+            </div>
+            <div style="margin-top:10px;" >
+                <div class="buy-tickets-input-label floating-left">Movie: &nbsp;</div>
+                <div id="window-label-movie" class="buy-tickets-input-label floating-left"><b> FF3</b></div>
+                <div class="buy-tickets-input-label floating-left">Cinema: &nbsp;</div>
+                <div id="window-label-cinema" class="buy-tickets-input-label floating-left"><b> Arena</b></div>
+                <div class="buy-tickets-input-label floating-left">Tickets: &nbsp;</div>
+                <div id="window-label-tickets" class="buy-tickets-input-label floating-left"><span style="font-weight:bold;">3</span>+<span style="font-weight:bold;">2</span></div>
+                <div class="clearing"></div>
+            </div>
+                <div id="children-tickets" style="margin-top:10px;">
+                    <div class="buy-tickets-input-label floating-left">Children</div>
+                    <div class="floating-left" id='buy-tickets-children-numberinput'></div>
+                    <div class="floating-left buy-tickets-placeholder"></div>
+                    <div class="floating-left buy-tickets-placeholder"></div>
+                    <div class="floating-left buy-tickets-placeholder"></div>
+                    <div class="floating-left buy-tickets-placeholder"></div>
+                    <div class="floating-left buy-tickets-placeholder"></div>
+                    <div class="clearing"></div>
+                </div>
+            <div style="margin-top:10px;">
+                <div class="buy-tickets-input-label floating-left">Adult: &nbsp;</div>
+
+                <div id="window-label-peradult" class="buy-tickets-input-label floating-left"> <b> 10$</b> </div>
+                <div class="buy-tickets-input-label floating-left">Child: &nbsp;</div>
+                <div id="window-label-perchild" class="buy-tickets-input-label floating-left"> <b> 8$</b> </div>
+                <div class="buy-tickets-input-label floating-left">Total: &nbsp;</div>
+                <div id="window-label-total" class="buy-tickets-input-label floating-left"> <b> 50$</b> </div>
+                <div class="clearing"></div>
+
+            </div>
+                <div id="screen">Screen</div>
+
+                <div id="seats">
+                    <div id="seat1x1" class="floating-left seat"></div>
+                    <div id="seat1x2" class="floating-left seat"></div>
+                    <div id="seat1x3" class="floating-left seat"></div>
+                    <div id="seat1x4" class="floating-left seat"></div>
+                    <div id="seat1x5" class="floating-left seat"></div>
+                    <div id="seat1x6" class="floating-left seat"></div>
+                    <div id="seat1x7" class="floating-left seat"></div>
+                    <div id="seat1x8" class="floating-left seat"></div>
+                    <div id="seat1x9" class="floating-left seat"></div>
+                    <div id="seat1x10" class="floating-left seat"></div>
+                    <div id="seat1x11" class="floating-left seat"></div>
+                    <div id="seat1x12" class="floating-left seat"></div>
+                    <div id="seat1x13" class="floating-left seat"></div>
+                    <div id="seat1x14" class="floating-left seat"></div>
+                    <div id="seat1x15" class="floating-left seat"></div>
+                    <div id="seat1x16" class="floating-left seat"></div>
+                    <div id="seat1x17" class="floating-left seat"></div>
+                    <div id="seat1x18" class="floating-left seat"></div>
+                    <div id="seat1x19" class="floating-left seat"></div>
+                    <div id="seat1x20" class="floating-left seat"></div>
+                    <div id="seat1x21" class="floating-left seat"></div>
+                    <div id="seat2x1" class="floating-left seat"></div>
+                    <div id="seat2x2" class="floating-left seat"></div>
+                    <div id="seat2x3" class="floating-left seat"></div>
+                    <div id="seat2x4" class="floating-left seat"></div>
+                    <div id="seat2x5" class="floating-left seat"></div>
+                    <div id="seat2x6" class="floating-left seat"></div>
+                    <div id="seat2x7" class="floating-left seat"></div>
+                    <div id="seat2x8" class="floating-left seat"></div>
+                    <div id="seat2x9" class="floating-left seat"></div>
+                    <div id="seat2x10" class="floating-left seat"></div>
+                    <div id="seat2x11" class="floating-left seat"></div>
+                    <div id="seat2x12" class="floating-left seat"></div>
+                    <div id="seat2x13" class="floating-left seat"></div>
+                    <div id="seat2x14" class="floating-left seat"></div>
+                    <div id="seat2x15" class="floating-left seat"></div>
+                    <div id="seat2x16" class="floating-left seat"></div>
+                    <div id="seat2x17" class="floating-left seat"></div>
+                    <div id="seat2x18" class="floating-left seat"></div>
+                    <div id="seat2x19" class="floating-left seat"></div>
+                    <div id="seat2x20" class="floating-left seat"></div>
+                    <div id="seat2x21" class="floating-left seat"></div>
+                    <div id="seat3x1" class="floating-left seat"></div>
+                    <div id="seat3x2" class="floating-left seat"></div>
+                    <div id="seat3x3" class="floating-left seat"></div>
+                    <div id="seat3x4" class="floating-left seat"></div>
+                    <div id="seat3x5" class="floating-left seat"></div>
+                    <div id="seat3x6" class="floating-left seat"></div>
+                    <div id="seat3x7" class="floating-left seat"></div>
+                    <div id="seat3x8" class="floating-left seat"></div>
+                    <div id="seat3x9" class="floating-left seat"></div>
+                    <div id="seat3x10" class="floating-left seat"></div>
+                    <div id="seat3x11" class="floating-left seat"></div>
+                    <div id="seat3x12" class="floating-left seat"></div>
+                    <div id="seat3x13" class="floating-left seat"></div>
+                    <div id="seat3x14" class="floating-left seat"></div>
+                    <div id="seat3x15" class="floating-left seat"></div>
+                    <div id="seat3x16" class="floating-left seat"></div>
+                    <div id="seat3x17" class="floating-left seat"></div>
+                    <div id="seat3x18" class="floating-left seat"></div>
+                    <div id="seat3x19" class="floating-left seat"></div>
+                    <div id="seat3x20" class="floating-left seat"></div>
+                    <div id="seat3x21" class="floating-left seat"></div>
+                    <div id="seat4x1" class="floating-left seat"></div>
+                    <div id="seat4x2" class="floating-left seat"></div>
+                    <div id="seat4x3" class="floating-left seat"></div>
+                    <div id="seat4x4" class="floating-left seat"></div>
+                    <div id="seat4x5" class="floating-left seat"></div>
+                    <div id="seat4x6" class="floating-left seat"></div>
+                    <div id="seat4x7" class="floating-left seat"></div>
+                    <div id="seat4x8" class="floating-left seat"></div>
+                    <div id="seat4x9" class="floating-left seat"></div>
+                    <div id="seat4x10" class="floating-left seat"></div>
+                    <div id="seat4x11" class="floating-left seat"></div>
+                    <div id="seat4x12" class="floating-left seat"></div>
+                    <div id="seat4x13" class="floating-left seat"></div>
+                    <div id="seat4x14" class="floating-left seat"></div>
+                    <div id="seat4x15" class="floating-left seat"></div>
+                    <div id="seat4x16" class="floating-left seat"></div>
+                    <div id="seat4x17" class="floating-left seat"></div>
+                    <div id="seat4x18" class="floating-left seat"></div>
+                    <div id="seat4x19" class="floating-left seat"></div>
+                    <div id="seat4x20" class="floating-left seat"></div>
+                    <div id="seat4x21" class="floating-left seat"></div>
+                    <div id="seat5x1" class="floating-left seat"></div>
+                    <div id="seat5x2" class="floating-left seat"></div>
+                    <div id="seat5x3" class="floating-left seat"></div>
+                    <div id="seat5x4" class="floating-left seat"></div>
+                    <div id="seat5x5" class="floating-left seat"></div>
+                    <div id="seat5x6" class="floating-left seat"></div>
+                    <div id="seat5x7" class="floating-left seat"></div>
+                    <div id="seat5x8" class="floating-left seat"></div>
+                    <div id="seat5x9" class="floating-left seat"></div>
+                    <div id="seat5x10" class="floating-left seat"></div>
+                    <div id="seat5x11" class="floating-left seat"></div>
+                    <div id="seat5x12" class="floating-left seat"></div>
+                    <div id="seat5x13" class="floating-left seat"></div>
+                    <div id="seat5x14" class="floating-left seat"></div>
+                    <div id="seat5x15" class="floating-left seat"></div>
+                    <div id="seat5x16" class="floating-left seat"></div>
+                    <div id="seat5x17" class="floating-left seat"></div>
+                    <div id="seat5x18" class="floating-left seat"></div>
+                    <div id="seat5x19" class="floating-left seat"></div>
+                    <div id="seat5x20" class="floating-left seat"></div>
+                    <div id="seat5x21" class="floating-left seat"></div>
+                    <div id="seat5x22" class="floating-left seat"></div>
+                    <div id="seat5x23" class="floating-left seat"></div>
+                    <div id="seat5x24" class="floating-left seat"></div>
+                    <div class="clearing"></div>
+                    <button id="buy-tickets-window-button">Buy</button>
+                </div>
+            </div>
+    </div>
+    <div id='buy-tickets-window-success'>
+        <div class="window-header">Your request was completed</div>
+        <div style="overflow:hidden;"><center><h1>Thanks for using our App</h1></center></div>
+    </div>
+
+    <div id="popover">
+        <div id="movies" style="padding:5px;">
+        </div>
+    </div>
+</body>
+</html>

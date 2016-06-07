@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Grid Order Details</title>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.metro.css" type="text/css" />
+    <link rel="stylesheet" href="../../../styles/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../styles/bootstrap-theme.min.css"/>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.edit.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtabs.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            'use strict';
+            var source =
+                {
+                    url: 'data.php?usedwidget=ordersgrid',
+                    datatype: 'json',
+                    datafields: [
+                    { name: 'orderID', type: 'string' },
+                    { name: 'orderDate', type: 'date' },
+                    { name: 'customer', type: 'string' },
+                    { name: 'address', type: 'string' },
+                    { name: 'city', type: 'string' },
+                    { name: 'country', type: 'string' },
+                    { name: 'product', type: 'string' },
+                    { name: 'price', type: 'float' },
+                    { name: 'qty', type: 'int' }
+
+
+                    ]
+                };
+            var nestedGrids = [];
+            var initrowdetails = function (index, parentElement, gridElement, record)
+            {
+                var id = record.uid.toString();
+                var grid = $($(parentElement).children()[0]);
+                nestedGrids[index] = grid;
+                var filtergroup = new $.jqx.filter();
+                var filtervalue = id;
+                var filtercondition = 'equal';
+                var filter = filtergroup.createfilter('stringfilter', filtervalue, filtercondition);
+
+                var ordersbyid = [];
+                for (var m = 0; m < orders.length; m++)
+                {
+                    var result = filter.evaluate(orders[m]['product']);
+                    if (result)
+                    {
+                        ordersbyid.push(orders[m]);
+                    }
+                }
+
+                var nestedGridAdapter = new $.jqx.dataAdapter(source);
+                if (grid != null)
+                {
+                    grid.jqxGrid({
+                        source: nestedGridAdapter, width: '97%', height: 200,
+                        theme: 'metro',
+                        columns: [
+                          { text: 'Product', datafield: 'orderID', width: '34%' },
+                          { text: 'Price', datafield: 'orderDate', width: '33%' },
+                          { text: 'Quantity', datafield: 'customer', width: '33%' }
+                        ]
+                    });
+                }
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            $('#orders').jqxGrid(
+            {
+                width: '100%',
+                height: 680,
+                theme: 'metro',
+                source: dataAdapter,
+                rowdetails: true,
+                rowdetailstemplate: { rowdetails: '<div style="margin: 10px;"></div>', rowdetailsheight: 200 },
+                ready: function ()
+                {
+                    $('#orders').jqxGrid('showrowdetails', 0);
+                    $('#orders').jqxGrid('showrowdetails', 1);
+                },
+                initrowdetails: initrowdetails,
+                columns: [
+                      { text: 'Order ID', datafield: 'orderID', width: '10%' },
+                      { text: 'Order Date', datafield: 'orderDate', width: '25%' },
+                      { text: 'Customer', datafield: 'customer', width: '20%' },
+                      { text: 'Address', datafield: 'address', width: '25%' },
+                      { text: 'City', datafield: 'city', width: '10%' },
+                      { text: 'Country', datafield: 'country', width: '10%' }
+                ]
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container" style="overflow:hidden;">
+        <div id="orders"></div>
+    </div>
+</body>
+</html>

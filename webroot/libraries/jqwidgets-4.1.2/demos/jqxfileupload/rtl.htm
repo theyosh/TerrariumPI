@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">This demo shows the Right to Left layout of jqxFileUpload. For uploading files, you should set the "uploadUrl" property to point to a Web Server file that will handle the actual Upload proces</title>
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxfileupload.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#jqxFileUpload').jqxFileUpload({ rtl: true, width: 300, uploadUrl: 'upload.php', fileInputName: 'fileToUpload' });
+        });
+    </script>
+</head>
+<body>     
+    <div id="jqxFileUpload">
+    </div>
+</body>
+</html>

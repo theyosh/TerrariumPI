@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>jqxCalendar provides support for localizing its content and dates for different languages and date formats. 
+Each localization is contained within its own file with the language code appended to the name, e.g. globalize.culture.de-DE.js for German. 
+    </title>
+ <meta name="description" content="AngularJS Calendar example. This example demonstrates a Localized Calendar built with Angular JS." /> 
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            $scope.calendarSettings = { culture: 'en-US', width: '220px', height: '220px', enableTooltips: false };
+
+            // set the culture.
+            $scope.selectHandler = function (event) {
+                var index = event.args.index;
+                switch (index) {
+                    case 0:
+                        $.getScript('../../../jqwidgets/globalization/globalize.culture.cs-CZ.js', function () {
+                            $scope.calendarSettings.culture = 'cs-CZ';
+                            $scope.$apply();
+                        });
+                        break;
+                    case 1:
+                        $.getScript('../../../jqwidgets/globalization/globalize.culture.de-DE.js', function () {
+                            $scope.calendarSettings.culture = 'de-DE';
+                            $scope.$apply();
+                        });
+                        break;
+                    case 2:
+                        $.getScript('../../../jqwidgets/globalization/globalize.culture.en-CA.js', function () {
+                            $scope.calendarSettings.culture = 'en-CA';
+                            $scope.$apply();
+                        });
+                        break;
+                    case 3:
+                        $.getScript('../../../jqwidgets/globalization/globalize.culture.en-US.js', function () {
+                            $scope.calendarSettings.culture = 'en-US';
+                            $scope.$apply();
+                        });
+                        break;
+                    case 4:
+                        $.getScript('../../../jqwidgets/globalization/globalize.culture.fr-FR.js', function () {
+                            $scope.calendarSettings.culture = 'fr-FR';
+                            $scope.$apply();
+                        });
+                        break;
+                    case 5:
+                        $.getScript('../../../jqwidgets/globalization/globalize.culture.it-IT.js', function () {
+                            $scope.calendarSettings.culture = 'it-IT';
+                            $scope.$apply();
+                        });
+                        break;
+                    case 6:
+                        $.getScript('../../../jqwidgets/globalization/globalize.culture.ja-JP.js', function () {
+                            $scope.calendarSettings.culture = 'ja-JP';
+                            $scope.$apply();
+                        });
+                        break;
+                    case 7:
+                        $.getScript('../../../jqwidgets/globalization/globalize.culture.he-IL.js', function () {
+                            $scope.calendarSettings.culture = 'he-IL';
+                            $scope.$apply();
+                        });
+                        break;
+                    case 8:
+                        $.getScript('../../../jqwidgets/globalization/globalize.culture.ru-RU.js', function () {
+                            $scope.calendarSettings.culture = 'ru-RU';
+                            $scope.$apply();
+                        });
+                        break;
+                    case 9:
+                        $.getScript('../../../jqwidgets/globalization/globalize.culture.hr-HR.js', function () {
+                            $scope.calendarSettings.culture = 'hr';
+                            $scope.$apply();
+                        });
+                        break;
+                    case 10:
+                        $.getScript('../../../jqwidgets/globalization/globalize.culture.sa-IN.js', function () {
+                            $scope.calendarSettings.culture = 'sa-IN';
+                            $scope.$apply();
+                        });
+                        break;
+                }
+            };
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-calendar jqx-watch="calendarSettings.culture" jqx-settings="calendarSettings" style='float: left; margin-right: 20px;' id='jqxCalendar'></jqx-calendar>
+    <div style='float: left;'>
+        <div style='float: left; font-family: "Verdana", "sans-serif"; font-size: 13px;'>Choose Culture</div>
+        <br />
+        <br />
+        <jqx-drop-down-list jqx-on-select="selectHandler(event)" jqx-width="220" jqx-height="25" jqx-selected-index="3" jqx-source="['Czech (Czech Republic)', 'German (Germany)', 'English (Canada)', 'English (United States)',
+          'French (France)', 'Italian (Italy)', 'Japanese (Japan)', 'Hebrew (Israel)', 'Russian (Russia)', 'Croatian (Croatia)', 'Sanskrit (India)'
+          ]"
+            style='float: left;'></jqx-drop-down-list>
+    </div>
+</body>
+</html>

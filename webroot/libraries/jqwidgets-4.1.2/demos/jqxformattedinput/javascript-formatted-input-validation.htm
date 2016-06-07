@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">In this jqxFormattedInput demo the input is restricted from
+        0 to 1000 (decimal). When the user enters a value whose decimal equivalent is not
+        from 0 to 1000, the jqxFormattedInput automatically updates the value to the chosen
+        numeral system's equivalent of 0 or 1000 depending on whether the value's decimal
+        equivalent is below 0 or above 1000. That happens on blur event or Enter keypress.
+    </title>
+    <meta name="description" content="In this jqxFormattedInput demo the input is restricted from 0 to 1000 (decimal). When the user enters a value whose decimal equivalent is not from 0 to 1000, the jqxFormattedInput automatically updates the value to the chosen numeral system's equivalent of 0 or 1000 depending on whether the value's decimal equivalent is below 0 or above 1000. That happens on blur event or Enter keypress." />
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxformattedinput.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxFormattedInput").jqxFormattedInput({ width: 250, height: 25, radix: "decimal", value: "0", min: "0", max: "1000", spinButtons: true });
+        });
+    </script>
+</head>
+<body>
+    <div id="jqxFormattedInput">
+        <input type="text" />
+        <div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Progress, Progress Bar, jqxProgressBar, Loading Bar, Progress Widget" /> 
+    <meta name="description" content="Progress Bar Ranges" />
+    <title id='Description'>Progress Bar Ranges.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxprogressbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Create jqxProgressBar.
+            $("#verticalColorRanges").jqxProgressBar({
+                width: 30, height: 250, value: 0, orientation: 'vertical',
+                showText: true, renderText: function (text, value)
+                {
+                    if (value < 60)
+                    {
+                        return "<span class='jqx-rc-all' style='color: #333;'>" + text + "</span>";
+                    }
+
+                    return "<span class='jqx-rc-all' style='color: #fff;'>" + text + "</span>";
+
+                },
+                colorRanges: [{ stop: 40, color: "#f0ad4e" }, { stop: 59, color: "#5bc0de" }, { stop: 70, color: "#5cb85c" }, { stop: 100, color: "#d9534f" }]
+            });
+            $("#colorRanges").jqxProgressBar({
+                showText: true, renderText: function(text, value)
+                {
+                    if (value < 60)
+                    {
+                        return "<span class='jqx-rc-all' style='color: #333;'>" + text + "</span>";
+                    }
+                    
+                    return "<span class='jqx-rc-all' style='color: #fff;'>" + text + "</span>";
+
+                },
+                colorRanges: [{ stop: 20, color: "#33b5e5" }, { stop: 50, color: "#98ca00" }, { stop: 80, color: "#ff4444" }, { stop: 100, color: "#aa66cc" }],
+                width: 250, height: 30, value: 0
+            });
+            var value = 0;
+            var interval = setInterval(function ()
+            {
+                value++;
+                if (value == 100) clearInterval(interval);
+                $("#colorRanges").val(value);
+                $("#verticalColorRanges").val(value);
+            }, 20);
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+        <div style='margin-top: 10px;'>Horizontal</div>
+        <div style='margin-top: 10px; overflow: hidden;' id='colorRanges'>
+     
+        </div>
+        <div style='margin-top: 10px;'>Vertical</div>
+        <div style='margin-top: 10px; overflow: hidden;' id='verticalColorRanges'>   
+        </div>
+     </div>
+</body>
+</html>

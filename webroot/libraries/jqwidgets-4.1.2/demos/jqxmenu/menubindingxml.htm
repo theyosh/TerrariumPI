@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>In this demo the jqxMenu is built from XML data.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+</head>
+<body>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {
+               // prepare the data
+                var source =
+                {
+                    datatype: "xml",
+                    datafields: [
+                        { name: 'CompanyName', map: 'm\\:properties>d\\:CompanyName' },
+                        { name: 'ContactName', map: 'm\\:properties>d\\:ContactName' },
+                        { name: 'ContactTitle', map: 'm\\:properties>d\\:ContactTitle' },
+                        { name: 'City', map: 'm\\:properties>d\\:City' },
+                        { name: 'PostalCode', map: 'm\\:properties>d\\:PostalCode' },
+                        { name: 'Country', map: 'm\\:properties>d\\:Country' }
+                    ],
+                    root: "entry",
+                    record: "content",
+                    id: 'm\\:properties>d\\:CustomerID',
+                    url: "../sampledata/customers.xml",
+                    async: false
+                };
+                // create data adapter.
+                var dataAdapter = new $.jqx.dataAdapter(source);
+                // perform Data Binding.
+                dataAdapter.dataBind();
+                // get the tree items. The first parameter is the grouping fields. The second parameter is the sub items collection name. The third parameter is the group's name. 
+                // Each jqxMenu item has a 'label' property, but in the data source, we have a 'CompanyName' field. The last parameter 
+                // specifies the mapping between the 'CompanyName' and 'label' fields.  
+                var records = dataAdapter.getGroupedRecords(['ContactTitle', 'ContactName'], 'items', 'label', [{ name: 'ContactName', map: 'label'}]);
+                $('#jqxWidget').jqxMenu({ source: records, mode: 'vertical',  width: '150px'});
+            });
+        </script>
+        <div id='jqxWidget'>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Kanban Item Template.</title>
+    <meta name="description" content="JavaScript Kanban Widget with custom items" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxsortable.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxkanban.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <style>
+        .jqx-kanban-item-color-status {
+            width: 100%;
+            height: 25px;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            position:relative;
+            margin-top:0px;
+            top: 0px;
+        }
+        .jqx-kanban-item {
+            padding-top: 0px;
+        }
+        .jqx-kanban-item-text {
+            padding-top: 6px;
+        }
+        .jqx-kanban-item-avatar {
+            top: 9px;
+        }
+        .jqx-kanban-template-icon {
+            position: absolute;
+            right: 3px;
+            top:12px;
+        }
+
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var fields = [
+                     { name: "id", type: "string" },
+                     { name: "status", map: "state", type: "string" },
+                     { name: "text", map: "label", type: "string" },
+                     { name: "tags", type: "string" },
+                     { name: "color", map: "hex", type: "string" },
+                     { name: "resourceId", type: "number" }
+            ];
+
+            var source =
+             {
+                 localData: [
+                          { id: "1161", state: "new", label: "Combine Orders", tags: "orders, combine", hex: "#5dc3f0", resourceId: 3 },
+                          { id: "1645", state: "work", label: "Change Billing Address", tags: "billing", hex: "#f19b60", resourceId: 1 },
+                          { id: "9213", state: "new", label: "One item added to the cart", tags: "cart", hex: "#5dc3f0", resourceId: 3 },
+                          { id: "6546", state: "done", label: "Edit Item Price", tags: "price, edit", hex: "#5dc3f0", resourceId: 4 },
+                          { id: "9034", state: "new", label: "Login 404 issue", tags: "issue, login", hex: "#6bbd49" }
+                 ],
+                 dataType: "array",
+                 dataFields: fields
+             };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            var resourcesAdapterFunc = function () {
+                var resourcesSource =
+                {
+                    localData: [
+                          { id: 0, name: "No name", image: "../../jqwidgets/styles/images/common.png", common: true },
+                          { id: 1, name: "Andrew Fuller", image: "../../images/andrew.png" },
+                          { id: 2, name: "Janet Leverling", image: "../../images/janet.png" },
+                          { id: 3, name: "Steven Buchanan", image: "../../images/steven.png" },
+                          { id: 4, name: "Nancy Davolio", image: "../../images/nancy.png" },
+                          { id: 5, name: "Michael Buchanan", image: "../../images/Michael.png" },
+                          { id: 6, name: "Margaret Buchanan", image: "../../images/margaret.png" },
+                          { id: 7, name: "Robert Buchanan", image: "../../images/robert.png" },
+                          { id: 8, name: "Laura Buchanan", image: "../../images/Laura.png" },
+                          { id: 9, name: "Laura Buchanan", image: "../../images/Anne.png" }
+                    ],
+                    dataType: "array",
+                    dataFields: [
+                         { name: "id", type: "number" },
+                         { name: "name", type: "string" },
+                         { name: "image", type: "string" },
+                         { name: "common", type: "boolean" }
+                    ]
+                };
+
+                var resourcesDataAdapter = new $.jqx.dataAdapter(resourcesSource);
+                return resourcesDataAdapter;
+            }
+
+            var getIconClassName = function () {
+                switch (theme) {
+                    case "darkblue":
+                    case "black":
+                    case "shinyblack":
+                    case "ui-le-frog":
+                    case "metrodark":
+                    case "orange":
+                    case "darkblue":
+                    case "highcontrast":
+                    case "ui-sunny":
+                    case "ui-darkness":
+                        return "jqx-icon-plus-alt-white ";
+                }
+                return "jqx-icon-plus-alt";
+            }
+
+            $('#kanban1').jqxKanban({
+                template: "<div class='jqx-kanban-item' id=''>"
+                        + "<div class='jqx-kanban-item-color-status'></div>"
+                        + "<div style='display: none;' class='jqx-kanban-item-avatar'></div>"
+                        + "<div class='jqx-icon jqx-icon-close-white jqx-kanban-item-template-content jqx-kanban-template-icon'></div>"
+                        + "<div class='jqx-kanban-item-text'></div>"
+                        + "<div style='display: none;' class='jqx-kanban-item-footer'></div>"
+                + "</div>",
+                resources: resourcesAdapterFunc(),
+                source: dataAdapter,
+                itemRenderer: function(element, item, resource)
+                {
+                    $(element).find(".jqx-kanban-item-color-status").html("<span style='line-height: 23px; margin-left: 5px; color:white;'>" + resource.name + "</span>");
+                },
+                columns: [
+                    { text: "Backlog", iconClassName: getIconClassName(), dataField: "new" },
+                    { text: "In Progress", iconClassName: getIconClassName(), dataField: "work" },
+                    { text: "Done", iconClassName: getIconClassName(), dataField: "done" }
+                ]
+            });
+
+            $('#kanban1').on("itemAttrClicked", function (event) {
+                var args = event.args;
+                if (args.attribute == "template") {
+                    $('#kanban1').jqxKanban('removeItem', args.item.id);
+                }
+            });
+            var itemIndex = 0;
+            $('#kanban1').on('columnAttrClicked', function (event) {
+                var args = event.args;
+                if (args.attribute == "button") {
+                    args.cancelToggle = true;
+                    if (!args.column.collapsed) {
+                        var colors = ['#f19b60', '#5dc3f0', '#6bbd49', '#732794']
+                        $('#kanban1').jqxKanban('addItem', { status: args.column.dataField, text: "<input placeholder='(No Title)' style='width: 96%; margin-top:2px; border-radius: 3px; border-color: #ddd; line-height:20px; height: 20px;' class='jqx-input' id='newItem" + itemIndex + "' value=''/>", tags: "new task", color: colors[Math.floor(Math.random() * 4)], resourceId: Math.floor(Math.random() * 4) });
+                        var input =  $("#newItem" + itemIndex);
+                        input.mousedown(function (event) {
+                            event.stopPropagation();
+                        });
+                        input.mouseup(function (event) {
+                            event.stopPropagation();
+                        });
+
+                        input.keydown(function (event) {
+                            if (event.keyCode == 13) {
+                                $("<span>" + $(event.target).val() + "</span>").insertBefore($(event.target));
+                                $(event.target).remove();
+                            }
+                        });
+                        input.focus();
+                        itemIndex++;
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+      <div id="kanban1"></div>     
+</body>
+</html>

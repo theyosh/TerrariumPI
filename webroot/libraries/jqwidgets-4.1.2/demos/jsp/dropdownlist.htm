@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title id="Description">Using jqxDropDownList with JSP and MySQL./title>
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <style type="text/css">
+        .demo-iframe {
+            border: none;
+            width: 600px;
+            height: 400px;
+            clear: both;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(
+            function () {
+                var source = {
+                    datatype: "json",
+                    datafields: [{
+                        name: 'FirstName',
+                        type: 'string'
+                    }, {
+                        name: 'Title',
+                        type: 'int'
+                    }],
+                    id: 'EmployeeId',
+                    url: 'jsp/select-data-simple.jsp',
+                    async: true
+                };
+                var dataAdapter = new $.jqx.dataAdapter(source);
+
+                $("#jqxDropDownList").jqxDropDownList({
+                    source: dataAdapter,
+                    width: 300,
+                    height: 25,
+                    selectedIndex: 0,
+                    displayMember: 'FirstName',
+                    valueMember: 'Title'
+                });
+
+                $('#sendButton').jqxButton({
+                    width: 70
+                });
+            });
+    </script>
+</head>
+<body>
+    <form class="form" id="form" target="form-iframe" method="post" action="jsp/submit.jsp" style="font-size: 13px; font-family: Verdana; width: 650px;">
+        <div id="jqxDropDownList" name="widget"></div>
+        <input style="margin-top: 10px;" type="submit" value="Submit" id="sendButton" />
+    </form>
+    <div>
+        <iframe id="form-iframe" name="form-iframe" class="demo-iframe" frameborder="0"></iframe>
+    </div>
+</body>
+</html>

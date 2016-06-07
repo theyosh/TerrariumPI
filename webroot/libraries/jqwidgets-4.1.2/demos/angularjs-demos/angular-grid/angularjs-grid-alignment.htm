@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS Grid cells and columns alignment.
+    </title>
+    <meta name="description" content="This is an example of an AngularJS Grid. Columns and Cells Alignment can be changed.">
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../sampledata/generatedata.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets", "jqwidgets-amd"]);  
+        demoApp.controller("demoController", function ($scope) {
+            // prepare the data
+            var data = generatedata(200);
+
+            var source =
+            {
+                localdata: data,
+                datafields:
+                [
+                    { name: 'id', type: 'number'},
+                    { name: 'firstname', type: 'string' },
+                    { name: 'lastname', type: 'string' },
+                    { name: 'productname', type: 'string' },
+                    { name: 'available', type: 'bool' },
+                    { name: 'quantity', type: 'number' },
+                    { name: 'price', type: 'number' },
+                    { name: 'total', type: 'number' }
+                ],
+                datatype: "array"
+            };
+
+            var columns = [
+                  { text: 'First Name', datafield: 'firstname', width: 200, cellsalign: 'center', align: 'center' },
+                  { text: 'Last Name', datafield: 'lastname', width: 200, cellsalign: 'center', align: 'center' },
+                  { text: 'Product', datafield: 'productname', width: 180, cellsalign: 'center', align: 'center' },
+                  { text: 'Quantity', datafield: 'quantity', width: 80, cellsalign: 'center', align: 'center' },
+                  { text: 'Unit Price', datafield: 'price', width: 90, cellsalign: 'center', align: 'center', cellsFormat: 'c2' },
+                  { text: 'Total', datafield: 'total', cellsAlign: 'center', align: 'center', cellsformat: 'c2' }
+            ];
+      
+            $scope.gridSettings =
+            {
+                width: 850,
+                source: source,                
+                selectionmode: 'multiplecellsextended',
+                columns: columns
+            };
+           
+            var setAlignment = function (align) {
+                $scope.gridSettings.apply('beginupdate');
+                for (var index = 0; index < columns.length; index++) {
+                    $scope.gridSettings.apply('setcolumnproperty', columns[index].datafield, 'align', align);
+                    $scope.gridSettings.apply('setcolumnproperty', columns[index].datafield, 'cellsAlign', align);
+                }
+                $scope.gridSettings.apply('endupdate');
+            }
+
+            $scope.leftCheck = function () {
+                setAlignment('left');
+            };
+            $scope.centerCheck =  function () {
+                setAlignment('center');
+            };
+            $scope.rightCheck = function () {
+                setAlignment('right');
+            };
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+    <jqx-grid jqx-settings="gridSettings"></jqx-grid>
+    <div>
+        <h3>Alignment</h3>
+        <jqx-radio-button jqx-width="100" style="float: left;" jqx-on-checked="leftCheck(event)">Left</jqx-radio-button>
+        <jqx-radio-button jqx-checked="true" jqx-width="100" style="float: left;" jqx-on-checked="centerCheck(event)">Center</jqx-radio-button>
+        <jqx-radio-button jqx-width="100" style="float: left;" jqx-on-checked="rightCheck(event)">Right</jqx-radio-button>
+    </div>
+</body>
+</html>

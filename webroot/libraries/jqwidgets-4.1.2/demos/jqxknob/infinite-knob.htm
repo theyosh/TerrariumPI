@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Infinite Knob</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxknob.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#knob').jqxKnob({
+                value: 60,
+                min: 0,
+                max: 100,
+                startAngle: 150,
+                endAngle: 510,
+                snapToStep: true,
+                rotation: 'clockwise',
+                style: { stroke: '#dfe3e9', strokeWidth: 3, fill: { color: '#fefefe', gradientType: "linear", gradientStops: [[0, 1], [50, 0.9], [100, 1]] } },
+                marks: {
+                    colorRemaining: '#333',
+                    colorProgress: '#333',
+                    type: 'line',
+                    offset: '71%',
+                    thickness: 1,
+                    size: '6%',
+                    majorSize: '9%',
+                    majorInterval: 10,
+                    minorInterval: 2
+                },
+                labels: {
+                    offset: '88%',
+                    step: 10
+                },
+                progressBar: {
+                    style: { fill: { color: '#00a644', gradientType: "linear", gradientStops: [[0, 1], [50, 0.9], [100, 1]] }, stroke: '#00a644' },
+                    background: { fill: { color: '#ff8b1e', gradientType: "linear", gradientStops: [[0, 1], [50, 0.9], [100, 1]] }, stroke: '#ff8b1e' },
+                    size: '9%',
+                    offset: '60%'
+                },
+                spinner: {
+                    style: { fill: { color: '#00a4e1', gradientType: "linear", gradientStops: [[0, 1], [50, 0.9], [100, 1]] }, stroke: '#00a4e1' },
+                    innerRadius: '45%', // specifies the inner Radius of the dial
+                    outerRadius: '60%', // specifies the outer Radius of the dial
+                    marks: {
+                        colorRemaining: '#fff',
+                        colorProgress: '#fff',
+                        type: 'line',
+                        offset: '46%',
+                        thickness: 2,
+                        size: '14%',
+                        majorSize: '14%',
+                        majorInterval: 10,
+                        minorInterval: 10
+                    },
+                },
+                dial: 
+                    {
+                        style: { fill: { color: '#dfe3e9', gradientType: "linearHorizontal", gradientStops: [[0, 0.9], [50, 1], [100, 1]] }, stroke: '#dfe3e9' },
+                        innerRadius: '0%', // specifies the inner Radius of the dial
+                        outerRadius: '45%'
+                    },
+                pointer:
+                    {
+                        type: 'circle',
+                        style: { fill: '#ef6100', stroke: '#ef6100' },
+                        size: '5%',
+                        offset: '38%',
+                        thickness: 20
+                    }
+            });
+
+            var lastValue;
+            var newValue = 0;
+            var min = 0;
+            var max = 100;
+            $('#knob').on('change', function (event) {
+                lastValue = newValue;
+                newValue = event.args.value;
+                if (newValue >= min && newValue <= min + 10 && lastValue <= max && lastValue >= max - 10){
+                    min = max;
+                    max += 100;
+                    $('#knob').jqxKnob({ value: max, max: max, min: min });
+                } else if (newValue >= max - 10 && newValue <= max && lastValue >= min && lastValue <= min + 10){
+                    max = min;
+                    min -= 100;
+                    $('#knob').jqxKnob({ value: min, min: min, max: max });
+                }
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+<div id='knob'">
+</div>
+</body>
+</html>

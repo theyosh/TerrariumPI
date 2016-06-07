@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>Initialize the AngularJS DropDownList from Array</title>
+    <meta name="description" content="AngularJS DropDownList example. This example demonstrates a DropDownList built with Angular." /> 
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            var source = [{
+                label: "Peppermint Hot Chocolate",
+                value: "Chocolate Beverage",
+                group: "Hot Chocolate"
+            }, {
+                label: "Salted Caramel Hot Chocolate",
+                value: "Chocolate Beverage",
+                group: "Hot Chocolate"
+            }, {
+                label: "White Hot Chocolate",
+                value: "Chocolate Beverage",
+                group: "Hot Chocolate"
+            }, {
+                label: "Caffe Americano",
+                value: "Espresso Beverage",
+                group: "Espresso"
+            }, {
+                label: "Caffe Latte",
+                value: "Espresso Beverage",
+                group: "Espresso"
+            }, {
+                label: "Caffe Mocha",
+                value: "Espresso Beverage",
+                group: "Espresso"
+            }, {
+                label: "Cappuccino",
+                value: "Espresso Beverage",
+                group: "Espresso"
+            }, {
+                label: "Caramel Brulee Latte",
+                value: "Espresso Beverage",
+                group: "Espresso"
+            }, {
+                label: "Caramel Macchiato",
+                value: "Espresso Beverage",
+                group: "Espresso"
+            }, {
+                label: "Peppermint Hot Chocolate",
+                value: "Espresso Beverage",
+                group: "Espresso"
+            }, {
+                label: "Cinnamon Dolce Latte",
+                value: "Espresso Beverage",
+                group: "Espresso"
+            }, {
+                label: "Eggnog Latte",
+                value: "Espresso Beverage",
+                group: "Espresso"
+            }, {
+                label: "Espresso",
+                value: "Espresso Beverage",
+                group: "Espresso"
+            }, {
+                label: "Espresso Con Panna",
+                value: "Espresso Beverage",
+                group: "Espresso"
+            }, {
+                label: "Espresso Macchiato",
+                value: "Espresso Beverage",
+                group: "Espresso"
+            }, {
+                label: "Flavored Latte",
+                value: "Espresso Beverage",
+                group: "Espresso"
+            }, {
+                label: "Gingerbread Latte",
+                value: "Espresso Beverage",
+                group: "Espresso"
+            }, {
+                label: "White Chocolate Mocha",
+                value: "Espresso Beverage",
+                group: "Espresso"
+            }, {
+                label: "Skinny Peppermint Mocha",
+                value: "Espresso Beverage",
+                group: "Espresso"
+            }, {
+                label: "Skinny Flavored Latte",
+                value: "Espresso Beverage",
+                group: "Espresso"
+            }, {
+                label: "Pumpkin Spice Latte",
+                value: "Espresso Beverage",
+                group: "Espresso"
+            }, {
+                label: "Caffe Vanilla Frappuccino",
+                value: "Frappuccino Blended Beverage",
+                group: "Frappuccino"
+            }, {
+                label: "Caffe Vanilla Frappuccino Light",
+                value: "Frappuccino Blended Beverage",
+                group: "Frappuccino"
+            }, {
+                label: "Caramel Brulee Frappuccino",
+                value: "Frappuccino Blended Beverage",
+                group: "Frappuccino"
+            }, {
+                label: "Caramel Brulee Frappuccino Light",
+                value: "Frappuccino Blended Beverage",
+                group: "Frappuccino"
+            }, {
+                label: "Eggnog Frappuccino",
+                value: "Frappuccino Blended Beverage",
+                group: "Frappuccino"
+            }, {
+                label: "Mocha Frappuccino",
+                value: "Frappuccino Blended Beverage",
+                group: "Frappuccino"
+            }, {
+                label: "Tazo Green Tea Creme Frappuccino",
+                value: "Frappuccino Blended Beverage",
+                group: "Frappuccino"
+            }];
+
+            $scope.settings = { source: source, width: 300, height: 30 };
+
+            // update events.
+            $scope.selectItem = function (event) {
+                if (event.args) {
+                    var item = event.args.item;
+                    if (item) {
+                        $scope.log = "Value: " + item.value + ", Label: " + item.label;
+                    }
+                }
+            };
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-drop-down-list jqx-on-select="selectItem(event)" jqx-settings="settings">
+        </jqx-drop-down-list>
+    {{log}}
+    </div>
+</body>
+</html>

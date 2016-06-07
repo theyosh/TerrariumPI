@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>AngularJS Chart Live Updates Performance Example</title>
+   <meta name="description" content="This is an example of AngularJS Chart. Charts Live Updates Performance" />	
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+     <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxresponse.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope, $interval) {
+            var refreshTimeout = 100;
+            var chart;
+
+            var response = new $.jqx.response();
+            if (response && response.device)
+            {
+				if (response.device.type == 'Tablet')
+				{
+				   refreshTimeout = 150;
+				}
+                else if (response.device.width < 800 || 
+                    response.device.height < 500 ||
+                    response.device.type == 'Phone' ||
+                    (response.browser.svg == false && response.browser.canvas == false)
+                   )
+                {
+                    refreshTimeout = 1000;
+                }
+            }
+
+            var data = [];
+
+            var max = 200;
+
+            for (var i = 0; i < 20; i++) {
+                data.push({
+                    key: i, 
+                    value1: (Math.random() * 200) % 200 + 200,
+                    value2: (Math.random() * 200) % 200 + 500,
+                    value3: (Math.random() * 200) % 200,
+                });
+            }
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "Live updates performance",
+                description: "Data changes every " + refreshTimeout + " milliseconds",
+                enableAnimations: false,
+                showLegend: true,
+                created: function(args)
+                {
+                    chart = args.instance;
+                },
+                padding: { left: 10, top: 10, right: 10, bottom: 10 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                source: data,
+                xAxis:
+                    {
+                        dataField: 'key',
+                        unitInterval: 1,
+                        valuesOnTicks: true,
+                        showGridLines: false
+                    },
+                colorScheme: 'scheme01',
+                seriesGroups:
+                    [
+                        {
+                            type: 'line',
+                            useGradientColors: false,
+                            valueAxis:
+                            {
+                                minValue: 0,
+                                maxValue: 700,
+                                description: 'Index Value<br>',
+                            },
+                            series: [
+                                    { dataField: 'value1', displayText: 'value1', lineWidth: 2, symbolType: 'circle' }
+                                ]
+                        },
+                        {
+                            type: 'spline',
+                            useGradientColors: false,
+                            columnsGapPercent: 50,
+                            alignEndPointsWithIntervals: true,
+                            valueAxis:
+                            {
+                                minValue: 0,
+                                maxValue: 700,
+                                visible: false
+                            },
+                            series: [
+                                    { dataField: 'value2', displayText: 'value2'}
+                                ]
+                        },
+                        {
+                            type: 'column',
+                            useGradientColors: false,
+                            columnsGapPercent: 50,
+                            alignEndPointsWithIntervals: true,
+                            valueAxis:
+                            {
+                                minValue: 0,
+                                maxValue: 700,
+                                visible: false
+                            },
+                            series: [
+                                    { dataField: 'value3', displayText: 'value3'}
+                                ]
+                        }
+                    ]
+            };
+
+
+            // create the chart
+            $scope.chartSettings = settings;
+
+    
+            // color scheme drop down
+            var colorsSchemesList = ["scheme01", "scheme02", "scheme03", "scheme04", "scheme05", "scheme06", "scheme07", "scheme08"];
+            $scope.dropDownColorsSettings = {change: function(event)
+            {
+                var value = event.args.item.value;
+                chart.colorScheme = value;
+                chart.update();
+            },
+                source: colorsSchemesList, selectedIndex: 0, width: '200', height: '25', dropDownHeight: 100, enableBrowserBoundsDetection: true };
+
+            
+            var timerFunction = function () {
+                data.splice(0, 1);
+                data.push({ key: data[data.length - 1].key + 1, 
+                    value1: (Math.random() * 200) % 200 + 200,
+                    value2: (Math.random() * 200) % 200 + 500,
+                    value3: (Math.random() * 200) % 200,
+                });
+
+                chart.update();
+            };
+
+            // auto update timer
+            var ttimer = $interval(timerFunction, refreshTimeout);
+
+            $scope.buttonText = "Pause";
+            $scope.pauseResume = function (event) {
+                if (ttimer) {
+                    $interval.cancel(ttimer);
+                    $scope.buttonText = "Resume";
+                    ttimer = undefined;
+                }
+                else {
+                    ttimer = $interval(timerFunction, refreshTimeout);
+                    $scope.buttonText = "Pause";
+                }
+            }
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <p>
+        <jqx-chart jqx-settings="chartSettings" style="width: 850px; height: 500px">
+        </jqx-chart>
+    </p>
+    <table style="width: 680px">
+        <tr>
+            <td>
+                <p style="font-family: Verdana; font-size: 12px; width:170px;">Pause / Resume updates:
+                </p>
+                <jqx-button jqx-on-click="pauseResume()" ng-model="buttonText"></jqx-button>
+            </td>
+            <td style="padding-left: 50px;">
+                <p style="font-family: Verdana; font-size: 12px;">Select color scheme:
+                </p>
+                <jqx-drop-down-list jqx-settings="dropDownColorsSettings" id='dropDownColors'>
+                </jqx-drop-down-list>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

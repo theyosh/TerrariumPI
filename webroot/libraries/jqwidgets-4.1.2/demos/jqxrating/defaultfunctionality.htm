@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Rating, jqxRating, Rating Widget" /> 
+    <meta name="description" content="The jqxRating control represents a widget that allows you to choose a rating." />
+    <title id='Description'>The jqxRating control represents a widget that allows you to choose a rating. You can configure the rating item's size, image and the number of displayed items.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.arctic.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxrating.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Create jqxRating
+            $("#jqxRating").jqxRating({ width: 350, height: 35, theme: 'classic'});
+            $("#jqxRating").on('change', function (event) {
+                $("#rate").find('span').remove();
+                $("#rate").append('<span>' + event.value + '</span');
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana;">
+        <div id='jqxRating'></div>
+        <div style='margin-top:10px;'>
+           <div style='float: left;'>Rating:</div> <div style='float: left;' id='rate'></div>
+        </div>
+  </div>
+  </body>
+</html>

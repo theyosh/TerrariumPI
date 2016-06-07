@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>The following example shows how to get the Grid's HTML, add it to a new browser window and trigger printing.</title>
+   <meta name="description" content="This is an example of AngularJS DataTable. Data Printing is demonstrated." />	
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+     <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.export.js"></script> 
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../sampledata/generatedata.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {           
+            var grid;
+            // initialize AngularJS DataTable
+            $scope.gridSettings =
+            {
+                created: function(args)
+                {
+                    grid = args.instance;
+                },
+                source: new $.jqx.dataAdapter({
+                    localData: generateData(10),
+                    datatype: "array",
+                    dataFields:
+                    [
+                        { name: 'firstname', type: 'string' },
+                        { name: 'lastname', type: 'string' },
+                        { name: 'productname', type: 'string' },
+                        { name: 'available', type: 'bool' },
+                        { name: 'date', type: 'date' },
+                        { name: 'quantity', type: 'number' },
+                        { name: 'price', type: 'number' }
+                    ]                     
+                }),                
+                altRows: true,
+                sortable: true,
+                exportSettings: { fileName: null },
+                columns: [
+                  { text: 'First Name', dataField: 'firstname', width: 150 },
+                  { text: 'Last Name', dataField: 'lastname', width: 150 },
+                  { text: 'Product', dataField: 'productname', width: 200 },
+                  { text: 'Ship Date', dataField: 'date', width: 150, align: 'right', cellsAlign: 'right', cellsFormat: 'd' },
+                  { text: 'Quantity', dataField: 'quantity', width: 100, align: 'right', cellsAlign: 'right' },
+                  { text: 'Price', dataField: 'price', width: 100, cellsalign: 'right', align: 'right', cellsFormat: 'c2' }
+                ]
+            };
+ 
+            $scope.print = function ()
+            {
+                var gridContent = grid.exportData('html');
+                var newWindow = window.open('', '', 'width=800, height=500'),
+                document = newWindow.document.open(),
+                pageContent =
+                    '<!DOCTYPE html>' +
+                    '<html>' +
+                    '<head>' +
+                    '<meta charset="utf-8" />' +
+                    '<title>jqwidgets Grid</title>' +
+                    '</head>' +
+                    '<body>' + gridContent + '</body></html>';
+                document.write(pageContent);
+                document.close();
+                newWindow.print();
+            };
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+    <jqx-data-table jqx-settings="gridSettings"></jqx-data-table>
+    <br /><br />
+    <jqx-button jqx-on-click="print()">Print</jqx-button> 
+</body>
+</html>

@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Calendar, Month Calendar, MonthCalendar, DateTimeInput, DateTimePicker, Date Picker" />
+    <meta name="description" content="This demo demonstrates the jqxCalendar widget. Choose a date and navigate through the months by clicking the left or right navigation arrows.
+The jqxCalendar has built-in Keyboard navigation so you can click on it and navigate by using the left, right, up or down arrow keys." />
+    <title id='Description'>This demo demonstrates the jqxCalendar widget. Choose a date
+        and navigate through the months by clicking the left or right navigation arrows.
+        The jqxCalendar has built-in Keyboard navigation so you can click on it and navigate
+        by using the left, right, up or down arrow keys. To switch to Year and Decade views, you need to click the Calendar's title. </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+</head>
+<body class='default'>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {                
+                // create jqxcalendar.
+                $("#jqxWidget").jqxCalendar({width: 220, height: 220});
+             });
+        </script>
+        <input type="date" id='jqxWidget'>
+        </input>
+    </div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Progress, Progress Bar, jqxProgressBar, Loading Bar, Progress Widget" /> 
+    <meta name="description" content="Progress Bar Templates" />
+    <title id='Description'>Progress Bar Templates.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxprogressbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Create jqxProgressBar.
+            var renderText = function (text, value)
+            {
+                if (value < 55)
+                {
+                    return "<span style='color: #333;'>" + text + "</span>";
+                }
+
+                return "<span style='color: #fff;'>" + text + "</span>";
+
+            }
+
+            $("#jqxProgressBar2").jqxProgressBar({ animationDuration: 0, showText: true, renderText: renderText, template: "primary", width: 250, height: 30, value: 0 });
+            $("#jqxProgressBar3").jqxProgressBar({ animationDuration: 0, showText: true, renderText: renderText, template: "success", width: 250, height: 30, value: 0 });
+            $("#jqxProgressBar4").jqxProgressBar({ animationDuration: 0, showText: true, renderText: renderText, template: "info", width: 250, height: 30, value: 0 });
+            $("#jqxProgressBar5").jqxProgressBar({ animationDuration: 0, showText: true, renderText: renderText, template: "warning", width: 250, height: 30, value: 0 });
+            $("#jqxProgressBar6").jqxProgressBar({ animationDuration: 0, showText: true, renderText: renderText, template: "danger", width: 250, height: 30, value: 0 });
+
+            var values = {};
+            var addInterval = function (id, intervalStep)
+            {
+                values[id] = {value: 0};
+                values[id].interval = setInterval(function ()
+                {
+                    values[id].value++;
+                    if (values[id].value == 100)
+                    {
+                        clearInterval(values[id].interval);
+                    }
+                    $("#" + id).val(values[id].value);
+                }, intervalStep);
+            }
+            addInterval("jqxProgressBar2", 20);
+            addInterval("jqxProgressBar3", 30);
+            addInterval("jqxProgressBar4", 40);
+            addInterval("jqxProgressBar5", 50);
+            addInterval("jqxProgressBar6", 60);
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+        <div style='margin-top: 10px;'>Primary</div>
+        <div style='margin-top: 10px;' id='jqxProgressBar2'></div>    
+        <div style='margin-top: 10px;'>Success</div>
+        <div style='margin-top: 10px;' id='jqxProgressBar3'></div>    
+        <div style='margin-top: 10px;'>Info</div>
+        <div style='margin-top: 10px;' id='jqxProgressBar4'></div>    
+        <div style='margin-top: 10px;'>Warning</div>
+        <div style='margin-top: 10px;' id='jqxProgressBar5'></div>    
+        <div style='margin-top: 10px;'>Danger</div>
+        <div style='margin-top: 10px;' id='jqxProgressBar6'></div>    
+    </div>
+</body>
+</html>

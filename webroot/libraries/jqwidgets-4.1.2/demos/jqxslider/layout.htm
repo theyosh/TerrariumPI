@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxSlider can be displayed either horizontally or vertically. By setting its "layout" property to "reverse", the layout of the widget's UI elements will be reversed.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxslider.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#horizontalSlider').jqxSlider({  width: 300, height: 50 });
+            $('#mirrorHorizontalSlider').jqxSlider({ layout: 'reverse',  width: 300, height: 50 });
+            $('#verticalSlider').jqxSlider({ orientation: 'vertical',  width: 50, height: 300 });
+            $('#mirrorVerticalSlider').jqxSlider({ orientation: 'vertical', layout: 'reverse',  width: 50, height: 300 });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div id="container" style="font-family: Verdana; font-size: 12px; float: left">
+            <b>Default Layout</b>
+            <div id='horizontalSlider'></div>
+            <div style="margin-top: 10px;" id='verticalSlider'></div>
+        </div>
+        <div style="float: right; font-family: Verdana; font-size: 12px;" id="rightContainer">
+            <b>Reversed Layout</b>
+            <div id='mirrorHorizontalSlider'></div>
+            <div style="margin-top: 10px; float: right;" id='mirrorVerticalSlider'></div>
+        </div>
+    </div>
+</body>
+</html>

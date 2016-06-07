@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">JavaScript DataTable Sorting API</title>
+    <meta name="description" content="This sample demonstrates the Sorting API of JavaScript DataTable">
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../sampledata/generatedata.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var source =
+            {
+                localdata: generatedata(85),
+                datatype: "array",
+                datafields:
+                [
+                    { name: 'firstname', type: 'string' },
+                    { name: 'lastname', type: 'string' },
+                    { name: 'productname', type: 'string' },
+                    { name: 'quantity', type: 'number' },
+                    { name: 'price', type: 'number' },
+                    { name: 'total', type: 'number' }
+                ],
+                sortcolumn: 'firstname',
+                sortdirection: 'asc'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            var columns = [
+                  { text: 'Name', dataField: 'firstname', width: 200 },
+                  { text: 'Last Name', dataField: 'lastname', width: 200 },
+                  { text: 'Product', editable: false, dataField: 'productname', width: 180 },
+                  { text: 'Quantity', dataField: 'quantity', width: 80, align: 'right', cellsalign: 'right' },
+                  { text: 'Unit Price', dataField: 'price', width: 90, align: 'right', cellsalign: 'right', cellsFormat: 'c2' },
+                  { text: 'Total', dataField: 'total', width: 100, align: 'right', cellsalign: 'right', cellsFormat: 'c2' }
+            ];
+
+            $("#dataTable").jqxDataTable(
+            {
+                source: dataAdapter,
+                sortable: true,
+                pageable: true,
+                altRows: true,
+                width: 650,
+                columns: columns
+            });
+
+            $("#columnName").jqxDropDownList({width: 100, selectedIndex: 0, autoDropDownHeight: true, source: ['Name', 'Last Name', 'Product', 'Quantity', 'Unit Price', 'Total'] });
+            $("#sortOrder").jqxDropDownList({ width: 100, selectedIndex: 0, autoDropDownHeight: true, source: ['Ascending', 'Descending'] });
+            $("button").jqxButton();
+            $("#sort").click(function () {
+                var columnIndex = $("#columnName").jqxDropDownList('selectedIndex');
+                var sortOrder = $("#sortOrder").jqxDropDownList('selectedIndex') == 0 ? 'asc' : 'desc';
+                $("#dataTable").jqxDataTable('sortBy', columns[columnIndex].dataField, sortOrder);
+            });
+            $("#clear").click(function () {
+                $("#dataTable").jqxDataTable('sortBy', null);
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div style="float: left;" id="dataTable">
+    </div>
+    <div style="float: left; margin-left: 10px;">
+        <table>
+            <tr>
+                <td align="right"><div><strong>Settings</strong></div></td>
+                <td align="left"></td>
+            </tr>
+            <tr>
+                <td align="right">Column:</td>
+                <td align="left">
+                    <div id="columnName"></div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">Sort Order:</td>
+                <td align="left">
+                    <div id="sortOrder"></div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right"></td>
+                <td align="left">
+                    <button id="sort" style="float: left;">Sort</button>
+                    <button id="clear" style="float: left; margin-left: 5px;">Clear</button></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

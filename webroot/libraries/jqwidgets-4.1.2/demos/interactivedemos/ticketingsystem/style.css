@@ -1,0 +1,272 @@
+﻿html, body {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+
+.login-label {
+    width: 60px;
+    color: gray;
+    padding-top: 5px;
+    float: left;
+}
+
+#addGroupWindow .login-label {
+    width: 120px !important;
+}
+
+.login-password-hint {
+    font-size: 10px;
+    margin: 5px 0px 10px 110px;
+}
+
+.login-button {
+    margin: 15px 12px 0px 0px;
+    float: right;
+}
+
+.clearing {
+    clear: both;
+}
+
+.header {
+    height: 50px;
+    background-color: #1EA9DD;
+    border: #1EA9DD solid 1px;
+}
+
+.header-text {
+    color: white;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+#loginWindow .login-label {
+    margin-right: 40px;
+}
+
+#loginWindow .jqx-window-content {
+    padding-left: 10px;
+    padding-top: 5px;
+}
+
+#usersGridButtonHeader {
+    cursor: pointer;
+}
+
+#loginPasswordContent {
+    padding-top: 4px;
+}
+
+#loginSubmitButton {
+    margin-right: 17px;
+}
+
+#editUserName {
+    float: left;
+    margin-right: 2%;
+}
+
+#add {
+    float: left;
+    display: inline-block;
+}
+
+#editUserGroupsGrid {
+    float: left;
+}
+
+#editUserAddGroupButtonClose {
+    margin-left: 130px;
+}
+
+#add #editUserAddGroupButton:hover .jqx-fill-state-normal,
+#add .jqx-fill-state-hover,
+#add .jqx-fill-state-pressed,
+#add #editUserAddGroupButton:hover .glyphicon-plus {
+    color: yellowgreen;
+}
+
+#editGroupsWindowContainerButtons {
+    position: absolute;
+    top: 218px;
+    height: 24px;
+}
+
+/* Current User - Grid Editor with list of activity */
+#editGroupsButtonClose {
+    margin-left: 30px;
+}
+
+/* WINDOW Add group */
+#addGroupWindow .login-label {
+    width: 120px;
+    margin-bottom: 5px;
+    padding-top: 0px;
+}
+
+.ok-cancel {
+    margin: 8px 0px 0px 0px;
+}
+
+#addGroupWindowCancel {
+    margin-left: 128px;
+}
+
+#editUserGroupsGrid .jqx-grid {
+    margin: 5px;
+}
+
+/* TABS */
+.jqx-tabs-title:not(:first-child) .jqx-tabs-titleContentWrapper {
+    padding-top: 4px;
+}
+
+/* TABS - User Controller Ticket Settings */
+.ticket-header {
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+    margin: 0px;
+    right: auto;
+    left: 0px;
+}
+
+.ticket-content {
+    padding: 10px;
+}
+
+.ticket-settings-left-section {
+    width: 10%;
+    float: left;
+}
+
+.ticket-settings-right-section {
+    width: 90%;
+    display: inline-block;
+    float: left;
+}
+
+    .ticket-settings-right-section .ticket-controller-right {
+        margin-top: 5px;
+    }
+
+.ticket-content .jqx-text-area-element {
+    margin-top: 3px;
+}
+
+.ticket-content .ticket-controller-status {
+    display: inline-block;
+}
+
+.ticket-controller-left {
+    padding-top: 13px;
+    width: 100px;
+}
+
+.ticket-controller-right:first-child {
+    padding-left: 4px;
+}
+
+.ticket-comments {
+    float: left;
+    color: gray;
+}
+
+    .ticket-comments h3:first-child {
+        font-size: 20px;
+        font-weight: bold;
+        color: black;
+    }
+
+    .ticket-comments p {
+        font-size: medium;
+    }
+
+.jqx-grid {
+    border-radius: 1px;
+}
+
+/* UPPER Right Sector - Grid */
+#dashboardTicketsGrid .jqx-grid-column-header:first-child .jqx-grid-column-menubutton, #dashboardTicketsGrid .jqx-grid-column-header:last-child .jqx-grid-column-menubutton {
+    display: none;
+}
+
+#dashboardTicketsGrid .jqx-grid-cell:hover .glyphicon-pencil, #dashboardTicketsGrid .jqx-grid-cell:last-child {
+    color: blue;
+    cursor: pointer;
+}
+
+#dashboardTicketsGrid .jqx-grid-cleared-cell:hover, #dashboardTicketsGrid .jqx-grid-cleared-cell:hover ~ div {
+    cursor: default;
+}
+
+#dashboardTicketsGrid .jqx-grid-column-header {
+    border-color: #CCCCCC;
+}
+
+/* LOWER Right Sector - Grid */
+#dashboardProjectMembersGrid .jqx-grid-column-header {
+    border-right: 0;
+}
+
+    #dashboardProjectMembersGrid .jqx-grid-column-header:hover {
+        border-right: 1px solid;
+        border-color: #DDDDDD;
+    }
+
+#dashboardProjectMembersGrid .jqx-grid-column-menubutton:hover {
+    border-right: 1px;
+}
+
+#dashboardProjectMembersGrid .jqx-grid-cell {
+    border-right: 0;
+}
+
+#dashboardProjectMembersGrid .jqx-grid-column-header:last-child .jqx-grid-column-menubutton {
+    display: none;
+}
+
+#editUserGroupsGrid .jqx-grid-cell:hover .glyphicon-trash, #editUserGroupsGrid .jqx-grid-cell:nth-child(2) {
+    color: red;
+    cursor: pointer;
+}
+
+#usersGrid .jqx-grid-cell:hover .glyphicon-trash, #usersGrid .jqx-grid-cell:nth-last-child(1) {
+    color: red;
+    cursor: pointer;
+}
+
+#usersGrid .jqx-grid-column-header:last-of-type:hover, #usersGrid .jqx-grid-column-header:hover .glyphicon-plus {
+    color: yellowgreen;
+    cursor: pointer;
+}
+
+#usersGrid .jqx-grid-cleared-cell:hover, #usersGrid .jqx-grid-cleared-cell:hover ~ div {
+    cursor: default;
+}
+
+#currentProject + div {
+    background-color: red;
+    margin: 5px 0px 0px 0px;
+}
+
+/* ICONS - glyphicon styling */
+.glyphicon {
+    cursor: pointer;
+}
+
+.glyphicon-pencil {
+    color: #777;
+}
+
+.glyphicon-trash, .glyphicon-plus, .glyphicon-search {
+    color: #304B62;
+}
+
+#projectsGrid .jqx-grid-cell:hover .glyphicon-search, #projectsGrid .jqx-grid-cell:last-child  {
+    color: green;
+    cursor: pointer;
+}

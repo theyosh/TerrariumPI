@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example shows how to create a computed column in jqxGrid using Knockout. The Grid in the sample is editable.
+    </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/json2.js"></script>
+    <script type="text/javascript" src="../../scripts/knockout-3.0.0.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.edit.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxknockout.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var vm = {
+                date: ko.observable(new Date()),
+                items: ko.observableArray(),
+                load: function () {
+                    for (var i = 0; i < 10; i++) {
+                        var item = {
+                            x: ko.observable(i),
+                            y: ko.observable(i + 1)
+                        };
+                        item.sum = ko.computed(function () {
+                            return this.x() + this.y();
+                        }, item);
+                        this.items.push(item);
+                    }
+                }
+            };
+            ko.applyBindings(vm);
+        
+        });
+    </script>
+</head>
+<input data-bind="click: load, jqxButton: {}" type="button" value="Load" />
+<div data-bind="jqxGrid: {source: items, disabled: false, autoheight: true,
+                editable: true,
+                selectionmode: 'singlecell',
+                ,
+                columns: [
+                { text: 'X', dataField: 'x' },
+                { text: 'Y', dataField: 'y' },
+                { text: 'Sum', dataField: 'sum'}
+                ]}"
+    id="jqxgrid">
+</div>
+<table style="margin-top: 20px;">
+    <tbody data-bind="foreach: items">
+        <tr>
+            <td data-bind="text: x"></td>
+            <td data-bind="text: y"></td>
+            <td data-bind="text: sum"></td>
+        </tr>
+    </tbody>
+</table>
+</html>

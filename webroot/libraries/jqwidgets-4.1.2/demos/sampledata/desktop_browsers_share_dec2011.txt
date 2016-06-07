@@ -1,0 +1,6 @@
+Internet Explorer, 33.3
+Firefox, 26.5
+Chrome, 25.4
+Safari, 7.0
+Opera, 4.6
+Other, 3.2

@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="Javascript Button, jQuery Button, CheckBox, Toggle Button, Repeat Button, Radio Button, Link Button, Button" />
+    <meta name="description" content="Javascript Button Text Positioning." />
+    <title id='Description'>Button Text Positioning</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            // Create jqxButton widgets.
+            $("#Button1").jqxButton({ textPosition: "topLeft", width: 120, height: 50 });
+            $("#Button2").jqxButton({ textPosition: "top", width: 120, height: 50 });
+            $("#Button3").jqxButton({ textPosition: "topRight", width: 120, height: 50 });
+            $("#Button4").jqxButton({ textPosition: "center", width: 120, height: 50 });
+            $("#Button5").jqxButton({ textPosition: "left", width: 120, height: 50 });
+            $("#Button6").jqxButton({ textPosition: "right", width: 120, height: 50 });
+            $("#Button7").jqxButton({ textPosition: "bottom", width: 120, height: 50 });
+            $("#Button8").jqxButton({ textPosition: "bottomLeft", width: 120, height: 50 });
+            $("#Button9").jqxButton({ textPosition: "bottomRight", width: 120, height: 50 });
+        });
+    </script>
+</head>
+<body class='default'>
+    <table>
+        <tr>
+            <td>
+                <input type="button" value="Top Left" id='Button1' />
+            </td>
+            <td>
+                <input type="button" value="Top" id='Button2' />
+            </td>
+            <td>
+                <input type="button" value="Top Right" id='Button3' />
+            </td>
+        </tr>
+    </table>
+    <table>
+         <tr>
+            <td>
+                <input type="button" value="Center" id='Button4' />
+            </td>
+            <td>
+                <input type="button" value="Left" id='Button5' />
+            </td>
+            <td>
+                <input type="button" value="Right" id='Button6' />
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <input type="button" value="Bottom" id='Button7' />
+            </td>
+            <td>
+                <input type="button" value="Bottom Left" id='Button8' />
+            </td>
+            <td>
+                <input type="button" value="Bottom Right" id='Button9' />
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example shows how to customize the Grid editors.</title>
+	<meta name="description" content="JavaScript Grid with custom cell editors" /> 	
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.edit.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {           
+            // prepare the data
+            var ordersSource =
+            {
+                datatype: "xml",
+                datafields: [
+                    { name: 'ShippedDate', map: 'm\\:properties>d\\:ShippedDate', type: 'date' },
+                    { name: 'Freight', map: 'm\\:properties>d\\:Freight', type: 'float' },
+                    { name: 'ShipName', map: 'm\\:properties>d\\:ShipName', type: 'string' },
+                    { name: 'ShipAddress', map: 'm\\:properties>d\\:ShipAddress', type: 'string' },
+                    { name: 'ShipCity', map: 'm\\:properties>d\\:ShipCity', type: 'string' },
+                    { name: 'ShipCountry', map: 'm\\:properties>d\\:ShipCountry', type: 'string' }
+                ],
+                root: "entry",
+                record: "content",
+                id: 'm\\:properties>d\\:OrderID',
+                url: "../sampledata/orders.xml",
+                pager: function (pagenum, pagesize, oldpagenum) {
+                    // callback called when a page or page size is changed.
+                },
+                updaterow: function (rowid, rowdata, result) {
+                    // synchronize with the server - send update command
+                    // call result with parameter true if the synchronization with the server is successful 
+                    // and with parameter false if the synchronization failder.
+                    result(true);
+                }
+            };
+            var ordersAdapter = new $.jqx.dataAdapter(ordersSource);
+
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 850,
+                source: ordersAdapter,
+                selectionmode: 'singlecell',
+                editable: true,
+                pageable: true,
+                autoheight: true,
+                columns: [
+                    {
+                        text: 'Ship City', datafield: 'ShipCity', width: 150, columntype: 'combobox',
+                        createeditor: function (row, column, editor) {
+                            // assign a new data source to the combobox.
+                            var list = ['Stuttgart', 'Rio de Janeiro', 'Strasbourg'];
+                            editor.jqxComboBox({ autoDropDownHeight: true, source: list, promptText: "Please Choose:" });
+                        },
+                        // update the editor's value before saving it.
+                        cellvaluechanging: function (row, column, columntype, oldvalue, newvalue) {
+                            // return the old value, if the new value is empty.
+                            if (newvalue == "") return oldvalue;
+                        }
+                    },
+                    {
+                        text: 'Ship Country', datafield: 'ShipCountry', width: 150, columntype: 'dropdownlist',
+                        createeditor: function (row, column, editor) {
+                            // assign a new data source to the dropdownlist.
+                            var list = ['Germany', 'Brazil', 'France'];
+                            editor.jqxDropDownList({ autoDropDownHeight: true, source: list });
+                        },
+                        // update the editor's value before saving it.
+                        cellvaluechanging: function (row, column, columntype, oldvalue, newvalue) {
+                            // return the old value, if the new value is empty.
+                            if (newvalue == "") return oldvalue;
+                        }
+                    },
+                    { text: 'Ship Name', datafield: 'ShipName', columntype: 'combobox' }
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+        <div id="jqxgrid">
+        </div>
+    </div>
+</body>
+</html>

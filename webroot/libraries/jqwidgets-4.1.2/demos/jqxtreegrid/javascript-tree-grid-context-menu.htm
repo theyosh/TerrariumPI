@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">Right-Click on jqxTreeGrid to display a Context Menu.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtreegrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                dataType: "csv",
+                dataFields: [
+                    { name: 'EmployeeKey', type: 'number' },
+                    { name: 'ParentEmployeeKey', type: 'number' },
+                    { name: 'FirstName', type: 'string' },
+                    { name: 'LastName', type: 'string' },
+                    { name: 'Title', type: 'string' },
+                    { name: 'HireDate', type: 'date' },
+                    { name: 'BirthDate', type: 'date' },
+                    { name: 'Phone', type: 'string' },
+                    { name: 'Gender', type: 'string' },
+                    { name: 'DepartmentName', type: 'string' }
+                ],
+                hierarchy:
+                {
+                    keyDataField: { name: 'EmployeeKey' },
+                    parentDataField: { name: 'ParentEmployeeKey' }
+                },
+                id: 'EmployeeKey',
+                url: '../sampledata/employeesadv.csv'
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            // create Tree Grid
+            $("#treeGrid").jqxTreeGrid(
+            {
+                width: 850,
+                source: dataAdapter,
+                columnsResize: true,
+                ready: function () {
+                    // expand row with 'EmployeeKey = 32'
+                    $("#treeGrid").jqxTreeGrid('expandRow', 32);
+                },
+                columns: [
+                  { text: 'FirstName', dataField: 'FirstName', minWidth: 100, width: 200 },
+                  { text: 'LastName', dataField: 'LastName', width: 200 },
+                  { text: 'Department Name', dataField: 'DepartmentName', width: 200 },
+                  { text: 'Title', dataField: 'Title', width: 300 },
+                  { text: 'Birth Date', dataField: 'BirthDate', cellsFormat: 'd', width: 120 },
+                  { text: 'Hire Date', dataField: 'HireDate', cellsFormat: 'd', width: 120 },
+                  { text: 'Phone', dataField: 'Phone', cellsFormat: 'd', width: 120 }
+                ]
+            });
+
+            // create context menu
+            var contextMenu = $("#Menu").jqxMenu({ width: 200, height: 58, autoOpenPopup: false, mode: 'popup' });
+
+            $("#treeGrid").on('contextmenu', function () {
+                return false;
+            });
+
+            $("#treeGrid").on('rowClick', function (event) {
+                var args = event.args;
+                if (args.originalEvent.button == 2) {
+                    var scrollTop = $(window).scrollTop();
+                    var scrollLeft = $(window).scrollLeft();
+                    contextMenu.jqxMenu('open', parseInt(event.args.originalEvent.clientX) + 5 + scrollLeft, parseInt(event.args.originalEvent.clientY) + 5 + scrollTop);
+
+                    return false;
+                }
+            });
+
+            $("#Menu").on('itemclick', function (event) {
+                var args = event.args;
+                var selection = $("#treeGrid").jqxTreeGrid('getSelection');
+                var rowid = selection[0].uid
+                if ($.trim($(args).text()) == "Edit Selected Row") {
+                    $("#treeGrid").jqxTreeGrid('beginRowEdit', rowid);
+                } else {
+                    $("#treeGrid").jqxTreeGrid('deleteRow', rowid);
+                }
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="treeGrid">
+    </div>
+    <div id='Menu'>
+        <ul>
+            <li>Edit Selected Row</li>
+            <li>Delete Selected Row</li>
+        </ul>
+    </div>
+</body>
+</html>

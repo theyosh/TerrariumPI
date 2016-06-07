@@ -1,0 +1,320 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../../styles/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../styles/bootstrap-theme.min.css"  />
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdraw.js"></script> 
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.annotations.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.api.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbargauge.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            'use strict';
+            //Pie Chart
+            var source =
+                     {
+                         datafields: [
+                             { name: 'earnings' },
+                             { name: 'year' }
+                         ],
+                         url: 'data.php?usedwidget=piechart',
+                         datatype: 'json'
+                     };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+
+            var settings = {
+                title: '',
+                description: '',
+                enableAnimations: false,
+                showBorderLine: false,
+                legendPosition: { left: 520, top: 140, width: 100, height: 100 },
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                seriesGroups:
+                    [
+                        {
+                            type: 'donut',
+                            showLabels: true,
+                            enableSelection: true,
+                            series:
+                                [
+                                    {
+                                        dataField: 'earnings',
+                                        displayText: 'year',
+                                        labelRadius: 95,
+                                        initialAngle: 15,
+                                        radius: 140,
+                                        innerRadius: 60,
+                                        centerOffset: 0
+
+                                    }
+                                ]
+                        }
+                    ]
+            };
+            $('#jqxchartOne').jqxChart(settings);
+            $('#jqxchartOne').jqxChart('addColorScheme', 'myScheme', ['#F1495B', '#4d5866', '#888D94']);
+            $('#jqxchartOne').jqxChart('colorScheme', 'myScheme');
+
+
+            //BarGauge
+            $('#jqxbargauge').jqxBarGauge({
+                width: '100%',
+                height: 420,
+                values: [0, 0, 0],
+                customColorScheme: {
+                    name: 'myScheme',
+                    colors: ['#F1495B', '#4d5866', '#888D94']
+                },
+                colorScheme: 'myScheme'
+            });
+            var targetBarGaugeSource = {
+                datatype: 'json',
+                datafields: [
+                    { name: 'value' },
+                    { name: 'description' }
+                ],
+                url: 'data.php?usedwidget=targetbargauge'
+            };
+            var targetBarGaugeDataAdapter = new $.jqx.dataAdapter(targetBarGaugeSource, {
+                loadComplete: function (records)
+                {
+                    var values = [];
+                    for (var i = 0; i < records.length; i++)
+                    {
+                        values.push(records[i].value);
+                    }
+                    $('#jqxbargauge').jqxBarGauge({ values: values });
+                },
+                loadError: function ()
+                {
+                    alert('Server is not responding (BarGauge)');
+                }
+            });
+            targetBarGaugeDataAdapter.dataBind();
+
+            //Column Chart
+            source =
+                    {
+                        datatype: 'json',
+                        datafields: [
+                            { name: 'Product' },
+                            { name: 'Sales' },
+                            { name: 'av' }
+                        ],
+
+                        url: 'data.php?usedwidget=popularproductschart'
+                    };
+            dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+
+            settings = {
+                title: 'Product Popularity',
+                description: 'per sold product',
+                showLegend: false,
+                enableAnimations: true,
+                borderLineWidth: 0.5,
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                xAxis:
+                {
+                    dataField: 'Product',
+                    flip: false,
+                    gridLines: { visible: false }
+                },
+                seriesGroups:
+                    [
+                        {
+                            type: 'column',
+                            columnsGapPercent: 50,
+                            valueAxis:
+                            {
+                                title: {
+                                    text: 'Amount<br><br>'
+                                },
+                                gridLines: { visible: false }
+                            },
+                            series:
+                            [
+                                { dataField: 'Sales' }
+
+                            ],
+                            bands: [
+                                {
+                                    minValue: 1790, maxValue: 1790, fillColor: '#F1495B', lineWidth: 2, dashStyle: '2,2'
+                                }
+                            ],
+                            annotations: [
+                                {
+                                    type: 'rect',
+                                    yValue: 1790,
+                                    xValue: 6,
+                                    offset: { x: -850, y: -25 },
+                                    width: 85,
+                                    height: 20,
+                                    fillColor: '#F1495B',
+                                    lineColor: '#F1495B',
+                                    text: {
+                                        value: 'Average',
+                                        fillColor: 'white',
+                                        offset: {
+                                            x: 15,
+                                            y: 4
+                                        },
+                                        'class': 'redLabel',
+                                        angle: 0
+                                    }
+                                }
+                            ]
+                        }
+
+                    ]
+            };
+
+
+
+            $('#jqxchart').jqxChart(settings);
+            $('#jqxchart').jqxChart('addColorScheme', 'myScheme', ['#888D94']);
+            $('#jqxchart').jqxChart('colorScheme', 'myScheme');
+
+
+            //Line Chart
+            var revenuesSource =
+                    {
+                        datatype: 'json',
+                        datafields: [
+                            { name: 'Month' },
+                            { name: '2014' },
+                            { name: '2015' },
+                            { name: '2016' }
+                        ],
+                        url: 'data.php?usedwidget=revenueschart'
+                    };
+            var revenuesDataAdapter = new $.jqx.dataAdapter(revenuesSource, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+
+            settings = {
+                title: 'Monthly revenues',
+                description: '(2014, 2015, 2016)',
+                enableAnimations: true,
+                showLegend: true,
+                borderLineWidth: 0.5,
+                padding: { left: 10, top: 10, right: 15, bottom: 10 },
+                titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                source: revenuesDataAdapter,
+                xAxis: {
+                    dataField: 'Month',
+                    unitInterval: 1,
+                    tickMarks: { visible: true, interval: 1 },
+                    gridLinesInterval: { visible: true, interval: 1 },
+                    valuesOnTicks: false,
+                    padding: { bottom: 10 }
+                },
+                valueAxis: {
+                    minValue: 1200,
+                    maxValue: 2500,
+                    title: { text: 'Revenues<br><br>' },
+                    labels: { horizontalAlignment: 'right' }
+                },
+                seriesGroups:
+                    [
+                        {
+                            type: 'line',
+                            series:
+                            [
+                                {
+                                    dataField: '2014',
+                                    symbolType: 'square',
+                                    labels:
+                                    {
+                                        visible: true,
+                                        backgroundColor: '#FEFEFE',
+                                        backgroundOpacity: 0.2,
+                                        borderColor: '#7FC4EF',
+                                        borderOpacity: 0.7,
+                                        padding: { left: 5, right: 5, top: 0, bottom: 0 }
+                                    }
+                                },
+                                {
+                                    dataField: '2015',
+                                    symbolType: 'square',
+                                    labels:
+                                    {
+                                        visible: true,
+                                        backgroundColor: '#FEFEFE',
+                                        backgroundOpacity: 0.2,
+                                        borderColor: '#7FC4EF',
+                                        borderOpacity: 0.7,
+                                        padding: { left: 5, right: 5, top: 0, bottom: 0 }
+                                    }
+                                },
+                                {
+                                    dataField: '2016',
+                                    symbolType: 'square',
+                                    labels:
+                                    {
+                                        visible: true,
+                                        backgroundColor: '#FEFEFE',
+                                        backgroundOpacity: 0.2,
+                                        borderColor: '#7FC4EF',
+                                        borderOpacity: 0.7,
+                                        padding: { left: 5, right: 5, top: 0, bottom: 0 }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+            };
+
+
+            $('#jqxchart1').jqxChart(settings);
+            $('#jqxchart1').jqxChart('addColorScheme', 'myScheme', ['#F1495B', '#4d5866', '#888D94']);
+            $('#jqxchart1').jqxChart('colorScheme', 'myScheme');
+        });
+    </script>
+    <style>
+        @media (max-width:991px) {
+            #listContainer {
+                margin-top:0em !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="overflow:hidden;padding-bottom:80px;margin-top:-24px">
+        <div style="text-align:center;color:#4d4d4d"><h3>General Info</h3></div>
+        <div class="row">
+            <div class="col-md-4">
+                <div id="jqxchartOne" style="width:100%; height:400px;"></div>
+            </div>
+            <div class="col-md-4">
+                <div id="jqxbargauge"></div>
+            </div>
+            <div id="listContainer" class="col-md-4" style="margin-top:10em;">
+                    <ul style="color:#4d4d4d;list-style:none;">
+                        <li><div style="width:235px;margin:auto;"><div style="width: 20px; height: 10px; background-color: #F1495B; display:inline-block; margin-top: 0.4em; margin-right: 1em"></div><h4 style="display:inline-block;">% of target for the year</h4></div></li>
+                        <li><div style="width:235px;margin:auto;"><div style="width: 20px; height: 10px; background-color: #4d5866; display:inline-block; margin-top: 0.4em; margin-right: 1em"></div><h4 style="display:inline-block;">% of target for the month</h4></div></li>
+                        <li><div style="width:235px;margin:auto;"><div style="width: 20px; height: 10px; background-color: #888D94; display:inline-block; margin-top: 0.4em; margin-right: 1em"></div><h4 style="display:inline-block;">% of target for the week</h4></div></li>
+                    </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div id="jqxchart1" style="width:97%; height:370px;margin-left:1.4em"></div>
+        </div>
+        <div class="row">
+            <div id="jqxchart" style="width:97%; height:370px;margin-left:1.4em"></div>
+        </div>
+    </div>
+</body>
+</html>

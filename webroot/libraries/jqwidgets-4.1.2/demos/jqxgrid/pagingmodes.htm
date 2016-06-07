@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example shows how to enable the paging feature of the Grid.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.filter.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.columnsresize.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+   <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = "../sampledata/orders.xml";
+
+            // prepare the data
+            var source =
+            {
+                datatype: "xml",
+                datafields: [
+                    { name: 'ShippedDate', map: 'm\\:properties>d\\:ShippedDate', type: 'date' },
+                    { name: 'Freight', map: 'm\\:properties>d\\:Freight', type: 'float' },
+                    { name: 'ShipName', map: 'm\\:properties>d\\:ShipName' },
+                    { name: 'ShipAddress', map: 'm\\:properties>d\\:ShipAddress' },
+                    { name: 'ShipCity', map: 'm\\:properties>d\\:ShipCity' },
+                    { name: 'ShipCountry', map: 'm\\:properties>d\\:ShipCountry' }
+                ],
+                root: "entry",
+                record: "content",
+                id: 'm\\:properties>d\\:OrderID',
+                url: url,
+                pager: function (pagenum, pagesize, oldpagenum) {
+                    // callback called when a page or page size is changed.
+                }
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 850,
+                source: dataAdapter,
+                selectionmode: 'multiplerowsextended',
+                sortable: true,
+                pageable: true,
+                autoheight: true,
+                columnsresize: true,
+                pagermode: 'simple',
+                columns: [
+                  { text: 'Ship Name', datafield: 'ShipName', width: 250 },
+                  { text: 'Shipped Date', datafield: 'ShippedDate', width: 230, cellsformat: 'D' },
+                  { text: 'Freight', datafield: 'Freight', width: 130, cellsformat: 'F2', cellsalign: 'right' },
+                  { text: 'Ship Address', datafield: 'ShipAddress', width: 350 },
+                  { text: 'Ship City', datafield: 'ShipCity', width: 100 },
+                  { text: 'Ship Country', datafield: 'ShipCountry', width: 101 }
+                ]
+            });
+            $("#modes").jqxDropDownList({width: 150, autoDropDownHeight: true, selectedIndex: 1, height: 25, source: ['Default', 'Simple'] });
+            $("#modes").on('select', function (event) {
+                if (event.args.index === 0) {
+                    $("#jqxgrid").jqxGrid({ pagermode: 'default' });
+                }
+                else {
+                    $("#jqxgrid").jqxGrid({ pagermode: 'simple' });
+                }
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+        <div id="jqxgrid">
+        </div>
+        <div style="margin-top: 30px;">
+            <div style="float: left;">
+                Pager Settings:
+                <div id="modes">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

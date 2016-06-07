@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">Integration of jqxSlider with Knockout</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/json2.js"></script> 
+    <script type="text/javascript" src="../../scripts/knockout-3.0.0.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxknockout.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxslider.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var viewModel = function (value) {
+                this.value = ko.observable(value);
+                this.min = ko.observable(0);
+                this.max = ko.observable(100);
+                this.disabled = ko.observable(false);
+            };
+
+            ko.applyBindings(new viewModel(20));
+        });
+    </script>
+</head>
+<body class='default'>
+    <div data-bind="jqxSlider: {min: min, max: max, value: value, disabled: disabled, width: 300, height: 25, showTicks: false, mode: 'fixed'}"></div>
+    <div data-bind="jqxCheckBox: {checked: disabled, width: '100px'}" style='margin-top: 10px; margin-bottom: 10px;'>Disabled</div>
+    <table>
+        <tr><td>Min</td><td><input data-bind="value: min" /></td></tr>
+        <tr><td>Max</td><td><input data-bind="value: max" /></td></tr>
+        <tr><td>Value</td><td><input data-bind="value: value" /></td></tr>
+    </table>
+
+</body>
+</html>

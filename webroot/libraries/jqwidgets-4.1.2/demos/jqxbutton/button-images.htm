@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Button, CheckBox, Toggle Button, Repeat Button, Radio Button, Link Button, Button" />
+    <meta name="description" content="Buttons with Text and Image." />
+    <title id='Description'>Buttons with Images.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            // image before text.
+            $("#button1").jqxButton({ width: 120, imgPosition: "left", textPosition: "left", imgSrc: "../../images/facebook.png", textImageRelation: "imageBeforeText" });
+            $("#button2").jqxButton({ width: 120, imgPosition: "left", textPosition: "center", imgSrc: "../../images/facebook.png", textImageRelation: "imageBeforeText" });
+            $("#button3").jqxButton({ width: 120, imgPosition: "left", textPosition: "right", imgSrc: "../../images/facebook.png", textImageRelation: "imageBeforeText" });
+
+            $("#button4").jqxButton({ width: 120, imgPosition: "center", textPosition: "left", imgSrc: "../../images/facebook.png", textImageRelation: "imageBeforeText" });
+            $("#button5").jqxButton({ width: 120, imgPosition: "center", textPosition: "center", imgSrc: "../../images/facebook.png", textImageRelation: "imageBeforeText" });
+            $("#button6").jqxButton({ width: 120, imgPosition: "center", textPosition: "right", imgSrc: "../../images/facebook.png", textImageRelation: "imageBeforeText" });
+
+            $("#button7").jqxButton({ width: 120, imgPosition: "right", textPosition: "left", imgSrc: "../../images/facebook.png", textImageRelation: "imageBeforeText" });
+            $("#button8").jqxButton({ width: 120, imgPosition: "right", textPosition: "center", imgSrc: "../../images/facebook.png", textImageRelation: "imageBeforeText" });
+            $("#button9").jqxButton({ width: 120, imgPosition: "right", textPosition: "right", imgSrc: "../../images/facebook.png", textImageRelation: "imageBeforeText" });
+
+            // text before image.
+            $("#button10").jqxButton({ width: 120, textPosition: "left", imgPosition: "left", imgSrc: "../../images/twitter.png", textImageRelation: "textBeforeImage" });
+            $("#button11").jqxButton({ width: 120, textPosition: "left", imgPosition: "center", imgSrc: "../../images/twitter.png", textImageRelation: "textBeforeImage" });
+            $("#button12").jqxButton({ width: 120, textPosition: "left", imgPosition: "right", imgSrc: "../../images/twitter.png", textImageRelation: "textBeforeImage" });
+
+            $("#button13").jqxButton({ width: 120, textPosition: "center", imgPosition: "left", imgSrc: "../../images/twitter.png", textImageRelation: "textBeforeImage" });
+            $("#button14").jqxButton({ width: 120, textPosition: "center", imgPosition: "center", imgSrc: "../../images/twitter.png", textImageRelation: "textBeforeImage" });
+            $("#button15").jqxButton({ width: 120, textPosition: "center", imgPosition: "right", imgSrc: "../../images/twitter.png", textImageRelation: "textBeforeImage" });
+
+            $("#button16").jqxButton({ width: 120, textPosition: "right", imgPosition: "left", imgSrc: "../../images/twitter.png", textImageRelation: "textBeforeImage" });
+            $("#button17").jqxButton({ width: 120, textPosition: "right", imgPosition: "center", imgSrc: "../../images/twitter.png", textImageRelation: "textBeforeImage" });
+            $("#button18").jqxButton({ width: 120, textPosition: "right", imgPosition: "right", imgSrc: "../../images/twitter.png", textImageRelation: "textBeforeImage" });
+
+            // image above text
+            $("#button19").jqxButton({ width: 120, imgPosition: "left", textPosition: "left", imgSrc: "../../images/facebook.png", textImageRelation: "imageAboveText" });
+            $("#button20").jqxButton({ width: 120, imgPosition: "left", textPosition: "center", imgSrc: "../../images/facebook.png", textImageRelation: "imageAboveText" });
+            $("#button21").jqxButton({ width: 120, imgPosition: "left", textPosition: "right", imgSrc: "../../images/facebook.png", textImageRelation: "imageAboveText" });
+
+            $("#button22").jqxButton({ width: 120, imgPosition: "center", textPosition: "left", imgSrc: "../../images/facebook.png", textImageRelation: "imageAboveText" });
+            $("#button23").jqxButton({ width: 120, imgPosition: "center", textPosition: "center", imgSrc: "../../images/facebook.png", textImageRelation: "imageAboveText" });
+            $("#button24").jqxButton({ width: 120, imgPosition: "center", textPosition: "right", imgSrc: "../../images/facebook.png", textImageRelation: "imageAboveText" });
+
+            $("#button25").jqxButton({ width: 120, imgPosition: "right", textPosition: "left", imgSrc: "../../images/facebook.png", textImageRelation: "imageAboveText" });
+            $("#button26").jqxButton({ width: 120, imgPosition: "right", textPosition: "center", imgSrc: "../../images/facebook.png", textImageRelation: "imageAboveText" });
+            $("#button27").jqxButton({ width: 120, imgPosition: "right", textPosition: "right", imgSrc: "../../images/facebook.png", textImageRelation: "imageAboveText" });
+
+            // text above image
+            $("#button28").jqxButton({ width: 120, textPosition: "top", imgPosition: "left", imgSrc: "../../images/twitter.png", textImageRelation: "textAboveImage" });
+            $("#button29").jqxButton({ width: 120, textPosition: "left", imgPosition: "center", imgSrc: "../../images/twitter.png", textImageRelation: "textAboveImage" });
+            $("#button30").jqxButton({ width: 120, textPosition: "left", imgPosition: "right", imgSrc: "../../images/twitter.png", textImageRelation: "textAboveImage" });
+
+            $("#button31").jqxButton({ width: 120, textPosition: "center", imgPosition: "left", imgSrc: "../../images/twitter.png", textImageRelation: "textAboveImage" });
+            $("#button32").jqxButton({ width: 120, textPosition: "center", imgPosition: "center", imgSrc: "../../images/twitter.png", textImageRelation: "textAboveImage" });
+            $("#button33").jqxButton({ width: 120, textPosition: "center", imgPosition: "right", imgSrc: "../../images/twitter.png", textImageRelation: "textAboveImage" });
+
+            $("#button34").jqxButton({ width: 120, textPosition: "right", imgPosition: "left", imgSrc: "../../images/twitter.png", textImageRelation: "textAboveImage" });
+            $("#button35").jqxButton({ width: 120, textPosition: "right", imgPosition: "center", imgSrc: "../../images/twitter.png", textImageRelation: "textAboveImage" });
+            $("#button36").jqxButton({ width: 120, textPosition: "right", imgPosition: "right", imgSrc: "../../images/twitter.png", textImageRelation: "textAboveImage" });
+
+            // overlay
+            $("#button37").jqxButton({ width: 120, imgPosition: "left", textPosition: "left", imgSrc: "../../images/facebook.png", textImageRelation: "overlay" });
+            $("#button38").jqxButton({ width: 120, imgPosition: "left", textPosition: "center", imgSrc: "../../images/facebook.png", textImageRelation: "overlay" });
+            $("#button39").jqxButton({ width: 120, imgPosition: "left", textPosition: "right", imgSrc: "../../images/facebook.png", textImageRelation: "overlay" });
+
+            $("#button40").jqxButton({ width: 120, imgPosition: "center", textPosition: "left", imgSrc: "../../images/facebook.png", textImageRelation: "overlay" });
+            $("#button41").jqxButton({ width: 120, imgPosition: "center", textPosition: "center", imgSrc: "../../images/facebook.png", textImageRelation: "overlay" });
+            $("#button42").jqxButton({ width: 120, imgPosition: "center", textPosition: "right", imgSrc: "../../images/facebook.png", textImageRelation: "overlay" });
+
+            $("#button43").jqxButton({ width: 120, imgPosition: "right", textPosition: "left", imgSrc: "../../images/facebook.png", textImageRelation: "overlay" });
+            $("#button44").jqxButton({ width: 120, imgPosition: "right", textPosition: "center", imgSrc: "../../images/facebook.png", textImageRelation: "overlay" });
+            $("#button45").jqxButton({ width: 120, imgPosition: "right", textPosition: "right", imgSrc: "../../images/facebook.png", textImageRelation: "overlay" });
+
+        });
+    </script>
+</head>
+<body class='default'>
+    <h3>Image Before Text</h3>
+    <table>
+        <tr>
+            <td>Image Left/Text Left</td>
+            <td>
+                <button id="button1">Button</button></td>
+            <td>Image Left/Text Center</td>
+            <td>
+                <button id="button2">Button</button></td>
+            <td>Image Left/Text Right</td>
+            <td>
+                <button id="button3">Button</button></td>
+        </tr>
+        <tr>
+            <td>Image Center/Text Left</td>
+            <td>
+                <button id="button4">Button</button></td>
+            <td>Image Center/Text Center</td>
+            <td>
+                <button id="button5">Button</button></td>
+            <td>Image Center/Text Right</td>
+            <td>
+                <button id="button6">Button</button></td>
+        </tr>
+        <tr>
+            <td>Image Right/Text Left</td>
+            <td>
+                <button id="button7">Button</button></td>
+            <td>Image Right/Text Center</td>
+            <td>
+                <button id="button8">Button</button></td>
+            <td>Image Right/Text Right</td>
+            <td>
+                <button id="button9">Button</button></td>
+        </tr>
+    </table>
+    <h3>Text Before Image</h3>
+    <table>
+        <tr>
+            <td>Text Left/Image Left</td>
+            <td>
+                <button id="button10">Button</button></td>
+            <td>Text Left/Image Center</td>
+            <td>
+                <button id="button11">Button</button></td>
+            <td>Text Left/Image Right</td>
+            <td>
+                <button id="button12">Button</button></td>
+        </tr>
+        <tr>
+            <td>Text Center/Image Left</td>
+            <td>
+                <button id="button13">Button</button></td>
+            <td>Text Center/Image Center</td>
+            <td>
+                <button id="button14">Button</button></td>
+            <td>Text Center/Image Right</td>
+            <td>
+                <button id="button15">Button</button></td>
+        </tr>
+        <tr>
+            <td>Text Right/Image Left</td>
+            <td>
+                <button id="button16">Button</button></td>
+            <td>Text Right/Image Center</td>
+            <td>
+                <button id="button17">Button</button></td>
+            <td>Text Right/Image Right</td>
+            <td>
+                <button id="button18">Button</button></td>
+        </tr>
+    </table>
+    <h3>Image Above Text</h3>
+    <table>
+        <tr>
+            <td>Image Left/Text Left</td>
+            <td>
+                <button id="button19">Button</button></td>
+            <td>Image Left/Text Center</td>
+            <td>
+                <button id="button20">Button</button></td>
+            <td>Image Left/Text Right</td>
+            <td>
+                <button id="button21">Button</button></td>
+        </tr>
+        <tr>
+            <td>Image Center/Text Left</td>
+            <td>
+                <button id="button22">Button</button></td>
+            <td>Image Center/Text Center</td>
+            <td>
+                <button id="button23">Button</button></td>
+            <td>Image Center/Text Right</td>
+            <td>
+                <button id="button24">Button</button></td>
+        </tr>
+        <tr>
+            <td>Image Right/Text Left</td>
+            <td>
+                <button id="button25">Button</button></td>
+            <td>Image Right/Text Center</td>
+            <td>
+                <button id="button26">Button</button></td>
+            <td>Image Right/Text Right</td>
+            <td>
+                <button id="button27">Button</button></td>
+        </tr>
+    </table>
+    <h3>Text Above Image</h3>
+    <table>
+        <tr>
+            <td>Text Left/Image Left</td>
+            <td>
+                <button id="button28">Button</button></td>
+            <td>Text Left/Image Center</td>
+            <td>
+                <button id="button29">Button</button></td>
+            <td>Text Left/Image Right</td>
+            <td>
+                <button id="button30">Button</button></td>
+        </tr>
+        <tr>
+            <td>Text Center/Image Left</td>
+            <td>
+                <button id="button31">Button</button></td>
+            <td>Text Center/Image Center</td>
+            <td>
+                <button id="button32">Button</button></td>
+            <td>Text Center/Image Right</td>
+            <td>
+                <button id="button33">Button</button></td>
+        </tr>
+        <tr>
+            <td>Text Right/Image Left</td>
+            <td>
+                <button id="button34">Button</button></td>
+            <td>Text Right/Image Center</td>
+            <td>
+                <button id="button35">Button</button></td>
+            <td>Text Right/Image Right</td>
+            <td>
+                <button id="button36">Button</button></td>
+        </tr>
+    </table>
+    <h3>Overlay(Text and Image can be one over another)</h3>
+    <table>
+        <tr>
+            <td>Image Left/Text Left</td>
+            <td>
+                <button id="button37">Button</button></td>
+            <td>Image Left/Text Center</td>
+            <td>
+                <button id="button38">Button</button></td>
+            <td>Image Left/Text Right</td>
+            <td>
+                <button id="button39">Button</button></td>
+        </tr>
+        <tr>
+            <td>Image Center/Text Left</td>
+            <td>
+                <button id="button40">Button</button></td>
+            <td>Image Center/Text Center</td>
+            <td>
+                <button id="button41">Button</button></td>
+            <td>Image Center/Text Right</td>
+            <td>
+                <button id="button42">Button</button></td>
+        </tr>
+        <tr>
+            <td>Image Right/Text Left</td>
+            <td>
+                <button id="button43">Button</button></td>
+            <td>Image Right/Text Center</td>
+            <td>
+                <button id="button44">Button</button></td>
+            <td>Image Right/Text Right</td>
+            <td>
+                <button id="button45">Button</button></td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Details";
+}
+<div>
+    <h3>Thank you for your Purchase</h3>
+    <h4>Purchase Details:</h4>
+    <table>
+        <tr>
+            <td>@Html.Label("", "Color: ")</td>
+            <td>@Html.Label("", ViewData["Color"].ToString())</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("", "Size: ")</td>
+            <td>@Html.Label("", ViewData["Size"].ToString())</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("", "Price: ")</td>
+            <td>@Html.Label("", "$" + ViewData["Price"].ToString())</td>
+        </tr>
+   </table>
+</div>
+

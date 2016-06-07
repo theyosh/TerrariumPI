@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">Data Filtering API.</title>
+    <meta name="description" content="Data Filtering API - JavaScript Tree Grid Demo | jQWidgets">     
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtreegrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var employees = [{ "EmployeeID": 1, "FirstName": "Nancy", "LastName": "Davolio", "ReportsTo": 2, "Country": "USA", "Title": "Sales Representative", "HireDate": "1992-05-01 00:00:00", "BirthDate": "1948-12-08 00:00:00", "City": "Seattle", "Address": "507 - 20th Ave. E.Apt. 2A" }, { "EmployeeID": 2, "FirstName": "Andrew", "LastName": "Fuller", "ReportsTo": null, "Country": "USA", "Title": "Vice President, Sales", "HireDate": "1992-08-14 00:00:00", "BirthDate": "1952-02-19 00:00:00", "City": "Tacoma", "Address": "908 W. Capital Way" }, { "EmployeeID": 3, "FirstName": "Janet", "LastName": "Leverling", "ReportsTo": 2, "Country": "USA", "Title": "Sales Representative", "HireDate": "1992-04-01 00:00:00", "BirthDate": "1963-08-30 00:00:00", "City": "Kirkland", "Address": "722 Moss Bay Blvd." }, { "EmployeeID": 4, "FirstName": "Margaret", "LastName": "Peacock", "ReportsTo": 2, "Country": "USA", "Title": "Sales Representative", "HireDate": "1993-05-03 00:00:00", "BirthDate": "1937-09-19 00:00:00", "City": "Redmond", "Address": "4110 Old Redmond Rd." }, { "EmployeeID": 5, "FirstName": "Steven", "LastName": "Buchanan", "ReportsTo": 2, "Country": "UK", "Title": "Sales Manager", "HireDate": "1993-10-17 00:00:00", "BirthDate": "1955-03-04 00:00:00", "City": "London", "Address": "14 Garrett Hill" }, { "EmployeeID": 6, "FirstName": "Michael", "LastName": "Suyama", "ReportsTo": 5, "Country": "UK", "Title": "Sales Representative", "HireDate": "1993-10-17 00:00:00", "BirthDate": "1963-07-02 00:00:00", "City": "London", "Address": "Coventry House Miner Rd." }, { "EmployeeID": 7, "FirstName": "Robert", "LastName": "King", "ReportsTo": 5, "Country": "UK", "Title": "Sales Representative", "HireDate": "1994-01-02 00:00:00", "BirthDate": "1960-05-29 00:00:00", "City": "London", "Address": "Edgeham Hollow Winchester Way" }, { "EmployeeID": 8, "FirstName": "Laura", "LastName": "Callahan", "ReportsTo": 2, "Country": "USA", "Title": "Inside Sales Coordinator", "HireDate": "1994-03-05 00:00:00", "BirthDate": "1958-01-09 00:00:00", "City": "Seattle", "Address": "4726 - 11th Ave. N.E." }, { "EmployeeID": 9, "FirstName": "Anne", "LastName": "Dodsworth", "ReportsTo": 5, "Country": "UK", "Title": "Sales Representative", "HireDate": "1994-11-15 00:00:00", "BirthDate": "1966-01-27 00:00:00", "City": "London", "Address": "7 Houndstooth Rd." }];
+
+            //// prepare the data
+            var source =
+            {
+                dataType: "json",
+                dataFields: [
+                    { name: 'EmployeeID', type: 'number' },
+                    { name: 'ReportsTo', type: 'number' },
+                    { name: 'FirstName', type: 'string' },
+                    { name: 'LastName', type: 'string' },
+                    { name: 'Country', type: 'string' },
+                    { name: 'City', type: 'string' },
+                    { name: 'Address', type: 'string' },
+                    { name: 'Title', type: 'string' },
+                    { name: 'HireDate', type: 'date' },
+                    { name: 'BirthDate', type: 'date' }
+                ],
+                hierarchy:
+                {
+                    keyDataField: { name: 'EmployeeID' },
+                    parentDataField: { name: 'ReportsTo' }
+                },
+                id: 'EmployeeID',
+                localData: employees
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            // create Tree Grid
+            $("#treeGrid").jqxTreeGrid(
+            {
+                width: 600,
+                source: dataAdapter,
+                ready: function () {
+                    // expand row with 'EmployeeKey = 2'
+                    $("#treeGrid").jqxTreeGrid('expandRow', 2);
+                },
+                columns: [
+                  { text: 'First Name', dataField: 'FirstName', minWidth: 100, width: 200 },
+                  { text: 'Last Name', dataField: 'LastName', width: 200 },
+                  { text: 'City', dataField: 'City' }
+                ]
+            });
+
+            // create buttons, listbox and the columns chooser dropdownlist.
+            $("#applyFilter").jqxButton();
+            $("#clearfilter").jqxButton();
+            $("#filterbox").jqxListBox({ checkboxes: true, width: 160, height: 250 });
+            $("#columnchooser").jqxDropDownList({
+                autoDropDownHeight: true, selectedIndex: 0, width: 160, height: 25,
+                source: [{ label: 'First Name', value: 'FirstName' },
+                  { label: 'Last Name', value: 'LastName' },
+                  { label: 'City', value: 'City' }
+                ]
+            });
+
+            // updates the listbox with unique records depending on the selected column.
+            var updateFilterBox = function (dataField) {
+                $("#treeGrid").jqxTreeGrid('clearFilters');
+                var filterBoxAdapter = new $.jqx.dataAdapter(source,
+                {
+                    uniqueDataFields: [dataField],
+                    async: false,
+                    autoBind: true
+                });
+                var uniqueRecords = filterBoxAdapter.records;
+                uniqueRecords.splice(0, 0, '(Select All)');
+                $("#filterbox").jqxListBox({ source: uniqueRecords, displayMember: dataField });
+                $("#filterbox").jqxListBox('checkAll');
+            }
+
+            updateFilterBox('FirstName');
+
+            // handle select all item.
+            var handleCheckChange = true;
+            $("#filterbox").on('checkChange', function (event) {
+                if (!handleCheckChange)
+                    return;
+                                 
+                if (event.args.label != '(Select All)') {
+                    // update the state of the "Select All" listbox item.
+
+                    handleCheckChange = false;
+                    $("#filterbox").jqxListBox('checkIndex', 0);
+                    var checkedItems = $("#filterbox").jqxListBox('getCheckedItems');
+                    var items = $("#filterbox").jqxListBox('getItems');
+
+                    if (checkedItems.length == 1) {
+                        $("#filterbox").jqxListBox('uncheckIndex', 0);
+                    }
+                    else if (items.length != checkedItems.length) {
+                        $("#filterbox").jqxListBox('indeterminateIndex', 0);
+                    }
+                    handleCheckChange = true;
+                }
+                else {
+                    // check/uncheck all items if "Select All" is clicked.
+                    handleCheckChange = false;
+                    if (event.args.checked) {
+                        $("#filterbox").jqxListBox('checkAll');
+                    }
+                    else {
+                        $("#filterbox").jqxListBox('uncheckAll');
+                    }
+
+                    handleCheckChange = true;
+                }
+            });
+
+            // handle columns selection.
+            $("#columnchooser").on('select', function (event) {
+                updateFilterBox(event.args.item.value);
+            });
+
+            // builds and applies the filter.
+            var applyFilter = function (dataField) {
+                $("#treeGrid").jqxTreeGrid('clearFilters');
+                var filtertype = 'stringfilter';
+         
+                // create a new group of filters.
+                var filtergroup = new $.jqx.filter();
+                // get listbox's checked items.
+                var checkedItems = $("#filterbox").jqxListBox('getCheckedItems');
+                if (checkedItems.length == 0) {
+                    var filter_or_operator = 1;
+                    var filtervalue = "Empty";
+                    var filtercondition = 'equal';
+                    var filter = filtergroup.createfilter(filtertype, filtervalue, filtercondition);
+                    filtergroup.addfilter(filter_or_operator, filter);
+                }
+                else {
+                    for (var i = 0; i < checkedItems.length; i++) {
+                        var filter_or_operator = 1;
+                        // set filter's value.
+                        var filtervalue = checkedItems[i].label;
+                        // set filter's condition.
+                        var filtercondition = 'equal';
+                        // create new filter.
+                        var filter = filtergroup.createfilter(filtertype, filtervalue, filtercondition);
+                        // add the filter to the filter group.
+                        filtergroup.addfilter(filter_or_operator, filter);
+                    }
+                }
+
+                // add the filters.
+                $("#treeGrid").jqxTreeGrid('addFilter', dataField, filtergroup);
+                // apply the filters.
+                $("#treeGrid").jqxTreeGrid('applyFilters');
+            }
+
+            // clears the filter.
+            $("#clearfilter").click(function () {
+                $("#treeGrid").jqxTreeGrid('clearFilters');
+            });
+
+            // applies the filter.
+            $("#applyFilter").click(function () {
+                var dataField = $("#columnchooser").jqxDropDownList('getSelectedItem').value;
+                applyFilter(dataField);
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style="float: left;">
+        <div style="float: left">
+            <div>Filter By:</div>
+            <div id="columnchooser"></div>
+            <div style="margin-top: 10px;" id="filterbox"></div>
+            <div style="margin-top: 10px;">
+                <input type="button" id="applyFilter" value="Apply Filter" />
+                <input type="button" id="clearfilter" value="Clear Filter" />
+            </div>
+        </div>
+        <div style="margin-left: 20px; float: left" id="treeGrid">
+        </div>
+    </div>
+</body>
+</html>

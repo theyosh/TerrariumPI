@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>To switch the widget to a right-to-left representation, just enable a single property - "rtl". When this property is on, the widget itself is mirrored (the layout of its UI elements is reversed).</title>   
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.culture.he-IL.js"></script>
+</head>
+<body>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {               
+                // Create a jqxDateTimeInput
+                $("#jqxWidget").jqxDateTimeInput({ width: '250px', height: '25px', rtl: true,  culture: 'he-IL' });
+            });
+        </script>
+        <div id='jqxWidget'>
+        </div>
+    </div>
+</body>
+</html>

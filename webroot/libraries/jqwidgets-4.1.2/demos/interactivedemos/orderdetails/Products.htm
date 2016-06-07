@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.metro.css" type="text/css" />
+    <link rel="stylesheet" href="../../../styles/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../styles/bootstrap-theme.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.edit.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            'use strict';
+            var source =
+            {
+                url: 'data.php?usedwidget=productsgrid',
+                datatype: 'json',
+                updaterow: function (rowid, rowdata, commit)
+                {
+                    commit(true);
+                },
+                datafields: [
+                    { name: 'productID', type: 'string' },
+                    { name: 'name', type: 'string' },
+                    { name: 'price', type: 'float' },
+                    { name: 'unitsInStock', type: 'int' }
+                ]
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $('#products').jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter,
+                height: 680,
+                theme: 'metro',
+                pageable: true,
+                pagesize: 25,
+                pagesizeoptions: ['10', '15', '25'],
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                editable: true,
+                selectionmode: 'multiplecellsadvanced',
+                columns: [
+                  { text: 'Product ID', datafield: 'productID', cellsalign: 'left', width: '10%' },
+                  { text: 'Name', datafield: 'name', cellsalign: 'left', align: 'left', width: '40%' },
+                  { text: 'Price', datafield: 'price', align: 'right', cellsalign: 'right', cellsformat: 'c2', width: '25%' },
+                  { text: 'Units in Stock', datafield: 'unitsInStock', cellsalign: 'right', align: 'right', width: '25%' }
+                ]
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container" style="overflow:hidden;">
+        <div id="products"></div>
+    </div>
+</body>
+</html>

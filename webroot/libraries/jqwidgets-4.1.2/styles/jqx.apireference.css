@@ -1,0 +1,107 @@
+﻿.documentation-option {
+    font-family: "Ek Mukta", sans-serif;
+     font-size: 14px;
+    line-height: 1.6;
+    width: 100%;
+    text-indent: 0px;
+    white-space: nowrap;
+    list-style-type: none;
+}
+
+.documentation-option-description {
+    font-family: "Ek Mukta", sans-serif;
+     font-size: 14px;
+    line-height: 1.6;
+    cursor: text;
+    color: #000;
+    max-width:100%;
+}
+
+.documentation-code {
+    cursor: text;
+    display: block;
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 1em;
+}
+
+    .documentation-code strong {
+        color: #000;
+    }
+
+
+.documentation-option-type-click {
+    text-align: left;
+     font-family: "Ek Mukta", sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #0b559b;
+    cursor: pointer;
+    -webkit-transition: color 0.3s ease 0s;
+    -moz-transition: color 0.3s ease 0s;
+    -ms-transition: color 0.3s ease 0s;
+    -o-transition: color 0.3s ease 0s;
+    transition: color 0.3s ease 0s;
+}
+
+    .documentation-option-type-click:hover {
+        color: #00a2e8;
+        cursor: pointer;
+    }
+
+.documentation-table {
+     font-family: "Ek Mukta", sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: left;
+    vertical-align: top;
+    float: left;
+    width: 100%;
+}
+
+    .documentation-table th {
+        width: 33%;
+        vertical-align: top;
+        text-align: left;
+    }
+
+    .documentation-table td {
+        width: 33%;
+        vertical-align: top;
+        text-align: left;
+    }
+.search {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  width:250px;
+  overflow: hidden; }
+
+  .search input {
+    font-family: "Ek Mukta", sans-serif;
+     line-height: 40px; }
+  .search input[type="text"] {
+    height: 40px;
+    width: 92%;
+    padding: 0 4%;
+    border: none;
+    background: #F2F2F2;
+    transition: 0.2s all ease-out; }
+    .search input[type="text"]::-webkit-input-placeholder {
+      color: #919299;
+      transition: 0.2s all ease-out; }
+    .search input[type="text"]:-moz-placeholder {
+      color: #919299;
+      transition: 0.2s all ease-out; }
+    .search input[type="text"]::-moz-placeholder {
+      color: #919299;
+      transition: 0.2s all ease-out; }
+    .search input[type="text"]:-ms-input-placeholder {
+      color: #919299;
+      transition: 0.2s all ease-out; }
+    .search input[type="text"]:focus {
+      background-color: #FFF; }
+#properties {
+    overflow-x:auto;
+}

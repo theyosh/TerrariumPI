@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title id='Description'>JavaScript NavBar - Mobile Example</title>
+    <link rel="stylesheet" href="../styles/demo.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.windowsphone.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.blackberry.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.android.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.mobile.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../simulator.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxnavbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = prepareSimulator("navBar");
+
+            $("#navBar").jqxNavBar({theme: theme, minimizedTitle: "Laptops", minimized: true, minimizedHeight: 50, height: '100%', selectedItem: 0 });
+
+            initSimulator("navBar");
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="demoContainer" class="device-mobile">
+        <div id="container" class="device-mobile-container">
+            <div id="navBar">
+                <ul>
+                    <li>Acer</li>
+                    <li>Asus</li>
+                    <li>Apple</li>
+                    <li>Dell</li>
+                    <li>Lenovo</li>
+                    <li>HP</li>
+                    <li>Toshiba</li>
+                    <li>Fujitsu</li>
+                </ul>
+            </div> 
+        </div>
+    </div>
+</body>
+</html>

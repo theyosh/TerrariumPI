@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>This demo demonstrates how to trigger the AngularJS Calendar's valueChanged
+        and nextButtonClick and backButtonClick events.</title>
+ <meta name="description" content="AngularJS Calendar example. This example demonstrates how to bind to events of the Calendar." /> 
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+         <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script><script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/globalization/globalize.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            $scope.eventHandler = function (event) {
+                var date = event.args.date;
+                var view = event.args.view;
+                var viewFrom = view.from;
+                var viewTo = view.to;
+                if (event.type == 'viewChange') {
+                    $scope.log = 'Event Type: viewChange Date: ' + date + ', View: ' + viewFrom + ' - ' + viewTo;
+                }
+                else {
+                    $scope.log = 'Event Type: change, Date: ' + date;
+                }
+            };
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-calendar jqx-width="220" jqx-height="220" jqx-on-change="eventHandler(event)" jqx-on-view-change="eventHandler(event)"></jqx-calendar>
+    <br />
+    <div style="font-family: 'segoe ui', arial, sans-serif;">
+        {{log}}
+    </div>
+</body>
+</html>

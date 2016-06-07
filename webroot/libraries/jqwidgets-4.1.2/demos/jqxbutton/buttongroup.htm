@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>The jqxButtonGroup widget creates a set of buttons that can work as normal buttons, radio buttons or checkboxes.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttongroup.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxradiobutton.js"></script>
+</head>
+<body class='default'>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {                
+                // Create jqxButton widgets.
+                $("#jqxWidget").jqxButtonGroup({ mode: 'default' });
+
+                $("#defaultMode").jqxRadioButton({checked: true});
+                $("#radioMode").jqxRadioButton();
+                $("#checkboxMode").jqxRadioButton();
+
+                $("#checkboxMode").on('checked', function () {
+                    $("#jqxWidget").jqxButtonGroup({ mode: 'checkbox' });
+                });
+                $("#defaultMode").on('checked', function () {
+                    $("#jqxWidget").jqxButtonGroup({ mode: 'default' });
+                });
+                $("#radioMode").on('checked', function () {
+                    $("#jqxWidget").jqxButtonGroup({ mode: 'radio' });
+                });
+
+                $("#jqxWidget").on('buttonclick', function (event) {
+                    var clickedButton = event.args.button;
+                    $("#eventsLog").text("Clicked: " + clickedButton[0].id);
+                });
+            });
+        </script>
+        <div id='jqxWidget'>
+            <button style="padding:4px 16px;" id="Left">
+                Left</button>
+            <button style="padding:4px 16px;" id="Center">
+                Center</button>
+            <button style="padding:4px 16px;" id="Right">
+                Right</button>
+        </div>
+        <div style="margin-top: 10px;">
+            <h4>
+                Modes</h4>
+            <div style="margin: 3px;" id="defaultMode">
+                Default</div>
+            <div style="margin: 3px;" id="radioMode">
+                RadioButtons</div>
+            <div style="margin: 3px;" id="checkboxMode">
+                CheckBoxes</div>
+        </div>
+        <div id="eventsLog" style="margin-top: 10px;">
+        </div>
+    </div>
+</body>
+</html>

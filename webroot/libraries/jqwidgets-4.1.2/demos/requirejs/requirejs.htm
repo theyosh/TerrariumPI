@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">RequireJS Integration</title>
+    <script type="text/javascript" data-main="requirejs-main" src="../../scripts/require.js"></script>
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+</head>
+<body>
+    <div id='jqxTree' style="visibility: hidden;">
+        <ul>
+            <li item-selected='true'>Home</li>
+            <li item-expanded='true'>Solutions
+                <ul>
+                    <li>Education</li>
+                    <li>Financial services</li>
+                    <li>Government</li>
+                    <li>Manufacturing</li>
+                    <li>Solutions
+                        <ul>
+                            <li>Consumer photo and video</li>
+                            <li>Mobile</li>
+                            <li>Rich Internet applications</li>
+                            <li>Technical communication</li>
+                            <li>Training and eLearning</li>
+                            <li>Web conferencing</li>
+                        </ul>
+                    </li>
+                    <li>All industries and solutions</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
+
+<!--=====requirejs-main.js======
+require.config({
+    paths: {
+        "jQuery": "../../scripts/jquery-1.10.2.min",
+        "jqxcore": "../../jqwidgets/jqxcore",
+        "jqxbuttons": "../../jqwidgets/jqxbuttons",
+        "jqxpanel": "../../jqwidgets/jqxpanel",
+        "jqxscrollbar": "../../jqwidgets/jqxscrollbar",
+        "jqxtree": "../../jqwidgets/jqxtree",
+        "demos": "../../scripts/demos"
+    },
+    shim: {
+        "jqxcore": {
+            export: "$",
+            deps: ['jQuery']
+        },
+        "jqxbuttons": {
+            export: "$",
+            deps: ['jQuery', "jqxcore"]
+        },
+        "jqxpanel": {
+            export: "$",
+            deps: ['jQuery', "jqxcore"]
+        },
+        "jqxscrollbar": {
+            export: "$",
+            deps: ['jQuery', "jqxcore"]
+        },
+        "jqxtree": {
+            export: "$",
+            deps: ['jQuery', "jqxcore"]
+        }
+    }
+});
+require(["requirejs-app"], function (App) {
+    App.initialize();
+});
+
+
+
+====requirejs-app.js=====
+define(["jQuery", "demos", "jqxcore", "jqxbuttons", "jqxtree", "jqxpanel", "jqxscrollbar"], function () {
+    var initialize = function () {
+        $(document).ready(function () {
+            $('#jqxTree').jqxTree({ height: '300px', width: '300px' });
+            $('#jqxTree').css("visibility", "visible");
+        });
+    };
+    return {
+        initialize: initialize
+    };
+});-->

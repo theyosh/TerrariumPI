@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>The first field is validated. You should enter more than 5 characters.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.filter.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.edit.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.columnsresize.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="generatedata.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var data = generatedata(10);
+            var source =
+            {
+                localdata: data,
+                datafields:
+                [
+                    { name: 'name', type: 'string' },
+                    { name: 'productname', type: 'string' },
+                    { name: 'available', type: 'bool' },
+                    { name: 'date', type: 'date'},
+                    { name: 'quantity', type: 'number' }
+                ],
+                datatype: "array"
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            // validation function
+            var validateFunc = function (datafield, value) {
+                switch (datafield) {
+                    case "name":
+                        if (value.length < 5) {
+                            return { message: "Entered value should be more than 5 characters", result: false };
+                        }
+                        return true;
+                    case "productname":
+                        if (value.length == 0) {
+                            return { message: "Entered field should be more than 0 characters", result: false };
+                        }
+                        return true;
+                        break;
+                    case "quantity":
+                        if (value < 0) {
+                            return { message: "Entered quantity should be positive number", result: false };
+                        }
+                        return true;
+                        break;
+                    case "date":
+                        if (new Date(value) == "Invalid Date") {
+                            return { message: "Entered date should be valid", result: false };
+                        }
+                        return true;
+                        break;
+                }
+                return true;
+            }
+
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 850,
+                filterable: true,
+                source: dataAdapter,
+                showeverpresentrow: true,
+                everpresentrowposition: "top",
+                editable: true,
+                selectionmode: 'multiplecellsadvanced',
+                columns: [
+                  {
+                      text: 'Name', columntype: 'textbox', filtertype: 'input', datafield: 'name', width: 215,
+                      validateEverPresentRowWidgetValue: validateFunc
+                  },
+                  {
+                      text: 'Product', filtertype: 'checkedlist', datafield: 'productname', width: 220, validateEverPresentRowWidgetValue: validateFunc
+                  },
+                  { text: 'Ship Date', datafield: 'date', filtertype: 'range', width: 210, cellsalign: 'right', cellsformat: 'd', validateEverPresentRowWidgetValue: validateFunc },
+                  { text: 'Qty.', datafield: 'quantity', filtertype: 'number', cellsalign: 'right', validateEverPresentRowWidgetValue: validateFunc }
+                ]
+            });
+
+            $("#top").jqxRadioButton({ checked: true });
+            $("#bottom").jqxRadioButton();
+            $("#top").on('checked', function () {
+                $("#jqxgrid").jqxGrid('everpresentrowactions', 'add reset');
+            });
+            $("#bottom").on('checked', function () {
+                $("#jqxgrid").jqxGrid('everpresentrowactions', 'addBottom reset');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="jqxgrid">
+    </div><br />
+    <div id="top">Add New Row to Top</div>
+    <div id="bottom">Add New Row to Bottom</div>
+</body>
+</html>

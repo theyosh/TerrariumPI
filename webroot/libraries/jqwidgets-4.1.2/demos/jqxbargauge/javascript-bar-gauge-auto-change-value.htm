@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This demo demonstrates auto changing values, related to the background color of the jqxBarGauge.</title>
+    <meta name="description" content="Bar Gauge widget with changing values" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbargauge.js"></script>
+    <script>
+        $(document).ready(function ()
+        {
+            var values = [];
+            var barGaugePalette = ['#307DD7', '#AA4643', '#89A54E', '#71588F', '#4198AF'];
+
+            $('#jqxbargauge').jqxBarGauge({
+                width: "100%",
+                height: 600,
+                values: [25],
+                relativeInnerRadius: 0.6,
+                formatFunction: function (value, index, color)
+                {
+                    if (value < 20)
+                    {
+                        return barGaugePalette[0];
+                    }
+                    if (value < 40)
+                    {
+                        return barGaugePalette[1];
+                    }
+                    if (value < 60)
+                    {
+                        return barGaugePalette[2];
+                    }
+                    if (value < 80)
+                    {
+                        return barGaugePalette[3];
+                    }
+                    if (value <= 100)
+                    {
+                        return barGaugePalette[4];
+                    }
+                }
+            });
+
+            var loop = 0;
+            $('#jqxbargauge').on("drawEnd", function ()
+            {
+                values[0] = getRandomInt(1, 99);
+                setTimeout(function ()
+                {
+                    $('#jqxbargauge').jqxBarGauge("val", values);
+                }, 1000);
+            });
+
+            function getRandomInt(min, max)
+            {
+                return Math.floor(Math.random() * (max - min)) + min;
+            }
+        });
+    </script>
+</head>
+<body>
+      <div id='jqxbargauge'></div>
+</body>
+</html>

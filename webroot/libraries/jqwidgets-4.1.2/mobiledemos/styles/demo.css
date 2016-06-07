@@ -1,0 +1,184 @@
+﻿html, body 
+{
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    font-size: 16px;
+}
+body {
+    visibility: hidden;
+}
+.mobile-container {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+    font-size: 16px;
+    -moz-box-sizing: border-box;
+    box-sizing:border-box;
+    padding-top: 40px;
+    padding-bottom: 5px;
+}
+.device-mobile {
+    font-family: HelveticaNeue,sans-serif;
+    margin: 10px;
+    margin-left: 50%;
+    left: -200px;
+    position: relative;
+    width: 400px;
+    height: 800px;
+    overflow: hidden;
+    background-image: url(../../images/iphone.png);
+    background-repeat: no-repeat;
+    padding-left: 41px;
+    padding-top: 119px;
+}
+.device-mobile-container {
+    background: #d9dcdf;
+    height: 567px;
+    width: 319px;
+    overflow: hidden;  
+}
+.device-mobile-tablet {
+    width: 680px; height: 532px;  
+    overflow: hidden; 
+    background-image: url(../../images/ipad.png);
+    background-repeat: no-repeat;
+    padding-left: 70px;
+    padding-top: 70px; 
+    margin: 5px;
+    font-family: HelveticaNeue,sans-serif;
+    margin-left: 50%;
+    left: -330px;
+    position: relative;
+}
+.device-mobile-tablet-container {
+    width: 537px;
+    height: 390px;
+    overflow: hidden;  
+    background: #d9dcdf;
+}
+.device-blackberry-tablet {
+    margin: 10px;
+    width: 680px; height: 532px; 
+    overflow: hidden; 
+    background-image: url(../../images/blackberry-tablet.png);
+    background-repeat: no-repeat;
+    padding-left: 70px;
+    padding-top: 70px; 
+    font-family: Slate Pro, Slate, Helvetica, sans-serif;
+    margin-left: 50%;
+    left: -334px;
+    position: relative;
+}
+.device-blackberry-tablet-container {
+    width: 537px;
+    height: 315px;
+    overflow: hidden;  
+}
+.device-android-tablet {
+    margin: 10px;
+    width: 680px;
+    height: 532px; 
+    overflow: hidden; 
+    background-image: url(../../images/android-tablet.png);
+    background-repeat: no-repeat;
+    padding-left: 59px;
+    padding-top: 58px; 
+    font-family: Roboto,HelveticaNeue,sans-serif;
+    margin-left: 50%;
+    left: -330px;
+    position: relative;
+}
+.device-android-tablet-container {
+    width: 556px;
+    height: 325px;
+    overflow: hidden;  
+}
+.device-android {
+    margin: 10px;
+    width: 383px; 
+    height: 731px;
+    overflow: hidden; 
+    background-image: url(../../images/galaxys4.png);
+    background-repeat: no-repeat;
+    padding-left: 25px;
+    padding-top: 78px;
+    font-family: Roboto,HelveticaNeue,sans-serif;
+    margin-left: 50%;
+    left: -191px;
+    position: relative;
+}
+.device-android-container {
+    height: 587px; 
+    width: 333px;
+    background: black;
+    overflow: hidden;  
+    color: white;
+}
+.device-win8-tablet {
+    margin: 10px;
+    width: 613px;
+    height: 532px; 
+    overflow: hidden; 
+    background-image: url(../../images/windows-tablet.png);
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    padding-top: 38px; 
+    font-family: 'Segoe WP';
+    margin-left: 50%;
+    left: -306px;
+    position: relative;
+}
+.device-win8-tablet-container {
+    width: 535px;
+    height: 302px;
+    overflow: hidden;  
+    background: black; 
+    color: white;
+}
+.device-win8 {
+    margin: 10px;
+    width: 383px; 
+    height: 731px;
+    overflow: hidden; 
+    background-image: url(../../images/nokia.png);
+    background-repeat: no-repeat;
+    padding-left: 30px;
+    padding-top: 78px;
+    font-family: 'Segoe WP';
+    margin-left: 50%;
+    left: -191px;
+    position: relative;
+}
+.device-win8-container {
+    height: 615px; 
+    width: 319px;
+    background: black;
+    overflow: hidden;  
+    color: white;
+}
+.device-blackberry {
+    margin: 10px;
+    width: 400px;
+    height: 794px;
+    overflow: hidden;
+    background-image: url(../../images/blackberry.png);
+    background-repeat: no-repeat;
+    padding-left: 30px;
+    padding-top: 114px;
+    font-family: Slate Pro, Slate, Helvetica, sans-serif;
+    margin-left: 50%;
+    left: -200px;
+    position: relative;
+}
+.device-blackberry-container {
+    background-repeat: no-repeat;
+    height: 558px;
+    width: 336px;
+    overflow: hidden;  
+    color: white;
+}

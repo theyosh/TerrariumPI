@@ -1,0 +1,1291 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../Styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="jQuery, BarGauge, jqxBarGauge, BarGauge method" />
+    <meta name="description" content="This page represents the help documentation of the jqxBarGauge widget." />
+    <title>jqxBarGauge API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            $(".documentation-option-type-click").click(function (event)
+            {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="properties">
+        <h2 class="documentation-top-header">
+            Properties
+        </h2>
+        <table class="documentation-table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Default
+                </th>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span1'>animationDuration</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    1000
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Determines the animation in milliseconds. To disable this property - set it to<strong>0</strong> (zero).
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+<pre><code>
+// select the BarGauge element and set the animation settings.
+$('#jqxBarGauge').jqxBarGauge({
+    values: values,
+    animationDuration: 500
+});
+</code></pre>
+                        <p>
+                            Get the <code>animation</code> property.
+                        </p>
+                        <pre><code>var animationDuration = $('#jqxBarGauge').jqxBarGauge('animationDuration');</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-animation-property">animation is set to 0.5 seconds duration</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span2'>backgroundColor</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    '#e0e0e0'
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the jqxBarGauge background color.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>backgroundColor</code> property.
+                        </p>
+                        <pre><code>$('#jqxBarGauge').jqxBarGauge({ backgroundColor: 'rosybrown' });</code></pre>
+                        <p>
+                            Get the <code>backgroundColor</code> property.
+                        </p>
+                        <pre><code>var backgroundColor = $('#jqxBarGauge').jqxBarGauge('backgroundColor');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-backgroundcolor-property">backgroundColor is set to 'mistyrose'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span3'>barSpacing</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    4
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the space between the segments of the jqxBarGauge.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>barSpacing</code> property.
+                        </p>
+                        <pre><code>$('#jqxBarGauge').jqxBarGauge({ barSpacing: 2 });</code></pre>
+                        <p>
+                            Get the <code>barSpacing</code> property.
+                        </p>
+                        <pre><code>var barSpacing = $('#jqxBarGauge').jqxBarGauge('barSpacing');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-barspacing-property">barSpacing is set to '12'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span4'>baseValue</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    null
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets the base value of jqxBarGauge.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>baseValue</code> property.
+                        </p>
+                        <pre><code>$('#jqxBarGauge').jqxBarGauge({ baseValue: 10 });</code></pre>
+                        <p>
+                            Get the <code>baseValue</code> property.
+                        </p>
+                        <pre><code>var baseValue = $('#jqxBarGauge').jqxBarGauge('baseValue');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-basevalue-property">baseValue is set to '30'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span12'>colorScheme</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    'scheme01'
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets the jqxBarGauge's color palette. jqxBarGauge suppports 27 color schemes from 'scheme01' to 'scheme27'. I's possible to set custom scheme in combination with "customColorScheme" property.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>colorScheme</code> property.
+                        </p>
+                        <pre><code>$('#jqxBarGauge').jqxBarGauge({ colorScheme: 'scheme06' });</code></pre>
+                        <p>
+                            Get the <code>colorScheme</code> property.
+                        </p>
+                        <pre><code>var colorScheme = $('#jqxBarGauge').jqxBarGauge('colorScheme');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-colorscheme-property">colorScheme is set to 'scheme02'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span12'>customColorScheme</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    'scheme01'
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets custom color palette in the BarGauge. This is used in combination with "colorScheme" property.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>customColorScheme</code> property.
+                        </p>
+                        <pre><code>
+$('#jqxBarGauge').jqxBarGauge({ 
+    colorScheme: 'customColors',
+    customColorScheme: {
+        name: 'customColors',
+        colors: ["blue", "green", "red"]
+    }
+});</code></pre>
+                        <br />
+                        CustomColorScheme Properties:
+
+                        <ul>
+                            <li>name - sets the name of color scheme, corresponding with the value of "colorScheme" property.</li>
+                            <li>colors - sets the array of colors.</li>
+                        </ul>
+
+                        <p>
+                            Get the <code>customColorScheme</code> property.
+                        </p>
+                        <pre><code>var customColorScheme = $('#jqxBarGauge').jqxBarGauge('customColorScheme');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-customcolorscheme-property">customColorScheme is set to custom colors</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span5'>disabled</span>
+                </td>
+                <td>
+                    <span>Boolean</span>
+                </td>
+                <td>
+                    false
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the values of the disabled property of jqxBarGauge. By default is false.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>disabled</code> property.
+                        </p>
+                        <pre><code>$('#jqxBarGauge').jqxBarGauge({ disabled: true });</code></pre>
+                        <p>
+                            Get the <code>disabled</code> property.
+                        </p>
+                        <pre><code>var disabled = $('#jqxBarGauge').jqxBarGauge('disabled');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-disabled-property">disabled is set to false</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span6'>endAngle</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    0
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the endAngle of the BarGauge. Used to create geometry of the arc in the space.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>endAngle</code> property.
+                        </p>
+<pre><code>
+$('#jqxBarGauge').jqxBarGauge({
+    startAngle: 320,
+    endAngle: 0
+});
+</code></pre>
+                        <p>
+                            Get the <code>endAngle</code> property.
+                        </p>
+                        <pre><code>var endAngle = $('#jqxBarGauge').jqxBarGauge('endAngle');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-endangle-property">endAngle is set to custom degrees</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span6'>formatFunction</span>
+                </td>
+                <td>
+                    <span>Object</span>
+                </td>
+                <td>
+                    null
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the formatFunction of the BarGauge. Used to make changes on the particular segment.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>formatFunction</code> property.
+                        </p>
+<pre><code>
+$('#jqxBarGauge').jqxBarGauge({
+    formatFunction: {
+        value: 45,
+        index: 0,
+        color: '#CA71AF'
+    }
+});
+</code></pre>
+                        <br />
+                        <p>
+                            The formatFunction is a string or object with properties.
+                        </p>
+                        <ul>
+                            <li>value - set value of the segment with expected index.</li>
+                            <li>index - set index of the BarGauge that will be changed.</li>
+                            <li>color - set color.</li>
+                        </ul>
+                        <p>
+                            Get the <code>formatFunction</code> property.
+                        </p>
+                        <pre><code>var formatFunction = $('#jqxBarGauge').jqxBarGauge('formatFunction');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-formatfunction-property">formatFunction is set with custom settings</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span16'>height</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    400
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the BarGauge's height.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>height</code> property.
+                        </p>
+                        <pre><code>$('#jqxBarGauge').jqxBarGauge({ height: 450 });</code></pre>
+                        <p>
+                            Get the <code>height</code> property.
+                        </p>
+                        <pre><code>var height = $('#jqxBarGauge').jqxBarGauge('height');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-height-property">height is set to 900</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span7'>labels</span>
+                </td>
+                <td>
+                    <span>Object</span>
+                </td>
+                <td>
+                    null
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This property is used to make fine settings on BarGauge labels at each segment.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>labels</code> property.
+                        </p>
+<pre><code>
+$('#jqxBarGauge').jqxBarGauge({
+    values: values,
+    labels: {
+        connectorColor: 'red',
+        connectorWidth: 1,
+        font: {
+            color: 'darkseagreen',
+            size: 12,
+        },
+        formatFunction: function (value, index) {
+            return value + ' €';
+        }
+        indent: 15,
+        precision: 1,
+        visible: true
+    }
+});
+</code></pre>
+                        Labels Properties:
+
+                        <ul>
+                            <li>connectorColor - sets the connector's color of the BarGauge can set this color as a string.</li>
+                            <li>connectorWidth - sets the connector's width of the BarGauge.</li>
+                            <li>
+                                font - sets the font of the labels in jqxBarGauge. This is an object with following members:
+                                <ul>
+                                    <li>color - sets the color of the labels.</li>
+                                    <li>family - sets the font family of the labels.</li>
+                                    <li>size - sets the size of the labels.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                formatFunction - sets a custom rendering function. The formatFunction function is called when a labels is appearing in the jqxBarGauge. You can use it to override the built-in labels rendering.
+                                The formatFunction function has 1 parameter passed by jqxBarGauge - value that is rendered by the BarGauge.<br />
+                                With following members:
+                                <ul>
+                                    <li>index - set index</li>
+                                    <li>value - set value</li>
+                                </ul>
+                            </li>
+                            <li>indent - sets the indent of the BarGauge. The distance of the last segment to the labels.</li>
+                            <li>precision - sets the precision of the displayed values in the BarGauge.</li>
+                            <li>visible - sets the visible of the BarGauge. Acceptable values: true or false.</li>
+                        </ul>
+                        <p>
+                            Get the <code>labels</code> property.
+                        </p>
+                        <pre><code>var labels = $('#jqxBarGauge').jqxBarGauge('labels');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-label-property">labels is set to { connectorColor: 'cornflowerblue', connectorWidth: 4, formatFunction: function (value) { return '(' + value + ')'; }, indent: 35, ... }</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span5'>max</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    100
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the end value of BarGauge.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>max</code> property.
+                        </p>
+                        <pre><code>$('#jqxBarGauge').jqxBarGauge({ max: 50 });</code></pre>
+                        <p>
+                            Get the <code>max</code> property.
+                        </p>
+                        <pre><code>var max = $('#jqxBarGauge').jqxBarGauge('max');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-endvalue-property">max is set to '60'</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span16'>min</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    0
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets BarGauge's min. This property specifies the beggining of the BarGauge's scale.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>min</code> property.
+                        </p>
+                        <pre><code>$('#jqxBarGauge').jqxBarGauge({ min: 0 });</code></pre>
+                        <p>
+                            Get the <code>min</code> property.
+                        </p>
+                        <pre><code>var min = $('#jqxBarGauge').jqxBarGauge('min');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-startvalue-property">min is set to -25</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span14'>relativeInnerRadius</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    0.3
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the relativeInnerRadius of jqxBarGauge. It's value represents the proportion between inner and outer radius.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>relativeInnerRadius</code> property.
+                        </p>
+                        <pre><code>$('#jqxBarGauge').jqxBarGauge({ relativeInnerRadius: 0.5 });</code></pre>
+                        <p>
+                            Get the <code>pathModified</code> property.
+                        </p>
+                        <pre><code>var relativeInnerRadius = $('#jqxBarGauge').jqxBarGauge('relativeInnerRadius');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-relativeinnerradius-property">relativeInnerRadius is set to 0</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span9'>rendered</span>
+                </td>
+                <td>
+                    <span>Function</span>
+                </td>
+                <td>
+                    null
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            This function is called when the BarGauge is initialized and the binding is complete.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>rendered</code> property.
+                        </p>
+                        <pre><code>
+$('#jqxBarGauge').jqxBarGauge({
+    rendered: function () {
+        // Create some functionality
+    }
+});
+                        </code></pre>
+                        <pre><code>var rendered = $('#jqxBarGauge').jqxBarGauge('rendered');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-rendered-property">rendered is set to a custom function</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span6'>startAngle</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    225
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the startAngle of the BarGauge. Used to create geometry of the arc in the space.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>startAngle</code> property.
+                        </p>
+<pre><code>
+$('#jqxBarGauge').jqxBarGauge({    
+    startAngle: 320,
+    endAngle: 0
+});
+</code></pre>
+                        <p>
+                            Get the <code>startAngle</code> property.
+                        </p>
+                        <pre><code>var startAngle = $('#jqxBarGauge').jqxBarGauge('startAngle');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-geometry-property">startAngle is set to custom degrees</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span16'>title</span>
+                </td>
+                <td>
+                    <span>Object|String</span>
+                </td>
+                <td>
+                    null
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the BarGauge's title. This property can be string or object with custom title settings.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>title</code> property.
+                        </p>
+                        <pre><code>
+$('#jqxBarGauge').jqxBarGauge({
+    values: [11, 22, 33, 55, 88, 143],
+    title: {
+        text: 'Ranking',
+        font: {
+            color: 'rosybrown',
+            size: 25,
+            opacity: 0.5,
+            family: "'Helvetica Neue', 'Arial'",
+            weight: 200
+        },
+        horizontalAlignment: 'center',
+        margin: {
+            bottom: 0,
+            left: 0,
+            right: 0,
+            top: 0
+        },
+        subtitle: {
+            text: '(top 100)',
+            font: {
+                color: 'mistyrose ',
+                family: 'MS Georgia',
+                opacity: 1,
+                size: 16,
+                weight: 200
+            }
+        },
+        verticalAlignment: 'top'
+    }
+});
+</code></pre>
+                        <br />
+                        The title is a string or object with properties.
+                        <br />
+                        <ul>
+                            <li>
+                                font - sets the font of the title in BarGauge. This is an object with following members:
+                                <ul>
+                                    <li>color - sets color for the text.</li>
+                                    <li>family - sets family for the text. For example: <code>family: 'MS Georgia'</code> 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', 'Verdana'.</li>
+                                    <li>opacity - sets opacity for the text. From 0 to 1 (ex. 0.45).</li>
+                                    <li>size - sets size for the text.</li>
+                                    <li>weight - sets weight for the text.</li>
+                                </ul>
+                            </li>
+                            <li>horizontalAlignment - horizontal position of the title. Possible values: 'center', 'left', 'right'</li>
+                            <li>
+                                margin - one value for space around the title. It is possible to set different space to each side:
+                                <ul>
+                                    <li>bottom - default value (<code>bottom: 0</code>)</li>
+                                    <li>left - default value (<code>left: 0</code>)</li>
+                                    <li>right - default value (<code>right: 0</code>)</li>
+                                    <li>top - default value (<code>top: 0</code>)</li>
+                                </ul>
+                            </li>
+                            <li>
+                                subtitle - sets subtitle of the BarGauge. Second way to set subtitle is with object.<br />
+                                Possible settings:
+                                <ul>
+                                    <li>text - content of the subtitle</li>
+                                    <li>
+                                        font - sets fine settings with object This is an object with following members:
+                                        <ul>
+                                            <li>color - set the color of the subtitle.</li>
+                                            <li>family - set the font family of the subtitle.</li>
+                                            <li>opacity - set the font opacity of the subtitle.</li>
+                                            <li>size - set the size of the subtitle.</li>
+                                            <li>weight - set the font weight of the subtitle.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>text - content of the title</li>
+                            <li>verticalAlignment - vertical position of the title. Possible values: 'top', 'bottom'</li>
+                        </ul>
+                        <p>
+                            Get the <code>title</code> property.
+                        </p>
+                        <pre><code>var title = $('#jqxBarGauge').jqxBarGauge('title');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-title-property">title is set custom settings</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span16'>tooltip</span>
+                </td>
+                <td>
+                    <span>Object</span>
+                </td>
+                <td>
+                    null
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the BarGauge's tooltip.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>tooltip</code> properties.
+                        </p>
+                        <pre><code>
+$('#jqxBarGauge').jqxBarGauge({
+    values: [11, 22, 33, 55, 88, 143],
+    tooltip: {
+       classname: "myTooltip",
+       formatFunction: function (value, index) {
+           return value + ' €';
+       },
+       visible: true,
+       precision: 0
+    }
+});
+</code></pre>
+                        <br />
+                        The tooltip is an object with following properties:
+                        <br />
+                        <ul>
+                            <li>classname - set a class for each one tooltip.</li>
+                            <li>
+                                formatFunction - This function is called when the user hover a segment of BarGauge and show details in desirable view.<br />
+                                With following members:
+                                <ul>
+                                    <li>index - set index</li>
+                                    <li>value - set value</li>
+                                </ul>
+                            </li>
+                            <li>precision - set a precision of the formatted value displayed in a tooltip.</li>
+                            <li>visible - set whether or not tooltips are visible in the BarGauge.</li>
+                        </ul>
+                        <p>
+                            Get the <code>tooltip</code> property.
+                        </p>
+                        <pre><code>var tooltip = $('#jqxBarGauge').jqxBarGauge('tooltip');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-tooltip-property">tooltip is set to a custom functionality</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span16'>useGradient</span>
+                </td>
+                <td>
+                    <span>Boolean</span>
+                </td>
+                <td>
+                    true
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets useGradient of the BarGauge. Change visualization of the segments between flat color or with gradient.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>useGradient</code> property.
+                        </p>
+                        <pre><code>$('#jqxBarGauge').jqxBarGauge({ useGradient: false });</code></pre>
+                        <p>
+                            Get the <code>useGradient</code> property.
+                        </p>
+                        <pre><code>var useGradient = $('#jqxBarGauge').jqxBarGauge('useGradient');</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-usegradient-property">useGradient is set to false</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span16'>values</span>
+                </td>
+                <td>
+                    <span>Array</span>
+                </td>
+                <td>
+                    []
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets array of values for the BarGauge.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>values</code> property.
+                        </p>
+                        <pre><code>$('#jqxBarGauge').jqxBarGauge({ values: [11, 22, 33, 55, 88, 143] });</code></pre>
+                        <p>
+                            Get the <code>values</code> property.
+                        </p>
+                        <pre><code>var values = $('#jqxBarGauge').jqxBarGauge('values');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-values-property">values is set to an array</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span16'>width</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    400
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets or gets the BarGauge's width.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Set the <code>width</code> property.
+                        </p>
+                        <pre><code>$('#jqxBarGauge').jqxBarGauge({ width: 850 });</code></pre>
+                        <p>
+                            Get the <code>width</code> property.
+                        </p>
+                        <pre><code>var width = $('#jqxBarGauge').jqxBarGauge('width');</code></pre>
+                        <div style="padding-bottom:5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-width-property">width is set to 850</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <h2 class="documentation-top-header">
+                        Events
+                    </h2>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span17'>drawEnd</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            The event is raised when the BarGauge finish rendering. Commonly used in combination with drawStart event.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>drawEnd</code> event by type: jqxBarGauge.
+                        </p>
+                        <pre><code>$('#jqxBarGauge').bind('drawEnd', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-drawend-event">Bind to the drawEnd event by type: jqxBarGauge.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span17'>drawStart</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            The event is raised when the BarGauge starts rendering again. Commonly used in combination with drawEnd event.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>drawStart</code> event by type: jqxBarGauge.
+                        </p>
+                        <pre><code>$('#jqxBarGauge').bind('drawStart', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-drawstart-event">Bind to the drawStart event by type: jqxBarGauge.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span17'>initialized</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Fires when the jqxBarGauge is rendered for the first time. The BarGauge is initialized.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>initialized</code> event by type: jqxBarGauge.
+                        </p>
+                        <pre><code>$('#jqxBarGauge').bind('initialized', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-initialized-event">Bind to the initialized event by type: jqxBarGauge.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span17'>tooltipClose</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Fires when a BarGauge's tooltip is closed.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>tooltipClose</code> event by type: jqxBarGauge.
+                        </p>
+                        <pre><code>$('#jqxBarGauge').on('tooltipClose', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-tooltipclose-event">Bind to the tooltipClose event by type: jqxBarGauge.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span17'>tooltipOpen</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Fires when a BarGauge's tooltip is open.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>tooltipOpen</code> event by type: jqxBarGauge.
+                        </p>
+                        <pre><code>$('#jqxBarGauge').on('tooltipOpen', function () { // Some code here. });</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-tooltipopen-event">Bind to the tooltipOpen event by type: jqxBarGauge.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span16'>valueChanged</span>
+                </td>
+                <td>
+                    <span>Event</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Fires after the values are changed.
+                        </p>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Bind to the <code>valueChanged</code> event by type: jqxBarGauge.
+                        </p>
+                        <pre><code>$('#jqxBarGauge').on('valueChanged', function () { // Some code here. }); </code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-valuechanged-event">Bind to the valueChanged event by type: jqxBarGauge.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <h2 class="documentation-top-header">
+                        Methods
+                    </h2>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span30'>refresh</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Refreshes the BarGauge.
+                        </p>
+
+                        <div class="methodArgs">
+                            <table class="arguments">
+                                <tbody>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Type</th>
+                                        <th style="display: none;">Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td><em>None</em></td>
+                                        <td><em></em></td>
+                                        <td style="display: none;"><em></em></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <strong>Return Value</strong><br />
+                            <em>None</em>
+                        </div>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>refresh</code> method.
+                        </p>
+                        <pre><code>
+$('#jqxBarGauge').jqxBarGauge('refresh');
+</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-refresh-method">Invoke the refresh and redraws the widget.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span30'>render</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Renders the BarGauge contents. This method completely refreshes the BarGauge.
+                        </p>
+                        <div class="methodArgs">
+                            <table class="arguments">
+                                <tbody>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Type</th>
+                                        <th style="display: none;">Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td><em>None</em></td>
+                                        <td><em></em></td>
+                                        <td style="display: none;"><em></em></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <strong>Return Value</strong><br />
+                            <em>None</em>
+                        </div>
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>render</code> method.
+                        </p>
+                        <pre><code>
+$('#jqxBarGauge').jqxBarGauge('refresh');
+</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-render-method">Invoke the render method.</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span31'>val</span>
+                </td>
+                <td>
+                    <span>Method</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Returns an array of the BarGauge values.
+                        </p>
+
+                        <div class="methodArgs">
+                            <table class="arguments">
+                                <tbody>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Type</th>
+                                        <th style="display: none;">Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td><em>Array</em></td>
+                                        <td><em></em></td>
+                                        <td style="display: none;"><em></em></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <strong>Return Value</strong><br />
+                            <em>Array</em>
+                        </div>
+
+                        <h4>
+                            Code examples
+                        </h4>
+                        <p>
+                            Invoke the <code>val</code> method.
+                        </p>
+                        // Get the value.
+                        <pre><code>var values = $("#jqxGauge").jqxGauge('val');</code></pre>
+                        // Get the values using jQuery's val()
+                        <pre><code>var values = $("#jqxGauge").val();</code></pre>
+                        // Set values.
+                        <pre><code>$("#jqxGauge").jqxGauge('val', [14, 27, 35]);</code></pre>
+                        // Set values using jQuery's val().
+                        <pre><code>$("#jqxGauge").val([14, 27, 35]);</code></pre>
+                        <div style="padding-bottom: 5px;">
+                            <em>Try it:</em> <a target="_blank" href="https://www.jqwidgets.com/jseditor/?key=jqxbargauge-val-method">Gets values in array from the BarGauge</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <br />
+    </div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>Nested Data Tables.</title>
+    <meta name="description" content="This sample demonstrates how we can implement Master-Details with jqwidgets Grid widget." />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {           
+            var url = "../../sampledata/employees.xml";
+
+            var source =
+            {
+                dataFields: [
+                    { name: 'FirstName', type: 'string' },
+                    { name: 'LastName', type: 'string' },
+                    { name: 'Title', type: 'string' },
+                    { name: 'Address', type: 'string' },
+                    { name: 'City', type: 'string' }
+                ],
+                root: "Employees",
+                record: "Employee",
+                id: 'EmployeeID',
+                dataType: "xml",
+                url: url
+            };
+
+            var employeesAdapter = new $.jqx.dataAdapter(source);
+
+            var orderdetailsurl = "../../sampledata/orderdetails.xml";
+
+            var ordersSource =
+            {
+                dataFields: [
+                    { name: 'EmployeeID', type: 'string' },
+                    { name: 'ShipName', type: 'string' },
+                    { name: 'ShipAddress', type: 'string' },
+                    { name: 'ShipCity', type: 'string' },
+                    { name: 'ShipCountry', type: 'string' },
+                    { name: 'ShippedDate', type: 'date' }
+                ],
+                root: "Orders",
+                record: "Order",
+                dataType: "xml",
+                url: orderdetailsurl,
+                async: false
+            };
+
+            var ordersDataAdapter = new $.jqx.dataAdapter(ordersSource, { autoBind: true });
+            orders = ordersDataAdapter.records;
+
+            var nestedTables = new Array();
+            // create nested Grid.
+            var initRowDetails = function (id, row, element, rowinfo) {
+                element.append($("<div style='margin: 10px;'></div>"));
+                var nestedGrid = $(element.children()[0]);
+                var filterGroup = new $.jqx.filter();
+                var filter_or_operator = 1;
+                var filterValue = id;
+                var filterCondition = 'equal';
+                var filter = filterGroup.createfilter('stringfilter', filterValue, filterCondition);
+                // fill the orders depending on the id.
+                var ordersbyid = [];
+                for (var m = 0; m < orders.length; m++) {
+                    var result = filter.evaluate(orders[m]["EmployeeID"]);
+                    if (result)
+                        ordersbyid.push(orders[m]);
+                }
+
+                var ordersSource = { dataFields: [
+                    { name: 'EmployeeID', type: 'string' },
+                    { name: 'ShipName', type: 'string' },
+                    { name: 'ShipAddress', type: 'string' },
+                    { name: 'ShipCity', type: 'string' },
+                    { name: 'ShipCountry', type: 'string' },
+                    { name: 'ShippedDate', type: 'date' }
+                ],
+                    id: 'OrderID',
+                    localdata: ordersbyid
+                }
+
+                if (nestedGrid != null) {
+                    var nestedGridAdapter = new $.jqx.dataAdapter(ordersSource);
+
+                    nestedGrid.jqxDataTable({
+                        pageable: true,
+                        source: nestedGridAdapter, width: 970, height: 180,
+                        pageable: true,
+                        columns: [
+                          { text: 'Ship Name', dataField: 'ShipName', width: 200 },
+                          { text: 'Ship Address', dataField: 'ShipAddress', width: 200 },
+                          { text: 'Ship City', dataField: 'ShipCity', width: 150 },
+                          { text: 'Ship Country', dataField: 'ShipCountry', width: 250 },
+                          { text: 'Shipped Date', dataField: 'ShippedDate', cellsFormat: 'd'}
+                       ]
+                    });
+                    // store the nested Data Tables and use the Employee ID as a key.
+                    nestedTables[id] = nestedGrid;
+                }
+            }
+
+            // create AngularJS DataTable.
+            $scope.gridSettings =
+            {
+                width: 850,
+                source: source,
+                pageable: true,
+                pageSize: 3,
+                rowDetails: true,
+                initRowDetails: initRowDetails,
+                created: function(args)
+                {
+                    args.instance.showDetails(1);
+                },
+                columns: [
+                      { text: 'First Name', dataField: 'FirstName', width: 250 },
+                      { text: 'Last Name', dataField: 'LastName', width: 250 },
+                      { text: 'Title', dataField: 'Title' }
+                  ]
+            };
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+    <jqx-data-table jqx-settings="gridSettings"></jqx-data-table>
+</body>
+</html>

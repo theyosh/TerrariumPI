@@ -1,0 +1,259 @@
+﻿html, body {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    background-color: #f2f2f2;
+}
+
+.row {
+    padding: 0px;
+    margin: 0px;
+}
+
+.description {
+    padding-top: 10px;
+    color: #7878a1;
+    font-size: x-large;
+    text-align: left;
+    font-weight: lighter;
+    font-family: Calibri, segoe ui;
+}
+
+/* HEADER */
+.headerband {
+    width: 100%;
+    height: 10%;
+    background-size: auto;
+    background-color: #3E3E42;
+    color: white;
+}
+
+#header {
+    float: left;
+    color: white;
+    font-weight: 500;
+    font-size: 30px;
+    font-family: Calibri, segoe ui;
+    padding: 11px 0px 0px 0px;
+}
+
+.headerTitle span {
+    padding-left: 5px;
+    padding-bottom: 20px;
+}
+
+.seticon {
+    float: left;
+    padding: 5px 8px;
+}
+
+#dropdownlist {
+    float: right;
+    margin-top: 7px;
+    display: inline-block;
+	margin-right:4px;
+	margin-bottom:4px;
+}
+
+.jqx-dropdownlist-content {
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+/* Person TITLE */
+.personpresent {
+    margin-top: 3%;
+    margin-bottom: 3%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#content {
+    border: 1px solid lightgray;
+    border-radius: 1px;
+    background-color: white;
+    margin: 30px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+}
+
+/* Person Information */
+#person {
+    float: right;
+    padding: 0;
+    margin: 10px 0px 0px 0px;
+}
+
+.personpicture {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    background-size: 100% 100% !important;
+    margin-top: 60px;
+    width: 95px;
+    height: 105px;
+    float: right;
+    margin: 5px;    
+}
+
+.personinfo {
+    padding: 15px 10px 12px 18px;
+    display: inline-block;
+    float: right;
+    font-family: Calibri, Verdana, sans-serif;
+}
+
+.fullname {
+    font-size: 25px;
+    color: black;
+}
+
+.contacts {
+    color: lightslategray;
+}
+
+/* END - Person Information */
+#controlPanel {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding: 0;
+}
+
+    #controlPanel p {
+        padding-top: 10px;
+        padding-left: 15px;
+    }
+
+    #controlPanelSettings {
+        padding-right: 13px;
+    }
+
+#monthCombobox {
+    vertical-align: bottom;
+    float: right;
+}
+
+/* Person Purchase */
+.sampleheader {
+    padding: 0;
+}
+
+.samplecontainer {
+    padding: 0;
+}
+
+#tablePurchase {
+    float: left;
+    border-radius: 5px;
+    border: solid 1px lightgray;
+    margin: 0px;
+    padding: 0px;
+}
+
+.inittable {
+    clear: both;
+}
+
+.purchase {
+    background-color: white;
+    border-radius: 12px;
+}
+
+    .purchase p {
+        margin: 0px;
+    }
+
+.sideborder {
+    border-right: solid 1px lightgray;
+}
+
+.orders-amt, .total-amt, .amount-amt {
+    height: 115px;
+    text-align: center;
+    width: 200px;
+}
+
+.total-val {
+    font-size: 22px;
+    font-family: Calibri, sans-serif;
+}
+
+.orders-val, .amount-val {
+    font-size: 22px;
+    font-family: Calibri, sans-serif;
+    font-weight: lighter;
+}
+
+.orders-text, .total-text, .amount-text {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.label {
+    display: inline-block;
+    text-align: left;
+    font-size: large;
+    color: darkgray;
+    margin: 0;
+    padding-left: 0;
+}
+
+/* END - Person Purchase */
+
+/* END - Person TITLE */
+
+/* CHART */
+#pin {
+    position: absolute;
+}
+
+#backButton {
+    position: relative;
+    top: 35px;
+    left: 40px;
+    z-index: 999999;
+}
+
+#personalSalesChart {
+    position: relative;
+    top: 35px;
+    padding: 10px;
+}
+
+.chartsection {
+    margin-top: 3%;
+    margin-bottom: 2%;
+}
+
+.amountcontent {
+    margin-top: 5%;
+    margin-left: 1%;
+}
+
+    .amountcontent table td {
+        height: 100px;
+        padding: 15px;
+        width: 80%;
+    }
+
+    .amountcontent p {
+        margin: 0px;
+    }
+
+.big-value-text, .small-value-text, .avg-value-text {
+    font-size: 19px;
+    color: #333333;
+}
+
+.big-value-amt, .small-value-amt, .avg-value-amt {
+    font-size: 24px;
+    font-weight: lighter;
+    font-family: Calibri, sans-serif;
+}
+
+#popupWindow td {
+    padding: 0 5px 10px 0;
+}
+
+.jqx-chart-title-description {
+    fill: gray;
+}
+/* CHART - End*/

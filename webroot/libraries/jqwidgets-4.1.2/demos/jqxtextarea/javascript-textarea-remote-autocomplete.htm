@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>The jqxTextArea widget provides suggestions while you type into
+        the field. The suggestions in this sample are cities. The datasource is the geonames.org
+        webservice. The city name ends up in the textarea after selecting an element, more
+        info is displayed in the suggestions popup to help find the right entry.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtextarea.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var timer;
+
+            $('#jqxTextArea').jqxTextArea({ placeHolder: "Enter a City", height: 75, width: 200,
+                source: function (query, response) {
+                    var dataAdapter = new $.jqx.dataAdapter({
+                        datatype: "jsonp",
+                        datafields: [{
+                            name: 'countryName'
+                        }, {
+                            name: 'name'
+                        }, {
+                            name: 'population',
+                            type: 'float'
+                        }, {
+                            name: 'continentCode'
+                        }, {
+                            name: 'adminName1'
+                        }],
+                        url: "http://api.geonames.org/searchJSON",
+                        data: {
+                            featureClass: "P",
+                            style: "full",
+                            maxRows: 12,
+                            username: "jqwidgets"
+                        }
+                    }, {
+                        autoBind: true,
+                        formatData: function (data) {
+                            data.name_startsWith = query;
+                            return data;
+                        },
+                        loadComplete: function (data) {
+                            if (data.geonames.length > 0) {
+                                response($.map(data.geonames, function (item) {
+                                    return {
+                                        label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
+                                        value: item.name
+                                    }
+                                }));
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+<body class="default">
+    <textarea id="jqxTextArea"></textarea>
+</body>
+</html>

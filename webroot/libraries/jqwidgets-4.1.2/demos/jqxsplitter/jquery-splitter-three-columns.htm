@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Splitter, Splitter Widget, Splitter, jqxSplitter" />
+    <meta name="description" content="This page demonstrates 3 columns splitter" />
+    <title id='Description'>This demonstration shows how to create a splitter with 3 columns.
+    </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxsplitter.js"></script>
+    <style type="text/css">
+        html, body
+        {
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+        }
+    </style>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#splitter').jqxSplitter({ width: '100%', height: '100%', panels: [{ size: '33%'}] });
+            $('#splitter2').jqxSplitter({ width: '100%', height: '100%', panels: [{ size: '50%', collapsible: false}] });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="splitter">
+        <div>
+            Column 1</div>
+        <div>
+            <div id="splitter2">
+                <div>
+                    Column 2</div>
+                <div>
+                    Column 3</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

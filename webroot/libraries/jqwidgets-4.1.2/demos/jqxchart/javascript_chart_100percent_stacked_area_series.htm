@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxChart 100% Stacked Area Series Example</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "tab",
+                datafields: [
+                    { name: 'Date' },
+                    { name: 'Referral' },
+                    { name: 'SearchPaid' },
+                    { name: 'SearchNonPaid' }
+                ],
+                url: '../sampledata/website_analytics.txt'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "Web Traffic Analysis",
+                description: "Unique monthly site visitors (percentage stacked)",
+                enableAnimations: true,
+                showLegend: true,
+                padding: { left: 10, top: 5, right: 10, bottom: 5 },
+                titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                xAxis:
+                {
+                    type: 'date',
+                    baseUnit: 'day',
+                    dataField: 'Date',
+                    valuesOnTicks: true,
+                    labels: {
+                        formatFunction: function (value) {
+                            return value.getDate();
+                        }
+                    },
+                    gridLines: { visible: false },
+                    toolTipFormatFunction: function (value) {
+                        return value.getDate() + '-' + months[value.getMonth()] + '-' + value.getFullYear();
+                    }
+                },
+                valueAxis:
+                {
+                    title: { text: 'Daily visitors' },
+                    labels: { horizontalAlignment: 'right' }
+                },
+                colorScheme: 'scheme06',
+                seriesGroups:
+                    [
+                        {
+                            type: 'stackedarea100',
+                            series: [
+                                    { dataField: 'SearchNonPaid', displayText: 'Organic Search Traffic' },
+                                    { dataField: 'SearchPaid', displayText: 'Paid Search Traffic' },
+                                    { dataField: 'Referral', displayText: 'Referral Traffic' }
+                                ]
+                        }
+                    ]
+            };
+
+            // setup the chart
+            $('#chartContainer').jqxChart(settings);
+
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='chartContainer' style="width:850px; height:500px">
+    </div>
+</body>
+</html>

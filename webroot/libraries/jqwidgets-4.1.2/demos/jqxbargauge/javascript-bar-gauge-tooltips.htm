@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>The jqxBarGauge tooltips in this demo are customized.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbargauge.js"></script>
+    <style>
+        .myTooltip {
+            padding: 10px;
+            font-size: 1.2em;
+            border-style: dashed;
+            border-width:3px;
+            border-radius:4px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var players = [25, 46, 6, 55, 14, 22, 57, 40, 87, 20];
+            var boundary = 33;
+            $('#jqxbargauge').jqxBarGauge({
+                width: 570,
+                height: 570,
+                title: { text: 'Ranking', subtitle: '(boundary - ' + boundary + ' points)' },
+                values: players,
+                baseValue: boundary,
+                colorScheme: "scheme04",
+                max: 90,
+                labels: {
+                    formatFunction: function (value) {
+                        var realVal = parseInt(value);
+                        return realVal + ' pts';
+                    },
+                    font: { size: 12 },
+                    indent: 10
+                },
+                tooltip: {
+                    classname: "myTooltip",
+                    formatFunction: function (value) {
+                        var realVal = parseInt(value);
+                        var player = players.indexOf(realVal) + 1;
+                        return ('Player ' + player + ': ' + realVal + ' points');
+                    },
+                    visible: true
+                },
+                startAngle: 180, 
+                endAngle: -65 
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxbargauge'></div>
+</body>
+</html>

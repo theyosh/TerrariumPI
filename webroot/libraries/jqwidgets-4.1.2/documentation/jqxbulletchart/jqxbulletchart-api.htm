@@ -1,0 +1,839 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../Styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/documentation.js"></script>
+    <meta name="keywords" content="jQuery, jqxBulletChart Help Documentation" />
+    <title>jqxBulletChart API Documentation</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+       <div id="properties">
+            <h2 class="documentation-top-header">Properties</h2>
+            <table class="documentation-table">
+                <tr>
+                    <th>Name
+                    </th>
+                    <th>Type
+                    </th>
+                    <th>Default
+                    </th>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span14'>animationDuration</span>
+                    </td>
+                    <td>
+                        <span>Function</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+
+                            <p>
+                                Sets ot gets the bulletcharts's animationDuration.
+                            </p>
+                            <h4>Possible values</h4>
+                            <p>number</p>
+                            <p>'slow'</p>
+                            <p>'fast'</p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>animationDuration</code> property.
+                            </p>
+                            <pre><code>$("#jqxBulletChart").jqxBulletChart( { animationDuration:'slow'});</code></pre>
+                            <p>
+                                Get the <code>animationDuration</code> property.
+                            </p>
+                            <pre><code>var animationDuration = $('#jqxBulletChart').jqxBulletChart('animationDuration');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/rPJwd/">animationDuration is set to  'slow'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span4'>barSize</span>
+                    </td>
+                    <td>
+                        <span>Array</span>
+                    </td>
+                    <td>50%
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+
+                            <p>
+                                Sets ot gets the bulletcharts's bar size.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>barSize</code> property.
+                            </p>
+                            <pre><code>$("#jqxBulletChart").jqxBulletChart({ barSize: '40%' });</code></pre>
+                            <p>
+                                Get the <code>barSize</code> property.
+                            </p>
+                            <pre><code>var barSize = $('#jqxBulletChart').jqxBulletChart('barSize');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/vfLE2/">barSize is set to '40%'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span10'>description</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'Description'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+
+                            <p>
+                                Sets ot gets the bulletcharts's description.
+                            </p>
+
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>description</code> property.
+                            </p>
+                            <pre><code>$("#jqxBulletChart").jqxBulletChart( { description:'New description'});</code></pre>
+                            <p>
+                                Get the <code>description</code> property.
+                            </p>
+                            <pre><code>var description = $('#jqxBulletChart').jqxBulletChart('description');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/8K8kX/">description is set to 'New description'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span17'>disabled</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Disables the bullet chart.
+                            </p>
+
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>disabled</code> property.
+                            </p>
+                            <pre><code>$("#jqxBulletChart").jqxBulletChart( { disabled:true});</code></pre>
+                            <p>
+                                Get the <code>disabled</code> property.
+                            </p>
+                            <pre><code>var disabled = $('#jqxBulletChart').jqxBulletChart('disabled');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/9ksuF/">disabled is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span2'>height</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>100
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets ot gets the bulletcharts's height.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>height</code> property.
+                            </p>
+                            <pre><code>$("#jqxBulletChart").jqxBulletChart({ height: 120 });</code></pre>
+                            <p>
+                                Get the <code>height</code> property.
+                            </p>
+                            <pre><code>var height = $('#jqxBulletChart').jqxBulletChart('height');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/E3K4H/">height is set to 120</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span12'>labelsFormat</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+
+                            <p>
+                                Sets ot gets the bulletcharts's labelsFormat.
+                            </p>
+                            <h4>Possible values:</h4>
+                            <p>"null"</p>
+                            <p>"d"-decimal numbers</p>
+                            <p>"f"- floating-point numbers</p>
+                            <p>"n"- integer numbers</p>
+                            <p>"c" - currency numbers</p>
+                            <p>"p"- percentage numbers</p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>labelsFormat</code> property.
+                            </p>
+                            <pre><code>$("#jqxBulletChart").jqxBulletChart( {  labelsFormat:'c'});</code></pre>
+                            <p>
+                                Get the <code>labelsFormat</code> property.
+                            </p>
+                            <pre><code>var labelsFormat = $('#jqxBulletChart').jqxBulletChart('labelsFormat');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/9Ahup/">labelsFormat is set to 'c'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span13'>labelsFormatFunction</span>
+                    </td>
+                    <td>
+                        <span>Function</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+
+                            <p>
+                                Sets ot gets the bulletcharts's labelsFormatFunction.
+                            </p>
+
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>labelsFormatFunction</code> property.
+                            </p>
+                            <pre><code>$("#jqxBulletChart").jqxBulletChart( {   labelsFormatFunction: function (value, position) { if (position == "near") { return value + " °C";} else { return value; }; }});</code></pre>
+                            <p>
+                                Get the <code>labelsFormatFunction</code> property.
+                            </p>
+                            <pre><code>var labelsFormatFunction = $('#jqxBulletChart').jqxBulletChart('labelsFormatFunction');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/LAW6b/">labelsFormatFunction is set to a custom function</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span11'>orientation</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>"horizontal"
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+
+                            <p>
+                                Sets ot gets the bulletcharts's orientation.
+                            </p>
+                            <h4>Possible values:</h4>
+                            <p>"horizontal"</p>
+                            <p>"vertical"</p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>orientation</code> property.
+                            </p>
+                            <pre><code>$("#jqxBulletChart").jqxBulletChart( {  width:100, height:500,description:'vertical'});</code></pre>
+                            <p>
+                                Get the <code>orientation</code> property.
+                            </p>
+                            <pre><code>var orientation = $('#jqxBulletChart').jqxBulletChart('orientation');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/975Jh/">orientation is set to 'vertical'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span5'>pointer</span>
+                    </td>
+                    <td>
+                        <span>Object</span>
+                    </td>
+                    <td>{ value: 65, label: "Value", size: "25%", color: "" }
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+
+                            <p>
+                                Sets ot gets the bulletcharts's pointer.
+                            </p>
+
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>pointer</code> property.
+                            </p>
+                            <pre><code>$("#jqxBulletChart").jqxBulletChart({ pointer: {value: 270, label: "Value", thickness: 8, color: "White" }});</code></pre>
+                            <p>
+                                Get the <code>pointer</code> property.
+                            </p>
+                            <pre><code>var pointer = $('#jqxBulletChart').jqxBulletChart('pointer');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/eu2qJ/">pointer is set to a custom object</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span18'>rtl</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>false
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets a value indicating whether widget's elements are aligned to support locales using right-to-left fonts.
+                            </p>
+
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>rtl</code> property.
+                            </p>
+                            <pre><code>$("#jqxBulletChart").jqxBulletChart( { rtl:true});</code></pre>
+                            <p>
+                                Get the <code>rtl</code> property.
+                            </p>
+                            <pre><code>var rtl = $('#jqxBulletChart').jqxBulletChart('rtl');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/NNZ49/">rtl is set to true</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span3'>ranges</span>
+                    </td>
+                    <td>
+                        <span>Array</span>
+                    </td>
+                    <td>[{ startValue: 0, endValue: 50, color: "#000000", opacity: 0.7 }, { startValue: 50, endValue: 80, color: "#000000", opacity: 0.5 }, { startValue: 80, endValue: 100, color: "#000000", opacity: 0.3}]
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets ot gets the bulletcharts's range.
+                            </p>
+                            <h4>Possible values</h4>
+                            <p>'startValue'-the value from which the range will start</p>
+                            <p>'endValue'-the value where the current range will end</p>
+                            <p>'color'- the colour of the range</p>
+                            <p>'opacity'- the opacity of the range</p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>ranges</code> property.
+                            </p>
+                            <pre><code>$("#jqxBulletChart").jqxBulletChart({ranges: [{startValue: 0, endValue: 200,color: "Blue", opacity: 0.6}, { startValue: 200, endValue: 250, color: "Black", opacity: 0.3}] });</code></pre>
+                            <p>
+                                Get the <code>ranges</code> property.
+                            </p>
+                            <pre><code>var ranges = $('#jqxBulletChart').jqxBulletChart('ranges');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/Hd4e6/">ranges is set to a custom array</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span15'>showTooltip</span>
+                    </td>
+                    <td>
+                        <span>Boolean</span>
+                    </td>
+                    <td>true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+
+                            <p>
+                                Sets ot gets the bulletcharts's showTooltip.Requires jqxtooltip.js
+                            </p>
+
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>showTooltip</code> property.
+                            </p>
+                            <pre><code>$("#jqxBulletChart").jqxBulletChart( { showTooltip:false});</code></pre>
+                            <p>
+                                Get the <code>showTooltip</code> property.
+                            </p>
+                            <pre><code>var showTooltip = $('#jqxBulletChart').jqxBulletChart('showTooltip');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/Lj5tj/">showTooltip is set to  false</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span6'>target</span>
+                    </td>
+                    <td>
+                        <span>Object</span>
+                    </td>
+                    <td>{ value: 85, label: "Target", size: 4, color: "" };
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+
+                            <p>
+                                Sets ot gets the bulletcharts's target.
+                            </p>
+
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>target</code> property.
+                            </p>
+                            <pre><code>$("#jqxBulletChart").jqxBulletChart({ target: {value: 270, label: "Value", thickness: 8, color: "White" }});</code></pre>
+                            <p>
+                                Get the <code>target</code> property.
+                            </p>
+                            <pre><code>var target = $('#jqxBulletChart').jqxBulletChart('target');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/v7pH7/">target is set to a custom object</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span7'>ticks</span>
+                    </td>
+                    <td>
+                        <span>Object</span>
+                    </td>
+                    <td>{ position: "far", interval: 20, size: 10 }
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+
+                            <p>
+                                Sets ot gets the bulletcharts's ticks.
+                            </p>
+                            <h4>Possible values for ticks.position</h4>
+                            <p>"near"- positions the ticks at the top of the ranges bar if the orientation is set to "horizontal" and at the left if the orientation is set to "vertical";</p>
+                            <p>"far" - positions the ticks at the bottom of the ranges bar if the orientation is set to "horizontal" and at the right if the orientation is set to "vertical";</p>
+                            <p>"both"</p>
+                            <p>"none"</p>
+
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>ticks</code> property.
+                            </p>
+                            <pre><code>$("#jqxBulletChart").jqxBulletChart({ticks: { position: "near", interval: 20,size: 10  }});</code></pre>
+                            <p>
+                                Get the <code>ticks</code> property.
+                            </p>
+                            <pre><code>var ticks = $('#jqxBulletChart').jqxBulletChart('ticks');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/qVGhS/">ticks is set to a custom object</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span8'>title</span>
+                    </td>
+                    <td>
+                        <span>String</span>
+                    </td>
+                    <td>'Title'
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+
+                            <p>
+                                Sets ot gets the bulletcharts's title.
+                            </p>
+
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>title</code> property.
+                            </p>
+                            <pre><code>$("#jqxBulletChart").jqxBulletChart( { title:'New title'});</code></pre>
+                            <p>
+                                Get the <code>title</code> property.
+                            </p>
+                            <pre><code>var title = $('#jqxBulletChart').jqxBulletChart('title');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/KfS4S/">title is set to 'New title'</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+
+
+
+
+
+
+
+
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span16'>tooltipFormatFunction</span>
+                    </td>
+                    <td>
+                        <span>Function</span>
+                    </td>
+                    <td>null
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+
+                            <p>
+                                Sets ot gets the bulletcharts's tooltipFormatFunction.Requires jqxtooltip.js
+                            </p>
+
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>tooltipFormatFunction</code> property.
+                            </p>
+                            <pre><code>$("#jqxBulletChart").jqxBulletChart( { tooltipFormatFunction: function (pointerValue, targetValue) { return "<span style='color: Red;'>Current: " + pointerValue + "</span>; <span style='color: Green;'>Average: " + targetValue + "</span>";}});</code></pre>
+                            <p>
+                                Get the <code>tooltipFormatFunction</code> property.
+                            </p>
+                            <pre><code>var tooltipFormatFunction = $('#jqxBulletChart').jqxBulletChart('tooltipFormatFunction');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/WhScw/">tooltipFormatFunction is set to a custom function</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span1'>width</span>
+                    </td>
+                    <td>
+                        <span>Number/String</span>
+                    </td>
+                    <td>500
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets ot gets the bulletcharts's width.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Set the <code>width</code> property.
+                            </p>
+                            <pre><code>$("#jqxBulletChart").jqxBulletChart({ width: 500 });</code></pre>
+                            <p>
+                                Get the <code>width</code> property.
+                            </p>
+                            <pre><code>var width = $('#jqxBulletChart').jqxBulletChart('width');</code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/6ekQC/">width is set to 600</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Events</h2>
+                    </td>
+                </tr>
+			<tr>
+				<td class="documentation-option-type-click">
+					<span id='Span27'>change</span>
+				</td>
+				<td>
+					<span>Event</span>
+				</td>
+				<td></td>
+			</tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                This event is triggered when the value is changed.
+                            </p>
+                            <h4>Code examples</h4>
+                            <p>
+                                Bind to the <code>change</code> event by type: jqxBulletChart.
+                            </p>
+                            <pre><code>$('#jqxBulletChart').on('change', function () { // Some code here. }); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/7tfS4/">Bind to the change event by type: jqxBulletChart.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <h2 class="documentation-top-header">Methods</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span21'>destroy</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Destroy  the jqxBulletChart widget.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples</h4>
+                            <p>
+                                Invoke the <code>destroy</code> method.
+                            </p>
+                            <pre><code>$('#jqxBulletChart').jqxBulletChart('destroy'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/5vt2W/">destroy the jqxBulletChart.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span9'>render</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Renders the jqxBulletChart widget.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples</h4>
+                            <p>
+                                Invoke the <code>render</code> method.
+                            </p>
+                            <pre><code>$('#jqxBulletChart').jqxBulletChart('render'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/jdp54/">render the bulletchart</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span19'>refresh</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Refresh the jqxBulletChart widget.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>None</em></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>None</em>
+                            </div>
+                            <h4>Code examples</h4>
+                            <p>
+                                Invoke the <code>refresh</code> method.
+                            </p>
+                            <pre><code>$('#jqxBulletChart').jqxBulletChart('refresh'); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/2d7vj/">refresh the bulletchart</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="documentation-option-type-click">
+                        <span id='Span20'>val</span>
+                    </td>
+                    <td>
+                        <span>Method</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan='3' style='width: 100%'>
+                        <div class="documentation-option-description property-content" style="display: none;">
+                            <p>
+                                Sets or gets the selected value.
+                            </p>
+                            <div class="methodArgs">
+                                <table class="arguments">
+                                    <tbody>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td><em>value(optional)</em></td>
+                                            <td>Number</td>
+                                            <td></td>
+                                        </tr>                                  
+                                    </tbody>
+                                </table>
+                                <strong>Return Value</strong><br /> 
+                                <em>Number</em>
+                            </div>
+                            <h4>Code examples</h4>
+                            <p>
+                                Invoke the <code>val</code> method.
+                            </p>
+                            <p>//Get the value.</p>
+                            <pre><code>var value = $("#jqxBulletChart").jqxBulletChart('val'); </code></pre>
+                            <p>//Get the value using jQuery's val() </p>
+                            <pre><code>var value = $("#jqxBulletChart").val(); </code></pre>
+                            <p>//Set value. </p>
+                            <pre><code>$("#jqxBulletChart").jqxBulletChart('val', 50); </code></pre>
+                            <p>//Set value using jQuery's val(). </p>
+                            <pre><code>$("#jqxBulletChart").val(50); </code></pre>
+                            <div style="padding-bottom: 5px;">
+                                <em>Try it:</em> <a target="_blank" href="http://jsfiddle.net/jqwidgets/jXQDL/">change the jqxBulletChart's value.</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+            <br />
+        </div>
+</body>
+</html>

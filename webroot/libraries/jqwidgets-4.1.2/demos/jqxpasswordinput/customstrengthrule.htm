@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">This demo illustrates how to show password strength in jqxPasswordInput,
+        using a custom password strength rule.</title>
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpasswordinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxPasswordInput").jqxPasswordInput({width: 200, height: 25,  placeHolder: "Enter password:", showStrength: true, showStrengthPosition: "right",
+                passwordStrength: function (password, characters, defaultStrength) {
+                    var length = password.length;
+                    var letters = characters.letters;
+                    var numbers = characters.numbers;
+                    var specialKeys = characters.specialKeys;
+                    var strengthCoefficient = letters + numbers + 2 * specialKeys + letters * numbers * specialKeys;
+                    var strengthValue;
+                    if (length < 4) {
+                        strengthValue = "Too short";
+                    } else if (strengthCoefficient < 10) {
+                        strengthValue = "Weak";
+                    } else if (strengthCoefficient < 20) {
+                        strengthValue = "Fair";
+                    } else if (strengthCoefficient < 30) {
+                        strengthValue = "Good";
+                    } else {
+                        strengthValue = "Strong";
+                    };
+                    return strengthValue;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <input id="jqxPasswordInput" type="password" style="margin-top: 5px;" />
+</body>
+</html>

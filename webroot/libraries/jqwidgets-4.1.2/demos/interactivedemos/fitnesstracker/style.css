@@ -1,0 +1,100 @@
+﻿html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.left-floated {
+    float: left;
+}
+
+.clearing {
+    clear: both;
+}
+
+.col-xs-12, .col-xs-6, .col-md-3, .col-lg-3 {
+    padding: 0px;
+    margin: 0px;
+}
+
+.ptiles.bargauge {
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: #EEEFEF;
+}
+
+.row {
+    border-bottom: 1px solid #EEEFEF;
+}
+
+.row.bargauge {
+    border-width: 1px 1px 0px 1px !important;
+}
+
+.description {
+    padding-top: 10px;
+    color: #7878a1;
+    font-size: x-large;
+    text-align: left;
+    font-weight: lighter;
+    font-family: Calibri, segoe ui;
+}
+
+#addDeleteSet {
+    margin-top: 15px;
+    padding: 5px 5px 5px 0px;
+}
+
+#foodGridValues .jqx-button {
+    color: white;
+    background: #df5050;
+}
+
+#gridCaloriesContent {
+    margin-top: 60px;    
+}
+
+.fullname {
+    font-weight: bold;
+}
+
+#fitnessTrackerHeader {
+    width: 100%;
+    height: 10%;
+    background-color: #1EA9DD;
+    color: white;
+    padding: 10px 0px;
+}
+
+.sampleheader {
+    padding: 0;
+}
+
+#header {
+    float: left;
+    color: white;
+    font-weight: 500;
+    font-size: 35px;
+    font-family: Calibri, segoe ui;
+    padding: 6px 0px 0px 0px;
+}
+
+#person {
+    float: right;
+    font-size: 15px;
+}
+
+.personpicture {
+    border-radius: 100%;
+    background: url('../../../images/janet.png');
+    background-size: 100% 100%;
+    width: 55px;
+    height: 55px;
+    float: left;
+    margin: 5px;
+}
+
+.personinfo {
+    padding: 12px 0px;
+    display: inline-block;
+    float: left;
+}

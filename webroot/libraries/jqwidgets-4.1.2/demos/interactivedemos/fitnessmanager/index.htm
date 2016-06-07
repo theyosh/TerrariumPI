@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 minimum-scale=1" />
+    <title id='Description'>Fitness manager.</title>
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.office.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.energyblue.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.metro.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.metrodark.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.arctic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.light.css" type="text/css" />
+
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdate.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbargauge.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.filter.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.edit.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxrangeselector.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdragdrop.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxrating.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxpopover.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxvalidator.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlayout.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxribbon.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxresponse.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdocking.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscheduler.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscheduler.api.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtree.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtagcloud.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxkanban.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxsortable.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxsplitter.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxeditor.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownbutton.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgauge.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxknob.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxexpander.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxnotification.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.aggregates.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/globalization/globalize.culture.de-DE.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+    <div style="background-color: white; height:80px;">
+        <div style="max-width: 1200px; margin: 0px auto 0px auto;">
+            <img src="../../../resources/design/i/logo-jqwidgets.svg" alt="jQWidgets" class="logo" />
+            <div id='jqxMenu' ></div>
+            <img src="../../../resources/design/i/logo-jqwidgets.svg" class="logo-top2" alt="jQWidgets">
+            <div style="clear:both;"></div>
+        </div>
+    </div>
+
+    <div class="breadcrumb-containter">
+        <div class="breadcrumb"> <span> jQWidgets Fitness Management System</span>&nbsp;&raquo;&nbsp;<span id="page">Dashboard</span></div>
+    </div>
+        <div class="row" id="row">
+            <div>
+                <div>
+
+                    <div id='page1' class="page">
+                        <div id="docking">
+                            
+                            <div>
+                                <div id="window2" style="height: 380px">
+                                    <div>
+                                        Set temperature
+                                    </div>
+                                    <div style="overflow: hidden;">
+                                        <div id='themperatureKnob' style="margin-left:auto; margin-right:auto; width:330px; height:330px;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="window4" style="height: 380px;">
+                                    <div>
+                                        Rooms themperature
+                                    </div>
+                                    <div style="overflow: hidden;">
+                                        <div class="demo-gauge">
+                                            <div style="margin: 0px 1% 0px 1%; float: left; padding: 1%; width: 20%;">
+                                                <div style="text-align:center;">Fitness</div>
+                                                <div class="temperatureText"><div style="text-align: center; color: blue; font-size:10px;">Low temp.</div></div>
+                                                <div id="gauge1"></div>
+                                            </div>
+                                            <div style="margin: 0px 1% 0px 1%; float: left; padding: 1%; width: 20%; ">
+                                                <div style="text-align:center;">Groups</div>
+                                                <div class="temperatureText"><div style="text-align: center; color: green; font-size: 10px;">Temp. in range</div></div>
+                                                <div id="gauge2"></div>
+                                            </div>
+                                            <div style="margin: 0px 1% 0px 1%; float: left; padding: 1%; width: 20%; ">
+                                                <div style="text-align:center;">Sauna</div>
+                                                <div class="temperatureText"><div style="text-align: center; color: red; font-size: 10px;">High temp.</div></div>
+                                                <div id="gauge3"></div>
+                                            </div>
+                                            <div id="gaugeRadioBtns" style="margin-left: 1%; float: left; padding: 1%; width: 20%;">
+                                                <div>Select</div>
+                                                <div>
+
+                                                    <div style='margin-top: 10px;' id='jqxRadioButton1' class="themperatureRadioButton">
+                                                        Fitness
+                                                    </div>
+                                                    <div style='margin-top: 10px;' id='jqxRadioButton2' class="themperatureRadioButton">
+                                                        Groups
+                                                    </div>
+                                                    <div style='margin-top: 10px;' id='jqxRadioButton3' class="themperatureRadioButton">
+                                                        Sauna
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                            <div>
+                                <div id="window1" style="height: 380px;">
+                                    <div>
+                                        Important Notes
+                                    </div>
+                                    <div style="overflow: hidden;">
+                                        <div id="dashboardListbox">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id='page2' class="page page-hidden">
+                        <div id='roomsSheduler'></div>
+                    </div>
+
+                    <div id='page3' class="page page-hidden">
+                        <div id='instructorsSheduler'></div>
+                    </div>
+
+                    <div id='page5' class="page page-hidden">
+                        <div id='instructorsGrid'></div>
+                    </div>
+
+                    <div id='page6' class="page page-hidden" style="width: 99%;">
+                        <div class="row" id='workloadResponsiveContainer' style="width:100%; height:100%;">
+                            <div style="height: 100%;">
+                                <div id='instructorsJqxExpander'>
+                                    <div>
+                                        Instructors with their clients
+                                    </div>
+                                    <div style="overflow: hidden;">
+                                        <div id="jqxTree"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height: 100%; text-align: center; font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif">
+                                <h1>Weekly fitness instructors workload</h1>
+                                <h4>Chart presents the daily number of client per current week about each instructor</h4>
+                                <div id="jqxChart" style="width:100%; height:500px; padding-bottom:10px;"></div>
+
+                                <h4>Weekly comparisson</h4>
+                                <h5>(In red is the instructor with more  clients, in green is with less clients)</h5>
+                                <center><div id="jqxTagCloud"></div></center>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id='page7' class="page page-hidden" style="height: calc(100vh-200px);">
+                        <div id='jqxKanban'></div>
+                    </div>
+
+                    <div id='page8' class="page page-hidden">
+                        <div id="splitter">
+                            <div style="overflow: hidden;">
+                                <div id='jqxListBox'></div>
+                            </div>
+                            <div style="overflow: hidden;" id="ContentPanel">
+                                <div id="dropdownlist" style="margin-top:2px; margin-bottom:2px;"></div>
+                                <input id="subject" type="text" value="value" /><br />
+                                <textarea id="editor"></textarea><br />
+                                <button id="add">Update</button><br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

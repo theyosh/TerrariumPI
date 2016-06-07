@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.metro.css" type="text/css" />
+    <link rel="stylesheet" href="../../../styles/bootstrap.min.css"  />
+    <link rel="stylesheet" href="../../../styles/bootstrap-theme.min.css" />
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxswitchbutton.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            'use strict';
+            var source = [
+                        'Car Report',
+                        'Employee Report'
+
+            ];
+            $('#dropdownlist1').jqxDropDownList({ source: source, selectedIndex: 0, width: '200', autoDropDownHeight: true, theme: 'metro' });
+
+            source = [
+                            'Broken',
+                            'Not working properly',
+                            'Something went wrong',
+                            'I dont know'
+
+            ];
+            $('#dropdownlist2').jqxDropDownList({ source: source, selectedIndex: 0, width: '200', autoDropDownHeight: true, theme: 'metro' });
+
+            source = [
+                            '2016',
+                            '2015',
+                            '2014',
+                            '2013'
+
+            ];
+            $('#dropdownlist3,#dropdownlist4').jqxDropDownList({ source: source, selectedIndex: 0, width: '200', autoDropDownHeight: true, theme: 'metro' });
+
+            source = [
+                            'January',
+                            'February',
+                            'March',
+                            'April',
+                            'May',
+                            'June',
+                            'July',
+                            'August',
+                            'September',
+                            'Octomber',
+                            'November',
+                            'December'
+
+            ];
+            $('#dropdownlist5').jqxDropDownList({ source: source, selectedIndex: 0, width: '200', autoDropDownHeight: true, theme: 'metro' });
+
+            $('#switchButton').jqxSwitchButton({ height: 27, width: 81, checked: false, theme: 'metro' });
+
+            $('#radiobutton1').jqxRadioButton({ width: 45, height: 25, checked: false, theme: 'metro' });
+
+            $('#radiobutton2').jqxRadioButton({ width: 45, height: 25, checked: false, theme: 'metro' });
+
+            $('#radiobutton3').jqxRadioButton({ width: 45, height: 25, checked: false, theme: 'metro' });
+            $('#radiobutton4').jqxRadioButton({ width: 45, height: 25, checked: false, theme: 'metro' });
+
+            $('#dateInput1').jqxDateTimeInput({ width: '200px', height: '25px', selectionMode: 'range', theme: 'metro' });
+
+            $('#switchButton').on('unchecked', function ()
+            {
+                $('#inputDiv').css('display', 'block');
+            });
+
+            $('#switchButton').on('checked', function ()
+            {
+                $('#inputDiv').css('display', 'none');
+            });
+
+            $('#submitButton').jqxButton({ width: '150', height: 25, template: 'info', theme: 'metro' });
+
+            $('#cancelButton').jqxButton({ width: '150', height: 25, template: 'warning', theme: 'metro' });
+            
+            source = [
+                'Subject1',
+                'Subject2',
+                'Subject3',
+                'Subject4',
+                'Subject5',
+                'Subject6',
+                'Subject7'
+            ];
+
+            $('#subjectsDropDown').jqxDropDownList({ source: source, placeHolder: 'Please select a subject:', width: '200', theme: 'metro' , autoDropDownHeight:true});
+        });
+    </script>
+</head>
+<body>
+    <div class="container" style="overflow:hidden;padding-bottom:80px;">
+        <div id="reports" class="row" style="margin-top:5em;margin-left:3em;margin-right:3em;border:3px solid #e8e8e8;">
+            <div style="width:100%;height:20px;background-color:#e8e8e8;margin-bottom:3em;"></div>
+            <div class="col-md-4">
+                <div class="form-group clearfix">
+                    <label class="col-md-4 label-control" style="color:grey;font-weight:600;padding-top:6px">Category</label>
+                    <div class="col-md-8">
+                        <div id="dropdownlist1"></div>
+                    </div>
+                </div>
+                <div class="form-group clearfix">
+                    <label class="col-md-4 label-control" style="color:grey;font-weight:600;padding-top:5px">CategoryTwo</label>
+                    <div class="col-md-8">
+                        <div id="dropdownlist2"></div>
+                    </div>
+                </div>
+                <div class="form-group clearfix">
+                    <label class="col-md-4 label-control" style="color:grey;font-weight:600;padding-top:5px">AllCategories</label>
+                    <div class="col-md-8">
+                        <div id="switchButton"></div>
+                    </div>
+                </div>
+                <div style="margin-left:1em;margin-bottom:1.5em;display:none" id="inputDiv">
+                    <label for="subjects" style="color:grey;font-weight:600">Subjects user can select :</label>
+                    <div id="subjectsDropDown"></div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group clearfix">
+                    <div class="col-md-2" style="color:grey;font-weight:600;padding-top:6px" id="radiobutton1"><span>Year</span></div>
+                    <div class="col-md-4">
+                        <div id="dropdownlist3"></div>
+                    </div>
+                </div>
+                <div class="form-group clearfix">
+                    <div class="col-md-2" style="color:grey;font-weight:600;padding-top:5px" id="radiobutton2">Month</div>
+                    <div class="col-md-4">
+                        <div id="dropdownlist4"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="dropdownlist5"></div>
+                    </div>
+                </div>
+                <div class="form-group clearfix">
+                    <div class="col-md-2" style="color:grey;font-weight:600;padding-top:5px" id="radiobutton3">From/To</div>
+                    <div class="col-md-10">
+                        <div id="dateInput1"></div>
+                    </div>
+                </div>
+                <div class="form-group clearfix">
+                    <div class="col-md-2" id="radiobutton4" style="color:grey;font-weight:600;padding-top:6px">All</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-1" style="margin-left:6em;">
+                <div id="cancelButton" style="font-size:120%;margin-top:2em"><span style="margin-top:3em">Cancel</span></div>
+            </div>
+            <div class="col-md-1" style="margin-left:6em;">
+                <div id="submitButton" style="font-size:120%;margin-top:2em"><span style="margin-top:3em">Submit</span></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>In this demo is demonstrated how to change the AngularJS DateTimeInput's alignment.
+    </title>
+    <meta name="description" content="AngularJS DateTime Input example. This example demonstrates a Date and Time Picker's DropDown Alignment." /> 
+
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            $scope.settings = { width: 250, height: 25, dropDownHorizontalAlignment: "right" };
+
+            $scope.rightChecked = function (event) {
+                $scope.settings.dropDownHorizontalAlignment = "right";
+            }
+
+            $scope.leftChecked = function (event) {
+                $scope.settings.dropDownHorizontalAlignment = "left";
+            }
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <div style="float: left; font-size: 13px; font-family: Verdana;">
+        <h3>Alignment</h3>
+        <jqx-radio-button jqx-checked="false" jqx-on-checked="leftChecked(event)">
+            Left</jqx-radio-button>
+        <jqx-radio-button jqx-checked="true" jqx-on-checked="rightChecked(event)" style='margin-top: 10px;'>
+            Right</jqx-radio-button>
+    </div>
+    <jqx-date-time-input jqx-settings="settings" jqx-watch="settings.dropDownHorizontalAlignment" style='float: left; margin-top: 20px; margin-left: 100px;'>
+    </jqx-date-time-input>
+</body>
+</html>

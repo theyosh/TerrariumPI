@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title id='Description'>jQWidgets Chart Spline Series Mobile Example</title>
+    <link rel="stylesheet" href="../styles/demo.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.windowsphone.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.blackberry.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.android.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.mobile.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../simulator.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = prepareSimulator("chart");
+            // prepare the data
+            var source =
+            {
+                datatype: "tab",
+                datafields: [
+                    { name: 'Year' },
+                    { name: 'HPI' },
+                    { name: 'BuildCost' },
+                    { name: 'Population' },
+                    { name: 'Rate' }
+                ],
+                url: '../../demos/sampledata/homeprices.txt'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "U.S. Historical Home Prices",
+                description: "",
+                enableAnimations: true,
+                showLegend: true,
+                padding: { left: 5, top: 5, right: 25, bottom: 5 },
+                titlePadding: { left: 30, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                categoryAxis:
+                    {
+                        text: 'Category Axis',
+                        textRotationAngle: 0,
+                        dataField: 'Year',
+                        showTickMarks: true,
+                        tickMarksInterval: 15,
+                        tickMarksColor: '#888888',
+                        unitInterval: 15,
+                        showGridLines: true,
+                        gridLinesInterval: 15,
+                        gridLinesColor: '#888888'
+                    },
+                colorScheme: 'scheme02',
+                seriesGroups:
+                    [
+                        {
+                            type: 'spline',
+                            valueAxis:
+                            {
+                                unitInterval: 1,
+                                displayValueAxis: false,
+                                displayGridLines: false
+                            },
+                            series: [
+                                    { dataField: 'Rate', displayText: 'Interest Rate' }
+                                ]
+                        },
+                        {
+                            type: 'spline',
+                            valueAxis:
+                            {
+                                unitInterval: 80,
+                                description: 'Index Value'
+                            },
+                            series: [
+                                    { dataField: 'HPI', displayText: 'Real Home Price Index' },
+                                    { dataField: 'BuildCost', displayText: 'Building Cost Index' }
+                                ]
+                        }
+                    ]
+            };
+
+            // setup the chart
+            $('#chart').jqxChart(settings);
+            initSimulator("chart");
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="demoContainer" class="device-mobile-tablet">
+        <div id="container" class="device-mobile-tablet-container">
+            <div id='chart' style="width: 100%; height: 100%">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

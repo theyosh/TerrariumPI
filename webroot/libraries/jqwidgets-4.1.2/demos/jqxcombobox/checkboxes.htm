@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>In this demo is illustrated how to display checkboxes next to the ComboBox items. The combobox's input field in this mode is readonly.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+</head>
+<body>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {                
+                var url = "../sampledata/customers.txt";
+                // prepare the data
+                var source =
+                {
+                    datatype: "json",
+                    datafields: [
+                        { name: 'CompanyName' },
+                        { name: 'ContactName' }
+                    ],
+                    id: 'id',
+                    url: url,
+                    async: false
+                };
+                var dataAdapter = new $.jqx.dataAdapter(source);
+
+                // Create a jqxComboBox
+                $("#jqxWidget").jqxComboBox({ checkboxes: true, source: dataAdapter, displayMember: "ContactName", valueMember: "CompanyName", width: 200, height: 25});
+                $("#jqxWidget").jqxComboBox('checkIndex', 0);
+                // subscribe to the checkChange event.
+                $("#jqxWidget").on('checkChange', function (event) {
+                    if (event.args) {
+                        var item = event.args.item;
+                        if (item) {
+                            var valueelement = $("<div></div>");
+                            valueelement.text("Value: " + item.value);
+                            var labelelement = $("<div></div>");
+                            labelelement.text("Label: " + item.label);
+                            var checkedelement = $("<div></div>");
+                            checkedelement.text("Checked: " + item.checked);
+
+                            $("#selectionlog").children().remove();
+                            $("#selectionlog").append(labelelement);
+                            $("#selectionlog").append(valueelement);
+                            $("#selectionlog").append(checkedelement);
+
+                            var items = $("#jqxWidget").jqxComboBox('getCheckedItems');
+                            var checkedItems = "";
+                            $.each(items, function (index) {
+                                checkedItems += this.label + ", ";                          
+                            });
+                            $("#checkedItemsLog").text(checkedItems);
+                        }
+                    }
+                });
+            });
+        </script>
+        <div>
+            <div style='float: left;' id='jqxWidget'>
+            </div>
+            <div style="float: left; margin-left: 20px; font-size: 13px; font-family: Verdana;">
+                <div id="selectionlog"></div>
+                <div style='max-width: 300px; margin-top: 20px;' id="checkedItemsLog"></div>
+            </div>
+          
+        </div>
+    </div>
+</body>
+</html>

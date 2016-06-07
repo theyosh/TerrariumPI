@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id="Description">This sample demonstrates how we can localize the AngularJS DataTable</title>
+    <meta name="description" content="This sample demonstrates how we can localize the strings used in the jqwidgets DataTable widget." />
+
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+     <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../sampledata/generatedata.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);  
+        demoApp.controller("demoController", function ($scope) {           
+         
+            var getLocalization = function () {
+                var localizationobj = {};
+                localizationobj.pagerGoToPageString = "Gehe zu:";
+                localizationobj.pagerShowRowsString = "Zeige Zeile:";
+                localizationobj.pagerRangeString = " von ";
+                localizationobj.pagerNextButtonString = "voriger";
+                localizationobj.pagerFirstButtonString = "erste";
+                localizationobj.pagerLastButtonString = "letzte";
+                localizationobj.pagerPreviousButtonString = "nächster";
+                localizationobj.sortAscendingString = "Sortiere aufsteigend";
+                localizationobj.sortDescendingString = "Sortiere absteigend";
+                localizationobj.sortRemoveString = "Entferne Sortierung";
+                localizationobj.emptydatastring = "keine Daten angezeigt";
+                localizationobj.firstDay = 1;
+                localizationobj.percentSymbol = "%";
+                localizationobj.currencySymbol = "€";
+                localizationobj.currencySymbolPosition = "after";
+                localizationobj.decimalSeparator = ".";
+                localizationobj.thousandsSeparator = ",";
+                var days = {
+                    // full day names
+                    names: ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"],
+                    // abbreviated day names
+                    namesAbbr: ["Sonn", "Mon", "Dien", "Mitt", "Donn", "Fre", "Sams"],
+                    // shortest day names
+                    namesShort: ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
+                };
+                localizationobj.days = days;
+                var months = {
+                    // full month names (13 months for lunar calendards -- 13th month should be "" if not lunar)
+                    names: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember", ""],
+                    // abbreviated month names
+                    namesAbbr: ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dez", ""]
+                };
+                var patterns = {
+                    d: "dd.MM.yyyy",
+                    D: "dddd, d. MMMM yyyy",
+                    t: "HH:mm",
+                    T: "HH:mm:ss",
+                    f: "dddd, d. MMMM yyyy HH:mm",
+                    F: "dddd, d. MMMM yyyy HH:mm:ss",
+                    M: "dd MMMM",
+                    Y: "MMMM yyyy"
+                }
+                localizationobj.patterns = patterns;
+                localizationobj.months = months;
+                return localizationobj;
+            }
+
+            $scope.gridSettings =
+            {
+                width: 850,
+                source:  new $.jqx.dataAdapter({
+                    localdata: generateData(250),
+                    dataFields:
+                    [
+                        { name: 'name', type: 'string' },
+                        { name: 'productname', type: 'string' },
+                        { name: 'available', type: 'bool' },
+                        { name: 'date', type: 'date'},
+                        { name: 'quantity', type: 'number' },
+                        { name: 'price', type: 'number' }
+                    ],
+                    datatype: "array"
+                }),
+                filterable: true,
+                pageable: true,
+                editable: true,
+                localization: getLocalization(),
+                columns: [
+                  { text: 'Name', dataField: 'name', width: 215 },
+                  { text: 'Produkt', dataField: 'productname', width: 220 },
+                  { text: 'Datum', dataField: 'date', width: 210, cellsAlign: 'right', cellsFormat: 'd'},
+                  { text: 'Qt.', dataField: 'quantity', cellsAlign: 'right', width: 60 },
+                  { text: 'Preis', dataField: 'price', cellsFormat: "c2", cellsAlign: 'right' }
+                ]
+            };
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+    <jqx-data-table jqx-settings="gridSettings"></jqx-data-table>
+</body>
+</html>

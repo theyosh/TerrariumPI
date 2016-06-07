@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title id='Description'>In this sample is illustrated how to save and load the jqxDropDownList's selection using cookies. This will allow you to keep the selection when the page is reloaded.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+</head>
+<body>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {               
+                var url = "../sampledata/customers.txt";
+
+                // prepare the data
+                var source =
+                {
+                    datatype: "json",
+                    datafields: [
+                        { name: 'CompanyName' },
+                        { name: 'ContactName' }
+                    ],
+                    id: 'id',
+                    url: url,
+                    async: false
+                };
+                var dataAdapter = new $.jqx.dataAdapter(source);
+
+                var index = $.jqx.cookie.cookie("jqxDropDownList_jqxWidget");
+                if (undefined == index) index = 0;
+
+                $("#jqxWidget").jqxDropDownList({ selectedIndex: index, source: dataAdapter, displayMember: "ContactName", valueMember: "CompanyName", width: 200, height: 25});
+
+                // subscribe to the select event.
+                $("#jqxWidget").on('select', function (event) {
+                    // save the index in cookie.
+                    $.jqx.cookie.cookie("jqxDropDownList_jqxWidget", event.args.index);
+                });
+            });
+        </script>
+        <div id='jqxWidget'>
+        </div>
+    </div>
+</body>
+</html>

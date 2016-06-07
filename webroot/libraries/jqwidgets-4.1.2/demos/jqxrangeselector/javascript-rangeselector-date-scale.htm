@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">RangeSelector - Date Scale</title>
+    <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxrangeselector.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#rangeSelector").jqxRangeSelector({
+                width: 750, height: 100, min: new Date(2014, 0, 1), max: new Date(2014, 11, 31), labelsOnTicks: false, range: { from: new Date(2014, 3, 15), to: new Date(2014, 7, 29) },
+                majorTicksInterval: "month", minorTicksInterval: "day", labelsFormat: 'MMM', markersFormat: 'd'
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="rangeSelector">
+    </div>
+</body>
+</html>

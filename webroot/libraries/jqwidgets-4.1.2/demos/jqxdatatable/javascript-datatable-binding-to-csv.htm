@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">Data Binding to CSV data in jqxDataTable</title>
+    <meta name="description" content="This sample demonstrates how we can bind jQWidgets DataTable widget to CSV Data by using jQWidgets DataAdapter plugin.">
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = '../sampledata/nasdaq_vs_sp500.txt';
+
+            var source =
+            {
+                dataType: "csv",
+                dataFields: [
+                    { name: 'Date', type: 'date' },
+                    { name: 'S&P 500', type: 'float' },
+                    { name: 'NASDAQ', type: 'float' }
+                ],
+                url: url
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $("#table").jqxDataTable(
+            {
+                width: 850,
+                pageable: true,
+                pagerButtonsCount: 10,
+                source: dataAdapter,
+                columnsResize: true,
+                columns: [
+                  { text: 'Date', dataField: 'Date', cellsFormat: 'D', width: 250},
+                  { text: 'S&P 500', dataField: 'S&P 500', width: 300, cellsFormat: 'f' },
+                  { text: 'NASDAQ', dataField: 'NASDAQ', cellsFormat: 'f' }
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="table"></div>
+</body>
+</html>

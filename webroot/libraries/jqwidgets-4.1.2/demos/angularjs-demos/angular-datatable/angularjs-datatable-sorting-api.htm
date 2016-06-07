@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id="Description">JavaScript AngularJS DataTable Sorting API</title>
+    <meta name="description" content="AngularJS DataTable Sorting API is demonstrated in this example." />	
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> 
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../sampledata/generatedata.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]); 
+        demoApp.controller("demoController", function ($scope) {  
+            var grid;
+            $scope.gridSettings =
+            {
+                source:  new $.jqx.dataAdapter({
+                    localdata: generateData(85),
+                    datatype: "array",
+                    datafields:
+                    [
+                        { name: 'firstname', type: 'string' },
+                        { name: 'lastname', type: 'string' },
+                        { name: 'productname', type: 'string' },
+                        { name: 'quantity', type: 'number' },
+                        { name: 'price', type: 'number' },
+                        { name: 'total', type: 'number' }
+                    ],
+                    sortcolumn: 'firstname',
+                    sortdirection: 'asc'
+                }),
+                sortable: true,
+                pageable: true,
+                altRows: true,
+                width: 650,
+                created: function(args)
+                {
+                    grid = args.instance;
+                },
+                columns: [
+                  { text: 'Name', dataField: 'firstname', width: 200 },
+                  { text: 'Last Name', dataField: 'lastname', width: 200 },
+                  { text: 'Product', editable: false, dataField: 'productname', width: 180 },
+                  { text: 'Quantity', dataField: 'quantity', width: 80, align: 'right', cellsalign: 'right' },
+                  { text: 'Unit Price', dataField: 'price', width: 90, align: 'right', cellsalign: 'right', cellsFormat: 'c2' },
+                  { text: 'Total', dataField: 'total', width: 100, align: 'right', cellsalign: 'right', cellsFormat: 'c2' }
+                ]
+            };
+
+            $scope.columnNameSettings = {width: 100, selectedIndex: 0, autoDropDownHeight: true, source: ['Name', 'Last Name', 'Product', 'Quantity', 'Unit Price', 'Total'] };
+            $scope.sortOrderSettings = { width: 100, selectedIndex: 0, autoDropDownHeight: true, source: ['Ascending', 'Descending'] };
+            $scope.sort = function () {
+                var columnIndex = $scope.columnNameSettings.selectedIndex;
+                var sortOrder =  $scope.sortOrderSettings.selectedIndex == 0 ? 'asc' : 'desc';
+                grid.sortBy($scope.gridSettings.columns[columnIndex].dataField, sortOrder);
+            };
+            $scope.clear = function () {
+                grid.sortBy(null);
+            };
+        });
+    </script>
+</head>
+ <body ng-controller="demoController">
+    <jqx-data-table jqx-settings="gridSettings" style="float: left;"></jqx-data-table>
+    <div style="float: left; margin-left: 10px;">
+        <table>
+            <tr>
+                <td align="right"><div><strong>Settings</strong></div></td>
+                <td align="left"></td>
+            </tr>
+            <tr>
+                <td align="right">Column:</td>
+                <td align="left">
+                    <jqx-drop-down-list jqx-watch="columnNameSettings.selectedIndex" jqx-settings="columnNameSettings"></jqx-drop-down-list>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">Sort Order:</td>
+                <td align="left">
+                    <jqx-drop-down-list jqx-watch-settings="sortOrderSettings" jqx-settings="sortOrderSettings"></jqx-drop-down-list>
+                </td>
+            </tr>
+            <tr>
+                <td align="right"></td>
+                <td align="left">
+                    <jqx-button jqx-on-click="sort()" style="float: left;">Sort</jqx-button>
+                    <jqx-button jqx-on-click="clear()" style="float: left; margin-left: 5px;">Clear</jqx-button></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

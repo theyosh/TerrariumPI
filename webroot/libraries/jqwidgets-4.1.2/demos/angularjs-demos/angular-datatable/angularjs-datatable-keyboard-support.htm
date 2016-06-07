@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>Keyboard Navigation in AngularJS DataTable</title>
+    <meta name="description" content="AngularJS DataTable with Keyboard Navigation example.">	
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script> <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script><script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            $scope.gridSettings =
+            {
+                width: 850,
+                source:  new $.jqx.dataAdapter({
+                    dataType: "xml",
+                    dataFields: [
+                        { name: 'ShippedDate', map: 'm\\:properties>d\\:ShippedDate', type: 'date' },
+                        { name: 'Freight', map: 'm\\:properties>d\\:Freight', type: 'float' },
+                        { name: 'ShipName', map: 'm\\:properties>d\\:ShipName', type: 'string' },
+                        { name: 'ShipAddress', map: 'm\\:properties>d\\:ShipAddress', type: 'string' },
+                        { name: 'ShipCity', map: 'm\\:properties>d\\:ShipCity', type: 'string' },
+                        { name: 'ShipCountry', map: 'm\\:properties>d\\:ShipCountry', type: 'string' }
+                    ],
+                    root: "entry",
+                    record: "content",
+                    id: 'm\\:properties>d\\:OrderID',
+                    url: "../../sampledata/orders.xml"
+                }),
+                editable: true,
+                pageable: true,
+                created: function (args) {
+                    var grid = args.instance;
+                    grid.focus();
+                    grid.selectRow(0);
+                },
+                columns: [
+                { text: 'Ship Name', dataField: 'ShipName', width: 350, align: 'left', cellsAlign: 'left' },
+                { text: 'Freight', dataField: 'Freight', width: 180, align: 'right', cellsFormat: 'F2', cellsAlign: 'right' },
+                { text: 'Ship Address', dataField: 'ShipAddress', align: 'left', width: 350, cellsAlign: 'left' },
+                { text: 'Ship City', dataField: 'ShipCity', width: 100, align: 'left', cellsAlign: 'left' },
+                { text: 'Ship Country', dataField: 'ShipCountry', align: 'left', cellsAlign: 'left' }
+                ]
+            };
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-data-table jqx-settings="gridSettings"></jqx-data-table>
+    <div style="font-family: Verdana; font-size: 12px; width: 670px;">
+        <ul>
+            <li><b>Left Arrow</b> key is pressed - Navigates to the Previous Page. If Row Details is enabled, Collapses the Row.</li>
+            <li><b>Right Arrow</b> key is pressed - Navigates to the Next Page. If Row Details is enabled, Expands the Row.</li>
+            <li><b>Up Arrow</b> key is pressed - Selects the row above.</li>
+            <li><b>Down Arrow</b> key is pressed - Selects the row below.</li>
+            <li><b>Page Up/Down</b> is pressed - Navigate Up or Down with one page.</li>
+            <li><b>Home/End</b> is pressed - Navigate to the first or last row on the current page.</li>
+            <li><b>Enter</b> key is pressed - Saves the Edited Row.</li>
+            <li><b>Esc</b> key is pressed - Closes all Editors and Cancels the changes.</li>
+            <li><b>F2</b> key is pressed -  Enters edit mode for the currently selected row.</li>
+            <li><b>Shift+Arrow</b> key extends the selection.</li>
+            <li><b>Shift</b> extends the selection when an end user clicks on a row.</li>
+            <li><b>Ctrl</b> key is pressed - extends the selection when an end user clicks on a row. </li>
+        </ul>
+    </div>
+</body>
+</html>

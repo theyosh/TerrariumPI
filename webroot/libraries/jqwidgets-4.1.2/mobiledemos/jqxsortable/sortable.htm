@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title>JavaScript Sortable - Mobile Example</title>
+    <link rel="stylesheet" href="../styles/demo.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.windowsphone.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.blackberry.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.android.css" type="text/css" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.mobile.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../simulator.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxsortable.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+     <style>
+        #sortable {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+        }
+
+            #sortable div {
+                border-radius: 5px;
+                padding: 5px;
+                background-color: white;
+                color: black;
+                border: 1px solid transparent;
+            }
+
+                #sortable div:hover {
+                    border: 1px solid #356AA0;
+                }
+    </style>
+   <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = prepareSimulator("sortable");
+            var firstNames = ["Nancy", "Andrew", "Janet", "Margaret", "Steven"];
+            var lastNames = ["Davolio", "Fuller", "Leverling", "Peacock", "Buchanan"];
+            var titles = ["Sales Representative", "Vice President, Sales", "Sales Representative", "Sales Representative", "Sales Manager"];
+
+            var sortableList = '';
+            for (var i = 0; i < firstNames.length; i++) {
+                var imgurl = '../../images/' + firstNames[i].toLowerCase() + '.png';
+                var img = '<img height="50" width="40" src="' + imgurl + '"/>';
+                var element = '<div><table style="min-width: 130px;"><tr><td style="width: 40px;" rowspan="2">' + img + '</td><td>' + firstNames[i] + " " + lastNames[i] + '</td></tr><tr><td>' + titles[i] + '</td></tr></table></div>';
+                sortableList = sortableList + element;
+            }
+
+            $("#sortable").html(sortableList);
+            $("#sortable").jqxSortable();
+            initSimulator("sortable");
+        });
+    </script>
+</head>
+<body style="background: white;">
+    <div id="demoContainer" class="device-mobile">
+        <div id="container" class="device-mobile-container">
+              <div id="sortable"></div>
+         </div>
+    </div>
+</body>
+</html>

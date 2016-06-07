@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Personal Sales example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 minimum-scale=1" />
+
+    <link rel=" stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.light.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.dark.css" type="text/css" />
+
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+
+    <link href="../../../styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../../styles/bootstrap-theme.min.css" rel="stylesheet" />
+    <script src="../../../scripts/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbargauge.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.rangeselector.js"></script>
+
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.filter.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.edit.js"></script>
+
+    <script type="text/javascript" src="../../../jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.aggregates.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/globalization/globalize.js"></script>
+
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+
+    <link href="style.css" rel="stylesheet" />
+    <script src="main.js"></script>
+</head>
+<body style="overflow: initial;">
+    <div id="personalSalesHeader" class="headerband">
+        <div class="sampleheader container">
+            <div id="personalSales">
+                <div id="header" class="col-xs-12">
+                    <div class="headerTitle">
+                        <span class="glyphicon glyphicon-piggy-bank seticon" aria-hidden="true"></span>
+                        <span>Personal Sales</span>
+                        <div id="dropdownlist"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENT container -->
+    <div class="samplecontainer container">
+        <div class="row personpresent">
+            <div id="tablePurchase" class="col-md-6 pull-left purchase">
+                <div class="inittable">
+                    <table class="purchase">
+                        <tbody>
+                            <tr>
+                                <td class="total-amt sideborder">
+                                    <p class="total-text"></p>
+                                    <p class="total-val"></p>
+                                </td>
+                                <td class="orders-amt sideborder">
+                                    <p class="orders-val"></p>
+                                    <p class="orders-text"></p>
+                                </td>
+                                <td class="amount-amt">
+                                    <p class="amount-val"></p>
+                                    <p class="amount-text"></p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="person" class="col-md-5"></div>
+            <div style="clear: both;"></div>
+            <div id="content">
+                <div class="row container">
+                    <!-- Start Grid Content -->
+                    <div class="row">
+                        <div id="controlPanel" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <p class="label col-xs-6 col-sm-6" style="display: inline-block;">Personal Sales Grid</p>
+                            <div id="controlPanelSettings" class="col-xs-6 col-sm-6">
+                                <div id="monthCombobox" style="display: inline-block;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row gridcontent">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div id="personalSalesGrid"></div>
+                        </div>
+                    </div>
+
+                    <!-- Start Chart Content -->
+                    <div class="row chartcontent">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="chartsection">
+                                <div id="pin" class="sectionname">
+                                    <div>
+                                        <p class="label">Personal Sales Chart</p>
+                                    </div>
+                                </div>
+
+                                <div class="sectionbody">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div id="personalSalesChart" style="width: 100%; height: 450px;"></div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="amountcontent">
+                                                <table cellspacing="10">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="big-value">
+                                                                <p class="big-value-text">
+                                                                    Biggest Amount
+                                                                </p>
+                                                                <p class="big-value-amt"></p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="small-value">
+                                                                <p class="small-value-text">
+                                                                    Smallest Amount
+                                                                </p>
+                                                                <p class="small-value-amt"></p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="avg-value">
+                                                                <p class="avg-value-text">
+                                                                    Average Amount
+                                                                </p>
+                                                                <p class="avg-value-amt"></p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

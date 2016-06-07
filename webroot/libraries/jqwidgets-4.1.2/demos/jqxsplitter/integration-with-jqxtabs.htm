@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>The sample shows how to divide a split panel into multiple tabs.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxsplitter.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#splitContainer').jqxSplitter({ height: 600, width: 850, orientation: 'horizontal', panels: [{ collapsible: false, size: '50%' }, { size: '50%' }] });
+            $('#splitter').jqxSplitter({ width: '100%',  panels: [{ size: "50%" }] });
+            $("#tabs1").jqxTabs({  height: '100%', width: '100%' });
+            $("#tabs2").jqxTabs({  height: '100%', width: '100%' });
+            $("#tabs3").jqxTabs({  height: '100%', width: '100%' });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="splitContainer">
+        <div>
+            <div class="jqx-hideborder jqx-hidescrollbars" id="tabs1">
+                <ul>
+                    <li style="margin-left: 30px;">Tab 1</li>
+                    <li>Tab 2</li>
+                </ul>
+                <div>
+                    Content 1</div>
+                <div>
+                    Content 2</div>
+            </div>
+        </div>
+        <div>
+            <div id="splitter">
+                <div>
+                    <div class="jqx-hideborder jqx-hidescrollbars" id="tabs2">
+                        <ul>
+                            <li style="margin-left: 30px;">Tab 1</li>
+                            <li>Tab 2</li>
+                        </ul>
+                        <div>
+                            Content 1</div>
+                        <div>
+                            Content 2</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="jqx-hideborder jqx-hidescrollbars" id="tabs3">
+                        <ul>
+                            <li style="margin-left: 30px;">Tab 1</li>
+                            <li>Tab 2</li>
+                        </ul>
+                        <div>
+                            Content 1</div>
+                        <div>
+                            Content 2</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

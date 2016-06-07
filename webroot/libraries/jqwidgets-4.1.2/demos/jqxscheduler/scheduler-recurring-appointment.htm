@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxScheduler Recurring appointments example
+    </title>
+		<meta name="description" content="Javascript Scheduler Recurring Appointments example" /> 
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdate.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscheduler.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscheduler.api.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxradiobutton.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.culture.de-DE.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var appointments = new Array();
+
+            var appointment1 = {
+                id: "id4",
+                description: "",
+                style: "#AA4643",
+                location: "",
+                subject: "New Projects Planning",
+                calendar: "Room 2",
+                from: new Date(2016, 10, 22, 8, 0, 0),
+                to: new Date(2016, 10, 22, 13, 0, 0)
+            }
+
+            var appointment2 = {
+                id: "id5",
+                description: "",
+                style: "#89A54E",
+                location: "",
+                subject: "Interview with James",
+                calendar: "Room 1",
+                from: new Date(2016, 10, 25, 13, 0, 0),
+                to: new Date(2016, 10, 25, 15, 0, 0)
+            }
+
+            var appointment3 = {
+                id: "id6",
+                description: "",
+                style: "#71588F",
+                location: "",
+                subject: "Interview with Nancy",
+                calendar: "Room 2",
+                from: new Date(2016, 10, 26, 14, 0, 0),
+                to: new Date(2016, 10, 26, 16, 0, 0)
+            }
+
+            var appointment4 = {
+                id: "id7",
+                description: "",
+                style: "#307DD7",
+                location: "",
+                subject: "Daily Meeting",
+                calendar: "Room 1",
+                recurrenceRule: "FREQ=DAILY;",
+                recurrenceException: "2016-11-24 09:00:00,2016-11-26 12:00:00",
+                from: new Date(2016, 10, 23, 10, 0, 0),
+                to: new Date(2016, 10, 23, 11, 0, 0)
+            }
+
+            appointments.push(appointment1);
+            appointments.push(appointment2);
+            appointments.push(appointment3);
+            appointments.push(appointment4);
+
+
+            // prepare the data
+            var source =
+            {
+                dataType: "array",
+                dataFields: [
+                    { name: 'id', type: 'string' },
+                    { name: 'description', type: 'string' },
+                    { name: 'location', type: 'string' },
+                    { name: 'subject', type: 'string' },
+                    { name: 'calendar', type: 'string' },
+                    { name: 'recurrenceRule', type: 'string' },
+                    { name: 'recurrenceException', type: 'string' },
+                    { name: 'style', type: 'string' },
+                    { name: 'from', type: 'date' },
+                    { name: 'to', type: 'date' }
+                ],
+                id: 'id',
+                localData: appointments
+            };
+            var adapter = new $.jqx.dataAdapter(source);
+            $("#scheduler").jqxScheduler({
+                date: new $.jqx.date(2016, 11, 23),
+                width: 850,
+                height: 600,
+                source: adapter,
+                ready: function()
+                {
+                    $("#scheduler").jqxScheduler('ensureAppointmentVisible', 'id7');
+                },
+                appointmentDataFields:
+                {
+                    from: "from",
+                    to: "to",
+                    id: "id",
+                    description: "description",
+                    location: "place",
+                    style: "style",
+                    subject: "subject",
+                    resourceId: "calendar",
+                    recurrencePattern: "recurrenceRule",
+                    recurrenceException: "recurrenceException"
+                },
+                view: "weekView",
+                views:
+                [
+                    'dayView',
+                    'weekView',
+                    'monthView'
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="scheduler"></div>
+</body>
+</html>

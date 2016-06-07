@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxMaskedInput Fluid Size Example. The width of the MaskedInput in this demo is in Percentages.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmaskedinput.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 minimum-scale=1" />  
+    <meta name="description" content="JavaScript Masked Input with Responsive Layout" />   
+     <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            padding: 3px;
+            box-sizing: border-box;
+            margin: 0;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#numericInput").jqxMaskedInput({ width: '50%', height: '35px', mask: '(###)###-####' });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div style='font-size: 13px; font-family: verdana; margin-top: 10px;'>
+        Phone Number
+    </div>
+    <input style='margin-top: 3px;' id='numericInput' />
+</body>
+</html>

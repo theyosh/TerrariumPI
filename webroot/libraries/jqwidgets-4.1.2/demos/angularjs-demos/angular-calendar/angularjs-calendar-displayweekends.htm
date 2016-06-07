@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoApp" lang="en">
+<head>
+    <title id='Description'>The AngularJS Calendar allows you to style the weekend dates. To enable this functionality, you need to set the enableWeekend property to true.
+    </title>
+ <meta name="description" content="AngularJS Calendar example. This example demonstrates how to display weekends in a calendar." /> 
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxangular.js"></script>
+    <script type="text/javascript">
+        var demoApp = angular.module("demoApp", ["jqwidgets"]);
+        demoApp.controller("demoController", function ($scope) {
+            $scope.calendarSettings = { width: '220px', height: '220px', enableOtherMonthDays: false, enableWeekend: true }
+        });
+    </script>
+</head>
+<body ng-controller="demoController">
+    <jqx-calendar jqx-settings="calendarSettings"></jqx-calendar>
+</body>
+</html>

@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jqxDocking, jQuery Docking, jQWidgets, API" />
+    <meta name="description" content="Using jqxDocking's API you have full control on the jqxWindows inside. You can move them, collapse them, 
+    hide any close or collapse button, disable the window you want and even add a new window to the docking. In this demo 
+    the first window into the first panel is pinned and the window with title 'CISC' is in floating mode. All other windows are in default mode." />
+    <title id='Description'>With the jqxDocking API, you can expand, collapse, move, disable,
+        pin or unpin a window.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdocking.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxslider.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#docking').jqxDocking({  orientation: 'horizontal', width: 450, mode: 'default', windowsMode: { window0: 'floating'} });
+            $('#docking').jqxDocking('setWindowPosition', 'window0', 100, 100);
+            $('#docking').jqxDocking('pinWindow', 'window1');
+            $('#docking').jqxDocking('hideAllCloseButtons');
+            $('#docking').jqxDocking('showAllCollapseButtons');
+
+            $('#disabledCheckbox').jqxCheckBox({ width: 200});
+            $('#closeButtonsCheckbox').jqxCheckBox({ width: 200});
+            $('#collapseButtonsCheckbox').jqxCheckBox({ width: 200,  checked: true });
+         
+            $('#disabledCheckbox').on('change', function () {
+                var disabled = $('#docking').jqxDocking('disabled');
+                if (disabled) {
+                    $('#docking').jqxDocking('enable');
+                } else {
+                    $('#docking').jqxDocking('disable');
+                }
+            });
+
+            $('#closeButtonsCheckbox').on('change', function () {
+                var checked = $('#closeButtonsCheckbox').jqxCheckBox('checked');
+                if (checked) {
+                    $('#docking').jqxDocking('showAllCloseButtons');
+                } else {
+                    $('#docking').jqxDocking('hideAllCloseButtons');
+                }
+            });
+
+            $('#collapseButtonsCheckbox').on('change', function () {
+                var checked = $('#collapseButtonsCheckbox').jqxCheckBox('checked');
+                if (checked) {
+                    $('#docking').jqxDocking('showAllCollapseButtons');
+                } else {
+                    $('#docking').jqxDocking('hideAllCollapseButtons');
+                }
+            });
+
+            $("#expandbutton").jqxButton({ theme: theme });
+            $("#collapsebutton").jqxButton({ theme: theme });
+            $("#movebutton").jqxButton({ theme: theme });
+
+            $('#movebutton').on('click', function () {
+                $('#docking').jqxDocking('move', "window3", 0, 1);
+            });
+
+            $('#collapsebutton').on('click', function () {
+                $('#docking').jqxDocking('collapseWindow', "window1");
+            });
+
+            $('#expandbutton').on('click', function () {
+                $('#docking').jqxDocking('expandWindow', "window1");
+            });
+
+            $("#slider").jqxSlider({ width: 200, mode: 'fixed', value: 5, ticksFrequency: 1,  max: 9 });
+            $("#slider").on('change', function (event) {
+                $("#docking").jqxDocking({ windowsOffset: event.args.value });
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div style="float: left;" id="docking">
+            <div id="panel0">
+                <div id="window0" style="height: 70px; width: 220px;">
+                    <div>
+                        jqxDock2</div>
+                    <div>
+                        You cannot drop this object.</div>
+                </div>
+                <div id="window1" style="height: 70px; width: 100px;">
+                    <div>
+                        jqxDock1</div>
+                    <div>
+                        You cannot drag this object.</div>
+                </div>
+            </div>
+            <div id="panel1">
+                <div id="window2" style="height: 70px; width: 100px;">
+                    <div>
+                        jqxDock3</div>
+                    <div>
+                        You can drag and drop this object.</div>
+                </div>
+                <div id="window3" style="height: 70px; width: 100px;">
+                    <div>
+                        jqxDock4</div>
+                    <div>
+                        You can drag and drop this object.</div>
+                </div>
+            </div>
+        </div>
+        <div style="float: left; margin-top: 30px;">
+            <span style="margin-left: 20px; margin-top: 20px; margin-bottom: 30px;">Settings</span>
+            <table style="margin-left: 20px; margin-top: 20px; margin-bottom: 30px;">
+                <tr>
+                    <td>
+                        <div id="collapseButtonsCheckbox">
+                            Collapse buttons</div>
+                    </td>
+                    <td>
+                        <input type="button" id="movebutton" value="Move jqxDock4 To Left Zone" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="closeButtonsCheckbox">
+                            Close buttons</div>
+                    </td>
+                    <td>
+                        <input type="button" id="collapsebutton" value="Collapse jqxDock1" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="disabledCheckbox">
+                            Disabled</div>
+                    </td>
+                    <td>
+                        <input type="button" id="expandbutton" value="Expand jqxDock1" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px;">
+                        <span style="font-family: Verdana; font-size: 13px;">Windows Margin</span>
+                        <div id="slider"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+﻿html, body {
+    margin: 0px;
+    padding: 0px;
+    height:99.9%;
+    width:99.95%;
+}
+
+.issue-type-container{
+    margin-top:15px;
+    padding:5px;
+}
+
+.issue-type{
+    border-radius:3px;
+    padding:5px;
+    font-size:14px;
+    font-style:italic;
+    color:white;
+}
+
+.issue-content-body{
+    font-weight:600; 
+    font-style:italic;
+}
+
+.issue-type-bug{
+    background-color:#FE4E4E;
+    background: -webkit-linear-gradient(red, #FE4E4E);
+    background: -o-linear-gradient(red, #FE4E4E);
+    background: -moz-linear-gradient(red, #FE4E4E);
+    background: linear-gradient(red, #FE4E4E);
+}
+
+.issue-type-feature{
+    background-color:lightgreen;
+    background: -webkit-linear-gradient(green, lightgreen);
+    background: -o-linear-gradient(green, lightgreen);
+    background: -moz-linear-gradient(green, lightgreen);
+    background: linear-gradient(green, lightgreen);
+}
+
+.issue-type-enhancement{
+    background-color:blue;
+    background: -webkit-linear-gradient(darkblue, blue);
+    background: -o-linear-gradient(darkblue, blue);
+    background: -moz-linear-gradient(darkblue, blue);
+    background: linear-gradient(darkblue, blue);
+}
+.issue-type-invalid{
+    background-color:orange;
+    background: -webkit-linear-gradient(darkorange, orange);
+    background: -o-linear-gradient(darkorange, orange);
+    background: -moz-linear-gradient(darkorange, orange);
+    background: linear-gradient(darkorange, orange);
+}
+
+.issue-type-question{
+    background-color:lightblue;
+    background: -webkit-linear-gradient(#3498DB, lightblue);
+    background: -o-linear-gradient(#3498DB, lightblue);
+    background: -moz-linear-gradient(#3498DB, lightblue);
+    background: linear-gradient(#3498DB, lightblue);
+}
+
+.issue-type-duplicate{
+    background-color:darkgray;
+    background: -webkit-linear-gradient(darkgray, gray);
+    background: -o-linear-gradient(darkgray, gray);
+    background: -moz-linear-gradient(darkgray, gray);
+    background: linear-gradient(darkgray, gray);
+}
+
+.issue-type-notconfirmed{
+    background-color:lightgray;
+}
+
+.issues-buttons-group{
+    text-align: left !important; 
+    padding-left: 20px; 
+    margin-right: 0px;
+}
+
+.milestones-button-group{
+    text-align: left !important; 
+    padding-left: 20px; 
+    margin-right: 0px;
+}
+
+.check-buttons-group{
+    margin: 0px; 
+    padding: 0px 0px 0px 10px !important; 
+    width: 97%; 
+}

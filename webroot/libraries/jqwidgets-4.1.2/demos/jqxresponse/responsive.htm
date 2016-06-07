@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Create Responsive Layouts using jqxResponse
+    </title>
+    <script src="../../scripts/jquery-1.11.1.min.js"></script>
+    <script src="../../jqwidgets/jqxcore.js"></script>
+    <script src="../../jqwidgets/jqxresponse.js"></script>
+    <style>
+        .row div {
+            background: #5cb85c;
+            color: #fff;
+        }
+        .row .big {
+            background: #5cb85c;
+        }
+        .row .medium {
+            background: #293955;
+        }
+        .row .small {
+            background: #00a0da;
+        }
+        .row .x-small {
+            background: #f0ad4e;
+        }
+        .row {
+            overflow: auto;
+        }
+        table {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        td {
+            padding: 5px;
+            border: 1px solid #aaa;
+        }
+        #currentWidth {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+    <script>
+        $(function ()
+        {
+            var response = new $.jqx.response();
+            var padding = {
+                left: 5,
+                top: 5,
+                right: 5,
+                bottom: 5
+            };
+            var margin = {
+                left: 0,
+                top: 0,
+                right: 0,
+                bottom: 0
+            };
+            var breakPointPadding = {
+                left: 0,
+                top: 5,
+                right: 0,
+                bottom: 5
+            };
+            var breakPointMargin = {
+                left: 0,
+                top: 0,
+                right: 0,
+                bottom: 0
+            };
+            response.responsive({
+                container: $("#row"),
+                deviceTypes: "Desktop, Tablet, Phone",
+                margin: margin, padding: padding,
+                colWidths: [0.16666, 0.16666, 0.16666, 0.16666, 0.16666, 0.16666],
+                breakpoints: [
+                    {
+                        colWidths: [0.33333, 0.33333, 0.33333, 0.33333, 0.33333, 0.33333], margin: breakPointMargin, padding: breakPointPadding,
+                        width: 1170
+                    },
+                    {
+                        colWidths: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5], margin: breakPointMargin, padding: breakPointPadding,
+                        width: 970
+                    },
+                    {
+                        colWidths: [1, 1, 1, 1, 1, 1], margin: breakPointMargin, padding: breakPointPadding,
+                        width: 750
+                    }
+                ]
+            });
+            response.responsive({
+                container: $("#row2"),
+                deviceTypes: "Desktop, Tablet, Phone",
+                margin: margin, padding: padding,
+                colWidths: [0.25, 0.5, 0.25],
+                breakpoints: [
+                    {
+                        colWidths: [1, 1, 1], margin: breakPointMargin, padding: breakPointPadding,
+                        width: 970
+                    }
+                ]
+            });
+            response.responsive({
+                container: $("#row3"),
+                deviceTypes: "Desktop, Tablet, Phone",
+                margin: margin, padding: padding,
+                colWidths: [0.75, 0.25],
+                breakpoints: [
+                    {
+                        colWidths: [1, 1], margin: breakPointMargin, padding: breakPointPadding,
+                        width: 750
+                    }
+                ]
+            });
+            response.responsive({
+                container: $("#row4"),
+                deviceTypes: "Desktop, Tablet, Phone",
+                margin: margin, padding: padding,
+                colWidths: [0.25, 0.25, 0.25],
+                colOffsets: [0, 0.05, 0.2],
+                breakpoints: [
+                    {
+                        colWidths: [1, 1, 1], margin: breakPointMargin, padding: breakPointPadding,
+                        width: 970
+                    }
+                ]
+            });
+            response.responsive({
+                container: $("#row5"),
+                deviceTypes: "Desktop, Tablet, Phone",
+                margin: margin, padding: padding,
+                colClass: "big",
+                colWidths: [0.16666, 0.16666, 0.16666, 0.16666, 0.16666, 0.16666],
+                breakpoints: [
+                    {
+                        colClass: "medium", margin: breakPointMargin, padding: breakPointPadding,
+                        colWidths: [0.3333, 0.3333, 0.3333, 0.3333, 0.3333, 0.3333], width: 1170
+                    },
+                    {
+                        colClass: "small", margin: breakPointMargin, padding: breakPointPadding,
+                        colWidths: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5], width: 970
+                    },
+                    {
+                        colClass: "x-small", margin: breakPointMargin, padding: breakPointPadding,
+                        colWidths: [1, 1, 1, 1, 1, 1], width: 750
+                    }
+                ]
+            });
+            $("#currentWidth").html("Width: " + $(window).width() + "px");
+            $(window).resize(function ()
+            {
+                $("#currentWidth").html("Width: " + $(window).width() + "px");
+            });
+        });
+    </script>
+</head>
+<body style="font-family: Verdana; font-size: 13px;">
+    <div id="currentWidth">Width:</div>
+    <table>
+        <tr>
+            <td>1 row, 6 columns</td>
+            <td>2 rows, 3 columns</td>
+            <td>3 rows, 2 columns</td>
+            <td>6 rows, 1 column</td>
+        </tr>
+        <tr>
+            <td>>=1170px</td>
+            <td>>=970px</td>
+            <td>>=750px</td>
+            <td>>=0px</td>
+        </tr>
+    </table>
+    <div class="row" id="row">
+        <div>Cell 1</div>
+        <div>Cell 2</div>
+        <div>Cell 3</div>
+        <div>Cell 4</div>
+        <div>Cell 5</div>
+        <div>Cell 6</div>
+    </div>
+    <table>
+        <tr>
+            <td>1 row, 3 columns</td>
+            <td>3 rows, 1 column</td>
+        </tr>
+        <tr>
+            <td>>=970px</td>
+            <td>>=0px</td>
+        </tr>
+    </table>
+    <div class="row" id="row2">
+        <div>Cell 1</div>
+        <div>Cell 2</div>
+        <div>Cell 3</div>
+    </div>
+    <table>
+        <tr>
+            <td>1 row, 2 columns</td>
+            <td>2 rows, 1 column</td>
+        </tr>
+        <tr>
+            <td>>=750px</td>
+            <td>>=0px</td>
+        </tr>
+    </table>
+    <div class="row" id="row3">
+        <div>Cell 1</div>
+        <div>Cell 2</div>
+    </div>
+    <table>
+        <tr>
+            <td>1 row, 3 columns, 2 columns with Offset</td>
+            <td>2 rows, 1 column</td>
+        </tr>
+        <tr>
+            <td>>=970px</td>
+            <td>>=0px</td>
+        </tr>
+    </table>
+    <div class="row" id="row4">
+        <div>Cell 1</div>
+        <div>Cell 2</div>
+        <div>Cell 3</div>
+    </div>
+    <table>
+        <tr>
+            <td>1 row, 6 columns, ".big" CSS class applied to all columns.</td>
+            <td>2 rows, 3 columns, ".medium" CSS class applied to all columns.</td>
+            <td>3 rows, 2 columns, ".small" CSS class applied to all columns.</td>
+            <td>6 rows, 1 column, ".x-small" CSS class applied to all columns.</td>
+        </tr>
+        <tr>
+            <td>>=1170px</td>
+            <td>>=970px</td>
+            <td>>=750px</td>
+            <td>>=0px</td>
+        </tr>
+    </table>
+    <div class="row" id="row5">
+        <div>Cell 1</div>
+        <div>Cell 2</div>
+        <div>Cell 3</div>
+        <div>Cell 4</div>
+        <div>Cell 5</div>
+        <div>Cell 6</div>
+    </div>
+</body>
+</html>

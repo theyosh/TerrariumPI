@@ -1,0 +1,418 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 minimum-scale=1" />
+	
+    <title id="Dashboard">jQWidgets Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 minimum-scale=1" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.metro.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.metrodark.css" type="text/css" />
+    <link rel="stylesheet" href="../../../jqwidgets/styles/jqx.web.css" type="text/css" />
+
+    <script type="text/javascript" src="../../../scripts/jquery-1.11.1.min.js"></script>
+
+    <link href="../../../styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../../styles/bootstrap-theme.min.css" rel="stylesheet" />
+    <script src="../../../scripts/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbargauge.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxlayout.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxribbon.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxresponse.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxsplitter.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxprogressbar.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.grouping.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxgrid.filter.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxexpander.js"></script>
+    <script type="text/javascript" src="../../../jqwidgets/jqxsortable.js"></script>
+
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div style="visibility:hidden;" id="mainSplitter">
+
+        <div class="splitter-panel" id="leftPanel">
+            <header class="clearfix">
+                <div class="container">
+                    <div class="header-left">
+                        <div id="logo"><p><span class="glyphicon glyphicon-stats"></span>Admin</p></div>
+                    </div>
+                    <div class="freeSpace"></div>
+                    <div id="listContainer"> 
+                        <label for="open">
+                            <span class="hidden-desktop"></span>
+                        </label>
+                        <input type="checkbox" name="" id="open">   
+                        <nav>
+                            <a href="#" class="active" id="1"><span class="glyphicon glyphicon-blackboard"></span><p style='position:relative; top: -2px;'>KPI</p></a>
+                            <a href="#" id="2"><span class="glyphicon glyphicon-dashboard"></span><p style='position:relative; top: -2px;'>Performance</p></a>
+                            <a href="#" id="3"><span class="glyphicon glyphicon-usd"></span><p style='position:relative; top: -2px;'>Reports</p></a>
+                            <a href="#" id="4"><span class="glyphicon glyphicon-list-alt"></span><p style='position:relative; top: -2px;'>News</p></a>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+        </div>
+
+        <div class="splitter-panel" id="rightPanel" >
+
+            <div id="overview">
+                <div class="overview-list container-fluid">
+                    <ul class="list-inline">
+                        <li><h2>23</h2><p>CAMPAIGNS</p></li>
+                        <li><h2>30,204</h2><p>OPPORTUNITIES</p></li>
+                        <li><h2>11,800</h2><p>CLOSED WON</p></li>
+                        <li><h2>$125,360</h2><p>TOTAL SALES</p></li>
+                        <li><h2>64%</h2><p>GOALS MET</p></li>
+                    </ul>
+                </div>
+                <div class="data container-fluid">
+                    <div style="float:right">
+                        <p style="margin-right: 20px;">CAMPAIGN PERFORMANCE</p>
+                    </div>
+                    <div style="float:left; margin-left: 20px;" id="overviewChartList">
+                        <ul class="list-inline">
+                            <li class="active-overview" id="5">CLICKS</li>
+                            <li id="6">WON</li>
+                            <li id="7">SALES</li>
+                            <li id="8">GOALS MET</li>
+                        </ul>
+                    </div>
+                    <div id="overviewChart" style="width:100%;height:500px;"></div>
+                    <div class="overviewBottomRight">
+                        <div>
+                            <p>STATISTICS</p>
+                        </div>
+                        <div class="progressBarsContainer">
+                            <p class="overviewBottomRightInnerText">CURRENT CAMPAIGNS</p>
+                            <ul>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><div style="background-color:#6BBD49"><p>ACTIVE</p></div></li>
+                                        <li><p>3 FOR 1, 50% OFF FOR $150</p><div style='overflow: hidden;' id='jqxProgressBar1'></div></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><div style="background-color:#C8C8C8"><p>PAUSED</p></div></li>
+                                        <li><p>$250 FOR NEW CUSTOMERS</p><div style='overflow: hidden;' id='jqxProgressBar2'></div></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><div style="background-color:#667B82"><p>ENDED</p></div></li>
+                                        <li><p>$30 REFFERAL</p><div style='overflow: hidden;' id='jqxProgressBar3'></div></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="overviewBottomLeft">
+                        <div>
+                            <p style="margin-left: 20px; text-align: right;">REDEMPTION</p>
+                        </div>
+                        <div class="barGaugesContainer">
+                            <div id="leftBarGauge"></div>
+                            <div id="rightBarGauge"></div>
+                            <ul class="gaugesList">
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><div class="dot" style="background-color:#6BBD49;"></div><p style="display:inline-block">In Store</p></li>
+                                        <li style="position:relative;right:-10em;"><p>2,308</p></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="list-inline">
+                                        <li><div class="dot" style="background-color:#667B82;"></div><p style="display:inline-block">Online</p></li>
+                                        <li style="float:right;margin-right:1em;"><p>33,156</p></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <p class="barGaugeLabels barGaugeLabelsLeft">35%</p>
+                            <p class="barGaugeLabels barGaugeLabelsRight">78%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="performance" class="container-fluid">
+                <div class="bottomContainer">
+                    <div class="performanceText">2016 STATEMENTS</div>
+
+                    <div id="sortableFirst">
+                        <div class="download-wrapper">
+                            <div class="wrapper">
+                                <div class="img"></div>
+                                <div class="wrapper-text">
+                                    <div class="wrapper-text-big">QUARTERLY STATEMENT 4 2016</div>
+                                    <div class="wrapper-text-small">Uploaded: SEPTEMBER 20 2016</div>
+                                </div>
+                                <div class="icon"></div>
+                            </div>
+                        </div>
+                        <div class="download-wrapper">
+                            <div class="wrapper">
+                                <div class="img"></div>
+                                <div class="wrapper-text">
+                                    <div class="wrapper-text-big">QUARTERLY STATEMENT 3 2016</div>
+                                    <div class="wrapper-text-small">Uploaded: JULY 20 2016</div>
+                                </div>
+                                <div class="icon"></div>
+                            </div>
+                        </div>
+                        <div class="download-wrapper">
+                            <div class="wrapper">
+                                <div class="img"></div>
+                                <div class="wrapper-text">
+                                    <div class="wrapper-text-big">QUARTERLY STATEMENT 2 2016</div>
+                                    <div class="wrapper-text-small">Uploaded: MAY 20 2016</div>
+                                </div>
+                                <div class="icon"></div>
+                            </div>
+                        </div>
+                        <div class="download-wrapper">
+                            <div class="wrapper">
+                                <div class="img"></div>
+                                <div class="wrapper-text">
+                                    <div class="wrapper-text-big">QUARTERLY STATEMENT 1 2016</div>
+                                    <div class="wrapper-text-small">Uploaded: JANUARY 20 2016</div>
+                                </div>
+                                <div class="icon"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="performanceText" style="margin-top:1em;">2015 STATEMENTS</div>
+                    <div id="sortableSecond">
+                        <div class="download-wrapper">
+                            <div class="wrapper">
+                                <div class="img"></div>
+                                <div class="wrapper-text">
+                                    <div class="wrapper-text-big">QUARTERLY STATEMENT 4 2015</div>
+                                    <div class="wrapper-text-small">Uploaded: SEPTEMBER 20 2015</div>
+                                </div>
+                                <div class="icon"></div>
+                            </div>
+                        </div>
+                        <div class="download-wrapper">
+                            <div class="wrapper">
+                                <div class="img"></div>
+                                <div class="wrapper-text">
+                                    <div class="wrapper-text-big">QUARTERLY STATEMENT 3 2015</div>
+                                    <div class="wrapper-text-small">Uploaded: JULY 20 2015</div>
+                                </div>
+                                <div class="icon"></div>
+                            </div>
+                        </div>
+                        <div class="download-wrapper">
+                            <div class="wrapper">
+                                <div class="img"></div>
+                                <div class="wrapper-text">
+                                    <div class="wrapper-text-big">QUARTERLY STATEMENT 2 2015</div>
+                                    <div class="wrapper-text-small">Uploaded: MAY 20 2015</div>
+                                </div>
+                                <div class="icon"></div>
+                            </div>
+                        </div>
+                        <div class="download-wrapper">
+                            <div class="wrapper">
+                                <div class="img"></div>
+                                <div class="wrapper-text">
+                                    <div class="wrapper-text-big">QUARTERLY STATEMENT 1 2015</div>
+                                    <div class="wrapper-text-small">Uploaded: JANUARY 20 2015</div>
+                                </div>
+                                <div class="icon"></div>
+                            </div>
+                        </div>
+                     </div>
+
+                    <div class="performanceText" style="margin-top:1em;">2014 STATEMENTS</div>
+                    <div id="sortableThird">
+                        <div class="download-wrapper">
+                            <div class="wrapper">
+                                <div class="img"></div>
+                                <div class="wrapper-text">
+                                    <div class="wrapper-text-big">QUARTERLY STATEMENT 4 2014</div>
+                                    <div class="wrapper-text-small">Uploaded: SEPTEMBER 20 2014</div>
+                                </div>
+                                <div class="icon"></div>
+                            </div>
+                        </div>
+                        <div class="download-wrapper">
+                            <div class="wrapper">
+                                <div class="img"></div>
+                                <div class="wrapper-text">
+                                    <div class="wrapper-text-big">QUARTERLY STATEMENT 3 2014</div>
+                                    <div class="wrapper-text-small">Uploaded: JULY 20 2014</div>
+                                </div>
+                                <div class="icon"></div>
+                            </div>
+                        </div>
+                        <div class="download-wrapper">
+                            <div class="wrapper">
+                                <div class="img"></div>
+                                <div class="wrapper-text">
+                                    <div class="wrapper-text-big">QUARTERLY STATEMENT 2 2014</div>
+                                    <div class="wrapper-text-small">Uploaded: MAY 20 2014</div>
+                                </div>
+                                <div class="icon"></div>
+                            </div>
+                        </div>
+                        <div class="download-wrapper">
+                            <div class="wrapper">
+                                <div class="img"></div>
+                                <div class="wrapper-text">
+                                    <div class="wrapper-text-big">QUARTERLY STATEMENT 1 2014</div>
+                                    <div class="wrapper-text-small">Uploaded: JANUARY 20 2014</div>
+                                </div>
+                                <div class="icon"></div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                <div class="topContainer">
+                    <div class="toolbar">
+                        <ul class="list-inline">
+                            <li>
+                                <div class="dropdown">
+                                    <button class="dropbtn">AAPL<span class="glyphicon glyphicon-triangle-bottom"></span></button>
+                                    <div class="dropdown-content">
+                                        <a href="#">AAPL</a>
+                                        <a href="#">GOOG</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="11"><p>CHANGE:</p><div>+16.21<p>(+1.47%)</p></div></li>
+                            <li class="12"><p>PRICE:</p><div>591.45</div></li>
+                            <li class="13"><p>MAX/MIN:</p><div>599.00/584.35</div></li>
+                            <li class="14"><p>VOLUME:</p><div>159.3 m</div></li>
+                        </ul>
+                    </div>
+                    <div id="performanceChart" style="width:100%;height:75%;"></div>
+                </div>        
+            </div>
+
+            <div id="profit" class="container-fluid">
+                <div id="profitDropDownOne"></div>
+                <div id="profitDropDownTwo"></div>
+                <div id="profitGrid"></div>
+            </div>
+
+            <div id="news" class="container-fluid">
+                <div id="newsDropDown"></div>
+                <div class="newsDataContainer">
+                    <div class="line"></div>
+
+                    <div class="newsContainer">
+                        <div class="expanderContainer">
+                            <div class="icon icon-news"></div>
+                            <div id="expander1" class="expander">
+                                <div><img class="person" src="images/person1.png" /><div>Duis aliquam elit id semper maximus.</div><p>by MICHAEL DUGLAS<span class="glyphicon glyphicon-calendar glyphicon-custom1"></span><span class="glyphicon glyphicon-time glyphicon-custom2"></span>09:00 PM</p><p class="toHide1 toHide">Just the good ol' boys, never meanin' no harm. Beats all you've ever saw, been in trouble with the law since the day they...</p></div>
+                                <div><div class='newsTextContainer'>Just the good ol' boys, never meanin' no harm. Beats all you've ever saw, been in trouble with the law since the day they was born. Straight'nin' the curve, flat'nin' the hills. Someday the mountain might get 'em, but the law never will. Makin' their way, the only way they know how, that's just a little bit more than the law will allow. Just good ol' boys, wouldn't change if they could, fightin' the system like a true modern day Robin Hood.</div></div>
+                            </div>
+                        </div>
+
+                        <div class="expanderContainer">
+                            <div class="icon icon-news"></div>
+                            <div id="expander2" class="expander">
+                                <div><img class="person" src="images/person2.png" /><div>Lorem ipsum dolor sit amet consectetur.</div><p>by BERTA SIMPSON<span class="glyphicon glyphicon-calendar glyphicon-custom1"></span><span class="glyphicon glyphicon-time glyphicon-custom2"></span>02:30 PM</p><p class="toHide2 toHide">Hong Kong Phooey, number one super guy. Hong Kong Phooey, quicker than the human eye. He's got style, a groovy style, and a car...</p></div>
+                                <div><div class='newsTextContainer'>Hong Kong Phooey, number one super guy. Hong Kong Phooey, quicker than the human eye. He's got style, a groovy style, and a car that just won't stop. When the going gets tough, he's really rough, with a Hong Kong Phooey chop (Hi-Ya!). Hong Kong Phooey, number one super guy. Hong Kong Phooey, quicker than the human eye. Hong Kong Phooey, he's fan-riffic!</div></div>
+                            </div>
+                        </div>
+
+                        <div class="expanderContainer">
+                            <div class="icon icon-news"></div>
+                            <div id="expander3" class="expander">
+                                <div><img class="person" src="images/person3.png" /><div>Duis ultricies blandit fermentum.</div><p>by TINNA RODRIGES<span class="glyphicon glyphicon-calendar glyphicon-custom1"></span><span class="glyphicon glyphicon-time glyphicon-custom2"></span>15:46 PM</p><p class="toHide3 toHide">Hey there where ya goin', not exactly knowin', who says you have to call just...</p></div>
+                                <div><div class='newsTextContainer'>Hey there where ya goin', not exactly knowin', who says you have to call just one place home. He's goin' everywhere, B.J. McKay and his best friend Bear. He just keeps on movin', ladies keep improvin', every day is better than the last. New dreams and better scenes, and best of all I don't pay property tax. Rollin' down to Dallas, who's providin' my palace, off to New Orleans or who knows where. Places new and ladies, too, I'm B.J. McKay and this is my best friend Bear.</div></div>
+                            </div>
+                        </div>
+
+                        <div class="expanderContainer">
+                            <div class="icon icon-news"></div>
+                            <div id="expander4" class="expander">
+                                <div><img class="person" src="images/person1.png" /><div>Pellentesque tristique dui in fermentum.</div><p>by MICHAEL DUGLAS<span class="glyphicon glyphicon-calendar glyphicon-custom1"></span><span class="glyphicon glyphicon-time glyphicon-custom2"></span>11:34 PM</p><p class="toHide4 toHide">Thunder, thunder, thundercats, Ho! Thundercats are on the move, Thundercats are loose. Feel the magic, hear the...</p></div>
+                                <div><div class='newsTextContainer'>Thunder, thunder, thundercats, Ho! Thundercats are on the move, Thundercats are loose. Feel the magic, hear the roar, Thundercats are loose. Thunder, thunder, thunder, Thundercats! Thunder, thunder, thunder, Thundercats! Thunder, thunder, thunder, Thundercats! Thunder, thunder, thunder, Thundercats! Thundercats!</div></div>
+                            </div>
+                        </div>
+
+                        <div class="expanderContainer">
+                            <div class="icon icon-news"></div>
+                            <div id="expander5" class="expander">
+                                <div><img class="person" src="images/person3.png" /><div>Vestibulum rutrum semper sapien</div><p>by TINNA RODRIGES<span class="glyphicon glyphicon-calendar glyphicon-custom1"></span><span class="glyphicon glyphicon-time glyphicon-custom2"></span>03:21 PM</p><p class="toHide5 toHide">There's a voice that keeps on calling me. Down the road, that's where I'll always be. Every stop I...</p></div>
+                                <div><div class='newsTextContainer'>There's a voice that keeps on calling me. Down the road, that's where I'll always be. Every stop I make, I make a new friend. Can't stay for long, just turn around and I'm gone again. Maybe tomorrow, I'll want to settle down, Until tomorrow, I'll just keep moving on.</div></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="forumContainer"> 
+                        <div class="expanderContainer">
+                            <div class="icon icon-forum"></div>
+                            <div id="expander6" class="expander">
+                                <div><img class="person" src="images/person2.png" /><div>Vivamus et urna non metus sodales consectetur.</div><p>by BERTA SIMPSON<span class="glyphicon glyphicon-calendar glyphicon-custom1"></span><span class="glyphicon glyphicon-time glyphicon-custom2"></span>17:40 PM</p><p class="toHide6 toHide">80 days around the world, we'll find a pot of gold just sitting where the rainbow's ending. Time - we'll...</p></div>
+                                <div><div class='newsTextContainer'>80 days around the world, we'll find a pot of gold just sitting where the rainbow's ending. Time - we'll fight against the time, and we'll fly on the white wings of the wind. 80 days around the world, no we won't say a word before the ship is really back. Round, round, all around the world. Round, all around the world. Round, all around the world. Round, all around the world.</div></div>
+                            </div>
+                        </div>
+
+                        <div class="expanderContainer">
+                            <div class="icon icon-forum"></div>
+                            <div id="expander7" class="expander">
+                                <div><img class="person" src="images/person3.png" /><div>Proin purus sapien, consequat eget diam sed.</div><p>by TINNA RODRIGES<span class="glyphicon glyphicon-calendar glyphicon-custom1"></span><span class="glyphicon glyphicon-time glyphicon-custom2"></span>08:10 PM</p><p class="toHide7 toHide">Knight Rider, a shadowy flight into the dangerous world of a man who does not exist. Michael Knight, a young loner...</p></div>
+                                <div><div class='newsTextContainer'>Knight Rider, a shadowy flight into the dangerous world of a man who does not exist. Michael Knight, a young loner on a crusade to champion the cause of the innocent, the helpless in a world of criminals who operate above the law.</div></div>
+                            </div>
+                        </div>
+
+                        <div class="expanderContainer">
+                            <div class="icon icon-forum"></div>
+                            <div id="expander8" class="expander">
+                                <div><img class="person" src="images/person1.png" /><div>Curabitur lectus sapien, ornare sed leo eget.</div><p>by MICHAEL DUGLAS<span class="glyphicon glyphicon-calendar glyphicon-custom1"></span><span class="glyphicon glyphicon-time glyphicon-custom2"></span>12:24 PM</p><p class="toHide8 toHide">Top Cat! The most effectual Top Cat! Who's intellectual close friends get to call him T.C., providing...</p></div>
+                                <div><div class='newsTextContainer'>Top Cat! The most effectual Top Cat! Who's intellectual close friends get to call him T.C., providing it's with dignity. Top Cat! The indisputable leader of the gang. He's the boss, he's a pip, he's the championship. He's the most tip top, Top Cat.</div></div>
+                            </div>
+                        </div>
+
+                        <div class="expanderContainer">
+                            <div class="icon icon-forum"></div>
+                            <div id="expander9" class="expander">
+                                <div><img class="person" src="images/person3.png" /><div>Duis eros est, dignissim sed eros.</div><p>by by TINNA RODRIGES<span class="glyphicon glyphicon-calendar glyphicon-custom1"></span><span class="glyphicon glyphicon-time glyphicon-custom2"></span>01:12 PM</p><p class="toHide9 toHide">Children of the sun, see your time has just begun, searching for your ways, through adventures every day. Every day...</p></div>
+                                <div><div class='newsTextContainer'>Children of the sun, see your time has just begun, searching for your ways, through adventures every day. Every day and night, with the condor in flight, with all your friends in tow, you search for the Cities of Gold. Ah-ah-ah-ah-ah... wishing for The Cities of Gold. Ah-ah-ah-ah-ah... some day we will find The Cities of Gold. Do-do-do-do ah-ah-ah, do-do-do-do, Cities of Gold. Do-do-do-do, Cities of Gold. Ah-ah-ah-ah-ah... some day we will find The Cities of Gold.</div></div>
+                            </div>
+                        </div>
+
+                        <div class="expanderContainer">
+                            <div class="icon icon-forum"></div>
+                            <div id="expander10" class="expander">
+                                <div><img class="person" src="images/person2.png" /><div>Fusce turpis nulla, mattis vel scelerisque.</div><p>by BERTA SIMPSON<span class="glyphicon glyphicon-calendar glyphicon-custom1"></span><span class="glyphicon glyphicon-time glyphicon-custom2"></span>14:59 PM</p><p class="toHide10 toHide">One for all and all for one, Muskehounds are always ready. One for all and all for one, helping everybody. One for all...</p></div>
+                                <div><div class='newsTextContainer'>One for all and all for one, Muskehounds are always ready. One for all and all for one, helping everybody. One for all and all for one, it's a pretty story. Sharing everything with fun, that's the way to be. One for all and all for one, Muskehounds are always ready. One for all and all for one, helping everybody. One for all and all for one, can sound pretty corny. If you've got a problem chum, think how it could be.</div></div>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+
+        </div>   
+           
+    </div>
+
+    <script type="text/javascript" src="main.js"></script>
+
+</body>
+</html>
