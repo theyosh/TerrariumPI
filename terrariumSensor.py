@@ -1,60 +1,66 @@
 # -*- coding: utf-8 -*-
-
 from datetime import datetime, timedelta
 from hashlib import md5
 import ow
 
-import logging
-terrarium_log = logging.getLogger('root')
-
 class terrariumSensor:
   valid_sensor_types = ['temperature','humidity']
 
+  def __init__(self, id, type, sensor, name = '', alarm_min = 0, alarm_max = 0, min = 0, max = 100):
+    self.id = id
+    self.type = str(type)
+    # OW Sensor object
+    self.sensor = sensor
+    self.sensor.useCache(True)
+    self.sensor_address = self.sensor.address
 
-  def __init__(self,sensor,type,configObj):
-    self.__sensor = sensor
-    self.__sensor.useCache(False)
-    self.__type = type
-    self.__config = configObj
-    self.__id = md5(b'' + self.__sensor.address + self.__type).hexdigest()
+    self.name = str(name)
+    self.current = float(0)
+    self.min = float(min)
+    self.max = float(max)
+    self.alarm_min = float(alarm_min)
+    self.alarm_max = float(alarm_max)
 
-    sensorConfig = self.__config.getSensorSettings(self.getID())
-
-    self.__name             = str(sensorConfig['name'] if 'name' in sensorConfig and sensorConfig['name'] else '{unknown}')
-    self.__maxLimit         = float(sensorConfig['maxlimit'] if 'maxlimit' in sensorConfig and sensorConfig['maxlimit'] else 0)
-    self.__minLimit         = float(sensorConfig['minlimit'] if 'minlimit' in sensorConfig and sensorConfig['minlimit'] else 0)
-    self.__alarmActive      = bool(sensorConfig['alarm'] if 'alarm' in sensorConfig and sensorConfig['alarm'] else True)
-    self.__loggingActive    = bool(sensorConfig['logging'] if 'logging' in sensorConfig and sensorConfig['logging'] else True)
-    self.__indicator        = str(sensorConfig['indicator'] if 'indicator' in sensorConfig and sensorConfig['indicator'] else '°C')
-
-    self.__current      = float(0)
-    self.__max          = float(-9999)
-    self.__min          = float(9999)
-    self.__lastUpdate   = datetime.fromtimestamp(0)
-    self.__lastReset    = datetime.fromtimestamp(0)
-    self.__lastResetTimeout = timedelta(seconds=float(30 * 60))
-
-    if 'humidity' == self.__type:
-      self.__cacheTimeOut     = timedelta(seconds=float(sensorConfig['timeout'] if 'timeout' in sensorConfig and sensorConfig['timeout'] else 15))
-    else:
-      self.__cacheTimeOut     = timedelta(seconds=float(sensorConfig['timeout'] if 'timeout' in sensorConfig and sensorConfig['timeout'] else 30))
+    self.last_update = datetime.fromtimestamp(0)
+    self.update_timeout = 30 #TODO: Config setting
 
     self.update()
 
   @staticmethod
-  def scan(port):
+  def scan(port,config): # TODO: Wants a callback per sensor here....?
     sensors = []
     try:
       ow.init(str(port));
       sensorsList = ow.Sensor('/').sensorList()
       for sensor in sensorsList:
+        sensor_config = {}
         if 'temperature' in sensor.entryList():
-          sensors.append({'type' : 'temperature',
-                          'sensor' : sensor })
+          sensor_id = md5(b'' + sensor.address + 'temperature').hexdigest()
+          if sensor_id in config:
+            sensor_config = config[sensor_id]
+
+          sensors.append(terrariumSensor( sensor_id,
+                                          'temperature',
+                                          sensor,
+                                          sensor_config['name'] if 'name' in sensor_config else '',
+                                          sensor_config['alarm_min'] if 'alarm_min' in sensor_config else 0,
+                                          sensor_config['alarm_max'] if 'alarm_max' in sensor_config else 0,
+                                          sensor_config['min'] if 'min' in sensor_config else 0,
+                                          sensor_config['max'] if 'max' in sensor_config else 100))
 
         if 'humidity' in sensor.entryList():
-          sensors.append({'type' : 'humidity',
-                          'sensor' : sensor })
+          sensor_id = md5(b'' + sensor.address + 'humidity').hexdigest()
+          if sensor_id in config:
+            sensor_config = config[sensor_id]
+
+          sensors.append(terrariumSensor(sensor_id,
+                                        'humidity',
+                                        sensor,
+                                        sensor_config['name'] if 'name' in sensor_config else '',
+                                        sensor_config['alarm_min'] if 'alarm_min' in sensor_config else 0,
+                                        sensor_config['alarm_max'] if 'alarm_max' in sensor_config else 0,
+                                        sensor_config['min'] if 'min' in sensor_config else 0,
+                                        sensor_config['max'] if 'max' in sensor_config else 100))
 
     except ow.exNoController:
       message = '1 Wire file system is not actve / installed on this device!'
@@ -62,172 +68,76 @@ class terrariumSensor:
 
     return sensors
 
-  def getID(self):
-    return self.__id
-
-  def setType(self,type):
-    if type in terrariumSensor.valid_sensor_types:
-      self.__type = str(type)
-      self.__saveSensorConfig()
-    else:
-      terrarium_log.error('Unknown sensor type %s', type)
-
-  def getType(self):
-    return self.__type
-
-  def setName(self,name):
-    self.__name = str(name)
-    self.__saveSensorConfig()
-
-  def getName(self):
-    return self.__name
-
-  def setIndicator(self,indicator):
-    self.__indicator = str(indicator)
-    self.__saveSensorConfig()
-
-  def getIndicator(self):
-    return self.__indicator
-
-  def getAddress(self):
-    if '' == self.__address:
-      try:
-        self.__address = self.__sensor.address
-      except Exception, err:
-        terrarium_log.error('Error getting sensor address for %s(%s): %s',self.getName(), self.getID(),err)
-
-    return self.__address
-
-  def getCacheTimeOut(self):
-    return self.__cacheTimeOut
-
-  def setCacheTimeout(self,timeout):
-    self.__cacheTimeOut = timedelta(seconds=int(timeout))
-    self.__saveSensorConfig()
-
-  def getMaxLimit(self):
-    return self.__maxLimit
-
-  def setMaxLimit(self,limit):
-    self.__maxLimit = float(limit)
-    self.__saveSensorConfig()
-
-  def getMinLimit(self):
-    return self.__minLimit
-
-  def setMinLimit(self,limit):
-    self.__minLimit = float(limit)
-    self.__saveSensorConfig()
-
-  def getCurrent(self):
-    return self.__current
-
-  def getMax(self):
-    return self.__max
-
-  def getMin(self):
-    return self.__min
-
-  def getLastUpdateTimeStamp(self):
-    return self.__lastUpdate
-
-  def resetMinMax(self):
-    self.__max = self.__min = self.getCurrent()
-    return True
-
-  def update(self):
+  def update(self, force = False):
     now = datetime.now()
-    if self.getAlarm() or now - self.__lastUpdate >= self.getCacheTimeOut():
-      terrarium_log.debug('Updating sensor %s(%s) of type %s',self.getName(),self.getID(),self.getType())
+    if now - self.last_update > timedelta(seconds=self.update_timeout) or force:
       try:
-        if 'temperature' == self.__type:
-          self.__current = float(self.__sensor.temperature)
-        elif 'humidity' == self.__type:
-          self.__current = float(self.__sensor.humidity)
-        self.__lastUpdate = now
+        if 'temperature' == self.get_type():
+          self.current = float(self.sensor.temperature)
+        elif 'humidity' == self.get_type():
+          self.current = float(self.sensor.humidity)
+        self.last_update = now
       except Exception, err:
         # error.... don't update
-        terrarium_log.error('Error updating sensor %s(%s): %s',self.getName(),self.getID(),err)
+        print err
+        pass
 
-      if self.getCurrent() > self.getMax():
-        self.__max = self.getCurrent()
-        terrarium_log.debug('Updated the maximum measured value of sensor %s(%s) of type %s to value %f%s',self.getName(),self.getID(),self.getType(),self.getCurrent(),self.getIndicator())
+  def get_data(self):
+    data = {'id' : self.get_id(),
+            'address' : self.get_address(),
+            'type' : self.get_type(),
+            'name' : self.get_name(),
+            'current' : self.get_current(),
+            'alarm_min' : self.get_alarm_min(),
+            'alarm_max' : self.get_alarm_max(),
+            'min' : self.get_min(),
+            'max' : self.get_max(),
+            'alarm' : self.get_alarm()
+            }
 
-      if self.getCurrent() < self.getMin():
-        self.__min = self.getCurrent()
-        terrarium_log.debug('Updated the minimum measured value of sensor %s(%s) of type %s to value %f%s',self.getName(),self.getID(),self.getType(),self.getCurrent(),self.getIndicator())
+    return data
 
-    if now - self.__lastReset >= self.__lastResetTimeout:
-      self.resetMinMax()
-      self.__lastReset = now
-      terrarium_log.info('Resetting the minimum an maximum measured value for sensor %s(%s)',self.getName(),self.getID())
+  def get_id(self):
+    return self.id
 
-  def setAlarm(self,on):
-    self.__alarmActive = on in ['1','True','true','on', True]
+  def get_type(self):
+    return self.type
 
-  def enableAlarm(self):
-    self.__alarmActive = True
+  def get_address(self):
+    return self.sensor_address
 
-  def disableAlarm(self):
-    self.__alarmActive = False
+  def set_name(self,name):
+    self.name = str(name)
 
-  def isAlarmActive(self):
-    return True == self.__alarmActive
+  def get_name(self):
+    return self.name
 
-  def setLogging(self,on):
-    self.__loggingActive = on in ['1','True','true','on', True]
+  def get_alarm_min(self):
+    return self.alarm_min
 
-  def enableLogging(self):
-    self.__loggingActive = True
+  def set_alarm_min(self,limit):
+    self.alarm_min = float(limit)
 
-  def disableLogging(self):
-    self.__loggingActive = False
+  def get_alarm_max(self):
+    return self.alarm_max
 
-  def isLoggingEnabled(self):
-    return True == self.__loggingActive
+  def set_alarm_max(self,limit):
+    self.alarm_max = float(limit)
 
-  def getAlarmMax(self):
-    if not self.isAlarmActive():
-      return -1
-    return self.getCurrent() > self.getMaxLimit()
+  def get_min(self):
+    return self.min
 
-  def getAlarmMin(self):
-    if not self.isAlarmActive():
-      return -1
-    return self.getCurrent() < self.getMinLimit()
+  def set_min(self,limit):
+    self.min = float(limit)
 
-  def getAlarm(self):
-    if not self.isAlarmActive():
-      return -1
-    return self.getAlarmMax() or self.getAlarmMin()
+  def get_max(self):
+    return self.max
 
-  def getSettings(self,format = 'json'):
-    if 'json' == format:
-      data = {}
-      data['id'] = self.getID()
-      data['type'] = self.getType()
-      data['name'] = self.getName()
-      data['current'] = self.getCurrent()
-      data['max'] = self.getMax()
-      data['min'] = self.getMin()
-      data['maxlimit'] = self.getMaxLimit()
-      data['minlimit'] = self.getMinLimit()
-      data['alarm'] = self.getAlarm()
-      data['alarm_enabled'] = self.isAlarmActive()
-      data['logging_enabled'] = self.isLoggingEnabled()
-      data['indicator'] = self.getIndicator()
-      data['timeout'] = self.getCacheTimeOut().total_seconds()
-      return data
+  def set_max(self,limit):
+    self.max = float(limit)
 
-    else:
-      return self
+  def get_current(self, force = False):
+    return self.current
 
-  def __saveSensorConfig(self):
-    self.__config.saveSensorSettings( self.getID(),
-                                      self.getName(),
-                                      self.getMaxLimit(),
-                                      self.getMinLimit(),
-                                      self.getCacheTimeOut().total_seconds(),
-                                      self.isAlarmActive(),
-                                      self.isLoggingEnabled(),
-                                      self.getIndicator())
+  def get_alarm(self):
+    return not self.get_alarm_min() < self.get_current() < self.get_alarm_max()

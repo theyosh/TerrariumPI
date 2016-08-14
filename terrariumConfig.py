@@ -3,323 +3,140 @@
 import ConfigParser
 
 class terrariumConfig:
-  def __init__(self):
-    self.__config_file_name = 'terrariumSettings.cfg'
+  def __init__(self,callback):
+    self.__defaults_file = 'defaults.cfg'
+    self.__config_file = 'settings.cfg'
+
     self.__config = ConfigParser.SafeConfigParser()
-    self.__config.read(self.__config_file_name)
+    self.__config.readfp(open(self.__defaults_file))
+    self.__config.read(self.__config_file)
 
-    self.__debug = True
+    self.callback = callback
 
-  def getOWSPortnumber(self):
-    value = 4304
-    try:
-      value = self.__config.getint('server','1Wireport')
+  # Private functions
+  def __save_config(self):
+    with open(self.__config_file, 'wb') as configfile:
+      self.__config.write(configfile)
 
-    except ValueError:
-      message = 'OWS port number is not a numeric value. Please update the configuration file: ' + self.__config_file_name
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoSectionError:
-      message = 'Server section is not available in the configuration file: ' + self.__config_file_name
-      self.__config.add_section('server')
-      self.__config.set('server', '1Wireport', str(value))
-
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoOptionError:
-      message = 'OWS port number is not set. Please update the configuration file: ' + self.__config_file_name
-      self.__config.set('server', '1Wireport', str(value))
-
-      if self.__debug:
-        print message
-
-    return value
-
-  def getLogLevel(self):
-    value = 5
-    try:
-      value = self.__config.getint('server','loglevel')
-
-    except ValueError:
-      message = 'Debug level is not a numeric value. Please update the configuration file: ' + self.__config_file_name
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoSectionError:
-      message = 'Server section is not available in the configuration file: ' + self.__config_file_name
-      self.__config.add_section('server')
-      self.__config.set('server', 'loglevel', str(value))
-
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoOptionError:
-      message = 'Debug level is not set. Please update the configuration file: ' + self.__config_file_name
-      self.__config.set('server', 'loglevel', str(value))
-
-      if self.__debug:
-        print message
-
-    return value
-
-
-  def getPiWattage(self):
-    value = 5
-    try:
-      value = self.__config.getint('environment','pi_wattage')
-
-    except ValueError:
-      message = 'Pi wattage not a numeric value. Please update the configuration file: ' + self.__config_file_name
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoSectionError:
-      message = 'Environment section is not available in the configuration file: ' + self.__config_file_name
-      self.__config.add_section('environment')
-      self.__config.set('environment', 'pi_wattage', str(value))
-
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoOptionError:
-      message = 'Pi wattage is not set. Please update the configuration file: ' + self.__config_file_name
-      self.__config.set('environment', 'pi_wattage', str(value))
-
-      if self.__debug:
-        print message
-
-    return value
-
-  def getServerIP(self):
-    value = '0.0.0.0'
-    try:
-      value = self.__config.get('server','hostname')
-
-    except ConfigParser.NoSectionError:
-      message = 'Server section is not available in the configuration file: ' + self.__config_file_name
-      self.__config.add_section('server')
-      self.__config.set('server', 'hostname', str(value))
-
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoOptionError:
-      message = 'Server hostname is not set. Please update the configuration file: ' + self.__config_file_name
-      self.__config.set('server', 'hostname', str(value))
-
-      if self.__debug:
-        print message
-
-    return value
-
-  def getServerPort(self):
-    value = 8282
-    try:
-      value = self.__config.getint('server','port')
-
-    except ValueError:
-      message = 'Server port number is not a numeric value. Please update the configuration file: ' + self.__config_file_name
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoSectionError:
-      message = 'Server section is not available in the configuration file: ' + self.__config_file_name
-      self.__config.add_section('server')
-      self.__config.set('server', 'port', str(value))
-
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoOptionError:
-      message = 'Server port number is not set. Please update the configuration file: ' + self.__config_file_name
-      self.__config.set('server', 'port', str(value))
-
-      if self.__debug:
-        print message
-
-    return value
-
-  def getDoorGPIOPin(self):
-    value = 21
-    try:
-      value = self.__config.getint('environment','door_gpi_pin')
-
-    except ValueError:
-      message = 'Door GPIO pin is not a numeric value. Please update the configuration file: ' + self.__config_file_name
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoSectionError:
-      message = 'Environment section is not available in the configuration file: ' + self.__config_file_name
-      self.__config.add_section('environment')
-      self.__config.set('environment', 'door_gpi_pin', str(value))
-
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoOptionError:
-      message = 'Door GPIO number is not set. Please update the configuration file: ' + self.__config_file_name
-      self.__config.set('environment', 'door_gpi_pin', str(value))
-
-      if self.__debug:
-        print message
-
-    return value
-
-  def getServerAdmin(self):
-    value = 'admin'
-    try:
-      value = self.__config.get('server','admin')
-
-    except ConfigParser.NoSectionError:
-      message = 'Server section is not available in the configuration file: ' + self.__config_file_name
-      self.__config.add_section('server')
-      self.__config.set('server', 'admin', str(value))
-
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoOptionError:
-      message = 'Server admin is not set. Please update the configuration file: ' + self.__config_file_name
-      self.__config.set('server', 'admin', str(value))
-
-      if self.__debug:
-        print message
-
-    return value
-
-  def getServerPassword(self):
-    value = 'admin'
-    try:
-      value = self.__config.get('server','password')
-
-    except ConfigParser.NoSectionError:
-      message = 'Server section is not available in the configuration file: ' + self.__config_file_name
-      self.__config.add_section('server')
-      self.__config.set('server', 'password', str(value))
-
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoOptionError:
-      message = 'Server password is not set. Please update the configuration file: ' + self.__config_file_name
-      self.__config.set('server', 'password', str(value))
-
-      if self.__debug:
-        print message
-    return value
-
-  def setServerUsername(self,name):
-    if not name:
-      return False
-
-    try:
-      value = self.__config.set('server','admin',str(name))
-
-    except ConfigParser.NoSectionError:
-      message = 'Server section is not available in the configuration file: ' + self.__config_file_name
-      self.__config.add_section('server')
-      self.__config.set('server', 'admin', str(name))
-
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoOptionError:
-      message = 'Server admin is not set. Please update the configuration file: ' + self.__config_file_name
-      self.__config.set('server', 'admin', str(name))
-
-      if self.__debug:
-        print message
-
-    self.__saveConfig()
     return True
 
-  def setServerPassword(self,password):
-    if not password:
-      return False
+  def __update_config(self,section,data):
+    if not self.__config.has_section(section):
+      self.__config.add_section(section)
 
-    try:
-      value = self.__config.set('server','password',str(password))
+    keys = data.keys()
+    keys.sort()
+    for setting in keys:
+      if type(data[setting]) is list:
+        data[setting] = ','.join(data[setting])
 
-    except ConfigParser.NoSectionError:
-      message = 'Server section is not available in the configuration file: ' + self.__config_file_name
-      self.__config.add_section('server')
-      self.__config.set('server', 'password', str(password))
+      self.__config.set(section, str(setting), str(data[setting]))
 
-      if self.__debug:
-        print message
+    return self.__save_config()
 
-    except ConfigParser.NoOptionError:
-      message = 'Server admin is not set. Please update the configuration file: ' + self.__config_file_name
-      self.__config.set('server', 'password', str(password))
+  def __get_config(self,section):
+    config = {}
+    if not self.__config.has_section(section):
+      return config
 
-      if self.__debug:
-        print message
+    for config_part in self.__config.items(section):
+      config[config_part[0]] = config_part[1]
 
-    self.__saveConfig()
-    return True
+    return config
 
-  def __getDeviceSettings(self,deviceid):
-    valueList = {}
-    if self.__config.has_section(deviceid):
-      for key,value in self.__config.items(deviceid):
-        valueList[key] = value
+  def get_system(self):
+    return self.__get_config('terrariumpi')
 
-    return valueList
+  def get_door_pin(self):
+    config = self.get_system()
+    return int(config['gpio_door_pin'])
 
-  def getSensorSettings(self,sensorid):
-    return self.__getDeviceSettings('sensor_' + sensorid);
+  def get_pi_power_wattage(self):
+    config = self.get_system()
+    return float(config['power_usage'])
 
-  def getSwitchSettings(self,switchid):
-    return self.__getDeviceSettings('switch_' + switchid);
+  # Environment functions
+  def save_environment(self,data):
+    config = {}
+    for environment_part in data:
+      for part in data[environment_part]:
+        config[environment_part + '_' + part] = data[environment_part][part]
 
-  def saveSensorSettings(self,sensorid,name,maxlimit,minlimit,timeout,alarm,logging,indicator):
-    section_name = 'sensor_' + sensorid
-    if not self.__config.has_section(section_name):
-      self.__config.add_section(section_name)
+    return self.__update_config('environment',config)
 
-    if name:
-      self.__config.set(section_name, 'name', str(name))
-    if maxlimit:
-      self.__config.set(section_name, 'maxlimit', str(maxlimit))
-    if minlimit:
-      self.__config.set(section_name, 'minlimit', str(minlimit))
-    if timeout:
-      self.__config.set(section_name, 'timeout', str(timeout))
-    if alarm:
-      self.__config.set(section_name, 'alarm', str(alarm))
-    #if logging != '':
-    self.__config.set(section_name, 'logging', str(logging))
-    if indicator:
-      if '%' == indicator:
-        indicator += '%'
-      self.__config.set(section_name, 'indicator', str(indicator))
+  def get_environment(self):
+    config = self.__get_config('environment')
+    data = {'lights' : {}, 'humidity' : {}, 'heater' : {} }
+    for key in config:
+      config_keys = key.split('_')
+      part = config_keys[0]
+      del(config_keys[0])
+      data[part]['_'.join(config_keys)] = config[key]
 
-    self.__saveConfig()
-    return True
+    return data
 
-  def saveSwitchSettings(self,switchid,name,timeout,logging,wattage,waterflow):
-    section_name = 'switch_' + switchid
-    if not self.__config.has_section(section_name):
-      self.__config.add_section(section_name)
+  def get_environment_lights(self):
+    data = self.get_environment()
+    return data['lights'] if 'lights' in data else None
 
-    if name:
-      self.__config.set(section_name, 'name', str(name))
-    if timeout:
-      self.__config.set(section_name, 'timeout', str(timeout))
-    if logging:
-      self.__config.set(section_name, 'logging', str(logging))
-    if wattage:
-      self.__config.set(section_name, 'wattage', str(wattage))
-    if waterflow:
-      self.__config.set(section_name, 'waterflow', str(waterflow))
+  # End Environment functions
 
-    self.__saveConfig()
-    return True
+  # Weather config functions
+  def save_weather(self,data):
+    return self.__update_config('weather',data)
 
-  def getWebcamsList(self):
+  def get_weather(self):
+    return self.__get_config('weather')
+
+  def get_weather_location(self):
+    data = self.get_weather()
+    return data['location'] if 'location' in data else None
+
+  def get_weather_windspeed(self):
+    data = self.get_weather()
+    return data['windspeed'] if 'windspeed' in data else None
+
+  def get_weather_temperature(self):
+    data = self.get_weather()
+    return data['temperature'] if 'temperature' in data else None
+  # End weather config functions
+
+  # Switches config functions
+  def save_switch(self,data):
+    return self.__update_config('switch' + str(data['nr']),data)
+
+  def get_switches(self):
+    config = self.__get_config('terrariumpi')
+    data = {'max_switches' : config['max_switches'],
+            'switches': []}
+    for switchnr in range (1,int(config['max_switches'])+1):
+      switch_config = self.__get_config('switch' + str(switchnr));
+      if len(switch_config) > 0:
+        data['switches'].append(switch_config)
+
+    return data
+
+  def get_1wire_port(self):
+    return int(self.get_system()['1wire_port'])
+
+  def save_sensor(self,data):
+    del(data['address'])
+    return self.__update_config('sensor' + str(data['id']),data)
+
+  def get_sensors(self):
+    data = {}
+    for section in self.__config.sections():
+      if section[:6] == 'sensor':
+        sensor_data = self.__get_config(section)
+        data[section[6:]] = sensor_data
+
+    return data
+
+  def get_full_config(self):
+    print self
+
+
+  '''def getWebcamsList(self):
     valuelist = []
     for configSection in self.__config.sections():
       if 'webcam_' in configSection:
@@ -357,234 +174,4 @@ class terrariumConfig:
       self.__config.set(webcamid, 'rotation', str(rotate))
 
     self.__saveConfig()
-    return True
-
-  def getWeatherURL(self):
-    value = 'http://www.yr.no/place/Netherlands/Groningen/Groningen/forecast_hour_by_hour.xml'
-    try:
-      value = self.__config.get('weather','location')
-
-    except ConfigParser.NoSectionError:
-      message = 'Weather section is not available in the configuration file: ' + self.__config_file_name
-      self.__config.add_section('weather')
-      self.__config.set('weather', 'location', str(value))
-
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoOptionError:
-      message = 'The weather XML url is not set. Please update the configuration file: ' + self.__config_file_name
-      self.__config.set('weather', 'location', str(value))
-
-      if self.__debug:
-        print message
-
-    return value
-
-  def getWeatherLoggerEnabled(self):
-    value = True
-    try:
-      value = self.__config.getboolean('weather','logger')
-
-    except ConfigParser.NoOptionError:
-      message = 'The weather XML url is not set. Please update the configuration file: ' + self.__config_file_name
-      self.__config.set('weather', 'logger', str(value))
-
-      if self.__debug:
-        print message
-
-    return value
-
-  def getWeatherAlarmEnabled(self):
-    value = True
-    try:
-      value = self.__config.getboolean('weather','alarm')
-
-    except ConfigParser.NoOptionError:
-      message = 'The weather XML url is not set. Please update the configuration file: ' + self.__config_file_name
-      self.__config.set('weather', 'alarm', str(value))
-
-      if self.__debug:
-        print message
-
-    return value
-
-  def getWeatherMaxLimit(self):
-    value = 35
-    try:
-      value = self.__config.get('weather','maxlimit')
-
-    except ConfigParser.NoOptionError:
-      message = 'The weather XML url is not set. Please update the configuration file: ' + self.__config_file_name
-      self.__config.set('weather', 'maxlimit', str(value))
-
-      if self.__debug:
-        print message
-
-    return value
-
-  def getWeatherMinLimit(self):
-    value = -10
-    try:
-      value = self.__config.get('weather','minlimit')
-
-    except ConfigParser.NoOptionError:
-      message = 'The weather XML url is not set. Please update the configuration file: ' + self.__config_file_name
-      self.__config.set('weather', 'minlimit', str(value))
-
-      if self.__debug:
-        print message
-
-    return value
-
-  def saveWeatherSettings(self,url,max,min,logger,alarm):
-    if not self.__config.has_section('weather'):
-      self.__config.add_section('weather')
-
-    if url:
-      self.__config.set('weather', 'location', str(url))
-
-    if max:
-      self.__config.set('weather', 'maxlimit', str(max))
-
-    if min:
-      self.__config.set('weather', 'minlimit', str(min))
-
-    if logger:
-      self.__config.set('weather', 'logger', str(logger))
-
-    if alarm:
-      self.__config.set('weather', 'alarm', str(alarm))
-
-    self.__saveConfig()
-    return True
-
-  def getEnvironmentConfig(self):
-    valueList = { 'light_enabled' : False,
-                  'light_on' : 'sunrise',
-                  'light_off' : 'sunset',
-                  'light_switch' : '',
-                  'light_sensor' : '',
-                  'light_duration_max_hours' : 16,
-                  'light_duration_min_hours' : 10,
-                  'light_duration_time_shift' : 0,
-                  'heater_enabled' : False,
-                  'heater_on' : '22:00',
-                  'heater_off' : '6:00',
-                  'heater_switch' : '',
-                  'heater_sensor' : '',
-                  'heater_modus' : 'time',
-                  'heater_active_during_day' : False,
-                  'humidity_enabled' : False,
-                  'humidity_sensor' : '',
-                  'humidity_switch' : '',
-                  'humidity_switch_duration' : 15,
-                  'humidity_switch_timeout' : 60,
-                  'humidity_active_during_night' : False
-                }
-    try:
-      for key,value in self.__config.items('environment'):
-        valueList[key] = value
-
-    except ConfigParser.NoSectionError:
-      message = 'Environment section is not available in the configuration file: ' + self.__config_file_name
-      self.__config.add_section('environment')
-      for key in valueList:
-        self.__config.set('environment', key, str(valueList[key]))
-
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoOptionError:
-      message = 'Something not set. Please update the configuration file: ' + self.__config_file_name
-      if self.__debug:
-        print message
-
-    return valueList
-
-  def setEnvironmentLightConfig(self,enabled = False,on = 'sunrise',off = 'sunset',switches = '',sensors = '',min = 10,max = 10 ,shift = 0):
-    self.__config.set('environment', 'light_enabled', str(enabled))
-    self.__config.set('environment', 'light_on', str(on))
-    self.__config.set('environment', 'light_off', str(off))
-    self.__config.set('environment', 'light_switch', str(switches))
-    self.__config.set('environment', 'light_sensor', str(sensors))
-    self.__config.set('environment', 'light_duration_max_hours', str(max))
-    self.__config.set('environment', 'light_duration_min_hours', str(min))
-    self.__config.set('environment', 'light_duration_time_shift', str(shift))
-    self.saveConfig()
-    return True
-
-  def setEnvironmentHeaterConfig(self, enabled = False, switches = '', sensors = '', modus = 'time', on = 0, off = 0, dayactive = False):
-    self.__config.set('environment', 'heater_enabled', str(enabled))
-    self.__config.set('environment', 'heater_on', str(on))
-    self.__config.set('environment', 'heater_off', str(off))
-    self.__config.set('environment', 'heater_switch', str(switches))
-    self.__config.set('environment', 'heater_sensor', str(sensors))
-    self.__config.set('environment', 'heater_modus', str(modus))
-    self.__config.set('environment', 'heater_active_during_day', str(dayactive))
-    self.saveConfig()
-    return True
-
-  def setEnvironmentHumidityConfig(self,enabled = False,switches = '',sensors = '',timeout = 60,duration = 15 ,nightactive = False):
-    self.__config.set('environment', 'humidity_enabled', str(enabled))
-    self.__config.set('environment', 'humidity_switch', str(switches))
-    self.__config.set('environment', 'humidity_sensor', str(sensors))
-    self.__config.set('environment', 'humidity_switch_timeout', str(timeout))
-    self.__config.set('environment', 'humidity_switch_duration', str(duration))
-    self.__config.set('environment', 'humidity_active_during_night', str(nightactive))
-    self.saveConfig()
-    return True
-
-  def getTwitterEnabled(self):
-    value = False
-    try:
-      value = self.__config.getboolean('twitter','enabled')
-
-    except ValueError:
-      message = 'Twitter Boolean value. Please update the configuration file: ' + self.__config_file_name
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoSectionError:
-      message = 'Twitter section is not available in the configuration file: ' + self.__config_file_name
-      self.__config.add_section('twitter')
-      self.__config.set('twitter', 'enabled', str(value))
-
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoOptionError:
-      message = 'Twitter setting is not set. Please update the configuration file: ' + self.__config_file_name
-      self.__config.set('twitter', 'enabled', str(value))
-
-      if self.__debug:
-        print message
-
-    return value
-
-  def getTwitterConfig(self):
-    valueList = {}
-    try:
-      for key,value in self.__config.items('twitter'):
-        valueList[key] = value
-
-    except ConfigParser.NoSectionError:
-      message = 'Twitter section is not available in the configuration file: ' + self.__config_file_name
-      self.__config.add_section('twitter')
-
-      if self.__debug:
-        print message
-
-    except ConfigParser.NoOptionError:
-      message = 'Something not set. Please update the configuration file: ' + self.__config_file_name
-      if self.__debug:
-        print message
-
-    return valueList
-
-  def saveConfig(self):
-    self.__saveConfig()
-
-  def __saveConfig(self):
-    with open(self.__config_file_name, 'wb') as configfile:
-      self.__config.write(configfile)
+    return True'''

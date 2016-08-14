@@ -1,37 +1,35 @@
 # -*- coding: utf-8 -*-
+import RPi.GPIO as GPIO
 
-import time
-import RPi.GPIO as gpio
-import thread
+class terrariumDoor():
+  
+  def __init__(self, gpio_pin, callback = None):
+    self.gpio_pin = int(gpio_pin)
+    self.door_status = 'closed'
+    self.callback = callback
 
-import logging
-terrarium_log = logging.getLogger('root')
-
-class terrariumDoor:
-  def __init__(self,pin):
-    self.__pin = pin
-    self.__door_open = False
-    
     ## set GPIO mode to BCM
     ## this takes GPIO number instead of pin number
-    gpio.setmode(gpio.BCM)
-
+    GPIO.setmode(GPIO.BCM)
+    
     ## use the built-in pull-up resistor
-    gpio.setup(self.__pin,gpio.IN,pull_up_down=gpio.PUD_UP)  # activate input with PullUp
+    GPIO.setup(self.gpio_pin,GPIO.IN,pull_up_down=GPIO.PUD_UP)  # activate input with PullUp
+    
+    # Add detetion with callback
+    GPIO.add_event_detect(self.gpio_pin, GPIO.BOTH, callback=self.__update_status)
 
-    thread.start_new_thread(self.__checker, ())
+  def __update_status(self):
+    current_status = 'open' if GPIO.input(self.__pin) else 'closed'
+    if current_status != self.door_status and self.callback:
+      self.callback(self.get_status())
+    
+    self.door_status = current_status
 
-  def __checker(self):
-    terrarium_log.debug('Started door sensor checker thread')
-    while True:
-      old_state = self.__door_open
-      self.__door_open = gpio.input(self.__pin)
-      if old_state != self.__door_open:
-        terrarium_log.debug('Door status changed from %s to %s', ('open' if old_state else 'closed'),('open' if self.__door_open else 'closed'))
-      time.sleep(1)
-
-  def open(self):
-    return self.__door_open == True
-
-  def close(self):
-    return not self.open()
+  def get_status(self):
+    return self.door_status
+  
+  def is_open(self):
+    return self.door_status == 'open'
+  
+  def is_closed(self):
+    return self.door_status == 'closed'

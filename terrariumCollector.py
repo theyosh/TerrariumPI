@@ -1,246 +1,163 @@
 # -*- coding: utf-8 -*-
+import sqlite3
+import time
+import json
+import copy
 
-from datetime import datetime, timedelta
-import xml.etree.ElementTree as ET
-from time import sleep, time
-from threading import Thread
-import thread
-import os
+import datetime
 
-import subprocess
-import rrdtool
+class terrariumCollector():
 
-import logging
-terrarium_log = logging.getLogger('root')
+  database = 'history.db'
 
-class terrariumCollector(Thread):
+  def __init__(self):
+    self.db = sqlite3.connect(terrariumCollector.database)
+    self.db.row_factory = sqlite3.Row
+    self.__create_database_structure()
 
-  def __init__(self,weatherObj,sensorList,powerswitchList,webcamList,environment,logtimeout = 60):
-    Thread.__init__(self)
-    self.__log_location = 'webroot/rrd'
+  def __create_database_structure(self):
+    with self.db:
+      cur = self.db.cursor()
+      cur.execute('CREATE TABLE IF NOT EXISTS data (day DATE, type VARCHAR(15), summary TEXT, rawdata TEXT)')
+      cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS historykey ON data(day,type)')
 
-    self.__weather = weatherObj
-    self.__sensors = sensorList
-    self.__powerswitches = powerswitchList
-    self.__webcams = webcamList
-    self.__environment = environment
+      self.db.commit()
 
-    self.__runTimeout = timedelta(seconds=int(logtimeout))
-    self.__lastRun = datetime.fromtimestamp(0)
+  def __log_data(self,type,id,datatype,newdata):
+    now = int(time.time())
+    if 'switches' != type:
+      now -= (now % 60)
 
-    self.__write_log = True
+    data = {'rawdata' : {}, 'summary' : {}}
+    with self.db:
+      cur = self.db.cursor()
+      cur.execute("SELECT rawdata, summary FROM data WHERE day = date(?,'unixepoch') and type=?", (now, type,))
+      rows = cur.fetchall()
+      if len(rows) == 1:
+        if rows[0]['rawdata'] != '':
+          data['rawdata'] = json.loads(rows[0]['rawdata'])
 
-    self.__cache_data = {}
-    self.start()
+        if rows[0]['summary'] != '':
+          data['summary'] = json.loads(rows[0]['summary'])
 
-  def run(self):
-    start_delay_time = int(self.__runTimeout.total_seconds() - (int(int(time()) % int(self.__runTimeout.total_seconds()))))
-    if start_delay_time > 0:
-      terrarium_log.debug('Delaying collector startup with %d seconds', start_delay_time)
-      sleep(start_delay_time)
+    if type == 'weather' or datatype == 'summary':
+      data[datatype][now] = newdata
+    else:
+      if id not in data[datatype]:
+        data[datatype][id] = {}
 
-    terrarium_log.info('Starting collector')
-    while True:
-      self.__lastRun = datetime.now()
-      terrarium_log.debug('Updating collector data ...')
+      data[datatype][id][now] = newdata
 
-      terrarium_log.debug('Running weather data')
-      self.updateWeatherData()
-      terrarium_log.debug('Running switch data')
-      self.updateSwitchesData()
-      terrarium_log.debug('Running sensor data')
-      self.updateSensorsData()
+    with self.db:
+      cur = self.db.cursor()
+      cur.execute("REPLACE INTO data (day, type, rawdata, summary) VALUES (date(?,'unixepoch'),?,?,?)",
+                  (now, type,json.dumps(data['rawdata']),json.dumps(data['summary'])))
+      self.db.commit()
 
-      duration = datetime.now() - self.__lastRun
-      terrarium_log.debug('Updating collector took %d seconds', duration.total_seconds())
-      if duration < self.__runTimeout:
-        terrarium_log.debug('Next collector update in %d seconds', (self.__runTimeout - duration).total_seconds())
-        sleep(int((self.__runTimeout - duration).total_seconds()))
+  def log_switch_data(self,switch):
+    switch_id = switch['id']
+    del(switch['id'])
+    del(switch['name'])
+    del(switch['nr'])
+    self.__log_data('switches',switch_id,'rawdata',switch)
 
-  def updateWeatherData(self):
-    if self.__write_log:
-      if self.__weather.isLoggingEnabled():
-        self.__createWeatherDatabase('groningen')
-        rrdtool.update(self.__log_location + '/weather_groningen.rrd',
-                       'N:%s:%s:%s' %( self.__weather.getCurrentTemperature(),
-                                       self.__weather.getMinimumTemperature(),
-                                       self.__weather.getMaximumTemperature()))
+  def log_weather_data(self,weather):
+    del(weather['from'])
+    del(weather['to'])
+    self.__log_data('weather',None,'rawdata',weather)
 
-  def updateSensorsData(self):
-    if self.__write_log:
-      for sensorid,sensor in self.__sensors.iteritems():
-        if sensor.isLoggingEnabled():
-          self.__createSensorDatabase(sensorid)
-          rrdtool.update(self.__log_location + '/sensor_' + sensorid + '.rrd',
-                          'N:%s:%s:%s:%s:%s' %( sensor.getCurrent(),
-                                                sensor.getMin(),
-                                                sensor.getMax(),
-                                                sensor.getMinLimit(),
-                                                sensor.getMaxLimit()))
+  def log_sensor_data(self,sensor):
+    sensor_data  = sensor.get_data()
+    del(sensor_data['id'])
+    del(sensor_data['address'])
+    del(sensor_data['type'])
+    del(sensor_data['name'])
+    self.__log_data(sensor.get_type(),sensor.get_id(),'rawdata',sensor_data)
 
-  def updateSwitchesData(self):
-    if self.__write_log:
-      for switchid,switch in self.__powerswitches.iteritems():
-        if switch.isLoggingEnabled():
-          self.__createSwitchDatabase(switchid)
-          rrdtool.update(self.__log_location + '/switch_' + switchid + '.rrd',
-                          'N:%s:%s' %( 1 if switch.getState() == 1 else 0,
-                                       0 if switch.getState() == 1 else 1))
+  def log_environment_data(self, type, averagedata):
+    self.__log_data(type,None,'summary',averagedata)
 
-  def getRRDDatabase(self,databaseid,period = 'day',format = 'json'):
-    cache_key = databaseid + '' + period
-    if cache_key in self.__cache_data and (datetime.now() - self.__cache_data[cache_key]['time']).total_seconds() <= 60:
-      terrarium_log.debug('Getting cached RDD data')
-      return self.__cache_data[cache_key]['data']
+  def log_power_usage_water_flow(self,data):
+    self.__log_data('switches',None,'summary',data)
 
-    terrarium_log.debug('Getting/generating fresh RDD data')
-    periodStart = '-1d'
-    if 'week' == period:
-      periodStart = '-1w'
-    elif 'month' == period:
-      periodStart = '-1m'
-    elif 'year' == period:
-      periodStart = '-1y'
+  def get_history(self, type, subtype = None, id = None, starttime = None, stoptime = None):
+    print 'get history: ' + str(type) + ' - ' + str(subtype) + ' - ' + str(id)
+    # Default return object
+    history = {}
+    # Every Xth minute will be returned
+    modulo = 1
 
-    if 'weather_' in databaseid:
-      p = subprocess.Popen('/usr/bin/rrdtool xport --start ' + periodStart + ' \
-                            DEF:current='+ self.__log_location + '/' + databaseid + '.rrd:current:AVERAGE \
-                            DEF:low='+ self.__log_location + '/' + databaseid + '.rrd:low:AVERAGE \
-                            DEF:high='+ self.__log_location + '/' + databaseid + '.rrd:high:AVERAGE \
-                            XPORT:current:"Current" \
-                            XPORT:low:"Lowest" \
-                            XPORT:high:"Highest"', stdout=subprocess.PIPE, shell=True)
-    elif 'switch_' in databaseid:
-      p = subprocess.Popen('/usr/bin/rrdtool xport --start ' + periodStart + ' \
-                            DEF:on='+ self.__log_location + '/' + databaseid + '.rrd:on:AVERAGE \
-                            DEF:off='+ self.__log_location + '/' + databaseid + '.rrd:off:AVERAGE \
-                            XPORT:on:"On" \
-                            XPORT:off:"Off"', stdout=subprocess.PIPE, shell=True)
-    elif 'sensor_' in databaseid:
-      p = subprocess.Popen('/usr/bin/rrdtool xport --start ' + periodStart + ' \
-                            DEF:current='+ self.__log_location + '/' + databaseid + '.rrd:current:AVERAGE \
-                            DEF:low='+ self.__log_location + '/' + databaseid + '.rrd:low:AVERAGE \
-                            DEF:high='+ self.__log_location + '/' + databaseid + '.rrd:high:AVERAGE \
-                            DEF:limitlow='+ self.__log_location + '/' + databaseid + '.rrd:limitlow:AVERAGE \
-                            DEF:limithigh='+ self.__log_location + '/' + databaseid + '.rrd:limithigh:AVERAGE \
-                            XPORT:current:"Current" \
-                            XPORT:low:"Lowest" \
-                            XPORT:high:"Highest" \
-                            XPORT:limitlow:"Limit low" \
-                            XPORT:limithigh:"Limit high"', stdout=subprocess.PIPE, shell=True)
-    (output, err) = p.communicate()
+    # Define start time
+    if starttime is None:
+      starttime = int(time.time())
+      if 'switches' != type:
+        starttime -= starttime % (1 * 60)
 
-    maxvalue = 0
-    minvalue = 0
-    returndata = []
-    skip = True
-    for data in ET.fromstring(output).findall('./data/row'):
-      if not skip:
-        timestamp = int(data.find('t').text) * 1000
-        datarow = {'timestamp' : timestamp, 'current': 0, 'low':0,'high':0,'limitlow':0 , 'limithigh': 0}
-        valueCounter = 0
-        for value in data.findall('v'):
-          value = ('%.3f' % float(value.text))
-          if 0 == valueCounter:
-            datarow['current'] = value
-          elif 1 == valueCounter:
-            datarow['low'] = value
-          elif 2 == valueCounter:
-            datarow['high'] = value
-          elif 3 == valueCounter:
-            datarow['limitlow'] = value
-          elif 4 == valueCounter:
-            datarow['limithigh'] = value
+    # Define stop time
+    if stoptime is None:
+      stoptime = starttime - (24 * 60 * 60)
 
-          if value > maxvalue:
-            maxvalue = value
-          if value < minvalue:
-            minvalue = value
+    if starttime - stoptime > (8 * 60):
+      modulo = 5
 
-          valueCounter = valueCounter + 1
+    if type == 'weather':
+      field = 'rawdata'
+      history_fields = { 'wind_speed' : [], 'temperature' : [], 'pressure' : [] , 'wind_direction' : [], 'rain' : [],
+                        'weather' : [], 'icon' : []}
+      datatypes = [subtype]
 
-        if 'nan' != datarow['current']:
-          returndata.append(datarow)
+    elif type == 'switches':
+      field = 'rawdata'
+      history_fields = { 'power_wattage' : [], 'water_flow' : [] , 'state' : []}
+      datatypes = [type]
 
-      skip = False
+    elif type == 'sensors' and subtype in ['temperature','humidity','summary']:
+      field = 'rawdata'
+      history_fields = { 'current' : [], 'alarm_min' : [], 'alarm_max' : [] , 'min' : [], 'max' : []}
+      datatypes = [subtype]
 
-    self.__cache_data[cache_key] = {'time': datetime.now(), 'min': minvalue, 'max' : maxvalue,'data': returndata}
-    return returndata
+      if subtype == 'summary':
+        field = 'summary'
+        datatypes = ['temperature','humidity']
+      elif id == 'summary':
+        field = 'summary'
 
-  def __checkLogFolder(self):
-    if not os.path.isdir(self.__log_location):
-        terrarium_log.info('Creating RDD log folders at location %s',self.__log_location)
-        os.makedirs(self.__log_location)
+    history = {}
+    for datatype in datatypes:
+      history[datatype] = {}
+      with self.db:
+        cur = self.db.cursor()
+        cur.execute('''SELECT day, ''' + field + ''' FROM data
+                    WHERE day >= date(?,"unixepoch") and day <= date(?,"unixepoch") and type=?
+                    ORDER BY day ASC''', (stoptime,starttime,datatype,))
+        rows = cur.fetchall()
 
-  def __createSensorDatabase(self,id):
-    self.__checkLogFolder()
-    if not os.path.isfile(self.__log_location + '/sensor_' + id + '.rrd'):
-      terrarium_log.info('Creating new RDD database for sensor with ID %s',id)
-      rrdtool.create(self.__log_location + '/sensor_' + id + '.rrd', '--step',str(self.__runTimeout.total_seconds()),
-        'DS:current:GAUGE:' + str(int(2 * self.__runTimeout.total_seconds())) + ':-50:100',
-        'DS:low:GAUGE:' + str(int(2 * self.__runTimeout.total_seconds())) + ':-50:100',
-        'DS:high:GAUGE:' + str(int(2 * self.__runTimeout.total_seconds())) + ':-50:100',
-        'DS:limitlow:GAUGE:' + str(int(2 * self.__runTimeout.total_seconds())) + ':-50:100',
-        'DS:limithigh:GAUGE:' + str(int(2 * self.__runTimeout.total_seconds())) + ':-50:100',
-      	'RRA:AVERAGE:0.5:1:60',
-      	'RRA:AVERAGE:0.5:1:1440',
-      	'RRA:AVERAGE:0.5:5:12',
-      	'RRA:AVERAGE:0.5:5:288',
-      	'RRA:AVERAGE:0.5:30:12',
-      	'RRA:AVERAGE:0.5:30:288',
-      	'RRA:AVERAGE:0.5:60:168',
-      	'RRA:AVERAGE:0.5:60:720',
-        'RRA:AVERAGE:0.5:1800:730',
-      	'RRA:AVERAGE:0.5:3600:365',
-      	'RRA:MIN:0.5:1:60',
-      	'RRA:MIN:0.5:1:1440',
-      	'RRA:MIN:0.5:5:12',
-      	'RRA:MIN:0.5:5:288',
-      	'RRA:MIN:0.5:30:12',
-      	'RRA:MIN:0.5:30:288',
-      	'RRA:MIN:0.5:60:168',
-      	'RRA:MIN:0.5:60:720',
-        'RRA:MIN:0.5:1800:730',
-      	'RRA:MIN:0.5:3600:365',
-      	'RRA:MAX:0.5:1:60',
-      	'RRA:MAX:0.5:1:1440',
-      	'RRA:MAX:0.5:5:12',
-      	'RRA:MAX:0.5:5:288',
-      	'RRA:MAX:0.5:30:12',
-      	'RRA:MAX:0.5:30:288',
-      	'RRA:MAX:0.5:60:168',
-      	'RRA:MAX:0.5:60:720',
-        'RRA:MAX:0.5:1800:730',
-      	'RRA:MAX:0.5:3600:365')
+        for row in rows:
+          if row[field] is None or row[field] == '':
+            continue
 
-  def __createWeatherDatabase(self,id):
-    self.__checkLogFolder()
-    if not os.path.isfile(self.__log_location + '/weather_' + id + '.rrd'):
-      terrarium_log.info('Creating new RDD database for weather with ID %s',id)
-      rrdtool.create(self.__log_location + '/weather_' + id + '.rrd', '--step',str(self.__runTimeout.total_seconds()),
-        'DS:current:GAUGE:120:-50:50',
-        'DS:low:GAUGE:120:-50:50',
-        'DS:high:GAUGE:120:-50:50',
-        'RRA:AVERAGE:0.5:1:1440',
-        'RRA:MIN:0.5:1:1440',
-        'RRA:MAX:0.5:1:1440',
-        'RRA:AVERAGE:0.5:30:1440',
-        'RRA:MIN:0.5:30:1440',
-        'RRA:MAX:0.5:30:1440')
+          dbdatatmp = json.loads(row[field])
 
-  def __createSwitchDatabase(self,id):
-    self.__checkLogFolder()
-    if not os.path.isfile(self.__log_location + '/switch_' + id + '.rrd'):
-      terrarium_log.info('Creating new RDD database for switch with ID %s',id)
-      rrdtool.create(self.__log_location + '/switch_' + id + '.rrd', '--step',str(self.__runTimeout.total_seconds()),
-        'DS:on:GAUGE:120:0:1',
-        'DS:off:GAUGE:120:0:1',
-        'RRA:AVERAGE:0.5:1:1440',
-        'RRA:MIN:0.5:1:1440',
-        'RRA:MAX:0.5:1:1440',
-        'RRA:AVERAGE:0.5:30:1440',
-        'RRA:MIN:0.5:30:1440',
-        'RRA:MAX:0.5:30:1440')
+          if field == 'summary':
+            dbdata = { 'summary' : dbdatatmp }
+          elif id is None:
+            dbdata = dbdatatmp
+          else:
+            dbdata = { id : dbdatatmp[id] }
 
-  def online(self):
-    return datetime.now() - self.__lastRun < 3 * self.__runTimeout
+          for dataid in dbdata:
+            if dataid not in history[datatype]:
+              history[datatype][dataid] = copy.deepcopy(history_fields)
+
+            timestamps = sorted(dbdata[dataid].keys())
+
+            for timestamp in timestamps:
+              if starttime > int(timestamp) > stoptime:
+                timedata = dbdata[dataid][str(timestamp)]
+
+                #if type == 'sensors' and int(timestamp) % (modulo * 60) == 0:
+                for history_field in history_fields:
+                  if history_field in timedata:
+                    history[datatype][dataid][history_field].append([int(timestamp) * 1000, timedata[history_field]])
+
+    return history
