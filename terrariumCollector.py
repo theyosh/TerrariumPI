@@ -4,8 +4,6 @@ import time
 import json
 import copy
 
-import datetime
-
 class terrariumCollector():
 
   database = 'history.db'
@@ -110,6 +108,10 @@ class terrariumCollector():
       field = 'rawdata'
       history_fields = { 'power_wattage' : [], 'water_flow' : [] , 'state' : []}
       datatypes = [type]
+
+      if subtype == 'summary':
+        field = 'summary'
+        history_fields = { 'total_power' : [], 'total_water' : []}
 
     elif type == 'sensors' and subtype in ['temperature','humidity','summary']:
       field = 'rawdata'

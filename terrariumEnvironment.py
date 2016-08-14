@@ -68,16 +68,15 @@ class terrariumEnvironment():
           self.waterspray_on()
 
       if self.heater['enabled']:
-        if self.heater['day_enabled']:
-          if not (self.heater['day_enabled'] and lights['on'] < now < lights['off']):
-            heater = self.get_heater_state()
+        if not (self.heater['day_enabled'] and lights['on'] < now < lights['off']):
+          heater = self.get_heater_state()
 
-            if heater['current'] < heater['alarm_min']:
-              self.heater_on()
-            elif heater['current'] > heater['alarm_max']:
-              self.heater_off()
-          else:
+          if heater['current'] < heater['alarm_min']:
+            self.heater_on()
+          elif heater['current'] > heater['alarm_max']:
             self.heater_off()
+        else:
+          self.heater_off()
 
       sleep(60)
 

@@ -89,6 +89,12 @@ class terrariumEngine():
 
     data['power_wattage'] = (float(duration) / 3600.0) * float(self.pi_power_wattage)
 
+    prev_data = self.collector.get_history('switches','summary')['switches']['summary']
+    for fieldname in prev_data:
+      for data_item in prev_data[fieldname]:
+        if data_item[0] / 1000 < today:
+          data[fieldname] = data_item[1]
+
     history_data = self.collector.get_history('switches')['switches']
     for switchid in history_data:
       if len(history_data[switchid]['state']) == 0:
@@ -99,7 +105,6 @@ class terrariumEngine():
         history_data[switchid]['state'].append([now * 1000 , False])
 
       for counter in range(0,len(history_data[switchid]['state'])):
-        # TODO: Need to figure out previous day total usages
         if counter > 0 and (history_data[switchid]['state'][counter][0] / 1000) >= today and not history_data[switchid]['state'][counter][1]:
           duration = (float(history_data[switchid]['state'][counter][0]) - float(history_data[switchid]['state'][counter-1][0])) / 1000.0
           data['power_wattage'] += (duration / 3600.0) * float(history_data[switchid]['power_wattage'][counter-1][1])

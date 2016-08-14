@@ -1,20 +1,14 @@
 # -*- coding: utf-8 -*-
-
 from bottle import Bottle, request, abort, static_file, template, error, response
 from bottle.ext.websocket import GeventWebSocketServer
 from bottle.ext.websocket import websocket
-
 from Queue import Queue
 
 import thread
-#import time
-
-import uptime
 import json
 import os
 import datetime
 import hashlib
-#import random
 
 from gevent import monkey, sleep
 monkey.patch_all()

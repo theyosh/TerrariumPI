@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
 from hashlib import md5
-import time
 
 class terrariumSwitchboard():
   bitbang_addresses = {
