@@ -41,7 +41,8 @@ class terrariumWeather():
            'rain' : 'rain',
            'rain showers' : 'sleet',
            'heavy rain showers' : 'sleet',
-           'heavy rain' : 'sleet'
+           'heavy rain' : 'sleet',
+           'fog' : 'fog'
            }
 
     if weathertype in icons:
@@ -111,15 +112,13 @@ class terrariumWeather():
     self.credits['text'] = xmldata.weatherdata.credit.link['text']
     self.credits['url'] = xmldata.weatherdata.credit.link['url']
 
-    #self.updates['lastupdate'] = dateutil.parser.parse(xmldata.weatherdata.meta.lastupdate.cdata)
-    #self.updates['nextupdate'] = dateutil.parser.parse(xmldata.weatherdata.meta.nextupdate.cdata)
-
     self.sun['rise'] = time.mktime(dateutil.parser.parse(xmldata.weatherdata.sun['rise']).timetuple())
     self.sun['set'] = time.mktime(dateutil.parser.parse(xmldata.weatherdata.sun['set']).timetuple())
 
   def __load_hours_forecast(self):
     xmldata = untangle.parse(terrariumWeather.forecast_hours.replace('{location}',self.settings['location']))
     self.__load_defaults(xmldata);
+    self.hour_forecast = []
     for forecast in xmldata.weatherdata.forecast.tabular.time:
       self.hour_forecast.append({'from' : time.mktime(dateutil.parser.parse(forecast['from']).timetuple()),
                             'to' : time.mktime(dateutil.parser.parse(forecast['to']).timetuple()),
@@ -135,6 +134,7 @@ class terrariumWeather():
   def __load_week_forecast(self):
     xmldata = untangle.parse(terrariumWeather.forecast_week.replace('{location}',self.settings['location']))
     self.__load_defaults(xmldata);
+    self.week_forecast = []
     for forecast in xmldata.weatherdata.forecast.tabular.time:
       self.week_forecast.append({'from' : time.mktime(dateutil.parser.parse(forecast['from']).timetuple()),
                               'to' : time.mktime(dateutil.parser.parse(forecast['to']).timetuple()),

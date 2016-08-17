@@ -1,19 +1,81 @@
-.power-switch {
-  text-align: center;
+.toggle {
+  width: 3.8em;
 }
-.power-switch span {
-  display: block;
-  font-size: 2.3em;
-  cursor: pointer;
+.panel_toolbox {
+  min-width: 20px;
+}
+.top_nav .navbar-right {
+  width: auto !important;
+  float: none !important;
+}
+.nav > li > div {
+    display: block;
+    padding: 13px 15px 12px;
+    line-height: 32px;
+    margin-left: 0 !important;
+}
+.row.tile_count {
+  margin-bottom: 0px !important;
+}
+.row.tile_count .progress {
+  height: 3.2em;
+  margin: 1.5em 0.2em 0em 0em;
 }
 
-.row.tile_count .progress.pull-right {
-  height: 50px;
-  margin-top: 15px;
-  margin-right:5px;
-  margin-bottom: 0px;
+#weather_credits {
+  margin-top: -40px;
+  text-align: right;
+}
+
+span.select2.select2-container {
+  width: 100% !important;
+}
+
+.power_switch {
+  text-align: center;
+  cursor: pointer;
+  font-size: 1.5em;
+}
+
+.power_switch.big {
+  font-size: 11em;
+}
+
+.x_title .power_switch {
+  float: left;
+  margin-right: 10px;
+  color: none;
+}
+
+.x_title .power_switch span.green {
+  color: #1ABB9C;
+}
+
+.x_title .power_switch span.blue {
+  color: #3498DB;
 }
 
 .history_graph {
-  min-height: 150px;
+  min-height: 175px;
+  display: block !important;
+  position: relative;
+}
+
+.orange {
+  color: #f0ad4e;
+}
+
+td {
+  white-space: nowrap;
+}
+table.tile_info td:first-child {
+  width: 70% !important;
+}
+
+canvas.gauge {
+  margin: 0px -40px;
+}
+
+.x_title h2 {
+  width: auto !important;
 }

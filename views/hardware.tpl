@@ -1,32 +1,27 @@
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Hardware</h3>
-              </div>
-            </div>
-            <div class="clearfix"></div>
+% include('inc/page_header.tpl')
             <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">       
+              <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="" role="tabpanel" data-example-id="togglable-tabs">
                   <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#pi" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Raspberry PI</a>
+                    <li role="presentation" class="active"><a href="#pi" id="pi-tab" role="tab" data-toggle="tab" aria-expanded="true">Raspberry PI</a>
                     </li>
-                    <li role="presentation" class=""><a href="#sensors" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">1 Wire</a>
+                    <li role="presentation" class=""><a href="#sensors" role="tab" id="sensors-tab" data-toggle="tab" aria-expanded="false">1 Wire</a>
                     </li>
-                    <li role="presentation" class=""><a href="#switches" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Switches</a>
+                    <li role="presentation" class=""><a href="#switches" role="tab" id="switches-tab2" data-toggle="tab" aria-expanded="false">Switches</a>
                     </li>
-                    <li role="presentation" class=""><a href="#webcam" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Webcams</a>
+                    <li role="presentation" class=""><a href="#webcam" role="tab" id="webcam-tab2" data-toggle="tab" aria-expanded="false">Webcams</a>
                     </li>
-                    <li role="presentation" class=""><a href="#door" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Door sensor</a>
+                    <li role="presentation" class=""><a href="#door" role="tab" id="door-tab2" data-toggle="tab" aria-expanded="false">Door sensor</a>
                     </li>
-                    <li role="presentation" class=""><a href="#water" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Water sprayer</a>
+                    <li role="presentation" class=""><a href="#water" role="tab" id="water-tab2" data-toggle="tab" aria-expanded="false">Water sprayer</a>
                     </li>
                   </ul>
                   <div id="myTabContent" class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade active in" id="pi" aria-labelledby="home-tab">
+                    <div role="tabpanel" class="tab-pane fade active in" id="pi" aria-labelledby="pi-tab">
                       <p class="lead">Raspberry Pi</span>
                       <p>The Raspberry Pi is a credit-card sized computer that plugs into your TV and a keyboard. It is a capable little computer which can be used in electronics projects, and for many of the things that your desktop PC does, like spreadsheets, word-processing and games. It also plays high-definition video. We want to see it being used by kids all over the world to learn programming. <a href="http://www.raspberrypi.org/" target="_blank" title="Raspberry PI">http://www.raspberrypi.org/</a></p>
                     </div>
-                    <div role="tabpanel" class="tab-pane fade" id="sensors" aria-labelledby="profile-tab">
+                    <div role="tabpanel" class="tab-pane fade" id="sensors" aria-labelledby="sensors-tab">
                       <div class="col-xs-9">
                         <!-- Tab panes -->
                         <div class="tab-content">
@@ -61,14 +56,14 @@
                           <li><a href="#1w_hub" data-toggle="tab">Hub</a>
                           </li>
                         </ul>
-                      </div>       
+                      </div>
                     </div>
-                    <div role="tabpanel" class="tab-pane fade" id="switches" aria-labelledby="profile-tab">
+                    <div role="tabpanel" class="tab-pane fade" id="switches" aria-labelledby="switches-tab">
                       <p class="lead">USB Four(4) Relay Output Module,Board for Home Automation</p>
                       <p>This is Four Channel relay board controlled by computer USB port. The usb relay board is with 4 SPDT relays rated up to 10A each. You may control devices 220V / 120V (up to 4) directly with one such relay unit. It is fully powered by the computer USB port. Suitable for home automation applications, hobby projects, industrial automation. The free software allows to control relays manually, create timers (weekly and calendar) and multivibrators, use date and time for alarms or control from command line. We provide software examples in Labview, .NET, Java, Borland C++. <a href="http://www.denkovi.com/usb-relay-board-four-channels-for-home-automation" target="_blank" title="USB Four(4) Relay Output Module,Board for Home Automation">http://www.denkovi.com/usb-relay-board-four-channels-for-home-automation</a></p>
                       <p>Alternatively: <a href="http://sigma-shop.com/product/75/usb-4-relay-board-rs232-serial-controlled-pcb.html" target="_blank" title="USB 4 Relay Board - RS232 Serial controlled, PCB">http://sigma-shop.com/product/75/usb-4-relay-board-rs232-serial-controlled-pcb.html</a></p>
                     </div>
-                    <div role="tabpanel" class="tab-pane fade" id="webcam" aria-labelledby="profile-tab">
+                    <div role="tabpanel" class="tab-pane fade" id="webcam" aria-labelledby="webcam-tab">
                       <div class="col-xs-9">
                         <!-- Tab panes -->
                         <div class="tab-content">
@@ -85,7 +80,7 @@
                             <p>Any online camera that provides a (simple) HTTP support</p>
                           </div>
                         </div>
-                      </div> 
+                      </div>
                       <div class="col-xs-3">
                         <!-- required for floating -->
                         <!-- Nav tabs -->
@@ -99,15 +94,16 @@
                         </ul>
                       </div>
                     </div>
-                    <div role="tabpanel" class="tab-pane fade" id="door" aria-labelledby="profile-tab">
+                    <div role="tabpanel" class="tab-pane fade" id="door" aria-labelledby="door-tab">
                       <p class="lead">Magnetic contact switch</p>
                       <p>This sensor is essentially a reed switch, encased in an ABS plastic shell. Normally the reed is 'open' (no connection between the two wires). The other half is a magnet. When the magnet is less than 13mm (0.5") away, the reed switch closes. They're often used to detect when a door or drawer is open, which is why they have mounting tabs and screws. You can also pick up some double-sided foam tape from a hardware store to mount these, that works well without needing screws.<br /<br /><a href="https://www.adafruit.com/products/375" target="_blank">More info</a></p>
                     </div>
-                    <div role="tabpanel" class="tab-pane fade" id="water" aria-labelledby="profile-tab">
+                    <div role="tabpanel" class="tab-pane fade" id="water" aria-labelledby="water-tab">
                       <p class="lead">Jewel spray starters set</p>
                       <p><a href="http://allinone-ict.mooo.com/jewelsprayv3/pages/bakery/basis-systeem-65-liter-4.php" target="_blank" title="Jewel spray starters set">Read more</a></p>
                     </div>
                   </div>
-                </div>               
+                </div>
               </div>
             </div>
+% include('inc/page_footer.tpl')

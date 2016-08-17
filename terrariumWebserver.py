@@ -139,7 +139,7 @@ class terrariumWebserver():
       if subwhat is None:
         pass
 
-      elif 'sensors' == subwhat or 'environment' == subwhat or 'switches' == subwhat:
+      elif 'sensors' == subwhat or 'environment' == subwhat or 'switches' == subwhat or 'system' == subwhat:
         type = None
         id = None
 
@@ -198,12 +198,12 @@ class terrariumWebserver():
             terrariumWebserver.app.terrarium.get_switches(True)
             terrariumWebserver.app.terrarium.get_power_usage_water_flow(True)
             terrariumWebserver.app.terrarium.get_total_power_usage_water_flow(True)
+            terrariumWebserver.app.terrarium.get_environment(None,True)
 
         elif message['type'] == 'toggle_switch':
-          if message['data']['state']:
-            terrariumWebserver.app.terrarium.switch_board.switches[int(message['data']['nr'])-1].on()
-          else:
-            terrariumWebserver.app.terrarium.switch_board.switches[int(message['data']['nr'])-1].off()
+          if 'toggle' == message['data']['state']:
+            terrariumWebserver.app.terrarium.power_switches[message['data']['id']].toggle()
+
       else:
         break
 

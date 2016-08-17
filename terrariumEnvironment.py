@@ -16,33 +16,31 @@ class terrariumEnvironment():
     self.power_switches = power_switches
     self.door_sensor = door_sensor
     self.weather = weather
-    self.__load_enironment_settings()
+    self.reload_config()
     thread.start_new_thread(self.__engine_loop, ())
 
-  def reload_settings(self):
-    self.__load_enironment_settings()
-
-  def __load_enironment_settings(self):
+  def __parse_config(self):
     config = self.config.get_environment()
-    self.lights = config['lights']
+    self.light = config['light']
 
-    self.lights['enabled'] = True if self.lights['enabled'].lower() in ['true','on','1'] else False
-    self.lights['on'] = int(self.lights['on'])
-    self.lights['off'] = int(self.lights['off'])
-    self.lights['hours_shift'] = float(self.lights['hours_shift'])
-    self.lights['min_hours'] = float(self.lights['min_hours'])
-    self.lights['max_hours'] = float(self.lights['max_hours'])
-    self.lights['power_switches'] = self.lights['power_switches'].split(',')
+    self.light['enabled'] = True if self.light['enabled'].lower() in ['true','on','1'] else False
+    self.light['on'] = int(self.light['on'])
+    self.light['off'] = int(self.light['off'])
+    self.light['hours_shift'] = float(self.light['hours_shift'])
+    self.light['min_hours'] = float(self.light['min_hours'])
+    self.light['max_hours'] = float(self.light['max_hours'])
+    self.light['power_switches'] = self.light['power_switches'].split(',')
 
-    self.humidity = config['humidity']
-    self.humidity['enabled'] = True if self.humidity['enabled'].lower() in ['true','on','1'] else False
-    self.humidity['night_enabled'] = True if self.humidity['night_enabled'].lower() in ['true','on','1'] else False
-    self.humidity['spray_duration'] = float(self.humidity['spray_duration'])
-    self.humidity['spray_timeout'] = float(self.humidity['spray_timeout'])
 
-    self.humidity['power_switches'] = self.humidity['power_switches'].split(',')
-    self.humidity['sensors'] = self.humidity['sensors'].split(',')
-    self.humidity['lastaction'] = datetime.datetime.now()
+    self.sprayer = config['sprayer']
+    self.sprayer['enabled'] = True if self.sprayer['enabled'].lower() in ['true','on','1'] else False
+    self.sprayer['night_enabled'] = True if self.sprayer['night_enabled'].lower() in ['true','on','1'] else False
+    self.sprayer['spray_duration'] = float(self.sprayer['spray_duration'])
+    self.sprayer['spray_timeout'] = float(self.sprayer['spray_timeout'])
+
+    self.sprayer['power_switches'] = self.sprayer['power_switches'].split(',')
+    self.sprayer['sensors'] = self.sprayer['sensors'].split(',')
+    self.sprayer['lastaction'] = datetime.datetime.now()
 
     self.heater = config['heater']
     self.heater['enabled'] =True if self.heater['enabled'].lower() in ['true','on','1'] else False
@@ -50,27 +48,35 @@ class terrariumEnvironment():
     self.heater['power_switches'] = self.heater['power_switches'].split(',')
     self.heater['sensors'] = self.heater['sensors'].split(',')
 
+  def __set_config(self,part,data):
+    for field in data:
+      if 'light' == part:
+        self.light[field] = data[field]
+      elif 'sprayer' == part:
+        self.sprayer[field] = data[field]
+      elif 'heater' == part:
+        self.heater[field] = data[field]
+
   def __engine_loop(self):
     while True:
-      now = int(time.time())
-      lights = self.get_lights_state()
+      light = self.get_light_state()
 
-      if self.lights['enabled']:
-        if lights['on'] < now < lights['off']:
-          self.lights_on()
+      if light['enabled']:
+        if light['on'] < int(time.time()) < light['off']:
+          self.light_on()
         else:
-          self.lights_off()
+          self.light_off()
 
-      if self.humidity['enabled']:
-        humidity = self.get_humidity_state()
+      light = self.get_light_state()
+      sprayer = self.get_sprayer_state()
+      if sprayer['enabled']:
+        if self.sprayer['night_enabled'] or light['state'] == 'on':
+          if sprayer['alarm']:
+            self.sprayer_on()
 
-        if humidity['current'] < humidity['alarm_min']:
-          self.waterspray_on()
-
-      if self.heater['enabled']:
-        if not (self.heater['day_enabled'] and lights['on'] < now < lights['off']):
-          heater = self.get_heater_state()
-
+      heater = self.get_heater_state()
+      if heater['enabled']:
+        if self.heater['day_enabled'] or light['state'] == 'off':
           if heater['current'] < heater['alarm_min']:
             self.heater_on()
           elif heater['current'] > heater['alarm_max']:
@@ -78,105 +84,96 @@ class terrariumEnvironment():
         else:
           self.heater_off()
 
-      sleep(60)
+      sleep(15)
+
+  def __switch_on(self,part, state = None):
+    is_on = True
+    power_switches = []
+    if 'light' == part:
+      power_switches = self.light['power_switches']
+    elif 'sprayer' == part:
+      power_switches = self.sprayer['power_switches']
+    elif 'heater' == part:
+      power_switches = self.heater['power_switches']
+
+    for switch in power_switches:
+      if state is None:
+        is_on = is_on and self.power_switches[switch].is_on()
+      else:
+        if state:
+          self.power_switches[switch].on()
+        else:
+          self.power_switches[switch].off()
+
+        is_on = state
+
+    return is_on
+
+  def __on(self,part):
+    return True == self.__switch_on(part,True)
+
+  def __off(self,part):
+    return False == self.__switch_on(part,False)
+
+  def __is_on(self,part):
+    return self.__switch_on(part)
+
+  def __is_off(self,part):
+    return not self.__is_on(part)
 
   def get_config(self):
-    return {'lights' : self.get_light_settings(),
-            'humidity' : self.get_humidity_settings() ,
-            'heater' : self.get_heater_settings()}
+    return {'light' : self.get_light_config(),
+            'sprayer' : self.get_sprayer_config() ,
+            'heater' : self.get_heater_config()}
 
-  def get_light_settings(self):
-    return self.lights
+  def reload_config(self):
+    self.__parse_config()
 
-  def set_light_settings(self,data):
-    for field in data:
-      self.lights[field] = data[field]
+  def get_light_config(self):
+    return self.light
 
-    #self.__load_enironment_settings()
+  def set_light_config(self,data):
+    self.__set_config('light',data)
 
-  def lights_on(self):
-    for switch in self.lights['power_switches']:
-      print 'Switch on: ' + self.power_switches[switch].get_name()
-      self.power_switches[switch].on();
+  def light_on(self):
+    return self.__on('light')
 
-  def lights_off(self):
-    for switch in self.lights['power_switches']:
-      print 'Switch off: ' + self.power_switches[switch].get_name()
-      self.power_switches[switch].off();
+  def light_off(self):
+    return self.__off('light')
 
-  def get_humidity_settings(self):
-    data = copy.deepcopy(self.humidity)
-    del(data['lastaction'])
-    return data
+  def is_light_on(self):
+    return self.__is_on('light')
 
-  def set_humidity_settings(self,data):
-    print data
-    for field in data:
-      self.humidity[field] = data[field]
+  def is_light_off(self):
+    return self.__is_off('light')
 
-    #self.__load_enironment_settings()
-
-  def waterspray_on(self):
-    if datetime.datetime.now() - self.humidity['lastaction'] > datetime.timedelta(seconds=self.humidity['spray_timeout']):
-      for switch in self.humidity['power_switches']:
-        print 'Switch on: ' + self.power_switches[switch].get_name()
-        self.power_switches[switch].on();
-
-      (Timer(self.humidity['spray_duration'], self.waterspray_off)).start()
-#        t.start()
-      self.humidity['lastaction'] = datetime.datetime.now()
-
-  def waterspray_off(self):
-    for switch in self.humidity['power_switches']:
-      print 'Switch off: ' + self.power_switches[switch].get_name()
-      self.power_switches[switch].off();
-
-  def get_heater_settings(self):
-    return self.heater
-
-  def set_heater_settings(self,data):
-    for field in data:
-      self.heater[field] = data[field]
-
-    #self.__load_enironment_settings()
-
-  def heater_on(self):
-    for switch in self.heater['power_switches']:
-      print 'Switch on: ' + self.power_switches[switch].get_name()
-      self.power_switches[switch].on();
-
-  def heater_off(self):
-    for switch in self.heater['power_switches']:
-      print 'Switch off: ' + self.power_switches[switch].get_name()
-      self.power_switches[switch].off();
-
-  def get_lights_state(self):
+  def get_light_state(self):
     now = datetime.datetime.now()
-    data = {'on' : 0, 'off' : 0}
-    if 'weather' == self.lights['modus']:
+    data = {'on' : 0, 'off' : 0, 'modus' : self.light['modus'], 'enabled' : self.light['enabled']}
+    if 'weather' == data['modus']:
       data['on'] = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['rise'])
       data['off'] = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['set'])
 
-    elif 'timer' == self.lights['modus']:
-      data['on'] = self.lights['on']
-      data['off'] = self.lights['off']
+    elif 'timer' == data['modus']:
+      data['on'] = self.light['on']
+      data['off'] = self.light['off']
 
     # Duration check
     duration = data['off'] - data['on']
     # Reduce the amount of hours if to much
-    if duration > datetime.timedelta(hours=self.lights['max_hours']):
-      duration -= datetime.timedelta(hours=self.lights['max_hours'])
+    if duration > datetime.timedelta(hours=self.light['max_hours']):
+      duration -= datetime.timedelta(hours=self.light['max_hours'])
       data['on'] += datetime.timedelta(seconds=duration.total_seconds()/2)
       data['off'] -= datetime.timedelta(seconds=duration.total_seconds()/2)
     # Increase the amount of hours it to little
-    elif duration < datetime.timedelta(hours=self.lights['min_hours']):
-      duration = datetime.timedelta(hours=self.lights['min_hours']) - duration
+    elif duration < datetime.timedelta(hours=self.light['min_hours']):
+      duration = datetime.timedelta(hours=self.light['min_hours']) - duration
       data['on'] -= datetime.timedelta(seconds=duration.total_seconds()/2)
       data['off'] += datetime.timedelta(seconds=duration.total_seconds()/2)
 
     # Shift hours
-    data['on'] += datetime.timedelta(hours=self.lights['hours_shift'])
-    data['off'] += datetime.timedelta(hours=self.lights['hours_shift'])
+    data['on'] += datetime.timedelta(hours=self.light['hours_shift'])
+    data['off'] += datetime.timedelta(hours=self.light['hours_shift'])
 
     # Shift time to next day?
     if now > data['off']:
@@ -187,22 +184,73 @@ class terrariumEnvironment():
     data['on'] = time.mktime(data['on'].timetuple())
     data['off'] = time.mktime(data['off'].timetuple())
 
+    data['state'] = 'on' if self.is_light_on() else 'off'
     return data
 
-  def get_humidity_state(self):
-    amount = float(len(self.humidity['sensors']))
-    data = {'current' : sum(self.sensors[sensor].get_current() for sensor in self.humidity['sensors']) / amount,
-            'alarm_min' : sum(self.sensors[sensor].get_alarm_min() for sensor in self.humidity['sensors']) / amount}
-
+  def get_sprayer_config(self):
+    data = copy.deepcopy(self.sprayer)
+    del(data['lastaction'])
     return data
+
+  def set_sprayer_config(self,data):
+    self.__set_config('sprayer',data)
+
+  def sprayer_on(self):
+    if datetime.datetime.now() - self.sprayer['lastaction'] > datetime.timedelta(seconds=self.sprayer['spray_timeout']):
+      self.__on('sprayer')
+      (Timer(self.sprayer['spray_duration'], self.sprayer_off)).start()
+      self.sprayer['lastaction'] = datetime.datetime.now()
+
+  def sprayer_off(self):
+    self.__off('sprayer')
+
+  def is_sprayer_on(self):
+    return self.__is_on('sprayer')
+
+  def is_sprayer_off(self):
+    return self.__is_off('sprayer')
+
+  def get_sprayer_state(self):
+    amount = float(len(self.sprayer['sensors']))
+    data = {'current' : sum(self.sensors[sensor].get_current() for sensor in self.sprayer['sensors']) / amount,
+            'alarm_min' : sum(self.sensors[sensor].get_alarm_min() for sensor in self.sprayer['sensors']) / amount,
+            'enabled' : self.sprayer['enabled']}
+
+    data['alarm'] = data['current'] < data['alarm_min']
+    data['state'] = 'on' if self.is_sprayer_on() else 'off'
+    return data
+
+  def get_heater_config(self):
+    return self.heater
+
+  def set_heater_config(self,data):
+    self.__set_config('heater',data)
+
+  def heater_on(self):
+    self.__on('heater')
+
+  def heater_off(self):
+    self.__off('heater')
+
+  def is_heater_on(self):
+    return self.__is_on('heater')
+
+  def is_heater_off(self):
+    return self.__is_off('heater')
 
   def get_heater_state(self):
     amount = float(len(self.heater['sensors']))
     data = {'current' : sum(self.sensors[sensor].get_current() for sensor in self.heater['sensors']) / amount,
           'alarm_min' : sum(self.sensors[sensor].get_alarm_min() for sensor in self.heater['sensors']) / amount,
-          'alarm_max' : sum(self.sensors[sensor].get_alarm_max() for sensor in self.heater['sensors']) / amount}
+          'alarm_max' : sum(self.sensors[sensor].get_alarm_max() for sensor in self.heater['sensors']) / amount,
+          'modus' : self.heater['modus'],
+          'enabled' : self.heater['enabled']}
 
+    data['alarm'] = not (data['alarm_max'] >= data['current'] >= data['alarm_min'])
+    data['state'] = 'on' if self.is_heater_on() else 'off'
     return data
+
+
 
   def get_average_temperature(self):
     return self.get_average('temperature')

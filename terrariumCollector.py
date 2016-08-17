@@ -5,7 +5,6 @@ import json
 import copy
 
 class terrariumCollector():
-
   database = 'history.db'
 
   def __init__(self):
@@ -18,7 +17,6 @@ class terrariumCollector():
       cur = self.db.cursor()
       cur.execute('CREATE TABLE IF NOT EXISTS data (day DATE, type VARCHAR(15), summary TEXT, rawdata TEXT)')
       cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS historykey ON data(day,type)')
-
       self.db.commit()
 
   def __log_data(self,type,id,datatype,newdata):
@@ -78,8 +76,12 @@ class terrariumCollector():
   def log_power_usage_water_flow(self,data):
     self.__log_data('switches',None,'summary',data)
 
+  def log_system_data(self, data):
+    for item in data:
+      self.__log_data('system',item,'rawdata',data[item])
+
   def get_history(self, type, subtype = None, id = None, starttime = None, stoptime = None):
-    print 'get history: ' + str(type) + ' - ' + str(subtype) + ' - ' + str(id)
+    #print 'get history: ' + str(type) + ' - ' + str(subtype) + ' - ' + str(id)
     # Default return object
     history = {}
     # Every Xth minute will be returned
@@ -103,6 +105,11 @@ class terrariumCollector():
       history_fields = { 'wind_speed' : [], 'temperature' : [], 'pressure' : [] , 'wind_direction' : [], 'rain' : [],
                         'weather' : [], 'icon' : []}
       datatypes = [subtype]
+
+    elif type == 'system':
+      field = 'rawdata'
+      history_fields = { 'load1' : [], 'load5' : [], 'load15' : [], 'uptime' : [] }
+      datatypes = [type]
 
     elif type == 'switches':
       field = 'rawdata'

@@ -1,11 +1,6 @@
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Info</h3>
-              </div>
-            </div>
-            <div class="clearfix"></div>
+% include('inc/page_header.tpl')
             <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">               
+              <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="" role="tabpanel" data-example-id="togglable-tabs">
                   <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Home</a>
@@ -31,4 +26,5 @@
                   </div>
                 </div>
               </div>
-            </div>    
+            </div>
+% include('inc/page_footer.tpl')

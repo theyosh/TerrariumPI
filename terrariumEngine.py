@@ -12,6 +12,7 @@ import time
 import uptime
 import os
 import datetime
+import psutil
 
 from gevent import monkey, sleep
 monkey.patch_all()
@@ -29,8 +30,10 @@ class terrariumEngine():
     # Load config
     self.config = terrariumConfig(self.get_config)
 
+    # Load data collector for historical data
     self.collector = terrariumCollector()
 
+    # Set the Pi power usage (including usb devices directly on the PI)
     self.pi_power_wattage = float(self.config.get_pi_power_wattage())
 
     # Load Weather part
@@ -53,24 +56,22 @@ class terrariumEngine():
     for sensor in terrariumSensor.scan(self.config.get_1wire_port(), self.config.get_sensors()):
       self.sensors[sensor.get_id()] = sensor
 
+    # Load the environment system. This will controll the lights, sprayer and heaters
     self.environment = terrariumEnvironment(self.sensors, self.power_switches, self.door_sensor, self.weather, self.config)
 
-    # Start uptime timer
-    thread.start_new_thread(self.get_uptime, (True,))
-
-    # Start sensors update loop
+    # Start system update loop
     thread.start_new_thread(self.__engine_loop, ())
 
   def __get_power_usage_water_flow(self, socket = False):
-    data = {'power' : {'current' : self.pi_power_wattage , 'max' : self.pi_power_wattage, 'history' : 0},
-            'water' : {'current' : 0 , 'max' : 0, 'history' : 0}}
+    data = {'power' : {'current' : self.pi_power_wattage , 'max' : self.pi_power_wattage},
+            'water' : {'current' : 0.0 , 'max' : 0.0}}
 
-    for switch in self.switch_board.get_switches()['switches']:
-      data['power']['current'] += switch['power_wattage'] if switch['state'] else 0
-      data['power']['max'] += switch['power_wattage']
+    for switchid in self.power_switches:
+      data['power']['current'] += self.power_switches[switchid].get_power_wattage() if self.power_switches[switchid].is_on() else 0.0
+      data['power']['max'] += self.power_switches[switchid].get_power_wattage()
 
-      data['water']['current'] += switch['water_flow'] if switch['state'] else 0
-      data['water']['max'] += switch['water_flow']
+      data['water']['current'] += self.power_switches[switchid].get_water_flow() if self.power_switches[switchid].is_on() else 0.0
+      data['water']['max'] += self.power_switches[switchid].get_water_flow()
 
     return data
 
@@ -83,17 +84,16 @@ class terrariumEngine():
     today = datetime.date.today()
     today = int(time.mktime(today.timetuple()))
     now = int(time.time())
-    duration = self.get_uptime()['uptime']
-    if duration > now - today:
-      duration = now -today
+    uptime = self.get_uptime()['uptime']
+    if uptime > now - today:
+      uptime = now -today
 
-    data['power_wattage'] = (float(duration) / 3600.0) * float(self.pi_power_wattage)
-
+    data['power_wattage'] = (float(uptime) / 3600.0) * float(self.pi_power_wattage)
     prev_data = self.collector.get_history('switches','summary')['switches']['summary']
     for fieldname in prev_data:
       for data_item in prev_data[fieldname]:
         if data_item[0] / 1000 < today:
-          data[fieldname] = data_item[1]
+          data[fieldname] = float(data_item[1])
 
     history_data = self.collector.get_history('switches')['switches']
     for switchid in history_data:
@@ -105,7 +105,7 @@ class terrariumEngine():
         history_data[switchid]['state'].append([now * 1000 , False])
 
       for counter in range(0,len(history_data[switchid]['state'])):
-        if counter > 0 and (history_data[switchid]['state'][counter][0] / 1000) >= today and not history_data[switchid]['state'][counter][1]:
+        if counter > 0 and (history_data[switchid]['state'][counter][0] / 1000) >= today and not history_data[switchid]['state'][counter][1] and history_data[switchid]['state'][counter-1][1]:
           duration = (float(history_data[switchid]['state'][counter][0]) - float(history_data[switchid]['state'][counter-1][0])) / 1000.0
           data['power_wattage'] += (duration / 3600.0) * float(history_data[switchid]['power_wattage'][counter-1][1])
           data['water_flow'] += (duration / 60.0) * float(history_data[switchid]['water_flow'][counter-1][1])
@@ -132,19 +132,22 @@ class terrariumEngine():
         # Save data in database per type
         self.collector.log_environment_data(sensortype,average_data[sensortype])
 
-      # Decide if need a sensor callback update
+      # Websocket callback
       self.__send_message({'type':'sensor_gauge','data':average_data})
 
+      # Calculate power and water usage per day
+      self.collector.log_power_usage_water_flow(self.__calculate_power_usage_water_flow())
+
+      # Websocket messages back
+      self.get_uptime(True)
+      self.get_power_usage_water_flow(True)
+      self.get_environment(None,True)
+
+      # Update weather
       self.weather.update()
       self.collector.log_weather_data(self.weather.get_data()['hour_forecast'][0])
 
-      # Calculate power and water usage per day
-      data = self.__calculate_power_usage_water_flow()
-      self.__send_message({'type':'power_usage_water_flow','data':{
-          'total_power' : data['power_wattage'] / 1000.0,
-          'total_water' : data['water_flow']
-      }})
-      self.collector.log_power_usage_water_flow(data)
+      self.get_system_stats()
 
       sleep(30) # TODO: Config setting
 
@@ -156,17 +159,33 @@ class terrariumEngine():
     self.subscribed_queues.append(queue)
     self.__send_message({'type':'dashboard_online', 'data':True})
 
+  def get_system_stats(self):
+    memory = psutil.virtual_memory()
+    uptime = self.get_uptime()
+
+    cpu_temp = -1
+    with open('/sys/class/thermal/thermal_zone0/temp') as temperature:
+      cpu_temp = float(temperature.read()) / 1000.0
+
+    data = {'memory' : {'total' : memory.total,
+                        'used' : memory.used,
+                        'free' : memory.free},
+            'load' : {'load1' : uptime['load'][0],
+                      'load5' : uptime['load'][1],
+                      'load15' : uptime['load'][2]},
+            'uptime' : uptime['uptime'],
+            'temperature' : cpu_temp}
+
+    self.collector.log_system_data(data)
+
   def get_uptime(self, socket = False):
     data = {'uptime' : uptime.uptime(),
               'load' : os.getloadavg()}
 
-    if not socket:
-      return data
-
-    while True:
+    if socket:
       self.__send_message({'type':'dashboard_uptime','data':data})
-      sleep(60)
-
+    else:
+      return data
 
   # API Config calls
   def get_config(self, part = None):
@@ -225,7 +244,7 @@ class terrariumEngine():
     data = self.weather.get_data()
 
     if socket:
-      self.__send_message({'type':'dashboard_weather','data':data})
+      self.__send_message({'type':'update_weather','data':data})
     else:
       return data
 
@@ -249,10 +268,10 @@ class terrariumEngine():
       return False
 
     data = self.switch_board.get_switches()
-
     if socket:
-      self.__send_message({'type':'dashboard_switches','data':data});
-      self.get_power_usage_water_flow(True);
+      self.__send_message({'type':'power_switches','data':data})
+      self.get_power_usage_water_flow(True)
+      self.get_environment(None,True)
     else:
       return data
 
@@ -262,6 +281,11 @@ class terrariumEngine():
 
   def get_power_usage_water_flow(self, socket = False):
     data = self.__get_power_usage_water_flow()
+    totaldata = self.__calculate_power_usage_water_flow()
+
+    data['power']['total'] = totaldata['total_power']
+    data['water']['total'] = totaldata['total_water']
+
     if socket:
       self.__send_message({'type':'dashboard_power_usage','data':data['power']});
       self.__send_message({'type':'dashboard_water_flow','data':data['water']});
@@ -326,26 +350,15 @@ class terrariumEngine():
   # Environment part
   def get_environment(self, filter = None, socket = False):
     data = self.environment.get_average()
-    data['lights'] = self.environment.get_lights_state()
-    data['lights']['modus'] = self.environment.get_light_settings()['modus']
-    data['lights']['enabled'] = self.environment.get_light_settings()['enabled']
-    data['lights']['state'] = 'on' if data['lights']['on'] < int(time.time()) < data['lights']['off'] else 'off'
-
-    data['sprayer'] = self.environment.get_humidity_state()
-    data['sprayer']['enabled'] = self.environment.get_humidity_settings()['enabled']
-    data['sprayer']['alarm'] = data['sprayer']['current'] <  data['sprayer']['alarm_min']
-
+    data['light'] = self.environment.get_light_state()
+    data['sprayer'] = self.environment.get_sprayer_state()
     data['heater'] = self.environment.get_heater_state()
-    data['heater']['modus'] = self.environment.get_heater_settings()['modus']
-    data['heater']['enabled'] = self.environment.get_heater_settings()['enabled']
-    data['heater']['alarm'] = not (data['heater']['alarm_max'] > data['heater']['current'] >  data['heater']['alarm_min'])
 
     if filter is not None:
       data = { filter: data[filter]}
 
     if socket:
-      pass
-      #self.__send_message({'type':'dashboard_sensors','data':data})
+      self.__send_message({'type':'environment','data':data})
     else:
       return { 'environment' : data }
 
@@ -353,17 +366,17 @@ class terrariumEngine():
     return self.environment.get_config()
 
   def set_environment_config(self,data):
-    if 'lights' in data:
-      self.environment.set_light_settings(data['lights'])
+    if 'light' in data:
+      self.environment.set_light_config(data['light'])
 
-    if 'humidity' in data:
-      self.environment.set_humidity_settings(data['humidity'])
+    if 'sprayer' in data:
+      self.environment.set_sprayer_config(data['sprayer'])
 
     if 'heater' in data:
-      self.environment.set_heater_settings(data['heater'])
+      self.environment.set_heater_config(data['heater'])
 
     update_ok = self.config.save_environment(self.environment.get_config())
-    self.environment.reload_settings()
+    self.environment.reload_config()
     return True
 
   # End Environment part
@@ -390,7 +403,7 @@ class terrariumEngine():
   # Histroy part (Collector)
   def get_history(self, type = None, subtype = None, id = None, socket = False):
     data = {}
-    if type == 'sensors' or type == 'switches':
+    if type == 'sensors' or type == 'switches' or type == 'system':
       if id is not None and id in self.sensors:
         data = self.collector.get_history(type,self.sensors[id].get_type(),id)
 

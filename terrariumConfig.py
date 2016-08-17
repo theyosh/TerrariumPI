@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import ConfigParser
 
 class terrariumConfig:
@@ -66,7 +65,7 @@ class terrariumConfig:
 
   def get_environment(self):
     config = self.__get_config('environment')
-    data = {'lights' : {}, 'humidity' : {}, 'heater' : {} }
+    data = {'light' : {}, 'sprayer' : {}, 'heater' : {} }
     for key in config:
       config_keys = key.split('_')
       part = config_keys[0]
@@ -75,9 +74,9 @@ class terrariumConfig:
 
     return data
 
-  def get_environment_lights(self):
+  def get_environment_light(self):
     data = self.get_environment()
-    return data['lights'] if 'lights' in data else None
+    return data['light'] if 'light' in data else None
 
   # End Environment functions
 
