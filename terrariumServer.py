@@ -140,40 +140,44 @@ class terrariumServer:
 
   def __statsinfo(self,rrdid,action='get',period = 'day'):
     value = []
-    if 'environment_' in rrdid:
+    temptype = 'sensors'
+    if 'environment_' in rrdid or 'system_' in rrdid:
        data = {}
+       tmpvalue = {}
        if 'environment_humidity' == rrdid:
          data = self.__environment.getHumidityStatus()
        elif 'environment_heater' == rrdid or 'environment_light' == rrdid:
          pass
+       elif 'system_power' == rrdid:
+         data = self.__environment.getPowerStatus()
+         temptype = 'switches'
 
-       for type in ['sensors']:
+       for type in [temptype]:
          amount = float(len(data[type]))
-         firstrun = True
 
          for rrdid in data[type]:
            if 'sensors' == type:
              rrdid = 'sensor_' + rrdid['id']
            elif 'switches' == type:
              rrdid = 'switch_' + rrdid['id']
+             amount = 1.0
 
            rrdlist = self.__collector.getRRDDatabase(rrdid,period)
+
            for i, rrddata in enumerate(rrdlist):
-             if firstrun == True:
-               value.append(copy.deepcopy(rrddata))
+             new = False
+             if rrddata['timestamp'] not in tmpvalue:
+               tmpvalue[rrddata['timestamp']] = copy.deepcopy(rrddata)
+               new = True
 
              for key in rrddata:
                if 'timestamp' == key:
                  continue
 
-               if firstrun == True:
-                 value[i][key] = 0
-
-               value[i][key] = str(float(value[i][key]) + (float(rrddata[key]) / amount))
-
-           firstrun = False
-         
-         del value[-1]
+               tmpvalue[rrddata['timestamp']][key] = (0.0 if new else tmpvalue[rrddata['timestamp']][key]) + (rrddata[key] / amount)
+ 
+       for key in sorted(tmpvalue):
+         value.append(tmpvalue[key])
 
     else:
       value = self.__collector.getRRDDatabase(rrdid,period)

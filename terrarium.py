@@ -92,7 +92,7 @@ class terrarium:
   environment = terrariumEnvironment(weather,sensors,powerSwitches,config.getEnvironmentConfig(),twitter,door,config)
   terrarium_log.info('Started the terrarium environment')
 
-  collector = terrariumCollector(weather,sensors,powerSwitches,config.getEnvironmentConfig(),environment)
+  collector = terrariumCollector(config,weather,sensors,powerSwitches,config.getEnvironmentConfig(),environment)
   terrarium_log.info('Started the terrarium collector')
 
   engine = terrariumEngine(weather,sensors,powerSwitches,webCams)

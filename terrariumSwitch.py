@@ -31,13 +31,15 @@ class terrariumSwitch:
     self.__name           = str(switchConfig['name'] if 'name' in switchConfig and switchConfig['name'] else '{unknown}')
     self.__loggingActive  = bool(switchConfig['logging'] if 'logging' in switchConfig and switchConfig['logging'] else True)
     self.__cacheTimeOut   = timedelta(seconds=float(switchConfig['timeout'] if 'timeout' in switchConfig and switchConfig['timeout'] else 24 * 60 * 60))
-    self.__wattage        = int(switchConfig['wattage'] if 'wattage' in switchConfig and switchConfig['wattage'] else 0)
-    self.__waterflow      = int(switchConfig['waterflow'] if 'waterflow' in switchConfig and switchConfig['waterflow'] else 0)
+    self.__wattage        = float(switchConfig['wattage'] if 'wattage' in switchConfig and switchConfig['wattage'] else 0.0)
+    self.__waterflow      = float(switchConfig['waterflow'] if 'waterflow' in switchConfig and switchConfig['waterflow'] else 0.0)
 
     self.__state          = -1
     self.__lastUpdate     = datetime.fromtimestamp(0)
 
-
+    self.__running_time   = 0.0
+    self.__r_time_update  = datetime.now()
+    self.__r_lock         = False
 
     self.__lastUsageChange     = datetime.now()
     self.__usageUpdateTimeout = 300
@@ -45,6 +47,7 @@ class terrariumSwitch:
     # Serial device does not have an status indicator
     # Force to 'out' state
     if 'Serial' == self.__device_type:
+      print 'Force to be switched off'
       self.off()
 
     self.update()
@@ -91,8 +94,8 @@ class terrariumSwitch:
               device.close()
 
           self.__lastUpdate = datetime.now()
-          self.__update_usage_stats()
-          self.__state = True if 'on' == state else False
+          self.__power_usage_stats()
+          self.__state = 1 if 'on' == state else 0
           terrarium_log.info('Switched switch %s(%s) from %s',self.getName(),self.getID(),('off to on' if 'on' == state else 'on to off')) 
           newstate = 1
         except Exception, err:
@@ -107,40 +110,19 @@ class terrariumSwitch:
 
     return newstate
 
-  def __update_usage_stats(self):
+  def __power_usage_stats(self):
     now = datetime.now()
-    logfile = 'log/wattage.' + self.getID() + '.log.' + now.strftime('%d-%m-%Y')
-    duration = (now - self.__lastUsageChange).total_seconds()
-    with open(logfile, 'a') as file:
-      file.write(now.strftime('%s') + ',' + now.strftime('%d-%m-%Y %H:%M:%S') + ',' + str(self.getState()) + ',' + str(duration) + ',' + str(self.getCurrentWattage()) + ',' + str(self.getCurrentWaterflow()) + '\n')
-
-    self.__lastUsageChange = now
-
+    self.__running_time += (now - self.__r_time_update).total_seconds() if self.getState() == 1 else 0.0
+    self.__r_time_update = now
 
   def __usage_updater(self):
     while True:
       terrarium_log.debug('Update wattage usage for switch %s ...', self.getName())
-      self.__update_usage_stats()
+      self.__power_usage_stats()
 
       now = datetime.now()
       waittime = self.__usageUpdateTimeout - (int(now.strftime('%s')) % self.__usageUpdateTimeout)
       sleep(int(waittime))
-
-  def get_wattage_usage(self,period = 'day'):
-    total_wattage = {}
-
-    logfile = 'log/wattage.' + self.getID() + '.log.' + (datetime.now()).strftime('%d-%m-%Y')
-    with open(logfile, 'rb') as file:
-      for line in file.readlines():
-        line = line.split(',')
-        if int(line[2]) == 1 and int(float(line[3])) > 0:
-          endtime   = datetime.fromtimestamp(float(line[0]))
-#          starttime = endtime - timedelta(seconds=int(float(line[3])))
-#          logtime   = starttime + timedelta(seconds=(int(starttime.strftime('%s')) % timeinterval))
-          logtime = endtime
-          total_wattage[logtime.strftime('%s')] = int(line[4])
-
-    return total_wattage
 
   def __setLogging(self,on):
     self.__loggingActive = bool(on)
@@ -200,7 +182,6 @@ class terrariumSwitch:
     return self.__name
 
   def update(self):
-    #self.__wattage_stats()
     now = datetime.now()
     if now - self.__lastUpdate >= self.__cacheTimeOut:
       if self.getDeviceLock():
@@ -227,10 +208,10 @@ class terrariumSwitch:
         terrarium_log.warn('Switch lock error. Could not update to new state!')
 
   def getState(self):
-    if 0 == self.__state:
-      return 0
-    else:
+    if 1 == self.__state:
       return 1
+    else:
+      return 0
 
   def on(self):
     self.__setState('on')
@@ -245,6 +226,11 @@ class terrariumSwitch:
       return self.off()
     else:
       return self.on()
+
+  def getPowerUsage(self):
+    self.__power_usage_stats()
+    usage = (float(self.__running_time) / 3600.0) * float(self.getWattage())
+    return usage
 
   def getCurrentWattage(self):
     return (0 if self.getState() == 0 else self.getWattage())
@@ -263,17 +249,23 @@ class terrariumSwitch:
     else:
       return False
 
+  def getWaterUsage(self):
+    self.__power_usage_stats()
+    usage = (float(self.__running_time) / 60.0) * self.getWaterflow()
+    return usage
+
   def getCurrentWaterflow(self):
     return (0 if self.getState() == 0 else self.getWaterflow())
 
   def getWaterflow(self):
-    if self.__waterflow >= 0:
+    if self.__waterflow >= 0.0:
       return self.__waterflow
     else:
       return False
 
   def setWaterflow(self,waterflow):
-    if 0 <= waterflow <= 500:
+    waterflow = float(waterflow)
+    if 0.0 <= waterflow <= 500.0:
       self.__waterflow = waterflow
       self.__saveSwitchConfig()
       return self.getWaterflow()

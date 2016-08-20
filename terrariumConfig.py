@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import ConfigParser
+from datetime import datetime
 
 class terrariumConfig:
   def __init__(self):
     self.__config_file_name = 'terrariumSettings.cfg'
     self.__config = ConfigParser.SafeConfigParser()
     self.__config.read(self.__config_file_name)
-
+    self.__starttime = datetime.now()
+    
     self.__debug = True
 
   def getOWSPortnumber(self):
@@ -64,6 +66,9 @@ class terrariumConfig:
 
     return value
 
+
+  def getRunningTime(self):
+    return (datetime.now() - self.__starttime).total_seconds()
 
   def getPiWattage(self):
     value = 5

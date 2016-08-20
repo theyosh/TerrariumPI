@@ -81,7 +81,7 @@ function loadSystemDashboard() {
     showAboutWindow();
   });
   jQuery('div#gauge_wattage').addClass('pointer').bind('click', function() {
-    showPowerHistoryGraph('system_wattage', 'Power usage', 'wattage');
+    showGraph('system_power', 'Power usage', 'power');
   });
 }
 

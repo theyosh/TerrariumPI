@@ -105,8 +105,8 @@ function Switch(id, name, nr, state, type, wattage, waterflow) {
         'name': 'waterflow',
         'type': 'number',
         'value': event.data.object.waterflow(),
-        'label': 'Waterflow',
-        'help': 'Enter the amount of water that is used  when switched on'
+        'label': 'Waterflow (Liters/minute)',
+        'help': 'Enter the amount of water that is used when switched on in liters per minute'
       })
       showEditForm(event.data.object.type() + ' switch ' + event.data.object.name(), fields, '/switch/' + event.data.object.id() + '/set', 'loadSwitches(true)');
     });

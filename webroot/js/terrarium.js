@@ -536,6 +536,7 @@ function timeFormat(duration) {
   return value.substr(0, value.trim().length - 1);
 }
 
+/*
 var powerHistoryData = {};
 function showPowerHistoryGraph(id, title, type) {
   powerHistoryData = {
@@ -565,7 +566,7 @@ function showPowerHistoryGraph(id, title, type) {
     showGraph(id, title, type);
   });
 }
-
+*/
 function showGraph(id, title, type) {
   if (jQuery('#graphWindow').length == 1) {
     jQuery('#graphWindow').jqxWindow('destroy');
@@ -685,13 +686,17 @@ function loadGraph(id, title, type, period) {
     lineColor: 'orange',
     fillColor: 'orange',
     lineWidth: 2
-  }, {
-    dataField: 'low',
-    displayText: 'Low ' + (type == 'temperature' ? 'temperature' : 'humidity'),
-    lineColor: 'green',
-    fillColor: 'green',
-    lineWidth: 2
   }];
+
+  if (jQuery.inArray(type, ['temperature', 'humidity', 'environment_humidity']) > -1) { // Exclude switches
+    dataLines.push({
+      dataField: 'low',
+      displayText: 'Low ' + (type == 'temperature' ? 'temperature' : 'humidity'),
+      lineColor: 'green',
+      fillColor: 'green',
+      lineWidth: 2
+    });
+  }
 
   if (jQuery.inArray(type, ['temperature', 'humidity', 'environment_humidity']) > -1) { // Exclude switches
     dataLines.push({
@@ -722,10 +727,10 @@ function loadGraph(id, title, type, period) {
   }
 
   if (type == 'power') {
-    dataLines[0].displayText = 'Switch On';
-    dataLines[1].displayText = 'Switch Off';
-    graphTitle = 'Power switch ' + title;
-    graphToolTipsuffix = '';
+    dataLines[0].displayText = 'Wattage';
+    graphTitle = 'Power usage switch ' + title;
+    graphDescription = 'Power usage in Watt per minute';
+    graphToolTipsuffix = ' watt/min';
   } else if (title.indexOf('Weather in city:') != -1) {
     graphTitle = title.replace('in city','temperature in city');
   }
@@ -789,17 +794,18 @@ function loadGraph(id, title, type, period) {
 
   graphTitle += ' period: ' + moment().subtract(periodDays, 'days').format('ll') + ' - ' + moment().format('ll');
 
+/*
   if (type == 'wattage') {
     // Big hack! To leazy to fix nicely
     graphTitle = 'Power usage for day ' + moment().format('ll');
     graphType = 'stackedcolumn';
-    graphDescription = 'Power usage in Watt';
+    graphDescription = 'Power usage in Watt per hour';
     graphToolTipsuffix = 'W';
     source['datafields'] = powerHistoryData['datafields'];
     dataLines = powerHistoryData['dataLines'];
     source['url'] = '/system/wattage/graph';
   }
-
+*/
   var dataAdapter = new jQuery.jqx.dataAdapter(source, {
     autoBind: true,
     async: false,
@@ -854,14 +860,14 @@ function loadGraph(id, title, type, period) {
       seriesGapPercent: 0,
       toolTipFormatFunction: function(value, itemIndex, serie, group, xAxisValue, xAxis) {
         return moment(xAxisValue).format('dddd D MMMM YYYY [at] HH:mm') + '<br />' +
-          serie.displayText + ': ' + (value + '').replace('.',',') + graphToolTipsuffix;
+          serie.displayText + ': ' + (Math.round(value*1000)/1000 + '').replace('.',',') + graphToolTipsuffix;
       },
       valueAxis: {
         displayValueAxis: true,
         description: graphDescription,
         showTickMarks: true,
         tickMarksColor: '#E0E0E0',
-        unitInterval: 5,
+//        unitInterval: 3,
         gridLinesColor: '#E0E0E0',
       },
       series: dataLines
@@ -874,12 +880,12 @@ function updateFavicon() {
   var currentFavicon = jQuery('link[rel=icon]').attr('href');
   var newFavicon = null;
   if (jQuery('.icon.webserver.enabled.error').length == 1) {
-    var img = jQuery('.icon.webserver.enabled.error').css('background-image').substr(5);
-    newFavicon = img.substr(0, img.length - 2);
+    newFavicon = 'images/favicons/error.png';
   } else {
-    newFavicon = (jQuery('#environment .alarm.on').length > 0 ? 'images/icons/alarm.png' : 'images/icons/enabled.png')
+    newFavicon = (jQuery('#environment .alarm.on').length > 0 ? 'images/favicons/alarm.png' : 'images/favicons/enabled.png')
   }
   if (currentFavicon != newFavicon) {
+    console.log('Change favicon from: ' + currentFavicon + ' to ' + newFavicon);
     jQuery('link[rel=icon]').replaceWith(jQuery('link[rel=icon]').clone().attr('href', newFavicon));
   }
 

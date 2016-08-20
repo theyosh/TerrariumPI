@@ -298,10 +298,13 @@ class terrariumEnvironment:
         should_be_on = self.__heater['alarm'] and self.__heater['avg_min'] > self.__heater['avg_val']
         terrarium_log.debug('Heater system is based on temperature sensor and should be %s',('running' if should_be_on else 'off'))
 
+
+      if not self.__heater['day_active'] and self.__weather.isDaytime():
+        terrarium_log.warn('Heater system is disabled during day time')
+        should_be_on = False
+
       if not self.__heater['active']:
         terrarium_log.warn('Heater system is manually disabled')
-      elif not self.__heater['day_active'] and self.__weather.isDaytime():
-        terrarium_log.warn('Heater system is disabled during day time')
       else:
 
         if should_be_on:
@@ -426,6 +429,16 @@ class terrariumEnvironment:
     return data
 
 # Environment Methods
+# Power usage
+
+  def getPowerStatus(self,format = 'json'):
+    data = {'switches' : [{'id':'pi'}]}
+    for switch in (self.__lights['switches'] + self.__humidity['switches'] + self.__heater['switches']):
+      data['switches'].append({ 'id' : switch.getID()})
+
+    return data
+    
+
 # Lights
   def getLightsStatus(self,format = 'json'):
     if 'json' == format:

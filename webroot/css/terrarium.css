@@ -280,3 +280,7 @@ input[readonly="readonly"] {
   -webkit-box-shadow: 5px 4px 10px #333333;
   box-shadow: 5px 4px 10px #333333;
 }
+
+#system_uptime {
+  height: 2em;
+}
