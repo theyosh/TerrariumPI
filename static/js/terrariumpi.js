@@ -1,6 +1,6 @@
 var globals = {
   websocket: null,
-  connection: 'ws://' + location.host + '/live',
+  connection: 'ws' + (location.protocol == 'https:' ? 's' : '') + '://' + location.host + '/live',
   gauges: [],
   webcams: [],
   websocket_timer: null,
