@@ -39,13 +39,16 @@ class terrariumSwitchboard():
       if switch_numbers[nr] is not None:
         power_switch_config = switch_config[switch_numbers[nr]]
 
-      self.switches[switch_numbers[nr]] = terrariumSwitch(self.device,
+
+      power_switch = terrariumSwitch(self.device,
                                         self.device_type,
                                         power_switch_config['nr'] if 'nr' in power_switch_config else nr+1,
                                         power_switch_config['name'] if 'name' in power_switch_config else '',
                                         power_switch_config['power_wattage'] if 'power_wattage' in power_switch_config else 0.0,
                                         power_switch_config['water_flow'] if 'water_flow' in power_switch_config else 0.0,
                                         callback)
+
+      self.switches[power_switch.get_id()] = power_switch
 
     self.id = md5(b'' + self.device + self.device_type).hexdigest()
 
