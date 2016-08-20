@@ -152,20 +152,26 @@ class terrariumWebserver():
 
   @app.route('/live', apply=[websocket])
   def handle_websocket(socket):
-
     messages = Queue()
+
     def listen_for_messages(messages,socket):
       while True:
         message = messages.get()
+
         try:
           socket.send(json.dumps(message))
-        except:
-          pass
+        except Exception, e:
+          # Socket connection is lost, stop looping....
+	  break
 
         messages.task_done()
 
     while True:
-      message = socket.receive()
+      try:
+        message = socket.receive()
+      except Exception, e:
+        break
+
       if message is not None:
         message = json.loads(message)
         print message
@@ -185,9 +191,6 @@ class terrariumWebserver():
         elif message['type'] == 'toggle_switch':
           if 'toggle' == message['data']['state']:
             terrariumWebserver.app.terrarium.power_switches[message['data']['id']].toggle()
-
-      else:
-        break
 
   def start(self):
     # Start the webserver
