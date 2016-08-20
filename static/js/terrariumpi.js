@@ -130,6 +130,7 @@ function load_page(url) {
   }
   if (url === '') return false;
 
+  $("#maincontent").height(0);
   $.get(url, function(data) {
     $("#maincontent").html(data);
     reload_reload_theme();

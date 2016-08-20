@@ -33,7 +33,7 @@
                   var webcams = $('div.webcam');
                   $.each(data.webcams, function(index,value){
                     if ($(webcams[index]).attr('id') === undefined) {
-                      var webcam = $(webcams[index]).attr('id','webcam_' + value.id);
+                      var webcam = $(webcams[index]).attr('id','webcam_' + value.id).height($(webcams[index]).width());
                     }
                     initWebcam(value.id, value.name, value.max_zoom);
                   });
