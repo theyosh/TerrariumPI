@@ -2,7 +2,7 @@
 
 # Some settings
 RUN_AS_USER="pi"
-SCREEN_NAME="gekko"
+SCREEN_NAME="terrariumPI"
 RESTART_TIME=10
 MAX_RESTARTS=5
 RESTART_TIMEOUT=45
@@ -27,7 +27,7 @@ then
 
     # Start terrarium software
     message "Starting terrarium server software..."
-    ${BASEDIR}/terrarium.py
+    python ${BASEDIR}/terrariumPI.py
 
     # Crashed / stopped / something else...
     if (( SECONDS < RESTART_TIMEOUT )); then
@@ -59,5 +59,5 @@ then
 else
   message "Starting terrarium server software..."
   cd "${BASEDIR}"
-  screen -dmS ${SCREEN_NAME} su ${RUN_AS_USER} -c "./${SCRIPT} run"
+  su ${RUN_AS_USER} -c "screen -dmS ${SCREEN_NAME} ./${SCRIPT} run"
 fi

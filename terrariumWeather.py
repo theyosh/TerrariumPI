@@ -1,238 +1,171 @@
 # -*- coding: utf-8 -*-
-
-import xml.etree.ElementTree as ET
-from urllib2 import urlopen
+import untangle
 from datetime import datetime, timedelta
-from time import sleep
+import dateutil.parser
+import thread
+import time
+import copy
 
-import logging
-terrarium_log = logging.getLogger('root')
+from gevent import monkey, sleep
+monkey.patch_all()
 
-class terrariumWeather:
+class terrariumWeather():
 
-  def __init__(self,config):
-    self.__config = config
+  # We only supprt yr.no for now
+  forecast_hours = '{location}/forecast_hour_by_hour.xml'
+  forecast_week = '{location}/forecast.xml'
 
-    self.__location = self.__config.getWeatherURL()
-    self.__weatherMaxTempLimit = self.__config.getWeatherMaxLimit()
-    self.__weatherMinTempLimit = self.__config.getWeatherMinLimit()
+  def __init__(self, location,  windspeed  = 'kmh', temperature = 'C', callback = None):
+    self.settings = {'type':'yr.no', 'location': location.strip('/')}
+    self.location = {'city' : '', 'country' : '', 'geo' : {'lat' : 0, 'long' : 0}}
+    self.credits =  {'text' : '', 'url' : ''}
+    self.updates =  {'lastupdate' : 0 , 'nextupdate' : 0}
+    self.sun =      {'rise' : 0, 'set' : 0}
+    self.hour_forecast = []
+    self.week_forecast = []
+    self.callback = callback
+    self.next_update = 0
+    self.windspeed = windspeed
+    self.temperature = temperature
+    self.__refresh()
 
-    self.__loggingActive = self.__config.getWeatherLoggerEnabled();
-    self.__alarmActive   = self.__config.getWeatherAlarmEnabled();
+  def __get_weather_icon(self,weathertype):
+    weathertype = weathertype.lower()
 
-    self.__weatherXML = ''
-    self.__weatherTimezone = ''
-    self.__weatherTimezoneOffset = 0
-    self.__weatherCityName = ''
-    self.__weatherCountryName = ''
-    self.__weatherLatLong = ''
-    self.__weatherSunrise = ''
-    self.__weatherSunset = ''
-    self.__weatherMaxTemp = float(-999)
-    self.__weatherMinTemp = float(999)
-    self.__weatherIndicator = '°C'
-    self.__weatherCreditsText = ''
-    self.__weatherCreditsLink = ''
-    self.__weahterForecast = []
+    icons = {'clear sky' : 'clear_' + ('day' if self.is_day() else 'night'),
+           'fair' : 'clear_' + ('day' if self.is_day() else 'night'),
+           'partly cloudy' : 'partly_cloudy_' + ('day' if self.is_day() else 'night'),
+           'cloudy' : 'cloudy',
+           'light rain showers' : 'rain',
+           'light rain' : 'rain',
+           'rain' : 'rain',
+           'rain showers' : 'sleet',
+           'heavy rain showers' : 'sleet',
+           'heavy rain' : 'sleet',
+           'fog' : 'fog'
+           }
 
-    self.__lastUpdate = datetime.fromtimestamp(0)
-    self.__cacheTimeOut = timedelta(seconds=3600)
+    if weathertype in icons:
+      return icons[weathertype]
 
-    self.update()
+    return None
 
-  def update(self,force = False):
-    now = datetime.now()
-    if force or self.__lastUpdate == 0 or now - self.__lastUpdate > self.__cacheTimeOut:
-      self.__lastUpdate = now
-      terrarium_log.debug('Refreshing weather data from source %s', self.getXMLUrl())
+  def __refresh(self):
+    self.__load_hours_forecast()
+    self.__load_week_forecast()
 
-      for nr in range(10):
-        try:
-          self.__weatherXML = ET.fromstring(urlopen(self.__location).read())
-          break
-        except Exception, err:
-          terrarium_log.warn('Error getting new weather data from source %s. Error: %s', self.getXMLUrl(), err)
-          sleep(5)
+    self.next_update = int(time.time()) + 3600
 
-      terrarium_log.debug('Updating weather location data')
-      self.__parseLocationData()
-      terrarium_log.debug('Updating weather sunrise and sunset')
-      self.__parseSunRiseSunSet()
-      terrarium_log.debug('Updating weather forecast')
-      self.__parseForcast()
+  def update(self, socket = False):
+    send_message = False
+    now = int(time.time())
 
-      terrarium_log.info('Updated weather data from source %s took %d seconds', self.getXMLUrl(), (datetime.now()-now).total_seconds())
+    # Refresh the data
+    if len(self.hour_forecast) == 0 or now > self.next_update:
+      self.__refresh()
+      send_message = True
 
-  def __parseLocationData(self):
-    data = self.__weatherXML.find('./location')
-    self.__weatherCityName = data.find('name').text
-    self.__weatherCountryName = data.find('country').text
-    self.__weatherTimezone = data.find('timezone').get('id')
-    self.__weatherTimezoneOffset = int(data.find('timezone').get('utcoffsetMinutes'))
-    self.__weatherLatLong = {'lat' : data.find('location').get('latitude'), 'long' : data.find('location').get('longitude')}
-    data = self.__weatherXML.find('./credit')
-    self.__weatherCreditsText = data.find('link').get('text')
-    self.__weatherCreditsLink = data.find('link').get('url')
+    # Update hourly forecast for today
+    if now > self.hour_forecast[0]['to']:
+      del self.hour_forecast[0]
+      send_message = True
 
-  def __parseSunRiseSunSet(self):
-    data = self.__weatherXML.find('./sun')
-    if data is not None:
-      self.__weatherSunrise = datetime.strptime(data.get('rise'),'%Y-%m-%dT%H:%M:%S')
-      self.__weatherSunset  = datetime.strptime(data.get('set'),'%Y-%m-%dT%H:%M:%S')
-    else:
-      self.__weatherSunrise = datetime.strptime(datetime.now().strftime('%Y-%m-%dT') + '08:00:00','%Y-%m-%dT%H:%M:%S')
-      self.__weatherSunset  = datetime.strptime(datetime.now().strftime('%Y-%m-%dT') + '20:00:00','%Y-%m-%dT%H:%M:%S')
+    # Update week forecast
+    if now > self.week_forecast[0]['to']:
+      del self.week_forecast[0]
+      send_message = True
 
-  def __parseForcast(self):
-     self.__weahterForecast = []
-     indicator = False
-     for data in self.__weatherXML.findall('./forecast/tabular/time'):
-       forecastStartTime = datetime.strptime(data.get('from'),'%Y-%m-%dT%H:%M:%S')
-       forecastEndTime = datetime.strptime(data.get('to'),'%Y-%m-%dT%H:%M:%S')
+    # Send message when there where changes
+    if send_message:
+      self.callback(socket=True)
 
-       forecastWeather = data.find('symbol').get('name')
+  def get_data(self):
+    data = copy.deepcopy({'city' :self.location,
+                          'sun' : self.sun,
+                          'day' : self.is_day(),
+                          'windspeed' : self.windspeed,
+                          'temperature' : self.temperature,
+                          'hour_forecast' : self.hour_forecast,
+                          'week_forecast' : self.week_forecast,
+                          'credits': self.credits})
 
-       forecastRain = float(data.find('precipitation').get('value'))
-       forecastWindDirection = float(data.find('windDirection').get('deg'))
-       forecastWindSpeed = float(data.find('windSpeed').get('mps'))
-       forecastTemperature = float(data.find('temperature').get('value'))
-       forecastPressure = float(data.find('pressure').get('value'))
+    for item in data['hour_forecast']:
+      item['icon'] = self.__get_weather_icon(item['weather'])
+      item['wind_speed'] *= (3.6 if self.windspeed == 'kmh' else 1.0)
+      item['temperature'] = item['temperature'] if self.temperature == 'C' else 9.0 / 5.0 * item['temperature'] + 32.0
 
-       if not indicator:
-         indicator = str(data.find('temperature').get('unit'))
-         if 'celsius' == indicator:
-           self.__weatherIndicator = '°C'
-         else:
-          self.__weatherIndicator = '°F'
+    for item in data['week_forecast']:
+      item['icon'] = self.__get_weather_icon(item['weather'])
+      item['wind_speed'] *= (3.6 if self.windspeed == 'kmh' else 1.0)
+      item['temperature'] = item['temperature'] if self.temperature == 'C' else 9.0 / 5.0 * item['temperature'] + 32.0
 
-       if forecastTemperature > self.__weatherMaxTemp:
-         self.__weatherMaxTemp = forecastTemperature
+    return data
 
-       if forecastTemperature < self.__weatherMinTemp:
-         self.__weatherMinTemp = forecastTemperature
+  def __load_defaults(self,xmldata):
+    self.location['city'] = xmldata.weatherdata.location.name.cdata
+    self.location['country'] = xmldata.weatherdata.location.country.cdata
+    self.location['geo'] = {'lat': float(xmldata.weatherdata.location.location['latitude']),
+                            'long' : float(xmldata.weatherdata.location.location['longitude'])}
 
-       self.__weahterForecast.append({'start' : forecastStartTime,
-                                      'end' : forecastEndTime,
-                                      'weather' : forecastWeather,
-                                      'rain' : forecastRain,
-                                      'wind_direction' : forecastWindDirection,
-                                      'windspeed' : forecastWindSpeed,
-                                      'temperature' : forecastTemperature,
-                                      'pressure' : forecastPressure })
+    self.credits['text'] = xmldata.weatherdata.credit.link['text']
+    self.credits['url'] = xmldata.weatherdata.credit.link['url']
 
-  def getXMLUrl(self):
-    return self.__location
+    self.sun['rise'] = time.mktime(dateutil.parser.parse(xmldata.weatherdata.sun['rise']).timetuple())
+    self.sun['set'] = time.mktime(dateutil.parser.parse(xmldata.weatherdata.sun['set']).timetuple())
 
-  def setXMLUrl(self,location):
-    self.__location = location
-    self.__saveWeatherConfig()
-    self.update(True)
+  def __load_hours_forecast(self):
+    xmldata = untangle.parse(terrariumWeather.forecast_hours.replace('{location}',self.settings['location']))
+    self.__load_defaults(xmldata);
+    self.hour_forecast = []
+    for forecast in xmldata.weatherdata.forecast.tabular.time:
+      self.hour_forecast.append({'from' : time.mktime(dateutil.parser.parse(forecast['from']).timetuple()),
+                            'to' : time.mktime(dateutil.parser.parse(forecast['to']).timetuple()),
+                            'weather' : forecast.symbol['name'],
+                            'rain' : float(forecast.precipitation['value']),
+                            'wind_direction' : forecast.windDirection['name'],
+                            'wind_speed' : float(forecast.windSpeed['mps']),
+                            'temperature' : float(forecast.temperature['value']),
+                            'pressure' : float(forecast.pressure['value']),
+                            'icon' : self.__get_weather_icon(forecast.symbol['name'])
+                           })
 
-  def setMaximumTemperatureLimit(self,limit):
-    self.__weatherMaxTempLimit = limit
-    self.__saveWeatherConfig()
+  def __load_week_forecast(self):
+    xmldata = untangle.parse(terrariumWeather.forecast_week.replace('{location}',self.settings['location']))
+    self.__load_defaults(xmldata);
+    self.week_forecast = []
+    for forecast in xmldata.weatherdata.forecast.tabular.time:
+      self.week_forecast.append({'from' : time.mktime(dateutil.parser.parse(forecast['from']).timetuple()),
+                              'to' : time.mktime(dateutil.parser.parse(forecast['to']).timetuple()),
+                              'weather' : forecast.symbol['name'],
+                              'rain' : float(forecast.precipitation['value']),
+                              'wind_direction' : forecast.windDirection['name'],
+                              'wind_speed' : float(forecast.windSpeed['mps']),
+                              'temperature' : float(forecast.temperature['value']),
+                              'pressure' : float(forecast.pressure['value']),
+                              'icon' : self.__get_weather_icon(forecast.symbol['name'])
+                             })
 
-  def setMinimumTemperatureLimit(self,limit):
-    self.__weatherMinTempLimit = limit
-    self.__saveWeatherConfig()
+  def get_config(self):
+    return {'location' : self.settings['location'],
+            'windspeed' : self.windspeed,
+            'temperature' : self.temperature,
+            'type': self.settings['type']}
 
-  def getMaximumTemperatureLimit(self):
-    return self.__weatherMaxTempLimit
+  def set_location(self,location):
+    location = location.strip('/')
+    refresh = location != self.settings['location'].strip('/')
+    self.settings['location'] = location
+    if refresh:
+      # Start refresh in a thread, so it will not lockup the web interface / API call
+      thread.start_new_thread(self.__refresh, (True))
 
-  def getMinimumTemperatureLimit(self):
-    return self.__weatherMinTempLimit
+  def set_windspeed_indicator(self,indicator):
+    if indicator in ['kmh','ms']:
+      self.windspeed = indicator
 
-  def getSunRiseTime(self):
-    return self.__weatherSunrise
+  def set_temperature_indicator(self,indicator):
+    if indicator.upper() in ['C','F']:
+      self.temperature = indicator.upper()
 
-  def getSunSetTime(self):
-    return self.__weatherSunset
-
-  def getCity(self):
-    return self.__weatherCityName
-
-  def getCountry(self):
-    return self.__weatherCountryName
-
-  def getLocation(self):
-    return self.__weatherLatLong
-
-  def getLocationTime(self):
-    return datetime.utcnow() + timedelta(minutes=self.__weatherTimezoneOffset)
-
-  def getMaximumTemperature(self):
-    return self.__weatherMaxTemp
-
-  def getMinimumTemperature(self):
-    return self.__weatherMinTemp
-
-  def getCurrentTemperature(self):
-    return self.getCurrentWeatherInfo()['temperature']
-
-  def getIndicator(self):
-    return self.__weatherIndicator
-
-  def isDaytime(self):
-    return self.getSunRiseTime() < self.getLocationTime() < self.getSunSetTime()
-
-  def getCurrentWeatherInfo(self,hours = 0):
-    now = datetime.now() + timedelta(hours=hours)
-    returnlist = []
-
-    for weatherForecast in self.__weahterForecast:
-      if (now < weatherForecast['start']) or (now > weatherForecast['start'] and now < weatherForecast['end']) or (now > weatherForecast['end']):
-        returnlist.append(weatherForecast)
-        if hours == 0:
-          break
-
-    if len(returnlist) == 1:
-      return returnlist[0]
-    return returnlist
-
-  def getLastUpdateTimeStamp(self):
-    return self.__lastUpdate
-
-  def getCredits(self):
-    return {'text' : self.__weatherCreditsText, 'link' : self.__weatherCreditsLink}
-
-  def setAlarm(self,on):
-    self.__alarmActive = bool(on)
-
-  def enableAlarm(self):
-    self.__alarmActive = True
-
-  def disableAlarm(self):
-    self.__alarmActive = False
-
-  def isAlarmActive(self):
-    return True == self.__alarmActive
-
-  def setLogging(self,on):
-    self.__loggingActive = bool(on)
-
-  def enableLogging(self):
-    self.__loggingActive = True
-
-  def disableLogging(self):
-    self.__loggingActive = False
-
-  def isLoggingEnabled(self):
-    return True == self.__loggingActive
-
-  def getAlarmMax(self):
-    if not self.isAlarmActive():
-      return -1
-    return self.getCurrent() > self.getMaximumTemperatureLimit()
-
-  def getAlarmMin(self):
-    if not self.isAlarmActive():
-      return -1
-    return self.getCurrentTemperature() < self.getMinimumTemperatureLimit()
-
-  def getAlarm(self):
-    if not self.isAlarmActive():
-      return -1
-    return self.getCurrentTemperature() or self.getAlarmMin()
-
-  def __saveWeatherConfig(self):
-    self.__config.saveWeatherSettings(self.getXMLUrl(),self.__weatherMaxTempLimit,self.__weatherMinTempLimit,self.__loggingActive,self.__alarmActive)
+  def is_day(self):
+    return self.sun['rise'] < int(time.time()) < self.sun['set']

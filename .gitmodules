@@ -19,3 +19,6 @@
 [submodule "waitForImages"]
         path = webroot/libraries/waitForImages
         url = https://github.com/alexanderdickson/waitForImages.git
+[submodule "gentelella"]
+	path = gentelella
+	url = https://github.com/puikinsh/gentelella.git

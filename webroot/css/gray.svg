@@ -1,9 +1,0 @@
-<svg>
-  <defs>
-    <linearGradient id="textgradient" x1="0%" x2="100%" y1="0%" y2="0%">
-      <stop stop-color = "#000" offset = "0%"/>
-      <stop stop-color = "#fff" offset = "100%"/>
-    </linearGradient>
-  </defs>
-  <text x="50%" y="0.8em" text-anchor="middle" letter-spacing="-1" font-size="10" fill="url(#textgradient)" >NoName</text>
-</svg>
