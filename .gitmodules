@@ -1,24 +1,3 @@
-[submodule "bottle"]
-	path = bottle
-	url = https://github.com/bottlepy/bottle.git
-[submodule "Leaflet.fullscreen"]
-        path = webroot/libraries/Leaflet.fullscreen
-        url = https://github.com/Leaflet/Leaflet.fullscreen.git
-[submodule "Leaflet.loading"]
-        path = webroot/libraries/Leaflet.loading
-        url = https://github.com/ebrelsford/Leaflet.loading.git
-[submodule "justgage"]
-        path = webroot/libraries/justgage
-        url = https://github.com/toorshia/justgage.git
-[submodule "moment"]
-        path = webroot/libraries/moment
-        url = https://github.com/moment/moment.git
-[submodule "raphael"]
-        path = webroot/libraries/raphael
-        url = https://github.com/DmitryBaranovskiy/raphael.git
-[submodule "waitForImages"]
-        path = webroot/libraries/waitForImages
-        url = https://github.com/alexanderdickson/waitForImages.git
 [submodule "gentelella"]
 	path = gentelella
 	url = https://github.com/puikinsh/gentelella.git
