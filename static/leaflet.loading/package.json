@@ -1,0 +1,27 @@
+{
+  "name": "leaflet-loading",
+  "version": "0.1.23",
+  "description": "A simple loading control for Leaflet",
+  "main": "src/Control.Loading.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ebrelsford/Leaflet.loading.git"
+  },
+  "keywords": [
+    "leaflet",
+    "map",
+    "maps",
+    "gis",
+    "geoweb",
+    "loading"
+  ],
+  "author": "Eric Brelsford <ebrelsford@gmail.com> (http://ebrelsford.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ebrelsford/Leaflet.loading/issues"
+  },
+  "homepage": "https://github.com/ebrelsford/Leaflet.loading"
+}
