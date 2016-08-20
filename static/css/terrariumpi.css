@@ -79,3 +79,69 @@ canvas.gauge {
 .x_title h2 {
   width: auto !important;
 }
+
+.webcam {
+  height: 280px;
+}
+
+.webcam_preview {
+  min-height: 240px;
+  background-color: #000000;
+  overflow: hidden;
+}
+
+.webcam_preview img {
+  width: 100%;
+}
+
+.webcam_90 {
+  /* for firefox, safari, chrome, etc. */
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  /* for ie */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.webcam_180 {
+  /* for firefox, safari, chrome, etc. */
+  -webkit-transform: rotate(-180deg);
+  -moz-transform: rotate(-180deg);
+  /* for ie */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=6);
+}
+
+.webcam_270 {
+  /* for firefox, safari, chrome, etc. */
+  -webkit-transform: rotate(-270deg);
+  -moz-transform: rotate(-270deg);
+  /* for ie */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=9);
+}
+
+.webcam_H {
+  -moz-transform: scaleX(-1); /* For Mozilla Firefox */
+  -o-transform: scaleX(-1);   /* For Opera */
+  -webkit-transform: scaleX(-1); /* For Safari, Google chrome */
+
+  /* For IE */
+  filter: FlipH;
+  -ms-filter: "FlipH";
+}
+
+.webcam_V {
+  -moz-transform: scaleY(-1); /* For Mozilla Firefox */
+  -o-transform: scaleY(-1);   /* For Opera */
+  -webkit-transform: scaleY(-1); /* For Safari, Google chrome */
+
+  /* For IE */
+  filter: FlipV;
+  -ms-filter: "FlipV";
+}
+
+.flot-x-axis .flot-tick-label {
+    white-space: nowrap;
+    transform: translate(-9px, 0) rotate(-45deg);
+    text-indent: -100%;
+    transform-origin: top right;
+    text-align: right !important;
+}

@@ -34,9 +34,14 @@
     <!-- PNotify -->
     <script src="/gentelella/vendors/pnotify/dist/pnotify.js"></script>
     <script src="/gentelella/vendors/pnotify/dist/pnotify.buttons.js"></script>
-    <script src="/gentelella/vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    <script src="/gentelella/vendors/pnotify/dist/pnotify.nonblock.js"></script
     <!-- Custom Theme Scripts -->
     <script src="/gentelella/build/js/custom.min.js"></script>
+    <!-- Leaflet -->
+    <script src="/static/leaflet/leaflet.js"></script>
+    <script src="/static/leaflet.loading/src/Control.Loading.js"></script>
+    <script src='/static/leaflet.fullscreen/dist/Leaflet.fullscreen.min.js'></script>
+
     <!-- Load the terrariumPI JS script-->
     <script src="/static/js/jquery.fullscreen-min.js"></script>
     <!-- Load the terrariumPI JS script-->

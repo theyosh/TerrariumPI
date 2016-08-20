@@ -13,13 +13,14 @@ class terrariumSensor:
     self.sensor = sensor
     self.sensor.useCache(True)
     self.sensor_address = self.sensor.address
+    
+    self.set_name(name)
+    self.set_min(min)
+    self.set_max(max)
+    self.set_alarm_min(alarm_min)
+    self.set_alarm_max(alarm_max)
 
-    self.name = str(name)
     self.current = float(0)
-    self.min = float(min)
-    self.max = float(max)
-    self.alarm_min = float(alarm_min)
-    self.alarm_max = float(alarm_max)
 
     self.last_update = datetime.fromtimestamp(0)
     self.update_timeout = 30 #TODO: Config setting

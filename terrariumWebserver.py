@@ -32,7 +32,7 @@ class terrariumWebserverHeaders(object):
 class terrariumWebserver():
 
   app = Bottle()
-  #app.install(terrariumWebserverHeaders())
+  app.install(terrariumWebserverHeaders())
 
   def __init__(self, terrariumEngine):
     self.__terrariumEngine = terrariumEngine
@@ -49,12 +49,8 @@ class terrariumWebserver():
     self.__app.route('/static/<filename:path>', method="GET", callback=self.__static_file)
     self.__app.route('/gentelella/<filename:path>', method="GET", callback=self.__static_file_gentelella)
 
-    self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|environment)>', method=['PUT','POST'], callback=self.__update_api_call)
+    self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|environment)>', method=['PUT','POST','DELETE'], callback=self.__update_api_call)
     self.__app.route('/api/<path:path>', method=['GET'], callback=self.__get_api_call)
-
-
-  #def __get_caching_header(self,file):
-
 
   def __template_variables(self, template):
     variables = { 'title' : self.__config['title'],
@@ -63,13 +59,17 @@ class terrariumWebserver():
     if 'index' == template:
       variables['person_name'] = self.__config['person']
       variables['person_image'] = self.__config['image']
-    elif 'sensor_settings' == template:
-      variables['amount_of_sensors'] = self.__terrariumEngine.get_amount_of_sensors()
+
+    elif 'webcam' == template or 'webcam_settings' == template:
+      variables['amount_of_webcams'] = self.__terrariumEngine.get_amount_of_webcams()
+
     elif 'switch_settings' == template:
-      variables['max_swithes'] = self.__terrariumEngine.get_switches_config()['max_switches']
+      variables['max_swithes'] = self.__terrariumEngine.get_max_switches_config()
     elif 'switch_status' == template:
       variables['amount_of_switches'] = self.__terrariumEngine.get_amount_of_switches()
 
+    elif 'sensor_settings' == template:
+      variables['amount_of_sensors'] = self.__terrariumEngine.get_amount_of_sensors()
     elif 'sensor_temperature' == template:
       variables['amount_of_sensors'] = self.__terrariumEngine.get_amount_of_sensors('temperature')
     elif 'sensor_humidity' == template:
@@ -77,13 +77,11 @@ class terrariumWebserver():
 
     return variables
 
-
   def __render_page(self,template_name = 'index.html'):
     template_name = template_name[:-5]
 
     if not os.path.isfile('views/' + template_name + '.tpl'):
       template_name = '404'
-
 
     return template(template_name,**self.__template_variables(template_name))
 
@@ -103,60 +101,44 @@ class terrariumWebserver():
     result = {}
     path = path.strip('/').split('/')
 
-    what = path[0]
-    subwhat = None
-    if len(path) > 1:
-      subwhat = path[1]
+    action = path[0]
+    del(path[0])
+    parameters = path
 
-    if 'switches' == what:
-      result = self.__terrariumEngine.get_switches(subwhat)
+    if 'switches' == action:
+      result = self.__terrariumEngine.get_switches(parameters)
 
-    elif 'sensors' == what:
-      result = self.__terrariumEngine.get_sensors(subwhat)
+    elif 'sensors' == action:
+      result = self.__terrariumEngine.get_sensors(parameters)
 
-    elif 'environment' == what:
-      result = self.__terrariumEngine.get_environment(subwhat)
+    elif 'webcams' == action:
+      result = self.__terrariumEngine.get_webcams(parameters)
 
-    elif 'weather' == what:
-      if subwhat is None:
-        result = self.__terrariumEngine.get_weather()
+    elif 'environment' == action:
+      result = self.__terrariumEngine.get_environment(parameters)
 
-    elif 'uptime' == what:
+    elif 'weather' == action:
+      result = self.__terrariumEngine.get_weather(parameters)
+
+    elif 'uptime' == action:
       result = self.__terrariumEngine.get_uptime()
 
-    elif 'power_usage' == what:
+    elif 'power_usage' == action:
       result = self.__terrariumEngine.get_power_usage_water_flow()['power']
 
-    elif 'water_usage' == what:
+    elif 'water_usage' == action:
       result = self.__terrariumEngine.get_power_usage_water_flow()['water']
 
-    elif 'total_usage' == what:
+    elif 'total_usage' == action:
       result = self.__terrariumEngine.get_total_power_usage_water_flow()
-      result['power_wattage'] /= 1000.0
+      #result['power_wattage'] /= 1000.0
       result['total_power'] /= 1000.0
 
-    elif 'history' == what:
-      if subwhat is None:
-        pass
+    elif 'history' == action:
+      result = self.__terrariumEngine.get_history(parameters)
 
-      elif 'sensors' == subwhat or 'environment' == subwhat or 'switches' == subwhat or 'system' == subwhat:
-        type = None
-        id = None
-
-        if len(path) >= 3:
-          type = path[2]
-
-        if len(path) >= 4:
-          id = path[3]
-
-        if 'environment' == subwhat:
-          subwhat = 'sensors'
-          type = 'summary'
-
-        result = self.__terrariumEngine.get_history(subwhat,type,id)
-
-    elif 'config' == what:
-      result = self.__terrariumEngine.get_config(subwhat)
+    elif 'config' == action:
+      result = self.__terrariumEngine.get_config(parameters[0])
 
     return result
 
@@ -165,7 +147,7 @@ class terrariumWebserver():
     config = terrariumWebserver.app.terrarium.get_config('system')
     variables = { 'title' : config['title'],
                   'page_title' : config['title'] + ' | 404'
-                  }
+                }
 
     return template('404',**variables)
 
@@ -180,6 +162,7 @@ class terrariumWebserver():
           socket.send(json.dumps(message))
         except:
           pass
+
         messages.task_done()
 
     while True:
@@ -194,11 +177,11 @@ class terrariumWebserver():
 
           # Load/Update actual data after reconnect
           if message['reconnect']:
-            terrariumWebserver.app.terrarium.get_weather(True)
-            terrariumWebserver.app.terrarium.get_switches(True)
-            terrariumWebserver.app.terrarium.get_power_usage_water_flow(True)
-            terrariumWebserver.app.terrarium.get_total_power_usage_water_flow(True)
-            terrariumWebserver.app.terrarium.get_environment(None,True)
+            terrariumWebserver.app.terrarium.get_weather(socket=True)
+            terrariumWebserver.app.terrarium.get_switches(socket=True)
+            terrariumWebserver.app.terrarium.get_power_usage_water_flow(socket=True)
+            terrariumWebserver.app.terrarium.get_total_power_usage_water_flow(socket=True)
+            terrariumWebserver.app.terrarium.get_environment(socket=True)
 
         elif message['type'] == 'toggle_switch':
           if 'toggle' == message['data']['state']:
@@ -208,4 +191,9 @@ class terrariumWebserver():
         break
 
   def start(self):
-      self.__app.run(host=self.__config['host'], port=self.__config['port'], server=GeventWebSocketServer, debug=False, reloader=False)
+    # Start the webserver
+    self.__app.run(host=self.__config['host'],
+                   port=self.__config['port'],
+                   server=GeventWebSocketServer,
+                   debug=False,
+                   reloader=False)

@@ -39,36 +39,22 @@
             % end
             <script type="text/javascript">
               $(document).ready(function() {
-                 $.get('/api/sensors/{{sensor_type}}',function(data){
-                   // Reset the gauges, due to reloading the main content
-                   globals.gauges = [];
-                   var rows = $('div.row.sensor');
-                   $.each(data.sensors, function(index,sensor) {
-                   // Add an id to the row when first run
-                     if ($(rows[index]).attr('id') === undefined) {
-                       var row = $(rows[index]).attr('id','sensor_' + sensor.id);
-                       row.find('canvas').attr('id','gauge_canvas_' + sensor.id);
-                       row.find('div.goal-wrapper > span:first').attr('id','gauge_text_' + sensor.id);
-                       row.find('div.history_graph').attr('id','history_graph_' + sensor.id);
-                     }
-                     sensor_gauge(sensor.id, sensor);
-                   });
-                   update_sensor_history();
-                 });
+                $.get('/api/sensors/{{sensor_type}}',function(data){
+                  // Reset the gauges, due to reloading the main content
+                  globals.gauges = [];
+                  var rows = $('div.row.sensor');
+                  $.each(data.sensors, function(index,sensor) {
+                  // Add an id to the row when first run
+                    if ($(rows[index]).attr('id') === undefined) {
+                      var row = $(rows[index]).attr('id','sensor_' + sensor.id);
+                      row.find('canvas').attr('id','gauge_canvas_' + sensor.id);
+                      row.find('div.goal-wrapper > span:first').attr('id','gauge_text_' + sensor.id);
+                      row.find('div.history_graph').attr('id','history_graph_' + sensor.id);
+                    }
+                    sensor_gauge(sensor.id, sensor);
+                  });
+                  update_sensor_history('{{sensor_type}}');
+                });
               });
-
-              function update_sensor_history() {
-               if ($('div.row.sensor').length >= 0) {
-                 $.getJSON('/api/history/sensors/{{sensor_type}}',function(data){
-                   $.each(data.{{sensor_type}}, function(index,sensor) {
-                     history_graph(index,sensor);
-                   });
-                   clearTimeout(globals['updatetimer']);
-                   globals['updatetimer'] = setTimeout(function(){
-                     update_sensor_history();
-                   } , 1 * 60 * 1000)
-                 });
-               }
-              }
             </script>
 % include('inc/page_footer.tpl')

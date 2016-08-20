@@ -3,6 +3,7 @@ from terrariumDoor import terrariumDoor
 from terrariumSensor import terrariumSensor
 from terrariumSwitchboard import terrariumSwitchboard
 from terrariumWeather import terrariumWeather
+from terrariumWebcam import terrariumWebcam
 from terrariumCollector import terrariumCollector
 from terrariumEnvironment import terrariumEnvironment
 from terrariumConfig import terrariumConfig
@@ -42,11 +43,10 @@ class terrariumEngine():
                                     self.config.get_weather_temperature(),
                                     self.get_weather)
 
-    # Load Powerswitches part TODO: Refactor
-    self.switch_board = terrariumSwitchboard(self.config,self.toggle_switch)
+    # Load Powerswitches part
     self.power_switches = {}
-    for power_switch in self.switch_board.switches:
-      self.power_switches[power_switch.get_id()] = power_switch
+    self.switch_board = terrariumSwitchboard(self.config,self.toggle_switch)
+    self.power_switches = self.switch_board.switches
 
     # Load Door part
     self.door_sensor = terrariumDoor(self.config.get_door_pin(),None)
@@ -58,6 +58,12 @@ class terrariumEngine():
 
     # Load the environment system. This will controll the lights, sprayer and heaters
     self.environment = terrariumEnvironment(self.sensors, self.power_switches, self.door_sensor, self.weather, self.config)
+
+    # Load webcams from config
+    self.webcams = {}
+    webcams = self.config.get_webcams()
+    for webcamid in webcams:
+      self.webcams[webcams[webcamid]['id']] = terrariumWebcam(webcams[webcamid]['id'],webcams[webcamid]['location'],webcams[webcamid]['name'],webcams[webcamid]['rotation'])
 
     # Start system update loop
     thread.start_new_thread(self.__engine_loop, ())
@@ -89,13 +95,14 @@ class terrariumEngine():
       uptime = now -today
 
     data['power_wattage'] = (float(uptime) / 3600.0) * float(self.pi_power_wattage)
-    prev_data = self.collector.get_history('switches','summary')['switches']['summary']
+    prev_data = self.collector.get_history(['switches','summary'])
+
     for fieldname in prev_data:
       for data_item in prev_data[fieldname]:
         if data_item[0] / 1000 < today:
           data[fieldname] = float(data_item[1])
 
-    history_data = self.collector.get_history('switches')['switches']
+    history_data = self.collector.get_history(['switches'])['switches']
     for switchid in history_data:
       if len(history_data[switchid]['state']) == 0:
         continue
@@ -122,7 +129,7 @@ class terrariumEngine():
         # Save new data to database
         self.collector.log_sensor_data(self.sensors[sensorid])
         # Websocket callback
-        self.get_sensors(sensorid,True)
+        self.get_sensors([sensorid],socket=True)
         # Make time for other web request
         sleep(0.2)
 
@@ -139,15 +146,19 @@ class terrariumEngine():
       self.collector.log_power_usage_water_flow(self.__calculate_power_usage_water_flow())
 
       # Websocket messages back
-      self.get_uptime(True)
-      self.get_power_usage_water_flow(True)
-      self.get_environment(None,True)
+      self.get_uptime(socket=True)
+      self.get_power_usage_water_flow(socket=True)
+      self.get_environment(socket=True)
 
       # Update weather
       self.weather.update()
       self.collector.log_weather_data(self.weather.get_data()['hour_forecast'][0])
 
       self.get_system_stats()
+
+      for webcamid in self.webcams:
+        self.webcams[webcamid].update()
+        sleep(0.2)
 
       sleep(30) # TODO: Config setting
 
@@ -187,98 +198,6 @@ class terrariumEngine():
     else:
       return data
 
-  # API Config calls
-  def get_config(self, part = None):
-    data = {}
-    if 'system' == part:
-      data = self.get_system_config()
-
-    elif 'weather' == part:
-      data = self.get_weather_config()
-
-    elif 'switches' == part:
-      data = self.get_switches_config()
-
-    elif 'sensors' == part:
-      data = self.get_sensors_config()
-
-    elif 'environment' == part:
-      data = self.get_environment_config()
-
-    elif part is None:
-      data = self.config.get_full_config()
-
-    return data
-
-  def set_config(self,part,data):
-    update_ok = False
-    if 'weather' == part:
-      update_ok = self.set_weather_config(data)
-
-    elif 'switches' == part:
-      update_ok = self.set_switches_config(data)
-
-    elif 'sensors' == part:
-      update_ok = self.set_sensors_config(data)
-
-    elif 'environment' == part:
-      update_ok = self.set_environment_config(data)
-
-    return update_ok
-
-  def get_system_config(self):
-    return self.config.get_system()
-
-  def set_weather_config(self,data):
-    self.weather.set_location(data['location'])
-    self.weather.set_windspeed_indicator(data['windspeed'])
-    self.weather.set_temperature_indicator(data['temperature'])
-
-    update_ok = self.config.save_weather(self.weather.get_config())
-    return update_ok
-
-  def get_weather_config(self):
-    return self.weather.get_config()
-
-  def get_weather(self, socket = False):
-    data = self.weather.get_data()
-
-    if socket:
-      self.__send_message({'type':'update_weather','data':data})
-    else:
-      return data
-
-  def set_switches_config(self,data):
-    update_ok = True
-    for switchdata in data:
-      switch = self.power_switches[switchdata['id']]
-      switch.set_name(switchdata['name'])
-      switch.set_power_wattage(switchdata['power_wattage'])
-      switch.set_water_flow(switchdata['water_flow'])
-
-      update_ok = update_ok and self.config.save_switch(switch.get_data())
-
-    return update_ok
-
-  def get_switches_config(self):
-    return self.switch_board.get_config()
-
-  def get_switches(self, socket = False):
-    if self.switch_board is None:
-      return False
-
-    data = self.switch_board.get_switches()
-    if socket:
-      self.__send_message({'type':'power_switches','data':data})
-      self.get_power_usage_water_flow(True)
-      self.get_environment(None,True)
-    else:
-      return data
-
-  def toggle_switch(self,data):
-    self.collector.log_switch_data(data)
-    self.get_switches(True)
-
   def get_power_usage_water_flow(self, socket = False):
     data = self.__get_power_usage_water_flow()
     totaldata = self.__calculate_power_usage_water_flow()
@@ -302,9 +221,88 @@ class terrariumEngine():
     else:
       return data
 
-  def get_amount_of_switches(self):
-    return len(self.power_switches)
+  # API Config calls
+  def get_config(self, part = None):
+    data = {}
+    if 'system' == part:
+      data = self.get_system_config()
 
+    elif 'weather' == part:
+      data = self.get_weather_config()
+
+    elif 'switches' == part:
+      data = self.get_switches_config()
+
+    elif 'sensors' == part:
+      data = self.get_sensors_config()
+
+    elif 'webcams' == part:
+      data = self.get_webcams_config()
+
+    elif 'environment' == part:
+      data = self.get_environment_config()
+
+    elif part is None:
+      data = self.config.get_full_config()
+
+    return data
+
+  def set_config(self,part,data):
+    update_ok = False
+    if 'weather' == part:
+      update_ok = self.set_weather_config(data)
+
+    elif 'switches' == part:
+      update_ok = self.set_switches_config(data)
+
+    elif 'sensors' == part:
+      update_ok = self.set_sensors_config(data)
+
+    elif 'webcams' == part:
+      update_ok = self.set_webcams_config(data)
+
+    elif 'environment' == part:
+      update_ok = self.set_environment_config(data)
+
+    return update_ok
+
+  def get_system_config(self):
+    return self.config.get_system()
+
+  # Weather part
+  def set_weather_config(self,data):
+    self.weather.set_location(data['location'])
+    self.weather.set_windspeed_indicator(data['windspeed'])
+    self.weather.set_temperature_indicator(data['temperature'])
+
+    update_ok = self.config.save_weather(self.weather.get_config())
+    return update_ok
+
+  def get_weather_config(self):
+    return self.weather.get_config()
+
+  def get_weather(self, parameters = [], socket = False):
+    data = self.weather.get_data()
+
+    if socket:
+      self.__send_message({'type':'update_weather','data':data})
+    else:
+      return data
+  # End weather part
+
+  # Door part
+  def door_status(self):
+    return self.door_status.get_status()
+
+  def is_door_open(self):
+    return self.door_status.is_open()
+
+  def is_door_closed(self):
+    return self.door_status.is_closed()
+  # End door part
+
+
+  # Sensors part
   def get_sensors_config(self, socket = False):
     return self.get_sensors()
 
@@ -333,11 +331,24 @@ class terrariumEngine():
 
     return amount
 
-  def get_average_temperature(self, socket = False):
-    return self.get_average_sensors('temperature', socket)
+  def get_sensors(self, parameters = [], socket = False):
+    data = []
+    filter = None
+    if len(parameters) > 0 and parameters[0] is not None:
+      filter = parameters[0]
 
-  def get_average_humidity(self, socket = False):
-    return self.get_average_sensors('humidity', socket)
+    if filter is not None and filter in self.sensors:
+      data.append(self.sensors[filter].get_data())
+
+    else:
+      for sensorid in self.sensors:
+        if filter is None or filter == self.sensors[sensorid].get_type():
+          data.append(self.sensors[sensorid].get_data())
+
+    if socket:
+      self.__send_message({'type':'sensor_gauge','data':data})
+    else:
+      return {'sensors' : data}
 
   def get_average_sensors(self, type = None, socket = False):
     data = self.environment.get_average()
@@ -346,9 +357,103 @@ class terrariumEngine():
       self.__send_message({'type':'dashboard_sensors','data':data})
     else:
       return data
+  # End sensors part
+
+  # Switch part
+  def get_switches_config(self, socket = False):
+    return self.get_switches()
+
+  def set_switches_config(self, data):
+    update_ok = True
+    for switchdata in data:
+      switch = self.power_switches[switchdata['id']]
+      switch.set_name(switchdata['name'])
+      switch.set_power_wattage(switchdata['power_wattage'])
+      switch.set_water_flow(switchdata['water_flow'])
+
+      update_ok = update_ok and self.config.save_switch(switch.get_data())
+
+    return update_ok
+
+  def get_amount_of_switches(self):
+    return len(self.power_switches)
+
+  def get_switches(self, parameters = [], socket = False):
+    data = []
+    filter = None
+    if len(parameters) > 0 and parameters[0] is not None:
+      filter = parameters[0]
+
+    if filter is not None and filter in self.power_switches:
+      data.append(self.power_switches[filter].get_data())
+
+    else:
+      for switchid in self.power_switches:
+        data.append(self.power_switches[switchid].get_data())
+
+    if socket:
+      self.__send_message({'type':'power_switches','data':data})
+    else:
+      return {'switches' : data}
+
+  def toggle_switch(self,data):
+    self.collector.log_switch_data(data)
+    self.get_switches(socket=True)
+
+  def get_max_switches_config(self):
+    return int(self.config.get_system()['max_switches'])
+  # End switch part
+
+  # Webcam part
+  def get_amount_of_webcams(self):
+    return len(self.webcams)
+
+  def get_webcams(self, parameters = [], socket = False):
+    data = []
+    filter = None
+    if len(parameters) > 0 and parameters[0] is not None:
+      filter = parameters[0]
+
+    if filter is not None and filter in self.webcams:
+      data.append(self.webcams[filter].get_data())
+
+    else:
+      for webcamid in self.webcams:
+        data.append(self.webcams[webcamid].get_data())
+
+    if socket:
+      self.__send_message({'type':'webcam_data','data':data})
+    else:
+      return {'webcams' : data}
+
+  def get_webcams_config(self):
+    return self.get_webcams()
+
+  def set_webcams_config(self, data):
+    update_ok = True
+    for webcamdata in data:
+
+      if webcamdata['id'] == '' or webcamdata['id'] not in self.webcams:
+        # Create new one
+        if webcamdata['location'] != '':
+          webcam = terrariumWebcam(None,webcamdata['location'],webcamdata['name'],webcamdata['rotation'])
+      else:
+        webcam = self.webcams[webcamdata['id']]
+        webcam.set_name(webcamdata['name'])
+        webcam.set_location(webcamdata['location'])
+        webcam.set_rotation(webcamdata['rotation'])
+
+      update_ok = update_ok and self.config.save_webcam(webcam.get_data())
+
+    return update_ok
+  # End webcam part
 
   # Environment part
-  def get_environment(self, filter = None, socket = False):
+  def get_environment(self, parameters = [], socket = False):
+    filter = None
+    if len(parameters) > 0 and parameters[0] is not None:
+      filter = parameters[0]
+
     data = self.environment.get_average()
     data['light'] = self.environment.get_light_state()
     data['sprayer'] = self.environment.get_sprayer_state()
@@ -379,49 +484,24 @@ class terrariumEngine():
     self.environment.reload_config()
     return True
 
+  def get_average_temperature(self, socket = False):
+    return self.get_average_sensors('temperature', socket)
+
+  def get_average_humidity(self, socket = False):
+    return self.get_average_sensors('humidity', socket)
   # End Environment part
 
 
-  # Sensor part
-  def get_sensors(self, filter = None, socket = False):
-    data = []
-    if filter is not None and filter in self.sensors:
-      data.append(self.sensors[filter].get_data())
-
-    else:
-      for sensorid in self.sensors:
-        if filter is None or filter == self.sensors[sensorid].get_type():
-          data.append(self.sensors[sensorid].get_data())
-
-    if socket:
-      self.__send_message({'type':'sensor_gauge','data':data})
-    else:
-      return {'sensors' : data}
-  # End Sensor part
-
-
   # Histroy part (Collector)
-  def get_history(self, type = None, subtype = None, id = None, socket = False):
+  def get_history(self, parameters = [], socket = False):
     data = {}
-    if type == 'sensors' or type == 'switches' or type == 'system':
-      if id is not None and id in self.sensors:
-        data = self.collector.get_history(type,self.sensors[id].get_type(),id)
-
-      else:
-        data = self.collector.get_history(type,subtype,id)
+    if len(parameters) == 0:
+      data = {'history' : 'ERROR, select a history type'}
+    else:
+      data = self.collector.get_history(parameters)
 
     if socket:
       self.__send_message({'type':'history_graph','data': data})
     else:
       return data
   # End Histroy part (Collector)
-
-
-  def door_status(self):
-    return self.door_status.get_status()
-
-  def is_door_open(self):
-    return self.door_status.is_open()
-
-  def is_door_closed(self):
-    return self.door_status.is_closed()

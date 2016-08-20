@@ -1,3 +1,4 @@
 *.pyc
 settings.cfg
 history.db
+static/webcam/*

@@ -36,10 +36,12 @@
             <script type="text/javascript">
               $(document).ready(function() {
                  $.get('/api/switches',function(data) {
-                    $('div.row.switch').each(function(index,power_switch_div){
-                       $(power_switch_div).attr('id','switch_' + data.switches[index].id);
-                       $(power_switch_div).find('div.history_graph').attr('id','history_graph_' + data.switches[index].id);
-                       update_power_switch(data.switches[index].id,data.switches[index]);
+                    var power_divs = $('div.row.switch');
+                    $.each(data.switches,function(index,value){
+                      power_div = $(power_divs[value.nr-1]);
+                      power_div.attr('id','switch_' + value.id);
+                      power_div.find('div.history_graph').attr('id','history_graph_' + value.id);
+                      update_power_switch(value.id,value);
                     });
                     update_switch_history();
                  });

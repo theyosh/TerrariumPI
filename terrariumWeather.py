@@ -55,10 +55,8 @@ class terrariumWeather():
     self.__load_week_forecast()
 
     self.next_update = int(time.time()) + 3600
-    #self.update(socket)
 
   def update(self, socket = False):
-    #while True:
     send_message = False
     now = int(time.time())
 
@@ -79,7 +77,7 @@ class terrariumWeather():
 
     # Send message when there where changes
     if send_message:
-      self.callback(True)
+      self.callback(socket=True)
 
   def get_data(self):
     data = copy.deepcopy({'city' :self.location,

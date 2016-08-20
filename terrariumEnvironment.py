@@ -14,6 +14,7 @@ class terrariumEnvironment():
     self.config = config
     self.sensors = sensors
     self.power_switches = power_switches
+
     self.door_sensor = door_sensor
     self.weather = weather
     self.reload_config()
@@ -216,7 +217,8 @@ class terrariumEnvironment():
             'alarm_min' : sum(self.sensors[sensor].get_alarm_min() for sensor in self.sprayer['sensors']) / amount,
             'enabled' : self.sprayer['enabled']}
 
-    data['alarm'] = data['current'] < data['alarm_min']
+    light = self.get_light_state()
+    data['alarm'] = (self.sprayer['night_enabled'] or (light['on'] < int(time.time()) < light['off'])) and data['current'] < data['alarm_min']
     data['state'] = 'on' if self.is_sprayer_on() else 'off'
     return data
 
@@ -244,13 +246,13 @@ class terrariumEnvironment():
           'alarm_min' : sum(self.sensors[sensor].get_alarm_min() for sensor in self.heater['sensors']) / amount,
           'alarm_max' : sum(self.sensors[sensor].get_alarm_max() for sensor in self.heater['sensors']) / amount,
           'modus' : self.heater['modus'],
+          'day_enabled': self.heater['day_enabled'],
           'enabled' : self.heater['enabled']}
 
-    data['alarm'] = not (data['alarm_max'] >= data['current'] >= data['alarm_min'])
+    light = self.get_light_state()
+    data['alarm'] = (self.heater['day_enabled'] or not (light['on'] < int(time.time()) < light['off'])) and not (data['alarm_max'] >= data['current'] >= data['alarm_min'])
     data['state'] = 'on' if self.is_heater_on() else 'off'
     return data
-
-
 
   def get_average_temperature(self):
     return self.get_average('temperature')

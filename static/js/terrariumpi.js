@@ -2,6 +2,7 @@ var globals = {
   websocket: null,
   connection: 'ws://' + location.host + '/live',
   gauges: [],
+  webcams: [],
   websocket_timer: null,
   updatetimer: null,
   online_timer: null
@@ -26,8 +27,9 @@ $(document).ready(function() {
 
   setInterval(function() {
     notification_timestamps();
+    updateWebcams();
     $('#system_time').text(moment().format('LLLL'));
-  }, 15 * 1000);
+  }, 30 * 1000);
 });
 
 function websocket_init(reconnect) {
@@ -73,7 +75,7 @@ function websocket_init(reconnect) {
         break;
 
       case 'power_switches':
-        $.each(data.data.switches, function(index, value) {
+        $.each(data.data, function(index, value) {
           update_power_switch(value.id, value);
         });
         break;
@@ -171,9 +173,9 @@ function process_form() {
 function prepare_form_data(form) {
   var formdata = [];
   var form_type = form.attr('action').split('/').pop();
-  var re = /sensor_(\d+)_(.*)/i;
+  var re = /(sensor|switch|webcam|light|sprayer|heater)(_\d+)?_(.*)/i;
   var objectdata = {};
-  var previd = -1;
+  var prev_nr = -1;
 
   if (form_type === 'weather' || form_type === 'environment') {
     formdata = {};
@@ -184,6 +186,8 @@ function prepare_form_data(form) {
       var field_name = $(this).attr('name');
       var field_value = $(this).val();
 
+      console.log('Process field: ', field_name, field_value, form_type);
+
       switch (form_type) {
         case 'weather':
           formdata[field_name] = field_value;
@@ -192,40 +196,55 @@ function prepare_form_data(form) {
         case 'sensors':
         case 'switches':
         case 'environment':
+        case 'webcams':
+          /*
           if (form_type === 'switches') {
             re = /switch_(\d+)_(.*)/i;
           } else if (form_type === 'environment') {
             re = /(light|sprayer|heater)_(.*)/i;
+          } else if (form_type === 'webcams') {
+            re = /(light|sprayer|heater)_(.*)/i;
           }
+          */
+          console.log('Regex matches: ', matches = re.exec(field_name));
           if ((matches = re.exec(field_name)) !== null) {
             if (matches.index === re.lastIndex) {
               re.lastIndex++;
             }
-            if (matches.length == 3) {
-              if (previd != matches[1]) {
+            console.log('Matches: ' , matches.length);
+            if (matches.length >= 3) {
+              current_nr = matches[2].substr(1) * 1;
+              if (prev_nr != current_nr) {
                 if (Object.keys(objectdata).length > 1) {
-                  formdata[(form_type == 'switches' ? (previd * 1) - 1 : previd)] = $.extend(true, {}, objectdata);
+                  //formdata[(form_type == 'switches' ? (previd * 1) - 1 : previd)] = $.extend(true, {}, objectdata);
+                  formdata[prev_nr] = $.extend(true, {}, objectdata);
                 }
-                // New tiem
+                // New item
                 objectdata = {};
-                previd = matches[1];
+                prev_nr = current_nr;
               }
-              if (matches[2] === 'on' || matches[2] === 'off') {
+              if (matches[3] === 'on' || matches[3] === 'off') {
                 field_value = moment(field_value, 'LT').unix();
               }
-              objectdata[matches[2]] = field_value;
+              objectdata[matches[3]] = field_value;
             }
           }
           break;
       }
     });
+    if (Object.keys(objectdata).length > 1) {
+      formdata[prev_nr] = $.extend(true, {}, objectdata);
+    }
+    /*
     if (form_type === 'sensors' || form_type === 'switches' || form_type === 'environment') {
       formdata[(form_type == 'switches' ? (previd * 1) - 1 : previd)] = $.extend(true, {}, objectdata);
-    }
+    }*/
+
   } catch (error) {
     console.log(error);
     return false;
   }
+  console.log('Processed form data:', formdata);
   return formdata;
 }
 
@@ -378,11 +397,16 @@ function update_online_messages(online) {
 function add_notification_message(type, title, message, icon, color) {
   var menu = $('ul#' + type);
 
+  if (menu.find('li:first a span.message').text() == message) {
+    // Skip duplica messages
+    return;
+  }
+
   var notification = $('<a>').on('click', function() {
     close_notification_message(this);
   });
   notification.append($('<span>').addClass('image').append($('<img>').attr({
-    'src': $('a.user-profile img').attr('src'),
+    'src': $('img.profile_img').attr('src'),
     'alt': 'Profile image'
   })));
   notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('timestamp', (new Date()).getTime()).text('...')));
@@ -564,6 +588,18 @@ function history_graph(name, data, type) {
       fill = false;
       break;
   }
+  var tickSize = 60;
+  var total_data_duration = (graph_data[0][graph_data[0].length-1][0] - graph_data[0][0][0]) / 3600000;
+  if (total_data_duration > 120) {
+    tickSize = 360;
+  } else if (total_data_duration > 120) {
+    tickSize = 240;
+  } else if (total_data_duration > 48) {
+    tickSize = 180;
+  } else if (total_data_duration > 24) {
+    tickSize = 120;
+  }
+
   if ($('#history_graph_' + name).length == 1) {
     $('#history_graph_' + name).html('').removeClass('loading');
     $.plot($('#history_graph_' + name), graph_data, {
@@ -594,7 +630,7 @@ function history_graph(name, data, type) {
         tickColor: "rgba(51, 51, 51, 0.06)",
         mode: "time",
         timezone: "browser",
-        tickSize: [90, "minute"],
+        tickSize: [tickSize, "minute"],
         //tickLength: 10,
         axisLabel: "Date",
         axisLabelUseCanvas: true,
@@ -674,6 +710,24 @@ function update_switch_history() {
   }
 }
 
+function update_dashboard_history() {
+  if ($('#sensor_temperature, #sensor_humidity').length >= 1) {
+    $.getJSON('/api/history/environment', function(data) {
+      $.each(data.environment, function(index, value) {
+        history_graph(index, value);
+      });
+      clearTimeout(globals.updatetimer);
+      globals.updatetimer = setTimeout(function() {
+        update_dashboard_history();
+      }, 1 * 60 * 1000)
+    });
+  }
+}
+
+function update_webcam_preview(name,url) {
+  $('img#webcam_' + name + '_preview').attr('src',url);
+}
+
 function toggleSwitch(id) {
   id = id.split('_')[1];
   websocket_message({
@@ -682,5 +736,56 @@ function toggleSwitch(id) {
       'id': id,
       'state': 'toggle'
     }
+  });
+}
+
+function update_sensor_history(type) {
+  if ($('div.row.sensor').length >= 1) {
+    $.getJSON('/api/history/sensors/' + type,function(data){
+      $.each(data[type], function(index,sensor) {
+        history_graph(index,sensor);
+      });
+      clearTimeout(globals['updatetimer']);
+      globals['updatetimer'] = setTimeout(function(){
+        update_sensor_history(type);
+      } , 1 * 60 * 1000)
+    });
+  }
+}
+
+function updateWebcams() {
+  if ($('.webcam').length > 0) {
+    $.each(Object.keys(globals.webcams), function(index,webcamid){
+      globals.webcams[webcamid].eachLayer(function(layer){
+        layer.redraw();
+      });
+    });
+  }
+}
+
+function initWebcam(webcamid, name, maxzoom) {
+  if ($('div#webcam_' + webcamid).length == 1) {
+    $('div#webcam_' + webcamid).parents('.x_panel').find('h2 small').text(name);
+    if (globals.webcams[webcamid] === undefined) {
+      globals.webcams[webcamid] = new L.Map('webcam_' + webcamid, {
+        layers: [createWebcamLayer(webcamid,maxzoom)],
+        fullscreenControl: true,
+      }).setView([0, 0], 1);
+      var loadingControl = L.Control.loading({
+        separate: true
+      });
+      globals.webcams[webcamid].addControl(loadingControl);
+    }
+  }
+}
+
+function createWebcamLayer(webcamid, maxzoom){
+  return L.tileLayer('/static/webcam/{id}_tile_{z}_{x}_{y}.jpg?_{time}', {
+    time: function() { return (new Date()).valueOf();},
+    id: webcamid,
+    noWrap: true,
+    continuousWorld: false,
+    maxNativeZoom: maxzoom,
+    maxZoom: maxzoom + 1
   });
 }

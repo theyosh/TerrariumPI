@@ -48,8 +48,8 @@
                   <li>
                     <a><i class="fa fa-video-camera"></i> Webcam <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="chartjs.html">Show</a></li>
-                      <li><a href="chartjs2.html">Add</a></li>
+                      <li><a href="webcam.html">Show</a></li>
+                      <li><a href="webcam_settings.html">Settings</a></li>
                     </ul>
                   </li>
                   <li>

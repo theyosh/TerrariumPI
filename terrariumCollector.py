@@ -80,12 +80,16 @@ class terrariumCollector():
     for item in data:
       self.__log_data('system',item,'rawdata',data[item])
 
-  def get_history(self, type, subtype = None, id = None, starttime = None, stoptime = None):
+  #def get_history(self, type, subtype = None, id = None, starttime = None, stoptime = None):
+  def get_history(self, parameters = [], starttime = None, stoptime = None):
     #print 'get history: ' + str(type) + ' - ' + str(subtype) + ' - ' + str(id)
     # Default return object
     history = {}
     # Every Xth minute will be returned
     modulo = 1
+
+    type = parameters[0]
+    del(parameters[0])
 
     # Define start time
     if starttime is None:
@@ -104,7 +108,7 @@ class terrariumCollector():
       field = 'rawdata'
       history_fields = { 'wind_speed' : [], 'temperature' : [], 'pressure' : [] , 'wind_direction' : [], 'rain' : [],
                         'weather' : [], 'icon' : []}
-      datatypes = [subtype]
+      datatypes = [type]
 
     elif type == 'system':
       field = 'rawdata'
@@ -116,24 +120,22 @@ class terrariumCollector():
       history_fields = { 'power_wattage' : [], 'water_flow' : [] , 'state' : []}
       datatypes = [type]
 
-      if subtype == 'summary':
-        field = 'summary'
-        history_fields = { 'total_power' : [], 'total_water' : []}
-
-    elif type == 'sensors' and subtype in ['temperature','humidity','summary']:
+    elif type == 'sensors':
       field = 'rawdata'
       history_fields = { 'current' : [], 'alarm_min' : [], 'alarm_max' : [] , 'min' : [], 'max' : []}
-      datatypes = [subtype]
+      datatypes = ['temperature','humidity']
 
-      if subtype == 'summary':
-        field = 'summary'
-        datatypes = ['temperature','humidity']
-      elif id == 'summary':
-        field = 'summary'
+      if len(parameters) == 1 and parameters[0] is not None and parameters[0] in ['temperature','humidity']:
+        datatypes = [parameters[0]]
+        del(parameters[0])
+
+    elif type == 'environment':
+      field = 'summary'
+      history_fields = { 'current' : [], 'alarm_min' : [], 'alarm_max' : [] , 'min' : [], 'max' : []}
+      datatypes = ['temperature','humidity']
 
     history = {}
     for datatype in datatypes:
-      history[datatype] = {}
       with self.db:
         cur = self.db.cursor()
         cur.execute('''SELECT day, ''' + field + ''' FROM data
@@ -148,13 +150,18 @@ class terrariumCollector():
           dbdatatmp = json.loads(row[field])
 
           if field == 'summary':
-            dbdata = { 'summary' : dbdatatmp }
-          elif id is None:
-            dbdata = dbdatatmp
+            dbdata = { datatype : dbdatatmp }
+            datatype = type
           else:
-            dbdata = { id : dbdatatmp[id] }
+            dbdata = dbdatatmp
+
+          if datatype not in history:
+            history[datatype] = {}
 
           for dataid in dbdata:
+            if len(parameters) > 0 and parameters[0] != dataid:
+              continue
+
             if dataid not in history[datatype]:
               history[datatype][dataid] = copy.deepcopy(history_fields)
 

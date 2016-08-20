@@ -20,11 +20,14 @@ class terrariumSwitchboard():
     # Reload config
     switch_config = config.get_switches()['switches']
 
+    switch_numbers = [None] * (self.max_number_of_switches)
+    for switchid in switch_config:
+      switch_numbers[int(switch_config[switchid]['nr'])-1] = switchid
+
     self.id = None
     self.device = None
     self.device_type = None
-    self.switches = []
-    self.callback = callback
+    self.switches = {}
 
     for device in Driver().list_devices():
       vendor, product, self.device = map(lambda x: x.decode('latin1'), device)
@@ -33,18 +36,18 @@ class terrariumSwitchboard():
 
     for nr in range(0,self.max_number_of_switches):
       power_switch_config = {}
-      if switch_config[nr] is not None:
-        power_switch_config = switch_config[nr]
+      if switch_numbers[nr] is not None:
+        power_switch_config = switch_config[switch_numbers[nr]]
 
-      self.switches.append(terrariumSwitch(self.device,
-                                           self.device_type,
-                                           nr+1,
-                                           power_switch_config['name'] if 'name' in power_switch_config else '',
-                                           power_switch_config['power_wattage'] if 'power_wattage' in power_switch_config else 0.0,
-                                           power_switch_config['water_flow'] if 'water_flow' in power_switch_config else 0.0,
-                                           callback))
+      self.switches[switch_numbers[nr]] = terrariumSwitch(self.device,
+                                        self.device_type,
+                                        power_switch_config['nr'] if 'nr' in power_switch_config else nr+1,
+                                        power_switch_config['name'] if 'name' in power_switch_config else '',
+                                        power_switch_config['power_wattage'] if 'power_wattage' in power_switch_config else 0.0,
+                                        power_switch_config['water_flow'] if 'water_flow' in power_switch_config else 0.0,
+                                        callback)
 
-    self.id = md5(b'' + self.device + self.device_type + str(self.max_number_of_switches)).hexdigest()
+    self.id = md5(b'' + self.device + self.device_type).hexdigest()
 
   def get_id(self):
     return self.id
@@ -67,9 +70,6 @@ class terrariumSwitchboard():
       switch.set_name(switch_config['switches'][switch.get_nr()-1]['name'])
       switch.set_power_wattage(switch_config['switches'][switch.get_nr()-1]['power_wattage'])
       switch.set_water_flow(switch_config['switches'][switch.get_nr()-1]['water_flow'])
-
-    #self.callback(True)
-
 
   def get_switches(self):
     data = {'switchboard_id':self.get_id(),

@@ -233,20 +233,5 @@
                 });
                 update_dashboard_history();
               });
-
-              function update_dashboard_history() {
-                if ($('#sensor_temperature, #sensor_humidity').length >= 1) {
-                  $.getJSON('/api/history/environment', function(data) {
-                    $.each(data, function(index, value) {
-                      history_graph(index, value.summary);
-                    });
-                    clearTimeout(globals.updatetimer);
-                    globals.updatetimer = setTimeout(function() {
-                      update_dashboard_history();
-                    }, 1 * 60 * 1000)
-                  });
-                }
-              }
-
             </script>
 % include('inc/page_footer.tpl')

@@ -42,6 +42,7 @@ class terrariumConfig:
       config[config_part[0]] = config_part[1]
 
     return config
+  # End private functions
 
   def get_system(self):
     return self.__get_config('terrariumpi')
@@ -77,7 +78,6 @@ class terrariumConfig:
   def get_environment_light(self):
     data = self.get_environment()
     return data['light'] if 'light' in data else None
-
   # End Environment functions
 
   # Weather config functions
@@ -102,16 +102,17 @@ class terrariumConfig:
 
   # Switches config functions
   def save_switch(self,data):
-    return self.__update_config('switch' + str(data['nr']),data)
+    return self.__update_config('switch' + str(data['id']),data)
 
   def get_switches(self):
     config = self.__get_config('terrariumpi')
     data = {'max_switches' : config['max_switches'],
-            'switches': []}
-    for switchnr in range (1,int(config['max_switches'])+1):
-      switch_config = self.__get_config('switch' + str(switchnr));
-      if len(switch_config) > 0:
-        data['switches'].append(switch_config)
+            'switches': {}}
+
+    for section in self.__config.sections():
+      if section[:6] == 'switch':
+        switch_data = self.__get_config(section)
+        data['switches'][section[6:]] = switch_data
 
     return data
 
@@ -131,46 +132,24 @@ class terrariumConfig:
 
     return data
 
+  def get_webcams(self):
+    data = {}
+    for section in self.__config.sections():
+      if section[:6] == 'webcam':
+        sensor_data = self.__get_config(section)
+        data[section[6:]] = sensor_data
+
+    return data
+
+  def save_webcam(self,data):
+    print data
+    del(data['state'])
+    del(data['image'])
+    del(data['max_zoom'])
+    del(data['last_update'])
+    del(data['resolution'])
+    del(data['preview'])
+    return self.__update_config('webcam' + str(data['id']),data)
+
   def get_full_config(self):
     print self
-
-
-  '''def getWebcamsList(self):
-    valuelist = []
-    for configSection in self.__config.sections():
-      if 'webcam_' in configSection:
-        archive = 0
-        try:
-          archive = self.__config.get(configSection,'archive')
-        except ConfigParser.NoOptionError:
-          archive = 0
-
-        rotate = 0
-        try:
-          rotate = self.__config.get(configSection,'rotation')
-        except ConfigParser.NoOptionError:
-          rotate = 0
-
-        valuelist.append({'location':self.__config.get(configSection,'location'),
-                          'name':self.__config.get(configSection,'name'),
-                          'archive' : archive,
-                          'rotation' : rotate})
-
-    return valuelist
-
-  def saveWebCamSettings(self,webcamid,name,url,archive,rotate):
-    webcamid = 'webcam_' + webcamid
-    if not self.__config.has_section(webcamid):
-      self.__config.add_section(webcamid)
-
-    if name:
-      self.__config.set(webcamid, 'name', str(name))
-    if url:
-      self.__config.set(webcamid, 'location', str(url))
-    if archive:
-      self.__config.set(webcamid, 'archive', str(archive))
-    if rotate:
-      self.__config.set(webcamid, 'rotation', str(rotate))
-
-    self.__saveConfig()
-    return True'''
