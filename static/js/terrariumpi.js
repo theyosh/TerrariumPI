@@ -7,14 +7,11 @@ var globals = {
   updatetimer: null,
   online_timer: null
 };
-
 $(document).ready(function() {
   $('#system_time').text(moment().format('LLLL'));
   websocket_init(false);
-
   // Bind to menu links in order to load Ajax calls
   $('#sidebar-menu a').on('click', load_page);
-
   // NProgress bar animation during Ajax calls
   $(document).on({
     ajaxStart: function() {
@@ -24,7 +21,6 @@ $(document).ready(function() {
       NProgress.done();
     }
   });
-
   setInterval(function() {
     notification_timestamps();
     updateWebcams();
@@ -34,7 +30,6 @@ $(document).ready(function() {
 
 function websocket_init(reconnect) {
   websocket_connect();
-
   globals.websocket.onopen = function(evt) {
     websocket_message({
       'type': 'client_init',
@@ -42,55 +37,43 @@ function websocket_init(reconnect) {
     });
     update_online_messages(true);
   };
-
   globals.websocket.onmessage = function(evt) {
     online_updater();
-
     var data = JSON.parse(evt.data);
     console.log(new Date(), data);
-
     switch (data.type) {
       case 'dashboard_uptime':
         update_dashboard_uptime(data.data);
         break;
-
       case 'dashboard_power_usage':
         update_dashboard_power_usage(data.data);
         break;
-
       case 'dashboard_water_flow':
         update_dashboard_water_flow(data.data);
         break;
-
       case 'environment':
         $.each(['heater', 'sprayer', 'light'], function(index, value) {
           update_dashboard_environment(value, data.data[value]);
         });
         break;
-
       case 'sensor_gauge':
         $.each(data.data, function(index, sensor) {
           sensor_gauge(sensor.id !== undefined ? sensor.id : index, sensor);
         });
         break;
-
       case 'power_switches':
         $.each(data.data, function(index, value) {
           update_power_switch(value.id, value);
         });
         break;
-
       case 'door_indicator':
         update_door_indicator(data.data);
         break;
-
       case 'update_weather':
         update_weather(data.data);
         break;
-
     }
   };
-
   globals.websocket.onclose = function(evt) {
     is_offline();
     update_online_messages(false);
@@ -116,26 +99,50 @@ function websocket_message(message) {
 }
 
 function menu_click(url) {
+  // Find the menu item that should be loaded
   var menu_item = $('a[href="' + url + '"]');
+  // Exists?
   if (menu_item.length == 1) {
-    menu_item.parent().parent().parent().find('a:first').click();
+    // Get the parent menu item
+    var parent_menu = menu_item.parent('li').parents('li');
+    // If the parent menu is active, we are al ready on the right parent menu
+    if (parent_menu.hasClass('active')) {
+      // Parent menu is the same, so clear all active submenu's
+      parent_menu.find('.child_menu li').removeClass('active');
+    } else {
+      // Open parent menu
+      parent_menu.find('a:first').click();
+    }
+    // Trigger the click on the sub menu item
     menu_item.click();
-    return false;
   }
+  // Make sure that the browser will not fire it's url loading event
+  return false;
 }
 
 function load_page(url) {
+  // If no url given, use the event trigger a href attribute
   if (typeof url != 'string') {
     url = this.href;
   }
-  if (url === '') return false;
-
-  $("#maincontent").height(0);
-  $.get(url, function(data) {
-    $("#maincontent").html(data);
-    reload_reload_theme();
-    process_form();
-  });
+  // Only process with some input
+  if (url !== '') {
+    // Get the menu url so that jQuery can match
+    var menu_url = url.replace('http://' + location.host + '/', '');
+    // Reset the main content height
+    $("#maincontent").height(0);
+    // Load the data through AJAX
+    $.get(url, function(data) {
+      // Clear all submenu's that are not clicked
+      $('.child_menu a[href!="' + menu_url + '"]').parent().removeClass('active');
+      $('.child_menu a[href="' + menu_url + '"]').parent().addClass('active');
+      // Put the content on the page
+      $("#maincontent").html(data);
+      // Reload some theme settings per page
+      reload_reload_theme();
+    });
+  }
+  // Make sure the browser will not fire it's url loading event
   return false;
 }
 
@@ -177,38 +184,30 @@ function prepare_form_data(form) {
   var re = /(sensor|switch|webcam|light|sprayer|heater)(_\d+)?_(.*)/i;
   var objectdata = {};
   var prev_nr = -1;
-
-  if (form_type === 'weather' || form_type === 'environment') {
+  if (form_type === 'weather' || form_type === 'environment' || form_type === 'system') {
     formdata = {};
   }
-
   try {
     form.find('input:not([disabled="disabled"]),select:not([disabled="disabled"])').each(function() {
       var field_name = $(this).attr('name');
       var field_value = $(this).val();
-
-      console.log('Process field: ', field_name, field_value, form_type);
-
       switch (form_type) {
         case 'weather':
+        case 'system':
           formdata[field_name] = field_value;
           break;
-
         case 'sensors':
         case 'switches':
         case 'environment':
         case 'webcams':
-          console.log('Regex matches: ', matches = re.exec(field_name));
           if ((matches = re.exec(field_name)) !== null) {
             if (matches.index === re.lastIndex) {
               re.lastIndex++;
             }
-            console.log('Matches: ' , matches.length);
             if (matches.length >= 3) {
               current_nr = matches[2].substr(1) * 1;
               if (prev_nr != current_nr) {
                 if (Object.keys(objectdata).length > 1) {
-                  //formdata[(form_type == 'switches' ? (previd * 1) - 1 : previd)] = $.extend(true, {}, objectdata);
                   formdata[prev_nr] = $.extend(true, {}, objectdata);
                 }
                 // New item
@@ -231,7 +230,6 @@ function prepare_form_data(form) {
     console.log(error);
     return false;
   }
-  console.log('Processed form data:', formdata);
   return formdata;
 }
 
@@ -273,27 +271,24 @@ function update_dashboard_water_flow(data) {
 
 function update_weather(data) {
   var icons = new Skycons({
-      "color": "#73879C"
+    "color": "#73879C"
   });
-
   var weather_current = $('div#weather_today');
   if (weather_current.length == 1) {
     weather_current.find('.status').html(moment(data.hour_forecast[0].from * 1000).format('[<b>]dddd[</b>,] LT') + ' <span> in <b>' + data.temperature + '</b></span>');
     weather_current.find('h2').html(data.city.city + '<br><i>' + data.hour_forecast[0].weather + '</i>');
-    weather_current.find('.sunrise').text(moment(data.sun.rise * 1000).format('LT')).parent().css('fontWeight',(data.day ? 'bold' : 'normal'));
-    weather_current.find('.sunset').text(moment(data.sun.set * 1000).format('LT')).parent().css('fontWeight',(data.day ? 'normal' : 'bold'));
+    weather_current.find('.sunrise').text(moment(data.sun.rise * 1000).format('LT')).parent().css('fontWeight', (data.day ? 'bold' : 'normal'));
+    weather_current.find('.sunset').text(moment(data.sun.set * 1000).format('LT')).parent().css('fontWeight', (data.day ? 'normal' : 'bold'));
     weather_current.find('.degrees').text(data.hour_forecast[0].temperature);
     icons.set(weather_current.find('canvas').attr('id'), data.hour_forecast[0].icon);
-
-
     var week_forecast_divs = weather_current.find('div.row.weather-days div.daily-weather');
     // Set timestamp to tomorrow at 13 hours. That is the first week forecast we take
     var timestamp = Math.round(new Date(Date.now()).setHours(13) / 1000) + (24 * 60 * 60);
     var day_counter = 0;
     var graphdata = [];
-    $.each(data.week_forecast, function(index,value) {
-      graphdata.push([ (value.to - ((value.to - value.from)/2)) * 1000 , value.temperature]);
-      if ( value.from - timestamp >= 3600 && day_counter < week_forecast_divs.length) {
+    $.each(data.week_forecast, function(index, value) {
+      graphdata.push([(value.to - ((value.to - value.from) / 2)) * 1000, value.temperature]);
+      if (value.from - timestamp >= 3600 && day_counter < week_forecast_divs.length) {
         $(week_forecast_divs[day_counter]).find('.day').text(moment(value.from * 1000).format('ddd'));
         $(week_forecast_divs[day_counter]).find('.degrees').text(value.temperature);
         $(week_forecast_divs[day_counter]).find('h5').html(value.wind_speed.toFixed(1) + ' <i>' + (data.windspeed === 'ms' ? 'm/s' : 'Km/h') + '</i>');
@@ -303,16 +298,14 @@ function update_weather(data) {
       }
     });
     icons.play();
-    history_graph('weather_week',graphdata,'weather');
-
+    history_graph('weather_week', graphdata, 'weather');
     graphdata = [];
-    $.each(data.hour_forecast, function(index,value){
-      graphdata.push([ (value.to - ((value.to - value.from)/2)) * 1000 , value.temperature]);
+    $.each(data.hour_forecast, function(index, value) {
+      graphdata.push([(value.to - ((value.to - value.from) / 2)) * 1000, value.temperature]);
     });
-    history_graph('weather_day',graphdata,'weather');
+    history_graph('weather_day', graphdata, 'weather');
   }
 }
-
 
 function update_dashboard_environment(name, value) {
   var systempart = $('div.environment_' + name);
@@ -325,14 +318,12 @@ function update_dashboard_environment(name, value) {
       systempart.find('.off').text(moment(value.off * 1000).format('LT'));
       systempart.find('.duration').text(moment.duration(Math.abs(value.off - value.on) * 1000).humanize());
       break;
-
     case 'sprayer':
       enabledColor = 'blue';
       systempart.find('.current').text(value.current.toFixed(3) + '%');
       systempart.find('.alarm_min').text(value.alarm_min + '%');
       systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
       break;
-
     case 'heater':
       enabledColor = 'red';
       systempart.find('h4 small').text('modus: ' + value.modus);
@@ -359,7 +350,6 @@ function format_uptime(uptime) {
 function online_updater() {
   clearTimeout(globals.online_timer);
   is_online();
-
   globals.online_timer = setTimeout(function() {
     is_offline();
   }, 120 * 1000);
@@ -383,12 +373,10 @@ function update_online_messages(online) {
 
 function add_notification_message(type, title, message, icon, color) {
   var menu = $('ul#' + type);
-
   if (menu.find('li:first a span.message').text() == message) {
     // Skip duplicate messages
     return;
   }
-
   var notification = $('<a>').on('click', function() {
     close_notification_message(this);
   });
@@ -398,7 +386,6 @@ function add_notification_message(type, title, message, icon, color) {
   })));
   notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('timestamp', (new Date()).getTime()).text('...')));
   notification.append($('<span>').addClass('message').text(message).append($('<span>').addClass('pull-right').html('<i class="fa ' + icon + ' ' + color + '"></i>')));
-
   // Remove no messages line
   menu.find('li.no_message').hide();
   // Add new message on top
@@ -471,7 +458,6 @@ function load_panel_tool_box() {
     var $BOX_PANEL = $(this).closest('.x_panel'),
       $ICON = $(this).find('i'),
       $BOX_CONTENT = $BOX_PANEL.find('.x_content');
-
     // fix for some div with hardcoded fix class
     if ($BOX_PANEL.attr('style')) {
       $BOX_CONTENT.slideToggle(200, function() {
@@ -483,7 +469,6 @@ function load_panel_tool_box() {
     }
     $ICON.toggleClass('fa-chevron-up fa-chevron-down');
   });
-
   $('.close-link').click(function() {
     var $BOX_PANEL = $(this).closest('.x_panel');
     $BOX_PANEL.remove();
@@ -493,11 +478,11 @@ function load_panel_tool_box() {
 function reload_reload_theme() {
   // Panel toolbox
   load_panel_tool_box();
-
   // Tooltip
   $('[data-toggle="tooltip"]').tooltip({
     container: 'body'
   });
+  process_form();
 }
 
 function sensor_gauge(name, data) {
@@ -507,8 +492,7 @@ function sensor_gauge(name, data) {
       $('#sensor_' + name + ' span.title').text(data.type + ' sensor: ' + (data.name !== '' ? data.name : data.address));
     }
     // Update timestamp indicator
-    $('#sensor_' + name + ' small.data_update').text(moment().format('LLL'));
-
+    $('#sensor_' + name + ' small').text(moment().format('LLL'));
     // Setup a new gauge if needed
     if (globals.gauges[name] === undefined) {
       var valid_area = data.alarm_max - data.alarm_min;
@@ -519,7 +503,6 @@ function sensor_gauge(name, data) {
         [(data.alarm_max + (0)) / (data.max - data.min), '#f0ad4e'],
         [1.0, '#E74C3C']
       ];
-
       var opts = {
         animationSpeed: 32,
         lines: 12,
@@ -552,31 +535,77 @@ function history_graph(name, data, type) {
   if (type === undefined) {
     type = 'temperature';
   }
+  var graph_data = [];
+  var show_splines = true;
+  var fill = false;
+  var show_lines = false;
   switch (type) {
     case 'temperature':
     case 'humidity':
-      graph_data = [data.current, data.alarm_min, data.alarm_max];
-      show_splines = true;
-      show_lines = false;
-      fill = false;
+      graph_data = [{
+        label: 'Current',
+        data: data.current
+      }, {
+        label: 'Alarm min',
+        data: data.alarm_min
+      }, {
+        label: 'Alarm max',
+        data: data.alarm_max
+      }];
       break;
-
+    case 'weather':
+    case 'system_temperature':
+      graph_data = [{
+        label: 'Temperature',
+        data: data
+      }];
+      break;
+    case 'system_uptime':
+      graph_data = [{
+        label: 'Uptime',
+        data: data
+      }];
+      break;
+    case 'system_load':
+      graph_data = [{
+        label: 'Load',
+        data: data.load1
+      }, {
+        label: 'Load5',
+        data: data.load5
+      }, {
+        label: 'Load15',
+        data: data.load15
+      }];
+      break;
+    case 'system_memory':
+      graph_data = [{
+        label: 'Used',
+        data: data.used
+      }, {
+        label: 'Free',
+        data: data.free
+      }, {
+        label: 'Total',
+        data: data.total
+      }];
+      break;
     case 'switch':
       graph_data = [data.power_wattage, data.water_flow];
+      graph_data = [{
+        label: 'Power usage',
+        data: data.power_wattage
+      }, {
+        label: 'Water flow',
+        data: data.water_flow
+      }];
       show_splines = false;
       show_lines = true;
       fill = true;
       break;
-
-    case 'weather':
-      graph_data = [data];
-      show_splines = true;
-      show_lines = false;
-      fill = false;
-      break;
   }
   var tickSize = 60;
-  var total_data_duration = (graph_data[0][graph_data[0].length-1][0] - graph_data[0][0][0]) / 3600000;
+  var total_data_duration = (graph_data[0].data[graph_data[0].data.length - 1][0] - graph_data[0].data[0][0]) / 3600000;
   if (total_data_duration > 120) {
     tickSize = 360;
   } else if (total_data_duration > 120) {
@@ -586,7 +615,6 @@ function history_graph(name, data, type) {
   } else if (total_data_duration > 24) {
     tickSize = 120;
   }
-
   if ($('#history_graph_' + name).length == 1) {
     $('#history_graph_' + name).html('').removeClass('loading');
     $.plot($('#history_graph_' + name), graph_data, {
@@ -657,30 +685,24 @@ function update_switch_history() {
             powerswitch.power_wattage[counter][1] = 0;
             powerswitch.water_flow[counter][1] = 0;
           }
-
           var copy = {};
           if (counter > 0 && state_chage != status[1]) {
             // Copy previous object to get the right status with current timestamp
             copy = $.extend(true, {}, powerswitch.power_wattage[counter - 1]);
             copy[0] = status[0];
             graphdata.power_wattage.push(copy);
-
             copy = $.extend(true, {}, powerswitch.water_flow[counter - 1]);
             copy[0] = status[0];
             graphdata.water_flow.push(copy);
-
             state_chage = status[1];
           }
-
           graphdata.power_wattage.push(powerswitch.power_wattage[counter]);
           graphdata.water_flow.push(powerswitch.water_flow[counter]);
-
           if (counter == powerswitch.state.length - 1) {
             // Add endpoint which is a copy of the last point, with current time
             copy = $.extend(true, {}, powerswitch.power_wattage[counter]);
             copy[0] = (new Date()).getTime();
             graphdata.power_wattage.push(copy);
-
             copy = $.extend(true, {}, powerswitch.water_flow[counter]);
             copy[0] = (new Date()).getTime();
             graphdata.water_flow.push(copy);
@@ -688,7 +710,6 @@ function update_switch_history() {
         });
         history_graph(index, graphdata, 'switch');
       });
-
       clearTimeout(globals.updatetimer);
       globals.updatetimer = setTimeout(function() {
         update_switch_history();
@@ -711,8 +732,8 @@ function update_dashboard_history() {
   }
 }
 
-function update_webcam_preview(name,url) {
-  $('img#webcam_' + name + '_preview').attr('src',url);
+function update_webcam_preview(name, url) {
+  $('img#webcam_' + name + '_preview').attr('src', url);
 }
 
 function toggleSwitch(id) {
@@ -728,22 +749,22 @@ function toggleSwitch(id) {
 
 function update_sensor_history(type) {
   if ($('div.row.sensor').length >= 1) {
-    $.getJSON('/api/history/sensors/' + type,function(data){
-      $.each(data[type], function(index,sensor) {
-        history_graph(index,sensor);
+    $.getJSON('/api/history/sensors/' + type, function(data) {
+      $.each(data[type], function(index, sensor) {
+        history_graph(index, sensor);
       });
       clearTimeout(globals['updatetimer']);
-      globals['updatetimer'] = setTimeout(function(){
+      globals['updatetimer'] = setTimeout(function() {
         update_sensor_history(type);
-      } , 1 * 60 * 1000)
+      }, 1 * 60 * 1000)
     });
   }
 }
 
 function updateWebcams() {
   if ($('.webcam').length > 0) {
-    $.each(Object.keys(globals.webcams), function(index,webcamid){
-      globals.webcams[webcamid].eachLayer(function(layer){
+    $.each(Object.keys(globals.webcams), function(index, webcamid) {
+      globals.webcams[webcamid].eachLayer(function(layer) {
         layer.redraw();
       });
     });
@@ -755,7 +776,7 @@ function initWebcam(webcamid, name, maxzoom) {
     $('div#webcam_' + webcamid).parents('.x_panel').find('h2 small').text(name);
     if (globals.webcams[webcamid] === undefined) {
       globals.webcams[webcamid] = new L.Map('webcam_' + webcamid, {
-        layers: [createWebcamLayer(webcamid,maxzoom)],
+        layers: [createWebcamLayer(webcamid, maxzoom)],
         fullscreenControl: true,
       }).setView([0, 0], 1);
       var loadingControl = L.Control.loading({
@@ -766,9 +787,11 @@ function initWebcam(webcamid, name, maxzoom) {
   }
 }
 
-function createWebcamLayer(webcamid, maxzoom){
+function createWebcamLayer(webcamid, maxzoom) {
   return L.tileLayer('/static/webcam/{id}_tile_{z}_{x}_{y}.jpg?_{time}', {
-    time: function() { return (new Date()).valueOf();},
+    time: function() {
+      return (new Date()).valueOf();
+    },
     id: webcamid,
     noWrap: true,
     continuousWorld: false,

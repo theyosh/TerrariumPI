@@ -2,15 +2,13 @@
 import ConfigParser
 
 class terrariumConfig:
-  def __init__(self,callback):
+  def __init__(self):
     self.__defaults_file = 'defaults.cfg'
     self.__config_file = 'settings.cfg'
 
     self.__config = ConfigParser.SafeConfigParser()
     self.__config.readfp(open(self.__defaults_file))
     self.__config.read(self.__config_file)
-
-    self.callback = callback
 
   # Private functions
   def __save_config(self):
@@ -46,6 +44,9 @@ class terrariumConfig:
 
   def get_system(self):
     return self.__get_config('terrariumpi')
+
+  def set_system(self,data):
+    return self.__update_config('terrariumpi',data)
 
   def get_door_pin(self):
     config = self.get_system()
@@ -142,7 +143,6 @@ class terrariumConfig:
     return data
 
   def save_webcam(self,data):
-    print data
     del(data['state'])
     del(data['image'])
     del(data['max_zoom'])
@@ -150,6 +150,3 @@ class terrariumConfig:
     del(data['resolution'])
     del(data['preview'])
     return self.__update_config('webcam' + str(data['id']),data)
-
-  def get_full_config(self):
-    print self

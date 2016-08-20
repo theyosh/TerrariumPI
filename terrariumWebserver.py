@@ -99,11 +99,10 @@ class terrariumWebserver():
 
   def __get_api_call(self,path):
     result = {}
-    path = path.strip('/').split('/')
+    parameters = path.strip('/').split('/')
 
-    action = path[0]
-    del(path[0])
-    parameters = path
+    action = parameters[0]
+    del(parameters[0])
 
     if 'switches' == action:
       result = self.__terrariumEngine.get_switches(parameters)
@@ -138,7 +137,7 @@ class terrariumWebserver():
       result = self.__terrariumEngine.get_history(parameters)
 
     elif 'config' == action:
-      result = self.__terrariumEngine.get_config(parameters[0])
+      result = self.__terrariumEngine.get_config(parameters[0] if len(parameters) == 1 else None)
 
     return result
 

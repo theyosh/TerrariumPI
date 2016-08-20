@@ -107,7 +107,6 @@ class terrariumSwitch():
     self.state = None
     self.set_state(False,True)
 
-
   def set_state(self, state, force = False):
     if self.get_state() is not state or force:
       try:

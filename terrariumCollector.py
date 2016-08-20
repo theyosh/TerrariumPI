@@ -82,19 +82,18 @@ class terrariumCollector():
 
   #def get_history(self, type, subtype = None, id = None, starttime = None, stoptime = None):
   def get_history(self, parameters = [], starttime = None, stoptime = None):
-    #print 'get history: ' + str(type) + ' - ' + str(subtype) + ' - ' + str(id)
     # Default return object
     history = {}
     # Every Xth minute will be returned
     modulo = 1
 
-    type = parameters[0]
+    history_type = parameters[0]
     del(parameters[0])
 
     # Define start time
     if starttime is None:
       starttime = int(time.time())
-      if 'switches' != type:
+      if 'switches' != history_type:
         starttime -= starttime % (1 * 60)
 
     # Define stop time
@@ -104,23 +103,26 @@ class terrariumCollector():
     if starttime - stoptime > (8 * 60):
       modulo = 5
 
-    if type == 'weather':
+    if history_type == 'weather':
       field = 'rawdata'
       history_fields = { 'wind_speed' : [], 'temperature' : [], 'pressure' : [] , 'wind_direction' : [], 'rain' : [],
                         'weather' : [], 'icon' : []}
-      datatypes = [type]
+      datatypes = [history_type]
 
-    elif type == 'system':
+    elif history_type == 'system':
       field = 'rawdata'
-      history_fields = { 'load1' : [], 'load5' : [], 'load15' : [], 'uptime' : [] }
-      datatypes = [type]
+      history_fields = {'load' : {'load1' : [], 'load5' : [], 'load15' : []},
+                        'uptime' : [],
+                        'temperature' : [],
+                        'memory' : {'total' : [], 'used' : [], 'free' : []} }
+      datatypes = [history_type]
 
-    elif type == 'switches':
+    elif history_type == 'switches':
       field = 'rawdata'
       history_fields = { 'power_wattage' : [], 'water_flow' : [] , 'state' : []}
-      datatypes = [type]
+      datatypes = [history_type]
 
-    elif type == 'sensors':
+    elif history_type == 'sensors':
       field = 'rawdata'
       history_fields = { 'current' : [], 'alarm_min' : [], 'alarm_max' : [] , 'min' : [], 'max' : []}
       datatypes = ['temperature','humidity']
@@ -129,7 +131,7 @@ class terrariumCollector():
         datatypes = [parameters[0]]
         del(parameters[0])
 
-    elif type == 'environment':
+    elif history_type == 'environment':
       field = 'summary'
       history_fields = { 'current' : [], 'alarm_min' : [], 'alarm_max' : [] , 'min' : [], 'max' : []}
       datatypes = ['temperature','humidity']
@@ -151,7 +153,7 @@ class terrariumCollector():
 
           if field == 'summary':
             dbdata = { datatype : dbdatatmp }
-            datatype = type
+            datatype = history_type
           else:
             dbdata = dbdatatmp
 
@@ -163,7 +165,12 @@ class terrariumCollector():
               continue
 
             if dataid not in history[datatype]:
-              history[datatype][dataid] = copy.deepcopy(history_fields)
+              if dataid in history_fields and type(history_fields[dataid]) is dict:
+                history[datatype][dataid] = copy.deepcopy(history_fields[dataid])
+              elif dataid in history_fields:
+                history[datatype][dataid] = []
+              else:
+                history[datatype][dataid] = copy.deepcopy(history_fields)
 
             timestamps = sorted(dbdata[dataid].keys())
 
@@ -171,9 +178,18 @@ class terrariumCollector():
               if starttime > int(timestamp) > stoptime:
                 timedata = dbdata[dataid][str(timestamp)]
 
-                #if type == 'sensors' and int(timestamp) % (modulo * 60) == 0:
-                for history_field in history_fields:
+                loopfields = history_fields
+                if dataid in history_fields and type(history_fields[dataid]) is dict:
+                  loopfields = history_fields[dataid]
+                elif dataid in history_fields:
+                  loopfields = { dataid : [] }
+                  timedata = {dataid:timedata}
+
+                for history_field in loopfields:
                   if history_field in timedata:
-                    history[datatype][dataid][history_field].append([int(timestamp) * 1000, timedata[history_field]])
+                    if history_field in history[datatype][dataid]:
+                      history[datatype][dataid][history_field].append([int(timestamp) * 1000, timedata[history_field]])
+                    else:
+                      history[datatype][dataid].append([int(timestamp) * 1000, timedata[history_field]])
 
     return history

@@ -29,7 +29,7 @@ class terrariumEngine():
     self.switch_board = None #TODO: Fix proper
 
     # Load config
-    self.config = terrariumConfig(self.get_config)
+    self.config = terrariumConfig()
 
     # Load data collector for historical data
     self.collector = terrariumCollector()
@@ -224,26 +224,23 @@ class terrariumEngine():
   # API Config calls
   def get_config(self, part = None):
     data = {}
-    if 'system' == part:
-      data = self.get_system_config()
+    if 'system' == part or part is None:
+      data.update(self.get_system_config())
 
-    elif 'weather' == part:
-      data = self.get_weather_config()
+    if 'weather' == part or part is None:
+      data.update(self.get_weather_config())
 
-    elif 'switches' == part:
-      data = self.get_switches_config()
+    if 'switches' == part or part is None:
+      data.update(self.get_switches_config())
 
-    elif 'sensors' == part:
-      data = self.get_sensors_config()
+    if 'sensors' == part or part is None:
+      data.update(self.get_sensors_config())
 
-    elif 'webcams' == part:
-      data = self.get_webcams_config()
+    if 'webcams' == part or part is None:
+      data.update(self.get_webcams_config())
 
-    elif 'environment' == part:
-      data = self.get_environment_config()
-
-    elif part is None:
-      data = self.config.get_full_config()
+    if 'environment' == part or part is None:
+      data.update(self.get_environment_config())
 
     return data
 
@@ -264,10 +261,20 @@ class terrariumEngine():
     elif 'environment' == part:
       update_ok = self.set_environment_config(data)
 
+    elif 'system' == part:
+      update_ok = self.set_system_config(data)
+      if update_ok:
+        # Update config settings
+        self.pi_power_wattage = float(self.config.get_pi_power_wattage())
+        #self.door_sensor.set_gpio_pin(self.config.get_door_pin())
+
     return update_ok
 
   def get_system_config(self):
     return self.config.get_system()
+
+  def set_system_config(self,data):
+    return self.config.set_system(data)
 
   # Weather part
   def set_weather_config(self,data):

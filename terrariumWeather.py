@@ -148,7 +148,8 @@ class terrariumWeather():
   def get_config(self):
     return {'location' : self.settings['location'],
             'windspeed' : self.windspeed,
-            'temperature' : self.temperature}
+            'temperature' : self.temperature,
+            'type': self.settings['type']}
 
   def set_location(self,location):
     location = location.strip('/')

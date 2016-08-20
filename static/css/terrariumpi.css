@@ -1,25 +1,30 @@
 .toggle {
   width: 3.8em;
 }
+
 .panel_toolbox {
   min-width: 20px;
 }
+
 .top_nav .navbar-right {
   width: auto !important;
   float: none !important;
 }
+
 .nav > li > div {
-    display: block;
-    padding: 13px 15px 12px;
-    line-height: 32px;
-    margin-left: 0 !important;
+  display: block;
+  padding: 13px 15px 12px;
+  line-height: 32px;
+  margin-left: 0 !important;
 }
+
 .row.tile_count {
-  margin-bottom: 0px !important;
+  margin-bottom: 0 !important;
 }
+
 .row.tile_count .progress {
   height: 3.2em;
-  margin: 1.5em 0.2em 0em 0em;
+  margin: 1.5em .2em 0 0;
 }
 
 #weather_credits {
@@ -68,12 +73,13 @@ span.select2.select2-container {
 td {
   white-space: nowrap;
 }
+
 table.tile_info td:first-child {
   width: 70% !important;
 }
 
 canvas.gauge {
-  margin: 0px -40px;
+  margin: 0 -40px;
 }
 
 .x_title h2 {
@@ -86,7 +92,7 @@ canvas.gauge {
 
 .webcam_preview {
   min-height: 240px;
-  background-color: #000000;
+  background-color: #000;
   overflow: hidden;
 }
 
@@ -95,53 +101,62 @@ canvas.gauge {
 }
 
 .webcam_90 {
-  /* for firefox, safari, chrome, etc. */
+/* for firefox, safari, chrome, etc. */
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
-  /* for ie */
+/* for ie */
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
 .webcam_180 {
-  /* for firefox, safari, chrome, etc. */
+/* for firefox, safari, chrome, etc. */
   -webkit-transform: rotate(-180deg);
   -moz-transform: rotate(-180deg);
-  /* for ie */
+/* for ie */
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=6);
 }
 
 .webcam_270 {
-  /* for firefox, safari, chrome, etc. */
+/* for firefox, safari, chrome, etc. */
   -webkit-transform: rotate(-270deg);
   -moz-transform: rotate(-270deg);
-  /* for ie */
+/* for ie */
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=9);
 }
 
 .webcam_H {
-  -moz-transform: scaleX(-1); /* For Mozilla Firefox */
-  -o-transform: scaleX(-1);   /* For Opera */
-  -webkit-transform: scaleX(-1); /* For Safari, Google chrome */
-
-  /* For IE */
+  -moz-transform: scaleX(-1);
+/* For Mozilla Firefox */
+  -o-transform: scaleX(-1);
+/* For Opera */
+  -webkit-transform: scaleX(-1);
+/* For Safari, Google chrome */
+/* For IE */
   filter: FlipH;
-  -ms-filter: "FlipH";
+  -ms-filter: FlipH;
 }
 
 .webcam_V {
-  -moz-transform: scaleY(-1); /* For Mozilla Firefox */
-  -o-transform: scaleY(-1);   /* For Opera */
-  -webkit-transform: scaleY(-1); /* For Safari, Google chrome */
-
-  /* For IE */
+  -moz-transform: scaleY(-1);
+/* For Mozilla Firefox */
+  -o-transform: scalY(-1);
+/* For Opera */
+  -webkit-transform: scaleY(-1);
+/* For Safari, Google chrome */
+/* For IE */
   filter: FlipV;
-  -ms-filter: "FlipV";
+  -ms-filter: FlipV;
 }
 
 .flot-x-axis .flot-tick-label {
-    white-space: nowrap;
-    transform: translate(-9px, 0) rotate(-45deg);
-    text-indent: -100%;
-    transform-origin: top right;
-    text-align: right !important;
+  white-space: nowrap;
+  transform: translate(-9px,0) rotate(-45deg);
+  text-indent: -100%;
+  transform-origin: top right;
+  text-align: right !important;
+}
+
+.history_graph .legend .legendLabel {
+  color: #73879c;
+  padding-left: .3em;
 }
