@@ -1,4 +1,4 @@
 *.pyc
 settings.cfg
 history.db
-static/webcam/*
+static/webcam/*.jpg

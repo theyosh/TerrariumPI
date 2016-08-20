@@ -197,15 +197,6 @@ function prepare_form_data(form) {
         case 'switches':
         case 'environment':
         case 'webcams':
-          /*
-          if (form_type === 'switches') {
-            re = /switch_(\d+)_(.*)/i;
-          } else if (form_type === 'environment') {
-            re = /(light|sprayer|heater)_(.*)/i;
-          } else if (form_type === 'webcams') {
-            re = /(light|sprayer|heater)_(.*)/i;
-          }
-          */
           console.log('Regex matches: ', matches = re.exec(field_name));
           if ((matches = re.exec(field_name)) !== null) {
             if (matches.index === re.lastIndex) {
@@ -235,11 +226,6 @@ function prepare_form_data(form) {
     if (Object.keys(objectdata).length > 1) {
       formdata[prev_nr] = $.extend(true, {}, objectdata);
     }
-    /*
-    if (form_type === 'sensors' || form_type === 'switches' || form_type === 'environment') {
-      formdata[(form_type == 'switches' ? (previd * 1) - 1 : previd)] = $.extend(true, {}, objectdata);
-    }*/
-
   } catch (error) {
     console.log(error);
     return false;
@@ -398,7 +384,7 @@ function add_notification_message(type, title, message, icon, color) {
   var menu = $('ul#' + type);
 
   if (menu.find('li:first a span.message').text() == message) {
-    // Skip duplica messages
+    // Skip duplicate messages
     return;
   }
 
@@ -406,7 +392,7 @@ function add_notification_message(type, title, message, icon, color) {
     close_notification_message(this);
   });
   notification.append($('<span>').addClass('image').append($('<img>').attr({
-    'src': $('img.profile_img').attr('src'),
+    'src': $('div.profile_pic img').attr('src'),
     'alt': 'Profile image'
   })));
   notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('timestamp', (new Date()).getTime()).text('...')));
