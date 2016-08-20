@@ -49,7 +49,7 @@ class terrariumEngine():
     self.power_switches = self.switch_board.switches
 
     # Load Door part
-    self.door_sensor = terrariumDoor(self.config.get_door_pin(),None)
+    self.door_sensor = terrariumDoor(self.config.get_door_pin(),self.door_status)
 
     # Load Sensors, with ID as index
     self.sensors = {}
@@ -298,14 +298,19 @@ class terrariumEngine():
   # End weather part
 
   # Door part
-  def door_status(self):
-    return self.door_status.get_status()
+  def door_status(self, socket = False):
+    data = self.door_sensor.get_status()
+
+    if socket:
+      self.__send_message({'type':'door_indicator','data': data})
+    else:
+      return data
 
   def is_door_open(self):
-    return self.door_status.is_open()
+    return self.door_sensor.is_open()
 
   def is_door_closed(self):
-    return self.door_status.is_closed()
+    return self.door_sensor.is_closed()
   # End door part
 
 
