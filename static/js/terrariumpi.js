@@ -188,7 +188,7 @@ function prepare_form_data(form) {
     formdata = {};
   }
   try {
-    form.find('input:not([disabled="disabled"]),select:not([disabled="disabled"])').each(function() {
+    form.find('input:visible:not([disabled="disabled"]),select:visible:not([disabled="disabled"])').each(function() {
       var field_name = $(this).attr('name');
       var field_value = $(this).val();
       switch (form_type) {
@@ -205,7 +205,11 @@ function prepare_form_data(form) {
               re.lastIndex++;
             }
             if (matches.length >= 3) {
-              current_nr = matches[2].substr(1) * 1;
+              if (matches[2] === undefined) {
+                current_nr = matches[1];
+              } else {
+                current_nr = matches[2].substr(1) * 1;
+              }
               if (prev_nr != current_nr) {
                 if (Object.keys(objectdata).length > 1) {
                   formdata[prev_nr] = $.extend(true, {}, objectdata);
