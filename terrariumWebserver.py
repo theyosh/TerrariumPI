@@ -89,7 +89,7 @@ class terrariumWebserver():
     return static_file(filename, root='./static/')
 
   def __static_file_gentelella(self,filename):
-    return static_file(filename, root='./gentelella-1.3.0/')
+    return static_file(filename, root='./gentelella/')
 
   def __update_api_call(self,path):
     result = {'ok' : False}

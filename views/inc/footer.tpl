@@ -7,7 +7,7 @@
       <div class="clearfix"></div>
     </footer><!-- /footer content -->
     <!-- gauge.js -->
-    <script src="/gentelella/vendors/bernii/gauge.js/dist/gauge.min.js">
+    <script src="/gentelella/vendors/gauge.js/dist/gauge.min.js">
     </script> <!-- Skycons -->
 
     <script src="/gentelella/vendors/skycons/skycons.js">
@@ -19,15 +19,18 @@
     </script>
     <script src="/gentelella/vendors/Flot/jquery.flot.resize.js">
     </script> <!-- Flot plugins -->
-
+<!--
     <script src="/gentelella/production/js/flot/jquery.flot.orderBars.js">
     </script>
+-->
+<!--
     <script src="/gentelella/production/js/flot/date.js">
     </script>
-    <script src="/gentelella/production/js/flot/jquery.flot.spline.js">
+    -->
+    <script src="/gentelella/vendors/flot-spline/js/jquery.flot.spline.min.js">
     </script> <!-- bootstrap-daterangepicker -->
 
-    <script src="/gentelella/production/js/moment/moment.min.js">
+    <script src="/gentelella/vendors/moment/min/moment-with-locales.min.js">
     </script> <!-- bootstrap-progressbar -->
 
     <script src="/gentelella/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js">
