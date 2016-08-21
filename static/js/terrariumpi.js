@@ -188,7 +188,7 @@ function prepare_form_data(form) {
     formdata = {};
   }
   try {
-    form.find('input:not([disabled="disabled"]),select:not([disabled="disabled"])').each(function() {
+    form.find('div:visible input:not([disabled="disabled"]),div:visible select:not([disabled="disabled"])').each(function() {
       var field_name = $(this).attr('name');
       var field_value = $(this).val();
       switch (form_type) {
