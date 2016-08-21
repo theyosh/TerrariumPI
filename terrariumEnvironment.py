@@ -32,6 +32,8 @@ class terrariumEnvironment():
       self.light['min_hours'] = float(self.light['min_hours'])
       self.light['max_hours'] = float(self.light['max_hours'])
       self.light['power_switches'] = self.light['power_switches'].split(',')
+    else:
+      self.light['enabled'] = False
 
     self.sprayer = config['sprayer']
     if len(self.sprayer) > 0:
@@ -42,6 +44,8 @@ class terrariumEnvironment():
       self.sprayer['power_switches'] = self.sprayer['power_switches'].split(',')
       self.sprayer['sensors'] = self.sprayer['sensors'].split(',')
       self.sprayer['lastaction'] = datetime.datetime.now()
+    else:
+      self.sprayer['enabled'] = False
 
     self.heater = config['heater']
     if len(self.heater) > 0:
@@ -49,6 +53,8 @@ class terrariumEnvironment():
       self.heater['day_enabled'] = True if self.heater['day_enabled'].lower() in ['true','on','1'] else False
       self.heater['power_switches'] = self.heater['power_switches'].split(',')
       self.heater['sensors'] = self.heater['sensors'].split(',')
+    else:
+      self.heater['enabled'] = False
 
   def __set_config(self,part,data):
     for field in data:
@@ -63,7 +69,7 @@ class terrariumEnvironment():
     while True:
       light = self.get_light_state()
 
-      if len(light) > 0 and light['enabled']:
+      if light['enabled']:
         if light['on'] < int(time.time()) < light['off']:
           self.light_on()
         else:
@@ -71,13 +77,13 @@ class terrariumEnvironment():
 
       light = self.get_light_state()
       sprayer = self.get_sprayer_state()
-      if len(sprayer) > 0 and sprayer['enabled']:
+      if sprayer['enabled'] and light['enabled']:
         if self.sprayer['night_enabled'] or light['state'] == 'on':
-          if sprayer['alarm']:
+          if sprayer['alarm'] and self.door_sensor.is_closed():
             self.sprayer_on()
 
       heater = self.get_heater_state()
-      if len(heater) > 0 and heater['enabled']:
+      if heater['enabled'] and light['enabled']:
         if self.heater['day_enabled'] or light['state'] == 'off':
           if heater['current'] < heater['alarm_min']:
             self.heater_on()

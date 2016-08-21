@@ -13,7 +13,7 @@ class terrariumSensor:
     self.sensor = sensor
     self.sensor.useCache(True)
     self.sensor_address = self.sensor.address
-    
+
     self.set_name(name)
     self.set_min(min)
     self.set_max(max)
@@ -66,6 +66,7 @@ class terrariumSensor:
     except ow.exNoController:
       message = '1 Wire file system is not actve / installed on this device!'
       print message
+      pass
 
     return sensors
 

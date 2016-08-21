@@ -412,6 +412,12 @@ class terrariumEngine():
     self.collector.log_switch_data(data)
     self.get_switches(socket=True)
 
+    self.get_power_usage_water_flow(socket=True)
+    self.get_environment(socket=True)
+
+
+
+
   def get_max_switches_config(self):
     return int(self.config.get_system()['max_switches'])
   # End switch part
