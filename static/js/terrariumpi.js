@@ -21,11 +21,14 @@ $(document).ready(function() {
       NProgress.done();
     }
   });
+
   setInterval(function() {
     notification_timestamps();
     updateWebcams();
     $('#system_time').text(moment().format('LLLL'));
   }, 30 * 1000);
+
+  load_page('dashboard.html');
 });
 
 function websocket_init(reconnect) {
@@ -42,15 +45,19 @@ function websocket_init(reconnect) {
     var data = JSON.parse(evt.data);
     console.log(new Date(), data);
     switch (data.type) {
-      case 'dashboard_uptime':
+      case 'uptime':
         update_dashboard_uptime(data.data);
         break;
-      case 'dashboard_power_usage':
-        update_dashboard_power_usage(data.data);
+      case 'power_usage_water_flow':
+        update_dashboard_power_usage(data.data.power);
+        update_dashboard_water_flow(data.data.water);
         break;
+      /*
       case 'dashboard_water_flow':
         update_dashboard_water_flow(data.data);
         break;
+        */
+
       case 'environment':
         $.each(['heater', 'sprayer', 'light'], function(index, value) {
           update_dashboard_environment(value, data.data[value]);
@@ -95,7 +102,11 @@ function websocket_connect() {
 }
 
 function websocket_message(message) {
-  globals.websocket.send(JSON.stringify(message));
+  try {
+    globals.websocket.send(JSON.stringify(message));
+  } catch (error) {
+    console.log('error', error);
+  }
 }
 
 function menu_click(url) {
@@ -724,8 +735,8 @@ function update_switch_history() {
 
 function update_dashboard_history() {
   if ($('#sensor_temperature, #sensor_humidity').length >= 1) {
-    $.getJSON('/api/history/environment', function(data) {
-      $.each(data.environment, function(index, value) {
+    $.getJSON('/api/history/sensors/average', function(data) {
+      $.each(data.sensors, function(index, value) {
         history_graph(index, value);
       });
       clearTimeout(globals.updatetimer);

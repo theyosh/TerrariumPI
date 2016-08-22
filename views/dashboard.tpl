@@ -172,44 +172,9 @@
               </div>
             </div>
             <div class="col-md-9 col-sm-9 col-xs-12 pull-left">
-              <div class="x_panel" id="sensor_temperature">
-                <div class="x_title">
-                  <h2><span aria-hidden="true" class="glyphicon glyphicon-fire"></span> <span class="title">Temperature</span> <small class="data_update">live...</small> <span class="badge bg-red" style="display:none;">warning</span></h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li>
-                      <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li class="dropdown">
-                      <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li>
-                          <a href="#" onclick="menu_click('sensor_settings.html')">Settings</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <div class="col-md-4 col-sm-5 col-xs-12">
-                    <div class="sidebar-widget">
-                      <canvas class="gauge" id="gauge_canvas_temperature"></canvas>
-                      <div class="goal-wrapper">
-                        <span class="gauge-value pull-left" id="gauge_text_temperature">...</span> <span class="gauge-value pull-left">°C</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-8 col-sm-7 col-xs-12">
-                    <div class="history_graph loading" id="history_graph_temperature"></div>
-                  </div>
-                </div>
-              </div>
               <div class="x_panel" id="sensor_humidity">
                 <div class="x_title">
-                  <h2><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> <span class="title">Humidity</span> <small class="data_update">live...</small> <span class="badge bg-red" style="display:none;">warning</span></h2>
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> <span class="title">Average Humidity</span> <small class="data_update">live...</small> <span class="badge bg-red" style="display:none;">warning</span></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -242,33 +207,49 @@
                   </div>
                 </div>
               </div>
+              <div class="x_panel" id="sensor_temperature">
+                <div class="x_title">
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-fire"></span> <span class="title">Average Temperature</span> <small class="data_update">live...</small> <span class="badge bg-red" style="display:none;">warning</span></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                      <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li>
+                          <a href="#" onclick="menu_click('sensor_settings.html')">Settings</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="col-md-4 col-sm-5 col-xs-12">
+                    <div class="sidebar-widget">
+                      <canvas class="gauge" id="gauge_canvas_temperature"></canvas>
+                      <div class="goal-wrapper">
+                        <span class="gauge-value pull-left" id="gauge_text_temperature">...</span> <span class="gauge-value pull-left">°C</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-8 col-sm-7 col-xs-12">
+                    <div class="history_graph loading" id="history_graph_temperature"></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <script type="text/javascript">
           $(document).ready(function() {
             globals.gauges = [];
-            $.getJSON('/api/uptime', function(data) {
-              update_dashboard_uptime(data);
-            });
-            $.getJSON('/api/power_usage', function(data) {
-              update_dashboard_power_usage(data);
-            });
-            $.getJSON('/api/water_usage', function(data) {
-              update_dashboard_water_flow(data);
-            });
-            $.getJSON('/api/total_usage', function(data) {
-              update_dashboard_tile('total_power', data.total_power.toFixed(2));
-              update_dashboard_tile('total_water', data.total_water.toFixed(2));
-            });
-            $.getJSON('/api/environment', function(data) {
-              $.each(data.environment, function(index, value) {
-                if ($('div.environment_' + index).length == 1) {
-                  update_dashboard_environment(index, value);
-                } else {
-                  sensor_gauge(index, value);
-                }
-              });
+            websocket_message({
+              'type': 'showdashboard'
             });
             update_dashboard_history();
           });
