@@ -4,6 +4,7 @@ from io import BytesIO
 import StringIO
 
 from picamera import PiCamera
+import cv2
 from PIL import Image, ImageDraw, ImageFont
 
 from hashlib import md5
@@ -46,6 +47,20 @@ class terrariumWebcam():
         camera.start_preview()
         sleep(2)
         camera.capture(stream, format='png')
+
+    elif self.location.startswith('/dev/video'):
+      camera = cv2.VideoCapture(int(self.location[10:]))
+      camera.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, 1280)
+      camera.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, 720)
+      sleep(2)
+      readok, image = camera.read()
+
+      if readok:
+        png = Image.fromarray(cv2.cvtColor(image,cv2.COLOR_BGR2RGB))
+        stream = StringIO.StringIO()
+        png.save(stream,'JPEG')
+
+      camera.release()
 
     elif self.location.startswith('http://') or self.location.startswith('https://'):
       if '@' in self.location:
