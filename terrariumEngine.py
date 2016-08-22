@@ -27,6 +27,7 @@ class terrariumEngine():
     self.pi_power_wattage = 5
 
     self.switch_board = None #TODO: Fix proper
+    self.environment = None
 
     # Load config
     self.config = terrariumConfig()
@@ -95,7 +96,7 @@ class terrariumEngine():
       uptime = now -today
 
     data['power_wattage'] = (float(uptime) / 3600.0) * float(self.pi_power_wattage)
-    prev_data = self.collector.get_history(['switches','summary'])
+    prev_data = self.collector.get_history(['switches','summary'])['switches']['switches']
 
     for fieldname in prev_data:
       for data_item in prev_data[fieldname]:
@@ -103,11 +104,12 @@ class terrariumEngine():
           data[fieldname] = float(data_item[1])
 
     history_data = self.collector.get_history(['switches'])['switches']
+
     for switchid in history_data:
       if len(history_data[switchid]['state']) == 0:
         continue
 
-      if self.power_switches[switchid].is_on() and history_data[switchid]['state'][len(history_data[switchid]['state'])-1][1]:
+      if self.power_switches[switchid].is_on() and not history_data[switchid]['state'][len(history_data[switchid]['state'])-1][1]:
         # Fake end state
         history_data[switchid]['state'].append([now * 1000 , False])
 
@@ -126,7 +128,7 @@ class terrariumEngine():
       for sensorid in self.sensors:
         # Update the current temperature.
         self.sensors[sensorid].update()
-        # Save new data to database
+        # Save new data to database TODO: UPDATE to get the right fields
         self.collector.log_sensor_data(self.sensors[sensorid])
         # Websocket callback
         self.get_sensors([sensorid],socket=True)
@@ -134,10 +136,10 @@ class terrariumEngine():
         sleep(0.2)
 
       # Get the current average temperatures
-      average_data = self.environment.get_average()
-      for sensortype in average_data:
+      average_data = self.get_sensors(['average'])['sensors']
+      for averagetype in average_data:
         # Save data in database per type
-        self.collector.log_environment_data(sensortype,average_data[sensortype])
+        self.collector.log_summary_sensor_data(averagetype,average_data[averagetype])
 
       # Websocket callback
       self.__send_message({'type':'sensor_gauge','data':average_data})
@@ -194,7 +196,7 @@ class terrariumEngine():
               'load' : os.getloadavg()}
 
     if socket:
-      self.__send_message({'type':'dashboard_uptime','data':data})
+      self.__send_message({'type':'uptime','data':data})
     else:
       return data
 
@@ -206,18 +208,7 @@ class terrariumEngine():
     data['water']['total'] = totaldata['total_water']
 
     if socket:
-      self.__send_message({'type':'dashboard_power_usage','data':data['power']});
-      self.__send_message({'type':'dashboard_water_flow','data':data['water']});
-    else:
-      return data
-
-  def get_total_power_usage_water_flow(self, socket = False):
-    data = self.__calculate_power_usage_water_flow()
-    if socket:
-      self.__send_message({'type':'power_usage_water_flow','data':{
-          'total_power' : data['power_wattage'] / 1000.0,
-          'total_water' : data['water_flow']
-        }})
+      self.__send_message({'type':'power_usage_water_flow','data':data});
     else:
       return data
 
@@ -354,21 +345,38 @@ class terrariumEngine():
 
     else:
       for sensorid in self.sensors:
-        if filter is None or filter == self.sensors[sensorid].get_type():
+        if filter is None or filter == 'average' or filter == self.sensors[sensorid].get_type():
           data.append(self.sensors[sensorid].get_data())
+
+    if 'average' == filter or len(parameters) == 2 and parameters[1] == 'average':
+      average = {}
+      for sensor in data:
+        if sensor['type'] not in average:
+          average[sensor['type']] = {'current' : 0.0, 'alarm_min' : 0.0, 'alarm_max' : 0.0, 'min' : 0.0, 'max':0.0, 'amount' : 0.0}
+
+        average[sensor['type']]['current'] += sensor['current']
+        average[sensor['type']]['alarm_min'] += sensor['alarm_min']
+        average[sensor['type']]['alarm_max'] += sensor['alarm_max']
+        average[sensor['type']]['min'] += sensor['min']
+        average[sensor['type']]['max'] += sensor['max']
+        average[sensor['type']]['amount'] += 1.0
+
+      for averagetype in average:
+        amount = average[averagetype]['amount']
+        del(average[averagetype]['amount'])
+        for field in average[averagetype]:
+          average[averagetype][field] /= amount
+
+        average[averagetype]['alarm'] = not (average[averagetype]['alarm_min'] < average[averagetype]['current'] < average[averagetype]['alarm_max'])
+        average[averagetype]['amount'] = amount
+        average[averagetype]['type'] = averagetype
+
+      data = average
 
     if socket:
       self.__send_message({'type':'sensor_gauge','data':data})
     else:
       return {'sensors' : data}
-
-  def get_average_sensors(self, type = None, socket = False):
-    data = self.environment.get_average()
-
-    if socket:
-      self.__send_message({'type':'dashboard_sensors','data':data})
-    else:
-      return data
   # End sensors part
 
   # Switch part
@@ -411,12 +419,10 @@ class terrariumEngine():
   def toggle_switch(self,data):
     self.collector.log_switch_data(data)
     self.get_switches(socket=True)
-
     self.get_power_usage_water_flow(socket=True)
-    self.get_environment(socket=True)
 
-
-
+    if self.environment is not None:
+      self.get_environment(socket=True)
 
   def get_max_switches_config(self):
     return int(self.config.get_system()['max_switches'])
@@ -499,14 +505,9 @@ class terrariumEngine():
       self.environment.set_heater_config(data['heater'])
 
     update_ok = self.config.save_environment(self.environment.get_config())
-    self.environment.reload_config()
-    return True
-
-  def get_average_temperature(self, socket = False):
-    return self.get_average_sensors('temperature', socket)
-
-  def get_average_humidity(self, socket = False):
-    return self.get_average_sensors('humidity', socket)
+    if update_ok:
+      self.environment.reload_config()
+    return update_ok
   # End Environment part
 
 

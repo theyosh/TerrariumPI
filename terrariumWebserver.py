@@ -128,10 +128,9 @@ class terrariumWebserver():
     elif 'water_usage' == action:
       result = self.__terrariumEngine.get_power_usage_water_flow()['water']
 
-    elif 'total_usage' == action:
-      result = self.__terrariumEngine.get_total_power_usage_water_flow()
-      #result['power_wattage'] /= 1000.0
-      result['total_power'] /= 1000.0
+    #elif 'total_usage' == action:
+    #  result = self.__terrariumEngine.get_total_power_usage_water_flow()
+    #  result['total_power'] /= 1000.0
 
     elif 'history' == action:
       result = self.__terrariumEngine.get_history(parameters)
@@ -162,7 +161,7 @@ class terrariumWebserver():
           socket.send(json.dumps(message))
         except Exception, e:
           # Socket connection is lost, stop looping....
-	  break
+          break
 
         messages.task_done()
 
@@ -174,19 +173,18 @@ class terrariumWebserver():
 
       if message is not None:
         message = json.loads(message)
-        #print message
+        print message
 
         if message['type'] == 'client_init':
           thread.start_new_thread(listen_for_messages, (messages,socket))
           terrariumWebserver.app.terrarium.subscribe(messages)
 
-          # Load/Update actual data after reconnect
-          if message['reconnect']:
-            terrariumWebserver.app.terrarium.get_weather(socket=True)
-            terrariumWebserver.app.terrarium.get_switches(socket=True)
-            terrariumWebserver.app.terrarium.get_power_usage_water_flow(socket=True)
-            terrariumWebserver.app.terrarium.get_total_power_usage_water_flow(socket=True)
-            terrariumWebserver.app.terrarium.get_environment(socket=True)
+        if message['type'] == 'client_init' or message['type'] == 'showdashboard':
+          terrariumWebserver.app.terrarium.door_status(socket=True)
+          terrariumWebserver.app.terrarium.get_uptime(socket=True)
+          terrariumWebserver.app.terrarium.get_power_usage_water_flow(socket=True)
+          terrariumWebserver.app.terrarium.get_environment(socket=True)
+          terrariumWebserver.app.terrarium.get_sensors(['average'],socket=True)
 
         elif message['type'] == 'toggle_switch':
           if 'toggle' == message['data']['state']:

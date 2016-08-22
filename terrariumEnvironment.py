@@ -68,7 +68,6 @@ class terrariumEnvironment():
   def __engine_loop(self):
     while True:
       light = self.get_light_state()
-
       if light['enabled']:
         if light['on'] < int(time.time()) < light['off']:
           self.light_on()
@@ -158,7 +157,7 @@ class terrariumEnvironment():
   def get_light_state(self):
     now = datetime.datetime.now()
     if len(self.light) == 0:
-      return {}
+      return {'enabled' : False}
 
     data = {'on' : 0, 'off' : 0, 'modus' : self.light['modus'], 'enabled' : self.light['enabled']}
     if 'weather' == data['modus']:
@@ -224,15 +223,14 @@ class terrariumEnvironment():
 
   def get_sprayer_state(self):
     if len(self.sprayer) == 0:
-      return {}
+      return {'enabled' : False}
 
-    amount = float(len(self.sprayer['sensors']))
-    data = {'current' : sum(self.sensors[sensor].get_current() for sensor in self.sprayer['sensors']) / amount,
-            'alarm_min' : sum(self.sensors[sensor].get_alarm_min() for sensor in self.sprayer['sensors']) / amount,
-            'enabled' : self.sprayer['enabled']}
+    data = self.get_average_humidity()
+    data['night_enabled'] = self.sprayer['night_enabled']
+    data['enabled'] = self.sprayer['enabled']
 
     light = self.get_light_state()
-    data['alarm'] = (self.sprayer['night_enabled'] or (light['on'] < int(time.time()) < light['off'])) and data['current'] < data['alarm_min']
+    data['alarm'] = (data['night_enabled'] or (light['on'] < int(time.time()) < light['off'])) and data['current'] < data['alarm_min']
     data['state'] = 'on' if self.is_sprayer_on() else 'off'
     return data
 
@@ -256,34 +254,40 @@ class terrariumEnvironment():
 
   def get_heater_state(self):
     if len(self.heater) == 0:
-      return {}
+      return {'enabled' : False}
 
-    amount = float(len(self.heater['sensors']))
-    data = {'current' : sum(self.sensors[sensor].get_current() for sensor in self.heater['sensors']) / amount,
-          'alarm_min' : sum(self.sensors[sensor].get_alarm_min() for sensor in self.heater['sensors']) / amount,
-          'alarm_max' : sum(self.sensors[sensor].get_alarm_max() for sensor in self.heater['sensors']) / amount,
-          'modus' : self.heater['modus'],
-          'day_enabled': self.heater['day_enabled'],
-          'enabled' : self.heater['enabled']}
+    data = self.get_average_temperature()
+    data['modus'] = self.heater['modus']
+    data['day_enabled'] = self.heater['day_enabled']
+    data['enabled'] = self.heater['enabled']
 
     light = self.get_light_state()
-    data['alarm'] = (self.heater['day_enabled'] or not (light['on'] < int(time.time()) < light['off'])) and not (data['alarm_max'] >= data['current'] >= data['alarm_min'])
+    data['alarm'] = (data['day_enabled'] or not (light['on'] < int(time.time()) < light['off'])) and not (data['alarm_max'] >= data['current'] >= data['alarm_min'])
     data['state'] = 'on' if self.is_heater_on() else 'off'
     return data
 
   def get_average_temperature(self):
-    return self.get_average('temperature')
+    data = self.get_average()
+    if 'temperature' in data:
+      return data['temperature']
+
+    return None
 
   def get_average_humidity(self):
-    return self.get_average('humidity')
+    data = self.get_average()
+    if 'humidity' in data:
+      return data['humidity']
 
-  def get_average(self, type = None):
-    average = {'temperature' : {'current': float(0), 'alarm_min' : float(0), 'alarm_max' : float(0), 'min' : float(0), 'max' : float(0), 'amount' : float(0), 'alarm' : False},
-               'humidity'    : {'current': float(0), 'alarm_min' : float(0), 'alarm_max' : float(0), 'min' : float(0), 'max' : float(0), 'amount' : float(0), 'alarm' : False}}
+    return None
 
-    for sensorid in self.sensors:
+  def get_average(self):
+    average = {}
+    for sensorid in self.sprayer['sensors'] + self.heater['sensors']:
       sensor = self.sensors[sensorid]
       sensor_type = sensor.get_type()
+      if sensor_type not in average:
+        average[sensor_type] = {'current' : 0.0, 'alarm_min' : 0.0, 'alarm_max' : 0.0, 'min' : 0.0, 'max':0.0, 'amount' : 0.0}
+
       average[sensor_type]['current'] += sensor.get_current()
       average[sensor_type]['alarm_min'] += sensor.get_alarm_min()
       average[sensor_type]['alarm_max'] += sensor.get_alarm_max()
@@ -291,17 +295,14 @@ class terrariumEnvironment():
       average[sensor_type]['max'] += sensor.get_max()
       average[sensor_type]['amount'] += 1
 
-    for sensortype in average:
-      average[sensortype]['current'] /= average[sensortype]['amount']
-      average[sensortype]['alarm_min'] /= average[sensortype]['amount']
-      average[sensortype]['alarm_max'] /= average[sensortype]['amount']
-      average[sensortype]['min'] /= average[sensortype]['amount']
-      average[sensortype]['max'] /= average[sensortype]['amount']
-      average[sensortype]['alarm'] = not average[sensortype]['alarm_min'] <  average[sensortype]['current'] < average[sensortype]['alarm_max']
+    for averagetype in average:
+      amount = average[averagetype]['amount']
+      del(average[averagetype]['amount'])
+      for field in average[averagetype]:
+        average[averagetype][field] /= amount
 
-      del(average[sensortype]['amount'])
-
-    if type is not None and type in average:
-      return { type : average[type] }
+      average[averagetype]['alarm'] = not (average[averagetype]['alarm_min'] < average[averagetype]['current'] < average[averagetype]['alarm_max'])
+      average[averagetype]['amount'] = amount
+      average[averagetype]['type'] = averagetype
 
     return average

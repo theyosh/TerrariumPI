@@ -39,7 +39,6 @@ class terrariumSwitchboard():
       if switch_numbers[nr] is not None:
         power_switch_config = switch_config[switch_numbers[nr]]
 
-
       power_switch = terrariumSwitch(self.device,
                                         self.device_type,
                                         power_switch_config['nr'] if 'nr' in power_switch_config else nr+1,
@@ -133,6 +132,7 @@ class terrariumSwitch():
         self.state = state
         self.callback(self.get_data())
       except Exception, err:
+        print 'Switch set state error'
         print err
 #          self.__log.logLine(self.__log.ERROR,'Error switching ' + ('on' if 'on' == state else 'off') + ' switch: ' + str(self.getName()) + ' (' + str(self.getID()) + ')!: ' + str(err))
         pass

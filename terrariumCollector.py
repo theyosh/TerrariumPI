@@ -70,7 +70,7 @@ class terrariumCollector():
     del(sensor_data['name'])
     self.__log_data(sensor.get_type(),sensor.get_id(),'rawdata',sensor_data)
 
-  def log_environment_data(self, type, averagedata):
+  def log_summary_sensor_data(self, type, averagedata):
     self.__log_data(type,None,'summary',averagedata)
 
   def log_power_usage_water_flow(self,data):
@@ -122,19 +122,30 @@ class terrariumCollector():
       history_fields = { 'power_wattage' : [], 'water_flow' : [] , 'state' : []}
       datatypes = [history_type]
 
+      if 'summary' in parameters:
+        field = 'summary'
+        del(parameters[parameters.index('summary')])
+        del(history_fields['state'])
+        history_fields['total_power'] = []
+        history_fields['total_water'] = []
+
     elif history_type == 'sensors':
       field = 'rawdata'
       history_fields = { 'current' : [], 'alarm_min' : [], 'alarm_max' : [] , 'min' : [], 'max' : []}
       datatypes = ['temperature','humidity']
 
-      if len(parameters) == 1 and parameters[0] is not None and parameters[0] in ['temperature','humidity']:
+      if 'average' in parameters:
+        field = 'summary'
+        del(parameters[parameters.index('average')])
+
+      if len(parameters) >= 1 and parameters[0] is not None and parameters[0] in ['temperature','humidity']:
         datatypes = [parameters[0]]
         del(parameters[0])
 
-    elif history_type == 'environment':
+    '''elif history_type == 'environment':
       field = 'summary'
       history_fields = { 'current' : [], 'alarm_min' : [], 'alarm_max' : [] , 'min' : [], 'max' : []}
-      datatypes = ['temperature','humidity']
+      datatypes = ['temperature','humidity']'''
 
     history = {}
     for datatype in datatypes:
