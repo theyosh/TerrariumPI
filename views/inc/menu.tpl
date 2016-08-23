@@ -124,7 +124,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="" role="presentation">
                 <div aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown">
-                  <span aria-hidden="true" class="glyphicon glyphicon-time"></span> <span id="system_time">date/time</span>
+                  <i id="time_isday" class="fa fa-clock-o"></i> <span id="system_time">date/time</span>
                 </div>
               </li>
               <li class="dropdown" role="presentation">

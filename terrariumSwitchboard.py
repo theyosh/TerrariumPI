@@ -143,6 +143,7 @@ class terrariumSwitch():
 #    else:
 #        return false
 #      terrarium_log.warn('No action made. State of switch %s(%s) is already in the requested state: %s', self.getName(),self.getID(),('on' if self.getState() else 'off'))
+
     return self.get_state() == state
 
   def get_state(self,force = False):

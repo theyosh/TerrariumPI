@@ -179,7 +179,7 @@ class terrariumWebserver():
           thread.start_new_thread(listen_for_messages, (messages,socket))
           terrariumWebserver.app.terrarium.subscribe(messages)
 
-        if message['type'] == 'client_init' or message['type'] == 'showdashboard':
+        if message['type'] == 'client_init' or message['type'] == 'show_dashboard':
           terrariumWebserver.app.terrarium.door_status(socket=True)
           terrariumWebserver.app.terrarium.get_uptime(socket=True)
           terrariumWebserver.app.terrarium.get_power_usage_water_flow(socket=True)

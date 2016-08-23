@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from time import sleep, time
+from time import time
 from io import BytesIO
 import StringIO
 
@@ -13,6 +13,9 @@ from datetime import datetime
 
 import urllib2
 import base64
+
+from gevent import monkey, sleep
+monkey.patch_all()
 
 class terrariumWebcam():
 

@@ -114,6 +114,7 @@ class terrariumCollector():
       history_fields = {'load' : {'load1' : [], 'load5' : [], 'load15' : []},
                         'uptime' : [],
                         'temperature' : [],
+                        'cores' : [],
                         'memory' : {'total' : [], 'used' : [], 'free' : []} }
       datatypes = [history_type]
 
@@ -124,6 +125,7 @@ class terrariumCollector():
 
       if 'summary' in parameters:
         field = 'summary'
+        summary_name = 'summary'
         del(parameters[parameters.index('summary')])
         del(history_fields['state'])
         history_fields['total_power'] = []
@@ -136,6 +138,7 @@ class terrariumCollector():
 
       if 'average' in parameters:
         field = 'summary'
+        summary_name = 'average'
         del(parameters[parameters.index('average')])
 
       if len(parameters) >= 1 and parameters[0] is not None and parameters[0] in ['temperature','humidity']:
@@ -163,8 +166,7 @@ class terrariumCollector():
           dbdatatmp = json.loads(row[field])
 
           if field == 'summary':
-            dbdata = { datatype : dbdatatmp }
-            datatype = history_type
+            dbdata = { summary_name : dbdatatmp }
           else:
             dbdata = dbdatatmp
 
@@ -189,9 +191,9 @@ class terrariumCollector():
               if starttime > int(timestamp) > stoptime:
                 timedata = dbdata[dataid][str(timestamp)]
 
-                loopfields = history_fields
+                loopfields = copy.deepcopy(history_fields)
                 if dataid in history_fields and type(history_fields[dataid]) is dict:
-                  loopfields = history_fields[dataid]
+                  loopfields = copy.deepcopy(history_fields[dataid])
                 elif dataid in history_fields:
                   loopfields = { dataid : [] }
                   timedata = {dataid:timedata}

@@ -96,7 +96,7 @@ class terrariumEngine():
       uptime = now -today
 
     data['power_wattage'] = (float(uptime) / 3600.0) * float(self.pi_power_wattage)
-    prev_data = self.collector.get_history(['switches','summary'])['switches']['switches']
+    prev_data = self.collector.get_history(['switches','summary'])['switches']['summary']
 
     for fieldname in prev_data:
       for data_item in prev_data[fieldname]:
@@ -106,10 +106,10 @@ class terrariumEngine():
     history_data = self.collector.get_history(['switches'])['switches']
 
     for switchid in history_data:
-      if len(history_data[switchid]['state']) == 0:
+      if switchid not in history_data or len(history_data[switchid]['state']) == 0:
         continue
 
-      if self.power_switches[switchid].is_on() and not history_data[switchid]['state'][len(history_data[switchid]['state'])-1][1]:
+      if switchid in self.power_switches and self.power_switches[switchid].is_on() and not history_data[switchid]['state'][len(history_data[switchid]['state'])-1][1]:
         # Fake end state
         history_data[switchid]['state'].append([now * 1000 , False])
 
@@ -187,13 +187,16 @@ class terrariumEngine():
                       'load5' : uptime['load'][1],
                       'load15' : uptime['load'][2]},
             'uptime' : uptime['uptime'],
+            'cores' : psutil.cpu_count(),
             'temperature' : cpu_temp}
 
     self.collector.log_system_data(data)
 
   def get_uptime(self, socket = False):
     data = {'uptime' : uptime.uptime(),
-              'load' : os.getloadavg()}
+            'timestamp' : int(time.time()),
+            'day' : self.weather.is_day(),
+            'load' : os.getloadavg()}
 
     if socket:
       self.__send_message({'type':'uptime','data':data})

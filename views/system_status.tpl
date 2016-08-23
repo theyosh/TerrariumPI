@@ -178,12 +178,15 @@
                     gauge_data.alarm_max = gauge_data.max * 0.9;
                     break;
                 }
-                if (key != 'uptime') {
+                if (key != 'uptime' && key !== 'cores') {
                   gauge_data.alarm = gauge_data.current < gauge_data.alarm_min || gauge_data.current > gauge_data.alarm_max
                   sensor_gauge('system_' + key, gauge_data);
                 }
 
-                history_graph('system_' + key,data.system[key],'system_' + key);
+                if (key !== 'cores') {
+
+                  history_graph('system_' + key,data.system[key],'system_' + key);
+                }
               });
             });
           });

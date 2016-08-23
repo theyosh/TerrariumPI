@@ -249,7 +249,7 @@
           $(document).ready(function() {
             globals.gauges = [];
             websocket_message({
-              'type': 'showdashboard'
+              'type': 'show_dashboard'
             });
             update_dashboard_history();
           });
