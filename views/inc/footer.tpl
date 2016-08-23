@@ -22,8 +22,12 @@
     </script>
     <script src="/gentelella/vendors/Flot/jquery.flot.resize.js">
     </script>
+    <!--
     <script src="/gentelella/vendors/flot-spline/js/jquery.flot.spline.min.js">
     </script>
+    -->
+    <script src="/gentelella/vendors/flot.curvedlines/curvedLines.js"></script>
+
 
     <!-- Momentjs -->
     <script src="/gentelella/vendors/moment/min/moment-with-locales.min.js">

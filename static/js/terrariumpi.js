@@ -22,13 +22,17 @@ $(document).ready(function() {
     }
   });
 
+  $("<div id='tooltip'><span title='blaat' id='tooltiptext' data-toggle='tooltip'>&nbsp;&nbsp;&nbsp;</span></div>").css({
+      position: "absolute",
+	}).appendTo("body");
+
+  load_page('dashboard.html');
+
   setInterval(function() {
     notification_timestamps();
     updateWebcams();
     $('#system_time').text(moment().format('LLLL'));
   }, 30 * 1000);
-
-  load_page('dashboard.html');
 });
 
 function websocket_init(reconnect) {
@@ -52,11 +56,6 @@ function websocket_init(reconnect) {
         update_dashboard_power_usage(data.data.power);
         update_dashboard_water_flow(data.data.water);
         break;
-      /*
-      case 'dashboard_water_flow':
-        update_dashboard_water_flow(data.data);
-        break;
-        */
 
       case 'environment':
         $.each(['heater', 'sprayer', 'light'], function(index, value) {
@@ -497,7 +496,8 @@ function reload_reload_theme() {
   load_panel_tool_box();
   // Tooltip
   $('[data-toggle="tooltip"]').tooltip({
-    container: 'body'
+    container: 'body',
+    html: true
   });
   process_form();
 }
@@ -553,9 +553,74 @@ function history_graph(name, data, type) {
     type = 'temperature';
   }
   var graph_data = [];
-  var show_splines = true;
-  var fill = false;
-  var show_lines = false;
+  var graph_options = {
+    tootip: true,
+    series: {
+      curvedLines: {
+        apply: true,
+        active: true,
+        monotonicFit: true
+      },
+      shadowSize: 2
+    },
+    grid: {
+      verticalLines: true,
+      hoverable: true,
+      clickable: false,
+      tickColor: "#d5d5d5",
+      borderWidth: 1,
+      color: '#fff'
+    },
+    colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)", "rgba(3, 88, 106, 0.38)"],
+    xaxis: {
+      tickColor: "rgba(51, 51, 51, 0.06)",
+      mode: "time",
+      timezone: "browser",
+      tickSize: [60, "minute"],
+      //tickLength: 10,
+      axisLabel: "Date",
+      axisLabelUseCanvas: true,
+      axisLabelFontSizePixels: 12,
+      axisLabelFontFamily: 'Verdana, Arial',
+      axisLabelPadding: 0,
+      //transform: function (v) { return -v; },
+      //inverseTransform: function (v) { return -v; }
+    },
+    yaxis: {
+      ticks: 8,
+      tickColor: "rgba(51, 51, 51, 0.06)",
+      tickDecimals: 1,
+      tickFormatter: function(val, axis) {
+        switch(type) {
+          case 'system_memory':
+              val = (val / (1024 * 1024)).toFixed(axis.tickDecimals) + ' MB';
+            break;
+
+          case 'system_uptime':
+              val = moment.duration(val * 1000).humanize();
+            break;
+
+          case 'weather':
+            val = val.toFixed(axis.tickDecimals) + ' °C';
+            break;
+
+          case 'humidity':
+            val = val.toFixed(axis.tickDecimals) + ' %';
+            break;
+
+          case 'switch':
+            val = val.toFixed(axis.tickDecimals) + ' W';
+            break;
+
+          default:
+            val = val.toFixed(axis.tickDecimals) + (type.indexOf('temperature') !== -1 ? ' °C' : ' %');
+            break;
+        }
+        return val;
+      }
+    }
+  };
+
   switch (type) {
     case 'temperature':
     case 'humidity':
@@ -578,12 +643,18 @@ function history_graph(name, data, type) {
       }];
       break;
     case 'system_uptime':
+      delete(graph_options.series.curvedLines);
+      graph_options.series.lines = {
+        show: true,
+        lineWidth: 2,
+        fill: false
+      };
+
       graph_data = [{
         label: 'Uptime',
         data: data
       }];
-      show_splines = false;
-      show_lines = true;
+
       $('div.row.uptime .x_title small').text(moment.duration(data[data.length-1][1] * 1000).humanize());
       break;
     case 'system_load':
@@ -591,26 +662,33 @@ function history_graph(name, data, type) {
         label: 'Load',
         data: data.load1
       }, {
-        label: 'Load5',
+        label: 'Load 5',
         data: data.load5
       }, {
-        label: 'Load15',
+        label: 'Load 15',
         data: data.load15
       }];
       break;
     case 'system_memory':
       graph_data = [{
-        label: 'Used',
+        label: 'Used memory',
         data: data.used
       }, {
-        label: 'Free',
+        label: 'Free memory',
         data: data.free
       }, {
-        label: 'Total',
+        label: 'Total memory',
         data: data.total
       }];
       break;
     case 'switch':
+      delete(graph_options.series.curvedLines);
+      graph_options.series.lines = {
+        show: true,
+        lineWidth: 2,
+        fill: true
+      };
+
       graph_data = [data.power_wattage, data.water_flow];
       graph_data = [{
         label: 'Power usage',
@@ -619,9 +697,6 @@ function history_graph(name, data, type) {
         label: 'Water flow',
         data: data.water_flow
       }];
-      show_splines = false;
-      show_lines = true;
-      fill = true;
       break;
   }
   var tickSize = 60;
@@ -635,68 +710,17 @@ function history_graph(name, data, type) {
   } else if (total_data_duration > 24) {
     tickSize = 120;
   }
+  graph_options.xaxis.tickSize[0] = tickSize;
+
   if ($('#history_graph_' + name).length == 1) {
     $('#history_graph_' + name).html('').removeClass('loading');
-    $.plot($('#history_graph_' + name), graph_data, {
-      series: {
-        splines: {
-          show: show_splines,
-          tension: 0.4,
-          lineWidth: 2,
-          fill: fill
-        },
-        lines: {
-          show: show_lines,
-          lineWidth: 2,
-          fill: fill
-        },
-        shadowSize: 2
-      },
-      grid: {
-        verticalLines: true,
-        hoverable: true,
-        clickable: true,
-        tickColor: "#d5d5d5",
-        borderWidth: 1,
-        color: '#fff'
-      },
-      colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)", "rgba(3, 88, 106, 0.38)"],
-      xaxis: {
-        tickColor: "rgba(51, 51, 51, 0.06)",
-        mode: "time",
-        timezone: "browser",
-        tickSize: [tickSize, "minute"],
-        //tickLength: 10,
-        axisLabel: "Date",
-        axisLabelUseCanvas: true,
-        axisLabelFontSizePixels: 12,
-        axisLabelFontFamily: 'Verdana, Arial',
-        axisLabelPadding: 0,
-        //transform: function (v) { return -v; },
-        //inverseTransform: function (v) { return -v; }
-      },
-      yaxis: {
-        ticks: 8,
-        tickColor: "rgba(51, 51, 51, 0.06)",
-        tickFormatter: function(val, axis) {
-          switch(type) {
-            case 'system_memory':
-                val = (val / (1024 * 1024)).toFixed(1);
-              break;
+    $.plot($('#history_graph_' + name), graph_data, graph_options);
 
-            case 'system_uptime':
-                val = moment.duration(val * 1000).humanize();
-              break;
-
-            default:
-              val = val.toFixed(1);
-              break;
-
-          }
-          return val;
-        }
-      },
-      tooltip: true
+    $('#history_graph_' + name).bind('plothover', function (event, pos, item) {
+      if (item) {
+        $('#tooltip').css({top: item.pageY-5, left: item.pageX-5});
+        $('#tooltip span').attr('data-original-title',moment(item.datapoint[0]).format('LLLL') + '<br />' + item.series.label + ' ' + item.series.yaxis.tickFormatter(item.datapoint[1],item.series.yaxis));
+      }
     });
   }
 }
@@ -759,7 +783,7 @@ function update_dashboard_history() {
   if ($('#sensor_temperature, #sensor_humidity').length >= 1) {
     $.getJSON('/api/history/sensors/average', function(data) {
       $.each(data, function(type, value) {
-        history_graph(type, value.average);
+        history_graph(type, value.average, type);
       });
       clearTimeout(globals.updatetimer);
       globals.updatetimer = setTimeout(function() {
@@ -789,7 +813,7 @@ function update_sensor_history(type) {
   if ($('div.row.sensor').length >= 1) {
     $.getJSON('/api/history/sensors/' + type, function(data) {
       $.each(data[type], function(index, sensor) {
-        history_graph(index, sensor);
+        history_graph(index, sensor, type);
       });
       clearTimeout(globals['updatetimer']);
       globals['updatetimer'] = setTimeout(function() {

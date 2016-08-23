@@ -160,3 +160,11 @@ canvas.gauge {
   color: #73879c;
   padding-left: .3em;
 }
+
+.tooltip .tooltip-inner {
+  white-space: nowrap;
+}
+
+#tooltip span {
+  cursor: default;
+}

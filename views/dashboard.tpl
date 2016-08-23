@@ -198,7 +198,7 @@
                     <div class="sidebar-widget">
                       <canvas class="gauge" id="gauge_canvas_humidity"></canvas>
                       <div class="goal-wrapper">
-                        <span class="gauge-value pull-left" id="gauge_text_humidity">...</span> <span class="gauge-value pull-left">°C</span>
+                        <span class="gauge-value pull-left" id="gauge_text_humidity">...</span> <span class="gauge-value pull-left">%</span>
                       </div>
                     </div>
                   </div>

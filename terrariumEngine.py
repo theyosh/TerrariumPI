@@ -171,8 +171,8 @@ class terrariumEngine():
     for queue in self.subscribed_queues:
       queue.put(message)
 
-  def __authenticate(self,username, password):
-    return password and username in self.authentication and self.authentication[username] == password
+  def authenticate(self,username, password):
+    return password and (username in self.authentication) and self.authentication[username] == password
 
   def set_authentication(self, username, password):
     config = self.config.get_system()
@@ -201,7 +201,7 @@ class terrariumEngine():
             'temperature' : cpu_temp}
 
     if socket:
-      gauge_data = {'system_load'        : {'current' : data['load']['load1'] * 100, 'alarm_min' : 30, 'alarm_max': 80, 'min' : 0, 'max': 100},
+      gauge_data = {'system_load'        : {'current' : data['load']['load1'] * 100, 'alarm_min' : 0, 'alarm_max': 80, 'min' : 0, 'max': 100},
                     'system_temperature' : {'current' : data['temperature'], 'alarm_min' : 30, 'alarm_max': 60, 'min' : 0, 'max': 80},
                     'system_memory'      : {'current' : data['memory']['used'] / (1024 * 1024), 'alarm_min' : data['memory']['total'] / (1024 * 1024) * 0.1, 'alarm_max': data['memory']['total'] / (1024 * 1024) * 0.9, 'min' : 0, 'max': data['memory']['total'] / (1024 * 1024)}}
 

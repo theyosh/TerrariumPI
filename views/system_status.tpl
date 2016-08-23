@@ -162,7 +162,7 @@
                     case 'load':
                       gauge_data.current = value['load1'] * 100;
                       gauge_data.alarm_max = 80;
-                      gauge_data.alarm_min = 30;
+                      gauge_data.alarm_min = 0;
                       gauge_data.max = 100;
                       break;
 

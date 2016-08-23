@@ -44,7 +44,7 @@ class terrariumWebserver():
     self.__routes()
 
   def __authenticate(self, user, password):
-    return self.__terrariumEngine.__authenticate(user,password)
+    return self.__terrariumEngine.authenticate(user,password)
 
   def __routes(self):
     self.__app.route('/', method="GET", callback=self.__render_page)
@@ -104,10 +104,6 @@ class terrariumWebserver():
     result = {'ok' : False}
     postdata = json.loads(request.body.getvalue())
     result['ok'] = self.__terrariumEngine.set_config(path,postdata)
-
-    if result['ok'] and path == 'system':
-      self.update_authentication(postdata['admin'],postdata['password'])
-
     return result
 
   def __get_api_call(self,path):
