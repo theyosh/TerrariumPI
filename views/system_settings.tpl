@@ -16,37 +16,49 @@
                   <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="host">IP or hostname <span class="required">*</span></label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
-                      <input class="form-control" id="location" name="host" required="required" type="text">
+                      <input class="form-control" name="host" required="required" type="text">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="port">Port number <span class="required">*</span></label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
-                      <input class="form-control" id="location" name="port" required="required" type="text">
+                      <input class="form-control" name="port" required="required" type="text">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="admin">Admin name <span class="required">*</span></label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                      <input class="form-control" name="admin" required="required" type="text">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="port">Admin password <span class="required">*</span></label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                      <input class="form-control" name="password" required="required" type="password">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="power_usage">Pi power usage in W <span class="required">*</span></label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
-                      <input class="form-control" id="location" name="power_usage" required="required" type="text">
+                      <input class="form-control" name="power_usage" required="required" type="text">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="gpio_door_pin">Door GPIO pin <span class="required">*</span></label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
-                      <input class="form-control" id="location" name="gpio_door_pin" required="required" type="text">
+                      <input class="form-control" name="gpio_door_pin" required="required" type="text">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="1wire_port">1-Wire / OWFS port <span class="required">*</span></label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
-                      <input class="form-control" id="location" name="1wire_port" required="required" type="text">
+                      <input class="form-control" name="1wire_port" required="required" type="text">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="loglevel">Loglevel <span class="required">*</span></label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
-                      <input class="form-control" id="location" name="loglevel" required="required" type="text" value="3">
+                      <input class="form-control" name="loglevel" required="required" type="text" value="3">
                     </div>
                   </div>
                   <div class="ln_solid"></div>

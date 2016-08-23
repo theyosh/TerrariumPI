@@ -31,6 +31,7 @@ class terrariumEngine():
 
     # Load config
     self.config = terrariumConfig()
+    self.set_authentication(self.config.get_admin(),self.config.get_password())
 
     # Load data collector for historical data
     self.collector = terrariumCollector()
@@ -168,6 +169,13 @@ class terrariumEngine():
     for queue in self.subscribed_queues:
       queue.put(message)
 
+  def __authenticate(self,username, password):
+    return password and username in self.authentication and self.authentication[username] == password
+
+  def set_authentication(self, username, password):
+    config = self.config.get_system()
+    self.authentication = { username : password }
+
   def subscribe(self,queue):
     self.subscribed_queues.append(queue)
     self.__send_message({'type':'dashboard_online', 'data':True})
@@ -260,7 +268,8 @@ class terrariumEngine():
       if update_ok:
         # Update config settings
         self.pi_power_wattage = float(self.config.get_pi_power_wattage())
-        #self.door_sensor.set_gpio_pin(self.config.get_door_pin())
+        self.door_sensor.set_gpio_pin(self.config.get_door_pin())
+        self.set_authentication(self.config.get_admin(),self.config.get_password())
 
     return update_ok
 

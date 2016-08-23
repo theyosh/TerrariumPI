@@ -56,6 +56,14 @@ class terrariumConfig:
     config = self.get_system()
     return float(config['power_usage'])
 
+  def get_admin(self):
+    config = self.get_system()
+    return config['admin']
+
+  def get_password(self):
+    config = self.get_system()
+    return config['password']
+
   # Environment functions
   def save_environment(self,data):
     config = {}

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from bottle import Bottle, request, abort, static_file, template, error, response
+from bottle import Bottle, request, abort, static_file, template, error, response, auth_basic
 from bottle.ext.websocket import GeventWebSocketServer
 from bottle.ext.websocket import websocket
 from Queue import Queue
@@ -38,9 +38,13 @@ class terrariumWebserver():
     self.__terrariumEngine = terrariumEngine
     self.__app = terrariumWebserver.app
     self.__config = terrariumEngine.get_config('system')
+
     terrariumWebserver.app.terrarium = self.__terrariumEngine
 
     self.__routes()
+
+  def update_authentication(self, user, password):
+    self.__authentication = { user : password,}
 
   def __routes(self):
     self.__app.route('/', method="GET", callback=self.__render_page)
@@ -49,7 +53,7 @@ class terrariumWebserver():
     self.__app.route('/static/<filename:path>', method="GET", callback=self.__static_file)
     self.__app.route('/gentelella/<filename:path>', method="GET", callback=self.__static_file_gentelella)
 
-    self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|environment)>', method=['PUT','POST','DELETE'], callback=self.__update_api_call)
+    self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|environment)>', method=['PUT','POST','DELETE'], callback=self.__update_api_call, apply=auth_basic(self.__terrariumEngine.__authenticate,'TerrarumPI Authentication','Authenticate to make any changes'))
     self.__app.route('/api/<path:path>', method=['GET'], callback=self.__get_api_call)
 
   def __template_variables(self, template):
@@ -95,6 +99,10 @@ class terrariumWebserver():
     result = {'ok' : False}
     postdata = json.loads(request.body.getvalue())
     result['ok'] = self.__terrariumEngine.set_config(path,postdata)
+
+    if result['ok'] and path == 'system':
+      self.update_authentication(postdata['admin'],postdata['password'])
+
     return result
 
   def __get_api_call(self,path):
