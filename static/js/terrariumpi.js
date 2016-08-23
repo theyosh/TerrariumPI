@@ -264,6 +264,8 @@ function update_dashboard_tile(tile, text) {
 
 function update_dashboard_uptime(data) {
   update_dashboard_tile('uptime', format_uptime(data.uptime));
+  $('#system_time').text(moment(data.timestamp * 1000).format('LLLL'));
+  $('#time_isday').removeClass('fa-clock-o fa-sun-o fa-moon-o').addClass((data.day ? 'fa-sun-o' : 'fa-moon-o'));
   $("#uptime .progress-bar-success").css('height', (data.load[0] * 100) + '%');
   $("#uptime .progress-bar-warning").css('height', (data.load[1] * 100) + '%');
   $("#uptime .progress-bar-danger").css('height', (data.load[2] * 100) + '%');
@@ -736,8 +738,8 @@ function update_switch_history() {
 function update_dashboard_history() {
   if ($('#sensor_temperature, #sensor_humidity').length >= 1) {
     $.getJSON('/api/history/sensors/average', function(data) {
-      $.each(data.sensors, function(index, value) {
-        history_graph(index, value);
+      $.each(data, function(type, value) {
+        history_graph(type, value.average);
       });
       clearTimeout(globals.updatetimer);
       globals.updatetimer = setTimeout(function() {
