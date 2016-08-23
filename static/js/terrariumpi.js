@@ -582,6 +582,9 @@ function history_graph(name, data, type) {
         label: 'Uptime',
         data: data
       }];
+      show_splines = false;
+      show_lines = true;
+      $('div.row.uptime .x_title small').text(moment.duration(data[data.length-1][1] * 1000).humanize());
       break;
     case 'system_load':
       graph_data = [{
@@ -675,6 +678,23 @@ function history_graph(name, data, type) {
       yaxis: {
         ticks: 8,
         tickColor: "rgba(51, 51, 51, 0.06)",
+        tickFormatter: function(val, axis) {
+          switch(type) {
+            case 'system_memory':
+                val = (val / (1024 * 1024)).toFixed(1);
+              break;
+
+            case 'system_uptime':
+                val = moment.duration(val * 1000).humanize();
+              break;
+
+            default:
+              val = val.toFixed(1);
+              break;
+
+          }
+          return val;
+        }
       },
       tooltip: true
     });
@@ -749,19 +769,20 @@ function update_dashboard_history() {
   }
 }
 
-function update_webcam_preview(name, url) {
-  $('img#webcam_' + name + '_preview').attr('src', url);
-}
-
-function toggleSwitch(id) {
-  id = id.split('_')[1];
-  websocket_message({
-    'type': 'toggle_switch',
-    'data': {
-      'id': id,
-      'state': 'toggle'
-    }
-  });
+function update_system_history() {
+  if ($('div.row.load').length >= 1) {
+    $.getJSON('/api/history/system', function(data) {
+      $.each(data.system, function(type, value) {
+        if (type != 'cores'){
+          history_graph('system_' + type, value, 'system_' + type);
+        }
+      });
+      clearTimeout(globals.updatetimer);
+      globals.updatetimer = setTimeout(function() {
+        update_system_history();
+      }, 1 * 60 * 1000)
+    });
+  }
 }
 
 function update_sensor_history(type) {
@@ -786,6 +807,21 @@ function updateWebcams() {
       });
     });
   }
+}
+
+function update_webcam_preview(name, url) {
+  $('img#webcam_' + name + '_preview').attr('src', url);
+}
+
+function toggleSwitch(id) {
+  id = id.split('_')[1];
+  websocket_message({
+    'type': 'toggle_switch',
+    'data': {
+      'id': id,
+      'state': 'toggle'
+    }
+  });
 }
 
 function initWebcam(webcamid, name, maxzoom) {

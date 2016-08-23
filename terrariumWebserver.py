@@ -43,8 +43,8 @@ class terrariumWebserver():
 
     self.__routes()
 
-  def update_authentication(self, user, password):
-    self.__authentication = { user : password,}
+  def __authenticate(self, user, password):
+    return self.__terrariumEngine.__authenticate(user,password)
 
   def __routes(self):
     self.__app.route('/', method="GET", callback=self.__render_page)
@@ -53,7 +53,12 @@ class terrariumWebserver():
     self.__app.route('/static/<filename:path>', method="GET", callback=self.__static_file)
     self.__app.route('/gentelella/<filename:path>', method="GET", callback=self.__static_file_gentelella)
 
-    self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|environment)>', method=['PUT','POST','DELETE'], callback=self.__update_api_call, apply=auth_basic(self.__terrariumEngine.__authenticate,'TerrarumPI Authentication','Authenticate to make any changes'))
+    self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|environment)>',
+                     method=['PUT','POST','DELETE'],
+                     callback=self.__update_api_call,
+                     apply=auth_basic(self.__authenticate,'TerrarumPI Authentication','Authenticate to make any changes')
+
+                    )
     self.__app.route('/api/<path:path>', method=['GET'], callback=self.__get_api_call)
 
   def __template_variables(self, template):
@@ -136,9 +141,8 @@ class terrariumWebserver():
     elif 'water_usage' == action:
       result = self.__terrariumEngine.get_power_usage_water_flow()['water']
 
-    #elif 'total_usage' == action:
-    #  result = self.__terrariumEngine.get_total_power_usage_water_flow()
-    #  result['total_power'] /= 1000.0
+    elif 'system' == action:
+      result = self.__terrariumEngine.get_system_stats()
 
     elif 'history' == action:
       result = self.__terrariumEngine.get_history(parameters)

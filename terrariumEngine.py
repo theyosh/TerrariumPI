@@ -157,7 +157,9 @@ class terrariumEngine():
       self.weather.update()
       self.collector.log_weather_data(self.weather.get_data()['hour_forecast'][0])
 
-      self.get_system_stats()
+      # Log system stats
+      self.collector.log_system_data(self.get_system_stats())
+      self.get_system_stats(socket=True)
 
       for webcamid in self.webcams:
         self.webcams[webcamid].update()
@@ -180,7 +182,7 @@ class terrariumEngine():
     self.subscribed_queues.append(queue)
     self.__send_message({'type':'dashboard_online', 'data':True})
 
-  def get_system_stats(self):
+  def get_system_stats(self, socket = False):
     memory = psutil.virtual_memory()
     uptime = self.get_uptime()
 
@@ -198,7 +200,18 @@ class terrariumEngine():
             'cores' : psutil.cpu_count(),
             'temperature' : cpu_temp}
 
-    self.collector.log_system_data(data)
+    if socket:
+      gauge_data = {'system_load'        : {'current' : data['load']['load1'] * 100, 'alarm_min' : 30, 'alarm_max': 80, 'min' : 0, 'max': 100},
+                    'system_temperature' : {'current' : data['temperature'], 'alarm_min' : 30, 'alarm_max': 60, 'min' : 0, 'max': 80},
+                    'system_memory'      : {'current' : data['memory']['used'] / (1024 * 1024), 'alarm_min' : data['memory']['total'] / (1024 * 1024) * 0.1, 'alarm_max': data['memory']['total'] / (1024 * 1024) * 0.9, 'min' : 0, 'max': data['memory']['total'] / (1024 * 1024)}}
+
+      gauge_data['system_load']['alarm'] = not(gauge_data['system_load']['alarm_min'] < gauge_data['system_load']['current'] < gauge_data['system_load']['alarm_max'])
+      gauge_data['system_temperature']['alarm'] = not(gauge_data['system_temperature']['alarm_min'] < gauge_data['system_temperature']['current'] < gauge_data['system_temperature']['alarm_max'])
+      gauge_data['system_memory']['alarm'] = not(gauge_data['system_memory']['alarm_min'] < gauge_data['system_memory']['current'] < gauge_data['system_memory']['alarm_max'])
+
+      self.__send_message({'type':'sensor_gauge','data':gauge_data})
+    else:
+      return data
 
   def get_uptime(self, socket = False):
     data = {'uptime' : uptime.uptime(),

@@ -149,45 +149,43 @@
         </div>
         <script type="text/javascript">
           $(document).ready(function() {
-            $.get('/api/history/system',function(data) {
+            $.get('/api/system',function(data) {
               globals.gauges = [];
-              $.each(Object.keys(data.system), function (index,key){
+              $.each(data, function (key,value) {
                 var row = $('div.row.' + key).attr('id','sensor_system_' + key);
-                row.find('canvas').attr('id','gauge_canvas_system_' + key);
-                row.find('div.goal-wrapper > span:first').attr('id','gauge_text_system_' + key);
-                row.find('div.history_graph').attr('id','history_graph_system_' + key);
+                if (row.find('canvas').length == 1) {
+                  row.find('canvas').attr('id','gauge_canvas_system_' + key);
+                  row.find('div.goal-wrapper > span:first').attr('id','gauge_text_system_' + key);
 
-                gauge_data = {alarm: false, current : 0, alarm_min : 0, alarm_max: 0, min : 0, max : 0}
-                switch (key) {
-                  case 'load':
-                    gauge_data.current = data.system[key]['load1'][data.system[key]['load1'].length-1][1] * 100;
-                    gauge_data.alarm_max = 100;
-                    gauge_data.max = 100;
-                    break;
+                  gauge_data = {alarm: false, current : 0, alarm_min : 0, alarm_max: 0, min : 0, max : 0}
+                  switch (key) {
+                    case 'load':
+                      gauge_data.current = value['load1'] * 100;
+                      gauge_data.alarm_max = 80;
+                      gauge_data.alarm_min = 30;
+                      gauge_data.max = 100;
+                      break;
 
-                  case 'temperature':
-                    gauge_data.current = data.system[key][data.system[key].length-1][1];
-                    gauge_data.alarm_min = 30;
-                    gauge_data.alarm_max = 50;
-                    gauge_data.max = 80;
-                    break;
+                    case 'temperature':
+                      gauge_data.current = value;
+                      gauge_data.alarm_min = 30;
+                      gauge_data.alarm_max = 60;
+                      gauge_data.max = 80;
+                      break;
 
-                  case 'memory':
-                    gauge_data.current = data.system[key]['used'][data.system[key]['used'].length-1][1] / (1024 * 1024);
-                    gauge_data.max = data.system[key]['total'][data.system[key]['total'].length-1][1] / (1024 * 1024);
-                    gauge_data.alarm_max = gauge_data.max * 0.9;
-                    break;
-                }
-                if (key != 'uptime' && key !== 'cores') {
+                    case 'memory':
+                      gauge_data.current = value['used'] / (1024 * 1024);
+                      gauge_data.max = value['total'] / (1024 * 1024);
+                      gauge_data.alarm_max = gauge_data.max * 0.9;
+                      gauge_data.alarm_min = gauge_data.max * 0.1;
+                      break;
+                  }
                   gauge_data.alarm = gauge_data.current < gauge_data.alarm_min || gauge_data.current > gauge_data.alarm_max
                   sensor_gauge('system_' + key, gauge_data);
                 }
-
-                if (key !== 'cores') {
-
-                  history_graph('system_' + key,data.system[key],'system_' + key);
-                }
+                row.find('div.history_graph').attr('id','history_graph_system_' + key);
               });
+              update_system_history();
             });
           });
         </script>
