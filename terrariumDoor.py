@@ -8,16 +8,14 @@ monkey.patch_all()
 class terrariumDoor():
 
   def __init__(self, gpio_pin, callback = None):
-    self.gpio_pin = int(gpio_pin)
-    self.door_status = None
-    self.callback = callback
-
     ## set GPIO mode to BCM
     ## this takes GPIO number instead of pin number
     GPIO.setmode(GPIO.BOARD)
 
-    ## use the built-in pull-up resistor
-    GPIO.setup(self.gpio_pin,GPIO.IN,pull_up_down=GPIO.PUD_UP)  # activate input with PullUp
+    self.door_status = None
+    self.callback = callback
+    
+    self.set_gpio_pin(gpio_pin)
 
     # Add detetion with callback !!!!THIS WILL CRASH THE GEVENT LOOP SOMEHOW!!!!!!
     # GPIO.add_event_detect(gpio_pin, GPIO.BOTH, callback=callback, bouncetime=300)
@@ -31,6 +29,11 @@ class terrariumDoor():
         self.callback(True)
 
       sleep(0.5)
+
+  def set_gpio_pin(self,gpio_pin):
+    self.gpio_pin = int(gpio_pin)
+    ## use the built-in pull-up resistor
+    GPIO.setup(self.gpio_pin,GPIO.IN,pull_up_down=GPIO.PUD_UP)  # activate input with PullUp
 
   def get_status(self):
     return self.door_status
