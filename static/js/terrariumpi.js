@@ -336,16 +336,16 @@ function update_dashboard_environment(name, value) {
       break;
     case 'sprayer':
       enabledColor = 'blue';
-      systempart.find('.current').text(value.current.toFixed(3) + '%');
-      systempart.find('.alarm_min').text(value.alarm_min + '%');
+      systempart.find('.current').text(value.current.toFixed(3) + ' %');
+      systempart.find('.alarm_min').text(value.alarm_min.toFixed(3) + ' %');
       systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
       break;
     case 'heater':
       enabledColor = 'red';
       systempart.find('h4 small').text('modus: ' + value.modus);
-      systempart.find('.current').text(value.current.toFixed(3) + 'C');
-      systempart.find('.alarm_min').text(value.alarm_min + 'C');
-      systempart.find('.alarm_max').text(value.alarm_max + 'C');
+      systempart.find('.current').text(value.current.toFixed(3) + ' °C');
+      systempart.find('.alarm_min').text(value.alarm_min.toFixed(3) + ' °C');
+      systempart.find('.alarm_max').text(value.alarm_max.toFixed(3) + ' °C');
       systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
       break;
   }
