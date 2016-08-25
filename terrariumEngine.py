@@ -491,6 +491,7 @@ class terrariumEngine():
         # Create new one
         if webcamdata['location'] != '':
           webcam = terrariumWebcam(None,webcamdata['location'],webcamdata['name'],webcamdata['rotation'])
+          self.webcams[webcam.get_id()] = webcam
       else:
         webcam = self.webcams[webcamdata['id']]
         webcam.set_name(webcamdata['name'])

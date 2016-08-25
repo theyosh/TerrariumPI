@@ -45,47 +45,100 @@ class terrariumWebcam():
 
   def __get_raw_image(self):
     stream = BytesIO()
-    if 'rpicam' == self.location:
-      with PiCamera(resolution=(1920, 1080)) as camera:
-        camera.start_preview()
+
+    try:
+      if 'rpicam' == self.location:
+        with PiCamera(resolution=(1920, 1080)) as camera:
+          camera.start_preview()
+          sleep(2)
+          camera.capture(stream, format='png')
+
+      elif self.location.startswith('/dev/video'):
+        camera = cv2.VideoCapture(int(self.location[10:]))
+        camera.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, 1280)
+        camera.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, 720)
         sleep(2)
-        camera.capture(stream, format='png')
+        readok, image = camera.read()
 
-    elif self.location.startswith('/dev/video'):
-      camera = cv2.VideoCapture(int(self.location[10:]))
-      camera.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, 1280)
-      camera.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, 720)
-      sleep(2)
-      readok, image = camera.read()
+        if readok:
+          png = Image.fromarray(cv2.cvtColor(image,cv2.COLOR_BGR2RGB))
+          stream = StringIO.StringIO()
+          png.save(stream,'JPEG')
 
-      if readok:
-        png = Image.fromarray(cv2.cvtColor(image,cv2.COLOR_BGR2RGB))
-        stream = StringIO.StringIO()
-        png.save(stream,'JPEG')
+        camera.release()
 
-      camera.release()
+      elif self.location.startswith('http://') or self.location.startswith('https://'):
+        if '@' in self.location:
+          start = self.location.find('://') + 3
+          end = self.location.find('@', start)
+          auth = self.location[start:end]
+          webcamurl = urllib2.Request(self.location.replace(auth+'@',''))
+          auth = auth.split(':')
+          base64string = base64.encodestring('%s:%s' % (auth[0], auth[1])).replace('\n', '')
+          webcamurl.add_header("Authorization", "Basic %s" % base64string)
+        else:
+          webcamurl = urllib2.Request(self.location)
 
-    elif self.location.startswith('http://') or self.location.startswith('https://'):
-      if '@' in self.location:
-        start = self.location.find('://') + 3
-        end = self.location.find('@', start)
-        auth = self.location[start:end]
-        webcamurl = urllib2.Request(self.location.replace(auth+'@',''))
-        auth = auth.split(':')
-        base64string = base64.encodestring('%s:%s' % (auth[0], auth[1])).replace('\n', '')
-        webcamurl.add_header("Authorization", "Basic %s" % base64string)
-      else:
-        webcamurl = urllib2.Request(self.location)
+        stream = StringIO.StringIO(urllib2.urlopen(webcamurl,None,15).read())
 
-      stream = StringIO.StringIO(urllib2.urlopen(webcamurl,None,15).read())
+      self.state = True
 
-    # "Rewind" the stream to the beginning so we can read its content
-    stream.seek(0)
-    # Store image in memory for further processing
-    self.raw_image = Image.open(stream)
-    self.raw_image.save(self.get_raw_image(),'jpeg',quality=95)
-    self.state = True
+      # "Rewind" the stream to the beginning so we can read its content
+      stream.seek(0)
+      # Store image in memory for further processing
+      self.raw_image = Image.open(stream)
+
+      # Rotate image if needed
+      if '90' == self.get_rotation():
+        self.raw_image = self.raw_image.transpose(Image.ROTATE_90)
+      elif  '180' == self.get_rotation():
+        self.raw_image = self.raw_image.transpose(Image.ROTATE_180)
+      elif '270' == self.get_rotation():
+        self.raw_image = self.raw_image.transpose(Image.ROTATE_270)
+      elif 'h' == self.get_rotation():
+        self.raw_image = self.raw_image.transpose(Image.FLIP_TOP_BOTTOM)
+      elif 'v' == self.get_rotation():
+        self.raw_image = self.raw_image.transpose(Image.FLIP_LEFT_RIGHT)
+
+      self.raw_image.save(self.get_raw_image(),'jpeg',quality=95)
+
+    except Exception, err:
+      # Error loadig image, so load offline image
+      if self.state is not False:
+        self.__get_offline_image()
+        self.state = False
+
     self.last_update = int(time())
+
+  def __get_offline_image(self):
+
+    def draw_text_center(im, draw, text, font, **kwargs):
+      text_height = text_top = None
+      linecounter = 0
+      for line in text:
+        text_size = draw.textsize(line, font)
+        if text_height is None:
+          text_height = len(text) * ( text_size[1])
+          text_top = (im.size[1] - text_height) / 2
+
+        draw.text(
+          ((im.size[0] - text_size[0]) / 2, (text_top + (linecounter * text_height)) / 2),
+          line, font=font, **kwargs)
+
+        linecounter += 1
+
+    self.raw_image = Image.open('static/images/webcam_offline.png')
+
+    mask = Image.open('static/images/mask_offline.png')
+    draw = ImageDraw.Draw(mask)
+    font = ImageFont.truetype('fonts/DejaVuSans.ttf',40)
+    text = ['Offline since:',datetime.now().strftime("%A %d %B %Y"),datetime.now().strftime("%H:%M:%S")]
+    draw_text_center(mask,draw,text,font)
+
+    mask_width, mask_height = mask.size
+    source_width, source_height = self.raw_image.size
+
+    self.raw_image.paste(mask, ((source_width/2)-(mask_width/2),(source_height/2)-(mask_height/2)), mask)
 
   def __set_timestamp(self,image):
     # Get the image dimensions
