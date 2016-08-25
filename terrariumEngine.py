@@ -418,6 +418,11 @@ class terrariumEngine():
 
       update_ok = update_ok and self.config.save_switch(switch.get_data())
 
+    if update_ok:
+      self.power_switches = {}
+      self.switch_board = terrariumSwitchboard(self.config,self.toggle_switch)
+      self.power_switches = self.switch_board.switches
+
     return update_ok
 
   def get_amount_of_switches(self):

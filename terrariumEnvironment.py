@@ -24,37 +24,43 @@ class terrariumEnvironment():
     config = self.config.get_environment()
 
     self.light = config['light']
-    if len(self.light) > 0:
-      self.light['enabled'] = True if self.light['enabled'].lower() in ['true','on','1'] else False
-      self.light['on'] = int(self.light['on'])
-      self.light['off'] = int(self.light['off'])
-      self.light['hours_shift'] = float(self.light['hours_shift'])
-      self.light['min_hours'] = float(self.light['min_hours'])
-      self.light['max_hours'] = float(self.light['max_hours'])
-      self.light['power_switches'] = self.light['power_switches'].split(',')
-    else:
-      self.light['enabled'] = False
+    init = len(self.light) == 0
+    if init:
+      self.light = {}
+
+    self.light['enabled'] = False if init else (True if self.light['enabled'].lower() in ['true','on','1'] else False)
+    self.light['modus'] = None if init else self.light['modus']
+    self.light['on'] = 0 if init else int(self.light['on'])
+    self.light['off'] = 0 if init else int(self.light['off'])
+    self.light['hours_shift'] = 0.0 if init else float(self.light['hours_shift'])
+    self.light['min_hours'] = 0.0 if init else float(self.light['min_hours'])
+    self.light['max_hours'] = 0.0 if init else float(self.light['max_hours'])
+    self.light['power_switches'] = [] if init else self.light['power_switches'].split(',')
 
     self.sprayer = config['sprayer']
-    if len(self.sprayer) > 0:
-      self.sprayer['enabled'] = True if self.sprayer['enabled'].lower() in ['true','on','1'] else False
-      self.sprayer['night_enabled'] = True if self.sprayer['night_enabled'].lower() in ['true','on','1'] else False
-      self.sprayer['spray_duration'] = float(self.sprayer['spray_duration'])
-      self.sprayer['spray_timeout'] = float(self.sprayer['spray_timeout'])
-      self.sprayer['power_switches'] = self.sprayer['power_switches'].split(',')
-      self.sprayer['sensors'] = self.sprayer['sensors'].split(',')
-      self.sprayer['lastaction'] = datetime.datetime.now()
-    else:
-      self.sprayer['enabled'] = False
+    init = len(self.sprayer) == 0
+    if init:
+      self.sprayer = {}
+
+    self.sprayer['enabled'] = False if init else (True if self.sprayer['enabled'].lower() in ['true','on','1'] else False)
+    self.sprayer['night_enabled'] = False if init else (True if self.sprayer['night_enabled'].lower() in ['true','on','1'] else False)
+    self.sprayer['spray_duration'] = 0.0 if init else float(self.sprayer['spray_duration'])
+    self.sprayer['spray_timeout'] = 0.0 if init else float(self.sprayer['spray_timeout'])
+    self.sprayer['power_switches'] = [] if init else self.sprayer['power_switches'].split(',')
+    self.sprayer['sensors'] = [] if init else self.sprayer['sensors'].split(',')
+    self.sprayer['lastaction'] = datetime.datetime.now()
+
 
     self.heater = config['heater']
-    if len(self.heater) > 0:
-      self.heater['enabled'] =True if self.heater['enabled'].lower() in ['true','on','1'] else False
-      self.heater['day_enabled'] = True if self.heater['day_enabled'].lower() in ['true','on','1'] else False
-      self.heater['power_switches'] = self.heater['power_switches'].split(',')
-      self.heater['sensors'] = self.heater['sensors'].split(',')
-    else:
-      self.heater['enabled'] = False
+    init = len(self.heater) == 0
+    if init:
+      self.heater = {}
+
+    self.heater['enabled'] = False if init else (True if self.heater['enabled'].lower() in ['true','on','1'] else False)
+    self.heater['modus'] = None if init else self.heater['modus']
+    self.heater['day_enabled'] = False if init else (True if self.heater['day_enabled'].lower() in ['true','on','1'] else False)
+    self.heater['power_switches'] = [] if init else self.heater['power_switches'].split(',')
+    self.heater['sensors'] = [] if init else self.heater['sensors'].split(',')
 
   def __set_config(self,part,data):
     for field in data:
@@ -68,7 +74,7 @@ class terrariumEnvironment():
   def __engine_loop(self):
     while True:
       light = self.get_light_state()
-      if light['enabled']:
+      if 'enabled' in light and light['enabled']:
         if light['on'] < int(time.time()) < light['off']:
           self.light_on()
         else:
@@ -76,7 +82,7 @@ class terrariumEnvironment():
 
       light = self.get_light_state()
       sprayer = self.get_sprayer_state()
-      if sprayer['enabled'] and light['enabled']:
+      if 'enabled' in sprayer and 'enabled' in light and sprayer['enabled'] and light['enabled']:
         if self.sprayer['night_enabled'] or light['state'] == 'on':
           if sprayer['alarm'] and self.door_sensor.is_closed():
             self.sprayer_on()
@@ -88,7 +94,7 @@ class terrariumEnvironment():
         self.sprayer_off()
 
       heater = self.get_heater_state()
-      if heater['enabled'] and light['enabled']:
+      if 'enabled' in heater and 'enabled' in light and heater['enabled'] and light['enabled']:
         if self.heater['day_enabled'] or light['state'] == 'off':
           if heater['current'] < heater['alarm_min']:
             self.heater_on()
@@ -162,10 +168,8 @@ class terrariumEnvironment():
 
   def get_light_state(self):
     now = datetime.datetime.now()
-    if len(self.light) == 0:
-      return {'enabled' : False}
 
-    data = {'on' : 0, 'off' : 0, 'modus' : self.light['modus'], 'enabled' : self.light['enabled']}
+    data = {'on' : datetime.datetime.fromtimestamp(0), 'off' : datetime.datetime.fromtimestamp(0), 'modus' : self.light['modus'], 'enabled' : self.light['enabled']}
     if 'weather' == data['modus']:
       data['on'] = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['rise'])
       data['off'] = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['set'])
@@ -228,10 +232,10 @@ class terrariumEnvironment():
     return self.__is_off('sprayer')
 
   def get_sprayer_state(self):
-    if len(self.sprayer) == 0:
-      return {'enabled' : False}
-
     data = self.get_average_humidity()
+    if data is None:
+      return {}
+
     data['night_enabled'] = self.sprayer['night_enabled']
     data['enabled'] = self.sprayer['enabled']
 
@@ -259,10 +263,10 @@ class terrariumEnvironment():
     return self.__is_off('heater')
 
   def get_heater_state(self):
-    if len(self.heater) == 0:
-      return {'enabled' : False}
-
     data = self.get_average_temperature()
+    if data is None:
+      return {}
+
     data['modus'] = self.heater['modus']
     data['day_enabled'] = self.heater['day_enabled']
     data['enabled'] = self.heater['enabled']

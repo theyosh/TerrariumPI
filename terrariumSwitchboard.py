@@ -19,8 +19,9 @@ class terrariumSwitchboard():
     self.max_number_of_switches = int(switch_config['max_switches'])
     # Reload config
     switch_config = config.get_switches()['switches']
+    self.active_number_of_switches = self.max_number_of_switches if len(switch_config) == 0 else len(switch_config)
 
-    switch_numbers = [None] * (self.max_number_of_switches)
+    switch_numbers = [None] * self.active_number_of_switches
     for switchid in switch_config:
       switch_numbers[int(switch_config[switchid]['nr'])-1] = switchid
 
@@ -34,7 +35,7 @@ class terrariumSwitchboard():
       self.device_type = 'Serial' if product.endswith('UART') else 'BitBang'
       break # For now, we only support 1 switch board!
 
-    for nr in range(0,self.max_number_of_switches):
+    for nr in range(0,self.active_number_of_switches):
       power_switch_config = {}
       if switch_numbers[nr] is not None:
         power_switch_config = switch_config[switch_numbers[nr]]
@@ -132,9 +133,7 @@ class terrariumSwitch():
         self.state = state
         self.callback(self.get_data())
       except Exception, err:
-        print 'Switch set state error'
-        print err
-#          self.__log.logLine(self.__log.ERROR,'Error switching ' + ('on' if 'on' == state else 'off') + ' switch: ' + str(self.getName()) + ' (' + str(self.getID()) + ')!: ' + str(err))
+        # Ignore for now
         pass
 
       finally:

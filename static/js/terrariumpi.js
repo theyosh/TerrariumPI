@@ -325,32 +325,39 @@ function update_weather(data) {
 
 function update_dashboard_environment(name, value) {
   var systempart = $('div.environment_' + name);
-  var enabledColor = '';
-  switch (name) {
-    case 'light':
-      enabledColor = 'orange';
-      systempart.find('h4 small').text('modus: ' + value.modus);
-      systempart.find('.on').text(moment(value.on * 1000).format('LT'));
-      systempart.find('.off').text(moment(value.off * 1000).format('LT'));
-      systempart.find('.duration').text(moment.duration(Math.abs(value.off - value.on) * 1000).humanize());
-      break;
-    case 'sprayer':
-      enabledColor = 'blue';
-      systempart.find('.current').text(value.current.toFixed(3) + ' %');
-      systempart.find('.alarm_min').text(value.alarm_min.toFixed(3) + ' %');
-      systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
-      break;
-    case 'heater':
-      enabledColor = 'red';
-      systempart.find('h4 small').text('modus: ' + value.modus);
-      systempart.find('.current').text(value.current.toFixed(3) + ' °C');
-      systempart.find('.alarm_min').text(value.alarm_min.toFixed(3) + ' °C');
-      systempart.find('.alarm_max').text(value.alarm_max.toFixed(3) + ' °C');
-      systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
-      break;
+  if (systempart.length === 0) {
+    return;
   }
-  systempart.find('h4').removeClass('orange blue red').addClass(value.enabled ? enabledColor : '').attr('title', value.enabled ? 'enabled' : 'disabled');
-  systempart.find('.state i').removeClass('red green').addClass(value.state == 'on' ? 'green' : 'red').attr('title', value.state);
+  try {
+    var enabledColor = '';
+    switch (name) {
+      case 'light':
+        enabledColor = 'orange';
+        systempart.find('h4 small').text('modus: ' + value.modus);
+        systempart.find('.on').text(moment(value.on * 1000).format('LT'));
+        systempart.find('.off').text(moment(value.off * 1000).format('LT'));
+        systempart.find('.duration').text(moment.duration(Math.abs(value.off - value.on) * 1000).humanize());
+        break;
+      case 'sprayer':
+        enabledColor = 'blue';
+        systempart.find('.current').text(value.current.toFixed(3) + ' %');
+        systempart.find('.alarm_min').text(value.alarm_min.toFixed(3) + ' %');
+        systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
+        break;
+      case 'heater':
+        enabledColor = 'red';
+        systempart.find('h4 small').text('modus: ' + value.modus);
+        systempart.find('.current').text(value.current.toFixed(3) + ' °C');
+        systempart.find('.alarm_min').text(value.alarm_min.toFixed(3) + ' °C');
+        systempart.find('.alarm_max').text(value.alarm_max.toFixed(3) + ' °C');
+        systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
+        break;
+    }
+    systempart.find('h4').removeClass('orange blue red').addClass(value.enabled ? enabledColor : '').attr('title', value.enabled ? 'enabled' : 'disabled');
+    systempart.find('.state i').removeClass('red green').addClass(value.state == 'on' ? 'green' : 'red').attr('title', value.state);
+  } catch (error) {
+      // Just ignore....
+  }
 }
 
 function format_uptime(uptime) {
@@ -699,19 +706,20 @@ function history_graph(name, data, type) {
       }];
       break;
   }
-  var tickSize = 60;
-  var total_data_duration = (graph_data[0].data[graph_data[0].data.length - 1][0] - graph_data[0].data[0][0]) / 3600000;
-  if (total_data_duration > 120) {
-    tickSize = 360;
-  } else if (total_data_duration > 120) {
-    tickSize = 240;
-  } else if (total_data_duration > 48) {
-    tickSize = 180;
-  } else if (total_data_duration > 24) {
-    tickSize = 120;
+  var tickSize = 10;
+  if (graph_data[0].data.length > 0) {
+    var total_data_duration = (graph_data[0].data[graph_data[0].data.length - 1][0] - graph_data[0].data[0][0]) / 3600000;
+    if (total_data_duration > 120) {
+      tickSize = 360;
+    } else if (total_data_duration > 120) {
+      tickSize = 240;
+    } else if (total_data_duration > 48) {
+      tickSize = 180;
+    } else if (total_data_duration > 24) {
+      tickSize = 120;
+    }
+    graph_options.xaxis.tickSize[0] = tickSize;
   }
-  graph_options.xaxis.tickSize[0] = tickSize;
-
   if ($('#history_graph_' + name).length == 1) {
     $('#history_graph_' + name).html('').removeClass('loading');
     $.plot($('#history_graph_' + name), graph_data, graph_options);
