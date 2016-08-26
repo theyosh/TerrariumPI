@@ -137,12 +137,12 @@ function load_page(url) {
   }
   // Only process with some input
   if (url !== '') {
-    // Get the menu url so that jQuery can match
-    var menu_url = url.replace('http://' + location.host + '/', '');
     // Reset the main content height
     $("#maincontent").height(0);
     // Load the data through AJAX
     $.get(url, function(data) {
+      // Get the menu url so that jQuery can match
+      var menu_url = $('<a/>').attr('href',url)[0].pathname.replace(/^[^\/]/,'/').substr(1);
       // Clear all submenu's that are not clicked
       $('.child_menu a[href!="' + menu_url + '"]').parent().removeClass('active');
       $('.child_menu a[href="' + menu_url + '"]').parent().addClass('active');
@@ -711,12 +711,14 @@ function history_graph(name, data, type) {
     var total_data_duration = (graph_data[0].data[graph_data[0].data.length - 1][0] - graph_data[0].data[0][0]) / 3600000;
     if (total_data_duration > 120) {
       tickSize = 360;
-    } else if (total_data_duration > 120) {
+    } else if (total_data_duration > 64) {
       tickSize = 240;
     } else if (total_data_duration > 48) {
       tickSize = 180;
     } else if (total_data_duration > 24) {
       tickSize = 120;
+    } else if (total_data_duration > 12) {
+      tickSize = 60;
     }
     graph_options.xaxis.tickSize[0] = tickSize;
   }
