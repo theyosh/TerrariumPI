@@ -849,6 +849,11 @@ function update_webcam_preview(name, url) {
 
 function toggleSwitch(id) {
   id = id.split('_')[1];
+  $.getJSON('/api/switch/toggle/' + id,function(data){
+    console.log(data);
+  });
+
+  /*
   websocket_message({
     'type': 'toggle_switch',
     'data': {
@@ -856,6 +861,7 @@ function toggleSwitch(id) {
       'state': 'toggle'
     }
   });
+  */
 }
 
 function initWebcam(webcamid, name, maxzoom) {

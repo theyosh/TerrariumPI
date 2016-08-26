@@ -53,13 +53,22 @@ class terrariumWebserver():
     self.__app.route('/static/<filename:path>', method="GET", callback=self.__static_file)
     self.__app.route('/gentelella/<filename:path>', method="GET", callback=self.__static_file_gentelella)
 
+    self.__app.route('/api/switch/toggle/<switchid:path>',
+                     method=['GET'],
+                     callback=self.__toggle_switch,
+                     apply=auth_basic(self.__authenticate,'TerrarumPI Authentication','Authenticate to make any changes')
+                    )
+
     self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|environment)>',
                      method=['PUT','POST','DELETE'],
                      callback=self.__update_api_call,
                      apply=auth_basic(self.__authenticate,'TerrarumPI Authentication','Authenticate to make any changes')
-
                     )
+
     self.__app.route('/api/<path:path>', method=['GET'], callback=self.__get_api_call)
+
+
+#    terrariumWebserver.app.terrarium.power_switches[message['data']['id']].toggle()
 
   def __template_variables(self, template):
     variables = { 'title' : self.__config['title'],
@@ -148,6 +157,13 @@ class terrariumWebserver():
 
     return result
 
+  def __toggle_switch(self,switchid):
+    if switchid in self.__terrariumEngine.power_switches:
+      self.__terrariumEngine.power_switches[switchid].toggle()
+      return {'ok' : True}
+
+    return {'ok' : False}
+
   @app.error(404)
   def error404(error):
     config = terrariumWebserver.app.terrarium.get_config('system')
@@ -193,10 +209,10 @@ class terrariumWebserver():
           terrariumWebserver.app.terrarium.get_power_usage_water_flow(socket=True)
           terrariumWebserver.app.terrarium.get_environment(socket=True)
           terrariumWebserver.app.terrarium.get_sensors(['average'],socket=True)
-
-        elif message['type'] == 'toggle_switch':
-          if 'toggle' == message['data']['state']:
-            terrariumWebserver.app.terrarium.power_switches[message['data']['id']].toggle()
+#
+#        elif message['type'] == 'toggle_switch':
+#          if 'toggle' == message['data']['state']:
+#            terrariumWebserver.app.terrarium.power_switches[message['data']['id']].toggle()
 
   def start(self):
     # Start the webserver
