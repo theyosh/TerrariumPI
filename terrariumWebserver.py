@@ -18,7 +18,7 @@ class terrariumWebserverHeaders(object):
   api = 2
 
   def apply(self, fn, context):
-    def _webserver_headers(*args, **kwargs):
+    def webserver_headers(*args, **kwargs):
       template_file = 'views' + request.fullpath[:-5] + '.tpl'
       if os.path.isfile(template_file):
         t = os.path.getmtime(template_file)
@@ -27,7 +27,7 @@ class terrariumWebserverHeaders(object):
 
       return fn(*args, **kwargs)
 
-    return _webserver_headers
+    return webserver_headers
 
 class terrariumWebserver():
 
@@ -203,12 +203,12 @@ class terrariumWebserver():
           thread.start_new_thread(listen_for_messages, (messages,socket))
           terrariumWebserver.app.terrarium.subscribe(messages)
 
-        if message['type'] == 'client_init' or message['type'] == 'show_dashboard':
-          terrariumWebserver.app.terrarium.door_status(socket=True)
-          terrariumWebserver.app.terrarium.get_uptime(socket=True)
-          terrariumWebserver.app.terrarium.get_power_usage_water_flow(socket=True)
-          terrariumWebserver.app.terrarium.get_environment(socket=True)
-          terrariumWebserver.app.terrarium.get_sensors(['average'],socket=True)
+        #if message['type'] == 'client_init' or message['type'] == 'show_dashboard':
+        terrariumWebserver.app.terrarium.door_status(socket=True)
+        terrariumWebserver.app.terrarium.get_uptime(socket=True)
+        terrariumWebserver.app.terrarium.get_power_usage_water_flow(socket=True)
+        terrariumWebserver.app.terrarium.get_environment(socket=True)
+        terrariumWebserver.app.terrarium.get_sensors(['average'],socket=True)
 #
 #        elif message['type'] == 'toggle_switch':
 #          if 'toggle' == message['data']['state']:
