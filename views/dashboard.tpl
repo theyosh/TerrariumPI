@@ -180,6 +180,23 @@
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
                     <li class="dropdown">
+                      <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-calendar"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li>
+                          <a href="#" onclick="return false">Day</a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="return false">Week</a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="return false">Month</a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="return false">Year</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="dropdown">
                       <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
                       <ul class="dropdown-menu" role="menu">
                         <li>
@@ -213,6 +230,23 @@
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-calendar"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li>
+                          <a href="#" onclick="return false">Day</a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="return false">Week</a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="return false">Month</a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="return false">Year</a>
+                        </li>
+                      </ul>
                     </li>
                     <li class="dropdown">
                       <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
