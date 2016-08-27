@@ -91,31 +91,34 @@ class terrariumEngine():
 
     today = datetime.date.today()
     today = int(time.mktime(today.timetuple()))
-    now = int(time.time())
-    uptime = self.get_uptime()['uptime']
 
-    if uptime > now - today:
-      uptime = now -today
-
-    data['power_wattage'] = (float(uptime) / 3600.0) * float(self.pi_power_wattage)
     prev_data = self.collector.get_history(['switches','summary'])['switches']['summary']
-
     for fieldname in prev_data:
       for data_item in prev_data[fieldname]:
         if data_item[0] / 1000 < today:
           data[fieldname] = float(data_item[1])
 
-    #Reset daily usage values
-    data['power_wattage'] = 0.0
-    data['water_flow'] = 0.0
-    history_data = self.collector.get_history(['switches'])['switches']
+    # Reset daily usage values
+    # Calculating the current uptime
+    now = int(time.time())
+    uptime = self.get_uptime()['uptime']
+    # If uptime is more then one day, reduce it to only of today
+    if uptime > now - today:
+      uptime = now - today
 
+    # Set the initial power usage on uptime of the server
+    data['power_wattage'] = (float(uptime) / 3600.0) * float(self.pi_power_wattage)
+    # Set water to zero
+    data['water_flow'] = 0.0
+
+    # Go through today power actions
+    history_data = self.collector.get_history(['switches'])['switches']
     for switchid in history_data:
       if switchid not in history_data or len(history_data[switchid]['state']) == 0:
         continue
 
       if switchid in self.power_switches and self.power_switches[switchid].is_on() and not history_data[switchid]['state'][len(history_data[switchid]['state'])-1][1]:
-        # Fake end state
+        # Fake end state to calculate current powered on switches usages until NOW
         history_data[switchid]['state'].append([now * 1000 , False])
 
       for counter in range(0,len(history_data[switchid]['state'])):
