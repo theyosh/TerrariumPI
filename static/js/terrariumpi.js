@@ -1,3 +1,5 @@
+'use strict';
+
 var globals = {
   websocket: null,
   connection: 'ws' + (location.protocol == 'https:' ? 's' : '') + '://' + location.host + '/live',
@@ -7,6 +9,7 @@ var globals = {
   updatetimer: null,
   online_timer: null
 };
+
 $(document).ready(function() {
   $('#system_time').text(moment().format('LLLL'));
   websocket_init(false);
@@ -29,8 +32,10 @@ $(document).ready(function() {
   load_page('dashboard.html');
 
   setInterval(function() {
+    update_door_indicator(Math.random(0,10) % 2 === 0 ? 'open' : 'closed');
     notification_timestamps();
     updateWebcams();
+
     $('#system_time').text(moment().format('LLLL'));
   }, 30 * 1000);
 });
@@ -42,7 +47,6 @@ function websocket_init(reconnect) {
       'type': 'client_init',
       'reconnect': reconnect
     });
-    update_online_messages(true);
   };
   globals.websocket.onmessage = function(evt) {
     online_updater();
@@ -82,7 +86,6 @@ function websocket_init(reconnect) {
   };
   globals.websocket.onclose = function(evt) {
     is_offline();
-    update_online_messages(false);
     clearInterval(globals.websocket_timer);
     globals.websocket_timer = setInterval(function() {
       websocket_init(true);
@@ -373,6 +376,7 @@ function format_uptime(uptime) {
 function online_updater() {
   clearTimeout(globals.online_timer);
   is_online();
+
   globals.online_timer = setTimeout(function() {
     is_offline();
   }, 120 * 1000);
@@ -381,8 +385,8 @@ function online_updater() {
 function update_door_messages(online) {
   var title = (online ? 'Open' : 'Close');
   var message = (online ? 'Door has been opend!' : 'Door is closed');
-  var icon = (online ? 'fa-lock' : 'fa-unlock');
-  var color = (online ? 'green' : 'red');
+  var icon = (online ? 'fa-unlock' : 'fa-lock');
+  var color = (online ? 'red' : 'green');
   add_notification_message('door_messages', title, message, icon, color);
 }
 
@@ -443,12 +447,14 @@ function is_online() {
   var online_indicator = $('a#online_indicator');
   online_indicator.find('span').text('Online');
   online_indicator.find('i.fa').removeClass('fa-check-circle-o fa-exclamation-triangle red green').addClass('fa-check-circle-o green');
+  update_online_messages(true);
 }
 
 function is_offline() {
   var online_indicator = $('a#online_indicator');
   online_indicator.find('span').text('Offline');
   online_indicator.find('i.fa').removeClass('fa-check-circle-o fa-exclamation-triangle red green').addClass('fa-exclamation-triangle red');
+  update_online_messages(false);
 }
 
 function update_door_indicator(status) {
@@ -463,12 +469,14 @@ function door_open() {
   var online_indicator = $('a#door_indicator');
   online_indicator.find('span').text('Door open');
   online_indicator.find('i.fa').removeClass('fa-lock fa-unlock red green').addClass('fa-unlock red');
+  update_door_messages(true);
 }
 
 function door_closed() {
   var online_indicator = $('a#door_indicator');
   online_indicator.find('span').text('Door closed');
   online_indicator.find('i.fa').removeClass('fa-lock fa-unlock red green').addClass('fa-lock green');
+  update_door_messages(false);
 }
 
 function get_theme_color(color) {
@@ -566,7 +574,7 @@ function history_graph(name, data, type) {
       curvedLines: {
         apply: true,
         active: true,
-        monotonicFit: true
+        monotonicFit: true,
       },
       shadowSize: 2
     },
@@ -706,21 +714,9 @@ function history_graph(name, data, type) {
       }];
       break;
   }
-  var tickSize = 10;
   if (graph_data[0].data.length > 0) {
     var total_data_duration = (graph_data[0].data[graph_data[0].data.length - 1][0] - graph_data[0].data[0][0]) / 3600000;
-    if (total_data_duration > 120) {
-      tickSize = 360;
-    } else if (total_data_duration > 64) {
-      tickSize = 240;
-    } else if (total_data_duration > 48) {
-      tickSize = 180;
-    } else if (total_data_duration > 24) {
-      tickSize = 120;
-    } else if (total_data_duration > 12) {
-      tickSize = 60;
-    }
-    graph_options.xaxis.tickSize[0] = tickSize;
+    graph_options.xaxis.tickSize[0] = Math.round(total_data_duration * 2.5);
   }
   if ($('#history_graph_' + name).length == 1) {
     $('#history_graph_' + name).html('').removeClass('loading');
@@ -852,16 +848,6 @@ function toggleSwitch(id) {
   $.getJSON('/api/switch/toggle/' + id,function(data){
     console.log(data);
   });
-
-  /*
-  websocket_message({
-    'type': 'toggle_switch',
-    'data': {
-      'id': id,
-      'state': 'toggle'
-    }
-  });
-  */
 }
 
 function initWebcam(webcamid, name, maxzoom) {
