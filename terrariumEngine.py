@@ -93,6 +93,7 @@ class terrariumEngine():
     today = int(time.mktime(today.timetuple()))
     now = int(time.time())
     uptime = self.get_uptime()['uptime']
+
     if uptime > now - today:
       uptime = now -today
 
@@ -104,6 +105,9 @@ class terrariumEngine():
         if data_item[0] / 1000 < today:
           data[fieldname] = float(data_item[1])
 
+    #Reset daily usage values
+    data['power_wattage'] = 0.0
+    data['water_flow'] = 0.0
     history_data = self.collector.get_history(['switches'])['switches']
 
     for switchid in history_data:
