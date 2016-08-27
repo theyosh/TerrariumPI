@@ -10,6 +10,8 @@ class terrariumCollector():
   def __init__(self):
     self.db = sqlite3.connect(terrariumCollector.database)
     self.db.row_factory = sqlite3.Row
+    # Store data every Xth minute. Except switches.
+    self.modulo = 1
     self.__create_database_structure()
 
   def __create_database_structure(self):
@@ -23,14 +25,14 @@ class terrariumCollector():
     now = int(time.time())
     rows = []
     if 'switches' != type:
-      now -= (now % 60)
+      now -= (now % (self.modulo * 60))
 
     data = {'rawdata' : {}, 'summary' : {}}
     with self.db:
       cur = self.db.cursor()
       cur.execute("SELECT rawdata, summary FROM data WHERE day = date(?,'unixepoch') and type=?", (now, type,))
       rows = cur.fetchall()
-      
+
     if len(rows) == 1:
       if rows[0]['rawdata'] != '':
         data['rawdata'] = json.loads(rows[0]['rawdata'])
@@ -86,8 +88,8 @@ class terrariumCollector():
   def get_history(self, parameters = [], starttime = None, stoptime = None):
     # Default return object
     history = {}
-    # Every Xth minute will be returned
-    modulo = 1
+
+    modulo = self.modulo
 
     history_type = parameters[0]
     del(parameters[0])
@@ -96,14 +98,16 @@ class terrariumCollector():
     if starttime is None:
       starttime = int(time.time())
       if 'switches' != history_type:
-        starttime -= starttime % (1 * 60)
+        starttime -= starttime % 60
 
     # Define stop time
     if stoptime is None:
       stoptime = starttime - (24 * 60 * 60)
 
-    if starttime - stoptime > (8 * 60):
-      modulo = 5
+    # Defined new time modulo
+    if starttime - stoptime > (8 * 60 * 60):
+      # For now, ignore. This also influence the total power calculation... :(
+      modulo = 1
 
     if history_type == 'weather':
       field = 'rawdata'
@@ -191,7 +195,7 @@ class terrariumCollector():
           timestamps = sorted(dbdata[dataid].keys())
 
           for timestamp in timestamps:
-            if starttime > int(timestamp) > stoptime:
+            if starttime > int(timestamp) > stoptime and (int(timestamp) % modulo == 0):
               timedata = dbdata[dataid][str(timestamp)]
 
               loopfields = copy.deepcopy(history_fields)
