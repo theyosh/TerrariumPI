@@ -21,6 +21,7 @@ class terrariumCollector():
 
   def __log_data(self,type,id,datatype,newdata):
     now = int(time.time())
+    rows = []
     if 'switches' != type:
       now -= (now % 60)
 
@@ -29,12 +30,13 @@ class terrariumCollector():
       cur = self.db.cursor()
       cur.execute("SELECT rawdata, summary FROM data WHERE day = date(?,'unixepoch') and type=?", (now, type,))
       rows = cur.fetchall()
-      if len(rows) == 1:
-        if rows[0]['rawdata'] != '':
-          data['rawdata'] = json.loads(rows[0]['rawdata'])
+      
+    if len(rows) == 1:
+      if rows[0]['rawdata'] != '':
+        data['rawdata'] = json.loads(rows[0]['rawdata'])
 
-        if rows[0]['summary'] != '':
-          data['summary'] = json.loads(rows[0]['summary'])
+      if rows[0]['summary'] != '':
+        data['summary'] = json.loads(rows[0]['summary'])
 
     if type == 'weather' or datatype == 'summary':
       data[datatype][now] = newdata
@@ -152,6 +154,7 @@ class terrariumCollector():
 
     history = {}
     for datatype in datatypes:
+      rows = []
       with self.db:
         cur = self.db.cursor()
         cur.execute('''SELECT day, ''' + field + ''' FROM data
@@ -159,50 +162,50 @@ class terrariumCollector():
                     ORDER BY day ASC''', (stoptime,starttime,datatype,))
         rows = cur.fetchall()
 
-        for row in rows:
-          if row[field] is None or row[field] == '':
+      for row in rows:
+        if row[field] is None or row[field] == '':
+          continue
+
+        dbdatatmp = json.loads(row[field])
+
+        if field == 'summary':
+          dbdata = { summary_name : dbdatatmp }
+        else:
+          dbdata = dbdatatmp
+
+        if datatype not in history:
+          history[datatype] = {}
+
+        for dataid in dbdata:
+          if len(parameters) > 0 and parameters[0] != dataid:
             continue
 
-          dbdatatmp = json.loads(row[field])
+          if dataid not in history[datatype]:
+            if dataid in history_fields and type(history_fields[dataid]) is dict:
+              history[datatype][dataid] = copy.deepcopy(history_fields[dataid])
+            elif dataid in history_fields:
+              history[datatype][dataid] = []
+            else:
+              history[datatype][dataid] = copy.deepcopy(history_fields)
 
-          if field == 'summary':
-            dbdata = { summary_name : dbdatatmp }
-          else:
-            dbdata = dbdatatmp
+          timestamps = sorted(dbdata[dataid].keys())
 
-          if datatype not in history:
-            history[datatype] = {}
+          for timestamp in timestamps:
+            if starttime > int(timestamp) > stoptime:
+              timedata = dbdata[dataid][str(timestamp)]
 
-          for dataid in dbdata:
-            if len(parameters) > 0 and parameters[0] != dataid:
-              continue
-
-            if dataid not in history[datatype]:
+              loopfields = copy.deepcopy(history_fields)
               if dataid in history_fields and type(history_fields[dataid]) is dict:
-                history[datatype][dataid] = copy.deepcopy(history_fields[dataid])
+                loopfields = copy.deepcopy(history_fields[dataid])
               elif dataid in history_fields:
-                history[datatype][dataid] = []
-              else:
-                history[datatype][dataid] = copy.deepcopy(history_fields)
+                loopfields = { dataid : [] }
+                timedata = {dataid:timedata}
 
-            timestamps = sorted(dbdata[dataid].keys())
-
-            for timestamp in timestamps:
-              if starttime > int(timestamp) > stoptime:
-                timedata = dbdata[dataid][str(timestamp)]
-
-                loopfields = copy.deepcopy(history_fields)
-                if dataid in history_fields and type(history_fields[dataid]) is dict:
-                  loopfields = copy.deepcopy(history_fields[dataid])
-                elif dataid in history_fields:
-                  loopfields = { dataid : [] }
-                  timedata = {dataid:timedata}
-
-                for history_field in loopfields:
-                  if history_field in timedata:
-                    if history_field in history[datatype][dataid]:
-                      history[datatype][dataid][history_field].append([int(timestamp) * 1000, timedata[history_field]])
-                    else:
-                      history[datatype][dataid].append([int(timestamp) * 1000, timedata[history_field]])
+              for history_field in loopfields:
+                if history_field in timedata:
+                  if history_field in history[datatype][dataid]:
+                    history[datatype][dataid][history_field].append([int(timestamp) * 1000, timedata[history_field]])
+                  else:
+                    history[datatype][dataid].append([int(timestamp) * 1000, timedata[history_field]])
 
     return history
