@@ -168,3 +168,7 @@ canvas.gauge {
 #tooltip span {
   cursor: default;
 }
+
+.dropdown-menu {
+  min-width: 50px;
+}
