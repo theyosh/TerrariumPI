@@ -67,9 +67,6 @@ class terrariumWebserver():
 
     self.__app.route('/api/<path:path>', method=['GET'], callback=self.__get_api_call)
 
-
-#    terrariumWebserver.app.terrarium.power_switches[message['data']['id']].toggle()
-
   def __template_variables(self, template):
     variables = { 'title' : self.__config['title'],
                   'page_title' : template.replace('_',' ').title()}
