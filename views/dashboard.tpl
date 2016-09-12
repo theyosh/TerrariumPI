@@ -288,3 +288,4 @@
             update_dashboard_history();
           });
         </script>
+% include('inc/page_footer.tpl')

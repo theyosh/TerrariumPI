@@ -84,6 +84,12 @@ class terrariumEngine():
     return data
 
   def __calculate_power_usage_water_flow(self):
+    print self.collector.get_history(['switches','summary'])
+
+    return self.collector.get_history(['switches','summary'])
+
+
+
     data = {'power_wattage' : 0.0,
             'water_flow' : 0.0,
             'total_power': 0.0,
@@ -92,7 +98,10 @@ class terrariumEngine():
     today = datetime.date.today()
     today = int(time.mktime(today.timetuple()))
 
-    prev_data = self.collector.get_history(['switches','summary'])['switches']['summary']
+    prev_data = self.collector.get_history(['switches','summary'])
+    if 'switches' in prev_data:
+      prev_data = prev_data['switches']['summary']
+
     for fieldname in prev_data:
       for data_item in prev_data[fieldname]:
         if data_item[0] / 1000 < today:
@@ -112,7 +121,10 @@ class terrariumEngine():
     data['water_flow'] = 0.0
 
     # Go through today power actions
-    history_data = self.collector.get_history(['switches'])['switches']
+    history_data = self.collector.get_history(['switches'])
+    if 'switches' in history_data:
+      history_data = history_data
+
     for switchid in history_data:
       if switchid not in history_data or len(history_data[switchid]['state']) == 0:
         continue
@@ -284,6 +296,14 @@ class terrariumEngine():
       update_ok = self.set_environment_config(data)
 
     elif 'system' == part:
+      if 'new_password' in data and data['new_password'] != '' and 'cur_password' in data and data['cur_password'] != '' and data['new_password'] != data['cur_password']:
+        # check if existing password is correct
+        existing_password =  self.config.get_system()['password']
+        if existing_password == data['cur_password']:
+          data['password'] = data['new_password']
+          del(data['new_password'])
+          del(data['cur_password'])
+
       update_ok = self.set_system_config(data)
       if update_ok:
         # Update config settings
@@ -294,7 +314,9 @@ class terrariumEngine():
     return update_ok
 
   def get_system_config(self):
-    return self.config.get_system()
+    data = self.config.get_system()
+    del(data['password'])
+    return data
 
   def set_system_config(self,data):
     return self.config.set_system(data)

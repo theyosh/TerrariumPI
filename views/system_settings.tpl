@@ -32,9 +32,15 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="port">Admin password <span class="required">*</span></label>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="port">New admin password <span class="required">*</span></label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
-                      <input class="form-control" name="password" required="required" type="password">
+                      <input class="form-control" name="new_password" required="required" type="password">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="port">Current admin password <span class="required">*</span></label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                      <input class="form-control" name="cur_password" required="required" type="password">
                     </div>
                   </div>
                   <div class="form-group">
