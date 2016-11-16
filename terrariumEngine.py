@@ -84,64 +84,7 @@ class terrariumEngine():
     return data
 
   def __calculate_power_usage_water_flow(self):
-    print self.collector.get_history(['switches','summary'])
-
     return self.collector.get_history(['switches','summary'])
-
-
-
-    data = {'power_wattage' : 0.0,
-            'water_flow' : 0.0,
-            'total_power': 0.0,
-            'total_water' : 0.0}
-
-    today = datetime.date.today()
-    today = int(time.mktime(today.timetuple()))
-
-    prev_data = self.collector.get_history(['switches','summary'])
-    if 'switches' in prev_data:
-      prev_data = prev_data['switches']['summary']
-
-    for fieldname in prev_data:
-      for data_item in prev_data[fieldname]:
-        if data_item[0] / 1000 < today:
-          data[fieldname] = float(data_item[1])
-
-    # Reset daily usage values
-    # Calculating the current uptime
-    now = int(time.time())
-    uptime = self.get_uptime()['uptime']
-    # If uptime is more then one day, reduce it to only of today
-    if uptime > now - today:
-      uptime = now - today
-
-    # Set the initial power usage on uptime of the server
-    data['power_wattage'] = (float(uptime) / 3600.0) * float(self.pi_power_wattage)
-    # Set water to zero
-    data['water_flow'] = 0.0
-
-    # Go through today power actions
-    history_data = self.collector.get_history(['switches'])
-    if 'switches' in history_data:
-      history_data = history_data
-
-    for switchid in history_data:
-      if switchid not in history_data or len(history_data[switchid]['state']) == 0:
-        continue
-
-      if switchid in self.power_switches and self.power_switches[switchid].is_on() and not history_data[switchid]['state'][len(history_data[switchid]['state'])-1][1]:
-        # Fake end state to calculate current powered on switches usages until NOW
-        history_data[switchid]['state'].append([now * 1000 , False])
-
-      for counter in range(0,len(history_data[switchid]['state'])):
-        if counter > 0 and (history_data[switchid]['state'][counter][0] / 1000) >= today and not history_data[switchid]['state'][counter][1] and history_data[switchid]['state'][counter-1][1]:
-          duration = (float(history_data[switchid]['state'][counter][0]) - float(history_data[switchid]['state'][counter-1][0])) / 1000.0
-          data['power_wattage'] += (duration / 3600.0) * float(history_data[switchid]['power_wattage'][counter-1][1])
-          data['water_flow'] += (duration / 60.0) * float(history_data[switchid]['water_flow'][counter-1][1])
-
-    data['total_power'] += data['power_wattage']
-    data['total_water'] += data['water_flow']
-    return data
 
   def __engine_loop(self):
     while True:

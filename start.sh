@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Some settings
-RUN_AS_USER="pi"
+RUN_AS_USER="root"
 SCREEN_NAME="terrariumPI"
 RESTART_TIME=10
 MAX_RESTARTS=5

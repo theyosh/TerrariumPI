@@ -51,7 +51,6 @@ function websocket_init(reconnect) {
   globals.websocket.onmessage = function(evt) {
     online_updater();
     var data = JSON.parse(evt.data);
-    console.log(new Date(), data);
     switch (data.type) {
       case 'uptime':
         update_dashboard_uptime(data.data);
@@ -195,6 +194,7 @@ function prepare_form_data(form) {
   var formdata = [];
   var form_type = form.attr('action').split('/').pop();
   var re = /(sensor|switch|webcam|light|sprayer|heater)(_\d+)?_(.*)/i;
+  var matches = null;
   var objectdata = {};
   var prev_nr = -1;
   if (form_type === 'weather' || form_type === 'environment' || form_type === 'system') {
@@ -217,6 +217,7 @@ function prepare_form_data(form) {
             if (matches.index === re.lastIndex) {
               re.lastIndex++;
             }
+            var current_nr = -1;
             if (matches.length >= 3) {
               if (matches[2] === undefined) {
                 current_nr = matches[1];
@@ -846,7 +847,6 @@ function update_webcam_preview(name, url) {
 function toggleSwitch(id) {
   id = id.split('_')[1];
   $.getJSON('/api/switch/toggle/' + id,function(data){
-    console.log(data);
   });
 }
 
