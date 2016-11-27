@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import logging
+logger = logging.getLogger(__name__)
+
 from bottle import Bottle, request, abort, static_file, template, error, response, auth_basic
 from bottle.ext.websocket import GeventWebSocketServer
 from bottle.ext.websocket import websocket
@@ -200,16 +203,11 @@ class terrariumWebserver():
           thread.start_new_thread(listen_for_messages, (messages,socket))
           terrariumWebserver.app.terrarium.subscribe(messages)
 
-        #if message['type'] == 'client_init' or message['type'] == 'show_dashboard':
         terrariumWebserver.app.terrarium.door_status(socket=True)
         terrariumWebserver.app.terrarium.get_uptime(socket=True)
         terrariumWebserver.app.terrarium.get_power_usage_water_flow(socket=True)
         terrariumWebserver.app.terrarium.get_environment(socket=True)
         terrariumWebserver.app.terrarium.get_sensors(['average'],socket=True)
-#
-#        elif message['type'] == 'toggle_switch':
-#          if 'toggle' == message['data']['state']:
-#            terrariumWebserver.app.terrarium.power_switches[message['data']['id']].toggle()
 
   def start(self):
     # Start the webserver

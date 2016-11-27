@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import logging
+logger = logging.getLogger(__name__)
+
 from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
 from hashlib import md5
 
@@ -17,9 +20,12 @@ class terrariumSwitchboard():
   def __init__(self, config, callback = None):
     switch_config = config.get_system()
     self.max_number_of_switches = int(switch_config['max_switches'])
+    logger.debug('Set maximum of switches to: %s' % (self.max_number_of_switches,))
+
     # Reload config
     switch_config = config.get_switches()['switches']
     self.active_number_of_switches = self.max_number_of_switches if len(switch_config) == 0 else len(switch_config)
+    logger.debug('Set user maximum of switches to: %s' % (self.active_number_of_switches,))
 
     switch_numbers = [None] * self.active_number_of_switches
     for switchid in switch_config:
@@ -33,6 +39,7 @@ class terrariumSwitchboard():
     for device in Driver().list_devices():
       vendor, product, self.device = map(lambda x: x.decode('latin1'), device)
       self.device_type = 'Serial' if product.endswith('UART') else 'BitBang'
+      logger.info('Found switch board %s %s %s of type %s' % (vendor,product,self.device,self.device_type))
       break # For now, we only support 1 switch board!
 
     for nr in range(0,self.active_number_of_switches):
@@ -51,6 +58,7 @@ class terrariumSwitchboard():
       self.switches[power_switch.get_id()] = power_switch
 
     self.id = md5(b'' + self.device + self.device_type).hexdigest()
+    logger.info('Done loading switches. Found %s' % (len(self.switches),))
 
   def get_id(self):
     return self.id
@@ -73,6 +81,8 @@ class terrariumSwitchboard():
       switch.set_name(switch_config['switches'][switch.get_nr()-1]['name'])
       switch.set_power_wattage(switch_config['switches'][switch.get_nr()-1]['power_wattage'])
       switch.set_water_flow(switch_config['switches'][switch.get_nr()-1]['water_flow'])
+
+    logger.debug('Reloaded switches. Found %s' % (len(self.switches),))
 
   def get_switches(self):
     data = {'switchboard_id':self.get_id(),
@@ -106,6 +116,11 @@ class terrariumSwitch():
     self.set_power_wattage(power_wattage)
     self.set_water_flow(water_flow)
 
+    logger.info('Loaded switch %s with values: power %sW and waterflow %sL/s' %
+                (self.get_name(),
+                 self.get_power_wattage(),
+                 self.get_water_flow()))
+
     # Force to off state!
     self.state = None
     self.set_state(False,True)
@@ -129,11 +144,12 @@ class terrariumSwitch():
             device.write(cmd)
             device.close()
 
-#        terrarium_log.info('Switched switch %s(%s) from %s',self.getName(),self.getID(),('off to on' if 'on' == state else 'on to off'))
         self.state = state
+        logger.info('Toggle switch %s from %s',self.get_name(),('off to on' if self.is_on() else 'on to off'))
         self.callback(self.get_data())
       except Exception, err:
         # Ignore for now
+        print err
         pass
 
       finally:

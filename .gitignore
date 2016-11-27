@@ -2,3 +2,4 @@
 settings.cfg
 history.db*
 static/webcam/*.jpg
+log/*.log

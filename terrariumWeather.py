@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import logging
+logger = logging.getLogger(__name__)
+
 import untangle
 from datetime import datetime, timedelta
 import dateutil.parser
@@ -51,10 +54,12 @@ class terrariumWeather():
     return None
 
   def __refresh(self):
+    logger.info('Refreshing weather data')
     self.__load_hours_forecast()
     self.__load_week_forecast()
 
     self.next_update = int(time.time()) + 3600
+    logger.info('Done refreshing weather data. Next update after: %s' % (self.next_update,))
 
   def update(self, socket = False):
     send_message = False
@@ -68,11 +73,13 @@ class terrariumWeather():
     # Update hourly forecast for today
     if now > self.hour_forecast[0]['to']:
       del self.hour_forecast[0]
+      logger.info('Shift hourly forecast to: %s' % (self.hour_forecast[0]['to'],))
       send_message = True
 
     # Update week forecast
     if now > self.week_forecast[0]['to']:
       del self.week_forecast[0]
+      logger.info('Shift weekly forecast to: %s' % (self.hour_forecast[0]['to'],))
       send_message = True
 
     # Send message when there where changes
@@ -113,7 +120,10 @@ class terrariumWeather():
     self.sun['rise'] = time.mktime(dateutil.parser.parse(xmldata.weatherdata.sun['rise']).timetuple())
     self.sun['set'] = time.mktime(dateutil.parser.parse(xmldata.weatherdata.sun['set']).timetuple())
 
+    logger.debug('Loaded weather defaults for location %s, sun %s, credits %s' % (self.location,self.sun,self.credits))
+
   def __load_hours_forecast(self):
+    logger.debug('Loading hours forcecast data from location: %s' % (terrariumWeather.forecast_hours.replace('{location}',self.settings['location']),))
     xmldata = untangle.parse(terrariumWeather.forecast_hours.replace('{location}',self.settings['location']))
     self.__load_defaults(xmldata);
     self.hour_forecast = []
@@ -128,8 +138,11 @@ class terrariumWeather():
                             'pressure' : float(forecast.pressure['value']),
                             'icon' : self.__get_weather_icon(forecast.symbol['name'])
                            })
+      logger.debug('Added hour forecast for timeslot %s to %s' % (datetime.fromtimestamp(self.hour_forecast[len(self.hour_forecast)-1]['from']),
+                                                                  datetime.fromtimestamp(self.hour_forecast[len(self.hour_forecast)-1]['to'])))
 
   def __load_week_forecast(self):
+    logger.debug('Loading week forcecast data from location: %s' % (terrariumWeather.forecast_week.replace('{location}',self.settings['location']),))
     xmldata = untangle.parse(terrariumWeather.forecast_week.replace('{location}',self.settings['location']))
     self.__load_defaults(xmldata);
     self.week_forecast = []
@@ -144,6 +157,8 @@ class terrariumWeather():
                               'pressure' : float(forecast.pressure['value']),
                               'icon' : self.__get_weather_icon(forecast.symbol['name'])
                              })
+      logger.debug('Added week forecast for timeslot %s to %s' % (datetime.fromtimestamp(self.week_forecast[len(self.week_forecast)-1]['from']),
+                                                                  datetime.fromtimestamp(self.week_forecast[len(self.week_forecast)-1]['to'])))
 
   def get_config(self):
     return {'location' : self.settings['location'],

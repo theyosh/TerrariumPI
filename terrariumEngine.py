@@ -1,4 +1,15 @@
 # -*- coding: utf-8 -*-
+import logging
+logger = logging.getLogger(__name__)
+
+import thread
+import time
+import uptime
+import os
+import datetime
+import psutil
+from gevent import monkey, sleep
+
 from terrariumDoor import terrariumDoor
 from terrariumSensor import terrariumSensor
 from terrariumSwitchboard import terrariumSwitchboard
@@ -8,14 +19,6 @@ from terrariumCollector import terrariumCollector
 from terrariumEnvironment import terrariumEnvironment
 from terrariumConfig import terrariumConfig
 
-import thread
-import time
-import uptime
-import os
-import datetime
-import psutil
-
-from gevent import monkey, sleep
 monkey.patch_all()
 
 class terrariumEngine():
@@ -30,44 +33,66 @@ class terrariumEngine():
     self.environment = None
 
     # Load config
+    logger.debug('Loading terrariumPI config')
     self.config = terrariumConfig()
+    logger.debug('Done Loading terrariumPI config')
+
+    logger.debug('Setting terrariumPI authentication')
     self.set_authentication(self.config.get_admin(),self.config.get_password())
+    logger.debug('Done setting terrariumPI authentication')
 
     # Load data collector for historical data
+    logger.debug('Loading terrariumPI collector')
     self.collector = terrariumCollector()
+    logger.debug('Done loading terrariumPI collector')
 
     # Set the Pi power usage (including usb devices directly on the PI)
+    logger.debug('Loading terrariumPI PI power setting')
     self.pi_power_wattage = float(self.config.get_pi_power_wattage())
+    logger.debug('Done loading terrariumPI PI power setting')
 
     # Load Weather part
+    logger.debug('Loading terrariumPI weather data')
     self.weather = terrariumWeather(self.config.get_weather_location(),
                                     self.config.get_weather_windspeed(),
                                     self.config.get_weather_temperature(),
                                     self.get_weather)
+    logger.debug('Done loading terrariumPI weather data')
 
     # Load Powerswitches part
+    logger.debug('Loading terrariumPI power switches')
     self.power_switches = {}
     self.switch_board = terrariumSwitchboard(self.config,self.toggle_switch)
     self.power_switches = self.switch_board.switches
+    logger.debug('Done loading terrariumPI power switches')
 
     # Load Door part
+    logger.debug('Loading terrariumPI power switches')
     self.door_sensor = terrariumDoor(self.config.get_door_pin(),self.door_status)
+    logger.debug('Done loading terrariumPI power switches')
 
     # Load Sensors, with ID as index
+    logger.debug('Loading terrariumPI temperature/humidity sensors')
     self.sensors = {}
     for sensor in terrariumSensor.scan(self.config.get_1wire_port(), self.config.get_sensors()):
       self.sensors[sensor.get_id()] = sensor
+    logger.debug('Done loading terrariumPI temperature/humidity sensors')
 
     # Load the environment system. This will controll the lights, sprayer and heaters
+    logger.debug('Loading terrariumPI environment system')
     self.environment = terrariumEnvironment(self.sensors, self.power_switches, self.door_sensor, self.weather, self.config)
+    logger.debug('Done loading terrariumPI environment system')
 
     # Load webcams from config
+    logger.debug('Loading terrariumPI webcams')
     self.webcams = {}
     webcams = self.config.get_webcams()
     for webcamid in webcams:
       self.webcams[webcams[webcamid]['id']] = terrariumWebcam(webcams[webcamid]['id'],webcams[webcamid]['location'],webcams[webcamid]['name'],webcams[webcamid]['rotation'])
+    logger.debug('Done loading terrariumPI webcams')
 
     # Start system update loop
+    logger.info('Start terrariumPI engine')
     thread.start_new_thread(self.__engine_loop, ())
 
   def __get_power_usage_water_flow(self, socket = False):

@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import logging
+logger = logging.getLogger(__name__)
+
 from time import time
 from io import BytesIO
 import StringIO
@@ -44,30 +47,47 @@ class terrariumWebcam():
     self.update()
 
   def __get_raw_image(self):
+    logger.debug('Start getting raw image data from location: %s' % (self.location,))
     stream = BytesIO()
 
     try:
       if 'rpicam' == self.location:
+        logger.debug('Using RPICAM')
         with PiCamera(resolution=(1920, 1080)) as camera:
+          logger.debug('Open rpicam')
           camera.start_preview()
+          logger.debug('Wait 2 seconds for preview')
           sleep(2)
-          camera.capture(stream, format='png')
+          logger.debug('Save rpicam to jpeg')
+          camera.capture(stream, format='jpeg')
+          logger.debug('Done creating RPICAM image')
 
       elif self.location.startswith('/dev/video'):
+        logger.debug('Using USB')
+        logger.debug('Open USB')
         camera = cv2.VideoCapture(int(self.location[10:]))
+        logger.debug('Set USB height to 1280')
         camera.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, 1280)
+        logger.debug('Set USB width to 720')
         camera.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, 720)
+        logger.debug('Wait 2 seconds for preview')
         sleep(2)
+        logger.debug('Save USB to raw data')
         readok, image = camera.read()
 
         if readok:
-          png = Image.fromarray(cv2.cvtColor(image,cv2.COLOR_BGR2RGB))
+          logger.debug('Save USB to jpeg')
+          jpeg = Image.fromarray(cv2.cvtColor(image,cv2.COLOR_BGR2RGB))
           stream = StringIO.StringIO()
-          png.save(stream,'JPEG')
+          jpeg.save(stream,'JPEG')
+          logger.debug('Done creating USB image')
 
+        logger.debug('Release USB camera')
         camera.release()
+        logger.debug('Done release USB camera')
 
       elif self.location.startswith('http://') or self.location.startswith('https://'):
+        logger.debug('Using URL')
         if '@' in self.location:
           start = self.location.find('://') + 3
           end = self.location.find('@', start)
@@ -84,11 +104,14 @@ class terrariumWebcam():
       self.state = True
 
       # "Rewind" the stream to the beginning so we can read its content
+      logger.debug('Reset raw image')
       stream.seek(0)
       # Store image in memory for further processing
+      logger.debug('Copy raw image to memory')
       self.raw_image = Image.open(stream)
 
       # Rotate image if needed
+      logger.debug('Rotate image at %s' % (self.get_rotation(),))
       if '90' == self.get_rotation():
         self.raw_image = self.raw_image.transpose(Image.ROTATE_90)
       elif  '180' == self.get_rotation():
@@ -100,11 +123,14 @@ class terrariumWebcam():
       elif 'v' == self.get_rotation():
         self.raw_image = self.raw_image.transpose(Image.FLIP_LEFT_RIGHT)
 
+      logger.debug('Saving image to disc: %s' % (self.get_raw_image(),))
       self.raw_image.save(self.get_raw_image(),'jpeg',quality=95)
+      logger.debug('Done saving image to disc: %s' % (self.get_raw_image(),))
 
     except Exception, err:
       # Error loadig image, so load offline image
       if self.state is not False:
+        logger.warning('Image at location %s is not available' % (self.location,))
         self.__get_offline_image()
         self.state = False
 
@@ -172,26 +198,37 @@ class terrariumWebcam():
     # Calculate the max zoomfactor
     zoom_factor = int(math.log(max_size/self.tile_size,2))
     self.max_zoom = zoom_factor
+    logger.debug('Tileing image with source resolution %s, from %sx%s with resize factor %s in %s steps' %
+                  (self.resolution, source_width,source_height,resize_factor, zoom_factor))
 
     # as long as there is a new layer, continue
     while zoom_factor >= 0:
       # Create black canvas on zoom factor dimensions
+      logger.debug('Createing new black canvas with dimensions %sx%s' % (canvas_width,canvas_height))
       canvas = Image.new("RGB", ((int(round(canvas_width)),int(round(canvas_height)))), "black")
       # Scale the raw image to the zoomfactor dimensions
+      logger.debug('Scale raw image to new canvas size (%sx%s)' % (canvas_width,canvas_height))
       source = self.raw_image.resize((int(round(source_width)),int(round(source_height))))
       # Set the timestamp on resized image
+      logger.debug('Put timestamp on scaled image')
       self.__set_timestamp(source)
 
       # Calculate the center in the canvas for pasting raw image
+      logger.debug('Calculate center position')
       paste_center_position = (int(round((canvas_width - source_width) / 2)),int(round((canvas_height - source_height) / 2)))
+      logger.debug('Pasting resized image to center of canvas at position %s' % (paste_center_position,))
       canvas.paste(source,paste_center_position)
 
       # Loop over the canvas to create the tiles
+      logger.debug('Creating the lose tiles with dimensions %sx%s' % (canvas_width, canvas_height,))
       for row in xrange(0,int(math.ceil(canvas_height/self.tile_size))):
         for column in xrange(0,int(math.ceil(canvas_width/self.tile_size))):
           crop_size = ( int(row*self.tile_size), int(column*self.tile_size) ,int((row+1)*self.tile_size), int((column+1)*self.tile_size))
+          logger.debug('Cropping image from position %s' % (crop_size,))
           tile = canvas.crop(crop_size)
+          logger.debug('Saving cropped image to %s' % (self.tile_location + self.id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg',))
           tile.save(self.tile_location + self.id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg','jpeg',quality=95)
+          logger.debug('Done saving %s' % (self.tile_location + self.id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg',))
 
       # Scale down by 50%
       canvas_width /= 2.0
@@ -218,8 +255,10 @@ class terrariumWebcam():
             }
 
   def update(self):
+    logger.info('Updating webcam %s at location %s' % (self.get_name(), self.get_location(),))
     self.__get_raw_image()
     self.__tile_image()
+    logger.info('Done updating webcam %s at location %s' % (self.get_name(), self.get_location(),))
 
   def get_id(self):
     return self.id
