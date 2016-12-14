@@ -197,7 +197,6 @@ class terrariumWebserver():
 
       if message is not None:
         message = json.loads(message)
-        print message
 
         if message['type'] == 'client_init':
           thread.start_new_thread(listen_for_messages, (messages,socket))

@@ -108,7 +108,7 @@
             </div><!-- end of weather widget -->
           </div>
           <div class="col-md-8 col-sm-7 col-xs-12">
-            <div class="x_panel">
+            <div class="x_panel" id="weather_day">
               <div class="x_title">
                 <h2>Day forecast <small id="weather_hourly">...</small></h2>
                 <ul class="nav navbar-right panel_toolbox">
@@ -133,10 +133,10 @@
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
-                <div class="history_graph loading" id="history_graph_weather_day"></div>
+                <div class="history_graph loading"></div>
               </div>
             </div>
-            <div class="x_panel">
+            <div class="x_panel" id="weather_week">
               <div class="x_title">
                 <h2>Week forecast <small id="weather_daily">...</small></h2>
                 <ul class="nav navbar-right panel_toolbox">
@@ -161,7 +161,7 @@
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
-                <div class="history_graph loading" id="history_graph_weather_week"></div>
+                <div class="history_graph loading"></div>
               </div>
             </div>
           </div>

@@ -5,8 +5,10 @@ var globals = {
   connection: 'ws' + (location.protocol == 'https:' ? 's' : '') + '://' + location.host + '/live',
   gauges: [],
   webcams: [],
+  graphs: {},
+  graph_cache: 5 * 60,
   websocket_timer: null,
-  updatetimer: null,
+//  updatetimer: null,
   online_timer: null
 };
 
@@ -519,15 +521,15 @@ function reload_reload_theme() {
 }
 
 function sensor_gauge(name, data) {
-  if ($('#sensor_' + name).length == 1) {
+  if ($('#' + name + ' .gauge').length == 1) {
     // Update title
     if (data.type !== undefined && data.name !== undefined) {
-      $('#sensor_' + name + ' span.title').text(data.type + ' sensor: ' + (data.name !== '' ? data.name : data.address));
+      $('#' + name + ' span.title').text(data.type + ' sensor: ' + (data.name !== '' ? data.name : data.address));
     }
     // Update timestamp indicator
-    $('#sensor_' + name + ' small').text(moment().format('LLL'));
+    $('#' + name + ' small').text(moment().format('LLL'));
     // Setup a new gauge if needed
-    if (globals.gauges[name] === undefined) {
+    if ($('#' + name + ' .gauge').attr('style') === undefined) {
       var valid_area = data.alarm_max - data.alarm_min;
       var colors = [
         [0.0, '#E74C3C'],
@@ -553,14 +555,54 @@ function sensor_gauge(name, data) {
         maxValue: data.max,
         percentColors: colors,
       };
-      globals.gauges[name] = new Gauge(document.getElementById('gauge_canvas_' + name)).setOptions(opts);
-      globals.gauges[name].setTextField(document.getElementById('gauge_text_' + name));
+      // Init Gauge
+      globals.gauges[name] = new Gauge($('#' + name + ' .gauge')[0]).setOptions(opts);
+      globals.gauges[name].setTextField($('#' + name + ' .gauge-value')[0]);
     }
     // Update values
     globals.gauges[name].minValue = data.min;
     globals.gauges[name].maxValue = data.max;
     globals.gauges[name].set(data.current);
-    $('div#sensor_' + name + ' .x_title h2 .badge').toggle(data.alarm);
+    $('div#' + name + ' .x_title h2 .badge').toggle(data.alarm);
+  }
+}
+
+function load_history_graph(id,type,data_url) {
+  if ($('#' + id + ' .history_graph').length == 1) {
+    var now = + new Date();
+    var data = [];
+    if (type === undefined) {
+      type = 'temperature';
+    }
+    if (globals.graphs[id] === undefined) {
+      globals.graphs[id] = {'timestamp' : 0,
+                            'type' : type,
+                            'data' : [],
+                            'timer': null };
+    }
+
+    if (now - globals.graphs[id].timestamp < globals.graph_cache * 1000) {
+      history_graph(id, globals.graphs[id].data, type);
+    } else {
+      // Load fresh data...
+      $.getJSON(data_url, function(online_data) {
+        $.each(online_data, function(dummy, value) {
+          $.each(value, function(dummy, data_array) {
+            globals.graphs[id].timestamp = now;
+            if (type == 'switch') {
+              globals.graphs[id].data = process_switch_data(data_array);
+            } else {
+              globals.graphs[id].data = data_array;
+            }
+          });
+        });
+        history_graph(id, globals.graphs[id].data, type);
+      });
+    }
+    clearTimeout(globals.graphs[id].timer);
+    globals.graphs[id].timer = setTimeout(function() {
+          load_history_graph(id,type,data_url);
+      }, 1 * 20 * 1000);
   }
 }
 
@@ -568,6 +610,7 @@ function history_graph(name, data, type) {
   if (type === undefined) {
     type = 'temperature';
   }
+
   var graph_data = [];
   var graph_options = {
     tootip: true,
@@ -719,14 +762,14 @@ function history_graph(name, data, type) {
     var total_data_duration = (graph_data[0].data[graph_data[0].data.length - 1][0] - graph_data[0].data[0][0]) / 3600000;
     graph_options.xaxis.tickSize[0] = Math.round(total_data_duration * 2.5);
   }
-  if ($('#history_graph_' + name).length == 1) {
-    $('#history_graph_' + name).html('').removeClass('loading');
-    $.plot($('#history_graph_' + name), graph_data, graph_options);
 
-    $('#history_graph_' + name).bind('plothover', function (event, pos, item) {
+  if ($('#' + name + ' .history_graph').length == 1) {
+    $('#' + name + ' .history_graph').html('').removeClass('loading');
+    $.plot($('#' + name + ' .history_graph'), graph_data, graph_options);
+    $('#' + name + ' .history_graph').bind('plothover', function (event, pos, item) {
       if (item) {
         $('#tooltip').css({top: item.pageY-5, left: item.pageX-5});
-        $('#tooltip span').attr('data-original-title',moment(item.datapoint[0]).format('LLLL') + '<br />' + item.series.label + ' ' + item.series.yaxis.tickFormatter(item.datapoint[1],item.series.yaxis));
+        $('#tooltip span').attr('data-original-title',moment(item.datapoint[0]).format('LLL') + '<br />' + item.series.label + ' ' + item.series.yaxis.tickFormatter(item.datapoint[1],item.series.yaxis));
       }
     });
   }
@@ -739,95 +782,47 @@ function update_power_switch(id, data) {
   power_switch.find('span.glyphicon').removeClass('blue green').addClass((data.state ? 'green' : 'blue'));
 }
 
-function update_switch_history() {
-  if ($('div.row.switch').length >= 0) {
-    $.getJSON('/api/history/switches', function(data) {
-      $.each(data.switches, function(index, powerswitch) {
-        var graphdata = {
-          power_wattage: [],
-          water_flow: []
-        };
-        var state_chage = -1;
-        $.each(powerswitch.state, function(counter, status) {
-          if (!status[1]) {
-            powerswitch.power_wattage[counter][1] = 0;
-            powerswitch.water_flow[counter][1] = 0;
-          }
-          var copy = {};
-          if (counter > 0 && state_chage != status[1]) {
-            // Copy previous object to get the right status with current timestamp
-            copy = $.extend(true, {}, powerswitch.power_wattage[counter - 1]);
-            copy[0] = status[0];
-            graphdata.power_wattage.push(copy);
-            copy = $.extend(true, {}, powerswitch.water_flow[counter - 1]);
-            copy[0] = status[0];
-            graphdata.water_flow.push(copy);
-            state_chage = status[1];
-          }
-          graphdata.power_wattage.push(powerswitch.power_wattage[counter]);
-          graphdata.water_flow.push(powerswitch.water_flow[counter]);
-          if (counter == powerswitch.state.length - 1) {
-            // Add endpoint which is a copy of the last point, with current time
-            copy = $.extend(true, {}, powerswitch.power_wattage[counter]);
-            copy[0] = (new Date()).getTime();
-            graphdata.power_wattage.push(copy);
-            copy = $.extend(true, {}, powerswitch.water_flow[counter]);
-            copy[0] = (new Date()).getTime();
-            graphdata.water_flow.push(copy);
-          }
-        });
-        history_graph(index, graphdata, 'switch');
-      });
-      clearTimeout(globals.updatetimer);
-      globals.updatetimer = setTimeout(function() {
-        update_switch_history();
-      }, 1 * 60 * 1000);
-    });
-  }
+function toggleSwitch(id) {
+  id = id.split('_')[1];
+  $.getJSON('/api/switch/toggle/' + id,function(data){
+  });
 }
 
-function update_dashboard_history() {
-  if ($('#sensor_temperature, #sensor_humidity').length >= 1) {
-    $.getJSON('/api/history/sensors/average', function(data) {
-      $.each(data, function(type, value) {
-        history_graph(type, value.average, type);
-      });
-      clearTimeout(globals.updatetimer);
-      globals.updatetimer = setTimeout(function() {
-        update_dashboard_history();
-      }, 1 * 60 * 1000)
-    });
-  }
-}
-
-function update_system_history() {
-  if ($('div.row.load').length >= 1) {
-    $.getJSON('/api/history/system', function(data) {
-      $.each(data.system, function(type, value) {
-        if (type != 'cores'){
-          history_graph('system_' + type, value, 'system_' + type);
-        }
-      });
-      clearTimeout(globals.updatetimer);
-      globals.updatetimer = setTimeout(function() {
-        update_system_history();
-      }, 1 * 60 * 1000)
-    });
-  }
-}
-
-function update_sensor_history(type) {
-  if ($('div.row.sensor').length >= 1) {
-    $.getJSON('/api/history/sensors/' + type, function(data) {
-      $.each(data[type], function(index, sensor) {
-        history_graph(index, sensor, type);
-      });
-      clearTimeout(globals['updatetimer']);
-      globals['updatetimer'] = setTimeout(function() {
-        update_sensor_history(type);
-      }, 1 * 60 * 1000)
-    });
-  }
+function process_switch_data(raw_data) {
+  var graphdata = {
+    power_wattage: [],
+    water_flow: []
+  };
+  var state_chage = -1;
+  $.each(raw_data.state, function(counter, status) {
+    if (!status[1]) {
+      raw_data.power_wattage[counter][1] = 0;
+      raw_data.water_flow[counter][1] = 0;
+    }
+    var copy = {};
+    if (counter > 0 && state_chage != status[1]) {
+      // Copy previous object to get the right status with current timestamp
+      copy = $.extend(true, {}, raw_data.power_wattage[counter - 1]);
+      copy[0] = status[0];
+      graphdata.power_wattage.push(copy);
+      copy = $.extend(true, {}, raw_data.water_flow[counter - 1]);
+      copy[0] = status[0];
+      graphdata.water_flow.push(copy);
+      state_chage = status[1];
+    }
+    graphdata.power_wattage.push(raw_data.power_wattage[counter]);
+    graphdata.water_flow.push(raw_data.water_flow[counter]);
+    if (counter == raw_data.state.length - 1) {
+      // Add endpoint which is a copy of the last point, with current time
+      copy = $.extend(true, {}, raw_data.power_wattage[counter]);
+      copy[0] = (new Date()).getTime();
+      graphdata.power_wattage.push(copy);
+      copy = $.extend(true, {}, raw_data.water_flow[counter]);
+      copy[0] = (new Date()).getTime();
+      graphdata.water_flow.push(copy);
+    }
+  });
+  return graphdata;
 }
 
 function updateWebcams() {
@@ -842,12 +837,6 @@ function updateWebcams() {
 
 function update_webcam_preview(name, url) {
   $('img#webcam_' + name + '_preview').attr('src', url);
-}
-
-function toggleSwitch(id) {
-  id = id.split('_')[1];
-  $.getJSON('/api/switch/toggle/' + id,function(data){
-  });
 }
 
 function initWebcam(webcamid, name, maxzoom) {

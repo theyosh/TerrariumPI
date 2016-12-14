@@ -71,10 +71,10 @@
                   <a><i class="fa fa-lightbulb-o"></i> System <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li>
-                      <a href="system_environment.html">Environment</a>
+                      <a href="system_status.html">Status</a>
                     </li>
                     <li>
-                      <a href="system_status.html">Status</a>
+                      <a href="system_environment.html">Environment</a>
                     </li>
                     <li>
                       <a href="system_settings.html">Settings</a>

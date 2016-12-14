@@ -129,6 +129,9 @@ class terrariumWebcam():
 
     except Exception, err:
       # Error loadig image, so load offline image
+      print 'Webcam exception error!'
+      print err
+
       if self.state is not False:
         logger.warning('Image at location %s is not available' % (self.location,))
         self.__get_offline_image()

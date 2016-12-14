@@ -150,12 +150,9 @@
         <script type="text/javascript">
           $(document).ready(function() {
             $.get('/api/system',function(data) {
-              globals.gauges = [];
               $.each(data, function (key,value) {
-                var row = $('div.row.' + key).attr('id','sensor_system_' + key);
+                var row = $('div.row.' + key).attr('id','system_' + key);
                 if (row.find('canvas').length == 1) {
-                  row.find('canvas').attr('id','gauge_canvas_system_' + key);
-                  row.find('div.goal-wrapper > span:first').attr('id','gauge_text_system_' + key);
 
                   gauge_data = {alarm: false, current : 0, alarm_min : 0, alarm_max: 0, min : 0, max : 0}
                   switch (key) {
@@ -183,9 +180,8 @@
                   gauge_data.alarm = gauge_data.current < gauge_data.alarm_min || gauge_data.current > gauge_data.alarm_max
                   sensor_gauge('system_' + key, gauge_data);
                 }
-                row.find('div.history_graph').attr('id','history_graph_system_' + key);
+                load_history_graph('system_' + key,'system_' + key,'/api/history/system/' + key);
               });
-              update_system_history();
             });
           });
         </script>

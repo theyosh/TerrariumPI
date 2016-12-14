@@ -137,6 +137,9 @@ class terrariumCollector():
     logtype = parameters[0]
     del(parameters[0])
 
+    #print 'Collector parameters:'
+    #print parameters
+
     # Define start time
     if starttime is None:
       starttime = int(time.time())
@@ -155,17 +158,29 @@ class terrariumCollector():
     if logtype == 'sensors':
       fields = { 'current' : [], 'alarm_min' : [], 'alarm_max' : [] , 'min' : [], 'max' : []}
       sql = 'SELECT id, type, timestamp,' + ', '.join(fields.keys()) + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ?'
-      if len(parameters) > 0 and parameters[0] in ['temperature','humidty']:
-        sql = sql + ' and type = ?'
-        filters = (stoptime,starttime,parameters[0],)
-        del(parameters[0])
-      elif len(parameters) > 0 and parameters[0] == 'average':
+
+      if len(parameters) > 0 and parameters[0] == 'average':
         sql = 'SELECT "average" as id, type, timestamp'
         for field in fields:
           sql = sql + ', AVG(' + field + ') as ' + field
+        sql = sql + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ?'
 
-        sql = sql + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ? GROUP BY type, timestamp'
-        del(parameters[0])
+        if len(parameters) == 2:
+          sql = sql + ' and type = ?'
+          filters = (stoptime,starttime,parameters[1],)
+
+        sql = sql + ' GROUP BY type, timestamp'
+
+      elif len(parameters) == 2 and parameters[0] in ['temperature','humidity']:
+        sql = sql + ' and type = ? and id = ?'
+        filters = (stoptime,starttime,parameters[0],parameters[1],)
+      elif len(parameters) == 1 and parameters[0] in ['temperature','humidity']:
+        sql = sql + ' and type = ?'
+        filters = (stoptime,starttime,parameters[0],)
+
+      elif len(parameters) == 1:
+        sql = sql + ' and id = ?'
+        filters = (stoptime,starttime,parameters[0],)
 
     elif logtype == 'switches':
       fields = { 'power_wattage' : [], 'water_flow' : [] , 'state' : []}
@@ -198,7 +213,6 @@ class terrariumCollector():
       elif len(parameters) > 0 and parameters[0] is not None:
         sql = sql + ' and id = ?'
         filters = (stoptime,starttime,parameters[0],)
-        del(parameters[0])
 
     elif logtype == 'weather':
       fields = { 'wind_speed' : [], 'temperature' : [], 'pressure' : [] , 'wind_direction' : [], 'rain' : [],
@@ -207,6 +221,18 @@ class terrariumCollector():
 
     elif logtype == 'system':
       fields = ['load_load1', 'load_load5','load_load15','uptime', 'temperature','cores', 'memory_total', 'memory_used' , 'memory_free']
+
+      if len(parameters) > 0 and parameters[0] == 'load':
+        fields = ['load_load1', 'load_load5','load_load15']
+      elif len(parameters) > 0 and parameters[0] == 'cores':
+        fields = ['cores']
+      elif len(parameters) > 0 and parameters[0] == 'uptime':
+        fields = ['uptime']
+      elif len(parameters) > 0 and parameters[0] == 'temperature':
+        fields = ['temperature']
+      elif len(parameters) > 0 and parameters[0] == 'memory':
+        fields = ['memory_total', 'memory_used' , 'memory_free']
+
       sql = 'SELECT "system" as type, timestamp, ' + ', '.join(fields) + ' FROM system_data WHERE timestamp >= ? and timestamp <= ?'
 
     sql = sql + ' ORDER BY timestamp ASC'
@@ -214,6 +240,8 @@ class terrariumCollector():
     rows = []
     with self.db:
       cur = self.db.cursor()
+      #print 'Collector query:'
+      #print sql
       cur.execute(sql, filters)
       rows = cur.fetchall()
 

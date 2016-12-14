@@ -373,6 +373,7 @@ class terrariumEngine():
     if 'average' == filter or len(parameters) == 2 and parameters[1] == 'average':
       average = {}
       for sensor in data:
+        sensor['type'] = 'average_' +  sensor['type']
         if sensor['type'] not in average:
           average[sensor['type']] = {'current' : 0.0, 'alarm_min' : 0.0, 'alarm_max' : 0.0, 'min' : 0.0, 'max':0.0, 'amount' : 0.0}
 
