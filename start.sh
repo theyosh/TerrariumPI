@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Some settings
-RUN_AS_USER="root"
+RUN_AS_USER="pi"
 SCREEN_NAME="terrariumPI"
 RESTART_TIME=10
 MAX_RESTARTS=5
@@ -15,7 +15,7 @@ SCRIPT=$(basename $(readlink -nf $0))
 RUN=$1
 
 function message {
-  echo "$(date +"%d-%m-%Y %T"): $1"
+  echo "$(date +"%Y-%m-%d %T") - $1"
 }
 
 if [ "${RUN}" == "run" ]
@@ -48,7 +48,7 @@ then
       RESTART_ATTEMPTS=0
     fi
 
-    echo -n "$(date +"%d-%m-%Y %T"): Restarting in ${RESTART_TIME} seconds after running for ${SECONDS} seconds "
+    echo -n "$(date +"%Y-%m-%d %T") - Restarting in ${RESTART_TIME} seconds after running for ${SECONDS} seconds "
     for (( counter=1; counter<=${RESTART_TIME}; counter++ ))
     do
       echo -n "."

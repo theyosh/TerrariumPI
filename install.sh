@@ -22,10 +22,11 @@ rm get-pip.py
 pip install gevent untangle uptime bottle bottle_websocket
 
 # Install https://pypi.python.org/pypi/pylibftdi
+# Docu https://pylibftdi.readthedocs.io/
 pip install pylibftdi
 # Make sure that the normal Pi user can read and write to the usb driver
-echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", GROUP="users", MODE="0660"' > /etc/udev/rules.d/99-libftdi.rules
-echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", GROUP="users", MODE="0660"' >> /etc/udev/rules.d/99-libftdi.rules
+echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", GROUP="dialout", MODE="0660"' > /etc/udev/rules.d/99-libftdi.rules
+echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", GROUP="dialout", MODE="0660"' >> /etc/udev/rules.d/99-libftdi.rules
 
 # Install 1 Wire stuff
 aptitude -y install i2c-tools owfs ow-shell
