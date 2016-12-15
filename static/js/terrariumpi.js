@@ -575,7 +575,7 @@ function load_history_graph(id,type,data_url,nocache) {
       type = 'temperature';
     }
     if (nocache === undefined) {
-      nocache = 1;
+      nocache = 0;
     }
     if (globals.graphs[id] === undefined) {
       globals.graphs[id] = {'timestamp' : 0,
@@ -592,11 +592,11 @@ function load_history_graph(id,type,data_url,nocache) {
         if (index === 0) {
           li.addClass('focus');
         }
-        menu.append(li.append($('<a>').attr({'href':'javascript:void(0);','onclick':'$(this).parent().siblings().removeClass(\'focus\');$(this).parent().addClass(\'focus\');load_history_graph(\'' + id + '\',\'' + type + '\',\'' + data_url + '/' + value + '\')'}).text(value)));
+        menu.append(li.append($('<a>').attr({'href':'javascript:void(0);','onclick':'$(this).parent().siblings().removeClass(\'focus\');$(this).parent().addClass(\'focus\');load_history_graph(\'' + id + '\',\'' + type + '\',\'' + data_url + '/' + value + '\',1)'}).text(value)));
       });
     }
 
-    if (nocache === 1 && now - globals.graphs[id].timestamp < globals.graph_cache * 1000) {
+    if (nocache === 0 && now - globals.graphs[id].timestamp < globals.graph_cache * 1000) {
       history_graph(id, globals.graphs[id].data, type);
     } else {
       // Load fresh data...
@@ -616,7 +616,7 @@ function load_history_graph(id,type,data_url,nocache) {
     }
     clearTimeout(globals.graphs[id].timer);
     globals.graphs[id].timer = setTimeout(function() {
-          load_history_graph(id,type,data_url,0);
+          load_history_graph(id,type,data_url,1);
       }, 1 * 20 * 1000);
   }
   return false;
