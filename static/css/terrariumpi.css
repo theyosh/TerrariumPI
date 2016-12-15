@@ -172,3 +172,7 @@ canvas.gauge {
 .dropdown-menu {
   min-width: 50px;
 }
+
+.focus a{
+  font-weight: bold !important;
+}

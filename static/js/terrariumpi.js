@@ -567,12 +567,15 @@ function sensor_gauge(name, data) {
   }
 }
 
-function load_history_graph(id,type,data_url) {
+function load_history_graph(id,type,data_url,nocache) {
   if ($('#' + id + ' .history_graph').length == 1) {
     var now = + new Date();
     var data = [];
     if (type === undefined) {
       type = 'temperature';
+    }
+    if (nocache === undefined) {
+      nocache = 1;
     }
     if (globals.graphs[id] === undefined) {
       globals.graphs[id] = {'timestamp' : 0,
@@ -581,7 +584,19 @@ function load_history_graph(id,type,data_url) {
                             'timer': null };
     }
 
-    if (now - globals.graphs[id].timestamp < globals.graph_cache * 1000) {
+    // Create period menu items
+    if ($('#' + id + ' ul.dropdown-menu.period').find('li').length === 0) {
+      var menu = $('#' + id + ' ul.dropdown-menu.period');
+      $.each(['day','week','month','year'],function(index,value){
+        var li = $('<li>');
+        if (index === 0) {
+          li.addClass('focus');
+        }
+        menu.append(li.append($('<a>').attr({'href':'javascript:void(0);','onclick':'$(this).parent().siblings().removeClass(\'focus\');$(this).parent().addClass(\'focus\');load_history_graph(\'' + id + '\',\'' + type + '\',\'' + data_url + '/' + value + '\')'}).text(value)));
+      });
+    }
+
+    if (nocache === 0 && now - globals.graphs[id].timestamp < globals.graph_cache * 1000) {
       history_graph(id, globals.graphs[id].data, type);
     } else {
       // Load fresh data...
@@ -601,9 +616,10 @@ function load_history_graph(id,type,data_url) {
     }
     clearTimeout(globals.graphs[id].timer);
     globals.graphs[id].timer = setTimeout(function() {
-          load_history_graph(id,type,data_url);
+          load_history_graph(id,type,data_url,0);
       }, 1 * 20 * 1000);
   }
+  return false;
 }
 
 function history_graph(name, data, type) {

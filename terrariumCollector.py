@@ -11,7 +11,7 @@ class terrariumCollector():
     self.db = sqlite3.connect(terrariumCollector.database)
     self.db.row_factory = sqlite3.Row
     # Store data every Xth minute. Except switches.
-    self.modulo = 1
+    self.modulo = 1 * 60
     self.__create_database_structure()
 
   def __create_database_structure(self):
@@ -132,6 +132,10 @@ class terrariumCollector():
   def get_history(self, parameters = [], starttime = None, stoptime = None):
     # Default return object
     history = {}
+    periods = {'day' : 1 * 24,
+               'week' : 7 * 24,
+               'month' : 30 * 24,
+               'year' : 365 * 24}
     modulo = self.modulo
 
     logtype = parameters[0]
@@ -148,22 +152,27 @@ class terrariumCollector():
     if stoptime is None:
       stoptime = starttime - (24 * 60 * 60)
 
+    if parameters[-1] in periods.keys():
+      stoptime = starttime - periods[parameters[-1]] * 60 * 60
+      modulo = ((periods[parameters[-1]] / 24)**2) * 60
+      del(parameters[-1])
+
     # Defined new time modulo
-    if starttime - stoptime > (8 * 60 * 60):
+    #if starttime - stoptime > (8 * 60 * 60):
       # For now, ignore. This also influence the total power calculation... :(
-      modulo = 1
+    #  modulo = 1
 
     sql = ''
     filters = (stoptime,starttime,)
     if logtype == 'sensors':
       fields = { 'current' : [], 'alarm_min' : [], 'alarm_max' : [] , 'min' : [], 'max' : []}
-      sql = 'SELECT id, type, timestamp,' + ', '.join(fields.keys()) + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ?'
+      sql = 'SELECT id, type, timestamp,' + ', '.join(fields.keys()) + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ? AND timestamp % ' + str(modulo) + ' = 0'
 
       if len(parameters) > 0 and parameters[0] == 'average':
         sql = 'SELECT "average" as id, type, timestamp'
         for field in fields:
           sql = sql + ', AVG(' + field + ') as ' + field
-        sql = sql + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ?'
+        sql = sql + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ? AND timestamp % ' + str(modulo) + ' = 0'
 
         if len(parameters) == 2:
           sql = sql + ' and type = ?'
@@ -184,7 +193,7 @@ class terrariumCollector():
 
     elif logtype == 'switches':
       fields = { 'power_wattage' : [], 'water_flow' : [] , 'state' : []}
-      sql = 'SELECT id, "switches" as type, timestamp, ' + ', '.join(fields.keys()) + ' FROM switch_data WHERE timestamp >= ? and timestamp <= ?'
+      sql = 'SELECT id, "switches" as type, timestamp, ' + ', '.join(fields.keys()) + ' FROM switch_data WHERE timestamp >= ? and timestamp <= ? '
       if len(parameters) > 0 and parameters[0] == 'summary':
         fields = ['total_power', 'total_water']
         filters = ()
@@ -217,7 +226,7 @@ class terrariumCollector():
     elif logtype == 'weather':
       fields = { 'wind_speed' : [], 'temperature' : [], 'pressure' : [] , 'wind_direction' : [], 'rain' : [],
                  'weather' : [], 'icon' : []}
-      sql = 'SELECT "city" as id, "weather" as type, timestamp, ' + ', '.join(fields.keys()) + ' FROM weather_data WHERE timestamp >= ? and timestamp <= ?'
+      sql = 'SELECT "city" as id, "weather" as type, timestamp, ' + ', '.join(fields.keys()) + ' FROM weather_data WHERE timestamp >= ? and timestamp <= ? AND timestamp % ' + str(modulo) + ' = 0'
 
     elif logtype == 'system':
       fields = ['load_load1', 'load_load5','load_load15','uptime', 'temperature','cores', 'memory_total', 'memory_used' , 'memory_free']
@@ -233,15 +242,13 @@ class terrariumCollector():
       elif len(parameters) > 0 and parameters[0] == 'memory':
         fields = ['memory_total', 'memory_used' , 'memory_free']
 
-      sql = 'SELECT "system" as type, timestamp, ' + ', '.join(fields) + ' FROM system_data WHERE timestamp >= ? and timestamp <= ?'
+      sql = 'SELECT "system" as type, timestamp, ' + ', '.join(fields) + ' FROM system_data WHERE timestamp >= ? and timestamp <= ? AND timestamp % ' + str(modulo) + ' = 0'
 
     sql = sql + ' ORDER BY timestamp ASC'
 
     rows = []
     with self.db:
       cur = self.db.cursor()
-      #print 'Collector query:'
-      #print sql
       cur.execute(sql, filters)
       rows = cur.fetchall()
 

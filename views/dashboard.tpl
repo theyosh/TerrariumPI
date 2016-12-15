@@ -76,7 +76,7 @@
                       <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
                       <ul class="dropdown-menu" role="menu">
                         <li>
-                          <a href="#" onclick="menu_click('environment.html')">Settings</a>
+                          <a href="#" onclick="menu_click('system_environment.html')">Settings</a>
                         </li>
                       </ul>
                     </li>
@@ -181,19 +181,7 @@
                     </li>
                     <li class="dropdown">
                       <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-calendar"></i></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li>
-                          <a href="#" onclick="return false">Day</a>
-                        </li>
-                        <li>
-                          <a href="#" onclick="return false">Week</a>
-                        </li>
-                        <li>
-                          <a href="#" onclick="return false">Month</a>
-                        </li>
-                        <li>
-                          <a href="#" onclick="return false">Year</a>
-                        </li>
+                      <ul class="dropdown-menu period" role="menu">
                       </ul>
                     </li>
                     <li class="dropdown">
@@ -233,19 +221,7 @@
                     </li>
                     <li class="dropdown">
                       <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-calendar"></i></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li>
-                          <a href="#" onclick="return false">Day</a>
-                        </li>
-                        <li>
-                          <a href="#" onclick="return false">Week</a>
-                        </li>
-                        <li>
-                          <a href="#" onclick="return false">Month</a>
-                        </li>
-                        <li>
-                          <a href="#" onclick="return false">Year</a>
-                        </li>
+                      <ul class="dropdown-menu period" role="menu">
                       </ul>
                     </li>
                     <li class="dropdown">
