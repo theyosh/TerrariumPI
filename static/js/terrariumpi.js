@@ -596,7 +596,7 @@ function load_history_graph(id,type,data_url,nocache) {
       });
     }
 
-    if (nocache === 0 && now - globals.graphs[id].timestamp < globals.graph_cache * 1000) {
+    if (nocache === 1 && now - globals.graphs[id].timestamp < globals.graph_cache * 1000) {
       history_graph(id, globals.graphs[id].data, type);
     } else {
       // Load fresh data...
