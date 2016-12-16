@@ -112,13 +112,15 @@ class terrariumWebserver():
     return template(template_name,**self.__template_variables(template_name))
 
   def __static_file(self,filename):
+    response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(days=30)).strftime('%a, %d %b %Y %H:%M:%S GMT')
     if filename == 'js/terrariumpi.js':
-      response.headers['Content-Type'] = 'application/javascript'
+      response.headers['Content-Type'] = 'application/javascript; charset=UTF-8'
       return template(filename,template_lookup=['./static/'])
 
     return static_file(filename, root='./static/')
 
   def __static_file_gentelella(self,filename):
+    response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(days=30)).strftime('%a, %d %b %Y %H:%M:%S GMT')
     return static_file(filename, root='./gentelella/')
 
   def __update_api_call(self,path):
