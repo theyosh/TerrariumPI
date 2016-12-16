@@ -1,0 +1,516 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TerrariumPI 0.1\n"
+"POT-Creation-Date: 2016-12-16 19:48+0100\n"
+"PO-Revision-Date: 2016-12-16 19:48+0100\n"
+"Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: terrariumWebserver.py:125
+msgid "Data could not be saved"
+msgstr "Data kon niet worden opgeslagen"
+
+#: terrariumWebserver.py:125
+msgid "Error!"
+msgstr "Fout!"
+
+#: terrariumWebserver.py:129
+msgid "Data saved"
+msgstr "Data is opgeslagen"
+
+#: terrariumWebserver.py:130
+msgid "Your changes are saved"
+msgstr "Je wijzigingen zijn opgeslagen"
+
+#: views/dashboard.tpl:7 views/system_status.tpl:174
+msgid "Uptime"
+msgstr "Actief"
+
+#: views/dashboard.tpl:26 views/switch_settings.tpl:65
+msgid "Power usage in Watt"
+msgstr "Stroomverbruik in Watt"
+
+#: views/dashboard.tpl:39 views/switch_settings.tpl:68
+msgid "Water flow in L/m"
+msgstr "Waterverbruik in L/m"
+
+#: views/dashboard.tpl:51
+msgid "Total power in kWh"
+msgstr "Totaal stroomverbruik in kWh."
+
+#: views/dashboard.tpl:59
+msgid "Total water in L"
+msgstr "Totaal waterverbruik in L"
+
+#: views/dashboard.tpl:70 views/inc/menu.tpl:77
+msgid "Environment"
+msgstr "Omgeving"
+
+#: views/dashboard.tpl:70 views/weather_forecast.tpl:7
+msgid "current"
+msgstr "huidig"
+
+#: views/dashboard.tpl:79 views/dashboard.tpl:203 views/dashboard.tpl:255
+#: views/inc/menu.tpl:30 views/inc/menu.tpl:44 views/inc/menu.tpl:55
+#: views/inc/menu.tpl:66 views/inc/menu.tpl:80 views/inc/sensor_list.tpl:38
+#: views/switch_status.tpl:33 views/system_status.tpl:32
+#: views/system_status.tpl:88 views/system_status.tpl:144
+#: views/system_status.tpl:200 views/weather_forecast.tpl:16
+#: views/webcam.tpl:16
+msgid "Settings"
+msgstr "Instellingen"
+
+#: views/dashboard.tpl:91 views/dashboard.tpl:143
+msgid "modus"
+msgstr "mode"
+
+#: views/dashboard.tpl:91 views/system_environment.tpl:7
+msgid "Lights"
+msgstr "Lampen"
+
+#: views/dashboard.tpl:95 views/dashboard.tpl:124 views/dashboard.tpl:147
+msgid "State"
+msgstr "Status"
+
+#: views/dashboard.tpl:101
+msgid "On"
+msgstr "Aan"
+
+#: views/dashboard.tpl:107
+msgid "Off"
+msgstr "Uit"
+
+#: views/dashboard.tpl:113
+msgid "Duration"
+msgstr "Tijdsduur"
+
+#: views/dashboard.tpl:120 views/system_environment.tpl:91
+msgid "Sprayer"
+msgstr "Sproeier"
+
+#: views/dashboard.tpl:130 views/dashboard.tpl:153 views/sensor_settings.tpl:39
+msgid "Current"
+msgstr "Huidig"
+
+#: views/dashboard.tpl:136 views/dashboard.tpl:159 views/sensor_settings.tpl:27
+msgid "Alarm min"
+msgstr "Alarm min."
+
+#: views/dashboard.tpl:143 views/system_environment.tpl:157
+msgid "Heater"
+msgstr "Verwarming"
+
+#: views/dashboard.tpl:165 views/sensor_settings.tpl:30
+msgid "Alarm max"
+msgstr "Alarm max."
+
+#: views/dashboard.tpl:177
+msgid "Average Humidity"
+msgstr "Gemiddelde luchtvochtigheid"
+
+#: views/dashboard.tpl:177 views/dashboard.tpl:229 views/inc/sensor_list.tpl:11
+#: views/switch_status.tpl:7 views/system_status.tpl:6
+#: views/system_status.tpl:62 views/system_status.tpl:118
+msgid "warning"
+msgstr "waarschuwing"
+
+#: views/dashboard.tpl:186 views/dashboard.tpl:238 views/inc/sensor_list.tpl:21
+#: views/switch_status.tpl:16 views/system_status.tpl:15
+#: views/system_status.tpl:71 views/system_status.tpl:127
+#: views/system_status.tpl:183
+msgid "day"
+msgstr "dag"
+
+#: views/dashboard.tpl:189 views/dashboard.tpl:241 views/inc/sensor_list.tpl:24
+#: views/switch_status.tpl:19 views/system_status.tpl:18
+#: views/system_status.tpl:74 views/system_status.tpl:130
+#: views/system_status.tpl:186
+msgid "week"
+msgstr "week"
+
+#: views/dashboard.tpl:192 views/dashboard.tpl:244 views/inc/sensor_list.tpl:27
+#: views/switch_status.tpl:22 views/system_status.tpl:21
+#: views/system_status.tpl:77 views/system_status.tpl:133
+#: views/system_status.tpl:189
+msgid "month"
+msgstr "maand"
+
+#: views/dashboard.tpl:195 views/dashboard.tpl:247 views/inc/sensor_list.tpl:30
+#: views/switch_status.tpl:25 views/system_status.tpl:24
+#: views/system_status.tpl:80 views/system_status.tpl:136
+#: views/system_status.tpl:192
+msgid "year"
+msgstr "jaar"
+
+#: views/dashboard.tpl:229
+msgid "Average Temperature"
+msgstr "Gemiddelde temperatuur"
+
+#: views/inc/menu.tpl:10
+msgid "Welcome"
+msgstr "Welkom"
+
+#: views/inc/menu.tpl:18
+msgid "General"
+msgstr "Algemeen"
+
+#: views/inc/menu.tpl:21
+msgid "Home"
+msgstr "Thuis"
+
+#: views/inc/menu.tpl:24 views/system_environment.tpl:38
+#: views/system_environment.tpl:196 views/weather_forecast.tpl:7
+#: views/weather_settings.tpl:6
+msgid "Weather"
+msgstr "Weer"
+
+#: views/inc/menu.tpl:27
+msgid "Forecast"
+msgstr "Voorspelling"
+
+#: views/inc/menu.tpl:35
+msgid "Sensors"
+msgstr "Sensoren"
+
+#: views/inc/menu.tpl:38 views/weather_settings.tpl:40
+msgid "Temperature"
+msgstr "Temperatuur"
+
+#: views/inc/menu.tpl:41
+msgid "Humidity"
+msgstr "Luchtvochtigheid"
+
+#: views/inc/menu.tpl:49
+msgid "Switches"
+msgstr "Schakelaars"
+
+#: views/inc/menu.tpl:52 views/inc/menu.tpl:74 views/system_environment.tpl:20
+#: views/system_environment.tpl:104 views/system_environment.tpl:170
+msgid "Status"
+msgstr "Status"
+
+#: views/inc/menu.tpl:60 views/webcam.tpl:7
+msgid "Webcam"
+msgstr "Webcam"
+
+#: views/inc/menu.tpl:63
+msgid "Show"
+msgstr "Toon"
+
+#: views/inc/menu.tpl:71
+msgid "System"
+msgstr "Systeem"
+
+#: views/inc/menu.tpl:87
+msgid "About"
+msgstr "Over"
+
+#: views/inc/menu.tpl:90
+msgid "Help"
+msgstr "Hulp"
+
+#: views/inc/menu.tpl:93
+msgid "Info"
+msgstr "Informatie"
+
+#: views/inc/menu.tpl:96
+msgid "Usage"
+msgstr "Gebruik"
+
+#: views/inc/menu.tpl:99
+msgid "Software"
+msgstr "Software"
+
+#: views/inc/menu.tpl:102
+msgid "Hardware"
+msgstr "Hardware"
+
+#: views/inc/menu.tpl:105
+msgid "Contact"
+msgstr "Contact"
+
+#: views/inc/menu.tpl:130
+msgid "date/time"
+msgstr "datum/tijd"
+
+#: views/inc/menu.tpl:134
+msgid "Door is closed"
+msgstr "Deur is gesloten"
+
+#: views/inc/menu.tpl:134
+msgid "Door is open"
+msgstr "Deur is geopend"
+
+#: views/inc/menu.tpl:138 views/inc/menu.tpl:148
+msgid "No messages"
+msgstr "Geen berichten"
+
+#: views/inc/menu.tpl:144
+msgid "Offline"
+msgstr "Offline"
+
+#: views/inc/menu.tpl:144
+msgid "Online"
+msgstr "Online"
+
+#: views/sensor_settings.tpl:8 views/system_environment.tpl:199
+msgid "Sensor"
+msgstr "Sensor"
+
+#: views/sensor_settings.tpl:21
+msgid "Address"
+msgstr "Adres"
+
+#: views/sensor_settings.tpl:24 views/switch_settings.tpl:62
+msgid "Name"
+msgstr "Naam"
+
+#: views/sensor_settings.tpl:33
+msgid "Limit min"
+msgstr "Limiet min."
+
+#: views/sensor_settings.tpl:36
+msgid "Limit max"
+msgstr "Limiet max."
+
+#: views/sensor_settings.tpl:51 views/switch_settings.tpl:80
+#: views/system_environment.tpl:244 views/system_settings.tpl:84
+#: views/weather_settings.tpl:59
+msgid "Submit"
+msgstr "Opslaan"
+
+#: views/switch_settings.tpl:7
+msgid "Device type"
+msgstr "Apperaattype"
+
+#: views/switch_settings.tpl:20
+msgid "Amount of switches"
+msgstr "Totaal aantal schakelaars"
+
+#: views/switch_settings.tpl:59
+msgid "ID"
+msgstr "ID"
+
+#: views/switch_status.tpl:7
+msgid "Switch"
+msgstr "Schakelaar"
+
+#: views/system_environment.tpl:7 views/system_environment.tpl:91
+#: views/system_environment.tpl:157
+msgid "settings"
+msgstr "instellingen"
+
+#: views/system_environment.tpl:23 views/system_environment.tpl:107
+#: views/system_environment.tpl:115 views/system_environment.tpl:173
+#: views/system_environment.tpl:181
+msgid "Disabled"
+msgstr "Gedeactiveerd"
+
+#: views/system_environment.tpl:23 views/system_environment.tpl:107
+#: views/system_environment.tpl:115 views/system_environment.tpl:173
+#: views/system_environment.tpl:181
+msgid "Enabled"
+msgstr "Geactiveerd"
+
+#: views/system_environment.tpl:28
+msgid "Light modus"
+msgstr "Lampen modus"
+
+#: views/system_environment.tpl:35 views/system_environment.tpl:193
+msgid "Timer"
+msgstr "Klok"
+
+#: views/system_environment.tpl:45
+msgid "Lights on"
+msgstr "Lampen aan"
+
+#: views/system_environment.tpl:51
+msgid "Lights off"
+msgstr "Lampen uit"
+
+#: views/system_environment.tpl:57
+msgid "Maximal lights hours"
+msgstr "Maximaal aantal uren verlichten"
+
+#: views/system_environment.tpl:63
+msgid "Minimal light hours"
+msgstr "Minimaal aantal uren verlichten"
+
+#: views/system_environment.tpl:69
+msgid "Hours shift"
+msgstr "Uren opschuiven"
+
+#: views/system_environment.tpl:75 views/system_environment.tpl:132
+#: views/system_environment.tpl:218
+msgid "Power switches"
+msgstr "Stroomschakelaars"
+
+#: views/system_environment.tpl:112
+msgid "Enabled during the night"
+msgstr "'s Nachts aan"
+
+#: views/system_environment.tpl:120
+msgid "Sprayer wait timeout (seconds)"
+msgstr "Sproeier wachttijd tijd (in seconden)"
+
+#: views/system_environment.tpl:126
+msgid "Sprayer spray duration (seconds)"
+msgstr "Sproeier sproei tijd (in seconden)"
+
+#: views/system_environment.tpl:141
+msgid "Humidity sensors"
+msgstr "Luchtvochtigheid sensoren"
+
+#: views/system_environment.tpl:178
+msgid "Enabled during the day"
+msgstr "Overdag aan"
+
+#: views/system_environment.tpl:186
+msgid "Heater modus"
+msgstr "Verwarming modus"
+
+#: views/system_environment.tpl:206
+msgid "Heater on"
+msgstr "Verwarming uit"
+
+#: views/system_environment.tpl:212
+msgid "Heater off"
+msgstr "Verwarming aan"
+
+#: views/system_environment.tpl:227
+msgid "Temperature sensors"
+msgstr "Temperatuur sensoren"
+
+#: views/system_settings.tpl:6
+msgid "TerrariumPI"
+msgstr "TerrariumPI"
+
+#: views/system_settings.tpl:17
+msgid "Language"
+msgstr "Taal"
+
+#: views/system_settings.tpl:28
+msgid "IP or hostname"
+msgstr "IP of hostnaam"
+
+#: views/system_settings.tpl:34
+msgid "Port number"
+msgstr "Poort nummer"
+
+#: views/system_settings.tpl:40
+msgid "Admin name"
+msgstr "Beheerdersnaam"
+
+#: views/system_settings.tpl:46
+msgid "New admin password"
+msgstr "Nieuw beheerswachtwoord"
+
+#: views/system_settings.tpl:52
+msgid "Current admin password"
+msgstr "Huidige beheerswachtwoord"
+
+#: views/system_settings.tpl:58
+msgid "Pi power usage in W"
+msgstr "Stroomverbruik Pi in W."
+
+#: views/system_settings.tpl:64
+msgid "Door GPIO pin"
+msgstr "Deur GPIO pin"
+
+#: views/system_settings.tpl:70
+msgid "1-Wire / OWFS port"
+msgstr "1-Wire / OWFS poort"
+
+#: views/system_settings.tpl:76
+msgid "Loglevel"
+msgstr "Loglevel"
+
+#: views/system_status.tpl:6
+msgid "CPU Load"
+msgstr "Processor belasting"
+
+#: views/system_status.tpl:62
+msgid "CPU Temperature"
+msgstr "Processor temperatuur"
+
+#: views/system_status.tpl:118
+msgid "Memory usage"
+msgstr "Geheugen verbruik"
+
+#: views/weather_forecast.tpl:39
+msgid "City"
+msgstr "Stad"
+
+#: views/weather_forecast.tpl:58
+msgid "Mon"
+msgstr "ma."
+
+#: views/weather_forecast.tpl:66
+msgid "Tue"
+msgstr "di."
+
+#: views/weather_forecast.tpl:74
+msgid "Wed"
+msgstr "wo."
+
+#: views/weather_forecast.tpl:82
+msgid "Thu"
+msgstr "do."
+
+#: views/weather_forecast.tpl:90
+msgid "Fri"
+msgstr "fr."
+
+#: views/weather_forecast.tpl:98
+msgid "Sat"
+msgstr "za."
+
+#: views/weather_forecast.tpl:112
+msgid "Day forecast"
+msgstr "Dagvoorspelling"
+
+#: views/weather_forecast.tpl:143
+msgid "Week forecast"
+msgstr "Weekvoorspelling"
+
+#: views/weather_settings.tpl:17
+msgid "Location"
+msgstr "Locatie"
+
+#: views/weather_settings.tpl:23
+msgid "Wind speed"
+msgstr "Windsnelheid"
+
+#: views/weather_settings.tpl:30
+msgid "m/s"
+msgstr "m/s."
+
+#: views/weather_settings.tpl:33
+msgid "km/h"
+msgstr "Km/h"
+
+#~ msgid "Water flow in liters/minute"
+#~ msgstr "Waterverbruik in liters/minuut"
+
+#~ msgid "Power usage in W"
+#~ msgstr "Stroomgebruik in W."
+
+#~ msgid "Door closed"
+#~ msgstr "Deur gesloten"
+
+#~ msgid "Water usage in liters/minute"
+#~ msgstr "Waterverbruik in liters/minuut"
+
+#~ msgid "sensor"
+#~ msgstr "sensor"
