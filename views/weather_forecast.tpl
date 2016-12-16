@@ -4,7 +4,7 @@
           <div class="col-md-4 col-sm-5 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2>Weather <small>current</small></h2>
+                <h2>{{_('Weather')}} <small>{{_('current')}}</small></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -13,7 +13,7 @@
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
                     <ul class="dropdown-menu" role="menu">
                       <li>
-                        <a href="#" onclick="menu_click('weather_settings.html')">Settings</a>
+                        <a href="#" onclick="menu_click('weather_settings.html')">{{_('Settings')}}</a>
                       </li>
                     </ul>
                   </li>
@@ -36,8 +36,7 @@
                     </div>
                   </div>
                   <div class="col-md-5 col-sm-5 col-xs-5">
-                    <h2>City<br>
-                    <i>...</i></h2>
+                    <h2>{{_('City')}}<br><i>...</i></h2>
                   </div>
                   <div class="col-md-3 col-sm-3 col-xs-3">
                     <div class="row" style="text-align:right">
@@ -56,7 +55,7 @@
                 <div class="row weather-days">
                   <div class="col-sm-2">
                     <div class="daily-weather">
-                      <h2 class="day">Mon</h2>
+                      <h2 class="day">{{_('Mon')}}</h2>
                       <h3 class="degrees">0</h3>
                       <canvas height="32" id="weather_icon_2" width="32"></canvas>
                       <h5>0 <i>km/h</i></h5>
@@ -64,7 +63,7 @@
                   </div>
                   <div class="col-sm-2">
                     <div class="daily-weather">
-                      <h2 class="day">Tue</h2>
+                      <h2 class="day">{{_('Tue')}}</h2>
                       <h3 class="degrees">0</h3>
                       <canvas height="32" id="weather_icon_3" width="32"></canvas>
                       <h5>0 <i>km/h</i></h5>
@@ -72,7 +71,7 @@
                   </div>
                   <div class="col-sm-2">
                     <div class="daily-weather">
-                      <h2 class="day">Wed</h2>
+                      <h2 class="day">{{_('Wed')}}</h2>
                       <h3 class="degrees">0</h3>
                       <canvas height="32" id="weather_icon_4" width="32"></canvas>
                       <h5>0 <i>km/h</i></h5>
@@ -80,7 +79,7 @@
                   </div>
                   <div class="col-sm-2">
                     <div class="daily-weather">
-                      <h2 class="day">Thu</h2>
+                      <h2 class="day">{{_('Thu')}}</h2>
                       <h3 class="degrees">0</h3>
                       <canvas height="32" id="weather_icon_5" width="32"></canvas>
                       <h5>0 <i>km/h</i></h5>
@@ -88,7 +87,7 @@
                   </div>
                   <div class="col-sm-2">
                     <div class="daily-weather">
-                      <h2 class="day">Fri</h2>
+                      <h2 class="day">{{_('Fri')}}</h2>
                       <h3 class="degrees">0</h3>
                       <canvas height="32" id="weather_icon_6" width="32"></canvas>
                       <h5>0 <i>km/h</i></h5>
@@ -96,7 +95,7 @@
                   </div>
                   <div class="col-sm-2">
                     <div class="daily-weather">
-                      <h2 class="day">Sat</h2>
+                      <h2 class="day">{{_('Sat')}}</h2>
                       <h3 class="degrees">0</h3>
                       <canvas height="32" id="weather_icon_7" width="32"></canvas>
                       <h5>0 <i>km/h</i></h5>
@@ -110,11 +109,13 @@
           <div class="col-md-8 col-sm-7 col-xs-12">
             <div class="x_panel" id="weather_day">
               <div class="x_title">
-                <h2>Day forecast <small id="weather_hourly">...</small></h2>
+                <h2>{{_('Day forecast')}} <small id="weather_hourly">...</small>
+                </h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
+                  <!--
                   <li class="dropdown">
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
                     <ul class="dropdown-menu" role="menu">
@@ -126,6 +127,7 @@
                       </li>
                     </ul>
                   </li>
+                  -->
                   <li>
                     <a class="close-link"><i class="fa fa-close"></i></a>
                   </li>
@@ -138,11 +140,13 @@
             </div>
             <div class="x_panel" id="weather_week">
               <div class="x_title">
-                <h2>Week forecast <small id="weather_daily">...</small></h2>
+                <h2>{{_('Week forecast')}} <small id="weather_daily">...</small>
+                </h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
+                  <!--
                   <li class="dropdown">
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
                     <ul class="dropdown-menu" role="menu">
@@ -154,6 +158,7 @@
                       </li>
                     </ul>
                   </li>
+                  -->
                   <li>
                     <a class="close-link"><i class="fa fa-close"></i></a>
                   </li>

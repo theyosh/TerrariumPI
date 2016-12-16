@@ -3,7 +3,7 @@
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2><span class="title">CPU Load</span> <small>live...</small> <span class="badge bg-red" style="display:none;">warning</span></h2>
+                <h2><span class="title">{{_('CPU Load')}}</span> <small>...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -11,13 +11,25 @@
                   <li class="dropdown">
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-calendar"></i></a>
                     <ul class="dropdown-menu period" role="menu">
+                      <li>
+                        <a href="javascript:;" >{{_('day')}}</a>
+                      </li>
+                      <li>
+                        <a href="javascript:;" >{{_('week')}}</a>
+                      </li>
+                      <li>
+                        <a href="javascript:;" >{{_('month')}}</a>
+                      </li>
+                      <li>
+                        <a href="javascript:;" >{{_('year')}}</a>
+                      </li>
                     </ul>
                   </li>
                   <li class="dropdown">
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
                     <ul class="dropdown-menu" role="menu">
                       <li>
-                        <a href="#" onclick="menu_click('system_settings.html')">Settings</a>
+                        <a href="#" onclick="menu_click('system_settings.html')">{{_('Settings')}}</a>
                       </li>
                     </ul>
                   </li>
@@ -47,7 +59,7 @@
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2><span class="title">CPU Temperature</span> <small>live...</small> <span class="badge bg-red" style="display:none;">warning</span></h2>
+                <h2><span class="title">{{_('CPU Temperature')}}</span> <small>...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -55,13 +67,25 @@
                   <li class="dropdown">
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-calendar"></i></a>
                     <ul class="dropdown-menu period" role="menu">
+                      <li>
+                        <a href="javascript:;" >{{_('day')}}</a>
+                      </li>
+                      <li>
+                        <a href="javascript:;" >{{_('week')}}</a>
+                      </li>
+                      <li>
+                        <a href="javascript:;" >{{_('month')}}</a>
+                      </li>
+                      <li>
+                        <a href="javascript:;" >{{_('year')}}</a>
+                      </li>
                     </ul>
                   </li>
                   <li class="dropdown">
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
                     <ul class="dropdown-menu" role="menu">
                       <li>
-                        <a href="#" onclick="menu_click('system_settings.html')">Settings</a>
+                        <a href="#" onclick="menu_click('system_settings.html')">{{_('Settings')}}</a>
                       </li>
                     </ul>
                   </li>
@@ -91,7 +115,7 @@
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2><span class="title">Memory usage</span> <small>live...</small> <span class="badge bg-red" style="display:none;">warning</span></h2>
+                <h2><span class="title">{{_('Memory usage')}}</span> <small>...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -99,13 +123,25 @@
                   <li class="dropdown">
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-calendar"></i></a>
                     <ul class="dropdown-menu period" role="menu">
+                      <li>
+                        <a href="javascript:;" >{{_('day')}}</a>
+                      </li>
+                      <li>
+                        <a href="javascript:;" >{{_('week')}}</a>
+                      </li>
+                      <li>
+                        <a href="javascript:;" >{{_('month')}}</a>
+                      </li>
+                      <li>
+                        <a href="javascript:;" >{{_('year')}}</a>
+                      </li>
                     </ul>
                   </li>
                   <li class="dropdown">
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
                     <ul class="dropdown-menu" role="menu">
                       <li>
-                        <a href="#" onclick="menu_click('system_settings.html')">Settings</a>
+                        <a href="#" onclick="menu_click('system_settings.html')">{{_('Settings')}}</a>
                       </li>
                     </ul>
                   </li>
@@ -135,7 +171,7 @@
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2><span class="title">Uptime</span> <small class="data_update">live...</small></h2>
+                <h2><span class="title">{{_('Uptime')}}</span> <small class="data_update">...</small></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -143,13 +179,25 @@
                   <li class="dropdown">
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-calendar"></i></a>
                     <ul class="dropdown-menu period" role="menu">
+                      <li>
+                        <a href="javascript:;" >{{_('day')}}</a>
+                      </li>
+                      <li>
+                        <a href="javascript:;" >{{_('week')}}</a>
+                      </li>
+                      <li>
+                        <a href="javascript:;" >{{_('month')}}</a>
+                      </li>
+                      <li>
+                        <a href="javascript:;" >{{_('year')}}</a>
+                      </li>
                     </ul>
                   </li>
                   <li class="dropdown">
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
                     <ul class="dropdown-menu" role="menu">
                       <li>
-                        <a href="#" onclick="menu_click('system_settings.html')">Settings</a>
+                        <a href="#" onclick="menu_click('system_settings.html')">{{_('Settings')}}</a>
                       </li>
                     </ul>
                   </li>

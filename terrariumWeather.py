@@ -36,16 +36,17 @@ class terrariumWeather():
     weathertype = weathertype.lower()
 
     icons = {'clear sky' : 'clear_' + ('day' if self.is_day() else 'night'),
-           'fair' : 'clear_' + ('day' if self.is_day() else 'night'),
-           'partly cloudy' : 'partly_cloudy_' + ('day' if self.is_day() else 'night'),
-           'cloudy' : 'cloudy',
-           'light rain showers' : 'rain',
-           'light rain' : 'rain',
-           'rain' : 'rain',
-           'rain showers' : 'sleet',
-           'heavy rain showers' : 'sleet',
-           'heavy rain' : 'sleet',
-           'fog' : 'fog'
+             'fair' : 'clear_' + ('day' if self.is_day() else 'night'),
+             'partly cloudy' : 'partly_cloudy_' + ('day' if self.is_day() else 'night'),
+             'cloudy' : 'cloudy',
+             'light rain showers' : 'rain',
+             'light rain' : 'rain',
+             'rain' : 'rain',
+             'rain showers' : 'sleet',
+             'heavy rain showers' : 'sleet',
+             'heavy rain' : 'sleet',
+             'fog' : 'fog',
+             'light snow showers' : 'snow'
            }
 
     if weathertype in icons:

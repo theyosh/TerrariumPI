@@ -5,7 +5,7 @@
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type"><!-- Meta, title, CSS, favicons, etc. -->
   <meta content="IE=edge" http-equiv="X-UA-Compatible">
   <meta content="width=device-width, initial-scale=1" name="viewport">
-  <title>{{title}} | {{page_title}}</title>
+  <title>{{title}} | {{_(page_title)}}</title>
   <link href="{{person_image}}" rel="icon" type="image/x-icon"><!-- Bootstrap -->
   <link href="/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"><!-- Font Awesome -->
   <link href="/gentelella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"><!-- jVectorMap -->
@@ -26,6 +26,12 @@
 
   <script src="/gentelella/vendors/bootstrap/dist/js/bootstrap.min.js">
   </script>
+
+  <script type="text/javascript">
+    var locale = '{{lang}}';
+  </script>
+
+
 </head>
 <body class="nav-md">
   <div class="container body">

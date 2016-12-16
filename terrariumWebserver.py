@@ -7,6 +7,11 @@ from bottle.ext.websocket import GeventWebSocketServer
 from bottle.ext.websocket import websocket
 from Queue import Queue
 
+import gettext
+gettext.install('terrariumpi', 'locales/', unicode=True)
+
+#gettext.translation('terrariumpi', 'locales/', languages=['nl_NL']).install(True)
+
 import thread
 import json
 import os
@@ -41,6 +46,8 @@ class terrariumWebserver():
     self.__terrariumEngine = terrariumEngine
     self.__app = terrariumWebserver.app
     self.__config = terrariumEngine.get_config('system')
+    # Load language
+    gettext.translation('terrariumpi', 'locales/', languages=[self.__terrariumEngine.config.get_active_language()]).install(True)
 
     terrariumWebserver.app.terrarium = self.__terrariumEngine
 
@@ -71,7 +78,8 @@ class terrariumWebserver():
     self.__app.route('/api/<path:path>', method=['GET'], callback=self.__get_api_call)
 
   def __template_variables(self, template):
-    variables = { 'title' : self.__config['title'],
+    variables = { 'lang' : self.__terrariumEngine.config.get_active_language(),
+                  'title' : self.__config['title'],
                   'page_title' : template.replace('_',' ').title()}
 
     if 'index' == template:
@@ -104,15 +112,26 @@ class terrariumWebserver():
     return template(template_name,**self.__template_variables(template_name))
 
   def __static_file(self,filename):
+    if filename == 'js/terrariumpi.js':
+      response.headers['Content-Type'] = 'application/javascript'
+      return template(filename,template_lookup=['./static/'])
+
     return static_file(filename, root='./static/')
 
   def __static_file_gentelella(self,filename):
     return static_file(filename, root='./gentelella/')
 
   def __update_api_call(self,path):
-    result = {'ok' : False}
+    result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Data could not be saved')}
     postdata = json.loads(request.body.getvalue())
     result['ok'] = self.__terrariumEngine.set_config(path,postdata)
+    if result['ok']:
+      result['title'] = _('Data saved')
+      result['message'] = _('Your changes are saved')
+
+      # Reload language
+      gettext.translation('terrariumpi', 'locales/', languages=[self.__terrariumEngine.config.get_active_language()]).install(True)
+
     return result
 
   def __get_api_call(self,path):
@@ -167,7 +186,8 @@ class terrariumWebserver():
   @app.error(404)
   def error404(error):
     config = terrariumWebserver.app.terrarium.get_config('system')
-    variables = { 'title' : config['title'],
+    variables = { 'lang' : self.__terrariumEngine.config.get_active_language(),
+                  'title' : config['title'],
                   'page_title' : config['title'] + ' | 404'
                 }
 

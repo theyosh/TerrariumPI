@@ -10,9 +10,6 @@
                   <a aria-expanded="false" data-toggle="tab" href="#owfs" id="owfs-tab" role="tab">OWFS</a>
                 </li>
                 <li class="" role="presentation">
-                  <a aria-expanded="false" data-toggle="tab" href="#mjpg_streamer" id="mjpg_streamer-tab2" role="tab">MJPG-streamer</a>
-                </li>
-                <li class="" role="presentation">
                   <a aria-expanded="false" data-toggle="tab" href="#python" id="python-tab2" role="tab">Python</a>
                 </li>
                 <li class="" role="presentation">
@@ -27,10 +24,6 @@
                 <div aria-labelledby="owfs-tab" class="tab-pane fade" id="owfs" role="tabpanel">
                   <p class="lead">OWFS 1-Wire File System</p>
                   <p>The OWFS 1-Wire File System software is used for reading out the 1-Wire temperatures and humidity sensors. <a href="http://owfs.org/" target="_blank" title="OWFS 1-Wire File System Website">http://owfs.org/</a></p>
-                </div>
-                <div aria-labelledby="mjpg_streamer-tab" class="tab-pane fade" id="mjpg_streamer" role="tabpanel">
-                  <p class="lead">MJPG-streamer</p>
-                  <p>A modified version of MJPG-streamer which can handle Raspberry PI cam is used for serving webcam images. <a href="https://github.com/jacksonliam/mjpg-streamer" target="_blank" title="MJPG-streamer Raspberry PI cam Website">https://github.com/jacksonliam/mjpg-streamer</a> based on the original <a href="http://sourceforge.net/projects/mjpg-streamer/" target="_blank" title="Original MJPG-streamer Website">http://sourceforge.net/projects/mjpg-streamer/</a></p>
                 </div>
                 <div aria-labelledby="python-tab" class="tab-pane fade" id="python" role="tabpanel">
                   <p class="lead">Python</p>

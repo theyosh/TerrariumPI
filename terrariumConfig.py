@@ -46,6 +46,8 @@ class terrariumConfig:
     return self.__get_config('terrariumpi')
 
   def set_system(self,data):
+    del(data['cur_password'])
+    del(data['new_password'])
     return self.__update_config('terrariumpi',data)
 
   def get_door_pin(self):
@@ -63,6 +65,14 @@ class terrariumConfig:
   def get_password(self):
     config = self.get_system()
     return config['password']
+
+  def get_available_languages(self):
+    config = self.get_system()
+    return config['available_languages'].split(',')
+
+  def get_active_language(self):
+    config = self.get_system()
+    return config['active_language']
 
   # Environment functions
   def save_environment(self,data):

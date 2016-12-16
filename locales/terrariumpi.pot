@@ -1,0 +1,503 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2016-12-16 19:48+CET\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: terrariumWebserver.py:125
+msgid "Data could not be saved"
+msgstr ""
+
+#: terrariumWebserver.py:125
+msgid "Error!"
+msgstr ""
+
+#: terrariumWebserver.py:129
+msgid "Data saved"
+msgstr ""
+
+#: terrariumWebserver.py:130
+msgid "Your changes are saved"
+msgstr ""
+
+#: views/dashboard.tpl:7 views/system_status.tpl:174
+msgid "Uptime"
+msgstr ""
+
+#: views/dashboard.tpl:26 views/switch_settings.tpl:65
+msgid "Power usage in Watt"
+msgstr ""
+
+#: views/dashboard.tpl:39 views/switch_settings.tpl:68
+msgid "Water flow in L/m"
+msgstr ""
+
+#: views/dashboard.tpl:51
+msgid "Total power in kWh"
+msgstr ""
+
+#: views/dashboard.tpl:59
+msgid "Total water in L"
+msgstr ""
+
+#: views/dashboard.tpl:70 views/inc/menu.tpl:77
+msgid "Environment"
+msgstr ""
+
+#: views/dashboard.tpl:70 views/weather_forecast.tpl:7
+msgid "current"
+msgstr ""
+
+#: views/dashboard.tpl:79 views/dashboard.tpl:203 views/dashboard.tpl:255
+#: views/inc/menu.tpl:30 views/inc/menu.tpl:44 views/inc/menu.tpl:55
+#: views/inc/menu.tpl:66 views/inc/menu.tpl:80 views/inc/sensor_list.tpl:38
+#: views/switch_status.tpl:33 views/system_status.tpl:32
+#: views/system_status.tpl:88 views/system_status.tpl:144
+#: views/system_status.tpl:200 views/weather_forecast.tpl:16
+#: views/webcam.tpl:16
+msgid "Settings"
+msgstr ""
+
+#: views/dashboard.tpl:91 views/dashboard.tpl:143
+msgid "modus"
+msgstr ""
+
+#: views/dashboard.tpl:91 views/system_environment.tpl:7
+msgid "Lights"
+msgstr ""
+
+#: views/dashboard.tpl:95 views/dashboard.tpl:124 views/dashboard.tpl:147
+msgid "State"
+msgstr ""
+
+#: views/dashboard.tpl:101
+msgid "On"
+msgstr ""
+
+#: views/dashboard.tpl:107
+msgid "Off"
+msgstr ""
+
+#: views/dashboard.tpl:113
+msgid "Duration"
+msgstr ""
+
+#: views/dashboard.tpl:120 views/system_environment.tpl:91
+msgid "Sprayer"
+msgstr ""
+
+#: views/dashboard.tpl:130 views/dashboard.tpl:153
+#: views/sensor_settings.tpl:39
+msgid "Current"
+msgstr ""
+
+#: views/dashboard.tpl:136 views/dashboard.tpl:159
+#: views/sensor_settings.tpl:27
+msgid "Alarm min"
+msgstr ""
+
+#: views/dashboard.tpl:143 views/system_environment.tpl:157
+msgid "Heater"
+msgstr ""
+
+#: views/dashboard.tpl:165 views/sensor_settings.tpl:30
+msgid "Alarm max"
+msgstr ""
+
+#: views/dashboard.tpl:177
+msgid "Average Humidity"
+msgstr ""
+
+#: views/dashboard.tpl:177 views/dashboard.tpl:229
+#: views/inc/sensor_list.tpl:11 views/switch_status.tpl:7
+#: views/system_status.tpl:6 views/system_status.tpl:62
+#: views/system_status.tpl:118
+msgid "warning"
+msgstr ""
+
+#: views/dashboard.tpl:186 views/dashboard.tpl:238
+#: views/inc/sensor_list.tpl:21 views/switch_status.tpl:16
+#: views/system_status.tpl:15 views/system_status.tpl:71
+#: views/system_status.tpl:127 views/system_status.tpl:183
+msgid "day"
+msgstr ""
+
+#: views/dashboard.tpl:189 views/dashboard.tpl:241
+#: views/inc/sensor_list.tpl:24 views/switch_status.tpl:19
+#: views/system_status.tpl:18 views/system_status.tpl:74
+#: views/system_status.tpl:130 views/system_status.tpl:186
+msgid "week"
+msgstr ""
+
+#: views/dashboard.tpl:192 views/dashboard.tpl:244
+#: views/inc/sensor_list.tpl:27 views/switch_status.tpl:22
+#: views/system_status.tpl:21 views/system_status.tpl:77
+#: views/system_status.tpl:133 views/system_status.tpl:189
+msgid "month"
+msgstr ""
+
+#: views/dashboard.tpl:195 views/dashboard.tpl:247
+#: views/inc/sensor_list.tpl:30 views/switch_status.tpl:25
+#: views/system_status.tpl:24 views/system_status.tpl:80
+#: views/system_status.tpl:136 views/system_status.tpl:192
+msgid "year"
+msgstr ""
+
+#: views/dashboard.tpl:229
+msgid "Average Temperature"
+msgstr ""
+
+#: views/inc/menu.tpl:10
+msgid "Welcome"
+msgstr ""
+
+#: views/inc/menu.tpl:18
+msgid "General"
+msgstr ""
+
+#: views/inc/menu.tpl:21
+msgid "Home"
+msgstr ""
+
+#: views/inc/menu.tpl:24 views/system_environment.tpl:38
+#: views/system_environment.tpl:196 views/weather_forecast.tpl:7
+#: views/weather_settings.tpl:6
+msgid "Weather"
+msgstr ""
+
+#: views/inc/menu.tpl:27
+msgid "Forecast"
+msgstr ""
+
+#: views/inc/menu.tpl:35
+msgid "Sensors"
+msgstr ""
+
+#: views/inc/menu.tpl:38 views/weather_settings.tpl:40
+msgid "Temperature"
+msgstr ""
+
+#: views/inc/menu.tpl:41
+msgid "Humidity"
+msgstr ""
+
+#: views/inc/menu.tpl:49
+msgid "Switches"
+msgstr ""
+
+#: views/inc/menu.tpl:52 views/inc/menu.tpl:74 views/system_environment.tpl:20
+#: views/system_environment.tpl:104 views/system_environment.tpl:170
+msgid "Status"
+msgstr ""
+
+#: views/inc/menu.tpl:60 views/webcam.tpl:7
+msgid "Webcam"
+msgstr ""
+
+#: views/inc/menu.tpl:63
+msgid "Show"
+msgstr ""
+
+#: views/inc/menu.tpl:71
+msgid "System"
+msgstr ""
+
+#: views/inc/menu.tpl:87
+msgid "About"
+msgstr ""
+
+#: views/inc/menu.tpl:90
+msgid "Help"
+msgstr ""
+
+#: views/inc/menu.tpl:93
+msgid "Info"
+msgstr ""
+
+#: views/inc/menu.tpl:96
+msgid "Usage"
+msgstr ""
+
+#: views/inc/menu.tpl:99
+msgid "Software"
+msgstr ""
+
+#: views/inc/menu.tpl:102
+msgid "Hardware"
+msgstr ""
+
+#: views/inc/menu.tpl:105
+msgid "Contact"
+msgstr ""
+
+#: views/inc/menu.tpl:130
+msgid "date/time"
+msgstr ""
+
+#: views/inc/menu.tpl:134
+msgid "Door is closed"
+msgstr ""
+
+#: views/inc/menu.tpl:134
+msgid "Door is open"
+msgstr ""
+
+#: views/inc/menu.tpl:138 views/inc/menu.tpl:148
+msgid "No messages"
+msgstr ""
+
+#: views/inc/menu.tpl:144
+msgid "Offline"
+msgstr ""
+
+#: views/inc/menu.tpl:144
+msgid "Online"
+msgstr ""
+
+#: views/sensor_settings.tpl:8 views/system_environment.tpl:199
+msgid "Sensor"
+msgstr ""
+
+#: views/sensor_settings.tpl:21
+msgid "Address"
+msgstr ""
+
+#: views/sensor_settings.tpl:24 views/switch_settings.tpl:62
+msgid "Name"
+msgstr ""
+
+#: views/sensor_settings.tpl:33
+msgid "Limit min"
+msgstr ""
+
+#: views/sensor_settings.tpl:36
+msgid "Limit max"
+msgstr ""
+
+#: views/sensor_settings.tpl:51 views/switch_settings.tpl:80
+#: views/system_environment.tpl:244 views/system_settings.tpl:84
+#: views/weather_settings.tpl:59
+msgid "Submit"
+msgstr ""
+
+#: views/switch_settings.tpl:7
+msgid "Device type"
+msgstr ""
+
+#: views/switch_settings.tpl:20
+msgid "Amount of switches"
+msgstr ""
+
+#: views/switch_settings.tpl:59
+msgid "ID"
+msgstr ""
+
+#: views/switch_status.tpl:7
+msgid "Switch"
+msgstr ""
+
+#: views/system_environment.tpl:7 views/system_environment.tpl:91
+#: views/system_environment.tpl:157
+msgid "settings"
+msgstr ""
+
+#: views/system_environment.tpl:23 views/system_environment.tpl:107
+#: views/system_environment.tpl:115 views/system_environment.tpl:173
+#: views/system_environment.tpl:181
+msgid "Disabled"
+msgstr ""
+
+#: views/system_environment.tpl:23 views/system_environment.tpl:107
+#: views/system_environment.tpl:115 views/system_environment.tpl:173
+#: views/system_environment.tpl:181
+msgid "Enabled"
+msgstr ""
+
+#: views/system_environment.tpl:28
+msgid "Light modus"
+msgstr ""
+
+#: views/system_environment.tpl:35 views/system_environment.tpl:193
+msgid "Timer"
+msgstr ""
+
+#: views/system_environment.tpl:45
+msgid "Lights on"
+msgstr ""
+
+#: views/system_environment.tpl:51
+msgid "Lights off"
+msgstr ""
+
+#: views/system_environment.tpl:57
+msgid "Maximal lights hours"
+msgstr ""
+
+#: views/system_environment.tpl:63
+msgid "Minimal light hours"
+msgstr ""
+
+#: views/system_environment.tpl:69
+msgid "Hours shift"
+msgstr ""
+
+#: views/system_environment.tpl:75 views/system_environment.tpl:132
+#: views/system_environment.tpl:218
+msgid "Power switches"
+msgstr ""
+
+#: views/system_environment.tpl:112
+msgid "Enabled during the night"
+msgstr ""
+
+#: views/system_environment.tpl:120
+msgid "Sprayer wait timeout (seconds)"
+msgstr ""
+
+#: views/system_environment.tpl:126
+msgid "Sprayer spray duration (seconds)"
+msgstr ""
+
+#: views/system_environment.tpl:141
+msgid "Humidity sensors"
+msgstr ""
+
+#: views/system_environment.tpl:178
+msgid "Enabled during the day"
+msgstr ""
+
+#: views/system_environment.tpl:186
+msgid "Heater modus"
+msgstr ""
+
+#: views/system_environment.tpl:206
+msgid "Heater on"
+msgstr ""
+
+#: views/system_environment.tpl:212
+msgid "Heater off"
+msgstr ""
+
+#: views/system_environment.tpl:227
+msgid "Temperature sensors"
+msgstr ""
+
+#: views/system_settings.tpl:6
+msgid "TerrariumPI"
+msgstr ""
+
+#: views/system_settings.tpl:17
+msgid "Language"
+msgstr ""
+
+#: views/system_settings.tpl:28
+msgid "IP or hostname"
+msgstr ""
+
+#: views/system_settings.tpl:34
+msgid "Port number"
+msgstr ""
+
+#: views/system_settings.tpl:40
+msgid "Admin name"
+msgstr ""
+
+#: views/system_settings.tpl:46
+msgid "New admin password"
+msgstr ""
+
+#: views/system_settings.tpl:52
+msgid "Current admin password"
+msgstr ""
+
+#: views/system_settings.tpl:58
+msgid "Pi power usage in W"
+msgstr ""
+
+#: views/system_settings.tpl:64
+msgid "Door GPIO pin"
+msgstr ""
+
+#: views/system_settings.tpl:70
+msgid "1-Wire / OWFS port"
+msgstr ""
+
+#: views/system_settings.tpl:76
+msgid "Loglevel"
+msgstr ""
+
+#: views/system_status.tpl:6
+msgid "CPU Load"
+msgstr ""
+
+#: views/system_status.tpl:62
+msgid "CPU Temperature"
+msgstr ""
+
+#: views/system_status.tpl:118
+msgid "Memory usage"
+msgstr ""
+
+#: views/weather_forecast.tpl:39
+msgid "City"
+msgstr ""
+
+#: views/weather_forecast.tpl:58
+msgid "Mon"
+msgstr ""
+
+#: views/weather_forecast.tpl:66
+msgid "Tue"
+msgstr ""
+
+#: views/weather_forecast.tpl:74
+msgid "Wed"
+msgstr ""
+
+#: views/weather_forecast.tpl:82
+msgid "Thu"
+msgstr ""
+
+#: views/weather_forecast.tpl:90
+msgid "Fri"
+msgstr ""
+
+#: views/weather_forecast.tpl:98
+msgid "Sat"
+msgstr ""
+
+#: views/weather_forecast.tpl:112
+msgid "Day forecast"
+msgstr ""
+
+#: views/weather_forecast.tpl:143
+msgid "Week forecast"
+msgstr ""
+
+#: views/weather_settings.tpl:17
+msgid "Location"
+msgstr ""
+
+#: views/weather_settings.tpl:23
+msgid "Wind speed"
+msgstr ""
+
+#: views/weather_settings.tpl:30
+msgid "m/s"
+msgstr ""
+
+#: views/weather_settings.tpl:33
+msgid "km/h"
+msgstr ""
+

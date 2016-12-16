@@ -3,7 +3,7 @@
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2 id="deviceid">Weather <small>[..]</small></h2>
+                <h2 id="deviceid">{{_('Weather')}} <small>...</small></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -14,30 +14,30 @@
               <div class="x_content">
                 <form action="/api/config/weather" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
                   <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="location">Location <span class="required">*</span></label>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="location">{{_('Location')}} <span class="required">*</span></label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
-                      <input class="form-control" id="location" name="location" required="required" type="text">
+                      <input class="form-control" id="location" name="location" required="required" type="text" placeholder="{{_('Location')}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="windspeed">Wind speed <span class="required">*</span></label>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="windspeed">{{_('Wind speed')}} <span class="required">*</span></label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
                       <div class="form-group">
                         <select class="form-control" name="windspeed" tabindex="-1">
                           <option>
                             </option>
                           <option value="ms">
-                            m/s
+                            {{_('m/s')}}
                           </option>
                           <option value="kmh">
-                            km/h
+                            {{_('km/h')}}
                           </option>
                         </select>
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="temperature">Temperature <span class="required">*</span></label>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="temperature">{{_('Temperature')}} <span class="required">*</span></label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
                       <div class="form-group">
                         <select class="form-control" name="temperature" tabindex="-1">
@@ -56,7 +56,7 @@
                   <div class="ln_solid"></div>
                   <div class="form-group">
                     <div class="col-md-11 col-sm-11 col-xs-12 text-center">
-                      <button class="btn btn-success" type="submit">Submit</button>
+                      <button class="btn btn-success" type="submit">{{_('Submit')}}</button>
                     </div>
                   </div>
                 </form>

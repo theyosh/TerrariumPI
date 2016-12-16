@@ -4,7 +4,7 @@
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2><span class="title">Webcam</span> <small>live...</small></h2>
+                <h2><span class="title">{{_('Webcam')}}</span> <small>...</small></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -13,7 +13,7 @@
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
                     <ul class="dropdown-menu" role="menu">
                       <li>
-                        <a href="#" onclick="menu_click('webcam_settings.html')">Settings</a>
+                        <a href="#" onclick="menu_click('webcam_settings.html')">{{_('Settings')}}</a>
                       </li>
                     </ul>
                   </li>

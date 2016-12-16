@@ -13,6 +13,8 @@ var globals = {
 };
 
 $(document).ready(function() {
+  moment.locale(locale);
+
   $('#system_time').text(moment().format('LLLL'));
   websocket_init(false);
   // Bind to menu links in order to load Ajax calls
@@ -27,16 +29,16 @@ $(document).ready(function() {
     }
   });
 
-  $("<div id='tooltip'><span title='blaat' id='tooltiptext' data-toggle='tooltip'>&nbsp;&nbsp;&nbsp;</span></div>").css({
+  $("<div id='tooltip'><span title='tooltip' id='tooltiptext' data-toggle='tooltip'>&nbsp;&nbsp;&nbsp;</span></div>").css({
       position: "absolute",
 	}).appendTo("body");
 
   load_page('dashboard.html');
 
   setInterval(function() {
-    update_door_indicator(Math.random(0,10) % 2 === 0 ? 'open' : 'closed');
+    //update_door_indicator(Math.random(0,10) % 2 === 0 ? 'open' : 'closed');
     notification_timestamps();
-    updateWebcams();
+    //updateWebcams();
 
     $('#system_time').text(moment().format('LLLL'));
   }, 30 * 1000);
@@ -152,6 +154,10 @@ function load_page(url) {
       $('.child_menu a[href="' + menu_url + '"]').parent().addClass('active');
       // Put the content on the page
       $("#maincontent").html(data);
+
+      $("#maincontent a").each(function(index,item){
+        $(item).attr('title',$(item).text());
+      });
       // Reload some theme settings per page
       reload_reload_theme();
     });
@@ -173,9 +179,9 @@ function process_form() {
       }).done(function(response) {
         if (response.ok) {
           new PNotify({
-            title: "Data saved",
-            type: "success",
-            text: "Your changes are saved",
+            type: 'success',
+            title: response.title,
+            text: response.message,
             nonblock: {
               nonblock: true
             },
@@ -313,7 +319,7 @@ function update_weather(data) {
       if (value.from - timestamp >= 3600 && day_counter < week_forecast_divs.length) {
         $(week_forecast_divs[day_counter]).find('.day').text(moment(value.from * 1000).format('ddd'));
         $(week_forecast_divs[day_counter]).find('.degrees').text(value.temperature);
-        $(week_forecast_divs[day_counter]).find('h5').html(value.wind_speed.toFixed(1) + ' <i>' + (data.windspeed === 'ms' ? 'm/s' : 'Km/h') + '</i>');
+        $(week_forecast_divs[day_counter]).find('h5').html(value.wind_speed.toFixed(1) + ' <i>' + (data.windspeed === 'ms' ? '{{_('m/s')}}' : '{{_('Km/h')}}') + '</i>');
         icons.set($(week_forecast_divs[day_counter]).find('canvas').attr('id'), value.icon);
         day_counter++;
         timestamp += (24 * 60 * 60);
@@ -339,7 +345,7 @@ function update_dashboard_environment(name, value) {
     switch (name) {
       case 'light':
         enabledColor = 'orange';
-        systempart.find('h4 small').text('modus: ' + value.modus);
+        systempart.find('h4 small span').text(value.modus);
         systempart.find('.on').text(moment(value.on * 1000).format('LT'));
         systempart.find('.off').text(moment(value.off * 1000).format('LT'));
         systempart.find('.duration').text(moment.duration(Math.abs(value.off - value.on) * 1000).humanize());
@@ -352,15 +358,15 @@ function update_dashboard_environment(name, value) {
         break;
       case 'heater':
         enabledColor = 'red';
-        systempart.find('h4 small').text('modus: ' + value.modus);
+        systempart.find('h4 small span').text(value.modus);
         systempart.find('.current').text(value.current.toFixed(3) + ' °C');
         systempart.find('.alarm_min').text(value.alarm_min.toFixed(3) + ' °C');
         systempart.find('.alarm_max').text(value.alarm_max.toFixed(3) + ' °C');
         systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
         break;
     }
-    systempart.find('h4').removeClass('orange blue red').addClass(value.enabled ? enabledColor : '').attr('title', value.enabled ? 'enabled' : 'disabled');
-    systempart.find('.state i').removeClass('red green').addClass(value.state == 'on' ? 'green' : 'red').attr('title', value.state);
+    systempart.find('h4').removeClass('orange blue red').addClass(value.enabled ? enabledColor : '').attr('title', value.enabled ? '{{_('Enabled')}}' : '{{_('Disabled')}}');
+    systempart.find('.state i').removeClass('red green').addClass(value.state === 'on' ? 'green' : 'red').attr('title', value.state === 'on' ? '{{_('On')}}' : '{{_('Off')}}');
   } catch (error) {
       // Just ignore....
   }
@@ -386,18 +392,18 @@ function online_updater() {
 }
 
 function update_door_messages(online) {
-  var title = (online ? 'Open' : 'Close');
-  var message = (online ? 'Door has been opend!' : 'Door is closed');
-  var icon = (online ? 'fa-unlock' : 'fa-lock');
-  var color = (online ? 'red' : 'green');
+  var title   = (online ? '{{_('Open')}}' : '{{_('Close')}}');
+  var message = (online ? '{{_('Door is open')}}' : '{{_('Door is closed')}}');
+  var icon    = (online ? 'fa-unlock' : 'fa-lock');
+  var color   = (online ? 'red' : 'green');
   add_notification_message('door_messages', title, message, icon, color);
 }
 
 function update_online_messages(online) {
-  var title = (online ? 'Online' : 'Offline');
-  var message = (online ? 'Connection restored!' : 'Connection lost!');
-  var icon = (online ? 'fa-check-circle-o' : 'fa-exclamation-triangle');
-  var color = (online ? 'green' : 'red');
+  var title   = (online ? '{{_('Online')}}' : '{{_('Offline')}}');
+  var message = (online ? '{{_('Connection restored')}}' : '{{_('Connection lost')}}');
+  var icon    = (online ? 'fa-check-circle-o' : 'fa-exclamation-triangle');
+  var color   = (online ? 'green' : 'red');
   add_notification_message('online_messages', title, message, icon, color);
 }
 
@@ -412,7 +418,7 @@ function add_notification_message(type, title, message, icon, color) {
   });
   notification.append($('<span>').addClass('image').append($('<img>').attr({
     'src': $('div.profile_pic img').attr('src'),
-    'alt': 'Profile image'
+    'alt': '{{_('Profile image')}}'
   })));
   notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('timestamp', (new Date()).getTime()).text('...')));
   notification.append($('<span>').addClass('message').text(message).append($('<span>').addClass('pull-right').html('<i class="fa ' + icon + ' ' + color + '"></i>')));
@@ -448,14 +454,14 @@ function notification_timestamps() {
 
 function is_online() {
   var online_indicator = $('a#online_indicator');
-  online_indicator.find('span').text('Online');
+  online_indicator.find('span').text('{{_('Online')}}');
   online_indicator.find('i.fa').removeClass('fa-check-circle-o fa-exclamation-triangle red green').addClass('fa-check-circle-o green');
   update_online_messages(true);
 }
 
 function is_offline() {
   var online_indicator = $('a#online_indicator');
-  online_indicator.find('span').text('Offline');
+  online_indicator.find('span').text('{{_('Offline')}}');
   online_indicator.find('i.fa').removeClass('fa-check-circle-o fa-exclamation-triangle red green').addClass('fa-exclamation-triangle red');
   update_online_messages(false);
 }
@@ -470,14 +476,14 @@ function update_door_indicator(status) {
 
 function door_open() {
   var online_indicator = $('a#door_indicator');
-  online_indicator.find('span').text('Door open');
+  online_indicator.find('span').text('{{_('Door is open')}}');
   online_indicator.find('i.fa').removeClass('fa-lock fa-unlock red green').addClass('fa-unlock red');
   update_door_messages(true);
 }
 
 function door_closed() {
   var online_indicator = $('a#door_indicator');
-  online_indicator.find('span').text('Door closed');
+  online_indicator.find('span').text('{{_('Door is closed')}}');
   online_indicator.find('i.fa').removeClass('fa-lock fa-unlock red green').addClass('fa-lock green');
   update_door_messages(false);
 }
@@ -524,7 +530,7 @@ function sensor_gauge(name, data) {
   if ($('#' + name + ' .gauge').length == 1) {
     // Update title
     if (data.type !== undefined && data.name !== undefined) {
-      $('#' + name + ' span.title').text(data.type + ' sensor: ' + (data.name !== '' ? data.name : data.address));
+      $('#' + name + ' span.title').text(data.type + ' {{_('sensor')}}: ' + (data.name !== '' ? data.name : data.address));
     }
     // Update timestamp indicator
     $('#' + name + ' small').text(moment().format('LLL'));
@@ -568,7 +574,7 @@ function sensor_gauge(name, data) {
 }
 
 function load_history_graph(id,type,data_url,nocache) {
-  if ($('#' + id + ' .history_graph').length == 1) {
+  if ($('#' + id + ' .history_graph').length === 1) {
     var now = + new Date();
     var data = [];
     if (type === undefined) {
@@ -584,22 +590,27 @@ function load_history_graph(id,type,data_url,nocache) {
                             'timer': null };
     }
 
+    if ($('#' + id + ' .history_graph.loading').length === 1) {
     // Create period menu items
-    if ($('#' + id + ' ul.dropdown-menu.period').find('li').length === 0) {
-      var menu = $('#' + id + ' ul.dropdown-menu.period');
+      var menu_items = $('#' + id + ' ul.dropdown-menu.period a');
       $.each(['day','week','month','year'],function(index,value){
-        var li = $('<li>');
         if (index === 0) {
-          li.addClass('focus');
+          $(menu_items[index]).parent().addClass('focus');
         }
-        menu.append(li.append($('<a>').attr({'href':'javascript:void(0);','onclick':'$(this).parent().siblings().removeClass(\'focus\');$(this).parent().addClass(\'focus\');load_history_graph(\'' + id + '\',\'' + type + '\',\'' + data_url + '/' + value + '\',1)'}).text(value)));
+        $(menu_items[index]).off('click');
+        $(menu_items[index]).on('click', function(){
+          $(this).parent().siblings().removeClass('focus');
+          $(this).parent().addClass('focus');
+          load_history_graph(id,type,data_url + '/' + value ,1);
+        });
       });
     }
-
     if (nocache === 0 && now - globals.graphs[id].timestamp < globals.graph_cache * 1000) {
+      console.log('Use cached graph data');
       history_graph(id, globals.graphs[id].data, type);
     } else {
       // Load fresh data...
+      console.log('Use FRESH graph data');
       $.getJSON(data_url, function(online_data) {
         $.each(online_data, function(dummy, value) {
           $.each(value, function(dummy, data_array) {
@@ -616,7 +627,7 @@ function load_history_graph(id,type,data_url,nocache) {
     }
     clearTimeout(globals.graphs[id].timer);
     globals.graphs[id].timer = setTimeout(function() {
-          load_history_graph(id,type,data_url,1);
+          load_history_graph(id,type,data_url);
       }, 1 * 20 * 1000);
   }
   return false;
@@ -700,20 +711,20 @@ function history_graph(name, data, type) {
     case 'temperature':
     case 'humidity':
       graph_data = [{
-        label: 'Current',
+        label: '{{_('Current')}}',
         data: data.current
       }, {
-        label: 'Alarm min',
+        label: '{{_('Alarm min')}}',
         data: data.alarm_min
       }, {
-        label: 'Alarm max',
+        label: '{{_('Alarm max')}}',
         data: data.alarm_max
       }];
       break;
     case 'weather':
     case 'system_temperature':
       graph_data = [{
-        label: 'Temperature',
+        label: '{{_('Temperature')}}',
         data: data
       }];
       break;
@@ -726,7 +737,7 @@ function history_graph(name, data, type) {
       };
 
       graph_data = [{
-        label: 'Uptime',
+        label: '{{_('Uptime')}}',
         data: data
       }];
 
@@ -734,25 +745,25 @@ function history_graph(name, data, type) {
       break;
     case 'system_load':
       graph_data = [{
-        label: 'Load',
+        label: '{{_('Load')}}',
         data: data.load1
       }, {
-        label: 'Load 5',
+        label: '{{_('Load 5')}}',
         data: data.load5
       }, {
-        label: 'Load 15',
+        label: '{{_('Load 15')}}',
         data: data.load15
       }];
       break;
     case 'system_memory':
       graph_data = [{
-        label: 'Used memory',
+        label: '{{_('Used memory')}}',
         data: data.used
       }, {
-        label: 'Free memory',
+        label: '{{_('Free memory')}}',
         data: data.free
       }, {
-        label: 'Total memory',
+        label: '{{_('Total memory')}}',
         data: data.total
       }];
       break;
@@ -766,10 +777,10 @@ function history_graph(name, data, type) {
 
       graph_data = [data.power_wattage, data.water_flow];
       graph_data = [{
-        label: 'Power usage',
+        label: '{{_('Power usage in Watt')}}',
         data: data.power_wattage
       }, {
-        label: 'Water flow',
+        label: '{{_('Water flow in L/m')}}',
         data: data.water_flow
       }];
       break;
@@ -780,7 +791,7 @@ function history_graph(name, data, type) {
   }
 
   if ($('#' + name + ' .history_graph').length == 1) {
-    $('#' + name + ' .history_graph').html('').removeClass('loading');
+    $('#' + name + ' .history_graph').html('').removeClass('{{_('loading')}}');
     $.plot($('#' + name + ' .history_graph'), graph_data, graph_options);
     $('#' + name + ' .history_graph').bind('plothover', function (event, pos, item) {
       if (item) {
@@ -793,7 +804,7 @@ function history_graph(name, data, type) {
 
 function update_power_switch(id, data) {
   var power_switch = $('#switch_' + id);
-  power_switch.find('h2 span.title').text('Switch ' + data.name);
+  power_switch.find('h2 span.title').text('{{_('Switch')}} ' + data.name);
   power_switch.find('h2 small.data_update').text(data.power_wattage + 'W' + (data.water_flow > 0 ? ', ' + data.water_flow + 'L/m' : ''));
   power_switch.find('span.glyphicon').removeClass('blue green').addClass((data.state ? 'green' : 'blue'));
 }
