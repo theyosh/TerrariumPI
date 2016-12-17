@@ -12,13 +12,14 @@ var globals = {
   online_timer: null
 };
 
-
 $(document).ready(function() {
   moment.locale($('html').attr('lang'));
   $('#system_time span').text(moment().format('LLLL'));
   websocket_init(false);
   // Bind to menu links in order to load Ajax calls
-  $('#sidebar-menu a').on('click', load_page);
+  $('#sidebar-menu a').each(function() {
+    $(this).on('click', load_page).attr('title',$(this).parents('li').find('a:first').text());
+  });
   // NProgress bar animation during Ajax calls
   $(document).on({
     ajaxStart: function() {
@@ -36,7 +37,6 @@ $(document).ready(function() {
   load_page('dashboard.html');
 
   setInterval(function() {
-    //update_door_indicator(Math.random(0,10) % 2 === 0 ? 'open' : 'closed');
     notification_timestamps();
     updateWebcams();
 
@@ -611,7 +611,7 @@ function load_history_graph(id,type,data_url,nocache) {
       clearTimeout(globals.graphs[id].timer);
       globals.graphs[id].timer = setTimeout(function() {
           load_history_graph(id,type,data_url);
-      }, 1 * 20 * 1000);
+      }, 1 * 60 * 1000);
 
     } else {
       // Load fresh data...
@@ -627,11 +627,12 @@ function load_history_graph(id,type,data_url,nocache) {
             }
           });
         });
+
         history_graph(id, globals.graphs[id].data, type);
         clearTimeout(globals.graphs[id].timer);
         globals.graphs[id].timer = setTimeout(function() {
           load_history_graph(id,type,data_url);
-        }, 1 * 20 * 1000);
+        }, 1 * 60 * 1000);
 
       });
     }

@@ -52,7 +52,7 @@ then
       RESTART_ATTEMPTS=0
     fi
 
-    echo -n "$(date +"%Y-%m-%d %T") - Restarting in ${RESTART_TIME} seconds after running for ${SECONDS} seconds "
+    echo -n "$(date +"%Y-%m-%d %T,000") - WARNING - terrariumWrapper - Restarting in ${RESTART_TIME} seconds after running for ${SECONDS} seconds "
     for (( counter=1; counter<=${RESTART_TIME}; counter++ ))
     do
       echo -n "."
