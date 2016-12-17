@@ -2,7 +2,7 @@
 
 # Some settings
 RUN_AS_USER="pi"
-SCREEN_NAME="terrariumPI"
+SCREEN_NAME="TerrariumPI"
 RESTART_TIME=10
 MAX_RESTARTS=5
 RESTART_TIMEOUT=45
@@ -15,8 +15,14 @@ SCRIPT=$(basename $(readlink -nf $0))
 RUN=$1
 
 function message {
-  echo "$(date +"%Y-%m-%d %T") - $1"
+  echo "$(date +"%Y-%m-%d %T,000") - INFO    - terrariumWrapper - $1"
 }
+
+WHOAMI=`whoami`
+if [ "${WHOAMI}" != "root" ]; then
+  message "Start TerrariumPI server as user root"
+  exit 0
+fi
 
 if [ "${RUN}" == "run" ]
 then
@@ -26,7 +32,7 @@ then
     SECONDS=0
 
     # Start terrarium software
-    message "Starting terrarium server software..."
+    message "Starting TerrariumPI server ..."
     python ${BASEDIR}/terrariumPI.py
 
     # Crashed / stopped / something else...
@@ -37,9 +43,7 @@ then
 
       if (( RESTART_ATTEMPTS > MAX_RESTARTS )); then
          # To many errors. Rebooting
-         message "To manny error (${RESTART_ATTEMPTS}). Final result is reboting!!!"
-         sync
-         reboot
+         message "To manny error (${RESTART_ATTEMPTS}). Shutting down TerrariumPI server!"
          exit 0
       fi
 
@@ -57,7 +61,7 @@ then
     echo " restart!"
   done
 else
-  message "Starting terrarium server software..."
+  message "Restarting TerrariumPI server running as user '${RUN_AS_USER}' ..."
   cd "${BASEDIR}"
   su ${RUN_AS_USER} -c "screen -dmS ${SCREEN_NAME} ./${SCRIPT} run"
 fi
