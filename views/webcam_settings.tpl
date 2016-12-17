@@ -5,7 +5,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2><span class="title">Webcam</span> <small>new</small></h2>
+                  <h2><span class="title">{{_('Webcam')}}</span> <small>new</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -18,41 +18,41 @@
                 </div>
                 <div class="x_content">
                   <div class="col-md-8 col-sm-8 col-xs-12 form-group">
-                    <label for="webcam_{{item}}_id">ID<span class="required">*</span></label> <input class="form-control" name="webcam_{{item}}_id" placeholder="ID" readonly="readonly" type="text">
+                    <label for="webcam_{{item}}_id">{{_('ID')}} <span class="required">*</span></label> <input class="form-control" name="webcam_{{item}}_id" placeholder="{{_('ID')}}" readonly="readonly" type="text">
                   </div>
                   <div class="col-md-4 col-sm-4 col-xs-12 form-group pull-right">
-                    <label for="webcam_{{item}}_location">Preview</label>
+                    <label for="webcam_{{item}}_location">{{_('Preview')}}</label>
                     <div class="webcam_preview"><img id="webcam_{{item}}_preview" src="static/images/webcam_offline.png"></div>
                   </div>
                   <div class="col-md-8 col-sm-8 col-xs-12 form-group">
-                    <label for="webcam_{{item}}_name">Name<span class="required">*</span></label> <input class="form-control" name="webcam_{{item}}_name" placeholder="Name" type="text">
+                    <label for="webcam_{{item}}_name">{{_('Name')}} <span class="required">*</span></label> <input class="form-control" name="webcam_{{item}}_name" placeholder="{{_('Name')}}" type="text">
                   </div>
                   <div class="col-md-8 col-sm-8 col-xs-12 form-group">
-                    <label for="webcam_{{item}}_location">Location<span class="required">*</span></label> <input class="form-control" name="webcam_{{item}}_location" onchange="update_webcam_preview(this.name.split('_')[1],this.value)" placeholder="Location" type="text">
+                    <label for="webcam_{{item}}_location">{{_('Location')}} <span class="required">*</span></label> <input class="form-control" name="webcam_{{item}}_location" onchange="update_webcam_preview(this.name.split('_')[1],this.value)" placeholder="{{_('Location')}}" type="text">
                   </div>
                   <div class="col-md-8 col-sm-8 col-xs-12 form-group">
-                    <label for="webcam_{{item}}_rotation">Picture rotation<span class="required">*</span></label>
+                    <label for="webcam_{{item}}_rotation">{{_('Picture rotation')}} <span class="required">*</span></label>
                     <div class="form-group">
-                      <select class="form-control" name="webcam_{{item}}_rotation" tabindex="-1">
+                      <select class="form-control" name="webcam_{{item}}_rotation" tabindex="-1" placeholder="{{_('Select an option')}}">
                         <option>
                           </option>
                         <option value="0">
-                          0
+                          0 {{_('degrees')}}
                         </option>
                         <option value="90">
-                          90
+                          90 {{_('degrees')}}
                         </option>
                         <option value="180">
-                          180
+                          180 {{_('degrees')}}
                         </option>
                         <option value="270">
-                          270
+                          270 {{_('degrees')}}
                         </option>
                         <option value="H">
-                          Flip Horizontal
+                          {{_('Flip Horizontal')}}
                         </option>
                         <option value="V">
-                          Flip Vertical
+                          {{_('Flip Vertical')}}
                         </option>
                       </select>
                     </div>
@@ -67,7 +67,7 @@
               <div class="ln_solid"></div>
               <div class="form-group">
                 <div class="col-md-11 col-sm-11 col-xs-12 text-center">
-                  <button class="btn btn-success" type="submit">Submit</button>
+                  <button class="btn btn-success" type="submit">{{_('Submit')}}</button>
                 </div>
               </div>
             </div>
@@ -77,11 +77,10 @@
           $(document).ready(function() {
             var selector = $("select");
             selector.select2({
-              placeholder: "Select a number",
+              placeholder: '{{_('Select an option')}}',
               allowClear: false,
               minimumResultsForSearch: Infinity
             });
-
             selector.on('change',function() {
               var id = this.name.split('_')[1];
               $('img#webcam_' + id + '_preview').removeClass('webcam_90 webcam_180 webcam_270 webcam_H webcam_V').addClass('webcam_' + this.value);

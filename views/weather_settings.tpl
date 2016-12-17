@@ -23,7 +23,7 @@
                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="windspeed">{{_('Wind speed')}} <span class="required">*</span></label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
                       <div class="form-group">
-                        <select class="form-control" name="windspeed" tabindex="-1">
+                        <select class="form-control" name="windspeed" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option>
                             </option>
                           <option value="ms">
@@ -40,7 +40,7 @@
                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="temperature">{{_('Temperature')}} <span class="required">*</span></label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
                       <div class="form-group">
-                        <select class="form-control" name="temperature" tabindex="-1">
+                        <select class="form-control" name="temperature" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option>
                             </option>
                           <option value="C">
@@ -64,16 +64,17 @@
             </div>
           </div>
         </div>
+
         <script type="text/javascript">
           $(document).ready(function() {
             var windspeed_selector = $("select[name='windspeed']").select2({
-              placeholder: "Select a value",
+              placeholder: '{{_('Select an option')}}',
               allowClear: false,
               minimumResultsForSearch: Infinity
             });
 
             var temperature_selector = $("select[name='temperature']").select2({
-              placeholder: "Select a value",
+              placeholder: '{{_('Select an option')}}',
               allowClear: false,
               minimumResultsForSearch: Infinity
             });

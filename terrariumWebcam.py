@@ -30,7 +30,7 @@ class terrariumWebcam():
 
     # Main config
     self.tile_size = 256 # Smaller tile sizes does not work with LeafJS
-    self.tile_location = 'static/webcam/'
+    self.tile_location = 'webcam/'
     self.font_size = 10
 
     # Per webcam config
@@ -129,11 +129,8 @@ class terrariumWebcam():
 
     except Exception, err:
       # Error loadig image, so load offline image
-      print 'Webcam exception error!'
-      print err
-
       if self.state is not False:
-        logger.warning('Image at location %s is not available' % (self.location,))
+        logger.warning('Image at location %s is not available. Exception: %s' % (self.location,err,))
         self.__get_offline_image()
         self.state = False
 

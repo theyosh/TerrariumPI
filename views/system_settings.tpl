@@ -17,9 +17,8 @@
                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="active_language">{{_('Language')}} <span class="required">*</span></label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
                       <div class="form-group">
-                        <select class="form-control" required="required" name="active_language" tabindex="-1">
-                          <option>
-                            </option>
+                        <select class="form-control" required="required" name="active_language" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option></option>
                         </select>
                       </div>
                     </div>

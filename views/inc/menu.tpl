@@ -102,7 +102,7 @@
                       <a href="hardware.html">{{_('Hardware')}}</a>
                     </li>
                     <li>
-                      <a href="contact.html">{{_('Contact')}}</a>
+                      <a href="cosidebar-footerntact.html">{{_('Contact')}}</a>
                     </li>
                   </ul>
                 </li>
@@ -111,10 +111,10 @@
           </div><!-- /sidebar menu -->
           <!-- /menu footer buttons -->
           <div class="sidebar-footer hidden-small">
-            <a data-placement="top" data-toggle="tooltip" title="Settings"><span aria-hidden="true" class="glyphicon glyphicon-cog"></span></a>
-            <a data-placement="top" data-toggle="tooltip" onclick="$(document).fullScreen(true);" title="{{_('FullScreen')}}"><span aria-hidden="true" class="glyphicon glyphicon-fullscreen"></span></a>
-            <a data-placement="top" data-toggle="tooltip" title="Lock"><span aria-hidden="true" class="glyphicon glyphicon-eye-close"></span></a>
-            <a data-placement="top" data-toggle="tooltip" title="Logout"><span aria-hidden="true" class="glyphicon glyphicon-off"></span></a>
+            <a data-placement="top" data-toggle="tooltip" href="javascript:;" onclick="menu_click('system_settings.html');" title="{{_('Settings')}}"><span aria-hidden="true" class="glyphicon glyphicon-cog"></span><br />{{_('Settings')}}</a>
+            <a data-placement="top" data-toggle="tooltip" href="javascript:;" onclick="$(document).fullScreen(true);" title="{{_('FullScreen')}}"><span aria-hidden="true" class="glyphicon glyphicon-fullscreen"></span><br />{{_('FullScreen')}}</a>
+            <a data-placement="top" data-toggle="tooltip" title="{{_('Lock')}}"><span aria-hidden="true" class="glyphicon glyphicon-eye-close"></span><br />{{_('Lock')}}</a>
+            <a data-placement="top" data-toggle="tooltip" title="{{_('Logout')}}"><span aria-hidden="true" class="glyphicon glyphicon-off"></span><br />{{_('Logout')}}</a>
           </div><!-- /menu footer buttons -->
         </div>
       </div><!-- top navigation -->
@@ -125,10 +125,8 @@
               <a id="menu_toggle"><i class="fa fa-bars"></i></a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-              <li class="" role="presentation">
-                <div aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown">
-                  <i id="time_isday" class="fa fa-clock-o"></i> <span id="system_time">{{_('date/time')}}</span>
-                </div>
+              <li id="system_time" role="presentation">
+                <i class="fa fa-clock-o"></i> <span >{{_('date/time')}}</span>
               </li>
               <li class="dropdown" role="presentation">
                 <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;" id="door_indicator"><i class="fa fa-lock green"></i> <span>{{_('Door is closed')}}/{{_('Door is open')}}</span></a>

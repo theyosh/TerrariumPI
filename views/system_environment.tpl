@@ -28,7 +28,7 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Light modus')}}</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <div class="form-group">
-                        <select class="form-control" name="light_modus" tabindex="-1">
+                        <select class="form-control" name="light_modus" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option>
                             </option>
                           <option value="timer">
@@ -75,7 +75,7 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Power switches')}}</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <div class="form-group">
-                        <select class="form-control" multiple="multiple" name="light_power_switches" tabindex="-1">
+                        <select class="form-control" multiple="multiple" name="light_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
                           </select>
                       </div>
                     </div>
@@ -132,7 +132,7 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Power switches')}}</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <div class="form-group">
-                        <select class="form-control" multiple="multiple" name="sprayer_power_switches" tabindex="-1">
+                        <select class="form-control" multiple="multiple" name="sprayer_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
                           </select>
                       </div>
                     </div>
@@ -141,7 +141,7 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Humidity sensors')}}</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <div class="form-group">
-                        <select class="form-control" multiple="multiple" name="sprayer_sensors" tabindex="-1">
+                        <select class="form-control" multiple="multiple" name="sprayer_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
                           </select>
                       </div>
                     </div>
@@ -186,9 +186,8 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Heater modus')}}</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <div class="form-group">
-                        <select class="form-control" name="heater_modus" tabindex="-1">
-                          <option>
-                            </option>
+                        <select class="form-control" name="heater_modus" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option></option>
                           <option value="timer">
                             {{_('Timer')}}
                           </option>
@@ -218,7 +217,7 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Power switches')}}</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <div class="form-group">
-                        <select class="form-control" multiple="multiple" name="heater_power_switches" tabindex="-1">
+                        <select class="form-control" multiple="multiple" name="heater_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
                           </select>
                       </div>
                     </div>
@@ -227,7 +226,7 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Temperature sensors')}}</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <div class="form-group">
-                        <select class="form-control" multiple="multiple" name="heater_sensors" tabindex="-1">
+                        <select class="form-control" multiple="multiple" name="heater_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
                           </select>
                       </div>
                     </div>
@@ -313,7 +312,7 @@
 
             var heater_power_switches_selector = $("select[name='heater_power_switches']");
             heater_power_switches_selector.select2({
-              placeholder: "Select an option",
+              placeholder: '{{_('Select an option')}}',
               allowClear: false,
               minimumResultsForSearch: Infinity
             });

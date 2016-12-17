@@ -10,8 +10,6 @@ from Queue import Queue
 import gettext
 gettext.install('terrariumpi', 'locales/', unicode=True)
 
-#gettext.translation('terrariumpi', 'locales/', languages=['nl_NL']).install(True)
-
 import thread
 import json
 import os
@@ -30,6 +28,7 @@ class terrariumWebserverHeaders(object):
       template_file = 'views' + request.fullpath[:-5] + '.tpl'
       if os.path.isfile(template_file):
         t = os.path.getmtime(template_file)
+        response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(days=1)).strftime('%a, %d %b %Y %H:%M:%S GMT')
         response.headers['Last-Modified'] = datetime.datetime.fromtimestamp(t).strftime( '%a, %d %b %Y %H:%M:%S GMT')
         response.headers['Etag'] = hashlib.md5(response.headers['Last-Modified']).hexdigest()
 
@@ -46,10 +45,10 @@ class terrariumWebserver():
     self.__terrariumEngine = terrariumEngine
     self.__app = terrariumWebserver.app
     self.__config = terrariumEngine.get_config('system')
+    self.__caching_days = 30
+    terrariumWebserver.app.terrarium = self.__terrariumEngine
     # Load language
     gettext.translation('terrariumpi', 'locales/', languages=[self.__terrariumEngine.config.get_active_language()]).install(True)
-
-    terrariumWebserver.app.terrarium = self.__terrariumEngine
 
     self.__routes()
 
@@ -60,19 +59,18 @@ class terrariumWebserver():
     self.__app.route('/', method="GET", callback=self.__render_page)
     self.__app.route('/<template_name:re:[^/]+\.html$>', method="GET", callback=self.__render_page, apply=[terrariumWebserverHeaders()])
 
-    self.__app.route('/static/<filename:path>', method="GET", callback=self.__static_file)
-    self.__app.route('/gentelella/<filename:path>', method="GET", callback=self.__static_file_gentelella)
+    self.__app.route('/<root:re:(static|gentelella|webcam)>/<filename:path>', method="GET", callback=self.__static_file)
 
     self.__app.route('/api/switch/toggle/<switchid:path>',
                      method=['GET'],
                      callback=self.__toggle_switch,
-                     apply=auth_basic(self.__authenticate,'TerrarumPI Authentication','Authenticate to make any changes')
+                     apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
                     )
 
     self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|environment)>',
                      method=['PUT','POST','DELETE'],
                      callback=self.__update_api_call,
-                     apply=auth_basic(self.__authenticate,'TerrarumPI Authentication','Authenticate to make any changes')
+                     apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
                     )
 
     self.__app.route('/api/<path:path>', method=['GET'], callback=self.__get_api_call)
@@ -111,17 +109,25 @@ class terrariumWebserver():
 
     return template(template_name,**self.__template_variables(template_name))
 
-  def __static_file(self,filename):
-    response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(days=30)).strftime('%a, %d %b %Y %H:%M:%S GMT')
+  def __static_file(self,filename, root = 'static'):
     if filename == 'js/terrariumpi.js':
+      t = os.path.getmtime(root + '/' + filename)
+      response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(days=1)).strftime('%a, %d %b %Y %H:%M:%S GMT')
+      response.headers['Last-Modified'] = datetime.datetime.fromtimestamp(t).strftime( '%a, %d %b %Y %H:%M:%S GMT')
+      response.headers['Etag'] = hashlib.md5(response.headers['Last-Modified']).hexdigest()
+
       response.headers['Content-Type'] = 'application/javascript; charset=UTF-8'
-      return template(filename,template_lookup=['./static/'])
+      return template(filename,template_lookup=[root])
 
-    return static_file(filename, root='./static/')
+    staticfile = static_file(filename, root=root)
+    if 'webcam' == root:
+      staticfile.add_header('Expires',datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S GMT'))
+    else:
+      staticfile.add_header('Expires',(datetime.datetime.now() + datetime.timedelta(days=self.__caching_days)).strftime('%a, %d %b %Y %H:%M:%S GMT'))
 
-  def __static_file_gentelella(self,filename):
-    response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(days=30)).strftime('%a, %d %b %Y %H:%M:%S GMT')
-    return static_file(filename, root='./gentelella/')
+    staticfile.add_header('Etag',hashlib.md5(staticfile.get_header('Last-Modified')).hexdigest())
+
+    return staticfile
 
   def __update_api_call(self,path):
     result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Data could not be saved')}
@@ -236,4 +242,5 @@ class terrariumWebserver():
                    port=self.__config['port'],
                    server=GeventWebSocketServer,
                    debug=False,
-                   reloader=False)
+                   reloader=False,
+                   quiet=True)

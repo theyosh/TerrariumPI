@@ -1,3 +1,3 @@
         <script type="text/javascript">
-          document.title = '{{title}} | {{_(page_title)}}';
+          document.title = '{{title}} | {{page_title}}';
         </script>

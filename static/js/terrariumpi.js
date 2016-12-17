@@ -12,10 +12,10 @@ var globals = {
   online_timer: null
 };
 
-$(document).ready(function() {
-  moment.locale(locale);
 
-  $('#system_time').text(moment().format('LLLL'));
+$(document).ready(function() {
+  moment.locale($('html').attr('lang'));
+  $('#system_time span').text(moment().format('LLLL'));
   websocket_init(false);
   // Bind to menu links in order to load Ajax calls
   $('#sidebar-menu a').on('click', load_page);
@@ -40,7 +40,7 @@ $(document).ready(function() {
     notification_timestamps();
     updateWebcams();
 
-    $('#system_time').text(moment().format('LLLL'));
+    $('#system_time span').text(moment().format('LLLL'));
   }, 30 * 1000);
 });
 
@@ -275,8 +275,8 @@ function update_dashboard_tile(tile, text) {
 
 function update_dashboard_uptime(data) {
   update_dashboard_tile('uptime', format_uptime(data.uptime));
-  $('#system_time').text(moment(data.timestamp * 1000).format('LLLL'));
-  $('#time_isday').removeClass('fa-clock-o fa-sun-o fa-moon-o').addClass((data.day ? 'fa-sun-o' : 'fa-moon-o'));
+  $('#system_time span').text(moment(data.timestamp * 1000).format('LLLL'));
+  $('#system_time i').removeClass('fa-clock-o fa-sun-o fa-moon-o').addClass((data.day ? 'fa-sun-o' : 'fa-moon-o'));
   $("#uptime .progress-bar-success").css('height', (data.load[0] * 100) + '%');
   $("#uptime .progress-bar-warning").css('height', (data.load[1] * 100) + '%');
   $("#uptime .progress-bar-danger").css('height', (data.load[2] * 100) + '%');
@@ -608,6 +608,11 @@ function load_history_graph(id,type,data_url,nocache) {
     if (nocache === 0 && now - globals.graphs[id].timestamp < globals.graph_cache * 1000) {
       console.log('Use cached graph data');
       history_graph(id, globals.graphs[id].data, type);
+      clearTimeout(globals.graphs[id].timer);
+      globals.graphs[id].timer = setTimeout(function() {
+          load_history_graph(id,type,data_url);
+      }, 1 * 20 * 1000);
+
     } else {
       // Load fresh data...
       console.log('Use FRESH graph data');
@@ -623,12 +628,14 @@ function load_history_graph(id,type,data_url,nocache) {
           });
         });
         history_graph(id, globals.graphs[id].data, type);
+        clearTimeout(globals.graphs[id].timer);
+        globals.graphs[id].timer = setTimeout(function() {
+          load_history_graph(id,type,data_url);
+        }, 1 * 20 * 1000);
+
       });
     }
-    clearTimeout(globals.graphs[id].timer);
-    globals.graphs[id].timer = setTimeout(function() {
-          load_history_graph(id,type,data_url);
-      }, 1 * 20 * 1000);
+
   }
   return false;
 }
@@ -883,7 +890,7 @@ function initWebcam(webcamid, name, maxzoom) {
 }
 
 function createWebcamLayer(webcamid, maxzoom) {
-  return L.tileLayer('/static/webcam/{id}_tile_{z}_{x}_{y}.jpg?_{time}', {
+  return L.tileLayer('/webcam/{id}_tile_{z}_{x}_{y}.jpg?_{time}', {
     time: function() {
       return (new Date()).valueOf();
     },

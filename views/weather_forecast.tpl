@@ -10,10 +10,10 @@
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
                   <li class="dropdown">
-                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
+                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-wrench"></i></a>
                     <ul class="dropdown-menu" role="menu">
                       <li>
-                        <a href="#" onclick="menu_click('weather_settings.html')">{{_('Settings')}}</a>
+                        <a href="javascript:;" onclick="menu_click('weather_settings.html')">{{_('Settings')}}</a>
                       </li>
                     </ul>
                   </li>
@@ -115,19 +115,6 @@
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
-                  <!--
-                  <li class="dropdown">
-                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li>
-                        <a href="#">Settings 1</a>
-                      </li>
-                      <li>
-                        <a href="#">Settings 2</a>
-                      </li>
-                    </ul>
-                  </li>
-                  -->
                   <li>
                     <a class="close-link"><i class="fa fa-close"></i></a>
                   </li>
@@ -146,19 +133,6 @@
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
-                  <!--
-                  <li class="dropdown">
-                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li>
-                        <a href="#">Settings 1</a>
-                      </li>
-                      <li>
-                        <a href="#">Settings 2</a>
-                      </li>
-                    </ul>
-                  </li>
-                  -->
                   <li>
                     <a class="close-link"><i class="fa fa-close"></i></a>
                   </li>
@@ -173,7 +147,13 @@
         </div>
         <script type="text/javascript">
           $.get('/api/weather',function(data){
-            $('#weather_credits').html('<a href="' + data.credits.url + '" target="_blank">' + data.credits.text + '</a>');
+            $('#weather_credits').append($('<a>').attr({'href': data.credits.url,
+                                                        'target':'_blank',
+                                                        'title' : data.credits.text})
+                                                 .text(data.credits.text));
+
+
+            //$('#weather_credits').html('<a href="' + data.credits.url + '" target="_blank">' + data.credits.text + '</a>');
             var period = moment(data.hour_forecast[0].from * 1000).format('lll') + ' - ' + moment(data.hour_forecast[data.hour_forecast.length-1].to * 1000).format('lll') + ', ' + moment.duration( (data.hour_forecast[data.hour_forecast.length-1].to - data.hour_forecast[0].from) * 1000).humanize();
             $('#weather_hourly').text(period);
             period = moment(data.week_forecast[0].from * 1000).format('lll') + ' - ' + moment(data.week_forecast[data.week_forecast.length-1].to * 1000).format('lll') + ', ' +  moment.duration( (data.week_forecast[data.week_forecast.length-1].to - data.week_forecast[0].from) * 1000).humanize();

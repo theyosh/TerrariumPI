@@ -4,7 +4,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2 id="deviceid">{{_('Device type')}} <small>..</small></h2>
+                  <h2 id="deviceid">{{_('Powerswitch board')}}: <span>{{_('Device type')}}</span> <small>..</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -20,7 +20,7 @@
                     <label class="control-label col-md-2 col-sm-4 col-xs-12" for="amount_of_switches">{{_('Amount of switches')}} <span class="required">*</span></label>
                     <div class="col-md-8 col-sm-6 col-xs-12">
                       <div class="form-group">
-                        <select class="form-control" name="amount_of_switches" tabindex="-1">
+                        <select class="form-control" name="amount_of_switches" tabindex="-1" placeholder="{{_('Select a number')}}">
                           <option></option>
                           % for item in range(0,max_swithes):
                           <option value="{{item+1}}">
@@ -43,7 +43,7 @@
                   <div class="power_switch small switch_{{item}}_state">
                     <span aria-hidden="true" class="glyphicon glyphicon-off" onclick="toggleSwitch($(this).parent().attr('id'));"></span>
                   </div>
-                  <h2>Switch {{item+1}}<small></small></h2>
+                  <h2>{{_('Switch')}} {{item+1}}<small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -62,10 +62,10 @@
                     <label for="switch_{{item}}_name">{{_('Name')}}</label> <input class="form-control" name="switch_{{item}}_name" placeholder="{{_('Name')}}" type="text">
                   </div>
                   <div class="col-md-3 col-sm-6 col-xs-12 form-group">
-                    <label for="switch_{{item}}_power_wattage">{{_('Power usage in Watt')}}</label> <input class="form-control" name="switch_{{item}}_power_wattage" placeholder="{{_('Power usage')}}" type="text">
+                    <label for="switch_{{item}}_power_wattage">{{_('Power usage in Watt')}}</label> <input class="form-control" name="switch_{{item}}_power_wattage" placeholder="{{_('Power usage in Watt')}}" type="text">
                   </div>
                   <div class="col-md-3 col-sm-6 col-xs-12 form-group">
-                    <label for="switch_{{item}}_water_flow">{{_('Water flow in L/m')}}</label> <input class="form-control" name="switch_{{item}}_water_flow" placeholder="{{_('Water usage')}}" type="text">
+                    <label for="switch_{{item}}_water_flow">{{_('Water flow in L/m')}}</label> <input class="form-control" name="switch_{{item}}_water_flow" placeholder="{{_('Water flow in L/m')}}" type="text">
                   </div>
                 </div>
               </div>
@@ -92,7 +92,7 @@
           $(document).ready(function() {
             var selector = $("select[name='amount_of_switches']");
             selector.select2({
-              placeholder: "Select a number",
+              placeholder: '{{_('Select a number')}}',
               allowClear: false,
               minimumResultsForSearch: Infinity
             });
@@ -109,7 +109,8 @@
             });
 
             $.get($('form').attr('action'),function(data){
-              $('h2#deviceid').html('Powerswitch board: ' + data.switchboard_device + ' (' + data.switchboard_type + ') <small>' + data.switchboard_id + '<\/small>')
+              $('h2#deviceid span').text(data.switchboard_device + ' (' + data.switchboard_type + ')');
+              $('h2#deviceid small').text(data.switchboard_id);
               $.each(data.switches, function(index,powerswitch) {
                 $('.switch_' + (powerswitch['nr']-1) + '_state').attr('id','switch_' + powerswitch['id']);
                 $(Object.keys(powerswitch)).each(function(counter,key){

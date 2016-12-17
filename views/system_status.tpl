@@ -9,7 +9,7 @@
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
                   <li class="dropdown">
-                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-calendar"></i></a>
+                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-calendar"></i></a>
                     <ul class="dropdown-menu period" role="menu">
                       <li>
                         <a href="javascript:;" >{{_('day')}}</a>
@@ -26,10 +26,10 @@
                     </ul>
                   </li>
                   <li class="dropdown">
-                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
+                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-wrench"></i></a>
                     <ul class="dropdown-menu" role="menu">
                       <li>
-                        <a href="#" onclick="menu_click('system_settings.html')">{{_('Settings')}}</a>
+                        <a href="javascript:;" onclick="menu_click('system_settings.html')">{{_('Settings')}}</a>
                       </li>
                     </ul>
                   </li>
@@ -65,7 +65,7 @@
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
                   <li class="dropdown">
-                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-calendar"></i></a>
+                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-calendar"></i></a>
                     <ul class="dropdown-menu period" role="menu">
                       <li>
                         <a href="javascript:;" >{{_('day')}}</a>
@@ -82,10 +82,10 @@
                     </ul>
                   </li>
                   <li class="dropdown">
-                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
+                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-wrench"></i></a>
                     <ul class="dropdown-menu" role="menu">
                       <li>
-                        <a href="#" onclick="menu_click('system_settings.html')">{{_('Settings')}}</a>
+                        <a href="javascript:;" onclick="menu_click('system_settings.html')">{{_('Settings')}}</a>
                       </li>
                     </ul>
                   </li>
@@ -121,7 +121,7 @@
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
                   <li class="dropdown">
-                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-calendar"></i></a>
+                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-calendar"></i></a>
                     <ul class="dropdown-menu period" role="menu">
                       <li>
                         <a href="javascript:;" >{{_('day')}}</a>
@@ -138,10 +138,10 @@
                     </ul>
                   </li>
                   <li class="dropdown">
-                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
+                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-wrench"></i></a>
                     <ul class="dropdown-menu" role="menu">
                       <li>
-                        <a href="#" onclick="menu_click('system_settings.html')">{{_('Settings')}}</a>
+                        <a href="javascript:;" onclick="menu_click('system_settings.html')">{{_('Settings')}}</a>
                       </li>
                     </ul>
                   </li>
@@ -177,7 +177,7 @@
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
                   <li class="dropdown">
-                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-calendar"></i></a>
+                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-calendar"></i></a>
                     <ul class="dropdown-menu period" role="menu">
                       <li>
                         <a href="javascript:;" >{{_('day')}}</a>
@@ -194,10 +194,10 @@
                     </ul>
                   </li>
                   <li class="dropdown">
-                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><i class="fa fa-wrench"></i></a>
+                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-wrench"></i></a>
                     <ul class="dropdown-menu" role="menu">
                       <li>
-                        <a href="#" onclick="menu_click('system_settings.html')">{{_('Settings')}}</a>
+                        <a href="javascript:;" onclick="menu_click('system_settings.html')">{{_('Settings')}}</a>
                       </li>
                     </ul>
                   </li>

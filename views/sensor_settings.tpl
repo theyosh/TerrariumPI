@@ -60,8 +60,10 @@
               $.each(data.sensors, function(index,sensor) {
                 $(Object.keys(sensor)).each(function(index2,key){
                   if ('type' == key ) {
-                    $('span.sensor_' + index + '_icon').html('<span class="glyphicon glyphicon-' + (sensor[key] == 'temperature' ? 'fire' : 'tint') + '" aria-hidden="true"><\/span>')
-                                                        .attr('title',sensor[key] + ' sensor');
+                    $('span.sensor_' + index + '_icon').append(
+                        $('<span>').addClass('glyphicon glyphicon-' + (sensor[key] == 'temperature' ? 'fire' : 'tint'))
+                                   .attr({'aria-hidden':'true','title': sensor[key] + ' {{_('sensor')}}'})
+                    );
                   } else {
                     $('input[name="sensor_' + index + '_' + key + '"]').val(sensor[key]);
                   }
