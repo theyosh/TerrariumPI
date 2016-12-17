@@ -1,17 +1,27 @@
 #!/bin/bash
+BASEDIR=$(dirname $(readlink -nf $0))
+
+WHOAMI=`whoami`
+if [ "${WHOAMI}" != "root" ]; then
+  echo "Start TerrariumPI installation as user root"
+  exit 0
+fi
 
 # Clean up first
 aptitude -y remove wolfram-engine sonic-pi oracle-java8-jdk desktop-base gnome-desktop3-data libgnome-desktop-3-10 epiphany-browser-data epiphany-browser nuscratch scratch wiringpi
 apt-get -y remove "^libreoffice.*"
 apt-get -y autoremove
 
-# Basic config:
-raspi-config
-
 # Install required packages to get the terrarium software running
 aptitude -y update
 aptitude -y safe-upgrade
 aptitude -y install libftdi1 screen python-imaging python-dateutil python-ow python-rpi.gpio python-psutil git subversion watchdog
+
+# Basic config:
+raspi-config
+
+# Set the timezone
+dpkg-reconfigure tzdata
 
 # Manually install python pip, else you will get Python 2.6... :(
 wget https://bootstrap.pypa.io/get-pip.py
@@ -42,7 +52,8 @@ modprobe i2c-dev
 update-rc.d -f owftpd remove
 update-rc.d -f owfhttpd remove
 
-# Set the timezone
-dpkg-reconfigure tzdata
+if [ `grep -ic "start.sh" /etc/rc.local` -eq 0 ]; then
+  sed -i.bak "s@^exit 0@# Starting TerrariumPI server\n${BASEDIR}/start.sh\n\nexit 0@" /etc/rc.local
+fi
 
 echo "Instaltion is done. Please reboot once to get the I2C working correctly"
