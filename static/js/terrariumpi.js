@@ -38,7 +38,7 @@ $(document).ready(function() {
   setInterval(function() {
     //update_door_indicator(Math.random(0,10) % 2 === 0 ? 'open' : 'closed');
     notification_timestamps();
-    //updateWebcams();
+    updateWebcams();
 
     $('#system_time').text(moment().format('LLLL'));
   }, 30 * 1000);
@@ -867,7 +867,7 @@ function update_webcam_preview(name, url) {
 }
 
 function initWebcam(webcamid, name, maxzoom) {
-  if ($('div#webcam_' + webcamid).length == 1) {
+  if ($('div#webcam_' + webcamid).length === 1) {
     $('div#webcam_' + webcamid).parents('.x_panel').find('h2 small').text(name);
     if (globals.webcams[webcamid] === undefined) {
       globals.webcams[webcamid] = new L.Map('webcam_' + webcamid, {

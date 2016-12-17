@@ -20,18 +20,9 @@
   <link href='/static/leaflet.fullscreen/dist/leaflet.fullscreen.css' rel='stylesheet'><!-- Custom Theme Style -->
   <link href="/gentelella/build/css/custom.min.css" rel="stylesheet">
   <link href="/static/css/terrariumpi.css" rel="stylesheet"><!-- jQuery -->
-
-  <script src="/gentelella/vendors/jquery/dist/jquery.min.js">
-  </script><!-- Bootstrap -->
-
-  <script src="/gentelella/vendors/bootstrap/dist/js/bootstrap.min.js">
-  </script>
-
-  <script type="text/javascript">
-    var locale = '{{lang}}';
-  </script>
-
-
+  <script src="/gentelella/vendors/jquery/dist/jquery.min.js"></script><!-- Bootstrap -->
+  <script src="/gentelella/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript">var locale = '{{lang}}';</script>
 </head>
 <body class="nav-md">
   <div class="container body">
