@@ -1,12 +1,12 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR ORGANIZATION
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) 2016 TheYOSH
+# Joshua (TheYOSH) Rubingh, <theyosh@theyosh.nl>, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2016-12-16 19:48+0100\n"
-"PO-Revision-Date: 2016-12-16 19:48+0100\n"
+"POT-Creation-Date: 2016-12-17 22:13+0100\n"
+"PO-Revision-Date: 2016-12-17 22:14+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -17,19 +17,32 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: terrariumWebserver.py:125
+#: terrariumWebserver.py:67 terrariumWebserver.py:73
+msgid "Authenticate to make any changes"
+msgstr "Login om wijzigingen te kunnen maken"
+
+#: terrariumWebserver.py:67 terrariumWebserver.py:73
+msgid "Authentication"
+msgstr "Authenticatie"
+
+#: terrariumWebserver.py:67 terrariumWebserver.py:73
+#: views/system_settings.tpl:6
+msgid "TerrariumPI"
+msgstr "TerrariumPI"
+
+#: terrariumWebserver.py:133
 msgid "Data could not be saved"
 msgstr "Data kon niet worden opgeslagen"
 
-#: terrariumWebserver.py:125
+#: terrariumWebserver.py:133
 msgid "Error!"
 msgstr "Fout!"
 
-#: terrariumWebserver.py:129
+#: terrariumWebserver.py:137
 msgid "Data saved"
 msgstr "Data is opgeslagen"
 
-#: terrariumWebserver.py:130
+#: terrariumWebserver.py:138
 msgid "Your changes are saved"
 msgstr "Je wijzigingen zijn opgeslagen"
 
@@ -63,11 +76,11 @@ msgstr "huidig"
 
 #: views/dashboard.tpl:79 views/dashboard.tpl:203 views/dashboard.tpl:255
 #: views/inc/menu.tpl:30 views/inc/menu.tpl:44 views/inc/menu.tpl:55
-#: views/inc/menu.tpl:66 views/inc/menu.tpl:80 views/inc/sensor_list.tpl:38
-#: views/switch_status.tpl:33 views/system_status.tpl:32
-#: views/system_status.tpl:88 views/system_status.tpl:144
-#: views/system_status.tpl:200 views/weather_forecast.tpl:16
-#: views/webcam.tpl:16
+#: views/inc/menu.tpl:66 views/inc/menu.tpl:80 views/inc/menu.tpl:114
+#: views/inc/sensor_list.tpl:38 views/switch_status.tpl:33
+#: views/system_status.tpl:32 views/system_status.tpl:88
+#: views/system_status.tpl:144 views/system_status.tpl:200
+#: views/weather_forecast.tpl:16 views/webcam.tpl:16
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -170,7 +183,7 @@ msgid "Home"
 msgstr "Thuis"
 
 #: views/inc/menu.tpl:24 views/system_environment.tpl:38
-#: views/system_environment.tpl:196 views/weather_forecast.tpl:7
+#: views/system_environment.tpl:195 views/weather_forecast.tpl:7
 #: views/weather_settings.tpl:6
 msgid "Weather"
 msgstr "Weer"
@@ -200,7 +213,7 @@ msgstr "Schakelaars"
 msgid "Status"
 msgstr "Status"
 
-#: views/inc/menu.tpl:60 views/webcam.tpl:7
+#: views/inc/menu.tpl:60 views/webcam.tpl:7 views/webcam_settings.tpl:8
 msgid "Webcam"
 msgstr "Webcam"
 
@@ -240,31 +253,43 @@ msgstr "Hardware"
 msgid "Contact"
 msgstr "Contact"
 
-#: views/inc/menu.tpl:130
+#: views/inc/menu.tpl:115
+msgid "FullScreen"
+msgstr "Volledig scherm"
+
+#: views/inc/menu.tpl:116
+msgid "Lock"
+msgstr "Vergrendelen"
+
+#: views/inc/menu.tpl:117
+msgid "Logout"
+msgstr "Uitloggen"
+
+#: views/inc/menu.tpl:129
 msgid "date/time"
 msgstr "datum/tijd"
 
-#: views/inc/menu.tpl:134
+#: views/inc/menu.tpl:132
 msgid "Door is closed"
 msgstr "Deur is gesloten"
 
-#: views/inc/menu.tpl:134
+#: views/inc/menu.tpl:132
 msgid "Door is open"
 msgstr "Deur is geopend"
 
-#: views/inc/menu.tpl:138 views/inc/menu.tpl:148
+#: views/inc/menu.tpl:136 views/inc/menu.tpl:146
 msgid "No messages"
 msgstr "Geen berichten"
 
-#: views/inc/menu.tpl:144
+#: views/inc/menu.tpl:142
 msgid "Offline"
 msgstr "Offline"
 
-#: views/inc/menu.tpl:144
+#: views/inc/menu.tpl:142
 msgid "Online"
 msgstr "Online"
 
-#: views/sensor_settings.tpl:8 views/system_environment.tpl:199
+#: views/sensor_settings.tpl:8 views/system_environment.tpl:198
 msgid "Sensor"
 msgstr "Sensor"
 
@@ -273,6 +298,7 @@ msgid "Address"
 msgstr "Adres"
 
 #: views/sensor_settings.tpl:24 views/switch_settings.tpl:62
+#: views/webcam_settings.tpl:28
 msgid "Name"
 msgstr "Naam"
 
@@ -285,8 +311,8 @@ msgid "Limit max"
 msgstr "Limiet max."
 
 #: views/sensor_settings.tpl:51 views/switch_settings.tpl:80
-#: views/system_environment.tpl:244 views/system_settings.tpl:84
-#: views/weather_settings.tpl:59
+#: views/system_environment.tpl:243 views/system_settings.tpl:83
+#: views/weather_settings.tpl:59 views/webcam_settings.tpl:70
 msgid "Submit"
 msgstr "Opslaan"
 
@@ -294,17 +320,21 @@ msgstr "Opslaan"
 msgid "Device type"
 msgstr "Apperaattype"
 
+#: views/switch_settings.tpl:7
+msgid "Powerswitch board"
+msgstr "Stroomschakelbord"
+
 #: views/switch_settings.tpl:20
 msgid "Amount of switches"
 msgstr "Totaal aantal schakelaars"
 
-#: views/switch_settings.tpl:59
-msgid "ID"
-msgstr "ID"
-
-#: views/switch_status.tpl:7
+#: views/switch_settings.tpl:46 views/switch_status.tpl:7
 msgid "Switch"
 msgstr "Schakelaar"
+
+#: views/switch_settings.tpl:59 views/webcam_settings.tpl:21
+msgid "ID"
+msgstr "ID"
 
 #: views/system_environment.tpl:7 views/system_environment.tpl:91
 #: views/system_environment.tpl:157
@@ -327,7 +357,7 @@ msgstr "Geactiveerd"
 msgid "Light modus"
 msgstr "Lampen modus"
 
-#: views/system_environment.tpl:35 views/system_environment.tpl:193
+#: views/system_environment.tpl:35 views/system_environment.tpl:192
 msgid "Timer"
 msgstr "Klok"
 
@@ -352,7 +382,7 @@ msgid "Hours shift"
 msgstr "Uren opschuiven"
 
 #: views/system_environment.tpl:75 views/system_environment.tpl:132
-#: views/system_environment.tpl:218
+#: views/system_environment.tpl:217
 msgid "Power switches"
 msgstr "Stroomschakelaars"
 
@@ -380,59 +410,55 @@ msgstr "Overdag aan"
 msgid "Heater modus"
 msgstr "Verwarming modus"
 
-#: views/system_environment.tpl:206
+#: views/system_environment.tpl:205
 msgid "Heater on"
 msgstr "Verwarming uit"
 
-#: views/system_environment.tpl:212
+#: views/system_environment.tpl:211
 msgid "Heater off"
 msgstr "Verwarming aan"
 
-#: views/system_environment.tpl:227
+#: views/system_environment.tpl:226
 msgid "Temperature sensors"
 msgstr "Temperatuur sensoren"
-
-#: views/system_settings.tpl:6
-msgid "TerrariumPI"
-msgstr "TerrariumPI"
 
 #: views/system_settings.tpl:17
 msgid "Language"
 msgstr "Taal"
 
-#: views/system_settings.tpl:28
+#: views/system_settings.tpl:27
 msgid "IP or hostname"
 msgstr "IP of hostnaam"
 
-#: views/system_settings.tpl:34
+#: views/system_settings.tpl:33
 msgid "Port number"
 msgstr "Poort nummer"
 
-#: views/system_settings.tpl:40
+#: views/system_settings.tpl:39
 msgid "Admin name"
 msgstr "Beheerdersnaam"
 
-#: views/system_settings.tpl:46
+#: views/system_settings.tpl:45
 msgid "New admin password"
 msgstr "Nieuw beheerswachtwoord"
 
-#: views/system_settings.tpl:52
+#: views/system_settings.tpl:51
 msgid "Current admin password"
 msgstr "Huidige beheerswachtwoord"
 
-#: views/system_settings.tpl:58
+#: views/system_settings.tpl:57
 msgid "Pi power usage in W"
 msgstr "Stroomverbruik Pi in W."
 
-#: views/system_settings.tpl:64
+#: views/system_settings.tpl:63
 msgid "Door GPIO pin"
 msgstr "Deur GPIO pin"
 
-#: views/system_settings.tpl:70
+#: views/system_settings.tpl:69
 msgid "1-Wire / OWFS port"
 msgstr "1-Wire / OWFS poort"
 
-#: views/system_settings.tpl:76
+#: views/system_settings.tpl:75
 msgid "Loglevel"
 msgstr "Loglevel"
 
@@ -480,11 +506,11 @@ msgstr "za."
 msgid "Day forecast"
 msgstr "Dagvoorspelling"
 
-#: views/weather_forecast.tpl:143
+#: views/weather_forecast.tpl:130
 msgid "Week forecast"
 msgstr "Weekvoorspelling"
 
-#: views/weather_settings.tpl:17
+#: views/weather_settings.tpl:17 views/webcam_settings.tpl:31
 msgid "Location"
 msgstr "Locatie"
 
@@ -499,6 +525,41 @@ msgstr "m/s."
 #: views/weather_settings.tpl:33
 msgid "km/h"
 msgstr "Km/h"
+
+#: views/webcam_settings.tpl:24
+msgid "Preview"
+msgstr "Voorbeeld"
+
+#: views/webcam_settings.tpl:34
+msgid "Picture rotation"
+msgstr "Afbeelding rotatie"
+
+#: views/webcam_settings.tpl:40 views/webcam_settings.tpl:43
+#: views/webcam_settings.tpl:46 views/webcam_settings.tpl:49
+msgid "degrees"
+msgstr "graden"
+
+#: views/webcam_settings.tpl:52
+msgid "Flip Horizontal"
+msgstr "Spiegel horizontaal"
+
+#: views/webcam_settings.tpl:55
+msgid "Flip Vertical"
+msgstr "Spiegel verticaal"
+
+#: Missing text string
+msgid "Select a number"
+msgstr "Kies een aantal"
+
+#: Missing text string
+msgid "Select an option"
+msgstr "Maak een keuze"
+
+#~ msgid "Water usage"
+#~ msgstr "Water verbruik"
+
+#~ msgid "0 degrees"
+#~ msgstr "0 graden"
 
 #~ msgid "Water flow in liters/minute"
 #~ msgstr "Waterverbruik in liters/minuut"
