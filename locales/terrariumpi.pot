@@ -1,11 +1,11 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR ORGANIZATION
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) 2016 TheYOSH
+# Joshua (TheYOSH) Rubingh, <theyosh@theyosh.nl>, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-12-16 19:48+CET\n"
+"POT-Creation-Date: 2016-12-17 22:15+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,19 +15,32 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: terrariumWebserver.py:125
+#: terrariumWebserver.py:67 terrariumWebserver.py:73
+msgid "Authenticate to make any changes"
+msgstr ""
+
+#: terrariumWebserver.py:67 terrariumWebserver.py:73
+msgid "Authentication"
+msgstr ""
+
+#: terrariumWebserver.py:67 terrariumWebserver.py:73
+#: views/system_settings.tpl:6
+msgid "TerrariumPI"
+msgstr ""
+
+#: terrariumWebserver.py:133
 msgid "Data could not be saved"
 msgstr ""
 
-#: terrariumWebserver.py:125
+#: terrariumWebserver.py:133
 msgid "Error!"
 msgstr ""
 
-#: terrariumWebserver.py:129
+#: terrariumWebserver.py:137
 msgid "Data saved"
 msgstr ""
 
-#: terrariumWebserver.py:130
+#: terrariumWebserver.py:138
 msgid "Your changes are saved"
 msgstr ""
 
@@ -61,11 +74,11 @@ msgstr ""
 
 #: views/dashboard.tpl:79 views/dashboard.tpl:203 views/dashboard.tpl:255
 #: views/inc/menu.tpl:30 views/inc/menu.tpl:44 views/inc/menu.tpl:55
-#: views/inc/menu.tpl:66 views/inc/menu.tpl:80 views/inc/sensor_list.tpl:38
-#: views/switch_status.tpl:33 views/system_status.tpl:32
-#: views/system_status.tpl:88 views/system_status.tpl:144
-#: views/system_status.tpl:200 views/weather_forecast.tpl:16
-#: views/webcam.tpl:16
+#: views/inc/menu.tpl:66 views/inc/menu.tpl:80 views/inc/menu.tpl:114
+#: views/inc/sensor_list.tpl:38 views/switch_status.tpl:33
+#: views/system_status.tpl:32 views/system_status.tpl:88
+#: views/system_status.tpl:144 views/system_status.tpl:200
+#: views/weather_forecast.tpl:16 views/webcam.tpl:16
 msgid "Settings"
 msgstr ""
 
@@ -171,7 +184,7 @@ msgid "Home"
 msgstr ""
 
 #: views/inc/menu.tpl:24 views/system_environment.tpl:38
-#: views/system_environment.tpl:196 views/weather_forecast.tpl:7
+#: views/system_environment.tpl:195 views/weather_forecast.tpl:7
 #: views/weather_settings.tpl:6
 msgid "Weather"
 msgstr ""
@@ -201,7 +214,7 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: views/inc/menu.tpl:60 views/webcam.tpl:7
+#: views/inc/menu.tpl:60 views/webcam.tpl:7 views/webcam_settings.tpl:8
 msgid "Webcam"
 msgstr ""
 
@@ -241,31 +254,43 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
-#: views/inc/menu.tpl:130
+#: views/inc/menu.tpl:115
+msgid "FullScreen"
+msgstr ""
+
+#: views/inc/menu.tpl:116
+msgid "Lock"
+msgstr ""
+
+#: views/inc/menu.tpl:117
+msgid "Logout"
+msgstr ""
+
+#: views/inc/menu.tpl:129
 msgid "date/time"
 msgstr ""
 
-#: views/inc/menu.tpl:134
+#: views/inc/menu.tpl:132
 msgid "Door is closed"
 msgstr ""
 
-#: views/inc/menu.tpl:134
+#: views/inc/menu.tpl:132
 msgid "Door is open"
 msgstr ""
 
-#: views/inc/menu.tpl:138 views/inc/menu.tpl:148
+#: views/inc/menu.tpl:136 views/inc/menu.tpl:146
 msgid "No messages"
 msgstr ""
 
-#: views/inc/menu.tpl:144
+#: views/inc/menu.tpl:142
 msgid "Offline"
 msgstr ""
 
-#: views/inc/menu.tpl:144
+#: views/inc/menu.tpl:142
 msgid "Online"
 msgstr ""
 
-#: views/sensor_settings.tpl:8 views/system_environment.tpl:199
+#: views/sensor_settings.tpl:8 views/system_environment.tpl:198
 msgid "Sensor"
 msgstr ""
 
@@ -274,6 +299,7 @@ msgid "Address"
 msgstr ""
 
 #: views/sensor_settings.tpl:24 views/switch_settings.tpl:62
+#: views/webcam_settings.tpl:28
 msgid "Name"
 msgstr ""
 
@@ -286,8 +312,8 @@ msgid "Limit max"
 msgstr ""
 
 #: views/sensor_settings.tpl:51 views/switch_settings.tpl:80
-#: views/system_environment.tpl:244 views/system_settings.tpl:84
-#: views/weather_settings.tpl:59
+#: views/system_environment.tpl:243 views/system_settings.tpl:83
+#: views/weather_settings.tpl:59 views/webcam_settings.tpl:70
 msgid "Submit"
 msgstr ""
 
@@ -295,16 +321,20 @@ msgstr ""
 msgid "Device type"
 msgstr ""
 
+#: views/switch_settings.tpl:7
+msgid "Powerswitch board"
+msgstr ""
+
 #: views/switch_settings.tpl:20
 msgid "Amount of switches"
 msgstr ""
 
-#: views/switch_settings.tpl:59
-msgid "ID"
+#: views/switch_settings.tpl:46 views/switch_status.tpl:7
+msgid "Switch"
 msgstr ""
 
-#: views/switch_status.tpl:7
-msgid "Switch"
+#: views/switch_settings.tpl:59 views/webcam_settings.tpl:21
+msgid "ID"
 msgstr ""
 
 #: views/system_environment.tpl:7 views/system_environment.tpl:91
@@ -328,7 +358,7 @@ msgstr ""
 msgid "Light modus"
 msgstr ""
 
-#: views/system_environment.tpl:35 views/system_environment.tpl:193
+#: views/system_environment.tpl:35 views/system_environment.tpl:192
 msgid "Timer"
 msgstr ""
 
@@ -353,7 +383,7 @@ msgid "Hours shift"
 msgstr ""
 
 #: views/system_environment.tpl:75 views/system_environment.tpl:132
-#: views/system_environment.tpl:218
+#: views/system_environment.tpl:217
 msgid "Power switches"
 msgstr ""
 
@@ -381,59 +411,55 @@ msgstr ""
 msgid "Heater modus"
 msgstr ""
 
-#: views/system_environment.tpl:206
+#: views/system_environment.tpl:205
 msgid "Heater on"
 msgstr ""
 
-#: views/system_environment.tpl:212
+#: views/system_environment.tpl:211
 msgid "Heater off"
 msgstr ""
 
-#: views/system_environment.tpl:227
+#: views/system_environment.tpl:226
 msgid "Temperature sensors"
-msgstr ""
-
-#: views/system_settings.tpl:6
-msgid "TerrariumPI"
 msgstr ""
 
 #: views/system_settings.tpl:17
 msgid "Language"
 msgstr ""
 
-#: views/system_settings.tpl:28
+#: views/system_settings.tpl:27
 msgid "IP or hostname"
 msgstr ""
 
-#: views/system_settings.tpl:34
+#: views/system_settings.tpl:33
 msgid "Port number"
 msgstr ""
 
-#: views/system_settings.tpl:40
+#: views/system_settings.tpl:39
 msgid "Admin name"
 msgstr ""
 
-#: views/system_settings.tpl:46
+#: views/system_settings.tpl:45
 msgid "New admin password"
 msgstr ""
 
-#: views/system_settings.tpl:52
+#: views/system_settings.tpl:51
 msgid "Current admin password"
 msgstr ""
 
-#: views/system_settings.tpl:58
+#: views/system_settings.tpl:57
 msgid "Pi power usage in W"
 msgstr ""
 
-#: views/system_settings.tpl:64
+#: views/system_settings.tpl:63
 msgid "Door GPIO pin"
 msgstr ""
 
-#: views/system_settings.tpl:70
+#: views/system_settings.tpl:69
 msgid "1-Wire / OWFS port"
 msgstr ""
 
-#: views/system_settings.tpl:76
+#: views/system_settings.tpl:75
 msgid "Loglevel"
 msgstr ""
 
@@ -481,11 +507,11 @@ msgstr ""
 msgid "Day forecast"
 msgstr ""
 
-#: views/weather_forecast.tpl:143
+#: views/weather_forecast.tpl:130
 msgid "Week forecast"
 msgstr ""
 
-#: views/weather_settings.tpl:17
+#: views/weather_settings.tpl:17 views/webcam_settings.tpl:31
 msgid "Location"
 msgstr ""
 
@@ -499,5 +525,34 @@ msgstr ""
 
 #: views/weather_settings.tpl:33
 msgid "km/h"
+msgstr ""
+
+#: views/webcam_settings.tpl:24
+msgid "Preview"
+msgstr ""
+
+#: views/webcam_settings.tpl:34
+msgid "Picture rotation"
+msgstr ""
+
+#: views/webcam_settings.tpl:40 views/webcam_settings.tpl:43
+#: views/webcam_settings.tpl:46 views/webcam_settings.tpl:49
+msgid "degrees"
+msgstr ""
+
+#: views/webcam_settings.tpl:52
+msgid "Flip Horizontal"
+msgstr ""
+
+#: views/webcam_settings.tpl:55
+msgid "Flip Vertical"
+msgstr ""
+
+#: Missing text string
+msgid "Select a number"
+msgstr ""
+
+#: Missing text string
+msgid "Select an option"
 msgstr ""
 
