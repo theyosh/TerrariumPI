@@ -6,7 +6,7 @@ import thread
 import time
 import uptime
 import os
-import datetime
+#import datetime
 import psutil
 from gevent import monkey, sleep
 
@@ -125,15 +125,13 @@ class terrariumEngine():
 
       # Get the current average temperatures
       average_data = self.get_sensors(['average'])['sensors']
-      for averagetype in average_data:
-        # Save data in database per type
-        self.collector.log_summary_sensor_data(averagetype,average_data[averagetype])
 
       # Websocket callback
       self.__send_message({'type':'sensor_gauge','data':average_data})
 
-      # Calculate power and water usage per day
-      self.collector.log_power_usage_water_flow(self.__calculate_power_usage_water_flow())
+      # Calculate power and water usage per day every 9th minute
+      if int(time.strftime('%M')) % 10 == 9:
+        self.collector.log_total_power_and_water_usage()
 
       # Websocket messages back
       self.get_uptime(socket=True)
@@ -214,6 +212,7 @@ class terrariumEngine():
   def get_power_usage_water_flow(self, socket = False):
     data = self.__get_power_usage_water_flow()
     totaldata = self.__calculate_power_usage_water_flow()
+    #totaldata = {'total_power' : 0, 'total_water' : 0 }
 
     data['power']['total'] = totaldata['total_power']
     data['water']['total'] = totaldata['total_water']
@@ -451,6 +450,9 @@ class terrariumEngine():
 
     if self.environment is not None:
       self.get_environment(socket=True)
+
+    if data['state'] is False:
+      self.collector.log_total_power_and_water_usage()
 
   def get_max_switches_config(self):
     return int(self.config.get_system()['max_switches'])

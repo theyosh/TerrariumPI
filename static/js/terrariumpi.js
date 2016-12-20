@@ -535,7 +535,7 @@ function sensor_gauge(name, data) {
     // Update timestamp indicator
     $('#' + name + ' small').text(moment().format('LLL'));
     // Setup a new gauge if needed
-    if ($('#' + name + ' .gauge').attr('style') === undefined) {
+    if ($('#' + name + ' .gauge').attr('done') === undefined) {
       var valid_area = data.alarm_max - data.alarm_min;
       var colors = [
         [0.0, '#E74C3C'],
@@ -562,6 +562,7 @@ function sensor_gauge(name, data) {
         percentColors: colors,
       };
       // Init Gauge
+      $('#' + name + ' .gauge').attr('done',1);
       globals.gauges[name] = new Gauge($('#' + name + ' .gauge')[0]).setOptions(opts);
       globals.gauges[name].setTextField($('#' + name + ' .gauge-value')[0]);
     }
@@ -801,6 +802,17 @@ function history_graph(name, data, type) {
   if ($('#' + name + ' .history_graph').length == 1) {
     $('#' + name + ' .history_graph').html('').removeClass('{{_('loading')}}');
     $.plot($('#' + name + ' .history_graph'), graph_data, graph_options);
+
+    if (type == 'switch') {
+      var usage = '';
+      if (data.total_power_usage > 0) {
+        usage = '{{_('Total power in kWh')}}: ' + Math.round(data.total_power_usage) / 1000;
+      }
+      if (data.total_water_usage > 0) {
+        usage += (usage != '' ? ', ' : '') + '{{_('Total water in L')}}: ' + Math.round(data.total_water_usage * 100) / 100;
+      }
+      $('#' + name + ' .total_usage').text(usage);
+    }
     $('#' + name + ' .history_graph').bind('plothover', function (event, pos, item) {
       if (item) {
         $('#tooltip').css({top: item.pageY-5, left: item.pageX-5});
@@ -826,37 +838,53 @@ function toggleSwitch(id) {
 function process_switch_data(raw_data) {
   var graphdata = {
     power_wattage: [],
-    water_flow: []
+    water_flow: [],
+    total_power_usage : 0,
+    total_water_usage : 0
   };
-  var state_chage = -1;
+  var state_change = -1;
   $.each(raw_data.state, function(counter, status) {
     if (!status[1]) {
       raw_data.power_wattage[counter][1] = 0;
       raw_data.water_flow[counter][1] = 0;
     }
     var copy = {};
-    if (counter > 0 && state_chage != status[1]) {
+    if (counter > 0 && state_change != status[1]) {
       // Copy previous object to get the right status with current timestamp
       copy = $.extend(true, {}, raw_data.power_wattage[counter - 1]);
+      if (copy[0] != 0) {
+        graphdata.total_power_usage += (status[0] - copy[0]) / 1000 * copy[1]
+      }
       copy[0] = status[0];
       graphdata.power_wattage.push(copy);
       copy = $.extend(true, {}, raw_data.water_flow[counter - 1]);
+      if (copy[0] != 0) {
+        graphdata.total_water_usage += (status[0] - copy[0]) / 1000 * copy[1]
+      }
       copy[0] = status[0];
       graphdata.water_flow.push(copy);
-      state_chage = status[1];
+      state_change = status[1];
     }
     graphdata.power_wattage.push(raw_data.power_wattage[counter]);
     graphdata.water_flow.push(raw_data.water_flow[counter]);
     if (counter == raw_data.state.length - 1) {
       // Add endpoint which is a copy of the last point, with current time
       copy = $.extend(true, {}, raw_data.power_wattage[counter]);
+      if (copy[0] != 0) {
+        graphdata.total_power_usage += ((new Date()).getTime() - copy[0]) / 1000 * copy[1]
+      }
       copy[0] = (new Date()).getTime();
       graphdata.power_wattage.push(copy);
       copy = $.extend(true, {}, raw_data.water_flow[counter]);
+      if (copy[0] != 0) {
+        graphdata.total_water_usage += ((new Date()).getTime() - copy[0]) / 1000 * copy[1]
+      }
       copy[0] = (new Date()).getTime();
       graphdata.water_flow.push(copy);
     }
   });
+  graphdata.total_power_usage /= 3600
+  graphdata.total_water_usage /= 60
   return graphdata;
 }
 

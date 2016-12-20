@@ -11,7 +11,7 @@ class terrariumCollector():
     self.db = sqlite3.connect(terrariumCollector.database)
     self.db.row_factory = sqlite3.Row
     # Store data every Xth minute. Except switches.
-    self.modulo = 1 * 60
+    self.modulo = 5 * 60
     self.__create_database_structure()
 
   def __create_database_structure(self):
@@ -28,8 +28,10 @@ class terrariumCollector():
                        alarm_max FLOAT(4),
                        alarm INTEGER(1) )''')
 
-      cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS sensor_data_unique ON sensor_data(id,type,timestamp DESC)')
+      cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS sensor_data_unique ON sensor_data(id,type,timestamp ASC)')
+      cur.execute('CREATE INDEX IF NOT EXISTS sensor_data_timestamp ON sensor_data(timestamp ASC)')
       cur.execute('CREATE INDEX IF NOT EXISTS sensor_data_type ON sensor_data(type)')
+      cur.execute('CREATE INDEX IF NOT EXISTS sensor_data_id ON sensor_data(id)')
 
       cur.execute('''CREATE TABLE IF NOT EXISTS switch_data
                       (id VARCHAR(50),
@@ -39,7 +41,9 @@ class terrariumCollector():
                        water_flow FLOAT(2)
                         )''')
 
-      cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS switch_data_unique ON switch_data(id,timestamp DESC)')
+      cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS switch_data_unique ON switch_data(id,timestamp ASC)')
+      cur.execute('CREATE INDEX IF NOT EXISTS switch_data_timestamp ON switch_data(timestamp ASC)')
+      cur.execute('CREATE INDEX IF NOT EXISTS switch_data_id ON switch_data(id)')
 
       cur.execute('''CREATE TABLE IF NOT EXISTS weather_data
                       (timestamp INTEGER(4),
@@ -51,7 +55,7 @@ class terrariumCollector():
                        icon VARCHAR(50)
                         )''')
 
-      cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS weather_data_unique ON weather_data(timestamp DESC)')
+      cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS weather_data_unique ON weather_data(timestamp ASC)')
 
 
       cur.execute('''CREATE TABLE IF NOT EXISTS system_data
@@ -67,7 +71,7 @@ class terrariumCollector():
                        memory_free INTEGER(6)
                         )''')
 
-      cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS system_data_unique ON system_data(timestamp DESC)')
+      cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS system_data_unique ON system_data(timestamp ASC)')
 
     self.db.commit()
 
@@ -129,6 +133,65 @@ class terrariumCollector():
     pass
     #self.__log_data('switches',None,'summary',data)
 
+  def log_total_power_and_water_usage(self,day = None):
+    if day is None:
+      today = int(time.time())
+      today -= today % 86400
+    else:
+      today = day
+
+    data = {'day' : today, 'on': 0, 'power' : 0, 'water' : 0}
+
+    sql = '''SELECT
+              switch_data_duration.id,
+		          switch_data_duration.timestamp AS aan,
+		          switch_data.timestamp AS uit,
+              switch_data.power_wattage,
+              switch_data.water_flow ,
+              switch_data.timestamp - max(switch_data_duration.timestamp) AS duration
+            FROM switch_data left join switch_data as switch_data_duration
+              ON switch_data.id = switch_data_duration.id
+              AND switch_data.timestamp > switch_data_duration.timestamp
+              AND switch_data_duration.id <> 'total'
+            WHERE switch_data_duration.id NOT null
+              AND switch_data.id <> 'total'
+              GROUP BY switch_data.id, switch_data.timestamp
+              HAVING switch_data_duration.state = 1
+              AND switch_data.timestamp >= ?
+              AND switch_data_duration.timestamp < ?
+            ORDER by aan ASC'''
+
+    filters = (today,today+86400,)
+    rows = []
+    with self.db:
+      cur = self.db.cursor()
+      cur.execute(sql, filters)
+      rows = cur.fetchall()
+
+    for row in rows:
+      if row['aan'] < today:
+        row['duration'] -= day - row['aan']
+        row['aan'] = today
+
+      if row['uit'] > today+86400:
+        row['duration'] -= row['uit'] - (today+86400)
+        row['uit'] = today+86400
+
+      data['on'] += row['duration']
+      data['power'] += row['duration'] * row['power_wattage']
+      data['water'] += row['duration'] * row['water_flow']
+
+    # Power is in Wh (Watt/hour) so devide by 3600 seconds
+    data['power'] /= 3600
+    # Water is in Liters
+    data['water'] /= 60
+
+    with self.db:
+      cur = self.db.cursor()
+      cur.execute('REPLACE INTO switch_data (id, timestamp, state, power_wattage, water_flow) VALUES (?,?,?,?,?)',
+                  ('total', today, data['on'], data['power'], data['water']))
+      self.db.commit()
+
   def get_history(self, parameters = [], starttime = None, stoptime = None):
     # Default return object
     history = {}
@@ -141,9 +204,6 @@ class terrariumCollector():
     logtype = parameters[0]
     del(parameters[0])
 
-    #print 'Collector parameters:'
-    #print parameters
-
     # Define start time
     if starttime is None:
       starttime = int(time.time())
@@ -154,13 +214,8 @@ class terrariumCollector():
 
     if parameters[-1] in periods.keys():
       stoptime = starttime - periods[parameters[-1]] * 60 * 60
-      modulo = ((periods[parameters[-1]] / 24)**2) * 60
+      modulo = (periods[parameters[-1]] / 24) * self.modulo
       del(parameters[-1])
-
-    # Defined new time modulo
-    #if starttime - stoptime > (8 * 60 * 60):
-      # For now, ignore. This also influence the total power calculation... :(
-    #  modulo = 1
 
     sql = ''
     filters = (stoptime,starttime,)
@@ -196,28 +251,14 @@ class terrariumCollector():
       sql = 'SELECT id, "switches" as type, timestamp, ' + ', '.join(fields.keys()) + ' FROM switch_data WHERE timestamp >= ? and timestamp <= ? '
       if len(parameters) > 0 and parameters[0] == 'summary':
         fields = ['total_power', 'total_water']
-        filters = ()
-        sql = '''SELECT ''' + str(stoptime) + ''' as timestamp,
-                  SUM(duration * power_wattage) / 3600 as total_power,
-                  SUM(duration * water_flow) / 60 as total_water
-                FROM (
-                  SELECT
-                     switch_data_duration.id,
-                     switch_data_duration.timestamp,
-                     switch_data_duration.state,
-                     switch_data.power_wattage,
-                     switch_data.water_flow ,
-                     switch_data.timestamp - max(switch_data_duration.timestamp) as duration
-
-                  FROM switch_data left join switch_data as switch_data_duration
-                            on switch_data.id = switch_data_duration.id
-                            and switch_data.timestamp > switch_data_duration.timestamp
-
-                  WHERE switch_data_duration.id not null
-
-                  GROUP BY switch_data.id, switch_data.timestamp
-                  HAVING  switch_data_duration.state != 0
-                  ORDER by switch_data.timestamp ASC)'''
+        filters = ('total',)
+        # Temporary overrule.... :P
+        sql = '''
+          SELECT ''' + str(stoptime) + ''' as timestamp,
+                  SUM(power_wattage) as total_power,
+                  SUM(water_flow) as total_water
+            FROM switch_data
+            WHERE id = ? '''
 
       elif len(parameters) > 0 and parameters[0] is not None:
         sql = sql + ' and id = ?'

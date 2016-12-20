@@ -281,11 +281,12 @@
         </div>
         <script type="text/javascript">
           $(document).ready(function() {
+            load_history_graph('average_humidity','humidity','/api/history/sensors/average/humidity');
+            load_history_graph('average_temperature','temperature','/api/history/sensors/average/temperature');
+
             websocket_message({
               'type': 'show_dashboard'
             });
-            load_history_graph('average_humidity','humidity','/api/history/sensors/average/humidity');
-            load_history_graph('average_temperature','temperature','/api/history/sensors/average/temperature');
           });
         </script>
 % include('inc/page_footer.tpl')

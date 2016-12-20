@@ -2,7 +2,7 @@
 import logging
 logger = logging.getLogger(__name__)
 
-from bottle import Bottle, request, abort, static_file, template, error, response, auth_basic
+from bottle import Bottle, request, abort, static_file, template, error, response, auth_basic, HTTPError
 from bottle.ext.websocket import GeventWebSocketServer
 from bottle.ext.websocket import websocket
 from Queue import Queue
@@ -115,7 +115,6 @@ class terrariumWebserver():
       response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(days=1)).strftime('%a, %d %b %Y %H:%M:%S GMT')
       response.headers['Last-Modified'] = datetime.datetime.fromtimestamp(t).strftime( '%a, %d %b %Y %H:%M:%S GMT')
       response.headers['Etag'] = hashlib.md5(response.headers['Last-Modified']).hexdigest()
-
       response.headers['Content-Type'] = 'application/javascript; charset=UTF-8'
       return template(filename,template_lookup=[root])
 
@@ -125,7 +124,8 @@ class terrariumWebserver():
     else:
       staticfile.add_header('Expires',(datetime.datetime.now() + datetime.timedelta(days=self.__caching_days)).strftime('%a, %d %b %Y %H:%M:%S GMT'))
 
-    staticfile.add_header('Etag',hashlib.md5(staticfile.get_header('Last-Modified')).hexdigest())
+    if staticfile.get_header('Last-Modified') is not None:
+      staticfile.add_header('Etag',hashlib.md5(staticfile.get_header('Last-Modified')).hexdigest())
 
     return staticfile
 
@@ -232,9 +232,9 @@ class terrariumWebserver():
 
         terrariumWebserver.app.terrarium.door_status(socket=True)
         terrariumWebserver.app.terrarium.get_uptime(socket=True)
-        terrariumWebserver.app.terrarium.get_power_usage_water_flow(socket=True)
         terrariumWebserver.app.terrarium.get_environment(socket=True)
         terrariumWebserver.app.terrarium.get_sensors(['average'],socket=True)
+        terrariumWebserver.app.terrarium.get_power_usage_water_flow(socket=True)
 
   def start(self):
     # Start the webserver
