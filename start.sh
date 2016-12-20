@@ -18,12 +18,6 @@ function message {
   echo "$(date +"%Y-%m-%d %T,000") - INFO    - terrariumWrapper - $1"
 }
 
-WHOAMI=`whoami`
-if [ "${WHOAMI}" != "root" ]; then
-  message "Start TerrariumPI server as user root"
-  exit 0
-fi
-
 if [ "${RUN}" == "run" ]
 then
   while true
@@ -61,6 +55,12 @@ then
     echo " restart!"
   done
 else
+  WHOAMI=`whoami`
+  if [ "${WHOAMI}" != "root" ]; then
+    message "Start TerrariumPI server as user root"
+    exit 0
+  fi
+
   message "Restarting TerrariumPI server running as user '${RUN_AS_USER}' ..."
   cd "${BASEDIR}"
   su ${RUN_AS_USER} -c "screen -dmS ${SCREEN_NAME} ./${SCRIPT} run"
