@@ -131,7 +131,7 @@ class terrariumEngine():
 
       # Calculate power and water usage per day every 9th minute
       if int(time.strftime('%M')) % 10 == 9:
-        self.collector.log_total_power_and_water_usage()
+        self.collector.log_total_power_and_water_usage(self.pi_power_wattage)
 
       # Websocket messages back
       self.get_uptime(socket=True)
@@ -452,7 +452,7 @@ class terrariumEngine():
       self.get_environment(socket=True)
 
     if data['state'] is False:
-      self.collector.log_total_power_and_water_usage()
+      self.collector.log_total_power_and_water_usage(self.pi_power_wattage)
 
   def get_max_switches_config(self):
     return int(self.config.get_system()['max_switches'])

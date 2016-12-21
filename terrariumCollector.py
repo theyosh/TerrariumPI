@@ -133,14 +133,11 @@ class terrariumCollector():
     pass
     #self.__log_data('switches',None,'summary',data)
 
-  def log_total_power_and_water_usage(self,day = None):
-    if day is None:
-      today = int(time.time())
-      today -= today % 86400
-    else:
-      today = day
-
-    data = {'day' : today, 'on': 0, 'power' : 0, 'water' : 0}
+  def log_total_power_and_water_usage(self,pi_wattage):
+    today = int(time.time())
+    time_past = today % 86400
+    today -= time_past
+    data = {'day' : today, 'on': 0, 'power' : time_past * pi_wattage, 'water' : 0}
 
     sql = '''SELECT
               switch_data_duration.id,
@@ -168,9 +165,15 @@ class terrariumCollector():
       cur.execute(sql, filters)
       rows = cur.fetchall()
 
-    for row in rows:
+    for row_tmp in rows:
+      row = {'aan': row_tmp['aan'],
+             'uit':row_tmp['uit'],
+             'duration' : row_tmp['duration'],
+             'power_wattage' : row_tmp['power_wattage'],
+             'water_flow' : row_tmp['water_flow']}
+
       if row['aan'] < today:
-        row['duration'] -= day - row['aan']
+        row['duration'] -= today - row['aan']
         row['aan'] = today
 
       if row['uit'] > today+86400:
