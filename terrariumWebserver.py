@@ -44,7 +44,7 @@ class terrariumWebserver():
   def __init__(self, terrariumEngine):
     self.__terrariumEngine = terrariumEngine
     self.__app = terrariumWebserver.app
-    self.__config = terrariumEngine.get_config('system')
+    self.__config = self.__terrariumEngine.get_config('system')
     self.__caching_days = 30
     terrariumWebserver.app.terrarium = self.__terrariumEngine
     # Load language
@@ -119,6 +119,9 @@ class terrariumWebserver():
       return template(filename,template_lookup=[root])
 
     staticfile = static_file(filename, root=root)
+    if isinstance(staticfile,HTTPError):
+      return staticfile
+
     if 'webcam' == root:
       staticfile.add_header('Expires',datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S GMT'))
     else:
@@ -194,7 +197,7 @@ class terrariumWebserver():
   @app.error(404)
   def error404(error):
     config = terrariumWebserver.app.terrarium.get_config('system')
-    variables = { 'lang' : self.__terrariumEngine.config.get_active_language(),
+    variables = { 'lang' : terrariumWebserver.app.terrarium.config.get_active_language(),
                   'title' : config['title'],
                   'page_title' : config['title'] + ' | 404'
                 }
