@@ -8,7 +8,6 @@ var globals = {
   graphs: {},
   graph_cache: 5 * 60,
   websocket_timer: null,
-//  updatetimer: null,
   online_timer: null
 };
 
@@ -38,8 +37,6 @@ $(document).ready(function() {
 
   setInterval(function() {
     notification_timestamps();
-    updateWebcams();
-
     $('#system_time span').text(moment().format('LLLL'));
   }, 30 * 1000);
 });
@@ -320,6 +317,7 @@ function update_weather(data) {
         $(week_forecast_divs[day_counter]).find('.day').text(moment(value.from * 1000).format('ddd'));
         $(week_forecast_divs[day_counter]).find('.degrees').text(value.temperature);
         $(week_forecast_divs[day_counter]).find('h5').html(value.wind_speed.toFixed(1) + ' <i>' + (data.windspeed === 'ms' ? '{{_('m/s')}}' : '{{_('Km/h')}}') + '</i>');
+        $(week_forecast_divs[day_counter]).find('canvas').attr('title',value.weather);
         icons.set($(week_forecast_divs[day_counter]).find('canvas').attr('id'), value.icon);
         day_counter++;
         timestamp += (24 * 60 * 60);
@@ -888,16 +886,6 @@ function process_switch_data(raw_data) {
   return graphdata;
 }
 
-function updateWebcams() {
-  if ($('.webcam').length > 0) {
-    $.each(Object.keys(globals.webcams), function(index, webcamid) {
-      globals.webcams[webcamid].eachLayer(function(layer) {
-        layer.redraw();
-      });
-    });
-  }
-}
-
 function update_webcam_preview(name, url) {
   $('img#webcam_' + name + '_preview').attr('src', url);
 }
@@ -905,16 +893,28 @@ function update_webcam_preview(name, url) {
 function initWebcam(webcamid, name, maxzoom) {
   if ($('div#webcam_' + webcamid).length === 1) {
     $('div#webcam_' + webcamid).parents('.x_panel').find('h2 small').text(name);
-    if (globals.webcams[webcamid] === undefined) {
-      globals.webcams[webcamid] = new L.Map('webcam_' + webcamid, {
+    if (!$('div#webcam_' + webcamid).hasClass('leaflet-container')) {
+      globals.webcams[webcamid] = null;
+      var webcam = new L.Map('webcam_' + webcamid, {
         layers: [createWebcamLayer(webcamid, maxzoom)],
         fullscreenControl: true,
       }).setView([0, 0], 1);
       var loadingControl = L.Control.loading({
         separate: true
       });
-      globals.webcams[webcamid].addControl(loadingControl);
+      webcam.addControl(loadingControl);
+      updateWebcam(webcam);
     }
+  }
+}
+
+function updateWebcam(webcam) {
+  if ($('div#' + webcam._container.id).length === 1) {
+    webcam.eachLayer(function(layer) {
+      layer.redraw();
+    });
+    clearTimeout(globals.webcams[webcam._container.id]);
+    globals.webcams[webcam._container.id] = setTimeout(function() { updateWebcam(webcam);},30 * 1000);
   }
 }
 
