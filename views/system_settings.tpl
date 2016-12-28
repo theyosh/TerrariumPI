@@ -24,18 +24,6 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="host">{{_('IP or hostname')}} <span class="required">*</span></label>
-                    <div class="col-md-8 col-sm-8 col-xs-12">
-                      <input class="form-control" name="host" required="required" type="text" placeholder="{{_('IP or hostname')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="port">{{_('Port number')}} <span class="required">*</span></label>
-                    <div class="col-md-8 col-sm-8 col-xs-12">
-                      <input class="form-control" name="port" required="required" type="text" placeholder="{{_('Port number')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="admin">{{_('Admin name')}} <span class="required">*</span></label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
                       <input class="form-control" name="admin" required="required" type="text" placeholder="{{_('Admin name')}}">
@@ -60,6 +48,30 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="host">{{_('Power price')}} <span class="required">*</span></label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                      <input class="form-control" name="power_price" required="required" type="text" placeholder="{{_('Power price')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="port">{{_('Water price')}} <span class="required">*</span></label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                      <input class="form-control" name="water_price" required="required" type="text" placeholder="{{_('Water price')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="host">{{_('IP or hostname')}} <span class="required">*</span></label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                      <input class="form-control" name="host" required="required" type="text" placeholder="{{_('IP or hostname')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="port">{{_('Port number')}} <span class="required">*</span></label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                      <input class="form-control" name="port" required="required" type="text" placeholder="{{_('Port number')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="gpio_door_pin">{{_('Door GPIO pin')}} <span class="required">*</span></label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
                       <input class="form-control" name="gpio_door_pin" required="required" type="text" placeholder="{{_('Door GPIO pin')}}">
@@ -69,12 +81,6 @@
                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="1wire_port">{{_('1-Wire / OWFS port')}} <span class="required">*</span></label>
                     <div class="col-md-8 col-sm-8 col-xs-12">
                       <input class="form-control" name="1wire_port" required="required" type="text" placeholder="{{_('1-Wire / OWFS port')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="loglevel">{{_('Loglevel')}} <span class="required">*</span></label>
-                    <div class="col-md-8 col-sm-8 col-xs-12">
-                      <input class="form-control" name="loglevel" required="required" type="text" value="3" placeholder="{{_('Loglevel')}}">
                     </div>
                   </div>
                   <div class="ln_solid"></div>

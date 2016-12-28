@@ -2,7 +2,18 @@
 import ConfigParser
 
 class terrariumConfig:
+  '''Class for loading the configuration for terrariumPI software.
+     The configuration is based on two configuration files.
+     - default.cfg holds system defaults for first run
+     - settigs.cfg holds the user defined config files
+
+     So the default.cfg file is read first, and overwritten by the settings
+     from the settings.cfg file.
+
+     Changes will always be written to settings.cfg.'''
+
   def __init__(self):
+    '''Load terrariumPI config object'''
     self.__defaults_file = 'defaults.cfg'
     self.__config_file = 'settings.cfg'
 
@@ -12,12 +23,19 @@ class terrariumConfig:
 
   # Private functions
   def __save_config(self):
+    '''Write terrariumPI config to settings.cfg file'''
     with open(self.__config_file, 'wb') as configfile:
       self.__config.write(configfile)
 
     return True
 
   def __update_config(self,section,data):
+    '''Update terrariumPI config with new values
+
+    Keyword arguments:
+    section -- section in configuration. If not exists it will be created
+    data -- data to save in dict form'''
+
     if not self.__config.has_section(section):
       self.__config.add_section(section)
 
@@ -32,6 +50,10 @@ class terrariumConfig:
     return self.__save_config()
 
   def __get_config(self,section):
+    '''Get terrariumPI config based on section. Return empty dict when not exists
+    Keyword arguments:
+    section -- section to read from the config'''
+
     config = {}
     if not self.__config.has_section(section):
       return config
@@ -43,39 +65,64 @@ class terrariumConfig:
   # End private functions
 
   def get_system(self):
+    '''Get terrariumPI configuration section 'terrariumpi'
+    '''
     return self.__get_config('terrariumpi')
 
   def set_system(self,data):
+    '''Set terrariumPI configuration section 'terrariumpi'
+
+    Make sure that the fields cur_password and new_password are never stored
+    '''
     del(data['cur_password'])
     del(data['new_password'])
     return self.__update_config('terrariumpi',data)
 
   def get_door_pin(self):
+    '''Get terrariumPI door pin'''
     config = self.get_system()
     return int(config['gpio_door_pin'])
 
   def get_pi_power_wattage(self):
+    '''Get terrariumPI power usage'''
     config = self.get_system()
     return float(config['power_usage'])
 
   def get_admin(self):
+    '''Get terrariumPI admin name'''
     config = self.get_system()
     return config['admin']
 
   def get_password(self):
+    '''Get terrariumPI admin password'''
     config = self.get_system()
     return config['password']
 
   def get_available_languages(self):
+    '''Get terrariumPI available languages'''
     config = self.get_system()
     return config['available_languages'].split(',')
 
   def get_active_language(self):
+    '''Get terrariumPI active language'''
     config = self.get_system()
     return config['active_language']
 
+  def get_power_price(self):
+    '''Get terrariumPI power price. Price is entered as euro/kWh'''
+    config = self.get_system()
+    return float(config['power_price'])
+
+  def get_water_price(self):
+    '''Get terrariumPI water price. Price is entered as euro/m3'''
+    config = self.get_system()
+    return float(config['water_price'])
+
   # Environment functions
   def save_environment(self,data):
+    '''Save the terrariumPI environment config
+
+    '''
     config = {}
     for environment_part in data:
       for part in data[environment_part]:
