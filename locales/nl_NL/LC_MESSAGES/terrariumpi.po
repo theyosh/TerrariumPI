@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2016-12-17 22:13+0100\n"
-"PO-Revision-Date: 2016-12-17 22:14+0100\n"
+"POT-Creation-Date: 2016-12-28 12:26+0100\n"
+"PO-Revision-Date: 2016-12-28 12:27+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -30,19 +30,19 @@ msgstr "Authenticatie"
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:133
+#: terrariumWebserver.py:136
 msgid "Data could not be saved"
 msgstr "Data kon niet worden opgeslagen"
 
-#: terrariumWebserver.py:133
+#: terrariumWebserver.py:136
 msgid "Error!"
 msgstr "Fout!"
 
-#: terrariumWebserver.py:137
+#: terrariumWebserver.py:140
 msgid "Data saved"
 msgstr "Data is opgeslagen"
 
-#: terrariumWebserver.py:138
+#: terrariumWebserver.py:141
 msgid "Your changes are saved"
 msgstr "Je wijzigingen zijn opgeslagen"
 
@@ -62,111 +62,115 @@ msgstr "Waterverbruik in L/m"
 msgid "Total power in kWh"
 msgstr "Totaal stroomverbruik in kWh."
 
-#: views/dashboard.tpl:59
+#: views/dashboard.tpl:55 views/dashboard.tpl:64
+msgid "in"
+msgstr "in"
+
+#: views/dashboard.tpl:60
 msgid "Total water in L"
 msgstr "Totaal waterverbruik in L"
 
-#: views/dashboard.tpl:70 views/inc/menu.tpl:77
+#: views/dashboard.tpl:72 views/inc/menu.tpl:77
 msgid "Environment"
 msgstr "Omgeving"
 
-#: views/dashboard.tpl:70 views/weather_forecast.tpl:7
+#: views/dashboard.tpl:72 views/weather_forecast.tpl:7
 msgid "current"
 msgstr "huidig"
 
-#: views/dashboard.tpl:79 views/dashboard.tpl:203 views/dashboard.tpl:255
+#: views/dashboard.tpl:81 views/dashboard.tpl:205 views/dashboard.tpl:257
 #: views/inc/menu.tpl:30 views/inc/menu.tpl:44 views/inc/menu.tpl:55
 #: views/inc/menu.tpl:66 views/inc/menu.tpl:80 views/inc/menu.tpl:114
-#: views/inc/sensor_list.tpl:38 views/switch_status.tpl:33
+#: views/inc/sensor_list.tpl:38 views/switch_status.tpl:34
 #: views/system_status.tpl:32 views/system_status.tpl:88
 #: views/system_status.tpl:144 views/system_status.tpl:200
 #: views/weather_forecast.tpl:16 views/webcam.tpl:16
 msgid "Settings"
 msgstr "Instellingen"
 
-#: views/dashboard.tpl:91 views/dashboard.tpl:143
+#: views/dashboard.tpl:93 views/dashboard.tpl:145
 msgid "modus"
 msgstr "mode"
 
-#: views/dashboard.tpl:91 views/system_environment.tpl:7
+#: views/dashboard.tpl:93 views/system_environment.tpl:7
 msgid "Lights"
 msgstr "Lampen"
 
-#: views/dashboard.tpl:95 views/dashboard.tpl:124 views/dashboard.tpl:147
+#: views/dashboard.tpl:97 views/dashboard.tpl:126 views/dashboard.tpl:149
 msgid "State"
 msgstr "Status"
 
-#: views/dashboard.tpl:101
+#: views/dashboard.tpl:103
 msgid "On"
 msgstr "Aan"
 
-#: views/dashboard.tpl:107
+#: views/dashboard.tpl:109
 msgid "Off"
 msgstr "Uit"
 
-#: views/dashboard.tpl:113
+#: views/dashboard.tpl:115
 msgid "Duration"
 msgstr "Tijdsduur"
 
-#: views/dashboard.tpl:120 views/system_environment.tpl:91
+#: views/dashboard.tpl:122 views/system_environment.tpl:91
 msgid "Sprayer"
 msgstr "Sproeier"
 
-#: views/dashboard.tpl:130 views/dashboard.tpl:153 views/sensor_settings.tpl:39
+#: views/dashboard.tpl:132 views/dashboard.tpl:155 views/sensor_settings.tpl:39
 msgid "Current"
 msgstr "Huidig"
 
-#: views/dashboard.tpl:136 views/dashboard.tpl:159 views/sensor_settings.tpl:27
+#: views/dashboard.tpl:138 views/dashboard.tpl:161 views/sensor_settings.tpl:27
 msgid "Alarm min"
 msgstr "Alarm min."
 
-#: views/dashboard.tpl:143 views/system_environment.tpl:157
+#: views/dashboard.tpl:145 views/system_environment.tpl:157
 msgid "Heater"
 msgstr "Verwarming"
 
-#: views/dashboard.tpl:165 views/sensor_settings.tpl:30
+#: views/dashboard.tpl:167 views/sensor_settings.tpl:30
 msgid "Alarm max"
 msgstr "Alarm max."
 
-#: views/dashboard.tpl:177
+#: views/dashboard.tpl:179
 msgid "Average Humidity"
 msgstr "Gemiddelde luchtvochtigheid"
 
-#: views/dashboard.tpl:177 views/dashboard.tpl:229 views/inc/sensor_list.tpl:11
-#: views/switch_status.tpl:7 views/system_status.tpl:6
-#: views/system_status.tpl:62 views/system_status.tpl:118
+#: views/dashboard.tpl:179 views/dashboard.tpl:231 views/inc/sensor_list.tpl:11
+#: views/system_status.tpl:6 views/system_status.tpl:62
+#: views/system_status.tpl:118
 msgid "warning"
 msgstr "waarschuwing"
 
-#: views/dashboard.tpl:186 views/dashboard.tpl:238 views/inc/sensor_list.tpl:21
-#: views/switch_status.tpl:16 views/system_status.tpl:15
+#: views/dashboard.tpl:188 views/dashboard.tpl:240 views/inc/sensor_list.tpl:21
+#: views/switch_status.tpl:17 views/system_status.tpl:15
 #: views/system_status.tpl:71 views/system_status.tpl:127
 #: views/system_status.tpl:183
 msgid "day"
 msgstr "dag"
 
-#: views/dashboard.tpl:189 views/dashboard.tpl:241 views/inc/sensor_list.tpl:24
-#: views/switch_status.tpl:19 views/system_status.tpl:18
+#: views/dashboard.tpl:191 views/dashboard.tpl:243 views/inc/sensor_list.tpl:24
+#: views/switch_status.tpl:20 views/system_status.tpl:18
 #: views/system_status.tpl:74 views/system_status.tpl:130
 #: views/system_status.tpl:186
 msgid "week"
 msgstr "week"
 
-#: views/dashboard.tpl:192 views/dashboard.tpl:244 views/inc/sensor_list.tpl:27
-#: views/switch_status.tpl:22 views/system_status.tpl:21
+#: views/dashboard.tpl:194 views/dashboard.tpl:246 views/inc/sensor_list.tpl:27
+#: views/switch_status.tpl:23 views/system_status.tpl:21
 #: views/system_status.tpl:77 views/system_status.tpl:133
 #: views/system_status.tpl:189
 msgid "month"
 msgstr "maand"
 
-#: views/dashboard.tpl:195 views/dashboard.tpl:247 views/inc/sensor_list.tpl:30
-#: views/switch_status.tpl:25 views/system_status.tpl:24
+#: views/dashboard.tpl:197 views/dashboard.tpl:249 views/inc/sensor_list.tpl:30
+#: views/switch_status.tpl:26 views/system_status.tpl:24
 #: views/system_status.tpl:80 views/system_status.tpl:136
 #: views/system_status.tpl:192
 msgid "year"
 msgstr "jaar"
 
-#: views/dashboard.tpl:229
+#: views/dashboard.tpl:231
 msgid "Average Temperature"
 msgstr "Gemiddelde temperatuur"
 
@@ -311,7 +315,7 @@ msgid "Limit max"
 msgstr "Limiet max."
 
 #: views/sensor_settings.tpl:51 views/switch_settings.tpl:80
-#: views/system_environment.tpl:243 views/system_settings.tpl:83
+#: views/system_environment.tpl:243 views/system_settings.tpl:89
 #: views/weather_settings.tpl:59 views/webcam_settings.tpl:70
 msgid "Submit"
 msgstr "Opslaan"
@@ -427,40 +431,44 @@ msgid "Language"
 msgstr "Taal"
 
 #: views/system_settings.tpl:27
-msgid "IP or hostname"
-msgstr "IP of hostnaam"
-
-#: views/system_settings.tpl:33
-msgid "Port number"
-msgstr "Poort nummer"
-
-#: views/system_settings.tpl:39
 msgid "Admin name"
 msgstr "Beheerdersnaam"
 
-#: views/system_settings.tpl:45
+#: views/system_settings.tpl:33
 msgid "New admin password"
 msgstr "Nieuw beheerswachtwoord"
 
-#: views/system_settings.tpl:51
+#: views/system_settings.tpl:39
 msgid "Current admin password"
 msgstr "Huidige beheerswachtwoord"
 
-#: views/system_settings.tpl:57
+#: views/system_settings.tpl:45
 msgid "Pi power usage in W"
 msgstr "Stroomverbruik Pi in W."
 
+#: views/system_settings.tpl:51
+msgid "Power price"
+msgstr "Stroom prijs"
+
+#: views/system_settings.tpl:57
+msgid "Water price"
+msgstr "Water prijs"
+
 #: views/system_settings.tpl:63
+msgid "IP or hostname"
+msgstr "IP of hostnaam"
+
+#: views/system_settings.tpl:69
+msgid "Port number"
+msgstr "Poort nummer"
+
+#: views/system_settings.tpl:75
 msgid "Door GPIO pin"
 msgstr "Deur GPIO pin"
 
-#: views/system_settings.tpl:69
+#: views/system_settings.tpl:81
 msgid "1-Wire / OWFS port"
 msgstr "1-Wire / OWFS poort"
-
-#: views/system_settings.tpl:75
-msgid "Loglevel"
-msgstr "Loglevel"
 
 #: views/system_status.tpl:6
 msgid "CPU Load"
@@ -554,6 +562,9 @@ msgstr "Kies een aantal"
 #: Missing text string
 msgid "Select an option"
 msgstr "Maak een keuze"
+
+#~ msgid "Loglevel"
+#~ msgstr "Loglevel"
 
 #~ msgid "Water usage"
 #~ msgstr "Water verbruik"

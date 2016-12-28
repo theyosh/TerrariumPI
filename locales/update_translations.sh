@@ -35,5 +35,5 @@ sed -e "s@YEAR-MO-DA HO:MI+ZONE@${NOW}@g" \
     -e 's@PACKAGE VERSION@TerrariumPI 0.1@g' \
     -e 's@"Language-Team: LANGUAGE <LL\@li.org>\\n"@"Language-Team: \\n"\n"Language: en_US\\n"@g' \
     -i en_US/LC_MESSAGES/terrariumpi.po
-msgfmt en_US/LC_MESSAGES/terrariumpi.po -o en_US/LC_MESSAGES/terrariumpi.mp
+msgfmt en_US/LC_MESSAGES/terrariumpi.po -o en_US/LC_MESSAGES/terrariumpi.mo
 echo "Done!"
