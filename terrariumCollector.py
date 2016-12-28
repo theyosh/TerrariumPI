@@ -253,11 +253,12 @@ class terrariumCollector():
       fields = { 'power_wattage' : [], 'water_flow' : [] , 'state' : []}
       sql = 'SELECT id, "switches" as type, timestamp, ' + ', '.join(fields.keys()) + ' FROM switch_data WHERE timestamp >= ? and timestamp <= ? '
       if len(parameters) > 0 and parameters[0] == 'summary':
-        fields = ['total_power', 'total_water']
+        fields = ['total_power', 'total_water', 'duration']
         filters = ('total',)
         # Temporary overrule.... :P
         sql = '''
           SELECT ''' + str(stoptime) + ''' as timestamp,
+                  MAX(timestamp) - MIN(timestamp) as duration,
                   SUM(power_wattage) as total_power,
                   SUM(water_flow) as total_water
             FROM switch_data
@@ -297,7 +298,7 @@ class terrariumCollector():
       rows = cur.fetchall()
 
     for row in rows:
-      if logtype == 'switches' and len(row) == 3:
+      if logtype == 'switches' and len(row) == len(fields)+1:
         for field in fields:
           history[field] = row[field]
 

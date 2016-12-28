@@ -284,6 +284,8 @@ function update_dashboard_power_usage(data) {
   var percentage = (data.max > 0 ? (data.current / data.max) * 100 : 0);
   $("#power_wattage .progress-bar-success").css('height', percentage + '%');
   data.total /= 1000;
+  $("#total_power .count_bottom .costs span").text((data.price * data.total).toFixed(3));
+  $("#total_power .count_bottom span.duration").text(moment.duration(data.duration * 1000).humanize());
   update_dashboard_tile('total_power', data.total.toFixed(2));
 }
 
@@ -291,6 +293,8 @@ function update_dashboard_water_flow(data) {
   update_dashboard_tile('water_flow', data.current + '/' + data.max);
   var percentage = (data.max > 0 ? (data.current / data.max) * 100 : 0);
   $("#water_flow .progress-bar-info").css('height', percentage + '%');
+  $("#total_water .count_bottom .costs span").text((data.price * (data.total / 1000)).toFixed(3));
+  $("#total_water .count_bottom span.duration").text(moment.duration(data.duration * 1000).humanize());
   update_dashboard_tile('total_water', data.total.toFixed(2));
 }
 

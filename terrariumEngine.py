@@ -212,10 +212,13 @@ class terrariumEngine():
   def get_power_usage_water_flow(self, socket = False):
     data = self.__get_power_usage_water_flow()
     totaldata = self.__calculate_power_usage_water_flow()
-    #totaldata = {'total_power' : 0, 'total_water' : 0 }
 
     data['power']['total'] = totaldata['total_power']
+    data['power']['duration'] = totaldata['duration']
+    data['power']['price'] = self.config.get_power_price()
     data['water']['total'] = totaldata['total_water']
+    data['water']['duration'] = totaldata['duration']
+    data['water']['price'] = self.config.get_water_price()
 
     if socket:
       self.__send_message({'type':'power_usage_water_flow','data':data});

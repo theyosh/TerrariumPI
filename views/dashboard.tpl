@@ -52,6 +52,7 @@
                 <div class="count">
                   0
                 </div>
+                <span class="count_bottom"><i class="green costs"><i class="fa fa-eur"></i><span></span></i> {{_('in')}} <span class="duration"></span></span>
               </div>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id="total_water">
@@ -60,6 +61,7 @@
                 <div class="count">
                   0
                 </div>
+                <span class="count_bottom"><i class="green costs"><i class="fa fa-eur"></i><span></span></i> {{_('in')}} <span class="duration"></span></span>
               </div>
             </div>
           </div><!-- /top tiles -->
