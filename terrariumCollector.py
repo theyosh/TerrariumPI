@@ -3,16 +3,40 @@ import sqlite3
 import time
 import json
 import copy
+import os
+
+"""TODO: Uitzoeken hoe dit op te vangen en te fixen.
+http://www.dosomethinghere.com/2013/02/20/fixing-the-sqlite-error-the-database-disk-image-is-malformed/
+
+DatabaseError: database disk image is malformed                                                                                                                                                                               
+Traceback (most recent call last):                                                                                                                                                                                            
+  File "/usr/local/lib/python2.7/dist-packages/bottle.py", line 862, in _handle                                                                                                                                               
+    return route.call(**args)                                                                                                                                                                                                 
+  File "/usr/local/lib/python2.7/dist-packages/bottle.py", line 1732, in wrapper                                                                                                                                              
+    rv = callback(*a, **ka)                                                                                                                                                                                                   
+  File "/home/pi/TerrariumPI/terrariumWebserver.py", line 35, in webserver_headers                                                                                                                                            
+    return fn(*args, **kwargs)                                                                                                                                                                                                
+  File "/home/pi/TerrariumPI/terrariumWebserver.py", line 183, in __get_api_call                                                                                                                                              
+    result = self.__terrariumEngine.get_history(parameters)                                                                                                                                                                   
+  File "/home/pi/TerrariumPI/terrariumEngine.py", line 554, in get_history                                                                                                                                                    
+    data = self.collector.get_history(parameters)                                                                                                                                                                             
+  File "/home/pi/TerrariumPI/terrariumCollector.py", line 297, in get_history                                                                                                                                                 
+    cur.execute(sql, filters)                                                                                                                                                                                                 
+DatabaseError: database disk image is malformed"""
 
 class terrariumCollector():
   database = 'history.db'
 
   def __init__(self):
-    self.db = sqlite3.connect(terrariumCollector.database)
-    self.db.row_factory = sqlite3.Row
+    self.__recovery = False
+    self.__connect()
     # Store data every Xth minute. Except switches.
     self.modulo = 5 * 60
     self.__create_database_structure()
+    
+  def __connect(self):
+    self.db = sqlite3.connect(terrariumCollector.database)
+    self.db.row_factory = sqlite3.Row
 
   def __create_database_structure(self):
     with self.db:
@@ -76,31 +100,61 @@ class terrariumCollector():
     self.db.commit()
 
   def __log_data(self,type,id,datatype,newdata):
+    if self.__recovery:
+      return
+    
     now = int(time.time())
     rows = []
     if 'switches' != type:
       now -= (now % 60)
 
-    with self.db:
-      cur = self.db.cursor()
-
-      if type in ['humidity','temperature']:
-        cur.execute('REPLACE INTO sensor_data (id, type, timestamp, current, min, max, alarm_min, alarm_max, alarm) VALUES (?,?,?,?,?,?,?,?,?)',
-                    (id, type, now, newdata['current'], newdata['min'], newdata['max'], newdata['alarm_min'], newdata['alarm_max'], newdata['alarm']))
-
-      if type in ['switches']:
-        cur.execute('REPLACE INTO switch_data (id, timestamp, state, power_wattage, water_flow) VALUES (?,?,?,?,?)',
-                    (id, now, newdata['state'], newdata['power_wattage'], newdata['water_flow']))
-
-      if type in ['weather']:
-        cur.execute('REPLACE INTO weather_data (timestamp, wind_speed, temperature, pressure, wind_direction, weather, icon) VALUES (?,?,?,?,?,?,?)',
-                    (now, newdata['wind_speed'], newdata['temperature'], newdata['pressure'], newdata['wind_direction'], newdata['weather'], newdata['icon']))
-
-      if type in ['system']:
-        cur.execute('REPLACE INTO system_data (timestamp, load_load1, load_load5, load_load15, uptime, temperature, cores, memory_total, memory_used, memory_free) VALUES (?,?,?,?,?,?,?,?,?,?)',
-                    (now, newdata['load']['load1'], newdata['load']['load5'], newdata['load']['load15'], newdata['uptime'], newdata['temperature'], newdata['cores'], newdata['memory']['total'], newdata['memory']['used'], newdata['memory']['free']))
-
-      self.db.commit()
+    try:
+      with self.db:
+        cur = self.db.cursor()
+  
+        if type in ['humidity','temperature']:
+          cur.execute('REPLACE INTO sensor_data (id, type, timestamp, current, min, max, alarm_min, alarm_max, alarm) VALUES (?,?,?,?,?,?,?,?,?)',
+                      (id, type, now, newdata['current'], newdata['min'], newdata['max'], newdata['alarm_min'], newdata['alarm_max'], newdata['alarm']))
+  
+        if type in ['switches']:
+          cur.execute('REPLACE INTO switch_data (id, timestamp, state, power_wattage, water_flow) VALUES (?,?,?,?,?)',
+                      (id, now, newdata['state'], newdata['power_wattage'], newdata['water_flow']))
+  
+        if type in ['weather']:
+          cur.execute('REPLACE INTO weather_data (timestamp, wind_speed, temperature, pressure, wind_direction, weather, icon) VALUES (?,?,?,?,?,?,?)',
+                      (now, newdata['wind_speed'], newdata['temperature'], newdata['pressure'], newdata['wind_direction'], newdata['weather'], newdata['icon']))
+  
+        if type in ['system']:
+          cur.execute('REPLACE INTO system_data (timestamp, load_load1, load_load5, load_load15, uptime, temperature, cores, memory_total, memory_used, memory_free) VALUES (?,?,?,?,?,?,?,?,?,?)',
+                      (now, newdata['load']['load1'], newdata['load']['load5'], newdata['load']['load15'], newdata['uptime'], newdata['temperature'], newdata['cores'], newdata['memory']['total'], newdata['memory']['used'], newdata['memory']['free']))
+  
+        self.db.commit()
+    except sqlite3.DatabaseError as ex:
+      if 'database disk image is malformed' == str(ex):
+        self.__recover()
+      
+  def __recover(self):
+    # Enable recovery status
+    self.__recovery = True
+    
+    # Create empty sql dump variable
+    sqldump = ''
+    with open('.recovery.sql', 'w') as f:
+      # Dump SQL data line for line
+      for line in self.db.iterdump():
+        sqldump += line + "\n"
+        f.write('%s\n' % line)
+    
+    # Delete broken db
+    os.remove(terrariumCollector.database)
+    # Reconnect will recreate the db
+    self.__connect()
+    cur = self.db.cursor()
+    # Load the SQL data back to db
+    cur.executescript(sqldump)
+    
+    # Return to normal modus
+    self.__recovery = False
 
   def log_switch_data(self,switch):
     switch_id = switch['id']
@@ -134,6 +188,9 @@ class terrariumCollector():
     #self.__log_data('switches',None,'summary',data)
 
   def log_total_power_and_water_usage(self,pi_wattage):
+    if self.__recovery:
+      return
+    
     today = int(time.time())
     time_past = today % 86400
     today -= time_past
@@ -146,24 +203,30 @@ class terrariumCollector():
               switch_data.power_wattage,
               switch_data.water_flow ,
               switch_data.timestamp - max(switch_data_duration.timestamp) AS duration
-            FROM switch_data left join switch_data as switch_data_duration
+            FROM switch_data left JOIN switch_data as switch_data_duration
               ON switch_data.id = switch_data_duration.id
               AND switch_data.timestamp > switch_data_duration.timestamp
               AND switch_data_duration.id <> 'total'
             WHERE switch_data_duration.id NOT null
               AND switch_data.id <> 'total'
-              GROUP BY switch_data.id, switch_data.timestamp
-              HAVING switch_data_duration.state = 1
               AND switch_data.timestamp >= ?
               AND switch_data_duration.timestamp < ?
-            ORDER by aan ASC'''
+            GROUP BY switch_data.id, switch_data.timestamp
+            HAVING switch_data_duration.state = 1
+              AND switch_data.timestamp >= ?
+              AND switch_data_duration.timestamp < ?
+            ORDER BY aan ASC'''
 
-    filters = (today,today+86400,)
+    filters = (today,today+86400,today,today+86400,)
     rows = []
-    with self.db:
-      cur = self.db.cursor()
-      cur.execute(sql, filters)
-      rows = cur.fetchall()
+    try:
+      with self.db:
+        cur = self.db.cursor()
+        cur.execute(sql, filters)
+        rows = cur.fetchall()
+    except sqlite3.DatabaseError as ex:
+      if 'database disk image is malformed' == str(ex):
+        self.__recover()
 
     for row_tmp in rows:
       row = {'aan': row_tmp['aan'],
@@ -189,11 +252,15 @@ class terrariumCollector():
     # Water is in Liters
     data['water'] /= 60
 
-    with self.db:
-      cur = self.db.cursor()
-      cur.execute('REPLACE INTO switch_data (id, timestamp, state, power_wattage, water_flow) VALUES (?,?,?,?,?)',
-                  ('total', today, data['on'], data['power'], data['water']))
-      self.db.commit()
+    try:
+      with self.db:
+        cur = self.db.cursor()
+        cur.execute('REPLACE INTO switch_data (id, timestamp, state, power_wattage, water_flow) VALUES (?,?,?,?,?)',
+                    ('total', today, data['on'], data['power'], data['water']))
+        self.db.commit()
+    except sqlite3.DatabaseError as ex:
+      if 'database disk image is malformed' == str(ex):
+        self.__recover()
 
   def get_history(self, parameters = [], starttime = None, stoptime = None):
     # Default return object
@@ -292,10 +359,15 @@ class terrariumCollector():
     sql = sql + ' ORDER BY timestamp ASC'
 
     rows = []
-    with self.db:
-      cur = self.db.cursor()
-      cur.execute(sql, filters)
-      rows = cur.fetchall()
+    if not self.__recovery:
+      try:
+        with self.db:
+          cur = self.db.cursor()
+          cur.execute(sql, filters)
+          rows = cur.fetchall()
+      except sqlite3.DatabaseError as ex:
+        if 'database disk image is malformed' == str(ex):
+          self.__recover()
 
     for row in rows:
       if logtype == 'switches' and len(row) == len(fields)+1:
