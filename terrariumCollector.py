@@ -5,38 +5,25 @@ import json
 import copy
 import os
 
-"""TODO: Uitzoeken hoe dit op te vangen en te fixen.
-http://www.dosomethinghere.com/2013/02/20/fixing-the-sqlite-error-the-database-disk-image-is-malformed/
-
-DatabaseError: database disk image is malformed                                                                                                                                                                               
-Traceback (most recent call last):                                                                                                                                                                                            
-  File "/usr/local/lib/python2.7/dist-packages/bottle.py", line 862, in _handle                                                                                                                                               
-    return route.call(**args)                                                                                                                                                                                                 
-  File "/usr/local/lib/python2.7/dist-packages/bottle.py", line 1732, in wrapper                                                                                                                                              
-    rv = callback(*a, **ka)                                                                                                                                                                                                   
-  File "/home/pi/TerrariumPI/terrariumWebserver.py", line 35, in webserver_headers                                                                                                                                            
-    return fn(*args, **kwargs)                                                                                                                                                                                                
-  File "/home/pi/TerrariumPI/terrariumWebserver.py", line 183, in __get_api_call                                                                                                                                              
-    result = self.__terrariumEngine.get_history(parameters)                                                                                                                                                                   
-  File "/home/pi/TerrariumPI/terrariumEngine.py", line 554, in get_history                                                                                                                                                    
-    data = self.collector.get_history(parameters)                                                                                                                                                                             
-  File "/home/pi/TerrariumPI/terrariumCollector.py", line 297, in get_history                                                                                                                                                 
-    cur.execute(sql, filters)                                                                                                                                                                                                 
-DatabaseError: database disk image is malformed"""
+import logging
+logger = logging.getLogger(__name__)
 
 class terrariumCollector():
   database = 'history.db'
 
   def __init__(self):
+    logger.info('Setting up collector database %s' % (terrariumCollector.database,))
     self.__recovery = False
     self.__connect()
     # Store data every Xth minute. Except switches.
     self.modulo = 5 * 60
     self.__create_database_structure()
+    logger.info('TerrariumPI Collecter is ready')
     
   def __connect(self):
     self.db = sqlite3.connect(terrariumCollector.database)
     self.db.row_factory = sqlite3.Row
+    logger.info('Database connection created to database %s' % (terrariumCollector.database,))
 
   def __create_database_structure(self):
     with self.db:
@@ -101,6 +88,7 @@ class terrariumCollector():
 
   def __log_data(self,type,id,datatype,newdata):
     if self.__recovery:
+      logger.warn('TerrariumPI Collecter is in recovery modus. Cannot store new logging data!')
       return
     
     now = int(time.time())
@@ -130,31 +118,43 @@ class terrariumCollector():
   
         self.db.commit()
     except sqlite3.DatabaseError as ex:
+      logger.error('TerrariumPI Collecter exception! %s', (ex,))
       if 'database disk image is malformed' == str(ex):
         self.__recover()
       
   def __recover(self):
+    # Based on: http://www.dosomethinghere.com/2013/02/20/fixing-the-sqlite-error-the-database-disk-image-is-malformed/
     # Enable recovery status
     self.__recovery = True
+    logger.warn('TTerrariumPI Collecter recovery modus is starting! %s', (self.__recovery,))
     
     # Create empty sql dump variable
     sqldump = ''
+    lines = 0
     with open('.recovery.sql', 'w') as f:
       # Dump SQL data line for line
       for line in self.db.iterdump():
+        lines += 1
         sqldump += line + "\n"
         f.write('%s\n' % line)
+        
+    logger.warn('TerrariumPI Collecter recovery modus created SQL dump of %s lines and %s bytes!', (lines,strlen(sqldump),))
     
     # Delete broken db
     os.remove(terrariumCollector.database)
+    logger.warn('TerrariumPI Collecter recovery modus deleted faulty database from disk %s', (terrariumCollector.database,))
+    
     # Reconnect will recreate the db
+    logger.warn('TerrariumPI Collecter recovery modus starts reconnecting database to create a new clean database at %s', (terrariumCollector.database,))
     self.__connect()
     cur = self.db.cursor()
     # Load the SQL data back to db
     cur.executescript(sqldump)
+    logger.warn('TerrariumPI Collecter recovery modus restored the old data in a new database. %s', (terrariumCollector.database,))
     
     # Return to normal modus
     self.__recovery = False
+    logger.warn('TerrariumPI Collecter recovery modus is finished! %s', (self.__recovery,))
 
   def log_switch_data(self,switch):
     switch_id = switch['id']
@@ -179,16 +179,9 @@ class terrariumCollector():
   def log_system_data(self, data):
     self.__log_data('system',None,'rawdata',data)
 
-  def log_summary_sensor_data(self, type, averagedata):
-    pass
-    #self.__log_data(type,None,'summary',averagedata)
-
-  def log_power_usage_water_flow(self,data):
-    pass
-    #self.__log_data('switches',None,'summary',data)
-
   def log_total_power_and_water_usage(self,pi_wattage):
     if self.__recovery:
+      logger.warn('TerrariumPI Collecter is in recovery modus. Cannot store new power and water total usage!')
       return
     
     today = int(time.time())
@@ -225,6 +218,7 @@ class terrariumCollector():
         cur.execute(sql, filters)
         rows = cur.fetchall()
     except sqlite3.DatabaseError as ex:
+      logger.error('TerrariumPI Collecter exception! %s', (ex,))
       if 'database disk image is malformed' == str(ex):
         self.__recover()
 
@@ -259,6 +253,7 @@ class terrariumCollector():
                     ('total', today, data['on'], data['power'], data['water']))
         self.db.commit()
     except sqlite3.DatabaseError as ex:
+      logger.error('TerrariumPI Collecter exception! %s', (ex,))
       if 'database disk image is malformed' == str(ex):
         self.__recover()
 
@@ -366,6 +361,7 @@ class terrariumCollector():
           cur.execute(sql, filters)
           rows = cur.fetchall()
       except sqlite3.DatabaseError as ex:
+        logger.error('TerrariumPI Collecter exception! %s', (ex,))
         if 'database disk image is malformed' == str(ex):
           self.__recover()
 
