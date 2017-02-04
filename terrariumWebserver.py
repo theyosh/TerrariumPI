@@ -241,6 +241,7 @@ class terrariumWebserver():
 
   def start(self):
     # Start the webserver
+    print 'Running webserver at %s:%s' % (self.__config['host'],self.__config['port'])
     self.__app.run(host=self.__config['host'],
                    port=self.__config['port'],
                    server=GeventWebSocketServer,
