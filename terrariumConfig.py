@@ -106,6 +106,9 @@ class terrariumConfig:
   def get_active_language(self):
     '''Get terrariumPI active language'''
     config = self.get_system()
+    if 'active_language' not in config:
+      config['active_language'] = self.get_available_languages()[0]
+
     return config['active_language']
 
   def get_power_price(self):
