@@ -175,8 +175,8 @@ class terrariumEnvironment():
       data['off'] = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['set'])
 
     elif 'timer' == data['modus']:
-      data['on'] = self.light['on']
-      data['off'] = self.light['off']
+      data['on'] = datetime.datetime.fromtimestamp(self.light['on'])
+      data['off'] = datetime.datetime.fromtimestamp(self.light['off'])
 
     # Duration check
     duration = data['off'] - data['on']
