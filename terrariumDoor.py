@@ -20,12 +20,16 @@ class terrariumDoor():
     self.door_status = None
     self.callback = callback
     logger.debug('Setting terrariumPI door to pi %s' % (gpio_pin,))
-    self.set_gpio_pin(gpio_pin)
-    logger.debug('Done setting terrariumPI door to pi %s' % (gpio_pin,))
-
-    # Add detetion with callback !!!!THIS WILL CRASH THE GEVENT LOOP SOMEHOW!!!!!!
-    # GPIO.add_event_detect(gpio_pin, GPIO.BOTH, callback=callback, bouncetime=300)
-    thread.start_new_thread(self.__checker, ())
+    try:
+      self.set_gpio_pin(gpio_pin)
+      logger.debug('Done setting terrariumPI door to pi %s' % (gpio_pin,))
+      # Add detetion with callback !!!!THIS WILL CRASH THE GEVENT LOOP SOMEHOW!!!!!!
+      # GPIO.add_event_detect(gpio_pin, GPIO.BOTH, callback=callback, bouncetime=300)
+      thread.start_new_thread(self.__checker, ())
+    except Exception:
+      logger.error('Door pin %s is not available. Doorsensor is disabled' % (gpio_pin,))
+      self.door_status = 'closed'
+      self.callback(True)
 
   def __checker(self):
     logger.info('Start terrariumPI door checker')
