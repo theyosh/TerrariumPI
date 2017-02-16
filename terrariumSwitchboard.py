@@ -42,6 +42,11 @@ class terrariumSwitchboard():
       logger.info('Found switch board %s %s %s of type %s' % (vendor,product,self.device,self.device_type))
       break # For now, we only support 1 switch board!
 
+    if self.device is None:
+      logger.warn('No switchboard available!')
+      logger.info('Done loading switches. Found %s' % (len(self.switches),))
+      return
+
     for nr in range(0,self.active_number_of_switches):
       power_switch_config = {}
       if switch_numbers[nr] is not None:
