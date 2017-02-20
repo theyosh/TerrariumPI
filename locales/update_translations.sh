@@ -18,6 +18,72 @@ for translation in `grep -r -h -o -e "_('[^)]\+')" ../views/*.tpl | sed "s/ /%20
   fi
 done
 
+# Add static translations
+echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"Dashboard\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
+echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"Weather forecast\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
+echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"Weather settings\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
+echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"Sensor temperature\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
+echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"Sensor humidity\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
+echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"Sensor settings\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
+echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"temperature\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
+echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"Switch status\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
+echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"Switch settings\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
+echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"Webcam settings\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
+echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"System status\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
+echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"System environment\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
+echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"System settings\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
 sed -e 's@YEAR ORGANIZATION@2016 TheYOSH@g' \
     -e 's@FIRST AUTHOR <EMAIL\@ADDRESS>, YEAR@Joshua (TheYOSH) Rubingh, <theyosh\@theyosh.nl>, 2016@g' \
     -i terrariumpi.pot

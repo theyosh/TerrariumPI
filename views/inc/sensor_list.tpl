@@ -6,7 +6,7 @@
               <div class="x_title">
                 <h2>
                   <span aria-hidden="true" class="glyphicon glyphicon-fire"></span>
-                  <span class="title">{{sensor_type.title()}}</span>
+                  <span class="title">{{_(sensor_type.capitalize())}}</span>
                   <small>...</small>
                   <span class="badge bg-red" style="display:none;">{{_('warning')}}</span>
                 </h2>

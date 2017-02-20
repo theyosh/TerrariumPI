@@ -101,9 +101,6 @@
                     <li>
                       <a href="hardware.html">{{_('Hardware')}}</a>
                     </li>
-                    <li>
-                      <a href="cosidebar-footerntact.html">{{_('Contact')}}</a>
-                    </li>
                   </ul>
                 </li>
               </ul>

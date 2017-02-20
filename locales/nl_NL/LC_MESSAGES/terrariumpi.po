@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2016-12-28 12:26+0100\n"
-"PO-Revision-Date: 2016-12-28 12:27+0100\n"
+"POT-Creation-Date: 2017-02-20 20:37+0100\n"
+"PO-Revision-Date: 2017-02-20 20:39+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -80,7 +80,7 @@ msgstr "huidig"
 
 #: views/dashboard.tpl:81 views/dashboard.tpl:205 views/dashboard.tpl:257
 #: views/inc/menu.tpl:30 views/inc/menu.tpl:44 views/inc/menu.tpl:55
-#: views/inc/menu.tpl:66 views/inc/menu.tpl:80 views/inc/menu.tpl:114
+#: views/inc/menu.tpl:66 views/inc/menu.tpl:80 views/inc/menu.tpl:111
 #: views/inc/sensor_list.tpl:38 views/switch_status.tpl:34
 #: views/system_status.tpl:32 views/system_status.tpl:88
 #: views/system_status.tpl:144 views/system_status.tpl:200
@@ -253,43 +253,39 @@ msgstr "Software"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: views/inc/menu.tpl:105
-msgid "Contact"
-msgstr "Contact"
-
-#: views/inc/menu.tpl:115
+#: views/inc/menu.tpl:112
 msgid "FullScreen"
 msgstr "Volledig scherm"
 
-#: views/inc/menu.tpl:116
+#: views/inc/menu.tpl:113
 msgid "Lock"
 msgstr "Vergrendelen"
 
-#: views/inc/menu.tpl:117
+#: views/inc/menu.tpl:114
 msgid "Logout"
 msgstr "Uitloggen"
 
-#: views/inc/menu.tpl:129
+#: views/inc/menu.tpl:126
 msgid "date/time"
 msgstr "datum/tijd"
 
-#: views/inc/menu.tpl:132
+#: views/inc/menu.tpl:129
 msgid "Door is closed"
 msgstr "Deur is gesloten"
 
-#: views/inc/menu.tpl:132
+#: views/inc/menu.tpl:129
 msgid "Door is open"
 msgstr "Deur is geopend"
 
-#: views/inc/menu.tpl:136 views/inc/menu.tpl:146
+#: views/inc/menu.tpl:133 views/inc/menu.tpl:143
 msgid "No messages"
 msgstr "Geen berichten"
 
-#: views/inc/menu.tpl:142
+#: views/inc/menu.tpl:139
 msgid "Offline"
 msgstr "Offline"
 
-#: views/inc/menu.tpl:142
+#: views/inc/menu.tpl:139
 msgid "Online"
 msgstr "Online"
 
@@ -562,6 +558,64 @@ msgstr "Kies een aantal"
 #: Missing text string
 msgid "Select an option"
 msgstr "Maak een keuze"
+
+#: Missing text string
+msgid "Dashboard"
+msgstr "Overzicht"
+
+#: Missing text string
+msgid "Weather forecast"
+msgstr "Weer voorspelling"
+
+#: Missing text string
+msgid "Weather settings"
+msgstr "Weer instellingen"
+
+#: Missing text string
+msgid "Sensor temperature"
+msgstr "Temperatuursensor"
+
+#: Missing text string
+msgid "Sensor humidity"
+msgstr "Luchtvochtigheidsensor"
+
+#: Missing text string
+msgid "Sensor settings"
+msgstr "Sensor instellingen"
+
+#: Missing text string
+msgid "temperature"
+msgstr "temperatuur"
+
+#: Missing text string
+msgid "Switch status"
+msgstr "Schakelaar status"
+
+#: Missing text string
+msgid "Switch settings"
+msgstr "Schakelaar instellingen"
+
+#: Missing text string
+msgid "Webcam settings"
+msgstr "Webcam instellingen"
+
+#: Missing text string
+msgid "System status"
+msgstr "Systeem status"
+
+#: Missing text string
+msgid "System environment"
+msgstr "Systeem omgeving"
+
+#: Missing text string
+msgid "System settings"
+msgstr "Systeem instellingen"
+
+#~ msgid "humidity"
+#~ msgstr "luchtvochtigheid"
+
+#~ msgid "Contact"
+#~ msgstr "Contact"
 
 #~ msgid "Loglevel"
 #~ msgstr "Loglevel"
