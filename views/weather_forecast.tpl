@@ -151,9 +151,6 @@
                                                         'target':'_blank',
                                                         'title' : data.credits.text})
                                                  .text(data.credits.text));
-
-
-            //$('#weather_credits').html('<a href="' + data.credits.url + '" target="_blank">' + data.credits.text + '</a>');
             var period = moment(data.hour_forecast[0].from * 1000).format('lll') + ' - ' + moment(data.hour_forecast[data.hour_forecast.length-1].to * 1000).format('lll') + ', ' + moment.duration( (data.hour_forecast[data.hour_forecast.length-1].to - data.hour_forecast[0].from) * 1000).humanize();
             $('#weather_hourly').text(period);
             period = moment(data.week_forecast[0].from * 1000).format('lll') + ' - ' + moment(data.week_forecast[data.week_forecast.length-1].to * 1000).format('lll') + ', ' +  moment.duration( (data.week_forecast[data.week_forecast.length-1].to - data.week_forecast[0].from) * 1000).humanize();
