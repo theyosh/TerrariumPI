@@ -28,7 +28,7 @@ class terrariumWebserverHeaders(object):
       template_file = 'views' + request.fullpath[:-5] + '.tpl'
       if os.path.isfile(template_file):
         t = os.path.getmtime(template_file)
-        response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(days=1)).strftime('%a, %d %b %Y %H:%M:%S GMT')
+        #response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(days=1)).strftime('%a, %d %b %Y %H:%M:%S GMT')
         response.headers['Last-Modified'] = datetime.datetime.fromtimestamp(t).strftime( '%a, %d %b %Y %H:%M:%S GMT')
         response.headers['Etag'] = hashlib.md5(response.headers['Last-Modified']).hexdigest()
 
@@ -57,7 +57,7 @@ class terrariumWebserver():
 
   def __routes(self):
     self.__app.route('/', method="GET", callback=self.__render_page)
-    self.__app.route('/<template_name:re:[^/]+\.html$>', method="GET", callback=self.__render_page, apply=[terrariumWebserverHeaders()])
+    self.__app.route('/<template_name:re:[^/]+\.html$>', method="GET", callback=self.__render_page)
 
     self.__app.route('/<root:re:(static|gentelella|webcam)>/<filename:path>', method="GET", callback=self.__static_file)
 
@@ -78,7 +78,7 @@ class terrariumWebserver():
   def __template_variables(self, template):
     variables = { 'lang' : self.__terrariumEngine.config.get_active_language(),
                   'title' : self.__config['title'],
-                  'page_title' : template.replace('_',' ').title()}
+                  'page_title' : _(template.replace('_',' ').capitalize())}
 
     if 'index' == template:
       variables['person_name'] = self.__config['person']
@@ -111,10 +111,10 @@ class terrariumWebserver():
 
   def __static_file(self,filename, root = 'static'):
     if filename == 'js/terrariumpi.js':
-      t = os.path.getmtime(root + '/' + filename)
-      response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(days=1)).strftime('%a, %d %b %Y %H:%M:%S GMT')
-      response.headers['Last-Modified'] = datetime.datetime.fromtimestamp(t).strftime( '%a, %d %b %Y %H:%M:%S GMT')
-      response.headers['Etag'] = hashlib.md5(response.headers['Last-Modified']).hexdigest()
+      #t = os.path.getmtime(root + '/' + filename)
+      #response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(days=1)).strftime('%a, %d %b %Y %H:%M:%S GMT')
+      #response.headers['Last-Modified'] = datetime.datetime.fromtimestamp(t).strftime( '%a, %d %b %Y %H:%M:%S GMT')
+      #response.headers['Etag'] = hashlib.md5(response.headers['Last-Modified']).hexdigest()
       response.headers['Content-Type'] = 'application/javascript; charset=UTF-8'
       return template(filename,template_lookup=[root])
 
@@ -140,8 +140,9 @@ class terrariumWebserver():
       result['title'] = _('Data saved')
       result['message'] = _('Your changes are saved')
 
-      # Reload language
-      gettext.translation('terrariumpi', 'locales/', languages=[self.__terrariumEngine.config.get_active_language()]).install(True)
+      # Reload language if needed
+      if 'active_language' in postdata:
+        gettext.translation('terrariumpi', 'locales/', languages=[self.__terrariumEngine.config.get_active_language()]).install(True)
 
     return result
 
