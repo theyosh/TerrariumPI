@@ -28,7 +28,6 @@
   <script type="text/javascript" src="/gentelella/vendors/pnotify/dist/pnotify.js"></script>
   <script type="text/javascript" src="/gentelella/vendors/pnotify/dist/pnotify.buttons.js"></script>
   <script type="text/javascript" src="/gentelella/vendors/pnotify/dist/pnotify.nonblock.js"></script>
-  <script type="text/javascript" src="/gentelella/build/js/custom.min.js"></script>
   <!-- Leaflet -->
   <script type="text/javascript" src="/static/leaflet/leaflet.js"></script>
   <script type="text/javascript" src="/static/leaflet.loading/src/Control.Loading.js"></script>
