@@ -27,11 +27,13 @@ class terrariumWebcam():
       self.id = md5(b'' + str(int(time()))).hexdigest()
     else:
       self.id = id
-
+  
     # Main config
     self.tile_size = 256 # Smaller tile sizes does not work with LeafJS
     self.tile_location = 'webcam/'
     self.font_size = 10
+    self.retries = 3
+    self.webam_warm_up = 2
 
     # Per webcam config
     self.set_location(location)
@@ -43,75 +45,45 @@ class terrariumWebcam():
     self.resolution = None
     self.last_update = None
     self.state = None
-
+    
+    logger.info('Initialized webcam %s (%s) at location %s' % (self.get_name(),self.get_id(), self.get_location()))
     self.update()
 
   def __get_raw_image(self):
     logger.debug('Start getting raw image data from location: %s' % (self.location,))
     stream = BytesIO()
-
-    try:
+    oldstate = self.state
+    
+    for trying in range(0,self.retries):
       if 'rpicam' == self.location:
-        logger.debug('Using RPICAM')
-        with PiCamera(resolution=(1920, 1080)) as camera:
-          logger.debug('Open rpicam')
-          camera.start_preview()
-          logger.debug('Wait 2 seconds for preview')
-          sleep(2)
-          logger.debug('Save rpicam to jpeg')
-          camera.capture(stream, format='jpeg')
-          logger.debug('Done creating RPICAM image')
-
+        stream = self.__get_raw_image_rpicam()
+  
       elif self.location.startswith('/dev/video'):
-        logger.debug('Using USB')
-        logger.debug('Open USB')
-        camera = cv2.VideoCapture(int(self.location[10:]))
-        logger.debug('Set USB height to 1280')
-        camera.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, 1280)
-        logger.debug('Set USB width to 720')
-        camera.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, 720)
-        logger.debug('Wait 2 seconds for preview')
-        sleep(2)
-        logger.debug('Save USB to raw data')
-        readok, image = camera.read()
-
-        if readok:
-          logger.debug('Save USB to jpeg')
-          jpeg = Image.fromarray(cv2.cvtColor(image,cv2.COLOR_BGR2RGB))
-          stream = StringIO.StringIO()
-          jpeg.save(stream,'JPEG')
-          logger.debug('Done creating USB image')
-
-        logger.debug('Release USB camera')
-        camera.release()
-        logger.debug('Done release USB camera')
-
+        stream = self.__get_raw_image_usb()
+  
       elif self.location.startswith('http://') or self.location.startswith('https://'):
-        logger.debug('Using URL')
-        if '@' in self.location:
-          start = self.location.find('://') + 3
-          end = self.location.find('@', start)
-          auth = self.location[start:end]
-          webcamurl = urllib2.Request(self.location.replace(auth+'@',''))
-          auth = auth.split(':')
-          base64string = base64.encodestring('%s:%s' % (auth[0], auth[1])).replace('\n', '')
-          webcamurl.add_header("Authorization", "Basic %s" % base64string)
-        else:
-          webcamurl = urllib2.Request(self.location)
+        stream = self.__get_raw_image_url()
 
-        stream = StringIO.StringIO(urllib2.urlopen(webcamurl,None,15).read())
+      if not self.state:
+        logger.warning('Attempt %s of %s for getting raw for %s did not succeed at location %s. Will retry in 1 second.' % (trying+1,self.retries,self.get_name(),self.get_location()))
+        sleep(1)
+      else:
+        break
 
-      self.state = True
-
+    if not self.state and oldstate:
+      # Changed from online to offline
+      logger.warning('Raw image %s at location %s is not available!' % (self.get_name(),self.get_location(),))
+      self.__get_offline_image()
+      self.__tile_image()
+    elif self.state:
       # "Rewind" the stream to the beginning so we can read its content
-      logger.debug('Reset raw image')
+      logger.debug('Resetting raw image %s' % (self.get_name(),))
       stream.seek(0)
       # Store image in memory for further processing
-      logger.debug('Copy raw image to memory')
       self.raw_image = Image.open(stream)
-
+      logger.debug('Loaded raw image %s to memory' % (self.get_name(),))
+      
       # Rotate image if needed
-      logger.debug('Rotate image at %s' % (self.get_rotation(),))
       if '90' == self.get_rotation():
         self.raw_image = self.raw_image.transpose(Image.ROTATE_90)
       elif  '180' == self.get_rotation():
@@ -122,19 +94,87 @@ class terrariumWebcam():
         self.raw_image = self.raw_image.transpose(Image.FLIP_TOP_BOTTOM)
       elif 'v' == self.get_rotation():
         self.raw_image = self.raw_image.transpose(Image.FLIP_LEFT_RIGHT)
+      logger.debug('Rotated raw image %s to %s' % (self.get_name(),self.get_rotation()))
 
-      logger.debug('Saving image to disc: %s' % (self.get_raw_image(),))
       self.raw_image.save(self.get_raw_image(),'jpeg',quality=95)
-      logger.debug('Done saving image to disc: %s' % (self.get_raw_image(),))
-
-    except Exception, err:
-      # Error loadig image, so load offline image
-      if self.state is not False:
-        logger.warning('Image at location %s is not available. Exception: %s' % (self.location,err,))
-        self.__get_offline_image()
-        self.state = False
+      logger.debug('Saved raw image %s to disc: %s' % (self.get_name(),self.get_raw_image()))
 
     self.last_update = int(time())
+
+  def __get_raw_image_rpicam(self):
+    logger.debug('Using RPICAM')
+    stream = BytesIO()
+    try:
+      with PiCamera(resolution=(1920, 1080)) as camera:
+        logger.debug('Open rpicam')
+        camera.start_preview()
+        logger.debug('Wait %s seconds for preview' % (self.webam_warm_up,))
+        sleep(self.webam_warm_up)
+        logger.debug('Save rpicam to jpeg')
+        camera.capture(stream, format='jpeg')
+        logger.debug('Done creating RPICAM image')
+        self.state = True
+    except PiCameraError, err:
+      logging.error('Error getting raw RPI image: %s' % (err,))
+      self.state = False
+    
+    return stream
+  
+  def __get_raw_image_usb(self):
+    logger.debug('Using USB device: %s' % (self.location,))
+    readok = False
+    stream = StringIO.StringIO()
+
+    try:
+      logger.debug('Open USB')
+      camera = cv2.VideoCapture(int(self.location[10:]))
+      logger.debug('Set USB height to 1280')
+      camera.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, 1280)
+      logger.debug('Set USB width to 720')
+      camera.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, 720)
+      logger.debug('Wait 2 seconds for preview')
+      sleep(2)
+      logger.debug('Save USB to raw data')
+      readok, image = camera.read()
+
+      if readok:
+        logger.debug('Save USB to jpeg')
+        jpeg = Image.fromarray(cv2.cvtColor(image,cv2.COLOR_BGR2RGB))
+        jpeg.save(stream,'JPEG')
+        logger.debug('Done creating USB image')
+        
+      logger.debug('Release USB camera')
+      camera.release()
+      logger.debug('Done release USB camera')
+      self.state = readok
+    except Exception, err:
+      logging.error('Error getting raw USB image: %s' % (err,))
+      self.state = False
+
+    return stream
+  
+  def __get_raw_image_url(self,stream):
+    logger.debug('Using URL: %s' % (self.location,))
+    stream = StringIO.StringIO()
+    try:
+      if '@' in self.location:
+        start = self.location.find('://') + 3
+        end = self.location.find('@', start)
+        auth = self.location[start:end]
+        webcamurl = urllib2.Request(self.location.replace(auth+'@',''))
+        auth = auth.split(':')
+        base64string = base64.encodestring('%s:%s' % (auth[0], auth[1])).replace('\n', '')
+        webcamurl.add_header("Authorization", "Basic %s" % base64string)
+      else:
+        webcamurl = urllib2.Request(self.location)
+
+      stream = StringIO.StringIO(urllib2.urlopen(webcamurl,None,15).read())
+      self.state = True
+    except Exception, err:
+      logging.error('Error getting raw HTTP image: %s' % (err,))
+      self.state = False
+  
+    return stream
 
   def __get_offline_image(self):
 
@@ -210,11 +250,9 @@ class terrariumWebcam():
       logger.debug('Scale raw image to new canvas size (%sx%s)' % (canvas_width,canvas_height))
       source = self.raw_image.resize((int(round(source_width)),int(round(source_height))))
       # Set the timestamp on resized image
-      logger.debug('Put timestamp on scaled image')
       self.__set_timestamp(source)
 
       # Calculate the center in the canvas for pasting raw image
-      logger.debug('Calculate center position')
       paste_center_position = (int(round((canvas_width - source_width) / 2)),int(round((canvas_height - source_height) / 2)))
       logger.debug('Pasting resized image to center of canvas at position %s' % (paste_center_position,))
       canvas.paste(source,paste_center_position)
@@ -241,6 +279,13 @@ class terrariumWebcam():
     del source
     del canvas
 
+  def update(self):
+    logger.info('Updating webcam %s at location %s' % (self.get_name(), self.get_location(),))
+    self.__get_raw_image()
+    if self.get_state() == 'online':
+      self.__tile_image()
+    logger.info('Done updating webcam %s at location %s' % (self.get_name(), self.get_location(),))
+    
   def get_data(self):
     return {'id': self.get_id(),
             'location': self.get_location(),
@@ -253,12 +298,6 @@ class terrariumWebcam():
             'image': self.get_raw_image(),
             'preview': self.get_preview_image()
             }
-
-  def update(self):
-    logger.info('Updating webcam %s at location %s' % (self.get_name(), self.get_location(),))
-    self.__get_raw_image()
-    self.__tile_image()
-    logger.info('Done updating webcam %s at location %s' % (self.get_name(), self.get_location(),))
 
   def get_id(self):
     return self.id
