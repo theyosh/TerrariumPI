@@ -16,6 +16,7 @@
                   <a aria-expanded="false" data-toggle="tab" href="#webinterface" id="webinterface-tab2" role="tab">Webinterface</a>
                 </li>
               </ul>
+              <p>Here you can see the software that is used in TerrariumPI</p>
               <div class="tab-content" id="myTabContent">
                 <div aria-labelledby="raspbian-tab" class="tab-pane fade active in" id="raspbian" role="tabpanel">
                   <p class="lead">Raspbian</p>

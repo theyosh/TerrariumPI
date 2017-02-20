@@ -22,6 +22,7 @@
                   <a aria-expanded="false" data-toggle="tab" href="#water" id="water-tab2" role="tab">Water sprayer</a>
                 </li>
               </ul>
+              <p>Here you can see the hardware that is used in TerrariumPI</p>
               <div class="tab-content" id="myTabContent">
                 <div aria-labelledby="pi-tab" class="tab-pane fade active in" id="pi" role="tabpanel">
                   <p class="lead">Raspberry Pi</p>
