@@ -108,8 +108,13 @@ canvas.gauge {
 .x_title .power_switch span.blue {
   color: #3498DB;
 }
-/* Webcam */
+div.row.door div.sidebar-widget i.fa {
+  display:block !important;
+  text-align: center;
+  font-size: 1350% !important;
+}
 
+/* Webcam */
 
 /* Webcam Preview */
 .webcam_preview img {

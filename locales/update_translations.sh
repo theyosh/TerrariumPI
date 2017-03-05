@@ -84,6 +84,16 @@ echo "msgid \"System settings\"" >> terrariumpi.pot
 echo "msgstr \"\"" >> terrariumpi.pot
 echo "" >> terrariumpi.pot
 
+echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"open\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
+echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"closed\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
 sed -e 's@YEAR ORGANIZATION@2016 TheYOSH@g' \
     -e 's@FIRST AUTHOR <EMAIL\@ADDRESS>, YEAR@Joshua (TheYOSH) Rubingh, <theyosh\@theyosh.nl>, 2016@g' \
     -i terrariumpi.pot

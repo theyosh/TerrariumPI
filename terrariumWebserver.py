@@ -155,6 +155,9 @@ class terrariumWebserver():
 
     if 'switches' == action:
       result = self.__terrariumEngine.get_switches(parameters)
+      
+    if 'door' == action:
+      result = {'door' : self.__terrariumEngine.door_status()}
 
     elif 'sensors' == action:
       result = self.__terrariumEngine.get_sensors(parameters)

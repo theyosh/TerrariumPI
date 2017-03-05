@@ -315,6 +315,7 @@ class terrariumEngine():
   # Door part
   def door_status(self, socket = False):
     data = self.door_sensor.get_status()
+    self.collector.log_door_data(data)
 
     if socket:
       self.__send_message({'type':'door_indicator','data': data})

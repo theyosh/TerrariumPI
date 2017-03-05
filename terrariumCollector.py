@@ -55,6 +55,16 @@ class terrariumCollector():
       cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS switch_data_unique ON switch_data(id,timestamp ASC)')
       cur.execute('CREATE INDEX IF NOT EXISTS switch_data_timestamp ON switch_data(timestamp ASC)')
       cur.execute('CREATE INDEX IF NOT EXISTS switch_data_id ON switch_data(id)')
+      
+      cur.execute('''CREATE TABLE IF NOT EXISTS door_data
+                      (id INTEGER(4),
+                       timestamp INTEGER(4),
+                       state TEXT CHECK( state IN ('open','closed') ) NOT NULL DEFAULT 'closed'
+                       )''')
+
+      cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS door_data_unique ON door_data(id,timestamp ASC)')
+      cur.execute('CREATE INDEX IF NOT EXISTS door_data_timestamp ON door_data(timestamp ASC)')
+      cur.execute('CREATE INDEX IF NOT EXISTS door_data_id ON door_data(id)')
 
       cur.execute('''CREATE TABLE IF NOT EXISTS weather_data
                       (timestamp INTEGER(4),
@@ -86,14 +96,14 @@ class terrariumCollector():
 
     self.db.commit()
 
-  def __log_data(self,type,id,datatype,newdata):
+  def __log_data(self,type,id,newdata):
     if self.__recovery:
       logger.warn('TerrariumPI Collecter is in recovery modus. Cannot store new logging data!')
       return
     
     now = int(time.time())
     rows = []
-    if 'switches' != type:
+    if 'switches' != type and 'door' != type:
       now -= (now % 60)
 
     try:
@@ -107,6 +117,10 @@ class terrariumCollector():
         if type in ['switches']:
           cur.execute('REPLACE INTO switch_data (id, timestamp, state, power_wattage, water_flow) VALUES (?,?,?,?,?)',
                       (id, now, newdata['state'], newdata['power_wattage'], newdata['water_flow']))
+          
+        if type in ['door']:
+          cur.execute('REPLACE INTO door_data (id, timestamp, state) VALUES (?,?,?)',
+                      (1, now, newdata))
   
         if type in ['weather']:
           cur.execute('REPLACE INTO weather_data (timestamp, wind_speed, temperature, pressure, wind_direction, weather, icon) VALUES (?,?,?,?,?,?,?)',
@@ -161,12 +175,15 @@ class terrariumCollector():
     del(switch['id'])
     del(switch['name'])
     del(switch['nr'])
-    self.__log_data('switches',switch_id,'rawdata',switch)
+    self.__log_data('switches',switch_id,switch)
+    
+  def log_door_data(self,door):
+    self.__log_data('door',None, door)
 
   def log_weather_data(self,weather):
     del(weather['from'])
     del(weather['to'])
-    self.__log_data('weather',None,'rawdata',weather)
+    self.__log_data('weather',None,weather)
 
   def log_sensor_data(self,sensor):
     sensor_data  = sensor.get_data()
@@ -174,10 +191,10 @@ class terrariumCollector():
     del(sensor_data['address'])
     del(sensor_data['type'])
     del(sensor_data['name'])
-    self.__log_data(sensor.get_type(),sensor.get_id(),'rawdata',sensor_data)
+    self.__log_data(sensor.get_type(),sensor.get_id(),sensor_data)
 
   def log_system_data(self, data):
-    self.__log_data('system',None,'rawdata',data)
+    self.__log_data('system',None,data)
 
   def log_total_power_and_water_usage(self,pi_wattage):
     if self.__recovery:
@@ -191,8 +208,8 @@ class terrariumCollector():
 
     sql = '''SELECT
               switch_data_duration.id,
-		          switch_data_duration.timestamp AS aan,
-		          switch_data.timestamp AS uit,
+              switch_data_duration.timestamp AS aan,
+              switch_data.timestamp AS uit,
               switch_data.power_wattage,
               switch_data.water_flow ,
               switch_data.timestamp - max(switch_data_duration.timestamp) AS duration
@@ -277,7 +294,7 @@ class terrariumCollector():
     if stoptime is None:
       stoptime = starttime - (24 * 60 * 60)
 
-    if parameters[-1] in periods.keys():
+    if len(parameters) > 0 and parameters[-1] in periods.keys():
       stoptime = starttime - periods[parameters[-1]] * 60 * 60
       modulo = (periods[parameters[-1]] / 24) * self.modulo
       del(parameters[-1])
@@ -329,6 +346,21 @@ class terrariumCollector():
       elif len(parameters) > 0 and parameters[0] is not None:
         sql = sql + ' and id = ?'
         filters = (stoptime,starttime,parameters[0],)
+        
+    elif logtype == 'door':
+      fields = { 'state' : []}
+      sql = 'SELECT id, "door" as type, timestamp, ' + ', '.join(fields.keys()) + ' FROM door_data WHERE timestamp >= ? and timestamp <= ? '
+      if len(parameters) > 0 and parameters[0] == 'summary':
+        fields = ['total_power', 'total_water', 'duration']
+        filters = ('total',)
+        # Temporary overrule.... :P
+        sql = '''
+          SELECT ''' + str(stoptime) + ''' as timestamp,
+                  MAX(timestamp) - MIN(timestamp) as duration,
+                  SUM(power_wattage) as total_power,
+                  SUM(water_flow) as total_water
+            FROM switch_data
+            WHERE id = ? '''
 
     elif logtype == 'weather':
       fields = { 'wind_speed' : [], 'temperature' : [], 'pressure' : [] , 'wind_direction' : [], 'rain' : [],

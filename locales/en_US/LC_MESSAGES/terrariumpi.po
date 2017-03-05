@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2017-02-20 20:36+CET\n"
-"PO-Revision-Date: 2017-02-20 20:36+0100\n"
+"POT-Creation-Date: 2017-03-05 22:45+CET\n"
+"PO-Revision-Date: 2017-03-05 22:45+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -45,7 +45,7 @@ msgstr "Data saved"
 msgid "Your changes are saved"
 msgstr "Your changes are saved"
 
-#: views/dashboard.tpl:7 views/system_status.tpl:174
+#: views/dashboard.tpl:7 views/system_status.tpl:227
 msgid "Uptime"
 msgstr "Uptime"
 
@@ -81,9 +81,10 @@ msgstr "current"
 #: views/inc/menu.tpl:30 views/inc/menu.tpl:44 views/inc/menu.tpl:55
 #: views/inc/menu.tpl:66 views/inc/menu.tpl:80 views/inc/menu.tpl:111
 #: views/inc/sensor_list.tpl:38 views/switch_status.tpl:34
-#: views/system_status.tpl:32 views/system_status.tpl:88
-#: views/system_status.tpl:144 views/system_status.tpl:200
-#: views/weather_forecast.tpl:16 views/webcam.tpl:16
+#: views/system_status.tpl:32 views/system_status.tpl:85
+#: views/system_status.tpl:141 views/system_status.tpl:197
+#: views/system_status.tpl:253 views/weather_forecast.tpl:16
+#: views/webcam.tpl:16
 msgid "Settings"
 msgstr "Settings"
 
@@ -139,35 +140,40 @@ msgstr "Average Humidity"
 
 #: views/dashboard.tpl:179 views/dashboard.tpl:231
 #: views/inc/sensor_list.tpl:11 views/system_status.tpl:6
-#: views/system_status.tpl:62 views/system_status.tpl:118
+#: views/system_status.tpl:59 views/system_status.tpl:115
+#: views/system_status.tpl:171
 msgid "warning"
 msgstr "warning"
 
 #: views/dashboard.tpl:188 views/dashboard.tpl:240
 #: views/inc/sensor_list.tpl:21 views/switch_status.tpl:17
-#: views/system_status.tpl:15 views/system_status.tpl:71
-#: views/system_status.tpl:127 views/system_status.tpl:183
+#: views/system_status.tpl:15 views/system_status.tpl:68
+#: views/system_status.tpl:124 views/system_status.tpl:180
+#: views/system_status.tpl:236
 msgid "day"
 msgstr "day"
 
 #: views/dashboard.tpl:191 views/dashboard.tpl:243
 #: views/inc/sensor_list.tpl:24 views/switch_status.tpl:20
-#: views/system_status.tpl:18 views/system_status.tpl:74
-#: views/system_status.tpl:130 views/system_status.tpl:186
+#: views/system_status.tpl:18 views/system_status.tpl:71
+#: views/system_status.tpl:127 views/system_status.tpl:183
+#: views/system_status.tpl:239
 msgid "week"
 msgstr "week"
 
 #: views/dashboard.tpl:194 views/dashboard.tpl:246
 #: views/inc/sensor_list.tpl:27 views/switch_status.tpl:23
-#: views/system_status.tpl:21 views/system_status.tpl:77
-#: views/system_status.tpl:133 views/system_status.tpl:189
+#: views/system_status.tpl:21 views/system_status.tpl:74
+#: views/system_status.tpl:130 views/system_status.tpl:186
+#: views/system_status.tpl:242
 msgid "month"
 msgstr "month"
 
 #: views/dashboard.tpl:197 views/dashboard.tpl:249
 #: views/inc/sensor_list.tpl:30 views/switch_status.tpl:26
-#: views/system_status.tpl:24 views/system_status.tpl:80
-#: views/system_status.tpl:136 views/system_status.tpl:192
+#: views/system_status.tpl:24 views/system_status.tpl:77
+#: views/system_status.tpl:133 views/system_status.tpl:189
+#: views/system_status.tpl:245
 msgid "year"
 msgstr "year"
 
@@ -468,14 +474,18 @@ msgid "1-Wire / OWFS port"
 msgstr "1-Wire / OWFS port"
 
 #: views/system_status.tpl:6
+msgid "Door status"
+msgstr "Door status"
+
+#: views/system_status.tpl:59
 msgid "CPU Load"
 msgstr "CPU Load"
 
-#: views/system_status.tpl:62
+#: views/system_status.tpl:115
 msgid "CPU Temperature"
 msgstr "CPU Temperature"
 
-#: views/system_status.tpl:118
+#: views/system_status.tpl:171
 msgid "Memory usage"
 msgstr "Memory usage"
 
@@ -611,4 +621,12 @@ msgstr "System environment"
 #: Missing text string
 msgid "System settings"
 msgstr "System settings"
+
+#: Missing text string
+msgid "open"
+msgstr "open"
+
+#: Missing text string
+msgid "closed"
+msgstr "closed"
 

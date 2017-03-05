@@ -719,7 +719,6 @@ function load_history_graph(id,type,data_url,nocache) {
       });
     }
     if (nocache === 0 && now - globals.graphs[id].timestamp < globals.graph_cache * 1000) {
-      console.log('Use cached graph data');
       history_graph(id, globals.graphs[id].data, type);
       clearTimeout(globals.graphs[id].timer);
       globals.graphs[id].timer = setTimeout(function() {
@@ -728,13 +727,14 @@ function load_history_graph(id,type,data_url,nocache) {
 
     } else {
       // Load fresh data...
-      console.log('Use FRESH graph data');
       $.getJSON(data_url, function(online_data) {
         $.each(online_data, function(dummy, value) {
           $.each(value, function(dummy, data_array) {
             globals.graphs[id].timestamp = now;
             if (type == 'switch') {
               globals.graphs[id].data = process_switch_data(data_array);
+            } else if (type == 'door') {
+              globals.graphs[id].data = process_door_data(data_array);
             } else {
               globals.graphs[id].data = data_array;
             }
@@ -794,7 +794,7 @@ function history_graph(name, data, type) {
       //inverseTransform: function (v) { return -v; }
     },
     yaxis: {
-      ticks: 8,
+      ticks: (type === 'door' ? [[0, '{{_('closed')}}'], [1, '{{_('open')}}']] : 8),
       tickColor: "rgba(51, 51, 51, 0.06)",
       tickDecimals: 1,
       tickFormatter: function(val, axis) {
@@ -817,6 +817,10 @@ function history_graph(name, data, type) {
 
           case 'switch':
             val = val.toFixed(axis.tickDecimals) + ' W';
+            break;
+          
+          case 'door':
+            val = (val ? '{{_('open')}}' : '{{_('closed')}}');
             break;
 
           default:
@@ -905,6 +909,21 @@ function history_graph(name, data, type) {
         data: data.water_flow
       }];
       break;
+    case 'door':
+      delete(graph_options.series.curvedLines);
+      graph_options.series.lines = {
+        show: true,
+        lineWidth: 2,
+        fill: true
+      };
+
+      graph_data = [data.state];
+      graph_data = [{
+        label: '{{_('Door status')}}',
+        data: data.state
+      }];
+      break;
+      
   }
   if (graph_data[0].data.length > 0) {
     var total_data_duration = (graph_data[0].data[graph_data[0].data.length - 1][0] - graph_data[0].data[0][0]) / 3600000;
@@ -997,6 +1016,35 @@ function process_switch_data(raw_data) {
   });
   graphdata.total_power_usage /= 3600
   graphdata.total_water_usage /= 60
+  return graphdata;
+}
+
+function process_door_data(raw_data) {
+  var graphdata = {
+    state: []
+  };
+  var state_change = -1;
+  $.each(raw_data.state, function(counter, status) {
+    status[1] = (status[1] === 'closed' ? 0 : 1)
+    if (!status[1]) {
+      raw_data.state[counter][1] = 0;
+    }
+    var copy = {};
+    if (counter > 0 && state_change != status[1]) {
+      // Copy previous object to get the right status with current timestamp
+      copy = $.extend(true, {}, raw_data.state[counter - 1]);
+      copy[0] = status[0];
+      graphdata.state.push(copy);
+      state_change = status[1];
+    }
+    graphdata.state.push(raw_data.state[counter]);
+    if (counter == raw_data.state.length - 1) {
+      // Add endpoint which is a copy of the last point, with current time
+      copy = $.extend(true, {}, raw_data.state[counter]);
+      copy[0] = (new Date()).getTime();
+      graphdata.state.push(copy);
+    }
+  });
   return graphdata;
 }
 
