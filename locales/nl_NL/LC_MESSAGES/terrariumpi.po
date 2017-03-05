@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2017-03-05 22:45+0100\n"
-"PO-Revision-Date: 2017-03-05 22:46+0100\n"
+"POT-Creation-Date: 2017-03-05 22:53+0100\n"
+"PO-Revision-Date: 2017-03-05 22:53+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -623,6 +623,14 @@ msgstr "open"
 #: Missing text string
 msgid "closed"
 msgstr "gesloten"
+
+#: Missing text string
+msgid "Connection restored"
+msgstr "Connectie is hersteld"
+
+#: Missing text string
+msgid "Connection lost"
+msgstr "Connectie verloren"
 
 #~ msgid "humidity"
 #~ msgstr "luchtvochtigheid"

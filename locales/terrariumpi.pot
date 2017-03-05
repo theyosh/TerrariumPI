@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-03-05 22:45+CET\n"
+"POT-Creation-Date: 2017-03-05 22:53+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -627,5 +627,13 @@ msgstr ""
 
 #: Missing text string
 msgid "closed"
+msgstr ""
+
+#: Missing text string
+msgid "Connection restored"
+msgstr ""
+
+#: Missing text string
+msgid "Connection lost"
 msgstr ""
 
