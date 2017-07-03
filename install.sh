@@ -15,18 +15,13 @@ apt-get -y autoremove
 # Install required packages to get the terrarium software running
 aptitude -y update
 aptitude -y safe-upgrade
-aptitude -y install libftdi1 screen python-imaging python-dateutil python-ow python-rpi.gpio python-psutil git subversion watchdog python-dev python-picamera python-opencv
+aptitude -y install libftdi1 screen python-imaging python-dateutil python-ow python-rpi.gpio python-psutil git subversion watchdog python-dev python-picamera python-opencv python-pip
 
 # Basic config:
 raspi-config
 
 # Set the timezone
 dpkg-reconfigure tzdata
-
-# Manually install python pip, else you will get Python 2.6... :(
-wget https://bootstrap.pypa.io/get-pip.py
-python get-pip.py
-rm get-pip.py
 
 # Install multiple python modules
 pip install gevent untangle uptime bottle bottle_websocket
