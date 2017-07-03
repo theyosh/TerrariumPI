@@ -71,8 +71,9 @@
                 }
                 else {
                     // Otherwise, create a container for the indicator
-                    container = L.DomUtil.create('div', 'leaflet-control-zoom leaflet-bar');
+                    container = L.DomUtil.create('div', 'leaflet-control-zoom leaflet-control-layer-container leaflet-bar');
                 }
+                this._indicatorContainer = container;
                 this._indicator = L.DomUtil.create('a', classes, container);
                 if (this.options.spinjs) {
                     this._spinner = new Spinner(this.options.spin).spin();
@@ -156,6 +157,7 @@
             _showIndicator: function() {
                 // Show loading indicator
                 L.DomUtil.addClass(this._indicator, 'is-loading');
+                L.DomUtil.addClass(this._indicatorContainer, 'is-loading');
 
                 // If zoomControl exists, make the zoom-out button not last
                 if (!this.options.separate) {
@@ -171,6 +173,7 @@
             _hideIndicator: function() {
                 // Hide loading indicator
                 L.DomUtil.removeClass(this._indicator, 'is-loading');
+                L.DomUtil.removeClass(this._indicatorContainer, 'is-loading');
 
                 // If zoomControl exists, make the zoom-out button last
                 if (!this.options.separate) {

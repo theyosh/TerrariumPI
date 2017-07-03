@@ -5,14 +5,16 @@
 }
 
 .leaflet-control-loading,
-.leaflet-control-zoom a.leaflet-control-loading ,
-.leaflet-control-zoomslider a.leaflet-control-loading {
+.leaflet-control-zoom a.leaflet-control-loading,
+.leaflet-control-zoomslider a.leaflet-control-loading,
+.leaflet-control-layer-container {
     display: none;
 }
 
 .leaflet-control-loading.is-loading,
 .leaflet-control-zoom a.leaflet-control-loading.is-loading,
-.leaflet-control-zoomslider a.leaflet-control-loading.is-loading  {
+.leaflet-control-zoomslider a.leaflet-control-loading.is-loading,
+.leaflet-control-layer-container.is-loading {
     display: block;
 }
 
