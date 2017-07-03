@@ -30,9 +30,9 @@
     }
   }).setView([37.8, -96], 4);
 
-  L.tileLayer('http://{s}.tiles.mapbox.com/v4/examples.map-i86l3621/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiOTZQTkFkcyJ9.0DKk_5HaToBWqNOJqCwB-g', {
-    attribution: '<a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox © OpenStreetMap</a>'
-  }).addTo(map);
+    var positron = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+    }).addTo(map);
 </script>
 </body>
 </html>

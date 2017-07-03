@@ -1,3 +1,7 @@
+## 1.0.2
+
+* Invalidate map size on fullscreen toggle (#61)
+
 ## 1.0.1
 
 * Fix package.json main
