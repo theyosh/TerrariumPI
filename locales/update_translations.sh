@@ -6,7 +6,7 @@ pygettext -v -a -n -o locales/terrariumpi.pot views/*.tpl views/inc/*.tpl *.py
 mv views/inc/footer.tpl_tmp views/inc/footer.tpl
 cd -
 
-for translation in `grep -r -h -o -e "_('[^)]\+')" ../views/*.tpl | sed "s/ /%20/g" | sort | uniq`; do
+for translation in `grep -r -h -o -e "_('[^)]\+')" ../views/*.tpl | sed "s/\\\\\'/\\'/g" | sed "s/ /%20/g" |  sort | uniq`; do
   translation=${translation:3:-2}
   translation=${translation//\%20/ }
   if [ `grep -ic "${translation}" terrariumpi.pot` -eq 0 ]; then

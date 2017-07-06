@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2017-03-05 22:53+0100\n"
-"PO-Revision-Date: 2017-03-05 22:53+0100\n"
+"POT-Creation-Date: 2017-07-06 18:05+0200\n"
+"PO-Revision-Date: 2017-07-06 18:16+0200\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -26,7 +26,7 @@ msgid "Authentication"
 msgstr "Authenticatie"
 
 #: terrariumWebserver.py:67 terrariumWebserver.py:73
-#: views/system_settings.tpl:6
+#: views/system_settings.tpl:23
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
@@ -46,15 +46,17 @@ msgstr "Data is opgeslagen"
 msgid "Your changes are saved"
 msgstr "Je wijzigingen zijn opgeslagen"
 
-#: views/dashboard.tpl:7 views/system_status.tpl:227
+#: views/dashboard.tpl:7 views/system_status.tpl:174
 msgid "Uptime"
 msgstr "Actief"
 
-#: views/dashboard.tpl:26 views/switch_settings.tpl:65
+#: views/dashboard.tpl:26 views/switch_settings.tpl:25
+#: views/switch_settings.tpl:96
 msgid "Power usage in Watt"
 msgstr "Stroomverbruik in Watt"
 
-#: views/dashboard.tpl:39 views/switch_settings.tpl:68
+#: views/dashboard.tpl:39 views/switch_settings.tpl:28
+#: views/switch_settings.tpl:99
 msgid "Water flow in L/m"
 msgstr "Waterverbruik in L/m"
 
@@ -70,7 +72,7 @@ msgstr "in"
 msgid "Total water in L"
 msgstr "Totaal waterverbruik in L"
 
-#: views/dashboard.tpl:72 views/inc/menu.tpl:77
+#: views/dashboard.tpl:72 views/inc/menu.tpl:88
 msgid "Environment"
 msgstr "Omgeving"
 
@@ -79,12 +81,12 @@ msgid "current"
 msgstr "huidig"
 
 #: views/dashboard.tpl:81 views/dashboard.tpl:205 views/dashboard.tpl:257
-#: views/inc/menu.tpl:30 views/inc/menu.tpl:44 views/inc/menu.tpl:55
-#: views/inc/menu.tpl:66 views/inc/menu.tpl:80 views/inc/menu.tpl:111
-#: views/inc/sensor_list.tpl:38 views/switch_status.tpl:34
-#: views/system_status.tpl:32 views/system_status.tpl:85
-#: views/system_status.tpl:141 views/system_status.tpl:197
-#: views/system_status.tpl:253 views/weather_forecast.tpl:16
+#: views/door_status.tpl:32 views/inc/menu.tpl:30 views/inc/menu.tpl:44
+#: views/inc/menu.tpl:55 views/inc/menu.tpl:66 views/inc/menu.tpl:77
+#: views/inc/menu.tpl:91 views/inc/menu.tpl:122 views/inc/sensor_list.tpl:38
+#: views/switch_status.tpl:34 views/system_status.tpl:32
+#: views/system_status.tpl:88 views/system_status.tpl:144
+#: views/system_status.tpl:200 views/weather_forecast.tpl:16
 #: views/webcam.tpl:16
 msgid "Settings"
 msgstr "Instellingen"
@@ -93,7 +95,7 @@ msgstr "Instellingen"
 msgid "modus"
 msgstr "mode"
 
-#: views/dashboard.tpl:93 views/system_environment.tpl:7
+#: views/dashboard.tpl:93 views/system_environment.tpl:24
 msgid "Lights"
 msgstr "Lampen"
 
@@ -113,67 +115,74 @@ msgstr "Uit"
 msgid "Duration"
 msgstr "Tijdsduur"
 
-#: views/dashboard.tpl:122 views/system_environment.tpl:91
+#: views/dashboard.tpl:122 views/system_environment.tpl:105
 msgid "Sprayer"
 msgstr "Sproeier"
 
-#: views/dashboard.tpl:132 views/dashboard.tpl:155 views/sensor_settings.tpl:39
+#: views/dashboard.tpl:132 views/dashboard.tpl:155 views/sensor_settings.tpl:37
+#: views/sensor_settings.tpl:79
 msgid "Current"
 msgstr "Huidig"
 
-#: views/dashboard.tpl:138 views/dashboard.tpl:161 views/sensor_settings.tpl:27
+#: views/dashboard.tpl:138 views/dashboard.tpl:161 views/sensor_settings.tpl:25
+#: views/sensor_settings.tpl:67
 msgid "Alarm min"
-msgstr "Alarm min."
+msgstr "Alarm min"
 
-#: views/dashboard.tpl:145 views/system_environment.tpl:157
+#: views/dashboard.tpl:145 views/system_environment.tpl:168
 msgid "Heater"
 msgstr "Verwarming"
 
-#: views/dashboard.tpl:167 views/sensor_settings.tpl:30
+#: views/dashboard.tpl:167 views/sensor_settings.tpl:28
+#: views/sensor_settings.tpl:70
 msgid "Alarm max"
-msgstr "Alarm max."
+msgstr "Alarm max"
 
 #: views/dashboard.tpl:179
 msgid "Average Humidity"
 msgstr "Gemiddelde luchtvochtigheid"
 
-#: views/dashboard.tpl:179 views/dashboard.tpl:231 views/inc/sensor_list.tpl:11
-#: views/system_status.tpl:6 views/system_status.tpl:59
-#: views/system_status.tpl:115 views/system_status.tpl:171
+#: views/dashboard.tpl:179 views/dashboard.tpl:231 views/door_status.tpl:6
+#: views/inc/sensor_list.tpl:11 views/system_status.tpl:6
+#: views/system_status.tpl:62 views/system_status.tpl:118
 msgid "warning"
 msgstr "waarschuwing"
 
-#: views/dashboard.tpl:188 views/dashboard.tpl:240 views/inc/sensor_list.tpl:21
-#: views/switch_status.tpl:17 views/system_status.tpl:15
-#: views/system_status.tpl:68 views/system_status.tpl:124
-#: views/system_status.tpl:180 views/system_status.tpl:236
+#: views/dashboard.tpl:188 views/dashboard.tpl:240 views/door_status.tpl:15
+#: views/inc/sensor_list.tpl:21 views/switch_status.tpl:17
+#: views/system_status.tpl:15 views/system_status.tpl:71
+#: views/system_status.tpl:127 views/system_status.tpl:183
 msgid "day"
 msgstr "dag"
 
-#: views/dashboard.tpl:191 views/dashboard.tpl:243 views/inc/sensor_list.tpl:24
-#: views/switch_status.tpl:20 views/system_status.tpl:18
-#: views/system_status.tpl:71 views/system_status.tpl:127
-#: views/system_status.tpl:183 views/system_status.tpl:239
+#: views/dashboard.tpl:191 views/dashboard.tpl:243 views/door_status.tpl:18
+#: views/inc/sensor_list.tpl:24 views/switch_status.tpl:20
+#: views/system_status.tpl:18 views/system_status.tpl:74
+#: views/system_status.tpl:130 views/system_status.tpl:186
 msgid "week"
 msgstr "week"
 
-#: views/dashboard.tpl:194 views/dashboard.tpl:246 views/inc/sensor_list.tpl:27
-#: views/switch_status.tpl:23 views/system_status.tpl:21
-#: views/system_status.tpl:74 views/system_status.tpl:130
-#: views/system_status.tpl:186 views/system_status.tpl:242
+#: views/dashboard.tpl:194 views/dashboard.tpl:246 views/door_status.tpl:21
+#: views/inc/sensor_list.tpl:27 views/switch_status.tpl:23
+#: views/system_status.tpl:21 views/system_status.tpl:77
+#: views/system_status.tpl:133 views/system_status.tpl:189
 msgid "month"
 msgstr "maand"
 
-#: views/dashboard.tpl:197 views/dashboard.tpl:249 views/inc/sensor_list.tpl:30
-#: views/switch_status.tpl:26 views/system_status.tpl:24
-#: views/system_status.tpl:77 views/system_status.tpl:133
-#: views/system_status.tpl:189 views/system_status.tpl:245
+#: views/dashboard.tpl:197 views/dashboard.tpl:249 views/door_status.tpl:24
+#: views/inc/sensor_list.tpl:30 views/switch_status.tpl:26
+#: views/system_status.tpl:24 views/system_status.tpl:80
+#: views/system_status.tpl:136 views/system_status.tpl:192
 msgid "year"
 msgstr "jaar"
 
 #: views/dashboard.tpl:231
 msgid "Average Temperature"
 msgstr "Gemiddelde temperatuur"
+
+#: views/door_status.tpl:6
+msgid "Door status"
+msgstr "Deur status"
 
 #: views/inc/menu.tpl:10
 msgid "Welcome"
@@ -187,8 +196,8 @@ msgstr "Algemeen"
 msgid "Home"
 msgstr "Thuis"
 
-#: views/inc/menu.tpl:24 views/system_environment.tpl:38
-#: views/system_environment.tpl:195 views/weather_forecast.tpl:7
+#: views/inc/menu.tpl:24 views/system_environment.tpl:52
+#: views/system_environment.tpl:203 views/weather_forecast.tpl:7
 #: views/weather_settings.tpl:6
 msgid "Weather"
 msgstr "Weer"
@@ -213,273 +222,353 @@ msgstr "Luchtvochtigheid"
 msgid "Switches"
 msgstr "Schakelaars"
 
-#: views/inc/menu.tpl:52 views/inc/menu.tpl:74 views/system_environment.tpl:20
-#: views/system_environment.tpl:104 views/system_environment.tpl:170
+#: views/inc/menu.tpl:52 views/inc/menu.tpl:63 views/inc/menu.tpl:85
+#: views/system_environment.tpl:34 views/system_environment.tpl:115
+#: views/system_environment.tpl:178
 msgid "Status"
 msgstr "Status"
 
-#: views/inc/menu.tpl:60 views/webcam.tpl:7 views/webcam_settings.tpl:8
+#: views/inc/menu.tpl:60
+msgid "Doors"
+msgstr "Deuren"
+
+#: views/inc/menu.tpl:71 views/webcam.tpl:7 views/webcam_settings.tpl:39
 msgid "Webcam"
 msgstr "Webcam"
 
-#: views/inc/menu.tpl:63
+#: views/inc/menu.tpl:74
 msgid "Show"
 msgstr "Toon"
 
-#: views/inc/menu.tpl:71
+#: views/inc/menu.tpl:82
 msgid "System"
 msgstr "Systeem"
 
-#: views/inc/menu.tpl:87
+#: views/inc/menu.tpl:98
 msgid "About"
 msgstr "Over"
 
-#: views/inc/menu.tpl:90
+#: views/inc/menu.tpl:101 views/sensor_settings.tpl:4
+#: views/switch_settings.tpl:4 views/system_environment.tpl:4
+#: views/system_settings.tpl:4 views/webcam_settings.tpl:4
 msgid "Help"
 msgstr "Hulp"
 
-#: views/inc/menu.tpl:93
+#: views/inc/menu.tpl:104
 msgid "Info"
 msgstr "Informatie"
 
-#: views/inc/menu.tpl:96
+#: views/inc/menu.tpl:107
 msgid "Usage"
 msgstr "Gebruik"
 
-#: views/inc/menu.tpl:99
+#: views/inc/menu.tpl:110
 msgid "Software"
 msgstr "Software"
 
-#: views/inc/menu.tpl:102
+#: views/inc/menu.tpl:113
 msgid "Hardware"
 msgstr "Hardware"
 
-#: views/inc/menu.tpl:112
+#: views/inc/menu.tpl:123
 msgid "FullScreen"
 msgstr "Volledig scherm"
 
-#: views/inc/menu.tpl:113
+#: views/inc/menu.tpl:124
 msgid "Lock"
 msgstr "Vergrendelen"
 
-#: views/inc/menu.tpl:114
+#: views/inc/menu.tpl:125
 msgid "Logout"
 msgstr "Uitloggen"
 
-#: views/inc/menu.tpl:126
+#: views/inc/menu.tpl:137
 msgid "date/time"
 msgstr "datum/tijd"
 
-#: views/inc/menu.tpl:129
+#: views/inc/menu.tpl:140
 msgid "Door is closed"
 msgstr "Deur is gesloten"
 
-#: views/inc/menu.tpl:129
+#: views/inc/menu.tpl:140
 msgid "Door is open"
 msgstr "Deur is geopend"
 
-#: views/inc/menu.tpl:133 views/inc/menu.tpl:143
+#: views/inc/menu.tpl:144 views/inc/menu.tpl:154
 msgid "No messages"
 msgstr "Geen berichten"
 
-#: views/inc/menu.tpl:139
+#: views/inc/menu.tpl:150
 msgid "Offline"
 msgstr "Offline"
 
-#: views/inc/menu.tpl:139
+#: views/inc/menu.tpl:150
 msgid "Online"
 msgstr "Online"
 
-#: views/sensor_settings.tpl:8 views/system_environment.tpl:198
-msgid "Sensor"
-msgstr "Sensor"
+#: views/sensor_settings.tpl:16
+msgid ""
+"Enter per sensor the values. The icon in front of the sensors shows if it is "
+"a humidity or temperature sensor. The address and current fields are "
+"readonly. The fields are:"
+msgstr ""
 
-#: views/sensor_settings.tpl:21
+#: views/sensor_settings.tpl:19
+msgid "Shows the 1-wire address of the sensor. (readonly)"
+msgstr ""
+
+#: views/sensor_settings.tpl:19 views/sensor_settings.tpl:61
 msgid "Address"
 msgstr "Adres"
 
-#: views/sensor_settings.tpl:24 views/switch_settings.tpl:62
-#: views/webcam_settings.tpl:28
+#: views/sensor_settings.tpl:22
+msgid "Holds the name of the sensor."
+msgstr "Bevat de naam van de sensor"
+
+#: views/sensor_settings.tpl:22 views/sensor_settings.tpl:64
+#: views/switch_settings.tpl:22 views/switch_settings.tpl:93
+#: views/webcam_settings.tpl:22 views/webcam_settings.tpl:59
 msgid "Name"
 msgstr "Naam"
 
-#: views/sensor_settings.tpl:33
+#: views/sensor_settings.tpl:25
+msgid ""
+"Holds the lower limit of the sensor. When below this value, alarms will "
+"trigger. Like humidity gets to low, it will trigger the spraying system."
+msgstr ""
+
+#: views/sensor_settings.tpl:28
+msgid ""
+"Holds the maximum limit of the sensor. When above this value, it will show "
+"alarms to indicate but no triggers."
+msgstr ""
+
+#: views/sensor_settings.tpl:31
+msgid "Holds the lowest value that should be used in the graphs."
+msgstr ""
+
+#: views/sensor_settings.tpl:31 views/sensor_settings.tpl:73
 msgid "Limit min"
-msgstr "Limiet min."
+msgstr "Limiet min"
 
-#: views/sensor_settings.tpl:36
+#: views/sensor_settings.tpl:34
+msgid "Holds the maximum value that should be used in the graphs."
+msgstr ""
+
+#: views/sensor_settings.tpl:34 views/sensor_settings.tpl:76
 msgid "Limit max"
-msgstr "Limiet max."
+msgstr "Limiet max"
 
-#: views/sensor_settings.tpl:51 views/switch_settings.tpl:80
-#: views/system_environment.tpl:243 views/system_settings.tpl:89
-#: views/weather_settings.tpl:59 views/webcam_settings.tpl:70
+#: views/sensor_settings.tpl:37
+msgid "Shows the current value in temperature or humidity."
+msgstr ""
+
+#: views/sensor_settings.tpl:48 views/system_environment.tpl:206
+msgid "Sensor"
+msgstr "Sensor"
+
+#: views/sensor_settings.tpl:91 views/switch_settings.tpl:111
+#: views/system_environment.tpl:251 views/system_settings.tpl:106
+#: views/weather_settings.tpl:59 views/webcam_settings.tpl:101
 msgid "Submit"
 msgstr "Opslaan"
 
-#: views/switch_settings.tpl:7
-msgid "Device type"
-msgstr "Apperaattype"
+#: views/switch_settings.tpl:16
+msgid ""
+"Here you can setup your power switches. First select the amount of switches "
+"that are being used. Then enter per switch the following information:"
+msgstr ""
 
-#: views/switch_settings.tpl:7
-msgid "Powerswitch board"
-msgstr "Stroomschakelbord"
+#: views/switch_settings.tpl:19
+msgid "Shows the switch ID. (readonly)"
+msgstr ""
 
-#: views/switch_settings.tpl:20
-msgid "Amount of switches"
-msgstr "Totaal aantal schakelaars"
-
-#: views/switch_settings.tpl:46 views/switch_status.tpl:7
-msgid "Switch"
-msgstr "Schakelaar"
-
-#: views/switch_settings.tpl:59 views/webcam_settings.tpl:21
+#: views/switch_settings.tpl:19 views/switch_settings.tpl:90
+#: views/webcam_settings.tpl:19 views/webcam_settings.tpl:52
 msgid "ID"
 msgstr "ID"
 
-#: views/system_environment.tpl:7 views/system_environment.tpl:91
-#: views/system_environment.tpl:157
+#: views/switch_settings.tpl:22
+msgid "Holds the name of the switch."
+msgstr ""
+
+#: views/switch_settings.tpl:25
+msgid "Holds the amount of watt of the power comsupmtion when switched on."
+msgstr ""
+
+#: views/switch_settings.tpl:28
+msgid ""
+"Holds the amount of water in liter per minute that is flowing through when "
+"switched on."
+msgstr ""
+
+#: views/switch_settings.tpl:38
+msgid "Device type"
+msgstr "Apperaattype"
+
+#: views/switch_settings.tpl:38
+msgid "Powerswitch board"
+msgstr "Stroomschakelbord"
+
+#: views/switch_settings.tpl:51
+msgid "Amount of switches"
+msgstr "Totaal aantal schakelaars"
+
+#: views/switch_settings.tpl:77 views/switch_status.tpl:7
+msgid "Switch"
+msgstr "Schakelaar"
+
+#: views/system_environment.tpl:16
+msgid ""
+"Here you can adjust the overall environment system. Hover above the settings "
+"to get more information. Or go to the help section."
+msgstr ""
+
+#: views/system_environment.tpl:24 views/system_environment.tpl:105
+#: views/system_environment.tpl:168
 msgid "settings"
 msgstr "instellingen"
 
-#: views/system_environment.tpl:23 views/system_environment.tpl:107
-#: views/system_environment.tpl:115 views/system_environment.tpl:173
-#: views/system_environment.tpl:181
+#: views/system_environment.tpl:37 views/system_environment.tpl:118
+#: views/system_environment.tpl:126 views/system_environment.tpl:181
+#: views/system_environment.tpl:189
 msgid "Disabled"
 msgstr "Gedeactiveerd"
 
-#: views/system_environment.tpl:23 views/system_environment.tpl:107
-#: views/system_environment.tpl:115 views/system_environment.tpl:173
-#: views/system_environment.tpl:181
+#: views/system_environment.tpl:37 views/system_environment.tpl:118
+#: views/system_environment.tpl:126 views/system_environment.tpl:181
+#: views/system_environment.tpl:189
 msgid "Enabled"
 msgstr "Geactiveerd"
 
-#: views/system_environment.tpl:28
+#: views/system_environment.tpl:42
 msgid "Light modus"
 msgstr "Lampen modus"
 
-#: views/system_environment.tpl:35 views/system_environment.tpl:192
+#: views/system_environment.tpl:49 views/system_environment.tpl:200
 msgid "Timer"
 msgstr "Klok"
 
-#: views/system_environment.tpl:45
+#: views/system_environment.tpl:59
 msgid "Lights on"
 msgstr "Lampen aan"
 
-#: views/system_environment.tpl:51
+#: views/system_environment.tpl:65
 msgid "Lights off"
 msgstr "Lampen uit"
 
-#: views/system_environment.tpl:57
+#: views/system_environment.tpl:71
 msgid "Maximal lights hours"
 msgstr "Maximaal aantal uren verlichten"
 
-#: views/system_environment.tpl:63
+#: views/system_environment.tpl:77
 msgid "Minimal light hours"
 msgstr "Minimaal aantal uren verlichten"
 
-#: views/system_environment.tpl:69
+#: views/system_environment.tpl:83
 msgid "Hours shift"
 msgstr "Uren opschuiven"
 
-#: views/system_environment.tpl:75 views/system_environment.tpl:132
-#: views/system_environment.tpl:217
+#: views/system_environment.tpl:89 views/system_environment.tpl:143
+#: views/system_environment.tpl:225
 msgid "Power switches"
 msgstr "Stroomschakelaars"
 
-#: views/system_environment.tpl:112
+#: views/system_environment.tpl:123
 msgid "Enabled during the night"
 msgstr "'s Nachts aan"
 
-#: views/system_environment.tpl:120
+#: views/system_environment.tpl:131
 msgid "Sprayer wait timeout (seconds)"
 msgstr "Sproeier wachttijd tijd (in seconden)"
 
-#: views/system_environment.tpl:126
+#: views/system_environment.tpl:137
 msgid "Sprayer spray duration (seconds)"
 msgstr "Sproeier sproei tijd (in seconden)"
 
-#: views/system_environment.tpl:141
+#: views/system_environment.tpl:152
 msgid "Humidity sensors"
 msgstr "Luchtvochtigheid sensoren"
 
-#: views/system_environment.tpl:178
+#: views/system_environment.tpl:186
 msgid "Enabled during the day"
 msgstr "Overdag aan"
 
-#: views/system_environment.tpl:186
+#: views/system_environment.tpl:194
 msgid "Heater modus"
 msgstr "Verwarming modus"
 
-#: views/system_environment.tpl:205
+#: views/system_environment.tpl:213
 msgid "Heater on"
 msgstr "Verwarming uit"
 
-#: views/system_environment.tpl:211
+#: views/system_environment.tpl:219
 msgid "Heater off"
 msgstr "Verwarming aan"
 
-#: views/system_environment.tpl:226
+#: views/system_environment.tpl:234
 msgid "Temperature sensors"
 msgstr "Temperatuur sensoren"
 
-#: views/system_settings.tpl:17
+#: views/system_settings.tpl:16
+msgid ""
+"Here you can adjust the basic system. Hover above the settings to get more "
+"information. Or go to the help section."
+msgstr ""
+
+#: views/system_settings.tpl:34
 msgid "Language"
 msgstr "Taal"
 
-#: views/system_settings.tpl:27
+#: views/system_settings.tpl:44
 msgid "Admin name"
 msgstr "Beheerdersnaam"
 
-#: views/system_settings.tpl:33
+#: views/system_settings.tpl:50
 msgid "New admin password"
 msgstr "Nieuw beheerswachtwoord"
 
-#: views/system_settings.tpl:39
+#: views/system_settings.tpl:56
 msgid "Current admin password"
 msgstr "Huidige beheerswachtwoord"
 
-#: views/system_settings.tpl:45
+#: views/system_settings.tpl:62
 msgid "Pi power usage in W"
 msgstr "Stroomverbruik Pi in W."
 
-#: views/system_settings.tpl:51
+#: views/system_settings.tpl:68
 msgid "Power price"
 msgstr "Stroom prijs"
 
-#: views/system_settings.tpl:57
+#: views/system_settings.tpl:74
 msgid "Water price"
 msgstr "Water prijs"
 
-#: views/system_settings.tpl:63
+#: views/system_settings.tpl:80
 msgid "IP or hostname"
 msgstr "IP of hostnaam"
 
-#: views/system_settings.tpl:69
+#: views/system_settings.tpl:86
 msgid "Port number"
 msgstr "Poort nummer"
 
-#: views/system_settings.tpl:75
+#: views/system_settings.tpl:92
 msgid "Door GPIO pin"
 msgstr "Deur GPIO pin"
 
-#: views/system_settings.tpl:81
+#: views/system_settings.tpl:98
 msgid "1-Wire / OWFS port"
 msgstr "1-Wire / OWFS poort"
 
 #: views/system_status.tpl:6
-msgid "Door status"
-msgstr "Deur status"
-
-#: views/system_status.tpl:59
 msgid "CPU Load"
 msgstr "Processor belasting"
 
-#: views/system_status.tpl:115
+#: views/system_status.tpl:62
 msgid "CPU Temperature"
 msgstr "Processor temperatuur"
 
-#: views/system_status.tpl:171
+#: views/system_status.tpl:118
 msgid "Memory usage"
 msgstr "Geheugen verbruik"
 
@@ -519,7 +608,8 @@ msgstr "Dagvoorspelling"
 msgid "Week forecast"
 msgstr "Weekvoorspelling"
 
-#: views/weather_settings.tpl:17 views/webcam_settings.tpl:31
+#: views/weather_settings.tpl:17 views/webcam_settings.tpl:25
+#: views/webcam_settings.tpl:62
 msgid "Location"
 msgstr "Locatie"
 
@@ -535,26 +625,201 @@ msgstr "m/s."
 msgid "km/h"
 msgstr "Km/h"
 
-#: views/webcam_settings.tpl:24
-msgid "Preview"
-msgstr "Voorbeeld"
+#: views/webcam_settings.tpl:16
+msgid ""
+"Here you can setup the webcams that are used. Per webcam fill in the "
+"following fields:"
+msgstr ""
 
-#: views/webcam_settings.tpl:34
+#: views/webcam_settings.tpl:19
+msgid "Shows the webcam ID. (readonly)"
+msgstr ""
+
+#: views/webcam_settings.tpl:22
+msgid "Holds the name of the webcam."
+msgstr ""
+
+#: views/webcam_settings.tpl:25
+msgid ""
+"Holds the location of the source. For Raspberry PI cam use '%s'. For V4L use "
+"'%s'. And for a remote HTTP webcam use a full url like '%s'."
+msgstr ""
+
+#: views/webcam_settings.tpl:28
+msgid "Holds the rotation value of the webcam."
+msgstr ""
+
+#: views/webcam_settings.tpl:28 views/webcam_settings.tpl:65
 msgid "Picture rotation"
 msgstr "Afbeelding rotatie"
 
-#: views/webcam_settings.tpl:40 views/webcam_settings.tpl:43
-#: views/webcam_settings.tpl:46 views/webcam_settings.tpl:49
+#: views/webcam_settings.tpl:55
+msgid "Preview"
+msgstr "Voorbeeld"
+
+#: views/webcam_settings.tpl:71 views/webcam_settings.tpl:74
+#: views/webcam_settings.tpl:77 views/webcam_settings.tpl:80
 msgid "degrees"
 msgstr "graden"
 
-#: views/webcam_settings.tpl:52
+#: views/webcam_settings.tpl:83
 msgid "Flip Horizontal"
 msgstr "Spiegel horizontaal"
 
-#: views/webcam_settings.tpl:55
+#: views/webcam_settings.tpl:86
 msgid "Flip Vertical"
 msgstr "Spiegel verticaal"
+
+#: Missing text string
+msgid ""
+"Choose the temperature indicator. The software will recalulate to the chosen "
+"indicator"
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Choose the windspeed indicator. The software will recalculate to the chosen "
+"indicator"
+msgstr ""
+
+#: Missing text string
+msgid "Choose your interface language"
+msgstr ""
+
+#: Missing text string
+msgid "Confirm the newly choosen password."
+msgstr ""
+
+#: Missing text string
+msgid "Enable or disable the heating system."
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Enable or disable the lighting system. When enabled, you can make changes "
+"below. By disabling it will not lose the current settings. You can temporary "
+"stop the lightning system."
+msgstr ""
+
+#: Missing text string
+msgid "Enable or disable the spraying system."
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Enable spraying when the lights are off. This can cause water flow when "
+"there is not enough heat to vaporize the water."
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Enable the heating system during day time. Normally the day time lighting "
+"will produce enough heat."
+msgstr ""
+
+#: Missing text string
+msgid "Enter the amount of euro/dollar per 1000 liters water."
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Enter the amount of hours that the lights should shift. Is only needed when "
+"running in the '%s' modus. Enter a positive number for adding hours to the "
+"start time. Use negative numbers for subtracking from the start time"
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Enter the amount of power in Wattage that the Raspberry PI uses including "
+"all USB equipment"
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Enter the full url to the weather data source. For now only YR.no is "
+"supported"
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Enter the hostname or IP address on which the software will listen for "
+"connections. Enter 0.0.0.0 for all adresses to bind to."
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Enter the maximum amount of lights time in hours. When the time between on "
+"and off is more then this maximum, the on and off time will be shifted more "
+"to each other."
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Enter the minimal amount of lights time in hours. When the time between on "
+"and off is less then this amount of hours, the on and off time will be "
+"widenend untill the minimum amount of hours entered here."
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Enter the new password for the administration user. Leaving empty will not "
+"change the password!"
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Enter the port number on which the OWFS software is running. Default is "
+"4304. Make sure the service OWServer is running."
+msgstr ""
+
+#: Missing text string
+msgid "Enter the portnumber on which the software is listening for connections"
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Enter the time when the heating should be put off. Only available when "
+"running in '%s' modus."
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Enter the time when the heating should be put on. Only available when "
+"running in '%s' modus."
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Enter the time when the light should be put on. Only available when running "
+"in '%s' modus."
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Enter the time when the lights should be put off. Only available when "
+"running in '%s' modus."
+msgstr ""
+
+#: Missing text string
+msgid ""
+"How long is the system spraying. Enter the amount of seconds that the system "
+"is on when the humidity is to low."
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Now much time must there be between two spray times and during startup. This "
+"is the amount of time that the humidity can settle and the new hudmity "
+"values are read."
+msgstr ""
+
+#: Missing text string
+msgid "Options"
+msgstr "Opties"
+
+#: Missing text string
+msgid "Period"
+msgstr "Periode"
 
 #: Missing text string
 msgid "Select a number"
@@ -563,6 +828,43 @@ msgstr "Kies een aantal"
 #: Missing text string
 msgid "Select an option"
 msgstr "Maak een keuze"
+
+#: Missing text string
+msgid ""
+"Select the humidity sensors that are use to controll the final humidity. "
+"When selecting multiple sensors, the average is used for determing the "
+"humidity. This is also shown on the dashboard on the right side."
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Select the modus on which the lights will be put on and off. Select weather "
+"to use the sun rise and sun set at your location. This will make the amount "
+"of lighting variable to the actual amount of daylight. When selecting clock, "
+"the light will put on and off at sellected times"
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Select the operating modus. Use '%s' modus to select the time period in "
+"which the heating is running. Select '%s' modus to use the sun rise and sun "
+"set as on and off times. When the sun rises the heating system will stop. "
+"Use '%s' modus to have the heating running when the lights are off."
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Select the power switches that should be toggled on the selected times "
+"above. Normally these are the switches connected to the lights. Select all "
+"needed switches below."
+msgstr ""
+
+#: Missing text string
+msgid ""
+"Select the temperature sensors that are use to controll the final "
+"temperature. When selecting multiple sensors, the average is used for "
+"determing the temperature. This is also shown on the dashboard right side."
+msgstr ""
 
 #: Missing text string
 msgid "Dashboard"
@@ -626,11 +928,11 @@ msgstr "gesloten"
 
 #: Missing text string
 msgid "Connection restored"
-msgstr "Connectie is hersteld"
+msgstr "Verbinding hersteld"
 
 #: Missing text string
 msgid "Connection lost"
-msgstr "Connectie verloren"
+msgstr "Verbinding verloren"
 
 #~ msgid "humidity"
 #~ msgstr "luchtvochtigheid"
