@@ -104,7 +104,7 @@ class terrariumSensor:
       except Exception, err:
         logger.error('Error updating %s sensor %s with error: %s' % (self.get_type(),
                                                                      self.get_name(),
-                                                                     er))
+                                                                     err))
         pass
 
   def get_data(self):
