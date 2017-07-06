@@ -8,7 +8,7 @@
     </footer><!-- /footer content -->
   </div>
   <!-- gauge.js -->
-  <script type="text/javascript" src="/gentelella/vendors/gauge.js/dist/gauge.min.js"></script>
+  <script type="text/javascript" src="/static/js/gauge.min.js"></script>
   <!-- Skycons -->
   <script type="text/javascript" src="/gentelella/vendors/skycons/skycons.js"></script>
   <!-- Flot -->

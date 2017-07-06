@@ -14,8 +14,15 @@ td {
 span.select2.select2-container {
   width: 100% !important;
 }
+
 canvas.gauge {
-  margin: 0 -40px;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.goal-wrapper {
+  padding-left: 45%;
+  font-size: 1.4em;
 }
 
 .sidebar-footer a {

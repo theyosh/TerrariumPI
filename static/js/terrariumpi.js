@@ -648,22 +648,32 @@ function sensor_gauge(name, data) {
     $('#' + name + ' small').text(moment().format('LLL'));
     // Setup a new gauge if needed
     if ($('#' + name + ' .gauge').attr('done') === undefined) {
-      var valid_area = data.alarm_max - data.alarm_min;
+      var total_area = data.max - data.min;
+/*
       var colors = [
-        [0.0, '#E74C3C'],
-        [(data.alarm_min - (0)) / (data.max - data.min), '#f0ad4e'],
-        [(data.alarm_min + (valid_area / 2)) / (data.max - data.min), '#1ABB9C'],
-        [(data.alarm_max + (0)) / (data.max - data.min), '#f0ad4e'],
-        [1.0, '#E74C3C']
+        [0.00, '#E74C3C'],
+        [0.25, '#f0ad4e'],
+        [0.50, '#1ABB9C'],
+        [0.75, '#f0ad4e'],
+        [1.00, '#E74C3C']
       ];
+*/
+      var colors = [
+        [0.00, '#E74C3C'],
+        [(data.alarm_min - data.min) / total_area, '#f0ad4e'],
+        [(((data.alarm_min + data.alarm_max)/2) - data.min) / total_area, '#1ABB9C'],
+        [(data.alarm_max - data.min) / total_area, '#f0ad4e'],
+        [1.00, '#E74C3C']
+      ];
+
       var opts = {
         animationSpeed: 32,
         lines: 12,
         angle: 0,
-        lineWidth: 0.4,
+        lineWidth: 0.6,
         pointer: {
-          length: 0.75,
-          strokeWidth: 0.042,
+          length: 0.80,
+          strokeWidth: 0.070,
           color: '#1D212A'
         },
         limitMax: 'false',
@@ -1091,6 +1101,10 @@ function createWebcamLayer(webcamid, maxzoom) {
     maxNativeZoom: maxzoom,
     maxZoom: maxzoom + 1
   });
+}
+
+function capitalizeFirstLetter(string) {
+    return string[0].toUpperCase() + string.slice(1);
 }
 
 
