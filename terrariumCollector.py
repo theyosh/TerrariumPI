@@ -351,6 +351,10 @@ class terrariumCollector():
       fields = { 'state' : []}
       sql = 'SELECT id, "door" as type, timestamp, ' + ', '.join(fields.keys()) + ' FROM door_data WHERE timestamp >= ? and timestamp <= ? '
 
+      if len(parameters) > 0 and parameters[0] is not None:
+        sql = sql + ' and id = ?'
+        filters = (stoptime,starttime,parameters[0],)
+
     elif logtype == 'weather':
       fields = { 'wind_speed' : [], 'temperature' : [], 'pressure' : [] , 'wind_direction' : [], 'rain' : [],
                  'weather' : [], 'icon' : []}
