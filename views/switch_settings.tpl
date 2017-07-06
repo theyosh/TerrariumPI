@@ -1,4 +1,35 @@
 % include('inc/page_header.tpl')
+        <div class="x_panel">
+          <div class="x_title">
+            <h2><span class="glyphicon glyphicon-info-sign" aria-hidden="true" title="{{_('Information')}}"></span> {{_('Help')}}<small></small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li>
+                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li>
+                <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <p>{{_('Here you can setup your power switches. First select the amount of switches that are being used. Then enter per switch the following information:')}}</p>
+            <ul>
+              <li>
+                <strong>{{_('ID')}}</strong>: {{_('Shows the switch ID. (readonly)')}}
+              </li>
+              <li>
+                <strong>{{_('Name')}}</strong>: {{_('Holds the name of the switch.')}}
+              </li>
+              <li>
+                <strong>{{_('Power usage in Watt')}}</strong>: {{_('Holds the amount of watt of the power comsupmtion when switched on.')}}
+              </li>
+              <li>
+                <strong>{{_('Water flow in L/m')}}</strong>: {{_('Holds the amount of water in liter per minute that is flowing through when switched on.')}}
+              </li>
+            </ul>
+          </div>
+        </div>
         <form action="/api/config/switches" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -10,7 +41,7 @@
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
                     <li>
-                      <a class="close-link"><i class="fa fa-close"></i></a>
+                      <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
                     </li>
                   </ul>
                   <div class="clearfix"></div>
@@ -49,7 +80,7 @@
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
                     <li>
-                      <a class="close-link"><i class="fa fa-close"></i></a>
+                      <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
                     </li>
                   </ul>
                   <div class="clearfix"></div>

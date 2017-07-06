@@ -14,15 +14,15 @@
               <div class="x_content">
                 <form action="/api/config/weather" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
                   <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="location">{{_('Location')}} <span class="required">*</span></label>
-                    <div class="col-md-8 col-sm-8 col-xs-12">
-                      <input class="form-control" id="location" name="location" required="required" type="text" placeholder="{{_('Location')}}">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="location">{{_('Location')}} <span class="required">*</span></label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control" id="location" name="location" required="required" type="text" placeholder="{{_('Location')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Enter the full url to the weather data source. For now only YR.no is supported')}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="windspeed">{{_('Wind speed')}} <span class="required">*</span></label>
-                    <div class="col-md-8 col-sm-8 col-xs-12">
-                      <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="windspeed">{{_('Wind speed')}} <span class="required">*</span></label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Choose the windspeed indicator. The software will recalculate to the chosen indicator')}}">
                         <select class="form-control" name="windspeed" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option>
                             </option>
@@ -37,9 +37,9 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="temperature">{{_('Temperature')}} <span class="required">*</span></label>
-                    <div class="col-md-8 col-sm-8 col-xs-12">
-                      <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature">{{_('Temperature')}} <span class="required">*</span></label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Choose the temperature indicator. The software will recalulate to the chosen indicator')}}">
                         <select class="form-control" name="temperature" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option>
                             </option>

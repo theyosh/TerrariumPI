@@ -1,5 +1,36 @@
 % include('inc/page_header.tpl')
-        <form action="/api/config/webcams" class="form-horizontal form-label-left" data-parsley-validate="" id="switch_settigs_form" method="put" name="switch_settigs_form">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2><span class="glyphicon glyphicon-info-sign" aria-hidden="true" title="{{_('Information')}}"></span> {{_('Help')}}<small></small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li>
+                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li>
+                <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <p>{{_('Here you can setup the webcams that are used. Per webcam fill in the following fields:')}}</p>
+            <ul>
+              <li>
+                <strong>{{_('ID')}}</strong>: {{_('Shows the webcam ID. (readonly)')}}
+              </li>
+              <li>
+                <strong>{{_('Name')}}</strong>: {{_('Holds the name of the webcam.')}}
+              </li>
+              <li>
+                <strong>{{_('Location')}}</strong>: {{_('Holds the location of the source. For Raspberry PI cam use \'%s\'. For V4L use \'%s\'. And for a remote HTTP webcam use a full url like \'%s\'.') % ('rpicam','/dev/video0','https://source.mywebcam.com/stream')}}
+              </li>
+              <li>
+                <strong>{{_('Picture rotation')}}</strong>: {{_('Holds the rotation value of the webcam.')}}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <form action="/api/config/webcams" class="form-horizontal form-label-left" data-parsley-validate="" id="webcam_settings_form" method="put" name="webcam_settings_form">
           % for item in range(0,amount_of_webcams+1):
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -11,7 +42,7 @@
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
                     <li>
-                      <a class="close-link"><i class="fa fa-close"></i></a>
+                      <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
                     </li>
                   </ul>
                   <div class="clearfix"></div>
@@ -86,7 +117,7 @@
               $('img#webcam_' + id + '_preview').removeClass('webcam_90 webcam_180 webcam_270 webcam_H webcam_V').addClass('webcam_' + this.value);
             });
 
-            $.get('/api/config/webcams',function(data) {
+            $.get($('form').attr('action'),function(data) {
               $.each(data.webcams, function(index,webcam) {
                 $(Object.keys(webcam)).each(function(index2,key){
                   $('img#webcam_' + index + '_preview').parents('h2').find('small').text(webcam['last_update']);

@@ -10,7 +10,7 @@
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
                   <li class="dropdown">
-                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-wrench"></i></a>
+                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-wrench" title="{{_('Options')}}"></i></a>
                     <ul class="dropdown-menu" role="menu">
                       <li>
                         <a href="javascript:;" onclick="menu_click('webcam_settings.html')">{{_('Settings')}}</a>
@@ -18,7 +18,7 @@
                     </ul>
                   </li>
                   <li>
-                    <a class="close-link"><i class="fa fa-close"></i></a>
+                    <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
                   </li>
                 </ul>
                 <div class="clearfix"></div>

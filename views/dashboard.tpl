@@ -69,13 +69,13 @@
             <div class="col-md-3 col-sm-3 col-xs-12 pull-right">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2><span class="fa fa-lightbulb-o"></span> <span class="title">{{_('Environment')}}</span> <small>{{_('current')}}</small></h2>
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-cog"></span></span> <span class="title">{{_('Environment')}}</span> <small>{{_('current')}}</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
                     <li class="dropdown">
-                      <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-wrench"></i></a>
+                      <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-wrench" title="{{_('Options')}}"></i></a>
                       <ul class="dropdown-menu" role="menu">
                         <li>
                           <a href="javascript:;" onclick="menu_click('system_environment.html')">{{_('Settings')}}</a>
@@ -83,14 +83,14 @@
                       </ul>
                     </li>
                     <li>
-                      <a class="close-link"><i class="fa fa-close"></i></a>
+                      <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
                     </li>
                   </ul>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                   <div class="row environment_light">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-flash"></span> {{_('Lights')}} <small>{{_('modus')}}: <span></span></small></h4>
+                    <h4><span class="fa fa-lightbulb-o"></span> {{_('Lights')}} <small>{{_('modus')}}: <span></span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
@@ -119,7 +119,7 @@
                     </table>
                   </div>
                   <div class="row environment_sprayer">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red"></span><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Sprayer')}}</h4>
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red"></span><i class="fa fa-tint"></i> {{_('Sprayer')}}</h4>
                     <table class="tile_info">
                       <tr>
                         <td>
@@ -142,7 +142,7 @@
                     </table>
                   </div>
                   <div class="row environment_heater">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red"></span> <span aria-hidden="true" class="glyphicon glyphicon-fire"></span> {{_('Heater')}} <small>{{_('modus')}}: <span></span></small></h4>
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red"></span><i class="fa fa-fire"></i> {{_('Heater')}} <small>{{_('modus')}}: <span></span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
@@ -182,7 +182,7 @@
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
                     <li class="dropdown">
-                      <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-calendar"></i></a>
+                      <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-calendar" title="{{_('Period')}}"></i></a>
                       <ul class="dropdown-menu period" role="menu">
                         <li>
                           <a href="javascript:;" >{{_('day')}}</a>
@@ -199,7 +199,7 @@
                       </ul>
                     </li>
                     <li class="dropdown">
-                      <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-wrench"></i></a>
+                      <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-wrench" title="{{_('Options')}}"></i></a>
                       <ul class="dropdown-menu" role="menu">
                         <li>
                           <a href="javascript:;" onclick="menu_click('sensor_settings.html')">{{_('Settings')}}</a>
@@ -207,7 +207,7 @@
                       </ul>
                     </li>
                     <li>
-                      <a class="close-link"><i class="fa fa-close"></i></a>
+                      <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
                     </li>
                   </ul>
                   <div class="clearfix"></div>
@@ -234,7 +234,7 @@
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
                     <li class="dropdown">
-                      <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-calendar"></i></a>
+                      <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-calendar" title="{{_('Period')}}"></i></a>
                       <ul class="dropdown-menu period" role="menu">
                         <li>
                           <a href="javascript:;" >{{_('day')}}</a>
@@ -251,7 +251,7 @@
                       </ul>
                     </li>
                     <li class="dropdown">
-                      <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-wrench"></i></a>
+                      <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-wrench" title="{{_('Options')}}"></i></a>
                       <ul class="dropdown-menu" role="menu">
                         <li>
                           <a href="javascript:;" onclick="menu_click('sensor_settings.html')">{{_('Settings')}}</a>
@@ -259,7 +259,7 @@
                       </ul>
                     </li>
                     <li>
-                      <a class="close-link"><i class="fa fa-close"></i></a>
+                      <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
                     </li>
                   </ul>
                   <div class="clearfix"></div>
