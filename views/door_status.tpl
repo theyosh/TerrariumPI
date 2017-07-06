@@ -61,7 +61,7 @@
               $.each(data.doors, function(index,door) {
                 // Add an id to the row when first run
                 $(rows[index]).attr('id',door.id);
-
+                $('h2 span.title', rows[index]).text(door.name);
                 $('h2 small', rows[index]).text((door.state === 'closed'  ? '{{_('closed')}}' : '{{_('open')}}' ));
                 $('.sidebar-widget i.fa-lock',rows[index]).removeClass('red','green','closed','open')
                                                   .addClass(door.state + ' ' + (door.state === 'closed' ? 'green':'red'))
