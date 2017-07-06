@@ -6,7 +6,7 @@ from time import time
 from io import BytesIO
 import StringIO
 
-from picamera import PiCamera
+from picamera import PiCamera, PiCameraError
 import cv2
 from PIL import Image, ImageDraw, ImageFont
 
