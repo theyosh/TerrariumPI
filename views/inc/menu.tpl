@@ -1,4 +1,4 @@
-      <div class="col-md-3 left_col menu_fixed">
+      <div class="col-md-3 left_col menu  ">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
             <a class="site_title" href="/"><i class="fa fa-paw"></i> <span>{{title}}</span></a>
@@ -53,6 +53,17 @@
                     </li>
                     <li>
                       <a href="switch_settings.html">{{_('Settings')}}</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a><i class="fa fa-lock"></i> {{_('Doors')}} <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li>
+                      <a href="door_status.html">{{_('Status')}}</a>
+                    </li>
+                    <li>
+                      <a href="door_settings.html">{{_('Settings')}}</a>
                     </li>
                   </ul>
                 </li>
