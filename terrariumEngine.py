@@ -66,10 +66,13 @@ class terrariumEngine():
     self.power_switches = self.switch_board.switches
     logger.debug('Done loading terrariumPI power switches')
 
-    # Load Door part
-    logger.debug('Loading terrariumPI power switches')
-    self.door_sensor = terrariumDoor(self.config.get_door_pin(),self.door_status)
-    logger.debug('Done loading terrariumPI power switches')
+    # Load doors from config
+    logger.debug('Loading terrariumPI doors')
+    self.doors = {}
+    doors = self.config.get_doors()
+    for doorid in doors:
+      self.doors[doors[doorid]['id']] = terrariumDoor(doors[doorid]['id'],doors[doorid]['gpiopin'],doors[doorid]['name'],self.toggle_door_status)
+    logger.debug('Done loading terrariumPI doors')
 
     # Load Sensors, with ID as index
     logger.debug('Loading terrariumPI temperature/humidity sensors')
@@ -80,7 +83,7 @@ class terrariumEngine():
 
     # Load the environment system. This will controll the lights, sprayer and heaters
     logger.debug('Loading terrariumPI environment system')
-    self.environment = terrariumEnvironment(self.sensors, self.power_switches, self.door_sensor, self.weather, self.config)
+    self.environment = terrariumEnvironment(self.sensors, self.power_switches, self.weather, self.door_status, self.config)
     logger.debug('Done loading terrariumPI environment system')
 
     # Load webcams from config
@@ -243,6 +246,9 @@ class terrariumEngine():
     if 'webcams' == part or part is None:
       data.update(self.get_webcams_config())
 
+    if 'doors' == part or part is None:
+      data.update(self.get_doors_config())
+
     if 'environment' == part or part is None:
       data.update(self.get_environment_config())
 
@@ -262,6 +268,9 @@ class terrariumEngine():
     elif 'webcams' == part:
       update_ok = self.set_webcams_config(data)
 
+    elif 'doors' == part:
+      update_ok = self.set_doors_config(data)
+
     elif 'environment' == part:
       update_ok = self.set_environment_config(data)
 
@@ -278,7 +287,7 @@ class terrariumEngine():
       if update_ok:
         # Update config settings
         self.pi_power_wattage = float(self.config.get_pi_power_wattage())
-        self.door_sensor.set_gpio_pin(self.config.get_door_pin())
+        #self.door_sensor.set_gpio_pin(self.config.get_door_pin())
         self.set_authentication(self.config.get_admin(),self.config.get_password())
 
     return update_ok
@@ -313,9 +322,17 @@ class terrariumEngine():
   # End weather part
 
   # Door part
-  def door_status(self, socket = False):
-    data = self.door_sensor.get_status()
+  def toggle_door_status(self, data, socket = False):
     self.collector.log_door_data(data)
+    if socket:
+      self.door_status(True)
+
+  def door_status(self, socket = False):
+    door_closed = True
+    for doorid in self.doors:
+      door_closed = door_closed and self.doors[doorid].get_status() == 'closed'
+
+    data = 'closed' if door_closed else 'open'
 
     if socket:
       self.__send_message({'type':'door_indicator','data': data})
@@ -323,10 +340,52 @@ class terrariumEngine():
       return data
 
   def is_door_open(self):
-    return self.door_sensor.is_open()
+    return self.door_status() == 'open'
 
   def is_door_closed(self):
-    return self.door_sensor.is_closed()
+    return self.door_status() == 'closed'
+
+  def get_amount_of_doors(self):
+    return len(self.doors)
+
+  def get_doors(self, parameters = [], socket = False):
+    data = []
+    filter = None
+    if len(parameters) > 0 and parameters[0] is not None:
+      filter = parameters[0]
+
+    if filter is not None and filter in self.doors:
+      data.append(self.doors[filter].get_data())
+
+    else:
+      for doorid in self.doors:
+        data.append(self.doors[doorid].get_data())
+
+    if socket:
+      self.__send_message({'type':'door_data','data':data})
+    else:
+      return {'doors' : data}
+
+  def get_doors_config(self):
+    return self.get_doors()
+
+  def set_doors_config(self, data):
+    update_ok = True
+    for doordata in data:
+
+      if doordata['id'] == '' or doordata['id'] not in self.doors:
+        # Create new one
+        if doordata['gpiopin'] != '':
+          door = terrariumDoor(None,doordata['gpiopin'],doordata['name'],self.toggle_door_status)
+          self.doors[door.get_id()] = door
+      else:
+        door = self.doors[doordata['id']]
+        door.set_name(doordata['name'])
+        door.set_gpio_pin(doordata['gpiopin'])
+
+      update_ok = update_ok and self.config.save_door(door.get_data())
+
+    return update_ok
   # End door part
 
 
@@ -506,6 +565,13 @@ class terrariumEngine():
 
     return update_ok
   # End webcam part
+
+
+
+
+
+
+
 
   # Environment part
   def get_environment(self, parameters = [], socket = False):

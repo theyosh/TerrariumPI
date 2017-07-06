@@ -10,12 +10,12 @@ monkey.patch_all()
 
 class terrariumEnvironment():
 
-  def __init__(self, sensors, power_switches, door_sensor, weather, config):
+  def __init__(self, sensors, power_switches, weather, door_status, config):
     self.config = config
     self.sensors = sensors
     self.power_switches = power_switches
 
-    self.door_sensor = door_sensor
+    self.door_status = door_status
     self.weather = weather
     self.reload_config()
     thread.start_new_thread(self.__engine_loop, ())
@@ -84,7 +84,7 @@ class terrariumEnvironment():
       sprayer = self.get_sprayer_state()
       if 'enabled' in sprayer and 'enabled' in light and sprayer['enabled'] and light['enabled']:
         if self.sprayer['night_enabled'] or light['state'] == 'on':
-          if sprayer['alarm'] and self.door_sensor.is_closed():
+          if sprayer['alarm'] and self.door_status == 'closed':
             self.sprayer_on()
           else:
             self.sprayer_off()

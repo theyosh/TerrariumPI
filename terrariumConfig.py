@@ -78,10 +78,10 @@ class terrariumConfig:
     del(data['new_password'])
     return self.__update_config('terrariumpi',data)
 
-  def get_door_pin(self):
-    '''Get terrariumPI door pin'''
-    config = self.get_system()
-    return int(config['gpio_door_pin'])
+  #def get_door_pin(self):
+  #  '''Get terrariumPI door pin'''
+  #  config = self.get_system()
+  #  return int(config['gpio_door_pin'])
 
   def get_pi_power_wattage(self):
     '''Get terrariumPI power usage'''
@@ -184,10 +184,12 @@ class terrariumConfig:
         data['switches'][section[6:]] = switch_data
 
     return data
+  # End switches config functions
 
+  # Sensor config functions
   def get_1wire_port(self):
     return int(self.get_system()['1wire_port'])
-
+  
   def save_sensor(self,data):
     del(data['address'])
     return self.__update_config('sensor' + str(data['id']),data)
@@ -200,7 +202,10 @@ class terrariumConfig:
         data[section[6:]] = sensor_data
 
     return data
+  # End sensor config functions
 
+
+  # Webcam config functions
   def get_webcams(self):
     data = {}
     for section in self.__config.sections():
@@ -218,3 +223,19 @@ class terrariumConfig:
     del(data['resolution'])
     del(data['preview'])
     return self.__update_config('webcam' + str(data['id']),data)
+  # End webcam config functions
+  
+  # Door config functions
+  def get_doors(self):
+    data = {}
+    for section in self.__config.sections():
+      if section[:4] == 'door':
+        sensor_data = self.__get_config(section)
+        data[section[6:]] = sensor_data
+
+    return data
+
+  def save_door(self,data):
+    del(data['state'])
+    return self.__update_config('door' + str(data['id']),data)
+  # End door config functions

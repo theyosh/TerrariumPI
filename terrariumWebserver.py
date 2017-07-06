@@ -67,7 +67,7 @@ class terrariumWebserver():
                      apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
                     )
 
-    self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|environment)>',
+    self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|doors|environment)>',
                      method=['PUT','POST','DELETE'],
                      callback=self.__update_api_call,
                      apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
@@ -86,6 +86,9 @@ class terrariumWebserver():
 
     elif 'webcam' == template or 'webcam_settings' == template:
       variables['amount_of_webcams'] = self.__terrariumEngine.get_amount_of_webcams()
+
+    elif 'door_status' == template or 'door_settings' == template:
+      variables['amount_of_doors'] = self.__terrariumEngine.get_amount_of_doors()
 
     elif 'switch_settings' == template:
       variables['max_swithes'] = self.__terrariumEngine.get_max_switches_config()
@@ -111,10 +114,6 @@ class terrariumWebserver():
 
   def __static_file(self,filename, root = 'static'):
     if filename == 'js/terrariumpi.js':
-      #t = os.path.getmtime(root + '/' + filename)
-      #response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(days=1)).strftime('%a, %d %b %Y %H:%M:%S GMT')
-      #response.headers['Last-Modified'] = datetime.datetime.fromtimestamp(t).strftime( '%a, %d %b %Y %H:%M:%S GMT')
-      #response.headers['Etag'] = hashlib.md5(response.headers['Last-Modified']).hexdigest()
       response.headers['Content-Type'] = 'application/javascript; charset=UTF-8'
       return template(filename,template_lookup=[root])
 
@@ -155,9 +154,12 @@ class terrariumWebserver():
 
     if 'switches' == action:
       result = self.__terrariumEngine.get_switches(parameters)
-      
-    if 'door' == action:
-      result = {'door' : self.__terrariumEngine.door_status()}
+
+    if 'doors' == action:
+      if len(parameters) > 0 and parameters[0] == 'status':
+         result = {'doors' : self.__terrariumEngine.door_status()}
+      else:
+        result = self.__terrariumEngine.get_doors()
 
     elif 'sensors' == action:
       result = self.__terrariumEngine.get_sensors(parameters)

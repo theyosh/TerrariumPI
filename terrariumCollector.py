@@ -19,7 +19,7 @@ class terrariumCollector():
     self.modulo = 5 * 60
     self.__create_database_structure()
     logger.info('TerrariumPI Collecter is ready')
-    
+
   def __connect(self):
     self.db = sqlite3.connect(terrariumCollector.database)
     self.db.row_factory = sqlite3.Row
@@ -55,7 +55,7 @@ class terrariumCollector():
       cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS switch_data_unique ON switch_data(id,timestamp ASC)')
       cur.execute('CREATE INDEX IF NOT EXISTS switch_data_timestamp ON switch_data(timestamp ASC)')
       cur.execute('CREATE INDEX IF NOT EXISTS switch_data_id ON switch_data(id)')
-      
+
       cur.execute('''CREATE TABLE IF NOT EXISTS door_data
                       (id INTEGER(4),
                        timestamp INTEGER(4),
@@ -100,7 +100,7 @@ class terrariumCollector():
     if self.__recovery:
       logger.warn('TerrariumPI Collecter is in recovery modus. Cannot store new logging data!')
       return
-    
+
     now = int(time.time())
     rows = []
     if 'switches' != type and 'door' != type:
@@ -109,39 +109,39 @@ class terrariumCollector():
     try:
       with self.db:
         cur = self.db.cursor()
-  
+
         if type in ['humidity','temperature']:
           cur.execute('REPLACE INTO sensor_data (id, type, timestamp, current, min, max, alarm_min, alarm_max, alarm) VALUES (?,?,?,?,?,?,?,?,?)',
                       (id, type, now, newdata['current'], newdata['min'], newdata['max'], newdata['alarm_min'], newdata['alarm_max'], newdata['alarm']))
-  
+
         if type in ['switches']:
           cur.execute('REPLACE INTO switch_data (id, timestamp, state, power_wattage, water_flow) VALUES (?,?,?,?,?)',
                       (id, now, newdata['state'], newdata['power_wattage'], newdata['water_flow']))
-          
+
         if type in ['door']:
           cur.execute('REPLACE INTO door_data (id, timestamp, state) VALUES (?,?,?)',
-                      (1, now, newdata))
-  
+                      (id, now, newdata))
+
         if type in ['weather']:
           cur.execute('REPLACE INTO weather_data (timestamp, wind_speed, temperature, pressure, wind_direction, weather, icon) VALUES (?,?,?,?,?,?,?)',
                       (now, newdata['wind_speed'], newdata['temperature'], newdata['pressure'], newdata['wind_direction'], newdata['weather'], newdata['icon']))
-  
+
         if type in ['system']:
           cur.execute('REPLACE INTO system_data (timestamp, load_load1, load_load5, load_load15, uptime, temperature, cores, memory_total, memory_used, memory_free) VALUES (?,?,?,?,?,?,?,?,?,?)',
                       (now, newdata['load']['load1'], newdata['load']['load5'], newdata['load']['load15'], newdata['uptime'], newdata['temperature'], newdata['cores'], newdata['memory']['total'], newdata['memory']['used'], newdata['memory']['free']))
-  
+
         self.db.commit()
     except sqlite3.DatabaseError as ex:
       logger.error('TerrariumPI Collecter exception! %s', (ex,))
       if 'database disk image is malformed' == str(ex):
         self.__recover()
-      
+
   def __recover(self):
     # Based on: http://www.dosomethinghere.com/2013/02/20/fixing-the-sqlite-error-the-database-disk-image-is-malformed/
     # Enable recovery status
     self.__recovery = True
     logger.warn('TTerrariumPI Collecter recovery modus is starting! %s', (self.__recovery,))
-    
+
     # Create empty sql dump variable
     sqldump = ''
     lines = 0
@@ -151,13 +151,13 @@ class terrariumCollector():
         lines += 1
         sqldump += line + "\n"
         f.write('%s\n' % line)
-        
+
     logger.warn('TerrariumPI Collecter recovery modus created SQL dump of %s lines and %s bytes!', (lines,strlen(sqldump),))
-    
+
     # Delete broken db
     os.remove(terrariumCollector.database)
     logger.warn('TerrariumPI Collecter recovery modus deleted faulty database from disk %s', (terrariumCollector.database,))
-    
+
     # Reconnect will recreate the db
     logger.warn('TerrariumPI Collecter recovery modus starts reconnecting database to create a new clean database at %s', (terrariumCollector.database,))
     self.__connect()
@@ -165,7 +165,7 @@ class terrariumCollector():
     # Load the SQL data back to db
     cur.executescript(sqldump)
     logger.warn('TerrariumPI Collecter recovery modus restored the old data in a new database. %s', (terrariumCollector.database,))
-    
+
     # Return to normal modus
     self.__recovery = False
     logger.warn('TerrariumPI Collecter recovery modus is finished! %s', (self.__recovery,))
@@ -176,9 +176,9 @@ class terrariumCollector():
     del(switch['name'])
     del(switch['nr'])
     self.__log_data('switches',switch_id,switch)
-    
+
   def log_door_data(self,door):
-    self.__log_data('door',None, door)
+    self.__log_data('door',door['id'], door['state'])
 
   def log_weather_data(self,weather):
     del(weather['from'])
@@ -200,7 +200,7 @@ class terrariumCollector():
     if self.__recovery:
       logger.warn('TerrariumPI Collecter is in recovery modus. Cannot store new power and water total usage!')
       return
-    
+
     today = int(time.time())
     time_past = today % 86400
     today -= time_past
@@ -346,21 +346,10 @@ class terrariumCollector():
       elif len(parameters) > 0 and parameters[0] is not None:
         sql = sql + ' and id = ?'
         filters = (stoptime,starttime,parameters[0],)
-        
-    elif logtype == 'door':
+
+    elif logtype == 'doors':
       fields = { 'state' : []}
       sql = 'SELECT id, "door" as type, timestamp, ' + ', '.join(fields.keys()) + ' FROM door_data WHERE timestamp >= ? and timestamp <= ? '
-      if len(parameters) > 0 and parameters[0] == 'summary':
-        fields = ['total_power', 'total_water', 'duration']
-        filters = ('total',)
-        # Temporary overrule.... :P
-        sql = '''
-          SELECT ''' + str(stoptime) + ''' as timestamp,
-                  MAX(timestamp) - MIN(timestamp) as duration,
-                  SUM(power_wattage) as total_power,
-                  SUM(water_flow) as total_water
-            FROM switch_data
-            WHERE id = ? '''
 
     elif logtype == 'weather':
       fields = { 'wind_speed' : [], 'temperature' : [], 'pressure' : [] , 'wind_direction' : [], 'rain' : [],
