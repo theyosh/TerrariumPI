@@ -19,10 +19,10 @@ class terrariumSensor:
     self.sensor_address = self.sensor.address
 
     self.set_name(name)
-    self.set_min(min)
-    self.set_max(max)
     self.set_alarm_min(alarm_min)
     self.set_alarm_max(alarm_max)
+    self.set_min(min)
+    self.set_max(max)
 
     self.current = float(0)
 
@@ -102,8 +102,9 @@ class terrariumSensor:
                                                             str(old_current) + self.get_indicator(),
                                                             str(self.get_current()) + self.get_indicator()))
       except Exception, err:
-        # error.... don't update
-        print err
+        logger.error('Error updating %s sensor %s with error: %s' % (self.get_type(),
+                                                                     self.get_name(),
+                                                                     er))
         pass
 
   def get_data(self):
