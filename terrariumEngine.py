@@ -116,6 +116,7 @@ class terrariumEngine():
 
   def __engine_loop(self):
     while True:
+      starttime = time.time()
       for sensorid in self.sensors:
         # Update the current temperature.
         self.sensors[sensorid].update()
@@ -153,6 +154,7 @@ class terrariumEngine():
         self.webcams[webcamid].update()
         sleep(0.2)
 
+      logger.debug('Engine loop done in %s seconds' % (time.time() - starttime,))
       sleep(30) # TODO: Config setting
 
   def __send_message(self,message):

@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import logging
+logger = logging.getLogger(__name__)
+
 import thread
 import datetime
 from threading import Timer
@@ -18,6 +21,7 @@ class terrariumEnvironment():
     self.door_status = door_status
     self.weather = weather
     self.reload_config()
+    logger.info('Starting environment')
     thread.start_new_thread(self.__engine_loop, ())
 
   def __parse_config(self):
@@ -73,6 +77,7 @@ class terrariumEnvironment():
 
   def __engine_loop(self):
     while True:
+      starttime = time.time()
       light = self.get_light_state()
       if 'enabled' in light and light['enabled']:
         if light['on'] < int(time.time()) < light['off']:
@@ -84,7 +89,7 @@ class terrariumEnvironment():
       sprayer = self.get_sprayer_state()
       if 'enabled' in sprayer and 'enabled' in light and sprayer['enabled'] and light['enabled']:
         if self.sprayer['night_enabled'] or light['state'] == 'on':
-          if sprayer['alarm'] and self.door_status == 'closed':
+          if sprayer['alarm'] and self.door_status() == 'closed':
             self.sprayer_on()
           else:
             self.sprayer_off()
@@ -103,6 +108,7 @@ class terrariumEnvironment():
         else:
           self.heater_off()
 
+      logger.info('Engine loop done in %s seconds' % (time.time() - starttime,))
       sleep(15)
 
   def __switch_on(self,part, state = None):
