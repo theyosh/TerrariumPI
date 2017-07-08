@@ -13,9 +13,9 @@ var globals = {
 
 /**
  * Resize function without multiple trigger
- * 
+ *
  * Usage:
- * $(window).smartresize(function(){  
+ * $(window).smartresize(function(){
  *     // code here
  * });
  */
@@ -29,8 +29,8 @@ var globals = {
             var obj = this, args = arguments;
             function delayed () {
                 if (!execAsap)
-                    func.apply(obj, args); 
-                timeout = null; 
+                    func.apply(obj, args);
+                timeout = null;
             }
 
             if (timeout)
@@ -38,11 +38,11 @@ var globals = {
             else if (execAsap)
                 func.apply(obj, args);
 
-            timeout = setTimeout(delayed, threshold || 100); 
+            timeout = setTimeout(delayed, threshold || 100);
         };
     };
 
-    // smartresize 
+    // smartresize
     jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
 
 })(jQuery,'smartresize');
@@ -518,15 +518,15 @@ function init_sidebar() {
   var setContentHeight = function () {
     // reset height
     $RIGHT_COL.css('min-height', $(window).height());
-  
+
     var bodyHeight = $BODY.outerHeight(),
       footerHeight = $BODY.hasClass('footer_fixed') ? -10 : $FOOTER.height(),
       leftColHeight = $LEFT_COL.eq(1).height() + $SIDEBAR_FOOTER.height(),
       contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
-  
+
     // normalize content
     contentHeight -= $NAV_MENU.height() + footerHeight;
-  
+
     $RIGHT_COL.css('min-height', contentHeight);
   };
 
@@ -560,10 +560,10 @@ function init_sidebar() {
         }
     });
 
-  // toggle small or large menu 
+  // toggle small or large menu
   $MENU_TOGGLE.on('click', function() {
 		console.log('clicked - menu toggle');
-		
+
 		if ($BODY.hasClass('nav-md')) {
 			$SIDEBAR_MENU.find('li.active ul').hide();
 			$SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
@@ -586,7 +586,7 @@ function init_sidebar() {
 	}).parent().addClass('active');
 
 	// recompute content when resizing
-	$(window).smartresize(function(){  
+	$(window).smartresize(function(){
 		setContentHeight();
 	});
 
@@ -608,15 +608,15 @@ function load_panel_tool_box() {
       var $BOX_PANEL = $(this).closest('.x_panel'),
           $ICON = $(this).find('i'),
           $BOX_CONTENT = $BOX_PANEL.find('.x_content');
-      
+
       // fix for some div with hardcoded fix class
       if ($BOX_PANEL.attr('style')) {
           $BOX_CONTENT.slideToggle(200, function(){
               $BOX_PANEL.removeAttr('style');
           });
       } else {
-          $BOX_CONTENT.slideToggle(200); 
-          $BOX_PANEL.css('height', 'auto');  
+          $BOX_CONTENT.slideToggle(200);
+          $BOX_PANEL.css('height', 'auto');
       }
 
       $ICON.toggleClass('fa-chevron-up fa-chevron-down');
@@ -635,7 +635,7 @@ function reload_reload_theme() {
   $('[data-toggle="tooltip"]').tooltip({
     container: 'body',
     html: true
-  });  
+  });
   process_form();
 }
 
@@ -650,26 +650,15 @@ function sensor_gauge(name, data) {
     // Setup a new gauge if needed
     if ($('#' + name + ' .gauge').attr('done') === undefined) {
       var total_area = data.max - data.min;
-/*
       var colors = [
         [0.00, '#E74C3C'],
-        [0.25, '#f0ad4e'],
-        [0.50, '#1ABB9C'],
-        [0.75, '#f0ad4e'],
-        [1.00, '#E74C3C']
-      ];
-*/
-      var colors = [
-        [0.00, '#E74C3C'],
-        [(data.alarm_min - data.min) / total_area, '#f0ad4e'],
+        [(data.alarm_min - data.min) / total_area, '#F0AD4E'],
         [(((data.alarm_min + data.alarm_max)/2) - data.min) / total_area, '#1ABB9C'],
-        [(data.alarm_max - data.min) / total_area, '#f0ad4e'],
+        [(data.alarm_max - data.min) / total_area, '#F0AD4E'],
         [1.00, '#E74C3C']
       ];
 
       var opts = {
-        animationSpeed: 32,
-        lines: 12,
         angle: 0,
         lineWidth: 0.6,
         pointer: {
@@ -677,11 +666,11 @@ function sensor_gauge(name, data) {
           strokeWidth: 0.070,
           color: '#1D212A'
         },
-        limitMax: 'false',
+        limitMax: false,
+        limitMin: true,
         strokeColor: '#F0F3F3',
         generateGradient: true,
-        minValue: data.min,
-        maxValue: data.max,
+        highDpiSupport: true,
         percentColors: colors,
       };
       // Init Gauge
@@ -690,8 +679,8 @@ function sensor_gauge(name, data) {
       globals.gauges[name].setTextField($('#' + name + ' .gauge-value')[0]);
     }
     // Update values
-    globals.gauges[name].minValue = data.min;
     globals.gauges[name].maxValue = data.max;
+    globals.gauges[name].setMinValue(data.min);
     globals.gauges[name].set(data.current);
     $('div#' + name + ' .x_title h2 .badge').toggle(data.alarm);
   }
@@ -829,7 +818,7 @@ function history_graph(name, data, type) {
           case 'switch':
             val = val.toFixed(axis.tickDecimals) + ' W';
             break;
-          
+
           case 'door':
             val = (val ? '{{_('open')}}' : '{{_('closed')}}');
             break;
@@ -934,7 +923,7 @@ function history_graph(name, data, type) {
         data: data.state
       }];
       break;
-      
+
   }
   if (graph_data[0].data.length > 0) {
     var total_data_duration = (graph_data[0].data[graph_data[0].data.length - 1][0] - graph_data[0].data[0][0]) / 3600000;
