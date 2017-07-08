@@ -4,7 +4,7 @@
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2><span class="title">{{_('Door status')}}</span> <small>...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
+                <h2><span class="title">{{_('Door status')}}</span> <small class="total_usage">...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>

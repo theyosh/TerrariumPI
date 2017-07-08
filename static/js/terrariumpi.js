@@ -944,6 +944,12 @@ function history_graph(name, data, type) {
         usage += (usage != '' ? ', ' : '') + '{{_('Total water in L')}}: ' + Math.round(data.total_water_usage * 100) / 100;
       }
       $('#' + name + ' .total_usage').text(usage);
+    } else if (type == 'door') {
+      var usage = '';
+      if (data.open > 0) {
+        usage = '{{_('Total open for')}}: ' + moment.duration(data.open).humanize();
+      }
+      $('#' + name + ' .total_usage').text(usage);
     }
     $('#' + name + ' .history_graph').bind('plothover', function (event, pos, item) {
       if (item) {
@@ -967,89 +973,117 @@ function toggleSwitch(id) {
   });
 }
 
-function process_switch_data(raw_data) {
-  var graphdata = {
-    power_wattage: [],
-    water_flow: [],
-    total_power_usage : 0,
-    total_water_usage : 0
-  };
-  var state_change = -1;
-  $.each(raw_data.state, function(counter, status) {
-    if (!status[1]) {
-      raw_data.power_wattage[counter][1] = 0;
-      raw_data.water_flow[counter][1] = 0;
-    }
-    var copy = {};
-    if (counter > 0 && state_change != status[1]) {
-      // Copy previous object to get the right status with current timestamp
-      copy = $.extend(true, {}, raw_data.power_wattage[counter - 1]);
-      if (copy[0] != 0) {
-        graphdata.total_power_usage += (status[0] - copy[0]) / 1000 * copy[1]
-      }
-      copy[0] = status[0];
-      graphdata.power_wattage.push(copy);
-      copy = $.extend(true, {}, raw_data.water_flow[counter - 1]);
-      if (copy[0] != 0) {
-        graphdata.total_water_usage += (status[0] - copy[0]) / 1000 * copy[1]
-      }
-      copy[0] = status[0];
-      graphdata.water_flow.push(copy);
-      state_change = status[1];
-    }
-    graphdata.power_wattage.push(raw_data.power_wattage[counter]);
-    graphdata.water_flow.push(raw_data.water_flow[counter]);
-    if (counter == raw_data.state.length - 1) {
-      // Add endpoint which is a copy of the last point, with current time
-      copy = $.extend(true, {}, raw_data.power_wattage[counter]);
-      if (copy[0] != 0) {
-        graphdata.total_power_usage += ((new Date()).getTime() - copy[0]) / 1000 * copy[1]
-      }
-      copy[0] = (new Date()).getTime();
-      graphdata.power_wattage.push(copy);
-      copy = $.extend(true, {}, raw_data.water_flow[counter]);
-      if (copy[0] != 0) {
-        graphdata.total_water_usage += ((new Date()).getTime() - copy[0]) / 1000 * copy[1]
-      }
-      copy[0] = (new Date()).getTime();
-      graphdata.water_flow.push(copy);
-    }
-  });
-  graphdata.total_power_usage /= 3600
-  graphdata.total_water_usage /= 60
-  return graphdata;
-}
+function process_graph_data(type, raw_data) {
+  var graphdata = {}
+  switch (type) {
+    case 'door':
+      graphdata.state = [];
+      graphdata.open = 0;
+    break;
+    case 'switch':
+      graphdata.power_wattage = [];
+      graphdata.water_flow = [];
+      graphdata.total_power_usage = 0;
+      graphdata.total_water_usage = 0;
+    break;
+  }
 
-function process_door_data(raw_data) {
-  var graphdata = {
-    state: []
-  };
   var state_change = -1;
   $.each(raw_data.state, function(counter, status) {
-    status[1] = (status[1] === 'closed' ? 0 : 1)
+    // Sanitize input
+    switch (type) {
+      case 'door':
+        status[1] = (status[1] === 'closed' ? 0 : 1)
+      break;
+      case 'switch':
+        if (!status[1]) {
+          raw_data.power_wattage[counter][1] = 0;
+          raw_data.water_flow[counter][1] = 0;
+        }
+      break;
+    }
+
     if (state_change != status[1]) {
       // Copy previous object to get the right status with current timestamp
       var copy = [];
       if (counter > 0) {
-        copy = [status[0],raw_data.state[counter-1][1]];
+        $.each(graphdata, function(name,data){
+          if (typeof graphdata[name] == 'object' ) {
+            copy = $.extend(true, [], raw_data[name][counter-1]);
+            // If turned down/off/closed, calculate usage, else it is zero!
+            var usage = (copy[1] != 0 ? (status[0] - copy[0]) / 1000 * copy[1] : 0);
+            switch (name) {
+              case 'state':
+                graphdata.open += usage;
+              break;
+              case 'power_wattage':
+                graphdata.total_power_usage += usage;
+              break;
+              case 'water_flow':
+                graphdata.total_water_usage += usage;
+              break;
+            }
+            copy[0] = status[0];
+            graphdata[name].push(copy);
+          }
+        });
       } else if (counter == 0 && status[1] == 1) {
-        // If door status starts with open door, add an extra timestamp with door closed so the graph looks a bit better. (and door should be closed)
-        copy = [status[0],0];
+        // If starting with status up/on add a status down/off first for nice graphing
+        $.each(graphdata, function(name,data){
+          if (typeof graphdata[name] == 'object' ) {
+            copy = $.extend(true, [], raw_data[name][counter]);
+            // If turned down/off/closed, calculate usage, else it is zero!
+            var usage = (copy[1] != 0 ? (status[0] - copy[0]) / 1000 * copy[1] : 0);
+            switch (name) {
+              case 'state':
+                graphdata.open += usage;
+              break;
+              case 'power_wattage':
+                graphdata.total_power_usage += usage;
+              break;
+              case 'water_flow':
+                graphdata.total_water_usage += usage;
+              break;
+            }
+            copy[1] = 0;
+            graphdata[name].push(copy);
+          }
+        });
       }
-      graphdata.state.push(copy);
       state_change = status[1];
     }
-    graphdata.state.push(raw_data.state[counter]);
+    $.each(graphdata, function(name,data){
+      if (typeof graphdata[name] == 'object' ) {
+        graphdata[name].push(raw_data[name][counter]);
+      }
+    });
   });
-  // Add end data to now...
+  // Add end data to now... and a startdate of 24 hours ago if needed
   var now = new Date().getTime();
-  graphdata.state.push([now,graphdata.state[graphdata.state.length-1][1]]);
-  // Add begin timestamp 24 hours back if needed
-  if (now - graphdata.state[0][0] < (24 * 60 * 60 * 1000)) {
-    graphdata.state.unshift([now - (24 * 60 * 60 * 1000),graphdata.state[0][1]]);
+  var start = now - (24 * 60 * 60 * 1000);
+  $.each(graphdata, function(name,data){
+    if (typeof graphdata[name] == 'object' ) {
+      graphdata[name].push([now,graphdata[name][graphdata[name].length-1][1]]);
+      // Add begin timestamp 24 hours back if needed
+      if (graphdata[name][0][0] > start) {
+        graphdata[name].unshift([start,graphdata[name][0][1]]);
+      }
+    }
+  });
+  if (type === 'switch') {
+    graphdata.total_power_usage /= 3600; // To kWh
+    graphdata.total_water_usage /= 60; // To liters
   }
   // Return data
   return graphdata;
+}
+
+function process_switch_data(raw_data) {
+  return process_graph_data('switch', raw_data);
+}
+
+function process_door_data(raw_data) {
+  return process_graph_data('door', raw_data);
 }
 
 function update_webcam_preview(name, url) {
