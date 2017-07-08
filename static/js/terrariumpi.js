@@ -1027,25 +1027,26 @@ function process_door_data(raw_data) {
   var state_change = -1;
   $.each(raw_data.state, function(counter, status) {
     status[1] = (status[1] === 'closed' ? 0 : 1)
-    if (!status[1]) {
-      raw_data.state[counter][1] = 0;
-    }
-    var copy = {};
-    if (counter > 0 && state_change != status[1]) {
+    if (state_change != status[1]) {
       // Copy previous object to get the right status with current timestamp
-      copy = $.extend(true, {}, raw_data.state[counter - 1]);
-      copy[0] = status[0];
+      var copy = [];
+      if (counter == 0 && status[1] == 1) {
+        // If door status starts with open door, add an extra timestamp with door closed so the graph looks a bit better. (and door should be closed)
+        copy = [status[0],0];
+      } else {
+        copy = [status[0],raw_data.state[counter-1][1]];
+      }
       graphdata.state.push(copy);
       state_change = status[1];
     }
     graphdata.state.push(raw_data.state[counter]);
-    if (counter == raw_data.state.length - 1) {
-      // Add endpoint which is a copy of the last point, with current time
-      copy = $.extend(true, {}, raw_data.state[counter]);
-      copy[0] = (new Date()).getTime();
-      graphdata.state.push(copy);
-    }
   });
+  // Add end data to now...
+  var now = new Date().getTime();
+  graphdata.state.push([now,graphdata.state[graphdata.state.length-1][1]]);
+  // Add begin timestamp 24 hours back
+  graphdata.state.unshift([now - (24 * 60 * 60 * 1000),graphdata.state[0][1]]);
+  // Return data
   return graphdata;
 }
 
