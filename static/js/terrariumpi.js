@@ -677,10 +677,11 @@ function sensor_gauge(name, data) {
       $('#' + name + ' .gauge').attr('done',1);
       globals.gauges[name] = new Gauge($('#' + name + ' .gauge')[0]).setOptions(opts);
       globals.gauges[name].setTextField($('#' + name + ' .gauge-value')[0]);
+      // Only set min and max only once. Else the gauge will flicker each data update
+      globals.gauges[name].maxValue = data.max;
+      globals.gauges[name].setMinValue(data.min);
     }
     // Update values
-    globals.gauges[name].maxValue = data.max;
-    globals.gauges[name].setMinValue(data.min);
     globals.gauges[name].set(data.current);
     $('div#' + name + ' .x_title h2 .badge').toggle(data.alarm);
   }
