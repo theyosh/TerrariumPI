@@ -39,12 +39,10 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Light modus')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_modus">{{_('Light modus')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Select the modus on which the lights will be put on and off. Select weather to use the sun rise and sun set at your location. This will make the amount of lighting variable to the actual amount of daylight. When selecting clock, the light will put on and off at sellected times')}}">
                         <select class="form-control" name="light_modus" tabindex="-1" placeholder="{{_('Select an option')}}">
-                          <option>
-                            </option>
                           <option value="timer">
                             {{_('Timer')}}
                           </option>
@@ -56,37 +54,37 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lights_on">{{_('Lights on')}} <span class="required">*</span></label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_on">{{_('Lights on')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control col-md-7 col-xs-12" name="light_on" required="required" type="text" placeholder="{{_('Lights on')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Enter the time when the light should be put on. Only available when running in \'%s\' modus.') % (_('Timer'),)}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lights_off">{{_('Lights off')}} <span class="required">*</span></label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_off">{{_('Lights off')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control col-md-7 col-xs-12" name="light_off" required="required" type="text" placeholder="{{_('Lights off')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Enter the time when the lights should be put off. Only available when running in \'%s\' modus.') % (_('Timer'),)}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lights_max_hours">{{_('Maximal lights hours')}} <span class="required">*</span></label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_max_hours">{{_('Maximal lights hours')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control col-md-7 col-xs-12" name="light_max_hours" required="required" type="text" placeholder="{{_('Maximal lights hours')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Enter the maximum amount of lights time in hours. When the time between on and off is more then this maximum, the on and off time will be shifted more to each other.')}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lights_min_hours">{{_('Minimal light hours')}} <span class="required">*</span></label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_min_hours">{{_('Minimal light hours')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control col-md-7 col-xs-12" name="light_min_hours" required="required" type="text" placeholder="{{_('Minimal light hours')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Enter the minimal amount of lights time in hours. When the time between on and off is less then this amount of hours, the on and off time will be widenend untill the minimum amount of hours entered here.')}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lights_hours_shift">{{_('Hours shift')}} <span class="required">*</span></label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_hours_shift">{{_('Hours shift')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control col-md-7 col-xs-12" name="light_hours_shift" required="required" type="text" placeholder="{{_('Hours shift')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Enter the amount of hours that the lights should shift. Is only needed when running in the \'%s\' modus. Enter a positive number for adding hours to the start time. Use negative numbers for subtracking from the start time') % (_('Weather'),)}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Power switches')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_power_switches">{{_('Power switches')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the lights. Select all needed switches below.')}}">
                         <select class="form-control" multiple="multiple" name="light_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
@@ -128,19 +126,19 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lights_on">{{_('Sprayer wait timeout (seconds)')}} <span class="required">*</span></label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_spray_timeout">{{_('Sprayer wait timeout (seconds)')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control col-md-7 col-xs-12" name="sprayer_spray_timeout" required="required" type="text" placeholder="{{_('Sprayer wait timeout (seconds)')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Now much time must there be between two spray times and during startup. This is the amount of time that the humidity can settle and the new hudmity values are read.')}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lights_off">{{_('Sprayer spray duration (seconds)')}} <span class="required">*</span></label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_spray_duration">{{_('Sprayer spray duration (seconds)')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control col-md-7 col-xs-12" name="sprayer_spray_duration" required="required" type="text" placeholder="{{_('Sprayer spray duration (seconds)')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('How long is the system spraying. Enter the amount of seconds that the system is on when the humidity is to low.')}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Power switches')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_power_switches">{{_('Power switches')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Select the power switche(s) which controll the spray system. You can select multiple switches.')}}">
                         <select class="form-control" multiple="multiple" name="sprayer_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
@@ -149,7 +147,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Humidity sensors')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_sensors">{{_('Humidity sensors')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Select the humidity sensors that are use to controll the final humidity. When selecting multiple sensors, the average is used for determing the humidity. This is also shown on the dashboard on the right side.')}}">
                         <select class="form-control" multiple="multiple" name="sprayer_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
@@ -191,11 +189,10 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Heater modus')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_modus">{{_('Heater modus')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Select the operating modus. Use \'%s\' modus to select the time period in which the heating is running. Select \'%s\' modus to use the sun rise and sun set as on and off times. When the sun rises the heating system will stop. Use \'%s\' modus to have the heating running when the lights are off.') % (_('Timer'),_('Weather'),_('Sensor'))}}">
                         <select class="form-control" name="heater_modus" tabindex="-1" placeholder="{{_('Select an option')}}">
-                          <option></option>
                           <option value="timer">
                             {{_('Timer')}}
                           </option>
@@ -222,7 +219,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Power switches')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_power_switches">{{_('Power switches')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Select the power switche(s) which controll the heating system. You can select multiple switches.')}}">
                         <select class="form-control" multiple="multiple" name="heater_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
@@ -231,7 +228,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Temperature sensors')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_sensors">{{_('Temperature sensors')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Select the temperature sensors that are use to controll the final temperature. When selecting multiple sensors, the average is used for determing the temperature. This is also shown on the dashboard right side.')}}">
                         <select class="form-control" multiple="multiple" name="heater_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
