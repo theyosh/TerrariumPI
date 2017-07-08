@@ -1030,11 +1030,11 @@ function process_door_data(raw_data) {
     if (state_change != status[1]) {
       // Copy previous object to get the right status with current timestamp
       var copy = [];
-      if (counter == 0 && status[1] == 1) {
+      if (counter > 0) {
+        copy = [status[0],raw_data.state[counter-1][1]];
+      } else if (counter == 0 && status[1] == 1) {
         // If door status starts with open door, add an extra timestamp with door closed so the graph looks a bit better. (and door should be closed)
         copy = [status[0],0];
-      } else {
-        copy = [status[0],raw_data.state[counter-1][1]];
       }
       graphdata.state.push(copy);
       state_change = status[1];
@@ -1044,8 +1044,10 @@ function process_door_data(raw_data) {
   // Add end data to now...
   var now = new Date().getTime();
   graphdata.state.push([now,graphdata.state[graphdata.state.length-1][1]]);
-  // Add begin timestamp 24 hours back
-  graphdata.state.unshift([now - (24 * 60 * 60 * 1000),graphdata.state[0][1]]);
+  // Add begin timestamp 24 hours back if needed
+  if (now - graphdata.state[0][0] < (24 * 60 * 60 * 1000)) {
+    graphdata.state.unshift([now - (24 * 60 * 60 * 1000),graphdata.state[0][1]]);
+  }
   // Return data
   return graphdata;
 }
