@@ -346,7 +346,7 @@ function update_weather(data) {
 
 function update_dashboard_environment(name, value) {
   var systempart = $('div.environment_' + name);
-  if (systempart.length === 0) {
+  if (systempart.length === 0 || Object.keys(value).length === 0) {
     return;
   }
   try {
@@ -366,6 +366,7 @@ function update_dashboard_environment(name, value) {
         systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
         break;
       case 'heater':
+
         enabledColor = 'red';
         systempart.find('h4 small span').text(value.modus);
         systempart.find('.current').text(value.current.toFixed(3) + ' °C');

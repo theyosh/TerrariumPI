@@ -124,6 +124,8 @@ class terrariumConfig:
     config = {}
     for environment_part in data:
       for part in data[environment_part]:
+        if data[environment_part][part] is None:
+          data[environment_part][part] = ''
         config[environment_part + '_' + part] = data[environment_part][part]
 
     return self.__update_config('environment',config)

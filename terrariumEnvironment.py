@@ -39,7 +39,7 @@ class terrariumEnvironment():
     self.light['hours_shift'] = 0.0 if init else float(self.light['hours_shift'])
     self.light['min_hours'] = 0.0 if init else float(self.light['min_hours'])
     self.light['max_hours'] = 0.0 if init else float(self.light['max_hours'])
-    self.light['power_switches'] = [] if init else self.light['power_switches'].split(',')
+    self.light['power_switches'] = [] if (init or self.light['power_switches'] == '' ) else self.light['power_switches'].split(',')
 
     self.sprayer = config['sprayer']
     init = len(self.sprayer) == 0
@@ -50,8 +50,8 @@ class terrariumEnvironment():
     self.sprayer['night_enabled'] = False if init else (True if self.sprayer['night_enabled'].lower() in ['true','on','1'] else False)
     self.sprayer['spray_duration'] = 0.0 if init else float(self.sprayer['spray_duration'])
     self.sprayer['spray_timeout'] = 0.0 if init else float(self.sprayer['spray_timeout'])
-    self.sprayer['power_switches'] = [] if init else self.sprayer['power_switches'].split(',')
-    self.sprayer['sensors'] = [] if init else self.sprayer['sensors'].split(',')
+    self.sprayer['power_switches'] = [] if (init or self.sprayer['power_switches'] == '' ) else self.sprayer['power_switches'].split(',')
+    self.sprayer['sensors'] = [] if (init or self.sprayer['sensors'] == '' ) else self.sprayer['sensors'].split(',')
     self.sprayer['lastaction'] = datetime.datetime.now()
 
 
@@ -63,8 +63,8 @@ class terrariumEnvironment():
     self.heater['enabled'] = False if init else (True if self.heater['enabled'].lower() in ['true','on','1'] else False)
     self.heater['modus'] = None if init else self.heater['modus']
     self.heater['day_enabled'] = False if init else (True if self.heater['day_enabled'].lower() in ['true','on','1'] else False)
-    self.heater['power_switches'] = [] if init else self.heater['power_switches'].split(',')
-    self.heater['sensors'] = [] if init else self.heater['sensors'].split(',')
+    self.heater['power_switches'] = [] if (init or self.heater['power_switches'] == '' ) else self.heater['power_switches'].split(',')
+    self.heater['sensors'] = [] if (init or self.heater['sensors'] == '' ) else self.heater['sensors'].split(',')
 
   def __set_config(self,part,data):
     for field in data:
