@@ -1,11 +1,12 @@
 % include('inc/page_header.tpl')
+% icon = 'fire' if sensor_type == 'temperature' else 'tint'
         % for item in range(0,amount_of_sensors):
         <div class="row sensor">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
                 <h2>
-                  <span aria-hidden="true" class="glyphicon glyphicon-fire"></span>
+                  <span aria-hidden="true" class="glyphicon glyphicon-{{icon}}"></span>
                   <span class="title">{{_(sensor_type.capitalize())}}</span>
                   <small>...</small>
                   <span class="badge bg-red" style="display:none;">{{_('warning')}}</span>
