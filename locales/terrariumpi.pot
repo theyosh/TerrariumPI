@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-07-06 23:31+CEST\n"
+"POT-Creation-Date: 2017-07-08 23:52+CEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,7 +81,7 @@ msgstr ""
 #: views/dashboard.tpl:81 views/dashboard.tpl:205 views/dashboard.tpl:257
 #: views/door_status.tpl:33 views/inc/menu.tpl:30 views/inc/menu.tpl:44
 #: views/inc/menu.tpl:55 views/inc/menu.tpl:66 views/inc/menu.tpl:77
-#: views/inc/menu.tpl:91 views/inc/menu.tpl:122 views/inc/sensor_list.tpl:38
+#: views/inc/menu.tpl:91 views/inc/menu.tpl:122 views/inc/sensor_list.tpl:39
 #: views/switch_status.tpl:34 views/system_status.tpl:32
 #: views/system_status.tpl:88 views/system_status.tpl:144
 #: views/system_status.tpl:200 views/weather_forecast.tpl:16
@@ -141,34 +141,34 @@ msgid "Average Humidity"
 msgstr ""
 
 #: views/dashboard.tpl:179 views/dashboard.tpl:231 views/door_status.tpl:7
-#: views/inc/sensor_list.tpl:11 views/system_status.tpl:6
+#: views/inc/sensor_list.tpl:12 views/system_status.tpl:6
 #: views/system_status.tpl:62 views/system_status.tpl:118
 msgid "warning"
 msgstr ""
 
 #: views/dashboard.tpl:188 views/dashboard.tpl:240 views/door_status.tpl:16
-#: views/inc/sensor_list.tpl:21 views/switch_status.tpl:17
+#: views/inc/sensor_list.tpl:22 views/switch_status.tpl:17
 #: views/system_status.tpl:15 views/system_status.tpl:71
 #: views/system_status.tpl:127 views/system_status.tpl:183
 msgid "day"
 msgstr ""
 
 #: views/dashboard.tpl:191 views/dashboard.tpl:243 views/door_status.tpl:19
-#: views/inc/sensor_list.tpl:24 views/switch_status.tpl:20
+#: views/inc/sensor_list.tpl:25 views/switch_status.tpl:20
 #: views/system_status.tpl:18 views/system_status.tpl:74
 #: views/system_status.tpl:130 views/system_status.tpl:186
 msgid "week"
 msgstr ""
 
 #: views/dashboard.tpl:194 views/dashboard.tpl:246 views/door_status.tpl:22
-#: views/inc/sensor_list.tpl:27 views/switch_status.tpl:23
+#: views/inc/sensor_list.tpl:28 views/switch_status.tpl:23
 #: views/system_status.tpl:21 views/system_status.tpl:77
 #: views/system_status.tpl:133 views/system_status.tpl:189
 msgid "month"
 msgstr ""
 
 #: views/dashboard.tpl:197 views/dashboard.tpl:249 views/door_status.tpl:25
-#: views/inc/sensor_list.tpl:30 views/switch_status.tpl:26
+#: views/inc/sensor_list.tpl:31 views/switch_status.tpl:26
 #: views/system_status.tpl:24 views/system_status.tpl:80
 #: views/system_status.tpl:136 views/system_status.tpl:192
 msgid "year"
@@ -224,7 +224,7 @@ msgstr ""
 
 #: views/door_settings.tpl:76 views/sensor_settings.tpl:91
 #: views/switch_settings.tpl:111 views/system_environment.tpl:251
-#: views/system_settings.tpl:106 views/weather_settings.tpl:59
+#: views/system_settings.tpl:100 views/weather_settings.tpl:59
 #: views/webcam_settings.tpl:101
 msgid "Submit"
 msgstr ""
@@ -564,10 +564,6 @@ msgid "Port number"
 msgstr ""
 
 #: views/system_settings.tpl:92
-msgid "Door GPIO pin"
-msgstr ""
-
-#: views/system_settings.tpl:98
 msgid "1-Wire / OWFS port"
 msgstr ""
 
