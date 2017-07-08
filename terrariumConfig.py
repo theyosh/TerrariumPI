@@ -78,11 +78,6 @@ class terrariumConfig:
     del(data['new_password'])
     return self.__update_config('terrariumpi',data)
 
-  #def get_door_pin(self):
-  #  '''Get terrariumPI door pin'''
-  #  config = self.get_system()
-  #  return int(config['gpio_door_pin'])
-
   def get_pi_power_wattage(self):
     '''Get terrariumPI power usage'''
     config = self.get_system()
@@ -189,7 +184,7 @@ class terrariumConfig:
   # Sensor config functions
   def get_1wire_port(self):
     return int(self.get_system()['1wire_port'])
-  
+
   def save_sensor(self,data):
     del(data['address'])
     return self.__update_config('sensor' + str(data['id']),data)
@@ -224,7 +219,7 @@ class terrariumConfig:
     del(data['preview'])
     return self.__update_config('webcam' + str(data['id']),data)
   # End webcam config functions
-  
+
   # Door config functions
   def get_doors(self):
     data = {}

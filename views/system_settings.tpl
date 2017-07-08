@@ -89,12 +89,6 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gpio_door_pin">{{_('Door GPIO pin')}} <span class="required">*</span></label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control" name="gpio_door_pin" required="required" type="text" placeholder="{{_('Door GPIO pin')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="1wire_port">{{_('1-Wire / OWFS port')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control" name="1wire_port" required="required" type="text" placeholder="{{_('1-Wire / OWFS port')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Enter the port number on which the OWFS software is running. Default is 4304. Make sure the service OWServer is running.')}}">
