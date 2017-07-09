@@ -99,21 +99,21 @@ ignore_regexps = [
 #]
 
 section_regexps = [
-    ('New', [
+    ('**New**', [
         r'^[Aa]dd(ed)? ',
      ]),
-    ('Changes', [
+    ('**Changes**', [
         r'[cC]hg\s*:\s*((dev|use?r|pkg|test|doc)\s*:\s*)?([^\n]*)$',
      ]),
-    ('Fix', [
+    ('**Fixes**', [
         r'[fF]ix',
      ]),
 
-    ('Updates', [
+    ('**Updates**', [
         r'[uU]p(date|grade)',
      ]),
 
-    ('Other', None ## Match all lines
+    ('**Other**', None ## Match all lines
      ),
 
 ]

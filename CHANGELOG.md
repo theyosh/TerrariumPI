@@ -1,11 +1,12 @@
 Changelog
 =========
 
-(2.2.0 2017-07-09)
+
+(unreleased)
 ------------
 
 **New**
-
+- Added changelog. [TheYOSH]
 - Add door open duration and fixed data processing or door and swiches.
   [TheYOSH]
 - Add missing title to the door status. [TheYOSH]
@@ -15,7 +16,6 @@ Changelog
 - Add door indicator logging and graphing. [TheYOSH]
 
 **Fixes**
-
 - Fix humidity icon in sensor list. [TheYOSH]
 - Fix door graphs (2) [TheYOSH]
 - Fix door graphs. [TheYOSH]
@@ -25,7 +25,9 @@ Changelog
 - Fix door history. [TheYOSH]
 
 **Updates**
+- Update changelog. [TheYOSH]
 
+  Better format
 - Small updates. [TheYOSH]
 - Updated English language. [TheYOSH]
 - Updated code to support multiple door sensors. [TheYOSH]
@@ -39,7 +41,6 @@ Changelog
 - Update missing translations. [TheYOSH]
 
 **Other**
-
 - Removed debugging. [TheYOSH]
 - Support for not using some parts of the environment system. [TheYOSH]
 - Removed the doorpin config from general settings page. [TheYOSH]
