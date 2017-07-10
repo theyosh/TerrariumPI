@@ -5,9 +5,7 @@
               <div class="row">
                 <div class="pull-left">
                   <span class="count_top"><span aria-hidden="true" class="glyphicon glyphicon-time"></span> {{_('Uptime')}}</span>
-                  <div class="count">
-                    0
-                  </div>
+                  <div class="count">0</div>
                 </div>
                 <div class="progress progress-striped active vertical bottom pull-right">
                   <div class="progress-bar progress-bar-danger" data-transitiongoal="0" role="progressbar"></div>
@@ -24,9 +22,7 @@
               <div class="row">
                 <div class="pull-left">
                   <span class="count_top"><span aria-hidden="true" class="glyphicon glyphicon-flash"></span> {{_('Power usage in Watt')}}</span>
-                  <div class="count">
-                    0/0
-                  </div>
+                  <div class="count">0/0</div>
                 </div>
                 <div class="progress progress-striped active vertical bottom pull-right">
                   <div class="progress-bar progress-bar-success" data-transitiongoal="0" role="progressbar"></div>
@@ -37,9 +33,7 @@
               <div class="row">
                 <div class="pull-left">
                   <span class="count_top"><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Water flow in L/m')}}</span>
-                  <div class="count">
-                    0/0
-                  </div>
+                  <div class="count">0/0</div>
                 </div>
                 <div class="progress progress-striped active vertical bottom pull-right">
                   <div class="progress-bar progress-bar-info" data-transitiongoal="0" role="progressbar"></div>
@@ -49,18 +43,14 @@
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id="total_power">
               <div class="row">
                 <span class="count_top"><span aria-hidden="true" class="glyphicon glyphicon-flash"></span> {{_('Total power in kWh')}}</span>
-                <div class="count">
-                  0
-                </div>
+                <div class="count">0</div>
                 <span class="count_bottom"><i class="green costs"><i class="fa fa-eur"></i><span></span></i> {{_('in')}} <span class="duration"></span></span>
               </div>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id="total_water">
               <div class="row">
                 <span class="count_top"><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Total water in L')}}</span>
-                <div class="count">
-                  0
-                </div>
+                <div class="count">0</div>
                 <span class="count_bottom"><i class="green costs"><i class="fa fa-eur"></i><span></span></i> {{_('in')}} <span class="duration"></span></span>
               </div>
             </div>
