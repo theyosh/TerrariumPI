@@ -2,13 +2,15 @@
 import logging
 logger = logging.getLogger(__name__)
 
+import gettext
+gettext.install('terrariumpi', 'locales/', unicode=True)
+
 from bottle import Bottle, request, abort, static_file, template, error, response, auth_basic, HTTPError
 from bottle.ext.websocket import GeventWebSocketServer
 from bottle.ext.websocket import websocket
 from Queue import Queue
 
-import gettext
-gettext.install('terrariumpi', 'locales/', unicode=True)
+from terrariumTranslations import terrariumTranslations
 
 import thread
 import json
@@ -46,9 +48,11 @@ class terrariumWebserver():
     self.__app = terrariumWebserver.app
     self.__config = self.__terrariumEngine.get_config('system')
     self.__caching_days = 30
+
     terrariumWebserver.app.terrarium = self.__terrariumEngine
     # Load language
     gettext.translation('terrariumpi', 'locales/', languages=[self.__terrariumEngine.config.get_active_language()]).install(True)
+    self.__translations = terrariumTranslations()
 
     self.__routes()
 
@@ -78,7 +82,8 @@ class terrariumWebserver():
   def __template_variables(self, template):
     variables = { 'lang' : self.__terrariumEngine.config.get_active_language(),
                   'title' : self.__config['title'],
-                  'page_title' : _(template.replace('_',' ').capitalize())}
+                  'page_title' : _(template.replace('_',' ').capitalize()),
+                  'translations': self.__translations }
 
     if 'index' == template:
       variables['person_name'] = self.__config['person']
@@ -142,6 +147,7 @@ class terrariumWebserver():
       # Reload language if needed
       if 'active_language' in postdata:
         gettext.translation('terrariumpi', 'locales/', languages=[self.__terrariumEngine.config.get_active_language()]).install(True)
+        self.__translations.reload()
 
     return result
 
@@ -247,7 +253,10 @@ class terrariumWebserver():
 
   def start(self):
     # Start the webserver
-    print 'Running webserver at %s:%s' % (self.__config['host'],self.__config['port'])
+    logger.info('Running webserver at %s:%s' % (self.__config['host'],self.__config['port']))
+    print '%s - INFO - terrariumWebserver - Running webserver at %s:%s' % (datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S,000'),
+                                             self.__config['host'],
+                                             self.__config['port'])
     self.__app.run(host=self.__config['host'],
                    port=self.__config['port'],
                    server=GeventWebSocketServer,
