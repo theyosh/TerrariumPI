@@ -401,12 +401,12 @@ function online_updater() {
   }, 120 * 1000);
 }
 
-function update_door_messages(online) {
+function update_door_messages(online,date) {
   var title   = (online ? '{{_('Open')}}' : '{{_('Close')}}');
   var message = (online ? '{{_('Door is open')}}' : '{{_('Door is closed')}}');
   var icon    = (online ? 'fa-unlock' : 'fa-lock');
   var color   = (online ? 'red' : 'green');
-  add_notification_message('door_messages', title, message, icon, color);
+  add_notification_message('door_messages', title, message, icon, color, date);
 }
 
 function update_online_messages(online) {
@@ -417,7 +417,11 @@ function update_online_messages(online) {
   add_notification_message('online_messages', title, message, icon, color);
 }
 
-function add_notification_message(type, title, message, icon, color) {
+function add_notification_message(type, title, message, icon, color, date) {
+  var notification_date = new Date().getTime();
+  if (date != undefined) {
+    notification_date = date;
+  }
   var menu = $('ul#' + type);
   if (menu.find('li:first a span.message').text() == message) {
     // Skip duplicate messages
@@ -430,14 +434,14 @@ function add_notification_message(type, title, message, icon, color) {
     'src': $('div.profile_pic img').attr('src'),
     'alt': '{{_('Profile image')}}'
   })));
-  notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('timestamp', (new Date()).getTime()).text('...')));
+  notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('timestamp',notification_date).text('...')));
   notification.append($('<span>').addClass('message').text(message).append($('<span>').addClass('pull-right').html('<i class="fa ' + icon + ' ' + color + '"></i>')));
   // Remove no messages line
   menu.find('li.no_message').hide();
   // Add new message on top
   menu.prepend($('<li>').addClass('notification').append(notification));
-  // Only allow 5 messages, more will be removed
-  menu.find('li.notification:gt(4)').remove();
+  // Only allow 6 messages, more will be removed
+  menu.find('li.notification:gt(5)').remove();
   // Update the notifcation time
   notification_timestamps();
 }
@@ -1027,7 +1031,7 @@ function process_graph_data(type, raw_data) {
             graphdata[name].push(copy);
           }
         });
-      } else if (counter == 0 && status[1] == 1) {
+      } else if (counter == 0 && status[1] == 1 && type == 'door') {
         // If starting with status up/on add a status down/off first for nice graphing
         $.each(graphdata, function(name,data){
           if (typeof graphdata[name] == 'object' ) {
@@ -1131,6 +1135,24 @@ function createWebcamLayer(webcamid, maxzoom) {
   });
 }
 
+function loadDoorHistory() {
+  $.getJSON('api/history/doors', function(door_data) {
+    var door_status = {};
+    var state_change = '';
+    $.each(door_data.door, function(counter, statedata) {
+      for (var i = 0; i < statedata.state.length; i++) {
+        if (state_change != statedata.state[i][1]) {
+          door_status[statedata.state[i][0]] = statedata.state[i][1];
+          state_change = statedata.state[i][1];
+        }
+      }
+    });
+    $.each(Object.keys(door_status).sort(), function(counter,change_time) {
+      update_door_messages((door_status[change_time] == 'open'), change_time);
+    })
+  });
+}
+
 function capitalizeFirstLetter(string) {
     return string[0].toUpperCase() + string.slice(1);
 }
@@ -1160,6 +1182,7 @@ $(document).ready(function() {
       position: "absolute",
 	}).appendTo("body");
 
+  loadDoorHistory();
   load_page('dashboard.html');
 
   setInterval(function() {
