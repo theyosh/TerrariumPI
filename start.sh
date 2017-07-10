@@ -15,7 +15,7 @@ SCRIPT=$(basename $(readlink -nf $0))
 RUN=$1
 
 function message {
-  echo "$(date +"%Y-%m-%d %T,000") - INFO    - terrariumWrapper - $1"
+  echo "$(date +"%Y-%m-%d %T,000") - INFO - terrariumWrapper - $1"
 }
 
 if [ "${RUN}" == "run" ]
