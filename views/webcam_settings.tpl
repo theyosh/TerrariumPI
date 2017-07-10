@@ -16,16 +16,16 @@
             <p>{{_('Here you can setup the webcams that are used. Per webcam fill in the following fields:')}}</p>
             <ul>
               <li>
-                <strong>{{_('ID')}}</strong>: {{_('Shows the webcam ID. (readonly)')}}
+                <strong>{{_('ID')}}</strong>: {{translations.get_translation('webcam_field_id')}}
               </li>
               <li>
-                <strong>{{_('Name')}}</strong>: {{_('Holds the name of the webcam.')}}
+                <strong>{{_('Name')}}</strong>: {{translations.get_translation('webcam_field_name')}}
               </li>
               <li>
-                <strong>{{_('Location')}}</strong>: {{_('Holds the location of the source. For Raspberry PI cam use \'%s\'. For V4L use \'%s\'. And for a remote HTTP webcam use a full url like \'%s\'.') % ('rpicam','/dev/video0','https://source.mywebcam.com/stream')}}
+                <strong>{{_('Location')}}</strong>: {{ translations.get_translation('webcam_field_location') % ('rpicam','/dev/video0','https://source.mywebcam.com/stream')}}
               </li>
               <li>
-                <strong>{{_('Picture rotation')}}</strong>: {{_('Holds the rotation value of the webcam.')}}
+                <strong>{{_('Picture rotation')}}</strong>: {{translations.get_translation('webcam_field_rotation')}}
               </li>
             </ul>
           </div>
@@ -49,42 +49,31 @@
                 </div>
                 <div class="x_content">
                   <div class="col-md-8 col-sm-8 col-xs-12 form-group">
-                    <label for="webcam_{{item}}_id">{{_('ID')}} <span class="required">*</span></label> <input class="form-control" name="webcam_{{item}}_id" placeholder="{{_('ID')}}" readonly="readonly" type="text">
+                    <label for="webcam_{{item}}_id">{{_('ID')}} <span class="required">*</span></label>
+                    <input class="form-control" name="webcam_{{item}}_id" placeholder="{{_('ID')}}" readonly="readonly" type="text">
                   </div>
                   <div class="col-md-4 col-sm-4 col-xs-12 form-group pull-right">
                     <label for="webcam_{{item}}_location">{{_('Preview')}}</label>
                     <div class="webcam_preview"><img id="webcam_{{item}}_preview" src="static/images/webcam_offline.png"></div>
                   </div>
                   <div class="col-md-8 col-sm-8 col-xs-12 form-group">
-                    <label for="webcam_{{item}}_name">{{_('Name')}} <span class="required">*</span></label> <input class="form-control" name="webcam_{{item}}_name" placeholder="{{_('Name')}}" type="text">
+                    <label for="webcam_{{item}}_name">{{_('Name')}} <span class="required">*</span></label>
+                    <input class="form-control" name="webcam_{{item}}_name" placeholder="{{_('Name')}}" type="text">
                   </div>
                   <div class="col-md-8 col-sm-8 col-xs-12 form-group">
-                    <label for="webcam_{{item}}_location">{{_('Location')}} <span class="required">*</span></label> <input class="form-control" name="webcam_{{item}}_location" onchange="update_webcam_preview(this.name.split('_')[1],this.value)" placeholder="{{_('Location')}}" type="text">
+                    <label for="webcam_{{item}}_location">{{_('Location')}} <span class="required">*</span></label>
+                    <input class="form-control" name="webcam_{{item}}_location" onchange="update_webcam_preview(this.name.split('_')[1],this.value)" placeholder="{{_('Location')}}" type="text">
                   </div>
                   <div class="col-md-8 col-sm-8 col-xs-12 form-group">
                     <label for="webcam_{{item}}_rotation">{{_('Picture rotation')}} <span class="required">*</span></label>
                     <div class="form-group">
                       <select class="form-control" name="webcam_{{item}}_rotation" tabindex="-1" placeholder="{{_('Select an option')}}">
-                        <option>
-                          </option>
-                        <option value="0">
-                          0 {{_('degrees')}}
-                        </option>
-                        <option value="90">
-                          90 {{_('degrees')}}
-                        </option>
-                        <option value="180">
-                          180 {{_('degrees')}}
-                        </option>
-                        <option value="270">
-                          270 {{_('degrees')}}
-                        </option>
-                        <option value="H">
-                          {{_('Flip Horizontal')}}
-                        </option>
-                        <option value="V">
-                          {{_('Flip Vertical')}}
-                        </option>
+                        <option value="0">0 {{_('degrees')}}</option>
+                        <option value="90">90 {{_('degrees')}}</option>
+                        <option value="180">180 {{_('degrees')}}</option>
+                        <option value="270">270 {{_('degrees')}}</option>
+                        <option value="H">{{_('Flip Horizontal')}}</option>
+                        <option value="V">{{_('Flip Vertical')}}</option>
                       </select>
                     </div>
                   </div>

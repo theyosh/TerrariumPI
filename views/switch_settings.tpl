@@ -16,16 +16,16 @@
             <p>{{_('Here you can setup your power switches. First select the amount of switches that are being used. Then enter per switch the following information:')}}</p>
             <ul>
               <li>
-                <strong>{{_('ID')}}</strong>: {{_('Shows the switch ID. (readonly)')}}
+                <strong>{{_('ID')}}</strong>: {{translations.get_translation('switch_field_id')}}
               </li>
               <li>
-                <strong>{{_('Name')}}</strong>: {{_('Holds the name of the switch.')}}
+                <strong>{{_('Name')}}</strong>: {{translations.get_translation('switch_field_name')}}
               </li>
               <li>
-                <strong>{{_('Power usage in Watt')}}</strong>: {{_('Holds the amount of watt of the power comsupmtion when switched on.')}}
+                <strong>{{_('Power usage in Watt')}}</strong>: {{translations.get_translation('switch_field_power_usage')}}
               </li>
               <li>
-                <strong>{{_('Water flow in L/m')}}</strong>: {{_('Holds the amount of water in liter per minute that is flowing through when switched on.')}}
+                <strong>{{_('Water flow in L/m')}}</strong>: {{translations.get_translation('switch_field_water_flow')}}
               </li>
             </ul>
           </div>
@@ -52,11 +52,8 @@
                     <div class="col-md-8 col-sm-6 col-xs-12">
                       <div class="form-group">
                         <select class="form-control" name="amount_of_switches" tabindex="-1" placeholder="{{_('Select a number')}}">
-                          <option></option>
-                          % for item in range(0,max_swithes):
-                          <option value="{{item+1}}">
-                            {{item+1}}
-                          </option>
+                          % for counter in range(1,max_swithes+1):
+                          <option value="{{counter}}">{{counter}}</option>
                           % end
                         </select>
                       </div>
@@ -87,16 +84,20 @@
                 </div>
                 <div class="x_content">
                   <div class="col-md-3 col-sm-6 col-xs-12 form-group">
-                    <label for="switch_{{item}}_id">{{_('ID')}}</label> <input class="form-control" name="switch_{{item}}_id" placeholder="{{_('ID')}}" readonly="readonly" type="text">
+                    <label for="switch_{{item}}_id">{{_('ID')}}</label>
+                    <input class="form-control" name="switch_{{item}}_id" placeholder="{{_('ID')}}" readonly="readonly" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_id')}}">
                   </div>
                   <div class="col-md-3 col-sm-6 col-xs-12 form-group">
-                    <label for="switch_{{item}}_name">{{_('Name')}}</label> <input class="form-control" name="switch_{{item}}_name" placeholder="{{_('Name')}}" type="text">
+                    <label for="switch_{{item}}_name">{{_('Name')}}</label>
+                    <input class="form-control" name="switch_{{item}}_name" placeholder="{{_('Name')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_name')}}">
                   </div>
                   <div class="col-md-3 col-sm-6 col-xs-12 form-group">
-                    <label for="switch_{{item}}_power_wattage">{{_('Power usage in Watt')}}</label> <input class="form-control" name="switch_{{item}}_power_wattage" placeholder="{{_('Power usage in Watt')}}" type="text">
+                    <label for="switch_{{item}}_power_wattage">{{_('Power usage in Watt')}}</label>
+                    <input class="form-control" name="switch_{{item}}_power_wattage" placeholder="{{_('Power usage in Watt')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_power_usage')}}">
                   </div>
                   <div class="col-md-3 col-sm-6 col-xs-12 form-group">
-                    <label for="switch_{{item}}_water_flow">{{_('Water flow in L/m')}}</label> <input class="form-control" name="switch_{{item}}_water_flow" placeholder="{{_('Water flow in L/m')}}" type="text">
+                    <label for="switch_{{item}}_water_flow">{{_('Water flow in L/m')}}</label>
+                    <input class="form-control" name="switch_{{item}}_water_flow" placeholder="{{_('Water flow in L/m')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_water_flow')}}">
                   </div>
                 </div>
               </div>

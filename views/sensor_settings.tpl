@@ -16,25 +16,25 @@
             <p>{{_('Enter per sensor the values. The icon in front of the sensors shows if it is a humidity or temperature sensor. The address and current fields are readonly. The fields are:')}}</p>
             <ul>
               <li>
-                <strong>{{_('Address')}}</strong>: {{_('Shows the 1-wire address of the sensor. (readonly)')}}
+                <strong>{{_('Address')}}</strong>: {{translations.get_translation('sensor_field_address')}}
               </li>
               <li>
-                <strong>{{_('Name')}}</strong>: {{_('Holds the name of the sensor.')}}
+                <strong>{{_('Name')}}</strong>: {{translations.get_translation('sensor_field_name')}}
               </li>
               <li>
-                <strong>{{_('Alarm min')}}</strong>: {{_('Holds the lower limit of the sensor. When below this value, alarms will trigger. Like humidity gets to low, it will trigger the spraying system.')}}
+                <strong>{{_('Alarm min')}}</strong>: {{translations.get_translation('sensor_field_alarm_min')}}
               </li>
               <li>
-                <strong>{{_('Alarm max')}}</strong>: {{_('Holds the maximum limit of the sensor. When above this value, it will show alarms to indicate but no triggers.')}}
+                <strong>{{_('Alarm max')}}</strong>: {{translations.get_translation('sensor_field_alarm_max')}}
               </li>
               <li>
-                <strong>{{_('Limit min')}}</strong>: {{_('Holds the lowest value that should be used in the graphs.')}}
+                <strong>{{_('Limit min')}}</strong>: {{translations.get_translation('sensor_field_limit_min')}}
               </li>
               <li>
-                <strong>{{_('Limit max')}}</strong>: {{_('Holds the maximum value that should be used in the graphs.')}}
+                <strong>{{_('Limit max')}}</strong>: {{translations.get_translation('sensor_field_limit_max')}}
               </li>
               <li>
-                <strong>{{_('Current')}}</strong>: {{_('Shows the current value in temperature or humidity.')}}
+                <strong>{{_('Current')}}</strong>: {{translations.get_translation('sensor_field_current')}}
               </li>
             </ul>
           </div>
@@ -58,25 +58,33 @@
                 </div>
                 <div class="x_content">
                   <div class="col-md-3 col-sm-3 col-xs-12 form-group">
-                    <label for="sensor_{{item}}_address">{{_('Address')}}</label> <input class="form-control" name="sensor_{{item}}_address" placeholder="{{_('Address')}}" readonly="readonly" type="text"> <input class="form-control" name="sensor_{{item}}_id" placeholder="ID" readonly="readonly" type="hidden">
+                    <label for="sensor_{{item}}_address">{{_('Address')}}</label>
+                    <input class="form-control" name="sensor_{{item}}_address" placeholder="{{_('Address')}}" readonly="readonly" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_address')}}">
+                    <input class="form-control" name="sensor_{{item}}_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
                   </div>
                   <div class="col-md-3 col-sm-3 col-xs-12 form-group">
-                    <label for="sensor_{{item}}_name">{{_('Name')}}</label> <input class="form-control" name="sensor_{{item}}_name" placeholder="{{_('Name')}}" type="text">
+                    <label for="sensor_{{item}}_name">{{_('Name')}}</label>
+                    <input class="form-control" name="sensor_{{item}}_name" placeholder="{{_('Name')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_name')}}">
                   </div>
                   <div class="col-md-1 col-sm-1 col-xs-12 form-group">
-                    <label for="sensor_{{item}}_alarm_min">{{_('Alarm min')}}</label> <input class="form-control" name="sensor_{{item}}_alarm_min" placeholder="{{_('Limit min')}}" type="text">
+                    <label for="sensor_{{item}}_alarm_min">{{_('Alarm min')}}</label>
+                    <input class="form-control" name="sensor_{{item}}_alarm_min" placeholder="{{_('Alarm min')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_alarm_min')}}">
                   </div>
                   <div class="col-md-1 col-sm-1 col-xs-12 form-group">
-                    <label for="sensor_{{item}}_alarm_max">{{_('Alarm max')}}</label> <input class="form-control" name="sensor_{{item}}_alarm_max" placeholder="{{_('Limit max')}}" type="text">
+                    <label for="sensor_{{item}}_alarm_max">{{_('Alarm max')}}</label>
+                    <input class="form-control" name="sensor_{{item}}_alarm_max" placeholder="{{_('Alarm max')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_alarm_max')}}">
                   </div>
                   <div class="col-md-1 col-sm-1 col-xs-12 form-group">
-                    <label for="sensor_{{item}}_min">{{_('Limit min')}}</label> <input class="form-control" name="sensor_{{item}}_min" placeholder="{{_('Limit min')}}" type="text">
+                    <label for="sensor_{{item}}_min">{{_('Limit min')}}</label>
+                    <input class="form-control" name="sensor_{{item}}_min" placeholder="{{_('Limit min')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_limit_min')}}">
                   </div>
                   <div class="col-md-1 col-sm-1 col-xs-12 form-group">
-                    <label for="sensor_{{item}}_max">{{_('Limit max')}}</label> <input class="form-control" name="sensor_{{item}}_max" placeholder="{{_('Limit max')}}" type="text">
+                    <label for="sensor_{{item}}_max">{{_('Limit max')}}</label>
+                    <input class="form-control" name="sensor_{{item}}_max" placeholder="{{_('Limit max')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_limit_max')}}">
                   </div>
                   <div class="col-md-2 col-sm-2 col-xs-12 form-group">
-                    <label for="sensor_{{item}}_current">{{_('Current')}}</label> <input class="form-control" name="sensor_{{item}}_current" placeholder="{{_('Current')}}" readonly="readonly" type="text">
+                    <label for="sensor_{{item}}_current">{{_('Current')}}</label>
+                    <input class="form-control" name="sensor_{{item}}_current" placeholder="{{_('Current')}}" readonly="readonly" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_current')}}">
                   </div>
                 </div>
               </div>

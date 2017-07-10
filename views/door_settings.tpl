@@ -16,13 +16,13 @@
             <p>{{_('Here you can setup the webcams that are used. Per webcam fill in the following fields:')}}</p>
             <ul>
               <li>
-                <strong>{{_('ID')}}</strong>: {{_('Shows the webcam ID. (readonly)')}}
+                <strong>{{_('ID')}}</strong>: {{translations.get_translation('door_field_id')}}
               </li>
               <li>
-                <strong>{{_('Name')}}</strong>: {{_('Holds the name of the webcam.')}}
+                <strong>{{_('Name')}}</strong>: {{translations.get_translation('door_field_name')}}
               </li>
               <li>
-                <strong>{{_('GPIO Pin')}}</strong>: {{_('Holds the pin number on which the sensor is connected.')}}
+                <strong>{{_('GPIO Pin')}}</strong>: {{translations.get_translation('door_field_gpio_pin')}}
               </li>
             </ul>
           </div>
@@ -48,19 +48,19 @@
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="door_{{item}}_id">{{_('ID')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control" name="door_{{item}}_id" placeholder="{{_('ID')}}" readonly="readonly" type="text">
+                      <input class="form-control" name="door_{{item}}_id" placeholder="{{_('ID')}}" readonly="readonly" type="text" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('door_field_id')}}">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="door_{{item}}_name">{{_('Name')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control" name="door_{{item}}_name" placeholder="{{_('Name')}}" type="text">
+                      <input class="form-control" name="door_{{item}}_name" placeholder="{{_('Name')}}" type="text" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('door_field_name')}}">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="door_{{item}}_gpiopin">{{_('GPIO Pin')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control" name="door_{{item}}_gpiopin" placeholder="{{_('GPIO Pin')}}" type="text">
+                      <input class="form-control" name="door_{{item}}_gpiopin" placeholder="{{_('GPIO Pin')}}" type="text" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('door_field_gpio_pin')}}">
                     </div>
                   </div>
                 </div>
