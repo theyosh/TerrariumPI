@@ -434,7 +434,7 @@ function add_notification_message(type, title, message, icon, color, date) {
     'src': $('div.profile_pic img').attr('src'),
     'alt': '{{_('Profile image')}}'
   })));
-  notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('timestamp',notification_date).text('...')));
+  notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('data-timestamp',notification_date).text('...')));
   notification.append($('<span>').addClass('message').text(message).append($('<span>').addClass('pull-right').html('<i class="fa ' + icon + ' ' + color + '"></i>')));
   // Remove no messages line
   menu.find('li.no_message').hide();
@@ -460,7 +460,7 @@ function close_notification_message(notification) {
 function notification_timestamps() {
   var now = (new Date()).getTime();
   $('span.notification_timestamp').each(function() {
-    var timestamp = $(this).attr('timestamp') * 1;
+    var timestamp = $(this).attr('data-timestamp') * 1;
     var duration = moment.duration((now - timestamp) * -1);
     $(this).text(duration.humanize(true));
   });
