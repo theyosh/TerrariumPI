@@ -119,7 +119,7 @@
                     </table>
                   </div>
                   <div class="row environment_sprayer">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span><i class="fa fa-tint"></i> {{_('Sprayer')}}</h4>
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-tint"></i> {{_('Sprayer')}}</h4>
                     <table class="tile_info">
                       <tr>
                         <td>
@@ -142,7 +142,7 @@
                     </table>
                   </div>
                   <div class="row environment_heater">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span><i class="fa fa-fire"></i> {{_('Heater')}} <small>{{_('modus')}}: <span></span></small></h4>
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-fire"></i> {{_('Heater')}} <small>{{_('modus')}}: <span></span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
