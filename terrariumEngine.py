@@ -135,7 +135,12 @@ class terrariumEngine():
 
       # Calculate power and water usage per day every 9th minute
       if int(time.strftime('%M')) % 10 == 9:
+        for powerswitchid in self.power_switches:
+          self.collector.log_switch_data(self.power_switches[powerswitchid].get_data())
         self.collector.log_total_power_and_water_usage(self.pi_power_wattage)
+
+        for doorid in self.doors:
+          self.collector.log_door_data(self.doors[doorid].get_data())
 
       # Websocket messages back
       self.get_uptime(socket=True)
