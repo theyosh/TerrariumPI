@@ -28,6 +28,9 @@ canvas.gauge {
 .sidebar-footer a {
   height: 35px;
 }
+.top_nav .navbar-right {
+  width: 80% !important;
+}
 
 /* System time */
 #system_time {
@@ -175,3 +178,72 @@ div.row.door div.sidebar-widget i.fa {
   filter: FlipV;
   -ms-filter: FlipV;
 }
+
+
+/* Documentation */
+#usage_content .interactive_screenshot {
+  position: relative;
+  padding: 0px;
+}
+#usage_content .interactive_screenshot img,
+#usage_content .interactive_screenshot iframe {
+  width: 100%;
+  margin: 0px;
+  box-shadow: 1px 1px 10px 2px #D1D1D1;
+}
+#usage_content .click_area {
+  position: absolute;
+  cursor: pointer;
+}
+#usage_content .click_area:hover,
+#usage_content .click_area.hover {
+  border: solid 1px #1ABB9C;
+}
+#usage_content #screenshot_dashboard_top_indicators {
+  left: 74%;
+  top: 0%;
+  height: 7.5%;
+  width: 26%;
+}
+#usage_content #screenshot_dashboard_top_tiles {
+  left: 14.5%;
+  top: 7.5%;
+  height: 12.5%;
+  width: 85.5%;
+}
+#usage_content #screenshot_dashboard_environment {
+  top: 22%;
+  height: 68.5%;
+  left: 79%;
+  width: 20%;
+}
+#usage_content #screenshot_dashboard_graphs {
+  top: 22%;
+  height: 69%;
+  left: 15.5%;
+  width: 62.2%;
+}
+
+
+#usage_content #screenshot_weather_forecast_current {
+  top: 14.5%;
+  height: 48.5%;
+  left: 15.5%;
+  width: 27.2%;
+}
+
+#usage_content #screenshot_weather_forecast_day {
+  top: 14.5%;
+  height: 33.6%;
+  left: 43.7%;
+  width: 55.2%;
+}
+
+#usage_content #screenshot_weather_forecast_week {
+  top: 48.8%;
+  height: 33.8%;
+  left: 43.8%;
+  width: 55.2%;
+}
+
+/* End Documentation */
