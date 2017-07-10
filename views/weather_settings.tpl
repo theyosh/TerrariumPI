@@ -1,18 +1,46 @@
 % include('inc/page_header.tpl')
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2 id="deviceid">{{_('Weather')}} <small>...</small></h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li>
-                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                  </li>
-                </ul>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <form action="/api/config/weather" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2><span class="glyphicon glyphicon-info-sign" aria-hidden="true" title="{{_('Information')}}"></span> {{_('Help')}}<small></small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li>
+                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li>
+                <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <p>{{_('Here you can configure the weather settings. Currently only data from https://yr.no is supported:')}}</p>
+            <ul>
+              <li>
+                <strong>{{_('Location')}}</strong>: {{_('Holds the full url of the XML source.')}}
+              </li>
+              <li>
+                <strong>{{_('Wind speed')}}</strong>: {{_('Holds the wind speed indicator.')}}
+              </li>
+              <li>
+                <strong>{{_('Temperature')}}</strong>: {{_('Holds the temperature indicator.')}}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <form action="/api/config/weather" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2 id="deviceid">{{_('Weather')}} <small>...</small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                      <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="location">{{_('Location')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
@@ -59,12 +87,11 @@
                       <button class="btn btn-success" type="submit">{{_('Submit')}}</button>
                     </div>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
+        </form>
         <script type="text/javascript">
           $(document).ready(function() {
             var windspeed_selector = $("select[name='windspeed']").select2({
