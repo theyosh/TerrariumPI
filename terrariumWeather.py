@@ -8,45 +8,278 @@ import dateutil.parser
 import thread
 import time
 import copy
+import urllib2
+import json
+import re
 
 from gevent import monkey, sleep
 monkey.patch_all()
 
-class terrariumWeather():
+class terrariumWeatherYRno():
 
-  # We only supprt yr.no for now
+  update_timeout = 30 * 60
   forecast_hours = '{location}/forecast_hour_by_hour.xml'
   forecast_week = '{location}/forecast.xml'
 
-  def __init__(self, location,  windspeed  = 'kmh', temperature = 'C', callback = None):
-    self.settings = {'type':'yr.no', 'location': location.strip('/')}
+  def __init__(self,url):
+    # We 'accept' that the url is valid... :(
+    self.source = url
+
+    self.city = None
+    self.country = None
+    self.geo = None
+    self.sunrise = None
+    self.sunset = None
+    self.forecast = []
+    self.copyright = {'text' : '', 'url' : ''}
+
+    self.last_update = None
+
+  def __update(self):
+    now = int(time.time())
+    if self.last_update is None or now - self.last_update > terrariumWeatherYRno.update_timeout:
+      self.__process_forecast_data('hour')
+      self.__process_forecast_data('week')
+      self.last_update = now
+
+  def __load_defaults(self,xmldata):
+    self.city = xmldata.weatherdata.location.name.cdata
+    self.country = xmldata.weatherdata.location.country.cdata
+    self.geo = {'lat'  : float(xmldata.weatherdata.location.location['latitude']),
+                'long' : float(xmldata.weatherdata.location.location['longitude'])}
+
+    self.copyright['text'] = xmldata.weatherdata.credit.link['text']
+    self.copyright['url']  = xmldata.weatherdata.credit.link['url']
+
+    self.sunrise = time.mktime(dateutil.parser.parse(xmldata.weatherdata.sun['rise']).timetuple())
+    self.sunset  = time.mktime(dateutil.parser.parse(xmldata.weatherdata.sun['set']).timetuple())
+
+  def __process_forecast_data(self,period = 'hour'):
+    if period == 'hour':
+      xmldata = untangle.parse(terrariumWeatherYRno.forecast_hours.replace('{location}',self.source))
+    elif period == 'week':
+      xmldata = untangle.parse(terrariumWeatherYRno.forecast_week.replace('{location}',self.source))
+
+    self.__load_defaults(xmldata)
+
+    data = []
+    for forecast in xmldata.weatherdata.forecast.tabular.time:
+      data.append({'from' : time.mktime(dateutil.parser.parse(forecast['from']).timetuple()),
+                   'to' : time.mktime(dateutil.parser.parse(forecast['to']).timetuple()),
+                   'weather' : forecast.symbol['name'],
+                   'rain' : float(forecast.precipitation['value']),
+                   'wind_direction' : forecast.windDirection['name'],
+                   'wind_speed' : float(forecast.windSpeed['mps']),
+                   'temperature' : float(forecast.temperature['value']),
+                   'pressure' : float(forecast.pressure['value'])
+                  })
+
+    if period == 'hour':
+      self.hour_forecast = copy.deepcopy(data)
+    elif period == 'week':
+      self.week_forecast = copy.deepcopy(data)
+
+  #def __set_sunrise(self,data):
+  #  now = datetime.now()
+  #  self.sunrise = now.replace(hour=int(data['hour']), minute=int(data['minute']), second=0)
+
+  #def __set_sunset(self,data):
+  #  now = datetime.now()
+  #  self.sunset = now.replace(hour=int(data['hour']), minute=int(data['minute']), second=0)
+  #  if now > self.sunset:
+  #    self.sunrise += timedelta(days=1)
+  #    self.sunset += timedelta(days=1)
+
+  def get_city(self):
+    self.__update()
+    return self.city
+
+  def get_country(self):
+    self.__update()
+    return self.country
+
+  def get_geo(self):
+    self.__update()
+    return self.geo
+
+  def get_copyright(self):
+    self.__update()
+    return self.copyright
+
+  def get_sunrise(self):
+    self.__update()
+    return self.sunrise
+
+  def get_sunset(self):
+    self.__update()
+    return self.sunset
+
+  def get_forecast(self,period = 'day'):
+    self.__update()
+    if period == 'day':
+      return self.hour_forecast
+    else:
+      return self.week_forecast
+
+class terrariumWeatherWunderground():
+
+  update_timeout = 30 * 60
+
+  def __init__(self,url):
+    # We 'accept' that the url is valid... :(
+    self.source = url
+
+    self.city = None
+    self.country = None
+    self.geo = None
+    self.sunrise = None
+    self.sunset = None
+    self.forecast = []
+    self.copyright = {'text' : 'Wunderground weather data', 'url' : ''}
+
+    self.last_update = None
+
+  def __update(self):
+    now = int(time.time())
+    if self.last_update is None or now - self.last_update > terrariumWeatherWunderground.update_timeout:
+      json_data = urllib2.urlopen(self.source)
+      parsed_json = json.loads(json_data.read())
+
+      self.city = parsed_json['location']['city']
+      self.country = parsed_json['location']['country_name']
+      self.geo = {'lat' : float(parsed_json['location']['lat']), 'long' : float(parsed_json['location']['lon'])}
+      self.copyright['url'] = parsed_json['location']['wuiurl']
+
+      self.__set_sunrise(parsed_json['sun_phase']['sunrise'])
+      self.__set_sunset(parsed_json['sun_phase']['sunset'])
+      self.__process_forecast_data(parsed_json['hourly_forecast'])
+
+      self.last_update = now
+
+  def __set_sunrise(self,data):
+    now = datetime.now()
+    self.sunrise = now.replace(hour=int(data['hour']), minute=int(data['minute']), second=0)
+
+  def __set_sunset(self,data):
+    now = datetime.now()
+    self.sunset = now.replace(hour=int(data['hour']), minute=int(data['minute']), second=0)
+    if now > self.sunset:
+      self.sunrise += timedelta(days=1)
+      self.sunset += timedelta(days=1)
+
+  def __process_forecast_data(self,data):
+    for forecast in data:
+      self.forecast.append({'from' : int(forecast['FCTTIME']['epoch']),
+                            'to' : int(forecast['FCTTIME']['epoch']) + (60 * 60),
+                            'weather' : forecast['condition'],
+                            'rain' : 0, # Figure out the data
+                            'wind_direction' : forecast['wdir']['dir'],
+                            'wind_speed' : float(forecast['wspd']['metric']) / 3.6,
+                            'temperature' : float(forecast['temp']['metric']),
+                            'pressure' : float(forecast['mslp']['metric'])
+                          })
+
+  def get_city(self):
+    self.__update()
+    return self.city
+
+  def get_country(self):
+    self.__update()
+    return self.country
+
+  def get_geo(self):
+    self.__update()
+    return self.geo
+
+  def get_copyright(self):
+    self.__update()
+    return self.copyright
+
+  def get_sunrise(self):
+    self.__update()
+    return time.mktime(self.sunrise.timetuple())
+
+  def get_sunset(self):
+    self.__update()
+    return time.mktime(self.sunset.timetuple())
+
+  def get_forecast(self,period = 'day'):
+    self.__update()
+    data = []
+    datelimit = int(time.time()) + (1 * 24 * 60 * 60 if period == 'day' else 99 * 24 * 60 * 60)
+    for forecast in self.forecast:
+      if forecast['to'] < datelimit:
+        data.append(forecast)
+
+    return copy.deepcopy(data)
+
+class terrariumWeather():
+
+  valid_sources = {'yr.no'       : re.compile(r'^https?://(www.)?yr.no/place/(?P<country>[^/]+)/(?P<provance>[^/]+)/(?P<city>[^/]+/?)?', re.IGNORECASE),
+                   'weather.com' : re.compile(r'^https?://api\.wunderground\.com/api/[^/]+/(?P<p1>[^/]+)/(?P<p2>[^/]+)/(?P<p3>[^/]+)/q/(?P<country>[^/]+)/(?P<city>[^/]+)\.json$', re.IGNORECASE)}
+
+  def __init__(self, source,  windspeed  = 'kmh', temperature = 'C', callback = None):
+    self.source   = None
     self.location = {'city' : '', 'country' : '', 'geo' : {'lat' : 0, 'long' : 0}}
-    self.credits =  {'text' : '', 'url' : ''}
-    self.updates =  {'lastupdate' : 0 , 'nextupdate' : 0}
-    self.sun =      {'rise' : 0, 'set' : 0}
+    self.credits  = {'text' : '', 'url' : ''}
+    self.sun      = {'rise' : 0, 'set' : 0}
     self.hour_forecast = []
     self.week_forecast = []
     self.callback = callback
     self.next_update = 0
     self.windspeed = windspeed
     self.temperature = temperature
-    self.__refresh()
+
+    if self.__set_source(source):
+      self.refresh()
+
+  def __set_source(self,source):
+    for source_type in terrariumWeather.valid_sources:
+      data = terrariumWeather.valid_sources[source_type].match(source)
+      if data and self.source != source:
+        self.source = source
+        self.type = source_type
+
+        if self.type == 'yr.no':
+          self.weater_source = terrariumWeatherYRno(self.source)
+        elif self.type == 'weather.com':
+          self.weater_source = terrariumWeatherWunderground(self.source)
+
+        return True
+
+    return False
+
+  def __update_weather_icons(self):
+    for forecast in self.hour_forecast:
+      forecast['icon'] = self.__get_weather_icon(forecast['weather'])
+
+    for forecast in self.week_forecast:
+      forecast['icon'] = self.__get_weather_icon(forecast['weather'])
 
   def __get_weather_icon(self,weathertype):
-    weathertype = weathertype.lower()
+    weathertype = weathertype.lower().replace(' ','',10)
 
-    icons = {'clear sky' : 'clear_' + ('day' if self.is_day() else 'night'),
+    icons = {'clearsky' : 'clear_' + ('day' if self.is_day() else 'night'),
              'fair' : 'clear_' + ('day' if self.is_day() else 'night'),
-             'partly cloudy' : 'partly_cloudy_' + ('day' if self.is_day() else 'night'),
+             'clear' : 'clear_' + ('day' if self.is_day() else 'night'),
+
+             'partlycloudy' : 'partly_cloudy_' + ('day' if self.is_day() else 'night'),
+             'mostlycloudy' : 'partly_cloudy_' + ('day' if self.is_day() else 'night'),
              'cloudy' : 'cloudy',
-             'light rain showers' : 'rain',
-             'light rain' : 'rain',
+             'overcast' : 'cloudy',
+
+             'lightrainshowers' : 'rain',
+             'lightrain' : 'rain',
              'rain' : 'rain',
-             'rain showers' : 'sleet',
-             'heavy rain showers' : 'sleet',
-             'heavy rain' : 'sleet',
+             'chanceofrain' : 'rain',
+
+             'rainshowers' : 'sleet',
+             'heavyrainshowers' : 'sleet',
+             'heavyrain' : 'sleet',
+
              'fog' : 'fog',
-             'light snow showers' : 'snow'
+
+             'lightsnowshowers' : 'snow'
            }
 
     if weathertype in icons:
@@ -54,10 +287,18 @@ class terrariumWeather():
 
     return None
 
-  def __refresh(self):
+  def refresh(self):
     logger.info('Refreshing weather data')
-    self.__load_hours_forecast()
-    self.__load_week_forecast()
+
+    self.sun['rise'] = self.weater_source.get_sunrise()
+    self.sun['set'] = self.weater_source.get_sunset()
+    self.location['city'] = self.weater_source.get_city()
+    self.location['country'] = self.weater_source.get_country()
+    self.location['geo'] = self.weater_source.get_geo()
+    self.credits = self.weater_source.get_copyright()
+    self.hour_forecast = self.weater_source.get_forecast('day')
+    self.week_forecast = self.weater_source.get_forecast('all')
+    self.__update_weather_icons()
 
     self.next_update = int(time.time()) + 3600
     logger.info('Done refreshing weather data. Next update after: %s' % (self.next_update,))
@@ -68,7 +309,7 @@ class terrariumWeather():
 
     # Refresh the data
     if len(self.hour_forecast) == 0 or now > self.next_update:
-      self.__refresh()
+      self.refresh()
       send_message = True
 
     # Update hourly forecast for today
@@ -98,82 +339,25 @@ class terrariumWeather():
                           'credits': self.credits})
 
     for item in data['hour_forecast']:
-      item['icon'] = self.__get_weather_icon(item['weather'])
       item['wind_speed'] *= (3.6 if self.windspeed == 'kmh' else 1.0)
       item['temperature'] = item['temperature'] if self.temperature == 'C' else 9.0 / 5.0 * item['temperature'] + 32.0
 
     for item in data['week_forecast']:
-      item['icon'] = self.__get_weather_icon(item['weather'])
       item['wind_speed'] *= (3.6 if self.windspeed == 'kmh' else 1.0)
       item['temperature'] = item['temperature'] if self.temperature == 'C' else 9.0 / 5.0 * item['temperature'] + 32.0
 
     return data
 
-  def __load_defaults(self,xmldata):
-    self.location['city'] = xmldata.weatherdata.location.name.cdata
-    self.location['country'] = xmldata.weatherdata.location.country.cdata
-    self.location['geo'] = {'lat': float(xmldata.weatherdata.location.location['latitude']),
-                            'long' : float(xmldata.weatherdata.location.location['longitude'])}
-
-    self.credits['text'] = xmldata.weatherdata.credit.link['text']
-    self.credits['url'] = xmldata.weatherdata.credit.link['url']
-
-    self.sun['rise'] = time.mktime(dateutil.parser.parse(xmldata.weatherdata.sun['rise']).timetuple())
-    self.sun['set'] = time.mktime(dateutil.parser.parse(xmldata.weatherdata.sun['set']).timetuple())
-
-    logger.debug('Loaded weather defaults for location %s, sun %s, credits %s' % (self.location,self.sun,self.credits))
-
-  def __load_hours_forecast(self):
-    logger.debug('Loading hours forcecast data from location: %s' % (terrariumWeather.forecast_hours.replace('{location}',self.settings['location']),))
-    xmldata = untangle.parse(terrariumWeather.forecast_hours.replace('{location}',self.settings['location']))
-    self.__load_defaults(xmldata);
-    self.hour_forecast = []
-    for forecast in xmldata.weatherdata.forecast.tabular.time:
-      self.hour_forecast.append({'from' : time.mktime(dateutil.parser.parse(forecast['from']).timetuple()),
-                            'to' : time.mktime(dateutil.parser.parse(forecast['to']).timetuple()),
-                            'weather' : forecast.symbol['name'],
-                            'rain' : float(forecast.precipitation['value']),
-                            'wind_direction' : forecast.windDirection['name'],
-                            'wind_speed' : float(forecast.windSpeed['mps']),
-                            'temperature' : float(forecast.temperature['value']),
-                            'pressure' : float(forecast.pressure['value']),
-                            'icon' : self.__get_weather_icon(forecast.symbol['name'])
-                           })
-      logger.debug('Added hour forecast for timeslot %s to %s' % (datetime.fromtimestamp(self.hour_forecast[len(self.hour_forecast)-1]['from']),
-                                                                  datetime.fromtimestamp(self.hour_forecast[len(self.hour_forecast)-1]['to'])))
-
-  def __load_week_forecast(self):
-    logger.debug('Loading week forcecast data from location: %s' % (terrariumWeather.forecast_week.replace('{location}',self.settings['location']),))
-    xmldata = untangle.parse(terrariumWeather.forecast_week.replace('{location}',self.settings['location']))
-    self.__load_defaults(xmldata);
-    self.week_forecast = []
-    for forecast in xmldata.weatherdata.forecast.tabular.time:
-      self.week_forecast.append({'from' : time.mktime(dateutil.parser.parse(forecast['from']).timetuple()),
-                              'to' : time.mktime(dateutil.parser.parse(forecast['to']).timetuple()),
-                              'weather' : forecast.symbol['name'],
-                              'rain' : float(forecast.precipitation['value']),
-                              'wind_direction' : forecast.windDirection['name'],
-                              'wind_speed' : float(forecast.windSpeed['mps']),
-                              'temperature' : float(forecast.temperature['value']),
-                              'pressure' : float(forecast.pressure['value']),
-                              'icon' : self.__get_weather_icon(forecast.symbol['name'])
-                             })
-      logger.debug('Added week forecast for timeslot %s to %s' % (datetime.fromtimestamp(self.week_forecast[len(self.week_forecast)-1]['from']),
-                                                                  datetime.fromtimestamp(self.week_forecast[len(self.week_forecast)-1]['to'])))
-
   def get_config(self):
-    return {'location' : self.settings['location'],
+    return {'location' : self.source,
             'windspeed' : self.windspeed,
             'temperature' : self.temperature,
-            'type': self.settings['type']}
+            'type': self.type}
 
-  def set_location(self,location):
-    location = location.strip('/')
-    refresh = location != self.settings['location'].strip('/')
-    self.settings['location'] = location
-    if refresh:
+  def set_location(self,url):
+    if self.__set_source(url):
       # Start refresh in a thread, so it will not lockup the web interface / API call
-      thread.start_new_thread(self.__refresh, (True))
+      thread.start_new_thread(self.refresh,)
 
   def set_windspeed_indicator(self,indicator):
     if indicator in ['kmh','ms']:

@@ -17,6 +17,10 @@
             <ul>
               <li>
                 <strong>{{_('Location')}}</strong>: {{translations.get_translation('weather_field_location')}}
+                <ul>
+                  <li><strong>YR.no</strong>: https://www.yr.no/place/[COUNTRY]/[PROVANCE]/[CITY]</li>
+                  <li><strong>Weather underground</strong>: http://api.wunderground.com/api/[YOUR_API_KEY]/<strong>geolookup/astronomy/hourly10day</strong>/q/[COUNTRY]/[CITY].json</li>
+                </ul>
               </li>
               <li>
                 <strong>{{_('Wind speed')}}</strong>: {{translations.get_translation('weather_field_wind_speed')}}

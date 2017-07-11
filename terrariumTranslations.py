@@ -12,7 +12,7 @@ class terrariumTranslations():
   def __load(self):
     logger.debug('Loading translations')
     # Weather
-    self.translations['weather_field_location'] = _('Enter the full url to the weather data source. For now only YR.no is supported')
+    self.translations['weather_field_location'] = _('Enter the full url to the weather data source. For now only YR.no and Weather underground is supported')
     self.translations['weather_field_wind_speed'] = _('Choose the windspeed indicator. The software will recalculate to the chosen indicator')
     self.translations['weather_field_temperature'] = _('Choose the temperature indicator. The software will recalulate to the chosen indicator')
     # End weather
