@@ -930,7 +930,7 @@ function history_graph(name, data, type) {
       break;
 
   }
-  if (graph_data[0].data.length > 0) {
+  if (graph_data[0].data != undefined && graph_data[0].data.length > 0) {
     var total_data_duration = (graph_data[0].data[graph_data[0].data.length - 1][0] - graph_data[0].data[0][0]) / 3600000;
     graph_options.xaxis.tickSize[0] = Math.round(total_data_duration * 2.5);
   }
