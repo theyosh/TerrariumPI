@@ -168,6 +168,7 @@ class terrariumWeatherWunderground():
       self.sunset += timedelta(days=1)
 
   def __process_forecast_data(self,data):
+    self.forecast = []
     for forecast in data:
       self.forecast.append({'from' : int(forecast['FCTTIME']['epoch']),
                             'to' : int(forecast['FCTTIME']['epoch']) + (60 * 60),
