@@ -32,6 +32,18 @@ canvas.gauge {
   width: 80% !important;
 }
 
+.modal-lg {
+  width: 80% !important;
+}
+
+.page-title .title_right h3 button {
+  margin: 0px 1px 1px 0px !important;
+}
+
+.missing-required {
+  border: solid 1px red;
+}
+
 /* System time */
 #system_time {
   display: block;

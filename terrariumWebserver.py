@@ -260,6 +260,6 @@ class terrariumWebserver():
     self.__app.run(host=self.__config['host'],
                    port=self.__config['port'],
                    server=GeventWebSocketServer,
-                   debug=False,
+                   debug=True,
                    reloader=False,
                    quiet=True)

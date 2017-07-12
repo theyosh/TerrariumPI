@@ -188,8 +188,27 @@ class terrariumConfig:
     return int(self.get_system()['1wire_port'])
 
   def save_sensor(self,data):
-    del(data['address'])
+    # Upgrade step
+    if 'min' in data:
+      data['limit_min'] = data['min']
+      del(data['min'])
+
+    if 'max' in data:
+      data['limit_max'] = data['max']
+      del(data['max'])
+
+    del(data['current'])
     return self.__update_config('sensor' + str(data['id']),data)
+
+  def save_sensors(self,data):
+    update_ok = True
+    for sensorid in self.get_sensors():
+      self.__config.remove_section('sensor' + sensorid)
+
+    for sensorid in data:
+      update_ok = update_ok and self.save_sensor(data[sensorid].get_data())
+
+    return update_ok
 
   def get_sensors(self):
     data = {}
@@ -197,6 +216,16 @@ class terrariumConfig:
       if section[:6] == 'sensor':
         sensor_data = self.__get_config(section)
         data[section[6:]] = sensor_data
+
+    # Upgrade step
+    # Upgrade step
+    if 'min' in data:
+      data['limit_min'] = data['min']
+      del(data['min'])
+
+    if 'max' in data:
+      data['limit_max'] = data['max']
+      del(data['max'])
 
     return data
   # End sensor config functions
