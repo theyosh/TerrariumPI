@@ -69,7 +69,8 @@ class terrariumSensor:
   def scan(port,config): # TODO: Wants a callback per sensor here....?
     logger.debug('Start scanning for temperature/humidity sensors')
     sensors = []
-    remaining_sensors = config.keys()
+    done_sensors = []
+
     try:
       ow.init(str(port));
       sensorsList = ow.Sensor('/').sensorList()
@@ -79,7 +80,7 @@ class terrariumSensor:
           sensor_id = md5(b'' + sensor.address + 'temperature').hexdigest()
           if sensor_id in config:
             sensor_config = config[sensor_id]
-            del(remaining_sensors[sensor_id])
+            done_sensors.append(sensor_id)
 
           sensors.append(terrariumSensor( sensor_id,
                                           '1wire',
@@ -95,7 +96,7 @@ class terrariumSensor:
           sensor_id = md5(b'' + sensor.address + 'humidity').hexdigest()
           if sensor_id in config:
             sensor_config = config[sensor_id]
-            del(remaining_sensors[sensor_id])
+            done_sensors.append(sensor_id)
 
           sensors.append(terrariumSensor(sensor_id,
                                          '1wire',
@@ -112,7 +113,7 @@ class terrariumSensor:
       pass
 
     # 'Scanning' for GPIO sensors. These are the remaining sensors based on config
-    for sensor_id in remaining_sensors:
+    for sensor_id in set(config.keys()) - set(done_sensors):
       if sensor_id in config:
         sensor_config = config[sensor_id]
 

@@ -203,9 +203,9 @@ class terrariumEngine():
             'temperature' : cpu_temp}
 
     if socket:
-      gauge_data = {'system_load'        : {'current' : data['load']['load1'] * 100, 'alarm_min' : 0, 'alarm_max': 80, 'min' : 0, 'max': 100},
-                    'system_temperature' : {'current' : data['temperature'], 'alarm_min' : 30, 'alarm_max': 60, 'min' : 0, 'max': 80},
-                    'system_memory'      : {'current' : data['memory']['used'] / (1024 * 1024), 'alarm_min' : data['memory']['total'] / (1024 * 1024) * 0.1, 'alarm_max': data['memory']['total'] / (1024 * 1024) * 0.9, 'min' : 0, 'max': data['memory']['total'] / (1024 * 1024)}}
+      gauge_data = {'system_load'        : {'current' : data['load']['load1'] * 100, 'alarm_min' : 0, 'alarm_max': 80, 'limit_min' : 0, 'limit_max': 100},
+                    'system_temperature' : {'current' : data['temperature'], 'alarm_min' : 30, 'alarm_max': 60, 'limit_min' : 0, 'limit_max': 80},
+                    'system_memory'      : {'current' : data['memory']['used'] / (1024 * 1024), 'alarm_min' : data['memory']['total'] / (1024 * 1024) * 0.1, 'alarm_max': data['memory']['total'] / (1024 * 1024) * 0.9, 'limit_min' : 0, 'limit_max': data['memory']['total'] / (1024 * 1024)}}
 
       gauge_data['system_load']['alarm'] = not(gauge_data['system_load']['alarm_min'] < gauge_data['system_load']['current'] < gauge_data['system_load']['alarm_max'])
       gauge_data['system_temperature']['alarm'] = not(gauge_data['system_temperature']['alarm_min'] < gauge_data['system_temperature']['current'] < gauge_data['system_temperature']['alarm_max'])
@@ -386,15 +386,7 @@ class terrariumEngine():
     if filtertype is None:
       return len(self.sensors)
     else:
-      return len(self.get_sensors([filtertype]))
-
-
-    #amount = 0
-    #for sensorid in self.sensors:
-    #  if self.sensors[sensorid].get_type() == filtertype:
-    #    amount += 1
-
-    #return amount
+      return len(self.get_sensors([filtertype])['sensors'])
 
   def get_sensors_config(self, socket = False):
     return self.get_sensors()

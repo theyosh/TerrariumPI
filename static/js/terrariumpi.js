@@ -239,7 +239,7 @@ function prepare_form_data(form) {
               }
               if (prev_nr != current_nr) {
                 if (Object.keys(objectdata).length > 1) {
-                  formdata[prev_nr] = $.extend(true, {}, objectdata);
+                  formdata.push($.extend(true, {}, objectdata));
                 }
                 // New item
                 objectdata = {};
@@ -255,7 +255,7 @@ function prepare_form_data(form) {
       }
     });
     if (Object.keys(objectdata).length > 1) {
-      formdata[prev_nr] = $.extend(true, {}, objectdata);
+      formdata.push($.extend(true, {}, objectdata));
     }
   } catch (error) {
     console.log(error);
@@ -567,8 +567,6 @@ function init_sidebar() {
 
   // toggle small or large menu
   $MENU_TOGGLE.on('click', function() {
-		console.log('clicked - menu toggle');
-
 		if ($BODY.hasClass('nav-md')) {
 			$SIDEBAR_MENU.find('li.active ul').hide();
 			$SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
