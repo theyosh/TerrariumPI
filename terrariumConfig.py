@@ -18,8 +18,14 @@ class terrariumConfig:
     self.__config_file = 'settings.cfg'
 
     self.__config = ConfigParser.SafeConfigParser()
+    # Read defaults config file
     self.__config.readfp(open(self.__defaults_file))
+    # Read new version number
+    version = self.get_system()['version']
+    # Read custom config file
     self.__config.read(self.__config_file)
+    # Update version number
+    self.__config.set('terrariumpi', 'version', str(version))
 
   # Private functions
   def __save_config(self):
@@ -149,6 +155,8 @@ class terrariumConfig:
 
   # Weather config functions
   def save_weather(self,data):
+    if 'type' in data:
+      del(data['type'])
     return self.__update_config('weather',data)
 
   def get_weather(self):
