@@ -239,7 +239,11 @@ function prepare_form_data(form) {
               }
               if (prev_nr != current_nr) {
                 if (Object.keys(objectdata).length > 1) {
-                  formdata.push($.extend(true, {}, objectdata));
+                  if (form_type === 'weather' || form_type === 'environment' || form_type === 'system') {
+                    formdata[prev_nr] = $.extend(true, {}, objectdata);
+                  } else {
+                    formdata.push($.extend(true, {}, objectdata));
+                  }
                 }
                 // New item
                 objectdata = {};
@@ -255,7 +259,11 @@ function prepare_form_data(form) {
       }
     });
     if (Object.keys(objectdata).length > 1) {
-      formdata.push($.extend(true, {}, objectdata));
+      if (form_type === 'weather' || form_type === 'environment' || form_type === 'system') {
+        formdata[prev_nr] = $.extend(true, {}, objectdata);
+      } else {
+        formdata.push($.extend(true, {}, objectdata));
+      }
     }
   } catch (error) {
     console.log(error);
