@@ -60,7 +60,7 @@
             $.get('/api/switches',function(data) {
               var power_divs = $('div.row.switch');
               $.each(data.switches,function(index,value){
-                $(power_divs[value.nr-1]).attr('id','switch_' + value.id);
+                $(power_divs[index]).attr('id','switch_' + value.id);
                 update_power_switch(value.id,value);
                 load_history_graph('switch_' + value.id,'switch','/api/history/switches/' + value.id);
               });

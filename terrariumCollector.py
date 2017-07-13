@@ -173,8 +173,9 @@ class terrariumCollector():
   def log_switch_data(self,switch):
     switch_id = switch['id']
     del(switch['id'])
+    del(switch['hardwaretype'])
+    del(switch['address'])
     del(switch['name'])
-    del(switch['nr'])
     self.__log_data('switches',switch_id,switch)
 
   def log_door_data(self,door):

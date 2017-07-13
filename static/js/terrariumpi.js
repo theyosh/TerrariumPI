@@ -1014,6 +1014,51 @@ function add_sensor_row(id,hardwaretype,address,type,name,alarm_min,alarm_max,li
   });
 }
 
+function add_switch() {
+  var form = $('.new-switch-form');
+  var fieldsok = true;
+  form.find('input[required="required"][readonly!="readonly"][readonly!="hidden"]').each(function(counter,item) {
+    var field = $(this);
+    var empty = field.val() == '';
+    if (empty) {
+      field.addClass('missing-required');
+    }
+    fieldsok = fieldsok && !empty;
+  });
+  if (!fieldsok) return false;
+
+  add_switch_row('None',
+                 form.find('select[name="switch_[nr]_hardwaretype"]').val(),
+                 form.find('input[name="switch_[nr]_address"]').val(),
+                 form.find('input[name="switch_[nr]_name"]').val(),
+                 form.find('input[name="switch_[nr]_power_wattage"]').val(),
+                 form.find('input[name="switch_[nr]_water_flow"]').val());
+
+  $('.new-switch-form').modal('hide');
+}
+
+function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow) {
+  var switch_row = $($('.modal-body div.row.switch').parent().clone().html().replace(/\[nr\]/g, $('form div.row.switch').length));
+
+  switch_row.find('div.power_switch.small').attr('id','switch_' + id);
+
+  switch_row.find('.x_title').show().find('h2 small').text(name);
+  switch_row.find('span.select2.select2-container').remove();
+
+  switch_row.find('input, select').each(function(counter,item){
+    $(item).val(eval($(item).attr('name').replace(/switch_[0-9]+_/g,'')));
+  });
+
+  switch_row.insertBefore('div.row.submit');
+  reload_reload_theme();
+
+  switch_row.find("select").select2({
+    placeholder: '{{_('Select an option')}}',
+    allowClear: false,
+    minimumResultsForSearch: Infinity
+  });
+}
+
 function update_power_switch(id, data) {
   var power_switch = $('#switch_' + id);
   power_switch.find('h2 span.title').text('{{_('Switch')}} ' + data.name);

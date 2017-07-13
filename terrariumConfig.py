@@ -146,6 +146,7 @@ class terrariumConfig:
     return data['light'] if 'light' in data else None
   # End Environment functions
 
+
   # Weather config functions
   def save_weather(self,data):
     return self.__update_config('weather',data)
@@ -165,6 +166,7 @@ class terrariumConfig:
     data = self.get_weather()
     return data['temperature'] if 'temperature' in data else None
   # End weather config functions
+
 
   # Sensor config functions
   def get_owfs_port(self):
@@ -204,7 +206,6 @@ class terrariumConfig:
         data[section[6:]] = sensor_data
 
     # Upgrade step
-    # Upgrade step
     if 'min' in data:
       data['limit_min'] = data['min']
       del(data['min'])
@@ -216,24 +217,36 @@ class terrariumConfig:
     return data
   # End sensor config functions
 
+
   # Switches config functions
-  def save_switch(self,data):
+  def save_power_switch(self,data):
+    if 'state' in data:
+      del(data['state'])
+
     return self.__update_config('switch' + str(data['id']),data)
 
-  def get_switches(self):
-    config = self.__get_config('terrariumpi')
-    data = {'max_switches' : config['max_switches'],
-            'switches': {}}
+  def save_power_switches(self,data):
+    update_ok = True
+    for power_switch_id in self.get_power_switches():
+      self.__config.remove_section('swicth' + power_switch_id)
 
+    for power_switch_id in data:
+      update_ok = update_ok and self.save_power_switch(data[power_switch_id].get_data())
+
+    if len(data) == 0:
+      update_ok = update_ok and self.__save_config()
+
+    return update_ok
+
+  def get_power_switches(self):
+    data = {}
     for section in self.__config.sections():
       if section[:6] == 'switch':
         switch_data = self.__get_config(section)
-        data['switches'][section[6:]] = switch_data
+        data[section[6:]] = switch_data
 
     return data
   # End switches config functions
-
-
 
 
   # Webcam config functions

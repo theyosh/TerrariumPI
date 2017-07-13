@@ -11,7 +11,7 @@ from gevent import monkey, sleep
 
 from terrariumDoor import terrariumDoor
 from terrariumSensor import terrariumSensor
-from terrariumSwitchboard import terrariumSwitchboard
+from terrariumSwitch import terrariumSwitch
 from terrariumWeather import terrariumWeather
 from terrariumWebcam import terrariumWebcam
 from terrariumCollector import terrariumCollector
@@ -28,7 +28,6 @@ class terrariumEngine():
     # Default power usage for a PI
     self.pi_power_wattage = 5
 
-    self.switch_board = None #TODO: Fix proper
     self.environment = None
 
     # Load config
@@ -62,11 +61,7 @@ class terrariumEngine():
     self.__load_sensors()
 
     # Load Powerswitches part
-    logger.debug('Loading terrariumPI power switches')
-    self.power_switches = {}
-    self.switch_board = terrariumSwitchboard(self.config,self.toggle_switch)
-    self.power_switches = self.switch_board.switches
-    logger.debug('Done loading terrariumPI power switches')
+    self.__load_power_switches()
 
     # Load doors from config
     logger.debug('Loading terrariumPI doors')
@@ -103,6 +98,27 @@ class terrariumEngine():
     logger.info('Done %s terrariumPI temperature/humidity sensors. Found %d sensors in %.3f seconds' % ('reloading' if reloading else 'loading',
                                                                                                         len(self.sensors),
                                                                                                         time.time()-starttime))
+
+  def __load_power_switches(self,reloading = False):
+    # Load Switches, with ID as index
+    starttime = time.time()
+    logger.info('%s terrariumPI switches' % 'Reloading' if reloading else 'Loading',)
+    switch_config = self.config.get_power_switches()
+    self.power_switches = {}
+    for power_switch_config in switch_config:
+      power_switch = terrariumSwitch(
+        switch_config[power_switch_config]['id'],
+        switch_config[power_switch_config]['hardwaretype'],
+        switch_config[power_switch_config]['address'],
+        switch_config[power_switch_config]['name'],
+        switch_config[power_switch_config]['power_wattage'],
+        switch_config[power_switch_config]['water_flow'],
+        self.toggle_switch
+      )
+      self.power_switches[power_switch.get_id()] = power_switch
+    logger.info('Done %s terrariumPI switches. Found %d switches in %.3f seconds' % ('reloading' if reloading else 'loading',
+                                                                                      len(self.power_switches),
+                                                                                      time.time()-starttime))
 
   def __get_power_usage_water_flow(self, socket = False):
     data = {'power' : {'current' : self.pi_power_wattage , 'max' : self.pi_power_wattage},
@@ -422,6 +438,70 @@ class terrariumEngine():
     return False
   # End sensors part
 
+  # Switch part
+  def get_switches(self, parameters = [], socket = False):
+    data = []
+    filter = None
+    if len(parameters) > 0 and parameters[0] is not None:
+      filter = parameters[0]
+
+    if filter is not None and filter in self.power_switches:
+      data.append(self.power_switches[filter].get_data())
+
+    else:
+      for switchid in self.power_switches:
+        data.append(self.power_switches[switchid].get_data())
+
+    if socket:
+      self.__send_message({'type':'power_switches','data':data})
+    else:
+      return {'switches' : data}
+
+  def get_amount_of_switches(self):
+    return len(self.power_switches)
+
+  def get_switches_config(self, socket = False):
+    return self.get_switches()
+
+  def set_switches_config(self, data):
+    new_switches = {}
+    for switchdata in data:
+      if switchdata['id'] is None or switchdata['id'] == 'None' or switchdata['id'] not in self.power_switches:
+        # New switch (add)
+        power_switch = terrariumSwitch(None,switchdata['hardwaretype'],switchdata['address'])
+      else:
+        # Existing sensor
+        power_switch = self.power_switches[switchdata['id']]
+        # Should not be able to change setings
+        #power_switch.set_hardware_type(switchdata['hardwaretype'])
+
+      power_switch.set_address(switchdata['address'])
+      power_switch.set_name(switchdata['name'])
+      power_switch.set_power_wattage(switchdata['power_wattage'])
+      power_switch.set_water_flow(switchdata['water_flow'])
+
+      new_switches[power_switch.get_id()] = power_switch
+
+    self.power_switches = new_switches
+    if self.config.save_power_switches(self.power_switches):
+      self.__load_power_switches(True)
+      return True
+
+    return False
+
+  def toggle_switch(self,data):
+    self.collector.log_switch_data(data)
+    self.get_switches(socket=True)
+    self.get_power_usage_water_flow(socket=True)
+
+    if self.environment is not None:
+      self.get_environment(socket=True)
+
+    if data['state'] is False:
+      self.collector.log_total_power_and_water_usage(self.pi_power_wattage)
+  # End switch part
+
+
   # Door part
   def toggle_door_status(self, data, socket = False):
     self.collector.log_door_data(data)
@@ -489,62 +569,7 @@ class terrariumEngine():
     return update_ok
   # End door part
 
-  # Switch part
-  def get_switches_config(self, socket = False):
-    return self.get_switches()
 
-  def set_switches_config(self, data):
-    update_ok = True
-    for switchdata in data:
-      switch = self.power_switches[switchdata['id']]
-      switch.set_name(switchdata['name'])
-      switch.set_power_wattage(switchdata['power_wattage'])
-      switch.set_water_flow(switchdata['water_flow'])
-
-      update_ok = update_ok and self.config.save_switch(switch.get_data())
-
-    if update_ok:
-      self.power_switches = {}
-      self.switch_board = terrariumSwitchboard(self.config,self.toggle_switch)
-      self.power_switches = self.switch_board.switches
-
-    return update_ok
-
-  def get_amount_of_switches(self):
-    return len(self.power_switches)
-
-  def get_switches(self, parameters = [], socket = False):
-    data = []
-    filter = None
-    if len(parameters) > 0 and parameters[0] is not None:
-      filter = parameters[0]
-
-    if filter is not None and filter in self.power_switches:
-      data.append(self.power_switches[filter].get_data())
-
-    else:
-      for switchid in self.power_switches:
-        data.append(self.power_switches[switchid].get_data())
-
-    if socket:
-      self.__send_message({'type':'power_switches','data':data})
-    else:
-      return {'switches' : data}
-
-  def toggle_switch(self,data):
-    self.collector.log_switch_data(data)
-    self.get_switches(socket=True)
-    self.get_power_usage_water_flow(socket=True)
-
-    if self.environment is not None:
-      self.get_environment(socket=True)
-
-    if data['state'] is False:
-      self.collector.log_total_power_and_water_usage(self.pi_power_wattage)
-
-  def get_max_switches_config(self):
-    return int(self.config.get_system()['max_switches'])
-  # End switch part
 
   # Webcam part
   def get_amount_of_webcams(self):

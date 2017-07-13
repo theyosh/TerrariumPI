@@ -16,13 +16,16 @@
             <p>{{_('Here you can setup your power switches. First select the amount of switches that are being used. Then enter per switch the following information:')}}</p>
             <ul>
               <li>
-                <strong>{{_('ID')}}</strong>: {{translations.get_translation('switch_field_id')}}
+                <strong>{{_('Hardware')}}</strong>: {{translations.get_translation('switch_field_hardware')}}
+              </li>
+              <li>
+                <strong>{{_('Address')}}</strong>: {{translations.get_translation('switch_field_address')}}
               </li>
               <li>
                 <strong>{{_('Name')}}</strong>: {{translations.get_translation('switch_field_name')}}
               </li>
               <li>
-                <strong>{{_('Power usage in Watt')}}</strong>: {{translations.get_translation('switch_field_power_usage')}}
+                <strong>{{_('Power usage in Watt')}}</strong>: {{translations.get_translation('switch_field_power_wattage')}}
               </li>
               <li>
                 <strong>{{_('Water flow in L/m')}}</strong>: {{translations.get_translation('switch_field_water_flow')}}
@@ -31,80 +34,7 @@
           </div>
         </div>
         <form action="/api/config/switches" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2 id="deviceid">{{_('Powerswitch board')}}: <span>{{_('Device type')}}</span> <small>..</small></h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li>
-                      <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li>
-                      <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-4 col-xs-12" for="amount_of_switches">{{_('Amount of switches')}} <span class="required">*</span></label>
-                    <div class="col-md-8 col-sm-6 col-xs-12">
-                      <div class="form-group">
-                        <select class="form-control" name="amount_of_switches" tabindex="-1" placeholder="{{_('Select a number')}}">
-                          % for counter in range(1,max_swithes+1):
-                          <option value="{{counter}}">{{counter}}</option>
-                          % end
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          % for item in range(0,max_swithes):
-          <div class="row switch">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <div class="power_switch small switch_{{item}}_state">
-                    <span aria-hidden="true" class="glyphicon glyphicon-off" onclick="toggleSwitch($(this).parent().attr('id'));"></span>
-                  </div>
-                  <h2>{{_('Switch')}} {{item+1}}<small></small></h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li>
-                      <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li>
-                      <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <div class="col-md-3 col-sm-6 col-xs-12 form-group">
-                    <label for="switch_{{item}}_id">{{_('ID')}}</label>
-                    <input class="form-control" name="switch_{{item}}_id" placeholder="{{_('ID')}}" readonly="readonly" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_id')}}">
-                  </div>
-                  <div class="col-md-3 col-sm-6 col-xs-12 form-group">
-                    <label for="switch_{{item}}_name">{{_('Name')}}</label>
-                    <input class="form-control" name="switch_{{item}}_name" placeholder="{{_('Name')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_name')}}">
-                  </div>
-                  <div class="col-md-3 col-sm-6 col-xs-12 form-group">
-                    <label for="switch_{{item}}_power_wattage">{{_('Power usage in Watt')}}</label>
-                    <input class="form-control" name="switch_{{item}}_power_wattage" placeholder="{{_('Power usage in Watt')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_power_usage')}}">
-                  </div>
-                  <div class="col-md-3 col-sm-6 col-xs-12 form-group">
-                    <label for="switch_{{item}}_water_flow">{{_('Water flow in L/m')}}</label>
-                    <input class="form-control" name="switch_{{item}}_water_flow" placeholder="{{_('Water flow in L/m')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_water_flow')}}">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          % end
-          <div class="row">
+          <div class="row submit">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="ln_solid"></div>
               <div class="form-group">
@@ -115,45 +45,94 @@
             </div>
           </div>
         </form>
-        <style>
-          .row.switch {
-            display: none;
-          }
-        </style>
-        <script type="text/javascript">
+        <div class="modal fade new-switch-form" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">{{_('Add new switch')}}</h4>
+              </div>
+              <div class="modal-body">
+                <div class="row switch">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                      <div class="x_title" style="display: none">
+                        <div class="power_switch small">
+                          <span aria-hidden="true" class="glyphicon glyphicon-off" onclick="toggleSwitch($(this).parent().attr('id'));"></span>
+                        </div>
+                        <h2><span class="switch_[nr]_icon"></span> {{_('Switch')}} <small>{{_('new')}}</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                          <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                          </li>
+                          <li>
+                            <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
+                          </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content">
+                        <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                          <label for="switch_[nr]_hardwaretype">{{_('Hardware')}} <span class="required">*</span></label>
+                          <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('switch_field_hardware')}}">
+                            <select class="form-control" name="switch_[nr]_hardwaretype" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
+                              <option value="ftdi">{{_('FTDI')}}</option>
+                              <option value="gpio">{{_('GPIO')}}</option>
+                              <option value="w1">{{_('1Wire')}}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12 form-group">
+                          <label for="switch_[nr]_address">{{_('Address')}}</label> <span class="required">*</span>
+                          <input class="form-control" name="switch_[nr]_address" placeholder="{{_('Address')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_address')}}">
+                          <input class="form-control" name="switch_[nr]_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                          <label for="switch_[nr]_name">{{_('Name')}}</label>
+                          <input class="form-control" name="switch_[nr]_name" placeholder="{{_('Name')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_name')}}">
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12 form-group">
+                          <label for="switch_[nr]_power_wattage">{{_('Power usage in Watt')}}</label>
+                          <input class="form-control" name="switch_[nr]_power_wattage" placeholder="{{_('Power usage in Watt')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_power_wattage')}}">
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12 form-group">
+                          <label for="switch_[nr]_water_flow">{{_('Water flow in L/m')}}</label>
+                          <input class="form-control" name="switch_[nr]_water_flow" placeholder="{{_('Water flow in L/m')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_water_flow')}}">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{_('Close')}}</button>
+                <button type="button" class="btn btn-primary" onclick="add_switch()" >{{_('Add')}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script tpe="text/javascript">
           $(document).ready(function() {
-            var selector = $("select[name='amount_of_switches']");
-            selector.select2({
-              placeholder: '{{_('Select a number')}}',
+            $('.page-title').append('<div class="title_right"><h3><button type="button" class="btn btn-primary alignright" data-toggle="modal" data-target=".new-switch-form"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h3> </div>');
+            $("select").select2({
+              placeholder: '{{_('Select an option')}}',
               allowClear: false,
               minimumResultsForSearch: Infinity
             });
-
-            selector.on('change',function() {
-              var amount = this.value;
-              $('.row.switch').each(function(index,row) {
-                if (index < amount) {
-                  $(row).show();
-                } else {
-                  $(row).hide();
-                }
-              });
-            });
-
             $.get($('form').attr('action'),function(data){
-              $('h2#deviceid span').text(data.switchboard_device + ' (' + data.switchboard_type + ')');
-              $('h2#deviceid small').text(data.switchboard_id);
-              $.each(data.switches, function(index,powerswitch) {
-                $('.switch_' + (powerswitch['nr']-1) + '_state').attr('id','switch_' + powerswitch['id']);
-                $(Object.keys(powerswitch)).each(function(counter,key){
-                  if ('state' != key ) {
-                    $('input[name="switch_' + (powerswitch['nr']-1) + '_' + key + '"]').val(powerswitch[key]);
-                  }
-                });
-                update_power_switch(powerswitch['id'],powerswitch);
+              $.each(data.switches, function(index,power_switch) {
+                // Clone empty sensor row....
+                add_switch_row(power_switch.id,
+                               power_switch.hardwaretype,
+                               power_switch.address,
+                               power_switch.name,
+                               power_switch.power_wattage,
+                               power_switch.water_flow);
+                update_power_switch(power_switch.id,power_switch);
               });
-              selector.val(data.switches.length);
-              selector.trigger('change');
+              reload_reload_theme();
             });
           });
         </script>
