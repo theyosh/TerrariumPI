@@ -998,7 +998,7 @@ function add_sensor_row(id,hardwaretype,address,type,name,alarm_min,alarm_max,li
   sensor_row.find('input, select').each(function(counter,item){
     $(item).val(eval($(item).attr('name').replace(/sensor_[0-9]+_/g,'')))
   });
-  sensor_row.find("input[name$='_address']").attr("readonly", hardwaretype == '1wire');
+  sensor_row.find("input[name$='_address']").attr("readonly", hardwaretype == 'owfs');
   sensor_row.insertBefore('div.row.submit');
 
   reload_reload_theme();
@@ -1009,7 +1009,7 @@ function add_sensor_row(id,hardwaretype,address,type,name,alarm_min,alarm_max,li
     minimumResultsForSearch: Infinity
   }).on('change',function() {
     if (this.name.indexOf('hardwaretype') >= 0) {
-      $("input[name='" + this.name.replace('hardwaretype','address') + "']").attr("readonly", this.value == '1wire');
+      $("input[name='" + this.name.replace('hardwaretype','address') + "']").attr("readonly", this.value == 'owfs');
     }
   });
 }

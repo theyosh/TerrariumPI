@@ -81,7 +81,7 @@
                           <label for="sensor_[nr]_hardwaretype">{{_('Hardware')}} <span class="required">*</span></label>
                           <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('sensor_field_bustype')}}">
                             <select class="form-control" name="sensor_[nr]_hardwaretype" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
-                              <option value="1wire">{{_('1Wire')}}</option>
+                              <option value="owfs">{{_('OWFS')}}</option>
                               <option value="dht11">{{_('DHT11')}}</option>
                               <option value="dht22">{{_('DHT22')}}</option>
                               <option value="am2302">{{_('AM2302')}}</option>
@@ -147,7 +147,7 @@
               minimumResultsForSearch: Infinity
             }).on('change',function() {
               if (this.name.indexOf('hardwaretype') >= 0) {
-                $("input[name='" + this.name.replace('hardwaretype','address') + "']").attr("readonly", this.value == '1wire');
+                $("input[name='" + this.name.replace('hardwaretype','address') + "']").attr("readonly", this.value == 'owfs');
               }
             });
             $.get($('form').attr('action'),function(data){

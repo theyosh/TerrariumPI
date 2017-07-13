@@ -184,8 +184,8 @@ class terrariumConfig:
   # End switches config functions
 
   # Sensor config functions
-  def get_1wire_port(self):
-    return int(self.get_system()['1wire_port'])
+  def get_owfs_port(self):
+    return int(self.get_system()['owfs_port'])
 
   def save_sensor(self,data):
     # Upgrade step

@@ -9,7 +9,7 @@ import ow
 import Adafruit_DHT as dht
 
 class terrariumSensor:
-  valid_hardware_types = ['1wire']
+  valid_hardware_types = ['owfs']
   valid_sensor_types   = ['temperature','humidity']
   valid_dht_sensors    = { 'dht11' : dht.DHT11,
                            'dht22' : dht.DHT22,
@@ -22,7 +22,7 @@ class terrariumSensor:
     self.id = id
     self.set_hardware_type(hardware_type)
 
-    if self.get_hardware_type() == '1wire':
+    if self.get_hardware_type() == 'owfs':
       # OW Sensor object
       self.sensor = sensor
       self.sensor.useCache(True)
@@ -30,7 +30,7 @@ class terrariumSensor:
     elif self.get_hardware_type() in terrariumSensor.valid_dht_sensors.keys():
       # Adafruit_DHT
       self.sensor = dht
-      # Dirty hack to replace 1wire sensor object for GPIO pin nr
+      # Dirty hack to replace OWFS sensor object for GPIO pin nr
       self.sensor_address = sensor
 
     self.set_name(name)
@@ -83,7 +83,7 @@ class terrariumSensor:
             done_sensors.append(sensor_id)
 
           sensors.append(terrariumSensor( sensor_id,
-                                          '1wire',
+                                          'owfs',
                                           'temperature',
                                           sensor,
                                           sensor_config['name'] if 'name' in sensor_config else '',
@@ -99,7 +99,7 @@ class terrariumSensor:
             done_sensors.append(sensor_id)
 
           sensors.append(terrariumSensor(sensor_id,
-                                         '1wire',
+                                         'owfs',
                                         'humidity',
                                         sensor,
                                         sensor_config['name'] if 'name' in sensor_config else '',
@@ -109,7 +109,7 @@ class terrariumSensor:
                                         sensor_config['limit_max'] if 'limit_max' in sensor_config else 100))
 
     except ow.exNoController:
-      logger.warning('1 Wire file system is not actve / installed on this device!')
+      logger.warning('OWFS file system is not actve / installed on this device!')
       pass
 
     # 'Scanning' for GPIO sensors. These are the remaining sensors based on config
@@ -138,13 +138,13 @@ class terrariumSensor:
       try:
         starttime = time.time()
         if 'temperature' == self.get_type():
-          if self.get_hardware_type() == '1wire':
+          if self.get_hardware_type() == 'owfs':
             self.current = float(self.sensor.temperature)
           elif self.get_hardware_type() in terrariumSensor.valid_dht_sensors.keys():
             humidity, temperature = self.sensor.read_retry(terrariumSensor.valid_dht_sensors[self.get_hardware_type()], self.sensor_address)
             self.current = float(temperature)
         elif 'humidity' == self.get_type():
-          if self.get_hardware_type() == '1wire':
+          if self.get_hardware_type() == 'owfs':
             self.current = float(self.sensor.humidity)
           elif self.get_hardware_type() in terrariumSensor.valid_dht_sensors.keys():
             humidity, temperature = self.sensor.read_retry(terrariumSensor.valid_dht_sensors[self.get_hardware_type()], self.sensor_address)
@@ -204,8 +204,8 @@ class terrariumSensor:
     return self.sensor_address
 
   def set_address(self,address):
-    # Can't set 1Wire addresses. This is done by the 1Wire bus
-    if self.get_hardware_type() != '1wire':
+    # Can't set OWFS sensor addresses. This is done by the OWFS software
+    if self.get_hardware_type() != 'owfs':
       self.sensor_address = address
 
   def set_name(self,name):

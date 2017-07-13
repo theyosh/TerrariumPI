@@ -98,7 +98,7 @@ class terrariumEngine():
     starttime = time.time()
     logger.info('%s terrariumPI temperature/humidity sensors' % 'Reloading' if reloading else 'Loading',)
     self.sensors = {}
-    for sensor in terrariumSensor.scan(self.config.get_1wire_port(), self.config.get_sensors()):
+    for sensor in terrariumSensor.scan(self.config.get_owfs_port(), self.config.get_sensors()):
       self.sensors[sensor.get_id()] = sensor
     logger.info('Done %s terrariumPI temperature/humidity sensors. Found %d sensors in %.3f seconds' % ('reloading' if reloading else 'loading',
                                                                                                         len(self.sensors),
@@ -404,7 +404,7 @@ class terrariumEngine():
         #sensor.set_hardware_type(sensordata['hardwaretype'])
         #sensor.set_type(sensordata['type'])
 
-      # Updating address will softly fail when updating 1wire sensors.
+      # Updating address will softly fail when updating OWFS sensors.
       sensor.set_address(sensordata['address'])
       sensor.set_name(sensordata['name'])
       sensor.set_alarm_min(sensordata['alarm_min'])
