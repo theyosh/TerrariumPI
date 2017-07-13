@@ -602,6 +602,7 @@ class terrariumEngine():
     return self.door_status() == terrariumDoor.CLOSED
   # End doors part
 
+
   # Webcams part
   def get_webcams(self, parameters = [], socket = False):
     data = []
@@ -631,21 +632,16 @@ class terrariumEngine():
     new_webcams = {}
     for webcamdata in data:
       if webcamdata['id'] is None or webcamdata['id'] == 'None' or webcamdata['id'] not in self.webcams:
-        # New switch (add)
+        # New webcam (add)
         webcam = terrariumWebcam(None,webcamdata['location'],webcamdata['name'])
       else:
-        # Existing door
+        # Existing webcam
         webcam = self.webcams[webcamdata['id']]
-        # Should not be able to change setings
-        #power_switch.set_hardware_type(switchdata['hardwaretype'])
 
       webcam.set_location(webcamdata['location'])
       webcam.set_name(webcamdata['name'])
 
       new_webcams[webcam.get_id()] = webcam
-
-
-    print new_webcams
 
     self.webcams = new_webcams
     if self.config.save_webcams(self.webcams):
