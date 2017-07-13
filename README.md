@@ -7,12 +7,12 @@ Software for cheap home automation of your reptile terrarium or any other enclos
 And all this is controlled with a nice webinterface based on [Bootstrap 3 template](https://github.com/puikinsh/gentelella/).
 ## Features
 - Controlling up to 4 electronic devices
-- Reading out 1-wire temperature and humidity sensors
+- Reading out temperature and humidity sensors
 - Open door detection
 - Support for native Raspberry PI cam out of the box
 - Power and water usage for costs calculation
 - Lights control based on sun rise and sun set or timers
-- Humidity control based on measured humidity
+- Rain control based on measured humidity
 - Heater control based on temperature sensors
 - Weather forecast from external source
 
@@ -20,17 +20,18 @@ And all this is controlled with a nice webinterface based on [Bootstrap 3 templa
 1. Get a working Raspberry PI
 2. Clone this repository and submodules: git clone --recursive https://github.com/theyosh/TerrariumPI.git
 3. run ./install.sh in the cloned folder
-4. run ./start.sh to start the TerrariumPI server
+4. reboot Raspberry PI to get all the needed modules loaded
 5. Go to the webinterface at http://[raspberry_ip]:8090
 
-# Setup
+If you want to use the Raspberry PI 1 wire interface, you have to manually enable it through the raspi-config and reboot once more.
+
+# Hardware
 This software requires some extra hardware in order to run and work. The bare minimun is
 - USB power relay board
-- 1-Wire setup
-  - 1-Wire readout module
-  - 1-Wire bus module
-  - 1 humdity sensor
-  - 1 temperature sensor
+- Temperature/humdity sensors DHT11, DHT22, AM2303, DS1820, HIH4000, etc through
+  - OWFS
+  - GPIO
+  - 1 Wire interface
 
 All other hardware depends on the usage. But you can use lights, spray systems, fans, everything that can be switched on and off through the USB power relay board.
 

@@ -33,8 +33,8 @@ class terrariumCollector():
                        type VARCHAR(15),
                        timestamp INTEGER(4),
                        current FLOAT(4),
-                       min FLOAT(4),
-                       max FLOAT(4),
+                       limit_min FLOAT(4),
+                       limit_max FLOAT(4),
                        alarm_min FLOAT(4),
                        alarm_max FLOAT(4),
                        alarm INTEGER(1) )''')
@@ -111,8 +111,8 @@ class terrariumCollector():
         cur = self.db.cursor()
 
         if type in ['humidity','temperature']:
-          cur.execute('REPLACE INTO sensor_data (id, type, timestamp, current, min, max, alarm_min, alarm_max, alarm) VALUES (?,?,?,?,?,?,?,?,?)',
-                      (id, type, now, newdata['current'], newdata['min'], newdata['max'], newdata['alarm_min'], newdata['alarm_max'], newdata['alarm']))
+          cur.execute('REPLACE INTO sensor_data (id, type, timestamp, current, limit_min, limit_max, alarm_min, alarm_max, alarm) VALUES (?,?,?,?,?,?,?,?,?)',
+                      (id, type, now, newdata['current'], newdata['limit_min'], newdata['limit_max'], newdata['alarm_min'], newdata['alarm_max'], newdata['alarm']))
 
         if type in ['switches']:
           cur.execute('REPLACE INTO switch_data (id, timestamp, state, power_wattage, water_flow) VALUES (?,?,?,?,?)',
@@ -188,6 +188,7 @@ class terrariumCollector():
   def log_sensor_data(self,sensor):
     sensor_data  = sensor.get_data()
     del(sensor_data['id'])
+    del(sensor_data['hardwaretype'])
     del(sensor_data['address'])
     del(sensor_data['type'])
     del(sensor_data['name'])
@@ -302,7 +303,7 @@ class terrariumCollector():
     sql = ''
     filters = (stoptime,starttime,)
     if logtype == 'sensors':
-      fields = { 'current' : [], 'alarm_min' : [], 'alarm_max' : [] , 'min' : [], 'max' : []}
+      fields = { 'current' : [], 'alarm_min' : [], 'alarm_max' : [] , 'limit_min' : [], 'limit_max' : []}
       sql = 'SELECT id, type, timestamp,' + ', '.join(fields.keys()) + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ? AND timestamp % ' + str(modulo) + ' = 0'
 
       if len(parameters) > 0 and parameters[0] == 'average':
@@ -337,9 +338,9 @@ class terrariumCollector():
         # Temporary overrule.... :P
         sql = '''
           SELECT ''' + str(stoptime) + ''' as timestamp,
-                  MAX(timestamp) - MIN(timestamp) as duration,
-                  SUM(power_wattage) as total_power,
-                  SUM(water_flow) as total_water
+                  IFNULL(MAX(timestamp) - MIN(timestamp),0) as duration,
+                  IFNULL(SUM(power_wattage),0) as total_power,
+                  IFNULL(SUM(water_flow),0) as total_water
             FROM switch_data
             WHERE id = ? '''
 

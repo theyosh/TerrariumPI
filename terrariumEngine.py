@@ -6,7 +6,6 @@ import thread
 import time
 import uptime
 import os
-#import datetime
 import psutil
 from gevent import monkey, sleep
 
@@ -33,31 +32,34 @@ class terrariumEngine():
     self.environment = None
 
     # Load config
-    logger.debug('Loading terrariumPI config')
+    logger.info('Loading terrariumPI config')
     self.config = terrariumConfig()
-    logger.debug('Done Loading terrariumPI config')
+    logger.info('Done Loading terrariumPI config')
 
-    logger.debug('Setting terrariumPI authentication')
+    logger.info('Setting terrariumPI authentication')
     self.set_authentication(self.config.get_admin(),self.config.get_password())
-    logger.debug('Done setting terrariumPI authentication')
+    logger.info('Done setting terrariumPI authentication')
 
     # Load data collector for historical data
-    logger.debug('Loading terrariumPI collector')
+    logger.info('Loading terrariumPI collector')
     self.collector = terrariumCollector()
-    logger.debug('Done loading terrariumPI collector')
+    logger.info('Done loading terrariumPI collector')
 
     # Set the Pi power usage (including usb devices directly on the PI)
-    logger.debug('Loading terrariumPI PI power setting')
+    logger.info('Loading terrariumPI PI power setting')
     self.pi_power_wattage = float(self.config.get_pi_power_wattage())
-    logger.debug('Done loading terrariumPI PI power setting')
+    logger.info('Done loading terrariumPI PI power setting')
 
     # Load Weather part
-    logger.debug('Loading terrariumPI weather data')
+    logger.info('Loading terrariumPI weather data')
     self.weather = terrariumWeather(self.config.get_weather_location(),
                                     self.config.get_weather_windspeed(),
                                     self.config.get_weather_temperature(),
                                     self.get_weather)
-    logger.debug('Done loading terrariumPI weather data')
+    logger.info('Done loading terrariumPI weather data')
+
+    # Load humidity and temperature sensors
+    self.__load_sensors()
 
     # Load Powerswitches part
     logger.debug('Loading terrariumPI power switches')
@@ -73,13 +75,6 @@ class terrariumEngine():
     for doorid in doors:
       self.doors[doors[doorid]['id']] = terrariumDoor(doors[doorid]['id'],doors[doorid]['gpiopin'],doors[doorid]['name'],self.toggle_door_status)
     logger.debug('Done loading terrariumPI doors')
-
-    # Load Sensors, with ID as index
-    logger.debug('Loading terrariumPI temperature/humidity sensors')
-    self.sensors = {}
-    for sensor in terrariumSensor.scan(self.config.get_1wire_port(), self.config.get_sensors()):
-      self.sensors[sensor.get_id()] = sensor
-    logger.debug('Done loading terrariumPI temperature/humidity sensors')
 
     # Load the environment system. This will controll the lights, sprayer and heaters
     logger.debug('Loading terrariumPI environment system')
@@ -97,6 +92,17 @@ class terrariumEngine():
     # Start system update loop
     logger.info('Start terrariumPI engine')
     thread.start_new_thread(self.__engine_loop, ())
+
+  def __load_sensors(self,reloading = False):
+    # Load Sensors, with ID as index
+    starttime = time.time()
+    logger.info('%s terrariumPI temperature/humidity sensors' % 'Reloading' if reloading else 'Loading',)
+    self.sensors = {}
+    for sensor in terrariumSensor.scan(self.config.get_owfs_port(), self.config.get_sensors()):
+      self.sensors[sensor.get_id()] = sensor
+    logger.info('Done %s terrariumPI temperature/humidity sensors. Found %d sensors in %.3f seconds' % ('reloading' if reloading else 'loading',
+                                                                                                        len(self.sensors),
+                                                                                                        time.time()-starttime))
 
   def __get_power_usage_water_flow(self, socket = False):
     data = {'power' : {'current' : self.pi_power_wattage , 'max' : self.pi_power_wattage},
@@ -117,10 +123,15 @@ class terrariumEngine():
   def __engine_loop(self):
     while True:
       starttime = time.time()
+      # Update weather
+      self.weather.update()
+      self.collector.log_weather_data(self.weather.get_data()['hour_forecast'][0])
+
+      # Update sensors
       for sensorid in self.sensors:
-        # Update the current temperature.
+        # Update the current sensor.
         self.sensors[sensorid].update()
-        # Save new data to database TODO: UPDATE to get the right fields
+        # Save new data to database
         self.collector.log_sensor_data(self.sensors[sensorid])
         # Websocket callback
         self.get_sensors([sensorid],socket=True)
@@ -146,10 +157,6 @@ class terrariumEngine():
       self.get_uptime(socket=True)
       self.get_power_usage_water_flow(socket=True)
       self.get_environment(socket=True)
-
-      # Update weather
-      self.weather.update()
-      self.collector.log_weather_data(self.weather.get_data()['hour_forecast'][0])
 
       # Log system stats
       self.collector.log_system_data(self.get_system_stats())
@@ -196,9 +203,9 @@ class terrariumEngine():
             'temperature' : cpu_temp}
 
     if socket:
-      gauge_data = {'system_load'        : {'current' : data['load']['load1'] * 100, 'alarm_min' : 0, 'alarm_max': 80, 'min' : 0, 'max': 100},
-                    'system_temperature' : {'current' : data['temperature'], 'alarm_min' : 30, 'alarm_max': 60, 'min' : 0, 'max': 80},
-                    'system_memory'      : {'current' : data['memory']['used'] / (1024 * 1024), 'alarm_min' : data['memory']['total'] / (1024 * 1024) * 0.1, 'alarm_max': data['memory']['total'] / (1024 * 1024) * 0.9, 'min' : 0, 'max': data['memory']['total'] / (1024 * 1024)}}
+      gauge_data = {'system_load'        : {'current' : data['load']['load1'] * 100, 'alarm_min' : 0, 'alarm_max': 80, 'limit_min' : 0, 'limit_max': 100},
+                    'system_temperature' : {'current' : data['temperature'], 'alarm_min' : 30, 'alarm_max': 60, 'limit_min' : 0, 'limit_max': 80},
+                    'system_memory'      : {'current' : data['memory']['used'] / (1024 * 1024), 'alarm_min' : data['memory']['total'] / (1024 * 1024) * 0.1, 'alarm_max': data['memory']['total'] / (1024 * 1024) * 0.9, 'limit_min' : 0, 'limit_max': data['memory']['total'] / (1024 * 1024)}}
 
       gauge_data['system_load']['alarm'] = not(gauge_data['system_load']['alarm_min'] < gauge_data['system_load']['current'] < gauge_data['system_load']['alarm_max'])
       gauge_data['system_temperature']['alarm'] = not(gauge_data['system_temperature']['alarm_min'] < gauge_data['system_temperature']['current'] < gauge_data['system_temperature']['alarm_max'])
@@ -294,7 +301,6 @@ class terrariumEngine():
       if update_ok:
         # Update config settings
         self.pi_power_wattage = float(self.config.get_pi_power_wattage())
-        #self.door_sensor.set_gpio_pin(self.config.get_door_pin())
         self.set_authentication(self.config.get_admin(),self.config.get_password())
 
     return update_ok
@@ -327,6 +333,94 @@ class terrariumEngine():
     else:
       return data
   # End weather part
+
+  # Sensors part
+  def get_sensors(self, parameters = [], socket = False):
+    data = []
+    filtertype = None
+    if len(parameters) > 0 and parameters[0] is not None:
+      filtertype = parameters[0]
+
+    # Filter is based on sensorid
+    if filtertype is not None and filtertype in self.sensors:
+      data.append(self.sensors[filtertype].get_data())
+
+    else:
+      for sensorid in self.sensors:
+        # Filter based on sensor type
+        if filtertype is None or filtertype == 'average' or filtertype == self.sensors[sensorid].get_type():
+          data.append(self.sensors[sensorid].get_data())
+
+    if 'average' == filtertype or len(parameters) == 2 and parameters[1] == 'average':
+      average = {}
+      for sensor in data:
+        sensor['type'] = 'average_' +  sensor['type']
+        if sensor['type'] not in average:
+          average[sensor['type']] = {'current' : 0.0, 'alarm_min' : 0.0, 'alarm_max' : 0.0, 'limit_min' : 0.0, 'limit_max':0.0, 'amount' : 0.0}
+
+        average[sensor['type']]['current'] += sensor['current']
+        average[sensor['type']]['alarm_min'] += sensor['alarm_min']
+        average[sensor['type']]['alarm_max'] += sensor['alarm_max']
+        average[sensor['type']]['limit_min'] += sensor['limit_min']
+        average[sensor['type']]['limit_max'] += sensor['limit_max']
+        average[sensor['type']]['amount'] += 1.0
+
+      for averagetype in average:
+        amount = average[averagetype]['amount']
+        del(average[averagetype]['amount'])
+        for field in average[averagetype]:
+          average[averagetype][field] /= amount
+
+        average[averagetype]['alarm'] = not (average[averagetype]['alarm_min'] < average[averagetype]['current'] < average[averagetype]['alarm_max'])
+        average[averagetype]['amount'] = amount
+        average[averagetype]['type'] = averagetype
+
+      data = average
+
+    if socket:
+      self.__send_message({'type':'sensor_gauge','data':data})
+    else:
+      return {'sensors' : data}
+
+  def get_amount_of_sensors(self, filtertype = None):
+    if filtertype is None:
+      return len(self.sensors)
+    else:
+      return len(self.get_sensors([filtertype])['sensors'])
+
+  def get_sensors_config(self, socket = False):
+    return self.get_sensors()
+
+  def set_sensors_config(self, data):
+    new_sensors = {}
+    for sensordata in data:
+      if sensordata['id'] is None or sensordata['id'] == 'None' or sensordata['id'] not in self.sensors:
+        # New sensor
+        sensor = terrariumSensor(None,sensordata['hardwaretype'],sensordata['type'],sensordata['address'])
+      else:
+        # Existing sensor
+        sensor = self.sensors[sensordata['id']]
+        # Should not be able to change setings
+        #sensor.set_hardware_type(sensordata['hardwaretype'])
+        #sensor.set_type(sensordata['type'])
+
+      # Updating address will softly fail when updating OWFS sensors.
+      sensor.set_address(sensordata['address'])
+      sensor.set_name(sensordata['name'])
+      sensor.set_alarm_min(sensordata['alarm_min'])
+      sensor.set_alarm_max(sensordata['alarm_max'])
+      sensor.set_limit_min(sensordata['limit_min'])
+      sensor.set_limit_max(sensordata['limit_max'])
+
+      new_sensors[sensor.get_id()] = sensor
+
+    self.sensors = new_sensors
+    if self.config.save_sensors(self.sensors):
+      self.__load_sensors(True)
+      return True
+
+    return False
+  # End sensors part
 
   # Door part
   def toggle_door_status(self, data, socket = False):
@@ -394,82 +488,6 @@ class terrariumEngine():
 
     return update_ok
   # End door part
-
-
-  # Sensors part
-  def get_sensors_config(self, socket = False):
-    return self.get_sensors()
-
-  def set_sensors_config(self, data):
-    update_ok = True
-    for sensordata in data:
-      sensor = self.sensors[sensordata['id']]
-      sensor.set_name(sensordata['name'])
-      sensor.set_alarm_min(sensordata['alarm_min'])
-      sensor.set_alarm_max(sensordata['alarm_max'])
-      sensor.set_min(sensordata['min'])
-      sensor.set_max(sensordata['max'])
-
-      update_ok = update_ok and self.config.save_sensor(sensor.get_data())
-
-    return update_ok
-
-  def get_amount_of_sensors(self, type = None):
-    if type is None:
-      return len(self.sensors)
-
-    amount = 0
-    for sensorid in self.sensors:
-      if self.sensors[sensorid].get_type() == type:
-        amount += 1
-
-    return amount
-
-  def get_sensors(self, parameters = [], socket = False):
-    data = []
-    filter = None
-    if len(parameters) > 0 and parameters[0] is not None:
-      filter = parameters[0]
-
-    if filter is not None and filter in self.sensors:
-      data.append(self.sensors[filter].get_data())
-
-    else:
-      for sensorid in self.sensors:
-        if filter is None or filter == 'average' or filter == self.sensors[sensorid].get_type():
-          data.append(self.sensors[sensorid].get_data())
-
-    if 'average' == filter or len(parameters) == 2 and parameters[1] == 'average':
-      average = {}
-      for sensor in data:
-        sensor['type'] = 'average_' +  sensor['type']
-        if sensor['type'] not in average:
-          average[sensor['type']] = {'current' : 0.0, 'alarm_min' : 0.0, 'alarm_max' : 0.0, 'min' : 0.0, 'max':0.0, 'amount' : 0.0}
-
-        average[sensor['type']]['current'] += sensor['current']
-        average[sensor['type']]['alarm_min'] += sensor['alarm_min']
-        average[sensor['type']]['alarm_max'] += sensor['alarm_max']
-        average[sensor['type']]['min'] += sensor['min']
-        average[sensor['type']]['max'] += sensor['max']
-        average[sensor['type']]['amount'] += 1.0
-
-      for averagetype in average:
-        amount = average[averagetype]['amount']
-        del(average[averagetype]['amount'])
-        for field in average[averagetype]:
-          average[averagetype][field] /= amount
-
-        average[averagetype]['alarm'] = not (average[averagetype]['alarm_min'] < average[averagetype]['current'] < average[averagetype]['alarm_max'])
-        average[averagetype]['amount'] = amount
-        average[averagetype]['type'] = averagetype
-
-      data = average
-
-    if socket:
-      self.__send_message({'type':'sensor_gauge','data':data})
-    else:
-      return {'sensors' : data}
-  # End sensors part
 
   # Switch part
   def get_switches_config(self, socket = False):
@@ -573,13 +591,6 @@ class terrariumEngine():
     return update_ok
   # End webcam part
 
-
-
-
-
-
-
-
   # Environment part
   def get_environment(self, parameters = [], socket = False):
     filter = None
@@ -617,7 +628,6 @@ class terrariumEngine():
       self.environment.reload_config()
     return update_ok
   # End Environment part
-
 
   # Histroy part (Collector)
   def get_history(self, parameters = [], socket = False):

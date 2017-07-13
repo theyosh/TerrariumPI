@@ -163,6 +163,7 @@ function load_page(url) {
       });
       // Reload some theme settings per page
       reload_reload_theme();
+      process_form();
     });
   }
   // Make sure the browser will not fire it's url loading event
@@ -238,7 +239,7 @@ function prepare_form_data(form) {
               }
               if (prev_nr != current_nr) {
                 if (Object.keys(objectdata).length > 1) {
-                  formdata[prev_nr] = $.extend(true, {}, objectdata);
+                  formdata.push($.extend(true, {}, objectdata));
                 }
                 // New item
                 objectdata = {};
@@ -254,7 +255,7 @@ function prepare_form_data(form) {
       }
     });
     if (Object.keys(objectdata).length > 1) {
-      formdata[prev_nr] = $.extend(true, {}, objectdata);
+      formdata.push($.extend(true, {}, objectdata));
     }
   } catch (error) {
     console.log(error);
@@ -566,8 +567,6 @@ function init_sidebar() {
 
   // toggle small or large menu
   $MENU_TOGGLE.on('click', function() {
-		console.log('clicked - menu toggle');
-
 		if ($BODY.hasClass('nav-md')) {
 			$SIDEBAR_MENU.find('li.active ul').hide();
 			$SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
@@ -640,7 +639,6 @@ function reload_reload_theme() {
     container: 'body',
     html: true
   });
-  process_form();
 }
 
 function sensor_gauge(name, data) {
@@ -653,12 +651,12 @@ function sensor_gauge(name, data) {
     $('#' + name + ' small').text(moment().format('LLL'));
     // Setup a new gauge if needed
     if ($('#' + name + ' .gauge').attr('done') === undefined) {
-      var total_area = data.max - data.min;
+      var total_area = data.limit_max - data.limit_min;
       var colors = [
         [0.00, '#E74C3C'],
-        [(data.alarm_min - data.min) / total_area, '#F0AD4E'],
-        [(((data.alarm_min + data.alarm_max)/2) - data.min) / total_area, '#1ABB9C'],
-        [(data.alarm_max - data.min) / total_area, '#F0AD4E'],
+        [(data.alarm_min - data.limit_min) / total_area, '#F0AD4E'],
+        [(((data.alarm_min + data.alarm_max)/2) - data.limit_min) / total_area, '#1ABB9C'],
+        [(data.alarm_max - data.limit_min) / total_area, '#F0AD4E'],
         [1.00, '#E74C3C']
       ];
 
@@ -682,8 +680,8 @@ function sensor_gauge(name, data) {
       globals.gauges[name] = new Gauge($('#' + name + ' .gauge')[0]).setOptions(opts);
       globals.gauges[name].setTextField($('#' + name + ' .gauge-value')[0]);
       // Only set min and max only once. Else the gauge will flicker each data update
-      globals.gauges[name].maxValue = data.max;
-      globals.gauges[name].setMinValue(data.min);
+      globals.gauges[name].maxValue = data.limit_max;
+      globals.gauges[name].setMinValue(data.limit_min);
     }
     // Update values
     globals.gauges[name].set(data.current);
@@ -962,6 +960,58 @@ function history_graph(name, data, type) {
       }
     });
   }
+}
+
+function add_sensor() {
+  var form = $('.new-sensor-form');
+  var fieldsok = true;
+  form.find('input[required="required"][readonly!="readonly"][readonly!="hidden"]').each(function(counter,item) {
+    var field = $(this);
+    var empty = field.val() == '';
+    if (empty) {
+      field.addClass('missing-required');
+    }
+    fieldsok = fieldsok && !empty;
+  });
+  if (!fieldsok) return false;
+
+  add_sensor_row('None',
+                 form.find('select[name="sensor_[nr]_hardwaretype"]').val(),
+                 form.find('input[name="sensor_[nr]_address"]').val(),
+                 form.find('select[name="sensor_[nr]_type"]').val(),
+                 form.find('input[name="sensor_[nr]_name"]').val(),
+                 form.find('input[name="sensor_[nr]_alarm_min"]').val(),
+                 form.find('input[name="sensor_[nr]_alarm_max"]').val(),
+                 form.find('input[name="sensor_[nr]_limit_min"]').val(),
+                 form.find('input[name="sensor_[nr]_limit_max"]').val(),
+                 -1);
+
+  $('.new-sensor-form').modal('hide');
+}
+
+function add_sensor_row(id,hardwaretype,address,type,name,alarm_min,alarm_max,limit_min,limit_max,current) {
+  var sensor_row = $($('.modal-body div.row.sensor').parent().clone().html().replace(/\[nr\]/g, $('form div.row.sensor').length));
+  sensor_row.find('.x_title').show().find('h2 span').addClass('glyphicon glyphicon-' + (type == 'temperature' ? 'fire' : 'tint')).attr({'aria-hidden':'true','title': capitalizeFirstLetter(type + ' {{_('sensor')}}')});
+  sensor_row.find('.x_title').show().find('h2 small').text(name);
+  sensor_row.find('span.select2.select2-container').remove();
+
+  sensor_row.find('input, select').each(function(counter,item){
+    $(item).val(eval($(item).attr('name').replace(/sensor_[0-9]+_/g,'')))
+  });
+  sensor_row.find("input[name$='_address']").attr("readonly", hardwaretype == 'owfs' || hardwaretype == 'w1');
+  sensor_row.insertBefore('div.row.submit');
+
+  reload_reload_theme();
+
+  sensor_row.find("select").select2({
+    placeholder: '{{_('Select an option')}}',
+    allowClear: false,
+    minimumResultsForSearch: Infinity
+  }).on('change',function() {
+    if (this.name.indexOf('hardwaretype') >= 0) {
+      $("input[name='" + this.name.replace('hardwaretype','address') + "']").attr("readonly", this.value == 'owfs' || this.value == 'w1');
+    }
+  });
 }
 
 function update_power_switch(id, data) {

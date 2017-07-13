@@ -222,27 +222,27 @@
                 var row = $('div.row.' + key).attr('id','system_' + key);
                 if (row.find('canvas').length == 1) {
 
-                  gauge_data = {alarm: false, current : 0, alarm_min : 0, alarm_max: 0, min : 0, max : 0}
+                  gauge_data = {alarm: false, current : 0, alarm_min : 0, alarm_max: 0, limit_min : 0, limit_max : 0}
                   switch (key) {
                     case 'load':
                       gauge_data.current = value['load1'] * 100;
                       gauge_data.alarm_max = 80;
                       gauge_data.alarm_min = 0;
-                      gauge_data.max = 100;
+                      gauge_data.limit_max = 100;
                       break;
 
                     case 'temperature':
                       gauge_data.current = value;
                       gauge_data.alarm_min = 30;
                       gauge_data.alarm_max = 60;
-                      gauge_data.max = 80;
+                      gauge_data.limit_max = 80;
                       break;
 
                     case 'memory':
                       gauge_data.current = value['used'] / (1024 * 1024);
-                      gauge_data.max = value['total'] / (1024 * 1024);
-                      gauge_data.alarm_max = gauge_data.max * 0.9;
-                      gauge_data.alarm_min = gauge_data.max * 0.1;
+                      gauge_data.limit_max = value['total'] / (1024 * 1024);
+                      gauge_data.alarm_max = gauge_data.limit_max * 0.9;
+                      gauge_data.alarm_min = gauge_data.limit_max * 0.1;
                       break;
                   }
                   gauge_data.alarm = gauge_data.current < gauge_data.alarm_min || gauge_data.current > gauge_data.alarm_max

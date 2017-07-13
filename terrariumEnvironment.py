@@ -302,13 +302,13 @@ class terrariumEnvironment():
       sensor = self.sensors[sensorid]
       sensor_type = sensor.get_type()
       if sensor_type not in average:
-        average[sensor_type] = {'current' : 0.0, 'alarm_min' : 0.0, 'alarm_max' : 0.0, 'min' : 0.0, 'max':0.0, 'amount' : 0.0}
+        average[sensor_type] = {'current' : 0.0, 'alarm_min' : 0.0, 'alarm_max' : 0.0, 'limit_min' : 0.0, 'limit_max':0.0, 'amount' : 0.0}
 
       average[sensor_type]['current'] += sensor.get_current()
       average[sensor_type]['alarm_min'] += sensor.get_alarm_min()
       average[sensor_type]['alarm_max'] += sensor.get_alarm_max()
-      average[sensor_type]['min'] += sensor.get_min()
-      average[sensor_type]['max'] += sensor.get_max()
+      average[sensor_type]['limit_min'] += sensor.get_limit_min()
+      average[sensor_type]['limit_max'] += sensor.get_limit_max()
       average[sensor_type]['amount'] += 1
 
     for averagetype in average:
