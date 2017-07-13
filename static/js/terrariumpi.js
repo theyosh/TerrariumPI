@@ -1063,7 +1063,7 @@ function update_power_switch(id, data) {
   var power_switch = $('#switch_' + id);
   power_switch.find('h2 span.title').text('{{_('Switch')}} ' + data.name);
   power_switch.find('h2 small.data_update').text(data.power_wattage + 'W' + (data.water_flow > 0 ? ', ' + data.water_flow + 'L/m' : ''));
-  power_switch.find('span.glyphicon').removeClass('blue green').addClass((data.state ? 'green' : 'blue'));
+  power_switch.find('span.glyphicon').removeClass('blue green').addClass((data.state ? 'green' : 'blue')).attr('title','{{_('Toggle power switch')}}');
 }
 
 function toggleSwitch(id) {
