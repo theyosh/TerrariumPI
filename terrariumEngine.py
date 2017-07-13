@@ -222,140 +222,6 @@ class terrariumEngine():
   # End private/internal functions
 
 
-
-
-  def authenticate(self,username, password):
-    return password and (username in self.authentication) and self.authentication[username] == password
-
-  def set_authentication(self, username, password):
-    config = self.config.get_system()
-    self.authentication = { username : password }
-
-  def subscribe(self,queue):
-    self.subscribed_queues.append(queue)
-    self.__send_message({'type':'dashboard_online', 'data':True})
-
-  def get_system_stats(self, socket = False):
-    memory = psutil.virtual_memory()
-    uptime = self.get_uptime()
-
-    cpu_temp = -1
-    with open('/sys/class/thermal/thermal_zone0/temp') as temperature:
-      cpu_temp = float(temperature.read()) / 1000.0
-
-    data = {'memory' : {'total' : memory.total,
-                        'used' : memory.used,
-                        'free' : memory.free},
-            'load' : {'load1' : uptime['load'][0],
-                      'load5' : uptime['load'][1],
-                      'load15' : uptime['load'][2]},
-            'uptime' : uptime['uptime'],
-            'cores' : psutil.cpu_count(),
-            'temperature' : cpu_temp}
-
-    if socket:
-      gauge_data = {'system_load'        : {'current' : data['load']['load1'] * 100, 'alarm_min' : 0, 'alarm_max': 80, 'limit_min' : 0, 'limit_max': 100},
-                    'system_temperature' : {'current' : data['temperature'], 'alarm_min' : 30, 'alarm_max': 60, 'limit_min' : 0, 'limit_max': 80},
-                    'system_memory'      : {'current' : data['memory']['used'] / (1024 * 1024), 'alarm_min' : data['memory']['total'] / (1024 * 1024) * 0.1, 'alarm_max': data['memory']['total'] / (1024 * 1024) * 0.9, 'limit_min' : 0, 'limit_max': data['memory']['total'] / (1024 * 1024)}}
-
-      gauge_data['system_load']['alarm'] = not(gauge_data['system_load']['alarm_min'] < gauge_data['system_load']['current'] < gauge_data['system_load']['alarm_max'])
-      gauge_data['system_temperature']['alarm'] = not(gauge_data['system_temperature']['alarm_min'] < gauge_data['system_temperature']['current'] < gauge_data['system_temperature']['alarm_max'])
-      gauge_data['system_memory']['alarm'] = not(gauge_data['system_memory']['alarm_min'] < gauge_data['system_memory']['current'] < gauge_data['system_memory']['alarm_max'])
-
-      self.__send_message({'type':'sensor_gauge','data':gauge_data})
-    else:
-      return data
-
-  def get_uptime(self, socket = False):
-    data = {'uptime' : uptime.uptime(),
-            'timestamp' : int(time.time()),
-            'day' : self.weather.is_day(),
-            'load' : os.getloadavg()}
-
-    if socket:
-      self.__send_message({'type':'uptime','data':data})
-    else:
-      return data
-
-  def get_power_usage_water_flow(self, socket = False):
-    data = self.__get_power_usage_water_flow()
-    totaldata = self.__calculate_power_usage_water_flow()
-
-    data['power']['total'] = totaldata['total_power']
-    data['power']['duration'] = totaldata['duration']
-    data['power']['price'] = self.config.get_power_price()
-    data['water']['total'] = totaldata['total_water']
-    data['water']['duration'] = totaldata['duration']
-    data['water']['price'] = self.config.get_water_price()
-
-    if socket:
-      self.__send_message({'type':'power_usage_water_flow','data':data});
-    else:
-      return data
-
-  # API Config calls
-  def get_config(self, part = None):
-    data = {}
-    if 'system' == part or part is None:
-      data.update(self.get_system_config())
-
-    if 'weather' == part or part is None:
-      data.update(self.get_weather_config())
-
-    if 'switches' == part or part is None:
-      data.update(self.get_switches_config())
-
-    if 'sensors' == part or part is None:
-      data.update(self.get_sensors_config())
-
-    if 'webcams' == part or part is None:
-      data.update(self.get_webcams_config())
-
-    if 'doors' == part or part is None:
-      data.update(self.get_doors_config())
-
-    if 'environment' == part or part is None:
-      data.update(self.get_environment_config())
-
-    return data
-
-  def set_config(self,part,data):
-    update_ok = False
-    if 'weather' == part:
-      update_ok = self.set_weather_config(data)
-
-    elif 'switches' == part:
-      update_ok = self.set_switches_config(data)
-
-    elif 'sensors' == part:
-      update_ok = self.set_sensors_config(data)
-
-    elif 'webcams' == part:
-      update_ok = self.set_webcams_config(data)
-
-    elif 'doors' == part:
-      update_ok = self.set_doors_config(data)
-
-    elif 'environment' == part:
-      update_ok = self.set_environment_config(data)
-
-    elif 'system' == part:
-      if 'new_password' in data and data['new_password'] != '' and 'cur_password' in data and data['cur_password'] != '' and data['new_password'] != data['cur_password']:
-        # check if existing password is correct
-        existing_password =  self.config.get_system()['password']
-        if existing_password == data['cur_password']:
-          data['password'] = data['new_password']
-          del(data['new_password'])
-          del(data['cur_password'])
-
-      update_ok = self.set_system_config(data)
-      if update_ok:
-        # Update config settings
-        self.pi_power_wattage = float(self.config.get_pi_power_wattage())
-        self.set_authentication(self.config.get_admin(),self.config.get_password())
-
-    return update_ok
-
   # Weather part
   def set_weather_config(self,data):
     self.weather.set_location(data['location'])
@@ -689,6 +555,141 @@ class terrariumEngine():
       self.environment.reload_config()
     return update_ok
   # End Environment part
+
+
+
+
+  def authenticate(self,username, password):
+    return password and (username in self.authentication) and self.authentication[username] == password
+
+  def set_authentication(self, username, password):
+    config = self.config.get_system()
+    self.authentication = { username : password }
+
+  def subscribe(self,queue):
+    self.subscribed_queues.append(queue)
+    self.__send_message({'type':'dashboard_online', 'data':True})
+
+  def get_system_stats(self, socket = False):
+    memory = psutil.virtual_memory()
+    uptime = self.get_uptime()
+
+    cpu_temp = -1
+    with open('/sys/class/thermal/thermal_zone0/temp') as temperature:
+      cpu_temp = float(temperature.read()) / 1000.0
+
+    data = {'memory' : {'total' : memory.total,
+                        'used' : memory.used,
+                        'free' : memory.free},
+            'load' : {'load1' : uptime['load'][0],
+                      'load5' : uptime['load'][1],
+                      'load15' : uptime['load'][2]},
+            'uptime' : uptime['uptime'],
+            'cores' : psutil.cpu_count(),
+            'temperature' : cpu_temp}
+
+    if socket:
+      gauge_data = {'system_load'        : {'current' : data['load']['load1'] * 100, 'alarm_min' : 0, 'alarm_max': 80, 'limit_min' : 0, 'limit_max': 100},
+                    'system_temperature' : {'current' : data['temperature'], 'alarm_min' : 30, 'alarm_max': 60, 'limit_min' : 0, 'limit_max': 80},
+                    'system_memory'      : {'current' : data['memory']['used'] / (1024 * 1024), 'alarm_min' : data['memory']['total'] / (1024 * 1024) * 0.1, 'alarm_max': data['memory']['total'] / (1024 * 1024) * 0.9, 'limit_min' : 0, 'limit_max': data['memory']['total'] / (1024 * 1024)}}
+
+      gauge_data['system_load']['alarm'] = not(gauge_data['system_load']['alarm_min'] < gauge_data['system_load']['current'] < gauge_data['system_load']['alarm_max'])
+      gauge_data['system_temperature']['alarm'] = not(gauge_data['system_temperature']['alarm_min'] < gauge_data['system_temperature']['current'] < gauge_data['system_temperature']['alarm_max'])
+      gauge_data['system_memory']['alarm'] = not(gauge_data['system_memory']['alarm_min'] < gauge_data['system_memory']['current'] < gauge_data['system_memory']['alarm_max'])
+
+      self.__send_message({'type':'sensor_gauge','data':gauge_data})
+    else:
+      return data
+
+  def get_uptime(self, socket = False):
+    data = {'uptime' : uptime.uptime(),
+            'timestamp' : int(time.time()),
+            'day' : self.weather.is_day(),
+            'load' : os.getloadavg()}
+
+    if socket:
+      self.__send_message({'type':'uptime','data':data})
+    else:
+      return data
+
+  def get_power_usage_water_flow(self, socket = False):
+    data = self.__get_power_usage_water_flow()
+    totaldata = self.__calculate_power_usage_water_flow()
+
+    data['power']['total'] = totaldata['total_power']
+    data['power']['duration'] = totaldata['duration']
+    data['power']['price'] = self.config.get_power_price()
+    data['water']['total'] = totaldata['total_water']
+    data['water']['duration'] = totaldata['duration']
+    data['water']['price'] = self.config.get_water_price()
+
+    if socket:
+      self.__send_message({'type':'power_usage_water_flow','data':data});
+    else:
+      return data
+
+  # API Config calls
+  def get_config(self, part = None):
+    data = {}
+    if 'system' == part or part is None:
+      data.update(self.get_system_config())
+
+    if 'weather' == part or part is None:
+      data.update(self.get_weather_config())
+
+    if 'switches' == part or part is None:
+      data.update(self.get_switches_config())
+
+    if 'sensors' == part or part is None:
+      data.update(self.get_sensors_config())
+
+    if 'webcams' == part or part is None:
+      data.update(self.get_webcams_config())
+
+    if 'doors' == part or part is None:
+      data.update(self.get_doors_config())
+
+    if 'environment' == part or part is None:
+      data.update(self.get_environment_config())
+
+    return data
+
+  def set_config(self,part,data):
+    update_ok = False
+    if 'weather' == part:
+      update_ok = self.set_weather_config(data)
+
+    elif 'switches' == part:
+      update_ok = self.set_switches_config(data)
+
+    elif 'sensors' == part:
+      update_ok = self.set_sensors_config(data)
+
+    elif 'webcams' == part:
+      update_ok = self.set_webcams_config(data)
+
+    elif 'doors' == part:
+      update_ok = self.set_doors_config(data)
+
+    elif 'environment' == part:
+      update_ok = self.set_environment_config(data)
+
+    elif 'system' == part:
+      if 'new_password' in data and data['new_password'] != '' and 'cur_password' in data and data['cur_password'] != '' and data['new_password'] != data['cur_password']:
+        # check if existing password is correct
+        existing_password =  self.config.get_system()['password']
+        if existing_password == data['cur_password']:
+          data['password'] = data['new_password']
+          del(data['new_password'])
+          del(data['cur_password'])
+
+      update_ok = self.set_system_config(data)
+      if update_ok:
+        # Update config settings
+        self.pi_power_wattage = float(self.config.get_pi_power_wattage())
+        self.set_authentication(self.config.get_admin(),self.config.get_password())
+
+    return update_ok
 
   def get_system_config(self):
     data = self.config.get_system()
