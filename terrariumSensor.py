@@ -122,7 +122,7 @@ class terrariumSensor:
       pass
 
     # Scanning w1 system bus
-    for address in glob.iglob(terrariumSensor.w1_base_path + '[0-9][0-9]-*'):
+    for address in glob.iglob(terrariumSensor.w1_base_path + '[1-9][0-9]-*'):
       data = ''
       with open(address + '/w1_slave', 'r') as w1data:
         data = w1data.read()
