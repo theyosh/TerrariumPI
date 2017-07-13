@@ -256,6 +256,37 @@ class terrariumConfig:
     return data
   # End switches config functions
 
+  # Door config functions
+  def save_door(self,data):
+    if 'state' in data:
+      del(data['state'])
+
+    return self.__update_config('door' + str(data['id']),data)
+
+  def save_doors(self,data):
+    update_ok = True
+    for door_id in self.get_doors():
+      self.__config.remove_section('door' + door_id)
+
+    for door_id in data:
+      update_ok = update_ok and self.save_door(data[door_id].get_data())
+
+    if len(data) == 0:
+      update_ok = update_ok and self.__save_config()
+
+    return update_ok
+
+  def get_doors(self):
+    data = {}
+    for section in self.__config.sections():
+      if section[:4] == 'door':
+        door_data = self.__get_config(section)
+        data[section[4:]] = door_data
+
+    return data
+  # End door config functions
+
+
 
   # Webcam config functions
   def get_webcams(self):
@@ -277,17 +308,4 @@ class terrariumConfig:
     return self.__update_config('webcam' + str(data['id']),data)
   # End webcam config functions
 
-  # Door config functions
-  def get_doors(self):
-    data = {}
-    for section in self.__config.sections():
-      if section[:4] == 'door':
-        sensor_data = self.__get_config(section)
-        data[section[6:]] = sensor_data
 
-    return data
-
-  def save_door(self,data):
-    del(data['state'])
-    return self.__update_config('door' + str(data['id']),data)
-  # End door config functions

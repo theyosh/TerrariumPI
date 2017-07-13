@@ -92,7 +92,7 @@ class terrariumWebserver():
     elif 'webcam' == template or 'webcam_settings' == template:
       variables['amount_of_webcams'] = self.__terrariumEngine.get_amount_of_webcams()
 
-    elif 'door_status' == template or 'door_settings' == template:
+    elif 'door_status' == template:
       variables['amount_of_doors'] = self.__terrariumEngine.get_amount_of_doors()
 
     elif 'switch_status' == template:

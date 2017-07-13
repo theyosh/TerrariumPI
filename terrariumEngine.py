@@ -64,12 +64,7 @@ class terrariumEngine():
     self.__load_power_switches()
 
     # Load doors from config
-    logger.debug('Loading terrariumPI doors')
-    self.doors = {}
-    doors = self.config.get_doors()
-    for doorid in doors:
-      self.doors[doors[doorid]['id']] = terrariumDoor(doors[doorid]['id'],doors[doorid]['gpiopin'],doors[doorid]['name'],self.toggle_door_status)
-    logger.debug('Done loading terrariumPI doors')
+    self.__load_doors()
 
     # Load the environment system. This will controll the lights, sprayer and heaters
     logger.debug('Loading terrariumPI environment system')
@@ -88,6 +83,7 @@ class terrariumEngine():
     logger.info('Start terrariumPI engine')
     thread.start_new_thread(self.__engine_loop, ())
 
+  # Private/internal functions
   def __load_sensors(self,reloading = False):
     # Load Sensors, with ID as index
     starttime = time.time()
@@ -119,6 +115,26 @@ class terrariumEngine():
     logger.info('Done %s terrariumPI switches. Found %d switches in %.3f seconds' % ('reloading' if reloading else 'loading',
                                                                                       len(self.power_switches),
                                                                                       time.time()-starttime))
+
+  def __load_doors(self, reloading = False):
+    # Load Doors, with ID as index
+    starttime = time.time()
+    logger.info('%s terrariumPI doors' % ('Reloading' if reloading else 'Loading',))
+    doors_config = self.config.get_doors()
+    self.doors = {}
+    for door_id in doors_config:
+      door = terrariumDoor(
+        doors_config[door_id]['id'],
+        doors_config[door_id]['hardwaretype'],
+        doors_config[door_id]['address'],
+        doors_config[door_id]['name'],
+        self.toggle_door_status
+      )
+      self.doors[door.get_id()] = door
+
+    logger.info('Done %s terrariumPI doors. Found %d doors in %.3f seconds' % ('reloading' if reloading else 'loading',
+                                                                                len(self.doors),
+                                                                                time.time()-starttime))
 
   def __get_power_usage_water_flow(self, socket = False):
     data = {'power' : {'current' : self.pi_power_wattage , 'max' : self.pi_power_wattage},
@@ -188,6 +204,11 @@ class terrariumEngine():
   def __send_message(self,message):
     for queue in self.subscribed_queues:
       queue.put(message)
+
+  # End private/internal functions
+
+
+
 
   def authenticate(self,username, password):
     return password and (username in self.authentication) and self.authentication[username] == password
@@ -321,14 +342,6 @@ class terrariumEngine():
 
     return update_ok
 
-  def get_system_config(self):
-    data = self.config.get_system()
-    del(data['password'])
-    return data
-
-  def set_system_config(self,data):
-    return self.config.set_system(data)
-
   # Weather part
   def set_weather_config(self,data):
     self.weather.set_location(data['location'])
@@ -438,7 +451,7 @@ class terrariumEngine():
     return False
   # End sensors part
 
-  # Switch part
+  # Switches part
   def get_switches(self, parameters = [], socket = False):
     data = []
     filter = None
@@ -470,7 +483,7 @@ class terrariumEngine():
         # New switch (add)
         power_switch = terrariumSwitch(None,switchdata['hardwaretype'],switchdata['address'])
       else:
-        # Existing sensor
+        # Existing switch
         power_switch = self.power_switches[switchdata['id']]
         # Should not be able to change setings
         #power_switch.set_hardware_type(switchdata['hardwaretype'])
@@ -499,36 +512,10 @@ class terrariumEngine():
 
     if data['state'] is False:
       self.collector.log_total_power_and_water_usage(self.pi_power_wattage)
-  # End switch part
+  # End switches part
 
 
-  # Door part
-  def toggle_door_status(self, data, socket = False):
-    self.collector.log_door_data(data)
-    if socket:
-      self.door_status(True)
-
-  def door_status(self, socket = False):
-    door_closed = True
-    for doorid in self.doors:
-      door_closed = door_closed and self.doors[doorid].get_status() == 'closed'
-
-    data = 'closed' if door_closed else 'open'
-
-    if socket:
-      self.__send_message({'type':'door_indicator','data': data})
-    else:
-      return data
-
-  def is_door_open(self):
-    return self.door_status() == 'open'
-
-  def is_door_closed(self):
-    return self.door_status() == 'closed'
-
-  def get_amount_of_doors(self):
-    return len(self.doors)
-
+  # Doors part
   def get_doors(self, parameters = [], socket = False):
     data = []
     filter = None
@@ -547,27 +534,59 @@ class terrariumEngine():
     else:
       return {'doors' : data}
 
+  def get_amount_of_doors(self):
+    return len(self.doors)
+
   def get_doors_config(self):
     return self.get_doors()
 
   def set_doors_config(self, data):
-    update_ok = True
+    new_doors = {}
     for doordata in data:
-
-      if doordata['id'] == '' or doordata['id'] not in self.doors:
-        # Create new one
-        if doordata['gpiopin'] != '':
-          door = terrariumDoor(None,doordata['gpiopin'],doordata['name'],self.toggle_door_status)
-          self.doors[door.get_id()] = door
+      if doordata['id'] is None or doordata['id'] == 'None' or doordata['id'] not in self.doors:
+        # New switch (add)
+        door = terrariumDoor(None,doordata['hardwaretype'],doordata['address'])
       else:
+        # Existing door
         door = self.doors[doordata['id']]
-        door.set_name(doordata['name'])
-        door.set_gpio_pin(doordata['gpiopin'])
+        # Should not be able to change setings
+        #power_switch.set_hardware_type(switchdata['hardwaretype'])
 
-      update_ok = update_ok and self.config.save_door(door.get_data())
+      door.set_address(doordata['address'])
+      door.set_name(doordata['name'])
 
-    return update_ok
-  # End door part
+      new_doors[door.get_id()] = door
+
+    self.doors = new_doors
+    if self.config.save_doors(self.doors):
+      self.__load_doors(True)
+      return True
+
+    return False
+
+  def toggle_door_status(self, data, socket = False):
+    self.collector.log_door_data(data)
+    if socket:
+      self.door_status(True)
+
+  def door_status(self, socket = False):
+    door_closed = True
+    for doorid in self.doors:
+      door_closed = door_closed and self.doors[doorid].get_status() == terrariumDoor.CLOSED
+
+    data = terrariumDoor.CLOSED if door_closed else terrariumDoor.OPEN
+
+    if socket:
+      self.__send_message({'type':'door_indicator','data': data})
+    else:
+      return data
+
+  def is_door_open(self):
+    return self.door_status() == terrariumDoor.OPEN
+
+  def is_door_closed(self):
+    return self.door_status() == terrariumDoor.CLOSED
+  # End doors part
 
 
 
@@ -653,6 +672,14 @@ class terrariumEngine():
       self.environment.reload_config()
     return update_ok
   # End Environment part
+
+  def get_system_config(self):
+    data = self.config.get_system()
+    del(data['password'])
+    return data
+
+  def set_system_config(self,data):
+    return self.config.set_system(data)
 
   # Histroy part (Collector)
   def get_history(self, parameters = [], socket = False):

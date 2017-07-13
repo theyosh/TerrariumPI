@@ -1067,6 +1067,46 @@ function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow) {
   });
 }
 
+function add_door() {
+  var form = $('.new-door-form');
+  var fieldsok = true;
+  form.find('input[required="required"][readonly!="readonly"][readonly!="hidden"]').each(function(counter,item) {
+    var field = $(this);
+    var empty = field.val() == '';
+    if (empty) {
+      field.addClass('missing-required');
+    }
+    fieldsok = fieldsok && !empty;
+  });
+  if (!fieldsok) return false;
+
+  add_door_row('None',
+                form.find('select[name="door_[nr]_hardwaretype"]').val(),
+                form.find('input[name="door_[nr]_address"]').val(),
+                form.find('input[name="door_[nr]_name"]').val());
+
+  $('.new-door-form').modal('hide');
+}
+
+function add_door_row(id,hardwaretype,address,name) {
+  var door_row = $($('.modal-body div.row.door').parent().clone().html().replace(/\[nr\]/g, $('form div.row.door').length));
+  door_row.find('.x_title').show().find('h2 small').text(name);
+  door_row.find('span.select2.select2-container').remove();
+
+  door_row.find('input, select').each(function(counter,item){
+    $(item).val(eval($(item).attr('name').replace(/door_[0-9]+_/g,'')));
+  });
+
+  door_row.insertBefore('div.row.submit');
+  reload_reload_theme();
+
+  door_row.find("select").select2({
+    placeholder: '{{_('Select an option')}}',
+    allowClear: false,
+    minimumResultsForSearch: Infinity
+  });
+}
+
 function update_power_switch(id, data) {
   var power_switch = $('#switch_' + id);
   power_switch.find('h2 span.title').text('{{_('Switch')}} ' + data.name);

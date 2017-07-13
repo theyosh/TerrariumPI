@@ -19,56 +19,19 @@
                 <strong>{{_('ID')}}</strong>: {{translations.get_translation('door_field_id')}}
               </li>
               <li>
-                <strong>{{_('Name')}}</strong>: {{translations.get_translation('door_field_name')}}
+                <strong>{{_('Hardware')}}</strong>: {{translations.get_translation('door_field_hardware')}}
               </li>
               <li>
-                <strong>{{_('GPIO Pin')}}</strong>: {{translations.get_translation('door_field_gpio_pin')}}
+                <strong>{{_('Address')}}</strong>: {{translations.get_translation('door_field_address')}}
+              </li>
+              <li>
+                <strong>{{_('Name')}}</strong>: {{translations.get_translation('door_field_name')}}
               </li>
             </ul>
           </div>
         </div>
         <form action="/api/config/doors" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
-          % for item in range(0,amount_of_doors+1):
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2><span class="title">{{_('Door')}}</span> <small>new</small></h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li>
-                      <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li>
-                      <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="door_{{item}}_id">{{_('ID')}} <span class="required">*</span></label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control" name="door_{{item}}_id" placeholder="{{_('ID')}}" readonly="readonly" type="text" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('door_field_id')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="door_{{item}}_name">{{_('Name')}} <span class="required">*</span></label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control" name="door_{{item}}_name" placeholder="{{_('Name')}}" type="text" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('door_field_name')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="door_{{item}}_gpiopin">{{_('GPIO Pin')}} <span class="required">*</span></label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control" name="door_{{item}}_gpiopin" placeholder="{{_('GPIO Pin')}}" type="text" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('door_field_gpio_pin')}}">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          % end
-          <div class="row">
+          <div class="row submit">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="ln_solid"></div>
               <div class="form-group">
@@ -79,15 +42,79 @@
             </div>
           </div>
         </form>
+        <div class="modal fade new-door-form" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">{{_('Add new door sensor')}}</h4>
+              </div>
+              <div class="modal-body">
+                <div class="row door">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                      <div class="x_title" style="display: none">
+                        <h2><span class="door_[nr]_icon"></span> {{_('Door sensor')}} <small>{{_('new')}}</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                          <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                          </li>
+                          <li>
+                            <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
+                          </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content">
+                        <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                          <label for="door_[nr]_hardwaretype">{{_('Hardware')}} <span class="required">*</span></label>
+                          <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('door_field_hardware')}}">
+                            <select class="form-control" name="door_[nr]_hardwaretype" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
+                              <option value="gpio">{{_('GPIO')}}</option>
+                              <option value="w1">{{_('1Wire')}}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                          <label for="door_[nr]_address">{{_('Address')}}</label> <span class="required">*</span>
+                          <input class="form-control" name="door_[nr]_address" placeholder="{{_('Address')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('door_field_address')}}">
+                          <input class="form-control" name="door_[nr]_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
+                        </div>
+                        <div class="col-md-5 col-sm-5 col-xs-12 form-group">
+                          <label for="door_[nr]_name">{{_('Name')}}</label>
+                          <input class="form-control" name="door_[nr]_name" placeholder="{{_('Name')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('door_field_name')}}">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{_('Close')}}</button>
+                <button type="button" class="btn btn-primary" onclick="add_door()" >{{_('Add')}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <script type="text/javascript">
           $(document).ready(function() {
-            $.get($('form').attr('action'),function(data) {
+            $('.page-title').append('<div class="title_right"><h3><button type="button" class="btn btn-primary alignright" data-toggle="modal" data-target=".new-door-form"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h3> </div>');
+            $("select").select2({
+              placeholder: '{{_('Select an option')}}',
+              allowClear: false,
+              minimumResultsForSearch: Infinity
+            });
+            $.get($('form').attr('action'),function(data){
               $.each(data.doors, function(index,door) {
-                $(Object.keys(door)).each(function(index2,key){
-                  $('input[name="door_' + index + '_' + key + '"]').val(door[key]);
-                });
-                $('input[name="door_' + index + '_name"]').parents('div.x_panel').find('h2 small').text(door.name);
+                // Clone empty sensor row....
+                add_door_row(door.id,
+                             door.hardwaretype,
+                             door.address,
+                             door.name);
               });
+              reload_reload_theme();
             });
           });
         </script>
