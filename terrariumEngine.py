@@ -72,12 +72,7 @@ class terrariumEngine():
     logger.debug('Done loading terrariumPI environment system')
 
     # Load webcams from config
-    logger.debug('Loading terrariumPI webcams')
-    self.webcams = {}
-    webcams = self.config.get_webcams()
-    for webcamid in webcams:
-      self.webcams[webcams[webcamid]['id']] = terrariumWebcam(webcams[webcamid]['id'],webcams[webcamid]['location'],webcams[webcamid]['name'],webcams[webcamid]['rotation'])
-    logger.debug('Done loading terrariumPI webcams')
+    self.__load_webcams();
 
     # Start system update loop
     logger.info('Start terrariumPI engine')
@@ -135,6 +130,25 @@ class terrariumEngine():
     logger.info('Done %s terrariumPI doors. Found %d doors in %.3f seconds' % ('reloading' if reloading else 'loading',
                                                                                 len(self.doors),
                                                                                 time.time()-starttime))
+
+  def __load_webcams(self, reloading = False):
+    # Load Webcams, with ID as index
+    starttime = time.time()
+    logger.info('%s terrariumPI webcams' % ('Reloading' if reloading else 'Loading',))
+    webcams_config = self.config.get_webcams()
+    self.webcams = {}
+    for webcam_id in webcams_config:
+      webcam = terrariumWebcam(
+        webcams_config[webcam_id]['id'],
+        webcams_config[webcam_id]['location'],
+        webcams_config[webcam_id]['name'],
+        webcams_config[webcam_id]['rotation']
+      )
+      self.webcams[webcam.get_id()] = webcam
+
+    logger.info('Done %s terrariumPI webcams. Found %d webcams in %.3f seconds' % ('reloading' if reloading else 'loading',
+                                                                                    len(self.webcams),
+                                                                                    time.time()-starttime))
 
   def __get_power_usage_water_flow(self, socket = False):
     data = {'power' : {'current' : self.pi_power_wattage , 'max' : self.pi_power_wattage},
@@ -588,12 +602,7 @@ class terrariumEngine():
     return self.door_status() == terrariumDoor.CLOSED
   # End doors part
 
-
-
-  # Webcam part
-  def get_amount_of_webcams(self):
-    return len(self.webcams)
-
+  # Webcams part
   def get_webcams(self, parameters = [], socket = False):
     data = []
     filter = None
@@ -612,28 +621,40 @@ class terrariumEngine():
     else:
       return {'webcams' : data}
 
+  def get_amount_of_webcams(self):
+    return len(self.webcams)
+
   def get_webcams_config(self):
     return self.get_webcams()
 
   def set_webcams_config(self, data):
-    update_ok = True
+    new_webcams = {}
     for webcamdata in data:
-
-      if webcamdata['id'] == '' or webcamdata['id'] not in self.webcams:
-        # Create new one
-        if webcamdata['location'] != '':
-          webcam = terrariumWebcam(None,webcamdata['location'],webcamdata['name'],webcamdata['rotation'])
-          self.webcams[webcam.get_id()] = webcam
+      if webcamdata['id'] is None or webcamdata['id'] == 'None' or webcamdata['id'] not in self.webcams:
+        # New switch (add)
+        webcam = terrariumWebcam(None,webcamdata['location'],webcamdata['name'])
       else:
+        # Existing door
         webcam = self.webcams[webcamdata['id']]
-        webcam.set_name(webcamdata['name'])
-        webcam.set_location(webcamdata['location'])
-        webcam.set_rotation(webcamdata['rotation'])
+        # Should not be able to change setings
+        #power_switch.set_hardware_type(switchdata['hardwaretype'])
 
-      update_ok = update_ok and self.config.save_webcam(webcam.get_data())
+      webcam.set_location(webcamdata['location'])
+      webcam.set_name(webcamdata['name'])
 
-    return update_ok
-  # End webcam part
+      new_webcams[webcam.get_id()] = webcam
+
+
+    print new_webcams
+
+    self.webcams = new_webcams
+    if self.config.save_webcams(self.webcams):
+      self.__load_webcams(True)
+      return True
+
+    return False
+  # End webcams part
+
 
   # Environment part
   def get_environment(self, parameters = [], socket = False):

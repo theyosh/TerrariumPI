@@ -22,12 +22,12 @@ monkey.patch_all()
 
 class terrariumWebcam():
 
-  def __init__(self, id = None, location = '', name = '', rotation = None):
-    if id is None:
-      self.id = md5(b'' + str(int(time()))).hexdigest()
-    else:
-      self.id = id
-  
+  OFFLINE = 'offline'
+  ONLINE = 'online'
+
+  def __init__(self, id, location, name = '', rotation = None):
+    self.id = id
+
     # Main config
     self.tile_size = 256 # Smaller tile sizes does not work with LeafJS
     self.tile_location = 'webcam/'
@@ -40,29 +40,38 @@ class terrariumWebcam():
     self.set_name(name)
     self.set_rotation(rotation)
 
+    # Variables per webcam
     self.max_zoom = 0
     self.raw_image = None
     self.resolution = None
     self.last_update = None
     self.state = None
-    
-    logger.info('Initialized webcam %s (%s) at location %s' % (self.get_name(),self.get_id(), self.get_location()))
+
+    if self.id is None:
+      self.id = md5(b'' + self.get_location()).hexdigest()
+    else:
+      self.id = id
+
+    logger.info('Loaded webcam \'%s\' on location %s' %
+                (self.get_name(),
+                 self.get_location()))
+
     self.update()
 
   def __get_raw_image(self):
     logger.debug('Start getting raw image data from location: %s' % (self.location,))
     stream = BytesIO()
     oldstate = self.state
-    
+
     for trying in range(0,self.retries):
       if 'rpicam' == self.location:
         stream = self.__get_raw_image_rpicam()
-  
+
       elif self.location.startswith('/dev/video'):
         stream = self.__get_raw_image_usb()
-  
+
       elif self.location.startswith('http://') or self.location.startswith('https://'):
-        stream = self.__get_raw_image_url()
+        stream = self.__get_raw_image_url(stream)
 
       if not self.state:
         logger.warning('Attempt %s of %s for getting raw for %s did not succeed at location %s. Will retry in 1 second.' % (trying+1,self.retries,self.get_name(),self.get_location()))
@@ -82,7 +91,7 @@ class terrariumWebcam():
       # Store image in memory for further processing
       self.raw_image = Image.open(stream)
       logger.debug('Loaded raw image %s to memory' % (self.get_name(),))
-      
+
       # Rotate image if needed
       if '90' == self.get_rotation():
         self.raw_image = self.raw_image.transpose(Image.ROTATE_90)
@@ -117,9 +126,9 @@ class terrariumWebcam():
     except PiCameraError, err:
       logging.error('Error getting raw RPI image: %s' % (err,))
       self.state = False
-    
+
     return stream
-  
+
   def __get_raw_image_usb(self):
     logger.debug('Using USB device: %s' % (self.location,))
     readok = False
@@ -142,7 +151,7 @@ class terrariumWebcam():
         jpeg = Image.fromarray(cv2.cvtColor(image,cv2.COLOR_BGR2RGB))
         jpeg.save(stream,'JPEG')
         logger.debug('Done creating USB image')
-        
+
       logger.debug('Release USB camera')
       camera.release()
       logger.debug('Done release USB camera')
@@ -152,7 +161,7 @@ class terrariumWebcam():
       self.state = False
 
     return stream
-  
+
   def __get_raw_image_url(self,stream):
     logger.debug('Using URL: %s' % (self.location,))
     stream = StringIO.StringIO()
@@ -173,7 +182,7 @@ class terrariumWebcam():
     except Exception, err:
       logging.error('Error getting raw HTTP image: %s' % (err,))
       self.state = False
-  
+
     return stream
 
   def __get_offline_image(self):
@@ -280,12 +289,13 @@ class terrariumWebcam():
     del canvas
 
   def update(self):
+    starttime = time()
     logger.info('Updating webcam %s at location %s' % (self.get_name(), self.get_location(),))
     self.__get_raw_image()
     if self.get_state() == 'online':
       self.__tile_image()
-    logger.info('Done updating webcam %s at location %s' % (self.get_name(), self.get_location(),))
-    
+    logger.info('Done updating webcam %s at location %s in %.5f seconds' % (self.get_name(), self.get_location(),time()-starttime))
+
   def get_data(self):
     return {'id': self.get_id(),
             'location': self.get_location(),
@@ -327,7 +337,7 @@ class terrariumWebcam():
     return self.max_zoom
 
   def get_state(self):
-    return 'online' if self.state else 'offline'
+    return terrariumWebcam.ONLINE if self.state else terrariumWebcam.OFFLINE
 
   def get_last_update(self):
     return self.last_update

@@ -1107,6 +1107,52 @@ function add_door_row(id,hardwaretype,address,name) {
   });
 }
 
+function add_webcam() {
+  var form = $('.new-webcam-form');
+  var fieldsok = true;
+  form.find('input[required="required"][readonly!="readonly"][readonly!="hidden"]').each(function(counter,item) {
+    var field = $(this);
+    var empty = field.val() == '';
+    if (empty) {
+      field.addClass('missing-required');
+    }
+    fieldsok = fieldsok && !empty;
+  });
+  if (!fieldsok) return false;
+
+  add_webcam_row('None',
+                form.find('input[name="webcam_[nr]_location"]').val(),
+                form.find('input[name="webcam_[nr]_name"]').val(),
+                form.find('select[name="webcam_[nr]_rotation"]').val());
+
+  $('.new-webcam-form').modal('hide');
+}
+
+function add_webcam_row(id,location,name,rotation,preview) {
+  var webcam_row = $($('.modal-body div.row.webcam').parent().clone().html().replace(/\[nr\]/g, $('form div.row.webcam').length));
+  webcam_row.find('.x_title').show().find('h2 small').text(name);
+  webcam_row.find('span.select2.select2-container').remove();
+
+  webcam_row.find('input, select').each(function(counter,item){
+    $(item).val(eval($(item).attr('name').replace(/webcam_[0-9]+_/g,'')));
+  });
+
+  if (preview != undefined) {
+    webcam_row.find('img').attr('src',preview);
+  }
+
+  webcam_row.insertBefore('div.row.submit');
+  reload_reload_theme();
+
+  webcam_row.find("select").select2({
+    placeholder: '{{_('Select an option')}}',
+    allowClear: false,
+    minimumResultsForSearch: Infinity
+  }).on('change',function(){
+    webcam_row.find('img').removeClass('webcam_90 webcam_180 webcam_270 webcam_H webcam_V').addClass('webcam_' + this.value);
+  });
+}
+
 function update_power_switch(id, data) {
   var power_switch = $('#switch_' + id);
   power_switch.find('h2 span.title').text('{{_('Switch')}} ' + data.name);

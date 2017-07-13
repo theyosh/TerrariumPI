@@ -287,17 +287,7 @@ class terrariumConfig:
   # End door config functions
 
 
-
   # Webcam config functions
-  def get_webcams(self):
-    data = {}
-    for section in self.__config.sections():
-      if section[:6] == 'webcam':
-        sensor_data = self.__get_config(section)
-        data[section[6:]] = sensor_data
-
-    return data
-
   def save_webcam(self,data):
     del(data['state'])
     del(data['image'])
@@ -306,6 +296,26 @@ class terrariumConfig:
     del(data['resolution'])
     del(data['preview'])
     return self.__update_config('webcam' + str(data['id']),data)
+
+  def save_webcams(self,data):
+    update_ok = True
+    for webcam_id in self.get_webcams():
+      self.__config.remove_section('webcam' + webcam_id)
+
+    for webcam_id in data:
+      update_ok = update_ok and self.save_webcam(data[webcam_id].get_data())
+
+    if len(data) == 0:
+      update_ok = update_ok and self.__save_config()
+
+    return update_ok
+
+  def get_webcams(self):
+    data = {}
+    for section in self.__config.sections():
+      if section[:6] == 'webcam':
+        sensor_data = self.__get_config(section)
+        data[section[6:]] = sensor_data
+
+    return data
   # End webcam config functions
-
-
