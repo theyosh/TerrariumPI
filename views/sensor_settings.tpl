@@ -16,7 +16,13 @@
             <p>{{_('Enter per sensor the values. The icon in front of the sensors shows if it is a humidity or temperature sensor. The address and current fields are readonly. The fields are:')}}</p>
             <ul>
               <li>
+                <strong>{{_('Hardware')}}</strong>: {{translations.get_translation('sensor_field_hardware')}}
+              </li>
+              <li>
                 <strong>{{_('Address')}}</strong>: {{translations.get_translation('sensor_field_address')}}
+              </li>
+              <li>
+                <strong>{{_('Type')}}</strong>: {{translations.get_translation('sensor_field_type')}}
               </li>
               <li>
                 <strong>{{_('Name')}}</strong>: {{translations.get_translation('sensor_field_name')}}
@@ -79,12 +85,13 @@
                       <div class="x_content">
                         <div class="col-md-1 col-sm-1 col-xs-12 form-group">
                           <label for="sensor_[nr]_hardwaretype">{{_('Hardware')}} <span class="required">*</span></label>
-                          <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('sensor_field_bustype')}}">
+                          <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('sensor_field_hardware')}}">
                             <select class="form-control" name="sensor_[nr]_hardwaretype" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
                               <option value="owfs">{{_('OWFS')}}</option>
                               <option value="dht11">{{_('DHT11')}}</option>
                               <option value="dht22">{{_('DHT22')}}</option>
                               <option value="am2302">{{_('AM2302')}}</option>
+                              <option value="w1">{{_('1Wire')}}</option>
                             </select>
                           </div>
                         </div>
@@ -147,7 +154,7 @@
               minimumResultsForSearch: Infinity
             }).on('change',function() {
               if (this.name.indexOf('hardwaretype') >= 0) {
-                $("input[name='" + this.name.replace('hardwaretype','address') + "']").attr("readonly", this.value == 'owfs');
+                $("input[name='" + this.name.replace('hardwaretype','address') + "']").attr("readonly", this.value == 'owfs' || this.value == 'w1');
               }
             });
             $.get($('form').attr('action'),function(data){

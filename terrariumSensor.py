@@ -7,9 +7,11 @@ import time
 from hashlib import md5
 import ow
 import Adafruit_DHT as dht
+import glob
+import re
 
 class terrariumSensor:
-  valid_hardware_types = ['owfs']
+  valid_hardware_types = ['owfs','w1']
   valid_sensor_types   = ['temperature','humidity']
   valid_dht_sensors    = { 'dht11' : dht.DHT11,
                            'dht22' : dht.DHT22,
@@ -17,6 +19,9 @@ class terrariumSensor:
   valid_hardware_types += valid_dht_sensors.keys()
   valid_indicators     = {'temperature' : 'C',
                           'humidity' : '%'}
+
+  w1_base_path = '/sys/bus/w1/devices/'
+  w1_temp_regex = re.compile(r'(?P<type>t|f)=(?P<value>[0-9]+)',re.IGNORECASE)
 
   def __init__(self, id, hardware_type, sensor_type, sensor, name = '', alarm_min = 0, alarm_max = 0, limit_min = 0, limit_max = 100):
     self.id = id
@@ -27,6 +32,9 @@ class terrariumSensor:
       self.sensor = sensor
       self.sensor.useCache(True)
       self.sensor_address = self.sensor.address
+    elif self.get_hardware_type() == 'w1':
+      # Dirty hack to replace OWFS sensor object for W1 path
+      self.sensor_address = sensor
     elif self.get_hardware_type() in terrariumSensor.valid_dht_sensors.keys():
       # Adafruit_DHT
       self.sensor = dht
@@ -75,9 +83,9 @@ class terrariumSensor:
       ow.init(str(port));
       sensorsList = ow.Sensor('/').sensorList()
       for sensor in sensorsList:
-        sensor_config = {}
         if 'temperature' in sensor.entryList():
           sensor_id = md5(b'' + sensor.address + 'temperature').hexdigest()
+          sensor_config = {}
           if sensor_id in config:
             sensor_config = config[sensor_id]
             done_sensors.append(sensor_id)
@@ -94,6 +102,7 @@ class terrariumSensor:
 
         if 'humidity' in sensor.entryList():
           sensor_id = md5(b'' + sensor.address + 'humidity').hexdigest()
+          sensor_config = {}
           if sensor_id in config:
             sensor_config = config[sensor_id]
             done_sensors.append(sensor_id)
@@ -109,11 +118,41 @@ class terrariumSensor:
                                         sensor_config['limit_max'] if 'limit_max' in sensor_config else 100))
 
     except ow.exNoController:
-      logger.warning('OWFS file system is not actve / installed on this device!')
+      logger.debug('OWFS file system is not actve / installed on this device!')
       pass
+
+    # Scanning w1 system bus
+    for address in glob.iglob(terrariumSensor.w1_base_path + '[0-9][0-9]-*'):
+      data = ''
+      with open(address + '/w1_slave', 'r') as w1data:
+        data = w1data.read()
+
+      w1data = terrariumSensor.w1_temp_regex.search(data)
+      if w1data:
+        # Found valid data
+        sensor_type = ('temperature' if w1data.group('type') == 't' else 'humidity')
+        # We expect temperature in Celcius degrees
+        sensor_value = float(w1data.group('value')) / 1000
+        sensor_id = md5(b'' + address.replace(terrariumSensor.w1_base_path,'').replace('-','').upper() + sensor_type).hexdigest()
+
+        sensor_config = {}
+        if sensor_id in config:
+          sensor_config = config[sensor_id]
+          done_sensors.append(sensor_id)
+
+        sensors.append(terrariumSensor(sensor_id,
+                                       'w1',
+                                       sensor_config['type'] if 'type' in sensor_config else sensor_type,
+                                       sensor_config['address'] if 'address' in sensor_config else address.replace(terrariumSensor.w1_base_path,''),
+                                       sensor_config['name'] if 'name' in sensor_config else '',
+                                       sensor_config['alarm_min'] if 'alarm_min' in sensor_config else 0,
+                                       sensor_config['alarm_max'] if 'alarm_max' in sensor_config else 0,
+                                       sensor_config['limit_min'] if 'limit_min' in sensor_config else 0,
+                                       sensor_config['limit_max'] if 'limit_max' in sensor_config else 100))
 
     # 'Scanning' for GPIO sensors. These are the remaining sensors based on config
     for sensor_id in set(config.keys()) - set(done_sensors):
+      sensor_config = {}
       if sensor_id in config:
         sensor_config = config[sensor_id]
 
@@ -140,12 +179,25 @@ class terrariumSensor:
         if 'temperature' == self.get_type():
           if self.get_hardware_type() == 'owfs':
             self.current = float(self.sensor.temperature)
+          elif self.get_hardware_type() == 'w1':
+            data = ''
+            with open(terrariumSensor.w1_base_path + self.get_address() + '/w1_slave', 'r') as w1data:
+              data = w1data.read()
+
+            w1data = terrariumSensor.w1_temp_regex.search(data)
+            if w1data:
+              # Found data
+              temperature = float(w1data.group('value')) / 1000
+              self.current = float(temperature)
           elif self.get_hardware_type() in terrariumSensor.valid_dht_sensors.keys():
             humidity, temperature = self.sensor.read_retry(terrariumSensor.valid_dht_sensors[self.get_hardware_type()], self.sensor_address)
             self.current = float(temperature)
         elif 'humidity' == self.get_type():
           if self.get_hardware_type() == 'owfs':
             self.current = float(self.sensor.humidity)
+          elif self.get_hardware_type() == 'w1':
+            # Not tested / No hardware to test with
+            pass
           elif self.get_hardware_type() in terrariumSensor.valid_dht_sensors.keys():
             humidity, temperature = self.sensor.read_retry(terrariumSensor.valid_dht_sensors[self.get_hardware_type()], self.sensor_address)
             self.current = float(humidity)
@@ -204,8 +256,8 @@ class terrariumSensor:
     return self.sensor_address
 
   def set_address(self,address):
-    # Can't set OWFS sensor addresses. This is done by the OWFS software
-    if self.get_hardware_type() != 'owfs':
+    # Can't set OWFS or W1 sensor addresses. This is done by the OWFS software or kernel OS
+    if self.get_hardware_type() not in  ['owfs','w1']:
       self.sensor_address = address
 
   def set_name(self,name):
