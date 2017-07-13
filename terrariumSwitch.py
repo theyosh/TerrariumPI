@@ -63,7 +63,7 @@ class terrariumSwitch():
           if 'BitBang' == self.device_type:
             with BitBangDevice(self.device) as device:
               device.baudrate = 9600
-              if state is terrariumSwitchboard.ON:
+              if state is terrariumSwitch.ON:
                 device.port |= int(terrariumSwitch.bitbang_addresses[str(self.get_address())], 16)
               else:
                 device.port &= ~int(terrariumSwitch.bitbang_addresses[str(self.get_address())], 16)
