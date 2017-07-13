@@ -89,7 +89,7 @@ class terrariumEnvironment():
       sprayer = self.get_sprayer_state()
       if 'enabled' in sprayer and 'enabled' in light and sprayer['enabled'] and light['enabled']:
         if self.sprayer['night_enabled'] or light['state'] == 'on':
-          if sprayer['alarm'] and self.door_status() == 'closed':
+          if sprayer['alarm'] and self.door_status() == terrariumDoor.CLOSED:
             self.sprayer_on()
           else:
             self.sprayer_off()

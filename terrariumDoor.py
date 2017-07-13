@@ -55,7 +55,9 @@ class terrariumDoor():
   def __checker(self):
     logger.info('Start terrariumPI door checker for door \'%s\'' % self.get_name())
     while True:
-      current_status = terrariumDoor.OPEN if GPIO.input(int(self.get_address())) else terrariumDoor.CLOSED
+      if self.get_hardware_type == 'gpio':
+        current_status = terrariumDoor.OPEN if GPIO.input(int(self.get_address())) else terrariumDoor.CLOSED
+
       logger.debug('Current door \'%s\' status: %s' % (self.get_name(),current_status))
       if current_status != self.get_status():
         logger.info('Door \'%s\' changed from %s to %s' % (self.get_name(),self.get_status(), current_status))
