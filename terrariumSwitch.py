@@ -40,7 +40,7 @@ class terrariumSwitch():
     if self.id is None:
       self.id = md5(b'' + self.get_hardware_type() + self.get_address()).hexdigest()
 
-    logger.info('Loaded switch %s with values: power %sW and waterflow %sL/s' %
+    logger.info('Loaded switch \'%s\' with values: power %.2fW and waterflow %.3fL/s' %
                 (self.get_name(),
                  self.get_power_wattage(),
                  self.get_water_flow()))
@@ -53,7 +53,7 @@ class terrariumSwitch():
     for device in Driver().list_devices():
       vendor, product, self.device = map(lambda x: x.decode('latin1'), device)
       self.device_type = 'Serial' if product.endswith('UART') else 'BitBang'
-      logger.info('Found switch board %s %s %s of type %s' % (vendor,product,self.device,self.device_type))
+      logger.info('Found switch board %s, %s, %s, of type %s' % (vendor,product,self.device,self.device_type))
       break # For now, we only support 1 switch board!
 
   def set_state(self, state, force = False):
@@ -77,7 +77,7 @@ class terrariumSwitch():
               device.close()
 
           self.state = state
-          logger.info('Toggle switch %s from %s',self.get_name(),('off to on' if self.is_on() else 'on to off'))
+          logger.info('Toggle switch \'%s\' from %s',self.get_name(),('off to on' if self.is_on() else 'on to off'))
           if self.callback is not None:
             self.callback(self.get_data())
         except Exception, err:
@@ -126,7 +126,7 @@ class terrariumSwitch():
     self.sensor_address = address
 
   def get_name(self):
-    return self.name if self.name is not '' else 'Switch '
+    return self.name
 
   def set_name(self,name):
     self.name = name

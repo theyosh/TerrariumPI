@@ -102,7 +102,7 @@ class terrariumEngine():
   def __load_power_switches(self,reloading = False):
     # Load Switches, with ID as index
     starttime = time.time()
-    logger.info('%s terrariumPI switches' % 'Reloading' if reloading else 'Loading',)
+    logger.info('%s terrariumPI switches' % ('Reloading' if reloading else 'Loading',))
     switch_config = self.config.get_power_switches()
     self.power_switches = {}
     for power_switch_config in switch_config:
