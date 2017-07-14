@@ -8,6 +8,8 @@ from threading import Timer
 import copy
 import time
 
+from terrariumDoor import terrariumDoor
+
 from gevent import monkey, sleep
 monkey.patch_all()
 
