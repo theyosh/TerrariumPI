@@ -125,7 +125,11 @@ class terrariumSwitch():
   def set_address(self,address):
     self.sensor_address = address
     if self.get_hardware_type() == 'gpio':
-      GPIO.setup(int(self.get_address()), GPIO.OUT)
+      try:
+        GPIO.setup(int(self.get_address()), GPIO.OUT)
+      except Exception, err:
+        print err
+        pass
 
   def get_name(self):
     return self.name
