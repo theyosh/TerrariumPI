@@ -118,6 +118,7 @@ class terrariumWebserver():
   def __static_file(self,filename, root = 'static'):
     if filename == 'js/terrariumpi.js':
       response.headers['Content-Type'] = 'application/javascript; charset=UTF-8'
+      response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(days=self.__caching_days)).strftime('%a, %d %b %Y %H:%M:%S GMT')
       return template(filename,template_lookup=[root])
 
     staticfile = static_file(filename, root=root)
@@ -260,4 +261,4 @@ class terrariumWebserver():
                    server=GeventWebSocketServer,
                    debug=True,
                    reloader=False,
-                   quiet=False)
+                   quiet=True)
