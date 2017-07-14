@@ -551,7 +551,7 @@ function setContentHeight() {
   // normalize content
   //contentHeight -= $NAV_MENU.height() + footerHeight;
 
-  $RIGHT_COL.css('min-height', bodyHeight - footerHeight);
+  $RIGHT_COL.css('min-height', bodyHeight - 50);
 }
 
 // Sidebar
