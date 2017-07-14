@@ -400,7 +400,6 @@ function update_dashboard_environment(name, value) {
     systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
   }
   systempart.find('.state i').removeClass('red green').addClass(value.state === 'on' ? 'green' : 'red').attr('title', value.state === 'on' ? '{{_('On')}}' : '{{_('Off')}}');
-  setContentHeight();
 }
 
 function format_uptime(uptime) {
@@ -538,25 +537,26 @@ var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
     $NAV_MENU = $('.nav_menu'),
     $FOOTER = $('footer');
 
-// TODO: This is some kind of easy fix, maybe we can improve this
-function setContentHeight() {
-  // reset height
-  $RIGHT_COL.css('min-height', $(window).height());
-
-  var bodyHeight = $BODY.outerHeight(),
-    footerHeight = $BODY.hasClass('footer_fixed') ? -10 : $FOOTER.height(),
-    leftColHeight = $LEFT_COL.eq(1).height() + $SIDEBAR_FOOTER.height(),
-    contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
-
-  // normalize content
-  //contentHeight -= $NAV_MENU.height() + footerHeight;
-
-  $RIGHT_COL.css('min-height', bodyHeight - 30);
-}
-
 // Sidebar
 function init_sidebar() {
+  // TODO: This is some kind of easy fix, maybe we can improve this
+  var setContentHeight = function () {
+    // reset height
+    $RIGHT_COL.css('min-height', $(window).height());
+
+    var bodyHeight = $BODY.outerHeight(),
+      footerHeight = $BODY.hasClass('footer_fixed') ? -10 : $FOOTER.height(),
+      leftColHeight = $LEFT_COL.eq(1).height() + $SIDEBAR_FOOTER.height(),
+      contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
+
+    // normalize content
+    contentHeight -= $NAV_MENU.height() + footerHeight;
+
+    $RIGHT_COL.css('min-height', contentHeight);
+  };
+
   $SIDEBAR_MENU.find('a').on('click', function(ev) {
+    console.log('clicked - sidebar_menu');
         var $li = $(this).parent();
 
         if ($li.is('.active')) {
@@ -571,12 +571,12 @@ function init_sidebar() {
                 $SIDEBAR_MENU.find('li ul').slideUp();
             }else
             {
-				if ( $BODY.is( ".nav-sm" ) )
-				{
-					$SIDEBAR_MENU.find( "li" ).removeClass( "active active-sm" );
-					$SIDEBAR_MENU.find( "li ul" ).slideUp();
-				}
-			}
+        if ( $BODY.is( ".nav-sm" ) )
+        {
+          $SIDEBAR_MENU.find( "li" ).removeClass( "active active-sm" );
+          $SIDEBAR_MENU.find( "li ul" ).slideUp();
+        }
+      }
             $li.addClass('active');
 
             $('ul:first', $li).slideDown(function() {
@@ -587,16 +587,21 @@ function init_sidebar() {
 
   // toggle small or large menu
   $MENU_TOGGLE.on('click', function() {
-		if ($BODY.hasClass('nav-md')) {
-			$SIDEBAR_MENU.find('li.active ul').hide();
-			$SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
-		} else {
-			$SIDEBAR_MENU.find('li.active-sm ul').show();
-			$SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
-		}
+      console.log('clicked - menu toggle');
 
-  	$BODY.toggleClass('nav-md nav-sm');
-  	setContentHeight();
+      if ($BODY.hasClass('nav-md')) {
+        $SIDEBAR_MENU.find('li.active ul').hide();
+        $SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
+      } else {
+        $SIDEBAR_MENU.find('li.active-sm ul').show();
+        $SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
+      }
+
+    $BODY.toggleClass('nav-md nav-sm');
+
+    setContentHeight();
+
+    $('.dataTable').each ( function () { $(this).dataTable().fnDraw(); });
   });
 
 	// check active menu
@@ -626,38 +631,31 @@ function init_sidebar() {
 };
 // /Sidebar
 
-function load_panel_tool_box() {
-  $('.collapse-link').on('click', function() {
-      var $BOX_PANEL = $(this).closest('.x_panel'),
-          $ICON = $(this).find('i'),
-          $BOX_CONTENT = $BOX_PANEL.find('.x_content');
-
-      // fix for some div with hardcoded fix class
-      if ($BOX_PANEL.attr('style')) {
-          $BOX_CONTENT.slideToggle(200, function(){
-              $BOX_PANEL.removeAttr('style');
-              setContentHeight();
-          });
-      } else {
-          $BOX_CONTENT.slideToggle(200);
-          $BOX_PANEL.css('height', 'auto');
-          setContentHeight();
-      }
-      $ICON.toggleClass('fa-chevron-up fa-chevron-down');
-    });
-
-    $('.close-link').click(function () {
-      var $BOX_PANEL = $(this).closest('.x_panel');
-      $BOX_PANEL.remove();
-      setContentHeight();
-    });
-}
-
 function reload_reload_theme() {
   // Panel toolbox
-  load_panel_tool_box();
+  $('.collapse-link').on('click', function() {
+    var $BOX_PANEL = $(this).closest('.x_panel'),
+        $ICON = $(this).find('i'),
+        $BOX_CONTENT = $BOX_PANEL.find('.x_content');
 
-  setContentHeight();
+    // fix for some div with hardcoded fix class
+    if ($BOX_PANEL.attr('style')) {
+        $BOX_CONTENT.slideToggle(200, function(){
+            $BOX_PANEL.removeAttr('style');
+        });
+    } else {
+        $BOX_CONTENT.slideToggle(200);
+        $BOX_PANEL.css('height', 'auto');
+    }
+
+    $ICON.toggleClass('fa-chevron-up fa-chevron-down');
+  });
+
+  $('.close-link').click(function () {
+    var $BOX_PANEL = $(this).closest('.x_panel');
+
+    $BOX_PANEL.remove();
+  });
   // Tooltip
   $('[data-toggle="tooltip"]').tooltip({
     container: 'body',
