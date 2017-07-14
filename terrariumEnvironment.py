@@ -19,11 +19,10 @@ class terrariumEnvironment():
     self.config = config
     self.sensors = sensors
     self.power_switches = power_switches
-
-    self.door_status = door_status
     self.weather = weather
+    self.door_status = door_status
     self.reload_config()
-    logger.info('Starting environment')
+    logger.info('Starting terrariumPI environment')
     thread.start_new_thread(self.__engine_loop, ())
 
   def __parse_config(self):
@@ -42,6 +41,9 @@ class terrariumEnvironment():
     self.light['min_hours'] = 0.0 if init else float(self.light['min_hours'])
     self.light['max_hours'] = 0.0 if init else float(self.light['max_hours'])
     self.light['power_switches'] = [] if (init or self.light['power_switches'] == '' ) else self.light['power_switches'].split(',')
+
+    if not self.light['enabled']:
+      self.light['modus'] = 'disabled'
 
     self.sprayer = config['sprayer']
     init = len(self.sprayer) == 0
@@ -68,6 +70,21 @@ class terrariumEnvironment():
     self.heater['power_switches'] = [] if (init or self.heater['power_switches'] == '' ) else self.heater['power_switches'].split(',')
     self.heater['sensors'] = [] if (init or self.heater['sensors'] == '' ) else self.heater['sensors'].split(',')
 
+
+
+    self.cooler = config['cooler']
+    init = len(self.cooler) == 0
+    if init:
+      self.cooler = {}
+
+    self.cooler['enabled'] = False if init else (True if self.cooler['enabled'].lower() in ['true','on','1'] else False)
+    self.cooler['modus'] = None if init else self.cooler['modus']
+    #self.cooler['day_enabled'] = False if init else (True if self.heater['day_enabled'].lower() in ['true','on','1'] else False)
+    self.cooler['power_switches'] = [] if (init or self.cooler['power_switches'] == '' ) else self.cooler['power_switches'].split(',')
+    self.cooler['sensors'] = [] if (init or self.cooler['sensors'] == '' ) else self.cooler['sensors'].split(',')
+
+
+  # Private functions
   def __set_config(self,part,data):
     for field in data:
       if 'light' == part:
@@ -76,6 +93,8 @@ class terrariumEnvironment():
         self.sprayer[field] = data[field]
       elif 'heater' == part:
         self.heater[field] = data[field]
+      elif 'cooler' == part:
+        self.cooler[field] = data[field]
 
   def __engine_loop(self):
     while True:
@@ -87,6 +106,7 @@ class terrariumEnvironment():
         else:
           self.light_off()
 
+      # Reread the light status.... above check could changed it
       light = self.get_light_state()
       sprayer = self.get_sprayer_state()
       if 'enabled' in sprayer and 'enabled' in light and sprayer['enabled'] and light['enabled']:
@@ -110,6 +130,16 @@ class terrariumEnvironment():
         else:
           self.heater_off()
 
+      cooler = self.get_cooler_state()
+      if 'enabled' in cooler and 'enabled' in light and cooler['enabled'] and light['enabled']:
+        if self.cooler['night_enabled'] or light['state'] == 'on':
+          if cooler['current'] > cooler['alarm_max']:
+            self.cooler_on()
+          elif cooler['current'] < cooler['alarm_min']:
+            self.cooler_off()
+        else:
+          self.cooler_off()
+
       logger.info('Engine loop done in %s seconds' % (time.time() - starttime,))
       sleep(15)
 
@@ -122,6 +152,8 @@ class terrariumEnvironment():
       power_switches = self.sprayer['power_switches']
     elif 'heater' == part:
       power_switches = self.heater['power_switches']
+    elif 'cooler' == part:
+      power_switches = self.cooler['power_switches']
 
     for switch in power_switches:
       if state is None:
@@ -147,15 +179,61 @@ class terrariumEnvironment():
 
   def __is_off(self,part):
     return not self.__is_on(part)
+  # End private functions
 
+  # System functions
   def get_config(self):
     return {'light' : self.get_light_config(),
             'sprayer' : self.get_sprayer_config() ,
-            'heater' : self.get_heater_config()}
+            'heater' : self.get_heater_config(),
+            'cooler' : self.get_cooler_config()}
 
   def reload_config(self):
     self.__parse_config()
 
+  def get_average_temperature(self):
+    data = self.get_average()
+    if 'temperature' in data:
+      return data['temperature']
+
+    return None
+
+  def get_average_humidity(self):
+    data = self.get_average()
+    if 'humidity' in data:
+      return data['humidity']
+
+    return None
+
+  def get_average(self):
+    average = {}
+    for sensorid in set(self.sprayer['sensors'] + self.heater['sensors'] + self.cooler['sensors']):
+      sensor = self.sensors[sensorid]
+      sensor_type = sensor.get_type()
+      if sensor_type not in average:
+        average[sensor_type] = {'current' : 0.0, 'alarm_min' : 0.0, 'alarm_max' : 0.0, 'limit_min' : 0.0, 'limit_max':0.0, 'amount' : 0.0}
+
+      average[sensor_type]['current'] += sensor.get_current()
+      average[sensor_type]['alarm_min'] += sensor.get_alarm_min()
+      average[sensor_type]['alarm_max'] += sensor.get_alarm_max()
+      average[sensor_type]['limit_min'] += sensor.get_limit_min()
+      average[sensor_type]['limit_max'] += sensor.get_limit_max()
+      average[sensor_type]['amount'] += 1
+
+    for averagetype in average:
+      amount = average[averagetype]['amount']
+      del(average[averagetype]['amount'])
+      for field in average[averagetype]:
+        average[averagetype][field] /= amount
+
+      average[averagetype]['alarm'] = not (average[averagetype]['alarm_min'] < average[averagetype]['current'] < average[averagetype]['alarm_max'])
+      average[averagetype]['amount'] = amount
+      average[averagetype]['type'] = averagetype
+
+    return average
+  # End system functions
+
+  # Light functions
   def get_light_config(self):
     return self.light
 
@@ -214,7 +292,10 @@ class terrariumEnvironment():
 
     data['state'] = 'on' if self.is_light_on() else 'off'
     return data
+  # End light functions
 
+
+  # Sprayer functions
   def get_sprayer_config(self):
     data = copy.deepcopy(self.sprayer)
     if 'lastaction' in data:
@@ -251,7 +332,10 @@ class terrariumEnvironment():
     data['alarm'] = (data['night_enabled'] or (light['on'] < int(time.time()) < light['off'])) and data['current'] < data['alarm_min']
     data['state'] = 'on' if self.is_sprayer_on() else 'off'
     return data
+  # End sprayer functions
 
+
+  # Heater functions
   def get_heater_config(self):
     return self.heater
 
@@ -283,44 +367,39 @@ class terrariumEnvironment():
     data['alarm'] = (data['day_enabled'] or not (light['on'] < int(time.time()) < light['off'])) and not (data['alarm_max'] >= data['current'] >= data['alarm_min'])
     data['state'] = 'on' if self.is_heater_on() else 'off'
     return data
+  # End heater functions
 
-  def get_average_temperature(self):
-    data = self.get_average()
-    if 'temperature' in data:
-      return data['temperature']
 
-    return None
+  # Cooler functions
+  def get_cooler_config(self):
+    return self.cooler
 
-  def get_average_humidity(self):
-    data = self.get_average()
-    if 'humidity' in data:
-      return data['humidity']
+  def set_cooler_config(self,data):
+    self.__set_config('cooler',data)
 
-    return None
+  def cooler_on(self):
+    self.__on('cooler')
 
-  def get_average(self):
-    average = {}
-    for sensorid in self.sprayer['sensors'] + self.heater['sensors']:
-      sensor = self.sensors[sensorid]
-      sensor_type = sensor.get_type()
-      if sensor_type not in average:
-        average[sensor_type] = {'current' : 0.0, 'alarm_min' : 0.0, 'alarm_max' : 0.0, 'limit_min' : 0.0, 'limit_max':0.0, 'amount' : 0.0}
+  def cooler_off(self):
+    self.__off('cooler')
 
-      average[sensor_type]['current'] += sensor.get_current()
-      average[sensor_type]['alarm_min'] += sensor.get_alarm_min()
-      average[sensor_type]['alarm_max'] += sensor.get_alarm_max()
-      average[sensor_type]['limit_min'] += sensor.get_limit_min()
-      average[sensor_type]['limit_max'] += sensor.get_limit_max()
-      average[sensor_type]['amount'] += 1
+  def is_cooler_on(self):
+    return self.__is_on('cooler')
 
-    for averagetype in average:
-      amount = average[averagetype]['amount']
-      del(average[averagetype]['amount'])
-      for field in average[averagetype]:
-        average[averagetype][field] /= amount
+  def is_cooler_off(self):
+    return self.__is_off('cooler')
 
-      average[averagetype]['alarm'] = not (average[averagetype]['alarm_min'] < average[averagetype]['current'] < average[averagetype]['alarm_max'])
-      average[averagetype]['amount'] = amount
-      average[averagetype]['type'] = averagetype
+  def get_cooler_state(self):
+    data = self.get_average_temperature()
+    if data is None:
+      return {}
 
-    return average
+    data['modus'] = self.cooler['modus']
+    data['night_enabled'] = self.cooler['night_enabled']
+    data['enabled'] = self.cooler['enabled']
+
+    light = self.get_light_state()
+    data['alarm'] = (data['night_enabled'] or not (light['on'] < int(time.time()) < light['off'])) and not (data['alarm_max'] >= data['current'] >= data['alarm_min'])
+    data['state'] = 'on' if self.is_cooler_on() else 'off'
+    return data
+  # End cooler functions

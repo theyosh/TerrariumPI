@@ -138,7 +138,7 @@ class terrariumConfig:
 
   def get_environment(self):
     config = self.__get_config('environment')
-    data = {'light' : {}, 'sprayer' : {}, 'heater' : {} }
+    data = {'light' : {}, 'sprayer' : {}, 'heater' : {} , 'cooler' : {}}
     for key in config:
       config_keys = key.split('_')
       part = config_keys[0]
@@ -146,10 +146,6 @@ class terrariumConfig:
       data[part]['_'.join(config_keys)] = config[key]
 
     return data
-
-  def get_environment_light(self):
-    data = self.get_environment()
-    return data['light'] if 'light' in data else None
   # End Environment functions
 
 

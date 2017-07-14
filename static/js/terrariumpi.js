@@ -68,7 +68,7 @@ function websocket_init(reconnect) {
         break;
 
       case 'environment':
-        $.each(['heater', 'sprayer', 'light'], function(index, value) {
+        $.each(['heater', 'sprayer', 'light', 'cooler'], function(index, value) {
           update_dashboard_environment(value, data.data[value]);
         });
         break;
@@ -356,38 +356,54 @@ function update_weather(data) {
 function update_dashboard_environment(name, value) {
   var systempart = $('div.environment_' + name);
   if (systempart.length === 0 || Object.keys(value).length === 0) {
+    systempart.find('table.tile_info').hide();
     return;
   }
-  try {
-    var enabledColor = '';
-    switch (name) {
-      case 'light':
-        enabledColor = 'orange';
-        systempart.find('h4 small span').text(value.modus);
-        systempart.find('.on').text(moment(value.on * 1000).format('LT'));
-        systempart.find('.off').text(moment(value.off * 1000).format('LT'));
-        systempart.find('.duration').text(moment.duration(Math.abs(value.off - value.on) * 1000).humanize());
-        break;
-      case 'sprayer':
-        enabledColor = 'blue';
-        systempart.find('.current').text(value.current.toFixed(3) + ' %');
-        systempart.find('.alarm_min').text(value.alarm_min.toFixed(3) + ' %');
-        systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
-        break;
-      case 'heater':
+  var enabledColor = '';
+  switch (name) {
+    case 'light':
+      enabledColor = 'orange';
+      break;
+    case 'sprayer':
+      enabledColor = 'blue';
+      break;
+    case 'heater':
+      enabledColor = 'red';
+      break;
+    case 'cooler':
+      enabledColor = 'blue';
+      break;
+  }
 
-        enabledColor = 'red';
-        systempart.find('h4 small span').text(value.modus);
-        systempart.find('.current').text(value.current.toFixed(3) + ' °C');
-        systempart.find('.alarm_min').text(value.alarm_min.toFixed(3) + ' °C');
-        systempart.find('.alarm_max').text(value.alarm_max.toFixed(3) + ' °C');
-        systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
-        break;
+  systempart.find('h4').removeClass('orange blue red')
+                       .addClass(value.enabled ? enabledColor : '')
+                       .attr('title', value.enabled ? "{{_('Enabled')}}" : "{{_('Disabled')}}");
+  systempart.find('h4 small span').text(value.modus);
+
+  if (value.enabled) {
+
+    if (value.on !== undefined) {
+      systempart.find('.on').text(moment(value.on * 1000).format('LT'));
     }
-    systempart.find('h4').removeClass('orange blue red').addClass(value.enabled ? enabledColor : '').attr('title', value.enabled ? '{{_('Enabled')}}' : '{{_('Disabled')}}');
+    if (value.off !== undefined) {
+      systempart.find('.off').text(moment(value.off * 1000).format('LT'));
+      systempart.find('.duration').text(moment.duration(Math.abs(value.off - value.on) * 1000).humanize());
+    }
+    if (value.current !== undefined) {
+      systempart.find('.current').text(value.current.toFixed(3) + ' °C');
+    }
+    if (value.alarm_min !== undefined) {
+      systempart.find('.alarm_min').text(value.alarm_min.toFixed(3) + ' °C');
+    }
+    if (value.alarm_max !== undefined) {
+      systempart.find('.alarm_max').text(value.alarm_max.toFixed(3) + ' °C');
+    }
+    if (value.alarm !== undefined) {
+      systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
+    }
     systempart.find('.state i').removeClass('red green').addClass(value.state === 'on' ? 'green' : 'red').attr('title', value.state === 'on' ? '{{_('On')}}' : '{{_('Off')}}');
-  } catch (error) {
-      // Just ignore....
+  } else {
+    systempart.find('table.tile_info').hide();
   }
 }
 
