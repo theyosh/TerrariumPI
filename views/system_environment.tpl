@@ -43,12 +43,8 @@
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Select the modus on which the lights will be put on and off. Select weather to use the sun rise and sun set at your location. This will make the amount of lighting variable to the actual amount of daylight. When selecting clock, the light will put on and off at sellected times')}}">
                         <select class="form-control" name="light_modus" tabindex="-1" placeholder="{{_('Select an option')}}">
-                          <option value="timer">
-                            {{_('Timer')}}
-                          </option>
-                          <option value="weather">
-                            {{_('Weather')}}
-                          </option>
+                          <option value="timer">{{_('Timer')}}</option>
+                          <option value="weather">{{_('Weather')}}</option>
                         </select>
                       </div>
                     </div>
@@ -88,7 +84,7 @@
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the lights. Select all needed switches below.')}}">
                         <select class="form-control" multiple="multiple" name="light_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
-                          </select>
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -152,7 +148,7 @@
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Select the power switche(s) which controll the spray system. You can select multiple switches.')}}">
                         <select class="form-control" multiple="multiple" name="sprayer_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
-                          </select>
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -161,7 +157,7 @@
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Select the humidity sensors that are use to controll the final humidity. When selecting multiple sensors, the average is used for determing the humidity. This is also shown on the dashboard on the right side.')}}">
                         <select class="form-control" multiple="multiple" name="sprayer_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
-                          </select>
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -204,15 +200,9 @@
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Select the operating modus. Use \'%s\' modus to select the time period in which the heating is running. Select \'%s\' modus to use the sun rise and sun set as on and off times. When the sun rises the heating system will stop. Use \'%s\' modus to have the heating running when the lights are off.') % (_('Timer'),_('Weather'),_('Sensor'))}}">
                         <select class="form-control" name="heater_modus" tabindex="-1" placeholder="{{_('Select an option')}}">
-                          <option value="timer">
-                            {{_('Timer')}}
-                          </option>
-                          <option value="weather">
-                            {{_('Weather')}}
-                          </option>
-                          <option value="sensor">
-                            {{_('Sensor')}}
-                          </option>
+                          <option value="timer">{{_('Timer')}}</option>
+                          <option value="weather">{{_('Weather')}}</option>
+                          <option value="sensor">{{_('Sensor')}}</option>
                         </select>
                       </div>
                     </div>
@@ -234,7 +224,7 @@
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Select the power switche(s) which controll the heating system. You can select multiple switches.')}}">
                         <select class="form-control" multiple="multiple" name="heater_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
-                          </select>
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -243,7 +233,7 @@
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Select the temperature sensors that are use to controll the final temperature. When selecting multiple sensors, the average is used for determing the temperature. This is also shown on the dashboard right side.')}}">
                         <select class="form-control" multiple="multiple" name="heater_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
-                          </select>
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -251,8 +241,6 @@
               </div>
             </div>
           </div>
-
-
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -287,15 +275,9 @@
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Select the operating modus. Use \'%s\' modus to select the time period in which the cooling is running. Select \'%s\' modus to use the sun rise and sun set as on and off times. When the sun sets the cooling system will stop. Use \'%s\' modus to have the cooling running when the lights are on.') % (_('Timer'),_('Weather'),_('Sensor'))}}">
                         <select class="form-control" name="cooler_modus" tabindex="-1" placeholder="{{_('Select an option')}}">
-                          <option value="timer">
-                            {{_('Timer')}}
-                          </option>
-                          <option value="weather">
-                            {{_('Weather')}}
-                          </option>
-                          <option value="sensor">
-                            {{_('Sensor')}}
-                          </option>
+                          <option value="timer">{{_('Timer')}}</option>
+                          <option value="weather">{{_('Weather')}}</option>
+                          <option value="sensor">{{_('Sensor')}}</option>
                         </select>
                       </div>
                     </div>
@@ -317,7 +299,7 @@
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Select the power switche(s) which controll the cooling system. You can select multiple switches.')}}">
                         <select class="form-control" multiple="multiple" name="cooler_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
-                          </select>
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -326,7 +308,7 @@
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Select the temperature sensors that are use to controll the final temperature. When selecting multiple sensors, the average is used for determing the temperature. This is also shown on the dashboard right side.')}}">
                         <select class="form-control" multiple="multiple" name="cooler_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
-                          </select>
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -334,7 +316,7 @@
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row submit">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="ln_solid"></div>
               <div class="form-group">
@@ -418,6 +400,7 @@
           });
 
           function load_environment_settings() {
+            // Wait with loading the environment settings until all selectors are loaded
             if (switches_loaded && humidity_sensors_loaded && temperature_sensors_loaded) {
               $.get('/api/config/environment',function(data){
                 $.each(data,function (index,type){
@@ -438,6 +421,7 @@
                 });
               });
             } else {
+              // Not all selectors are loaded... wait for 100 miliseconds and try again
               setTimeout(function() {
                 load_environment_settings();
               }, 100);
