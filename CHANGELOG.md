@@ -2,10 +2,16 @@ Changelog
 =========
 
 
-(unreleased)
+Version 2.4 - 2017-07-15 - TheYOSH
 ------------
 
 **New**
+- Added exception handling for wrong GPIO pin number. [TheYOSH]
+- Add GPIO relay support. Closes #3. [TheYOSH]
+- Added sprayer modus. Is always sensor for now. [TheYOSH]
+- Added cooling system to the environment engine. [TheYOSH]
+- Added missing door module. [TheYOSH]
+- Add power switch title when hover over it. [TheYOSH]
 - Added support for Raspberry PI 1Wire interface sensors. For now only
   temperature sensors are supported. #2. [TheYOSH]
 - Add support for GPIO (DHT11, DHT22 and AM2302) sensors. [TheYOSH]
@@ -27,6 +33,20 @@ Changelog
 - Add door indicator logging and graphing. [TheYOSH]
 
 **Fixes**
+- Fixes for UX. [TheYOSH]
+- Fix removing switches. [TheYOSH]
+- Fix content height. [TheYOSH]
+- Fix content heights (3) [TheYOSH]
+- Fix content heights (2) [TheYOSH]
+- Fix content heights. [TheYOSH]
+- Fix for loading environment settings page. [TheYOSH]
+- Fix environent on dashboard. [TheYOSH]
+- Fix. [TheYOSH]
+- Fix form processing. [TheYOSH]
+- Fix switch on detection. [TheYOSH]
+- Fix power switch logging. [TheYOSH]
+- Fix cleaning all sensors. [TheYOSH]
+- Update changelog. Fixes #2. [TheYOSH]
 - Fix environment measurement. [TheYOSH]
 - Fix 1 wire sensor detection. #2. [TheYOSH]
 - Fix SSL issue with weather data. [TheYOSH]
@@ -46,6 +66,21 @@ Changelog
 - Fix door history. [TheYOSH]
 
 **Updates**
+- Update readme. [TheYOSH]
+- Update readme for GPIO relay board. [TheYOSH]
+- Revert UX updates. [TheYOSH]
+- Update readme file. [TheYOSH]
+- Small UX updates. [TheYOSH]
+- Updated cooler dashboard. Switched min and max value. [TheYOSH]
+- Update weather icons. [TheYOSH]
+- More small updates. [TheYOSH]
+- Small updates. [TheYOSH]
+- Update webcam system. [TheYOSH]
+- Small updates. [TheYOSH]
+- Updated door system code. [TheYOSH]
+- Updated config settings. [TheYOSH]
+- Updated readme file for more information about sensor support. #2.
+  [TheYOSH]
 - Update install location Adafruit libraries. [TheYOSH]
 - Update startup script. [TheYOSH]
 - Updated notification timestamp data fields. [TheYOSH]
@@ -65,6 +100,21 @@ Changelog
 - Update missing translations. [TheYOSH]
 
 **Other**
+- Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
+  [TheYOSH]
+- Merge pull request #7 from theyosh/cooler. [TheYOSH]
+
+  Merge Cooler system
+- Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
+  [TheYOSH]
+- Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
+  [TheYOSH]
+- Change default logging to info. [TheYOSH]
+- In preperation for #3 the power switch system has been rewritten to
+  add and delete power switches. [TheYOSH]
+- Merge pull request #4 from theyosh/gpio_sensors. [TheYOSH]
+
+  Merge gpio sensors branch to master
 - Changed term 1wire to OWFS to support Raspberry PI 1 Wire overlay. #2.
   [TheYOSH]
 - Cleanup spaces. [TheYOSH]

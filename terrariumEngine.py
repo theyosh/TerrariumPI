@@ -82,7 +82,7 @@ class terrariumEngine():
   def __load_sensors(self,reloading = False):
     # Load Sensors, with ID as index
     starttime = time.time()
-    logger.info('%s terrariumPI temperature/humidity sensors' % 'Reloading' if reloading else 'Loading',)
+    logger.info('%s terrariumPI temperature/humidity sensors' % ('Reloading' if reloading else 'Loading'),)
     self.sensors = {}
     for sensor in terrariumSensor.scan(self.config.get_owfs_port(), self.config.get_sensors()):
       self.sensors[sensor.get_id()] = sensor
