@@ -11,10 +11,11 @@ And all this is controlled with a nice webinterface based on [Bootstrap 3 templa
 - Open door detection (sprayer will not spray when door(s) are open)
 - Support for native Raspberry PI cam out of the box
 - Power and water usage for costs calculation
+- Support for USB and remote webcams
 - Lights control based on sun rise and sun set or timers
 - Rain control based on measured humidity
-- Heater control based on temperature sensors
-- Cooling control based on temperature sensors
+- Heater control based on temperature sensors or timers
+- Cooling control based on temperature sensors or timers
 - Weather forecast from external source
 
 # Installation
