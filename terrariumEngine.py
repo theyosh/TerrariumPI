@@ -528,6 +528,7 @@ class terrariumEngine():
     data['light'] = self.environment.get_light_state()
     data['sprayer'] = self.environment.get_sprayer_state()
     data['heater'] = self.environment.get_heater_state()
+    data['cooler'] = self.environment.get_cooler_state()
 
     if filter is not None:
       data = { filter: data[filter]}
@@ -549,6 +550,9 @@ class terrariumEngine():
 
     if 'heater' in data:
       self.environment.set_heater_config(data['heater'])
+
+    if 'cooler' in data:
+      self.environment.set_cooler_config(data['cooler'])
 
     update_ok = self.config.save_environment(self.environment.get_config())
     if update_ok:

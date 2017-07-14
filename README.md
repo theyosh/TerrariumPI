@@ -6,14 +6,15 @@ Software for cheap home automation of your reptile terrarium or any other enclos
 
 And all this is controlled with a nice webinterface based on [Bootstrap 3 template](https://github.com/puikinsh/gentelella/).
 ## Features
-- Controlling up to 4 electronic devices
+- Controlling electronic devices like lights, sprayers, heating and cooling equipment
 - Reading out temperature and humidity sensors
-- Open door detection
+- Open door detection (sprayer will not spray when door(s) are open)
 - Support for native Raspberry PI cam out of the box
 - Power and water usage for costs calculation
 - Lights control based on sun rise and sun set or timers
 - Rain control based on measured humidity
 - Heater control based on temperature sensors
+- Cooling control based on temperature sensors
 - Weather forecast from external source
 
 # Installation

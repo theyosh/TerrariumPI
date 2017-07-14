@@ -68,7 +68,7 @@ function websocket_init(reconnect) {
         break;
 
       case 'environment':
-        $.each(['heater', 'sprayer', 'light'], function(index, value) {
+        $.each(['heater', 'sprayer', 'light', 'cooler'], function(index, value) {
           update_dashboard_environment(value, data.data[value]);
         });
         break;
@@ -146,8 +146,6 @@ function load_page(url) {
   }
   // Only process with some input
   if (url !== '') {
-    // Reset the main content height
-    $("#maincontent").height(0);
     // Load the data through AJAX
     $.get(url, function(data) {
       // Get the menu url so that jQuery can match
@@ -205,7 +203,7 @@ function process_form() {
 function prepare_form_data(form) {
   var formdata = [];
   var form_type = form.attr('action').split('/').pop();
-  var re = /(sensor|switch|webcam|light|sprayer|heater|door)(_\d+)?_(.*)/i;
+  var re = /(sensor|switch|webcam|light|sprayer|heater|cooler|door)(_\d+)?_(.*)/i;
   var matches = null;
   var objectdata = {};
   var prev_nr = -1;
@@ -355,40 +353,51 @@ function update_weather(data) {
 
 function update_dashboard_environment(name, value) {
   var systempart = $('div.environment_' + name);
-  if (systempart.length === 0 || Object.keys(value).length === 0) {
+  if (systempart.length === 0 || Object.keys(value).length === 0 || !value.enabled) {
+    systempart.find('table.tile_info').hide();
     return;
   }
-  try {
-    var enabledColor = '';
-    switch (name) {
-      case 'light':
-        enabledColor = 'orange';
-        systempart.find('h4 small span').text(value.modus);
-        systempart.find('.on').text(moment(value.on * 1000).format('LT'));
-        systempart.find('.off').text(moment(value.off * 1000).format('LT'));
-        systempart.find('.duration').text(moment.duration(Math.abs(value.off - value.on) * 1000).humanize());
-        break;
-      case 'sprayer':
-        enabledColor = 'blue';
-        systempart.find('.current').text(value.current.toFixed(3) + ' %');
-        systempart.find('.alarm_min').text(value.alarm_min.toFixed(3) + ' %');
-        systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
-        break;
-      case 'heater':
-
-        enabledColor = 'red';
-        systempart.find('h4 small span').text(value.modus);
-        systempart.find('.current').text(value.current.toFixed(3) + ' °C');
-        systempart.find('.alarm_min').text(value.alarm_min.toFixed(3) + ' °C');
-        systempart.find('.alarm_max').text(value.alarm_max.toFixed(3) + ' °C');
-        systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
-        break;
-    }
-    systempart.find('h4').removeClass('orange blue red').addClass(value.enabled ? enabledColor : '').attr('title', value.enabled ? '{{_('Enabled')}}' : '{{_('Disabled')}}');
-    systempart.find('.state i').removeClass('red green').addClass(value.state === 'on' ? 'green' : 'red').attr('title', value.state === 'on' ? '{{_('On')}}' : '{{_('Off')}}');
-  } catch (error) {
-      // Just ignore....
+  var enabledColor = '';
+  switch (name) {
+    case 'light':
+      enabledColor = 'orange';
+      break;
+    case 'sprayer':
+      enabledColor = 'blue';
+      break;
+    case 'heater':
+      enabledColor = 'red';
+      break;
+    case 'cooler':
+      enabledColor = 'blue';
+      break;
   }
+
+  systempart.find('h4').removeClass('orange blue red')
+                       .addClass(value.enabled ? enabledColor : '')
+                       .attr('title', value.enabled ? "{{_('Enabled')}}" : "{{_('Disabled')}}");
+  systempart.find('h4 small span').text(value.modus);
+
+  if (value.on !== undefined) {
+    systempart.find('.on').text(moment(value.on * 1000).format('LT'));
+  }
+  if (value.off !== undefined) {
+    systempart.find('.off').text(moment(value.off * 1000).format('LT'));
+    systempart.find('.duration').text(moment.duration(Math.abs(value.off - value.on) * 1000).humanize());
+  }
+  if (value.current !== undefined) {
+    systempart.find('.current').text(value.current.toFixed(3) + ' °C');
+  }
+  if (value.alarm_min !== undefined) {
+    systempart.find('.alarm_min').text(value.alarm_min.toFixed(3) + ' °C');
+  }
+  if (value.alarm_max !== undefined) {
+    systempart.find('.alarm_max').text(value.alarm_max.toFixed(3) + ' °C');
+  }
+  if (value.alarm !== undefined) {
+    systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
+  }
+  systempart.find('.state i').removeClass('red green').addClass(value.state === 'on' ? 'green' : 'red').attr('title', value.state === 'on' ? '{{_('On')}}' : '{{_('Off')}}');
 }
 
 function format_uptime(uptime) {
@@ -545,6 +554,7 @@ function init_sidebar() {
   };
 
   $SIDEBAR_MENU.find('a').on('click', function(ev) {
+    console.log('clicked - sidebar_menu');
         var $li = $(this).parent();
 
         if ($li.is('.active')) {
@@ -559,12 +569,12 @@ function init_sidebar() {
                 $SIDEBAR_MENU.find('li ul').slideUp();
             }else
             {
-				if ( $BODY.is( ".nav-sm" ) )
-				{
-					$SIDEBAR_MENU.find( "li" ).removeClass( "active active-sm" );
-					$SIDEBAR_MENU.find( "li ul" ).slideUp();
-				}
-			}
+        if ( $BODY.is( ".nav-sm" ) )
+        {
+          $SIDEBAR_MENU.find( "li" ).removeClass( "active active-sm" );
+          $SIDEBAR_MENU.find( "li ul" ).slideUp();
+        }
+      }
             $li.addClass('active');
 
             $('ul:first', $li).slideDown(function() {
@@ -575,16 +585,21 @@ function init_sidebar() {
 
   // toggle small or large menu
   $MENU_TOGGLE.on('click', function() {
-		if ($BODY.hasClass('nav-md')) {
-			$SIDEBAR_MENU.find('li.active ul').hide();
-			$SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
-		} else {
-			$SIDEBAR_MENU.find('li.active-sm ul').show();
-			$SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
-		}
+      console.log('clicked - menu toggle');
 
-  	$BODY.toggleClass('nav-md nav-sm');
-  	setContentHeight();
+      if ($BODY.hasClass('nav-md')) {
+        $SIDEBAR_MENU.find('li.active ul').hide();
+        $SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
+      } else {
+        $SIDEBAR_MENU.find('li.active-sm ul').show();
+        $SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
+      }
+
+    $BODY.toggleClass('nav-md nav-sm');
+
+    setContentHeight();
+
+    $('.dataTable').each ( function () { $(this).dataTable().fnDraw(); });
   });
 
 	// check active menu
@@ -614,34 +629,31 @@ function init_sidebar() {
 };
 // /Sidebar
 
-function load_panel_tool_box() {
-  $('.collapse-link').on('click', function() {
-      var $BOX_PANEL = $(this).closest('.x_panel'),
-          $ICON = $(this).find('i'),
-          $BOX_CONTENT = $BOX_PANEL.find('.x_content');
-
-      // fix for some div with hardcoded fix class
-      if ($BOX_PANEL.attr('style')) {
-          $BOX_CONTENT.slideToggle(200, function(){
-              $BOX_PANEL.removeAttr('style');
-          });
-      } else {
-          $BOX_CONTENT.slideToggle(200);
-          $BOX_PANEL.css('height', 'auto');
-      }
-
-      $ICON.toggleClass('fa-chevron-up fa-chevron-down');
-    });
-
-    $('.close-link').click(function () {
-      var $BOX_PANEL = $(this).closest('.x_panel');
-      $BOX_PANEL.remove();
-    });
-}
-
 function reload_reload_theme() {
   // Panel toolbox
-  load_panel_tool_box();
+  $('.collapse-link').on('click', function() {
+    var $BOX_PANEL = $(this).closest('.x_panel'),
+        $ICON = $(this).find('i'),
+        $BOX_CONTENT = $BOX_PANEL.find('.x_content');
+
+    // fix for some div with hardcoded fix class
+    if ($BOX_PANEL.attr('style')) {
+        $BOX_CONTENT.slideToggle(200, function(){
+            $BOX_PANEL.removeAttr('style');
+        });
+    } else {
+        $BOX_CONTENT.slideToggle(200);
+        $BOX_PANEL.css('height', 'auto');
+    }
+
+    $ICON.toggleClass('fa-chevron-up fa-chevron-down');
+  });
+
+  $('.close-link').click(function () {
+    var $BOX_PANEL = $(this).closest('.x_panel');
+
+    $BOX_PANEL.remove();
+  });
   // Tooltip
   $('[data-toggle="tooltip"]').tooltip({
     container: 'body',
