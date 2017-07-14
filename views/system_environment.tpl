@@ -126,6 +126,16 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_modus">{{_('Sprayer modus')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Select the operating modus.')}}">
+                        <select class="form-control" name="sprayer_modus" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option value="sensor" selected="selected">{{_('Sensor')}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_spray_timeout">{{_('Sprayer wait timeout (seconds)')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control col-md-7 col-xs-12" name="sprayer_spray_timeout" required="required" type="text" placeholder="{{_('Sprayer wait timeout (seconds)')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{_('Now much time must there be between two spray times and during startup. This is the amount of time that the humidity can settle and the new hudmity values are read.')}}">
@@ -324,7 +334,6 @@
               </div>
             </div>
           </div>
-
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="ln_solid"></div>
@@ -337,8 +346,11 @@
           </div>
         </form>
         <script type="text/javascript">
-          $(document).ready(function() {
+          var switches_loaded = false;
+          var humidity_sensors_loaded = false;
+          var temperature_sensors_loaded = false;
 
+          $(document).ready(function() {
             $('form').on('submit',function() {
               $(this).find('input[type="radio"]').removeAttr('checked').removeAttr('disabled');
               $(this).find('label.active > input[type="radio"]').attr('checked','checked');
@@ -356,7 +368,6 @@
                   $('input[name="' + part + '_on"]').removeAttr('readonly').removeAttr('disabled');
                   $('input[name="' + part + '_off"]').removeAttr('readonly').removeAttr('disabled');
                   break;
-
                 case 'weather':
                   $('input[name="' + part + '_on"]').attr('readonly','readonly').removeAttr('disabled');
                   $('input[name="' + part + '_off"]').attr('readonly','readonly').removeAttr('disabled');
@@ -384,6 +395,7 @@
               $.each(data.switches,function (index,powerswitch){
                 select_boxes.append($('<option>').attr({'value':powerswitch.id}).text(powerswitch.name));
               });
+              switches_loaded = true;
             });
 
             $.get('/api/sensors/humidity',function(data){
@@ -391,6 +403,7 @@
               $.each(data.sensors,function (index,sensor){
                 select_boxes.append($('<option>').attr({'value':sensor.id}).text(sensor.name));
               });
+              humidity_sensors_loaded = true;
             });
 
             $.get('/api/sensors/temperature',function(data){
@@ -398,26 +411,37 @@
               $.each(data.sensors,function (index,sensor){
                 select_boxes.append($('<option>').attr({'value':sensor.id}).text(sensor.name));
               });
+              temperature_sensors_loaded = true;
             });
+            reload_reload_theme();
+            load_environment_settings();
+          });
 
-            $.get('/api/config/environment',function(data){
-              $.each(data,function (index,type){
-                $.each(type,function(name,value) {
-                  var config_field = $('form [name="' + index + '_' + name + '"]');
-                  var config_value = value;
-                  if (name == 'on' || name == 'off') {
-                    config_value = moment(config_value).format('LT');
-                  }
-                  if (config_field.attr('type') == 'text') {
-                    config_field.val(config_value);
-                  } else if (config_field.attr('type') == 'radio') {
-                    $('input[name="' + index + '_' + name + '"][value="' + config_value + '"]').attr('checked','checked').parent().addClass('active');
-                  } else if (config_field.prop("tagName").toLowerCase() == 'select') {
-                    config_field.val(value).trigger('change');
-                  }
+          function load_environment_settings() {
+            if (switches_loaded && humidity_sensors_loaded && temperature_sensors_loaded) {
+              $.get('/api/config/environment',function(data){
+                $.each(data,function (index,type){
+                  $.each(type,function(name,value) {
+                    var config_field = $('form [name="' + index + '_' + name + '"]');
+                    var config_value = value;
+                    if (name == 'on' || name == 'off') {
+                      config_value = moment(config_value).format('LT');
+                    }
+                    if (config_field.attr('type') == 'text') {
+                      config_field.val(config_value);
+                    } else if (config_field.attr('type') == 'radio') {
+                      $('input[name="' + index + '_' + name + '"][value="' + config_value + '"]').attr('checked','checked').parent().addClass('active');
+                    } else if (config_field.prop("tagName").toLowerCase() == 'select') {
+                      config_field.val(value).trigger('change');
+                    }
+                  });
                 });
               });
-            });
-          });
+            } else {
+              setTimeout(function() {
+                load_environment_settings();
+              }, 100);
+            }
+          }
         </script>
 % include('inc/page_footer.tpl')

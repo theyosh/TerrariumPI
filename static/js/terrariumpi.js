@@ -380,31 +380,26 @@ function update_dashboard_environment(name, value) {
                        .attr('title', value.enabled ? "{{_('Enabled')}}" : "{{_('Disabled')}}");
   systempart.find('h4 small span').text(value.modus);
 
-  if (value.enabled) {
-
-    if (value.on !== undefined) {
-      systempart.find('.on').text(moment(value.on * 1000).format('LT'));
-    }
-    if (value.off !== undefined) {
-      systempart.find('.off').text(moment(value.off * 1000).format('LT'));
-      systempart.find('.duration').text(moment.duration(Math.abs(value.off - value.on) * 1000).humanize());
-    }
-    if (value.current !== undefined) {
-      systempart.find('.current').text(value.current.toFixed(3) + ' °C');
-    }
-    if (value.alarm_min !== undefined) {
-      systempart.find('.alarm_min').text(value.alarm_min.toFixed(3) + ' °C');
-    }
-    if (value.alarm_max !== undefined) {
-      systempart.find('.alarm_max').text(value.alarm_max.toFixed(3) + ' °C');
-    }
-    if (value.alarm !== undefined) {
-      systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
-    }
-    systempart.find('.state i').removeClass('red green').addClass(value.state === 'on' ? 'green' : 'red').attr('title', value.state === 'on' ? '{{_('On')}}' : '{{_('Off')}}');
-  } else {
-    systempart.find('table.tile_info').hide();
+  if (value.on !== undefined) {
+    systempart.find('.on').text(moment(value.on * 1000).format('LT'));
   }
+  if (value.off !== undefined) {
+    systempart.find('.off').text(moment(value.off * 1000).format('LT'));
+    systempart.find('.duration').text(moment.duration(Math.abs(value.off - value.on) * 1000).humanize());
+  }
+  if (value.current !== undefined) {
+    systempart.find('.current').text(value.current.toFixed(3) + ' °C');
+  }
+  if (value.alarm_min !== undefined) {
+    systempart.find('.alarm_min').text(value.alarm_min.toFixed(3) + ' °C');
+  }
+  if (value.alarm_max !== undefined) {
+    systempart.find('.alarm_max').text(value.alarm_max.toFixed(3) + ' °C');
+  }
+  if (value.alarm !== undefined) {
+    systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
+  }
+  systempart.find('.state i').removeClass('red green').addClass(value.state === 'on' ? 'green' : 'red').attr('title', value.state === 'on' ? '{{_('On')}}' : '{{_('Off')}}');
 }
 
 function format_uptime(uptime) {
