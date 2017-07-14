@@ -400,6 +400,7 @@ function update_dashboard_environment(name, value) {
     systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
   }
   systempart.find('.state i').removeClass('red green').addClass(value.state === 'on' ? 'green' : 'red').attr('title', value.state === 'on' ? '{{_('On')}}' : '{{_('Off')}}');
+  setContentHeight();
 }
 
 function format_uptime(uptime) {
@@ -537,24 +538,24 @@ var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
     $NAV_MENU = $('.nav_menu'),
     $FOOTER = $('footer');
 
+// TODO: This is some kind of easy fix, maybe we can improve this
+function setContentHeight() {
+  // reset height
+  $RIGHT_COL.css('min-height', $(window).height());
+
+  var bodyHeight = $BODY.outerHeight(),
+    footerHeight = $BODY.hasClass('footer_fixed') ? -10 : $FOOTER.height(),
+    leftColHeight = $LEFT_COL.eq(1).height() + $SIDEBAR_FOOTER.height(),
+    contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
+
+  // normalize content
+  //contentHeight -= $NAV_MENU.height() + footerHeight;
+
+  $RIGHT_COL.css('min-height', bodyHeight - footerHeight);
+}
+
 // Sidebar
 function init_sidebar() {
-  // TODO: This is some kind of easy fix, maybe we can improve this
-  var setContentHeight = function () {
-    // reset height
-    $RIGHT_COL.css('min-height', $(window).height());
-
-    var bodyHeight = $BODY.outerHeight(),
-      footerHeight = $BODY.hasClass('footer_fixed') ? -10 : $FOOTER.height(),
-      leftColHeight = $LEFT_COL.eq(1).height() + $SIDEBAR_FOOTER.height(),
-      contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
-
-    // normalize content
-    contentHeight -= $NAV_MENU.height() + footerHeight;
-
-    $RIGHT_COL.css('min-height', contentHeight);
-  };
-
   $SIDEBAR_MENU.find('a').on('click', function(ev) {
         var $li = $(this).parent();
 
@@ -642,17 +643,21 @@ function load_panel_tool_box() {
       }
 
       $ICON.toggleClass('fa-chevron-up fa-chevron-down');
+      setContentHeight()
     });
 
     $('.close-link').click(function () {
       var $BOX_PANEL = $(this).closest('.x_panel');
       $BOX_PANEL.remove();
+      setContentHeight();
     });
 }
 
 function reload_reload_theme() {
   // Panel toolbox
   load_panel_tool_box();
+
+  setContentHeight();
   // Tooltip
   $('[data-toggle="tooltip"]').tooltip({
     container: 'body',
