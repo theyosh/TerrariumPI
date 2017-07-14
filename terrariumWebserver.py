@@ -82,6 +82,7 @@ class terrariumWebserver():
   def __template_variables(self, template):
     variables = { 'lang' : self.__terrariumEngine.config.get_active_language(),
                   'title' : self.__config['title'],
+                  'version' : self.__config['version'],
                   'page_title' : _(template.replace('_',' ').capitalize()),
                   'translations': self.__translations }
 
@@ -259,4 +260,4 @@ class terrariumWebserver():
                    server=GeventWebSocketServer,
                    debug=True,
                    reloader=False,
-                   quiet=True)
+                   quiet=False)

@@ -44,6 +44,17 @@ canvas.gauge {
   border: solid 1px red;
 }
 
+footer {
+  margin-bottom: -20px;
+}
+
+div.row.sensor,
+div.row.switch,
+div.row.door,
+div.row.webcam{
+  display: none;
+}
+
 /* System time */
 #system_time {
   display: block;

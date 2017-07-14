@@ -70,6 +70,7 @@
 
                 load_history_graph(door.id,'door','/api/history/doors/' + door.id);
               });
+              setContentHeight();
             });
           });
         </script>

@@ -132,7 +132,6 @@
                                power_switch.water_flow);
                 update_power_switch(power_switch.id,power_switch);
               });
-              reload_reload_theme();
             });
           });
         </script>

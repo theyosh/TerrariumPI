@@ -69,10 +69,11 @@
               var rows = $('div.row.sensor');
               $.each(data.sensors, function(index,sensor) {
                 // Add an id to the row when first run
-                $(rows[index]).attr('id',sensor.id);
+                $(rows[index]).attr('id',sensor.id).show();
                 sensor_gauge(sensor.id, sensor);
                 load_history_graph(sensor.id,'{{sensor_type}}','/api/history/sensors/' + sensor.id);
               });
+              setContentHeight();
             });
           });
         </script>

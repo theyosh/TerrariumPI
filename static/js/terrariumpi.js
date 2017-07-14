@@ -398,6 +398,7 @@ function update_dashboard_environment(name, value) {
     systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
   }
   systempart.find('.state i').removeClass('red green').addClass(value.state === 'on' ? 'green' : 'red').attr('title', value.state === 'on' ? '{{_('On')}}' : '{{_('Off')}}');
+  setContentHeight();
 }
 
 function format_uptime(uptime) {
@@ -535,24 +536,24 @@ var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
     $NAV_MENU = $('.nav_menu'),
     $FOOTER = $('footer');
 
+// TODO: This is some kind of easy fix, maybe we can improve this
+function setContentHeight() {
+  // reset height
+  $RIGHT_COL.css('min-height', $(window).height());
+
+  var bodyHeight = $BODY.outerHeight(),
+    footerHeight = $BODY.hasClass('footer_fixed') ? -10 : $FOOTER.height(),
+    leftColHeight = $LEFT_COL.eq(1).height() + $SIDEBAR_FOOTER.height(),
+    contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
+
+  // normalize content
+  contentHeight -= $NAV_MENU.height() + footerHeight;
+
+  $RIGHT_COL.css('min-height', contentHeight - 15);
+};
+
 // Sidebar
 function init_sidebar() {
-  // TODO: This is some kind of easy fix, maybe we can improve this
-  var setContentHeight = function () {
-    // reset height
-    $RIGHT_COL.css('min-height', $(window).height());
-
-    var bodyHeight = $BODY.outerHeight(),
-      footerHeight = $BODY.hasClass('footer_fixed') ? -10 : $FOOTER.height(),
-      leftColHeight = $LEFT_COL.eq(1).height() + $SIDEBAR_FOOTER.height(),
-      contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
-
-    // normalize content
-    contentHeight -= $NAV_MENU.height() + footerHeight;
-
-    $RIGHT_COL.css('min-height', contentHeight);
-  };
-
   $SIDEBAR_MENU.find('a').on('click', function(ev) {
     console.log('clicked - sidebar_menu');
         var $li = $(this).parent();
@@ -659,6 +660,8 @@ function reload_reload_theme() {
     container: 'body',
     html: true
   });
+
+  setContentHeight();
 }
 
 function sensor_gauge(name, data) {
@@ -1019,7 +1022,7 @@ function add_sensor_row(id,hardwaretype,address,type,name,alarm_min,alarm_max,li
     $(item).val(eval($(item).attr('name').replace(/sensor_[0-9]+_/g,'')))
   });
   sensor_row.find("input[name$='_address']").attr("readonly", hardwaretype == 'owfs' || hardwaretype == 'w1');
-  sensor_row.insertBefore('div.row.submit');
+  sensor_row.insertBefore('div.row.submit').show();
 
   reload_reload_theme();
 
@@ -1069,7 +1072,7 @@ function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow) {
     $(item).val(eval($(item).attr('name').replace(/switch_[0-9]+_/g,'')));
   });
 
-  switch_row.insertBefore('div.row.submit');
+  switch_row.insertBefore('div.row.submit').show();
   reload_reload_theme();
 
   switch_row.find("select").select2({
@@ -1109,7 +1112,7 @@ function add_door_row(id,hardwaretype,address,name) {
     $(item).val(eval($(item).attr('name').replace(/door_[0-9]+_/g,'')));
   });
 
-  door_row.insertBefore('div.row.submit');
+  door_row.insertBefore('div.row.submit').show();
   reload_reload_theme();
 
   door_row.find("select").select2({
@@ -1153,7 +1156,7 @@ function add_webcam_row(id,location,name,rotation,preview) {
     webcam_row.find('img').attr('src',preview);
   }
 
-  webcam_row.insertBefore('div.row.submit');
+  webcam_row.insertBefore('div.row.submit').show();
   reload_reload_theme();
 
   webcam_row.find("select").select2({
