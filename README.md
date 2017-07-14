@@ -28,7 +28,9 @@ If you want to use the Raspberry PI 1 wire interface, you have to manually enabl
 
 # Hardware
 This software requires some extra hardware in order to run and work. The bare minimun is
-- USB power relay board
+- Power relay board
+  - USB versions (Serial and Bitbang)
+  - GPIO versions
 - Temperature/humdity sensors DHT11, DHT22, AM2303, DS1820, HIH4000, etc through
   - OWFS
   - GPIO
