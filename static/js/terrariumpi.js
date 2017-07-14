@@ -205,7 +205,7 @@ function process_form() {
 function prepare_form_data(form) {
   var formdata = [];
   var form_type = form.attr('action').split('/').pop();
-  var re = /(sensor|switch|webcam|light|sprayer|heater|door)(_\d+)?_(.*)/i;
+  var re = /(sensor|switch|webcam|light|sprayer|heater|cooler|door)(_\d+)?_(.*)/i;
   var matches = null;
   var objectdata = {};
   var prev_nr = -1;
@@ -355,7 +355,7 @@ function update_weather(data) {
 
 function update_dashboard_environment(name, value) {
   var systempart = $('div.environment_' + name);
-  if (systempart.length === 0 || Object.keys(value).length === 0) {
+  if (systempart.length === 0 || Object.keys(value).length === 0 || !value.enabled) {
     systempart.find('table.tile_info').hide();
     return;
   }
