@@ -551,7 +551,7 @@ function setContentHeight() {
   // normalize content
   //contentHeight -= $NAV_MENU.height() + footerHeight;
 
-  $RIGHT_COL.css('min-height', bodyHeight - 50);
+  $RIGHT_COL.css('min-height', bodyHeight - 30);
 }
 
 // Sidebar
@@ -636,14 +636,14 @@ function load_panel_tool_box() {
       if ($BOX_PANEL.attr('style')) {
           $BOX_CONTENT.slideToggle(200, function(){
               $BOX_PANEL.removeAttr('style');
+              setContentHeight();
           });
       } else {
           $BOX_CONTENT.slideToggle(200);
           $BOX_PANEL.css('height', 'auto');
+          setContentHeight();
       }
-
       $ICON.toggleClass('fa-chevron-up fa-chevron-down');
-      setContentHeight()
     });
 
     $('.close-link').click(function () {
