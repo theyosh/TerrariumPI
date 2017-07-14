@@ -3,6 +3,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
+import RPi.GPIO as GPIO
 from hashlib import md5
 
 class terrariumSwitch():
@@ -20,9 +21,6 @@ class terrariumSwitch():
     "all":"FF"
   }
 
-  #w1_base_path = '/sys/bus/w1/devices/'
-  #w1_temp_regex = re.compile(r'(?P<type>t|f)=(?P<value>[0-9]+)',re.IGNORECASE)
-
   def __init__(self, id, hardware_type, address, name = '', power_wattage = 0, water_flow = 0, callback = None):
     self.id = id
     self.callback = callback
@@ -31,6 +29,8 @@ class terrariumSwitch():
 
     if self.get_hardware_type() == 'ftdi':
       self.__load_ftdi_device()
+    elif self.get_hardware_type() == 'gpio':
+      self.__load_gpio_device()
 
     self.set_address(address)
     self.set_name(name)
@@ -47,7 +47,7 @@ class terrariumSwitch():
 
     # Force to off state!
     self.state = None
-    self.set_state(False,True)
+    self.set_state(terrariumSwitch.OFF,True)
 
   def __load_ftdi_device(self):
     for device in Driver().list_devices():
@@ -55,6 +55,9 @@ class terrariumSwitch():
       self.device_type = 'Serial' if product.endswith('UART') else 'BitBang'
       logger.info('Found switch board %s, %s, %s, of type %s' % (vendor,product,self.device,self.device_type))
       break # For now, we only support 1 switch board!
+
+  def __load_gpio_device(self):
+    GPIO.setmode(GPIO.BOARD)
 
   def set_state(self, state, force = False):
     if self.get_state() is not state or force:
@@ -76,21 +79,18 @@ class terrariumSwitch():
               device.write(cmd)
               device.close()
 
-          self.state = state
-          logger.info('Toggle switch \'%s\' from %s',self.get_name(),('off to on' if self.is_on() else 'on to off'))
-          if self.callback is not None:
-            self.callback(self.get_data())
         except Exception, err:
           # Ignore for now
           print err
           pass
 
-        finally:
-          pass
+      elif self.get_hardware_type() == 'gpio':
+        GPIO.output(int(self.get_address()), ( GPIO.HIGH if state is terrariumSwitch.ON else GPIO.LOW ))
 
-#    else:
-#        return false
-#      terrarium_log.warn('No action made. State of switch %s(%s) is already in the requested state: %s', self.getName(),self.getID(),('on' if self.getState() else 'off'))
+      self.state = state
+      logger.info('Toggle switch \'%s\' from %s',self.get_name(),('off to on' if self.is_on() else 'on to off'))
+      if self.callback is not None:
+        self.callback(self.get_data())
 
     return self.get_state() == state
 
@@ -124,6 +124,8 @@ class terrariumSwitch():
 
   def set_address(self,address):
     self.sensor_address = address
+    if self.get_hardware_type() == 'gpio':
+      GPIO.setup(int(self.get_address()), GPIO.OUT)
 
   def get_name(self):
     return self.name
