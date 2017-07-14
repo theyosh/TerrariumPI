@@ -146,8 +146,6 @@ function load_page(url) {
   }
   // Only process with some input
   if (url !== '') {
-    // Reset the main content height
-    $("#maincontent").height(0);
     // Load the data through AJAX
     $.get(url, function(data) {
       // Get the menu url so that jQuery can match
