@@ -325,6 +325,7 @@ class terrariumEnvironment():
     if data is None:
       return {}
 
+    data['modus'] = self.sprayer['modus']
     data['night_enabled'] = self.sprayer['night_enabled']
     data['enabled'] = self.sprayer['enabled']
 
