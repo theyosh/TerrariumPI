@@ -232,7 +232,7 @@ class terrariumConfig:
   def save_power_switches(self,data):
     update_ok = True
     for power_switch_id in self.get_power_switches():
-      self.__config.remove_section('swicth' + power_switch_id)
+      self.__config.remove_section('switch' + power_switch_id)
 
     for power_switch_id in data:
       update_ok = update_ok and self.save_power_switch(data[power_switch_id].get_data())
