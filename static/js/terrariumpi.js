@@ -400,6 +400,7 @@ function update_dashboard_environment(name, value) {
     systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
   }
   systempart.find('.state i').removeClass('red green').addClass(value.state === 'on' ? 'green' : 'red').attr('title', value.state === 'on' ? '{{_('On')}}' : '{{_('Off')}}');
+  systempart.find('table.tile_info').show();
   setContentHeight();
 }
 
