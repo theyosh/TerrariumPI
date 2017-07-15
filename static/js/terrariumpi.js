@@ -49,12 +49,14 @@ var globals = {
 
 function websocket_init(reconnect) {
   websocket_connect();
+
   globals.websocket.onopen = function(evt) {
     websocket_message({
       'type': 'client_init',
       'reconnect': reconnect
     });
   };
+
   globals.websocket.onmessage = function(evt) {
     online_updater();
     var data = JSON.parse(evt.data);
@@ -105,7 +107,7 @@ function websocket_connect() {
     globals.websocket = null;
     globals.websocket = new WebSocket(globals.connection);
   } catch (error) {
-    console.log('error', error);
+    //console.log('websocket_connect', error);
   }
 }
 
@@ -113,7 +115,7 @@ function websocket_message(message) {
   try {
     globals.websocket.send(JSON.stringify(message));
   } catch (error) {
-    console.log('error', error);
+    //console.log('websocket_message', error, message);
   }
 }
 
@@ -555,7 +557,6 @@ function setContentHeight() {
 // Sidebar
 function init_sidebar() {
   $SIDEBAR_MENU.find('a').on('click', function(ev) {
-    console.log('clicked - sidebar_menu');
         var $li = $(this).parent();
 
         if ($li.is('.active')) {
@@ -586,8 +587,6 @@ function init_sidebar() {
 
   // toggle small or large menu
   $MENU_TOGGLE.on('click', function() {
-      console.log('clicked - menu toggle');
-
       if ($BODY.hasClass('nav-md')) {
         $SIDEBAR_MENU.find('li.active ul').hide();
         $SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
@@ -660,7 +659,6 @@ function reload_reload_theme() {
     container: 'body',
     html: true
   });
-
   setContentHeight();
 }
 
