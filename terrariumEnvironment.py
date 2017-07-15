@@ -16,85 +16,73 @@ monkey.patch_all()
 class terrariumEnvironment():
 
   def __init__(self, sensors, power_switches, weather, door_status, config):
+    logger.debug('Init terrariumPI environment')
+
     self.config = config
     self.sensors = sensors
     self.power_switches = power_switches
     self.weather = weather
     self.door_status = door_status
+
     self.reload_config()
-    logger.info('Starting terrariumPI environment')
     thread.start_new_thread(self.__engine_loop, ())
 
+  # Private functions
   def __parse_config(self):
     config = self.config.get_environment()
 
     self.light = config['light']
-    init = len(self.light) == 0
-    if init:
+    if len(self.light.keys()) == 0:
       self.light = {}
 
-    self.light['enabled'] = False if init else (True if self.light['enabled'].lower() in ['true','on','1'] else False)
-    self.light['modus'] = None if init else self.light['modus']
-    self.light['on'] = 0 if init else int(self.light['on'])
-    self.light['off'] = 0 if init else int(self.light['off'])
-    self.light['hours_shift'] = 0.0 if init else float(self.light['hours_shift'])
-    self.light['min_hours'] = 0.0 if init else float(self.light['min_hours'])
-    self.light['max_hours'] = 0.0 if init else float(self.light['max_hours'])
-    self.light['power_switches'] = [] if (init or self.light['power_switches'] == '' ) else self.light['power_switches'].split(',')
+    self.light['enabled']        = False if 'enabled' not in self.light else (self.light['enabled'].lower() in ['true','on','1'])
+    self.light['modus']          = None  if 'modus' not in self.light else self.light['modus']
+    self.light['on']             = 0     if 'on' not in self.light else int(self.light['on'])
+    self.light['off']            = 0     if 'off' not in self.light else int(self.light['off'])
+    self.light['hours_shift']    = 0.0   if 'hours_shift' not in self.light else float(self.light['hours_shift'])
+    self.light['min_hours']      = 0.0   if 'min_hours' not in self.light else float(self.light['min_hours'])
+    self.light['max_hours']      = 0.0   if 'max_hours' not in self.light else float(self.light['max_hours'])
+    self.light['power_switches'] = []    if 'power_switches' not in self.light else self.light['power_switches'].split(',')
 
-    if not self.light['enabled']:
+    if self.light['modus'] is None:
       self.light['modus'] = 'disabled'
 
+
     self.sprayer = config['sprayer']
-    init = len(self.sprayer) == 0
-    if init:
+    if len(self.sprayer.keys()) == 0:
       self.sprayer = {}
 
-    self.sprayer['enabled'] = False if init else (True if self.sprayer['enabled'].lower() in ['true','on','1'] else False)
-    self.sprayer['night_enabled'] = False if init else (True if self.sprayer['night_enabled'].lower() in ['true','on','1'] else False)
-    self.sprayer['spray_duration'] = 0.0 if init else float(self.sprayer['spray_duration'])
-    self.sprayer['spray_timeout'] = 0.0 if init else float(self.sprayer['spray_timeout'])
-    self.sprayer['power_switches'] = [] if (init or self.sprayer['power_switches'] == '' ) else self.sprayer['power_switches'].split(',')
-    self.sprayer['sensors'] = [] if (init or self.sprayer['sensors'] == '' ) else self.sprayer['sensors'].split(',')
-    self.sprayer['lastaction'] = datetime.datetime.now()
+    self.sprayer['enabled']        = False if 'enabled' not in self.sprayer else (self.sprayer['enabled'].lower() in ['true','on','1'])
+    self.sprayer['modus']          = 'sensor'
+    self.sprayer['night_enabled']  = False if 'night_enabled' not in self.sprayer else (self.sprayer['night_enabled'].lower() in ['true','on','1'])
+    self.sprayer['spray_duration'] = 0.0   if 'spray_duration' not in self.sprayer else float(self.sprayer['spray_duration'])
+    self.sprayer['spray_timeout']  = 0.0   if 'spray_timeout' not in self.sprayer else float(self.sprayer['spray_timeout'])
+    self.sprayer['power_switches'] = []    if 'power_switches' not in self.sprayer else self.sprayer['power_switches'].split(',')
+    self.sprayer['sensors']        = []    if 'sensors' not in self.sprayer else self.sprayer['sensors'].split(',')
+    self.sprayer['lastaction']     = datetime.datetime.now()
 
+    if self.sprayer['modus'] is None:
+      self.sprayer['modus'] = 'disabled'
 
     self.heater = config['heater']
-    init = len(self.heater) == 0
-    if init:
+    if len(self.heater.keys()) == 0:
       self.heater = {}
 
-    self.heater['enabled'] = False if init else (True if self.heater['enabled'].lower() in ['true','on','1'] else False)
-    self.heater['modus'] = None if init else self.heater['modus']
-    self.heater['day_enabled'] = False if init else (True if self.heater['day_enabled'].lower() in ['true','on','1'] else False)
-    self.heater['power_switches'] = [] if (init or self.heater['power_switches'] == '' ) else self.heater['power_switches'].split(',')
-    self.heater['sensors'] = [] if (init or self.heater['sensors'] == '' ) else self.heater['sensors'].split(',')
-
-
+    self.heater['enabled']        = False if 'enabled' not in self.heater else (self.heater['enabled'].lower() in ['true','on','1'])
+    self.heater['modus']          = None  if 'modus' not in self.heater else self.heater['modus']
+    self.heater['day_enabled']    = False if 'day_enabled' not in self.heater else (self.heater['day_enabled'].lower() in ['true','on','1'])
+    self.heater['power_switches'] = []    if 'power_switches' not in self.heater else self.heater['power_switches'].split(',')
+    self.heater['sensors']        = []    if 'sensors' not in self.heater else self.heater['sensors'].split(',')
 
     self.cooler = config['cooler']
-    init = len(self.cooler) == 0
-    if init:
+    if len(self.cooler.keys()) == 0:
       self.cooler = {}
 
-    self.cooler['enabled'] = False if init else (True if self.cooler['enabled'].lower() in ['true','on','1'] else False)
-    self.cooler['modus'] = None if init else self.cooler['modus']
-    #self.cooler['day_enabled'] = False if init else (True if self.heater['day_enabled'].lower() in ['true','on','1'] else False)
-    self.cooler['power_switches'] = [] if (init or self.cooler['power_switches'] == '' ) else self.cooler['power_switches'].split(',')
-    self.cooler['sensors'] = [] if (init or self.cooler['sensors'] == '' ) else self.cooler['sensors'].split(',')
-
-
-  # Private functions
-  def __set_config(self,part,data):
-    for field in data:
-      if 'light' == part:
-        self.light[field] = data[field]
-      elif 'sprayer' == part:
-        self.sprayer[field] = data[field]
-      elif 'heater' == part:
-        self.heater[field] = data[field]
-      elif 'cooler' == part:
-        self.cooler[field] = data[field]
+    self.cooler['enabled']        = False if 'enabled' not in self.cooler else (self.cooler['enabled'].lower() in ['true','on','1'])
+    self.cooler['modus']          = None  if 'modus' not in self.cooler else self.cooler['modus']
+    self.cooler['night_enabled']  = False if 'night_enabled' not in self.cooler else (self.cooler['night_enabled'].lower() in ['true','on','1'])
+    self.cooler['power_switches'] = []    if 'power_switches' not in self.cooler else self.cooler['power_switches'].split(',')
+    self.cooler['sensors']        = []    if 'sensors' not in self.cooler else self.cooler['sensors'].split(',')
 
   def __engine_loop(self):
     while True:
@@ -143,7 +131,18 @@ class terrariumEnvironment():
       logger.info('Engine loop done in %s seconds' % (time.time() - starttime,))
       sleep(15)
 
-  def __switch_on(self,part, state = None):
+  def __set_config(self,part,data):
+    for field in data:
+      if 'light' == part:
+        self.light[field] = data[field]
+      elif 'sprayer' == part:
+        self.sprayer[field] = data[field]
+      elif 'heater' == part:
+        self.heater[field] = data[field]
+      elif 'cooler' == part:
+        self.cooler[field] = data[field]
+
+  def __on_off(self,part, state = None):
     is_on = True
     power_switches = []
     if 'light' == part:
@@ -155,38 +154,72 @@ class terrariumEnvironment():
     elif 'cooler' == part:
       power_switches = self.cooler['power_switches']
 
-    for switch in power_switches:
+    for switch_id in power_switches:
       if state is None:
-        is_on = is_on and self.power_switches[switch].is_on()
+        is_on = is_on and self.power_switches[switch_id].is_on()
       else:
         if state:
-          self.power_switches[switch].on()
+          self.power_switches[switch_id].on()
         else:
-          self.power_switches[switch].off()
+          self.power_switches[switch_id].off()
 
         is_on = state
 
     return is_on
 
-  def __on(self,part):
-    return True == self.__switch_on(part,True)
+  def __switch_on(self,part):
+    return True == self.__on_off(part,True)
 
-  def __off(self,part):
-    return False == self.__switch_on(part,False)
+  def __switch_off(self,part):
+    return False == self.__on_off(part,False)
 
   def __is_on(self,part):
-    return self.__switch_on(part)
+    return self.__switch_on(part) == True
 
   def __is_off(self,part):
     return not self.__is_on(part)
+
+  def __get_state(self,part):
+
+    data = {}
+    state_data = {}
+    average = {}
+    state = False
+    overrule_field = ''
+
+    if part == 'sprayer':
+      state_data = self.sprayer
+      if 'lastaction' in state_data:
+        del(state_data['lastaction'])
+      average = self.get_average_humidity()
+      state = self.is_sprayer_on()
+      overrule_field = 'night_enabled'
+    elif part == 'heater':
+      state_data = self.heater
+      average = self.get_average_temperature()
+      state = self.is_heater_on()
+      overrule_field = 'day_enabled'
+    elif part == 'cooler':
+      state_data = self.cooler
+      average = self.get_average_temperature()
+      state = self.is_cooler_on()
+      overrule_field = 'night_enabled'
+
+    for key in state_data:
+      data[key] = state_data[key]
+    data.update(average)
+
+    data['alarm'] = data['alarm'] and (data[overrule_field] or self.is_light_on())
+    data['state'] = 'on' if state else 'off'
+    return data
   # End private functions
 
   # System functions
   def get_config(self):
-    return {'light' : self.get_light_config(),
+    return {'light'   : self.get_light_config(),
             'sprayer' : self.get_sprayer_config() ,
-            'heater' : self.get_heater_config(),
-            'cooler' : self.get_cooler_config()}
+            'heater'  : self.get_heater_config(),
+            'cooler'  : self.get_cooler_config()}
 
   def reload_config(self):
     self.__parse_config()
@@ -196,14 +229,14 @@ class terrariumEnvironment():
     if 'temperature' in data:
       return data['temperature']
 
-    return None
+    return data
 
   def get_average_humidity(self):
     data = self.get_average()
     if 'humidity' in data:
       return data['humidity']
 
-    return None
+    return data
 
   def get_average(self):
     average = {}
@@ -211,7 +244,13 @@ class terrariumEnvironment():
       sensor = self.sensors[sensorid]
       sensor_type = sensor.get_type()
       if sensor_type not in average:
-        average[sensor_type] = {'current' : 0.0, 'alarm_min' : 0.0, 'alarm_max' : 0.0, 'limit_min' : 0.0, 'limit_max':0.0, 'amount' : 0.0}
+        average[sensor_type] = {'current' : 0.0,
+                                'alarm_min' : 0.0,
+                                'alarm_max' : 0.0,
+                                'limit_min' : 0.0,
+                                'limit_max':0.0,
+                                'amount' : 0.0,
+                                'alarm' : False}
 
       average[sensor_type]['current'] += sensor.get_current()
       average[sensor_type]['alarm_min'] += sensor.get_alarm_min()
@@ -230,21 +269,29 @@ class terrariumEnvironment():
       average[averagetype]['amount'] = amount
       average[averagetype]['type'] = averagetype
 
-    return average
+    return average if len(average.keys()) > 0 else {'current'   : 0.0,
+                                                    'alarm_min' : 0.0,
+                                                    'alarm_max' : 0.0,
+                                                    'limit_min' : 0.0,
+                                                    'limit_max' : 0.0,
+                                                    'amount'    : 0.0,
+                                                    'alarm'     : False}
   # End system functions
+
 
   # Light functions
   def get_light_config(self):
-    return self.light
+    data = copy.deepcopy(self.light)
+    return data
 
   def set_light_config(self,data):
     self.__set_config('light',data)
 
   def light_on(self):
-    return self.__on('light')
+    return self.__switch_on('light')
 
   def light_off(self):
-    return self.__off('light')
+    return self.__switch_off('light')
 
   def is_light_on(self):
     return self.__is_on('light')
@@ -307,12 +354,12 @@ class terrariumEnvironment():
 
   def sprayer_on(self):
     if datetime.datetime.now() - self.sprayer['lastaction'] > datetime.timedelta(seconds=self.sprayer['spray_timeout']):
-      self.__on('sprayer')
+      self.__switch_on('sprayer')
       (Timer(self.sprayer['spray_duration'], self.sprayer_off)).start()
       self.sprayer['lastaction'] = datetime.datetime.now()
 
   def sprayer_off(self):
-    self.__off('sprayer')
+    self.__switch_off('sprayer')
 
   def is_sprayer_on(self):
     return self.__is_on('sprayer')
@@ -321,33 +368,23 @@ class terrariumEnvironment():
     return self.__is_off('sprayer')
 
   def get_sprayer_state(self):
-    data = self.get_average_humidity()
-    if data is None:
-      return {}
-
-    data['modus'] = self.sprayer['modus']
-    data['night_enabled'] = self.sprayer['night_enabled']
-    data['enabled'] = self.sprayer['enabled']
-
-    light = self.get_light_state()
-    data['alarm'] = (data['night_enabled'] or (light['on'] < int(time.time()) < light['off'])) and data['current'] < data['alarm_min']
-    data['state'] = 'on' if self.is_sprayer_on() else 'off'
-    return data
+    return self.__get_state('sprayer')
   # End sprayer functions
 
 
   # Heater functions
   def get_heater_config(self):
-    return self.heater
+    data = copy.deepcopy(self.heater)
+    return data
 
   def set_heater_config(self,data):
     self.__set_config('heater',data)
 
   def heater_on(self):
-    self.__on('heater')
+    self.__switch_on('heater')
 
   def heater_off(self):
-    self.__off('heater')
+    self.__switch_off('heater')
 
   def is_heater_on(self):
     return self.__is_on('heater')
@@ -356,33 +393,23 @@ class terrariumEnvironment():
     return self.__is_off('heater')
 
   def get_heater_state(self):
-    data = self.get_average_temperature()
-    if data is None:
-      return {}
-
-    data['modus'] = self.heater['modus']
-    data['day_enabled'] = self.heater['day_enabled']
-    data['enabled'] = self.heater['enabled']
-
-    light = self.get_light_state()
-    data['alarm'] = (data['day_enabled'] or not (light['on'] < int(time.time()) < light['off'])) and not (data['alarm_max'] >= data['current'] >= data['alarm_min'])
-    data['state'] = 'on' if self.is_heater_on() else 'off'
-    return data
+    return self.__get_state('heater')
   # End heater functions
 
 
   # Cooler functions
   def get_cooler_config(self):
-    return self.cooler
+    data = copy.deepcopy(self.cooler)
+    return data
 
   def set_cooler_config(self,data):
     self.__set_config('cooler',data)
 
   def cooler_on(self):
-    self.__on('cooler')
+    self.__switch_on('cooler')
 
   def cooler_off(self):
-    self.__off('cooler')
+    self.__switch_off('cooler')
 
   def is_cooler_on(self):
     return self.__is_on('cooler')
@@ -391,16 +418,5 @@ class terrariumEnvironment():
     return self.__is_off('cooler')
 
   def get_cooler_state(self):
-    data = self.get_average_temperature()
-    if data is None:
-      return {}
-
-    data['modus'] = self.cooler['modus']
-    data['night_enabled'] = self.cooler['night_enabled']
-    data['enabled'] = self.cooler['enabled']
-
-    light = self.get_light_state()
-    data['alarm'] = (data['night_enabled'] or not (light['on'] < int(time.time()) < light['off'])) and not (data['alarm_max'] >= data['current'] >= data['alarm_min'])
-    data['state'] = 'on' if self.is_cooler_on() else 'off'
-    return data
+    return self.__get_state('cooler')
   # End cooler functions
