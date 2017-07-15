@@ -42,7 +42,7 @@ class terrariumEnvironment():
     self.light['hours_shift']    = 0.0   if 'hours_shift' not in self.light else float(self.light['hours_shift'])
     self.light['min_hours']      = 0.0   if 'min_hours' not in self.light else float(self.light['min_hours'])
     self.light['max_hours']      = 0.0   if 'max_hours' not in self.light else float(self.light['max_hours'])
-    self.light['power_switches'] = []    if 'power_switches' not in self.light else self.light['power_switches'].split(',')
+    self.light['power_switches'] = []    if ('power_switches' not in self.light or self.light['power_switches'] == '') else self.light['power_switches'].split(',')
 
     if self.light['modus'] is None:
       self.light['modus'] = 'disabled'
@@ -57,8 +57,8 @@ class terrariumEnvironment():
     self.sprayer['night_enabled']  = False if 'night_enabled' not in self.sprayer else (self.sprayer['night_enabled'].lower() in ['true','on','1'])
     self.sprayer['spray_duration'] = 0.0   if 'spray_duration' not in self.sprayer else float(self.sprayer['spray_duration'])
     self.sprayer['spray_timeout']  = 0.0   if 'spray_timeout' not in self.sprayer else float(self.sprayer['spray_timeout'])
-    self.sprayer['power_switches'] = []    if 'power_switches' not in self.sprayer else self.sprayer['power_switches'].split(',')
-    self.sprayer['sensors']        = []    if 'sensors' not in self.sprayer else self.sprayer['sensors'].split(',')
+    self.sprayer['power_switches'] = []    if ('power_switches' not in self.sprayer or self.sprayer['power_switches'] == '') else self.sprayer['power_switches'].split(',')
+    self.sprayer['sensors']        = []    if ('sensors' not in self.sprayer or self.sprayer['sensors'] == '') else self.sprayer['sensors'].split(',')
     self.sprayer['lastaction']     = datetime.datetime.now()
 
     if self.sprayer['modus'] is None:
@@ -73,8 +73,8 @@ class terrariumEnvironment():
     self.heater['on']             = 0     if 'on' not in self.heater else int(self.heater['on'])
     self.heater['off']            = 0     if 'off' not in self.heater else int(self.heater['off'])
     self.heater['day_enabled']    = False if 'day_enabled' not in self.heater else (self.heater['day_enabled'].lower() in ['true','on','1'])
-    self.heater['power_switches'] = []    if 'power_switches' not in self.heater else self.heater['power_switches'].split(',')
-    self.heater['sensors']        = []    if 'sensors' not in self.heater else self.heater['sensors'].split(',')
+    self.heater['power_switches'] = []    if ('power_switches' not in self.heater or self.heater['power_switches'] == '') else self.heater['power_switches'].split(',')
+    self.heater['sensors']        = []    if ('sensors' not in self.heater or self.heater['sensors'] == '') else self.heater['sensors'].split(',')
 
     self.cooler = config['cooler']
     if len(self.cooler.keys()) == 0:
@@ -85,8 +85,8 @@ class terrariumEnvironment():
     self.cooler['on']             = 0     if 'on' not in self.cooler else int(self.cooler['on'])
     self.cooler['off']            = 0     if 'off' not in self.cooler else int(self.cooler['off'])
     self.cooler['night_enabled']  = False if 'night_enabled' not in self.cooler else (self.cooler['night_enabled'].lower() in ['true','on','1'])
-    self.cooler['power_switches'] = []    if 'power_switches' not in self.cooler else self.cooler['power_switches'].split(',')
-    self.cooler['sensors']        = []    if 'sensors' not in self.cooler else self.cooler['sensors'].split(',')
+    self.cooler['power_switches'] = []    if ('power_switches' not in self.cooler or self.cooler['power_switches'] == '') else self.cooler['power_switches'].split(',')
+    self.cooler['sensors']        = []    if ('sensors' not in self.cooler or self.cooler['sensors'] == '') else self.cooler['sensors'].split(',')
 
   def __engine_loop(self):
     while True:
@@ -248,13 +248,13 @@ class terrariumEnvironment():
       sensor = self.sensors[sensorid]
       sensor_type = sensor.get_type()
       if sensor_type not in average:
-        average[sensor_type] = {'current' : 0.0,
+        average[sensor_type] = {'current'   : 0.0,
                                 'alarm_min' : 0.0,
                                 'alarm_max' : 0.0,
                                 'limit_min' : 0.0,
-                                'limit_max':0.0,
-                                'amount' : 0.0,
-                                'alarm' : False}
+                                'limit_max' : 0.0,
+                                'amount'    : 0.0,
+                                'alarm'     : False}
 
       average[sensor_type]['current'] += sensor.get_current()
       average[sensor_type]['alarm_min'] += sensor.get_alarm_min()
