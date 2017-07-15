@@ -19,10 +19,13 @@ class terrariumEnvironment():
     logger.debug('Init terrariumPI environment')
 
     self.config = config
+    self.door_status = door_status
+
+
     self.sensors = sensors
     self.power_switches = power_switches
+
     self.weather = weather
-    self.door_status = door_status
 
     self.reload_config()
     thread.start_new_thread(self.__engine_loop, ())
@@ -64,6 +67,7 @@ class terrariumEnvironment():
     if self.sprayer['modus'] is None:
       self.sprayer['modus'] = 'disabled'
 
+
     self.heater = config['heater']
     if len(self.heater.keys()) == 0:
       self.heater = {}
@@ -75,6 +79,7 @@ class terrariumEnvironment():
     self.heater['day_enabled']    = False if 'day_enabled' not in self.heater else (self.heater['day_enabled'].lower() in ['true','on','1'])
     self.heater['power_switches'] = []    if ('power_switches' not in self.heater or self.heater['power_switches'] == '') else self.heater['power_switches'].split(',')
     self.heater['sensors']        = []    if ('sensors' not in self.heater or self.heater['sensors'] == '') else self.heater['sensors'].split(',')
+
 
     self.cooler = config['cooler']
     if len(self.cooler.keys()) == 0:
@@ -220,6 +225,14 @@ class terrariumEnvironment():
   # End private functions
 
   # System functions
+  def set_power_switches(self,data):
+    self.power_switches = data
+    self.reload_config()
+
+  def set_sensors(self,data):
+    self.sensors = data
+    self.reload_config()
+
   def get_config(self):
     return {'light'   : self.get_light_config(),
             'sprayer' : self.get_sprayer_config() ,
@@ -288,7 +301,7 @@ class terrariumEnvironment():
       average[averagetype]['amount'] = amount
       average[averagetype]['type'] = averagetype
 
-    return average 
+    return average
   # End system functions
 
 

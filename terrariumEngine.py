@@ -88,6 +88,10 @@ class terrariumEngine():
     self.sensors = {}
     for sensor in terrariumSensor.scan(self.config.get_owfs_port(), self.config.get_sensors()):
       self.sensors[sensor.get_id()] = sensor
+
+    if reloading:
+      self.environment.set_sensors(self.sensors)
+
     logger.info('Done %s terrariumPI temperature/humidity sensors. Found %d sensors in %.3f seconds' % ('reloading' if reloading else 'loading',
                                                                                                         len(self.sensors),
                                                                                                         time.time()-starttime))
@@ -109,6 +113,10 @@ class terrariumEngine():
         self.toggle_switch
       )
       self.power_switches[power_switch.get_id()] = power_switch
+
+    if reloading:
+      self.environment.set_power_switches(self.power_switches)
+
     logger.info('Done %s terrariumPI switches. Found %d switches in %.3f seconds' % ('reloading' if reloading else 'loading',
                                                                                       len(self.power_switches),
                                                                                       time.time()-starttime))
