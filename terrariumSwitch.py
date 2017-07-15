@@ -8,7 +8,7 @@ from hashlib import md5
 
 class terrariumSwitch():
 
-  valid_hardware_types = ['ftdi','gpio','w1']
+  valid_hardware_types = ['ftdi','gpio']
 
   OFF = False
   ON = True
