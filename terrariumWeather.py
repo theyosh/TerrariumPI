@@ -38,6 +38,7 @@ class terrariumWeatherYRno():
   def __update(self):
     now = int(time.time())
     if self.last_update is None or now - self.last_update > terrariumWeatherYRno.update_timeout:
+      logger.info('Update YR.no data from ONLINE refreshing cache.')
       self.__process_forecast_data('hour')
       self.__process_forecast_data('week')
       self.last_update = now
@@ -142,6 +143,7 @@ class terrariumWeatherWunderground():
   def __update(self):
     now = int(time.time())
     if self.last_update is None or now - self.last_update > terrariumWeatherWunderground.update_timeout:
+      logger.info('Update Wunderground data from ONLINE refreshing cache.')
       json_data = urllib2.urlopen(self.source)
       parsed_json = json.loads(json_data.read())
 
@@ -220,16 +222,17 @@ class terrariumWeather():
                    'weather.com' : re.compile(r'^https?://api\.wunderground\.com/api/[^/]+/(?P<p1>[^/]+)/(?P<p2>[^/]+)/(?P<p3>[^/]+)/q/(?P<country>[^/]+)/(?P<city>[^/]+)\.json$', re.IGNORECASE)}
 
   def __init__(self, source,  windspeed  = 'kmh', temperature = 'C', callback = None):
+    logger.info('Create weather object')
     self.source   = None
+    self.next_update = 0
     self.location = {'city' : '', 'country' : '', 'geo' : {'lat' : 0, 'long' : 0}}
     self.credits  = {'text' : '', 'url' : ''}
     self.sun      = {'rise' : 0, 'set' : 0}
     self.hour_forecast = []
     self.week_forecast = []
-    self.callback = callback
-    self.next_update = 0
     self.windspeed = windspeed
     self.temperature = temperature
+    self.callback = callback
 
     if self.__set_source(source):
       self.refresh()
@@ -246,8 +249,10 @@ class terrariumWeather():
         elif self.type == 'weather.com':
           self.weater_source = terrariumWeatherWunderground(self.source)
 
+        logger.info('Set weather to type %s based source to \'%s\'' % (self.type,self.source))
         return True
 
+    logger.error('Setting weather source failed! The url \'%s\' is invalid' % source)
     return False
 
   def __update_weather_icons(self):
@@ -290,7 +295,8 @@ class terrariumWeather():
     return None
 
   def refresh(self):
-    logger.info('Refreshing weather data')
+    starttime = time.time()
+    logger.info('Refreshing weather data from %s' % self.type)
 
     self.sun['rise'] = self.weater_source.get_sunrise()
     self.sun['set'] = self.weater_source.get_sunset()
@@ -302,8 +308,8 @@ class terrariumWeather():
     self.week_forecast = self.weater_source.get_forecast('all')
     self.__update_weather_icons()
 
-    self.next_update = int(time.time()) + 3600
-    logger.info('Done refreshing weather data. Next update after: %s' % (self.next_update,))
+    self.next_update = int(starttime) + 3600
+    logger.info('Done refreshing weather data in %.5f seconds. Next update after: %s' % (time.time() - starttime, datetime.fromtimestamp(self.next_update),))
 
   def update(self, socket = False):
     send_message = False
@@ -351,10 +357,10 @@ class terrariumWeather():
     return data
 
   def get_config(self):
-    return {'location' : self.source,
-            'windspeed' : self.windspeed,
+    return {'location'    : self.source,
+            'windspeed'   : self.windspeed,
             'temperature' : self.temperature,
-            'type': self.type}
+            'type'        : self.type}
 
   def set_location(self,url):
     if self.__set_source(url):
