@@ -55,6 +55,13 @@ div.row.webcam{
   display: none;
 }
 
+div.modal div.row.sensor,
+div.modal div.row.switch,
+div.modal div.row.door,
+div.modal div.row.webcam{
+  display: block;
+}
+
 /* System time */
 #system_time {
   display: block;
@@ -71,6 +78,10 @@ div.row.webcam{
 
 #dashboard .tile_count .tile_stats_count .pull-left {
   position: absolute;
+}
+
+#dashboard table.tile_info {
+  display: none;
 }
 
 #dashboard table.tile_info td:first-child {
