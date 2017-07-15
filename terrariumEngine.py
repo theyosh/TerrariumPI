@@ -7,17 +7,19 @@ import time
 import uptime
 import os
 import psutil
-from gevent import monkey, sleep
 
-from terrariumDoor import terrariumDoor
-from terrariumSensor import terrariumSensor
-from terrariumSwitch import terrariumSwitch
-from terrariumWeather import terrariumWeather
-from terrariumWebcam import terrariumWebcam
-from terrariumCollector import terrariumCollector
-from terrariumEnvironment import terrariumEnvironment
 from terrariumConfig import terrariumConfig
 
+from terrariumWeather import terrariumWeather
+from terrariumSensor import terrariumSensor
+from terrariumSwitch import terrariumSwitch
+from terrariumDoor import terrariumDoor
+from terrariumWebcam import terrariumWebcam
+
+from terrariumCollector import terrariumCollector
+from terrariumEnvironment import terrariumEnvironment
+
+from gevent import monkey, sleep
 monkey.patch_all()
 
 class terrariumEngine():
@@ -169,6 +171,7 @@ class terrariumEngine():
   def __engine_loop(self):
     while True:
       starttime = time.time()
+
       # Update weather
       self.weather.update()
       self.collector.log_weather_data(self.weather.get_data()['hour_forecast'][0])
@@ -212,7 +215,7 @@ class terrariumEngine():
         self.webcams[webcamid].update()
         sleep(0.2)
 
-      logger.debug('Engine loop done in %s seconds' % (time.time() - starttime,))
+      logger.info('Engine loop done in %s seconds' % (time.time() - starttime,))
       sleep(30) # TODO: Config setting
 
   def __send_message(self,message):
