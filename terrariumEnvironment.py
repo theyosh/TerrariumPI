@@ -21,7 +21,6 @@ class terrariumEnvironment():
     self.config = config
     self.door_status = door_status
 
-
     self.sensors = sensors
     self.power_switches = power_switches
 
@@ -189,7 +188,6 @@ class terrariumEnvironment():
     return not self.__is_on(part)
 
   def __get_state(self,part):
-
     data = {}
     state_data = {}
     average = {}
