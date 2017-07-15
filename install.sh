@@ -7,8 +7,6 @@ if [ "${WHOAMI}" != "root" ]; then
   exit 0
 fi
 
-cd ..
-
 # Clean up first
 aptitude -y remove wolfram-engine sonic-pi oracle-java8-jdk desktop-base gnome-desktop3-data libgnome-desktop-3-10 epiphany-browser-data epiphany-browser nuscratch scratch wiringpi
 apt-get -y remove "^libreoffice.*"
@@ -18,6 +16,13 @@ apt-get -y autoremove
 aptitude -y update
 aptitude -y safe-upgrade
 aptitude -y install libftdi1 screen python-imaging python-dateutil python-ow python-rpi.gpio python-psutil git subversion watchdog build-essential python-dev python-picamera python-opencv python-pip
+
+if [ `ls -l gentelella | grep -v ^t | wc -l` -eq 0 ]; then
+  # Manual get Gentelella bootstrap 3 template
+  git clone https://github.com/puikinsh/gentelella.git gentelella
+fi
+
+cd ..
 
 # Basic config:
 raspi-config
