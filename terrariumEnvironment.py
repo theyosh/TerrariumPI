@@ -59,7 +59,7 @@ class terrariumEnvironment():
     self.sprayer['spray_timeout']  = 0.0   if 'spray_timeout' not in self.sprayer else float(self.sprayer['spray_timeout'])
     self.sprayer['power_switches'] = []    if ('power_switches' not in self.sprayer or self.sprayer['power_switches'] == '') else self.sprayer['power_switches'].split(',')
     self.sprayer['sensors']        = []    if ('sensors' not in self.sprayer or self.sprayer['sensors'] == '') else self.sprayer['sensors'].split(',')
-    self.sprayer['lastaction']     = datetime.datetime.now()
+    self.sprayer['lastaction']     = int(time.time())
 
     if self.sprayer['modus'] is None:
       self.sprayer['modus'] = 'disabled'
@@ -103,7 +103,7 @@ class terrariumEnvironment():
       sprayer = self.get_sprayer_state()
       if 'enabled' in sprayer and 'enabled' in light and sprayer['enabled'] and light['enabled']:
         if self.sprayer['night_enabled'] or light['state'] == 'on':
-          if sprayer['alarm'] and self.door_status() == terrariumDoor.CLOSED:
+          if sprayer['alarm'] and sprayer['current'] < sprayer['alarm_min'] and self.door_status() == terrariumDoor.CLOSED:
             self.sprayer_on()
           else:
             self.sprayer_off()
@@ -178,7 +178,7 @@ class terrariumEnvironment():
     return False == self.__on_off(part,False)
 
   def __is_on(self,part):
-    return self.__switch_on(part) == True
+    return self.__on_off(part) == True
 
   def __is_off(self,part):
     return not self.__is_on(part)
@@ -193,8 +193,6 @@ class terrariumEnvironment():
 
     if part == 'sprayer':
       state_data = self.sprayer
-      if 'lastaction' in state_data:
-        del(state_data['lastaction'])
       average = self.get_average_humidity()
       state = self.is_sprayer_on()
       overrule_field = 'night_enabled'
@@ -212,6 +210,9 @@ class terrariumEnvironment():
     for key in state_data:
       data[key] = state_data[key]
     data.update(average)
+
+    if 'alarm' not in data or (part == 'sprayer' and data['current'] > data['alarm_max']):
+      data['alarm'] = False
 
     data['alarm'] = data['alarm'] and (data[overrule_field] or self.is_light_on())
     data['state'] = 'on' if state else 'off'
@@ -233,20 +234,34 @@ class terrariumEnvironment():
     if 'temperature' in data:
       return data['temperature']
 
-    return data
+    return {'current'   : 0.0,
+            'alarm_min' : 0.0,
+            'alarm_max' : 0.0,
+            'limit_min' : 0.0,
+            'limit_max' : 0.0,
+            'amount'    : 0.0,
+            'alarm'     : False}
+
 
   def get_average_humidity(self):
     data = self.get_average()
     if 'humidity' in data:
       return data['humidity']
 
-    return data
+    return {'current'   : 0.0,
+            'alarm_min' : 0.0,
+            'alarm_max' : 0.0,
+            'limit_min' : 0.0,
+            'limit_max' : 0.0,
+            'amount'    : 0.0,
+            'alarm'     : False}
 
   def get_average(self):
     average = {}
     for sensorid in set(self.sprayer['sensors'] + self.heater['sensors'] + self.cooler['sensors']):
       sensor = self.sensors[sensorid]
       sensor_type = sensor.get_type()
+
       if sensor_type not in average:
         average[sensor_type] = {'current'   : 0.0,
                                 'alarm_min' : 0.0,
@@ -273,13 +288,7 @@ class terrariumEnvironment():
       average[averagetype]['amount'] = amount
       average[averagetype]['type'] = averagetype
 
-    return average if len(average.keys()) > 0 else {'current'   : 0.0,
-                                                    'alarm_min' : 0.0,
-                                                    'alarm_max' : 0.0,
-                                                    'limit_min' : 0.0,
-                                                    'limit_max' : 0.0,
-                                                    'amount'    : 0.0,
-                                                    'alarm'     : False}
+    return average 
   # End system functions
 
 
@@ -357,10 +366,10 @@ class terrariumEnvironment():
     self.__set_config('sprayer',data)
 
   def sprayer_on(self):
-    if datetime.datetime.now() - self.sprayer['lastaction'] > datetime.timedelta(seconds=self.sprayer['spray_timeout']):
+    if int(time.time()) - self.sprayer['lastaction'] > self.sprayer['spray_timeout']:
       self.__switch_on('sprayer')
       (Timer(self.sprayer['spray_duration'], self.sprayer_off)).start()
-      self.sprayer['lastaction'] = datetime.datetime.now()
+      self.sprayer['lastaction'] = int(time.time())
 
   def sprayer_off(self):
     self.__switch_off('sprayer')
