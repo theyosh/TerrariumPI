@@ -107,25 +107,17 @@
         <script type="text/javascript">
           $(document).ready(function() {
             $.get($('form').attr('action'),function(data){
+              var language_selector = $("select[name='active_language']");
 
-              //$("select[name='active_language']");
-
-              var language_selector = $("select[name='active_language']").select2({
+              language_selector.select2({
                 placeholder: '{{_('Select an option')}}',
                 allowClear: false,
                 minimumResultsForSearch: Infinity
               });
-
-
-
               $.each(data.available_languages.split(','),function(index,value){
                 language_selector.append($('<option>').attr({'value':value}).text(value));
               });
-
-
               language_selector.val(data.active_language).trigger('change');
-              //delete data.available_languages;
-              //delete data.active_language;
 
               $.each(Object.keys(data), function(key,value){
                 $('input[name="' + value + '"]').val(data[value]);
