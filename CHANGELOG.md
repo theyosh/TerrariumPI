@@ -2,8 +2,40 @@ Changelog
 =========
 
 
-Version 2.4 - 2017-07-15 - TheYOSH
-------------
+2.4.1 (2017-07-15)
+----------------
+
+**New**
+- Add js script for translations. [TheYOSH]
+- Added git checkout for Gentelella bootstrap 3 template if missing.
+  [TheYOSH]
+- Add better empty switches/sensors loading. [TheYOSH]
+- Added heater and cooler timers fields. [TheYOSH]
+- Added style code to hide rows when loading. [TheYOSH]
+- Add some debugging. [TheYOSH]
+- Add chaching header. Disabled webserver debug output. [TheYOSH]
+
+**Fixes**
+- Fix translations. [TheYOSH]
+- Fix dashboard environment. [TheYOSH]
+- Fix environment. [TheYOSH]
+- Fix spelling typos. [TheYOSH]
+
+**Updates**
+- Update US language. [TheYOSH]
+- Updated system form fields. [TheYOSH]
+- Update translations form fields. [TheYOSH]
+
+**Other**
+- Rewritten environment code. Reduces a lot of code. [TheYOSH]
+- Small changes. [TheYOSH]
+- Remove w1 support for switches. [TheYOSH]
+- Debug cleanup. [TheYOSH]
+- Smaller image. [TheYOSH]
+
+
+2.4 (2017-07-14)
+----------------
 
 **New**
 - Added exception handling for wrong GPIO pin number. [TheYOSH]
