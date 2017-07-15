@@ -13,10 +13,10 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <p>{{_('Here you can setup your power switches. First select the amount of switches that are being used. Then enter per switch the following information:')}}</p>
+            <p>{{_('Here you can configure your power switches.')}}</p>
             <ul>
               <li>
-                <strong>{{_('Hardware')}}</strong>: {{translations.get_translation('switch_field_hardware')}}
+                <strong>{{_('Hardware')}}</strong>: {{!translations.get_translation('switch_field_hardware')}}
               </li>
               <li>
                 <strong>{{_('Address')}}</strong>: {{translations.get_translation('switch_field_address')}}
@@ -76,11 +76,10 @@
                       <div class="x_content">
                         <div class="col-md-3 col-sm-3 col-xs-12 form-group">
                           <label for="switch_[nr]_hardwaretype">{{_('Hardware')}} <span class="required">*</span></label>
-                          <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('switch_field_hardware')}}">
+                          <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{!translations.get_translation('switch_field_hardware')}}">
                             <select class="form-control" name="switch_[nr]_hardwaretype" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
                               <option value="ftdi">{{_('FTDI')}}</option>
                               <option value="gpio">{{_('GPIO')}}</option>
-                              <option value="w1">{{_('1Wire')}}</option>
                             </select>
                           </div>
                         </div>

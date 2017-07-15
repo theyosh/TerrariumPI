@@ -13,13 +13,10 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <p>{{_('Here you can setup the webcams that are used. Per webcam fill in the following fields:')}}</p>
+            <p>{{_('Here you can configure your doors.')}}</p>
             <ul>
               <li>
-                <strong>{{_('ID')}}</strong>: {{translations.get_translation('door_field_id')}}
-              </li>
-              <li>
-                <strong>{{_('Hardware')}}</strong>: {{translations.get_translation('door_field_hardware')}}
+                <strong>{{_('Hardware')}}</strong>: {{!translations.get_translation('door_field_hardware')}}
               </li>
               <li>
                 <strong>{{_('Address')}}</strong>: {{translations.get_translation('door_field_address')}}
@@ -70,10 +67,9 @@
                       <div class="x_content">
                         <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                           <label for="door_[nr]_hardwaretype">{{_('Hardware')}} <span class="required">*</span></label>
-                          <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('door_field_hardware')}}">
+                          <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{!translations.get_translation('door_field_hardware')}}">
                             <select class="form-control" name="door_[nr]_hardwaretype" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
                               <option value="gpio">{{_('GPIO')}}</option>
-                              <option value="w1">{{_('1Wire')}}</option>
                             </select>
                           </div>
                         </div>

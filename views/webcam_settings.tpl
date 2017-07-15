@@ -13,16 +13,24 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <p>{{_('Here you can setup the webcams that are used. Per webcam fill in the following fields:')}}</p>
+            <p>{{_('Here you can configure your webcams.')}}</p>
             <ul>
+              <li>
+                <strong>{{_('Location')}}</strong>: {{!translations.get_translation('webcam_field_location')}}
+                <ul>
+                  <li><strong>{{_('RPICam')}}:</strong> rpicam</li>
+                  <li><strong>{{_('V4L')}}:</strong> /dev/videoX</li>
+                  <li><strong>{{_('Remote source')}}:</strong> http://source.web.cam/stream</li>
+                </ul>
+              </li>
               <li>
                 <strong>{{_('Name')}}</strong>: {{translations.get_translation('webcam_field_name')}}
               </li>
               <li>
-                <strong>{{_('Location')}}</strong>: {{ translations.get_translation('webcam_field_location') % ('rpicam','/dev/video0','https://source.mywebcam.com/stream')}}
+                <strong>{{_('Picture rotation')}}</strong>: {{translations.get_translation('webcam_field_rotation')}}
               </li>
               <li>
-                <strong>{{_('Picture rotation')}}</strong>: {{translations.get_translation('webcam_field_rotation')}}
+                <strong>{{_('Preview')}}</strong>: {{translations.get_translation('webcam_field_preview')}}
               </li>
             </ul>
           </div>

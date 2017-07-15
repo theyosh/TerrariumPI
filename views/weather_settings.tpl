@@ -13,10 +13,10 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <p>{{_('Here you can configure the weather settings. Currently only data from https://yr.no is supported:')}}</p>
+            <p>{{_('Here you can configure the weather settings.')}}</p>
             <ul>
               <li>
-                <strong>{{_('Location')}}</strong>: {{translations.get_translation('weather_field_location')}}
+                <strong>{{_('Location')}}</strong>: {{!translations.get_translation('weather_field_location')}}
                 <ul>
                   <li><strong>YR.no</strong>: https://www.yr.no/place/[COUNTRY]/[PROVANCE]/[CITY]</li>
                   <li><strong>Weather underground</strong>: http://api.wunderground.com/api/[YOUR_API_KEY]/<strong>geolookup/astronomy/hourly10day</strong>/q/[COUNTRY]/[CITY].json</li>
@@ -48,7 +48,7 @@
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="location">{{_('Location')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control" id="location" name="location" required="required" type="text" placeholder="{{_('Location')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('weather_field_location')}}">
+                      <input class="form-control" id="location" name="location" required="required" type="text" placeholder="{{_('Location')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{!translations.get_translation('weather_field_location')}}">
                     </div>
                   </div>
                   <div class="form-group">
