@@ -79,20 +79,38 @@ class terrariumSensor:
     sensors = []
     done_sensors = []
 
-    try:
-      ow.init(str(port));
-      sensorsList = ow.Sensor('/').sensorList()
-      for sensor in sensorsList:
-        if 'temperature' in sensor.entryList():
-          sensor_id = md5(b'' + sensor.address + 'temperature').hexdigest()
-          sensor_config = {}
-          if sensor_id in config:
-            sensor_config = config[sensor_id]
-            done_sensors.append(sensor_id)
+    if port > 0:
+      try:
+        ow.init(str(port));
+        sensorsList = ow.Sensor('/').sensorList()
+        for sensor in sensorsList:
+          if 'temperature' in sensor.entryList():
+            sensor_id = md5(b'' + sensor.address + 'temperature').hexdigest()
+            sensor_config = {}
+            if sensor_id in config:
+              sensor_config = config[sensor_id]
+              done_sensors.append(sensor_id)
 
-          sensors.append(terrariumSensor( sensor_id,
-                                          'owfs',
-                                          'temperature',
+            sensors.append(terrariumSensor( sensor_id,
+                                            'owfs',
+                                            'temperature',
+                                            sensor,
+                                            sensor_config['name'] if 'name' in sensor_config else '',
+                                            sensor_config['alarm_min'] if 'alarm_min' in sensor_config else 0,
+                                            sensor_config['alarm_max'] if 'alarm_max' in sensor_config else 0,
+                                            sensor_config['limit_min'] if 'limit_min' in sensor_config else 0,
+                                            sensor_config['limit_max'] if 'limit_max' in sensor_config else 100))
+
+          if 'humidity' in sensor.entryList():
+            sensor_id = md5(b'' + sensor.address + 'humidity').hexdigest()
+            sensor_config = {}
+            if sensor_id in config:
+              sensor_config = config[sensor_id]
+              done_sensors.append(sensor_id)
+
+            sensors.append(terrariumSensor(sensor_id,
+                                           'owfs',
+                                          'humidity',
                                           sensor,
                                           sensor_config['name'] if 'name' in sensor_config else '',
                                           sensor_config['alarm_min'] if 'alarm_min' in sensor_config else 0,
@@ -100,26 +118,9 @@ class terrariumSensor:
                                           sensor_config['limit_min'] if 'limit_min' in sensor_config else 0,
                                           sensor_config['limit_max'] if 'limit_max' in sensor_config else 100))
 
-        if 'humidity' in sensor.entryList():
-          sensor_id = md5(b'' + sensor.address + 'humidity').hexdigest()
-          sensor_config = {}
-          if sensor_id in config:
-            sensor_config = config[sensor_id]
-            done_sensors.append(sensor_id)
-
-          sensors.append(terrariumSensor(sensor_id,
-                                         'owfs',
-                                        'humidity',
-                                        sensor,
-                                        sensor_config['name'] if 'name' in sensor_config else '',
-                                        sensor_config['alarm_min'] if 'alarm_min' in sensor_config else 0,
-                                        sensor_config['alarm_max'] if 'alarm_max' in sensor_config else 0,
-                                        sensor_config['limit_min'] if 'limit_min' in sensor_config else 0,
-                                        sensor_config['limit_max'] if 'limit_max' in sensor_config else 100))
-
-    except ow.exNoController:
-      logger.debug('OWFS file system is not actve / installed on this device!')
-      pass
+      except ow.exNoController:
+        logger.debug('OWFS file system is not actve / installed on this device!')
+        pass
 
     # Scanning w1 system bus
     for address in glob.iglob(terrariumSensor.w1_base_path + '[1-9][0-9]-*'):
