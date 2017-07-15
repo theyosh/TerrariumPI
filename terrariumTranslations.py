@@ -63,7 +63,7 @@ class terrariumTranslations():
 
     # System
     self.translations['environment_field_lights_enable'] = _('Enable or disable the light system. When enabled, you can make changes below. By disabling it will not loose the current settings. It will temporary stop the lighting system.')
-    self.translations['environment_field_lights_modus'] = _('Select the modus on which the lights will be put on and off. Select weather to use the sun rise and sun set at your location. This will make the amount of lighting variable to the actual amount of daylight. When selecting clock, the light will put on and off at sellected times.')
+    self.translations['environment_field_lights_modus'] = _('Select the modus on which the lights will be put on and off. Select \'%s\' to use the sun rise and sun set at your location. This will make the amount of lighting variable to the actual amount of daylight. When selecting \'%s\', the light will put on and off at sellected times.' % (_('Weather'),_('Timer')))
     self.translations['environment_field_lights_on'] = _('Enter the time when the light should be put on. Only available when running in \'%s\' modus.' % _('Timer'))
     self.translations['environment_field_lights_off'] = _('Enter the time when the lights should be put off. Only available when running in \'%s\' modus.' % _('Timer'))
     self.translations['environment_field_lights_max_hours'] = _('Enter the maximum amount of lights time in hours. When the time between on and off is more then this maximum, the on and off time will be shifted more to each other.')
@@ -99,6 +99,16 @@ class terrariumTranslations():
     self.translations['environment_field_cooler_temperature_sensors'] = _('Select the temperature sensors that are used to controll the temperature. When selecting multiple sensors, the average is calculated to determen the final temperature.')
 
 
+    self.translations['system_field_language'] = _('Choose your interface language.')
+    self.translations['system_field_admin'] = _('Holds the username which can make changes (Administrator).')
+    self.translations['system_field_new_password'] = _('Enter the new password for the administration user. Leaving empty will not change the password!')
+    self.translations['system_field_current_password'] = _('Enter the current password in order to change the password.')
+    self.translations['system_field_pi_power'] = _('Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment.')
+    self.translations['system_field_power_price'] = _('Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour).')
+    self.translations['system_field_water_price'] = _('Holds the amount of euro/dollar per 1000 liters water.')
+    self.translations['system_field_hostname'] = _('Holds the hostname or IP address on which the software will listen for connections. Enter 0.0.0.0 for all adresses to bind.')
+    self.translations['system_field_port_number'] = _('Holds the portnumber on which the software is listening for connections.')
+    self.translations['system_field_owfs_port'] = _('Holds the port number on which the OWFS software is running. Leave empty to disable OWFS support.')
     # End system
 
     logger.info('Loaded TerrariumPI translations')
