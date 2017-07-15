@@ -70,6 +70,8 @@ class terrariumEnvironment():
 
     self.heater['enabled']        = False if 'enabled' not in self.heater else (self.heater['enabled'].lower() in ['true','on','1'])
     self.heater['modus']          = None  if 'modus' not in self.heater else self.heater['modus']
+    self.heater['on']             = 0     if 'on' not in self.heater else int(self.heater['on'])
+    self.heater['off']            = 0     if 'off' not in self.heater else int(self.heater['off'])
     self.heater['day_enabled']    = False if 'day_enabled' not in self.heater else (self.heater['day_enabled'].lower() in ['true','on','1'])
     self.heater['power_switches'] = []    if 'power_switches' not in self.heater else self.heater['power_switches'].split(',')
     self.heater['sensors']        = []    if 'sensors' not in self.heater else self.heater['sensors'].split(',')
@@ -80,6 +82,8 @@ class terrariumEnvironment():
 
     self.cooler['enabled']        = False if 'enabled' not in self.cooler else (self.cooler['enabled'].lower() in ['true','on','1'])
     self.cooler['modus']          = None  if 'modus' not in self.cooler else self.cooler['modus']
+    self.cooler['on']             = 0     if 'on' not in self.cooler else int(self.cooler['on'])
+    self.cooler['off']            = 0     if 'off' not in self.cooler else int(self.cooler['off'])
     self.cooler['night_enabled']  = False if 'night_enabled' not in self.cooler else (self.cooler['night_enabled'].lower() in ['true','on','1'])
     self.cooler['power_switches'] = []    if 'power_switches' not in self.cooler else self.cooler['power_switches'].split(',')
     self.cooler['sensors']        = []    if 'sensors' not in self.cooler else self.cooler['sensors'].split(',')
