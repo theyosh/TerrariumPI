@@ -632,7 +632,7 @@ function init_sidebar() {
 
 function reload_reload_theme() {
   // Panel toolbox
-  $('.collapse-link').on('click', function() {
+  $('.collapse-link').off('click').on('click', function() {
     var $BOX_PANEL = $(this).closest('.x_panel'),
         $ICON = $(this).find('i'),
         $BOX_CONTENT = $BOX_PANEL.find('.x_content');
@@ -641,19 +641,23 @@ function reload_reload_theme() {
     if ($BOX_PANEL.attr('style')) {
         $BOX_CONTENT.slideToggle(200, function(){
             $BOX_PANEL.removeAttr('style');
+            setContentHeight();
         });
     } else {
-        $BOX_CONTENT.slideToggle(200);
+        $BOX_CONTENT.slideToggle(200, function() {
+          setContentHeight();
+        });
         $BOX_PANEL.css('height', 'auto');
     }
 
     $ICON.toggleClass('fa-chevron-up fa-chevron-down');
   });
 
-  $('.close-link').click(function () {
+  $('.close-link').off('click').click(function () {
     var $BOX_PANEL = $(this).closest('.x_panel');
 
     $BOX_PANEL.remove();
+    setContentHeight();
   });
   // Tooltip
   $('[data-toggle="tooltip"]').tooltip({

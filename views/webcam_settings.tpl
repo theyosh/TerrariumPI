@@ -4,7 +4,7 @@
             <h2><span class="glyphicon glyphicon-info-sign" aria-hidden="true" title="{{_('Information')}}"></span> {{_('Help')}}<small></small></h2>
             <ul class="nav navbar-right panel_toolbox">
               <li>
-                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                <a class="collapse-link"><i class="fa fa-chevron-down"></i></a>
               </li>
               <li>
                 <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
@@ -12,7 +12,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
-          <div class="x_content">
+          <div class="x_content" style="display:none">
             <p>{{_('Here you can configure your webcams.')}}</p>
             <ul>
               <li>
