@@ -128,7 +128,7 @@ class terrariumSwitch():
       try:
         GPIO.setup(int(self.get_address()), GPIO.OUT)
       except Exception, err:
-        print err
+        logger.warning(err)
         pass
 
   def get_name(self):
