@@ -2,11 +2,11 @@
 
 cd ..
 mv views/inc/footer.tpl views/inc/footer.tpl_tmp
-pygettext -v -a -n -o locales/terrariumpi.pot static/js/terrariumpi.js views/*.tpl views/inc/*.tpl *.py
+pygettext -v -a -n -o locales/terrariumpi.pot views/*.tpl views/inc/*.tpl *.py
 mv views/inc/footer.tpl_tmp views/inc/footer.tpl
 cd -
 
-for translation in `grep -r -h -o -e "_('[^)]\+')" ../views/*.tpl | sed "s/\\\\\'/\\'/g" | sed "s/ /%20/g" |  sort | uniq`; do
+for translation in `grep -r -h -o -e "_('[^)]\+')" ../views/*.tpl ../views/inc/*.tpl ../static/js/terrariumpi.js ../*.py | sed "s/\\\\\'/\\'/g" | sed "s/ /%20/g" |  sort | uniq`; do
   translation=${translation:3:-2}
   translation=${translation//\%20/ }
   if [ `grep -ic "${translation}" terrariumpi.pot` -eq 0 ]; then
@@ -91,16 +91,6 @@ echo "" >> terrariumpi.pot
 
 echo "#: Missing text string" >> terrariumpi.pot
 echo "msgid \"closed\"" >> terrariumpi.pot
-echo "msgstr \"\"" >> terrariumpi.pot
-echo "" >> terrariumpi.pot
-
-echo "#: Missing text string" >> terrariumpi.pot
-echo "msgid \"Connection restored\"" >> terrariumpi.pot
-echo "msgstr \"\"" >> terrariumpi.pot
-echo "" >> terrariumpi.pot
-
-echo "#: Missing text string" >> terrariumpi.pot
-echo "msgid \"Connection lost\"" >> terrariumpi.pot
 echo "msgstr \"\"" >> terrariumpi.pot
 echo "" >> terrariumpi.pot
 

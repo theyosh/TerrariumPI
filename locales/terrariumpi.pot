@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-07-15 17:51+CEST\n"
+"POT-Creation-Date: 2017-07-16 18:07+CEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -354,7 +354,7 @@ msgstr ""
 #: views/dashboard.tpl:71 views/dashboard.tpl:224 views/dashboard.tpl:276
 #: views/door_status.tpl:33 views/inc/menu.tpl:30 views/inc/menu.tpl:44
 #: views/inc/menu.tpl:55 views/inc/menu.tpl:66 views/inc/menu.tpl:77
-#: views/inc/menu.tpl:91 views/inc/menu.tpl:122 views/inc/sensor_list.tpl:39
+#: views/inc/menu.tpl:91 views/inc/menu.tpl:119 views/inc/sensor_list.tpl:39
 #: views/inc/usage_weather.tpl:33 views/inc/usage_weather.tpl:68
 #: views/switch_status.tpl:34 views/system_status.tpl:32
 #: views/system_status.tpl:88 views/system_status.tpl:144
@@ -478,8 +478,15 @@ msgstr ""
 msgid "Here you can configure your doors."
 msgstr ""
 
-#: views/door_settings.tpl:19 views/door_settings.tpl:69
-#: views/inc/menu.tpl:113 views/sensor_settings.tpl:19
+#: views/door_settings.tpl:16 views/sensor_settings.tpl:16
+#: views/switch_settings.tpl:16 views/system_environment.tpl:16
+#: views/system_settings.tpl:16 views/weather_settings.tpl:16
+#: views/webcam_settings.tpl:16
+msgid "Required fields are marked with '%s'."
+msgstr ""
+
+#: views/door_settings.tpl:19 views/door_settings.tpl:69 views/hardware.tpl:7
+#: views/hardware.tpl:27 views/inc/menu.tpl:110 views/sensor_settings.tpl:19
 #: views/sensor_settings.tpl:87 views/switch_settings.tpl:19
 #: views/switch_settings.tpl:78
 msgid "Hardware"
@@ -518,7 +525,8 @@ msgstr ""
 msgid "new"
 msgstr ""
 
-#: views/door_settings.tpl:72 views/switch_settings.tpl:82
+#: views/door_settings.tpl:72 views/hardware.tpl:63 views/hardware.tpl:88
+#: views/switch_settings.tpl:82
 msgid "GPIO"
 msgstr ""
 
@@ -534,6 +542,154 @@ msgstr ""
 
 #: views/door_status.tpl:7
 msgid "Door status"
+msgstr ""
+
+#: views/hardware.tpl:10 views/hardware.tpl:44
+msgid "Raspberry Pi"
+msgstr ""
+
+#: views/hardware.tpl:13 views/hardware.tpl:50 views/inc/menu.tpl:35
+#: views/usage.tpl:13 views/usage.tpl:36
+msgid "Sensors"
+msgstr ""
+
+#: views/hardware.tpl:16 views/hardware.tpl:84 views/inc/menu.tpl:49
+#: views/usage.tpl:16 views/usage.tpl:40
+msgid "Switches"
+msgstr ""
+
+#: views/hardware.tpl:19 views/hardware.tpl:107 views/inc/menu.tpl:60
+#: views/usage.tpl:19 views/usage.tpl:44
+msgid "Doors"
+msgstr ""
+
+#: views/hardware.tpl:22
+msgid "Webcams"
+msgstr ""
+
+#: views/hardware.tpl:28
+msgid "Hover over the image below to read more about the supported hardware."
+msgstr ""
+
+#: views/hardware.tpl:45
+msgid "TerrariumPI software is designed to run on a Raspberry Pi. It has been tested on a Raspberry Pi 2 and 3 with %s. Raspberry Pi Zero is not tested."
+msgstr ""
+
+#: views/hardware.tpl:45 views/info.tpl:31
+msgid "Raspbian OS"
+msgstr ""
+
+#: views/hardware.tpl:46
+msgid "The Raspberry Pi should have network connection and optionally SSH enabled for remote management. Also a strong power adapter is needed (+2Amps)."
+msgstr ""
+
+#: views/hardware.tpl:51
+msgid "TerrariumPI software has support for different kind of sensors. The following sensors below are tested with TerrariumPI software."
+msgstr ""
+
+#: views/hardware.tpl:54
+msgid "1 Wire"
+msgstr ""
+
+#: views/hardware.tpl:55
+msgid "The 1 wire bus will be scanned automatically during start up to load the connected and supported sensors. The DS18B20 sensors can share the GPIO pin by putting the sensors in parallel."
+msgstr ""
+
+#: views/hardware.tpl:56
+msgid "Through the 1 wire bus of the Raspberry Pi you can use the following hardware sensors"
+msgstr ""
+
+#: views/hardware.tpl:58 views/hardware.tpl:78
+msgid "DS18B20"
+msgstr ""
+
+#: views/hardware.tpl:64
+msgid "GPIO sensors has to added manual to TerrariumPI software. This can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra capacitor"
+msgstr ""
+
+#: views/hardware.tpl:65
+msgid "Through the GPIO bus of the Raspberry Pi you can use the following hardware sensors"
+msgstr ""
+
+#: views/hardware.tpl:67 views/sensor_settings.tpl:91
+msgid "DHT11"
+msgstr ""
+
+#: views/hardware.tpl:68 views/sensor_settings.tpl:92
+msgid "DHT22"
+msgstr ""
+
+#: views/hardware.tpl:69
+msgid "AM2303"
+msgstr ""
+
+#: views/hardware.tpl:74 views/sensor_settings.tpl:90
+msgid "OWFS"
+msgstr ""
+
+#: views/hardware.tpl:75
+msgid "The OWFS server will be scanned automatically during start up to load the connected and supported sensors. There can be all kind of sensors connected to this server. All supported sensors will be shown."
+msgstr ""
+
+#: views/hardware.tpl:76
+msgid "Through the I2C bus of the Raspberry Pi you can use the following hardware sensors with OWFS software"
+msgstr ""
+
+#: views/hardware.tpl:79
+msgid "HIH400"
+msgstr ""
+
+#: views/hardware.tpl:85
+msgid "TerrariumPI software has support for different kind of relay boards. The following relay boards below are tested with TerrariumPI software."
+msgstr ""
+
+#: views/hardware.tpl:89
+msgid "For every relay on the board there is need for a dedicated GPIO pin. For a 4 ports relay board there are 4 control GPIO pins and 2 pins for power and ground needed. This makes that it needs 6 GPIO pins in total."
+msgstr ""
+
+#: views/hardware.tpl:90 views/hardware.tpl:99
+msgid "The following boards are tested"
+msgstr ""
+
+#: views/hardware.tpl:92
+msgid "VMA400"
+msgstr ""
+
+#: views/hardware.tpl:97 views/hardware.tpl:120
+msgid "USB"
+msgstr ""
+
+#: views/hardware.tpl:98
+msgid "The USB relay board does not need GPIO pins. It only needs one USB connection. The TerrariumPI software supports boards that are either running in Serial or BitBang. This is automatically detected when adding power switches."
+msgstr ""
+
+#: views/hardware.tpl:101
+msgid "Denkovi"
+msgstr ""
+
+#: views/hardware.tpl:108
+msgid "TerrariumPI software has support for magnetic door sensors. Only versions with two wires are supported. Connect one wire to the ground and the other wire to any GPIO pin that is free (except power and ground pins)."
+msgstr ""
+
+#: views/hardware.tpl:111 views/inc/menu.tpl:71 views/usage.tpl:22
+#: views/usage.tpl:48 views/webcam.tpl:7 views/webcam_settings.tpl:64
+msgid "Webcam"
+msgstr ""
+
+#: views/hardware.tpl:112
+msgid "TerrariumPI software has support for different kind of cameras. The following cameras below are tested with TerrariumPI software."
+msgstr ""
+
+#: views/hardware.tpl:115 views/webcam_settings.tpl:21
+msgid "RPICam"
+msgstr ""
+
+#: views/hardware.tpl:116
+msgid "There are different Raspberry Pi cameras available. If the camera is Raspberry Pi compatible, it can be used with TerrariumPI software."
+msgstr ""
+
+#: views/hardware.tpl:121
+msgid "All kind of USB cameras can be used. Enter physical path of the device like /dev/videoX."
 msgstr ""
 
 #: views/inc/menu.tpl:10
@@ -553,10 +709,6 @@ msgstr ""
 msgid "Forecast"
 msgstr ""
 
-#: views/inc/menu.tpl:35 views/usage.tpl:13 views/usage.tpl:36
-msgid "Sensors"
-msgstr ""
-
 #: views/inc/menu.tpl:38 views/inc/usage_weather.tpl:45
 #: views/sensor_settings.tpl:107 views/weather_settings.tpl:29
 #: views/weather_settings.tpl:66
@@ -567,23 +719,10 @@ msgstr ""
 msgid "Humidity"
 msgstr ""
 
-#: views/inc/menu.tpl:49 views/usage.tpl:16 views/usage.tpl:40
-msgid "Switches"
-msgstr ""
-
 #: views/inc/menu.tpl:52 views/inc/menu.tpl:63 views/inc/menu.tpl:85
 #: views/system_environment.tpl:34 views/system_environment.tpl:109
 #: views/system_environment.tpl:182 views/system_environment.tpl:257
 msgid "Status"
-msgstr ""
-
-#: views/inc/menu.tpl:60 views/usage.tpl:19 views/usage.tpl:44
-msgid "Doors"
-msgstr ""
-
-#: views/inc/menu.tpl:71 views/usage.tpl:22 views/usage.tpl:48
-#: views/webcam.tpl:7 views/webcam_settings.tpl:64
-msgid "Webcam"
 msgstr ""
 
 #: views/inc/menu.tpl:74
@@ -606,43 +745,39 @@ msgstr ""
 msgid "Usage"
 msgstr ""
 
-#: views/inc/menu.tpl:110
-msgid "Software"
-msgstr ""
-
-#: views/inc/menu.tpl:123
+#: views/inc/menu.tpl:120
 msgid "FullScreen"
 msgstr ""
 
-#: views/inc/menu.tpl:124
+#: views/inc/menu.tpl:121
 msgid "Lock"
 msgstr ""
 
-#: views/inc/menu.tpl:125
+#: views/inc/menu.tpl:122
 msgid "Logout"
 msgstr ""
 
-#: views/inc/menu.tpl:137
+#: views/inc/menu.tpl:134
 msgid "date/time"
 msgstr ""
 
-#: views/inc/menu.tpl:140 views/inc/usage_dashboard.tpl:45
+#: views/inc/menu.tpl:137 views/inc/usage_dashboard.tpl:45
 msgid "Door is closed"
 msgstr ""
 
-#: views/inc/menu.tpl:140 views/inc/usage_dashboard.tpl:52
+#: views/inc/menu.tpl:137 views/inc/usage_dashboard.tpl:52
 msgid "Door is open"
 msgstr ""
 
-#: views/inc/menu.tpl:144 views/inc/menu.tpl:154
+#: views/inc/menu.tpl:141 views/inc/menu.tpl:151
 msgid "No messages"
 msgstr ""
 
-#: views/inc/menu.tpl:150 views/inc/usage_dashboard.tpl:21
+#: views/inc/menu.tpl:147 views/inc/usage_dashboard.tpl:21
 msgid "Online"
 msgstr ""
 
-#: views/inc/menu.tpl:150 views/inc/usage_dashboard.tpl:28
+#: views/inc/menu.tpl:147 views/inc/usage_dashboard.tpl:28
 msgid "Offline"
 msgstr ""
 
@@ -720,6 +855,78 @@ msgstr ""
 msgid "Wind speed"
 msgstr ""
 
+#: views/info.tpl:7 views/info.tpl:18
+msgid "TerrariumPI %s"
+msgstr ""
+
+#: views/info.tpl:10 views/info.tpl:23
+msgid "Used software"
+msgstr ""
+
+#: views/info.tpl:13 views/info.tpl:76
+msgid "Contact"
+msgstr ""
+
+#: views/info.tpl:19
+msgid "Use TerrariumPI to automate your own reptile environment. The software can handle a combination of multiple temperature and humidity sensors and relay switches to control a closed environment."
+msgstr ""
+
+#: views/info.tpl:24
+msgid "TerrariumPI is mainly written in Python version 2.7. The web interface is a bootstrap 3 template. It can be downloaded from %s."
+msgstr ""
+
+#: views/info.tpl:24 views/info.tpl:77 views/info.tpl:79
+msgid "Download TerrariumPI on Github"
+msgstr ""
+
+#: views/info.tpl:29 views/info.tpl:67
+msgid "Python modules"
+msgstr ""
+
+#: views/info.tpl:30
+msgid "The following external Python libraries are used"
+msgstr ""
+
+#: views/info.tpl:40
+msgid "PIP"
+msgstr ""
+
+#: views/info.tpl:48
+msgid "Source"
+msgstr ""
+
+#: views/info.tpl:54 views/info.tpl:70
+msgid "Web interface"
+msgstr ""
+
+#: views/info.tpl:55
+msgid "Gentellela Admin is a free to use Bootstrap admin template. This template uses the default Bootstrap 3 styles along with a variety of powerful jQuery plugins and tools to create a powerful framework for creating admin panels or back-end dashboards."
+msgstr ""
+
+#: views/info.tpl:56
+msgid "Theme uses several libraries for charts, calendar, form validation, wizard style interface, off-canvas navigation menu, text forms, date range, upload area, form autocomplete, range slider, progress bars, notifications and much more."
+msgstr ""
+
+#: views/info.tpl:57
+msgid "We would love to see how you use this awesome admin template. You can notify us about your site, app or service by tweeting to @colorlib. Once the list will grown long enough we will write a post similar to this to showcase the best examples."
+msgstr ""
+
+#: views/info.tpl:77
+msgid "Questions or problems? Contact me at %s or open an issue on %s."
+msgstr ""
+
+#: views/info.tpl:78
+msgid "Feature request"
+msgstr ""
+
+#: views/info.tpl:79
+msgid "Missing something? Drop a feature request on %s and we will see what can be done."
+msgstr ""
+
+#: views/info.tpl:80
+msgid "Copyright"
+msgstr ""
+
 #: views/sensor_settings.tpl:16
 msgid "Here you can configure your sensors."
 msgstr ""
@@ -734,18 +941,6 @@ msgstr ""
 
 #: views/sensor_settings.tpl:67
 msgid "Add new sensor"
-msgstr ""
-
-#: views/sensor_settings.tpl:90
-msgid "OWFS"
-msgstr ""
-
-#: views/sensor_settings.tpl:91
-msgid "DHT11"
-msgstr ""
-
-#: views/sensor_settings.tpl:92
-msgid "DHT22"
 msgstr ""
 
 #: views/sensor_settings.tpl:93
@@ -980,10 +1175,6 @@ msgstr ""
 msgid "Here you can configure your webcams."
 msgstr ""
 
-#: views/webcam_settings.tpl:21
-msgid "RPICam"
-msgstr ""
-
 #: views/webcam_settings.tpl:22
 msgid "V4L"
 msgstr ""
@@ -1018,11 +1209,119 @@ msgid "Flip Vertical"
 msgstr ""
 
 #: Missing text string
+msgid "1Wire bus"
+msgstr ""
+
+#: Missing text string
+msgid "1Wire DS18B20 wiring scheme"
+msgstr ""
+
+#: Missing text string
+msgid "1Wire sensor 1"
+msgstr ""
+
+#: Missing text string
+msgid "1Wire sensor 2"
+msgstr ""
+
+#: Missing text string
+msgid "4 Ports GPIO relay board"
+msgstr ""
+
+#: Missing text string
+msgid "4 Ports USB relay board"
+msgstr ""
+
+#: Missing text string
+msgid "Connection lost"
+msgstr ""
+
+#: Missing text string
+msgid "Connection restored"
+msgstr ""
+
+#: Missing text string
+msgid "DHT22 GPIO wiring scheme"
+msgstr ""
+
+#: Missing text string
+msgid "DHT22 temperature and humidity sensor"
+msgstr ""
+
+#: Missing text string
+msgid "Free memory"
+msgstr ""
+
+#: Missing text string
+msgid "GPIO Magnetic door sensor"
+msgstr ""
+
+#: Missing text string
+msgid "GPIO relay board wiring scheme"
+msgstr ""
+
+#: Missing text string
+msgid "I2C bus adapter"
+msgstr ""
+
+#: Missing text string
 msgid "Information"
 msgstr ""
 
 #: Missing text string
+msgid "Load 15"
+msgstr ""
+
+#: Missing text string
+msgid "Load 5"
+msgstr ""
+
+#: Missing text string
+msgid "loading"
+msgstr ""
+
+#: Missing text string
+msgid "Profile image"
+msgstr ""
+
+#: Missing text string
+msgid "Raspberry Pi 3 camera"
+msgstr ""
+
+#: Missing text string
+msgid "Raspberry Pi 3 specifications"
+msgstr ""
+
+#: Missing text string
 msgid "Select an option"
+msgstr ""
+
+#: Missing text string
+msgid "TerrariumPI test setup"
+msgstr ""
+
+#: Missing text string
+msgid "Toggle power switch"
+msgstr ""
+
+#: Missing text string
+msgid "Total memory"
+msgstr ""
+
+#: Missing text string
+msgid "Total open for"
+msgstr ""
+
+#: Missing text string
+msgid "USB Webcam"
+msgstr ""
+
+#: Missing text string
+msgid "Used memory"
+msgstr ""
+
+#: Missing text string
+msgid "Weather forceast screenshot"
 msgstr ""
 
 #: Missing text string
@@ -1083,13 +1382,5 @@ msgstr ""
 
 #: Missing text string
 msgid "closed"
-msgstr ""
-
-#: Missing text string
-msgid "Connection restored"
-msgstr ""
-
-#: Missing text string
-msgid "Connection lost"
 msgstr ""
 

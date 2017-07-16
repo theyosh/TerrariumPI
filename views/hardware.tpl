@@ -42,7 +42,7 @@
                 </div>
                 <div aria-labelledby="hardware_tab_raspberrypi" class="tab-pane fade" id="hardware-tab-raspberrypi" role="tabpanel">
                   <h2>{{_('Raspberry Pi')}}</h2>
-                  <p>{{!_('TerrariumPI software is designed to run on a Raspberry Pi. It has been tested on a Raspberry Pi 2 and 3 with <a href="https://www.raspberrypi.org/downloads/raspbian/" target="_blank">Raspbian OS</a>. Raspberry Pi Zero is not tested.')}}</p>
+                  <p>{{!_('TerrariumPI software is designed to run on a Raspberry Pi. It has been tested on a Raspberry Pi 2 and 3 with %s. Raspberry Pi Zero is not tested.') % ('<a href="https://www.raspberrypi.org/downloads/raspbian/" target="_blank">' + _('Raspbian OS') + '</a>')}}</p>
                   <p>{{_('The Raspberry Pi should have network connection and optionally SSH enabled for remote management. Also a strong power adapter is needed (+2Amps).')}}</p>
                   <img src="static/images/documentation/pi3specs.jpg" alt="{{_('Raspberry Pi 3 specifications')}}" class="img-thumbnail" />
                 </div>
