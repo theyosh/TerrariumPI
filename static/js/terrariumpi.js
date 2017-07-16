@@ -8,7 +8,8 @@ var globals = {
   graphs: {},
   graph_cache: 5 * 60,
   websocket_timer: null,
-  online_timer: null
+  online_timer: null,
+  current_version: null
 };
 
 /**
@@ -1340,6 +1341,32 @@ function capitalizeFirstLetter(string) {
     return string[0].toUpperCase() + string.slice(1);
 }
 
+function version_check() {
+  $.getJSON('https://api.github.com/repos/theyosh/TerrariumPI/releases/latest' ,function(data){
+
+    var latest_version = data.tag_name.replace(/\./g,'') * 1;
+    var current_version = globals.current_version.replace(/\./g,'') * 1;
+    if (current_version < 100) current_version *= 10;
+
+    if (current_version < latest_version) {
+      var message = 'New version available! <a href="' + data.html_url + '" target="_blank" title="Download TerrariumPI version ' + data.tag_name + '">Click here to download</a>!';
+      new PNotify({
+            type: 'info',
+            title: 'New release: ' + data.tag_name,
+            text: message,
+            delay: 1000,
+            mouse_reset: false,
+            styling: 'bootstrap3',
+            hide: false
+        });
+    }
+
+    setTimeout(function() {
+      version_check();
+    },   24 * 60 * 60 * 1000 ); // Check once a day
+  });
+}
+
 $(document).ready(function() {
   init_sidebar();
 
@@ -1371,4 +1398,6 @@ $(document).ready(function() {
     notification_timestamps();
     $('#system_time span').text(moment().format('LLLL'));
   }, 30 * 1000);
+
+  version_check();
 });

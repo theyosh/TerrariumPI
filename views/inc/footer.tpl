@@ -36,5 +36,8 @@
   <script type="text/javascript" src="/static/js/jquery.fullscreen-min.js"></script>
   <!-- Load the terrariumPI JS script-->
   <script type="text/javascript" src="/static/js/terrariumpi.js"></script>
+  <script type="text/javascript">
+    globals.current_version = '{{version}}';
+  </script>
 </body>
 </html>
