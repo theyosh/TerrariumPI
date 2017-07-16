@@ -1,5 +1,5 @@
 % include('inc/page_header.tpl')
-        <div class="row">
+        <div class="row documentation">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="" data-example-id="togglable-tabs" role="tabpanel">
               <ul class="nav nav-tabs bar_tabs" id="usage_tablist" role="tablist">

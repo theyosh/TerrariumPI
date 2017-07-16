@@ -215,43 +215,47 @@ div.row.door div.sidebar-widget i.fa {
 
 
 /* Documentation */
-#usage_content .interactive_screenshot {
+
+div.row.documentation img {
+  max-width: 100%
+}
+.interactive_screenshot {
   position: relative;
   padding: 0px;
 }
-#usage_content .interactive_screenshot img,
-#usage_content .interactive_screenshot iframe {
+.interactive_screenshot img,
+.interactive_screenshot iframe {
   width: 100%;
   margin: 0px;
   box-shadow: 1px 1px 10px 2px #D1D1D1;
 }
-#usage_content .click_area {
+.interactive_screenshot .click_area {
   position: absolute;
   cursor: pointer;
 }
-#usage_content .click_area:hover,
-#usage_content .click_area.hover {
-  border: solid 1px #1ABB9C;
+.interactive_screenshot .click_area:hover,
+.interactive_screenshot .click_area.hover {
+  border: solid 1px #1ABB9C !important;
 }
-#usage_content #screenshot_dashboard_top_indicators {
+#usage_content .interactive_screenshot #screenshot_dashboard_top_indicators {
   left: 74%;
   top: 0%;
   height: 7.5%;
   width: 26%;
 }
-#usage_content #screenshot_dashboard_top_tiles {
+#usage_content .interactive_screenshot #screenshot_dashboard_top_tiles {
   left: 14.5%;
   top: 7.5%;
   height: 12.5%;
   width: 85.5%;
 }
-#usage_content #screenshot_dashboard_environment {
+#usage_content .interactive_screenshot #screenshot_dashboard_environment {
   top: 22%;
   height: 68.5%;
   left: 79%;
   width: 20%;
 }
-#usage_content #screenshot_dashboard_graphs {
+#usage_content .interactive_screenshot #screenshot_dashboard_graphs {
   top: 22%;
   height: 69%;
   left: 15.5%;
@@ -259,25 +263,118 @@ div.row.door div.sidebar-widget i.fa {
 }
 
 
-#usage_content #screenshot_weather_forecast_current {
+#usage_content .interactive_screenshot #screenshot_weather_forecast_current {
   top: 14.5%;
   height: 48.5%;
   left: 15.5%;
   width: 27.2%;
 }
 
-#usage_content #screenshot_weather_forecast_day {
+#usage_content .interactive_screenshot #screenshot_weather_forecast_day {
   top: 14.5%;
   height: 33.6%;
   left: 43.7%;
   width: 55.2%;
 }
 
-#usage_content #screenshot_weather_forecast_week {
+#usage_content .interactive_screenshot #screenshot_weather_forecast_week {
   top: 48.8%;
   height: 33.8%;
   left: 43.8%;
   width: 55.2%;
 }
+
+
+
+
+/* Hardware documentation */
+
+#hardware_content .interactive_screenshot .click_area {
+  border: solid 1px gray;
+}
+#hardware_content .interactive_screenshot #raspberrypi{
+  top: 41%;
+  left: 50%;
+  width: 22.5%;
+  height: 23.5%;
+}
+#hardware_content .interactive_screenshot #bus_i2c {
+  top: 5.5%;
+  left: 16%;
+  width: 9.5%;
+  height: 11%;
+}
+#hardware_content .interactive_screenshot #bus_1wire {
+  top: 15.5%;
+  left: 58%;
+  width: 9%;
+  height: 13%;
+}
+#hardware_content .interactive_screenshot #one_wire_temp_sensor1 {
+  top: 33.5%;
+  left: 18%;
+  width: 3%;
+  height: 23.5%;
+}
+#hardware_content .interactive_screenshot #one_wire_temp_sensor2 {
+  top: 40%;
+  left: 3%;
+  width: 5.5%;
+  height: 29%;
+}
+#hardware_content .interactive_screenshot #dht22_temp_humidity_sensor {
+  top: 70%;
+  left: 31.5%;
+  width: 7%;
+  height: 20%;
+}
+#hardware_content .interactive_screenshot #USB_Relay {
+  top: 8%;
+  left: 76%;
+  width: 15%;
+  height: 25.5%;
+}
+#hardware_content .interactive_screenshot #GPIO_Relay {
+  top: 45%;
+  left: 82.5%;
+  width: 16%;
+  height: 31.5%;
+}
+#hardware_content .interactive_screenshot #GPIO_Door_sensor {
+  top: 31%;
+  left: 36.5%;
+  width: 7%;
+  height: 12%;
+}
+#hardware_content .interactive_screenshot #RPICam {
+  top: 44%;
+  left: 31%;
+  width: 7%;
+  height: 12%;
+}
+/* End hardware documentation */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* End Documentation */

@@ -107,9 +107,6 @@
                       <a href="usage.html">{{_('Usage')}}</a>
                     </li>
                     <li>
-                      <a href="software.html">{{_('Software')}}</a>
-                    </li>
-                    <li>
                       <a href="hardware.html">{{_('Hardware')}}</a>
                     </li>
                   </ul>

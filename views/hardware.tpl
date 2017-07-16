@@ -1,128 +1,143 @@
 % include('inc/page_header.tpl')
-        <div class="row">
+        <div class="row documentation">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="" data-example-id="togglable-tabs" role="tabpanel">
-              <ul class="nav nav-tabs bar_tabs" id="myTab" role="tablist">
+              <ul class="nav nav-tabs bar_tabs" id="hardware_tablist" role="tablist">
                 <li class="active" role="presentation">
-                  <a aria-expanded="true" data-toggle="tab" href="#pi" id="pi-tab" role="tab">Raspberry PI</a>
+                  <a aria-expanded="true" data-toggle="tab" href="#hardware-tab-hardware" id="hardware_tab_hardware" role="tab">{{_('Hardware')}}</a>
                 </li>
                 <li class="" role="presentation">
-                  <a aria-expanded="false" data-toggle="tab" href="#sensors" id="sensors-tab" role="tab">1 Wire</a>
+                  <a aria-expanded="false" data-toggle="tab" href="#hardware-tab-raspberrypi" id="hardware_tab_raspberrypi" role="tab">{{_('Raspberry Pi')}}</a>
                 </li>
                 <li class="" role="presentation">
-                  <a aria-expanded="false" data-toggle="tab" href="#switches" id="switches-tab2" role="tab">Switches</a>
+                  <a aria-expanded="false" data-toggle="tab" href="#hardware-tab-sensors" id="hardware_tab_sensors" role="tab">{{_('Sensors')}}</a>
                 </li>
                 <li class="" role="presentation">
-                  <a aria-expanded="false" data-toggle="tab" href="#webcam" id="webcam-tab2" role="tab">Webcams</a>
+                  <a aria-expanded="false" data-toggle="tab" href="#hardware-tab-switches" id="hardware_tab_switches" role="tab">{{_('Switches')}}</a>
                 </li>
                 <li class="" role="presentation">
-                  <a aria-expanded="false" data-toggle="tab" href="#door" id="door-tab2" role="tab">Door sensor</a>
+                  <a aria-expanded="false" data-toggle="tab" href="#hardware-tab-doors" id="hardware_tab_doors" role="tab">{{_('Doors')}}</a>
                 </li>
                 <li class="" role="presentation">
-                  <a aria-expanded="false" data-toggle="tab" href="#water" id="water-tab2" role="tab">Water sprayer</a>
+                  <a aria-expanded="false" data-toggle="tab" href="#hardware-tab-webcams" id="hardware_tab_webcams" role="tab">{{_('Webcams')}}</a>
                 </li>
               </ul>
-              <p>Here you can see the hardware that is used in TerrariumPI</p>
-              <div class="tab-content" id="myTabContent">
-                <div aria-labelledby="pi-tab" class="tab-pane fade active in" id="pi" role="tabpanel">
-                  <p class="lead">Raspberry Pi</p>
-                  <p>The Raspberry Pi is a credit-card sized computer that plugs into your TV and a keyboard. It is a capable little computer which can be used in electronics projects, and for many of the things that your desktop PC does, like spreadsheets, word-processing and games. It also plays high-definition video. We want to see it being used by kids all over the world to learn programming. <a href="http://www.raspberrypi.org/" target="_blank" title="Raspberry PI">http://www.raspberrypi.org/</a></p>
-                </div>
-                <div aria-labelledby="sensors-tab" class="tab-pane fade" id="sensors" role="tabpanel">
-                  <div class="col-xs-9">
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                      <div class="tab-pane active" id="1w_adapter">
-                        <p class="lead">RPI2 I2C to 1-Wire Host Adapter for Raspberry Pi</p>
-                        <p>This module provides an easy way to connect 1-Wire devices to your Raspberry Pi without using up one of the USB ports. It is based around a DS2482-100 I2C to 1-Wire IC. <a href="http://www.sheepwalkelectronics.co.uk/product_info.php?cPath=22&products_id=30" target="_blank" title="RPI2 I2C to 1-Wire Host Adapter for Raspberry Pi">http://www.sheepwalkelectronics.co.uk/product_info.php?cPath=22&products_id=30</a></p>
-                      </div>
-                      <div class="tab-pane" id="1w_temperature">
-                        <p class="lead">SWE0 Temperature Sensor</p>
-                        <p>A simple temperature sensor consisting of a DS18B20 sensors on 2m of cable with an RJ45 plug on the other end.<br>
-                        Wired for parasitic or external power (see options below).<br>
-                        Unsure which power option to choose? See the SWE0 Information page linked below for further information. <a href="http://www.sheepwalkelectronics.co.uk/product_info.php?cPath=23&products_id=52" target="_blank" title="SWE0 Temperature Sensor">http://www.sheepwalkelectronics.co.uk/product_info.php?cPath=23&products_id=52</a></p>
-                      </div>
-                      <div class="tab-pane" id="1w_humidity">
-                        <p class="lead">SWE3 Humidity Sensor Module</p>
-                        <p>This is a humidity sensor module based on a Honeywell HIH-4031 humidity sensor interfaced to the 1-Wire bus with a Maxim DS2438Z IC.</p>
-                        <p>After several customer requests this module is now designed with 3 extra screw terminals connected directly to pins on the DS2438Z allowing you to use it as a general purpose 0-10V DC ADC. The assembled module and kit are now available omitting the HIH-4031 sensor and resistor R1 if you wish to use the module as such. <a href="http://www.sheepwalkelectronics.co.uk/product_info.php?cPath=23&products_id=55" target="_blank" title="SWE3 Humidity Sensor Module">http://www.sheepwalkelectronics.co.uk/product_info.php?cPath=23&products_id=55</a></p>
-                      </div>
-                      <div class="tab-pane" id="1w_hub">
-                        <p class="lead">SWE2b Sensor Connection Module</p>
-                        <p>This is a simple PCB with two RJ45 sockets and 6 sets of screw terminals connected in parallel to allow you to easily connect SWE0a sensors into your 1-Wire network. <a href="http://www.sheepwalkelectronics.co.uk/product_info.php?cPath=23&products_id=64" target="_blank" title="SWE2b Sensor Connection Module">http://www.sheepwalkelectronics.co.uk/product_info.php?cPath=23&products_id=64</a></p>
-                      </div>
-                    </div>
+              <div class="tab-content col-xs-9" id="hardware_content">
+                <div aria-labelledby="hardware_tab_hardware" class="tab-pane fade active in" id="hardware-tab-hardware" role="tabpanel">
+                  <h2>{{_('Hardware')}}</h2>
+                  <p>{{_('Hover over the image below to read more about the supported hardware.')}}</p>
+                  <div class="interactive_screenshot">
+                    <div id="raspberrypi" class="click_area raspberrypi" title="{{_('Raspberry Pi')}}"></div>
+                    <div id="bus_i2c" class="click_area" title="{{_('I2C bus')}}"></div>
+                    <div id="bus_1wire" class="click_area" title="{{_('1Wire bus')}}"></div>
+                    <div id="one_wire_temp_sensor1" class="click_area sensors" title="{{_('1Wire sensor 1')}}"></div>
+                    <div id="one_wire_temp_sensor2" class="click_area sensors" title="{{_('1Wire sensor 2')}}"></div>
+                    <div id="dht22_temp_humidity_sensor" class="click_area sensors" title="{{_('DHT22 temperature and humidity sensor')}}"></div>
+                    <div id="USB_Relay" class="click_area switches" title="{{_('4 Ports USB relay board')}}"></div>
+                    <div id="GPIO_Relay" class="click_area switches" title="{{_('4 Ports GPIO relay board')}}"></div>
+                    <div id="GPIO_Door_sensor" class="click_area doors" title="{{_('GPIO Magnetic door sensor')}}"></div>
+                    <div id="RPICam" class="click_area webcams" title="{{_('Raspberry Pi camera')}}"></div>
+                    <img src="static/images/documentation/hardware_overview.jpg" alt="{{_('TerrariumPI test setup')}}" />
                   </div>
-                  <div class="col-xs-3">
-                    <!-- required for floating -->
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs tabs-right">
-                      <li class="active">
-                        <a data-toggle="tab" href="#1w_adapter">Host adapter</a>
-                      </li>
-                      <li>
-                        <a data-toggle="tab" href="#1w_temperature">Temperature</a>
-                      </li>
-                      <li>
-                        <a data-toggle="tab" href="#1w_humidity">Humidity</a>
-                      </li>
-                      <li>
-                        <a data-toggle="tab" href="#1w_hub">Hub</a>
-                      </li>
+                </div>
+                <div aria-labelledby="hardware_tab_raspberrypi" class="tab-pane fade" id="hardware-tab-raspberrypi" role="tabpanel">
+                  <h1>{{_('Raspberry Pi')}}</h1>
+                  <p>{{!_('TerrariumPI software is designed to run on a Raspberry Pi. It has been tested on a Raspberry Pi 2 and 3 with <a href="https://www.raspberrypi.org/downloads/raspbian/" target="_blank">Raspbian OS</a>. Raspberry Pi Zero is not tested.')}}</p>
+                  <p>{{_('The Raspberry Pi should have network connection and optionally SSH enabled for remote management. Also a strong power adapter is needed (+2A).')}}</p>
+                  <img src="static/images/documentation/pi3specs.jpg" alt="{{_('Raspberry Pi 3 specifications')}}" class="img-thumbnail" />
+                </div>
+                <div aria-labelledby="hardware_tab_sensors" class="tab-pane fade" id="hardware-tab-sensors" role="tabpanel">
+                  <h1>{{_('Sensors')}}</h1>
+                  <p>{{_('TerrariumPI software has support for different kind of sensors. The following sensors below are tested with TerrariumPI software.')}}</p>
+                  <div class="row">
+                    <img src="static/images/documentation/ds1820-Raspberry-pi.png" alt="{{_('1Wire DS18B20 wiring scheme')}}" class="img-thumbnail alignright col-xs-3" />
+                    <h2>{{_('1 Wire')}}</h2>
+                    <p>{{_('The 1 wire bus will be scanned automatically during start up to load the connected and supported sensors. The DS18B20 sensors can share the GPIO pin by putting the sensors in parallel.')}}</p>
+                    <p>{{_('Through the 1 wire bus of the Raspberry Pi you can use the following hardware sensors')}}</p>
+                    <ul>
+                      <li><strong>{{_('DS18B20')}}</strong>: ...</li>
+                    </ul>
+                  </div>
+                  <div class="row">
+                    <img src="static/images/documentation/FEJ7RIQIH54GPUB.MEDIUM.jpg" alt="{{_('DHT22 GPIO wiring scheme')}}" class="img-thumbnail alignright col-xs-3" />
+                    <h2>{{_('GPIO')}}</h2>
+                    <p>{{_('GPIO sensors has to added manual to TerrariumPI software. This can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra capacitor')}}</p>
+                    <p>{{_('Through the GPIO bus of the Raspberry Pi you can use the following hardware sensors')}}</p>
+                    <ul>
+                      <li><strong>{{_('DHT11')}}</strong>: ...</li>
+                      <li><strong>{{_('DHT22')}}</strong>: ...</li>
+                      <li><strong>{{_('AM2303')}}</strong>: ...</li>
+                    </ul>
+                  </div>
+                  <div class="row">
+                    <img src="static/images/documentation/RPI2-1lg.jpg" alt="{{_('I2C bus adapter')}}" class="img-thumbnail alignright col-xs-3" />
+                    <h2>{{_('OWFS')}}</h2>
+                    <p>{{_('The OWFS server will be scanned automatically during start up to load the connected and supported sensors. There can be all kind of sensors connected to this server. All supported sensors will be shown.')}}</p>
+                    <p>{{_('Through the I2C bus of the Raspberry Pi you can use the following hardware sensors with OWFS software')}}</p>
+                    <ul>
+                      <li><strong>{{_('DS18B20')}}</strong>: ...</li>
+                      <li><strong>{{_('HIH400')}}</strong>: ...</li>
                     </ul>
                   </div>
                 </div>
-                <div aria-labelledby="switches-tab" class="tab-pane fade" id="switches" role="tabpanel">
-                  <p class="lead">USB Four(4) Relay Output Module,Board for Home Automation</p>
-                  <p>This is Four Channel relay board controlled by computer USB port. The usb relay board is with 4 SPDT relays rated up to 10A each. You may control devices 220V / 120V (up to 4) directly with one such relay unit. It is fully powered by the computer USB port. Suitable for home automation applications, hobby projects, industrial automation. The free software allows to control relays manually, create timers (weekly and calendar) and multivibrators, use date and time for alarms or control from command line. We provide software examples in Labview, .NET, Java, Borland C++. <a href="http://www.denkovi.com/usb-relay-board-four-channels-for-home-automation" target="_blank" title="USB Four(4) Relay Output Module,Board for Home Automation">http://www.denkovi.com/usb-relay-board-four-channels-for-home-automation</a></p>
-                  <p>Alternatively: <a href="http://sigma-shop.com/product/75/usb-4-relay-board-rs232-serial-controlled-pcb.html" target="_blank" title="USB 4 Relay Board - RS232 Serial controlled, PCB">http://sigma-shop.com/product/75/usb-4-relay-board-rs232-serial-controlled-pcb.html</a></p>
-                </div>
-                <div aria-labelledby="webcam-tab" class="tab-pane fade" id="webcam" role="tabpanel">
-                  <div class="col-xs-9">
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                      <div class="tab-pane active" id="webcam_rpi">
-                        <p class="lead">Raspberry PI Camera</p>
-                        <p><a href="http://www.raspberrypi.org/camera" target="_blank" title="Raspberry PI Camera">http://www.raspberrypi.org/camera</a></p>
-                      </div>
-                      <div class="tab-pane" id="webcam_usb">
-                        <p class="lead">USB Webcam</p>
-                        <p>Any USB webcam will work</p>
-                      </div>
-                      <div class="tab-pane" id="webcam_online">
-                        <p class="lead">Online Webcam</p>
-                        <p>Any online camera that provides a (simple) HTTP support</p>
-                      </div>
-                    </div>
+                <div aria-labelledby="hardware_tab_switches" class="tab-pane fade" id="hardware-tab-switches" role="tabpanel">
+                  <h1>{{_('Switches')}}</h1>
+                  <p>{{_('TerrariumPI software has support for different kind of relay boards. The following relay boards below are tested with TerrariumPI software.')}}</p>
+                  <div class="row">
+                    <img src="static/images/documentation/Raspberry_Pi_with_4_Channel_Relay_2.png" alt="{{_('GPIO relay board wiring scheme')}}" class="img-thumbnail alignright col-xs-3" />
+                    <h2>{{_('GPIO')}}</h2>
+                    <p>{{_('For every relay on the board there is need for a dedicated GPIO pin. For a 4 ports relay board there are 4 control GPIO pins and 2 pins for power and ground needed. This makes that it needs 6 GPIO pins in total.')}}</p>
+                    <p>{{_('The following boards are tested')}}</p>
+                    <ul>
+                      <li><strong>{{_('VMA400')}}</strong>: ...</li>
+                    </ul>
                   </div>
-                  <div class="col-xs-3">
-                    <!-- required for floating -->
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs tabs-right">
-                      <li class="active">
-                        <a data-toggle="tab" href="#webcam_rpi">PiCam</a>
-                      </li>
-                      <li>
-                        <a data-toggle="tab" href="#webcam_usb">USB</a>
-                      </li>
-                      <li>
-                        <a data-toggle="tab" href="#webcam_online">Online</a>
-                      </li>
+                  <div class="row">
+                    <img src="static/images/documentation/variant_44_107.jpg" alt="{{_('USB Relay board')}}" class="img-thumbnail alignright col-xs-3" />
+                    <h2>{{_('USB')}}</h2>
+                    <p>{{_('The USB relay board does not need GPIO pins. It only needs one USB connection. The TerrariumPI software supports boards that are either running in Serial or BitBang. This is automatically detected when adding power switches.')}}</p>
+                    <p>{{_('The following boards are tested')}}</p>
+                    <ul>
+                      <li><strong>{{_('Denkovi')}}</strong>: ...</li>
                     </ul>
                   </div>
                 </div>
-                <div aria-labelledby="door-tab" class="tab-pane fade" id="door" role="tabpanel">
-                  <p class="lead">Magnetic contact switch</p>
-                  <p>This sensor is essentially a reed switch, encased in an ABS plastic shell. Normally the reed is 'open' (no connection between the two wires). The other half is a magnet. When the magnet is less than 13mm (0.5") away, the reed switch closes. They're often used to detect when a door or drawer is open, which is why they have mounting tabs and screws. You can also pick up some double-sided foam tape from a hardware store to mount these, that works well without needing screws.<br>
-                  <br>
-                  <a href="https://www.adafruit.com/products/375" target="_blank">More info</a></p>
+                <div aria-labelledby="hardware_tab_doors" class="tab-pane fade" id="hardware-tab-doors" role="tabpanel">
+                  <img src="static/images/documentation/CKN6004-900.jpg" alt="Dashboard screenshot" class="img-thumbnail alignright col-xs-3" />
+                  <h1>{{_('Doors')}}</h1>
+                  <p>{{_('TerrariumPI software has support for magnetic door sensors. Only versions with two wires are supported. Connect one wire to the ground and the other wire to any GPIO pin that is free (except power and ground pins).')}}</p>
                 </div>
-                <div aria-labelledby="water-tab" class="tab-pane fade" id="water" role="tabpanel">
-                  <p class="lead">Jewel spray starters set</p>
-                  <p><a href="http://allinone-ict.mooo.com/jewelsprayv3/pages/bakery/basis-systeem-65-liter-4.php" target="_blank" title="Jewel spray starters set">Read more</a></p>
+                <div aria-labelledby="hardware_tab_webcams" class="tab-pane fade" id="hardware-tab-webcams" role="tabpanel">
+                  <h1>{{_('Webcam')}}</h1>
+                  <p>{{_('TerrariumPI software has support for different kind of cameras. The following cameras below are tested with TerrariumPI software.')}}</p>
+                  <div class="row">
+                    <img src="static/images/documentation/Pi-Camera-web.jpg" alt="{{_('Raspberry Pi 3 camera')}}" class="img-thumbnail alignright col-xs-3" />
+                    <h2>{{_('RPICam')}}</h2>
+                    <p>{{_('There are different Raspberry Pi cameras available. If the camera is Raspberry Pi compatible, it can be used with TerrariumPI software.')}}</p>
+                  </div>
+                  <div class="row">
+                    <img src="static/images/documentation/webcam.jpg" alt="{{_('USB Webcam')}}" class="img-thumbnail alignright col-xs-3" />
+                    <h2>{{_('USB')}}</h2>
+                    <p>{{_('All kind of USB cameras can be used. Enter physical path of the device like /dev/videoX.')}}</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <script type="text/javascript">
+          $('ul.nav.nav-tabs.bar_tabs a').hover(
+              function() {
+                $('.interactive_screenshot .' + $(this).attr('href').replace('#hardware-tab-','')).addClass('hover');
+              },
+              function() {
+                $('.interactive_screenshot .' + $(this).attr('href').replace('#hardware-tab-','')).removeClass('hover');
+              }
+          );
+
+          $('div.interactive_screenshot div.click_area').on('click',function(){
+            var link = $(this).attr('class').replace('click_area ','hardware-tab-');
+            $('ul.nav.nav-tabs.bar_tabs a[href="#' + link + '"]').click();
+          });
+        </script>
 % include('inc/page_footer.tpl')
