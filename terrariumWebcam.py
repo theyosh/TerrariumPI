@@ -33,7 +33,7 @@ class terrariumWebcam():
     self.tile_location = 'webcam/'
     self.font_size = 10
     self.retries = 3
-    self.webam_warm_up = 2
+    self.webcam_warm_up = 2
 
     # Per webcam config
     self.set_location(location)
@@ -117,8 +117,8 @@ class terrariumWebcam():
       with PiCamera(resolution=(1920, 1080)) as camera:
         logger.debug('Open rpicam')
         camera.start_preview()
-        logger.debug('Wait %s seconds for preview' % (self.webam_warm_up,))
-        sleep(self.webam_warm_up)
+        logger.debug('Wait %s seconds for preview' % (self.webcam_warm_up,))
+        sleep(self.webcam_warm_up)
         logger.debug('Save rpicam to jpeg')
         camera.capture(stream, format='jpeg')
         logger.debug('Done creating RPICAM image')
@@ -142,7 +142,7 @@ class terrariumWebcam():
       logger.debug('Set USB width to 720')
       camera.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, 720)
       logger.debug('Wait 2 seconds for preview')
-      sleep(2)
+      sleep(self.webcam_warm_up)
       logger.debug('Save USB to raw data')
       readok, image = camera.read()
 
