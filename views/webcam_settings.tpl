@@ -13,7 +13,7 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content" style="display:none">
-            <p>{{_('Here you can configure your webcams.')}}</p>
+            <p>{{_('Here you can configure your webcams.')}} {{!_('Required fields are marked with \'%s\'.') % ('<span class="required">*</span>',)}}</p>
             <ul>
               <li>
                 <strong>{{_('Location')}}</strong>: {{!translations.get_translation('webcam_field_location')}}

@@ -988,8 +988,7 @@ function history_graph(name, data, type) {
   }
 }
 
-function add_sensor() {
-  var form = $('.new-sensor-form');
+function check_form_data(form) {
   var fieldsok = true;
   form.find('input[required="required"][readonly!="readonly"][readonly!="hidden"]').each(function(counter,item) {
     var field = $(this);
@@ -999,7 +998,12 @@ function add_sensor() {
     }
     fieldsok = fieldsok && !empty;
   });
-  if (!fieldsok) return false;
+  return fieldsok;
+}
+
+function add_sensor() {
+  var form = $('.new-sensor-form');
+  if (!check_form_data(form)) return false;
 
   add_sensor_row('None',
                  form.find('select[name="sensor_[nr]_hardwaretype"]').val(),
@@ -1042,16 +1046,7 @@ function add_sensor_row(id,hardwaretype,address,type,name,alarm_min,alarm_max,li
 
 function add_switch() {
   var form = $('.new-switch-form');
-  var fieldsok = true;
-  form.find('input[required="required"][readonly!="readonly"][readonly!="hidden"]').each(function(counter,item) {
-    var field = $(this);
-    var empty = field.val() == '';
-    if (empty) {
-      field.addClass('missing-required');
-    }
-    fieldsok = fieldsok && !empty;
-  });
-  if (!fieldsok) return false;
+  if (!check_form_data(form)) return false;
 
   add_switch_row('None',
                  form.find('select[name="switch_[nr]_hardwaretype"]').val(),
@@ -1087,16 +1082,7 @@ function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow) {
 
 function add_door() {
   var form = $('.new-door-form');
-  var fieldsok = true;
-  form.find('input[required="required"][readonly!="readonly"][readonly!="hidden"]').each(function(counter,item) {
-    var field = $(this);
-    var empty = field.val() == '';
-    if (empty) {
-      field.addClass('missing-required');
-    }
-    fieldsok = fieldsok && !empty;
-  });
-  if (!fieldsok) return false;
+  if (!check_form_data(form)) return false;
 
   add_door_row('None',
                 form.find('select[name="door_[nr]_hardwaretype"]').val(),
@@ -1127,16 +1113,7 @@ function add_door_row(id,hardwaretype,address,name) {
 
 function add_webcam() {
   var form = $('.new-webcam-form');
-  var fieldsok = true;
-  form.find('input[required="required"][readonly!="readonly"][readonly!="hidden"]').each(function(counter,item) {
-    var field = $(this);
-    var empty = field.val() == '';
-    if (empty) {
-      field.addClass('missing-required');
-    }
-    fieldsok = fieldsok && !empty;
-  });
-  if (!fieldsok) return false;
+  if (!check_form_data(form)) return false;
 
   add_webcam_row('None',
                 form.find('input[name="webcam_[nr]_location"]').val(),
@@ -1342,18 +1319,17 @@ function createWebcamLayer(webcamid, maxzoom) {
   });
 }
 
-function loadDoorHistory() {
-  $.getJSON('api/history/doors', function(door_data) {
+function load_door_history() {
+  $.getJSON('/api/history/doors', function(door_data) {
     var door_status = {};
-    var state_change = '';
     $.each(door_data.door, function(counter, statedata) {
       for (var i = 0; i < statedata.state.length; i++) {
-        if (state_change != statedata.state[i][1]) {
+        if (i == 0 || statedata.state[i][1] != statedata.state[i-1][1]) {
           door_status[statedata.state[i][0]] = statedata.state[i][1];
-          state_change = statedata.state[i][1];
         }
       }
     });
+    // Sort door data events on time. Needed if you have more than one door
     $.each(Object.keys(door_status).sort(), function(counter,change_time) {
       update_door_messages((door_status[change_time] == 'open'), change_time);
     })
@@ -1363,7 +1339,6 @@ function loadDoorHistory() {
 function capitalizeFirstLetter(string) {
     return string[0].toUpperCase() + string.slice(1);
 }
-
 
 $(document).ready(function() {
   init_sidebar();
@@ -1389,7 +1364,7 @@ $(document).ready(function() {
       position: "absolute",
 	}).appendTo("body");
 
-  loadDoorHistory();
+  load_door_history();
   load_page('dashboard.html');
 
   setInterval(function() {

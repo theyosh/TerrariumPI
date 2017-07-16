@@ -13,7 +13,7 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content" style="display:none">
-            <p>{{_('Here you can configure your sensors.')}}</p>
+            <p>{{_('Here you can configure your sensors.')}} {{!_('Required fields are marked with \'%s\'.') % ('<span class="required">*</span>',)}}</p>
             <ul>
               <li>
                 <strong>{{_('Hardware')}}</strong>: {{!translations.get_translation('sensor_field_hardware')}}
@@ -110,8 +110,8 @@
                           </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12 form-group">
-                          <label for="sensor_[nr]_name">{{_('Name')}}</label>
-                          <input class="form-control" name="sensor_[nr]_name" placeholder="{{_('Name')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{!translations.get_translation('sensor_field_name')}}">
+                          <label for="sensor_[nr]_name">{{_('Name')}}</label> <span class="required">*</span>
+                          <input class="form-control" name="sensor_[nr]_name" placeholder="{{_('Name')}}" type="text" required="required" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{!translations.get_translation('sensor_field_name')}}">
                         </div>
                         <div class="col-md-1 col-sm-1 col-xs-12 form-group">
                           <label for="sensor_[nr]_alarm_min">{{_('Alarm min')}}</label>

@@ -13,7 +13,7 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content" style="display:none">
-            <p>{{_('Here you can configure your environment.')}}</p>
+            <p>{{_('Here you can configure your environment.')}} {{!_('Required fields are marked with \'%s\'.') % ('<span class="required">*</span>',)}}</p>
           </div>
         </div>
         <form action="/api/config/environment" class="form-horizontal form-label-left" data-parsley-validate="" method="put">

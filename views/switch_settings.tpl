@@ -13,7 +13,7 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content" style="display:none">
-            <p>{{_('Here you can configure your power switches.')}}</p>
+            <p>{{_('Here you can configure your power switches.')}} {{!_('Required fields are marked with \'%s\'.') % ('<span class="required">*</span>',)}}</p>
             <ul>
               <li>
                 <strong>{{_('Hardware')}}</strong>: {{!translations.get_translation('switch_field_hardware')}}
@@ -89,8 +89,8 @@
                           <input class="form-control" name="switch_[nr]_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-12 form-group">
-                          <label for="switch_[nr]_name">{{_('Name')}}</label>
-                          <input class="form-control" name="switch_[nr]_name" placeholder="{{_('Name')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_name')}}">
+                          <label for="switch_[nr]_name">{{_('Name')}}</label> <span class="required">*</span>
+                          <input class="form-control" name="switch_[nr]_name" placeholder="{{_('Name')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_name')}}">
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                           <label for="switch_[nr]_power_wattage">{{_('Power usage in Watt')}}</label>
@@ -122,7 +122,7 @@
             });
             $.get($('form').attr('action'),function(data){
               $.each(data.switches, function(index,power_switch) {
-                // Clone empty sensor row....
+                // Clone empty switch row....
                 add_switch_row(power_switch.id,
                                power_switch.hardwaretype,
                                power_switch.address,

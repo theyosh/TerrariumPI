@@ -13,7 +13,7 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content" style="display:none">
-            <p>{{_('Here you can configure your TerrariumPI server.')}}</p>
+            <p>{{_('Here you can configure your TerrariumPI server.')}} {{!_('Required fields are marked with \'%s\'.') % ('<span class="required">*</span>',)}}</p>
           </div>
         </div>
         <div class="row">

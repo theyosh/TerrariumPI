@@ -13,7 +13,7 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content" style="display:none">
-            <p>{{_('Here you can configure your doors.')}}</p>
+            <p>{{_('Here you can configure your doors.')}} {{!_('Required fields are marked with \'%s\'.') % ('<span class="required">*</span>',)}}</p>
             <ul>
               <li>
                 <strong>{{_('Hardware')}}</strong>: {{!translations.get_translation('door_field_hardware')}}
@@ -79,8 +79,8 @@
                           <input class="form-control" name="door_[nr]_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
                         </div>
                         <div class="col-md-5 col-sm-5 col-xs-12 form-group">
-                          <label for="door_[nr]_name">{{_('Name')}}</label>
-                          <input class="form-control" name="door_[nr]_name" placeholder="{{_('Name')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('door_field_name')}}">
+                          <label for="door_[nr]_name">{{_('Name')}}</label> <span class="required">*</span>
+                          <input class="form-control" name="door_[nr]_name" placeholder="{{_('Name')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('door_field_name')}}">
                         </div>
                       </div>
                     </div>

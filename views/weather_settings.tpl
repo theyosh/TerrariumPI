@@ -13,7 +13,7 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content" style="display:none">
-            <p>{{_('Here you can configure the weather settings.')}}</p>
+            <p>{{_('Here you can configure the weather settings.')}} {{!_('Required fields are marked with \'%s\'.') % ('<span class="required">*</span>',)}}</p>
             <ul>
               <li>
                 <strong>{{_('Location')}}</strong>: {{!translations.get_translation('weather_field_location')}}
