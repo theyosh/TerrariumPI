@@ -1,9 +1,37 @@
 Changelog
 =========
 
+2.4.2 (2017-07-16)
+------------
+
+**New**
+- Add version checker. [TheYOSH]
+- Add hardware documentation. [TheYOSH]
+- Add switch GPIO errors to logfile. [TheYOSH]
+
+**Fixes**
+- Fix webcam warmup time variable. [TheYOSH]
+- Helpsections are by default closed now. Fixed multiple clicks loaded.
+  [TheYOSH]
+- Fixed adding sensors and switches to the system. [TheYOSH]
+- Fix door status overview page. [TheYOSH]
+
+**Updates**
+- Update version number. [TheYOSH]
+- Update language. [TheYOSH]
+- Update information page. [TheYOSH]
+- Updated required fields. [TheYOSH]
+- Update weather logging. [TheYOSH]
+- Update OWFS port setting. Now OWFS can be disabled by setting the OWFS
+  port to 0. [TheYOSH]
+
+**Other**
+- Removed software page. [TheYOSH]
+- Remove empty lines. [TheYOSH]
+
 
 2.4.1 (2017-07-15)
-----------------
+------------------
 
 **New**
 - Add js script for translations. [TheYOSH]
@@ -22,11 +50,13 @@ Changelog
 - Fix spelling typos. [TheYOSH]
 
 **Updates**
+- Update changelog. [TheYOSH]
 - Update US language. [TheYOSH]
 - Updated system form fields. [TheYOSH]
 - Update translations form fields. [TheYOSH]
 
 **Other**
+- Bla. [TheYOSH]
 - Rewritten environment code. Reduces a lot of code. [TheYOSH]
 - Small changes. [TheYOSH]
 - Remove w1 support for switches. [TheYOSH]
@@ -98,6 +128,7 @@ Changelog
 - Fix door history. [TheYOSH]
 
 **Updates**
+- Update changelog. [TheYOSH]
 - Update readme. [TheYOSH]
 - Update readme for GPIO relay board. [TheYOSH]
 - Revert UX updates. [TheYOSH]
