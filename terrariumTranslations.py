@@ -62,7 +62,7 @@ class terrariumTranslations():
     self.translations['environment_field_lights_on'] = _('Enter the time when the light should be put on. Only available when running in \'%s\' mode.') % _('Timer')
     self.translations['environment_field_lights_off'] = _('Enter the time when the lights should be put off. Only available when running in \'%s\' mode.') % _('Timer')
     self.translations['environment_field_lights_max_hours'] = _('Enter the maximum amount of lights time in hours. When the time between on and off is more then this maximum, the on and off time will be shifted more to each other.')
-    self.translations['environment_field_lights_min_hours'] = _('Enter the minimal amount of lights time in hours. When the time between on and off is less then this amount of hours, the on and off time will be widened until the minimum amount of hours entered here.')
+    self.translations['environment_field_lights_min_hours'] = _('Enter the minimum amount of lights time in hours. When the time between on and off is less then this amount of hours, the on and off time will be widened until the minimum amount of hours entered here.')
     self.translations['environment_field_lights_hour_shift'] = _('Enter the amount of hours that the lights should shift. Is only needed when running in the \'%s\' mode. Enter a positive number for adding hours to the start time. Use negative numbers for subtracting from the start time.') % _('Weather')
     self.translations['environment_field_lights_power_switches'] = _('Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the lights. Select all needed switches below.')
 

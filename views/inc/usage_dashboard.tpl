@@ -131,14 +131,14 @@
                         </p>
                         <h4><i class="fa fa-tint"></i> {{_('Sprayer')}}</h4>
                         <p>
-                          The sprayer part give the basic information about how the spray system is configured. The spray system uses humidity sensors to determen the current and minimal humidity value. When the current value is below the minimal value a warning sign (<span aria-hidden="true" class="glyphicon glyphicon-warning-sign red"></span>) will be shown. There is no mode, the spray system just works on sensor data.<br />
+                          The sprayer part give the basic information about how the spray system is configured. The spray system uses humidity sensors to determen the current and minimum humidity value. When the current value is below the minimum value a warning sign (<span aria-hidden="true" class="glyphicon glyphicon-warning-sign red"></span>) will be shown. There is no mode, the spray system just works on sensor data.<br />
                           The state indicator is either green or red. Green means that it is switched on. When it is red, the sprayer is switched of<br />
                           The current value shows the current humidity in percentage.<br />
                           The alarm min value shows the lowest value that is valid. When the current value become less then the alarm min value, an alarm message will be shown and the trigger to spraying is activated.
                         </p>
                         <h4><i class="fa fa-fire"></i> {{_('Heater')}}</h4>
                         <p>
-                          The heater part give the basic information about how the heating system is configured. The heating system uses temperature sensors to determen the current, minimal and maximun temperature value. When the current value is outside the minimal or maximum value a warning sign (<span aria-hidden="true" class="glyphicon glyphicon-warning-sign red"></span>) will be shown.<br />
+                          The heater part give the basic information about how the heating system is configured. The heating system uses temperature sensors to determen the current, minimum and maximun temperature value. When the current value is outside the minimum or maximum value a warning sign (<span aria-hidden="true" class="glyphicon glyphicon-warning-sign red"></span>) will be shown.<br />
                           There are three modees available. 'Clock', 'Weather', 'Sensor'.<br />
                           The state indicator is either green or red. Green means that it is switched on. When it is red, the heater is switched of<br />
                           The current value shows the current temperature in degress.<br />
@@ -148,8 +148,8 @@
                       </div>
                       <div class="tab-pane" id="usage-tab-dashboard-graphs">
                         <h3 class="lead">{{_('Graphs')}}</h3>
-                        <p>The graphs on the home are combined graphs from all temperature and humidity sensors. The gauge meters are realtime and show the current value. The historical graphs shows also the minimal and maximun value and will be updated once every 5 minutes.</p>
-                        <p>Every sensor has his own type and a minimal and maximum value. To get the graph data all the data is combined and devided by the amount of sensors. This way the average of the sensors is used.</p>
+                        <p>The graphs on the home are combined graphs from all temperature and humidity sensors. The gauge meters are realtime and show the current value. The historical graphs shows also the minimum and maximun value and will be updated once every 5 minutes.</p>
+                        <p>Every sensor has his own type and a minimum and maximum value. To get the graph data all the data is combined and devided by the amount of sensors. This way the average of the sensors is used.</p>
                         <img src="static/images/documentation/dashboard_graphs.gif" alt="Dashboard top indicators online screenshot" />
                         <div class="row">
                           <h4><span aria-hidden="true" class="glyphicon glyphicon-tint"></span>/<span aria-hidden="true" class="glyphicon glyphicon-fire"></span> </span> {{_('Type')}}</h4>
@@ -170,7 +170,7 @@
                         <div class="row">
                           <h4><span class="badge bg-red">{{_('warning')}}</span> {{_('warning')}}</h4>
                           <p>
-                            When the current value is outside the minimal of maximum value a red warning badge is shown.
+                            When the current value is outside the minimum of maximum value a red warning badge is shown.
                           </p>
                         </div>
                         <div class="row">

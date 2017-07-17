@@ -62,15 +62,15 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_max_hours">{{_('Maximal lights hours')}} <span class="required">*</span></label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_max_hours">{{_('Maximum lights hours')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="light_max_hours" required="required" type="text" placeholder="{{_('Maximal lights hours')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_max_hours')}}">
+                      <input class="form-control col-md-7 col-xs-12" name="light_max_hours" required="required" type="text" placeholder="{{_('Maximum lights hours')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_max_hours')}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_min_hours">{{_('Minimal light hours')}} <span class="required">*</span></label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_min_hours">{{_('Minimum light hours')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="light_min_hours" required="required" type="text" placeholder="{{_('Minimal light hours')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_min_hours')}}">
+                      <input class="form-control col-md-7 col-xs-12" name="light_min_hours" required="required" type="text" placeholder="{{_('Minimum light hours')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_min_hours')}}">
                     </div>
                   </div>
                   <div class="form-group">

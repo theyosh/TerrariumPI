@@ -56,7 +56,7 @@ class terrariumSensor:
     self.last_update = datetime.fromtimestamp(0)
     self.update_timeout = 30 #TODO: Config setting
 
-    logger.info('Loaded %s %s sensor \'%s\' on location %s with minimal value %.2f%s, maximum value %.2f%s, alarm low value %.2f%s, alarm high value %.2f%s' %
+    logger.info('Loaded %s %s sensor \'%s\' on location %s with minimum value %.2f%s, maximum value %.2f%s, alarm low value %.2f%s, alarm high value %.2f%s' %
                 (self.get_hardware_type(),
                  self.get_type(),
                  self.get_name(),
