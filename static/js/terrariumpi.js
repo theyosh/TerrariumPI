@@ -1346,6 +1346,7 @@ function version_check() {
 
     var latest_version = data.tag_name.replace(/\./g,'') * 1;
     var current_version = globals.current_version.replace(/\./g,'') * 1;
+    if (latest_version < 100) latest_version *= 10;
     if (current_version < 100) current_version *= 10;
 
     if (current_version < latest_version) {
