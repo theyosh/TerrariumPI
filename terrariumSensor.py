@@ -175,11 +175,12 @@ class terrariumSensor:
     if now - self.last_update > timedelta(seconds=self.update_timeout) or force:
       logger.debug('Updating %s %s sensor \'%s\'' % (self.get_hardware_type(),self.get_type(), self.get_name()))
       old_current = self.get_current()
+      current = None
       try:
         starttime = time.time()
         if 'temperature' == self.get_type():
           if self.get_hardware_type() == 'owfs':
-            self.current = float(self.sensor.temperature)
+            current = float(self.sensor.temperature)
           elif self.get_hardware_type() == 'w1':
             data = ''
             with open(terrariumSensor.w1_base_path + self.get_address() + '/w1_slave', 'r') as w1data:
@@ -189,27 +190,38 @@ class terrariumSensor:
             if w1data:
               # Found data
               temperature = float(w1data.group('value')) / 1000
-              self.current = float(temperature)
+              current = float(temperature)
           elif self.get_hardware_type() in terrariumSensor.valid_dht_sensors.keys():
             humidity, temperature = self.sensor.read_retry(terrariumSensor.valid_dht_sensors[self.get_hardware_type()], self.sensor_address)
-            self.current = float(temperature)
+            current = float(temperature)
         elif 'humidity' == self.get_type():
           if self.get_hardware_type() == 'owfs':
-            self.current = float(self.sensor.humidity)
+            current = float(self.sensor.humidity)
           elif self.get_hardware_type() == 'w1':
             # Not tested / No hardware to test with
             pass
           elif self.get_hardware_type() in terrariumSensor.valid_dht_sensors.keys():
             humidity, temperature = self.sensor.read_retry(terrariumSensor.valid_dht_sensors[self.get_hardware_type()], self.sensor_address)
-            self.current = float(humidity)
-        self.last_update = now
-        logger.info('Updated %s sensor \'%s\' from %.2f%s to %.2f%s in %.5f seconds' % (self.get_type(),
-                                                                                        self.get_name(),
-                                                                                        old_current,
-                                                                                        self.get_indicator(),
-                                                                                        self.get_current(),
-                                                                                        self.get_indicator(),
-                                                                                        time.time()-starttime))
+            current = float(humidity)
+
+        if current is None or not (self.get_limit_min() < current < self.get_limit_max()):
+          # Invalid current value.... log and ingore
+          logger.warn('Error on %s sensor \'%s\'! Got invalid value %f%s in %.5f seconds' % (self.get_type(),
+                                                                                             self.get_name(),
+                                                                                             current,
+                                                                                             self.get_indicator(),
+                                                                                             time.time()-starttime))
+
+        else:
+          self.current = current
+          self.last_update = now
+          logger.info('Updated %s sensor \'%s\' from %.2f%s to %.2f%s in %.5f seconds' % (self.get_type(),
+                                                                                          self.get_name(),
+                                                                                          old_current,
+                                                                                          self.get_indicator(),
+                                                                                          self.get_current(),
+                                                                                          self.get_indicator(),
+                                                                                          time.time()-starttime))
       except Exception, err:
         logger.error('Error updating %s %s sensor \'%s\' with error: %s' % (self.get_hardware_type(),
                                                                             self.get_type(),
