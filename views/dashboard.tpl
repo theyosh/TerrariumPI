@@ -233,10 +233,10 @@
                 </div>
                 <div class="x_content">
                   <div class="col-md-4 col-sm-5 col-xs-12">
-                    <div class="sidebar-widget">
+                    <div class="sidebar-widget text-center">
                       <canvas class="gauge"></canvas>
                       <div class="goal-wrapper">
-                        <span class="gauge-value pull-left">...</span> <span class="gauge-value pull-left">%</span>
+                        <span class="gauge-value">...</span> <span>%</span>
                       </div>
                     </div>
                   </div>
@@ -285,10 +285,10 @@
                 </div>
                 <div class="x_content">
                   <div class="col-md-4 col-sm-5 col-xs-12">
-                    <div class="sidebar-widget">
+                    <div class="sidebar-widget text-center">
                       <canvas class="gauge"></canvas>
                       <div class="goal-wrapper">
-                        <span class="gauge-value pull-left">...</span> <span class="gauge-value pull-left">°C</span>
+                        <span class="gauge-value">...</span> <span>°C</span>
                       </div>
                     </div>
                   </div>

@@ -14,17 +14,10 @@ td {
 span.select2.select2-container {
   width: 100% !important;
 }
-
 canvas.gauge {
-  width: 100% !important;
-  height: 100% !important;
+  max-width: 110% !important;
+  max-height: 100% !important;
 }
-
-.goal-wrapper {
-  padding-left: 45%;
-  font-size: 1.4em;
-}
-
 .sidebar-footer a {
   height: 35px;
 }
@@ -42,6 +35,15 @@ canvas.gauge {
 
 .missing-required {
   border: solid 1px red;
+}
+
+.history_graph.loading {
+  text-align: center;
+
+}
+
+.history_graph.loading span.glyphicon {
+  font-size: 100%;
 }
 
 footer {

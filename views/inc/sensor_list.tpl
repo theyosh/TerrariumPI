@@ -48,10 +48,10 @@
               </div>
               <div class="x_content">
                 <div class="col-md-3 col-sm-4 col-xs-12">
-                  <div class="sidebar-widget">
+                  <div class="sidebar-widget text-center">
                     <canvas class="gauge"></canvas>
                     <div class="goal-wrapper">
-                      <span class="gauge-value pull-left">...</span> <span class="gauge-value pull-left">{{sensor_indicator}}</span>
+                      <span class="gauge-value">...</span> <span>{{sensor_indicator}}</span>
                     </div>
                   </div>
                 </div>
