@@ -118,7 +118,7 @@ class terrariumWebserver():
   def __static_file(self,filename, root = 'static'):
     if filename == 'js/terrariumpi.js':
       response.headers['Content-Type'] = 'application/javascript; charset=UTF-8'
-      response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(days=self.__caching_days)).strftime('%a, %d %b %Y %H:%M:%S GMT')
+      response.headers['Expires'] = (datetime.datetime.utcnow() + datetime.timedelta(days=self.__caching_days)).strftime('%a, %d %b %Y %H:%M:%S GMT')
       return template(filename,template_lookup=[root])
 
     staticfile = static_file(filename, root=root)
@@ -126,9 +126,9 @@ class terrariumWebserver():
       return staticfile
 
     if 'webcam' == root:
-      staticfile.add_header('Expires',datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S GMT'))
+      staticfile.add_header('Expires',datetime.datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
     else:
-      staticfile.add_header('Expires',(datetime.datetime.now() + datetime.timedelta(days=self.__caching_days)).strftime('%a, %d %b %Y %H:%M:%S GMT'))
+      staticfile.add_header('Expires',(datetime.datetime.utcnow() + datetime.timedelta(days=self.__caching_days)).strftime('%a, %d %b %Y %H:%M:%S GMT'))
 
     if staticfile.get_header('Last-Modified') is not None:
       staticfile.add_header('Etag',hashlib.md5(staticfile.get_header('Last-Modified')).hexdigest())
@@ -151,7 +151,7 @@ class terrariumWebserver():
     return result
 
   def __get_api_call(self,path):
-    response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(minutes=1)).strftime('%a, %d %b %Y %H:%M:%S GMT')
+    response.headers['Expires'] = (datetime.datetime.utcnow() + datetime.timedelta(minutes=1)).strftime('%a, %d %b %Y %H:%M:%S GMT')
 
     result = {}
     parameters = path.strip('/').split('/')
@@ -193,7 +193,7 @@ class terrariumWebserver():
       result = self.__terrariumEngine.get_system_stats()
 
     elif 'history' == action:
-      response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(minutes=5)).strftime('%a, %d %b %Y %H:%M:%S GMT')
+      response.headers['Expires'] = (datetime.datetime.utcnow() + datetime.timedelta(minutes=5)).strftime('%a, %d %b %Y %H:%M:%S GMT')
       result = self.__terrariumEngine.get_history(parameters)
 
     elif 'config' == action:
