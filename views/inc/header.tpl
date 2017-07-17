@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{lang}}">
+<html lang="{{lang[:2]}}">
 <head>
   <meta content="yes" name="apple-mobile-web-app-capable">
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type"><!-- Meta, title, CSS, favicons, etc. -->
