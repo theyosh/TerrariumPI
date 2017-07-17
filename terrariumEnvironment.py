@@ -163,7 +163,9 @@ class terrariumEnvironment():
       power_switches = self.cooler['power_switches']
 
     for switch_id in power_switches:
-      if state is None:
+      if switch_id not in self.power_switches:
+        is_on = False
+      elif state is None:
         is_on = is_on and self.power_switches[switch_id].is_on()
       else:
         if state:

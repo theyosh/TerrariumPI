@@ -101,18 +101,33 @@ class terrariumEngine():
     starttime = time.time()
     logger.info('%s terrariumPI switches' % ('Reloading' if reloading else 'Loading',))
     switch_config = self.config.get_power_switches()
-    self.power_switches = {}
+    if not reloading:
+      self.power_switches = {}
+
+    seen_switches = []
     for power_switch_config in switch_config:
-      power_switch = terrariumSwitch(
-        switch_config[power_switch_config]['id'],
-        switch_config[power_switch_config]['hardwaretype'],
-        switch_config[power_switch_config]['address'],
-        switch_config[power_switch_config]['name'],
-        switch_config[power_switch_config]['power_wattage'],
-        switch_config[power_switch_config]['water_flow'],
-        self.toggle_switch
-      )
-      self.power_switches[power_switch.get_id()] = power_switch
+      seen_switches.append(switch_config[power_switch_config]['id'])
+      if switch_config[power_switch_config]['id'] in self.power_switches:
+        # Update switch
+        self.power_switches[switch_config[power_switch_config]['id']].set_name(switch_config[power_switch_config]['name'])
+        self.power_switches[switch_config[power_switch_config]['id']].set_power_wattage(switch_config[power_switch_config]['power_wattage'])
+        self.power_switches[switch_config[power_switch_config]['id']].set_water_flow(switch_config[power_switch_config]['water_flow'])
+
+      else:
+        power_switch = terrariumSwitch(
+          switch_config[power_switch_config]['id'],
+          switch_config[power_switch_config]['hardwaretype'],
+          switch_config[power_switch_config]['address'],
+          switch_config[power_switch_config]['name'],
+          switch_config[power_switch_config]['power_wattage'],
+          switch_config[power_switch_config]['water_flow'],
+          self.toggle_switch
+        )
+        self.power_switches[power_switch.get_id()] = power_switch
+
+    for power_switch_id in set(self.power_switches) - set(seen_switches):
+      # clean up old deleted switches
+      del(self.power_switches[switch_config[power_switch_config]['id']])
 
     if reloading:
       self.environment.set_power_switches(self.power_switches)
