@@ -151,6 +151,8 @@ class terrariumWebserver():
     return result
 
   def __get_api_call(self,path):
+    response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(minutes=1)).strftime('%a, %d %b %Y %H:%M:%S GMT')
+
     result = {}
     parameters = path.strip('/').split('/')
 
@@ -191,6 +193,7 @@ class terrariumWebserver():
       result = self.__terrariumEngine.get_system_stats()
 
     elif 'history' == action:
+      response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(minutes=5)).strftime('%a, %d %b %Y %H:%M:%S GMT')
       result = self.__terrariumEngine.get_history(parameters)
 
     elif 'config' == action:
