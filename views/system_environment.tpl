@@ -114,7 +114,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Enabled during the night')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Enabled when lights are off')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sprayer_enable_during_night')}}">
                       <div class="btn-group" data-toggle="buttons">
                         <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="sprayer_night_enabled" type="radio" value="false"> {{_('Disabled')}}</label><label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="sprayer_night_enabled" type="radio" value="true"> {{_('Enabled')}}</label>
@@ -138,7 +138,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_spray_duration">{{_('Sprayer spray duration (seconds)')}} <span class="required">*</span></label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_spray_duration">{{_('Spray duration (seconds)')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control col-md-7 col-xs-12" name="sprayer_spray_duration" required="required" type="text" placeholder="{{_('Sprayer spray duration (seconds)')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sprayer_duration')}}">
                     </div>
@@ -187,7 +187,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Enabled during the day')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Enabled when lights are on')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_enable_during_day')}}">
                       <div class="btn-group" data-toggle="buttons">
                         <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="heater_day_enabled" type="radio" value="false"> {{_('Disabled')}}</label><label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="heater_day_enabled" type="radio" value="true"> {{_('Enabled')}}</label>
@@ -262,7 +262,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Enabled during the night')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Enabled when lights are off')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_cooler_enable_during_night')}}">
                       <div class="btn-group" data-toggle="buttons">
                         <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="cooler_night_enabled" type="radio" value="false"> {{_('Disabled')}}</label><label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="cooler_night_enabled" type="radio" value="true"> {{_('Enabled')}}</label>
