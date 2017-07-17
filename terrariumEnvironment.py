@@ -38,7 +38,7 @@ class terrariumEnvironment():
       self.light = {}
 
     self.light['enabled']        = False if 'enabled' not in self.light else (self.light['enabled'].lower() in ['true','on','1'])
-    self.light['modus']          = None  if 'modus' not in self.light else self.light['modus']
+    self.light['mode']           = None  if 'mode' not in self.light else self.light['mode']
     self.light['on']             = 0     if 'on' not in self.light else int(self.light['on'])
     self.light['off']            = 0     if 'off' not in self.light else int(self.light['off'])
     self.light['hours_shift']    = 0.0   if 'hours_shift' not in self.light else float(self.light['hours_shift'])
@@ -46,16 +46,12 @@ class terrariumEnvironment():
     self.light['max_hours']      = 0.0   if 'max_hours' not in self.light else float(self.light['max_hours'])
     self.light['power_switches'] = []    if ('power_switches' not in self.light or self.light['power_switches'] == '') else self.light['power_switches'].split(',')
 
-    if self.light['modus'] is None:
-      self.light['modus'] = 'disabled'
-
-
     self.sprayer = config['sprayer']
     if len(self.sprayer.keys()) == 0:
       self.sprayer = {}
 
     self.sprayer['enabled']        = False if 'enabled' not in self.sprayer else (self.sprayer['enabled'].lower() in ['true','on','1'])
-    self.sprayer['modus']          = 'sensor'
+    self.sprayer['mode']           = 'sensor'
     self.sprayer['night_enabled']  = False if 'night_enabled' not in self.sprayer else (self.sprayer['night_enabled'].lower() in ['true','on','1'])
     self.sprayer['spray_duration'] = 0.0   if 'spray_duration' not in self.sprayer else float(self.sprayer['spray_duration'])
     self.sprayer['spray_timeout']  = 0.0   if 'spray_timeout' not in self.sprayer else float(self.sprayer['spray_timeout'])
@@ -63,29 +59,24 @@ class terrariumEnvironment():
     self.sprayer['sensors']        = []    if ('sensors' not in self.sprayer or self.sprayer['sensors'] == '') else self.sprayer['sensors'].split(',')
     self.sprayer['lastaction']     = int(time.time())
 
-    if self.sprayer['modus'] is None:
-      self.sprayer['modus'] = 'disabled'
-
-
     self.heater = config['heater']
     if len(self.heater.keys()) == 0:
       self.heater = {}
 
     self.heater['enabled']        = False if 'enabled' not in self.heater else (self.heater['enabled'].lower() in ['true','on','1'])
-    self.heater['modus']          = None  if 'modus' not in self.heater else self.heater['modus']
+    self.heater['mode']           = None  if 'mode' not in self.heater else self.heater['mode']
     self.heater['on']             = 0     if 'on' not in self.heater else int(self.heater['on'])
     self.heater['off']            = 0     if 'off' not in self.heater else int(self.heater['off'])
     self.heater['day_enabled']    = False if 'day_enabled' not in self.heater else (self.heater['day_enabled'].lower() in ['true','on','1'])
     self.heater['power_switches'] = []    if ('power_switches' not in self.heater or self.heater['power_switches'] == '') else self.heater['power_switches'].split(',')
     self.heater['sensors']        = []    if ('sensors' not in self.heater or self.heater['sensors'] == '') else self.heater['sensors'].split(',')
 
-
     self.cooler = config['cooler']
     if len(self.cooler.keys()) == 0:
       self.cooler = {}
 
     self.cooler['enabled']        = False if 'enabled' not in self.cooler else (self.cooler['enabled'].lower() in ['true','on','1'])
-    self.cooler['modus']          = None  if 'modus' not in self.cooler else self.cooler['modus']
+    self.cooler['mode']           = None  if 'mode' not in self.cooler else self.cooler['mode']
     self.cooler['on']             = 0     if 'on' not in self.cooler else int(self.cooler['on'])
     self.cooler['off']            = 0     if 'off' not in self.cooler else int(self.cooler['off'])
     self.cooler['night_enabled']  = False if 'night_enabled' not in self.cooler else (self.cooler['night_enabled'].lower() in ['true','on','1'])
@@ -328,12 +319,16 @@ class terrariumEnvironment():
   def get_light_state(self):
     now = datetime.datetime.now()
 
-    data = {'on' : datetime.datetime.fromtimestamp(0), 'off' : datetime.datetime.fromtimestamp(0), 'modus' : self.light['modus'], 'enabled' : self.light['enabled']}
-    if 'weather' == data['modus']:
+    data = {'on' : datetime.datetime.fromtimestamp(0),
+            'off' : datetime.datetime.fromtimestamp(0),
+            'mode' : self.light['mode'],
+            'enabled' : self.light['enabled']}
+
+    if 'weather' == data['mode']:
       data['on'] = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['rise'])
       data['off'] = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['set'])
 
-    elif 'timer' == data['modus']:
+    elif 'timer' == data['mode']:
       data['on'] = datetime.datetime.fromtimestamp(self.light['on'])
       data['off'] = datetime.datetime.fromtimestamp(self.light['off'])
 

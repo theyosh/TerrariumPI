@@ -98,7 +98,7 @@ class terrariumCollector():
 
   def __log_data(self,type,id,newdata):
     if self.__recovery:
-      logger.warn('TerrariumPI Collecter is in recovery modus. Cannot store new logging data!')
+      logger.warn('TerrariumPI Collecter is in recovery mode. Cannot store new logging data!')
       return
 
     now = int(time.time())
@@ -140,7 +140,7 @@ class terrariumCollector():
     # Based on: http://www.dosomethinghere.com/2013/02/20/fixing-the-sqlite-error-the-database-disk-image-is-malformed/
     # Enable recovery status
     self.__recovery = True
-    logger.warn('TTerrariumPI Collecter recovery modus is starting! %s', (self.__recovery,))
+    logger.warn('TTerrariumPI Collecter recovery mode is starting! %s', (self.__recovery,))
 
     # Create empty sql dump variable
     sqldump = ''
@@ -152,23 +152,23 @@ class terrariumCollector():
         sqldump += line + "\n"
         f.write('%s\n' % line)
 
-    logger.warn('TerrariumPI Collecter recovery modus created SQL dump of %s lines and %s bytes!', (lines,strlen(sqldump),))
+    logger.warn('TerrariumPI Collecter recovery mode created SQL dump of %s lines and %s bytes!', (lines,strlen(sqldump),))
 
     # Delete broken db
     os.remove(terrariumCollector.database)
-    logger.warn('TerrariumPI Collecter recovery modus deleted faulty database from disk %s', (terrariumCollector.database,))
+    logger.warn('TerrariumPI Collecter recovery mode deleted faulty database from disk %s', (terrariumCollector.database,))
 
     # Reconnect will recreate the db
-    logger.warn('TerrariumPI Collecter recovery modus starts reconnecting database to create a new clean database at %s', (terrariumCollector.database,))
+    logger.warn('TerrariumPI Collecter recovery mode starts reconnecting database to create a new clean database at %s', (terrariumCollector.database,))
     self.__connect()
     cur = self.db.cursor()
     # Load the SQL data back to db
     cur.executescript(sqldump)
-    logger.warn('TerrariumPI Collecter recovery modus restored the old data in a new database. %s', (terrariumCollector.database,))
+    logger.warn('TerrariumPI Collecter recovery mode restored the old data in a new database. %s', (terrariumCollector.database,))
 
-    # Return to normal modus
+    # Return to normal mode
     self.__recovery = False
-    logger.warn('TerrariumPI Collecter recovery modus is finished! %s', (self.__recovery,))
+    logger.warn('TerrariumPI Collecter recovery mode is finished! %s', (self.__recovery,))
 
   def log_switch_data(self,switch):
     switch_id = switch['id']
@@ -200,7 +200,7 @@ class terrariumCollector():
 
   def log_total_power_and_water_usage(self,pi_wattage):
     if self.__recovery:
-      logger.warn('TerrariumPI Collecter is in recovery modus. Cannot store new power and water total usage!')
+      logger.warn('TerrariumPI Collecter is in recovery mode. Cannot store new power and water total usage!')
       return
 
     today = int(time.time())

@@ -80,7 +80,7 @@
                 </div>
                 <div class="x_content">
                   <div class="row environment_light">
-                    <h4><span class="fa fa-lightbulb-o"></span> {{_('Lights')}} <small>{{_('modus')}}: <span>{{_('disabled')}}</span></small></h4>
+                    <h4><span class="fa fa-lightbulb-o"></span> {{_('Lights')}} <small>{{_('mode')}}: <span>{{_('disabled')}}</span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
@@ -109,7 +109,7 @@
                     </table>
                   </div>
                   <div class="row environment_sprayer">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-tint"></i> {{_('Sprayer')}} <small>{{_('modus')}}: <span>{{_('disabled')}}</span></small></h4>
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-tint"></i> {{_('Sprayer')}} <small>{{_('mode')}}: <span>{{_('disabled')}}</span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
@@ -132,7 +132,7 @@
                     </table>
                   </div>
                   <div class="row environment_heater">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-fire"></i> {{_('Heater')}} <small>{{_('modus')}}: <span>{{_('disabled')}}</span></small></h4>
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-fire"></i> {{_('Heater')}} <small>{{_('mode')}}: <span>{{_('disabled')}}</span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
@@ -161,7 +161,7 @@
                     </table>
                   </div>
                   <div class="row environment_cooler">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-flag-o"></i> {{_('Cooler')}} <small>{{_('modus')}}: <span>{{_('disabled')}}</span></small></h4>
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-flag-o"></i> {{_('Cooler')}} <small>{{_('mode')}}: <span>{{_('disabled')}}</span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>

@@ -39,10 +39,10 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_modus">{{_('Light modus')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_mode">{{_('Light mode')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_modus')}}">
-                        <select class="form-control" name="light_modus" tabindex="-1" placeholder="{{_('Select an option')}}">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_mode')}}">
+                        <select class="form-control" name="light_mode" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="timer">{{_('Timer')}}</option>
                           <option value="weather">{{_('Weather')}}</option>
                         </select>
@@ -122,10 +122,10 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_modus">{{_('Sprayer modus')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_mode">{{_('Sprayer mode')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sprayer_modus')}}">
-                        <select class="form-control" name="sprayer_modus" tabindex="-1" placeholder="{{_('Select an option')}}">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sprayer_mode')}}">
+                        <select class="form-control" name="sprayer_mode" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="sensor" selected="selected">{{_('Sensor')}}</option>
                         </select>
                       </div>
@@ -195,10 +195,10 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_modus">{{_('Heater modus')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_mode">{{_('Heater mode')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_modus')}}">
-                        <select class="form-control" name="heater_modus" tabindex="-1" placeholder="{{_('Select an option')}}">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_mode')}}">
+                        <select class="form-control" name="heater_mode" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="timer">{{_('Timer')}}</option>
                           <option value="weather">{{_('Weather')}}</option>
                           <option value="sensor">{{_('Sensor')}}</option>
@@ -270,10 +270,10 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cooler_modus">{{_('Cooler modus')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cooler_mode">{{_('Cooler mode')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_cooler_modus')}}">
-                        <select class="form-control" name="cooler_modus" tabindex="-1" placeholder="{{_('Select an option')}}">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_cooler_mode')}}">
+                        <select class="form-control" name="cooler_mode" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="timer">{{_('Timer')}}</option>
                           <option value="weather">{{_('Weather')}}</option>
                           <option value="sensor">{{_('Sensor')}}</option>
@@ -338,12 +338,12 @@
               $(this).find('label:not(.active) > input[type="radio"]').attr('disabled','disabled');
             });
 
-            $('select[name$="_modus"]').select2({
+            $('select[name$="_mode"]').select2({
               placeholder: '{{_('Select an option')}}',
               allowClear: false,
               minimumResultsForSearch: Infinity
             }).on('change',function() {
-              var part = this.name.replace('_modus','')
+              var part = this.name.replace('_mode','')
               switch (this.value) {
                 case 'timer':
                   $('input[name="' + part + '_on"]').removeAttr('readonly').removeAttr('disabled');

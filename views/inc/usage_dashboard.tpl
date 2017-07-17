@@ -123,7 +123,7 @@
                         <p>When a part is active the title is in color. If the title is gray that part is than not running or configured.</p>
                         <h4><span class="fa fa-lightbulb-o"></span> {{_('Lights')}}</h4>
                         <p>
-                          The lights part give the basic information about how the lightsystem is configured. It shows the chosen modus out of 'clock' or 'weather'. There are no triggers or warnings used by the lightsystem.<br />
+                          The lights part give the basic information about how the lightsystem is configured. It shows the chosen mode out of 'clock' or 'weather'. There are no triggers or warnings used by the lightsystem.<br />
                           The state indicator is either green or red. Green means that it is switched on. When it is red, the lights are switched of<br />
                           The on value is the timestamp when the lights are turned on.<br />
                           The off valus is the timestamp when the lights will be turned off.<br />
@@ -131,7 +131,7 @@
                         </p>
                         <h4><i class="fa fa-tint"></i> {{_('Sprayer')}}</h4>
                         <p>
-                          The sprayer part give the basic information about how the spray system is configured. The spray system uses humidity sensors to determen the current and minimal humidity value. When the current value is below the minimal value a warning sign (<span aria-hidden="true" class="glyphicon glyphicon-warning-sign red"></span>) will be shown. There is no modus, the spray system just works on sensor data.<br />
+                          The sprayer part give the basic information about how the spray system is configured. The spray system uses humidity sensors to determen the current and minimal humidity value. When the current value is below the minimal value a warning sign (<span aria-hidden="true" class="glyphicon glyphicon-warning-sign red"></span>) will be shown. There is no mode, the spray system just works on sensor data.<br />
                           The state indicator is either green or red. Green means that it is switched on. When it is red, the sprayer is switched of<br />
                           The current value shows the current humidity in percentage.<br />
                           The alarm min value shows the lowest value that is valid. When the current value become less then the alarm min value, an alarm message will be shown and the trigger to spraying is activated.
@@ -139,7 +139,7 @@
                         <h4><i class="fa fa-fire"></i> {{_('Heater')}}</h4>
                         <p>
                           The heater part give the basic information about how the heating system is configured. The heating system uses temperature sensors to determen the current, minimal and maximun temperature value. When the current value is outside the minimal or maximum value a warning sign (<span aria-hidden="true" class="glyphicon glyphicon-warning-sign red"></span>) will be shown.<br />
-                          There are three moduses available. 'Clock', 'Weather', 'Sensor'.<br />
+                          There are three modees available. 'Clock', 'Weather', 'Sensor'.<br />
                           The state indicator is either green or red. Green means that it is switched on. When it is red, the heater is switched of<br />
                           The current value shows the current temperature in degress.<br />
                           The alarm min value shows the lowest value that is valid. When the current value become less then the alarm min value, an alarm message will be shown and the trigger to heating is activated.<br />

@@ -361,12 +361,14 @@ function update_dashboard_environment(name, value) {
     return;
   }
   var enabledColor = '';
+  var indicator = '°C';
   switch (name) {
     case 'light':
       enabledColor = 'orange';
       break;
     case 'sprayer':
       enabledColor = 'blue';
+      indicator = '%';
       break;
     case 'heater':
       enabledColor = 'red';
@@ -379,7 +381,7 @@ function update_dashboard_environment(name, value) {
   systempart.find('h4').removeClass('orange blue red')
                        .addClass(value.enabled ? enabledColor : '')
                        .attr('title', value.enabled ? "{{_('Enabled')}}" : "{{_('Disabled')}}");
-  systempart.find('h4 small span').text(value.modus);
+  systempart.find('h4 small span').text(value.mode);
 
   if (value.on !== undefined) {
     systempart.find('.on').text(moment(value.on * 1000).format('LT'));
@@ -389,13 +391,13 @@ function update_dashboard_environment(name, value) {
     systempart.find('.duration').text(moment.duration(Math.abs(value.off - value.on) * 1000).humanize());
   }
   if (value.current !== undefined) {
-    systempart.find('.current').text(value.current.toFixed(3) + ' °C');
+    systempart.find('.current').text(value.current.toFixed(3) + ' ' + indicator);
   }
   if (value.alarm_min !== undefined) {
-    systempart.find('.alarm_min').text(value.alarm_min.toFixed(3) + ' °C');
+    systempart.find('.alarm_min').text(value.alarm_min.toFixed(3) + ' ' + indicator);
   }
   if (value.alarm_max !== undefined) {
-    systempart.find('.alarm_max').text(value.alarm_max.toFixed(3) + ' °C');
+    systempart.find('.alarm_max').text(value.alarm_max.toFixed(3) + ' ' + indicator);
   }
   if (value.alarm !== undefined) {
     systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
