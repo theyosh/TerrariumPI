@@ -250,7 +250,7 @@ class terrariumEngine():
 
   # Weather part
   def set_weather_config(self,data):
-    self.weather.set_location(data['location'])
+    self.weather.set_source(data['location'])
     self.weather.set_windspeed_indicator(data['windspeed'])
     self.weather.set_temperature_indicator(data['temperature'])
 
