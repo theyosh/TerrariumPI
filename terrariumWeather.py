@@ -165,9 +165,9 @@ class terrariumWeatherWunderground():
   def __set_sunset(self,data):
     now = datetime.now()
     self.sunset = now.replace(hour=int(data['hour']), minute=int(data['minute']), second=0)
-    if now > self.sunset:
-      self.sunrise += timedelta(days=1)
-      self.sunset += timedelta(days=1)
+    #if now > self.sunset:
+    #  self.sunrise += timedelta(days=1)
+    #  self.sunset += timedelta(days=1)
 
   def __process_forecast_data(self,data):
     self.forecast = []
