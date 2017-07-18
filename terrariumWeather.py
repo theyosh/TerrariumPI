@@ -217,12 +217,17 @@ class terrariumWeatherWunderground():
     return copy.deepcopy(data)
 
 class terrariumWeather():
+  # Weather data expects temperature in celcius degrees and windspeed in meters per second
+  weather_update_timeout = 4 * 60 * 60 # In seconds (4 hours)
+
+  valid_temperature_indicators = ['c','f']
+  valid_windspeed_indicators = ['kmh','ms']
 
   valid_sources = {'yr.no'       : re.compile(r'^https?://(www.)?yr.no/place/(?P<country>[^/]+)/(?P<provance>[^/]+)/(?P<city>[^/]+/?)?', re.IGNORECASE),
                    'weather.com' : re.compile(r'^https?://api\.wunderground\.com/api/[^/]+/(?P<p1>[^/]+)/(?P<p2>[^/]+)/(?P<p3>[^/]+)/q/(?P<country>[^/]+)/(?P<city>[^/]+)\.json$', re.IGNORECASE)}
 
   def __init__(self, source,  windspeed  = 'kmh', temperature = 'C', callback = None):
-    logger.info('Create weather object')
+    logger.info('Initializing weather object')
     self.source   = None
     self.next_update = 0
     self.location = {'city' : '', 'country' : '', 'geo' : {'lat' : 0, 'long' : 0}}
@@ -244,12 +249,13 @@ class terrariumWeather():
         self.source = source
         self.type = source_type
 
-        if self.type == 'yr.no':
+        if self.get_type() == 'yr.no':
           self.weater_source = terrariumWeatherYRno(self.source)
-        elif self.type == 'weather.com':
+        elif self.get_type() == 'weather.com':
           self.weater_source = terrariumWeatherWunderground(self.source)
 
-        logger.info('Set weather to type %s based source to \'%s\'' % (self.type,self.source))
+        logger.info('Set weather to type \'%s\' based on source to \'%s\'' % (self.get_type(),
+                                                                              self.get_source()))
         return True
 
     logger.error('Setting weather source failed! The url \'%s\' is invalid' % source)
@@ -297,7 +303,8 @@ class terrariumWeather():
 
   def refresh(self):
     starttime = time.time()
-    logger.info('Refreshing weather data from %s' % self.type)
+    logger.info('Refreshing \'%s\' weather data from source \'%s\'' % (self.get_type(),
+                                                                   self.get_source()))
 
     self.sun['rise'] = self.weater_source.get_sunrise()
     self.sun['set'] = self.weater_source.get_sunset()
@@ -309,8 +316,9 @@ class terrariumWeather():
     self.week_forecast = self.weater_source.get_forecast('all')
     self.__update_weather_icons()
 
-    self.next_update = int(starttime) + 3600
-    logger.info('Done refreshing weather data in %.5f seconds. Next update after: %s' % (time.time() - starttime, datetime.fromtimestamp(self.next_update),))
+    self.next_update = int(starttime) + terrariumWeather.weather_update_timeout
+    logger.info('Done refreshing weather data in %.5f seconds. Next refresh after: %s' % (time.time() - starttime,
+                                                                                         datetime.fromtimestamp(self.next_update),))
 
   def update(self, socket = False):
     send_message = False
@@ -338,43 +346,54 @@ class terrariumWeather():
       self.callback(socket=True)
 
   def get_data(self):
-    data = copy.deepcopy({'city' :self.location,
+    data = copy.deepcopy({'city' : self.location,
                           'sun' : self.sun,
                           'day' : self.is_day(),
-                          'windspeed' : self.windspeed,
-                          'temperature' : self.temperature,
+                          'windspeed' : self.get_windspeed_indicator(),
+                          'temperature' : self.get_temperature_indicator(),
                           'hour_forecast' : self.hour_forecast,
                           'week_forecast' : self.week_forecast,
                           'credits': self.credits})
 
     for item in data['hour_forecast']:
-      item['wind_speed'] *= (3.6 if self.windspeed == 'kmh' else 1.0)
-      item['temperature'] = item['temperature'] if self.temperature == 'C' else 9.0 / 5.0 * item['temperature'] + 32.0
+      item['wind_speed'] *= (3.6 if self.get_windspeed_indicator() == 'kmh' else 1.0)
+      item['temperature'] = item['temperature'] if self.get_temperature_indicator() == 'c' else 9.0 / 5.0 * item['temperature'] + 32.0
 
     for item in data['week_forecast']:
-      item['wind_speed'] *= (3.6 if self.windspeed == 'kmh' else 1.0)
-      item['temperature'] = item['temperature'] if self.temperature == 'C' else 9.0 / 5.0 * item['temperature'] + 32.0
+      item['wind_speed'] *= (3.6 if self.get_windspeed_indicator() == 'kmh' else 1.0)
+      item['temperature'] = item['temperature'] if self.get_temperature_indicator() == 'c' else 9.0 / 5.0 * item['temperature'] + 32.0
 
     return data
 
   def get_config(self):
-    return {'location'    : self.source,
-            'windspeed'   : self.windspeed,
-            'temperature' : self.temperature,
-            'type'        : self.type}
+    return {'location'    : self.get_source(),
+            'windspeed'   : self.get_windspeed_indicator(),
+            'temperature' : self.get_temperature_indicator(),
+            'type'        : self.get_type()}
 
-  def set_location(self,url):
+  def get_type(self):
+    return self.type
+
+  def get_source(self):
+    return self.source
+
+  def set_soure(self,url):
     if self.__set_source(url):
-      # Start refresh in a thread, so it will not lockup the web interface / API call
-      thread.start_new_thread(self.refresh,)
+      self.refresh()
+
+  def get_windspeed_indicator(self):
+    return self.windspeed
 
   def set_windspeed_indicator(self,indicator):
-    if indicator in ['kmh','ms']:
-      self.windspeed = indicator
+    if indicator.lower() in terrariumWeather.valid_windspeed_indicators:
+      self.windspeed = indicator.lower()
+
+  def get_temperature_indicator(self):
+    return self.temperature.upper()
 
   def set_temperature_indicator(self,indicator):
-    if indicator.upper() in ['C','F']:
-      self.temperature = indicator.upper()
+    if indicator.lower() in terrariumWeather.valid_temperature_indicators:
+      self.temperature = indicator.lower()
 
   def is_day(self):
     return self.sun['rise'] < int(time.time()) < self.sun['set']
