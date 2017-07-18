@@ -235,8 +235,10 @@ class terrariumWeather():
     self.sun      = {'rise' : 0, 'set' : 0}
     self.hour_forecast = []
     self.week_forecast = []
-    self.windspeed = windspeed
-    self.temperature = temperature
+
+    self.set_windspeed_indicator(windspeed)
+    self.set_temperature_indicator(temperature)
+
     self.callback = callback
 
     if self.__set_source(source):
@@ -357,11 +359,11 @@ class terrariumWeather():
 
     for item in data['hour_forecast']:
       item['wind_speed'] *= (3.6 if self.get_windspeed_indicator() == 'kmh' else 1.0)
-      item['temperature'] = item['temperature'] if self.get_temperature_indicator() == 'c' else 9.0 / 5.0 * item['temperature'] + 32.0
+      item['temperature'] = item['temperature'] if self.get_temperature_indicator() == 'C' else 9.0 / 5.0 * item['temperature'] + 32.0
 
     for item in data['week_forecast']:
       item['wind_speed'] *= (3.6 if self.get_windspeed_indicator() == 'kmh' else 1.0)
-      item['temperature'] = item['temperature'] if self.get_temperature_indicator() == 'c' else 9.0 / 5.0 * item['temperature'] + 32.0
+      item['temperature'] = item['temperature'] if self.get_temperature_indicator() == 'C' else 9.0 / 5.0 * item['temperature'] + 32.0
 
     return data
 
