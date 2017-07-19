@@ -354,8 +354,14 @@
                   $('input[name="' + part + '_off"]').attr('readonly','readonly').removeAttr('disabled');
                   // Load current sun rise and sun set based on weather data
                   $.get('/api/weather',function(data){
-                    $('input[name="' + part + '_on"]').val(moment(data.sun.rise * 1000).format('LT'));
-                    $('input[name="' + part + '_off"]').val(moment(data.sun.set * 1000).format('LT'));
+                    if (part == 'heater') {
+                      // For heater we swap the times, because heater should not be running when it is 'day'
+                      $('input[name="' + part + '_on"]').val(moment(data.sun.set * 1000).format('LT'));
+                      $('input[name="' + part + '_off"]').val(moment(data.sun.rise * 1000).format('LT'));
+                    } else {
+                      $('input[name="' + part + '_on"]').val(moment(data.sun.rise * 1000).format('LT'));
+                      $('input[name="' + part + '_off"]').val(moment(data.sun.set * 1000).format('LT'));
+                    }
                   });
                   break
                 case 'sensor':
