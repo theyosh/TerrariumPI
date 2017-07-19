@@ -241,7 +241,6 @@ class terrariumEnvironment():
     state_data = {}
     average = {}
     state = False
-#    overrule_field = ''
 
     if part == 'light':
       state_data = self.light
@@ -250,17 +249,14 @@ class terrariumEnvironment():
       state_data = self.sprayer
       average = self.get_average_humidity()
       state = self.is_sprayer_on()
-#      overrule_field = 'night_enabled'
     elif part == 'heater':
       state_data = self.heater
       average = self.get_average_temperature()
       state = self.is_heater_on()
-#      overrule_field = 'day_enabled'
     elif part == 'cooler':
       state_data = self.cooler
       average = self.get_average_temperature()
       state = self.is_cooler_on()
-#      overrule_field = 'night_enabled'
 
     for key in state_data:
       data[key] = state_data[key]
