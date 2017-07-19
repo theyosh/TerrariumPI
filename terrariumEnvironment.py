@@ -278,6 +278,8 @@ class terrariumEnvironment():
                                                                                month=int(now.strftime('%m')),
                                                                                day=int(now.strftime('%d')))
 
+      print data
+
     if 'light' == part:
       # Duration check
       duration = data['off'] - data['on']

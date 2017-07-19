@@ -414,7 +414,7 @@
                     var config_field = $('form [name="' + index + '_' + name + '"]');
                     var config_value = value;
                     if (name == 'on' || name == 'off') {
-                      config_value = moment(config_value).format('LT');
+                      config_value = moment(config_value * 1000).format('LT');
                     }
                     if (config_field.attr('type') == 'text') {
                       config_field.val(config_value);
