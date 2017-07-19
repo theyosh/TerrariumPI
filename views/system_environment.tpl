@@ -408,7 +408,6 @@
             // Wait with loading the environment settings until all selectors are loaded
             if (switches_loaded && humidity_sensors_loaded && temperature_sensors_loaded) {
               $.get('/api/config/environment',function(data){
-                console.log(data);
                 $.each(data,function (index,type){
                   $.each(type,function(name,value) {
                     var config_field = $('form [name="' + index + '_' + name + '"]');
