@@ -1,8 +1,44 @@
 Changelog
 =========
 
-2.4.2 (2017-07-16)
+
+2.4.3 (2017-07-19)
 ------------
+
+**New**
+- Add caching headers for API calls - Now in UTC. [TheYOSH]
+- Add caching headers for API calls. [TheYOSH]
+
+**Fixes**
+- Fix timer times in environment settings page. [TheYOSH]
+- Temperature indicator fix. [TheYOSH]
+- Fixed weather sun rise and set times. [TheYOSH]
+- Fix update checker. [TheYOSH]
+- Fix wrong sensor reads. [TheYOSH]
+- Fix gauges. [TheYOSH]
+- Fix HTML5 language. [TheYOSH]
+- Fix missing weather icon for thunderstorm. [TheYOSH]
+
+**Updates**
+- Update version. [TheYOSH]
+- Updated environment engine to support weather and timer mode with or
+  without sensors for fine tuning. [TheYOSH]
+- Updated weather code. [TheYOSH]
+- Updated webcam code. [TheYOSH]
+- Updated field descriptions. [TheYOSH]
+- Updated switch loading so updating will not switch of existing
+  switches. [TheYOSH]
+
+**Other**
+- Remove JS debug. [TheYOSH]
+- Remove sunset and sunsrising shifting. [TheYOSH]
+- More proper English. [TheYOSH]
+- Refactor code to use proper English terms. Will require the renew the
+  environment settings. [TheYOSH]
+
+
+2.4.2 (2017-07-16)
+------------------
 
 **New**
 - Add version checker. [TheYOSH]
@@ -17,6 +53,7 @@ Changelog
 - Fix door status overview page. [TheYOSH]
 
 **Updates**
+- Update changelog. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update language. [TheYOSH]
 - Update information page. [TheYOSH]

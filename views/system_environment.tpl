@@ -354,8 +354,14 @@
                   $('input[name="' + part + '_off"]').attr('readonly','readonly').removeAttr('disabled');
                   // Load current sun rise and sun set based on weather data
                   $.get('/api/weather',function(data){
-                    $('input[name="' + part + '_on"]').val(moment(data.sun.rise * 1000).format('LT'));
-                    $('input[name="' + part + '_off"]').val(moment(data.sun.set * 1000).format('LT'));
+                    if (part == 'heater') {
+                      // For heater we swap the times, because heater should not be running when it is 'day'
+                      $('input[name="' + part + '_on"]').val(moment(data.sun.set * 1000).format('LT'));
+                      $('input[name="' + part + '_off"]').val(moment(data.sun.rise * 1000).format('LT'));
+                    } else {
+                      $('input[name="' + part + '_on"]').val(moment(data.sun.rise * 1000).format('LT'));
+                      $('input[name="' + part + '_off"]').val(moment(data.sun.set * 1000).format('LT'));
+                    }
                   });
                   break
                 case 'sensor':
@@ -402,13 +408,12 @@
             // Wait with loading the environment settings until all selectors are loaded
             if (switches_loaded && humidity_sensors_loaded && temperature_sensors_loaded) {
               $.get('/api/config/environment',function(data){
-                console.log(data);
                 $.each(data,function (index,type){
                   $.each(type,function(name,value) {
                     var config_field = $('form [name="' + index + '_' + name + '"]');
                     var config_value = value;
                     if (name == 'on' || name == 'off') {
-                      config_value = moment(config_value).format('LT');
+                      config_value = moment(config_value * 1000).format('LT');
                     }
                     if (config_field.attr('type') == 'text') {
                       config_field.val(config_value);
