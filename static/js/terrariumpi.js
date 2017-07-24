@@ -3,6 +3,7 @@
 var globals = {
   websocket: null,
   connection: 'ws' + (location.protocol == 'https:' ? 's' : '') + '://' + location.host + '/live',
+  temperature_indicator: 'C',
   gauges: [],
   webcams: [],
   graphs: {},
@@ -336,7 +337,7 @@ function update_weather(data) {
       graphdata.push([(value.to - ((value.to - value.from) / 2)) * 1000, value.temperature]);
       if (value.from - timestamp >= 3600 && day_counter < week_forecast_divs.length) {
         $(week_forecast_divs[day_counter]).find('.day').text(moment(value.from * 1000).format('ddd'));
-        $(week_forecast_divs[day_counter]).find('.degrees').text(value.temperature);
+        $(week_forecast_divs[day_counter]).find('.degrees').text(value.temperature.toFixed(1));
         $(week_forecast_divs[day_counter]).find('h5').html(value.wind_speed.toFixed(1) + ' <i>' + (data.windspeed === 'ms' ? '{{_('m/s')}}' : '{{_('Km/h')}}') + '</i>');
         $(week_forecast_divs[day_counter]).find('canvas').attr('title',value.weather);
         icons.set($(week_forecast_divs[day_counter]).find('canvas').attr('id'), value.icon);
@@ -840,7 +841,7 @@ function history_graph(name, data, type) {
             break;
 
           case 'weather':
-            val = val.toFixed(axis.tickDecimals) + ' °C';
+            val = val.toFixed(axis.tickDecimals) + ' °' + globals.temperature_indicator;
             break;
 
           case 'humidity':

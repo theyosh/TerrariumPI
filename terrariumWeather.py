@@ -376,7 +376,7 @@ class terrariumWeather():
   def get_source(self):
     return self.source
 
-  def set_soure(self,url):
+  def set_source(self,url):
     if self.__set_source(url):
       self.refresh()
 

@@ -147,6 +147,7 @@
         </div>
         <script type="text/javascript">
           $.get('/api/weather',function(data){
+            globals.temperature_indicator = data.temperature
             $('#weather_credits').append($('<a>').attr({'href': data.credits.url,
                                                         'target':'_blank',
                                                         'title' : data.credits.text})
