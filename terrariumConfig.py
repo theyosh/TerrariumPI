@@ -20,6 +20,7 @@ class terrariumConfig:
     self.__config = ConfigParser.SafeConfigParser()
     # Read defaults config file
     self.__config.readfp(open(self.__defaults_file))
+
     # Read new version number
     version = self.get_system()['version']
     # Read custom config file
@@ -27,7 +28,22 @@ class terrariumConfig:
     # Update version number
     self.__config.set('terrariumpi', 'version', str(version))
 
+    self.__upgrade_config()
+
   # Private functions
+  def __upgrade_config(self):
+    upgrade = False
+    temperature_indicator = self.__get_config('weather')
+    if 'temperature' in temperature_indicator:
+      self.__config.set('terrariumpi', 'temperature_indicator', str(temperature_indicator['temperature']))
+      self.__config.remove_option('weather','temperature')
+      # upgrade = True
+
+    if upgrade:
+      self.__save_config()
+      self.__config.read(self.__config_file)
+
+
   def __save_config(self):
     '''Write terrariumPI config to settings.cfg file'''
     with open(self.__config_file, 'wb') as configfile:
@@ -122,6 +138,10 @@ class terrariumConfig:
     config = self.get_system()
     return float(config['water_price'])
 
+  def get_temperature_indicator(self):
+    config = self.get_system()
+    return config['temperature_indicator'].upper()
+
   # Environment functions
   def save_environment(self,data):
     '''Save the terrariumPI environment config
@@ -165,10 +185,6 @@ class terrariumConfig:
   def get_weather_windspeed(self):
     data = self.get_weather()
     return data['windspeed'] if 'windspeed' in data else None
-
-  def get_weather_temperature(self):
-    data = self.get_weather()
-    return data['temperature'] if 'temperature' in data else None
   # End weather config functions
 
 

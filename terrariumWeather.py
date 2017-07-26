@@ -12,6 +12,8 @@ import urllib2
 import json
 import re
 
+from terrariumUtils import terrariumUtils
+
 from gevent import monkey, sleep
 monkey.patch_all()
 
@@ -79,17 +81,6 @@ class terrariumWeatherYRno():
       self.hour_forecast = copy.deepcopy(data)
     elif period == 'week':
       self.week_forecast = copy.deepcopy(data)
-
-  #def __set_sunrise(self,data):
-  #  now = datetime.now()
-  #  self.sunrise = now.replace(hour=int(data['hour']), minute=int(data['minute']), second=0)
-
-  #def __set_sunset(self,data):
-  #  now = datetime.now()
-  #  self.sunset = now.replace(hour=int(data['hour']), minute=int(data['minute']), second=0)
-  #  if now > self.sunset:
-  #    self.sunrise += timedelta(days=1)
-  #    self.sunset += timedelta(days=1)
 
   def get_city(self):
     self.__update()
@@ -217,13 +208,13 @@ class terrariumWeather():
   # Weather data expects temperature in celcius degrees and windspeed in meters per second
   weather_update_timeout = 4 * 60 * 60 # In seconds (4 hours)
 
-  valid_temperature_indicators = ['c','f']
+  valid_temperature_indicators = ['C','F']
   valid_windspeed_indicators = ['kmh','ms']
 
   valid_sources = {'yr.no'       : re.compile(r'^https?://(www.)?yr.no/place/(?P<country>[^/]+)/(?P<provance>[^/]+)/(?P<city>[^/]+/?)?', re.IGNORECASE),
                    'weather.com' : re.compile(r'^https?://api\.wunderground\.com/api/[^/]+/(?P<p1>[^/]+)/(?P<p2>[^/]+)/(?P<p3>[^/]+)/q/(?P<country>[^/]+)/(?P<city>[^/]+)\.json$', re.IGNORECASE)}
 
-  def __init__(self, source,  windspeed  = 'kmh', temperature = 'C', callback = None):
+  def __init__(self, source,  windspeed  = 'kmh', temperature_indicator = None, callback = None):
     logger.info('Initializing weather object')
     self.source   = None
     self.next_update = 0
@@ -234,7 +225,7 @@ class terrariumWeather():
     self.week_forecast = []
 
     self.set_windspeed_indicator(windspeed)
-    self.set_temperature_indicator(temperature)
+    self.set_temperature_indicator(temperature_indicator)
 
     self.callback = callback
 
@@ -349,25 +340,24 @@ class terrariumWeather():
                           'sun' : self.sun,
                           'day' : self.is_day(),
                           'windspeed' : self.get_windspeed_indicator(),
-                          'temperature' : self.get_temperature_indicator(),
+                          'temperature_indicator' : self.get_temperature_indicator(),
                           'hour_forecast' : self.hour_forecast,
                           'week_forecast' : self.week_forecast,
                           'credits': self.credits})
 
     for item in data['hour_forecast']:
       item['wind_speed'] *= (3.6 if self.get_windspeed_indicator() == 'kmh' else 1.0)
-      item['temperature'] = item['temperature'] if self.get_temperature_indicator() == 'C' else 9.0 / 5.0 * item['temperature'] + 32.0
+      item['temperature'] = item['temperature'] if self.get_temperature_indicator() == 'C' else terrariumUtils.to_fahrenheit(item['temperature'])
 
     for item in data['week_forecast']:
       item['wind_speed'] *= (3.6 if self.get_windspeed_indicator() == 'kmh' else 1.0)
-      item['temperature'] = item['temperature'] if self.get_temperature_indicator() == 'C' else 9.0 / 5.0 * item['temperature'] + 32.0
+      item['temperature'] = item['temperature'] if self.get_temperature_indicator() == 'C' else terrariumUtils.to_fahrenheit(item['temperature'])
 
     return data
 
   def get_config(self):
     return {'location'    : self.get_source(),
             'windspeed'   : self.get_windspeed_indicator(),
-            'temperature' : self.get_temperature_indicator(),
             'type'        : self.get_type()}
 
   def get_type(self):
@@ -388,11 +378,12 @@ class terrariumWeather():
       self.windspeed = indicator.lower()
 
   def get_temperature_indicator(self):
-    return self.temperature.upper()
+    # 'Realtime' callback to terrariumEngine for right indicator
+    return self.temperature_indicator().upper()
 
   def set_temperature_indicator(self,indicator):
-    if indicator.lower() in terrariumWeather.valid_temperature_indicators:
-      self.temperature = indicator.lower()
+    if indicator().upper() in terrariumWeather.valid_temperature_indicators:
+      self.temperature_indicator = indicator
 
   def is_day(self):
     return self.sun['rise'] < int(time.time()) < self.sun['set']

@@ -20,7 +20,6 @@ class terrariumTranslations():
     # Weather
     self.translations['weather_field_location'] = _('Holds the external source URL. Supported sources are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumWeather.valid_sources.keys()) + '</strong>')
     self.translations['weather_field_wind_speed'] = _('Choose the wind speed indicator. The software will recalculate to the chosen indicator.')
-    self.translations['weather_field_temperature'] = _('Choose the temperature indicator. The software will recalculate to the chosen indicator.')
     # End weather
 
     # Sensors
@@ -101,7 +100,8 @@ class terrariumTranslations():
     self.translations['system_field_pi_power'] = _('Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment.')
     self.translations['system_field_power_price'] = _('Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour).')
     self.translations['system_field_water_price'] = _('Holds the amount of euro/dollar per 1000 liters water.')
-    self.translations['system_field_hostname'] = _('Holds the host name or IP address on which the software will listen for connections. Enter 0.0.0.0 for all addresses to bind.')
+    self.translations['system_field_temperature_indicator'] = _('Choose the temperature indicator. The software will recalculate to the chosen indicator.')
+    self.translations['system_field_hostname'] = _('Holds the host name or IP address on which the software will listen for connections. Enter :: for all addresses to bind.')
     self.translations['system_field_port_number'] = _('Holds the port number on which the software is listening for connections.')
     self.translations['system_field_owfs_port'] = _('Holds the port number on which the OWFS software is running. Leave empty to disable OWFS support.')
     # End system

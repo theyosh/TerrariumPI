@@ -100,7 +100,7 @@
                   <div class="sidebar-widget text-center">
                     <canvas class="gauge"></canvas>
                     <div class="goal-wrapper">
-                      <span class="gauge-value">...</span> <span>°C</span>
+                      <span class="gauge-value">...</span> <span>°{{temperature_indicator}}</span>
                     </div>
                   </div>
                 </div>

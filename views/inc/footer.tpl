@@ -38,6 +38,7 @@
   <script type="text/javascript" src="/static/js/terrariumpi.js"></script>
   <script type="text/javascript">
     globals.current_version = '{{version}}';
+    globals.temperature_indicator = '{{temperature_indicator}}';
   </script>
 </body>
 </html>

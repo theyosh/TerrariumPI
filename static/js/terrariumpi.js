@@ -322,7 +322,7 @@ function update_weather(data) {
   });
   var weather_current = $('div#weather_today');
   if (weather_current.length == 1) {
-    weather_current.find('.status').html(moment(data.hour_forecast[0].from * 1000).format('[<b>]dddd[</b>,] LT') + ' <span> in <b>' + data.temperature + '</b></span>');
+    weather_current.find('.status').html(moment(data.hour_forecast[0].from * 1000).format('[<b>]dddd[</b>,] LT') + ' <span> in <b>°' + globals.temperature_indicator + '</b></span>');
     weather_current.find('h2').html(data.city.city + '<br><i>' + data.hour_forecast[0].weather + '</i>');
     weather_current.find('.sunrise').text(moment(data.sun.rise * 1000).format('LT')).parent().css('fontWeight', (data.day ? 'bold' : 'normal'));
     weather_current.find('.sunset').text(moment(data.sun.set * 1000).format('LT')).parent().css('fontWeight', (data.day ? 'normal' : 'bold'));
@@ -362,7 +362,7 @@ function update_dashboard_environment(name, value) {
     return;
   }
   var enabledColor = '';
-  var indicator = '°C';
+  var indicator = '°' + globals.temperature_indicator;
   switch (name) {
     case 'light':
       enabledColor = 'orange';
@@ -707,6 +707,7 @@ function sensor_gauge(name, data) {
       };
       // Init Gauge
       $('#' + name + ' .gauge').attr('done',1);
+      //$('#' + name + ' .goal-wrapper span:nth-child(2)').text('°' + globals.temperature_indicator);
       globals.gauges[name] = new Gauge($('#' + name + ' .gauge')[0]).setOptions(opts);
       globals.gauges[name].setTextField($('#' + name + ' .gauge-value')[0]);
       // Only set min and max only once. Else the gauge will flicker each data update
@@ -857,7 +858,7 @@ function history_graph(name, data, type) {
             break;
 
           default:
-            val = val.toFixed(axis.tickDecimals) + (type.indexOf('temperature') !== -1 ? ' °C' : ' %');
+            val = val.toFixed(axis.tickDecimals) + (type.indexOf('temperature') !== -1 ? ' °' + globals.temperature_indicator : ' %');
             break;
         }
         return val;
