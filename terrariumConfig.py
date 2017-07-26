@@ -37,7 +37,7 @@ class terrariumConfig:
     if 'temperature' in temperature_indicator:
       self.__config.set('terrariumpi', 'temperature_indicator', str(temperature_indicator['temperature']))
       self.__config.remove_option('weather','temperature')
-      # upgrade = True
+      upgrade = True
 
     if upgrade:
       self.__save_config()
