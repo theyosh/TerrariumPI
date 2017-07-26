@@ -55,8 +55,6 @@ class terrariumEngine():
     logger.info('Loading terrariumPI PI temperature indicator')
     self.temperature_indicator = self.config.get_temperature_indicator()
 
-    print 'Condfig: ' + self.temperature_indicator
-
     logger.info('Done loading terrariumPI PI temperature indicator')
 
     # Load Weather part
