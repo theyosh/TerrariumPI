@@ -140,7 +140,8 @@ div.modal div.row.webcam{
   cursor: pointer;
 }
 
-.power_switch.big {
+.power_switch.big,
+.fa.fa-lock.big {
   font-size: 11em;
 }
 
@@ -239,6 +240,8 @@ div.row.documentation img {
 .interactive_screenshot .click_area.hover {
   border: solid 1px #1ABB9C !important;
 }
+
+/* Dashboard */
 #usage_content .interactive_screenshot #screenshot_dashboard_top_indicators {
   left: 74%;
   top: 0%;
@@ -263,8 +266,9 @@ div.row.documentation img {
   left: 15.5%;
   width: 62.2%;
 }
+/* End dashboard */
 
-
+/* Weather */
 #usage_content .interactive_screenshot #screenshot_weather_forecast_current {
   top: 14.5%;
   height: 48.5%;
@@ -285,6 +289,117 @@ div.row.documentation img {
   left: 43.8%;
   width: 55.2%;
 }
+/* End weather */
+
+/* Sensors */
+#usage_content .interactive_screenshot #screenshot_sensors_current{
+  top: 21%;
+  height: 27%;
+  left: 15.5%;
+  width: 20%;
+}
+
+#usage_content .interactive_screenshot #screenshot_sensors_graph {
+  top: 21%;
+  height: 27%;
+  left: 36.5%;
+  width: 61%;
+}
+
+#usage_content .interactive_screenshot #screenshot_sensors_title {
+  top: 15%;
+  height: 5.5%;
+  left: 15.5%;
+  width: 82%;
+}
+
+
+#usage_content #currentvalue {
+
+}
+/* End sensors */
+
+/* Switches */
+#usage_content .interactive_screenshot #screenshot_switches_toggle{
+  top: 21%;
+  height: 27%;
+  left: 15.5%;
+  width: 20%;
+}
+
+#usage_content .interactive_screenshot #screenshot_switches_graph {
+  top: 21%;
+  height: 27%;
+  left: 36.5%;
+  width: 61%;
+}
+
+#usage_content .interactive_screenshot #screenshot_switches_title {
+  top: 15%;
+  height: 5.5%;
+  left: 15.5%;
+  width: 82%;
+}
+/* End switches */
+
+/* Doors */
+#usage_content .interactive_screenshot #screenshot_doors_status{
+  top: 21%;
+  height: 27%;
+  left: 15.5%;
+  width: 20%;
+}
+
+#usage_content .interactive_screenshot #screenshot_doors_graph {
+  top: 21%;
+  height: 27%;
+  left: 36.5%;
+  width: 61%;
+}
+
+#usage_content .interactive_screenshot #screenshot_doors_title {
+  top: 15%;
+  height: 5.5%;
+  left: 15.5%;
+  width: 82%;
+}
+/* End doors */
+
+/* Webcams */
+#usage_content .interactive_screenshot #screenshot_webcams_zoom{
+  top: 24.5%;
+  height: 7.5%;
+  left: 16%;
+  width: 2%;
+}
+
+#usage_content .interactive_screenshot #screenshot_webcams_fullscreen {
+  top: 32.5%;
+  height: 4.5%;
+  left: 16%;
+  width: 2%;
+}
+
+#usage_content .interactive_screenshot #screenshot_webcams_title {
+  top: 15%;
+  height: 5.5%;
+  left: 15.5%;
+  width: 25.5%;
+}
+/* End webcams */
+
+/* Environment setup */
+/*
+#usage_content .interactive_screenshot #screenshot_environment_lights {
+  top: 15%;
+  height: 5.5%;
+  left: 15.5%;
+  width: 25.5%;
+}
+*/
+/* End environment setup
+
+
 
 
 

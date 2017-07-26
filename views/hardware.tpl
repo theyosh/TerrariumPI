@@ -59,7 +59,7 @@
                     </ul>
                   </div>
                   <div class="row">
-                    <img src="static/images/documentation/FEJ7RIQIH54GPUB.MEDIUM.jpg" alt="{{_('DHT22 GPIO wiring scheme')}}" class="img-thumbnail alignright col-xs-3" />
+                    <img src="static/images/documentation/DHT_GPIO_schema.jpg" alt="{{_('DHT22 GPIO wiring scheme')}}" class="img-thumbnail alignright col-xs-3" />
                     <h4>{{_('GPIO')}}</h4>
                     <p>{{_('GPIO sensors has to added manual to TerrariumPI software. This can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra capacitor')}}</p>
                     <p>{{_('Through the GPIO bus of the Raspberry Pi you can use the following hardware sensors')}}</p>
@@ -103,7 +103,7 @@
                   </div>
                 </div>
                 <div aria-labelledby="hardware_tab_doors" class="tab-pane fade" id="hardware-tab-doors" role="tabpanel">
-                  <img src="static/images/documentation/CKN6004-900.jpg" alt="Dashboard screenshot" class="img-thumbnail alignright col-xs-3" />
+                  <img src="static/images/documentation/door_magnets.jpg" alt="Dashboard screenshot" class="img-thumbnail alignright col-xs-3" />
                   <h2>{{_('Doors')}}</h2>
                   <p>{{_('TerrariumPI software has support for magnetic door sensors. Only versions with two wires are supported. Connect one wire to the ground and the other wire to any GPIO pin that is free (except power and ground pins).')}}</p>
                 </div>
