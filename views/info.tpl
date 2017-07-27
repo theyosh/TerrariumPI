@@ -83,7 +83,6 @@
                   <h2>{{_('Copyright')}}</h2>
                   <p>&copy; Copyright 2015 - 2017</p>
                 </div>
-
                 <div aria-labelledby="info_tab_example" class="tab-pane fade" id="info-tab-example" role="tabpanel">
                   <h2>{{_('Example setup')}}</h2>
                   <p>{{_('Here are some photos how you can use it.')}}</p>
@@ -113,8 +112,7 @@
         </div>
         <script type="text/javascript">
           $("[data-fancybox]").fancybox({
-		// Options will go here
-	});
+            // Options will go here
+          });
         </script>
-
 % include('inc/page_footer.tpl')
