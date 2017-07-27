@@ -108,6 +108,7 @@
                       <div class="tab-pane" id="usage-tab-environment-sprayer">
                         <h3 class="lead">{{_('Sprayer')}}</h3>
                         <p>{{_('The sprayer is only working in sensor mode. This means it needs to have at least one humidity sensor and one switch to activate a spray system. When multiple humidity sensors are used, the averages of the minimum, maximum and current values are used.')}}</p>
+                        <p>{{_('The sprayer will not operate when a door is open.')}}</p>
                         <p>{{!_('All fields with a %s are required.') % '<span class="required">*</span>'}}</p>
                         <div class="row">
                           <div class="x_panel">

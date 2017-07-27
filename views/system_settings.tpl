@@ -46,13 +46,13 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="port">{{_('New admin password')}} </label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="new_password">{{_('New admin password')}} </label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control" name="new_password" type="password" placeholder="{{_('New admin password')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_new_password')}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="port">{{_('Current admin password')}} </label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cur_password">{{_('Current admin password')}} </label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control" name="cur_password" type="password" placeholder="{{_('Current admin password')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_current_password')}}">
                     </div>
@@ -64,13 +64,13 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="host">{{_('Power price')}} <span class="required">*</span></label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="power_price">{{_('Power price')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control" name="power_price" required="required" type="text" placeholder="{{_('Power price')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_power_price')}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="port">{{_('Water price')}} <span class="required">*</span></label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="water_price">{{_('Water price')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control" name="water_price" required="required" type="text" placeholder="{{_('Water price')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_water_price')}}">
                     </div>
