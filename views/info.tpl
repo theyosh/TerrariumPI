@@ -88,14 +88,11 @@
                   <h2>{{_('Example setup')}}</h2>
                   <p>{{_('Here are some photos how you can use it.')}}</p>
                   <a href="static/images/photos/20170704_163655.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_163655.jpg" class="thumbnail alignleft" alt="test"/></a>
-
                   <a href="static/images/photos/20170704_163822.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_163822.jpg" class="thumbnail alignleft" /></a>
                   <a href="static/images/photos/20170704_163655.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_163655.jpg" class="thumbnail alignleft" /></a>
                   <a href="static/images/photos/20170704_163845.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_163845.jpg" class="thumbnail alignleft" /></a>
                   <a href="static/images/photos/20170704_164213.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_164213.jpg" class="thumbnail alignleft" /></a>
                   <a href="static/images/photos/20170704_164800.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_164800.jpg" class="thumbnail alignleft" /></a>
-
-
                   <a href="static/images/photos/20170704_165605.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_165605.jpg" class="thumbnail alignleft"/></a>
                   <a href="static/images/photos/20170704_165617.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_165617.jpg" class="thumbnail alignleft"/></a>
                   <a href="static/images/photos/20170704_165637.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_165637.jpg" class="thumbnail alignleft"/></a>
@@ -103,18 +100,12 @@
                   <a href="static/images/photos/20170704_173437.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_173437.jpg" class="thumbnail alignleft"/></a>
                   <a href="static/images/photos/20170704_174156.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_174156.jpg" class="thumbnail alignleft"/></a>
                   <a href="static/images/photos/20170704_174223.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_174223.jpg" class="thumbnail alignleft"/></a>
-
-
-
                   <a href="static/images/photos/20170704_201329.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_201329.jpg" class="thumbnail alignleft"/></a>
                   <a href="static/images/photos/20170706_113413.jpg" data-fancybox="gallery"><img src="static/images/photos/20170706_113413.jpg" class="thumbnail alignleft"/></a>
                   <a href="static/images/photos/20170706_113426.jpg" data-fancybox="gallery"><img src="static/images/photos/20170706_113426.jpg" class="thumbnail alignleft"/></a>
                   <a href="static/images/photos/20170706_194921.jpg" data-fancybox="gallery"><img src="static/images/photos/20170706_194921.jpg" class="thumbnail alignleft"/></a>
                   <a href="static/images/photos/20170706_195141.jpg" data-fancybox="gallery"><img src="static/images/photos/20170706_195141.jpg" class="thumbnail alignleft"/></a>
                   <a href="static/images/photos/20170707_105830.jpg" data-fancybox="gallery"><img src="static/images/photos/20170707_105830.jpg" class="thumbnail alignleft"/></a>
-
-
-
                 </div>
               </div>
             </div>

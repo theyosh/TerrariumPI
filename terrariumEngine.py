@@ -51,11 +51,17 @@ class terrariumEngine():
     self.pi_power_wattage = float(self.config.get_pi_power_wattage())
     logger.info('Done loading terrariumPI PI power setting')
 
+    # Set the system temperature indicator
+    logger.info('Loading terrariumPI PI temperature indicator')
+    self.temperature_indicator = self.config.get_temperature_indicator()
+
+    logger.info('Done loading terrariumPI PI temperature indicator')
+
     # Load Weather part
     logger.info('Loading terrariumPI weather data')
     self.weather = terrariumWeather(self.config.get_weather_location(),
                                     self.config.get_weather_windspeed(),
-                                    self.config.get_weather_temperature(),
+                                    self.get_temperature_indicator,
                                     self.get_weather)
     logger.info('Done loading terrariumPI weather data')
 
@@ -86,7 +92,7 @@ class terrariumEngine():
     starttime = time.time()
     logger.info('%s terrariumPI temperature/humidity sensors' % ('Reloading' if reloading else 'Loading'),)
     self.sensors = {}
-    for sensor in terrariumSensor.scan(self.config.get_owfs_port(), self.config.get_sensors()):
+    for sensor in terrariumSensor.scan(self.config.get_owfs_port(), self.config.get_sensors(), self.get_temperature_indicator):
       self.sensors[sensor.get_id()] = sensor
 
     if reloading:
@@ -658,6 +664,9 @@ class terrariumEngine():
     else:
       return data
 
+  def get_temperature_indicator(self):
+    return self.temperature_indicator
+
   # API Config calls
   def get_config(self, part = None):
     data = {}
@@ -718,6 +727,7 @@ class terrariumEngine():
         # Update config settings
         self.pi_power_wattage = float(self.config.get_pi_power_wattage())
         self.set_authentication(self.config.get_admin(),self.config.get_password())
+        self.temperature_indicator = self.config.get_temperature_indicator()
 
     return update_ok
 

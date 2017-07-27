@@ -84,6 +84,7 @@ class terrariumWebserver():
                   'title' : self.__config['title'],
                   'version' : self.__config['version'],
                   'page_title' : _(template.replace('_',' ').capitalize()),
+                  'temperature_indicator' : self.__terrariumEngine.get_temperature_indicator(),
                   'translations': self.__translations }
 
     if 'index' == template:

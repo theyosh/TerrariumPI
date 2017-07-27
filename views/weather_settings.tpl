@@ -25,9 +25,6 @@
               <li>
                 <strong>{{_('Wind speed')}}</strong>: {{translations.get_translation('weather_field_wind_speed')}}
               </li>
-              <li>
-                <strong>{{_('Temperature')}}</strong>: {{translations.get_translation('weather_field_temperature')}}
-              </li>
             </ul>
           </div>
         </div>
@@ -62,17 +59,6 @@
                       </div>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature">{{_('Temperature')}} <span class="required">*</span></label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('weather_field_temperature')}}">
-                        <select class="form-control" name="temperature" tabindex="-1" placeholder="{{_('Select an option')}}">
-                          <option value="C">C</option>
-                          <option value="F">F</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
                   <div class="ln_solid"></div>
                   <div class="form-group">
                     <div class="col-md-11 col-sm-11 col-xs-12 text-center">
@@ -92,20 +78,10 @@
               minimumResultsForSearch: Infinity
             });
 
-            var temperature_selector = $("select[name='temperature']").select2({
-              placeholder: '{{_('Select an option')}}',
-              allowClear: false,
-              minimumResultsForSearch: Infinity
-            });
-
             $.get($('form').attr('action'),function(data){
               $('form h2 small').text(data.type);
               $('input[name="location"]').val(data.location);
-
-              windspeed_selector.val(data.windspeed);
-              windspeed_selector.trigger('change');
-              temperature_selector.val(data.temperature);
-              temperature_selector.trigger('change');
+              windspeed_selector.val(data.windspeed).trigger('change');
             });
           });
         </script>
