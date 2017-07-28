@@ -55,22 +55,10 @@
                                     </div>
                                   </div>
                                 </div>
-                                <div class="form-group">
-                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature">{{_('Temperature')}} <span class="required">*</span></label>
-                                  <div class="col-md-7 col-sm-6 col-xs-10">
-                                    <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('weather_field_temperature')}}">
-                                      <select class="form-control" name="temperature" tabindex="-1" placeholder="{{_('Select an option')}}">
-                                        <option value="C">C</option>
-                                        <option value="F">F</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-
                         <ul>
                           <li>
                             <strong>{{_('Location')}}</strong>: {{!translations.get_translation('weather_field_location')}}
@@ -81,9 +69,6 @@
                           </li>
                           <li>
                             <strong>{{_('Wind speed')}}</strong>: {{translations.get_translation('weather_field_wind_speed')}}
-                          </li>
-                          <li>
-                            <strong>{{_('Temperature')}}</strong>: {{translations.get_translation('weather_field_temperature')}}
                           </li>
                         </ul>
                       </div>
