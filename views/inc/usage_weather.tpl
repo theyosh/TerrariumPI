@@ -11,7 +11,7 @@
                       </div>
                       <div class="tab-pane" id="usage-tab-weather-forecast-current">
                         <h3 class="lead">{{_('Weather')}} {{_('current')}}</h3>
-                        <img src="static/images/documentation/weather_forecast.gif" alt="{{_('Current weather widget screenshot')}}" class="alignright" />
+                        <img src="static/images/documentation/weather_current.gif" alt="{{_('Current weather widget screenshot')}}" class="thumbnail alignright" />
                         <p>{{_('The forecast widgets shows the forecast at current time and the location for which the forecast is valid. The data is loaded external from the external API source and is not measured by the software.')}}</p>
                         <p>{{_('It shows the current day and time for which the forecast is valid. And what temperature indicator is used.')}}</p>
                         <p>{{_('The forecast is based on the time of the day. During the day, a sun is used in the animation. During the night a moon is used.')}}</p>
@@ -20,13 +20,13 @@
                       </div>
                       <div class="tab-pane" id="usage-tab-weather-forecast-day">
                         <h3 class="lead">{{_('Day forecast')}}</h3>
-                        <img src="static/images/documentation/weather_forecast_day.png" alt="{{_('Weather day forecast screenshot')}}" /><br /><br />
+                        <img src="static/images/documentation/weather_forecast_day.png" alt="{{_('Weather day forecast screenshot')}}" class="img-thumbnail" /><br /><br />
                         <p>{{_('The day forecast shows the temperature per hour for 24 / 36 hours from now. The title holds the graph period.')}}</p>
                         <p>{{!_('Use the calendar icon %s in the title to select the period for the history graph.') % '<i class="fa fa-calendar"></i>'}}</p>
                       </div>
                       <div class="tab-pane" id="usage-tab-weather-forecast-week">
                         <h3 class="lead">{{_('Week forecast')}}</h3>
-                        <img src="static/images/documentation/weather_forecast_week.png" alt="{{_('Week forecast screenshot')}}" /><br /><br />
+                        <img src="static/images/documentation/weather_forecast_week.png" alt="{{_('Week forecast screenshot')}}" class="img-thumbnail" /><br /><br />
                         <p>{{_('The week forecast shows the temperature per hour for 10 days from now. The title holds the graph period.')}}</p>
                         <p>{{!_('Use the calendar icon %s in the title to select the period for the history graph.') % '<i class="fa fa-calendar"></i>'}}</p>
                       </div>

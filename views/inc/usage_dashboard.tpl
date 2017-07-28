@@ -82,7 +82,7 @@
                       <div class="tab-pane" id="usage-tab-dashboard-top-tiles">
                         <h3 class="lead">{{_('Top tiles')}}</h3>
                         <p>{{_('All tiles will be updated in real time. When a switch is toggled, either by hand or by the system, the tiles will update instantly.')}}</p>
-                        <img src="static/images/documentation/dashboard_top_tiles.gif" alt="Dashboard top indicators online screenshot" />
+                        <img src="static/images/documentation/dashboard_top_tiles.gif" alt="Dashboard top indicators online screenshot" class="img-thumbnail" />
                         <div class="row">
                           <h4><span aria-hidden="true" class="glyphicon glyphicon-time"></span> {{_('Uptime')}}</h4>
                           <p>
@@ -116,7 +116,7 @@
                       </div>
                       <div class="tab-pane" id="usage-tab-dashboard-environment">
                         <h3 class="lead">{{_('Environment')}}</h3>
-                        <img src="static/images/documentation/dashboard_environment.gif" alt="Dashboard top indicators online screenshot" class="alignright" />
+                        <img src="static/images/documentation/dashboard_environment.gif" alt="Dashboard top indicators online screenshot" style="width: 35%" class="img-thumbnail alignright" />
                         <p>{{_('The environment section shows the current state of the environment. The environment is divided in three parts. There is a lighting system, a spray system and a heating system.')}}</p>
                         <p>{{_('When a part is active the title is in color. If the title is gray that part is than not running or configured.')}}</p>
                         <h4><span class="fa fa-lightbulb-o"></span> {{_('Lights')}}</h4>
@@ -148,7 +148,7 @@
                         <h3 class="lead">{{_('Graphs')}}</h3>
                         <p>{{_('The graphs on the home are combined graphs from all temperature and humidity sensors. The gauge meters are real time and show the current value. The historical graphs shows also the minimum and maximum value and will be updated once every 5 minutes.')}}</p>
                         <p>{{_('Every sensor has his own type and a minimum and maximum value. To get the graph data all the data is combined and divided by the amount of sensors. This way the average of the sensors is used.')}}</p>
-                        <img src="static/images/documentation/dashboard_graphs.gif" alt="Dashboard top indicators online screenshot" />
+                        <img src="static/images/documentation/dashboard_graphs.gif" alt="Dashboard top indicators online screenshot" class="img-thumbnail" />
                         <div class="row">
                           <h4><span aria-hidden="true" class="glyphicon glyphicon-tint"></span>/<span aria-hidden="true" class="glyphicon glyphicon-fire"></span> </span> {{_('Type')}}</h4>
                           <p>

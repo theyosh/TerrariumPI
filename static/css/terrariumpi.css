@@ -245,24 +245,24 @@ div.row.documentation img {
 #usage_content .interactive_screenshot #screenshot_dashboard_top_indicators {
   left: 74%;
   top: 0%;
-  height: 7.5%;
+  height: 6.4%;
   width: 26%;
 }
 #usage_content .interactive_screenshot #screenshot_dashboard_top_tiles {
-  left: 14.5%;
-  top: 7.5%;
-  height: 12.5%;
-  width: 85.5%;
+  left: 14.4%;
+  top: 6.4%;
+  height: 12%;
+  width: 85.6%;
 }
 #usage_content .interactive_screenshot #screenshot_dashboard_environment {
-  top: 22%;
-  height: 68.5%;
+  top: 19%;
+  height: 50%;
   left: 79%;
   width: 20%;
 }
 #usage_content .interactive_screenshot #screenshot_dashboard_graphs {
-  top: 22%;
-  height: 69%;
+  top: 19%;
+  height: 59%;
   left: 15.5%;
   width: 62.2%;
 }
@@ -270,121 +270,114 @@ div.row.documentation img {
 
 /* Weather */
 #usage_content .interactive_screenshot #screenshot_weather_forecast_current {
-  top: 14.5%;
-  height: 48.5%;
+  top: 12.4%;
+  height: 42%;
   left: 15.5%;
   width: 27.2%;
 }
 
 #usage_content .interactive_screenshot #screenshot_weather_forecast_day {
-  top: 14.5%;
-  height: 33.6%;
+  top: 12.4%;
+  height: 29.1%;
   left: 43.7%;
   width: 55.2%;
 }
 
 #usage_content .interactive_screenshot #screenshot_weather_forecast_week {
-  top: 48.8%;
-  height: 33.8%;
-  left: 43.8%;
+  top: 42%;
+  height: 29.1%;
+  left: 43.7%;
   width: 55.2%;
 }
 /* End weather */
 
 /* Sensors */
+#usage_content .interactive_screenshot #screenshot_sensors_title {
+  top: 12.6%;
+  height: 5.6%;
+  left: 15.6%;
+  width: 83.1%;
+}
+
 #usage_content .interactive_screenshot #screenshot_sensors_current{
-  top: 21%;
-  height: 27%;
-  left: 15.5%;
-  width: 20%;
+  top: 18.2%;
+  height: 53.2%;
+  left: 15.6%;
+  width: 21%;
 }
 
 #usage_content .interactive_screenshot #screenshot_sensors_graph {
-  top: 21%;
-  height: 27%;
+  top: 18.2%;
+  height: 53.2%;
   left: 36.5%;
-  width: 61%;
-}
-
-#usage_content .interactive_screenshot #screenshot_sensors_title {
-  top: 15%;
-  height: 5.5%;
-  left: 15.5%;
-  width: 82%;
-}
-
-
-#usage_content #currentvalue {
-
+  width: 62.2%;
 }
 /* End sensors */
 
 /* Switches */
+#usage_content .interactive_screenshot #screenshot_switches_title {
+  top: 12.6%;
+  height: 5.6%;
+  left: 15.6%;
+  width: 83.1%;
+}
+
 #usage_content .interactive_screenshot #screenshot_switches_toggle{
-  top: 21%;
-  height: 27%;
-  left: 15.5%;
-  width: 20%;
+  top: 18.2%;
+  height: 61%;
+  left: 15.6%;
+  width: 21%;
 }
 
 #usage_content .interactive_screenshot #screenshot_switches_graph {
-  top: 21%;
-  height: 27%;
+  top: 18.2%;
+  height: 61%;
   left: 36.5%;
-  width: 61%;
-}
-
-#usage_content .interactive_screenshot #screenshot_switches_title {
-  top: 15%;
-  height: 5.5%;
-  left: 15.5%;
-  width: 82%;
+  width: 62.2%;
 }
 /* End switches */
 
 /* Doors */
+#usage_content .interactive_screenshot #screenshot_doors_title {
+  top: 12.6%;
+  height: 5.6%;
+  left: 15.6%;
+  width: 83.1%;
+}
+
 #usage_content .interactive_screenshot #screenshot_doors_status{
-  top: 21%;
-  height: 27%;
-  left: 15.5%;
-  width: 20%;
+  top: 18.2%;
+  height: 53.2%;
+  left: 15.6%;
+  width: 21%;
 }
 
 #usage_content .interactive_screenshot #screenshot_doors_graph {
-  top: 21%;
-  height: 27%;
+  top: 18.2%;
+  height: 53.2%;
   left: 36.5%;
-  width: 61%;
-}
-
-#usage_content .interactive_screenshot #screenshot_doors_title {
-  top: 15%;
-  height: 5.5%;
-  left: 15.5%;
-  width: 82%;
+  width: 62.2%;
 }
 /* End doors */
 
 /* Webcams */
-#usage_content .interactive_screenshot #screenshot_webcams_zoom{
-  top: 24.5%;
-  height: 7.5%;
-  left: 16%;
-  width: 2%;
-}
-
-#usage_content .interactive_screenshot #screenshot_webcams_fullscreen {
-  top: 32.5%;
-  height: 4.5%;
-  left: 16%;
-  width: 2%;
-}
-
 #usage_content .interactive_screenshot #screenshot_webcams_title {
-  top: 15%;
-  height: 5.5%;
-  left: 15.5%;
-  width: 25.5%;
+  top: 12.6%;
+  height: 5.6%;
+  left: 15.6%;
+  width: 27%;
+}
+#usage_content .interactive_screenshot #screenshot_webcams_zoom{
+  top: 20.5%;
+  height: 6.5%;
+  left: 17.5%;
+  width: 2%;
+}
+#usage_content .interactive_screenshot #screenshot_webcams_fullscreen {
+  top: 27.5%;
+  height: 3.5%;
+  left: 17.5%;
+  width: 2%;
 }
 /* End webcams */
 

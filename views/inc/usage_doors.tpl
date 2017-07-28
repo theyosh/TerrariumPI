@@ -84,7 +84,7 @@
                       </div>
                       <div class="tab-pane" id="usage-tab-doors-graph">
                         <h3 class="lead">{{_('History graph')}}</h3>
-                        <img src="static/images/documentation/history_graph_door.png" alt="{{_('Door history graph')}}" /><br /><br />
+                        <img src="static/images/documentation/history_graph_door.png" alt="{{_('Door history graph')}}" class="img-thumbnail" /><br /><br />
                         <p>{{_('The history graph will shows when a door was opened.')}}</p>
                         <p>{{!_('Use the calendar icon %s in the title to select the period for the history graph.') % '<i class="fa fa-calendar"></i>'}}</p>
                       </div>

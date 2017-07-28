@@ -22,10 +22,7 @@
                   <a aria-expanded="false" data-toggle="tab" href="#usage-tab-webcam" id="usage_tab_webcam" role="tab"><i class="fa fa-video-camera"></i> {{_('Webcam')}}</a>
                 </li>
                 <li class="" role="presentation">
-                  <a aria-expanded="false" data-toggle="tab" href="#usage-tab-environment" id="usage_tab_system" role="tab"><span aria-hidden="true" class="glyphicon glyphicon-cog"></span> {{_('Environment')}}</a>
-                </li>
-                <li class="" role="presentation">
-                  <a aria-expanded="false" data-toggle="tab" href="#usage-tab-system" id="usage_tab_system" role="tab"><i class="fa fa-lightbulb-o"></i> {{_('System')}}</a>
+                  <a aria-expanded="false" data-toggle="tab" href="#usage-tab-environment" id="usage_tab_system" role="tab"><i class="fa fa-lightbulb-o"></i> {{_('Environment')}}</a>
                 </li>
               </ul>
               <div class="tab-content" id="usage_content">
@@ -50,9 +47,6 @@
                 </div>
                 <div aria-labelledby="usage_tab_environment" class="tab-pane fade" id="usage-tab-environment" role="tabpanel">
                   % include('inc/usage_environment.tpl')
-                </div>
-                <div aria-labelledby="usage_tab_system" class="tab-pane fade" id="usage-tab-system" role="tabpanel">
-                  % include('inc/usage_system.tpl')
                 </div>
               </div>
             </div>

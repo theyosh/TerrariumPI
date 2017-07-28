@@ -20,7 +20,7 @@
                 <div aria-labelledby="info_tab_terrariumpi" class="tab-pane fade active in" id="info-tab-terrariumpi" role="tabpanel">
                   <h2>{{_('TerrariumPI %s') % version,}}</h2>
                   <p>{{_('Use TerrariumPI to automate your own reptile environment. The software can handle a combination of multiple temperature and humidity sensors and relay switches to control a closed environment.')}}</p>
-                  <img src="static/images/documentation/dashboard.png" alt="Dashboard screenshot" class="img-thumbnail"/>
+                  <img src="static/images/documentation/dashboard.png" alt="Dashboard screenshot" class="img-thumbnail" style="width:60%"/>
                 </div>
                 <div aria-labelledby="info_tab_software" class="tab-pane fade" id="info-tab-software" role="tabpanel">
                   <h2>{{_('Used software')}}</h2>
@@ -88,7 +88,6 @@
                   <p>{{_('Here are some photos how you can use it.')}}</p>
                   <a href="static/images/photos/20170704_163655.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_163655.jpg" class="thumbnail alignleft" alt="test"/></a>
                   <a href="static/images/photos/20170704_163822.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_163822.jpg" class="thumbnail alignleft" /></a>
-                  <a href="static/images/photos/20170704_163655.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_163655.jpg" class="thumbnail alignleft" /></a>
                   <a href="static/images/photos/20170704_163845.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_163845.jpg" class="thumbnail alignleft" /></a>
                   <a href="static/images/photos/20170704_164213.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_164213.jpg" class="thumbnail alignleft" /></a>
                   <a href="static/images/photos/20170704_164800.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_164800.jpg" class="thumbnail alignleft" /></a>

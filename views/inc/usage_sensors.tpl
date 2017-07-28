@@ -6,7 +6,7 @@
                           <div id="screenshot_sensors_title" class="click_area" title="{{_('Title')}}"></div>
                           <div id="screenshot_sensors_current" class="click_area" title="{{_('Current value')}}"></div>
                           <div id="screenshot_sensors_graph" class="click_area" title="{{_('History graph')}}"></div>
-                          <img src="static/images/documentation/TerrariumPI_Sensors.gif" alt="{{_('Sensors overview screenshot')}}" />
+                          <img src="static/images/documentation/sensors_list.gif" alt="{{_('Sensors overview screenshot')}}" />
                         </div>
                       </div>
                       <div class="tab-pane" id="usage-tab-sensors-graphs">
@@ -94,7 +94,7 @@
                       </div>
                       <div class="tab-pane" id="usage-tab-sensors-graph">
                         <h3 class="lead">{{_('History graph')}}</h3>
-                        <img src="static/images/documentation/history_graph_sensor.png" alt="{{_('Sensor history graph')}}" /><br /><br />
+                        <img src="static/images/documentation/history_graph_sensor.png" alt="{{_('Sensor history graph')}}" class="img-thumbnail" /><br /><br />
                         <p>{{_('The history graph will shows the measured value. The flat lines are the minimum and maximum values that are configured. When the measured value is outside this range an alarm will be given. Hover above the graph lines to get detailed information.')}}</p>
                         <p>{{!_('Use the calendar icon %s in the title to select the period for the history graph.') % '<i class="fa fa-calendar"></i>'}}</p>
                       </div>

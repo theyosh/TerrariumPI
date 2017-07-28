@@ -88,7 +88,7 @@
                       </div>
                       <div class="tab-pane" id="usage-tab-switches-graph">
                         <h3 class="lead">{{_('History graph')}}</h3>
-                        <img src="static/images/documentation/history_graph_power_switch.png" alt="{{_('Switch history graph')}}" /><br /><br />
+                        <img src="static/images/documentation/history_graph_power_switch.png" alt="{{_('Switch history graph')}}" class="img-thumbnail" /><br /><br />
                         <p>{{_('The history graph will shows when a switch was powered on. It will show the power usage on the y-axis and time on the x-axis. When hovering over the graph it will also show the water usage.')}}</p>
                         <p>{{!_('Use the calendar icon %s in the title to select the period for the history graph.') % '<i class="fa fa-calendar"></i>'}}</p>
                       </div>
