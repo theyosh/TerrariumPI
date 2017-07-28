@@ -32,6 +32,12 @@
   <script type="text/javascript" src="/static/leaflet/leaflet.js"></script>
   <script type="text/javascript" src="/static/leaflet.loading/src/Control.Loading.js"></script>
   <script type="text/javascript" src='/static/leaflet.fullscreen/dist/Leaflet.fullscreen.min.js'></script>
+
+
+
+  <script type="text/javascript" src='/static/fancybox/dist/jquery.fancybox.min.js'></script>
+
+
   <!-- Load the terrariumPI JS script-->
   <script type="text/javascript" src="/static/js/jquery.fullscreen-min.js"></script>
   <!-- Load the terrariumPI JS script-->

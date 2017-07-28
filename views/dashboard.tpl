@@ -60,7 +60,7 @@
             <div class="col-md-3 col-sm-3 col-xs-12 pull-right">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2><span aria-hidden="true" class="glyphicon glyphicon-cog"></span></span> <span class="title">{{_('Environment')}}</span> <small>{{_('current')}}</small></h2>
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-cog"></span> <span class="title">{{_('Environment')}}</span> <small>{{_('current')}}</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>

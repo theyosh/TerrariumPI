@@ -65,22 +65,24 @@
                         <div class="clearfix"></div>
                       </div>
                       <div class="x_content">
-                        <div class="col-md-4 col-sm-4 col-xs-12 form-group">
-                          <label for="door_[nr]_hardwaretype">{{_('Hardware')}} <span class="required">*</span></label>
-                          <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{!translations.get_translation('door_field_hardware')}}">
-                            <select class="form-control" name="door_[nr]_hardwaretype" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
-                              <option value="gpio">{{_('GPIO')}}</option>
-                            </select>
+                        <div class="row">
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                            <label for="door_[nr]_hardwaretype">{{_('Hardware')}} <span class="required">*</span></label>
+                            <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{!translations.get_translation('door_field_hardware')}}">
+                              <select class="form-control" name="door_[nr]_hardwaretype" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
+                                <option value="gpio">{{_('GPIO')}}</option>
+                              </select>
+                            </div>
                           </div>
-                        </div>
-                        <div class="col-md-3 col-sm-3 col-xs-12 form-group">
-                          <label for="door_[nr]_address">{{_('Address')}}</label> <span class="required">*</span>
-                          <input class="form-control" name="door_[nr]_address" placeholder="{{_('Address')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('door_field_address')}}">
-                          <input class="form-control" name="door_[nr]_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
-                        </div>
-                        <div class="col-md-5 col-sm-5 col-xs-12 form-group">
-                          <label for="door_[nr]_name">{{_('Name')}}</label> <span class="required">*</span>
-                          <input class="form-control" name="door_[nr]_name" placeholder="{{_('Name')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('door_field_name')}}">
+                          <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                            <label for="door_[nr]_address">{{_('Address')}}</label> <span class="required">*</span>
+                            <input class="form-control" name="door_[nr]_address" placeholder="{{_('Address')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('door_field_address')}}">
+                            <input class="form-control" name="door_[nr]_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
+                          </div>
+                          <div class="col-md-5 col-sm-5 col-xs-12 form-group">
+                            <label for="door_[nr]_name">{{_('Name')}}</label> <span class="required">*</span>
+                            <input class="form-control" name="door_[nr]_name" placeholder="{{_('Name')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('door_field_name')}}">
+                          </div>
                         </div>
                       </div>
                     </div>

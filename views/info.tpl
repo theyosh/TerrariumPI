@@ -12,12 +12,15 @@
                 <li class="" role="presentation">
                   <a aria-expanded="false" data-toggle="tab" href="#info-tab-contact" id="info_tab_contact" role="tab">{{_('Contact')}}</a>
                 </li>
+                <li class="" role="presentation">
+                  <a aria-expanded="false" data-toggle="tab" href="#info-tab-example" id="info_tab_example" role="tab">{{_('Example setup')}}</a>
+                </li>
               </ul>
               <div class="tab-content" id="info_content">
                 <div aria-labelledby="info_tab_terrariumpi" class="tab-pane fade active in" id="info-tab-terrariumpi" role="tabpanel">
                   <h2>{{_('TerrariumPI %s') % version,}}</h2>
                   <p>{{_('Use TerrariumPI to automate your own reptile environment. The software can handle a combination of multiple temperature and humidity sensors and relay switches to control a closed environment.')}}</p>
-                  <img src="static/images/documentation/dashboard.png" alt="Dashboard screenshot" class="img-thumbnail"/>
+                  <img src="static/images/documentation/dashboard.png" alt="Dashboard screenshot" class="img-thumbnail" style="width:60%"/>
                 </div>
                 <div aria-labelledby="info_tab_software" class="tab-pane fade" id="info-tab-software" role="tabpanel">
                   <h2>{{_('Used software')}}</h2>
@@ -76,13 +79,39 @@
                   <h2>{{_('Contact')}}</h2>
                   <p>{{!_('Questions or problems? Contact me at %s or open an issue on %s.') % ('<a href="mailto:terrariumpi@theyosh.nl">terrariumpi@theyosh.nl</a>', '<a href="https://github.com/theyosh/TerrariumPI" target="_blank" title="' + _('Download TerrariumPI on Github') + '">Github</a>')}}</p>
                   <h2>{{_('Feature request')}}</h2>
-                  <p>{{!_('Missing something? Drop a feature request on %s and we will see what can be done.') % ('<a href="https://github.com/theyosh/TerrariumPI" target="_blank" title="' + _('Download TerrariumPI on Github') + '">Github</a>')}}</p>
+                  <p>{{!_('Missing something? Drop a feature request on %s and we will see what can be done.') % ('<a href="htt</a>ps://github.com/theyosh/TerrariumPI" target="_blank" title="' + _('Download TerrariumPI on Github') + '">Github</a>')}}</p>
                   <h2>{{_('Copyright')}}</h2>
                   <p>&copy; Copyright 2015 - 2017</p>
+                </div>
+                <div aria-labelledby="info_tab_example" class="tab-pane fade" id="info-tab-example" role="tabpanel">
+                  <h2>{{_('Example setup')}}</h2>
+                  <p>{{_('Here are some photos how you can use it.')}}</p>
+                  <a href="static/images/photos/20170704_163655.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_163655.jpg" class="thumbnail alignleft" alt="test"/></a>
+                  <a href="static/images/photos/20170704_163822.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_163822.jpg" class="thumbnail alignleft" /></a>
+                  <a href="static/images/photos/20170704_163845.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_163845.jpg" class="thumbnail alignleft" /></a>
+                  <a href="static/images/photos/20170704_164213.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_164213.jpg" class="thumbnail alignleft" /></a>
+                  <a href="static/images/photos/20170704_164800.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_164800.jpg" class="thumbnail alignleft" /></a>
+                  <a href="static/images/photos/20170704_165605.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_165605.jpg" class="thumbnail alignleft"/></a>
+                  <a href="static/images/photos/20170704_165617.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_165617.jpg" class="thumbnail alignleft"/></a>
+                  <a href="static/images/photos/20170704_165637.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_165637.jpg" class="thumbnail alignleft"/></a>
+                  <a href="static/images/photos/20170704_172443.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_172443.jpg" class="thumbnail alignleft"/></a>
+                  <a href="static/images/photos/20170704_173437.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_173437.jpg" class="thumbnail alignleft"/></a>
+                  <a href="static/images/photos/20170704_174156.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_174156.jpg" class="thumbnail alignleft"/></a>
+                  <a href="static/images/photos/20170704_174223.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_174223.jpg" class="thumbnail alignleft"/></a>
+                  <a href="static/images/photos/20170704_201329.jpg" data-fancybox="gallery"><img src="static/images/photos/20170704_201329.jpg" class="thumbnail alignleft"/></a>
+                  <a href="static/images/photos/20170706_113413.jpg" data-fancybox="gallery"><img src="static/images/photos/20170706_113413.jpg" class="thumbnail alignleft"/></a>
+                  <a href="static/images/photos/20170706_113426.jpg" data-fancybox="gallery"><img src="static/images/photos/20170706_113426.jpg" class="thumbnail alignleft"/></a>
+                  <a href="static/images/photos/20170706_194921.jpg" data-fancybox="gallery"><img src="static/images/photos/20170706_194921.jpg" class="thumbnail alignleft"/></a>
+                  <a href="static/images/photos/20170706_195141.jpg" data-fancybox="gallery"><img src="static/images/photos/20170706_195141.jpg" class="thumbnail alignleft"/></a>
+                  <a href="static/images/photos/20170707_105830.jpg" data-fancybox="gallery"><img src="static/images/photos/20170707_105830.jpg" class="thumbnail alignleft"/></a>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <script type="text/javascript">
+          $("[data-fancybox]").fancybox({
+            // Options will go here
+          });
+        </script>
 % include('inc/page_footer.tpl')
-

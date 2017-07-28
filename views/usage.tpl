@@ -4,25 +4,25 @@
             <div class="" data-example-id="togglable-tabs" role="tabpanel">
               <ul class="nav nav-tabs bar_tabs" id="usage_tablist" role="tablist">
                 <li class="active" role="presentation">
-                  <a aria-expanded="true" data-toggle="tab" href="#usage-tab-dashboard" id="usage_tab_dashboard" role="tab">{{_('Home')}}</a>
+                  <a aria-expanded="true" data-toggle="tab" href="#usage-tab-dashboard" id="usage_tab_dashboard" role="tab"><i class="fa fa-home"></i> {{_('Home')}}</a>
                 </li>
                 <li class="" role="presentation">
-                  <a aria-expanded="false" data-toggle="tab" href="#usage-tab-weather" id="usage_tab_weather" role="tab">{{_('Weather')}}</a>
+                  <a aria-expanded="false" data-toggle="tab" href="#usage-tab-weather" id="usage_tab_weather" role="tab"><i class="fa fa-cloud"></i> {{_('Weather')}}</a>
                 </li>
                 <li class="" role="presentation">
-                  <a aria-expanded="false" data-toggle="tab" href="#usage-tab-sensors" id="usage_tab_sensors" role="tab">{{_('Sensors')}}</a>
+                  <a aria-expanded="false" data-toggle="tab" href="#usage-tab-sensors" id="usage_tab_sensors" role="tab"><i class="fa fa-tint"></i> {{_('Sensors')}}</a>
                 </li>
                 <li class="" role="presentation">
-                  <a aria-expanded="false" data-toggle="tab" href="#usage-tab-switches" id="usage_tab_switches" role="tab">{{_('Switches')}}</a>
+                  <a aria-expanded="false" data-toggle="tab" href="#usage-tab-switches" id="usage_tab_switches" role="tab"><i class="fa fa-flash"></i> {{_('Switches')}}</a>
                 </li>
                 <li class="" role="presentation">
-                  <a aria-expanded="false" data-toggle="tab" href="#usage-tab-doors" id="usage_tab_doors" role="tab">{{_('Doors')}}</a>
+                  <a aria-expanded="false" data-toggle="tab" href="#usage-tab-doors" id="usage_tab_doors" role="tab"><i class="fa fa-lock"></i> {{_('Doors')}}</a>
                 </li>
                 <li class="" role="presentation">
-                  <a aria-expanded="false" data-toggle="tab" href="#usage-tab-webcam" id="usage_tab_webcam" role="tab">{{_('Webcam')}}</a>
+                  <a aria-expanded="false" data-toggle="tab" href="#usage-tab-webcam" id="usage_tab_webcam" role="tab"><i class="fa fa-video-camera"></i> {{_('Webcam')}}</a>
                 </li>
                 <li class="" role="presentation">
-                  <a aria-expanded="false" data-toggle="tab" href="#usage-tab-system" id="usage_tab_system" role="tab">{{_('System')}}</a>
+                  <a aria-expanded="false" data-toggle="tab" href="#usage-tab-environment" id="usage_tab_system" role="tab"><i class="fa fa-lightbulb-o"></i> {{_('Environment')}}</a>
                 </li>
               </ul>
               <div class="tab-content" id="usage_content">
@@ -33,24 +33,20 @@
                   % include('inc/usage_weather.tpl')
                 </div>
                 <div aria-labelledby="usage_tab_sensors" class="tab-pane fade" id="usage-tab-sensors" role="tabpanel">
-                  <h1>{{_('Sensors')}}</h1>
+                  % include('inc/usage_sensors.tpl')
                   <p></p>
                 </div>
                 <div aria-labelledby="usage_tab_switches" class="tab-pane fade" id="usage-tab-switches" role="tabpanel">
-                  <h1>{{_('Switches')}}</h1>
-                  <p></p>
+                  % include('inc/usage_switches.tpl')
                 </div>
                 <div aria-labelledby="usage_tab_doors" class="tab-pane fade" id="usage-tab-doors" role="tabpanel">
-                  <h1>{{_('Doors')}}</h1>
-                  <p></p>
+                  % include('inc/usage_doors.tpl')
                 </div>
                 <div aria-labelledby="usage_tab_webcam" class="tab-pane fade" id="usage-tab-webcam" role="tabpanel">
-                  <h1>{{_('Webcam')}}</h1>
-                  <p></p>
+                  % include('inc/usage_webcams.tpl')
                 </div>
-                <div aria-labelledby="usage_tab_system" class="tab-pane fade" id="usage-tab-system" role="tabpanel">
-                  <h1>{{_('System')}}</h1>
-                  <p></p>
+                <div aria-labelledby="usage_tab_environment" class="tab-pane fade" id="usage-tab-environment" role="tabpanel">
+                  % include('inc/usage_environment.tpl')
                 </div>
               </div>
             </div>

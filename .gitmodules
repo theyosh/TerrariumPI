@@ -1,3 +1,6 @@
 [submodule "gentelella"]
 	path = gentelella
 	url = https://github.com/puikinsh/gentelella.git
+[submodule "static/fancybox"]
+	path = static/fancybox
+	url = https://github.com/fancyapps/fancybox.git

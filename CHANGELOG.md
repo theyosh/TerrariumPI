@@ -2,14 +2,51 @@ Changelog
 =========
 
 
-2.4.3 (2017-07-19)
-------------
+2.5 (2017-07-28)
+------------------
+
+**New**
+- Add fancybox. [TheYOSH]
+- Added documentation v0.1. [TheYOSH]
+- Add IPv6 support. [TheYOSH]
+
+**Fixes**
+- Fix issue #9. Typo in function call. And extra fix for indicator on
+  the weather page. Close #9. [TheYOSH]
+
+**Updates**
+- Update documentation part2. [TheYOSH]
+- Update readme. [TheYOSH]
+- Update screenshots 4. [TheYOSH]
+- Update screenshots 3. [TheYOSH]
+- Update screenshots 2. [TheYOSH]
+- Update screenshots. [TheYOSH]
+- Update version number. [TheYOSH]
+- Activate config upgrade. [TheYOSH]
+- Updated software to run fully in Celsius or Fahrenheit. The option is
+  now under system settings and is valid for all temperature
+  measurements. #10. [TheYOSH]
+
+**Other**
+- Remove fancybox. [TheYOSH]
+- Merge master. [TheYOSH]
+- Remove debug. [TheYOSH]
+- Documentation part 2. [TheYOSH]
+- Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
+  [TheYOSH]
+
+
+2.4.3 (2017-07-21)
+------------------
 
 **New**
 - Add caching headers for API calls - Now in UTC. [TheYOSH]
 - Add caching headers for API calls. [TheYOSH]
 
 **Fixes**
+- Merge pull request #8 from theyosh/fix_environment. [TheYOSH]
+
+  Fix environment
 - Fix timer times in environment settings page. [TheYOSH]
 - Temperature indicator fix. [TheYOSH]
 - Fixed weather sun rise and set times. [TheYOSH]
@@ -20,6 +57,7 @@ Changelog
 - Fix missing weather icon for thunderstorm. [TheYOSH]
 
 **Updates**
+- Update changelog. [TheYOSH]
 - Update version. [TheYOSH]
 - Updated environment engine to support weather and timer mode with or
   without sensors for fine tuning. [TheYOSH]
@@ -30,6 +68,7 @@ Changelog
   switches. [TheYOSH]
 
 **Other**
+- Remove debug. [TheYOSH]
 - Remove JS debug. [TheYOSH]
 - Remove sunset and sunsrising shifting. [TheYOSH]
 - More proper English. [TheYOSH]
