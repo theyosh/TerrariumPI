@@ -49,7 +49,7 @@ If there is some other hardware which is not working with TerrariumPI, open an i
 ### Dashboard
 ![TerrariumPI 2.5 Dashboard screenshot](screenshots/Dashboard.png)
 ### Sensors
-![TerrariumPI 2.5 Sensors settings screenshot](screenshots/Sensor_settings.png)
+![TerrariumPI 2.5 Sensors settings screenshot](screenshots/Temperature_sensors_list.png)
 ### Adding sensors
 ![TerrariumPI 2.5 Sensors settings screenshot adding a new sensor](screenshots/Sensor_settings_add_sensor.png)
 ### Power switches
