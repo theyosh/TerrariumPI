@@ -59,7 +59,7 @@ If there is some other hardware which is not working with TerrariumPI, open an i
 ### System settings
 ![TerrariumPI 2.5 System setup screenshot](screenshots/System_setup.png)
 
-More screenshots can be found [here](documentation/screenshots/)
+More screenshots can be found [here](https://github.com/theyosh/TerrariumPI/tree/documentation/screenshots/)
 
 ## About
 Read more information at: https://terrarium.theyosh.nl/index.html
