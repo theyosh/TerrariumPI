@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.5 (2017-07-28)
+2.5(2017-07-28)
 ------------------
 
 **New**
@@ -11,10 +11,12 @@ Changelog
 - Add IPv6 support. [TheYOSH]
 
 **Fixes**
+- Fixed weather usage documentation. [TheYOSH]
 - Fix issue #9. Typo in function call. And extra fix for indicator on
   the weather page. Close #9. [TheYOSH]
 
 **Updates**
+- Update changelog. [TheYOSH]
 - Update documentation part2. [TheYOSH]
 - Update readme. [TheYOSH]
 - Update screenshots 4. [TheYOSH]
@@ -28,6 +30,9 @@ Changelog
   measurements. #10. [TheYOSH]
 
 **Other**
+- Merge pull request #11 from theyosh/documentation. [TheYOSH]
+
+  Documentation
 - Remove fancybox. [TheYOSH]
 - Merge master. [TheYOSH]
 - Remove debug. [TheYOSH]
