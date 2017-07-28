@@ -8,7 +8,7 @@ Think off:
 - Aquarium
 - Growhouse
 
-And all this is controlled with a nice webinterface based on [Bootstrap 3 template](https://github.com/puikinsh/gentelella/).
+And all this is controlled with a nice webinterface based on [Gentelella a Bootstrap 3 template](https://github.com/puikinsh/gentelella/).
 ## Features
 - Controlling electronic devices like lights, sprayers, heating and cooling equipment
 - Reading out temperature and humidity sensors
@@ -33,6 +33,8 @@ And all this is controlled with a nice webinterface based on [Bootstrap 3 templa
 
 If you want to use the Raspberry PI 1 wire interface, you have to manually enable it through the raspi-config and reboot once more.
 
+Make sure that your Pi is secured when you put it to the Internet. Would be a shame if TerrariumPI gets next fictum of '[A smart fish tank left a casino vulnerable to hackers](http://money.cnn.com/2017/07/19/technology/fish-tank-hack-darktrace/index.html)' :P
+
 ## Hardware
 This software requires some extra hardware in order to run and work. The bare minimun is
 - Power relay board
@@ -46,6 +48,7 @@ This software requires some extra hardware in order to run and work. The bare mi
 If there is some other hardware which is not working with TerrariumPI, open an issue on [Github](https://github.com/theyosh/TerrariumPI/issues) and we will try to support it.
 
 ## Screenshots
+(made on a very big screen :P )
 ### Dashboard
 ![TerrariumPI 2.5 Dashboard screenshot](screenshots/Dashboard.png)
 ### Sensors
