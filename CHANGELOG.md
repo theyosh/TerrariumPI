@@ -2,10 +2,12 @@ Changelog
 =========
 
 
-2.4.4 (2017-07-28)
-------------
+2.5 (2017-07-28)
+------------------
 
 **New**
+- Add fancybox. [TheYOSH]
+- Added documentation v0.1. [TheYOSH]
 - Add IPv6 support. [TheYOSH]
 
 **Fixes**
@@ -13,13 +15,23 @@ Changelog
   the weather page. Close #9. [TheYOSH]
 
 **Updates**
+- Update documentation part2. [TheYOSH]
+- Update readme. [TheYOSH]
+- Update screenshots 4. [TheYOSH]
+- Update screenshots 3. [TheYOSH]
+- Update screenshots 2. [TheYOSH]
+- Update screenshots. [TheYOSH]
+- Update version number. [TheYOSH]
 - Activate config upgrade. [TheYOSH]
 - Updated software to run fully in Celsius or Fahrenheit. The option is
   now under system settings and is valid for all temperature
   measurements. #10. [TheYOSH]
 
 **Other**
+- Remove fancybox. [TheYOSH]
+- Merge master. [TheYOSH]
 - Remove debug. [TheYOSH]
+- Documentation part 2. [TheYOSH]
 - Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
   [TheYOSH]
 
