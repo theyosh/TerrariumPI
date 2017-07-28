@@ -47,13 +47,19 @@ If there is some other hardware which is not working with TerrariumPI, open an i
 
 ## Screenshots
 ### Dashboard
-![TerrariumPI 2.0 Dashboard Screenshot](screenshots/dashboard.png)
+![TerrariumPI 2.5 Dashboard screenshot](screenshots/Dashboard.png)
 ### Sensors
-![TerrariumPI 2.0 Sensors Screenshot](screenshots/sensors.png)
+![TerrariumPI 2.5 Sensors settings screenshot](screenshots/Sensor_settings.png)
+### Adding sensors
+![TerrariumPI 2.5 Sensors settings screenshot adding a new sensor](screenshots/Sensor_settings_add_sensor.png)
 ### Power switches
-![TerrariumPI 2.0 Power switches Screenshot](screenshots/power_switches.png)
-### Environment
-![TerrariumPI 2.0 Environment Screenshot](screenshots/environment.png)
+![TerrariumPI 2.5 Power switches settings screenshot](screenshots/Switch_settings.png)
+### Environment setup
+![TerrariumPI 2.5 Environment setup screenshot](screenshots/Environment_setup.png)
+### System settings
+![TerrariumPI 2.5 System setup screenshot](screenshots/System_setup.png)
+
+More screenshots can be found at https://github.com/theyosh/TerrariumPI/screenshots/
 
 ## About
 Read more information at: https://terrarium.theyosh.nl/index.html
