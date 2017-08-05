@@ -1469,7 +1469,7 @@ function uploadProfileImage() {
         data: fd,
         enctype: 'multipart/form-data',
         success:function(data){
-           console.log(data);
+           load_page('profile.html');
         },
         cache: false,
         contentType: false,
