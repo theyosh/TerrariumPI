@@ -196,7 +196,6 @@ class terrariumConfig:
     return config['name']
 
   def save_profile(self,data):
-    print data
     return self.__update_config('profile',data)
   # End profile functions
 
