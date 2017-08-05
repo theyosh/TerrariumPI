@@ -63,6 +63,7 @@ class terrariumWebserver():
     self.__app.route('/', method="GET", callback=self.__render_page)
     self.__app.route('/<template_name:re:[^/]+\.html$>', method="GET", callback=self.__render_page)
 
+    self.__app.route('/<filename:re:robots\.txt>', method="GET", callback=self.__static_file)
     self.__app.route('/<root:re:(static|gentelella|webcam)>/<filename:path>', method="GET", callback=self.__static_file)
 
     self.__app.route('/api/switch/toggle/<switchid:path>',
