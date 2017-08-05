@@ -1,3 +1,4 @@
+%  setdefault('temperature_indicator', 'C')
       </div>
     </div>
     <footer>
