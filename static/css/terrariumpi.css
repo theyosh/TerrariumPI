@@ -24,31 +24,54 @@ canvas.gauge {
 .top_nav .navbar-right {
   width: 80% !important;
 }
-
 .modal-lg {
   width: 80% !important;
 }
-
 .page-title .title_right h3 button {
   margin: 0px 1px 1px 0px !important;
 }
-
 .missing-required {
   border: solid 1px red;
 }
-
 .history_graph.loading {
   text-align: center;
-
 }
-
 .history_graph.loading span.glyphicon {
   font-size: 100%;
 }
-
 footer {
   margin-bottom: -20px;
 }
+
+form#profile label{
+  padding-top: 0px;
+}
+
+form#profile input,
+form#profile .xdisplay_inputx,
+form#profile .editor-wrapper,
+form#profile .editor,
+form#profile .submit {
+  display: none;
+}
+
+form#profile.edit input,
+form#profile.edit .xdisplay_inputx,
+form#profile.edit .editor-wrapper,
+form#profile.edit .editor,
+form#profile.edit .submit {
+  display: block;
+}
+
+form#profile.edit span.text {
+  display: none;
+}
+
+form#profile.edit label{
+  padding-top: 8px;
+}
+
+/* End general overrule */
 
 div.row.sensor,
 div.row.switch,

@@ -33,16 +33,31 @@ class terrariumConfig:
   # Private functions
   def __upgrade_config(self):
     upgrade = False
+
+    # Upgrade: Move temperature indicator from weather to system
     temperature_indicator = self.__get_config('weather')
     if 'temperature' in temperature_indicator:
       self.__config.set('terrariumpi', 'temperature_indicator', str(temperature_indicator['temperature']))
       self.__config.remove_option('weather','temperature')
       upgrade = True
 
+    # Upgrade: Change profile image path to new path and config location
+    profile = self.__get_config('terrariumpi')
+    if 'image' in profile and '/static/images/gecko.jpg' == profile['image']:
+      self.__config.set('profile', 'image', '/static/images/profile_image.jpg')
+      self.__config.remove_option('terrariumpi','image')
+      upgrade = True
+
+    # Upgrade: Change profile name path to new config location
+    profile = self.__get_config('terrariumpi')
+    if 'person' in profile:
+      self.__config.set('profile', 'name', profile['person'])
+      self.__config.remove_option('terrariumpi','person')
+      upgrade = True
+
     if upgrade:
       self.__save_config()
       self.__config.read(self.__config_file)
-
 
   def __save_config(self):
     '''Write terrariumPI config to settings.cfg file'''
@@ -167,6 +182,23 @@ class terrariumConfig:
 
     return data
   # End Environment functions
+
+  # Profile functions
+  def get_profile(self):
+    return self.__get_config('profile')
+
+  def get_profile_image(self):
+    config = self.get_profile()
+    return config['image']
+
+  def get_profile_name(self):
+    config = self.get_profile()
+    return config['name']
+
+  def save_profile(self,data):
+    print data
+    return self.__update_config('profile',data)
+  # End profile functions
 
 
   # Weather config functions

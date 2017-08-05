@@ -1,4 +1,3 @@
-% setdefault('sensor_indicator', temperature_indicator)
         <div id="dashboard">
           <!-- top tiles -->
           <div class="row tile_count">
@@ -289,7 +288,7 @@
                     <div class="sidebar-widget text-center">
                       <canvas class="gauge"></canvas>
                       <div class="goal-wrapper">
-                        <span class="gauge-value">...</span> <span>°{{sensor_indicator}}</span>
+                        <span class="gauge-value">...</span> <span>°{{temperature_indicator}}</span>
                       </div>
                     </div>
                   </div>

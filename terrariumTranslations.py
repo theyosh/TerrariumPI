@@ -106,6 +106,16 @@ class terrariumTranslations():
     self.translations['system_field_owfs_port'] = _('Holds the port number on which the OWFS software is running. Leave empty to disable OWFS support.')
     # End system
 
+
+    self.translations['profile_name'] = _('Holds the name of the animal.')
+    self.translations['profile_type'] = _('Holds the type of the animal')
+    self.translations['profile_gender'] = _('Holds the gender of the animal.')
+    self.translations['profile_age'] = _('Holds the day of birth of the animal.')
+    self.translations['profile_species'] = _('Holds the species name of the animal.')
+    self.translations['profile_latin_name'] = _('Holds the latin name of the animal.')
+    self.translations['profile_description'] = _('Holds a small description about the animal.')
+    self.translations['profile_more_information'] = _('Holds a link to more information.')
+
     logger.info('Loaded TerrariumPI translations')
 
   def get_translation(self,translation):

@@ -5,7 +5,10 @@ logger = logging.getLogger(__name__)
 import gettext
 gettext.install('terrariumpi', 'locales/', unicode=True)
 
-from bottle import Bottle, request, abort, static_file, template, error, response, auth_basic, HTTPError
+from bottle import BaseRequest, Bottle, request, abort, static_file, template, error, response, auth_basic, HTTPError
+#Increase bottle memory to max 5MB to process images in WYSIWYG editor
+BaseRequest.MEMFILE_MAX = 5 * 1024 * 1024
+
 from bottle.ext.websocket import GeventWebSocketServer
 from bottle.ext.websocket import websocket
 from Queue import Queue
@@ -72,7 +75,7 @@ class terrariumWebserver():
                      apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
                     )
 
-    self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|doors|environment)>',
+    self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|doors|environment|profile)>',
                      method=['PUT','POST','DELETE'],
                      callback=self.__update_api_call,
                      apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
@@ -88,9 +91,9 @@ class terrariumWebserver():
                   'temperature_indicator' : self.__terrariumEngine.get_temperature_indicator(),
                   'translations': self.__translations }
 
-    if 'index' == template:
-      variables['person_name'] = self.__config['person']
-      variables['person_image'] = self.__config['image']
+    if 'index' == template or 'profile' == template:
+      variables['person_name'] = self.__terrariumEngine.get_profile_name()
+      variables['person_image'] = self.__terrariumEngine.get_profile_image()
 
     elif 'webcam' == template or 'webcam_settings' == template:
       variables['amount_of_webcams'] = self.__terrariumEngine.get_amount_of_webcams()
@@ -139,8 +142,12 @@ class terrariumWebserver():
 
   def __update_api_call(self,path):
     result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Data could not be saved')}
-    postdata = json.loads(request.body.getvalue())
-    result['ok'] = self.__terrariumEngine.set_config(path,postdata)
+    postdata = {}
+
+    if request.json is not None:
+      postdata = request.json
+
+    result['ok'] = self.__terrariumEngine.set_config(path,postdata,request.files)
     if result['ok']:
       result['title'] = _('Data saved')
       result['message'] = _('Your changes are saved')
@@ -164,7 +171,10 @@ class terrariumWebserver():
     if 'switches' == action:
       result = self.__terrariumEngine.get_switches(parameters)
 
-    if 'doors' == action:
+    elif 'profile' == action:
+      result = self.__terrariumEngine.get_profile()
+
+    elif 'doors' == action:
       if len(parameters) > 0 and parameters[0] == 'status':
          result = {'doors' : self.__terrariumEngine.door_status()}
       else:

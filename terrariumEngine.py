@@ -258,7 +258,6 @@ class terrariumEngine():
   def set_weather_config(self,data):
     self.weather.set_source(data['location'])
     self.weather.set_windspeed_indicator(data['windspeed'])
-    self.weather.set_temperature_indicator(data['temperature'])
 
     update_ok = self.config.save_weather(self.weather.get_config())
     return update_ok
@@ -592,6 +591,36 @@ class terrariumEngine():
     return update_ok
   # End Environment part
 
+  # Profile part
+  def get_profile_config(self):
+    return self.config.get_profile()
+
+  def get_profile(self):
+    return self.get_profile_config()
+
+  def get_profile_name(self):
+    return self.get_profile_config()['name']
+
+  def get_profile_image(self):
+    return self.get_profile_config()['image']
+
+  def set_profile(self,data,files):
+
+    print data
+
+    if 'profile_image' in files.keys():
+      profile_image = files.get('profile_image')
+      name, ext = os.path.splitext(profile_image.filename)
+      if ext not in ('.png','.jpg','.jpeg'):
+        return 'File extension not allowed.'
+
+      profile_image.save('static/images/')
+      data['image'] = 'static/images/' + profile_image.filename
+
+    update_ok = self.config.save_profile(data)
+    return update_ok
+  # End profile part
+
 
 
 
@@ -688,12 +717,15 @@ class terrariumEngine():
     if 'doors' == part or part is None:
       data.update(self.get_doors_config())
 
+    if 'profile' == part or part is None:
+      data.update(self.get_profile_config())
+
     if 'environment' == part or part is None:
       data.update(self.get_environment_config())
 
     return data
 
-  def set_config(self,part,data):
+  def set_config(self,part,data,files = None):
     update_ok = False
     if 'weather' == part:
       update_ok = self.set_weather_config(data)
@@ -712,6 +744,9 @@ class terrariumEngine():
 
     elif 'environment' == part:
       update_ok = self.set_environment_config(data)
+
+    elif 'profile' == part:
+      update_ok = self.set_profile(data,files)
 
     elif 'system' == part:
       if 'new_password' in data and data['new_password'] != '' and 'cur_password' in data and data['cur_password'] != '' and data['new_password'] != data['cur_password']:
