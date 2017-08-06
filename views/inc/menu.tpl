@@ -18,7 +18,15 @@
               <h3>{{_('General')}}</h3>
               <ul class="nav side-menu">
                 <li class="active">
-                  <a href="dashboard.html" title="{{_('Home')}}"><i class="fa fa-home"></i> {{_('Home')}}</a>
+                  <a><i class="fa fa-home"></i> {{_('Home')}} <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display:block">
+                    <li>
+                      <a href="dashboard.html">{{_('Dashboard')}}</a>
+                    </li>
+                    <li>
+                      <a href="profile.html">{{_('Profile')}}</a>
+                    </li>
+                  </ul>
                 </li>
                 <li>
                   <a><i class="fa fa-cloud"></i> {{_('Weather')}} <span class="fa fa-chevron-down"></span></a>
@@ -130,15 +138,7 @@
               <a id="menu_toggle"><i class="fa fa-bars"></i></a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown" role="presentation">
-                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="{{person_image}}" alt="">{{person_name}}
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
-                <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:void(0)"; onclick="load_page('profile.html')"> Profile</a></li>
-                  </ul>
-              </li>
+
               <li id="system_time" role="presentation">
                 <i class="fa fa-clock-o"></i> <span >{{_('date/time')}}</span>
               </li>
@@ -162,8 +162,6 @@
                   </li>
                 </ul>
               </li>
-
-
             </ul>
           </nav>
         </div>
