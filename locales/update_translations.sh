@@ -6,10 +6,10 @@ pygettext -v -a -n -o locales/terrariumpi.pot views/*.tpl views/inc/*.tpl *.py
 mv views/inc/footer.tpl_tmp views/inc/footer.tpl
 cd -
 
-for translation in `grep -r -h -o -e "_('[^)]\+')" ../views/*.tpl ../views/inc/*.tpl ../static/js/terrariumpi.js ../*.py | sed "s/\\\\\'/\\'/g" | sed "s/ /%20/g" |  sort | uniq`; do
+for translation in `grep -r -h -o -e "_('[^)]\+')" ../views/*.tpl ../views/inc/*.tpl ../static/js/terrariumpi.js ../*.py | sort | uniq | sed "s/\\\\\'/\\'/g" | sed "s/ /%20/g" `; do
   translation=${translation:3:-2}
   translation=${translation//\%20/ }
-  if [ `grep -ic "${translation}" terrariumpi.pot` -eq 0 ]; then
+  if [ `grep -c "\"${translation}\"" terrariumpi.pot` -eq 0 ]; then
     echo "Adding missing ${translation}"
     echo "#: Missing text string" >> terrariumpi.pot
     echo "msgid \"${translation}\"" >> terrariumpi.pot
@@ -19,11 +19,6 @@ for translation in `grep -r -h -o -e "_('[^)]\+')" ../views/*.tpl ../views/inc/*
 done
 
 # Add static translations
-echo "#: Missing text string" >> terrariumpi.pot
-echo "msgid \"Dashboard\"" >> terrariumpi.pot
-echo "msgstr \"\"" >> terrariumpi.pot
-echo "" >> terrariumpi.pot
-
 echo "#: Missing text string" >> terrariumpi.pot
 echo "msgid \"Weather forecast\"" >> terrariumpi.pot
 echo "msgstr \"\"" >> terrariumpi.pot
@@ -46,11 +41,6 @@ echo "" >> terrariumpi.pot
 
 echo "#: Missing text string" >> terrariumpi.pot
 echo "msgid \"Sensor settings\"" >> terrariumpi.pot
-echo "msgstr \"\"" >> terrariumpi.pot
-echo "" >> terrariumpi.pot
-
-echo "#: Missing text string" >> terrariumpi.pot
-echo "msgid \"temperature\"" >> terrariumpi.pot
 echo "msgstr \"\"" >> terrariumpi.pot
 echo "" >> terrariumpi.pot
 
@@ -81,16 +71,6 @@ echo "" >> terrariumpi.pot
 
 echo "#: Missing text string" >> terrariumpi.pot
 echo "msgid \"System settings\"" >> terrariumpi.pot
-echo "msgstr \"\"" >> terrariumpi.pot
-echo "" >> terrariumpi.pot
-
-echo "#: Missing text string" >> terrariumpi.pot
-echo "msgid \"open\"" >> terrariumpi.pot
-echo "msgstr \"\"" >> terrariumpi.pot
-echo "" >> terrariumpi.pot
-
-echo "#: Missing text string" >> terrariumpi.pot
-echo "msgid \"closed\"" >> terrariumpi.pot
 echo "msgstr \"\"" >> terrariumpi.pot
 echo "" >> terrariumpi.pot
 
