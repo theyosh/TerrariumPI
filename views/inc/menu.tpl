@@ -5,7 +5,7 @@
           </div>
           <div class="clearfix"></div><!-- menu profile quick info -->
           <div class="profile">
-            <div class="profile_pic"><img alt="..." class="img-circle profile_img" src="{{person_image}}"></div>
+            <div class="profile_pic"><img alt="{{person_name}}" class="img-circle profile_img" src="{{person_image}}"></div>
             <div class="profile_info">
               <span>{{_('Welcome')}},</span>
               <h2>{{person_name}}</h2>
