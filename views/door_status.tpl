@@ -13,16 +13,16 @@
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-calendar" title="{{_('Period')}}"></i></a>
                     <ul class="dropdown-menu period" role="menu">
                       <li>
-                        <a href="javascript:;" >{{_('day')}}</a>
+                        <a href="javascript:;" >{{_('Day')}}</a>
                       </li>
                       <li>
-                        <a href="javascript:;" >{{_('week')}}</a>
+                        <a href="javascript:;" >{{_('Week')}}</a>
                       </li>
                       <li>
-                        <a href="javascript:;" >{{_('month')}}</a>
+                        <a href="javascript:;" >{{_('Month')}}</a>
                       </li>
                       <li>
-                        <a href="javascript:;" >{{_('year')}}</a>
+                        <a href="javascript:;" >{{_('Year')}}</a>
                       </li>
                     </ul>
                   </li>
@@ -62,7 +62,7 @@
                 // Add an id to the row when first run
                 $(rows[index]).attr('id',door.id).show();
                 $('h2 span.title', rows[index]).text(door.name);
-                $('h2 small', rows[index]).text((door.state === 'closed'  ? '{{_('closed')}}' : '{{_('open')}}' ));
+                $('h2 small', rows[index]).text((door.state === 'closed'  ? '{{_('Closed')}}' : '{{_('Open')}}' ));
                 $('.sidebar-widget i.fa-lock',rows[index]).removeClass('red','green','closed','open')
                                                   .addClass(door.state + ' ' + (door.state === 'closed' ? 'green':'red'))
                                                   .attr({'title': (door.state === 'closed'  ? '{{_('Door is closed')}}' : '{{_('Door is open')}}' )});

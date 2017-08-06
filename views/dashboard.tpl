@@ -59,7 +59,7 @@
             <div class="col-md-3 col-sm-3 col-xs-12 pull-right">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2><span aria-hidden="true" class="glyphicon glyphicon-cog"></span> <span class="title">{{_('Environment')}}</span> <small>{{_('current')}}</small></h2>
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-cog"></span> <span class="title">{{_('Environment')}}</span> <small>{{_('Current')}}</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -80,11 +80,11 @@
                 </div>
                 <div class="x_content">
                   <div class="row environment_light">
-                    <h4><span class="fa fa-lightbulb-o"></span> {{_('Lights')}} <small>{{_('mode')}}: <span>{{_('disabled')}}</span></small></h4>
+                    <h4><span class="fa fa-lightbulb-o"></span> {{_('Lights')}} <small>{{_('mode')}}: <span>{{_('Disabled')}}</span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
-                          <p>{{_('State')}}</p>
+                          <p>{{_('Status')}}</p>
                         </td>
                         <td class="state"><i class="fa fa-square"></i></td>
                       </tr>
@@ -109,11 +109,11 @@
                     </table>
                   </div>
                   <div class="row environment_sprayer">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-tint"></i> {{_('Sprayer')}} <small>{{_('mode')}}: <span>{{_('disabled')}}</span></small></h4>
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-tint"></i> {{_('Sprayer')}} <small>{{_('mode')}}: <span>{{_('Disabled')}}</span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
-                          <p>{{_('State')}}</p>
+                          <p>{{_('Status')}}</p>
                         </td>
                         <td class="state"><i class="fa fa-square"></i></td>
                       </tr>
@@ -132,11 +132,11 @@
                     </table>
                   </div>
                   <div class="row environment_heater">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-fire"></i> {{_('Heater')}} <small>{{_('mode')}}: <span>{{_('disabled')}}</span></small></h4>
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-fire"></i> {{_('Heater')}} <small>{{_('mode')}}: <span>{{_('Disabled')}}</span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
-                          <p>{{_('State')}}</p>
+                          <p>{{_('Status')}}</p>
                         </td>
                         <td class="state"><i class="fa fa-square"></i></td>
                       </tr>
@@ -161,11 +161,11 @@
                     </table>
                   </div>
                   <div class="row environment_cooler">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-flag-o"></i> {{_('Cooler')}} <small>{{_('mode')}}: <span>{{_('disabled')}}</span></small></h4>
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-flag-o"></i> {{_('Cooler')}} <small>{{_('mode')}}: <span>{{_('Disabled')}}</span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
-                          <p>{{_('State')}}</p>
+                          <p>{{_('Status')}}</p>
                         </td>
                         <td class="state"><i class="fa fa-square"></i></td>
                       </tr>
@@ -204,16 +204,16 @@
                       <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-calendar" title="{{_('Period')}}"></i></a>
                       <ul class="dropdown-menu period" role="menu">
                         <li>
-                          <a href="javascript:;" >{{_('day')}}</a>
+                          <a href="javascript:;" >{{_('Day')}}</a>
                         </li>
                         <li>
-                          <a href="javascript:;" >{{_('week')}}</a>
+                          <a href="javascript:;" >{{_('Week')}}</a>
                         </li>
                         <li>
-                          <a href="javascript:;" >{{_('month')}}</a>
+                          <a href="javascript:;" >{{_('Month')}}</a>
                         </li>
                         <li>
-                          <a href="javascript:;" >{{_('year')}}</a>
+                          <a href="javascript:;" >{{_('Year')}}</a>
                         </li>
                       </ul>
                     </li>
@@ -256,16 +256,16 @@
                       <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-calendar" title="{{_('Period')}}"></i></a>
                       <ul class="dropdown-menu period" role="menu">
                         <li>
-                          <a href="javascript:;" >{{_('day')}}</a>
+                          <a href="javascript:;" >{{_('Day')}}</a>
                         </li>
                         <li>
-                          <a href="javascript:;" >{{_('week')}}</a>
+                          <a href="javascript:;" >{{_('Week')}}</a>
                         </li>
                         <li>
-                          <a href="javascript:;" >{{_('month')}}</a>
+                          <a href="javascript:;" >{{_('Month')}}</a>
                         </li>
                         <li>
-                          <a href="javascript:;" >{{_('year')}}</a>
+                          <a href="javascript:;" >{{_('Year')}}</a>
                         </li>
                       </ul>
                     </li>

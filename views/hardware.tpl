@@ -51,9 +51,9 @@
                   <p>{{_('TerrariumPI software has support for different kind of sensors. The following sensors below are tested with TerrariumPI software.')}}</p>
                   <div class="row">
                     <img src="static/images/documentation/ds1820-Raspberry-pi.png" alt="{{_('1Wire DS18B20 wiring scheme')}}" class="img-thumbnail alignright col-xs-3" />
-                    <h4>{{_('1 Wire')}}</h4>
-                    <p>{{_('The 1 wire bus will be scanned automatically during start up to load the connected and supported sensors. The DS18B20 sensors can share the GPIO pin by putting the sensors in parallel.')}}</p>
-                    <p>{{_('Through the 1 wire bus of the Raspberry Pi you can use the following hardware sensors')}}</p>
+                    <h4>{{_('1Wire')}}</h4>
+                    <p>{{_('The 1wire bus will be scanned automatically during start up to load the connected and supported sensors. The DS18B20 sensors can share the GPIO pin by putting the sensors in parallel.')}}</p>
+                    <p>{{_('Through the 1wire bus of the Raspberry Pi you can use the following hardware sensors')}}</p>
                     <ul>
                       <li><strong>{{_('DS18B20')}}</strong>: ...</li>
                     </ul>
@@ -61,12 +61,12 @@
                   <div class="row">
                     <img src="static/images/documentation/DHT_GPIO_schema.jpg" alt="{{_('DHT22 GPIO wiring scheme')}}" class="img-thumbnail alignright col-xs-3" />
                     <h4>{{_('GPIO')}}</h4>
-                    <p>{{_('GPIO sensors has to added manual to TerrariumPI software. This can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra capacitor')}}</p>
+                    <p>{{_('GPIO sensors has to added manually to TerrariumPI software. That can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra capacitor')}}</p>
                     <p>{{_('Through the GPIO bus of the Raspberry Pi you can use the following hardware sensors')}}</p>
                     <ul>
                       <li><strong>{{_('DHT11')}}</strong>: ...</li>
                       <li><strong>{{_('DHT22')}}</strong>: ...</li>
-                      <li><strong>{{_('AM2303')}}</strong>: ...</li>
+                      <li><strong>{{_('AM2302')}}</strong>: ...</li>
                     </ul>
                   </div>
                   <div class="row">

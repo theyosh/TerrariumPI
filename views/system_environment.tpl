@@ -21,7 +21,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2 class="orange"><i class="fa fa-lightbulb-o"></i> {{_('Lights')}} <small class="data_update">{{_('settings')}}</small></h2>
+                  <h2 class="orange"><i class="fa fa-lightbulb-o"></i> {{_('Lights')}} <small class="data_update">{{_('Settings')}}</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -96,7 +96,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2 class="blue"><i class="fa fa-tint"></i> {{_('Sprayer')}} <small class="data_update">{{_('settings')}}</small></h2>
+                  <h2 class="blue"><i class="fa fa-tint"></i> {{_('Sprayer')}} <small class="data_update">{{_('Settings')}}</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -169,7 +169,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2 class="red"><i class="fa fa-fire"></i> {{_('Heater')}} <small class="data_update">{{_('settings')}}</small></h2>
+                  <h2 class="red"><i class="fa fa-fire"></i> {{_('Heater')}} <small class="data_update">{{_('Settings')}}</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -244,7 +244,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2 class="blue"><i class="fa fa-flag-o"></i> {{_('Cooling')}} <small class="data_update">{{_('settings')}}</small></h2>
+                  <h2 class="blue"><i class="fa fa-flag-o"></i> {{_('Cooling')}} <small class="data_update">{{_('Settings')}}</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>

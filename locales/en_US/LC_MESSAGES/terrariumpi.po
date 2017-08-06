@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2017-08-06 12:56+CEST\n"
-"PO-Revision-Date: 2017-08-06 12:56+0200\n"
+"POT-Creation-Date: 2017-08-06 17:27+CEST\n"
+"PO-Revision-Date: 2017-08-06 17:27+0200\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -29,8 +29,8 @@ msgid "Holds the sensor hardware type. Supported hardware types are: %s."
 msgstr "Holds the sensor hardware type. Supported hardware types are: %s."
 
 #: terrariumTranslations.py:27
-msgid "Holds the sensor address. Depending on hardware type, it is either a read only hex number or GPIO pin. When using DHT11, DHT22 or AM2303 use <strong>Broadcom</strong> pin numbering (BCM)"
-msgstr "Holds the sensor address. Depending on hardware type, it is either a read only hex number or GPIO pin. When using DHT11, DHT22 or AM2303 use <strong>Broadcom</strong> pin numbering (BCM)"
+msgid "Holds the sensor address. Depending on hardware type, it is either a read only hex number or GPIO pin. When using DHT11, DHT22 or AM2302 use <strong>Broadcom</strong> pin numbering (BCM)"
+msgstr "Holds the sensor address. Depending on hardware type, it is either a read only hex number or GPIO pin. When using DHT11, DHT22 or AM2302 use <strong>Broadcom</strong> pin numbering (BCM)"
 
 #: terrariumTranslations.py:28
 msgid "Holds the sensor type. Supported sensor types are: %s."
@@ -180,8 +180,8 @@ msgid "How much time must there be between two spray actions and after start up.
 msgstr "How much time must there be between two spray actions and after start up. Enter the amount of seconds in which the humidity can settle."
 
 #: terrariumTranslations.py:73
-msgid "How long is the system spraying. Enter the amount of seconds that the system is on when the humidity is to low."
-msgstr "How long is the system spraying. Enter the amount of seconds that the system is on when the humidity is to low."
+msgid "How long is the system spraying. Enter the amount of seconds that the system is on when the humidity is too low."
+msgstr "How long is the system spraying. Enter the amount of seconds that the system is on when the humidity is too low."
 
 #: terrariumTranslations.py:74
 msgid "Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the sprayer. Select all needed switches below."
@@ -383,16 +383,20 @@ msgstr "in"
 msgid "Total water in L"
 msgstr "Total water in L"
 
+#: views/dashboard.tpl:62 views/dashboard.tpl:122 views/dashboard.tpl:145
+#: views/dashboard.tpl:174 views/inc/usage_sensors.tpl:84
+#: views/inc/usage_sensors.tpl:154 views/inc/usage_sensors.tpl:186
+#: views/inc/usage_sensors.tpl:203 views/inc/usage_weather.tpl:13
+#: views/inc/usage_weather.tpl:85 views/sensor_settings.tpl:43
+#: views/sensor_settings.tpl:133 views/weather_forecast.tpl:7
+msgid "Current"
+msgstr "Current"
+
 #: views/dashboard.tpl:62 views/inc/menu.tpl:96
 #: views/inc/usage_dashboard.tpl:118 views/inc/usage_dashboard.tpl:211
 #: views/usage.tpl:25
 msgid "Environment"
 msgstr "Environment"
-
-#: views/dashboard.tpl:62 views/inc/usage_weather.tpl:13
-#: views/inc/usage_weather.tpl:85 views/weather_forecast.tpl:7
-msgid "current"
-msgstr "current"
 
 #: views/dashboard.tpl:71 views/dashboard.tpl:224 views/dashboard.tpl:276
 #: views/door_status.tpl:33 views/inc/menu.tpl:38 views/inc/menu.tpl:52
@@ -405,7 +409,9 @@ msgstr "current"
 #: views/inc/usage_switches.tpl:169 views/inc/usage_weather.tpl:34
 #: views/inc/usage_weather.tpl:94 views/inc/usage_webcams.tpl:46
 #: views/inc/usage_webcams.tpl:88 views/inc/usage_webcams.tpl:163
-#: views/switch_status.tpl:34 views/system_status.tpl:32
+#: views/switch_status.tpl:34 views/system_environment.tpl:24
+#: views/system_environment.tpl:99 views/system_environment.tpl:172
+#: views/system_environment.tpl:247 views/system_status.tpl:32
 #: views/system_status.tpl:88 views/system_status.tpl:144
 #: views/system_status.tpl:200 views/weather_forecast.tpl:16
 #: views/webcam.tpl:16
@@ -414,13 +420,20 @@ msgstr "Settings"
 
 #: views/dashboard.tpl:83 views/dashboard.tpl:112 views/dashboard.tpl:135
 #: views/dashboard.tpl:164
-msgid "disabled"
-msgstr "disabled"
-
-#: views/dashboard.tpl:83 views/dashboard.tpl:112 views/dashboard.tpl:135
-#: views/dashboard.tpl:164
 msgid "mode"
 msgstr "mode"
+
+#: views/dashboard.tpl:83 views/dashboard.tpl:112 views/dashboard.tpl:135
+#: views/dashboard.tpl:164 views/inc/usage_environment.tpl:24
+#: views/inc/usage_environment.tpl:120 views/inc/usage_environment.tpl:128
+#: views/inc/usage_environment.tpl:212 views/inc/usage_environment.tpl:220
+#: views/inc/usage_environment.tpl:306 views/inc/usage_environment.tpl:314
+#: views/system_environment.tpl:37 views/system_environment.tpl:112
+#: views/system_environment.tpl:120 views/system_environment.tpl:185
+#: views/system_environment.tpl:193 views/system_environment.tpl:260
+#: views/system_environment.tpl:268
+msgid "Disabled"
+msgstr "Disabled"
 
 #: views/dashboard.tpl:83 views/inc/usage_dashboard.tpl:122
 #: views/inc/usage_environment.tpl:14 views/inc/usage_environment.tpl:397
@@ -429,9 +442,18 @@ msgid "Lights"
 msgstr "Lights"
 
 #: views/dashboard.tpl:87 views/dashboard.tpl:116 views/dashboard.tpl:139
-#: views/dashboard.tpl:168
-msgid "State"
-msgstr "State"
+#: views/dashboard.tpl:168 views/inc/menu.tpl:60 views/inc/menu.tpl:71
+#: views/inc/menu.tpl:93 views/inc/usage_doors.tpl:74
+#: views/inc/usage_doors.tpl:79 views/inc/usage_doors.tpl:142
+#: views/inc/usage_environment.tpl:21 views/inc/usage_environment.tpl:83
+#: views/inc/usage_environment.tpl:117 views/inc/usage_environment.tpl:177
+#: views/inc/usage_environment.tpl:209 views/inc/usage_environment.tpl:271
+#: views/inc/usage_environment.tpl:303 views/inc/usage_environment.tpl:365
+#: views/inc/usage_switches.tpl:83 views/system_environment.tpl:34
+#: views/system_environment.tpl:109 views/system_environment.tpl:182
+#: views/system_environment.tpl:257
+msgid "Status"
+msgstr "Status"
 
 #: views/dashboard.tpl:93
 msgid "On"
@@ -450,13 +472,6 @@ msgstr "Duration"
 #: views/system_environment.tpl:99
 msgid "Sprayer"
 msgstr "Sprayer"
-
-#: views/dashboard.tpl:122 views/dashboard.tpl:145 views/dashboard.tpl:174
-#: views/inc/usage_sensors.tpl:84 views/inc/usage_sensors.tpl:154
-#: views/inc/usage_sensors.tpl:186 views/inc/usage_sensors.tpl:203
-#: views/sensor_settings.tpl:43 views/sensor_settings.tpl:133
-msgid "Current"
-msgstr "Current"
 
 #: views/dashboard.tpl:128 views/dashboard.tpl:151 views/dashboard.tpl:186
 #: views/inc/usage_sensors.tpl:138 views/inc/usage_sensors.tpl:174
@@ -493,40 +508,44 @@ msgid "warning"
 msgstr "warning"
 
 #: views/dashboard.tpl:207 views/dashboard.tpl:259 views/door_status.tpl:16
-#: views/inc/sensor_list.tpl:22 views/inc/usage_doors.tpl:31
+#: views/inc/sensor_list.tpl:22 views/inc/usage_dashboard.tpl:67
+#: views/inc/usage_dashboard.tpl:180 views/inc/usage_doors.tpl:31
 #: views/inc/usage_sensors.tpl:35 views/inc/usage_switches.tpl:31
 #: views/inc/usage_webcams.tpl:29 views/switch_status.tpl:17
 #: views/system_status.tpl:15 views/system_status.tpl:71
 #: views/system_status.tpl:127 views/system_status.tpl:183
-msgid "day"
-msgstr "day"
+msgid "Day"
+msgstr "Day"
 
 #: views/dashboard.tpl:210 views/dashboard.tpl:262 views/door_status.tpl:19
-#: views/inc/sensor_list.tpl:25 views/inc/usage_doors.tpl:34
-#: views/inc/usage_sensors.tpl:38 views/inc/usage_switches.tpl:34
-#: views/inc/usage_webcams.tpl:32 views/switch_status.tpl:20
-#: views/system_status.tpl:18 views/system_status.tpl:74
-#: views/system_status.tpl:130 views/system_status.tpl:186
-msgid "week"
-msgstr "week"
+#: views/inc/sensor_list.tpl:25 views/inc/usage_dashboard.tpl:181
+#: views/inc/usage_doors.tpl:34 views/inc/usage_sensors.tpl:38
+#: views/inc/usage_switches.tpl:34 views/inc/usage_webcams.tpl:32
+#: views/switch_status.tpl:20 views/system_status.tpl:18
+#: views/system_status.tpl:74 views/system_status.tpl:130
+#: views/system_status.tpl:186
+msgid "Week"
+msgstr "Week"
 
 #: views/dashboard.tpl:213 views/dashboard.tpl:265 views/door_status.tpl:22
-#: views/inc/sensor_list.tpl:28 views/inc/usage_doors.tpl:37
-#: views/inc/usage_sensors.tpl:41 views/inc/usage_switches.tpl:37
-#: views/inc/usage_webcams.tpl:35 views/switch_status.tpl:23
-#: views/system_status.tpl:21 views/system_status.tpl:77
-#: views/system_status.tpl:133 views/system_status.tpl:189
-msgid "month"
-msgstr "month"
+#: views/inc/sensor_list.tpl:28 views/inc/usage_dashboard.tpl:182
+#: views/inc/usage_doors.tpl:37 views/inc/usage_sensors.tpl:41
+#: views/inc/usage_switches.tpl:37 views/inc/usage_webcams.tpl:35
+#: views/switch_status.tpl:23 views/system_status.tpl:21
+#: views/system_status.tpl:77 views/system_status.tpl:133
+#: views/system_status.tpl:189
+msgid "Month"
+msgstr "Month"
 
 #: views/dashboard.tpl:216 views/dashboard.tpl:268 views/door_status.tpl:25
-#: views/inc/sensor_list.tpl:31 views/inc/usage_doors.tpl:40
-#: views/inc/usage_sensors.tpl:44 views/inc/usage_switches.tpl:40
-#: views/inc/usage_webcams.tpl:38 views/switch_status.tpl:26
-#: views/system_status.tpl:24 views/system_status.tpl:80
-#: views/system_status.tpl:136 views/system_status.tpl:192
-msgid "year"
-msgstr "year"
+#: views/inc/sensor_list.tpl:31 views/inc/usage_dashboard.tpl:183
+#: views/inc/usage_doors.tpl:40 views/inc/usage_sensors.tpl:44
+#: views/inc/usage_switches.tpl:40 views/inc/usage_webcams.tpl:38
+#: views/switch_status.tpl:26 views/system_status.tpl:24
+#: views/system_status.tpl:80 views/system_status.tpl:136
+#: views/system_status.tpl:192
+msgid "Year"
+msgstr "Year"
 
 #: views/dashboard.tpl:250
 msgid "Average Temperature"
@@ -666,25 +685,26 @@ msgstr "The Raspberry Pi should have network connection and optionally SSH enabl
 msgid "TerrariumPI software has support for different kind of sensors. The following sensors below are tested with TerrariumPI software."
 msgstr "TerrariumPI software has support for different kind of sensors. The following sensors below are tested with TerrariumPI software."
 
-#: views/hardware.tpl:54
-msgid "1 Wire"
-msgstr "1 Wire"
+#: views/hardware.tpl:54 views/inc/usage_sensors.tpl:115
+#: views/sensor_settings.tpl:94
+msgid "1Wire"
+msgstr "1Wire"
 
 #: views/hardware.tpl:55
-msgid "The 1 wire bus will be scanned automatically during start up to load the connected and supported sensors. The DS18B20 sensors can share the GPIO pin by putting the sensors in parallel."
-msgstr "The 1 wire bus will be scanned automatically during start up to load the connected and supported sensors. The DS18B20 sensors can share the GPIO pin by putting the sensors in parallel."
+msgid "The 1wire bus will be scanned automatically during start up to load the connected and supported sensors. The DS18B20 sensors can share the GPIO pin by putting the sensors in parallel."
+msgstr "The 1wire bus will be scanned automatically during start up to load the connected and supported sensors. The DS18B20 sensors can share the GPIO pin by putting the sensors in parallel."
 
 #: views/hardware.tpl:56
-msgid "Through the 1 wire bus of the Raspberry Pi you can use the following hardware sensors"
-msgstr "Through the 1 wire bus of the Raspberry Pi you can use the following hardware sensors"
+msgid "Through the 1wire bus of the Raspberry Pi you can use the following hardware sensors"
+msgstr "Through the 1wire bus of the Raspberry Pi you can use the following hardware sensors"
 
 #: views/hardware.tpl:58 views/hardware.tpl:78
 msgid "DS18B20"
 msgstr "DS18B20"
 
 #: views/hardware.tpl:64
-msgid "GPIO sensors has to added manual to TerrariumPI software. This can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra capacitor"
-msgstr "GPIO sensors has to added manual to TerrariumPI software. This can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra capacitor"
+msgid "GPIO sensors has to added manually to TerrariumPI software. That can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra capacitor"
+msgstr "GPIO sensors has to added manually to TerrariumPI software. That can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra capacitor"
 
 #: views/hardware.tpl:65
 msgid "Through the GPIO bus of the Raspberry Pi you can use the following hardware sensors"
@@ -700,9 +720,10 @@ msgstr "DHT11"
 msgid "DHT22"
 msgstr "DHT22"
 
-#: views/hardware.tpl:69
-msgid "AM2303"
-msgstr "AM2303"
+#: views/hardware.tpl:69 views/inc/usage_sensors.tpl:114
+#: views/sensor_settings.tpl:93
+msgid "AM2302"
+msgstr "AM2302"
 
 #: views/hardware.tpl:74 views/inc/usage_sensors.tpl:111
 #: views/sensor_settings.tpl:90
@@ -809,18 +830,6 @@ msgstr "Temperature"
 msgid "Humidity"
 msgstr "Humidity"
 
-#: views/inc/menu.tpl:60 views/inc/menu.tpl:71 views/inc/menu.tpl:93
-#: views/inc/usage_doors.tpl:74 views/inc/usage_doors.tpl:79
-#: views/inc/usage_doors.tpl:142 views/inc/usage_environment.tpl:21
-#: views/inc/usage_environment.tpl:83 views/inc/usage_environment.tpl:117
-#: views/inc/usage_environment.tpl:177 views/inc/usage_environment.tpl:209
-#: views/inc/usage_environment.tpl:271 views/inc/usage_environment.tpl:303
-#: views/inc/usage_environment.tpl:365 views/inc/usage_switches.tpl:83
-#: views/system_environment.tpl:34 views/system_environment.tpl:109
-#: views/system_environment.tpl:182 views/system_environment.tpl:257
-msgid "Status"
-msgstr "Status"
-
 #: views/inc/menu.tpl:82
 msgid "Show"
 msgstr "Show"
@@ -926,10 +935,6 @@ msgstr "Click on the door indicator to see the last 6 notifications. During load
 #: views/inc/usage_dashboard.tpl:65
 msgid "Date and time"
 msgstr "Date and time"
-
-#: views/inc/usage_dashboard.tpl:67 views/inc/usage_dashboard.tpl:180
-msgid "Day"
-msgstr "Day"
 
 #: views/inc/usage_dashboard.tpl:71
 msgid "The last indicator is the current time. When it is day time, a sun is shown."
@@ -1041,19 +1046,9 @@ msgstr "Period"
 msgid "With the calendar icon you can select multiple periods for the historical graph. The valid periods are:"
 msgstr "With the calendar icon you can select multiple periods for the historical graph. The valid periods are:"
 
-#: views/inc/usage_dashboard.tpl:181
-msgid "Week"
-msgstr "Week"
-
-#: views/inc/usage_dashboard.tpl:182
-msgid "Month"
-msgstr "Month"
-
-#: views/inc/usage_dashboard.tpl:183
-msgid "Year"
-msgstr "Year"
-
-#: views/inc/usage_dashboard.tpl:188
+#: views/inc/usage_dashboard.tpl:188 views/inc/usage_doors.tpl:65
+#: views/inc/usage_sensors.tpl:75 views/inc/usage_switches.tpl:65
+#: views/inc/usage_webcams.tpl:61
 msgid "Options"
 msgstr "Options"
 
@@ -1104,11 +1099,6 @@ msgstr "Warning badge when the door is open"
 msgid "Right side"
 msgstr "Right side"
 
-#: views/inc/usage_doors.tpl:65 views/inc/usage_sensors.tpl:75
-#: views/inc/usage_switches.tpl:65 views/inc/usage_webcams.tpl:61
-msgid "options"
-msgstr "options"
-
 #: views/inc/usage_doors.tpl:67 views/inc/usage_webcams.tpl:63
 msgid "Show or hide the door"
 msgstr "Show or hide the door"
@@ -1153,7 +1143,7 @@ msgstr "On the door settings page you can configure all needed doors. Click on %
 
 #: views/inc/usage_doors.tpl:136 views/inc/usage_environment.tpl:394
 #: views/inc/usage_sensors.tpl:197 views/inc/usage_switches.tpl:157
-#: views/inc/usage_webcams.tpl:151
+#: views/inc/usage_webcams.tpl:151 views/profile.tpl:6
 msgid "Overview"
 msgstr "Overview"
 
@@ -1170,16 +1160,6 @@ msgstr "The light system always works on time. You can use the weather sun rise 
 #: views/inc/usage_weather.tpl:36
 msgid "All fields with a %s are required."
 msgstr "All fields with a %s are required."
-
-#: views/inc/usage_environment.tpl:24 views/inc/usage_environment.tpl:120
-#: views/inc/usage_environment.tpl:128 views/inc/usage_environment.tpl:212
-#: views/inc/usage_environment.tpl:220 views/inc/usage_environment.tpl:306
-#: views/inc/usage_environment.tpl:314 views/system_environment.tpl:37
-#: views/system_environment.tpl:112 views/system_environment.tpl:120
-#: views/system_environment.tpl:185 views/system_environment.tpl:193
-#: views/system_environment.tpl:260 views/system_environment.tpl:268
-msgid "Disabled"
-msgstr "Disabled"
 
 #: views/inc/usage_environment.tpl:24 views/inc/usage_environment.tpl:120
 #: views/inc/usage_environment.tpl:128 views/inc/usage_environment.tpl:212
@@ -1375,14 +1355,6 @@ msgstr "The current value is also written below the graph in degrees or percenta
 msgid "The history graph will shows the measured value. The flat lines are the minimum and maximum values that are configured. When the measured value is outside this range an alarm will be given. Hover above the graph lines to get detailed information."
 msgstr "The history graph will shows the measured value. The flat lines are the minimum and maximum values that are configured. When the measured value is outside this range an alarm will be given. Hover above the graph lines to get detailed information."
 
-#: views/inc/usage_sensors.tpl:114 views/sensor_settings.tpl:93
-msgid "AM2302"
-msgstr "AM2302"
-
-#: views/inc/usage_sensors.tpl:115 views/sensor_settings.tpl:94
-msgid "1Wire"
-msgstr "1Wire"
-
 #: views/inc/usage_sensors.tpl:146 views/inc/usage_sensors.tpl:180
 #: views/sensor_settings.tpl:37 views/sensor_settings.tpl:125
 msgid "Limit min"
@@ -1505,8 +1477,8 @@ msgid "m/s"
 msgstr "m/s"
 
 #: views/inc/usage_weather.tpl:53 views/weather_settings.tpl:57
-msgid "km/h"
-msgstr "km/h"
+msgid "Km/h"
+msgstr "Km/h"
 
 #: views/inc/usage_webcams.tpl:14
 msgid "Per webcam the title holds shows some values and options."
@@ -1665,10 +1637,6 @@ msgstr "Copyright"
 msgid "Here are some photos how you can use it."
 msgstr "Here are some photos how you can use it."
 
-#: views/profile.tpl:6
-msgid "overview"
-msgstr "overview"
-
 #: views/profile.tpl:15
 msgid "Edit"
 msgstr "Edit"
@@ -1720,11 +1688,6 @@ msgstr "Add new switch"
 #: views/system_environment.tpl:16
 msgid "Here you can configure your environment."
 msgstr "Here you can configure your environment."
-
-#: views/system_environment.tpl:24 views/system_environment.tpl:99
-#: views/system_environment.tpl:172 views/system_environment.tpl:247
-msgid "settings"
-msgstr "settings"
 
 #: views/system_settings.tpl:16
 msgid "Here you can configure your TerrariumPI server."
@@ -1867,8 +1830,8 @@ msgid "Click to change image"
 msgstr "Click to change image"
 
 #: Missing text string
-msgid "closed"
-msgstr "closed"
+msgid "Closed"
+msgstr "Closed"
 
 #: Missing text string
 msgid "Connection lost"
@@ -1935,10 +1898,6 @@ msgid "Information"
 msgstr "Information"
 
 #: Missing text string
-msgid "Km/h"
-msgstr "Km/h"
-
-#: Missing text string
 msgid "Load"
 msgstr "Load"
 
@@ -1949,14 +1908,6 @@ msgstr "Load 15"
 #: Missing text string
 msgid "Load 5"
 msgstr "Load 5"
-
-#: Missing text string
-msgid "loading"
-msgstr "loading"
-
-#: Missing text string
-msgid "open"
-msgstr "open"
 
 #: Missing text string
 msgid "Open"

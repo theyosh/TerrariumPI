@@ -28,16 +28,16 @@
                                 <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-calendar" title="{{_('Period')}}"></i></a>
                                 <ul class="dropdown-menu period" role="menu">
                                   <li>
-                                    <a href="javascript:;" >{{_('day')}}</a>
+                                    <a href="javascript:;" >{{_('Day')}}</a>
                                   </li>
                                   <li>
-                                    <a href="javascript:;" >{{_('week')}}</a>
+                                    <a href="javascript:;" >{{_('Week')}}</a>
                                   </li>
                                   <li>
-                                    <a href="javascript:;" >{{_('month')}}</a>
+                                    <a href="javascript:;" >{{_('Month')}}</a>
                                   </li>
                                   <li>
-                                    <a href="javascript:;" >{{_('year')}}</a>
+                                    <a href="javascript:;" >{{_('Year')}}</a>
                                   </li>
                                 </ul>
                               </li>
@@ -62,7 +62,7 @@
                           <li>{{_('The power usage and/or water flow per minute when switched on')}}</li>
                           <li>{{_('The total amount of power usage and/or water usage for the selected history period')}}</li>
                         </ul>
-                        <h4>{{_('Right side')}} <small>({{_('options')}})</small></h4>
+                        <h4>{{_('Right side')}} <small>({{_('Options')}})</small></h4>
                         <ul>
                           <li><i class="fa fa-chevron-up"></i>: {{_('Show or hide the switch')}}</li>
                           <li><i class="fa fa-calendar" title="{{_('Period')}}"></i>: {{_('Select history graph period')}}</li>

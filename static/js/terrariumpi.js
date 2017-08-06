@@ -834,7 +834,7 @@ function history_graph(name, data, type) {
       //inverseTransform: function (v) { return -v; }
     },
     yaxis: {
-      ticks: (type === 'door' ? [[0, '{{_('closed')}}'], [1, '{{_('open')}}']] : 8),
+      ticks: (type === 'door' ? [[0, '{{_('Closed')}}'], [1, '{{_('Open')}}']] : 8),
       tickColor: "rgba(51, 51, 51, 0.06)",
       tickDecimals: 1,
       tickFormatter: function(val, axis) {
@@ -860,7 +860,7 @@ function history_graph(name, data, type) {
             break;
 
           case 'door':
-            val = (val ? '{{_('open')}}' : '{{_('closed')}}');
+            val = (val ? '{{_('Open')}}' : '{{_('Closed')}}');
             break;
 
           default:
@@ -971,7 +971,7 @@ function history_graph(name, data, type) {
   }
 
   if ($('#' + name + ' .history_graph').length == 1) {
-    $('#' + name + ' .history_graph').html('').removeClass('{{_('loading')}}');
+    $('#' + name + ' .history_graph').html('').removeClass('loading');
     $.plot($('#' + name + ' .history_graph'), graph_data, graph_options);
 
     if (type == 'switch') {

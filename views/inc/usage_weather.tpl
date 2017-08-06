@@ -3,14 +3,14 @@
                     <div class="tab-content">
                       <div class="tab-pane active" id="usage-tab-weather-weather">
                         <div class="interactive_screenshot">
-                          <div id="screenshot_weather_forecast_current" class="click_area" title="{{_('Weather')}} {{_('current')}}"></div>
+                          <div id="screenshot_weather_forecast_current" class="click_area" title="{{_('Weather')}} {{_('Current')}}"></div>
                           <div id="screenshot_weather_forecast_day" class="click_area" title="{{_('Day forecast')}}"></div>
                           <div id="screenshot_weather_forecast_week" class="click_area" title="{{_('Week forecast')}}"></div>
                           <img src="static/images/documentation/weather_forecast.png" alt="{{_('Weather forecast screenshot')}}" />
                         </div>
                       </div>
                       <div class="tab-pane" id="usage-tab-weather-forecast-current">
-                        <h3 class="lead">{{_('Weather')}} {{_('current')}}</h3>
+                        <h3 class="lead">{{_('Weather')}} {{_('Current')}}</h3>
                         <img src="static/images/documentation/weather_current.gif" alt="{{_('Current weather widget screenshot')}}" class="thumbnail alignright" />
                         <p>{{_('The forecast widgets shows the forecast at current time and the location for which the forecast is valid. The data is loaded external from the external API source and is not measured by the software.')}}</p>
                         <p>{{_('It shows the current day and time for which the forecast is valid. And what temperature indicator is used.')}}</p>
@@ -50,7 +50,7 @@
                                     <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('weather_field_wind_speed')}}">
                                       <select class="form-control" name="windspeed" tabindex="-1" placeholder="{{_('Select an option')}}">
                                         <option value="ms">{{_('m/s')}}</option>
-                                        <option value="kmh">{{_('km/h')}}</option>
+                                        <option value="kmh">{{_('Km/h')}}</option>
                                       </select>
                                     </div>
                                   </div>
@@ -82,7 +82,7 @@
                         <a data-toggle="tab" href="#usage-tab-weather-weather" title="{{_('Weather')}}">{{_('Weather')}}</a>
                       </li>
                       <li>
-                        <a data-toggle="tab" href="#usage-tab-weather-forecast-current" title="{{_('Weather')}} {{_('current')}}">{{_('Weather')}} {{_('current')}}</a>
+                        <a data-toggle="tab" href="#usage-tab-weather-forecast-current" title="{{_('Weather')}} {{_('Current')}}">{{_('Weather')}} {{_('Current')}}</a>
                       </li>
                       <li>
                         <a data-toggle="tab" href="#usage-tab-weather-forecast-day" title="{{_('Day forecast')}}">{{_('Day forecast')}}</a>

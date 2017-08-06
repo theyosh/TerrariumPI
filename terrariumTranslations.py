@@ -24,7 +24,7 @@ class terrariumTranslations():
 
     # Sensors
     self.translations['sensor_field_hardware'] = _('Holds the sensor hardware type. Supported hardware types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSensor.valid_hardware_types) + '</strong>')
-    self.translations['sensor_field_address'] = _('Holds the sensor address. Depending on hardware type, it is either a read only hex number or GPIO pin. When using DHT11, DHT22 or AM2303 use <strong>Broadcom</strong> pin numbering (BCM)')
+    self.translations['sensor_field_address'] = _('Holds the sensor address. Depending on hardware type, it is either a read only hex number or GPIO pin. When using DHT11, DHT22 or AM2302 use <strong>Broadcom</strong> pin numbering (BCM)')
     self.translations['sensor_field_type'] = _('Holds the sensor type. Supported sensor types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSensor.valid_sensor_types) + '</strong>')
     self.translations['sensor_field_name'] = _('Holds the name of the sensor.')
     self.translations['sensor_field_alarm_min'] = _('Holds the sensor lower alarm value of the sensor. When below this value, alarms can be triggered.')
@@ -70,7 +70,7 @@ class terrariumTranslations():
     self.translations['environment_field_sprayer_enable_during_night'] = _('Enable spraying when the lights are off. This can cause water flow when there is not enough heat to vaporize the water.')
     self.translations['environment_field_sprayer_mode'] = _('Select the operating mode. For now only sensor mode is available.')
     self.translations['environment_field_sprayer_delay'] = _('How much time must there be between two spray actions and after start up. Enter the amount of seconds in which the humidity can settle.')
-    self.translations['environment_field_sprayer_duration'] = _('How long is the system spraying. Enter the amount of seconds that the system is on when the humidity is to low.')
+    self.translations['environment_field_sprayer_duration'] = _('How long is the system spraying. Enter the amount of seconds that the system is on when the humidity is too low.')
     self.translations['environment_field_sprayer_power_switches'] = _('Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the sprayer. Select all needed switches below.')
     self.translations['environment_field_sprayer_humidity_sensors'] = _('Select the humidity sensors that are used to control the humidity. When selecting multiple sensors, the average is calculated to determine the final humidity.')
 

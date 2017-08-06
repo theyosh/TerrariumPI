@@ -54,7 +54,7 @@
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('weather_field_wind_speed')}}">
                         <select class="form-control" name="windspeed" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="ms">{{_('m/s')}}</option>
-                          <option value="kmh">{{_('km/h')}}</option>
+                          <option value="kmh">{{_('Km/h')}}</option>
                         </select>
                       </div>
                     </div>

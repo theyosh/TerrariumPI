@@ -12,16 +12,16 @@
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-calendar" title="{{_('Period')}}"></i></a>
                     <ul class="dropdown-menu period" role="menu">
                       <li>
-                        <a href="javascript:;" >{{_('day')}}</a>
+                        <a href="javascript:;" >{{_('Day')}}</a>
                       </li>
                       <li>
-                        <a href="javascript:;" >{{_('week')}}</a>
+                        <a href="javascript:;" >{{_('Week')}}</a>
                       </li>
                       <li>
-                        <a href="javascript:;" >{{_('month')}}</a>
+                        <a href="javascript:;" >{{_('Month')}}</a>
                       </li>
                       <li>
-                        <a href="javascript:;" >{{_('year')}}</a>
+                        <a href="javascript:;" >{{_('Year')}}</a>
                       </li>
                     </ul>
                   </li>
@@ -68,16 +68,16 @@
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-calendar" title="{{_('Period')}}"></i></a>
                     <ul class="dropdown-menu period" role="menu">
                       <li>
-                        <a href="javascript:;" >{{_('day')}}</a>
+                        <a href="javascript:;" >{{_('Day')}}</a>
                       </li>
                       <li>
-                        <a href="javascript:;" >{{_('week')}}</a>
+                        <a href="javascript:;" >{{_('Week')}}</a>
                       </li>
                       <li>
-                        <a href="javascript:;" >{{_('month')}}</a>
+                        <a href="javascript:;" >{{_('Month')}}</a>
                       </li>
                       <li>
-                        <a href="javascript:;" >{{_('year')}}</a>
+                        <a href="javascript:;" >{{_('Year')}}</a>
                       </li>
                     </ul>
                   </li>
@@ -124,16 +124,16 @@
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-calendar" title="{{_('Period')}}"></i></a>
                     <ul class="dropdown-menu period" role="menu">
                       <li>
-                        <a href="javascript:;" >{{_('day')}}</a>
+                        <a href="javascript:;" >{{_('Day')}}</a>
                       </li>
                       <li>
-                        <a href="javascript:;" >{{_('week')}}</a>
+                        <a href="javascript:;" >{{_('Week')}}</a>
                       </li>
                       <li>
-                        <a href="javascript:;" >{{_('month')}}</a>
+                        <a href="javascript:;" >{{_('Month')}}</a>
                       </li>
                       <li>
-                        <a href="javascript:;" >{{_('year')}}</a>
+                        <a href="javascript:;" >{{_('Year')}}</a>
                       </li>
                     </ul>
                   </li>
@@ -180,16 +180,16 @@
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-calendar" title="{{_('Period')}}"></i></a>
                     <ul class="dropdown-menu period" role="menu">
                       <li>
-                        <a href="javascript:;" >{{_('day')}}</a>
+                        <a href="javascript:;" >{{_('Day')}}</a>
                       </li>
                       <li>
-                        <a href="javascript:;" >{{_('week')}}</a>
+                        <a href="javascript:;" >{{_('Week')}}</a>
                       </li>
                       <li>
-                        <a href="javascript:;" >{{_('month')}}</a>
+                        <a href="javascript:;" >{{_('Month')}}</a>
                       </li>
                       <li>
-                        <a href="javascript:;" >{{_('year')}}</a>
+                        <a href="javascript:;" >{{_('Year')}}</a>
                       </li>
                     </ul>
                   </li>
