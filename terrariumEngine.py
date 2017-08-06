@@ -605,9 +605,6 @@ class terrariumEngine():
     return self.get_profile_config()['image']
 
   def set_profile(self,data,files):
-
-    print data
-
     if 'profile_image' in files.keys():
       profile_image = files.get('profile_image')
       name, ext = os.path.splitext(profile_image.filename)
@@ -620,7 +617,6 @@ class terrariumEngine():
     update_ok = self.config.save_profile(data)
     return update_ok
   # End profile part
-
 
 
 
