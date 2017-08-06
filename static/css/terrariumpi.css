@@ -51,7 +51,8 @@ form#profile input,
 form#profile .xdisplay_inputx,
 form#profile .editor-wrapper,
 form#profile .editor,
-form#profile .submit {
+form#profile .submit,
+form#profile .glyphicon.glyphicon-import{
   display: none;
 }
 
@@ -59,7 +60,8 @@ form#profile.edit input,
 form#profile.edit .xdisplay_inputx,
 form#profile.edit .editor-wrapper,
 form#profile.edit .editor,
-form#profile.edit .submit {
+form#profile.edit .submit,
+form#profile.edit .glyphicon.glyphicon-import{
   display: block;
 }
 

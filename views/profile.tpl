@@ -22,35 +22,36 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
-                      <div class="profile_img">
-                        <div id="crop-avatar">
-                          <img class="img-responsive avatar-view" src="{{person_image}}" alt="{{_('Avatar')}}" title="{{_('Change the avatar')}}" onclick="uploadProfileImage()">
+                    <form id="profile" action="/api/config/profile" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
+                      <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                        <div class="profile_img">
+                          <div id="crop-avatar">
+                            <img class="img-responsive avatar-view" src="{{person_image}}" alt="{{_('Avatar')}}" >
+                            <span title="{{_('Click to change image')}}" class="glyphicon glyphicon-import" aria-hidden="true" style="margin: 0.2em;position: absolute;font-size: 2em;" onclick="uploadProfileImage()"> </span>
+                          </div>
                         </div>
+                        <h3 class="profile_name">{{person_name}}</h3>
+                        <ul class="list-unstyled user_data">
+                          <li>
+                            <i class="fa fa-map-marker user-profile-icon"></i>
+                            <span class="profile_location">...</span>
+                          </li>
+                          <li>
+                            <i class="fa fa-briefcase user-profile-icon"></i>
+                            <span class="profile_type">...</span>
+                          </li>
+                          <li class="m-top-xs">
+                            <i class="fa fa-external-link user-profile-icon"></i>
+                            <span class="profile_moreinfo">...</span>
+                          </li>
+                        </ul>
                       </div>
-                      <h3 class="profile_name">{{person_name}}</h3>
-                      <ul class="list-unstyled user_data">
-                        <li>
-                          <i class="fa fa-map-marker user-profile-icon"></i>
-                          <span class="profile_location">...</span>
-                        </li>
-                        <li>
-                          <i class="fa fa-briefcase user-profile-icon"></i>
-                          <span class="profile_type">...</span>
-                        </li>
-                        <li class="m-top-xs">
-                          <i class="fa fa-external-link user-profile-icon"></i>
-                          <span class="profile_moreinfo">...</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="col-md-9 col-sm-9 col-xs-12">
-                      <div class="profile_title">
-                        <div class="col-md-6">
-                          <h2>{{_('General information')}}</h2>
+                      <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div class="profile_title">
+                          <div class="col-md-6">
+                            <h2>{{_('General information')}}</h2>
+                          </div>
                         </div>
-                      </div>
-                      <form id="profile" action="/api/config/profile" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
                         <div class="form-group">
                           <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{_('Name')}} </label>
                           <div class="col-md-8 col-sm-8 col-xs-12">
@@ -178,8 +179,8 @@
                             <button class="btn btn-success" type="submit">{{_('Submit')}}</button>
                           </div>
                         </div>
-                      </form>
-                    </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>

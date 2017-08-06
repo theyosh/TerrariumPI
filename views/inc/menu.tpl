@@ -138,7 +138,6 @@
               <a id="menu_toggle"><i class="fa fa-bars"></i></a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-
               <li id="system_time" role="presentation">
                 <i class="fa fa-clock-o"></i> <span >{{_('date/time')}}</span>
               </li>
