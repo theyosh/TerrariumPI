@@ -16,6 +16,8 @@ Changelog
 - Fix 404 error in template rendering. [TheYOSH]
 
 **Updates**
+- Update changelog. [TheYOSH]
+- Update changelog. [TheYOSH]
 - Update translations. [TheYOSH]
 
 **Other**
