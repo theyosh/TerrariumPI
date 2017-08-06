@@ -235,7 +235,7 @@ class terrariumWeather():
   def __set_source(self,source):
     for source_type in terrariumWeather.valid_sources:
       data = terrariumWeather.valid_sources[source_type].match(source)
-      if data and self.source != source:
+      if data:
         self.source = source
         self.type = source_type
 

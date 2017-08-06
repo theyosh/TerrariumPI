@@ -207,57 +207,63 @@ function process_form() {
 function prepare_form_data(form) {
   var formdata = [];
   var form_type = form.attr('action').split('/').pop();
-  var re = /(sensor|switch|webcam|light|sprayer|heater|cooler|door)(_\d+)?_(.*)/i;
+  var re = /(sensor|switch|webcam|light|sprayer|heater|cooler|door|profile)(_\d+)?_(.*)/i;
   var matches = null;
   var objectdata = {};
   var prev_nr = -1;
-  if (form_type === 'weather' || form_type === 'environment' || form_type === 'system') {
+  if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'profile') {
     formdata = {};
   }
   try {
     form.find('div:visible input:not([disabled="disabled"]),div:visible select:not([disabled="disabled"])').each(function() {
       var field_name = $(this).attr('name');
-      var field_value = $(this).val();
-      switch (form_type) {
-        case 'weather':
-        case 'system':
-          formdata[field_name] = field_value;
-          break;
-        case 'sensors':
-        case 'switches':
-        case 'environment':
-        case 'webcams':
-        case 'doors':
-          if ((matches = re.exec(field_name)) !== null) {
-            if (matches.index === re.lastIndex) {
-              re.lastIndex++;
-            }
-            var current_nr = -1;
-            if (matches.length >= 3) {
-              if (matches[2] === undefined) {
-                current_nr = matches[1];
-              } else {
-                current_nr = matches[2].substr(1) * 1;
+      if (field_name !== undefined) {
+        var field_value = $(this).val();
+        switch (form_type) {
+          case 'profile':
+            if (field_name == 'age') {
+              field_value = moment(field_value,'L').unix();
+            };
+          case 'weather':
+          case 'system':
+            formdata[field_name] = field_value;
+            break;
+          case 'sensors':
+          case 'switches':
+          case 'environment':
+          case 'webcams':
+          case 'doors':
+            if ((matches = re.exec(field_name)) !== null) {
+              if (matches.index === re.lastIndex) {
+                re.lastIndex++;
               }
-              if (prev_nr != current_nr) {
-                if (Object.keys(objectdata).length > 1) {
-                  if (form_type === 'weather' || form_type === 'environment' || form_type === 'system') {
-                    formdata[prev_nr] = $.extend(true, {}, objectdata);
-                  } else {
-                    formdata.push($.extend(true, {}, objectdata));
-                  }
+              var current_nr = -1;
+              if (matches.length >= 3) {
+                if (matches[2] === undefined) {
+                  current_nr = matches[1];
+                } else {
+                  current_nr = matches[2].substr(1) * 1;
                 }
-                // New item
-                objectdata = {};
-                prev_nr = current_nr;
+                if (prev_nr != current_nr) {
+                  if (Object.keys(objectdata).length > 1) {
+                    if (form_type === 'environment') {
+                      formdata[prev_nr] = $.extend(true, {}, objectdata);
+                    } else {
+                      formdata.push($.extend(true, {}, objectdata));
+                    }
+                  }
+                  // New item
+                  objectdata = {};
+                  prev_nr = current_nr;
+                }
+                if (matches[3] === 'on' || matches[3] === 'off') {
+                  field_value = moment(field_value, 'LT').unix();
+                }
+                objectdata[matches[3]] = field_value;
               }
-              if (matches[3] === 'on' || matches[3] === 'off') {
-                field_value = moment(field_value, 'LT').unix();
-              }
-              objectdata[matches[3]] = field_value;
             }
-          }
-          break;
+            break;
+        }
       }
     });
     if (Object.keys(objectdata).length > 1) {
@@ -1370,6 +1376,107 @@ function version_check() {
       version_check();
     },   24 * 60 * 60 * 1000 ); // Check once a day
   });
+}
+
+function init_wysiwyg() {
+
+  if (typeof ($.fn.wysiwyg) === 'undefined') { return; }
+
+  function init_ToolbarBootstrapBindings() {
+
+    var fonts = [ 'Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
+                  'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
+                  'Times New Roman', 'Verdana'
+                ],
+        fontTarget = $('.fa.fa-font').parent().siblings('.dropdown-menu');
+    $.each(fonts, function(idx, fontName) {
+      fontTarget.append($('<li><a data-edit="fontName ' + fontName + '" style="font-family:\'' + fontName + '\'">' + fontName + '</a></li>'));
+    });
+/*
+    $('.btn-toolbar.editor a[title]').tooltip({
+      container: 'body'
+    });
+*/
+    $('.dropdown-menu input').click(function() {
+      return false;
+    }).change(function() {
+      $(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');
+    }).keydown('esc', function() {
+      this.value = '';
+      $(this).change();
+    });
+
+    $('[data-role=magic-overlay]').each(function() {
+      var overlay = $(this),
+          target = $(overlay.data('target'));
+      overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
+    });
+
+    if ("onwebkitspeechchange" in document.createElement("input")) {
+      var editorOffset = $('#editor').offset();
+
+      $('.voiceBtn').css('position', 'absolute').offset({
+        top: editorOffset.top,
+        left: editorOffset.left + $('#editor').innerWidth() - 35
+      });
+    } else {
+      $('.voiceBtn').hide();
+    }
+  }
+
+  function showErrorAlert(reason, detail) {
+    var msg = '';
+    if (reason === 'unsupported-file-type') {
+      msg = "Unsupported format " + detail;
+    } else {
+      console.log("error uploading file", reason, detail);
+    }
+    $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>' +
+      '<strong>File upload error</strong> ' + msg + ' </div>').prependTo('#alerts');
+  }
+
+  $('.editor-wrapper').each(function(){
+    var id = $(this).attr('id');	//editor-one
+    $(this).wysiwyg({
+      toolbarSelector: '[data-target="#' + id + '"]',
+      fileUploadError: showErrorAlert
+    });
+  });
+
+  init_ToolbarBootstrapBindings();
+  window.prettyPrint;
+  prettyPrint();
+};
+
+function edit_profile() {
+  $('form#profile').toggleClass('edit');
+  if ($('form#profile').hasClass('edit')) {
+    init_wysiwyg();
+    $('input[name="age"]').daterangepicker({
+      singleDatePicker: true,
+    });
+  }
+  return false;
+}
+
+function uploadProfileImage() {
+  var file = $('<input>').attr({'type':'file','name':'profile_image'}).on('change',function() {
+    var fd = new FormData();
+    fd.append('profile_image',file[0].files[0]);
+    $.ajax({
+        url: '/api/config/profile',
+        type: 'POST',
+        data: fd,
+        enctype: 'multipart/form-data',
+        success:function(data){
+           load_page('profile.html');
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+  });
+  file.click();
 }
 
 $(document).ready(function() {

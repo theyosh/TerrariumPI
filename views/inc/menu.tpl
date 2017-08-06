@@ -5,7 +5,7 @@
           </div>
           <div class="clearfix"></div><!-- menu profile quick info -->
           <div class="profile">
-            <div class="profile_pic"><img alt="..." class="img-circle profile_img" src="{{person_image}}"></div>
+            <div class="profile_pic"><img alt="{{person_name}}" class="img-circle profile_img" src="{{person_image}}"></div>
             <div class="profile_info">
               <span>{{_('Welcome')}},</span>
               <h2>{{person_name}}</h2>
@@ -18,7 +18,15 @@
               <h3>{{_('General')}}</h3>
               <ul class="nav side-menu">
                 <li class="active">
-                  <a href="dashboard.html" title="{{_('Home')}}"><i class="fa fa-home"></i> {{_('Home')}}</a>
+                  <a><i class="fa fa-home"></i> {{_('Home')}} <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display:block">
+                    <li>
+                      <a href="dashboard.html">{{_('Dashboard')}}</a>
+                    </li>
+                    <li>
+                      <a href="profile.html">{{_('Profile')}}</a>
+                    </li>
+                  </ul>
                 </li>
                 <li>
                   <a><i class="fa fa-cloud"></i> {{_('Weather')}} <span class="fa fa-chevron-down"></span></a>

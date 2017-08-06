@@ -33,12 +33,13 @@
   <script type="text/javascript" src="/static/leaflet/leaflet.js"></script>
   <script type="text/javascript" src="/static/leaflet.loading/src/Control.Loading.js"></script>
   <script type="text/javascript" src='/static/leaflet.fullscreen/dist/Leaflet.fullscreen.min.js'></script>
-
-
-
+  <!-- bootstrap-wysiwyg -->
+  <script type="text/javascript" src="/gentelella/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+  <script type="text/javascript" src="/gentelella/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
+  <script type="text/javascript" src="/gentelella/vendors/google-code-prettify/src/prettify.js"></script>
+  <!-- bootstrap-datetimepicker -->
+  <script type="text/javascript" src="/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
   <script type="text/javascript" src='/static/fancybox/dist/jquery.fancybox.min.js'></script>
-
-
   <!-- Load the terrariumPI JS script-->
   <script type="text/javascript" src="/static/js/jquery.fullscreen-min.js"></script>
   <!-- Load the terrariumPI JS script-->

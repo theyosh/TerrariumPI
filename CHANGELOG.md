@@ -2,8 +2,32 @@ Changelog
 =========
 
 
-2.5(2017-07-28)
-------------------
+2.6 (2017-08-06)
+------------
+
+**New**
+- Add profile page reloading after changing profile image. [TheYOSH]
+- Add Animal Profile option. [TheYOSH]
+- Add robots.txt. [TheYOSH]
+
+**Fixes**
+- Small fix. [TheYOSH]
+- Fix missing variable in template. [TheYOSH]
+- Fix 404 error in template rendering. [TheYOSH]
+
+**Updates**
+- Update changelog. [TheYOSH]
+- Update changelog. [TheYOSH]
+- Update translations. [TheYOSH]
+
+**Other**
+- Changed profile image uploading. [TheYOSH]
+- Moved profile page to main menu. [TheYOSH]
+- Remove debug. [TheYOSH]
+
+
+2.5 (2017-07-28)
+----------------
 
 **New**
 - Add fancybox. [TheYOSH]
@@ -16,6 +40,7 @@ Changelog
   the weather page. Close #9. [TheYOSH]
 
 **Updates**
+- Update changelog. [TheYOSH]
 - Update changelog. [TheYOSH]
 - Update documentation part2. [TheYOSH]
 - Update readme. [TheYOSH]
