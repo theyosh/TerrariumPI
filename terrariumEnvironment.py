@@ -278,9 +278,9 @@ class terrariumEnvironment():
                                                                                month=int(now.strftime('%m')),
                                                                                day=int(now.strftime('%d')))
 
-    if 'light' == part:
+    if 'light' == part and self.is_light_enabled():
       # Duration check
-      duration = data['off'] - data['on']
+      duration = data['off'] - data['on']     
       # Reduce the amount of hours if to much
       if duration > datetime.timedelta(hours=state_data['max_hours']):
         duration -= datetime.timedelta(hours=state_data['max_hours'])
@@ -406,6 +406,9 @@ class terrariumEnvironment():
   def set_light_config(self,data):
     self.__set_config('light',data)
 
+  def is_light_enabled(self):
+    return self.config.is_feature_enabled('light')
+
   def light_on(self):
     return self.__switch_on('light')
 
@@ -432,6 +435,9 @@ class terrariumEnvironment():
 
   def set_sprayer_config(self,data):
     self.__set_config('sprayer',data)
+
+  def is_sprayer_enabled(self):
+    return self.config.is_feature_enabled('sprayer')
 
   def sprayer_on(self):
     if int(time.time()) - self.sprayer['lastaction'] > self.sprayer['spray_timeout']:
@@ -461,6 +467,9 @@ class terrariumEnvironment():
   def set_heater_config(self,data):
     self.__set_config('heater',data)
 
+  def is_heater_enabled(self):
+    return self.config.is_feature_enabled('heater')
+  
   def heater_on(self):
     self.__switch_on('heater')
 
@@ -485,6 +494,9 @@ class terrariumEnvironment():
 
   def set_cooler_config(self,data):
     self.__set_config('cooler',data)
+
+  def is_cooler_enabled(self):
+    return self.config.is_feature_enabled('cooler')
 
   def cooler_on(self):
     self.__switch_on('cooler')
