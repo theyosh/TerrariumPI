@@ -181,6 +181,14 @@ class terrariumConfig:
       data[part]['_'.join(config_keys)] = config[key]
 
     return data
+  
+  def is_feature_enabled(self, feature):
+    env_feature = '{}_enabled'.format(unicode(feature))
+
+    if env_feature in self.get_environment() and env_feature == 'true':
+      return True
+    else:
+      return False
   # End Environment functions
 
   # Profile functions
