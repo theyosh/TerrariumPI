@@ -61,7 +61,7 @@
                   <div class="row">
                     <img src="static/images/documentation/DHT_GPIO_schema.jpg" alt="{{_('DHT22 GPIO wiring scheme')}}" class="img-thumbnail alignright col-xs-3" />
                     <h4>{{_('GPIO')}}</h4>
-                    <p>{{_('GPIO sensors has to added manually to TerrariumPI software. That can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra capacitor')}}</p>
+                    <p>{{_('GPIO sensors has to added manually to TerrariumPI software. That can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra resistor')}}</p>
                     <p>{{_('Through the GPIO bus of the Raspberry Pi you can use the following hardware sensors')}}</p>
                     <ul>
                       <li><strong>{{_('DHT11')}}</strong>: ...</li>

@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2017-08-06 17:27+CEST\n"
-"PO-Revision-Date: 2017-08-06 17:27+0200\n"
+"POT-Creation-Date: 2017-08-09 23:01+CEST\n"
+"PO-Revision-Date: 2017-08-09 23:01+0200\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -703,8 +703,8 @@ msgid "DS18B20"
 msgstr "DS18B20"
 
 #: views/hardware.tpl:64
-msgid "GPIO sensors has to added manually to TerrariumPI software. That can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra capacitor"
-msgstr "GPIO sensors has to added manually to TerrariumPI software. That can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra capacitor"
+msgid "GPIO sensors has to added manually to TerrariumPI software. That can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra resistor"
+msgstr "GPIO sensors has to added manually to TerrariumPI software. That can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra resistor"
 
 #: views/hardware.tpl:65
 msgid "Through the GPIO bus of the Raspberry Pi you can use the following hardware sensors"
