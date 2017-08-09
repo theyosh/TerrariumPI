@@ -223,6 +223,8 @@ class terrariumEngine():
       self.__send_message({'type':'sensor_gauge','data':average_data})
 
       # Calculate power and water usage per day every 9th minute
+      # Disabled again!
+      '''
       if int(time.strftime('%M')) % 10 == 9:
         for powerswitchid in self.power_switches:
           self.collector.log_switch_data(self.power_switches[powerswitchid].get_data())
@@ -230,6 +232,7 @@ class terrariumEngine():
 
         for doorid in self.doors:
           self.collector.log_door_data(self.doors[doorid].get_data())
+      '''
 
       # Websocket messages back
       self.get_uptime(socket=True)
