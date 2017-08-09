@@ -278,7 +278,7 @@ class terrariumEnvironment():
                                                                                month=int(now.strftime('%m')),
                                                                                day=int(now.strftime('%d')))
 
-    if 'light' == part:
+    if 'light' == part and data['enabled']:
       # Duration check
       duration = data['off'] - data['on']
       # Reduce the amount of hours if to much
