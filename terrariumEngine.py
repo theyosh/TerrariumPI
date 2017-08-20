@@ -339,7 +339,7 @@ class terrariumEngine():
     for sensordata in data:
       if sensordata['id'] is None or sensordata['id'] == 'None' or sensordata['id'] not in self.sensors:
         # New sensor
-        sensor = terrariumSensor(None,sensordata['hardwaretype'],sensordata['type'],sensordata['address'])
+        sensor = terrariumSensor(None,sensordata['hardwaretype'],sensordata['type'],sensordata['address'],indicator=self.get_temperature_indicator)
       else:
         # Existing sensor
         sensor = self.sensors[sensordata['id']]
