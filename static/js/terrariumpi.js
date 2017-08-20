@@ -342,6 +342,7 @@ function update_weather(data) {
     $.each(data.week_forecast, function(index, value) {
       graphdata.push([(value.to - ((value.to - value.from) / 2)) * 1000, value.temperature]);
       if (value.from - timestamp >= 3600 && day_counter < week_forecast_divs.length) {
+        $(week_forecast_divs[day_counter]).show();
         $(week_forecast_divs[day_counter]).find('.day').text(moment(value.from * 1000).format('ddd'));
         $(week_forecast_divs[day_counter]).find('.degrees').text(value.temperature.toFixed(1));
         $(week_forecast_divs[day_counter]).find('h5').html(value.wind_speed.toFixed(1) + ' <i>' + (data.windspeed === 'ms' ? '{{_('m/s')}}' : '{{_('Km/h')}}') + '</i>');

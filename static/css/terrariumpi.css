@@ -153,6 +153,10 @@ div.modal div.row.webcam{
   text-align: right;
 }
 
+.daily-weather {
+  display: none;
+}
+
 /* Power switches */
 .power_switch {
   text-align: center;

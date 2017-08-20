@@ -204,6 +204,101 @@ class terrariumWeatherWunderground():
 
     return copy.deepcopy(data)
 
+class terrariumWeatherOpenWeathermap():
+
+  update_timeout = 30 * 60
+
+  def __init__(self,url):
+    # We 'accept' that the url is valid... :(
+    self.source = url
+
+    self.city = None
+    self.country = None
+    self.geo = None
+    self.sunrise = None
+    self.sunset = None
+    self.forecast = []
+    self.copyright = {'text' : 'OpenWeatherMap data', 'url' : ''}
+
+    self.last_update = None
+
+  def __update(self):
+    now = int(time.time())
+    if self.last_update is None or now - self.last_update > terrariumWeatherOpenWeathermap.update_timeout:
+      logger.info('Update OpenWeatherMap data from ONLINE refreshing cache.')
+      json_data = urllib2.urlopen(self.source)
+      parsed_json = json.loads(json_data.read())
+
+      self.city = parsed_json['name']
+      self.country = parsed_json['sys']['country']
+      self.geo = {'lat' : float(parsed_json['coord']['lat']), 'long' : float(parsed_json['coord']['lon'])}
+      #self.copyright['url'] = parsed_json['location']['wuiurl']
+
+      self.__set_sunrise(parsed_json['sys']['sunrise'])
+      self.__set_sunset(parsed_json['sys']['sunset'])
+
+      json_data = urllib2.urlopen(self.source.replace('/weather?q','/forecast?q'))
+      parsed_json = json.loads(json_data.read())
+
+      self.__process_forecast_data(parsed_json['list'])
+
+      self.last_update = now
+
+  def __set_sunrise(self,data):
+    now = datetime.now()
+    self.sunrise = data
+
+  def __set_sunset(self,data):
+    now = datetime.now()
+    self.sunset = data
+
+  def __process_forecast_data(self,data):
+    self.forecast = []
+    for forecast in data:
+      self.forecast.append({'from' : forecast['dt'],
+                            'to' : forecast['dt'] + (3 * 60 * 60),
+                            'weather' : forecast['weather'][0]['description'],
+                            'rain' : 0, # Figure out the data
+                            'wind_direction' : forecast['wind']['deg'],
+                            'wind_speed' : float(forecast['wind']['speed']) / 3.6,
+                            'temperature' : float(forecast['main']['temp']),
+                            'pressure' : float(forecast['main']['pressure'])
+                          })
+
+  def get_city(self):
+    self.__update()
+    return self.city
+
+  def get_country(self):
+    self.__update()
+    return self.country
+
+  def get_geo(self):
+    self.__update()
+    return self.geo
+
+  def get_copyright(self):
+    self.__update()
+    return self.copyright
+
+  def get_sunrise(self):
+    self.__update()
+    return self.sunrise
+
+  def get_sunset(self):
+    self.__update()
+    return self.sunset
+
+  def get_forecast(self,period = 'day'):
+    self.__update()
+    data = []
+    datelimit = int(time.time()) + (1 * 24 * 60 * 60 if period == 'day' else 99 * 24 * 60 * 60)
+    for forecast in self.forecast:
+      if forecast['to'] < datelimit:
+        data.append(forecast)
+
+    return copy.deepcopy(data)
+
 class terrariumWeather():
   # Weather data expects temperature in celcius degrees and windspeed in meters per second
   weather_update_timeout = 4 * 60 * 60 # In seconds (4 hours)
@@ -212,7 +307,9 @@ class terrariumWeather():
   valid_windspeed_indicators = ['kmh','ms']
 
   valid_sources = {'yr.no'       : re.compile(r'^https?://(www.)?yr.no/place/(?P<country>[^/]+)/(?P<provance>[^/]+)/(?P<city>[^/]+/?)?', re.IGNORECASE),
-                   'weather.com' : re.compile(r'^https?://api\.wunderground\.com/api/[^/]+/(?P<p1>[^/]+)/(?P<p2>[^/]+)/(?P<p3>[^/]+)/q/(?P<country>[^/]+)/(?P<city>[^/]+)\.json$', re.IGNORECASE)}
+                   'weather.com' : re.compile(r'^https?://api\.wunderground\.com/api/[^/]+/(?P<p1>[^/]+)/(?P<p2>[^/]+)/(?P<p3>[^/]+)/q/(?P<country>[^/]+)/(?P<city>[^/]+)\.json$', re.IGNORECASE),
+                   'openweathermap.org' : re.compile('https?://api\.openweathermap\.org/data/2\.5/weather\?q=(?P<city>[^,&]+),(?P<country>[^,&]+)&units=metric&appid=[a-z0-9]{32}$')
+                   }
 
   def __init__(self, source,  windspeed  = 'kmh', temperature_indicator = None, callback = None):
     logger.info('Initializing weather object')
@@ -243,6 +340,8 @@ class terrariumWeather():
           self.weater_source = terrariumWeatherYRno(self.source)
         elif self.get_type() == 'weather.com':
           self.weater_source = terrariumWeatherWunderground(self.source)
+        elif self.get_type() == 'openweathermap.org':
+          self.weater_source = terrariumWeatherOpenWeathermap(self.source)
 
         logger.info('Set weather to type \'%s\' based on source to \'%s\'' % (self.get_type(),
                                                                               self.get_source()))
@@ -267,7 +366,10 @@ class terrariumWeather():
 
              'partlycloudy' : 'partly_cloudy_' + ('day' if self.is_day() else 'night'),
              'mostlycloudy' : 'partly_cloudy_' + ('day' if self.is_day() else 'night'),
+             'brokenclouds' : 'partly_cloudy_' + ('day' if self.is_day() else 'night'),
+
              'cloudy' : 'cloudy',
+             'scatteredclouds' : 'cloudy',
              'overcast' : 'cloudy',
 
              'lightrainshowers' : 'rain',
