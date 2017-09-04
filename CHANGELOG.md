@@ -2,8 +2,31 @@ Changelog
 =========
 
 
-2.6 (2017-08-06)
+2.7 (2017-09-04)
 ------------
+
+**Fixes**
+- Better warning message when sensor measured values are outside given
+  ranges. Fix #16. [TheYOSH]
+- Fix switch callback functions. Refs #15. [TheYOSH]
+- Fix adding new temperature sensors. Refs #15. [TheYOSH]
+- Fixed bug found in #13. Only calculate hours when lights are enabled.
+  [TheYOSH]
+
+**Updates**
+- Update readme. [TheYOSH]
+- Update gentelella. [TheYOSH]
+- Update hardware text. [TheYOSH]
+- Update translation. Dutch at 75% [TheYOSH]
+
+**Other**
+- Support OpenWeatherMap.org. [TheYOSH]
+- Disable extra door and switch logging. [TheYOSH]
+- Support up to 8 ports on USB relay switch. [TheYOSH]
+
+
+2.6 (2017-08-06)
+----------------
 
 **New**
 - Add profile page reloading after changing profile image. [TheYOSH]
@@ -18,9 +41,13 @@ Changelog
 **Updates**
 - Update changelog. [TheYOSH]
 - Update changelog. [TheYOSH]
+- Update changelog. [TheYOSH]
 - Update translations. [TheYOSH]
 
 **Other**
+- Merge pull request #12 from theyosh/feature/profile. [TheYOSH]
+
+  Feature/profile
 - Changed profile image uploading. [TheYOSH]
 - Moved profile page to main menu. [TheYOSH]
 - Remove debug. [TheYOSH]
