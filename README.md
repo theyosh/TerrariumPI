@@ -1,4 +1,4 @@
-# TerrariumPI 2.5
+# TerrariumPI 2.7
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control an enclosed environment so that the temperature and humidity is of a constant value. This is done by using temperature and humidity sensors and realy switches to activate external devices.
 
 It has support for lights, sprayer, heater and cooler equipment. The amount of devices that can be controlled depends on the used relay boards.
@@ -14,8 +14,8 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
 - Reading out temperature and humidity sensors
 - Open door detection (sprayer will not spray when a door is open)
 - Support for native Raspberry Pi cam out of the box
-- Total power and water usage for costs calculation
 - Support for USB and remote webcams
+- Total power and water usage for costs calculation
 - Lights control based on sun rise and sun set or timers
 - Rain control based on measured humidity
 - Heater control based on temperature sensors or timers
@@ -23,6 +23,8 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
 - Weather forecast from external source
 - Temperatures in Celsius or Fahrenheit
 - Alarm detections
+
+It is currently controling my reptile terrarium for more then three years! And my Madagascar Day Gecko is very happy with it!
 
 ## Installation
 1. Get a working Raspberry Pi
@@ -62,7 +64,7 @@ If there is some other hardware which is not working with TerrariumPI, open an i
 ### System settings
 ![TerrariumPI 2.5 System setup screenshot](screenshots/System_setup.png)
 
-More screenshots can be found [here](https://github.com/theyosh/TerrariumPI/tree/documentation/screenshots/)
+More screenshots can be found [here](https://github.com/theyosh/TerrariumPI/tree/screenshots/)
 
 ## About
 Read more information at: https://terrarium.theyosh.nl/index.html
