@@ -209,11 +209,15 @@ class terrariumSensor:
 
         if current is None or not (self.get_limit_min() < current < self.get_limit_max()):
           # Invalid current value.... log and ingore
-          logger.warn('Error on %s sensor \'%s\'! Got invalid value %f%s in %.5f seconds' % (self.get_type(),
-                                                                                             self.get_name(),
-                                                                                             current,
-                                                                                             self.get_indicator(),
-                                                                                             time.time()-starttime))
+          logger.warn('Measured value %f%s from %s sensor \'%s\' is outside valid range %.2f%s - %.2f%s in %.5f seconds.' % (current,
+                                                                                                                             self.get_indicator(),
+                                                                                                                             self.get_type(),
+                                                                                                                             self.get_name(),
+                                                                                                                             self.get_limit_min(),
+                                                                                                                             self.get_indicator(),
+                                                                                                                             self.get_limit_max(),
+                                                                                                                             self.get_indicator(),
+                                                                                                                             time.time()-starttime))
 
         else:
           self.current = current
