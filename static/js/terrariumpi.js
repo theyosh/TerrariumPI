@@ -183,21 +183,19 @@ function process_form() {
         contentType: 'application/json',
         data: JSON.stringify(prepare_form_data(form))
       }).done(function(response) {
-        if (response.ok) {
-          new PNotify({
-            type: 'success',
-            title: response.title,
-            text: response.message,
-            nonblock: {
-              nonblock: true
-            },
-            delay: 1000,
-            mouse_reset: false,
-            addclass: 'dark',
-            styling: 'bootstrap3',
-            hide: true,
-          });
-        }
+        new PNotify({
+          type: (response.ok ? 'success' : 'error'),
+          title: response.title,
+          text: response.message,
+          nonblock: {
+            nonblock: true
+          },
+          delay: 3000,
+          mouse_reset: false,
+          //addclass: 'dark',
+          styling: 'bootstrap3',
+          hide: true,
+        });
       });
       return false;
     });

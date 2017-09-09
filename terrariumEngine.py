@@ -755,6 +755,8 @@ class terrariumEngine():
           data['password'] = data['new_password']
           del(data['new_password'])
           del(data['cur_password'])
+        else:
+          return False
 
       update_ok = self.set_system_config(data)
       if update_ok:

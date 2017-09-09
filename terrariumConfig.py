@@ -111,8 +111,10 @@ class terrariumConfig:
 
     Make sure that the fields cur_password and new_password are never stored
     '''
-    del(data['cur_password'])
-    del(data['new_password'])
+    if 'cur_password' in data:
+      del(data['cur_password'])
+    if 'new_password' in data:
+      del(data['new_password'])
     return self.__update_config('terrariumpi',data)
 
   def get_pi_power_wattage(self):
