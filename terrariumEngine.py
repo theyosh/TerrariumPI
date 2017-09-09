@@ -597,7 +597,12 @@ class terrariumEngine():
 
   # Profile part
   def get_profile_config(self):
-    return self.config.get_profile()
+    data = self.config.get_profile()
+    if os.path.isfile('description.txt'):
+      with open('description.txt', 'r') as description_file:
+        data['description'] = description_file.read()
+
+    return data
 
   def get_profile(self):
     return self.get_profile_config()
@@ -617,6 +622,11 @@ class terrariumEngine():
 
       profile_image.save('static/images/')
       data['image'] = 'static/images/' + profile_image.filename
+
+    if 'description' in data:
+      with open('description.txt', 'wb') as description_file:
+        description_file.write(data['description'])
+        del(data['description'])
 
     update_ok = self.config.save_profile(data)
     return update_ok

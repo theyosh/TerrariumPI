@@ -188,7 +188,7 @@
             <script>
               $(document).ready(function() {
                 $('#editor-one').on('change',function(){
-                  $('input[name="profile_description"]').val(this.innerHTML);
+                  $('input[name="description"]').val(this.innerHTML);
                 });
                 $.get($('form').attr('action'),function(data){
                   $.each(Object.keys(data), function(index,key){
