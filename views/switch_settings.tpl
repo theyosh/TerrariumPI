@@ -80,6 +80,7 @@
                             <select class="form-control" name="switch_[nr]_hardwaretype" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
                               <option value="ftdi">{{_('FTDI')}}</option>
                               <option value="gpio">{{_('GPIO')}}</option>
+                              <option value="gpio-inverse">{{_('GPIO Inverse')}}</option>
                             </select>
                           </div>
                         </div>

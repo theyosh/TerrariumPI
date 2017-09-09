@@ -8,7 +8,7 @@ from hashlib import md5
 
 class terrariumSwitch():
 
-  valid_hardware_types = ['ftdi','gpio']
+  valid_hardware_types = ['ftdi','gpio','gpio-inverse']
 
   OFF = False
   ON = True
@@ -33,7 +33,7 @@ class terrariumSwitch():
 
     if self.get_hardware_type() == 'ftdi':
       self.__load_ftdi_device()
-    elif self.get_hardware_type() == 'gpio':
+    elif 'gpio' in self.get_hardware_type():
       self.__load_gpio_device()
 
     self.set_address(address)
@@ -90,6 +90,8 @@ class terrariumSwitch():
 
       elif self.get_hardware_type() == 'gpio':
         GPIO.output(int(self.get_address()), ( GPIO.HIGH if state is terrariumSwitch.ON else GPIO.LOW ))
+      elif self.get_hardware_type() == 'gpio-inverse':
+        GPIO.output(int(self.get_address()), ( GPIO.LOW if state is terrariumSwitch.ON else GPIO.HIGH ))
 
       self.state = state
       logger.info('Toggle switch \'%s\' from %s',self.get_name(),('off to on' if self.is_on() else 'on to off'))
@@ -128,7 +130,7 @@ class terrariumSwitch():
 
   def set_address(self,address):
     self.sensor_address = address
-    if self.get_hardware_type() == 'gpio':
+    if 'gpio' in self.get_hardware_type():
       try:
         GPIO.setup(int(self.get_address()), GPIO.OUT)
       except Exception, err:
