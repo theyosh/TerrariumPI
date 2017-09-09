@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import ConfigParser
+from glob import glob
 
 class terrariumConfig:
   '''Class for loading the configuration for terrariumPI software.
@@ -16,6 +17,8 @@ class terrariumConfig:
     '''Load terrariumPI config object'''
     self.__defaults_file = 'defaults.cfg'
     self.__config_file = 'settings.cfg'
+
+    self.__cache_available_languages = None
 
     self.__config = ConfigParser.SafeConfigParser()
     # Read defaults config file
@@ -42,17 +45,23 @@ class terrariumConfig:
       upgrade = True
 
     # Upgrade: Change profile image path to new path and config location
-    profile = self.__get_config('terrariumpi')
-    if 'image' in profile and '/static/images/gecko.jpg' == profile['image']:
+    data = self.__get_config('terrariumpi')
+    if 'image' in data and '/static/images/gecko.jpg' == data['image']:
       self.__config.set('profile', 'image', '/static/images/profile_image.jpg')
       self.__config.remove_option('terrariumpi','image')
       upgrade = True
 
     # Upgrade: Change profile name path to new config location
-    profile = self.__get_config('terrariumpi')
-    if 'person' in profile:
-      self.__config.set('profile', 'name', profile['person'])
+    data = self.__get_config('terrariumpi')
+    if 'person' in data:
+      self.__config.set('profile', 'name', data['person'])
       self.__config.remove_option('terrariumpi','person')
+      upgrade = True
+
+    # Upgrade: Remove default available languages variable
+    data = self.__get_config('terrariumpi')
+    if 'available_languages' in data:
+      self.__config.remove_option('terrariumpi','available_languages')
       upgrade = True
 
     if upgrade:
@@ -104,7 +113,9 @@ class terrariumConfig:
   def get_system(self):
     '''Get terrariumPI configuration section 'terrariumpi'
     '''
-    return self.__get_config('terrariumpi')
+    data = self.__get_config('terrariumpi')
+    data['available_languages'] = self.get_available_languages()
+    return data
 
   def set_system(self,data):
     '''Set terrariumPI configuration section 'terrariumpi'
@@ -115,6 +126,8 @@ class terrariumConfig:
       del(data['cur_password'])
     if 'new_password' in data:
       del(data['new_password'])
+    if 'available_languages' in data:
+      del(data['available_languages'])
     return self.__update_config('terrariumpi',data)
 
   def get_pi_power_wattage(self):
@@ -134,8 +147,10 @@ class terrariumConfig:
 
   def get_available_languages(self):
     '''Get terrariumPI available languages'''
-    config = self.get_system()
-    return config['available_languages'].split(',')
+    if self.__cache_available_languages is None:
+      self.__cache_available_languages = [language.replace('locales/','').replace('/','') for language in glob("locales/*/")]
+
+    return self.__cache_available_languages
 
   def get_active_language(self):
     '''Get terrariumPI active language'''

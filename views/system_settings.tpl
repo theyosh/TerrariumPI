@@ -123,7 +123,7 @@
                 allowClear: false,
                 minimumResultsForSearch: Infinity
               });
-              $.each(data.available_languages.split(','),function(index,value){
+              $.each(data.available_languages,function(index,value){
                 language_selector.append($('<option>').attr({'value':value}).text(value));
               });
               language_selector.val(data.active_language).trigger('change');
