@@ -540,6 +540,7 @@ class terrariumEngine():
 
       webcam.set_location(webcamdata['location'])
       webcam.set_name(webcamdata['name'])
+      webcam.set_rotation(webcamdata['rotation'])
 
       new_webcams[webcam.get_id()] = webcam
 
