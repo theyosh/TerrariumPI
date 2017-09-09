@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-08-09 23:01+CEST\n"
+"POT-Creation-Date: 2017-09-09 13:59+CEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -134,7 +134,7 @@ msgstr ""
 #: views/inc/usage_weather.tpl:85 views/system_environment.tpl:47
 #: views/system_environment.tpl:203 views/system_environment.tpl:278
 #: views/usage.tpl:10 views/weather_forecast.tpl:7
-#: views/weather_settings.tpl:36
+#: views/weather_settings.tpl:37
 msgid "Weather"
 msgstr ""
 
@@ -358,13 +358,13 @@ msgstr ""
 
 #: views/dashboard.tpl:24 views/inc/usage_dashboard.tpl:93
 #: views/inc/usage_switches.tpl:121 views/inc/usage_switches.tpl:143
-#: views/switch_settings.tpl:28 views/switch_settings.tpl:96
+#: views/switch_settings.tpl:28 views/switch_settings.tpl:97
 msgid "Power usage in Watt"
 msgstr ""
 
 #: views/dashboard.tpl:35 views/inc/usage_dashboard.tpl:99
 #: views/inc/usage_switches.tpl:125 views/inc/usage_switches.tpl:146
-#: views/switch_settings.tpl:31 views/switch_settings.tpl:100
+#: views/switch_settings.tpl:31 views/switch_settings.tpl:101
 msgid "Water flow in L/m"
 msgstr ""
 
@@ -583,7 +583,7 @@ msgstr ""
 #: views/inc/usage_sensors.tpl:120 views/inc/usage_sensors.tpl:165
 #: views/inc/usage_switches.tpl:112 views/inc/usage_switches.tpl:137
 #: views/sensor_settings.tpl:22 views/sensor_settings.tpl:99
-#: views/switch_settings.tpl:22 views/switch_settings.tpl:87
+#: views/switch_settings.tpl:22 views/switch_settings.tpl:88
 msgid "Address"
 msgstr ""
 
@@ -594,7 +594,7 @@ msgstr ""
 #: views/inc/usage_webcams.tpl:104 views/inc/usage_webcams.tpl:134
 #: views/profile.tpl:56 views/sensor_settings.tpl:28
 #: views/sensor_settings.tpl:113 views/switch_settings.tpl:25
-#: views/switch_settings.tpl:92 views/webcam_settings.tpl:27
+#: views/switch_settings.tpl:93 views/webcam_settings.tpl:27
 #: views/webcam_settings.tpl:86
 msgid "Name"
 msgstr ""
@@ -602,7 +602,7 @@ msgstr ""
 #: views/door_settings.tpl:36 views/profile.tpl:179
 #: views/sensor_settings.tpl:54 views/switch_settings.tpl:42
 #: views/system_environment.tpl:323 views/system_settings.tpl:110
-#: views/weather_settings.tpl:65 views/webcam_settings.tpl:44
+#: views/weather_settings.tpl:66 views/webcam_settings.tpl:44
 msgid "Submit"
 msgstr ""
 
@@ -628,12 +628,12 @@ msgstr ""
 #: views/door_settings.tpl:93 views/inc/usage_doors.tpl:70
 #: views/inc/usage_sensors.tpl:80 views/inc/usage_switches.tpl:70
 #: views/inc/usage_webcams.tpl:66 views/sensor_settings.tpl:142
-#: views/switch_settings.tpl:109 views/webcam_settings.tpl:108
+#: views/switch_settings.tpl:110 views/webcam_settings.tpl:108
 msgid "Close"
 msgstr ""
 
 #: views/door_settings.tpl:94 views/sensor_settings.tpl:143
-#: views/switch_settings.tpl:110 views/webcam_settings.tpl:109
+#: views/switch_settings.tpl:111 views/webcam_settings.tpl:109
 msgid "Add"
 msgstr ""
 
@@ -1461,21 +1461,21 @@ msgstr ""
 
 #: views/inc/usage_weather.tpl:42 views/inc/usage_weather.tpl:64
 #: views/inc/usage_webcams.tpl:99 views/inc/usage_webcams.tpl:126
-#: views/weather_settings.tpl:19 views/weather_settings.tpl:46
+#: views/weather_settings.tpl:19 views/weather_settings.tpl:47
 #: views/webcam_settings.tpl:19 views/webcam_settings.tpl:81
 msgid "Location"
 msgstr ""
 
 #: views/inc/usage_weather.tpl:48 views/inc/usage_weather.tpl:71
-#: views/weather_settings.tpl:26 views/weather_settings.tpl:52
+#: views/weather_settings.tpl:27 views/weather_settings.tpl:53
 msgid "Wind speed"
 msgstr ""
 
-#: views/inc/usage_weather.tpl:52 views/weather_settings.tpl:56
+#: views/inc/usage_weather.tpl:52 views/weather_settings.tpl:57
 msgid "m/s"
 msgstr ""
 
-#: views/inc/usage_weather.tpl:53 views/weather_settings.tpl:57
+#: views/inc/usage_weather.tpl:53 views/weather_settings.tpl:58
 msgid "Km/h"
 msgstr ""
 
@@ -1682,6 +1682,10 @@ msgstr ""
 
 #: views/switch_settings.tpl:55
 msgid "Add new switch"
+msgstr ""
+
+#: views/switch_settings.tpl:83
+msgid "GPIO Inverse"
 msgstr ""
 
 #: views/system_environment.tpl:16
