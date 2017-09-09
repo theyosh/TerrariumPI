@@ -2,8 +2,27 @@ Changelog
 =========
 
 
+2.7.1 (2017-09-09)
+----------------
+
+**New**
+- Added description back to working. Fix #18. [TheYOSH]
+- Add a new switch type GPIO-invert. Use it when normal GPIO is working
+  in oppisite way. Fix #20. [TheYOSH]
+
+**Fixes**
+- Fix webcam rotation. Settings was not saved at all :( . Fix #19.
+  [TheYOSH]
+- Fixed saving new password. Added error feedback when saving is not
+  successfull. And better password update check. Fix #17. [TheYOSH]
+
+**Updates**
+- Update version number. [TheYOSH]
+- Update translations files. [TheYOSH]
+
+
 2.7 (2017-09-04)
-------------
+----------------
 
 **Fixes**
 - Better warning message when sensor measured values are outside given
@@ -14,6 +33,7 @@ Changelog
   [TheYOSH]
 
 **Updates**
+- Update changelog. [TheYOSH]
 - Update readme. [TheYOSH]
 - Update gentelella. [TheYOSH]
 - Update hardware text. [TheYOSH]
