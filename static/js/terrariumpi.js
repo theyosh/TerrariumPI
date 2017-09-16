@@ -11,7 +11,7 @@ var globals = {
   websocket_timer: null,
   online_timer: null,
   current_version: null,
-  language: '',
+  language: null,
 };
 
 /**
