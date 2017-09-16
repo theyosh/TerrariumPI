@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2017-08-06 17:28+0200\n"
-"PO-Revision-Date: 2017-08-06 17:30+0200\n"
+"POT-Creation-Date: 2017-09-16 21:18+0200\n"
+"PO-Revision-Date: 2017-09-16 22:56+0200\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -85,7 +85,7 @@ msgstr ""
 
 #: terrariumTranslations.py:40
 msgid "Holds the switch name."
-msgstr ""
+msgstr "Bevat de schakelaar naam."
 
 #: terrariumTranslations.py:41
 msgid "Holds the switch power usage in Watt when switched on."
@@ -107,7 +107,7 @@ msgstr ""
 
 #: terrariumTranslations.py:48
 msgid "Holds the door name."
-msgstr ""
+msgstr "Bevat de deur naam."
 
 #: terrariumTranslations.py:52
 msgid "Holds the webcam location source. Supported sources are: %s"
@@ -115,7 +115,7 @@ msgstr ""
 
 #: terrariumTranslations.py:53
 msgid "Holds the webcam name."
-msgstr ""
+msgstr "Bevat de webcam naam."
 
 #: terrariumTranslations.py:54
 msgid "Holds the webcam rotation of the image."
@@ -163,7 +163,7 @@ msgstr "Klok"
 #: views/inc/usage_weather.tpl:85 views/system_environment.tpl:47
 #: views/system_environment.tpl:203 views/system_environment.tpl:278
 #: views/usage.tpl:10 views/weather_forecast.tpl:7
-#: views/weather_settings.tpl:36
+#: views/weather_settings.tpl:37
 msgid "Weather"
 msgstr "Weer"
 
@@ -242,6 +242,7 @@ msgstr ""
 #: terrariumTranslations.py:71
 msgid "Select the operating mode. For now only sensor mode is available."
 msgstr ""
+"Selecteer de bedrijfsmodus. Vooralsnog is alleen sensor modus beschikbaar."
 
 #: terrariumTranslations.py:72
 msgid ""
@@ -440,7 +441,7 @@ msgstr ""
 
 #: terrariumTranslations.py:110
 msgid "Holds the name of the animal."
-msgstr ""
+msgstr "Bevat de dier naam."
 
 #: terrariumTranslations.py:111
 msgid "Holds the type of the animal"
@@ -470,34 +471,42 @@ msgstr "Bevat een kleine beschrijving over het dier."
 msgid "Holds a link to more information."
 msgstr "Bevat een link naar meer informatie."
 
-#: terrariumWebserver.py:75 terrariumWebserver.py:81
+#: terrariumWebserver.py:78 terrariumWebserver.py:84 terrariumWebserver.py:92
 msgid "Authenticate to make any changes"
 msgstr "Login om wijzigingen te kunnen maken"
 
-#: terrariumWebserver.py:75 terrariumWebserver.py:81
+#: terrariumWebserver.py:78 terrariumWebserver.py:84 terrariumWebserver.py:92
 msgid "Authentication"
 msgstr "Authenticatie"
 
-#: terrariumWebserver.py:75 terrariumWebserver.py:81
+#: terrariumWebserver.py:78 terrariumWebserver.py:84 terrariumWebserver.py:92
 #: views/system_settings.tpl:23
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:144
+#: terrariumWebserver.py:153
 msgid "Data could not be saved"
 msgstr "Data kon niet worden opgeslagen"
 
-#: terrariumWebserver.py:144
+#: terrariumWebserver.py:153
 msgid "Error!"
 msgstr "Fout!"
 
-#: terrariumWebserver.py:152
+#: terrariumWebserver.py:161
 msgid "Data saved"
 msgstr "Data is opgeslagen"
 
-#: terrariumWebserver.py:153
+#: terrariumWebserver.py:162
 msgid "Your changes are saved"
 msgstr "Je wijzigingen zijn opgeslagen"
+
+#: terrariumWebserver.py:234 views/inc/menu.tpl:130
+msgid "Log out"
+msgstr "Log uit"
+
+#: terrariumWebserver.py:235
+msgid "You are now logged out"
+msgstr "Je bent nu uitgelogd"
 
 #: views/dashboard.tpl:7 views/inc/usage_dashboard.tpl:87
 #: views/system_status.tpl:174
@@ -506,13 +515,13 @@ msgstr "Actief"
 
 #: views/dashboard.tpl:24 views/inc/usage_dashboard.tpl:93
 #: views/inc/usage_switches.tpl:121 views/inc/usage_switches.tpl:143
-#: views/switch_settings.tpl:28 views/switch_settings.tpl:96
+#: views/switch_settings.tpl:28 views/switch_settings.tpl:97
 msgid "Power usage in Watt"
 msgstr "Stroomverbruik in Watt"
 
 #: views/dashboard.tpl:35 views/inc/usage_dashboard.tpl:99
 #: views/inc/usage_switches.tpl:125 views/inc/usage_switches.tpl:146
-#: views/switch_settings.tpl:31 views/switch_settings.tpl:100
+#: views/switch_settings.tpl:31 views/switch_settings.tpl:101
 msgid "Water flow in L/m"
 msgstr "Waterverbruik in L/m"
 
@@ -731,7 +740,7 @@ msgstr "Hardware"
 #: views/inc/usage_sensors.tpl:120 views/inc/usage_sensors.tpl:165
 #: views/inc/usage_switches.tpl:112 views/inc/usage_switches.tpl:137
 #: views/sensor_settings.tpl:22 views/sensor_settings.tpl:99
-#: views/switch_settings.tpl:22 views/switch_settings.tpl:87
+#: views/switch_settings.tpl:22 views/switch_settings.tpl:88
 msgid "Address"
 msgstr "Adres"
 
@@ -742,7 +751,7 @@ msgstr "Adres"
 #: views/inc/usage_webcams.tpl:104 views/inc/usage_webcams.tpl:134
 #: views/profile.tpl:56 views/sensor_settings.tpl:28
 #: views/sensor_settings.tpl:113 views/switch_settings.tpl:25
-#: views/switch_settings.tpl:92 views/webcam_settings.tpl:27
+#: views/switch_settings.tpl:93 views/webcam_settings.tpl:27
 #: views/webcam_settings.tpl:86
 msgid "Name"
 msgstr "Naam"
@@ -750,7 +759,7 @@ msgstr "Naam"
 #: views/door_settings.tpl:36 views/profile.tpl:179
 #: views/sensor_settings.tpl:54 views/switch_settings.tpl:42
 #: views/system_environment.tpl:323 views/system_settings.tpl:110
-#: views/weather_settings.tpl:65 views/webcam_settings.tpl:44
+#: views/weather_settings.tpl:66 views/webcam_settings.tpl:44
 msgid "Submit"
 msgstr "Opslaan"
 
@@ -776,12 +785,12 @@ msgstr "GPIO"
 #: views/door_settings.tpl:93 views/inc/usage_doors.tpl:70
 #: views/inc/usage_sensors.tpl:80 views/inc/usage_switches.tpl:70
 #: views/inc/usage_webcams.tpl:66 views/sensor_settings.tpl:142
-#: views/switch_settings.tpl:109 views/webcam_settings.tpl:108
+#: views/switch_settings.tpl:110 views/webcam_settings.tpl:108
 msgid "Close"
 msgstr "Sluiten"
 
 #: views/door_settings.tpl:94 views/sensor_settings.tpl:143
-#: views/switch_settings.tpl:110 views/webcam_settings.tpl:109
+#: views/switch_settings.tpl:111 views/webcam_settings.tpl:109
 msgid "Add"
 msgstr "Voeg toe"
 
@@ -823,6 +832,8 @@ msgid ""
 "TerrariumPI software is designed to run on a Raspberry Pi. It has been "
 "tested on a Raspberry Pi 2 and 3 with %s. Raspberry Pi Zero is not tested."
 msgstr ""
+"TerrariumPI software is ontworpen om te werken op een Raspberry Pi. Het is "
+"getest op een Raspberry Pi 2 en 3 met %s. Raspberry Pi Zero is niet getest."
 
 #: views/hardware.tpl:45 views/info.tpl:34
 msgid "Raspbian OS"
@@ -839,6 +850,9 @@ msgid ""
 "TerrariumPI software has support for different kind of sensors. The "
 "following sensors below are tested with TerrariumPI software."
 msgstr ""
+"TerrariumPI software heeft ondersteuning voor verschillende soorten "
+"sensoren. De onderstaande sensoren hieronder zijn getest met TerrariumPI "
+"software."
 
 #: views/hardware.tpl:54 views/inc/usage_sensors.tpl:115
 #: views/sensor_settings.tpl:94
@@ -851,12 +865,17 @@ msgid ""
 "connected and supported sensors. The DS18B20 sensors can share the GPIO pin "
 "by putting the sensors in parallel."
 msgstr ""
+"De 1wire bus wordt automatisch gescanned bij het opstarten om de aangesloten "
+"en ondersteunde sensoren te laden. De DS18B20-sensoren kunnen de GPIO-pin "
+"delen door de sensoren in parallel te zetten."
 
 #: views/hardware.tpl:56
 msgid ""
 "Through the 1wire bus of the Raspberry Pi you can use the following hardware "
 "sensors"
 msgstr ""
+"Via de 1wire bus van de Raspberry Pi kunt u de volgende hardware sensoren "
+"gebruiken"
 
 #: views/hardware.tpl:58 views/hardware.tpl:78
 msgid "DS18B20"
@@ -866,17 +885,19 @@ msgstr "DS18B20"
 msgid ""
 "GPIO sensors has to added manually to TerrariumPI software. That can done in "
 "the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and "
-"DHT22 needs an extra capacitor"
+"DHT22 needs an extra resistor"
 msgstr ""
 "GPIO sensoren moeten handmatig toevoegen aan TerrariumPI software. Dit kan "
 "gedaan worden in de webinterface. De GPIO-sensoren kunnen GPIO-pennen niet "
-"delen. De DHT11 en DHT22 hebben een extra condensator nodig"
+"delen. De DHT11 en DHT22 hebben een extra weerstand nodig"
 
 #: views/hardware.tpl:65
 msgid ""
 "Through the GPIO bus of the Raspberry Pi you can use the following hardware "
 "sensors"
 msgstr ""
+"Via de GPIO bus van de Raspberry Pi kunt u de volgende hardware sensoren "
+"gebruiken"
 
 #: views/hardware.tpl:67 views/inc/usage_sensors.tpl:112
 #: views/sensor_settings.tpl:91
@@ -920,6 +941,9 @@ msgid ""
 "TerrariumPI software has support for different kind of relay boards. The "
 "following relay boards below are tested with TerrariumPI software."
 msgstr ""
+"TerrariumPI software heeft ondersteuning voor verschillende soorten relais "
+"boards. De onderstaande relais boards hieronder zijn getest met TerrariumPI "
+"software."
 
 #: views/hardware.tpl:89
 msgid ""
@@ -933,7 +957,7 @@ msgstr ""
 
 #: views/hardware.tpl:90 views/hardware.tpl:99
 msgid "The following boards are tested"
-msgstr ""
+msgstr "De volgende borden zijn getest"
 
 #: views/hardware.tpl:92
 msgid "VMA400"
@@ -961,6 +985,10 @@ msgid ""
 "with two wires are supported. Connect one wire to the ground and the other "
 "wire to any GPIO pin that is free (except power and ground pins)."
 msgstr ""
+"TerrariumPI software heeft ondersteuning voor magnetische deur sensoren. "
+"Alleen versies met twee draden worden ondersteund. Sluit een draad aan de "
+"grond en de andere draad aan op een GPIO-pin die vrij is (behalve power en "
+"grond pinnen)."
 
 #: views/hardware.tpl:111 views/inc/menu.tpl:79 views/inc/usage_webcams.tpl:19
 #: views/usage.tpl:22 views/webcam.tpl:7 views/webcam_settings.tpl:64
@@ -972,6 +1000,8 @@ msgid ""
 "TerrariumPI software has support for different kind of cameras. The "
 "following cameras below are tested with TerrariumPI software."
 msgstr ""
+"TerrariumPI software heeft ondersteuning voor verschillende soorten "
+"camera's. De onderstaande camera's zijn getest met TerrariumPI software."
 
 #: views/hardware.tpl:115 views/inc/usage_webcams.tpl:128
 #: views/webcam_settings.tpl:21
@@ -1054,33 +1084,29 @@ msgstr "Volledig scherm"
 msgid "Lock"
 msgstr "Vergrendelen"
 
-#: views/inc/menu.tpl:130
-msgid "Log out"
-msgstr "Log uit"
-
 #: views/inc/menu.tpl:142
 msgid "date/time"
 msgstr "datum/tijd"
 
-#: views/inc/menu.tpl:145 views/inc/usage_dashboard.tpl:43
+#: views/inc/menu.tpl:147 views/inc/usage_dashboard.tpl:43
 #: views/inc/usage_doors.tpl:82
 msgid "Door is closed"
 msgstr "Deur is gesloten"
 
-#: views/inc/menu.tpl:145 views/inc/usage_dashboard.tpl:50
+#: views/inc/menu.tpl:150 views/inc/usage_dashboard.tpl:50
 #: views/inc/usage_doors.tpl:81
 msgid "Door is open"
 msgstr "Deur is geopend"
 
-#: views/inc/menu.tpl:149 views/inc/menu.tpl:159
+#: views/inc/menu.tpl:156 views/inc/menu.tpl:173
 msgid "No messages"
 msgstr "Geen berichten"
 
-#: views/inc/menu.tpl:155 views/inc/usage_dashboard.tpl:19
+#: views/inc/menu.tpl:164 views/inc/usage_dashboard.tpl:19
 msgid "Online"
 msgstr "Online"
 
-#: views/inc/menu.tpl:155 views/inc/usage_dashboard.tpl:26
+#: views/inc/menu.tpl:167 views/inc/usage_dashboard.tpl:26
 msgid "Offline"
 msgstr "Offline"
 
@@ -1093,6 +1119,8 @@ msgid ""
 "The dashboard has two indicators and a clock on the top row at the right "
 "site."
 msgstr ""
+"Het dashboard heeft twee indicatoren en een klok op de bovenste rij aan de "
+"rechterkant."
 
 #: views/inc/usage_dashboard.tpl:17
 msgid "Status indicator"
@@ -1109,6 +1137,8 @@ msgid ""
 "When there is a connection problem, the first round check mark will turn to "
 "a red explanation mark which indicates that there is a problem."
 msgstr ""
+"Als er een verbindingsprobleem is, zal het eerste ronde vinkje veranderen in "
+"een rood uitroepteken dat aangeeft dat er een probleem is."
 
 #: views/inc/usage_dashboard.tpl:33 views/inc/usage_dashboard.tpl:57
 msgid "History"
@@ -1138,6 +1168,9 @@ msgid ""
 "indicator is near real time, so when you open the door, the indicator will "
 "change."
 msgstr ""
+"Wanneer een deur wordt geopend, verandert de indicator naar een rood open "
+"slot. Deze indicator is real time, dus wanneer u de deur opent, verandert de "
+"indicator."
 
 #: views/inc/usage_dashboard.tpl:61
 msgid ""
@@ -1231,6 +1264,8 @@ msgid ""
 "When a part is active the title is in color. If the title is gray that part "
 "is than not running or configured."
 msgstr ""
+"Wanneer een deel actief is, is de titel in kleur. Als de titel grijs is, dan "
+"is het onderdeel niet in werking of geconfigureerd."
 
 #: views/inc/usage_dashboard.tpl:124
 msgid ""
@@ -1247,7 +1282,7 @@ msgstr ""
 
 #: views/inc/usage_dashboard.tpl:126
 msgid "The on value is the time stamp when the lights are turned on."
-msgstr ""
+msgstr "De aan-waarde is het tijdstip waarop de lichten zijn ingeschakeld."
 
 #: views/inc/usage_dashboard.tpl:127
 msgid "The off value is the time stamp when the lights will be turned off."
@@ -1255,7 +1290,7 @@ msgstr ""
 
 #: views/inc/usage_dashboard.tpl:128
 msgid "The duration holds the amount of hours that the lights are on."
-msgstr ""
+msgstr "De duur bevat de hoeveelheid uren dat de lichten aan zijn."
 
 #: views/inc/usage_dashboard.tpl:148 views/inc/usage_dashboard.tpl:214
 msgid "Graphs"
@@ -1291,6 +1326,8 @@ msgid ""
 "There are multiple graph times. On the home there is a humidity and a "
 "temperature graph shown."
 msgstr ""
+"Er zijn meerdere grafiektijden. Op het voorpagina is er een vochtigheid en "
+"een temperatuurgrafiek getoond."
 
 #: views/inc/usage_dashboard.tpl:163
 msgid "Last update"
@@ -1301,12 +1338,16 @@ msgid ""
 "When there is new data, the gauge part of the graph is updated and will also "
 "update the last update time stamp."
 msgstr ""
+"Wanneer er nieuwe gegevens zijn, wordt het gauge gedeelte van de grafiek "
+"bijgewerkt en wordt ook de laatste update tijdstempel bijgewerkt."
 
 #: views/inc/usage_dashboard.tpl:171
 msgid ""
 "When the current value is outside the minimum of maximum value a red warning "
 "badge is shown."
 msgstr ""
+"Wanneer de huidige waarde buiten het minimum of de maximum waarde is, wordt "
+"een rode waarschuwing badge weergegeven."
 
 #: views/inc/usage_dashboard.tpl:175
 msgid "Period"
@@ -1408,7 +1449,7 @@ msgstr "Geschiedenis grafiek"
 
 #: views/inc/usage_doors.tpl:88
 msgid "The history graph will shows when a door was opened."
-msgstr ""
+msgstr "De geschiedenisgrafiek geeft aan wanneer een deur open is geweest."
 
 #: views/inc/usage_doors.tpl:89 views/inc/usage_sensors.tpl:99
 #: views/inc/usage_switches.tpl:93 views/inc/usage_weather.tpl:25
@@ -1512,7 +1553,7 @@ msgstr ""
 
 #: views/inc/usage_environment.tpl:111
 msgid "The sprayer will not operate when a door is open."
-msgstr ""
+msgstr "De sproeier werkt niet wanneer een deur open is."
 
 #: views/inc/usage_environment.tpl:125 views/inc/usage_environment.tpl:180
 #: views/inc/usage_environment.tpl:311 views/system_environment.tpl:117
@@ -1549,12 +1590,20 @@ msgid ""
 "will be toggled off and stay out until the temperature hits the minimum "
 "value."
 msgstr ""
+"Wanneer de verwarming in de sensor-modus wordt gebruikt, schakelt het "
+"systeem de schakelaars op basis van de alarmen van de sensoren. Als de "
+"temperatuur te koud is, verandert het op de schakelaars. Totdat de "
+"temperatuur boven de maximale waarde komt, blijft de schakelaar aan. Wanneer "
+"de maximale temperatuur is bereikt, worden de schakelaars uitgeschakeld en "
+"blijven ze uit tot de temperatuur de minimumwaarde bereikt."
 
 #: views/inc/usage_environment.tpl:202 views/inc/usage_environment.tpl:296
 msgid ""
 "When used in Timer or Weather mode, the switches will be toggled on and of "
 "on the selected times regardless of the temperature."
 msgstr ""
+"Wanneer in Timer of Weer-modus wordt gebruikt, worden de schakelaars aan en "
+"uitgeschakeld op de geselecteerde tijden ongeacht de temperatuur."
 
 #: views/inc/usage_environment.tpl:203 views/inc/usage_environment.tpl:297
 msgid ""
@@ -1648,7 +1697,7 @@ msgstr "Temperatuur sensor"
 
 #: views/inc/usage_sensors.tpl:72
 msgid "The time stamp of the last measurement."
-msgstr ""
+msgstr "Het tijdstip van de laatste meting."
 
 #: views/inc/usage_sensors.tpl:73
 msgid ""
@@ -1674,11 +1723,15 @@ msgstr ""
 msgid ""
 "The values are updated every 30 seconds and updated in real time on the page."
 msgstr ""
+"De waarden worden elke 30 seconden bijgewerkt en worden in real time op de "
+"pagina bijgewerkt."
 
 #: views/inc/usage_sensors.tpl:93
 msgid ""
 "The current value is also written below the graph in degrees or percentage."
 msgstr ""
+"De huidige waarde wordt ook onder de grafiek in graden of percentage "
+"geschreven."
 
 #: views/inc/usage_sensors.tpl:98
 msgid ""
@@ -1796,7 +1849,7 @@ msgstr ""
 
 #: views/inc/usage_weather.tpl:19
 msgid "The week forecast is shown at 13:00 hours of each day."
-msgstr ""
+msgstr "De weekvoorspelling wordt om 13:00 uur van elke dag weergegeven."
 
 #: views/inc/usage_weather.tpl:22 views/inc/usage_weather.tpl:88
 #: views/weather_forecast.tpl:112
@@ -1808,6 +1861,8 @@ msgid ""
 "The day forecast shows the temperature per hour for 24 / 36 hours from now. "
 "The title holds the graph period."
 msgstr ""
+"De dag voorspelling geeft de temperatuur per uur voor 24/36 uur vanaf nu. De "
+"titel bevat de grafiekperiode."
 
 #: views/inc/usage_weather.tpl:28 views/inc/usage_weather.tpl:91
 #: views/weather_forecast.tpl:130
@@ -1832,21 +1887,21 @@ msgstr ""
 
 #: views/inc/usage_weather.tpl:42 views/inc/usage_weather.tpl:64
 #: views/inc/usage_webcams.tpl:99 views/inc/usage_webcams.tpl:126
-#: views/weather_settings.tpl:19 views/weather_settings.tpl:46
+#: views/weather_settings.tpl:19 views/weather_settings.tpl:47
 #: views/webcam_settings.tpl:19 views/webcam_settings.tpl:81
 msgid "Location"
 msgstr "Locatie"
 
 #: views/inc/usage_weather.tpl:48 views/inc/usage_weather.tpl:71
-#: views/weather_settings.tpl:26 views/weather_settings.tpl:52
+#: views/weather_settings.tpl:27 views/weather_settings.tpl:53
 msgid "Wind speed"
 msgstr "Windsnelheid"
 
-#: views/inc/usage_weather.tpl:52 views/weather_settings.tpl:56
+#: views/inc/usage_weather.tpl:52 views/weather_settings.tpl:57
 msgid "m/s"
 msgstr "m/s."
 
-#: views/inc/usage_weather.tpl:53 views/weather_settings.tpl:57
+#: views/inc/usage_weather.tpl:53 views/weather_settings.tpl:58
 msgid "Km/h"
 msgstr "Km/h"
 
@@ -1965,6 +2020,8 @@ msgid ""
 "TerrariumPI is mainly written in Python version 2.7. The web interface is a "
 "bootstrap 3 template. It can be downloaded from %s."
 msgstr ""
+"TerrariumPI is voornamelijk geschreven in Python versie 2.7. De webinterface "
+"is een bootstrap 3 sjabloon. Het kan worden gedownload op %s."
 
 #: views/info.tpl:27 views/info.tpl:80 views/info.tpl:82
 msgid "Download TerrariumPI on Github"
@@ -2094,6 +2151,10 @@ msgstr "Hier kunt u uw stroomschakelaars configureren."
 #: views/switch_settings.tpl:55
 msgid "Add new switch"
 msgstr "Voeg nieuwe schakelaar toe"
+
+#: views/switch_settings.tpl:83
+msgid "GPIO Inverse"
+msgstr "GPIO omgekeerd"
 
 #: views/system_environment.tpl:16
 msgid "Here you can configure your environment."
@@ -2454,3 +2515,12 @@ msgstr "Systeem omgeving"
 #: Missing text string
 msgid "System settings"
 msgstr "Systeem instellingen"
+
+#~ msgid ""
+#~ "GPIO sensors has to added manually to TerrariumPI software. That can done "
+#~ "in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 "
+#~ "and DHT22 needs an extra capacitor"
+#~ msgstr ""
+#~ "GPIO sensoren moeten handmatig toevoegen aan TerrariumPI software. Dit "
+#~ "kan gedaan worden in de webinterface. De GPIO-sensoren kunnen GPIO-pennen "
+#~ "niet delen. De DHT11 en DHT22 hebben een extra condensator nodig"

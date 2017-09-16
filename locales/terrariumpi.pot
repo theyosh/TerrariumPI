@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-09-09 13:59+CEST\n"
+"POT-Creation-Date: 2017-09-16 21:17+CEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -322,33 +322,41 @@ msgstr ""
 msgid "Holds a link to more information."
 msgstr ""
 
-#: terrariumWebserver.py:75 terrariumWebserver.py:81
+#: terrariumWebserver.py:78 terrariumWebserver.py:84 terrariumWebserver.py:92
 msgid "Authenticate to make any changes"
 msgstr ""
 
-#: terrariumWebserver.py:75 terrariumWebserver.py:81
+#: terrariumWebserver.py:78 terrariumWebserver.py:84 terrariumWebserver.py:92
 msgid "Authentication"
 msgstr ""
 
-#: terrariumWebserver.py:75 terrariumWebserver.py:81
+#: terrariumWebserver.py:78 terrariumWebserver.py:84 terrariumWebserver.py:92
 #: views/system_settings.tpl:23
 msgid "TerrariumPI"
 msgstr ""
 
-#: terrariumWebserver.py:144
+#: terrariumWebserver.py:153
 msgid "Data could not be saved"
 msgstr ""
 
-#: terrariumWebserver.py:144
+#: terrariumWebserver.py:153
 msgid "Error!"
 msgstr ""
 
-#: terrariumWebserver.py:152
+#: terrariumWebserver.py:161
 msgid "Data saved"
 msgstr ""
 
-#: terrariumWebserver.py:153
+#: terrariumWebserver.py:162
 msgid "Your changes are saved"
+msgstr ""
+
+#: terrariumWebserver.py:234 views/inc/menu.tpl:130
+msgid "Log out"
+msgstr ""
+
+#: terrariumWebserver.py:235
+msgid "You are now logged out"
 msgstr ""
 
 #: views/dashboard.tpl:7 views/inc/usage_dashboard.tpl:87
@@ -857,33 +865,29 @@ msgstr ""
 msgid "Lock"
 msgstr ""
 
-#: views/inc/menu.tpl:130
-msgid "Log out"
-msgstr ""
-
 #: views/inc/menu.tpl:142
 msgid "date/time"
 msgstr ""
 
-#: views/inc/menu.tpl:145 views/inc/usage_dashboard.tpl:43
+#: views/inc/menu.tpl:147 views/inc/usage_dashboard.tpl:43
 #: views/inc/usage_doors.tpl:82
 msgid "Door is closed"
 msgstr ""
 
-#: views/inc/menu.tpl:145 views/inc/usage_dashboard.tpl:50
+#: views/inc/menu.tpl:150 views/inc/usage_dashboard.tpl:50
 #: views/inc/usage_doors.tpl:81
 msgid "Door is open"
 msgstr ""
 
-#: views/inc/menu.tpl:149 views/inc/menu.tpl:159
+#: views/inc/menu.tpl:156 views/inc/menu.tpl:173
 msgid "No messages"
 msgstr ""
 
-#: views/inc/menu.tpl:155 views/inc/usage_dashboard.tpl:19
+#: views/inc/menu.tpl:164 views/inc/usage_dashboard.tpl:19
 msgid "Online"
 msgstr ""
 
-#: views/inc/menu.tpl:155 views/inc/usage_dashboard.tpl:26
+#: views/inc/menu.tpl:167 views/inc/usage_dashboard.tpl:26
 msgid "Offline"
 msgstr ""
 
