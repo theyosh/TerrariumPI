@@ -10,7 +10,8 @@ var globals = {
   graph_cache: 5 * 60,
   websocket_timer: null,
   online_timer: null,
-  current_version: null
+  current_version: null,
+  language: '',
 };
 
 /**
@@ -172,6 +173,20 @@ function load_page(url) {
   return false;
 }
 
+function formatCurrency(amount) {
+  return (1 * amount).toLocaleString(globals.language.replace('_','-'), {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 2
+  });
+}
+
+function formatNumber(amount) {
+  return (1 * amount).toLocaleString(globals.language.replace('_','-'), {
+    maximumFractionDigits: 3
+  });
+}
+
 function process_form() {
   $('form').each(function() {
     $(this).on('submit', function() {
@@ -302,22 +317,23 @@ function update_dashboard_uptime(data) {
 }
 
 function update_dashboard_power_usage(data) {
-  update_dashboard_tile('power_wattage', data.current + '/' + data.max);
+  update_dashboard_tile('power_wattage', formatNumber(data.current) + '/' + formatNumber(data.max));
   var percentage = (data.max > 0 ? (data.current / data.max) * 100 : 0);
   $("#power_wattage .progress-bar-success").css('height', percentage + '%');
   data.total /= 1000;
-  $("#total_power .count_bottom .costs span").text((data.price * data.total).toFixed(3));
+  $("#total_power .count_bottom .costs span").text(formatCurrency(data.price * data.total));
   $("#total_power .count_bottom span.duration").text(moment.duration(data.duration * 1000).humanize());
-  update_dashboard_tile('total_power', data.total.toFixed(2));
+  update_dashboard_tile('total_power',formatNumber(data.total));
 }
 
 function update_dashboard_water_flow(data) {
-  update_dashboard_tile('water_flow', data.current + '/' + data.max);
+  update_dashboard_tile('water_flow', formatNumber(data.current) + '/' + formatNumber(data.max));
   var percentage = (data.max > 0 ? (data.current / data.max) * 100 : 0);
   $("#water_flow .progress-bar-info").css('height', percentage + '%');
-  $("#total_water .count_bottom .costs span").text((data.price * (data.total / 1000)).toFixed(3));
+  data.total /= 1000;
+  $("#total_water .count_bottom .costs span").text(formatCurrency(data.price * data.total));
   $("#total_water .count_bottom span.duration").text(moment.duration(data.duration * 1000).humanize());
-  update_dashboard_tile('total_water', data.total.toFixed(2));
+  update_dashboard_tile('total_water', formatNumber(data.total));
 }
 
 function update_weather(data) {
@@ -330,7 +346,7 @@ function update_weather(data) {
     weather_current.find('h2').html(data.city.city + '<br><i>' + data.hour_forecast[0].weather + '</i>');
     weather_current.find('.sunrise').text(moment(data.sun.rise * 1000).format('LT')).parent().css('fontWeight', (data.day ? 'bold' : 'normal'));
     weather_current.find('.sunset').text(moment(data.sun.set * 1000).format('LT')).parent().css('fontWeight', (data.day ? 'normal' : 'bold'));
-    weather_current.find('.degrees').text(data.hour_forecast[0].temperature);
+    weather_current.find('.degrees').text(formatNumber(data.hour_forecast[0].temperature));
     icons.set(weather_current.find('canvas').attr('id'), data.hour_forecast[0].icon);
     var week_forecast_divs = weather_current.find('div.row.weather-days div.daily-weather');
     // Set timestamp to tomorrow at 13 hours. That is the first week forecast we take
@@ -342,8 +358,8 @@ function update_weather(data) {
       if (value.from - timestamp >= 3600 && day_counter < week_forecast_divs.length) {
         $(week_forecast_divs[day_counter]).show();
         $(week_forecast_divs[day_counter]).find('.day').text(moment(value.from * 1000).format('ddd'));
-        $(week_forecast_divs[day_counter]).find('.degrees').text(value.temperature.toFixed(1));
-        $(week_forecast_divs[day_counter]).find('h5').html(value.wind_speed.toFixed(1) + ' <i>' + (data.windspeed === 'ms' ? '{{_('m/s')}}' : '{{_('Km/h')}}') + '</i>');
+        $(week_forecast_divs[day_counter]).find('.degrees').text(formatNumber(value.temperature));
+        $(week_forecast_divs[day_counter]).find('h5').html(formatNumber(value.wind_speed) + ' <i>' + (data.windspeed === 'ms' ? '{{_('m/s')}}' : '{{_('Km/h')}}') + '</i>');
         $(week_forecast_divs[day_counter]).find('canvas').attr('title',value.weather);
         icons.set($(week_forecast_divs[day_counter]).find('canvas').attr('id'), value.icon);
         day_counter++;
@@ -397,13 +413,13 @@ function update_dashboard_environment(name, value) {
     systempart.find('.duration').text(moment.duration(Math.abs(value.off - value.on) * 1000).humanize());
   }
   if (value.current !== undefined) {
-    systempart.find('.current').text(value.current.toFixed(3) + ' ' + indicator);
+    systempart.find('.current').text(formatNumber(value.current) + ' ' + indicator);
   }
   if (value.alarm_min !== undefined) {
-    systempart.find('.alarm_min').text(value.alarm_min.toFixed(3) + ' ' + indicator);
+    systempart.find('.alarm_min').text(formatNumber(value.alarm_min) + ' ' + indicator);
   }
   if (value.alarm_max !== undefined) {
-    systempart.find('.alarm_max').text(value.alarm_max.toFixed(3) + ' ' + indicator);
+    systempart.find('.alarm_max').text(formatNumber(value.alarm_max) + ' ' + indicator);
   }
   if (value.alarm !== undefined) {
     systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
@@ -846,7 +862,7 @@ function history_graph(name, data, type) {
       tickFormatter: function(val, axis) {
         switch(type) {
           case 'system_memory':
-              val = (val / (1024 * 1024)).toFixed(axis.tickDecimals) + ' MB';
+              val = formatNumber(val / (1024 * 1024)) + ' MB'
             break;
 
           case 'system_uptime':
@@ -854,15 +870,15 @@ function history_graph(name, data, type) {
             break;
 
           case 'weather':
-            val = val.toFixed(axis.tickDecimals) + ' °' + globals.temperature_indicator;
+            val = formatNumber(val) + ' °' + globals.temperature_indicator;
             break;
 
           case 'humidity':
-            val = val.toFixed(axis.tickDecimals) + ' %';
+            val = formatNumber(val) + ' %';
             break;
 
           case 'switch':
-            val = val.toFixed(axis.tickDecimals) + ' W';
+            val = formatNumber(val) + ' W';
             break;
 
           case 'door':
@@ -870,7 +886,7 @@ function history_graph(name, data, type) {
             break;
 
           default:
-            val = val.toFixed(axis.tickDecimals) + (type.indexOf('temperature') !== -1 ? ' °' + globals.temperature_indicator : ' %');
+            val = formatNumber(val) + (type.indexOf('temperature') !== -1 ? ' °' + globals.temperature_indicator : ' %');
             break;
         }
         return val;
@@ -983,10 +999,10 @@ function history_graph(name, data, type) {
     if (type == 'switch') {
       var usage = '';
       if (data.total_power_usage > 0) {
-        usage = '{{_('Total power in kWh')}}: ' + Math.round(data.total_power_usage) / 1000;
+        usage = '{{_('Total power in kWh')}}: ' + formatNumber(data.total_power_usage);
       }
       if (data.total_water_usage > 0) {
-        usage += (usage != '' ? ', ' : '') + '{{_('Total water in L')}}: ' + Math.round(data.total_water_usage * 100) / 100;
+        usage += (usage != '' ? ' - ' : '') + '{{_('Total water in L')}}: ' + formatNumber(data.total_water_usage);
       }
       $('#' + name + ' .total_usage').text(usage);
     } else if (type == 'door') {
@@ -1168,7 +1184,7 @@ function add_webcam_row(id,location,name,rotation,preview) {
 function update_power_switch(id, data) {
   var power_switch = $('#switch_' + id);
   power_switch.find('h2 span.title').text('{{_('Switch')}} ' + data.name);
-  power_switch.find('h2 small.data_update').text(data.power_wattage + 'W' + (data.water_flow > 0 ? ', ' + data.water_flow + 'L/m' : ''));
+  power_switch.find('h2 small.data_update').text(formatNumber(data.power_wattage) + 'W' + (data.water_flow > 0 ? ' - ' + formatNumber(data.water_flow) + 'L/m' : ''));
   power_switch.find('span.glyphicon').removeClass('blue green').addClass((data.state ? 'green' : 'blue')).attr('title','{{_('Toggle power switch')}}');
 }
 
@@ -1488,7 +1504,7 @@ function uploadProfileImage() {
 $(document).ready(function() {
   init_sidebar();
 
-  moment.locale($('html').attr('lang'));
+  moment.locale(globals.language);
   $('#system_time span').text(moment().format('LLLL'));
   websocket_init(false);
   // Bind to menu links in order to load Ajax calls

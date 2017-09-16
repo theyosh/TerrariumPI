@@ -47,6 +47,7 @@
   <script type="text/javascript">
     globals.current_version = '{{version}}';
     globals.temperature_indicator = '{{temperature_indicator}}';
+    globals.language = '{{lang}}';
   </script>
 </body>
 </html>

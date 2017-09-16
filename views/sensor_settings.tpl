@@ -169,7 +169,7 @@
                                sensor.alarm_max,
                                sensor.limit_min,
                                sensor.limit_max,
-                               sensor.current);
+                               formatNumber(sensor.current));
               });
               reload_reload_theme();
             });
