@@ -127,7 +127,7 @@
             <a data-placement="top" data-toggle="tooltip" href="javascript:;" onclick="menu_click('system_settings.html');" title="{{_('Settings')}}"><span aria-hidden="true" class="glyphicon glyphicon-cog"></span><br />{{_('Settings')}}</a>
             <a data-placement="top" data-toggle="tooltip" href="javascript:;" onclick="$(document).fullScreen(true);" title="{{_('Full screen')}}"><span aria-hidden="true" class="glyphicon glyphicon-fullscreen"></span><br />{{_('FullScreen')}}</a>
             <a data-placement="top" data-toggle="tooltip" title="{{_('Lock')}}"><span aria-hidden="true" class="glyphicon glyphicon-eye-close"></span><br />{{_('Lock')}}</a>
-            <a data-placement="top" data-toggle="tooltip" title="{{_('Log out')}}"><span aria-hidden="true" class="glyphicon glyphicon-off"></span><br />{{_('Log out')}}</a>
+            <a data-placement="top" data-toggle="tooltip" href="javascript:;" onclick="logout();" title="{{_('Log out')}}"><span aria-hidden="true" class="glyphicon glyphicon-off"></span><br />{{_('Log out')}}</a>
           </div><!-- /menu footer buttons -->
         </div>
       </div><!-- top navigation -->

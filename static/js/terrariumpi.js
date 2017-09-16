@@ -122,6 +122,15 @@ function websocket_message(message) {
   }
 }
 
+function logout() {
+  $.ajax({
+      async: false,
+      url: 'logout',
+      type: 'GET',
+      username: 'logout'
+  });
+}
+
 function menu_click(url) {
   // Find the menu item that should be loaded
   var menu_item = $('a[href="' + url + '"]');

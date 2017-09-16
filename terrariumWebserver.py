@@ -62,6 +62,9 @@ class terrariumWebserver():
   def __authenticate(self, user, password):
     return self.__terrariumEngine.authenticate(user,password)
 
+  def __logout_authenticate(self, user, password):
+    return True
+
   def __routes(self):
     self.__app.route('/', method="GET", callback=self.__render_page)
     self.__app.route('/<template_name:re:[^/]+\.html$>', method="GET", callback=self.__render_page)
@@ -82,6 +85,12 @@ class terrariumWebserver():
                     )
 
     self.__app.route('/api/<path:path>', method=['GET'], callback=self.__get_api_call)
+
+    self.__app.route('/logout',
+                     method=['GET'],
+                     callback=self.__logout_url,
+                     apply=auth_basic(self.__logout_authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
+                    )
 
   def __template_variables(self, template):
     variables = { 'lang' : self.__terrariumEngine.config.get_active_language(),
@@ -219,6 +228,9 @@ class terrariumWebserver():
       return {'ok' : True}
 
     return {'ok' : False}
+
+  def __logout_url(self):
+    return {}
 
   @app.error(404)
   def error404(error):
