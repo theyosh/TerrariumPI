@@ -680,7 +680,14 @@ function sensor_gauge(name, data) {
   if ($('#' + name + ' .gauge').length == 1) {
     // Update title
     if (data.type !== undefined && data.name !== undefined) {
-      $('#' + name + ' span.title').text(data.type + ' {{_('sensor')}}: ' + (data.name !== '' ? data.name : data.address));
+      var title = data.type + ' {{_('sensor')}}';
+      if ('temperature' === data.type) {
+        title = '{{_('Temperature sensor')}}';
+      } else if ('humidity' === data.type) {
+        title = '{{_('Humidity sensor')}}';
+      }
+      title += ': ';
+      $('#' + name + ' span.title').text(title + (data.name !== '' ? data.name : data.address));
     }
     // Update timestamp indicator
     $('#' + name + ' small').text(moment().format('LLL'));
