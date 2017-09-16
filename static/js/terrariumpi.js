@@ -196,17 +196,24 @@ function load_page(url) {
   return false;
 }
 
-function formatCurrency(amount) {
+function formatCurrency(amount,minfrac,maxfrac) {
+  if (minfrac === undefined) minfrac = 2;
+  if (maxfrac === undefined) maxfrac = 2;
+
   return (1 * amount).toLocaleString(globals.language.replace('_','-'), {
     style: 'currency',
     currency: 'EUR',
-    minimumFractionDigits: 2
+    minimumFractionDigits: minfrac,
+    maximumFractionDigits: maxfrac
   });
 }
 
-function formatNumber(amount) {
+function formatNumber(amount,minfrac,maxfrac) {
+  if (minfrac === undefined) minfrac = 0;
+  if (maxfrac === undefined) maxfrac = 3;
   return (1 * amount).toLocaleString(globals.language.replace('_','-'), {
-    maximumFractionDigits: 3
+    minimumFractionDigits: minfrac,
+    maximumFractionDigits: maxfrac
   });
 }
 
@@ -436,13 +443,13 @@ function update_dashboard_environment(name, value) {
     systempart.find('.duration').text(moment.duration(Math.abs(value.off - value.on) * 1000).humanize());
   }
   if (value.current !== undefined) {
-    systempart.find('.current').text(formatNumber(value.current) + ' ' + indicator);
+    systempart.find('.current').text(formatNumber(value.current,3) + ' ' + indicator);
   }
   if (value.alarm_min !== undefined) {
-    systempart.find('.alarm_min').text(formatNumber(value.alarm_min) + ' ' + indicator);
+    systempart.find('.alarm_min').text(formatNumber(value.alarm_min,3) + ' ' + indicator);
   }
   if (value.alarm_max !== undefined) {
-    systempart.find('.alarm_max').text(formatNumber(value.alarm_max) + ' ' + indicator);
+    systempart.find('.alarm_max').text(formatNumber(value.alarm_max,3) + ' ' + indicator);
   }
   if (value.alarm !== undefined) {
     systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
@@ -831,7 +838,6 @@ function load_history_graph(id,type,data_url,nocache) {
         globals.graphs[id].timer = setTimeout(function() {
           load_history_graph(id,type,data_url);
         }, 1 * 60 * 1000);
-
       });
     }
 
