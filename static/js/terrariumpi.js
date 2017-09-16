@@ -128,6 +128,20 @@ function logout() {
       url: 'logout',
       type: 'GET',
       username: 'logout'
+  }).done(function(response) {
+    new PNotify({
+      type: (response.ok ? 'success' : 'error'),
+      title: response.title,
+      text: response.message,
+      nonblock: {
+        nonblock: true
+      },
+      delay: 3000,
+      mouse_reset: false,
+      //addclass: 'dark',
+      styling: 'bootstrap3',
+      hide: true,
+    });
   });
 }
 

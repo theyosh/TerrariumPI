@@ -230,7 +230,10 @@ class terrariumWebserver():
     return {'ok' : False}
 
   def __logout_url(self):
-    return {}
+    return {'ok'      : True,
+            'title'   : _('Log out'),
+            'message' : _('You are now logged out')
+           }
 
   @app.error(404)
   def error404(error):
