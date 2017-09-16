@@ -12,6 +12,7 @@ var globals = {
   online_timer: null,
   current_version: null,
   language: null,
+  ajaxloader: 0
 };
 
 /**
@@ -23,30 +24,30 @@ var globals = {
  * });
  */
 (function($,sr){
-    // debouncing function from John Hann
-    // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
-    var debounce = function (func, threshold, execAsap) {
-      var timeout;
+  // debouncing function from John Hann
+  // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
+  var debounce = function (func, threshold, execAsap) {
+    var timeout;
 
-        return function debounced () {
-            var obj = this, args = arguments;
-            function delayed () {
-                if (!execAsap)
-                    func.apply(obj, args);
-                timeout = null;
-            }
+    return function debounced () {
+      var obj = this, args = arguments;
+      function delayed () {
+        if (!execAsap)
+          func.apply(obj, args);
+        timeout = null;
+      }
 
-            if (timeout)
-                clearTimeout(timeout);
-            else if (execAsap)
-                func.apply(obj, args);
+      if (timeout)
+        clearTimeout(timeout);
+      else if (execAsap)
+        func.apply(obj, args);
 
-            timeout = setTimeout(delayed, threshold || 100);
-        };
+      timeout = setTimeout(delayed, threshold || 100);
     };
+  };
 
-    // smartresize
-    jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
+  // smartresize
+  jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
 
 })(jQuery,'smartresize');
 
@@ -264,11 +265,11 @@ function prepare_form_data(form) {
         var field_value = $(this).val();
         switch (form_type) {
           case 'profile':
-            if (field_name == 'age') {
-              field_value = moment(field_value,'L').unix();
-            };
           case 'weather':
           case 'system':
+            if (field_name == 'age') {
+              field_value = moment(field_value,'L').unix();
+            }
             formdata[field_name] = field_value;
             break;
           case 'sensors':
@@ -326,8 +327,8 @@ function prepare_form_data(form) {
 function update_dashboard_tile(tile, text) {
   var div = $('div.tile_count #' + tile + ' div.count');
   if (div.length == 1 && div.text() != text) {
-    div.text(text);
     var oldColor = div.css('color');
+    div.text(text);
     div.addClass('green');
     div.animate({
       color: oldColor
@@ -643,13 +644,13 @@ function init_sidebar() {
 
   // toggle small or large menu
   $MENU_TOGGLE.on('click', function() {
-      if ($BODY.hasClass('nav-md')) {
-        $SIDEBAR_MENU.find('li.active ul').hide();
-        $SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
-      } else {
-        $SIDEBAR_MENU.find('li.active-sm ul').show();
-        $SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
-      }
+    if ($BODY.hasClass('nav-md')) {
+      $SIDEBAR_MENU.find('li.active ul').hide();
+      $SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
+    } else {
+      $SIDEBAR_MENU.find('li.active-sm ul').show();
+      $SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
+    }
 
     $BODY.toggleClass('nav-md nav-sm');
 
@@ -1531,23 +1532,30 @@ function uploadProfileImage() {
 }
 
 $(document).ready(function() {
+  moment.locale(globals.language);
+  // NProgress bar animation during Ajax calls
+  $(document).on({
+    ajaxSend: function() {
+      if (globals.ajaxloader === 0) {
+        NProgress.start();
+      }
+      globals.ajaxloader++;
+    },
+    ajaxComplete: function() {
+      globals.ajaxloader--;
+      if (globals.ajaxloader === 0) {
+        NProgress.done();
+      }
+    }
+  });
+
   init_sidebar();
 
-  moment.locale(globals.language);
   $('#system_time span').text(moment().format('LLLL'));
   websocket_init(false);
   // Bind to menu links in order to load Ajax calls
   $('#sidebar-menu a').each(function() {
     $(this).on('click', load_page).attr('title',$(this).parents('li').find('a:first').text());
-  });
-  // NProgress bar animation during Ajax calls
-  $(document).on({
-    ajaxStart: function() {
-      NProgress.start();
-    },
-    ajaxComplete: function() {
-      NProgress.done();
-    }
   });
 
   $("<div id='tooltip'><span title='tooltip' id='tooltiptext' data-toggle='tooltip'>&nbsp;&nbsp;&nbsp;</span></div>").css({
