@@ -432,11 +432,11 @@ function online_updater() {
   }, 120 * 1000);
 }
 
-function update_door_messages(online,date) {
-  var title   = (online ? '{{_('Open')}}' : '{{_('Close')}}');
-  var message = (online ? '{{_('Door is open')}}' : '{{_('Door is closed')}}');
-  var icon    = (online ? 'fa-unlock' : 'fa-lock');
-  var color   = (online ? 'red' : 'green');
+function update_door_messages(open,date) {
+  var title   = (open ? '{{_('Open')}}' : '{{_('Closed')}}');
+  var message = (open ? '{{_('Door is open')}}' : '{{_('Door is closed')}}');
+  var icon    = (open ? 'fa-unlock' : 'fa-lock');
+  var color   = (open ? 'red' : 'green');
   add_notification_message('door_messages', title, message, icon, color, date);
 }
 
@@ -499,20 +499,20 @@ function notification_timestamps() {
 
 function is_online() {
   var online_indicator = $('a#online_indicator');
-  online_indicator.find('span').text('{{_('Online')}}');
-  online_indicator.find('i.fa').removeClass('fa-check-circle-o fa-exclamation-triangle red green').addClass('fa-check-circle-o green');
+  online_indicator.find('span.offline').hide();
+  online_indicator.find('span.online').show();
   update_online_messages(true);
 }
 
 function is_offline() {
   var online_indicator = $('a#online_indicator');
-  online_indicator.find('span').text('{{_('Offline')}}');
-  online_indicator.find('i.fa').removeClass('fa-check-circle-o fa-exclamation-triangle red green').addClass('fa-exclamation-triangle red');
+  online_indicator.find('span.online').hide();
+  online_indicator.find('span.offline').show();
   update_online_messages(false);
 }
 
 function update_door_indicator(status) {
-  if (status == 'open') {
+  if ('open' === status) {
     door_open();
   } else {
     door_closed();
@@ -520,16 +520,16 @@ function update_door_indicator(status) {
 }
 
 function door_open() {
-  var online_indicator = $('a#door_indicator');
-  online_indicator.find('span').text('{{_('Door is open')}}');
-  online_indicator.find('i.fa').removeClass('fa-lock fa-unlock red green').addClass('fa-unlock red');
+  var door_indicator = $('a#door_indicator');
+  door_indicator.find('span.closed').hide();
+  door_indicator.find('span.open').show();
   update_door_messages(true);
 }
 
 function door_closed() {
-  var online_indicator = $('a#door_indicator');
-  online_indicator.find('span').text('{{_('Door is closed')}}');
-  online_indicator.find('i.fa').removeClass('fa-lock fa-unlock red green').addClass('fa-lock green');
+  var door_indicator = $('a#door_indicator');
+  door_indicator.find('span.open').hide();
+  door_indicator.find('span.closed').show();
   update_door_messages(false);
 }
 

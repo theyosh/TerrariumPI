@@ -142,7 +142,14 @@
                 <i class="fa fa-clock-o"></i> <span >{{_('date/time')}}</span>
               </li>
               <li class="dropdown" role="presentation">
-                <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;" id="door_indicator"><i class="fa fa-lock green"></i> <span>{{_('Door is closed')}}/{{_('Door is open')}}</span></a>
+                <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;" id="door_indicator">
+                  <span class="closed">
+                    <i class="fa fa-lock green"></i> <span>{{_('Door is closed')}}</span>
+                  </span>
+                  <span class="open" style="display:none">
+                    <i class="fa fa-lock red"></i> <span>{{_('Door is open')}}</span>
+                  </span>
+                </a>
                 <ul class="dropdown-menu list-unstyled msg_list" id="door_messages" role="menu">
                   <li class="no_message">
                     <div class="text-center">
@@ -152,7 +159,14 @@
                 </ul>
               </li>
               <li class="dropdown" role="presentation">
-                <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;" id="online_indicator"><i class="fa fa-exclamation-triangle red"></i> <span>{{_('Online')}}/{{_('Offline')}}</span></a>
+                <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;" id="online_indicator">
+                  <span class="online">
+                    <i class="fa fa-check-circle-o green"></i> <span>{{_('Online')}}</span>
+                  </span>
+                  <span class="offline" style="display:none">
+                    <i class="fa fa-exclamation-triangle red"></i> <span>{{_('Offline')}}</span>
+                  </span>
+                </a>
                 <ul class="dropdown-menu list-unstyled msg_list" id="online_messages" role="menu">
                   <li class="no_message">
                     <div class="text-center">
