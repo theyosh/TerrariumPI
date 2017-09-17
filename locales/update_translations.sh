@@ -74,8 +74,8 @@ echo "msgid \"System settings\"" >> terrariumpi.pot
 echo "msgstr \"\"" >> terrariumpi.pot
 echo "" >> terrariumpi.pot
 
-sed -e 's@YEAR ORGANIZATION@2016 TheYOSH@g' \
-    -e 's@FIRST AUTHOR <EMAIL\@ADDRESS>, YEAR@Joshua (TheYOSH) Rubingh, <theyosh\@theyosh.nl>, 2016@g' \
+sed -e 's@YEAR ORGANIZATION@2016-2017 TheYOSH@g' \
+    -e 's@FIRST AUTHOR <EMAIL\@ADDRESS>, YEAR@Joshua (TheYOSH) Rubingh, <theyosh\@theyosh.nl>, 2016-2017@g' \
     -i terrariumpi.pot
 
 echo "Creating en_US language"
