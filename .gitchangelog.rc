@@ -157,6 +157,7 @@ section_regexps = [
 body_process = ReSub(r'((^|\n)[A-Z]\w+(-\w+)*: .*(\n\s+.*)*)+$', r'') | strip
 
 
+
 ## ``subject_process`` is a callable
 ##
 ## This callable will be given the original subject and result will
@@ -268,7 +269,14 @@ include_merge = True
 #     idx=lambda m: m.start(1)
 # )
 #publish = stdout
-
+import codecs
+import re
+def publish(lines):
+    """Write changelog to file."""
+    with codecs.open('CHANGELOG.md', 'w', 'utf-8') as f:
+        for line in lines:
+            line = re.sub("#(\d+)", "[#\\1](https://github.com/theyosh/TerrariumPI/issues/\\1)", line, 0, re.IGNORECASE)
+            f.write(line)
 
 ## ``revs`` is a list of callable or a list of string
 ##
