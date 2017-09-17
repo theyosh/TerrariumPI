@@ -367,6 +367,7 @@ class terrariumWeather():
              'partlycloudy' : 'partly_cloudy_' + ('day' if self.is_day() else 'night'),
              'mostlycloudy' : 'partly_cloudy_' + ('day' if self.is_day() else 'night'),
              'brokenclouds' : 'partly_cloudy_' + ('day' if self.is_day() else 'night'),
+             'fewclouds' : 'partly_cloudy_' + ('day' if self.is_day() else 'night'),
 
              'cloudy' : 'cloudy',
              'scatteredclouds' : 'cloudy',
@@ -376,6 +377,7 @@ class terrariumWeather():
              'lightrain' : 'rain',
              'rain' : 'rain',
              'chanceofrain' : 'rain',
+             'moderaterain' : 'rain',
 
              'rainshowers' : 'sleet',
              'heavyrainshowers' : 'sleet',
