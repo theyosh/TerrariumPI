@@ -26,6 +26,15 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
 
 It is currently controling my reptile terrarium for more then three years! And my Madagascar Day Gecko is very happy with it!
 
+## Translations
+The software has support for the following languages:
+- English
+- Dutch
+- German
+- Italian
+
+Your language not in the list? [Create your own language translation](https://github.com/theyosh/TerrariumPI/wiki/Translations)
+
 ## Installation
 1. Get a working Raspberry Pi
 2. Clone this repository and submodules: git clone --recursive https://github.com/theyosh/TerrariumPI.git
@@ -64,7 +73,7 @@ If there is some other hardware which is not working with TerrariumPI, open an i
 ### System settings
 ![TerrariumPI 2.5 System setup screenshot](screenshots/System_setup.png)
 
-More screenshots can be found [here](https://github.com/theyosh/TerrariumPI/tree/screenshots/)
+More screenshots can be found [here](https://github.com/theyosh/TerrariumPI/tree/master/screenshots)
 
 ## About
-Read more information at: https://terrarium.theyosh.nl/index.html
+A live version is running at: https://terrarium.theyosh.nl/index.html. Go to 'Help' menu for more information about used hardware, software and how to setup.
