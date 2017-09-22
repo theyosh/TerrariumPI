@@ -36,15 +36,24 @@ The software has support for the following languages:
 Your language not in the list? [Create your own language translation](https://github.com/theyosh/TerrariumPI/wiki/Translations)
 
 ## Installation
-1. Get a working Raspberry Pi
-2. Clone this repository and submodules: git clone --recursive https://github.com/theyosh/TerrariumPI.git
-3. run ./install.sh in the cloned folder
-4. reboot Raspberry PI to get all the needed modules loaded
+1. Get a working Raspberry Pi and login as user 'pi'
+2. Clone this repository and submodules!: `git clone --recursive https://github.com/theyosh/TerrariumPI.git`
+3. Run `./install.sh` in the cloned folder
+4. Reboot Raspberry PI to get all the needed modules loaded
 5. Go to the webinterface at http://[raspberry_ip]:8090
 
 If you want to use the Raspberry PI 1 wire interface, you have to manually enable it through the raspi-config and reboot once more.
 
 Make sure that your Pi is secured when you put it to the Internet. Would be a shame if TerrariumPI gets next fictum of '[A smart fish tank left a casino vulnerable to hackers](http://money.cnn.com/2017/07/19/technology/fish-tank-hack-darktrace/index.html)' :P
+
+## Updating
+This updating is based on that the software is installed with the steps in the Installation above.
+1. Login with user 'pi' in Raspberry Pi
+2. Enter the TerrariumPI directory: `cd TerrariumPI`
+3. Run `git pull` to get the latest version
+4. Restart TerrariumPI according to: https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-restart-terrariumpi
+
+Now clear your browser cache and reload the webinterface. A brand new version should be running.
 
 ## Hardware
 This software requires some extra hardware in order to run and work. The bare minimun is
