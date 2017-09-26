@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2017-09-16 21:17+CEST\n"
-"PO-Revision-Date: 2017-09-27 00:09+0200\n"
+"PO-Revision-Date: 2017-09-27 00:18+0200\n"
 "Last-Translator: Lorenzo Faleschini <lorenzo@nordest.systems>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -38,11 +38,6 @@ msgstr ""
 "sono: %s."
 
 #: terrariumTranslations.py:27
-#, fuzzy
-#| msgid ""
-#| "Holds the sensor address. Depending on hardware type, it is either a read "
-#| "only hex number or GPIO pin. When using DHT11, DHT22 or AM2302 use "
-#| "<strong>Broadcom</strong> pin numbering (BCM)"
 msgid ""
 "Holds the sensor address. Depending on hardware type, it is either a read "
 "only hex number or GPIO pin. When using DHT11, DHT22 or AM2302 use "
@@ -103,11 +98,11 @@ msgstr ""
 #: terrariumTranslations.py:39
 msgid ""
 "Holds the switch address. Depending on hardware type, it is either a number "
-"or GPIO pin. For GPIO use <strong>normal</strong> GPIO numbering."
+"or GPIO pin. For GPIO use <strong>Physical</strong> GPIO pin numbering."
 msgstr ""
 "Registra l'indirizzo dell'interruttore. Dipendentemente dal tipo di "
-"hardware, può essere il numero di pin GPIO. Per i pin GPIO va utilizzata la "
-"numerazione <strong>normale</strong> GPIO."
+"hardware, può essere il numero di pin GPIO. Per i pin GPIO va utilizzato il "
+"numero di pin <strong>fisico</strong> GPIO."
 
 #: terrariumTranslations.py:40
 msgid "Holds the switch name."
@@ -133,11 +128,11 @@ msgstr ""
 
 #: terrariumTranslations.py:47
 msgid ""
-"Holds the door address. When using GPIO use <strong>normal</strong> GPIO pin "
-"numbering as address."
+"Holds the door address. When using GPIO use <strong>Physical</strong> GPIO "
+"pin numbering as address."
 msgstr ""
-"Registra l'indirizzo della porta. Per i pin GPIO va utilizzata la "
-"numerazione <strong>normale</strong> GPIO."
+"Registra l'indirizzo della porta. Per i pin GPIO va utilizzato il numero di "
+"pin <strong>fisico</strong> GPIO."
 
 #: terrariumTranslations.py:48
 msgid "Holds the door name."
