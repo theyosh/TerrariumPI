@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2017-09-09 13:59+CEST\n"
-"PO-Revision-Date: 2017-09-16 23:33+0200\n"
+"PO-Revision-Date: 2017-09-26 20:35+0200\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,17 +19,19 @@ msgstr ""
 
 #: terrariumTranslations.py:21
 msgid "Holds the external source URL. Supported sources are: %s."
-msgstr "Hält die externe Quell-URL. Unterstützte Quellen sind: %s."
+msgstr "Externe Quell-URL. Unterstützte Quellen sind: %s."
 
 #: terrariumTranslations.py:22
 msgid ""
 "Choose the wind speed indicator. The software will recalculate to the chosen "
 "indicator."
 msgstr ""
+"Wählen Sie die Windgeschwindigkeitsanzeige. Die Software wird mit dem "
+"gewählten Indikator neu berechnet."
 
 #: terrariumTranslations.py:26
 msgid "Holds the sensor hardware type. Supported hardware types are: %s."
-msgstr ""
+msgstr "Sensor Hardware-Typen. Unterstützte Sensoren sind: %s."
 
 #: terrariumTranslations.py:27
 msgid ""
@@ -37,90 +39,104 @@ msgid ""
 "only hex number or GPIO pin. When using DHT11, DHT22 or AM2302 use "
 "<strong>Broadcom</strong> pin numbering (BCM)"
 msgstr ""
+"Sensoradresse. Je nach Hardware-Typ ist es entweder eine Hex-Nummer oder ein "
+"GPIO-Pin. Bei Verwendung von DHT11, DHT22 oder AM2302 verwenden Sie "
+"<strong>Broadcom</strong> Pin-Nummerierung (BCM)"
 
 #: terrariumTranslations.py:28
 msgid "Holds the sensor type. Supported sensor types are: %s."
-msgstr ""
+msgstr "Sensortyp. Unterstützte Sensortypen sind: %s."
 
 #: terrariumTranslations.py:29
 msgid "Holds the name of the sensor."
-msgstr ""
+msgstr "Namen des Sensors."
 
 #: terrariumTranslations.py:30
 msgid ""
 "Holds the sensor lower alarm value of the sensor. When below this value, "
 "alarms can be triggered."
 msgstr ""
+"Unterer Alarmwert des Sensors. Unterhalb dieses Wertes können Alarme "
+"ausgelöst werden."
 
 #: terrariumTranslations.py:31
 msgid ""
 "Holds the sensor maximum alarm value of the sensor. When above this value, "
 "alarms can be triggered."
 msgstr ""
+"Maximaler Alarmwert des Sensors. Oberhalb dieses Wertes können Alarme "
+"ausgelöst werden."
 
 #: terrariumTranslations.py:32
 msgid "Holds the sensor lowest value that should be used in the graphs."
-msgstr ""
+msgstr "Niedrigster Wert des Sensors, der in der Grafik verwendet werden soll."
 
 #: terrariumTranslations.py:33
 msgid "Holds the sensor maximum value that should be used in the graphs."
-msgstr ""
+msgstr "Maximaler Wert des Sensors, der in der Grafik verwendet werden soll."
 
 #: terrariumTranslations.py:34
 msgid "Shows the sensor current value in temperature or humidity (read only)."
 msgstr ""
+"Zeigt den aktuellen Wert des Sensors in Temperatur oder Feuchtigkeit an (nur "
+"lesbar)."
 
 #: terrariumTranslations.py:38
 msgid "Holds the switch hardware type. Supported hardware types are: %s."
-msgstr ""
+msgstr "Unterstützte Hardware Typen sind: %s."
 
 #: terrariumTranslations.py:39
 msgid ""
 "Holds the switch address. Depending on hardware type, it is either a number "
 "or GPIO pin. For GPIO use <strong>normal</strong> GPIO numbering."
 msgstr ""
+"Schalteradresse. Je nach Hardware-Typ ist es entweder eine Nummer oder ein "
+"GPIO-Pin. Für GPIO verwenden Sie eine<strong>Normal</strong> GPIO "
+"Nummerierung."
 
 #: terrariumTranslations.py:40
 msgid "Holds the switch name."
-msgstr ""
+msgstr "Namen des Schalters."
 
 #: terrariumTranslations.py:41
 msgid "Holds the switch power usage in Watt when switched on."
-msgstr ""
+msgstr "Schalter Stromverbrauch in Watt, wenn eingeschaltet."
 
 #: terrariumTranslations.py:42
 msgid "Holds the switch water flow in liters per minute when switched on"
-msgstr ""
+msgstr "Schalter Wasserfluss in Liter/min., wenn eingeschaltet"
 
 #: terrariumTranslations.py:46
 msgid "Holds the door hardware type. Supported hardware types are: %s."
-msgstr ""
+msgstr "Hardware-Typ für Türsensor. Unterstützte Hardware-Typen sind:% s."
 
 #: terrariumTranslations.py:47
 msgid ""
 "Holds the door address. When using GPIO use <strong>normal</strong> GPIO pin "
 "numbering as address."
 msgstr ""
+"Sensoradresse. Bei Verwendung von GPIO verwenden Sie eine<strong>Normale</"
+"strong> GPIO-Pin-Nummerierung als Adresse."
 
 #: terrariumTranslations.py:48
 msgid "Holds the door name."
-msgstr ""
+msgstr "Türbezeichnung."
 
 #: terrariumTranslations.py:52
 msgid "Holds the webcam location source. Supported sources are: %s"
-msgstr ""
+msgstr "Webcam-Typ. Unterstützte Webcams sind: %s"
 
 #: terrariumTranslations.py:53
 msgid "Holds the webcam name."
-msgstr ""
+msgstr "Name der Webcam (z.B.: Flur1)."
 
 #: terrariumTranslations.py:54
 msgid "Holds the webcam rotation of the image."
-msgstr ""
+msgstr "Rotation des Bildes."
 
 #: terrariumTranslations.py:55
 msgid "Shows the webcam preview image."
-msgstr ""
+msgstr "Zeigt das Webcam Vorschau bild."
 
 #: terrariumTranslations.py:59
 msgid ""
@@ -128,6 +144,10 @@ msgid ""
 "below. By disabling it will not loose the current settings. It will "
 "temporary stop the lighting system."
 msgstr ""
+"Aktivieren oder Deaktivieren Sie die Beleuchtung. Wenn es aktiviert ist, "
+"können Sie die folgenden Änderungen vornehmen. Durch das Deaktivieren gehen "
+"keine Einstellungen verloren, es wird vorübergehend die Beleuchtung "
+"abgeschaltet."
 
 #: terrariumTranslations.py:60
 msgid ""
@@ -136,6 +156,10 @@ msgid ""
 "lighting variable to the actual amount of daylight. When selecting '%s', the "
 "light will put on and off at selected times."
 msgstr ""
+"Wählen Sie den Modus, wonach die Beleuchtung ein oder ausgeschaltet wird. "
+"Wählen Sie '%s', um den Sonnenaufgang Ihres Standortes zu nutzen. Damit wird "
+"die Beleuchtung auf das tatsächliche Tageslicht eingestellt. Bei Auswahl von "
+"'%s' wird die Beleuchtung zu ausgewählten Zeiten ein oder ausgeschaltet."
 
 #: terrariumTranslations.py:60 terrariumTranslations.py:61
 #: terrariumTranslations.py:62 terrariumTranslations.py:80
@@ -146,7 +170,7 @@ msgstr ""
 #: views/system_environment.tpl:46 views/system_environment.tpl:202
 #: views/system_environment.tpl:277
 msgid "Timer"
-msgstr ""
+msgstr "Zeitschaltuhr"
 
 #: terrariumTranslations.py:60 terrariumTranslations.py:65
 #: terrariumTranslations.py:80 terrariumTranslations.py:89
@@ -158,19 +182,23 @@ msgstr ""
 #: views/usage.tpl:10 views/weather_forecast.tpl:7
 #: views/weather_settings.tpl:37
 msgid "Weather"
-msgstr ""
+msgstr "Wetter"
 
 #: terrariumTranslations.py:61
 msgid ""
 "Enter the time when the light should be put on. Only available when running "
 "in '%s' mode."
 msgstr ""
+"Geben Sie die Zeit ein, an der die Beleuchtung eingeschaltet werden soll. "
+"Nur verfügbar für '%s' Modus."
 
 #: terrariumTranslations.py:62
 msgid ""
 "Enter the time when the lights should be put off. Only available when "
 "running in '%s' mode."
 msgstr ""
+"Geben Sie die Zeit ein, an der die Beleuchtung ausgeschaltet werden soll. "
+"Nur verfügbar für '%s' Modus."
 
 #: terrariumTranslations.py:63
 msgid ""
@@ -178,6 +206,9 @@ msgid ""
 "and off is more then this maximum, the on and off time will be shifted more "
 "to each other."
 msgstr ""
+"Geben Sie die maximale Beleuchtungszeit in Stunden ein. Wenn die Zeit "
+"zwischen Ein und Aus mehr als dieses Maximum ist, wird die ein/aus Zeit mehr "
+"zueinander verschoben."
 
 #: terrariumTranslations.py:64
 msgid ""
@@ -185,6 +216,10 @@ msgid ""
 "and off is less then this amount of hours, the on and off time will be "
 "widened until the minimum amount of hours entered here."
 msgstr ""
+"Geben Sie die minimale Beleuchtungszeit in Stunden ein. Wenn die Zeit "
+"zwischen ein und aus weniger als die eingegebenen Stunden sind, wird die ein "
+"und aus Zeit erweitert, bis die minimale Beleuchtungszeit an Stunden "
+"erreicht wurde."
 
 #: terrariumTranslations.py:65
 msgid ""
@@ -192,6 +227,10 @@ msgid ""
 "running in the '%s' mode. Enter a positive number for adding hours to the "
 "start time. Use negative numbers for subtracting from the start time."
 msgstr ""
+"Geben Sie die Anzahl der Stunden ein die die Beleuchtungszeit verschoben "
+"werden soll. Wird nur benötigt, wenn man im '%s' Modus ist. Geben Sie eine "
+"positive Zahl für das Hinzufügen von Stunden zur Startzeit ein. Verwenden "
+"Sie für die Subtraktion der Startzeit negative Zahlen."
 
 #: terrariumTranslations.py:66
 msgid ""
@@ -199,6 +238,8 @@ msgid ""
 "above. Normally these are the switches connected to the lights. Select all "
 "needed switches below."
 msgstr ""
+"Wählen Sie die Schalter aus, die zu den gewählten Zeiten umgeschaltet werden "
+"sollen."
 
 #: terrariumTranslations.py:69
 msgid ""
@@ -206,28 +247,39 @@ msgid ""
 "below. By disabling it will not loose the current settings. It will "
 "temporary stop the sprayer system."
 msgstr ""
+"Aktivieren oder Deaktivieren Sie denn Sprüher. Wenn er aktiviert ist, können "
+"Sie die folgenden Änderungen vornehmen. Durch das Deaktivieren gehen keine "
+"Einstellungen verloren, es wird vorübergehend der Sprüher abgeschaltet."
 
 #: terrariumTranslations.py:70
 msgid ""
 "Enable spraying when the lights are off. This can cause water flow when "
 "there is not enough heat to vaporize the water."
 msgstr ""
+"Sprüher aktivieren, wenn die Lichter ausgeschaltet sind. Dies kann zu "
+"Kondenswasser führen, wenn nicht genügend Hitze vorhanden ist, damit Wasser "
+"verdampfen kann."
 
 #: terrariumTranslations.py:71
 msgid "Select the operating mode. For now only sensor mode is available."
 msgstr ""
+"Wählen Sie die Betriebsart. Momentan ist nur der Sensormodus verfügbar."
 
 #: terrariumTranslations.py:72
 msgid ""
 "How much time must there be between two spray actions and after start up. "
 "Enter the amount of seconds in which the humidity can settle."
 msgstr ""
+"Zeit die zwischen den Sprühaktionen und nach dem Start sein soll. Geben Sie "
+"die Anzahl der Sekunden ein, in denen sich die Feuchtigkeit absetzen kann."
 
 #: terrariumTranslations.py:73
 msgid ""
 "How long is the system spraying. Enter the amount of seconds that the system "
 "is on when the humidity is too low."
 msgstr ""
+"Wie lange sprüht das Gerät? Geben Sie die Anzahl der Sekunden ein, die das "
+"Gerät aktiviert ist wenn die Luftfeuchtigkeit zu niedrig ist."
 
 #: terrariumTranslations.py:74
 msgid ""
@@ -235,6 +287,8 @@ msgid ""
 "above. Normally these are the switches connected to the sprayer. Select all "
 "needed switches below."
 msgstr ""
+"Wählen Sie die Schalter aus, die zu den gewählten Zeiten umgeschaltet werden "
+"sollen."
 
 #: terrariumTranslations.py:75
 msgid ""
@@ -242,6 +296,9 @@ msgid ""
 "selecting multiple sensors, the average is calculated to determine the final "
 "humidity."
 msgstr ""
+"Wählen Sie die Feuchtigkeitssensoren aus, mit denen die Feuchtigkeit "
+"kontrolliert wird. Bei der Auswahl mehrerer Sensoren wird der Mittelwert "
+"berechnet, um die endgültige Feuchtigkeit zu bestimmen."
 
 #: terrariumTranslations.py:78
 msgid ""
@@ -249,12 +306,18 @@ msgid ""
 "below. By disabling it will not loose the current settings. It will "
 "temporary stop the heater system."
 msgstr ""
+"Aktivieren oder Deaktivieren Sie das Heizungssystem. Wenn es aktiviert ist, "
+"können Sie die folgenden Änderungen vornehmen. Durch das Deaktivieren gehen "
+"keine Einstellungen verloren, es wird vorübergehend das Heizungssystem "
+"abgeschaltet."
 
 #: terrariumTranslations.py:79
 msgid ""
 "Enable heating when the lights are on. This can cause overheating when the "
 "lights are on."
 msgstr ""
+"Heizungssystem aktivieren, wenn die Lichter eingeschaltet sind. Dies kann zu "
+"Überhitzung führen, wenn die Lichter eingeschaltet sind!"
 
 #: terrariumTranslations.py:80 terrariumTranslations.py:89
 msgid ""
@@ -263,6 +326,11 @@ msgid ""
 "on and off times. When the sun rises the heating system will stop. Use '%s' "
 "mode to have the heating running when the lights are off."
 msgstr ""
+"Wählen Sie die Betriebsart. Verwenden Sie den '%s' Modus, um den Zeitraum "
+"auszuwählen, in dem das Heizungssystem läuft. Wählen Sie '%s' Modus, um den "
+"Sonnenaufgang als Ein bzw. Aus Zeiten zu verwenden. Wenn der Sonnenaufgang "
+"ist, hört das Heizungssystem auf. Verwenden Sie '%s' Modus, um die Heizung "
+"laufen zu lassen, wenn die Lichter ausgeschaltet sind."
 
 #: terrariumTranslations.py:80 terrariumTranslations.py:89
 #: views/inc/usage_environment.tpl:137 views/inc/usage_environment.tpl:231
@@ -270,19 +338,23 @@ msgstr ""
 #: views/sensor_settings.tpl:74 views/system_environment.tpl:129
 #: views/system_environment.tpl:204 views/system_environment.tpl:279
 msgid "Sensor"
-msgstr ""
+msgstr "Sensor"
 
 #: terrariumTranslations.py:81
 msgid ""
 "Enter the time when the heater should be put on. Only available when running "
 "in '%s' mode."
 msgstr ""
+"Geben Sie die Zeit ein, in der das Heizungssystem eingeschaltet werden soll. "
+"Nur verfügbar für '%s' Modus."
 
 #: terrariumTranslations.py:82
 msgid ""
 "Enter the time when the heater should be put off. Only available when "
 "running in '%s' mode."
 msgstr ""
+"Geben Sie die Zeit ein, in der das Heizungssystem ausgeschaltet werden soll. "
+"Nur verfügbar, für '%s' Modus."
 
 #: terrariumTranslations.py:83
 msgid ""
@@ -290,6 +362,8 @@ msgid ""
 "above. Normally these are the switches connected to the heater. Select all "
 "needed switches below."
 msgstr ""
+"Wählen Sie die Schalter aus, die zu den gewählten Zeiten umgeschaltet werden "
+"sollen."
 
 #: terrariumTranslations.py:84 terrariumTranslations.py:93
 msgid ""
@@ -297,6 +371,9 @@ msgid ""
 "When selecting multiple sensors, the average is calculated to determine the "
 "final temperature."
 msgstr ""
+"Wählen Sie die Temperatursensoren aus, die zur Regelung der Temperatur "
+"verwendet werden. Bei der Auswahl mehrerer Sensoren wird der Mittelwert "
+"berechnet, um die endgültige Temperatur zu bestimmen."
 
 #: terrariumTranslations.py:87
 msgid ""
@@ -304,24 +381,35 @@ msgid ""
 "below. By disabling it will not loose the current settings. It will "
 "temporary stop the cooler system."
 msgstr ""
+"Aktivieren oder Deaktivieren Sie das Kühlsystem. Wenn es aktiviert ist, "
+"können Sie die folgenden Änderungen vornehmen. Durch das Deaktivieren gehen "
+"keine Einstellungen verloren, es wird vorübergehend das Kühlsystem "
+"abgeschaltet."
 
 #: terrariumTranslations.py:88
 msgid ""
 "Enable cooling when the lights are off. This can cause a very low "
 "temperature when the lights are off."
 msgstr ""
+"Aktivieren Sie das Kühlsystem, wenn die Lichter ausgeschaltet sind. Dies "
+"kann zu einer sehr niedrigen Temperatur führen, wenn die Lichter "
+"ausgeschaltet sind."
 
 #: terrariumTranslations.py:90
 msgid ""
 "Enter the time when the cooler should be put on. Only available when running "
 "in '%s' mode."
 msgstr ""
+"Geben Sie die Zeit ein, in der das Kühlsystem eingeschaltet werden soll. Nur "
+"verfügbar, für '%s' Modus."
 
 #: terrariumTranslations.py:91
 msgid ""
 "Enter the time when the cooler should be put off. Only available when "
 "running in '%s' mode."
 msgstr ""
+"Geben Sie die Zeit ein, in der das Kühlsystem ausgeschaltet werden soll. Nur "
+"verfügbar für '%s' Modus."
 
 #: terrariumTranslations.py:92
 msgid ""
@@ -329,101 +417,111 @@ msgid ""
 "above. Normally these are the switches connected to the cooler. Select all "
 "needed switches below."
 msgstr ""
+"Wählen Sie die Schalter aus, die zu den gewählten Zeiten umgeschaltet werden "
+"sollen."
 
 #: terrariumTranslations.py:96
 msgid "Choose your interface language."
-msgstr ""
+msgstr "Auswahl der Interface Sprache."
 
 #: terrariumTranslations.py:97
 msgid "Holds the username which can make changes (Administrator)."
-msgstr ""
+msgstr "Benutzername der Änderungen vornehmen kann (Admin)."
 
 #: terrariumTranslations.py:98
 msgid ""
 "Enter the new password for the administration user. Leaving empty will not "
 "change the password!"
-msgstr ""
+msgstr "Geben Sie das neue Passwort für den Administrationsbenutzer ein!"
 
 #: terrariumTranslations.py:99
 msgid "Enter the current password in order to change the password."
-msgstr ""
+msgstr "Neues Passwort wiederholen."
 
 #: terrariumTranslations.py:100
 msgid ""
 "Holds the amount of power in Wattage that the Raspberry PI uses including "
 "all USB equipment."
 msgstr ""
+"Stromverbrauch in Watt, die der Raspberry verbraucht, einschließlich aller "
+"USB-Geräte."
 
 #: terrariumTranslations.py:101
 msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
-msgstr ""
+msgstr "Preis für 1 kW / h Strom."
 
 #: terrariumTranslations.py:102
 msgid "Holds the amount of euro/dollar per 1000 liters water."
-msgstr ""
+msgstr "Preis für 1000 Liter Wasser."
 
 #: terrariumTranslations.py:103
 msgid ""
 "Choose the temperature indicator. The software will recalculate to the "
 "chosen indicator."
 msgstr ""
+"Wählen der Temperaturangabe. Die Software wird mit dem gewählten Wert neu "
+"berechnet."
 
 #: terrariumTranslations.py:104
 msgid ""
 "Holds the host name or IP address on which the software will listen for "
 "connections. Enter :: for all addresses to bind."
 msgstr ""
+"Hostnamen oder IP-Adresse, auf der die Software auf Verbindungen reagiert. "
+"Geben Sie :: für alle zu bindenden Adressen ein."
 
 #: terrariumTranslations.py:105
 msgid ""
 "Holds the port number on which the software is listening for connections."
-msgstr ""
+msgstr "Portnummer, auf der die Software auf Verbindungen reagiert."
 
 #: terrariumTranslations.py:106
 msgid ""
 "Holds the port number on which the OWFS software is running. Leave empty to "
 "disable OWFS support."
 msgstr ""
+"Portnummer, auf der die OWFS-Software läuft. Leer lassen, um die OWFS-"
+"Unterstützung zu deaktivieren."
 
 #: terrariumTranslations.py:110
 msgid "Holds the name of the animal."
-msgstr ""
+msgstr "Namen"
 
 #: terrariumTranslations.py:111
 msgid "Holds the type of the animal"
-msgstr ""
+msgstr "Art"
 
 #: terrariumTranslations.py:112
 msgid "Holds the gender of the animal."
-msgstr ""
+msgstr "Geschlecht"
 
 #: terrariumTranslations.py:113
 msgid "Holds the day of birth of the animal."
-msgstr ""
+msgstr "Tag der Geburt"
 
 #: terrariumTranslations.py:114
 msgid "Holds the species name of the animal."
-msgstr ""
+msgstr "Artennamen"
 
 #: terrariumTranslations.py:115
 msgid "Holds the latin name of the animal."
-msgstr ""
+msgstr "lateinischer Namen"
 
 #: terrariumTranslations.py:116
 msgid "Holds a small description about the animal."
-msgstr ""
+msgstr "Beschreibung"
 
 #: terrariumTranslations.py:117
 msgid "Holds a link to more information."
-msgstr ""
+msgstr "Link für mehr Informationen."
 
 #: terrariumWebserver.py:75 terrariumWebserver.py:81
 msgid "Authenticate to make any changes"
-msgstr ""
+msgstr "Authentifizieren, um Änderungen vorzunehmen"
 
 #: terrariumWebserver.py:75 terrariumWebserver.py:81
 msgid "Authentication"
-msgstr ""
+msgstr "Authentifizierung"
 
 #: terrariumWebserver.py:75 terrariumWebserver.py:81
 #: views/system_settings.tpl:23
@@ -449,7 +547,7 @@ msgstr "Ihre Änderungen wurden gespeichert"
 #: views/dashboard.tpl:7 views/inc/usage_dashboard.tpl:87
 #: views/system_status.tpl:174
 msgid "Uptime"
-msgstr ""
+msgstr "Betriebszeit"
 
 #: views/dashboard.tpl:24 views/inc/usage_dashboard.tpl:93
 #: views/inc/usage_switches.tpl:121 views/inc/usage_switches.tpl:143
@@ -470,12 +568,12 @@ msgstr "Gesamtleistung in kWh"
 
 #: views/dashboard.tpl:47 views/dashboard.tpl:54
 msgid "in"
-msgstr ""
+msgstr "in"
 
 #: views/dashboard.tpl:52 views/inc/usage_dashboard.tpl:111
 #: views/inc/usage_switches.tpl:21
 msgid "Total water in L"
-msgstr "Gesamt Wasser in L"
+msgstr "Gesamtwasser in L"
 
 #: views/dashboard.tpl:62 views/dashboard.tpl:122 views/dashboard.tpl:145
 #: views/dashboard.tpl:174 views/inc/usage_sensors.tpl:84
@@ -490,7 +588,7 @@ msgstr "Strom"
 #: views/inc/usage_dashboard.tpl:118 views/inc/usage_dashboard.tpl:211
 #: views/usage.tpl:25
 msgid "Environment"
-msgstr "Umwelt"
+msgstr "Systemumgebung"
 
 #: views/dashboard.tpl:71 views/dashboard.tpl:224 views/dashboard.tpl:276
 #: views/door_status.tpl:33 views/inc/menu.tpl:38 views/inc/menu.tpl:52
@@ -527,7 +625,7 @@ msgstr "Modus"
 #: views/system_environment.tpl:193 views/system_environment.tpl:260
 #: views/system_environment.tpl:268
 msgid "Disabled"
-msgstr "Ausgeschaltet"
+msgstr "Aus"
 
 #: views/dashboard.tpl:83 views/inc/usage_dashboard.tpl:122
 #: views/inc/usage_environment.tpl:14 views/inc/usage_environment.tpl:397
@@ -565,13 +663,13 @@ msgstr "Dauer"
 #: views/inc/usage_environment.tpl:109 views/inc/usage_environment.tpl:400
 #: views/system_environment.tpl:99
 msgid "Sprayer"
-msgstr "Sprühgerät"
+msgstr "Sprüher"
 
 #: views/dashboard.tpl:128 views/dashboard.tpl:151 views/dashboard.tpl:186
 #: views/inc/usage_sensors.tpl:138 views/inc/usage_sensors.tpl:174
 #: views/sensor_settings.tpl:31 views/sensor_settings.tpl:117
 msgid "Alarm min"
-msgstr "Alarm min"
+msgstr "Alarm min."
 
 #: views/dashboard.tpl:135 views/inc/usage_dashboard.tpl:137
 #: views/inc/usage_environment.tpl:200 views/inc/usage_environment.tpl:403
@@ -583,11 +681,11 @@ msgstr "Heizung"
 #: views/inc/usage_sensors.tpl:142 views/inc/usage_sensors.tpl:177
 #: views/sensor_settings.tpl:34 views/sensor_settings.tpl:121
 msgid "Alarm max"
-msgstr "Alarm max"
+msgstr "Alarm max."
 
 #: views/dashboard.tpl:164
 msgid "Cooler"
-msgstr "Kühler"
+msgstr "Kühlung"
 
 #: views/dashboard.tpl:198
 msgid "Average Humidity"
@@ -643,7 +741,7 @@ msgstr "Jahr"
 
 #: views/dashboard.tpl:250
 msgid "Average Temperature"
-msgstr "Durchschnittstemperatur"
+msgstr "Durchschnittliche Temperatur"
 
 #: views/door_settings.tpl:4 views/inc/menu.tpl:109 views/sensor_settings.tpl:4
 #: views/switch_settings.tpl:4 views/system_environment.tpl:4
@@ -661,7 +759,7 @@ msgstr "Hier können Sie Ihre Türen konfigurieren."
 #: views/system_settings.tpl:16 views/weather_settings.tpl:16
 #: views/webcam_settings.tpl:16
 msgid "Required fields are marked with '%s'."
-msgstr ""
+msgstr "Pflichtfelder sind markiert mit '%s'."
 
 #: views/door_settings.tpl:19 views/door_settings.tpl:70 views/hardware.tpl:7
 #: views/hardware.tpl:27 views/inc/menu.tpl:118 views/inc/usage_doors.tpl:98
@@ -671,7 +769,7 @@ msgstr ""
 #: views/sensor_settings.tpl:87 views/switch_settings.tpl:19
 #: views/switch_settings.tpl:78
 msgid "Hardware"
-msgstr ""
+msgstr "Hardware"
 
 #: views/door_settings.tpl:22 views/door_settings.tpl:78
 #: views/inc/usage_doors.tpl:106 views/inc/usage_doors.tpl:122
@@ -680,7 +778,7 @@ msgstr ""
 #: views/sensor_settings.tpl:22 views/sensor_settings.tpl:99
 #: views/switch_settings.tpl:22 views/switch_settings.tpl:88
 msgid "Address"
-msgstr ""
+msgstr "Adresse"
 
 #: views/door_settings.tpl:25 views/door_settings.tpl:83
 #: views/inc/usage_doors.tpl:111 views/inc/usage_doors.tpl:125
@@ -692,103 +790,113 @@ msgstr ""
 #: views/switch_settings.tpl:93 views/webcam_settings.tpl:27
 #: views/webcam_settings.tpl:86
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: views/door_settings.tpl:36 views/profile.tpl:179
 #: views/sensor_settings.tpl:54 views/switch_settings.tpl:42
 #: views/system_environment.tpl:323 views/system_settings.tpl:110
 #: views/weather_settings.tpl:66 views/webcam_settings.tpl:44
 msgid "Submit"
-msgstr ""
+msgstr "Speichern"
 
 #: views/door_settings.tpl:49
 msgid "Add new door sensor"
-msgstr ""
+msgstr "Neuen Türsensor hinzufügen"
 
 #: views/door_settings.tpl:56
 msgid "Door sensor"
-msgstr ""
+msgstr "Türsensor"
 
 #: views/door_settings.tpl:56 views/sensor_settings.tpl:74
 #: views/switch_settings.tpl:65 views/webcam_settings.tpl:64
 msgid "new"
-msgstr ""
+msgstr "neu"
 
 #: views/door_settings.tpl:73 views/hardware.tpl:63 views/hardware.tpl:88
 #: views/inc/usage_doors.tpl:101 views/inc/usage_switches.tpl:107
 #: views/switch_settings.tpl:82
 msgid "GPIO"
-msgstr ""
+msgstr "GPIO"
 
 #: views/door_settings.tpl:93 views/inc/usage_doors.tpl:70
 #: views/inc/usage_sensors.tpl:80 views/inc/usage_switches.tpl:70
 #: views/inc/usage_webcams.tpl:66 views/sensor_settings.tpl:142
 #: views/switch_settings.tpl:110 views/webcam_settings.tpl:108
 msgid "Close"
-msgstr ""
+msgstr "Schließen"
 
 #: views/door_settings.tpl:94 views/sensor_settings.tpl:143
 #: views/switch_settings.tpl:111 views/webcam_settings.tpl:109
 msgid "Add"
-msgstr ""
+msgstr "Hinzufügen"
 
 #: views/door_status.tpl:7
 msgid "Door status"
-msgstr ""
+msgstr "Türstatus"
 
 #: views/hardware.tpl:10 views/hardware.tpl:44
 msgid "Raspberry Pi"
-msgstr ""
+msgstr "Raspberry Pi"
 
 #: views/hardware.tpl:13 views/hardware.tpl:50 views/inc/menu.tpl:43
 #: views/usage.tpl:13
 msgid "Sensors"
-msgstr ""
+msgstr "Sensoren"
 
 #: views/hardware.tpl:16 views/hardware.tpl:84 views/inc/menu.tpl:57
 #: views/usage.tpl:16
 msgid "Switches"
-msgstr ""
+msgstr "Schalter"
 
 #: views/hardware.tpl:19 views/hardware.tpl:107 views/inc/menu.tpl:68
 #: views/usage.tpl:19
 msgid "Doors"
-msgstr ""
+msgstr "Türen"
 
 #: views/hardware.tpl:22
 msgid "Webcams"
-msgstr ""
+msgstr "Webcams"
 
 #: views/hardware.tpl:28
 msgid "Hover over the image below to read more about the supported hardware."
 msgstr ""
+"Fahren Sie über das Bild unten, um mehr über die unterstützte Hardware zu "
+"lesen."
 
 #: views/hardware.tpl:45
 msgid ""
 "TerrariumPI software is designed to run on a Raspberry Pi. It has been "
 "tested on a Raspberry Pi 2 and 3 with %s. Raspberry Pi Zero is not tested."
 msgstr ""
+"Die TerrariumPI Software ist entworfen worden, um auf einem Raspberry Pi zu "
+"laufen. Es wurde auf einem Raspberry Pi 2 und 3 mit dem %s getestet. "
+"Raspberry Pi Zero wurde nicht getestet."
 
 #: views/hardware.tpl:45 views/info.tpl:34
 msgid "Raspbian OS"
-msgstr ""
+msgstr "Raspberry OS"
 
 #: views/hardware.tpl:46
 msgid ""
 "The Raspberry Pi should have network connection and optionally SSH enabled "
 "for remote management. Also a strong power adapter is needed (+2Amps)."
 msgstr ""
+"Der Raspberry Pi sollte eine Netzwerkverbindung haben und optional sollte "
+"SSH für die Remote-Verwaltung aktiviert sein. Auch ein starker Netzadapter "
+"wird benötigt (+ 2Amps)."
 
 #: views/hardware.tpl:51
 msgid ""
 "TerrariumPI software has support for different kind of sensors. The "
 "following sensors below are tested with TerrariumPI software."
 msgstr ""
+"Die Terrarium Pi Software unterstützt verschiedene Sensoren. Folgende "
+"Sensoren wurden mit der Software Terrarium Pi getestet."
 
 #: views/hardware.tpl:54 views/inc/usage_sensors.tpl:115
 #: views/sensor_settings.tpl:94
 msgid "1Wire"
-msgstr ""
+msgstr "1Wire"
 
 #: views/hardware.tpl:55
 msgid ""
@@ -796,16 +904,21 @@ msgid ""
 "connected and supported sensors. The DS18B20 sensors can share the GPIO pin "
 "by putting the sensors in parallel."
 msgstr ""
+"Der 1Wire Bus wird beim Start automatisch gescannt, um die angeschlossenen "
+"und unterstützten Sensoren zu laden. Die DS18B20 Sensoren können sich einen "
+"GPIO-Pin teilen, indem die Sensoren parallel geschaltet werden."
 
 #: views/hardware.tpl:56
 msgid ""
 "Through the 1wire bus of the Raspberry Pi you can use the following hardware "
 "sensors"
 msgstr ""
+"Durch den 1Wire Bus des Raspberry Pi können Sie die folgenden "
+"Hardwaresensoren verwenden:"
 
 #: views/hardware.tpl:58 views/hardware.tpl:78
 msgid "DS18B20"
-msgstr ""
+msgstr "DS18B20"
 
 #: views/hardware.tpl:64
 msgid ""
@@ -813,32 +926,37 @@ msgid ""
 "the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and "
 "DHT22 needs an extra resistor"
 msgstr ""
+"GPIO-Sensoren müssen manuell der TerrariumPI Software hinzugefügt werden. "
+"Das kann man im Web Interface machen. Die GPIO-Sensoren können sich keine "
+"GPIO-Pins teilen. Die DHT11 und DHT22 benötigen einen zusätzlichen "
+"Widerstand."
 
 #: views/hardware.tpl:65
 msgid ""
 "Through the GPIO bus of the Raspberry Pi you can use the following hardware "
 "sensors"
 msgstr ""
+"Durch den GPIO-Bus des Raspberry Pi können Sie folgende Sensoren verwenden:"
 
 #: views/hardware.tpl:67 views/inc/usage_sensors.tpl:112
 #: views/sensor_settings.tpl:91
 msgid "DHT11"
-msgstr ""
+msgstr "DHT11"
 
 #: views/hardware.tpl:68 views/inc/usage_sensors.tpl:113
 #: views/sensor_settings.tpl:92
 msgid "DHT22"
-msgstr ""
+msgstr "DHT22"
 
 #: views/hardware.tpl:69 views/inc/usage_sensors.tpl:114
 #: views/sensor_settings.tpl:93
 msgid "AM2302"
-msgstr ""
+msgstr "AM2302"
 
 #: views/hardware.tpl:74 views/inc/usage_sensors.tpl:111
 #: views/sensor_settings.tpl:90
 msgid "OWFS"
-msgstr ""
+msgstr "OWFS"
 
 #: views/hardware.tpl:75
 msgid ""
@@ -846,22 +964,30 @@ msgid ""
 "connected and supported sensors. There can be all kind of sensors connected "
 "to this server. All supported sensors will be shown."
 msgstr ""
+"Der OWFS-Server wird beim Start automatisch gescannt, um die angeschlossenen "
+"und unterstützten Sensoren zu laden. Es können alle Arten von Sensoren an "
+"diesen Server angeschlossen werden. Alle unterstützten Sensoren werden "
+"angezeigt."
 
 #: views/hardware.tpl:76
 msgid ""
 "Through the I2C bus of the Raspberry Pi you can use the following hardware "
 "sensors with OWFS software"
 msgstr ""
+"Durch den I2C Bus des Raspberry Pi können Sie folgende Hardware Sensoren mit "
+"OWFS Software verwenden:"
 
 #: views/hardware.tpl:79
 msgid "HIH400"
-msgstr ""
+msgstr "HIH400"
 
 #: views/hardware.tpl:85
 msgid ""
 "TerrariumPI software has support for different kind of relay boards. The "
 "following relay boards below are tested with TerrariumPI software."
 msgstr ""
+"Die TerrariumPI Software unterstützt verschiedene Art von Relais Boards. Die "
+"folgenden Relais Boards wurden mit TerrariumPI Software getestet:"
 
 #: views/hardware.tpl:89
 msgid ""
@@ -869,18 +995,21 @@ msgid ""
 "ports relay board there are 4 control GPIO pins and 2 pins for power and "
 "ground needed. This makes that it needs 6 GPIO pins in total."
 msgstr ""
+"Für jedes Relais auf dem Board braucht man einen eigenen GPIO-Pin. Für ein "
+"Relais Board mit 4 Relais braucht man 4 Steuer GPIO-Pins und 2 Pins, für + "
+"und - . Es werden also insgesamt 6 GPIO-Pins benötigt."
 
 #: views/hardware.tpl:90 views/hardware.tpl:99
 msgid "The following boards are tested"
-msgstr ""
+msgstr "Mit folgenden Boards wurde es getestet:"
 
 #: views/hardware.tpl:92
 msgid "VMA400"
-msgstr ""
+msgstr "VMA400"
 
 #: views/hardware.tpl:97 views/hardware.tpl:120
 msgid "USB"
-msgstr ""
+msgstr "USB"
 
 #: views/hardware.tpl:98
 msgid ""
@@ -889,10 +1018,14 @@ msgid ""
 "in Serial or BitBang. This is automatically detected when adding power "
 "switches."
 msgstr ""
+"Die USB Relais Boards benötigen keine GPIO-Pins sie brauchen nur einen USB-"
+"Anschluss. Die TerrariumPI Software unterstützt Boards die entweder in Serie "
+"oder bit-bang laufen. Dies wird beim Hinzufügen von Schaltern automatisch "
+"erkannt."
 
 #: views/hardware.tpl:101
 msgid "Denkovi"
-msgstr ""
+msgstr "Denkovi"
 
 #: views/hardware.tpl:108
 msgid ""
@@ -900,172 +1033,192 @@ msgid ""
 "with two wires are supported. Connect one wire to the ground and the other "
 "wire to any GPIO pin that is free (except power and ground pins)."
 msgstr ""
+"Die TerrariumPI Software unterstützt magnetische Türsensoren. Es werden nur "
+"Versionen mit zwei Drähten unterstützt. Verbinden Sie einen Draht mit dem "
+"GND und den anderen Draht mit einem beliebigen GPIO-Pin, der frei ist (außer "
+"GPIO-PIN + und GPIO-PIN -)."
 
 #: views/hardware.tpl:111 views/inc/menu.tpl:79 views/inc/usage_webcams.tpl:19
 #: views/usage.tpl:22 views/webcam.tpl:7 views/webcam_settings.tpl:64
 msgid "Webcam"
-msgstr ""
+msgstr "Webcam"
 
 #: views/hardware.tpl:112
 msgid ""
 "TerrariumPI software has support for different kind of cameras. The "
 "following cameras below are tested with TerrariumPI software."
 msgstr ""
+"Die TerrariumPI Software Unterstützung verschiedene Arten von Kameras. Die "
+"folgenden Kameras unten wurden mit TerrariumPI Software getestet."
 
 #: views/hardware.tpl:115 views/inc/usage_webcams.tpl:128
 #: views/webcam_settings.tpl:21
 msgid "RPICam"
-msgstr ""
+msgstr "RPICam"
 
 #: views/hardware.tpl:116
 msgid ""
 "There are different Raspberry Pi cameras available. If the camera is "
 "Raspberry Pi compatible, it can be used with TerrariumPI software."
 msgstr ""
+"Es gibt verschiedene Raspberry Pi Kameras. Wenn die Kamera Raspberry Pi "
+"kompatibel ist, kann sie mit der TerrariumPI Software verwendet werden."
 
 #: views/hardware.tpl:121
 msgid ""
 "All kind of USB cameras can be used. Enter physical path of the device like /"
 "dev/videoX."
 msgstr ""
+"Es können alle Arten von USB Kameras verwendet werden. Geben Sie den "
+"physischen Pfad des Gerätes wie /dev /videoX ein."
 
 #: views/inc/menu.tpl:10
 msgid "Welcome"
-msgstr ""
+msgstr "Herzlich willkommen"
 
 #: views/inc/menu.tpl:18
 msgid "General"
-msgstr ""
+msgstr "Menü"
 
 #: views/inc/menu.tpl:21 views/inc/usage_dashboard.tpl:202 views/usage.tpl:7
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 #: views/inc/menu.tpl:24
 msgid "Dashboard"
-msgstr ""
+msgstr "Übersicht"
 
 #: views/inc/menu.tpl:27 views/profile.tpl:6
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 #: views/inc/menu.tpl:35
 msgid "Forecast"
-msgstr ""
+msgstr "Prognose"
 
 #: views/inc/menu.tpl:46 views/inc/usage_dashboard.tpl:158
 #: views/inc/usage_sensors.tpl:128 views/sensor_settings.tpl:107
 msgid "Temperature"
-msgstr ""
+msgstr "Temperatur"
 
 #: views/inc/menu.tpl:49 views/inc/usage_dashboard.tpl:157
 #: views/inc/usage_sensors.tpl:129 views/sensor_settings.tpl:108
 msgid "Humidity"
-msgstr ""
+msgstr "Feuchtigkeit"
 
 #: views/inc/menu.tpl:82
 msgid "Show"
-msgstr ""
+msgstr "Show"
 
 #: views/inc/menu.tpl:90
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #: views/inc/menu.tpl:106
 msgid "About"
-msgstr ""
+msgstr "Über"
 
 #: views/inc/menu.tpl:112
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: views/inc/menu.tpl:115
 msgid "Usage"
-msgstr ""
+msgstr "Verwendung"
 
 #: views/inc/menu.tpl:128
 msgid "FullScreen"
-msgstr ""
+msgstr "Vollbild"
 
 #: views/inc/menu.tpl:129
 msgid "Lock"
-msgstr ""
+msgstr "Sperren"
 
 #: views/inc/menu.tpl:130
 msgid "Log out"
-msgstr ""
+msgstr "Ausloggen"
 
 #: views/inc/menu.tpl:142
 msgid "date/time"
-msgstr ""
+msgstr "Datum/Zeit"
 
 #: views/inc/menu.tpl:145 views/inc/usage_dashboard.tpl:43
 #: views/inc/usage_doors.tpl:82
 msgid "Door is closed"
-msgstr ""
+msgstr "Türe ist geschlossen"
 
 #: views/inc/menu.tpl:145 views/inc/usage_dashboard.tpl:50
 #: views/inc/usage_doors.tpl:81
 msgid "Door is open"
-msgstr ""
+msgstr "Türe ist offen"
 
 #: views/inc/menu.tpl:149 views/inc/menu.tpl:159
 msgid "No messages"
-msgstr ""
+msgstr "Keine Nachrichten"
 
 #: views/inc/menu.tpl:155 views/inc/usage_dashboard.tpl:19
 msgid "Online"
-msgstr ""
+msgstr "Online"
 
 #: views/inc/menu.tpl:155 views/inc/usage_dashboard.tpl:26
 msgid "Offline"
-msgstr ""
+msgstr "Offline"
 
 #: views/inc/usage_dashboard.tpl:14 views/inc/usage_dashboard.tpl:205
 msgid "Top indicators"
-msgstr ""
+msgstr "Top Anzeigen"
 
 #: views/inc/usage_dashboard.tpl:15
 msgid ""
 "The dashboard has two indicators and a clock on the top row at the right "
 "site."
 msgstr ""
+"Das Dashboard hat zwei Anzeigen und eine Uhr in der obersten Reihe auf der "
+"rechten Seite."
 
 #: views/inc/usage_dashboard.tpl:17
 msgid "Status indicator"
-msgstr ""
+msgstr "Statusanzeige"
 
 #: views/inc/usage_dashboard.tpl:23
 msgid ""
 "The first green round check mark shows that the interface is connected with "
 "the server and that it is working as expected."
 msgstr ""
+"Das erste grüne runde Häkchen zeigt an, dass die Schnittstelle mit dem "
+"Server verbunden ist und es wie erwartet funktioniert."
 
 #: views/inc/usage_dashboard.tpl:30
 msgid ""
 "When there is a connection problem, the first round check mark will turn to "
 "a red explanation mark which indicates that there is a problem."
 msgstr ""
+"Wenn es ein Verbindungsproblem gibt, wird das erste runde Häkchen zu einem "
+"roten Erklärungszeichen, das anzeigt, dass es ein Problem gibt."
 
 #: views/inc/usage_dashboard.tpl:33 views/inc/usage_dashboard.tpl:57
 msgid "History"
-msgstr ""
+msgstr "Historie"
 
 #: views/inc/usage_dashboard.tpl:37
 msgid ""
 "Click on the online/offline indicator to get some history. The history is "
 "cleared when the web interface is reloaded."
 msgstr ""
+"Klicken Sie auf die online / offline Anzeige, um eine Historie zu erhalten. "
+"Der Verlauf wird gelöscht, wenn das Web Interface neu geladen wurde."
 
 #: views/inc/usage_dashboard.tpl:41
 msgid "Door indicator"
-msgstr ""
+msgstr "Türstatus"
 
 #: views/inc/usage_dashboard.tpl:47
 msgid ""
 "The second indicator is a lock that shows the status of the door(s). It is "
 "green when all doors are closed."
 msgstr ""
+"Die zweite Anzeige ist ein Indikator, die den Status der Tür (en) anzeigt. "
+"Es ist grün, wenn alle Türen geschlossen sind."
 
 #: views/inc/usage_dashboard.tpl:54
 msgid ""
@@ -1073,6 +1226,9 @@ msgid ""
 "indicator is near real time, so when you open the door, the indicator will "
 "change."
 msgstr ""
+"Wenn eine Türe geöffnet wird, wechselt die Anzeige zu einem roten offenen "
+"Schloss. Diese Anzeige ist in Echtzeit, wenn Sie die Türe öffnen, ändert "
+"sich die Anzeige."
 
 #: views/inc/usage_dashboard.tpl:61
 msgid ""
@@ -1080,33 +1236,40 @@ msgid ""
 "of the dashboard the door changes for the last 24 hours are loaded from "
 "history."
 msgstr ""
+"Klicken Sie auf den Türstatus, um die Letzten 6 Benachrichtigungen zu sehen. "
+"Beim Laden des Dashboards wird die Historie der Letzten 24 stunden geladen."
 
 #: views/inc/usage_dashboard.tpl:65
 msgid "Date and time"
-msgstr ""
+msgstr "Datum und Uhrzeit"
 
 #: views/inc/usage_dashboard.tpl:71
 msgid ""
 "The last indicator is the current time. When it is day time, a sun is shown."
 msgstr ""
+"Die letzte Anzeige ist die aktuelle Uhrzeit. Wenn es Tag ist, wird eine "
+"Sonne angezeigt."
 
 #: views/inc/usage_dashboard.tpl:74
 msgid "Night"
-msgstr ""
+msgstr "Nacht"
 
 #: views/inc/usage_dashboard.tpl:78
 msgid "When the sun sets, the icon of the date time indicator in a moon."
-msgstr ""
+msgstr "Wenn es Nacht ist, wird bei der Uhrzeit ein Mond angezeigt."
 
 #: views/inc/usage_dashboard.tpl:83 views/inc/usage_dashboard.tpl:208
 msgid "Top tiles"
-msgstr ""
+msgstr "Top Anzeigen"
 
 #: views/inc/usage_dashboard.tpl:84
 msgid ""
 "All tiles will be updated in real time. When a switch is toggled, either by "
 "hand or by the system, the tiles will update instantly."
 msgstr ""
+"Alle anzeigen werden in Echtzeit aktualisiert. Wenn ein Schalter durch Hand "
+"oder durch das System umgeschaltet wird, werden die Anzeigen sofort "
+"aktualisiert."
 
 #: views/inc/usage_dashboard.tpl:89
 msgid ""
@@ -1114,6 +1277,9 @@ msgid ""
 "indicates the load off the hardware. First bar is actual load, second is "
 "load during 5 minutes and last is load during 15 minutes."
 msgstr ""
+"Die erste Kachel zeigt die Hardware-Betriebszeit und drei Balken, die die "
+"Last der Hardware anzeigt. Der erste Stab ist die tatsächliche Last, der "
+"zweite ist während 5 Minuten und der Letzte ist während 15 Minuten."
 
 #: views/inc/usage_dashboard.tpl:95
 msgid ""
@@ -1121,6 +1287,10 @@ msgid ""
 "calculated based on the power switch settings and what the state is of the "
 "switches. The bar shows a percentage of the max usage."
 msgstr ""
+"Die zweite Kachel zeigt den aktuellen Stromverbrauch in Watt. Der Betrag "
+"wird auf der Grundlage der Schalter Einstellungen berechnet und ob der "
+"Zustand der Schalter ein oder aus ist. Die Leiste zeigt einen Prozentsatz "
+"der maximalen Nutzung an."
 
 #: views/inc/usage_dashboard.tpl:101
 msgid ""
@@ -1128,6 +1298,10 @@ msgid ""
 "is calculated based on the power switch settings and what the state is of "
 "the switches. The bar shows a percentage of the max usage."
 msgstr ""
+"Die dritte Kachel zeigt den aktuellen Wasserfluss in Liter pro Minute an. "
+"Der Betrag wird auf der Grundlage der Leistungsschalter Einstellungen "
+"berechnet und ob der Zustand der Schalter ein oder aus ist. Die Leiste zeigt "
+"einen Prozentsatz der maximalen Nutzung an."
 
 #: views/inc/usage_dashboard.tpl:107
 msgid ""
@@ -1137,6 +1311,11 @@ msgid ""
 "is entered, it will show the costs of the power bill and the amount of days "
 "it is calculated on."
 msgstr ""
+"Die vierte Kachel zeigt den Gesamtleistungsverbrauch von Beginn der Nutzung "
+"dieser Software an. Es wird der gesamte Stromverbrauch alle 10 Minuten "
+"basierend auf allen historischen Daten berechnet. Es wird in Kilo Watt pro "
+"Stunde angezeigt. Wenn der Strompreis eingegeben wird, werden die Kosten der "
+"Stromrechnung und die Anzahl der Tage, auf die er berechnet wird, angezeigt."
 
 #: views/inc/usage_dashboard.tpl:113
 msgid ""
@@ -1146,6 +1325,11 @@ msgid ""
 "it will show the costs of the water bill and the amount of days it is "
 "calculated on."
 msgstr ""
+"Die fünfte Kachel zeigt den Gesamtwasserverbrauch von Beginn der Nutzung "
+"dieser Software an. Es wird der gesamte Wasserverbrauch alle 10 Minuten "
+"basierend auf allen historischen Daten berechnet. Es wird in Liter "
+"angezeigt. Wenn der Wasserpreis eingegeben wird, zeigt er die Kosten der "
+"Wasserrechnung und die Anzahl der Tage, auf die er berechnet wird."
 
 #: views/inc/usage_dashboard.tpl:120
 msgid ""
@@ -1153,12 +1337,17 @@ msgid ""
 "environment is divided in three parts. There is a lighting system, a spray "
 "system and a heating system."
 msgstr ""
+"Der Umgebungsabschnitt zeigt den aktuellen Stand der Umgebung an. Die "
+"Umgebung ist in vier Teile geteilt. Es gibt das Beleuchtungssystem, das "
+"Sprühsystem das Heizungssystem und das Kühlsystem."
 
 #: views/inc/usage_dashboard.tpl:121
 msgid ""
 "When a part is active the title is in color. If the title is gray that part "
 "is than not running or configured."
 msgstr ""
+"Wenn ein System aktiv ist, ist der Titel in Farbe. Wenn der Titel grau ist, "
+"wird dieses System nicht ausgeführt oder ist nicht konfiguriert."
 
 #: views/inc/usage_dashboard.tpl:124
 msgid ""
@@ -1166,28 +1355,36 @@ msgid ""
 "configured. It shows the chosen mode out of 'clock' or 'weather'. There are "
 "no triggers or warnings used by the light system."
 msgstr ""
+"Der Beleuchtungsbereich gibt die grundlegenden Informationen darüber, wie "
+"die Beleuchtung konfiguriert ist. Es zeigt den gewählten Modus an "
+"'Zeitschaltuhr' oder 'Wetter'. Es gibt keine Warnungen, die vom "
+"Beleuchtungssystem ausgegeben werden."
 
 #: views/inc/usage_dashboard.tpl:125
 msgid ""
 "The state indicator is either green or red. Green means that it is switched "
 "on. When it is red, the lights are switched off."
 msgstr ""
+"Die Zustandsanzeige ist entweder grün oder rot. Grün bedeutet, dass es "
+"eingeschaltet ist. Wenn es rot ist, sind die Lichter ausgeschaltet."
 
 #: views/inc/usage_dashboard.tpl:126
 msgid "The on value is the time stamp when the lights are turned on."
 msgstr ""
+"Der Ein-Wert ist der Zeitstempel, wenn die Beleuchtung eingeschaltet wird."
 
 #: views/inc/usage_dashboard.tpl:127
 msgid "The off value is the time stamp when the lights will be turned off."
 msgstr ""
+"Der Aus-Wert ist der Zeitstempel, wenn die Beleuchtung ausgeschaltet wird."
 
 #: views/inc/usage_dashboard.tpl:128
 msgid "The duration holds the amount of hours that the lights are on."
-msgstr ""
+msgstr "Die Dauer in Stunden, die die Beleuchtung an ist."
 
 #: views/inc/usage_dashboard.tpl:148 views/inc/usage_dashboard.tpl:214
 msgid "Graphs"
-msgstr ""
+msgstr "Grafiken"
 
 #: views/inc/usage_dashboard.tpl:149
 msgid ""
@@ -1196,6 +1393,10 @@ msgid ""
 "historical graphs shows also the minimum and maximum value and will be "
 "updated once every 5 minutes."
 msgstr ""
+"Die Grafiken in Home sind kombinierte Grafiken von allen Temperatur und "
+"Feuchtigkeitssensoren. Die Messgeräte sind in Echtzeit und zeigen den "
+"aktuellen Wert. Die historischen Grafiken zeigen auch den minimalen und "
+"maximalen Wert und werden alle 5 Minuten aktualisiert."
 
 #: views/inc/usage_dashboard.tpl:150
 msgid ""
@@ -1203,111 +1404,123 @@ msgid ""
 "graph data all the data is combined and divided by the amount of sensors. "
 "This way the average of the sensors is used."
 msgstr ""
+"Jeder Sensor hat seinen eigenen Wert und einen minimalen und maximalen Wert. "
+"Um die Grafikdaten zu erhalten, werden alle Daten kombiniert und durch die "
+"Anzahl der Sensoren geteilt. Auf diese Weise wird der Mittelwert der "
+"Sensoren verwendet."
 
 #: views/inc/usage_dashboard.tpl:153 views/inc/usage_sensors.tpl:125
 #: views/inc/usage_sensors.tpl:168 views/profile.tpl:63
 #: views/sensor_settings.tpl:25 views/sensor_settings.tpl:104
 msgid "Type"
-msgstr ""
+msgstr "Art"
 
 #: views/inc/usage_dashboard.tpl:155
 msgid ""
 "There are multiple graph times. On the home there is a humidity and a "
 "temperature graph shown."
 msgstr ""
+"Es gibt mehrere Grafiken. In Home befindet sich ein Feuchtigkeit und ein "
+"Temperaturdiagramm."
 
 #: views/inc/usage_dashboard.tpl:163
 msgid "Last update"
-msgstr ""
+msgstr "Letztes Update"
 
 #: views/inc/usage_dashboard.tpl:165
 msgid ""
 "When there is new data, the gauge part of the graph is updated and will also "
 "update the last update time stamp."
 msgstr ""
+"Wenn es neue Daten gibt, wird die Kurve der Grafik aktualisiert sowie auch "
+"der letzte Aktualisierungszeitstempel."
 
 #: views/inc/usage_dashboard.tpl:171
 msgid ""
 "When the current value is outside the minimum of maximum value a red warning "
 "badge is shown."
 msgstr ""
+"Wenn der aktuelle Wert außerhalb des Minimums oder Maximalwertes liegt, wird "
+"ein rotes Warnzeichen angezeigt."
 
 #: views/inc/usage_dashboard.tpl:175
 msgid "Period"
-msgstr ""
+msgstr "Periode"
 
 #: views/inc/usage_dashboard.tpl:178
 msgid ""
 "With the calendar icon you can select multiple periods for the historical "
 "graph. The valid periods are:"
 msgstr ""
+"Mit dem Kalender Icon können Sie verschiedene Perioden für die historischen "
+"Grafiken auswählen. Die gültigen Zeiten sind:"
 
 #: views/inc/usage_dashboard.tpl:188 views/inc/usage_doors.tpl:65
 #: views/inc/usage_sensors.tpl:75 views/inc/usage_switches.tpl:65
 #: views/inc/usage_webcams.tpl:61
 msgid "Options"
-msgstr ""
+msgstr "Optionen"
 
 #: views/inc/usage_dashboard.tpl:191
 msgid "With the wrench you will get an options menu."
-msgstr ""
+msgstr "Mit dem Schraubenschlüssel Icon kommen Sie zum Optionsmenü."
 
 #: views/inc/usage_doors.tpl:13 views/inc/usage_doors.tpl:139
 #: views/inc/usage_sensors.tpl:17 views/inc/usage_sensors.tpl:200
 #: views/inc/usage_switches.tpl:13 views/inc/usage_switches.tpl:160
 #: views/inc/usage_webcams.tpl:13 views/inc/usage_webcams.tpl:154
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: views/inc/usage_doors.tpl:14
 msgid "Per door the title holds shows some values and options."
-msgstr ""
+msgstr "Pro Türe zeigt der Titel einige Werte und Optionen an."
 
 #: views/inc/usage_doors.tpl:19
 msgid "Door"
-msgstr ""
+msgstr "Türe"
 
 #: views/inc/usage_doors.tpl:59 views/inc/usage_sensors.tpl:63
 #: views/inc/usage_switches.tpl:59 views/inc/usage_webcams.tpl:57
 msgid "Left side"
-msgstr ""
+msgstr "Linke Seite"
 
 #: views/inc/usage_doors.tpl:59 views/inc/usage_sensors.tpl:63
 #: views/inc/usage_switches.tpl:59 views/inc/usage_webcams.tpl:57
 msgid "values"
-msgstr ""
+msgstr "Werte"
 
 #: views/inc/usage_doors.tpl:61 views/inc/usage_sensors.tpl:71
 #: views/inc/usage_switches.tpl:61 views/inc/usage_webcams.tpl:59
 msgid "The configured name"
-msgstr ""
+msgstr "Der konfigurierte Name"
 
 #: views/inc/usage_doors.tpl:62
 msgid "The total time the door has been open"
-msgstr ""
+msgstr "Die Gesamtzeit die die Tür offen ist"
 
 #: views/inc/usage_doors.tpl:63
 msgid "Warning badge when the door is open"
-msgstr ""
+msgstr "Warnungsanzeige, wenn die Türe offen ist"
 
 #: views/inc/usage_doors.tpl:65 views/inc/usage_sensors.tpl:75
 #: views/inc/usage_switches.tpl:65 views/inc/usage_webcams.tpl:61
 msgid "Right side"
-msgstr ""
+msgstr "Rechte Seite"
 
 #: views/inc/usage_doors.tpl:67 views/inc/usage_webcams.tpl:63
 msgid "Show or hide the door"
-msgstr ""
+msgstr "Zeigen oder verstecken Sie die Türe."
 
 #: views/inc/usage_doors.tpl:68 views/inc/usage_sensors.tpl:78
 #: views/inc/usage_switches.tpl:68 views/inc/usage_webcams.tpl:64
 msgid "Select history graph period"
-msgstr ""
+msgstr "Periode der Grafik auswählen"
 
 #: views/inc/usage_doors.tpl:69 views/inc/usage_sensors.tpl:79
 #: views/inc/usage_switches.tpl:69 views/inc/usage_webcams.tpl:65
 msgid "Options menu"
-msgstr ""
+msgstr "Menü Optionen"
 
 #: views/inc/usage_doors.tpl:77
 msgid ""
@@ -1315,22 +1528,27 @@ msgid ""
 "status of the doors. There can be as much doors added to the system as "
 "needed."
 msgstr ""
+"Auf der Türseite befinden sich eine Liste der Türsensoren, die den aktuellen "
+"Stand der Türen zeigen. Es können so viele Türen hinzugefügt werden, wie "
+"nötig sind."
 
 #: views/inc/usage_doors.tpl:78
 msgid ""
 "The list is also updating when a door is opened by hand. The state off the "
 "door is shown here in real time."
 msgstr ""
+"Die Liste wird auch aktualisiert, wenn eine Tür von Hand geöffnet wird. Der "
+"Zustand der Türe wird hier in Echtzeit angezeigt."
 
 #: views/inc/usage_doors.tpl:86 views/inc/usage_sensors.tpl:96
 #: views/inc/usage_sensors.tpl:206 views/inc/usage_switches.tpl:90
 #: views/inc/usage_switches.tpl:166
 msgid "History graph"
-msgstr ""
+msgstr "Grafik"
 
 #: views/inc/usage_doors.tpl:88
 msgid "The history graph will shows when a door was opened."
-msgstr ""
+msgstr "Die Grafik zeigt an, wann eine Türe geöffnet wurde."
 
 #: views/inc/usage_doors.tpl:89 views/inc/usage_sensors.tpl:99
 #: views/inc/usage_switches.tpl:93 views/inc/usage_weather.tpl:25
@@ -1339,6 +1557,8 @@ msgid ""
 "Use the calendar icon %s in the title to select the period for the history "
 "graph."
 msgstr ""
+"Verwenden Sie das Kalender-Symbol %s im Titel, um den Zeitraum für die "
+"Grafik auszuwählen."
 
 #: views/inc/usage_doors.tpl:93 views/inc/usage_sensors.tpl:103
 msgid ""
@@ -1347,16 +1567,20 @@ msgid ""
 "filled in. Make sure the right values are filled in. All fields with a %s "
 "are required."
 msgstr ""
+"Auf der Tür-Einstellungsseite können Sie alle benötigten Türen "
+"konfigurieren. Klicken Sie auf die Schaltfläche %s um eine neue Türe "
+"hinzuzufügen. Stellen Sie sicher, dass die richtigen Werte ausgefüllt sind. "
+"Alle Felder mit %s sind erforderlich."
 
 #: views/inc/usage_doors.tpl:136 views/inc/usage_environment.tpl:394
 #: views/inc/usage_sensors.tpl:197 views/inc/usage_switches.tpl:157
 #: views/inc/usage_webcams.tpl:151 views/profile.tpl:6
 msgid "Overview"
-msgstr ""
+msgstr "Überblick"
 
 #: views/inc/usage_doors.tpl:145
 msgid "Graph"
-msgstr ""
+msgstr "Grafik"
 
 #: views/inc/usage_environment.tpl:15
 msgid ""
@@ -1366,12 +1590,19 @@ msgid ""
 "values for the maximum and minimum hours. And the hours shift will shift the "
 "hours for on and off by the amount of hours  entered here."
 msgstr ""
+"Das Beleuchtungssystem arbeitet immer pünktlich. Sie können Sonnenaufgang "
+"und Sonnenuntergang als Zeitwerte oder feste Zeitwerte nehmen. Bei der "
+"Auswahl Sonnenaufgang und Sonnenuntergang kann es passieren, dass die "
+"Beleuchtung für lange oder kurz an sind. Verwenden Sie die gewünschten Werte "
+"für die maximalen und minimalen Stunden. Die Stunden Verschiebung verschiebt "
+"die Stunden für ein und aus durch die Menge der Stunden, die hier eingegeben "
+"werden."
 
 #: views/inc/usage_environment.tpl:16 views/inc/usage_environment.tpl:112
 #: views/inc/usage_environment.tpl:204 views/inc/usage_environment.tpl:298
 #: views/inc/usage_weather.tpl:36
 msgid "All fields with a %s are required."
-msgstr ""
+msgstr "Alle Felder mit %s sind erforderlich."
 
 #: views/inc/usage_environment.tpl:24 views/inc/usage_environment.tpl:120
 #: views/inc/usage_environment.tpl:128 views/inc/usage_environment.tpl:212
@@ -1381,37 +1612,37 @@ msgstr ""
 #: views/system_environment.tpl:185 views/system_environment.tpl:193
 #: views/system_environment.tpl:260 views/system_environment.tpl:268
 msgid "Enabled"
-msgstr ""
+msgstr "Ein"
 
 #: views/inc/usage_environment.tpl:29 views/inc/usage_environment.tpl:86
 #: views/system_environment.tpl:42
 msgid "Light mode"
-msgstr ""
+msgstr "Beleuchtungsmodus"
 
 #: views/inc/usage_environment.tpl:40 views/inc/usage_environment.tpl:89
 #: views/system_environment.tpl:53
 msgid "Lights on"
-msgstr ""
+msgstr "Beleuchtung an"
 
 #: views/inc/usage_environment.tpl:46 views/inc/usage_environment.tpl:92
 #: views/system_environment.tpl:59
 msgid "Lights off"
-msgstr ""
+msgstr "Beleuchtung aus"
 
 #: views/inc/usage_environment.tpl:52 views/inc/usage_environment.tpl:95
 #: views/system_environment.tpl:65
 msgid "Maximum lights hours"
-msgstr ""
+msgstr "Beleuchtungszeit max."
 
 #: views/inc/usage_environment.tpl:58 views/inc/usage_environment.tpl:98
 #: views/system_environment.tpl:71
 msgid "Minimum light hours"
-msgstr ""
+msgstr "Beleuchtungszeit min."
 
 #: views/inc/usage_environment.tpl:64 views/inc/usage_environment.tpl:101
 #: views/system_environment.tpl:77
 msgid "Hours shift"
-msgstr ""
+msgstr "Stunden verschieben"
 
 #: views/inc/usage_environment.tpl:70 views/inc/usage_environment.tpl:104
 #: views/inc/usage_environment.tpl:155 views/inc/usage_environment.tpl:192
@@ -1420,7 +1651,7 @@ msgstr ""
 #: views/system_environment.tpl:83 views/system_environment.tpl:147
 #: views/system_environment.tpl:222 views/system_environment.tpl:297
 msgid "Power switches"
-msgstr ""
+msgstr "Schalter"
 
 #: views/inc/usage_environment.tpl:110
 msgid ""
@@ -1429,36 +1660,40 @@ msgid ""
 "multiple humidity sensors are used, the averages of the minimum, maximum and "
 "current values are used."
 msgstr ""
+"Der Sprüher arbeitet nur im Sensormodus. Das bedeutet, es muss mindestens "
+"ein Feuchtigkeitssensor und ein Schalter zur Aktivierung eines Sprühsystems "
+"vorhanden sein. Bei Verwendung mehrerer Feuchtesensoren werden die "
+"Mittelwerte der minimalen, maximalen und aktuellen Werte verwendet."
 
 #: views/inc/usage_environment.tpl:111
 msgid "The sprayer will not operate when a door is open."
-msgstr ""
+msgstr "Der Sprüher funktioniert nicht, wenn eine Türe geöffnet ist."
 
 #: views/inc/usage_environment.tpl:125 views/inc/usage_environment.tpl:180
 #: views/inc/usage_environment.tpl:311 views/system_environment.tpl:117
 #: views/system_environment.tpl:265
 msgid "Enabled when lights are off"
-msgstr ""
+msgstr "Aktivieren, wenn die Beleuchtung ausgeschaltet ist"
 
 #: views/inc/usage_environment.tpl:133 views/inc/usage_environment.tpl:183
 #: views/system_environment.tpl:125
 msgid "Sprayer mode"
-msgstr ""
+msgstr "Sprühmodus"
 
 #: views/inc/usage_environment.tpl:143 views/inc/usage_environment.tpl:186
 #: views/system_environment.tpl:135
 msgid "Sprayer wait timeout (seconds)"
-msgstr ""
+msgstr "Sprüher Wartezeit (Sekunden)"
 
 #: views/inc/usage_environment.tpl:149 views/inc/usage_environment.tpl:189
 #: views/system_environment.tpl:141
 msgid "Spray duration (seconds)"
-msgstr ""
+msgstr "Sprühdauer (Sekunden)"
 
 #: views/inc/usage_environment.tpl:164 views/inc/usage_environment.tpl:195
 #: views/system_environment.tpl:156
 msgid "Humidity sensors"
-msgstr ""
+msgstr "Feuchtigkeitssensoren"
 
 #: views/inc/usage_environment.tpl:201
 msgid ""
@@ -1469,12 +1704,20 @@ msgid ""
 "will be toggled off and stay out until the temperature hits the minimum "
 "value."
 msgstr ""
+"Wenn die Heizung im Sensormodus verwendet wird, schaltet das System die "
+"Relais auf Grundlage der Werte der Sensoren um. Wenn die Temperatur zu kalt "
+"ist, werden die Relais an den Schaltern umgeschaltet, bis die Temperatur "
+"über den Maximalwert hinausgeht. Wenn die maximale Temperatur erreicht ist, "
+"werden die Relais ausgeschaltet und bleiben aus, bis die Temperatur auf den "
+"Minimalwert trifft."
 
 #: views/inc/usage_environment.tpl:202 views/inc/usage_environment.tpl:296
 msgid ""
 "When used in Timer or Weather mode, the switches will be toggled on and of "
 "on the selected times regardless of the temperature."
 msgstr ""
+"Bei Verwendung im Timer- oder Wettermodus werden die Relais unabhängig von "
+"Temperatur und gewählten Zeiten geschaltet."
 
 #: views/inc/usage_environment.tpl:203 views/inc/usage_environment.tpl:297
 msgid ""
@@ -1482,37 +1725,40 @@ msgid ""
 "the switches will toggle on and off when there is an alarm based on the "
 "sensors and within the selected time frame."
 msgstr ""
+"Aber wenn es Sensoren gibt, die in Kombination mit Timer- oder Wettermodus "
+"verwendet werden, schalten die Relais ein oder aus, wenn ein Alarm auf der "
+"Grundlage der Sensoren und innerhalb des ausgewählten Zeitrahmens erfolgt."
 
 #: views/inc/usage_environment.tpl:217 views/inc/usage_environment.tpl:274
 #: views/inc/usage_environment.tpl:368 views/system_environment.tpl:190
 msgid "Enabled when lights are on"
-msgstr ""
+msgstr "Aktivieren, wenn Beleuchtung eingeschaltet ist"
 
 #: views/inc/usage_environment.tpl:225 views/inc/usage_environment.tpl:277
 #: views/inc/usage_environment.tpl:371 views/system_environment.tpl:198
 msgid "Heater mode"
-msgstr ""
+msgstr "Heizungsmodus"
 
 #: views/inc/usage_environment.tpl:237 views/inc/usage_environment.tpl:280
 #: views/inc/usage_environment.tpl:374 views/system_environment.tpl:210
 msgid "Heater on"
-msgstr ""
+msgstr "Heizung an"
 
 #: views/inc/usage_environment.tpl:243 views/inc/usage_environment.tpl:283
 #: views/inc/usage_environment.tpl:377 views/system_environment.tpl:216
 msgid "Heater off"
-msgstr ""
+msgstr "Heizung aus"
 
 #: views/inc/usage_environment.tpl:258 views/inc/usage_environment.tpl:289
 #: views/inc/usage_environment.tpl:352 views/inc/usage_environment.tpl:383
 #: views/system_environment.tpl:231 views/system_environment.tpl:306
 msgid "Temperature sensors"
-msgstr ""
+msgstr "Temperatursensoren"
 
 #: views/inc/usage_environment.tpl:294 views/inc/usage_environment.tpl:406
 #: views/system_environment.tpl:247
 msgid "Cooling"
-msgstr ""
+msgstr "Kühlung"
 
 #: views/inc/usage_environment.tpl:295
 msgid ""
@@ -1523,18 +1769,24 @@ msgid ""
 "will be toggled off and stay out until the temperature hits the maximum "
 "value."
 msgstr ""
+"Wenn die Kühlung im Sensormodus verwendet wird, schaltet das System die "
+"Relais auf der Grundlage der Alarme der Sensoren um. Wenn die Temperatur "
+"heiß ist, wird ein Relais geschaltet, bis die Temperatur unter den "
+"Minimalwert sinkt. Wenn die Mindesttemperatur erreicht ist, wird das Relais "
+"ausgeschaltet und bleibt aus, bis die Temperatur wieder auf den Maximalwert "
+"kommt."
 
 #: views/inc/usage_environment.tpl:319 views/system_environment.tpl:273
 msgid "Cooler mode"
-msgstr ""
+msgstr "Kühlbetrieb"
 
 #: views/inc/usage_environment.tpl:331 views/system_environment.tpl:285
 msgid "Cooler on"
-msgstr ""
+msgstr "Kühler an"
 
 #: views/inc/usage_environment.tpl:337 views/system_environment.tpl:291
 msgid "Cooler off"
-msgstr ""
+msgstr "Kühler aus"
 
 #: views/inc/usage_sensors.tpl:13
 msgid ""
@@ -1542,40 +1794,44 @@ msgid ""
 "type. Select temperature from the menu to get all the temperature sensors. "
 "Select humidity for all humidity sensors."
 msgstr ""
+"Auf der Sensorseite finden Sie alle verfügbaren Sensoren nach Gruppierung. "
+"Wählen Sie die Temperatur aus dem Menü, um alle Temperatursensoren zu "
+"erhalten. Feuchte für alle Feuchtesensoren wählen."
 
 #: views/inc/usage_sensors.tpl:14
 msgid "Per graph you have the following options and indicators."
-msgstr ""
+msgstr "Pro Grafik haben Sie die folgenden Optionen und Indikatoren."
 
 #: views/inc/usage_sensors.tpl:18
 msgid "Per sensor the title shows some values and options."
-msgstr ""
+msgstr "Pro Sensor zeigt der Titel einige Werte und Optionen an."
 
 #: views/inc/usage_sensors.tpl:65
 msgid "The sensor type"
-msgstr ""
+msgstr "Sensortype"
 
 #: views/inc/usage_sensors.tpl:67
 msgid "Humidity sensor"
-msgstr ""
+msgstr "Feuchtigkeitssensor"
 
 #: views/inc/usage_sensors.tpl:68
 msgid "Temperature sensor"
-msgstr ""
+msgstr "Temperatursensor"
 
 #: views/inc/usage_sensors.tpl:72
 msgid "The time stamp of the last measurement."
-msgstr ""
+msgstr "Die Uhrzeit der letzten Messung."
 
 #: views/inc/usage_sensors.tpl:73
 msgid ""
 "Warning badge when the sensor value is outside the defined save operating "
 "values."
 msgstr ""
+"Warnzeichen, wenn der Sensorwert außerhalb der definierten Sollwerte liegt."
 
 #: views/inc/usage_sensors.tpl:77
 msgid "Show or hide the sensor"
-msgstr ""
+msgstr "Den Sensor ein- oder ausblenden."
 
 #: views/inc/usage_sensors.tpl:91
 msgid ""
@@ -1584,16 +1840,24 @@ msgid ""
 "value gets more to the minimum or maximum value, it will gets more red/"
 "orange."
 msgstr ""
+"Die Messkurve zeigt den aktuellen Temperatur oder Feuchtigkeitswert an. Die "
+"Farbe der Grafik hängt vom aktuellen Wert und den Alarmwerten ab. Wenn der "
+"Wert näher auf den minimalen oder maximalen Wert kommt, wird die Farbe rot / "
+"orange."
 
 #: views/inc/usage_sensors.tpl:92
 msgid ""
 "The values are updated every 30 seconds and updated in real time on the page."
 msgstr ""
+"Die Werte werden alle 30 Sekunden aktualisiert und in Echtzeit auf der Seite "
+"aktualisiert."
 
 #: views/inc/usage_sensors.tpl:93
 msgid ""
 "The current value is also written below the graph in degrees or percentage."
 msgstr ""
+"Der aktuelle Wert wird auch unterhalb der Grafik in Grad oder Prozent "
+"geschrieben."
 
 #: views/inc/usage_sensors.tpl:98
 msgid ""
@@ -1602,43 +1866,50 @@ msgid ""
 "outside this range an alarm will be given. Hover above the graph lines to "
 "get detailed information."
 msgstr ""
+"Die Grafik zeigt den Messwert an. Die flachen Linien sind die minimalen und "
+"maximalen Werte, die konfiguriert sind. Wenn der Messwert außerhalb dieses "
+"Bereichs liegt, wird ein Alarm ausgegeben. Gehen Sie über die Grafiklinie, "
+"um detaillierte Informationen zu erhalten."
 
 #: views/inc/usage_sensors.tpl:146 views/inc/usage_sensors.tpl:180
 #: views/sensor_settings.tpl:37 views/sensor_settings.tpl:125
 msgid "Limit min"
-msgstr ""
+msgstr "Limit min."
 
 #: views/inc/usage_sensors.tpl:150 views/inc/usage_sensors.tpl:183
 #: views/sensor_settings.tpl:40 views/sensor_settings.tpl:129
 msgid "Limit max"
-msgstr ""
+msgstr "Limit max."
 
 #: views/inc/usage_switches.tpl:14
 msgid "Per switch the title holds shows some values and options."
-msgstr ""
+msgstr "Pro Schalter zeigt der Titel einige Werte und Optionen an."
 
 #: views/inc/usage_switches.tpl:19 views/switch_settings.tpl:65
 #: views/switch_status.tpl:7
 msgid "Switch"
-msgstr ""
+msgstr "Schalter"
 
 #: views/inc/usage_switches.tpl:62
 msgid "The power usage and/or water flow per minute when switched on"
-msgstr ""
+msgstr "Der Stromverbrauch und / oder Wasserfluss pro Minute beim Einschalten"
 
 #: views/inc/usage_switches.tpl:63
 msgid ""
 "The total amount of power usage and/or water usage for the selected history "
 "period"
 msgstr ""
+"Die Gesamtmenge des Stromverbrauchs und / oder der Wasserverbrauch für den "
+"ausgewählten Grafikzeitraum"
 
 #: views/inc/usage_switches.tpl:67
 msgid "Show or hide the switch"
-msgstr ""
+msgstr "Den Schalter ein- oder ausblenden"
 
 #: views/inc/usage_switches.tpl:74 views/inc/usage_switches.tpl:163
+#, fuzzy
 msgid "Status and toggle"
-msgstr ""
+msgstr "Status und Toggle"
 
 #: views/inc/usage_switches.tpl:81
 msgid ""
@@ -1648,20 +1919,27 @@ msgid ""
 "made. Use here the username and password that are configured at the system "
 "configuration page."
 msgstr ""
+"Auf der Schalterseite befinden sich Geräte Taster, die die Powerschalter "
+"umschalten. Jeder Schalter wird aufgeführt und kann von der Statusseite aus "
+"gesteuert werden. Um den Schalter umzuschalten, wird eine Anfrage für einen "
+"Benutzernamen und ein Passwort gemacht. Verwenden Sie hier den Benutzernamen "
+"und das Passwort, die auf der Systemkonfigurationsseite konfiguriert sind."
 
 #: views/inc/usage_switches.tpl:82
 msgid ""
 "The list is also updating when the environment toggles a switch. The state "
 "off the switch is shown here in real time."
 msgstr ""
+"Die Liste wird auch aktualisiert, wenn die Umgebung einen Schalter "
+"umschaltet. Der Zustand aus dem Schalter wird hier in Echtzeit angezeigt."
 
 #: views/inc/usage_switches.tpl:85
 msgid "Switch is on"
-msgstr ""
+msgstr "Schalter ein"
 
 #: views/inc/usage_switches.tpl:86
 msgid "Switch is off"
-msgstr ""
+msgstr "Schalter aus"
 
 #: views/inc/usage_switches.tpl:92
 msgid ""
@@ -1669,6 +1947,9 @@ msgid ""
 "power usage on the y-axis and time on the x-axis. When hovering over the "
 "graph it will also show the water usage."
 msgstr ""
+"Die Verlaufsgrafik zeigt an, wenn ein Schalter eingeschaltet wurde. Es zeigt "
+"den Stromverbrauch auf der y-Achse und die Zeit auf der x-Achse. Wenn man "
+"über der Grafik schwebt, zeigt es auch den Wasserverbrauch."
 
 #: views/inc/usage_switches.tpl:97
 msgid ""
@@ -1677,10 +1958,14 @@ msgid ""
 "be filled in. Make sure the right values are filled in. All fields with a %s "
 "are required."
 msgstr ""
+"Auf der Schalter-Einstellungsseite können Sie alle benötigten Schalter "
+"konfigurieren. Klicken Sie auf die Schaltfläche %s, um einen neuen Schalter "
+"hinzuzufügen. Stellen Sie sicher, dass die richtigen Werte ausgefüllt sind. "
+"Alle Felder mit %s sind erforderlich."
 
 #: views/inc/usage_switches.tpl:106 views/switch_settings.tpl:81
 msgid "FTDI"
-msgstr ""
+msgstr "FTDI"
 
 #: views/inc/usage_weather.tpl:15
 msgid ""
@@ -1688,50 +1973,63 @@ msgid ""
 "which the forecast is valid. The data is loaded external from the external "
 "API source and is not measured by the software."
 msgstr ""
+"Das Prognose-Widget zeigen die Prognose zur aktuellen Uhrzeit und den Ort "
+"an. Die Daten werden extern von der externen API-Quelle geladen und nicht "
+"von der Software gemessen."
 
 #: views/inc/usage_weather.tpl:16
 msgid ""
 "It shows the current day and time for which the forecast is valid. And what "
 "temperature indicator is used."
 msgstr ""
+"Es zeigt den aktuellen Tag und die Zeit, für die Prognose an. Und welche "
+"Temperaturanzeige verwendet wird."
 
 #: views/inc/usage_weather.tpl:17
 msgid ""
 "The forecast is based on the time of the day. During the day, a sun is used "
 "in the animation. During the night a moon is used."
 msgstr ""
+"Die Prognose basiert auf der Tageszeit. Während des Tages wird eine Sonne in "
+"der Animation verwendet. In der Nacht wird ein Mond benutzt."
 
 #: views/inc/usage_weather.tpl:18
 msgid ""
 "The sun rise and sun set are shown on the right side. The line that is bold "
 "is indicating the current state."
 msgstr ""
+"Der Sonnen auf bzw. Untergang ist auf der rechten Seite. Die Zeile, die fett "
+"ist, zeigt den aktuellen Zustand an."
 
 #: views/inc/usage_weather.tpl:19
 msgid "The week forecast is shown at 13:00 hours of each day."
-msgstr ""
+msgstr "Die Wochenprognose wird um 13:00 Uhr pro Tag angezeigt."
 
 #: views/inc/usage_weather.tpl:22 views/inc/usage_weather.tpl:88
 #: views/weather_forecast.tpl:112
 msgid "Day forecast"
-msgstr ""
+msgstr "Tagesvorhersage"
 
 #: views/inc/usage_weather.tpl:24
 msgid ""
 "The day forecast shows the temperature per hour for 24 / 36 hours from now. "
 "The title holds the graph period."
 msgstr ""
+"Die Tagesvorhersage zeigt die Temperatur pro Stunde für 24/36 Stunden an. "
+"Der Titel enthält die Grafikperiode."
 
 #: views/inc/usage_weather.tpl:28 views/inc/usage_weather.tpl:91
 #: views/weather_forecast.tpl:130
 msgid "Week forecast"
-msgstr ""
+msgstr "Wochenvorhersage"
 
 #: views/inc/usage_weather.tpl:30
 msgid ""
 "The week forecast shows the temperature per hour for 10 days from now. The "
 "title holds the graph period."
 msgstr ""
+"Die Wochenprognose zeigt die Temperatur pro Stunde für 10 Tage an. Der Titel "
+"enthält die Grafikperiode."
 
 #: views/inc/usage_weather.tpl:35
 msgid ""
@@ -1739,66 +2037,72 @@ msgid ""
 "need to get a free API key from %s. The temperature are read in Celsius "
 "degrees. It can be converted to Fahrenheit."
 msgstr ""
+"Geben Sie die vollständige URL des API-Wetter-Servers ein. Für den Einsatz "
+"mit Weather.com musst du einen kostenlosen API Key von %s bekommen. Die "
+"Temperatur wird in Celsius Grad gelesen. Es kann in Fahrenheit umgewandelt "
+"werden."
 
 #: views/inc/usage_weather.tpl:42 views/inc/usage_weather.tpl:64
 #: views/inc/usage_webcams.tpl:99 views/inc/usage_webcams.tpl:126
 #: views/weather_settings.tpl:19 views/weather_settings.tpl:47
 #: views/webcam_settings.tpl:19 views/webcam_settings.tpl:81
 msgid "Location"
-msgstr ""
+msgstr "Ort"
 
 #: views/inc/usage_weather.tpl:48 views/inc/usage_weather.tpl:71
 #: views/weather_settings.tpl:27 views/weather_settings.tpl:53
 msgid "Wind speed"
-msgstr ""
+msgstr "Windgeschwindigkeit"
 
 #: views/inc/usage_weather.tpl:52 views/weather_settings.tpl:57
 msgid "m/s"
-msgstr ""
+msgstr "m/s"
 
 #: views/inc/usage_weather.tpl:53 views/weather_settings.tpl:58
 msgid "Km/h"
-msgstr ""
+msgstr "km/h"
 
 #: views/inc/usage_webcams.tpl:14
 msgid "Per webcam the title holds shows some values and options."
-msgstr ""
+msgstr "Pro Webcam zeigt der Titel einige Werte und Optionen an."
 
 #: views/inc/usage_webcams.tpl:70 views/inc/usage_webcams.tpl:157
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 #: views/inc/usage_webcams.tpl:71
 msgid "Use the zooming control to zoom in and out."
-msgstr ""
+msgstr "Verwenden Sie die Zoom-Steuerung zum Vergrößern und Verkleinern."
 
 #: views/inc/usage_webcams.tpl:72 views/inc/usage_webcams.tpl:82
 msgid "Controls"
-msgstr ""
+msgstr "Steuert"
 
 #: views/inc/usage_webcams.tpl:74
 msgid "Zooming control"
-msgstr ""
+msgstr "Zoomsteuerung"
 
 #: views/inc/usage_webcams.tpl:75
 msgid "Zoom at minimum level"
-msgstr ""
+msgstr "Zoom auf niedrigste Stufe"
 
 #: views/inc/usage_webcams.tpl:76
 msgid "Zoom at maximum level"
-msgstr ""
+msgstr "Zoom auf Höchststufe"
 
 #: views/inc/usage_webcams.tpl:80 views/inc/usage_webcams.tpl:160
 msgid "Full screen"
-msgstr ""
+msgstr "Vollbild"
 
 #: views/inc/usage_webcams.tpl:81
 msgid "Use the full screen control to toggle full screen on or off."
 msgstr ""
+"Verwenden Sie das Vollbild Symbol, um den Vollbildmodus ein- oder "
+"auszuschalten."
 
 #: views/inc/usage_webcams.tpl:84
 msgid "Full screen control"
-msgstr ""
+msgstr "Vollbildsteuerung"
 
 #: views/inc/usage_webcams.tpl:89
 msgid ""
@@ -1807,55 +2111,59 @@ msgid ""
 "be filled in. Make sure the right values are filled in. All fields with a %s "
 "are required."
 msgstr ""
+"Auf der Webcam Seite können Sie alle vorhandenen Webcams konfigurieren. "
+"Klicken Sie auf die Schaltfläche %s, um eine neue Webcam hinzuzufügen. "
+"Stellen Sie, dass die richtigen Werte eingetragen sind. Alle Felder mit% s "
+"sind erforderlich."
 
 #: views/inc/usage_webcams.tpl:95 views/inc/usage_webcams.tpl:140
 #: views/webcam_settings.tpl:33 views/webcam_settings.tpl:77
 msgid "Preview"
-msgstr ""
+msgstr "Vorschau"
 
 #: views/inc/usage_webcams.tpl:108 views/inc/usage_webcams.tpl:137
 #: views/webcam_settings.tpl:30 views/webcam_settings.tpl:90
 msgid "Picture rotation"
-msgstr ""
+msgstr "Bilddrehung"
 
 #: views/inc/usage_webcams.tpl:111 views/inc/usage_webcams.tpl:112
 #: views/inc/usage_webcams.tpl:113 views/inc/usage_webcams.tpl:114
 #: views/webcam_settings.tpl:93 views/webcam_settings.tpl:94
 #: views/webcam_settings.tpl:95 views/webcam_settings.tpl:96
 msgid "degrees"
-msgstr ""
+msgstr "Grad"
 
 #: views/inc/usage_webcams.tpl:115 views/webcam_settings.tpl:97
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Horizontal spiegeln"
 
 #: views/inc/usage_webcams.tpl:116 views/webcam_settings.tpl:98
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Vertikal spiegeln"
 
 #: views/inc/usage_webcams.tpl:129 views/webcam_settings.tpl:22
 msgid "V4L"
-msgstr ""
+msgstr "V4L"
 
 #: views/inc/usage_webcams.tpl:130 views/webcam_settings.tpl:23
 msgid "Remote source"
-msgstr ""
+msgstr "Fernquelle"
 
 #: views/info.tpl:7 views/info.tpl:21
 msgid "TerrariumPI %s"
-msgstr ""
+msgstr "TerrariumPI %s"
 
 #: views/info.tpl:10 views/info.tpl:26
 msgid "Used software"
-msgstr ""
+msgstr "Verwendete Software"
 
 #: views/info.tpl:13 views/info.tpl:79
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #: views/info.tpl:16 views/info.tpl:87
 msgid "Example setup"
-msgstr ""
+msgstr "Beispiele"
 
 #: views/info.tpl:22
 msgid ""
@@ -1863,36 +2171,43 @@ msgid ""
 "handle a combination of multiple temperature and humidity sensors and relay "
 "switches to control a closed environment."
 msgstr ""
+"Verwenden Sie TerrariumPI, um Ihre eigene Reptilienumgebung zu "
+"automatisieren. Die Software kann eine Kombination aus mehreren Temperatur "
+"und Feuchtigkeitssensoren sowie Relaisschaltern verarbeiten, um eine "
+"geschlossene Umgebung zu steuern."
 
 #: views/info.tpl:27
 msgid ""
 "TerrariumPI is mainly written in Python version 2.7. The web interface is a "
 "bootstrap 3 template. It can be downloaded from %s."
 msgstr ""
+"TerrariumPI wird hauptsächlich in Python Version 2.7 geschrieben. Das Web "
+"Interface ist eine Bootstrap 3 Vorlage. Es kann bei %s heruntergeladen "
+"werden."
 
 #: views/info.tpl:27 views/info.tpl:80 views/info.tpl:82
 msgid "Download TerrariumPI on Github"
-msgstr ""
+msgstr "TerrariumPI auf Github herunterladen"
 
 #: views/info.tpl:32 views/info.tpl:70
 msgid "Python modules"
-msgstr ""
+msgstr "Python Module"
 
 #: views/info.tpl:33
 msgid "The following external Python libraries are used"
-msgstr ""
+msgstr "Folgende externe Python-Bibliotheken werden verwendet"
 
 #: views/info.tpl:43
 msgid "PIP"
-msgstr ""
+msgstr "PIP"
 
 #: views/info.tpl:51
 msgid "Source"
-msgstr ""
+msgstr "Quelle"
 
 #: views/info.tpl:57 views/info.tpl:73
 msgid "Web interface"
-msgstr ""
+msgstr "Web Interface"
 
 #: views/info.tpl:58
 msgid ""
@@ -1901,6 +2216,11 @@ msgid ""
 "plugins and tools to create a powerful framework for creating admin panels "
 "or back-end dashboards."
 msgstr ""
+"Gentellela Admin ist eine kostenlose Bootstrap Admin Vorlage. Diese Vorlage "
+"verwendet die Standard-Bootstrap 3-Styles zusammen mit einer Vielzahl von "
+"leistungsstarken jQuery-Plugins und Tools, um ein leistungsstarkes Framework "
+"für die Erstellung von Admin-Panels oder Back-End-Dashboards erstellen zu "
+"können."
 
 #: views/info.tpl:59
 msgid ""
@@ -1909,6 +2229,11 @@ msgid ""
 "area, form autocomplete, range slider, progress bars, notifications and much "
 "more."
 msgstr ""
+"Die Weboberfläche verwendet mehrere Bibliotheken für Diagramme, Kalender, "
+"Formularvalidierung, Assistenten-Stil-Schnittstelle, Off-Canvas-"
+"Navigationsmenü, Textformulare, Datumsbereich, Uploadbereich, Formular "
+"Autovervollständigung, Bereichsregler, Fortschrittsbalken, "
+"Benachrichtigungen und vieles mehr."
 
 #: views/info.tpl:60
 msgid ""
@@ -1917,264 +2242,273 @@ msgid ""
 "will grown long enough we will write a post similar to this to showcase the "
 "best examples."
 msgstr ""
+"Wir würden gerne sehen, wie Sie diese tolle Admin Vorlage verwenden. Sie "
+"können uns über Ihre Website oder App benachrichtigen, indem Sie @colorlib "
+"Tweeten. Sobald die Liste lange genug ist, werden wir einen Beitrag "
+"schreiben, um die besten Beispiele zu präsentieren."
 
 #: views/info.tpl:80
 msgid "Questions or problems? Contact me at %s or open an issue on %s."
 msgstr ""
+"Fragen oder Probleme? Kontaktieren Sie mich auf %s oder öffnen Sie ein "
+"Ticket auf %s."
 
 #: views/info.tpl:81
 msgid "Feature request"
-msgstr ""
+msgstr "Anfragen für zukünftige Verbesserungen"
 
 #: views/info.tpl:82
 msgid ""
 "Missing something? Drop a feature request on %s and we will see what can be "
 "done."
 msgstr ""
+"Vermissen Sie etwas? Öffnen Sie ein Ticket auf %s und wir werden sehen was "
+"getan werden kann."
 
 #: views/info.tpl:83
 msgid "Copyright"
-msgstr ""
+msgstr "Copyright"
 
 #: views/info.tpl:88
 msgid "Here are some photos how you can use it."
 msgstr ""
+"Hier sind einige Beispiele in der die TerrariumPI Software verwendet wurde."
 
 #: views/profile.tpl:15
 msgid "Edit"
-msgstr ""
+msgstr "Bearbeiten"
 
 #: views/profile.tpl:52
 msgid "General information"
-msgstr ""
+msgstr "Allgemeine Information"
 
 #: views/profile.tpl:70
 msgid "Gender"
-msgstr ""
+msgstr "Geschlecht"
 
 #: views/profile.tpl:77
 msgid "Age"
-msgstr ""
+msgstr "Alter"
 
 #: views/profile.tpl:88
 msgid "Species"
-msgstr ""
+msgstr "Spezielles"
 
 #: views/profile.tpl:95
 msgid "Latin name"
-msgstr ""
+msgstr "Lateinischer Name"
 
 #: views/profile.tpl:102
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: views/profile.tpl:171
 msgid "More information"
-msgstr ""
+msgstr "Mehr Informationen"
 
 #: views/sensor_settings.tpl:16
 msgid "Here you can configure your sensors."
-msgstr ""
+msgstr "Hier können Sie Ihre Sensoren konfigurieren."
 
 #: views/sensor_settings.tpl:67
 msgid "Add new sensor"
-msgstr ""
+msgstr "Neuen Sensor hinzufügen"
 
 #: views/switch_settings.tpl:16
 msgid "Here you can configure your power switches."
-msgstr ""
+msgstr "Hier können Sie Ihre Schalter konfigurieren."
 
 #: views/switch_settings.tpl:55
 msgid "Add new switch"
-msgstr ""
+msgstr "Neuen Schalter hinzufügen"
 
 #: views/switch_settings.tpl:83
 msgid "GPIO Inverse"
-msgstr ""
+msgstr "GPIO Umkehren"
 
 #: views/system_environment.tpl:16
 msgid "Here you can configure your environment."
-msgstr ""
+msgstr "Hier können Sie Ihre Systemumgebung konfigurieren."
 
 #: views/system_settings.tpl:16
 msgid "Here you can configure your TerrariumPI server."
-msgstr ""
+msgstr "Hier können Sie Ihre Systemeinstellungen konfigurieren."
 
 #: views/system_settings.tpl:34
 msgid "Language"
-msgstr ""
+msgstr "Sprache"
 
 #: views/system_settings.tpl:43
 msgid "Temperature indicator"
-msgstr ""
+msgstr "Temperaturanzeige"
 
 #: views/system_settings.tpl:47
 msgid "Celsius"
-msgstr ""
+msgstr "Celsius"
 
 #: views/system_settings.tpl:48
 msgid "Fahrenheit"
-msgstr ""
+msgstr "Fahrenheit"
 
 #: views/system_settings.tpl:54
 msgid "Admin name"
-msgstr ""
+msgstr "Benutzername"
 
 #: views/system_settings.tpl:60
 msgid "New admin password"
-msgstr ""
+msgstr "Neues Passwort"
 
 #: views/system_settings.tpl:66
 msgid "Current admin password"
-msgstr ""
+msgstr "Neues Passwort wiederholen"
 
 #: views/system_settings.tpl:72
 msgid "Pi power usage in W"
-msgstr ""
+msgstr "Pi Stromverbrauch in Watt"
 
 #: views/system_settings.tpl:78
 msgid "Power price"
-msgstr ""
+msgstr "Strompreis"
 
 #: views/system_settings.tpl:84
 msgid "Water price"
-msgstr ""
+msgstr "Wasserpreis"
 
 #: views/system_settings.tpl:90
 msgid "IP or hostname"
-msgstr ""
+msgstr "IP oder Hostname"
 
 #: views/system_settings.tpl:96
 msgid "Port number"
-msgstr ""
+msgstr "Port Nummer"
 
 #: views/system_settings.tpl:102
 msgid "OWFS server port"
-msgstr ""
+msgstr "OWFS Server Port"
 
 #: views/system_status.tpl:6
 msgid "CPU Load"
-msgstr ""
+msgstr "CPU Auslastung"
 
 #: views/system_status.tpl:62
 msgid "CPU Temperature"
-msgstr ""
+msgstr "CPU Temperatur"
 
 #: views/system_status.tpl:118
 msgid "Memory usage"
-msgstr ""
+msgstr "Speichernutzung"
 
 #: views/weather_forecast.tpl:39
 msgid "City"
-msgstr ""
+msgstr "Stadt"
 
 #: views/weather_forecast.tpl:58
 msgid "Mon"
-msgstr ""
+msgstr "Mo"
 
 #: views/weather_forecast.tpl:66
 msgid "Tue"
-msgstr ""
+msgstr "Di"
 
 #: views/weather_forecast.tpl:74
 msgid "Wed"
-msgstr ""
+msgstr "Mi"
 
 #: views/weather_forecast.tpl:82
 msgid "Thu"
-msgstr ""
+msgstr "Do"
 
 #: views/weather_forecast.tpl:90
 msgid "Fri"
-msgstr ""
+msgstr "Fr"
 
 #: views/weather_forecast.tpl:98
 msgid "Sat"
-msgstr ""
+msgstr "Sa"
 
 #: views/weather_settings.tpl:16
 msgid "Here you can configure the weather settings."
-msgstr ""
+msgstr "Hier können Sie die Wettereinstellungen konfigurieren."
 
 #: views/webcam_settings.tpl:16
 msgid "Here you can configure your webcams."
-msgstr ""
+msgstr "Hier können Sie Ihre Webcams konfigurieren."
 
 #: views/webcam_settings.tpl:57
 msgid "Add new webcam"
-msgstr ""
+msgstr "Neue Webcam hinzufügen"
 
 #: Missing text string
 msgid "1Wire bus"
-msgstr ""
+msgstr "1Wire Bus"
 
 #: Missing text string
 msgid "1Wire DS18B20 wiring scheme"
-msgstr ""
+msgstr "1Wire DS18B20 Schaltplan"
 
 #: Missing text string
 msgid "1Wire sensor 1"
-msgstr ""
+msgstr "1Wire Sensor 1"
 
 #: Missing text string
 msgid "1Wire sensor 2"
-msgstr ""
+msgstr "1Wire Sensor 2"
 
 #: Missing text string
 msgid "4 Ports GPIO relay board"
-msgstr ""
+msgstr "Relaiskarte mit 4 GPIO Anschlüssen"
 
 #: Missing text string
 msgid "4 Ports USB relay board"
-msgstr ""
+msgstr "Relaiskarte mit 4 USB Anschlüssen"
 
 #: Missing text string
 msgid "Avatar"
-msgstr ""
+msgstr "Benutzerbild"
 
 #: Missing text string
 msgid "Click to change image"
-msgstr ""
+msgstr "Klicken Sie hier, um das Bild zu ändern"
 
 #: Missing text string
 msgid "Closed"
-msgstr ""
+msgstr "Abgeschlossen"
 
 #: Missing text string
 msgid "Connection lost"
-msgstr ""
+msgstr "Verbindung unterbrochen"
 
 #: Missing text string
 msgid "Connection restored"
-msgstr ""
+msgstr "Verbindung wiederhergestellt"
 
 #: Missing text string
 msgid "Current value"
-msgstr ""
+msgstr "Aktueller Wert"
 
 #: Missing text string
 msgid "Current weather widget screenshot"
-msgstr ""
+msgstr "Aktueller Wetter Widget Screenshot"
 
 #: Missing text string
 msgid "DHT22 GPIO wiring scheme"
-msgstr "DHT22 GPIO Schaltschema"
+msgstr "DHT22 GPIO Schaltplan"
 
 #: Missing text string
 msgid "DHT22 temperature and humidity sensor"
-msgstr "DHT22 Temperatur- und Feuchtigkeitssensor"
+msgstr "DHT22 Temperatur Luftfeuchtigkeitssensor"
 
 #: Missing text string
 msgid "Door history graph"
-msgstr ""
+msgstr "Türengrafik"
 
 #: Missing text string
 msgid "Doors overview screenshot"
-msgstr ""
+msgstr "Türenübersicht Screenshot"
 
 #: Missing text string
 msgid "Free memory"
-msgstr ""
+msgstr "Freier Speicher"
 
 #: Missing text string
 msgid "Github"
@@ -2182,11 +2516,11 @@ msgstr "Github"
 
 #: Missing text string
 msgid "GPIO Magnetic door sensor"
-msgstr "GPIO Magnetischer Türsensor"
+msgstr "Magnetischer GPIO Türsensor"
 
 #: Missing text string
 msgid "GPIO relay board wiring scheme"
-msgstr ""
+msgstr "Schaltplan GPIO Relaiskarte"
 
 #: Missing text string
 msgid "I2C bus"
@@ -2206,19 +2540,19 @@ msgstr "Information"
 
 #: Missing text string
 msgid "Load"
-msgstr ""
+msgstr "Last jetzt"
 
 #: Missing text string
 msgid "Load 15"
-msgstr ""
+msgstr "Last 15 min."
 
 #: Missing text string
 msgid "Load 5"
-msgstr ""
+msgstr "Last 5 min."
 
 #: Missing text string
 msgid "Open"
-msgstr "Öffnen"
+msgstr "Offen"
 
 #: Missing text string
 msgid "Profile image"
@@ -2238,7 +2572,7 @@ msgstr "Raspberry Pi Kamera"
 
 #: Missing text string
 msgid "Select an option"
-msgstr "Wähle eine Option"
+msgstr "Wählen einer Option"
 
 #: Missing text string
 msgid "sensor"
@@ -2246,108 +2580,108 @@ msgstr "Sensor"
 
 #: Missing text string
 msgid "Sensor history graph"
-msgstr ""
+msgstr "Sensorgrafik"
 
 #: Missing text string
 msgid "Sensors overview screenshot"
-msgstr ""
+msgstr "Sensorübersicht Screenshot"
 
 #: Missing text string
 msgid "Switches overview screenshot"
-msgstr ""
+msgstr "Schalterübersicht Screenshot"
 
 #: Missing text string
 msgid "Switch history graph"
-msgstr ""
+msgstr "Grafik umschalten"
 
 #: Missing text string
 msgid "System environment screenshot"
-msgstr ""
+msgstr "Systemumgebung-Screenshot"
 
 #: Missing text string
 msgid "TerrariumPI test setup"
-msgstr ""
+msgstr "TerrariumPI Testaufbau"
 
 #: Missing text string
 msgid "Toggle power switch"
-msgstr ""
+msgstr "Ein oder Ausschalten"
 
 #: Missing text string
 msgid "Total memory"
-msgstr ""
+msgstr "Gesamtspeicher"
 
 #: Missing text string
 msgid "Total open for"
-msgstr ""
+msgstr "Gesamt offen für"
 
 #: Missing text string
 msgid "USB Relay board"
-msgstr ""
+msgstr "USB Relaiskarte"
 
 #: Missing text string
 msgid "USB Webcam"
-msgstr ""
+msgstr "USB Webcam"
 
 #: Missing text string
 msgid "Used memory"
-msgstr ""
+msgstr "Verwendeter Speicher"
 
 #: Missing text string
 msgid "Weather day forecast screenshot"
-msgstr ""
+msgstr "Wetter Tagesvorhersage Screenshot"
 
 #: Missing text string
 msgid "Weather forecast screenshot"
-msgstr ""
+msgstr "Wettervorhersage Screenshot"
 
 #: Missing text string
 msgid "Webcam overview screenshot"
-msgstr ""
+msgstr "Webcam Übersicht-Screenshot"
 
 #: Missing text string
 msgid "Week forecast screenshot"
-msgstr ""
+msgstr "Wetter Wochenvorhersage Screenshot"
 
 #: Missing text string
 msgid "Weather forecast"
-msgstr ""
+msgstr "Wettervorhersage"
 
 #: Missing text string
 msgid "Weather settings"
-msgstr ""
+msgstr "Wettereinstellungen"
 
 #: Missing text string
 msgid "Sensor temperature"
-msgstr ""
+msgstr "Temperatursensor"
 
 #: Missing text string
 msgid "Sensor humidity"
-msgstr ""
+msgstr "Luftfeuchtesensor"
 
 #: Missing text string
 msgid "Sensor settings"
-msgstr ""
+msgstr "Sensoreinstellungen"
 
 #: Missing text string
 msgid "Switch status"
-msgstr ""
+msgstr "Schaltzustand"
 
 #: Missing text string
 msgid "Switch settings"
-msgstr ""
+msgstr "Schalter Einstellungen"
 
 #: Missing text string
 msgid "Webcam settings"
-msgstr ""
+msgstr "Webcam Einstellungen"
 
 #: Missing text string
 msgid "System status"
-msgstr ""
+msgstr "Systemstatus"
 
 #: Missing text string
 msgid "System environment"
-msgstr ""
+msgstr "Systemumgebung"
 
 #: Missing text string
 msgid "System settings"
-msgstr ""
+msgstr "Systemeinstellungen"
