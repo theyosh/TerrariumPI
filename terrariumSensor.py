@@ -195,7 +195,7 @@ class terrariumSensor:
               temperature = float(w1data.group('value')) / 1000
               current = float(temperature)
           elif self.get_hardware_type() in terrariumSensor.valid_dht_sensors.keys():
-            humidity, temperature = self.sensor.read_retry(terrariumSensor.valid_dht_sensors[self.get_hardware_type()], self.sensor_address)
+            humidity, temperature = self.sensor.read_retry(terrariumSensor.valid_dht_sensors[self.get_hardware_type()], float(self.sensor_address))
             current = float(temperature)
         elif 'humidity' == self.get_type():
           if self.get_hardware_type() == 'owfs':
@@ -204,10 +204,10 @@ class terrariumSensor:
             # Not tested / No hardware to test with
             pass
           elif self.get_hardware_type() in terrariumSensor.valid_dht_sensors.keys():
-            humidity, temperature = self.sensor.read_retry(terrariumSensor.valid_dht_sensors[self.get_hardware_type()], self.sensor_address)
+            humidity, temperature = self.sensor.read_retry(terrariumSensor.valid_dht_sensors[self.get_hardware_type()], float(self.sensor_address))
             current = float(humidity)
 
-        if current is None or not (self.get_limit_min() < current < self.get_limit_max()):
+        if current is None or not (self.get_limit_min() <= current <= self.get_limit_max()):
           # Invalid current value.... log and ingore
           logger.warn('Measured value %f%s from %s sensor \'%s\' is outside valid range %.2f%s - %.2f%s in %.5f seconds.' % (current,
                                                                                                                              self.get_indicator(),

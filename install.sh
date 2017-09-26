@@ -31,11 +31,11 @@ raspi-config
 dpkg-reconfigure tzdata
 
 # Install multiple python modules
-pip install gevent untangle uptime bottle bottle_websocket
+pip install --upgrade gevent untangle uptime bottle bottle_websocket
 
 # Install https://pypi.python.org/pypi/pylibftdi
 # Docu https://pylibftdi.readthedocs.io/
-pip install pylibftdi
+pip install --upgrade pylibftdi
 # Make sure that the normal Pi user can read and write to the usb driver
 echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", GROUP="dialout", MODE="0660"' > /etc/udev/rules.d/99-libftdi.rules
 echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", GROUP="dialout", MODE="0660"' >> /etc/udev/rules.d/99-libftdi.rules
@@ -51,8 +51,12 @@ modprobe i2c-bcm2708
 modprobe i2c-dev
 
 # Install Adafruit DHT Python library
-git clone https://github.com/adafruit/Adafruit_Python_DHT.git
+if [ ! -d Adafruit_Python_DHT ]
+then
+  git clone https://github.com/adafruit/Adafruit_Python_DHT.git
+fi
 cd Adafruit_Python_DHT
+git pull
 sudo python setup.py install
 
 # Remove unneeded OWS services
@@ -63,4 +67,9 @@ if [ `grep -ic "start.sh" /etc/rc.local` -eq 0 ]; then
   sed -i.bak "s@^exit 0@# Starting TerrariumPI server\n${BASEDIR}/start.sh\n\nexit 0@" /etc/rc.local
 fi
 
+# Make sure GPIO group is available
+groupadd gpio 2> /dev/null
+usermod -a -G gpio pi 2> /dev/null
+
+# We are done!
 echo "Instaltion is done. Please reboot once to get the I2C and Adafruit DHT libary working correctly"
