@@ -28,7 +28,7 @@ msgid "Holds the sensor hardware type. Supported hardware types are: %s."
 msgstr ""
 
 #: terrariumTranslations.py:27
-msgid "Holds the sensor address. Depending on hardware type, it is either a read only hex number or GPIO pin. When using DHT11, DHT22 or AM2302 use <strong>Broadcom</strong> pin numbering (BCM)"
+msgid "Holds the sensor address. Depending on hardware type, it is either a read only hex number or GPIO pin. When using DHT11, DHT22 or AM2302 use <strong>Broadcom</strong> pin numbering (BCM). For a quick reference about BCM and Physical pin numbers: <a target="_blank" href="https://pinout.xyz" >https://pinout.xyz</a>."
 msgstr ""
 
 #: terrariumTranslations.py:28
