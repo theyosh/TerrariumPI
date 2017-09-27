@@ -28,7 +28,7 @@ msgid "Holds the sensor hardware type. Supported hardware types are: %s."
 msgstr ""
 
 #: terrariumTranslations.py:27
-msgid "Holds the sensor address. Depending on hardware type, it is either a read only hex number or GPIO pin. When using DHT11, DHT22 or AM2302 use <strong>Broadcom</strong> pin numbering (BCM)"
+msgid "Holds the sensor address. Depending on hardware type, it is either a read only hex number or GPIO pin. When using DHT11, DHT22 or AM2302 use <strong>Broadcom</strong> pin numbering (BCM). For a quick reference about BCM and Physical pin numbers: <a target="_blank" href="https://pinout.xyz" >https://pinout.xyz</a>."
 msgstr ""
 
 #: terrariumTranslations.py:28
@@ -64,7 +64,7 @@ msgid "Holds the switch hardware type. Supported hardware types are: %s."
 msgstr ""
 
 #: terrariumTranslations.py:39
-msgid "Holds the switch address. Depending on hardware type, it is either a number or GPIO pin. For GPIO use <strong>normal</strong> GPIO numbering."
+msgid "Holds the switch address. Depending on hardware type, it is either a number or GPIO pin. For GPIO use <strong>Physical</strong> GPIO pin numbering."
 msgstr ""
 
 #: terrariumTranslations.py:40
@@ -84,7 +84,7 @@ msgid "Holds the door hardware type. Supported hardware types are: %s."
 msgstr ""
 
 #: terrariumTranslations.py:47
-msgid "Holds the door address. When using GPIO use <strong>normal</strong> GPIO pin numbering as address."
+msgid "Holds the door address. When using GPIO use <strong>Physical</strong> GPIO pin numbering as address."
 msgstr ""
 
 #: terrariumTranslations.py:48
