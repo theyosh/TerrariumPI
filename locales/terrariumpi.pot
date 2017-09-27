@@ -1,11 +1,11 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2016 TheYOSH
-# Joshua (TheYOSH) Rubingh, <theyosh@theyosh.nl>, 2016.
+# Copyright (C) 2016-2017 TheYOSH
+# Joshua (TheYOSH) Rubingh, <theyosh@theyosh.nl>, 2016-2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-09-16 21:17+CEST\n"
+"POT-Creation-Date: 2017-09-27 20:19+CEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgid "Holds the sensor hardware type. Supported hardware types are: %s."
 msgstr ""
 
 #: terrariumTranslations.py:27
-msgid "Holds the sensor address. Depending on hardware type, it is either a read only hex number or GPIO pin. When using DHT11, DHT22 or AM2302 use <strong>Broadcom</strong> pin numbering (BCM). For a quick reference about BCM and Physical pin numbers: <a target="_blank" href="https://pinout.xyz" >https://pinout.xyz</a>."
+msgid "Holds the sensor address. Depending on hardware type, it is either a read only hex number or GPIO pin. When using DHT11, DHT22 or AM2302 use <strong>Broadcom</strong> pin numbering (BCM). For a quick reference about BCM and Physical pin numbers: %s."
 msgstr ""
 
 #: terrariumTranslations.py:28

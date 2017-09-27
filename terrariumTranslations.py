@@ -24,7 +24,7 @@ class terrariumTranslations():
 
     # Sensors
     self.translations['sensor_field_hardware'] = _('Holds the sensor hardware type. Supported hardware types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSensor.valid_hardware_types) + '</strong>')
-    self.translations['sensor_field_address'] = _('Holds the sensor address. Depending on hardware type, it is either a read only hex number or GPIO pin. When using DHT11, DHT22 or AM2302 use <strong>Broadcom</strong> pin numbering (BCM)')
+    self.translations['sensor_field_address'] = _('Holds the sensor address. Depending on hardware type, it is either a read only hex number or GPIO pin. When using DHT11, DHT22 or AM2302 use <strong>Broadcom</strong> pin numbering (BCM). For a quick reference about BCM and Physical pin numbers: %s.') % ('<a target="_blank" href="https://pinout.xyz">https://pinout.xyz</a>')
     self.translations['sensor_field_type'] = _('Holds the sensor type. Supported sensor types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSensor.valid_sensor_types) + '</strong>')
     self.translations['sensor_field_name'] = _('Holds the name of the sensor.')
     self.translations['sensor_field_alarm_min'] = _('Holds the sensor lower alarm value of the sensor. When below this value, alarms can be triggered.')
@@ -36,7 +36,7 @@ class terrariumTranslations():
 
     # Switches
     self.translations['switch_field_hardware'] = _('Holds the switch hardware type. Supported hardware types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSwitch.valid_hardware_types) + '</strong>')
-    self.translations['switch_field_address'] = _('Holds the switch address. Depending on hardware type, it is either a number or GPIO pin. For GPIO use <strong>normal</strong> GPIO numbering.')
+    self.translations['switch_field_address'] = _('Holds the switch address. Depending on hardware type, it is either a number or GPIO pin. For GPIO use <strong>Physical</strong> GPIO pin numbering.')
     self.translations['switch_field_name'] = _('Holds the switch name.')
     self.translations['switch_field_power_wattage'] = _('Holds the switch power usage in Watt when switched on.')
     self.translations['switch_field_water_flow'] = _('Holds the switch water flow in liters per minute when switched on')
@@ -44,7 +44,7 @@ class terrariumTranslations():
 
     # Doors
     self.translations['door_field_hardware'] = _('Holds the door hardware type. Supported hardware types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumDoor.valid_hardware_types) + '</strong>')
-    self.translations['door_field_address'] = _('Holds the door address. When using GPIO use <strong>normal</strong> GPIO pin numbering as address.')
+    self.translations['door_field_address'] = _('Holds the door address. When using GPIO use <strong>Physical</strong> GPIO pin numbering as address.')
     self.translations['door_field_name'] = _('Holds the door name.')
     # End doors
 

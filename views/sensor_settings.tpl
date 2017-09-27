@@ -19,7 +19,7 @@
                 <strong>{{_('Hardware')}}</strong>: {{!translations.get_translation('sensor_field_hardware')}}
               </li>
               <li>
-                <strong>{{_('Address')}}</strong>: {{translations.get_translation('sensor_field_address')}}
+                <strong>{{_('Address')}}</strong>: {{!translations.get_translation('sensor_field_address')}}
               </li>
               <li>
                 <strong>{{_('Type')}}</strong>: {{!translations.get_translation('sensor_field_type')}}
