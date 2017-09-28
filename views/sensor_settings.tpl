@@ -115,19 +115,19 @@
                         </div>
                         <div class="col-md-1 col-sm-1 col-xs-12 form-group">
                           <label for="sensor_[nr]_alarm_min">{{_('Alarm min')}}</label>
-                          <input class="form-control" name="sensor_[nr]_alarm_min" placeholder="{{_('Alarm min')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_alarm_min')}}">
+                          <input class="form-control" name="sensor_[nr]_alarm_min" placeholder="{{_('Alarm min')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom"= title="" data-original-title="{{translations.get_translation('sensor_field_alarm_min')}}">
                         </div>
                         <div class="col-md-1 col-sm-1 col-xs-12 form-group">
                           <label for="sensor_[nr]_alarm_max">{{_('Alarm max')}}</label>
-                          <input class="form-control" name="sensor_[nr]_alarm_max" placeholder="{{_('Alarm max')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_alarm_max')}}">
+                          <input class="form-control" name="sensor_[nr]_alarm_max" placeholder="{{_('Alarm max')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_alarm_max')}}">
                         </div>
                         <div class="col-md-1 col-sm-1 col-xs-12 form-group">
                           <label for="sensor_[nr]_min">{{_('Limit min')}}</label>
-                          <input class="form-control" name="sensor_[nr]_limit_min" placeholder="{{_('Limit min')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_limit_min')}}">
+                          <input class="form-control" name="sensor_[nr]_limit_min" placeholder="{{_('Limit min')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_limit_min')}}">
                         </div>
                         <div class="col-md-1 col-sm-1 col-xs-12 form-group">
                           <label for="sensor_[nr]_max">{{_('Limit max')}}</label>
-                          <input class="form-control" name="sensor_[nr]_limit_max" placeholder="{{_('Limit max')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_limit_max')}}">
+                          <input class="form-control" name="sensor_[nr]_limit_max" placeholder="{{_('Limit max')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_limit_max')}}">
                         </div>
                         <div class="col-md-1 col-sm-1 col-xs-12 form-group">
                           <label for="sensor_[nr]_current">{{_('Current')}}</label>

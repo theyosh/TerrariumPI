@@ -95,11 +95,11 @@
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                           <label for="switch_[nr]_power_wattage">{{_('Power usage in Watt')}}</label>
-                          <input class="form-control" name="switch_[nr]_power_wattage" placeholder="{{_('Power usage in Watt')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_power_wattage')}}">
+                          <input class="form-control" name="switch_[nr]_power_wattage" placeholder="{{_('Power usage in Watt')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_power_wattage')}}">
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                           <label for="switch_[nr]_water_flow">{{_('Water flow in L/m')}}</label>
-                          <input class="form-control" name="switch_[nr]_water_flow" placeholder="{{_('Water flow in L/m')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_water_flow')}}">
+                          <input class="form-control" name="switch_[nr]_water_flow" placeholder="{{_('Water flow in L/m')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_water_flow')}}">
                         </div>
                       </div>
                     </div>
