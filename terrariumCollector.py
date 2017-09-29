@@ -115,6 +115,8 @@ class terrariumCollector():
                       (id, type, now, newdata['current'], newdata['limit_min'], newdata['limit_max'], newdata['alarm_min'], newdata['alarm_max'], newdata['alarm']))
 
         if type in ['switches']:
+          if 'time' in newdata:
+            now = newdata['time']
           cur.execute('REPLACE INTO switch_data (id, timestamp, state, power_wattage, water_flow) VALUES (?,?,?,?,?)',
                       (id, now, newdata['state'], newdata['power_wattage'], newdata['water_flow']))
 
@@ -180,6 +182,7 @@ class terrariumCollector():
     # Create new object for the previous state. Copy data and invert boolean value
     old_swich = switch.copy()
     old_swich['state'] = not switch['state']
+    old_swich['time'] = int(time.time()) - 1
 
     self.__log_data('switches',switch_id,old_swich)
     self.__log_data('switches',switch_id,switch)
