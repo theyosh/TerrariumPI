@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2017-09-16 21:18+0200\n"
-"PO-Revision-Date: 2017-09-16 22:56+0200\n"
+"POT-Creation-Date: 2017-09-30 14:37+0200\n"
+"PO-Revision-Date: 2017-09-30 14:38+0200\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: terrariumTranslations.py:21
 msgid "Holds the external source URL. Supported sources are: %s."
-msgstr ""
+msgstr "Bevat de externe bron URL. Ondersteunde bronnen zijn: %s."
 
 #: terrariumTranslations.py:22
 msgid ""
@@ -31,18 +31,23 @@ msgstr ""
 
 #: terrariumTranslations.py:26
 msgid "Holds the sensor hardware type. Supported hardware types are: %s."
-msgstr ""
+msgstr "Bevat de sensor hardware type. Ondersteunde hardware types zijn: %s."
 
 #: terrariumTranslations.py:27
 msgid ""
 "Holds the sensor address. Depending on hardware type, it is either a read "
 "only hex number or GPIO pin. When using DHT11, DHT22 or AM2302 use "
-"<strong>Broadcom</strong> pin numbering (BCM)"
+"<strong>Broadcom</strong> pin numbering (BCM). For a quick reference about "
+"BCM and Physical pin numbers: %s."
 msgstr ""
+"Bevat het sensoradres. Afhankelijk van het type hardware is het een alleen-"
+"lezen hex-nummer of een GPIO-pin. Wanneer u DHT11, DHT22 of AM2302 gebruikt, "
+"gebruik <strong> Broadcom </ strong> pin nummering (BCM). Voor een snelle "
+"verwijzing naar BCM en Fysische pinnummers: %s."
 
 #: terrariumTranslations.py:28
 msgid "Holds the sensor type. Supported sensor types are: %s."
-msgstr ""
+msgstr "Bevat het sensor type. Ondersteunde sensor types zijn: %s."
 
 #: terrariumTranslations.py:29
 msgid "Holds the name of the sensor."
@@ -53,35 +58,48 @@ msgid ""
 "Holds the sensor lower alarm value of the sensor. When below this value, "
 "alarms can be triggered."
 msgstr ""
+"Bevat de sensor onderste alarmwaarde van de sensor. Onder deze waarde kunnen "
+"alarmen worden geactiveerd."
 
 #: terrariumTranslations.py:31
 msgid ""
 "Holds the sensor maximum alarm value of the sensor. When above this value, "
 "alarms can be triggered."
 msgstr ""
+"Bevat de sensor maximale alarmwaarde van de sensor. Boven deze waarde kunnen "
+"alarmen worden geactiveerd."
 
 #: terrariumTranslations.py:32
 msgid "Holds the sensor lowest value that should be used in the graphs."
 msgstr ""
+"Bevat de laagste waarde van de sensor die in de grafieken moet worden "
+"gebruikt."
 
 #: terrariumTranslations.py:33
 msgid "Holds the sensor maximum value that should be used in the graphs."
 msgstr ""
+"Bevat de maximale waarde van de sensor die in de grafieken moet worden "
+"gebruikt."
 
 #: terrariumTranslations.py:34
 msgid "Shows the sensor current value in temperature or humidity (read only)."
 msgstr ""
-"Toont de sensor huidige waarde in temperatuur of vochtigheid (alleen lezen)."
+"Toont de sensor huidige waarde in temperatuur of luchtvochtigheid (alleen "
+"lezen)."
 
 #: terrariumTranslations.py:38
 msgid "Holds the switch hardware type. Supported hardware types are: %s."
 msgstr ""
+"Bevat de schakelaar hardware type. Ondersteunde hardware types zijn: %s."
 
 #: terrariumTranslations.py:39
 msgid ""
 "Holds the switch address. Depending on hardware type, it is either a number "
-"or GPIO pin. For GPIO use <strong>normal</strong> GPIO numbering."
+"or GPIO pin. For GPIO use <strong>Physical</strong> GPIO pin numbering."
 msgstr ""
+"Bevat het schakeladres. Afhankelijk van het type hardware is het een nummer "
+"of een GPIO-pin. Voor GPIO gebruikt u <strong>Fysieke</ strong> GPIO pin "
+"nummering."
 
 #: terrariumTranslations.py:40
 msgid "Holds the switch name."
@@ -89,21 +107,24 @@ msgstr "Bevat de schakelaar naam."
 
 #: terrariumTranslations.py:41
 msgid "Holds the switch power usage in Watt when switched on."
-msgstr ""
+msgstr "Bevat het schakelvermogensverbruik in Watt wanneer ingeschakeld."
 
 #: terrariumTranslations.py:42
 msgid "Holds the switch water flow in liters per minute when switched on"
 msgstr ""
+"Houd de schakelaar waterstroom in liter per minuut wanneer ingeschakeld."
 
 #: terrariumTranslations.py:46
 msgid "Holds the door hardware type. Supported hardware types are: %s."
-msgstr ""
+msgstr "Bevat de deurhardware type. Ondersteunde hardware types zijn: %s."
 
 #: terrariumTranslations.py:47
 msgid ""
-"Holds the door address. When using GPIO use <strong>normal</strong> GPIO pin "
-"numbering as address."
+"Holds the door address. When using GPIO use <strong>Physical</strong> GPIO "
+"pin numbering as address."
 msgstr ""
+"Bevat het deuradres. Wanneer u GPIO gebruikt, gebruikt u <strong>Physical</ "
+"strong> GPIO pin nummering als adres"
 
 #: terrariumTranslations.py:48
 msgid "Holds the door name."
@@ -111,7 +132,7 @@ msgstr "Bevat de deur naam."
 
 #: terrariumTranslations.py:52
 msgid "Holds the webcam location source. Supported sources are: %s"
-msgstr ""
+msgstr "Bevat de webcam locatie bron. Ondersteunde bronnen zijn: %s"
 
 #: terrariumTranslations.py:53
 msgid "Holds the webcam name."
@@ -119,7 +140,7 @@ msgstr "Bevat de webcam naam."
 
 #: terrariumTranslations.py:54
 msgid "Holds the webcam rotation of the image."
-msgstr ""
+msgstr "Bevat de webcam rotatie van de afbeelding."
 
 #: terrariumTranslations.py:55
 msgid "Shows the webcam preview image."
@@ -143,6 +164,11 @@ msgid ""
 "lighting variable to the actual amount of daylight. When selecting '%s', the "
 "light will put on and off at selected times."
 msgstr ""
+"Selecteer de modus waarop de lichten aan en uit worden gezet. Selecteer '%s' "
+"om de zonsopkomst en zonsondergang op uw locatie te gebruiken. Dit zal de "
+"hoeveelheid licht variabele tot de werkelijke hoeveelheid daglicht maken. "
+"Bij het selecteren van '%s', zal het licht aan en uit zetten op "
+"geselecteerde tijden."
 
 #: terrariumTranslations.py:60 terrariumTranslations.py:61
 #: terrariumTranslations.py:62 terrariumTranslations.py:80
@@ -220,6 +246,9 @@ msgid ""
 "above. Normally these are the switches connected to the lights. Select all "
 "needed switches below."
 msgstr ""
+"Selecteer de aan / uit-schakelaars die op de geselecteerde tijdstippen "
+"moeten worden ingeschakeld. Normaal gesproken zijn dit de schakelaars die op "
+"de lichten zijn aangesloten. Selecteer alle benodigde schakelaars hieronder."
 
 #: terrariumTranslations.py:69
 msgid ""
@@ -266,6 +295,9 @@ msgid ""
 "above. Normally these are the switches connected to the sprayer. Select all "
 "needed switches below."
 msgstr ""
+"Selecteer de aan / uit-schakelaars die op de geselecteerde tijdstippen "
+"moeten worden ingeschakeld. Normaal gesproken zijn deze de schakelaars "
+"aangesloten op de sproeier. Selecteer alle benodigde schakelaars hieronder."
 
 #: terrariumTranslations.py:75
 msgid ""
@@ -273,6 +305,9 @@ msgid ""
 "selecting multiple sensors, the average is calculated to determine the final "
 "humidity."
 msgstr ""
+"Selecteer de luchtvochtigheidssensoren die gebruikt worden om de "
+"luchtvochtigheid te regelen. Bij het selecteren van meerdere sensoren wordt "
+"het gemiddelde berekend om de uiteindelijke luchtvochtigheid te bepalen."
 
 #: terrariumTranslations.py:78
 msgid ""
@@ -300,6 +335,11 @@ msgid ""
 "on and off times. When the sun rises the heating system will stop. Use '%s' "
 "mode to have the heating running when the lights are off."
 msgstr ""
+"Selecteer de bedrijfsmodus. Gebruik de modus '%s' om de periode te "
+"selecteren waarin de verwarming wordt uitgevoerd. Selecteer '%s' modus om de "
+"zonsopgang en zonsondergang te gebruiken als aan en uit tijden. Als de zon "
+"opkomt, stopt het verwarmingssysteem. Gebruik de '%s' modus om de verwarming "
+"te laten draaien als de verlichting uit is."
 
 #: terrariumTranslations.py:80 terrariumTranslations.py:89
 #: views/inc/usage_environment.tpl:137 views/inc/usage_environment.tpl:231
@@ -331,6 +371,9 @@ msgid ""
 "above. Normally these are the switches connected to the heater. Select all "
 "needed switches below."
 msgstr ""
+"Selecteer de aan / uit-schakelaars die op de geselecteerde tijdstippen "
+"moeten worden ingeschakeld. Normaal gesproken zijn deze de schakelaars "
+"aangesloten op de verwarming. Selecteer alle benodigde schakelaars hieronder."
 
 #: terrariumTranslations.py:84 terrariumTranslations.py:93
 msgid ""
@@ -338,6 +381,9 @@ msgid ""
 "When selecting multiple sensors, the average is calculated to determine the "
 "final temperature."
 msgstr ""
+"Selecteer de temperatuursensoren die gebruikt worden om de temperatuur te "
+"regelen. Bij het selecteren van meerdere sensoren wordt het gemiddelde "
+"berekend om de eindtemperatuur te bepalen."
 
 #: terrariumTranslations.py:87
 msgid ""
@@ -379,6 +425,9 @@ msgid ""
 "above. Normally these are the switches connected to the cooler. Select all "
 "needed switches below."
 msgstr ""
+"Selecteer de aan / uit-schakelaars die op de geselecteerde tijdstippen "
+"moeten worden ingeschakeld. Normaal gesproken zijn deze de schakelaars "
+"aangesloten op de koeler. Selecteer alle benodigde schakelaars hieronder."
 
 #: terrariumTranslations.py:96
 msgid "Choose your interface language."
@@ -386,7 +435,7 @@ msgstr "Kies uw interface taal."
 
 #: terrariumTranslations.py:97
 msgid "Holds the username which can make changes (Administrator)."
-msgstr ""
+msgstr "Bevat de gebruikersnaam die wijzigingen kan doen (Administrator)."
 
 #: terrariumTranslations.py:98
 msgid ""
@@ -405,6 +454,8 @@ msgid ""
 "Holds the amount of power in Wattage that the Raspberry PI uses including "
 "all USB equipment."
 msgstr ""
+"Bevat de hoeveelheid energie in watt die de Raspberry PI gebruikt, inclusief "
+"alle USB-apparatuur."
 
 #: terrariumTranslations.py:101
 msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
@@ -427,17 +478,21 @@ msgid ""
 "Holds the host name or IP address on which the software will listen for "
 "connections. Enter :: for all addresses to bind."
 msgstr ""
+"Bevat de hostnaam of het IP-adres waarop de software naar verbindingen "
+"luistert. Vul in :: voor alle adressen om te luisteren."
 
 #: terrariumTranslations.py:105
 msgid ""
 "Holds the port number on which the software is listening for connections."
-msgstr ""
+msgstr "Bevat het poortnummer waarop de software luistert naar verbindingen."
 
 #: terrariumTranslations.py:106
 msgid ""
 "Holds the port number on which the OWFS software is running. Leave empty to "
 "disable OWFS support."
 msgstr ""
+"Bevat het poortnummer waarop de OWFS-software draait. Laat leeg om OWFS-"
+"ondersteuning uit te schakelen."
 
 #: terrariumTranslations.py:110
 msgid "Holds the name of the animal."
@@ -445,23 +500,23 @@ msgstr "Bevat de dier naam."
 
 #: terrariumTranslations.py:111
 msgid "Holds the type of the animal"
-msgstr ""
+msgstr "Bevat de type van het dier."
 
 #: terrariumTranslations.py:112
 msgid "Holds the gender of the animal."
-msgstr ""
+msgstr "Bevat het geslacht van het dier."
 
 #: terrariumTranslations.py:113
 msgid "Holds the day of birth of the animal."
-msgstr ""
+msgstr "Bevat de geboortedatum van het dier."
 
 #: terrariumTranslations.py:114
 msgid "Holds the species name of the animal."
-msgstr ""
+msgstr "Bevat de soortnaam van het dier."
 
 #: terrariumTranslations.py:115
 msgid "Holds the latin name of the animal."
-msgstr ""
+msgstr "Bevat de Latijnse naam van het dier."
 
 #: terrariumTranslations.py:116
 msgid "Holds a small description about the animal."
@@ -844,6 +899,8 @@ msgid ""
 "The Raspberry Pi should have network connection and optionally SSH enabled "
 "for remote management. Also a strong power adapter is needed (+2Amps)."
 msgstr ""
+"De Raspberry Pi moet netwerkverbinding hebben en optioneel SSH ingeschakeld "
+"voor remote management. Ook is een sterke stroom adapter nodig (+ 2Amps)."
 
 #: views/hardware.tpl:51
 msgid ""
@@ -925,12 +982,17 @@ msgid ""
 "connected and supported sensors. There can be all kind of sensors connected "
 "to this server. All supported sensors will be shown."
 msgstr ""
+"De OWFS-server wordt tijdens het opstarten automatisch gescand om de "
+"aangesloten en ondersteunde sensoren te laden. Er kunnen allerlei sensoren "
+"verbonden zijn met deze server. Alle ondersteunde sensoren worden getoond."
 
 #: views/hardware.tpl:76
 msgid ""
 "Through the I2C bus of the Raspberry Pi you can use the following hardware "
 "sensors with OWFS software"
 msgstr ""
+"Via de I2C bus van de Raspberry Pi kunt u de volgende hardware sensoren "
+"gebruiken met OWFS software"
 
 #: views/hardware.tpl:79
 msgid "HIH400"
@@ -974,6 +1036,10 @@ msgid ""
 "in Serial or BitBang. This is automatically detected when adding power "
 "switches."
 msgstr ""
+"Het USB-relaisbord heeft geen GPIO-pins nodig. Het heeft maar één USB-"
+"verbinding nodig. De TerrariumPI software ondersteunt boards die ofwel in "
+"Seriële of BitBang modus draaien. Dit wordt automatisch gedetecteerd bij het "
+"toevoegen van stroomschakelaars."
 
 #: views/hardware.tpl:101
 msgid "Denkovi"
@@ -1013,6 +1079,9 @@ msgid ""
 "There are different Raspberry Pi cameras available. If the camera is "
 "Raspberry Pi compatible, it can be used with TerrariumPI software."
 msgstr ""
+"Er zijn verschillende Raspberry Pi camera's beschikbaar. Als de camera "
+"Raspberry Pi compatibel is, kan deze worden gebruikt met TerrariumPI "
+"software."
 
 #: views/hardware.tpl:121
 msgid ""
@@ -1131,6 +1200,8 @@ msgid ""
 "The first green round check mark shows that the interface is connected with "
 "the server and that it is working as expected."
 msgstr ""
+"De eerste groene ronde vinkje laat zien dat de interface is verbonden met de "
+"server en dat het werkt zoals verwacht."
 
 #: views/inc/usage_dashboard.tpl:30
 msgid ""
@@ -1161,6 +1232,8 @@ msgid ""
 "The second indicator is a lock that shows the status of the door(s). It is "
 "green when all doors are closed."
 msgstr ""
+"De tweede indicator is een slot dat de status van de deur (en) toont. Het is "
+"groen wanneer alle deuren gesloten zijn."
 
 #: views/inc/usage_dashboard.tpl:54
 msgid ""
@@ -1189,6 +1262,8 @@ msgstr "Datum en tijd"
 msgid ""
 "The last indicator is the current time. When it is day time, a sun is shown."
 msgstr ""
+"De laatste indicator is de huidige tijd. Als het dag is, wordt er een zon "
+"getoond."
 
 #: views/inc/usage_dashboard.tpl:74
 msgid "Night"
@@ -1219,6 +1294,10 @@ msgid ""
 "indicates the load off the hardware. First bar is actual load, second is "
 "load during 5 minutes and last is load during 15 minutes."
 msgstr ""
+"De eerste tegel toont de uptime van de hardware. En het toont drie balkjes "
+"die de last van de hardware aanduiden. Eerste balk is de werkelijke "
+"belasting, de tweede is de belasting gedurende 5 minuten en de laatste is de "
+"belasting gedurende 15 minuten."
 
 #: views/inc/usage_dashboard.tpl:95
 msgid ""
@@ -1226,6 +1305,9 @@ msgid ""
 "calculated based on the power switch settings and what the state is of the "
 "switches. The bar shows a percentage of the max usage."
 msgstr ""
+"De tweede tegel toont het stroomverbruik in Watts. Het bedrag wordt berekend "
+"op basis van de stroomschakelaar instellingen en wat de toestand van de "
+"schakelaars is. De balk toont een percentage van het maximale gebruik."
 
 #: views/inc/usage_dashboard.tpl:101
 msgid ""
@@ -1233,6 +1315,10 @@ msgid ""
 "is calculated based on the power switch settings and what the state is of "
 "the switches. The bar shows a percentage of the max usage."
 msgstr ""
+"De derde tegel toont de huidige waterstroom in liter per minuut. Het bedrag "
+"wordt berekend op basis van de stroomschakelaar instellingen en wat de "
+"toestand van de schakelaars is. De balk toont een percentage van het "
+"maximale gebruik."
 
 #: views/inc/usage_dashboard.tpl:107
 msgid ""
@@ -1242,6 +1328,12 @@ msgid ""
 "is entered, it will show the costs of the power bill and the amount of days "
 "it is calculated on."
 msgstr ""
+"De vierde tegel toont het totale stroomverbruik vanaf het begin van het "
+"gebruik van deze software. Het zal het totale energieverbruik om de 10 "
+"minuten berekenen op basis van alle historische gegevens. Het wordt "
+"weergegeven in kilo Watt per uur. Wanneer de stroomprijs is ingevoerd, "
+"worden de kosten van de wisselrekening en het aantal dagen waarop het is "
+"berekend, weergegeven."
 
 #: views/inc/usage_dashboard.tpl:113
 msgid ""
@@ -1251,6 +1343,11 @@ msgid ""
 "it will show the costs of the water bill and the amount of days it is "
 "calculated on."
 msgstr ""
+"De vijfde tegel toont het totale waterverbruik vanaf het begin van het "
+"gebruik van deze software. Het zal het totale waterverbruik om de 10 minuten "
+"berekenen op basis van alle historische gegevens. Het wordt in liter "
+"weergegeven. Wanneer de waterprijs is ingevoerd, worden de kosten van de "
+"waterrekening en het aantal dagen waarop het is berekend, aangegeven."
 
 #: views/inc/usage_dashboard.tpl:120
 msgid ""
@@ -1258,6 +1355,9 @@ msgid ""
 "environment is divided in three parts. There is a lighting system, a spray "
 "system and a heating system."
 msgstr ""
+"Het omgeving-gedeelte toont de huidige toestand van de omgeving. Het milieu "
+"is in drie delen verdeeld. Er is een verlichtingssysteem, een sproeistelsel "
+"en een verwarmingssysteem."
 
 #: views/inc/usage_dashboard.tpl:121
 msgid ""
@@ -1273,12 +1373,17 @@ msgid ""
 "configured. It shows the chosen mode out of 'clock' or 'weather'. There are "
 "no triggers or warnings used by the light system."
 msgstr ""
+"De lampjes geven de basisinformatie over hoe het licht systeem is "
+"geconfigureerd. Het toont de gekozen modus uit 'klok' of 'weer'. Er zijn "
+"geen triggers of waarschuwingen gebruikt door het licht systeem."
 
 #: views/inc/usage_dashboard.tpl:125
 msgid ""
 "The state indicator is either green or red. Green means that it is switched "
 "on. When it is red, the lights are switched off."
 msgstr ""
+"De statusindicator is groen of rood. Groen betekent dat het is ingeschakeld. "
+"Als het rood is, zijn de lichten uitgeschakeld."
 
 #: views/inc/usage_dashboard.tpl:126
 msgid "The on value is the time stamp when the lights are turned on."
@@ -1287,6 +1392,8 @@ msgstr "De aan-waarde is het tijdstip waarop de lichten zijn ingeschakeld."
 #: views/inc/usage_dashboard.tpl:127
 msgid "The off value is the time stamp when the lights will be turned off."
 msgstr ""
+"De uit waarde is de tijdstempel wanneer de lichten uitgeschakeld zullen "
+"worden."
 
 #: views/inc/usage_dashboard.tpl:128
 msgid "The duration holds the amount of hours that the lights are on."
@@ -1303,6 +1410,10 @@ msgid ""
 "historical graphs shows also the minimum and maximum value and will be "
 "updated once every 5 minutes."
 msgstr ""
+"De grafieken op het huis zijn gecombineerde grafieken van alle temperatuur- "
+"en luchtvochtigheidssensoren. De meetmeters zijn real-time en tonen de "
+"huidige waarde. De historische grafieken tonen ook de minimum- en "
+"maximumwaarde en worden elke 5 minuten bijgewerkt."
 
 #: views/inc/usage_dashboard.tpl:150
 msgid ""
@@ -1326,8 +1437,8 @@ msgid ""
 "There are multiple graph times. On the home there is a humidity and a "
 "temperature graph shown."
 msgstr ""
-"Er zijn meerdere grafiektijden. Op het voorpagina is er een vochtigheid en "
-"een temperatuurgrafiek getoond."
+"Er zijn meerdere grafiektijden. Op het voorpagina is er een luchtvochtigheid "
+"en een temperatuurgrafiek getoond."
 
 #: views/inc/usage_dashboard.tpl:163
 msgid "Last update"
@@ -1434,12 +1545,17 @@ msgid ""
 "status of the doors. There can be as much doors added to the system as "
 "needed."
 msgstr ""
+"Op de deurpagina staat een lijst van deurensensoren die de huidige status "
+"van de deuren tonen. Er kunnen zo veel deuren aan het systeem toegevoegd "
+"worden als nodig."
 
 #: views/inc/usage_doors.tpl:78
 msgid ""
 "The list is also updating when a door is opened by hand. The state off the "
 "door is shown here in real time."
 msgstr ""
+"De lijst wordt ook bijgewerkt wanneer een deur met de hand wordt geopend. De "
+"staat buiten de deur wordt hier in real time weergegeven."
 
 #: views/inc/usage_doors.tpl:86 views/inc/usage_sensors.tpl:96
 #: views/inc/usage_sensors.tpl:206 views/inc/usage_switches.tpl:90
@@ -1468,6 +1584,10 @@ msgid ""
 "filled in. Make sure the right values are filled in. All fields with a %s "
 "are required."
 msgstr ""
+"Op de deur instellingen pagina kunt u alle benodigde deuren configureren. "
+"Klik op de knop %s om een nieuwe deur toe te voegen. En het lege formulier "
+"als hieronder wordt getoond en moet ingevuld worden. Zorg ervoor dat de "
+"juiste waarden zijn ingevuld. Alle velden met een %s zijn verplicht."
 
 #: views/inc/usage_doors.tpl:136 views/inc/usage_environment.tpl:394
 #: views/inc/usage_sensors.tpl:197 views/inc/usage_switches.tpl:157
@@ -1487,6 +1607,12 @@ msgid ""
 "values for the maximum and minimum hours. And the hours shift will shift the "
 "hours for on and off by the amount of hours  entered here."
 msgstr ""
+"Het licht systeem werkt altijd op tijd. U kunt de zonsopkomst en "
+"zonsondergang instellen als tijdwaarden of vaste tijdwaarden. Bij het kiezen "
+"van het weer kan het gebeuren dat de verlichting lang of kort wordt "
+"ingeschakeld. Gebruik de gewenste waarden voor de maximale en minimale uren. "
+"En de urenverplaatsing verplaatst de uren voor aan en uit met het aantal "
+"uren dat hier is ingevoerd."
 
 #: views/inc/usage_environment.tpl:16 views/inc/usage_environment.tpl:112
 #: views/inc/usage_environment.tpl:204 views/inc/usage_environment.tpl:298
@@ -1550,6 +1676,11 @@ msgid ""
 "multiple humidity sensors are used, the averages of the minimum, maximum and "
 "current values are used."
 msgstr ""
+"De sproeier werkt alleen in de sensor modus. Dit betekent dat het minstens "
+"één luchtvochtigheidssensor en één schakelaar moet hebben om een sproei "
+"systeem te activeren. Wanneer meerdere luchtvochtigheidssensoren worden "
+"gebruikt, worden de gemiddelden van de minimale, maximum en huidige waarden "
+"gebruikt."
 
 #: views/inc/usage_environment.tpl:111
 msgid "The sprayer will not operate when a door is open."
@@ -1655,6 +1786,12 @@ msgid ""
 "will be toggled off and stay out until the temperature hits the maximum "
 "value."
 msgstr ""
+"Wanneer de koeler in de sensor modus wordt gebruikt, schakelt het systeem de "
+"schakelaars op basis van de alarmen van de sensoren. Als de temperatuur te "
+"warm is, zal het op de schakelaars inschakelen. Totdat de temperatuur onder "
+"de minimale waarde daalt, blijft de schakelaar aan. Wanneer de minimale "
+"temperatuur is bereikt, worden de schakelaars uitgeschakeld en blijven ze "
+"uit totdat de temperatuur de maximale waarde treft."
 
 #: views/inc/usage_environment.tpl:319 views/system_environment.tpl:273
 msgid "Cooler mode"
@@ -1674,6 +1811,9 @@ msgid ""
 "type. Select temperature from the menu to get all the temperature sensors. "
 "Select humidity for all humidity sensors."
 msgstr ""
+"Op de sensors pagina vindt u alle beschikbare sensoren pagina die per type "
+"is gegroepeerd. Kies temperatuur in het menu om alle temperatuursensoren te "
+"krijgen. Kies luchtvochtigheid voor alle luchtvochtigheidssensoren."
 
 #: views/inc/usage_sensors.tpl:14
 msgid "Per graph you have the following options and indicators."
@@ -1718,6 +1858,10 @@ msgid ""
 "value gets more to the minimum or maximum value, it will gets more red/"
 "orange."
 msgstr ""
+"De meetgrafiek toont de huidige temperatuur of luchtvochtigheidswaarde. De "
+"kleur van de grafiek hangt af van de huidige waarde en de alarmwaarden. "
+"Wanneer de waarde meer naar de minimum- of maximumwaarde komt, wordt het "
+"meer rood / oranje."
 
 #: views/inc/usage_sensors.tpl:92
 msgid ""
@@ -1740,6 +1884,10 @@ msgid ""
 "outside this range an alarm will be given. Hover above the graph lines to "
 "get detailed information."
 msgstr ""
+"De geschiedenisgrafiek toont de gemeten waarde. De platte lijnen zijn de "
+"minimum en maximumwaarden die zijn geconfigureerd. Wanneer de gemeten waarde "
+"buiten dit bereik ligt, wordt een alarm gegeven. Beweeg boven de "
+"grafieklijnen om gedetailleerde informatie te krijgen."
 
 #: views/inc/usage_sensors.tpl:146 views/inc/usage_sensors.tpl:180
 #: views/sensor_settings.tpl:37 views/sensor_settings.tpl:125
@@ -1762,13 +1910,15 @@ msgstr "Schakelaar"
 
 #: views/inc/usage_switches.tpl:62
 msgid "The power usage and/or water flow per minute when switched on"
-msgstr ""
+msgstr "Het stroomverbruik en / of waterstroom per minuut bij inschakelen"
 
 #: views/inc/usage_switches.tpl:63
 msgid ""
 "The total amount of power usage and/or water usage for the selected history "
 "period"
 msgstr ""
+"Het totale aantal stroomverbruik en / of waterverbruik voor de geselecteerde "
+"geschiedenisperiode"
 
 #: views/inc/usage_switches.tpl:67
 msgid "Show or hide the switch"
@@ -1786,12 +1936,19 @@ msgid ""
 "made. Use here the username and password that are configured at the system "
 "configuration page."
 msgstr ""
+"Op de schakelpagina zijn er stroomtoetsen die de stroomschakelaars wisselen. "
+"Elke schakelaar wordt vermeld en kan vanuit de statuspagina worden "
+"gecontroleerd. Om de switch te schakelen, wordt een aanvraag voor een "
+"gebruikersnaam en wachtwoord aangemaakt. Gebruik hier de gebruikersnaam en "
+"het wachtwoord dat is geconfigureerd op de systeemconfiguratiepagina."
 
 #: views/inc/usage_switches.tpl:82
 msgid ""
 "The list is also updating when the environment toggles a switch. The state "
 "off the switch is shown here in real time."
 msgstr ""
+"De lijst wordt ook bijgewerkt wanneer het milieu een switch schakelt. De "
+"status van de schakelaar wordt hier in real time weergegeven."
 
 #: views/inc/usage_switches.tpl:85
 msgid "Switch is on"
@@ -1807,6 +1964,9 @@ msgid ""
 "power usage on the y-axis and time on the x-axis. When hovering over the "
 "graph it will also show the water usage."
 msgstr ""
+"De geschiedenisgrafiek wordt weergegeven wanneer een schakelaar ingeschakeld "
+"is. Het zal het energieverbruik op de y-as en de tijd op de x-as tonen. Bij "
+"het zweven over de grafiek zal het ook het watergebruik tonen."
 
 #: views/inc/usage_switches.tpl:97
 msgid ""
@@ -1815,6 +1975,11 @@ msgid ""
 "be filled in. Make sure the right values are filled in. All fields with a %s "
 "are required."
 msgstr ""
+"Op de schakelinstellingenpagina kunt u alle benodigde schakelaars "
+"configureren. Klik op de knop %s om een nieuwe schakelaar toe te voegen. En "
+"het lege formulier als hieronder wordt getoond en moet ingevuld worden. Zorg "
+"ervoor dat de juiste waarden zijn ingevuld. Alle velden met een %s zijn "
+"verplicht."
 
 #: views/inc/usage_switches.tpl:106 views/switch_settings.tpl:81
 msgid "FTDI"
@@ -1826,6 +1991,9 @@ msgid ""
 "which the forecast is valid. The data is loaded external from the external "
 "API source and is not measured by the software."
 msgstr ""
+"De weervoorspelling widgets tonen de prognose op de huidige tijd en de "
+"locatie waarvoor de weervoorspelling geldig is. De gegevens worden extern "
+"geladen van de externe API bron en wordt niet gemeten door de software."
 
 #: views/inc/usage_weather.tpl:16
 msgid ""
@@ -1840,12 +2008,17 @@ msgid ""
 "The forecast is based on the time of the day. During the day, a sun is used "
 "in the animation. During the night a moon is used."
 msgstr ""
+"De weervoorspelling is gebaseerd op het tijdstip van de dag. Tijdens de dag "
+"wordt een zon gebruikt in de animatie. Gedurende de nacht wordt een maan "
+"gebruikt."
 
 #: views/inc/usage_weather.tpl:18
 msgid ""
 "The sun rise and sun set are shown on the right side. The line that is bold "
 "is indicating the current state."
 msgstr ""
+"De zonsopkomst en zonsondergang worden aan de rechterkant getoond. De lijn "
+"die vet is, geeft de huidige toestand aan."
 
 #: views/inc/usage_weather.tpl:19
 msgid "The week forecast is shown at 13:00 hours of each day."
@@ -1874,6 +2047,8 @@ msgid ""
 "The week forecast shows the temperature per hour for 10 days from now. The "
 "title holds the graph period."
 msgstr ""
+"De weersverwachting toont de temperatuur per uur voor 10 dagen vanaf nu. De "
+"titel bevat de grafiekperiode."
 
 #: views/inc/usage_weather.tpl:35
 msgid ""
@@ -1954,6 +2129,10 @@ msgid ""
 "be filled in. Make sure the right values are filled in. All fields with a %s "
 "are required."
 msgstr ""
+"Op de webcam instellingen pagina kunt u alle benodigde webcams configureren. "
+"Klik op de knop %s om een nieuwe webcam toe te voegen. En het lege formulier "
+"als hieronder wordt getoond en moet ingevuld worden. Zorg ervoor dat de "
+"juiste waarden zijn ingevuld. Alle velden met een %s zijn verplicht."
 
 #: views/inc/usage_webcams.tpl:95 views/inc/usage_webcams.tpl:140
 #: views/webcam_settings.tpl:33 views/webcam_settings.tpl:77
@@ -2066,6 +2245,11 @@ msgid ""
 "area, form autocomplete, range slider, progress bars, notifications and much "
 "more."
 msgstr ""
+"Thema maakt gebruik van verschillende bibliotheken voor grafieken, agenda, "
+"formulier validatie, wizard stijl interface, off-canvas navigatie menu, "
+"tekst formulieren, datum bereik, upload gebied, formulier automatische "
+"completering, bereik schuifregelaar, voortgangsbalkjes, meldingen en nog "
+"veel meer."
 
 #: views/info.tpl:60
 msgid ""
@@ -2326,7 +2510,7 @@ msgstr "DHT22 GPIO bedrading schema"
 
 #: Missing text string
 msgid "DHT22 temperature and humidity sensor"
-msgstr "DHT22 temperatuur- en vochtigheidssensor"
+msgstr "DHT22 temperatuur- en luchtvochtigheidssensor"
 
 #: Missing text string
 msgid "Door history graph"
@@ -2454,7 +2638,7 @@ msgstr "USB Webcam"
 
 #: Missing text string
 msgid "Used memory"
-msgstr "Geheugen verbruik"
+msgstr "Gebruikt geheugen"
 
 #: Missing text string
 msgid "Weather day forecast screenshot"
