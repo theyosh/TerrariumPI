@@ -50,6 +50,7 @@ class terrariumSwitch():
                  self.get_water_flow()))
 
     # Force to off state!
+    self.init = True
     self.state = None
     self.set_state(terrariumSwitch.OFF,True)
 
@@ -96,7 +97,13 @@ class terrariumSwitch():
       self.state = state
       logger.info('Toggle switch \'%s\' from %s',self.get_name(),('off to on' if self.is_on() else 'on to off'))
       if self.callback is not None:
-        self.callback(self.get_data())
+        data = self.get_data()
+
+        if self.init:
+          data['init'] = 1
+          self.init = False
+
+        self.callback(data)
 
     return self.get_state() == state
 

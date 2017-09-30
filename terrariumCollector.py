@@ -180,11 +180,14 @@ class terrariumCollector():
     del(switch['name'])
 
     # Create new object for the previous state. Copy data and invert boolean value
-    old_swich = switch.copy()
-    old_swich['state'] = not switch['state']
-    old_swich['time'] = int(time.time()) - 1
+    if 'init' not in switch:
+      old_swich = switch.copy()
+      old_swich['state'] = not switch['state']
+      old_swich['time'] = int(time.time()) - 1
+      self.__log_data('switches',switch_id,old_swich)
+    else:
+      del(switch['init'])
 
-    self.__log_data('switches',switch_id,old_swich)
     self.__log_data('switches',switch_id,switch)
 
   def log_door_data(self,door):
