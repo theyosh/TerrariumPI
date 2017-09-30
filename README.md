@@ -1,4 +1,4 @@
-# TerrariumPI 2.8
+# TerrariumPI 2.8.1
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control an enclosed environment so that the temperature and humidity is of a constant value. This is done by using temperature and humidity sensors and realy switches to activate external devices.
 
 It has support for lights, sprayer, heater and cooler equipment. The amount of devices that can be controlled depends on the used relay boards.
