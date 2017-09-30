@@ -2,8 +2,43 @@ Changelog
 =========
 
 
+2.8.1 (2017-09-30)
+------------
+
+**New**
+- Added a link in the Usage link to https://pinout.xyz to help end users
+  that are not familiar with different pin numbering, updated and fixed
+  some of the italian translation    modified:
+  locales/it_IT/LC_MESSAGES/terrariumpi.mo    modified:
+  locales/it_IT/LC_MESSAGES/terrariumpi.po    modified:
+  locales/terrariumpi.pot. [Lorenzo Faleschini]
+
+**Updates**
+- Update version number. [TheYOSH]
+- Update fancybox. [TheYOSH]
+- Update switch logging. [TheYOSH]
+- Update to switch logging for short duration switching. [TheYOSH]
+- Update translations including Italian for better supporting urls in
+  text. [TheYOSH]
+- Changed "normal" pin numbering with more correct "physiscal" pin
+  numbering and updated italian translation. [Lorenzo Faleschini]
+
+  modified:   locales/it_IT/LC_MESSAGES/terrariumpi.mo
+  	modified:   locales/it_IT/LC_MESSAGES/terrariumpi.po
+  	modified:   locales/terrariumpi.pot
+- Update version number in configfile. [TheYOSH]
+- Update version number in readme. [TheYOSH]
+
+**Other**
+- Finished Dutch translation. [TheYOSH]
+- Forced decimal number input by using input patterns. [TheYOSH]
+- Merge pull request [#26](https://github.com/theyosh/TerrariumPI/issues/26) from penzoiders/master. [TheYOSH]
+
+  updated translation and original strings to help user with GPIO pinout numbering
+
+
 2.8 (2017-09-26)
-------------------
+----------------
 
 **New**
 - Add update section for updating software from Git. Updated
@@ -24,6 +59,7 @@ Changelog
 - Fix translating sensor types. [TheYOSH]
 
 **Updates**
+- Update changelog. [TheYOSH]
 - Update install script to handle updates better. Forced GPIO pin number
   to float when reading data. [#25](https://github.com/theyosh/TerrariumPI/issues/25). [TheYOSH]
 - Update readme file. [TheYOSH]
@@ -39,7 +75,7 @@ Changelog
 - Update loading available languages. [TheYOSH]
 
 **Other**
-- First final version Germand translation. Close [#23](https://github.com/theyosh/TerrariumPI/issues/23). [@vanessa2013]
+- First final version Germand translation. Close [#23](https://github.com/theyosh/TerrariumPI/issues/23). [TheYOSH]
 - Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
   [TheYOSH]
 - New screenshots. [TheYOSH]
