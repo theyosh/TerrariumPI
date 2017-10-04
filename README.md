@@ -36,7 +36,7 @@ The software has support for the following languages:
 Your language not in the list? [Create your own language translation](https://github.com/theyosh/TerrariumPI/wiki/Translations)
 
 ## Installation
-The installation expects a Pi with working network and ssh. It is tested with [Raspbian Stretch Lite](https://www.raspberrypi.org/downloads/raspbian/)
+The installation expects a Pi with working network and ssh. It is tested with [Raspbian Stretch Lite](https://www.raspberrypi.org/downloads/raspbian/). For now the Full version is not working somehow.... So use the lite image!
 1. Get a working Raspberry Pi and login as user 'pi'  
   `ssh pi@[raspberry_ip]`
 2. Clone this repository and submodules!  
