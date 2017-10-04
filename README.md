@@ -36,11 +36,18 @@ The software has support for the following languages:
 Your language not in the list? [Create your own language translation](https://github.com/theyosh/TerrariumPI/wiki/Translations)
 
 ## Installation
-1. Get a working Raspberry Pi and login as user 'pi'
-2. Clone this repository and submodules!: `git clone --recursive https://github.com/theyosh/TerrariumPI.git`
-3. Run `./install.sh` in the cloned folder
-4. Reboot Raspberry PI to get all the needed modules loaded
-5. Go to the webinterface at http://[raspberry_ip]:8090
+The installation expects a Pi with working network and ssh. It is tested with [Raspbian Stretch Lite](https://www.raspberrypi.org/downloads/raspbian/)
+1. Get a working Raspberry Pi and login as user 'pi'  
+  `ssh pi@[raspberry_ip]`
+2. Clone this repository and submodules!  
+  `git clone --recursive https://github.com/theyosh/TerrariumPI.git`
+3. Enter the new TerrariumPI folder  
+  `cd TerrariumPI`
+4. Run the installer script and wait  
+  `sudo ./install.sh`
+5. Reboot Raspberry PI to get all the needed modules loaded  
+  `sudo reboot`
+6. Go to the webinterface at http://[raspberry_ip]:8090
 
 If you want to use the Raspberry PI 1 wire interface, you have to manually enable it through the raspi-config and reboot once more.
 
@@ -48,9 +55,12 @@ Make sure that your Pi is secured when you put it to the Internet. Would be a sh
 
 ## Updating
 This updating is based on that the software is installed with the steps in the Installation above.
-1. Login with user 'pi' in Raspberry Pi
-2. Enter the TerrariumPI directory: `cd TerrariumPI`
-3. Run `git pull` to get the latest version
+1. Get a working Raspberry Pi and login as user 'pi'  
+  `ssh pi@[raspberry_ip]`
+2. Enter the TerrariumPI folder  
+  `cd TerrariumPI`
+3. Update the new code with git  
+  `git pull`
 4. Restart TerrariumPI according to: https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-restart-terrariumpi
 
 Now clear your browser cache and reload the webinterface. A brand new version should be running.
