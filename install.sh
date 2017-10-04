@@ -71,5 +71,7 @@ fi
 groupadd gpio 2> /dev/null
 usermod -a -G gpio pi 2> /dev/null
 
+sync
+
 # We are done!
 echo "Instaltion is done. Please reboot once to get the I2C and Adafruit DHT libary working correctly"
