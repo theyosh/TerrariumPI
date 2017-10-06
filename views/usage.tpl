@@ -34,7 +34,6 @@
                 </div>
                 <div aria-labelledby="usage_tab_sensors" class="tab-pane fade" id="usage-tab-sensors" role="tabpanel">
                   % include('inc/usage_sensors.tpl')
-                  <p></p>
                 </div>
                 <div aria-labelledby="usage_tab_switches" class="tab-pane fade" id="usage-tab-switches" role="tabpanel">
                   % include('inc/usage_switches.tpl')

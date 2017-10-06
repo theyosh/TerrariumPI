@@ -115,7 +115,7 @@
                         </div>
                         <div class="col-md-1 col-sm-1 col-xs-12 form-group">
                           <label for="sensor_[nr]_alarm_min">{{_('Alarm min')}}</label>
-                          <input class="form-control" name="sensor_[nr]_alarm_min" placeholder="{{_('Alarm min')}}" type="text" pattern="[0-9\.-]+" data-toggle="tooltip" data-placement="bottom"= title="" data-original-title="{{translations.get_translation('sensor_field_alarm_min')}}">
+                          <input class="form-control" name="sensor_[nr]_alarm_min" placeholder="{{_('Alarm min')}}" type="text" pattern="[0-9\.-]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_alarm_min')}}">
                         </div>
                         <div class="col-md-1 col-sm-1 col-xs-12 form-group">
                           <label for="sensor_[nr]_alarm_max">{{_('Alarm max')}}</label>

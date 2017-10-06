@@ -150,14 +150,14 @@
                         <p>{{_('Every sensor has his own type and a minimum and maximum value. To get the graph data all the data is combined and divided by the amount of sensors. This way the average of the sensors is used.')}}</p>
                         <img src="static/images/documentation/dashboard_graphs.gif" alt="Dashboard top indicators online screenshot" class="img-thumbnail" />
                         <div class="row">
-                          <h4><span aria-hidden="true" class="glyphicon glyphicon-tint"></span>/<span aria-hidden="true" class="glyphicon glyphicon-fire"></span> </span> {{_('Type')}}</h4>
+                          <h4><span aria-hidden="true" class="glyphicon glyphicon-tint"></span>/<span aria-hidden="true" class="glyphicon glyphicon-fire"></span> {{_('Type')}}</h4>
                           <p>
                             {{_('There are multiple graph times. On the home there is a humidity and a temperature graph shown.')}}
-                            <ul>
-                              <li><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Humidity')}}</li>
-                              <li><span aria-hidden="true" class="glyphicon glyphicon-fire"></span> {{_('Temperature')}}</li>
-                            </ul>
                           </p>
+                          <ul>
+                            <li><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Humidity')}}</li>
+                            <li><span aria-hidden="true" class="glyphicon glyphicon-fire"></span> {{_('Temperature')}}</li>
+                          </ul>
                         </div>
                         <div class="row">
                           <h4>{{_('Last update')}}</h4>
@@ -176,13 +176,13 @@
                           <img src="static/images/documentation/graph_period.png" class="alignright" />
                           <p>
                             {{_('With the calendar icon you can select multiple periods for the historical graph. The valid periods are:')}}
-                            <ul>
-                              <li>{{_('Day')}}</li>
-                              <li>{{_('Week')}}</li>
-                              <li>{{_('Month')}}</li>
-                              <li>{{_('Year')}}</li>
-                            </ul>
                           </p>
+                          <ul>
+                            <li>{{_('Day')}}</li>
+                            <li>{{_('Week')}}</li>
+                            <li>{{_('Month')}}</li>
+                            <li>{{_('Year')}}</li>
+                          </ul>
                         </div>
                         <div class="row">
                           <h4><i class="fa fa-wrench" title="{{_('Options')}}"></i> {{_('Options')}}</h4>
