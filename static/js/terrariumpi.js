@@ -380,8 +380,8 @@ function update_weather(data) {
     weather_current.find('.degrees').text(formatNumber(data.hour_forecast[0].temperature));
     icons.set(weather_current.find('canvas').attr('id'), data.hour_forecast[0].icon);
     var week_forecast_divs = weather_current.find('div.row.weather-days div.daily-weather');
-    // Set timestamp to tomorrow at 13 hours. That is the first week forecast we take
-    var timestamp = Math.round(new Date(Date.now()).setHours(13) / 1000) + (24 * 60 * 60);
+    // Set timestamp to tomorrow at 12 hours. That is the first week forecast we take
+    var timestamp = Math.round(new Date(Date.now()).setHours(12) / 1000) + (24 * 60 * 60);
     var day_counter = 0;
     var graphdata = [];
     $.each(data.week_forecast, function(index, value) {

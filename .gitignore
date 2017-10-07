@@ -4,3 +4,4 @@ history.db*
 static/webcam/*.jpg
 log/*.log*
 description.txt
+weather.txt
