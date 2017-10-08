@@ -286,6 +286,7 @@ class terrariumWeather():
              'cloudy' : 'cloudy',
              'scatteredclouds' : 'cloudy',
              'overcast' : 'cloudy',
+             'overcastclouds' : 'cloudy',
 
              'lightrainshowers' : 'rain',
              'lightrain' : 'rain',
