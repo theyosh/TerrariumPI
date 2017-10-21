@@ -71,6 +71,8 @@ fi
 groupadd gpio 2> /dev/null
 usermod -a -G gpio pi 2> /dev/null
 
+systemctl enable pigpiod
+
 sync
 
 # We are done!
