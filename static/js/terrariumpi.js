@@ -1116,12 +1116,17 @@ function add_switch() {
                  form.find('input[name="switch_[nr]_address"]').val(),
                  form.find('input[name="switch_[nr]_name"]').val(),
                  form.find('input[name="switch_[nr]_power_wattage"]').val(),
-                 form.find('input[name="switch_[nr]_water_flow"]').val());
+                 form.find('input[name="switch_[nr]_water_flow"]').val(),
+                 form.find('input[name="switch_[nr]_dimmer_on_duration"]').val(),
+                 form.find('input[name="switch_[nr]_dimmer_on_percentage"]').val(),
+                 form.find('input[name="switch_[nr]_dimmer_off_duration"]').val(),
+                 form.find('input[name="switch_[nr]_dimmer_off_percentage"]').val(),
+                 );
 
   $('.new-switch-form').modal('hide');
 }
 
-function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow) {
+function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow, dimmer_on_duration,dimmer_on_percentage,dimmer_off_duration,dimmer_off_percentage) {
   var switch_row = $($('.modal-body div.row.switch').parent().clone().html().replace(/\[nr\]/g, $('form div.row.switch').length));
 
   switch_row.find('div.power_switch.small').attr('id','switch_' + id);
@@ -1129,7 +1134,7 @@ function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow) {
   switch_row.find('.x_title').show().find('h2 small').text(name);
   switch_row.find('span.select2.select2-container').remove();
 
-  switch_row.find('input, select').each(function(counter,item){
+  switch_row.find('input, select').each(function(counter,item) {
     $(item).val(eval($(item).attr('name').replace(/switch_[0-9]+_/g,'')));
   });
 
@@ -1140,7 +1145,10 @@ function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow) {
     placeholder: '{{_('Select an option')}}',
     allowClear: false,
     minimumResultsForSearch: Infinity
+  }).on('change',function() {
+    switch_row.find('.row.dimmer').toggle(this.value === 'pwm-dimmer');
   });
+  switch_row.find('.row.dimmer').toggle(hardwaretype === 'pwm-dimmer');
 }
 
 function add_door() {
@@ -1226,12 +1234,15 @@ function update_power_switch(id, data) {
   power_switch.find('h2 small.data_update').text(update_data);
 
   if (data.hardwaretype === 'pwm-dimmer') {
-    power_switch.find('div.power_switch').removeClass('big').addClass('dimmer').html('<input class="knob" data-width="80%" data-angleOffset=20 data-angleArc=320 data-fgColor="#1ABB9C" value="'+ data.state + '">');
+    power_switch.find('div.power_switch').removeClass('big').addClass('dimmer').html('<input class="knob" data-width="75%" data-angleOffset=20 data-angleArc=320 data-fgColor="#1ABB9C" value="'+ data.state + '">');
 
     power_switch.find('.knob').knob({
 			release: function(value) {
         $.getJSON('/api/switch/state/' + id + '/' + value,function(data){
         });
+      },
+      format: function(value) {
+        return value + '%';
       }
     });
   }

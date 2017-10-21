@@ -7,6 +7,9 @@ import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
 import pigpio
 from hashlib import md5
+import thread
+import time
+import math
 
 class terrariumSwitch():
 
@@ -14,7 +17,11 @@ class terrariumSwitch():
 
   OFF = False
   ON = True
-  PWM_MAXDIM = 880 # http://www.esp8266-projects.com/2017/04/raspberry-pi-domoticz-ac-dimmer-part-1/
+
+  # PWM Dimmer settings
+  PWM_DIMMER_MAXDIM = 880 # http://www.esp8266-projects.com/2017/04/raspberry-pi-domoticz-ac-dimmer-part-1/
+  PWM_DIMMER_MIN_TIMEOUT=0.3
+  PWM_DIMMER_MIN_STEP=1.0
 
   bitbang_addresses = {
     "1":"2",
@@ -55,7 +62,6 @@ class terrariumSwitch():
                  self.get_water_flow()))
 
     # Force to off state!
-    #self.init = True
     self.state = None
     self.set_state(terrariumSwitch.OFF,True)
 
@@ -70,12 +76,57 @@ class terrariumSwitch():
     GPIO.setmode(GPIO.BOARD)
 
   def __load_pwm_device(self):
-    #self.callback = None
+    self.__dimmer_running = False
     # localhost will not work always due to IPv6. Explicit 127.0.0.1 host
     self.__pigpio = pigpio.pi('127.0.0.1',8888)
     if not self.__pigpio.connected:
       logger.error('PiGPIOd process is not running')
       self.__pigpio = False
+
+  def __dim_switch(self,from_value,to_value):
+    # When the dimmer is working, ignore new state changes.
+    if not self.__dimmer_running:
+      self.__dimmer_running = True
+
+      if from_value is None:
+        logger.info('Switching dimmer \'%s\' from %s%% to %s%% instantly',
+                  self.get_name(),from_value,to_value)
+        # Geen animatie, gelijk to_value
+        dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - to_value) / 100.0)
+        self.__pigpio.hardware_PWM(int(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
+      else:
+        direction = (1 if from_value < to_value else -1)
+        duration = (self.get_dimmer_on_duration() if direction == 1 else self.get_dimmer_off_duration())
+
+        logger.info('Changing dimmer \'%s\' from %s%% to %s%% in %s seconds',
+                  self.get_name(),from_value,to_value,duration)
+
+        distance = abs(from_value - to_value)
+        if duration == 0:
+          steps = 1
+        else:
+          steps = math.floor(min( (abs(duration) / terrariumSwitch.PWM_DIMMER_MIN_TIMEOUT),
+                                  (distance / terrariumSwitch.PWM_DIMMER_MIN_STEP)))
+          distance /= steps
+          duration /= steps
+
+        logger.debug('Dimmer settings: Steps: %s, Distance per step: %s%%, Time per step: %s, Direction: %s',steps, distance, duration, direction)
+
+        for counter in range(int(steps)):
+          from_value += (direction * distance)
+          dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - from_value) / 100.0)
+          logger.debug('Dimmer animation: Step: %s, value %s%%, Dim value: %s, timeout %s',counter+1, from_value, dim_value, duration)
+          self.__pigpio.hardware_PWM(int(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
+          time.sleep(duration)
+
+        # For impatient people... Put the dimmer at the current state value if it has changed during the animation
+        dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - self.get_state()) / 100.0)
+        self.__pigpio.hardware_PWM(int(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
+
+      self.__dimmer_running = False
+      logger.info('Dimmer \'%s\' is done at value %s%%',self.get_name(),self.get_state())
+    else:
+      logger.warning('Dimmer %s is already working. Ignoring state change!. Will switch to latest state value when done', self.get_name())
 
   def set_state(self, state, force = False):
     if self.get_state() is not state or force:
@@ -112,24 +163,17 @@ class terrariumSwitch():
         # State 100 = full on which means 0 dim.
         # State is inverse of dim
         if state is terrariumSwitch.ON:
-          state = 100.0
+          state = self.get_dimmer_on_percentage()
         elif state is terrariumSwitch.OFF or not (0 <= state <= 100):
-          state = 0.0
+          state = self.get_dimmer_off_percentage()
 
-        dim = terrariumSwitch.PWM_MAXDIM * ((100.0 - state) / 100.0)
-        self.__pigpio.hardware_PWM(int(self.get_address()), 5000, int(dim) * 1000) # 5000Hz state*1000% dutycycle
-        logger.info('Changed dimmer \'%s\' from %s to %s',self.get_name(),self.state,state)
+        thread.start_new_thread(self.__dim_switch, (self.state,state))
 
       self.state = state
       if self.get_hardware_type() != 'pwm-dimmer':
         logger.info('Toggle switch \'%s\' from %s',self.get_name(),('off to on' if self.is_on() else 'on to off'))
       if self.callback is not None:
         data = self.get_data()
-
-        #if self.init:
-        #  data['init'] = 1
-        #  self.init = False
-
         self.callback(data)
 
     return self.get_state() == state
@@ -146,7 +190,11 @@ class terrariumSwitch():
             'current_power_wattage' : self.get_current_power_wattage(),
             'water_flow' : self.get_water_flow(),
             'current_water_flow' : self.get_current_water_flow(),
-            'state' : self.get_state()
+            'state' : self.get_state(),
+            'dimmer_on_duration': self.get_dimmer_on_duration(),
+            'dimmer_on_percentage' : self.get_dimmer_on_percentage(),
+            'dimmer_off_duration': self.get_dimmer_off_duration(),
+            'dimmer_off_percentage': self.get_dimmer_off_percentage()
             }
 
     return data
@@ -254,3 +302,18 @@ class terrariumSwitch():
   def dim(self,value):
     if 0 <= value <= 100:
       self.set_state(100 - value)
+
+  #def get_dimmer_duration(self):
+  #  return (15 if self.get_hardware_type() == 'pwm-dimmer' else 0)
+
+  def get_dimmer_on_duration(self):
+    return (15 if self.get_hardware_type() == 'pwm-dimmer' else 0)
+
+  def get_dimmer_off_duration(self):
+    return (5 if self.get_hardware_type() == 'pwm-dimmer' else 0)
+
+  def get_dimmer_on_percentage(self):
+    return (60 if self.get_hardware_type() == 'pwm-dimmer' else 100)
+
+  def get_dimmer_off_percentage(self):
+    return (0 if self.get_hardware_type() == 'pwm-dimmer' else 0)

@@ -74,33 +74,53 @@
                         <div class="clearfix"></div>
                       </div>
                       <div class="x_content">
-                        <div class="col-md-3 col-sm-3 col-xs-12 form-group">
-                          <label for="switch_[nr]_hardwaretype">{{_('Hardware')}} <span class="required">*</span></label>
-                          <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{!translations.get_translation('switch_field_hardware')}}">
-                            <select class="form-control" name="switch_[nr]_hardwaretype" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
-                              <option value="ftdi">{{_('FTDI')}}</option>
-                              <option value="gpio">{{_('GPIO')}}</option>
-                              <option value="gpio-inverse">{{_('GPIO Inverse')}}</option>
-                              <option value="pwm-dimmer">{{_('PWM Dimmer')}}</option>
-                            </select>
+                        <div class="row">
+                          <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                            <label for="switch_[nr]_hardwaretype">{{_('Hardware')}} <span class="required">*</span></label>
+                            <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{!translations.get_translation('switch_field_hardware')}}">
+                              <select class="form-control" name="switch_[nr]_hardwaretype" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
+                                <option value="ftdi">{{_('FTDI')}}</option>
+                                <option value="gpio">{{_('GPIO')}}</option>
+                                <option value="gpio-inverse">{{_('GPIO Inverse')}}</option>
+                                <option value="pwm-dimmer">{{_('PWM Dimmer')}}</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-2 col-sm-2 col-xs-12 form-group">
+                            <label for="switch_[nr]_address">{{_('Address')}}</label> <span class="required">*</span>
+                            <input class="form-control" name="switch_[nr]_address" placeholder="{{_('Address')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_address')}}">
+                            <input class="form-control" name="switch_[nr]_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
+                          </div>
+                          <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                            <label for="switch_[nr]_name">{{_('Name')}}</label> <span class="required">*</span>
+                            <input class="form-control" name="switch_[nr]_name" placeholder="{{_('Name')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_name')}}">
+                          </div>
+                          <div class="col-md-2 col-sm-2 col-xs-12 form-group">
+                            <label for="switch_[nr]_power_wattage">{{_('Power usage in Watt')}}</label>
+                            <input class="form-control" name="switch_[nr]_power_wattage" placeholder="{{_('Power usage in Watt')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_power_wattage')}}">
+                          </div>
+                          <div class="col-md-2 col-sm-2 col-xs-12 form-group">
+                            <label for="switch_[nr]_water_flow">{{_('Water flow in L/m')}}</label>
+                            <input class="form-control" name="switch_[nr]_water_flow" placeholder="{{_('Water flow in L/m')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_water_flow')}}">
                           </div>
                         </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12 form-group">
-                          <label for="switch_[nr]_address">{{_('Address')}}</label> <span class="required">*</span>
-                          <input class="form-control" name="switch_[nr]_address" placeholder="{{_('Address')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_address')}}">
-                          <input class="form-control" name="switch_[nr]_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
-                        </div>
-                        <div class="col-md-3 col-sm-3 col-xs-12 form-group">
-                          <label for="switch_[nr]_name">{{_('Name')}}</label> <span class="required">*</span>
-                          <input class="form-control" name="switch_[nr]_name" placeholder="{{_('Name')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_name')}}">
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12 form-group">
-                          <label for="switch_[nr]_power_wattage">{{_('Power usage in Watt')}}</label>
-                          <input class="form-control" name="switch_[nr]_power_wattage" placeholder="{{_('Power usage in Watt')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_power_wattage')}}">
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12 form-group">
-                          <label for="switch_[nr]_water_flow">{{_('Water flow in L/m')}}</label>
-                          <input class="form-control" name="switch_[nr]_water_flow" placeholder="{{_('Water flow in L/m')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_water_flow')}}">
+                        <div class="row dimmer" style="display:none;">
+                          <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                            <label for="switch_[nr]_dimmer_on_duration">{{_('Dimmer on duration')}}</label>
+                            <input class="form-control" name="switch_[nr]_dimmer_on_duration" placeholder="{{_('Dimmer on duration')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_on_duration')}}">
+                          </div>
+                          <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                            <label for="switch_[nr]_dimmer_on_percentage">{{_('Dimmer on percentage')}}</label>
+                            <input class="form-control" name="switch_[nr]_dimmer_on_percentage" placeholder="{{_('Dimmer on percentage')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_on_percentage')}}">
+                          </div>
+                          <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                            <label for="switch_[nr]_dimmer_off_duration">{{_('Dimmer off duration')}}</label>
+                            <input class="form-control" name="switch_[nr]_dimmer_off_duration" placeholder="{{_('Dimmer off duration')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_off_duration')}}">
+                          </div>
+                          <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                            <label for="switch_[nr]_dimmer_off_percentage">{{_('Dimmer off percentage')}}</label>
+                            <input class="form-control" name="switch_[nr]_dimmer_off_percentage" placeholder="{{_('Dimmer off percentage')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_off_percentage')}}">
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -117,10 +137,13 @@
         <script tpe="text/javascript">
           $(document).ready(function() {
             $('.page-title').append('<div class="title_right"><h3><button type="button" class="btn btn-primary alignright" data-toggle="modal" data-target=".new-switch-form"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h3> </div>');
+
             $("select").select2({
               placeholder: '{{_('Select an option')}}',
               allowClear: false,
               minimumResultsForSearch: Infinity
+            }).on('change',function() {
+              $(this).parents('.x_content').find('.row.dimmer').toggle(this.value === 'pwm-dimmer');
             });
             $.get($('form').attr('action'),function(data){
               $.each(data.switches, function(index,power_switch) {
@@ -130,9 +153,15 @@
                                power_switch.address,
                                power_switch.name,
                                power_switch.power_wattage,
-                               power_switch.water_flow);
+                               power_switch.water_flow,
+                               power_switch.dimmer_on_duration,
+                               power_switch.dimmer_on_percentage,
+                               power_switch.dimmer_off_duration,
+                               power_switch.dimmer_off_percentage);
+
                 update_power_switch(power_switch.id,power_switch);
               });
+              reload_reload_theme();
             });
           });
         </script>
