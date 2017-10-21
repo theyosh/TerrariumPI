@@ -2,8 +2,35 @@ Changelog
 =========
 
 
-2.8.1 (2017-09-30)
+2.8.2 (2017-10-21)
 ------------
+
+**New**
+- Add sync command. [TheYOSH]
+
+**Fixes**
+- Fix wrong timers and updated German language. fix [#33](https://github.com/theyosh/TerrariumPI/issues/33). [TheYOSH]
+- Fixed weather icons. [TheYOSH]
+- Small HTML fixes. [TheYOSH]
+- Fix HTML code in Dutch translation. Was broke in usage page. [TheYOSH]
+
+**Updates**
+- Update version number. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update install and update documentation. [TheYOSH]
+
+**Other**
+- Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
+  [TheYOSH]
+- Refactor weather code to use inheritance. [TheYOSH]
+- Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
+  [TheYOSH]
+- Allow negative temperature settings. [TheYOSH]
+
+
+2.8.1 (2017-09-30)
+------------------
 
 **New**
 - Added a link in the Usage link to https://pinout.xyz to help end users
@@ -14,6 +41,7 @@ Changelog
   locales/terrariumpi.pot. [Lorenzo Faleschini]
 
 **Updates**
+- Update changelog. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update fancybox. [TheYOSH]
 - Update switch logging. [TheYOSH]

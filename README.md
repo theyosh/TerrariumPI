@@ -1,4 +1,4 @@
-# TerrariumPI 2.8.1
+# TerrariumPI 2.8.2
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control an enclosed environment so that the temperature and humidity is of a constant value. This is done by using temperature and humidity sensors and realy switches to activate external devices.
 
 It has support for lights, sprayer, heater and cooler equipment. The amount of devices that can be controlled depends on the used relay boards.
@@ -67,7 +67,10 @@ This updating is based on that the software is installed with the steps in the I
 Now clear your browser cache and reload the webinterface. A brand new version should be running.
 
 ## Hardware
-This software requires some extra hardware in order to run and work. The bare minimun is
+This software requires a Raspberry Pi and some extra hardware in order to run and work. The bare minimun is
+- Raspberry PI
+  - Pi 2
+  - Pi 3
 - Power relay board
   - USB versions (Serial and Bitbang)
   - GPIO versions
@@ -77,7 +80,7 @@ This software requires some extra hardware in order to run and work. The bare mi
   - GPIO
   - 1 Wire interface
 
-If there is some other hardware which is not working with TerrariumPI, open an issue on [Github](https://github.com/theyosh/TerrariumPI/issues) and we will try to support it.
+If there is some other hardware which is not working with TerrariumPI, open an issue on [Github](https://github.com/theyosh/TerrariumPI/issues) and we will try to support it. Raspberry Pi Zero is not tested.
 
 ## Screenshots
 (made on a very big screen :P )
