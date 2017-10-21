@@ -119,7 +119,7 @@ class terrariumCollector():
             now = newdata['time']
 
           # Make a duplicate of last state and save it with 1 sec back in time to smooth the graphs
-          cur.execute('''INSERT INTO switch_data (id,timestamp,state,power_wattage,water_flow)
+          cur.execute('''REPLACE INTO switch_data (id,timestamp,state,power_wattage,water_flow)
                           SELECT id, ? as timestamp,state,power_wattage,water_flow
                           FROM switch_data
                           WHERE id = ? ORDER BY timestamp DESC LIMIT 1''', (now-1, id))
