@@ -271,29 +271,25 @@ class terrariumSwitch():
 
   def toggle(self):
     if self.get_state() is not None:
-      old_state = self.get_state()
-      self.set_state(not old_state)
-      return self.get_state() is not old_state
+      if self.is_on():
+        self.off()
+      else:
+        self.on()
+      return True
 
     return None
 
   def is_on(self):
-    state = None
     if self.get_hardware_type() == 'pwm-dimmer':
-      state = self.get_state() > 0.0
+      return self.get_state() > self.get_dimmer_off_percentage()
     else:
-      state = self.get_state()
-
-    return state is terrariumSwitch.ON
+      return self.get_state() is terrariumSwitch.ON
 
   def is_off(self):
-    state = None
     if self.get_hardware_type() == 'pwm-dimmer':
-      state = self.get_state() == 0.0
+      return self.get_state() == self.get_dimmer_off_percentage()
     else:
-      state = self.get_state()
-
-    return state is terrariumSwitch.OFF
+      return self.get_state() is terrariumSwitch.OFF
 
   def on(self):
     if self.get_state() is None or self.is_off():
