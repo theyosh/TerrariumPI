@@ -6,13 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2017-09-09 13:59+CEST\n"
-"PO-Revision-Date: 2017-09-26 20:35+0200\n"
+"PO-Revision-Date: 2017-10-21 13:27+0200\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 2.0.4\n"
 "Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: de_AT\n"
@@ -559,7 +559,7 @@ msgstr "Stromverbrauch in Watt"
 #: views/inc/usage_switches.tpl:125 views/inc/usage_switches.tpl:146
 #: views/switch_settings.tpl:31 views/switch_settings.tpl:101
 msgid "Water flow in L/m"
-msgstr "Wasserfluss in L/m"
+msgstr "Wasserverbrauch in L/m"
 
 #: views/dashboard.tpl:45 views/inc/usage_dashboard.tpl:105
 #: views/inc/usage_switches.tpl:21
@@ -582,7 +582,7 @@ msgstr "Gesamtwasser in L"
 #: views/inc/usage_weather.tpl:85 views/sensor_settings.tpl:43
 #: views/sensor_settings.tpl:133 views/weather_forecast.tpl:7
 msgid "Current"
-msgstr "Strom"
+msgstr "Aktuell"
 
 #: views/dashboard.tpl:62 views/inc/menu.tpl:96
 #: views/inc/usage_dashboard.tpl:118 views/inc/usage_dashboard.tpl:211
@@ -1907,7 +1907,6 @@ msgid "Show or hide the switch"
 msgstr "Den Schalter ein- oder ausblenden"
 
 #: views/inc/usage_switches.tpl:74 views/inc/usage_switches.tpl:163
-#, fuzzy
 msgid "Status and toggle"
 msgstr "Status und Toggle"
 
