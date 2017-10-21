@@ -105,11 +105,10 @@ class terrariumSwitch():
         direction = (1.0 if from_value < to_value else -1.0)
         duration = (self.get_dimmer_on_duration() if direction == 1.0 else self.get_dimmer_off_duration())
 
-        logger.info('Changing dimmer \'%s\' from %s%% to %s%% in %s seconds',
-                  self.get_name(),from_value,to_value,duration)
+        logger.info('Changing dimmer \'%s\' from %s%% to %s%% in %s seconds',self.get_name(),from_value,to_value,duration)
 
         distance = abs(from_value - to_value)
-        if duration == 0.0:
+        if duration == 0.0 or distance == 0.0:
           steps = 1.0
         else:
           steps = math.floor(min( (abs(duration) / terrariumSwitch.PWM_DIMMER_MIN_TIMEOUT),
