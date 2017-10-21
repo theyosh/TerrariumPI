@@ -1234,20 +1234,18 @@ function update_power_switch(id, data) {
   power_switch.find('h2 small.data_update').text(update_data);
 
   if (data.hardwaretype === 'pwm-dimmer') {
-    power_switch.find('div.power_switch').removeClass('big').addClass('dimmer').html('<input class="knob" data-width="75%" data-angleOffset=20 data-angleArc=320 data-fgColor="#1ABB9C" value="'+ data.state + '">');
+    power_switch.find('div.power_switch').removeClass('big').addClass('dimmer').html('<input class="knob" data-width="75%" data-angleOffset=20 data-angleArc=320 data-fgColor="' + (data.state > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB') + '" value="'+ data.state + '">');
 
     power_switch.find('.knob').knob({
 			release: function(value) {
-        $.getJSON('/api/switch/state/' + id + '/' + value,function(data){
+        $.getJSON('/api/switch/state/' + id + '/' + value,function(dummy){
         });
       },
       format: function(value) {
         return value + '%';
       }
     });
-    console.log(data);
-    data.state = data.state >= data.dimmer_off_percentage
-    console.log(data);
+    data.state = data.state > data.dimmer_off_percentage
   }
   power_switch.find('span.glyphicon').removeClass('blue green').addClass((data.state ? 'green' : 'blue'));
 }
