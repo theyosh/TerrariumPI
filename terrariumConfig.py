@@ -291,6 +291,12 @@ class terrariumConfig:
     if 'state' in data:
       del(data['state'])
 
+    if 'current_power_wattage' in data:
+      del(data['current_power_wattage'])
+
+    if 'current_water_flow' in data:
+      del(data['current_water_flow'])
+
     return self.__update_config('switch' + str(data['id']),data)
 
   def save_power_switches(self,data):

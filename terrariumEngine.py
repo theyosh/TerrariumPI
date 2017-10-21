@@ -118,6 +118,10 @@ class terrariumEngine():
         self.power_switches[switch_config[power_switch_config]['id']].set_name(switch_config[power_switch_config]['name'])
         self.power_switches[switch_config[power_switch_config]['id']].set_power_wattage(switch_config[power_switch_config]['power_wattage'])
         self.power_switches[switch_config[power_switch_config]['id']].set_water_flow(switch_config[power_switch_config]['water_flow'])
+        self.power_switches[switch_config[power_switch_config]['id']].set_dimmer_on_duration(switch_config[power_switch_config]['dimmer_on_duration'])
+        self.power_switches[switch_config[power_switch_config]['id']].set_dimmer_on_percentage(switch_config[power_switch_config]['dimmer_on_percentage'])
+        self.power_switches[switch_config[power_switch_config]['id']].set_dimmer_off_duration(switch_config[power_switch_config]['dimmer_off_duration'])
+        self.power_switches[switch_config[power_switch_config]['id']].set_dimmer_off_percentage(switch_config[power_switch_config]['dimmer_off_percentage'])
 
       else:
         power_switch = terrariumSwitch(
@@ -127,6 +131,10 @@ class terrariumEngine():
           switch_config[power_switch_config]['name'],
           switch_config[power_switch_config]['power_wattage'],
           switch_config[power_switch_config]['water_flow'],
+          switch_config[power_switch_config]['dimmer_on_duration'],
+          switch_config[power_switch_config]['dimmer_on_percentage'],
+          switch_config[power_switch_config]['dimmer_off_duration'],
+          switch_config[power_switch_config]['dimmer_off_percentage'],
           self.toggle_switch
         )
         self.power_switches[power_switch.get_id()] = power_switch
@@ -406,6 +414,10 @@ class terrariumEngine():
       power_switch.set_name(switchdata['name'])
       power_switch.set_power_wattage(switchdata['power_wattage'])
       power_switch.set_water_flow(switchdata['water_flow'])
+      power_switch.set_dimmer_on_duration(switchdata['dimmer_on_duration'])
+      power_switch.set_dimmer_on_percentage(switchdata['dimmer_on_percentage'])
+      power_switch.set_dimmer_off_duration(switchdata['dimmer_off_duration'])
+      power_switch.set_dimmer_off_percentage(switchdata['dimmer_off_percentage'])
 
       new_switches[power_switch.get_id()] = power_switch
 
