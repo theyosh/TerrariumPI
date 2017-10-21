@@ -1245,6 +1245,9 @@ function update_power_switch(id, data) {
         return value + '%';
       }
     });
+    console.log(data);
+    data.state = data.state >= data.dimmer_off_percentage
+    console.log(data);
   }
   power_switch.find('span.glyphicon').removeClass('blue green').addClass((data.state ? 'green' : 'blue'));
 }

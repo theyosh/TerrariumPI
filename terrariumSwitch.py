@@ -175,6 +175,8 @@ class terrariumSwitch():
 
         thread.start_new_thread(self.__dim_switch, (self.state,state))
 
+      print 'New state'
+      print state
       self.state = state
       if self.get_hardware_type() != 'pwm-dimmer':
         logger.info('Toggle switch \'%s\' from %s',self.get_name(),('off to on' if self.is_on() else 'on to off'))
