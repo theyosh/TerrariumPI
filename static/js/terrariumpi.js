@@ -1213,9 +1213,29 @@ function add_webcam_row(id,location,name,rotation,preview) {
 
 function update_power_switch(id, data) {
   var power_switch = $('#switch_' + id);
+  var update_data = '';
+  if (data.hardwaretype === 'pwm-dimmer') {
+    update_data = formatNumber(data.current_power_wattage) + 'W / '
+  }
+  update_data += formatNumber(data.power_wattage) + 'W';
+  if (data.water_flow > 0) {
+    update_data += ' - ' + formatNumber(data.water_flow) + 'L/m';
+  }
+
   power_switch.find('h2 span.title').text('{{_('Switch')}} ' + data.name);
-  power_switch.find('h2 small.data_update').text(formatNumber(data.power_wattage) + 'W' + (data.water_flow > 0 ? ' - ' + formatNumber(data.water_flow) + 'L/m' : ''));
-  power_switch.find('span.glyphicon').removeClass('blue green').addClass((data.state ? 'green' : 'blue')).attr('title','{{_('Toggle power switch')}}');
+  power_switch.find('h2 small.data_update').text(update_data);
+
+  if (data.hardwaretype === 'pwm-dimmer') {
+    power_switch.find('div.power_switch').removeClass('big').addClass('dimmer').html('<input class="knob" data-width="80%" data-angleOffset=20 data-angleArc=320 data-fgColor="#1ABB9C" value="'+ data.state + '">');
+
+    power_switch.find('.knob').knob({
+			release: function(value) {
+        $.getJSON('/api/switch/state/' + id + '/' + value,function(data){
+        });
+      }
+    });
+  }
+  power_switch.find('span.glyphicon').removeClass('blue green').addClass((data.state ? 'green' : 'blue'));
 }
 
 function toggleSwitch(id) {

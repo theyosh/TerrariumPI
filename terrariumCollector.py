@@ -117,6 +117,13 @@ class terrariumCollector():
         if type in ['switches']:
           if 'time' in newdata:
             now = newdata['time']
+
+          # Make a duplicate of last state and save it with 1 sec back in time to smooth the graphs
+          cur.execute('''INSERT INTO switch_data (id,timestamp,state,power_wattage,water_flow)
+                          SELECT id, ? as timestamp,state,power_wattage,water_flow
+                          FROM switch_data
+                          WHERE id = ? ORDER BY timestamp DESC LIMIT 1''', (now-1, id))
+
           cur.execute('REPLACE INTO switch_data (id, timestamp, state, power_wattage, water_flow) VALUES (?,?,?,?,?)',
                       (id, now, newdata['state'], newdata['power_wattage'], newdata['water_flow']))
 
@@ -179,15 +186,14 @@ class terrariumCollector():
     del(switch['address'])
     del(switch['name'])
 
-    # Create new object for the previous state. Copy data and invert boolean value
-    if 'init' not in switch:
-      old_swich = switch.copy()
-      old_swich['state'] = not switch['state']
-      old_swich['time'] = int(time.time()) - 1
-      self.__log_data('switches',switch_id,old_swich)
-    else:
-      del(switch['init'])
+    # Rather updating a big database, we translate some fields here
+    switch['power_wattage'] = switch['current_power_wattage']
+    switch['water_flow'] = switch['current_water_flow']
+    del(switch['current_power_wattage'])
+    del(switch['current_water_flow'])
 
+    if 'init' in switch:
+      del(switch['init'])
     self.__log_data('switches',switch_id,switch)
 
   def log_door_data(self,door):

@@ -11,6 +11,7 @@ Think off:
 And all this is controlled with a nice webinterface based on [Gentelella a Bootstrap 3 template](https://github.com/puikinsh/gentelella/).
 ## Features
 - Controlling electronic devices like lights, sprayers, heating and cooling equipment
+- Support for dimming electronic devices
 - Reading out temperature and humidity sensors
 - Open door detection (sprayer will not spray when a door is open)
 - Support for native Raspberry Pi cam out of the box
@@ -37,15 +38,15 @@ Your language not in the list? [Create your own language translation](https://gi
 
 ## Installation
 The installation expects a Pi with working network and ssh. It is tested with [Raspbian Stretch Lite](https://www.raspberrypi.org/downloads/raspbian/). For now the Full version is not working somehow.... So use the lite image!
-1. Get a working Raspberry Pi and login as user 'pi'  
+1. Get a working Raspberry Pi and login as user 'pi'
   `ssh pi@[raspberry_ip]`
-2. Clone this repository and submodules!  
+2. Clone this repository and submodules!
   `git clone --recursive https://github.com/theyosh/TerrariumPI.git`
-3. Enter the new TerrariumPI folder  
+3. Enter the new TerrariumPI folder
   `cd TerrariumPI`
-4. Run the installer script and wait  
+4. Run the installer script and wait
   `sudo ./install.sh`
-5. Reboot Raspberry PI to get all the needed modules loaded  
+5. Reboot Raspberry PI to get all the needed modules loaded
   `sudo reboot`
 6. Go to the webinterface at http://[raspberry_ip]:8090
 
@@ -55,11 +56,11 @@ Make sure that your Pi is secured when you put it to the Internet. Would be a sh
 
 ## Updating
 This updating is based on that the software is installed with the steps in the Installation above.
-1. Get a working Raspberry Pi and login as user 'pi'  
+1. Get a working Raspberry Pi and login as user 'pi'
   `ssh pi@[raspberry_ip]`
-2. Enter the TerrariumPI folder  
+2. Enter the TerrariumPI folder
   `cd TerrariumPI`
-3. Update the new code with git  
+3. Update the new code with git
   `git pull`
 4. Restart TerrariumPI according to: https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-restart-terrariumpi
 
@@ -70,6 +71,7 @@ This software requires some extra hardware in order to run and work. The bare mi
 - Power relay board
   - USB versions (Serial and Bitbang)
   - GPIO versions
+  - PWM Dimmer versions
 - Temperature/humdity sensors DHT11, DHT22, AM2303, DS1820, HIH4000, etc through
   - OWFS
   - GPIO

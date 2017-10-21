@@ -186,10 +186,10 @@ class terrariumEngine():
             'water' : {'current' : 0.0 , 'max' : 0.0}}
 
     for switchid in self.power_switches:
-      data['power']['current'] += self.power_switches[switchid].get_power_wattage() if self.power_switches[switchid].is_on() else 0.0
+      data['power']['current'] += self.power_switches[switchid].get_current_power_wattage() if self.power_switches[switchid].is_on() else 0.0
       data['power']['max'] += self.power_switches[switchid].get_power_wattage()
 
-      data['water']['current'] += self.power_switches[switchid].get_water_flow() if self.power_switches[switchid].is_on() else 0.0
+      data['water']['current'] += self.power_switches[switchid].get_current_water_flow() if self.power_switches[switchid].is_on() else 0.0
       data['water']['max'] += self.power_switches[switchid].get_water_flow()
 
     return data

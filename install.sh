@@ -15,7 +15,7 @@ apt-get -y autoremove
 # Install required packages to get the terrarium software running
 aptitude -y update
 aptitude -y safe-upgrade
-aptitude -y install libftdi1 screen python-imaging python-dateutil python-ow python-rpi.gpio python-psutil git subversion watchdog build-essential python-dev python-picamera python-opencv python-pip
+aptitude -y install libftdi1 screen python-imaging python-dateutil python-ow python-rpi.gpio python-psutil git subversion watchdog build-essential python-dev python-picamera python-opencv python-pip python-pigpio
 
 if [ `ls -l gentelella | grep -v ^t | wc -l` -eq 0 ]; then
   # Manual get Gentelella bootstrap 3 template

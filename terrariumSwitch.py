@@ -4,14 +4,17 @@ logger = logging.getLogger(__name__)
 
 from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
 import RPi.GPIO as GPIO
+GPIO.setwarnings(False)
+import pigpio
 from hashlib import md5
 
 class terrariumSwitch():
 
-  valid_hardware_types = ['ftdi','gpio','gpio-inverse']
+  valid_hardware_types = ['ftdi','gpio','gpio-inverse','pwm-dimmer']
 
   OFF = False
   ON = True
+  PWM_MAXDIM = 880 # http://www.esp8266-projects.com/2017/04/raspberry-pi-domoticz-ac-dimmer-part-1/
 
   bitbang_addresses = {
     "1":"2",
@@ -33,6 +36,8 @@ class terrariumSwitch():
 
     if self.get_hardware_type() == 'ftdi':
       self.__load_ftdi_device()
+    elif self.get_hardware_type() == 'pwm-dimmer':
+      self.__load_pwm_device()
     elif 'gpio' in self.get_hardware_type():
       self.__load_gpio_device()
 
@@ -50,7 +55,7 @@ class terrariumSwitch():
                  self.get_water_flow()))
 
     # Force to off state!
-    self.init = True
+    #self.init = True
     self.state = None
     self.set_state(terrariumSwitch.OFF,True)
 
@@ -63,6 +68,14 @@ class terrariumSwitch():
 
   def __load_gpio_device(self):
     GPIO.setmode(GPIO.BOARD)
+
+  def __load_pwm_device(self):
+    #self.callback = None
+    # localhost will not work always due to IPv6. Explicit 127.0.0.1 host
+    self.__pigpio = pigpio.pi('127.0.0.1',8888)
+    if not self.__pigpio.connected:
+      logger.error('PiGPIOd process is not running')
+      self.__pigpio = False
 
   def set_state(self, state, force = False):
     if self.get_state() is not state or force:
@@ -91,17 +104,31 @@ class terrariumSwitch():
 
       elif self.get_hardware_type() == 'gpio':
         GPIO.output(int(self.get_address()), ( GPIO.HIGH if state is terrariumSwitch.ON else GPIO.LOW ))
+
       elif self.get_hardware_type() == 'gpio-inverse':
         GPIO.output(int(self.get_address()), ( GPIO.LOW if state is terrariumSwitch.ON else GPIO.HIGH ))
 
+      elif self.get_hardware_type() == 'pwm-dimmer' and self.__pigpio is not False:
+        # State 100 = full on which means 0 dim.
+        # State is inverse of dim
+        if state is terrariumSwitch.ON:
+          state = 100.0
+        elif state is terrariumSwitch.OFF or not (0 <= state <= 100):
+          state = 0.0
+
+        dim = terrariumSwitch.PWM_MAXDIM * ((100.0 - state) / 100.0)
+        self.__pigpio.hardware_PWM(int(self.get_address()), 5000, int(dim) * 1000) # 5000Hz state*1000% dutycycle
+        logger.info('Changed dimmer \'%s\' from %s to %s',self.get_name(),self.state,state)
+
       self.state = state
-      logger.info('Toggle switch \'%s\' from %s',self.get_name(),('off to on' if self.is_on() else 'on to off'))
+      if self.get_hardware_type() != 'pwm-dimmer':
+        logger.info('Toggle switch \'%s\' from %s',self.get_name(),('off to on' if self.is_on() else 'on to off'))
       if self.callback is not None:
         data = self.get_data()
 
-        if self.init:
-          data['init'] = 1
-          self.init = False
+        #if self.init:
+        #  data['init'] = 1
+        #  self.init = False
 
         self.callback(data)
 
@@ -116,7 +143,9 @@ class terrariumSwitch():
             'address' : self.get_address(),
             'name' : self.get_name(),
             'power_wattage' : self.get_power_wattage(),
+            'current_power_wattage' : self.get_current_power_wattage(),
             'water_flow' : self.get_water_flow(),
+            'current_water_flow' : self.get_current_water_flow(),
             'state' : self.get_state()
             }
 
@@ -153,6 +182,15 @@ class terrariumSwitch():
   def get_power_wattage(self):
     return self.power_wattage
 
+  def get_current_power_wattage(self):
+    wattage = 0.0
+    if self.get_hardware_type() == 'pwm-dimmer':
+      wattage = self.get_power_wattage() * (self.get_state() / 100.0)
+    else:
+      wattage = self.get_power_wattage()
+
+    return wattage
+
   def set_power_wattage(self,value):
     try:
       self.power_wattage = float(value)
@@ -161,6 +199,15 @@ class terrariumSwitch():
 
   def get_water_flow(self):
     return self.water_flow
+
+  def get_current_water_flow(self):
+    waterflow = 0.0
+    if self.get_hardware_type() == 'pwm-dimmer':
+      waterflow = self.get_water_flow() * (self.get_state() / 100.0)
+    else:
+      waterflow = self.get_water_flow()
+
+    return waterflow
 
   def set_water_flow(self,value):
     try:
@@ -177,10 +224,22 @@ class terrariumSwitch():
     return None
 
   def is_on(self):
-    return self.get_state() is terrariumSwitch.ON
+    state = None
+    if self.get_hardware_type() == 'pwm-dimmer':
+      state = self.get_state() > 0.0
+    else:
+      state = self.get_state()
+
+    return state is terrariumSwitch.ON
 
   def is_off(self):
-    return self.get_state() is terrariumSwitch.OFF
+    state = None
+    if self.get_hardware_type() == 'pwm-dimmer':
+      state = self.get_state() == 0.0
+    else:
+      state = self.get_state()
+
+    return state is terrariumSwitch.OFF
 
   def on(self):
     if self.get_state() is None or self.is_off():
@@ -191,3 +250,7 @@ class terrariumSwitch():
     if self.get_state() is None or self.is_on():
       self.set_state(terrariumSwitch.OFF)
       return self.is_off()
+
+  def dim(self,value):
+    if 0 <= value <= 100:
+      self.set_state(100 - value)

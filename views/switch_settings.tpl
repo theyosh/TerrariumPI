@@ -81,6 +81,7 @@
                               <option value="ftdi">{{_('FTDI')}}</option>
                               <option value="gpio">{{_('GPIO')}}</option>
                               <option value="gpio-inverse">{{_('GPIO Inverse')}}</option>
+                              <option value="pwm-dimmer">{{_('PWM Dimmer')}}</option>
                             </select>
                           </div>
                         </div>
