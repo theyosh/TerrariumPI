@@ -15,14 +15,7 @@ apt-get -y autoremove
 # Install required packages to get the terrarium software running
 aptitude -y update
 aptitude -y safe-upgrade
-aptitude -y install libftdi1 screen python-imaging python-dateutil python-ow python-rpi.gpio python-psutil git subversion watchdog build-essential python-dev python-picamera python-opencv python-pip python-pigpio
-
-if [ `ls -l gentelella | grep -v ^t | wc -l` -eq 0 ]; then
-  # Manual get Gentelella bootstrap 3 template
-  git clone https://github.com/puikinsh/gentelella.git gentelella
-fi
-
-cd ..
+aptitude -y install libftdi1 screen python-imaging python-dateutil python-ow python-rpi.gpio python-psutil git subversion watchdog build-essential python-dev python-picamera python-opencv python-pip python-pigpio i2c-tools owfs ow-shell
 
 # Basic config:
 raspi-config
@@ -30,23 +23,36 @@ raspi-config
 # Set the timezone
 dpkg-reconfigure tzdata
 
+if [ `ls -l gentelella | grep -v ^t | wc -l` -eq 0 ]; then
+  # Manual get Gentelella bootstrap 3 template
+  git clone https://github.com/puikinsh/gentelella.git gentelella
+fi
+
+cd gentelella
+git pull
+cd "${BASEDIR}/.."
+
 # Install multiple python modules
-pip install --upgrade gevent untangle uptime bottle bottle_websocket
+pip install --upgrade gevent untangle uptime bottle bottle_websocket pylibftdi
 
 # Install https://pypi.python.org/pypi/pylibftdi
 # Docu https://pylibftdi.readthedocs.io/
-pip install --upgrade pylibftdi
 # Make sure that the normal Pi user can read and write to the usb driver
 echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", GROUP="dialout", MODE="0660"' > /etc/udev/rules.d/99-libftdi.rules
 echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", GROUP="dialout", MODE="0660"' >> /etc/udev/rules.d/99-libftdi.rules
 
 # Install 1 Wire stuff
-aptitude -y install i2c-tools owfs ow-shell
 sed -i.bak 's/^server: FAKE = DS18S20,DS2405/#server: FAKE = DS18S20,DS2405/' /etc/owfs.conf
-echo "server: device=/dev/i2c-1" >> /etc/owfs.conf
+
+if [ `grep -ic "server: device=/dev/i2c-1" /etc/owfs.conf` -eq 0 ]; then
+  echo "server: device=/dev/i2c-1" >> /etc/owfs.conf
+fi
 
 sed -i.bak 's/^blacklist i2c-bcm2708/#blacklist i2c-bcm2708/' /etc/modprobe.d/raspi-blacklist.conf
-echo "i2c-dev" >> /etc/modules
+if [ `grep -ic "i2c-dev" /etc/modules` -eq 0 ]; then
+  echo "i2c-dev" >> /etc/modules
+fi
+
 modprobe i2c-bcm2708
 modprobe i2c-dev
 
@@ -58,6 +64,7 @@ fi
 cd Adafruit_Python_DHT
 git pull
 sudo python setup.py install
+cd "${BASEDIR}/.."
 
 # Remove unneeded OWS services
 update-rc.d -f owftpd remove
@@ -75,7 +82,7 @@ usermod -a -G gpio pi 2> /dev/null
 echo "pi ALL=(ALL) NOPASSWD: /usr/sbin/service pigpiod restart" > /etc/sudoers.d/terrariumpi
 systemctl enable pigpiod
 
-sync
-
 # We are done!
+sync
 echo "Instaltion is done. Please reboot once to get the I2C and Adafruit DHT libary working correctly"
+
