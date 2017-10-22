@@ -204,7 +204,7 @@ class terrariumEngine():
     return data
 
   def __get_total_power_usage_water_flow(self):
-    totals = {'power_wattage' : {'duration' : 0.0 , 'wattage' : 0.0, 'price' : 0.0},
+    totals = {'power_wattage' : {'duration' : 0.0 , 'wattage' : self.get_uptime()['uptime'] * self.pi_power_wattage, 'price' : 0.0},
               'water_flow'    : {'duration' : 0.0 , 'water'   : 0.0, 'price' : 0.0}}
 
     history = self.collector.get_history(['switches'],int(time.time()),0)
