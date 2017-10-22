@@ -166,6 +166,9 @@ class terrariumEngine():
       )
       self.doors[door.get_id()] = door
 
+    if not reloading:
+      self.toggle_door_status(door.get_data())
+
     logger.info('Done %s terrariumPI doors. Found %d doors in %.3f seconds' % ('reloading' if reloading else 'loading',
                                                                                 len(self.doors),
                                                                                 time.time()-starttime))
@@ -189,7 +192,7 @@ class terrariumEngine():
                                                                                     len(self.webcams),
                                                                                     time.time()-starttime))
 
-  def __get_power_usage_water_flow(self, socket = False):
+  def __get_current_power_usage_water_flow(self, socket = False):
     data = {'power' : {'current' : self.pi_power_wattage , 'max' : self.pi_power_wattage},
             'water' : {'current' : 0.0 , 'max' : 0.0}}
 
@@ -202,8 +205,20 @@ class terrariumEngine():
 
     return data
 
-  def __calculate_power_usage_water_flow(self):
-    return self.collector.get_history(['switches','summary'])
+  def __get_total_power_usage_water_flow(self):
+    totals = {'power_wattage' : {'duration' : 0.0 , 'wattage' : 0.0, 'price' : 0.0},
+              'water_flow'    : {'duration' : 0.0 , 'water'   : 0.0, 'price' : 0.0}}
+
+    history = self.collector.get_history(['switches'],int(time.time()),0)
+
+    for switchid in history['switches']:
+      totals['power_wattage']['duration'] += history['switches'][switchid]['totals']['power_wattage']['duration']
+      totals['power_wattage']['wattage'] += history['switches'][switchid]['totals']['power_wattage']['wattage']
+
+      totals['water_flow']['duration'] += history['switches'][switchid]['totals']['water_flow']['duration']
+      totals['water_flow']['water'] += history['switches'][switchid]['totals']['water_flow']['water']
+
+    return totals
 
   def __engine_loop(self):
     while True:
@@ -229,18 +244,6 @@ class terrariumEngine():
 
       # Websocket callback
       self.__send_message({'type':'sensor_gauge','data':average_data})
-
-      # Calculate power and water usage per day every 9th minute
-      # Disabled again!
-      '''
-      if int(time.strftime('%M')) % 10 == 9:
-        for powerswitchid in self.power_switches:
-          self.collector.log_switch_data(self.power_switches[powerswitchid].get_data())
-        self.collector.log_total_power_and_water_usage(self.pi_power_wattage)
-
-        for doorid in self.doors:
-          self.collector.log_door_data(self.doors[doorid].get_data())
-      '''
 
       # Websocket messages back
       self.get_uptime(socket=True)
@@ -436,8 +439,6 @@ class terrariumEngine():
     if self.environment is not None:
       self.get_environment(socket=True)
 
-    if data['state'] is False:
-      self.collector.log_total_power_and_water_usage(self.pi_power_wattage)
   # End switches part
 
 
@@ -700,15 +701,16 @@ class terrariumEngine():
       return data
 
   def get_power_usage_water_flow(self, socket = False):
-    data = self.__get_power_usage_water_flow()
-    totaldata = self.__calculate_power_usage_water_flow()
+    data = self.__get_current_power_usage_water_flow()
+    totaldata = self.__get_total_power_usage_water_flow()
 
-    data['power']['total'] = totaldata['total_power']
-    data['power']['duration'] = totaldata['duration']
-    data['power']['price'] = self.config.get_power_price()
-    data['water']['total'] = totaldata['total_water']
-    data['water']['duration'] = totaldata['duration']
-    data['water']['price'] = self.config.get_water_price()
+    data['power']['total'] = totaldata['power_wattage']['wattage']
+    data['power']['duration'] = totaldata['power_wattage']['duration']
+    data['power']['price'] = self.config.get_power_price() * (totaldata['power_wattage']['wattage'] / (3600 * 1000))
+
+    data['water']['total'] = totaldata['water_flow']['water']
+    data['water']['duration'] = totaldata['water_flow']['duration']
+    data['water']['price'] = self.config.get_water_price() * totaldata['water_flow']['water']
 
     if socket:
       self.__send_message({'type':'power_usage_water_flow','data':data});
