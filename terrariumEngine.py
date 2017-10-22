@@ -112,36 +112,34 @@ class terrariumEngine():
 
     seen_switches = []
     for power_switch_config in switch_config:
-      seen_switches.append(switch_config[power_switch_config]['id'])
-      if switch_config[power_switch_config]['id'] in self.power_switches:
-        # Update switch
-        self.power_switches[switch_config[power_switch_config]['id']].set_name(switch_config[power_switch_config]['name'])
-        self.power_switches[switch_config[power_switch_config]['id']].set_power_wattage(switch_config[power_switch_config]['power_wattage'])
-        self.power_switches[switch_config[power_switch_config]['id']].set_water_flow(switch_config[power_switch_config]['water_flow'])
-        self.power_switches[switch_config[power_switch_config]['id']].set_dimmer_on_duration(switch_config[power_switch_config]['dimmer_on_duration'])
-        self.power_switches[switch_config[power_switch_config]['id']].set_dimmer_on_percentage(switch_config[power_switch_config]['dimmer_on_percentage'])
-        self.power_switches[switch_config[power_switch_config]['id']].set_dimmer_off_duration(switch_config[power_switch_config]['dimmer_off_duration'])
-        self.power_switches[switch_config[power_switch_config]['id']].set_dimmer_off_percentage(switch_config[power_switch_config]['dimmer_off_percentage'])
+      power_switch_id = switch_config[power_switch_config]['id']
+      seen_switches.append(power_switch_id)
+      if not power_switch_id in self.power_switches:
+        # Add new switch
+        power_switch = terrariumSwitch(switch_config[power_switch_config]['id'],
+                                       switch_config[power_switch_config]['hardwaretype'],
+                                       switch_config[power_switch_config]['address'],
+                                       callback=self.toggle_switch)
+        power_switch_id = power_switch.get_id()
+        self.power_switches[power_switch_id] = power_switch
 
-      else:
-        power_switch = terrariumSwitch(
-          switch_config[power_switch_config]['id'],
-          switch_config[power_switch_config]['hardwaretype'],
-          switch_config[power_switch_config]['address'],
-          switch_config[power_switch_config]['name'],
-          switch_config[power_switch_config]['power_wattage'],
-          switch_config[power_switch_config]['water_flow'],
-          switch_config[power_switch_config]['dimmer_on_duration'],
-          switch_config[power_switch_config]['dimmer_on_percentage'],
-          switch_config[power_switch_config]['dimmer_off_duration'],
-          switch_config[power_switch_config]['dimmer_off_percentage'],
-          self.toggle_switch
-        )
-        self.power_switches[power_switch.get_id()] = power_switch
+      # Update switch
+      self.power_switches[power_switch_id].set_name(switch_config[power_switch_config]['name'])
+      self.power_switches[power_switch_id].set_power_wattage(switch_config[power_switch_config]['power_wattage'])
+      self.power_switches[power_switch_id].set_water_flow(switch_config[power_switch_config]['water_flow'])
+
+      if 'dimmer_on_duration' in switch_config[power_switch_config]:
+        self.power_switches[power_switch_id].set_dimmer_on_duration(switch_config[power_switch_config]['dimmer_on_duration'])
+      if 'dimmer_on_percentage' in switch_config[power_switch_config]:
+        self.power_switches[power_switch_id].set_dimmer_on_percentage(switch_config[power_switch_config]['dimmer_on_percentage'])
+      if 'dimmer_off_duration' in switch_config[power_switch_config]:
+        self.power_switches[power_switch_id].set_dimmer_off_duration(switch_config[power_switch_config]['dimmer_off_duration'])
+      if 'dimmer_off_percentage' in switch_config[power_switch_config]:
+        self.power_switches[power_switch_id].set_dimmer_off_percentage(switch_config[power_switch_config]['dimmer_off_percentage'])
 
     for power_switch_id in set(self.power_switches) - set(seen_switches):
       # clean up old deleted switches
-      del(self.power_switches[switch_config[power_switch_config]['id']])
+      del(self.power_switches[power_switch_id])
 
     if reloading:
       self.environment.set_power_switches(self.power_switches)
@@ -417,10 +415,14 @@ class terrariumEngine():
       power_switch.set_name(switchdata['name'])
       power_switch.set_power_wattage(switchdata['power_wattage'])
       power_switch.set_water_flow(switchdata['water_flow'])
-      power_switch.set_dimmer_on_duration(switchdata['dimmer_on_duration'])
-      power_switch.set_dimmer_on_percentage(switchdata['dimmer_on_percentage'])
-      power_switch.set_dimmer_off_duration(switchdata['dimmer_off_duration'])
-      power_switch.set_dimmer_off_percentage(switchdata['dimmer_off_percentage'])
+      if 'dimmer_on_duration' in switchdata:
+        power_switch.set_dimmer_on_duration(switchdata['dimmer_on_duration'])
+      if 'dimmer_on_percentage' in switchdata:
+        power_switch.set_dimmer_on_percentage(switchdata['dimmer_on_percentage'])
+      if 'dimmer_off_duration' in switchdata:
+        power_switch.set_dimmer_off_duration(switchdata['dimmer_off_duration'])
+      if 'dimmer_off_percentage' in switchdata:
+        power_switch.set_dimmer_off_percentage(switchdata['dimmer_off_percentage'])
 
       new_switches[power_switch.get_id()] = power_switch
 
