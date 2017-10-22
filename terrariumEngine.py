@@ -204,17 +204,26 @@ class terrariumEngine():
     return data
 
   def __get_total_power_usage_water_flow(self):
-    totals = {'power_wattage' : {'duration' : 0.0 , 'wattage' : self.get_uptime()['uptime'] * self.pi_power_wattage, 'price' : 0.0},
-              'water_flow'    : {'duration' : 0.0 , 'water'   : 0.0, 'price' : 0.0}}
+    totals = {'power_wattage' : {'duration' : int(time.time()) , 'wattage' : 0.0, 'price' : 0.0},
+              'water_flow'    : {'duration' : int(time.time()) , 'water'   : 0.0, 'price' : 0.0}}
 
     history = self.collector.get_history(['switches'],int(time.time()),0)
 
     for switchid in history['switches']:
-      totals['power_wattage']['duration'] += history['switches'][switchid]['totals']['power_wattage']['duration']
+      if history['switches'][switchid]['power_wattage'][0][0] / 1000.0 < totals['power_wattage']['duration']:
+        totals['power_wattage']['duration'] = history['switches'][switchid]['power_wattage'][0][0] / 1000.0
+
       totals['power_wattage']['wattage'] += history['switches'][switchid]['totals']['power_wattage']['wattage']
 
-      totals['water_flow']['duration'] += history['switches'][switchid]['totals']['water_flow']['duration']
+      if history['switches'][switchid]['water_flow'][0][0] / 1000.0 < totals['water_flow']['duration']:
+        totals['water_flow']['duration'] = history['switches'][switchid]['water_flow'][0][0] / 1000.0
+
       totals['water_flow']['water'] += history['switches'][switchid]['totals']['water_flow']['water']
+
+    totals['power_wattage']['duration'] = int(time.time()) - totals['power_wattage']['duration']
+    totals['water_flow']['duration'] = int(time.time()) - totals['water_flow']['duration']
+
+    totals['power_wattage']['wattage'] += max(totals['power_wattage']['duration'],totals['water_flow']['duration']) * self.pi_power_wattage
 
     return totals
 
