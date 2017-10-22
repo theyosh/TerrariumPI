@@ -20,8 +20,8 @@ class terrariumSwitch():
 
   # PWM Dimmer settings
   PWM_DIMMER_MAXDIM = 880 # http://www.esp8266-projects.com/2017/04/raspberry-pi-domoticz-ac-dimmer-part-1/
-  PWM_DIMMER_MIN_TIMEOUT=0.3
-  PWM_DIMMER_MIN_STEP=1.0
+  PWM_DIMMER_MIN_TIMEOUT=0.2
+  PWM_DIMMER_MIN_STEP=1
 
   bitbang_addresses = {
     "1":"2",
@@ -91,6 +91,7 @@ class terrariumSwitch():
   def __dim_switch(self,from_value,to_value):
     # When the dimmer is working, ignore new state changes.
     if not self.__dimmer_running:
+      self.__pigpio.set_pull_up_down(int(self.get_address()), pigpio.PUD_OFF)
       self.__dimmer_running = True
 
       if from_value is None:
