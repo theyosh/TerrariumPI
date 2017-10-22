@@ -71,6 +71,8 @@ fi
 groupadd gpio 2> /dev/null
 usermod -a -G gpio pi 2> /dev/null
 
+# Make sure pigpiod is started at boot, and that user PI can restart it with sudo command
+echo "pi ALL=(ALL) NOPASSWD: /usr/sbin/service pigpiod restart" > /etc/sudoers.d/terrariumpi
 systemctl enable pigpiod
 
 sync
