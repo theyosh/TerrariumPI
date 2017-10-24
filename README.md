@@ -27,7 +27,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
 - Rain control based on humidity sensors and timers
 - Heater control based on temperature sensors or timers
 - Cooling control based on temperature sensors or timers
-- Weather forecast from external source for lighting schema (turing on when sun rises, turning off when sun sets)
+- Weather forecast from external source for lighting schema
 - Temperatures in Celsius or Fahrenheit
 - Alarm detections
 
