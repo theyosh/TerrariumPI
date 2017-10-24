@@ -1,27 +1,33 @@
 # TerrariumPI 2.8.2
-Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control an enclosed environment so that the temperature and humidity is of a constant value. This is done by using temperature and humidity sensors and realy switches to activate external devices.
+Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
 
-It has support for lights, sprayer, heater and cooler equipment. The amount of devices that can be controlled depends on the used relay boards.
+For humidity control there is support for a spraying system. The sprayer can be configured to spray for an X amount of seconds and there is a minumal period between two spray actions. Use at least one humitidy sensors to get a constant humidity value.
+
+The software is that flexible that there is no limit in amount of sensors, relay boards or door sensors. The usage can be endless.
 
 Think off:
-- Terrarium
+- Terrarium (wet of dry)
 - Aquarium
+- Tanks with animals or plants
 - Growhouse
 
 And all this is controlled with a nice webinterface based on [Gentelella a Bootstrap 3 template](https://github.com/puikinsh/gentelella/).
 ## Features
 - Controlling electronic devices like lights, sprayers, heating and cooling equipment
 - Support for dimming electronic devices
-- Reading out temperature and humidity sensors
-- Open door detection (sprayer will not spray when a door is open)
+  - Manual dimming through web interface
+  - Predefined on and off durations
+  - Predefined on and off dimming percentages
+- Reading out multiple temperature and humidity sensors
 - Support for native Raspberry Pi cam out of the box
 - Support for USB and remote webcams
+- Open door detection (sprayer will not spray when a door is open)
 - Total power and water usage for costs calculation
 - Lights control based on sun rise and sun set or timers
-- Rain control based on measured humidity
+- Rain control based on humidity sensors and timers
 - Heater control based on temperature sensors or timers
 - Cooling control based on temperature sensors or timers
-- Weather forecast from external source
+- Weather forecast from external source for lighting schema (turing on when sun rises, turning off when sun sets)
 - Temperatures in Celsius or Fahrenheit
 - Alarm detections
 
@@ -62,12 +68,14 @@ This updating is based on that the software is installed with the steps in the I
   `cd TerrariumPI`
 3. Update the new code with git
   `git pull`
+4. Re-run the installation script in order to update software dependencies
+  `sudo ./install.sh`
 4. Restart TerrariumPI according to: https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-restart-terrariumpi
 
 Now clear your browser cache and reload the webinterface. A brand new version should be running.
 
 ## Hardware
-This software requires a Raspberry Pi and some extra hardware in order to run and work. The bare minimun is
+This software requires a Raspberry Pi and some extra hardware in order to run and work. The bare minimun and tested hardware is
 - Raspberry PI
   - Pi 2
   - Pi 3
