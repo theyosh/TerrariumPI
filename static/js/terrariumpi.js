@@ -917,8 +917,8 @@ function history_graph(name, data, type) {
   };
 
   switch (type) {
-    case 'temperature':
     case 'humidity':
+    case 'temperature':
       graph_data = [{
         label: '{{_('Current')}}',
         data: data.current
@@ -982,6 +982,9 @@ function history_graph(name, data, type) {
       break;
 
     case 'switch':
+      if (data.water_flow === undefined || data.water_flow === undefined || data.water_flow.length == 0 && data.power_wattage.length == 0) {
+        graph_options.yaxis.min = 0;
+      }
       delete(graph_options.series.curvedLines);
       graph_options.series.lines = {
         show: true,
@@ -994,11 +997,13 @@ function history_graph(name, data, type) {
       }, {
         label: '{{_('Water flow in L/m')}}',
         data: data.water_flow,
-        //yaxis: 2
       }];
       break;
 
     case 'door':
+      if (data.state === undefined ||data.state.length == 0) {
+        graph_options.yaxis.min = 0;
+      }
       delete(graph_options.series.curvedLines);
       graph_options.series.lines = {
         show: true,
@@ -1023,18 +1028,23 @@ function history_graph(name, data, type) {
 
     if (type == 'switch') {
       var usage = '';
-      if (data.totals.power_wattage.duration > 0) {
-        usage = '{{_('Duration')}}: ' + moment.duration(data.totals.power_wattage.duration * 1000).humanize()
-      }
-      if (data.totals.power_wattage.wattage > 0) {
-        usage += (usage != '' ? ' - ' : '') + '{{_('Total power in kWh')}}: ' + formatNumber(data.totals.power_wattage.wattage / (3600 * 1000));
-      }
-      if (data.totals.water_flow.water > 0) {
-        usage += (usage != '' ? ' - ' : '') + '{{_('Total water in L')}}: ' + formatNumber(data.totals.water_flow.water);
+      if (data.totals !== undefined) {
+        if (data.totals.power_wattage.duration > 0) {
+          usage = '{{_('Duration')}}: ' + moment.duration(data.totals.power_wattage.duration * 1000).humanize()
+        }
+        if (data.totals.power_wattage.wattage > 0) {
+          usage += (usage != '' ? ' - ' : '') + '{{_('Total power in kWh')}}: ' + formatNumber(data.totals.power_wattage.wattage / (3600 * 1000));
+        }
+        if (data.totals.water_flow.water > 0) {
+          usage += (usage != '' ? ' - ' : '') + '{{_('Total water in L')}}: ' + formatNumber(data.totals.water_flow.water);
+        }
       }
       $('#' + name + ' .total_usage').text(usage);
     } else if (type == 'door') {
-      var usage = '{{_('Total open for')}}: ' + moment.duration(data.totals.duration).humanize();
+      var usage = '';
+      if (data.totals !== undefined) {
+        usage = '{{_('Total open for')}}: ' + moment.duration(data.totals.duration).humanize();
+      }
       $('#' + name + ' .total_usage').text(usage);
     }
     $('#' + name + ' .history_graph').bind('plothover', function (event, pos, item) {
@@ -1229,7 +1239,7 @@ function update_power_switch(id, data) {
   power_switch.find('h2 small.data_update').text(update_data);
 
   if (data.hardwaretype === 'pwm-dimmer') {
-    power_switch.find('div.power_switch').removeClass('big').addClass('dimmer').html('<input class="knob" data-width="75%" data-angleOffset=20 data-angleArc=320 data-fgColor="' + (data.state > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB') + '" value="'+ data.state + '">');
+    power_switch.find('div.power_switch').removeClass('big').addClass('dimmer').html('<input class="knob" data-thickness=".3" data-width="170" data-angleOffset=20 data-angleArc=320 data-fgColor="' + (data.state > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB') + '" value="'+ data.state + '">');
 
     power_switch.find('.knob').knob({
 			release: function(value) {
