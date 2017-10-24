@@ -35,7 +35,7 @@ class terrariumSwitch():
     "all":"FF"
   }
 
-  def __init__(self, id, hardware_type, address, name = '', power_wattage = 0.0, water_flow = 0.0, dimmer_on_duration = 0.0, dimmer_on_percentage = 100.0, dimmer_off_duration = 0.0, dimmer_off_percentage = 0.0, callback = None):
+  def __init__(self, id, hardware_type, address, name = '', power_wattage = 0.0, water_flow = 0.0, dimmer_duration = 5.0, dimmer_on_duration = 0.0, dimmer_on_percentage = 100.0, dimmer_off_duration = 0.0, dimmer_off_percentage = 0.0, callback = None):
     self.id = id
     self.callback = callback
 
@@ -53,6 +53,7 @@ class terrariumSwitch():
     self.set_power_wattage(power_wattage)
     self.set_water_flow(water_flow)
 
+    self.set_dimmer_duration(dimmer_duration)
     self.set_dimmer_on_duration(dimmer_on_duration)
     self.set_dimmer_on_percentage(dimmer_on_percentage)
     self.set_dimmer_off_duration(dimmer_off_duration)
@@ -88,13 +89,13 @@ class terrariumSwitch():
       logger.error('PiGPIOd process is not running')
       self.__pigpio = False
 
-  def __dim_switch(self,from_value,to_value):
+  def __dim_switch(self,from_value,to_value,duration):
     # When the dimmer is working, ignore new state changes.
     if not self.__dimmer_running:
       self.__pigpio.set_pull_up_down(int(self.get_address()), pigpio.PUD_OFF)
       self.__dimmer_running = True
 
-      if from_value is None:
+      if from_value is None or duration == 0:
         logger.info('Switching dimmer \'%s\' from %s%% to %s%% instantly',
                   self.get_name(),from_value,to_value)
         # Geen animatie, gelijk to_value
@@ -104,7 +105,6 @@ class terrariumSwitch():
         from_value = float(from_value)
         to_value = float(to_value)
         direction = (1.0 if from_value < to_value else -1.0)
-        duration = (self.get_dimmer_on_duration() if direction == 1.0 else self.get_dimmer_off_duration())
 
         logger.info('Changing dimmer \'%s\' from %s%% to %s%% in %s seconds',self.get_name(),from_value,to_value,duration)
 
@@ -167,14 +167,17 @@ class terrariumSwitch():
         GPIO.output(int(self.get_address()), ( GPIO.LOW if state is terrariumSwitch.ON else GPIO.HIGH ))
 
       elif self.get_hardware_type() == 'pwm-dimmer' and self.__pigpio is not False:
+        duration = self.get_dimmer_duration()
         # State 100 = full on which means 0 dim.
         # State is inverse of dim
         if state is terrariumSwitch.ON:
           state = self.get_dimmer_on_percentage()
+          duration = self.get_dimmer_on_duration()
         elif state is terrariumSwitch.OFF or not (0 <= state <= 100):
           state = self.get_dimmer_off_percentage()
+          duration = self.get_dimmer_off_duration()
 
-        thread.start_new_thread(self.__dim_switch, (self.state,state))
+        thread.start_new_thread(self.__dim_switch, (self.state,state,duration))
 
       self.state = state
       if self.get_hardware_type() != 'pwm-dimmer':
@@ -198,6 +201,7 @@ class terrariumSwitch():
             'water_flow' : self.get_water_flow(),
             'current_water_flow' : self.get_current_water_flow(),
             'state' : self.get_state(),
+            'dimmer_duration': self.get_dimmer_duration(),
             'dimmer_on_duration': self.get_dimmer_on_duration(),
             'dimmer_on_percentage' : self.get_dimmer_on_percentage(),
             'dimmer_off_duration': self.get_dimmer_off_duration(),
@@ -305,6 +309,12 @@ class terrariumSwitch():
   def dim(self,value):
     if 0 <= value <= 100:
       self.set_state(100 - value)
+
+  def set_dimmer_duration(self,value):
+    self.__dimmer_duration = float(value if float(value) >= 0.0 else 0)
+
+  def get_dimmer_duration(self):
+    return (self.__dimmer_duration if self.get_hardware_type() == 'pwm-dimmer' else 0.0)
 
   def set_dimmer_on_duration(self,value):
     self.__dimmer_on_duration = float(value if float(value) >= 0.0 else 0)

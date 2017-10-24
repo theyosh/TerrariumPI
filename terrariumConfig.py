@@ -298,6 +298,9 @@ class terrariumConfig:
       del(data['current_water_flow'])
 
     if data['hardwaretype'] != 'pwm-dimmer':
+      if 'dimmer_duration' in data:
+        del(data['dimmer_duration'])
+
       if 'dimmer_off_duration' in data:
         del(data['dimmer_off_duration'])
 

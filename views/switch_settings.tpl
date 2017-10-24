@@ -106,18 +106,22 @@
                         </div>
                         <div class="row dimmer" style="display:none;">
                           <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                            <label for="switch_[nr]_dimmer_duration">{{_('Dimmer action duration')}}</label>
+                            <input class="form-control" name="switch_[nr]_dimmer_duration" placeholder="{{_('Dimmer action duration')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_duration')}}">
+                          </div>
+                          <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                             <label for="switch_[nr]_dimmer_on_duration">{{_('Dimmer on duration')}}</label>
                             <input class="form-control" name="switch_[nr]_dimmer_on_duration" placeholder="{{_('Dimmer on duration')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_on_duration')}}">
                           </div>
-                          <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                          <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                             <label for="switch_[nr]_dimmer_on_percentage">{{_('Dimmer on percentage')}}</label>
                             <input class="form-control" name="switch_[nr]_dimmer_on_percentage" placeholder="{{_('Dimmer on percentage')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_on_percentage')}}">
                           </div>
-                          <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                          <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                             <label for="switch_[nr]_dimmer_off_duration">{{_('Dimmer off duration')}}</label>
                             <input class="form-control" name="switch_[nr]_dimmer_off_duration" placeholder="{{_('Dimmer off duration')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_off_duration')}}">
                           </div>
-                          <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                          <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                             <label for="switch_[nr]_dimmer_off_percentage">{{_('Dimmer off percentage')}}</label>
                             <input class="form-control" name="switch_[nr]_dimmer_off_percentage" placeholder="{{_('Dimmer off percentage')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_off_percentage')}}">
                           </div>
@@ -137,7 +141,6 @@
         <script tpe="text/javascript">
           $(document).ready(function() {
             $('.page-title').append('<div class="title_right"><h3><button type="button" class="btn btn-primary alignright" data-toggle="modal" data-target=".new-switch-form"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h3> </div>');
-
             $("select").select2({
               placeholder: '{{_('Select an option')}}',
               allowClear: false,
@@ -154,11 +157,11 @@
                                power_switch.name,
                                power_switch.power_wattage,
                                power_switch.water_flow,
+                               power_switch.dimmer_duration,
                                power_switch.dimmer_on_duration,
                                power_switch.dimmer_on_percentage,
                                power_switch.dimmer_off_duration,
                                power_switch.dimmer_off_percentage);
-
                 update_power_switch(power_switch.id,power_switch);
               });
               reload_reload_theme();

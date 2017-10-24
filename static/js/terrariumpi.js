@@ -1122,6 +1122,7 @@ function add_switch() {
                  form.find('input[name="switch_[nr]_name"]').val(),
                  form.find('input[name="switch_[nr]_power_wattage"]').val(),
                  form.find('input[name="switch_[nr]_water_flow"]').val(),
+                 form.find('input[name="switch_[nr]_dimmer_duration"]').val(),
                  form.find('input[name="switch_[nr]_dimmer_on_duration"]').val(),
                  form.find('input[name="switch_[nr]_dimmer_on_percentage"]').val(),
                  form.find('input[name="switch_[nr]_dimmer_off_duration"]').val(),
@@ -1131,7 +1132,7 @@ function add_switch() {
   $('.new-switch-form').modal('hide');
 }
 
-function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow, dimmer_on_duration,dimmer_on_percentage,dimmer_off_duration,dimmer_off_percentage) {
+function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow, dimmer_duration,dimmer_on_duration,dimmer_on_percentage,dimmer_off_duration,dimmer_off_percentage) {
   var switch_row = $($('.modal-body div.row.switch').parent().clone().html().replace(/\[nr\]/g, $('form div.row.switch').length));
 
   switch_row.find('div.power_switch.small').attr('id','switch_' + id);

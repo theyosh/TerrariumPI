@@ -128,6 +128,8 @@ class terrariumEngine():
       self.power_switches[power_switch_id].set_power_wattage(switch_config[power_switch_config]['power_wattage'])
       self.power_switches[power_switch_id].set_water_flow(switch_config[power_switch_config]['water_flow'])
 
+      if 'dimmer_duration' in switch_config[power_switch_config]:
+        self.power_switches[power_switch_id].set_dimmer_duration(switch_config[power_switch_config]['dimmer_duration'])
       if 'dimmer_on_duration' in switch_config[power_switch_config]:
         self.power_switches[power_switch_id].set_dimmer_on_duration(switch_config[power_switch_config]['dimmer_on_duration'])
       if 'dimmer_on_percentage' in switch_config[power_switch_config]:
@@ -423,6 +425,8 @@ class terrariumEngine():
       power_switch.set_name(switchdata['name'])
       power_switch.set_power_wattage(switchdata['power_wattage'])
       power_switch.set_water_flow(switchdata['water_flow'])
+      if 'dimmer_duration' in switchdata:
+        power_switch.set_dimmer_duration(switchdata['dimmer_duration'])
       if 'dimmer_on_duration' in switchdata:
         power_switch.set_dimmer_on_duration(switchdata['dimmer_on_duration'])
       if 'dimmer_on_percentage' in switchdata:
