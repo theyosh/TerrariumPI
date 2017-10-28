@@ -279,7 +279,10 @@ class terrariumEnvironment():
                                                                                day=int(now.strftime('%d')))
 
       if data['on'] > data['off']:
-        data['off'] += datetime.timedelta(hours=24)
+        if now > data['off']:
+          data['off'] += datetime.timedelta(hours=24)
+        else:
+          data['on'] -= datetime.timedelta(hours=24)
 
     if 'light' == part and data['enabled']:
       # Duration check
