@@ -408,9 +408,9 @@ function update_weather(data) {
 }
 
 function update_dashboard_environment(name, value) {
-  var mode_translations = {'sensor' : '{{_('Sensor')}}'.toLowerCase(),
-                           'weather':'{{_('Weather')}}'.toLowerCase(),
-                           'timer':'{{_('Timer')}}'.toLowerCase()};
+  var mode_translations = {'sensor' : '{{_('Sensor')}}',
+                           'weather':'{{_('Weather')}}',
+                           'timer':'{{_('Timer')}}'};
   var systempart = $('div.environment_' + name);
   if (systempart.length === 0 || Object.keys(value).length === 0 || !value.enabled) {
     systempart.find('table.tile_info').hide();
