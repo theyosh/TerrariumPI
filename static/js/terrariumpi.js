@@ -406,6 +406,9 @@ function update_weather(data) {
 }
 
 function update_dashboard_environment(name, value) {
+  var mode_translations = {'sensor' : '{{_('Sensor')}}'.toLowerCase(),
+                           'weather':'{{_('Weather')}}'.toLowerCase(),
+                           'timer':'{{_('Timer')}}'.toLowerCase()};
   var systempart = $('div.environment_' + name);
   if (systempart.length === 0 || Object.keys(value).length === 0 || !value.enabled) {
     systempart.find('table.tile_info').hide();
@@ -432,7 +435,7 @@ function update_dashboard_environment(name, value) {
   systempart.find('h4').removeClass('orange blue red')
                        .addClass(value.enabled ? enabledColor : '')
                        .attr('title', value.enabled ? "{{_('Enabled')}}" : "{{_('Disabled')}}");
-  systempart.find('h4 small span').text(value.mode);
+  systempart.find('h4 small span').text(mode_translations[value.mode]);
 
   if (value.on !== undefined) {
     systempart.find('.on').text(moment(value.on * 1000).format('LT'));
