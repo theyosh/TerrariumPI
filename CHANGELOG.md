@@ -2,8 +2,63 @@ Changelog
 =========
 
 
-2.8.2 (2017-10-21)
+(unreleased)
 ------------
+
+**New**
+- Add sqlite3 dependency for manual database manupilation. [TheYOSH]
+- Added webcam update timeout. Webcams are now only updated once a
+  minute. Should reduce the load and makes the enginge a bit faster.
+  [TheYOSH]
+- Add extra dimming timing for small changes. [TheYOSH]
+- Add PI power user to total power usage. [TheYOSH]
+- Added missing translation fields. [TheYOSH]
+- Add dimmer settings processing and saving to config file. [TheYOSH]
+- Add dimmer support part 1. [TheYOSH]
+
+**Fixes**
+- Fix empty graphs. [TheYOSH]
+- Fixed missing translation in home dashboard. [#33](https://github.com/theyosh/TerrariumPI/issues/33). [TheYOSH]
+- Fix timer issues [#34](https://github.com/theyosh/TerrariumPI/issues/34). [TheYOSH]
+- Fix graphing empty graphs and smaller dimmer knob. [TheYOSH]
+- Fixed total duration calculation in total power usage. [TheYOSH]
+- Fix switch loading without dimmer settings. [TheYOSH]
+- Fix switch toggle to support dimmers. [TheYOSH]
+- Fix switch toggle to support dimmers. [TheYOSH]
+- Fix devision by zero. [TheYOSH]
+- Fix SQL duplicate key error. [TheYOSH]
+
+**Updates**
+- Update version number. [TheYOSH]
+- Update engine loop to make sure at least one run per minute is
+  possible. Should prevent spicky graphs. [TheYOSH]
+- Update environment dashboard modus names [#34](https://github.com/theyosh/TerrariumPI/issues/34). [TheYOSH]
+- Update translations. [TheYOSH]
+- Update readme. [TheYOSH]
+- Update readme. [TheYOSH]
+- Update power duration calculation. [TheYOSH]
+- Updated installation so it works faster and handles upgrades better.
+  [TheYOSH]
+- Updated data logging and graphing. Reduced load on the client side.
+  [TheYOSH]
+- Update gentelella. [TheYOSH]
+- Updated dimmer settings in switch settings page. [TheYOSH]
+- Updated supported hardware page. [TheYOSH]
+
+**Other**
+- Collector code clean up and better data storage and retrieval.
+  [TheYOSH]
+- Merge branch 'master' into feature/power_dimmer. [TheYOSH]
+- Trying to add more stability for dimming hardware. [TheYOSH]
+- Remove unused settings for non dimmer switches. [TheYOSH]
+- Make PI user restart PiGPIOd process. [TheYOSH]
+- Enable pigpiod service at reboot. [TheYOSH]
+- Better on and off detection for dimmers. [TheYOSH]
+- Merge branch 'master' into feature/power_dimmer. [TheYOSH]
+
+
+2.8.2 (2017-10-21)
+------------------
 
 **New**
 - Add sync command. [TheYOSH]
@@ -15,6 +70,7 @@ Changelog
 - Fix HTML code in Dutch translation. Was broke in usage page. [TheYOSH]
 
 **Updates**
+- Update changelog. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update README.md. [TheYOSH]
 - Update README.md. [TheYOSH]
@@ -453,3 +509,5 @@ Changelog
 - Typo. [TheYOSH]
 - Moved door status to own page. [TheYOSH]
 - Use system default pip. [TheYOSH]
+
+
