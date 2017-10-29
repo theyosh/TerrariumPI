@@ -985,15 +985,13 @@ function history_graph(name, data, type) {
       break;
 
     case 'switch':
-      if (data.water_flow === undefined || data.water_flow === undefined || data.water_flow.length == 0 && data.power_wattage.length == 0) {
-        graph_options.yaxis.min = 0;
-      }
       delete(graph_options.series.curvedLines);
       graph_options.series.lines = {
         show: true,
         lineWidth: 2,
         fill: true
       };
+      graph_options.yaxis.min = 0;
       graph_data = [{
         label: '{{_('Power usage in Watt')}}',
         data: data.power_wattage
@@ -1004,15 +1002,14 @@ function history_graph(name, data, type) {
       break;
 
     case 'door':
-      if (data.state === undefined ||data.state.length == 0) {
-        graph_options.yaxis.min = 0;
-      }
       delete(graph_options.series.curvedLines);
       graph_options.series.lines = {
         show: true,
         lineWidth: 2,
         fill: true
       };
+      graph_options.yaxis.min = 0;
+      graph_options.yaxis.max = 1;
       graph_data = [{
         label: '{{_('Door status')}}',
         data: data.state
