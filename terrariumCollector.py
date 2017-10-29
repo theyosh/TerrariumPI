@@ -9,21 +9,21 @@ import logging
 logger = logging.getLogger(__name__)
 
 class terrariumCollector():
-  database = 'history.db'
+  DATABASE = 'history.db'
+  # Store data every Xth minute. Except switches and doors
+  STORE_MODULO = 1 * 60
 
   def __init__(self):
-    logger.info('Setting up collector database %s' % (terrariumCollector.database,))
+    logger.info('Setting up collector database %s' % (terrariumCollector.DATABASE,))
     self.__recovery = False
     self.__connect()
-    # Store data every Xth minute. Except switches.
-    self.modulo = 5 * 60
     self.__create_database_structure()
     logger.info('TerrariumPI Collecter is ready')
 
   def __connect(self):
-    self.db = sqlite3.connect(terrariumCollector.database)
+    self.db = sqlite3.connect(terrariumCollector.DATABASE)
     self.db.row_factory = sqlite3.Row
-    logger.info('Database connection created to database %s' % (terrariumCollector.database,))
+    logger.info('Database connection created to database %s' % (terrariumCollector.DATABASE,))
 
   def __create_database_structure(self):
     with self.db:
@@ -97,6 +97,7 @@ class terrariumCollector():
     self.db.commit()
 
   def __recover(self):
+    starttime = time.time()
     # Based on: http://www.dosomethinghere.com/2013/02/20/fixing-the-sqlite-error-the-database-disk-image-is-malformed/
     # Enable recovery status
     self.__recovery = True
@@ -115,20 +116,20 @@ class terrariumCollector():
     logger.warn('TerrariumPI Collecter recovery mode created SQL dump of %s lines and %s bytes!', (lines,strlen(sqldump),))
 
     # Delete broken db
-    os.remove(terrariumCollector.database)
-    logger.warn('TerrariumPI Collecter recovery mode deleted faulty database from disk %s', (terrariumCollector.database,))
+    os.remove(terrariumCollector.DATABASE)
+    logger.warn('TerrariumPI Collecter recovery mode deleted faulty database from disk %s', (terrariumCollector.DATABASE,))
 
     # Reconnect will recreate the db
-    logger.warn('TerrariumPI Collecter recovery mode starts reconnecting database to create a new clean database at %s', (terrariumCollector.database,))
+    logger.warn('TerrariumPI Collecter recovery mode starts reconnecting database to create a new clean database at %s', (terrariumCollector.DATABASE,))
     self.__connect()
     cur = self.db.cursor()
     # Load the SQL data back to db
     cur.executescript(sqldump)
-    logger.warn('TerrariumPI Collecter recovery mode restored the old data in a new database. %s', (terrariumCollector.database,))
+    logger.warn('TerrariumPI Collecter recovery mode restored the old data in a new database. %s', (terrariumCollector.DATABASE,))
 
     # Return to normal mode
     self.__recovery = False
-    logger.warn('TerrariumPI Collecter recovery mode is finished! %s', (self.__recovery,))
+    logger.warn('TerrariumPI Collecter recovery mode is finished in %s seconds!', (time.time()-starttime,))
 
   def __log_data(self,type,id,newdata):
     if self.__recovery:
@@ -137,8 +138,8 @@ class terrariumCollector():
 
     now = int(time.time())
     rows = []
-    if 'switches' != type and 'door' != type:
-      now -= (now % 60)
+    if type not in ['switches','door']:
+      now -= (now % terrariumCollector.STORE_MODULO)
 
     try:
       with self.db:
@@ -204,7 +205,7 @@ class terrariumCollector():
       for counter,state in enumerate(history['switches'][switchid]['state']):
         if state[1] > 0 and power_on_time is None: # Power went on! The value could be variable from zero to 100. Above zero is 'on'
           power_on_time = counter
-        elif power_on_time is not None: # .....
+        elif power_on_time is not None: # Now check if the power went off, or put on a second time...
           power_wattage_start = history['switches'][switchid]['power_wattage'][power_on_time][1] * (history['switches'][switchid]['state'][power_on_time][1] / 100.0)
           power_wattage_end = history['switches'][switchid]['power_wattage'][counter][1] * (state[1] / 100.0)
           power_wattage = (power_wattage_start + power_wattage_end) / 2.0
@@ -258,49 +259,34 @@ class terrariumCollector():
 
       history['doors'][doorid]['totals'] = totals
 
-  def log_switch_data(self,switch):
-    switch_id = switch['id']
-    del(switch['id'])
-    del(switch['address'])
-    del(switch['name'])
-    del(switch['current_power_wattage'])
-    del(switch['current_water_flow'])
-
-    if switch['hardwaretype'] != 'pwm-dimmer':
+  def log_switch_data(self,data):
+    if data['hardwaretype'] != 'pwm-dimmer':
       # Store normal switches with value 100 indicating full power (aka no dimming)
-      switch['state'] = (100 if switch['state'] == 1 else 0)
+      data['state'] = (100 if data['state'] == 1 else 0)
 
-    del(switch['hardwaretype'])
-    self.__log_data('switches',switch_id,switch)
+    self.__log_data('switches',data['id'],data)
 
-  def log_door_data(self,door):
-    self.__log_data('door',door['id'], door['state'])
+  def log_door_data(self,data):
+    self.__log_data('door',data['id'], data['state'])
 
-  def log_weather_data(self,weather):
-    del(weather['from'])
-    del(weather['to'])
-    self.__log_data('weather',None,weather)
+  def log_weather_data(self,data):
+    self.__log_data('weather',None,data)
 
-  def log_sensor_data(self,sensor):
-    sensor_data  = sensor.get_data()
-    del(sensor_data['id'])
-    del(sensor_data['hardwaretype'])
-    del(sensor_data['address'])
-    del(sensor_data['type'])
-    del(sensor_data['name'])
-    self.__log_data(sensor.get_type(),sensor.get_id(),sensor_data)
+  def log_sensor_data(self,data):
+    self.__log_data(data['type'],data['id'],data)
 
   def log_system_data(self, data):
     self.__log_data('system',None,data)
 
   def get_history(self, parameters = [], starttime = None, stoptime = None):
     # Default return object
+    timer = time.time()
     history = {}
     periods = {'day' : 1 * 24,
                'week' : 7 * 24,
                'month' : 30 * 24,
                'year' : 365 * 24}
-    modulo = self.modulo
+    modulo = terrariumCollector.STORE_MODULO
 
     logtype = parameters[0]
     del(parameters[0])
@@ -315,20 +301,22 @@ class terrariumCollector():
 
     if len(parameters) > 0 and parameters[-1] in periods.keys():
       stoptime = starttime - periods[parameters[-1]] * 60 * 60
-      modulo = (periods[parameters[-1]] / 24) * self.modulo
+      modulo = (periods[parameters[-1]] / 24) * terrariumCollector.STORE_MODULO
       del(parameters[-1])
 
     sql = ''
     filters = (stoptime,starttime,)
     if logtype == 'sensors':
       fields = { 'current' : [], 'alarm_min' : [], 'alarm_max' : [] , 'limit_min' : [], 'limit_max' : []}
-      sql = 'SELECT id, type, timestamp,' + ', '.join(fields.keys()) + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ? AND timestamp % ' + str(modulo) + ' = 0'
+      sql = 'SELECT id, type, timestamp,' + ', '.join(fields.keys()) + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ?'
+      #AND timestamp % ' + str(modulo) + ' = 0'
 
       if len(parameters) > 0 and parameters[0] == 'average':
         sql = 'SELECT "average" as id, type, timestamp'
         for field in fields:
           sql = sql + ', AVG(' + field + ') as ' + field
-        sql = sql + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ? AND timestamp % ' + str(modulo) + ' = 0'
+        sql = sql + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ?'
+        #AND timestamp % ' + str(modulo) + ' = 0'
 
         if len(parameters) == 2:
           sql = sql + ' and type = ?'
@@ -365,7 +353,9 @@ class terrariumCollector():
     elif logtype == 'weather':
       fields = { 'wind_speed' : [], 'temperature' : [], 'pressure' : [] , 'wind_direction' : [], 'rain' : [],
                  'weather' : [], 'icon' : []}
-      sql = 'SELECT "city" as id, "weather" as type, timestamp, ' + ', '.join(fields.keys()) + ' FROM weather_data WHERE timestamp >= ? and timestamp <= ? AND timestamp % ' + str(modulo) + ' = 0'
+      sql = 'SELECT "city" as id, "weather" as type, timestamp, ' + ', '.join(fields.keys()) + ' FROM weather_data WHERE timestamp >= ? and timestamp <= ?'
+#      AND timestamp % '
+#      +      str(modulo) + ' = 0'
 
     elif logtype == 'system':
       fields = ['load_load1', 'load_load5','load_load15','uptime', 'temperature','cores', 'memory_total', 'memory_used' , 'memory_free']
@@ -381,7 +371,8 @@ class terrariumCollector():
       elif len(parameters) > 0 and parameters[0] == 'memory':
         fields = ['memory_total', 'memory_used' , 'memory_free']
 
-      sql = 'SELECT "system" as type, timestamp, ' + ', '.join(fields) + ' FROM system_data WHERE timestamp >= ? and timestamp <= ? AND timestamp % ' + str(modulo) + ' = 0'
+      sql = 'SELECT "system" as type, timestamp, ' + ', '.join(fields) + ' FROM system_data WHERE timestamp >= ? and timestamp <= ?'
+      #AND timestamp % ' + str(modulo) + ' = 0'
 
     sql = sql + ' ORDER BY timestamp ASC'
 
@@ -392,6 +383,7 @@ class terrariumCollector():
           cur = self.db.cursor()
           cur.execute(sql, filters)
           rows = cur.fetchall()
+          logger.debug('TerrariumPI Collecter history query:  %s seconds, %s records -> %s, %s' % (time.time()-timer,len(rows),sql,filters))
       except sqlite3.DatabaseError as ex:
         logger.error('TerrariumPI Collecter exception! %s', (ex,))
         if 'database disk image is malformed' == str(ex):
