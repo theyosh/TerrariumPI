@@ -168,8 +168,8 @@ class terrariumEngine():
       )
       self.doors[door.get_id()] = door
 
-    if not reloading:
-      self.toggle_door_status(door.get_data())
+      if not reloading:
+        self.toggle_door_status(door.get_data())
 
     logger.info('Done %s terrariumPI doors. Found %d doors in %.3f seconds' % ('reloading' if reloading else 'loading',
                                                                                 len(self.doors),
