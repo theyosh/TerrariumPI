@@ -44,7 +44,7 @@
               <div class="x_content">
                 <div class="col-md-3 col-sm-4 col-xs-12">
                   <div class="power_switch big">
-                    <span aria-hidden="true" class="glyphicon glyphicon-off" onclick="toggleSwitch($(this).parents('div.row.switch').attr('id'))"></span>
+                    <span aria-hidden="true" class="glyphicon glyphicon-off" title="{{_('Toggle power switch')}}" onclick="toggleSwitch($(this).parents('div.row.switch').attr('id'))"></span>
                   </div>
                 </div>
                 <div class="col-md-9 col-sm-8 col-xs-12">

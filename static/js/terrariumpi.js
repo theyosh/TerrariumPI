@@ -351,18 +351,16 @@ function update_dashboard_power_usage(data) {
   update_dashboard_tile('power_wattage', formatNumber(data.current) + '/' + formatNumber(data.max));
   var percentage = (data.max > 0 ? (data.current / data.max) * 100 : 0);
   $("#power_wattage .progress-bar-success").css('height', percentage + '%');
-  data.total /= 1000;
-  $("#total_power .count_bottom .costs span").text(formatCurrency(data.price * data.total));
+  $("#total_power .count_bottom .costs span").text(formatCurrency(data.price));
   $("#total_power .count_bottom span.duration").text(moment.duration(data.duration * 1000).humanize());
-  update_dashboard_tile('total_power',formatNumber(data.total));
+  update_dashboard_tile('total_power',formatNumber(data.total / (3600 * 1000)));
 }
 
 function update_dashboard_water_flow(data) {
   update_dashboard_tile('water_flow', formatNumber(data.current) + '/' + formatNumber(data.max));
   var percentage = (data.max > 0 ? (data.current / data.max) * 100 : 0);
   $("#water_flow .progress-bar-info").css('height', percentage + '%');
-  data.total /= 1000;
-  $("#total_water .count_bottom .costs span").text(formatCurrency(data.price * data.total));
+  $("#total_water .count_bottom .costs span").text(formatCurrency(data.price));
   $("#total_water .count_bottom span.duration").text(moment.duration(data.duration * 1000).humanize());
   update_dashboard_tile('total_water', formatNumber(data.total));
 }
@@ -827,13 +825,7 @@ function load_history_graph(id,type,data_url,nocache) {
         $.each(online_data, function(dummy, value) {
           $.each(value, function(dummy, data_array) {
             globals.graphs[id].timestamp = now;
-            if (type == 'switch') {
-              globals.graphs[id].data = process_switch_data(data_array);
-            } else if (type == 'door') {
-              globals.graphs[id].data = process_door_data(data_array);
-            } else {
-              globals.graphs[id].data = data_array;
-            }
+            globals.graphs[id].data = data_array;
           });
         });
 
@@ -928,8 +920,8 @@ function history_graph(name, data, type) {
   };
 
   switch (type) {
-    case 'temperature':
     case 'humidity':
+    case 'temperature':
       graph_data = [{
         label: '{{_('Current')}}',
         data: data.current
@@ -941,6 +933,7 @@ function history_graph(name, data, type) {
         data: data.alarm_max
       }];
       break;
+
     case 'weather':
     case 'system_temperature':
       graph_data = [{
@@ -948,6 +941,7 @@ function history_graph(name, data, type) {
         data: data
       }];
       break;
+
     case 'system_uptime':
       delete(graph_options.series.curvedLines);
       graph_options.series.lines = {
@@ -963,6 +957,7 @@ function history_graph(name, data, type) {
 
       $('div.row.uptime .x_title small').text(moment.duration(data[data.length-1][1] * 1000).humanize());
       break;
+
     case 'system_load':
       graph_data = [{
         label: '{{_('Load')}}',
@@ -975,6 +970,7 @@ function history_graph(name, data, type) {
         data: data.load15
       }];
       break;
+
     case 'system_memory':
       graph_data = [{
         label: '{{_('Used memory')}}',
@@ -987,6 +983,7 @@ function history_graph(name, data, type) {
         data: data.total
       }];
       break;
+
     case 'switch':
       delete(graph_options.series.curvedLines);
       graph_options.series.lines = {
@@ -994,16 +991,16 @@ function history_graph(name, data, type) {
         lineWidth: 2,
         fill: true
       };
-
-      graph_data = [data.power_wattage, data.water_flow];
+      graph_options.yaxis.min = 0;
       graph_data = [{
         label: '{{_('Power usage in Watt')}}',
         data: data.power_wattage
       }, {
         label: '{{_('Water flow in L/m')}}',
-        data: data.water_flow
+        data: data.water_flow,
       }];
       break;
+
     case 'door':
       delete(graph_options.series.curvedLines);
       graph_options.series.lines = {
@@ -1011,15 +1008,15 @@ function history_graph(name, data, type) {
         lineWidth: 2,
         fill: true
       };
-
-      graph_data = [data.state];
+      graph_options.yaxis.min = 0;
+      graph_options.yaxis.max = 1;
       graph_data = [{
         label: '{{_('Door status')}}',
         data: data.state
       }];
       break;
-
   }
+
   if (graph_data[0].data != undefined && graph_data[0].data.length > 0) {
     var total_data_duration = (graph_data[0].data[graph_data[0].data.length - 1][0] - graph_data[0].data[0][0]) / 3600000;
     graph_options.xaxis.tickSize[0] = Math.round(total_data_duration * 2.5);
@@ -1031,17 +1028,22 @@ function history_graph(name, data, type) {
 
     if (type == 'switch') {
       var usage = '';
-      if (data.total_power_usage > 0) {
-        usage = '{{_('Total power in kWh')}}: ' + formatNumber(data.total_power_usage);
-      }
-      if (data.total_water_usage > 0) {
-        usage += (usage != '' ? ' - ' : '') + '{{_('Total water in L')}}: ' + formatNumber(data.total_water_usage);
+      if (data.totals !== undefined) {
+        if (data.totals.power_wattage.duration > 0) {
+          usage = '{{_('Duration')}}: ' + moment.duration(data.totals.power_wattage.duration * 1000).humanize()
+        }
+        if (data.totals.power_wattage.wattage > 0) {
+          usage += (usage != '' ? ' - ' : '') + '{{_('Total power in kWh')}}: ' + formatNumber(data.totals.power_wattage.wattage / (3600 * 1000));
+        }
+        if (data.totals.water_flow.water > 0) {
+          usage += (usage != '' ? ' - ' : '') + '{{_('Total water in L')}}: ' + formatNumber(data.totals.water_flow.water);
+        }
       }
       $('#' + name + ' .total_usage').text(usage);
     } else if (type == 'door') {
       var usage = '';
-      if (data.open > 0) {
-        usage = '{{_('Total open for')}}: ' + moment.duration(data.open).humanize();
+      if (data.totals !== undefined) {
+        usage = '{{_('Total open for')}}: ' + moment.duration(data.totals.duration).humanize();
       }
       $('#' + name + ' .total_usage').text(usage);
     }
@@ -1119,12 +1121,18 @@ function add_switch() {
                  form.find('input[name="switch_[nr]_address"]').val(),
                  form.find('input[name="switch_[nr]_name"]').val(),
                  form.find('input[name="switch_[nr]_power_wattage"]').val(),
-                 form.find('input[name="switch_[nr]_water_flow"]').val());
+                 form.find('input[name="switch_[nr]_water_flow"]').val(),
+                 form.find('input[name="switch_[nr]_dimmer_duration"]').val(),
+                 form.find('input[name="switch_[nr]_dimmer_on_duration"]').val(),
+                 form.find('input[name="switch_[nr]_dimmer_on_percentage"]').val(),
+                 form.find('input[name="switch_[nr]_dimmer_off_duration"]').val(),
+                 form.find('input[name="switch_[nr]_dimmer_off_percentage"]').val(),
+                 );
 
   $('.new-switch-form').modal('hide');
 }
 
-function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow) {
+function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow, dimmer_duration,dimmer_on_duration,dimmer_on_percentage,dimmer_off_duration,dimmer_off_percentage) {
   var switch_row = $($('.modal-body div.row.switch').parent().clone().html().replace(/\[nr\]/g, $('form div.row.switch').length));
 
   switch_row.find('div.power_switch.small').attr('id','switch_' + id);
@@ -1132,7 +1140,7 @@ function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow) {
   switch_row.find('.x_title').show().find('h2 small').text(name);
   switch_row.find('span.select2.select2-container').remove();
 
-  switch_row.find('input, select').each(function(counter,item){
+  switch_row.find('input, select').each(function(counter,item) {
     $(item).val(eval($(item).attr('name').replace(/switch_[0-9]+_/g,'')));
   });
 
@@ -1143,7 +1151,10 @@ function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow) {
     placeholder: '{{_('Select an option')}}',
     allowClear: false,
     minimumResultsForSearch: Infinity
+  }).on('change',function() {
+    switch_row.find('.row.dimmer').toggle(this.value === 'pwm-dimmer');
   });
+  switch_row.find('.row.dimmer').toggle(hardwaretype === 'pwm-dimmer');
 }
 
 function add_door() {
@@ -1216,128 +1227,39 @@ function add_webcam_row(id,location,name,rotation,preview) {
 
 function update_power_switch(id, data) {
   var power_switch = $('#switch_' + id);
+  var update_data = '';
+  if (data.hardwaretype === 'pwm-dimmer') {
+    update_data = formatNumber(data.current_power_wattage) + 'W / '
+  }
+  update_data += formatNumber(data.power_wattage) + 'W';
+  if (data.water_flow > 0) {
+    update_data += ' - ' + formatNumber(data.water_flow) + 'L/m';
+  }
+
   power_switch.find('h2 span.title').text('{{_('Switch')}} ' + data.name);
-  power_switch.find('h2 small.data_update').text(formatNumber(data.power_wattage) + 'W' + (data.water_flow > 0 ? ' - ' + formatNumber(data.water_flow) + 'L/m' : ''));
-  power_switch.find('span.glyphicon').removeClass('blue green').addClass((data.state ? 'green' : 'blue')).attr('title','{{_('Toggle power switch')}}');
+  power_switch.find('h2 small.data_update').text(update_data);
+
+  if (data.hardwaretype === 'pwm-dimmer') {
+    power_switch.find('div.power_switch').removeClass('big').addClass('dimmer').html('<input class="knob" data-thickness=".3" data-width="170" data-angleOffset=20 data-angleArc=320 data-fgColor="' + (data.state > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB') + '" value="'+ data.state + '">');
+
+    power_switch.find('.knob').knob({
+			release: function(value) {
+        $.getJSON('/api/switch/state/' + id + '/' + value,function(dummy){
+        });
+      },
+      format: function(value) {
+        return value + '%';
+      }
+    });
+    data.state = data.state > data.dimmer_off_percentage
+  }
+  power_switch.find('span.glyphicon').removeClass('blue green').addClass((data.state ? 'green' : 'blue'));
 }
 
 function toggleSwitch(id) {
   id = id.split('_')[1];
   $.getJSON('/api/switch/toggle/' + id,function(data){
   });
-}
-
-function process_graph_data(type, raw_data) {
-  var graphdata = {}
-  switch (type) {
-    case 'door':
-      graphdata.state = [];
-      graphdata.open = 0;
-    break;
-    case 'switch':
-      graphdata.power_wattage = [];
-      graphdata.water_flow = [];
-      graphdata.total_power_usage = 0;
-      graphdata.total_water_usage = 0;
-    break;
-  }
-
-  var state_change = -1;
-  $.each(raw_data.state, function(counter, status) {
-    // Sanitize input
-    switch (type) {
-      case 'door':
-        status[1] = (status[1] === 'closed' ? 0 : 1)
-      break;
-      case 'switch':
-        if (!status[1]) {
-          raw_data.power_wattage[counter][1] = 0;
-          raw_data.water_flow[counter][1] = 0;
-        }
-      break;
-    }
-
-    if (state_change != status[1]) {
-      // Copy previous object to get the right status with current timestamp
-      var copy = [];
-      if (counter > 0) {
-        $.each(graphdata, function(name,data){
-          if (typeof graphdata[name] == 'object' ) {
-            copy = $.extend(true, [], raw_data[name][counter-1]);
-            // If turned down/off/closed, calculate usage, else it is zero!
-            var usage = (copy[1] != 0 ? (status[0] - copy[0]) / 1000 * copy[1] : 0);
-            switch (name) {
-              case 'state':
-                graphdata.open += usage;
-              break;
-              case 'power_wattage':
-                graphdata.total_power_usage += usage;
-              break;
-              case 'water_flow':
-                graphdata.total_water_usage += usage;
-              break;
-            }
-            copy[0] = status[0];
-            graphdata[name].push(copy);
-          }
-        });
-      } else if (counter == 0 && status[1] == 1 && type == 'door') {
-        // If starting with status up/on add a status down/off first for nice graphing
-        $.each(graphdata, function(name,data){
-          if (typeof graphdata[name] == 'object' ) {
-            copy = $.extend(true, [], raw_data[name][counter]);
-            // If turned down/off/closed, calculate usage, else it is zero!
-            var usage = (copy[1] != 0 ? (status[0] - copy[0]) / 1000 * copy[1] : 0);
-            switch (name) {
-              case 'state':
-                graphdata.open += usage;
-              break;
-              case 'power_wattage':
-                graphdata.total_power_usage += usage;
-              break;
-              case 'water_flow':
-                graphdata.total_water_usage += usage;
-              break;
-            }
-            copy[1] = 0;
-            graphdata[name].push(copy);
-          }
-        });
-      }
-      state_change = status[1];
-    }
-    $.each(graphdata, function(name,data){
-      if (typeof graphdata[name] == 'object' ) {
-        graphdata[name].push(raw_data[name][counter]);
-      }
-    });
-  });
-  // Add end data to now... and a startdate of 24 hours ago if needed
-  var now = new Date().getTime();
-  var start = now - (24 * 60 * 60 * 1000);
-  $.each(graphdata, function(name,data){
-    if (typeof graphdata[name] == 'object' ) {
-      graphdata[name].push([now,graphdata[name][graphdata[name].length-1][1]]);
-      // Add begin timestamp 24 hours back if needed
-      if (graphdata[name][0][0] > start) {
-        graphdata[name].unshift([start,graphdata[name][0][1]]);
-      }
-    }
-  });
-  if (type === 'switch') {
-    graphdata.total_power_usage /= 3600; // To kWh
-    graphdata.total_water_usage /= 60; // To liters
-  }
-  // Return data
-  return graphdata;
-}
-
-function process_switch_data(raw_data) {
-  return process_graph_data('switch', raw_data);
-}
-
-function process_door_data(raw_data) {
-  return process_graph_data('door', raw_data);
 }
 
 function update_webcam_preview(name, url) {
@@ -1388,7 +1310,7 @@ function createWebcamLayer(webcamid, maxzoom) {
 function load_door_history() {
   $.getJSON('/api/history/doors', function(door_data) {
     var door_status = {};
-    $.each(door_data.door, function(counter, statedata) {
+    $.each(door_data.doors, function(counter, statedata) {
       for (var i = 0; i < statedata.state.length; i++) {
         if (i == 0 || statedata.state[i][1] != statedata.state[i-1][1]) {
           door_status[statedata.state[i][0]] = statedata.state[i][1];
@@ -1397,7 +1319,7 @@ function load_door_history() {
     });
     // Sort door data events on time. Needed if you have more than one door
     $.each(Object.keys(door_status).sort(), function(counter,change_time) {
-      update_door_messages((door_status[change_time] == 'open'), change_time);
+      update_door_messages((door_status[change_time] === 1), change_time);
     })
   });
 }
@@ -1434,9 +1356,6 @@ function version_check() {
 }
 
 function init_wysiwyg() {
-
-  if (typeof ($.fn.wysiwyg) === 'undefined') { return; }
-
   function init_ToolbarBootstrapBindings() {
 
     var fonts = [ 'Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',

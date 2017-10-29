@@ -25,6 +25,8 @@
   <script type="text/javascript" src="/gentelella/vendors/select2/dist/js/select2.full.min.js"></script>
   <!-- FastClick -->
   <script type="text/javascript" src="/gentelella/vendors/fastclick/lib/fastclick.js"></script>
+  <!-- jQuery Knob -->
+  <script type="text/javascript" src="/gentelella/vendors/jquery-knob/dist/jquery.knob.min.js"></script>
   <!-- PNotify -->
   <script type="text/javascript" src="/gentelella/vendors/pnotify/dist/pnotify.js"></script>
   <script type="text/javascript" src="/gentelella/vendors/pnotify/dist/pnotify.buttons.js"></script>
