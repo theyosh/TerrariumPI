@@ -24,6 +24,8 @@ monkey.patch_all()
 
 class terrariumEngine():
 
+  LOOP_TIMEOUT = 30
+
   def __init__(self):
     # List of queues for websocket communication
     self.subscribed_queues = []
@@ -241,11 +243,11 @@ class terrariumEngine():
         # Update the current sensor.
         self.sensors[sensorid].update()
         # Save new data to database
-        self.collector.log_sensor_data(self.sensors[sensorid])
+        self.collector.log_sensor_data(self.sensors[sensorid].get_data())
         # Websocket callback
         self.get_sensors([sensorid],socket=True)
         # Make time for other web request
-        sleep(0.2)
+        sleep(0.1)
 
       # Get the current average temperatures
       average_data = self.get_sensors(['average'])['sensors']
@@ -266,8 +268,12 @@ class terrariumEngine():
         self.webcams[webcamid].update()
         sleep(0.2)
 
-      logger.info('Engine loop done in %s seconds' % (time.time() - starttime,))
-      sleep(30) # TODO: Config setting
+      duration = time.time() - starttime
+      if duration < terrariumEngine.LOOP_TIMEOUT:
+        logger.info('Engine loop done in %.5f seconds. Waiting for %.5f seconds for next round' % (duration,terrariumEngine.LOOP_TIMEOUT - duration))
+        sleep(terrariumEngine.LOOP_TIMEOUT - duration) # TODO: Config setting
+      else:
+        logger.warning('Engine took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEngine.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
 
   def __send_message(self,message):
     for queue in self.subscribed_queues:
