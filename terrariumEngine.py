@@ -24,6 +24,8 @@ monkey.patch_all()
 
 class terrariumEngine():
 
+  LOOP_TIMEOUT = 30
+
   def __init__(self):
     # List of queues for websocket communication
     self.subscribed_queues = []
@@ -112,28 +114,36 @@ class terrariumEngine():
 
     seen_switches = []
     for power_switch_config in switch_config:
-      seen_switches.append(switch_config[power_switch_config]['id'])
-      if switch_config[power_switch_config]['id'] in self.power_switches:
-        # Update switch
-        self.power_switches[switch_config[power_switch_config]['id']].set_name(switch_config[power_switch_config]['name'])
-        self.power_switches[switch_config[power_switch_config]['id']].set_power_wattage(switch_config[power_switch_config]['power_wattage'])
-        self.power_switches[switch_config[power_switch_config]['id']].set_water_flow(switch_config[power_switch_config]['water_flow'])
+      power_switch_id = switch_config[power_switch_config]['id']
+      seen_switches.append(power_switch_id)
+      if not power_switch_id in self.power_switches:
+        # Add new switch
+        power_switch = terrariumSwitch(switch_config[power_switch_config]['id'],
+                                       switch_config[power_switch_config]['hardwaretype'],
+                                       switch_config[power_switch_config]['address'],
+                                       callback=self.toggle_switch)
+        power_switch_id = power_switch.get_id()
+        self.power_switches[power_switch_id] = power_switch
 
-      else:
-        power_switch = terrariumSwitch(
-          switch_config[power_switch_config]['id'],
-          switch_config[power_switch_config]['hardwaretype'],
-          switch_config[power_switch_config]['address'],
-          switch_config[power_switch_config]['name'],
-          switch_config[power_switch_config]['power_wattage'],
-          switch_config[power_switch_config]['water_flow'],
-          self.toggle_switch
-        )
-        self.power_switches[power_switch.get_id()] = power_switch
+      # Update switch
+      self.power_switches[power_switch_id].set_name(switch_config[power_switch_config]['name'])
+      self.power_switches[power_switch_id].set_power_wattage(switch_config[power_switch_config]['power_wattage'])
+      self.power_switches[power_switch_id].set_water_flow(switch_config[power_switch_config]['water_flow'])
+
+      if 'dimmer_duration' in switch_config[power_switch_config]:
+        self.power_switches[power_switch_id].set_dimmer_duration(switch_config[power_switch_config]['dimmer_duration'])
+      if 'dimmer_on_duration' in switch_config[power_switch_config]:
+        self.power_switches[power_switch_id].set_dimmer_on_duration(switch_config[power_switch_config]['dimmer_on_duration'])
+      if 'dimmer_on_percentage' in switch_config[power_switch_config]:
+        self.power_switches[power_switch_id].set_dimmer_on_percentage(switch_config[power_switch_config]['dimmer_on_percentage'])
+      if 'dimmer_off_duration' in switch_config[power_switch_config]:
+        self.power_switches[power_switch_id].set_dimmer_off_duration(switch_config[power_switch_config]['dimmer_off_duration'])
+      if 'dimmer_off_percentage' in switch_config[power_switch_config]:
+        self.power_switches[power_switch_id].set_dimmer_off_percentage(switch_config[power_switch_config]['dimmer_off_percentage'])
 
     for power_switch_id in set(self.power_switches) - set(seen_switches):
       # clean up old deleted switches
-      del(self.power_switches[switch_config[power_switch_config]['id']])
+      del(self.power_switches[power_switch_id])
 
     if reloading:
       self.environment.set_power_switches(self.power_switches)
@@ -158,6 +168,9 @@ class terrariumEngine():
       )
       self.doors[door.get_id()] = door
 
+    if not reloading:
+      self.toggle_door_status(door.get_data())
+
     logger.info('Done %s terrariumPI doors. Found %d doors in %.3f seconds' % ('reloading' if reloading else 'loading',
                                                                                 len(self.doors),
                                                                                 time.time()-starttime))
@@ -181,21 +194,41 @@ class terrariumEngine():
                                                                                     len(self.webcams),
                                                                                     time.time()-starttime))
 
-  def __get_power_usage_water_flow(self, socket = False):
+  def __get_current_power_usage_water_flow(self, socket = False):
     data = {'power' : {'current' : self.pi_power_wattage , 'max' : self.pi_power_wattage},
             'water' : {'current' : 0.0 , 'max' : 0.0}}
 
     for switchid in self.power_switches:
-      data['power']['current'] += self.power_switches[switchid].get_power_wattage() if self.power_switches[switchid].is_on() else 0.0
+      data['power']['current'] += self.power_switches[switchid].get_current_power_wattage() if self.power_switches[switchid].is_on() else 0.0
       data['power']['max'] += self.power_switches[switchid].get_power_wattage()
 
-      data['water']['current'] += self.power_switches[switchid].get_water_flow() if self.power_switches[switchid].is_on() else 0.0
+      data['water']['current'] += self.power_switches[switchid].get_current_water_flow() if self.power_switches[switchid].is_on() else 0.0
       data['water']['max'] += self.power_switches[switchid].get_water_flow()
 
     return data
 
-  def __calculate_power_usage_water_flow(self):
-    return self.collector.get_history(['switches','summary'])
+  def __get_total_power_usage_water_flow(self):
+    totals = {'power_wattage' : {'duration' : int(time.time()) , 'wattage' : 0.0, 'price' : 0.0},
+              'water_flow'    : {'duration' : int(time.time()) , 'water'   : 0.0, 'price' : 0.0}}
+
+    history = self.collector.get_history(['switches'],int(time.time()),0)
+
+    for switchid in history['switches']:
+      totals['power_wattage']['wattage'] += history['switches'][switchid]['totals']['power_wattage']['wattage']
+      totals['water_flow']['water'] += history['switches'][switchid]['totals']['water_flow']['water']
+
+      if history['switches'][switchid]['power_wattage'][0][0] / 1000.0 < totals['power_wattage']['duration']:
+        totals['power_wattage']['duration'] = history['switches'][switchid]['power_wattage'][0][0] / 1000.0
+
+      if history['switches'][switchid]['water_flow'][0][0] / 1000.0 < totals['water_flow']['duration']:
+        totals['water_flow']['duration'] = history['switches'][switchid]['water_flow'][0][0] / 1000.0
+
+    totals['power_wattage']['duration'] = max(self.get_uptime()['uptime'],int(time.time()) - totals['power_wattage']['duration'],int(time.time()) - totals['water_flow']['duration'])
+    totals['water_flow']['duration'] = totals['power_wattage']['duration']
+
+    totals['power_wattage']['wattage'] += totals['power_wattage']['duration'] * self.pi_power_wattage
+
+    return totals
 
   def __engine_loop(self):
     while True:
@@ -210,29 +243,17 @@ class terrariumEngine():
         # Update the current sensor.
         self.sensors[sensorid].update()
         # Save new data to database
-        self.collector.log_sensor_data(self.sensors[sensorid])
+        self.collector.log_sensor_data(self.sensors[sensorid].get_data())
         # Websocket callback
         self.get_sensors([sensorid],socket=True)
         # Make time for other web request
-        sleep(0.2)
+        sleep(0.1)
 
       # Get the current average temperatures
       average_data = self.get_sensors(['average'])['sensors']
 
       # Websocket callback
       self.__send_message({'type':'sensor_gauge','data':average_data})
-
-      # Calculate power and water usage per day every 9th minute
-      # Disabled again!
-      '''
-      if int(time.strftime('%M')) % 10 == 9:
-        for powerswitchid in self.power_switches:
-          self.collector.log_switch_data(self.power_switches[powerswitchid].get_data())
-        self.collector.log_total_power_and_water_usage(self.pi_power_wattage)
-
-        for doorid in self.doors:
-          self.collector.log_door_data(self.doors[doorid].get_data())
-      '''
 
       # Websocket messages back
       self.get_uptime(socket=True)
@@ -247,8 +268,12 @@ class terrariumEngine():
         self.webcams[webcamid].update()
         sleep(0.2)
 
-      logger.info('Engine loop done in %s seconds' % (time.time() - starttime,))
-      sleep(30) # TODO: Config setting
+      duration = time.time() - starttime
+      if duration < terrariumEngine.LOOP_TIMEOUT:
+        logger.info('Engine loop done in %.5f seconds. Waiting for %.5f seconds for next round' % (duration,terrariumEngine.LOOP_TIMEOUT - duration))
+        sleep(terrariumEngine.LOOP_TIMEOUT - duration) # TODO: Config setting
+      else:
+        logger.warning('Engine took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEngine.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
 
   def __send_message(self,message):
     for queue in self.subscribed_queues:
@@ -406,6 +431,16 @@ class terrariumEngine():
       power_switch.set_name(switchdata['name'])
       power_switch.set_power_wattage(switchdata['power_wattage'])
       power_switch.set_water_flow(switchdata['water_flow'])
+      if 'dimmer_duration' in switchdata:
+        power_switch.set_dimmer_duration(switchdata['dimmer_duration'])
+      if 'dimmer_on_duration' in switchdata:
+        power_switch.set_dimmer_on_duration(switchdata['dimmer_on_duration'])
+      if 'dimmer_on_percentage' in switchdata:
+        power_switch.set_dimmer_on_percentage(switchdata['dimmer_on_percentage'])
+      if 'dimmer_off_duration' in switchdata:
+        power_switch.set_dimmer_off_duration(switchdata['dimmer_off_duration'])
+      if 'dimmer_off_percentage' in switchdata:
+        power_switch.set_dimmer_off_percentage(switchdata['dimmer_off_percentage'])
 
       new_switches[power_switch.get_id()] = power_switch
 
@@ -424,8 +459,6 @@ class terrariumEngine():
     if self.environment is not None:
       self.get_environment(socket=True)
 
-    if data['state'] is False:
-      self.collector.log_total_power_and_water_usage(self.pi_power_wattage)
   # End switches part
 
 
@@ -688,15 +721,16 @@ class terrariumEngine():
       return data
 
   def get_power_usage_water_flow(self, socket = False):
-    data = self.__get_power_usage_water_flow()
-    totaldata = self.__calculate_power_usage_water_flow()
+    data = self.__get_current_power_usage_water_flow()
+    totaldata = self.__get_total_power_usage_water_flow()
 
-    data['power']['total'] = totaldata['total_power']
-    data['power']['duration'] = totaldata['duration']
-    data['power']['price'] = self.config.get_power_price()
-    data['water']['total'] = totaldata['total_water']
-    data['water']['duration'] = totaldata['duration']
-    data['water']['price'] = self.config.get_water_price()
+    data['power']['total'] = totaldata['power_wattage']['wattage']
+    data['power']['duration'] = totaldata['power_wattage']['duration']
+    data['power']['price'] = self.config.get_power_price() * (totaldata['power_wattage']['wattage'] / (3600 * 1000))
+
+    data['water']['total'] = totaldata['water_flow']['water']
+    data['water']['duration'] = totaldata['water_flow']['duration']
+    data['water']['price'] = self.config.get_water_price() * totaldata['water_flow']['water']
 
     if socket:
       self.__send_message({'type':'power_usage_water_flow','data':data});

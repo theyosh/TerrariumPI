@@ -162,16 +162,23 @@ div.modal div.row.webcam{
   text-align: center;
   font-size: 1.5em;
   display: inline;
-  margin: 0.15em 25%;
 }
 
 .power_switch span {
   cursor: pointer;
 }
 
+.power_switch.dimmer {
+  display: block;
+  position: relative;
+}
+
 .power_switch.big,
 .fa.fa-lock.big {
-  font-size: 11em;
+  font-size: 12em;
+  display: block;
+  padding-top: 0.1em;
+  line-height: 1em;
 }
 
 .x_title .power_switch {

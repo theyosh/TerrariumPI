@@ -101,6 +101,15 @@
                       <li><strong>{{_('Denkovi')}}</strong>: ...</li>
                     </ul>
                   </div>
+                  <div class="row">
+                    <img src="static/images/documentation/AC_Dimmer_MPDMv4_1_3_Kit_top_1.jpg.2560x2560_q85.jpg" alt="{{_('Universal AC MAINS Dimmer - MPDMv4.1')}}" class="img-thumbnail alignright col-xs-3" />
+                    <h4>{{_('PWM')}}</h4>
+                    <p>{{_('With PWM controlled boards it is possible to support dimming devices.')}}</p>
+                    <p>{{_('The following boards are tested')}}</p>
+                    <ul>
+                      <li><strong>{{_('Nextevo')}}</strong>: <a href="https://www.tindie.com/products/nEXT_EVO1/universal-ac-mains-dimmer-mpdmv41/" target="blank">Universal AC MAINS Dimmer - MPDMv4.1 </a></li>
+                    </ul>
+                  </div>
                 </div>
                 <div aria-labelledby="hardware_tab_doors" class="tab-pane fade" id="hardware-tab-doors" role="tabpanel">
                   <img src="static/images/documentation/door_magnets.jpg" alt="Dashboard screenshot" class="img-thumbnail alignright col-xs-3" />

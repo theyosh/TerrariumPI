@@ -40,6 +40,11 @@ class terrariumTranslations():
     self.translations['switch_field_name'] = _('Holds the switch name.')
     self.translations['switch_field_power_wattage'] = _('Holds the switch power usage in Watt when switched on.')
     self.translations['switch_field_water_flow'] = _('Holds the switch water flow in liters per minute when switched on')
+    self.translations['switch_field_dimmer_duration'] = _('Holds the amount of seconds for the duration in which the dimmer changes to the new value.')
+    self.translations['switch_field_dimmer_on_duration'] = _('Holds the amount of seconds for the duration in which it increases the power.')
+    self.translations['switch_field_dimmer_on_percentage'] = _('Holds the amount in percentage to go to when switched on.')
+    self.translations['switch_field_dimmer_off_duration'] = _('Holds the amount of seconds for the duration in which it decresses the power.')
+    self.translations['switch_field_dimmer_off_percentage'] = _('Holds the amount in percentage to go to when switched off.')
     # End switches
 
     # Doors

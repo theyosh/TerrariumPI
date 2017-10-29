@@ -53,6 +53,9 @@ then
       sleep 1
     done
     echo " restart!"
+
+    # Restart PiGPIOd process....
+    sudo service pigpiod restart
   done
 else
   WHOAMI=`whoami`

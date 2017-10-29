@@ -24,6 +24,7 @@ class terrariumWebcam():
 
   OFFLINE = 'offline'
   ONLINE = 'online'
+  UPDATE_TIMEOUT = 60
 
   def __init__(self, id, location, name = '', rotation = None):
     self.id = id
@@ -299,11 +300,12 @@ class terrariumWebcam():
 
   def update(self):
     starttime = time()
-    logger.info('Updating webcam \'%s\' at location %s' % (self.get_name(), self.get_location(),))
-    self.__get_raw_image()
-    if self.get_state() == 'online':
-      self.__tile_image()
-    logger.info('Done updating webcam \'%s\' at location %s in %.5f seconds' % (self.get_name(), self.get_location(),time()-starttime))
+    if self.last_update is None or (int(starttime) - self.get_last_update()) > terrariumWebcam.UPDATE_TIMEOUT:
+      logger.info('Updating webcam \'%s\' at location %s' % (self.get_name(), self.get_location(),))
+      self.__get_raw_image()
+      if self.get_state() == 'online':
+        self.__tile_image()
+      logger.info('Done updating webcam \'%s\' at location %s in %.5f seconds' % (self.get_name(), self.get_location(),time()-starttime))
 
   def get_data(self):
     return {'id': self.get_id(),

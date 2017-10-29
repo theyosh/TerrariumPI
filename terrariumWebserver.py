@@ -78,6 +78,12 @@ class terrariumWebserver():
                      apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
                     )
 
+    self.__app.route('/api/switch/state/<switchid:path>/<value:int>',
+                     method=['GET'],
+                     callback=self.__state_switch,
+                     apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
+                    )
+
     self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|doors|environment|profile)>',
                      method=['PUT','POST','DELETE'],
                      callback=self.__update_api_call,
@@ -225,6 +231,13 @@ class terrariumWebserver():
   def __toggle_switch(self,switchid):
     if switchid in self.__terrariumEngine.power_switches:
       self.__terrariumEngine.power_switches[switchid].toggle()
+      return {'ok' : True}
+
+    return {'ok' : False}
+
+  def __state_switch(self,switchid,value):
+    if switchid in self.__terrariumEngine.power_switches:
+      self.__terrariumEngine.power_switches[switchid].set_state(value)
       return {'ok' : True}
 
     return {'ok' : False}

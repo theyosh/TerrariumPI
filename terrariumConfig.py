@@ -291,6 +291,28 @@ class terrariumConfig:
     if 'state' in data:
       del(data['state'])
 
+    if 'current_power_wattage' in data:
+      del(data['current_power_wattage'])
+
+    if 'current_water_flow' in data:
+      del(data['current_water_flow'])
+
+    if data['hardwaretype'] != 'pwm-dimmer':
+      if 'dimmer_duration' in data:
+        del(data['dimmer_duration'])
+
+      if 'dimmer_off_duration' in data:
+        del(data['dimmer_off_duration'])
+
+      if 'dimmer_off_percentage' in data:
+        del(data['dimmer_off_percentage'])
+
+      if 'dimmer_on_duration' in data:
+        del(data['dimmer_on_duration'])
+
+      if 'dimmer_on_percentage' in data:
+        del(data['dimmer_on_percentage'])
+
     return self.__update_config('switch' + str(data['id']),data)
 
   def save_power_switches(self,data):
