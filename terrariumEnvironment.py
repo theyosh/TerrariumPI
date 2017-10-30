@@ -371,6 +371,20 @@ class terrariumEnvironment():
     average = {}
     # Make a set, in order to get a list of unique sensorids. In other words, set will remove duplicate sensorids
     for sensorid in set(self.sprayer['sensors'] + self.heater['sensors'] + self.cooler['sensors']):
+      if sensorid not in self.sensors:
+        part = ''
+        if sensorid in self.sprayer['sensors']:
+          part += 'sprayer,'
+        if sensorid in self.heater['sensors']:
+          part += 'heater,'
+        if sensorid in self.cooler['sensors']:
+          part += 'cooler,'
+
+        part = part[:-1]
+
+        logger.error('Error getting average data from sensor with id %s. Sensor is specified in \'%s\' part, but the sensor is not known anymore in confg' % (sensorid,part))
+        continue
+
       sensor = self.sensors[sensorid]
       sensor_type = sensor.get_type()
 
