@@ -46,10 +46,11 @@ then
       RESTART_ATTEMPTS=0
     fi
 
-    echo -n "$(date +"%Y-%m-%d %T,000") - WARNING - terrariumWrapper - Restarting in ${RESTART_TIME} seconds after running for ${SECONDS} seconds "
+#    echo -n "$(date +"%Y-%m-%d %T,000") - WARNING - terrariumWrapper -
+    message "Restarting in ${RESTART_TIME} seconds after running for ${SECONDS} seconds. Press Ctrl+C now to terminate TerrariumPI."
     for (( counter=1; counter<=${RESTART_TIME}; counter++ ))
     do
-      echo -n "."
+      echo -n " ${counter},"
       sleep 1
     done
     echo " restart!"
