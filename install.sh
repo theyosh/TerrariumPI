@@ -23,13 +23,9 @@ raspi-config
 # Set the timezone
 dpkg-reconfigure tzdata
 
-if [ `ls -l gentelella | grep -v ^t | wc -l` -eq 0 ]; then
-  # Manual get Gentelella bootstrap 3 template
-  git clone https://github.com/puikinsh/gentelella.git gentelella
-fi
-
-cd gentelella
-git pull
+cd "${BASEDIR}/"
+git submodule init
+git submodule update
 cd "${BASEDIR}/.."
 
 # Install multiple python modules
