@@ -7,3 +7,6 @@
 [submodule "static/Leaflet.fullscreen"]
 	path = static/Leaflet.fullscreen
 	url = https://github.com/Leaflet/Leaflet.fullscreen.git
+[submodule "static/Leaflet.loading"]
+	path = static/Leaflet.loading
+	url = https://github.com/ebrelsford/Leaflet.loading.git
