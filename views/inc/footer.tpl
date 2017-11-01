@@ -33,7 +33,7 @@
   <script type="text/javascript" src="/gentelella/vendors/pnotify/dist/pnotify.nonblock.js"></script>
   <!-- Leaflet -->
   <script type="text/javascript" src="/static/leaflet/leaflet.js"></script>
-  <script type="text/javascript" src="/static/leaflet.loading/src/Control.Loading.js"></script>
+  <script type="text/javascript" src="/static/Leaflet.loading/src/Control.Loading.js"></script>
   <script type="text/javascript" src='/static/Leaflet.fullscreen/dist/Leaflet.fullscreen.min.js'></script>
   <!-- bootstrap-wysiwyg -->
   <script type="text/javascript" src="/gentelella/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
