@@ -10,6 +10,7 @@ from hashlib import md5
 import thread
 import time
 import math
+from terrariumUtils import terrariumUtils
 
 class terrariumSwitch():
 
@@ -311,31 +312,36 @@ class terrariumSwitch():
       self.set_state(100 - value)
 
   def set_dimmer_duration(self,value):
-    self.__dimmer_duration = float(value if float(value) >= 0.0 else 0)
+    value = float(value) if terrariumUtils.is_float(value) else 0.0
+    self.__dimmer_duration = value if value >= 0.0 else 0.0
 
   def get_dimmer_duration(self):
     return (self.__dimmer_duration if self.get_hardware_type() == 'pwm-dimmer' else 0.0)
 
   def set_dimmer_on_duration(self,value):
-    self.__dimmer_on_duration = float(value if float(value) >= 0.0 else 0)
+    value = float(value) if terrariumUtils.is_float(value) else 0.0
+    self.__dimmer_on_duration = value if value >= 0.0 else 0.0
 
   def get_dimmer_on_duration(self):
     return (self.__dimmer_on_duration if self.get_hardware_type() == 'pwm-dimmer' else 0.0)
 
   def set_dimmer_off_duration(self,value):
-    self.__dimmer_off_duration = float(value if float(value) >= 0.0 else 0)
+    value = float(value) if terrariumUtils.is_float(value) else 0.0
+    self.__dimmer_off_duration = value if value >= 0.0 else 0.0
 
   def get_dimmer_off_duration(self):
     return (self.__dimmer_off_duration if self.get_hardware_type() == 'pwm-dimmer' else 0.0)
 
   def set_dimmer_on_percentage(self,value):
-    self.__dimmer_on_percentage = float(value if (0.0 <= float(value) <= 100.0) else 100)
+    value = float(value) if terrariumUtils.is_float(value) else 0.0
+    self.__dimmer_on_percentage = value if (0.0 <= value <= 100.0) else 100.0
 
   def get_dimmer_on_percentage(self):
     return (self.__dimmer_on_percentage if self.get_hardware_type() == 'pwm-dimmer' else 100.0)
 
   def set_dimmer_off_percentage(self,value):
-    self.__dimmer_off_percentage = float(value if (0.0 <= float(value) <= 100.0) else 100)
+    value = float(value) if terrariumUtils.is_float(value) else 0.0
+    self.__dimmer_off_percentage = value if (0.0 <= value <= 100.0) else 100.0
 
   def get_dimmer_off_percentage(self):
     return (self.__dimmer_off_percentage if self.get_hardware_type() == 'pwm-dimmer' else 0.0)
