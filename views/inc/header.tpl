@@ -18,7 +18,7 @@
   <link href="/gentelella/vendors/nprogress/nprogress.css" rel="stylesheet">   <!-- NProgress -->
   <link href="/static/leaflet/leaflet.css" rel="stylesheet">
   <link href="/static/leaflet.loading/src/Control.Loading.css" rel="stylesheet">
-  <link href='/static/leaflet.fullscreen/dist/leaflet.fullscreen.css' rel='stylesheet'><!-- Custom Theme Style -->
+  <link href='/static/Leaflet.fullscreen/dist/leaflet.fullscreen.css' rel='stylesheet'><!-- Custom Theme Style -->
   <link href="/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet"><!-- bootstrap-daterangepicker -->
   <link href="/static/fancybox/dist/jquery.fancybox.min.css" rel="stylesheet">
   <link href="/gentelella/build/css/custom.min.css" rel="stylesheet">

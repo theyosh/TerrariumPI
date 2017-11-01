@@ -4,3 +4,6 @@
 [submodule "static/fancybox"]
 	path = static/fancybox
 	url = https://github.com/fancyapps/fancybox.git
+[submodule "static/Leaflet.fullscreen"]
+	path = static/Leaflet.fullscreen
+	url = https://github.com/Leaflet/Leaflet.fullscreen.git
