@@ -213,6 +213,9 @@ class terrariumEngine():
 
     history = self.collector.get_history(['switches'],int(time.time()),0)
 
+    if 'switches' not in history:
+      return totals
+
     for switchid in history['switches']:
       totals['power_wattage']['wattage'] += history['switches'][switchid]['totals']['power_wattage']['wattage']
       totals['water_flow']['water'] += history['switches'][switchid]['totals']['water_flow']['water']
