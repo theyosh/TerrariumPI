@@ -7,6 +7,9 @@ import time
 import uptime
 import os
 import psutil
+import datetime
+import copy
+from hashlib import md5
 
 from terrariumConfig import terrariumConfig
 
@@ -15,6 +18,7 @@ from terrariumSensor import terrariumSensor
 from terrariumSwitch import terrariumSwitch
 from terrariumDoor import terrariumDoor
 from terrariumWebcam import terrariumWebcam
+from terrariumAudio import terrariumAudioPlayer
 
 from terrariumCollector import terrariumCollector
 from terrariumEnvironment import terrariumEnvironment
@@ -82,7 +86,10 @@ class terrariumEngine():
     logger.debug('Done loading terrariumPI environment system')
 
     # Load webcams from config
-    self.__load_webcams();
+    self.__load_webcams()
+
+    # Load audio system
+    self.__audio_player = terrariumAudioPlayer(self.config,self.get_audio_playing)
 
     # Start system update loop
     logger.info('Start terrariumPI engine')
@@ -262,6 +269,7 @@ class terrariumEngine():
       self.get_uptime(socket=True)
       self.get_power_usage_water_flow(socket=True)
       self.get_environment(socket=True)
+      self.get_audio_playing(socket=True)
 
       # Log system stats
       self.collector.log_system_data(self.get_system_stats())
@@ -588,6 +596,87 @@ class terrariumEngine():
     return False
   # End webcams part
 
+  # Start audio files part
+  def reload_audio_files(self):
+    self.__audio_player.reload_audio_files()
+
+  def upload_audio_file(self):
+    pass
+
+  def delete_audio_file(self,audiofileid):
+    audio_files = self.__audio_player.get_audio_files()
+    if audiofileid in audio_files:
+      if audio_files[audiofileid].delete():
+        self.reload_audio_files()
+        return True
+
+    return False
+
+  def get_audio_files(self, parameters = []):
+    audio_files = self.__audio_player.get_audio_files()
+    data = []
+    filter = None
+    if len(parameters) > 0 and parameters[0] is not None:
+      filter = parameters[0]
+
+    if filter is not None and filter in audio_files:
+      data.append(audio_files[filter].get_data())
+
+    else:
+      for audiofileid in audio_files:
+        data.append(audio_files[audiofileid].get_data())
+
+    return {'audiofiles' : data}
+
+  def get_audio_playlists(self, parameters = [], socket = False):
+    playlists = self.__audio_player.get_playlists()
+    data = []
+    filter = None
+    if len(parameters) > 0 and parameters[0] is not None:
+      filter = parameters[0]
+
+    if filter is not None and filter in playlists:
+      data.append(playlists[filter])
+
+    else:
+      for playlist_id in playlists:
+        data.append(playlists[playlist_id].get_data())
+
+    if socket:
+      self.__send_message({'type':'playlists_data','data':data})
+    else:
+      return {'playlists' : data}
+
+  def get_audio_playlists_config(self):
+    return self.get_audio_playlists()
+
+  def set_audio_playlists_config(self, data):
+    new_audio_playlists = {}
+    for audio_playlist_data in data:
+      audio_playlist = {'id'     : md5(b'' + str(audio_playlist_data['start']) + str(audio_playlist_data['stop'])).hexdigest(),
+                        'name'   : audio_playlist_data['name'],
+                        'start'  : audio_playlist_data['start'],
+                        'stop'   : audio_playlist_data['stop'],
+                        'volume' : audio_playlist_data['volume'],
+                        'files'  : audio_playlist_data['files']}
+
+      new_audio_playlists[audio_playlist['id']] = audio_playlist
+
+    if self.config.save_audio_playlists(new_audio_playlists):
+      self.__audio_player.reload_playlists()
+      return True
+
+    return False
+
+  def get_audio_playing(self,socket = False):
+    data = self.__audio_player.get_current_state()
+
+    if socket:
+      self.__send_message({'type':'player_indicator','data': data})
+    else:
+      return data
+
+  # End audio part
 
   # Environment part
   def get_environment(self, parameters = [], socket = False):
@@ -764,6 +853,9 @@ class terrariumEngine():
     if 'doors' == part or part is None:
       data.update(self.get_doors_config())
 
+    if 'audio' == part or part is None:
+      data.update(self.get_audio_playlists_config())
+
     if 'profile' == part or part is None:
       data.update(self.get_profile_config())
 
@@ -788,6 +880,9 @@ class terrariumEngine():
 
     elif 'doors' == part:
       update_ok = self.set_doors_config(data)
+
+    elif 'audio' == part:
+      update_ok = self.set_audio_playlists_config(data)
 
     elif 'environment' == part:
       update_ok = self.set_environment_config(data)

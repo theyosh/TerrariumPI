@@ -252,6 +252,15 @@ div.row.door div.sidebar-widget i.fa {
   -ms-filter: FlipV;
 }
 
+.dropzone {
+  min-height: auto !important;
+}
+
+table.dataTable .glyphicon-trash,
+table.dataTable .glyphicon-play {
+  margin: 0.2em;
+  cursor: pointer;
+}
 
 /* Documentation */
 

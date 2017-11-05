@@ -401,3 +401,37 @@ class terrariumConfig:
 
     return data
   # End webcam config functions
+
+  # Audio playlist config functions
+  def save_audio_playlist(self,data):
+    if 'running' in data:
+      del(data['running'])
+
+    return self.__update_config('playlist' + str(data['id']),data)
+
+  def save_audio_playlists(self,data):
+    update_ok = True
+    for audio_playlist_id in self.get_audio_playlists():
+      self.__config.remove_section('playlist' + audio_playlist_id)
+
+    for audio_playlist_id in data:
+      update_ok = update_ok and self.save_audio_playlist(data[audio_playlist_id])
+
+    if len(data) == 0:
+      update_ok = update_ok and self.__save_config()
+
+    return update_ok
+
+  def get_audio_playlists(self):
+    data = {}
+    for section in self.__config.sections():
+      if section[:8] == 'playlist':
+        audio_playlist_data = self.__get_config(section)
+        audio_playlist_data['start'] = int(audio_playlist_data['start'])
+        audio_playlist_data['stop'] = int(audio_playlist_data['stop'])
+        audio_playlist_data['files'] = audio_playlist_data['files'].split(',') if audio_playlist_data['files'] is not None else []
+        audio_playlist_data['volume'] = int(audio_playlist_data['volume'])
+        data[section[8:]] = audio_playlist_data
+
+    return data
+  # End audio playlist config functions

@@ -91,6 +91,9 @@ function websocket_init(reconnect) {
       case 'door_indicator':
         update_door_indicator(data.data);
         break;
+      case 'player_indicator':
+        update_player_indicator(data.data);
+        break;
       case 'update_weather':
         update_weather(data.data);
         break;
@@ -218,6 +221,15 @@ function formatNumber(amount,minfrac,maxfrac) {
   });
 }
 
+function formatBytes(bytes,decimals) {
+   if(bytes === 0) return '0 Bytes';
+   var k = 1024,
+       dm = decimals || 2,
+       sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+       i = Math.floor(Math.log(bytes) / Math.log(k));
+   return formatNumber(parseFloat((bytes / Math.pow(k, i))),0,2) + ' ' + sizes[i];
+}
+
 function process_form() {
   $('form').each(function() {
     $(this).on('submit', function() {
@@ -251,7 +263,7 @@ function process_form() {
 function prepare_form_data(form) {
   var formdata = [];
   var form_type = form.attr('action').split('/').pop();
-  var re = /(sensor|switch|webcam|light|sprayer|heater|cooler|door|profile)(_\d+)?_(.*)/i;
+  var re = /(sensor|switch|webcam|light|sprayer|heater|cooler|door|profile|playlist)(_\d+)?_(.*)/i;
   var matches = null;
   var objectdata = {};
   var prev_nr = -1;
@@ -277,6 +289,7 @@ function prepare_form_data(form) {
           case 'environment':
           case 'webcams':
           case 'doors':
+          case 'audio':
             if ((matches = re.exec(field_name)) !== null) {
               if (matches.index === re.lastIndex) {
                 re.lastIndex++;
@@ -300,7 +313,7 @@ function prepare_form_data(form) {
                   objectdata = {};
                   prev_nr = current_nr;
                 }
-                if (matches[3] === 'on' || matches[3] === 'off') {
+                if (matches[3] === 'on' || matches[3] === 'off' || matches[3] === 'start' || matches[3] === 'stop') {
                   field_value = moment(field_value, 'LT').unix();
                 }
                 objectdata[matches[3]] = field_value;
@@ -496,6 +509,14 @@ function update_online_messages(online) {
   add_notification_message('online_messages', title, message, icon, color);
 }
 
+function update_player_messages(data) {
+  var title   = (data.running ? '{{_('Playing')}}' : '{{_('Stopped')}}');
+  var message = (data.running ? '{{_('Playlist')}}: ' + data.name + ' - ' + moment(data.start * 1000).format('LT') + '-' + moment(data.stop * 1000).format('LT'): '{{_('Not playing')}}');
+  var icon    = (data.running ? 'fa-play-circle-o' : 'fa-play-circle-o');
+  var color   = (data.running ? 'green' : 'red');
+  add_notification_message('player_messages', title, message, icon, color);
+}
+
 function add_notification_message(type, title, message, icon, color, date) {
   var notification_date = new Date().getTime();
   if (date != undefined) {
@@ -579,6 +600,18 @@ function door_closed() {
   door_indicator.find('span.open').hide();
   door_indicator.find('span.closed').show();
   update_door_messages(false);
+}
+
+function update_player_indicator(data) {
+  var player_indicator = $('a#player_indicator');
+  if (data.running) {
+    player_indicator.find('span.running').show();
+    player_indicator.find('span.stopped').hide();
+  } else {
+    player_indicator.find('span.running').hide();
+    player_indicator.find('span.stopped').show();
+  }
+  update_player_messages(data);
 }
 
 function get_theme_color(color) {
@@ -1324,6 +1357,69 @@ function load_door_history() {
   });
 }
 
+function load_player_status() {
+  $.getJSON('/api/audio/playing', function(player_data) {
+    update_player_indicator(player_data);
+  });
+}
+
+function delete_audio_file(audio_file_id, audio_file_name) {
+  if (confirm('Are you sure to delete the file: \'' + audio_file_name + '\' ?')) {
+    $.ajax({
+      url: "/api/audio/file/" + audio_file_id,
+      type: "DELETE",
+      dataType : "json",
+    }).done(function(response) {
+      new PNotify({
+        type: (response.ok ? 'success' : 'error'),
+        title: response.title,
+        text: response.message,
+        nonblock: {
+          nonblock: true
+        },
+        delay: 3000,
+        mouse_reset: false,
+        //addclass: 'dark',
+        styling: 'bootstrap3',
+        hide: true,
+      });
+    });
+  }
+}
+
+function add_audio_playlist() {
+  var form = $('.new-playlist-form');
+  if (!check_form_data(form)) return false;
+
+  add_audio_playlist_row('None',
+                form.find('input[name="playlist_[nr]_name"]').val(),
+                form.find('input[name="playlist_[nr]_start"]').val(),
+                form.find('input[name="playlist_[nr]_stop"]').val(),
+                form.find('input[name="playlist_[nr]_volume"]').val(),
+                form.find('select[name="playlist_[nr]_files"]').val());
+
+  $('.new-playlist-form').modal('hide');
+}
+
+function add_audio_playlist_row(id,name,start,stop,volume,files) {
+  var audio_playlist_row = $($('.modal-body div.row.playlist').parent().clone().html().replace(/\[nr\]/g, $('form div.row.playlist').length));
+  audio_playlist_row.find('.x_title').show().find('h2 small').text(name);
+  audio_playlist_row.find('span.select2.select2-container').remove();
+
+  audio_playlist_row.find('input, select').each(function(counter,item){
+    $(item).val(eval($(item).attr('name').replace(/playlist_[0-9]+_/g,'')));
+  });
+
+  audio_playlist_row.insertBefore('div.row.submit').show();
+  reload_reload_theme();
+
+  audio_playlist_row.find("select").select2({
+    placeholder: '{{_('Select an option')}}',
+    allowClear: false,
+    minimumResultsForSearch: Infinity
+  });
+}
+
 function capitalizeFirstLetter(string) {
     return string[0].toUpperCase() + string.slice(1);
 }
@@ -1485,6 +1581,7 @@ $(document).ready(function() {
 	}).appendTo("body");
 
   load_door_history();
+  load_player_status();
   load_page('dashboard.html');
 
   setInterval(function() {
