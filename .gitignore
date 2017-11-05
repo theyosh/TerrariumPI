@@ -3,5 +3,6 @@ settings.cfg
 history.db*
 static/webcam/*.jpg
 log/*.log*
+audio/*
 description.txt
 weather.txt

@@ -14,6 +14,7 @@ from bottle.ext.websocket import websocket
 from Queue import Queue
 
 from terrariumTranslations import terrariumTranslations
+from terrariumAudio import terrariumAudioPlayer
 
 import thread
 import json
@@ -72,6 +73,8 @@ class terrariumWebserver():
     self.__app.route('/<filename:re:robots\.txt>', method="GET", callback=self.__static_file)
     self.__app.route('/<root:re:(static|gentelella|webcam)>/<filename:path>', method="GET", callback=self.__static_file)
 
+    self.__app.route('/api/<path:path>', method=['GET'], callback=self.__get_api_call)
+
     self.__app.route('/api/switch/toggle/<switchid:path>',
                      method=['GET'],
                      callback=self.__toggle_switch,
@@ -84,13 +87,23 @@ class terrariumWebserver():
                      apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
                     )
 
-    self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|doors|environment|profile)>',
+    self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|doors|audio|environment|profile)>',
                      method=['PUT','POST','DELETE'],
                      callback=self.__update_api_call,
                      apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
                     )
 
-    self.__app.route('/api/<path:path>', method=['GET'], callback=self.__get_api_call)
+    self.__app.route('/api/audio/file',
+                     method=['POST'],
+                     callback=self.__upload_audio_file,
+                     apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
+                    )
+
+    self.__app.route('/api/audio/file/<audiofileid:path>',
+                     method=['DELETE'],
+                     callback=self.__delete_audio_file,
+                     apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
+                    )
 
     self.__app.route('/logout',
                      method=['GET'],
@@ -155,6 +168,26 @@ class terrariumWebserver():
 
     return staticfile
 
+  def __upload_audio_file(self):
+    result = {'ok' : False, 'title' : _('Error!'), 'message' : _('File is not uploaded!')}
+    upload = request.files.get('file')
+    try:
+      upload.save(terrariumAudioPlayer.AUDIO_FOLDER)
+      self.__terrariumEngine.reload_audio_files()
+      result = {'ok' : True, 'title' : _('Success!'), 'message' : _('File \'%s\' is uploaded' % (upload.filename,))}
+    except IOError, message:
+      result['message'] = _('Duplicate file \'%s\'' % (upload.filename,))
+
+    return result
+
+  def __delete_audio_file(self,audiofileid):
+    result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Action could not be satisfied')}
+
+    if self.__terrariumEngine.delete_audio_file(audiofileid):
+      result = {'ok' : True, 'title' : _('Success!'), 'message' : _('Audio file is deleted')}
+
+    return result
+
   def __update_api_call(self,path):
     result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Data could not be saved')}
     postdata = {}
@@ -200,6 +233,16 @@ class terrariumWebserver():
 
     elif 'webcams' == action:
       result = self.__terrariumEngine.get_webcams(parameters)
+
+    elif 'audio' == action:
+      if len(parameters) > 0 and parameters[0] == 'files':
+        del(parameters[0])
+        result = self.__terrariumEngine.get_audio_files(parameters)
+      elif len(parameters) > 0 and parameters[0] == 'playing':
+        del(parameters[0])
+        result = self.__terrariumEngine.get_audio_playing()
+      else:
+        result = self.__terrariumEngine.get_audio_playlists(parameters)
 
     elif 'environment' == action:
       result = self.__terrariumEngine.get_environment(parameters)

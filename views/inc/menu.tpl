@@ -87,6 +87,22 @@
                   </ul>
                 </li>
                 <li>
+                  <a><i class="fa fa-music"></i> {{_('Audio')}} <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <!--
+                    <li>
+                      <a href="audio_status.html">{{_('Status')}}</a>
+                    </li>
+                    -->
+                    <li>
+                      <a href="audio_playlist.html">{{_('Playlist')}}</a>
+                    </li>
+                    <li>
+                      <a href="audio_files.html">{{_('Files')}}</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
                   <a><i class="fa fa-lightbulb-o"></i> {{_('System')}} <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li>
@@ -168,6 +184,23 @@
                   </span>
                 </a>
                 <ul class="dropdown-menu list-unstyled msg_list" id="online_messages" role="menu">
+                  <li class="no_message">
+                    <div class="text-center">
+                      <a><strong>{{_('No messages')}}</strong></a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li class="dropdown" role="presentation">
+                <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;" id="player_indicator">
+                  <span class="running" style="display:none">
+                    <i class="fa fa-play-circle-o green"></i> <span>{{_('Playing')}}</span>
+                  </span>
+                  <span class="stopped">
+                    <i class="fa fa-play-circle-o red"></i> <span>{{_('Stopped')}}</span>
+                  </span>
+                </a>
+                <ul class="dropdown-menu list-unstyled msg_list" id="player_messages" role="menu">
                   <li class="no_message">
                     <div class="text-center">
                       <a><strong>{{_('No messages')}}</strong></a>

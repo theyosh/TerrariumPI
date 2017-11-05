@@ -33,7 +33,7 @@ then
     if (( SECONDS < RESTART_TIMEOUT )); then
       # Restarted to soon... counting
       RESTART_ATTEMPTS=$((RESTART_ATTEMPTS+1))
-      message "Restart counter: ${RESTART_ATTEMPTS}"
+      message "Restart counter: ${RESTART_ATTEMPTS}/${MAX_RESTARTS}"
 
       if (( RESTART_ATTEMPTS > MAX_RESTARTS )); then
          # To many errors. Rebooting
@@ -46,14 +46,13 @@ then
       RESTART_ATTEMPTS=0
     fi
 
-#    echo -n "$(date +"%Y-%m-%d %T,000") - WARNING - terrariumWrapper -
     message "Restarting in ${RESTART_TIME} seconds after running for ${SECONDS} seconds. Press Ctrl+C now to terminate TerrariumPI."
-    for (( counter=1; counter<=${RESTART_TIME}; counter++ ))
+    for (( counter=${RESTART_TIME}; counter>0; counter-- ))
     do
-      echo -n " ${counter},"
+      echo -n "${counter} "
       sleep 1
     done
-    echo " restart!"
+    echo "restart!"
 
     # Restart PiGPIOd process....
     sudo service pigpiod restart

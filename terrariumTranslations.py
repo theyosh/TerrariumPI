@@ -60,6 +60,10 @@ class terrariumTranslations():
     self.translations['webcam_field_preview'] = _('Shows the webcam preview image.')
     # End webcam
 
+    # Audio
+
+    # End Audio
+
     # System
     self.translations['environment_field_lights_enable'] = _('Enable or disable the light system. When enabled, you can make changes below. By disabling it will not loose the current settings. It will temporary stop the lighting system.')
     self.translations['environment_field_lights_mode'] = _('Select the mode on which the lights will be put on and off. Select \'%s\' to use the sun rise and sun set at your location. This will make the amount of lighting variable to the actual amount of daylight. When selecting \'%s\', the light will put on and off at selected times.') % (_('Weather'),_('Timer'))
