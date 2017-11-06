@@ -431,6 +431,8 @@ class terrariumConfig:
         audio_playlist_data['stop'] = int(audio_playlist_data['stop'])
         audio_playlist_data['files'] = audio_playlist_data['files'].split(',') if audio_playlist_data['files'] is not None else []
         audio_playlist_data['volume'] = int(audio_playlist_data['volume'])
+        audio_playlist_data['repeat'] = audio_playlist_data['repeat'] in [True,1,'True','true','1','on']
+        audio_playlist_data['shuffle'] = audio_playlist_data['shuffle'] in [True,1,'True','true','1','on']
         data[section[8:]] = audio_playlist_data
 
     return data
