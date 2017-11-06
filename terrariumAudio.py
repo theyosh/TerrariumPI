@@ -50,7 +50,9 @@ class terrariumAudioPlayer():
                                         data[audio_playlist_id]['start'],
                                         data[audio_playlist_id]['stop'],
                                         data[audio_playlist_id]['volume'],
-                                        data[audio_playlist_id]['files'])
+                                        data[audio_playlist_id]['files'],
+                                        data[audio_playlist_id]['repeat'],
+                                        data[audio_playlist_id]['shuffle'])
 
       self.__playlists[playlist.get_id()] = playlist
 
@@ -76,7 +78,17 @@ class terrariumAudioPlayer():
                         playlist.get_volume())
                       )
 
-          self.__audio_player = psutil.Popen(['cvlc','-q','--no-interact', '-L','--norm-buff-size=','1000','--norm-max-level','5.0'] + files)
+          audio_player_command = ['cvlc','-q','--no-interact']
+          audio_player_command += ['--norm-buff-size','1000','--norm-max-level','5.0']
+          if playlist.get_shuffle():
+            audio_player_command += ['-Z']
+
+          if playlist.get_repeat():
+            audio_player_command += ['-L']
+
+          audio_player_command += files
+
+          self.__audio_player = psutil.Popen(audio_player_command)
           self.__active_playlist = playlist
           self.mute(False)
           self.set_volume(playlist.get_volume())
@@ -87,6 +99,7 @@ class terrariumAudioPlayer():
           logger.info('Stopping playlist %s' % (playlist.get_name(),))
           self.__audio_player.terminate()
           self.__active_playlist = None
+          self.__audio_player = None
           self.mute()
           if self.__callback is not None:
             self.__callback(socket=True)
@@ -129,6 +142,9 @@ class terrariumAudioPlayer():
     return self.__playlists
 
   def get_current_state(self):
+    if len(self.get_audio_files()) == 0 and len(self.get_playlists()) == 0:
+      return {'running' : 'disabled'}
+
     data = {'running' : self.is_running()}
 
     if data['running'] and self.__active_playlist is not None:
@@ -147,19 +163,23 @@ class terrariumAudioPlayer():
 
 class terrariumAudioPlaylist():
 
-  def __init__(self,id,name = None,start = None,stop = None,volume = None,files = None):
+  def __init__(self,id,name = None,start = None,stop = None,volume = None,files = None,repeat = False, shuffle = False):
     self.__id = id
     self.__name = None
     self.__start = None
     self.__stop = None
     self.__volume = None
     self.__files = None
+    self.__repeat = False
+    self.__shuffle = False
 
     self.set_name(name)
     self.set_start(start)
     self.set_stop(stop)
     self.set_volume(volume)
     self.set_files(files)
+    self.set_repeat(repeat)
+    self.set_shuffle(shuffle)
 
   def __calculate_start_stop_times(self):
     now = datetime.datetime.now()
@@ -219,6 +239,18 @@ class terrariumAudioPlaylist():
   def get_files(self):
     return self.__files
 
+  def set_repeat(self,repeat = True):
+    self.__repeat = repeat == True
+
+  def get_repeat(self):
+    return self.__repeat == True
+
+  def set_shuffle(self,shuffle = True):
+    self.__shuffle = shuffle == True
+
+  def get_shuffle(self):
+    return self.__shuffle == True
+
   def is_time(self):
     return self.get_start() < datetime.datetime.now() < self.get_stop()
 
@@ -235,7 +267,10 @@ class terrariumAudioPlaylist():
             'stop'    : time.mktime(self.get_stop().timetuple()),
             'volume'  : self.get_volume(),
             'files'   : self.get_files(),
-            'is_time' : self.is_time()
+            'repeat'  : self.get_repeat(),
+            'shuffle' : self.get_shuffle(),
+            'is_time' : self.is_time(),
+            'duration': self.get_duration()
             }
 
     return data

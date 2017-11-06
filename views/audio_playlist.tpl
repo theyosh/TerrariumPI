@@ -81,13 +81,21 @@
                             <label for="playlist_[nr]_start">{{_('Start')}}</label> <span class="required">*</span>
                             <input class="form-control" name="playlist_[nr]_start" placeholder="{{_('Start')}}" required="required" type="text" pattern="[0-9:]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('audio_playlist_field_start')}}">
                           </div>
-                          <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                          <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                             <label for="playlist_[nr]_stop">{{_('Stop')}}</label> <span class="required">*</span>
                             <input class="form-control" name="playlist_[nr]_stop" placeholder="{{_('Stop')}}" required="required" type="text" pattern="[0-9:]+"  data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('audio_playlist_field_stop')}}">
                           </div>
-                          <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                          <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                             <label for="playlist_[nr]_volume">{{_('Volume')}}</label> <span class="required">*</span>
-                            <input class="form-control" name="playlist_[nr]_volume" placeholder="{{_('Volume')}}" required="required" type="text" pattern="[0-9]+"  data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('audio_playlist_field_volume')}}">
+                            <input class="form-control" name="playlist_[nr]_volume" placeholder="{{_('Volume')}}" required="required" type="text" pattern="[0-9]+"  data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('audio_playlist_field_volume')}}" />
+                          </div>
+                          <div class="col-md-1 col-sm-1 col-xs-12 form-group" style="text-align: center">
+                            <label for="playlist_[nr]_repeat">{{_('Repeat')}}</label><br />
+                            <input type="checkbox" name="playlist_[nr]_repeat" class="js-switch" value="0" />
+                          </div>
+                          <div class="col-md-1 col-sm-1 col-xs-12 form-group" style="text-align: center">
+                            <label for="playlist_[nr]_shuffle">{{_('Shuffle')}}</label><br />
+                            <input type="checkbox" name="playlist_[nr]_shuffle" class="js-switch" value="0" />
                           </div>
                         </div>
                         <div class="row">
@@ -113,6 +121,13 @@
         </div>
         <script type="text/javascript">
           $(document).ready(function() {
+            jQuery('.new-playlist-form .js-switch').each(function(index,html_element){
+              var switchery = new Switchery(html_element);
+              html_element.onchange = function() {
+                this.value = this.checked;
+              };
+            });
+
             $('.page-title').append('<div class="title_right"><h3><button type="button" class="btn btn-primary alignright" data-toggle="modal" data-target=".new-playlist-form"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h3> </div>');
 
             $('select[name="playlist_[nr]_files"]').select2({
@@ -135,7 +150,9 @@
                                        moment(playlist.start * 1000).format('HH:mm'),
                                        moment(playlist.stop * 1000).format('HH:mm'),
                                        playlist.volume,
-                                       playlist.files);
+                                       playlist.files,
+                                       playlist.repeat,
+                                       playlist.shuffle);
               });
               reload_reload_theme();
             });

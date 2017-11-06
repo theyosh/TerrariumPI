@@ -604,6 +604,12 @@ function door_closed() {
 
 function update_player_indicator(data) {
   var player_indicator = $('a#player_indicator');
+  if (data.running == 'disabled') {
+    player_indicator.hide();
+    return
+  }
+
+  player_indicator.show();
   if (data.running) {
     player_indicator.find('span.running').show();
     player_indicator.find('span.stopped').hide();
@@ -1401,8 +1407,12 @@ function add_audio_playlist() {
   $('.new-playlist-form').modal('hide');
 }
 
-function add_audio_playlist_row(id,name,start,stop,volume,files) {
+function add_audio_playlist_row(id,name,start,stop,volume,files,repeat,shuffle) {
   var audio_playlist_row = $($('.modal-body div.row.playlist').parent().clone().html().replace(/\[nr\]/g, $('form div.row.playlist').length));
+
+  // Remove existing switchery from modal input form
+  audio_playlist_row.find('span.switchery').remove();
+
   audio_playlist_row.find('.x_title').show().find('h2 small').text(name);
   audio_playlist_row.find('span.select2.select2-container').remove();
 
@@ -1417,6 +1427,27 @@ function add_audio_playlist_row(id,name,start,stop,volume,files) {
     placeholder: '{{_('Select an option')}}',
     allowClear: false,
     minimumResultsForSearch: Infinity
+  });
+
+  audio_playlist_row.find('.js-switch').each(function(index,html_element){
+
+    console.log(this.name,this.name.indexOf('_repeat'));
+
+    if (this.name.indexOf('_repeat') != -1) {
+      this.checked = repeat == true;
+    }
+
+    if (this.name.indexOf('_shuffle') != -1) {
+      this.checked = shuffle == true;
+    }
+
+    var switchery = new Switchery(html_element);
+
+    html_element.onchange = function() {
+      this.value = this.checked;
+    };
+
+
   });
 }
 

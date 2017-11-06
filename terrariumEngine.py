@@ -658,7 +658,10 @@ class terrariumEngine():
                         'start'  : audio_playlist_data['start'],
                         'stop'   : audio_playlist_data['stop'],
                         'volume' : audio_playlist_data['volume'],
-                        'files'  : audio_playlist_data['files']}
+                        'files'  : audio_playlist_data['files'],
+                        'repeat' : audio_playlist_data['repeat'] in [True,'True','true','1',1,'on'],
+                        'shuffle': audio_playlist_data['shuffle'] in [True,'True','true','1',1,'on'],
+                        }
 
       new_audio_playlists[audio_playlist['id']] = audio_playlist
 
