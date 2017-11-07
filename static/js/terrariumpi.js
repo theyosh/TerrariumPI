@@ -510,6 +510,7 @@ function update_online_messages(online) {
 }
 
 function update_player_messages(data) {
+  update_player_volume(data.volume);
   var title   = (data.running ? '{{_('Playing')}}' : '{{_('Stopped')}}');
   var message = (data.running ? '{{_('Playlist')}}: ' + data.name + ' - ' + moment(data.start * 1000).format('LT') + '-' + moment(data.stop * 1000).format('LT'): '{{_('Not playing')}}');
   var icon    = (data.running ? 'fa-play-circle-o' : 'fa-play-circle-o');
@@ -517,29 +518,55 @@ function update_player_messages(data) {
   add_notification_message('player_messages', title, message, icon, color);
 }
 
-function add_notification_message(type, title, message, icon, color, date) {
-  var notification_date = new Date().getTime();
-  if (date != undefined) {
-    notification_date = date;
+function update_player_volume(volume) {
+  if ($('div.row.player_volume').length == 0) {
+    var volume_control = $('<div>').addClass('row player_volume');
+    volume_control.append($('<div>').addClass('col-md-1').append($('<span>').addClass('fa fa-volume-down').on('click',function(){
+      $.post('/api/audio/player/volumedown');
+      return false;
+    })));
+    volume_control.append($('<div>').addClass('col-md-10  progress progress-striped active').append($('<div>').addClass('progress-bar progress-bar-success').attr('data-transitiongoal',volume)));
+    volume_control.append($('<div>').addClass('col-md-1').append($('<span>').addClass('fa fa-volume-up').on('click',function(){
+      $.post('/api/audio/player/volumeup');
+      return false;
+    })));
+
+    var menu = $('ul#player_messages');
+    menu.find('li.notification').remove();
+    menu.prepend($('<li>').addClass('notification').append(volume_control));
+    $('ul#player_messages .progress .progress-bar').progressbar();
+  } else {
+    $('div.row.player_volume .progress-bar.progress-bar-success').css('width', volume + '%');
   }
+}
+
+function add_notification_message(type, title, message, icon, color, date) {
+  var notification_date = date || new Date().getTime();
   var menu = $('ul#' + type);
   if (menu.find('li:first a span.message').text() == message) {
     // Skip duplicate messages
     return;
   }
-  var notification = $('<a>').on('click', function() {
-    close_notification_message(this);
-  });
+
+  var notification = $('<a>');
+  if (type != 'player_messages') {
+    notification.on('click', function() {
+      close_notification_message(this);
+    });
+  }
+
   notification.append($('<span>').addClass('image').append($('<img>').attr({
     'src': $('div.profile_pic img').attr('src'),
     'alt': '{{_('Profile image')}}'
   })));
   notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('data-timestamp',notification_date).text('...')));
   notification.append($('<span>').addClass('message').text(message).append($('<span>').addClass('pull-right').html('<i class="fa ' + icon + ' ' + color + '"></i>')));
+
   // Remove no messages line
   menu.find('li.no_message').hide();
   // Add new message on top
   menu.prepend($('<li>').addClass('notification').append(notification));
+
   // Only allow 6 messages, more will be removed
   menu.find('li.notification:gt(5)').remove();
   // Update the notifcation time
@@ -1402,7 +1429,9 @@ function add_audio_playlist() {
                 form.find('input[name="playlist_[nr]_start"]').val(),
                 form.find('input[name="playlist_[nr]_stop"]').val(),
                 form.find('input[name="playlist_[nr]_volume"]').val(),
-                form.find('select[name="playlist_[nr]_files"]').val());
+                form.find('select[name="playlist_[nr]_files"]').val(),
+                form.find('input[name="playlist_[nr]_repeat"]').val(),
+                form.find('input[name="playlist_[nr]_shuffle"]').val());
 
   $('.new-playlist-form').modal('hide');
 }
@@ -1430,24 +1459,17 @@ function add_audio_playlist_row(id,name,start,stop,volume,files,repeat,shuffle) 
   });
 
   audio_playlist_row.find('.js-switch').each(function(index,html_element){
-
-    console.log(this.name,this.name.indexOf('_repeat'));
-
     if (this.name.indexOf('_repeat') != -1) {
       this.checked = repeat == true;
     }
-
     if (this.name.indexOf('_shuffle') != -1) {
       this.checked = shuffle == true;
     }
 
     var switchery = new Switchery(html_element);
-
     html_element.onchange = function() {
       this.value = this.checked;
     };
-
-
   });
 }
 

@@ -21,6 +21,7 @@ class terrariumAudioPlayer():
   AUDIO_FOLDER = 'audio'
   VALID_EXTENSION = ['mp3','m4a','ogg']
   LOOP_TIMEOUT = 30
+  VOLUME_STEP = 10
 
   def __init__(self,config,callback=None):
     self.__config = config
@@ -126,6 +127,20 @@ class terrariumAudioPlayer():
     if 0 <= value <= 100:
       self.__audio_mixer.setvolume(value,alsaaudio.MIXER_CHANNEL_ALL)
 
+  def volume_up(self):
+    volume = self.get_volume() + terrariumAudioPlayer.VOLUME_STEP
+    if volume > 100:
+      volume = 100
+
+    self.set_volume(volume)
+
+  def volume_down(self):
+    volume = self.get_volume() - terrariumAudioPlayer.VOLUME_STEP
+    if volume < 0:
+      volume = 0
+
+    self.set_volume(volume)
+
   def mute(self,mute = True):
     self.__audio_mixer.setmute(1 if mute else 0, alsaaudio.MIXER_CHANNEL_ALL)
 
@@ -149,6 +164,8 @@ class terrariumAudioPlayer():
 
     if data['running'] and self.__active_playlist is not None:
       data.update(self.get_active_playlist().get_data())
+
+    data['volume'] = self.get_volume()
 
     return data
 

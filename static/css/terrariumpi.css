@@ -256,6 +256,29 @@ div.row.door div.sidebar-widget i.fa {
   min-height: auto !important;
 }
 
+.player_volume .col-md-1 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.player_volume .col-md-1 .fa {
+  font-size: 1.3em;
+  margin: 0px 3px;
+  cursor: pointer;
+}
+
+.player_volume .col-md-1 .fa.fa-volume-down {
+  float: right;
+}
+
+.player_volume .progress {
+  height: 1.3em;
+  margin-bottom: 0px;
+  padding-right: 0px;
+  padding-left: 0px;
+
+}
+
 table.dataTable .glyphicon-trash,
 table.dataTable .glyphicon-play {
   margin: 0.2em;
