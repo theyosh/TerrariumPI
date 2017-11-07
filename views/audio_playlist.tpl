@@ -144,7 +144,12 @@
             });
 
             $.get($('form').attr('action'),function(data){
+              var sort_order = {}
               $.each(data.playlists, function(index,playlist) {
+                sort_order[moment(playlist.start * 1000).format('HHmm')] = index;
+              });
+              $.each(Object.keys(sort_order).sort(), function(index,key) {
+                var playlist = data.playlists[sort_order[key]];
                 add_audio_playlist_row(playlist.id,
                                        playlist.name,
                                        moment(playlist.start * 1000).format('HH:mm'),

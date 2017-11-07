@@ -92,6 +92,11 @@ class terrariumWebserver():
                      callback=self.__update_api_call,
                      apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
                     )
+    self.__app.route('/api/audio/player/<action:re:(start|stop|volumeup|volumedown|mute|unmute)>',
+                     method=['POST'],
+                     callback=self.__player_commands,
+                     apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
+                    )
 
     self.__app.route('/api/audio/file',
                      method=['POST'],
@@ -167,6 +172,26 @@ class terrariumWebserver():
       staticfile.add_header('Etag',hashlib.md5(staticfile.get_header('Last-Modified')).hexdigest())
 
     return staticfile
+
+  def __player_commands(self,action):
+    result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Player command could ot be executed!')}
+
+    if 'start' == action:
+      self.__terrariumEngine.audio_player_start()
+    elif 'stop' == action:
+      self.__terrariumEngine.audio_player_stop()
+    elif 'volumeup' == action:
+      self.__terrariumEngine.audio_player_volume_up()
+      result = {'ok' : True, 'title' : _('OK!'), 'message' : _('Player command executed!')}
+    elif 'volumedown' == action:
+      self.__terrariumEngine.audio_player_volume_down()
+      result = {'ok' : True, 'title' : _('OK!'), 'message' : _('Player command executed!')}
+    elif 'mute' == action:
+      pass
+    elif 'unmute' == action:
+      pass
+
+    return result;
 
   def __upload_audio_file(self):
     result = {'ok' : False, 'title' : _('Error!'), 'message' : _('File is not uploaded!')}

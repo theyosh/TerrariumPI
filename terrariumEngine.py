@@ -679,6 +679,20 @@ class terrariumEngine():
     else:
       return data
 
+  def start_audio_player(self):
+    pass
+
+  def stop_audio_player(self):
+    pass
+
+  def audio_player_volume_up(self):
+    self.__audio_player.volume_up()
+    self.get_audio_playing(True)
+
+  def audio_player_volume_down(self):
+    self.__audio_player.volume_down()
+    self.get_audio_playing(True)
+
   # End audio part
 
   # Environment part
