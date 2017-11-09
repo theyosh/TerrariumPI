@@ -276,7 +276,11 @@ div.row.door div.sidebar-widget i.fa {
   margin-bottom: 0px;
   padding-right: 0px;
   padding-left: 0px;
+  border-radius: 4px;
+}
 
+.player_volume .progress .progress-bar {
+  line-height: 16px;
 }
 
 table.dataTable .glyphicon-trash,

@@ -519,24 +519,24 @@ function update_player_messages(data) {
 }
 
 function update_player_volume(volume) {
+  var menu = $('ul#player_messages');
+  menu.find('li.notification:not(:has(.player_volume))').remove();
+
   if ($('div.row.player_volume').length == 0) {
     var volume_control = $('<div>').addClass('row player_volume');
     volume_control.append($('<div>').addClass('col-md-1').append($('<span>').addClass('fa fa-volume-down').on('click',function(){
       $.post('/api/audio/player/volumedown');
       return false;
     })));
-    volume_control.append($('<div>').addClass('col-md-10  progress progress-striped active').append($('<div>').addClass('progress-bar progress-bar-success').attr('data-transitiongoal',volume)));
+    volume_control.append($('<div>').addClass('col-md-10  progress progress-striped active').append($('<div>').addClass('progress-bar progress-bar-success').attr('data-transitiongoal',volume).text(volume + '%')));
     volume_control.append($('<div>').addClass('col-md-1').append($('<span>').addClass('fa fa-volume-up').on('click',function(){
       $.post('/api/audio/player/volumeup');
       return false;
     })));
-
-    var menu = $('ul#player_messages');
-    menu.find('li.notification').remove();
     menu.prepend($('<li>').addClass('notification').append(volume_control));
     $('ul#player_messages .progress .progress-bar').progressbar();
   } else {
-    $('div.row.player_volume .progress-bar.progress-bar-success').css('width', volume + '%');
+    $('div.row.player_volume .progress-bar.progress-bar-success').css('width', volume + '%').text(volume + '%');
   }
 }
 

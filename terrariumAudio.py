@@ -59,7 +59,8 @@ class terrariumAudioPlayer():
 
   def __load_audio_mixer(self):
     self.__audio_mixer = alsaaudio.Mixer('PCM')
-    self.mute()
+    #self.mute()
+    #psutil.Popen(['cvlc','-q','--no-interact','silence.wav'])
 
   def __engine_loop(self):
     self.__current_playlist = None
@@ -80,7 +81,7 @@ class terrariumAudioPlayer():
                       )
 
           audio_player_command = ['cvlc','-q','--no-interact']
-          audio_player_command += ['--norm-buff-size','1000','--norm-max-level','5.0']
+          #audio_player_command += ['--norm-buff-size','1000','--norm-max-level','5.0']
           if playlist.get_shuffle():
             audio_player_command += ['-Z']
 
@@ -89,9 +90,11 @@ class terrariumAudioPlayer():
 
           audio_player_command += files
 
+          audio_player_command += ['vlc://quit']
+
           self.__audio_player = psutil.Popen(audio_player_command)
           self.__active_playlist = playlist
-          self.mute(False)
+          #self.mute(False)
           self.set_volume(playlist.get_volume())
           if self.__callback is not None:
             self.__callback(socket=True)
@@ -101,7 +104,9 @@ class terrariumAudioPlayer():
           self.__audio_player.terminate()
           self.__active_playlist = None
           self.__audio_player = None
-          self.mute()
+          #self.mute()
+          #psutil.Popen(['cvlc','-q','--no-interact','silence.wav'])
+
           if self.__callback is not None:
             self.__callback(socket=True)
 
@@ -116,6 +121,7 @@ class terrariumAudioPlayer():
         logger.warning('Engine took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumAudioPlayer.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
 
   def get_volume(self):
+    print self.__audio_mixer.getvolume()
     return int(self.__audio_mixer.getvolume()[0])
 
   def set_volume(self,value):
@@ -128,14 +134,14 @@ class terrariumAudioPlayer():
       self.__audio_mixer.setvolume(value,alsaaudio.MIXER_CHANNEL_ALL)
 
   def volume_up(self):
-    volume = self.get_volume() + terrariumAudioPlayer.VOLUME_STEP
+    volume = self.get_volume() + terrariumAudioPlayer.VOLUME_STEP / 2
     if volume > 100:
       volume = 100
 
     self.set_volume(volume)
 
   def volume_down(self):
-    volume = self.get_volume() - terrariumAudioPlayer.VOLUME_STEP
+    volume = self.get_volume() - terrariumAudioPlayer.VOLUME_STEP / 2
     if volume < 0:
       volume = 0
 
@@ -170,10 +176,13 @@ class terrariumAudioPlayer():
     return data
 
   def is_running(self):
-    if self.__audio_player is not None:
-      print self.__audio_player.status()
+    running = False
+    try:
+      running = self.__audio_player.status() in ['running','sleeping','disk-sleep']
+    except Exception, ex:
+      pass
 
-    return self.__audio_player is not None and self.__audio_player.status() in ['running','sleeping']
+    return running
 
   def get_active_playlist(self):
     return self.__active_playlist
@@ -295,7 +304,7 @@ class terrariumAudioPlaylist():
 class terrariumAudioFile():
 
   META_FIELDS = ['Format','Duration','Overall bit rate mode','Overall bit rate','Album','Track name','Format profile','Channel(s)','Sampling rate']
-  VALID_EXTENSION = ['mp3','m4a','ogg']
+  VALID_EXTENSION = terrariumAudioPlayer.VALID_EXTENSION
 
   def __init__(self,filename):
     self.id = None
