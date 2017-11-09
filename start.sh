@@ -22,6 +22,8 @@ if [ "${RUN}" == "run" ]
 then
   while true
   do
+    # Reset soundcard???
+    cvlc -q --no-interact silence.mp3 vlc://quit &
     # Reset internal bash seconds counter
     SECONDS=0
 
