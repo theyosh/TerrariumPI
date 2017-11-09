@@ -21,7 +21,7 @@ class terrariumAudioPlayer():
   AUDIO_FOLDER = 'audio'
   VALID_EXTENSION = ['mp3','m4a','ogg']
   LOOP_TIMEOUT = 30
-  VOLUME_STEP = 10
+  VOLUME_STEP = 5
 
   def __init__(self,config,callback=None):
     self.__config = config
@@ -59,8 +59,8 @@ class terrariumAudioPlayer():
 
   def __load_audio_mixer(self):
     self.__audio_mixer = alsaaudio.Mixer('PCM')
-    #self.mute()
-    #psutil.Popen(['cvlc','-q','--no-interact','silence.wav'])
+    self.mute()
+    #psutil.Popen(['cvlc','-q','--no-interact','silence.mp3','vlc://quit'])
 
   def __engine_loop(self):
     self.__current_playlist = None
@@ -94,7 +94,7 @@ class terrariumAudioPlayer():
 
           self.__audio_player = psutil.Popen(audio_player_command)
           self.__active_playlist = playlist
-          #self.mute(False)
+          self.mute(False)
           self.set_volume(playlist.get_volume())
           if self.__callback is not None:
             self.__callback(socket=True)
@@ -104,7 +104,7 @@ class terrariumAudioPlayer():
           self.__audio_player.terminate()
           self.__active_playlist = None
           self.__audio_player = None
-          #self.mute()
+          self.mute()
           #psutil.Popen(['cvlc','-q','--no-interact','silence.wav'])
 
           if self.__callback is not None:
@@ -134,14 +134,14 @@ class terrariumAudioPlayer():
       self.__audio_mixer.setvolume(value,alsaaudio.MIXER_CHANNEL_ALL)
 
   def volume_up(self):
-    volume = self.get_volume() + terrariumAudioPlayer.VOLUME_STEP / 2
+    volume = self.get_volume() + terrariumAudioPlayer.VOLUME_STEP
     if volume > 100:
       volume = 100
 
     self.set_volume(volume)
 
   def volume_down(self):
-    volume = self.get_volume() - terrariumAudioPlayer.VOLUME_STEP / 2
+    volume = self.get_volume() - terrariumAudioPlayer.VOLUME_STEP
     if volume < 0:
       volume = 0
 
