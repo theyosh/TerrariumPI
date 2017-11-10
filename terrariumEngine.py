@@ -215,8 +215,8 @@ class terrariumEngine():
     return data
 
   def __get_total_power_usage_water_flow(self):
-    totals = {'power_wattage' : {'duration' : int(time.time()) , 'wattage' : 0.0, 'price' : 0.0},
-              'water_flow'    : {'duration' : int(time.time()) , 'water'   : 0.0, 'price' : 0.0}}
+    totals = {'power_wattage' : {'duration' : int(time.time()) , 'wattage' : 0.0},
+              'water_flow'    : {'duration' : int(time.time()) , 'water'   : 0.0}}
 
     history = self.collector.get_history(['switches'],int(time.time()),0)
 
@@ -835,11 +835,11 @@ class terrariumEngine():
 
     data['power']['total'] = totaldata['power_wattage']['wattage']
     data['power']['duration'] = totaldata['power_wattage']['duration']
-    data['power']['price'] = self.config.get_power_price() * (totaldata['power_wattage']['wattage'] / (3600 * 1000))
+    data['power']['price'] = self.config.get_power_price() * (totaldata['power_wattage']['wattage'] / (3600.0 * 1000.0))
 
     data['water']['total'] = totaldata['water_flow']['water']
     data['water']['duration'] = totaldata['water_flow']['duration']
-    data['water']['price'] = self.config.get_water_price() * totaldata['water_flow']['water']
+    data['water']['price'] = self.config.get_water_price() * (totaldata['water_flow']['water'] / 1000.0)
 
     if socket:
       self.__send_message({'type':'power_usage_water_flow','data':data});
