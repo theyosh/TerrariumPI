@@ -51,7 +51,7 @@ class terrariumSensor:
     self.set_limit_max(limit_max)
 
     if self.id is None:
-      self.id = md5(b'' + self.get_address() + self.get_type()).hexdigest()
+      self.id = md5(b'' + self.get_address().replace('-','').upper() + self.get_type()).hexdigest()
 
     self.current = float(0)
 
@@ -135,7 +135,8 @@ class terrariumSensor:
       if w1data:
         # Found valid data
         sensor_type = ('temperature' if w1data.group('type') == 't' else 'humidity')
-        sensor_id = md5(b'' + address.replace(terrariumSensor.w1_base_path,'').replace('-','').upper() + sensor_type).hexdigest()
+        sensor_address = address.replace(terrariumSensor.w1_base_path,'')
+        sensor_id = md5(b'' + sensor_address.replace('-','').upper() + sensor_type).hexdigest()
 
         sensor_config = {}
         if sensor_id in config:
@@ -145,7 +146,7 @@ class terrariumSensor:
         sensors.append(terrariumSensor(sensor_id,
                                        'w1',
                                        sensor_config['type'] if 'type' in sensor_config else sensor_type,
-                                       sensor_config['address'] if 'address' in sensor_config else address.replace(terrariumSensor.w1_base_path,''),
+                                       sensor_config['address'] if 'address' in sensor_config else sensor_address,
                                        sensor_config['name'] if 'name' in sensor_config else '',
                                        sensor_config['alarm_min'] if 'alarm_min' in sensor_config else 0,
                                        sensor_config['alarm_max'] if 'alarm_max' in sensor_config else 0,
