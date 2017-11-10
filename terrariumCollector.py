@@ -199,8 +199,8 @@ class terrariumCollector():
       history['switches'][switchid]['water_flow'].append([now,history['switches'][switchid]['water_flow'][-1][1]])
       history['switches'][switchid]['state'].append([now,history['switches'][switchid]['state'][-1][1]])
 
-      totals = {'power_wattage' : {'duration' : 0.0 , 'wattage' : 0.0, 'price' : 0.0},
-                'water_flow'    : {'duration' : 0.0 , 'water'   : 0.0, 'price' : 0.0}}
+      totals = {'power_wattage' : {'duration' : 0.0 , 'wattage' : 0.0},
+                'water_flow'    : {'duration' : 0.0 , 'water'   : 0.0}}
       power_on_time = None
       for counter,state in enumerate(history['switches'][switchid]['state']):
         if state[1] > 0 and power_on_time is None: # Power went on! The value could be variable from zero to 100. Above zero is 'on'
