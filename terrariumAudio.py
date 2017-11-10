@@ -121,7 +121,6 @@ class terrariumAudioPlayer():
         logger.warning('Engine took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumAudioPlayer.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
 
   def get_volume(self):
-    print self.__audio_mixer.getvolume()
     return int(self.__audio_mixer.getvolume()[0])
 
   def set_volume(self,value):
