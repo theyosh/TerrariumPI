@@ -7,19 +7,16 @@ import time
 import uptime
 import os
 import psutil
-import datetime
 import copy
 from hashlib import md5
 
 from terrariumConfig import terrariumConfig
-
 from terrariumWeather import terrariumWeather
 from terrariumSensor import terrariumSensor
 from terrariumSwitch import terrariumSwitch
 from terrariumDoor import terrariumDoor
 from terrariumWebcam import terrariumWebcam
 from terrariumAudio import terrariumAudioPlayer
-
 from terrariumCollector import terrariumCollector
 from terrariumEnvironment import terrariumEnvironment
 
@@ -131,6 +128,9 @@ class terrariumEngine():
         power_switch = terrariumSwitch(switch_config[power_switch_config]['id'],
                                        switch_config[power_switch_config]['hardwaretype'],
                                        switch_config[power_switch_config]['address'],
+                                       switch_config[power_switch_config]['name'],
+                                       switch_config[power_switch_config]['power_wattage'],
+                                       switch_config[power_switch_config]['water_flow'],
                                        callback=self.toggle_switch)
         power_switch_id = power_switch.get_id()
         self.power_switches[power_switch_id] = power_switch

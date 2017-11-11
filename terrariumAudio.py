@@ -4,6 +4,7 @@ logger = logging.getLogger(__name__)
 
 import thread
 import datetime
+import time
 import psutil
 import os
 import json
@@ -72,7 +73,7 @@ class terrariumAudioPlayer():
   def __engine_loop(self):
     self.__current_playlist = None
     while True and self.__audio_mixer is not None:
-      starttime = int(datetime.datetime.now().strftime("%s"))
+      starttime = time.time()
       for audio_playlist_id in self.__playlists:
         playlist = self.__playlists[audio_playlist_id]
         if not self.is_running() and playlist.is_time() and playlist.has_files():
@@ -119,10 +120,10 @@ class terrariumAudioPlayer():
         else:
           logger.debug('No player action needed')
 
-      duration = int(datetime.datetime.now().strftime("%s")) - starttime
+      duration = time.time() - starttime
       if duration < terrariumAudioPlayer.LOOP_TIMEOUT:
         logger.info('Engine loop done in %.5f seconds. Waiting for %.5f seconds for next round' % (duration,terrariumAudioPlayer.LOOP_TIMEOUT - duration))
-        sleep(terrariumAudioPlayer.LOOP_TIMEOUT - duration) # TODO: Config setting
+        sleep(terrariumAudioPlayer.LOOP_TIMEOUT - duration)
       else:
         logger.warning('Engine took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumAudioPlayer.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
 

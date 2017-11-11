@@ -4,20 +4,20 @@ logger = logging.getLogger(__name__)
 
 import thread
 import datetime
-from threading import Timer
-import copy
 import time
+import copy
 
+from threading import Timer
 from terrariumDoor import terrariumDoor
 
 from gevent import monkey, sleep
 monkey.patch_all()
 
 class terrariumEnvironment():
+  LOOP_TIMEOUT = 15
 
   def __init__(self, sensors, power_switches, weather, door_status, config):
     logger.debug('Init terrariumPI environment')
-    self.engine_loop_timeout = 15
 
     self.config = config
     self.door_status = door_status
@@ -181,8 +181,12 @@ class terrariumEnvironment():
         # Cooler is disabled. Make sure cooler is off
         self.cooler_off()
 
-      logger.info('Engine loop done in %s seconds' % (time.time() - starttime,))
-      sleep(self.engine_loop_timeout)
+      duration = time.time() - starttime
+      if duration < terrariumEnvironment.LOOP_TIMEOUT:
+        logger.info('Engine loop done in %.5f seconds. Waiting for %.5f seconds for next round' % (duration,terrariumEnvironment.LOOP_TIMEOUT - duration))
+        sleep(terrariumEnvironment.LOOP_TIMEOUT - duration) # TODO: Config setting
+      else:
+        logger.warning('Engine took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEnvironment.LOOP_TIMEOUT,terrariumEnvironment.LOOP_TIMEOUT))
 
   def __set_config(self,part,data):
     for field in data:
