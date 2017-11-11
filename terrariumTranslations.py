@@ -61,7 +61,13 @@ class terrariumTranslations():
     # End webcam
 
     # Audio
-
+    self.translations['audio_playlist_field_name'] = _('Holds the audio playlist name.')
+    self.translations['audio_playlist_field_start'] = _('Holds the time when the playlist should be started.')
+    self.translations['audio_playlist_field_stop'] = _('Holds the time when the playlist should be stopped.')
+    self.translations['audio_playlist_field_volume'] = _('Holds the volume for this playlist.')
+    self.translations['audio_playlist_field_repeat'] = _('Toggle on to enable repeating of the audio files.')
+    self.translations['audio_playlist_field_shuffle'] = _('Toggle on to enable shuffeling of the audio files.')
+    self.translations['audio_playlist_field_files'] = _('Select the audio files for this playlist. It is possible to select the same audio file in multiple playlists.')
     # End Audio
 
     # System
