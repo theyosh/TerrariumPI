@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2017-11-11 15:04+0100\n"
-"PO-Revision-Date: 2017-11-11 15:04+0100\n"
+"POT-Creation-Date: 2017-11-11 18:26+0100\n"
+"PO-Revision-Date: 2017-11-11 18:27+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -486,15 +486,15 @@ msgstr ""
 "moeten worden ingeschakeld. Normaal gesproken zijn deze de schakelaars "
 "aangesloten op de koeler. Selecteer alle benodigde schakelaars hieronder."
 
-#: terrariumTranslations.py:111
+#: terrariumTranslations.py:112
 msgid "Choose your interface language."
 msgstr "Kies uw interface taal."
 
-#: terrariumTranslations.py:112
+#: terrariumTranslations.py:113
 msgid "Holds the username which can make changes (Administrator)."
 msgstr "Bevat de gebruikersnaam die wijzigingen kan doen (Administrator)."
 
-#: terrariumTranslations.py:113
+#: terrariumTranslations.py:114
 msgid ""
 "Enter the new password for the administration user. Leaving empty will not "
 "change the password!"
@@ -502,11 +502,15 @@ msgstr ""
 "Voer het nieuwe wachtwoord in voor de beheerder. Als u het leeg gaat, "
 "verandert het wachtwoord niet!"
 
-#: terrariumTranslations.py:114
+#: terrariumTranslations.py:115
 msgid "Enter the current password in order to change the password."
 msgstr "Voer het huidige wachtwoord in om het wachtwoord te wijzigen."
 
-#: terrariumTranslations.py:115
+#: terrariumTranslations.py:116
+msgid "Holds the soundcard that is used for playing audio."
+msgstr "Bevat de geluidskaart dat wordt gebruikt voor het afspelen van audio."
+
+#: terrariumTranslations.py:117
 msgid ""
 "Holds the amount of power in Wattage that the Raspberry PI uses including "
 "all USB equipment."
@@ -514,15 +518,15 @@ msgstr ""
 "Bevat de hoeveelheid energie in watt die de Raspberry PI gebruikt, inclusief "
 "alle USB-apparatuur."
 
-#: terrariumTranslations.py:116
+#: terrariumTranslations.py:118
 msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
 msgstr "Bevat de hoeveelheid euro/dollar per 1 kW/h (1 Kilowatt per uur)."
 
-#: terrariumTranslations.py:117
+#: terrariumTranslations.py:119
 msgid "Holds the amount of euro/dollar per 1000 liters water."
 msgstr "Bevat de hoeveelheid euro/dollar per 1000 liter water."
 
-#: terrariumTranslations.py:118
+#: terrariumTranslations.py:120
 msgid ""
 "Choose the temperature indicator. The software will recalculate to the "
 "chosen indicator."
@@ -530,7 +534,7 @@ msgstr ""
 "Kies de temperatuurindicator. De software zal opnieuw worden berekend op de "
 "gekozen indicator."
 
-#: terrariumTranslations.py:119
+#: terrariumTranslations.py:121
 msgid ""
 "Holds the host name or IP address on which the software will listen for "
 "connections. Enter :: for all addresses to bind."
@@ -538,12 +542,12 @@ msgstr ""
 "Bevat de hostnaam of het IP-adres waarop de software naar verbindingen "
 "luistert. Vul in :: voor alle adressen om te luisteren."
 
-#: terrariumTranslations.py:120
+#: terrariumTranslations.py:122
 msgid ""
 "Holds the port number on which the software is listening for connections."
 msgstr "Bevat het poortnummer waarop de software luistert naar verbindingen."
 
-#: terrariumTranslations.py:121
+#: terrariumTranslations.py:123
 msgid ""
 "Holds the port number on which the OWFS software is running. Leave empty to "
 "disable OWFS support."
@@ -551,35 +555,35 @@ msgstr ""
 "Bevat het poortnummer waarop de OWFS-software draait. Laat leeg om OWFS-"
 "ondersteuning uit te schakelen."
 
-#: terrariumTranslations.py:125
+#: terrariumTranslations.py:127
 msgid "Holds the name of the animal."
 msgstr "Bevat de dier naam."
 
-#: terrariumTranslations.py:126
+#: terrariumTranslations.py:128
 msgid "Holds the type of the animal"
 msgstr "Bevat de type van het dier."
 
-#: terrariumTranslations.py:127
+#: terrariumTranslations.py:129
 msgid "Holds the gender of the animal."
 msgstr "Bevat het geslacht van het dier."
 
-#: terrariumTranslations.py:128
+#: terrariumTranslations.py:130
 msgid "Holds the day of birth of the animal."
 msgstr "Bevat de geboortedatum van het dier."
 
-#: terrariumTranslations.py:129
+#: terrariumTranslations.py:131
 msgid "Holds the species name of the animal."
 msgstr "Bevat de soortnaam van het dier."
 
-#: terrariumTranslations.py:130
+#: terrariumTranslations.py:132
 msgid "Holds the latin name of the animal."
 msgstr "Bevat de Latijnse naam van het dier."
 
-#: terrariumTranslations.py:131
+#: terrariumTranslations.py:133
 msgid "Holds a small description about the animal."
 msgstr "Bevat een kleine beschrijving over het dier."
 
-#: terrariumTranslations.py:132
+#: terrariumTranslations.py:134
 msgid "Holds a link to more information."
 msgstr "Bevat een link naar meer informatie."
 
@@ -646,11 +650,11 @@ msgstr "Data is opgeslagen"
 msgid "Your changes are saved"
 msgstr "Je wijzigingen zijn opgeslagen"
 
-#: terrariumWebserver.py:315 views/inc/menu.tpl:146
+#: terrariumWebserver.py:318 views/inc/menu.tpl:146
 msgid "Log out"
 msgstr "Log uit"
 
-#: terrariumWebserver.py:316
+#: terrariumWebserver.py:319
 msgid "You are now logged out"
 msgstr "Je bent nu uitgelogd"
 
@@ -803,7 +807,7 @@ msgstr "Bestanden"
 
 #: views/audio_playlist.tpl:48 views/door_settings.tpl:36 views/profile.tpl:179
 #: views/sensor_settings.tpl:54 views/switch_settings.tpl:42
-#: views/system_environment.tpl:323 views/system_settings.tpl:110
+#: views/system_environment.tpl:323 views/system_settings.tpl:119
 #: views/weather_settings.tpl:66 views/webcam_settings.tpl:44
 msgid "Submit"
 msgstr "Opslaan"
@@ -2642,26 +2646,30 @@ msgid "Current admin password"
 msgstr "Huidige beheerswachtwoord"
 
 #: views/system_settings.tpl:72
+msgid "Soundcard"
+msgstr "Geluidskaart"
+
+#: views/system_settings.tpl:81
 msgid "Pi power usage in W"
 msgstr "Stroomverbruik Pi in W."
 
-#: views/system_settings.tpl:78
+#: views/system_settings.tpl:87
 msgid "Power price"
 msgstr "Stroom prijs"
 
-#: views/system_settings.tpl:84
+#: views/system_settings.tpl:93
 msgid "Water price"
 msgstr "Water prijs"
 
-#: views/system_settings.tpl:90
+#: views/system_settings.tpl:99
 msgid "IP or hostname"
 msgstr "IP of hostnaam"
 
-#: views/system_settings.tpl:96
+#: views/system_settings.tpl:105
 msgid "Port number"
 msgstr "Poort nummer"
 
-#: views/system_settings.tpl:102
+#: views/system_settings.tpl:111
 msgid "OWFS server port"
 msgstr "OWFS server poort"
 
