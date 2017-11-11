@@ -266,6 +266,9 @@ class terrariumWebserver():
       elif len(parameters) > 0 and parameters[0] == 'playing':
         del(parameters[0])
         result = self.__terrariumEngine.get_audio_playing()
+      elif len(parameters) > 0 and parameters[0] == 'hardware':
+        del(parameters[0])
+        result = {'audiohardware' : terrariumAudioPlayer.get_sound_cards()}
       else:
         result = self.__terrariumEngine.get_audio_playlists(parameters)
 

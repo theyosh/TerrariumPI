@@ -25,8 +25,10 @@ class terrariumAudioPlayer():
 
   def __init__(self,config,hardwareconflict,callback=None):
     self.__config = config
+    self.__hwid = int(config.get_active_soundcard())
+
     # If self.__pwm_conflict is True, there are dimmers in use with PWM. That interfears with the PCM audio output. Disable all audio card actions
-    self.__pwm_conflict = hardwareconflict
+    self.__pwm_conflict = hardwareconflict and self.__hwid == 0
     self.__callback = callback
     self.__audio_player = None
     self.__audio_mixer = None
@@ -61,7 +63,7 @@ class terrariumAudioPlayer():
 
   def __load_audio_mixer(self):
     if not self.__pwm_conflict:
-      self.__audio_mixer = alsaaudio.Mixer('PCM')
+      self.__audio_mixer = alsaaudio.Mixer(control='PCM',cardindex=self.__hwid)
       self.mute()
 
   def __engine_loop(self):
@@ -82,7 +84,9 @@ class terrariumAudioPlayer():
                         playlist.get_volume())
                       )
 
-          audio_player_command = ['cvlc','-q','--no-interact','--play-and-exit']
+          audio_player_command = ['cvlc','-q','--no-interact','--play-and-exit','--aout=alsa','--alsa-audio-device=hw:' + str(self.__hwid)]
+
+          #audio_player_command += ['--aout=alsa','--alsa-audio-device=hw:' + str(self.__hwid)]
           #audio_player_command += ['--norm-buff-size','1000','--norm-max-level','5.0']
           if playlist.get_shuffle():
             audio_player_command += ['-Z']
@@ -118,6 +122,16 @@ class terrariumAudioPlayer():
         sleep(terrariumAudioPlayer.LOOP_TIMEOUT - duration) # TODO: Config setting
       else:
         logger.warning('Engine took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumAudioPlayer.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
+
+  @staticmethod
+  def get_sound_cards():
+    soundcards = []
+    for i in alsaaudio.card_indexes():
+      if 'PCM' in alsaaudio.mixers(**{'cardindex': i}):
+        (name, longname) = alsaaudio.card_name(i)
+        soundcards.append({'hwid' : int(i), 'name' : longname})
+
+    return soundcards
 
   def get_volume(self):
     return (-1 if self.__pwm_conflict else int(self.__audio_mixer.getvolume()[0]))

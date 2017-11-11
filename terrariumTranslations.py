@@ -70,7 +70,7 @@ class terrariumTranslations():
     self.translations['audio_playlist_field_files'] = _('Select the audio files for this playlist. It is possible to select the same audio file in multiple playlists.')
     # End Audio
 
-    # System
+    # Environment
     self.translations['environment_field_lights_enable'] = _('Enable or disable the light system. When enabled, you can make changes below. By disabling it will not loose the current settings. It will temporary stop the lighting system.')
     self.translations['environment_field_lights_mode'] = _('Select the mode on which the lights will be put on and off. Select \'%s\' to use the sun rise and sun set at your location. This will make the amount of lighting variable to the actual amount of daylight. When selecting \'%s\', the light will put on and off at selected times.') % (_('Weather'),_('Timer'))
     self.translations['environment_field_lights_on'] = _('Enter the time when the light should be put on. Only available when running in \'%s\' mode.') % _('Timer')
@@ -106,12 +106,14 @@ class terrariumTranslations():
     self.translations['environment_field_cooler_off'] = _('Enter the time when the cooler should be put off. Only available when running in \'%s\' mode.') % _('Timer')
     self.translations['environment_field_cooler_power_switches'] = _('Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the cooler. Select all needed switches below.')
     self.translations['environment_field_cooler_temperature_sensors'] = _('Select the temperature sensors that are used to control the temperature. When selecting multiple sensors, the average is calculated to determine the final temperature.')
+    # End environment
 
-
+    # System
     self.translations['system_field_language'] = _('Choose your interface language.')
     self.translations['system_field_admin'] = _('Holds the username which can make changes (Administrator).')
     self.translations['system_field_new_password'] = _('Enter the new password for the administration user. Leaving empty will not change the password!')
     self.translations['system_field_current_password'] = _('Enter the current password in order to change the password.')
+    self.translations['system_field_soundcard'] = _('Holds the soundcard that is used for playing audio.')
     self.translations['system_field_pi_power'] = _('Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment.')
     self.translations['system_field_power_price'] = _('Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour).')
     self.translations['system_field_water_price'] = _('Holds the amount of euro/dollar per 1000 liters water.')

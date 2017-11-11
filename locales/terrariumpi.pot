@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-11-11 15:04+CET\n"
+"POT-Creation-Date: 2017-11-11 18:26+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -294,79 +294,83 @@ msgstr ""
 msgid "Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the cooler. Select all needed switches below."
 msgstr ""
 
-#: terrariumTranslations.py:111
+#: terrariumTranslations.py:112
 msgid "Choose your interface language."
 msgstr ""
 
-#: terrariumTranslations.py:112
+#: terrariumTranslations.py:113
 msgid "Holds the username which can make changes (Administrator)."
 msgstr ""
 
-#: terrariumTranslations.py:113
+#: terrariumTranslations.py:114
 msgid "Enter the new password for the administration user. Leaving empty will not change the password!"
 msgstr ""
 
-#: terrariumTranslations.py:114
+#: terrariumTranslations.py:115
 msgid "Enter the current password in order to change the password."
 msgstr ""
 
-#: terrariumTranslations.py:115
-msgid "Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment."
-msgstr ""
-
 #: terrariumTranslations.py:116
-msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
+msgid "Holds the soundcard that is used for playing audio."
 msgstr ""
 
 #: terrariumTranslations.py:117
-msgid "Holds the amount of euro/dollar per 1000 liters water."
+msgid "Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment."
 msgstr ""
 
 #: terrariumTranslations.py:118
-msgid "Choose the temperature indicator. The software will recalculate to the chosen indicator."
+msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
 msgstr ""
 
 #: terrariumTranslations.py:119
-msgid "Holds the host name or IP address on which the software will listen for connections. Enter :: for all addresses to bind."
+msgid "Holds the amount of euro/dollar per 1000 liters water."
 msgstr ""
 
 #: terrariumTranslations.py:120
-msgid "Holds the port number on which the software is listening for connections."
+msgid "Choose the temperature indicator. The software will recalculate to the chosen indicator."
 msgstr ""
 
 #: terrariumTranslations.py:121
+msgid "Holds the host name or IP address on which the software will listen for connections. Enter :: for all addresses to bind."
+msgstr ""
+
+#: terrariumTranslations.py:122
+msgid "Holds the port number on which the software is listening for connections."
+msgstr ""
+
+#: terrariumTranslations.py:123
 msgid "Holds the port number on which the OWFS software is running. Leave empty to disable OWFS support."
 msgstr ""
 
-#: terrariumTranslations.py:125
+#: terrariumTranslations.py:127
 msgid "Holds the name of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:126
+#: terrariumTranslations.py:128
 msgid "Holds the type of the animal"
 msgstr ""
 
-#: terrariumTranslations.py:127
+#: terrariumTranslations.py:129
 msgid "Holds the gender of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:128
+#: terrariumTranslations.py:130
 msgid "Holds the day of birth of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:129
+#: terrariumTranslations.py:131
 msgid "Holds the species name of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:130
+#: terrariumTranslations.py:132
 msgid "Holds the latin name of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:131
+#: terrariumTranslations.py:133
 msgid "Holds a small description about the animal."
 msgstr ""
 
-#: terrariumTranslations.py:132
+#: terrariumTranslations.py:134
 msgid "Holds a link to more information."
 msgstr ""
 
@@ -434,11 +438,11 @@ msgstr ""
 msgid "Your changes are saved"
 msgstr ""
 
-#: terrariumWebserver.py:315 views/inc/menu.tpl:146
+#: terrariumWebserver.py:318 views/inc/menu.tpl:146
 msgid "Log out"
 msgstr ""
 
-#: terrariumWebserver.py:316
+#: terrariumWebserver.py:319
 msgid "You are now logged out"
 msgstr ""
 
@@ -577,7 +581,7 @@ msgstr ""
 #: views/audio_playlist.tpl:48 views/door_settings.tpl:36
 #: views/profile.tpl:179 views/sensor_settings.tpl:54
 #: views/switch_settings.tpl:42 views/system_environment.tpl:323
-#: views/system_settings.tpl:110 views/weather_settings.tpl:66
+#: views/system_settings.tpl:119 views/weather_settings.tpl:66
 #: views/webcam_settings.tpl:44
 msgid "Submit"
 msgstr ""
@@ -1972,26 +1976,30 @@ msgid "Current admin password"
 msgstr ""
 
 #: views/system_settings.tpl:72
+msgid "Soundcard"
+msgstr ""
+
+#: views/system_settings.tpl:81
 msgid "Pi power usage in W"
 msgstr ""
 
-#: views/system_settings.tpl:78
+#: views/system_settings.tpl:87
 msgid "Power price"
 msgstr ""
 
-#: views/system_settings.tpl:84
+#: views/system_settings.tpl:93
 msgid "Water price"
 msgstr ""
 
-#: views/system_settings.tpl:90
+#: views/system_settings.tpl:99
 msgid "IP or hostname"
 msgstr ""
 
-#: views/system_settings.tpl:96
+#: views/system_settings.tpl:105
 msgid "Port number"
 msgstr ""
 
-#: views/system_settings.tpl:102
+#: views/system_settings.tpl:111
 msgid "OWFS server port"
 msgstr ""
 

@@ -174,6 +174,10 @@ class terrariumConfig:
     config = self.get_system()
     return config['temperature_indicator'].upper()
 
+  def get_active_soundcard(self):
+    config = self.get_system()
+    return config['soundcard']
+
   # Environment functions
   def save_environment(self,data):
     '''Save the terrariumPI environment config

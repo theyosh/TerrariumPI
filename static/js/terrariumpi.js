@@ -134,7 +134,7 @@ function logout() {
       username: 'logout'
   }).done(function(response) {
     new PNotify({
-      type: (response.ok ? '{{_('Success!')}}' : '{{_('Error!')}}'),
+      type: (response.ok ? 'success' : 'error'),
       title: response.title,
       text: response.message,
       nonblock: {
@@ -242,7 +242,7 @@ function process_form() {
         data: JSON.stringify(prepare_form_data(form))
       }).done(function(response) {
         new PNotify({
-          type: (response.ok ? '{{_('Success!')}}' : '{{_('Error!')}}'),
+          type: (response.ok ? 'success' : 'error'),
           title: response.title,
           text: response.message,
           nonblock: {
@@ -1411,7 +1411,7 @@ function delete_audio_file(audio_file_id, audio_file_name) {
       dataType : "json",
     }).done(function(response) {
       new PNotify({
-        type: (response.ok ? '{{_('Success!')}}' : '{{_('Error!')}}'),
+        type: (response.ok ? 'success' : 'error'),
         title: response.title,
         text: response.message,
         nonblock: {
