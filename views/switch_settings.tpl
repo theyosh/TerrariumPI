@@ -16,10 +16,10 @@
             <p>{{_('Here you can configure your power switches.')}} {{!_('Required fields are marked with \'%s\'.') % ('<span class="required">*</span>',)}}</p>
             <ul>
               <li>
-                <strong>{{_('Hardware')}}</strong>: {{!translations.get_translation('switch_field_hardware')}}
+                <strong>{{_('Hardware')}}</strong>: {{!translations.get_translation('switch_field_hardware')}} {{!_('When you have a %s type switch added the audio player will not work. More information can be found here: %s.') % ('<strong>pwm-dimmer</strong>','<a href="http://www.raspberry-projects.com/pi/programming-in-c/pwm/using-the-pwm-pin" target="_blank">http://www.raspberry-projects.com/pi/programming-in-c/pwm/using-the-pwm-pin</a>')}}
               </li>
               <li>
-                <strong>{{_('Address')}}</strong>: {{translations.get_translation('switch_field_address')}}
+                <strong>{{_('Address')}}</strong>: {{!translations.get_translation('switch_field_address')}}
               </li>
               <li>
                 <strong>{{_('Name')}}</strong>: {{translations.get_translation('switch_field_name')}}
