@@ -309,14 +309,12 @@ class terrariumCollector():
     if logtype == 'sensors':
       fields = { 'current' : [], 'alarm_min' : [], 'alarm_max' : [] , 'limit_min' : [], 'limit_max' : []}
       sql = 'SELECT id, type, timestamp,' + ', '.join(fields.keys()) + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ?'
-      #AND timestamp % ' + str(modulo) + ' = 0'
 
       if len(parameters) > 0 and parameters[0] == 'average':
         sql = 'SELECT "average" as id, type, timestamp'
         for field in fields:
           sql = sql + ', AVG(' + field + ') as ' + field
         sql = sql + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ?'
-        #AND timestamp % ' + str(modulo) + ' = 0'
 
         if len(parameters) == 2:
           sql = sql + ' and type = ?'
@@ -354,8 +352,6 @@ class terrariumCollector():
       fields = { 'wind_speed' : [], 'temperature' : [], 'pressure' : [] , 'wind_direction' : [], 'rain' : [],
                  'weather' : [], 'icon' : []}
       sql = 'SELECT "city" as id, "weather" as type, timestamp, ' + ', '.join(fields.keys()) + ' FROM weather_data WHERE timestamp >= ? and timestamp <= ?'
-#      AND timestamp % '
-#      +      str(modulo) + ' = 0'
 
     elif logtype == 'system':
       fields = ['load_load1', 'load_load5','load_load15','uptime', 'temperature','cores', 'memory_total', 'memory_used' , 'memory_free']
@@ -372,7 +368,6 @@ class terrariumCollector():
         fields = ['memory_total', 'memory_used' , 'memory_free']
 
       sql = 'SELECT "system" as type, timestamp, ' + ', '.join(fields) + ' FROM system_data WHERE timestamp >= ? and timestamp <= ?'
-      #AND timestamp % ' + str(modulo) + ' = 0'
 
     sql = sql + ' ORDER BY timestamp ASC'
 

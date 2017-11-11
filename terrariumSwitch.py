@@ -2,19 +2,19 @@
 import logging
 logger = logging.getLogger(__name__)
 
-from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
 import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
 import pigpio
-from hashlib import md5
 import thread
 import time
 import math
+
+from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
+from hashlib import md5
 from terrariumUtils import terrariumUtils
 
 class terrariumSwitch():
-
-  valid_hardware_types = ['ftdi','gpio','gpio-inverse','pwm-dimmer']
+  VALID_HARDWARE_TYPES = ['ftdi','gpio','gpio-inverse','pwm-dimmer']
 
   OFF = False
   ON = True
@@ -24,7 +24,7 @@ class terrariumSwitch():
   PWM_DIMMER_MIN_TIMEOUT=0.2
   PWM_DIMMER_MIN_STEP=1
 
-  bitbang_addresses = {
+  BITBANG_ADDRESSES = {
     "1":"2",
     "2":"8",
     "3":"20",
@@ -76,7 +76,7 @@ class terrariumSwitch():
     for device in Driver().list_devices():
       vendor, product, self.device = map(lambda x: x.decode('latin1'), device)
       self.device_type = 'Serial' if product.endswith('UART') else 'BitBang'
-      logger.info('Found switch board %s, %s, %s, of type %s' % (vendor,product,self.device,self.device_type))
+      logger.debug('Found switch board %s, %s, %s, of type %s' % (vendor,product,self.device,self.device_type))
       break # For now, we only support 1 switch board!
 
   def __load_gpio_device(self):
@@ -144,9 +144,9 @@ class terrariumSwitch():
             with BitBangDevice(self.device) as device:
               device.baudrate = 9600
               if state is terrariumSwitch.ON:
-                device.port |= int(terrariumSwitch.bitbang_addresses[str(self.get_address())], 16)
+                device.port |= int(terrariumSwitch.BITBANG_ADDRESSES[str(self.get_address())], 16)
               else:
-                device.port &= ~int(terrariumSwitch.bitbang_addresses[str(self.get_address())], 16)
+                device.port &= ~int(terrariumSwitch.BITBANG_ADDRESSES[str(self.get_address())], 16)
               device.close()
 
           elif 'Serial' == self.device_type:
@@ -218,7 +218,7 @@ class terrariumSwitch():
     return self.hardwaretype
 
   def set_hardware_type(self,type):
-    if type in terrariumSwitch.valid_hardware_types:
+    if type in terrariumSwitch.VALID_HARDWARE_TYPES:
       self.hardwaretype = type
 
   def get_address(self):

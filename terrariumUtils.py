@@ -20,10 +20,10 @@ class terrariumUtils():
 
   @staticmethod
   def to_BCM_port_number(value):
-    pinout = {'gpio3' : 2,
-              'gpio5' : 3,
-              'gpio7' : 4,
-              'gpio8' : 14,
+    pinout = {'gpio3'  : 2,
+              'gpio5'  : 3,
+              'gpio7'  : 4,
+              'gpio8'  : 14,
               'gpio10' : 15,
               'gpio11' : 17,
               'gpio12' : 18,

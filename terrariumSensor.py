@@ -2,28 +2,26 @@
 import logging
 logger = logging.getLogger(__name__)
 
-from datetime import datetime, timedelta
+import datetime
 import time
-from hashlib import md5
 import ow
 import Adafruit_DHT as dht
 import glob
 import re
 
+from hashlib import md5
 from terrariumUtils import terrariumUtils
 
 class terrariumSensor:
-  valid_hardware_types = ['owfs','w1']
-  valid_sensor_types   = ['temperature','humidity']
-  valid_dht_sensors    = { 'dht11' : dht.DHT11,
+  UPDATE_TIMEOUT = 30
+  VALID_SENSOR_TYPES   = ['temperature','humidity']
+  VALID_DHT_SENSORS    = { 'dht11' : dht.DHT11,
                            'dht22' : dht.DHT22,
                            'am2302': dht.AM2302 }
-  valid_hardware_types += valid_dht_sensors.keys()
-  valid_indicators     = {'temperature' : ['C','F'],
-                          'humidity' : '%'}
+  VALID_HARDWARE_TYPES = ['owfs','w1'] + VALID_DHT_SENSORS.keys()
 
-  w1_base_path = '/sys/bus/w1/devices/'
-  w1_temp_regex = re.compile(r'(?P<type>t|f)=(?P<value>[0-9]+)',re.IGNORECASE)
+  W1_BASE_PATH = '/sys/bus/w1/devices/'
+  W1_TEMP_REGEX = re.compile(r'(?P<type>t|f)=(?P<value>[0-9]+)',re.IGNORECASE)
 
   def __init__(self, id, hardware_type, sensor_type, sensor, name = '', alarm_min = 0, alarm_max = 0, limit_min = 0, limit_max = 100, indicator = None):
     self.id = id
@@ -37,7 +35,7 @@ class terrariumSensor:
     elif self.get_hardware_type() == 'w1':
       # Dirty hack to replace OWFS sensor object for W1 path
       self.sensor_address = sensor
-    elif self.get_hardware_type() in terrariumSensor.valid_dht_sensors.keys():
+    elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
       # Adafruit_DHT
       self.sensor = dht
       # Dirty hack to replace OWFS sensor object for GPIO pin nr
@@ -55,8 +53,7 @@ class terrariumSensor:
 
     self.current = float(0)
 
-    self.last_update = datetime.fromtimestamp(0)
-    self.update_timeout = 30 #TODO: Config setting
+    self.last_update = datetime.datetime.fromtimestamp(0)
 
     logger.info('Loaded %s %s sensor \'%s\' on location %s with minimum value %.2f%s, maximum value %.2f%s, alarm low value %.2f%s, alarm high value %.2f%s' %
                 (self.get_hardware_type(),
@@ -77,6 +74,7 @@ class terrariumSensor:
 
   @staticmethod
   def scan(port,config,temperature_indicator): # TODO: Wants a callback per sensor here....?
+    starttime = time.time()
     logger.debug('Start scanning for temperature/humidity sensors')
     sensors = []
     done_sensors = []
@@ -126,16 +124,16 @@ class terrariumSensor:
         pass
 
     # Scanning w1 system bus
-    for address in glob.iglob(terrariumSensor.w1_base_path + '[1-9][0-9]-*'):
+    for address in glob.iglob(terrariumSensor.W1_BASE_PATH + '[1-9][0-9]-*'):
       data = ''
       with open(address + '/w1_slave', 'r') as w1data:
         data = w1data.read()
 
-      w1data = terrariumSensor.w1_temp_regex.search(data)
+      w1data = terrariumSensor.W1_TEMP_REGEX.search(data)
       if w1data:
         # Found valid data
         sensor_type = ('temperature' if w1data.group('type') == 't' else 'humidity')
-        sensor_address = address.replace(terrariumSensor.w1_base_path,'')
+        sensor_address = address.replace(terrariumSensor.W1_BASE_PATH,'')
         sensor_id = md5(b'' + sensor_address.replace('-','').upper() + sensor_type).hexdigest()
 
         sensor_config = {}
@@ -171,12 +169,12 @@ class terrariumSensor:
                                       sensor_config['limit_max'] if 'limit_max' in sensor_config else 100,
                                       temperature_indicator))
 
-    logger.debug('Found %d temperature/humidity sensors' % (len(sensors)))
+    logger.info('Found %d temperature/humidity sensors in %.5f seconds' % (len(sensors),time.time() - starttime))
     return sensors
 
   def update(self, force = False):
-    now = datetime.now()
-    if now - self.last_update > timedelta(seconds=self.update_timeout) or force:
+    now = datetime.datetime.now()
+    if now - self.last_update > datetime.timedelta(seconds=terrariumSensor.UPDATE_TIMEOUT) or force:
       logger.debug('Updating %s %s sensor \'%s\'' % (self.get_hardware_type(),self.get_type(), self.get_name()))
       old_current = self.get_current()
       current = None
@@ -187,16 +185,16 @@ class terrariumSensor:
             current = float(self.sensor.temperature)
           elif self.get_hardware_type() == 'w1':
             data = ''
-            with open(terrariumSensor.w1_base_path + self.get_address() + '/w1_slave', 'r') as w1data:
+            with open(terrariumSensor.W1_BASE_PATH + self.get_address() + '/w1_slave', 'r') as w1data:
               data = w1data.read()
 
-            w1data = terrariumSensor.w1_temp_regex.search(data)
+            w1data = terrariumSensor.W1_TEMP_REGEX.search(data)
             if w1data:
               # Found data
               temperature = float(w1data.group('value')) / 1000
               current = float(temperature)
-          elif self.get_hardware_type() in terrariumSensor.valid_dht_sensors.keys():
-            humidity, temperature = self.sensor.read_retry(terrariumSensor.valid_dht_sensors[self.get_hardware_type()], float(terrariumUtils.to_BCM_port_number(self.sensor_address)))
+          elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
+            humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()], float(terrariumUtils.to_BCM_port_number(self.sensor_address)))
             current = float(temperature)
         elif 'humidity' == self.get_type():
           if self.get_hardware_type() == 'owfs':
@@ -204,8 +202,8 @@ class terrariumSensor:
           elif self.get_hardware_type() == 'w1':
             # Not tested / No hardware to test with
             pass
-          elif self.get_hardware_type() in terrariumSensor.valid_dht_sensors.keys():
-            humidity, temperature = self.sensor.read_retry(terrariumSensor.valid_dht_sensors[self.get_hardware_type()], float(terrariumUtils.to_BCM_port_number(self.sensor_address)))
+          elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
+            humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()], float(terrariumUtils.to_BCM_port_number(self.sensor_address)))
             current = float(humidity)
 
         if current is None or not (self.get_limit_min() <= current <= self.get_limit_max()):
@@ -260,11 +258,11 @@ class terrariumSensor:
     return self.hardwaretype
 
   def set_hardware_type(self,type):
-    if type in terrariumSensor.valid_hardware_types:
+    if type in terrariumSensor.VALID_HARDWARE_TYPES:
       self.hardwaretype = type
 
   def set_type(self,type,indicator):
-    if type in terrariumSensor.valid_sensor_types:
+    if type in terrariumSensor.VALID_SENSOR_TYPES:
       self.type = type
       self.indicator = indicator
 
@@ -283,7 +281,7 @@ class terrariumSensor:
 
   def set_address(self,address):
     # Can't set OWFS or W1 sensor addresses. This is done by the OWFS software or kernel OS
-    if self.get_hardware_type() not in  ['owfs','w1']:
+    if self.get_hardware_type() not in ['owfs','w1']:
       self.sensor_address = address
 
   def set_name(self,name):
