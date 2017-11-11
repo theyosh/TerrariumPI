@@ -23,8 +23,10 @@ class terrariumAudioPlayer():
   LOOP_TIMEOUT = 30
   VOLUME_STEP = 5
 
-  def __init__(self,config,callback=None):
+  def __init__(self,config,hardwareconflict,callback=None):
     self.__config = config
+    # If self.__pwm_conflict is True, there are dimmers in use with PWM. That interfears with the PCM audio output. Disable all audio card actions
+    self.__pwm_conflict = hardwareconflict
     self.__callback = callback
     self.__audio_player = None
     self.__audio_mixer = None
@@ -58,13 +60,13 @@ class terrariumAudioPlayer():
       self.__playlists[playlist.get_id()] = playlist
 
   def __load_audio_mixer(self):
-    self.__audio_mixer = alsaaudio.Mixer('PCM')
-    self.mute()
-    #psutil.Popen(['cvlc','-q','--no-interact','silence.mp3','vlc://quit'])
+    if not self.__pwm_conflict:
+      self.__audio_mixer = alsaaudio.Mixer('PCM')
+      self.mute()
 
   def __engine_loop(self):
     self.__current_playlist = None
-    while True:
+    while True and not self.__pwm_conflict:
       starttime = time.time()
       for audio_playlist_id in self.__playlists:
         playlist = self.__playlists[audio_playlist_id]
@@ -119,33 +121,37 @@ class terrariumAudioPlayer():
         logger.warning('Engine took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumAudioPlayer.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
 
   def get_volume(self):
-    return int(self.__audio_mixer.getvolume()[0])
+    return (-1 if self.__pwm_conflict else int(self.__audio_mixer.getvolume()[0]))
 
   def set_volume(self,value):
-    try:
-      value = int(value)
-    except Exception, ex:
-      pass
+    if not self.__pwm_conflict:
+      try:
+        value = int(value)
+      except Exception, ex:
+        pass
 
-    if 0 <= value <= 100:
-      self.__audio_mixer.setvolume(value,alsaaudio.MIXER_CHANNEL_ALL)
+      if 0 <= value <= 100:
+        self.__audio_mixer.setvolume(value,alsaaudio.MIXER_CHANNEL_ALL)
 
   def volume_up(self):
-    volume = self.get_volume() + terrariumAudioPlayer.VOLUME_STEP
-    if volume > 100:
-      volume = 100
+    if not self.__pwm_conflict:
+      volume = self.get_volume() + terrariumAudioPlayer.VOLUME_STEP
+      if volume > 100:
+        volume = 100
 
-    self.set_volume(volume)
+      self.set_volume(volume)
 
   def volume_down(self):
-    volume = self.get_volume() - terrariumAudioPlayer.VOLUME_STEP
-    if volume < 0:
-      volume = 0
+    if not self.__pwm_conflict:
+      volume = self.get_volume() - terrariumAudioPlayer.VOLUME_STEP
+      if volume < 0:
+        volume = 0
 
-    self.set_volume(volume)
+      self.set_volume(volume)
 
   def mute(self,mute = True):
-    self.__audio_mixer.setmute(1 if mute else 0, alsaaudio.MIXER_CHANNEL_ALL)
+    if not self.__pwm_conflict:
+      self.__audio_mixer.setmute(1 if mute else 0, alsaaudio.MIXER_CHANNEL_ALL)
 
   def reload_audio_files(self):
     self.__load_audio_files()
@@ -160,7 +166,7 @@ class terrariumAudioPlayer():
     return self.__playlists
 
   def get_current_state(self):
-    if len(self.get_audio_files()) == 0 and len(self.get_playlists()) == 0:
+    if self.__pwm_conflict or len(self.get_audio_files()) == 0 and len(self.get_playlists()) == 0:
       return {'running' : 'disabled'}
 
     data = {'running' : self.is_running()}
@@ -174,10 +180,11 @@ class terrariumAudioPlayer():
 
   def is_running(self):
     running = False
-    try:
-      running = self.__audio_player.status() in ['running','sleeping','disk-sleep']
-    except Exception, ex:
-      pass
+    if not self.__pwm_conflict:
+      try:
+        running = self.__audio_player.status() in ['running','sleeping','disk-sleep']
+      except Exception, ex:
+        pass
 
     return running
 
