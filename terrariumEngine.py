@@ -670,7 +670,7 @@ class terrariumEngine():
       new_audio_playlists[audio_playlist['id']] = audio_playlist
 
     if self.config.save_audio_playlists(new_audio_playlists):
-      self.__audio_player.reload_playlists()
+      self.__audio_player.reload_playlists(self.config.get_audio_playlists())
       return True
 
     return False

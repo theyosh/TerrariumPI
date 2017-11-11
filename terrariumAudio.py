@@ -172,8 +172,8 @@ class terrariumAudioPlayer():
   def reload_audio_files(self):
     self.__load_audio_files()
 
-  def reload_playlists(self):
-    self.__load_playlists()
+  def reload_playlists(self,data):
+    self.__load_playlists(data)
 
   def get_audio_files(self):
     return self.__audio_files
