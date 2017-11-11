@@ -632,11 +632,18 @@ function door_closed() {
 function update_player_indicator(data) {
   var player_indicator = $('a#player_indicator');
   if (data.running == 'disabled') {
-    player_indicator.hide();
-    return
+    player_indicator.find('span.running').hide();
+    player_indicator.find('span.stopped').hide();
+    player_indicator.find('span.disabled').show();
+    add_notification_message('player_messages',
+                             '{{_('Disabled')}}',
+                             '{{_('Either add audio files and playlists. Or you have a pwm-dimmer switch configured.')}}',
+                             'fa-play-circle-o',
+                             'orange');
+    return;
   }
 
-  player_indicator.show();
+  player_indicator.find('span.disabled').hide();
   if (data.running) {
     player_indicator.find('span.running').show();
     player_indicator.find('span.stopped').hide();
