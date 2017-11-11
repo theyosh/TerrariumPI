@@ -13,7 +13,7 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <p>{{_('Here you can configure your audio playlists.')}} {{_('Make sure you do not overlap playlists in time!')}} {{!_('Required fields are marked with \'%s\'.') % ('<span class="required">*</span>',)}}</p>
+            <p>{{_('Here you can configure your audio playlists.')}} {{_('Make sure you do not overlap playlists in time!')}} {{!_('When you have a %s type switch added the audio player will not work. More information can be found here: %s.') % ('<strong>pwm-dimmer</strong>','<a href="http://www.raspberry-projects.com/pi/programming-in-c/pwm/using-the-pwm-pin" target="_blank">http://www.raspberry-projects.com/pi/programming-in-c/pwm/using-the-pwm-pin</a>')}} {{!_('Required fields are marked with \'%s\'.') % ('<span class="required">*</span>',)}}</p>
             <ul>
               <li>
                 <strong>{{_('Name')}}</strong>: {{!translations.get_translation('audio_playlist_field_name')}}
