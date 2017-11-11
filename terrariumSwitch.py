@@ -307,6 +307,9 @@ class terrariumSwitch():
       self.set_state(terrariumSwitch.OFF)
       return self.is_off()
 
+  def is_pwm_dimmer(self):
+    return self.get_hardware_type() == 'pwm-dimmer'
+
   def dim(self,value):
     if 0 <= value <= 100:
       self.set_state(100 - value)
