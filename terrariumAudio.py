@@ -4,7 +4,6 @@ logger = logging.getLogger(__name__)
 
 import thread
 import datetime
-import time
 import psutil
 import os
 import json
@@ -23,20 +22,21 @@ class terrariumAudioPlayer():
   LOOP_TIMEOUT = 30
   VOLUME_STEP = 5
 
-  def __init__(self,config,hardwareconflict,callback=None):
-    self.__config = config
-    self.__hwid = int(config.get_active_soundcard())
-
-    # If self.__pwm_conflict is True, there are dimmers in use with PWM. That interfears with the PCM audio output. Disable all audio card actions
-    self.__pwm_conflict = hardwareconflict and self.__hwid == 0
+  def __init__(self,playlistdata,cardid,pwmdimmer,callback=None):
+    self.__hwid = cardid
     self.__callback = callback
     self.__audio_player = None
     self.__audio_mixer = None
+
     self.__load_audio_files()
-    self.__load_playlists()
-    self.__load_audio_mixer()
-    logger.info('Player loaded with %s audio files and %s playlists. Starting engine.' % (len(self.__audio_files),len(self.__playlists)))
-    thread.start_new_thread(self.__engine_loop, ())
+    self.__load_playlists(playlistdata)
+
+    if pwmdimmer and self.__hwid == 0:
+      logger.warning('Disabled audio playing due to hardware conflict with PWM dimmers and onboard soundcard')
+    else:
+      self.__load_audio_mixer()
+      logger.info('Player loaded with %s audio files and %s playlists. Starting engine.' % (len(self.__audio_files),len(self.__playlists)))
+      thread.start_new_thread(self.__engine_loop, ())
 
   def __load_audio_files(self):
     self.__audio_files = {}
@@ -46,33 +46,36 @@ class terrariumAudioPlayer():
         if audiofile.get_id() is not None:
           self.__audio_files[audiofile.get_id()] = audiofile
 
-  def __load_playlists(self):
+  def __load_playlists(self,data):
     self.__playlists = {}
-    data = self.__config.get_audio_playlists()
     for audio_playlist_id in data:
+      audio_files = {}
+      for fileid in data[audio_playlist_id]['files']:
+        if fileid in self.__audio_files:
+          audio_files[fileid] = self.__audio_files[fileid]
+
       playlist = terrariumAudioPlaylist(data[audio_playlist_id]['id'],
                                         data[audio_playlist_id]['name'],
                                         data[audio_playlist_id]['start'],
                                         data[audio_playlist_id]['stop'],
                                         data[audio_playlist_id]['volume'],
-                                        data[audio_playlist_id]['files'],
                                         data[audio_playlist_id]['repeat'],
-                                        data[audio_playlist_id]['shuffle'])
+                                        data[audio_playlist_id]['shuffle'],
+                                        audio_files)
 
       self.__playlists[playlist.get_id()] = playlist
 
   def __load_audio_mixer(self):
-    if not self.__pwm_conflict:
-      self.__audio_mixer = alsaaudio.Mixer(control='PCM',cardindex=self.__hwid)
-      self.mute()
+    self.__audio_mixer = alsaaudio.Mixer(control='PCM',cardindex=self.__hwid)
+    self.mute()
 
   def __engine_loop(self):
     self.__current_playlist = None
-    while True and not self.__pwm_conflict:
-      starttime = time.time()
+    while True and self.__audio_mixer is not None:
+      starttime = int(datetime.datetime.now().strftime("%s"))
       for audio_playlist_id in self.__playlists:
         playlist = self.__playlists[audio_playlist_id]
-        if playlist.is_time() and playlist.has_files() and not self.is_running():
+        if not self.is_running() and playlist.is_time() and playlist.has_files():
           # Current playlist needs to be running
           files = [self.__audio_files[audiofile_id].get_full_path() for audiofile_id in playlist.get_files()]
           logger.info('Starting playlist %s for period start %s and end %s with %s/%s amount of files at volume %s' %
@@ -85,9 +88,8 @@ class terrariumAudioPlayer():
                       )
 
           audio_player_command = ['cvlc','-q','--no-interact','--play-and-exit','--aout=alsa','--alsa-audio-device=hw:' + str(self.__hwid)]
-
-          #audio_player_command += ['--aout=alsa','--alsa-audio-device=hw:' + str(self.__hwid)]
           #audio_player_command += ['--norm-buff-size','1000','--norm-max-level','5.0']
+
           if playlist.get_shuffle():
             audio_player_command += ['-Z']
 
@@ -97,6 +99,7 @@ class terrariumAudioPlayer():
           audio_player_command += files
 
           self.__audio_player = psutil.Popen(audio_player_command)
+          playlist.set_started()
           self.__active_playlist = playlist
           self.mute(False)
           self.set_volume(playlist.get_volume())
@@ -116,7 +119,7 @@ class terrariumAudioPlayer():
         else:
           logger.debug('No player action needed')
 
-      duration = time.time() - starttime
+      duration = int(datetime.datetime.now().strftime("%s")) - starttime
       if duration < terrariumAudioPlayer.LOOP_TIMEOUT:
         logger.info('Engine loop done in %.5f seconds. Waiting for %.5f seconds for next round' % (duration,terrariumAudioPlayer.LOOP_TIMEOUT - duration))
         sleep(terrariumAudioPlayer.LOOP_TIMEOUT - duration) # TODO: Config setting
@@ -134,10 +137,10 @@ class terrariumAudioPlayer():
     return soundcards
 
   def get_volume(self):
-    return (-1 if self.__pwm_conflict else int(self.__audio_mixer.getvolume()[0]))
+    return (int(self.__audio_mixer.getvolume()[0]) if self.__audio_mixer is not None else -1)
 
   def set_volume(self,value):
-    if not self.__pwm_conflict:
+    if self.__audio_mixer is not None:
       try:
         value = int(value)
       except Exception, ex:
@@ -147,7 +150,7 @@ class terrariumAudioPlayer():
         self.__audio_mixer.setvolume(value,alsaaudio.MIXER_CHANNEL_ALL)
 
   def volume_up(self):
-    if not self.__pwm_conflict:
+    if self.__audio_mixer is not None:
       volume = self.get_volume() + terrariumAudioPlayer.VOLUME_STEP
       if volume > 100:
         volume = 100
@@ -155,7 +158,7 @@ class terrariumAudioPlayer():
       self.set_volume(volume)
 
   def volume_down(self):
-    if not self.__pwm_conflict:
+    if self.__audio_mixer is not None:
       volume = self.get_volume() - terrariumAudioPlayer.VOLUME_STEP
       if volume < 0:
         volume = 0
@@ -163,7 +166,7 @@ class terrariumAudioPlayer():
       self.set_volume(volume)
 
   def mute(self,mute = True):
-    if not self.__pwm_conflict:
+    if self.__audio_mixer is not None:
       self.__audio_mixer.setmute(1 if mute else 0, alsaaudio.MIXER_CHANNEL_ALL)
 
   def reload_audio_files(self):
@@ -179,7 +182,7 @@ class terrariumAudioPlayer():
     return self.__playlists
 
   def get_current_state(self):
-    if self.__pwm_conflict or len(self.get_audio_files()) == 0 and len(self.get_playlists()) == 0:
+    if self.__audio_mixer is None or len(self.get_audio_files()) == 0 and len(self.get_playlists()) == 0:
       return {'running' : 'disabled'}
 
     data = {'running' : self.is_running()}
@@ -193,7 +196,7 @@ class terrariumAudioPlayer():
 
   def is_running(self):
     running = False
-    if not self.__pwm_conflict:
+    if self.__audio_mixer is not None:
       try:
         running = self.__audio_player.status() in ['running','sleeping','disk-sleep']
       except Exception, ex:
@@ -206,23 +209,24 @@ class terrariumAudioPlayer():
 
 class terrariumAudioPlaylist():
 
-  def __init__(self,id,name = None,start = None,stop = None,volume = None,files = None,repeat = False, shuffle = False):
+  def __init__(self, id, name = None, start = None, stop = None, volume = None, repeat = False, shuffle = False, files = None):
     self.__id = id
     self.__name = None
     self.__start = None
     self.__stop = None
     self.__volume = None
-    self.__files = None
     self.__repeat = False
     self.__shuffle = False
+    self.__files = None
+    self.__is_started_at = None
 
     self.set_name(name)
     self.set_start(start)
     self.set_stop(stop)
     self.set_volume(volume)
-    self.set_files(files)
     self.set_repeat(repeat)
     self.set_shuffle(shuffle)
+    self.set_files(files)
 
   def __calculate_start_stop_times(self):
     now = datetime.datetime.now()
@@ -274,9 +278,6 @@ class terrariumAudioPlaylist():
     return self.__volume
 
   def set_files(self,value):
-    if not isinstance(value,list):
-      value = value.split(',')
-
     self.__files = value
 
   def get_files(self):
@@ -294,11 +295,23 @@ class terrariumAudioPlaylist():
   def get_shuffle(self):
     return self.__shuffle == True
 
+  def set_started(self):
+    self.__is_started_at = datetime.datetime.now()
+
   def is_time(self):
-    return self.get_start() < datetime.datetime.now() < self.get_stop()
+    is_time = self.get_start() < datetime.datetime.now() < self.get_stop()
+
+    if is_time and not self.get_repeat() and self.__is_started_at is not None and datetime.datetime.now() - self.__is_started_at < datetime.timedelta(hours=24):
+      # Extra check for playlists that do not repeat and the playlist duration is more then all songs combine duration
+      is_time = datetime.datetime.now() <= self.__is_started_at + datetime.timedelta(seconds=self.get_songs_duration())
+
+    return is_time
 
   def get_duration(self):
     return (self.get_stop() - self.get_start()).total_seconds()
+
+  def get_songs_duration(self):
+    return 0.0 + sum(self.__files[fileid].get_track_duration() for fileid in self.__files)
 
   def has_files(self):
     return len(self.__files) > 0
@@ -306,10 +319,10 @@ class terrariumAudioPlaylist():
   def get_data(self):
     data = {'id'      : self.get_id(),
             'name'    : self.get_name(),
-            'start'   : time.mktime(self.get_start().timetuple()),
-            'stop'    : time.mktime(self.get_stop().timetuple()),
+            'start'   : int(self.get_start().strftime("%s")),
+            'stop'    : int(self.get_stop().strftime("%s")),
             'volume'  : self.get_volume(),
-            'files'   : self.get_files(),
+            'files'   : self.get_files().keys(),
             'repeat'  : self.get_repeat(),
             'shuffle' : self.get_shuffle(),
             'is_time' : self.is_time(),
