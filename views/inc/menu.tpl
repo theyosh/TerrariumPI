@@ -163,7 +163,7 @@
                     <i class="fa fa-lock green"></i> <span>{{_('Door is closed')}}</span>
                   </span>
                   <span class="open" style="display:none">
-                    <i class="fa fa-lock red"></i> <span>{{_('Door is open')}}</span>
+                    <i class="fa fa-unlock red"></i> <span>{{_('Door is open')}}</span>
                   </span>
                 </a>
                 <ul class="dropdown-menu list-unstyled msg_list" id="door_messages" role="menu">
