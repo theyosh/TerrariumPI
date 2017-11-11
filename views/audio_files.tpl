@@ -83,7 +83,7 @@
                                       init: function() {
                                         this.on("success", function(file,response) {
                                           new PNotify({
-                                            type: (response.ok ? '{{_('success')}}' : '{{_('error')}}'),
+                                            type: (response.ok ? 'success' : 'error'),
                                             title: response.title,
                                             text: response.message,
                                             nonblock: {
