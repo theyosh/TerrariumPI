@@ -1430,8 +1430,8 @@ function add_audio_playlist() {
                 form.find('input[name="playlist_[nr]_stop"]').val(),
                 form.find('input[name="playlist_[nr]_volume"]').val(),
                 form.find('select[name="playlist_[nr]_files"]').val(),
-                form.find('input[name="playlist_[nr]_repeat"]').val(),
-                form.find('input[name="playlist_[nr]_shuffle"]').val());
+                form.find('input[name="playlist_[nr]_repeat"]').val() == 'true',
+                form.find('input[name="playlist_[nr]_shuffle"]').val() == 'true');
 
   $('.new-playlist-form').modal('hide');
 }
@@ -1441,7 +1441,6 @@ function add_audio_playlist_row(id,name,start,stop,volume,files,repeat,shuffle) 
 
   // Remove existing switchery from modal input form
   audio_playlist_row.find('span.switchery').remove();
-
   audio_playlist_row.find('.x_title').show().find('h2 small').text(name);
   audio_playlist_row.find('span.select2.select2-container').remove();
 
@@ -1459,14 +1458,8 @@ function add_audio_playlist_row(id,name,start,stop,volume,files,repeat,shuffle) 
   });
 
   audio_playlist_row.find('.js-switch').each(function(index,html_element){
-    if (this.name.indexOf('_repeat') != -1) {
-      this.checked = repeat == true;
-    }
-    if (this.name.indexOf('_shuffle') != -1) {
-      this.checked = shuffle == true;
-    }
-
-    var switchery = new Switchery(html_element);
+    this.checked = (this.name.indexOf('_repeat') != -1 && repeat == true) || (this.name.indexOf('_shuffle') != -1 && shuffle == true)
+    var switchery = new Switchery(this);
     html_element.onchange = function() {
       this.value = this.checked;
     };
