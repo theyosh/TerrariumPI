@@ -105,7 +105,6 @@ class terrariumAudioPlayer():
           self.__active_playlist = None
           self.__audio_player = None
           self.mute()
-          #psutil.Popen(['cvlc','-q','--no-interact','silence.wav'])
 
           if self.__callback is not None:
             self.__callback(socket=True)
