@@ -80,7 +80,7 @@ class terrariumAudioPlayer():
                         playlist.get_volume())
                       )
 
-          audio_player_command = ['cvlc','-q','--no-interact']
+          audio_player_command = ['cvlc','-q','--no-interact','--play-and-exit']
           #audio_player_command += ['--norm-buff-size','1000','--norm-max-level','5.0']
           if playlist.get_shuffle():
             audio_player_command += ['-Z']
@@ -89,8 +89,6 @@ class terrariumAudioPlayer():
             audio_player_command += ['-L']
 
           audio_player_command += files
-
-          audio_player_command += ['vlc://quit']
 
           self.__audio_player = psutil.Popen(audio_player_command)
           self.__active_playlist = playlist
