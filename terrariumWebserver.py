@@ -76,13 +76,13 @@ class terrariumWebserver():
     self.__app.route('/api/<path:path>', method=['GET'], callback=self.__get_api_call)
 
     self.__app.route('/api/switch/toggle/<switchid:path>',
-                     method=['GET'],
+                     method=['POST'],
                      callback=self.__toggle_switch,
                      apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
                     )
 
     self.__app.route('/api/switch/state/<switchid:path>/<value:int>',
-                     method=['GET'],
+                     method=['POST'],
                      callback=self.__state_switch,
                      apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
                     )
@@ -92,6 +92,7 @@ class terrariumWebserver():
                      callback=self.__update_api_call,
                      apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
                     )
+
     self.__app.route('/api/audio/player/<action:re:(start|stop|volumeup|volumedown|mute|unmute)>',
                      method=['POST'],
                      callback=self.__player_commands,

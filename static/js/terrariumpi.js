@@ -1317,7 +1317,7 @@ function update_power_switch(id, data) {
 
     power_switch.find('.knob').knob({
 			release: function(value) {
-        $.getJSON('/api/switch/state/' + id + '/' + value,function(dummy){
+        $.post('/api/switch/state/' + id + '/' + value,function(dummy){
         });
       },
       format: function(value) {
@@ -1331,7 +1331,7 @@ function update_power_switch(id, data) {
 
 function toggleSwitch(id) {
   id = id.split('_')[1];
-  $.getJSON('/api/switch/toggle/' + id,function(data){
+  $.post('/api/switch/toggle/' + id,function(data){
   });
 }
 
