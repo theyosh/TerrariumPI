@@ -1404,14 +1404,14 @@ function load_player_status() {
 }
 
 function delete_audio_file(audio_file_id, audio_file_name) {
-  if (confirm('Are you sure to delete the file: \'' + audio_file_name + '\' ?')) {
+  if (confirm('{{_('Are you sure to delete the file')}}: \'' + audio_file_name + '\' ?')) {
     $.ajax({
       url: "/api/audio/file/" + audio_file_id,
       type: "DELETE",
       dataType : "json",
     }).done(function(response) {
       new PNotify({
-        type: (response.ok ? 'success' : 'error'),
+        type: (response.ok ? '{{_('success')}}' : '{{_('error')}}'),
         title: response.title,
         text: response.message,
         nonblock: {

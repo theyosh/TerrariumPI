@@ -1,5 +1,5 @@
 % include('inc/page_header.tpl')
-        <div class="x_panel">
+        <div class="x_panel help">
           <div class="x_title">
             <h2><span class="glyphicon glyphicon-info-sign" aria-hidden="true" title="{{_('Information')}}"></span> {{_('Help')}}<small></small></h2>
             <ul class="nav navbar-right panel_toolbox">
@@ -12,8 +12,8 @@
             </ul>
             <div class="clearfix"></div>
           </div>
-          <div class="x_content" style="display:none">
-            <p>{{_('Here you can configure your audio sequences.')}} {{!_('Required fields are marked with \'%s\'.') % ('<span class="required">*</span>',)}}</p>
+          <div class="x_content">
+            <p>{{_('Here you can configure your audio playlists.')}} {{_('Make sure you do not overlap playlists in time!')}} {{!_('Required fields are marked with \'%s\'.') % ('<span class="required">*</span>',)}}</p>
             <ul>
               <li>
                 <strong>{{_('Name')}}</strong>: {{!translations.get_translation('audio_playlist_field_name')}}
@@ -26,6 +26,12 @@
               </li>
               <li>
                 <strong>{{_('Volume')}}</strong>: {{translations.get_translation('audio_playlist_field_volume')}}
+              </li>
+              <li>
+                <strong>{{_('Repeat')}}</strong>: {{translations.get_translation('audio_playlist_field_repeat')}}
+              </li>
+              <li>
+                <strong>{{_('Shuffle')}}</strong>: {{translations.get_translation('audio_playlist_field_shuffle')}}
               </li>
               <li>
                 <strong>{{_('Files')}}</strong>: {{translations.get_translation('audio_playlist_field_files')}}
@@ -90,11 +96,11 @@
                             <input class="form-control" name="playlist_[nr]_volume" placeholder="{{_('Volume')}}" required="required" type="text" pattern="[0-9]+"  data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('audio_playlist_field_volume')}}" />
                           </div>
                           <div class="col-md-1 col-sm-1 col-xs-12 form-group" style="text-align: center">
-                            <label for="playlist_[nr]_repeat">{{_('Repeat')}}</label><br />
+                            <label for="playlist_[nr]_repeat" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('audio_playlist_field_repeat')}}">{{_('Repeat')}}</label><br />
                             <input type="checkbox" name="playlist_[nr]_repeat" class="js-switch" value="0" />
                           </div>
                           <div class="col-md-1 col-sm-1 col-xs-12 form-group" style="text-align: center">
-                            <label for="playlist_[nr]_shuffle">{{_('Shuffle')}}</label><br />
+                            <label for="playlist_[nr]_shuffle" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('audio_playlist_field_shuffle')}}">{{_('Shuffle')}}</label><br />
                             <input type="checkbox" name="playlist_[nr]_shuffle" class="js-switch" value="0" />
                           </div>
                         </div>

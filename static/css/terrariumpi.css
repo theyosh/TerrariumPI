@@ -73,6 +73,10 @@ form#profile.edit label{
   padding-top: 8px;
 }
 
+.x_panel.help .x_content {
+  display: none;
+}
+
 /* End general overrule */
 
 div.row.sensor,
