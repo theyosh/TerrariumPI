@@ -19,7 +19,7 @@
                 <strong>{{_('Hardware')}}</strong>: {{!translations.get_translation('door_field_hardware')}}
               </li>
               <li>
-                <strong>{{_('Address')}}</strong>: {{translations.get_translation('door_field_address')}}
+                <strong>{{_('Address')}}</strong>: {{!translations.get_translation('door_field_address')}}
               </li>
               <li>
                 <strong>{{_('Name')}}</strong>: {{translations.get_translation('door_field_name')}}

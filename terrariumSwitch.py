@@ -93,7 +93,7 @@ class terrariumSwitch():
   def __dim_switch(self,from_value,to_value,duration):
     # When the dimmer is working, ignore new state changes.
     if not self.__dimmer_running:
-      self.__pigpio.set_pull_up_down(int(self.get_address()), pigpio.PUD_OFF)
+      self.__pigpio.set_pull_up_down(terrariumUtils.to_BCM_port_number(self.get_address()), pigpio.PUD_OFF)
       self.__dimmer_running = True
 
       if from_value is None or duration == 0:
@@ -101,7 +101,7 @@ class terrariumSwitch():
                   self.get_name(),from_value,to_value)
         # Geen animatie, gelijk to_value
         dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - float(to_value)) / 100.0)
-        self.__pigpio.hardware_PWM(int(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
+        self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
       else:
         from_value = float(from_value)
         to_value = float(to_value)
@@ -124,12 +124,12 @@ class terrariumSwitch():
           from_value += (direction * distance)
           dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - from_value) / 100.0)
           logger.debug('Dimmer animation: Step: %s, value %s%%, Dim value: %s, timeout %s',counter+1, from_value, dim_value, duration)
-          self.__pigpio.hardware_PWM(int(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
+          self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
           time.sleep(duration)
 
         # For impatient people... Put the dimmer at the current state value if it has changed during the animation
         dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - self.get_state()) / 100.0)
-        self.__pigpio.hardware_PWM(int(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
+        self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
 
       self.__dimmer_running = False
       logger.info('Dimmer \'%s\' is done at value %s%%',self.get_name(),self.get_state())
