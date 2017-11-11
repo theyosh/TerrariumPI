@@ -24,7 +24,7 @@ class terrariumTranslations():
 
     # Sensors
     self.translations['sensor_field_hardware'] = _('Holds the sensor hardware type. Supported hardware types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSensor.valid_hardware_types) + '</strong>')
-    self.translations['sensor_field_address'] = _('Holds the sensor address. Depending on hardware type, it is either a read only hex number or GPIO pin. For GPIO use <strong>Physical</strong> GPIO pin numbering.')
+    self.translations['sensor_field_address'] = _('Holds the sensor address. Depending on hardware type, it is either a read only hex number or GPIO pin. For GPIO use <strong>physical</strong> GPIO pin numbering.')
     self.translations['sensor_field_type'] = _('Holds the sensor type. Supported sensor types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSensor.valid_sensor_types) + '</strong>')
     self.translations['sensor_field_name'] = _('Holds the name of the sensor.')
     self.translations['sensor_field_alarm_min'] = _('Holds the sensor lower alarm value of the sensor. When below this value, alarms can be triggered.')
