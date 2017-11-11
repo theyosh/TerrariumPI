@@ -31,7 +31,6 @@ class terrariumEngine():
   LOOP_TIMEOUT = 30
 
   def __init__(self):
-    self.__audio_player = None
     # List of queues for websocket communication
     self.subscribed_queues = []
     # Default power usage for a PI
@@ -139,9 +138,6 @@ class terrariumEngine():
       self.power_switches[power_switch_id].set_name(switch_config[power_switch_config]['name'])
       self.power_switches[power_switch_id].set_power_wattage(switch_config[power_switch_config]['power_wattage'])
       self.power_switches[power_switch_id].set_water_flow(switch_config[power_switch_config]['water_flow'])
-
-      # Disable audio player when dimmer switches are used: http://www.raspberry-projects.com/pi/programming-in-c/pwm/using-the-pwm-pin
-      self.__audio_player = False if power_switch.is_dimmer() else self.__audio_player
 
       if 'dimmer_duration' in switch_config[power_switch_config]:
         self.power_switches[power_switch_id].set_dimmer_duration(switch_config[power_switch_config]['dimmer_duration'])
