@@ -342,8 +342,6 @@ class terrariumWebserver():
           socket.send(json.dumps(message))
         except Exception, err:
           # Socket connection is lost, stop looping....
-          #print 'listen_for_messages error:'
-          #print err
           break
 
         messages.task_done()
@@ -352,8 +350,6 @@ class terrariumWebserver():
       try:
         message = socket.receive()
       except Exception, err:
-        #print 'handle_websocket error:'
-        #print err
         break
 
       if message is not None:
