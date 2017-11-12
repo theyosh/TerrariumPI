@@ -46,7 +46,7 @@ class terrariumEngine():
 
     # Load data collector for historical data
     logger.info('Loading terrariumPI collector')
-    self.collector = terrariumCollector()
+    self.collector = terrariumCollector(self.config.get_system()['version'])
     logger.info('Done loading terrariumPI collector')
 
     # Set the Pi power usage (including usb devices directly on the PI)
