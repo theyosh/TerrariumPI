@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
+import terrariumLogging
+logger = terrariumLogging.logging.getLogger(__name__)
+
 import ConfigParser
 from glob import glob
 
 from terrariumUtils import terrariumUtils
-
-import logging
-logger = logging.getLogger(__name__)
 
 class terrariumConfig:
   DEFAULT_CONFIG = 'defaults.cfg'
