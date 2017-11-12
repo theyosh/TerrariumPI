@@ -87,7 +87,7 @@ class terrariumWebcam():
 
     if not self.state and oldstate:
       # Changed from online to offline
-      logger.warning('Raw image \'%s\' at location %s is not available!' % (self.get_name(),self.get_location(),))
+      logger.error('Raw image \'%s\' at location %s is not available!' % (self.get_name(),self.get_location(),))
       self.__get_offline_image()
       self.__tile_image()
     elif self.state:
