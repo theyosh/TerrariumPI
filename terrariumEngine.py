@@ -794,6 +794,7 @@ class terrariumEngine():
   def get_system_stats(self, socket = False):
     memory = psutil.virtual_memory()
     uptime = self.get_uptime()
+    disk = psutil.disk_usage('/')
 
     cpu_temp = -1
     with open('/sys/class/thermal/thermal_zone0/temp') as temperature:
@@ -802,6 +803,9 @@ class terrariumEngine():
     data = {'memory' : {'total' : memory.total,
                         'used' : memory.used,
                         'free' : memory.free},
+            'disk' : {'total' : disk.total,
+                        'used' : disk.used,
+                        'free' : disk.free},
             'load' : {'load1' : uptime['load'][0],
                       'load5' : uptime['load'][1],
                       'load15' : uptime['load'][2]},
@@ -812,11 +816,13 @@ class terrariumEngine():
     if socket:
       gauge_data = {'system_load'        : {'current' : data['load']['load1'] * 100, 'alarm_min' : 0, 'alarm_max': 80, 'limit_min' : 0, 'limit_max': 100},
                     'system_temperature' : {'current' : data['temperature'], 'alarm_min' : 30, 'alarm_max': 60, 'limit_min' : 0, 'limit_max': 80},
-                    'system_memory'      : {'current' : data['memory']['used'] / (1024 * 1024), 'alarm_min' : data['memory']['total'] / (1024 * 1024) * 0.1, 'alarm_max': data['memory']['total'] / (1024 * 1024) * 0.9, 'limit_min' : 0, 'limit_max': data['memory']['total'] / (1024 * 1024)}}
+                    'system_memory'      : {'current' : data['memory']['used'] / (1024 * 1024), 'alarm_min' : data['memory']['total'] / (1024 * 1024) * 0.1, 'alarm_max': data['memory']['total'] / (1024 * 1024) * 0.9, 'limit_min' : 0, 'limit_max': data['memory']['total'] / (1024 * 1024)},
+                    'system_disk'        : {'current' : data['disk']['used'] / (1024 * 1024), 'alarm_min' : data['disk']['total'] / (1024 * 1024) * 0.1, 'alarm_max': data['disk']['total'] / (1024 * 1024) * 0.9, 'limit_min' : 0, 'limit_max': data['disk']['total'] / (1024 * 1024)}}
 
       gauge_data['system_load']['alarm'] = not(gauge_data['system_load']['alarm_min'] < gauge_data['system_load']['current'] < gauge_data['system_load']['alarm_max'])
       gauge_data['system_temperature']['alarm'] = not(gauge_data['system_temperature']['alarm_min'] < gauge_data['system_temperature']['current'] < gauge_data['system_temperature']['alarm_max'])
       gauge_data['system_memory']['alarm'] = not(gauge_data['system_memory']['alarm_min'] < gauge_data['system_memory']['current'] < gauge_data['system_memory']['alarm_max'])
+      gauge_data['system_disk']['alarm'] = not(gauge_data['system_disk']['alarm_min'] < gauge_data['system_disk']['current'] < gauge_data['system_disk']['alarm_max'])
 
       self.__send_message({'type':'sensor_gauge','data':gauge_data})
     else:
