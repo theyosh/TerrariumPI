@@ -13,11 +13,12 @@ class terrariumCollector():
   # Store data every Xth minute. Except switches and doors
   STORE_MODULO = 1 * 60
 
-  def __init__(self):
+  def __init__(self,versionid):
     logger.info('Setting up collector database %s' % (terrariumCollector.DATABASE,))
     self.__recovery = False
     self.__connect()
     self.__create_database_structure()
+    self.__upgrade(int(versionid.replace('.','')))
     logger.info('TerrariumPI Collecter is ready')
 
   def __connect(self):
@@ -89,12 +90,52 @@ class terrariumCollector():
                        cores VARCHAR(25),
                        memory_total INTEGER(6),
                        memory_used INTEGER(6),
-                       memory_free INTEGER(6)
+                       memory_free INTEGER(6),
+                       disk_total INTEGER(6),
+                       disk_used INTEGER(6),
+                       disk_free INTEGER(6)
                         )''')
 
       cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS system_data_unique ON system_data(timestamp ASC)')
 
     self.db.commit()
+
+  def __upgrade(self,to_version):
+    # Set minimal version to 3.0.0
+    current_version = 300
+    table_upgrades = {'310' : ['ALTER TABLE system_data ADD COLUMN disk_total INTEGER(6)',
+                               'ALTER TABLE system_data ADD COLUMN disk_used INTEGER(6)',
+                               'ALTER TABLE system_data ADD COLUMN disk_free INTEGER(6)']}
+
+    with self.db:
+      cur = self.db.cursor()
+      db_version = int(cur.execute('PRAGMA user_version').fetchall()[0][0])
+      if db_version > current_version:
+        current_version = db_version
+
+    if current_version == to_version:
+      logger.info('Collector database is up to date')
+    elif current_version < to_version:
+      logger.info('Collector database is out of date. Running updates from %s to %s' % (current_version,to_version))
+      # Execute updates
+      with self.db:
+        cur = self.db.cursor()
+        for update_version in table_upgrades.keys():
+          if current_version < int(update_version) <= to_version:
+            # Execute all updates between the versions
+            for sql_upgrade in table_upgrades[update_version]:
+              try:
+                cur.execute(sql_upgrade)
+                logger.info('Collector database upgrade for version %s succeeded! %s' % (update_version,sql_upgrade))
+              except Exception, ex:
+                if 'duplicate column name' not in str(ex):
+                  logger.error('Error updating collector database. Please contact support. Error message: %s' % (ex,))
+
+        cur.execute('VACUUM')
+        cur.execute('PRAGMA user_version = ' + str(to_version))
+        logger.info('Updated collector database. Set version to: %s' % (to_version,))
+
+      self.db.commit()
 
   def __recover(self):
     starttime = time.time()
