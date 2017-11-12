@@ -76,7 +76,6 @@
             </div>
           </div>
         </div>
-
         <div class="modal fade preview_player" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
           <div class="modal-dialog modal-sm" style="width:30%">
             <div class="modal-content">
