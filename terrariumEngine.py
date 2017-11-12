@@ -825,8 +825,8 @@ class terrariumEngine():
     if socket:
       gauge_data = {'system_load'        : {'current' : data['load']['load1'] * 100, 'alarm_min' : 0, 'alarm_max': 80, 'limit_min' : 0, 'limit_max': 100},
                     'system_temperature' : {'current' : data['temperature'], 'alarm_min' : 30, 'alarm_max': 60, 'limit_min' : 0, 'limit_max': 80},
-                    'system_memory'      : {'current' : data['memory']['used'] / (1024 * 1024), 'alarm_min' : data['memory']['total'] / (1024 * 1024) * 0.1, 'alarm_max': data['memory']['total'] / (1024 * 1024) * 0.9, 'limit_min' : 0, 'limit_max': data['memory']['total'] / (1024 * 1024)},
-                    'system_disk'        : {'current' : data['disk']['used'] / (1024 * 1024), 'alarm_min' : data['disk']['total'] / (1024 * 1024) * 0.1, 'alarm_max': data['disk']['total'] / (1024 * 1024) * 0.9, 'limit_min' : 0, 'limit_max': data['disk']['total'] / (1024 * 1024)}}
+                    'system_memory'      : {'current' : data['memory']['used'], 'alarm_min' : data['memory']['total'] * 0.1, 'alarm_max': data['memory']['total'] * 0.9, 'limit_min' : 0, 'limit_max': data['memory']['total']},
+                    'system_disk'        : {'current' : data['disk']['used'], 'alarm_min' : data['disk']['total'] * 0.1, 'alarm_max': data['disk']['total'] * 0.9, 'limit_min' : 0, 'limit_max': data['disk']['total']}}
 
       gauge_data['system_load']['alarm'] = not(gauge_data['system_load']['alarm_min'] < gauge_data['system_load']['current'] < gauge_data['system_load']['alarm_max'])
       gauge_data['system_temperature']['alarm'] = not(gauge_data['system_temperature']['alarm_min'] < gauge_data['system_temperature']['current'] < gauge_data['system_temperature']['alarm_max'])

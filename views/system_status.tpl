@@ -156,7 +156,7 @@
                   <div class="sidebar-widget text-center">
                     <canvas class="gauge"></canvas>
                     <div class="goal-wrapper">
-                      <span class="gauge-value">...</span> <span>MB</span>
+                      <span class="gauge-value">...</span>
                     </div>
                   </div>
                 </div>
@@ -212,7 +212,7 @@
                   <div class="sidebar-widget text-center">
                     <canvas class="gauge"></canvas>
                     <div class="goal-wrapper">
-                      <span class="gauge-value">...</span> <span>MB</span>
+                      <span class="gauge-value">...</span>
                     </div>
                   </div>
                 </div>
@@ -295,15 +295,15 @@
                       break;
 
                     case 'memory':
-                      gauge_data.current = value['used'] / (1024 * 1024);
-                      gauge_data.limit_max = value['total'] / (1024 * 1024);
+                      gauge_data.current = value['used'];
+                      gauge_data.limit_max = value['total'];
                       gauge_data.alarm_max = gauge_data.limit_max * 0.9;
                       gauge_data.alarm_min = gauge_data.limit_max * 0.1;
                       break;
 
                     case 'disk':
-                      gauge_data.current = value['used'] / (1024 * 1024);
-                      gauge_data.limit_max = value['total'] / (1024 * 1024);
+                      gauge_data.current = value['used'];
+                      gauge_data.limit_max = value['total'];
                       gauge_data.alarm_max = gauge_data.limit_max * 0.9;
                       gauge_data.alarm_min = gauge_data.limit_max * 0.1;
                       break;
