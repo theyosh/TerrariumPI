@@ -4,7 +4,7 @@ import logging.config
 import zipfile
 import os
 from logging.handlers import TimedRotatingFileHandler
-from gevent import monkey, sleep
+from gevent import monkey
 monkey.patch_all()
 
 class TimedCompressedRotatingFileHandler(TimedRotatingFileHandler):
