@@ -960,6 +960,7 @@ function history_graph(name, data, type) {
       tickFormatter: function(val, axis) {
         switch(type) {
           case 'system_memory':
+          case 'system_disk':
               val = formatNumber(val / (1024 * 1024)) + ' MB'
             break;
 
@@ -1053,6 +1054,19 @@ function history_graph(name, data, type) {
         data: data.free
       }, {
         label: '{{_('Total memory')}}',
+        data: data.total
+      }];
+      break;
+
+    case 'system_disk':
+      graph_data = [{
+        label: '{{_('Used space')}}',
+        data: data.used
+      }, {
+        label: '{{_('Free space')}}',
+        data: data.free
+      }, {
+        label: '{{_('Total space')}}',
         data: data.total
       }];
       break;

@@ -167,6 +167,62 @@
             </div>
           </div>
         </div>
+        <div class="row disk">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2><span class="title">{{_('Disk usage')}}</span> <small>...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                  <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                  <li class="dropdown">
+                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-calendar" title="{{_('Period')}}"></i></a>
+                    <ul class="dropdown-menu period" role="menu">
+                      <li>
+                        <a href="javascript:;" >{{_('Day')}}</a>
+                      </li>
+                      <li>
+                        <a href="javascript:;" >{{_('Week')}}</a>
+                      </li>
+                      <li>
+                        <a href="javascript:;" >{{_('Month')}}</a>
+                      </li>
+                      <li>
+                        <a href="javascript:;" >{{_('Year')}}</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="dropdown">
+                    <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-wrench" title="{{_('Options')}}"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li>
+                        <a href="javascript:;" onclick="menu_click('system_settings.html')">{{_('Settings')}}</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
+                  </li>
+                </ul>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                  <div class="sidebar-widget text-center">
+                    <canvas class="gauge"></canvas>
+                    <div class="goal-wrapper">
+                      <span class="gauge-value">...</span> <span>MB</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                  <div class="history_graph loading"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="row uptime">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
@@ -239,6 +295,13 @@
                       break;
 
                     case 'memory':
+                      gauge_data.current = value['used'] / (1024 * 1024);
+                      gauge_data.limit_max = value['total'] / (1024 * 1024);
+                      gauge_data.alarm_max = gauge_data.limit_max * 0.9;
+                      gauge_data.alarm_min = gauge_data.limit_max * 0.1;
+                      break;
+
+                    case 'disk':
                       gauge_data.current = value['used'] / (1024 * 1024);
                       gauge_data.limit_max = value['total'] / (1024 * 1024);
                       gauge_data.alarm_max = gauge_data.limit_max * 0.9;

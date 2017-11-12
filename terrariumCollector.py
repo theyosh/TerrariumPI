@@ -195,8 +195,8 @@ class terrariumCollector():
                       (now, newdata['wind_speed'], newdata['temperature'], newdata['pressure'], newdata['wind_direction'], newdata['weather'], newdata['icon']))
 
         if type in ['system']:
-          cur.execute('REPLACE INTO system_data (timestamp, load_load1, load_load5, load_load15, uptime, temperature, cores, memory_total, memory_used, memory_free) VALUES (?,?,?,?,?,?,?,?,?,?)',
-                      (now, newdata['load']['load1'], newdata['load']['load5'], newdata['load']['load15'], newdata['uptime'], newdata['temperature'], newdata['cores'], newdata['memory']['total'], newdata['memory']['used'], newdata['memory']['free']))
+          cur.execute('REPLACE INTO system_data (timestamp, load_load1, load_load5, load_load15, uptime, temperature, cores, memory_total, memory_used, memory_free, disk_total, disk_used, disk_free) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                      (now, newdata['load']['load1'], newdata['load']['load5'], newdata['load']['load15'], newdata['uptime'], newdata['temperature'], newdata['cores'], newdata['memory']['total'], newdata['memory']['used'], newdata['memory']['free'],newdata['disk']['total'], newdata['disk']['used'], newdata['disk']['free']))
 
         if type in ['switches']:
           if 'time' in newdata:
@@ -395,7 +395,7 @@ class terrariumCollector():
       sql = 'SELECT "city" as id, "weather" as type, timestamp, ' + ', '.join(fields.keys()) + ' FROM weather_data WHERE timestamp >= ? and timestamp <= ?'
 
     elif logtype == 'system':
-      fields = ['load_load1', 'load_load5','load_load15','uptime', 'temperature','cores', 'memory_total', 'memory_used' , 'memory_free']
+      fields = ['load_load1', 'load_load5','load_load15','uptime', 'temperature','cores', 'memory_total', 'memory_used' , 'memory_free', 'disk_total', 'disk_used' , 'disk_free']
 
       if len(parameters) > 0 and parameters[0] == 'load':
         fields = ['load_load1', 'load_load5','load_load15']
@@ -407,6 +407,8 @@ class terrariumCollector():
         fields = ['temperature']
       elif len(parameters) > 0 and parameters[0] == 'memory':
         fields = ['memory_total', 'memory_used' , 'memory_free']
+      elif len(parameters) > 0 and parameters[0] == 'disk':
+        fields = ['disk_total', 'disk_used' , 'disk_free']
 
       sql = 'SELECT "system" as type, timestamp, ' + ', '.join(fields) + ' FROM system_data WHERE timestamp >= ? and timestamp <= ?'
 

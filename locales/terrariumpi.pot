@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-11-12 01:24+CET\n"
+"POT-Creation-Date: 2017-11-12 11:23+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -619,7 +619,7 @@ msgid "Add"
 msgstr ""
 
 #: views/dashboard.tpl:7 views/inc/usage_dashboard.tpl:87
-#: views/system_status.tpl:174
+#: views/system_status.tpl:230
 msgid "Uptime"
 msgstr ""
 
@@ -679,8 +679,8 @@ msgstr ""
 #: views/system_environment.tpl:99 views/system_environment.tpl:172
 #: views/system_environment.tpl:247 views/system_status.tpl:32
 #: views/system_status.tpl:88 views/system_status.tpl:144
-#: views/system_status.tpl:200 views/weather_forecast.tpl:16
-#: views/webcam.tpl:16
+#: views/system_status.tpl:200 views/system_status.tpl:256
+#: views/weather_forecast.tpl:16 views/webcam.tpl:16
 msgid "Settings"
 msgstr ""
 
@@ -765,7 +765,7 @@ msgstr ""
 #: views/inc/sensor_list.tpl:12 views/inc/usage_dashboard.tpl:169
 #: views/inc/usage_doors.tpl:21 views/inc/usage_sensors.tpl:25
 #: views/system_status.tpl:6 views/system_status.tpl:62
-#: views/system_status.tpl:118
+#: views/system_status.tpl:118 views/system_status.tpl:174
 msgid "warning"
 msgstr ""
 
@@ -776,6 +776,7 @@ msgstr ""
 #: views/inc/usage_webcams.tpl:29 views/switch_status.tpl:17
 #: views/system_status.tpl:15 views/system_status.tpl:71
 #: views/system_status.tpl:127 views/system_status.tpl:183
+#: views/system_status.tpl:239
 msgid "Day"
 msgstr ""
 
@@ -785,7 +786,7 @@ msgstr ""
 #: views/inc/usage_switches.tpl:34 views/inc/usage_webcams.tpl:32
 #: views/switch_status.tpl:20 views/system_status.tpl:18
 #: views/system_status.tpl:74 views/system_status.tpl:130
-#: views/system_status.tpl:186
+#: views/system_status.tpl:186 views/system_status.tpl:242
 msgid "Week"
 msgstr ""
 
@@ -795,7 +796,7 @@ msgstr ""
 #: views/inc/usage_switches.tpl:37 views/inc/usage_webcams.tpl:35
 #: views/switch_status.tpl:23 views/system_status.tpl:21
 #: views/system_status.tpl:77 views/system_status.tpl:133
-#: views/system_status.tpl:189
+#: views/system_status.tpl:189 views/system_status.tpl:245
 msgid "Month"
 msgstr ""
 
@@ -805,7 +806,7 @@ msgstr ""
 #: views/inc/usage_switches.tpl:40 views/inc/usage_webcams.tpl:38
 #: views/switch_status.tpl:26 views/system_status.tpl:24
 #: views/system_status.tpl:80 views/system_status.tpl:136
-#: views/system_status.tpl:192
+#: views/system_status.tpl:192 views/system_status.tpl:248
 msgid "Year"
 msgstr ""
 
@@ -2019,6 +2020,10 @@ msgstr ""
 msgid "Memory usage"
 msgstr ""
 
+#: views/system_status.tpl:174
+msgid "Disk usage"
+msgstr ""
+
 #: views/weather_forecast.tpl:39
 msgid "City"
 msgstr ""
@@ -2144,6 +2149,10 @@ msgid "Free memory"
 msgstr ""
 
 #: Missing text string
+msgid "Free space"
+msgstr ""
+
+#: Missing text string
 msgid "Github"
 msgstr ""
 
@@ -2252,6 +2261,10 @@ msgid "Total open for"
 msgstr ""
 
 #: Missing text string
+msgid "Total space"
+msgstr ""
+
+#: Missing text string
 msgid "Universal AC MAINS Dimmer - MPDMv4.1"
 msgstr ""
 
@@ -2265,6 +2278,10 @@ msgstr ""
 
 #: Missing text string
 msgid "Used memory"
+msgstr ""
+
+#: Missing text string
+msgid "Used space"
 msgstr ""
 
 #: Missing text string
