@@ -35,4 +35,3 @@ class TimedCompressedRotatingFileHandler(TimedRotatingFileHandler):
 
 
 logging.config.fileConfig('logging.cfg')
-#logger = logging.getLogger('terrariumPI')
