@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import logging
-logger = logging.getLogger(__name__)
+import terrariumLogging
+logger = terrariumLogging.logging.getLogger(__name__)
 
 from terrariumWeather import terrariumWeather
 from terrariumSensor import terrariumSensor

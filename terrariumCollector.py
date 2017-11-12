@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
+import terrariumLogging
+logger = terrariumLogging.logging.getLogger(__name__)
+
 import sqlite3
 import time
 import json
 import copy
 import os
-
-import logging
-logger = logging.getLogger(__name__)
 
 class terrariumCollector():
   DATABASE = 'history.db'
