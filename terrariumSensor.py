@@ -197,7 +197,9 @@ class terrariumSensor:
             humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()],
                                                            float(terrariumUtils.to_BCM_port_number(self.sensor_address)),
                                                            5)
-            current = float(temperature)
+            if temperature is not None:
+              current = float(temperature)
+
         elif 'humidity' == self.get_type():
           if self.get_hardware_type() == 'owfs':
             current = float(self.sensor.humidity)
@@ -208,11 +210,12 @@ class terrariumSensor:
             humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()],
                                                            float(terrariumUtils.to_BCM_port_number(self.sensor_address)),
                                                            5)
-            current = float(humidity)
+            if humidity is not None:
+              current = float(humidity)
 
         if current is None or not (self.get_limit_min() <= current <= self.get_limit_max()):
           # Invalid current value.... log and ingore
-          logger.warn('Measured value %f%s from %s sensor \'%s\' is outside valid range %.2f%s - %.2f%s in %.5f seconds.' % (current,
+          logger.warn('Measured value %s%s from %s sensor \'%s\' is outside valid range %.2f%s - %.2f%s in %.5f seconds.' % (current,
                                                                                                                              self.get_indicator(),
                                                                                                                              self.get_type(),
                                                                                                                              self.get_name(),
