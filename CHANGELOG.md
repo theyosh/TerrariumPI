@@ -2,10 +2,11 @@ Changelog
 =========
 
 
-(unreleased)
+3.1.0 (2017-11-12)
 ------------
 
 **New**
+- Add audio preview player. [TheYOSH]
 - Add audio usage page. [TheYOSH]
 - Add better configuration upgrading and logging. [TheYOSH]
 - Add disk usage stats and graphs. [TheYOSH]
@@ -50,6 +51,7 @@ Changelog
 - Fix [#36](https://github.com/theyosh/TerrariumPI/issues/36). [TheYOSH]
 
 **Updates**
+- Update Dutch translation. [TheYOSH]
 - Update logging. [TheYOSH]
 - Update logging. [TheYOSH]
 - Update disk and memory graphs. [TheYOSH]
@@ -601,5 +603,3 @@ Changelog
 - Typo. [TheYOSH]
 - Moved door status to own page. [TheYOSH]
 - Use system default pip. [TheYOSH]
-
-
