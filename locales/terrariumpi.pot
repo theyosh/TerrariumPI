@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-11-11 18:26+CET\n"
+"POT-Creation-Date: 2017-11-12 01:24+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -374,75 +374,79 @@ msgstr ""
 msgid "Holds a link to more information."
 msgstr ""
 
+#: terrariumWebcam.py:216
+msgid "Offline since"
+msgstr ""
+
 #: terrariumWebserver.py:81 terrariumWebserver.py:87 terrariumWebserver.py:93
-#: terrariumWebserver.py:98 terrariumWebserver.py:104
-#: terrariumWebserver.py:110 terrariumWebserver.py:116
+#: terrariumWebserver.py:99 terrariumWebserver.py:105
+#: terrariumWebserver.py:111 terrariumWebserver.py:117
 msgid "Authenticate to make any changes"
 msgstr ""
 
 #: terrariumWebserver.py:81 terrariumWebserver.py:87 terrariumWebserver.py:93
-#: terrariumWebserver.py:98 terrariumWebserver.py:104
-#: terrariumWebserver.py:110 terrariumWebserver.py:116
+#: terrariumWebserver.py:99 terrariumWebserver.py:105
+#: terrariumWebserver.py:111 terrariumWebserver.py:117
 msgid "Authentication"
 msgstr ""
 
 #: terrariumWebserver.py:81 terrariumWebserver.py:87 terrariumWebserver.py:93
-#: terrariumWebserver.py:98 terrariumWebserver.py:104
-#: terrariumWebserver.py:110 terrariumWebserver.py:116
+#: terrariumWebserver.py:99 terrariumWebserver.py:105
+#: terrariumWebserver.py:111 terrariumWebserver.py:117
 #: views/system_settings.tpl:23
 msgid "TerrariumPI"
 msgstr ""
 
-#: terrariumWebserver.py:177
+#: terrariumWebserver.py:178
 msgid "Player command could ot be executed!"
 msgstr ""
 
-#: terrariumWebserver.py:177 terrariumWebserver.py:197
-#: terrariumWebserver.py:209 terrariumWebserver.py:217
+#: terrariumWebserver.py:178 terrariumWebserver.py:198
+#: terrariumWebserver.py:210 terrariumWebserver.py:218
 msgid "Error!"
 msgstr ""
 
-#: terrariumWebserver.py:185 terrariumWebserver.py:188
+#: terrariumWebserver.py:186 terrariumWebserver.py:189
 msgid "OK!"
 msgstr ""
 
-#: terrariumWebserver.py:185 terrariumWebserver.py:188
+#: terrariumWebserver.py:186 terrariumWebserver.py:189
 msgid "Player command executed!"
 msgstr ""
 
-#: terrariumWebserver.py:197
+#: terrariumWebserver.py:198
 msgid "File is not uploaded!"
 msgstr ""
 
-#: terrariumWebserver.py:202 terrariumWebserver.py:212
+#: terrariumWebserver.py:203 terrariumWebserver.py:213
 msgid "Success!"
 msgstr ""
 
-#: terrariumWebserver.py:209
+#: terrariumWebserver.py:210
 msgid "Action could not be satisfied"
 msgstr ""
 
-#: terrariumWebserver.py:212
+#: terrariumWebserver.py:213
 msgid "Audio file is deleted"
 msgstr ""
 
-#: terrariumWebserver.py:217
+#: terrariumWebserver.py:218
 msgid "Data could not be saved"
 msgstr ""
 
-#: terrariumWebserver.py:225
+#: terrariumWebserver.py:226
 msgid "Data saved"
 msgstr ""
 
-#: terrariumWebserver.py:226
+#: terrariumWebserver.py:227
 msgid "Your changes are saved"
 msgstr ""
 
-#: terrariumWebserver.py:318 views/inc/menu.tpl:146
+#: terrariumWebserver.py:319 views/inc/menu.tpl:146
 msgid "Log out"
 msgstr ""
 
-#: terrariumWebserver.py:319
+#: terrariumWebserver.py:320
 msgid "You are now logged out"
 msgstr ""
 
@@ -2136,10 +2140,6 @@ msgid "Either add audio files and playlists. Or you have a pwm-dimmer switch con
 msgstr ""
 
 #: Missing text string
-msgid "error"
-msgstr ""
-
-#: Missing text string
 msgid "Free memory"
 msgstr ""
 
@@ -2221,10 +2221,6 @@ msgstr ""
 
 #: Missing text string
 msgid "Sensors overview screenshot"
-msgstr ""
-
-#: Missing text string
-msgid "success"
 msgstr ""
 
 #: Missing text string
