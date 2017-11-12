@@ -76,6 +76,25 @@
             </div>
           </div>
         </div>
+
+        <div class="modal fade preview_player" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+          <div class="modal-dialog modal-sm" style="width:30%">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('.modal.fade.preview_player .modal-body p').html('')"><span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">{{_('Preview player')}}</h4>
+              </div>
+              <div class="modal-body">
+                <h4>...</h4>
+                <p>...</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('.modal.fade.preview_player .modal-body p').html('')">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <script type="text/javascript">
           $(document).ready(function() {
             $('.dropzone').dropzone({ url: this.action,
@@ -107,7 +126,7 @@
               },
               columns: [
                 { data: null, render: function(value) {return '';}, orderable: false },
-                { data: 'id', render: function(value,type,data) {return '<span class="glyphicon glyphicon-trash" aria-hidden="true" onclick="delete_audio_file(\'' + value + '\',\'' + data.name + '\')" title="{{_('Delete file')}} ' + data.name + '"></span> <span class="glyphicon glyphicon-play" aria-hidden="true"></span>';} },
+                { data: 'id', render: function(value,type,data) {return '<span class="glyphicon glyphicon-trash" aria-hidden="true" onclick="delete_audio_file(\'' + value + '\',\'' + data.name + '\')" title="{{_('Delete file')}} ' + data.name + '"></span> <span class="glyphicon glyphicon-play" aria-hidden="true" data-toggle="modal" data-target=".preview_player" onclick="preview_audio_file(\'' + value + '\',\'' + data.name + '\')" title="{{_('Preview file')}} ' + data.name + '"></span>';} },
                 { data: 'name' },
                 { data: 'size',          render: function(value) {return formatBytes(value);}},
                 { data: 'uploaddate',    render: function(value) {return moment(value * 1000).format('LLL');}},

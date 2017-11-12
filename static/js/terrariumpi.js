@@ -1423,6 +1423,13 @@ function load_player_status() {
   });
 }
 
+function preview_audio_file(audio_file_id, audio_file_name) {
+  var modal = $('.modal.fade.preview_player');
+  modal.find('.modal-body h4').text(audio_file_name);
+  modal.find('.modal-body p').html('<audio controls><source src="/audio/' + audio_file_name + '" /></audio>');
+}
+
+
 function delete_audio_file(audio_file_id, audio_file_name) {
   if (confirm('{{_('Are you sure to delete the file')}}: \'' + audio_file_name + '\' ?')) {
     $.ajax({

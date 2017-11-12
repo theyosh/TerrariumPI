@@ -2,10 +2,15 @@ Changelog
 =========
 
 
-3.1.0 (2017-11-11)
+(unreleased)
 ------------
 
 **New**
+- Add audio usage page. [TheYOSH]
+- Add better configuration upgrading and logging. [TheYOSH]
+- Add disk usage stats and graphs. [TheYOSH]
+- Add automatic database upgrades during startup. [TheYOSH]
+- Add disk stats part1. [TheYOSH]
 - Add soundcard selection which adds the option to use USB soundscards.
   [TheYOSH]
 - Added player and dimmer switch warning to power switch settings page
@@ -25,6 +30,12 @@ Changelog
 - Add extra information when rebooting. [TheYOSH]
 
 **Fixes**
+- Small fixes. [TheYOSH]
+- Small fixes. [TheYOSH]
+- Fix logging for saving new doors. [TheYOSH]
+- Fix logging for saving new switches. [TheYOSH]
+- Fix audio playlists reloading. [TheYOSH]
+- Fix notification message color. [TheYOSH]
 - Fix switch toggleing. [TheYOSH]
 - Fix HTML in dutch translation. [TheYOSH]
 - Fix dimmer detection. [TheYOSH]
@@ -39,6 +50,13 @@ Changelog
 - Fix [#36](https://github.com/theyosh/TerrariumPI/issues/36). [TheYOSH]
 
 **Updates**
+- Update logging. [TheYOSH]
+- Update logging. [TheYOSH]
+- Update disk and memory graphs. [TheYOSH]
+- Update language configuration variable. [TheYOSH]
+- Update translations. [TheYOSH]
+- Update logging. [TheYOSH]
+- Update changelog. [TheYOSH]
 - Update module fancybox. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update readme documentation. [TheYOSH]
@@ -54,6 +72,11 @@ Changelog
 - Update with remote master. [TheYOSH]
 
 **Other**
+- Remove debug. [TheYOSH]
+- Log volume changes. [TheYOSH]
+- Better DHT sensor warnings. [TheYOSH]
+- Max timeout DHT senors is 10 seconds. [TheYOSH]
+- Code cleanup. [TheYOSH]
 - Cleanup Audio player code. [TheYOSH]
 - Remove debug. [TheYOSH]
 - Merge branch 'master' into feature/audio_modules. [TheYOSH]
@@ -578,3 +601,5 @@ Changelog
 - Typo. [TheYOSH]
 - Moved door status to own page. [TheYOSH]
 - Use system default pip. [TheYOSH]
+
+
