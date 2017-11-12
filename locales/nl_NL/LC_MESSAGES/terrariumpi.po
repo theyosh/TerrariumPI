@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2017-11-12 01:24+0100\n"
-"PO-Revision-Date: 2017-11-12 01:25+0100\n"
+"POT-Creation-Date: 2017-11-12 11:23+0100\n"
+"PO-Revision-Date: 2017-11-12 11:23+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -845,7 +845,7 @@ msgid "Add"
 msgstr "Voeg toe"
 
 #: views/dashboard.tpl:7 views/inc/usage_dashboard.tpl:87
-#: views/system_status.tpl:174
+#: views/system_status.tpl:230
 msgid "Uptime"
 msgstr "Actief"
 
@@ -905,8 +905,8 @@ msgstr "Omgeving"
 #: views/system_environment.tpl:99 views/system_environment.tpl:172
 #: views/system_environment.tpl:247 views/system_status.tpl:32
 #: views/system_status.tpl:88 views/system_status.tpl:144
-#: views/system_status.tpl:200 views/weather_forecast.tpl:16
-#: views/webcam.tpl:16
+#: views/system_status.tpl:200 views/system_status.tpl:256
+#: views/weather_forecast.tpl:16 views/webcam.tpl:16
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -991,7 +991,7 @@ msgstr "Gemiddelde luchtvochtigheid"
 #: views/inc/sensor_list.tpl:12 views/inc/usage_dashboard.tpl:169
 #: views/inc/usage_doors.tpl:21 views/inc/usage_sensors.tpl:25
 #: views/system_status.tpl:6 views/system_status.tpl:62
-#: views/system_status.tpl:118
+#: views/system_status.tpl:118 views/system_status.tpl:174
 msgid "warning"
 msgstr "waarschuwing"
 
@@ -1002,6 +1002,7 @@ msgstr "waarschuwing"
 #: views/inc/usage_webcams.tpl:29 views/switch_status.tpl:17
 #: views/system_status.tpl:15 views/system_status.tpl:71
 #: views/system_status.tpl:127 views/system_status.tpl:183
+#: views/system_status.tpl:239
 msgid "Day"
 msgstr "Dag"
 
@@ -1011,7 +1012,7 @@ msgstr "Dag"
 #: views/inc/usage_switches.tpl:34 views/inc/usage_webcams.tpl:32
 #: views/switch_status.tpl:20 views/system_status.tpl:18
 #: views/system_status.tpl:74 views/system_status.tpl:130
-#: views/system_status.tpl:186
+#: views/system_status.tpl:186 views/system_status.tpl:242
 msgid "Week"
 msgstr "Week"
 
@@ -1021,7 +1022,7 @@ msgstr "Week"
 #: views/inc/usage_switches.tpl:37 views/inc/usage_webcams.tpl:35
 #: views/switch_status.tpl:23 views/system_status.tpl:21
 #: views/system_status.tpl:77 views/system_status.tpl:133
-#: views/system_status.tpl:189
+#: views/system_status.tpl:189 views/system_status.tpl:245
 msgid "Month"
 msgstr "Maand"
 
@@ -1031,7 +1032,7 @@ msgstr "Maand"
 #: views/inc/usage_switches.tpl:40 views/inc/usage_webcams.tpl:38
 #: views/switch_status.tpl:26 views/system_status.tpl:24
 #: views/system_status.tpl:80 views/system_status.tpl:136
-#: views/system_status.tpl:192
+#: views/system_status.tpl:192 views/system_status.tpl:248
 msgid "Year"
 msgstr "Jaar"
 
@@ -2689,6 +2690,10 @@ msgstr "Processor temperatuur"
 msgid "Memory usage"
 msgstr "Geheugen verbruik"
 
+#: views/system_status.tpl:174
+msgid "Disk usage"
+msgstr "Harde schijf gebruik"
+
 #: views/weather_forecast.tpl:39
 msgid "City"
 msgstr "Stad"
@@ -2818,6 +2823,10 @@ msgid "Free memory"
 msgstr "Vrij geheugen"
 
 #: Missing text string
+msgid "Free space"
+msgstr "Vrije ruimte"
+
+#: Missing text string
 msgid "Github"
 msgstr "Github"
 
@@ -2926,6 +2935,10 @@ msgid "Total open for"
 msgstr "In totaal open"
 
 #: Missing text string
+msgid "Total space"
+msgstr "Totale ruimte"
+
+#: Missing text string
 msgid "Universal AC MAINS Dimmer - MPDMv4.1"
 msgstr "Universal AC MAINS Dimmer - MPDMv4.1"
 
@@ -2940,6 +2953,10 @@ msgstr "USB Webcam"
 #: Missing text string
 msgid "Used memory"
 msgstr "Gebruikt geheugen"
+
+#: Missing text string
+msgid "Used space"
+msgstr "Gebruikte ruimte"
 
 #: Missing text string
 msgid "Weather day forecast screenshot"
