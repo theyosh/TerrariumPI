@@ -2,7 +2,15 @@
 import ConfigParser
 from glob import glob
 
+from terrariumUtils import terrariumUtils
+
+import logging
+logger = logging.getLogger(__name__)
+
 class terrariumConfig:
+  DEFAULT_CONFIG = 'defaults.cfg'
+  CUSTOM_CONFIG = 'settings.cfg'
+
   '''Class for loading the configuration for terrariumPI software.
      The configuration is based on two configuration files.
      - default.cfg holds system defaults for first run
@@ -15,69 +23,90 @@ class terrariumConfig:
 
   def __init__(self):
     '''Load terrariumPI config object'''
-    self.__defaults_file = 'defaults.cfg'
-    self.__config_file = 'settings.cfg'
-
+    logger.info('Setting up configuration')
     self.__cache_available_languages = None
 
     self.__config = ConfigParser.SafeConfigParser()
     # Read defaults config file
-    self.__config.readfp(open(self.__defaults_file))
+    self.__config.readfp(open(terrariumConfig.DEFAULT_CONFIG))
+    logger.info('Loaded default settings from %s' % (terrariumConfig.DEFAULT_CONFIG,))
 
     # Read new version number
     version = self.get_system()['version']
     # Read custom config file
-    self.__config.read(self.__config_file)
-    # Update version number
-    self.__config.set('terrariumpi', 'version', str(version))
-
-    self.__upgrade_config()
+    self.__config.read(terrariumConfig.CUSTOM_CONFIG)
+    logger.info('Loaded custom settings from %s' % (terrariumConfig.CUSTOM_CONFIG,))
+    # Upgrade config and save new version number
+    self.__upgrade_config(version)
+    logger.info('TerrariumPI Config is ready')
 
   # Private functions
-  def __upgrade_config(self):
-    upgrade = False
+  def __upgrade_config(self,to_version):
+    # Set minimal version to 3.0.0
+    current_version = 300
+    new_version = int(to_version.replace('.',''))
+    if int(self.get_system()['version'].replace('.','')) >= current_version:
+      current_version = int(self.get_system()['version'].replace('.',''))
 
-    # Upgrade: Move temperature indicator from weather to system
-    temperature_indicator = self.__get_config('weather')
-    if 'temperature' in temperature_indicator:
-      self.__config.set('terrariumpi', 'temperature_indicator', str(temperature_indicator['temperature']))
-      self.__config.remove_option('weather','temperature')
-      upgrade = True
+    if not current_version < new_version:
+      logger.info('Configuration is up to date')
+    else:
+      logger.info('Configuration is out of date. Running updates from %s to %s' % (current_version,new_version))
+      for version in xrange(current_version+1,new_version+1):
+        if version == 300:
+          logger.info('Updating configuration file to version: %s' % (version,))
+          # Upgrade: Move temperature indicator from weather to system
+          temperature_indicator = self.__get_config('weather')
+          if 'temperature' in temperature_indicator:
+            self.__config.set('terrariumpi', 'temperature_indicator', str(temperature_indicator['temperature']))
+            self.__config.remove_option('weather','temperature')
 
-    # Upgrade: Change profile image path to new path and config location
-    data = self.__get_config('terrariumpi')
-    if 'image' in data and '/static/images/gecko.jpg' == data['image']:
-      self.__config.set('profile', 'image', '/static/images/profile_image.jpg')
-      self.__config.remove_option('terrariumpi','image')
-      upgrade = True
+          # Upgrade: Change profile image path to new path and config location
+          data = self.__get_config('terrariumpi')
+          if 'image' in data and '/static/images/gecko.jpg' == data['image']:
+            self.__config.set('profile', 'image', '/static/images/profile_image.jpg')
+            self.__config.remove_option('terrariumpi','image')
 
-    # Upgrade: Change profile name path to new config location
-    data = self.__get_config('terrariumpi')
-    if 'person' in data:
-      self.__config.set('profile', 'name', data['person'])
-      self.__config.remove_option('terrariumpi','person')
-      upgrade = True
+          # Upgrade: Change profile name path to new config location
+          data = self.__get_config('terrariumpi')
+          if 'person' in data:
+            self.__config.set('profile', 'name', data['person'])
+            self.__config.remove_option('terrariumpi','person')
 
-    # Upgrade: Remove default available languages variable
-    data = self.__get_config('terrariumpi')
-    if 'available_languages' in data:
-      self.__config.remove_option('terrariumpi','available_languages')
-      upgrade = True
+          # Upgrade: Remove default available languages variable
+          data = self.__get_config('terrariumpi')
+          if 'available_languages' in data:
+            self.__config.remove_option('terrariumpi','available_languages')
 
-    # Upgrade: Rename active_language to just language
-    data = self.__get_config('terrariumpi')
-    if 'active_language' in data:
-      self.__config.set('terrariumpi', 'language', data['active_language'])
-      self.__config.remove_option('terrariumpi','active_language')
-      upgrade = True
+        elif version == 310:
+          logger.info('Updating configuration file to version: %s' % (version,))
+          # Upgrade: Rename active_language to just language
+          data = self.__get_config('terrariumpi')
+          if 'active_language' in data:
+            self.__config.set('terrariumpi', 'language', data['active_language'])
+            self.__config.remove_option('terrariumpi','active_language')
 
-    if upgrade:
+          # Update the GPIO pinnumbering for PWM dimmers and DHT like sensors
+          for section in self.__config.sections():
+            if section[:6] == 'sensor':
+              sensor_data = self.__get_config(section)
+              if 'dht' in sensor_data['hardwaretype'] or 'am2302' == sensor_data['hardwaretype']:
+                self.__config.set(section, 'address', str(terrariumUtils.to_BOARD_port_number(sensor_data['address'])))
+
+            if section[:6] == 'switch':
+              switch_data = self.__get_config(section)
+              if 'pwm-dimmer' == switch_data['hardwaretype']:
+                self.__config.set(section, 'address', str(terrariumUtils.to_BOARD_port_number(switch_data['address'])))
+
+      # Update version number
+      self.__config.set('terrariumpi', 'version', str(to_version))
       self.__save_config()
-      self.__config.read(self.__config_file)
+      self.__config.read(terrariumConfig.CUSTOM_CONFIG)
+      logger.info('Updated configuration. Set version to: %s' % (to_version,))
 
   def __save_config(self):
     '''Write terrariumPI config to settings.cfg file'''
-    with open(self.__config_file, 'wb') as configfile:
+    with open(terrariumConfig.CUSTOM_CONFIG, 'wb') as configfile:
       self.__config.write(configfile)
 
     return True
