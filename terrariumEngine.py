@@ -513,7 +513,10 @@ class terrariumEngine():
     for doordata in data:
       if doordata['id'] is None or doordata['id'] == 'None' or doordata['id'] not in self.doors:
         # New switch (add)
-        door = terrariumDoor(None,doordata['hardwaretype'],doordata['address'])
+        door = terrariumDoor(None,
+                             doordata['hardwaretype'],
+                             doordata['address'],
+                             doordata['name'])
       else:
         # Existing door
         door = self.doors[doordata['id']]
