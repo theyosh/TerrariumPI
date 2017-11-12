@@ -22,6 +22,9 @@
                   <a aria-expanded="false" data-toggle="tab" href="#usage-tab-webcam" id="usage_tab_webcam" role="tab"><i class="fa fa-video-camera"></i> {{_('Webcam')}}</a>
                 </li>
                 <li class="" role="presentation">
+                  <a aria-expanded="false" data-toggle="tab" href="#usage-tab-audio" id="usage_tab_audio" role="tab"><i class="fa fa-music"></i> {{_('Audio')}}</a>
+                </li>
+                <li class="" role="presentation">
                   <a aria-expanded="false" data-toggle="tab" href="#usage-tab-environment" id="usage_tab_system" role="tab"><i class="fa fa-lightbulb-o"></i> {{_('Environment')}}</a>
                 </li>
               </ul>
@@ -40,6 +43,9 @@
                 </div>
                 <div aria-labelledby="usage_tab_doors" class="tab-pane fade" id="usage-tab-doors" role="tabpanel">
                   % include('inc/usage_doors.tpl')
+                </div>
+                <div aria-labelledby="usage_tab_audio" class="tab-pane fade" id="usage-tab-audio" role="tabpanel">
+                  % include('inc/usage_audio.tpl')
                 </div>
                 <div aria-labelledby="usage_tab_webcam" class="tab-pane fade" id="usage-tab-webcam" role="tabpanel">
                   % include('inc/usage_webcams.tpl')
