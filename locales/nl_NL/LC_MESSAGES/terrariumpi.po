@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2017-11-11 18:26+0100\n"
-"PO-Revision-Date: 2017-11-11 20:54+0100\n"
+"POT-Creation-Date: 2017-11-12 01:24+0100\n"
+"PO-Revision-Date: 2017-11-12 01:25+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -587,74 +587,78 @@ msgstr "Bevat een kleine beschrijving over het dier."
 msgid "Holds a link to more information."
 msgstr "Bevat een link naar meer informatie."
 
+#: terrariumWebcam.py:216
+msgid "Offline since"
+msgstr "Offline sinds"
+
 #: terrariumWebserver.py:81 terrariumWebserver.py:87 terrariumWebserver.py:93
-#: terrariumWebserver.py:98 terrariumWebserver.py:104 terrariumWebserver.py:110
-#: terrariumWebserver.py:116
+#: terrariumWebserver.py:99 terrariumWebserver.py:105 terrariumWebserver.py:111
+#: terrariumWebserver.py:117
 msgid "Authenticate to make any changes"
 msgstr "Login om wijzigingen te kunnen maken"
 
 #: terrariumWebserver.py:81 terrariumWebserver.py:87 terrariumWebserver.py:93
-#: terrariumWebserver.py:98 terrariumWebserver.py:104 terrariumWebserver.py:110
-#: terrariumWebserver.py:116
+#: terrariumWebserver.py:99 terrariumWebserver.py:105 terrariumWebserver.py:111
+#: terrariumWebserver.py:117
 msgid "Authentication"
 msgstr "Authenticatie"
 
 #: terrariumWebserver.py:81 terrariumWebserver.py:87 terrariumWebserver.py:93
-#: terrariumWebserver.py:98 terrariumWebserver.py:104 terrariumWebserver.py:110
-#: terrariumWebserver.py:116 views/system_settings.tpl:23
+#: terrariumWebserver.py:99 terrariumWebserver.py:105 terrariumWebserver.py:111
+#: terrariumWebserver.py:117 views/system_settings.tpl:23
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:177
+#: terrariumWebserver.py:178
 msgid "Player command could ot be executed!"
 msgstr "De audio speler commando kon niet worden uitgevoerd!"
 
-#: terrariumWebserver.py:177 terrariumWebserver.py:197
-#: terrariumWebserver.py:209 terrariumWebserver.py:217
+#: terrariumWebserver.py:178 terrariumWebserver.py:198
+#: terrariumWebserver.py:210 terrariumWebserver.py:218
 msgid "Error!"
 msgstr "Fout!"
 
-#: terrariumWebserver.py:185 terrariumWebserver.py:188
+#: terrariumWebserver.py:186 terrariumWebserver.py:189
 msgid "OK!"
 msgstr "OK!"
 
-#: terrariumWebserver.py:185 terrariumWebserver.py:188
+#: terrariumWebserver.py:186 terrariumWebserver.py:189
 msgid "Player command executed!"
 msgstr "De audio speler commando is uitgevoerd!"
 
-#: terrariumWebserver.py:197
+#: terrariumWebserver.py:198
 msgid "File is not uploaded!"
 msgstr "Bestand is niet geüpload!"
 
-#: terrariumWebserver.py:202 terrariumWebserver.py:212
+#: terrariumWebserver.py:203 terrariumWebserver.py:213
 msgid "Success!"
 msgstr "Success!"
 
-#: terrariumWebserver.py:209
+#: terrariumWebserver.py:210
 msgid "Action could not be satisfied"
 msgstr "Actie kon niet worden uitgevoerd"
 
-#: terrariumWebserver.py:212
+#: terrariumWebserver.py:213
 msgid "Audio file is deleted"
 msgstr "Audio bestand is verwijderd"
 
-#: terrariumWebserver.py:217
+#: terrariumWebserver.py:218
 msgid "Data could not be saved"
 msgstr "Data kon niet worden opgeslagen"
 
-#: terrariumWebserver.py:225
+#: terrariumWebserver.py:226
 msgid "Data saved"
 msgstr "Data is opgeslagen"
 
-#: terrariumWebserver.py:226
+#: terrariumWebserver.py:227
 msgid "Your changes are saved"
 msgstr "Je wijzigingen zijn opgeslagen"
 
-#: terrariumWebserver.py:318 views/inc/menu.tpl:146
+#: terrariumWebserver.py:319 views/inc/menu.tpl:146
 msgid "Log out"
 msgstr "Log uit"
 
-#: terrariumWebserver.py:319
+#: terrariumWebserver.py:320
 msgid "You are now logged out"
 msgstr "Je bent nu uitgelogd"
 
@@ -2810,10 +2814,6 @@ msgstr ""
 "schakelaar ingesteld."
 
 #: Missing text string
-msgid "error"
-msgstr "error"
-
-#: Missing text string
 msgid "Free memory"
 msgstr "Vrij geheugen"
 
@@ -2896,10 +2896,6 @@ msgstr "Sensor geschiedenis grafiek"
 #: Missing text string
 msgid "Sensors overview screenshot"
 msgstr "Sensoren overzicht screenshot"
-
-#: Missing text string
-msgid "success"
-msgstr "succes"
 
 #: Missing text string
 msgid "Switches overview screenshot"
@@ -3012,6 +3008,12 @@ msgstr "Systeem omgeving"
 #: Missing text string
 msgid "System settings"
 msgstr "Systeem instellingen"
+
+#~ msgid "error"
+#~ msgstr "error"
+
+#~ msgid "success"
+#~ msgstr "succes"
 
 #~ msgid ""
 #~ "Holds the sensor address. Depending on hardware type, it is either a read "

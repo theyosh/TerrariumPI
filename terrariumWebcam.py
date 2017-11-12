@@ -213,7 +213,7 @@ class terrariumWebcam():
     mask = Image.open('static/images/mask_offline.png')
     draw = ImageDraw.Draw(mask)
     font = ImageFont.truetype('fonts/DejaVuSans.ttf',40)
-    text = ['Offline since:',datetime.datetime.now().strftime("%A %d %B %Y"),datetime.datetime.now().strftime("%H:%M:%S")]
+    text = [_('Offline since') + ':',datetime.datetime.now().strftime("%A %d %B %Y"),datetime.datetime.now().strftime("%H:%M:%S")]
     draw_text_center(mask,draw,text,font)
 
     mask_width, mask_height = mask.size

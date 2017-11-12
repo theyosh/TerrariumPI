@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2017-11-11 18:26+CET\n"
-"PO-Revision-Date: 2017-11-11 18:26+0100\n"
+"POT-Creation-Date: 2017-11-12 01:24+CET\n"
+"PO-Revision-Date: 2017-11-12 01:24+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -375,75 +375,79 @@ msgstr "Holds a small description about the animal."
 msgid "Holds a link to more information."
 msgstr "Holds a link to more information."
 
+#: terrariumWebcam.py:216
+msgid "Offline since"
+msgstr "Offline since"
+
 #: terrariumWebserver.py:81 terrariumWebserver.py:87 terrariumWebserver.py:93
-#: terrariumWebserver.py:98 terrariumWebserver.py:104
-#: terrariumWebserver.py:110 terrariumWebserver.py:116
+#: terrariumWebserver.py:99 terrariumWebserver.py:105
+#: terrariumWebserver.py:111 terrariumWebserver.py:117
 msgid "Authenticate to make any changes"
 msgstr "Authenticate to make any changes"
 
 #: terrariumWebserver.py:81 terrariumWebserver.py:87 terrariumWebserver.py:93
-#: terrariumWebserver.py:98 terrariumWebserver.py:104
-#: terrariumWebserver.py:110 terrariumWebserver.py:116
+#: terrariumWebserver.py:99 terrariumWebserver.py:105
+#: terrariumWebserver.py:111 terrariumWebserver.py:117
 msgid "Authentication"
 msgstr "Authentication"
 
 #: terrariumWebserver.py:81 terrariumWebserver.py:87 terrariumWebserver.py:93
-#: terrariumWebserver.py:98 terrariumWebserver.py:104
-#: terrariumWebserver.py:110 terrariumWebserver.py:116
+#: terrariumWebserver.py:99 terrariumWebserver.py:105
+#: terrariumWebserver.py:111 terrariumWebserver.py:117
 #: views/system_settings.tpl:23
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:177
+#: terrariumWebserver.py:178
 msgid "Player command could ot be executed!"
 msgstr "Player command could ot be executed!"
 
-#: terrariumWebserver.py:177 terrariumWebserver.py:197
-#: terrariumWebserver.py:209 terrariumWebserver.py:217
+#: terrariumWebserver.py:178 terrariumWebserver.py:198
+#: terrariumWebserver.py:210 terrariumWebserver.py:218
 msgid "Error!"
 msgstr "Error!"
 
-#: terrariumWebserver.py:185 terrariumWebserver.py:188
+#: terrariumWebserver.py:186 terrariumWebserver.py:189
 msgid "OK!"
 msgstr "OK!"
 
-#: terrariumWebserver.py:185 terrariumWebserver.py:188
+#: terrariumWebserver.py:186 terrariumWebserver.py:189
 msgid "Player command executed!"
 msgstr "Player command executed!"
 
-#: terrariumWebserver.py:197
+#: terrariumWebserver.py:198
 msgid "File is not uploaded!"
 msgstr "File is not uploaded!"
 
-#: terrariumWebserver.py:202 terrariumWebserver.py:212
+#: terrariumWebserver.py:203 terrariumWebserver.py:213
 msgid "Success!"
 msgstr "Success!"
 
-#: terrariumWebserver.py:209
+#: terrariumWebserver.py:210
 msgid "Action could not be satisfied"
 msgstr "Action could not be satisfied"
 
-#: terrariumWebserver.py:212
+#: terrariumWebserver.py:213
 msgid "Audio file is deleted"
 msgstr "Audio file is deleted"
 
-#: terrariumWebserver.py:217
+#: terrariumWebserver.py:218
 msgid "Data could not be saved"
 msgstr "Data could not be saved"
 
-#: terrariumWebserver.py:225
+#: terrariumWebserver.py:226
 msgid "Data saved"
 msgstr "Data saved"
 
-#: terrariumWebserver.py:226
+#: terrariumWebserver.py:227
 msgid "Your changes are saved"
 msgstr "Your changes are saved"
 
-#: terrariumWebserver.py:318 views/inc/menu.tpl:146
+#: terrariumWebserver.py:319 views/inc/menu.tpl:146
 msgid "Log out"
 msgstr "Log out"
 
-#: terrariumWebserver.py:319
+#: terrariumWebserver.py:320
 msgid "You are now logged out"
 msgstr "You are now logged out"
 
@@ -2137,10 +2141,6 @@ msgid "Either add audio files and playlists. Or you have a pwm-dimmer switch con
 msgstr "Either add audio files and playlists. Or you have a pwm-dimmer switch configured."
 
 #: Missing text string
-msgid "error"
-msgstr "error"
-
-#: Missing text string
 msgid "Free memory"
 msgstr "Free memory"
 
@@ -2223,10 +2223,6 @@ msgstr "Sensor history graph"
 #: Missing text string
 msgid "Sensors overview screenshot"
 msgstr "Sensors overview screenshot"
-
-#: Missing text string
-msgid "success"
-msgstr "success"
 
 #: Missing text string
 msgid "Switches overview screenshot"
