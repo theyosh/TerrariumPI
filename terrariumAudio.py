@@ -145,10 +145,12 @@ class terrariumAudioPlayer():
       try:
         value = int(value)
       except Exception, ex:
-        pass
+        value = -1
 
       if 0 <= value <= 100:
+        oldvalue = self.get_volume()
         self.__audio_mixer.setvolume(value,alsaaudio.MIXER_CHANNEL_ALL)
+        logger.info('Changed volume from %s to %s' % (oldvalue,self.get_volume()))
 
   def volume_up(self):
     if self.__audio_mixer is not None:
