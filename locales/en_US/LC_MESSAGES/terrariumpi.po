@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2017-11-12 11:23+CET\n"
-"PO-Revision-Date: 2017-11-12 11:23+0100\n"
+"POT-Creation-Date: 2017-11-12 18:09+CET\n"
+"PO-Revision-Date: 2017-11-12 18:09+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -539,6 +539,10 @@ msgstr "Channels"
 msgid "Frequency"
 msgstr "Frequency"
 
+#: views/audio_files.tpl:85
+msgid "Preview player"
+msgstr "Preview player"
+
 #: views/audio_playlist.tpl:16
 msgid "Here you can configure your audio playlists."
 msgstr "Here you can configure your audio playlists."
@@ -661,7 +665,7 @@ msgstr "Current"
 
 #: views/dashboard.tpl:62 views/inc/menu.tpl:112
 #: views/inc/usage_dashboard.tpl:118 views/inc/usage_dashboard.tpl:211
-#: views/usage.tpl:25
+#: views/usage.tpl:28
 msgid "Environment"
 msgstr "Environment"
 
@@ -820,7 +824,7 @@ msgid "Here you can configure your doors."
 msgstr "Here you can configure your doors."
 
 #: views/door_settings.tpl:19 views/door_settings.tpl:70 views/hardware.tpl:7
-#: views/hardware.tpl:27 views/inc/menu.tpl:134 views/inc/usage_doors.tpl:98
+#: views/hardware.tpl:30 views/inc/menu.tpl:134 views/inc/usage_doors.tpl:98
 #: views/inc/usage_doors.tpl:119 views/inc/usage_sensors.tpl:108
 #: views/inc/usage_sensors.tpl:162 views/inc/usage_switches.tpl:103
 #: views/inc/usage_switches.tpl:134 views/sensor_settings.tpl:19
@@ -846,7 +850,7 @@ msgstr "Add new door sensor"
 msgid "Door sensor"
 msgstr "Door sensor"
 
-#: views/door_settings.tpl:73 views/hardware.tpl:63 views/hardware.tpl:88
+#: views/door_settings.tpl:73 views/hardware.tpl:66 views/hardware.tpl:91
 #: views/inc/usage_doors.tpl:101 views/inc/usage_switches.tpl:107
 #: views/switch_settings.tpl:83
 msgid "GPIO"
@@ -856,21 +860,21 @@ msgstr "GPIO"
 msgid "Door status"
 msgstr "Door status"
 
-#: views/hardware.tpl:10 views/hardware.tpl:44
+#: views/hardware.tpl:10 views/hardware.tpl:47
 msgid "Raspberry Pi"
 msgstr "Raspberry Pi"
 
-#: views/hardware.tpl:13 views/hardware.tpl:50 views/inc/menu.tpl:43
+#: views/hardware.tpl:13 views/hardware.tpl:53 views/inc/menu.tpl:43
 #: views/usage.tpl:13
 msgid "Sensors"
 msgstr "Sensors"
 
-#: views/hardware.tpl:16 views/hardware.tpl:84 views/inc/menu.tpl:57
+#: views/hardware.tpl:16 views/hardware.tpl:87 views/inc/menu.tpl:57
 #: views/usage.tpl:16
 msgid "Switches"
 msgstr "Switches"
 
-#: views/hardware.tpl:19 views/hardware.tpl:116 views/inc/menu.tpl:68
+#: views/hardware.tpl:19 views/hardware.tpl:119 views/inc/menu.tpl:68
 #: views/usage.tpl:19
 msgid "Doors"
 msgstr "Doors"
@@ -879,148 +883,157 @@ msgstr "Doors"
 msgid "Webcams"
 msgstr "Webcams"
 
-#: views/hardware.tpl:28
+#: views/hardware.tpl:25 views/hardware.tpl:138 views/inc/menu.tpl:90
+#: views/usage.tpl:25
+msgid "Audio"
+msgstr "Audio"
+
+#: views/hardware.tpl:31
 msgid "Hover over the image below to read more about the supported hardware."
 msgstr "Hover over the image below to read more about the supported hardware."
 
-#: views/hardware.tpl:45
+#: views/hardware.tpl:48
 msgid "TerrariumPI software is designed to run on a Raspberry Pi. It has been tested on a Raspberry Pi 2 and 3 with %s. Raspberry Pi Zero is not tested."
 msgstr "TerrariumPI software is designed to run on a Raspberry Pi. It has been tested on a Raspberry Pi 2 and 3 with %s. Raspberry Pi Zero is not tested."
 
-#: views/hardware.tpl:45 views/info.tpl:34
+#: views/hardware.tpl:48 views/info.tpl:34
 msgid "Raspbian OS"
 msgstr "Raspbian OS"
 
-#: views/hardware.tpl:46
+#: views/hardware.tpl:49
 msgid "The Raspberry Pi should have network connection and optionally SSH enabled for remote management. Also a strong power adapter is needed (+2Amps)."
 msgstr "The Raspberry Pi should have network connection and optionally SSH enabled for remote management. Also a strong power adapter is needed (+2Amps)."
 
-#: views/hardware.tpl:51
+#: views/hardware.tpl:54
 msgid "TerrariumPI software has support for different kind of sensors. The following sensors below are tested with TerrariumPI software."
 msgstr "TerrariumPI software has support for different kind of sensors. The following sensors below are tested with TerrariumPI software."
 
-#: views/hardware.tpl:54 views/inc/usage_sensors.tpl:115
+#: views/hardware.tpl:57 views/inc/usage_sensors.tpl:115
 #: views/sensor_settings.tpl:94
 msgid "1Wire"
 msgstr "1Wire"
 
-#: views/hardware.tpl:55
+#: views/hardware.tpl:58
 msgid "The 1wire bus will be scanned automatically during start up to load the connected and supported sensors. The DS18B20 sensors can share the GPIO pin by putting the sensors in parallel."
 msgstr "The 1wire bus will be scanned automatically during start up to load the connected and supported sensors. The DS18B20 sensors can share the GPIO pin by putting the sensors in parallel."
 
-#: views/hardware.tpl:56
+#: views/hardware.tpl:59
 msgid "Through the 1wire bus of the Raspberry Pi you can use the following hardware sensors"
 msgstr "Through the 1wire bus of the Raspberry Pi you can use the following hardware sensors"
 
-#: views/hardware.tpl:58 views/hardware.tpl:78
+#: views/hardware.tpl:61 views/hardware.tpl:81
 msgid "DS18B20"
 msgstr "DS18B20"
 
-#: views/hardware.tpl:64
+#: views/hardware.tpl:67
 msgid "GPIO sensors has to added manually to TerrariumPI software. That can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra resistor"
 msgstr "GPIO sensors has to added manually to TerrariumPI software. That can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra resistor"
 
-#: views/hardware.tpl:65
+#: views/hardware.tpl:68
 msgid "Through the GPIO bus of the Raspberry Pi you can use the following hardware sensors"
 msgstr "Through the GPIO bus of the Raspberry Pi you can use the following hardware sensors"
 
-#: views/hardware.tpl:67 views/inc/usage_sensors.tpl:112
+#: views/hardware.tpl:70 views/inc/usage_sensors.tpl:112
 #: views/sensor_settings.tpl:91
 msgid "DHT11"
 msgstr "DHT11"
 
-#: views/hardware.tpl:68 views/inc/usage_sensors.tpl:113
+#: views/hardware.tpl:71 views/inc/usage_sensors.tpl:113
 #: views/sensor_settings.tpl:92
 msgid "DHT22"
 msgstr "DHT22"
 
-#: views/hardware.tpl:69 views/inc/usage_sensors.tpl:114
+#: views/hardware.tpl:72 views/inc/usage_sensors.tpl:114
 #: views/sensor_settings.tpl:93
 msgid "AM2302"
 msgstr "AM2302"
 
-#: views/hardware.tpl:74 views/inc/usage_sensors.tpl:111
+#: views/hardware.tpl:77 views/inc/usage_sensors.tpl:111
 #: views/sensor_settings.tpl:90
 msgid "OWFS"
 msgstr "OWFS"
 
-#: views/hardware.tpl:75
+#: views/hardware.tpl:78
 msgid "The OWFS server will be scanned automatically during start up to load the connected and supported sensors. There can be all kind of sensors connected to this server. All supported sensors will be shown."
 msgstr "The OWFS server will be scanned automatically during start up to load the connected and supported sensors. There can be all kind of sensors connected to this server. All supported sensors will be shown."
 
-#: views/hardware.tpl:76
+#: views/hardware.tpl:79
 msgid "Through the I2C bus of the Raspberry Pi you can use the following hardware sensors with OWFS software"
 msgstr "Through the I2C bus of the Raspberry Pi you can use the following hardware sensors with OWFS software"
 
-#: views/hardware.tpl:79
+#: views/hardware.tpl:82
 msgid "HIH400"
 msgstr "HIH400"
 
-#: views/hardware.tpl:85
+#: views/hardware.tpl:88
 msgid "TerrariumPI software has support for different kind of relay boards. The following relay boards below are tested with TerrariumPI software."
 msgstr "TerrariumPI software has support for different kind of relay boards. The following relay boards below are tested with TerrariumPI software."
 
-#: views/hardware.tpl:89
+#: views/hardware.tpl:92
 msgid "For every relay on the board there is need for a dedicated GPIO pin. For a 4 ports relay board there are 4 control GPIO pins and 2 pins for power and ground needed. This makes that it needs 6 GPIO pins in total."
 msgstr "For every relay on the board there is need for a dedicated GPIO pin. For a 4 ports relay board there are 4 control GPIO pins and 2 pins for power and ground needed. This makes that it needs 6 GPIO pins in total."
 
-#: views/hardware.tpl:90 views/hardware.tpl:99 views/hardware.tpl:108
+#: views/hardware.tpl:93 views/hardware.tpl:102 views/hardware.tpl:111
 msgid "The following boards are tested"
 msgstr "The following boards are tested"
 
-#: views/hardware.tpl:92
+#: views/hardware.tpl:95
 msgid "VMA400"
 msgstr "VMA400"
 
-#: views/hardware.tpl:97 views/hardware.tpl:129
+#: views/hardware.tpl:100 views/hardware.tpl:132
 msgid "USB"
 msgstr "USB"
 
-#: views/hardware.tpl:98
+#: views/hardware.tpl:101
 msgid "The USB relay board does not need GPIO pins. It only needs one USB connection. The TerrariumPI software supports boards that are either running in Serial or BitBang. This is automatically detected when adding power switches."
 msgstr "The USB relay board does not need GPIO pins. It only needs one USB connection. The TerrariumPI software supports boards that are either running in Serial or BitBang. This is automatically detected when adding power switches."
 
-#: views/hardware.tpl:101
+#: views/hardware.tpl:104
 msgid "Denkovi"
 msgstr "Denkovi"
 
-#: views/hardware.tpl:106
+#: views/hardware.tpl:109
 msgid "PWM"
 msgstr "PWM"
 
-#: views/hardware.tpl:107
+#: views/hardware.tpl:110
 msgid "With PWM controlled boards it is possible to support dimming devices."
 msgstr "With PWM controlled boards it is possible to support dimming devices."
 
-#: views/hardware.tpl:110
+#: views/hardware.tpl:113
 msgid "Nextevo"
 msgstr "Nextevo"
 
-#: views/hardware.tpl:117
+#: views/hardware.tpl:120
 msgid "TerrariumPI software has support for magnetic door sensors. Only versions with two wires are supported. Connect one wire to the ground and the other wire to any GPIO pin that is free (except power and ground pins)."
 msgstr "TerrariumPI software has support for magnetic door sensors. Only versions with two wires are supported. Connect one wire to the ground and the other wire to any GPIO pin that is free (except power and ground pins)."
 
-#: views/hardware.tpl:120 views/inc/menu.tpl:79 views/inc/usage_webcams.tpl:19
+#: views/hardware.tpl:123 views/inc/menu.tpl:79 views/inc/usage_webcams.tpl:19
 #: views/usage.tpl:22 views/webcam.tpl:7 views/webcam_settings.tpl:64
 msgid "Webcam"
 msgstr "Webcam"
 
-#: views/hardware.tpl:121
+#: views/hardware.tpl:124
 msgid "TerrariumPI software has support for different kind of cameras. The following cameras below are tested with TerrariumPI software."
 msgstr "TerrariumPI software has support for different kind of cameras. The following cameras below are tested with TerrariumPI software."
 
-#: views/hardware.tpl:124 views/inc/usage_webcams.tpl:128
+#: views/hardware.tpl:127 views/inc/usage_webcams.tpl:128
 #: views/webcam_settings.tpl:21
 msgid "RPICam"
 msgstr "RPICam"
 
-#: views/hardware.tpl:125
+#: views/hardware.tpl:128
 msgid "There are different Raspberry Pi cameras available. If the camera is Raspberry Pi compatible, it can be used with TerrariumPI software."
 msgstr "There are different Raspberry Pi cameras available. If the camera is Raspberry Pi compatible, it can be used with TerrariumPI software."
 
-#: views/hardware.tpl:130
+#: views/hardware.tpl:133
 msgid "All kind of USB cameras can be used. Enter physical path of the device like /dev/videoX."
 msgstr "All kind of USB cameras can be used. Enter physical path of the device like /dev/videoX."
+
+#: views/hardware.tpl:139
+msgid "BLA"
+msgstr "BLA"
 
 #: views/inc/menu.tpl:10
 msgid "Welcome"
@@ -1059,10 +1072,6 @@ msgstr "Humidity"
 #: views/inc/menu.tpl:82
 msgid "Show"
 msgstr "Show"
-
-#: views/inc/menu.tpl:90
-msgid "Audio"
-msgstr "Audio"
 
 #: views/inc/menu.tpl:98
 msgid "Playlist"
@@ -2200,6 +2209,10 @@ msgstr "Not playing"
 #: Missing text string
 msgid "Open"
 msgstr "Open"
+
+#: Missing text string
+msgid "Preview file"
+msgstr "Preview file"
 
 #: Missing text string
 msgid "Profile image"
