@@ -838,17 +838,23 @@ function sensor_gauge(name, data) {
         highDpiSupport: true,
         percentColors: colors,
       };
+
       // Init Gauge
       $('#' + name + ' .gauge').attr('done',1);
       //$('#' + name + ' .goal-wrapper span:nth-child(2)').text('°' + globals.temperature_indicator);
       globals.gauges[name] = new Gauge($('#' + name + ' .gauge')[0]).setOptions(opts);
-      globals.gauges[name].setTextField($('#' + name + ' .gauge-value')[0]);
+      if (name != 'system_disk' && name != 'system_memory') {
+        globals.gauges[name].setTextField($('#' + name + ' .gauge-value')[0]);
+      }
       // Only set min and max only once. Else the gauge will flicker each data update
       globals.gauges[name].maxValue = data.limit_max;
       globals.gauges[name].setMinValue(data.limit_min);
     }
     // Update values
     globals.gauges[name].set(data.current);
+    if (name == 'system_disk' || name == 'system_memory') {
+      $('#' + name + ' .gauge-value').text(formatBytes(data.current))
+    }
     $('div#' + name + ' .x_title h2 .badge').toggle(data.alarm);
   }
 }
@@ -961,7 +967,7 @@ function history_graph(name, data, type) {
         switch(type) {
           case 'system_memory':
           case 'system_disk':
-              val = formatNumber(val / (1024 * 1024)) + ' MB'
+              val = formatBytes(val);
             break;
 
           case 'system_uptime':
