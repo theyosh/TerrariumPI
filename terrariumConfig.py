@@ -64,6 +64,13 @@ class terrariumConfig:
       self.__config.remove_option('terrariumpi','available_languages')
       upgrade = True
 
+    # Upgrade: Rename active_language to just language
+    data = self.__get_config('terrariumpi')
+    if 'active_language' in data:
+      self.__config.set('terrariumpi', 'language', data['active_language'])
+      self.__config.remove_option('terrariumpi','active_language')
+      upgrade = True
+
     if upgrade:
       self.__save_config()
       self.__config.read(self.__config_file)
@@ -152,13 +159,13 @@ class terrariumConfig:
 
     return self.__cache_available_languages
 
-  def get_active_language(self):
-    '''Get terrariumPI active language'''
+  def get_language(self):
+    '''Get terrariumPI language'''
     config = self.get_system()
-    if 'active_language' not in config:
-      config['active_language'] = self.get_available_languages()[0]
+    if 'language' not in config:
+      config['language'] = self.get_available_languages()[0]
 
-    return config['active_language']
+    return config['language']
 
   def get_power_price(self):
     '''Get terrariumPI power price. Price is entered as euro/kWh'''

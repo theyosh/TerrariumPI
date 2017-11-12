@@ -55,7 +55,7 @@ class terrariumWebserver():
 
     terrariumWebserver.app.terrarium = self.__terrariumEngine
     # Load language
-    gettext.translation('terrariumpi', 'locales/', languages=[self.__terrariumEngine.config.get_active_language()]).install(True)
+    gettext.translation('terrariumpi', 'locales/', languages=[self.__terrariumEngine.config.get_language()]).install(True)
     self.__translations = terrariumTranslations()
 
     self.__routes()
@@ -118,7 +118,7 @@ class terrariumWebserver():
                     )
 
   def __template_variables(self, template):
-    variables = { 'lang' : self.__terrariumEngine.config.get_active_language(),
+    variables = { 'lang' : self.__terrariumEngine.config.get_language(),
                   'title' : self.__config['title'],
                   'version' : self.__config['version'],
                   'page_title' : _(template.replace('_',' ').capitalize()),
@@ -227,8 +227,8 @@ class terrariumWebserver():
       result['message'] = _('Your changes are saved')
 
       # Reload language if needed
-      if 'active_language' in postdata:
-        gettext.translation('terrariumpi', 'locales/', languages=[self.__terrariumEngine.config.get_active_language()]).install(True)
+      if 'language' in postdata:
+        gettext.translation('terrariumpi', 'locales/', languages=[self.__terrariumEngine.config.get_language()]).install(True)
         self.__translations.reload()
 
     return result
@@ -323,7 +323,7 @@ class terrariumWebserver():
   @app.error(404)
   def error404(error):
     config = terrariumWebserver.app.terrarium.get_config('system')
-    variables = { 'lang' : terrariumWebserver.app.terrarium.config.get_active_language(),
+    variables = { 'lang' : terrariumWebserver.app.terrarium.config.get_language(),
                   'title' : config['title'],
                   'page_title' : config['title'] + ' | 404'
                 }

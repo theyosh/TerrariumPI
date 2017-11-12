@@ -31,10 +31,10 @@
               <div class="x_content">
                 <form action="/api/config/system" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="active_language">{{_('Language')}} <span class="required">*</span></label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="language">{{_('Language')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_language')}}">
-                        <select class="form-control" required="required" name="active_language" tabindex="-1" placeholder="{{_('Select an option')}}">
+                        <select class="form-control" required="required" name="language" tabindex="-1" placeholder="{{_('Select an option')}}">
                         </select>
                       </div>
                     </div>
@@ -69,7 +69,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="active_language">{{_('Soundcard')}} <span class="required">*</span></label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="soundcard">{{_('Soundcard')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_soundcard')}}">
                         <select class="form-control" required="required" name="soundcard" tabindex="-1" placeholder="{{_('Select an option')}}">
@@ -126,7 +126,7 @@
         </div>
         <script type="text/javascript">
           $(document).ready(function() {
-            var language_selector = $("select[name='active_language']").select2({
+            var language_selector = $("select[name='language']").select2({
                 placeholder: '{{_('Select an option')}}',
                 allowClear: false,
                 minimumResultsForSearch: Infinity
@@ -148,17 +148,16 @@
               $(data.audiohardware).each(function(index,hardware_device){
                 soundcard_selector.append($('<option>').attr({'value':hardware_device.hwid}).text(hardware_device.name));
               });
-            });
-
-            $.get($('form').attr('action'),function(data){
-              $.each(data.available_languages,function(index,value){
-                language_selector.append($('<option>').attr({'value':value}).text(value));
-              });
-              language_selector.val(data.active_language).trigger('change');
-              temperature_indicator.val(data.temperature_indicator).trigger('change');
-              soundcard_selector.val(data.soundcard).trigger('change');
-              $.each(Object.keys(data), function(key,value){
-                $('input[name="' + value + '"]').val(data[value]);
+              $.get($('form').attr('action'),function(data){
+                $.each(data.available_languages,function(index,value){
+                  language_selector.append($('<option>').attr({'value':value}).text(value));
+                });
+                language_selector.val(data.language).trigger('change');
+                soundcard_selector.val(data.soundcard).trigger('change');
+                temperature_indicator.val(data.temperature_indicator).trigger('change');
+                $.each(Object.keys(data), function(key,value){
+                  $('input[name="' + value + '"]').val(data[value]);
+                });
               });
             });
           });
