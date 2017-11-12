@@ -194,7 +194,9 @@ class terrariumSensor:
               temperature = float(w1data.group('value')) / 1000
               current = float(temperature)
           elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
-            humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()], float(terrariumUtils.to_BCM_port_number(self.sensor_address)))
+            humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()],
+                                                           float(terrariumUtils.to_BCM_port_number(self.sensor_address)),
+                                                           5)
             current = float(temperature)
         elif 'humidity' == self.get_type():
           if self.get_hardware_type() == 'owfs':
@@ -203,7 +205,9 @@ class terrariumSensor:
             # Not tested / No hardware to test with
             pass
           elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
-            humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()], float(terrariumUtils.to_BCM_port_number(self.sensor_address)))
+            humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()],
+                                                           float(terrariumUtils.to_BCM_port_number(self.sensor_address)),
+                                                           5)
             current = float(humidity)
 
         if current is None or not (self.get_limit_min() <= current <= self.get_limit_max()):
