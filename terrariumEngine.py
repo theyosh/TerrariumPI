@@ -424,7 +424,6 @@ class terrariumEngine():
       return {'switches' : data}
 
   def get_amount_of_switches(self):
-    print self.power_switches
     return len(self.power_switches)
 
   def get_switches_config(self, socket = False):

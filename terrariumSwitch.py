@@ -158,7 +158,6 @@ class terrariumSwitch():
 
         except Exception, err:
           # Ignore for now
-          print err
           pass
 
       elif self.get_hardware_type() == 'gpio':
