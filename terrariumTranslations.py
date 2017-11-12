@@ -133,7 +133,7 @@ class terrariumTranslations():
     self.translations['profile_description'] = _('Holds a small description about the animal.')
     self.translations['profile_more_information'] = _('Holds a link to more information.')
 
-    logger.info('Loaded TerrariumPI translations')
+    logger.info('Loaded TerrariumPI %s translations' % (len(self.translations),))
 
   def get_translation(self,translation):
     if translation in self.translations:
