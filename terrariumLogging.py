@@ -1,37 +1,57 @@
 # -*- coding: utf-8 -*-
+
 import logging
-import logging.config
+import logging.handlers
 import zipfile
+import codecs
+import sys
 import os
-from logging.handlers import TimedRotatingFileHandler
+import time
+import glob
+
+import logging.config
 from gevent import monkey
 monkey.patch_all()
 
-class TimedCompressedRotatingFileHandler(TimedRotatingFileHandler):
-  """
-  Extended version of TimedRotatingFileHandler that compress logs on rollover.
-  """
-  def find_last_rotated_file(self):
-    dir_name, base_name = os.path.split(self.baseFilename)
-    file_names = os.listdir(dir_name)
-    result = []
-    prefix = '{}.20'.format(base_name)  # we want to find a rotated file with eg filename.2017-12-12... name
-    for file_name in file_names:
-      if file_name.startswith(prefix) and not file_name.endswith('.zip'):
-        result.append(file_name)
-    result.sort()
-    return result[0]
 
-  def doRollover(self):
-    super(TimedCompressedRotatingFileHandler, self).doRollover()
+class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandler):
+    """
+    Extended version of TimedRotatingFileHandler that compress logs on rollover.
+    """
+    def doRollover(self):
+        """
+        do a rollover; in this case, a date/time stamp is appended to the filename
+        when the rollover happens.  However, you want the file to be named for the
+        start of the interval, not the current time.  If there is a backup count,
+        then we have to get a list of matching filenames, sort them and remove
+        the one with the oldest suffix.
+        """
 
-    dfn = self.find_last_rotated_file()
-    dfn_zipped = '{}.zip'.format(dfn)
-    if os.path.exists(dfn_zipped):
-      os.remove(dfn_zipped)
-    with zipfile.ZipFile(dfn_zipped, 'w') as f:
-      f.write(dfn, dfn_zipped, zipfile.ZIP_DEFLATED)
-    os.remove(dfn)
-
+        self.stream.close()
+        # get the time that this sequence started at and make it a TimeTuple
+        t = self.rolloverAt - self.interval
+        timeTuple = time.localtime(t)
+        dfn = self.baseFilename + "." + time.strftime(self.suffix, timeTuple)
+        if os.path.exists(dfn):
+            os.remove(dfn)
+        os.rename(self.baseFilename, dfn)
+        if self.backupCount > 0:
+            # find the oldest log file and delete it
+            s = glob.glob(self.baseFilename + ".20*")
+            if len(s) > self.backupCount:
+                s.sort()
+                os.remove(s[0])
+        #print "%s -> %s" % (self.baseFilename, dfn)
+        if self.encoding:
+            self.stream = codecs.open(self.baseFilename, 'w', self.encoding)
+        else:
+            self.stream = open(self.baseFilename, 'w')
+        self.rolloverAt = self.rolloverAt + self.interval
+        if os.path.exists(dfn + ".zip"):
+            os.remove(dfn + ".zip")
+        file = zipfile.ZipFile(dfn + ".zip", "w")
+        file.write(dfn, os.path.basename(dfn), zipfile.ZIP_DEFLATED)
+        file.close()
+        os.remove(dfn)
 
 logging.config.fileConfig('logging.cfg')
