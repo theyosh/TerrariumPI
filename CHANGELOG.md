@@ -2,10 +2,11 @@ Changelog
 =========
 
 
-3.1.0 (2017-11-12)
+3.1.0 (2017-11-14)
 ------------
 
 **New**
+- Add logfile compressio. [TheYOSH]
 - Add audio preview player. [TheYOSH]
 - Add audio usage page. [TheYOSH]
 - Add better configuration upgrading and logging. [TheYOSH]
@@ -31,6 +32,8 @@ Changelog
 - Add extra information when rebooting. [TheYOSH]
 
 **Fixes**
+- Fix updating weather data when offline. [TheYOSH]
+- Fix logging. [TheYOSH]
 - Small fixes. [TheYOSH]
 - Small fixes. [TheYOSH]
 - Fix logging for saving new doors. [TheYOSH]
@@ -51,6 +54,7 @@ Changelog
 - Fix [#36](https://github.com/theyosh/TerrariumPI/issues/36). [TheYOSH]
 
 **Updates**
+- Update changelog. [TheYOSH]
 - Update Dutch translation. [TheYOSH]
 - Update logging. [TheYOSH]
 - Update logging. [TheYOSH]
@@ -74,6 +78,7 @@ Changelog
 - Update with remote master. [TheYOSH]
 
 **Other**
+- Clean up weather code. [TheYOSH]
 - Remove debug. [TheYOSH]
 - Log volume changes. [TheYOSH]
 - Better DHT sensor warnings. [TheYOSH]
