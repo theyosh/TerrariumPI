@@ -11,9 +11,6 @@ import copy
 import urllib2
 import json
 import re
-import sys
-reload(sys) # just to be sure
-sys.setdefaultencoding('utf-8')
 
 from terrariumUtils import terrariumUtils
 
