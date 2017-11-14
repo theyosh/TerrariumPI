@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import logging
-logger = logging.getLogger(__name__)
+import terrariumLogging
+logger = terrariumLogging.logging.getLogger(__name__)
 
 from terrariumWeather import terrariumWeather
 from terrariumSensor import terrariumSensor
@@ -23,9 +23,9 @@ class terrariumTranslations():
     # End weather
 
     # Sensors
-    self.translations['sensor_field_hardware'] = _('Holds the sensor hardware type. Supported hardware types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSensor.valid_hardware_types) + '</strong>')
-    self.translations['sensor_field_address'] = _('Holds the sensor address. Depending on hardware type, it is either a read only hex number or GPIO pin. When using DHT11, DHT22 or AM2302 use <strong>Broadcom</strong> pin numbering (BCM). For a quick reference about BCM and Physical pin numbers: %s.') % ('<a target="_blank" href="https://pinout.xyz">https://pinout.xyz</a>')
-    self.translations['sensor_field_type'] = _('Holds the sensor type. Supported sensor types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSensor.valid_sensor_types) + '</strong>')
+    self.translations['sensor_field_hardware'] = _('Holds the sensor hardware type. Supported hardware types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSensor.VALID_HARDWARE_TYPES) + '</strong>')
+    self.translations['sensor_field_address'] = _('Holds the sensor address. Depending on hardware type, it is either a read only hex number or GPIO pin. For GPIO use <strong>physical</strong> GPIO pin numbering.')
+    self.translations['sensor_field_type'] = _('Holds the sensor type. Supported sensor types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSensor.VALID_SENSOR_TYPES) + '</strong>')
     self.translations['sensor_field_name'] = _('Holds the name of the sensor.')
     self.translations['sensor_field_alarm_min'] = _('Holds the sensor lower alarm value of the sensor. When below this value, alarms can be triggered.')
     self.translations['sensor_field_alarm_max'] = _('Holds the sensor maximum alarm value of the sensor. When above this value, alarms can be triggered.')
@@ -35,8 +35,8 @@ class terrariumTranslations():
     # End sensors
 
     # Switches
-    self.translations['switch_field_hardware'] = _('Holds the switch hardware type. Supported hardware types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSwitch.valid_hardware_types) + '</strong>')
-    self.translations['switch_field_address'] = _('Holds the switch address. Depending on hardware type, it is either a number or GPIO pin. For GPIO use <strong>Physical</strong> GPIO pin numbering.')
+    self.translations['switch_field_hardware'] = _('Holds the switch hardware type. Supported hardware types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSwitch.VALID_HARDWARE_TYPES) + '</strong>')
+    self.translations['switch_field_address'] = _('Holds the switch address. Depending on hardware type, it is either a number or GPIO pin. For GPIO and PWM-Dimmer use <strong>physical</strong> GPIO pin numbering.')
     self.translations['switch_field_name'] = _('Holds the switch name.')
     self.translations['switch_field_power_wattage'] = _('Holds the switch power usage in Watt when switched on.')
     self.translations['switch_field_water_flow'] = _('Holds the switch water flow in liters per minute when switched on')
@@ -48,8 +48,8 @@ class terrariumTranslations():
     # End switches
 
     # Doors
-    self.translations['door_field_hardware'] = _('Holds the door hardware type. Supported hardware types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumDoor.valid_hardware_types) + '</strong>')
-    self.translations['door_field_address'] = _('Holds the door address. When using GPIO use <strong>Physical</strong> GPIO pin numbering as address.')
+    self.translations['door_field_hardware'] = _('Holds the door hardware type. Supported hardware types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumDoor.VALID_HARDWARE_TYPES) + '</strong>')
+    self.translations['door_field_address'] = _('Holds the door address. When using GPIO use <strong>physical</strong> GPIO pin numbering as address.')
     self.translations['door_field_name'] = _('Holds the door name.')
     # End doors
 
@@ -60,7 +60,17 @@ class terrariumTranslations():
     self.translations['webcam_field_preview'] = _('Shows the webcam preview image.')
     # End webcam
 
-    # System
+    # Audio
+    self.translations['audio_playlist_field_name'] = _('Holds the audio playlist name.')
+    self.translations['audio_playlist_field_start'] = _('Holds the time when the playlist should be started.')
+    self.translations['audio_playlist_field_stop'] = _('Holds the time when the playlist should be stopped.')
+    self.translations['audio_playlist_field_volume'] = _('Holds the volume for this playlist.')
+    self.translations['audio_playlist_field_repeat'] = _('Toggle on to enable repeating of the audio files.')
+    self.translations['audio_playlist_field_shuffle'] = _('Toggle on to enable shuffeling of the audio files.')
+    self.translations['audio_playlist_field_files'] = _('Select the audio files for this playlist. It is possible to select the same audio file in multiple playlists.')
+    # End Audio
+
+    # Environment
     self.translations['environment_field_lights_enable'] = _('Enable or disable the light system. When enabled, you can make changes below. By disabling it will not loose the current settings. It will temporary stop the lighting system.')
     self.translations['environment_field_lights_mode'] = _('Select the mode on which the lights will be put on and off. Select \'%s\' to use the sun rise and sun set at your location. This will make the amount of lighting variable to the actual amount of daylight. When selecting \'%s\', the light will put on and off at selected times.') % (_('Weather'),_('Timer'))
     self.translations['environment_field_lights_on'] = _('Enter the time when the light should be put on. Only available when running in \'%s\' mode.') % _('Timer')
@@ -96,12 +106,14 @@ class terrariumTranslations():
     self.translations['environment_field_cooler_off'] = _('Enter the time when the cooler should be put off. Only available when running in \'%s\' mode.') % _('Timer')
     self.translations['environment_field_cooler_power_switches'] = _('Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the cooler. Select all needed switches below.')
     self.translations['environment_field_cooler_temperature_sensors'] = _('Select the temperature sensors that are used to control the temperature. When selecting multiple sensors, the average is calculated to determine the final temperature.')
+    # End environment
 
-
+    # System
     self.translations['system_field_language'] = _('Choose your interface language.')
     self.translations['system_field_admin'] = _('Holds the username which can make changes (Administrator).')
     self.translations['system_field_new_password'] = _('Enter the new password for the administration user. Leaving empty will not change the password!')
     self.translations['system_field_current_password'] = _('Enter the current password in order to change the password.')
+    self.translations['system_field_soundcard'] = _('Holds the soundcard that is used for playing audio.')
     self.translations['system_field_pi_power'] = _('Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment.')
     self.translations['system_field_power_price'] = _('Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour).')
     self.translations['system_field_water_price'] = _('Holds the amount of euro/dollar per 1000 liters water.')
@@ -121,7 +133,7 @@ class terrariumTranslations():
     self.translations['profile_description'] = _('Holds a small description about the animal.')
     self.translations['profile_more_information'] = _('Holds a link to more information.')
 
-    logger.info('Loaded TerrariumPI translations')
+    logger.info('Loaded TerrariumPI %s translations' % (len(self.translations),))
 
   def get_translation(self,translation):
     if translation in self.translations:

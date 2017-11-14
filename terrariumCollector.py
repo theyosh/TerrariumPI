@@ -1,23 +1,24 @@
 # -*- coding: utf-8 -*-
+import terrariumLogging
+logger = terrariumLogging.logging.getLogger(__name__)
+
 import sqlite3
 import time
 import json
 import copy
 import os
 
-import logging
-logger = logging.getLogger(__name__)
-
 class terrariumCollector():
   DATABASE = 'history.db'
   # Store data every Xth minute. Except switches and doors
   STORE_MODULO = 1 * 60
 
-  def __init__(self):
+  def __init__(self,versionid):
     logger.info('Setting up collector database %s' % (terrariumCollector.DATABASE,))
     self.__recovery = False
     self.__connect()
     self.__create_database_structure()
+    self.__upgrade(int(versionid.replace('.','')))
     logger.info('TerrariumPI Collecter is ready')
 
   def __connect(self):
@@ -89,12 +90,52 @@ class terrariumCollector():
                        cores VARCHAR(25),
                        memory_total INTEGER(6),
                        memory_used INTEGER(6),
-                       memory_free INTEGER(6)
+                       memory_free INTEGER(6),
+                       disk_total INTEGER(6),
+                       disk_used INTEGER(6),
+                       disk_free INTEGER(6)
                         )''')
 
       cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS system_data_unique ON system_data(timestamp ASC)')
 
     self.db.commit()
+
+  def __upgrade(self,to_version):
+    # Set minimal version to 3.0.0
+    current_version = 300
+    table_upgrades = {'310' : ['ALTER TABLE system_data ADD COLUMN disk_total INTEGER(6)',
+                               'ALTER TABLE system_data ADD COLUMN disk_used INTEGER(6)',
+                               'ALTER TABLE system_data ADD COLUMN disk_free INTEGER(6)']}
+
+    with self.db:
+      cur = self.db.cursor()
+      db_version = int(cur.execute('PRAGMA user_version').fetchall()[0][0])
+      if db_version > current_version:
+        current_version = db_version
+
+    if current_version == to_version:
+      logger.info('Collector database is up to date')
+    elif current_version < to_version:
+      logger.info('Collector database is out of date. Running updates from %s to %s' % (current_version,to_version))
+      # Execute updates
+      with self.db:
+        cur = self.db.cursor()
+        for update_version in table_upgrades.keys():
+          if current_version < int(update_version) <= to_version:
+            # Execute all updates between the versions
+            for sql_upgrade in table_upgrades[update_version]:
+              try:
+                cur.execute(sql_upgrade)
+                logger.info('Collector database upgrade for version %s succeeded! %s' % (update_version,sql_upgrade))
+              except Exception, ex:
+                if 'duplicate column name' not in str(ex):
+                  logger.error('Error updating collector database. Please contact support. Error message: %s' % (ex,))
+
+        cur.execute('VACUUM')
+        cur.execute('PRAGMA user_version = ' + str(to_version))
+        logger.info('Updated collector database. Set version to: %s' % (to_version,))
+
+      self.db.commit()
 
   def __recover(self):
     starttime = time.time()
@@ -154,8 +195,8 @@ class terrariumCollector():
                       (now, newdata['wind_speed'], newdata['temperature'], newdata['pressure'], newdata['wind_direction'], newdata['weather'], newdata['icon']))
 
         if type in ['system']:
-          cur.execute('REPLACE INTO system_data (timestamp, load_load1, load_load5, load_load15, uptime, temperature, cores, memory_total, memory_used, memory_free) VALUES (?,?,?,?,?,?,?,?,?,?)',
-                      (now, newdata['load']['load1'], newdata['load']['load5'], newdata['load']['load15'], newdata['uptime'], newdata['temperature'], newdata['cores'], newdata['memory']['total'], newdata['memory']['used'], newdata['memory']['free']))
+          cur.execute('REPLACE INTO system_data (timestamp, load_load1, load_load5, load_load15, uptime, temperature, cores, memory_total, memory_used, memory_free, disk_total, disk_used, disk_free) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                      (now, newdata['load']['load1'], newdata['load']['load5'], newdata['load']['load15'], newdata['uptime'], newdata['temperature'], newdata['cores'], newdata['memory']['total'], newdata['memory']['used'], newdata['memory']['free'],newdata['disk']['total'], newdata['disk']['used'], newdata['disk']['free']))
 
         if type in ['switches']:
           if 'time' in newdata:
@@ -309,14 +350,12 @@ class terrariumCollector():
     if logtype == 'sensors':
       fields = { 'current' : [], 'alarm_min' : [], 'alarm_max' : [] , 'limit_min' : [], 'limit_max' : []}
       sql = 'SELECT id, type, timestamp,' + ', '.join(fields.keys()) + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ?'
-      #AND timestamp % ' + str(modulo) + ' = 0'
 
       if len(parameters) > 0 and parameters[0] == 'average':
         sql = 'SELECT "average" as id, type, timestamp'
         for field in fields:
           sql = sql + ', AVG(' + field + ') as ' + field
         sql = sql + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ?'
-        #AND timestamp % ' + str(modulo) + ' = 0'
 
         if len(parameters) == 2:
           sql = sql + ' and type = ?'
@@ -354,11 +393,9 @@ class terrariumCollector():
       fields = { 'wind_speed' : [], 'temperature' : [], 'pressure' : [] , 'wind_direction' : [], 'rain' : [],
                  'weather' : [], 'icon' : []}
       sql = 'SELECT "city" as id, "weather" as type, timestamp, ' + ', '.join(fields.keys()) + ' FROM weather_data WHERE timestamp >= ? and timestamp <= ?'
-#      AND timestamp % '
-#      +      str(modulo) + ' = 0'
 
     elif logtype == 'system':
-      fields = ['load_load1', 'load_load5','load_load15','uptime', 'temperature','cores', 'memory_total', 'memory_used' , 'memory_free']
+      fields = ['load_load1', 'load_load5','load_load15','uptime', 'temperature','cores', 'memory_total', 'memory_used' , 'memory_free', 'disk_total', 'disk_used' , 'disk_free']
 
       if len(parameters) > 0 and parameters[0] == 'load':
         fields = ['load_load1', 'load_load5','load_load15']
@@ -370,9 +407,10 @@ class terrariumCollector():
         fields = ['temperature']
       elif len(parameters) > 0 and parameters[0] == 'memory':
         fields = ['memory_total', 'memory_used' , 'memory_free']
+      elif len(parameters) > 0 and parameters[0] == 'disk':
+        fields = ['disk_total', 'disk_used' , 'disk_free']
 
       sql = 'SELECT "system" as type, timestamp, ' + ', '.join(fields) + ' FROM system_data WHERE timestamp >= ? and timestamp <= ?'
-      #AND timestamp % ' + str(modulo) + ' = 0'
 
     sql = sql + ' ORDER BY timestamp ASC'
 

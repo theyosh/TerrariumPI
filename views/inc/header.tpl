@@ -21,6 +21,15 @@
   <link href='/static/Leaflet.fullscreen/dist/leaflet.fullscreen.css' rel='stylesheet'><!-- Custom Theme Style -->
   <link href="/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet"><!-- bootstrap-daterangepicker -->
   <link href="/static/fancybox/dist/jquery.fancybox.min.css" rel="stylesheet">
+  <link href="/gentelella/vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
+  <link href="/gentelella/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+  <link href="/gentelella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+  <link href="/gentelella/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+
+
+  <link href="/gentelella/vendors/switchery/dist/switchery.min.css" rel="stylesheet"><!-- Switchery -->
+
+
   <link href="/gentelella/build/css/custom.min.css" rel="stylesheet">
   <link href="/static/css/terrariumpi.css" rel="stylesheet"><!-- jQuery -->
   <script type="text/javascript" src="/gentelella/vendors/jquery/dist/jquery.min.js"></script><!-- Bootstrap -->

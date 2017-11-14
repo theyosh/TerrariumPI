@@ -5,14 +5,12 @@ aptitude install python-dateutil python-ow python-rpi.gpio python-psutil python-
 pip install gevent untangle uptime bottle bottle_websocket
 
 '''
-import logging
-import logging.config
-logging.config.fileConfig('logging.cfg')
-logger = logging.getLogger('terrariumPI')
+import terrariumLogging
+logger = terrariumLogging.logging.getLogger(__name__)
 
-logger.info('Starting terrariumPI')
 from terrariumEngine import terrariumEngine
 from terrariumWebserver import terrariumWebserver
+logger.info('Starting terrariumPI version' )
 
 if __name__  == "__main__":
   logger.debug('Starting terrariumPI engine')

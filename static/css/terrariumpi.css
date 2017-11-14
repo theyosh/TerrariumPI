@@ -73,6 +73,10 @@ form#profile.edit label{
   padding-top: 8px;
 }
 
+.x_panel.help .x_content {
+  display: none;
+}
+
 /* End general overrule */
 
 div.row.sensor,
@@ -252,6 +256,42 @@ div.row.door div.sidebar-widget i.fa {
   -ms-filter: FlipV;
 }
 
+.dropzone {
+  min-height: auto !important;
+}
+
+.player_volume .col-md-1 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.player_volume .col-md-1 .fa {
+  font-size: 1.3em;
+  margin: 0px 3px;
+  cursor: pointer;
+}
+
+.player_volume .col-md-1 .fa.fa-volume-down {
+  float: right;
+}
+
+.player_volume .progress {
+  height: 1.3em;
+  margin-bottom: 0px;
+  padding-right: 0px;
+  padding-left: 0px;
+  border-radius: 4px;
+}
+
+.player_volume .progress .progress-bar {
+  line-height: 16px;
+}
+
+table.dataTable .glyphicon-trash,
+table.dataTable .glyphicon-play {
+  margin: 0.2em;
+  cursor: pointer;
+}
 
 /* Documentation */
 
