@@ -91,6 +91,9 @@ function websocket_init(reconnect) {
       case 'door_indicator':
         update_door_indicator(data.data);
         break;
+      case 'player_indicator':
+        update_player_indicator(data.data);
+        break;
       case 'update_weather':
         update_weather(data.data);
         break;
@@ -218,6 +221,15 @@ function formatNumber(amount,minfrac,maxfrac) {
   });
 }
 
+function formatBytes(bytes,decimals) {
+   if(bytes === 0) return '0 Bytes';
+   var k = 1024,
+       dm = decimals || 2,
+       sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+       i = Math.floor(Math.log(bytes) / Math.log(k));
+   return formatNumber(parseFloat((bytes / Math.pow(k, i))),0,2) + ' ' + sizes[i];
+}
+
 function process_form() {
   $('form').each(function() {
     $(this).on('submit', function() {
@@ -251,7 +263,7 @@ function process_form() {
 function prepare_form_data(form) {
   var formdata = [];
   var form_type = form.attr('action').split('/').pop();
-  var re = /(sensor|switch|webcam|light|sprayer|heater|cooler|door|profile)(_\d+)?_(.*)/i;
+  var re = /(sensor|switch|webcam|light|sprayer|heater|cooler|door|profile|playlist)(_\d+)?_(.*)/i;
   var matches = null;
   var objectdata = {};
   var prev_nr = -1;
@@ -277,6 +289,7 @@ function prepare_form_data(form) {
           case 'environment':
           case 'webcams':
           case 'doors':
+          case 'audio':
             if ((matches = re.exec(field_name)) !== null) {
               if (matches.index === re.lastIndex) {
                 re.lastIndex++;
@@ -300,7 +313,7 @@ function prepare_form_data(form) {
                   objectdata = {};
                   prev_nr = current_nr;
                 }
-                if (matches[3] === 'on' || matches[3] === 'off') {
+                if (matches[3] === 'on' || matches[3] === 'off' || matches[3] === 'start' || matches[3] === 'stop') {
                   field_value = moment(field_value, 'LT').unix();
                 }
                 objectdata[matches[3]] = field_value;
@@ -496,29 +509,64 @@ function update_online_messages(online) {
   add_notification_message('online_messages', title, message, icon, color);
 }
 
-function add_notification_message(type, title, message, icon, color, date) {
-  var notification_date = new Date().getTime();
-  if (date != undefined) {
-    notification_date = date;
+function update_player_messages(data) {
+  update_player_volume(data.volume);
+  var title   = (data.running ? '{{_('Playing')}}' : '{{_('Stopped')}}');
+  var message = (data.running ? '{{_('Playlist')}}: ' + data.name + ' - ' + moment(data.start * 1000).format('LT') + '-' + moment(data.stop * 1000).format('LT'): '{{_('Not playing')}}');
+  var icon    = (data.running ? 'fa-play-circle-o' : 'fa-play-circle-o');
+  var color   = (data.running ? 'green' : 'red');
+  add_notification_message('player_messages', title, message, icon, color);
+}
+
+function update_player_volume(volume) {
+  var menu = $('ul#player_messages');
+  menu.find('li.notification:not(:has(.player_volume))').remove();
+
+  if ($('div.row.player_volume').length == 0) {
+    var volume_control = $('<div>').addClass('row player_volume');
+    volume_control.append($('<div>').addClass('col-md-1').append($('<span>').addClass('fa fa-volume-down').on('click',function(){
+      $.post('/api/audio/player/volumedown');
+      return false;
+    })));
+    volume_control.append($('<div>').addClass('col-md-10  progress progress-striped active').append($('<div>').addClass('progress-bar progress-bar-success').attr('data-transitiongoal',volume).text(volume + '%')));
+    volume_control.append($('<div>').addClass('col-md-1').append($('<span>').addClass('fa fa-volume-up').on('click',function(){
+      $.post('/api/audio/player/volumeup');
+      return false;
+    })));
+    menu.prepend($('<li>').addClass('notification').append(volume_control));
+    $('ul#player_messages .progress .progress-bar').progressbar();
+  } else {
+    $('div.row.player_volume .progress-bar.progress-bar-success').css('width', volume + '%').text(volume + '%');
   }
+}
+
+function add_notification_message(type, title, message, icon, color, date) {
+  var notification_date = date || new Date().getTime();
   var menu = $('ul#' + type);
   if (menu.find('li:first a span.message').text() == message) {
     // Skip duplicate messages
     return;
   }
-  var notification = $('<a>').on('click', function() {
-    close_notification_message(this);
-  });
+
+  var notification = $('<a>');
+  if (type != 'player_messages') {
+    notification.on('click', function() {
+      close_notification_message(this);
+    });
+  }
+
   notification.append($('<span>').addClass('image').append($('<img>').attr({
     'src': $('div.profile_pic img').attr('src'),
     'alt': '{{_('Profile image')}}'
   })));
   notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('data-timestamp',notification_date).text('...')));
   notification.append($('<span>').addClass('message').text(message).append($('<span>').addClass('pull-right').html('<i class="fa ' + icon + ' ' + color + '"></i>')));
+
   // Remove no messages line
   menu.find('li.no_message').hide();
   // Add new message on top
   menu.prepend($('<li>').addClass('notification').append(notification));
+
   // Only allow 6 messages, more will be removed
   menu.find('li.notification:gt(5)').remove();
   // Update the notifcation time
@@ -579,6 +627,31 @@ function door_closed() {
   door_indicator.find('span.open').hide();
   door_indicator.find('span.closed').show();
   update_door_messages(false);
+}
+
+function update_player_indicator(data) {
+  var player_indicator = $('a#player_indicator');
+  if (data.running == 'disabled') {
+    player_indicator.find('span.running').hide();
+    player_indicator.find('span.stopped').hide();
+    player_indicator.find('span.disabled').show();
+    add_notification_message('player_messages',
+                             '{{_('Disabled')}}',
+                             '{{_('Either add audio files and playlists. Or you have a pwm-dimmer switch configured.')}}',
+                             'fa-play-circle-o',
+                             'orange');
+    return;
+  }
+
+  player_indicator.find('span.disabled').hide();
+  if (data.running) {
+    player_indicator.find('span.running').show();
+    player_indicator.find('span.stopped').hide();
+  } else {
+    player_indicator.find('span.running').hide();
+    player_indicator.find('span.stopped').show();
+  }
+  update_player_messages(data);
 }
 
 function get_theme_color(color) {
@@ -765,17 +838,23 @@ function sensor_gauge(name, data) {
         highDpiSupport: true,
         percentColors: colors,
       };
+
       // Init Gauge
       $('#' + name + ' .gauge').attr('done',1);
       //$('#' + name + ' .goal-wrapper span:nth-child(2)').text('°' + globals.temperature_indicator);
       globals.gauges[name] = new Gauge($('#' + name + ' .gauge')[0]).setOptions(opts);
-      globals.gauges[name].setTextField($('#' + name + ' .gauge-value')[0]);
+      if (name != 'system_disk' && name != 'system_memory') {
+        globals.gauges[name].setTextField($('#' + name + ' .gauge-value')[0]);
+      }
       // Only set min and max only once. Else the gauge will flicker each data update
       globals.gauges[name].maxValue = data.limit_max;
       globals.gauges[name].setMinValue(data.limit_min);
     }
     // Update values
     globals.gauges[name].set(data.current);
+    if (name == 'system_disk' || name == 'system_memory') {
+      $('#' + name + ' .gauge-value').text(formatBytes(data.current))
+    }
     $('div#' + name + ' .x_title h2 .badge').toggle(data.alarm);
   }
 }
@@ -887,7 +966,8 @@ function history_graph(name, data, type) {
       tickFormatter: function(val, axis) {
         switch(type) {
           case 'system_memory':
-              val = formatNumber(val / (1024 * 1024)) + ' MB'
+          case 'system_disk':
+              val = formatBytes(val);
             break;
 
           case 'system_uptime':
@@ -980,6 +1060,19 @@ function history_graph(name, data, type) {
         data: data.free
       }, {
         label: '{{_('Total memory')}}',
+        data: data.total
+      }];
+      break;
+
+    case 'system_disk':
+      graph_data = [{
+        label: '{{_('Used space')}}',
+        data: data.used
+      }, {
+        label: '{{_('Free space')}}',
+        data: data.free
+      }, {
+        label: '{{_('Total space')}}',
         data: data.total
       }];
       break;
@@ -1244,7 +1337,7 @@ function update_power_switch(id, data) {
 
     power_switch.find('.knob').knob({
 			release: function(value) {
-        $.getJSON('/api/switch/state/' + id + '/' + value,function(dummy){
+        $.post('/api/switch/state/' + id + '/' + value,function(dummy){
         });
       },
       format: function(value) {
@@ -1258,7 +1351,7 @@ function update_power_switch(id, data) {
 
 function toggleSwitch(id) {
   id = id.split('_')[1];
-  $.getJSON('/api/switch/toggle/' + id,function(data){
+  $.post('/api/switch/toggle/' + id,function(data){
   });
 }
 
@@ -1321,6 +1414,89 @@ function load_door_history() {
     $.each(Object.keys(door_status).sort(), function(counter,change_time) {
       update_door_messages((door_status[change_time] === 1), change_time);
     })
+  });
+}
+
+function load_player_status() {
+  $.getJSON('/api/audio/playing', function(player_data) {
+    update_player_indicator(player_data);
+  });
+}
+
+function preview_audio_file(audio_file_id, audio_file_name) {
+  var modal = $('.modal.fade.preview_player');
+  modal.find('.modal-body h4').text(audio_file_name);
+  modal.find('.modal-body p').html('<audio controls><source src="/audio/' + audio_file_name + '" /></audio>');
+}
+
+
+function delete_audio_file(audio_file_id, audio_file_name) {
+  if (confirm('{{_('Are you sure to delete the file')}}: \'' + audio_file_name + '\' ?')) {
+    $.ajax({
+      url: "/api/audio/file/" + audio_file_id,
+      type: "DELETE",
+      dataType : "json",
+    }).done(function(response) {
+      new PNotify({
+        type: (response.ok ? 'success' : 'error'),
+        title: response.title,
+        text: response.message,
+        nonblock: {
+          nonblock: true
+        },
+        delay: 3000,
+        mouse_reset: false,
+        //addclass: 'dark',
+        styling: 'bootstrap3',
+        hide: true,
+      });
+    });
+  }
+}
+
+function add_audio_playlist() {
+  var form = $('.new-playlist-form');
+  if (!check_form_data(form)) return false;
+
+  add_audio_playlist_row('None',
+                form.find('input[name="playlist_[nr]_name"]').val(),
+                form.find('input[name="playlist_[nr]_start"]').val(),
+                form.find('input[name="playlist_[nr]_stop"]').val(),
+                form.find('input[name="playlist_[nr]_volume"]').val(),
+                form.find('select[name="playlist_[nr]_files"]').val(),
+                form.find('input[name="playlist_[nr]_repeat"]').val() == 'true',
+                form.find('input[name="playlist_[nr]_shuffle"]').val() == 'true');
+
+  $('.new-playlist-form').modal('hide');
+}
+
+function add_audio_playlist_row(id,name,start,stop,volume,files,repeat,shuffle) {
+  var audio_playlist_row = $($('.modal-body div.row.playlist').parent().clone().html().replace(/\[nr\]/g, $('form div.row.playlist').length));
+
+  // Remove existing switchery from modal input form
+  audio_playlist_row.find('span.switchery').remove();
+  audio_playlist_row.find('.x_title').show().find('h2 small').text(name);
+  audio_playlist_row.find('span.select2.select2-container').remove();
+
+  audio_playlist_row.find('input, select').each(function(counter,item){
+    $(item).val(eval($(item).attr('name').replace(/playlist_[0-9]+_/g,'')));
+  });
+
+  audio_playlist_row.insertBefore('div.row.submit').show();
+  reload_reload_theme();
+
+  audio_playlist_row.find("select").select2({
+    placeholder: '{{_('Select an option')}}',
+    allowClear: false,
+    minimumResultsForSearch: Infinity
+  });
+
+  audio_playlist_row.find('.js-switch').each(function(index,html_element){
+    this.checked = (this.name.indexOf('_repeat') != -1 && repeat == true) || (this.name.indexOf('_shuffle') != -1 && shuffle == true)
+    var switchery = new Switchery(this);
+    html_element.onchange = function() {
+      this.value = this.checked;
+    };
   });
 }
 
@@ -1485,6 +1661,7 @@ $(document).ready(function() {
 	}).appendTo("body");
 
   load_door_history();
+  load_player_status();
   load_page('dashboard.html');
 
   setInterval(function() {

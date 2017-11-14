@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
-import logging
-logger = logging.getLogger(__name__)
+import terrariumLogging
+logger = terrariumLogging.logging.getLogger(__name__)
 
-from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
 import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
 import pigpio
-from hashlib import md5
 import thread
 import time
 import math
+
+from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
+from hashlib import md5
 from terrariumUtils import terrariumUtils
 
 class terrariumSwitch():
-
-  valid_hardware_types = ['ftdi','gpio','gpio-inverse','pwm-dimmer']
+  VALID_HARDWARE_TYPES = ['ftdi','gpio','gpio-inverse','pwm-dimmer']
 
   OFF = False
   ON = True
@@ -24,7 +24,7 @@ class terrariumSwitch():
   PWM_DIMMER_MIN_TIMEOUT=0.2
   PWM_DIMMER_MIN_STEP=1
 
-  bitbang_addresses = {
+  BITBANG_ADDRESSES = {
     "1":"2",
     "2":"8",
     "3":"20",
@@ -76,7 +76,7 @@ class terrariumSwitch():
     for device in Driver().list_devices():
       vendor, product, self.device = map(lambda x: x.decode('latin1'), device)
       self.device_type = 'Serial' if product.endswith('UART') else 'BitBang'
-      logger.info('Found switch board %s, %s, %s, of type %s' % (vendor,product,self.device,self.device_type))
+      logger.debug('Found switch board %s, %s, %s, of type %s' % (vendor,product,self.device,self.device_type))
       break # For now, we only support 1 switch board!
 
   def __load_gpio_device(self):
@@ -93,7 +93,7 @@ class terrariumSwitch():
   def __dim_switch(self,from_value,to_value,duration):
     # When the dimmer is working, ignore new state changes.
     if not self.__dimmer_running:
-      self.__pigpio.set_pull_up_down(int(self.get_address()), pigpio.PUD_OFF)
+      self.__pigpio.set_pull_up_down(terrariumUtils.to_BCM_port_number(self.get_address()), pigpio.PUD_OFF)
       self.__dimmer_running = True
 
       if from_value is None or duration == 0:
@@ -101,7 +101,7 @@ class terrariumSwitch():
                   self.get_name(),from_value,to_value)
         # Geen animatie, gelijk to_value
         dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - float(to_value)) / 100.0)
-        self.__pigpio.hardware_PWM(int(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
+        self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
       else:
         from_value = float(from_value)
         to_value = float(to_value)
@@ -124,12 +124,12 @@ class terrariumSwitch():
           from_value += (direction * distance)
           dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - from_value) / 100.0)
           logger.debug('Dimmer animation: Step: %s, value %s%%, Dim value: %s, timeout %s',counter+1, from_value, dim_value, duration)
-          self.__pigpio.hardware_PWM(int(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
+          self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
           time.sleep(duration)
 
         # For impatient people... Put the dimmer at the current state value if it has changed during the animation
         dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - self.get_state()) / 100.0)
-        self.__pigpio.hardware_PWM(int(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
+        self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
 
       self.__dimmer_running = False
       logger.info('Dimmer \'%s\' is done at value %s%%',self.get_name(),self.get_state())
@@ -144,9 +144,9 @@ class terrariumSwitch():
             with BitBangDevice(self.device) as device:
               device.baudrate = 9600
               if state is terrariumSwitch.ON:
-                device.port |= int(terrariumSwitch.bitbang_addresses[str(self.get_address())], 16)
+                device.port |= int(terrariumSwitch.BITBANG_ADDRESSES[str(self.get_address())], 16)
               else:
-                device.port &= ~int(terrariumSwitch.bitbang_addresses[str(self.get_address())], 16)
+                device.port &= ~int(terrariumSwitch.BITBANG_ADDRESSES[str(self.get_address())], 16)
               device.close()
 
           elif 'Serial' == self.device_type:
@@ -158,7 +158,6 @@ class terrariumSwitch():
 
         except Exception, err:
           # Ignore for now
-          print err
           pass
 
       elif self.get_hardware_type() == 'gpio':
@@ -218,7 +217,7 @@ class terrariumSwitch():
     return self.hardwaretype
 
   def set_hardware_type(self,type):
-    if type in terrariumSwitch.valid_hardware_types:
+    if type in terrariumSwitch.VALID_HARDWARE_TYPES:
       self.hardwaretype = type
 
   def get_address(self):
@@ -306,6 +305,9 @@ class terrariumSwitch():
     if self.get_state() is None or self.is_on():
       self.set_state(terrariumSwitch.OFF)
       return self.is_off()
+
+  def is_pwm_dimmer(self):
+    return self.get_hardware_type() == 'pwm-dimmer'
 
   def dim(self,value):
     if 0 <= value <= 100:

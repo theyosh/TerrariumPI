@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import logging
-logger = logging.getLogger(__name__)
+import terrariumLogging
+logger = terrariumLogging.logging.getLogger(__name__)
 
 import gettext
 gettext.install('terrariumpi', 'locales/', unicode=True)
@@ -14,6 +14,7 @@ from bottle.ext.websocket import websocket
 from Queue import Queue
 
 from terrariumTranslations import terrariumTranslations
+from terrariumAudio import terrariumAudioPlayer
 
 import thread
 import json
@@ -54,7 +55,7 @@ class terrariumWebserver():
 
     terrariumWebserver.app.terrarium = self.__terrariumEngine
     # Load language
-    gettext.translation('terrariumpi', 'locales/', languages=[self.__terrariumEngine.config.get_active_language()]).install(True)
+    gettext.translation('terrariumpi', 'locales/', languages=[self.__terrariumEngine.config.get_language()]).install(True)
     self.__translations = terrariumTranslations()
 
     self.__routes()
@@ -70,27 +71,45 @@ class terrariumWebserver():
     self.__app.route('/<template_name:re:[^/]+\.html$>', method="GET", callback=self.__render_page)
 
     self.__app.route('/<filename:re:robots\.txt>', method="GET", callback=self.__static_file)
-    self.__app.route('/<root:re:(static|gentelella|webcam)>/<filename:path>', method="GET", callback=self.__static_file)
+    self.__app.route('/<root:re:(static|gentelella|webcam|audio)>/<filename:path>', method="GET", callback=self.__static_file)
+
+    self.__app.route('/api/<path:path>', method=['GET'], callback=self.__get_api_call)
 
     self.__app.route('/api/switch/toggle/<switchid:path>',
-                     method=['GET'],
+                     method=['POST'],
                      callback=self.__toggle_switch,
                      apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
                     )
 
     self.__app.route('/api/switch/state/<switchid:path>/<value:int>',
-                     method=['GET'],
+                     method=['POST'],
                      callback=self.__state_switch,
                      apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
                     )
 
-    self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|doors|environment|profile)>',
+    self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|doors|audio|environment|profile)>',
                      method=['PUT','POST','DELETE'],
                      callback=self.__update_api_call,
                      apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
                     )
 
-    self.__app.route('/api/<path:path>', method=['GET'], callback=self.__get_api_call)
+    self.__app.route('/api/audio/player/<action:re:(start|stop|volumeup|volumedown|mute|unmute)>',
+                     method=['POST'],
+                     callback=self.__player_commands,
+                     apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
+                    )
+
+    self.__app.route('/api/audio/file',
+                     method=['POST'],
+                     callback=self.__upload_audio_file,
+                     apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
+                    )
+
+    self.__app.route('/api/audio/file/<audiofileid:path>',
+                     method=['DELETE'],
+                     callback=self.__delete_audio_file,
+                     apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
+                    )
 
     self.__app.route('/logout',
                      method=['GET'],
@@ -99,7 +118,7 @@ class terrariumWebserver():
                     )
 
   def __template_variables(self, template):
-    variables = { 'lang' : self.__terrariumEngine.config.get_active_language(),
+    variables = { 'lang' : self.__terrariumEngine.config.get_language(),
                   'title' : self.__config['title'],
                   'version' : self.__config['version'],
                   'page_title' : _(template.replace('_',' ').capitalize()),
@@ -155,6 +174,46 @@ class terrariumWebserver():
 
     return staticfile
 
+  def __player_commands(self,action):
+    result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Player command could ot be executed!')}
+
+    if 'start' == action:
+      self.__terrariumEngine.audio_player_start()
+    elif 'stop' == action:
+      self.__terrariumEngine.audio_player_stop()
+    elif 'volumeup' == action:
+      self.__terrariumEngine.audio_player_volume_up()
+      result = {'ok' : True, 'title' : _('OK!'), 'message' : _('Player command executed!')}
+    elif 'volumedown' == action:
+      self.__terrariumEngine.audio_player_volume_down()
+      result = {'ok' : True, 'title' : _('OK!'), 'message' : _('Player command executed!')}
+    elif 'mute' == action:
+      pass
+    elif 'unmute' == action:
+      pass
+
+    return result;
+
+  def __upload_audio_file(self):
+    result = {'ok' : False, 'title' : _('Error!'), 'message' : _('File is not uploaded!')}
+    upload = request.files.get('file')
+    try:
+      upload.save(terrariumAudioPlayer.AUDIO_FOLDER)
+      self.__terrariumEngine.reload_audio_files()
+      result = {'ok' : True, 'title' : _('Success!'), 'message' : _('File \'%s\' is uploaded' % (upload.filename,))}
+    except IOError, message:
+      result['message'] = _('Duplicate file \'%s\'' % (upload.filename,))
+
+    return result
+
+  def __delete_audio_file(self,audiofileid):
+    result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Action could not be satisfied')}
+
+    if self.__terrariumEngine.delete_audio_file(audiofileid):
+      result = {'ok' : True, 'title' : _('Success!'), 'message' : _('Audio file is deleted')}
+
+    return result
+
   def __update_api_call(self,path):
     result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Data could not be saved')}
     postdata = {}
@@ -168,8 +227,8 @@ class terrariumWebserver():
       result['message'] = _('Your changes are saved')
 
       # Reload language if needed
-      if 'active_language' in postdata:
-        gettext.translation('terrariumpi', 'locales/', languages=[self.__terrariumEngine.config.get_active_language()]).install(True)
+      if 'language' in postdata:
+        gettext.translation('terrariumpi', 'locales/', languages=[self.__terrariumEngine.config.get_language()]).install(True)
         self.__translations.reload()
 
     return result
@@ -200,6 +259,19 @@ class terrariumWebserver():
 
     elif 'webcams' == action:
       result = self.__terrariumEngine.get_webcams(parameters)
+
+    elif 'audio' == action:
+      if len(parameters) > 0 and parameters[0] == 'files':
+        del(parameters[0])
+        result = self.__terrariumEngine.get_audio_files(parameters)
+      elif len(parameters) > 0 and parameters[0] == 'playing':
+        del(parameters[0])
+        result = self.__terrariumEngine.get_audio_playing()
+      elif len(parameters) > 0 and parameters[0] == 'hardware':
+        del(parameters[0])
+        result = {'audiohardware' : terrariumAudioPlayer.get_sound_cards()}
+      else:
+        result = self.__terrariumEngine.get_audio_playlists(parameters)
 
     elif 'environment' == action:
       result = self.__terrariumEngine.get_environment(parameters)
@@ -251,7 +323,7 @@ class terrariumWebserver():
   @app.error(404)
   def error404(error):
     config = terrariumWebserver.app.terrarium.get_config('system')
-    variables = { 'lang' : terrariumWebserver.app.terrarium.config.get_active_language(),
+    variables = { 'lang' : terrariumWebserver.app.terrarium.config.get_language(),
                   'title' : config['title'],
                   'page_title' : config['title'] + ' | 404'
                 }
@@ -270,8 +342,6 @@ class terrariumWebserver():
           socket.send(json.dumps(message))
         except Exception, err:
           # Socket connection is lost, stop looping....
-          #print 'listen_for_messages error:'
-          #print err
           break
 
         messages.task_done()
@@ -280,8 +350,6 @@ class terrariumWebserver():
       try:
         message = socket.receive()
       except Exception, err:
-        #print 'handle_websocket error:'
-        #print err
         break
 
       if message is not None:

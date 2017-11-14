@@ -1,5 +1,5 @@
 % include('inc/page_header.tpl')
-        <div class="x_panel">
+        <div class="x_panel help">
           <div class="x_title">
             <h2><span class="glyphicon glyphicon-info-sign" aria-hidden="true" title="{{_('Information')}}"></span> {{_('Help')}}<small></small></h2>
             <ul class="nav navbar-right panel_toolbox">
@@ -12,14 +12,14 @@
             </ul>
             <div class="clearfix"></div>
           </div>
-          <div class="x_content" style="display:none">
+          <div class="x_content">
             <p>{{_('Here you can configure your doors.')}} {{!_('Required fields are marked with \'%s\'.') % ('<span class="required">*</span>',)}}</p>
             <ul>
               <li>
                 <strong>{{_('Hardware')}}</strong>: {{!translations.get_translation('door_field_hardware')}}
               </li>
               <li>
-                <strong>{{_('Address')}}</strong>: {{translations.get_translation('door_field_address')}}
+                <strong>{{_('Address')}}</strong>: {{!translations.get_translation('door_field_address')}}
               </li>
               <li>
                 <strong>{{_('Name')}}</strong>: {{translations.get_translation('door_field_name')}}

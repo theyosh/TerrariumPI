@@ -55,7 +55,17 @@ echo "msgstr \"\"" >> terrariumpi.pot
 echo "" >> terrariumpi.pot
 
 echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"Door settings\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
+echo "#: Missing text string" >> terrariumpi.pot
 echo "msgid \"Webcam settings\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
+echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"Audio files\"" >> terrariumpi.pot
 echo "msgstr \"\"" >> terrariumpi.pot
 echo "" >> terrariumpi.pot
 

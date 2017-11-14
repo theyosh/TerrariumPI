@@ -1,5 +1,5 @@
 % include('inc/page_header.tpl')
-        <div class="x_panel">
+        <div class="x_panel help">
           <div class="x_title">
             <h2><span class="glyphicon glyphicon-info-sign" aria-hidden="true" title="{{_('Information')}}"></span> {{_('Help')}}<small></small></h2>
             <ul class="nav navbar-right panel_toolbox">
@@ -12,7 +12,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
-          <div class="x_content" style="display:none">
+          <div class="x_content">
             <p>{{_('Here you can configure your TerrariumPI server.')}} {{!_('Required fields are marked with \'%s\'.') % ('<span class="required">*</span>',)}}</p>
           </div>
         </div>
@@ -31,10 +31,10 @@
               <div class="x_content">
                 <form action="/api/config/system" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="active_language">{{_('Language')}} <span class="required">*</span></label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="language">{{_('Language')}} <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_language')}}">
-                        <select class="form-control" required="required" name="active_language" tabindex="-1" placeholder="{{_('Select an option')}}">
+                        <select class="form-control" required="required" name="language" tabindex="-1" placeholder="{{_('Select an option')}}">
                         </select>
                       </div>
                     </div>
@@ -66,6 +66,15 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cur_password">{{_('Current admin password')}} </label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control" name="cur_password" type="password" placeholder="{{_('Current admin password')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_current_password')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="soundcard">{{_('Soundcard')}} <span class="required">*</span></label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_soundcard')}}">
+                        <select class="form-control" required="required" name="soundcard" tabindex="-1" placeholder="{{_('Select an option')}}">
+                        </select>
+                      </div>
                     </div>
                   </div>
                   <div class="form-group">
@@ -117,26 +126,38 @@
         </div>
         <script type="text/javascript">
           $(document).ready(function() {
-            $.get($('form').attr('action'),function(data){
-              var language_selector = $("select[name='active_language']").select2({
+            var language_selector = $("select[name='language']").select2({
                 placeholder: '{{_('Select an option')}}',
                 allowClear: false,
                 minimumResultsForSearch: Infinity
-              });
-              $.each(data.available_languages,function(index,value){
-                language_selector.append($('<option>').attr({'value':value}).text(value));
-              });
-              language_selector.val(data.active_language).trigger('change');
+            });
 
-              var temperature_indicator = $("select[name='temperature_indicator']").select2({
+            var temperature_indicator = $("select[name='temperature_indicator']").select2({
                 placeholder: '{{_('Select an option')}}',
                 allowClear: false,
                 minimumResultsForSearch: Infinity
-              });
-              temperature_indicator.val(data.temperature_indicator).trigger('change');
+            });
 
-              $.each(Object.keys(data), function(key,value){
-                $('input[name="' + value + '"]').val(data[value]);
+            var soundcard_selector = $("select[name='soundcard']").select2({
+                placeholder: '{{_('Select an option')}}',
+                allowClear: false,
+                minimumResultsForSearch: Infinity
+            });
+
+            $.get('/api/audio/hardware',function(data) {
+              $(data.audiohardware).each(function(index,hardware_device){
+                soundcard_selector.append($('<option>').attr({'value':hardware_device.hwid}).text(hardware_device.name));
+              });
+              $.get($('form').attr('action'),function(data){
+                $.each(data.available_languages,function(index,value){
+                  language_selector.append($('<option>').attr({'value':value}).text(value));
+                });
+                language_selector.val(data.language).trigger('change');
+                soundcard_selector.val(data.soundcard).trigger('change');
+                temperature_indicator.val(data.temperature_indicator).trigger('change');
+                $.each(Object.keys(data), function(key,value){
+                  $('input[name="' + value + '"]').val(data[value]);
+                });
               });
             });
           });

@@ -15,7 +15,7 @@ apt-get -y autoremove
 # Install required packages to get the terrarium software running
 aptitude -y update
 aptitude -y safe-upgrade
-aptitude -y install libftdi1 screen python-imaging python-dateutil python-ow python-rpi.gpio python-psutil git subversion watchdog build-essential python-dev python-picamera python-opencv python-pip python-pigpio i2c-tools owfs ow-shell sqlite3
+aptitude -y install libftdi1 screen python-imaging python-dateutil python-ow python-rpi.gpio python-psutil git subversion watchdog build-essential python-dev python-picamera python-opencv python-pip python-pigpio i2c-tools owfs ow-shell sqlite3 vlc-nox python-mediainfodll libasound2-dev
 
 # Basic config:
 raspi-config
@@ -29,7 +29,7 @@ git submodule update
 cd "${BASEDIR}/.."
 
 # Install multiple python modules
-pip install --upgrade gevent untangle uptime bottle bottle_websocket pylibftdi
+pip install --upgrade gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio
 
 # Install https://pypi.python.org/pypi/pylibftdi
 # Docu https://pylibftdi.readthedocs.io/

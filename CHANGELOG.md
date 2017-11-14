@@ -2,8 +2,101 @@ Changelog
 =========
 
 
-(unreleased)
+3.1.0 (2017-11-14)
 ------------
+
+**New**
+- Add logfile compressio. [TheYOSH]
+- Add audio preview player. [TheYOSH]
+- Add audio usage page. [TheYOSH]
+- Add better configuration upgrading and logging. [TheYOSH]
+- Add disk usage stats and graphs. [TheYOSH]
+- Add automatic database upgrades during startup. [TheYOSH]
+- Add disk stats part1. [TheYOSH]
+- Add soundcard selection which adds the option to use USB soundscards.
+  [TheYOSH]
+- Added player and dimmer switch warning to power switch settings page
+  and playlist page. [TheYOSH]
+- Add information text and changed showing help information. [TheYOSH]
+- Add player disabled message. [TheYOSH]
+- Add PWM Dimmer check and disable audio when a PWM dimmer is used.
+  [TheYOSH]
+- Add web based audio player. Add playlist options repeat and shuffle.
+  [TheYOSH]
+- Add support for repeat and shuffle playlists. [TheYOSH]
+- Add extra check if switch history data is available. Fix [#41](https://github.com/theyosh/TerrariumPI/issues/41).
+  [TheYOSH]
+- Add Leaflet.loading as submodule. [TheYOSH]
+- Add Leaflet fullscreen as submodule. [TheYOSH]
+- Add check for non existing sensor ids. [#38](https://github.com/theyosh/TerrariumPI/issues/38). [TheYOSH]
+- Add extra information when rebooting. [TheYOSH]
+
+**Fixes**
+- Fix updating weather data when offline. [TheYOSH]
+- Fix logging. [TheYOSH]
+- Small fixes. [TheYOSH]
+- Small fixes. [TheYOSH]
+- Fix logging for saving new doors. [TheYOSH]
+- Fix logging for saving new switches. [TheYOSH]
+- Fix audio playlists reloading. [TheYOSH]
+- Fix notification message color. [TheYOSH]
+- Fix switch toggleing. [TheYOSH]
+- Fix HTML in dutch translation. [TheYOSH]
+- Fix dimmer detection. [TheYOSH]
+- Fix repeat and shuffle switches when a new playlist is added.
+  [TheYOSH]
+- Fix open door indicator. [TheYOSH]
+- Attempt to fix issue [#44](https://github.com/theyosh/TerrariumPI/issues/44). [TheYOSH]
+- Final fix German language. Thanks @vanessa2013. [TheYOSH]
+- Fix German translation. [TheYOSH]
+- Fix water price calculation. [TheYOSH]
+- Fix [#40](https://github.com/theyosh/TerrariumPI/issues/40). Keeping your iguana nicely warm. [TheYOSH]
+- Fix [#36](https://github.com/theyosh/TerrariumPI/issues/36). [TheYOSH]
+
+**Updates**
+- Update changelog. [TheYOSH]
+- Update Dutch translation. [TheYOSH]
+- Update logging. [TheYOSH]
+- Update logging. [TheYOSH]
+- Update disk and memory graphs. [TheYOSH]
+- Update language configuration variable. [TheYOSH]
+- Update translations. [TheYOSH]
+- Update logging. [TheYOSH]
+- Update changelog. [TheYOSH]
+- Update module fancybox. [TheYOSH]
+- Update version number. [TheYOSH]
+- Update readme documentation. [TheYOSH]
+- Update translations. [TheYOSH]
+- Major update. Transform all BCM pin numbering to GPIO in config. Code
+  will transform to BCM numbering when needed. Makes it easier to add
+  GPIO based hardware. [TheYOSH]
+- Update price formatting power and water usage on the dasboard.
+  [TheYOSH]
+- Update German translation. [TheYOSH]
+- Audio update to get Pi silent during startup :( [TheYOSH]
+- Better submodules update support. [TheYOSH]
+- Update with remote master. [TheYOSH]
+
+**Other**
+- Clean up weather code. [TheYOSH]
+- Remove debug. [TheYOSH]
+- Log volume changes. [TheYOSH]
+- Better DHT sensor warnings. [TheYOSH]
+- Max timeout DHT senors is 10 seconds. [TheYOSH]
+- Code cleanup. [TheYOSH]
+- Cleanup Audio player code. [TheYOSH]
+- Remove debug. [TheYOSH]
+- Merge branch 'master' into feature/audio_modules. [TheYOSH]
+- Final tuning audio. [TheYOSH]
+- Merge branch 'master' into feature/audio_modules. [TheYOSH]
+- Remove debug. [TheYOSH]
+- Temp stash. [TheYOSH]
+- First attempt to add an audio system with audio files and playlists.
+  [#42](https://github.com/theyosh/TerrariumPI/issues/42). [TheYOSH]
+
+
+3.0.0 (2017-10-29)
+------------------
 
 **New**
 - Add sqlite3 dependency for manual database manupilation. [TheYOSH]
@@ -18,7 +111,6 @@ Changelog
 
 **Fixes**
 - Fix empty graphs. [TheYOSH]
-- Fixed missing translation in home dashboard. [#33](https://github.com/theyosh/TerrariumPI/issues/33). [TheYOSH]
 - Fix timer issues [#34](https://github.com/theyosh/TerrariumPI/issues/34). [TheYOSH]
 - Fix graphing empty graphs and smaller dimmer knob. [TheYOSH]
 - Fixed total duration calculation in total power usage. [TheYOSH]
@@ -27,8 +119,11 @@ Changelog
 - Fix switch toggle to support dimmers. [TheYOSH]
 - Fix devision by zero. [TheYOSH]
 - Fix SQL duplicate key error. [TheYOSH]
+- Fix timer issues [#34](https://github.com/theyosh/TerrariumPI/issues/34). [TheYOSH]
+- Fixed missing translation in home dashboard. [#33](https://github.com/theyosh/TerrariumPI/issues/33). [TheYOSH]
 
 **Updates**
+- Update changelog. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update engine loop to make sure at least one run per minute is
   possible. Should prevent spicky graphs. [TheYOSH]
@@ -41,11 +136,15 @@ Changelog
   [TheYOSH]
 - Updated data logging and graphing. Reduced load on the client side.
   [TheYOSH]
-- Update gentelella. [TheYOSH]
 - Updated dimmer settings in switch settings page. [TheYOSH]
 - Updated supported hardware page. [TheYOSH]
+- Update environment dashboard modus names [#34](https://github.com/theyosh/TerrariumPI/issues/34). [TheYOSH]
+- Update gentelella. [TheYOSH]
 
 **Other**
+- Merge pull request [#35](https://github.com/theyosh/TerrariumPI/issues/35) from theyosh/feature/power_dimmer. [TheYOSH]
+
+  Feature/power dimmer
 - Collector code clean up and better data storage and retrieval.
   [TheYOSH]
 - Merge branch 'master' into feature/power_dimmer. [TheYOSH]
@@ -509,5 +608,3 @@ Changelog
 - Typo. [TheYOSH]
 - Moved door status to own page. [TheYOSH]
 - Use system default pip. [TheYOSH]
-
-

@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
-import logging
-logger = logging.getLogger(__name__)
+import terrariumLogging
+logger = terrariumLogging.logging.getLogger(__name__)
 
 import RPi.GPIO as GPIO
 import thread
-
-from time import time
 from hashlib import md5
 from gevent import monkey, sleep
 monkey.patch_all()
 
 class terrariumDoor():
-  valid_hardware_types = ['gpio']
+  VALID_HARDWARE_TYPES = ['gpio']
+  CHECKER_TIMEOUT = 0.5
 
   CLOSED = 'closed'
   OPEN = 'open'
@@ -27,10 +26,6 @@ class terrariumDoor():
     self.callback = callback
 
     self.set_hardware_type(hardware_type)
-
-    if self.get_hardware_type() == 'gpio':
-      pass
-
     self.set_address(address)
     self.set_name(name)
 
@@ -65,7 +60,7 @@ class terrariumDoor():
         if self.callback is not None:
           self.callback(self.get_data(),True)
 
-      sleep(0.5)
+      sleep(terrariumDoor.CHECKER_TIMEOUT)
 
   def get_data(self):
     return {'id': self.get_id(),
@@ -82,7 +77,7 @@ class terrariumDoor():
     return self.hardwaretype
 
   def set_hardware_type(self,type):
-    if type in terrariumDoor.valid_hardware_types:
+    if type in terrariumDoor.VALID_HARDWARE_TYPES:
       self.hardwaretype = type
 
   def get_address(self):

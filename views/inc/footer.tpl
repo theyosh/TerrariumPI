@@ -44,6 +44,15 @@
   <script type="text/javascript" src='/static/fancybox/dist/jquery.fancybox.min.js'></script>
   <!-- Load the terrariumPI JS script-->
   <script type="text/javascript" src="/static/js/jquery.fullscreen-min.js"></script>
+  <!-- Dropzone.js -->
+  <script type="text/javascript" src="/gentelella/vendors/dropzone/dist/min/dropzone.min.js"></script>
+  <!-- DataTables -->
+  <script type="text/javascript" src="/gentelella/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="/gentelella/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+  <script type="text/javascript" src="/gentelella/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+  <!-- Switchery -->
+  <script type="text/javascript" src="/gentelella/vendors/switchery/dist/switchery.min.js"></script>
+
   <!-- Load the terrariumPI JS script-->
   <script type="text/javascript" src="/static/js/terrariumpi.js"></script>
   <script type="text/javascript">

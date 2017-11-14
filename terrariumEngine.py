@@ -1,21 +1,22 @@
 # -*- coding: utf-8 -*-
-import logging
-logger = logging.getLogger(__name__)
+import terrariumLogging
+logger = terrariumLogging.logging.getLogger(__name__)
 
 import thread
 import time
 import uptime
 import os
 import psutil
+import copy
+from hashlib import md5
 
 from terrariumConfig import terrariumConfig
-
 from terrariumWeather import terrariumWeather
 from terrariumSensor import terrariumSensor
 from terrariumSwitch import terrariumSwitch
 from terrariumDoor import terrariumDoor
 from terrariumWebcam import terrariumWebcam
-
+from terrariumAudio import terrariumAudioPlayer
 from terrariumCollector import terrariumCollector
 from terrariumEnvironment import terrariumEnvironment
 
@@ -45,7 +46,7 @@ class terrariumEngine():
 
     # Load data collector for historical data
     logger.info('Loading terrariumPI collector')
-    self.collector = terrariumCollector()
+    self.collector = terrariumCollector(self.config.get_system()['version'])
     logger.info('Done loading terrariumPI collector')
 
     # Set the Pi power usage (including usb devices directly on the PI)
@@ -82,7 +83,13 @@ class terrariumEngine():
     logger.debug('Done loading terrariumPI environment system')
 
     # Load webcams from config
-    self.__load_webcams();
+    self.__load_webcams()
+
+    # Load audio system
+    self.__audio_player = terrariumAudioPlayer(self.config.get_audio_playlists(),
+                                               int(self.config.get_active_soundcard()),
+                                               any(self.power_switches[switchid].is_pwm_dimmer() for switchid in self.power_switches),
+                                               self.get_audio_playing)
 
     # Start system update loop
     logger.info('Start terrariumPI engine')
@@ -121,6 +128,9 @@ class terrariumEngine():
         power_switch = terrariumSwitch(switch_config[power_switch_config]['id'],
                                        switch_config[power_switch_config]['hardwaretype'],
                                        switch_config[power_switch_config]['address'],
+                                       switch_config[power_switch_config]['name'],
+                                       switch_config[power_switch_config]['power_wattage'],
+                                       switch_config[power_switch_config]['water_flow'],
                                        callback=self.toggle_switch)
         power_switch_id = power_switch.get_id()
         self.power_switches[power_switch_id] = power_switch
@@ -262,6 +272,7 @@ class terrariumEngine():
       self.get_uptime(socket=True)
       self.get_power_usage_water_flow(socket=True)
       self.get_environment(socket=True)
+      self.get_audio_playing(socket=True)
 
       # Log system stats
       self.collector.log_system_data(self.get_system_stats())
@@ -423,7 +434,13 @@ class terrariumEngine():
     for switchdata in data:
       if switchdata['id'] is None or switchdata['id'] == 'None' or switchdata['id'] not in self.power_switches:
         # New switch (add)
-        power_switch = terrariumSwitch(None,switchdata['hardwaretype'],switchdata['address'],callback=self.toggle_switch)
+        power_switch = terrariumSwitch(None,
+                                       switchdata['hardwaretype'],
+                                       switchdata['address'],
+                                       switchdata['name'],
+                                       switchdata['power_wattage'],
+                                       switchdata['water_flow'],
+                                       callback=self.toggle_switch)
       else:
         # Existing switch
         power_switch = self.power_switches[switchdata['id']]
@@ -495,7 +512,10 @@ class terrariumEngine():
     for doordata in data:
       if doordata['id'] is None or doordata['id'] == 'None' or doordata['id'] not in self.doors:
         # New switch (add)
-        door = terrariumDoor(None,doordata['hardwaretype'],doordata['address'])
+        door = terrariumDoor(None,
+                             doordata['hardwaretype'],
+                             doordata['address'],
+                             doordata['name'])
       else:
         # Existing door
         door = self.doors[doordata['id']]
@@ -588,6 +608,104 @@ class terrariumEngine():
     return False
   # End webcams part
 
+  # Start audio files part
+  def reload_audio_files(self):
+    self.__audio_player.reload_audio_files()
+
+  def upload_audio_file(self):
+    pass
+
+  def delete_audio_file(self,audiofileid):
+    audio_files = self.__audio_player.get_audio_files()
+    if audiofileid in audio_files:
+      if audio_files[audiofileid].delete():
+        self.reload_audio_files()
+        return True
+
+    return False
+
+  def get_audio_files(self, parameters = []):
+    audio_files = self.__audio_player.get_audio_files()
+    data = []
+    filter = None
+    if len(parameters) > 0 and parameters[0] is not None:
+      filter = parameters[0]
+
+    if filter is not None and filter in audio_files:
+      data.append(audio_files[filter].get_data())
+
+    else:
+      for audiofileid in audio_files:
+        data.append(audio_files[audiofileid].get_data())
+
+    return {'audiofiles' : data}
+
+  def get_audio_playlists(self, parameters = [], socket = False):
+    playlists = self.__audio_player.get_playlists()
+    data = []
+    filter = None
+    if len(parameters) > 0 and parameters[0] is not None:
+      filter = parameters[0]
+
+    if filter is not None and filter in playlists:
+      data.append(playlists[filter])
+
+    else:
+      for playlist_id in playlists:
+        data.append(playlists[playlist_id].get_data())
+
+    if socket:
+      self.__send_message({'type':'playlists_data','data':data})
+    else:
+      return {'playlists' : data}
+
+  def get_audio_playlists_config(self):
+    return self.get_audio_playlists()
+
+  def set_audio_playlists_config(self, data):
+    new_audio_playlists = {}
+    for audio_playlist_data in data:
+      audio_playlist = {'id'     : md5(b'' + str(audio_playlist_data['start']) + str(audio_playlist_data['stop'])).hexdigest(),
+                        'name'   : audio_playlist_data['name'],
+                        'start'  : audio_playlist_data['start'],
+                        'stop'   : audio_playlist_data['stop'],
+                        'volume' : audio_playlist_data['volume'],
+                        'files'  : audio_playlist_data['files'],
+                        'repeat' : audio_playlist_data['repeat'] in [True,'True','true','1',1,'on'],
+                        'shuffle': audio_playlist_data['shuffle'] in [True,'True','true','1',1,'on'],
+                        }
+
+      new_audio_playlists[audio_playlist['id']] = audio_playlist
+
+    if self.config.save_audio_playlists(new_audio_playlists):
+      self.__audio_player.reload_playlists(self.config.get_audio_playlists())
+      return True
+
+    return False
+
+  def get_audio_playing(self,socket = False):
+    data = self.__audio_player.get_current_state()
+
+    if socket:
+      self.__send_message({'type':'player_indicator','data': data})
+    else:
+      return data
+
+  def start_audio_player(self):
+    pass
+
+  def stop_audio_player(self):
+    pass
+
+  def audio_player_volume_up(self):
+    self.__audio_player.volume_up()
+    self.get_audio_playing(True)
+
+  def audio_player_volume_down(self):
+    self.__audio_player.volume_down()
+    self.get_audio_playing(True)
+
+  # End audio part
 
   # Environment part
   def get_environment(self, parameters = [], socket = False):
@@ -684,6 +802,7 @@ class terrariumEngine():
   def get_system_stats(self, socket = False):
     memory = psutil.virtual_memory()
     uptime = self.get_uptime()
+    disk = psutil.disk_usage('/')
 
     cpu_temp = -1
     with open('/sys/class/thermal/thermal_zone0/temp') as temperature:
@@ -692,6 +811,9 @@ class terrariumEngine():
     data = {'memory' : {'total' : memory.total,
                         'used' : memory.used,
                         'free' : memory.free},
+            'disk' : {'total' : disk.total,
+                        'used' : disk.used,
+                        'free' : disk.free},
             'load' : {'load1' : uptime['load'][0],
                       'load5' : uptime['load'][1],
                       'load15' : uptime['load'][2]},
@@ -702,11 +824,13 @@ class terrariumEngine():
     if socket:
       gauge_data = {'system_load'        : {'current' : data['load']['load1'] * 100, 'alarm_min' : 0, 'alarm_max': 80, 'limit_min' : 0, 'limit_max': 100},
                     'system_temperature' : {'current' : data['temperature'], 'alarm_min' : 30, 'alarm_max': 60, 'limit_min' : 0, 'limit_max': 80},
-                    'system_memory'      : {'current' : data['memory']['used'] / (1024 * 1024), 'alarm_min' : data['memory']['total'] / (1024 * 1024) * 0.1, 'alarm_max': data['memory']['total'] / (1024 * 1024) * 0.9, 'limit_min' : 0, 'limit_max': data['memory']['total'] / (1024 * 1024)}}
+                    'system_memory'      : {'current' : data['memory']['used'], 'alarm_min' : data['memory']['total'] * 0.1, 'alarm_max': data['memory']['total'] * 0.9, 'limit_min' : 0, 'limit_max': data['memory']['total']},
+                    'system_disk'        : {'current' : data['disk']['used'], 'alarm_min' : data['disk']['total'] * 0.1, 'alarm_max': data['disk']['total'] * 0.9, 'limit_min' : 0, 'limit_max': data['disk']['total']}}
 
       gauge_data['system_load']['alarm'] = not(gauge_data['system_load']['alarm_min'] < gauge_data['system_load']['current'] < gauge_data['system_load']['alarm_max'])
       gauge_data['system_temperature']['alarm'] = not(gauge_data['system_temperature']['alarm_min'] < gauge_data['system_temperature']['current'] < gauge_data['system_temperature']['alarm_max'])
       gauge_data['system_memory']['alarm'] = not(gauge_data['system_memory']['alarm_min'] < gauge_data['system_memory']['current'] < gauge_data['system_memory']['alarm_max'])
+      gauge_data['system_disk']['alarm'] = not(gauge_data['system_disk']['alarm_min'] < gauge_data['system_disk']['current'] < gauge_data['system_disk']['alarm_max'])
 
       self.__send_message({'type':'sensor_gauge','data':gauge_data})
     else:
@@ -764,6 +888,9 @@ class terrariumEngine():
     if 'doors' == part or part is None:
       data.update(self.get_doors_config())
 
+    if 'audio' == part or part is None:
+      data.update(self.get_audio_playlists_config())
+
     if 'profile' == part or part is None:
       data.update(self.get_profile_config())
 
@@ -788,6 +915,9 @@ class terrariumEngine():
 
     elif 'doors' == part:
       update_ok = self.set_doors_config(data)
+
+    elif 'audio' == part:
+      update_ok = self.set_audio_playlists_config(data)
 
     elif 'environment' == part:
       update_ok = self.set_environment_config(data)

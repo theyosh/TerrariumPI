@@ -1,27 +1,26 @@
 # -*- coding: utf-8 -*-
-import logging
-logger = logging.getLogger(__name__)
+import terrariumLogging
+logger = terrariumLogging.logging.getLogger(__name__)
 
-from time import time
-from io import BytesIO
+import time
 import StringIO
-
-from picamera import PiCamera, PiCameraError
 import cv2
-from PIL import Image, ImageDraw, ImageFont
-
-from hashlib import md5
 import math
-from datetime import datetime
-
+import datetime
 import urllib2
 import base64
+
+from picamera import PiCamera, PiCameraError
+from io import BytesIO
+from PIL import Image, ImageDraw, ImageFont
+from hashlib import md5
 
 from gevent import monkey, sleep
 monkey.patch_all()
 
 class terrariumWebcam():
-
+  TILE_LOCATION = 'webcam/'
+  JPEG_QUALITY = 95
   OFFLINE = 'offline'
   ONLINE = 'online'
   UPDATE_TIMEOUT = 60
@@ -32,7 +31,6 @@ class terrariumWebcam():
 
     # Main config
     self.tile_size = 256 # Smaller tile sizes does not work with LeafJS
-    self.tile_location = 'webcam/'
     self.font_size = 10
     self.retries = 3
     self.webcam_warm_up = 2
@@ -89,7 +87,7 @@ class terrariumWebcam():
 
     if not self.state and oldstate:
       # Changed from online to offline
-      logger.warning('Raw image \'%s\' at location %s is not available!' % (self.get_name(),self.get_location(),))
+      logger.error('Raw image \'%s\' at location %s is not available!' % (self.get_name(),self.get_location(),))
       self.__get_offline_image()
       self.__tile_image()
     elif self.state:
@@ -113,10 +111,10 @@ class terrariumWebcam():
         self.raw_image = self.raw_image.transpose(Image.FLIP_LEFT_RIGHT)
       logger.debug('Rotated raw image %s to %s' % (self.get_name(),self.get_rotation()))
 
-      self.raw_image.save(self.get_raw_image(),'jpeg',quality=95)
+      self.raw_image.save(self.get_raw_image(),'jpeg',quality=terrariumWebcam.JPEG_QUALITY)
       logger.debug('Saved raw image %s to disk: %s' % (self.get_name(),self.get_raw_image()))
 
-    self.last_update = int(time())
+    self.last_update = int(time.time())
 
   def __get_raw_image_rpicam(self):
     logger.debug('Using RPICAM')
@@ -215,7 +213,7 @@ class terrariumWebcam():
     mask = Image.open('static/images/mask_offline.png')
     draw = ImageDraw.Draw(mask)
     font = ImageFont.truetype('fonts/DejaVuSans.ttf',40)
-    text = ['Offline since:',datetime.now().strftime("%A %d %B %Y"),datetime.now().strftime("%H:%M:%S")]
+    text = [_('Offline since') + ':',datetime.datetime.now().strftime("%A %d %B %Y"),datetime.datetime.now().strftime("%H:%M:%S")]
     draw_text_center(mask,draw,text,font)
 
     mask_width, mask_height = mask.size
@@ -233,11 +231,11 @@ class terrariumWebcam():
     # Create black box on the bottom of the image
     draw.rectangle([0,source_height-(self.font_size+2),source_width,source_height],fill='black')
     # Draw the current time stamp on the image
-    draw.text((1, source_height-(self.font_size+1)), self.name + ' @ ' + (datetime.now()).strftime("%d/%m/%Y %H:%M:%S") ,(255,255,255),font=font)
+    draw.text((1, source_height-(self.font_size+1)), self.name + ' @ ' + (datetime.datetime.now()).strftime("%d/%m/%Y %H:%M:%S") ,(255,255,255),font=font)
     del draw
 
   def __tile_image(self):
-    starttime = time()
+    starttime = time.time()
     # Original width
     source_width, source_height = self.raw_image.size
     self.resolution = self.raw_image.size
@@ -282,9 +280,9 @@ class terrariumWebcam():
           crop_size = ( int(row*self.tile_size), int(column*self.tile_size) ,int((row+1)*self.tile_size), int((column+1)*self.tile_size))
           logger.debug('Cropping image from position %s' % (crop_size,))
           tile = canvas.crop(crop_size)
-          logger.debug('Saving cropped image to %s' % (self.tile_location + self.id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg',))
-          tile.save(self.tile_location + self.id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg','jpeg',quality=95)
-          logger.debug('Done saving %s' % (self.tile_location + self.id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg',))
+          logger.debug('Saving cropped image to %s' % (terrariumWebcam.TILE_LOCATION + self.id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg',))
+          tile.save(terrariumWebcam.TILE_LOCATION + self.id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg','jpeg',quality=terrariumWebcam.JPEG_QUALITY)
+          logger.debug('Done saving %s' % (terrariumWebcam.TILE_LOCATION + self.id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg',))
 
       # Scale down by 50%
       canvas_width /= 2.0
@@ -296,16 +294,16 @@ class terrariumWebcam():
     # Clear memory, not sure if needed
     del source
     del canvas
-    logger.debug('Done tiling webcam image \'%s\' in %.5f seconds' % (self.get_name(),time()-starttime))
+    logger.debug('Done tiling webcam image \'%s\' in %.5f seconds' % (self.get_name(),time.time()-starttime))
 
   def update(self):
-    starttime = time()
+    starttime = time.time()
     if self.last_update is None or (int(starttime) - self.get_last_update()) > terrariumWebcam.UPDATE_TIMEOUT:
-      logger.info('Updating webcam \'%s\' at location %s' % (self.get_name(), self.get_location(),))
+      logger.debug('Updating webcam \'%s\' at location %s' % (self.get_name(), self.get_location(),))
       self.__get_raw_image()
       if self.get_state() == 'online':
         self.__tile_image()
-      logger.info('Done updating webcam \'%s\' at location %s in %.5f seconds' % (self.get_name(), self.get_location(),time()-starttime))
+      logger.info('Done updating webcam \'%s\' at location %s in %.5f seconds' % (self.get_name(), self.get_location(),time.time()-starttime))
 
   def get_data(self):
     return {'id': self.get_id(),
@@ -365,7 +363,7 @@ class terrariumWebcam():
     return self.last_update
 
   def get_raw_image(self):
-    return self.tile_location + self.get_id() + '_raw.jpg'
+    return terrariumWebcam.TILE_LOCATION + self.get_id() + '_raw.jpg'
 
   def get_preview_image(self):
-    return self.tile_location + self.get_id() + '_tile_0_0_0.jpg'
+    return terrariumWebcam.TILE_LOCATION + self.get_id() + '_tile_0_0_0.jpg'

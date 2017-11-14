@@ -21,6 +21,9 @@
                 <li class="" role="presentation">
                   <a aria-expanded="false" data-toggle="tab" href="#hardware-tab-webcams" id="hardware_tab_webcams" role="tab">{{_('Webcams')}}</a>
                 </li>
+                <li class="" role="presentation">
+                  <a aria-expanded="false" data-toggle="tab" href="#hardware-tab-audio" id="hardware_tab_audio" role="tab">{{_('Audio')}}</a>
+                </li>
               </ul>
               <div class="tab-content col-xs-9" id="hardware_content">
                 <div aria-labelledby="hardware_tab_hardware" class="tab-pane fade active in" id="hardware-tab-hardware" role="tabpanel">
@@ -129,6 +132,11 @@
                     <h4>{{_('USB')}}</h4>
                     <p>{{_('All kind of USB cameras can be used. Enter physical path of the device like /dev/videoX.')}}</p>
                   </div>
+                </div>
+                <div aria-labelledby="hardware_tab_audio" class="tab-pane fade" id="hardware-tab-audio" role="tabpanel">
+                  <!-- <img src="static/images/documentation/door_magnets.jpg" alt="Dashboard screenshot" class="img-thumbnail alignright col-xs-3" /> -->
+                  <h2>{{_('Audio')}}</h2>
+                  <p>{{_('BLA')}}</p>
                 </div>
               </div>
             </div>
