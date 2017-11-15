@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-3.1.0 (2017-11-14)
-------------
+3.1.0 (2017-11-15)
+------------------
 
 **New**
 - Add logfile compressio. [TheYOSH]
@@ -55,6 +55,7 @@ Changelog
 
 **Updates**
 - Update changelog. [TheYOSH]
+- Update changelog. [TheYOSH]
 - Update Dutch translation. [TheYOSH]
 - Update logging. [TheYOSH]
 - Update logging. [TheYOSH]
@@ -78,6 +79,11 @@ Changelog
 - Update with remote master. [TheYOSH]
 
 **Other**
+- Fucking Apple does not support javascript toLocaleString on iOS.
+  Stupid! [TheYOSH]
+- Merge pull request [#47](https://github.com/theyosh/TerrariumPI/issues/47) from theyosh/feature/audio_modules. [TheYOSH]
+
+  Feature/audio modules. Fix [#42](https://github.com/theyosh/TerrariumPI/issues/42)
 - Clean up weather code. [TheYOSH]
 - Remove debug. [TheYOSH]
 - Log volume changes. [TheYOSH]
@@ -608,3 +614,5 @@ Changelog
 - Typo. [TheYOSH]
 - Moved door status to own page. [TheYOSH]
 - Use system default pip. [TheYOSH]
+
+
