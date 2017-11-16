@@ -25,15 +25,15 @@
   <link href="/gentelella/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
   <link href="/gentelella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
   <link href="/gentelella/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-
-
   <link href="/gentelella/vendors/switchery/dist/switchery.min.css" rel="stylesheet"><!-- Switchery -->
-
-
   <link href="/gentelella/build/css/custom.min.css" rel="stylesheet">
   <link href="/static/css/terrariumpi.css" rel="stylesheet"><!-- jQuery -->
   <script type="text/javascript" src="/gentelella/vendors/jquery/dist/jquery.min.js"></script><!-- Bootstrap -->
   <script type="text/javascript" src="/gentelella/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+  <link rel="apple-touch-icon" sizes="57x57" href="{{person_image}}" />
+  <link rel="apple-touch-icon" sizes="72x72" href="{{person_image}}" />
+  <link rel="apple-touch-icon" sizes="114x114" href="{{person_image}}" />
+  <link rel="apple-touch-icon" sizes="144x144" href="{{person_image}}" />
 </head>
 <body class="nav-md">
   <div class="container body">
