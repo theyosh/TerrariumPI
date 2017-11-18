@@ -157,7 +157,6 @@
               <li role="presentation" id="system_time">
                 <i class="fa fa-clock-o"></i> <span >{{_('date/time')}}</span>
               </li>
-
               <li class="dropdown" role="presentation" id="online_indicator">
                 <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;">
                   <span class="online">
@@ -175,8 +174,6 @@
                   </li>
                 </ul>
               </li>
-
-
               <li class="dropdown disabled" role="presentation" id="door_indicator">
                 <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;">
                   <span class="disabled">
@@ -197,7 +194,6 @@
                   </li>
                 </ul>
               </li>
-
               <li class="dropdown disabled" role="presentation" id="player_indicator">
                 <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;">
                   <span class="running">
@@ -218,7 +214,6 @@
                   </li>
                 </ul>
               </li>
-
             </ul>
           </nav>
         </div>

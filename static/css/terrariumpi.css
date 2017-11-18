@@ -476,21 +476,22 @@ div.row.documentation img {
 }
 /* End webcams */
 
-/* Environment setup */
-/*
-#usage_content .interactive_screenshot #screenshot_environment_lights {
-  top: 15%;
-  height: 5.5%;
-  left: 15.5%;
-  width: 25.5%;
+/* Audio */
+div.modal.fade.preview_player {
+  display:none;
 }
-*/
+div.modal.fade.preview_player div.modal-dialog.modal-sm {
+  width:40%;
+}
+
+audio {
+  width: 100%;
+}
+/* End Audio */
+
+/* Environment setup */
+
 /* End environment setup
-
-
-
-
-
 
 /* Hardware documentation */
 

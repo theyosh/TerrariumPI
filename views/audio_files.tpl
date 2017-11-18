@@ -76,11 +76,12 @@
             </div>
           </div>
         </div>
-        <div class="modal fade preview_player" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-          <div class="modal-dialog modal-sm" style="width:30%">
+        <div class="modal fade preview_player" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
             <div class="modal-content">
               <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('.modal.fade.preview_player .modal-body p').html('')"><span aria-hidden="true">×</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="stop_player()">
+                  <span aria-hidden="true">×</span>
                 </button>
                 <h4 class="modal-title">{{_('Preview player')}}</h4>
               </div>
@@ -89,12 +90,15 @@
                 <p>...</p>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('.modal.fade.preview_player .modal-body p').html('')">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="stop_player()">Close</button>
               </div>
             </div>
           </div>
         </div>
         <script type="text/javascript">
+          function stop_player() {
+            $('.modal.fade.preview_player .modal-body p').html('')
+          }
           $(document).ready(function() {
             $('.dropzone').dropzone({ url: this.action,
                                       withCredentials: true,
