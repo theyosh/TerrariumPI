@@ -544,7 +544,10 @@ class terrariumEngine():
     for doorid in self.doors:
       door_closed = door_closed and self.doors[doorid].get_status() == terrariumDoor.CLOSED
 
-    data = terrariumDoor.CLOSED if door_closed else terrariumDoor.OPEN
+    if len(self.doors) == 0:
+      data = 'disabled';
+    else:
+      data = terrariumDoor.CLOSED if door_closed else terrariumDoor.OPEN
 
     if socket:
       self.__send_message({'type':'door_indicator','data': data})
@@ -555,7 +558,7 @@ class terrariumEngine():
     return self.door_status() == terrariumDoor.OPEN
 
   def is_door_closed(self):
-    return self.door_status() == terrariumDoor.CLOSED
+    return not self.is_door_open()
   # End doors part
 
 
