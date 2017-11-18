@@ -41,8 +41,6 @@
   <script type="text/javascript" src="/gentelella/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
   <script type="text/javascript" src="/gentelella/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
   <script type="text/javascript" src="/gentelella/vendors/google-code-prettify/src/prettify.js"></script>
-  <!-- bootstrap-datetimepicker -->
-  <script type="text/javascript" src="/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
   <!-- Fancybox -->
   <script type="text/javascript" src='/static/fancybox/dist/jquery.fancybox.min.js'></script>
   <!-- jQuery fullscreen -->
