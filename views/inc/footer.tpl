@@ -19,9 +19,11 @@
   <script type="text/javascript" src="/gentelella/vendors/flot.curvedlines/curvedLines.js"></script>
   <!-- Momentjs -->
   <script type="text/javascript" src="/gentelella/vendors/moment/min/moment-with-locales.min.js"></script>
+  <!-- bootstrap-progressbar -->
   <script type="text/javascript" src="/gentelella/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
   <!-- NProgress -->
   <script type="text/javascript" src="/gentelella/vendors/nprogress/nprogress.js"></script>
+  <!-- select2 -->
   <script type="text/javascript" src="/gentelella/vendors/select2/dist/js/select2.full.min.js"></script>
   <!-- FastClick -->
   <script type="text/javascript" src="/gentelella/vendors/fastclick/lib/fastclick.js"></script>
@@ -41,18 +43,19 @@
   <script type="text/javascript" src="/gentelella/vendors/google-code-prettify/src/prettify.js"></script>
   <!-- bootstrap-datetimepicker -->
   <script type="text/javascript" src="/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <!-- Fancybox -->
   <script type="text/javascript" src='/static/fancybox/dist/jquery.fancybox.min.js'></script>
-  <!-- Load the terrariumPI JS script-->
+  <!-- jQuery fullscreen -->
   <script type="text/javascript" src="/static/js/jquery.fullscreen-min.js"></script>
   <!-- Dropzone.js -->
   <script type="text/javascript" src="/gentelella/vendors/dropzone/dist/min/dropzone.min.js"></script>
   <!-- DataTables -->
   <script type="text/javascript" src="/gentelella/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="/gentelella/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
   <script type="text/javascript" src="/gentelella/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
   <script type="text/javascript" src="/gentelella/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
   <!-- Switchery -->
   <script type="text/javascript" src="/gentelella/vendors/switchery/dist/switchery.min.js"></script>
-
   <!-- Load the terrariumPI JS script-->
   <script type="text/javascript" src="/static/js/terrariumpi.js"></script>
   <script type="text/javascript">
