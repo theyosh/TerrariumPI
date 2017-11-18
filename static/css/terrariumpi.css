@@ -125,6 +125,25 @@ div.modal div.row.webcam{
   margin: 1.5em .2em 0 0;
 }
 
+/* Dashboard indicators */
+
+/* Default state */
+.top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#online_indicator .offline,
+.top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#door_indicator .open,
+.top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#door_indicator .closed,
+.top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#player_indicator .running,
+.top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#player_indicator .stopped {
+  display:none;
+}
+
+@media only screen and (max-width: 700px) {
+  /* Small screen hide disabled elements */
+  .top_nav .nav_menu ul.nav.navbar-nav.navbar-right li.dropdown.disabled {
+    display:none;
+  }
+}
+
+
 /* Graphs */
 .focus a {
   font-weight: bold !important;

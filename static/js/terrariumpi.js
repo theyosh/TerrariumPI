@@ -875,48 +875,74 @@ function notification_timestamps() {
   });
 }
 
+
+function update_online_indicator(online) {
+  var online_indicator = $('li#online_indicator');
+
+  online_indicator.find('span.online, span.offline').hide();
+  if (online) {
+    online_indicator.find('span.online').show();
+  } else {
+    online_indicator.find('span.offline').show();
+  }
+
+  update_online_messages(online);
+}
+
 function is_online() {
-  var online_indicator = $('a#online_indicator');
-  online_indicator.find('span.offline').hide();
-  online_indicator.find('span.online').show();
-  update_online_messages(true);
+  update_online_indicator(true);
 }
 
 function is_offline() {
-  var online_indicator = $('a#online_indicator');
-  online_indicator.find('span.online').hide();
-  online_indicator.find('span.offline').show();
-  update_online_messages(false);
+  update_online_indicator(false);
 }
+
+
 
 function update_door_indicator(status) {
-  if ('open' === status) {
-    door_open();
-  } else {
-    door_closed();
+  var indicator = $('li#door_indicator');
+
+  indicator.removeClass('disabled');
+  indicator.find('span.open, span.closed, span.disabled').hide();
+
+  if ('disabled' === status) {
+    indicator.addClass('disabled');
+    indicator.find('span.disabled').show();
+    add_notification_message('door_messages',
+                             '{{_('Disabled')}}',
+                             '{{_('There are zero door sensors configured.')}}',
+                             'fa-play-circle-o',
+                             'orange');
+    return;
   }
+
+
+  if ('open' === status) {
+    indicator.find('span.open').show();
+  } else if ('closed' === status) {
+    indicator.find('span.closed').show();
+  }
+
+  update_door_messages('open' === status)
 }
 
-function door_open() {
-  var door_indicator = $('a#door_indicator');
-  door_indicator.find('span.closed').hide();
-  door_indicator.find('span.open').show();
-  update_door_messages(true);
+function door_open(open) {
+  update_door_indicator('open');
 }
 
 function door_closed() {
-  var door_indicator = $('a#door_indicator');
-  door_indicator.find('span.open').hide();
-  door_indicator.find('span.closed').show();
-  update_door_messages(false);
+  update_door_indicator('closed');
 }
 
+
 function update_player_indicator(data) {
-  var player_indicator = $('a#player_indicator');
-  if (data.running == 'disabled') {
-    player_indicator.find('span.running').hide();
-    player_indicator.find('span.stopped').hide();
-    player_indicator.find('span.disabled').show();
+  var indicator = $('li#player_indicator');
+  indicator.removeClass('disabled');
+  indicator.find('span.running, span.stopped, span.disabled').hide();
+
+  if ('disabled' === data.running) {
+    indicator.addClass('disabled');
+    indicator.find('span.disabled').show();
     add_notification_message('player_messages',
                              '{{_('Disabled')}}',
                              '{{_('Either add audio files and playlists. Or you have a pwm-dimmer switch configured.')}}',
@@ -925,16 +951,16 @@ function update_player_indicator(data) {
     return;
   }
 
-  player_indicator.find('span.disabled').hide();
   if (data.running) {
-    player_indicator.find('span.running').show();
-    player_indicator.find('span.stopped').hide();
+    indicator.find('span.running').show();
   } else {
-    player_indicator.find('span.running').hide();
-    player_indicator.find('span.stopped').show();
+    indicator.find('span.stopped').show();
   }
   update_player_messages(data);
 }
+
+
+
 
 function get_theme_color(color) {
   if (color == 'orange') return '#f0ad4e';

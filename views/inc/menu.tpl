@@ -154,32 +154,16 @@
               <a id="menu_toggle"><i class="fa fa-bars"></i></a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-              <li id="system_time" role="presentation">
+              <li role="presentation" id="system_time">
                 <i class="fa fa-clock-o"></i> <span >{{_('date/time')}}</span>
               </li>
-              <li class="dropdown" role="presentation">
-                <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;" id="door_indicator">
-                  <span class="closed">
-                    <i class="fa fa-lock green"></i> <span>{{_('Door is closed')}}</span>
-                  </span>
-                  <span class="open" style="display:none">
-                    <i class="fa fa-unlock red"></i> <span>{{_('Door is open')}}</span>
-                  </span>
-                </a>
-                <ul class="dropdown-menu list-unstyled msg_list" id="door_messages" role="menu">
-                  <li class="no_message">
-                    <div class="text-center">
-                      <a><strong>{{_('No messages')}}</strong></a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li class="dropdown" role="presentation">
-                <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;" id="online_indicator">
+
+              <li class="dropdown" role="presentation" id="online_indicator">
+                <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;">
                   <span class="online">
                     <i class="fa fa-check-circle-o green"></i> <span>{{_('Online')}}</span>
                   </span>
-                  <span class="offline" style="display:none">
+                  <span class="offline">
                     <i class="fa fa-exclamation-triangle red"></i> <span>{{_('Offline')}}</span>
                   </span>
                 </a>
@@ -191,12 +175,35 @@
                   </li>
                 </ul>
               </li>
-              <li class="dropdown" role="presentation">
-                <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;" id="player_indicator">
-                  <span class="running" style="display:none">
+
+
+              <li class="dropdown disabled" role="presentation" id="door_indicator">
+                <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;">
+                  <span class="disabled">
+                    <i class="fa fa-lock orange"></i> <span>{{_('Disabled')}}</span>
+                  </span>
+                  <span class="closed">
+                    <i class="fa fa-lock green"></i> <span>{{_('Door is closed')}}</span>
+                  </span>
+                  <span class="open">
+                    <i class="fa fa-unlock red"></i> <span>{{_('Door is open')}}</span>
+                  </span>
+                </a>
+                <ul class="dropdown-menu list-unstyled msg_list" id="door_messages" role="menu">
+                  <li class="no_message">
+                    <div class="text-center">
+                      <a><strong>{{_('No messages')}}</strong></a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="dropdown disabled" role="presentation" id="player_indicator">
+                <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;">
+                  <span class="running">
                     <i class="fa fa-play-circle-o green"></i> <span>{{_('Playing')}}</span>
                   </span>
-                  <span class="stopped" style="display:none">
+                  <span class="stopped">
                     <i class="fa fa-play-circle-o red"></i> <span>{{_('Stopped')}}</span>
                   </span>
                   <span class="disabled">
@@ -211,6 +218,7 @@
                   </li>
                 </ul>
               </li>
+
             </ul>
           </nav>
         </div>
