@@ -275,13 +275,13 @@ function load_page(url) {
 
             return replaceSeparators(sNum, seperators);
         };
-        
+
         var apostrophThousDotDec = function(sNum) {
             var seperators = {
                 decimal: '.',
                 thousands: '\u0027'
             };
-            
+
             return replaceSeparators(sNum, seperators);
         };
 
