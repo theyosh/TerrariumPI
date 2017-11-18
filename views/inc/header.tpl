@@ -28,7 +28,7 @@
   <!-- Leaflet -->
   <link href="/static/leaflet/leaflet.css" rel="stylesheet">
   <link href="/static/Leaflet.loading/src/Control.Loading.css" rel="stylesheet">
-  <link href='/static/Leaflet.fullscreen/dist/leaflet.fullscreen.css' rel='stylesheet'>
+  <link href="/static/Leaflet.fullscreen/dist/leaflet.fullscreen.css" rel="stylesheet">
   <!-- Fancybox -->
   <link href="/static/fancybox/dist/jquery.fancybox.min.css" rel="stylesheet">
   <!-- Dropzone.js -->
