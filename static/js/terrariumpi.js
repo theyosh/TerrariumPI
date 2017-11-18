@@ -875,17 +875,15 @@ function notification_timestamps() {
   });
 }
 
-
 function update_online_indicator(online) {
-  var online_indicator = $('li#online_indicator');
+  var indicator = $('li#online_indicator');
 
-  online_indicator.find('span.online, span.offline').hide();
+  indicator.find('span.online, span.offline').hide();
   if (online) {
-    online_indicator.find('span.online').show();
+    indicator.find('span.online').show();
   } else {
-    online_indicator.find('span.offline').show();
+    indicator.find('span.offline').show();
   }
-
   update_online_messages(online);
 }
 
@@ -896,8 +894,6 @@ function is_online() {
 function is_offline() {
   update_online_indicator(false);
 }
-
-
 
 function update_door_indicator(status) {
   var indicator = $('li#door_indicator');
@@ -922,8 +918,7 @@ function update_door_indicator(status) {
   } else if ('closed' === status) {
     indicator.find('span.closed').show();
   }
-
-  update_door_messages('open' === status)
+  update_door_messages('open' === status);
 }
 
 function door_open(open) {
@@ -958,9 +953,6 @@ function update_player_indicator(data) {
   }
   update_player_messages(data);
 }
-
-
-
 
 function get_theme_color(color) {
   if (color == 'orange') return '#f0ad4e';
