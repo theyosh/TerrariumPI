@@ -545,7 +545,7 @@ class terrariumEngine():
       door_closed = door_closed and self.doors[doorid].get_status() == terrariumDoor.CLOSED
 
     if len(self.doors) == 0:
-      data = 'disabled';
+      data = 'disabled'
     else:
       data = terrariumDoor.CLOSED if door_closed else terrariumDoor.OPEN
 
