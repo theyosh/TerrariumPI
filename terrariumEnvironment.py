@@ -273,6 +273,9 @@ class terrariumEnvironment():
       elif 'heater' == part:
         data['on'] = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['set'])
         data['off'] = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['rise']) + datetime.timedelta(hours=24)
+        if now < data['on']:
+          data['on'] -= datetime.timedelta(hours=24)
+          data['off'] -= datetime.timedelta(hours=24)
 
     elif 'timer' == data['mode']:
       data['on'] = datetime.datetime.fromtimestamp(state_data['on']).replace(year=int(now.strftime('%Y')),
