@@ -2,6 +2,24 @@ Changelog
 =========
 
 
+3.1.1 (2017-11-20)
+------------------
+
+**New**
+- Add disabled door status. [TheYOSH]
+- Add Apple icon. [TheYOSH]
+
+**Updates**
+- Updated top indicators. Hide disabled indicators on small screens.
+  [TheYOSH]
+
+**Other**
+- Quotes. [TheYOSH]
+- Code cleanup. [TheYOSH]
+- Cleanup unused code. [TheYOSH]
+- Cleanup HTML, Javascript and CSS code. [TheYOSH]
+
+
 3.1.0 (2017-11-15)
 ------------------
 
@@ -54,6 +72,7 @@ Changelog
 - Fix [#36](https://github.com/theyosh/TerrariumPI/issues/36). [TheYOSH]
 
 **Updates**
+- Update changelog. [TheYOSH]
 - Update changelog. [TheYOSH]
 - Update changelog. [TheYOSH]
 - Update Dutch translation. [TheYOSH]
@@ -614,5 +633,3 @@ Changelog
 - Typo. [TheYOSH]
 - Moved door status to own page. [TheYOSH]
 - Use system default pip. [TheYOSH]
-
-
