@@ -141,6 +141,10 @@ div.modal div.row.webcam{
   .top_nav .nav_menu ul.nav.navbar-nav.navbar-right li.dropdown.disabled {
     display:none;
   }
+
+  .nav.toggle {
+    width: 60px;
+  }
 }
 
 
