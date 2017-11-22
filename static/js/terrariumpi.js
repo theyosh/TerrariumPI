@@ -1279,6 +1279,10 @@ function history_graph(name, data, type) {
               val = moment.duration(val * 1000).humanize();
             break;
 
+          case 'system_load':
+              val = formatNumber(val);
+            break;
+
           case 'weather':
             val = formatNumber(val) + ' °' + globals.temperature_indicator;
             break;
