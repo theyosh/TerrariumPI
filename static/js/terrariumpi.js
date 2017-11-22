@@ -637,9 +637,9 @@ function update_dashboard_uptime(data) {
   update_dashboard_tile('uptime', format_uptime(data.uptime));
   $('#system_time span').text(moment(data.timestamp * 1000).format('LLLL'));
   $('#system_time i').removeClass('fa-clock-o fa-sun-o fa-moon-o').addClass((data.day ? 'fa-sun-o' : 'fa-moon-o'));
-  $("#uptime .progress-bar-success").css('height', (data.load[0] * 100) + '%');
-  $("#uptime .progress-bar-warning").css('height', (data.load[1] * 100) + '%');
-  $("#uptime .progress-bar-danger").css('height', (data.load[2] * 100) + '%');
+  $("#uptime .progress-bar-success").css('height', ((data.load[0] / data.cores) * 100) + '%');
+  $("#uptime .progress-bar-warning").css('height', ((data.load[1] / data.cores) * 100) + '%');
+  $("#uptime .progress-bar-danger").css('height', ( (data.load[2] / data.cores) * 100) + '%');
 }
 
 function update_dashboard_power_usage(data) {
@@ -1153,6 +1153,9 @@ function sensor_gauge(name, data) {
       globals.gauges[name].setMinValue(data.limit_min);
     }
     // Update values
+    if (name == 'system_load') {
+      data.current /= data.cores;
+    }
     globals.gauges[name].set(data.current);
     if (name == 'system_disk' || name == 'system_memory') {
       $('#' + name + ' .gauge-value').text(formatBytes(data.current))
