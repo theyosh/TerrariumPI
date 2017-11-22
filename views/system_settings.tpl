@@ -145,8 +145,8 @@
             });
 
             $.get('/api/audio/hardware',function(data) {
-              $(data.audiohardware).each(function(index,hardware_device){
-                soundcard_selector.append($('<option>').attr({'value':hardware_device.hwid}).text(hardware_device.name));
+              $(Object.keys(data.audiohardware)).each(function(index,hardware_device){
+                soundcard_selector.append($('<option>').attr({'value':hardware_device}).text(data.audiohardware[hardware_device].name));
               });
               $.get($('form').attr('action'),function(data){
                 $.each(data.available_languages,function(index,value){

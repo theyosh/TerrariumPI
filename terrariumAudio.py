@@ -24,11 +24,14 @@ class terrariumAudioPlayer():
   VOLUME_STEP = 5
 
   def __init__(self,playlistdata,cardid,pwmdimmer,callback=None):
-    self.__hwid = cardid
-    self.__callback = callback
     self.__audio_player = None
     self.__audio_mixer = None
 
+    hwcards = terrariumAudioPlayer.get_sound_cards()
+    if cardid in hwcards:
+      self.__hwid = hwcards[cardid]['hwid']
+
+    self.__callback = callback
     self.__load_audio_files()
     self.__load_playlists(playlistdata)
 
@@ -129,11 +132,11 @@ class terrariumAudioPlayer():
 
   @staticmethod
   def get_sound_cards():
-    soundcards = []
+    soundcards = {}
     for i in alsaaudio.card_indexes():
       if 'PCM' in alsaaudio.mixers(**{'cardindex': i}):
         (name, longname) = alsaaudio.card_name(i)
-        soundcards.append({'hwid' : int(i), 'name' : longname})
+        soundcards[name] = {'hwid' : int(i), 'name' : longname}
 
     return soundcards
 

@@ -87,7 +87,7 @@ class terrariumEngine():
 
     # Load audio system
     self.__audio_player = terrariumAudioPlayer(self.config.get_audio_playlists(),
-                                               int(self.config.get_active_soundcard()),
+                                               self.config.get_active_soundcard(),
                                                any(self.power_switches[switchid].is_pwm_dimmer() for switchid in self.power_switches),
                                                self.get_audio_playing)
 
