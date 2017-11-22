@@ -20,6 +20,10 @@ class terrariumUtils():
       return False
 
   @staticmethod
+  def is_true(value):
+    return value in ['true','True','1',1,'on',True]
+
+  @staticmethod
   def to_BCM_port_number(value):
     pinout = {'gpio3'  : 2,
               'gpio5'  : 3,

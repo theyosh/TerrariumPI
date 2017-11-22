@@ -1462,24 +1462,24 @@ function check_form_data(form) {
   return fieldsok;
 }
 
-function parse_remote_sensor(url) {
+function parse_remote_data(type,url) {
   $.get(url,function(data) {
-    json_path = url.indexOf('#');
+    var json_path = url.indexOf('#');
     if (json_path != -1) {
       json_path = url.substring(json_path+1).split('/');
       // TerrariumPI API is known, and can be used to fill in all values
       var is_remote_terrarium_pi = json_path.length == 3
-                                   && json_path[0] === 'sensors'
+                                   && (json_path[0] === 'sensors' || json_path[0] === 'switches')
                                    && json_path[1] === '0'
-                                   && json_path[2] === 'current';
+                                   && (json_path[2] === 'current' || json_path[2] === 'state');
 
       if (is_remote_terrarium_pi) {
         // Loop through the fields and fill in the fields with remote information
         $.each(data[json_path[0]][json_path[1]],function(fieldname,value) {
           // Never overrule fields in array below
           if ($.inArray(fieldname,['address','hardwaretype','id']) == -1) {
-            $('input[name="sensor_[nr]_' + fieldname + '"]').val(value);
-            $('select[name="sensor_[nr]_' + fieldname + '"]').val(value).change();
+            $('input[name="' + type + '_[nr]_' + fieldname + '"]').val(value);
+            $('select[name="' + type + '_[nr]_' + fieldname + '"]').val(value).change();
           }
         });
       } else {
@@ -1487,7 +1487,7 @@ function parse_remote_sensor(url) {
         $.each(json_path,function(index,value){
           data = data[value];
         });
-        $('input[name="sensor_[nr]_current"]').val(data);
+        $('input[name="' + type + '_[nr]_current"]').val(data);
       }
     }
   });
@@ -1559,7 +1559,11 @@ function add_switch() {
                  form.find('input[name="switch_[nr]_dimmer_off_percentage"]').val()
                  );
 
-  $('.new-switch-form').modal('hide');
+  // Reset form
+  form.find('input').val('');
+  form.find('select').val(null).trigger('change');
+  // Hide form
+  form.modal('hide');
 }
 
 function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow, dimmer_duration,dimmer_on_duration,dimmer_on_percentage,dimmer_off_duration,dimmer_off_percentage) {
@@ -1582,9 +1586,9 @@ function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow, d
     allowClear: false,
     minimumResultsForSearch: Infinity
   }).on('change',function() {
-    switch_row.find('.row.dimmer').toggle(this.value === 'pwm-dimmer');
+    //switch_row.find('.row.dimmer').toggle(this.value === 'pwm-dimmer');
   });
-  switch_row.find('.row.dimmer').toggle(hardwaretype === 'pwm-dimmer');
+  switch_row.find('.row.dimmer').toggle('pwm-dimmer' === hardwaretype || 'remote-dimmer' === hardwaretype);
 }
 
 function add_door() {
@@ -1658,7 +1662,7 @@ function add_webcam_row(id,location,name,rotation,preview) {
 function update_power_switch(id, data) {
   var power_switch = $('#switch_' + id);
   var update_data = '';
-  if (data.hardwaretype === 'pwm-dimmer') {
+  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype) {
     update_data = formatNumber(data.current_power_wattage) + 'W / '
   }
   update_data += formatNumber(data.power_wattage) + 'W';
@@ -1669,7 +1673,7 @@ function update_power_switch(id, data) {
   power_switch.find('h2 span.title').text('{{_('Switch')}} ' + data.name);
   power_switch.find('h2 small.data_update').text(update_data);
 
-  if (data.hardwaretype === 'pwm-dimmer') {
+  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype) {
     power_switch.find('div.power_switch').removeClass('big').addClass('dimmer').html('<input class="knob" data-thickness=".3" data-width="170" data-angleOffset=20 data-angleArc=320 data-fgColor="' + (data.state > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB') + '" value="'+ data.state + '">');
 
     power_switch.find('.knob').knob({

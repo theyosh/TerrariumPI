@@ -83,6 +83,8 @@
                                 <option value="gpio">{{_('GPIO')}}</option>
                                 <option value="gpio-inverse">{{_('GPIO Inverse')}}</option>
                                 <option value="pwm-dimmer">{{_('PWM Dimmer')}}</option>
+                                <option value="remote">{{_('Remote')}}</option>
+                                <option value="remote-dimmer">{{_('Remote Dimmer')}}</option>
                               </select>
                             </div>
                           </div>
@@ -141,13 +143,23 @@
         <script tpe="text/javascript">
           $(document).ready(function() {
             $('.page-title').append('<div class="title_right"><h3><button type="button" class="btn btn-primary alignright" data-toggle="modal" data-target=".new-switch-form"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h3> </div>');
-            $("select").select2({
+            $('select[name^="switch_[nr]_"]').select2({
               placeholder: '{{_('Select an option')}}',
               allowClear: false,
               minimumResultsForSearch: Infinity
             }).on('change',function() {
-              $(this).parents('.x_content').find('.row.dimmer').toggle(this.value === 'pwm-dimmer');
-            });
+              $(this).parents('.x_content').find('.row.dimmer').toggle('pwm-dimmer' === this.value || 'remote-dimmer' === this.value);
+
+              var address_field = $("input[name='" + this.name.replace('hardwaretype','address') + "']");
+              address_field.off('change');
+
+              if ('remote' === this.value || 'remote-dimmer' === this.value) {
+                address_field.on('change',function(){
+                    parse_remote_data('switch',this.value);
+                });
+              }
+
+            }).val(null).trigger('change');
             $.get($('form').attr('action'),function(data){
               $.each(data.switches, function(index,power_switch) {
                 // Clone empty switch row....

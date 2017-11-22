@@ -160,7 +160,7 @@
 
                 if ('remote' === this.value) {
                   address_field.on('change',function(){
-                      parse_remote_sensor(this.value);
+                      parse_remote_data('sensor',this.value);
                   });
                 }
               }

@@ -268,6 +268,13 @@ class terrariumEngine():
       # Websocket callback
       self.__send_message({'type':'sensor_gauge','data':average_data})
 
+      # Update (remote) power switches
+      for power_switch_id in self.power_switches:
+        # Update the current sensor.
+        self.power_switches[power_switch_id].update()
+        # Make time for other web request
+        sleep(0.1)
+
       # Websocket messages back
       self.get_uptime(socket=True)
       self.get_power_usage_water_flow(socket=True)
