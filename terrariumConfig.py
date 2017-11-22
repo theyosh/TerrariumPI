@@ -98,6 +98,12 @@ class terrariumConfig:
               if 'pwm-dimmer' == switch_data['hardwaretype']:
                 self.__config.set(section, 'address', str(terrariumUtils.to_BOARD_port_number(switch_data['address'])))
 
+        elif version == 312:
+          logger.info('Updating configuration file to version: %s' % (version,))
+          data = self.__get_config('terrariumpi')
+          if 'soundcard' in data and data['soundcard'] == '0':
+            self.__config.set('terrariumpi', 'soundcard', 'bcm2835 ALSA')
+
       # Update version number
       self.__config.set('terrariumpi', 'version', str(to_version))
       self.__save_config()
