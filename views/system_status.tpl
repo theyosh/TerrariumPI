@@ -285,6 +285,7 @@
                       gauge_data.alarm_max = 80;
                       gauge_data.alarm_min = 0;
                       gauge_data.limit_max = 100;
+                      gauge_data.cores = data['cores'];
                       break;
 
                     case 'temperature':

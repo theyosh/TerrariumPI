@@ -832,7 +832,7 @@ class terrariumEngine():
             'temperature' : cpu_temp}
 
     if socket:
-      gauge_data = {'system_load'        : {'current' : data['load']['load1'] * 100, 'alarm_min' : 0, 'alarm_max': 80, 'limit_min' : 0, 'limit_max': 100},
+      gauge_data = {'system_load'        : {'current' : data['load']['load1'] * 100, 'alarm_min' : 0, 'alarm_max': 80, 'limit_min' : 0, 'limit_max': 100, 'cores' : data['cores']},
                     'system_temperature' : {'current' : data['temperature'], 'alarm_min' : 30, 'alarm_max': 60, 'limit_min' : 0, 'limit_max': 80},
                     'system_memory'      : {'current' : data['memory']['used'], 'alarm_min' : data['memory']['total'] * 0.1, 'alarm_max': data['memory']['total'] * 0.9, 'limit_min' : 0, 'limit_max': data['memory']['total']},
                     'system_disk'        : {'current' : data['disk']['used'], 'alarm_min' : data['disk']['total'] * 0.1, 'alarm_max': data['disk']['total'] * 0.9, 'limit_min' : 0, 'limit_max': data['disk']['total']}}
@@ -850,7 +850,8 @@ class terrariumEngine():
     data = {'uptime' : uptime.uptime(),
             'timestamp' : int(time.time()),
             'day' : self.weather.is_day(),
-            'load' : os.getloadavg()}
+            'load' : os.getloadavg(),
+            'cores' : psutil.cpu_count()}
 
     if socket:
       self.__send_message({'type':'uptime','data':data})
