@@ -92,6 +92,7 @@
                               <option value="dht22">{{_('DHT22')}}</option>
                               <option value="am2302">{{_('AM2302')}}</option>
                               <option value="w1">{{_('1Wire')}}</option>
+                              <option value="remote">{{_('Remote')}}</option>
                             </select>
                           </div>
                         </div>
@@ -148,15 +149,22 @@
         <script type="text/javascript">
           $(document).ready(function() {
             $('.page-title').append('<div class="title_right"><h3><button type="button" class="btn btn-primary alignright" data-toggle="modal" data-target=".new-sensor-form"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h3> </div>');
-            $("select").select2({
+            $('select[name^="sensor_[nr]_"]').select2({
               placeholder: '{{_('Select an option')}}',
               allowClear: false,
               minimumResultsForSearch: Infinity
             }).on('change',function() {
               if (this.name.indexOf('hardwaretype') >= 0) {
-                $("input[name='" + this.name.replace('hardwaretype','address') + "']").attr("readonly", this.value == 'owfs' || this.value == 'w1');
+                var address_field = $("input[name='" + this.name.replace('hardwaretype','address') + "']");
+                address_field.attr("readonly", this.value == 'owfs' || this.value == 'w1').off('change');
+
+                if ('remote' === this.value) {
+                  address_field.on('change',function(){
+                      parse_remote_sensor(this.value);
+                  });
+                }
               }
-            });
+            }).val(null).trigger('change');
             $.get($('form').attr('action'),function(data){
               $.each(data.sensors, function(index,sensor) {
                 // Clone empty sensor row....

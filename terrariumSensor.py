@@ -8,6 +8,7 @@ import ow
 import Adafruit_DHT as dht
 import glob
 import re
+import requests
 
 from hashlib import md5
 from terrariumUtils import terrariumUtils
@@ -18,7 +19,7 @@ class terrariumSensor:
   VALID_DHT_SENSORS    = { 'dht11' : dht.DHT11,
                            'dht22' : dht.DHT22,
                            'am2302': dht.AM2302 }
-  VALID_HARDWARE_TYPES = ['owfs','w1'] + VALID_DHT_SENSORS.keys()
+  VALID_HARDWARE_TYPES = ['owfs','w1','remote'] + VALID_DHT_SENSORS.keys()
 
   W1_BASE_PATH = '/sys/bus/w1/devices/'
   W1_TEMP_REGEX = re.compile(r'(?P<type>t|f)=(?P<value>[0-9]+)',re.IGNORECASE)
@@ -40,6 +41,12 @@ class terrariumSensor:
       self.sensor = dht
       # Dirty hack to replace OWFS sensor object for GPIO pin nr
       self.sensor_address = sensor
+    elif self.get_hardware_type() == 'remote':
+      self.sensor_address = None
+      url_data = terrariumUtils.parse_url(sensor)
+      if url_data:
+        self.sensor = url_data
+        self.sensor_address = sensor
 
     self.set_name(name)
     self.set_type(sensor_type,indicator)
@@ -183,6 +190,24 @@ class terrariumSensor:
         if 'temperature' == self.get_type():
           if self.get_hardware_type() == 'owfs':
             current = float(self.sensor.temperature)
+          elif 'remote' == self.get_hardware_type() and self.sensor_address is not None:
+            authentication=(self.sensor['username'], self.sensor['password'])
+            data = requests.get(self.sensor_address,auth=authentication)
+
+            if data.status_code == 200:
+              data = data.json()
+              json_path = self.sensor['fragment'].split('/') if 'fragment' in self.sensor and self.sensor['fragment'] is not None else []
+
+              for item in json_path:
+                # Dirty hack to process array data....
+                try:
+                  item = int(item)
+                except Exception, ex:
+                  item = str(item)
+
+                data = data[item]
+              current = float(data)
+
           elif self.get_hardware_type() == 'w1':
             data = ''
             with open(terrariumSensor.W1_BASE_PATH + self.get_address() + '/w1_slave', 'r') as w1data:
@@ -191,8 +216,7 @@ class terrariumSensor:
             w1data = terrariumSensor.W1_TEMP_REGEX.search(data)
             if w1data:
               # Found data
-              temperature = float(w1data.group('value')) / 1000
-              current = float(temperature)
+              current = float(w1data.group('value')) / 1000
           elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
             humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()],
                                                            float(terrariumUtils.to_BCM_port_number(self.sensor_address)),
@@ -203,9 +227,28 @@ class terrariumSensor:
         elif 'humidity' == self.get_type():
           if self.get_hardware_type() == 'owfs':
             current = float(self.sensor.humidity)
+          elif 'remote' == self.get_hardware_type() and self.sensor_address is not None:
+            authentication=(self.sensor['username'], self.sensor['password'])
+            data = requests.get(self.sensor_address,auth=authentication)
+
+            if data.status_code == 200:
+              data = data.json()
+              json_path = self.sensor['fragment'].split('/') if 'fragment' in self.sensor and self.sensor['fragment'] is not None else []
+
+              for item in json_path:
+                # Dirty hack to process array data....
+                try:
+                  item = int(item)
+                except Exception, ex:
+                  item = str(item)
+
+                data = data[item]
+              current = float(data)
+
           elif self.get_hardware_type() == 'w1':
             # Not tested / No hardware to test with
             pass
+
           elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
             humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()],
                                                            float(terrariumUtils.to_BCM_port_number(self.sensor_address)),

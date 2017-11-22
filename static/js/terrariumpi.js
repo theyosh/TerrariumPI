@@ -1462,6 +1462,37 @@ function check_form_data(form) {
   return fieldsok;
 }
 
+function parse_remote_sensor(url) {
+  $.get(url,function(data) {
+    json_path = url.indexOf('#');
+    if (json_path != -1) {
+      json_path = url.substring(json_path+1).split('/');
+      // TerrariumPI API is known, and can be used to fill in all values
+      var is_remote_terrarium_pi = json_path.length == 3
+                                   && json_path[0] === 'sensors'
+                                   && json_path[1] === '0'
+                                   && json_path[2] === 'current';
+
+      if (is_remote_terrarium_pi) {
+        // Loop through the fields and fill in the fields with remote information
+        $.each(data[json_path[0]][json_path[1]],function(fieldname,value) {
+          // Never overrule fields in array below
+          if ($.inArray(fieldname,['address','hardwaretype','id']) == -1) {
+            $('input[name="sensor_[nr]_' + fieldname + '"]').val(value);
+            $('select[name="sensor_[nr]_' + fieldname + '"]').val(value).change();
+          }
+        });
+      } else {
+        // Here we loop over the JSON structure to get the end value which should be the current value
+        $.each(json_path,function(index,value){
+          data = data[value];
+        });
+        $('input[name="sensor_[nr]_current"]').val(data);
+      }
+    }
+  });
+}
+
 function add_sensor() {
   var form = $('.new-sensor-form');
   if (!check_form_data(form)) return false;
@@ -1476,8 +1507,11 @@ function add_sensor() {
                  form.find('input[name="sensor_[nr]_limit_min"]').val(),
                  form.find('input[name="sensor_[nr]_limit_max"]').val(),
                  -1);
-
-  $('.new-sensor-form').modal('hide');
+  // Reset form
+  form.find('input').val('');
+  form.find('select').val(null).trigger('change');
+  // Hide form
+  form.modal('hide');
 }
 
 function add_sensor_row(id,hardwaretype,address,type,name,alarm_min,alarm_max,limit_min,limit_max,current) {
@@ -1497,11 +1531,14 @@ function add_sensor_row(id,hardwaretype,address,type,name,alarm_min,alarm_max,li
   sensor_row.find("select").select2({
     placeholder: '{{_('Select an option')}}',
     allowClear: false,
-    minimumResultsForSearch: Infinity
+    minimumResultsForSearch: Infinity,
   }).on('change',function() {
+    // Changing should not be possible. But disabling will cripple the form post data
+    /*
     if (this.name.indexOf('hardwaretype') >= 0) {
       $("input[name='" + this.name.replace('hardwaretype','address') + "']").attr("readonly", this.value == 'owfs' || this.value == 'w1');
     }
+    */
   });
 }
 
