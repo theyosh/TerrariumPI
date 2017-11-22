@@ -237,7 +237,7 @@ class terrariumSwitch():
         if 'remote' == self.get_hardware_type():
           self.set_state(terrariumUtils.is_true(data))
         elif 'remote-dimmer' == self.get_hardware_type():
-          self.set_state(data)
+          self.set_state(int(data))
 
   def get_id(self):
     return self.id
