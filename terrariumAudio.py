@@ -31,16 +31,16 @@ class terrariumAudioPlayer():
     if cardid in hwcards:
       self.__hwid = hwcards[cardid]['hwid']
 
-    self.__callback = callback
-    self.__load_audio_files()
-    self.__load_playlists(playlistdata)
+      self.__callback = callback
+      self.__load_audio_files()
+      self.__load_playlists(playlistdata)
 
-    if pwmdimmer and self.__hwid == 0:
-      logger.warning('Disabled audio playing due to hardware conflict with PWM dimmers and onboard soundcard')
-    else:
-      self.__load_audio_mixer()
-      logger.info('Player loaded with %s audio files and %s playlists. Starting engine.' % (len(self.__audio_files),len(self.__playlists)))
-      thread.start_new_thread(self.__engine_loop, ())
+      if pwmdimmer and self.__hwid == 0:
+        logger.warning('Disabled audio playing due to hardware conflict with PWM dimmers and onboard soundcard')
+      else:
+        self.__load_audio_mixer()
+        logger.info('Player loaded with %s audio files and %s playlists. Starting engine.' % (len(self.__audio_files),len(self.__playlists)))
+        thread.start_new_thread(self.__engine_loop, ())
 
   def __load_audio_files(self):
     self.__audio_files = {}
