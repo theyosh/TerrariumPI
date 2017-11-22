@@ -1,4 +1,4 @@
-# TerrariumPI 3.1.0
+# TerrariumPI 3.2.XYZ
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
 
 For humidity control there is support for a spraying system. The sprayer can be configured to spray for an X amount of seconds and there is a minumal period between two spray actions. Use at least one humitidy sensors to get a constant humidity value.
@@ -35,6 +35,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Volume controle in the webinterface
   - Uploadig audio files through webinterface
   - Audio meta data support
+- Remote temperature and humidity sensors through HTTP(S) JSON API's
 
 It is currently controling my reptile terrarium for more then three years! And my Madagascar Day Gecko is very happy with it!
 
@@ -94,6 +95,13 @@ This software requires a Raspberry Pi and some extra hardware in order to run an
   - 1 Wire interface
 
 If there is some other hardware which is not working with TerrariumPI, open an issue on [Github](https://github.com/theyosh/TerrariumPI/issues) and we will try to support it. Raspberry Pi Zero is not tested.
+
+## Remote data
+It is possible to use external sensor data that is available through HTTP(S) in JSON format. This way you can combine multiple Raspberry Pi's with TerrariumPI running to one single system. By using multiple Rapsberry PI's you can cover a bigger area. But there are limitations.
+
+Currently it is READONLY. So you can read out remote sensors and switches but you cannot control the remote switches. But this way you can combine the power swiches total costs and power usage.
+
+more information is here: [Remote data wiki](https://github.com/theyosh/TerrariumPI/wiki/Remote-data)
 
 ## Screenshots
 (made on a very big screen :P )
