@@ -79,7 +79,7 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <div class="row environment_light">
+                  <div class="row environment_light disabled">
                     <h4><span class="fa fa-lightbulb-o"></span> {{_('Lights')}} <small>{{_('mode')}}: <span>{{_('Disabled')}}</span></small></h4>
                     <table class="tile_info">
                       <tr>
@@ -108,7 +108,7 @@
                       </tr>
                     </table>
                   </div>
-                  <div class="row environment_sprayer">
+                  <div class="row environment_sprayer disabled">
                     <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-tint"></i> {{_('Sprayer')}} <small>{{_('mode')}}: <span>{{_('Disabled')}}</span></small></h4>
                     <table class="tile_info">
                       <tr>
@@ -131,7 +131,7 @@
                       </tr>
                     </table>
                   </div>
-                  <div class="row environment_heater">
+                  <div class="row environment_heater disabled">
                     <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-fire"></i> {{_('Heater')}} <small>{{_('mode')}}: <span>{{_('Disabled')}}</span></small></h4>
                     <table class="tile_info">
                       <tr>
@@ -160,7 +160,7 @@
                       </tr>
                     </table>
                   </div>
-                  <div class="row environment_cooler">
+                  <div class="row environment_cooler disabled">
                     <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-flag-o"></i> {{_('Cooler')}} <small>{{_('mode')}}: <span>{{_('Disabled')}}</span></small></h4>
                     <table class="tile_info">
                       <tr>
