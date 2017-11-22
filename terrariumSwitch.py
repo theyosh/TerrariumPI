@@ -219,7 +219,7 @@ class terrariumSwitch():
   def update(self):
     if 'remote' in self.get_hardware_type():
       url_data = terrariumUtils.parse_url(self.get_address())
-      data = requests.get(self.get_address(),auth=(url_data['username'], url_data['password']))
+      data = requests.get(self.get_address(),auth=(url_data['username'], url_data['password']),timeout=3)
 
       if data.status_code == 200:
         data = data.json()
@@ -260,8 +260,6 @@ class terrariumSwitch():
       except Exception, err:
         logger.warning(err)
         pass
-    elif 'remote' in self.get_hardware_type():
-      self.sensor_address = address
 
   def get_name(self):
     return self.name
