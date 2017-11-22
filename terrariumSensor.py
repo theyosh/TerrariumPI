@@ -41,12 +41,8 @@ class terrariumSensor:
       self.sensor = dht
       # Dirty hack to replace OWFS sensor object for GPIO pin nr
       self.sensor_address = sensor
-    elif self.get_hardware_type() == 'remote':
-      self.sensor_address = None
-      url_data = terrariumUtils.parse_url(sensor)
-      if url_data:
-        self.sensor = url_data
-        self.sensor_address = sensor
+    elif 'remote' == self.get_hardware_type():
+      self.sensor_address = sensor
 
     self.set_name(name)
     self.set_type(sensor_type,indicator)
@@ -187,16 +183,16 @@ class terrariumSensor:
       current = None
       try:
         starttime = time.time()
-        if 'temperature' == self.get_type():
-          if self.get_hardware_type() == 'owfs':
-            current = float(self.sensor.temperature)
-          elif 'remote' == self.get_hardware_type() and self.sensor_address is not None:
-            authentication=(self.sensor['username'], self.sensor['password'])
-            data = requests.get(self.sensor_address,auth=authentication)
+        if 'remote' == self.get_hardware_type():
+          url_data = terrariumUtils.parse_url(self.get_address())
+          if url_data is False:
+            logger.error('Remote url \'%s\' for sensor \'%s\' is not a valid remote source url!' % (self.get_address(),self.get_name()))
+          else:
+            data = requests.get(self.get_address(),auth=(url_data['username'],url_data['password']),timeout=3)
 
             if data.status_code == 200:
               data = data.json()
-              json_path = self.sensor['fragment'].split('/') if 'fragment' in self.sensor and self.sensor['fragment'] is not None else []
+              json_path = url_data['fragment'].split('/') if 'fragment' in url_data and url_data['fragment'] is not None else []
 
               for item in json_path:
                 # Dirty hack to process array data....
@@ -207,6 +203,12 @@ class terrariumSensor:
 
                 data = data[item]
               current = float(data)
+            else:
+              logger.warning('Remote sensor \'%s\' got error from remote source \'%s\': %s' % (self.get_name(),self.get_address(),data.status_code))
+
+        elif 'temperature' == self.get_type():
+          if self.get_hardware_type() == 'owfs':
+            current = float(self.sensor.temperature)
 
           elif self.get_hardware_type() == 'w1':
             data = ''
@@ -227,23 +229,6 @@ class terrariumSensor:
         elif 'humidity' == self.get_type():
           if self.get_hardware_type() == 'owfs':
             current = float(self.sensor.humidity)
-          elif 'remote' == self.get_hardware_type() and self.sensor_address is not None:
-            authentication=(self.sensor['username'], self.sensor['password'])
-            data = requests.get(self.sensor_address,auth=authentication)
-
-            if data.status_code == 200:
-              data = data.json()
-              json_path = self.sensor['fragment'].split('/') if 'fragment' in self.sensor and self.sensor['fragment'] is not None else []
-
-              for item in json_path:
-                # Dirty hack to process array data....
-                try:
-                  item = int(item)
-                except Exception, ex:
-                  item = str(item)
-
-                data = data[item]
-              current = float(data)
 
           elif self.get_hardware_type() == 'w1':
             # Not tested / No hardware to test with
