@@ -706,9 +706,10 @@ function update_dashboard_environment(name, value) {
                            'timer':'{{_('Timer')}}'};
   var systempart = $('div.environment_' + name);
   if (systempart.length === 0 || Object.keys(value).length === 0 || !value.enabled) {
-    systempart.find('table.tile_info').hide();
+    systempart.addClass('disabled');
     return;
   }
+  systempart.removeClass('disabled');
   var enabledColor = '';
   var indicator = '°' + globals.temperature_indicator;
   switch (name) {
@@ -730,6 +731,7 @@ function update_dashboard_environment(name, value) {
   systempart.find('h4').removeClass('orange blue red')
                        .addClass(value.enabled ? enabledColor : '')
                        .attr('title', value.enabled ? "{{_('Enabled')}}" : "{{_('Disabled')}}");
+
   systempart.find('h4 small span').text(mode_translations[value.mode]);
 
   if (value.on !== undefined) {
