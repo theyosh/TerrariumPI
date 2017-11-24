@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import re
 
 class terrariumUtils():
 
@@ -17,6 +18,10 @@ class terrariumUtils():
       return True
     except ValueError:
       return False
+
+  @staticmethod
+  def is_true(value):
+    return value in ['true','True','1',1,'on',True]
 
   @staticmethod
   def to_BCM_port_number(value):
@@ -91,5 +96,18 @@ class terrariumUtils():
     index = 'BCM' + str(value)
     if index in pinout:
       return pinout[index]
+
+    return False
+
+  @staticmethod
+  def parse_url(url):
+    url = url.strip()
+    if '' == url:
+      return False
+
+    regex = ur"^((?P<scheme>https?|ftp):\/)?\/?((?P<username>.*?)(:(?P<password>.*?)|)@)?(?P<hostname>[^:\/\s]+)(:(?P<port>(\d*))?)?(?P<path>(\/\w+)*\/)(?P<filename>[-\w.]+[^#?\s]*)?(?P<query>\?([^#]*))?(#(?P<fragment>(.*))?)?$"
+    matches = re.search(regex, url)
+    if matches:
+      return matches.groupdict()
 
     return False

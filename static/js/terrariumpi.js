@@ -637,9 +637,9 @@ function update_dashboard_uptime(data) {
   update_dashboard_tile('uptime', format_uptime(data.uptime));
   $('#system_time span').text(moment(data.timestamp * 1000).format('LLLL'));
   $('#system_time i').removeClass('fa-clock-o fa-sun-o fa-moon-o').addClass((data.day ? 'fa-sun-o' : 'fa-moon-o'));
-  $("#uptime .progress-bar-success").css('height', (data.load[0] * 100) + '%');
-  $("#uptime .progress-bar-warning").css('height', (data.load[1] * 100) + '%');
-  $("#uptime .progress-bar-danger").css('height', (data.load[2] * 100) + '%');
+  $("#uptime .progress-bar-success").css('height', ((data.load[0] / data.cores) * 100) + '%');
+  $("#uptime .progress-bar-warning").css('height', ((data.load[1] / data.cores) * 100) + '%');
+  $("#uptime .progress-bar-danger").css('height', ( (data.load[2] / data.cores) * 100) + '%');
 }
 
 function update_dashboard_power_usage(data) {
@@ -706,9 +706,10 @@ function update_dashboard_environment(name, value) {
                            'timer':'{{_('Timer')}}'};
   var systempart = $('div.environment_' + name);
   if (systempart.length === 0 || Object.keys(value).length === 0 || !value.enabled) {
-    systempart.find('table.tile_info').hide();
+    systempart.addClass('disabled');
     return;
   }
+  systempart.removeClass('disabled');
   var enabledColor = '';
   var indicator = '°' + globals.temperature_indicator;
   switch (name) {
@@ -730,6 +731,7 @@ function update_dashboard_environment(name, value) {
   systempart.find('h4').removeClass('orange blue red')
                        .addClass(value.enabled ? enabledColor : '')
                        .attr('title', value.enabled ? "{{_('Enabled')}}" : "{{_('Disabled')}}");
+
   systempart.find('h4 small span').text(mode_translations[value.mode]);
 
   if (value.on !== undefined) {
@@ -1151,6 +1153,9 @@ function sensor_gauge(name, data) {
       globals.gauges[name].setMinValue(data.limit_min);
     }
     // Update values
+    if (name == 'system_load') {
+      data.current /= data.cores;
+    }
     globals.gauges[name].set(data.current);
     if (name == 'system_disk' || name == 'system_memory') {
       $('#' + name + ' .gauge-value').text(formatBytes(data.current))
@@ -1272,6 +1277,10 @@ function history_graph(name, data, type) {
 
           case 'system_uptime':
               val = moment.duration(val * 1000).humanize();
+            break;
+
+          case 'system_load':
+              val = formatNumber(val);
             break;
 
           case 'weather':
@@ -1462,6 +1471,37 @@ function check_form_data(form) {
   return fieldsok;
 }
 
+function parse_remote_data(type,url) {
+  $.get(url,function(data) {
+    var json_path = url.indexOf('#');
+    if (json_path != -1) {
+      json_path = url.substring(json_path+1).split('/');
+      // TerrariumPI API is known, and can be used to fill in all values
+      var is_remote_terrarium_pi = json_path.length == 3
+                                   && (json_path[0] === 'sensors' || json_path[0] === 'switches')
+                                   && json_path[1] === '0'
+                                   && (json_path[2] === 'current' || json_path[2] === 'state');
+
+      if (is_remote_terrarium_pi) {
+        // Loop through the fields and fill in the fields with remote information
+        $.each(data[json_path[0]][json_path[1]],function(fieldname,value) {
+          // Never overrule fields in array below
+          if ($.inArray(fieldname,['address','hardwaretype','id']) == -1) {
+            $('input[name="' + type + '_[nr]_' + fieldname + '"]').val(value);
+            $('select[name="' + type + '_[nr]_' + fieldname + '"]').val(value).change();
+          }
+        });
+      } else {
+        // Here we loop over the JSON structure to get the end value which should be the current value
+        $.each(json_path,function(index,value){
+          data = data[value];
+        });
+        $('input[name="' + type + '_[nr]_current"]').val(data);
+      }
+    }
+  });
+}
+
 function add_sensor() {
   var form = $('.new-sensor-form');
   if (!check_form_data(form)) return false;
@@ -1476,8 +1516,11 @@ function add_sensor() {
                  form.find('input[name="sensor_[nr]_limit_min"]').val(),
                  form.find('input[name="sensor_[nr]_limit_max"]').val(),
                  -1);
-
-  $('.new-sensor-form').modal('hide');
+  // Reset form
+  form.find('input').val('');
+  form.find('select').val(null).trigger('change');
+  // Hide form
+  form.modal('hide');
 }
 
 function add_sensor_row(id,hardwaretype,address,type,name,alarm_min,alarm_max,limit_min,limit_max,current) {
@@ -1497,11 +1540,14 @@ function add_sensor_row(id,hardwaretype,address,type,name,alarm_min,alarm_max,li
   sensor_row.find("select").select2({
     placeholder: '{{_('Select an option')}}',
     allowClear: false,
-    minimumResultsForSearch: Infinity
+    minimumResultsForSearch: Infinity,
   }).on('change',function() {
+    // Changing should not be possible. But disabling will cripple the form post data
+    /*
     if (this.name.indexOf('hardwaretype') >= 0) {
       $("input[name='" + this.name.replace('hardwaretype','address') + "']").attr("readonly", this.value == 'owfs' || this.value == 'w1');
     }
+    */
   });
 }
 
@@ -1522,7 +1568,11 @@ function add_switch() {
                  form.find('input[name="switch_[nr]_dimmer_off_percentage"]').val()
                  );
 
-  $('.new-switch-form').modal('hide');
+  // Reset form
+  form.find('input').val('');
+  form.find('select').val(null).trigger('change');
+  // Hide form
+  form.modal('hide');
 }
 
 function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow, dimmer_duration,dimmer_on_duration,dimmer_on_percentage,dimmer_off_duration,dimmer_off_percentage) {
@@ -1545,9 +1595,9 @@ function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow, d
     allowClear: false,
     minimumResultsForSearch: Infinity
   }).on('change',function() {
-    switch_row.find('.row.dimmer').toggle(this.value === 'pwm-dimmer');
+    //switch_row.find('.row.dimmer').toggle(this.value === 'pwm-dimmer');
   });
-  switch_row.find('.row.dimmer').toggle(hardwaretype === 'pwm-dimmer');
+  switch_row.find('.row.dimmer').toggle('pwm-dimmer' === hardwaretype || 'remote-dimmer' === hardwaretype);
 }
 
 function add_door() {
@@ -1621,7 +1671,7 @@ function add_webcam_row(id,location,name,rotation,preview) {
 function update_power_switch(id, data) {
   var power_switch = $('#switch_' + id);
   var update_data = '';
-  if (data.hardwaretype === 'pwm-dimmer') {
+  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype) {
     update_data = formatNumber(data.current_power_wattage) + 'W / '
   }
   update_data += formatNumber(data.power_wattage) + 'W';
@@ -1632,7 +1682,7 @@ function update_power_switch(id, data) {
   power_switch.find('h2 span.title').text('{{_('Switch')}} ' + data.name);
   power_switch.find('h2 small.data_update').text(update_data);
 
-  if (data.hardwaretype === 'pwm-dimmer') {
+  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype) {
     power_switch.find('div.power_switch').removeClass('big').addClass('dimmer').html('<input class="knob" data-thickness=".3" data-width="170" data-angleOffset=20 data-angleArc=320 data-fgColor="' + (data.state > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB') + '" value="'+ data.state + '">');
 
     power_switch.find('.knob').knob({

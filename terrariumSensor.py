@@ -8,6 +8,7 @@ import ow
 import Adafruit_DHT as dht
 import glob
 import re
+import requests
 
 from hashlib import md5
 from terrariumUtils import terrariumUtils
@@ -18,7 +19,7 @@ class terrariumSensor:
   VALID_DHT_SENSORS    = { 'dht11' : dht.DHT11,
                            'dht22' : dht.DHT22,
                            'am2302': dht.AM2302 }
-  VALID_HARDWARE_TYPES = ['owfs','w1'] + VALID_DHT_SENSORS.keys()
+  VALID_HARDWARE_TYPES = ['owfs','w1','remote'] + VALID_DHT_SENSORS.keys()
 
   W1_BASE_PATH = '/sys/bus/w1/devices/'
   W1_TEMP_REGEX = re.compile(r'(?P<type>t|f)=(?P<value>[0-9]+)',re.IGNORECASE)
@@ -39,6 +40,8 @@ class terrariumSensor:
       # Adafruit_DHT
       self.sensor = dht
       # Dirty hack to replace OWFS sensor object for GPIO pin nr
+      self.sensor_address = sensor
+    elif 'remote' == self.get_hardware_type():
       self.sensor_address = sensor
 
     self.set_name(name)
@@ -180,9 +183,33 @@ class terrariumSensor:
       current = None
       try:
         starttime = time.time()
-        if 'temperature' == self.get_type():
+        if 'remote' == self.get_hardware_type():
+          url_data = terrariumUtils.parse_url(self.get_address())
+          if url_data is False:
+            logger.error('Remote url \'%s\' for sensor \'%s\' is not a valid remote source url!' % (self.get_address(),self.get_name()))
+          else:
+            data = requests.get(self.get_address(),auth=(url_data['username'],url_data['password']),timeout=3)
+
+            if data.status_code == 200:
+              data = data.json()
+              json_path = url_data['fragment'].split('/') if 'fragment' in url_data and url_data['fragment'] is not None else []
+
+              for item in json_path:
+                # Dirty hack to process array data....
+                try:
+                  item = int(item)
+                except Exception, ex:
+                  item = str(item)
+
+                data = data[item]
+              current = float(data)
+            else:
+              logger.warning('Remote sensor \'%s\' got error from remote source \'%s\': %s' % (self.get_name(),self.get_address(),data.status_code))
+
+        elif 'temperature' == self.get_type():
           if self.get_hardware_type() == 'owfs':
             current = float(self.sensor.temperature)
+
           elif self.get_hardware_type() == 'w1':
             data = ''
             with open(terrariumSensor.W1_BASE_PATH + self.get_address() + '/w1_slave', 'r') as w1data:
@@ -191,8 +218,7 @@ class terrariumSensor:
             w1data = terrariumSensor.W1_TEMP_REGEX.search(data)
             if w1data:
               # Found data
-              temperature = float(w1data.group('value')) / 1000
-              current = float(temperature)
+              current = float(w1data.group('value')) / 1000
           elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
             humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()],
                                                            float(terrariumUtils.to_BCM_port_number(self.sensor_address)),
@@ -203,9 +229,11 @@ class terrariumSensor:
         elif 'humidity' == self.get_type():
           if self.get_hardware_type() == 'owfs':
             current = float(self.sensor.humidity)
+
           elif self.get_hardware_type() == 'w1':
             # Not tested / No hardware to test with
             pass
+
           elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
             humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()],
                                                            float(terrariumUtils.to_BCM_port_number(self.sensor_address)),
