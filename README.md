@@ -35,7 +35,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Volume controle in the webinterface
   - Uploadig audio files through webinterface
   - Audio meta data support
-- Remote temperature and humidity sensors through HTTP(S) JSON API's
+- Remote temperature and humidity sensors through HTTP(S) JSON API's. JSON Data format can be found on [Remote data wiki](https://github.com/theyosh/TerrariumPI/wiki/Remote-data).
 
 It is currently controling my reptile terrarium for more then three years! And my Madagascar Day Gecko is very happy with it!
 
@@ -93,7 +93,11 @@ This software requires a Raspberry Pi and some extra hardware in order to run an
   - OWFS
   - GPIO
   - 1 Wire interface
+  
+### GPIO numbering
+All hardware that connects to the GPIO pins use Physical GPIO numbering (1 - 40). The software will translate it to BCM if needed for a supported device or sensor. [More information about GPIO pin numbering](https://pinout.xyz/)
 
+### New hardware
 If there is some other hardware which is not working with TerrariumPI, open an issue on [Github](https://github.com/theyosh/TerrariumPI/issues) and we will try to support it. Raspberry Pi Zero is not tested.
 
 ## Remote data
