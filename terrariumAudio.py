@@ -35,7 +35,7 @@ class terrariumAudioPlayer():
       self.__load_audio_files()
       self.__load_playlists(playlistdata)
 
-      if pwmdimmer and self.__hwid == 0:
+      if pwmdimmer and cardid == 'bcm2835 ALSA':
         logger.warning('Disabled audio playing due to hardware conflict with PWM dimmers and onboard soundcard')
       else:
         self.__load_audio_mixer()

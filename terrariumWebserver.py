@@ -235,6 +235,7 @@ class terrariumWebserver():
 
   def __get_api_call(self,path):
     response.headers['Expires'] = (datetime.datetime.utcnow() + datetime.timedelta(minutes=1)).strftime('%a, %d %b %Y %H:%M:%S GMT')
+    response.headers['Access-Control-Allow-Origin'] = '*'
 
     result = {}
     parameters = path.strip('/').split('/')

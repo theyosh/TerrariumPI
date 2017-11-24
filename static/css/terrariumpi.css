@@ -132,7 +132,11 @@ div.modal div.row.webcam{
 .top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#door_indicator .open,
 .top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#door_indicator .closed,
 .top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#player_indicator .running,
-.top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#player_indicator .stopped {
+.top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#player_indicator .stopped,
+div.row.environment_light.disabled,
+div.row.environment_sprayer.disabled,
+div.row.environment_heater.disabled,
+div.row.environment_cooler.disabled {
   display:none;
 }
 

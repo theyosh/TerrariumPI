@@ -2,6 +2,43 @@ Changelog
 =========
 
 
+3.2.0 (2017-11-24)
+------------------
+
+**New**
+- Add TOC. [TheYOSH]
+- Add config upgrade. [TheYOSH]
+- Add files via upload. [TheYOSH]
+- Add remote switches support. For now READONLY [#51](https://github.com/theyosh/TerrariumPI/issues/51). [TheYOSH]
+- Add support for remote (HTTP/HTTPS) temperature and humidity sensors
+  through JSON REST API. [#51](https://github.com/theyosh/TerrariumPI/issues/51). [TheYOSH]
+- Add static url parser. [TheYOSH]
+- Add CORS headers for Ajax REST calls. [TheYOSH]
+
+**Fixes**
+- Fix for remote data timeouts. [TheYOSH]
+- Fix remote dimmer data collectin. [TheYOSH]
+- Fix remote dimmer state updates. [TheYOSH]
+
+**Updates**
+- Update README.md. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update language files. [TheYOSH]
+- Update dashboard. Hide not enabled environment parts. [TheYOSH]
+- Small player updates. [TheYOSH]
+- Update soundcard code to support random soundcard order (2) [TheYOSH]
+- Update soundcard code to support random soundcard order. [TheYOSH]
+- Update readme. [TheYOSH]
+- Update version number. [TheYOSH]
+
+**Other**
+- Better load indicator. (2) [TheYOSH]
+- Better load indicator. [TheYOSH]
+- Merge branch 'master' into feature/remote_data. [TheYOSH]
+- Merge branch 'master' into feature/remote_data. [TheYOSH]
+- Code cleanup and add connection timeouts. [TheYOSH]
+
+
 3.1.1 (2017-11-20)
 ------------------
 
@@ -10,6 +47,7 @@ Changelog
 - Add Apple icon. [TheYOSH]
 
 **Updates**
+- Update changelog. [TheYOSH]
 - Updated top indicators. Hide disabled indicators on small screens.
   [TheYOSH]
 

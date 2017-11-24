@@ -8,13 +8,14 @@ import pigpio
 import thread
 import time
 import math
+import requests
 
 from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
 from hashlib import md5
 from terrariumUtils import terrariumUtils
 
 class terrariumSwitch():
-  VALID_HARDWARE_TYPES = ['ftdi','gpio','gpio-inverse','pwm-dimmer']
+  VALID_HARDWARE_TYPES = ['ftdi','gpio','gpio-inverse','pwm-dimmer','remote','remote-dimmer']
 
   OFF = False
   ON = True
@@ -46,6 +47,8 @@ class terrariumSwitch():
       self.__load_ftdi_device()
     elif self.get_hardware_type() == 'pwm-dimmer':
       self.__load_pwm_device()
+    elif 'remote' in self.get_hardware_type():
+      pass
     elif 'gpio' in self.get_hardware_type():
       self.__load_gpio_device()
 
@@ -178,6 +181,9 @@ class terrariumSwitch():
           duration = self.get_dimmer_off_duration()
 
         thread.start_new_thread(self.__dim_switch, (self.state,state,duration))
+      elif 'remote' in self.get_hardware_type():
+        # Not yet implemented
+        pass
 
       self.state = state
       if self.get_hardware_type() != 'pwm-dimmer':
@@ -209,6 +215,38 @@ class terrariumSwitch():
             }
 
     return data
+
+  def update(self):
+    if 'remote' in self.get_hardware_type():
+      url_data = terrariumUtils.parse_url(self.get_address())
+      if url_data is False:
+        logger.error('Remote url \'%s\' for switch \'%s\' is not a valid remote source url!' % (self.get_address(),self.get_name()))
+      else:
+        try:
+          data = requests.get(self.get_address(),auth=(url_data['username'],url_data['password']),timeout=3)
+
+          if data.status_code == 200:
+            data = data.json()
+            json_path = url_data['fragment'].split('/') if 'fragment' in url_data and url_data['fragment'] is not None else []
+
+            for item in json_path:
+              # Dirty hack to process array data....
+              try:
+                item = int(item)
+              except Exception, ex:
+                item = str(item)
+
+              data = data[item]
+
+            if 'remote' == self.get_hardware_type():
+              self.set_state(terrariumUtils.is_true(data))
+            elif 'remote-dimmer' == self.get_hardware_type():
+              self.set_state(int(data))
+
+          else:
+            logger.warning('Remote switch \'%s\' got error from remote source \'%s\': %s' % (self.get_name(),self.get_address(),data.status_code))
+        except Exception, ex:
+          logger.error('Remote switch \'%s\' got error from remote source \'%s\': %s' % (self.get_name(),self.get_address(),ex))
 
   def get_id(self):
     return self.id
@@ -243,7 +281,7 @@ class terrariumSwitch():
 
   def get_current_power_wattage(self):
     wattage = 0.0
-    if self.get_hardware_type() == 'pwm-dimmer':
+    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
       wattage = self.get_power_wattage() * (self.get_state() / 100.0)
     else:
       wattage = self.get_power_wattage()
@@ -261,7 +299,7 @@ class terrariumSwitch():
 
   def get_current_water_flow(self):
     waterflow = 0.0
-    if self.get_hardware_type() == 'pwm-dimmer':
+    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
       waterflow = self.get_water_flow() * (self.get_state() / 100.0)
     else:
       waterflow = self.get_water_flow()
@@ -285,13 +323,13 @@ class terrariumSwitch():
     return None
 
   def is_on(self):
-    if self.get_hardware_type() == 'pwm-dimmer':
+    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
       return self.get_state() > self.get_dimmer_off_percentage()
     else:
       return self.get_state() is terrariumSwitch.ON
 
   def is_off(self):
-    if self.get_hardware_type() == 'pwm-dimmer':
+    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
       return self.get_state() == self.get_dimmer_off_percentage()
     else:
       return self.get_state() is terrariumSwitch.OFF
@@ -318,32 +356,32 @@ class terrariumSwitch():
     self.__dimmer_duration = value if value >= 0.0 else 0.0
 
   def get_dimmer_duration(self):
-    return (self.__dimmer_duration if self.get_hardware_type() == 'pwm-dimmer' else 0.0)
+    return (self.__dimmer_duration if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] else 0.0)
 
   def set_dimmer_on_duration(self,value):
     value = float(value) if terrariumUtils.is_float(value) else 0.0
     self.__dimmer_on_duration = value if value >= 0.0 else 0.0
 
   def get_dimmer_on_duration(self):
-    return (self.__dimmer_on_duration if self.get_hardware_type() == 'pwm-dimmer' else 0.0)
+    return (self.__dimmer_on_duration if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] else 0.0)
 
   def set_dimmer_off_duration(self,value):
     value = float(value) if terrariumUtils.is_float(value) else 0.0
     self.__dimmer_off_duration = value if value >= 0.0 else 0.0
 
   def get_dimmer_off_duration(self):
-    return (self.__dimmer_off_duration if self.get_hardware_type() == 'pwm-dimmer' else 0.0)
+    return (self.__dimmer_off_duration if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] else 0.0)
 
   def set_dimmer_on_percentage(self,value):
     value = float(value) if terrariumUtils.is_float(value) else 0.0
     self.__dimmer_on_percentage = value if (0.0 <= value <= 100.0) else 100.0
 
   def get_dimmer_on_percentage(self):
-    return (self.__dimmer_on_percentage if self.get_hardware_type() == 'pwm-dimmer' else 100.0)
+    return (self.__dimmer_on_percentage if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] else 100.0)
 
   def set_dimmer_off_percentage(self,value):
     value = float(value) if terrariumUtils.is_float(value) else 0.0
     self.__dimmer_off_percentage = value if (0.0 <= value <= 100.0) else 100.0
 
   def get_dimmer_off_percentage(self):
-    return (self.__dimmer_off_percentage if self.get_hardware_type() == 'pwm-dimmer' else 0.0)
+    return (self.__dimmer_off_percentage if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] else 0.0)

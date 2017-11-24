@@ -268,6 +268,13 @@ class terrariumEngine():
       # Websocket callback
       self.__send_message({'type':'sensor_gauge','data':average_data})
 
+      # Update (remote) power switches
+      for power_switch_id in self.power_switches:
+        # Update the current sensor.
+        self.power_switches[power_switch_id].update()
+        # Make time for other web request
+        sleep(0.1)
+
       # Websocket messages back
       self.get_uptime(socket=True)
       self.get_power_usage_water_flow(socket=True)
@@ -825,12 +832,12 @@ class terrariumEngine():
             'temperature' : cpu_temp}
 
     if socket:
-      gauge_data = {'system_load'        : {'current' : data['load']['load1'] * 100, 'alarm_min' : 0, 'alarm_max': 80, 'limit_min' : 0, 'limit_max': 100},
+      gauge_data = {'system_load'        : {'current' : data['load']['load1'] * 100, 'alarm_min' : 0, 'alarm_max': 80, 'limit_min' : 0, 'limit_max': 100, 'cores' : data['cores']},
                     'system_temperature' : {'current' : data['temperature'], 'alarm_min' : 30, 'alarm_max': 60, 'limit_min' : 0, 'limit_max': 80},
                     'system_memory'      : {'current' : data['memory']['used'], 'alarm_min' : data['memory']['total'] * 0.1, 'alarm_max': data['memory']['total'] * 0.9, 'limit_min' : 0, 'limit_max': data['memory']['total']},
                     'system_disk'        : {'current' : data['disk']['used'], 'alarm_min' : data['disk']['total'] * 0.1, 'alarm_max': data['disk']['total'] * 0.9, 'limit_min' : 0, 'limit_max': data['disk']['total']}}
 
-      gauge_data['system_load']['alarm'] = not(gauge_data['system_load']['alarm_min'] < gauge_data['system_load']['current'] < gauge_data['system_load']['alarm_max'])
+      gauge_data['system_load']['alarm'] = not(gauge_data['system_load']['alarm_min'] < gauge_data['system_load']['current'] / data['cores'] < gauge_data['system_load']['alarm_max'])
       gauge_data['system_temperature']['alarm'] = not(gauge_data['system_temperature']['alarm_min'] < gauge_data['system_temperature']['current'] < gauge_data['system_temperature']['alarm_max'])
       gauge_data['system_memory']['alarm'] = not(gauge_data['system_memory']['alarm_min'] < gauge_data['system_memory']['current'] < gauge_data['system_memory']['alarm_max'])
       gauge_data['system_disk']['alarm'] = not(gauge_data['system_disk']['alarm_min'] < gauge_data['system_disk']['current'] < gauge_data['system_disk']['alarm_max'])
@@ -843,7 +850,8 @@ class terrariumEngine():
     data = {'uptime' : uptime.uptime(),
             'timestamp' : int(time.time()),
             'day' : self.weather.is_day(),
-            'load' : os.getloadavg()}
+            'load' : os.getloadavg(),
+            'cores' : psutil.cpu_count()}
 
     if socket:
       self.__send_message({'type':'uptime','data':data})
