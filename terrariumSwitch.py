@@ -219,25 +219,34 @@ class terrariumSwitch():
   def update(self):
     if 'remote' in self.get_hardware_type():
       url_data = terrariumUtils.parse_url(self.get_address())
-      data = requests.get(self.get_address(),auth=(url_data['username'], url_data['password']),timeout=3)
+      if url_data is False:
+        logger.error('Remote url \'%s\' for switch \'%s\' is not a valid remote source url!' % (self.get_address(),self.get_name()))
+      else:
+        try:
+          data = requests.get(self.get_address(),auth=(url_data['username'],url_data['password']),timeout=3)
 
-      if data.status_code == 200:
-        data = data.json()
-        json_path = url_data['fragment'].split('/') if 'fragment' in url_data and url_data['fragment'] is not None else []
+          if data.status_code == 200:
+            data = data.json()
+            json_path = url_data['fragment'].split('/') if 'fragment' in url_data and url_data['fragment'] is not None else []
 
-        for item in json_path:
-          # Dirty hack to process array data....
-          try:
-            item = int(item)
-          except Exception, ex:
-            item = str(item)
+            for item in json_path:
+              # Dirty hack to process array data....
+              try:
+                item = int(item)
+              except Exception, ex:
+                item = str(item)
 
-          data = data[item]
+              data = data[item]
 
-        if 'remote' == self.get_hardware_type():
-          self.set_state(terrariumUtils.is_true(data))
-        elif 'remote-dimmer' == self.get_hardware_type():
-          self.set_state(int(data))
+            if 'remote' == self.get_hardware_type():
+              self.set_state(terrariumUtils.is_true(data))
+            elif 'remote-dimmer' == self.get_hardware_type():
+              self.set_state(int(data))
+
+          else:
+            logger.warning('Remote switch \'%s\' got error from remote source \'%s\': %s' % (self.get_name(),self.get_address(),data.status_code))
+        except Exception, ex:
+          logger.error('Remote switch \'%s\' got error from remote source \'%s\': %s' % (self.get_name(),self.get_address(),ex))
 
   def get_id(self):
     return self.id
