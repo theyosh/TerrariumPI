@@ -11,6 +11,18 @@ Think off:
 - Tanks with animals or plants
 - Growhouse
 
+## Table of Contents
+1. [Features](#features)
+2. [Translations](#translations)
+3. [Installation](#installation)
+4. [Updating](#updating)
+5. [Hardware](#hardware)
+   1. [GPIO numbering](#gpio-numbering)
+   2. [New hardware](#new-hardware)
+6. [Remote data](#remote-data)
+7. [Screenshots](#screenshots)
+8. [About](#about)
+
 And all this is controlled with a nice webinterface based on [Gentelella a Bootstrap 3 template](https://github.com/puikinsh/gentelella/).
 ## Features
 - Controlling electronic devices like lights, sprayers, heating and cooling equipment
