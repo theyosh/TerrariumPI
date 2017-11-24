@@ -11,6 +11,8 @@ Think off:
 - Tanks with animals or plants
 - Growhouse
 
+And all this is controlled with a nice webinterface based on [Gentelella a Bootstrap 3 template](https://github.com/puikinsh/gentelella/).
+
 ## Table of Contents
 1. [Features](#features)
 2. [Translations](#translations)
@@ -23,7 +25,6 @@ Think off:
 7. [Screenshots](#screenshots)
 8. [About](#about)
 
-And all this is controlled with a nice webinterface based on [Gentelella a Bootstrap 3 template](https://github.com/puikinsh/gentelella/).
 ## Features
 - Controlling electronic devices like lights, sprayers, heating and cooling equipment
 - Support for dimming electronic devices
