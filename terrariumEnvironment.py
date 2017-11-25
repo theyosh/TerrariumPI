@@ -251,15 +251,15 @@ class terrariumEnvironment():
       state = self.is_light_on()
     elif part == 'sprayer':
       state_data = self.sprayer
-      average = self.get_average_humidity()
+      average = self.get_average_humidity(self.sprayer['sensors'])
       state = self.is_sprayer_on()
     elif part == 'heater':
       state_data = self.heater
-      average = self.get_average_temperature()
+      average = self.get_average_temperature(self.heater['sensors'])
       state = self.is_heater_on()
     elif part == 'cooler':
       state_data = self.cooler
-      average = self.get_average_temperature()
+      average = self.get_average_temperature(self.cooler['sensors'])
       state = self.is_cooler_on()
 
     for key in state_data:
@@ -347,8 +347,8 @@ class terrariumEnvironment():
   def reload_config(self):
     self.__parse_config()
 
-  def get_average_temperature(self):
-    data = self.get_average()
+  def get_average_temperature(self,sensors = []):
+    data = self.get_average(sensors)
     if 'temperature' in data:
       return data['temperature']
 
@@ -361,8 +361,8 @@ class terrariumEnvironment():
             'alarm'     : False}
 
 
-  def get_average_humidity(self):
-    data = self.get_average()
+  def get_average_humidity(self,sensors = []):
+    data = self.get_average(sensors)
     if 'humidity' in data:
       return data['humidity']
 
@@ -374,10 +374,14 @@ class terrariumEnvironment():
             'amount'    : 0.0,
             'alarm'     : False}
 
-  def get_average(self):
+  def get_average(self,sensors_filter = []):
     average = {}
     # Make a set, in order to get a list of unique sensorids. In other words, set will remove duplicate sensorids
     for sensorid in set(self.sprayer['sensors'] + self.heater['sensors'] + self.cooler['sensors']):
+      if len(sensors_filter) > 0 and sensorid not in sensors_filter:
+        # If we want to filter, we only count the ones that are giving as parameter
+        continue
+
       if sensorid not in self.sensors:
         part = ''
         if sensorid in self.sprayer['sensors']:
