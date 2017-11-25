@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-11-24 12:57+CET\n"
+"POT-Creation-Date: 2017-11-25 21:21+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1032,10 +1032,6 @@ msgstr ""
 
 #: views/hardware.tpl:133
 msgid "All kind of USB cameras can be used. Enter physical path of the device like /dev/videoX."
-msgstr ""
-
-#: views/hardware.tpl:139
-msgid "BLA"
 msgstr ""
 
 #: views/inc/menu.tpl:10
@@ -2162,7 +2158,15 @@ msgid "Doors overview screenshot"
 msgstr ""
 
 #: Missing text string
+msgid "Drop files here to upload"
+msgstr ""
+
+#: Missing text string
 msgid "Either add audio files and playlists. Or you have a pwm-dimmer switch configured."
+msgstr ""
+
+#: Missing text string
+msgid "File is to big. Filesize {{filesize}} is more then max {{maxFilesize}}"
 msgstr ""
 
 #: Missing text string
@@ -2202,6 +2206,10 @@ msgid "Information"
 msgstr ""
 
 #: Missing text string
+msgid "Invalid filetype"
+msgstr ""
+
+#: Missing text string
 msgid "Load"
 msgstr ""
 
@@ -2219,6 +2227,10 @@ msgstr ""
 
 #: Missing text string
 msgid "Open"
+msgstr ""
+
+#: Missing text string
+msgid "Press browse button to select files"
 msgstr ""
 
 #: Missing text string
@@ -2255,6 +2267,10 @@ msgstr ""
 
 #: Missing text string
 msgid "Sensors overview screenshot"
+msgstr ""
+
+#: Missing text string
+msgid "Server could not process the upload. Error code {{statusCode}}"
 msgstr ""
 
 #: Missing text string
