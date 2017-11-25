@@ -361,7 +361,6 @@ class terrariumEngine():
           average[averagetype][field] /= amount
 
         average[averagetype]['alarm'] = not (average[averagetype]['alarm_min'] < average[averagetype]['current'] < average[averagetype]['alarm_max'])
-        average[averagetype]['amount'] = amount
         average[averagetype]['type'] = averagetype
 
       data = average
@@ -723,7 +722,7 @@ class terrariumEngine():
     if len(parameters) > 0 and parameters[0] is not None:
       filter = parameters[0]
 
-    data = self.environment.get_average()
+    data = self.get_sensors(['average'])['sensors']
     data['light'] = self.environment.get_light_state()
     data['sprayer'] = self.environment.get_sprayer_state()
     data['heater'] = self.environment.get_heater_state()
