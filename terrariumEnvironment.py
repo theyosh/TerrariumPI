@@ -421,7 +421,7 @@ class terrariumEnvironment():
       for field in average[averagetype]:
         average[averagetype][field] /= amount
 
-      average[averagetype]['alarm'] = not (average[averagetype]['alarm_min'] < average[averagetype]['current'] < average[averagetype]['alarm_max'])
+      average[averagetype]['alarm'] = not (average[averagetype]['alarm_min'] <= average[averagetype]['current'] <= average[averagetype]['alarm_max'])
       average[averagetype]['type'] = averagetype
 
     return average
