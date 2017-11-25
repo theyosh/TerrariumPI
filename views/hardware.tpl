@@ -136,7 +136,7 @@
                 <div aria-labelledby="hardware_tab_audio" class="tab-pane fade" id="hardware-tab-audio" role="tabpanel">
                   <!-- <img src="static/images/documentation/door_magnets.jpg" alt="Dashboard screenshot" class="img-thumbnail alignright col-xs-3" /> -->
                   <h2>{{_('Audio')}}</h2>
-                  <p>{{_('BLA')}}</p>
+                  <p></p>
                 </div>
               </div>
             </div>

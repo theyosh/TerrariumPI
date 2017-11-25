@@ -102,6 +102,13 @@
           $(document).ready(function() {
             $('.dropzone').dropzone({ url: this.action,
                                       withCredentials: true,
+                                      acceptedFiles: '.mp3,.ogg,.m4a',
+                                      dictDefaultMessage: '{{_('Drop files here to upload')}}',
+                                      dictFallbackMessage: '{{_('Press browse button to select files')}}',
+                                      dictFallbackText: null,
+                                      dictFileTooBig: '{{_('File is to big. Filesize {{filesize}} is more then max {{maxFilesize}}')}}',
+                                      dictInvalidFileType: '{{_('Invalid filetype')}}',
+                                      dictResponseError: '{{_('Server could not process the upload. Error code {{statusCode}}')}}',
                                       init: function() {
                                         this.on("success", function(file,response) {
                                           new PNotify({
@@ -120,7 +127,11 @@
                                         });
                                       }
                                     });
+
             $('#datatable-responsive').DataTable({
+              language: {
+                url: dataTableTranslations[$('html').attr('lang')],
+              },
               processing: true,
               order: [[ 2, 'asc' ]],
               ajax: {
