@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2017-11-24 12:57+CET\n"
-"PO-Revision-Date: 2017-11-24 12:57+0100\n"
+"POT-Creation-Date: 2017-11-25 21:21+CET\n"
+"PO-Revision-Date: 2017-11-25 21:21+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -1034,10 +1034,6 @@ msgstr "There are different Raspberry Pi cameras available. If the camera is Ras
 #: views/hardware.tpl:133
 msgid "All kind of USB cameras can be used. Enter physical path of the device like /dev/videoX."
 msgstr "All kind of USB cameras can be used. Enter physical path of the device like /dev/videoX."
-
-#: views/hardware.tpl:139
-msgid "BLA"
-msgstr "BLA"
 
 #: views/inc/menu.tpl:10
 msgid "Welcome"
@@ -2163,8 +2159,16 @@ msgid "Doors overview screenshot"
 msgstr "Doors overview screenshot"
 
 #: Missing text string
+msgid "Drop files here to upload"
+msgstr "Drop files here to upload"
+
+#: Missing text string
 msgid "Either add audio files and playlists. Or you have a pwm-dimmer switch configured."
 msgstr "Either add audio files and playlists. Or you have a pwm-dimmer switch configured."
+
+#: Missing text string
+msgid "File is to big. Filesize {{filesize}} is more then max {{maxFilesize}}"
+msgstr "File is to big. Filesize {{filesize}} is more then max {{maxFilesize}}"
 
 #: Missing text string
 msgid "Free memory"
@@ -2203,6 +2207,10 @@ msgid "Information"
 msgstr "Information"
 
 #: Missing text string
+msgid "Invalid filetype"
+msgstr "Invalid filetype"
+
+#: Missing text string
 msgid "Load"
 msgstr "Load"
 
@@ -2221,6 +2229,10 @@ msgstr "Not playing"
 #: Missing text string
 msgid "Open"
 msgstr "Open"
+
+#: Missing text string
+msgid "Press browse button to select files"
+msgstr "Press browse button to select files"
 
 #: Missing text string
 msgid "Preview file"
@@ -2257,6 +2269,10 @@ msgstr "Sensor history graph"
 #: Missing text string
 msgid "Sensors overview screenshot"
 msgstr "Sensors overview screenshot"
+
+#: Missing text string
+msgid "Server could not process the upload. Error code {{statusCode}}"
+msgstr "Server could not process the upload. Error code {{statusCode}}"
 
 #: Missing text string
 msgid "Switches overview screenshot"
