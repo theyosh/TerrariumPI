@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2017-11-24 12:57+0100\n"
-"PO-Revision-Date: 2017-11-24 13:01+0100\n"
+"POT-Creation-Date: 2017-11-25 21:22+0100\n"
+"PO-Revision-Date: 2017-11-25 21:24+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -1345,10 +1345,6 @@ msgid ""
 msgstr ""
 "Alle soorten USB-camera's kunnen worden gebruikt. Voer het fysieke pad van "
 "het apparaat in zoals / dev / videoX."
-
-#: views/hardware.tpl:139
-msgid "BLA"
-msgstr ""
 
 #: views/inc/menu.tpl:10
 msgid "Welcome"
@@ -2834,12 +2830,22 @@ msgid "Doors overview screenshot"
 msgstr "Deuren overzicht screenshot"
 
 #: Missing text string
+msgid "Drop files here to upload"
+msgstr "Sleep bestanden hier naar toe om te uploaden"
+
+#: Missing text string
 msgid ""
 "Either add audio files and playlists. Or you have a pwm-dimmer switch "
 "configured."
 msgstr ""
 "Of voeg audio bestanden en afspeellijsten toe. Of je hebt een pwm-dimmer "
 "schakelaar ingesteld."
+
+#: Missing text string
+msgid "File is to big. Filesize {{filesize}} is more then max {{maxFilesize}}"
+msgstr ""
+"Bestand is te groot. Bestandsgrootte {{filesize}} is meer dan het maximum "
+"{{maxFilesize}}"
 
 #: Missing text string
 msgid "Free memory"
@@ -2878,6 +2884,10 @@ msgid "Information"
 msgstr "Informatie"
 
 #: Missing text string
+msgid "Invalid filetype"
+msgstr "Ongeldige bestandstypes"
+
+#: Missing text string
 msgid "Load"
 msgstr "Belasting"
 
@@ -2896,6 +2906,10 @@ msgstr "Niet aan het afspelen"
 #: Missing text string
 msgid "Open"
 msgstr "Open"
+
+#: Missing text string
+msgid "Press browse button to select files"
+msgstr "Klik op de browse button om bestanden te kiezen"
 
 #: Missing text string
 msgid "Preview file"
@@ -2932,6 +2946,10 @@ msgstr "Sensor geschiedenis grafiek"
 #: Missing text string
 msgid "Sensors overview screenshot"
 msgstr "Sensoren overzicht screenshot"
+
+#: Missing text string
+msgid "Server could not process the upload. Error code {{statusCode}}"
+msgstr "De server kon de upload niet verwerken. Error code {{statusCode}}"
 
 #: Missing text string
 msgid "Switches overview screenshot"
