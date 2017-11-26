@@ -133,7 +133,7 @@ class terrariumConfig:
       if type(data[setting]) is list:
         data[setting] = ','.join(data[setting])
 
-      self.__config.set(section, str(setting), str(data[setting]))
+      self.__config.set(section, str(setting), str(data[setting].encode('utf-8')))
 
     return self.__save_config()
 
