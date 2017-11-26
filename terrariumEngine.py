@@ -249,7 +249,9 @@ class terrariumEngine():
 
       # Update weather
       self.weather.update()
-      self.collector.log_weather_data(self.weather.get_data()['hour_forecast'][0])
+      weather_data = self.weather.get_data()
+      if 'hour_forecast' in weather_data and len(weather_data['hour_forecast']) > 0:
+        self.collector.log_weather_data(weather_data['hour_forecast'][0])
 
       # Update sensors
       for sensorid in self.sensors:
