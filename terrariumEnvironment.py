@@ -98,8 +98,8 @@ class terrariumEnvironment():
       # Reread the light status.... above check could changed it
       light = self.get_light_state()
       sprayer = self.get_sprayer_state()
-      if sprayer['enabled'] and light['enabled']:
-        if sprayer['night_enabled'] or light['state'] == 'on':
+      if sprayer['enabled']:
+        if sprayer['night_enabled'] or (light['enabled'] and light['state'] == 'on'):
           if sprayer['current'] < sprayer['alarm_min']:
             # To low humidity. Put sprayer on
             if not self.is_door_open():
@@ -121,8 +121,8 @@ class terrariumEnvironment():
         self.sprayer_off()
 
       heater = self.get_heater_state()
-      if heater['enabled'] and light['enabled']:
-        if heater['day_enabled'] or light['state'] == 'off':
+      if heater['enabled']:
+        if heater['day_enabled'] or (light['enabled'] and light['state'] == 'off'):
           # Heater controll starts here...
           if heater['mode'] == 'sensor':
             # Trigger on sensor data only when lights are off
@@ -152,8 +152,8 @@ class terrariumEnvironment():
         self.heater_off()
 
       cooler = self.get_cooler_state()
-      if cooler['enabled'] and light['enabled']:
-        if cooler['night_enabled'] or light['state'] == 'on':
+      if cooler['enabled']:
+        if cooler['night_enabled'] or (light['enabled'] and light['state'] == 'on'):
           # Heater controll starts here...
           if cooler['mode'] == 'sensor':
             # Trigger on sensor data only when lights are off
