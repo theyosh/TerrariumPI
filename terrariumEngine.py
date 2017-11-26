@@ -79,7 +79,7 @@ class terrariumEngine():
 
     # Load the environment system. This will controll the lights, sprayer and heaters
     logger.debug('Loading terrariumPI environment system')
-    self.environment = terrariumEnvironment(self.sensors, self.power_switches, self.weather, self.door_status, self.config)
+    self.environment = terrariumEnvironment(self.sensors, self.power_switches, self.weather, self.is_door_open, self.config)
     logger.debug('Done loading terrariumPI environment system')
 
     # Load webcams from config
@@ -546,13 +546,13 @@ class terrariumEngine():
       self.door_status(True)
 
   def door_status(self, socket = False):
-    door_closed = True
-    for doorid in self.doors:
-      door_closed = door_closed and self.doors[doorid].get_status() == terrariumDoor.CLOSED
-
     if len(self.doors) == 0:
       data = 'disabled'
     else:
+      door_closed = True
+      for doorid in self.doors:
+        door_closed = door_closed and self.doors[doorid].get_status() == terrariumDoor.CLOSED
+
       data = terrariumDoor.CLOSED if door_closed else terrariumDoor.OPEN
 
     if socket:
