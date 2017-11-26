@@ -20,7 +20,8 @@ class terrariumEnvironment():
     logger.debug('Init terrariumPI environment')
 
     self.config = config
-    self.door_status = door_status
+    # Door status callback
+    self.is_door_open = door_status
 
     self.sensors = sensors
     self.power_switches = power_switches
@@ -101,14 +102,14 @@ class terrariumEnvironment():
         if sprayer['night_enabled'] or light['state'] == 'on':
           if sprayer['current'] < sprayer['alarm_min']:
             # To low humidity. Put sprayer on
-            if self.door_status() == terrariumDoor.CLOSED:
+            if not self.is_door_open():
               # Door is closed, so we can spray
               self.sprayer_on()
-              logger.info('Humdity value %f is to low. Sprayer will run for %f seconds' % (sprayer['current'],self.sprayer['spray_duration']))
+              logger.info('Humdity value %f%% is to low. Sprayer will run for %f seconds' % (sprayer['current'],self.sprayer['spray_duration']))
             else:
               # Door is open!! Cannot spray!
               self.sprayer_off()
-              logger.warning('Humdity value %f is to low. But door is open, so we cannot spray water' % sprayer['current'])
+              logger.warning('Humdity value %f%% is to low. But door is open, so we cannot spray water' % sprayer['current'])
           else:
             # Humidity is ok. Make sure sprayer is off
             self.sprayer_off()
