@@ -2,6 +2,37 @@ Changelog
 =========
 
 
+3.2.1 (2017-11-26)
+------------
+
+**New**
+- Add another check for failing weather data. [#52](https://github.com/theyosh/TerrariumPI/issues/52). [TheYOSH]
+- Add extra check for weather data. [#52](https://github.com/theyosh/TerrariumPI/issues/52). [TheYOSH]
+- Add publications. [TheYOSH]
+- Add translations to audio files table and dropzone. [TheYOSH]
+
+**Fixes**
+- Fix utf-8 check for non string values. [#52](https://github.com/theyosh/TerrariumPI/issues/52). [TheYOSH]
+- Fix door detection in sprayer engine. Fix [#59](https://github.com/theyosh/TerrariumPI/issues/59). [TheYOSH]
+- Fix alarm warnings. [TheYOSH]
+- Fixed environment averages. [TheYOSH]
+
+**Updates**
+- Update README.md. [TheYOSH]
+- Update German translation. [TheYOSH]
+- Update environment averages. [TheYOSH]
+- Update Fancybox. [TheYOSH]
+- Update German translation [#55](https://github.com/theyosh/TerrariumPI/issues/55). [TheYOSH]
+- Update Dutch translation. [TheYOSH]
+- Update English translation. [TheYOSH]
+
+**Other**
+- Support UTF-8 configuration values. [#52](https://github.com/theyosh/TerrariumPI/issues/52). [TheYOSH]
+- Do not make environment parts depend on light part. [TheYOSH]
+- Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
+  [TheYOSH]
+
+
 3.2.0 (2017-11-24)
 ------------------
 
@@ -21,6 +52,8 @@ Changelog
 - Fix remote dimmer state updates. [TheYOSH]
 
 **Updates**
+- Update Dutch translation. [TheYOSH]
+- Update changelog. [TheYOSH]
 - Update README.md. [TheYOSH]
 - Update README.md. [TheYOSH]
 - Update language files. [TheYOSH]
@@ -32,6 +65,9 @@ Changelog
 - Update version number. [TheYOSH]
 
 **Other**
+- Merge pull request [#53](https://github.com/theyosh/TerrariumPI/issues/53) from theyosh/feature/remote_data. [TheYOSH]
+
+  Feature/remote data
 - Better load indicator. (2) [TheYOSH]
 - Better load indicator. [TheYOSH]
 - Merge branch 'master' into feature/remote_data. [TheYOSH]
