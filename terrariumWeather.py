@@ -317,6 +317,8 @@ class terrariumWeather():
              'heavyrain' : 'sleet',
              'chanceofathunderstorm' : 'sleet',
              'thunderstorm' : 'sleet',
+             'lightsleet' : 'sleet',
+
 
              'fog' : 'fog',
 
@@ -357,13 +359,13 @@ class terrariumWeather():
       send_message = True
 
     # Update hourly forecast for today
-    if now > self.hour_forecast[0]['to']:
+    if len(self.hour_forecast) > 0 and now > self.hour_forecast[0]['to']:
       del self.hour_forecast[0]
       logger.info('Shift hourly forecast to: %s' % (self.hour_forecast[0]['to'],))
       send_message = True
 
     # Update week forecast
-    if now > self.week_forecast[0]['to']:
+    if len(self.hour_forecast) > 0 and now > self.week_forecast[0]['to']:
       del self.week_forecast[0]
       logger.info('Shift weekly forecast to: %s' % (self.hour_forecast[0]['to'],))
       send_message = True
