@@ -163,7 +163,7 @@ class terrariumWebcam():
       logger.debug('Done release USB camera')
       self.state = readok
     except Exception:
-      logging.exception('Error getting raw USB image from webcam \'%s\' with error message: %s' % (self.get_name(),))
+      logging.exception('Error getting raw USB image from webcam \'%s\' with error message:' % (self.get_name(),))
       self.state = False
 
     return stream
@@ -186,7 +186,7 @@ class terrariumWebcam():
       stream = StringIO.StringIO(urllib2.urlopen(webcamurl,None,15).read())
       self.state = True
     except Exception:
-      logging.exception('Error getting raw online image from webcam \'%s\' with error message: %s' % (self.get_name(),))
+      logging.exception('Error getting raw online image from webcam \'%s\' with error message:' % (self.get_name(),))
       self.state = False
 
     return stream
