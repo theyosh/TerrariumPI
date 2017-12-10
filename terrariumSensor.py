@@ -263,12 +263,10 @@ class terrariumSensor:
                                                                                           self.get_current(),
                                                                                           self.get_indicator(),
                                                                                           time.time()-starttime))
-      except Exception, err:
-        logger.error('Error updating %s %s sensor \'%s\' with error: %s' % (self.get_hardware_type(),
-                                                                            self.get_type(),
-                                                                            self.get_name(),
-                                                                            err))
-        pass
+      except Exception:
+        logger.exception('Error updating %s %s sensor \'%s\' with error: %s' % (self.get_hardware_type(),
+                                                                              self.get_type(),
+                                                                              self.get_name()))
 
   def get_data(self):
     data = {'id' : self.get_id(),
