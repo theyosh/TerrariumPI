@@ -312,6 +312,7 @@ class terrariumWeather():
              'chanceofrain' : 'rain',
              'moderaterain' : 'rain',
 
+             'sleet' : 'sleet',
              'rainshowers' : 'sleet',
              'heavyrainshowers' : 'sleet',
              'heavyrain' : 'sleet',
@@ -323,7 +324,9 @@ class terrariumWeather():
              'fog' : 'fog',
 
              'lightsnowshowers' : 'snow',
-             'heavysnow' : 'snow'
+             'lightsnow' : 'snow',
+             'heavysnow' : 'snow',
+             'snow' : 'snow'
            }
 
     if weathertype in icons:
