@@ -13,6 +13,7 @@ RESTART_ATTEMPTS=0
 BASEDIR=$(dirname $(readlink -nf $0))
 SCRIPT=$(basename $(readlink -nf $0))
 RUN=$1
+IP=`ip -4 addr | grep inet | grep -v "127.0.0.1" | grep -o -P "inet \K([0-9.]+)"`
 
 function message {
   echo "$(date +"%Y-%m-%d %T,000") - INFO - terrariumWrapper - $1"
@@ -26,7 +27,7 @@ then
     SECONDS=0
 
     # Start terrarium software
-    message "Starting TerrariumPI server ..."
+    message "Starting TerrariumPI server at location: http://${IP}:8090 ..."
     python ${BASEDIR}/terrariumPI.py
 
     # Crashed / stopped / something else...
@@ -64,7 +65,7 @@ else
     exit 0
   fi
 
-  message "Restarting TerrariumPI server running as user '${RUN_AS_USER}' ..."
+  message "Starting TerrariumPI server running as user '${RUN_AS_USER}' at location: http://${IP}:8090 ..."
   cd "${BASEDIR}"
   su ${RUN_AS_USER} -c "screen -dmS ${SCREEN_NAME} ./${SCRIPT} run"
 fi
