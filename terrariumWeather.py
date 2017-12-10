@@ -318,15 +318,18 @@ class terrariumWeather():
              'chanceofathunderstorm' : 'sleet',
              'thunderstorm' : 'sleet',
              'lightsleet' : 'sleet',
-
+             'heavysleet' : 'sleet',
 
              'fog' : 'fog',
 
-             'lightsnowshowers' : 'snow'
+             'lightsnowshowers' : 'snow',
+             'heavysnow' : 'snow'
            }
 
     if weathertype in icons:
       return icons[weathertype]
+    else:
+      logger.warn('Missing skycon %s' % weathertype,)
 
     return None
 
