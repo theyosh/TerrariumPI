@@ -41,8 +41,8 @@ class terrariumDoor():
       # Add detetion with callback !!!!THIS WILL CRASH THE GEVENT LOOP SOMEHOW!!!!!!
       # GPIO.add_event_detect(gpio_pin, GPIO.BOTH, callback=callback, bouncetime=300)
       thread.start_new_thread(self.__checker, ())
-    except Exception, err:
-      logger.error('Error in door \'%s\' with message: %s' % (self.get_name(),err))
+    except Exception:
+      logger.exception('Error in door \'%s\' with message: %s' % (self.get_name(),))
       self.set_status(terrariumDoor.CLOSED)
       if self.callback is not None:
         self.callback(self.get_data(), True)

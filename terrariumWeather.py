@@ -124,8 +124,8 @@ class terrariumWeatherYRno(terrariumWeatherSource):
                                     'temperature' : float(forecast.temperature['value']),
                                     'pressure' : float(forecast.pressure['value'])
                                   })
-    except Exception, ex:
-      logger.error(ex)
+    except Exception:
+      logger.exception('Error getting online data from yr.no')
       return False
 
     return True
@@ -177,8 +177,8 @@ class terrariumWeatherWunderground(terrariumWeatherSource):
         if forecast_hour['to'] <= datelimit:
           self.hour_forecast.append(copy.deepcopy(forecast_hour))
 
-    except Exception, ex:
-      logger.error(ex)
+    except Exception:
+      logger.exception('Error getting online data from weather.com')
       return False
 
     return True
@@ -225,8 +225,8 @@ class terrariumWeatherOpenWeathermap(terrariumWeatherSource):
         if forecast_hour['to'] <= datelimit:
           self.hour_forecast.append(copy.deepcopy(forecast_hour))
 
-    except Exception, ex:
-      logger.error(ex)
+    except Exception:
+      logger.exception('Error getting online data from openweathermap.org')
       return False
 
     return True

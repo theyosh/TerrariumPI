@@ -129,8 +129,8 @@ class terrariumWebcam():
         camera.capture(stream, format='jpeg')
         logger.debug('Done creating RPICAM image')
         self.state = True
-    except PiCameraError, err:
-      logging.error('Error getting raw RPI image from webcam \'%s\' with error message: %s' % (self.get_name(), err,))
+    except PiCameraError:
+      logging.exception('Error getting raw RPI image from webcam \'%s\' with error message: %s' % (self.get_name(),))
       self.state = False
 
     return stream
@@ -162,8 +162,8 @@ class terrariumWebcam():
       camera.release()
       logger.debug('Done release USB camera')
       self.state = readok
-    except Exception, err:
-      logging.error('Error getting raw USB image from webcam \'%s\' with error message: %s' % (self.get_name(), err,))
+    except Exception:
+      logging.exception('Error getting raw USB image from webcam \'%s\' with error message: %s' % (self.get_name(),))
       self.state = False
 
     return stream
@@ -185,8 +185,8 @@ class terrariumWebcam():
 
       stream = StringIO.StringIO(urllib2.urlopen(webcamurl,None,15).read())
       self.state = True
-    except Exception, err:
-      logging.error('Error getting raw online image from webcam \'%s\' with error message: %s' % (self.get_name(), err,))
+    except Exception:
+      logging.exception('Error getting raw online image from webcam \'%s\' with error message: %s' % (self.get_name(),))
       self.state = False
 
     return stream

@@ -245,8 +245,8 @@ class terrariumSwitch():
 
           else:
             logger.warning('Remote switch \'%s\' got error from remote source \'%s\': %s' % (self.get_name(),self.get_address(),data.status_code))
-        except Exception, ex:
-          logger.error('Remote switch \'%s\' got error from remote source \'%s\': %s' % (self.get_name(),self.get_address(),ex))
+        except Exception:
+          logger.exception('Remote switch \'%s\' got error from remote source \'%s\': %s' % (self.get_name(),self.get_address()))
 
   def get_id(self):
     return self.id
