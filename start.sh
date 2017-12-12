@@ -67,5 +67,10 @@ else
 
   message "Starting TerrariumPI server running as user '${RUN_AS_USER}' at location: http://${IP}:8090 ..."
   cd "${BASEDIR}"
+
+  # Because people will never read manuals and are installing everything as user root..... we have to fix it... :(
+  chown ${RUN_AS_USER}.${RUN_AS_USER} .
+  chown ${RUN_AS_USER}.${RUN_AS_USER} * -Rf
+
   su ${RUN_AS_USER} -c "screen -dmS ${SCREEN_NAME} ./${SCRIPT} run"
 fi
