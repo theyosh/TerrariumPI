@@ -65,15 +65,17 @@ Your language not in the list? [Create your own language translation](https://gi
 The installation expects a Pi with working network and ssh. It is tested with [Raspbian Stretch Lite](https://www.raspberrypi.org/downloads/raspbian/). For now the Full version is not working somehow.... So use the lite image!
 1. Get a working Raspberry Pi and login as user 'pi'  
   `ssh pi@[raspberry_ip]`
-2. Clone this repository and submodules!  
+2. Install git  
+  `apt install git`
+3. Clone this repository and submodules!  
   `git clone --recursive https://github.com/theyosh/TerrariumPI.git`
-3. Enter the new TerrariumPI folder  
+4. Enter the new TerrariumPI folder  
   `cd TerrariumPI`
-4. Run the installer script and wait  
+5. Run the installer script and wait  
   `sudo ./install.sh`
-5. Reboot Raspberry PI to get all the needed modules loaded  
+6. Reboot Raspberry PI to get all the needed modules loaded  
   `sudo reboot`
-6. Go to the webinterface at http://[raspberry_ip]:8090
+7. Go to the webinterface at http://[raspberry_ip]:8090
 
 If you want to use the Raspberry PI 1 wire interface, you have to manually enable it through the raspi-config and reboot once more.
 
