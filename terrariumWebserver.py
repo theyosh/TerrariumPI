@@ -292,9 +292,36 @@ class terrariumWebserver():
     elif 'system' == action:
       result = self.__terrariumEngine.get_system_stats()
 
-    elif 'history' == action:
+    elif 'history' == action or 'export' == action:
       response.headers['Expires'] = (datetime.datetime.utcnow() + datetime.timedelta(minutes=5)).strftime('%a, %d %b %Y %H:%M:%S GMT')
+      if 'export' == action:
+        parameters.append('all')
       result = self.__terrariumEngine.get_history(parameters)
+
+      if 'export' == action:
+        csv = ''
+        export_name = 'error'
+        for datatype in result:
+          for dataid in result[datatype]:
+            export_name = datatype + '_' + dataid + '.csv'
+            # Header
+            fields = result[datatype][dataid].keys()
+            if 'totals' in fields:
+              fields.remove('totals')
+            csv = '"' + '","'.join(['timestamp'] + fields) + "\"\n"
+
+            for counter in xrange(0,len(result[datatype][dataid][fields[0]])):
+              # Timestamp
+              row = [str(int(result[datatype][dataid][fields[0]][counter][0]/100))]
+              for field in fields:
+                # Row values
+                row.append(str(result[datatype][dataid][field][counter][1]))
+
+              csv += '"' + '","'.join(row) + "\"\n"
+
+        response.headers['Content-Type'] = 'application/csv';
+        response.headers['Content-Disposition'] = 'attachment; filename=' + export_name;
+        return csv
 
     elif 'config' == action:
       result = self.__terrariumEngine.get_config(parameters[0] if len(parameters) == 1 else None)

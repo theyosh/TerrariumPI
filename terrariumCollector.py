@@ -326,7 +326,8 @@ class terrariumCollector():
     periods = {'day' : 1 * 24,
                'week' : 7 * 24,
                'month' : 30 * 24,
-               'year' : 365 * 24}
+               'year' : 365 * 24,
+               'all' : 3650 * 24}
     modulo = terrariumCollector.STORE_MODULO
 
     logtype = parameters[0]
