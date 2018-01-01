@@ -32,6 +32,9 @@
                       <li>
                         <a href="javascript:;" onclick="menu_click('door_settings.html')">{{_('Settings')}}</a>
                       </li>
+                      <li>
+                        <a href="javascript:;" class="export">{{_('Export data')}}</a>
+                      </li>
                     </ul>
                   </li>
                   <li>

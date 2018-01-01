@@ -1202,6 +1202,20 @@ function load_history_graph(id,type,data_url,nocache) {
           load_history_graph(id,type,data_url + '/' + value ,1);
         });
       });
+      $('#' + id + ' ul.dropdown-menu a.export').off('click').on('click',function(){
+        var download = $('iframe#history_export');
+        if (download.length == 0) {
+          download = $('<iframe>', { id:'history_export', src:'#' }).on('load',function(){
+            if (globals.ajaxloader > 0) {
+              globals.ajaxloader--;
+            }
+            NProgress.done();
+          }).hide().appendTo('body');
+        }
+        globals.ajaxloader++;
+        NProgress.start();
+        download.attr('src',data_url.replace('/history/','/export/'));
+      });
     }
     if (nocache === 0 && now - globals.graphs[id].timestamp < globals.graph_cache * 1000) {
       history_graph(id, globals.graphs[id].data, type);

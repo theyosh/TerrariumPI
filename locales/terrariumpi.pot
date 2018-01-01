@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-11-25 21:21+CET\n"
+"POT-Creation-Date: 2018-01-01 21:52+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -446,11 +446,11 @@ msgstr ""
 msgid "Your changes are saved"
 msgstr ""
 
-#: terrariumWebserver.py:320 views/inc/menu.tpl:146
+#: terrariumWebserver.py:347 views/inc/menu.tpl:146
 msgid "Log out"
 msgstr ""
 
-#: terrariumWebserver.py:321
+#: terrariumWebserver.py:348
 msgid "You are now logged out"
 msgstr ""
 
@@ -672,7 +672,7 @@ msgstr ""
 msgid "Environment"
 msgstr ""
 
-#: views/dashboard.tpl:71 views/dashboard.tpl:224 views/dashboard.tpl:276
+#: views/dashboard.tpl:71 views/dashboard.tpl:224 views/dashboard.tpl:279
 #: views/door_status.tpl:33 views/inc/menu.tpl:38 views/inc/menu.tpl:52
 #: views/inc/menu.tpl:63 views/inc/menu.tpl:74 views/inc/menu.tpl:85
 #: views/inc/menu.tpl:115 views/inc/menu.tpl:143 views/inc/sensor_list.tpl:39
@@ -769,7 +769,7 @@ msgstr ""
 msgid "Average Humidity"
 msgstr ""
 
-#: views/dashboard.tpl:198 views/dashboard.tpl:250 views/door_status.tpl:7
+#: views/dashboard.tpl:198 views/dashboard.tpl:253 views/door_status.tpl:7
 #: views/inc/sensor_list.tpl:12 views/inc/usage_dashboard.tpl:169
 #: views/inc/usage_doors.tpl:21 views/inc/usage_sensors.tpl:25
 #: views/system_status.tpl:6 views/system_status.tpl:62
@@ -777,7 +777,7 @@ msgstr ""
 msgid "warning"
 msgstr ""
 
-#: views/dashboard.tpl:207 views/dashboard.tpl:259 views/door_status.tpl:16
+#: views/dashboard.tpl:207 views/dashboard.tpl:262 views/door_status.tpl:16
 #: views/inc/sensor_list.tpl:22 views/inc/usage_dashboard.tpl:67
 #: views/inc/usage_dashboard.tpl:181 views/inc/usage_doors.tpl:31
 #: views/inc/usage_sensors.tpl:35 views/inc/usage_switches.tpl:31
@@ -788,7 +788,7 @@ msgstr ""
 msgid "Day"
 msgstr ""
 
-#: views/dashboard.tpl:210 views/dashboard.tpl:262 views/door_status.tpl:19
+#: views/dashboard.tpl:210 views/dashboard.tpl:265 views/door_status.tpl:19
 #: views/inc/sensor_list.tpl:25 views/inc/usage_dashboard.tpl:182
 #: views/inc/usage_doors.tpl:34 views/inc/usage_sensors.tpl:38
 #: views/inc/usage_switches.tpl:34 views/inc/usage_webcams.tpl:32
@@ -798,7 +798,7 @@ msgstr ""
 msgid "Week"
 msgstr ""
 
-#: views/dashboard.tpl:213 views/dashboard.tpl:265 views/door_status.tpl:22
+#: views/dashboard.tpl:213 views/dashboard.tpl:268 views/door_status.tpl:22
 #: views/inc/sensor_list.tpl:28 views/inc/usage_dashboard.tpl:183
 #: views/inc/usage_doors.tpl:37 views/inc/usage_sensors.tpl:41
 #: views/inc/usage_switches.tpl:37 views/inc/usage_webcams.tpl:35
@@ -808,7 +808,7 @@ msgstr ""
 msgid "Month"
 msgstr ""
 
-#: views/dashboard.tpl:216 views/dashboard.tpl:268 views/door_status.tpl:25
+#: views/dashboard.tpl:216 views/dashboard.tpl:271 views/door_status.tpl:25
 #: views/inc/sensor_list.tpl:31 views/inc/usage_dashboard.tpl:184
 #: views/inc/usage_doors.tpl:40 views/inc/usage_sensors.tpl:44
 #: views/inc/usage_switches.tpl:40 views/inc/usage_webcams.tpl:38
@@ -818,7 +818,12 @@ msgstr ""
 msgid "Year"
 msgstr ""
 
-#: views/dashboard.tpl:250
+#: views/dashboard.tpl:227 views/dashboard.tpl:282 views/door_status.tpl:36
+#: views/inc/sensor_list.tpl:42 views/switch_status.tpl:37
+msgid "Export data"
+msgstr ""
+
+#: views/dashboard.tpl:253
 msgid "Average Temperature"
 msgstr ""
 
