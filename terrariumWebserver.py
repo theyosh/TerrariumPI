@@ -312,7 +312,7 @@ class terrariumWebserver():
 
             for counter in xrange(0,len(result[datatype][dataid][fields[0]])):
               # Timestamp
-              row = [str(int(result[datatype][dataid][fields[0]][counter][0]/100))]
+              row = [str(int(result[datatype][dataid][fields[0]][counter][0]/1000))]
               for field in fields:
                 # Row values
                 row.append(str(result[datatype][dataid][field][counter][1]))
