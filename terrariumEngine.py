@@ -307,10 +307,11 @@ class terrariumEngine():
 
   # Weather part
   def set_weather_config(self,data):
-    self.weather.set_source(data['location'])
-    self.weather.set_windspeed_indicator(data['windspeed'])
+    update_ok = self.config.save_weather(data)
+    if update_ok:
+      self.weather.set_source(self.config.get_weather_location())
+      self.weather.set_windspeed_indicator(self.config.get_weather_windspeed())
 
-    update_ok = self.config.save_weather(self.weather.get_config())
     return update_ok
 
   def get_weather_config(self):
