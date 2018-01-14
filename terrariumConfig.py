@@ -110,6 +110,9 @@ class terrariumConfig:
       self.__config.read(terrariumConfig.CUSTOM_CONFIG)
       logger.info('Updated configuration. Set version to: %s' % (to_version,))
 
+  def __reload_config(self):
+    self.__config.read(terrariumConfig.CUSTOM_CONFIG)
+
   def __save_config(self):
     '''Write terrariumPI config to settings.cfg file'''
     with open(terrariumConfig.CUSTOM_CONFIG, 'wb') as configfile:
@@ -134,11 +137,19 @@ class terrariumConfig:
         data[setting] = ','.join(data[setting])
 
       if isinstance(data[setting], basestring):
-        data[setting] = data[setting].encode('utf-8')
+        try:
+          data[setting] = data[setting].encode('utf-8')
+        except Exception, ex:
+          'Not sure what to do... but it seams already utf-8...??'
+          pass
 
       self.__config.set(section, str(setting), str(data[setting]))
 
-    return self.__save_config()
+    config_ok = self.__save_config()
+    if config_ok:
+      self.__reload_config()
+
+    return config_ok
 
   def __get_config(self,section):
     '''Get terrariumPI config based on section. Return empty dict when not exists
