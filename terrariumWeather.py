@@ -319,6 +319,7 @@ class terrariumWeather():
              'chanceofathunderstorm' : 'sleet',
              'thunderstorm' : 'sleet',
              'lightsleet' : 'sleet',
+             'lightsleetshowers' : 'sleet',
              'heavysleet' : 'sleet',
 
              'fog' : 'fog',
