@@ -313,6 +313,7 @@ class terrariumWeather():
              'moderaterain' : 'rain',
 
              'sleet' : 'sleet',
+             'sleetshowers' : 'sleet',
              'rainshowers' : 'sleet',
              'heavyrainshowers' : 'sleet',
              'heavyrain' : 'sleet',
@@ -325,6 +326,7 @@ class terrariumWeather():
              'fog' : 'fog',
 
              'lightsnowshowers' : 'snow',
+             'snowshowers' : 'snow',
              'lightsnow' : 'snow',
              'heavysnow' : 'snow',
              'snow' : 'snow'
