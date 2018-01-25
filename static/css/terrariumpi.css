@@ -80,7 +80,6 @@ form#profile.edit label{
 /* End general overrule */
 
 div.row.sensor,
-div.row.switch,
 div.row.door,
 div.row.webcam{
   display: none;
@@ -210,6 +209,18 @@ div.row.environment_cooler.disabled {
   display: block;
   padding-top: 0.1em;
   line-height: 1em;
+}
+
+.power_switch span.glyphicon-time {
+  font-size: 0.4em;
+  position: absolute;
+  top: 61%;
+  left: 70%;
+  background-color: white;
+}
+
+.power_switch span.glyphicon-time::before {
+  margin-left: -5px;
 }
 
 .x_title .power_switch {

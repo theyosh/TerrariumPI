@@ -151,6 +151,17 @@ class terrariumEngine():
       if 'dimmer_off_percentage' in switch_config[power_switch_config]:
         self.power_switches[power_switch_id].set_dimmer_off_percentage(switch_config[power_switch_config]['dimmer_off_percentage'])
 
+      if 'timer_enabled' in switch_config[power_switch_config]:
+        self.power_switches[power_switch_id].set_timer_enabled(switch_config[power_switch_config]['timer_enabled'])
+      if 'timer_start' in switch_config[power_switch_config]:
+        self.power_switches[power_switch_id].set_timer_start(switch_config[power_switch_config]['timer_start'])
+      if 'timer_stop' in switch_config[power_switch_config]:
+        self.power_switches[power_switch_id].set_timer_stop(switch_config[power_switch_config]['timer_stop'])
+      if 'timer_on_duration' in switch_config[power_switch_config]:
+        self.power_switches[power_switch_id].set_timer_on_duration(switch_config[power_switch_config]['timer_on_duration'])
+      if 'timer_off_duration' in switch_config[power_switch_config]:
+        self.power_switches[power_switch_id].set_timer_off_duration(switch_config[power_switch_config]['timer_off_duration'])
+
     for power_switch_id in set(self.power_switches) - set(seen_switches):
       # clean up old deleted switches
       del(self.power_switches[power_switch_id])
@@ -460,6 +471,7 @@ class terrariumEngine():
       power_switch.set_name(switchdata['name'])
       power_switch.set_power_wattage(switchdata['power_wattage'])
       power_switch.set_water_flow(switchdata['water_flow'])
+
       if 'dimmer_duration' in switchdata:
         power_switch.set_dimmer_duration(switchdata['dimmer_duration'])
       if 'dimmer_on_duration' in switchdata:
@@ -470,6 +482,17 @@ class terrariumEngine():
         power_switch.set_dimmer_off_duration(switchdata['dimmer_off_duration'])
       if 'dimmer_off_percentage' in switchdata:
         power_switch.set_dimmer_off_percentage(switchdata['dimmer_off_percentage'])
+
+      if 'timer_enabled' in switchdata:
+        power_switch.set_timer_enabled(switchdata['timer_enabled'])
+      if 'timer_start' in switchdata:
+        power_switch.set_timer_start(switchdata['timer_start'])
+      if 'timer_stop' in switchdata:
+        power_switch.set_timer_stop(switchdata['timer_stop'])
+      if 'timer_on_duration' in switchdata:
+        power_switch.set_timer_on_duration(switchdata['timer_on_duration'])
+      if 'timer_off_duration' in switchdata:
+        power_switch.set_timer_off_duration(switchdata['timer_off_duration'])
 
       new_switches[power_switch.get_id()] = power_switch
 

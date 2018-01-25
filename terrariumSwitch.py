@@ -37,7 +37,7 @@ class terrariumSwitch():
     "all":"FF"
   }
 
-  def __init__(self, id, hardware_type, address, name = '', power_wattage = 0.0, water_flow = 0.0, dimmer_duration = 5.0, dimmer_on_duration = 0.0, dimmer_on_percentage = 100.0, dimmer_off_duration = 0.0, dimmer_off_percentage = 0.0, callback = None):
+  def __init__(self, id, hardware_type, address, name = '', power_wattage = 0.0, water_flow = 0.0, callback = None):
     self.id = id
     self.callback = callback
 
@@ -57,11 +57,18 @@ class terrariumSwitch():
     self.set_power_wattage(power_wattage)
     self.set_water_flow(water_flow)
 
-    self.set_dimmer_duration(dimmer_duration)
-    self.set_dimmer_on_duration(dimmer_on_duration)
-    self.set_dimmer_on_percentage(dimmer_on_percentage)
-    self.set_dimmer_off_duration(dimmer_off_duration)
-    self.set_dimmer_off_percentage(dimmer_off_percentage)
+    self.set_timer_enabled(False)
+    self.set_timer_start(0)
+    self.set_timer_stop(0)
+    self.set_timer_on_duration(0)
+    self.set_timer_off_duration(0)
+
+    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+      self.set_dimmer_duration(10)
+      self.set_dimmer_on_duration(5)
+      self.set_dimmer_on_percentage(100)
+      self.set_dimmer_off_duration(5)
+      self.set_dimmer_off_percentage(0)
 
     if self.id is None:
       self.id = md5(b'' + self.get_hardware_type() + self.get_address()).hexdigest()
@@ -207,12 +214,20 @@ class terrariumSwitch():
             'water_flow' : self.get_water_flow(),
             'current_water_flow' : self.get_current_water_flow(),
             'state' : self.get_state(),
-            'dimmer_duration': self.get_dimmer_duration(),
-            'dimmer_on_duration': self.get_dimmer_on_duration(),
-            'dimmer_on_percentage' : self.get_dimmer_on_percentage(),
-            'dimmer_off_duration': self.get_dimmer_off_duration(),
-            'dimmer_off_percentage': self.get_dimmer_off_percentage()
+            'timer_enabled': self.get_timer_enabled(),
+            'timer_start': self.get_timer_start(),
+            'timer_stop' : self.get_timer_stop(),
+            'timer_on_duration': self.get_timer_on_duration(),
+            'timer_off_duration': self.get_timer_off_duration()
             }
+
+    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+      data.update({ 'dimmer_duration': self.get_dimmer_duration(),
+                    'dimmer_on_duration': self.get_dimmer_on_duration(),
+                    'dimmer_on_percentage' : self.get_dimmer_on_percentage(),
+                    'dimmer_off_duration': self.get_dimmer_off_duration(),
+                    'dimmer_off_percentage': self.get_dimmer_off_percentage()
+                  })
 
     return data
 
@@ -385,3 +400,35 @@ class terrariumSwitch():
 
   def get_dimmer_off_percentage(self):
     return (self.__dimmer_off_percentage if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] else 0.0)
+
+  def set_timer_enabled(self,value):
+    self.__timer_enabled = value in ['enabled',True,'True','true',1]
+
+  def get_timer_enabled(self):
+    return (self.__timer_enabled if self.__timer_enabled in [True,False] else False)
+
+  def set_timer_start(self,value):
+    self.__timer_start = value
+
+  def get_timer_start(self):
+    return self.__timer_start
+
+  def set_timer_stop(self,value):
+    self.__timer_stop = value
+
+  def get_timer_stop(self):
+    return self.__timer_stop
+
+  def set_timer_on_duration(self,value):
+    value = float(value) if terrariumUtils.is_float(value) else 0.0
+    self.__timer_on_duration = value if value >= 0.0 else 0.0
+
+  def get_timer_on_duration(self):
+    return (self.__timer_on_duration if self.get_timer_enabled() else 0.0)
+
+  def set_timer_off_duration(self,value):
+    value = float(value) if terrariumUtils.is_float(value) else 0.0
+    self.__timer_off_duration = value if value >= 0.0 else 0.0
+
+  def get_timer_off_duration(self):
+    return (self.__timer_off_duration if self.get_timer_enabled() else 0.0)
