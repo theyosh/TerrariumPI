@@ -15,6 +15,9 @@ var globals = {
   ajaxloader: 0
 };
 
+
+var source_row = null;
+
 var dataTableTranslations = {
   'en' : '//cdn.datatables.net/plug-ins/1.10.16/i18n/English.json',
   'nl' : '//cdn.datatables.net/plug-ins/1.10.16/i18n/Dutch.json',
@@ -92,7 +95,7 @@ function websocket_init(reconnect) {
         break;
       case 'power_switches':
         $.each(data.data, function(index, value) {
-          update_power_switch(value.id, value);
+          update_power_switch(value);
         });
         break;
       case 'door_indicator':
@@ -140,19 +143,11 @@ function logout() {
       type: 'GET',
       username: 'logout'
   }).done(function(response) {
-    new PNotify({
-      type: (response.ok ? 'success' : 'error'),
-      title: response.title,
-      text: response.message,
-      nonblock: {
-        nonblock: true
-      },
-      delay: 3000,
-      mouse_reset: false,
-      //addclass: 'dark',
-      styling: 'bootstrap3',
-      hide: true,
-    });
+    if (response.ok) {
+      ok_notification_bubble(response.title,response.message);
+    } else {
+      error_notification_bubble(response.title,response.message);
+    }
   });
 }
 
@@ -208,284 +203,275 @@ function load_page(url) {
 }
 
 (function() {
-    'use strict';
+  'use strict';
 
-    // Got this from MDN:
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString#Example:_Checking_for_support_for_locales_and_options_arguments
-    function toLocaleStringSupportsLocales() {
-        var number = 0;
-        try {
-            number.toLocaleString("i");
-        } catch (e) {
-            return e.name === "RangeError";
+  // Got this from MDN:
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString#Example:_Checking_for_support_for_locales_and_options_arguments
+  function toLocaleStringSupportsLocales() {
+    var number = 0;
+    try {
+      number.toLocaleString("i");
+    } catch (e) {
+      return e.name === "RangeError";
+    }
+    return false;
+  }
+
+  if (!toLocaleStringSupportsLocales()) {
+    var replaceSeparators = function(sNum, separators) {
+      var sNumParts = sNum.split('.');
+      if (separators && separators.thousands) {
+        sNumParts[0] = sNumParts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1" + separators.thousands);
+      }
+      sNum = sNumParts.join(separators.decimal);
+      return sNum;
+    };
+
+    var renderFormat = function(template, props) {
+      for (var prop in props) {
+        template = template.replace("[[" + prop + "]]", props[prop]);
+      }
+      return template;
+    };
+
+    var mapMatch = function(map, locale) {
+      var match = locale;
+      var language = locale && locale.toLowerCase().match(/^\w+/);
+
+      if (!map.hasOwnProperty(locale)) {
+        if (map.hasOwnProperty(language)) {
+          match = language;
+        } else {
+          match = "en";
         }
-        return false;
-    }
+      }
+      return map[match];
+    };
 
-    if (!toLocaleStringSupportsLocales()) {
-        var replaceSeparators = function(sNum, separators) {
-            var sNumParts = sNum.split('.');
-            if (separators && separators.thousands) {
-                sNumParts[0] = sNumParts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1" + separators.thousands);
-            }
-            sNum = sNumParts.join(separators.decimal);
+    var dotThousCommaDec = function(sNum) {
+      var separators = {
+        decimal: ',',
+        thousands: '.'
+      };
+      return replaceSeparators(sNum, separators);
+    };
 
-            return sNum;
-        };
+    var commaThousDotDec = function(sNum) {
+      var separators = {
+        decimal: '.',
+        thousands: ','
+      };
+      return replaceSeparators(sNum, separators);
+    };
 
-        var renderFormat = function(template, props) {
-            for (var prop in props) {
-                template = template.replace("[[" + prop + "]]", props[prop]);
-            }
+    var spaceThousCommaDec = function(sNum) {
+      var seperators = {
+        decimal: ',',
+        thousands: '\u00A0'
+      };
+      return replaceSeparators(sNum, seperators);
+    };
 
-            return template;
-        };
+    var apostrophThousDotDec = function(sNum) {
+      var seperators = {
+        decimal: '.',
+        thousands: '\u0027'
+      };
+      return replaceSeparators(sNum, seperators);
+    };
 
-        var mapMatch = function(map, locale) {
-            var match = locale;
-            var language = locale && locale.toLowerCase().match(/^\w+/);
+    var transformForLocale = {
+      en: commaThousDotDec,
+      it: dotThousCommaDec,
+      fr: spaceThousCommaDec,
+      de: dotThousCommaDec,
+      nl: dotThousCommaDec,
+      "de-DE": dotThousCommaDec,
+      "de-AT": dotThousCommaDec,
+      "de-CH": apostrophThousDotDec,
+      "de-LI": apostrophThousDotDec,
+      "de-BE": dotThousCommaDec,
+      ro: dotThousCommaDec,
+      "ro-RO": dotThousCommaDec,
+      hu: spaceThousCommaDec,
+      "hu-HU": spaceThousCommaDec,
+      "da-DK": dotThousCommaDec,
+      "nb-NO": spaceThousCommaDec
+    };
 
-            if (!map.hasOwnProperty(locale)) {
-                if (map.hasOwnProperty(language)) {
-                    match = language;
-                } else {
-                    match = "en";
-                }
-            }
+    var currencyFormatMap = {
+      en: "pre",
+      it: "post",
+      fr: "post",
+      de: "post",
+      nl: "prespace",
+      "de-DE": "post",
+      "de-AT": "prespace",
+      "de-CH": "prespace",
+      "de-LI": "post",
+      "de-BE": "post",
+      ro: "post",
+      "ro-RO": "post",
+      hu: "post",
+      "hu-HU": "post",
+      "da-DK": "post",
+      "nb-NO": "post"
+    };
 
-            return map[match];
-        };
+    var currencySymbols = {
+      "afn": "؋",
+      "ars": "$",
+      "awg": "ƒ",
+      "aud": "$",
+      "azn": "₼",
+      "bsd": "$",
+      "bbd": "$",
+      "byr": "p.",
+      "bzd": "BZ$",
+      "bmd": "$",
+      "bob": "Bs.",
+      "bam": "KM",
+      "bwp": "P",
+      "bgn": "лв",
+      "brl": "R$",
+      "bnd": "$",
+      "khr": "៛",
+      "cad": "$",
+      "kyd": "$",
+      "clp": "$",
+      "cny": "¥",
+      "cop": "$",
+      "crc": "₡",
+      "hrk": "kn",
+      "cup": "₱",
+      "czk": "Kč",
+      "dkk": "kr",
+      "dop": "RD$",
+      "xcd": "$",
+      "egp": "£",
+      "svc": "$",
+      "eek": "kr",
+      "eur": "€",
+      "fkp": "£",
+      "fjd": "$",
+      "ghc": "¢",
+      "gip": "£",
+      "gtq": "Q",
+      "ggp": "£",
+      "gyd": "$",
+      "hnl": "L",
+      "hkd": "$",
+      "huf": "Ft",
+      "isk": "kr",
+      "inr": "₹",
+      "idr": "Rp",
+      "irr": "﷼",
+      "imp": "£",
+      "ils": "₪",
+      "jmd": "J$",
+      "jpy": "¥",
+      "jep": "£",
+      "kes": "KSh",
+      "kzt": "лв",
+      "kpw": "₩",
+      "krw": "₩",
+      "kgs": "лв",
+      "lak": "₭",
+      "lvl": "Ls",
+      "lbp": "£",
+      "lrd": "$",
+      "ltl": "Lt",
+      "mkd": "ден",
+      "myr": "RM",
+      "mur": "₨",
+      "mxn": "$",
+      "mnt": "₮",
+      "mzn": "MT",
+      "nad": "$",
+      "npr": "₨",
+      "ang": "ƒ",
+      "nzd": "$",
+      "nio": "C$",
+      "ngn": "₦",
+      "nok": "kr",
+      "omr": "﷼",
+      "pkr": "₨",
+      "pab": "B/.",
+      "pyg": "Gs",
+      "pen": "S/.",
+      "php": "₱",
+      "pln": "zł",
+      "qar": "﷼",
+      "ron": "lei",
+      "rub": "₽",
+      "shp": "£",
+      "sar": "﷼",
+      "rsd": "Дин.",
+      "scr": "₨",
+      "sgd": "$",
+      "sbd": "$",
+      "sos": "S",
+      "zar": "R",
+      "lkr": "₨",
+      "sek": "kr",
+      "chf": "CHF",
+      "srd": "$",
+      "syp": "£",
+      "tzs": "TSh",
+      "twd": "NT$",
+      "thb": "฿",
+      "ttd": "TT$",
+      "try": "",
+      "trl": "₤",
+      "tvd": "$",
+      "ugx": "USh",
+      "uah": "₴",
+      "gbp": "£",
+      "usd": "$",
+      "uyu": "$U",
+      "uzs": "лв",
+      "vef": "Bs",
+      "vnd": "₫",
+      "yer": "﷼",
+      "zwd": "Z$"
+    };
 
-        var dotThousCommaDec = function(sNum) {
-            var separators = {
-                decimal: ',',
-                thousands: '.'
-            };
+    var currencyFormats = {
+      pre: "[[code]][[num]]",
+      post: "[[num]] [[code]]",
+      prespace: "[[code]] [[num]]"
+    };
 
-            return replaceSeparators(sNum, separators);
-        };
+    Number.prototype.toLocaleString = function(locale, options) {
+      if (locale && locale.length < 2)
+        throw new RangeError("Invalid language tag: " + locale);
 
-        var commaThousDotDec = function(sNum) {
-            var separators = {
-                decimal: '.',
-                thousands: ','
-            };
+      var sNum;
+      if (options && options.minimumFractionDigits) {
+        sNum = this.toFixed(options.minimumFractionDigits);
+      } else {
+        sNum = this.toString();
+      }
 
-            return replaceSeparators(sNum, separators);
-        };
+      sNum = mapMatch(transformForLocale, locale)(sNum, options);
 
-        var spaceThousCommaDec = function(sNum) {
-            var seperators = {
-                decimal: ',',
-                thousands: '\u00A0'
-            };
-
-            return replaceSeparators(sNum, seperators);
-        };
-
-        var apostrophThousDotDec = function(sNum) {
-            var seperators = {
-                decimal: '.',
-                thousands: '\u0027'
-            };
-
-            return replaceSeparators(sNum, seperators);
-        };
-
-        var transformForLocale = {
-            en: commaThousDotDec,
-            it: dotThousCommaDec,
-            fr: spaceThousCommaDec,
-            de: dotThousCommaDec,
-            nl: dotThousCommaDec,
-            "de-DE": dotThousCommaDec,
-            "de-AT": dotThousCommaDec,
-            "de-CH": apostrophThousDotDec,
-            "de-LI": apostrophThousDotDec,
-            "de-BE": dotThousCommaDec,
-            ro: dotThousCommaDec,
-            "ro-RO": dotThousCommaDec,
-            hu: spaceThousCommaDec,
-            "hu-HU": spaceThousCommaDec,
-            "da-DK": dotThousCommaDec,
-            "nb-NO": spaceThousCommaDec
-        };
-
-        var currencyFormatMap = {
-            en: "pre",
-            it: "post",
-            fr: "post",
-            de: "post",
-            nl: "prespace",
-            "de-DE": "post",
-            "de-AT": "prespace",
-            "de-CH": "prespace",
-            "de-LI": "post",
-            "de-BE": "post",
-            ro: "post",
-            "ro-RO": "post",
-            hu: "post",
-            "hu-HU": "post",
-            "da-DK": "post",
-            "nb-NO": "post"
-        };
-
-        var currencySymbols = {
-            "afn": "؋",
-            "ars": "$",
-            "awg": "ƒ",
-            "aud": "$",
-            "azn": "₼",
-            "bsd": "$",
-            "bbd": "$",
-            "byr": "p.",
-            "bzd": "BZ$",
-            "bmd": "$",
-            "bob": "Bs.",
-            "bam": "KM",
-            "bwp": "P",
-            "bgn": "лв",
-            "brl": "R$",
-            "bnd": "$",
-            "khr": "៛",
-            "cad": "$",
-            "kyd": "$",
-            "clp": "$",
-            "cny": "¥",
-            "cop": "$",
-            "crc": "₡",
-            "hrk": "kn",
-            "cup": "₱",
-            "czk": "Kč",
-            "dkk": "kr",
-            "dop": "RD$",
-            "xcd": "$",
-            "egp": "£",
-            "svc": "$",
-            "eek": "kr",
-            "eur": "€",
-            "fkp": "£",
-            "fjd": "$",
-            "ghc": "¢",
-            "gip": "£",
-            "gtq": "Q",
-            "ggp": "£",
-            "gyd": "$",
-            "hnl": "L",
-            "hkd": "$",
-            "huf": "Ft",
-            "isk": "kr",
-            "inr": "₹",
-            "idr": "Rp",
-            "irr": "﷼",
-            "imp": "£",
-            "ils": "₪",
-            "jmd": "J$",
-            "jpy": "¥",
-            "jep": "£",
-            "kes": "KSh",
-            "kzt": "лв",
-            "kpw": "₩",
-            "krw": "₩",
-            "kgs": "лв",
-            "lak": "₭",
-            "lvl": "Ls",
-            "lbp": "£",
-            "lrd": "$",
-            "ltl": "Lt",
-            "mkd": "ден",
-            "myr": "RM",
-            "mur": "₨",
-            "mxn": "$",
-            "mnt": "₮",
-            "mzn": "MT",
-            "nad": "$",
-            "npr": "₨",
-            "ang": "ƒ",
-            "nzd": "$",
-            "nio": "C$",
-            "ngn": "₦",
-            "nok": "kr",
-            "omr": "﷼",
-            "pkr": "₨",
-            "pab": "B/.",
-            "pyg": "Gs",
-            "pen": "S/.",
-            "php": "₱",
-            "pln": "zł",
-            "qar": "﷼",
-            "ron": "lei",
-            "rub": "₽",
-            "shp": "£",
-            "sar": "﷼",
-            "rsd": "Дин.",
-            "scr": "₨",
-            "sgd": "$",
-            "sbd": "$",
-            "sos": "S",
-            "zar": "R",
-            "lkr": "₨",
-            "sek": "kr",
-            "chf": "CHF",
-            "srd": "$",
-            "syp": "£",
-            "tzs": "TSh",
-            "twd": "NT$",
-            "thb": "฿",
-            "ttd": "TT$",
-            "try": "",
-            "trl": "₤",
-            "tvd": "$",
-            "ugx": "USh",
-            "uah": "₴",
-            "gbp": "£",
-            "usd": "$",
-            "uyu": "$U",
-            "uzs": "лв",
-            "vef": "Bs",
-            "vnd": "₫",
-            "yer": "﷼",
-            "zwd": "Z$"
-        };
-
-        var currencyFormats = {
-            pre: "[[code]][[num]]",
-            post: "[[num]] [[code]]",
-            prespace: "[[code]] [[num]]"
-        };
-
-        Number.prototype.toLocaleString = function(locale, options) {
-            if (locale && locale.length < 2)
-                throw new RangeError("Invalid language tag: " + locale);
-
-            var sNum;
-            if (options && options.minimumFractionDigits) {
-                sNum = this.toFixed(options.minimumFractionDigits);
-            } else {
-                sNum = this.toString();
-            }
-
-            sNum = mapMatch(transformForLocale, locale)(sNum, options);
-
-            if(options && options.currency && options.style === "currency") {
-                var format = currencyFormats[mapMatch(currencyFormatMap, locale)];
-                if(options.currencyDisplay === "code") {
-                    sNum = renderFormat(format, {
-                        num: sNum,
-                        code: options.currency.toUpperCase()
-                    });
-                } else {
-                    sNum = renderFormat(format, {
-                        num: sNum,
-                        code: currencySymbols[options.currency.toLowerCase()]
-                    });
-                }
-            }
-
-            return sNum;
-        };
-    }
-
+      if(options && options.currency && options.style === "currency") {
+        var format = currencyFormats[mapMatch(currencyFormatMap, locale)];
+        if(options.currencyDisplay === "code") {
+          sNum = renderFormat(format, {
+            num: sNum,
+            code: options.currency.toUpperCase()
+          });
+        } else {
+          sNum = renderFormat(format, {
+            num: sNum,
+            code: currencySymbols[options.currency.toLowerCase()]
+          });
+        }
+      }
+      return sNum;
+    };
+  }
 }());
 
 function formatCurrency(amount,minfrac,maxfrac) {
@@ -521,6 +507,12 @@ function formatBytes(bytes,decimals) {
 
 function process_form() {
   $('form').each(function() {
+    // Somehow browser will not post javascript generated forms.... :(
+    $(this).find('button[type=submit]').on('click',function(){
+      $('form').submit();
+      return false;
+    });
+
     $(this).on('submit', function() {
       var form = $(this);
       $.ajax({
@@ -530,19 +522,11 @@ function process_form() {
         contentType: 'application/json',
         data: JSON.stringify(prepare_form_data(form))
       }).done(function(response) {
-        new PNotify({
-          type: (response.ok ? 'success' : 'error'),
-          title: response.title,
-          text: response.message,
-          nonblock: {
-            nonblock: true
-          },
-          delay: 3000,
-          mouse_reset: false,
-          //addclass: 'dark',
-          styling: 'bootstrap3',
-          hide: true,
-        });
+        if (response.ok) {
+          ok_notification_bubble(response.title,response.message);
+        } else {
+          error_notification_bubble(response.title,response.message);
+        }
       });
       return false;
     });
@@ -1572,54 +1556,202 @@ function add_sensor_row(id,hardwaretype,address,type,name,alarm_min,alarm_max,li
   });
 }
 
-function add_switch() {
-  var form = $('.new-switch-form');
-  if (!check_form_data(form)) return false;
 
-  add_switch_row('None',
-                 form.find('select[name="switch_[nr]_hardwaretype"]').val(),
-                 form.find('input[name="switch_[nr]_address"]').val(),
-                 form.find('input[name="switch_[nr]_name"]').val(),
-                 form.find('input[name="switch_[nr]_power_wattage"]').val(),
-                 form.find('input[name="switch_[nr]_water_flow"]').val(),
-                 form.find('input[name="switch_[nr]_dimmer_duration"]').val(),
-                 form.find('input[name="switch_[nr]_dimmer_on_duration"]').val(),
-                 form.find('input[name="switch_[nr]_dimmer_on_percentage"]').val(),
-                 form.find('input[name="switch_[nr]_dimmer_off_duration"]').val(),
-                 form.find('input[name="switch_[nr]_dimmer_off_percentage"]').val()
-                 );
 
-  // Reset form
-  form.find('input').val('');
-  form.find('select').val(null).trigger('change');
-  // Hide form
-  form.modal('hide');
+
+
+/* General functions */
+
+/* General functions - Notification bubbles */
+function notification_bubble(type,title,message) {
+  new PNotify({
+    type: type,
+    title: title,
+    text: message,
+    nonblock: {
+      nonblock: true
+    },
+    delay: 3000,
+    mouse_reset: false,
+    styling: 'bootstrap3',
+    hide: true,
+  });
 }
 
-function add_switch_row(id,hardwaretype,address,name,power_wattage,water_flow, dimmer_duration,dimmer_on_duration,dimmer_on_percentage,dimmer_off_duration,dimmer_off_percentage) {
-  var switch_row = $($('.modal-body div.row.switch').parent().clone().html().replace(/\[nr\]/g, $('form div.row.switch').length));
+function error_notification_bubble(title,message) {
+  notification_bubble('error',title,message);
+}
 
-  switch_row.find('div.power_switch.small').attr('id','switch_' + id);
+function ok_notification_bubble(title,message) {
+  notification_bubble('success',title,message);
+}
 
-  switch_row.find('.x_title').show().find('h2 small').text(name);
-  switch_row.find('span.select2.select2-container').remove();
+function info_notification_bubble(title,message) {
+  notification_bubble('info',title,message);
+}
+/* General functions - End notification bubbles */
 
-  switch_row.find('input, select').each(function(counter,item) {
-    $(item).val(eval($(item).attr('name').replace(/switch_[0-9]+_/g,'')));
+function init_form_settings(pType) {
+  $('.page-title').append('<div class="title_right"><h3><button type="button" class="btn btn-primary alignright" data-toggle="modal" data-target=".add-form"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h3> </div>');
+
+  var submit_button = $('.modal-footer button.btn.btn-primary');
+  switch (pType) {
+    case 'switch':
+      // Load initial HTML data
+      source_row = $('.modal-body div.row.switch').html();
+      // Bind to add button
+      submit_button.on('click',function(){
+        add_power_switch();
+      });
+      break;
+  }
+}
+
+/* End general functions */
+
+
+
+/* Power switches code */
+function toggle_power_switch(id) {
+  $.post('/api/switch/toggle/' + id,function(data){
   });
+}
 
-  switch_row.insertBefore('div.row.submit').show();
-  reload_reload_theme();
+function add_power_switch_status_row(data) {
+  if (source_row == null) {
+    return false;
+  }
+  // Create new row
+  var power_switch_row = $('<div>').addClass('row switch').html(source_row);
 
-  switch_row.find("select").select2({
+  // Set ID
+  power_switch_row.attr('id','powerswitch_' + data.id);
+
+  // Change the toggle icon with a slider knob
+  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype) {
+    power_switch_row.find('div.x_content div.power_switch')
+      .removeClass('big')
+      .addClass('dimmer')
+      .html('<input type="text" class="knob" data-thickness=".3" data-width="170" data-angleOffset=20 data-angleArc=320 data-fgColor="' + (data.state > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB') + '" value="' + data.state + '">');
+
+    power_switch_row.find('.knob').knob({
+      release: function(value) {
+        $.post('/api/switch/state/' + data.id + '/' + value,function(dummy){
+        });
+      },
+      format: function(value) {
+        return value + '%';
+      },
+      change: function(value) {
+        this.o.fgColor = (value > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB');
+        $(this.i).css('color',this.o.fgColor);
+      }
+    });
+  } else {
+    // Set toggle
+    power_switch_row.find('div.power_switch span.glyphicon').on('click',function(){
+      toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
+    });
+
+    if (data.timer_enabled) {
+      power_switch_row.find('div.power_switch span.glyphicon').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'))
+    }
+  }
+  $('div#maincontent').append(power_switch_row);
+}
+
+function add_power_switch_setting_row(power_switch) {
+  if (source_row == null) {
+    return false;
+  }
+  // Create new row
+  var power_switch_row = $('<div>').addClass('row switch').html(source_row.replace(/\[nr\]/g, $('form div.row.switch').length));
+  if (power_switch.id !== undefined) {
+    // Set ID
+    power_switch_row.attr('id','powerswitch_' + power_switch.id);
+
+    // Set toggle (disabled in 'edit' modus)
+    /*
+    power_switch_row.find('div.power_switch span.glyphicon').on('click',function(){
+      toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
+    });
+    */
+  }
+  // Re-initialize the select pulldowns
+  power_switch_row.find('span.select2.select2-container').remove();
+  power_switch_row.find('select').select2({
     placeholder: '{{_('Select an option')}}',
     allowClear: false,
     minimumResultsForSearch: Infinity
   }).on('change',function() {
-    //switch_row.find('.row.dimmer').toggle(this.value === 'pwm-dimmer');
+      if (this.name.indexOf('_timer_enabled') >= 0) {
+        $(this).parents('.x_content').find('.row.timer').toggle('true' === this.value);
+      }
   });
-  switch_row.find('.row.dimmer').toggle('pwm-dimmer' === hardwaretype || 'remote-dimmer' === hardwaretype);
+  // Add on the bottom before the submit row
+  power_switch_row.insertBefore('div.row.submit');
 }
+
+function update_power_switch(power_switch) {
+  // Load the switch row to update the data
+  var switch_row = $('div.row.switch#' + 'powerswitch_' + power_switch.id);
+
+  // Update state icon
+  switch_row.find('span.glyphicon').removeClass('blue green').addClass((power_switch.state ? 'green' : 'blue'));
+
+  // Set the name and status
+  var current_status_data = '';
+  if ('pwm-dimmer' === power_switch.hardwaretype || 'remote-dimmer' === power_switch.hardwaretype) {
+    current_status_data = formatNumber(power_switch.current_power_wattage) + 'W / '
+  }
+  current_status_data += formatNumber(power_switch.power_wattage) + 'W';
+  if (power_switch.water_flow > 0) {
+    current_status_data += ' - ' + formatNumber(power_switch.water_flow) + 'L/m';
+  }
+  switch_row.find('h2 span.title').text(power_switch.name);
+  switch_row.find('h2 small.current_usage').text(current_status_data);
+  //switch_row.find('.knob').val(power_switch.state).trigger('change');
+
+  // Set the values only when empty
+  switch_row.find('input:not(.knob), select').each(function(counter,item) {
+    try {
+      // Cast explicit to string to fix dropdown options
+      if ($(item).val() === '') $(item).val(power_switch[item.name.replace(/switch_[0-9]+_/g,'')] + '').trigger('change');
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  // Open or hide the dimmer values (will not trigger on the select field)
+  switch_row.find('.row.dimmer').toggle('pwm-dimmer' === power_switch.hardwaretype || 'remote-dimmer' === power_switch.hardwaretype);
+}
+
+function add_power_switch() {
+  var form = $('.add-form');
+  if (!check_form_data(form)) return false;
+
+  // Create power switch data object and fill it with form data
+  var data = {};
+  form.find('input, select').each(function(counter,item) {
+    data[item.name.replace('switch_[nr]_','')] = item.value;
+  });
+  data['id'] = Math.floor(Date.now() / 1000);
+
+  // Add new row
+  add_power_switch_setting_row(data);
+  // Update new row with new values
+  update_power_switch(data);
+
+  // Reset form
+  form.find('input').removeClass('missing-required').val('');
+  form.find('select').removeClass('missing-required').val(null).trigger('change');
+  // Hide form
+  form.modal('hide');
+
+  reload_reload_theme();
+}
+/* End power switches code code */
+
 
 function add_door() {
   var form = $('.new-door-form');
@@ -1686,43 +1818,6 @@ function add_webcam_row(id,location,name,rotation,preview) {
     minimumResultsForSearch: Infinity
   }).on('change',function(){
     webcam_row.find('img').removeClass('webcam_90 webcam_180 webcam_270 webcam_H webcam_V').addClass('webcam_' + this.value);
-  });
-}
-
-function update_power_switch(id, data) {
-  var power_switch = $('#switch_' + id);
-  var update_data = '';
-  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype) {
-    update_data = formatNumber(data.current_power_wattage) + 'W / '
-  }
-  update_data += formatNumber(data.power_wattage) + 'W';
-  if (data.water_flow > 0) {
-    update_data += ' - ' + formatNumber(data.water_flow) + 'L/m';
-  }
-
-  power_switch.find('h2 span.title').text('{{_('Switch')}} ' + data.name);
-  power_switch.find('h2 small.data_update').text(update_data);
-
-  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype) {
-    power_switch.find('div.power_switch').removeClass('big').addClass('dimmer').html('<input class="knob" data-thickness=".3" data-width="170" data-angleOffset=20 data-angleArc=320 data-fgColor="' + (data.state > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB') + '" value="'+ data.state + '">');
-
-    power_switch.find('.knob').knob({
-			release: function(value) {
-        $.post('/api/switch/state/' + id + '/' + value,function(dummy){
-        });
-      },
-      format: function(value) {
-        return value + '%';
-      }
-    });
-    data.state = data.state > data.dimmer_off_percentage
-  }
-  power_switch.find('span.glyphicon').removeClass('blue green').addClass((data.state ? 'green' : 'blue'));
-}
-
-function toggleSwitch(id) {
-  id = id.split('_')[1];
-  $.post('/api/switch/toggle/' + id,function(data){
   });
 }
 
@@ -1807,19 +1902,11 @@ function delete_audio_file(audio_file_id, audio_file_name) {
       type: "DELETE",
       dataType : "json",
     }).done(function(response) {
-      new PNotify({
-        type: (response.ok ? 'success' : 'error'),
-        title: response.title,
-        text: response.message,
-        nonblock: {
-          nonblock: true
-        },
-        delay: 3000,
-        mouse_reset: false,
-        //addclass: 'dark',
-        styling: 'bootstrap3',
-        hide: true,
-      });
+      if (response.ok) {
+        ok_notification_bubble(response.title,response.message);
+      } else {
+        error_notification_bubble(response.title,response.message);
+      }
     });
   }
 }
@@ -1884,17 +1971,8 @@ function version_check() {
 
     if (current_version < latest_version) {
       var message = 'New version available! <a href="' + data.html_url + '" target="_blank" title="Download TerrariumPI version ' + data.tag_name + '">Click here to download</a>!';
-      new PNotify({
-            type: 'info',
-            title: 'New release: ' + data.tag_name,
-            text: message,
-            delay: 1000,
-            mouse_reset: false,
-            styling: 'bootstrap3',
-            hide: false
-        });
+        info_notification_bubble('New release: ' + data.tag_name, message);
     }
-
     setTimeout(function() {
       version_check();
     },   24 * 60 * 60 * 1000 ); // Check once a day

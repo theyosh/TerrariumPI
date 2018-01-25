@@ -1,11 +1,10 @@
 % include('inc/page_header.tpl')
-        % for item in range(0,amount_of_switches):
         <div class="row switch">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2><span aria-hidden="true" class="glyphicon glyphicon-flash"></span> <span class="title">{{_('Switch')}}</span>
-                <small class="data_update">...</small> <small class="total_usage">...</small></h2>
+                <h2><span aria-hidden="true" class="glyphicon glyphicon-flash"></span>{{_('Switch')}} <span class="title"></span>
+                <small class="current_usage"></small> <small class="total_usage"></small></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -47,7 +46,7 @@
               <div class="x_content">
                 <div class="col-md-3 col-sm-4 col-xs-12">
                   <div class="power_switch big">
-                    <span aria-hidden="true" class="glyphicon glyphicon-off" title="{{_('Toggle power switch')}}" onclick="toggleSwitch($(this).parents('div.row.switch').attr('id'))"></span>
+                    <span aria-hidden="true" class="glyphicon glyphicon-off" title="{{_('Toggle power switch')}}"></span>
                   </div>
                 </div>
                 <div class="col-md-9 col-sm-8 col-xs-12">
@@ -57,17 +56,18 @@
             </div>
           </div>
         </div>
-        % end
         <script type="text/javascript">
           $(document).ready(function() {
-            $.get('/api/switches',function(data) {
-              var power_divs = $('div.row.switch');
-              $.each(data.switches,function(index,value){
-                $(power_divs[index]).attr('id','switch_' + value.id).show()
-                update_power_switch(value.id,value);
-                load_history_graph('switch_' + value.id,'switch','/api/history/switches/' + value.id);
+            source_row = $('div.row.switch').html();
+            $('div.row.switch').remove();
+
+            $.get('/api/switches',function(json_data) {
+              $.each(json_data.switches,function(index,powerswitch_data){
+                add_power_switch_status_row(powerswitch_data);
+                update_power_switch(powerswitch_data);
+                load_history_graph('powerswitch_' + powerswitch_data.id,'switch','/api/history/switches/' + powerswitch_data.id);
               });
-              setContentHeight();
+              reload_reload_theme();
             });
           });
         </script>
