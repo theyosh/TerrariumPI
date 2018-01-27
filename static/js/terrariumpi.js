@@ -589,6 +589,12 @@ function prepare_form_data(form) {
                 if (matches[3] === 'on' || matches[3] === 'off' || matches[3] === 'start' || matches[3] === 'stop') {
                   field_value = moment(field_value, 'LT').unix();
                 }
+
+                if (matches[3] === 'timer_start' || matches[3] === 'timer_stop') {
+                  // TODO: new way of storing time values. Should be used at all other time fields
+                  // Load from local format, and store in 24h format. Do not use UNIX timestamp formats
+                  field_value = moment(field_value, 'LT').format('HH:mm');
+                }
                 objectdata[matches[3]] = field_value;
               }
             }
@@ -1714,9 +1720,17 @@ function update_power_switch(power_switch) {
 
   // Set the values only when empty
   switch_row.find('input:not(.knob), select').each(function(counter,item) {
+    var name = item.name.replace(/switch_[0-9]+_/g,'');
     try {
-      // Cast explicit to string to fix dropdown options
-      if ($(item).val() === '') $(item).val(power_switch[item.name.replace(/switch_[0-9]+_/g,'')] + '').trigger('change');
+      if ($(item).val() === '') {
+        // Cast explicit to string to fix dropdown options
+        var value = power_switch[name] + '';
+        if (name == 'timer_start' || name == 'timer_stop') {
+          // Format time to local format
+          value = moment(value, "HH:mm").format('LT');
+        }
+        $(item).val(value).trigger('change');
+      }
     } catch (e) {
       console.log(e);
     }
