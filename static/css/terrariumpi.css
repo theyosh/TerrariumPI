@@ -77,6 +77,10 @@ form#profile.edit label{
   display: none;
 }
 
+.dropdown-backdrop {
+  display: none !important;
+}
+
 /* End general overrule */
 
 div.row.sensor,
