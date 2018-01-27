@@ -13,6 +13,7 @@ Changelog
 - Add extra information when TerrariumPI starts. [TheYOSH]
 
 **Fixes**
+- Fix dimmer on bug. [TheYOSH]
 - Fix pulldown settings menu. [TheYOSH]
 - Fix UTF-8 characters in Weather urls. Close [#77](https://github.com/theyosh/TerrariumPI/issues/77). [TheYOSH]
 - Fix export timestamp. [TheYOSH]
@@ -20,6 +21,7 @@ Changelog
 - Fix file rights. [TheYOSH]
 
 **Updates**
+- Update CHANGELOG. [#72](https://github.com/theyosh/TerrariumPI/issues/72). [TheYOSH]
 - Update language files. [#72](https://github.com/theyosh/TerrariumPI/issues/72). [TheYOSH]
 - Update timer functionality. [#72](https://github.com/theyosh/TerrariumPI/issues/72). [TheYOSH]
 - Next update for power switch timers. The timer functionality is
@@ -35,6 +37,8 @@ Changelog
 - Update exception logging. [TheYOSH]
 
 **Other**
+- Finetine dimmer css. [TheYOSH]
+- Fine tuning power switch css. [TheYOSH]
 - Remove not used variable. [TheYOSH]
 - Merge branch 'master' into feature/switch_timers. [TheYOSH]
 - Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
