@@ -260,7 +260,7 @@ class terrariumSwitch():
           break
 
       logmessage = 'State not changed.'
-      if switch_state is not None and self.get_state() != switch_state:
+      if switch_state is not None and 'dimmer' not in self.get_hardware_type() and self.get_state() != switch_state:
         logmessage = 'Switched to state %s.' % ('on' if switch_state else 'off')
 
       if switch_state is None:
@@ -416,7 +416,7 @@ class terrariumSwitch():
 
   def is_off(self):
     if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
-      return self.get_state() == self.get_dimmer_off_percentage()
+      return self.get_state() <= self.get_dimmer_off_percentage()
     else:
       return self.get_state() is terrariumSwitch.OFF
 
