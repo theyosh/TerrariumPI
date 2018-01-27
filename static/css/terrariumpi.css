@@ -215,15 +215,23 @@ div.row.environment_cooler.disabled {
   line-height: 1em;
 }
 
-.power_switch span.glyphicon-time {
-  font-size: 0.4em;
+.power_switch span.glyphicon-time,
+.power_switch.dimmer div span.glyphicon-time{
   position: absolute;
+  background-color: white;
+  font-size: 0.4em;
   top: 61%;
   left: 70%;
-  background-color: white;
 }
 
-.power_switch span.glyphicon-time::before {
+.power_switch.dimmer div span.glyphicon-time {
+  font-size: 3.3em;
+  top: 55%;
+  left: 60%;
+}
+
+.power_switch span.glyphicon-time::before,
+.power_switch.dimmer div span.glyphicon-time::before {
   margin-left: -5px;
 }
 
