@@ -111,62 +111,68 @@ class terrariumEngine():
                                                                                                         len(self.sensors),
                                                                                                         time.time()-starttime))
 
-  def __load_power_switches(self,reloading = False):
+  def __load_power_switches(self,data = None):
     # Load Switches, with ID as index
     starttime = time.time()
+    reloading = data is not None
+
     logger.info('%s terrariumPI switches' % ('Reloading' if reloading else 'Loading',))
-    switch_config = self.config.get_power_switches()
+
+    switch_config = (self.config.get_power_switches() if not reloading else data)
     if not reloading:
       self.power_switches = {}
 
     seen_switches = []
-    for power_switch_config in switch_config:
-      power_switch_id = switch_config[power_switch_config]['id']
-      seen_switches.append(power_switch_id)
-      if not power_switch_id in self.power_switches:
-        # Add new switch
-        power_switch = terrariumSwitch(switch_config[power_switch_config]['id'],
-                                       switch_config[power_switch_config]['hardwaretype'],
-                                       switch_config[power_switch_config]['address'],
-                                       switch_config[power_switch_config]['name'],
-                                       switch_config[power_switch_config]['power_wattage'],
-                                       switch_config[power_switch_config]['water_flow'],
+    for switchdata in switch_config:
+      if switchdata['id'] is None or switchdata['id'] == 'None' or switchdata['id'] not in self.power_switches:
+        # New switch (add)
+        power_switch = terrariumSwitch(None,
+                                       switchdata['hardwaretype'],
+                                       switchdata['address'],
+                                       switchdata['name'],
+                                       switchdata['power_wattage'],
+                                       switchdata['water_flow'],
                                        callback=self.toggle_switch)
-        power_switch_id = power_switch.get_id()
-        self.power_switches[power_switch_id] = power_switch
+        self.power_switches[power_switch.get_id()] = power_switch
+      else:
+        # Existing switch
+        power_switch = self.power_switches[switchdata['id']]
+        # Should not be able to change setings
+        #power_switch.set_hardware_type(switchdata['hardwaretype'])
+        power_switch.set_address(switchdata['address'])
+        power_switch.set_name(switchdata['name'])
+        power_switch.set_power_wattage(switchdata['power_wattage'])
+        power_switch.set_water_flow(switchdata['water_flow'])
 
-      # Update switch
-      self.power_switches[power_switch_id].set_name(switch_config[power_switch_config]['name'])
-      self.power_switches[power_switch_id].set_power_wattage(switch_config[power_switch_config]['power_wattage'])
-      self.power_switches[power_switch_id].set_water_flow(switch_config[power_switch_config]['water_flow'])
+      if 'dimmer_duration' in switchdata:
+        power_switch.set_dimmer_duration(switchdata['dimmer_duration'])
+      if 'dimmer_on_duration' in switchdata:
+        power_switch.set_dimmer_on_duration(switchdata['dimmer_on_duration'])
+      if 'dimmer_on_percentage' in switchdata:
+        power_switch.set_dimmer_on_percentage(switchdata['dimmer_on_percentage'])
+      if 'dimmer_off_duration' in switchdata:
+        power_switch.set_dimmer_off_duration(switchdata['dimmer_off_duration'])
+      if 'dimmer_off_percentage' in switchdata:
+        power_switch.set_dimmer_off_percentage(switchdata['dimmer_off_percentage'])
 
-      if 'dimmer_duration' in switch_config[power_switch_config]:
-        self.power_switches[power_switch_id].set_dimmer_duration(switch_config[power_switch_config]['dimmer_duration'])
-      if 'dimmer_on_duration' in switch_config[power_switch_config]:
-        self.power_switches[power_switch_id].set_dimmer_on_duration(switch_config[power_switch_config]['dimmer_on_duration'])
-      if 'dimmer_on_percentage' in switch_config[power_switch_config]:
-        self.power_switches[power_switch_id].set_dimmer_on_percentage(switch_config[power_switch_config]['dimmer_on_percentage'])
-      if 'dimmer_off_duration' in switch_config[power_switch_config]:
-        self.power_switches[power_switch_id].set_dimmer_off_duration(switch_config[power_switch_config]['dimmer_off_duration'])
-      if 'dimmer_off_percentage' in switch_config[power_switch_config]:
-        self.power_switches[power_switch_id].set_dimmer_off_percentage(switch_config[power_switch_config]['dimmer_off_percentage'])
+      if 'timer_enabled' in switchdata:
+        power_switch.set_timer_enabled(switchdata['timer_enabled'])
+      if 'timer_start' in switchdata:
+        power_switch.set_timer_start(switchdata['timer_start'])
+      if 'timer_stop' in switchdata:
+        power_switch.set_timer_stop(switchdata['timer_stop'])
+      if 'timer_on_duration' in switchdata:
+        power_switch.set_timer_on_duration(switchdata['timer_on_duration'])
+      if 'timer_off_duration' in switchdata:
+        power_switch.set_timer_off_duration(switchdata['timer_off_duration'])
 
-      if 'timer_enabled' in switch_config[power_switch_config]:
-        self.power_switches[power_switch_id].set_timer_enabled(switch_config[power_switch_config]['timer_enabled'])
-      if 'timer_start' in switch_config[power_switch_config]:
-        self.power_switches[power_switch_id].set_timer_start(switch_config[power_switch_config]['timer_start'])
-      if 'timer_stop' in switch_config[power_switch_config]:
-        self.power_switches[power_switch_id].set_timer_stop(switch_config[power_switch_config]['timer_stop'])
-      if 'timer_on_duration' in switch_config[power_switch_config]:
-        self.power_switches[power_switch_id].set_timer_on_duration(switch_config[power_switch_config]['timer_on_duration'])
-      if 'timer_off_duration' in switch_config[power_switch_config]:
-        self.power_switches[power_switch_id].set_timer_off_duration(switch_config[power_switch_config]['timer_off_duration'])
-
-    for power_switch_id in set(self.power_switches) - set(seen_switches):
-      # clean up old deleted switches
-      del(self.power_switches[power_switch_id])
+      seen_switches.append(power_switch.get_id())
 
     if reloading:
+      for power_switch_id in set(self.power_switches) - set(seen_switches):
+        # clean up old deleted switches
+        del(self.power_switches[power_switch_id])
+
       self.environment.set_power_switches(self.power_switches)
 
     logger.info('Done %s terrariumPI switches. Found %d switches in %.3f seconds' % ('reloading' if reloading else 'loading',
@@ -283,6 +289,8 @@ class terrariumEngine():
 
       # Update (remote) power switches
       for power_switch_id in self.power_switches:
+        # Update timer trigger if activated
+        self.power_switches[power_switch_id].timer()
         # Update the current sensor.
         self.power_switches[power_switch_id].update()
         # Make time for other web request
@@ -300,7 +308,7 @@ class terrariumEngine():
 
       for webcamid in self.webcams:
         self.webcams[webcamid].update()
-        sleep(0.2)
+        sleep(0.1)
 
       duration = time.time() - starttime
       if duration < terrariumEngine.LOOP_TIMEOUT:
@@ -450,58 +458,8 @@ class terrariumEngine():
     return self.get_switches()
 
   def set_switches_config(self, data):
-    new_switches = {}
-    for switchdata in data:
-      if switchdata['id'] is None or switchdata['id'] == 'None' or switchdata['id'] not in self.power_switches:
-        # New switch (add)
-        power_switch = terrariumSwitch(None,
-                                       switchdata['hardwaretype'],
-                                       switchdata['address'],
-                                       switchdata['name'],
-                                       switchdata['power_wattage'],
-                                       switchdata['water_flow'],
-                                       callback=self.toggle_switch)
-      else:
-        # Existing switch
-        power_switch = self.power_switches[switchdata['id']]
-        # Should not be able to change setings
-        #power_switch.set_hardware_type(switchdata['hardwaretype'])
-
-      power_switch.set_address(switchdata['address'])
-      power_switch.set_name(switchdata['name'])
-      power_switch.set_power_wattage(switchdata['power_wattage'])
-      power_switch.set_water_flow(switchdata['water_flow'])
-
-      if 'dimmer_duration' in switchdata:
-        power_switch.set_dimmer_duration(switchdata['dimmer_duration'])
-      if 'dimmer_on_duration' in switchdata:
-        power_switch.set_dimmer_on_duration(switchdata['dimmer_on_duration'])
-      if 'dimmer_on_percentage' in switchdata:
-        power_switch.set_dimmer_on_percentage(switchdata['dimmer_on_percentage'])
-      if 'dimmer_off_duration' in switchdata:
-        power_switch.set_dimmer_off_duration(switchdata['dimmer_off_duration'])
-      if 'dimmer_off_percentage' in switchdata:
-        power_switch.set_dimmer_off_percentage(switchdata['dimmer_off_percentage'])
-
-      if 'timer_enabled' in switchdata:
-        power_switch.set_timer_enabled(switchdata['timer_enabled'])
-      if 'timer_start' in switchdata:
-        power_switch.set_timer_start(switchdata['timer_start'])
-      if 'timer_stop' in switchdata:
-        power_switch.set_timer_stop(switchdata['timer_stop'])
-      if 'timer_on_duration' in switchdata:
-        power_switch.set_timer_on_duration(switchdata['timer_on_duration'])
-      if 'timer_off_duration' in switchdata:
-        power_switch.set_timer_off_duration(switchdata['timer_off_duration'])
-
-      new_switches[power_switch.get_id()] = power_switch
-
-    self.power_switches = new_switches
-    if self.config.save_power_switches(self.power_switches):
-      self.__load_power_switches(True)
-      return True
-
-    return False
+    self.__load_power_switches(data)
+    return self.config.save_power_switches(self.power_switches)
 
   def toggle_switch(self,data):
     self.collector.log_switch_data(data)

@@ -9,10 +9,14 @@ import thread
 import time
 import math
 import requests
+import datetime
 
 from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
 from hashlib import md5
 from terrariumUtils import terrariumUtils
+
+from gevent import monkey, sleep
+monkey.patch_all()
 
 class terrariumSwitch():
   VALID_HARDWARE_TYPES = ['ftdi','gpio','gpio-inverse','pwm-dimmer','remote','remote-dimmer']
@@ -39,6 +43,7 @@ class terrariumSwitch():
 
   def __init__(self, id, hardware_type, address, name = '', power_wattage = 0.0, water_flow = 0.0, callback = None):
     self.id = id
+    self.state = None
     self.callback = callback
 
     self.set_hardware_type(hardware_type)
@@ -57,13 +62,15 @@ class terrariumSwitch():
     self.set_power_wattage(power_wattage)
     self.set_water_flow(water_flow)
 
+    # Init system default timer settings
     self.set_timer_enabled(False)
-    self.set_timer_start(0)
-    self.set_timer_stop(0)
+    self.set_timer_start('00:00')
+    self.set_timer_stop('00:00')
     self.set_timer_on_duration(0)
     self.set_timer_off_duration(0)
 
     if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+      # Init system default dimmer settings
       self.set_dimmer_duration(10)
       self.set_dimmer_on_duration(5)
       self.set_dimmer_on_percentage(100)
@@ -79,7 +86,6 @@ class terrariumSwitch():
                  self.get_water_flow()))
 
     # Force to off state!
-    self.state = None
     self.set_state(terrariumSwitch.OFF,True)
 
   def __load_ftdi_device(self):
@@ -146,6 +152,41 @@ class terrariumSwitch():
     else:
       logger.warning('Dimmer %s is already working. Ignoring state change!. Will switch to latest state value when done', self.get_name())
 
+  def __calculate_time_table(self):
+    self.__timer_time_table = []
+    if self.state is None or \
+       not self.get_timer_enabled() or \
+       self.get_timer_start() == self.get_timer_stop() or \
+       (self.get_timer_on_duration() == 0 and self.get_timer_off_duration() == 0):
+
+      return False
+
+    logger.info('Calculating timer \'%s\' with timer data: enabled = %s, start = %s, stop = %s, on duration = %s, off duration = %s',
+      self.get_name(),
+      self.get_timer_enabled(),
+      self.get_timer_start(),
+      self.get_timer_stop(),
+      self.get_timer_on_duration(),
+      self.get_timer_off_duration())
+
+    now = datetime.datetime.today()
+    starttime = self.get_timer_start().split(':')
+    starttime = now.replace(hour=int(starttime[0]), minute=int(starttime[1]))
+    logger.debug('Calculating timer \'%s\' start time: %s',self.get_name(),starttime)
+
+    stoptime = self.get_timer_stop().split(':')
+    stoptime = now.replace(hour=int(stoptime[0]), minute=int(stoptime[1]))
+    logger.debug('Calculating timer \'%s\' stop time: %s',self.get_name(),stoptime)
+
+    #if starttime > stoptime:
+    #  starttime -= datetime.timedelta(days=1)
+
+    while starttime <= stoptime:
+      self.__timer_time_table.append((starttime,starttime + datetime.timedelta(minutes=self.get_timer_on_duration())))
+      starttime += datetime.timedelta(minutes=self.get_timer_on_duration() + self.get_timer_off_duration())
+
+    logger.info('Timer time table loaded for switch \'%s\' with %s entries.', self.get_name(),len(self.__timer_time_table))
+
   def set_state(self, state, force = False):
     if self.get_state() is not state or force:
       if self.get_hardware_type() == 'ftdi':
@@ -200,6 +241,33 @@ class terrariumSwitch():
         self.callback(data)
 
     return self.get_state() == state
+
+  def timer(self):
+    if self.get_timer_enabled():
+      logger.info('Checking timer time table for switch %s with %s entries.', self.get_name(),len(self.__timer_time_table))
+      switch_state = None
+      now = datetime.datetime.today()
+      for time_schedule in self.__timer_time_table:
+        if now > time_schedule[0] and now < time_schedule[1]:
+          switch_state = True
+          break
+
+        elif now < time_schedule[0]:
+          switch_state = False
+          break
+
+      logmessage = 'State not changed.'
+      if switch_state is not None and self.get_state() != switch_state:
+        logmessage = 'Switched to state %s.' % ('on' if switch_state else 'off')
+
+      if switch_state is None:
+        self.__calculate_time_table()
+      elif switch_state is True:
+        self.on()
+      else:
+        self.off()
+
+      logger.info('Timer action is done for switch %s. %s', self.get_name(),logmessage)
 
   def get_state(self):
     return self.state
@@ -403,32 +471,49 @@ class terrariumSwitch():
 
   def set_timer_enabled(self,value):
     self.__timer_enabled = value in ['enabled',True,'True','true',1]
+    self.__calculate_time_table()
 
   def get_timer_enabled(self):
     return (self.__timer_enabled if self.__timer_enabled in [True,False] else False)
 
   def set_timer_start(self,value):
-    self.__timer_start = value
+    if ':' in value:
+      try:
+        value = value.split(':')
+        self.__timer_start = "{:0>2}:{:0>2}".format(int(value[0])%24,int(value[1])%60)
+        self.__calculate_time_table()
+      except Exception, err:
+        print 'Error in set_timer_start'
+        print err
 
   def get_timer_start(self):
     return self.__timer_start
 
   def set_timer_stop(self,value):
-    self.__timer_stop = value
+    if ':' in value:
+      try:
+        value = value.split(':')
+        self.__timer_stop = "{:0>2}:{:0>2}".format(int(value[0])%24,int(value[1])%60)
+        self.__calculate_time_table()
+      except Exception, err:
+        print 'Error in set_timer_stop'
+        print err
 
   def get_timer_stop(self):
     return self.__timer_stop
 
   def set_timer_on_duration(self,value):
-    value = float(value) if terrariumUtils.is_float(value) else 0.0
-    self.__timer_on_duration = value if value >= 0.0 else 0.0
+    if terrariumUtils.is_float(value) and int(value) >= 0:
+      self.__timer_on_duration = int(value)
+      self.__calculate_time_table()
 
   def get_timer_on_duration(self):
-    return (self.__timer_on_duration if self.get_timer_enabled() else 0.0)
+    return self.__timer_on_duration
 
   def set_timer_off_duration(self,value):
-    value = float(value) if terrariumUtils.is_float(value) else 0.0
-    self.__timer_off_duration = value if value >= 0.0 else 0.0
+    if terrariumUtils.is_float(value) and int(value) >= 0:
+      self.__timer_off_duration = int(value)
+      self.__calculate_time_table()
 
   def get_timer_off_duration(self):
-    return (self.__timer_off_duration if self.get_timer_enabled() else 0.0)
+    return self.__timer_off_duration

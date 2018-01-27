@@ -380,7 +380,10 @@
             $.get('/api/switches',function(data){
               var select_boxes = $('select[name$="_power_switches"]');
               $.each(data.switches,function (index,powerswitch){
-                select_boxes.append($('<option>').attr({'value':powerswitch.id}).text(powerswitch.name));
+                if (!powerswitch.timer_enabled) {
+                  // We can't use timer enabled switches. They have there own schedule
+                  select_boxes.append($('<option>').attr({'value':powerswitch.id}).text(powerswitch.name));
+                }
               });
               switches_loaded = true;
             });
