@@ -135,9 +135,6 @@ class terrariumWebserver():
     elif 'door_status' == template:
       variables['amount_of_doors'] = self.__terrariumEngine.get_amount_of_doors()
 
-    elif 'switch_status' == template:
-      variables['amount_of_switches'] = self.__terrariumEngine.get_amount_of_switches()
-
     elif 'sensor_temperature' == template:
       variables['amount_of_sensors'] = self.__terrariumEngine.get_amount_of_sensors('temperature')
 
