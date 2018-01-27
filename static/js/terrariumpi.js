@@ -1638,7 +1638,7 @@ function add_power_switch_status_row(data) {
     power_switch_row.find('div.x_content div.power_switch')
       .removeClass('big')
       .addClass('dimmer')
-      .html('<input type="text" class="knob" data-thickness=".3" data-width="170" data-angleOffset=20 data-angleArc=320 data-fgColor="' + (data.state > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB') + '" value="' + data.state + '">');
+      .html('<input type="text" class="knob" data-thickness=".3" data-width="160" data-angleOffset=20 data-angleArc=320 data-fgColor="' + (data.state > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB') + '" value="' + data.state + '">');
 
     power_switch_row.find('.knob').knob({
       release: function(value) {
@@ -1658,10 +1658,10 @@ function add_power_switch_status_row(data) {
     power_switch_row.find('div.power_switch span.glyphicon').on('click',function(){
       toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
     });
-
-    if (data.timer_enabled) {
-      power_switch_row.find('div.power_switch span.glyphicon').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'))
-    }
+  }
+  if (data.timer_enabled) {
+      power_switch_row.find('div.power_switch span.glyphicon').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'));
+      power_switch_row.find('div.power_switch.dimmer div').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'));
   }
   $('div#maincontent').append(power_switch_row);
 }
