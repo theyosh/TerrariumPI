@@ -2,8 +2,47 @@ Changelog
 =========
 
 
-3.2.1 (2017-11-26)
+(unreleased)
 ------------
+
+**New**
+- Added first part for timer functionality with power switches. This
+  update brings only updates to the webinterface and configuration. The
+  timer functionality is not yet implemented. [#72](https://github.com/theyosh/TerrariumPI/issues/72). [TheYOSH]
+- Add export data option. [#69](https://github.com/theyosh/TerrariumPI/issues/69). [TheYOSH]
+- Add extra information when TerrariumPI starts. [TheYOSH]
+
+**Fixes**
+- Fix pulldown settings menu. [TheYOSH]
+- Fix UTF-8 characters in Weather urls. Close [#77](https://github.com/theyosh/TerrariumPI/issues/77). [TheYOSH]
+- Fix export timestamp. [TheYOSH]
+- Fix webcam error logging. [TheYOSH]
+- Fix file rights. [TheYOSH]
+
+**Updates**
+- Update language files. [#72](https://github.com/theyosh/TerrariumPI/issues/72). [TheYOSH]
+- Update timer functionality. [#72](https://github.com/theyosh/TerrariumPI/issues/72). [TheYOSH]
+- Next update for power switch timers. The timer functionality is
+  implemented. Not very wel tested yet. [#72](https://github.com/theyosh/TerrariumPI/issues/72). [TheYOSH]
+- Update Leaflet to version 1.3.1. [TheYOSH]
+- Update submodules. [TheYOSH]
+- Update weather icons. [TheYOSH]
+- Update weather icons. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update expection logging. [TheYOSH]
+- Update weahter skycons. [TheYOSH]
+- Update weather skycons. [TheYOSH]
+- Update exception logging. [TheYOSH]
+
+**Other**
+- Remove not used variable. [TheYOSH]
+- Merge branch 'master' into feature/switch_timers. [TheYOSH]
+- Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
+  [TheYOSH]
+
+
+3.2.1 (2017-11-26)
+------------------
 
 **New**
 - Add another check for failing weather data. [#52](https://github.com/theyosh/TerrariumPI/issues/52). [TheYOSH]
@@ -18,6 +57,8 @@ Changelog
 - Fixed environment averages. [TheYOSH]
 
 **Updates**
+- Update README.md. [TheYOSH]
+- Update version. [TheYOSH]
 - Update README.md. [TheYOSH]
 - Update German translation. [TheYOSH]
 - Update environment averages. [TheYOSH]
@@ -707,3 +748,5 @@ Changelog
 - Typo. [TheYOSH]
 - Moved door status to own page. [TheYOSH]
 - Use system default pip. [TheYOSH]
+
+
