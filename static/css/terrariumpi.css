@@ -205,6 +205,7 @@ div.row.environment_cooler.disabled {
 .power_switch.dimmer {
   display: block;
   position: relative;
+  margin-bottom: -20px;
 }
 
 .power_switch.big,
