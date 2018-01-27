@@ -178,8 +178,11 @@ class terrariumSwitch():
     stoptime = now.replace(hour=int(stoptime[0]), minute=int(stoptime[1]))
     logger.debug('Calculating timer \'%s\' stop time: %s',self.get_name(),stoptime)
 
-    #if starttime > stoptime:
-    #  starttime -= datetime.timedelta(days=1)
+    if starttime > stoptime:
+      if now > stoptime:
+        stoptime += datetime.timedelta(hours=24)
+      else:
+        starttime -= datetime.timedelta(hours=24)
 
     while starttime <= stoptime:
       self.__timer_time_table.append((starttime,starttime + datetime.timedelta(minutes=self.get_timer_on_duration())))
