@@ -337,7 +337,7 @@ class terrariumWebcam():
     elif location.startswith('/dev/video'):
       self.location = location
       self.type = 'usb'
-    elif self.location.startswith('http://') or self.location.startswith('https://'):
+    elif location.startswith('http://') or location.startswith('https://'):
       self.location = location
       self.type = 'online'
 
