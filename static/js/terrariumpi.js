@@ -569,6 +569,15 @@ function init_form_settings(pType) {
         add_door();
       });
       break;
+
+    case 'webcam':
+      // Load initial HTML data
+      source_row = $('.modal-body div.row.webcam').html();
+      // Bind to add button
+      submit_button.on('click',function(){
+        add_webcam();
+      });
+      break;
   }
 }
 
@@ -728,329 +737,36 @@ function version_check() {
   });
 }
 
-function logout() {
-  $.ajax({
-      async: false,
-      url: 'logout',
-      type: 'GET',
-      username: 'logout'
-  }).done(function(response) {
-    if (response.ok) {
-      ok_notification_bubble(response.title,response.message);
-    } else {
-      error_notification_bubble(response.title,response.message);
-    }
-  });
-}
-/* General functions - End system functions */
+function parse_remote_data(type,url) {
+  $.get(url,function(data) {
+    var json_path = url.indexOf('#');
+    if (json_path != -1) {
+      json_path = url.substring(json_path+1).split('/');
+      // TerrariumPI API is known, and can be used to fill in all values
+      var is_remote_terrarium_pi = json_path.length == 3
+                                   && (json_path[0] === 'sensors' || json_path[0] === 'switches')
+                                   && json_path[1] === '0'
+                                   && (json_path[2] === 'current' || json_path[2] === 'state');
 
-/* End general functions */
-
-
-/* Power switches code */
-function toggle_power_switch(id) {
-  $.post('/api/switch/toggle/' + id,function(data){
-  });
-}
-
-function add_power_switch_status_row(data) {
-  if (source_row === null) {
-    return false;
-  }
-  // Create new row
-  var power_switch_row = $('<div>').addClass('row switch').html(source_row);
-
-  // Set ID
-  power_switch_row.attr('id','powerswitch_' + data.id);
-
-  // Change the toggle icon with a slider knob
-  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype) {
-    power_switch_row.find('div.x_content div.power_switch')
-      .removeClass('big')
-      .addClass('dimmer')
-      .html('<input type="text" class="knob" data-thickness=".3" data-width="160" data-angleOffset=20 data-angleArc=320 data-fgColor="' + (data.state > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB') + '" value="' + data.state + '">');
-
-    power_switch_row.find('.knob').knob({
-      release: function(value) {
-        $.post('/api/switch/state/' + data.id + '/' + value,function(dummy){
+      if (is_remote_terrarium_pi) {
+        // Loop through the fields and fill in the fields with remote information
+        $.each(data[json_path[0]][json_path[1]],function(fieldname,value) {
+          // Never overrule fields in array below
+          if ($.inArray(fieldname,['address','hardwaretype','id']) == -1) {
+            $('input[name="' + type + '_[nr]_' + fieldname + '"]').val(value);
+            $('select[name="' + type + '_[nr]_' + fieldname + '"]').val(value).change();
+          }
         });
-      },
-      format: function(value) {
-        return value + '%';
-      },
-      change: function(value) {
-        this.o.fgColor = (value > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB');
-        $(this.i).css('color',this.o.fgColor);
+      } else {
+        // Here we loop over the JSON structure to get the end value which should be the current value
+        $.each(json_path,function(index,value){
+          data = data[value];
+        });
+        $('input[name="' + type + '_[nr]_current"]').val(data);
       }
-    });
-  } else {
-    // Set toggle
-    power_switch_row.find('div.power_switch span.glyphicon').on('click',function(){
-      toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
-    });
-  }
-  if (data.timer_enabled) {
-      power_switch_row.find('div.power_switch span.glyphicon').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'));
-      power_switch_row.find('div.power_switch.dimmer div').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'));
-  }
-  $('div#maincontent').append(power_switch_row);
-}
-
-function update_power_switch(power_switch) {
-  // Load the switch row to update the data
-  var switch_row = $('div.row.switch#' + 'powerswitch_' + power_switch.id);
-
-  // Update state icon
-  switch_row.find('span.glyphicon').removeClass('blue green').addClass((power_switch.state ? 'green' : 'blue'));
-
-  // Set the name and status
-  var current_status_data = '';
-  if ('pwm-dimmer' === power_switch.hardwaretype || 'remote-dimmer' === power_switch.hardwaretype) {
-    current_status_data = formatNumber(power_switch.current_power_wattage) + 'W / ';
-  }
-  current_status_data += formatNumber(power_switch.power_wattage) + 'W';
-  if (power_switch.water_flow > 0) {
-    current_status_data += ' - ' + formatNumber(power_switch.water_flow) + 'L/m';
-  }
-  switch_row.find('h2 span.title').text(power_switch.name);
-  switch_row.find('h2 small.current_usage').text(current_status_data);
-  //switch_row.find('.knob').val(power_switch.state).trigger('change');
-
-  // Set the values only when empty
-  switch_row.find('input:not(.knob), select').each(function(counter,item) {
-    var name = item.name.replace(/switch_[0-9]+_/g,'');
-    try {
-      if ($(item).val() === '') {
-        // Cast explicit to string to fix dropdown options
-        var value = power_switch[name] + '';
-        if (name == 'timer_start' || name == 'timer_stop') {
-          // Format time to local format
-          value = moment(value, "HH:mm").format('LT');
-        }
-        $(item).val(value).trigger('change');
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  });
-
-  // Open or hide the dimmer values (will not trigger on the select field)
-  switch_row.find('.row.dimmer').toggle('pwm-dimmer' === power_switch.hardwaretype || 'remote-dimmer' === power_switch.hardwaretype);
-}
-
-function add_power_switch_setting_row(power_switch) {
-  if (source_row === null) {
-    return false;
-  }
-  // Create new row
-  var power_switch_row = $('<div>').addClass('row switch').html(source_row.replace(/\[nr\]/g, $('form div.row.switch').length));
-  if (power_switch.id !== undefined) {
-    // Set ID
-    power_switch_row.attr('id','powerswitch_' + power_switch.id);
-
-    // Set toggle (disabled in 'edit' modus)
-    /*
-    power_switch_row.find('div.power_switch span.glyphicon').on('click',function(){
-      toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
-    });
-    */
-  }
-  // Re-initialize the select pulldowns
-  power_switch_row.find('span.select2.select2-container').remove();
-  power_switch_row.find('select').select2({
-    placeholder: '{{_('Select an option')}}',
-    allowClear: false,
-    minimumResultsForSearch: Infinity
-  }).on('change',function() {
-      if (this.name.indexOf('_timer_enabled') >= 0) {
-        $(this).parents('.x_content').find('.row.timer').toggle('true' === this.value);
-      }
-  });
-  // Add on the bottom before the submit row
-  power_switch_row.insertBefore('div.row.submit');
-}
-
-function add_power_switch() {
-  var form = $('.add-form');
-  if (!check_form_data(form)) return false;
-
-  // Create power switch data object and fill it with form data
-  var data = {};
-  form.find('input, select').each(function(counter,item) {
-    data[item.name.replace('switch_[nr]_','')] = item.value;
-  });
-  data['id'] = Math.floor(Date.now() / 1000);
-
-  // Add new row
-  add_power_switch_setting_row(data);
-  // Update new row with new values
-  update_power_switch(data);
-
-  // Reset form
-  form.find('input').val('');
-  form.find('select').val(null).trigger('change');
-  // Hide form
-  form.modal('hide');
-
-  reload_reload_theme();
-}
-/* End power switches code code */
-
-
-/* Doors code */
-function update_door_indicator(status) {
-  var indicator = $('li#door_indicator');
-
-  indicator.removeClass('disabled');
-  indicator.find('span.open, span.closed, span.disabled').hide();
-
-  if ('disabled' === status) {
-    indicator.addClass('disabled');
-    indicator.find('span.disabled').show();
-    add_notification_message('door_messages',
-                             '{{_('Disabled')}}',
-                             '{{_('There are zero door sensors configured.')}}',
-                             'fa-play-circle-o',
-                             'orange');
-    return;
-  }
-
-  var door_open = 'open' === status;
-  if (door_open) {
-    indicator.find('span.open').show();
-  } else {
-    indicator.find('span.closed').show();
-  }
-
-  update_door_messages('open' === status);
-}
-
-function update_door_messages(open,date) {
-  var title   = (open ? '{{_('Open')}}' : '{{_('Closed')}}');
-  var message = (open ? '{{_('Door is open')}}' : '{{_('Door is closed')}}');
-  var icon    = (open ? 'fa-unlock' : 'fa-lock');
-  var color   = (open ? 'red' : 'green');
-  add_notification_message('door_messages', title, message, icon, color, date);
-}
-
-function load_door_history() {
-  $.getJSON('/api/history/doors', function(door_data) {
-    var door_status = {};
-    $.each(door_data.doors, function(counter, statedata) {
-      for (var i = 0; i < statedata.state.length; i++) {
-        if (i == 0 || statedata.state[i][1] != statedata.state[i-1][1]) {
-          door_status[statedata.state[i][0]] = statedata.state[i][1];
-        }
-      }
-    });
-    // Sort door data events on time. Needed if you have more than one door
-    $.each(Object.keys(door_status).sort(), function(counter,change_time) {
-      update_door_messages((door_status[change_time] === 1), change_time);
-    })
-  });
-}
-
-function add_door_status_row(data) {
-  if (source_row === null) {
-    return false;
-  }
-  // Create new row
-  var door_row = $('<div>').addClass('row door').html(source_row);
-
-  // Set ID
-  door_row.attr('id','door_' + data.id);
-
-  // Add to page
-  $('div#maincontent').append(door_row);
-}
-
-function update_door(data) {
-  // Load the switch row to update the data
-  var switch_row = $('div.row.door#' + 'door_' + data.id);
-
-  // Update state icon
-  switch_row.find('div.door_status i').removeClass('fa-lock fa-unlock green red')
-                                      .addClass((data.state === 'closed' ? 'fa-lock green' : 'fa-unlock red'))
-                                      .attr('title',(data.state === 'closed' ? '{{_('Door is closed')}}' : '{{_('Door is open')}}'));
-
-  // Set the name and status
-  switch_row.find('h2 span.title').text(data.name);
-
-  // Set the values only when empty
-  switch_row.find('input:not(.knob), select').each(function(counter,item) {
-    var name = item.name.replace(/door_[0-9]+_/g,'');
-    try {
-      if ($(item).val() === '') {
-        // Cast explicit to string to fix dropdown options
-        var value = data[name] + '';
-        if (name == 'timer_start' || name == 'timer_stop') {
-          // Format time to local format
-          value = moment(value, "HH:mm").format('LT');
-        }
-        $(item).val(value).trigger('change');
-      }
-    } catch (e) {
-      console.log(e);
     }
   });
 }
-
-function add_door_setting_row(data) {
-  if (source_row === null) {
-    return false;
-  }
-  // Create new row
-  var content_row = $('<div>').addClass('row door').html(source_row.replace(/\[nr\]/g, $('form div.row.door').length));
-  if (data.id !== undefined) {
-    // Set ID
-    content_row.attr('id','door_' + data.id);
-  }
-  // Re-initialize the select pulldowns
-  content_row.find('span.select2.select2-container').remove();
-  content_row.find('select').select2({
-    placeholder: '{{_('Select an option')}}',
-    allowClear: false,
-    minimumResultsForSearch: Infinity
-  });
-  // Add on the bottom before the submit row
-  content_row.insertBefore('div.row.submit');
-}
-
-function add_door() {
-  var form = $('.add-form');
-  if (!check_form_data(form)) return false;
-
-  // Create power switch data object and fill it with form data
-  var data = {};
-  form.find('input, select').each(function(counter,item) {
-    data[item.name.replace('door_[nr]_','')] = item.value;
-  });
-  data['id'] = Math.floor(Date.now() / 1000);
-
-  // Add new row
-  add_door_setting_row(data);
-  // Update new row with new values
-  update_door(data);
-
-  // Reset form
-  form.find('input').val('');
-  form.find('select').val(null).trigger('change');
-  // Hide form
-  form.modal('hide');
-
-  reload_reload_theme();
-}
-/* End Doors code */
-
-
-
-
-
-
-
-
-
-
 
 function menu_click(url) {
   // Find the menu item that should be loaded
@@ -1103,395 +819,23 @@ function load_page(url) {
   return false;
 }
 
-
-
-
-
-function update_dashboard_tile(tile, text) {
-  var div = $('div.tile_count #' + tile + ' div.count');
-  if (div.length == 1 && div.text() != text) {
-    var oldColor = div.css('color');
-    div.text(text);
-    div.addClass('green');
-    div.animate({
-      color: oldColor
-    }, 1000, function() {
-      $(this).removeClass('green').css('color', '');
-    });
-  }
-}
-
-function update_dashboard_uptime(data) {
-  update_dashboard_tile('uptime', formatUptime(data.uptime));
-  $('#system_time span').text(moment(data.timestamp * 1000).format('LLLL'));
-  $('#system_time i').removeClass('fa-clock-o fa-sun-o fa-moon-o').addClass((data.day ? 'fa-sun-o' : 'fa-moon-o'));
-  $("#uptime .progress-bar-success").css('height', ((data.load[0] / data.cores) * 100) + '%');
-  $("#uptime .progress-bar-warning").css('height', ((data.load[1] / data.cores) * 100) + '%');
-  $("#uptime .progress-bar-danger").css('height', ( (data.load[2] / data.cores) * 100) + '%');
-}
-
-function update_dashboard_power_usage(data) {
-  update_dashboard_tile('power_wattage', formatNumber(data.current) + '/' + formatNumber(data.max));
-  var percentage = (data.max > 0 ? (data.current / data.max) * 100 : 0);
-  $("#power_wattage .progress-bar-success").css('height', percentage + '%');
-  $("#total_power .count_bottom .costs span").text(formatCurrency(data.price,2,3));
-  $("#total_power .count_bottom span.duration").text(moment.duration(data.duration * 1000).humanize());
-  update_dashboard_tile('total_power',formatNumber(data.total / (3600 * 1000)));
-}
-
-function update_dashboard_water_flow(data) {
-  update_dashboard_tile('water_flow', formatNumber(data.current) + '/' + formatNumber(data.max));
-  var percentage = (data.max > 0 ? (data.current / data.max) * 100 : 0);
-  $("#water_flow .progress-bar-info").css('height', percentage + '%');
-  $("#total_water .count_bottom .costs span").text(formatCurrency(data.price,2,3));
-  $("#total_water .count_bottom span.duration").text(moment.duration(data.duration * 1000).humanize());
-  update_dashboard_tile('total_water', formatNumber(data.total));
-}
-
-
-
-
-
-function update_weather(data) {
-  var icons = new Skycons({
-    "color": "#73879C"
-  });
-  var weather_current = $('div#weather_today');
-  if (weather_current.length == 1) {
-    weather_current.find('.status').html(moment(data.hour_forecast[0].from * 1000).format('[<b>]dddd[</b>,] LT') + ' <span> in <b>°' + globals.temperature_indicator + '</b></span>');
-    weather_current.find('h2').html(data.city.city + '<br><i>' + data.hour_forecast[0].weather + '</i>');
-    weather_current.find('.sunrise').text(moment(data.sun.rise * 1000).format('LT')).parent().css('fontWeight', (data.day ? 'bold' : 'normal'));
-    weather_current.find('.sunset').text(moment(data.sun.set * 1000).format('LT')).parent().css('fontWeight', (data.day ? 'normal' : 'bold'));
-    weather_current.find('.degrees').text(formatNumber(data.hour_forecast[0].temperature));
-    icons.set(weather_current.find('canvas').attr('id'), data.hour_forecast[0].icon);
-    var week_forecast_divs = weather_current.find('div.row.weather-days div.daily-weather');
-    // Set timestamp to tomorrow at 12 hours. That is the first week forecast we take
-    var timestamp = Math.round(new Date(Date.now()).setHours(12) / 1000) + (24 * 60 * 60);
-    var day_counter = 0;
-    var graphdata = [];
-    $.each(data.week_forecast, function(index, value) {
-      graphdata.push([(value.to - ((value.to - value.from) / 2)) * 1000, value.temperature]);
-      if (value.from - timestamp >= 3600 && day_counter < week_forecast_divs.length) {
-        $(week_forecast_divs[day_counter]).show();
-        $(week_forecast_divs[day_counter]).find('.day').text(moment(value.from * 1000).format('ddd'));
-        $(week_forecast_divs[day_counter]).find('.degrees').text(formatNumber(value.temperature));
-        $(week_forecast_divs[day_counter]).find('h5').html(formatNumber(value.wind_speed) + ' <i>' + (data.windspeed === 'ms' ? '{{_('m/s')}}' : '{{_('Km/h')}}') + '</i>');
-        $(week_forecast_divs[day_counter]).find('canvas').attr('title',value.weather);
-        icons.set($(week_forecast_divs[day_counter]).find('canvas').attr('id'), value.icon);
-        day_counter++;
-        timestamp += (24 * 60 * 60);
-      }
-    });
-    icons.play();
-    history_graph('weather_week', graphdata, 'weather');
-    graphdata = [];
-    $.each(data.hour_forecast, function(index, value) {
-      graphdata.push([(value.to - ((value.to - value.from) / 2)) * 1000, value.temperature]);
-    });
-    history_graph('weather_day', graphdata, 'weather');
-  }
-}
-
-function update_dashboard_environment(name, value) {
-  var mode_translations = {'sensor' : '{{_('Sensor')}}',
-                           'weather':'{{_('Weather')}}',
-                           'timer':'{{_('Timer')}}'};
-  var systempart = $('div.environment_' + name);
-  if (systempart.length === 0 || Object.keys(value).length === 0 || !value.enabled) {
-    systempart.addClass('disabled');
-    return;
-  }
-  systempart.removeClass('disabled');
-  var enabledColor = '';
-  var indicator = '°' + globals.temperature_indicator;
-  switch (name) {
-    case 'light':
-      enabledColor = 'orange';
-      break;
-    case 'sprayer':
-      enabledColor = 'blue';
-      indicator = '%';
-      break;
-    case 'heater':
-      enabledColor = 'red';
-      break;
-    case 'cooler':
-      enabledColor = 'blue';
-      break;
-  }
-
-  systempart.find('h4').removeClass('orange blue red')
-                       .addClass(value.enabled ? enabledColor : '')
-                       .attr('title', value.enabled ? "{{_('Enabled')}}" : "{{_('Disabled')}}");
-
-  systempart.find('h4 small span').text(mode_translations[value.mode]);
-
-  if (value.on !== undefined) {
-    systempart.find('.on').text(moment(value.on * 1000).format('LT'));
-  }
-  if (value.off !== undefined) {
-    systempart.find('.off').text(moment(value.off * 1000).format('LT'));
-    systempart.find('.duration').text(moment.duration(Math.abs(value.off - value.on) * 1000).humanize());
-  }
-  if (value.current !== undefined) {
-    systempart.find('.current').text(formatNumber(value.current,3) + ' ' + indicator);
-  }
-  if (value.alarm_min !== undefined) {
-    systempart.find('.alarm_min').text(formatNumber(value.alarm_min,3) + ' ' + indicator);
-  }
-  if (value.alarm_max !== undefined) {
-    systempart.find('.alarm_max').text(formatNumber(value.alarm_max,3) + ' ' + indicator);
-  }
-  if (value.alarm !== undefined) {
-    systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
-  }
-  systempart.find('.state i').removeClass('red green').addClass(value.state === 'on' ? 'green' : 'red').attr('title', value.state === 'on' ? '{{_('On')}}' : '{{_('Off')}}');
-  systempart.find('table.tile_info').show();
-  setContentHeight();
-}
-
-
-
-
-
-
-
-
-
-function update_online_messages(online) {
-  var title   = (online ? '{{_('Online')}}' : '{{_('Offline')}}');
-  var message = (online ? '{{_('Connection restored')}}' : '{{_('Connection lost')}}');
-  var icon    = (online ? 'fa-check-circle-o' : 'fa-exclamation-triangle');
-  var color   = (online ? 'green' : 'red');
-  add_notification_message('online_messages', title, message, icon, color);
-}
-
-function update_player_messages(data) {
-  update_player_volume(data.volume);
-  var title   = (data.running ? '{{_('Playing')}}' : '{{_('Stopped')}}');
-  var message = (data.running ? '{{_('Playlist')}}: ' + data.name + ' - ' + moment(data.start * 1000).format('LT') + '-' + moment(data.stop * 1000).format('LT'): '{{_('Not playing')}}');
-  var icon    = (data.running ? 'fa-play-circle-o' : 'fa-play-circle-o');
-  var color   = (data.running ? 'green' : 'red');
-  add_notification_message('player_messages', title, message, icon, color);
-}
-
-function update_player_volume(volume) {
-  var menu = $('ul#player_messages');
-  menu.find('li.notification:not(:has(.player_volume))').remove();
-
-  if ($('div.row.player_volume').length == 0) {
-    var volume_control = $('<div>').addClass('row player_volume');
-    volume_control.append($('<div>').addClass('col-md-1').append($('<span>').addClass('fa fa-volume-down').on('click',function(){
-      $.post('/api/audio/player/volumedown');
-      return false;
-    })));
-    volume_control.append($('<div>').addClass('col-md-10  progress progress-striped active').append($('<div>').addClass('progress-bar progress-bar-success').attr('data-transitiongoal',volume).text(volume + '%')));
-    volume_control.append($('<div>').addClass('col-md-1').append($('<span>').addClass('fa fa-volume-up').on('click',function(){
-      $.post('/api/audio/player/volumeup');
-      return false;
-    })));
-    menu.prepend($('<li>').addClass('notification').append(volume_control));
-    $('ul#player_messages .progress .progress-bar').progressbar();
-  } else {
-    $('div.row.player_volume .progress-bar.progress-bar-success').css('width', volume + '%').text(volume + '%');
-  }
-}
-
-
-
-function update_online_indicator(online) {
-  var indicator = $('li#online_indicator');
-
-  indicator.find('span.online, span.offline').hide();
-  if (online) {
-    indicator.find('span.online').show();
-  } else {
-    indicator.find('span.offline').show();
-  }
-  update_online_messages(online);
-}
-
-function is_online() {
-  update_online_indicator(true);
-}
-
-function is_offline() {
-  update_online_indicator(false);
-}
-
-
-
-
-
-
-
-function update_player_indicator(data) {
-  var indicator = $('li#player_indicator');
-  indicator.removeClass('disabled');
-  indicator.find('span.running, span.stopped, span.disabled').hide();
-
-  if ('disabled' === data.running) {
-    indicator.addClass('disabled');
-    indicator.find('span.disabled').show();
-    add_notification_message('player_messages',
-                             '{{_('Disabled')}}',
-                             '{{_('Either add audio files and playlists. Or you have a pwm-dimmer switch configured.')}}',
-                             'fa-play-circle-o',
-                             'orange');
-    return;
-  }
-
-  if (data.running) {
-    indicator.find('span.running').show();
-  } else {
-    indicator.find('span.stopped').show();
-  }
-  update_player_messages(data);
-}
-
-function get_theme_color(color) {
-  if (color == 'orange') return '#f0ad4e';
-  return $('<div>').addClass(color).css('color');
-}
-
-var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
-    $BODY = $('body'),
-    $MENU_TOGGLE = $('#menu_toggle'),
-    $SIDEBAR_MENU = $('#sidebar-menu'),
-    $SIDEBAR_FOOTER = $('.sidebar-footer'),
-    $LEFT_COL = $('.left_col'),
-    $RIGHT_COL = $('.right_col'),
-    $NAV_MENU = $('.nav_menu'),
-    $FOOTER = $('footer');
-
-// TODO: This is some kind of easy fix, maybe we can improve this
-function setContentHeight() {
-  // reset height
-  $RIGHT_COL.css('min-height', $(window).height());
-
-  var bodyHeight = $BODY.outerHeight(),
-    footerHeight = $BODY.hasClass('footer_fixed') ? -10 : $FOOTER.height(),
-    leftColHeight = $LEFT_COL.eq(1).height() + $SIDEBAR_FOOTER.height(),
-    contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
-
-  // normalize content
-  contentHeight -= $NAV_MENU.height() + footerHeight;
-
-  $RIGHT_COL.css('min-height', contentHeight - 15);
-};
-
-// Sidebar
-function init_sidebar() {
-  $SIDEBAR_MENU.find('a').on('click', function(ev) {
-        var $li = $(this).parent();
-
-        if ($li.is('.active')) {
-            $li.removeClass('active active-sm');
-            $('ul:first', $li).slideUp(function() {
-                setContentHeight();
-            });
-        } else {
-            // prevent closing menu if we are on child menu
-            if (!$li.parent().is('.child_menu')) {
-                $SIDEBAR_MENU.find('li').removeClass('active active-sm');
-                $SIDEBAR_MENU.find('li ul').slideUp();
-            }else
-            {
-        if ( $BODY.is( ".nav-sm" ) )
-        {
-          $SIDEBAR_MENU.find( "li" ).removeClass( "active active-sm" );
-          $SIDEBAR_MENU.find( "li ul" ).slideUp();
-        }
-      }
-            $li.addClass('active');
-
-            $('ul:first', $li).slideDown(function() {
-                setContentHeight();
-            });
-        }
-    });
-
-  // toggle small or large menu
-  $MENU_TOGGLE.on('click', function() {
-    if ($BODY.hasClass('nav-md')) {
-      $SIDEBAR_MENU.find('li.active ul').hide();
-      $SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
+function logout() {
+  $.ajax({
+      async: false,
+      url: 'logout',
+      type: 'GET',
+      username: 'logout'
+  }).done(function(response) {
+    if (response.ok) {
+      ok_notification_bubble(response.title,response.message);
     } else {
-      $SIDEBAR_MENU.find('li.active-sm ul').show();
-      $SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
+      error_notification_bubble(response.title,response.message);
     }
-
-    $BODY.toggleClass('nav-md nav-sm');
-
-    setContentHeight();
-
-    $('.dataTable').each ( function () { $(this).dataTable().fnDraw(); });
   });
-
-	// check active menu
-	$SIDEBAR_MENU.find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('current-page');
-
-	$SIDEBAR_MENU.find('a').filter(function () {
-		return this.href == CURRENT_URL;
-	}).parent('li').addClass('current-page').parents('ul').slideDown(function() {
-		setContentHeight();
-	}).parent().addClass('active');
-
-	// recompute content when resizing
-	$(window).smartresize(function(){
-		setContentHeight();
-	});
-
-	setContentHeight();
-
-	// fixed sidebar
-	if ($.fn.mCustomScrollbar) {
-		$('.menu_fixed').mCustomScrollbar({
-			autoHideScrollbar: true,
-			theme: 'minimal',
-			mouseWheel:{ preventDefault: true }
-		});
-	}
-};
-// /Sidebar
-
-function reload_reload_theme() {
-  // Panel toolbox
-  $('.collapse-link').off('click').on('click', function() {
-    var $BOX_PANEL = $(this).closest('.x_panel'),
-        $ICON = $(this).find('i'),
-        $BOX_CONTENT = $BOX_PANEL.find('.x_content');
-
-    // fix for some div with hardcoded fix class
-    if ($BOX_PANEL.attr('style')) {
-        $BOX_CONTENT.slideToggle(200, function(){
-            $BOX_PANEL.removeAttr('style');
-            setContentHeight();
-        });
-    } else {
-        $BOX_CONTENT.slideToggle(200, function() {
-          setContentHeight();
-        });
-        $BOX_PANEL.css('height', 'auto');
-    }
-
-    $ICON.toggleClass('fa-chevron-up fa-chevron-down');
-  });
-
-  $('.close-link').off('click').click(function () {
-    var $BOX_PANEL = $(this).closest('.x_panel');
-
-    $BOX_PANEL.remove();
-    setContentHeight();
-  });
-  // Tooltip
-  $('[data-toggle="tooltip"]').tooltip({
-    container: 'body',
-    html: true
-  });
-  setContentHeight();
 }
+/* General functions - End system functions */
 
+/* General functions - Graph functions */
 function sensor_gauge(name, data) {
   if ($('#' + name + ' .gauge').length == 1) {
     // Update title
@@ -1864,38 +1208,836 @@ function history_graph(name, data, type) {
     });
   }
 }
+/* General functions - End graph functions */
+/* End general functions */
 
 
+/* Power switches code */
+function toggle_power_switch(id) {
+  $.post('/api/switch/toggle/' + id,function(data){
+  });
+}
 
-function parse_remote_data(type,url) {
-  $.get(url,function(data) {
-    var json_path = url.indexOf('#');
-    if (json_path != -1) {
-      json_path = url.substring(json_path+1).split('/');
-      // TerrariumPI API is known, and can be used to fill in all values
-      var is_remote_terrarium_pi = json_path.length == 3
-                                   && (json_path[0] === 'sensors' || json_path[0] === 'switches')
-                                   && json_path[1] === '0'
-                                   && (json_path[2] === 'current' || json_path[2] === 'state');
+function add_power_switch_status_row(data) {
+  if (source_row === null || source_row === '') {
+    return false;
+  }
+  // Create new row
+  var power_switch_row = $('<div>').addClass('row switch').html(source_row);
 
-      if (is_remote_terrarium_pi) {
-        // Loop through the fields and fill in the fields with remote information
-        $.each(data[json_path[0]][json_path[1]],function(fieldname,value) {
-          // Never overrule fields in array below
-          if ($.inArray(fieldname,['address','hardwaretype','id']) == -1) {
-            $('input[name="' + type + '_[nr]_' + fieldname + '"]').val(value);
-            $('select[name="' + type + '_[nr]_' + fieldname + '"]').val(value).change();
-          }
+  // Set ID
+  power_switch_row.attr('id','powerswitch_' + data.id);
+
+  // Change the toggle icon with a slider knob
+  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype) {
+    power_switch_row.find('div.x_content div.power_switch')
+      .removeClass('big')
+      .addClass('dimmer')
+      .html('<input type="text" class="knob" data-thickness=".3" data-width="160" data-angleOffset=20 data-angleArc=320 data-fgColor="' + (data.state > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB') + '" value="' + data.state + '">');
+
+    power_switch_row.find('.knob').knob({
+      release: function(value) {
+        $.post('/api/switch/state/' + data.id + '/' + value,function(dummy){
         });
-      } else {
-        // Here we loop over the JSON structure to get the end value which should be the current value
-        $.each(json_path,function(index,value){
-          data = data[value];
-        });
-        $('input[name="' + type + '_[nr]_current"]').val(data);
+      },
+      format: function(value) {
+        return value + '%';
+      },
+      change: function(value) {
+        this.o.fgColor = (value > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB');
+        $(this.i).css('color',this.o.fgColor);
       }
+    });
+  } else {
+    // Set toggle
+    power_switch_row.find('div.power_switch span.glyphicon').on('click',function(){
+      toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
+    });
+  }
+  if (data.timer_enabled) {
+      power_switch_row.find('div.power_switch span.glyphicon').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'));
+      power_switch_row.find('div.power_switch.dimmer div').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'));
+  }
+  $('div#maincontent').append(power_switch_row);
+}
+
+function update_power_switch(power_switch) {
+  // Load the switch row to update the data
+  var switch_row = $('div.row.switch#' + 'powerswitch_' + power_switch.id);
+
+  // Update state icon
+  switch_row.find('span.glyphicon').removeClass('blue green').addClass((power_switch.state ? 'green' : 'blue'));
+
+  // Set the name and status
+  var current_status_data = '';
+  if ('pwm-dimmer' === power_switch.hardwaretype || 'remote-dimmer' === power_switch.hardwaretype) {
+    current_status_data = formatNumber(power_switch.current_power_wattage) + 'W / ';
+  }
+  current_status_data += formatNumber(power_switch.power_wattage) + 'W';
+  if (power_switch.water_flow > 0) {
+    current_status_data += ' - ' + formatNumber(power_switch.water_flow) + 'L/m';
+  }
+  switch_row.find('h2 span.title').text(power_switch.name);
+  switch_row.find('h2 small.current_usage').text(current_status_data);
+  //switch_row.find('.knob').val(power_switch.state).trigger('change');
+
+  // Set the values only when empty
+  switch_row.find('input:not(.knob), select').each(function(counter,item) {
+    var name = item.name.replace(/switch_[0-9]+_/g,'');
+    try {
+      if ($(item).val() === '') {
+        // Cast explicit to string to fix dropdown options
+        var value = power_switch[name] + '';
+        if (name == 'timer_start' || name == 'timer_stop') {
+          // Format time to local format
+          value = moment(value, "HH:mm").format('LT');
+        }
+        $(item).val(value).trigger('change');
+      }
+    } catch (e) {
+      console.log(e);
     }
   });
+
+  // Open or hide the dimmer values (will not trigger on the select field)
+  switch_row.find('.row.dimmer').toggle('pwm-dimmer' === power_switch.hardwaretype || 'remote-dimmer' === power_switch.hardwaretype);
+}
+
+function add_power_switch_setting_row(power_switch) {
+  if (source_row === null || source_row === '') {
+    return false;
+  }
+  // Create new row
+  var power_switch_row = $('<div>').addClass('row switch').html(source_row.replace(/\[nr\]/g, $('form div.row.switch').length));
+  if (power_switch.id !== undefined) {
+    // Set ID
+    power_switch_row.attr('id','powerswitch_' + power_switch.id);
+
+    // Set toggle (disabled in 'edit' modus)
+    /*
+    power_switch_row.find('div.power_switch span.glyphicon').on('click',function(){
+      toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
+    });
+    */
+  }
+  // Re-initialize the select pulldowns
+  power_switch_row.find('span.select2.select2-container').remove();
+  power_switch_row.find('select').select2({
+    placeholder: '{{_('Select an option')}}',
+    allowClear: false,
+    minimumResultsForSearch: Infinity
+  }).on('change',function() {
+      if (this.name.indexOf('_timer_enabled') >= 0) {
+        $(this).parents('.x_content').find('.row.timer').toggle('true' === this.value);
+      }
+  });
+  // Add on the bottom before the submit row
+  power_switch_row.insertBefore('div.row.submit');
+}
+
+function add_power_switch() {
+  var form = $('.add-form');
+  if (!check_form_data(form)) return false;
+
+  // Create power switch data object and fill it with form data
+  var data = {};
+  form.find('input, select').each(function(counter,item) {
+    data[item.name.replace('switch_[nr]_','')] = item.value;
+  });
+  data['id'] = Math.floor(Date.now() / 1000);
+
+  // Add new row
+  add_power_switch_setting_row(data);
+  // Update new row with new values
+  update_power_switch(data);
+
+  // Reset form
+  form.find('input').val('');
+  form.find('select').val(null).trigger('change');
+  // Hide form
+  form.modal('hide');
+
+  reload_reload_theme();
+}
+/* End power switches code code */
+
+
+/* Doors code */
+function update_door_indicator(status) {
+  var indicator = $('li#door_indicator');
+
+  indicator.removeClass('disabled');
+  indicator.find('span.open, span.closed, span.disabled').hide();
+
+  if ('disabled' === status) {
+    indicator.addClass('disabled');
+    indicator.find('span.disabled').show();
+    add_notification_message('door_messages',
+                             '{{_('Disabled')}}',
+                             '{{_('There are zero door sensors configured.')}}',
+                             'fa-play-circle-o',
+                             'orange');
+    return;
+  }
+
+  var door_open = 'open' === status;
+  if (door_open) {
+    indicator.find('span.open').show();
+  } else {
+    indicator.find('span.closed').show();
+  }
+
+  update_door_messages('open' === status);
+}
+
+function update_door_messages(open,date) {
+  var title   = (open ? '{{_('Open')}}' : '{{_('Closed')}}');
+  var message = (open ? '{{_('Door is open')}}' : '{{_('Door is closed')}}');
+  var icon    = (open ? 'fa-unlock' : 'fa-lock');
+  var color   = (open ? 'red' : 'green');
+  add_notification_message('door_messages', title, message, icon, color, date);
+}
+
+function load_door_history() {
+  $.getJSON('/api/history/doors', function(door_data) {
+    var door_status = {};
+    $.each(door_data.doors, function(counter, statedata) {
+      for (var i = 0; i < statedata.state.length; i++) {
+        if (i == 0 || statedata.state[i][1] != statedata.state[i-1][1]) {
+          door_status[statedata.state[i][0]] = statedata.state[i][1];
+        }
+      }
+    });
+    // Sort door data events on time. Needed if you have more than one door
+    $.each(Object.keys(door_status).sort(), function(counter,change_time) {
+      update_door_messages((door_status[change_time] === 1), change_time);
+    })
+  });
+}
+
+function add_door_status_row(data) {
+  if (source_row === null || source_row === '') {
+    return false;
+  }
+  // Create new row
+  var door_row = $('<div>').addClass('row door').html(source_row);
+
+  // Set ID
+  door_row.attr('id','door_' + data.id);
+
+  // Add to page
+  $('div#maincontent').append(door_row);
+}
+
+function update_door(data) {
+  // Load the switch row to update the data
+  var switch_row = $('div.row.door#' + 'door_' + data.id);
+
+  // Update state icon
+  switch_row.find('div.door_status i').removeClass('fa-lock fa-unlock green red')
+                                      .addClass((data.state === 'closed' ? 'fa-lock green' : 'fa-unlock red'))
+                                      .attr('title',(data.state === 'closed' ? '{{_('Door is closed')}}' : '{{_('Door is open')}}'));
+
+  // Set the name and status
+  switch_row.find('h2 span.title').text(data.name);
+
+  // Set the values only when empty
+  switch_row.find('input:not(.knob), select').each(function(counter,item) {
+    var name = item.name.replace(/door_[0-9]+_/g,'');
+    try {
+      if ($(item).val() === '') {
+        // Cast explicit to string to fix dropdown options
+        var value = data[name] + '';
+        if (name == 'timer_start' || name == 'timer_stop') {
+          // Format time to local format
+          value = moment(value, "HH:mm").format('LT');
+        }
+        $(item).val(value).trigger('change');
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  });
+}
+
+function add_door_setting_row(data) {
+  if (source_row === null || source_row === '') {
+    return false;
+  }
+  // Create new row
+  var content_row = $('<div>').addClass('row door').html(source_row.replace(/\[nr\]/g, $('form div.row.door').length));
+  if (data.id !== undefined) {
+    // Set ID
+    content_row.attr('id','door_' + data.id);
+  }
+  // Re-initialize the select pulldowns
+  content_row.find('span.select2.select2-container').remove();
+  content_row.find('select').select2({
+    placeholder: '{{_('Select an option')}}',
+    allowClear: false,
+    minimumResultsForSearch: Infinity
+  });
+  // Add on the bottom before the submit row
+  content_row.insertBefore('div.row.submit');
+}
+
+function add_door() {
+  var form = $('.add-form');
+  if (!check_form_data(form)) return false;
+
+  // Create power switch data object and fill it with form data
+  var data = {};
+  form.find('input, select').each(function(counter,item) {
+    data[item.name.replace('door_[nr]_','')] = item.value;
+  });
+  data['id'] = Math.floor(Date.now() / 1000);
+
+  // Add new row
+  add_door_setting_row(data);
+  // Update new row with new values
+  update_door(data);
+
+  // Reset form
+  form.find('input').val('');
+  form.find('select').val(null).trigger('change');
+  // Hide form
+  form.modal('hide');
+
+  reload_reload_theme();
+}
+/* End Doors code */
+
+
+/* Webcam code */
+function createWebcamLayer(webcamid, maxzoom) {
+  return L.tileLayer('/webcam/{id}_tile_{z}_{x}_{y}.jpg?_{time}', {
+    time: function() {
+      return (new Date()).valueOf();
+    },
+    id: webcamid,
+    noWrap: true,
+    continuousWorld: false,
+    maxNativeZoom: maxzoom,
+    maxZoom: maxzoom + 1
+  });
+}
+function initWebcam(data) {
+  if ($('div#webcam_' + data.id).length === 1) {
+    return false;
+  }
+  // Init the HTML
+  var webcam_row = $(source_row);
+  // Set the name and status
+  webcam_row.find('h2 span.title').text(data.name);
+  // Append the page
+  $('div.row.webcam').append(webcam_row);
+  // Resize the height to get the maps working
+  webcam_row.find('div.webcam_player').attr('id','webcam_' + data.id).height(webcam_row.width()-webcam_row.find('.x_title').height());
+
+  // Load Leaflet webcam code
+  var webcam = new L.Map('webcam_' + data.id, {
+    layers: [createWebcamLayer(data.id, data.max_zoom)],
+    fullscreenControl: true,
+  }).setView([0, 0], 1);
+
+  L.Control.TakePhoto = L.Control.extend({
+    options: {
+      position: 'topleft',
+    },
+    onAdd: function (map) {
+      var container = L.DomUtil.create('div', 'leaflet-control-takephoto leaflet-bar leaflet-control');
+      var link = L.DomUtil.create('a', 'leaflet-control-takephoto-button leaflet-bar-part', container);
+      link.title = '{{_('Save RAW photo')}}';
+      link.target = '_blank';
+      link.href = '/webcam/' + data.id + '_raw.jpg';
+      L.DomUtil.create('i', 'fa fa-camera', link);
+     return container;
+    }
+  });
+  var takePhotoControl = new L.Control.TakePhoto();
+  webcam.addControl(takePhotoControl);
+  webcam.addControl(L.Control.loading({separate: true}));
+
+  globals.webcams[webcam._container.id] = null;
+  updateWebcamView(webcam);
+}
+
+function updateWebcamView(webcam) {
+  if ($('div#' + webcam._container.id).length === 1) {
+    webcam.eachLayer(function(layer) {
+      layer.redraw();
+    });
+    clearTimeout(globals.webcams[webcam._container.id]);
+    globals.webcams[webcam._container.id] = setTimeout(function() { updateWebcamView(webcam);},30 * 1000);
+  }
+}
+
+function add_webcam_setting_row(data) {
+  if (source_row === null || source_row === '') {
+    return false;
+  }
+  // Create new row
+  var content_row = $('<div>').addClass('row webcam').html(source_row.replace(/\[nr\]/g, $('form div.row.webcam').length));
+  if (data.id !== undefined) {
+    // Set ID
+    content_row.attr('id','webcam_' + data.id);
+  }
+
+  // Re-initialize the select pulldowns
+  content_row.find('span.select2.select2-container').remove();
+  content_row.find('select').select2({
+    placeholder: '{{_('Select an option')}}',
+    allowClear: false,
+    minimumResultsForSearch: Infinity
+  }).on('change',function() {
+    $(this).parents('.x_content').find('img').removeClass('webcam_90 webcam_180 webcam_270 webcam_H webcam_V').addClass('webcam_' + this.value);
+  });
+  // Add on the bottom before the submit row
+  content_row.insertBefore('div.row.submit');
+}
+
+function update_webcam(data) {
+  // Load the switch row to update the data
+  var content_row = $('div.row.webcam#' + 'webcam_' + data.id);
+
+  content_row.find('h2 span.title').text(data.name);
+  content_row.find('.webcam_preview img').attr('src',data.image);
+
+  // Set the values only when empty
+  content_row.find('input:not(.knob), select').each(function(counter,item) {
+    var name = item.name.replace(/webcam_[0-9]+_/g,'');
+    try {
+      if ($(item).val() === '') {
+        // Cast explicit to string to fix dropdown options
+        var value = data[name] + '';
+        if (name == 'timer_start' || name == 'timer_stop') {
+          // Format time to local format
+          value = moment(value, "HH:mm").format('LT');
+        }
+        $(item).val(value).trigger('change');
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  });
+}
+
+function add_webcam() {
+  var form = $('.add-form');
+  if (!check_form_data(form)) return false;
+
+  // Create power switch data object and fill it with form data
+  var data = {};
+  form.find('input, select').each(function(counter,item) {
+    data[item.name.replace('webcam_[nr]_','')] = item.value;
+  });
+  data['id'] = Math.floor(Date.now() / 1000);
+
+  // Add new row
+  add_webcam_setting_row(data);
+  // Update new row with new values
+  update_webcam(data);
+
+  // Reset form
+  form.find('input').val('');
+  form.find('select').val(null).trigger('change');
+  // Hide form
+  form.modal('hide');
+
+  reload_reload_theme();
+}
+/* End webcam code */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function update_dashboard_tile(tile, text) {
+  var div = $('div.tile_count #' + tile + ' div.count');
+  if (div.length == 1 && div.text() != text) {
+    var oldColor = div.css('color');
+    div.text(text);
+    div.addClass('green');
+    div.animate({
+      color: oldColor
+    }, 1000, function() {
+      $(this).removeClass('green').css('color', '');
+    });
+  }
+}
+
+function update_dashboard_uptime(data) {
+  update_dashboard_tile('uptime', formatUptime(data.uptime));
+  $('#system_time span').text(moment(data.timestamp * 1000).format('LLLL'));
+  $('#system_time i').removeClass('fa-clock-o fa-sun-o fa-moon-o').addClass((data.day ? 'fa-sun-o' : 'fa-moon-o'));
+  $("#uptime .progress-bar-success").css('height', ((data.load[0] / data.cores) * 100) + '%');
+  $("#uptime .progress-bar-warning").css('height', ((data.load[1] / data.cores) * 100) + '%');
+  $("#uptime .progress-bar-danger").css('height', ( (data.load[2] / data.cores) * 100) + '%');
+}
+
+function update_dashboard_power_usage(data) {
+  update_dashboard_tile('power_wattage', formatNumber(data.current) + '/' + formatNumber(data.max));
+  var percentage = (data.max > 0 ? (data.current / data.max) * 100 : 0);
+  $("#power_wattage .progress-bar-success").css('height', percentage + '%');
+  $("#total_power .count_bottom .costs span").text(formatCurrency(data.price,2,3));
+  $("#total_power .count_bottom span.duration").text(moment.duration(data.duration * 1000).humanize());
+  update_dashboard_tile('total_power',formatNumber(data.total / (3600 * 1000)));
+}
+
+function update_dashboard_water_flow(data) {
+  update_dashboard_tile('water_flow', formatNumber(data.current) + '/' + formatNumber(data.max));
+  var percentage = (data.max > 0 ? (data.current / data.max) * 100 : 0);
+  $("#water_flow .progress-bar-info").css('height', percentage + '%');
+  $("#total_water .count_bottom .costs span").text(formatCurrency(data.price,2,3));
+  $("#total_water .count_bottom span.duration").text(moment.duration(data.duration * 1000).humanize());
+  update_dashboard_tile('total_water', formatNumber(data.total));
+}
+
+function update_weather(data) {
+  var icons = new Skycons({
+    "color": "#73879C"
+  });
+  var weather_current = $('div#weather_today');
+  if (weather_current.length == 1) {
+    weather_current.find('.status').html(moment(data.hour_forecast[0].from * 1000).format('[<b>]dddd[</b>,] LT') + ' <span> in <b>°' + globals.temperature_indicator + '</b></span>');
+    weather_current.find('h2').html(data.city.city + '<br><i>' + data.hour_forecast[0].weather + '</i>');
+    weather_current.find('.sunrise').text(moment(data.sun.rise * 1000).format('LT')).parent().css('fontWeight', (data.day ? 'bold' : 'normal'));
+    weather_current.find('.sunset').text(moment(data.sun.set * 1000).format('LT')).parent().css('fontWeight', (data.day ? 'normal' : 'bold'));
+    weather_current.find('.degrees').text(formatNumber(data.hour_forecast[0].temperature));
+    icons.set(weather_current.find('canvas').attr('id'), data.hour_forecast[0].icon);
+    var week_forecast_divs = weather_current.find('div.row.weather-days div.daily-weather');
+    // Set timestamp to tomorrow at 12 hours. That is the first week forecast we take
+    var timestamp = Math.round(new Date(Date.now()).setHours(12) / 1000) + (24 * 60 * 60);
+    var day_counter = 0;
+    var graphdata = [];
+    $.each(data.week_forecast, function(index, value) {
+      graphdata.push([(value.to - ((value.to - value.from) / 2)) * 1000, value.temperature]);
+      if (value.from - timestamp >= 3600 && day_counter < week_forecast_divs.length) {
+        $(week_forecast_divs[day_counter]).show();
+        $(week_forecast_divs[day_counter]).find('.day').text(moment(value.from * 1000).format('ddd'));
+        $(week_forecast_divs[day_counter]).find('.degrees').text(formatNumber(value.temperature));
+        $(week_forecast_divs[day_counter]).find('h5').html(formatNumber(value.wind_speed) + ' <i>' + (data.windspeed === 'ms' ? '{{_('m/s')}}' : '{{_('Km/h')}}') + '</i>');
+        $(week_forecast_divs[day_counter]).find('canvas').attr('title',value.weather);
+        icons.set($(week_forecast_divs[day_counter]).find('canvas').attr('id'), value.icon);
+        day_counter++;
+        timestamp += (24 * 60 * 60);
+      }
+    });
+    icons.play();
+    history_graph('weather_week', graphdata, 'weather');
+    graphdata = [];
+    $.each(data.hour_forecast, function(index, value) {
+      graphdata.push([(value.to - ((value.to - value.from) / 2)) * 1000, value.temperature]);
+    });
+    history_graph('weather_day', graphdata, 'weather');
+  }
+}
+
+function update_dashboard_environment(name, value) {
+  var mode_translations = {'sensor' : '{{_('Sensor')}}',
+                           'weather':'{{_('Weather')}}',
+                           'timer':'{{_('Timer')}}'};
+  var systempart = $('div.environment_' + name);
+  if (systempart.length === 0 || Object.keys(value).length === 0 || !value.enabled) {
+    systempart.addClass('disabled');
+    return;
+  }
+  systempart.removeClass('disabled');
+  var enabledColor = '';
+  var indicator = '°' + globals.temperature_indicator;
+  switch (name) {
+    case 'light':
+      enabledColor = 'orange';
+      break;
+    case 'sprayer':
+      enabledColor = 'blue';
+      indicator = '%';
+      break;
+    case 'heater':
+      enabledColor = 'red';
+      break;
+    case 'cooler':
+      enabledColor = 'blue';
+      break;
+  }
+
+  systempart.find('h4').removeClass('orange blue red')
+                       .addClass(value.enabled ? enabledColor : '')
+                       .attr('title', value.enabled ? "{{_('Enabled')}}" : "{{_('Disabled')}}");
+
+  systempart.find('h4 small span').text(mode_translations[value.mode]);
+
+  if (value.on !== undefined) {
+    systempart.find('.on').text(moment(value.on * 1000).format('LT'));
+  }
+  if (value.off !== undefined) {
+    systempart.find('.off').text(moment(value.off * 1000).format('LT'));
+    systempart.find('.duration').text(moment.duration(Math.abs(value.off - value.on) * 1000).humanize());
+  }
+  if (value.current !== undefined) {
+    systempart.find('.current').text(formatNumber(value.current,3) + ' ' + indicator);
+  }
+  if (value.alarm_min !== undefined) {
+    systempart.find('.alarm_min').text(formatNumber(value.alarm_min,3) + ' ' + indicator);
+  }
+  if (value.alarm_max !== undefined) {
+    systempart.find('.alarm_max').text(formatNumber(value.alarm_max,3) + ' ' + indicator);
+  }
+  if (value.alarm !== undefined) {
+    systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
+  }
+  systempart.find('.state i').removeClass('red green').addClass(value.state === 'on' ? 'green' : 'red').attr('title', value.state === 'on' ? '{{_('On')}}' : '{{_('Off')}}');
+  systempart.find('table.tile_info').show();
+  setContentHeight();
+}
+
+
+function update_online_messages(online) {
+  var title   = (online ? '{{_('Online')}}' : '{{_('Offline')}}');
+  var message = (online ? '{{_('Connection restored')}}' : '{{_('Connection lost')}}');
+  var icon    = (online ? 'fa-check-circle-o' : 'fa-exclamation-triangle');
+  var color   = (online ? 'green' : 'red');
+  add_notification_message('online_messages', title, message, icon, color);
+}
+
+function update_player_messages(data) {
+  update_player_volume(data.volume);
+  var title   = (data.running ? '{{_('Playing')}}' : '{{_('Stopped')}}');
+  var message = (data.running ? '{{_('Playlist')}}: ' + data.name + ' - ' + moment(data.start * 1000).format('LT') + '-' + moment(data.stop * 1000).format('LT'): '{{_('Not playing')}}');
+  var icon    = (data.running ? 'fa-play-circle-o' : 'fa-play-circle-o');
+  var color   = (data.running ? 'green' : 'red');
+  add_notification_message('player_messages', title, message, icon, color);
+}
+
+function update_player_volume(volume) {
+  var menu = $('ul#player_messages');
+  menu.find('li.notification:not(:has(.player_volume))').remove();
+
+  if ($('div.row.player_volume').length == 0) {
+    var volume_control = $('<div>').addClass('row player_volume');
+    volume_control.append($('<div>').addClass('col-md-1').append($('<span>').addClass('fa fa-volume-down').on('click',function(){
+      $.post('/api/audio/player/volumedown');
+      return false;
+    })));
+    volume_control.append($('<div>').addClass('col-md-10  progress progress-striped active').append($('<div>').addClass('progress-bar progress-bar-success').attr('data-transitiongoal',volume).text(volume + '%')));
+    volume_control.append($('<div>').addClass('col-md-1').append($('<span>').addClass('fa fa-volume-up').on('click',function(){
+      $.post('/api/audio/player/volumeup');
+      return false;
+    })));
+    menu.prepend($('<li>').addClass('notification').append(volume_control));
+    $('ul#player_messages .progress .progress-bar').progressbar();
+  } else {
+    $('div.row.player_volume .progress-bar.progress-bar-success').css('width', volume + '%').text(volume + '%');
+  }
+}
+
+function update_online_indicator(online) {
+  var indicator = $('li#online_indicator');
+
+  indicator.find('span.online, span.offline').hide();
+  if (online) {
+    indicator.find('span.online').show();
+  } else {
+    indicator.find('span.offline').show();
+  }
+  update_online_messages(online);
+}
+
+function is_online() {
+  update_online_indicator(true);
+}
+
+function is_offline() {
+  update_online_indicator(false);
+}
+
+function update_player_indicator(data) {
+  var indicator = $('li#player_indicator');
+  indicator.removeClass('disabled');
+  indicator.find('span.running, span.stopped, span.disabled').hide();
+
+  if ('disabled' === data.running) {
+    indicator.addClass('disabled');
+    indicator.find('span.disabled').show();
+    add_notification_message('player_messages',
+                             '{{_('Disabled')}}',
+                             '{{_('Either add audio files and playlists. Or you have a pwm-dimmer switch configured.')}}',
+                             'fa-play-circle-o',
+                             'orange');
+    return;
+  }
+
+  if (data.running) {
+    indicator.find('span.running').show();
+  } else {
+    indicator.find('span.stopped').show();
+  }
+  update_player_messages(data);
+}
+
+function get_theme_color(color) {
+  if (color == 'orange') return '#f0ad4e';
+  return $('<div>').addClass(color).css('color');
+}
+
+var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
+    $BODY = $('body'),
+    $MENU_TOGGLE = $('#menu_toggle'),
+    $SIDEBAR_MENU = $('#sidebar-menu'),
+    $SIDEBAR_FOOTER = $('.sidebar-footer'),
+    $LEFT_COL = $('.left_col'),
+    $RIGHT_COL = $('.right_col'),
+    $NAV_MENU = $('.nav_menu'),
+    $FOOTER = $('footer');
+
+// TODO: This is some kind of easy fix, maybe we can improve this
+function setContentHeight() {
+  // reset height
+  $RIGHT_COL.css('min-height', $(window).height());
+
+  var bodyHeight = $BODY.outerHeight(),
+    footerHeight = $BODY.hasClass('footer_fixed') ? -10 : $FOOTER.height(),
+    leftColHeight = $LEFT_COL.eq(1).height() + $SIDEBAR_FOOTER.height(),
+    contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
+
+  // normalize content
+  contentHeight -= $NAV_MENU.height() + footerHeight;
+
+  $RIGHT_COL.css('min-height', contentHeight - 15);
+};
+
+// Sidebar
+function init_sidebar() {
+  $SIDEBAR_MENU.find('a').on('click', function(ev) {
+        var $li = $(this).parent();
+
+        if ($li.is('.active')) {
+            $li.removeClass('active active-sm');
+            $('ul:first', $li).slideUp(function() {
+                setContentHeight();
+            });
+        } else {
+            // prevent closing menu if we are on child menu
+            if (!$li.parent().is('.child_menu')) {
+                $SIDEBAR_MENU.find('li').removeClass('active active-sm');
+                $SIDEBAR_MENU.find('li ul').slideUp();
+            }else
+            {
+        if ( $BODY.is( ".nav-sm" ) )
+        {
+          $SIDEBAR_MENU.find( "li" ).removeClass( "active active-sm" );
+          $SIDEBAR_MENU.find( "li ul" ).slideUp();
+        }
+      }
+            $li.addClass('active');
+
+            $('ul:first', $li).slideDown(function() {
+                setContentHeight();
+            });
+        }
+    });
+
+  // toggle small or large menu
+  $MENU_TOGGLE.on('click', function() {
+    if ($BODY.hasClass('nav-md')) {
+      $SIDEBAR_MENU.find('li.active ul').hide();
+      $SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
+    } else {
+      $SIDEBAR_MENU.find('li.active-sm ul').show();
+      $SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
+    }
+
+    $BODY.toggleClass('nav-md nav-sm');
+
+    setContentHeight();
+
+    $('.dataTable').each ( function () { $(this).dataTable().fnDraw(); });
+  });
+
+	// check active menu
+	$SIDEBAR_MENU.find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('current-page');
+
+	$SIDEBAR_MENU.find('a').filter(function () {
+		return this.href == CURRENT_URL;
+	}).parent('li').addClass('current-page').parents('ul').slideDown(function() {
+		setContentHeight();
+	}).parent().addClass('active');
+
+	// recompute content when resizing
+	$(window).smartresize(function(){
+		setContentHeight();
+	});
+
+	setContentHeight();
+
+	// fixed sidebar
+	if ($.fn.mCustomScrollbar) {
+		$('.menu_fixed').mCustomScrollbar({
+			autoHideScrollbar: true,
+			theme: 'minimal',
+			mouseWheel:{ preventDefault: true }
+		});
+	}
+};
+// /Sidebar
+
+function reload_reload_theme() {
+  // Panel toolbox
+  $('.collapse-link').off('click').on('click', function() {
+    var $BOX_PANEL = $(this).closest('.x_panel'),
+        $ICON = $(this).find('i'),
+        $BOX_CONTENT = $BOX_PANEL.find('.x_content');
+
+    // fix for some div with hardcoded fix class
+    if ($BOX_PANEL.attr('style')) {
+        $BOX_CONTENT.slideToggle(200, function(){
+            $BOX_PANEL.removeAttr('style');
+            setContentHeight();
+        });
+    } else {
+        $BOX_CONTENT.slideToggle(200, function() {
+          setContentHeight();
+        });
+        $BOX_PANEL.css('height', 'auto');
+    }
+
+    $ICON.toggleClass('fa-chevron-up fa-chevron-down');
+  });
+
+  $('.close-link').off('click').click(function () {
+    var $BOX_PANEL = $(this).closest('.x_panel');
+
+    $BOX_PANEL.remove();
+    setContentHeight();
+  });
+  // Tooltip
+  $('[data-toggle="tooltip"]').tooltip({
+    container: 'body',
+    html: true
+  });
+  setContentHeight();
 }
 
 function add_sensor() {
@@ -1948,133 +2090,11 @@ function add_sensor_row(id,hardwaretype,address,type,name,alarm_min,alarm_max,li
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function add_webcam() {
-  var form = $('.new-webcam-form');
-  if (!check_form_data(form)) return false;
-
-  add_webcam_row('None',
-                form.find('input[name="webcam_[nr]_location"]').val(),
-                form.find('input[name="webcam_[nr]_name"]').val(),
-                form.find('select[name="webcam_[nr]_rotation"]').val());
-
-  $('.new-webcam-form').modal('hide');
-}
-
-function add_webcam_row(id,location,name,rotation,preview) {
-  var webcam_row = $($('.modal-body div.row.webcam').parent().clone().html().replace(/\[nr\]/g, $('form div.row.webcam').length));
-  webcam_row.find('.x_title').show().find('h2 small').text(name);
-  webcam_row.find('span.select2.select2-container').remove();
-
-  webcam_row.find('input, select').each(function(counter,item){
-    $(item).val(eval($(item).attr('name').replace(/webcam_[0-9]+_/g,'')));
-  });
-
-  if (preview != undefined) {
-    webcam_row.find('img').attr('src',preview);
-  }
-
-  webcam_row.insertBefore('div.row.submit').show();
-  reload_reload_theme();
-
-  webcam_row.find("select").select2({
-    placeholder: '{{_('Select an option')}}',
-    allowClear: false,
-    minimumResultsForSearch: Infinity
-  }).on('change',function(){
-    webcam_row.find('img').removeClass('webcam_90 webcam_180 webcam_270 webcam_H webcam_V').addClass('webcam_' + this.value);
-  });
-}
-
+/*
 function update_webcam_preview(name, url) {
   $('img#webcam_' + name + '_preview').attr('src', url);
 }
-
-function initWebcam(webcamid, name, maxzoom) {
-  if ($('div#webcam_' + webcamid).length === 1) {
-    $('div#webcam_' + webcamid).parents('.x_panel').find('h2 small').text(name);
-    if (!$('div#webcam_' + webcamid).hasClass('leaflet-container')) {
-      globals.webcams[webcamid] = null;
-      var webcam = new L.Map('webcam_' + webcamid, {
-        layers: [createWebcamLayer(webcamid, maxzoom)],
-        fullscreenControl: true,
-      }).setView([0, 0], 1);
-
-      L.Control.TakePhoto = L.Control.extend({
-        options: {
-            position: 'topleft',
-        },
-        onAdd: function (map) {
-          var container = L.DomUtil.create('div', 'leaflet-control-takephoto leaflet-bar leaflet-control');
-          var link = L.DomUtil.create('a', 'leaflet-control-takephoto-button leaflet-bar-part', container);
-          link.title = 'Save RAW photo';
-          link.target = '_blank';
-          link.href = '/webcam/' + webcamid + '_raw.jpg';
-          L.DomUtil.create('i', 'fa fa-camera', link);
-         return container;
-        }
-      });
-      var takePhotoControl = new L.Control.TakePhoto();
-      webcam.addControl(takePhotoControl);
-
-      webcam.addControl(L.Control.loading({separate: true}));
-      updateWebcam(webcam);
-    }
-  }
-}
-
-function updateWebcam(webcam) {
-  if ($('div#' + webcam._container.id).length === 1) {
-    webcam.eachLayer(function(layer) {
-      layer.redraw();
-    });
-    clearTimeout(globals.webcams[webcam._container.id]);
-    globals.webcams[webcam._container.id] = setTimeout(function() { updateWebcam(webcam);},30 * 1000);
-  }
-}
-
-function createWebcamLayer(webcamid, maxzoom) {
-  return L.tileLayer('/webcam/{id}_tile_{z}_{x}_{y}.jpg?_{time}', {
-    time: function() {
-      return (new Date()).valueOf();
-    },
-    id: webcamid,
-    noWrap: true,
-    continuousWorld: false,
-    maxNativeZoom: maxzoom,
-    maxZoom: maxzoom + 1
-  });
-}
-
-
+*/
 
 function load_player_status() {
   $.getJSON('/api/audio/playing', function(player_data) {
@@ -2149,10 +2169,6 @@ function add_audio_playlist_row(id,name,start,stop,volume,files,repeat,shuffle) 
     };
   });
 }
-
-
-
-
 
 function init_wysiwyg() {
   function init_ToolbarBootstrapBindings() {

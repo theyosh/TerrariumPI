@@ -47,21 +47,21 @@
             </div>
           </div>
         </form>
-        <div class="modal fade new-webcam-form" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal fade add-form" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                   <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">{{_('Add new webcam')}}</h4>
+                <h4 class="modal-title">{{_('Add new webcam')}}</h4>
               </div>
               <div class="modal-body">
                 <div class="row webcam">
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
-                      <div class="x_title" style="display: none">
-                        <h2><span class="webcam_[nr]_icon"></span> {{_('Webcam')}} <small>{{_('new')}}</small></h2>
+                      <div class="x_title">
+                        <h2><span aria-hidden="true" class="glyphicon glyphicon-facetime-video"></span>{{_('Webcam')}} <span class="title">{{_('new')}}</span></h2>
                         <ul class="nav navbar-right panel_toolbox">
                           <li>
                             <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -83,13 +83,14 @@
                           <input class="form-control" name="webcam_[nr]_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-12 form-group">
-                          <label for="webcam_[nr]_name">{{_('Name')}}</label>
-                          <input class="form-control" name="webcam_[nr]_name" placeholder="{{_('Name')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('webcam_field_name')}}">
+                          <label for="webcam_[nr]_name">{{_('Name')}} <span class="required">*</span></label>
+                          <input class="form-control" name="webcam_[nr]_name" placeholder="{{_('Name')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('webcam_field_name')}}">
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-12 form-group">
                           <label for="webcam_[nr]_rotation">{{_('Picture rotation')}}</label>
                           <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('webcam_field_rotation')}}">
                             <select class="form-control" name="webcam_[nr]_rotation" tabindex="-1" placeholder="{{_('Select an option')}}">
+                              <option value="">{{_('Select an option')}}</option>
                               <option value="0">0 {{_('degrees')}}</option>
                               <option value="90">90 {{_('degrees')}}</option>
                               <option value="180">180 {{_('degrees')}}</option>
@@ -106,27 +107,26 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{_('Close')}}</button>
-                <button type="button" class="btn btn-primary" onclick="add_webcam()" >{{_('Add')}}</button>
+                <button type="button" class="btn btn-primary">{{_('Add')}}</button>
               </div>
             </div>
           </div>
         </div>
         <script type="text/javascript">
           $(document).ready(function() {
-            $('.page-title').append('<div class="title_right"><h3><button type="button" class="btn btn-primary alignright" data-toggle="modal" data-target=".new-webcam-form"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h3> </div>');
-            $("select").select2({
+            // Create add button
+            init_form_settings('webcam');
+
+            $('select').select2({
               placeholder: '{{_('Select an option')}}',
               allowClear: false,
               minimumResultsForSearch: Infinity
             });
-            $.get($('form').attr('action'),function(data){
-              $.each(data.webcams, function(index,webcam) {
-                // Clone empty webcam row....
-                add_webcam_row(webcam.id,
-                               webcam.location,
-                               webcam.name,
-                               webcam.rotation,
-                               webcam.preview);
+
+            $.get($('form').attr('action'),function(json_data){
+              $.each(json_data.webcams, function(index,webcam_data) {
+                add_webcam_setting_row(webcam_data);
+                update_webcam(webcam_data);
               });
               reload_reload_theme();
             });

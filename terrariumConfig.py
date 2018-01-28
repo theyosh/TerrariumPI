@@ -120,7 +120,7 @@ class terrariumConfig:
 
     return True
 
-  def __update_config(self,section,data):
+  def __update_config(self,section,data,exclude = []):
     '''Update terrariumPI config with new values
 
     Keyword arguments:
@@ -133,6 +133,9 @@ class terrariumConfig:
     keys = data.keys()
     keys.sort()
     for setting in keys:
+      if setting in exclude:
+        continue
+
       if type(data[setting]) is list:
         data[setting] = ','.join(data[setting])
 
@@ -164,6 +167,15 @@ class terrariumConfig:
       config[config_part[0]] = config_part[1]
 
     return config
+
+  def __get_all_config(self,part):
+    data = []
+    for section in self.__config.sections():
+      if section[:len(part)] == part:
+        data.append(self.__get_config(section))
+
+    return data
+
   # End private functions
 
   def get_system(self):
@@ -279,8 +291,10 @@ class terrariumConfig:
 
   # Weather config functions
   def save_weather(self,data):
-    if 'type' in data:
-      del(data['type'])
+    for clearfield in ['type']:
+      if clearfield in data:
+        del(data[clearfield])
+
     return self.__update_config('weather',data)
 
   def get_weather(self):
@@ -301,16 +315,10 @@ class terrariumConfig:
     return int(self.get_system()['owfs_port'])
 
   def save_sensor(self,data):
-    # Upgrade step
-    if 'min' in data:
-      data['limit_min'] = data['min']
-      del(data['min'])
+    for clearfield in ['current']:
+      if clearfield in data:
+        del(data[clearfield])
 
-    if 'max' in data:
-      data['limit_max'] = data['max']
-      del(data['max'])
-
-    del(data['current'])
     return self.__update_config('sensor' + str(data['id']),data)
 
   def save_sensors(self,data):
@@ -348,32 +356,11 @@ class terrariumConfig:
 
   # Switches config functions
   def save_power_switch(self,data):
-    if 'state' in data:
-      del(data['state'])
-
-    if 'current_power_wattage' in data:
-      del(data['current_power_wattage'])
-
-    if 'current_water_flow' in data:
-      del(data['current_water_flow'])
-
+    clearfields = ['state','current_power_wattage','current_water_flow']
     if data['hardwaretype'] != 'pwm-dimmer':
-      if 'dimmer_duration' in data:
-        del(data['dimmer_duration'])
+      clearfields += ['dimmer_duration','dimmer_off_duration','dimmer_off_percentage','dimmer_on_duration','dimmer_on_percentage']
 
-      if 'dimmer_off_duration' in data:
-        del(data['dimmer_off_duration'])
-
-      if 'dimmer_off_percentage' in data:
-        del(data['dimmer_off_percentage'])
-
-      if 'dimmer_on_duration' in data:
-        del(data['dimmer_on_duration'])
-
-      if 'dimmer_on_percentage' in data:
-        del(data['dimmer_on_percentage'])
-
-    return self.__update_config('switch' + str(data['id']),data)
+    return self.__update_config('switch' + data['id'],data,clearfields)
 
   def save_power_switches(self,data):
     update_ok = True
@@ -389,21 +376,12 @@ class terrariumConfig:
     return update_ok
 
   def get_power_switches(self):
-    data = []
-    for section in self.__config.sections():
-      if section[:6] == 'switch':
-        switch_data = self.__get_config(section)
-        data.append(switch_data)
-
-    return data
+    return self.__get_all_config('switch')
   # End switches config functions
 
   # Door config functions
   def save_door(self,data):
-    if 'state' in data:
-      del(data['state'])
-
-    return self.__update_config('door' + str(data['id']),data)
+    return self.__update_config('door' + data['id'],data,['state'])
 
   def save_doors(self,data):
     update_ok = True
@@ -419,30 +397,18 @@ class terrariumConfig:
     return update_ok
 
   def get_doors(self):
-    data = []
-    for section in self.__config.sections():
-      if section[:4] == 'door':
-        door_data = self.__get_config(section)
-        data.append(door_data)
-
-    return data
+    return self.__get_all_config('door')
   # End door config functions
 
 
   # Webcam config functions
   def save_webcam(self,data):
-    del(data['state'])
-    del(data['image'])
-    del(data['max_zoom'])
-    del(data['last_update'])
-    del(data['resolution'])
-    del(data['preview'])
-    return self.__update_config('webcam' + str(data['id']),data)
+    return self.__update_config('webcam' + data['id'],data,['state','image','max_zoom','last_update','resolution','preview'])
 
   def save_webcams(self,data):
     update_ok = True
-    for webcam_id in self.get_webcams():
-      self.__config.remove_section('webcam' + webcam_id)
+    for webcam in self.get_webcams():
+      self.__config.remove_section('webcam' + webcam['id'])
 
     for webcam_id in data:
       update_ok = update_ok and self.save_webcam(data[webcam_id].get_data())
@@ -453,21 +419,12 @@ class terrariumConfig:
     return update_ok
 
   def get_webcams(self):
-    data = {}
-    for section in self.__config.sections():
-      if section[:6] == 'webcam':
-        sensor_data = self.__get_config(section)
-        data[section[6:]] = sensor_data
-
-    return data
+    return self.__get_all_config('webcam')
   # End webcam config functions
 
   # Audio playlist config functions
   def save_audio_playlist(self,data):
-    if 'running' in data:
-      del(data['running'])
-
-    return self.__update_config('playlist' + str(data['id']),data)
+    return self.__update_config('playlist' + data['id'],data,['running'])
 
   def save_audio_playlists(self,data):
     update_ok = True

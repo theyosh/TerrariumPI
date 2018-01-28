@@ -1,10 +1,9 @@
 % include('inc/page_header.tpl')
-        <div class="row">
-          % for item in range(0,amount_of_webcams):
+        <div class="row webcam">
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2><span class="title">{{_('Webcam')}}</span> <small>...</small></h2>
+                <h2><span aria-hidden="true" class="glyphicon glyphicon-facetime-video"></span>{{_('Webcam')}} <span class="title"></span></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -24,13 +23,42 @@
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
-                <div class="webcam"></div>
+                <div class="webcam_player"></div>
               </div>
             </div>
           </div>
-          % end
         </div>
         <script type="text/javascript">
+          $(document).ready(function() {
+            source_row = $('div.row.webcam').html();
+
+            // Do not remove it, but clean it
+            $('div.row.webcam').html('');
+
+
+
+
+            $.get('/api/webcams',function(json_data) {
+
+
+
+              $.each(json_data.webcams,function(index,webcam_data){
+                initWebcam(webcam_data);
+
+
+
+                //add_power_switch_status_row(switch_data);
+                //update_power_switch(switch_data);
+
+
+
+                //load_history_graph('powerswitch_' + switch_data.id,'switch','/api/history/switches/' + switch_data.id);
+              });
+              reload_reload_theme();
+            });
+          });
+          /*
+
           $(document).ready(function() {
             $.get('/api/webcams',function(data) {
               globals.webcams = [];
@@ -43,5 +71,7 @@
               });
             });
           });
+          */
+
         </script>
 % include('inc/page_footer.tpl')

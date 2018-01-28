@@ -180,7 +180,7 @@ class terrariumEngine():
                                                                                       time.time()-starttime))
 
   def __load_doors(self,data = None):
-    # Load Switches, with ID as index
+    # Load Doors, with ID as index
     starttime = time.time()
     reloading = data is not None
 
@@ -219,24 +219,45 @@ class terrariumEngine():
                                                                               len(self.doors),
                                                                               time.time()-starttime))
 
-  def __load_webcams(self, reloading = False):
+  def __load_webcams(self, data = None):
     # Load Webcams, with ID as index
     starttime = time.time()
+    reloading = data is not None
+
     logger.info('%s terrariumPI webcams' % ('Reloading' if reloading else 'Loading',))
-    webcams_config = self.config.get_webcams()
-    self.webcams = {}
-    for webcam_id in webcams_config:
-      webcam = terrariumWebcam(
-        webcams_config[webcam_id]['id'],
-        webcams_config[webcam_id]['location'],
-        webcams_config[webcam_id]['name'],
-        webcams_config[webcam_id]['rotation']
-      )
-      self.webcams[webcam.get_id()] = webcam
+
+    webcam_config = (self.config.get_webcams() if not reloading else data)
+    if not reloading:
+      self.webcams = {}
+
+    seen_webcams = []
+    for webcamdata in webcam_config:
+      if webcamdata['id'] is None or webcamdata['id'] == 'None' or webcamdata['id'] not in self.webcams:
+        # New switch (add)
+        webcam = terrariumWebcam(None,
+                                 webcamdata['location'],
+                                 webcamdata['name'])
+        self.webcams[webcam.get_id()] = webcam
+      else:
+        # Existing switch
+        webcam = self.webcams[webcamdata['id']]
+        # Should not be able to change setings
+        #door.set_hardware_type(doordata['hardwaretype'])
+        webcam.set_location(webcamdata['location'])
+        webcam.set_name(webcamdata['name'])
+
+      webcam.set_rotation(webcamdata['rotation'])
+
+      seen_webcams.append(webcam.get_id())
+
+    if reloading:
+      for webcam_id in set(self.webcams) - set(seen_webcams):
+        # clean up old deleted switches
+        del(self.webcams[webcam_id])
 
     logger.info('Done %s terrariumPI webcams. Found %d webcams in %.3f seconds' % ('reloading' if reloading else 'loading',
-                                                                                    len(self.webcams),
-                                                                                    time.time()-starttime))
+                                                                              len(self.webcams),
+                                                                              time.time()-starttime))
 
   def __get_current_power_usage_water_flow(self, socket = False):
     data = {'power' : {'current' : self.pi_power_wattage , 'max' : self.pi_power_wattage},
@@ -545,38 +566,16 @@ class terrariumEngine():
         data.append(self.webcams[webcamid].get_data())
 
     if socket:
-      self.__send_message({'type':'webcam_data','data':data})
+      self.__send_message({'type':'webcams','data':data})
     else:
       return {'webcams' : data}
-
-  def get_amount_of_webcams(self):
-    return len(self.webcams)
 
   def get_webcams_config(self):
     return self.get_webcams()
 
   def set_webcams_config(self, data):
-    new_webcams = {}
-    for webcamdata in data:
-      if webcamdata['id'] is None or webcamdata['id'] == 'None' or webcamdata['id'] not in self.webcams:
-        # New webcam (add)
-        webcam = terrariumWebcam(None,webcamdata['location'],webcamdata['name'])
-      else:
-        # Existing webcam
-        webcam = self.webcams[webcamdata['id']]
-
-      webcam.set_location(webcamdata['location'])
-      webcam.set_name(webcamdata['name'])
-      webcam.set_rotation(webcamdata['rotation'])
-
-      new_webcams[webcam.get_id()] = webcam
-
-    self.webcams = new_webcams
-    if self.config.save_webcams(self.webcams):
-      self.__load_webcams(True)
-      return True
-
-    return False
+    self.__load_webcams(data)
+    return self.config.save_webcams(self.webcams)
   # End webcams part
 
   # Start audio files part

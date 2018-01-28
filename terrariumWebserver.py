@@ -129,9 +129,6 @@ class terrariumWebserver():
       variables['person_name'] = self.__terrariumEngine.get_profile_name()
       variables['person_image'] = self.__terrariumEngine.get_profile_image()
 
-    elif 'webcam' == template or 'webcam_settings' == template:
-      variables['amount_of_webcams'] = self.__terrariumEngine.get_amount_of_webcams()
-
     elif 'sensor_temperature' == template:
       variables['amount_of_sensors'] = self.__terrariumEngine.get_amount_of_sensors('temperature')
 
