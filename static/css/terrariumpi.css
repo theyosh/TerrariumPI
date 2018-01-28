@@ -80,11 +80,12 @@ form#profile.edit label{
 .dropdown-backdrop {
   display: none !important;
 }
-
 /* End general overrule */
 
+
+
+
 div.row.sensor,
-div.row.door,
 div.row.webcam{
   display: none;
 }
@@ -181,6 +182,8 @@ div.row.environment_cooler.disabled {
   margin-left: -10px;
 }
 
+
+
 /* Weather */
 #weather_credits {
   margin-top: -40px;
@@ -191,66 +194,65 @@ div.row.environment_cooler.disabled {
   display: none;
 }
 
+
+
+
+
 /* Power switches */
 .power_switch {
   text-align: center;
   font-size: 1.5em;
   display: inline;
 }
-
 .power_switch span {
   cursor: pointer;
 }
-
 .power_switch.dimmer {
   display: block;
   position: relative;
   margin-bottom: -20px;
 }
-
-.power_switch.big,
-.fa.fa-lock.big {
+.power_switch.big {
   font-size: 12em;
   display: block;
   padding-top: 0.1em;
   line-height: 1em;
 }
-
 .power_switch span.glyphicon-time,
-.power_switch.dimmer div span.glyphicon-time{
+.power_switch.dimmer div span.glyphicon-time {
   position: absolute;
   background-color: white;
   font-size: 0.4em;
   top: 61%;
   left: 70%;
 }
-
 .power_switch.dimmer div span.glyphicon-time {
   font-size: 3.3em;
   top: 55%;
   left: 60%;
 }
-
 .power_switch span.glyphicon-time::before,
 .power_switch.dimmer div span.glyphicon-time::before {
   margin-left: -5px;
 }
+/* End power switches */
 
-.x_title .power_switch {
-  float: left;
-  margin: 0.15em 10px 0px 0px;
-}
-.x_title .power_switch span.green {
-  color: #1ABB9C;
-}
-.x_title .power_switch span.blue {
-  color: #3498DB;
-}
-div.row.door div.sidebar-widget i.fa {
-  display:block !important;
+
+
+/* Doors */
+/* Door status */
+div.door_status {
   text-align: center;
-  font-size: 1350% !important;
 }
+
+div.door_status i {
+  font-size: 13.5em;
+}
+/* End door status */
+/* End Doors */
+
+
+
 
 /* Webcam */
 

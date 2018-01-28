@@ -62,10 +62,10 @@
             $('div.row.switch').remove();
 
             $.get('/api/switches',function(json_data) {
-              $.each(json_data.switches,function(index,powerswitch_data){
-                add_power_switch_status_row(powerswitch_data);
-                update_power_switch(powerswitch_data);
-                load_history_graph('powerswitch_' + powerswitch_data.id,'switch','/api/history/switches/' + powerswitch_data.id);
+              $.each(json_data.switches,function(index,switch_data){
+                add_power_switch_status_row(switch_data);
+                update_power_switch(switch_data);
+                load_history_graph('powerswitch_' + switch_data.id,'switch','/api/history/switches/' + switch_data.id);
               });
               reload_reload_theme();
             });

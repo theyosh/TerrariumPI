@@ -132,9 +132,6 @@ class terrariumWebserver():
     elif 'webcam' == template or 'webcam_settings' == template:
       variables['amount_of_webcams'] = self.__terrariumEngine.get_amount_of_webcams()
 
-    elif 'door_status' == template:
-      variables['amount_of_doors'] = self.__terrariumEngine.get_amount_of_doors()
-
     elif 'sensor_temperature' == template:
       variables['amount_of_sensors'] = self.__terrariumEngine.get_amount_of_sensors('temperature')
 
@@ -242,16 +239,15 @@ class terrariumWebserver():
 
     if 'switches' == action:
       result = self.__terrariumEngine.get_switches(parameters)
-
-    elif 'profile' == action:
-      result = self.__terrariumEngine.get_profile()
-
     elif 'doors' == action:
       if len(parameters) > 0 and parameters[0] == 'status':
-         result = {'doors' : self.__terrariumEngine.door_status()}
+         result = {'status' : self.__terrariumEngine.get_doors_status()}
       else:
         result = self.__terrariumEngine.get_doors()
 
+
+    elif 'profile' == action:
+      result = self.__terrariumEngine.get_profile()
     elif 'sensors' == action:
       result = self.__terrariumEngine.get_sensors(parameters)
 
@@ -321,6 +317,7 @@ class terrariumWebserver():
         return csv
 
     elif 'config' == action:
+      # TODO: New way of data processing.... fix other config options
       result = self.__terrariumEngine.get_config(parameters[0] if len(parameters) == 1 else None)
 
     return result
@@ -384,7 +381,9 @@ class terrariumWebserver():
           thread.start_new_thread(listen_for_messages, (messages,socket))
           terrariumWebserver.app.terrarium.subscribe(messages)
 
-        terrariumWebserver.app.terrarium.door_status(socket=True)
+        terrariumWebserver.app.terrarium.get_doors_status(socket=True)
+
+
         terrariumWebserver.app.terrarium.get_uptime(socket=True)
         terrariumWebserver.app.terrarium.get_environment(socket=True)
         terrariumWebserver.app.terrarium.get_sensors(['average'],socket=True)

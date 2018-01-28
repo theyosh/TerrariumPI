@@ -224,10 +224,10 @@
             }).val(null).trigger('change');
 
             // Load existing switches
-            $.get($('form').attr('action'),function(data){
-              $.each(data.switches, function(index,power_switch) {
-                add_power_switch_setting_row(power_switch);
-                update_power_switch(power_switch);
+            $.get($('form').attr('action'),function(json_data){
+              $.each(json_data.switches, function(index,switch_data) {
+                add_power_switch_setting_row(switch_data);
+                update_power_switch(switch_data);
               });
               reload_reload_theme();
             });

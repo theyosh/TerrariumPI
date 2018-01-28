@@ -39,21 +39,22 @@
             </div>
           </div>
         </form>
-        <div class="modal fade new-door-form" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal fade add-form" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                   <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">{{_('Add new door sensor')}}</h4>
+                <h4 class="modal-title">{{_('Add new door sensor')}}</h4>
               </div>
               <div class="modal-body">
                 <div class="row door">
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
-                      <div class="x_title" style="display: none">
-                        <h2><span class="door_[nr]_icon"></span> {{_('Door sensor')}} <small>{{_('new')}}</small></h2>
+                      <div class="x_title">
+                        <h2><span aria-hidden="true" class="glyphicon glyphicon-lock"></span>{{_('Door')}} <span class="title"></span>
+                        <small class="total_usage"></small></h2>
                         <ul class="nav navbar-right panel_toolbox">
                           <li>
                             <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -91,26 +92,26 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{_('Close')}}</button>
-                <button type="button" class="btn btn-primary" onclick="add_door()" >{{_('Add')}}</button>
+                <button type="button" class="btn btn-primary">{{_('Add')}}</button>
               </div>
             </div>
           </div>
         </div>
         <script type="text/javascript">
           $(document).ready(function() {
-            $('.page-title').append('<div class="title_right"><h3><button type="button" class="btn btn-primary alignright" data-toggle="modal" data-target=".new-door-form"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h3> </div>');
+            // Create add button
+            init_form_settings('door');
             $("select").select2({
               placeholder: '{{_('Select an option')}}',
               allowClear: false,
               minimumResultsForSearch: Infinity
             });
-            $.get($('form').attr('action'),function(data){
-              $.each(data.doors, function(index,door) {
-                // Clone empty sensor row....
-                add_door_row(door.id,
-                             door.hardwaretype,
-                             door.address,
-                             door.name);
+
+            // Load existing switches
+            $.get($('form').attr('action'),function(json_data){
+              $.each(json_data.doors, function(index,door_data) {
+                add_door_setting_row(door_data);
+                update_door(door_data);
               });
               reload_reload_theme();
             });

@@ -45,7 +45,7 @@ class terrariumDoor():
       logger.exception('Error in door \'%s\' with message:' % (self.get_name(),))
       self.set_status(terrariumDoor.CLOSED)
       if self.callback is not None:
-        self.callback(self.get_data(), True)
+        self.callback(self.get_data())
 
   def __checker(self):
     logger.info('Start terrariumPI door checker for door \'%s\'' % self.get_name())
@@ -58,7 +58,7 @@ class terrariumDoor():
         logger.info('Door \'%s\' changed from %s to %s' % (self.get_name(),self.get_status(), current_status))
         self.set_status(current_status)
         if self.callback is not None:
-          self.callback(self.get_data(),True)
+          self.callback(self.get_data())
 
       sleep(terrariumDoor.CHECKER_TIMEOUT)
 
