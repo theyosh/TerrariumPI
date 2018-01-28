@@ -85,8 +85,7 @@ form#profile.edit label{
 
 
 
-div.row.sensor,
-div.row.webcam{
+div.row.sensor{
   display: none;
 }
 
@@ -198,6 +197,9 @@ div.row.environment_cooler.disabled {
 
 
 
+
+
+
 /* Power switches */
 .power_switch {
   text-align: center;
@@ -238,7 +240,6 @@ div.row.environment_cooler.disabled {
 /* End power switches */
 
 
-
 /* Doors */
 /* Door status */
 div.door_status {
@@ -251,12 +252,16 @@ div.door_status i {
 /* End door status */
 /* End Doors */
 
-
-
-
 /* Webcam */
 
 /* Webcam Preview */
+.webcam_preview {
+  overflow: hidden;
+  max-height: 250px;
+  width: 100%;
+}
+
+
 .webcam_preview img {
   width: 100%;
 }
@@ -308,6 +313,11 @@ div.door_status i {
   filter: FlipV;
   -ms-filter: FlipV;
 }
+
+/* Webcam End Preview */
+
+/* End Webcam */
+
 
 .dropzone {
   min-height: auto !important;
