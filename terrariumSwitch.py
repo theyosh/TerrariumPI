@@ -184,6 +184,9 @@ class terrariumSwitch():
       else:
         starttime -= datetime.timedelta(hours=24)
 
+    #starttime -= datetime.timedelta(hours=24)
+    #stoptime += datetime.timedelta(hours=24)
+
     while starttime <= stoptime:
       self.__timer_time_table.append((starttime,starttime + datetime.timedelta(minutes=self.get_timer_on_duration())))
       starttime += datetime.timedelta(minutes=self.get_timer_on_duration() + self.get_timer_off_duration())
@@ -265,7 +268,9 @@ class terrariumSwitch():
 
       if switch_state is None:
         self.__calculate_time_table()
-      elif switch_state is True:
+        switch_state = False
+
+      if switch_state is True:
         self.on()
       else:
         self.off()
