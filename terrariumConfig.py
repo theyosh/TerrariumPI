@@ -291,11 +291,7 @@ class terrariumConfig:
 
   # Weather config functions
   def save_weather(self,data):
-    for clearfield in ['type']:
-      if clearfield in data:
-        del(data[clearfield])
-
-    return self.__update_config('weather',data)
+    return self.__update_config('weather',data,['type'])
 
   def get_weather(self):
     return self.__get_config('weather')
@@ -315,11 +311,7 @@ class terrariumConfig:
     return int(self.get_system()['owfs_port'])
 
   def save_sensor(self,data):
-    for clearfield in ['current']:
-      if clearfield in data:
-        del(data[clearfield])
-
-    return self.__update_config('sensor' + str(data['id']),data)
+    return self.__update_config('sensor' + str(data['id']),data,['current'])
 
   def save_sensors(self,data):
     update_ok = True
