@@ -1739,10 +1739,25 @@ function initWebcam(webcamid, name, maxzoom) {
         layers: [createWebcamLayer(webcamid, maxzoom)],
         fullscreenControl: true,
       }).setView([0, 0], 1);
-      var loadingControl = L.Control.loading({
-        separate: true
+
+      L.Control.TakePhoto = L.Control.extend({
+        options: {
+            position: 'topleft',
+        },
+        onAdd: function (map) {
+          var container = L.DomUtil.create('div', 'leaflet-control-takephoto leaflet-bar leaflet-control');
+          var link = L.DomUtil.create('a', 'leaflet-control-takephoto-button leaflet-bar-part', container);
+          link.title = 'Save RAW photo';
+          link.target = '_blank';
+          link.href = '/webcam/' + webcamid + '_raw.jpg';
+          L.DomUtil.create('i', 'fa fa-camera', link);
+         return container;
+        }
       });
-      webcam.addControl(loadingControl);
+      var takePhotoControl = new L.Control.TakePhoto();
+      webcam.addControl(takePhotoControl);
+
+      webcam.addControl(L.Control.loading({separate: true}));
       updateWebcam(webcam);
     }
   }
