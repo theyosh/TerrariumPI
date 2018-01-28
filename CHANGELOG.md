@@ -6,6 +6,7 @@ Changelog
 ------------
 
 **New**
+- Add photo saving option to the webcam. [TheYOSH]
 - Added first part for timer functionality with power switches. This
   update brings only updates to the webinterface and configuration. The
   timer functionality is not yet implemented. [#72](https://github.com/theyosh/TerrariumPI/issues/72). [TheYOSH]
@@ -13,6 +14,7 @@ Changelog
 - Add extra information when TerrariumPI starts. [TheYOSH]
 
 **Fixes**
+- Fix saving new remote webcam. [TheYOSH]
 - Fix dimmer on bug. [TheYOSH]
 - Fix pulldown settings menu. [TheYOSH]
 - Fix UTF-8 characters in Weather urls. Close [#77](https://github.com/theyosh/TerrariumPI/issues/77). [TheYOSH]
@@ -21,6 +23,8 @@ Changelog
 - Fix file rights. [TheYOSH]
 
 **Updates**
+- Update Terrarium door code based on new switch code. [TheYOSH]
+- Update changelog. [TheYOSH]
 - Update CHANGELOG. [#72](https://github.com/theyosh/TerrariumPI/issues/72). [TheYOSH]
 - Update language files. [#72](https://github.com/theyosh/TerrariumPI/issues/72). [TheYOSH]
 - Update timer functionality. [#72](https://github.com/theyosh/TerrariumPI/issues/72). [TheYOSH]
@@ -37,6 +41,9 @@ Changelog
 - Update exception logging. [TheYOSH]
 
 **Other**
+- Cleanup weather html code. [TheYOSH]
+- Merge branch 'master' into feature/switch_timers. [TheYOSH]
+- Merge branch 'master' into feature/switch_timers. [TheYOSH]
 - Finetine dimmer css. [TheYOSH]
 - Fine tuning power switch css. [TheYOSH]
 - Remove not used variable. [TheYOSH]
