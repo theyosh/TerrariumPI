@@ -1,10 +1,10 @@
 % include('inc/page_header.tpl')
-        % for item in range(0,amount_of_doors):
         <div class="row door">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2><span class="title">{{_('Door status')}}</span> <small class="total_usage">...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
+                <h2><span aria-hidden="true" class="glyphicon glyphicon-lock"></span>{{_('Door')}} <span class="title"></span>
+                <small class="total_usage"></small></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -45,8 +45,8 @@
               </div>
               <div class="x_content">
                 <div class="col-md-3 col-sm-4 col-xs-12">
-                  <div class="sidebar-widget">
-                    <i class="fa fa-lock"></i>
+                  <div class="door_status">
+                    <i class="fa fa-lock" title="{{_('Door status')}}"></i>
                   </div>
                 </div>
                 <div class="col-md-9 col-sm-8 col-xs-12">
@@ -56,24 +56,18 @@
             </div>
           </div>
         </div>
-        % end
         <script type="text/javascript">
           $(document).ready(function() {
-            $.get('/api/doors',function(data) {
-              var rows = $('div.row.door');
-              $.each(data.doors, function(index,door) {
-                // Add an id to the row when first run
-                $(rows[index]).attr('id',door.id).show();
-                $('h2 span.title', rows[index]).text(door.name);
-                $('h2 small', rows[index]).text((door.state === 'closed'  ? '{{_('Closed')}}' : '{{_('Open')}}' ));
-                $('.sidebar-widget i.fa-lock',rows[index]).removeClass('red','green','closed','open')
-                                                  .addClass(door.state + ' ' + (door.state === 'closed' ? 'green':'red'))
-                                                  .attr({'title': (door.state === 'closed'  ? '{{_('Door is closed')}}' : '{{_('Door is open')}}' )});
+            source_row = $('div.row.door').html();
+            $('div.row.door').remove();
 
-
-                load_history_graph(door.id,'door','/api/history/doors/' + door.id);
+            $.get('/api/doors',function(json_data) {
+              $.each(json_data.doors,function(index,door_data){
+                add_door_status_row(door_data);
+                update_door(door_data);
+                load_history_graph('door_' + door_data.id,'door','/api/history/doors/' + door_data.id);
               });
-              setContentHeight();
+              reload_reload_theme();
             });
           });
         </script>

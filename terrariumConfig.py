@@ -407,8 +407,8 @@ class terrariumConfig:
 
   def save_doors(self,data):
     update_ok = True
-    for door_id in self.get_doors():
-      self.__config.remove_section('door' + door_id)
+    for door in self.get_doors():
+      self.__config.remove_section('door' + door['id'])
 
     for door_id in data:
       update_ok = update_ok and self.save_door(data[door_id].get_data())
@@ -419,11 +419,11 @@ class terrariumConfig:
     return update_ok
 
   def get_doors(self):
-    data = {}
+    data = []
     for section in self.__config.sections():
       if section[:4] == 'door':
         door_data = self.__get_config(section)
-        data[section[4:]] = door_data
+        data.append(door_data)
 
     return data
   # End door config functions

@@ -179,28 +179,45 @@ class terrariumEngine():
                                                                                       len(self.power_switches),
                                                                                       time.time()-starttime))
 
-  def __load_doors(self, reloading = False):
-    # Load Doors, with ID as index
+  def __load_doors(self,data = None):
+    # Load Switches, with ID as index
     starttime = time.time()
-    logger.info('%s terrariumPI doors' % ('Reloading' if reloading else 'Loading',))
-    doors_config = self.config.get_doors()
-    self.doors = {}
-    for door_id in doors_config:
-      door = terrariumDoor(
-        doors_config[door_id]['id'],
-        doors_config[door_id]['hardwaretype'],
-        doors_config[door_id]['address'],
-        doors_config[door_id]['name'],
-        self.toggle_door_status
-      )
-      self.doors[door.get_id()] = door
+    reloading = data is not None
 
-      if not reloading:
-        self.toggle_door_status(door.get_data())
+    logger.info('%s terrariumPI doors' % ('Reloading' if reloading else 'Loading',))
+
+    door_config = (self.config.get_doors() if not reloading else data)
+    if not reloading:
+      self.doors = {}
+
+    seen_doors = []
+    for doordata in door_config:
+      if doordata['id'] is None or doordata['id'] == 'None' or doordata['id'] not in self.doors:
+        # New switch (add)
+        door = terrariumDoor(None,
+                             doordata['hardwaretype'],
+                             doordata['address'],
+                             doordata['name'],
+                             callback=self.toggle_door_status)
+        self.doors[door.get_id()] = door
+      else:
+        # Existing switch
+        door = self.doors[doordata['id']]
+        # Should not be able to change setings
+        #door.set_hardware_type(doordata['hardwaretype'])
+        door.set_address(doordata['address'])
+        door.set_name(doordata['name'])
+
+      seen_doors.append(door.get_id())
+
+    if reloading:
+      for door_id in set(self.doors) - set(seen_doors):
+        # clean up old deleted switches
+        del(self.doors[door_id])
 
     logger.info('Done %s terrariumPI doors. Found %d doors in %.3f seconds' % ('reloading' if reloading else 'loading',
-                                                                                len(self.doors),
-                                                                                time.time()-starttime))
+                                                                              len(self.doors),
+                                                                              time.time()-starttime))
 
   def __load_webcams(self, reloading = False):
     # Load Webcams, with ID as index
@@ -320,9 +337,7 @@ class terrariumEngine():
   def __send_message(self,message):
     for queue in self.subscribed_queues:
       queue.put(message)
-
   # End private/internal functions
-
 
   # Weather part
   def set_weather_config(self,data):
@@ -447,12 +462,9 @@ class terrariumEngine():
         data.append(self.power_switches[switchid].get_data())
 
     if socket:
-      self.__send_message({'type':'power_switches','data':data})
+      self.__send_message({'type':'switches','data':data})
     else:
       return {'switches' : data}
-
-  def get_amount_of_switches(self):
-    return len(self.power_switches)
 
   def get_switches_config(self, socket = False):
     return self.get_switches()
@@ -468,9 +480,7 @@ class terrariumEngine():
 
     if self.environment is not None:
       self.get_environment(socket=True)
-
   # End switches part
-
 
   # Doors part
   def get_doors(self, parameters = [], socket = False):
@@ -487,70 +497,38 @@ class terrariumEngine():
         data.append(self.doors[doorid].get_data())
 
     if socket:
-      self.__send_message({'type':'door_data','data':data})
+      self.__send_message({'type':'doors','data':data})
     else:
       return {'doors' : data}
-
-  def get_amount_of_doors(self):
-    return len(self.doors)
 
   def get_doors_config(self):
     return self.get_doors()
 
   def set_doors_config(self, data):
-    new_doors = {}
-    for doordata in data:
-      if doordata['id'] is None or doordata['id'] == 'None' or doordata['id'] not in self.doors:
-        # New switch (add)
-        door = terrariumDoor(None,
-                             doordata['hardwaretype'],
-                             doordata['address'],
-                             doordata['name'])
-      else:
-        # Existing door
-        door = self.doors[doordata['id']]
-        # Should not be able to change setings
-        #power_switch.set_hardware_type(switchdata['hardwaretype'])
+    self.__load_doors(data)
+    return self.config.save_doors(self.doors)
 
-      door.set_address(doordata['address'])
-      door.set_name(doordata['name'])
-
-      new_doors[door.get_id()] = door
-
-    self.doors = new_doors
-    if self.config.save_doors(self.doors):
-      self.__load_doors(True)
-      return True
-
-    return False
-
-  def toggle_door_status(self, data, socket = False):
+  def toggle_door_status(self, data):
     self.collector.log_door_data(data)
-    if socket:
-      self.door_status(True)
+    self.get_doors_status(socket=True)
+    self.get_doors(socket=True)
 
-  def door_status(self, socket = False):
-    if len(self.doors) == 0:
-      data = 'disabled'
-    else:
-      door_closed = True
-      for doorid in self.doors:
-        door_closed = door_closed and self.doors[doorid].get_status() == terrariumDoor.CLOSED
-
-      data = terrariumDoor.CLOSED if door_closed else terrariumDoor.OPEN
+  def get_doors_status(self, socket = False):
+    data = 'disabled'
+    if len(self.doors) > 0:
+      data = 'closed' if all(self.doors[doorid].get_status() == terrariumDoor.CLOSED for doorid in self.doors) else 'open'
 
     if socket:
-      self.__send_message({'type':'door_indicator','data': data})
+      self.__send_message({'type':'door_status','data': data})
     else:
       return data
 
   def is_door_open(self):
-    return self.door_status() == terrariumDoor.OPEN
+    return 'open' == self.get_doors_status()
 
   def is_door_closed(self):
     return not self.is_door_open()
   # End doors part
-
 
   # Webcams part
   def get_webcams(self, parameters = [], socket = False):

@@ -14,10 +14,9 @@ var globals = {
   language: null,
   ajaxloader: 0
 };
-
-
+// Single variable that is used for loading the status and settings rows for: sensors, power switches, door indicators etc
 var source_row = null;
-
+// Translations for dataTable module
 var dataTableTranslations = {
   'en' : '//cdn.datatables.net/plug-ins/1.10.16/i18n/English.json',
   'nl' : '//cdn.datatables.net/plug-ins/1.10.16/i18n/Dutch.json',
@@ -61,150 +60,7 @@ var dataTableTranslations = {
 
 })(jQuery,'smartresize');
 
-function websocket_init(reconnect) {
-  websocket_connect();
-
-  globals.websocket.onopen = function(evt) {
-    websocket_message({
-      'type': 'client_init',
-      'reconnect': reconnect
-    });
-  };
-
-  globals.websocket.onmessage = function(evt) {
-    online_updater();
-    var data = JSON.parse(evt.data);
-    switch (data.type) {
-      case 'uptime':
-        update_dashboard_uptime(data.data);
-        break;
-      case 'power_usage_water_flow':
-        update_dashboard_power_usage(data.data.power);
-        update_dashboard_water_flow(data.data.water);
-        break;
-
-      case 'environment':
-        $.each(['heater', 'sprayer', 'light', 'cooler'], function(index, value) {
-          update_dashboard_environment(value, data.data[value]);
-        });
-        break;
-      case 'sensor_gauge':
-        $.each(data.data, function(index, sensor) {
-          sensor_gauge(sensor.id !== undefined ? sensor.id : index, sensor);
-        });
-        break;
-      case 'power_switches':
-        $.each(data.data, function(index, value) {
-          update_power_switch(value);
-        });
-        break;
-      case 'door_indicator':
-        update_door_indicator(data.data);
-        break;
-      case 'player_indicator':
-        update_player_indicator(data.data);
-        break;
-      case 'update_weather':
-        update_weather(data.data);
-        break;
-    }
-  };
-  globals.websocket.onclose = function(evt) {
-    is_offline();
-    clearInterval(globals.websocket_timer);
-    globals.websocket_timer = setInterval(function() {
-      websocket_init(true);
-    }, 10 * 1000);
-  };
-}
-
-function websocket_connect() {
-  try {
-    clearInterval(globals.websocket_timer);
-    globals.websocket = null;
-    globals.websocket = new WebSocket(globals.connection);
-  } catch (error) {
-    //console.log('websocket_connect', error);
-  }
-}
-
-function websocket_message(message) {
-  try {
-    globals.websocket.send(JSON.stringify(message));
-  } catch (error) {
-    //console.log('websocket_message', error, message);
-  }
-}
-
-function logout() {
-  $.ajax({
-      async: false,
-      url: 'logout',
-      type: 'GET',
-      username: 'logout'
-  }).done(function(response) {
-    if (response.ok) {
-      ok_notification_bubble(response.title,response.message);
-    } else {
-      error_notification_bubble(response.title,response.message);
-    }
-  });
-}
-
-function menu_click(url) {
-  // Find the menu item that should be loaded
-  var menu_item = $('a[href="' + url + '"]');
-  // Exists?
-  if (menu_item.length == 1) {
-    // Get the parent menu item
-    var parent_menu = menu_item.parent('li').parents('li');
-    // If the parent menu is active, we are al ready on the right parent menu
-    if (parent_menu.hasClass('active')) {
-      // Parent menu is the same, so clear all active submenu's
-      parent_menu.find('.child_menu li').removeClass('active');
-    } else {
-      // Open parent menu
-      parent_menu.find('a:first').click();
-    }
-    // Trigger the click on the sub menu item
-    menu_item.click();
-  }
-  // Make sure that the browser will not fire it's url loading event
-  return false;
-}
-
-function load_page(url) {
-  // If no url given, use the event trigger a href attribute
-  if (typeof url != 'string') {
-    url = this.href;
-  }
-  // Only process with some input
-  if (url !== '') {
-    // Load the data through AJAX
-    $.get(url, function(data) {
-      // Get the menu url so that jQuery can match
-      var menu_url = $('<a/>').attr('href',url)[0].pathname.replace(/^[^\/]/,'/').substr(1);
-      // Clear all submenu's that are not clicked
-      $('.child_menu a[href!="' + menu_url + '"]').parent().removeClass('active');
-      $('.child_menu a[href="' + menu_url + '"]').parent().addClass('active');
-      // Put the content on the page
-      $("#maincontent").html(data);
-
-      $("#maincontent a").each(function(index,item){
-        $(item).attr('title',$(item).text());
-      });
-      // Reload some theme settings per page
-      reload_reload_theme();
-      process_form();
-    });
-  }
-  // Make sure the browser will not fire it's url loading event
-  return false;
-}
-
 (function() {
-  'use strict';
-
   // Got this from MDN:
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString#Example:_Checking_for_support_for_locales_and_options_arguments
   function toLocaleStringSupportsLocales() {
@@ -474,6 +330,8 @@ function load_page(url) {
   }
 }());
 
+/* General functions */
+/* General functions - Numbers, currency, etc formatting  */
 function formatCurrency(amount,minfrac,maxfrac) {
   minfrac = minfrac || 2;
   maxfrac = maxfrac || 2;
@@ -503,6 +361,230 @@ function formatBytes(bytes,decimals) {
        sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
        i = Math.floor(Math.log(bytes) / Math.log(k));
    return formatNumber(parseFloat((bytes / Math.pow(k, i))),0,2) + ' ' + sizes[i];
+}
+
+function formatUptime(uptime) {
+  uptime = moment.duration(uptime * 1000);
+  var uptime_duration = '';
+  uptime_duration += uptime.days() + 'D';
+  uptime_duration += (uptime.hours() < 10 ? '0' : '') + uptime.hours() + 'H';
+  uptime_duration += (uptime.minutes() < 10 ? '0' : '') + uptime.minutes() + 'M';
+  uptime_duration += (uptime.seconds() < 10 ? '0' : '') + uptime.seconds() + 'S';
+  return uptime_duration;
+}
+
+function capitalizeFirstLetter(string) {
+    return string[0].toUpperCase() + string.slice(1);
+}
+/* General functions - End numbers, currency, etc formatting  */
+
+/* General functions - Websockets  */
+function websocket_init(reconnect) {
+  websocket_connect();
+
+  globals.websocket.onopen = function(evt) {
+    websocket_message({
+      'type': 'client_init',
+      'reconnect': reconnect
+    });
+  };
+
+  globals.websocket.onmessage = function(evt) {
+    online_updater();
+    var data = JSON.parse(evt.data);
+    switch (data.type) {
+      case 'uptime':
+        update_dashboard_uptime(data.data);
+        break;
+      case 'power_usage_water_flow':
+        update_dashboard_power_usage(data.data.power);
+        update_dashboard_water_flow(data.data.water);
+        break;
+
+      case 'environment':
+        $.each(['heater', 'sprayer', 'light', 'cooler'], function(index, value) {
+          update_dashboard_environment(value, data.data[value]);
+        });
+        break;
+      case 'sensor_gauge':
+        $.each(data.data, function(index, sensor) {
+          sensor_gauge(sensor.id !== undefined ? sensor.id : index, sensor);
+        });
+        break;
+      case 'switches':
+        $.each(data.data, function(index, switch_data) {
+          update_power_switch(switch_data);
+        });
+        break;
+      case 'door_status':
+        update_door_indicator(data.data);
+        break;
+      case 'doors':
+        $.each(data.data, function(index, door_data) {
+          update_door(door_data);
+        });
+        break;
+      case 'player_indicator':
+        update_player_indicator(data.data);
+        break;
+      case 'update_weather':
+        update_weather(data.data);
+        break;
+    }
+  };
+  globals.websocket.onclose = function(evt) {
+    is_offline();
+    clearInterval(globals.websocket_timer);
+    globals.websocket_timer = setInterval(function() {
+      websocket_init(true);
+    }, 10 * 1000);
+  };
+}
+
+function websocket_connect() {
+  try {
+    clearInterval(globals.websocket_timer);
+    globals.websocket = null;
+    globals.websocket = new WebSocket(globals.connection);
+  } catch (error) {
+    //console.log('websocket_connect', error);
+  }
+}
+
+function websocket_message(message) {
+  try {
+    globals.websocket.send(JSON.stringify(message));
+  } catch (error) {
+    //console.log('websocket_message', error, message);
+  }
+}
+/* General functions - End websockets  */
+
+/* General functions - Notification bubbles */
+function notification_bubble(type,title,message) {
+  new PNotify({
+    type: type,
+    title: title,
+    text: message,
+    nonblock: {
+      nonblock: true
+    },
+    delay: 3000,
+    mouse_reset: false,
+    styling: 'bootstrap3',
+    hide: true,
+  });
+}
+
+function error_notification_bubble(title,message) {
+  notification_bubble('error',title,message);
+}
+
+function ok_notification_bubble(title,message) {
+  notification_bubble('success',title,message);
+}
+
+function info_notification_bubble(title,message) {
+  notification_bubble('info',title,message);
+}
+/* General functions - End notification bubbles */
+
+
+function add_notification_message(type, title, message, icon, color, date) {
+  var notification_date = date || new Date().getTime();
+  var menu = $('ul#' + type);
+  if (menu.find('li:first a span.message').text() == message) {
+    // Skip duplicate messages
+    return;
+  }
+
+  var notification = $('<a>');
+  if (type != 'player_messages') {
+    notification.on('click', function() {
+      close_notification_message(this);
+    });
+  }
+
+  notification.append($('<span>').addClass('image').append($('<img>').attr({
+    'src': $('div.profile_pic img').attr('src'),
+    'alt': '{{_('Profile image')}}'
+  })));
+  notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('data-timestamp',notification_date).text('...')));
+  notification.append($('<span>').addClass('message').text(message).append($('<span>').addClass('pull-right').html('<i class="fa ' + icon + ' ' + color + '"></i>')));
+
+  // Remove no messages line
+  menu.find('li.no_message').hide();
+  // Add new message on top
+  menu.prepend($('<li>').addClass('notification').append(notification));
+
+  // Only allow 6 messages, more will be removed
+  menu.find('li.notification:gt(5)').remove();
+  // Update the notifcation time
+  notification_timestamps();
+}
+
+function close_notification_message(notification) {
+  notification = $(notification).parent();
+  var menu = notification.parent('ul');
+  notification.remove();
+  if (menu.find('li.notification').length === 0) {
+    menu.find('li.no_message').show();
+  } else {
+    menu.find('li.no_message').hide();
+  }
+}
+
+function notification_timestamps() {
+  var now = (new Date()).getTime();
+  $('span.notification_timestamp').each(function() {
+    var timestamp = $(this).attr('data-timestamp') * 1;
+    var duration = moment.duration((now - timestamp) * -1);
+    $(this).text(duration.humanize(true));
+  });
+}
+
+
+
+
+/* General functions - Form functions */
+function init_form_settings(pType) {
+  $('.page-title').append('<div class="title_right"><h3><button type="button" class="btn btn-primary alignright" data-toggle="modal" data-target=".add-form"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h3> </div>');
+
+  var submit_button = $('.modal-footer button.btn.btn-primary');
+  switch (pType) {
+    case 'switch':
+      // Load initial HTML data
+      source_row = $('.modal-body div.row.switch').html();
+      // Bind to add button
+      submit_button.on('click',function(){
+        add_power_switch();
+      });
+      break;
+
+    case 'door':
+      // Load initial HTML data
+      source_row = $('.modal-body div.row.door').html();
+      // Bind to add button
+      submit_button.on('click',function(){
+        add_door();
+      });
+      break;
+  }
+}
+
+function check_form_data(form) {
+  var fieldsok = true;
+  form.find('input[required="required"][readonly!="readonly"][readonly!="hidden"]').each(function(counter,item) {
+    var field = $(this);
+    var empty = field.val() === '';
+    if (empty) {
+      field.addClass('missing-required');
+    } else {
+      field.removeClass('missing-required');
+    }
+    fieldsok = fieldsok && !empty;
+  });
+  return fieldsok;
 }
 
 function process_form() {
@@ -615,6 +697,415 @@ function prepare_form_data(form) {
   }
   return formdata;
 }
+/* General functions - End form functions */
+
+
+/* General functions - System functions */
+function online_updater() {
+  clearTimeout(globals.online_timer);
+  is_online();
+
+  globals.online_timer = setTimeout(function() {
+    is_offline();
+  }, 120 * 1000);
+}
+
+function version_check() {
+  $.getJSON('https://api.github.com/repos/theyosh/TerrariumPI/releases/latest' ,function(data){
+
+    var latest_version = data.tag_name.replace(/\./g,'') * 1;
+    var current_version = globals.current_version.replace(/\./g,'') * 1;
+    if (latest_version < 100) latest_version *= 10;
+    if (current_version < 100) current_version *= 10;
+
+    if (current_version < latest_version) {
+      var message = 'New version available! <a href="' + data.html_url + '" target="_blank" title="Download TerrariumPI version ' + data.tag_name + '">Click here to download</a>!';
+        info_notification_bubble('New release: ' + data.tag_name, message);
+    }
+    setTimeout(function() {
+      version_check();
+    },   24 * 60 * 60 * 1000 ); // Check once a day
+  });
+}
+
+function logout() {
+  $.ajax({
+      async: false,
+      url: 'logout',
+      type: 'GET',
+      username: 'logout'
+  }).done(function(response) {
+    if (response.ok) {
+      ok_notification_bubble(response.title,response.message);
+    } else {
+      error_notification_bubble(response.title,response.message);
+    }
+  });
+}
+/* General functions - End system functions */
+
+/* End general functions */
+
+
+/* Power switches code */
+function toggle_power_switch(id) {
+  $.post('/api/switch/toggle/' + id,function(data){
+  });
+}
+
+function add_power_switch_status_row(data) {
+  if (source_row === null) {
+    return false;
+  }
+  // Create new row
+  var power_switch_row = $('<div>').addClass('row switch').html(source_row);
+
+  // Set ID
+  power_switch_row.attr('id','powerswitch_' + data.id);
+
+  // Change the toggle icon with a slider knob
+  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype) {
+    power_switch_row.find('div.x_content div.power_switch')
+      .removeClass('big')
+      .addClass('dimmer')
+      .html('<input type="text" class="knob" data-thickness=".3" data-width="160" data-angleOffset=20 data-angleArc=320 data-fgColor="' + (data.state > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB') + '" value="' + data.state + '">');
+
+    power_switch_row.find('.knob').knob({
+      release: function(value) {
+        $.post('/api/switch/state/' + data.id + '/' + value,function(dummy){
+        });
+      },
+      format: function(value) {
+        return value + '%';
+      },
+      change: function(value) {
+        this.o.fgColor = (value > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB');
+        $(this.i).css('color',this.o.fgColor);
+      }
+    });
+  } else {
+    // Set toggle
+    power_switch_row.find('div.power_switch span.glyphicon').on('click',function(){
+      toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
+    });
+  }
+  if (data.timer_enabled) {
+      power_switch_row.find('div.power_switch span.glyphicon').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'));
+      power_switch_row.find('div.power_switch.dimmer div').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'));
+  }
+  $('div#maincontent').append(power_switch_row);
+}
+
+function update_power_switch(power_switch) {
+  // Load the switch row to update the data
+  var switch_row = $('div.row.switch#' + 'powerswitch_' + power_switch.id);
+
+  // Update state icon
+  switch_row.find('span.glyphicon').removeClass('blue green').addClass((power_switch.state ? 'green' : 'blue'));
+
+  // Set the name and status
+  var current_status_data = '';
+  if ('pwm-dimmer' === power_switch.hardwaretype || 'remote-dimmer' === power_switch.hardwaretype) {
+    current_status_data = formatNumber(power_switch.current_power_wattage) + 'W / ';
+  }
+  current_status_data += formatNumber(power_switch.power_wattage) + 'W';
+  if (power_switch.water_flow > 0) {
+    current_status_data += ' - ' + formatNumber(power_switch.water_flow) + 'L/m';
+  }
+  switch_row.find('h2 span.title').text(power_switch.name);
+  switch_row.find('h2 small.current_usage').text(current_status_data);
+  //switch_row.find('.knob').val(power_switch.state).trigger('change');
+
+  // Set the values only when empty
+  switch_row.find('input:not(.knob), select').each(function(counter,item) {
+    var name = item.name.replace(/switch_[0-9]+_/g,'');
+    try {
+      if ($(item).val() === '') {
+        // Cast explicit to string to fix dropdown options
+        var value = power_switch[name] + '';
+        if (name == 'timer_start' || name == 'timer_stop') {
+          // Format time to local format
+          value = moment(value, "HH:mm").format('LT');
+        }
+        $(item).val(value).trigger('change');
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  // Open or hide the dimmer values (will not trigger on the select field)
+  switch_row.find('.row.dimmer').toggle('pwm-dimmer' === power_switch.hardwaretype || 'remote-dimmer' === power_switch.hardwaretype);
+}
+
+function add_power_switch_setting_row(power_switch) {
+  if (source_row === null) {
+    return false;
+  }
+  // Create new row
+  var power_switch_row = $('<div>').addClass('row switch').html(source_row.replace(/\[nr\]/g, $('form div.row.switch').length));
+  if (power_switch.id !== undefined) {
+    // Set ID
+    power_switch_row.attr('id','powerswitch_' + power_switch.id);
+
+    // Set toggle (disabled in 'edit' modus)
+    /*
+    power_switch_row.find('div.power_switch span.glyphicon').on('click',function(){
+      toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
+    });
+    */
+  }
+  // Re-initialize the select pulldowns
+  power_switch_row.find('span.select2.select2-container').remove();
+  power_switch_row.find('select').select2({
+    placeholder: '{{_('Select an option')}}',
+    allowClear: false,
+    minimumResultsForSearch: Infinity
+  }).on('change',function() {
+      if (this.name.indexOf('_timer_enabled') >= 0) {
+        $(this).parents('.x_content').find('.row.timer').toggle('true' === this.value);
+      }
+  });
+  // Add on the bottom before the submit row
+  power_switch_row.insertBefore('div.row.submit');
+}
+
+function add_power_switch() {
+  var form = $('.add-form');
+  if (!check_form_data(form)) return false;
+
+  // Create power switch data object and fill it with form data
+  var data = {};
+  form.find('input, select').each(function(counter,item) {
+    data[item.name.replace('switch_[nr]_','')] = item.value;
+  });
+  data['id'] = Math.floor(Date.now() / 1000);
+
+  // Add new row
+  add_power_switch_setting_row(data);
+  // Update new row with new values
+  update_power_switch(data);
+
+  // Reset form
+  form.find('input').val('');
+  form.find('select').val(null).trigger('change');
+  // Hide form
+  form.modal('hide');
+
+  reload_reload_theme();
+}
+/* End power switches code code */
+
+
+/* Doors code */
+function update_door_indicator(status) {
+  var indicator = $('li#door_indicator');
+
+  indicator.removeClass('disabled');
+  indicator.find('span.open, span.closed, span.disabled').hide();
+
+  if ('disabled' === status) {
+    indicator.addClass('disabled');
+    indicator.find('span.disabled').show();
+    add_notification_message('door_messages',
+                             '{{_('Disabled')}}',
+                             '{{_('There are zero door sensors configured.')}}',
+                             'fa-play-circle-o',
+                             'orange');
+    return;
+  }
+
+  var door_open = 'open' === status;
+  if (door_open) {
+    indicator.find('span.open').show();
+  } else {
+    indicator.find('span.closed').show();
+  }
+
+  update_door_messages('open' === status);
+}
+
+function update_door_messages(open,date) {
+  var title   = (open ? '{{_('Open')}}' : '{{_('Closed')}}');
+  var message = (open ? '{{_('Door is open')}}' : '{{_('Door is closed')}}');
+  var icon    = (open ? 'fa-unlock' : 'fa-lock');
+  var color   = (open ? 'red' : 'green');
+  add_notification_message('door_messages', title, message, icon, color, date);
+}
+
+function load_door_history() {
+  $.getJSON('/api/history/doors', function(door_data) {
+    var door_status = {};
+    $.each(door_data.doors, function(counter, statedata) {
+      for (var i = 0; i < statedata.state.length; i++) {
+        if (i == 0 || statedata.state[i][1] != statedata.state[i-1][1]) {
+          door_status[statedata.state[i][0]] = statedata.state[i][1];
+        }
+      }
+    });
+    // Sort door data events on time. Needed if you have more than one door
+    $.each(Object.keys(door_status).sort(), function(counter,change_time) {
+      update_door_messages((door_status[change_time] === 1), change_time);
+    })
+  });
+}
+
+function add_door_status_row(data) {
+  if (source_row === null) {
+    return false;
+  }
+  // Create new row
+  var door_row = $('<div>').addClass('row door').html(source_row);
+
+  // Set ID
+  door_row.attr('id','door_' + data.id);
+
+  // Add to page
+  $('div#maincontent').append(door_row);
+}
+
+function update_door(data) {
+  // Load the switch row to update the data
+  var switch_row = $('div.row.door#' + 'door_' + data.id);
+
+  // Update state icon
+  switch_row.find('div.door_status i').removeClass('fa-lock fa-unlock green red')
+                                      .addClass((data.state === 'closed' ? 'fa-lock green' : 'fa-unlock red'))
+                                      .attr('title',(data.state === 'closed' ? '{{_('Door is closed')}}' : '{{_('Door is open')}}'));
+
+  // Set the name and status
+  switch_row.find('h2 span.title').text(data.name);
+
+  // Set the values only when empty
+  switch_row.find('input:not(.knob), select').each(function(counter,item) {
+    var name = item.name.replace(/door_[0-9]+_/g,'');
+    try {
+      if ($(item).val() === '') {
+        // Cast explicit to string to fix dropdown options
+        var value = data[name] + '';
+        if (name == 'timer_start' || name == 'timer_stop') {
+          // Format time to local format
+          value = moment(value, "HH:mm").format('LT');
+        }
+        $(item).val(value).trigger('change');
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  });
+}
+
+function add_door_setting_row(data) {
+  if (source_row === null) {
+    return false;
+  }
+  // Create new row
+  var content_row = $('<div>').addClass('row door').html(source_row.replace(/\[nr\]/g, $('form div.row.door').length));
+  if (data.id !== undefined) {
+    // Set ID
+    content_row.attr('id','door_' + data.id);
+  }
+  // Re-initialize the select pulldowns
+  content_row.find('span.select2.select2-container').remove();
+  content_row.find('select').select2({
+    placeholder: '{{_('Select an option')}}',
+    allowClear: false,
+    minimumResultsForSearch: Infinity
+  });
+  // Add on the bottom before the submit row
+  content_row.insertBefore('div.row.submit');
+}
+
+function add_door() {
+  var form = $('.add-form');
+  if (!check_form_data(form)) return false;
+
+  // Create power switch data object and fill it with form data
+  var data = {};
+  form.find('input, select').each(function(counter,item) {
+    data[item.name.replace('door_[nr]_','')] = item.value;
+  });
+  data['id'] = Math.floor(Date.now() / 1000);
+
+  // Add new row
+  add_door_setting_row(data);
+  // Update new row with new values
+  update_door(data);
+
+  // Reset form
+  form.find('input').val('');
+  form.find('select').val(null).trigger('change');
+  // Hide form
+  form.modal('hide');
+
+  reload_reload_theme();
+}
+/* End Doors code */
+
+
+
+
+
+
+
+
+
+
+
+function menu_click(url) {
+  // Find the menu item that should be loaded
+  var menu_item = $('a[href="' + url + '"]');
+  // Exists?
+  if (menu_item.length == 1) {
+    // Get the parent menu item
+    var parent_menu = menu_item.parent('li').parents('li');
+    // If the parent menu is active, we are al ready on the right parent menu
+    if (parent_menu.hasClass('active')) {
+      // Parent menu is the same, so clear all active submenu's
+      parent_menu.find('.child_menu li').removeClass('active');
+    } else {
+      // Open parent menu
+      parent_menu.find('a:first').click();
+    }
+    // Trigger the click on the sub menu item
+    menu_item.click();
+  }
+  // Make sure that the browser will not fire it's url loading event
+  return false;
+}
+
+function load_page(url) {
+  // If no url given, use the event trigger a href attribute
+  if (typeof url != 'string') {
+    url = this.href;
+  }
+  // Only process with some input
+  if (url !== '') {
+    // Load the data through AJAX
+    $.get(url, function(data) {
+      // Get the menu url so that jQuery can match
+      var menu_url = $('<a/>').attr('href',url)[0].pathname.replace(/^[^\/]/,'/').substr(1);
+      // Clear all submenu's that are not clicked
+      $('.child_menu a[href!="' + menu_url + '"]').parent().removeClass('active');
+      $('.child_menu a[href="' + menu_url + '"]').parent().addClass('active');
+      // Put the content on the page
+      $("#maincontent").html(data);
+
+      $("#maincontent a").each(function(index,item){
+        $(item).attr('title',$(item).text());
+      });
+      // Reload some theme settings per page
+      reload_reload_theme();
+      process_form();
+    });
+  }
+  // Make sure the browser will not fire it's url loading event
+  return false;
+}
+
+
+
+
 
 function update_dashboard_tile(tile, text) {
   var div = $('div.tile_count #' + tile + ' div.count');
@@ -631,7 +1122,7 @@ function update_dashboard_tile(tile, text) {
 }
 
 function update_dashboard_uptime(data) {
-  update_dashboard_tile('uptime', format_uptime(data.uptime));
+  update_dashboard_tile('uptime', formatUptime(data.uptime));
   $('#system_time span').text(moment(data.timestamp * 1000).format('LLLL'));
   $('#system_time i').removeClass('fa-clock-o fa-sun-o fa-moon-o').addClass((data.day ? 'fa-sun-o' : 'fa-moon-o'));
   $("#uptime .progress-bar-success").css('height', ((data.load[0] / data.cores) * 100) + '%');
@@ -656,6 +1147,10 @@ function update_dashboard_water_flow(data) {
   $("#total_water .count_bottom span.duration").text(moment.duration(data.duration * 1000).humanize());
   update_dashboard_tile('total_water', formatNumber(data.total));
 }
+
+
+
+
 
 function update_weather(data) {
   var icons = new Skycons({
@@ -755,32 +1250,13 @@ function update_dashboard_environment(name, value) {
   setContentHeight();
 }
 
-function format_uptime(uptime) {
-  uptime = moment.duration(uptime * 1000);
-  var uptime_duration = '';
-  uptime_duration += uptime.days() + 'D';
-  uptime_duration += (uptime.hours() < 10 ? '0' : '') + uptime.hours() + 'H';
-  uptime_duration += (uptime.minutes() < 10 ? '0' : '') + uptime.minutes() + 'M';
-  uptime_duration += (uptime.seconds() < 10 ? '0' : '') + uptime.seconds() + 'S';
-  return uptime_duration;
-}
 
-function online_updater() {
-  clearTimeout(globals.online_timer);
-  is_online();
 
-  globals.online_timer = setTimeout(function() {
-    is_offline();
-  }, 120 * 1000);
-}
 
-function update_door_messages(open,date) {
-  var title   = (open ? '{{_('Open')}}' : '{{_('Closed')}}');
-  var message = (open ? '{{_('Door is open')}}' : '{{_('Door is closed')}}');
-  var icon    = (open ? 'fa-unlock' : 'fa-lock');
-  var color   = (open ? 'red' : 'green');
-  add_notification_message('door_messages', title, message, icon, color, date);
-}
+
+
+
+
 
 function update_online_messages(online) {
   var title   = (online ? '{{_('Online')}}' : '{{_('Offline')}}');
@@ -821,58 +1297,7 @@ function update_player_volume(volume) {
   }
 }
 
-function add_notification_message(type, title, message, icon, color, date) {
-  var notification_date = date || new Date().getTime();
-  var menu = $('ul#' + type);
-  if (menu.find('li:first a span.message').text() == message) {
-    // Skip duplicate messages
-    return;
-  }
 
-  var notification = $('<a>');
-  if (type != 'player_messages') {
-    notification.on('click', function() {
-      close_notification_message(this);
-    });
-  }
-
-  notification.append($('<span>').addClass('image').append($('<img>').attr({
-    'src': $('div.profile_pic img').attr('src'),
-    'alt': '{{_('Profile image')}}'
-  })));
-  notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('data-timestamp',notification_date).text('...')));
-  notification.append($('<span>').addClass('message').text(message).append($('<span>').addClass('pull-right').html('<i class="fa ' + icon + ' ' + color + '"></i>')));
-
-  // Remove no messages line
-  menu.find('li.no_message').hide();
-  // Add new message on top
-  menu.prepend($('<li>').addClass('notification').append(notification));
-
-  // Only allow 6 messages, more will be removed
-  menu.find('li.notification:gt(5)').remove();
-  // Update the notifcation time
-  notification_timestamps();
-}
-
-function close_notification_message(notification) {
-  notification = $(notification).parent();
-  var menu = notification.parent('ul');
-  notification.remove();
-  if (menu.find('li.notification').length === 0) {
-    menu.find('li.no_message').show();
-  } else {
-    menu.find('li.no_message').hide();
-  }
-}
-
-function notification_timestamps() {
-  var now = (new Date()).getTime();
-  $('span.notification_timestamp').each(function() {
-    var timestamp = $(this).attr('data-timestamp') * 1;
-    var duration = moment.duration((now - timestamp) * -1);
-    $(this).text(duration.humanize(true));
-  });
-}
 
 function update_online_indicator(online) {
   var indicator = $('li#online_indicator');
@@ -894,39 +1319,10 @@ function is_offline() {
   update_online_indicator(false);
 }
 
-function update_door_indicator(status) {
-  var indicator = $('li#door_indicator');
-
-  indicator.removeClass('disabled');
-  indicator.find('span.open, span.closed, span.disabled').hide();
-
-  if ('disabled' === status) {
-    indicator.addClass('disabled');
-    indicator.find('span.disabled').show();
-    add_notification_message('door_messages',
-                             '{{_('Disabled')}}',
-                             '{{_('There are zero door sensors configured.')}}',
-                             'fa-play-circle-o',
-                             'orange');
-    return;
-  }
 
 
-  if ('open' === status) {
-    indicator.find('span.open').show();
-  } else if ('closed' === status) {
-    indicator.find('span.closed').show();
-  }
-  update_door_messages('open' === status);
-}
 
-function door_open(open) {
-  update_door_indicator('open');
-}
 
-function door_closed() {
-  update_door_indicator('closed');
-}
 
 
 function update_player_indicator(data) {
@@ -1456,7 +1852,7 @@ function history_graph(name, data, type) {
     } else if (type == 'door') {
       var usage = '';
       if (data.totals !== undefined) {
-        usage = '{{_('Total open for')}}: ' + moment.duration(data.totals.duration).humanize();
+        usage = '{{_('Total open for')}}: ' + moment.duration(data.totals.duration * 1000).humanize();
       }
       $('#' + name + ' .total_usage').text(usage);
     }
@@ -1469,18 +1865,7 @@ function history_graph(name, data, type) {
   }
 }
 
-function check_form_data(form) {
-  var fieldsok = true;
-  form.find('input[required="required"][readonly!="readonly"][readonly!="hidden"]').each(function(counter,item) {
-    var field = $(this);
-    var empty = field.val() == '';
-    if (empty) {
-      field.addClass('missing-required');
-    }
-    fieldsok = fieldsok && !empty;
-  });
-  return fieldsok;
-}
+
 
 function parse_remote_data(type,url) {
   $.get(url,function(data) {
@@ -1566,237 +1951,31 @@ function add_sensor_row(id,hardwaretype,address,type,name,alarm_min,alarm_max,li
 
 
 
-/* General functions */
-
-/* General functions - Notification bubbles */
-function notification_bubble(type,title,message) {
-  new PNotify({
-    type: type,
-    title: title,
-    text: message,
-    nonblock: {
-      nonblock: true
-    },
-    delay: 3000,
-    mouse_reset: false,
-    styling: 'bootstrap3',
-    hide: true,
-  });
-}
-
-function error_notification_bubble(title,message) {
-  notification_bubble('error',title,message);
-}
-
-function ok_notification_bubble(title,message) {
-  notification_bubble('success',title,message);
-}
-
-function info_notification_bubble(title,message) {
-  notification_bubble('info',title,message);
-}
-/* General functions - End notification bubbles */
-
-function init_form_settings(pType) {
-  $('.page-title').append('<div class="title_right"><h3><button type="button" class="btn btn-primary alignright" data-toggle="modal" data-target=".add-form"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h3> </div>');
-
-  var submit_button = $('.modal-footer button.btn.btn-primary');
-  switch (pType) {
-    case 'switch':
-      // Load initial HTML data
-      source_row = $('.modal-body div.row.switch').html();
-      // Bind to add button
-      submit_button.on('click',function(){
-        add_power_switch();
-      });
-      break;
-  }
-}
-
-/* End general functions */
 
 
 
-/* Power switches code */
-function toggle_power_switch(id) {
-  $.post('/api/switch/toggle/' + id,function(data){
-  });
-}
-
-function add_power_switch_status_row(data) {
-  if (source_row == null) {
-    return false;
-  }
-  // Create new row
-  var power_switch_row = $('<div>').addClass('row switch').html(source_row);
-
-  // Set ID
-  power_switch_row.attr('id','powerswitch_' + data.id);
-
-  // Change the toggle icon with a slider knob
-  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype) {
-    power_switch_row.find('div.x_content div.power_switch')
-      .removeClass('big')
-      .addClass('dimmer')
-      .html('<input type="text" class="knob" data-thickness=".3" data-width="160" data-angleOffset=20 data-angleArc=320 data-fgColor="' + (data.state > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB') + '" value="' + data.state + '">');
-
-    power_switch_row.find('.knob').knob({
-      release: function(value) {
-        $.post('/api/switch/state/' + data.id + '/' + value,function(dummy){
-        });
-      },
-      format: function(value) {
-        return value + '%';
-      },
-      change: function(value) {
-        this.o.fgColor = (value > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB');
-        $(this.i).css('color',this.o.fgColor);
-      }
-    });
-  } else {
-    // Set toggle
-    power_switch_row.find('div.power_switch span.glyphicon').on('click',function(){
-      toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
-    });
-  }
-  if (data.timer_enabled) {
-      power_switch_row.find('div.power_switch span.glyphicon').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'));
-      power_switch_row.find('div.power_switch.dimmer div').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'));
-  }
-  $('div#maincontent').append(power_switch_row);
-}
-
-function add_power_switch_setting_row(power_switch) {
-  if (source_row == null) {
-    return false;
-  }
-  // Create new row
-  var power_switch_row = $('<div>').addClass('row switch').html(source_row.replace(/\[nr\]/g, $('form div.row.switch').length));
-  if (power_switch.id !== undefined) {
-    // Set ID
-    power_switch_row.attr('id','powerswitch_' + power_switch.id);
-
-    // Set toggle (disabled in 'edit' modus)
-    /*
-    power_switch_row.find('div.power_switch span.glyphicon').on('click',function(){
-      toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
-    });
-    */
-  }
-  // Re-initialize the select pulldowns
-  power_switch_row.find('span.select2.select2-container').remove();
-  power_switch_row.find('select').select2({
-    placeholder: '{{_('Select an option')}}',
-    allowClear: false,
-    minimumResultsForSearch: Infinity
-  }).on('change',function() {
-      if (this.name.indexOf('_timer_enabled') >= 0) {
-        $(this).parents('.x_content').find('.row.timer').toggle('true' === this.value);
-      }
-  });
-  // Add on the bottom before the submit row
-  power_switch_row.insertBefore('div.row.submit');
-}
-
-function update_power_switch(power_switch) {
-  // Load the switch row to update the data
-  var switch_row = $('div.row.switch#' + 'powerswitch_' + power_switch.id);
-
-  // Update state icon
-  switch_row.find('span.glyphicon').removeClass('blue green').addClass((power_switch.state ? 'green' : 'blue'));
-
-  // Set the name and status
-  var current_status_data = '';
-  if ('pwm-dimmer' === power_switch.hardwaretype || 'remote-dimmer' === power_switch.hardwaretype) {
-    current_status_data = formatNumber(power_switch.current_power_wattage) + 'W / '
-  }
-  current_status_data += formatNumber(power_switch.power_wattage) + 'W';
-  if (power_switch.water_flow > 0) {
-    current_status_data += ' - ' + formatNumber(power_switch.water_flow) + 'L/m';
-  }
-  switch_row.find('h2 span.title').text(power_switch.name);
-  switch_row.find('h2 small.current_usage').text(current_status_data);
-  //switch_row.find('.knob').val(power_switch.state).trigger('change');
-
-  // Set the values only when empty
-  switch_row.find('input:not(.knob), select').each(function(counter,item) {
-    var name = item.name.replace(/switch_[0-9]+_/g,'');
-    try {
-      if ($(item).val() === '') {
-        // Cast explicit to string to fix dropdown options
-        var value = power_switch[name] + '';
-        if (name == 'timer_start' || name == 'timer_stop') {
-          // Format time to local format
-          value = moment(value, "HH:mm").format('LT');
-        }
-        $(item).val(value).trigger('change');
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  });
-
-  // Open or hide the dimmer values (will not trigger on the select field)
-  switch_row.find('.row.dimmer').toggle('pwm-dimmer' === power_switch.hardwaretype || 'remote-dimmer' === power_switch.hardwaretype);
-}
-
-function add_power_switch() {
-  var form = $('.add-form');
-  if (!check_form_data(form)) return false;
-
-  // Create power switch data object and fill it with form data
-  var data = {};
-  form.find('input, select').each(function(counter,item) {
-    data[item.name.replace('switch_[nr]_','')] = item.value;
-  });
-  data['id'] = Math.floor(Date.now() / 1000);
-
-  // Add new row
-  add_power_switch_setting_row(data);
-  // Update new row with new values
-  update_power_switch(data);
-
-  // Reset form
-  form.find('input').removeClass('missing-required').val('');
-  form.find('select').removeClass('missing-required').val(null).trigger('change');
-  // Hide form
-  form.modal('hide');
-
-  reload_reload_theme();
-}
-/* End power switches code code */
 
 
-function add_door() {
-  var form = $('.new-door-form');
-  if (!check_form_data(form)) return false;
 
-  add_door_row('None',
-                form.find('select[name="door_[nr]_hardwaretype"]').val(),
-                form.find('input[name="door_[nr]_address"]').val(),
-                form.find('input[name="door_[nr]_name"]').val());
 
-  $('.new-door-form').modal('hide');
-}
 
-function add_door_row(id,hardwaretype,address,name) {
-  var door_row = $($('.modal-body div.row.door').parent().clone().html().replace(/\[nr\]/g, $('form div.row.door').length));
-  door_row.find('.x_title').show().find('h2 small').text(name);
-  door_row.find('span.select2.select2-container').remove();
 
-  door_row.find('input, select').each(function(counter,item){
-    $(item).val(eval($(item).attr('name').replace(/door_[0-9]+_/g,'')));
-  });
 
-  door_row.insertBefore('div.row.submit').show();
-  reload_reload_theme();
 
-  door_row.find("select").select2({
-    placeholder: '{{_('Select an option')}}',
-    allowClear: false,
-    minimumResultsForSearch: Infinity
-  });
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function add_webcam() {
   var form = $('.new-webcam-form');
@@ -1895,22 +2074,7 @@ function createWebcamLayer(webcamid, maxzoom) {
   });
 }
 
-function load_door_history() {
-  $.getJSON('/api/history/doors', function(door_data) {
-    var door_status = {};
-    $.each(door_data.doors, function(counter, statedata) {
-      for (var i = 0; i < statedata.state.length; i++) {
-        if (i == 0 || statedata.state[i][1] != statedata.state[i-1][1]) {
-          door_status[statedata.state[i][0]] = statedata.state[i][1];
-        }
-      }
-    });
-    // Sort door data events on time. Needed if you have more than one door
-    $.each(Object.keys(door_status).sort(), function(counter,change_time) {
-      update_door_messages((door_status[change_time] === 1), change_time);
-    })
-  });
-}
+
 
 function load_player_status() {
   $.getJSON('/api/audio/playing', function(player_data) {
@@ -1986,27 +2150,9 @@ function add_audio_playlist_row(id,name,start,stop,volume,files,repeat,shuffle) 
   });
 }
 
-function capitalizeFirstLetter(string) {
-    return string[0].toUpperCase() + string.slice(1);
-}
 
-function version_check() {
-  $.getJSON('https://api.github.com/repos/theyosh/TerrariumPI/releases/latest' ,function(data){
 
-    var latest_version = data.tag_name.replace(/\./g,'') * 1;
-    var current_version = globals.current_version.replace(/\./g,'') * 1;
-    if (latest_version < 100) latest_version *= 10;
-    if (current_version < 100) current_version *= 10;
 
-    if (current_version < latest_version) {
-      var message = 'New version available! <a href="' + data.html_url + '" target="_blank" title="Download TerrariumPI version ' + data.tag_name + '">Click here to download</a>!';
-        info_notification_bubble('New release: ' + data.tag_name, message);
-    }
-    setTimeout(function() {
-      version_check();
-    },   24 * 60 * 60 * 1000 ); // Check once a day
-  });
-}
 
 function init_wysiwyg() {
   function init_ToolbarBootstrapBindings() {
