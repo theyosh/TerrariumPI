@@ -1790,25 +1790,25 @@ function update_dashboard_environment(name, value) {
   systempart.find('h4 small span').text(mode_translations[value.mode]);
 
   if (value.on !== undefined) {
-    systempart.find('.on').text(moment(value.on * 1000).format('LT'));
+    systempart.find('.on').text(moment(value.on * 1000).format('LT')).parent().toggle(value.mode != 'sensor');
   }
   if (value.off !== undefined) {
-    systempart.find('.off').text(moment(value.off * 1000).format('LT'));
-    systempart.find('.duration').text(moment.duration(Math.abs(value.off - value.on) * 1000).humanize());
+    systempart.find('.off').text(moment(value.off * 1000).format('LT')).parent().toggle(value.mode != 'sensor');
+    systempart.find('.duration').text(moment.duration(Math.abs(value.off - value.on) * 1000).humanize()).parent().toggle(value.mode != 'sensor');
   }
   if (value.current !== undefined) {
-    systempart.find('.current').text(formatNumber(value.current,3) + ' ' + indicator);
+    systempart.find('.current').text(formatNumber(value.current,3) + ' ' + indicator).parent().toggle(value.mode === 'sensor');
   }
   if (value.alarm_min !== undefined) {
-    systempart.find('.alarm_min').text(formatNumber(value.alarm_min,3) + ' ' + indicator);
+    systempart.find('.alarm_min').text(formatNumber(value.alarm_min,3) + ' ' + indicator).parent().toggle(value.mode === 'sensor');
   }
   if (value.alarm_max !== undefined) {
-    systempart.find('.alarm_max').text(formatNumber(value.alarm_max,3) + ' ' + indicator);
+    systempart.find('.alarm_max').text(formatNumber(value.alarm_max,3) + ' ' + indicator).parent().toggle(value.mode === 'sensor');
   }
   if (value.alarm !== undefined) {
     systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
   }
-  systempart.find('.state i').removeClass('red green').addClass(value.state === 'on' ? 'green' : 'red').attr('title', value.state === 'on' ? '{{_('On')}}' : '{{_('Off')}}');
+  systempart.find('.state i').removeClass('red green').addClass(value.state === 'on' ? 'green' : 'red').attr('title', value.state === 'on' ? '{{_('On')}}' : '{{_('Off')}}').parent().parent().show();
   systempart.find('table.tile_info').show();
   setContentHeight();
 }

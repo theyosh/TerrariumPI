@@ -55,7 +55,7 @@
               </div>
             </div>
           </div><!-- /top tiles -->
-          <div class="row">
+          <div class="row environment">
             <div class="col-md-3 col-sm-3 col-xs-12 pull-right">
               <div class="x_panel">
                 <div class="x_title">
@@ -158,6 +158,24 @@
                         </td>
                         <td class="alarm_max">...</td>
                       </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('On')}}</p>
+                        </td>
+                        <td class="on">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Off')}}</p>
+                        </td>
+                        <td class="off">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Duration')}}</p>
+                        </td>
+                        <td class="duration">...</td>
+                      </tr>
                     </table>
                   </div>
                   <div class="row environment_cooler disabled">
@@ -186,6 +204,24 @@
                           <p>{{_('Alarm min')}}</p>
                         </td>
                         <td class="alarm_min">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('On')}}</p>
+                        </td>
+                        <td class="on">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Off')}}</p>
+                        </td>
+                        <td class="off">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Duration')}}</p>
+                        </td>
+                        <td class="duration">...</td>
                       </tr>
                     </table>
                   </div>

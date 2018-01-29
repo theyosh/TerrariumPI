@@ -114,12 +114,16 @@ div.modal div.row.webcam{
   position: absolute;
 }
 
-#dashboard table.tile_info {
+#dashboard div.row.environment table.tile_info {
   display: none;
 }
 
-#dashboard table.tile_info td:first-child {
+#dashboard div.row.environment table.tile_info td:first-child {
   width: 70%;
+}
+
+div#dashboard div.row.environment table.tile_info tr {
+  display: none;
 }
 
 /* Dashboard Progress bars */
@@ -127,6 +131,11 @@ div.modal div.row.webcam{
   height: 3.2em;
   margin: 1.5em .2em 0 0;
 }
+
+
+
+
+
 
 /* Dashboard indicators */
 
