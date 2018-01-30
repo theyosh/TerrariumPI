@@ -311,7 +311,7 @@ class terrariumConfig:
     return int(self.get_system()['owfs_port'])
 
   def save_sensor(self,data):
-    return self.__update_config('sensor' + str(data['id']),data,['current'])
+    return self.__update_config('sensor' + data['id'],data,['current'])
 
   def save_sensors(self,data):
     update_ok = True
@@ -327,22 +327,7 @@ class terrariumConfig:
     return update_ok
 
   def get_sensors(self):
-    data = {}
-    for section in self.__config.sections():
-      if section[:6] == 'sensor':
-        sensor_data = self.__get_config(section)
-        data[section[6:]] = sensor_data
-
-    # Upgrade step
-    if 'min' in data:
-      data['limit_min'] = data['min']
-      del(data['min'])
-
-    if 'max' in data:
-      data['limit_max'] = data['max']
-      del(data['max'])
-
-    return data
+    return self.__get_all_config('sensor')
   # End sensor config functions
 
 

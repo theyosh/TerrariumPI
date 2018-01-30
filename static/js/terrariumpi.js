@@ -433,7 +433,7 @@ function websocket_init(reconnect) {
     }
   };
   globals.websocket.onclose = function(evt) {
-    is_offline();
+    update_online_indicator(false);
     clearInterval(globals.websocket_timer);
     globals.websocket_timer = setInterval(function() {
       websocket_init(true);
@@ -489,6 +489,7 @@ function info_notification_bubble(title,message) {
 }
 /* General functions - End notification bubbles */
 
+/* General functions - Notification messages */
 
 function add_notification_message(type, title, message, icon, color, date) {
   var notification_date = date || new Date().getTime();
@@ -506,8 +507,7 @@ function add_notification_message(type, title, message, icon, color, date) {
   }
 
   notification.append($('<span>').addClass('image').append($('<img>').attr({
-    'src': $('div.profile_pic img').attr('src'),
-    'alt': '{{_('Profile image')}}'
+    'src': $('div.profile_pic img').attr('src')
   })));
   notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('data-timestamp',notification_date).text('...')));
   notification.append($('<span>').addClass('message').text(message).append($('<span>').addClass('pull-right').html('<i class="fa ' + icon + ' ' + color + '"></i>')));
@@ -525,13 +525,9 @@ function add_notification_message(type, title, message, icon, color, date) {
 
 function close_notification_message(notification) {
   notification = $(notification).parent();
-  var menu = notification.parent('ul');
+  var list = notification.parent('ul');
   notification.remove();
-  if (menu.find('li.notification').length === 0) {
-    menu.find('li.no_message').show();
-  } else {
-    menu.find('li.no_message').hide();
-  }
+  menu.find('li.no_message').toggle(list.find('li.notification').length === 0);
 }
 
 function notification_timestamps() {
@@ -543,8 +539,26 @@ function notification_timestamps() {
   });
 }
 
+function update_online_messages(online) {
+  var title   = (online ? '{{_('Online')}}' : '{{_('Offline')}}');
+  var message = (online ? '{{_('Connection restored')}}' : '{{_('Connection lost')}}');
+  var icon    = (online ? 'fa-check-circle-o' : 'fa-exclamation-triangle');
+  var color   = (online ? 'green' : 'red');
+  add_notification_message('online_messages', title, message, icon, color);
+}
 
+function update_online_indicator(online) {
+  var indicator = $('li#online_indicator');
 
+  indicator.find('span.online, span.offline').hide();
+  if (online) {
+    indicator.find('span.online').show();
+  } else {
+    indicator.find('span.offline').show();
+  }
+  update_online_messages(online);
+}
+/* General functions - End Notification messages */
 
 /* General functions - Form functions */
 function init_form_settings(pType) {
@@ -552,6 +566,15 @@ function init_form_settings(pType) {
 
   var submit_button = $('.modal-footer button.btn.btn-primary');
   switch (pType) {
+    case 'sensor':
+      // Load initial HTML data
+      source_row = $('.modal-body div.row.sensor').html();
+      // Bind to add button
+      submit_button.on('click',function(){
+        add_sensor();
+      });
+      break;
+
     case 'switch':
       // Load initial HTML data
       source_row = $('.modal-body div.row.switch').html();
@@ -708,15 +731,14 @@ function prepare_form_data(form) {
 }
 /* General functions - End form functions */
 
-
 /* General functions - System functions */
 function online_updater() {
   clearTimeout(globals.online_timer);
-  is_online();
+  update_online_indicator(true);
 
   globals.online_timer = setTimeout(function() {
-    is_offline();
-  }, 120 * 1000);
+    update_online_indicator(false);
+  }, 90 * 1000);
 }
 
 function version_check() {
@@ -737,7 +759,7 @@ function version_check() {
   });
 }
 
-function parse_remote_data(type,url) {
+function parse_remote_data(field,url) {
   $.get(url,function(data) {
     var json_path = url.indexOf('#');
     if (json_path != -1) {
@@ -753,8 +775,8 @@ function parse_remote_data(type,url) {
         $.each(data[json_path[0]][json_path[1]],function(fieldname,value) {
           // Never overrule fields in array below
           if ($.inArray(fieldname,['address','hardwaretype','id']) == -1) {
-            $('input[name="' + type + '_[nr]_' + fieldname + '"]').val(value);
-            $('select[name="' + type + '_[nr]_' + fieldname + '"]').val(value).change();
+            $('input[name="' + field + '"]').val(value);
+            $('select[name="' + field + '"]').val(value).change();
           }
         });
       } else {
@@ -762,7 +784,7 @@ function parse_remote_data(type,url) {
         $.each(json_path,function(index,value){
           data = data[value];
         });
-        $('input[name="' + type + '_[nr]_current"]').val(data);
+        $('input[name="' + field + '"]').val(data);
       }
     }
   });
@@ -838,17 +860,6 @@ function logout() {
 /* General functions - Graph functions */
 function sensor_gauge(name, data) {
   if ($('#' + name + ' .gauge').length == 1) {
-    // Update title
-    if (data.type !== undefined && data.name !== undefined) {
-      var title = data.type + ' {{_('sensor')}}';
-      if ('temperature' === data.type) {
-        title = '{{_('Temperature sensor')}}';
-      } else if ('humidity' === data.type) {
-        title = '{{_('Humidity sensor')}}';
-      }
-      title += ': ';
-      $('#' + name + ' span.title').text(title + (data.name !== '' ? data.name : data.address));
-    }
     // Update timestamp indicator
     $('#' + name + ' small').text(moment().format('LLL'));
     // Setup a new gauge if needed
@@ -1209,694 +1220,8 @@ function history_graph(name, data, type) {
   }
 }
 /* General functions - End graph functions */
-/* End general functions */
 
-
-/* Power switches code */
-function toggle_power_switch(id) {
-  $.post('/api/switch/toggle/' + id,function(data){
-  });
-}
-
-function add_power_switch_status_row(data) {
-  if (source_row === null || source_row === '') {
-    return false;
-  }
-  // Create new row
-  var power_switch_row = $('<div>').addClass('row switch').html(source_row);
-
-  // Set ID
-  power_switch_row.attr('id','powerswitch_' + data.id);
-
-  // Change the toggle icon with a slider knob
-  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype) {
-    power_switch_row.find('div.x_content div.power_switch')
-      .removeClass('big')
-      .addClass('dimmer')
-      .html('<input type="text" class="knob" data-thickness=".3" data-width="160" data-angleOffset=20 data-angleArc=320 data-fgColor="' + (data.state > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB') + '" value="' + data.state + '">');
-
-    power_switch_row.find('.knob').knob({
-      release: function(value) {
-        $.post('/api/switch/state/' + data.id + '/' + value,function(dummy){
-        });
-      },
-      format: function(value) {
-        return value + '%';
-      },
-      change: function(value) {
-        this.o.fgColor = (value > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB');
-        $(this.i).css('color',this.o.fgColor);
-      }
-    });
-  } else {
-    // Set toggle
-    power_switch_row.find('div.power_switch span.glyphicon').on('click',function(){
-      toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
-    });
-  }
-  if (data.timer_enabled) {
-      power_switch_row.find('div.power_switch span.glyphicon').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'));
-      power_switch_row.find('div.power_switch.dimmer div').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'));
-  }
-  $('div#maincontent').append(power_switch_row);
-}
-
-function update_power_switch(power_switch) {
-  // Load the switch row to update the data
-  var switch_row = $('div.row.switch#' + 'powerswitch_' + power_switch.id);
-
-  // Update state icon
-  switch_row.find('span.glyphicon').removeClass('blue green').addClass((power_switch.state ? 'green' : 'blue'));
-
-  // Set the name and status
-  var current_status_data = '';
-  if ('pwm-dimmer' === power_switch.hardwaretype || 'remote-dimmer' === power_switch.hardwaretype) {
-    current_status_data = formatNumber(power_switch.current_power_wattage) + 'W / ';
-  }
-  current_status_data += formatNumber(power_switch.power_wattage) + 'W';
-  if (power_switch.water_flow > 0) {
-    current_status_data += ' - ' + formatNumber(power_switch.water_flow) + 'L/m';
-  }
-  switch_row.find('h2 span.title').text(power_switch.name);
-  switch_row.find('h2 small.current_usage').text(current_status_data);
-  //switch_row.find('.knob').val(power_switch.state).trigger('change');
-
-  // Set the values only when empty
-  switch_row.find('input:not(.knob), select').each(function(counter,item) {
-    var name = item.name.replace(/switch_[0-9]+_/g,'');
-    try {
-      if ($(item).val() === '') {
-        // Cast explicit to string to fix dropdown options
-        var value = power_switch[name] + '';
-        if (name == 'timer_start' || name == 'timer_stop') {
-          // Format time to local format
-          value = moment(value, "HH:mm").format('LT');
-        }
-        $(item).val(value).trigger('change');
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  });
-
-  // Open or hide the dimmer values (will not trigger on the select field)
-  switch_row.find('.row.dimmer').toggle('pwm-dimmer' === power_switch.hardwaretype || 'remote-dimmer' === power_switch.hardwaretype);
-}
-
-function add_power_switch_setting_row(power_switch) {
-  if (source_row === null || source_row === '') {
-    return false;
-  }
-  // Create new row
-  var power_switch_row = $('<div>').addClass('row switch').html(source_row.replace(/\[nr\]/g, $('form div.row.switch').length));
-  if (power_switch.id !== undefined) {
-    // Set ID
-    power_switch_row.attr('id','powerswitch_' + power_switch.id);
-
-    // Set toggle (disabled in 'edit' modus)
-    /*
-    power_switch_row.find('div.power_switch span.glyphicon').on('click',function(){
-      toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
-    });
-    */
-  }
-  // Re-initialize the select pulldowns
-  power_switch_row.find('span.select2.select2-container').remove();
-  power_switch_row.find('select').select2({
-    placeholder: '{{_('Select an option')}}',
-    allowClear: false,
-    minimumResultsForSearch: Infinity
-  }).on('change',function() {
-      if (this.name.indexOf('_timer_enabled') >= 0) {
-        $(this).parents('.x_content').find('.row.timer').toggle('true' === this.value);
-      }
-  });
-  // Add on the bottom before the submit row
-  power_switch_row.insertBefore('div.row.submit');
-}
-
-function add_power_switch() {
-  var form = $('.add-form');
-  if (!check_form_data(form)) return false;
-
-  // Create power switch data object and fill it with form data
-  var data = {};
-  form.find('input, select').each(function(counter,item) {
-    data[item.name.replace('switch_[nr]_','')] = item.value;
-  });
-  data['id'] = Math.floor(Date.now() / 1000);
-
-  // Add new row
-  add_power_switch_setting_row(data);
-  // Update new row with new values
-  update_power_switch(data);
-
-  // Reset form
-  form.find('input').val('');
-  form.find('select').val(null).trigger('change');
-  // Hide form
-  form.modal('hide');
-
-  reload_reload_theme();
-}
-/* End power switches code code */
-
-
-/* Doors code */
-function update_door_indicator(status) {
-  var indicator = $('li#door_indicator');
-
-  indicator.removeClass('disabled');
-  indicator.find('span.open, span.closed, span.disabled').hide();
-
-  if ('disabled' === status) {
-    indicator.addClass('disabled');
-    indicator.find('span.disabled').show();
-    add_notification_message('door_messages',
-                             '{{_('Disabled')}}',
-                             '{{_('There are zero door sensors configured.')}}',
-                             'fa-play-circle-o',
-                             'orange');
-    return;
-  }
-
-  var door_open = 'open' === status;
-  if (door_open) {
-    indicator.find('span.open').show();
-  } else {
-    indicator.find('span.closed').show();
-  }
-
-  update_door_messages('open' === status);
-}
-
-function update_door_messages(open,date) {
-  var title   = (open ? '{{_('Open')}}' : '{{_('Closed')}}');
-  var message = (open ? '{{_('Door is open')}}' : '{{_('Door is closed')}}');
-  var icon    = (open ? 'fa-unlock' : 'fa-lock');
-  var color   = (open ? 'red' : 'green');
-  add_notification_message('door_messages', title, message, icon, color, date);
-}
-
-function load_door_history() {
-  $.getJSON('/api/history/doors', function(door_data) {
-    var door_status = {};
-    $.each(door_data.doors, function(counter, statedata) {
-      for (var i = 0; i < statedata.state.length; i++) {
-        if (i == 0 || statedata.state[i][1] != statedata.state[i-1][1]) {
-          door_status[statedata.state[i][0]] = statedata.state[i][1];
-        }
-      }
-    });
-    // Sort door data events on time. Needed if you have more than one door
-    $.each(Object.keys(door_status).sort(), function(counter,change_time) {
-      update_door_messages((door_status[change_time] === 1), change_time);
-    })
-  });
-}
-
-function add_door_status_row(data) {
-  if (source_row === null || source_row === '') {
-    return false;
-  }
-  // Create new row
-  var door_row = $('<div>').addClass('row door').html(source_row);
-
-  // Set ID
-  door_row.attr('id','door_' + data.id);
-
-  // Add to page
-  $('div#maincontent').append(door_row);
-}
-
-function update_door(data) {
-  // Load the switch row to update the data
-  var switch_row = $('div.row.door#' + 'door_' + data.id);
-
-  // Update state icon
-  switch_row.find('div.door_status i').removeClass('fa-lock fa-unlock green red')
-                                      .addClass((data.state === 'closed' ? 'fa-lock green' : 'fa-unlock red'))
-                                      .attr('title',(data.state === 'closed' ? '{{_('Door is closed')}}' : '{{_('Door is open')}}'));
-
-  // Set the name and status
-  switch_row.find('h2 span.title').text(data.name);
-
-  // Set the values only when empty
-  switch_row.find('input:not(.knob), select').each(function(counter,item) {
-    var name = item.name.replace(/door_[0-9]+_/g,'');
-    try {
-      if ($(item).val() === '') {
-        // Cast explicit to string to fix dropdown options
-        var value = data[name] + '';
-        if (name == 'timer_start' || name == 'timer_stop') {
-          // Format time to local format
-          value = moment(value, "HH:mm").format('LT');
-        }
-        $(item).val(value).trigger('change');
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  });
-}
-
-function add_door_setting_row(data) {
-  if (source_row === null || source_row === '') {
-    return false;
-  }
-  // Create new row
-  var content_row = $('<div>').addClass('row door').html(source_row.replace(/\[nr\]/g, $('form div.row.door').length));
-  if (data.id !== undefined) {
-    // Set ID
-    content_row.attr('id','door_' + data.id);
-  }
-  // Re-initialize the select pulldowns
-  content_row.find('span.select2.select2-container').remove();
-  content_row.find('select').select2({
-    placeholder: '{{_('Select an option')}}',
-    allowClear: false,
-    minimumResultsForSearch: Infinity
-  });
-  // Add on the bottom before the submit row
-  content_row.insertBefore('div.row.submit');
-}
-
-function add_door() {
-  var form = $('.add-form');
-  if (!check_form_data(form)) return false;
-
-  // Create power switch data object and fill it with form data
-  var data = {};
-  form.find('input, select').each(function(counter,item) {
-    data[item.name.replace('door_[nr]_','')] = item.value;
-  });
-  data['id'] = Math.floor(Date.now() / 1000);
-
-  // Add new row
-  add_door_setting_row(data);
-  // Update new row with new values
-  update_door(data);
-
-  // Reset form
-  form.find('input').val('');
-  form.find('select').val(null).trigger('change');
-  // Hide form
-  form.modal('hide');
-
-  reload_reload_theme();
-}
-/* End Doors code */
-
-
-/* Webcam code */
-function createWebcamLayer(webcamid, maxzoom) {
-  return L.tileLayer('/webcam/{id}_tile_{z}_{x}_{y}.jpg?_{time}', {
-    time: function() {
-      return (new Date()).valueOf();
-    },
-    id: webcamid,
-    noWrap: true,
-    continuousWorld: false,
-    maxNativeZoom: maxzoom,
-    maxZoom: maxzoom + 1
-  });
-}
-function initWebcam(data) {
-  if ($('div#webcam_' + data.id).length === 1) {
-    return false;
-  }
-  // Init the HTML
-  var webcam_row = $(source_row);
-  // Set the name and status
-  webcam_row.find('h2 span.title').text(data.name);
-  // Append the page
-  $('div.row.webcam').append(webcam_row);
-  // Resize the height to get the maps working
-  webcam_row.find('div.webcam_player').attr('id','webcam_' + data.id).height(webcam_row.width()-webcam_row.find('.x_title').height());
-
-  // Load Leaflet webcam code
-  var webcam = new L.Map('webcam_' + data.id, {
-    layers: [createWebcamLayer(data.id, data.max_zoom)],
-    fullscreenControl: true,
-  }).setView([0, 0], 1);
-
-  L.Control.TakePhoto = L.Control.extend({
-    options: {
-      position: 'topleft',
-    },
-    onAdd: function (map) {
-      var container = L.DomUtil.create('div', 'leaflet-control-takephoto leaflet-bar leaflet-control');
-      var link = L.DomUtil.create('a', 'leaflet-control-takephoto-button leaflet-bar-part', container);
-      link.title = '{{_('Save RAW photo')}}';
-      link.target = '_blank';
-      link.href = '/webcam/' + data.id + '_raw.jpg';
-      L.DomUtil.create('i', 'fa fa-camera', link);
-     return container;
-    }
-  });
-  var takePhotoControl = new L.Control.TakePhoto();
-  webcam.addControl(takePhotoControl);
-  webcam.addControl(L.Control.loading({separate: true}));
-
-  globals.webcams[webcam._container.id] = null;
-  updateWebcamView(webcam);
-}
-
-function updateWebcamView(webcam) {
-  if ($('div#' + webcam._container.id).length === 1) {
-    webcam.eachLayer(function(layer) {
-      layer.redraw();
-    });
-    clearTimeout(globals.webcams[webcam._container.id]);
-    globals.webcams[webcam._container.id] = setTimeout(function() { updateWebcamView(webcam);},30 * 1000);
-  }
-}
-
-function add_webcam_setting_row(data) {
-  if (source_row === null || source_row === '') {
-    return false;
-  }
-  // Create new row
-  var content_row = $('<div>').addClass('row webcam').html(source_row.replace(/\[nr\]/g, $('form div.row.webcam').length));
-  if (data.id !== undefined) {
-    // Set ID
-    content_row.attr('id','webcam_' + data.id);
-  }
-
-  // Re-initialize the select pulldowns
-  content_row.find('span.select2.select2-container').remove();
-  content_row.find('select').select2({
-    placeholder: '{{_('Select an option')}}',
-    allowClear: false,
-    minimumResultsForSearch: Infinity
-  }).on('change',function() {
-    $(this).parents('.x_content').find('img').removeClass('webcam_90 webcam_180 webcam_270 webcam_H webcam_V').addClass('webcam_' + this.value);
-  });
-  // Add on the bottom before the submit row
-  content_row.insertBefore('div.row.submit');
-}
-
-function update_webcam(data) {
-  // Load the switch row to update the data
-  var content_row = $('div.row.webcam#' + 'webcam_' + data.id);
-
-  content_row.find('h2 span.title').text(data.name);
-  content_row.find('.webcam_preview img').attr('src',data.image);
-
-  // Set the values only when empty
-  content_row.find('input:not(.knob), select').each(function(counter,item) {
-    var name = item.name.replace(/webcam_[0-9]+_/g,'');
-    try {
-      if ($(item).val() === '') {
-        // Cast explicit to string to fix dropdown options
-        var value = data[name] + '';
-        if (name == 'timer_start' || name == 'timer_stop') {
-          // Format time to local format
-          value = moment(value, "HH:mm").format('LT');
-        }
-        $(item).val(value).trigger('change');
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  });
-}
-
-function add_webcam() {
-  var form = $('.add-form');
-  if (!check_form_data(form)) return false;
-
-  // Create power switch data object and fill it with form data
-  var data = {};
-  form.find('input, select').each(function(counter,item) {
-    data[item.name.replace('webcam_[nr]_','')] = item.value;
-  });
-  data['id'] = Math.floor(Date.now() / 1000);
-
-  // Add new row
-  add_webcam_setting_row(data);
-  // Update new row with new values
-  update_webcam(data);
-
-  // Reset form
-  form.find('input').val('');
-  form.find('select').val(null).trigger('change');
-  // Hide form
-  form.modal('hide');
-
-  reload_reload_theme();
-}
-/* End webcam code */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function update_dashboard_tile(tile, text) {
-  var div = $('div.tile_count #' + tile + ' div.count');
-  if (div.length == 1 && div.text() != text) {
-    var oldColor = div.css('color');
-    div.text(text);
-    div.addClass('green');
-    div.animate({
-      color: oldColor
-    }, 1000, function() {
-      $(this).removeClass('green').css('color', '');
-    });
-  }
-}
-
-function update_dashboard_uptime(data) {
-  update_dashboard_tile('uptime', formatUptime(data.uptime));
-  $('#system_time span').text(moment(data.timestamp * 1000).format('LLLL'));
-  $('#system_time i').removeClass('fa-clock-o fa-sun-o fa-moon-o').addClass((data.day ? 'fa-sun-o' : 'fa-moon-o'));
-  $("#uptime .progress-bar-success").css('height', ((data.load[0] / data.cores) * 100) + '%');
-  $("#uptime .progress-bar-warning").css('height', ((data.load[1] / data.cores) * 100) + '%');
-  $("#uptime .progress-bar-danger").css('height', ( (data.load[2] / data.cores) * 100) + '%');
-}
-
-function update_dashboard_power_usage(data) {
-  update_dashboard_tile('power_wattage', formatNumber(data.current) + '/' + formatNumber(data.max));
-  var percentage = (data.max > 0 ? (data.current / data.max) * 100 : 0);
-  $("#power_wattage .progress-bar-success").css('height', percentage + '%');
-  $("#total_power .count_bottom .costs span").text(formatCurrency(data.price,2,3));
-  $("#total_power .count_bottom span.duration").text(moment.duration(data.duration * 1000).humanize());
-  update_dashboard_tile('total_power',formatNumber(data.total / (3600 * 1000)));
-}
-
-function update_dashboard_water_flow(data) {
-  update_dashboard_tile('water_flow', formatNumber(data.current) + '/' + formatNumber(data.max));
-  var percentage = (data.max > 0 ? (data.current / data.max) * 100 : 0);
-  $("#water_flow .progress-bar-info").css('height', percentage + '%');
-  $("#total_water .count_bottom .costs span").text(formatCurrency(data.price,2,3));
-  $("#total_water .count_bottom span.duration").text(moment.duration(data.duration * 1000).humanize());
-  update_dashboard_tile('total_water', formatNumber(data.total));
-}
-
-function update_weather(data) {
-  var icons = new Skycons({
-    "color": "#73879C"
-  });
-  var weather_current = $('div#weather_today');
-  if (weather_current.length == 1) {
-    weather_current.find('.status').html(moment(data.hour_forecast[0].from * 1000).format('[<b>]dddd[</b>,] LT') + ' <span> in <b>°' + globals.temperature_indicator + '</b></span>');
-    weather_current.find('h2').html(data.city.city + '<br><i>' + data.hour_forecast[0].weather + '</i>');
-    weather_current.find('.sunrise').text(moment(data.sun.rise * 1000).format('LT')).parent().css('fontWeight', (data.day ? 'bold' : 'normal'));
-    weather_current.find('.sunset').text(moment(data.sun.set * 1000).format('LT')).parent().css('fontWeight', (data.day ? 'normal' : 'bold'));
-    weather_current.find('.degrees').text(formatNumber(data.hour_forecast[0].temperature));
-    icons.set(weather_current.find('canvas').attr('id'), data.hour_forecast[0].icon);
-    var week_forecast_divs = weather_current.find('div.row.weather-days div.daily-weather');
-    // Set timestamp to tomorrow at 12 hours. That is the first week forecast we take
-    var timestamp = Math.round(new Date(Date.now()).setHours(12) / 1000) + (24 * 60 * 60);
-    var day_counter = 0;
-    var graphdata = [];
-    $.each(data.week_forecast, function(index, value) {
-      graphdata.push([(value.to - ((value.to - value.from) / 2)) * 1000, value.temperature]);
-      if (value.from - timestamp >= 3600 && day_counter < week_forecast_divs.length) {
-        $(week_forecast_divs[day_counter]).show();
-        $(week_forecast_divs[day_counter]).find('.day').text(moment(value.from * 1000).format('ddd'));
-        $(week_forecast_divs[day_counter]).find('.degrees').text(formatNumber(value.temperature));
-        $(week_forecast_divs[day_counter]).find('h5').html(formatNumber(value.wind_speed) + ' <i>' + (data.windspeed === 'ms' ? '{{_('m/s')}}' : '{{_('Km/h')}}') + '</i>');
-        $(week_forecast_divs[day_counter]).find('canvas').attr('title',value.weather);
-        icons.set($(week_forecast_divs[day_counter]).find('canvas').attr('id'), value.icon);
-        day_counter++;
-        timestamp += (24 * 60 * 60);
-      }
-    });
-    icons.play();
-    history_graph('weather_week', graphdata, 'weather');
-    graphdata = [];
-    $.each(data.hour_forecast, function(index, value) {
-      graphdata.push([(value.to - ((value.to - value.from) / 2)) * 1000, value.temperature]);
-    });
-    history_graph('weather_day', graphdata, 'weather');
-  }
-}
-
-function update_dashboard_environment(name, value) {
-  var mode_translations = {'sensor' : '{{_('Sensor')}}',
-                           'weather':'{{_('Weather')}}',
-                           'timer':'{{_('Timer')}}'};
-  var systempart = $('div.environment_' + name);
-  if (systempart.length === 0 || Object.keys(value).length === 0 || !value.enabled) {
-    systempart.addClass('disabled');
-    return;
-  }
-  systempart.removeClass('disabled');
-  var enabledColor = '';
-  var indicator = '°' + globals.temperature_indicator;
-  switch (name) {
-    case 'light':
-      enabledColor = 'orange';
-      break;
-    case 'sprayer':
-      enabledColor = 'blue';
-      indicator = '%';
-      break;
-    case 'heater':
-      enabledColor = 'red';
-      break;
-    case 'cooler':
-      enabledColor = 'blue';
-      break;
-  }
-
-  systempart.find('h4').removeClass('orange blue red')
-                       .addClass(value.enabled ? enabledColor : '')
-                       .attr('title', value.enabled ? "{{_('Enabled')}}" : "{{_('Disabled')}}");
-
-  systempart.find('h4 small span').text(mode_translations[value.mode]);
-
-  if (value.on !== undefined) {
-    systempart.find('.on').text(moment(value.on * 1000).format('LT')).parent().toggle(value.mode != 'sensor');
-  }
-  if (value.off !== undefined) {
-    systempart.find('.off').text(moment(value.off * 1000).format('LT')).parent().toggle(value.mode != 'sensor');
-    systempart.find('.duration').text(moment.duration(Math.abs(value.off - value.on) * 1000).humanize()).parent().toggle(value.mode != 'sensor');
-  }
-  if (value.current !== undefined) {
-    systempart.find('.current').text(formatNumber(value.current,3) + ' ' + indicator).parent().toggle(value.mode === 'sensor');
-  }
-  if (value.alarm_min !== undefined) {
-    systempart.find('.alarm_min').text(formatNumber(value.alarm_min,3) + ' ' + indicator).parent().toggle(value.mode === 'sensor');
-  }
-  if (value.alarm_max !== undefined) {
-    systempart.find('.alarm_max').text(formatNumber(value.alarm_max,3) + ' ' + indicator).parent().toggle(value.mode === 'sensor');
-  }
-  if (value.alarm !== undefined) {
-    systempart.find('span.glyphicon-warning-sign').toggle(value.alarm);
-  }
-  systempart.find('.state i').removeClass('red green').addClass(value.state === 'on' ? 'green' : 'red').attr('title', value.state === 'on' ? '{{_('On')}}' : '{{_('Off')}}').parent().parent().show();
-  systempart.find('table.tile_info').show();
-  setContentHeight();
-}
-
-
-function update_online_messages(online) {
-  var title   = (online ? '{{_('Online')}}' : '{{_('Offline')}}');
-  var message = (online ? '{{_('Connection restored')}}' : '{{_('Connection lost')}}');
-  var icon    = (online ? 'fa-check-circle-o' : 'fa-exclamation-triangle');
-  var color   = (online ? 'green' : 'red');
-  add_notification_message('online_messages', title, message, icon, color);
-}
-
-function update_player_messages(data) {
-  update_player_volume(data.volume);
-  var title   = (data.running ? '{{_('Playing')}}' : '{{_('Stopped')}}');
-  var message = (data.running ? '{{_('Playlist')}}: ' + data.name + ' - ' + moment(data.start * 1000).format('LT') + '-' + moment(data.stop * 1000).format('LT'): '{{_('Not playing')}}');
-  var icon    = (data.running ? 'fa-play-circle-o' : 'fa-play-circle-o');
-  var color   = (data.running ? 'green' : 'red');
-  add_notification_message('player_messages', title, message, icon, color);
-}
-
-function update_player_volume(volume) {
-  var menu = $('ul#player_messages');
-  menu.find('li.notification:not(:has(.player_volume))').remove();
-
-  if ($('div.row.player_volume').length == 0) {
-    var volume_control = $('<div>').addClass('row player_volume');
-    volume_control.append($('<div>').addClass('col-md-1').append($('<span>').addClass('fa fa-volume-down').on('click',function(){
-      $.post('/api/audio/player/volumedown');
-      return false;
-    })));
-    volume_control.append($('<div>').addClass('col-md-10  progress progress-striped active').append($('<div>').addClass('progress-bar progress-bar-success').attr('data-transitiongoal',volume).text(volume + '%')));
-    volume_control.append($('<div>').addClass('col-md-1').append($('<span>').addClass('fa fa-volume-up').on('click',function(){
-      $.post('/api/audio/player/volumeup');
-      return false;
-    })));
-    menu.prepend($('<li>').addClass('notification').append(volume_control));
-    $('ul#player_messages .progress .progress-bar').progressbar();
-  } else {
-    $('div.row.player_volume .progress-bar.progress-bar-success').css('width', volume + '%').text(volume + '%');
-  }
-}
-
-function update_online_indicator(online) {
-  var indicator = $('li#online_indicator');
-
-  indicator.find('span.online, span.offline').hide();
-  if (online) {
-    indicator.find('span.online').show();
-  } else {
-    indicator.find('span.offline').show();
-  }
-  update_online_messages(online);
-}
-
-function is_online() {
-  update_online_indicator(true);
-}
-
-function is_offline() {
-  update_online_indicator(false);
-}
-
-function update_player_indicator(data) {
-  var indicator = $('li#player_indicator');
-  indicator.removeClass('disabled');
-  indicator.find('span.running, span.stopped, span.disabled').hide();
-
-  if ('disabled' === data.running) {
-    indicator.addClass('disabled');
-    indicator.find('span.disabled').show();
-    add_notification_message('player_messages',
-                             '{{_('Disabled')}}',
-                             '{{_('Either add audio files and playlists. Or you have a pwm-dimmer switch configured.')}}',
-                             'fa-play-circle-o',
-                             'orange');
-    return;
-  }
-
-  if (data.running) {
-    indicator.find('span.running').show();
-  } else {
-    indicator.find('span.stopped').show();
-  }
-  update_player_messages(data);
-}
-
+/* General functions - Template functions */
 function get_theme_color(color) {
   if (color == 'orange') return '#f0ad4e';
   return $('<div>').addClass(color).css('color');
@@ -2039,62 +1364,817 @@ function reload_reload_theme() {
   });
   setContentHeight();
 }
+/* General functions - End template functions */
+/* End general functions */
+
+
+/* Dashboard code */
+/* Dashboard code - Top tiles */
+function update_dashboard_tile(tile, text) {
+  var div = $('div.tile_count #' + tile + ' div.count');
+  if (div.length == 1 && div.text() != text) {
+    var oldColor = div.css('color');
+    div.text(text);
+    div.addClass('green');
+    div.animate({
+      color: oldColor
+    }, 1000, function() {
+      $(this).removeClass('green').css('color', '');
+    });
+  }
+}
+
+function update_dashboard_time(data) {
+  $('#system_time span').text(moment(data.timestamp * 1000).format('LLLL'));
+  $('#system_time i').removeClass('fa-clock-o fa-sun-o fa-moon-o').addClass((data.day ? 'fa-sun-o' : 'fa-moon-o'));
+}
+
+function update_dashboard_uptime(data) {
+  update_dashboard_time(data);
+  update_dashboard_tile('uptime', formatUptime(data.uptime));
+  $("#uptime .progress-bar-success").css('height', ((data.load[0] / data.cores) * 100) + '%');
+  $("#uptime .progress-bar-warning").css('height', ((data.load[1] / data.cores) * 100) + '%');
+  $("#uptime .progress-bar-danger").css('height',  ((data.load[2] / data.cores) * 100) + '%');
+}
+
+function update_dashboard_power_usage(data) {
+  update_dashboard_tile('power_wattage', formatNumber(data.current) + '/' + formatNumber(data.max));
+  $("#power_wattage .progress-bar-success").css('height', (data.max > 0 ? (data.current / data.max) * 100 : 0) + '%');
+
+  update_dashboard_tile('total_power',formatNumber(data.total / (3600 * 1000))); // from total watt to KiloWattHours
+  $("#total_power .count_bottom .costs").text(formatCurrency(data.price,2,3));
+  $("#total_power .count_bottom .duration").text(moment.duration(data.duration * 1000).humanize());
+}
+
+function update_dashboard_water_flow(data) {
+  update_dashboard_tile('water_flow', formatNumber(data.current) + '/' + formatNumber(data.max));
+  $("#water_flow .progress-bar-info").css('height', (data.max > 0 ? (data.current / data.max) * 100 : 0) + '%');
+
+  update_dashboard_tile('total_water', formatNumber(data.total));
+  $("#total_water .count_bottom .costs").text(formatCurrency(data.price,2,3));
+  $("#total_water .count_bottom .duration").text(moment.duration(data.duration * 1000).humanize());
+}
+/* Dashboard code - End Top tiles */
+
+/* Dashboard code - Environment */
+function update_dashboard_environment(name, data) {
+  var systempart = $('div.environment_' + name);
+
+  var enabledColor = '';
+  var indicator = '°' + globals.temperature_indicator;
+  switch (name) {
+    case 'light':
+      enabledColor = 'orange';
+      break;
+    case 'heater':
+      enabledColor = 'red';
+      break;
+    case 'sprayer':
+      indicator = '%';
+    case 'cooler':
+      enabledColor = 'blue';
+      break;
+  }
+
+  systempart.find('h4').removeClass('orange blue red').addClass(data.enabled ? enabledColor : '');
+  systempart.find('h4 small span').hide().filter('.' + (data.enabled ? data.mode : 'disabled')).show();
+
+  $.each(data, function(key, value) {
+    switch (key) {
+      case 'state':
+        // Find all i elements withing the .state table row. Hide them all, then filter the enabled one and show that. Then go up and show the complete state table row... Nice!
+        systempart.find('.state i').hide().filter('.' + (value == 'on' ? 'green' : 'red')).show().parent().parent().toggle(data.enabled);
+        break;
+      case 'alarm':
+        systempart.find('span.glyphicon-warning-sign').toggle(value);
+        break;
+      case 'on':
+      case 'off':
+        systempart.find('.' + key).text(moment(value * 1000).format('LT')).parent().toggle(data.mode != 'sensor');
+        systempart.find('.duration').text(moment.duration(Math.abs(data.off - data.on) * 1000).humanize()).parent().toggle(data.mode != 'sensor');
+        break;
+
+      case 'current':
+      case 'alarm_min':
+      case 'alarm_max':
+        systempart.find('.' + key).text(formatNumber(value,3) + ' ' + indicator).parent().toggle(data.mode === 'sensor');
+        break;
+    }
+  });
+  systempart.find('table').toggle(data.enabled);
+  setContentHeight();
+}
+/* Dashboard code - End Environment */
+/* End dashboard code */
+
+
+/* Weather code */
+function update_weather(data) {
+  var icons = new Skycons({
+    "color": "#73879C"
+  });
+  var weather_current = $('div#weather_today');
+  if (weather_current.length == 1) {
+    weather_current.find('.status').html(moment(data.hour_forecast[0].from * 1000).format('[<b>]dddd[</b>,] LT') + ' <span> in <b>°' + globals.temperature_indicator + '</b></span>');
+    weather_current.find('h2').html(data.city.city + '<br><i>' + data.hour_forecast[0].weather + '</i>');
+    weather_current.find('.sunrise').text(moment(data.sun.rise * 1000).format('LT')).parent().css('fontWeight', (data.day ? 'bold' : 'normal'));
+    weather_current.find('.sunset').text(moment(data.sun.set * 1000).format('LT')).parent().css('fontWeight', (data.day ? 'normal' : 'bold'));
+    weather_current.find('.degrees').text(formatNumber(data.hour_forecast[0].temperature));
+    icons.set(weather_current.find('canvas').attr('id'), data.hour_forecast[0].icon);
+    var week_forecast_divs = weather_current.find('div.row.weather-days div.daily-weather');
+    // Set timestamp to tomorrow at 12 hours. That is the first week forecast we take
+    var timestamp = Math.round(new Date(Date.now()).setHours(12) / 1000) + (24 * 60 * 60);
+    var day_counter = 0;
+    var graphdata = [];
+    $.each(data.week_forecast, function(index, value) {
+      graphdata.push([(value.to - ((value.to - value.from) / 2)) * 1000, value.temperature]);
+      if (value.from - timestamp >= 3600 && day_counter < week_forecast_divs.length) {
+        $(week_forecast_divs[day_counter]).show();
+        $(week_forecast_divs[day_counter]).find('.day').text(moment(value.from * 1000).format('ddd'));
+        $(week_forecast_divs[day_counter]).find('.degrees').text(formatNumber(value.temperature));
+        $(week_forecast_divs[day_counter]).find('h5').html(formatNumber(value.wind_speed) + ' <i>' + (data.windspeed === 'ms' ? '{{_('m/s')}}' : '{{_('Km/h')}}') + '</i>');
+        $(week_forecast_divs[day_counter]).find('canvas').attr('title',value.weather);
+        icons.set($(week_forecast_divs[day_counter]).find('canvas').attr('id'), value.icon);
+        day_counter++;
+        timestamp += (24 * 60 * 60);
+      }
+    });
+    icons.play();
+    history_graph('weather_week', graphdata, 'weather');
+    graphdata = [];
+    $.each(data.hour_forecast, function(index, value) {
+      graphdata.push([(value.to - ((value.to - value.from) / 2)) * 1000, value.temperature]);
+    });
+    history_graph('weather_day', graphdata, 'weather');
+  }
+}
+/* End weather code */
+
+/* Sensors code */
+function add_sensor_status_row(data) {
+  if (source_row === null || source_row === '') {
+    return false;
+  }
+  // Create new row
+  var new_row = $('<div>').addClass('row sensor').html(source_row);
+  // Set ID
+  new_row.attr('id','sensor_' + data.id);
+  // Add to page
+  $('div#maincontent').append(new_row);
+}
+
+function update_sensor(data) {
+  // Load the switch row to update the data
+  var content_row = $('div.row.sensor#' + 'sensor_' + data.id);
+  // Show either the temperature or humidity header and icon
+  content_row.find('h2').hide().filter('.' + data.type).show();
+  // Update title
+  content_row.find('h2 span.title').text(data.name);
+  // Set the values only when empty
+  content_row.find('input:not(.knob), select').each(function(counter,item) {
+    var name = item.name.replace(/sensor_[0-9]+_/g,'');
+    try {
+      if ($(item).val() === '') {
+        // Cast explicit to string to fix dropdown options
+        var value = data[name] + '';
+        $(item).val(value).trigger('change');
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  });
+}
+
+function add_sensor_setting_row(data) {
+  if (source_row === null || source_row === '') {
+    return false;
+  }
+  // Create new row
+  var setting_row = $('<div>').addClass('row sensor').html(source_row.replace(/\[nr\]/g, $('form div.row.sensor').length));
+  if (data.id !== undefined) {
+    // Set ID
+    setting_row.attr('id','sensor_' + data.id);
+  }
+  // Re-initialize the select pulldowns
+  setting_row.find('span.select2.select2-container').remove();
+  setting_row.find('select').select2({
+    placeholder: '{{_('Select an option')}}',
+    allowClear: false,
+    minimumResultsForSearch: Infinity
+  }).on('change',function() {
+    if (this.name.indexOf('hardwaretype') >= 0) {
+      var address_field = $("input[name='" + this.name.replace('hardwaretype','address') + "']");
+      address_field.attr("readonly", this.value == 'owfs' || this.value == 'w1').off('change');
+/*
+      if ('remote' === this.value) {
+        address_field.on('change',function(){
+            parse_remote_data('sensor',this.value);
+        });
+      }
+      */
+    }
+  });
+  // Add on the bottom before the submit row
+  setting_row.insertBefore('div.row.submit');
+}
 
 function add_sensor() {
-  var form = $('.new-sensor-form');
+  var form = $('.add-form');
   if (!check_form_data(form)) return false;
 
-  add_sensor_row('None',
-                 form.find('select[name="sensor_[nr]_hardwaretype"]').val(),
-                 form.find('input[name="sensor_[nr]_address"]').val(),
-                 form.find('select[name="sensor_[nr]_type"]').val(),
-                 form.find('input[name="sensor_[nr]_name"]').val(),
-                 form.find('input[name="sensor_[nr]_alarm_min"]').val(),
-                 form.find('input[name="sensor_[nr]_alarm_max"]').val(),
-                 form.find('input[name="sensor_[nr]_limit_min"]').val(),
-                 form.find('input[name="sensor_[nr]_limit_max"]').val(),
-                 -1);
+  // Create power switch data object and fill it with form data
+  var data = {};
+  form.find('input, select').each(function(counter,item) {
+    data[item.name.replace('sensor_[nr]_','')] = item.value;
+  });
+  data['id'] = Math.floor(Date.now() / 1000);
+
+  // Add new row
+  add_sensor_setting_row(data);
+  // Update new row with new values
+  update_sensor(data);
+
   // Reset form
   form.find('input').val('');
   form.find('select').val(null).trigger('change');
   // Hide form
   form.modal('hide');
-}
-
-function add_sensor_row(id,hardwaretype,address,type,name,alarm_min,alarm_max,limit_min,limit_max,current) {
-  var sensor_row = $($('.modal-body div.row.sensor').parent().clone().html().replace(/\[nr\]/g, $('form div.row.sensor').length));
-  sensor_row.find('.x_title').show().find('h2 span').addClass('glyphicon glyphicon-' + (type == 'temperature' ? 'fire' : 'tint')).attr({'aria-hidden':'true','title': capitalizeFirstLetter(type + ' {{_('sensor')}}')});
-  sensor_row.find('.x_title').show().find('h2 small').text(name);
-  sensor_row.find('span.select2.select2-container').remove();
-
-  sensor_row.find('input, select').each(function(counter,item){
-    $(item).val(eval($(item).attr('name').replace(/sensor_[0-9]+_/g,'')))
-  });
-  sensor_row.find("input[name$='_address']").attr("readonly", hardwaretype == 'owfs' || hardwaretype == 'w1');
-  sensor_row.insertBefore('div.row.submit').show();
 
   reload_reload_theme();
+}
+/* End sensors code code */
 
-  sensor_row.find("select").select2({
-    placeholder: '{{_('Select an option')}}',
-    allowClear: false,
-    minimumResultsForSearch: Infinity,
-  }).on('change',function() {
-    // Changing should not be possible. But disabling will cripple the form post data
-    /*
-    if (this.name.indexOf('hardwaretype') >= 0) {
-      $("input[name='" + this.name.replace('hardwaretype','address') + "']").attr("readonly", this.value == 'owfs' || this.value == 'w1');
-    }
-    */
+
+/* Power switches code */
+function toggle_power_switch(id) {
+  $.post('/api/switch/toggle/' + id,function(data){
   });
 }
 
+function add_power_switch_status_row(data) {
+  if (source_row === null || source_row === '') {
+    return false;
+  }
+  // Create new row
+  var new_row = $('<div>').addClass('row switch').html(source_row);
 
-/*
-function update_webcam_preview(name, url) {
-  $('img#webcam_' + name + '_preview').attr('src', url);
+  // Set ID
+  new_row.attr('id','powerswitch_' + data.id);
+
+  // Change the toggle icon with a slider knob
+  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype) {
+    new_row.find('div.x_content div.power_switch')
+      .removeClass('big')
+      .addClass('dimmer')
+      .html('<input type="text" class="knob" data-thickness=".3" data-width="160" data-angleOffset=20 data-angleArc=320 data-fgColor="' + (data.state > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB') + '" value="' + data.state + '">');
+
+    new_row.find('.knob').knob({
+      release: function(value) {
+        $.post('/api/switch/state/' + data.id + '/' + value,function(dummy){
+        });
+      },
+      format: function(value) {
+        return value + '%';
+      },
+      change: function(value) {
+        this.o.fgColor = (value > data.dimmer_off_percentage ? '#1ABB9C' : '#3498DB');
+        $(this.i).css('color',this.o.fgColor);
+      }
+    });
+  } else {
+    // Set toggle
+    new_row.find('div.power_switch span.glyphicon').on('click',function(){
+      toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
+    });
+  }
+  if (data.timer_enabled) {
+      new_row.find('div.power_switch span.glyphicon').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'));
+      new_row.find('div.power_switch.dimmer div').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'));
+  }
+  $('div#maincontent').append(new_row);
 }
-*/
+
+function update_power_switch(data) {
+  // Load the switch row to update the data
+  var content_row = $('div.row.switch#' + 'powerswitch_' + data.id);
+
+  // Update state icon
+  content_row.find('span.glyphicon').removeClass('blue green').addClass((data.state ? 'green' : 'blue'));
+
+  // Set the name and status
+  var current_status_data = '';
+  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype) {
+    current_status_data = formatNumber(data.current_power_wattage) + 'W / ';
+  }
+  current_status_data += formatNumber(data.power_wattage) + 'W';
+  if (data.water_flow > 0) {
+    current_status_data += ' - ' + formatNumber(data.water_flow) + 'L/m';
+  }
+  content_row.find('h2 span.title').text(data.name);
+  content_row.find('h2 small.current_usage').text(current_status_data);
+  //switch_row.find('.knob').val(power_switch.state).trigger('change');
+
+  // Set the values only when empty
+  content_row.find('input:not(.knob), select').each(function(counter,item) {
+    var name = item.name.replace(/switch_[0-9]+_/g,'');
+    try {
+      if ($(item).val() === '') {
+        // Cast explicit to string to fix dropdown options
+        var value = data[name] + '';
+        if (name == 'timer_start' || name == 'timer_stop') {
+          // Format time to local format
+          value = moment(value, "HH:mm").format('LT');
+        }
+        $(item).val(value).trigger('change');
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  // Open or hide the dimmer values (will not trigger on the select field)
+  content_row.find('.row.dimmer').toggle('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype);
+}
+
+function add_power_switch_setting_row(data) {
+  if (source_row === null || source_row === '') {
+    return false;
+  }
+  // Create new row
+  var setting_row = $('<div>').addClass('row switch').html(source_row.replace(/\[nr\]/g, $('form div.row.switch').length));
+  if (data.id !== undefined) {
+    // Set ID
+    setting_row.attr('id','powerswitch_' + data.id);
+
+    // Set toggle (disabled in 'edit' modus)
+    /*
+    power_switch_row.find('div.power_switch span.glyphicon').on('click',function(){
+      toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
+    });
+    */
+  }
+  // Re-initialize the select pulldowns
+  setting_row.find('span.select2.select2-container').remove();
+  setting_row.find('select').select2({
+    placeholder: '{{_('Select an option')}}',
+    allowClear: false,
+    minimumResultsForSearch: Infinity
+  }).on('change',function() {
+      if (this.name.indexOf('_timer_enabled') >= 0) {
+        $(this).parents('.x_content').find('.row.timer').toggle('true' === this.value);
+      }
+  });
+  // Add on the bottom before the submit row
+  setting_row.insertBefore('div.row.submit');
+}
+
+function add_power_switch() {
+  var form = $('.add-form');
+  if (!check_form_data(form)) return false;
+
+  // Create power switch data object and fill it with form data
+  var data = {};
+  form.find('input, select').each(function(counter,item) {
+    data[item.name.replace('switch_[nr]_','')] = item.value;
+  });
+  data['id'] = Math.floor(Date.now() / 1000);
+
+  // Add new row
+  add_power_switch_setting_row(data);
+  // Update new row with new values
+  update_power_switch(data);
+
+  // Reset form
+  form.find('input').val('');
+  form.find('select').val(null).trigger('change');
+  // Hide form
+  form.modal('hide');
+
+  reload_reload_theme();
+}
+/* End power switches code code */
+
+
+/* Doors code */
+function update_door_indicator(status) {
+  var indicator = $('li#door_indicator');
+
+  indicator.removeClass('disabled');
+  indicator.find('span.open, span.closed, span.disabled').hide();
+
+  if ('disabled' === status) {
+    indicator.addClass('disabled');
+    indicator.find('span.disabled').show();
+    add_notification_message('door_messages',
+                             '{{_('Disabled')}}',
+                             '{{_('There are zero door sensors configured.')}}',
+                             'fa-play-circle-o',
+                             'orange');
+    return;
+  }
+
+  var door_open = 'open' === status;
+  if (door_open) {
+    indicator.find('span.open').show();
+  } else {
+    indicator.find('span.closed').show();
+  }
+
+  update_door_messages('open' === status);
+}
+
+function update_door_messages(open,date) {
+  var title   = (open ? '{{_('Open')}}' : '{{_('Closed')}}');
+  var message = (open ? '{{_('Door is open')}}' : '{{_('Door is closed')}}');
+  var icon    = (open ? 'fa-unlock' : 'fa-lock');
+  var color   = (open ? 'red' : 'green');
+  add_notification_message('door_messages', title, message, icon, color, date);
+}
+
+function load_door_history() {
+  $.getJSON('/api/history/doors', function(door_data) {
+    var door_status = {};
+    $.each(door_data.doors, function(counter, statedata) {
+      for (var i = 0; i < statedata.state.length; i++) {
+        if (i == 0 || statedata.state[i][1] != statedata.state[i-1][1]) {
+          door_status[statedata.state[i][0]] = statedata.state[i][1];
+        }
+      }
+    });
+    // Sort door data events on time. Needed if you have more than one door
+    $.each(Object.keys(door_status).sort(), function(counter,change_time) {
+      update_door_messages((door_status[change_time] === 1), change_time);
+    })
+  });
+}
+
+function add_door_status_row(data) {
+  if (source_row === null || source_row === '') {
+    return false;
+  }
+  // Create new row
+  var new_row = $('<div>').addClass('row door').html(source_row);
+  // Set ID
+  new_row.attr('id','door_' + data.id);
+  // Add to page
+  $('div#maincontent').append(new_row);
+}
+
+function update_door(data) {
+  // Load the switch row to update the data
+  var content_row = $('div.row.door#' + 'door_' + data.id);
+
+  // Update state icon
+  content_row.find('div.door_status i').removeClass('fa-lock fa-unlock green red')
+                                      .addClass((data.state === 'closed' ? 'fa-lock green' : 'fa-unlock red'))
+                                      .attr('title',(data.state === 'closed' ? '{{_('Door is closed')}}' : '{{_('Door is open')}}'));
+
+  // Set the name and status
+  content_row.find('h2 span.title').text(data.name);
+
+  // Set the values only when empty
+  content_row.find('input:not(.knob), select').each(function(counter,item) {
+    var name = item.name.replace(/door_[0-9]+_/g,'');
+    try {
+      if ($(item).val() === '') {
+        // Cast explicit to string to fix dropdown options
+        var value = data[name] + '';
+        if (name == 'timer_start' || name == 'timer_stop') {
+          // Format time to local format
+          value = moment(value, "HH:mm").format('LT');
+        }
+        $(item).val(value).trigger('change');
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  });
+}
+
+function add_door_setting_row(data) {
+  if (source_row === null || source_row === '') {
+    return false;
+  }
+  // Create new row
+  var setting_row = $('<div>').addClass('row door').html(source_row.replace(/\[nr\]/g, $('form div.row.door').length));
+  if (data.id !== undefined) {
+    // Set ID
+    setting_row.attr('id','door_' + data.id);
+  }
+  // Re-initialize the select pulldowns
+  setting_row.find('span.select2.select2-container').remove();
+  setting_row.find('select').select2({
+    placeholder: '{{_('Select an option')}}',
+    allowClear: false,
+    minimumResultsForSearch: Infinity
+  });
+  // Add on the bottom before the submit row
+  setting_row.insertBefore('div.row.submit');
+}
+
+function add_door() {
+  var form = $('.add-form');
+  if (!check_form_data(form)) return false;
+
+  // Create power switch data object and fill it with form data
+  var data = {};
+  form.find('input, select').each(function(counter,item) {
+    data[item.name.replace('door_[nr]_','')] = item.value;
+  });
+  data['id'] = Math.floor(Date.now() / 1000);
+
+  // Add new row
+  add_door_setting_row(data);
+  // Update new row with new values
+  update_door(data);
+
+  // Reset form
+  form.find('input').val('');
+  form.find('select').val(null).trigger('change');
+  // Hide form
+  form.modal('hide');
+
+  reload_reload_theme();
+}
+/* End Doors code */
+
+
+/* Webcam code */
+function createWebcamLayer(webcamid, maxzoom) {
+  return L.tileLayer('/webcam/{id}_tile_{z}_{x}_{y}.jpg?_{time}', {
+    time: function() {
+      return (new Date()).valueOf();
+    },
+    id: webcamid,
+    noWrap: true,
+    continuousWorld: false,
+    maxNativeZoom: maxzoom,
+    maxZoom: maxzoom + 1
+  });
+}
+function initWebcam(data) {
+  if ($('div#webcam_' + data.id).length === 1) {
+    return false;
+  }
+  // Init the HTML
+  var webcam_row = $(source_row);
+  // Set the name and status
+  webcam_row.find('h2 span.title').text(data.name);
+  // Append the page
+  $('div.row.webcam').append(webcam_row);
+  // Resize the height to get the maps working
+  webcam_row.find('div.webcam_player').attr('id','webcam_' + data.id).height(webcam_row.width()-webcam_row.find('.x_title').height());
+
+  // Load Leaflet webcam code
+  var webcam = new L.Map('webcam_' + data.id, {
+    layers: [createWebcamLayer(data.id, data.max_zoom)],
+    fullscreenControl: true,
+  }).setView([0, 0], 1);
+
+  L.Control.TakePhoto = L.Control.extend({
+    options: {
+      position: 'topleft',
+    },
+    onAdd: function (map) {
+      var container = L.DomUtil.create('div', 'leaflet-control-takephoto leaflet-bar leaflet-control');
+      var link = L.DomUtil.create('a', 'leaflet-control-takephoto-button leaflet-bar-part', container);
+      link.title = '{{_('Save RAW photo')}}';
+      link.target = '_blank';
+      link.href = '/webcam/' + data.id + '_raw.jpg';
+      L.DomUtil.create('i', 'fa fa-camera', link);
+     return container;
+    }
+  });
+  var takePhotoControl = new L.Control.TakePhoto();
+  webcam.addControl(takePhotoControl);
+  webcam.addControl(L.Control.loading({separate: true}));
+
+  globals.webcams[webcam._container.id] = null;
+  updateWebcamView(webcam);
+}
+
+function updateWebcamView(webcam) {
+  if ($('div#' + webcam._container.id).length === 1) {
+    webcam.eachLayer(function(layer) {
+      layer.redraw();
+    });
+    clearTimeout(globals.webcams[webcam._container.id]);
+    globals.webcams[webcam._container.id] = setTimeout(function() { updateWebcamView(webcam);},30 * 1000);
+  }
+}
+
+function add_webcam_setting_row(data) {
+  if (source_row === null || source_row === '') {
+    return false;
+  }
+  // Create new row
+  var setting_row = $('<div>').addClass('row webcam').html(source_row.replace(/\[nr\]/g, $('form div.row.webcam').length));
+  if (data.id !== undefined) {
+    // Set ID
+    setting_row.attr('id','webcam_' + data.id);
+  }
+
+  // Re-initialize the select pulldowns
+  setting_row.find('span.select2.select2-container').remove();
+  setting_row.find('select').select2({
+    placeholder: '{{_('Select an option')}}',
+    allowClear: false,
+    minimumResultsForSearch: Infinity
+  }).on('change',function() {
+    $(this).parents('.x_content').find('img').removeClass('webcam_90 webcam_180 webcam_270 webcam_H webcam_V').addClass('webcam_' + this.value);
+  });
+  // Add on the bottom before the submit row
+  setting_row.insertBefore('div.row.submit');
+}
+
+function update_webcam(data) {
+  // Load the switch row to update the data
+  var content_row = $('div.row.webcam#' + 'webcam_' + data.id);
+
+  content_row.find('h2 span.title').text(data.name);
+  content_row.find('.webcam_preview img').attr('src',data.image);
+
+  // Set the values only when empty
+  content_row.find('input:not(.knob), select').each(function(counter,item) {
+    var name = item.name.replace(/webcam_[0-9]+_/g,'');
+    try {
+      if ($(item).val() === '') {
+        // Cast explicit to string to fix dropdown options
+        var value = data[name] + '';
+        if (name == 'timer_start' || name == 'timer_stop') {
+          // Format time to local format
+          value = moment(value, "HH:mm").format('LT');
+        }
+        $(item).val(value).trigger('change');
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  });
+}
+
+function add_webcam() {
+  var form = $('.add-form');
+  if (!check_form_data(form)) return false;
+
+  // Create power switch data object and fill it with form data
+  var data = {};
+  form.find('input, select').each(function(counter,item) {
+    data[item.name.replace('webcam_[nr]_','')] = item.value;
+  });
+  data['id'] = Math.floor(Date.now() / 1000);
+
+  // Add new row
+  add_webcam_setting_row(data);
+  // Update new row with new values
+  update_webcam(data);
+
+  // Reset form
+  form.find('input').val('');
+  form.find('select').val(null).trigger('change');
+  // Hide form
+  form.modal('hide');
+
+  reload_reload_theme();
+}
+/* End webcam code */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function update_player_messages(data) {
+  update_player_volume(data.volume);
+  var title   = (data.running ? '{{_('Playing')}}' : '{{_('Stopped')}}');
+  var message = (data.running ? '{{_('Playlist')}}: ' + data.name + ' - ' + moment(data.start * 1000).format('LT') + '-' + moment(data.stop * 1000).format('LT'): '{{_('Not playing')}}');
+  var icon    = (data.running ? 'fa-play-circle-o' : 'fa-play-circle-o');
+  var color   = (data.running ? 'green' : 'red');
+  add_notification_message('player_messages', title, message, icon, color);
+}
+
+function update_player_volume(volume) {
+  var menu = $('ul#player_messages');
+  menu.find('li.notification:not(:has(.player_volume))').remove();
+
+  if ($('div.row.player_volume').length == 0) {
+    var volume_control = $('<div>').addClass('row player_volume');
+    volume_control.append($('<div>').addClass('col-md-1').append($('<span>').addClass('fa fa-volume-down').on('click',function(){
+      $.post('/api/audio/player/volumedown');
+      return false;
+    })));
+    volume_control.append($('<div>').addClass('col-md-10  progress progress-striped active').append($('<div>').addClass('progress-bar progress-bar-success').attr('data-transitiongoal',volume).text(volume + '%')));
+    volume_control.append($('<div>').addClass('col-md-1').append($('<span>').addClass('fa fa-volume-up').on('click',function(){
+      $.post('/api/audio/player/volumeup');
+      return false;
+    })));
+    menu.prepend($('<li>').addClass('notification').append(volume_control));
+    $('ul#player_messages .progress .progress-bar').progressbar();
+  } else {
+    $('div.row.player_volume .progress-bar.progress-bar-success').css('width', volume + '%').text(volume + '%');
+  }
+}
+
+
+
+function update_player_indicator(data) {
+  var indicator = $('li#player_indicator');
+  indicator.removeClass('disabled');
+  indicator.find('span.running, span.stopped, span.disabled').hide();
+
+  if ('disabled' === data.running) {
+    indicator.addClass('disabled');
+    indicator.find('span.disabled').show();
+    add_notification_message('player_messages',
+                             '{{_('Disabled')}}',
+                             '{{_('Either add audio files and playlists. Or you have a pwm-dimmer switch configured.')}}',
+                             'fa-play-circle-o',
+                             'orange');
+    return;
+  }
+
+  if (data.running) {
+    indicator.find('span.running').show();
+  } else {
+    indicator.find('span.stopped').show();
+  }
+  update_player_messages(data);
+}
+
+
+
+
+
+
+
+
+
+
+
 
 function load_player_status() {
   $.getJSON('/api/audio/playing', function(player_data) {
@@ -2169,6 +2249,13 @@ function add_audio_playlist_row(id,name,start,stop,volume,files,repeat,shuffle) 
     };
   });
 }
+
+
+
+
+
+
+
 
 function init_wysiwyg() {
   function init_ToolbarBootstrapBindings() {
@@ -2268,6 +2355,12 @@ function uploadProfileImage() {
   file.click();
 }
 
+
+
+
+
+
+// Start it all.....
 $(document).ready(function() {
   moment.locale(globals.language);
   // NProgress bar animation during Ajax calls

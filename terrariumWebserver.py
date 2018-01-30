@@ -129,12 +129,6 @@ class terrariumWebserver():
       variables['person_name'] = self.__terrariumEngine.get_profile_name()
       variables['person_image'] = self.__terrariumEngine.get_profile_image()
 
-    elif 'sensor_temperature' == template:
-      variables['amount_of_sensors'] = self.__terrariumEngine.get_amount_of_sensors('temperature')
-
-    elif 'sensor_humidity' == template:
-      variables['amount_of_sensors'] = self.__terrariumEngine.get_amount_of_sensors('humidity')
-
     return variables
 
   def __render_page(self,template_name = 'index.html'):

@@ -24,7 +24,7 @@ class terrariumSensor:
   W1_BASE_PATH = '/sys/bus/w1/devices/'
   W1_TEMP_REGEX = re.compile(r'(?P<type>t|f)=(?P<value>[0-9]+)',re.IGNORECASE)
 
-  def __init__(self, id, hardware_type, sensor_type, sensor, name = '', alarm_min = 0, alarm_max = 0, limit_min = 0, limit_max = 100, indicator = None):
+  def __init__(self, id, hardware_type, sensor_type, sensor, name = '', indicator = None):
     self.id = id
     self.set_hardware_type(hardware_type)
 
@@ -46,10 +46,10 @@ class terrariumSensor:
 
     self.set_name(name)
     self.set_type(sensor_type,indicator)
-    self.set_alarm_min(alarm_min)
-    self.set_alarm_max(alarm_max)
-    self.set_limit_min(limit_min)
-    self.set_limit_max(limit_max)
+    self.set_alarm_min(0)
+    self.set_alarm_max(0)
+    self.set_limit_min(0)
+    self.set_limit_max(100)
 
     if self.id is None:
       self.id = md5(b'' + self.get_address().replace('-','').upper() + self.get_type()).hexdigest()
@@ -58,29 +58,15 @@ class terrariumSensor:
 
     self.last_update = datetime.datetime.fromtimestamp(0)
 
-    logger.info('Loaded %s %s sensor \'%s\' on location %s with minimum value %.2f%s, maximum value %.2f%s, alarm low value %.2f%s, alarm high value %.2f%s' %
-                (self.get_hardware_type(),
-                 self.get_type(),
-                 self.get_name(),
-                 self.get_address(),
-                 self.get_limit_min(),
-                 self.get_indicator(),
-                 self.get_limit_max(),
-                 self.get_indicator(),
-                 self.get_alarm_min(),
-                 self.get_indicator(),
-                 self.get_alarm_max(),
-                 self.get_indicator()
-                ))
+    logger.info('Loaded %s %s sensor \'%s\' on location %s.' % (self.get_hardware_type(),self.get_type(),self.get_name(),self.get_address()))
 
     self.update()
 
   @staticmethod
-  def scan(port,config,temperature_indicator): # TODO: Wants a callback per sensor here....?
+  def scan(port,temperature_indicator): # TODO: Wants a callback per sensor here....?
     starttime = time.time()
     logger.debug('Start scanning for temperature/humidity sensors')
     sensors = []
-    done_sensors = []
 
     if port > 0:
       try:
@@ -89,38 +75,18 @@ class terrariumSensor:
         for sensor in sensorsList:
           if 'temperature' in sensor.entryList():
             sensor_id = md5(b'' + sensor.address + 'temperature').hexdigest()
-            sensor_config = {}
-            if sensor_id in config:
-              sensor_config = config[sensor_id]
-              done_sensors.append(sensor_id)
-
             sensors.append(terrariumSensor( sensor_id,
                                             'owfs',
                                             'temperature',
                                             sensor,
-                                            sensor_config['name'] if 'name' in sensor_config else '',
-                                            sensor_config['alarm_min'] if 'alarm_min' in sensor_config else 0,
-                                            sensor_config['alarm_max'] if 'alarm_max' in sensor_config else 0,
-                                            sensor_config['limit_min'] if 'limit_min' in sensor_config else 0,
-                                            sensor_config['limit_max'] if 'limit_max' in sensor_config else 100,
-                                            temperature_indicator))
+                                            indicator=temperature_indicator))
 
           if 'humidity' in sensor.entryList():
             sensor_id = md5(b'' + sensor.address + 'humidity').hexdigest()
-            sensor_config = {}
-            if sensor_id in config:
-              sensor_config = config[sensor_id]
-              done_sensors.append(sensor_id)
-
             sensors.append(terrariumSensor(sensor_id,
                                            'owfs',
                                           'humidity',
-                                          sensor,
-                                          sensor_config['name'] if 'name' in sensor_config else '',
-                                          sensor_config['alarm_min'] if 'alarm_min' in sensor_config else 0,
-                                          sensor_config['alarm_max'] if 'alarm_max' in sensor_config else 0,
-                                          sensor_config['limit_min'] if 'limit_min' in sensor_config else 0,
-                                          sensor_config['limit_max'] if 'limit_max' in sensor_config else 100))
+                                          sensor))
 
       except ow.exNoController:
         logger.debug('OWFS file system is not actve / installed on this device!')
@@ -138,39 +104,11 @@ class terrariumSensor:
         sensor_type = ('temperature' if w1data.group('type') == 't' else 'humidity')
         sensor_address = address.replace(terrariumSensor.W1_BASE_PATH,'')
         sensor_id = md5(b'' + sensor_address.replace('-','').upper() + sensor_type).hexdigest()
-
-        sensor_config = {}
-        if sensor_id in config:
-          sensor_config = config[sensor_id]
-          done_sensors.append(sensor_id)
-
         sensors.append(terrariumSensor(sensor_id,
                                        'w1',
-                                       sensor_config['type'] if 'type' in sensor_config else sensor_type,
-                                       sensor_config['address'] if 'address' in sensor_config else sensor_address,
-                                       sensor_config['name'] if 'name' in sensor_config else '',
-                                       sensor_config['alarm_min'] if 'alarm_min' in sensor_config else 0,
-                                       sensor_config['alarm_max'] if 'alarm_max' in sensor_config else 0,
-                                       sensor_config['limit_min'] if 'limit_min' in sensor_config else 0,
-                                       sensor_config['limit_max'] if 'limit_max' in sensor_config else 100,
-                                       temperature_indicator))
-
-    # 'Scanning' for GPIO sensors. These are the remaining sensors based on config
-    for sensor_id in set(config.keys()) - set(done_sensors):
-      sensor_config = {}
-      if sensor_id in config:
-        sensor_config = config[sensor_id]
-
-      sensors.append(terrariumSensor(sensor_id,
-                                      sensor_config['hardwaretype'] if 'hardwaretype' in sensor_config else 'dht22',
-                                      sensor_config['type'] if 'type' in sensor_config else 'temperature',
-                                      sensor_config['address'] if 'address' in sensor_config else 1,
-                                      sensor_config['name'] if 'name' in sensor_config else '',
-                                      sensor_config['alarm_min'] if 'alarm_min' in sensor_config else 0,
-                                      sensor_config['alarm_max'] if 'alarm_max' in sensor_config else 0,
-                                      sensor_config['limit_min'] if 'limit_min' in sensor_config else 0,
-                                      sensor_config['limit_max'] if 'limit_max' in sensor_config else 100,
-                                      temperature_indicator))
+                                       sensor_type,
+                                       sensor_address,
+                                       indicator=temperature_indicator))
 
     logger.info('Found %d temperature/humidity sensors in %.5f seconds' % (len(sensors),time.time() - starttime))
     return sensors

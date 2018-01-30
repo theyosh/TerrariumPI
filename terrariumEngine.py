@@ -96,20 +96,58 @@ class terrariumEngine():
     thread.start_new_thread(self.__engine_loop, ())
 
   # Private/internal functions
-  def __load_sensors(self,reloading = False):
+  def __load_sensors(self,data = None):
     # Load Sensors, with ID as index
     starttime = time.time()
-    logger.info('%s terrariumPI temperature/humidity sensors' % ('Reloading' if reloading else 'Loading'),)
-    self.sensors = {}
-    for sensor in terrariumSensor.scan(self.config.get_owfs_port(), self.config.get_sensors(), self.get_temperature_indicator):
+    reloading = data is not None
+
+    logger.info('%s terrariumPI sensors' % ('Reloading' if reloading else 'Loading',))
+
+    sensor_config = (self.config.get_sensors() if not reloading else data)
+    if not reloading:
+      self.sensors = {}
+
+    seen_sensors = []
+    for sensor in terrariumSensor.scan(self.config.get_owfs_port(), self.get_temperature_indicator):
       self.sensors[sensor.get_id()] = sensor
 
+    for sensordata in sensor_config:
+      if sensordata['id'] is None or sensordata['id'] == 'None' or sensordata['id'] not in self.sensors:
+        # New sensor (add)
+        sensor = terrariumSensor( None,
+                                 sensordata['hardwaretype'],
+                                 sensordata['type'],
+                                 sensordata['address'],
+                                 sensordata['name'],
+                                 self.get_temperature_indicator)
+
+        self.sensors[sensor.get_id()] = sensor
+      else:
+        # Existing sensor
+        sensor = self.sensors[sensordata['id']]
+        # Should not be able to change setings
+        #sensor.set_hardware_type(sensordata['hardwaretype'])
+        sensor.set_type(sensordata['type'],self.get_temperature_indicator)
+        sensor.set_address(sensordata['address'])
+        sensor.set_name(sensordata['name'])
+
+      sensor.set_alarm_min(sensordata['alarm_min'])
+      sensor.set_alarm_max(sensordata['alarm_max'])
+      sensor.set_limit_min(sensordata['limit_min'])
+      sensor.set_limit_max(sensordata['limit_max'])
+
+      seen_sensors.append(sensor.get_id())
+
     if reloading:
+      for sensor_id in set(self.sensors) - set(seen_sensors):
+        # clean up old deleted sensors
+        del(self.sensors[sensor_id])
+
       self.environment.set_sensors(self.sensors)
 
-    logger.info('Done %s terrariumPI temperature/humidity sensors. Found %d sensors in %.3f seconds' % ('reloading' if reloading else 'loading',
-                                                                                                        len(self.sensors),
-                                                                                                        time.time()-starttime))
+    logger.info('Done %s terrariumPI sensors. Found %d sensors in %.3f seconds' % ('reloading' if reloading else 'loading',
+                                                                                      len(self.sensors),
+                                                                                      time.time()-starttime))
 
   def __load_power_switches(self,data = None):
     # Load Switches, with ID as index
@@ -428,44 +466,12 @@ class terrariumEngine():
     else:
       return {'sensors' : data}
 
-  def get_amount_of_sensors(self, filtertype = None):
-    if filtertype is None:
-      return len(self.sensors)
-    else:
-      return len(self.get_sensors([filtertype])['sensors'])
-
   def get_sensors_config(self, socket = False):
     return self.get_sensors()
 
   def set_sensors_config(self, data):
-    new_sensors = {}
-    for sensordata in data:
-      if sensordata['id'] is None or sensordata['id'] == 'None' or sensordata['id'] not in self.sensors:
-        # New sensor
-        sensor = terrariumSensor(None,sensordata['hardwaretype'],sensordata['type'],sensordata['address'],indicator=self.get_temperature_indicator)
-      else:
-        # Existing sensor
-        sensor = self.sensors[sensordata['id']]
-        # Should not be able to change setings
-        #sensor.set_hardware_type(sensordata['hardwaretype'])
-        #sensor.set_type(sensordata['type'])
-
-      # Updating address will softly fail when updating OWFS sensors.
-      sensor.set_address(sensordata['address'])
-      sensor.set_name(sensordata['name'])
-      sensor.set_alarm_min(sensordata['alarm_min'])
-      sensor.set_alarm_max(sensordata['alarm_max'])
-      sensor.set_limit_min(sensordata['limit_min'])
-      sensor.set_limit_max(sensordata['limit_max'])
-
-      new_sensors[sensor.get_id()] = sensor
-
-    self.sensors = new_sensors
-    if self.config.save_sensors(self.sensors):
-      self.__load_sensors(True)
-      return True
-
-    return False
+    self.__load_sensors(data)
+    return self.config.save_sensors(self.sensors)
   # End sensors part
 
   # Switches part
