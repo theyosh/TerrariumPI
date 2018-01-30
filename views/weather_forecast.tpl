@@ -4,7 +4,7 @@
           <div class="col-md-4 col-sm-5 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2>{{_('Weather')}} <small>{{_('Current')}}</small></h2>
+                <h2><span aria-hidden="true" class="glyphicon glyphicon-cloud"></span> {{_('Weather')}} <small>{{_('Current')}}</small></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -109,7 +109,7 @@
           <div class="col-md-8 col-sm-7 col-xs-12">
             <div class="x_panel" id="weather_day">
               <div class="x_title">
-                <h2>{{_('Day forecast')}} <small id="weather_hourly">...</small>
+                <h2><span aria-hidden="true" class="glyphicon glyphicon-cloud"></span> {{_('Day forecast')}} <small id="weather_hourly">...</small>
                 </h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
@@ -127,7 +127,7 @@
             </div>
             <div class="x_panel" id="weather_week">
               <div class="x_title">
-                <h2>{{_('Week forecast')}} <small id="weather_daily">...</small>
+                <h2><span aria-hidden="true" class="glyphicon glyphicon-cloud"></span> {{_('Week forecast')}} <small id="weather_daily">...</small>
                 </h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>

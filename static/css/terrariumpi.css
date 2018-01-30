@@ -82,13 +82,6 @@ form#profile.edit label{
 }
 /* End general overrule */
 
-
-
-
-div.row.sensor{
-  display: none;
-}
-
 div.modal div.row.sensor,
 div.modal div.row.switch,
 div.modal div.row.door,
@@ -104,63 +97,58 @@ div.modal div.row.webcam{
   line-height: 32px;
 }
 
-/* Dashboard tiles */
-#dashboard .tile_count .tile_stats_count {
+
+/* Dashboard */
+div#dashboard .tile_count .tile_stats_count {
   margin-bottom: 0px;
   padding-bottom: 0px;
 }
 
-#dashboard .tile_count .tile_stats_count .pull-left {
+div#dashboard .tile_count .tile_stats_count .pull-left {
   position: absolute;
 }
 
-#dashboard div.row.environment table.tile_info {
-  display: none;
-}
-
-#dashboard div.row.environment table.tile_info td:first-child {
-  width: 70%;
-}
-
-div#dashboard div.row.environment table.tile_info tr {
-  display: none;
-}
-
-/* Dashboard Progress bars */
-#dashboard .row.tile_count .progress {
+div#dashboard .row.tile_count .progress {
   height: 3.2em;
   margin: 1.5em .2em 0 0;
 }
 
+div#dashboard div.row.environment h4 span.glyphicon-warning-sign,
+div#dashboard div.row.environment small span,
+div#dashboard div.row.environment table,
+div#dashboard div.row.environment table tr{
+  display: none;
+}
+
+div#dashboard div.row.environment small span:first-child {
+  display: inline;
+}
+
+div#dashboard div.row.environment table td:first-child {
+  width: 70%;
+}
+
+/* End Dashboard */
 
 
 
 
 
-/* Dashboard indicators */
+
+
+
+
+
+
+
 
 /* Default state */
 .top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#online_indicator .offline,
 .top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#door_indicator .open,
 .top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#door_indicator .closed,
 .top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#player_indicator .running,
-.top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#player_indicator .stopped,
-div.row.environment_light.disabled,
-div.row.environment_sprayer.disabled,
-div.row.environment_heater.disabled,
-div.row.environment_cooler.disabled {
+.top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#player_indicator .stopped {
   display:none;
-}
-
-@media only screen and (max-width: 700px) {
-  /* Small screen hide disabled elements */
-  .top_nav .nav_menu ul.nav.navbar-nav.navbar-right li.dropdown.disabled {
-    display:none;
-  }
-
-  .nav.toggle {
-    width: 60px;
-  }
 }
 
 
@@ -189,8 +177,7 @@ div.row.environment_cooler.disabled {
   text-align: right !important;
   margin-left: -10px;
 }
-
-
+/* End Graphs */
 
 /* Weather */
 #weather_credits {
@@ -201,12 +188,7 @@ div.row.environment_cooler.disabled {
 .daily-weather {
   display: none;
 }
-
-
-
-
-
-
+/* End Weather */
 
 
 /* Power switches */
@@ -364,6 +346,23 @@ table.dataTable .glyphicon-play {
   margin: 0.2em;
   cursor: pointer;
 }
+
+
+
+@media only screen and (max-width: 700px) {
+  /* Small screen hide disabled elements */
+  .top_nav .nav_menu ul.nav.navbar-nav.navbar-right li.dropdown.disabled {
+    display:none;
+  }
+
+  .nav.toggle {
+    width: 60px;
+  }
+}
+
+
+
+
 
 /* Documentation */
 

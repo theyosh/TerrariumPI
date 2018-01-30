@@ -44,14 +44,14 @@
               <div class="row">
                 <span class="count_top"><span aria-hidden="true" class="glyphicon glyphicon-flash"></span> {{_('Total power in kWh')}}</span>
                 <div class="count">0</div>
-                <span class="count_bottom"><i class="green costs"><span></span></i> {{_('in')}} <span class="duration"></span></span>
+                <span class="count_bottom"><i class="green costs"></i> {{_('in')}} <span class="duration"></span></span>
               </div>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id="total_water">
               <div class="row">
                 <span class="count_top"><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Total water in L')}}</span>
                 <div class="count">0</div>
-                <span class="count_bottom"><i class="green costs"><span></span></i> {{_('in')}} <span class="duration"></span></span>
+                <span class="count_bottom"><i class="green costs"></i> {{_('in')}} <span class="duration"></span></span>
               </div>
             </div>
           </div><!-- /top tiles -->
@@ -79,14 +79,14 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <div class="row environment_light disabled">
-                    <h4><span class="fa fa-lightbulb-o"></span> {{_('Lights')}} <small>{{_('mode')}}: <span>{{_('Disabled')}}</span></small></h4>
+                  <div class="row environment_light">
+                    <h4><span class="fa fa-lightbulb-o"></span> {{_('Lights')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="sensor">{{_('Sensor')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
                           <p>{{_('Status')}}</p>
                         </td>
-                        <td class="state"><i class="fa fa-square"></i></td>
+                        <td class="state"><i class="fa fa-square green" title="{{_('On')}}"></i><i class="fa fa-square red" title="{{_('Off')}}"></i></td>
                       </tr>
                       <tr>
                         <td>
@@ -108,14 +108,14 @@
                       </tr>
                     </table>
                   </div>
-                  <div class="row environment_sprayer disabled">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-tint"></i> {{_('Sprayer')}} <small>{{_('mode')}}: <span>{{_('Disabled')}}</span></small></h4>
+                  <div class="row environment_sprayer">
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-tint"></i> {{_('Sprayer')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="sensor">{{_('Sensor')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
                           <p>{{_('Status')}}</p>
                         </td>
-                        <td class="state"><i class="fa fa-square"></i></td>
+                        <td class="state"><i class="fa fa-square green" title="{{_('On')}}"></i><i class="fa fa-square red" title="{{_('Off')}}"></i></td>
                       </tr>
                       <tr>
                         <td>
@@ -131,14 +131,14 @@
                       </tr>
                     </table>
                   </div>
-                  <div class="row environment_heater disabled">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-fire"></i> {{_('Heater')}} <small>{{_('mode')}}: <span>{{_('Disabled')}}</span></small></h4>
+                  <div class="row environment_heater">
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-fire"></i> {{_('Heater')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="sensor">{{_('Sensor')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
                           <p>{{_('Status')}}</p>
                         </td>
-                        <td class="state"><i class="fa fa-square"></i></td>
+                        <td class="state"><i class="fa fa-square green" title="{{_('On')}}"></i><i class="fa fa-square red" title="{{_('Off')}}"></i></td>
                       </tr>
                       <tr>
                         <td>
@@ -178,14 +178,14 @@
                       </tr>
                     </table>
                   </div>
-                  <div class="row environment_cooler disabled">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" style="display: none"></span> <i class="fa fa-flag-o"></i> {{_('Cooler')}} <small>{{_('mode')}}: <span>{{_('Disabled')}}</span></small></h4>
+                  <div class="row environment_cooler">
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-flag-o"></i> {{_('Cooler')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="sensor">{{_('Sensor')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
                           <p>{{_('Status')}}</p>
                         </td>
-                        <td class="state"><i class="fa fa-square"></i></td>
+                        <td class="state"><i class="fa fa-square green" title="{{_('On')}}"></i><i class="fa fa-square red" title="{{_('Off')}}"></i></td>
                       </tr>
                       <tr>
                         <td>

@@ -57,21 +57,22 @@
             </div>
           </div>
         </form>
-        <div class="modal fade new-sensor-form" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal fade add-form" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                   <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">{{_('Add new sensor')}}</h4>
+                <h4 class="modal-title">{{_('Add new sensor')}}</h4>
               </div>
               <div class="modal-body">
                 <div class="row sensor">
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
-                      <div class="x_title" style="display: none">
-                        <h2><span class="sensor_[nr]_icon"></span> {{_('Sensor')}} <small>{{_('new')}}</small></h2>
+                      <div class="x_title">
+                        <h2 class="temperature"><span aria-hidden="true" class="glyphicon glyphicon-fire"></span> {{_('Temperature sensor')}} <span class="title">{{_('new')}}</span></h2>
+                        <h2 class="humidity" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Humidity sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <ul class="nav navbar-right panel_toolbox">
                           <li>
                             <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -87,6 +88,7 @@
                           <label for="sensor_[nr]_hardwaretype">{{_('Hardware')}} <span class="required">*</span></label>
                           <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{!translations.get_translation('sensor_field_hardware')}}">
                             <select class="form-control" name="sensor_[nr]_hardwaretype" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
+                              <option value="">{{_('Select an option')}}</option>
                               <option value="owfs">{{_('OWFS')}}</option>
                               <option value="dht11">{{_('DHT11')}}</option>
                               <option value="dht22">{{_('DHT22')}}</option>
@@ -98,13 +100,14 @@
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                           <label for="sensor_[nr]_address">{{_('Address')}}</label> <span class="required">*</span>
-                          <input class="form-control" name="sensor_[nr]_address" placeholder="{{_('Address')}}" readonly="readonly"  required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_address')}}">
+                          <input class="form-control" name="sensor_[nr]_address" placeholder="{{_('Address')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_address')}}">
                           <input class="form-control" name="sensor_[nr]_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                           <label for="sensor_[nr]_type">{{_('Type')}} <span class="required">*</span></label>
                           <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{!translations.get_translation('sensor_field_type')}}">
                             <select class="form-control" name="sensor_[nr]_type" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
+                              <option value="">{{_('Select an option')}}</option>
                               <option value="temperature">{{_('Temperature')}}</option>
                               <option value="humidity">{{_('Humidity')}}</option>
                             </select>
@@ -141,14 +144,16 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{_('Close')}}</button>
-                <button type="button" class="btn btn-primary" onclick="add_sensor()" >{{_('Add')}}</button>
+                <button type="button" class="btn btn-primary">{{_('Add')}}</button>
               </div>
             </div>
           </div>
         </div>
         <script type="text/javascript">
           $(document).ready(function() {
-            $('.page-title').append('<div class="title_right"><h3><button type="button" class="btn btn-primary alignright" data-toggle="modal" data-target=".new-sensor-form"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h3> </div>');
+            // Create add button
+            init_form_settings('sensor');
+
             $('select[name^="sensor_[nr]_"]').select2({
               placeholder: '{{_('Select an option')}}',
               allowClear: false,
@@ -160,24 +165,19 @@
 
                 if ('remote' === this.value) {
                   address_field.on('change',function(){
-                      parse_remote_data('sensor',this.value);
+                      parse_remote_data(address_field,this.value);
                   });
                 }
+              } else if (this.name.indexOf('type') >= 0 && this.value != '') {
+                $(this).parentsUntil('.row').find('h2').hide().filter('.' + this.value).show();
               }
             }).val(null).trigger('change');
-            $.get($('form').attr('action'),function(data){
-              $.each(data.sensors, function(index,sensor) {
-                // Clone empty sensor row....
-                add_sensor_row(sensor.id,
-                               sensor.hardwaretype,
-                               sensor.address,
-                               sensor.type,
-                               sensor.name,
-                               sensor.alarm_min,
-                               sensor.alarm_max,
-                               sensor.limit_min,
-                               sensor.limit_max,
-                               formatNumber(sensor.current));
+
+            // Load existing switches
+            $.get($('form').attr('action'),function(json_data){
+              $.each(json_data.sensors, function(index,sensor_data) {
+                add_sensor_setting_row(sensor_data);
+                update_sensor(sensor_data);
               });
               reload_reload_theme();
             });

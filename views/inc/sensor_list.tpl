@@ -1,16 +1,10 @@
 % include('inc/page_header.tpl')
-% icon = 'fire' if sensor_type == 'temperature' else 'tint'
-        % for item in range(0,amount_of_sensors):
         <div class="row sensor">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2>
-                  <span aria-hidden="true" class="glyphicon glyphicon-{{icon}}"></span>
-                  <span class="title">{{_(sensor_type.capitalize())}}</span>
-                  <small>...</small>
-                  <span class="badge bg-red" style="display:none;">{{_('warning')}}</span>
-                </h2>
+                <h2 class="temperature"><span aria-hidden="true" class="glyphicon glyphicon-fire"></span> {{_('Temperature sensor')}} <span class="title">{{_('new')}}</span> <span class="badge bg-red">{{_('warning')}}</span></h2>
+                <h2 class="humidity"><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Humidity sensor')}} <span class="title">{{_('new')}}</span> <span class="badge bg-red">{{_('warning')}}</span></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -65,18 +59,19 @@
             </div>
           </div>
         </div>
-        % end
         <script type="text/javascript">
           $(document).ready(function() {
-            $.get('/api/sensors/{{sensor_type}}',function(data){
-              var rows = $('div.row.sensor');
-              $.each(data.sensors, function(index,sensor) {
-                // Add an id to the row when first run
-                $(rows[index]).attr('id',sensor.id).show();
-                sensor_gauge(sensor.id, sensor);
-                load_history_graph(sensor.id,'{{sensor_type}}','/api/history/sensors/' + sensor.id);
+            source_row = $('div.row.sensor').html();
+            $('div.row.sensor').remove();
+
+            $.get('/api/sensors/{{sensor_type}}',function(json_data) {
+              $.each(json_data.sensors,function(index,sensor_data){
+                add_sensor_status_row(sensor_data);
+                update_sensor(sensor_data);
+                sensor_gauge('sensor_' + sensor_data.id, sensor_data);
+                load_history_graph('sensor_' + sensor_data.id,'{{sensor_type}}','/api/history/sensors/' + sensor_data.id);
               });
-              setContentHeight();
+              reload_reload_theme();
             });
           });
         </script>

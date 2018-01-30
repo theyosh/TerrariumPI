@@ -3,7 +3,7 @@
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2><span aria-hidden="true" class="glyphicon glyphicon-facetime-video"></span>{{_('Webcam')}} <span class="title"></span></h2>
+                <h2><span aria-hidden="true" class="glyphicon glyphicon-facetime-video"></span> {{_('Webcam')}} <span class="title"></span></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
