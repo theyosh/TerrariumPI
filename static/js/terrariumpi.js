@@ -2102,7 +2102,7 @@ function add_webcam() {
 function update_player_messages(data) {
   update_player_volume(data.volume);
   var title   = (data.running ? '{{_('Playing')}}' : '{{_('Stopped')}}');
-  var message = (data.running ? '{{_('Playlist')}}: ' + data.name + ' - ' + moment(data.start * 1000).format('LT') + '-' + moment(data.stop * 1000).format('LT'): '{{_('Not playing')}}');
+  var message = (data.running ? '{{_('Playlist')}}: ' + data.name + ' - ' + moment(data.start, "HH:mm").format('LT') + '-' + moment(data.stop, "HH:mm").format('LT'): '{{_('Not playing')}}');
   var icon    = (data.running ? 'fa-play-circle-o' : 'fa-play-circle-o');
   var color   = (data.running ? 'green' : 'red');
   add_notification_message('player_messages', title, message, icon, color);
