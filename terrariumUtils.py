@@ -22,7 +22,7 @@ class terrariumUtils():
 
   @staticmethod
   def is_true(value):
-    return value in [True,'True','true','1',1,'ON','On','on']
+    return value in [True,'True','true','1',1,'ON','On','on','YES','Yes','yes']
 
   @staticmethod
   def to_BCM_port_number(value):
