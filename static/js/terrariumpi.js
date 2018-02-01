@@ -2045,24 +2045,6 @@ function update_webcam(data) {
         console.log(e);
       }
     }
-
-
-    /*
-    var name = item.name.replace(/webcam_[0-9]+_/g,'');
-    try {
-      if ($(item).val() === '') {
-        // Cast explicit to string to fix dropdown options
-        var value = data[name] + '';
-        if (name == 'timer_start' || name == 'timer_stop') {
-          // Format time to local format
-          value = moment(value, "HH:mm").format('LT');
-        }
-        $(item).val(value).trigger('change');
-      }
-    } catch (e) {
-      console.log(e);
-    }
-    */
   });
 }
 
