@@ -55,11 +55,8 @@ class terrariumSensor:
       self.id = md5(b'' + self.get_address().replace('-','').upper() + self.get_type()).hexdigest()
 
     self.current = float(0)
-
     self.last_update = datetime.datetime.fromtimestamp(0)
-
     logger.info('Loaded %s %s sensor \'%s\' on location %s.' % (self.get_hardware_type(),self.get_type(),self.get_name(),self.get_address()))
-
     self.update()
 
   @staticmethod

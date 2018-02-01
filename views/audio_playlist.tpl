@@ -51,21 +51,21 @@
             </div>
           </div>
         </form>
-        <div class="modal fade new-playlist-form" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal fade add-form" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                   <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">{{_('Add new audio playlist')}}</h4>
+                <h4 class="modal-title">{{_('Add new audio playlist')}}</h4>
               </div>
               <div class="modal-body">
                 <div class="row playlist">
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
-                      <div class="x_title" style="display: none">
-                        <h2><span class="playlist_[nr]_icon"></span> {{_('Audio playlist')}} <small>{{_('new')}}</small></h2>
+                      <div class="x_title">
+                        <h2><span aria-hidden="true" class="glyphicon glyphicon-music"></span> {{_('Audio playlist')}} <span class="title">{{_('new')}}</span> <small>...</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
                           <li>
                             <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -109,6 +109,7 @@
                             <label for="playlist_[nr]_files">{{_('Files')}}</label> <span class="required">*</span>
                             <div class="form-group" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('audio_playlist_field_files')}}">
                               <select class="form-control" multiple="multiple" name="playlist_[nr]_files" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                <option value="">{{_('Select an option')}}</option>
                               </select>
                             </div>
                           </div>
@@ -120,52 +121,43 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{_('Close')}}</button>
-                <button type="button" class="btn btn-primary" onclick="add_audio_playlist()" >{{_('Add')}}</button>
+                <button type="button" class="btn btn-primary">{{_('Add')}}</button>
               </div>
             </div>
           </div>
         </div>
         <script type="text/javascript">
           $(document).ready(function() {
-            jQuery('.new-playlist-form .js-switch').each(function(index,html_element){
-              var switchery = new Switchery(html_element);
-              html_element.onchange = function() {
-                this.value = this.checked;
-              };
-            });
-
-            $('.page-title').append('<div class="title_right"><h3><button type="button" class="btn btn-primary alignright" data-toggle="modal" data-target=".new-playlist-form"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h3> </div>');
-
-            $('select[name="playlist_[nr]_files"]').select2({
-              placeholder: '{{_('Select an option')}}',
-              allowClear: false,
-              minimumResultsForSearch: Infinity
-            });
+            init_form_settings('playlist');
 
             $.get('/api/audio/files',function(data){
               var select_boxes = $('select[name="playlist_[nr]_files"]');
               $.each(data.audiofiles,function (index,audiofile){
                 select_boxes.append($('<option>').attr({'value':audiofile.id}).text(audiofile.name));
               });
-            });
 
-            $.get($('form').attr('action'),function(data){
-              var sort_order = {}
-              $.each(data.playlists, function(index,playlist) {
-                sort_order[moment(playlist.start * 1000).format('HHmm')] = index;
+              source_row = $('.modal-body div.row.playlist').html();
+
+              $('select[name="playlist_[nr]_files"]').select2({
+                placeholder: '{{_('Select an option')}}',
+                allowClear: false,
+                minimumResultsForSearch: Infinity
               });
-              $.each(Object.keys(sort_order).sort(), function(index,key) {
-                var playlist = data.playlists[sort_order[key]];
-                add_audio_playlist_row(playlist.id,
-                                       playlist.name,
-                                       moment(playlist.start * 1000).format('HH:mm'),
-                                       moment(playlist.stop * 1000).format('HH:mm'),
-                                       playlist.volume,
-                                       playlist.files,
-                                       playlist.repeat,
-                                       playlist.shuffle);
+
+              $('.add-form .js-switch').each(function(index,html_element){
+                var switchery = new Switchery(html_element);
+                html_element.onchange = function() {
+                  this.value = this.checked;
+                };
               });
-              reload_reload_theme();
+
+              $.get($('form').attr('action'),function(json_data){
+                $.each(json_data.playlists, function(index,playlist_data) {
+                  add_audio_playlist_setting_row(playlist_data);
+                  update_audio_playlist(playlist_data);
+                });
+                reload_reload_theme();
+              });
             });
           });
         </script>

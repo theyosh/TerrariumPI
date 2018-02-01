@@ -631,7 +631,7 @@ class terrariumEngine():
         data.append(playlists[playlist_id].get_data())
 
     if socket:
-      self.__send_message({'type':'playlists_data','data':data})
+      self.__send_message({'type':'playlists','data': data})
     else:
       return {'playlists' : data}
 
@@ -639,25 +639,8 @@ class terrariumEngine():
     return self.get_audio_playlists()
 
   def set_audio_playlists_config(self, data):
-    new_audio_playlists = {}
-    for audio_playlist_data in data:
-      audio_playlist = {'id'     : md5(b'' + str(audio_playlist_data['start']) + str(audio_playlist_data['stop'])).hexdigest(),
-                        'name'   : audio_playlist_data['name'],
-                        'start'  : audio_playlist_data['start'],
-                        'stop'   : audio_playlist_data['stop'],
-                        'volume' : audio_playlist_data['volume'],
-                        'files'  : audio_playlist_data['files'],
-                        'repeat' : audio_playlist_data['repeat'] in [True,'True','true','1',1,'on'],
-                        'shuffle': audio_playlist_data['shuffle'] in [True,'True','true','1',1,'on'],
-                        }
-
-      new_audio_playlists[audio_playlist['id']] = audio_playlist
-
-    if self.config.save_audio_playlists(new_audio_playlists):
-      self.__audio_player.reload_playlists(self.config.get_audio_playlists())
-      return True
-
-    return False
+    self.__audio_player.reload_playlists(data)
+    return self.config.save_audio_playlists(self.__audio_player.get_playlists())
 
   def get_audio_playing(self,socket = False):
     data = self.__audio_player.get_current_state()

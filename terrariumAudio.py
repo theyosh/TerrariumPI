@@ -12,6 +12,7 @@ import alsaaudio
 
 from hashlib import md5
 from MediaInfoDLL import MediaInfo, Stream
+from terrariumUtils import terrariumUtils
 
 from gevent import monkey, sleep
 monkey.patch_all()
@@ -27,13 +28,12 @@ class terrariumAudioPlayer():
     self.__audio_player = None
     self.__audio_mixer = None
 
+    self.__load_audio_files()
+    self.__load_playlists(playlistdata)
     hwcards = terrariumAudioPlayer.get_sound_cards()
     if cardid in hwcards:
       self.__hwid = hwcards[cardid]['hwid']
-
       self.__callback = callback
-      self.__load_audio_files()
-      self.__load_playlists(playlistdata)
 
       if pwmdimmer and cardid == 'bcm2835 ALSA':
         logger.warning('Disabled audio playing due to hardware conflict with PWM dimmers and onboard soundcard')
@@ -52,19 +52,20 @@ class terrariumAudioPlayer():
 
   def __load_playlists(self,data):
     self.__playlists = {}
-    for audio_playlist_id in data:
+    for audio_playlist in data:
       audio_files = {}
-      for fileid in data[audio_playlist_id]['files']:
+
+      for fileid in audio_playlist['files']:
         if fileid in self.__audio_files:
           audio_files[fileid] = self.__audio_files[fileid]
 
-      playlist = terrariumAudioPlaylist(data[audio_playlist_id]['id'],
-                                        data[audio_playlist_id]['name'],
-                                        data[audio_playlist_id]['start'],
-                                        data[audio_playlist_id]['stop'],
-                                        data[audio_playlist_id]['volume'],
-                                        data[audio_playlist_id]['repeat'],
-                                        data[audio_playlist_id]['shuffle'],
+      playlist = terrariumAudioPlaylist(audio_playlist['id'],
+                                        audio_playlist['name'],
+                                        audio_playlist['start'],
+                                        audio_playlist['stop'],
+                                        audio_playlist['volume'],
+                                        audio_playlist['repeat'],
+                                        audio_playlist['shuffle'],
                                         audio_files)
 
       self.__playlists[playlist.get_id()] = playlist
@@ -223,8 +224,9 @@ class terrariumAudioPlaylist():
     self.__volume = None
     self.__repeat = False
     self.__shuffle = False
-    self.__files = None
+    self.__files = []
     self.__is_started_at = None
+    self.__timer_time_table = []
 
     self.set_name(name)
     self.set_start(start)
@@ -234,27 +236,25 @@ class terrariumAudioPlaylist():
     self.set_shuffle(shuffle)
     self.set_files(files)
 
-  def __calculate_start_stop_times(self):
-    now = datetime.datetime.now()
-    on = None
-    off = None
+  def __calculate_time_table(self):
+    logger.info('Calculating timer -=- Calculating timer -=- Calculating timer -=- Calculating timer');
+    self.__timer_time_table = []
+    if self.get_start() is None or self.get_stop() is None:
+      return
 
-    if self.__start is not None:
-      on = datetime.datetime.fromtimestamp(self.__start).replace(year=int(now.strftime('%Y')),
-                                                                 month=int(now.strftime('%m')),
-                                                                 day=int(now.strftime('%d')))
+    logger.info('Calculating autioplaylist \'%s\' with timer data: start = %s, stop = %s',
+      self.get_name(),
+      self.get_start(),
+      self.get_stop())
 
-    if self.__stop is not None:
-      off = datetime.datetime.fromtimestamp(self.__stop).replace(year=int(now.strftime('%Y')),
-                                                                 month=int(now.strftime('%m')),
-                                                                 day=int(now.strftime('%d')))
-    if on is not None and off is not None and on > off:
-      if now > off:
-        off += datetime.timedelta(hours=24)
-      else:
-        on -= datetime.timedelta(hours=24)
+    duration_on = None
+    if not self.get_repeat():
+      duration_on = int(self.get_songs_duration()/60)
 
-    return {'on':on,'off':off}
+    self.__timer_time_table = terrariumUtils.calculate_time_table(self.get_start(),
+                                                                  self.get_stop(),
+                                                                  duration_on)
+    logger.info('Timer time table loaded for autioplaylist \'%s\' with %s entries.', self.get_name(),len(self.__timer_time_table))
 
   def get_id(self):
     return self.__id
@@ -266,16 +266,18 @@ class terrariumAudioPlaylist():
     return self.__name
 
   def set_start(self,value):
-    self.__start = value
+    self.__start = terrariumUtils.parse_time(value)
+    self.__calculate_time_table()
 
   def get_start(self):
-    return self.__calculate_start_stop_times()['on']
+    return self.__start
 
   def set_stop(self,value):
-    self.__stop = value
+    self.__stop = terrariumUtils.parse_time(value)
+    self.__calculate_time_table()
 
   def get_stop(self):
-    return self.__calculate_start_stop_times()['off']
+    return self.__stop
 
   def set_volume(self,value):
     self.__volume = value
@@ -290,13 +292,13 @@ class terrariumAudioPlaylist():
     return self.__files
 
   def set_repeat(self,repeat = True):
-    self.__repeat = repeat == True
+    self.__repeat = terrariumUtils.is_true(repeat)
 
   def get_repeat(self):
     return self.__repeat == True
 
   def set_shuffle(self,shuffle = True):
-    self.__shuffle = shuffle == True
+    self.__shuffle = terrariumUtils.is_true(shuffle)
 
   def get_shuffle(self):
     return self.__shuffle == True
@@ -305,16 +307,27 @@ class terrariumAudioPlaylist():
     self.__is_started_at = datetime.datetime.now()
 
   def is_time(self):
-    is_time = self.get_start() < datetime.datetime.now() < self.get_stop()
+    logger.info('Checking timer time table for switch %s with %s entries.', self.get_name(),len(self.__timer_time_table))
+    is_time = None
+    now = datetime.datetime.today()
+    for time_schedule in self.__timer_time_table:
+      if now > time_schedule[0] and now < time_schedule[1]:
+        is_time = True
+        break
 
-    if is_time and not self.get_repeat() and self.__is_started_at is not None and datetime.datetime.now() - self.__is_started_at < datetime.timedelta(hours=24):
-      # Extra check for playlists that do not repeat and the playlist duration is more then all songs combine duration
-      is_time = datetime.datetime.now() <= self.__is_started_at + datetime.timedelta(seconds=self.get_songs_duration())
+      elif now < time_schedule[0]:
+        is_time = False
+        break
 
+    if is_time is None:
+      self.__calculate_time_table()
+      is_time = False
+
+    logger.info('Timer action is done for switch %s. Is it time?: %s.', self.get_name(),('Yes' if is_time else 'Nope'))
     return is_time
 
   def get_duration(self):
-    return (self.get_stop() - self.get_start()).total_seconds()
+    return (self.__timer_time_table[0][1] - self.__timer_time_table[0][0]).total_seconds()
 
   def get_songs_duration(self):
     return 0.0 + sum(self.__files[fileid].get_track_duration() for fileid in self.__files)
@@ -325,14 +338,15 @@ class terrariumAudioPlaylist():
   def get_data(self):
     data = {'id'      : self.get_id(),
             'name'    : self.get_name(),
-            'start'   : int(self.get_start().strftime("%s")),
-            'stop'    : int(self.get_stop().strftime("%s")),
+            'start'   : self.get_start(),
+            'stop'    : self.get_stop(),
             'volume'  : self.get_volume(),
             'files'   : self.get_files().keys(),
             'repeat'  : self.get_repeat(),
             'shuffle' : self.get_shuffle(),
             'is_time' : self.is_time(),
-            'duration': self.get_duration()
+            'duration': self.get_duration(),
+            'songs_duration': self.get_songs_duration()
             }
 
     return data

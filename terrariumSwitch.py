@@ -153,10 +153,10 @@ class terrariumSwitch():
       logger.warning('Dimmer %s is already working. Ignoring state change!. Will switch to latest state value when done', self.get_name())
 
   def __calculate_time_table(self):
+    logger.info('Calculating timer -=- Calculating timer -=- Calculating timer -=- Calculating timer');
     self.__timer_time_table = []
     if self.state is None or \
        not self.get_timer_enabled() or \
-       self.get_timer_start() == self.get_timer_stop() or \
        (self.get_timer_on_duration() == 0 and self.get_timer_off_duration() == 0):
 
       return False
@@ -169,28 +169,10 @@ class terrariumSwitch():
       self.get_timer_on_duration(),
       self.get_timer_off_duration())
 
-    now = datetime.datetime.today()
-    starttime = self.get_timer_start().split(':')
-    starttime = now.replace(hour=int(starttime[0]), minute=int(starttime[1]))
-    logger.debug('Calculating timer \'%s\' start time: %s',self.get_name(),starttime)
-
-    stoptime = self.get_timer_stop().split(':')
-    stoptime = now.replace(hour=int(stoptime[0]), minute=int(stoptime[1]))
-    logger.debug('Calculating timer \'%s\' stop time: %s',self.get_name(),stoptime)
-
-    if starttime > stoptime:
-      if now > stoptime:
-        stoptime += datetime.timedelta(hours=24)
-      else:
-        starttime -= datetime.timedelta(hours=24)
-
-    #starttime -= datetime.timedelta(hours=24)
-    #stoptime += datetime.timedelta(hours=24)
-
-    while starttime <= stoptime:
-      self.__timer_time_table.append((starttime,starttime + datetime.timedelta(minutes=self.get_timer_on_duration())))
-      starttime += datetime.timedelta(minutes=self.get_timer_on_duration() + self.get_timer_off_duration())
-
+    self.__timer_time_table = terrariumUtils.calculate_time_table(self.get_timer_start(),
+                                                                  self.get_timer_stop(),
+                                                                  self.get_timer_on_duration(),
+                                                                  self.get_timer_off_duration())
     logger.info('Timer time table loaded for switch \'%s\' with %s entries.', self.get_name(),len(self.__timer_time_table))
 
   def set_state(self, state, force = False):
@@ -478,34 +460,22 @@ class terrariumSwitch():
     return (self.__dimmer_off_percentage if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] else 0.0)
 
   def set_timer_enabled(self,value):
-    self.__timer_enabled = value in ['enabled',True,'True','true',1]
+    self.__timer_enabled = terrariumUtils.is_true(value)
     self.__calculate_time_table()
 
   def get_timer_enabled(self):
     return (self.__timer_enabled if self.__timer_enabled in [True,False] else False)
 
   def set_timer_start(self,value):
-    if ':' in value:
-      try:
-        value = value.split(':')
-        self.__timer_start = "{:0>2}:{:0>2}".format(int(value[0])%24,int(value[1])%60)
-        self.__calculate_time_table()
-      except Exception, err:
-        print 'Error in set_timer_start'
-        print err
+    self.__timer_start = terrariumUtils.parse_time(value)
+    self.__calculate_time_table()
 
   def get_timer_start(self):
     return self.__timer_start
 
   def set_timer_stop(self,value):
-    if ':' in value:
-      try:
-        value = value.split(':')
-        self.__timer_stop = "{:0>2}:{:0>2}".format(int(value[0])%24,int(value[1])%60)
-        self.__calculate_time_table()
-      except Exception, err:
-        print 'Error in set_timer_stop'
-        print err
+    self.__timer_stop = terrariumUtils.parse_time(value)
+    self.__calculate_time_table()
 
   def get_timer_stop(self):
     return self.__timer_stop

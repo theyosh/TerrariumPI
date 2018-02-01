@@ -221,8 +221,8 @@ div#dashboard div.row.environment table td:first-child {
 }
 .power_switch.dimmer div span.glyphicon-time {
   font-size: 3.3em;
-  top: 55%;
-  left: 60%;
+  top: 53%;
+  left: 61%;
 }
 .power_switch span.glyphicon-time::before,
 .power_switch.dimmer div span.glyphicon-time::before {

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
+import datetime
 
 class terrariumUtils():
 
@@ -21,7 +22,7 @@ class terrariumUtils():
 
   @staticmethod
   def is_true(value):
-    return value in ['true','True','1',1,'on',True]
+    return value in [True,'True','true','1',1,'ON','On','on']
 
   @staticmethod
   def to_BCM_port_number(value):
@@ -111,3 +112,47 @@ class terrariumUtils():
       return matches.groupdict()
 
     return False
+
+  @staticmethod
+  def parse_time(value):
+    time = None
+    if ':' in value:
+      try:
+        value = value.split(':')
+        time = "{:0>2}:{:0>2}".format(int(value[0])%24,int(value[1])%60)
+      except Exception, err:
+        print 'Error in terrariumUtils.parse_time'
+        print err
+
+    return time
+
+  @staticmethod
+  def calculate_time_table(start, stop, on_duration = None, off_duration = None):
+    timer_time_table = []
+
+    now = datetime.datetime.today()
+    starttime = start.split(':')
+    starttime = now.replace(hour=int(starttime[0]), minute=int(starttime[1]))
+
+    stoptime = stop.split(':')
+    stoptime = now.replace(hour=int(stoptime[0]), minute=int(stoptime[1]))
+
+    if starttime == stoptime:
+      stoptime += datetime.timedelta(hours=24)
+
+    elif starttime > stoptime:
+      if now > stoptime:
+        stoptime += datetime.timedelta(hours=24)
+      else:
+        starttime -= datetime.timedelta(hours=24)
+
+    if on_duration is None and off_duration is None:
+      timer_time_table.append((starttime,stoptime))
+    elif on_duration is not None and off_duration is None:
+      timer_time_table.append((starttime,starttime + datetime.timedelta(minutes=on_duration)))
+    else:
+      while starttime <= stoptime:
+        timer_time_table.append((starttime,starttime + datetime.timedelta(minutes=on_duration)))
+        starttime += datetime.timedelta(minutes=on_duration + off_duration)
+
+    return timer_time_table

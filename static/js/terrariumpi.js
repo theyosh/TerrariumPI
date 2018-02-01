@@ -490,7 +490,6 @@ function info_notification_bubble(title,message) {
 /* General functions - End notification bubbles */
 
 /* General functions - Notification messages */
-
 function add_notification_message(type, title, message, icon, color, date) {
   var notification_date = date || new Date().getTime();
   var menu = $('ul#' + type);
@@ -601,7 +600,17 @@ function init_form_settings(pType) {
         add_webcam();
       });
       break;
+
+    case 'playlist':
+      // Load initial HTML data
+      source_row = $('.modal-body div.row.playlist').html();
+      // Bind to add button
+      submit_button.on('click',function(){
+        add_audio_playlist();
+      });
+      break;
   }
+
 }
 
 function check_form_data(form) {
@@ -700,11 +709,11 @@ function prepare_form_data(form) {
                   objectdata = {};
                   prev_nr = current_nr;
                 }
-                if (matches[3] === 'on' || matches[3] === 'off' || matches[3] === 'start' || matches[3] === 'stop') {
+                if (matches[3] === 'on' || matches[3] === 'off') {
                   field_value = moment(field_value, 'LT').unix();
                 }
 
-                if (matches[3] === 'timer_start' || matches[3] === 'timer_stop') {
+                if (['timer_start','timer_stop','start','stop'].indexOf(matches[3]) != -1) {
                   // TODO: new way of storing time values. Should be used at all other time fields
                   // Load from local format, and store in 24h format. Do not use UNIX timestamp formats
                   field_value = moment(field_value, 'LT').format('HH:mm');
@@ -1532,15 +1541,21 @@ function update_sensor(data) {
   content_row.find('h2 span.title').text(data.name);
   // Set the values only when empty
   content_row.find('input:not(.knob), select').each(function(counter,item) {
-    var name = item.name.replace(/sensor_[0-9]+_/g,'');
-    try {
-      if ($(item).val() === '') {
-        // Cast explicit to string to fix dropdown options
-        var value = data[name] + '';
-        $(item).val(value).trigger('change');
+    if (item.name !== undefined && item.name !== '') {
+      var name = item.name.replace(/sensor_[0-9]+_/g,'');
+      var field_value = $(item).val();
+      try {
+        if (field_value === '' || field_value === null) {
+          var value = data[name];
+          if (!$.isArray(value)) {
+            // Cast explicit to string to fix dropdown options
+            value += '';
+          }
+          $(item).val(value).trigger('change');
+        }
+      } catch (e) {
+        console.log(e);
       }
-    } catch (e) {
-      console.log(e);
     }
   });
 }
@@ -1556,7 +1571,7 @@ function add_sensor_setting_row(data) {
     setting_row.attr('id','sensor_' + data.id);
   }
   // Re-initialize the select pulldowns
-  setting_row.find('span.select2.select2-container').remove();
+  //setting_row.find('span.select2.select2-container').remove();
   setting_row.find('select').select2({
     placeholder: '{{_('Select an option')}}',
     allowClear: false,
@@ -1585,7 +1600,11 @@ function add_sensor() {
   // Create power switch data object and fill it with form data
   var data = {};
   form.find('input, select').each(function(counter,item) {
-    data[item.name.replace('sensor_[nr]_','')] = item.value;
+    if (item.name !== undefined && item.name !== '') {
+      var fieldname = item.name.replace('sensor_[nr]_','');
+      var value = $(item).val();
+      data[fieldname] = value;
+    }
   });
   data['id'] = Math.floor(Date.now() / 1000);
 
@@ -1603,7 +1622,6 @@ function add_sensor() {
   reload_reload_theme();
 }
 /* End sensors code code */
-
 
 /* Power switches code */
 function toggle_power_switch(id) {
@@ -1659,36 +1677,42 @@ function update_power_switch(data) {
   var content_row = $('div.row.switch#' + 'powerswitch_' + data.id);
 
   // Update state icon
-  content_row.find('span.glyphicon').removeClass('blue green').addClass((data.state ? 'green' : 'blue'));
-
+  var on = data.state;
   // Set the name and status
   var current_status_data = '';
-  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype) {
+  if (data.hardwaretype.indexOf('dimmer') > 0) {
     current_status_data = formatNumber(data.current_power_wattage) + 'W / ';
+    on = data.state > data.dimmer_off_percentage;
   }
   current_status_data += formatNumber(data.power_wattage) + 'W';
   if (data.water_flow > 0) {
     current_status_data += ' - ' + formatNumber(data.water_flow) + 'L/m';
   }
+  content_row.find('span.glyphicon').removeClass('blue green').addClass((on ? 'green' : 'blue'));
   content_row.find('h2 span.title').text(data.name);
   content_row.find('h2 small.current_usage').text(current_status_data);
   //switch_row.find('.knob').val(power_switch.state).trigger('change');
 
   // Set the values only when empty
   content_row.find('input:not(.knob), select').each(function(counter,item) {
-    var name = item.name.replace(/switch_[0-9]+_/g,'');
-    try {
-      if ($(item).val() === '') {
-        // Cast explicit to string to fix dropdown options
-        var value = data[name] + '';
-        if (name == 'timer_start' || name == 'timer_stop') {
-          // Format time to local format
-          value = moment(value, "HH:mm").format('LT');
+    if (item.name !== undefined && item.name !== '') {
+      var name = item.name.replace(/switch_[0-9]+_/g,'');
+      var field_value = $(item).val();
+      try {
+        if (field_value === '' || field_value === null) {
+          var value = data[name];
+          if (!$.isArray(value)) {
+            // Cast explicit to string to fix dropdown options
+            value += '';
+          }
+          if (['timer_start','timer_stop'].indexOf(name) != -1) {
+            value = moment(value, "HH:mm").format('LT');
+          }
+          $(item).val(value).trigger('change');
         }
-        $(item).val(value).trigger('change');
+      } catch (e) {
+        console.log(e);
       }
-    } catch (e) {
-      console.log(e);
     }
   });
 
@@ -1714,7 +1738,7 @@ function add_power_switch_setting_row(data) {
     */
   }
   // Re-initialize the select pulldowns
-  setting_row.find('span.select2.select2-container').remove();
+  //setting_row.find('span.select2.select2-container').remove();
   setting_row.find('select').select2({
     placeholder: '{{_('Select an option')}}',
     allowClear: false,
@@ -1735,7 +1759,11 @@ function add_power_switch() {
   // Create power switch data object and fill it with form data
   var data = {};
   form.find('input, select').each(function(counter,item) {
-    data[item.name.replace('switch_[nr]_','')] = item.value;
+    if (item.name !== undefined && item.name !== '') {
+      var fieldname = item.name.replace('switch_[nr]_','');
+      var value = $(item).val();
+      data[fieldname] = value;
+    }
   });
   data['id'] = Math.floor(Date.now() / 1000);
 
@@ -1753,7 +1781,6 @@ function add_power_switch() {
   reload_reload_theme();
 }
 /* End power switches code code */
-
 
 /* Doors code */
 function update_door_indicator(status) {
@@ -1834,19 +1861,21 @@ function update_door(data) {
 
   // Set the values only when empty
   content_row.find('input:not(.knob), select').each(function(counter,item) {
-    var name = item.name.replace(/door_[0-9]+_/g,'');
-    try {
-      if ($(item).val() === '') {
-        // Cast explicit to string to fix dropdown options
-        var value = data[name] + '';
-        if (name == 'timer_start' || name == 'timer_stop') {
-          // Format time to local format
-          value = moment(value, "HH:mm").format('LT');
+    if (item.name !== undefined && item.name !== '') {
+      var name = item.name.replace(/door_[0-9]+_/g,'');
+      var field_value = $(item).val();
+      try {
+        if (field_value === '' || field_value === null) {
+          var value = data[name];
+          if (!$.isArray(value)) {
+            // Cast explicit to string to fix dropdown options
+            value += '';
+          }
+          $(item).val(value).trigger('change');
         }
-        $(item).val(value).trigger('change');
+      } catch (e) {
+        console.log(e);
       }
-    } catch (e) {
-      console.log(e);
     }
   });
 }
@@ -1862,7 +1891,7 @@ function add_door_setting_row(data) {
     setting_row.attr('id','door_' + data.id);
   }
   // Re-initialize the select pulldowns
-  setting_row.find('span.select2.select2-container').remove();
+  //setting_row.find('span.select2.select2-container').remove();
   setting_row.find('select').select2({
     placeholder: '{{_('Select an option')}}',
     allowClear: false,
@@ -1879,7 +1908,11 @@ function add_door() {
   // Create power switch data object and fill it with form data
   var data = {};
   form.find('input, select').each(function(counter,item) {
-    data[item.name.replace('door_[nr]_','')] = item.value;
+    if (item.name !== undefined && item.name !== '') {
+      var fieldname = item.name.replace('door_[nr]_','');
+      var value = $(item).val();
+      data[fieldname] = value;
+    }
   });
   data['id'] = Math.floor(Date.now() / 1000);
 
@@ -1898,7 +1931,6 @@ function add_door() {
 }
 /* End Doors code */
 
-
 /* Webcam code */
 function createWebcamLayer(webcamid, maxzoom) {
   return L.tileLayer('/webcam/{id}_tile_{z}_{x}_{y}.jpg?_{time}', {
@@ -1912,6 +1944,7 @@ function createWebcamLayer(webcamid, maxzoom) {
     maxZoom: maxzoom + 1
   });
 }
+
 function initWebcam(data) {
   if ($('div#webcam_' + data.id).length === 1) {
     return false;
@@ -1975,7 +2008,7 @@ function add_webcam_setting_row(data) {
   }
 
   // Re-initialize the select pulldowns
-  setting_row.find('span.select2.select2-container').remove();
+  //setting_row.find('span.select2.select2-container').remove();
   setting_row.find('select').select2({
     placeholder: '{{_('Select an option')}}',
     allowClear: false,
@@ -1996,6 +2029,25 @@ function update_webcam(data) {
 
   // Set the values only when empty
   content_row.find('input:not(.knob), select').each(function(counter,item) {
+    if (item.name !== undefined && item.name !== '') {
+      var name = item.name.replace(/webcam_[0-9]+_/g,'');
+      var field_value = $(item).val();
+      try {
+        if (field_value === '' || field_value === null) {
+          var value = data[name];
+          if (!$.isArray(value)) {
+            // Cast explicit to string to fix dropdown options
+            value += '';
+          }
+          $(item).val(value).trigger('change');
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+
+    /*
     var name = item.name.replace(/webcam_[0-9]+_/g,'');
     try {
       if ($(item).val() === '') {
@@ -2010,6 +2062,7 @@ function update_webcam(data) {
     } catch (e) {
       console.log(e);
     }
+    */
   });
 }
 
@@ -2020,7 +2073,11 @@ function add_webcam() {
   // Create power switch data object and fill it with form data
   var data = {};
   form.find('input, select').each(function(counter,item) {
-    data[item.name.replace('webcam_[nr]_','')] = item.value;
+    if (item.name !== undefined && item.name !== '') {
+      var fieldname = item.name.replace('webcam_[nr]_','');
+      var value = $(item).val();
+      data[fieldname] = value;
+    }
   });
   data['id'] = Math.floor(Date.now() / 1000);
 
@@ -2040,74 +2097,8 @@ function add_webcam() {
 /* End webcam code */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Audio code */
+/* Audio player */
 function update_player_messages(data) {
   update_player_volume(data.volume);
   var title   = (data.running ? '{{_('Playing')}}' : '{{_('Stopped')}}');
@@ -2139,7 +2130,11 @@ function update_player_volume(volume) {
   }
 }
 
-
+function load_player_status() {
+  $.getJSON('/api/audio/playing', function(player_data) {
+    update_player_indicator(player_data);
+  });
+}
 
 function update_player_indicator(data) {
   var indicator = $('li#player_indicator');
@@ -2164,24 +2159,110 @@ function update_player_indicator(data) {
   }
   update_player_messages(data);
 }
+/* End audio player */
 
+/* Audio playlist code */
+function update_audio_playlist(data) {
+  // Load the switch row to update the data
+  var content_row = $('div.row.playlist#' + 'playlist_' + data.id);
 
+  // Update title
+  content_row.find('h2 span.title').text(data.name);
 
+  // Update duration
+  content_row.find('h2 small').text(moment.duration(( data.repeat ? data.duration : data.songs_duration ) * 1000).humanize());
 
-
-
-
-
-
-
-
-
-function load_player_status() {
-  $.getJSON('/api/audio/playing', function(player_data) {
-    update_player_indicator(player_data);
+  // Set the values only when empty
+  content_row.find('input:not(.knob), select').each(function(counter,item) {
+    if (item.name !== undefined && item.name !== '') {
+      var name = item.name.replace(/playlist_[0-9]+_/g,'');
+      var field_value = $(item).val();
+      try {
+        if (field_value === '' || field_value === null || ['repeat','shuffle'].indexOf(name) != -1) {
+          var value = data[name];
+          if (!$.isArray(value)) {
+            // Cast explicit to string to fix dropdown options
+            value += '';
+          }
+          if (['repeat','shuffle'].indexOf(name) != -1) {
+            value = (value == 'true' || value == true || value == 1);
+          }
+          $(item).val(value).trigger('change');
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
   });
 }
 
+function add_audio_playlist_setting_row(data) {
+  if (source_row === null || source_row === '') {
+    return false;
+  }
+  // Create new row
+  var setting_row = $('<div>').addClass('row playlist').html(source_row.replace(/\[nr\]/g, $('form div.row.playlist').length));
+  if (data.id !== undefined) {
+    // Set ID
+    setting_row.attr('id','playlist_' + data.id);
+  }
+  // Re-initialize the select pulldowns
+  setting_row.find('select').select2({
+    placeholder: '{{_('Select an option')}}',
+    allowClear: false,
+    minimumResultsForSearch: Infinity
+  });
+
+  setting_row.find('.js-switch').each(function(index,html_element){
+    this.checked = (this.name.indexOf('_repeat') != -1 && data.repeat == true) || (this.name.indexOf('_shuffle') != -1 && data.shuffle == true)
+    var switchery = new Switchery(this);
+    html_element.onchange = function() {
+      this.value = this.checked;
+    };
+  });
+
+  // Add on the bottom before the submit row
+  setting_row.insertBefore('div.row.submit');
+}
+
+function add_audio_playlist() {
+  var form = $('.add-form');
+  if (!check_form_data(form)) return false;
+
+  // Create power switch data object and fill it with form data
+  var data = {};
+  form.find('input, select').each(function(counter,item) {
+    if (item.name !== undefined && item.name !== '') {
+      var fieldname = item.name.replace('playlist_[nr]_','');
+      var value = $(item).val();
+      if (['repeat','shuffle'].indexOf(fieldname) != -1) {
+        value = (value == 'true' || value == true || value == 1);
+      }
+      data[fieldname] = value;
+    }
+  });
+  data['id'] = Math.floor(Date.now() / 1000);
+
+  // Add new row
+  add_audio_playlist_setting_row(data);
+  // Update new row with new values
+  update_audio_playlist(data);
+
+  // Reset form
+  form.find('input').val('');
+
+  form.find('input[name="repeat"]').val(false);
+  form.find('input[name="shuffle"]').val(false);
+
+  form.find('select').val(null).trigger('change');
+  // Hide form
+  form.modal('hide');
+
+  reload_reload_theme();
+}
+/* End audio playlist code */
+
+/* Audio files code */
 function preview_audio_file(audio_file_id, audio_file_name) {
   var modal = $('.modal.fade.preview_player');
   modal.find('.modal-body h4').text(audio_file_name);
@@ -2203,60 +2284,10 @@ function delete_audio_file(audio_file_id, audio_file_name) {
     });
   }
 }
+/* End audio files code */
+/* End audio code */
 
-function add_audio_playlist() {
-  var form = $('.new-playlist-form');
-  if (!check_form_data(form)) return false;
-
-  add_audio_playlist_row('None',
-                form.find('input[name="playlist_[nr]_name"]').val(),
-                form.find('input[name="playlist_[nr]_start"]').val(),
-                form.find('input[name="playlist_[nr]_stop"]').val(),
-                form.find('input[name="playlist_[nr]_volume"]').val(),
-                form.find('select[name="playlist_[nr]_files"]').val(),
-                form.find('input[name="playlist_[nr]_repeat"]').val() == 'true',
-                form.find('input[name="playlist_[nr]_shuffle"]').val() == 'true');
-
-  $('.new-playlist-form').modal('hide');
-}
-
-function add_audio_playlist_row(id,name,start,stop,volume,files,repeat,shuffle) {
-  var audio_playlist_row = $($('.modal-body div.row.playlist').parent().clone().html().replace(/\[nr\]/g, $('form div.row.playlist').length));
-
-  // Remove existing switchery from modal input form
-  audio_playlist_row.find('span.switchery').remove();
-  audio_playlist_row.find('.x_title').show().find('h2 small').text(name);
-  audio_playlist_row.find('span.select2.select2-container').remove();
-
-  audio_playlist_row.find('input, select').each(function(counter,item){
-    $(item).val(eval($(item).attr('name').replace(/playlist_[0-9]+_/g,'')));
-  });
-
-  audio_playlist_row.insertBefore('div.row.submit').show();
-  reload_reload_theme();
-
-  audio_playlist_row.find("select").select2({
-    placeholder: '{{_('Select an option')}}',
-    allowClear: false,
-    minimumResultsForSearch: Infinity
-  });
-
-  audio_playlist_row.find('.js-switch').each(function(index,html_element){
-    this.checked = (this.name.indexOf('_repeat') != -1 && repeat == true) || (this.name.indexOf('_shuffle') != -1 && shuffle == true)
-    var switchery = new Switchery(this);
-    html_element.onchange = function() {
-      this.value = this.checked;
-    };
-  });
-}
-
-
-
-
-
-
-
-
+/* Profile code */
 function init_wysiwyg() {
   function init_ToolbarBootstrapBindings() {
 
@@ -2354,10 +2385,7 @@ function uploadProfileImage() {
   });
   file.click();
 }
-
-
-
-
+/* End profile code */
 
 
 // Start it all.....
