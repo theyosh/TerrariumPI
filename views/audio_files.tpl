@@ -102,7 +102,7 @@
           $(document).ready(function() {
             $('.dropzone').dropzone({ url: this.action,
                                       withCredentials: true,
-                                      acceptedFiles: '.mp3,.ogg,.m4a',
+                                      acceptedFiles: '.mp3,.ogg,.m4a,.oga',
                                       dictDefaultMessage: '{{_('Drop files here to upload')}}',
                                       dictFallbackMessage: '{{_('Press browse button to select files')}}',
                                       dictFallbackText: null,
@@ -111,19 +111,12 @@
                                       dictResponseError: '{{_('Server could not process the upload. Error code {{statusCode}}')}}',
                                       init: function() {
                                         this.on("success", function(file,response) {
-                                          new PNotify({
-                                            type: (response.ok ? 'success' : 'error'),
-                                            title: response.title,
-                                            text: response.message,
-                                            nonblock: {
-                                              nonblock: true
-                                            },
-                                            delay: 3000,
-                                            mouse_reset: false,
-                                            //addclass: 'dark',
-                                            styling: 'bootstrap3',
-                                            hide: true,
-                                          });
+                                          if (response.ok) {
+                                            ok_notification_bubble(response.title,response.message);
+                                          } else {
+                                            error_notification_bubble(response.title,response.message);
+                                          }
+
                                         });
                                       }
                                     });

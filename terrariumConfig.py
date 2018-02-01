@@ -104,10 +104,18 @@ class terrariumConfig:
           if 'soundcard' in data and data['soundcard'] == '0':
             self.__config.set('terrariumpi', 'soundcard', 'bcm2835 ALSA')
 
+        elif version == 330:
+          logger.info('Updating configuration file to version: %s' % (version,))
+          for section in self.__config.sections():
+            if section[:8] == 'playlist':
+              playlist_data = self.__get_config(section)
+              self.__config.set(section, 'start', str(datetime.datetime.fromtimestamp(playlist_data['start']).strftime('%H:%M')))
+              self.__config.set(section, 'stop',  str(datetime.datetime.fromtimestamp(playlist_data['stop']).strftime('%H:%M')))
+
       # Update version number
       self.__config.set('terrariumpi', 'version', str(to_version))
-      self.__save_config()
-      self.__config.read(terrariumConfig.CUSTOM_CONFIG)
+      #self.__save_config()
+      #self.__config.read(terrariumConfig.CUSTOM_CONFIG)
       logger.info('Updated configuration. Set version to: %s' % (to_version,))
 
   def __reload_config(self):
@@ -190,13 +198,7 @@ class terrariumConfig:
 
     Make sure that the fields cur_password and new_password are never stored
     '''
-    if 'cur_password' in data:
-      del(data['cur_password'])
-    if 'new_password' in data:
-      del(data['new_password'])
-    if 'available_languages' in data:
-      del(data['available_languages'])
-    return self.__update_config('terrariumpi',data)
+    return self.__update_config('terrariumpi',data,['cur_password','new_password','available_languages'])
 
   def get_pi_power_wattage(self):
     '''Get terrariumPI power usage'''
@@ -401,15 +403,15 @@ class terrariumConfig:
 
   # Audio playlist config functions
   def save_audio_playlist(self,data):
-    return self.__update_config('playlist' + data['id'],data,['running'])
+    return self.__update_config('playlist' + data['id'],data,['running','songs_duration','duration'])
 
   def save_audio_playlists(self,data):
     update_ok = True
-    for audio_playlist_id in self.get_audio_playlists():
-      self.__config.remove_section('playlist' + audio_playlist_id)
+    for audio_playlist in self.get_audio_playlists():
+      self.__config.remove_section('playlist' + audio_playlist['id'])
 
     for audio_playlist_id in data:
-      update_ok = update_ok and self.save_audio_playlist(data[audio_playlist_id])
+      update_ok = update_ok and self.save_audio_playlist(data[audio_playlist_id].get_data())
 
     if len(data) == 0:
       update_ok = update_ok and self.__save_config()
@@ -417,17 +419,9 @@ class terrariumConfig:
     return update_ok
 
   def get_audio_playlists(self):
-    data = {}
-    for section in self.__config.sections():
-      if section[:8] == 'playlist':
-        audio_playlist_data = self.__get_config(section)
-        audio_playlist_data['start'] = int(audio_playlist_data['start'])
-        audio_playlist_data['stop'] = int(audio_playlist_data['stop'])
-        audio_playlist_data['files'] = audio_playlist_data['files'].split(',') if audio_playlist_data['files'] is not None else []
-        audio_playlist_data['volume'] = int(audio_playlist_data['volume'])
-        audio_playlist_data['repeat'] = audio_playlist_data['repeat'] in [True,1,'True','true','1','on']
-        audio_playlist_data['shuffle'] = audio_playlist_data['shuffle'] in [True,1,'True','true','1','on']
-        data[section[8:]] = audio_playlist_data
+    data = self.__get_all_config('playlist')
+    for playlist in data:
+      playlist['files'] = playlist['files'].split(',')
 
     return data
   # End audio playlist config functions
