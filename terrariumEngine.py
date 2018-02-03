@@ -387,10 +387,10 @@ class terrariumEngine():
 
       duration = time.time() - starttime
       if duration < terrariumEngine.LOOP_TIMEOUT:
-        logger.info('Engine loop done in %.5f seconds. Waiting for %.5f seconds for next round' % (duration,terrariumEngine.LOOP_TIMEOUT - duration))
+        logger.info('Update done in %.5f seconds. Waiting for %.5f seconds for next round' % (duration,terrariumEngine.LOOP_TIMEOUT - duration))
         sleep(terrariumEngine.LOOP_TIMEOUT - duration) # TODO: Config setting
       else:
-        logger.warning('Engine took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEngine.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
+        logger.warning('Updating took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEngine.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
 
   def __send_message(self,message):
     for queue in self.subscribed_queues:
