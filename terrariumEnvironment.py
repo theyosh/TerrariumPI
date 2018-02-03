@@ -300,11 +300,12 @@ class terrariumEnvironment():
                                                                                                       self.sprayer['mode'],
                                                                                                       extra_logging_message))
           self.sprayer_on()
-        else:
+        elif toggle_on and self.is_door_open():
           if self.is_door_open():
             logger.warning('Environment could not spray for %f seconds based on %s mode because of an open door.%s' % (self.sprayer['spray_duration'],
                                                                                                                        self.sprayer['mode'],
                                                                                                                        extra_logging_message))
+        else:
           if self.is_sprayer_on():
             logger.info('Environment is turning off the sprayer based on %s mode.' % (self.sprayer['mode'],))
 
