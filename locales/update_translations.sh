@@ -20,11 +20,6 @@ done
 
 # Add static translations
 echo "#: Missing text string" >> terrariumpi.pot
-echo "msgid \"Weather forecast\"" >> terrariumpi.pot
-echo "msgstr \"\"" >> terrariumpi.pot
-echo "" >> terrariumpi.pot
-
-echo "#: Missing text string" >> terrariumpi.pot
 echo "msgid \"Weather settings\"" >> terrariumpi.pot
 echo "msgstr \"\"" >> terrariumpi.pot
 echo "" >> terrariumpi.pot
