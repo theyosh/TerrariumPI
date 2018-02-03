@@ -1,4 +1,4 @@
-# TerrariumPI 3.2.1
+# TerrariumPI 3.3.0
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
 
 For humidity control there is support for a spraying system. The sprayer can be configured to spray for an X amount of seconds and there is a minumal period between two spray actions. Use at least one humitidy sensors to get a constant humidity value.
@@ -31,6 +31,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Manual dimming through web interface
   - Predefined on and off durations
   - Predefined on and off dimming percentages
+- Support for timmers in powerswitches and environment #72
 - Reading out multiple temperature and humidity sensors
 - Support for native Raspberry Pi cam out of the box
 - Support for USB and remote webcams
@@ -66,7 +67,7 @@ The installation expects a Pi with working network and ssh. It is tested with [R
 1. Get a working Raspberry Pi and login as user 'pi'  
   `ssh pi@[raspberry_ip]`
 2. Install git  
-  `apt install git`
+  `sudo apt -y install git`
 3. Clone this repository and submodules!  
   `git clone --recursive https://github.com/theyosh/TerrariumPI.git`
 4. Enter the new TerrariumPI folder  
