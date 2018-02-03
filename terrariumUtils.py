@@ -147,12 +147,38 @@ class terrariumUtils():
         starttime -= datetime.timedelta(hours=24)
 
     if on_duration is None and off_duration is None:
-      timer_time_table.append((starttime,stoptime))
+      timer_time_table.append((int(starttime.strftime('%s')),int(stoptime.strftime('%s'))))
     elif on_duration is not None and off_duration is None:
-      timer_time_table.append((starttime,starttime + datetime.timedelta(minutes=on_duration)))
+      if (starttime + datetime.timedelta(minutes=on_duration)) > stoptime:
+        on_duration = (stoptime - starttime).total_seconds() / 60
+      timer_time_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(minutes=on_duration)).strftime('%s'))))
     else:
-      while starttime <= stoptime:
-        timer_time_table.append((starttime,starttime + datetime.timedelta(minutes=on_duration)))
+      while starttime < stoptime:
+        if (starttime + datetime.timedelta(minutes=on_duration)) > stoptime:
+          on_duration = (stoptime - starttime).total_seconds() / 60
+
+        timer_time_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(minutes=on_duration)).strftime('%s'))))
         starttime += datetime.timedelta(minutes=on_duration + off_duration)
 
     return timer_time_table
+
+  @staticmethod
+  def is_time(time_table):
+    now = int(datetime.datetime.now().strftime('%s'))
+    for time_schedule in time_table:
+      if time_schedule[0] < now < time_schedule[1]:
+        return True
+
+      elif now < time_schedule[0]:
+        return False
+
+    #End of time_table. No data to decide for today
+    return None
+
+  @staticmethod
+  def duration(time_table):
+    duration = 0
+    for time_schedule in time_table:
+      duration += time_schedule[1] - time_schedule[0]
+
+    return duration

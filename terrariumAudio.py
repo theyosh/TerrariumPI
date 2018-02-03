@@ -308,16 +308,7 @@ class terrariumAudioPlaylist():
 
   def is_time(self):
     logger.info('Checking timer time table for switch %s with %s entries.', self.get_name(),len(self.__timer_time_table))
-    is_time = None
-    now = datetime.datetime.today()
-    for time_schedule in self.__timer_time_table:
-      if now > time_schedule[0] and now < time_schedule[1]:
-        is_time = True
-        break
-
-      elif now < time_schedule[0]:
-        is_time = False
-        break
+    is_time = terrariumUtils.is_time(self.__timer_time_table)
 
     if is_time is None:
       self.__calculate_time_table()
@@ -327,7 +318,7 @@ class terrariumAudioPlaylist():
     return is_time
 
   def get_duration(self):
-    return (self.__timer_time_table[0][1] - self.__timer_time_table[0][0]).total_seconds()
+    return terrariumUtils.duration(self.__timer_time_table)
 
   def get_songs_duration(self):
     return 0.0 + sum(self.__files[fileid].get_track_duration() for fileid in self.__files)

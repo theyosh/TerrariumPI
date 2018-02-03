@@ -4,6 +4,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 import ConfigParser
 from glob import glob
+import datetime
 
 from terrariumUtils import terrariumUtils
 
@@ -109,13 +110,22 @@ class terrariumConfig:
           for section in self.__config.sections():
             if section[:8] == 'playlist':
               playlist_data = self.__get_config(section)
-              self.__config.set(section, 'start', str(datetime.datetime.fromtimestamp(playlist_data['start']).strftime('%H:%M')))
-              self.__config.set(section, 'stop',  str(datetime.datetime.fromtimestamp(playlist_data['stop']).strftime('%H:%M')))
+              self.__config.set(section, 'start', str(datetime.datetime.fromtimestamp(float(playlist_data['start'])).strftime('%H:%M')))
+              self.__config.set(section, 'stop',  str(datetime.datetime.fromtimestamp(float(playlist_data['stop'])).strftime('%H:%M')))
+
+            if section == 'environment':
+              environment_data = self.__get_config(section)
+              self.__config.set(section, 'light_on',  str(datetime.datetime.fromtimestamp(float(environment_data['light_on'])).strftime('%H:%M')))
+              self.__config.set(section, 'light_off', str(datetime.datetime.fromtimestamp(float(environment_data['light_off'])).strftime('%H:%M')))
+              self.__config.set(section, 'heater_on',  str(datetime.datetime.fromtimestamp(float(environment_data['heater_on'])).strftime('%H:%M')))
+              self.__config.set(section, 'heater_off', str(datetime.datetime.fromtimestamp(float(environment_data['heater_off'])).strftime('%H:%M')))
+              self.__config.set(section, 'cooler_on',  str(datetime.datetime.fromtimestamp(float(environment_data['cooler_on'])).strftime('%H:%M')))
+              self.__config.set(section, 'cooler_off', str(datetime.datetime.fromtimestamp(float(environment_data['cooler_off'])).strftime('%H:%M')))
 
       # Update version number
       self.__config.set('terrariumpi', 'version', str(to_version))
-      #self.__save_config()
-      #self.__config.read(terrariumConfig.CUSTOM_CONFIG)
+      self.__save_config()
+      self.__config.read(terrariumConfig.CUSTOM_CONFIG)
       logger.info('Updated configuration. Set version to: %s' % (to_version,))
 
   def __reload_config(self):
@@ -200,21 +210,6 @@ class terrariumConfig:
     '''
     return self.__update_config('terrariumpi',data,['cur_password','new_password','available_languages'])
 
-  def get_pi_power_wattage(self):
-    '''Get terrariumPI power usage'''
-    config = self.get_system()
-    return float(config['power_usage'])
-
-  def get_admin(self):
-    '''Get terrariumPI admin name'''
-    config = self.get_system()
-    return config['admin']
-
-  def get_password(self):
-    '''Get terrariumPI admin password'''
-    config = self.get_system()
-    return config['password']
-
   def get_available_languages(self):
     '''Get terrariumPI available languages'''
     if self.__cache_available_languages is None:
@@ -230,6 +225,37 @@ class terrariumConfig:
 
     return config['language']
 
+  def get_weather_location(self):
+    data = self.get_weather()
+    return data['location'] if 'location' in data else None
+
+  def get_weather_windspeed(self):
+    data = self.get_weather()
+    return data['windspeed'] if 'windspeed' in data else None
+
+  def get_temperature_indicator(self):
+    config = self.get_system()
+    return config['temperature_indicator'].upper()
+
+  def get_admin(self):
+    '''Get terrariumPI admin name'''
+    config = self.get_system()
+    return config['admin']
+
+  def get_password(self):
+    '''Get terrariumPI admin password'''
+    config = self.get_system()
+    return config['password']
+
+  def get_active_soundcard(self):
+    config = self.get_system()
+    return config['soundcard']
+
+  def get_pi_power_wattage(self):
+    '''Get terrariumPI power usage'''
+    config = self.get_system()
+    return float(config['power_usage'])
+
   def get_power_price(self):
     '''Get terrariumPI power price. Price is entered as euro/kWh'''
     config = self.get_system()
@@ -240,13 +266,14 @@ class terrariumConfig:
     config = self.get_system()
     return float(config['water_price'])
 
-  def get_temperature_indicator(self):
+  def get_hostname(self):
     config = self.get_system()
-    return config['temperature_indicator'].upper()
+    return config['host']
 
-  def get_active_soundcard(self):
+  def get_port_number(self):
     config = self.get_system()
-    return config['soundcard']
+    return config['port']
+
 
   # Environment functions
   def save_environment(self,data):
@@ -260,7 +287,11 @@ class terrariumConfig:
           data[environment_part][part] = ''
         config[environment_part + '_' + part] = data[environment_part][part]
 
-    return self.__update_config('environment',config)
+    return self.__update_config('environment',config,['light_enabled','light_time_table',
+                                                      'sprayer_enabled','sprayer_time_table',
+                                                      'heater_enabled','heater_time_table',
+                                                      'cooler_enabled','cooler_time_table',
+                                                      'cooler_temperature','sprayer_humidity','heater_temperature'])
 
   def get_environment(self):
     config = self.__get_config('environment')
@@ -298,13 +329,7 @@ class terrariumConfig:
   def get_weather(self):
     return self.__get_config('weather')
 
-  def get_weather_location(self):
-    data = self.get_weather()
-    return data['location'] if 'location' in data else None
 
-  def get_weather_windspeed(self):
-    data = self.get_weather()
-    return data['windspeed'] if 'windspeed' in data else None
   # End weather config functions
 
 
@@ -317,8 +342,8 @@ class terrariumConfig:
 
   def save_sensors(self,data):
     update_ok = True
-    for sensorid in self.get_sensors():
-      self.__config.remove_section('sensor' + sensorid)
+    for sensor in self.get_sensors():
+      self.__config.remove_section('sensor' + sensor['id'])
 
     for sensorid in data:
       update_ok = update_ok and self.save_sensor(data[sensorid].get_data())

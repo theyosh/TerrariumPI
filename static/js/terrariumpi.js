@@ -563,6 +563,8 @@ function update_online_indicator(online) {
 function init_form_settings(pType) {
   $('.page-title').append('<div class="title_right"><h3><button type="button" class="btn btn-primary alignright" data-toggle="modal" data-target=".add-form"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h3> </div>');
 
+  $('.form-group:has([required="required"]) > label').append('<span class="required"> *</span>');
+
   var submit_button = $('.modal-footer button.btn.btn-primary');
   switch (pType) {
     case 'sensor':
@@ -607,6 +609,14 @@ function init_form_settings(pType) {
       // Bind to add button
       submit_button.on('click',function(){
         add_audio_playlist();
+      });
+      break;
+
+    case 'environment':
+      $('form').on('submit',function() {
+        $(this).find('input[type="radio"]').removeAttr('checked').removeAttr('disabled');
+        $(this).find('label.active > input[type="radio"]').attr('checked','checked');
+        $(this).find('label:not(.active) > input[type="radio"]').attr('disabled','disabled');
       });
       break;
   }
@@ -709,12 +719,8 @@ function prepare_form_data(form) {
                   objectdata = {};
                   prev_nr = current_nr;
                 }
-                if (matches[3] === 'on' || matches[3] === 'off') {
-                  field_value = moment(field_value, 'LT').unix();
-                }
 
-                if (['timer_start','timer_stop','start','stop'].indexOf(matches[3]) != -1) {
-                  // TODO: new way of storing time values. Should be used at all other time fields
+                if (['timer_start','timer_stop','start','stop','on','off'].indexOf(matches[3]) != -1) {
                   // Load from local format, and store in 24h format. Do not use UNIX timestamp formats
                   field_value = moment(field_value, 'LT').format('HH:mm');
                 }
@@ -1459,8 +1465,8 @@ function update_dashboard_environment(name, data) {
         break;
       case 'on':
       case 'off':
-        systempart.find('.' + key).text(moment(value * 1000).format('LT')).parent().toggle(data.mode != 'sensor');
-        systempart.find('.duration').text(moment.duration(Math.abs(data.off - data.on) * 1000).humanize()).parent().toggle(data.mode != 'sensor');
+        systempart.find('.' + key).text(moment(value,'HH:mm').format('LT')).parent().toggle(data.mode != 'sensor');
+        systempart.find('.duration').text(moment.duration(data.duration * 1000).humanize()).parent().toggle(data.mode != 'sensor');
         break;
 
       case 'current':

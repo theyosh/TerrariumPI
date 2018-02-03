@@ -153,7 +153,6 @@ class terrariumSwitch():
       logger.warning('Dimmer %s is already working. Ignoring state change!. Will switch to latest state value when done', self.get_name())
 
   def __calculate_time_table(self):
-    logger.info('Calculating timer -=- Calculating timer -=- Calculating timer -=- Calculating timer');
     self.__timer_time_table = []
     if self.state is None or \
        not self.get_timer_enabled() or \
@@ -233,16 +232,7 @@ class terrariumSwitch():
   def timer(self):
     if self.get_timer_enabled():
       logger.info('Checking timer time table for switch %s with %s entries.', self.get_name(),len(self.__timer_time_table))
-      switch_state = None
-      now = datetime.datetime.today()
-      for time_schedule in self.__timer_time_table:
-        if now > time_schedule[0] and now < time_schedule[1]:
-          switch_state = True
-          break
-
-        elif now < time_schedule[0]:
-          switch_state = False
-          break
+      switch_state = terrariumUtils.is_time(self.__timer_time_table)
 
       logmessage = 'State not changed.'
       if switch_state is not None and 'dimmer' not in self.get_hardware_type() and self.get_state() != switch_state:

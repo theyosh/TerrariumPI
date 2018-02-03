@@ -7,7 +7,6 @@ import time
 import uptime
 import os
 import psutil
-import copy
 from hashlib import md5
 
 from terrariumConfig import terrariumConfig
@@ -79,7 +78,7 @@ class terrariumEngine():
 
     # Load the environment system. This will controll the lights, sprayer and heaters
     logger.debug('Loading terrariumPI environment system')
-    self.environment = terrariumEnvironment(self.sensors, self.power_switches, self.weather, self.is_door_open, self.config)
+    self.environment = terrariumEnvironment(self.sensors, self.power_switches, self.weather, self.is_door_open, self.config.get_environment)
     logger.debug('Done loading terrariumPI environment system')
 
     # Load webcams from config
@@ -673,13 +672,13 @@ class terrariumEngine():
       filter = parameters[0]
 
     data = self.get_sensors(['average'])['sensors']
-    data['light'] = self.environment.get_light_state()
+    data['light']   = self.environment.get_light_state()
     data['sprayer'] = self.environment.get_sprayer_state()
-    data['heater'] = self.environment.get_heater_state()
-    data['cooler'] = self.environment.get_cooler_state()
+    data['heater']  = self.environment.get_heater_state()
+    data['cooler']  = self.environment.get_cooler_state()
 
-    if filter is not None:
-      data = { filter: data[filter]}
+    if filter is not None and filter in data:
+      data = { filter : data[filter]}
 
     if socket:
       self.__send_message({'type':'environment','data':data})
@@ -690,22 +689,8 @@ class terrariumEngine():
     return self.environment.get_config()
 
   def set_environment_config(self,data):
-    if 'light' in data:
-      self.environment.set_light_config(data['light'])
-
-    if 'sprayer' in data:
-      self.environment.set_sprayer_config(data['sprayer'])
-
-    if 'heater' in data:
-      self.environment.set_heater_config(data['heater'])
-
-    if 'cooler' in data:
-      self.environment.set_cooler_config(data['cooler'])
-
-    update_ok = self.config.save_environment(self.environment.get_config())
-    if update_ok:
-      self.environment.reload_config()
-    return update_ok
+    self.environment.load_environment(data)
+    return self.config.save_environment(self.environment.get_config())
   # End Environment part
 
   # Profile part
@@ -745,8 +730,7 @@ class terrariumEngine():
     return update_ok
   # End profile part
 
-
-
+  # System functions part
   def authenticate(self,username, password):
     return password and (username in self.authentication) and self.authentication[username] == password
 
@@ -827,6 +811,8 @@ class terrariumEngine():
   def get_temperature_indicator(self):
     return self.temperature_indicator
 
+  # End system functions part
+
   # API Config calls
   def get_config(self, part = None):
     data = {}
@@ -896,6 +882,9 @@ class terrariumEngine():
         else:
           return False
 
+      # Update weather data
+      self.set_weather_config({'location' : data['location'], 'windspeed' : data['windspeed']})
+
       update_ok = self.set_system_config(data)
       if update_ok:
         # Update config settings
@@ -912,6 +901,8 @@ class terrariumEngine():
 
   def set_system_config(self,data):
     return self.config.set_system(data)
+
+  # End system functions part
 
   # Histroy part (Collector)
   def get_history(self, parameters = [], socket = False):

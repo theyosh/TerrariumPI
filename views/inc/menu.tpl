@@ -26,16 +26,8 @@
                     <li>
                       <a href="profile.html">{{_('Profile')}}</a>
                     </li>
-                  </ul>
-                </li>
-                <li>
-                  <a><i class="fa fa-cloud"></i> {{_('Weather')}} <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
                     <li>
-                      <a href="weather_forecast.html">{{_('Forecast')}}</a>
-                    </li>
-                    <li>
-                      <a href="weather_settings.html">{{_('Settings')}}</a>
+                      <a href="weather_forecast.html">{{_('Weather forecast')}}</a>
                     </li>
                   </ul>
                 </li>
