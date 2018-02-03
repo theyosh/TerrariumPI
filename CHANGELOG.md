@@ -6,6 +6,7 @@ Changelog
 ------------
 
 **New**
+- Add debug logging. [TheYOSH]
 - Add photo saving option to the webcam. [TheYOSH]
 - Added first part for timer functionality with power switches. This
   update brings only updates to the webinterface and configuration. The
@@ -14,6 +15,10 @@ Changelog
 - Add extra information when TerrariumPI starts. [TheYOSH]
 
 **Fixes**
+- Fix audio player time display. [TheYOSH]
+- Fix showing times instead of alarms when using timer mode. Fix [#85](https://github.com/theyosh/TerrariumPI/issues/85).
+  [TheYOSH]
+- Fix timers. [TheYOSH]
 - Fix saving new remote webcam. [TheYOSH]
 - Fix dimmer on bug. [TheYOSH]
 - Fix pulldown settings menu. [TheYOSH]
@@ -23,6 +28,17 @@ Changelog
 - Fix file rights. [TheYOSH]
 
 **Updates**
+- Refactored a lot code. Updated form processing. Added timers in the
+  environment system based on [#47](https://github.com/theyosh/TerrariumPI/issues/47). Code cleanup by more re-using code.
+  [TheYOSH]
+- Update version number. [TheYOSH]
+- Update English language. [TheYOSH]
+- Major update. Rewritten and simplicated a lot of Pyton and JS code.
+  Less caching issues when adding new sensors, switches etc. Better
+  reuse of functions and repeating code. [TheYOSH]
+- Update changelog. [TheYOSH]
+- Update config code. [TheYOSH]
+- Update configuration code and webcam part. [TheYOSH]
 - Update Terrarium door code based on new switch code. [TheYOSH]
 - Update changelog. [TheYOSH]
 - Update CHANGELOG. [#72](https://github.com/theyosh/TerrariumPI/issues/72). [TheYOSH]
@@ -41,6 +57,12 @@ Changelog
 - Update exception logging. [TheYOSH]
 
 **Other**
+- More yes are true :P. [TheYOSH]
+- Removed disabled code. [TheYOSH]
+- Refactor audio playlists. Refactor a bunch of Javascript. [TheYOSH]
+- Merge pull request [#83](https://github.com/theyosh/TerrariumPI/issues/83) from theyosh/feature/switch_timers. [TheYOSH]
+
+  Update changelog
 - Cleanup weather html code. [TheYOSH]
 - Merge branch 'master' into feature/switch_timers. [TheYOSH]
 - Merge branch 'master' into feature/switch_timers. [TheYOSH]
