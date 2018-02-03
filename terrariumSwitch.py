@@ -101,7 +101,7 @@ class terrariumSwitch():
   def __load_pwm_device(self):
     self.__dimmer_running = False
     # localhost will not work always due to IPv6. Explicit 127.0.0.1 host
-    self.__pigpio = pigpio.pi('127.0.0.1',8888)
+    self.__pigpio = pigpio.pi('localhost',8888)
     if not self.__pigpio.connected:
       logger.error('PiGPIOd process is not running')
       self.__pigpio = False
