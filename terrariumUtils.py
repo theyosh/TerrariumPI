@@ -130,7 +130,7 @@ class terrariumUtils():
   def calculate_time_table(start, stop, on_duration = None, off_duration = None):
     timer_time_table = []
 
-    now = datetime.datetime.today()
+    now = datetime.datetime.now()
     starttime = start.split(':')
     starttime = now.replace(hour=int(starttime[0]), minute=int(starttime[1]))
 
@@ -145,6 +145,11 @@ class terrariumUtils():
         stoptime += datetime.timedelta(hours=24)
       else:
         starttime -= datetime.timedelta(hours=24)
+
+    # Calculate next day when current day is done...
+    if now > stoptime:
+      starttime += datetime.timedelta(hours=24)
+      stoptime += datetime.timedelta(hours=24)
 
     if on_duration is None and off_duration is None:
       timer_time_table.append((int(starttime.strftime('%s')),int(stoptime.strftime('%s'))))
