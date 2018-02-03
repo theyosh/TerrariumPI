@@ -129,6 +129,30 @@
                         </td>
                         <td class="alarm_min">...</td>
                       </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Alarm max')}}</p>
+                        </td>
+                        <td class="alarm_max">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('On')}}</p>
+                        </td>
+                        <td class="on">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Off')}}</p>
+                        </td>
+                        <td class="off">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Duration')}}</p>
+                        </td>
+                        <td class="duration">...</td>
+                      </tr>
                     </table>
                   </div>
                   <div class="row environment_heater">

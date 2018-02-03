@@ -230,15 +230,16 @@ class terrariumWebserver():
 
     if 'switches' == action:
       result = self.__terrariumEngine.get_switches(parameters)
+
     elif 'doors' == action:
       if len(parameters) > 0 and parameters[0] == 'status':
          result = {'status' : self.__terrariumEngine.get_doors_status()}
       else:
         result = self.__terrariumEngine.get_doors()
 
-
     elif 'profile' == action:
       result = self.__terrariumEngine.get_profile()
+
     elif 'sensors' == action:
       result = self.__terrariumEngine.get_sensors(parameters)
 
@@ -373,8 +374,6 @@ class terrariumWebserver():
           terrariumWebserver.app.terrarium.subscribe(messages)
 
         terrariumWebserver.app.terrarium.get_doors_status(socket=True)
-
-
         terrariumWebserver.app.terrarium.get_uptime(socket=True)
         terrariumWebserver.app.terrarium.get_environment(socket=True)
         terrariumWebserver.app.terrarium.get_sensors(['average'],socket=True)

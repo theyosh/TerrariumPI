@@ -78,12 +78,12 @@
                           <div class="webcam_preview"><img id="webcam_[nr]_preview" src="static/images/webcam_offline.png"></div>
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-12 form-group">
-                          <label for="webcam_[nr]_location">{{_('Location')}} <span class="required">*</span></label>
+                          <label for="webcam_[nr]_location">{{_('Location')}}</label>
                           <input class="form-control" name="webcam_[nr]_location" placeholder="{{_('Location')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('webcam_field_location')}}">
                           <input class="form-control" name="webcam_[nr]_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-12 form-group">
-                          <label for="webcam_[nr]_name">{{_('Name')}} <span class="required">*</span></label>
+                          <label for="webcam_[nr]_name">{{_('Name')}}</label>
                           <input class="form-control" name="webcam_[nr]_name" placeholder="{{_('Name')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('webcam_field_name')}}">
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-12 form-group">

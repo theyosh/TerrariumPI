@@ -79,20 +79,20 @@
                       <div class="x_content">
                         <div class="row">
                           <div class="col-md-3 col-sm-3 col-xs-12 form-group">
-                            <label for="playlist_[nr]_name">{{_('Name')}}</label> <span class="required">*</span>
+                            <label for="playlist_[nr]_name">{{_('Name')}}</label>
                             <input class="form-control" name="playlist_[nr]_name" placeholder="{{_('Name')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('audio_playlist_field_name')}}">
                             <input class="form-control" name="playlist_[nr]_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
                           </div>
                           <div class="col-md-3 col-sm-3 col-xs-12 form-group">
-                            <label for="playlist_[nr]_start">{{_('Start')}}</label> <span class="required">*</span>
+                            <label for="playlist_[nr]_start">{{_('Start')}}</label>
                             <input class="form-control" name="playlist_[nr]_start" placeholder="{{_('Start')}}" required="required" type="text" pattern="[0-9:]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('audio_playlist_field_start')}}">
                           </div>
                           <div class="col-md-2 col-sm-2 col-xs-12 form-group">
-                            <label for="playlist_[nr]_stop">{{_('Stop')}}</label> <span class="required">*</span>
+                            <label for="playlist_[nr]_stop">{{_('Stop')}}</label>
                             <input class="form-control" name="playlist_[nr]_stop" placeholder="{{_('Stop')}}" required="required" type="text" pattern="[0-9:]+"  data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('audio_playlist_field_stop')}}">
                           </div>
                           <div class="col-md-2 col-sm-2 col-xs-12 form-group">
-                            <label for="playlist_[nr]_volume">{{_('Volume')}}</label> <span class="required">*</span>
+                            <label for="playlist_[nr]_volume">{{_('Volume')}}</label>
                             <input class="form-control" name="playlist_[nr]_volume" placeholder="{{_('Volume')}}" required="required" type="text" pattern="[0-9]+"  data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('audio_playlist_field_volume')}}" />
                           </div>
                           <div class="col-md-1 col-sm-1 col-xs-12 form-group" style="text-align: center">
@@ -106,7 +106,7 @@
                         </div>
                         <div class="row">
                           <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                            <label for="playlist_[nr]_files">{{_('Files')}}</label> <span class="required">*</span>
+                            <label for="playlist_[nr]_files">{{_('Files')}}</label>
                             <div class="form-group" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('audio_playlist_field_files')}}">
                               <select class="form-control" multiple="multiple" name="playlist_[nr]_files" tabindex="-1" placeholder="{{_('Select an option')}}">
                                 <option value="">{{_('Select an option')}}</option>

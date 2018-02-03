@@ -103,7 +103,7 @@
                       <div class="x_content">
                         <div class="row">
                           <div class="col-md-2 col-sm-2 col-xs-12 form-group">
-                            <label for="switch_[nr]_hardwaretype">{{_('Hardware')}} <span class="required">*</span></label>
+                            <label for="switch_[nr]_hardwaretype">{{_('Hardware')}}</label>
                             <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{!translations.get_translation('switch_field_hardware')}}">
                               <select class="form-control" name="switch_[nr]_hardwaretype" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
                                 <option value="">{{_('Select an option')}}</option>
@@ -117,21 +117,21 @@
                             </div>
                           </div>
                           <div class="col-md-2 col-sm-2 col-xs-12 form-group">
-                            <label for="switch_[nr]_address">{{_('Address')}}</label> <span class="required">*</span>
+                            <label for="switch_[nr]_address">{{_('Address')}}</label>
                             <input class="form-control" name="switch_[nr]_address" placeholder="{{_('Address')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_address')}}">
                             <input class="form-control" name="switch_[nr]_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
                           </div>
                           <div class="col-md-2 col-sm-2 col-xs-12 form-group">
-                            <label for="switch_[nr]_name">{{_('Name')}}</label> <span class="required">*</span>
+                            <label for="switch_[nr]_name">{{_('Name')}}</label>
                             <input class="form-control" name="switch_[nr]_name" placeholder="{{_('Name')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_name')}}">
                           </div>
                           <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                             <label for="switch_[nr]_power_wattage">{{_('Power usage in Watt')}}</label>
-                            <input class="form-control" name="switch_[nr]_power_wattage" placeholder="{{_('Power usage in Watt')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_power_wattage')}}">
+                            <input class="form-control" name="switch_[nr]_power_wattage" placeholder="{{_('Power usage in Watt')}}" required="required" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_power_wattage')}}">
                           </div>
                           <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                             <label for="switch_[nr]_water_flow">{{_('Water flow in L/m')}}</label>
-                            <input class="form-control" name="switch_[nr]_water_flow" placeholder="{{_('Water flow in L/m')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_water_flow')}}">
+                            <input class="form-control" name="switch_[nr]_water_flow" placeholder="{{_('Water flow in L/m')}}" required="required" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_water_flow')}}">
                           </div>
                           <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                             <label for="switch_[nr]_timer_enabled">{{_('Timer')}}</label>
