@@ -294,17 +294,17 @@ class terrariumEnvironment():
               extra_logging_message = 'Humdity value %f%% is lower then alarm %f%%.' % (self.sprayer['humidity']['current'],
                                                                                         self.sprayer['humidity']['alarm_min'])
 
-        if toggle_on and not self.is_door_open():
-          if not self.is_sprayer_on():
-            logger.info('Environment is turning on the sprayer for %f seconds based on %s mode.%s' % (self.sprayer['spray_duration'],
-                                                                                                      self.sprayer['mode'],
-                                                                                                      extra_logging_message))
-          self.sprayer_on()
-        elif toggle_on and self.is_door_open():
+        if toggle_on:
           if self.is_door_open():
             logger.warning('Environment could not spray for %f seconds based on %s mode because of an open door.%s' % (self.sprayer['spray_duration'],
                                                                                                                        self.sprayer['mode'],
                                                                                                                        extra_logging_message))
+          else:
+            if not self.is_sprayer_on():
+              logger.info('Environment is turning on the sprayer for %f seconds based on %s mode.%s' % (self.sprayer['spray_duration'],
+                                                                                                      self.sprayer['mode'],
+                                                                                                      extra_logging_message))
+            self.sprayer_on()
         else:
           if self.is_sprayer_on():
             logger.info('Environment is turning off the sprayer based on %s mode.' % (self.sprayer['mode'],))

@@ -126,10 +126,10 @@ class terrariumAudioPlayer():
 
       duration = time.time() - starttime
       if duration < terrariumAudioPlayer.LOOP_TIMEOUT:
-        logger.info('Engine loop done in %.5f seconds. Waiting for %.5f seconds for next round' % (duration,terrariumAudioPlayer.LOOP_TIMEOUT - duration))
+        logger.info('Update done in %.5f seconds. Waiting for %.5f seconds for next round' % (duration,terrariumAudioPlayer.LOOP_TIMEOUT - duration))
         sleep(terrariumAudioPlayer.LOOP_TIMEOUT - duration)
       else:
-        logger.warning('Engine took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumAudioPlayer.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
+        logger.warning('Updating took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumAudioPlayer.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
 
   @staticmethod
   def get_sound_cards():
@@ -237,7 +237,6 @@ class terrariumAudioPlaylist():
     self.set_files(files)
 
   def __calculate_time_table(self):
-    logger.info('Calculating timer -=- Calculating timer -=- Calculating timer -=- Calculating timer');
     self.__timer_time_table = []
     if self.get_start() is None or self.get_stop() is None:
       return
@@ -307,14 +306,14 @@ class terrariumAudioPlaylist():
     self.__is_started_at = datetime.datetime.now()
 
   def is_time(self):
-    logger.info('Checking timer time table for switch %s with %s entries.', self.get_name(),len(self.__timer_time_table))
+    logger.debug('Checking timer time table for switch %s with %s entries.', self.get_name(),len(self.__timer_time_table))
     is_time = terrariumUtils.is_time(self.__timer_time_table)
 
     if is_time is None:
       self.__calculate_time_table()
       is_time = False
 
-    logger.info('Timer action is done for switch %s. Is it time?: %s.', self.get_name(),('Yes' if is_time else 'Nope'))
+    logger.info('Timer action is done for switch %s. Is it time to play?: %s.', self.get_name(),('Yes' if is_time else 'Nope'))
     return is_time
 
   def get_duration(self):
