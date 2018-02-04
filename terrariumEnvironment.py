@@ -279,7 +279,7 @@ class terrariumEnvironment():
             # Spray based on the average humidity values of the used sensors
             toggle_on = self.sprayer['humidity']['current'] < self.sprayer['humidity']['alarm_min']
             if toggle_on:
-              extra_logging_message = 'Humdity value %f%% is lower then alarm %f%%.' % (self.sprayer['humidity']['current'],
+              extra_logging_message = 'Sprayer humdity value %f%% is lower then alarm %f%%.' % (self.sprayer['humidity']['current'],
                                                                                         self.sprayer['humidity']['alarm_min'])
         else:
           # Spray based on time table
@@ -291,7 +291,7 @@ class terrariumEnvironment():
             # Use the extra added sensors for finetuning the trigger action
             toggle_on = self.sprayer['humidity']['current'] < self.sprayer['humidity']['alarm_min']
             if toggle_on:
-              extra_logging_message = 'Humdity value %f%% is lower then alarm %f%%.' % (self.sprayer['humidity']['current'],
+              extra_logging_message = 'Sprayer humdity value %f%% is lower then alarm %f%%.' % (self.sprayer['humidity']['current'],
                                                                                         self.sprayer['humidity']['alarm_min'])
 
         if toggle_on:
@@ -330,11 +330,11 @@ class terrariumEnvironment():
             # Heat based on the average temperature values of the used sensors
             if self.heater['temperature']['current'] < self.heater['temperature']['alarm_min']:
               toggle_on = True
-              extra_logging_message = 'Temperature value %f%% is lower then alarm %f%%.' % (self.heater['temperature']['current'],
+              extra_logging_message = 'Heater temperature value %f%% is lower then alarm %f%%.' % (self.heater['temperature']['current'],
                                                                                             self.heater['temperature']['alarm_min'])
             elif self.heater['temperature']['current'] > self.heater['temperature']['alarm_max']:
               toggle_on = False
-              extra_logging_message = 'Temperature value %f%% is higher then alarm %f%%.' % (self.heater['temperature']['current'],
+              extra_logging_message = 'Heater temperature value %f%% is higher then alarm %f%%.' % (self.heater['temperature']['current'],
                                                                                              self.heater['temperature']['alarm_max'])
 
 
@@ -350,11 +350,11 @@ class terrariumEnvironment():
             # Use the extra added sensors for finetuning the trigger action
             if self.heater['temperature']['current'] < self.heater['temperature']['alarm_min']:
               toggle_on = True
-              extra_logging_message = 'Temperature value %f%% is lower then alarm %f%%.' % (self.heater['temperature']['current'],
+              extra_logging_message = 'Heater temperature value %f%% is lower then alarm %f%%.' % (self.heater['temperature']['current'],
                                                                                             self.heater['temperature']['alarm_min'])
             elif self.heater['temperature']['current'] > self.heater['temperature']['alarm_max']:
               toggle_on = False
-              extra_logging_message = 'Temperature value %f%% is higher then alarm %f%%.' % (self.heater['temperature']['current'],
+              extra_logging_message = 'Heater temperature value %f%% is higher then alarm %f%%.' % (self.heater['temperature']['current'],
                                                                                              self.heater['temperature']['alarm_max'])
 
         if toggle_on is True:
@@ -389,11 +389,11 @@ class terrariumEnvironment():
             # Heat based on the average temperature values of the used sensors
             if self.cooler['temperature']['current'] < self.cooler['temperature']['alarm_min']:
               toggle_on = True
-              extra_logging_message = 'Temperature value %f%% is lower then alarm %f%%.' % (self.cooler['temperature']['current'],
+              extra_logging_message = 'Cooler temperature value %f%% is lower then alarm %f%%.' % (self.cooler['temperature']['current'],
                                                                                             self.cooler['temperature']['alarm_min'])
             elif self.cooler['temperature']['current'] > self.cooler['temperature']['alarm_max']:
               toggle_on = False
-              extra_logging_message = 'Temperature value %f%% is higher then alarm %f%%.' % (self.cooler['temperature']['current'],
+              extra_logging_message = 'Cooler temperature value %f%% is higher then alarm %f%%.' % (self.cooler['temperature']['current'],
                                                                                              self.cooler['temperature']['alarm_max'])
 
 
@@ -409,11 +409,11 @@ class terrariumEnvironment():
             # Use the extra added sensors for finetuning the trigger action
             if self.cooler['temperature']['current'] < self.cooler['temperature']['alarm_min']:
               toggle_on = True
-              extra_logging_message = 'Temperature value %f%% is lower then alarm %f%%.' % (self.cooler['temperature']['current'],
+              extra_logging_message = 'Cooler temperature value %f%% is lower then alarm %f%%.' % (self.cooler['temperature']['current'],
                                                                                             self.cooler['temperature']['alarm_min'])
             elif self.cooler['temperature']['current'] > self.cooler['temperature']['alarm_max']:
               toggle_on = False
-              extra_logging_message = 'Temperature value %f%% is higher then alarm %f%%.' % (self.cooler['temperature']['current'],
+              extra_logging_message = 'Cooler temperature value %f%% is higher then alarm %f%%.' % (self.cooler['temperature']['current'],
                                                                                              self.cooler['temperature']['alarm_max'])
 
         if toggle_on is True:
@@ -511,6 +511,7 @@ class terrariumEnvironment():
     # Reset alarm for to high mudity and sprayer, to hot and heater, or to cool and cooling
     if part != 'light':
       if 'alarm' not in return_data or \
+          return_data['mode'] == 'disabled' or \
          (part in ['sprayer','heater'] and return_data['current'] >= return_data['alarm_max']) or \
          (part == 'cooler'  and return_data['current'] <= return_data['alarm_max']):
         return_data['alarm'] = False
