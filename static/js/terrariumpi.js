@@ -1453,6 +1453,9 @@ function update_dashboard_environment(name, data) {
 
   systempart.find('h4').removeClass('orange blue red').addClass(data.enabled ? enabledColor : '');
   systempart.find('h4 small span').hide().filter('.' + (data.enabled ? data.mode : 'disabled')).show();
+  if (data.sensors !== undefined && data.sensors.length > 0) {
+    systempart.find('h4 small span.sensor').show();
+  }
 
   $.each(data, function(key, value) {
     switch (key) {
