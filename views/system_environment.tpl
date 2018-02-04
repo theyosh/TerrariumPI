@@ -55,15 +55,15 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_on_duration">{{_('Lights on duration')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_on_duration">{{_('Timer on duration')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="light_on_duration" required="required" type="text" placeholder="{{_('Lights on duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_on_duration')}}">
+                      <input class="form-control col-md-7 col-xs-12" name="light_on_duration" required="required" type="text" placeholder="{{_('Timer on duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_on_duration')}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_off_duration">{{_('Lights off duration')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_off_duration">{{_('Timer off duration')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="light_off_duration" required="required" type="text" placeholder="{{_('Lights off duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_off_duration')}}">
+                      <input class="form-control col-md-7 col-xs-12" name="light_off_duration" required="required" type="text" placeholder="{{_('Timer off duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_off_duration')}}">
                     </div>
                   </div>
                   <div class="form-group">
@@ -126,20 +126,21 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Enabled when lights are off')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sprayer_enable_during_night')}}">
                       <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="sprayer_night_enabled" type="radio" value="false"> {{_('Disabled')}}</label><label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="sprayer_night_enabled" type="radio" value="true"> {{_('Enabled')}}</label>
+                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="sprayer_night_enabled" type="radio" value="true">{{_('Yes')}}</label>
+                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="sprayer_night_enabled" type="radio" value="false">{{_('No')}}</label>
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_on_duration">{{_('Sprayer on duration')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_on_duration">{{_('Timer on duration')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="sprayer_on_duration" required="required" type="text" placeholder="{{_('Sprayer on duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sprayer_on_duration')}}">
+                      <input class="form-control col-md-7 col-xs-12" name="sprayer_on_duration" required="required" type="text" placeholder="{{_('Timer on duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sprayer_on_duration')}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_off_duration">{{_('Sprayer off duration')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_off_duration">{{_('Timer off duration')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="sprayer_off_duration" required="required" type="text" placeholder="{{_('Sprayer off duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sprayer_off_duration')}}">
+                      <input class="form-control col-md-7 col-xs-12" name="sprayer_off_duration" required="required" type="text" placeholder="{{_('Timer off duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sprayer_off_duration')}}">
                     </div>
                   </div>
                   <div class="form-group">
@@ -206,7 +207,8 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Enabled when lights are on')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_enable_during_day')}}">
                       <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="heater_day_enabled" type="radio" value="false"> {{_('Disabled')}}</label><label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="heater_day_enabled" type="radio" value="true"> {{_('Enabled')}}</label>
+                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="heater_day_enabled" type="radio" value="true">{{_('Yes')}}</label>
+                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="heater_day_enabled" type="radio" value="false">{{_('No')}}</label>
                       </div>
                     </div>
                   </div>
@@ -223,15 +225,15 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_on_duration">{{_('Heater on duration')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_on_duration">{{_('Timer on duration')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="heater_on_duration" required="required" type="text" placeholder="{{_('Heater on duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_on_duration')}}">
+                      <input class="form-control col-md-7 col-xs-12" name="heater_on_duration" required="required" type="text" placeholder="{{_('Timer on duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_on_duration')}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_off_duration">{{_('Heater off duration')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_off_duration">{{_('Timer off duration')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="heater_off_duration" required="required" type="text" placeholder="{{_('Heater off duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_off_duration')}}">
+                      <input class="form-control col-md-7 col-xs-12" name="heater_off_duration" required="required" type="text" placeholder="{{_('Timer off duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_off_duration')}}">
                     </div>
                   </div>
                   <div class="form-group">
@@ -286,7 +288,8 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Enabled when lights are off')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_cooler_enable_during_night')}}">
                       <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="cooler_night_enabled" type="radio" value="false"> {{_('Disabled')}}</label><label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="cooler_night_enabled" type="radio" value="true"> {{_('Enabled')}}</label>
+                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="cooler_night_enabled" type="radio" value="true">{{_('Yes')}}</label>
+                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="cooler_night_enabled" type="radio" value="false">{{_('No')}}</label>
                       </div>
                     </div>
                   </div>
@@ -303,15 +306,15 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cooler_on_duration">{{_('Cooler on duration')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cooler_on_duration">{{_('Timer on duration')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="cooler_on_duration" required="required" type="text" placeholder="{{_('Cooler on duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_cooler_on_duration')}}">
+                      <input class="form-control col-md-7 col-xs-12" name="cooler_on_duration" required="required" type="text" placeholder="{{_('Timer on duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_cooler_on_duration')}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cooler_off_duration">{{_('Cooler off duration')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cooler_off_duration">{{_('Timer off duration')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="cooler_off_duration" required="required" type="text" placeholder="{{_('Cooler off duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_cooler_off_duration')}}">
+                      <input class="form-control col-md-7 col-xs-12" name="cooler_off_duration" required="required" type="text" placeholder="{{_('Timer off duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_cooler_off_duration')}}">
                     </div>
                   </div>
                   <div class="form-group">
