@@ -18,11 +18,28 @@ aptitude -y safe-upgrade
 aptitude -y install libftdi1 screen python-imaging python-dateutil python-ow python-rpi.gpio python-psutil git subversion watchdog build-essential python-dev python-picamera python-opencv python-pip python-pigpio python-requests i2c-tools owfs ow-shell sqlite3 vlc-nox python-mediainfodll libasound2-dev
 
 # Basic config:
-raspi-config
+#raspi-config
+# Enable 1Wire en I2C during boot
+if [ `grep -ic "#dtparam=i2c_arm=on" /boot/config.txt` -eq 1 ]; then
+  sed -i.bak 's/^#dtparam=i2c_arm=on/dtparam=i2c_arm=on/' /boot/config.txt
+fi
+if [ `grep -ic "dtparam=i2c_arm=on" /boot/config.txt` -eq 0 ]; then
+  echo "dtparam=i2c_arm=on" >> /boot/config.txt
+fi
+
+if [ `grep -ic "dtoverlay=w1-gpio" /boot/config.txt` -eq 0 ]; then
+  echo "dtoverlay=w1-gpio" >> /boot/config.txt
+fi
+
+# Enable camera
+if [ `grep -ic "gpu_mem=" /boot/config.txt` -eq 0 ]; then
+  echo "gpu_mem=128" >> /boot/config.txt
+fi
 
 # Set the timezone
 dpkg-reconfigure tzdata
 
+# Update submodules if downloaded through tar or zip
 cd "${BASEDIR}/"
 git submodule init
 git submodule update
@@ -37,7 +54,7 @@ pip install --upgrade gevent untangle uptime bottle bottle_websocket pylibftdi p
 echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", GROUP="dialout", MODE="0660"' > /etc/udev/rules.d/99-libftdi.rules
 echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", GROUP="dialout", MODE="0660"' >> /etc/udev/rules.d/99-libftdi.rules
 
-# Install 1 Wire stuff
+# Install 1 Wire I2C stuff
 sed -i.bak 's/^server: FAKE = DS18S20,DS2405/#server: FAKE = DS18S20,DS2405/' /etc/owfs.conf
 
 if [ `grep -ic "server: device=/dev/i2c-1" /etc/owfs.conf` -eq 0 ]; then
@@ -80,4 +97,4 @@ systemctl enable pigpiod
 
 # We are done!
 sync
-echo "Instaltion is done. Please reboot once to get the I2C and Adafruit DHT libary working correctly"
+echo "Instaltion is done. Please reboot once to get the 1Wire, I2C and Adafruit DHT libary working correctly"
