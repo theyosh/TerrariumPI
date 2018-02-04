@@ -3,7 +3,7 @@ Software for cheap home automation of your reptile terrarium or any other enclos
 
 For humidity control there is support for a spraying system. The sprayer can be configured to spray for an X amount of seconds and there is a minumal period between two spray actions. Use at least one humitidy sensors to get a constant humidity value.
 
-The software is that flexible that there is no limit in amount of sensors, relay boards or door sensors. The usage can be endless.
+The software is that flexible that there is no limit in amount of sensors, relay boards or door sensors. The usage can be endless. All power switches have support for timers to trigger based on a time pattern.
 
 Think off:
 - Terrarium (wet of dry)
@@ -60,7 +60,7 @@ The software has support for the following languages:
 - German
 - Italian
 
-Your language not in the list? [Create your own language translation](https://github.com/theyosh/TerrariumPI/wiki/Translations)
+Your language not in the list or not up to date? [Create your own language translation](https://github.com/theyosh/TerrariumPI/wiki/Translations)
 
 ## Installation
 The installation expects a Pi with working network and ssh. It is tested with [Raspbian Stretch Lite](https://www.raspberrypi.org/downloads/raspbian/). For now the Full version is not working somehow.... So use the lite image!
@@ -78,12 +78,12 @@ The installation expects a Pi with working network and ssh. It is tested with [R
   `sudo reboot`
 7. Go to the webinterface at http://[raspberry_ip]:8090
 
-If you want to use the Raspberry PI 1 wire interface, you have to manually enable it through the raspi-config and reboot once more.
+All needed options and modules are setup by the installer script. This means that I2C and 1Wire overlay are enabled by default.
 
 Make sure that your Pi is secured when you put it to the Internet. Would be a shame if TerrariumPI gets next fictum of '[A smart fish tank left a casino vulnerable to hackers](http://money.cnn.com/2017/07/19/technology/fish-tank-hack-darktrace/index.html)' :P
 
 ## Updating
-This updating is based on that the software is installed with the steps in the Installation above.
+This updating is based on that the software is installed with the steps in the Installation above. When updating between release versions it will take more time due to database updates and cleanups. This can be seen in the logfile.
 1. Get a working Raspberry Pi and login as user 'pi'  
   `ssh pi@[raspberry_ip]`
 2. Enter the TerrariumPI folder  
