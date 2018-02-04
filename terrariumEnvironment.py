@@ -232,8 +232,8 @@ class terrariumEnvironment():
 
   def __update_environment_state(self):
     self.sprayer['humidity'] = self.get_average_humidity(self.sprayer['sensors'])
-    self.heater['temperature'] = self.get_average_humidity(self.heater['power_switches'])
-    self.cooler['temperature'] = self.get_average_humidity(self.cooler['power_switches'])
+    self.heater['temperature'] = self.get_average_temperature(self.heater['sensors'])
+    self.cooler['temperature'] = self.get_average_temperature(self.cooler['sensors'])
 
   def __engine_loop(self):
     logger.info('Starting engine')
