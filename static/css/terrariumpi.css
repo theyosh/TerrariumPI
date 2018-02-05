@@ -115,8 +115,8 @@ div#dashboard .row.tile_count .progress {
 
 div#dashboard div.row.environment h4 span.glyphicon-warning-sign,
 div#dashboard div.row.environment small span,
-div#dashboard div.row.environment table,
-div#dashboard div.row.environment table tr{
+div#dashboard div.row.environment table.tile_info,
+div#dashboard div.row.environment table.tile_info tr{
   display: none;
 }
 
@@ -124,7 +124,7 @@ div#dashboard div.row.environment small span:first-child {
   display: inline;
 }
 
-div#dashboard div.row.environment table td:first-child {
+div#dashboard div.row.environment table.tile_info td:first-child {
   width: 70%;
 }
 
