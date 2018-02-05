@@ -336,6 +336,12 @@ class terrariumEnvironment():
               toggle_on = False
               extra_logging_message = 'Heater temperature value %f%% is higher then alarm %f%%.' % (self.heater['temperature']['current'],
                                                                                              self.heater['temperature']['alarm_max'])
+          else:
+            # Force off when lights are on!
+            if self.is_heater_on():
+              logger.info('Environment is turning off the heater due to lights on based on %s mode.' % (self.sprayer['mode'],))
+
+            toggle_on = False
 
 
         else:
@@ -395,6 +401,12 @@ class terrariumEnvironment():
               toggle_on = False
               extra_logging_message = 'Cooler temperature value %f%% is higher then alarm %f%%.' % (self.cooler['temperature']['current'],
                                                                                              self.cooler['temperature']['alarm_max'])
+          else:
+            # Force off when lights are on!
+            if self.is_cooler_on():
+              logger.info('Environment is turning off the cooler due to lights on based on %s mode.' % (self.sprayer['mode'],))
+
+            toggle_on = False
 
 
         else:
