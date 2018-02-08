@@ -407,7 +407,12 @@ class terrariumConfig:
 
   # Webcam config functions
   def save_webcam(self,data):
-    return self.__update_config('webcam' + data['id'],data,['state','image','max_zoom','last_update','resolution','preview'])
+    if 'resolution' in data:
+      data['resolution_width'] = data['resolution']['width']
+      data['resolution_height'] = data['resolution']['height']
+      del(data['resolution'])
+
+    return self.__update_config('webcam' + data['id'],data,['state','image','max_zoom','last_update','preview'])
 
   def save_webcams(self,data):
     update_ok = True

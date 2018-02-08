@@ -61,6 +61,9 @@ class terrariumTranslations():
     # Webcam
     self.translations['webcam_field_location'] = _('Holds the webcam location source. Supported sources are: %s') % ('<strong>RPICam</strong>, <strong>V4L device</strong>, <strong>Remote URL</strong>')
     self.translations['webcam_field_name'] = _('Holds the webcam name.')
+    self.translations['webcam_field_resolution'] = _('Holds the webcam resolution.')
+    self.translations['webcam_field_resolution_width'] = _('Holds the webcam resolution width in pixels.')
+    self.translations['webcam_field_resolution_height'] = _('Holds the webcam resolution height in pixels.')
     self.translations['webcam_field_rotation'] = _('Holds the webcam rotation of the image.')
     self.translations['webcam_field_preview'] = _('Shows the webcam preview image.')
     # End webcam
