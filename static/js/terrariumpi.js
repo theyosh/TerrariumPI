@@ -21,7 +21,8 @@ var dataTableTranslations = {
   'en' : '//cdn.datatables.net/plug-ins/1.10.16/i18n/English.json',
   'nl' : '//cdn.datatables.net/plug-ins/1.10.16/i18n/Dutch.json',
   'de' : '//cdn.datatables.net/plug-ins/1.10.16/i18n/German.json',
-  'it' : '//cdn.datatables.net/plug-ins/1.10.16/i18n/Italian.json'
+  'it' : '//cdn.datatables.net/plug-ins/1.10.16/i18n/Italian.json',
+  'fr' : '//cdn.datatables.net/plug-ins/1.10.16/i18n/France.json'
 };
 
 /**
