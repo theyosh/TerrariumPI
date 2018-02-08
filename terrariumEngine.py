@@ -271,9 +271,17 @@ class terrariumEngine():
     for webcamdata in webcam_config:
       if webcamdata['id'] is None or webcamdata['id'] == 'None' or webcamdata['id'] not in self.webcams:
         # New switch (add)
+        width = 640
+        height = 480
+        if 'resolution_width' in webcamdata and 'resolution_height' in webcamdata:
+          width = webcamdata['resolution_width']
+          height = webcamdata['resolution_height']
+
         webcam = terrariumWebcam(None,
                                  webcamdata['location'],
-                                 webcamdata['name'])
+                                 webcamdata['name'],
+                                 webcamdata['rotation'],
+                                 width,height)
         self.webcams[webcam.get_id()] = webcam
       else:
         # Existing switch
@@ -284,6 +292,9 @@ class terrariumEngine():
         webcam.set_name(webcamdata['name'])
 
       webcam.set_rotation(webcamdata['rotation'])
+
+      if 'resolution_width' in webcamdata and 'resolution_height' in webcamdata:
+        webcam.set_resolution(webcamdata['resolution_width'],webcamdata['resolution_height'])
 
       seen_webcams.append(webcam.get_id())
 

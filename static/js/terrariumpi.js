@@ -2037,21 +2037,21 @@ function update_webcam(data) {
   content_row.find('.webcam_preview img').attr('src',data.image);
 
   // Set the values only when empty
-  content_row.find('input:not(.knob), select').each(function(counter,item) {
-    if (item.name !== undefined && item.name !== '') {
-      var name = item.name.replace(/webcam_[0-9]+_/g,'');
-      var field_value = $(item).val();
-      try {
-        if (field_value === '' || field_value === null) {
-          var value = data[name];
-          if (!$.isArray(value)) {
-            // Cast explicit to string to fix dropdown options
-            value += '';
-          }
-          $(item).val(value).trigger('change');
+  content_row.find('input:not(.knob), select').each(function(counter,form_field) {
+    if (form_field.name !== undefined && form_field.name !== '') {
+      var field_value = $(form_field).val();
+      if (field_value === '' || field_value === null) {
+        var name = form_field.name.replace(/webcam_[0-9]+_/g,'').split('_');
+        var value = data[name[0]];
+        // Loop over array data or objects
+        for (var i = 1; i < name.length; i++) {
+          value = value[name[i]];
         }
-      } catch (e) {
-        console.log(e);
+        if (!$.isArray(value)) {
+          // Cast explicit to string to fix dropdown options
+          value += '';
+        }
+        $(form_field).val(value).trigger('change');
       }
     }
   });

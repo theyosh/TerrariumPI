@@ -24,8 +24,9 @@ class terrariumWebcam():
   OFFLINE = 'offline'
   ONLINE = 'online'
   UPDATE_TIMEOUT = 60
+  VALID_ROTATIONS = ['0','90','180','270','h','v']
 
-  def __init__(self, id, location, name = '', rotation = None):
+  def __init__(self, id, location, name = '', rotation = '0', width = 640, height = 480):
     self.id = id
     self.type = None
 
@@ -35,17 +36,17 @@ class terrariumWebcam():
     self.retries = 3
     self.webcam_warm_up = 2
 
+    # Variables per webcam
+    self.max_zoom = 0
+    self.raw_image = None
+    self.resolution = {'width': width, 'height': height}
+    self.last_update = None
+    self.state = None
+
     # Per webcam config
     self.set_location(location)
     self.set_name(name)
     self.set_rotation(rotation)
-
-    # Variables per webcam
-    self.max_zoom = 0
-    self.raw_image = None
-    self.resolution = None
-    self.last_update = None
-    self.state = None
 
     if self.id is None:
       self.id = md5(b'' + self.get_location()).hexdigest()
@@ -73,6 +74,7 @@ class terrariumWebcam():
 
       elif 'online' == self.get_type():
         stream = self.__get_raw_image_url(stream)
+
 
       if not self.state:
         logger.warning('Attempt %s of %s for getting raw for %s type \'%s\' did not succeed at location %s. Will retry in 1 second.' %
@@ -120,7 +122,7 @@ class terrariumWebcam():
     logger.debug('Using RPICAM')
     stream = BytesIO()
     try:
-      with PiCamera(resolution=(1920, 1080)) as camera:
+      with PiCamera(resolution=(self.resolution['width'], self.resolution['height'])) as camera:
         logger.debug('Open rpicam')
         camera.start_preview()
         logger.debug('Wait %s seconds for preview' % (self.webcam_warm_up,))
@@ -144,9 +146,9 @@ class terrariumWebcam():
       logger.debug('Open USB')
       camera = cv2.VideoCapture(int(self.location[10:]))
       logger.debug('Set USB height to 1280')
-      camera.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, 1280)
+      camera.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, float(self.resolution['width']))
       logger.debug('Set USB width to 720')
-      camera.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, 720)
+      camera.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, float(self.resolution['height']))
       logger.debug('Wait 2 seconds for preview')
       sleep(self.webcam_warm_up)
       logger.debug('Save USB to raw data')
@@ -238,7 +240,8 @@ class terrariumWebcam():
     starttime = time.time()
     # Original width
     source_width, source_height = self.raw_image.size
-    self.resolution = self.raw_image.size
+    # Overwrite settings based on result
+    self.resolution = {'width' : source_width, 'height' : source_height}
 
     # Calc new square canvas size
     longest_side = float(source_width if source_width > source_height else source_height)
@@ -334,6 +337,7 @@ class terrariumWebcam():
     if 'rpicam' == location:
       self.location = location
       self.type = 'rpicam'
+      self.set_resolution(1920,1080)
     elif location.startswith('/dev/video'):
       self.location = location
       self.type = 'usb'
@@ -348,7 +352,11 @@ class terrariumWebcam():
     return self.rotation
 
   def set_rotation(self,rotation):
-    self.rotation = rotation
+    if rotation in terrariumWebcam.VALID_ROTATIONS:
+      self.rotation = rotation
+
+  def set_resolution(self,width,height):
+    self.resolution = {'width' : int(width), 'height' : int(height)}
 
   def get_resolution(self):
     return self.resolution
