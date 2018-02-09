@@ -339,7 +339,7 @@ class terrariumEnvironment():
           else:
             # Force off when lights are on!
             if self.is_heater_on():
-              logger.info('Environment is turning off the heater due to lights on based on %s mode.' % (self.sprayer['mode'],))
+              logger.info('Environment is turning off the heater due to lights on based on %s mode.' % (self.heater['mode'],))
 
             toggle_on = False
 
@@ -392,25 +392,25 @@ class terrariumEnvironment():
         if 'sensor' == self.cooler['mode']:
           # Only cool when the lights are on. Or when explicit enabled during the night.
           if self.cooler['night_enabled'] or self.is_light_on():
-            # Heat based on the average temperature values of the used sensors
+            # Cooler based on the average temperature values of the used sensors
             if self.cooler['temperature']['current'] < self.cooler['temperature']['alarm_min']:
-              toggle_on = True
+              toggle_on = False
               extra_logging_message = 'Cooler temperature value %f%% is lower then alarm %f%%.' % (self.cooler['temperature']['current'],
                                                                                             self.cooler['temperature']['alarm_min'])
             elif self.cooler['temperature']['current'] > self.cooler['temperature']['alarm_max']:
-              toggle_on = False
+              toggle_on = True
               extra_logging_message = 'Cooler temperature value %f%% is higher then alarm %f%%.' % (self.cooler['temperature']['current'],
                                                                                              self.cooler['temperature']['alarm_max'])
           else:
             # Force off when lights are on!
             if self.is_cooler_on():
-              logger.info('Environment is turning off the cooler due to lights on based on %s mode.' % (self.sprayer['mode'],))
+              logger.info('Environment is turning off the cooler due to lights on based on %s mode.' % (self.cooler['mode'],))
 
             toggle_on = False
 
 
         else:
-          # Heat based on time table
+          # Cooler based on time table
           toggle_on = terrariumUtils.is_time(self.cooler['time_table'])
           if toggle_on is None:
             self.__update_timing('cooler')
@@ -420,11 +420,11 @@ class terrariumEnvironment():
             toggle_on = None
             # Use the extra added sensors for finetuning the trigger action
             if self.cooler['temperature']['current'] < self.cooler['temperature']['alarm_min']:
-              toggle_on = True
+              toggle_on = False
               extra_logging_message = 'Cooler temperature value %f%% is lower then alarm %f%%.' % (self.cooler['temperature']['current'],
                                                                                             self.cooler['temperature']['alarm_min'])
             elif self.cooler['temperature']['current'] > self.cooler['temperature']['alarm_max']:
-              toggle_on = False
+              toggle_on = True
               extra_logging_message = 'Cooler temperature value %f%% is higher then alarm %f%%.' % (self.cooler['temperature']['current'],
                                                                                              self.cooler['temperature']['alarm_max'])
 
