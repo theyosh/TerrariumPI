@@ -147,41 +147,41 @@
                         <div class="row dimmer" style="display:none;">
                           <div class="col-md-3 col-sm-3 col-xs-12 form-group">
                             <label for="switch_[nr]_dimmer_duration">{{_('Dimmer action duration')}}</label>
-                            <input class="form-control" name="switch_[nr]_dimmer_duration" placeholder="{{_('Dimmer action duration')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_duration')}}">
+                            <input class="form-control" name="switch_[nr]_dimmer_duration" placeholder="{{_('Dimmer action duration')}}" required="required" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_duration')}}">
                           </div>
                           <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                             <label for="switch_[nr]_dimmer_on_duration">{{_('Dimmer on duration')}}</label>
-                            <input class="form-control" name="switch_[nr]_dimmer_on_duration" placeholder="{{_('Dimmer on duration')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_on_duration')}}">
+                            <input class="form-control" name="switch_[nr]_dimmer_on_duration" placeholder="{{_('Dimmer on duration')}}" required="required" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_on_duration')}}">
                           </div>
                           <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                             <label for="switch_[nr]_dimmer_on_percentage">{{_('Dimmer on percentage')}}</label>
-                            <input class="form-control" name="switch_[nr]_dimmer_on_percentage" placeholder="{{_('Dimmer on percentage')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_on_percentage')}}">
+                            <input class="form-control" name="switch_[nr]_dimmer_on_percentage" placeholder="{{_('Dimmer on percentage')}}" required="required" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_on_percentage')}}">
                           </div>
                           <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                             <label for="switch_[nr]_dimmer_off_duration">{{_('Dimmer off duration')}}</label>
-                            <input class="form-control" name="switch_[nr]_dimmer_off_duration" placeholder="{{_('Dimmer off duration')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_off_duration')}}">
+                            <input class="form-control" name="switch_[nr]_dimmer_off_duration" placeholder="{{_('Dimmer off duration')}}" required="required" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_off_duration')}}">
                           </div>
                           <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                             <label for="switch_[nr]_dimmer_off_percentage">{{_('Dimmer off percentage')}}</label>
-                            <input class="form-control" name="switch_[nr]_dimmer_off_percentage" placeholder="{{_('Dimmer off percentage')}}" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_off_percentage')}}">
+                            <input class="form-control" name="switch_[nr]_dimmer_off_percentage" placeholder="{{_('Dimmer off percentage')}}" required="required" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_off_percentage')}}">
                           </div>
                         </div>
                         <div class="row timer" style="display:none;">
                           <div class="col-md-3 col-sm-3 col-xs-12 form-group">
                             <label for="switch_[nr]_timer_start">{{_('Timer start time')}}</label>
-                            <input class="form-control" name="switch_[nr]_timer_start" placeholder="{{_('Timer start time')}}" type="text" pattern="[0-9:APM]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_start')}}">
+                            <input class="form-control" name="switch_[nr]_timer_start" placeholder="{{_('Timer start time')}}" required="required" type="text" pattern="[0-9:APM]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_start')}}">
                           </div>
                           <div class="col-md-3 col-sm-3 col-xs-12 form-group">
                             <label for="switch_[nr]_timer_stop">{{_('Timer stop time')}}</label>
-                            <input class="form-control" name="switch_[nr]_timer_stop" placeholder="{{_('Timer stop time')}}" type="text" pattern="[0-9:APM]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_stop')}}">
+                            <input class="form-control" name="switch_[nr]_timer_stop" placeholder="{{_('Timer stop time')}}" required="required" type="text" pattern="[0-9:APM]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_stop')}}">
                           </div>
                           <div class="col-md-3 col-sm-2 col-xs-12 form-group">
                             <label for="switch_[nr]_timer_on_duration">{{_('Timer on duration')}}</label>
-                            <input class="form-control" name="switch_[nr]_timer_on_duration" placeholder="{{_('Timer period on duration in minutes')}}" type="text" pattern="[0-9]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_on_duration')}}">
+                            <input class="form-control" name="switch_[nr]_timer_on_duration" placeholder="{{_('Timer period on duration in minutes')}}" required="required" type="text" pattern="[0-9]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_on_duration')}}">
                           </div>
                           <div class="col-md-3 col-sm-2 col-xs-12 form-group">
                             <label for="switch_[nr]_timer_off_duration">{{_('Timer off duration')}}</label>
-                            <input class="form-control" name="switch_[nr]_timer_off_duration" placeholder="{{_('Timer period off duration in minutes')}}" type="text" pattern="[0-9]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_off_duration')}}">
+                            <input class="form-control" name="switch_[nr]_timer_off_duration" placeholder="{{_('Timer period off duration in minutes')}}" required="required" type="text" pattern="[0-9]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_off_duration')}}">
                           </div>
                         </div>
                       </div>

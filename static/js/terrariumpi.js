@@ -641,12 +641,6 @@ function check_form_data(form) {
 
 function process_form() {
   $('form').each(function() {
-    // Somehow browser will not post javascript generated forms.... :(
-    $(this).find('button[type=submit]').on('click',function(){
-      $('form').submit();
-      return false;
-    });
-
     $(this).on('submit', function() {
       var form = $(this);
       $.ajax({
@@ -1727,7 +1721,12 @@ function update_power_switch(data) {
   });
 
   // Open or hide the dimmer values (will not trigger on the select field)
-  content_row.find('.row.dimmer').toggle('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype);
+  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype) {
+    content_row.find('.row.dimmer').show();
+  } else {
+    // Remove dimmer row, else form submit is 'stuck' on hidden fields that have invalid patterns... :(
+    content_row.find('.row.dimmer').remove();
+  }
 }
 
 function add_power_switch_setting_row(data) {
