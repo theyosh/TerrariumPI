@@ -566,7 +566,9 @@ function update_online_indicator(online) {
 
 /* General functions - Form functions */
 function init_form_settings(pType) {
-  $('.page-title').append('<div class="title_right"><h3><button type="button" class="btn btn-primary alignright" data-toggle="modal" data-target=".add-form"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h3> </div>');
+  if (['environment'].indexOf(pType) == -1) {
+    $('.page-title').append('<div class="title_right"><h3><button type="button" class="btn btn-primary alignright" data-toggle="modal" data-target=".add-form"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h3> </div>');
+  }
 
   $('.form-group:has([required="required"]) > label').append('<span class="required"> *</span>');
 
