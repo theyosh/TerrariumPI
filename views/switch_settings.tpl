@@ -169,19 +169,19 @@
                         <div class="row timer" style="display:none;">
                           <div class="col-md-3 col-sm-3 col-xs-12 form-group">
                             <label for="switch_[nr]_timer_start">{{_('Timer start time')}}</label>
-                            <input class="form-control" name="switch_[nr]_timer_start" placeholder="{{_('Timer start time')}}" required="required" type="text" pattern="[0-9:APM]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_start')}}">
+                            <input class="form-control" name="switch_[nr]_timer_start" placeholder="{{_('Timer start time')}}" required="required" type="text" value="00:00" pattern="[0-9:APM]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_start')}}">
                           </div>
                           <div class="col-md-3 col-sm-3 col-xs-12 form-group">
                             <label for="switch_[nr]_timer_stop">{{_('Timer stop time')}}</label>
-                            <input class="form-control" name="switch_[nr]_timer_stop" placeholder="{{_('Timer stop time')}}" required="required" type="text" pattern="[0-9:APM]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_stop')}}">
+                            <input class="form-control" name="switch_[nr]_timer_stop" placeholder="{{_('Timer stop time')}}" required="required" type="text" value="00:00" pattern="[0-9:APM]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_stop')}}">
                           </div>
                           <div class="col-md-3 col-sm-2 col-xs-12 form-group">
                             <label for="switch_[nr]_timer_on_duration">{{_('Timer on duration')}}</label>
-                            <input class="form-control" name="switch_[nr]_timer_on_duration" placeholder="{{_('Timer period on duration in minutes')}}" required="required" type="text" pattern="[0-9]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_on_duration')}}">
+                            <input class="form-control" name="switch_[nr]_timer_on_duration" placeholder="{{_('Timer period on duration in minutes')}}" required="required" type="text" value="0" pattern="[0-9]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_on_duration')}}">
                           </div>
                           <div class="col-md-3 col-sm-2 col-xs-12 form-group">
                             <label for="switch_[nr]_timer_off_duration">{{_('Timer off duration')}}</label>
-                            <input class="form-control" name="switch_[nr]_timer_off_duration" placeholder="{{_('Timer period off duration in minutes')}}" required="required" type="text" pattern="[0-9]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_off_duration')}}">
+                            <input class="form-control" name="switch_[nr]_timer_off_duration" placeholder="{{_('Timer period off duration in minutes')}}" required="required" type="text" value="0" pattern="[0-9]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_off_duration')}}">
                           </div>
                         </div>
                       </div>
@@ -208,7 +208,15 @@
               minimumResultsForSearch: Infinity
             }).on('change',function() {
               if ('switch_[nr]_hardwaretype' === this.name) {
-                $(this).parents('.x_content').find('.row.dimmer').toggle('pwm-dimmer' === this.value || 'remote-dimmer' === this.value);
+                var dimmer = 'pwm-dimmer' === this.value || 'remote-dimmer' === this.value;
+                if (dimmer) {
+                  $(this).parents('.x_content').find('.row.dimmer input').attr('required','required');
+                } else {
+                  $(this).parents('.x_content').find('.row.dimmer input').removeAttr('required');
+                }
+
+
+                $(this).parents('.x_content').find('.row.dimmer').toggle(dimmer);
 
                 var address_field = $("input[name='" + this.name.replace('hardwaretype','address') + "']");
                 address_field.off('change');
@@ -218,9 +226,15 @@
                   });
                 }
               } else if ('switch_[nr]_timer_enabled' === this.name) {
+                if ('true' === this.value) {
+                  $(this).parents('.x_content').find('.row.timer input').attr('required','required');
+                } else {
+                  $(this).parents('.x_content').find('.row.timer input').removeAttr('required');
+                }
                 $(this).parents('.x_content').find('.row.timer').toggle('true' === this.value);
               }
             }).val(null).trigger('change');
+
 
             // Load existing switches
             $.get($('form').attr('action'),function(json_data){
