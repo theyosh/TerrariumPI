@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-02-08 22:02+CET\n"
+"POT-Creation-Date: 2018-02-11 18:16+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -498,7 +498,7 @@ msgstr ""
 msgid "Your changes are saved"
 msgstr ""
 
-#: terrariumWebserver.py:333 views/inc/menu.tpl:138
+#: terrariumWebserver.py:333 views/inc/menu.tpl:141
 msgid "Log out"
 msgstr ""
 
@@ -507,7 +507,7 @@ msgid "You are now logged out"
 msgstr ""
 
 #: views/audio_files.tpl:4 views/audio_playlist.tpl:4
-#: views/door_settings.tpl:4 views/inc/menu.tpl:117
+#: views/door_settings.tpl:4 views/inc/menu.tpl:120
 #: views/sensor_settings.tpl:4 views/switch_settings.tpl:4
 #: views/system_environment.tpl:4 views/system_settings.tpl:4
 #: views/webcam_settings.tpl:4
@@ -725,7 +725,7 @@ msgstr ""
 msgid "Current"
 msgstr ""
 
-#: views/dashboard.tpl:62 views/inc/menu.tpl:104
+#: views/dashboard.tpl:62 views/inc/menu.tpl:107
 #: views/inc/usage_dashboard.tpl:118 views/inc/usage_dashboard.tpl:211
 #: views/usage.tpl:28
 msgid "Environment"
@@ -733,8 +733,8 @@ msgstr ""
 
 #: views/dashboard.tpl:71 views/dashboard.tpl:284 views/dashboard.tpl:339
 #: views/door_status.tpl:32 views/inc/menu.tpl:44 views/inc/menu.tpl:55
-#: views/inc/menu.tpl:66 views/inc/menu.tpl:77 views/inc/menu.tpl:107
-#: views/inc/menu.tpl:135 views/inc/sensor_list.tpl:33
+#: views/inc/menu.tpl:66 views/inc/menu.tpl:77 views/inc/menu.tpl:110
+#: views/inc/menu.tpl:138 views/inc/sensor_list.tpl:33
 #: views/inc/usage_doors.tpl:48 views/inc/usage_doors.tpl:92
 #: views/inc/usage_doors.tpl:148 views/inc/usage_sensors.tpl:52
 #: views/inc/usage_sensors.tpl:102 views/inc/usage_sensors.tpl:209
@@ -744,10 +744,11 @@ msgstr ""
 #: views/inc/usage_webcams.tpl:88 views/inc/usage_webcams.tpl:163
 #: views/switch_status.tpl:32 views/system_environment.tpl:24
 #: views/system_environment.tpl:104 views/system_environment.tpl:184
-#: views/system_environment.tpl:265 views/system_status.tpl:32
-#: views/system_status.tpl:88 views/system_status.tpl:144
-#: views/system_status.tpl:200 views/system_status.tpl:256
-#: views/weather_forecast.tpl:16 views/webcam.tpl:15
+#: views/system_environment.tpl:265 views/system_log.tpl:15
+#: views/system_status.tpl:32 views/system_status.tpl:88
+#: views/system_status.tpl:144 views/system_status.tpl:200
+#: views/system_status.tpl:256 views/weather_forecast.tpl:16
+#: views/webcam.tpl:15
 msgid "Settings"
 msgstr ""
 
@@ -757,7 +758,7 @@ msgid "mode"
 msgstr ""
 
 #: views/dashboard.tpl:83 views/dashboard.tpl:112 views/dashboard.tpl:159
-#: views/dashboard.tpl:206 views/inc/menu.tpl:172 views/inc/menu.tpl:198
+#: views/dashboard.tpl:206 views/inc/menu.tpl:175 views/inc/menu.tpl:201
 #: views/inc/usage_environment.tpl:24 views/inc/usage_environment.tpl:120
 #: views/inc/usage_environment.tpl:128 views/inc/usage_environment.tpl:212
 #: views/inc/usage_environment.tpl:220 views/inc/usage_environment.tpl:306
@@ -890,7 +891,7 @@ msgid "Here you can configure your doors."
 msgstr ""
 
 #: views/door_settings.tpl:19 views/door_settings.tpl:70 views/hardware.tpl:7
-#: views/hardware.tpl:30 views/inc/menu.tpl:126 views/inc/usage_doors.tpl:98
+#: views/hardware.tpl:30 views/inc/menu.tpl:129 views/inc/usage_doors.tpl:98
 #: views/inc/usage_doors.tpl:119 views/inc/usage_sensors.tpl:108
 #: views/inc/usage_sensors.tpl:162 views/inc/usage_switches.tpl:103
 #: views/inc/usage_switches.tpl:134 views/sensor_settings.tpl:19
@@ -1140,57 +1141,61 @@ msgstr ""
 msgid "System"
 msgstr ""
 
-#: views/inc/menu.tpl:114
+#: views/inc/menu.tpl:104
+msgid "Log"
+msgstr ""
+
+#: views/inc/menu.tpl:117
 msgid "About"
 msgstr ""
 
-#: views/inc/menu.tpl:120
+#: views/inc/menu.tpl:123
 msgid "Info"
 msgstr ""
 
-#: views/inc/menu.tpl:123
+#: views/inc/menu.tpl:126
 msgid "Usage"
 msgstr ""
 
-#: views/inc/menu.tpl:136
+#: views/inc/menu.tpl:139
 msgid "FullScreen"
 msgstr ""
 
-#: views/inc/menu.tpl:137
+#: views/inc/menu.tpl:140
 msgid "Lock"
 msgstr ""
 
-#: views/inc/menu.tpl:150
+#: views/inc/menu.tpl:153
 msgid "date/time"
 msgstr ""
 
-#: views/inc/menu.tpl:155 views/inc/usage_dashboard.tpl:19
+#: views/inc/menu.tpl:158 views/inc/usage_dashboard.tpl:19
 msgid "Online"
 msgstr ""
 
-#: views/inc/menu.tpl:158 views/inc/usage_dashboard.tpl:26
+#: views/inc/menu.tpl:161 views/inc/usage_dashboard.tpl:26
 msgid "Offline"
 msgstr ""
 
-#: views/inc/menu.tpl:164 views/inc/menu.tpl:184 views/inc/menu.tpl:204
+#: views/inc/menu.tpl:167 views/inc/menu.tpl:187 views/inc/menu.tpl:207
 msgid "No messages"
 msgstr ""
 
-#: views/inc/menu.tpl:175 views/inc/usage_dashboard.tpl:43
+#: views/inc/menu.tpl:178 views/inc/usage_dashboard.tpl:43
 #: views/inc/usage_doors.tpl:82
 msgid "Door is closed"
 msgstr ""
 
-#: views/inc/menu.tpl:178 views/inc/usage_dashboard.tpl:50
+#: views/inc/menu.tpl:181 views/inc/usage_dashboard.tpl:50
 #: views/inc/usage_doors.tpl:81
 msgid "Door is open"
 msgstr ""
 
-#: views/inc/menu.tpl:192
+#: views/inc/menu.tpl:195
 msgid "Playing"
 msgstr ""
 
-#: views/inc/menu.tpl:195
+#: views/inc/menu.tpl:198
 msgid "Stopped"
 msgstr ""
 
@@ -1336,7 +1341,7 @@ msgstr ""
 msgid "There are multiple graph times. On the home there is a humidity and a temperature graph shown."
 msgstr ""
 
-#: views/inc/usage_dashboard.tpl:163
+#: views/inc/usage_dashboard.tpl:163 views/system_log.tpl:6
 msgid "Last update"
 msgstr ""
 

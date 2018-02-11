@@ -101,6 +101,9 @@
                       <a href="system_status.html">{{_('Status')}}</a>
                     </li>
                     <li>
+                      <a href="system_log.html">{{_('Log')}}</a>
+                    </li>
+                    <li>
                       <a href="system_environment.html">{{_('Environment')}}</a>
                     </li>
                     <li>

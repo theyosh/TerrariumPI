@@ -7,6 +7,7 @@ import time
 import uptime
 import os
 import psutil
+import subprocess
 from hashlib import md5
 
 from terrariumConfig import terrariumConfig
@@ -91,8 +92,9 @@ class terrariumEngine():
                                                self.get_audio_playing)
 
     # Start system update loop
-    logger.info('Start terrariumPI engine')
     thread.start_new_thread(self.__engine_loop, ())
+    thread.start_new_thread(self.__log_tail, ())
+    logger.info('TerrariumPI engine is running')
 
   # Private/internal functions
   def __load_sensors(self,data = None):
@@ -347,6 +349,7 @@ class terrariumEngine():
     return totals
 
   def __engine_loop(self):
+    logger.info('Start terrariumPI engine')
     while True:
       starttime = time.time()
 
@@ -406,6 +409,12 @@ class terrariumEngine():
   def __send_message(self,message):
     for queue in self.subscribed_queues:
       queue.put(message)
+
+  def __log_tail(self):
+    logger.info('Start terrariumPI engine log')
+    logtail = subprocess.Popen(['tail','-f','log/terrariumpi.log'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    for line in logtail.stdout:
+      self.__send_message({'type':'logtail','data':line.strip()})
   # End private/internal functions
 
   # Weather part
