@@ -1,11 +1,33 @@
 #!/bin/bash
 BASEDIR=$(dirname $(readlink -nf $0))
+SCRIPT_USER=`who -m | awk '{print $1}'`
 
 WHOAMI=`whoami`
 if [ "${WHOAMI}" != "root" ]; then
   echo "Start TerrariumPI installation as user root"
+  echo "sudo ./install.sh"
   exit 0
 fi
+
+echo "TerrariumPI is going to be installed to run with user '${SCRIPT_USER}'."
+PS3='Is this correct?: '
+options=("yes" "no")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "yes")
+            echo "Installing..."
+            break
+            ;;
+        "no")
+           echo "Run the installer from the prefered user to run the software."
+           exit 0
+            break
+            ;;
+        *) echo invalid option;;
+    esac
+done
+
 
 # Clean up first
 aptitude -y remove wolfram-engine sonic-pi oracle-java8-jdk desktop-base gnome-desktop3-data libgnome-desktop-3-10 epiphany-browser-data epiphany-browser nuscratch scratch wiringpi
@@ -46,13 +68,36 @@ git submodule update
 cd "${BASEDIR}/.."
 
 # Install multiple python modules
-pip install --upgrade gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio
+pip install --upgrade gevent
+pip install --upgrade untangle
+pip install --upgrade uptime
+pip install --upgrade bottle
+pip install --upgrade bottle_websocket
+pip install --upgrade pylibftdi
+pip install --upgrade pyalsaaudio
+pip install --upgrade pyusb
+pip install --upgrade pysispm
 
 # Install https://pypi.python.org/pypi/pylibftdi
 # Docu https://pylibftdi.readthedocs.io/
 # Make sure that the normal Pi user can read and write to the usb driver
+groupadd dialout 2> /dev/null
+usermod -a -G dialout ${SCRIPT_USER} 2> /dev/null
 echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", GROUP="dialout", MODE="0660"' > /etc/udev/rules.d/99-libftdi.rules
 echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", GROUP="dialout", MODE="0660"' >> /etc/udev/rules.d/99-libftdi.rules
+
+
+# https://pypi.python.org/pypi/pysispm
+groupadd sispmctl 2> /dev/null
+usermod -a -G sispmctl ${SCRIPT_USER} 2> /dev/null
+echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="04b4", ATTR{idProduct}=="fd10", GROUP="sispmctl", MODE="660"' > /etc/udev/rules.d/60-sispmctl.rules
+echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="04b4", ATTR{idProduct}=="fd11", GROUP="sispmctl", MODE="660"' >> /etc/udev/rules.d/60-sispmctl.rules
+echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="04b4", ATTR{idProduct}=="fd12", GROUP="sispmctl", MODE="660"' >> /etc/udev/rules.d/60-sispmctl.rules
+echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="04b4", ATTR{idProduct}=="fd13", GROUP="sispmctl", MODE="660"' >> /etc/udev/rules.d/60-sispmctl.rules
+
+# Reload udev controll
+udevadm control --reload-rules
+
 
 # Install 1 Wire I2C stuff
 sed -i.bak 's/^server: FAKE = DS18S20,DS2405/#server: FAKE = DS18S20,DS2405/' /etc/owfs.conf
@@ -77,7 +122,10 @@ fi
 cd Adafruit_Python_DHT
 git pull
 sudo python setup.py install
-cd "${BASEDIR}/.."
+cd "${BASEDIR}"
+
+chown ${SCRIPT_USER}. .
+chown ${SCRIPT_USER}. * -Rf
 
 # Remove unneeded OWS services
 update-rc.d -f owftpd remove
@@ -89,10 +137,10 @@ fi
 
 # Make sure GPIO group is available
 groupadd gpio 2> /dev/null
-usermod -a -G gpio pi 2> /dev/null
+usermod -a -G gpio ${SCRIPT_USER} 2> /dev/null
 
 # Make sure pigpiod is started at boot, and that user PI can restart it with sudo command
-echo "pi ALL=(ALL) NOPASSWD: /usr/sbin/service pigpiod restart" > /etc/sudoers.d/terrariumpi
+echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/sbin/service pigpiod restart" > /etc/sudoers.d/terrariumpi
 systemctl enable pigpiod
 
 # We are done!

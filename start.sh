@@ -14,6 +14,8 @@ BASEDIR=$(dirname $(readlink -nf $0))
 SCRIPT=$(basename $(readlink -nf $0))
 RUN=$1
 IP=`ip -4 addr | grep inet | grep -v "127.0.0.1" | grep -o -P "inet \K([0-9.]+)"`
+# Overrule default user based on the installation directory user rights
+RUN_AS_USER=`stat -c "%U" "${BASEDIR}"`
 
 function message {
   echo "$(date +"%Y-%m-%d %T,000") - INFO - terrariumWrapper - $1"
@@ -61,16 +63,13 @@ then
 else
   WHOAMI=`whoami`
   if [ "${WHOAMI}" != "root" ]; then
-    message "Start TerrariumPI server as user root"
+    echo "Start TerrariumPI as user root"
+    echo "sudo ./start.sh"
     exit 0
   fi
 
   message "Starting TerrariumPI server running as user '${RUN_AS_USER}' at location: http://${IP}:8090 ..."
   cd "${BASEDIR}"
-
-  # Because people will never read manuals and are installing everything as user root..... we have to fix it... :(
-  chown ${RUN_AS_USER}.${RUN_AS_USER} .
-  chown ${RUN_AS_USER}.${RUN_AS_USER} * -Rf
 
   su ${RUN_AS_USER} -c "screen -dmS ${SCREEN_NAME} ./${SCRIPT} run"
 fi
