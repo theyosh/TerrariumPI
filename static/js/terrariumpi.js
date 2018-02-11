@@ -394,6 +394,10 @@ function websocket_init(reconnect) {
     online_updater();
     var data = JSON.parse(evt.data);
     switch (data.type) {
+      case 'logtail':
+        $('div.row.logtail div.x_content pre').prepend(data.data + '\n');
+        $('div.row.logtail div.x_title small').text(moment().format('LL LTS'));
+        break;
       case 'uptime':
         update_dashboard_uptime(data.data);
         break;

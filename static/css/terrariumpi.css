@@ -130,17 +130,9 @@ div#dashboard div.row.environment table.tile_info td:first-child {
 
 /* End Dashboard */
 
-
-
-
-
-
-
-
-
-
-
-
+div.row.logtail div.x_content pre{
+  max-height: 550px;
+}
 
 /* Default state */
 .top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#online_indicator .offline,
