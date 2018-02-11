@@ -1707,7 +1707,7 @@ function update_power_switch(data) {
       var name = item.name.replace(/switch_[0-9]+_/g,'');
       var field_value = $(item).val();
       try {
-        if (field_value === '' || field_value === null) {
+        if (field_value === '' || field_value === null || field_value == 0 || field_value == '00:00') {
           var value = data[name];
           if (!$.isArray(value)) {
             // Cast explicit to string to fix dropdown options
@@ -1759,6 +1759,11 @@ function add_power_switch_setting_row(data) {
   }).on('change',function() {
       if (this.name.indexOf('_timer_enabled') >= 0) {
         $(this).parents('.x_content').find('.row.timer').toggle('true' === this.value);
+        if ('true' === this.value) {
+          $(this).parents('.x_content').find('.row.timer input').attr('required','required');
+        } else {
+          $(this).parents('.x_content').find('.row.timer input').removeAttr('required');
+        }
       }
   });
   // Add on the bottom before the submit row
