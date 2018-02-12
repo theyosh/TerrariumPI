@@ -412,7 +412,7 @@ class terrariumEngine():
 
   def __log_tail(self):
     logger.info('Start terrariumPI engine log')
-    logtail = subprocess.Popen(['tail','-f','log/terrariumpi.log'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    logtail = subprocess.Popen(['tail','-F','log/terrariumpi.log'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     for line in logtail.stdout:
       self.__send_message({'type':'logtail','data':line.strip()})
   # End private/internal functions
