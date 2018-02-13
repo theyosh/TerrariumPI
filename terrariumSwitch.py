@@ -11,11 +11,19 @@ import math
 import requests
 import datetime
 import os
+import sys
 import subprocess
+import re
 
 from hashlib import md5
 from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
 from terrariumUtils import terrariumUtils
+
+# Dirty hack to include someone his code... to lazy to make it myself :)
+# https://github.com/perryflynn/energenie-connect0r
+sys.path.insert(0, './energenie-connect0r')
+import energenieconnector
+
 from gevent import monkey, sleep
 monkey.patch_all()
 
@@ -60,8 +68,8 @@ class terrariumSwitch():
     elif 'gpio' in self.get_hardware_type():
       self.__load_gpio_device()
 
-    self.set_address(address)
     self.set_name(name)
+    self.set_address(address)
     self.set_power_wattage(power_wattage)
     self.set_water_flow(water_flow)
 
@@ -209,7 +217,29 @@ class terrariumSwitch():
         if address == 0:
           address = 4
 
+        logger.debug('Change remote Energenie USB power switch nr %s, on device nr %s, to state %s' % (address,self.device,state))
         subprocess.call(['/usr/bin/sispmctl', '-d',str(self.device),('-o' if state is terrariumSwitch.ON else '-f'),str(address)],stdout=open(os.devnull, 'w'), stderr=subprocess.STDOUT)
+
+      elif self.get_hardware_type() == 'eg-pm-lan':
+        data = re.match(r"^http:\/\/((?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?#(?P<switch>[1-4])$",self.sensor_address)
+        if data:
+          address = int(data.group('switch')) % 4
+          if address == 0:
+            address = 4
+
+          logger.debug('Change remote Energenie LAN power switch nr %s to state %s' % (address,state))
+
+          status = self.device.getstatus()
+          if status['login'] == 1:
+            logger.debug('Logged in at remote Energenie LAN power switch  %s' % (self.sensor_address,))
+            if self.device.login():
+              status = self.device.getstatus()
+
+          if status['login'] == 0:
+            self.device.changesocket(address, ( 1 if state is terrariumSwitch.ON else 0 ))
+            self.device.logout()
+          else:
+            logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.sensor_address,status['logintxt'],status['login']))
 
       elif self.get_hardware_type() == 'gpio':
         GPIO.output(int(self.get_address()), ( GPIO.HIGH if state is terrariumSwitch.ON else GPIO.LOW ))
@@ -342,7 +372,33 @@ class terrariumSwitch():
     if 'eg-pm-usb' in self.get_hardware_type():
       self.device = (int(self.sensor_address)-1) / 4
 
-    if 'gpio' in self.get_hardware_type():
+    elif 'eg-pm-lan' in self.get_hardware_type():
+      # Input format should be either:
+      # - http://[HOST]#[POWER_SWITCH_NR]
+      # - http://[HOST]/#[POWER_SWITCH_NR]
+      # - http://[PASSWORD]@[HOST]#[POWER_SWITCH_NR]
+      # - http://[PASSWORD]@[HOST]/#[POWER_SWITCH_NR]
+
+      data = re.match(r"^http:\/\/((?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?#(?P<switch>[1-4])$",self.sensor_address)
+      if data:
+        data = data.groupdict()
+        if 'passwd' not in data:
+          data['passwd'] = ''
+
+        # https://github.com/perryflynn/energenie-connect0r
+        self.device = energenieconnector.EnergenieConnector('http://' + data['host'],data['passwd'])
+        status = self.device.getstatus()
+
+        if status['login'] == 1:
+          if self.device.login():
+            logger.info('Connection to remote Energenie LAN \'%s\' is successfull at location %s' % (self.get_name(), self.sensor_address))
+            status = self.device.getstatus()
+
+        if status['login'] != 0:
+          logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.sensor_address,status['logintxt'],status['login']))
+          self.device = None
+
+    elif 'gpio' in self.get_hardware_type():
       try:
         GPIO.setup(int(self.get_address()), GPIO.OUT)
       except Exception, err:
