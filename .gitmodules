@@ -10,3 +10,6 @@
 [submodule "static/Leaflet.loading"]
 	path = static/Leaflet.loading
 	url = https://github.com/ebrelsford/Leaflet.loading.git
+[submodule "energenie-connect0r"]
+	path = energenie-connect0r
+	url = https://github.com/perryflynn/energenie-connect0r.git
