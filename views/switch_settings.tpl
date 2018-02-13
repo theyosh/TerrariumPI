@@ -113,6 +113,8 @@
                                 <option value="pwm-dimmer">{{_('PWM Dimmer')}}</option>
                                 <option value="remote">{{_('Remote')}}</option>
                                 <option value="remote-dimmer">{{_('Remote Dimmer')}}</option>
+                                <option value="eg-pm-usb">{{_('Energenie USB')}}</option>
+                                <option value="eg-pm-lan">{{_('Energenie LAN')}}</option>
                               </select>
                             </div>
                           </div>
