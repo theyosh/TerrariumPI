@@ -169,11 +169,11 @@
                         <div class="row timer" style="display:none;">
                           <div class="col-md-3 col-sm-3 col-xs-12 form-group">
                             <label for="switch_[nr]_timer_start">{{_('Timer start time')}}</label>
-                            <input class="form-control" name="switch_[nr]_timer_start" placeholder="{{_('Timer start time')}}" required="required" type="text" value="00:00" pattern="[0-9:APM]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_start')}}">
+                            <input class="form-control" name="switch_[nr]_timer_start" placeholder="{{_('Timer start time')}}" required="required" type="text" value="00:00" pattern="[0-9: APM]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_start')}}">
                           </div>
                           <div class="col-md-3 col-sm-3 col-xs-12 form-group">
                             <label for="switch_[nr]_timer_stop">{{_('Timer stop time')}}</label>
-                            <input class="form-control" name="switch_[nr]_timer_stop" placeholder="{{_('Timer stop time')}}" required="required" type="text" value="00:00" pattern="[0-9:APM]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_stop')}}">
+                            <input class="form-control" name="switch_[nr]_timer_stop" placeholder="{{_('Timer stop time')}}" required="required" type="text" value="00:00" pattern="[0-9: APM]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_stop')}}">
                           </div>
                           <div class="col-md-3 col-sm-2 col-xs-12 form-group">
                             <label for="switch_[nr]_timer_on_duration">{{_('Timer on duration')}}</label>
