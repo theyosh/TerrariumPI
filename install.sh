@@ -37,7 +37,7 @@ apt-get -y autoremove
 # Install required packages to get the terrarium software running
 aptitude -y update
 aptitude -y safe-upgrade
-aptitude -y install libftdi1 screen python-imaging python-dateutil python-ow python-rpi.gpio python-psutil git subversion watchdog build-essential python-dev python-picamera python-opencv python-pip python-pigpio python-requests i2c-tools owfs ow-shell sqlite3 vlc-nox python-mediainfodll libasound2-dev
+aptitude -y install libftdi1 screen python-imaging python-dateutil python-ow python-rpi.gpio python-psutil git subversion watchdog build-essential python-dev python-picamera python-opencv python-pip python-pigpio python-requests i2c-tools owfs ow-shell sqlite3 vlc-nox python-mediainfodll libasound2-dev sispmctl
 
 # Basic config:
 #raspi-config
@@ -75,8 +75,6 @@ pip install --upgrade bottle
 pip install --upgrade bottle_websocket
 pip install --upgrade pylibftdi
 pip install --upgrade pyalsaaudio
-pip install --upgrade pyusb
-pip install --upgrade pysispm
 
 # Install https://pypi.python.org/pypi/pylibftdi
 # Docu https://pylibftdi.readthedocs.io/
@@ -85,7 +83,6 @@ groupadd dialout 2> /dev/null
 usermod -a -G dialout ${SCRIPT_USER} 2> /dev/null
 echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", GROUP="dialout", MODE="0660"' > /etc/udev/rules.d/99-libftdi.rules
 echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", GROUP="dialout", MODE="0660"' >> /etc/udev/rules.d/99-libftdi.rules
-
 
 # https://pypi.python.org/pypi/pysispm
 groupadd sispmctl 2> /dev/null

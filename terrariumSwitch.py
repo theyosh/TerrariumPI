@@ -10,16 +10,17 @@ import time
 import math
 import requests
 import datetime
+import os
+import subprocess
 
-from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
 from hashlib import md5
+from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
 from terrariumUtils import terrariumUtils
-
 from gevent import monkey, sleep
 monkey.patch_all()
 
 class terrariumSwitch():
-  VALID_HARDWARE_TYPES = ['ftdi','gpio','gpio-inverse','pwm-dimmer','remote','remote-dimmer']
+  VALID_HARDWARE_TYPES = ['ftdi','gpio','gpio-inverse','pwm-dimmer','remote','remote-dimmer','eg-pm-usb','eg-pm-lan']
 
   OFF = False
   ON = True
@@ -50,6 +51,8 @@ class terrariumSwitch():
 
     if self.get_hardware_type() == 'ftdi':
       self.__load_ftdi_device()
+    elif self.get_hardware_type() == 'eg-pm-usb':
+      self.__load_eg_pm_usb_device()
     elif self.get_hardware_type() == 'pwm-dimmer':
       self.__load_pwm_device()
     elif 'remote' in self.get_hardware_type():
@@ -94,6 +97,9 @@ class terrariumSwitch():
       self.device_type = 'Serial' if product.endswith('UART') else 'BitBang'
       logger.debug('Found switch board %s, %s, %s, of type %s' % (vendor,product,self.device,self.device_type))
       break # For now, we only support 1 switch board!
+
+  def __load_eg_pm_usb_device(self):
+    self.device = 0
 
   def __load_gpio_device(self):
     GPIO.setmode(GPIO.BOARD)
@@ -197,6 +203,13 @@ class terrariumSwitch():
         except Exception, err:
           # Ignore for now
           pass
+
+      elif self.get_hardware_type() == 'eg-pm-usb':
+        address = int(self.sensor_address) % 4
+        if address == 0:
+          address = 4
+
+        subprocess.call(['/usr/bin/sispmctl', '-d',str(self.device),('-o' if state is terrariumSwitch.ON else '-f'),str(address)],stdout=open(os.devnull, 'w'), stderr=subprocess.STDOUT)
 
       elif self.get_hardware_type() == 'gpio':
         GPIO.output(int(self.get_address()), ( GPIO.HIGH if state is terrariumSwitch.ON else GPIO.LOW ))
@@ -326,6 +339,9 @@ class terrariumSwitch():
 
   def set_address(self,address):
     self.sensor_address = address
+    if 'eg-pm-usb' in self.get_hardware_type():
+      self.device = (int(self.sensor_address)-1) / 4
+
     if 'gpio' in self.get_hardware_type():
       try:
         GPIO.setup(int(self.get_address()), GPIO.OUT)
