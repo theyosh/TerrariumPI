@@ -21,6 +21,27 @@ function message {
   echo "$(date +"%Y-%m-%d %T,000") - INFO - terrariumWrapper - $1"
 }
 
+function update_software {
+  # Initial run, no settings file, always up to date
+  if [ -f settings.cfg ]; then
+
+    # Read out the new and current versions
+    NEW_VERSION=`grep ^version defaults.cfg | cut -d' ' -f 3 | sed "s/\.//g"`
+    CURRENT_VERSION=`grep ^version settings.cfg | cut -d' ' -f 3 | sed "s/\.//g"`
+
+    # New version detected? Return true for updating
+    if [ "${CURRENT_VERSION}" -lt "${NEW_VERSION}" ]; then
+      return 0
+    else
+      # No update, return false
+      return 1
+    fi
+  fi
+
+  # Return false
+  return 1
+}
+
 if [ "${RUN}" == "run" ]
 then
   while true
@@ -31,6 +52,13 @@ then
     # Start terrarium software
     message "Starting TerrariumPI server at location: http://${IP}:8090 ..."
     python ${BASEDIR}/terrariumPI.py
+
+    # Check after run if there is an update. If so, show message and exit
+    if update_software ; then
+      message "A new version of TerrariumPI is detected. Please restart."
+      sleep 5
+      break
+    fi
 
     # Crashed / stopped / something else...
     if (( SECONDS < RESTART_TIMEOUT )); then
@@ -66,6 +94,18 @@ else
     echo "Start TerrariumPI as user root"
     echo "sudo ./start.sh"
     exit 0
+  fi
+
+  # Update version?
+  if update_software ; then
+    message "TerrariumPI has detected an update and will now run the installer to update all dependencies and libraries."
+    ./install.sh
+    message "Updating TerrariumPI software is done and will now start in 5 seconds."
+    for (( counter=5; counter>0; counter-- ))
+    do
+      echo -n "${counter} "
+      sleep 1
+    done
   fi
 
   message "Starting TerrariumPI server running as user '${RUN_AS_USER}' at location: http://${IP}:8090 ..."
