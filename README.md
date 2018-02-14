@@ -32,6 +32,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Predefined on and off durations
   - Predefined on and off dimming percentages
 - Support for timmers in powerswitches and environment #72
+- Support for Energenie USB and LAN powerswitches [EG-PM(s)2](http://energenie.com/item.aspx?id=7556)
 - Reading out multiple temperature and humidity sensors
 - Support for native Raspberry Pi cam out of the box
 - Support for USB and remote webcams
