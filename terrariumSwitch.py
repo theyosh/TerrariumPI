@@ -221,25 +221,28 @@ class terrariumSwitch():
         subprocess.call(['/usr/bin/sispmctl', '-d',str(self.device),('-o' if state is terrariumSwitch.ON else '-f'),str(address)],stdout=open(os.devnull, 'w'), stderr=subprocess.STDOUT)
 
       elif self.get_hardware_type() == 'eg-pm-lan':
-        data = re.match(r"^http:\/\/((?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?#(?P<switch>[1-4])$",self.sensor_address)
-        if data:
-          address = int(data.group('switch')) % 4
-          if address == 0:
-            address = 4
+        if self.device is None:
+          logger.error('Energenie LAN device is not connected. Cannot trigger power switch')
+        else:
+          data = re.match(r"^http:\/\/((?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?#(?P<switch>[1-4])$",self.sensor_address)
+          if data:
+            address = int(data.group('switch')) % 4
+            if address == 0:
+              address = 4
 
-          logger.debug('Change remote Energenie LAN power switch nr %s to state %s' % (address,state))
+            logger.debug('Change remote Energenie LAN power switch nr %s to state %s' % (address,state))
 
-          status = self.device.getstatus()
-          if status['login'] == 1:
-            logger.debug('Logged in at remote Energenie LAN power switch  %s' % (self.sensor_address,))
-            if self.device.login():
-              status = self.device.getstatus()
+            webstatus = self.device.getstatus()
+            if webstatus['login'] == 1:
+              logger.debug('Logged in at remote Energenie LAN power switch  %s' % (self.sensor_address,))
+              if self.device.login():
+                webstatus = self.device.getstatus()
 
-          if status['login'] == 0:
-            self.device.changesocket(address, ( 1 if state is terrariumSwitch.ON else 0 ))
-            self.device.logout()
-          else:
-            logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.sensor_address,status['logintxt'],status['login']))
+            if webstatus['login'] == 0:
+              self.device.changesocket(address, ( 1 if state is terrariumSwitch.ON else 0 ))
+              self.device.logout()
+            else:
+              logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.sensor_address,webstatus['logintxt'],webstatus['login']))
 
       elif self.get_hardware_type() == 'gpio':
         GPIO.output(int(self.get_address()), ( GPIO.HIGH if state is terrariumSwitch.ON else GPIO.LOW ))
