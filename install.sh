@@ -142,21 +142,4 @@ systemctl enable pigpiod
 
 # We are done!
 sync
-echo "Instaltion is done. Please reboot once to get the 1Wire, I2C and Adafruit DHT libary working correctly"
-PS3='Reboot now?: '
-options=("yes" "no")
-select opt in "${options[@]}"
-do
-    case $opt in
-        "yes")
-            echo "Rebooting..."
-            reboot
-            break
-            ;;
-        "no")
-           exit 0
-            break
-            ;;
-        *) echo invalid option;;
-    esac
-done
+echo "Installation is done. Please reboot once to get the 1Wire, I2C and Adafruit DHT libary working correctly."
