@@ -71,7 +71,7 @@ class terrariumWebserver():
     self.__app.route('/<template_name:re:[^/]+\.html$>', method="GET", callback=self.__render_page)
 
     self.__app.route('/<filename:re:robots\.txt>', method="GET", callback=self.__static_file)
-    self.__app.route('/<root:re:(static|gentelella|webcam|audio)>/<filename:path>', method="GET", callback=self.__static_file)
+    self.__app.route('/<root:re:(static|gentelella|webcam|audio|log)>/<filename:path>', method="GET", callback=self.__static_file)
 
     self.__app.route('/api/<path:path>', method=['GET'], callback=self.__get_api_call)
 
@@ -149,8 +149,11 @@ class terrariumWebserver():
     if isinstance(staticfile,HTTPError):
       return staticfile
 
-    if 'webcam' == root:
+    if 'webcam' == root or 'log' == root:
       staticfile.add_header('Expires',datetime.datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT'))
+      if 'log' == root:
+        staticfile.add_header('Content-Type','text/text; charset=UTF-8')
+        staticfile.add_header('Content-Disposition','Attachment;filename=' + filename)
     else:
       staticfile.add_header('Expires',(datetime.datetime.utcnow() + datetime.timedelta(days=self.__caching_days)).strftime('%a, %d %b %Y %H:%M:%S GMT'))
 
