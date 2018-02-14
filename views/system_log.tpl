@@ -14,6 +14,9 @@
                       <li>
                         <a href="javascript:;" onclick="menu_click('system_settings.html')">{{_('Settings')}}</a>
                       </li>
+                      <li>
+                        <a href="/log/terrariumpi.log" target="_blank">{{_('Download')}}</a>
+                      </li>
                     </ul>
                   </li>
                   <li>
@@ -27,4 +30,23 @@
             </div>
           </div>
         </div>
+        <script type="text/javascript">
+          $(document).ready(function() {
+            // Read the last 100KB of logfile data
+            $.ajax({
+              url: 'log/terrariumpi.log',
+              headers: {Range: "bytes=-102400"},
+              success: function( data ) {
+                var content = $('.x_content pre');
+                // Data in wrong order. Need to reverse it.
+                $.each(data.split("\n"),function(counter,line){
+                  if ((line = line.trim()) != '') {
+                    content.prepend(line + "\n");
+                  }
+                });
+                reload_reload_theme();
+              }
+            });
+          });
+        </script>
 % include('inc/page_footer.tpl')
