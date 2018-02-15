@@ -2,8 +2,63 @@ Changelog
 =========
 
 
-3.3.0 (2018-02-06)
+(unreleased)
 ------------
+
+**New**
+~~~~~~~
+- Add option to add full authentication. [#102](https://github.com/theyosh/TerrariumPI/issues/102). [TheYOSH]
+- Add extra check for remote Energenie power switches. [TheYOSH]
+- Add auto updater to start script. Add reboot question in installer
+  script. [TheYOSH]
+- Add support for Energenie LAN power switches. [#95](https://github.com/theyosh/TerrariumPI/issues/95). [TheYOSH]
+- Add support for Energenie USB powerswitches. [#95](https://github.com/theyosh/TerrariumPI/issues/95). [TheYOSH]
+- Add files via upload. [nke69]
+- Add log page. [TheYOSH]
+- Add files via upload. [nke69]
+- Add resolution settings to webcams. [#91](https://github.com/theyosh/TerrariumPI/issues/91). [TheYOSH]
+
+**Fixes**
+~~~~~~~~~
+- Fix US date parsing. [#97](https://github.com/theyosh/TerrariumPI/issues/97). [TheYOSH]
+- Fix adding new switches. [#97](https://github.com/theyosh/TerrariumPI/issues/97). [TheYOSH]
+- Changed installation script to support other user then pi to run the
+  software [#96](https://github.com/theyosh/TerrariumPI/issues/96). Changed pip installer so it could fix [#81](https://github.com/theyosh/TerrariumPI/issues/81). And added
+  support for remote usb power switches [#95](https://github.com/theyosh/TerrariumPI/issues/95). [TheYOSH]
+- Fix stupid copy paste code actions. [#94](https://github.com/theyosh/TerrariumPI/issues/94). [TheYOSH]
+- Fix form validation. Close [#93](https://github.com/theyosh/TerrariumPI/issues/93). [TheYOSH]
+
+**Updates**
+~~~~~~~~~~~
+- Update README.md. [TheYOSH]
+- Small update to the installler. [TheYOSH]
+- Update README.md. [TheYOSH]
+
+**Other**
+~~~~~~~~~
+- Code cleanup. [TheYOSH]
+- Code Cleanup. [TheYOSH]
+- Cleanup sensor scanning. [TheYOSH]
+- Load last 100KB of logfile data to start with. Add option to download
+  full logfile. [TheYOSH]
+- Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
+  [TheYOSH]
+- Keep tailing after logfile rotation. [TheYOSH]
+- Merge pull request [#98](https://github.com/theyosh/TerrariumPI/issues/98) from nke69/master. [TheYOSH]
+
+  Update France language by @nke69
+- Remove the wrongly add button from the environment page. [#97](https://github.com/theyosh/TerrariumPI/issues/97).
+  [TheYOSH]
+- Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
+  [TheYOSH]
+- Translate table fields to France. [#92](https://github.com/theyosh/TerrariumPI/issues/92). [TheYOSH]
+- Merge pull request [#92](https://github.com/theyosh/TerrariumPI/issues/92) from nke69/master. [TheYOSH]
+
+  Merged language france
+
+
+3.3.0 (2018-02-06)
+------------------
 
 **New**
 ~~~~~~~
@@ -33,6 +88,7 @@ Changelog
 
 **Updates**
 ~~~~~~~~~~~
+- Update changelog. [TheYOSH]
 - Update installer. [TheYOSH]
 - Update README.md. [TheYOSH]
 - Update Dutch and English translations. [TheYOSH]
