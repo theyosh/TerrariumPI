@@ -17,7 +17,6 @@ from terrariumTranslations import terrariumTranslations
 from terrariumAudio import terrariumAudioPlayer
 from terrariumUtils import terrariumUtils
 
-
 import thread
 import json
 import os
@@ -63,7 +62,7 @@ class terrariumWebserver():
     self.__routes()
 
   # Custom HTTP authentication routine. This way there is an option to optional secure the hole web interface
-  def auth_basic2(self, check, required, realm="private", text="Access denied"):
+  def __auth_basic2(self, check, required, realm="private", text="Access denied"):
     """ Callback decorator to require HTTP auth (basic).
         TODO: Add route(check_auth=...) parameter. """
 
@@ -86,7 +85,7 @@ class terrariumWebserver():
     return decorator
 
   def __authenticate(self, required):
-    return self.auth_basic2(self.__terrariumEngine.authenticate,required,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
+    return self.__auth_basic2(self.__terrariumEngine.authenticate,required,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
 
   def __logout_authenticate(self, user, password):
     return True
