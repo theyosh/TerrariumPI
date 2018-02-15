@@ -63,7 +63,7 @@ class terrariumSensor:
   def scan(port,temperature_indicator): # TODO: Wants a callback per sensor here....?
     starttime = time.time()
     logger.debug('Start scanning for temperature/humidity sensors')
-    sensors = []
+    sensor_list = []
 
     if port > 0:
       try:
@@ -71,16 +71,14 @@ class terrariumSensor:
         sensorsList = ow.Sensor('/').sensorList()
         for sensor in sensorsList:
           if 'temperature' in sensor.entryList():
-            sensor_id = md5(b'' + sensor.address + 'temperature').hexdigest()
-            sensors.append(terrariumSensor( sensor_id,
+            sensor_list.append(terrariumSensor(None,
                                             'owfs',
                                             'temperature',
                                             sensor,
                                             indicator=temperature_indicator))
 
           if 'humidity' in sensor.entryList():
-            sensor_id = md5(b'' + sensor.address + 'humidity').hexdigest()
-            sensors.append(terrariumSensor(sensor_id,
+            sensor_list.append(terrariumSensor(None,
                                            'owfs',
                                           'humidity',
                                           sensor))
@@ -98,17 +96,14 @@ class terrariumSensor:
       w1data = terrariumSensor.W1_TEMP_REGEX.search(data)
       if w1data:
         # Found valid data
-        sensor_type = ('temperature' if w1data.group('type') == 't' else 'humidity')
-        sensor_address = address.replace(terrariumSensor.W1_BASE_PATH,'')
-        sensor_id = md5(b'' + sensor_address.replace('-','').upper() + sensor_type).hexdigest()
-        sensors.append(terrariumSensor(sensor_id,
+        sensor_list.append(terrariumSensor(None,
                                        'w1',
-                                       sensor_type,
-                                       sensor_address,
+                                       ('temperature' if w1data.group('type') == 't' else 'humidity'),
+                                       address.replace(terrariumSensor.W1_BASE_PATH,''),
                                        indicator=temperature_indicator))
 
-    logger.info('Found %d temperature/humidity sensors in %.5f seconds' % (len(sensors),time.time() - starttime))
-    return sensors
+    logger.info('Found %d temperature/humidity sensors in %.5f seconds' % (len(sensor_list),time.time() - starttime))
+    return sensor_list
 
   def update(self, force = False):
     now = datetime.datetime.now()
