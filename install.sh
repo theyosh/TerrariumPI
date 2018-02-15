@@ -28,7 +28,6 @@ do
     esac
 done
 
-
 # Clean up first
 aptitude -y remove wolfram-engine sonic-pi oracle-java8-jdk desktop-base gnome-desktop3-data libgnome-desktop-3-10 epiphany-browser-data epiphany-browser nuscratch scratch wiringpi
 apt-get -y remove "^libreoffice.*"
