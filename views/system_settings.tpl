@@ -80,6 +80,9 @@
                       </div>
                     </div>
                   </div>
+
+
+
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="admin">{{_('Admin name')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
@@ -96,6 +99,15 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cur_password">{{_('Current admin password')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control" name="cur_password" type="password" placeholder="{{_('Current admin password')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_current_password')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Always authenticate')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_always_authentication')}}">
+                      <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="always_authenticate" type="radio" value="true">{{_('Yes')}}</label>
+                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="always_authenticate" type="radio" value="false">{{_('No')}}</label>
+                      </div>
                     </div>
                   </div>
                   <div class="form-group">
@@ -156,6 +168,8 @@
         </div>
         <script type="text/javascript">
           $(document).ready(function() {
+            init_form_settings('system');
+
             var language_selector = $("select[name='language']").select2({
                 placeholder: '{{_('Select an option')}}',
                 allowClear: false,
@@ -197,8 +211,25 @@
                   soundcard_selector.val(data.soundcard).trigger('change');
                   temperature_indicator.val(data.temperature_indicator).trigger('change');
                   $.each(Object.keys(data), function(key,value){
-                    $('input[name="' + value + '"]').val(data[value]);
+                    var config_field = $('form [name="' + value + '"]');
+                    if (config_field.length >= 1) {
+                      switch (config_field.prop('type').toLowerCase()) {
+                        case 'text':
+                          config_field.val(data[value]);
+                          break;
+
+                        case 'radio':
+                          $('input[name="' + value + '"][value="' + data[value] + '"]').attr('checked','checked').parent().addClass('active');
+                          break;
+
+                        case 'select-one':
+                        case 'select-multiple':
+                          config_field.val(data[value]).trigger('change');
+                          break;
+                      }
+                    }
                   });
+                  setContentHeight();
                 });
               });
             });

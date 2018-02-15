@@ -15,12 +15,15 @@ from Queue import Queue
 
 from terrariumTranslations import terrariumTranslations
 from terrariumAudio import terrariumAudioPlayer
+from terrariumUtils import terrariumUtils
+
 
 import thread
 import json
 import os
 import datetime
 import hashlib
+import functools
 
 from gevent import monkey, sleep
 monkey.patch_all()
@@ -52,7 +55,6 @@ class terrariumWebserver():
     self.__app = terrariumWebserver.app
     self.__config = self.__terrariumEngine.get_config('system')
     self.__caching_days = 30
-
     terrariumWebserver.app.terrarium = self.__terrariumEngine
     # Load language
     gettext.translation('terrariumpi', 'locales/', languages=[self.__terrariumEngine.config.get_language()]).install(True)
@@ -60,60 +62,101 @@ class terrariumWebserver():
 
     self.__routes()
 
-  def __authenticate(self, user, password):
-    return self.__terrariumEngine.authenticate(user,password)
+  # Custom HTTP authentication routine. This way there is an option to optional secure the hole web interface
+  def auth_basic2(self, check, required, realm="private", text="Access denied"):
+    """ Callback decorator to require HTTP auth (basic).
+        TODO: Add route(check_auth=...) parameter. """
+
+    def decorator(func):
+
+        @functools.wraps(func)
+        def wrapper(*a, **ka):
+            user, password = request.auth or (None, None)
+            if required or terrariumUtils.is_true(self.__terrariumEngine.config.get_system()['always_authenticate']):
+
+              if user is None or not check(user, password):
+                  err = HTTPError(401, text)
+                  err.add_header('WWW-Authenticate', 'Basic realm="%s"' % realm)
+                  return err
+
+            return func(*a, **ka)
+
+        return wrapper
+
+    return decorator
+
+  def __authenticate(self, required):
+    return self.auth_basic2(self.__terrariumEngine.authenticate,required,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
 
   def __logout_authenticate(self, user, password):
     return True
 
   def __routes(self):
-    self.__app.route('/', method="GET", callback=self.__render_page)
-    self.__app.route('/<template_name:re:[^/]+\.html$>', method="GET", callback=self.__render_page)
+    self.__app.route('/',
+                     method="GET",
+                     callback=self.__render_page,
+                     apply=self.__authenticate(False))
 
-    self.__app.route('/<filename:re:robots\.txt>', method="GET", callback=self.__static_file)
-    self.__app.route('/<root:re:(static|gentelella|webcam|audio|log)>/<filename:path>', method="GET", callback=self.__static_file)
+    self.__app.route('/<template_name:re:[^/]+\.html$>',
+                     method="GET",
+                     callback=self.__render_page,
+                     apply=self.__authenticate(False))
 
-    self.__app.route('/api/<path:path>', method=['GET'], callback=self.__get_api_call)
+    self.__app.route('/<filename:re:robots\.txt>',
+                     method="GET",
+                     callback=self.__static_file,
+                     apply=self.__authenticate(False))
+
+    self.__app.route('/<root:re:(static|gentelella|webcam|audio|log)>/<filename:path>',
+                     method="GET",
+                     callback=self.__static_file,
+                     apply=self.__authenticate(False))
+
+    self.__app.route('/api/<path:path>',
+                     method=['GET'],
+                     callback=self.__get_api_call,
+                     apply=self.__authenticate(False))
 
     self.__app.route('/api/switch/toggle/<switchid:path>',
                      method=['POST'],
                      callback=self.__toggle_switch,
-                     apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
+                     apply=self.__authenticate(True)
                     )
 
     self.__app.route('/api/switch/state/<switchid:path>/<value:int>',
                      method=['POST'],
                      callback=self.__state_switch,
-                     apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
+                     apply=self.__authenticate(True)
                     )
 
     self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|doors|audio|environment|profile)>',
                      method=['PUT','POST','DELETE'],
                      callback=self.__update_api_call,
-                     apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
+                     apply=self.__authenticate(True)
                     )
 
     self.__app.route('/api/audio/player/<action:re:(start|stop|volumeup|volumedown|mute|unmute)>',
                      method=['POST'],
                      callback=self.__player_commands,
-                     apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
+                     apply=self.__authenticate(True)
                     )
 
     self.__app.route('/api/audio/file',
                      method=['POST'],
                      callback=self.__upload_audio_file,
-                     apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
+                     apply=self.__authenticate(True)
                     )
 
     self.__app.route('/api/audio/file/<audiofileid:path>',
                      method=['DELETE'],
                      callback=self.__delete_audio_file,
-                     apply=auth_basic(self.__authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
+                     apply=self.__authenticate(True)
                     )
 
     self.__app.route('/logout',
                      method=['GET'],
                      callback=self.__logout_url,
+
                      apply=auth_basic(self.__logout_authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
                     )
 
