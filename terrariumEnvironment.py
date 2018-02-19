@@ -137,34 +137,17 @@ class terrariumEnvironment():
                                                                                       time.time()-starttime))
 
   def __check_available_power_switches(self):
-    for switchid in self.light['power_switches']:
-      if switchid not in self.power_switches:
-        del(self.light['power_switches'][switchid])
-
-    for switchid in self.sprayer['power_switches']:
-      if switchid not in self.power_switches:
-        del(self.sprayer['power_switches'][switchid])
-
-    for switchid in self.heater['power_switches']:
-      if switchid not in self.power_switches:
-        del(self.heater['power_switches'][switchid])
-
-    for switchid in self.cooler['power_switches']:
-      if switchid not in self.power_switches:
-        del(self.cooler['power_switches'][switchid])
+    # Filter out the non existing powerswiches
+    self.light['power_switches']   = [switchid for switchid in self.light['power_switches'] if switchid in self.power_switches]
+    self.sprayer['power_switches'] = [switchid for switchid in self.sprayer['power_switches'] if switchid in self.power_switches]
+    self.heater['power_switches']  = [switchid for switchid in self.heater['power_switches'] if switchid in self.power_switches]
+    self.cooler['power_switches']  = [switchid for switchid in self.cooler['power_switches'] if switchid in self.power_switches]
 
   def __check_available_sensors(self):
-    for sensorid in self.sprayer['sensors']:
-      if sensorid not in self.sensors:
-        del(self.sprayer['sensors'][sensorid])
-
-    for sensorid in self.heater['sensors']:
-      if sensorid not in self.sensors:
-        del(self.heater['sensors'][sensorid])
-
-    for sensorid in self.cooler['sensors']:
-      if sensorid not in self.sensors:
-        del(self.cooler['sensors'][sensorid])
+    # Filter out the non existing sensors
+    self.sprayer['sensors'] = [sensorid for sensorid in self.sprayer['sensors'] if sensorid in self.sensors]
+    self.heater['sensors']  = [sensorid for sensorid in self.heater['sensors'] if sensorid in self.sensors]
+    self.cooler['sensors']  = [sensorid for sensorid in self.cooler['sensors'] if sensorid in self.sensors]
 
   def __update_timing(self,part = None):
     if part is None or part == 'light':
