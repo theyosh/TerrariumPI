@@ -164,12 +164,12 @@ class terrariumEnvironment():
         # Duration check
         duration = self.light['off'] - self.light['on']
         # Reduce the amount of hours if to much
-        if duration > datetime.timedelta(hours=self.light['max_hours']):
+        if self.light['max_hours'] > 0 and duration > datetime.timedelta(hours=self.light['max_hours']):
           duration -= datetime.timedelta(hours=self.light['max_hours'])
           self.light['on'] += datetime.timedelta(seconds=duration.total_seconds()/2)
           self.light['off'] -= datetime.timedelta(seconds=duration.total_seconds()/2)
         # Increase the amount of hours if to little
-        elif duration < datetime.timedelta(hours=self.light['min_hours']):
+        elif self.light['min_hours'] > 0 and duration < datetime.timedelta(hours=self.light['min_hours']):
           duration = datetime.timedelta(hours=self.light['min_hours']) - duration
           self.light['on'] -= datetime.timedelta(seconds=duration.total_seconds()/2)
           self.light['off'] += datetime.timedelta(seconds=duration.total_seconds()/2)
