@@ -30,37 +30,25 @@ class terrariumSensor:
     self.id = id
     self.set_hardware_type(hardware_type)
 
-    if self.get_hardware_type() == 'owfs':
+    if 'owfs' == self.get_hardware_type():
       # OW Sensor object
       self.sensor = sensor
       self.sensor.useCache(True)
       self.sensor_address = self.sensor.address
-    elif self.get_hardware_type() == 'w1':
+    elif 'w1' == self.get_hardware_type():
       # Dirty hack to replace OWFS sensor object for W1 path
       self.sensor_address = sensor
+    elif 'hc-sr04' == self.get_hardware_type():
+      # Dirty hack to set sensor address
+      self.set_address(sensor)
+    elif 'remote' == self.get_hardware_type():
+      # Dirty hack to set sensor address
+      self.set_address(sensor)
     elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
       # Adafruit_DHT
       self.sensor = dht
-      # Dirty hack to replace OWFS sensor object for GPIO pin nr
-      self.sensor_address = sensor
-    elif self.get_hardware_type() == 'hc-sr04':
-      # Adafruit_DHT
-      #self.sensor = dht
-      # Dirty hack to replace OWFS sensor object for GPIO pin nr
-      sensor = sensor.split(',')
-      self.sensor_address = {'TRIG' : sensor[0] , 'ECHO' : sensor[1]}
-      #GPIO.setmode(GPIO.BCM)
-      try:
-        GPIO.setup(int(self.sensor_address['TRIG']),GPIO.OUT)
-        GPIO.setup(int(self.sensor_address['ECHO']),GPIO.IN)
-
-      except Exception, err:
-        logger.warning(err)
-        pass
-
-
-    elif 'remote' == self.get_hardware_type():
-      self.sensor_address = sensor
+      # Dirty hack to set sensor address
+      self.set_address(sensor)
 
     self.set_name(name)
     self.set_type(sensor_type,callback_indicator)
@@ -68,7 +56,7 @@ class terrariumSensor:
     self.set_alarm_max(0)
     self.set_limit_min(0)
     self.set_limit_max(100)
-    if self.get_hardware_type() == 'hc-sr04':
+    if 'hc-sr04' == self.get_hardware_type():
       # Limit 10 meters
       self.set_limit_max(100000)
 
@@ -81,7 +69,7 @@ class terrariumSensor:
     self.update()
 
   @staticmethod
-  def scan(port,temperature_indicator): # TODO: Wants a callback per sensor here....?
+  def scan(port,unit_indicator): # TODO: Wants a callback per sensor here....?
     starttime = time.time()
     logger.debug('Start scanning for temperature/humidity sensors')
     sensor_list = []
@@ -93,16 +81,17 @@ class terrariumSensor:
         for sensor in sensorsList:
           if 'temperature' in sensor.entryList():
             sensor_list.append(terrariumSensor(None,
-                                            'owfs',
-                                            'temperature',
-                                            sensor,
-                                            callback_indicator=temperature_indicator))
+                                               'owfs',
+                                               'temperature',
+                                               sensor,
+                                               callback_indicator=unit_indicator))
 
           if 'humidity' in sensor.entryList():
             sensor_list.append(terrariumSensor(None,
-                                           'owfs',
-                                          'humidity',
-                                          sensor))
+                                               'owfs',
+                                               'humidity',
+                                               sensor,
+                                               callback_indicator=unit_indicator))
 
       except ow.exNoController:
         logger.debug('OWFS file system is not actve / installed on this device!')
@@ -121,10 +110,10 @@ class terrariumSensor:
       if w1data:
         # Found valid data
         sensor_list.append(terrariumSensor(None,
-                                       'w1',
-                                       ('temperature' if w1data.group('type') == 't' else 'humidity'),
-                                       address.replace(terrariumSensor.W1_BASE_PATH,''),
-                                       callback_indicator=temperature_indicator))
+                                           'w1',
+                                           ('temperature' if 't' == w1data.group('type') else 'humidity'),
+                                           address.replace(terrariumSensor.W1_BASE_PATH,''),
+                                           callback_indicator=unit_indicator))
 
     logger.info('Found %d temperature/humidity sensors in %.5f seconds' % (len(sensor_list),time.time() - starttime))
     return sensor_list
@@ -173,7 +162,7 @@ class terrariumSensor:
 
           pulse_duration = pulse_end - pulse_start
           # https://www.modmypi.com/blog/hc-sr04-ultrasonic-range-sensor-on-the-raspberry-pi
-          # Measure in millimetre
+          # Measure in centimetre
           current = round(pulse_duration * 17150,2)
 
         elif 'temperature' == self.get_type():
@@ -280,7 +269,7 @@ class terrariumSensor:
 
   def get_address(self):
     address = self.sensor_address
-    if self.get_hardware_type() == 'hc-sr04':
+    if 'hc-sr04' == self.get_hardware_type():
       address = str(self.sensor_address['TRIG']) + ',' + str(self.sensor_address['ECHO'])
 
     return address
@@ -290,10 +279,9 @@ class terrariumSensor:
     if self.get_hardware_type() not in ['owfs','w1']:
       self.sensor_address = address
 
-      if self.get_hardware_type() == 'hc-sr04':
+      if 'hc-sr04' == self.get_hardware_type() and ',' in address:
         sensor = address.split(',')
         self.sensor_address = {'TRIG' : int(sensor[0]) , 'ECHO' : int(sensor[1])}
-        #GPIO.setmode(GPIO.BCM)
         try:
           GPIO.setup(self.sensor_address['TRIG'],GPIO.OUT)
           GPIO.setup(self.sensor_address['ECHO'],GPIO.IN)
@@ -336,9 +324,9 @@ class terrariumSensor:
     current = self.current
     indicator = self.get_indicator().lower()
 
-    if indicator == 'f':
+    if 'f' == indicator:
       current = terrariumUtils.to_fahrenheit(self.current)
-    elif indicator == 'inch':
+    elif 'inch' == indicator:
       current = terrariumUtils.to_inches(self.current)
 
     return float(current)
