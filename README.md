@@ -51,8 +51,8 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
 - Audio support through interal audio jack or USB soundcards #42
   - Create playlists (loop and repeat)
   - Volume controle in the webinterface
-  - Uploadig audio files through webinterface
-  - Audio meta data support
+  - Uploading audio files through webinterface
+  - Audio meta data support (mediainfo)
 - Remote temperature and humidity sensors through HTTP(S) JSON API's. JSON Data format can be found on [Remote data wiki](https://github.com/theyosh/TerrariumPI/wiki/Remote-data).
 
 It is currently controling my reptile terrarium for more then three years! And my Madagascar Day Gecko is very happy with it!
