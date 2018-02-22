@@ -41,6 +41,9 @@
                       <a href="sensor_humidity.html">{{_('Humidity')}}</a>
                     </li>
                     <li>
+                      <a href="sensor_distance.html">{{_('Distance')}}</a>
+                    </li>
+                    <li>
                       <a href="sensor_settings.html">{{_('Settings')}}</a>
                     </li>
                   </ul>
