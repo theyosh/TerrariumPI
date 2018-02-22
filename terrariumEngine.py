@@ -2,6 +2,7 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
+import RPi.GPIO as GPIO
 import thread
 import time
 import uptime
@@ -20,8 +21,6 @@ from terrariumAudio import terrariumAudioPlayer
 from terrariumCollector import terrariumCollector
 from terrariumEnvironment import terrariumEnvironment
 
-import RPi.GPIO as GPIO
-
 from gevent import monkey, sleep
 monkey.patch_all()
 
@@ -36,6 +35,7 @@ class terrariumEngine():
     GPIO.setmode(GPIO.BOARD)
     logger.debug('Done setting terrariumPI GPIO Mode to %s' % (GPIO.BOARD,))
 
+    # Default system units
     self.__units = {'temperature' : 'C',
                     'distance'    : 'cm',
                     'humidity'    : '%'}
@@ -716,10 +716,11 @@ class terrariumEngine():
       filter = parameters[0]
 
     data = self.get_sensors(['average'])['sensors']
-    data['light']   = self.environment.get_light_state()
-    data['sprayer'] = self.environment.get_sprayer_state()
-    data['heater']  = self.environment.get_heater_state()
-    data['cooler']  = self.environment.get_cooler_state()
+    data['light']     = self.environment.get_light_state()
+    data['sprayer']   = self.environment.get_sprayer_state()
+    data['heater']    = self.environment.get_heater_state()
+    data['cooler']    = self.environment.get_cooler_state()
+    data['watertank'] = self.environment.get_watertank_state()
 
     if filter is not None and filter in data:
       data = { filter : data[filter]}
