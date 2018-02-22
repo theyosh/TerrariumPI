@@ -5,6 +5,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 import datetime
 import time
 import ow
+import os.path
 import Adafruit_DHT as dht
 import glob
 import re
@@ -109,6 +110,9 @@ class terrariumSensor:
 
     # Scanning w1 system bus
     for address in glob.iglob(terrariumSensor.W1_BASE_PATH + '[1-9][0-9]-*'):
+      if not os.path.isfile(address + '/w1_slave'):
+        break
+
       data = ''
       with open(address + '/w1_slave', 'r') as w1data:
         data = w1data.read()
@@ -168,8 +172,9 @@ class terrariumSensor:
             pulse_end = time.time()
 
           pulse_duration = pulse_end - pulse_start
+          # https://www.modmypi.com/blog/hc-sr04-ultrasonic-range-sensor-on-the-raspberry-pi
           # Measure in millimetre
-          current = round(pulse_duration * 171500,2)
+          current = round(pulse_duration * 17150,2)
 
         elif 'temperature' == self.get_type():
           if self.get_hardware_type() == 'owfs':
@@ -335,8 +340,6 @@ class terrariumSensor:
       current = terrariumUtils.to_fahrenheit(self.current)
     elif indicator == 'inch':
       current = terrariumUtils.to_inches(self.current)
-    elif indicator == 'cm':
-      current = self.current / 10.0
 
     return float(current)
 

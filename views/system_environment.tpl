@@ -181,6 +181,83 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
+                  <h2 class="blue"><i class="fa fa-tint"></i> {{_('Water tank')}} <small class="data_update">{{_('Settings')}}</small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                      <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_mode">{{_('Water tank mode')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_mode')}}">
+                        <select class="form-control" name="watertank_mode" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option value="disabled">{{_('Disabled')}}</option>
+                          <option value="timer">{{_('Timer')}}</option>
+                          <option value="sensor">{{_('Sensor')}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_on_duration">{{_('Timer on duration')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="watertank_on_duration" required="required" type="text" placeholder="{{_('Timer on duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_on_duration')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_off_duration">{{_('Timer off duration')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="watertank_off_duration" required="required" type="text" placeholder="{{_('Timer off duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_off_duration')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_pump_duration">{{_('Water tank pump duration (seconds)')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="watertank_pump_duration" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Water tank pump duration (seconds)')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_duration')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_volume">{{_('Water tank volume in liters')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="watertank_volume" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Water tank volume in liters')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_volume')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_height">{{_('Water tank height in ...')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="watertank_height" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Water tank height in ...')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_height')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_power_switches">{{_('Power switches')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_power_switches')}}">
+                        <select class="form-control" multiple="multiple" name="watertank_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_sensors">{{_('Distance sensors')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_distance_sensors')}}">
+                        <select class="form-control" multiple="multiple" name="watertank_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
                   <h2 class="red"><i class="fa fa-fire"></i> {{_('Heater')}} <small class="data_update">{{_('Settings')}}</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
@@ -354,6 +431,7 @@
           var switches_loaded = false;
           var humidity_sensors_loaded = false;
           var temperature_sensors_loaded = false;
+          var distance_sensors_loaded = false;
 
           $(document).ready(function() {
             init_form_settings('environment');
@@ -431,13 +509,21 @@
               temperature_sensors_loaded = true;
             });
 
+            $.get('/api/sensors/distance',function(data){
+              var select_boxes = $('select[name="watertank_sensors"]');
+              $.each(data.sensors,function (index,sensor){
+                select_boxes.append($('<option>').attr({'value':sensor.id}).text(sensor.name));
+              });
+              distance_sensors_loaded = true;
+            });
+
             setContentHeight();
             load_environment_settings();
           });
 
           function load_environment_settings() {
             // Wait with loading the environment settings until all selectors are loaded
-            if (switches_loaded && humidity_sensors_loaded && temperature_sensors_loaded) {
+            if (switches_loaded && humidity_sensors_loaded && temperature_sensors_loaded && distance_sensors_loaded) {
               $.get('/api/config/environment',function(data){
                 $.each(data,function (environmentpart,environmentdata){
                   $.each(environmentdata,function(name,value) {

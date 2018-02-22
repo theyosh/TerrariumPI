@@ -90,6 +90,29 @@ class terrariumEnvironment():
     self.sprayer['lastaction']     = int(time.time())
 
 
+    if len(config_data['watertank'].keys()) == 0 or not reloading:
+      self.watertank = {}
+
+    self.watertank['mode']           = 'disabled' if 'mode' not in config_data['watertank'] else config_data['watertank']['mode']
+    self.watertank['on']             = '00:00'    if 'on' not in config_data['watertank'] else config_data['watertank']['on']
+    self.watertank['off']            = '00:00'    if 'off' not in config_data['watertank'] else config_data['watertank']['off']
+    self.watertank['on_duration']    =  1.0       if 'on_duration' not in config_data['watertank'] else float(config_data['watertank']['on_duration'])
+    self.watertank['off_duration']   = 59.0       if 'off_duration' not in config_data['watertank'] else float(config_data['watertank']['off_duration'])
+    self.watertank['pump_duration']  = 0.0        if 'pump_duration' not in config_data['watertank'] else float(config_data['watertank']['pump_duration'])
+    self.watertank['volume']         = 0.0        if 'volume' not in config_data['watertank'] else float(config_data['watertank']['volume'])
+    self.watertank['height']         = 0.0        if 'height' not in config_data['watertank'] else float(config_data['watertank']['height'])
+    self.watertank['power_switches'] = []         if ('power_switches' not in config_data['watertank'] or config_data['watertank']['power_switches'] in ['',None]) else config_data['watertank']['power_switches']
+    self.watertank['sensors']        = []         if ('sensors' not in config_data['watertank'] or config_data['watertank']['sensors'] in ['',None]) else config_data['watertank']['sensors']
+
+    if not isinstance(self.watertank['power_switches'], list):
+      self.watertank['power_switches'] = self.watertank['power_switches'].split(',')
+    if not isinstance(self.watertank['sensors'], list):
+      self.watertank['sensors'] = self.watertank['sensors'].split(',')
+
+    self.watertank['enabled']        =  'disabled' != self.watertank['mode']
+    self.watertank['lastaction']     = int(time.time())
+
+
     if len(config_data['heater'].keys()) == 0 or not reloading:
       self.heater = {}
 
@@ -138,16 +161,18 @@ class terrariumEnvironment():
 
   def __check_available_power_switches(self):
     # Filter out the non existing powerswiches
-    self.light['power_switches']   = [switchid for switchid in self.light['power_switches'] if switchid in self.power_switches]
-    self.sprayer['power_switches'] = [switchid for switchid in self.sprayer['power_switches'] if switchid in self.power_switches]
-    self.heater['power_switches']  = [switchid for switchid in self.heater['power_switches'] if switchid in self.power_switches]
-    self.cooler['power_switches']  = [switchid for switchid in self.cooler['power_switches'] if switchid in self.power_switches]
+    self.light['power_switches']     = [switchid for switchid in self.light['power_switches'] if switchid in self.power_switches]
+    self.sprayer['power_switches']   = [switchid for switchid in self.sprayer['power_switches'] if switchid in self.power_switches]
+    self.heater['power_switches']    = [switchid for switchid in self.heater['power_switches'] if switchid in self.power_switches]
+    self.cooler['power_switches']    = [switchid for switchid in self.cooler['power_switches'] if switchid in self.power_switches]
+    self.watertank['power_switches'] = [switchid for switchid in self.watertank['power_switches'] if switchid in self.power_switches]
 
   def __check_available_sensors(self):
     # Filter out the non existing sensors
-    self.sprayer['sensors'] = [sensorid for sensorid in self.sprayer['sensors'] if sensorid in self.sensors]
-    self.heater['sensors']  = [sensorid for sensorid in self.heater['sensors'] if sensorid in self.sensors]
-    self.cooler['sensors']  = [sensorid for sensorid in self.cooler['sensors'] if sensorid in self.sensors]
+    self.sprayer['sensors']   = [sensorid for sensorid in self.sprayer['sensors'] if sensorid in self.sensors]
+    self.heater['sensors']    = [sensorid for sensorid in self.heater['sensors'] if sensorid in self.sensors]
+    self.cooler['sensors']    = [sensorid for sensorid in self.cooler['sensors'] if sensorid in self.sensors]
+    self.watertank['sensors'] = [sensorid for sensorid in self.watertank['sensors'] if sensorid in self.sensors]
 
   def __update_timing(self,part = None):
     if part is None or part == 'light':
@@ -192,6 +217,12 @@ class terrariumEnvironment():
 
       self.sprayer['duration'] = terrariumUtils.duration(self.sprayer['time_table'])
 
+    if part is None or part == 'watertank':
+      self.watertank['time_table'] = terrariumUtils.calculate_time_table(self.watertank['on'],self.watertank['off'],
+                                                                       self.watertank['on_duration'],self.watertank['off_duration'])
+
+      self.watertank['duration'] = terrariumUtils.duration(self.watertank['time_table'])
+
     if part is None or part == 'heater':
       if self.heater['mode'] == 'weather':
         self.heater['on']  = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['set']).strftime('%H:%M')
@@ -220,6 +251,7 @@ class terrariumEnvironment():
     self.sprayer['humidity'] = self.get_average_humidity(self.sprayer['sensors'])
     self.heater['temperature'] = self.get_average_temperature(self.heater['sensors'])
     self.cooler['temperature'] = self.get_average_temperature(self.cooler['sensors'])
+    self.watertank['distance'] = self.get_average_distance(self.watertank['sensors'])
 
   def __engine_loop(self):
     logger.info('Starting engine')
@@ -450,6 +482,8 @@ class terrariumEnvironment():
       power_switches = self.heater['power_switches']
     elif 'cooler' == part:
       power_switches = self.cooler['power_switches']
+    elif 'watertank' == part:
+      power_switches = self.watertank['power_switches']
 
     for switch_id in power_switches:
       if switch_id not in self.power_switches:
@@ -491,6 +525,10 @@ class terrariumEnvironment():
       state_data = self.sprayer
       average = self.get_average_humidity(self.sprayer['sensors'])
       state = self.is_sprayer_on()
+    elif part == 'watertank':
+      state_data = self.watertank
+      average = self.get_average_distance(self.watertank['sensors'])
+      state = self.is_watertank_on()
     elif part == 'heater':
       state_data = self.heater
       average = self.get_average_temperature(self.heater['sensors'])
@@ -528,10 +566,11 @@ class terrariumEnvironment():
     self.__check_available_sensors()
 
   def get_config(self):
-    data = {'light'   : self.get_light_config(),
-            'sprayer' : self.get_sprayer_config() ,
-            'heater'  : self.get_heater_config(),
-            'cooler'  : self.get_cooler_config()}
+    data = {'light'     : self.get_light_config(),
+            'sprayer'   : self.get_sprayer_config() ,
+            'heater'    : self.get_heater_config(),
+            'cooler'    : self.get_cooler_config(),
+            'watertank' : self.get_watertank_config()}
 
     return data
 
@@ -562,10 +601,23 @@ class terrariumEnvironment():
             'amount'    : 0.0,
             'alarm'     : False}
 
+  def get_average_distance(self,sensors = []):
+    data = self.get_average(sensors)
+    if 'distance' in data:
+      return data['distance']
+
+    return {'current'   : 0.0,
+            'alarm_min' : 0.0,
+            'alarm_max' : 0.0,
+            'limit_min' : 0.0,
+            'limit_max' : 0.0,
+            'amount'    : 0.0,
+            'alarm'     : False}
+
   def get_average(self,sensors_filter = []):
     average = {}
     # Make a set, in order to get a list of unique sensorids. In other words, set will remove duplicate sensorids
-    for sensorid in set(self.sprayer['sensors'] + self.heater['sensors'] + self.cooler['sensors']):
+    for sensorid in set(self.sprayer['sensors'] + self.heater['sensors'] + self.cooler['sensors'] + self.watertank['sensors']):
       if len(sensors_filter) > 0 and sensorid not in sensors_filter:
         # If we want to filter, we only count the ones that are giving as parameter
         continue
@@ -578,6 +630,8 @@ class terrariumEnvironment():
           part += 'heater,'
         if sensorid in self.cooler['sensors']:
           part += 'cooler,'
+        if sensorid in self.watertank['sensors']:
+          part += 'watertank,'
 
         part = part[:-1]
 
@@ -611,6 +665,7 @@ class terrariumEnvironment():
 
       average[averagetype]['alarm'] = not (average[averagetype]['alarm_min'] <= average[averagetype]['current'] <= average[averagetype]['alarm_max'])
       average[averagetype]['type'] = averagetype
+      #average[averagetype]['indicator'] = self.__unit_type(averagetype)
 
     return average
   # End system functions
@@ -685,6 +740,42 @@ class terrariumEnvironment():
     return self.__is_off('sprayer')
   # End sprayer functions
 
+  # Watertank functions
+  def get_watertank_config(self):
+    return self.__get_state('watertank',['time_table','enabled','state','lastaction','duration'])
+
+  def set_watertank_config(self,data):
+    self.__set_config('watertank',data)
+
+  def get_watertank_state(self):
+    cleanup_fields = []
+
+    if 'weather' == self.watertank['mode']:
+      cleanup_fields = ['on_duration','off_duration','time_table']
+
+    elif 'timer' == self.watertank['mode']:
+      cleanup_fields = ['min_hours','max_hours','hours_shift']
+
+    elif 'sensor' == self.watertank['mode']:
+      cleanup_fields = ['min_hours','max_hours','hours_shift','time_table']
+
+    return self.__get_state('watertank',cleanup_fields)
+
+  def watertank_on(self):
+#    if int(time.time()) - self.watertank['lastaction'] > self.watertank['spray_timeout']:
+    self.__switch_on('watertank')
+    (Timer(self.watertank['pump_duration'], self.watertank_off)).start()
+    self.watertank['lastaction'] = int(time.time())
+
+  def watertank_off(self):
+    self.__switch_off('watertank')
+
+  def is_watertank_on(self):
+    return self.__is_on('watertank')
+
+  def is_watertank_off(self):
+    return self.__is_off('watertank')
+  # End watertank functions
 
   # Heater functions
   def get_heater_config(self):

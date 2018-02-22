@@ -278,7 +278,6 @@ class terrariumConfig:
     config = self.get_system()
     return config['port']
 
-
   # Environment functions
   def save_environment(self,data):
     '''Save the terrariumPI environment config
@@ -287,19 +286,20 @@ class terrariumConfig:
     config = {}
     for environment_part in data:
       for part in data[environment_part]:
+        # Do not save the following settings
+        if part in ['enabled','time_table','state','amount','current','temperature','humidity','distance','alarm','type']:
+          continue
+
         if data[environment_part][part] is None:
           data[environment_part][part] = ''
         config[environment_part + '_' + part] = data[environment_part][part]
 
-    return self.__update_config('environment',config,['light_enabled','light_time_table',
-                                                      'sprayer_enabled','sprayer_time_table',
-                                                      'heater_enabled','heater_time_table',
-                                                      'cooler_enabled','cooler_time_table',
-                                                      'cooler_temperature','sprayer_humidity','heater_temperature'])
+    self.__config.remove_section('environment')
+    return self.__update_config('environment',config,[])
 
   def get_environment(self):
     config = self.__get_config('environment')
-    data = {'light' : {}, 'sprayer' : {}, 'heater' : {} , 'cooler' : {}}
+    data = {'light' : {}, 'sprayer' : {}, 'heater' : {} , 'cooler' : {}, 'watertank' : {}}
     for key in config:
       config_keys = key.split('_')
       part = config_keys[0]
