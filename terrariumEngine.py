@@ -431,6 +431,7 @@ class terrariumEngine():
 
   def get_weather(self, parameters = [], socket = False):
     data = self.weather.get_data()
+    self.environment.update_timing()
 
     if socket:
       self.__send_message({'type':'update_weather','data':data})

@@ -213,6 +213,9 @@ class terrariumEnvironment():
 
       self.cooler['duration'] = terrariumUtils.duration(self.cooler['time_table'])
 
+  def update_timing(self):
+    self.__update_timing()
+
   def __update_environment_state(self):
     self.sprayer['humidity'] = self.get_average_humidity(self.sprayer['sensors'])
     self.heater['temperature'] = self.get_average_temperature(self.heater['sensors'])
