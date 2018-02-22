@@ -98,7 +98,7 @@
                   </ul>
                 </li>
                 <li>
-                  <a><i class="fa fa-lightbulb-o"></i> {{_('System')}} <span class="fa fa-chevron-down"></span></a>
+                  <a><i class="fa fa-cog"></i> {{_('System')}} <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li>
                       <a href="system_status.html">{{_('Status')}}</a>
