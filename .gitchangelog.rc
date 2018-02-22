@@ -276,6 +276,11 @@ def publish(lines):
     with codecs.open('CHANGELOG.md', 'w', 'utf-8') as f:
         for line in lines:
             line = re.sub("#(\d+)", "[#\\1](https://github.com/theyosh/TerrariumPI/issues/\\1)", line, 0, re.IGNORECASE)
+            line = re.sub("@([^\s]+)", "[@\\1](https://github.com/\\1)", line, 0, re.IGNORECASE)
+
+            line = re.sub("~+","------", line, 0, re.IGNORECASE)
+
+
             f.write(line)
 
 ## ``revs`` is a list of callable or a list of string

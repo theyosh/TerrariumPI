@@ -6,7 +6,11 @@ Changelog
 ------------
 
 **New**
-~~~~~~~
+------
+- Add watertank environment part. It does only measurement. No actions
+  yet. [#87](https://github.com/theyosh/TerrariumPI/issues/87). [TheYOSH]
+- Add HC-SR04-Ultrasonic-Sensor support part1.1 [#87](https://github.com/theyosh/TerrariumPI/issues/87). [TheYOSH]
+- Add HC-SR04-Ultrasonic-Sensor support part1 [#87](https://github.com/theyosh/TerrariumPI/issues/87). [TheYOSH]
 - Add option to add full authentication. [#102](https://github.com/theyosh/TerrariumPI/issues/102). [TheYOSH]
 - Add extra check for remote Energenie power switches. [TheYOSH]
 - Add auto updater to start script. Add reboot question in installer
@@ -19,7 +23,16 @@ Changelog
 - Add resolution settings to webcams. [#91](https://github.com/theyosh/TerrariumPI/issues/91). [TheYOSH]
 
 **Fixes**
-~~~~~~~~~
+------
+- Fix dashboard js bug. [TheYOSH]
+- Finetune distance sensor code and fix OWFS sensor scanning. [TheYOSH]
+- Updates for measurements in centimetre or inches [#87](https://github.com/theyosh/TerrariumPI/issues/87). Various small
+  fixes and code cleanup regarding [#87](https://github.com/theyosh/TerrariumPI/issues/87). [TheYOSH]
+- Fix gauge graphs. Fix sensor indicators. [TheYOSH]
+- Fix lights bug when combination off weather and no min and max hours.
+  [TheYOSH]
+- Fix bug in clearing power switches and sensors. Do NOT make code at 3
+  in the night :). Fix [#104](https://github.com/theyosh/TerrariumPI/issues/104). [TheYOSH]
 - Fix US date parsing. [#97](https://github.com/theyosh/TerrariumPI/issues/97). [TheYOSH]
 - Fix adding new switches. [#97](https://github.com/theyosh/TerrariumPI/issues/97). [TheYOSH]
 - Changed installation script to support other user then pi to run the
@@ -29,13 +42,21 @@ Changelog
 - Fix form validation. Close [#93](https://github.com/theyosh/TerrariumPI/issues/93). [TheYOSH]
 
 **Updates**
-~~~~~~~~~~~
+------
+- Update README.md. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update weather based timing. [TheYOSH]
+- Update submodule Leaflet.fullscreen. [TheYOSH]
+- Update submodule gentelella. [TheYOSH]
+- Update German translation. Thanks to [@Barbara1984](https://github.com/Barbara1984) [#105](https://github.com/theyosh/TerrariumPI/issues/105). [TheYOSH]
+- Update changelog. [TheYOSH]
 - Update README.md. [TheYOSH]
 - Small update to the installler. [TheYOSH]
 - Update README.md. [TheYOSH]
 
 **Other**
-~~~~~~~~~
+------
+- Found the magic number [#82](https://github.com/theyosh/TerrariumPI/issues/82). [TheYOSH]
 - Code cleanup. [TheYOSH]
 - Code Cleanup. [TheYOSH]
 - Cleanup sensor scanning. [TheYOSH]
@@ -46,7 +67,7 @@ Changelog
 - Keep tailing after logfile rotation. [TheYOSH]
 - Merge pull request [#98](https://github.com/theyosh/TerrariumPI/issues/98) from nke69/master. [TheYOSH]
 
-  Update France language by @nke69
+  Update France language by [@nke69](https://github.com/nke69)
 - Remove the wrongly add button from the environment page. [#97](https://github.com/theyosh/TerrariumPI/issues/97).
   [TheYOSH]
 - Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
@@ -61,7 +82,7 @@ Changelog
 ------------------
 
 **New**
-~~~~~~~
+------
 - Add debug logging. [TheYOSH]
 - Add photo saving option to the webcam. [TheYOSH]
 - Added first part for timer functionality with power switches. This
@@ -71,7 +92,7 @@ Changelog
 - Add extra information when TerrariumPI starts. [TheYOSH]
 
 **Fixes**
-~~~~~~~~~
+------
 - Fix average temperatur readout. [TheYOSH]
 - Fix open door logging. [TheYOSH]
 - Fix audio player time display. [TheYOSH]
@@ -87,7 +108,7 @@ Changelog
 - Fix file rights. [TheYOSH]
 
 **Updates**
-~~~~~~~~~~~
+------
 - Update changelog. [TheYOSH]
 - Update installer. [TheYOSH]
 - Update README.md. [TheYOSH]
@@ -124,7 +145,7 @@ Changelog
 - Update exception logging. [TheYOSH]
 
 **Other**
-~~~~~~~~~
+------
 - Show dashboard graphs legend. [TheYOSH]
 - Force heater and cooler of when lights are going on. [TheYOSH]
 - Clear translation files. [TheYOSH]
@@ -159,21 +180,21 @@ Changelog
 ------------------
 
 **New**
-~~~~~~~
+------
 - Add another check for failing weather data. [#52](https://github.com/theyosh/TerrariumPI/issues/52). [TheYOSH]
 - Add extra check for weather data. [#52](https://github.com/theyosh/TerrariumPI/issues/52). [TheYOSH]
 - Add publications. [TheYOSH]
 - Add translations to audio files table and dropzone. [TheYOSH]
 
 **Fixes**
-~~~~~~~~~
+------
 - Fix utf-8 check for non string values. [#52](https://github.com/theyosh/TerrariumPI/issues/52). [TheYOSH]
 - Fix door detection in sprayer engine. Fix [#59](https://github.com/theyosh/TerrariumPI/issues/59). [TheYOSH]
 - Fix alarm warnings. [TheYOSH]
 - Fixed environment averages. [TheYOSH]
 
 **Updates**
-~~~~~~~~~~~
+------
 - Update README.md. [TheYOSH]
 - Update version. [TheYOSH]
 - Update README.md. [TheYOSH]
@@ -185,7 +206,7 @@ Changelog
 - Update English translation. [TheYOSH]
 
 **Other**
-~~~~~~~~~
+------
 - Support UTF-8 configuration values. [#52](https://github.com/theyosh/TerrariumPI/issues/52). [TheYOSH]
 - Do not make environment parts depend on light part. [TheYOSH]
 - Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
@@ -196,7 +217,7 @@ Changelog
 ------------------
 
 **New**
-~~~~~~~
+------
 - Add TOC. [TheYOSH]
 - Add config upgrade. [TheYOSH]
 - Add files via upload. [TheYOSH]
@@ -207,13 +228,13 @@ Changelog
 - Add CORS headers for Ajax REST calls. [TheYOSH]
 
 **Fixes**
-~~~~~~~~~
+------
 - Fix for remote data timeouts. [TheYOSH]
 - Fix remote dimmer data collectin. [TheYOSH]
 - Fix remote dimmer state updates. [TheYOSH]
 
 **Updates**
-~~~~~~~~~~~
+------
 - Update Dutch translation. [TheYOSH]
 - Update changelog. [TheYOSH]
 - Update README.md. [TheYOSH]
@@ -227,7 +248,7 @@ Changelog
 - Update version number. [TheYOSH]
 
 **Other**
-~~~~~~~~~
+------
 - Merge pull request [#53](https://github.com/theyosh/TerrariumPI/issues/53) from theyosh/feature/remote_data. [TheYOSH]
 
   Feature/remote data
@@ -242,18 +263,18 @@ Changelog
 ------------------
 
 **New**
-~~~~~~~
+------
 - Add disabled door status. [TheYOSH]
 - Add Apple icon. [TheYOSH]
 
 **Updates**
-~~~~~~~~~~~
+------
 - Update changelog. [TheYOSH]
 - Updated top indicators. Hide disabled indicators on small screens.
   [TheYOSH]
 
 **Other**
-~~~~~~~~~
+------
 - Quotes. [TheYOSH]
 - Code cleanup. [TheYOSH]
 - Cleanup unused code. [TheYOSH]
@@ -264,7 +285,7 @@ Changelog
 ------------------
 
 **New**
-~~~~~~~
+------
 - Add logfile compressio. [TheYOSH]
 - Add audio preview player. [TheYOSH]
 - Add audio usage page. [TheYOSH]
@@ -291,7 +312,7 @@ Changelog
 - Add extra information when rebooting. [TheYOSH]
 
 **Fixes**
-~~~~~~~~~
+------
 - Fix updating weather data when offline. [TheYOSH]
 - Fix logging. [TheYOSH]
 - Small fixes. [TheYOSH]
@@ -307,14 +328,14 @@ Changelog
   [TheYOSH]
 - Fix open door indicator. [TheYOSH]
 - Attempt to fix issue [#44](https://github.com/theyosh/TerrariumPI/issues/44). [TheYOSH]
-- Final fix German language. Thanks @vanessa2013. [TheYOSH]
+- Final fix German language. Thanks [@vanessa2013.](https://github.com/vanessa2013.) [TheYOSH]
 - Fix German translation. [TheYOSH]
 - Fix water price calculation. [TheYOSH]
 - Fix [#40](https://github.com/theyosh/TerrariumPI/issues/40). Keeping your iguana nicely warm. [TheYOSH]
 - Fix [#36](https://github.com/theyosh/TerrariumPI/issues/36). [TheYOSH]
 
 **Updates**
-~~~~~~~~~~~
+------
 - Update changelog. [TheYOSH]
 - Update changelog. [TheYOSH]
 - Update changelog. [TheYOSH]
@@ -341,7 +362,7 @@ Changelog
 - Update with remote master. [TheYOSH]
 
 **Other**
-~~~~~~~~~
+------
 - Fucking Apple does not support javascript toLocaleString on iOS.
   Stupid! [TheYOSH]
 - Merge pull request [#47](https://github.com/theyosh/TerrariumPI/issues/47) from theyosh/feature/audio_modules. [TheYOSH]
@@ -368,7 +389,7 @@ Changelog
 ------------------
 
 **New**
-~~~~~~~
+------
 - Add sqlite3 dependency for manual database manupilation. [TheYOSH]
 - Added webcam update timeout. Webcams are now only updated once a
   minute. Should reduce the load and makes the enginge a bit faster.
@@ -380,7 +401,7 @@ Changelog
 - Add dimmer support part 1. [TheYOSH]
 
 **Fixes**
-~~~~~~~~~
+------
 - Fix empty graphs. [TheYOSH]
 - Fix timer issues [#34](https://github.com/theyosh/TerrariumPI/issues/34). [TheYOSH]
 - Fix graphing empty graphs and smaller dimmer knob. [TheYOSH]
@@ -394,7 +415,7 @@ Changelog
 - Fixed missing translation in home dashboard. [#33](https://github.com/theyosh/TerrariumPI/issues/33). [TheYOSH]
 
 **Updates**
-~~~~~~~~~~~
+------
 - Update changelog. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update engine loop to make sure at least one run per minute is
@@ -414,7 +435,7 @@ Changelog
 - Update gentelella. [TheYOSH]
 
 **Other**
-~~~~~~~~~
+------
 - Merge pull request [#35](https://github.com/theyosh/TerrariumPI/issues/35) from theyosh/feature/power_dimmer. [TheYOSH]
 
   Feature/power dimmer
@@ -433,18 +454,18 @@ Changelog
 ------------------
 
 **New**
-~~~~~~~
+------
 - Add sync command. [TheYOSH]
 
 **Fixes**
-~~~~~~~~~
+------
 - Fix wrong timers and updated German language. fix [#33](https://github.com/theyosh/TerrariumPI/issues/33). [TheYOSH]
 - Fixed weather icons. [TheYOSH]
 - Small HTML fixes. [TheYOSH]
 - Fix HTML code in Dutch translation. Was broke in usage page. [TheYOSH]
 
 **Updates**
-~~~~~~~~~~~
+------
 - Update changelog. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update README.md. [TheYOSH]
@@ -452,7 +473,7 @@ Changelog
 - Update install and update documentation. [TheYOSH]
 
 **Other**
-~~~~~~~~~
+------
 - Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
   [TheYOSH]
 - Refactor weather code to use inheritance. [TheYOSH]
@@ -465,7 +486,7 @@ Changelog
 ------------------
 
 **New**
-~~~~~~~
+------
 - Added a link in the Usage link to https://pinout.xyz to help end users
   that are not familiar with different pin numbering, updated and fixed
   some of the italian translation    modified:
@@ -474,7 +495,7 @@ Changelog
   locales/terrariumpi.pot. [Lorenzo Faleschini]
 
 **Updates**
-~~~~~~~~~~~
+------
 - Update changelog. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update fancybox. [TheYOSH]
@@ -492,7 +513,7 @@ Changelog
 - Update version number in readme. [TheYOSH]
 
 **Other**
-~~~~~~~~~
+------
 - Finished Dutch translation. [TheYOSH]
 - Forced decimal number input by using input patterns. [TheYOSH]
 - Merge pull request [#26](https://github.com/theyosh/TerrariumPI/issues/26) from penzoiders/master. [TheYOSH]
@@ -504,7 +525,7 @@ Changelog
 ----------------
 
 **New**
-~~~~~~~
+------
 - Add update section for updating software from Git. Updated
   installation steps. [TheYOSH]
 - Add translation screenshots. [TheYOSH]
@@ -518,13 +539,13 @@ Changelog
   locales/it_IT/LC_MESSAGES/it.po. [Lorenzo Faleschini]
 
 **Fixes**
-~~~~~~~~~
+------
 - Update switch logging to add the old switch state in front of the new
   state. Should fix broken switch graphs. [TheYOSH]
 - Fix translating sensor types. [TheYOSH]
 
 **Updates**
-~~~~~~~~~~~
+------
 - Update changelog. [TheYOSH]
 - Update install script to handle updates better. Forced GPIO pin number
   to float when reading data. [#25](https://github.com/theyosh/TerrariumPI/issues/25). [TheYOSH]
@@ -541,7 +562,7 @@ Changelog
 - Update loading available languages. [TheYOSH]
 
 **Other**
-~~~~~~~~~
+------
 - First final version Germand translation. Close [#23](https://github.com/theyosh/TerrariumPI/issues/23). [TheYOSH]
 - Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
   [TheYOSH]
@@ -557,20 +578,20 @@ Changelog
 ------------------
 
 **New**
-~~~~~~~
+------
 - Added description back to working. Fix [#18](https://github.com/theyosh/TerrariumPI/issues/18). [TheYOSH]
 - Add a new switch type GPIO-invert. Use it when normal GPIO is working
   in oppisite way. Fix [#20](https://github.com/theyosh/TerrariumPI/issues/20). [TheYOSH]
 
 **Fixes**
-~~~~~~~~~
+------
 - Fix webcam rotation. Settings was not saved at all :( . Fix [#19](https://github.com/theyosh/TerrariumPI/issues/19).
   [TheYOSH]
 - Fixed saving new password. Added error feedback when saving is not
   successfull. And better password update check. Fix [#17](https://github.com/theyosh/TerrariumPI/issues/17). [TheYOSH]
 
 **Updates**
-~~~~~~~~~~~
+------
 - Update changelog. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update translations files. [TheYOSH]
@@ -580,7 +601,7 @@ Changelog
 ----------------
 
 **Fixes**
-~~~~~~~~~
+------
 - Better warning message when sensor measured values are outside given
   ranges. Fix [#16](https://github.com/theyosh/TerrariumPI/issues/16). [TheYOSH]
 - Fix switch callback functions. Refs [#15](https://github.com/theyosh/TerrariumPI/issues/15). [TheYOSH]
@@ -589,7 +610,7 @@ Changelog
   [TheYOSH]
 
 **Updates**
-~~~~~~~~~~~
+------
 - Update changelog. [TheYOSH]
 - Update readme. [TheYOSH]
 - Update gentelella. [TheYOSH]
@@ -597,7 +618,7 @@ Changelog
 - Update translation. Dutch at 75% [TheYOSH]
 
 **Other**
-~~~~~~~~~
+------
 - Support OpenWeatherMap.org. [TheYOSH]
 - Disable extra door and switch logging. [TheYOSH]
 - Support up to 8 ports on USB relay switch. [TheYOSH]
@@ -607,26 +628,26 @@ Changelog
 ----------------
 
 **New**
-~~~~~~~
+------
 - Add profile page reloading after changing profile image. [TheYOSH]
 - Add Animal Profile option. [TheYOSH]
 - Add robots.txt. [TheYOSH]
 
 **Fixes**
-~~~~~~~~~
+------
 - Small fix. [TheYOSH]
 - Fix missing variable in template. [TheYOSH]
 - Fix 404 error in template rendering. [TheYOSH]
 
 **Updates**
-~~~~~~~~~~~
+------
 - Update changelog. [TheYOSH]
 - Update changelog. [TheYOSH]
 - Update changelog. [TheYOSH]
 - Update translations. [TheYOSH]
 
 **Other**
-~~~~~~~~~
+------
 - Merge pull request [#12](https://github.com/theyosh/TerrariumPI/issues/12) from theyosh/feature/profile. [TheYOSH]
 
   Feature/profile
@@ -639,19 +660,19 @@ Changelog
 ----------------
 
 **New**
-~~~~~~~
+------
 - Add fancybox. [TheYOSH]
 - Added documentation v0.1. [TheYOSH]
 - Add IPv6 support. [TheYOSH]
 
 **Fixes**
-~~~~~~~~~
+------
 - Fixed weather usage documentation. [TheYOSH]
 - Fix issue [#9](https://github.com/theyosh/TerrariumPI/issues/9). Typo in function call. And extra fix for indicator on
   the weather page. Close [#9](https://github.com/theyosh/TerrariumPI/issues/9). [TheYOSH]
 
 **Updates**
-~~~~~~~~~~~
+------
 - Update changelog. [TheYOSH]
 - Update changelog. [TheYOSH]
 - Update documentation part2. [TheYOSH]
@@ -667,7 +688,7 @@ Changelog
   measurements. [#10](https://github.com/theyosh/TerrariumPI/issues/10). [TheYOSH]
 
 **Other**
-~~~~~~~~~
+------
 - Merge pull request [#11](https://github.com/theyosh/TerrariumPI/issues/11) from theyosh/documentation. [TheYOSH]
 
   Documentation
@@ -683,12 +704,12 @@ Changelog
 ------------------
 
 **New**
-~~~~~~~
+------
 - Add caching headers for API calls - Now in UTC. [TheYOSH]
 - Add caching headers for API calls. [TheYOSH]
 
 **Fixes**
-~~~~~~~~~
+------
 - Merge pull request [#8](https://github.com/theyosh/TerrariumPI/issues/8) from theyosh/fix_environment. [TheYOSH]
 
   Fix environment
@@ -702,7 +723,7 @@ Changelog
 - Fix missing weather icon for thunderstorm. [TheYOSH]
 
 **Updates**
-~~~~~~~~~~~
+------
 - Update changelog. [TheYOSH]
 - Update version. [TheYOSH]
 - Updated environment engine to support weather and timer mode with or
@@ -714,7 +735,7 @@ Changelog
   switches. [TheYOSH]
 
 **Other**
-~~~~~~~~~
+------
 - Remove debug. [TheYOSH]
 - Remove JS debug. [TheYOSH]
 - Remove sunset and sunsrising shifting. [TheYOSH]
@@ -727,13 +748,13 @@ Changelog
 ------------------
 
 **New**
-~~~~~~~
+------
 - Add version checker. [TheYOSH]
 - Add hardware documentation. [TheYOSH]
 - Add switch GPIO errors to logfile. [TheYOSH]
 
 **Fixes**
-~~~~~~~~~
+------
 - Fix webcam warmup time variable. [TheYOSH]
 - Helpsections are by default closed now. Fixed multiple clicks loaded.
   [TheYOSH]
@@ -741,7 +762,7 @@ Changelog
 - Fix door status overview page. [TheYOSH]
 
 **Updates**
-~~~~~~~~~~~
+------
 - Update changelog. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update language. [TheYOSH]
@@ -752,7 +773,7 @@ Changelog
   port to 0. [TheYOSH]
 
 **Other**
-~~~~~~~~~
+------
 - Removed software page. [TheYOSH]
 - Remove empty lines. [TheYOSH]
 
@@ -761,7 +782,7 @@ Changelog
 ------------------
 
 **New**
-~~~~~~~
+------
 - Add js script for translations. [TheYOSH]
 - Added git checkout for Gentelella bootstrap 3 template if missing.
   [TheYOSH]
@@ -772,21 +793,21 @@ Changelog
 - Add chaching header. Disabled webserver debug output. [TheYOSH]
 
 **Fixes**
-~~~~~~~~~
+------
 - Fix translations. [TheYOSH]
 - Fix dashboard environment. [TheYOSH]
 - Fix environment. [TheYOSH]
 - Fix spelling typos. [TheYOSH]
 
 **Updates**
-~~~~~~~~~~~
+------
 - Update changelog. [TheYOSH]
 - Update US language. [TheYOSH]
 - Updated system form fields. [TheYOSH]
 - Update translations form fields. [TheYOSH]
 
 **Other**
-~~~~~~~~~
+------
 - Bla. [TheYOSH]
 - Rewritten environment code. Reduces a lot of code. [TheYOSH]
 - Small changes. [TheYOSH]
@@ -799,7 +820,7 @@ Changelog
 ----------------
 
 **New**
-~~~~~~~
+------
 - Added exception handling for wrong GPIO pin number. [TheYOSH]
 - Add GPIO relay support. Closes [#3](https://github.com/theyosh/TerrariumPI/issues/3). [TheYOSH]
 - Added sprayer modus. Is always sensor for now. [TheYOSH]
@@ -854,7 +875,7 @@ Changelog
 - Added link to github page. [TheYOSH]
 
 **Fixes**
-~~~~~~~~~
+------
 - Fixes for UX. [TheYOSH]
 - Fix removing switches. [TheYOSH]
 - Fix content height. [TheYOSH]
@@ -931,7 +952,7 @@ Changelog
   wattage usage. [TheYOSH]
 
 **Updates**
-~~~~~~~~~~~
+------
 - Update changelog. [TheYOSH]
 - Update readme. [TheYOSH]
 - Update readme for GPIO relay board. [TheYOSH]
@@ -1003,7 +1024,7 @@ Changelog
 - Updated submodules. [TheYOSH]
 
 **Other**
-~~~~~~~~~
+------
 - Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
   [TheYOSH]
 - Merge pull request [#7](https://github.com/theyosh/TerrariumPI/issues/7) from theyosh/cooler. [TheYOSH]
