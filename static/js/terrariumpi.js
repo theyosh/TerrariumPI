@@ -883,6 +883,11 @@ function logout() {
 
 /* General functions - Graph functions */
 function sensor_gauge(name, data) {
+  // BUG: Missing 'sensor_' part in name.... lazy fix.
+  if ($('#' + name + ' .gauge').length == 0 && $('#sensor_' + name + ' .gauge').length == 1) {
+    name = 'sensor_' + name;
+  }
+
   if ($('#' + name + ' .gauge').length == 1) {
     // Update timestamp indicator
     $('#' + name + ' small').text(moment().format('LLL'));
