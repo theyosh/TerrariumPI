@@ -1,4 +1,3 @@
-%  setdefault('temperature_indicator', 'C')
       </div>
     </div>
     <footer>
@@ -59,6 +58,7 @@
   <script type="text/javascript">
     globals.current_version = '{{version}}';
     globals.temperature_indicator = '{{temperature_indicator}}';
+    globals.distance_indicator = '{{distance_indicator}}';
     globals.language = '{{lang}}';
   </script>
 </body>

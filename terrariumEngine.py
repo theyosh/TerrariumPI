@@ -20,6 +20,8 @@ from terrariumAudio import terrariumAudioPlayer
 from terrariumCollector import terrariumCollector
 from terrariumEnvironment import terrariumEnvironment
 
+import RPi.GPIO as GPIO
+
 from gevent import monkey, sleep
 monkey.patch_all()
 
@@ -28,6 +30,16 @@ class terrariumEngine():
   LOOP_TIMEOUT = 30
 
   def __init__(self):
+    ## set GPIO mode to BOARD
+    ## this takes the pin number instead of GPIO mapping pin
+    logger.debug('Setting terrariumPI GPIO Mode to %s' % (GPIO.BOARD,))
+    GPIO.setmode(GPIO.BOARD)
+    logger.debug('Done setting terrariumPI GPIO Mode to %s' % (GPIO.BOARD,))
+
+    self.__units = {'temperature' : 'C',
+                    'distance'    : 'cm',
+                    'humidity'    : '%'}
+
     # List of queues for websocket communication
     self.subscribed_queues = []
     # Default power usage for a PI
@@ -56,15 +68,19 @@ class terrariumEngine():
 
     # Set the system temperature indicator
     logger.info('Loading terrariumPI PI temperature indicator')
-    self.temperature_indicator = self.config.get_temperature_indicator()
-
+    self.set_temperature_indicator(self.config.get_temperature_indicator())
     logger.info('Done loading terrariumPI PI temperature indicator')
+
+    # Set the system distance indicator
+    logger.info('Loading terrariumPI PI distance indicator')
+    self.set_distance_indicator(self.config.get_distance_indicator())
+    logger.info('Done loading terrariumPI PI distance indicator')
 
     # Load Weather part
     logger.info('Loading terrariumPI weather data')
     self.weather = terrariumWeather(self.config.get_weather_location(),
                                     self.config.get_weather_windspeed(),
-                                    self.get_temperature_indicator,
+                                    self.__unit_type,
                                     self.get_weather)
     logger.info('Done loading terrariumPI weather data')
 
@@ -109,7 +125,7 @@ class terrariumEngine():
       self.sensors = {}
 
     seen_sensors = []
-    for sensor in terrariumSensor.scan(self.config.get_owfs_port(), self.get_temperature_indicator):
+    for sensor in terrariumSensor.scan(self.config.get_owfs_port(), self.__unit_type):
       self.sensors[sensor.get_id()] = sensor
 
     for sensordata in sensor_config:
@@ -120,7 +136,7 @@ class terrariumEngine():
                                  sensordata['type'],
                                  sensordata['address'],
                                  sensordata['name'],
-                                 self.get_temperature_indicator)
+                                 self.__unit_type)
 
         self.sensors[sensor.get_id()] = sensor
       else:
@@ -128,7 +144,7 @@ class terrariumEngine():
         sensor = self.sensors[sensordata['id']]
         # Should not be able to change setings
         #sensor.set_hardware_type(sensordata['hardwaretype'])
-        sensor.set_type(sensordata['type'],self.get_temperature_indicator)
+        sensor.set_type(sensordata['type'],self.__unit_type)
         sensor.set_address(sensordata['address'])
         sensor.set_name(sensordata['name'])
 
@@ -415,6 +431,12 @@ class terrariumEngine():
     logtail = subprocess.Popen(['tail','-F','log/terrariumpi.log'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     for line in logtail.stdout:
       self.__send_message({'type':'logtail','data':line.strip()})
+
+  def __unit_type(self,unittype):
+    if unittype in self.__units:
+      return self.__units[unittype]
+
+    return None
   # End private/internal functions
 
   # Weather part
@@ -478,6 +500,7 @@ class terrariumEngine():
 
         average[averagetype]['alarm'] = not (average[averagetype]['alarm_min'] <= average[averagetype]['current'] <= average[averagetype]['alarm_max'])
         average[averagetype]['type'] = averagetype
+        average[averagetype]['indicator'] = self.__unit_type(averagetype[8:])
 
       data = average
 
@@ -830,7 +853,19 @@ class terrariumEngine():
       return data
 
   def get_temperature_indicator(self):
-    return self.temperature_indicator
+    return self.__unit_type('temperature')
+
+  def set_temperature_indicator(self,value):
+    self.__units['temperature'] = value
+
+  def get_humidity_indicator(self):
+    return self.__unit_type('humidity')
+
+  def get_distance_indicator(self):
+    return self.__unit_type('distance')
+
+  def set_distance_indicator(self,value):
+    self.__units['distance'] = value
 
   # End system functions part
 
@@ -911,7 +946,11 @@ class terrariumEngine():
         # Update config settings
         self.pi_power_wattage = float(self.config.get_pi_power_wattage())
         self.set_authentication(self.config.get_admin(),self.config.get_password())
-        self.temperature_indicator = self.config.get_temperature_indicator()
+
+        self.set_temperature_indicator(self.config.get_temperature_indicator())
+        self.set_distance_indicator(self.config.get_distance_indicator())
+
+        #self.temperature_indicator = self.config.get_temperature_indicator()
 
     return update_ok
 

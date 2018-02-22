@@ -25,7 +25,7 @@ class terrariumSensor:
   W1_BASE_PATH = '/sys/bus/w1/devices/'
   W1_TEMP_REGEX = re.compile(r'(?P<type>t|f)=(?P<value>[0-9]+)',re.IGNORECASE)
 
-  def __init__(self, id, hardware_type, sensor_type, sensor, name = '', indicator = None):
+  def __init__(self, id, hardware_type, sensor_type, sensor, name = '', callback_indicator = None):
     self.id = id
     self.set_hardware_type(hardware_type)
 
@@ -48,10 +48,10 @@ class terrariumSensor:
       # Dirty hack to replace OWFS sensor object for GPIO pin nr
       sensor = sensor.split(',')
       self.sensor_address = {'TRIG' : sensor[0] , 'ECHO' : sensor[1]}
-      GPIO.setmode(GPIO.BCM)
+      #GPIO.setmode(GPIO.BCM)
       try:
-        GPIO.setup(terrariumUtils.to_BCM_port_number(self.sensor_address['TRIG']),GPIO.OUT)
-        GPIO.setup(terrariumUtils.to_BCM_port_number(self.sensor_address['ECHO']),GPIO.IN)
+        GPIO.setup(int(self.sensor_address['TRIG']),GPIO.OUT)
+        GPIO.setup(int(self.sensor_address['ECHO']),GPIO.IN)
 
       except Exception, err:
         logger.warning(err)
@@ -62,7 +62,7 @@ class terrariumSensor:
       self.sensor_address = sensor
 
     self.set_name(name)
-    self.set_type(sensor_type,indicator)
+    self.set_type(sensor_type,callback_indicator)
     self.set_alarm_min(0)
     self.set_alarm_max(0)
     self.set_limit_min(0)
@@ -95,7 +95,7 @@ class terrariumSensor:
                                             'owfs',
                                             'temperature',
                                             sensor,
-                                            indicator=temperature_indicator))
+                                            callback_indicator=temperature_indicator))
 
           if 'humidity' in sensor.entryList():
             sensor_list.append(terrariumSensor(None,
@@ -120,7 +120,7 @@ class terrariumSensor:
                                        'w1',
                                        ('temperature' if w1data.group('type') == 't' else 'humidity'),
                                        address.replace(terrariumSensor.W1_BASE_PATH,''),
-                                       indicator=temperature_indicator))
+                                       callback_indicator=temperature_indicator))
 
     logger.info('Found %d temperature/humidity sensors in %.5f seconds' % (len(sensor_list),time.time() - starttime))
     return sensor_list
@@ -157,14 +157,14 @@ class terrariumSensor:
               logger.warning('Remote sensor \'%s\' got error from remote source \'%s\': %s' % (self.get_name(),self.get_address(),data.status_code))
 
         elif 'hc-sr04' == self.get_hardware_type():
-          GPIO.output(terrariumUtils.to_BCM_port_number(self.sensor_address['TRIG']), False)
+          GPIO.output(int(self.sensor_address['TRIG']), False)
           time.sleep(2)
-          GPIO.output(terrariumUtils.to_BCM_port_number(self.sensor_address['TRIG']), True)
+          GPIO.output(int(self.sensor_address['TRIG']), True)
           time.sleep(0.00001)
-          GPIO.output(terrariumUtils.to_BCM_port_number(self.sensor_address['TRIG']), False)
-          while GPIO.input(terrariumUtils.to_BCM_port_number(self.sensor_address['ECHO']))==0:
+          GPIO.output(int(self.sensor_address['TRIG']), False)
+          while GPIO.input(int(self.sensor_address['ECHO']))==0:
             pulse_start = time.time()
-          while GPIO.input(terrariumUtils.to_BCM_port_number(self.sensor_address['ECHO']))==1:
+          while GPIO.input(int(self.sensor_address['ECHO']))==1:
             pulse_end = time.time()
 
           pulse_duration = pulse_end - pulse_start
@@ -239,6 +239,7 @@ class terrariumSensor:
             'hardwaretype' : self.get_hardware_type(),
             'address' : self.get_address(),
             'type' : self.get_type(),
+            'indicator' : self.get_indicator(),
             'name' : self.get_name(),
             'current' : self.get_current(),
             'alarm_min' : self.get_alarm_min(),
@@ -263,20 +264,14 @@ class terrariumSensor:
   def set_type(self,type,indicator):
     if type in terrariumSensor.VALID_SENSOR_TYPES:
       self.type = type
-      self.indicator = indicator
+      self.__indicator = indicator
 
   def get_type(self):
     return self.type
 
   def get_indicator(self):
     # Use a callback from terrariumEngine for 'realtime' updates
-    if self.get_type() == 'humidity':
-      return '%'
-
-    if self.get_type() == 'distance':
-      return 'mm'
-
-    return self.indicator().upper()
+    return self.__indicator(self.get_type())
 
   def get_address(self):
     address = self.sensor_address
@@ -293,7 +288,7 @@ class terrariumSensor:
       if self.get_hardware_type() == 'hc-sr04':
         sensor = address.split(',')
         self.sensor_address = {'TRIG' : int(sensor[0]) , 'ECHO' : int(sensor[1])}
-        GPIO.setmode(GPIO.BCM)
+        #GPIO.setmode(GPIO.BCM)
         try:
           GPIO.setup(self.sensor_address['TRIG'],GPIO.OUT)
           GPIO.setup(self.sensor_address['ECHO'],GPIO.IN)
@@ -333,7 +328,17 @@ class terrariumSensor:
     self.limit_max = float(limit)
 
   def get_current(self, force = False):
-    return float(terrariumUtils.to_fahrenheit(self.current) if self.get_indicator() == 'F' else self.current)
+    current = self.current
+    indicator = self.get_indicator().lower()
+
+    if indicator == 'f':
+      current = terrariumUtils.to_fahrenheit(self.current)
+    elif indicator == 'inch':
+      current = terrariumUtils.to_inches(self.current)
+    elif indicator == 'cm':
+      current = self.current / 10.0
+
+    return float(current)
 
   def get_alarm(self):
     return not self.get_alarm_min() < self.get_current() < self.get_alarm_max()

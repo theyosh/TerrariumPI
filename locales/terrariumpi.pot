@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-02-21 18:55+CET\n"
+"POT-Creation-Date: 2018-02-22 14:38+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -451,56 +451,56 @@ msgstr ""
 msgid "TerrariumPI"
 msgstr ""
 
-#: terrariumWebserver.py:208
+#: terrariumWebserver.py:209
 msgid "Player command could ot be executed!"
 msgstr ""
 
-#: terrariumWebserver.py:208 terrariumWebserver.py:228
-#: terrariumWebserver.py:240 terrariumWebserver.py:248
+#: terrariumWebserver.py:209 terrariumWebserver.py:229
+#: terrariumWebserver.py:241 terrariumWebserver.py:249
 msgid "Error!"
 msgstr ""
 
-#: terrariumWebserver.py:216 terrariumWebserver.py:219
+#: terrariumWebserver.py:217 terrariumWebserver.py:220
 msgid "OK!"
 msgstr ""
 
-#: terrariumWebserver.py:216 terrariumWebserver.py:219
+#: terrariumWebserver.py:217 terrariumWebserver.py:220
 msgid "Player command executed!"
 msgstr ""
 
-#: terrariumWebserver.py:228
+#: terrariumWebserver.py:229
 msgid "File is not uploaded!"
 msgstr ""
 
-#: terrariumWebserver.py:233 terrariumWebserver.py:243
+#: terrariumWebserver.py:234 terrariumWebserver.py:244
 msgid "Success!"
 msgstr ""
 
-#: terrariumWebserver.py:240
+#: terrariumWebserver.py:241
 msgid "Action could not be satisfied"
 msgstr ""
 
-#: terrariumWebserver.py:243
+#: terrariumWebserver.py:244
 msgid "Audio file is deleted"
 msgstr ""
 
-#: terrariumWebserver.py:248
+#: terrariumWebserver.py:249
 msgid "Data could not be saved"
 msgstr ""
 
-#: terrariumWebserver.py:256
+#: terrariumWebserver.py:257
 msgid "Data saved"
 msgstr ""
 
-#: terrariumWebserver.py:257
+#: terrariumWebserver.py:258
 msgid "Your changes are saved"
 msgstr ""
 
-#: terrariumWebserver.py:378 views/inc/menu.tpl:144
+#: terrariumWebserver.py:379 views/inc/menu.tpl:144
 msgid "Log out"
 msgstr ""
 
-#: terrariumWebserver.py:379
+#: terrariumWebserver.py:380
 msgid "You are now logged out"
 msgstr ""
 
@@ -644,7 +644,7 @@ msgstr ""
 #: views/audio_playlist.tpl:48 views/door_settings.tpl:36
 #: views/profile.tpl:179 views/sensor_settings.tpl:54
 #: views/switch_settings.tpl:72 views/system_environment.tpl:347
-#: views/system_settings.tpl:161 views/webcam_settings.tpl:47
+#: views/system_settings.tpl:169 views/webcam_settings.tpl:47
 msgid "Submit"
 msgstr ""
 
@@ -2064,12 +2064,12 @@ msgid "Here you can configure your environment."
 msgstr ""
 
 #: views/system_environment.tpl:129 views/system_environment.tpl:210
-#: views/system_environment.tpl:291 views/system_settings.tpl:108
+#: views/system_environment.tpl:291 views/system_settings.tpl:116
 msgid "Yes"
 msgstr ""
 
 #: views/system_environment.tpl:130 views/system_environment.tpl:211
-#: views/system_environment.tpl:292 views/system_settings.tpl:109
+#: views/system_environment.tpl:292 views/system_settings.tpl:117
 msgid "No"
 msgstr ""
 
@@ -2105,47 +2105,59 @@ msgstr ""
 msgid "Fahrenheit"
 msgstr ""
 
-#: views/system_settings.tpl:87
+#: views/system_settings.tpl:84
+msgid "Distance indicator"
+msgstr ""
+
+#: views/system_settings.tpl:88
+msgid "Centimetre"
+msgstr ""
+
+#: views/system_settings.tpl:89
+msgid "Inches"
+msgstr ""
+
+#: views/system_settings.tpl:95
 msgid "Admin name"
 msgstr ""
 
-#: views/system_settings.tpl:93
+#: views/system_settings.tpl:101
 msgid "New admin password"
 msgstr ""
 
-#: views/system_settings.tpl:99
+#: views/system_settings.tpl:107
 msgid "Current admin password"
 msgstr ""
 
-#: views/system_settings.tpl:105
+#: views/system_settings.tpl:113
 msgid "Always authenticate"
 msgstr ""
 
-#: views/system_settings.tpl:114
+#: views/system_settings.tpl:122
 msgid "Soundcard"
 msgstr ""
 
-#: views/system_settings.tpl:123
+#: views/system_settings.tpl:131
 msgid "Pi power usage in W"
 msgstr ""
 
-#: views/system_settings.tpl:129
+#: views/system_settings.tpl:137
 msgid "Power price"
 msgstr ""
 
-#: views/system_settings.tpl:135
+#: views/system_settings.tpl:143
 msgid "Water price"
 msgstr ""
 
-#: views/system_settings.tpl:141
+#: views/system_settings.tpl:149
 msgid "IP or hostname"
 msgstr ""
 
-#: views/system_settings.tpl:147
+#: views/system_settings.tpl:155
 msgid "Port number"
 msgstr ""
 
-#: views/system_settings.tpl:153
+#: views/system_settings.tpl:161
 msgid "OWFS server port"
 msgstr ""
 

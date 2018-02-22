@@ -4,6 +4,7 @@ var globals = {
   websocket: null,
   connection: 'ws' + (location.protocol == 'https:' ? 's' : '') + '://' + location.host + '/live',
   temperature_indicator: 'C',
+  distance_indicator: 'cm',
   gauges: [],
   webcams: [],
   graphs: {},
@@ -933,6 +934,7 @@ function sensor_gauge(name, data) {
     if (name == 'system_load') {
       data.current /= data.cores;
     }
+    $('#' + name + ' .gauge-indicator').text(data.indicator);
     globals.gauges[name].set(data.current);
     if (name == 'system_disk' || name == 'system_memory') {
       $('#' + name + ' .gauge-value').text(formatBytes(data.current))
@@ -1075,15 +1077,19 @@ function history_graph(name, data, type) {
             break;
 
           case 'weather':
-            val = formatNumber(val) + ' °' + globals.temperature_indicator;
+          case 'temperature':
+          case 'average_temperature':
+            val = formatNumber(val) + ' ' + globals.temperature_indicator;
             break;
 
           case 'humidity':
+          case 'average_humidity':
             val = formatNumber(val) + ' %';
             break;
 
           case 'distance':
-            val = formatNumber(val) + ' mm';
+          case 'average_distance':
+            val = formatNumber(val) + ' ' + globals.distance_indicator;
             break;
 
           case 'switch':
@@ -1092,10 +1098,6 @@ function history_graph(name, data, type) {
 
           case 'door':
             val = (val ? '{{_('Open')}}' : '{{_('Closed')}}');
-            break;
-
-          default:
-            val = formatNumber(val) + (type.indexOf('temperature') !== -1 ? ' °' + globals.temperature_indicator : ' %');
             break;
         }
         return val;
@@ -1512,7 +1514,7 @@ function update_weather(data) {
   });
   var weather_current = $('div#weather_today');
   if (weather_current.length == 1) {
-    weather_current.find('.status').html(moment(data.hour_forecast[0].from * 1000).format('[<b>]dddd[</b>,] LT') + ' <span> in <b>°' + globals.temperature_indicator + '</b></span>');
+    weather_current.find('.status').html(moment(data.hour_forecast[0].from * 1000).format('[<b>]dddd[</b>,] LT') + ' <span> in <b>' + globals.temperature_indicator + '</b></span>');
     weather_current.find('h2').html(data.city.city + '<br><i>' + data.hour_forecast[0].weather + '</i>');
     weather_current.find('.sunrise').text(moment(data.sun.rise * 1000).format('LT')).parent().css('fontWeight', (data.day ? 'bold' : 'normal'));
     weather_current.find('.sunset').text(moment(data.sun.set * 1000).format('LT')).parent().css('fontWeight', (data.day ? 'normal' : 'bold'));

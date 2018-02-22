@@ -235,7 +235,11 @@ class terrariumConfig:
 
   def get_temperature_indicator(self):
     config = self.get_system()
-    return config['temperature_indicator'].upper()
+    return config['temperature_indicator']
+
+  def get_distance_indicator(self):
+    config = self.get_system()
+    return config['distance_indicator']
 
   def get_admin(self):
     '''Get terrariumPI admin name'''
@@ -338,7 +342,7 @@ class terrariumConfig:
     return int(self.get_system()['owfs_port'])
 
   def save_sensor(self,data):
-    return self.__update_config('sensor' + data['id'],data,['current'])
+    return self.__update_config('sensor' + data['id'],data,['current','indicator'])
 
   def save_sensors(self,data):
     update_ok = True
