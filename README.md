@@ -33,7 +33,8 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Predefined on and off dimming percentages
 - Support for timmers in powerswitches and environment #72
 - Support for Energenie USB and LAN powerswitches [EG-PM(s)2](http://energenie.com/item.aspx?id=7556)
-- Reading out multiple temperature and humidity sensors
+- Support for multiple temperature and humidity sensors
+- Support for ultrasonic sound range sensors
 - Support for native Raspberry Pi cam out of the box
 - Support for USB and remote webcams
 - Open door detection (sprayer will not spray when a door is open)
@@ -42,8 +43,10 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
 - Rain control based on humidity sensors and timers
 - Heater control based on temperature sensors or timers
 - Cooling control based on temperature sensors or timers
+- Watertank control based on ultrasonic sound range sensors
 - Weather forecast from external source for lighting schema
 - Temperatures in Celsius or Fahrenheit
+- Distances in centimetres or inches
 - Alarm detections
 - Audio support through interal audio jack or USB soundcards #42
   - Create playlists (loop and repeat)
@@ -107,7 +110,7 @@ This software requires a Raspberry Pi and some extra hardware in order to run an
   - USB versions (Serial and Bitbang)
   - GPIO versions
   - PWM Dimmer versions
-- Temperature/humdity sensors DHT11, DHT22, AM2303, DS1820, HIH4000, etc through
+- Temperature/humdity/ultrasonic sensors DHT11, DHT22, AM2303, DS1820, HIH4000, HC-SR04 etc through
   - OWFS
   - GPIO
   - 1 Wire interface
