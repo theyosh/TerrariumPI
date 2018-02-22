@@ -1466,6 +1466,8 @@ function update_dashboard_environment(name, data) {
       break;
     case 'sprayer':
       indicator = '%';
+      enabledColor = 'blue';
+      break;
     case 'watertank':
       indicator = globals.distance_indicator;
     case 'cooler':
