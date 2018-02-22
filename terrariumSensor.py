@@ -9,17 +9,18 @@ import Adafruit_DHT as dht
 import glob
 import re
 import requests
+import RPi.GPIO as GPIO
 
 from hashlib import md5
 from terrariumUtils import terrariumUtils
 
 class terrariumSensor:
   UPDATE_TIMEOUT = 30
-  VALID_SENSOR_TYPES   = ['temperature','humidity']
+  VALID_SENSOR_TYPES   = ['temperature','humidity','distance']
   VALID_DHT_SENSORS    = { 'dht11' : dht.DHT11,
                            'dht22' : dht.DHT22,
                            'am2302': dht.AM2302 }
-  VALID_HARDWARE_TYPES = ['owfs','w1','remote'] + VALID_DHT_SENSORS.keys()
+  VALID_HARDWARE_TYPES = ['owfs','w1','remote','hc-sr04'] + VALID_DHT_SENSORS.keys()
 
   W1_BASE_PATH = '/sys/bus/w1/devices/'
   W1_TEMP_REGEX = re.compile(r'(?P<type>t|f)=(?P<value>[0-9]+)',re.IGNORECASE)
@@ -41,6 +42,22 @@ class terrariumSensor:
       self.sensor = dht
       # Dirty hack to replace OWFS sensor object for GPIO pin nr
       self.sensor_address = sensor
+    elif self.get_hardware_type() == 'hc-sr04':
+      # Adafruit_DHT
+      #self.sensor = dht
+      # Dirty hack to replace OWFS sensor object for GPIO pin nr
+      sensor = sensor.split(',')
+      self.sensor_address = {'TRIG' : sensor[0] , 'ECHO' : sensor[1]}
+      GPIO.setmode(GPIO.BCM)
+      try:
+        GPIO.setup(terrariumUtils.to_BCM_port_number(self.sensor_address['TRIG']),GPIO.OUT)
+        GPIO.setup(terrariumUtils.to_BCM_port_number(self.sensor_address['ECHO']),GPIO.IN)
+
+      except Exception, err:
+        logger.warning(err)
+        pass
+
+
     elif 'remote' == self.get_hardware_type():
       self.sensor_address = sensor
 
@@ -50,6 +67,9 @@ class terrariumSensor:
     self.set_alarm_max(0)
     self.set_limit_min(0)
     self.set_limit_max(100)
+    if self.get_hardware_type() == 'hc-sr04':
+      # Limit 10 meters
+      self.set_limit_max(100000)
 
     if self.id is None:
       self.id = md5(b'' + self.get_address().replace('-','').upper() + self.get_type()).hexdigest()
@@ -136,6 +156,21 @@ class terrariumSensor:
             else:
               logger.warning('Remote sensor \'%s\' got error from remote source \'%s\': %s' % (self.get_name(),self.get_address(),data.status_code))
 
+        elif 'hc-sr04' == self.get_hardware_type():
+          GPIO.output(terrariumUtils.to_BCM_port_number(self.sensor_address['TRIG']), False)
+          time.sleep(2)
+          GPIO.output(terrariumUtils.to_BCM_port_number(self.sensor_address['TRIG']), True)
+          time.sleep(0.00001)
+          GPIO.output(terrariumUtils.to_BCM_port_number(self.sensor_address['TRIG']), False)
+          while GPIO.input(terrariumUtils.to_BCM_port_number(self.sensor_address['ECHO']))==0:
+            pulse_start = time.time()
+          while GPIO.input(terrariumUtils.to_BCM_port_number(self.sensor_address['ECHO']))==1:
+            pulse_end = time.time()
+
+          pulse_duration = pulse_end - pulse_start
+          # Measure in millimetre
+          current = round(pulse_duration * 171500,2)
+
         elif 'temperature' == self.get_type():
           if self.get_hardware_type() == 'owfs':
             current = float(self.sensor.temperature)
@@ -193,7 +228,8 @@ class terrariumSensor:
                                                                                           self.get_current(),
                                                                                           self.get_indicator(),
                                                                                           time.time()-starttime))
-      except Exception:
+      except Exception, ex:
+        print ex
         logger.exception('Error updating %s %s sensor \'%s\' with error:' % (self.get_hardware_type(),
                                                                               self.get_type(),
                                                                               self.get_name()))
@@ -237,15 +273,34 @@ class terrariumSensor:
     if self.get_type() == 'humidity':
       return '%'
 
+    if self.get_type() == 'distance':
+      return 'mm'
+
     return self.indicator().upper()
 
   def get_address(self):
-    return self.sensor_address
+    address = self.sensor_address
+    if self.get_hardware_type() == 'hc-sr04':
+      address = str(self.sensor_address['TRIG']) + ',' + str(self.sensor_address['ECHO'])
+
+    return address
 
   def set_address(self,address):
     # Can't set OWFS or W1 sensor addresses. This is done by the OWFS software or kernel OS
     if self.get_hardware_type() not in ['owfs','w1']:
       self.sensor_address = address
+
+      if self.get_hardware_type() == 'hc-sr04':
+        sensor = address.split(',')
+        self.sensor_address = {'TRIG' : int(sensor[0]) , 'ECHO' : int(sensor[1])}
+        GPIO.setmode(GPIO.BCM)
+        try:
+          GPIO.setup(self.sensor_address['TRIG'],GPIO.OUT)
+          GPIO.setup(self.sensor_address['ECHO'],GPIO.IN)
+
+        except Exception, err:
+          logger.warning(err)
+          pass
 
   def set_name(self,name):
     self.name = str(name)

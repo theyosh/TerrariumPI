@@ -1077,6 +1077,10 @@ function history_graph(name, data, type) {
             val = formatNumber(val) + ' %';
             break;
 
+          case 'distance':
+            val = formatNumber(val) + ' mm';
+            break;
+
           case 'switch':
             val = formatNumber(val) + ' W';
             break;
@@ -1097,6 +1101,7 @@ function history_graph(name, data, type) {
   switch (type) {
     case 'humidity':
     case 'temperature':
+    case 'distance':
       graph_data = [{
         label: '{{_('Current')}}',
         data: data.current

@@ -73,6 +73,7 @@
                       <div class="x_title">
                         <h2 class="temperature"><span aria-hidden="true" class="glyphicon glyphicon-fire"></span> {{_('Temperature sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <h2 class="humidity" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Humidity sensor')}} <span class="title">{{_('new')}}</span></h2>
+                        <h2 class="distance" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-signal"></span> {{_('Distance sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <ul class="nav navbar-right panel_toolbox">
                           <li>
                             <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -95,6 +96,7 @@
                               <option value="am2302">{{_('AM2302')}}</option>
                               <option value="w1">{{_('1Wire')}}</option>
                               <option value="remote">{{_('Remote')}}</option>
+                              <option value="hc-sr04">{{_('HC-SR04')}}</option>
                             </select>
                           </div>
                         </div>
@@ -110,6 +112,7 @@
                               <option value="">{{_('Select an option')}}</option>
                               <option value="temperature">{{_('Temperature')}}</option>
                               <option value="humidity">{{_('Humidity')}}</option>
+                              <option value="distance">{{_('Distance')}}</option>
                             </select>
                           </div>
                         </div>
