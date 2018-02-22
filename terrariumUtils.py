@@ -13,6 +13,12 @@ class terrariumUtils():
     return float((value - 32) * 5.0 / 9.0)
 
   @staticmethod
+  def to_inches(value):
+    # https://www.convertunits.com/from/cm/to/inches , http://www.manuelsweb.com/in_cm.htm
+    # Input value is in mm -> devide by 10 to  get cm for to inches calculation
+    return (39.370078740157 / 100.0) * (float(value) / 10.0)
+
+  @staticmethod
   def is_float(value):
     try:
       float(value)

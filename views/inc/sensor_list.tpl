@@ -49,7 +49,7 @@
                   <div class="sidebar-widget text-center">
                     <canvas class="gauge"></canvas>
                     <div class="goal-wrapper">
-                      <span class="gauge-value">...</span> <span>{{sensor_indicator}}</span>
+                      <span class="gauge-value">...</span> <span class="gauge-indicator"></span>
                     </div>
                   </div>
                 </div>

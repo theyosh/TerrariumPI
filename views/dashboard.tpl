@@ -299,7 +299,7 @@
                     <div class="sidebar-widget text-center">
                       <canvas class="gauge"></canvas>
                       <div class="goal-wrapper">
-                        <span class="gauge-value">...</span> <span>%</span>
+                        <span class="gauge-value">...</span> <span class="gauge-indicator"></span>
                       </div>
                     </div>
                   </div>
@@ -354,7 +354,7 @@
                     <div class="sidebar-widget text-center">
                       <canvas class="gauge"></canvas>
                       <div class="goal-wrapper">
-                        <span class="gauge-value">...</span> <span>°{{temperature_indicator}}</span>
+                        <span class="gauge-value">...</span> <span class="gauge-indicator"></span>
                       </div>
                     </div>
                   </div>

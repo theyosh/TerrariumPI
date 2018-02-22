@@ -80,9 +80,17 @@
                       </div>
                     </div>
                   </div>
-
-
-
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="distance_indicator">{{_('Distance indicator')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_distance_indicator')}}">
+                        <select class="form-control" required="required" name="distance_indicator" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option value="cm">{{_('Centimetre')}}</option>
+                          <option value="inch">{{_('Inches')}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="admin">{{_('Admin name')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
@@ -188,6 +196,12 @@
                 minimumResultsForSearch: Infinity
             });
 
+            var distance_indicator = $("select[name='distance_indicator']").select2({
+                placeholder: '{{_('Select an option')}}',
+                allowClear: false,
+                minimumResultsForSearch: Infinity
+            });
+
             var soundcard_selector = $("select[name='soundcard']").select2({
                 placeholder: '{{_('Select an option')}}',
                 allowClear: false,
@@ -207,9 +221,6 @@
                   $.each(data.available_languages,function(index,value){
                     language_selector.append($('<option>').attr({'value':value}).text(value));
                   });
-                  language_selector.val(data.language).trigger('change');
-                  soundcard_selector.val(data.soundcard).trigger('change');
-                  temperature_indicator.val(data.temperature_indicator).trigger('change');
                   $.each(Object.keys(data), function(key,value){
                     var config_field = $('form [name="' + value + '"]');
                     if (config_field.length >= 1) {

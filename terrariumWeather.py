@@ -427,10 +427,10 @@ class terrariumWeather():
 
   def get_temperature_indicator(self):
     # 'Realtime' callback to terrariumEngine for right indicator
-    return self.temperature_indicator().upper()
+    return self.temperature_indicator('temperature').upper()
 
   def set_temperature_indicator(self,indicator):
-    if indicator().upper() in terrariumWeather.valid_temperature_indicators:
+    if indicator('temperature').upper() in terrariumWeather.valid_temperature_indicators:
       self.temperature_indicator = indicator
 
   def is_day(self):

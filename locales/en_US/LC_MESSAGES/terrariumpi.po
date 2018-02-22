@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2018-02-21 18:55+CET\n"
-"PO-Revision-Date: 2018-02-21 18:55+0100\n"
+"POT-Creation-Date: 2018-02-22 14:38+CET\n"
+"PO-Revision-Date: 2018-02-22 14:38+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -452,56 +452,56 @@ msgstr "Authentication"
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:208
+#: terrariumWebserver.py:209
 msgid "Player command could ot be executed!"
 msgstr "Player command could ot be executed!"
 
-#: terrariumWebserver.py:208 terrariumWebserver.py:228
-#: terrariumWebserver.py:240 terrariumWebserver.py:248
+#: terrariumWebserver.py:209 terrariumWebserver.py:229
+#: terrariumWebserver.py:241 terrariumWebserver.py:249
 msgid "Error!"
 msgstr "Error!"
 
-#: terrariumWebserver.py:216 terrariumWebserver.py:219
+#: terrariumWebserver.py:217 terrariumWebserver.py:220
 msgid "OK!"
 msgstr "OK!"
 
-#: terrariumWebserver.py:216 terrariumWebserver.py:219
+#: terrariumWebserver.py:217 terrariumWebserver.py:220
 msgid "Player command executed!"
 msgstr "Player command executed!"
 
-#: terrariumWebserver.py:228
+#: terrariumWebserver.py:229
 msgid "File is not uploaded!"
 msgstr "File is not uploaded!"
 
-#: terrariumWebserver.py:233 terrariumWebserver.py:243
+#: terrariumWebserver.py:234 terrariumWebserver.py:244
 msgid "Success!"
 msgstr "Success!"
 
-#: terrariumWebserver.py:240
+#: terrariumWebserver.py:241
 msgid "Action could not be satisfied"
 msgstr "Action could not be satisfied"
 
-#: terrariumWebserver.py:243
+#: terrariumWebserver.py:244
 msgid "Audio file is deleted"
 msgstr "Audio file is deleted"
 
-#: terrariumWebserver.py:248
+#: terrariumWebserver.py:249
 msgid "Data could not be saved"
 msgstr "Data could not be saved"
 
-#: terrariumWebserver.py:256
+#: terrariumWebserver.py:257
 msgid "Data saved"
 msgstr "Data saved"
 
-#: terrariumWebserver.py:257
+#: terrariumWebserver.py:258
 msgid "Your changes are saved"
 msgstr "Your changes are saved"
 
-#: terrariumWebserver.py:378 views/inc/menu.tpl:144
+#: terrariumWebserver.py:379 views/inc/menu.tpl:144
 msgid "Log out"
 msgstr "Log out"
 
-#: terrariumWebserver.py:379
+#: terrariumWebserver.py:380
 msgid "You are now logged out"
 msgstr "You are now logged out"
 
@@ -645,7 +645,7 @@ msgstr "Files"
 #: views/audio_playlist.tpl:48 views/door_settings.tpl:36
 #: views/profile.tpl:179 views/sensor_settings.tpl:54
 #: views/switch_settings.tpl:72 views/system_environment.tpl:347
-#: views/system_settings.tpl:161 views/webcam_settings.tpl:47
+#: views/system_settings.tpl:169 views/webcam_settings.tpl:47
 msgid "Submit"
 msgstr "Submit"
 
@@ -2065,12 +2065,12 @@ msgid "Here you can configure your environment."
 msgstr "Here you can configure your environment."
 
 #: views/system_environment.tpl:129 views/system_environment.tpl:210
-#: views/system_environment.tpl:291 views/system_settings.tpl:108
+#: views/system_environment.tpl:291 views/system_settings.tpl:116
 msgid "Yes"
 msgstr "Yes"
 
 #: views/system_environment.tpl:130 views/system_environment.tpl:211
-#: views/system_environment.tpl:292 views/system_settings.tpl:109
+#: views/system_environment.tpl:292 views/system_settings.tpl:117
 msgid "No"
 msgstr "No"
 
@@ -2106,47 +2106,59 @@ msgstr "Celsius"
 msgid "Fahrenheit"
 msgstr "Fahrenheit"
 
-#: views/system_settings.tpl:87
+#: views/system_settings.tpl:84
+msgid "Distance indicator"
+msgstr "Distance indicator"
+
+#: views/system_settings.tpl:88
+msgid "Centimetre"
+msgstr "Centimetre"
+
+#: views/system_settings.tpl:89
+msgid "Inches"
+msgstr "Inches"
+
+#: views/system_settings.tpl:95
 msgid "Admin name"
 msgstr "Admin name"
 
-#: views/system_settings.tpl:93
+#: views/system_settings.tpl:101
 msgid "New admin password"
 msgstr "New admin password"
 
-#: views/system_settings.tpl:99
+#: views/system_settings.tpl:107
 msgid "Current admin password"
 msgstr "Current admin password"
 
-#: views/system_settings.tpl:105
+#: views/system_settings.tpl:113
 msgid "Always authenticate"
 msgstr "Always authenticate"
 
-#: views/system_settings.tpl:114
+#: views/system_settings.tpl:122
 msgid "Soundcard"
 msgstr "Soundcard"
 
-#: views/system_settings.tpl:123
+#: views/system_settings.tpl:131
 msgid "Pi power usage in W"
 msgstr "Pi power usage in W"
 
-#: views/system_settings.tpl:129
+#: views/system_settings.tpl:137
 msgid "Power price"
 msgstr "Power price"
 
-#: views/system_settings.tpl:135
+#: views/system_settings.tpl:143
 msgid "Water price"
 msgstr "Water price"
 
-#: views/system_settings.tpl:141
+#: views/system_settings.tpl:149
 msgid "IP or hostname"
 msgstr "IP or hostname"
 
-#: views/system_settings.tpl:147
+#: views/system_settings.tpl:155
 msgid "Port number"
 msgstr "Port number"
 
-#: views/system_settings.tpl:153
+#: views/system_settings.tpl:161
 msgid "OWFS server port"
 msgstr "OWFS server port"
 

@@ -16,12 +16,6 @@ class terrariumDoor():
   OPEN = 'open'
 
   def __init__(self, id, hardware_type, address, name = '', callback = None):
-    ## set GPIO mode to BOARD
-    ## this takes the pin number instead of GPIO mapping pin
-    logger.debug('Setting terrariumPI GPIO Mode to %s' % (GPIO.BOARD,))
-    GPIO.setmode(GPIO.BOARD)
-    logger.debug('Done setting terrariumPI GPIO Mode to %s' % (GPIO.BOARD,))
-
     self.id = id
     self.callback = callback
 
