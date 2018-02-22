@@ -34,7 +34,7 @@ class terrariumSwitch():
   ON = True
 
   # PWM Dimmer settings
-  PWM_DIMMER_MAXDIM = 880 # http://www.esp8266-projects.com/2017/04/raspberry-pi-domoticz-ac-dimmer-part-1/
+  PWM_DIMMER_MAXDIM = 895 # http://www.esp8266-projects.com/2017/04/raspberry-pi-domoticz-ac-dimmer-part-1/
   PWM_DIMMER_MIN_TIMEOUT=0.2
   PWM_DIMMER_MIN_STEP=1
 
