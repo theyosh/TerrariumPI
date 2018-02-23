@@ -104,6 +104,9 @@
                   <a href="static/images/photos/20170706_194921.jpg" data-fancybox="gallery"><img src="static/images/photos/20170706_194921.jpg" class="thumbnail alignleft"/></a>
                   <a href="static/images/photos/20170706_195141.jpg" data-fancybox="gallery"><img src="static/images/photos/20170706_195141.jpg" class="thumbnail alignleft"/></a>
                   <a href="static/images/photos/20170707_105830.jpg" data-fancybox="gallery"><img src="static/images/photos/20170707_105830.jpg" class="thumbnail alignleft"/></a>
+                  <a href="static/images/photos/DistanceSensor1.jpg" data-fancybox="gallery"><img src="static/images/photos/DistanceSensor1.jpg" class="thumbnail alignleft"/></a>
+                  <a href="static/images/photos/DistanceSensor2.jpg" data-fancybox="gallery"><img src="static/images/photos/DistanceSensor2.jpg" class="thumbnail alignleft"/></a>
+                  <a href="static/images/photos/DistanceSensor5.jpg" data-fancybox="gallery"><img src="static/images/photos/DistanceSensor5.jpg" class="thumbnail alignleft"/></a>
                 </div>
               </div>
             </div>
