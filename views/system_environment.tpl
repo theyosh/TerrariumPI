@@ -13,7 +13,10 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <p>{{_('Here you can configure your environment.')}} {{!_('Required fields are marked with \'%s\'.') % ('<span class="required">*</span>',)}}</p>
+            <p>{{_('Here you can configure your environment.')}}
+               {{!_('Required fields are marked with \'%s\'.') % ('<span class="required">*</span>',)}}
+               {{_('Hover over the fields to get extra information.')}}
+            </p>
           </div>
         </div>
         <form action="/api/config/environment" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
@@ -196,10 +199,23 @@
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_mode')}}">
                         <select class="form-control" name="watertank_mode" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="disabled">{{_('Disabled')}}</option>
+                          <option value="weather">{{_('Weather')}}</option>
                           <option value="timer">{{_('Timer')}}</option>
                           <option value="sensor">{{_('Sensor')}}</option>
                         </select>
                       </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_on">{{_('Water pump on')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="watertank_on" required="required" type="text" placeholder="{{_('Water pump on')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_on')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_off">{{_('Water pump off')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="watertank_off" required="required" type="text" placeholder="{{_('Water pump off')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_off')}}">
                     </div>
                   </div>
                   <div class="form-group">

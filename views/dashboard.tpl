@@ -129,12 +129,14 @@
                         </td>
                         <td class="alarm_min">...</td>
                       </tr>
+                      <!--
                       <tr>
                         <td>
                           <p>{{_('Alarm max')}}</p>
                         </td>
                         <td class="alarm_max">...</td>
                       </tr>
+                      -->
                       <tr>
                         <td>
                           <p>{{_('On')}}</p>
@@ -176,12 +178,14 @@
                         </td>
                         <td class="alarm_min">...</td>
                       </tr>
+                      <!--
                       <tr>
                         <td>
                           <p>{{_('Alarm max')}}</p>
                         </td>
                         <td class="alarm_max">...</td>
                       </tr>
+                      -->
                       <tr>
                         <td>
                           <p>{{_('On')}}</p>

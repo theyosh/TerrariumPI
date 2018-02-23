@@ -5,6 +5,7 @@
                         <div class="interactive_screenshot">
                           <div id="screenshot_environment_lights" class="click_area" title="{{_('Lights')}}"></div>
                           <div id="screenshot_environment_sprayer" class="click_area" title="{{_('Sprayer')}}"></div>
+                          <div id="screenshot_environment_watertank" class="click_area" title="{{_('Watertank')}}"></div>
                           <div id="screenshot_environment_heater" class="click_area" title="{{_('Heater')}}"></div>
                           <div id="screenshot_environment_cooler" class="click_area" title="{{_('Cooler')}}"></div>
                           <img src="static/images/documentation/environment_overview.png" alt="{{_('System environment screenshot')}}" />
