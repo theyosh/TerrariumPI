@@ -99,8 +99,8 @@ class terrariumEnvironment():
     self.watertank['on_duration']    =  1.0       if 'on_duration' not in config_data['watertank'] else float(config_data['watertank']['on_duration'])
     self.watertank['off_duration']   = 59.0       if 'off_duration' not in config_data['watertank'] else float(config_data['watertank']['off_duration'])
     self.watertank['pump_duration']  = 0.0        if 'pump_duration' not in config_data['watertank'] else float(config_data['watertank']['pump_duration'])
-    self.watertank['volume']         = 0.0        if 'volume' not in config_data['watertank'] else float(config_data['watertank']['volume'])
-    self.watertank['height']         = 0.0        if 'height' not in config_data['watertank'] else float(config_data['watertank']['height'])
+    self.watertank['volume']         = 1.0        if 'volume' not in config_data['watertank'] else float(config_data['watertank']['volume'])
+    self.watertank['height']         = 1.0        if 'height' not in config_data['watertank'] else float(config_data['watertank']['height'])
     self.watertank['power_switches'] = []         if ('power_switches' not in config_data['watertank'] or config_data['watertank']['power_switches'] in ['',None]) else config_data['watertank']['power_switches']
     self.watertank['sensors']        = []         if ('sensors' not in config_data['watertank'] or config_data['watertank']['sensors'] in ['',None]) else config_data['watertank']['sensors']
 
@@ -334,6 +334,50 @@ class terrariumEnvironment():
       #  if self.is_sprayer_on():
       #    logger.info('Environment is turning off the sprayer due to disabling it')
       #  self.sprayer_off()
+
+
+      # Watertank checks and actions
+      if self.watertank['enabled']:
+        toggle_on = False
+        extra_logging_message = ''
+        logger.debug('Environment watertank is enabled.')
+        logger.debug('Environment watertank is based on: %s' % self.watertank['mode'])
+        if 'sensor' == self.watertank['mode']:
+          # Spray based on the average humidity values of the used sensors
+          toggle_on = self.watertank['height'] - self.watertank['distance']['current'] < self.watertank['distance']['alarm_min']
+          if toggle_on:
+            extra_logging_message = 'Water tank level value %f%% is lower then alarm %f%%.' % (self.watertank['height'] - self.watertank['distance']['current'],
+                                                                                        self.watertank['distance']['alarm_min'])
+        else:
+          # Spray based on time table
+          toggle_on = terrariumUtils.is_time(self.watertank['time_table'])
+          if toggle_on is None:
+            self.__update_timing('watertank')
+
+          if toggle_on and len(self.watertank['sensors']) > 0:
+            # Use the extra added sensors for finetuning the trigger action
+            toggle_on = self.watertank['height'] - self.watertank['distance']['current'] < self.watertank['distance']['alarm_min']
+            if toggle_on:
+              extra_logging_message = 'Water tank level value %f%% is lower then alarm %f%%.' % (self.watertank['height'] - self.watertank['distance']['current'],
+                                                                                        self.watertank['distance']['alarm_min'])
+
+        if toggle_on:
+          if not self.is_watertank_on():
+            logger.info('Environment is turning on the water punt for %f seconds based on %s mode.%s' % (self.watertank['pump_duration'],
+                                                                                                      self.watertank['mode'],
+                                                                                                      extra_logging_message))
+            self.watertank_on()
+        else:
+          if self.is_watertank_on():
+            logger.info('Environment is turning off the water pump based on %s mode.' % (self.watertank['mode'],))
+
+          self.watertank_off()
+
+      #else:
+      #  logger.debug('Make sure that the water pump is off when not enabled at all.')
+      #  if self.is_watertank_on():
+      #    logger.info('Environment is turning off the water pump due to disabling it')
+      #  self.watertank_off()
 
 
       # Heater checks and actions
