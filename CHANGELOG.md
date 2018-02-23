@@ -7,6 +7,9 @@ Changelog
 
 **New**
 ------
+- Add watertank actions based on sensors or timer data. Enable automatic
+  switchig on water pumps. [#87](https://github.com/theyosh/TerrariumPI/issues/87). [TheYOSH]
+- Add water tank sensor photos. [TheYOSH]
 - Add watertank environment part. It does only measurement. No actions
   yet. [#87](https://github.com/theyosh/TerrariumPI/issues/87). [TheYOSH]
 - Add HC-SR04-Ultrasonic-Sensor support part1.1 [#87](https://github.com/theyosh/TerrariumPI/issues/87). [TheYOSH]
@@ -43,6 +46,9 @@ Changelog
 
 **Updates**
 ------
+- Update documentation and use liters for watertank dashboard. [TheYOSH]
+- Update UI icons. [TheYOSH]
+- Update changelog. [TheYOSH]
 - Update README.md. [TheYOSH]
 - Update README.md. [TheYOSH]
 - Update weather based timing. [TheYOSH]
