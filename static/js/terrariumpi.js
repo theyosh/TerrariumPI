@@ -1469,7 +1469,7 @@ function update_dashboard_environment(name, data) {
       enabledColor = 'blue';
       break;
     case 'watertank':
-      indicator = globals.distance_indicator;
+      indicator = 'L';
     case 'cooler':
       enabledColor = 'blue';
       break;

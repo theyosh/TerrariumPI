@@ -529,6 +529,15 @@ class terrariumEnvironment():
       state_data = self.watertank
       average = self.get_average_distance(self.watertank['sensors'])
       state = self.is_watertank_on()
+
+      # Update to Liters based on the distanes
+      factor = float(self.watertank['volume']) / float(self.watertank['height'])
+      average['current'] = (float(self.watertank['height']) - average['current']) * factor
+      average['alarm_max'] *= factor
+      average['alarm_min'] *= factor
+      average['limit_max'] *= factor
+      average['limit_min'] *= factor
+
     elif part == 'heater':
       state_data = self.heater
       average = self.get_average_temperature(self.heater['sensors'])
@@ -548,7 +557,7 @@ class terrariumEnvironment():
     if part != 'light':
       if 'alarm' not in return_data or \
           return_data['mode'] == 'disabled' or \
-         (part in ['sprayer','heater'] and return_data['current'] >= return_data['alarm_max']) or \
+         (part in ['sprayer','heater','watertank'] and return_data['current'] >= return_data['alarm_max']) or \
          (part == 'cooler'  and return_data['current'] <= return_data['alarm_max']):
         return_data['alarm'] = False
 

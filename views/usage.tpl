@@ -10,6 +10,9 @@
                   <a aria-expanded="false" data-toggle="tab" href="#usage-tab-weather" id="usage_tab_weather" role="tab"><i class="fa fa-cloud"></i> {{_('Weather')}}</a>
                 </li>
                 <li class="" role="presentation">
+                  <a aria-expanded="false" data-toggle="tab" href="#usage-tab-profile" id="usage_tab_profile" role="tab"><i class="fa fa-cloud"></i> {{_('Profile')}}</a>
+                </li>
+                <li class="" role="presentation">
                   <a aria-expanded="false" data-toggle="tab" href="#usage-tab-sensors" id="usage_tab_sensors" role="tab"><i class="fa fa-tint"></i> {{_('Sensors')}}</a>
                 </li>
                 <li class="" role="presentation">
@@ -34,6 +37,9 @@
                 </div>
                 <div aria-labelledby="usage_tab_weather" class="tab-pane fade" id="usage-tab-weather" role="tabpanel">
                   % include('inc/usage_weather.tpl')
+                </div>
+                <div aria-labelledby="usage_tab_profile" class="tab-pane fade" id="usage-tab-profile" role="tabpanel">
+                  % include('inc/usage_profile.tpl')
                 </div>
                 <div aria-labelledby="usage_tab_sensors" class="tab-pane fade" id="usage-tab-sensors" role="tabpanel">
                   % include('inc/usage_sensors.tpl')

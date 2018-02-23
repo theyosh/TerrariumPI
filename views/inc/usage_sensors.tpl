@@ -66,6 +66,7 @@
                             <ul>
                               <li><span aria-hidden="true" class="glyphicon glyphicon-tint"></span>: {{_('Humidity sensor')}}</li>
                               <li><span aria-hidden="true" class="glyphicon glyphicon-fire"></span>: {{_('Temperature sensor')}}</li>
+                              <li><span aria-hidden="true" class="glyphicon glyphicon-signal"></span>: {{_('Distance sensor')}}</li>
                             </ul>
                           </li>
                           <li>{{_('The configured name')}}</li>
@@ -85,12 +86,12 @@
                         <div id="currentvalue" class="sidebar-widget text-center alignright">
                           <canvas class="gauge"></canvas>
                           <div class="goal-wrapper">
-                            <span class="gauge-value">...</span> <span>C / %</span>
+                            <span class="gauge-value">...</span> <span>C/F / % / cm/inch</span>
                           </div>
                         </div>
                         <p>{{_('The gauge graph shows the current temperature or humidity value. The color of the graph depends on the current value and the alarm values. When the value gets more to the minimum or maximum value, it will gets more red/orange.')}}</p>
                         <p>{{_('The values are updated every 30 seconds and updated in real time on the page.')}}</p>
-                        <p>{{_('The current value is also written below the graph in degrees or percentage.')}}</p>
+                        <p>{{_('The current value is also written below the graph in degrees, percentage or distance.')}}</p>
                       </div>
                       <div class="tab-pane" id="usage-tab-sensors-graph">
                         <h3 class="lead">{{_('History graph')}}</h3>
@@ -113,6 +114,8 @@
                                     <option value="dht22">{{_('DHT22')}}</option>
                                     <option value="am2302">{{_('AM2302')}}</option>
                                     <option value="w1">{{_('1Wire')}}</option>
+                                    <option value="remote">{{_('Remote')}}</option>
+                                    <option value="hc-sr04">{{_('HC-SR04')}}</option>
                                   </select>
                                 </div>
                               </div>
@@ -135,19 +138,19 @@
                                 <input class="form-control" name="sensor_[nr]_name" placeholder="{{_('Name')}}" type="text" required="required" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{!translations.get_translation('sensor_field_name')}}">
                               </div>
                               <div class="col-md-1 col-sm-1 col-xs-12 form-group">
-                                <label for="sensor_[nr]_alarm_min">{{_('Alarm min')}}</label>
+                                <label for="sensor_[nr]_alarm_min">{{_('Alarm min')}} <span class="required">*</span></label>
                                 <input class="form-control" name="sensor_[nr]_alarm_min" placeholder="{{_('Alarm min')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_alarm_min')}}">
                               </div>
                               <div class="col-md-1 col-sm-1 col-xs-12 form-group">
-                                <label for="sensor_[nr]_alarm_max">{{_('Alarm max')}}</label>
+                                <label for="sensor_[nr]_alarm_max">{{_('Alarm max')}} <span class="required">*</span></label>
                                 <input class="form-control" name="sensor_[nr]_alarm_max" placeholder="{{_('Alarm max')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_alarm_max')}}">
                               </div>
                               <div class="col-md-1 col-sm-1 col-xs-12 form-group">
-                                <label for="sensor_[nr]_min">{{_('Limit min')}}</label>
+                                <label for="sensor_[nr]_min">{{_('Limit min')}} <span class="required">*</span></label>
                                 <input class="form-control" name="sensor_[nr]_limit_min" placeholder="{{_('Limit min')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_limit_min')}}">
                               </div>
                               <div class="col-md-1 col-sm-1 col-xs-12 form-group">
-                                <label for="sensor_[nr]_max">{{_('Limit max')}}</label>
+                                <label for="sensor_[nr]_max">{{_('Limit max')}} <span class="required">*</span></label>
                                 <input class="form-control" name="sensor_[nr]_limit_max" placeholder="{{_('Limit max')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_limit_max')}}">
                               </div>
                               <div class="col-md-1 col-sm-1 col-xs-12 form-group">
