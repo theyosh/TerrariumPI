@@ -26,12 +26,14 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
 8. [About](#about)
 
 ## Features
-- Controlling electronic devices like lights, sprayers, heating and cooling equipment
+- Controlling electronic devices like lights, sprayers, heating, cooling and water pump equipment
 - Support for dimming electronic devices
   - Manual dimming through web interface
-  - Predefined on and off durations
+  - Predefined on and off dimming durations
   - Predefined on and off dimming percentages
 - Support for timmers in powerswitches and environment #72
+  - Predefined start and stop times based on timer or weather
+  - Predefined on and off durations in minutes
 - Support for Energenie USB and LAN powerswitches [EG-PM(s)2](http://energenie.com/item.aspx?id=7556)
 - Support for multiple temperature and humidity sensors
 - Support for ultrasonic sound range sensors
@@ -43,8 +45,11 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
 - Rain control based on humidity sensors and timers
 - Heater control based on temperature sensors or timers
 - Cooling control based on temperature sensors or timers
-- Watertank control based on ultrasonic sound range sensors
+- Watertank level control based on ultrasonic sound range sensors
 - Weather forecast from external source for lighting schema
+  - Supports https://yr.no
+  - Supports https://wunderground.com
+  - Supports https://openweathermap.org
 - Temperatures in Celsius or Fahrenheit
 - Distances in centimetres or inches
 - Alarm detections
