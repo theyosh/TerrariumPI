@@ -44,6 +44,9 @@
                       <a href="sensor_distance.html">{{_('Distance')}}</a>
                     </li>
                     <li>
+                      <a href="sensor_ph.html">{{_('PH')}}</a>
+                    </li>
+                    <li>
                       <a href="sensor_settings.html">{{_('Settings')}}</a>
                     </li>
                   </ul>
