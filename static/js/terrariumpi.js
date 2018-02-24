@@ -1485,7 +1485,7 @@ function update_dashboard_environment(name, data) {
     switch (key) {
       case 'state':
         // Find all i elements withing the .state table row. Hide them all, then filter the enabled one and show that. Then go up and show the complete state table row... Nice!
-        systempart.find('.state i').hide().filter('.' + (value == 'on' ? 'green' : 'red')).show().parent().parent().toggle(data.enabled);
+        systempart.find('.state i').hide().filter('.' + (value == 'on' ? 'green' : 'red')).show().parent().parent().toggle(data.enabled && data.power_switches.length > 0);
         break;
       case 'alarm':
         systempart.find('span.glyphicon-warning-sign').toggle(value);
