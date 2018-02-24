@@ -516,7 +516,6 @@ class terrariumEnvironment():
         logger.warning('Update took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEnvironment.LOOP_TIMEOUT,terrariumEnvironment.LOOP_TIMEOUT))
 
   def __on_off(self,part, state = None):
-    is_on = True
     power_switches = []
     if 'light' == part:
       power_switches = self.light['power_switches']
@@ -529,6 +528,7 @@ class terrariumEnvironment():
     elif 'watertank' == part:
       power_switches = self.watertank['power_switches']
 
+    is_on = len(power_switches) > 0
     for switch_id in power_switches:
       if switch_id not in self.power_switches:
         is_on = False
