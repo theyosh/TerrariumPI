@@ -155,6 +155,7 @@ class terrariumSensor:
           GPIO.output(int(self.sensor_address['TRIG']), True)
           time.sleep(0.00001)
           GPIO.output(int(self.sensor_address['TRIG']), False)
+          pulse_start = time.time()
           while GPIO.input(int(self.sensor_address['ECHO']))==0:
             pulse_start = time.time()
           while GPIO.input(int(self.sensor_address['ECHO']))==1:
