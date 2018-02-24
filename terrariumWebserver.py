@@ -343,7 +343,7 @@ class terrariumWebserver():
 
             for counter in xrange(0,len(result[datatype][dataid][fields[0]])):
               # Timestamp
-              row = [str(int(result[datatype][dataid][fields[0]][counter][0]/1000))]
+              row = [datetime.datetime.fromtimestamp(int(str(int(result[datatype][dataid][fields[0]][counter][0]/1000)))).strftime('%Y-%m-%d %H:%M:%S')]
               for field in fields:
                 # Row values
                 row.append(str(result[datatype][dataid][field][counter][1]))
