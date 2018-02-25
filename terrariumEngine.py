@@ -39,7 +39,8 @@ class terrariumEngine():
     # Default system units
     self.__units = {'temperature' : 'C',
                     'distance'    : 'cm',
-                    'humidity'    : '%'}
+                    'humidity'    : '%',
+                    'ph'          : 'Ph'}
 
     # List of queues for websocket communication
     self.subscribed_queues = []
