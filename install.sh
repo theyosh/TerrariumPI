@@ -29,14 +29,14 @@ do
 done
 
 # Clean up first
-aptitude -y remove wolfram-engine sonic-pi oracle-java8-jdk desktop-base gnome-desktop3-data libgnome-desktop-3-10 epiphany-browser-data epiphany-browser nuscratch scratch wiringpi python-gpiozero
+aptitude -y remove wolfram-engine sonic-pi oracle-java8-jdk desktop-base gnome-desktop3-data libgnome-desktop-3-10 epiphany-browser-data epiphany-browser nuscratch scratch wiringpi
 apt-get -y remove "^libreoffice.*"
 apt-get -y autoremove
 
 # Install required packages to get the terrarium software running
 aptitude -y update
 aptitude -y safe-upgrade
-aptitude -y install libftdi1 screen python-imaging python-dateutil python-ow python-rpi.gpio python-psutil git subversion watchdog build-essential python-dev python-picamera python-opencv python-pip python-pigpio python-requests i2c-tools owfs ow-shell sqlite3 vlc-nox python-mediainfodll libasound2-dev sispmctl
+aptitude -y install libftdi1 screen python-imaging python-dateutil python-ow python-rpi.gpio python-psutil git subversion watchdog build-essential python-dev python-picamera python-opencv python-pip python-pigpio python-requests i2c-tools owfs ow-shell sqlite3 vlc-nox python-mediainfodll libasound2-dev sispmctl python-gpiozero
 
 # Basic config:
 #raspi-config
