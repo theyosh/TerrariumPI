@@ -187,7 +187,7 @@ class terrariumSensor:
           print 'Sorted values'
           print values
           # Calculate average. Exclude the min and max value. And therefore devide by 3
-          current = round((sum(values[1,-1]) / 3.0),2)
+          current = round((sum(values[1:-1]) / 3.0),2)
           print 'Current PH: ' + str(current)
 
         elif 'temperature' == self.get_type():
