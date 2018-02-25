@@ -15,6 +15,7 @@ import uptime
 import os
 import psutil
 import subprocess
+import re
 from hashlib import md5
 
 from terrariumConfig import terrariumConfig
@@ -44,6 +45,17 @@ class terrariumEngine():
 
     # List of queues for websocket communication
     self.subscribed_queues = []
+
+    self.device = ''
+    regex = r"product: (?P<device>.*)"
+    hw=os.popen("lshw -c system 2>/dev/null")
+    for line in hw.readlines():
+      matches = re.search(regex, line)
+      if matches:
+        self.device = matches.group('device')
+        break
+    hw.close()
+
     # Default power usage for a PI
     self.pi_power_wattage = 5
 
