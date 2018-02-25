@@ -162,6 +162,7 @@ class terrariumSensor:
           pulse_start = time.time()
           while GPIO.input(terrariumUtils.to_BCM_port_number(self.sensor_address['ECHO']))==0:
             pulse_start = time.time()
+          pulse_end = time.time()
           while GPIO.input(terrariumUtils.to_BCM_port_number(self.sensor_address['ECHO']))==1:
             pulse_end = time.time()
 
@@ -173,22 +174,17 @@ class terrariumSensor:
         elif 'sku-sen0161' == self.get_hardware_type():
           # Do multiple measurements...
           values = []
-          print 'Start measurement sku-sen0161'
-          print values
           for counter in range(5):
             analog_port = MCP3008(channel=int(self.get_address()))
-            print 'Got voltage: ' + str(analog_port.value)
+            # https://github.com/theyosh/TerrariumPI/issues/108
+            # We measure the values in volts already, so no deviding by 1000 as original script does
             values.append((analog_port.value * ( 5000.0 / 1024.0)) * 3.3 + 0.1614)
-            print values
             time.sleep(0.2)
 
           # sort values from low to high
           values.sort()
-          print 'Sorted values'
-          print values
           # Calculate average. Exclude the min and max value. And therefore devide by 3
           current = round((sum(values[1:-1]) / 3.0),2)
-          print 'Current PH: ' + str(current)
 
         elif 'temperature' == self.get_type():
           if self.get_hardware_type() == 'owfs':
