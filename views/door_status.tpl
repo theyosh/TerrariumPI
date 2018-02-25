@@ -1,4 +1,9 @@
 % include('inc/page_header.tpl')
+        <div class="row jumbotron">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+              <h1>{{_('No doors available')}}</h1>
+          </div>
+        </div>
         <div class="row door">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
@@ -61,6 +66,7 @@
             $('div.row.door').remove();
 
             $.get('/api/doors',function(json_data) {
+              $('div.row.jumbotron').toggle(json_data.doors.length == 0);
               $.each(json_data.doors,function(index,door_data){
                 add_door_status_row(door_data);
                 update_door(door_data);
