@@ -174,7 +174,7 @@ class terrariumSensor:
           # Do multiple measurements...
           values = []
           for counter in range(5):
-            analog_port = MCP3008(channel=terrariumUtils.to_BCM_port_number(self.get_address()))
+            analog_port = MCP3008(channel=int(self.get_address()))
             values.append(((analog_port.value * ( 5000.0 / 1024.0)) / 1000.0) * 3.3 + 0.1614)
             time.sleep(0.2)
 
