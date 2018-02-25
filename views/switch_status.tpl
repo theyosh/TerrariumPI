@@ -1,4 +1,9 @@
 % include('inc/page_header.tpl')
+        <div class="row jumbotron">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+              <h1>{{_('No switches available')}}</h1>
+          </div>
+        </div>
         <div class="row switch">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
@@ -61,6 +66,7 @@
             $('div.row.switch').remove();
 
             $.get('/api/switches',function(json_data) {
+              $('div.row.jumbotron').toggle(json_data.switches.length == 0);
               $.each(json_data.switches,function(index,switch_data){
                 add_power_switch_status_row(switch_data);
                 update_power_switch(switch_data);

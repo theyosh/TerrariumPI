@@ -1,4 +1,9 @@
 % include('inc/page_header.tpl')
+        <div class="row jumbotron">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+              <h1>{{_('No sensors available')}}</h1>
+          </div>
+        </div>
         <div class="row sensor">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
@@ -66,6 +71,7 @@
             $('div.row.sensor').remove();
 
             $.get('/api/sensors/{{sensor_type}}',function(json_data) {
+              $('div.row.jumbotron').toggle(json_data.sensors.length == 0);
               $.each(json_data.sensors,function(index,sensor_data){
                 add_sensor_status_row(sensor_data);
                 update_sensor(sensor_data);

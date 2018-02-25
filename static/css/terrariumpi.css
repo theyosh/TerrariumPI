@@ -80,6 +80,19 @@ form#profile.edit label{
 .dropdown-backdrop {
   display: none !important;
 }
+
+
+div.row.jumbotron {
+  text-shadow: 1px 2px 3px rgba(255,255,255,0.5),
+              -1px -1px 1px rgba(0,0,0,0.6);
+  text-align:center;
+  margin-top: 3em;
+  background-color: transparent;
+  color: #ccc;
+  display: none;
+}
+
+
 /* End general overrule */
 
 div.modal div.row.sensor,
