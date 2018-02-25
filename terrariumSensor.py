@@ -13,15 +13,16 @@ import requests
 import RPi.GPIO as GPIO
 
 from hashlib import md5
+from gpiozero import MCP3008
 from terrariumUtils import terrariumUtils
 
 class terrariumSensor:
   UPDATE_TIMEOUT = 30
-  VALID_SENSOR_TYPES   = ['temperature','humidity','distance']
+  VALID_SENSOR_TYPES   = ['temperature','humidity','distance','ph']
   VALID_DHT_SENSORS    = { 'dht11' : dht.DHT11,
                            'dht22' : dht.DHT22,
                            'am2302': dht.AM2302 }
-  VALID_HARDWARE_TYPES = ['owfs','w1','remote','hc-sr04'] + VALID_DHT_SENSORS.keys()
+  VALID_HARDWARE_TYPES = ['owfs','w1','remote','hc-sr04','sku-sen0161'] + VALID_DHT_SENSORS.keys()
 
   W1_BASE_PATH = '/sys/bus/w1/devices/'
   W1_TEMP_REGEX = re.compile(r'(?P<type>t|f)=(?P<value>[0-9]+)',re.IGNORECASE)
@@ -39,6 +40,9 @@ class terrariumSensor:
       # Dirty hack to replace OWFS sensor object for W1 path
       self.sensor_address = sensor
     elif 'hc-sr04' == self.get_hardware_type():
+      # Dirty hack to set sensor address
+      self.set_address(sensor)
+    elif 'sku-sen0161' == self.get_hardware_type():
       # Dirty hack to set sensor address
       self.set_address(sensor)
     elif 'remote' == self.get_hardware_type():
@@ -150,21 +154,37 @@ class terrariumSensor:
               logger.warning('Remote sensor \'%s\' got error from remote source \'%s\': %s' % (self.get_name(),self.get_address(),data.status_code))
 
         elif 'hc-sr04' == self.get_hardware_type():
-          GPIO.output(int(self.sensor_address['TRIG']), False)
+          GPIO.output(terrariumUtils.to_BCM_port_number(self.sensor_address['TRIG']), False)
           time.sleep(2)
-          GPIO.output(int(self.sensor_address['TRIG']), True)
+          GPIO.output(terrariumUtils.to_BCM_port_number(self.sensor_address['TRIG']), True)
           time.sleep(0.00001)
-          GPIO.output(int(self.sensor_address['TRIG']), False)
+          GPIO.output(terrariumUtils.to_BCM_port_number(self.sensor_address['TRIG']), False)
           pulse_start = time.time()
-          while GPIO.input(int(self.sensor_address['ECHO']))==0:
+          while GPIO.input(terrariumUtils.to_BCM_port_number(self.sensor_address['ECHO']))==0:
             pulse_start = time.time()
-          while GPIO.input(int(self.sensor_address['ECHO']))==1:
+          pulse_end = time.time()
+          while GPIO.input(terrariumUtils.to_BCM_port_number(self.sensor_address['ECHO']))==1:
             pulse_end = time.time()
 
           pulse_duration = pulse_end - pulse_start
           # https://www.modmypi.com/blog/hc-sr04-ultrasonic-range-sensor-on-the-raspberry-pi
           # Measure in centimetre
           current = round(pulse_duration * 17150,2)
+
+        elif 'sku-sen0161' == self.get_hardware_type():
+          # Do multiple measurements...
+          values = []
+          for counter in range(5):
+            analog_port = MCP3008(channel=int(self.get_address()))
+            # https://github.com/theyosh/TerrariumPI/issues/108
+            # We measure the values in volts already, so no deviding by 1000 as original script does
+            values.append((analog_port.value * ( 5000.0 / 1024.0)) * 3.3 + 0.1614)
+            time.sleep(0.2)
+
+          # sort values from low to high
+          values.sort()
+          # Calculate average. Exclude the min and max value. And therefore devide by 3
+          current = round((sum(values[1:-1]) / 3.0),2)
 
         elif 'temperature' == self.get_type():
           if self.get_hardware_type() == 'owfs':
@@ -282,10 +302,10 @@ class terrariumSensor:
 
       if 'hc-sr04' == self.get_hardware_type() and ',' in address:
         sensor = address.split(',')
-        self.sensor_address = {'TRIG' : int(sensor[0]) , 'ECHO' : int(sensor[1])}
+        self.sensor_address = {'TRIG' : sensor[0] , 'ECHO' : sensor[1]}
         try:
-          GPIO.setup(self.sensor_address['TRIG'],GPIO.OUT)
-          GPIO.setup(self.sensor_address['ECHO'],GPIO.IN)
+          GPIO.setup(terrariumUtils.to_BCM_port_number(self.sensor_address['TRIG']),GPIO.OUT)
+          GPIO.setup(terrariumUtils.to_BCM_port_number(self.sensor_address['ECHO']),GPIO.IN)
 
         except Exception, err:
           logger.warning(err)

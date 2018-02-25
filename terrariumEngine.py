@@ -3,6 +3,12 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 import RPi.GPIO as GPIO
+#GPIO.setwarnings(False)
+## set GPIO mode to BCM. This is needed to support analog devices through gpiozero
+logger.debug('Setting terrariumPI GPIO Mode to %s' % (GPIO.BCM,))
+GPIO.setmode(GPIO.BCM)
+logger.debug('Done setting terrariumPI GPIO Mode to %s' % (GPIO.BCM,))
+
 import thread
 import time
 import uptime
@@ -29,16 +35,12 @@ class terrariumEngine():
   LOOP_TIMEOUT = 30
 
   def __init__(self):
-    ## set GPIO mode to BOARD
-    ## this takes the pin number instead of GPIO mapping pin
-    logger.debug('Setting terrariumPI GPIO Mode to %s' % (GPIO.BOARD,))
-    GPIO.setmode(GPIO.BOARD)
-    logger.debug('Done setting terrariumPI GPIO Mode to %s' % (GPIO.BOARD,))
 
     # Default system units
     self.__units = {'temperature' : 'C',
                     'distance'    : 'cm',
-                    'humidity'    : '%'}
+                    'humidity'    : '%',
+                    'ph'          : 'Ph'}
 
     # List of queues for websocket communication
     self.subscribed_queues = []

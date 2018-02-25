@@ -1,4 +1,4 @@
-# TerrariumPI 3.3.0
+# TerrariumPI 3.4.0
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
 
 For humidity control there is support for a spraying system. The sprayer can be configured to spray for an X amount of seconds and there is a minumal period between two spray actions. Use at least one humitidy sensors to get a constant humidity value.
@@ -39,6 +39,8 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
 - Support for ultrasonic sound range sensors
 - Support for native Raspberry Pi cam out of the box
 - Support for USB and remote webcams
+- Support for analog devices through a MCP3008
+  - Support for PH probe SKU SEN0161
 - Open door detection (sprayer will not spray when a door is open)
 - Total power and water usage for costs calculation
 - Lights control based on sun rise and sun set or timers
@@ -111,17 +113,21 @@ This software requires a Raspberry Pi and some extra hardware in order to run an
 - Raspberry PI
   - Pi 2
   - Pi 3
+  - Zero
 - Power relay board
   - USB versions (Serial and Bitbang)
   - GPIO versions
   - PWM Dimmer versions
-- Temperature/humdity/ultrasonic sensors DHT11, DHT22, AM2303, DS1820, HIH4000, HC-SR04 etc through
+- Temperature/humdity/ultrasonic/PH sensors DHT11, DHT22, AM2303, DS1820, HIH4000, HC-SR04, SEN0161, etc through
   - OWFS
   - GPIO
   - 1 Wire interface
+  - MCP3008 ([RasPiO Analog Zero](https://github.com/raspitv/analogzero))
   
 ### GPIO numbering
 All hardware that connects to the GPIO pins use **Physical GPIO numbering** (1 - 40). The software will translate it to BCM if needed for a supported device or sensor. [More information about GPIO pin numbering](https://pinout.xyz/)
+
+For the analog devices use numbers of the channel on the analog device which is from 0 to 7 (8 channels). Also the software expect the analog MCP3008 on GPIO ports 19,21,23,24 physical (default). [More information about GPIO pin numbering](https://pinout.xyz/)
 
 ### New hardware
 If there is some other hardware which is not working with TerrariumPI, open an issue on [Github](https://github.com/theyosh/TerrariumPI/issues) and we will try to support it. Raspberry Pi Zero is not tested.

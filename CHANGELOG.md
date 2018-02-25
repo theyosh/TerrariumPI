@@ -2,11 +2,16 @@ Changelog
 =========
 
 
-(unreleased)
-------------
+3.4.0 (2018-02-25)
+------------------
 
 **New**
 ------
+- Add debug for testing. [TheYOSH]
+- Add PH indicator. [#108](https://github.com/theyosh/TerrariumPI/issues/108). [TheYOSH]
+- Add traduction and minor bug. [nke69]
+
+  Add description for new changes [#87](https://github.com/theyosh/TerrariumPI/issues/87) and minor bug in traduction
 - Add watertank actions based on sensors or timer data. Enable automatic
   switchig on water pumps. [#87](https://github.com/theyosh/TerrariumPI/issues/87). [TheYOSH]
 - Add water tank sensor photos. [TheYOSH]
@@ -27,6 +32,11 @@ Changelog
 
 **Fixes**
 ------
+- Fixed gpiozero library installation. [TheYOSH]
+- Fix array selecting. [TheYOSH]
+- Another fix for PH devices [#108](https://github.com/theyosh/TerrariumPI/issues/108). [TheYOSH]
+- Fix missing GPIO to BCM conversion. [#108](https://github.com/theyosh/TerrariumPI/issues/108). [TheYOSH]
+- Fix on/off detection with zeor power switches. [TheYOSH]
 - Fix dashboard js bug. [TheYOSH]
 - Finetune distance sensor code and fix OWFS sensor scanning. [TheYOSH]
 - Updates for measurements in centimetre or inches [#87](https://github.com/theyosh/TerrariumPI/issues/87). Various small
@@ -46,6 +56,11 @@ Changelog
 
 **Updates**
 ------
+- Update defaults.cfg. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update changelog. [TheYOSH]
 - Update documentation and use liters for watertank dashboard. [TheYOSH]
 - Update UI icons. [TheYOSH]
 - Update changelog. [TheYOSH]
@@ -62,6 +77,18 @@ Changelog
 
 **Other**
 ------
+- Merge branch 'feature/ph' of ssh://github.com/theyosh/TerrariumPI into
+  feature/ph. [TheYOSH]
+- Cleaup debug code. [#108](https://github.com/theyosh/TerrariumPI/issues/108). [TheYOSH]
+- We measure in smaller values. [#108](https://github.com/theyosh/TerrariumPI/issues/108). [TheYOSH]
+- First attempt for supporting PH device. [#87](https://github.com/theyosh/TerrariumPI/issues/87). [TheYOSH]
+- Better export date formatting. [TheYOSH]
+- Merge pull request [#107](https://github.com/theyosh/TerrariumPI/issues/107) from nke69/master. [TheYOSH]
+
+  Add traduction and minor bug
+- Hide environment part status indicator when there are no switchtes
+  selected. [TheYOSH]
+- Force sensor start time. [TheYOSH]
 - Found the magic number [#82](https://github.com/theyosh/TerrariumPI/issues/82). [TheYOSH]
 - Code cleanup. [TheYOSH]
 - Code Cleanup. [TheYOSH]
@@ -1105,5 +1132,3 @@ Changelog
 - Living on the edge.... use latest beta of Leaflet. [TheYOSH]
 - Initial release. [TheYOSH]
 - Initial commit. [TheYOSH]
-
-

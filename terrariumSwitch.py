@@ -3,7 +3,6 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 import RPi.GPIO as GPIO
-GPIO.setwarnings(False)
 import pigpio
 import thread
 import time
@@ -110,7 +109,8 @@ class terrariumSwitch():
     self.device = 0
 
   def __load_gpio_device(self):
-    GPIO.setmode(GPIO.BOARD)
+    pass
+#    GPIO.setmode(GPIO.BOARD)
 
   def __load_pwm_device(self):
     self.__dimmer_running = False
@@ -245,10 +245,10 @@ class terrariumSwitch():
               logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.sensor_address,webstatus['logintxt'],webstatus['login']))
 
       elif self.get_hardware_type() == 'gpio':
-        GPIO.output(int(self.get_address()), ( GPIO.HIGH if state is terrariumSwitch.ON else GPIO.LOW ))
+        GPIO.output(terrariumUtils.to_BCM_port_number(self.get_address()), ( GPIO.HIGH if state is terrariumSwitch.ON else GPIO.LOW ))
 
       elif self.get_hardware_type() == 'gpio-inverse':
-        GPIO.output(int(self.get_address()), ( GPIO.LOW if state is terrariumSwitch.ON else GPIO.HIGH ))
+        GPIO.output(terrariumUtils.to_BCM_port_number(self.get_address()), ( GPIO.LOW if state is terrariumSwitch.ON else GPIO.HIGH ))
 
       elif self.get_hardware_type() == 'pwm-dimmer' and self.__pigpio is not False:
         duration = self.get_dimmer_duration()
@@ -403,7 +403,7 @@ class terrariumSwitch():
 
     elif 'gpio' in self.get_hardware_type():
       try:
-        GPIO.setup(int(self.get_address()), GPIO.OUT)
+        GPIO.setup(terrariumUtils.to_BCM_port_number(self.get_address()), GPIO.OUT)
       except Exception, err:
         logger.warning(err)
         pass
