@@ -178,7 +178,7 @@ class terrariumSensor:
           for counter in range(5):
             analog_port = MCP3008(channel=int(self.get_address()))
             print 'Got voltage: ' + str(analog_port.value)
-            values.append(((analog_port.value * ( 5000.0 / 1024.0)) / 1000.0) * 3.3 + 0.1614)
+            values.append((analog_port.value * ( 5000.0 / 1024.0)) * 3.3 + 0.1614)
             print values
             time.sleep(0.2)
 
