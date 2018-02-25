@@ -299,10 +299,10 @@ class terrariumSensor:
 
       if 'hc-sr04' == self.get_hardware_type() and ',' in address:
         sensor = address.split(',')
-        self.sensor_address = {'TRIG' : int(sensor[0]) , 'ECHO' : int(sensor[1])}
+        self.sensor_address = {'TRIG' : sensor[0] , 'ECHO' : sensor[1]}
         try:
-          GPIO.setup(self.sensor_address['TRIG'],GPIO.OUT)
-          GPIO.setup(self.sensor_address['ECHO'],GPIO.IN)
+          GPIO.setup(terrariumUtils.to_BCM_port_number(self.sensor_address['TRIG']),GPIO.OUT)
+          GPIO.setup(terrariumUtils.to_BCM_port_number(self.sensor_address['ECHO']),GPIO.IN)
 
         except Exception, err:
           logger.warning(err)
