@@ -5,6 +5,8 @@ logger = terrariumLogging.logging.getLogger(__name__)
 import RPi.GPIO as GPIO
 import thread
 from hashlib import md5
+from terrariumUtils import terrariumUtils
+
 from gevent import monkey, sleep
 monkey.patch_all()
 
@@ -45,7 +47,7 @@ class terrariumDoor():
     logger.info('Start terrariumPI door checker for door \'%s\'' % self.get_name())
     while True:
       if self.get_hardware_type() == 'gpio':
-        current_status = terrariumDoor.OPEN if GPIO.input(int(self.get_address())) else terrariumDoor.CLOSED
+        current_status = terrariumDoor.OPEN if GPIO.input(terrariumUtils.to_BCM_port_number(self.get_address())) else terrariumDoor.CLOSED
 
       logger.debug('Current door \'%s\' status: %s' % (self.get_name(),current_status))
       if current_status != self.get_status():
@@ -79,7 +81,7 @@ class terrariumDoor():
 
   def set_address(self,address):
     self.address = address
-    GPIO.setup(int(address),GPIO.IN,pull_up_down=GPIO.PUD_UP)  # activate input with PullUp
+    GPIO.setup(terrariumUtils.to_BCM_port_number(address),GPIO.IN,pull_up_down=GPIO.PUD_UP)  # activate input with PullUp
 
   def get_name(self):
     return self.name
