@@ -92,6 +92,11 @@ div.row.jumbotron {
   display: none;
 }
 
+footer .pull-right .label {
+  font-size: 50%;
+  vertical-align: middle;
+  opacity: 0.2;
+}
 
 /* End general overrule */
 
