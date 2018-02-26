@@ -147,6 +147,7 @@ class terrariumTranslations():
     # End environment
 
     # System
+    self.translations['system_field_language'] = _('Choose your interface language.')
     self.translations['system_field_distance_indicator'] = _('Holds the distance type used by distance sensors.')
     self.translations['system_field_admin'] = _('Holds the username which can make changes (Administrator).')
     self.translations['system_field_admin'] = _('Holds the username which can make changes (Administrator).')
