@@ -2,7 +2,7 @@
     </div>
     <footer>
       <div class="pull-right">
-        {{device}} - {{title}} - <a href="https://terrarium.theyosh.nl" title="{{_('Terrarium home automation v. %s' % version)}}" target="_blank">{{_('Terrarium home automation v. %s' % version)}}</a> - <a href="https://github.com/theyosh/TerrariumPI" target="_blank" title="{{_('Download TerrariumPI on Github')}}">{{_('Github')}}</a>
+        <span class="label label-success" title="{{_('No messages')}}">&nbsp;</span> <span class="label label-warning" title="{{_('No warning messages')}}">&nbsp;</span> <span class="label label-danger" title="{{_('No error messages')}}">&nbsp;</span>&nbsp;&nbsp; {{device}} - {{title}} - <a href="https://terrarium.theyosh.nl" title="{{_('Terrarium home automation v. %s' % version)}}" target="_blank">{{_('Terrarium home automation v. %s' % version)}}</a> - <a href="https://github.com/theyosh/TerrariumPI" target="_blank" title="{{_('Download TerrariumPI on Github')}}">{{_('Github')}}</a>
       </div>
       <div class="clearfix"></div>
     </footer><!-- /footer content -->

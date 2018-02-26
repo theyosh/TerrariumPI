@@ -396,8 +396,7 @@ function websocket_init(reconnect) {
     var data = JSON.parse(evt.data);
     switch (data.type) {
       case 'logtail':
-        $('div.row.logtail div.x_content pre').prepend(data.data + '\n');
-        $('div.row.logtail div.x_title small').text(moment().format('LL LTS'));
+        update_logtail(data.data);
         break;
       case 'uptime':
         update_dashboard_uptime(data.data);
@@ -408,7 +407,7 @@ function websocket_init(reconnect) {
         break;
 
       case 'environment':
-        $.each(['heater', 'sprayer', 'light', 'cooler','watertank'], function(index, value) {
+        $.each(['heater','sprayer','light','cooler','watertank'], function(index, value) {
           update_dashboard_environment(value, data.data[value]);
         });
         break;
@@ -1258,6 +1257,38 @@ function history_graph(name, data, type) {
 /* General functions - End graph functions */
 
 /* General functions - Template functions */
+function update_logtail_indicator(type) {
+  var indicator = $('footer .label.label-success');
+  var opacity = 0.2;
+  var count = '&nbsp;';
+
+  if ('warning' == type) {
+    indicator = $('footer .label.label-warning');
+    opacity = (indicator.css('opacity') * 1) + 0.1;
+    count = ((indicator.text()).trim() * 1) + 1;
+  } else if ('error' == type) {
+    indicator = $('footer .label.label-danger');
+    opacity = (indicator.css('opacity') * 1) + 0.1;
+    count = ((indicator.text()).trim() * 1) + 1;
+  }
+  if (opacity > 1) {
+    opacity = 1;
+  }
+  indicator.stop().attr({'title':'{{_("Last update")}}: ' + moment().format('LL LTS')}).css({'opacity': 1.0}).html(count).animate({'opacity': opacity},333);
+}
+
+function update_logtail(message) {
+  var message_type = 'info';
+  if (message.indexOf('WARNING') > 0) {
+    message_type = 'warning';
+  } else if (message.indexOf('ERROR') > 0) {
+    message_type = 'error';
+  }
+  update_logtail_indicator(message_type);
+  $('div.row.logtail div.x_content pre').prepend(message + '\n');
+  $('div.row.logtail div.x_title small').text(moment().format('LL LTS'));
+}
+
 function get_theme_color(color) {
   if (color == 'orange') return '#f0ad4e';
   return $('<div>').addClass(color).css('color');
