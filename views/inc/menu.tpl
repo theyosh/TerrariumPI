@@ -27,7 +27,7 @@
                       <a href="profile.html">{{_('Profile')}}</a>
                     </li>
                     <li>
-                      <a href="weather_forecast.html">{{_('Weather forecast')}}</a>
+                      <a href="weather.html">{{_('Weather')}}</a>
                     </li>
                   </ul>
                 </li>
