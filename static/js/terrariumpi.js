@@ -2105,6 +2105,8 @@ function add_webcam() {
     }
   });
   data['id'] = Math.floor(Date.now() / 1000);
+  // Dirty hack...
+  data.resolution = {'width' : data.resolution_width, 'height' : data.resolution_height};
 
   // Add new row
   add_webcam_setting_row(data);
