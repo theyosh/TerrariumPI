@@ -17,9 +17,9 @@
             <div class="menu_section">
               <h3>{{_('General')}}</h3>
               <ul class="nav side-menu">
-                <li class="active">
+                <li>
                   <a><i class="fa fa-home"></i> {{_('Home')}} <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display:block">
+                  <ul class="nav child_menu">
                     <li>
                       <a href="dashboard.html">{{_('Dashboard')}}</a>
                     </li>

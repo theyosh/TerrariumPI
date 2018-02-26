@@ -2466,6 +2466,7 @@ $(document).ready(function() {
   });
 
   init_sidebar();
+  $('ul.nav.side-menu li:first a:first').trigger('click');
 
   $('#system_time span').text(moment().format('LLLL'));
   websocket_init(false);
