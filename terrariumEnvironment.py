@@ -77,7 +77,7 @@ class terrariumEnvironment():
     self.sprayer['off_duration']   = 59.0       if 'off_duration' not in config_data['sprayer'] else float(config_data['sprayer']['off_duration'])
     self.sprayer['night_enabled']  = False      if 'night_enabled' not in config_data['sprayer'] else terrariumUtils.is_true(config_data['sprayer']['night_enabled'])
     self.sprayer['spray_duration'] = 0.0        if 'spray_duration' not in config_data['sprayer'] else float(config_data['sprayer']['spray_duration'])
-    self.sprayer['spray_timeout']  = 0.0        if 'spray_timeout' not in config_data['sprayer'] else float(config_data['sprayer']['spray_timeout'])
+    self.sprayer['spray_timeout']  = 120.0      if 'spray_timeout' not in config_data['sprayer'] else float(config_data['sprayer']['spray_timeout'])
     self.sprayer['power_switches'] = []         if ('power_switches' not in config_data['sprayer'] or config_data['sprayer']['power_switches'] in ['',None]) else config_data['sprayer']['power_switches']
     self.sprayer['sensors']        = []         if ('sensors' not in config_data['sprayer'] or config_data['sprayer']['sensors'] in ['',None]) else config_data['sprayer']['sensors']
 
@@ -122,6 +122,7 @@ class terrariumEnvironment():
     self.heater['on_duration']    = 60.0       if 'on_duration' not in config_data['heater'] else float(config_data['heater']['on_duration'])
     self.heater['off_duration']   = 60.0       if 'off_duration' not in config_data['heater'] else float(config_data['heater']['off_duration'])
     self.heater['day_enabled']    = False      if 'day_enabled' not in config_data['heater'] else terrariumUtils.is_true(config_data['heater']['day_enabled'])
+    self.heater['settle_timeout'] = 120.0      if 'settle_timeout' not in config_data['heater'] else float(config_data['heater']['settle_timeout'])
     self.heater['power_switches'] = []         if ('power_switches' not in config_data['heater'] or config_data['heater']['power_switches'] in ['',None]) else config_data['heater']['power_switches']
     self.heater['sensors']        = []         if ('sensors' not in config_data['heater'] or config_data['heater']['sensors'] in ['',None]) else config_data['heater']['sensors']
 
@@ -131,6 +132,7 @@ class terrariumEnvironment():
       self.heater['sensors'] = self.heater['sensors'].split(',')
 
     self.heater['enabled']        =  'disabled' != self.heater['mode']
+    self.heater['lastaction']     = int(time.time())
 
 
     if len(config_data['cooler'].keys()) == 0 or not reloading:
@@ -176,12 +178,7 @@ class terrariumEnvironment():
 
   def __update_timing(self,part = None):
     if part is None or part == 'light':
-      on_duration = self.light['on_duration']
-      off_duration = self.light['off_duration']
-
       if self.light['mode'] == 'weather':
-        on_duration = off_duration = None
-
         # Upate times based on weather
         self.light['on']  = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['rise'])
         self.light['off'] = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['set'])
@@ -207,7 +204,8 @@ class terrariumEnvironment():
         self.light['off'] = self.light['off'].strftime('%H:%M')
 
       self.light['time_table']   = terrariumUtils.calculate_time_table(self.light['on'],self.light['off'],
-                                                                       on_duration,off_duration)
+                                                                       None if self.light['mode'] == 'weather' else self.light['on_duration'],
+                                                                       None if self.light['mode'] == 'weather' else self.light['off_duration'])
 
       self.light['duration'] = terrariumUtils.duration(self.light['time_table'])
 
@@ -230,7 +228,8 @@ class terrariumEnvironment():
 
 
       self.heater['time_table']  = terrariumUtils.calculate_time_table(self.heater['on'],self.heater['off'],
-                                                                       self.heater['on_duration'],self.heater['off_duration'])
+                                                                       None if self.heater['mode'] == 'weather' else self.heater['on_duration'],
+                                                                       None if self.heater['mode'] == 'weather' else self.heater['off_duration'])
 
       self.heater['duration'] = terrariumUtils.duration(self.heater['time_table'])
 
@@ -240,7 +239,8 @@ class terrariumEnvironment():
         self.cooler['off'] = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['set']).strftime('%H:%M')
 
       self.cooler['time_table']  = terrariumUtils.calculate_time_table(self.cooler['on'],self.cooler['off'],
-                                                                       self.cooler['on_duration'],self.cooler['off_duration'])
+                                                                       None if self.cooler['mode'] == 'weather' else self.cooler['on_duration'],
+                                                                       None if self.cooler['mode'] == 'weather' else self.cooler['off_duration'])
 
       self.cooler['duration'] = terrariumUtils.duration(self.cooler['time_table'])
 
@@ -427,13 +427,13 @@ class terrariumEnvironment():
 
         if toggle_on is True:
           if not self.is_heater_on():
-            logger.info('Environment is turning on the heater based on %s mode.%s' % (self.heater['mode'],
+            logger.info('Environment is turning on the heater based on %s mode. %s' % (self.heater['mode'],
                                                                                       extra_logging_message))
           self.heater_on()
 
         elif toggle_on is False:
           if self.is_heater_on():
-            logger.info('Environment is turning off the heater based on %s mode.%s' % (self.heater['mode'],
+            logger.info('Environment is turning off the heater based on %s mode. %s' % (self.heater['mode'],
                                                                                        extra_logging_message))
           self.heater_off()
 
@@ -536,9 +536,15 @@ class terrariumEnvironment():
         is_on = is_on and self.power_switches[switch_id].is_on()
       else:
         if state:
-          self.power_switches[switch_id].on()
+          if part in ['heater','cooler'] and self.power_switches[switch_id].get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+            self.power_switches[switch_id].go_up()
+          else:
+            self.power_switches[switch_id].on()
         else:
-          self.power_switches[switch_id].off()
+          if part in ['heater','cooler'] and self.power_switches[switch_id].get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+            self.power_switches[switch_id].go_down()
+          else:
+            self.power_switches[switch_id].off()
 
         is_on = state
 
@@ -852,7 +858,9 @@ class terrariumEnvironment():
     return self.__get_state('heater',cleanup_fields)
 
   def heater_on(self):
-    self.__switch_on('heater')
+    if int(time.time()) - self.heater['lastaction'] > self.heater['settle_timeout']:
+      self.__switch_on('heater')
+      self.heater['lastaction'] = int(time.time())
 
   def heater_off(self):
     self.__switch_off('heater')

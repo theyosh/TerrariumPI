@@ -82,6 +82,7 @@ class terrariumSwitch():
     if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
       # Init system default dimmer settings
       self.set_dimmer_duration(10)
+      self.set_dimmer_step(10)
       self.set_dimmer_on_duration(5)
       self.set_dimmer_on_percentage(100)
       self.set_dimmer_off_duration(5)
@@ -316,10 +317,11 @@ class terrariumSwitch():
             }
 
     if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
-      data.update({ 'dimmer_duration': self.get_dimmer_duration(),
-                    'dimmer_on_duration': self.get_dimmer_on_duration(),
+      data.update({ 'dimmer_duration'      : self.get_dimmer_duration(),
+                    'dimmer_step'          : self.get_dimmer_step(),
+                    'dimmer_on_duration'   : self.get_dimmer_on_duration(),
                     'dimmer_on_percentage' : self.get_dimmer_on_percentage(),
-                    'dimmer_off_duration': self.get_dimmer_off_duration(),
+                    'dimmer_off_duration'  : self.get_dimmer_off_duration(),
                     'dimmer_off_percentage': self.get_dimmer_off_percentage()
                   })
 
@@ -482,12 +484,39 @@ class terrariumSwitch():
       self.set_state(terrariumSwitch.OFF)
       return self.is_off()
 
+  def go_down(self):
+    new_value = self.get_state() - self.get_dimmer_step()
+    if new_value > 100:
+      new_value = 100
+
+    if new_value < 0:
+      new_value = 0
+
+    self.set_state(new_value)
+
+  def go_up(self):
+    new_value = self.get_state() + self.get_dimmer_step()
+    if new_value > 100:
+      new_value = 100
+
+    if new_value < 0:
+      new_value = 0
+
+    self.set_state(new_value)
+
   def is_pwm_dimmer(self):
     return self.get_hardware_type() == 'pwm-dimmer'
 
   def dim(self,value):
     if 0 <= value <= 100:
       self.set_state(100 - value)
+
+  def set_dimmer_step(self,value):
+    value = float(value) if terrariumUtils.is_float(value) else 100.0
+    self.__dimmer_step = value if value >= 0.0 else 100.0
+
+  def get_dimmer_step(self):
+    return (self.__dimmer_step if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] else 100.0)
 
   def set_dimmer_duration(self,value):
     value = float(value) if terrariumUtils.is_float(value) else 0.0

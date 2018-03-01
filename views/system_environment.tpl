@@ -330,6 +330,12 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_settle_timeout">{{_('Heater settle time')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="heater_settle_timeout" required="required" type="text" placeholder="{{_('Heater settle time')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_settle_timeout')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_power_switches">{{_('Power switches')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_power_switches')}}">
