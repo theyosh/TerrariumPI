@@ -235,6 +235,12 @@
                         </td>
                         <td class="duration">...</td>
                       </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Day/night difference')}}</p>
+                        </td>
+                        <td class="night_difference">...</td>
+                      </tr>
                     </table>
                   </div>
                   <div class="row environment_cooler">

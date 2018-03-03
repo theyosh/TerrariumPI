@@ -287,7 +287,7 @@ class terrariumConfig:
     for environment_part in data:
       for part in data[environment_part]:
         # Do not save the following settings
-        if part in ['enabled','time_table','state','amount','current','temperature','humidity','distance','alarm','type']:
+        if part in ['enabled','time_table','state','amount','current','temperature','humidity','distance','alarm','type','night_modus']:
           continue
 
         if data[environment_part][part] is None:
