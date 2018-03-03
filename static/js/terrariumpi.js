@@ -1532,6 +1532,10 @@ function update_dashboard_environment(name, data) {
       case 'alarm_max':
         systempart.find('.' + key).text(formatNumber(value,3) + ' ' + indicator).parent().toggle(data.mode === 'sensor');
         break;
+
+      case 'night_difference':
+        systempart.find('.' + key).text(formatNumber(value,3) + ' ' + indicator).parent().toggle(data.night_difference != 0);
+        break;
     }
   });
   systempart.find('table').toggle(data.enabled);
