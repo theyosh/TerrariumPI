@@ -1528,9 +1528,12 @@ function update_dashboard_environment(name, data) {
         break;
 
       case 'current':
+        systempart.find('.' + key).text(formatNumber(value,3) + ' ' + indicator).parent().toggle(data.mode === 'sensor' || data.sensors.length > 0);
+        break;
+
       case 'alarm_min':
       case 'alarm_max':
-        systempart.find('.' + key).text(formatNumber(value,3) + ' ' + indicator).parent().toggle(data.mode === 'sensor');
+        systempart.find('.' + key).text(formatNumber(data.alarm_min,1) + '-' + formatNumber(data.alarm_max,1) + ' ' + indicator).parent().toggle(data.mode === 'sensor' || data.sensors.length > 0);
         break;
 
       case 'night_difference':
