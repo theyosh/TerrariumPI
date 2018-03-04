@@ -1,13 +1,13 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2016-2018 TheYOSH
-# Joshua (TheYOSH) Rubingh, <theyosh@theyosh.nl>, 2016-2018.
+# Joshua (TheYOSH) Rubingh, <terrariumpi@theyosh.nl>, 2016-2018.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2018-03-04 12:34+CET\n"
-"PO-Revision-Date: 2018-03-04 12:35+0100\n"
-"Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
+"Project-Id-Version: TerrariumPI 3.4.0\n"
+"POT-Creation-Date: 2018-03-04 13:38+CET\n"
+"PO-Revision-Date: 2018-03-04 13:38+0100\n"
+"Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"

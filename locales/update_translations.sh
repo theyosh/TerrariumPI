@@ -89,21 +89,27 @@ echo "msgid \"System settings\"" >> terrariumpi.pot
 echo "msgstr \"\"" >> terrariumpi.pot
 echo "" >> terrariumpi.pot
 
-sed -e 's@YEAR ORGANIZATION@2016-2018 TheYOSH@g' \
-    -e 's@FIRST AUTHOR <EMAIL\@ADDRESS>, YEAR@Joshua (TheYOSH) Rubingh, <theyosh\@theyosh.nl>, 2016-2018@g' \
+VERSION=`grep "version = " ../defaults.cfg | grep -o -E "[0-9\.]+"`
+YEAR=`date "+%Y"`
+NOW=`date "+%Y-%m-%d %H:%M%z"`
+
+sed -e "s@YEAR ORGANIZATION@2016-${YEAR} TheYOSH@g" \
+    -e "s@FIRST AUTHOR <EMAIL\@ADDRESS>, YEAR@Joshua (TheYOSH) Rubingh, <terrariumpi\@theyosh.nl>, 2016-${YEAR}@g" \
+    -e "s@PACKAGE VERSION@TerrariumPI ${VERSION}@g" \
+    -e 's@CHARSET@UTF-8@g' \
+    -e 's@ENCODING@8bit@g' \
     -i terrariumpi.pot
 
 echo "Creating en_US language"
-NOW=`date "+%Y-%m-%d %H:%M%z"`
 grep -v 'msgstr ""' terrariumpi.pot | sed 's@msgid "\([^"]*\)"@msgid "\1"\nmsgstr "\1"@' > en_US/LC_MESSAGES/terrariumpi.po
 sed -e "s@YEAR-MO-DA HO:MI+ZONE@${NOW}@g" \
     -e 's@FIRST AUTHOR@Joshua (TheYOSH) Rubingh@g' \
     -e 's@ORGANIZATION@TheYOSH@g' \
     -e 's@FULL NAME@Joshua (TheYOSH) Rubingh@g' \
-    -e 's@EMAIL\@ADDRESS@theyosh\@theyosh.nl@g' \
+    -e 's@EMAIL\@ADDRESS@terrariumpi\@theyosh.nl@g' \
     -e 's@CHARSET@UTF-8@g' \
     -e 's@ENCODING@8bit@g' \
-    -e 's@PACKAGE VERSION@TerrariumPI 0.1@g' \
+    -e "s@PACKAGE VERSION@TerrariumPI ${VERSION}@g" \
     -e 's@"Language-Team: LANGUAGE <LL\@li.org>\\n"@"Language-Team: \\n"\n"Language: en_US\\n"@g' \
     -i en_US/LC_MESSAGES/terrariumpi.po
 msgfmt en_US/LC_MESSAGES/terrariumpi.po -o en_US/LC_MESSAGES/terrariumpi.mo
