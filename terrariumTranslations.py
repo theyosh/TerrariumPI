@@ -46,6 +46,7 @@ class terrariumTranslations():
     self.translations['switch_field_timer_on_duration'] = _('Holds the period in minutes that the power switch is on withing the total timer window.')
     self.translations['switch_field_timer_off_duration'] = _('Holds the period in minutes that the power switch is off withing the total timer window.')
     self.translations['switch_field_dimmer_duration'] = _('Holds the amount of seconds for the duration in which the dimmer changes to the new value.')
+    self.translations['switch_field_dimmer_step'] = _('Holds the amount in percentage to change the dimmer by the heater environment.')
     self.translations['switch_field_dimmer_on_duration'] = _('Holds the amount of seconds for the duration in which it increases the power.')
     self.translations['switch_field_dimmer_on_percentage'] = _('Holds the amount in percentage to go to when switched on.')
     self.translations['switch_field_dimmer_off_duration'] = _('Holds the amount of seconds for the duration in which it decresses the power.')
@@ -113,35 +114,24 @@ class terrariumTranslations():
     self.translations['environment_field_watertank_distance_sensors'] = _('Select the distance sensors that are used to control the level. When selecting multiple sensors, the average is calculated to determine the final distance.')
 
 
-
     self.translations['environment_field_heater_enable_during_day'] = _('Enable heating when the lights are on. This can cause overheating when the lights are on.')
     self.translations['environment_field_heater_mode'] = _('Select the operating mode. Use \'%s\' mode to select the time period in which the heating is running. Select \'%s\' mode to use the sun rise and sun set as on and off times. When the sun rises the heating system will stop. Use \'%s\' mode to have the heating running when the lights are off.') % (_('Timer'),_('Weather'),_('Sensor'))
     self.translations['environment_field_heater_on'] = _('Enter the time when the heater should be put on. Only available when running in \'%s\' mode.') % _('Timer')
     self.translations['environment_field_heater_off'] = _('Enter the time when the heater should be put off. Only available when running in \'%s\' mode.') % _('Timer')
     self.translations['environment_field_heater_on_duration'] = _('Holds the period in minutes that the heater is on withing the total timer window.')
     self.translations['environment_field_heater_off_duration'] = _('Holds the period in minutes that the heater is off withing the total timer window')
+    self.translations['environment_field_heater_settle_timeout'] = _('Holds the period in seconds in which the heating will wait to settle the new temperature before changing again.')
+    self.translations['environment_field_heater_night_difference'] = _('Holds the dirrence in degrees that the night temperature should change. Use positive and negative values.')
     self.translations['environment_field_heater_power_switches'] = _('Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the heater. Select all needed switches below.')
     self.translations['environment_field_heater_temperature_sensors'] = _('Select the temperature sensors that are used to control the temperature. When selecting multiple sensors, the average is calculated to determine the final temperature.')
-
-
-
-
-
-
-
-
 
 
     self.translations['environment_field_cooler_enable_during_night'] = _('Enable cooling when the lights are off. This can cause a very low temperature when the lights are off.')
     self.translations['environment_field_cooler_mode'] = _('Select the operating mode. Use \'%s\' mode to select the time period in which the heating is running. Select \'%s\' mode to use the sun rise and sun set as on and off times. When the sun rises the heating system will stop. Use \'%s\' mode to have the heating running when the lights are off.') % (_('Timer'),_('Weather'),_('Sensor'))
     self.translations['environment_field_cooler_on'] = _('Enter the time when the cooler should be put on. Only available when running in \'%s\' mode.') % _('Timer')
     self.translations['environment_field_cooler_off'] = _('Enter the time when the cooler should be put off. Only available when running in \'%s\' mode.') % _('Timer')
-
-
     self.translations['environment_field_cooler_on_duration'] = _('Holds the period in minutes that the cooler is on withing the total timer window.')
     self.translations['environment_field_cooler_off_duration'] = _('Holds the period in minutes that the cooler is off withing the total timer window')
-
-
     self.translations['environment_field_cooler_power_switches'] = _('Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the cooler. Select all needed switches below.')
     self.translations['environment_field_cooler_temperature_sensors'] = _('Select the temperature sensors that are used to control the temperature. When selecting multiple sensors, the average is calculated to determine the final temperature.')
     # End environment
