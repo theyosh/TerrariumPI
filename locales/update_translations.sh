@@ -30,6 +30,16 @@ echo "msgstr \"\"" >> terrariumpi.pot
 echo "" >> terrariumpi.pot
 
 echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"Sensor distance\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
+echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"Sensor ph\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
+echo "#: Missing text string" >> terrariumpi.pot
 echo "msgid \"Sensor settings\"" >> terrariumpi.pot
 echo "msgstr \"\"" >> terrariumpi.pot
 echo "" >> terrariumpi.pot
@@ -65,6 +75,11 @@ echo "msgstr \"\"" >> terrariumpi.pot
 echo "" >> terrariumpi.pot
 
 echo "#: Missing text string" >> terrariumpi.pot
+echo "msgid \"System log\"" >> terrariumpi.pot
+echo "msgstr \"\"" >> terrariumpi.pot
+echo "" >> terrariumpi.pot
+
+echo "#: Missing text string" >> terrariumpi.pot
 echo "msgid \"System environment\"" >> terrariumpi.pot
 echo "msgstr \"\"" >> terrariumpi.pot
 echo "" >> terrariumpi.pot
@@ -74,8 +89,8 @@ echo "msgid \"System settings\"" >> terrariumpi.pot
 echo "msgstr \"\"" >> terrariumpi.pot
 echo "" >> terrariumpi.pot
 
-sed -e 's@YEAR ORGANIZATION@2016-2017 TheYOSH@g' \
-    -e 's@FIRST AUTHOR <EMAIL\@ADDRESS>, YEAR@Joshua (TheYOSH) Rubingh, <theyosh\@theyosh.nl>, 2016-2017@g' \
+sed -e 's@YEAR ORGANIZATION@2016-2018 TheYOSH@g' \
+    -e 's@FIRST AUTHOR <EMAIL\@ADDRESS>, YEAR@Joshua (TheYOSH) Rubingh, <theyosh\@theyosh.nl>, 2016-2018@g' \
     -i terrariumpi.pot
 
 echo "Creating en_US language"
