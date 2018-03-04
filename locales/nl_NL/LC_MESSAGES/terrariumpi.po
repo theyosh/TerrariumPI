@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: TerrariumPI 0.1\n"
-"POT-Creation-Date: 2018-03-04 12:35+0100\n"
-"PO-Revision-Date: 2018-03-04 12:42+0100\n"
+"Project-Id-Version: TerrariumPI 3.4.0\n"
+"POT-Creation-Date: 2018-03-04 13:36+0100\n"
+"PO-Revision-Date: 2018-03-04 13:36+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: terrariumTranslations.py:21
 msgid "Holds the external source URL. Supported sources are: %s."
