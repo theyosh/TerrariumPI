@@ -6,17 +6,21 @@ Dependencies:
 Python
 ntfy	-	https://pypi.python.org/pypi/ntfy
 pygtail	-	https://pypi.python.org/pypi/pygtail
+parse	-	https://pypi.python.org/pypi/parse
 
 Function:
-The script opens the logfile of TerrariumPI with pygtail. Pygtail allows the script to start behind the last read row of the log.
-Ntfy is used for sending notifications in different ways.
+The script opens the logfile of TerrariumPI with pygtail. Pygtail allows the script to start 
+behind the last read row of the log.
+With parse, the different lines will be parsed. Ntfy is used for sending notifications.
 
-The script itself parses the read lines and searches for the log-Levels and the modules. If the script finds a logfile-line containing a module in combination with a log-level, you'll get one or more notifications, depending on your ntfy-config.
+The script itself parses the read lines and searches for the log-Levels and the modules.
+If the script finds a logfile-line containing a module in combination with a log-level, 
+you'll get one or more notifications, depending on your ntfy-config.
 
 Configuration:
 To configure ntfy, use the described website.
 It's possible to use the default-config-file of ntfy, or you creat an additional config-file. In this case, you can add the path to it into the logcheck.conf. 
-The logcheck.conf also holds the path to the logfile and the modules/log-Levels, written into the logfile.
+The logcheck.conf also holds the path to the logfile of TerrariumPI and the modules/log-Levels, written into the logfile.
 You just have to uncomment the searched modules and log-Levels.
 
 To automate the script, just add a cronjob.

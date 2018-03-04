@@ -2,9 +2,10 @@
 #!/usr/bin/env python3
 #kahuwi14
 #Version: 0.3
-#Dependencies: ntfy, pygtail
+#Dependencies: ntfy, pygtail, parse
 #https://pypi.python.org/pypi/ntfy
 #https://pypi.python.org/pypi/pygtail
+#https://pypi.python.org/pypi/parse
 
 
 import ntfy
