@@ -811,8 +811,8 @@ class terrariumEngine():
       cpu_temp = float(temperature.read()) / 1000.0
 
     data = {'memory' : {'total' : memory.total,
-                        'used' : memory.used,
-                        'free' : memory.free},
+                        'used' : memory.total - memory.available,
+                        'free' : memory.available},
             'disk' : {'total' : disk.total,
                         'used' : disk.used,
                         'free' : disk.free},
