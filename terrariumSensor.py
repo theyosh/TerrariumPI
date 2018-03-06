@@ -7,6 +7,12 @@ import time
 import ow
 import os.path
 import Adafruit_DHT as dht
+
+import pigpio
+# https://www.rototron.info/dht22-tutorial-for-raspberry-pi/
+# http://abyz.me.uk/rpi/pigpio/examples.html#Python%20code
+import DHT22
+
 import glob
 import re
 import requests
@@ -50,7 +56,7 @@ class terrariumSensor:
       self.set_address(sensor)
     elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
       # Adafruit_DHT
-      self.sensor = dht
+      self.sensor = pigpio.pi()
       # Dirty hack to set sensor address
       self.set_address(sensor)
 
@@ -200,9 +206,15 @@ class terrariumSensor:
               # Found data
               current = float(w1data.group('value')) / 1000
           elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
-            humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()],
-                                                           float(terrariumUtils.to_BCM_port_number(self.sensor_address)),
-                                                           5)
+            sensor = DHT22.sensor(self.sensor, terrariumUtils.to_BCM_port_number(self.sensor_address))
+            sensor.trigger()
+            time.sleep(.05)
+            temperature = sensor.temperature()
+            sensor.cancel()
+
+            #humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()],
+            #                                               float(terrariumUtils.to_BCM_port_number(self.sensor_address)),
+            #                                               5)
             if temperature is not None:
               current = float(temperature)
 
@@ -215,9 +227,15 @@ class terrariumSensor:
             pass
 
           elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
-            humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()],
-                                                           float(terrariumUtils.to_BCM_port_number(self.sensor_address)),
-                                                           5)
+            sensor = DHT22.sensor(self.sensor, terrariumUtils.to_BCM_port_number(self.sensor_address))
+            sensor.trigger()
+            time.sleep(.05)
+            humidity = sensor.humidity()
+            sensor.cancel()
+
+            #humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()],
+            #                                               float(terrariumUtils.to_BCM_port_number(self.sensor_address)),
+            #                                               5)
             if humidity is not None:
               current = float(humidity)
 
