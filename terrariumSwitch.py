@@ -23,8 +23,8 @@ from terrariumUtils import terrariumUtils
 sys.path.insert(0, './energenie-connect0r')
 import energenieconnector
 
-from gevent import monkey, sleep
-monkey.patch_all()
+#from gevent import monkey, sleep
+#monkey.patch_all()
 
 class terrariumSwitch():
   VALID_HARDWARE_TYPES = ['ftdi','gpio','gpio-inverse','pwm-dimmer','remote','remote-dimmer','eg-pm-usb','eg-pm-lan']
