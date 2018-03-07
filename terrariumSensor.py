@@ -6,7 +6,7 @@ import datetime
 import time
 import ow
 import os.path
-import Adafruit_DHT as dht
+#import Adafruit_DHT as dht
 
 import pigpio
 # https://www.rototron.info/dht22-tutorial-for-raspberry-pi/
@@ -25,10 +25,8 @@ from terrariumUtils import terrariumUtils
 class terrariumSensor:
   UPDATE_TIMEOUT = 30
   VALID_SENSOR_TYPES   = ['temperature','humidity','distance','ph']
-  VALID_DHT_SENSORS    = { 'dht11' : dht.DHT11,
-                           'dht22' : dht.DHT22,
-                           'am2302': dht.AM2302 }
-  VALID_HARDWARE_TYPES = ['owfs','w1','remote','hc-sr04','sku-sen0161'] + VALID_DHT_SENSORS.keys()
+  VALID_DHT_SENSORS    = ['dht11','dht22','am2302']
+  VALID_HARDWARE_TYPES = ['owfs','w1','remote','hc-sr04','sku-sen0161'] + VALID_DHT_SENSORS
 
   W1_BASE_PATH = '/sys/bus/w1/devices/'
   W1_TEMP_REGEX = re.compile(r'(?P<type>t|f)=(?P<value>[0-9]+)',re.IGNORECASE)
@@ -54,7 +52,7 @@ class terrariumSensor:
     elif 'remote' == self.get_hardware_type():
       # Dirty hack to set sensor address
       self.set_address(sensor)
-    elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
+    elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS:
       # Adafruit_DHT
       self.sensor = pigpio.pi()
       # Dirty hack to set sensor address
@@ -205,7 +203,7 @@ class terrariumSensor:
             if w1data:
               # Found data
               current = float(w1data.group('value')) / 1000
-          elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
+          elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS:
             sensor = DHT22.sensor(self.sensor, terrariumUtils.to_BCM_port_number(self.sensor_address))
             sensor.trigger()
             time.sleep(.05)
@@ -226,7 +224,7 @@ class terrariumSensor:
             # Not tested / No hardware to test with
             pass
 
-          elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
+          elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS:
             sensor = DHT22.sensor(self.sensor, terrariumUtils.to_BCM_port_number(self.sensor_address))
             sensor.trigger()
             time.sleep(.05)
@@ -266,6 +264,12 @@ class terrariumSensor:
         logger.exception('Error updating %s %s sensor \'%s\' with error:' % (self.get_hardware_type(),
                                                                               self.get_type(),
                                                                               self.get_name()))
+
+  def stop(self):
+    if self.get_hardware_type() in ['hc-sr04']:
+      GPIO.cleanup(self.get_address())
+
+    logger.info('Shutdown sensor %s' % self.get_name())
 
   def get_data(self):
     data = {'id' : self.get_id(),

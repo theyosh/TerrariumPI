@@ -122,6 +122,7 @@ class terrariumEngine():
                                                self.get_audio_playing)
 
     # Start system update loop
+    self.__running = True
     thread.start_new_thread(self.__engine_loop, ())
     thread.start_new_thread(self.__log_tail, ())
     logger.info('TerrariumPI engine is running')
@@ -380,7 +381,7 @@ class terrariumEngine():
 
   def __engine_loop(self):
     logger.info('Start terrariumPI engine')
-    while True:
+    while self.__running:
       starttime = time.time()
 
       # Update weather
@@ -451,6 +452,18 @@ class terrariumEngine():
       return self.__units[unittype]
 
     return None
+
+  def stop(self):
+    self.environment.stop()
+    for sensorid in self.sensors:
+      self.sensors[sensorid].stop()
+
+    for power_switch_id in self.power_switches:
+      self.power_switches[power_switch_id].stop()
+
+    self.collector.stop()
+    self.__running = False
+    logger.info('Shutdown engine')
   # End private/internal functions
 
   # Weather part
