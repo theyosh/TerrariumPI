@@ -116,7 +116,7 @@ class terrariumSwitch():
   def __load_pwm_device(self):
     self.__dimmer_running = False
     # localhost will not work always due to IPv6. Explicit 127.0.0.1 host
-    self.__pigpio = pigpio.pi('localhost',8888)
+    self.__pigpio = pigpio.pi()
     if not self.__pigpio.connected:
       logger.error('PiGPIOd process is not running')
       self.__pigpio = False
@@ -188,6 +188,14 @@ class terrariumSwitch():
                                                                   self.get_timer_on_duration(),
                                                                   self.get_timer_off_duration())
     logger.info('Timer time table loaded for switch \'%s\' with %s entries.', self.get_name(),len(self.__timer_time_table))
+
+  def stop(self):
+    if self.get_hardware_type() in ['gpio','gpio-inverse']:
+      GPIO.cleanup(self.get_address())
+    elif self.get_hardware_type() == 'eg-pm-lan':
+      self.device.logout()
+
+    logger.info('Shutdown power switch %s' % self.get_name())
 
   def set_state(self, state, force = False):
     if self.get_state() is not state or force:

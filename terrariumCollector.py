@@ -300,6 +300,10 @@ class terrariumCollector():
 
       history['doors'][doorid]['totals'] = totals
 
+  def stop(self):
+    self.db.close()
+    logger.info('Shutdown data collector')
+
   def log_switch_data(self,data):
     if data['hardwaretype'] not in ['pwm-dimmer','remote-dimmer']:
       # Store normal switches with value 100 indicating full power (aka no dimming)

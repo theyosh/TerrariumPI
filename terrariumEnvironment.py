@@ -28,6 +28,8 @@ class terrariumEnvironment():
     self.weather = weather
 
     self.load_environment()
+
+    self.__running = True
     thread.start_new_thread(self.__engine_loop, ())
 
   def load_environment(self, data = None):
@@ -257,7 +259,7 @@ class terrariumEnvironment():
 
   def __engine_loop(self):
     logger.info('Starting engine')
-    while True:
+    while self.__running:
       logger.debug('Environment starts new checks')
       starttime = time.time()
 
@@ -635,6 +637,10 @@ class terrariumEnvironment():
   # End private functions
 
   # System functions
+  def stop(self):
+    self.__running = False
+    logger.info('Shutdown environment')
+
   def set_power_switches(self,data):
     self.power_switches = data
     self.__check_available_power_switches()
