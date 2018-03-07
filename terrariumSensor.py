@@ -53,8 +53,14 @@ class terrariumSensor:
       # Dirty hack to set sensor address
       self.set_address(sensor)
     elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS:
-      # Adafruit_DHT
+      # PiGPIOd
       self.sensor = pigpio.pi()
+      if not self.sensor.connected:
+        self.sensor = pigpio.pi('127.0.0.1')
+        if not self.sensor.connected:
+          logger.error('PiGPIOd process is not running')
+          self.sensor = False
+
       # Dirty hack to set sensor address
       self.set_address(sensor)
 
@@ -267,7 +273,9 @@ class terrariumSensor:
 
   def stop(self):
     if self.get_hardware_type() in ['hc-sr04']:
-      GPIO.cleanup(self.get_address())
+      address = self.get_address().split(',')
+      GPIO.cleanup(address[0])
+      GPIO.cleanup(address[1])
 
     logger.info('Shutdown sensor %s' % self.get_name())
 

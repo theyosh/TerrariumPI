@@ -118,8 +118,10 @@ class terrariumSwitch():
     # localhost will not work always due to IPv6. Explicit 127.0.0.1 host
     self.__pigpio = pigpio.pi()
     if not self.__pigpio.connected:
-      logger.error('PiGPIOd process is not running')
-      self.__pigpio = False
+      self.__pigpio = pigpio.pi('127.0.0.1')
+      if not self.__pigpio.connected:
+        logger.error('PiGPIOd process is not running')
+        self.__pigpio = False
 
   def __dim_switch(self,from_value,to_value,duration):
     # When the dimmer is working, ignore new state changes.
