@@ -54,12 +54,15 @@ class terrariumSensor:
       self.set_address(sensor)
     elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS:
       # PiGPIOd
-      self.sensor = pigpio.pi('127.0.0.1')
+      pigpio.exceptions = False
+      self.sensor = pigpio.pi('localhost')
       if not self.sensor.connected:
         self.sensor = pigpio.pi()
         if not self.sensor.connected:
           logger.error('PiGPIOd process is not running')
           self.sensor = False
+
+      pigpio.exceptions = True
 
       # Dirty hack to set sensor address
       self.set_address(sensor)
