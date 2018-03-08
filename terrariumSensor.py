@@ -277,8 +277,8 @@ class terrariumSensor:
   def stop(self):
     if self.get_hardware_type() in ['hc-sr04']:
       address = self.get_address().split(',')
-      GPIO.cleanup(address[0])
-      GPIO.cleanup(address[1])
+      GPIO.cleanup(int(address[0]))
+      GPIO.cleanup(int(address[1]))
 
     logger.info('Shutdown sensor %s' % self.get_name())
 
