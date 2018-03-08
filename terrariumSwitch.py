@@ -196,7 +196,7 @@ class terrariumSwitch():
 
   def stop(self):
     if self.get_hardware_type() in ['gpio','gpio-inverse']:
-      GPIO.cleanup(self.get_address())
+      GPIO.cleanup(int(self.get_address()))
     elif self.get_hardware_type() == 'eg-pm-lan':
       self.device.logout()
 
