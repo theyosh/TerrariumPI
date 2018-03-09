@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2018-02-23 20:00+CET\n"
-"PO-Revision-Date: 2018-02-25 23:37+0100\n"
+"PO-Revision-Date: 2018-02-26 22:48+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_AT\n"
@@ -34,21 +34,16 @@ msgid "Holds the sensor hardware type. Supported hardware types are: %s."
 msgstr "Sensor Hardware-Typen. Unterstützte Sensoren sind: %s."
 
 #: terrariumTranslations.py:27
-#, fuzzy
-#| msgid ""
-#| "Holds the sensor address. Depending on hardware type, it is either a read "
-#| "only hex number, a GPIO pin or a full HTTP(S) adress. Full url "
-#| "specification can be found on the %s wiki page. For GPIO use "
-#| "<strong>physical</strong> GPIO pin numbering."
 msgid ""
 "Holds the sensor address. Depending on hardware type, it is either a read "
 "only hex number, a GPIO pin, a GPIO pin combination of %s or a full HTTP(S) "
 "adress. Full url specification can be found on the %s wiki page. For GPIO "
 "use <strong>physical</strong> GPIO pin numbering."
 msgstr ""
-"Sensoradresse. Je nach Hardwaretyp ist dies entweder eine Hexadezimalzahl, "
-"ein GPIO-Pin oder eine vollständige HTTP (S) -Adresse. Die vollständige URL-"
-"Spezifikation finden Sie auf der %s Wiki-Seite. Verwenden Sie für GPIO die "
+"Sensoradresse. Je nach Hardwaretyp handelt es sich entweder um eine "
+"schreibgeschützte Hex-Nummer, einen GPIO-Pin, eine GPIO-Pin-Kombination von "
+"%s oder eine vollständige HTTP(S) -Adresse. Die vollständige URL-"
+"Spezifikation finden Sie auf der Wiki-Seite %s. Verwenden Sie für GPIO die "
 "<strong>physische</strong> GPIO-Pin-Nummerierung."
 
 #: terrariumTranslations.py:27
@@ -380,10 +375,8 @@ msgstr ""
 "verdampfen kann."
 
 #: terrariumTranslations.py:94
-#, fuzzy
-#| msgid "Select an option"
 msgid "Select the operating mode."
-msgstr "Wählen einer Option"
+msgstr "Wählen Sie den Betriebsmodus."
 
 #: terrariumTranslations.py:96
 msgid ""
@@ -437,23 +430,17 @@ msgstr ""
 "berechnet, um die endgültige Feuchtigkeit zu bestimmen."
 
 #: terrariumTranslations.py:104
-#, fuzzy
-#| msgid ""
-#| "Select the operating mode. Use '%s' mode to select the time period in "
-#| "which the heating is running. Select '%s' mode to use the sun rise and "
-#| "sun set as on and off times. When the sun rises the heating system will "
-#| "stop. Use '%s' mode to have the heating running when the lights are off."
 msgid ""
 "Select the operating mode. Use '%s' mode to select the time period in which "
 "the water pump is running. Select '%s' mode to use the sun rise and sun set "
 "as on and off times. Use '%s' mode to have the water pump running when the "
 "water level is to low."
 msgstr ""
-"Wählen Sie die Betriebsart. Verwenden Sie den '%s' Modus, um den Zeitraum "
-"auszuwählen, in dem das Heizungssystem läuft. Wählen Sie '%s' Modus, um den "
-"Sonnenaufgang als Ein bzw. Aus Zeiten zu verwenden. Wenn der Sonnenaufgang "
-"ist, hört das Heizungssystem auf. Verwenden Sie '%s' Modus, um die Heizung "
-"laufen zu lassen, wenn die Lichter ausgeschaltet sind."
+"Wählen Sie den Betriebsmodus. Verwenden Sie den \"%s\" -Modus, um den "
+"Zeitraum auszuwählen, in dem die Wasserpumpe läuft. Wählen Sie den Modus \"%s"
+"\", um den Sonnen auf- und -Untergang als Ein- und Ausschaltzeiten zu "
+"verwenden. Verwenden Sie den \"%s\" -Modus, um die Wasserpumpe laufen zu "
+"lassen, wenn der Wasserstand zu niedrig ist."
 
 #: terrariumTranslations.py:104 terrariumTranslations.py:118
 #: terrariumTranslations.py:136 views/dashboard.tpl:83 views/dashboard.tpl:112
@@ -466,105 +453,73 @@ msgid "Sensor"
 msgstr "Sensor"
 
 #: terrariumTranslations.py:105
-#, fuzzy
-#| msgid ""
-#| "Enter the time when the heater should be put on. Only available when "
-#| "running in '%s' mode."
 msgid ""
 "Enter the time when the water pump should be put on. Only available when "
 "running in '%s' mode."
 msgstr ""
-"Geben Sie die Zeit ein, in der das Heizungssystem eingeschaltet werden soll. "
-"Nur verfügbar für '%s' Modus."
+"Geben Sie den Zeitpunkt ein, zu dem die Wasserpumpe eingeschaltet werden "
+"soll. Nur verfügbar, wenn der Modus '%s' ausgeführt wird."
 
 #: terrariumTranslations.py:106
-#, fuzzy
-#| msgid ""
-#| "Enter the time when the heater should be put off. Only available when "
-#| "running in '%s' mode."
 msgid ""
 "Enter the time when the water pump should be put off. Only available when "
 "running in '%s' mode."
 msgstr ""
-"Geben Sie die Zeit ein, in der das Heizungssystem ausgeschaltet werden soll. "
-"Nur verfügbar, für '%s' Modus."
+"Geben Sie den Zeitpunkt ein, zu dem die Wasserpumpe ausgeschaltet werden "
+"soll. Nur verfügbar, wenn der Modus '%s' ausgeführt wird."
 
 #: terrariumTranslations.py:107
-#, fuzzy
-#| msgid ""
-#| "Holds the period in minutes that the heater is on withing the total timer "
-#| "window."
 msgid ""
 "Holds the period in minutes that the watertank is on withing the total timer "
 "window."
 msgstr ""
-"Hält den Zeitraum in Minuten, in dem die Heizung eingeschaltet ist, mit dem "
-"gesamten Zeitfenster."
+"Hält den Zeitraum in Minuten, in dem der Wassertank eingeschaltet ist, mit "
+"dem gesamten Zeit Fenster."
 
 #: terrariumTranslations.py:108
-#, fuzzy
-#| msgid ""
-#| "Holds the period in minutes that the heater is off withing the total "
-#| "timer window"
 msgid ""
 "Holds the period in minutes that the watertank is off withing the total "
 "timer window"
 msgstr ""
-"Hält den Zeitraum in Minuten, in dem die Heizung ausgeschaltet ist, mit dem "
-"gesamten Zeitfenster"
+"Hält den Zeitraum in Minuten, in dem der Wassertank ausgeschaltet ist, mit "
+"dem gesamten Zeit Fenster"
 
 #: terrariumTranslations.py:109
-#, fuzzy
-#| msgid ""
-#| "How long is the system spraying. Enter the amount of seconds that the "
-#| "system is on when the humidity is too low."
 msgid ""
 "How long is the system pumping water. Enter the amount of seconds that the "
 "system is on when the water level is too low."
 msgstr ""
-"Wie lange sprüht das Gerät? Geben Sie die Anzahl der Sekunden ein, die das "
-"Gerät aktiviert ist wenn die Luftfeuchtigkeit zu niedrig ist."
+"Wie lange pumpt das System Wasser? Geben Sie die Sekunden ein, für die das "
+"System bei zu niedrigem Wasserstand eingeschaltet ist."
 
 #: terrariumTranslations.py:110
-#, fuzzy
-#| msgid "Holds the volume for this playlist."
 msgid "Holds the water volume in liters."
-msgstr "Lautstärke für diese Playlist."
+msgstr "Hält das Wasservolumen in Litern."
 
 #: terrariumTranslations.py:111
-#, fuzzy
-#| msgid "Holds the webcam resolution height in pixels."
 msgid "Holds the water tank height in cm or inches."
-msgstr "Hält die Auflösung der Webcam , Höhe in Pixel."
+msgstr "Hält die Wassertankhöhe in cm oder Zoll."
 
 #: terrariumTranslations.py:112
-#, fuzzy
-#| msgid ""
-#| "Select the power switches that should be toggled on the selected times "
-#| "above. Normally these are the switches connected to the heater. Select "
-#| "all needed switches below."
 msgid ""
 "Select the power switches that should be toggled on the selected times "
 "above. Normally these are the switches connected to the watertank. Select "
 "all needed switches below."
 msgstr ""
-"Wählen Sie die Schalter aus, die zu den gewählten Zeiten umgeschaltet werden "
-"sollen."
+"Wählen Sie die Netzschalter, die zu den oben ausgewählten Zeiten "
+"umgeschaltet werden sollen. Normalerweise sind dies die Schalter, die an den "
+"Wassertank angeschlossen sind. Wählen Sie alle erforderlichen Schalter unten "
+"aus."
 
 #: terrariumTranslations.py:113
-#, fuzzy
-#| msgid ""
-#| "Select the humidity sensors that are used to control the humidity. When "
-#| "selecting multiple sensors, the average is calculated to determine the "
-#| "final humidity."
 msgid ""
 "Select the distance sensors that are used to control the level. When "
 "selecting multiple sensors, the average is calculated to determine the final "
 "distance."
 msgstr ""
-"Wählen Sie die Feuchtigkeitssensoren aus, mit denen die Feuchtigkeit "
-"kontrolliert wird. Bei der Auswahl mehrerer Sensoren wird der Mittelwert "
-"berechnet, um die endgültige Feuchtigkeit zu bestimmen."
+"Wählen Sie die Abstandssensoren aus, die zum Steuern des Pegels verwendet "
+"werden. Wenn mehrere Sensoren ausgewählt werden, wird der Durchschnitt "
+"berechnet, um den endgültigen Abstand zu bestimmen."
 
 #: terrariumTranslations.py:117
 msgid ""
@@ -689,10 +644,8 @@ msgstr ""
 "sollen."
 
 #: terrariumTranslations.py:150
-#, fuzzy
-#| msgid "Holds the name of the sensor."
 msgid "Holds the distance type used by distance sensors."
-msgstr "Namen des Sensors."
+msgstr "Enthält den Abstandstyp, der von Abstandssensoren verwendet wird."
 
 #: terrariumTranslations.py:151 terrariumTranslations.py:152
 msgid "Holds the username which can make changes (Administrator)."
@@ -1684,10 +1637,8 @@ msgstr "Feuchtigkeitssensor"
 
 #: views/inc/sensor_list.tpl:8 views/inc/usage_sensors.tpl:69
 #: views/sensor_settings.tpl:76
-#, fuzzy
-#| msgid "1Wire sensor 1"
 msgid "Distance sensor"
-msgstr "1Wire Sensor 1"
+msgstr "Abstandssensor"
 
 #: views/inc/usage_dashboard.tpl:14 views/inc/usage_dashboard.tpl:205
 msgid "Top indicators"
@@ -2358,16 +2309,12 @@ msgstr ""
 "aktualisiert."
 
 #: views/inc/usage_sensors.tpl:94
-#, fuzzy
-#| msgid ""
-#| "The current value is also written below the graph in degrees or "
-#| "percentage."
 msgid ""
 "The current value is also written below the graph in degrees, percentage or "
 "distance."
 msgstr ""
-"Der aktuelle Wert wird auch unterhalb der Grafik in Grad oder Prozent "
-"geschrieben."
+"Der aktuelle Wert wird auch unter dem Diagramm in Grad, Prozent oder "
+"Entfernung angezeigt."
 
 #: views/inc/usage_sensors.tpl:99
 msgid ""
@@ -2921,34 +2868,24 @@ msgid "No"
 msgstr "Nein"
 
 #: views/system_environment.tpl:187
-#, fuzzy
-#| msgid "Heater on"
 msgid "Water tank"
-msgstr "Heizung an"
+msgstr "Wassertank"
 
 #: views/system_environment.tpl:197
-#, fuzzy
-#| msgid "Heater mode"
 msgid "Water tank mode"
-msgstr "Heizungsmodus"
+msgstr "Wassertank-Modus"
 
 #: views/system_environment.tpl:210
-#, fuzzy
-#| msgid "Heater on"
 msgid "Water pump on"
-msgstr "Heizung an"
+msgstr "Wasserpumpe an"
 
 #: views/system_environment.tpl:216
-#, fuzzy
-#| msgid "Heater off"
 msgid "Water pump off"
-msgstr "Heizung aus"
+msgstr "Wasserpumpe aus"
 
 #: views/system_environment.tpl:234
-#, fuzzy
-#| msgid "Spray duration (seconds)"
 msgid "Water tank pump duration (seconds)"
-msgstr "Sprühdauer (Sekunden)"
+msgstr "Wassertankpumpendauer (Sekunden)"
 
 #: views/system_environment.tpl:240
 msgid "Water tank volume in liters"
@@ -2959,10 +2896,8 @@ msgid "Water tank height in ..."
 msgstr "Wassertankhöhe in ..."
 
 #: views/system_environment.tpl:261
-#, fuzzy
-#| msgid "Humidity sensors"
 msgid "Distance sensors"
-msgstr "Feuchtigkeitssensoren"
+msgstr "Abstandssensoren"
 
 #: views/system_log.tpl:18
 msgid "Download"
@@ -2997,10 +2932,8 @@ msgid "Fahrenheit"
 msgstr "Fahrenheit"
 
 #: views/system_settings.tpl:84
-#, fuzzy
-#| msgid "Status indicator"
 msgid "Distance indicator"
-msgstr "Statusanzeige"
+msgstr "Distanzanzeige"
 
 #: views/system_settings.tpl:88
 msgid "Centimetre"
@@ -3023,10 +2956,8 @@ msgid "Current admin password"
 msgstr "Aktuelles Administratorkennwort"
 
 #: views/system_settings.tpl:113
-#, fuzzy
-#| msgid "Authentication"
 msgid "Always authenticate"
-msgstr "Authentifizierung"
+msgstr "Immer authentifizieren"
 
 #: views/system_settings.tpl:122
 msgid "Soundcard"
