@@ -47,6 +47,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
 - Lights control based on sun rise and sun set or timers
 - Rain control based on humidity sensors and timers
 - Heater control based on temperature sensors or timers
+  - Variable day and night difference for min and max temperature
 - Cooling control based on temperature sensors or timers
 - Watertank level control based on ultrasonic sound range sensors
 - Weather forecast from external source for lighting schema
