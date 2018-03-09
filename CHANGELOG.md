@@ -1,8 +1,7 @@
 Changelog
 =========
 
-
-(unreleased)
+3.4.1 (unreleased)
 ------------
 
 **New**
@@ -24,9 +23,15 @@ Changelog
 **Fixes**
 ------
 - Fix adding new webcams. [TheYOSH]
+- Test for fixing DHT issues. [#118](https://github.com/theyosh/TerrariumPI/issues/118) [#120](https://github.com/theyosh/TerrariumPI/issues/120). [TheYOSH]
+- Fix adding new webcams. [TheYOSH]
 
 **Updates**
 ------
+- Update README.md. [TheYOSH]
+- Update German translation. Thanks to [@Barbara1984](https://github.com/Barbara1984) [#105](https://github.com/theyosh/TerrariumPI/issues/105). [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update changelog. [TheYOSH]
 - Updated translation generator. [TheYOSH]
 - Update notify contrib code by [@kahuwi14.](https://github.com/kahuwi14.) [TheYOSH]
 - Update translations. [TheYOSH]
@@ -39,6 +44,17 @@ Changelog
 
 **Other**
 ------
+- Merge with master. [TheYOSH]
+- Better pin cleanup. [TheYOSH]
+- Better settings checking. [#116](https://github.com/theyosh/TerrariumPI/issues/116). [TheYOSH]
+- Better PiGPIOd connections(3) [TheYOSH]
+- Better PiGPIOd connections(2) [TheYOSH]
+- Better PiGPIOd connections. [TheYOSH]
+- Cleanup of GPIO pins. [TheYOSH]
+- Only allow up and down dimming with dimmer power switches. Respect the
+  max on and off dimmer percentage when going up or down. [#106](https://github.com/theyosh/TerrariumPI/issues/106).
+  [TheYOSH]
+- Better memory usage reporting in status view. Close [#117](https://github.com/theyosh/TerrariumPI/issues/117). [TheYOSH]
 - Cleanup dashboard. [TheYOSH]
 - Changed weather forecast to just weather. [TheYOSH]
 
@@ -1177,5 +1193,3 @@ Changelog
 - Living on the edge.... use latest beta of Leaflet. [TheYOSH]
 - Initial release. [TheYOSH]
 - Initial commit. [TheYOSH]
-
-

@@ -208,7 +208,7 @@ class terrariumConfig:
 
     Make sure that the fields cur_password and new_password are never stored
     '''
-    return self.__update_config('terrariumpi',data,['cur_password','new_password','available_languages'])
+    return self.__update_config('terrariumpi',data,['cur_password','new_password','available_languages','location','windspeed'])
 
   def get_available_languages(self):
     '''Get terrariumPI available languages'''
