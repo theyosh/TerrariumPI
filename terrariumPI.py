@@ -16,9 +16,10 @@ if __name__  == "__main__":
   logger.debug('Starting terrariumPI engine')
   terrariumEngine = terrariumEngine()
   logger.debug('Started terrariumPI engine')
-
   logger.debug('Starting terrariumPI webserver')
   terrariumWebserver = terrariumWebserver(terrariumEngine)
   logger.debug('Started terrariumPI webserver')
   terrariumWebserver.start()
   logger.info('Stopping terrariumPI')
+  terrariumEngine.stop()
+  logger.info('Shutdown terrariumPI')
