@@ -200,6 +200,7 @@ class terrariumSensor:
               # Found data
               current = float(w1data.group('value')) / 1000
           elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
+            time.sleep(2.1)
             humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()],
                                                            float(terrariumUtils.to_BCM_port_number(self.sensor_address)),
                                                            5)
@@ -215,6 +216,7 @@ class terrariumSensor:
             pass
 
           elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
+            time.sleep(2.1)
             humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()],
                                                            float(terrariumUtils.to_BCM_port_number(self.sensor_address)),
                                                            5)

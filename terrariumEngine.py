@@ -15,6 +15,7 @@ import uptime
 import os
 import psutil
 import subprocess
+import re
 from hashlib import md5
 
 from terrariumConfig import terrariumConfig
@@ -44,6 +45,17 @@ class terrariumEngine():
 
     # List of queues for websocket communication
     self.subscribed_queues = []
+
+    self.device = ''
+    regex = r"product: (?P<device>.*)"
+    hw=os.popen("lshw -c system 2>/dev/null")
+    for line in hw.readlines():
+      matches = re.search(regex, line)
+      if matches:
+        self.device = matches.group('device')
+        break
+    hw.close()
+
     # Default power usage for a PI
     self.pi_power_wattage = 5
 
@@ -110,6 +122,7 @@ class terrariumEngine():
                                                self.get_audio_playing)
 
     # Start system update loop
+    self.__running = True
     thread.start_new_thread(self.__engine_loop, ())
     thread.start_new_thread(self.__log_tail, ())
     logger.info('TerrariumPI engine is running')
@@ -201,26 +214,26 @@ class terrariumEngine():
         power_switch.set_power_wattage(switchdata['power_wattage'])
         power_switch.set_water_flow(switchdata['water_flow'])
 
-      if 'dimmer_duration' in switchdata:
+      if 'dimmer_duration' in switchdata and switchdata['dimmer_duration'] is not None:
         power_switch.set_dimmer_duration(switchdata['dimmer_duration'])
-      if 'dimmer_on_duration' in switchdata:
+      if 'dimmer_on_duration' in switchdata and switchdata['dimmer_on_duration'] is not None:
         power_switch.set_dimmer_on_duration(switchdata['dimmer_on_duration'])
-      if 'dimmer_on_percentage' in switchdata:
+      if 'dimmer_on_percentage' in switchdata and switchdata['dimmer_on_percentage'] is not None:
         power_switch.set_dimmer_on_percentage(switchdata['dimmer_on_percentage'])
-      if 'dimmer_off_duration' in switchdata:
+      if 'dimmer_off_duration' in switchdata and switchdata['dimmer_off_duration'] is not None:
         power_switch.set_dimmer_off_duration(switchdata['dimmer_off_duration'])
-      if 'dimmer_off_percentage' in switchdata:
+      if 'dimmer_off_percentage' in switchdata and switchdata['dimmer_off_percentage'] is not None:
         power_switch.set_dimmer_off_percentage(switchdata['dimmer_off_percentage'])
 
-      if 'timer_enabled' in switchdata:
+      if 'timer_enabled' in switchdata and switchdata['timer_enabled'] is not None:
         power_switch.set_timer_enabled(switchdata['timer_enabled'])
-      if 'timer_start' in switchdata:
+      if 'timer_start' in switchdata and switchdata['timer_start'] is not None:
         power_switch.set_timer_start(switchdata['timer_start'])
-      if 'timer_stop' in switchdata:
+      if 'timer_stop' in switchdata and switchdata['timer_stop'] is not None:
         power_switch.set_timer_stop(switchdata['timer_stop'])
-      if 'timer_on_duration' in switchdata:
+      if 'timer_on_duration' in switchdata and switchdata['timer_on_duration'] is not None:
         power_switch.set_timer_on_duration(switchdata['timer_on_duration'])
-      if 'timer_off_duration' in switchdata:
+      if 'timer_off_duration' in switchdata and switchdata['timer_off_duration'] is not None:
         power_switch.set_timer_off_duration(switchdata['timer_off_duration'])
 
       seen_switches.append(power_switch.get_id())
@@ -368,7 +381,7 @@ class terrariumEngine():
 
   def __engine_loop(self):
     logger.info('Start terrariumPI engine')
-    while True:
+    while self.__running:
       starttime = time.time()
 
       # Update weather
@@ -439,6 +452,18 @@ class terrariumEngine():
       return self.__units[unittype]
 
     return None
+
+  def stop(self):
+    self.environment.stop()
+    for sensorid in self.sensors:
+      self.sensors[sensorid].stop()
+
+    for power_switch_id in self.power_switches:
+      self.power_switches[power_switch_id].stop()
+
+    self.collector.stop()
+    self.__running = False
+    logger.info('Shutdown engine')
   # End private/internal functions
 
   # Weather part
@@ -799,8 +824,8 @@ class terrariumEngine():
       cpu_temp = float(temperature.read()) / 1000.0
 
     data = {'memory' : {'total' : memory.total,
-                        'used' : memory.used,
-                        'free' : memory.free},
+                        'used' : memory.total - memory.available,
+                        'free' : memory.available},
             'disk' : {'total' : disk.total,
                         'used' : disk.used,
                         'free' : disk.free},

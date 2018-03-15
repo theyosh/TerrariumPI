@@ -208,7 +208,7 @@ class terrariumConfig:
 
     Make sure that the fields cur_password and new_password are never stored
     '''
-    return self.__update_config('terrariumpi',data,['cur_password','new_password','available_languages'])
+    return self.__update_config('terrariumpi',data,['cur_password','new_password','available_languages','location','windspeed'])
 
   def get_available_languages(self):
     '''Get terrariumPI available languages'''
@@ -287,7 +287,7 @@ class terrariumConfig:
     for environment_part in data:
       for part in data[environment_part]:
         # Do not save the following settings
-        if part in ['enabled','time_table','state','amount','current','temperature','humidity','distance','alarm','type']:
+        if part in ['enabled','time_table','state','amount','current','temperature','humidity','distance','alarm','type','night_modus']:
           continue
 
         if data[environment_part][part] is None:

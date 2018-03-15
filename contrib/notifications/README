@@ -1,0 +1,34 @@
+TePiNot - TerrariumPiNotification Version 0.1 -> renamed logcheck
+
+This is a Python-script to parse the logfile from TerrariumPI and send a notification over ntfy.
+
+To automate the script, just add a cronjob.
+
+Dependencies:
+Python
+ntfy	-	https://pypi.python.org/pypi/ntfy
+pygtail	-	https://pypi.python.org/pypi/pygtail
+parse	-	https://pypi.python.org/pypi/parse
+
+Function:
+The script opens the logfile of TerrariumPI with pygtail. Pygtail allows the script to start 
+behind the last read row of the log.
+With parse, the different lines will be parsed. Ntfy is used for sending notifications.
+
+The script itself parses the read lines and searches for the log-Levels and the modules.
+If the script finds a logfile-line containing a module in combination with a log-level, 
+you'll get one or more notifications, depending on your ntfy-config.
+
+A log-file is written, at the path you defined in the config-file.
+
+In Debug-Mode will be more output.
+
+Configuration:
+To configure ntfy, use the described website.
+It's possible to use the default-config-file of ntfy, or you creat an additional config-file. In this case, you can add the path to it into the tepinot.conf. 
+
+
+That config-file also holds the path to its logfile, to the logfile of TerrariumPI and the searched modules/log-Levels written into the TerrariumPi-logfile.
+For activating the search for a specific module or log-level, just uncomment the respective keyword.
+
+Last but not least, you can enable the "Debug-Mode".

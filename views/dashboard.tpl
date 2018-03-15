@@ -129,14 +129,6 @@
                         </td>
                         <td class="alarm_min">...</td>
                       </tr>
-                      <!--
-                      <tr>
-                        <td>
-                          <p>{{_('Alarm max')}}</p>
-                        </td>
-                        <td class="alarm_max">...</td>
-                      </tr>
-                      -->
                       <tr>
                         <td>
                           <p>{{_('On')}}</p>
@@ -158,7 +150,7 @@
                     </table>
                   </div>
                   <div class="row environment_watertank">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-tint"></i> {{_('Watertank')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}}</span></small></h4>
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-tint"></i> {{_('Water tank')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}}</span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
@@ -178,14 +170,6 @@
                         </td>
                         <td class="alarm_min">...</td>
                       </tr>
-                      <!--
-                      <tr>
-                        <td>
-                          <p>{{_('Alarm max')}}</p>
-                        </td>
-                        <td class="alarm_max">...</td>
-                      </tr>
-                      -->
                       <tr>
                         <td>
                           <p>{{_('On')}}</p>
@@ -217,24 +201,6 @@
                       </tr>
                       <tr>
                         <td>
-                          <p>{{_('Current')}}</p>
-                        </td>
-                        <td class="current">...</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>{{_('Alarm min')}}</p>
-                        </td>
-                        <td class="alarm_min">...</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>{{_('Alarm max')}}</p>
-                        </td>
-                        <td class="alarm_max">...</td>
-                      </tr>
-                      <tr>
-                        <td>
                           <p>{{_('On')}}</p>
                         </td>
                         <td class="on">...</td>
@@ -250,6 +216,24 @@
                           <p>{{_('Duration')}}</p>
                         </td>
                         <td class="duration">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Current')}}</p>
+                        </td>
+                        <td class="current">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Range')}}</p>
+                        </td>
+                        <td class="alarm_min alarm_max">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Day/night difference')}}</p>
+                        </td>
+                        <td class="night_difference">...</td>
                       </tr>
                     </table>
                   </div>
@@ -264,24 +248,6 @@
                       </tr>
                       <tr>
                         <td>
-                          <p>{{_('Current')}}</p>
-                        </td>
-                        <td class="current">...</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>{{_('Alarm max')}}</p>
-                        </td>
-                        <td class="alarm_max">...</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>{{_('Alarm min')}}</p>
-                        </td>
-                        <td class="alarm_min">...</td>
-                      </tr>
-                      <tr>
-                        <td>
                           <p>{{_('On')}}</p>
                         </td>
                         <td class="on">...</td>
@@ -297,6 +263,24 @@
                           <p>{{_('Duration')}}</p>
                         </td>
                         <td class="duration">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Current')}}</p>
+                        </td>
+                        <td class="current">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Range')}}</p>
+                        </td>
+                        <td class="alarm_min alarm_max">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Day/night difference')}}</p>
+                        </td>
+                        <td class="night_difference">...</td>
                       </tr>
                     </table>
                   </div>

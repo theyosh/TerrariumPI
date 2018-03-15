@@ -1,4 +1,9 @@
 % include('inc/page_header.tpl')
+        <div class="row jumbotron">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <h1>{{_('No webcams available')}}</h1>
+          </div>
+        </div>
         <div class="row webcam">
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="x_panel">
@@ -31,47 +36,16 @@
         <script type="text/javascript">
           $(document).ready(function() {
             source_row = $('div.row.webcam').html();
-
             // Do not remove it, but clean it
             $('div.row.webcam').html('');
 
-
-
-
             $.get('/api/webcams',function(json_data) {
-
-
-
+              $('div.row.jumbotron').toggle(json_data.webcams.length == 0);
               $.each(json_data.webcams,function(index,webcam_data){
                 initWebcam(webcam_data);
-
-
-
-                //add_power_switch_status_row(switch_data);
-                //update_power_switch(switch_data);
-
-
-
-                //load_history_graph('powerswitch_' + switch_data.id,'switch','/api/history/switches/' + switch_data.id);
               });
               reload_reload_theme();
             });
           });
-          /*
-
-          $(document).ready(function() {
-            $.get('/api/webcams',function(data) {
-              globals.webcams = [];
-              var webcams = $('div.webcam');
-              $.each(data.webcams, function(index,value){
-                if ($(webcams[index]).attr('id') === undefined) {
-                  $(webcams[index]).attr('id','webcam_' + value.id).height($(webcams[index]).width());
-                }
-                initWebcam(value.id, value.name, value.max_zoom);
-              });
-            });
-          });
-          */
-
         </script>
 % include('inc/page_footer.tpl')

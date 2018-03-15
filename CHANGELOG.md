@@ -1,6 +1,63 @@
 Changelog
 =========
 
+3.4.1 (unreleased)
+------------
+
+**New**
+------
+- Add pushnotification through external script. Thanks [@kahuwi14](https://github.com/kahuwi14) [#101](https://github.com/theyosh/TerrariumPI/issues/101).
+  [TheYOSH]
+- Add day/night temperature difference in heater environment system.
+  [#106](https://github.com/theyosh/TerrariumPI/issues/106). [TheYOSH]
+- Add smart dimming in heater and cooler environment system. [#106](https://github.com/theyosh/TerrariumPI/issues/106).
+  [TheYOSH]
+- Add NGINX vHost config for running on port 80. [#113](https://github.com/theyosh/TerrariumPI/issues/113). [TheYOSH]
+- Added missing translation. [TheYOSH]
+- Add logfile status indicator in the footer. [TheYOSH]
+- Add program lshw depedency. [TheYOSH]
+- Add visual feedback when there are no sensors / switches / etc
+  available. [TheYOSH]
+- Add device information in the footer of the webinterface. [TheYOSH]
+
+**Fixes**
+------
+- Fix adding new webcams. [TheYOSH]
+- Test for fixing DHT issues. [#118](https://github.com/theyosh/TerrariumPI/issues/118) [#120](https://github.com/theyosh/TerrariumPI/issues/120). [TheYOSH]
+- Fix adding new webcams. [TheYOSH]
+
+**Updates**
+------
+- Update README.md. [TheYOSH]
+- Update German translation. Thanks to [@Barbara1984](https://github.com/Barbara1984) [#105](https://github.com/theyosh/TerrariumPI/issues/105). [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update changelog. [TheYOSH]
+- Updated translation generator. [TheYOSH]
+- Update notify contrib code by [@kahuwi14.](https://github.com/kahuwi14.) [TheYOSH]
+- Update translations. [TheYOSH]
+- Update translations. [TheYOSH]
+- Update environment dashboard (2) [TheYOSH]
+- Update environment dashboard. [TheYOSH]
+- Update system settings page. [TheYOSH]
+- Update initial loading. [TheYOSH]
+- Update German language. Thanks [@Barbara1984.](https://github.com/Barbara1984.) Close [#111](https://github.com/theyosh/TerrariumPI/issues/111). [TheYOSH]
+
+**Other**
+------
+- Merge with master. [TheYOSH]
+- Better pin cleanup. [TheYOSH]
+- Better settings checking. [#116](https://github.com/theyosh/TerrariumPI/issues/116). [TheYOSH]
+- Better PiGPIOd connections(3) [TheYOSH]
+- Better PiGPIOd connections(2) [TheYOSH]
+- Better PiGPIOd connections. [TheYOSH]
+- Cleanup of GPIO pins. [TheYOSH]
+- Only allow up and down dimming with dimmer power switches. Respect the
+  max on and off dimmer percentage when going up or down. [#106](https://github.com/theyosh/TerrariumPI/issues/106).
+  [TheYOSH]
+- Better memory usage reporting in status view. Close [#117](https://github.com/theyosh/TerrariumPI/issues/117). [TheYOSH]
+- Cleanup dashboard. [TheYOSH]
+- Changed weather forecast to just weather. [TheYOSH]
+
 
 3.4.0 (2018-02-25)
 ------------------
@@ -56,6 +113,7 @@ Changelog
 
 **Updates**
 ------
+- Update changelog. [TheYOSH]
 - Update defaults.cfg. [TheYOSH]
 - Update README.md. [TheYOSH]
 - Update README.md. [TheYOSH]
@@ -77,6 +135,9 @@ Changelog
 
 **Other**
 ------
+- Merge pull request [#109](https://github.com/theyosh/TerrariumPI/issues/109) from theyosh/feature/ph. [TheYOSH]
+
+  Feature/ph
 - Merge branch 'feature/ph' of ssh://github.com/theyosh/TerrariumPI into
   feature/ph. [TheYOSH]
 - Cleaup debug code. [#108](https://github.com/theyosh/TerrariumPI/issues/108). [TheYOSH]

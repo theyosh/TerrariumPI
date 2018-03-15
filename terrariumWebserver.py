@@ -166,7 +166,8 @@ class terrariumWebserver():
                   'page_title' : _(template.replace('_',' ').capitalize()),
                   'temperature_indicator' : self.__terrariumEngine.get_temperature_indicator(),
                   'distance_indicator' : self.__terrariumEngine.get_distance_indicator(),
-                  'translations': self.__translations }
+                  'translations': self.__translations,
+                  'device': self.__terrariumEngine.device}
 
     if 'index' == template or 'profile' == template:
       variables['person_name'] = self.__terrariumEngine.get_profile_name()

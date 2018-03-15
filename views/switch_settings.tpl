@@ -147,9 +147,13 @@
                           </div>
                         </div>
                         <div class="row dimmer" style="display:none;">
-                          <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                          <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                             <label for="switch_[nr]_dimmer_duration">{{_('Dimmer action duration')}}</label>
                             <input class="form-control" name="switch_[nr]_dimmer_duration" placeholder="{{_('Dimmer action duration')}}" required="required" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_duration')}}">
+                          </div>
+                          <div class="col-md-2 col-sm-2 col-xs-12 form-group">
+                            <label for="switch_[nr]_dimmer_step">{{_('Dimmer environment step')}}</label>
+                            <input class="form-control" name="switch_[nr]_dimmer_step" placeholder="{{_('Dimmer environment step in %')}}" required="required" type="text" pattern="[0-9\.-]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_dimmer_step')}}">
                           </div>
                           <div class="col-md-2 col-sm-2 col-xs-12 form-group">
                             <label for="switch_[nr]_dimmer_on_duration">{{_('Dimmer on duration')}}</label>
