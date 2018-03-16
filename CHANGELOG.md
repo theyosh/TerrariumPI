@@ -1,7 +1,8 @@
 Changelog
 =========
 
-3.4.1 (unreleased)
+
+(unreleased)
 ------------
 
 **New**
@@ -22,14 +23,15 @@ Changelog
 
 **Fixes**
 ------
-- Fix adding new webcams. [TheYOSH]
 - Test for fixing DHT issues. [#118](https://github.com/theyosh/TerrariumPI/issues/118) [#120](https://github.com/theyosh/TerrariumPI/issues/120). [TheYOSH]
+- Fix adding new webcams. [TheYOSH]
 - Fix adding new webcams. [TheYOSH]
 
 **Updates**
 ------
+- Update notification script. [#101](https://github.com/theyosh/TerrariumPI/issues/101). [TheYOSH]
+- Update changelog. [TheYOSH]
 - Update README.md. [TheYOSH]
-- Update German translation. Thanks to [@Barbara1984](https://github.com/Barbara1984) [#105](https://github.com/theyosh/TerrariumPI/issues/105). [TheYOSH]
 - Update README.md. [TheYOSH]
 - Update changelog. [TheYOSH]
 - Updated translation generator. [TheYOSH]
@@ -41,9 +43,16 @@ Changelog
 - Update system settings page. [TheYOSH]
 - Update initial loading. [TheYOSH]
 - Update German language. Thanks [@Barbara1984.](https://github.com/Barbara1984.) Close [#111](https://github.com/theyosh/TerrariumPI/issues/111). [TheYOSH]
+- Update translation to reflect correct fr, minor bug with translation.
+  [nke69]
+- Update German translation. Thanks to [@Barbara1984](https://github.com/Barbara1984) [#105](https://github.com/theyosh/TerrariumPI/issues/105). [TheYOSH]
 
 **Other**
 ------
+- Merge branch 'development' [TheYOSH]
+- Revert back code for DHT sensors. Add extra timeout per DHT readout.
+  Will slow down the process, but will also give the DHT sensors more
+  time to produce data. [#120](https://github.com/theyosh/TerrariumPI/issues/120). [TheYOSH]
 - Merge with master. [TheYOSH]
 - Better pin cleanup. [TheYOSH]
 - Better settings checking. [#116](https://github.com/theyosh/TerrariumPI/issues/116). [TheYOSH]
@@ -57,6 +66,9 @@ Changelog
 - Better memory usage reporting in status view. Close [#117](https://github.com/theyosh/TerrariumPI/issues/117). [TheYOSH]
 - Cleanup dashboard. [TheYOSH]
 - Changed weather forecast to just weather. [TheYOSH]
+- Merge pull request [#119](https://github.com/theyosh/TerrariumPI/issues/119) from nke69/master. [TheYOSH]
+
+  Update translation to reflect correct fr, minor bug with translation.
 
 
 3.4.0 (2018-02-25)
@@ -1193,3 +1205,5 @@ Changelog
 - Living on the edge.... use latest beta of Leaflet. [TheYOSH]
 - Initial release. [TheYOSH]
 - Initial commit. [TheYOSH]
+
+
