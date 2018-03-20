@@ -5,6 +5,7 @@ var globals = {
   connection: 'ws' + (location.protocol == 'https:' ? 's' : '') + '://' + location.host + '/live',
   temperature_indicator: 'C',
   distance_indicator: 'cm',
+  ph_indicator: 'PH',
   gauges: [],
   webcams: [],
   graphs: {},
@@ -1090,6 +1091,11 @@ function history_graph(name, data, type) {
           case 'average_distance':
             val = formatNumber(val) + ' ' + globals.distance_indicator;
             break;
+			
+          case 'ph':
+          case 'average_ph':
+            val = formatNumber(val) + ' ' + globals.ph_indicator;
+            break;			
 
           case 'switch':
             val = formatNumber(val) + ' W';
@@ -1108,6 +1114,7 @@ function history_graph(name, data, type) {
     case 'humidity':
     case 'temperature':
     case 'distance':
+	case 'ph':
       graph_data = [{
         label: '{{_('Current')}}',
         data: data.current
