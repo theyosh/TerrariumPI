@@ -11,7 +11,8 @@
                 <h2 class="temperature"><span aria-hidden="true" class="glyphicon glyphicon-fire"></span> {{_('Temperature sensor')}} <span class="title">{{_('new')}}</span> <small>...</small> <span class="badge bg-red">{{_('warning')}}</span></h2>
                 <h2 class="humidity"><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Humidity sensor')}} <span class="title">{{_('new')}}</span> <small>...</small> <span class="badge bg-red">{{_('warning')}}</span></h2>
                 <h2 class="distance"><span aria-hidden="true" class="glyphicon glyphicon-signal"></span> {{_('Distance sensor')}} <span class="title">{{_('new')}}</span> <small>...</small> <span class="badge bg-red">{{_('warning')}}</span></h2>
-                <ul class="nav navbar-right panel_toolbox">
+                <h2 class="ph"><span aria-hidden="true" class="glyphicon glyphicon-certificate"></span> {{_('PH sensor')}} <span class="title">{{_('new')}}</span> <small>...</small> <span class="badge bg-red">{{_('warning')}}</span></h2>
+				<ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
