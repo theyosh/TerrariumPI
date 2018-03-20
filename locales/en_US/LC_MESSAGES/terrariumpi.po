@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2018-03-04 13:38+CET\n"
-"PO-Revision-Date: 2018-03-04 13:38+0100\n"
+"Project-Id-Version: TerrariumPI 3.4.1\n"
+"POT-Creation-Date: 2018-03-20 22:57+CET\n"
+"PO-Revision-Date: 2018-03-20 22:58+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -719,9 +719,10 @@ msgstr "Audio playlist"
 
 #: views/audio_playlist.tpl:68 views/inc/sensor_list.tpl:11
 #: views/inc/sensor_list.tpl:12 views/inc/sensor_list.tpl:13
-#: views/sensor_settings.tpl:74 views/sensor_settings.tpl:75
-#: views/sensor_settings.tpl:76 views/sensor_settings.tpl:77
-#: views/switch_settings.tpl:92 views/webcam_settings.tpl:67
+#: views/inc/sensor_list.tpl:14 views/sensor_settings.tpl:74
+#: views/sensor_settings.tpl:75 views/sensor_settings.tpl:76
+#: views/sensor_settings.tpl:77 views/switch_settings.tpl:92
+#: views/webcam_settings.tpl:67
 msgid "new"
 msgstr "new"
 
@@ -795,7 +796,7 @@ msgstr "Environment"
 #: views/dashboard.tpl:71 views/dashboard.tpl:319 views/dashboard.tpl:374
 #: views/door_status.tpl:37 views/inc/menu.tpl:50 views/inc/menu.tpl:61
 #: views/inc/menu.tpl:72 views/inc/menu.tpl:83 views/inc/menu.tpl:116
-#: views/inc/menu.tpl:144 views/inc/sensor_list.tpl:39
+#: views/inc/menu.tpl:144 views/inc/sensor_list.tpl:40
 #: views/inc/usage_doors.tpl:48 views/inc/usage_doors.tpl:92
 #: views/inc/usage_doors.tpl:148 views/inc/usage_sensors.tpl:52
 #: views/inc/usage_sensors.tpl:103 views/inc/usage_sensors.tpl:212
@@ -899,15 +900,16 @@ msgstr "Average Humidity"
 
 #: views/dashboard.tpl:293 views/dashboard.tpl:348
 #: views/inc/sensor_list.tpl:11 views/inc/sensor_list.tpl:12
-#: views/inc/sensor_list.tpl:13 views/inc/usage_dashboard.tpl:169
-#: views/inc/usage_doors.tpl:21 views/inc/usage_sensors.tpl:25
-#: views/system_status.tpl:6 views/system_status.tpl:62
-#: views/system_status.tpl:118 views/system_status.tpl:174
+#: views/inc/sensor_list.tpl:13 views/inc/sensor_list.tpl:14
+#: views/inc/usage_dashboard.tpl:169 views/inc/usage_doors.tpl:21
+#: views/inc/usage_sensors.tpl:25 views/system_status.tpl:6
+#: views/system_status.tpl:62 views/system_status.tpl:118
+#: views/system_status.tpl:174
 msgid "warning"
 msgstr "warning"
 
 #: views/dashboard.tpl:302 views/dashboard.tpl:357 views/door_status.tpl:20
-#: views/inc/sensor_list.tpl:22 views/inc/usage_dashboard.tpl:67
+#: views/inc/sensor_list.tpl:23 views/inc/usage_dashboard.tpl:67
 #: views/inc/usage_dashboard.tpl:181 views/inc/usage_doors.tpl:31
 #: views/inc/usage_sensors.tpl:35 views/inc/usage_switches.tpl:31
 #: views/inc/usage_webcams.tpl:29 views/switch_status.tpl:20
@@ -918,7 +920,7 @@ msgid "Day"
 msgstr "Day"
 
 #: views/dashboard.tpl:305 views/dashboard.tpl:360 views/door_status.tpl:23
-#: views/inc/sensor_list.tpl:25 views/inc/usage_dashboard.tpl:182
+#: views/inc/sensor_list.tpl:26 views/inc/usage_dashboard.tpl:182
 #: views/inc/usage_doors.tpl:34 views/inc/usage_sensors.tpl:38
 #: views/inc/usage_switches.tpl:34 views/inc/usage_webcams.tpl:32
 #: views/switch_status.tpl:23 views/system_status.tpl:18
@@ -928,7 +930,7 @@ msgid "Week"
 msgstr "Week"
 
 #: views/dashboard.tpl:308 views/dashboard.tpl:363 views/door_status.tpl:26
-#: views/inc/sensor_list.tpl:28 views/inc/usage_dashboard.tpl:183
+#: views/inc/sensor_list.tpl:29 views/inc/usage_dashboard.tpl:183
 #: views/inc/usage_doors.tpl:37 views/inc/usage_sensors.tpl:41
 #: views/inc/usage_switches.tpl:37 views/inc/usage_webcams.tpl:35
 #: views/switch_status.tpl:26 views/system_status.tpl:21
@@ -938,7 +940,7 @@ msgid "Month"
 msgstr "Month"
 
 #: views/dashboard.tpl:311 views/dashboard.tpl:366 views/door_status.tpl:29
-#: views/inc/sensor_list.tpl:31 views/inc/usage_dashboard.tpl:184
+#: views/inc/sensor_list.tpl:32 views/inc/usage_dashboard.tpl:184
 #: views/inc/usage_doors.tpl:40 views/inc/usage_sensors.tpl:44
 #: views/inc/usage_switches.tpl:40 views/inc/usage_webcams.tpl:38
 #: views/switch_status.tpl:29 views/system_status.tpl:24
@@ -948,7 +950,7 @@ msgid "Year"
 msgstr "Year"
 
 #: views/dashboard.tpl:322 views/dashboard.tpl:377 views/door_status.tpl:40
-#: views/inc/sensor_list.tpl:42 views/switch_status.tpl:40
+#: views/inc/sensor_list.tpl:43 views/switch_status.tpl:40
 msgid "Export data"
 msgstr "Export data"
 
@@ -1204,8 +1206,8 @@ msgid "Distance"
 msgstr "Distance"
 
 #: views/inc/menu.tpl:47 views/sensor_settings.tpl:118
-msgid "PH"
-msgstr "PH"
+msgid "pH"
+msgstr "pH"
 
 #: views/inc/menu.tpl:80
 msgid "Show"
@@ -1295,6 +1297,10 @@ msgstr "Humidity sensor"
 #: views/sensor_settings.tpl:76
 msgid "Distance sensor"
 msgstr "Distance sensor"
+
+#: views/inc/sensor_list.tpl:14 views/sensor_settings.tpl:77
+msgid "pH sensor"
+msgstr "pH sensor"
 
 #: views/inc/usage_dashboard.tpl:14 views/inc/usage_dashboard.tpl:205
 msgid "Top indicators"
@@ -2077,13 +2083,9 @@ msgstr "Here you can configure your sensors."
 msgid "Add new sensor"
 msgstr "Add new sensor"
 
-#: views/sensor_settings.tpl:77
-msgid "PH sensor"
-msgstr "PH sensor"
-
 #: views/sensor_settings.tpl:101
-msgid "PH SKU-SEN0161"
-msgstr "PH SKU-SEN0161"
+msgid "pH SKU-SEN0161"
+msgstr "pH SKU-SEN0161"
 
 #: views/switch_settings.tpl:16
 msgid "Here you can configure your power switches."
