@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 import datetime
+import requests
 
 class terrariumUtils():
 
@@ -131,6 +132,31 @@ class terrariumUtils():
         print err
 
     return time
+
+  @staticmethod
+  def get_remote_data(url):
+    data = None
+    try:
+      url_data = terrariumUtils.parse_url(url)
+      data = requests.get(url,auth=(url_data['username'],url_data['password']),timeout=3)
+
+      if data.status_code == 200:
+        data = data.json()
+        json_path = url_data['fragment'].split('/') if 'fragment' in url_data and url_data['fragment'] is not None else []
+
+        for item in json_path:
+          # Dirty hack to process array data....
+          try:
+            item = int(item)
+          except Exception, ex:
+            item = str(item)
+
+          data = data[item]
+
+    except Exception, ex:
+      print ex
+
+    return data
 
   @staticmethod
   def calculate_time_table(start, stop, on_duration = None, off_duration = None):

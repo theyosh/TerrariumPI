@@ -9,7 +9,6 @@ import os.path
 import Adafruit_DHT as dht
 import glob
 import re
-import requests
 import RPi.GPIO as GPIO
 
 from hashlib import md5
@@ -135,20 +134,8 @@ class terrariumSensor:
           if url_data is False:
             logger.error('Remote url \'%s\' for sensor \'%s\' is not a valid remote source url!' % (self.get_address(),self.get_name()))
           else:
-            data = requests.get(self.get_address(),auth=(url_data['username'],url_data['password']),timeout=3)
-
-            if data.status_code == 200:
-              data = data.json()
-              json_path = url_data['fragment'].split('/') if 'fragment' in url_data and url_data['fragment'] is not None else []
-
-              for item in json_path:
-                # Dirty hack to process array data....
-                try:
-                  item = int(item)
-                except Exception, ex:
-                  item = str(item)
-
-                data = data[item]
+            data = terrariumUtils.get_remote_data(self.get_address())
+            if data is not None:
               current = float(data)
             else:
               logger.warning('Remote sensor \'%s\' got error from remote source \'%s\': %s' % (self.get_name(),self.get_address(),data.status_code))

@@ -71,6 +71,7 @@
                             <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{!translations.get_translation('door_field_hardware')}}">
                               <select class="form-control" name="door_[nr]_hardwaretype" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
                                 <option value="gpio">{{_('GPIO')}}</option>
+                                <option value="remote">{{_('Remote')}}</option>
                               </select>
                             </div>
                           </div>
@@ -105,7 +106,6 @@
               allowClear: false,
               minimumResultsForSearch: Infinity
             });
-
             // Load existing switches
             $.get($('form').attr('action'),function(json_data){
               $.each(json_data.doors, function(index,door_data) {

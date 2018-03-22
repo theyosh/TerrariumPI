@@ -4,6 +4,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 import RPi.GPIO as GPIO
 import thread
+import time
 from hashlib import md5
 from terrariumUtils import terrariumUtils
 
@@ -11,7 +12,7 @@ from gevent import monkey, sleep
 monkey.patch_all()
 
 class terrariumDoor():
-  VALID_HARDWARE_TYPES = ['gpio']
+  VALID_HARDWARE_TYPES = ['gpio','remote']
   CHECKER_TIMEOUT = 0.5
 
   CLOSED = 'closed'
@@ -24,6 +25,8 @@ class terrariumDoor():
     self.set_hardware_type(hardware_type)
     self.set_address(address)
     self.set_name(name)
+
+    self.__last_check = 0
 
     if self.id is None:
       self.id = md5(b'' + self.get_hardware_type() + self.get_address()).hexdigest()
@@ -48,6 +51,19 @@ class terrariumDoor():
     while True:
       if self.get_hardware_type() == 'gpio':
         current_status = terrariumDoor.OPEN if GPIO.input(terrariumUtils.to_BCM_port_number(self.get_address())) else terrariumDoor.CLOSED
+
+      elif self.get_hardware_type() == 'remote' and (int(time.time()) - self.__last_check) >= 30:
+        url_data = terrariumUtils.parse_url(self.get_address())
+        if url_data is False:
+          logger.error('Remote url \'%s\' for door \'%s\' is not a valid remote source url!' % (self.get_address(),self.get_name()))
+        else:
+          data = terrariumUtils.get_remote_data(self.get_address())
+          if data is not None:
+            current_status = terrariumDoor.OPEN if terrariumUtils.is_true(data) else terrariumDoor.CLOSED
+          else:
+            logger.warning('Remote door \'%s\' got error from remote source \'%s\': %s' % (self.get_name(),self.get_address(),data.status_code))
+
+        self.__last_check = int(time.time())
 
       logger.debug('Current door \'%s\' status: %s' % (self.get_name(),current_status))
       if current_status != self.get_status():
@@ -81,7 +97,8 @@ class terrariumDoor():
 
   def set_address(self,address):
     self.address = address
-    GPIO.setup(terrariumUtils.to_BCM_port_number(address),GPIO.IN,pull_up_down=GPIO.PUD_UP)  # activate input with PullUp
+    if self.get_hardware_type() == 'gpio':
+      GPIO.setup(terrariumUtils.to_BCM_port_number(address),GPIO.IN,pull_up_down=GPIO.PUD_UP)  # activate input with PullUp
 
   def get_name(self):
     return self.name
