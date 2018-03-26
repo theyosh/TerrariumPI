@@ -29,6 +29,9 @@
                     <li>
                       <a href="weather.html">{{_('Weather')}}</a>
                     </li>
+                    <li>
+                      <a href="calendar.html">{{_('Calendar')}}</a>
+                    </li>
                   </ul>
                 </li>
                 <li>

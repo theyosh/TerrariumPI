@@ -255,6 +255,13 @@ class terrariumConfig:
     config = self.get_system()
     return config['soundcard']
 
+  def get_external_calender_url(self):
+    config = self.get_system()
+    if 'external_calendar_url' in config and config['external_calendar_url'] != '':
+      return config['external_calendar_url']
+
+    return ''
+
   def get_pi_power_wattage(self):
     '''Get terrariumPI power usage'''
     config = self.get_system()

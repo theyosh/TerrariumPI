@@ -144,6 +144,7 @@ class terrariumTranslations():
     self.translations['system_field_new_password'] = _('Enter the new password for the administration user. Leaving empty will not change the password!')
     self.translations['system_field_current_password'] = _('Enter the current password in order to change the password.')
     self.translations['system_field_always_authentication'] = _('Toggle on or off full authentication. When on, you need to authenticate at all times.')
+    self.translations['system_field_external_calendar_url'] = _('Holds the external calendar url.')
     self.translations['system_field_soundcard'] = _('Holds the soundcard that is used for playing audio.')
     self.translations['system_field_pi_power'] = _('Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment.')
     self.translations['system_field_power_price'] = _('Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour).')
