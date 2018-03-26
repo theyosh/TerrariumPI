@@ -13,7 +13,7 @@
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-wrench" title="{{_('Options')}}"></i></a>
                     <ul class="dropdown-menu" role="menu">
                       <li>
-                        <a href="javascript:;" onclick="menu_click('weather_settings.html')">{{_('Settings')}}</a>
+                        <a href="javascript:;" onclick="menu_click('system_settings.html')">{{_('Settings')}}</a>
                       </li>
                     </ul>
                   </li>
