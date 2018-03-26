@@ -152,6 +152,12 @@ div.row.logtail div.x_content pre{
   max-height: 550px;
 }
 
+iframe.external_calendar {
+  width: 100%;
+  height: 500px;
+  border: none;
+}
+
 /* Default state */
 .top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#online_indicator .offline,
 .top_nav .nav_menu ul.nav.navbar-nav.navbar-right li#door_indicator .open,

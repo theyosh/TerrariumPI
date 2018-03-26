@@ -834,7 +834,8 @@ class terrariumEngine():
                       'load15' : uptime['load'][2]},
             'uptime' : uptime['uptime'],
             'cores' : psutil.cpu_count(),
-            'temperature' : cpu_temp}
+            'temperature' : cpu_temp,
+            'external_calendar_url': self.config.get_external_calender_url()}
 
     if socket:
       gauge_data = {'system_load'        : {'current' : data['load']['load1'] * 100, 'alarm_min' : 0, 'alarm_max': 80, 'limit_min' : 0, 'limit_max': 100, 'cores' : data['cores']},

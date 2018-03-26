@@ -128,6 +128,12 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="power_usage">{{_('External calendar')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control" name="external_calendar_url" type="text" placeholder="{{_('External calendar url')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_external_calendar_url')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="power_usage">{{_('Pi power usage in W')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control" name="power_usage" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Pi power usage in W')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_pi_power')}}">
