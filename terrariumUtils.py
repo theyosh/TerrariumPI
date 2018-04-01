@@ -152,6 +152,8 @@ class terrariumUtils():
             item = str(item)
 
           data = data[item]
+      else:
+        data = None
 
     except Exception, ex:
       print ex
