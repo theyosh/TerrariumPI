@@ -95,6 +95,7 @@
                               <option value="dht11">{{_('DHT11')}}</option>
                               <option value="dht22">{{_('DHT22')}}</option>
                               <option value="am2302">{{_('AM2302')}}</option>
+                              <option value="sht2x">{{_('SHT2X')}}</option>
                               <option value="w1">{{_('1Wire')}}</option>
                               <option value="remote">{{_('Remote')}}</option>
                               <option value="hc-sr04">{{_('HC-SR04')}}</option>

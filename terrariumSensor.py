@@ -14,6 +14,7 @@ import RPi.GPIO as GPIO
 from hashlib import md5
 from gpiozero import MCP3008
 from terrariumUtils import terrariumUtils
+from sht2x import SHT21
 
 class terrariumSensor:
   UPDATE_TIMEOUT = 30
@@ -21,7 +22,7 @@ class terrariumSensor:
   VALID_DHT_SENSORS    = { 'dht11' : dht.DHT11,
                            'dht22' : dht.DHT22,
                            'am2302': dht.AM2302 }
-  VALID_HARDWARE_TYPES = ['owfs','w1','remote','hc-sr04','sku-sen0161'] + VALID_DHT_SENSORS.keys()
+  VALID_HARDWARE_TYPES = ['owfs','w1','remote','hc-sr04','sku-sen0161','sht2x'] + VALID_DHT_SENSORS.keys()
 
   W1_BASE_PATH = '/sys/bus/w1/devices/'
   W1_TEMP_REGEX = re.compile(r'(?P<type>t|f)=(?P<value>[0-9]+)',re.IGNORECASE)
@@ -45,6 +46,9 @@ class terrariumSensor:
       # Dirty hack to set sensor address
       self.set_address(sensor)
     elif 'remote' == self.get_hardware_type():
+      # Dirty hack to set sensor address
+      self.set_address(sensor)
+    elif 'sht2x' == self.get_hardware_type():
       # Dirty hack to set sensor address
       self.set_address(sensor)
     elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
@@ -177,6 +181,9 @@ class terrariumSensor:
           if self.get_hardware_type() == 'owfs':
             current = float(self.sensor.temperature)
 
+          elif self.get_hardware_type() == 'sht2x':
+            current = float(self.sensor.read_temperature())
+
           elif self.get_hardware_type() == 'w1':
             data = ''
             with open(terrariumSensor.W1_BASE_PATH + self.get_address() + '/w1_slave', 'r') as w1data:
@@ -197,6 +204,9 @@ class terrariumSensor:
         elif 'humidity' == self.get_type():
           if self.get_hardware_type() == 'owfs':
             current = float(self.sensor.humidity)
+
+          elif self.get_hardware_type() == 'sht2x':
+            current = float(self.sensor.read_humidity())
 
           elif self.get_hardware_type() == 'w1':
             # Not tested / No hardware to test with
@@ -281,6 +291,8 @@ class terrariumSensor:
     address = self.sensor_address
     if 'hc-sr04' == self.get_hardware_type():
       address = str(self.sensor_address['TRIG']) + ',' + str(self.sensor_address['ECHO'])
+    elif 'sht2x' == self.get_hardware_type():
+      address = str(self.sensor_address['device']) + ',' + str(self.sensor_address['address'])
 
     return address
 
@@ -299,6 +311,13 @@ class terrariumSensor:
         except Exception, err:
           logger.warning(err)
           pass
+      elif 'sht2x' == self.get_hardware_type():
+        sensor = address.split(',')
+        if len(sensor) == 2:
+          self.sensor_address = {'device' : sensor[0] , 'address' : sensor[1]}
+        else:
+          self.sensor_address = {'device' : 1 , 'address' : address}
+        self.sensor = SHT21(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
 
   def set_name(self,name):
     self.name = str(name)
