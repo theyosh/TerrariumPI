@@ -317,7 +317,12 @@ class terrariumSensor:
           self.sensor_address = {'device' : sensor[0] , 'address' : sensor[1]}
         else:
           self.sensor_address = {'device' : 1 , 'address' : address}
-        self.sensor = SHT21(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
+
+        try:
+          self.sensor = SHT21(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
+        except Exception, err:
+          logger.exception(err)
+          pass
 
   def set_name(self,name):
     self.name = str(name)
