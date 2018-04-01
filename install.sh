@@ -65,7 +65,6 @@ cd "${BASEDIR}/"
 git submodule init
 git submodule update
 cd "${BASEDIR}/.."
-git submodule foreach git pull
 
 # Install multiple python modules
 pip install --upgrade gevent
