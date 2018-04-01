@@ -362,3 +362,14 @@ class terrariumSensor:
 
   def get_alarm(self):
     return not self.get_alarm_min() < self.get_current() < self.get_alarm_max()
+
+  def stop(self):
+    if 'hc-sr04' == self.get_hardware_type():
+      GPIO.cleanup(terrariumUtils.to_BCM_port_number(self.sensor_address['TRIG']))
+      GPIO.cleanup(terrariumUtils.to_BCM_port_number(self.sensor_address['ECHO']))
+    elif 'sht2x' == self.get_hardware_type():
+      self.sensor.close()
+    elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
+      GPIO.cleanup(terrariumUtils.to_BCM_port_number(self.sensor_address))
+
+    logger.info('Cleaning up sensor %s at location %s' % (self.get_name(), self.get_address()))
