@@ -53,6 +53,7 @@ class terrariumDoor():
         current_status = terrariumDoor.OPEN if GPIO.input(terrariumUtils.to_BCM_port_number(self.get_address())) else terrariumDoor.CLOSED
 
       elif self.get_hardware_type() == 'remote' and (int(time.time()) - self.__last_check) >= 30:
+        current_status = None
         url_data = terrariumUtils.parse_url(self.get_address())
         if url_data is False:
           logger.error('Remote url \'%s\' for door \'%s\' is not a valid remote source url!' % (self.get_address(),self.get_name()))
@@ -61,7 +62,7 @@ class terrariumDoor():
           if data is not None:
             current_status = terrariumDoor.OPEN if terrariumUtils.is_true(data) else terrariumDoor.CLOSED
           else:
-            logger.warning('Remote door \'%s\' got error from remote source \'%s\': %s' % (self.get_name(),self.get_address(),data.status_code))
+            logger.warning('Remote door \'%s\' got error from remote source \'%s\'' % (self.get_name(),self.get_address()))
 
         self.__last_check = int(time.time())
 

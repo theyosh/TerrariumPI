@@ -142,7 +142,7 @@ class terrariumSensor:
             if data is not None:
               current = float(data)
             else:
-              logger.warning('Remote sensor \'%s\' got error from remote source \'%s\': %s' % (self.get_name(),self.get_address(),data.status_code))
+              logger.warning('Remote sensor \'%s\' got error from remote source \'%s\'' % (self.get_name(),self.get_address()))
 
         elif 'hc-sr04' == self.get_hardware_type():
           GPIO.output(terrariumUtils.to_BCM_port_number(self.sensor_address['TRIG']), False)
