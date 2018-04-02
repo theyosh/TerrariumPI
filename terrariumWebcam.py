@@ -9,17 +9,23 @@ import math
 import datetime
 import urllib2
 import base64
+import os
+import glob
+import re
+
 
 from picamera import PiCamera, PiCameraError
 from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont
 from hashlib import md5
+from shutil import copyfile
 
 from gevent import monkey, sleep
 monkey.patch_all()
 
 class terrariumWebcam():
   TILE_LOCATION = 'webcam/'
+  ARCHIVE_LOCATION = TILE_LOCATION + 'archive/'
   JPEG_QUALITY = 95
   OFFLINE = 'offline'
   ONLINE = 'online'
@@ -113,7 +119,22 @@ class terrariumWebcam():
         self.raw_image = self.raw_image.transpose(Image.FLIP_LEFT_RIGHT)
       logger.debug('Rotated raw image %s to %s' % (self.get_name(),self.get_rotation()))
 
+      # https://stackoverflow.com/questions/189943/how-can-i-quantify-difference-between-two-images#189960
+      prev_image_file_size = os.path.getsize(self.get_raw_image()) * 1.0
       self.raw_image.save(self.get_raw_image(),'jpeg',quality=terrariumWebcam.JPEG_QUALITY)
+      new_image_file_size = os.path.getsize(self.get_raw_image()) * 1.0
+
+      file_difference = abs(prev_image_file_size-new_image_file_size) * 1.0
+      file_difference_precentage = (file_difference/new_image_file_size) * 100.0
+
+      if file_difference_precentage > 10:
+        copyfile(self.get_raw_image(), self.get_raw_image(True))
+
+      print 'Webcam %s changed from %s to %s bytes. Difference: %s, %s percentage' % (self.get_name(),prev_image_file_size,
+                                                                                     new_image_file_size,
+                                                                                     file_difference,
+                                                                                     file_difference_precentage)
+
       logger.debug('Saved raw image %s to disk: %s' % (self.get_name(),self.get_raw_image()))
 
     self.last_update = int(time.time())
@@ -299,6 +320,12 @@ class terrariumWebcam():
     del canvas
     logger.debug('Done tiling webcam image \'%s\' in %.5f seconds' % (self.get_name(),time.time()-starttime))
 
+  def get_archive(self):
+    file_filter = re.sub(r"archive_\d+\.jpg$", "archive_*.jpg", self.get_raw_image(True))
+    files = glob.glob(file_filter)
+    files.sort(key=os.path.getmtime,reverse = True)
+    return files
+
   def update(self):
     starttime = time.time()
     if self.last_update is None or (int(starttime) - self.get_last_update()) > terrariumWebcam.UPDATE_TIMEOUT:
@@ -308,8 +335,8 @@ class terrariumWebcam():
         self.__tile_image()
       logger.info('Done updating webcam \'%s\' at location %s in %.5f seconds' % (self.get_name(), self.get_location(),time.time()-starttime))
 
-  def get_data(self):
-    return {'id': self.get_id(),
+  def get_data(self,archive = False):
+    data = {'id': self.get_id(),
             'location': self.get_location(),
             'name': self.get_name(),
             'rotation' : self.get_rotation(),
@@ -318,8 +345,14 @@ class terrariumWebcam():
             'state' : self.get_state(),
             'last_update' : self.get_last_update(),
             'image': self.get_raw_image(),
-            'preview': self.get_preview_image()
+            'preview': self.get_preview_image(),
+            'archive' : []
             }
+
+    if archive:
+      data['archive'] = self.get_archive()
+
+    return data
 
   def get_id(self):
     return self.id
@@ -370,8 +403,12 @@ class terrariumWebcam():
   def get_last_update(self):
     return self.last_update
 
-  def get_raw_image(self):
-    return terrariumWebcam.TILE_LOCATION + self.get_id() + '_raw.jpg'
+  def get_raw_image(self,motion = False):
+    image = terrariumWebcam.TILE_LOCATION + self.get_id() + '_raw.jpg'
+    if motion:
+      image = terrariumWebcam.ARCHIVE_LOCATION + self.get_id() + '_archive_' + str(int(time.time())) + '.jpg'
+
+    return image
 
   def get_preview_image(self):
     return terrariumWebcam.TILE_LOCATION + self.get_id() + '_tile_0_0_0.jpg'
