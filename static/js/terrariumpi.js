@@ -2036,6 +2036,36 @@ function createWebcamLayer(webcamid, maxzoom) {
   });
 }
 
+function webcamArchive(webcamid) {
+   $.getJSON('api/webcams/' + webcamid + '/archive', function(data) {
+    var photos = [];
+    var date_match = /archive_(\d+)\.jpg$/g;
+    $.each(data.webcams[0].archive, function(index,value) {
+      value.match(date_match);
+      var date_photo = date_match.exec(value);
+      if (date_photo != null && date_photo.length == 2) {
+        date_photo = moment(date_photo[1]* 1000).format('LLL');
+      } else {
+        date_photo = '{{_('Unknown date')}}';
+      }
+      photos.push({src : value,
+                  opts: { caption: '{{_('Webcam')}}' + ' ' + data.webcams[0].name + ': ' + date_photo}})
+    });
+    $.fancybox.open(photos,
+                    {loop : false,
+                     buttons : [
+                        'slideShow',
+                        'fullScreen',
+                        'thumbs',
+                        //'share',
+                        'download',
+                        'zoom',
+                        'close'
+                     ]}
+                );
+  });
+}
+
 function initWebcam(data) {
   if ($('div#webcam_' + data.id).length === 1) {
     return false;
@@ -2055,22 +2085,34 @@ function initWebcam(data) {
     fullscreenControl: true,
   }).setView([0, 0], 1);
 
-  L.Control.TakePhoto = L.Control.extend({
+  L.Control.ExtraWebcamControls = L.Control.extend({
     options: {
       position: 'topleft',
     },
     onAdd: function (map) {
       var container = L.DomUtil.create('div', 'leaflet-control-takephoto leaflet-bar leaflet-control');
-      var link = L.DomUtil.create('a', 'leaflet-control-takephoto-button leaflet-bar-part', container);
-      link.title = '{{_('Save RAW photo')}}';
-      link.target = '_blank';
-      link.href = '/webcam/' + data.id + '_raw.jpg';
-      L.DomUtil.create('i', 'fa fa-camera', link);
-     return container;
+
+      this.photo_link = L.DomUtil.create('a', 'leaflet-control-takephoto-button leaflet-bar-part', container);
+      this.photo_link.title = '{{_('Save RAW photo')}}';
+      this.photo_link.target = '_blank';
+      this.photo_link.href = '/webcam/' + data.id + '_raw.jpg';
+      L.DomUtil.create('i', 'fa fa-camera', this.photo_link);
+
+      this.archive_link = L.DomUtil.create('a', 'leaflet-control-archive-button leaflet-bar-part', container);
+      this.archive_link.href = '#';
+      this.archive_link.title = '{{_('Archive')}}';
+      L.DomEvent.on(this.archive_link, 'click', this._start_archive, this);
+      L.DomUtil.create('i', 'fa fa-archive', this.archive_link);
+
+      return container;
+    },
+    _start_archive: function (e) {
+        L.DomEvent.stopPropagation(e);
+        L.DomEvent.preventDefault(e);
+        webcamArchive(data.id);
     }
   });
-  var takePhotoControl = new L.Control.TakePhoto();
-  webcam.addControl(takePhotoControl);
+  webcam.addControl(new L.Control.ExtraWebcamControls());
   webcam.addControl(L.Control.loading({separate: true}));
 
   globals.webcams[webcam._container.id] = null;

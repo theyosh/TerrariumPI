@@ -384,51 +384,55 @@ class terrariumEngine():
     while self.__running:
       starttime = time.time()
 
-      # Update weather
-      self.weather.update()
-      weather_data = self.weather.get_data()
-      if 'hour_forecast' in weather_data and len(weather_data['hour_forecast']) > 0:
-        self.collector.log_weather_data(weather_data['hour_forecast'][0])
+      try:
+        # Update weather
+        self.weather.update()
+        weather_data = self.weather.get_data()
+        if 'hour_forecast' in weather_data and len(weather_data['hour_forecast']) > 0:
+          self.collector.log_weather_data(weather_data['hour_forecast'][0])
 
-      # Update sensors
-      for sensorid in self.sensors:
-        # Update the current sensor.
-        self.sensors[sensorid].update()
-        # Save new data to database
-        self.collector.log_sensor_data(self.sensors[sensorid].get_data())
+        # Update sensors
+        for sensorid in self.sensors:
+          # Update the current sensor.
+          self.sensors[sensorid].update()
+          # Save new data to database
+          self.collector.log_sensor_data(self.sensors[sensorid].get_data())
+          # Websocket callback
+          self.get_sensors([sensorid],socket=True)
+          # Make time for other web request
+          sleep(0.1)
+
+        # Get the current average temperatures
+        average_data = self.get_sensors(['average'])['sensors']
+
         # Websocket callback
-        self.get_sensors([sensorid],socket=True)
-        # Make time for other web request
-        sleep(0.1)
+        self.__send_message({'type':'sensor_gauge','data':average_data})
 
-      # Get the current average temperatures
-      average_data = self.get_sensors(['average'])['sensors']
+        # Update (remote) power switches
+        for power_switch_id in self.power_switches:
+          # Update timer trigger if activated
+          self.power_switches[power_switch_id].timer()
+          # Update the current sensor.
+          self.power_switches[power_switch_id].update()
+          # Make time for other web request
+          sleep(0.1)
 
-      # Websocket callback
-      self.__send_message({'type':'sensor_gauge','data':average_data})
+        # Websocket messages back
+        self.get_uptime(socket=True)
+        self.get_power_usage_water_flow(socket=True)
+        self.get_environment(socket=True)
+        self.get_audio_playing(socket=True)
 
-      # Update (remote) power switches
-      for power_switch_id in self.power_switches:
-        # Update timer trigger if activated
-        self.power_switches[power_switch_id].timer()
-        # Update the current sensor.
-        self.power_switches[power_switch_id].update()
-        # Make time for other web request
-        sleep(0.1)
+        # Log system stats
+        self.collector.log_system_data(self.get_system_stats())
+        self.get_system_stats(socket=True)
 
-      # Websocket messages back
-      self.get_uptime(socket=True)
-      self.get_power_usage_water_flow(socket=True)
-      self.get_environment(socket=True)
-      self.get_audio_playing(socket=True)
+        for webcamid in self.webcams:
+          self.webcams[webcamid].update()
+          sleep(0.1)
 
-      # Log system stats
-      self.collector.log_system_data(self.get_system_stats())
-      self.get_system_stats(socket=True)
-
-      for webcamid in self.webcams:
-        self.webcams[webcamid].update()
-        sleep(0.1)
+      except Exception, err:
+        print err
 
       duration = time.time() - starttime
       if duration < terrariumEngine.LOOP_TIMEOUT:
@@ -635,7 +639,8 @@ class terrariumEngine():
       filter = parameters[0]
 
     if filter is not None and filter in self.webcams:
-      data.append(self.webcams[filter].get_data())
+      archive = len(parameters) > 1 and 'archive' == parameters[1]
+      data.append(self.webcams[filter].get_data(archive))
 
     else:
       for webcamid in self.webcams:
