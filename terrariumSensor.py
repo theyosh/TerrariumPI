@@ -25,7 +25,7 @@ class terrariumSensor:
   VALID_HARDWARE_TYPES = ['owfs','w1','remote','hc-sr04','sku-sen0161','sht2x'] + VALID_DHT_SENSORS.keys()
 
   W1_BASE_PATH = '/sys/bus/w1/devices/'
-  W1_TEMP_REGEX = re.compile(r'(?P<type>t|f)=(?P<value>[0-9]+)',re.IGNORECASE)
+  W1_TEMP_REGEX = re.compile(r'(?P<type>t|f)=(?P<value>[0-9\-]+)',re.IGNORECASE)
 
   def __init__(self, id, hardware_type, sensor_type, sensor, name = '', callback_indicator = None):
     self.id = id
