@@ -129,11 +129,7 @@ class terrariumWebcam():
 
       if file_difference_precentage > 10:
         copyfile(self.get_raw_image(), self.get_raw_image(True))
-
-      print 'Webcam %s changed from %s to %s bytes. Difference: %s, %s percentage' % (self.get_name(),prev_image_file_size,
-                                                                                     new_image_file_size,
-                                                                                     file_difference,
-                                                                                     file_difference_precentage)
+        logger.info('Saved webcam %s image for archive due to more then 10 percent file change (motion detection)' % (self.get_name(),))
 
       logger.debug('Saved raw image %s to disk: %s' % (self.get_name(),self.get_raw_image()))
 
