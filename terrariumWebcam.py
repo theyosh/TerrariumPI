@@ -146,7 +146,7 @@ class terrariumWebcam():
       #file_difference_precentage = self.__test_image_entropy(image_difference)
       #difference_limit = 3.0
 
-      motion_detected = image_entropy(ImageChops.difference(prev_image,self.raw_image)) >= 3.0
+      motion_detected = image_entropy(ImageChops.difference(prev_image,self.raw_image)) >= 4.0
 
       if motion_detected:
         copyfile(self.get_raw_image(), self.get_raw_image(True))
