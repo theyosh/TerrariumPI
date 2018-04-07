@@ -186,13 +186,18 @@ class terrariumSensor:
 
           elif self.get_hardware_type() == 'w1':
             data = ''
-            with open(terrariumSensor.W1_BASE_PATH + self.get_address() + '/w1_slave', 'r') as w1data:
-              data = w1data.read()
+            if os.path.isfile(terrariumSensor.W1_BASE_PATH + self.get_address() + '/w1_slave'):
+              with open(terrariumSensor.W1_BASE_PATH + self.get_address() + '/w1_slave', 'r') as w1data:
+                data = w1data.read()
 
-            w1data = terrariumSensor.W1_TEMP_REGEX.search(data)
-            if w1data:
-              # Found data
-              current = float(w1data.group('value')) / 1000
+              w1data = terrariumSensor.W1_TEMP_REGEX.search(data)
+              if w1data:
+                # Found data
+                current = float(w1data.group('value')) / 1000
+              else:
+                logger.error('Error reading 1Wire temperature %s at location %s. Current data: %s', (self.get_name(),self.get_address(),data))
+            else:
+              logger.error('1 Wire sensor %s at location %s is not available!!!', (self.get_name(),self.get_address()))
           elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
             time.sleep(2.1)
             humidity, temperature = self.sensor.read_retry(terrariumSensor.VALID_DHT_SENSORS[self.get_hardware_type()],
@@ -247,6 +252,7 @@ class terrariumSensor:
         logger.exception('Error updating %s %s sensor \'%s\' with error:' % (self.get_hardware_type(),
                                                                               self.get_type(),
                                                                               self.get_name()))
+        logger.exception(ex)
 
   def get_data(self):
     data = {'id' : self.get_id(),
