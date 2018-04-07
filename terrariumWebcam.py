@@ -13,10 +13,12 @@ import os
 import glob
 import re
 
+import numpy as np
+
 
 from picamera import PiCamera, PiCameraError
 from io import BytesIO
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageChops
 from hashlib import md5
 from shutil import copyfile
 
@@ -67,6 +69,14 @@ class terrariumWebcam():
     self.update()
 
   def __get_raw_image(self):
+    def image_entropy(img):
+      w,h = img.size
+      a = np.array(img.convert('RGB')).reshape((w*h,3))
+      h,e = np.histogramdd(a, bins=(16,)*3, range=((0,256),)*3)
+      prob = h/np.sum(h) # normalize
+      prob = prob[prob>0] # remove zeros
+      return -np.sum(prob*np.log2(prob))
+
     logger.debug('Start getting raw image data from location: %s' % (self.location,))
     stream = BytesIO()
     oldstate = self.state
@@ -120,14 +130,25 @@ class terrariumWebcam():
       logger.debug('Rotated raw image %s to %s' % (self.get_name(),self.get_rotation()))
 
       # https://stackoverflow.com/questions/189943/how-can-i-quantify-difference-between-two-images#189960
-      prev_image_file_size = os.path.getsize(self.get_raw_image()) * 1.0
+      # prev_image_file_size = os.path.getsize(self.get_raw_image()) * 1.0
+      # self.raw_image.save(self.get_raw_image(),'jpeg',quality=terrariumWebcam.JPEG_QUALITY)
+      # new_image_file_size = os.path.getsize(self.get_raw_image()) * 1.0
+
+      # file_difference = abs(prev_image_file_size-new_image_file_size) * 1.0
+      # file_difference_precentage = (file_difference/new_image_file_size) * 100.0
+      # difference_limit = 10
+      # motion_detected = file_difference_precentage >= 10.0
+
+      #https://stackoverflow.com/questions/5524179/how-to-detect-motion-between-two-pil-images-wxpython-webcam-integration-exampl
+      prev_image = Image.open(self.get_raw_image())
       self.raw_image.save(self.get_raw_image(),'jpeg',quality=terrariumWebcam.JPEG_QUALITY)
-      new_image_file_size = os.path.getsize(self.get_raw_image()) * 1.0
+      #image_difference = ImageChops.difference(prev_image,self.raw_image)
+      #file_difference_precentage = self.__test_image_entropy(image_difference)
+      #difference_limit = 3.0
 
-      file_difference = abs(prev_image_file_size-new_image_file_size) * 1.0
-      file_difference_precentage = (file_difference/new_image_file_size) * 100.0
+      motion_detected = image_entropy(ImageChops.difference(prev_image,self.raw_image)) >= 3.0
 
-      if file_difference_precentage > 10:
+      if motion_detected:
         copyfile(self.get_raw_image(), self.get_raw_image(True))
         logger.info('Saved webcam %s image for archive due to more then 10 percent file change (motion detection)' % (self.get_name(),))
 
