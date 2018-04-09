@@ -159,5 +159,9 @@ more information is here: [Remote data wiki](https://github.com/theyosh/Terrariu
 
 More screenshots can be found [here](https://github.com/theyosh/TerrariumPI/tree/master/screenshots)
 
+## Testing
+[Free tested with BrowserStack for opensource](https://browserstack.com)
+![BrowserStack](screenshots/BrowserStack.png)
+
 ## About
 A live version is running at: https://terrarium.theyosh.nl/index.html. Go to 'Help' menu for more information about used hardware, software and how to setup.
