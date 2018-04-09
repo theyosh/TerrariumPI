@@ -2040,7 +2040,7 @@ function webcamArchive(webcamid) {
    $.getJSON('api/webcams/' + webcamid + '/archive', function(data) {
     var photos = [];
     var date_match = /archive_(\d+)\.jpg$/g;
-    $.each(data.webcams[0].archive, function(index,value) {
+    $.each(data.webcams[0].archive_images, function(index,value) {
       value.match(date_match);
       var date_photo = date_match.exec(value);
       if (date_photo != null && date_photo.length == 2) {
@@ -2088,6 +2088,11 @@ function initWebcam(data) {
   L.Control.ExtraWebcamControls = L.Control.extend({
     options: {
       position: 'topleft',
+      archive: data.archive
+    },
+    initialize: function (options) {
+      // constructor
+      L.Util.setOptions(this, options);
     },
     onAdd: function (map) {
       var container = L.DomUtil.create('div', 'leaflet-control-takephoto leaflet-bar leaflet-control');
@@ -2098,11 +2103,13 @@ function initWebcam(data) {
       this.photo_link.href = '/webcam/' + data.id + '_raw.jpg';
       L.DomUtil.create('i', 'fa fa-camera', this.photo_link);
 
-      this.archive_link = L.DomUtil.create('a', 'leaflet-control-archive-button leaflet-bar-part', container);
-      this.archive_link.href = '#';
-      this.archive_link.title = '{{_('Archive')}}';
-      L.DomEvent.on(this.archive_link, 'click', this._start_archive, this);
-      L.DomUtil.create('i', 'fa fa-archive', this.archive_link);
+      if (this.options.archive) {
+        this.archive_link = L.DomUtil.create('a', 'leaflet-control-archive-button leaflet-bar-part', container);
+        this.archive_link.href = '#';
+        this.archive_link.title = '{{_('Archive')}}';
+        L.DomEvent.on(this.archive_link, 'click', this._start_archive, this);
+        L.DomUtil.create('i', 'fa fa-archive', this.archive_link);
+      }
 
       return container;
     },

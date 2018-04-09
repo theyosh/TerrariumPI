@@ -423,7 +423,7 @@ class terrariumConfig:
       data['resolution_height'] = data['resolution']['height']
       del(data['resolution'])
 
-    return self.__update_config('webcam' + data['id'],data,['state','image','max_zoom','last_update','preview'])
+    return self.__update_config('webcam' + data['id'],data,['state','image','max_zoom','last_update','preview','archive_images'])
 
   def save_webcams(self,data):
     update_ok = True

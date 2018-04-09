@@ -67,6 +67,7 @@ class terrariumTranslations():
     self.translations['webcam_field_resolution_height'] = _('Holds the webcam resolution height in pixels.')
     self.translations['webcam_field_rotation'] = _('Holds the webcam rotation of the image.')
     self.translations['webcam_field_preview'] = _('Shows the webcam preview image.')
+    self.translations['webcam_field_archive'] = _('Enabled or disable image archiving based on motion detection.')
     # End webcam
 
     # Audio

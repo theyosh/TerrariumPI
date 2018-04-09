@@ -98,7 +98,7 @@
                         <div class="col-md-4 col-sm-4 col-xs-6 form-group">
                           <input class="form-control" name="webcam_[nr]_resolution_height" placeholder="{{_('Height')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" pattern="[0-9]+"  data-original-title="{{translations.get_translation('webcam_field_resolution_height')}}">
                         </div>
-                        <div class="col-md-8 col-sm-8 col-xs-12 form-group">
+                        <div class="col-md-4 col-sm-4 col-xs-6 form-group">
                           <label for="webcam_[nr]_rotation">{{_('Picture rotation')}}</label>
                           <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('webcam_field_rotation')}}">
                             <select class="form-control" name="webcam_[nr]_rotation" tabindex="-1" placeholder="{{_('Select an option')}}">
@@ -109,6 +109,16 @@
                               <option value="270">270 {{_('degrees')}}</option>
                               <option value="H">{{_('Flip Horizontal')}}</option>
                               <option value="V">{{_('Flip Vertical')}}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-6 form-group">
+                          <label for="webcam_[nr]_archive">{{_('Archive')}}</label>
+                          <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('webcam_field_archive')}}">
+                            <select class="form-control" name="webcam_[nr]_archive" tabindex="-1" placeholder="{{_('Select an option')}}">
+                              <option value="">{{_('Select an option')}}</option>
+                              <option value="false">{{_('Disabled')}}</option>
+                              <option value="true">{{_('Enabled')}}</option>
                             </select>
                           </div>
                         </div>
