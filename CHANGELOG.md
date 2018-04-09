@@ -34,6 +34,7 @@ Changelog
 
 **Updates**
 ------
+- Update translation files. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update submodules. [TheYOSH]
 - Update translations. [TheYOSH]
