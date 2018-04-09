@@ -306,15 +306,20 @@ class terrariumEngine():
         # New switch (add)
         width = 640
         height = 480
+        archive = False
         if 'resolution_width' in webcamdata and 'resolution_height' in webcamdata:
           width = webcamdata['resolution_width']
           height = webcamdata['resolution_height']
+
+        if 'archive' in webcamdata:
+          archive = webcamdata['archive']
 
         webcam = terrariumWebcam(None,
                                  webcamdata['location'],
                                  webcamdata['name'],
                                  webcamdata['rotation'],
-                                 width,height)
+                                 width,height,
+                                 archive)
         self.webcams[webcam.get_id()] = webcam
       else:
         # Existing switch
@@ -328,6 +333,9 @@ class terrariumEngine():
 
       if 'resolution_width' in webcamdata and 'resolution_height' in webcamdata:
         webcam.set_resolution(webcamdata['resolution_width'],webcamdata['resolution_height'])
+
+      if 'archive' in webcamdata:
+        webcam.set_archive(webcamdata['archive'])
 
       seen_webcams.append(webcam.get_id())
 

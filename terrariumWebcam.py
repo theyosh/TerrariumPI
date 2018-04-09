@@ -13,14 +13,13 @@ import os
 import glob
 import re
 
-import numpy as np
-
-
 from picamera import PiCamera, PiCameraError
 from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont, ImageChops
 from hashlib import md5
 from shutil import copyfile
+
+from terrariumUtils import terrariumUtils
 
 from gevent import monkey, sleep
 monkey.patch_all()
@@ -34,7 +33,7 @@ class terrariumWebcam():
   UPDATE_TIMEOUT = 60
   VALID_ROTATIONS = ['0','90','180','270','h','v']
 
-  def __init__(self, id, location, name = '', rotation = '0', width = 640, height = 480):
+  def __init__(self, id, location, name = '', rotation = '0', width = 640, height = 480, archive = False):
     self.id = id
     self.type = None
 
@@ -50,11 +49,13 @@ class terrariumWebcam():
     self.resolution = {'width': width, 'height': height}
     self.last_update = None
     self.state = None
+    self.__previous_image = None
 
     # Per webcam config
     self.set_location(location)
     self.set_name(name)
     self.set_rotation(rotation)
+    self.set_archive(archive)
 
     if self.id is None:
       self.id = md5(b'' + self.get_location()).hexdigest()
@@ -129,30 +130,42 @@ class terrariumWebcam():
         self.raw_image = self.raw_image.transpose(Image.FLIP_LEFT_RIGHT)
       logger.debug('Rotated raw image %s to %s' % (self.get_name(),self.get_rotation()))
 
-      # https://stackoverflow.com/questions/189943/how-can-i-quantify-difference-between-two-images#189960
-      # prev_image_file_size = os.path.getsize(self.get_raw_image()) * 1.0
-      # self.raw_image.save(self.get_raw_image(),'jpeg',quality=terrariumWebcam.JPEG_QUALITY)
-      # new_image_file_size = os.path.getsize(self.get_raw_image()) * 1.0
-
-      # file_difference = abs(prev_image_file_size-new_image_file_size) * 1.0
-      # file_difference_precentage = (file_difference/new_image_file_size) * 100.0
-      # difference_limit = 10
-      # motion_detected = file_difference_precentage >= 10.0
-
-      #https://stackoverflow.com/questions/5524179/how-to-detect-motion-between-two-pil-images-wxpython-webcam-integration-exampl
-      prev_image = Image.open(self.get_raw_image())
       self.raw_image.save(self.get_raw_image(),'jpeg',quality=terrariumWebcam.JPEG_QUALITY)
-      #image_difference = ImageChops.difference(prev_image,self.raw_image)
-      #file_difference_precentage = self.__test_image_entropy(image_difference)
-      #difference_limit = 3.0
-
-      motion_detected = image_entropy(ImageChops.difference(prev_image,self.raw_image)) >= 4.0
-
-      if motion_detected:
-        copyfile(self.get_raw_image(), self.get_raw_image(True))
-        logger.info('Saved webcam %s image for archive due to more then 10 percent file change (motion detection)' % (self.get_name(),))
-
       logger.debug('Saved raw image %s to disk: %s' % (self.get_name(),self.get_raw_image()))
+
+      if self.get_archive():
+        # https://www.pyimagesearch.com/2015/05/25/basic-motion-detection-and-tracking-with-python-and-opencv/
+        if self.__previous_image is None:
+          self.__previous_image = cv2.imread(self.get_raw_image())
+          self.__previous_image = cv2.cvtColor(self.__previous_image, cv2.COLOR_BGR2GRAY)
+          self.__previous_image = cv2.GaussianBlur(self.__previous_image, (21, 21), 0)
+
+        current_image = cv2.imread(self.get_raw_image())
+        current_image = cv2.cvtColor(current_image, cv2.COLOR_BGR2GRAY)
+        current_image = cv2.GaussianBlur(current_image, (21, 21), 0)
+
+        thresh = cv2.threshold(cv2.absdiff(self.__previous_image, current_image), 25, 255, cv2.THRESH_BINARY)[1]
+        thresh = cv2.dilate(thresh, None, iterations=2)
+
+        (cnts, _) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+        self.__previous_image = current_image
+        motion_detected = False
+        raw_image = cv2.imread(self.get_raw_image())
+        # loop over the contours
+        for c in cnts:
+          # if the contour is too small, ignore it
+          if cv2.contourArea(c) < 500:
+            continue
+
+          motion_detected = True
+          # compute the bounding box for the contour, draw it on the frame,
+          (x, y, w, h) = cv2.boundingRect(c)
+          cv2.rectangle(raw_image, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
+        if motion_detected:
+          cv2.imwrite(self.get_raw_image(True),raw_image)
+          logger.info('Saved webcam %s image for archive due to motion detection' % (self.get_name(),))
 
     self.last_update = int(time.time())
 
@@ -337,7 +350,7 @@ class terrariumWebcam():
     del canvas
     logger.debug('Done tiling webcam image \'%s\' in %.5f seconds' % (self.get_name(),time.time()-starttime))
 
-  def get_archive(self):
+  def get_archive_images(self):
     file_filter = re.sub(r"archive_\d+\.jpg$", "archive_*.jpg", self.get_raw_image(True))
     files = glob.glob(file_filter)
     files.sort(key=os.path.getmtime,reverse = True)
@@ -363,11 +376,12 @@ class terrariumWebcam():
             'last_update' : self.get_last_update(),
             'image': self.get_raw_image(),
             'preview': self.get_preview_image(),
-            'archive' : []
+            'archive': self.get_archive(),
+            'archive_images' : []
             }
 
     if archive:
-      data['archive'] = self.get_archive()
+      data['archive_images'] = self.get_archive_images()
 
     return data
 
@@ -413,6 +427,12 @@ class terrariumWebcam():
 
   def get_max_zoom(self):
     return self.max_zoom
+
+  def get_archive(self):
+    return self.archive == True
+
+  def set_archive(self,enabled = True):
+    self.archive = terrariumUtils.is_true(enabled)
 
   def get_state(self):
     return terrariumWebcam.ONLINE if self.state else terrariumWebcam.OFFLINE
