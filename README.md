@@ -23,7 +23,8 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
    2. [New hardware](#new-hardware)
 6. [Remote data](#remote-data)
 7. [Screenshots](#screenshots)
-8. [About](#about)
+8. [Testing](#testing)
+9. [About](#about)
 
 ## Features
 - Controlling electronic devices like lights, sprayers, heating, cooling and water pump equipment
@@ -161,7 +162,7 @@ More screenshots can be found [here](https://github.com/theyosh/TerrariumPI/tree
 
 ## Testing
 [Free tested with BrowserStack for opensource](https://browserstack.com)
-![BrowserStack](screenshots/BrowserStack.png)
+[![BrowserStack](screenshots/BrowserStack.png)](https://browserstack.com)
 
 ## About
 A live version is running at: https://terrarium.theyosh.nl/index.html. Go to 'Help' menu for more information about used hardware, software and how to setup.
