@@ -2,6 +2,63 @@ Changelog
 =========
 
 
+3.4.2 (2018-04-09)
+------------------
+
+**New**
+------
+- Add webcam archiving based on motion detection. [TheYOSH]
+- Add webcam archiving. Testing n ow. [TheYOSH]
+- Add extra checks. [TheYOSH]
+- Add sensor cleanup. [TheYOSH]
+- Add support for SHT2X sensors. [#84](https://github.com/theyosh/TerrariumPI/issues/84). [TheYOSH]
+- Add external calendar support. [#124](https://github.com/theyosh/TerrariumPI/issues/124). [TheYOSH]
+- Add external calendar support. [#124](https://github.com/theyosh/TerrariumPI/issues/124). [TheYOSH]
+- Add empty folder for external json data. [TheYOSH]
+- Add empty folder for external json data. [TheYOSH]
+- Add remote doors support. Will update once every 30 seconds. [#124](https://github.com/theyosh/TerrariumPI/issues/124).
+  [TheYOSH]
+- Add files via upload. [nke69]
+
+  Added "PH" value to display ph value in the graphics.
+  Continued from https://github.com/theyosh/TerrariumPI/issues/87
+- Add "PH" value. [nke69]
+
+  Add "PH" value to collect information into the database.
+  Continued from https://github.com/theyosh/TerrariumPI/issues/87
+
+**Fixes**
+------
+- Fix reading negative temperature values for 1-wire devices. [TheYOSH]
+- Fix weather settings link. [TheYOSH]
+
+**Updates**
+------
+- Update version number. [TheYOSH]
+- Update submodules. [TheYOSH]
+- Update translations. [TheYOSH]
+
+**Other**
+------
+- Different motion detection. Should work better with low light (2)
+  [TheYOSH]
+- Different motion detection. Should work better with low light.
+  [TheYOSH]
+- Remove debug output. [TheYOSH]
+- Better sensor checking. [TheYOSH]
+- Bla. [TheYOSH]
+- Better handling of offline remote data. [TheYOSH]
+- Change PH to pH. [TheYOSH]
+- Some finetuning. [#125](https://github.com/theyosh/TerrariumPI/issues/125). [TheYOSH]
+- Merge pull request [#125](https://github.com/theyosh/TerrariumPI/issues/125) from nke69/master. [TheYOSH]
+
+  Adding "PH" value in database
+- Display PH Graphs. [nke69]
+
+  Added the value "PH" for displaying graphs.
+  Continued from https://github.com/theyosh/TerrariumPI/issues/87
+
+
 3.4.1 (2018-03-19)
 ------------------
 
@@ -29,6 +86,8 @@ Changelog
 
 **Updates**
 ------
+- Update CHANGELOG.md. [TheYOSH]
+- Update changelog. [TheYOSH]
 - Update notification script. [#101](https://github.com/theyosh/TerrariumPI/issues/101). [TheYOSH]
 - Update changelog. [TheYOSH]
 - Update README.md. [TheYOSH]
@@ -1205,5 +1264,3 @@ Changelog
 - Living on the edge.... use latest beta of Leaflet. [TheYOSH]
 - Initial release. [TheYOSH]
 - Initial commit. [TheYOSH]
-
-

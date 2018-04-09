@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: TerrariumPI 3.4.1\n"
-"POT-Creation-Date: 2018-03-20 22:57+CET\n"
-"PO-Revision-Date: 2018-03-20 22:58+0100\n"
+"Project-Id-Version: TerrariumPI 3.4.2\n"
+"POT-Creation-Date: 2018-04-09 19:16+CEST\n"
+"PO-Revision-Date: 2018-04-09 19:16+0200\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -168,44 +168,48 @@ msgstr "Holds the webcam rotation of the image."
 msgid "Shows the webcam preview image."
 msgstr "Shows the webcam preview image."
 
-#: terrariumTranslations.py:73
+#: terrariumTranslations.py:70
+msgid "Enabled or disable image archiving based on motion detection."
+msgstr "Enabled or disable image archiving based on motion detection."
+
+#: terrariumTranslations.py:74
 msgid "Holds the audio playlist name."
 msgstr "Holds the audio playlist name."
 
-#: terrariumTranslations.py:74
+#: terrariumTranslations.py:75
 msgid "Holds the time when the playlist should be started."
 msgstr "Holds the time when the playlist should be started."
 
-#: terrariumTranslations.py:75
+#: terrariumTranslations.py:76
 msgid "Holds the time when the playlist should be stopped."
 msgstr "Holds the time when the playlist should be stopped."
 
-#: terrariumTranslations.py:76
+#: terrariumTranslations.py:77
 msgid "Holds the volume for this playlist."
 msgstr "Holds the volume for this playlist."
 
-#: terrariumTranslations.py:77
+#: terrariumTranslations.py:78
 msgid "Toggle on to enable repeating of the audio files."
 msgstr "Toggle on to enable repeating of the audio files."
 
-#: terrariumTranslations.py:78
+#: terrariumTranslations.py:79
 msgid "Toggle on to enable shuffeling of the audio files."
 msgstr "Toggle on to enable shuffeling of the audio files."
 
-#: terrariumTranslations.py:79
+#: terrariumTranslations.py:80
 msgid "Select the audio files for this playlist. It is possible to select the same audio file in multiple playlists."
 msgstr "Select the audio files for this playlist. It is possible to select the same audio file in multiple playlists."
 
-#: terrariumTranslations.py:83
+#: terrariumTranslations.py:84
 msgid "Select the mode on which the lights will be put on and off. Select '%s' to use the sun rise and sun set at your location. This will make the amount of lighting variable to the actual amount of daylight. When selecting '%s', the light will put on and off at selected times."
 msgstr "Select the mode on which the lights will be put on and off. Select '%s' to use the sun rise and sun set at your location. This will make the amount of lighting variable to the actual amount of daylight. When selecting '%s', the light will put on and off at selected times."
 
-#: terrariumTranslations.py:83 terrariumTranslations.py:84
-#: terrariumTranslations.py:85 terrariumTranslations.py:105
-#: terrariumTranslations.py:106 terrariumTranslations.py:107
-#: terrariumTranslations.py:118 terrariumTranslations.py:119
-#: terrariumTranslations.py:120 terrariumTranslations.py:130
-#: terrariumTranslations.py:131 terrariumTranslations.py:132
+#: terrariumTranslations.py:84 terrariumTranslations.py:85
+#: terrariumTranslations.py:86 terrariumTranslations.py:106
+#: terrariumTranslations.py:107 terrariumTranslations.py:108
+#: terrariumTranslations.py:119 terrariumTranslations.py:120
+#: terrariumTranslations.py:121 terrariumTranslations.py:131
+#: terrariumTranslations.py:132 terrariumTranslations.py:133
 #: views/dashboard.tpl:83 views/dashboard.tpl:112 views/dashboard.tpl:153
 #: views/dashboard.tpl:194 views/dashboard.tpl:241
 #: views/inc/usage_environment.tpl:34 views/inc/usage_environment.tpl:230
@@ -216,9 +220,9 @@ msgstr "Select the mode on which the lights will be put on and off. Select '%s' 
 msgid "Timer"
 msgstr "Timer"
 
-#: terrariumTranslations.py:83 terrariumTranslations.py:90
-#: terrariumTranslations.py:105 terrariumTranslations.py:118
-#: terrariumTranslations.py:130 views/dashboard.tpl:83 views/dashboard.tpl:112
+#: terrariumTranslations.py:84 terrariumTranslations.py:91
+#: terrariumTranslations.py:106 terrariumTranslations.py:119
+#: terrariumTranslations.py:131 views/dashboard.tpl:83 views/dashboard.tpl:112
 #: views/dashboard.tpl:153 views/dashboard.tpl:194 views/dashboard.tpl:241
 #: views/inc/menu.tpl:30 views/inc/usage_environment.tpl:35
 #: views/inc/usage_environment.tpl:231 views/inc/usage_environment.tpl:325
@@ -229,76 +233,76 @@ msgstr "Timer"
 msgid "Weather"
 msgstr "Weather"
 
-#: terrariumTranslations.py:84
+#: terrariumTranslations.py:85
 msgid "Enter the time when the light should be put on. Only available when running in '%s' mode."
 msgstr "Enter the time when the light should be put on. Only available when running in '%s' mode."
 
-#: terrariumTranslations.py:85
+#: terrariumTranslations.py:86
 msgid "Enter the time when the lights should be put off. Only available when running in '%s' mode."
 msgstr "Enter the time when the lights should be put off. Only available when running in '%s' mode."
 
-#: terrariumTranslations.py:86
+#: terrariumTranslations.py:87
 msgid "Holds the period in minutes that the lights are on withing the total timer window."
 msgstr "Holds the period in minutes that the lights are on withing the total timer window."
 
-#: terrariumTranslations.py:87
+#: terrariumTranslations.py:88
 msgid "Holds the period in minutes that the lights are off withing the total timer window"
 msgstr "Holds the period in minutes that the lights are off withing the total timer window"
 
-#: terrariumTranslations.py:88
+#: terrariumTranslations.py:89
 msgid "Enter the maximum amount of lights time in hours. When the time between on and off is more then this maximum, the on and off time will be shifted more to each other."
 msgstr "Enter the maximum amount of lights time in hours. When the time between on and off is more then this maximum, the on and off time will be shifted more to each other."
 
-#: terrariumTranslations.py:89
+#: terrariumTranslations.py:90
 msgid "Enter the minimum amount of lights time in hours. When the time between on and off is less then this amount of hours, the on and off time will be widened until the minimum amount of hours entered here."
 msgstr "Enter the minimum amount of lights time in hours. When the time between on and off is less then this amount of hours, the on and off time will be widened until the minimum amount of hours entered here."
 
-#: terrariumTranslations.py:90
+#: terrariumTranslations.py:91
 msgid "Enter the amount of hours that the lights should shift. Is only needed when running in the '%s' mode. Enter a positive number for adding hours to the start time. Use negative numbers for subtracting from the start time."
 msgstr "Enter the amount of hours that the lights should shift. Is only needed when running in the '%s' mode. Enter a positive number for adding hours to the start time. Use negative numbers for subtracting from the start time."
 
-#: terrariumTranslations.py:91
+#: terrariumTranslations.py:92
 msgid "Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the lights. Select all needed switches below."
 msgstr "Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the lights. Select all needed switches below."
 
-#: terrariumTranslations.py:94
+#: terrariumTranslations.py:95
 msgid "Enable spraying when the lights are off. This can cause water flow when there is not enough heat to vaporize the water."
 msgstr "Enable spraying when the lights are off. This can cause water flow when there is not enough heat to vaporize the water."
 
-#: terrariumTranslations.py:95
+#: terrariumTranslations.py:96
 msgid "Select the operating mode."
 msgstr "Select the operating mode."
 
-#: terrariumTranslations.py:97
+#: terrariumTranslations.py:98
 msgid "Holds the period in minutes that the sprayer is on withing the total timer window."
 msgstr "Holds the period in minutes that the sprayer is on withing the total timer window."
 
-#: terrariumTranslations.py:98
+#: terrariumTranslations.py:99
 msgid "Holds the period in minutes that the sprayer is off withing the total timer window"
 msgstr "Holds the period in minutes that the sprayer is off withing the total timer window"
 
-#: terrariumTranslations.py:99
+#: terrariumTranslations.py:100
 msgid "How much time must there be between two spray actions and after start up. Enter the amount of seconds in which the humidity can settle."
 msgstr "How much time must there be between two spray actions and after start up. Enter the amount of seconds in which the humidity can settle."
 
-#: terrariumTranslations.py:100
+#: terrariumTranslations.py:101
 msgid "How long is the system spraying. Enter the amount of seconds that the system is on when the humidity is too low."
 msgstr "How long is the system spraying. Enter the amount of seconds that the system is on when the humidity is too low."
 
-#: terrariumTranslations.py:101
+#: terrariumTranslations.py:102
 msgid "Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the sprayer. Select all needed switches below."
 msgstr "Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the sprayer. Select all needed switches below."
 
-#: terrariumTranslations.py:102
+#: terrariumTranslations.py:103
 msgid "Select the humidity sensors that are used to control the humidity. When selecting multiple sensors, the average is calculated to determine the final humidity."
 msgstr "Select the humidity sensors that are used to control the humidity. When selecting multiple sensors, the average is calculated to determine the final humidity."
 
-#: terrariumTranslations.py:105
+#: terrariumTranslations.py:106
 msgid "Select the operating mode. Use '%s' mode to select the time period in which the water pump is running. Select '%s' mode to use the sun rise and sun set as on and off times. Use '%s' mode to have the water pump running when the water level is to low."
 msgstr "Select the operating mode. Use '%s' mode to select the time period in which the water pump is running. Select '%s' mode to use the sun rise and sun set as on and off times. Use '%s' mode to have the water pump running when the water level is to low."
 
-#: terrariumTranslations.py:105 terrariumTranslations.py:118
-#: terrariumTranslations.py:130 views/dashboard.tpl:83 views/dashboard.tpl:112
+#: terrariumTranslations.py:106 terrariumTranslations.py:119
+#: terrariumTranslations.py:131 views/dashboard.tpl:83 views/dashboard.tpl:112
 #: views/dashboard.tpl:153 views/dashboard.tpl:194 views/dashboard.tpl:241
 #: views/inc/usage_environment.tpl:138 views/inc/usage_environment.tpl:232
 #: views/inc/usage_environment.tpl:326 views/inc/usage_sensors.tpl:23
@@ -307,195 +311,199 @@ msgstr "Select the operating mode. Use '%s' mode to select the time period in wh
 msgid "Sensor"
 msgstr "Sensor"
 
-#: terrariumTranslations.py:106
+#: terrariumTranslations.py:107
 msgid "Enter the time when the water pump should be put on. Only available when running in '%s' mode."
 msgstr "Enter the time when the water pump should be put on. Only available when running in '%s' mode."
 
-#: terrariumTranslations.py:107
+#: terrariumTranslations.py:108
 msgid "Enter the time when the water pump should be put off. Only available when running in '%s' mode."
 msgstr "Enter the time when the water pump should be put off. Only available when running in '%s' mode."
 
-#: terrariumTranslations.py:108
+#: terrariumTranslations.py:109
 msgid "Holds the period in minutes that the watertank is on withing the total timer window."
 msgstr "Holds the period in minutes that the watertank is on withing the total timer window."
 
-#: terrariumTranslations.py:109
+#: terrariumTranslations.py:110
 msgid "Holds the period in minutes that the watertank is off withing the total timer window"
 msgstr "Holds the period in minutes that the watertank is off withing the total timer window"
 
-#: terrariumTranslations.py:110
+#: terrariumTranslations.py:111
 msgid "How long is the system pumping water. Enter the amount of seconds that the system is on when the water level is too low."
 msgstr "How long is the system pumping water. Enter the amount of seconds that the system is on when the water level is too low."
 
-#: terrariumTranslations.py:111
+#: terrariumTranslations.py:112
 msgid "Holds the water volume in liters."
 msgstr "Holds the water volume in liters."
 
-#: terrariumTranslations.py:112
+#: terrariumTranslations.py:113
 msgid "Holds the water tank height in cm or inches."
 msgstr "Holds the water tank height in cm or inches."
 
-#: terrariumTranslations.py:113
+#: terrariumTranslations.py:114
 msgid "Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the watertank. Select all needed switches below."
 msgstr "Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the watertank. Select all needed switches below."
 
-#: terrariumTranslations.py:114
+#: terrariumTranslations.py:115
 msgid "Select the distance sensors that are used to control the level. When selecting multiple sensors, the average is calculated to determine the final distance."
 msgstr "Select the distance sensors that are used to control the level. When selecting multiple sensors, the average is calculated to determine the final distance."
 
-#: terrariumTranslations.py:117
+#: terrariumTranslations.py:118
 msgid "Enable heating when the lights are on. This can cause overheating when the lights are on."
 msgstr "Enable heating when the lights are on. This can cause overheating when the lights are on."
 
-#: terrariumTranslations.py:118 terrariumTranslations.py:130
+#: terrariumTranslations.py:119 terrariumTranslations.py:131
 msgid "Select the operating mode. Use '%s' mode to select the time period in which the heating is running. Select '%s' mode to use the sun rise and sun set as on and off times. When the sun rises the heating system will stop. Use '%s' mode to have the heating running when the lights are off."
 msgstr "Select the operating mode. Use '%s' mode to select the time period in which the heating is running. Select '%s' mode to use the sun rise and sun set as on and off times. When the sun rises the heating system will stop. Use '%s' mode to have the heating running when the lights are off."
 
-#: terrariumTranslations.py:119
+#: terrariumTranslations.py:120
 msgid "Enter the time when the heater should be put on. Only available when running in '%s' mode."
 msgstr "Enter the time when the heater should be put on. Only available when running in '%s' mode."
 
-#: terrariumTranslations.py:120
+#: terrariumTranslations.py:121
 msgid "Enter the time when the heater should be put off. Only available when running in '%s' mode."
 msgstr "Enter the time when the heater should be put off. Only available when running in '%s' mode."
 
-#: terrariumTranslations.py:121
+#: terrariumTranslations.py:122
 msgid "Holds the period in minutes that the heater is on withing the total timer window."
 msgstr "Holds the period in minutes that the heater is on withing the total timer window."
 
-#: terrariumTranslations.py:122
+#: terrariumTranslations.py:123
 msgid "Holds the period in minutes that the heater is off withing the total timer window"
 msgstr "Holds the period in minutes that the heater is off withing the total timer window"
 
-#: terrariumTranslations.py:123
+#: terrariumTranslations.py:124
 msgid "Holds the period in seconds in which the heating will wait to settle the new temperature before changing again."
 msgstr "Holds the period in seconds in which the heating will wait to settle the new temperature before changing again."
 
-#: terrariumTranslations.py:124
+#: terrariumTranslations.py:125
 msgid "Holds the dirrence in degrees that the night temperature should change. Use positive and negative values."
 msgstr "Holds the dirrence in degrees that the night temperature should change. Use positive and negative values."
 
-#: terrariumTranslations.py:125
+#: terrariumTranslations.py:126
 msgid "Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the heater. Select all needed switches below."
 msgstr "Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the heater. Select all needed switches below."
 
-#: terrariumTranslations.py:126 terrariumTranslations.py:136
+#: terrariumTranslations.py:127 terrariumTranslations.py:137
 msgid "Select the temperature sensors that are used to control the temperature. When selecting multiple sensors, the average is calculated to determine the final temperature."
 msgstr "Select the temperature sensors that are used to control the temperature. When selecting multiple sensors, the average is calculated to determine the final temperature."
 
-#: terrariumTranslations.py:129
+#: terrariumTranslations.py:130
 msgid "Enable cooling when the lights are off. This can cause a very low temperature when the lights are off."
 msgstr "Enable cooling when the lights are off. This can cause a very low temperature when the lights are off."
 
-#: terrariumTranslations.py:131
+#: terrariumTranslations.py:132
 msgid "Enter the time when the cooler should be put on. Only available when running in '%s' mode."
 msgstr "Enter the time when the cooler should be put on. Only available when running in '%s' mode."
 
-#: terrariumTranslations.py:132
+#: terrariumTranslations.py:133
 msgid "Enter the time when the cooler should be put off. Only available when running in '%s' mode."
 msgstr "Enter the time when the cooler should be put off. Only available when running in '%s' mode."
 
-#: terrariumTranslations.py:133
+#: terrariumTranslations.py:134
 msgid "Holds the period in minutes that the cooler is on withing the total timer window."
 msgstr "Holds the period in minutes that the cooler is on withing the total timer window."
 
-#: terrariumTranslations.py:134
+#: terrariumTranslations.py:135
 msgid "Holds the period in minutes that the cooler is off withing the total timer window"
 msgstr "Holds the period in minutes that the cooler is off withing the total timer window"
 
-#: terrariumTranslations.py:135
+#: terrariumTranslations.py:136
 msgid "Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the cooler. Select all needed switches below."
 msgstr "Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the cooler. Select all needed switches below."
 
-#: terrariumTranslations.py:140
+#: terrariumTranslations.py:141
 msgid "Choose your interface language."
 msgstr "Choose your interface language."
 
-#: terrariumTranslations.py:141
+#: terrariumTranslations.py:142
 msgid "Holds the distance type used by distance sensors."
 msgstr "Holds the distance type used by distance sensors."
 
-#: terrariumTranslations.py:142 terrariumTranslations.py:143
+#: terrariumTranslations.py:143 terrariumTranslations.py:144
 msgid "Holds the username which can make changes (Administrator)."
 msgstr "Holds the username which can make changes (Administrator)."
 
-#: terrariumTranslations.py:144
+#: terrariumTranslations.py:145
 msgid "Enter the new password for the administration user. Leaving empty will not change the password!"
 msgstr "Enter the new password for the administration user. Leaving empty will not change the password!"
 
-#: terrariumTranslations.py:145
+#: terrariumTranslations.py:146
 msgid "Enter the current password in order to change the password."
 msgstr "Enter the current password in order to change the password."
 
-#: terrariumTranslations.py:146
+#: terrariumTranslations.py:147
 msgid "Toggle on or off full authentication. When on, you need to authenticate at all times."
 msgstr "Toggle on or off full authentication. When on, you need to authenticate at all times."
 
-#: terrariumTranslations.py:147
+#: terrariumTranslations.py:148
+msgid "Holds the external calendar url."
+msgstr "Holds the external calendar url."
+
+#: terrariumTranslations.py:149
 msgid "Holds the soundcard that is used for playing audio."
 msgstr "Holds the soundcard that is used for playing audio."
 
-#: terrariumTranslations.py:148
+#: terrariumTranslations.py:150
 msgid "Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment."
 msgstr "Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment."
 
-#: terrariumTranslations.py:149
+#: terrariumTranslations.py:151
 msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
 msgstr "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
 
-#: terrariumTranslations.py:150
+#: terrariumTranslations.py:152
 msgid "Holds the amount of euro/dollar per 1000 liters water."
 msgstr "Holds the amount of euro/dollar per 1000 liters water."
 
-#: terrariumTranslations.py:151
+#: terrariumTranslations.py:153
 msgid "Choose the temperature indicator. The software will recalculate to the chosen indicator."
 msgstr "Choose the temperature indicator. The software will recalculate to the chosen indicator."
 
-#: terrariumTranslations.py:152
+#: terrariumTranslations.py:154
 msgid "Holds the host name or IP address on which the software will listen for connections. Enter :: for all addresses to bind."
 msgstr "Holds the host name or IP address on which the software will listen for connections. Enter :: for all addresses to bind."
 
-#: terrariumTranslations.py:153
+#: terrariumTranslations.py:155
 msgid "Holds the port number on which the software is listening for connections."
 msgstr "Holds the port number on which the software is listening for connections."
 
-#: terrariumTranslations.py:154
+#: terrariumTranslations.py:156
 msgid "Holds the port number on which the OWFS software is running. Leave empty to disable OWFS support."
 msgstr "Holds the port number on which the OWFS software is running. Leave empty to disable OWFS support."
 
-#: terrariumTranslations.py:158
+#: terrariumTranslations.py:160
 msgid "Holds the name of the animal."
 msgstr "Holds the name of the animal."
 
-#: terrariumTranslations.py:159
+#: terrariumTranslations.py:161
 msgid "Holds the type of the animal"
 msgstr "Holds the type of the animal"
 
-#: terrariumTranslations.py:160
+#: terrariumTranslations.py:162
 msgid "Holds the gender of the animal."
 msgstr "Holds the gender of the animal."
 
-#: terrariumTranslations.py:161
+#: terrariumTranslations.py:163
 msgid "Holds the day of birth of the animal."
 msgstr "Holds the day of birth of the animal."
 
-#: terrariumTranslations.py:162
+#: terrariumTranslations.py:164
 msgid "Holds the species name of the animal."
 msgstr "Holds the species name of the animal."
 
-#: terrariumTranslations.py:163
+#: terrariumTranslations.py:165
 msgid "Holds the latin name of the animal."
 msgstr "Holds the latin name of the animal."
 
-#: terrariumTranslations.py:164
+#: terrariumTranslations.py:166
 msgid "Holds a small description about the animal."
 msgstr "Holds a small description about the animal."
 
-#: terrariumTranslations.py:165
+#: terrariumTranslations.py:167
 msgid "Holds a link to more information."
 msgstr "Holds a link to more information."
 
-#: terrariumWebcam.py:218
+#: terrariumWebcam.py:269
 msgid "Offline since"
 msgstr "Offline since"
 
@@ -557,7 +565,7 @@ msgstr "Data saved"
 msgid "Your changes are saved"
 msgstr "Your changes are saved"
 
-#: terrariumWebserver.py:380 views/inc/menu.tpl:147
+#: terrariumWebserver.py:380 views/inc/menu.tpl:150
 msgid "Log out"
 msgstr "Log out"
 
@@ -566,7 +574,7 @@ msgid "You are now logged out"
 msgstr "You are now logged out"
 
 #: views/audio_files.tpl:4 views/audio_playlist.tpl:4
-#: views/door_settings.tpl:4 views/inc/menu.tpl:126
+#: views/door_settings.tpl:4 views/inc/menu.tpl:129
 #: views/sensor_settings.tpl:4 views/switch_settings.tpl:4
 #: views/system_environment.tpl:4 views/system_settings.tpl:4
 #: views/webcam_settings.tpl:4
@@ -620,12 +628,12 @@ msgstr "Duration"
 
 #: views/audio_files.tpl:66 views/audio_playlist.tpl:19
 #: views/audio_playlist.tpl:82 views/door_settings.tpl:25
-#: views/door_settings.tpl:83 views/inc/usage_doors.tpl:111
+#: views/door_settings.tpl:84 views/inc/usage_doors.tpl:111
 #: views/inc/usage_doors.tpl:125 views/inc/usage_sensors.tpl:137
 #: views/inc/usage_sensors.tpl:174 views/inc/usage_switches.tpl:117
 #: views/inc/usage_switches.tpl:140 views/inc/usage_webcams.tpl:104
 #: views/inc/usage_webcams.tpl:134 views/profile.tpl:56
-#: views/sensor_settings.tpl:28 views/sensor_settings.tpl:123
+#: views/sensor_settings.tpl:28 views/sensor_settings.tpl:124
 #: views/switch_settings.tpl:25 views/switch_settings.tpl:127
 #: views/webcam_settings.tpl:27 views/webcam_settings.tpl:89
 msgid "Name"
@@ -638,7 +646,7 @@ msgstr "Album"
 #: views/audio_files.tpl:68 views/inc/usage_dashboard.tpl:153
 #: views/inc/usage_sensors.tpl:128 views/inc/usage_sensors.tpl:171
 #: views/profile.tpl:63 views/sensor_settings.tpl:25
-#: views/sensor_settings.tpl:111
+#: views/sensor_settings.tpl:112
 msgid "Type"
 msgstr "Type"
 
@@ -698,14 +706,14 @@ msgid "Shuffle"
 msgstr "Shuffle"
 
 #: views/audio_playlist.tpl:37 views/audio_playlist.tpl:109
-#: views/inc/menu.tpl:99
+#: views/inc/menu.tpl:102
 msgid "Files"
 msgstr "Files"
 
 #: views/audio_playlist.tpl:48 views/door_settings.tpl:36
 #: views/profile.tpl:179 views/sensor_settings.tpl:54
 #: views/switch_settings.tpl:72 views/system_environment.tpl:452
-#: views/system_settings.tpl:169 views/webcam_settings.tpl:47
+#: views/system_settings.tpl:175 views/webcam_settings.tpl:47
 msgid "Submit"
 msgstr "Submit"
 
@@ -727,24 +735,54 @@ msgid "new"
 msgstr "new"
 
 #: views/audio_playlist.tpl:112 views/sensor_settings.tpl:93
-#: views/sensor_settings.tpl:114 views/switch_settings.tpl:109
+#: views/sensor_settings.tpl:115 views/switch_settings.tpl:109
 #: views/switch_settings.tpl:142 views/webcam_settings.tpl:105
+#: views/webcam_settings.tpl:119
 msgid "Select an option"
 msgstr "Select an option"
 
-#: views/audio_playlist.tpl:123 views/door_settings.tpl:93
+#: views/audio_playlist.tpl:123 views/door_settings.tpl:94
 #: views/inc/usage_doors.tpl:70 views/inc/usage_sensors.tpl:81
 #: views/inc/usage_switches.tpl:70 views/inc/usage_webcams.tpl:66
-#: views/sensor_settings.tpl:152 views/switch_settings.tpl:199
-#: views/webcam_settings.tpl:121
+#: views/sensor_settings.tpl:153 views/switch_settings.tpl:199
+#: views/webcam_settings.tpl:131
 msgid "Close"
 msgstr "Close"
 
-#: views/audio_playlist.tpl:124 views/door_settings.tpl:94
-#: views/sensor_settings.tpl:153 views/switch_settings.tpl:200
-#: views/webcam_settings.tpl:122
+#: views/audio_playlist.tpl:124 views/door_settings.tpl:95
+#: views/sensor_settings.tpl:154 views/switch_settings.tpl:200
+#: views/webcam_settings.tpl:132
 msgid "Add"
 msgstr "Add"
+
+#: views/calendar.tpl:6 views/inc/menu.tpl:33
+msgid "Calendar"
+msgstr "Calendar"
+
+#: views/calendar.tpl:15 views/dashboard.tpl:71 views/dashboard.tpl:319
+#: views/dashboard.tpl:374 views/door_status.tpl:37 views/inc/menu.tpl:53
+#: views/inc/menu.tpl:64 views/inc/menu.tpl:75 views/inc/menu.tpl:86
+#: views/inc/menu.tpl:119 views/inc/menu.tpl:147 views/inc/sensor_list.tpl:40
+#: views/inc/usage_doors.tpl:48 views/inc/usage_doors.tpl:92
+#: views/inc/usage_doors.tpl:148 views/inc/usage_sensors.tpl:52
+#: views/inc/usage_sensors.tpl:103 views/inc/usage_sensors.tpl:212
+#: views/inc/usage_switches.tpl:48 views/inc/usage_switches.tpl:96
+#: views/inc/usage_switches.tpl:169 views/inc/usage_weather.tpl:34
+#: views/inc/usage_weather.tpl:94 views/inc/usage_webcams.tpl:46
+#: views/inc/usage_webcams.tpl:88 views/inc/usage_webcams.tpl:163
+#: views/switch_status.tpl:37 views/system_environment.tpl:27
+#: views/system_environment.tpl:107 views/system_environment.tpl:187
+#: views/system_environment.tpl:277 views/system_environment.tpl:370
+#: views/system_log.tpl:15 views/system_status.tpl:32
+#: views/system_status.tpl:88 views/system_status.tpl:144
+#: views/system_status.tpl:200 views/system_status.tpl:256
+#: views/weather.tpl:16 views/webcam.tpl:20
+msgid "Settings"
+msgstr "Settings"
+
+#: views/calendar.tpl:28
+msgid "No calendar available"
+msgstr "No calendar available"
 
 #: views/dashboard.tpl:7 views/inc/usage_dashboard.tpl:87
 #: views/system_status.tpl:230
@@ -782,37 +820,16 @@ msgstr "Total water in L"
 #: views/inc/usage_sensors.tpl:85 views/inc/usage_sensors.tpl:157
 #: views/inc/usage_sensors.tpl:189 views/inc/usage_sensors.tpl:206
 #: views/inc/usage_weather.tpl:13 views/inc/usage_weather.tpl:85
-#: views/sensor_settings.tpl:43 views/sensor_settings.tpl:143
+#: views/sensor_settings.tpl:43 views/sensor_settings.tpl:144
 #: views/weather.tpl:7
 msgid "Current"
 msgstr "Current"
 
-#: views/dashboard.tpl:62 views/inc/menu.tpl:113
+#: views/dashboard.tpl:62 views/inc/menu.tpl:116
 #: views/inc/usage_dashboard.tpl:118 views/inc/usage_dashboard.tpl:211
 #: views/usage.tpl:31
 msgid "Environment"
 msgstr "Environment"
-
-#: views/dashboard.tpl:71 views/dashboard.tpl:319 views/dashboard.tpl:374
-#: views/door_status.tpl:37 views/inc/menu.tpl:50 views/inc/menu.tpl:61
-#: views/inc/menu.tpl:72 views/inc/menu.tpl:83 views/inc/menu.tpl:116
-#: views/inc/menu.tpl:144 views/inc/sensor_list.tpl:40
-#: views/inc/usage_doors.tpl:48 views/inc/usage_doors.tpl:92
-#: views/inc/usage_doors.tpl:148 views/inc/usage_sensors.tpl:52
-#: views/inc/usage_sensors.tpl:103 views/inc/usage_sensors.tpl:212
-#: views/inc/usage_switches.tpl:48 views/inc/usage_switches.tpl:96
-#: views/inc/usage_switches.tpl:169 views/inc/usage_weather.tpl:34
-#: views/inc/usage_weather.tpl:94 views/inc/usage_webcams.tpl:46
-#: views/inc/usage_webcams.tpl:88 views/inc/usage_webcams.tpl:163
-#: views/switch_status.tpl:37 views/system_environment.tpl:27
-#: views/system_environment.tpl:107 views/system_environment.tpl:187
-#: views/system_environment.tpl:277 views/system_environment.tpl:370
-#: views/system_log.tpl:15 views/system_status.tpl:32
-#: views/system_status.tpl:88 views/system_status.tpl:144
-#: views/system_status.tpl:200 views/system_status.tpl:256
-#: views/weather.tpl:16 views/webcam.tpl:20
-msgid "Settings"
-msgstr "Settings"
 
 #: views/dashboard.tpl:83 views/dashboard.tpl:112 views/dashboard.tpl:153
 #: views/dashboard.tpl:194 views/dashboard.tpl:241
@@ -820,14 +837,15 @@ msgid "mode"
 msgstr "mode"
 
 #: views/dashboard.tpl:83 views/dashboard.tpl:112 views/dashboard.tpl:153
-#: views/dashboard.tpl:194 views/dashboard.tpl:241 views/inc/menu.tpl:181
-#: views/inc/menu.tpl:207 views/inc/usage_environment.tpl:25
+#: views/dashboard.tpl:194 views/dashboard.tpl:241 views/inc/menu.tpl:184
+#: views/inc/menu.tpl:210 views/inc/usage_environment.tpl:25
 #: views/inc/usage_environment.tpl:121 views/inc/usage_environment.tpl:129
 #: views/inc/usage_environment.tpl:213 views/inc/usage_environment.tpl:221
 #: views/inc/usage_environment.tpl:307 views/inc/usage_environment.tpl:315
 #: views/switch_settings.tpl:144 views/system_environment.tpl:41
 #: views/system_environment.tpl:121 views/system_environment.tpl:201
 #: views/system_environment.tpl:291 views/system_environment.tpl:384
+#: views/webcam_settings.tpl:120
 msgid "Disabled"
 msgstr "Disabled"
 
@@ -838,8 +856,8 @@ msgid "Lights"
 msgstr "Lights"
 
 #: views/dashboard.tpl:87 views/dashboard.tpl:116 views/dashboard.tpl:157
-#: views/dashboard.tpl:198 views/dashboard.tpl:245 views/inc/menu.tpl:58
-#: views/inc/menu.tpl:69 views/inc/menu.tpl:92 views/inc/menu.tpl:107
+#: views/dashboard.tpl:198 views/dashboard.tpl:245 views/inc/menu.tpl:61
+#: views/inc/menu.tpl:72 views/inc/menu.tpl:95 views/inc/menu.tpl:110
 #: views/inc/usage_doors.tpl:74 views/inc/usage_doors.tpl:79
 #: views/inc/usage_doors.tpl:142 views/inc/usage_environment.tpl:22
 #: views/inc/usage_environment.tpl:84 views/inc/usage_environment.tpl:118
@@ -867,7 +885,7 @@ msgstr "Sprayer"
 
 #: views/dashboard.tpl:128 views/dashboard.tpl:169
 #: views/inc/usage_sensors.tpl:141 views/inc/usage_sensors.tpl:177
-#: views/sensor_settings.tpl:31 views/sensor_settings.tpl:127
+#: views/sensor_settings.tpl:31 views/sensor_settings.tpl:128
 msgid "Alarm min"
 msgstr "Alarm min"
 
@@ -963,7 +981,7 @@ msgid "Here you can configure your doors."
 msgstr "Here you can configure your doors."
 
 #: views/door_settings.tpl:19 views/door_settings.tpl:70 views/hardware.tpl:7
-#: views/hardware.tpl:30 views/inc/menu.tpl:135 views/inc/usage_doors.tpl:98
+#: views/hardware.tpl:30 views/inc/menu.tpl:138 views/inc/usage_doors.tpl:98
 #: views/inc/usage_doors.tpl:119 views/inc/usage_sensors.tpl:109
 #: views/inc/usage_sensors.tpl:165 views/inc/usage_switches.tpl:103
 #: views/inc/usage_switches.tpl:134 views/sensor_settings.tpl:19
@@ -972,11 +990,11 @@ msgstr "Here you can configure your doors."
 msgid "Hardware"
 msgstr "Hardware"
 
-#: views/door_settings.tpl:22 views/door_settings.tpl:78
+#: views/door_settings.tpl:22 views/door_settings.tpl:79
 #: views/inc/usage_doors.tpl:106 views/inc/usage_doors.tpl:122
 #: views/inc/usage_sensors.tpl:123 views/inc/usage_sensors.tpl:168
 #: views/inc/usage_switches.tpl:112 views/inc/usage_switches.tpl:137
-#: views/sensor_settings.tpl:22 views/sensor_settings.tpl:106
+#: views/sensor_settings.tpl:22 views/sensor_settings.tpl:107
 #: views/switch_settings.tpl:22 views/switch_settings.tpl:122
 msgid "Address"
 msgstr "Address"
@@ -996,6 +1014,11 @@ msgstr "Door"
 msgid "GPIO"
 msgstr "GPIO"
 
+#: views/door_settings.tpl:74 views/inc/usage_sensors.tpl:117
+#: views/sensor_settings.tpl:100 views/switch_settings.tpl:114
+msgid "Remote"
+msgstr "Remote"
+
 #: views/door_status.tpl:4
 msgid "No doors available"
 msgstr "No doors available"
@@ -1004,17 +1027,17 @@ msgstr "No doors available"
 msgid "Raspberry Pi"
 msgstr "Raspberry Pi"
 
-#: views/hardware.tpl:13 views/hardware.tpl:53 views/inc/menu.tpl:35
+#: views/hardware.tpl:13 views/hardware.tpl:53 views/inc/menu.tpl:38
 #: views/usage.tpl:16
 msgid "Sensors"
 msgstr "Sensors"
 
-#: views/hardware.tpl:16 views/hardware.tpl:87 views/inc/menu.tpl:55
+#: views/hardware.tpl:16 views/hardware.tpl:87 views/inc/menu.tpl:58
 #: views/usage.tpl:19
 msgid "Switches"
 msgstr "Switches"
 
-#: views/hardware.tpl:19 views/hardware.tpl:119 views/inc/menu.tpl:66
+#: views/hardware.tpl:19 views/hardware.tpl:119 views/inc/menu.tpl:69
 #: views/usage.tpl:22
 msgid "Doors"
 msgstr "Doors"
@@ -1023,7 +1046,7 @@ msgstr "Doors"
 msgid "Webcams"
 msgstr "Webcams"
 
-#: views/hardware.tpl:25 views/hardware.tpl:138 views/inc/menu.tpl:88
+#: views/hardware.tpl:25 views/hardware.tpl:138 views/inc/menu.tpl:91
 #: views/usage.tpl:28
 msgid "Audio"
 msgstr "Audio"
@@ -1049,7 +1072,7 @@ msgid "TerrariumPI software has support for different kind of sensors. The follo
 msgstr "TerrariumPI software has support for different kind of sensors. The following sensors below are tested with TerrariumPI software."
 
 #: views/hardware.tpl:57 views/inc/usage_sensors.tpl:116
-#: views/sensor_settings.tpl:98
+#: views/sensor_settings.tpl:99
 msgid "1Wire"
 msgstr "1Wire"
 
@@ -1149,7 +1172,7 @@ msgstr "Nextevo"
 msgid "TerrariumPI software has support for magnetic door sensors. Only versions with two wires are supported. Connect one wire to the ground and the other wire to any GPIO pin that is free (except power and ground pins)."
 msgstr "TerrariumPI software has support for magnetic door sensors. Only versions with two wires are supported. Connect one wire to the ground and the other wire to any GPIO pin that is free (except power and ground pins)."
 
-#: views/hardware.tpl:123 views/inc/menu.tpl:77 views/inc/usage_webcams.tpl:19
+#: views/hardware.tpl:123 views/inc/menu.tpl:80 views/inc/usage_webcams.tpl:19
 #: views/usage.tpl:25 views/webcam.tpl:11 views/webcam_settings.tpl:67
 msgid "Webcam"
 msgstr "Webcam"
@@ -1191,91 +1214,91 @@ msgstr "Dashboard"
 msgid "Profile"
 msgstr "Profile"
 
-#: views/inc/menu.tpl:38 views/inc/usage_dashboard.tpl:159
-#: views/inc/usage_sensors.tpl:131 views/sensor_settings.tpl:115
+#: views/inc/menu.tpl:41 views/inc/usage_dashboard.tpl:159
+#: views/inc/usage_sensors.tpl:131 views/sensor_settings.tpl:116
 msgid "Temperature"
 msgstr "Temperature"
 
-#: views/inc/menu.tpl:41 views/inc/usage_dashboard.tpl:158
-#: views/inc/usage_sensors.tpl:132 views/sensor_settings.tpl:116
+#: views/inc/menu.tpl:44 views/inc/usage_dashboard.tpl:158
+#: views/inc/usage_sensors.tpl:132 views/sensor_settings.tpl:117
 msgid "Humidity"
 msgstr "Humidity"
 
-#: views/inc/menu.tpl:44 views/sensor_settings.tpl:117
+#: views/inc/menu.tpl:47 views/sensor_settings.tpl:118
 msgid "Distance"
 msgstr "Distance"
 
-#: views/inc/menu.tpl:47 views/sensor_settings.tpl:118
+#: views/inc/menu.tpl:50 views/sensor_settings.tpl:119
 msgid "pH"
 msgstr "pH"
 
-#: views/inc/menu.tpl:80
+#: views/inc/menu.tpl:83
 msgid "Show"
 msgstr "Show"
 
-#: views/inc/menu.tpl:96
+#: views/inc/menu.tpl:99
 msgid "Playlist"
 msgstr "Playlist"
 
-#: views/inc/menu.tpl:104
+#: views/inc/menu.tpl:107
 msgid "System"
 msgstr "System"
 
-#: views/inc/menu.tpl:110
+#: views/inc/menu.tpl:113
 msgid "Log"
 msgstr "Log"
 
-#: views/inc/menu.tpl:123
+#: views/inc/menu.tpl:126
 msgid "About"
 msgstr "About"
 
-#: views/inc/menu.tpl:129
+#: views/inc/menu.tpl:132
 msgid "Info"
 msgstr "Info"
 
-#: views/inc/menu.tpl:132
+#: views/inc/menu.tpl:135
 msgid "Usage"
 msgstr "Usage"
 
-#: views/inc/menu.tpl:145
+#: views/inc/menu.tpl:148
 msgid "FullScreen"
 msgstr "FullScreen"
 
-#: views/inc/menu.tpl:146
+#: views/inc/menu.tpl:149
 msgid "Lock"
 msgstr "Lock"
 
-#: views/inc/menu.tpl:159
+#: views/inc/menu.tpl:162
 msgid "date/time"
 msgstr "date/time"
 
-#: views/inc/menu.tpl:164 views/inc/usage_dashboard.tpl:19
+#: views/inc/menu.tpl:167 views/inc/usage_dashboard.tpl:19
 msgid "Online"
 msgstr "Online"
 
-#: views/inc/menu.tpl:167 views/inc/usage_dashboard.tpl:26
+#: views/inc/menu.tpl:170 views/inc/usage_dashboard.tpl:26
 msgid "Offline"
 msgstr "Offline"
 
-#: views/inc/menu.tpl:173 views/inc/menu.tpl:193 views/inc/menu.tpl:213
+#: views/inc/menu.tpl:176 views/inc/menu.tpl:196 views/inc/menu.tpl:216
 msgid "No messages"
 msgstr "No messages"
 
-#: views/inc/menu.tpl:184 views/inc/usage_dashboard.tpl:43
+#: views/inc/menu.tpl:187 views/inc/usage_dashboard.tpl:43
 #: views/inc/usage_doors.tpl:82
 msgid "Door is closed"
 msgstr "Door is closed"
 
-#: views/inc/menu.tpl:187 views/inc/usage_dashboard.tpl:50
+#: views/inc/menu.tpl:190 views/inc/usage_dashboard.tpl:50
 #: views/inc/usage_doors.tpl:81
 msgid "Door is open"
 msgstr "Door is open"
 
-#: views/inc/menu.tpl:201
+#: views/inc/menu.tpl:204
 msgid "Playing"
 msgstr "Playing"
 
-#: views/inc/menu.tpl:204
+#: views/inc/menu.tpl:207
 msgid "Stopped"
 msgstr "Stopped"
 
@@ -1569,6 +1592,7 @@ msgstr "All fields with a %s are required."
 #: views/inc/usage_environment.tpl:129 views/inc/usage_environment.tpl:213
 #: views/inc/usage_environment.tpl:221 views/inc/usage_environment.tpl:307
 #: views/inc/usage_environment.tpl:315 views/switch_settings.tpl:143
+#: views/webcam_settings.tpl:121
 msgid "Enabled"
 msgstr "Enabled"
 
@@ -1749,27 +1773,22 @@ msgstr "The current value is also written below the graph in degrees, percentage
 msgid "The history graph will shows the measured value. The flat lines are the minimum and maximum values that are configured. When the measured value is outside this range an alarm will be given. Hover above the graph lines to get detailed information."
 msgstr "The history graph will shows the measured value. The flat lines are the minimum and maximum values that are configured. When the measured value is outside this range an alarm will be given. Hover above the graph lines to get detailed information."
 
-#: views/inc/usage_sensors.tpl:117 views/sensor_settings.tpl:99
-#: views/switch_settings.tpl:114
-msgid "Remote"
-msgstr "Remote"
-
-#: views/inc/usage_sensors.tpl:118 views/sensor_settings.tpl:100
+#: views/inc/usage_sensors.tpl:118 views/sensor_settings.tpl:101
 msgid "HC-SR04"
 msgstr "HC-SR04"
 
 #: views/inc/usage_sensors.tpl:145 views/inc/usage_sensors.tpl:180
-#: views/sensor_settings.tpl:34 views/sensor_settings.tpl:131
+#: views/sensor_settings.tpl:34 views/sensor_settings.tpl:132
 msgid "Alarm max"
 msgstr "Alarm max"
 
 #: views/inc/usage_sensors.tpl:149 views/inc/usage_sensors.tpl:183
-#: views/sensor_settings.tpl:37 views/sensor_settings.tpl:135
+#: views/sensor_settings.tpl:37 views/sensor_settings.tpl:136
 msgid "Limit min"
 msgstr "Limit min"
 
 #: views/inc/usage_sensors.tpl:153 views/inc/usage_sensors.tpl:186
-#: views/sensor_settings.tpl:40 views/sensor_settings.tpl:139
+#: views/sensor_settings.tpl:40 views/sensor_settings.tpl:140
 msgid "Limit max"
 msgstr "Limit max"
 
@@ -2083,7 +2102,11 @@ msgstr "Here you can configure your sensors."
 msgid "Add new sensor"
 msgstr "Add new sensor"
 
-#: views/sensor_settings.tpl:101
+#: views/sensor_settings.tpl:98
+msgid "SHT2X"
+msgstr "SHT2X"
+
+#: views/sensor_settings.tpl:102
 msgid "pH SKU-SEN0161"
 msgstr "pH SKU-SEN0161"
 
@@ -2280,26 +2303,30 @@ msgid "Soundcard"
 msgstr "Soundcard"
 
 #: views/system_settings.tpl:131
+msgid "External calendar"
+msgstr "External calendar"
+
+#: views/system_settings.tpl:137
 msgid "Pi power usage in W"
 msgstr "Pi power usage in W"
 
-#: views/system_settings.tpl:137
+#: views/system_settings.tpl:143
 msgid "Power price"
 msgstr "Power price"
 
-#: views/system_settings.tpl:143
+#: views/system_settings.tpl:149
 msgid "Water price"
 msgstr "Water price"
 
-#: views/system_settings.tpl:149
+#: views/system_settings.tpl:155
 msgid "IP or hostname"
 msgstr "IP or hostname"
 
-#: views/system_settings.tpl:155
+#: views/system_settings.tpl:161
 msgid "Port number"
 msgstr "Port number"
 
-#: views/system_settings.tpl:161
+#: views/system_settings.tpl:167
 msgid "OWFS server port"
 msgstr "OWFS server port"
 
@@ -2362,6 +2389,10 @@ msgstr "Resolution"
 #: views/webcam_settings.tpl:60
 msgid "Add new webcam"
 msgstr "Add new webcam"
+
+#: views/webcam_settings.tpl:116
+msgid "Archive"
+msgstr "Archive"
 
 #: Missing text string
 msgid "1Wire DS18B20 wiring scheme"
@@ -2458,6 +2489,10 @@ msgstr "Drop files here to upload"
 #: Missing text string
 msgid "Either add audio files and playlists. Or you have a pwm-dimmer switch configured."
 msgstr "Either add audio files and playlists. Or you have a pwm-dimmer switch configured."
+
+#: Missing text string
+msgid "External calendar url"
+msgstr "External calendar url"
 
 #: Missing text string
 msgid "File is to big. Filesize {{filesize}} is more then max {{maxFilesize}}"
@@ -2630,6 +2665,10 @@ msgstr "USB Webcam"
 #: Missing text string
 msgid "Universal AC MAINS Dimmer - MPDMv4.1"
 msgstr "Universal AC MAINS Dimmer - MPDMv4.1"
+
+#: Missing text string
+msgid "Unknown date"
+msgstr "Unknown date"
 
 #: Missing text string
 msgid "Used memory"
