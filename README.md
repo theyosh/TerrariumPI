@@ -42,6 +42,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
 - Support for USB and remote webcams
 - Support for analog devices through a MCP3008
   - Support for PH probe SKU SEN0161
+- Support for SHT2X sensors through I2C
 - Open door detection (sprayer will not spray when a door is open)
 - Total power and water usage for costs calculation
 - Lights control based on sun rise and sun set or timers
