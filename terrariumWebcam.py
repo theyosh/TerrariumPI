@@ -135,35 +135,39 @@ class terrariumWebcam():
 
       if self.get_archive():
         # https://www.pyimagesearch.com/2015/05/25/basic-motion-detection-and-tracking-with-python-and-opencv/
-        current_image = cv2.imread(self.get_raw_image())
-        current_image = cv2.cvtColor(current_image, cv2.COLOR_BGR2GRAY)
-        current_image = cv2.GaussianBlur(current_image, (21, 21), 0)
+        try:
+          current_image = cv2.imread(self.get_raw_image())
+          current_image = cv2.cvtColor(current_image, cv2.COLOR_BGR2GRAY)
+          current_image = cv2.GaussianBlur(current_image, (21, 21), 0)
 
-        if self.__previous_image is None:
+          if self.__previous_image is None:
+            self.__previous_image = current_image
+
+          thresh = cv2.threshold(cv2.absdiff(self.__previous_image, current_image), 25, 255, cv2.THRESH_BINARY)[1]
+          thresh = cv2.dilate(thresh, None, iterations=2)
+
+          (cnts, _) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
           self.__previous_image = current_image
+          motion_detected = False
+          raw_image = cv2.imread(self.get_raw_image())
+          # loop over the contours
+          for c in cnts:
+            # if the contour is too small, ignore it
+            if cv2.contourArea(c) < 500:
+              continue
 
-        thresh = cv2.threshold(cv2.absdiff(self.__previous_image, current_image), 25, 255, cv2.THRESH_BINARY)[1]
-        thresh = cv2.dilate(thresh, None, iterations=2)
+            motion_detected = True
+            # compute the bounding box for the contour, draw it on the frame,
+            (x, y, w, h) = cv2.boundingRect(c)
+            cv2.rectangle(raw_image, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
-        (cnts, _) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+          if motion_detected:
+            cv2.imwrite(self.get_raw_image(True),raw_image)
+            logger.info('Saved webcam %s image for archive due to motion detection' % (self.get_name(),))
 
-        self.__previous_image = current_image
-        motion_detected = False
-        raw_image = cv2.imread(self.get_raw_image())
-        # loop over the contours
-        for c in cnts:
-          # if the contour is too small, ignore it
-          if cv2.contourArea(c) < 500:
-            continue
-
-          motion_detected = True
-          # compute the bounding box for the contour, draw it on the frame,
-          (x, y, w, h) = cv2.boundingRect(c)
-          cv2.rectangle(raw_image, (x, y), (x + w, y + h), (0, 255, 0), 2)
-
-        if motion_detected:
-          cv2.imwrite(self.get_raw_image(True),raw_image)
-          logger.info('Saved webcam %s image for archive due to motion detection' % (self.get_name(),))
+        except Exception, ex:
+          print ex
 
     self.last_update = int(time.time())
 
