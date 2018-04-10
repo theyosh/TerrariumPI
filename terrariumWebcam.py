@@ -293,8 +293,6 @@ class terrariumWebcam():
     starttime = time.time()
     # Original width
     source_width, source_height = self.raw_image.size
-    # Overwrite settings based on result
-    self.resolution = {'width' : source_width, 'height' : source_height}
 
     # Calc new square canvas size
     longest_side = float(source_width if source_width > source_height else source_height)
