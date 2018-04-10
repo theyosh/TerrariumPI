@@ -140,7 +140,8 @@ class terrariumWebcam():
           current_image = cv2.cvtColor(current_image, cv2.COLOR_BGR2GRAY)
           current_image = cv2.GaussianBlur(current_image, (21, 21), 0)
 
-          if self.__previous_image is None:
+          # Reset previous image. This is needed/happening when resolution of image changes due to rotation or settings update
+          if self.__previous_image is None or self.__previous_image.shape[0] != current_image.shape[0] or self.__previous_image.shape[1] != current_image.shape[1]:
             self.__previous_image = current_image
 
           thresh = cv2.threshold(cv2.absdiff(self.__previous_image, current_image), 25, 255, cv2.THRESH_BINARY)[1]
