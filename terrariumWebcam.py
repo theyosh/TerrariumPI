@@ -135,14 +135,12 @@ class terrariumWebcam():
 
       if self.get_archive():
         # https://www.pyimagesearch.com/2015/05/25/basic-motion-detection-and-tracking-with-python-and-opencv/
-        if self.__previous_image is None:
-          self.__previous_image = cv2.imread(self.get_raw_image())
-          self.__previous_image = cv2.cvtColor(self.__previous_image, cv2.COLOR_BGR2GRAY)
-          self.__previous_image = cv2.GaussianBlur(self.__previous_image, (21, 21), 0)
-
         current_image = cv2.imread(self.get_raw_image())
         current_image = cv2.cvtColor(current_image, cv2.COLOR_BGR2GRAY)
         current_image = cv2.GaussianBlur(current_image, (21, 21), 0)
+
+        if self.__previous_image is None:
+          self.__previous_image = current_image
 
         thresh = cv2.threshold(cv2.absdiff(self.__previous_image, current_image), 25, 255, cv2.THRESH_BINARY)[1]
         thresh = cv2.dilate(thresh, None, iterations=2)
