@@ -126,6 +126,7 @@ class terrariumEnvironment():
     self.heater['day_enabled']      = False      if 'day_enabled' not in config_data['heater'] else terrariumUtils.is_true(config_data['heater']['day_enabled'])
     self.heater['settle_timeout']   = 120.0      if 'settle_timeout' not in config_data['heater'] else float(config_data['heater']['settle_timeout'])
     self.heater['night_difference'] = 0.0      if 'night_difference' not in config_data['heater'] else float(config_data['heater']['night_difference'])
+    self.heater['night_source']     = 'weather'     if 'night_source' not in config_data['heater'] else config_data['heater']['night_source']
     self.heater['power_switches']   = []         if ('power_switches' not in config_data['heater'] or config_data['heater']['power_switches'] in ['',None]) else config_data['heater']['power_switches']
     self.heater['sensors']          = []         if ('sensors' not in config_data['heater'] or config_data['heater']['sensors'] in ['',None]) else config_data['heater']['sensors']
 
@@ -391,21 +392,28 @@ class terrariumEnvironment():
         logger.debug('Environment heater is enabled.')
         logger.debug('Environment heater is based on: %s.' % self.heater['mode'])
 
-        if self.heater['night_difference'] != 0.0 and self.heater['night_modus'] != self.is_night():
-          logger.info('Changing heater to %s modus. Changing the min and max alarm %s by %s degrees.' % (
-                ('night' if self.is_night() else 'day'),
-                ('up' if self.is_night() else 'down'),
-                self.heater['night_difference']))
-          # Change temperatures when switching from day to night and vise versa
-          for sensorid in self.heater['sensors']:
-            if self.is_night():
-              self.sensors[sensorid].set_alarm_min(self.sensors[sensorid].get_alarm_min() + self.heater['night_difference'])
-              self.sensors[sensorid].set_alarm_max(self.sensors[sensorid].get_alarm_max() + self.heater['night_difference'])
-            else:
-              self.sensors[sensorid].set_alarm_min(self.sensors[sensorid].get_alarm_min() - self.heater['night_difference'])
-              self.sensors[sensorid].set_alarm_max(self.sensors[sensorid].get_alarm_max() - self.heater['night_difference'])
+        if self.heater['night_difference'] != 0.0:
+          is_night = False
+          if self.heater['night_source'] == 'weather':
+            is_night = self.is_night()
+          elif self.heater['night_source'] == 'lights':
+            is_night = not self.is_light_on()
 
-            self.heater['night_modus'] = self.is_night()
+          if self.heater['night_modus'] != is_night:
+            logger.info('Changing heater to %s modus. Changing the min and max alarm %s by %s degrees.' % (
+                  ('night' if is_night else 'day'),
+                  ('up' if is_night else 'down'),
+                  self.heater['night_difference']))
+            # Change temperatures when switching from day to night and vise versa
+            for sensorid in self.heater['sensors']:
+              if is_night:
+                self.sensors[sensorid].set_alarm_min(self.sensors[sensorid].get_alarm_min() + self.heater['night_difference'])
+                self.sensors[sensorid].set_alarm_max(self.sensors[sensorid].get_alarm_max() + self.heater['night_difference'])
+              else:
+                self.sensors[sensorid].set_alarm_min(self.sensors[sensorid].get_alarm_min() - self.heater['night_difference'])
+                self.sensors[sensorid].set_alarm_max(self.sensors[sensorid].get_alarm_max() - self.heater['night_difference'])
+
+              self.heater['night_modus'] = is_night
 
         if 'sensor' == self.heater['mode']:
           # Only heat when the lights are off. Or when explicit enabled during the day.
