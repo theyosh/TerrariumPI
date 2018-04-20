@@ -1027,7 +1027,7 @@ function history_graph(name, data, type) {
     tootip: true,
     series: {
       curvedLines: {
-        apply: true,
+        apply: false,
         active: true,
         monotonicFit: true,
       },
@@ -1127,6 +1127,7 @@ function history_graph(name, data, type) {
       break;
 
     case 'weather':
+      graph_options.series.curvedLines.apply = true;
     case 'system_temperature':
       graph_data = [{
         label: '{{_('Temperature')}}',
@@ -1135,7 +1136,6 @@ function history_graph(name, data, type) {
       break;
 
     case 'system_uptime':
-      delete(graph_options.series.curvedLines);
       graph_options.series.lines = {
         show: true,
         lineWidth: 2,
@@ -1190,7 +1190,6 @@ function history_graph(name, data, type) {
       break;
 
     case 'switch':
-      delete(graph_options.series.curvedLines);
       graph_options.series.lines = {
         show: true,
         lineWidth: 2,
@@ -1207,7 +1206,6 @@ function history_graph(name, data, type) {
       break;
 
     case 'door':
-      delete(graph_options.series.curvedLines);
       graph_options.series.lines = {
         show: true,
         lineWidth: 2,
