@@ -10,88 +10,134 @@ if [ "${WHOAMI}" != "root" ]; then
   exit 0
 fi
 
-# Stop at all errors
-set -e
+#set -e
 
 # Install dialog for further installation
-if ! hash dialog 2>/dev/null; then
-  aptitude -y install dialog
+if ! hash whiptail 2>/dev/null; then
+  aptitude -y install whiptail
 fi
 
-dialog --aspect 40 --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to be installed to run with user '${SCRIPT_USER}'.\n\nDo you want to continue?" 0 0
+whiptail --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to be installed to run with user '${SCRIPT_USER}'. If this is not the right user stop the installation now!\n\nDo you want to continue?" 0 60
 
 case $? in
-  1|255) dialog --aspect 40 --backtitle "TerrariumPI v. ${VERSION}"  --title " TerrariumPI Installer " --infobox "TerrariumPI installation is aborted" 0 0
-         sleep 2
+  1|255) whiptail --backtitle "TerrariumPI v. ${VERSION}"  --title " TerrariumPI Installer " --msgbox "TerrariumPI installation is aborted" 0 60
          exit 0
   ;;
 esac
 
 # Clean up first
-echo "10\n" | dialog --aspect 40 --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --gauge "Cleaning unwanted programs..." 0 0
+whiptail --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to remove not needed programs in order to free up diskspace and make future updates faster. All desktop software will be removed.\n\nDo you want to remove not needed programs?" 0 0
 
-apt-get -q -y remove wolfram-engine sonic-pi oracle-java8-jdk desktop-base gnome-desktop3-data libgnome-desktop-3-10 epiphany-browser-data epiphany-browser nuscratch scratch wiringpi > /dev/null
+case $? in
+  0) whiptail --backtitle "TerrariumPI v. ${VERSION}"  --title " TerrariumPI Installer " --infobox "TerrariumPI is removing not needed programs" 0 0
 
-echo "40\n" | dialog --aspect 40 --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --gauge "Cleaning unwanted programs..." 0 0
-
-apt-get -q -y remove "^libreoffice.*" > /dev/null
-
-echo "70\n" | dialog --aspect 40 --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --gauge "Cleaning unwanted programs..." 0 0
-
-apt-get -q -y autoremove > /dev/null
-
-echo "100\n" | dialog --aspect 40 --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --gauge "Cleaning unwanted programs..." 0 0
+     debconf-apt-progress -- apt-get -y remove wolfram-engine sonic-pi oracle-java8-jdk desktop-base gnome-desktop3-data libgnome-desktop-3-10 epiphany-browser-data epiphany-browser nuscratch scratch wiringpi "^libreoffice.*"
+     debconf-apt-progress -- apt-get -y autoremove
+  ;;
+esac
 
 # Install required packages to get the terrarium software running
-echo "10\n" | dialog --aspect 40 --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --gauge "Install required software..." 0 0
-apt-get -q -y update > /dev/null
-echo "20\n" | dialog --aspect 40 --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --gauge "Install required software..." 0 0
-apt-get -q -y full-upgrade > /dev/null
-echo "40\n" | dialog --aspect 40 --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --gauge "Install required software..." 0 0
-apt-get -q -y install libftdi1 screen python-imaging python-dateutil python-ow python-rpi.gpio python-psutil git subversion watchdog build-essential python-dev python-picamera python-opencv python-pip python-pigpio python-requests i2c-tools owfs ow-shell sqlite3 vlc-nox python-mediainfodll libasound2-dev sispmctl python-gpiozero lshw > /dev/null
+debconf-apt-progress -- apt-get -y update
+debconf-apt-progress -- apt-get -y full-upgrade
+debconf-apt-progress -- apt-get -y install libftdi1 screen python-imaging python-dateutil python-ow python-rpi.gpio python-psutil git subversion watchdog build-essential python-dev python-picamera python-opencv python-pip python-pigpio python-requests i2c-tools owfs ow-shell sqlite3 vlc-nox python-mediainfodll libasound2-dev sispmctl python-gpiozero lshw
 
-echo "60\n" | dialog --aspect 40 --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --gauge "Install required software..." 0 0
-
+PROGRESS=55
 # Update submodules if downloaded through tar or zip
+(
 cd "${BASEDIR}/"
+cat <<EOF
+XXX
+$PROGRESS
+Install required software\n\nInstalling base software ...
+XXX
+EOF
+
+
+PROGRESS=$((PROGRESS + 10))
+cat <<EOF
+XXX
+$PROGRESS
+Install required software\n\nInstalling base software ...
+XXX
+EOF
 git submodule init > /dev/null
+
+
+PROGRESS=$((PROGRESS + 10))
+cat <<EOF
+XXX
+$PROGRESS
+Install required software\n\nInstalling base software ...
+XXX
+EOF
 git submodule update > /dev/null
 cd "${BASEDIR}/.."
 
-echo "70\n" | dialog --aspect 40 --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --gauge "Install required software..." 0 0
 
-PROGRESS=70
 PIP_MODULES="gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio"
 for PIP_MODULE in ${PIP_MODULES}
 do
   PROGRESS=$((PROGRESS + 2))
-  echo "${PROGRESS}\n" | dialog --aspect 40 --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --gauge "Install required software..." 0 0
+
+  cat <<EOF
+XXX
+$PROGRESS
+Install required software\n\nInstalling python module ${PIP_MODULE} ...
+XXX
+EOF
   pip install -q --upgrade ${PIP_MODULE}
 done
 
-# Install Adafruit DHT Python library
+
 PROGRESS=$((PROGRESS + 2))
-echo "${PROGRESS}\n" | dialog --aspect 40 --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --gauge "Install required software..." 0 0
+cat <<EOF
+XXX
+$PROGRESS
+Install required software\n\nCloning Adafruit DHT python library ...
+XXX
+EOF
+
 if [ ! -d Adafruit_Python_DHT ]
 then
   git clone https://github.com/adafruit/Adafruit_Python_DHT.git >/dev/null
 fi
 
+
 PROGRESS=$((PROGRESS + 2))
-echo "${PROGRESS}\n" | dialog --aspect 40 --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --gauge "Install required software..." 0 0
+cat <<EOF
+XXX
+$PROGRESS
+Install required software\n\nUpdating Adafruit DHT python library ...
+XXX
+EOF
 cd Adafruit_Python_DHT
 git pull  > /dev/null
 
+
 PROGRESS=$((PROGRESS + 2))
-echo "${PROGRESS}\n" | dialog --aspect 40 --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --gauge "Install required software..." 0 0
+cat <<EOF
+XXX
+$PROGRESS
+Install required software\n\nCompiling Adafruit DHT python library ...
+XXX
+EOF
+
 python setup.py -q install 2> /dev/null
 cd "${BASEDIR}"
-
 chown ${SCRIPT_USER}. .
 chown ${SCRIPT_USER}. * -Rf
 
-echo "100\n" | dialog --aspect 40 --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --gauge "Install required software..." 0 0
 
+PROGRESS=100
+cat <<EOF
+XXX
+$PROGRESS
+Install required software\n\nDone! ...
+XXX
+EOF
+
+sleep 1
+) | whiptail --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --gauge "Install required software\n\nInstalling python module ${PIP_MODULE} ..." 0 60 0
 
 # Basic config:
 # Enable 1Wire en I2C during boot
@@ -175,14 +221,14 @@ fi
 # We are done!
 sync
 
-dialog --aspect 40 --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --yesno "TerrariumPI is installed/upgraded. To make sure that all is working please reboot.\n\nDo you want to reboot now?" 0 0
+whiptail --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --yesno "TerrariumPI is installed/upgraded. To make sure that all is working please reboot.\n\nDo you want to reboot now?" 0 60
 
 case $? in
   0)
   for SECONDS in {5..1}
   do
-    dialog --aspect 40 --backtitle "TerrariumPI v. ${VERSION}"  --title " TerrariumPI Installer " --infobox "TerrariumPI installation is rebooting the Raspberry PI in ${SECONDS} seconds..." 0 0
-         sleep 1
+    echo "TerrariumPI installation is rebooting the Raspberry PI in ${SECONDS} seconds..."
+    sleep 1
   done
   sync
   reboot
