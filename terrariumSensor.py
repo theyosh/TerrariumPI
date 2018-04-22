@@ -16,7 +16,7 @@ from hashlib import md5
 from gpiozero import MCP3008
 
 from terrariumUtils import terrariumUtils
-from terrariumI2CSensor import terrariumSHT2XSensor,terrariumHTU21DSensor,terrariumSi7021Sensor
+from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor
 
 from gevent import monkey, sleep
 monkey.patch_all()
@@ -69,6 +69,7 @@ class terrariumSensor:
   VALID_HARDWARE_TYPES.append(terrariumSHT2XSensor.hardwaretype)
   VALID_HARDWARE_TYPES.append(terrariumHTU21DSensor.hardwaretype)
   VALID_HARDWARE_TYPES.append(terrariumSi7021Sensor.hardwaretype)
+  VALID_HARDWARE_TYPES.append(terrariumBME280Sensor.hardwaretype)
 
   # Append moisture sensor(s) to the list of valid sensors
   VALID_HARDWARE_TYPES.append(terrariumSensorYTXXDigital.hardwaretype)
@@ -219,7 +220,10 @@ class terrariumSensor:
           if self.get_hardware_type() == 'owfs':
             current = float(self.sensor.temperature)
 
-          elif self.get_hardware_type() in [terrariumSHT2XSensor.hardwaretype,terrariumHTU21DSensor.hardwaretype,terrariumSi7021Sensor.hardwaretype]:
+          elif self.get_hardware_type() in [terrariumSHT2XSensor.hardwaretype,
+                                            terrariumHTU21DSensor.hardwaretype,
+                                            terrariumSi7021Sensor.hardwaretype,
+                                            terrariumBME280Sensor.hardwaretype]:
             # This will open a new connection to the sensor
             if terrariumSHT2XSensor.hardwaretype == self.get_hardware_type():
               hardwaresensor = terrariumSHT2XSensor(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
@@ -227,6 +231,8 @@ class terrariumSensor:
               hardwaresensor = terrariumHTU21DSensor(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
             elif terrariumSi7021Sensor.hardwaretype == self.get_hardware_type():
               hardwaresensor = terrariumSi7021Sensor(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
+            elif terrariumBME280Sensor.hardwaretype == self.get_hardware_type():
+              hardwaresensor = terrariumBME280Sensor(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
 
             with hardwaresensor as sensor:
               current = sensor.read_temperature()
@@ -261,7 +267,10 @@ class terrariumSensor:
           if self.get_hardware_type() == 'owfs':
             current = float(self.sensor.humidity)
 
-          elif self.get_hardware_type() in [terrariumSHT2XSensor.hardwaretype,terrariumHTU21DSensor.hardwaretype,terrariumSi7021Sensor.hardwaretype]:
+          elif self.get_hardware_type() in [terrariumSHT2XSensor.hardwaretype,
+                                            terrariumHTU21DSensor.hardwaretype,
+                                            terrariumSi7021Sensor.hardwaretype,
+                                            terrariumBME280Sensor.hardwaretype]:
             # This will open a new connection to the sensor
             if terrariumSHT2XSensor.hardwaretype == self.get_hardware_type():
               hardwaresensor = terrariumSHT2XSensor(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
@@ -269,6 +278,8 @@ class terrariumSensor:
               hardwaresensor = terrariumHTU21DSensor(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
             elif terrariumSi7021Sensor.hardwaretype == self.get_hardware_type():
               hardwaresensor = terrariumSi7021Sensor(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
+            elif terrariumBME280Sensor.hardwaretype == self.get_hardware_type():
+              hardwaresensor = terrariumBME280Sensor(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
 
             with hardwaresensor as sensor:
               current = sensor.read_humidity()
@@ -371,7 +382,10 @@ class terrariumSensor:
     address = self.sensor_address
     if 'hc-sr04' == self.get_hardware_type():
       address = str(self.sensor_address['TRIG']) + ',' + str(self.sensor_address['ECHO'])
-    elif 'sht2x' == self.get_hardware_type():
+    elif self.get_hardware_type() in [terrariumSHT2XSensor.hardwaretype,
+                                      terrariumHTU21DSensor.hardwaretype,
+                                      terrariumSi7021Sensor.hardwaretype,
+                                      terrariumBME280Sensor.hardwaretype]:
       address = str(self.sensor_address['device']) + ',' + str(self.sensor_address['address'])
 
     return address
@@ -391,7 +405,10 @@ class terrariumSensor:
         except Exception, err:
           logger.warning(err)
           pass
-      elif self.get_hardware_type() in [terrariumSHT2XSensor.hardwaretype,terrariumHTU21DSensor.hardwaretype,terrariumSi7021Sensor.hardwaretype]:
+      elif self.get_hardware_type() in [terrariumSHT2XSensor.hardwaretype,
+                                      terrariumHTU21DSensor.hardwaretype,
+                                      terrariumSi7021Sensor.hardwaretype,
+                                      terrariumBME280Sensor.hardwaretype]:
         sensor = address.split(',')
         if len(sensor) == 2:
           self.sensor_address = {'device' : sensor[0] , 'address' : sensor[1]}

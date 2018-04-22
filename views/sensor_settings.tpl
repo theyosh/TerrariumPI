@@ -99,6 +99,7 @@
                               <option value="sht2x">{{_('SHT2X')}}</option>
                               <option value="htu21d">{{_('HTU21D')}}</option>
                               <option value="si7021">{{_('SI7021')}}</option>
+                              <option value="bme280">{{_('BME280 / BMP280')}}</option>
                               <option value="w1">{{_('1Wire')}}</option>
                               <option value="ytxx-digital">{{_('YTXX-digital')}}</option>
                               <option value="remote">{{_('Remote')}}</option>
