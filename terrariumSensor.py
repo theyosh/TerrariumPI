@@ -25,16 +25,39 @@ class terrariumSensorYTXXDigital():
 
   hardwaretype = 'ytxx-digital'
 
-  def __init__(self,gpionummer):
+  def __init__(self,gpionummer,gpiopower = None):
     self.__gpionummer = gpionummer
+    self.__gpio_power = gpiopower
     self.__alarm = None
 
     logger.debug('Initializing sensor type \'%s\' with GPIO address %s' % (self.__class__.__name__,self.__gpionummer))
     GPIO.setup(terrariumUtils.to_BCM_port_number(self.__gpionummer), GPIO.IN,pull_up_down=GPIO.PUD_UP)
+
+    if self.__gpio_power is not None:
+      # Some kind of 'power management' :) https://raspberrypi.stackexchange.com/questions/68123/preventing-corrosion-on-yl-69
+      logger.debug('Enabling power control management on sensor type \'%s\' with GPIO power address %s' % (self.__class__.__name__,self.__gpio_power))
+      GPIO.setup(terrariumUtils.to_BCM_port_number(self.__gpio_power), GPIO.OUT)
+
+
+
     #GPIO.add_event_detect(terrariumUtils.to_BCM_port_number(self.__gpionummer), GPIO.BOTH, bouncetime=300)
     #GPIO.add_event_callback(terrariumUtils.to_BCM_port_number(self.__gpionummer), self.__state_change)
 
+
+
+  def __get_raw_data(self):
+    if self.__gpio_power is not None:
+      logger.debug('Powering up sensor type \'%s\' with GPIO address %s' % (self.__class__.__name__,self.__gpionummer))
+      GPIO.output(terrariumUtils.to_BCM_port_number(self.__gpio_power),1)
+      # Time to get power flowing
+      time.sleep(0.5)
+
     self.__alarm = True if not GPIO.input(terrariumUtils.to_BCM_port_number(self.__gpionummer)) else False
+    logger.debug('Read state sensor type \'%s\' with GPIO address %s with current alarm: %s' % (self.__class__.__name__,self.__gpionummer,self.__alarm))
+
+    if self.__gpio_power is not None:
+      logger.debug('Powering down sensor type \'%s\' with GPIO address %s' % (self.__class__.__name__,self.__gpionummer))
+      GPIO.output(terrariumUtils.to_BCM_port_number(self.__gpio_power),0)
 
   def __enter__(self):
     """used to enable python's with statement support"""
@@ -47,8 +70,12 @@ class terrariumSensorYTXXDigital():
   def close(self):
     logger.debug('Close sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__gpionummer))
     GPIO.cleanup(terrariumUtils.to_BCM_port_number(self.__gpionummer))
+    if self.__gpio_power is not None:
+      logger.debug('Close power control pin of sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__gpio_power))
+      GPIO.cleanup(terrariumUtils.to_BCM_port_number(self.__gpio_power))
 
   def get_alarm(self):
+    self.__get_raw_data()
     return self.__alarm is True
 
   def get_state(self):
@@ -303,7 +330,11 @@ class terrariumSensor:
 
         elif 'moisture' == self.get_type():
           if terrariumSensorYTXXDigital.hardwaretype == self.get_hardware_type():
-            hardwaresensor = terrariumSensorYTXXDigital(int(self.sensor_address))
+            address = [self.sensor_address,None]
+            if ',' in address:
+              address = self.sensor_address.split(',')
+
+            hardwaresensor = terrariumSensorYTXXDigital(address[0],address[1])
 
           with hardwaresensor as sensor:
             current = sensor.get_current()
