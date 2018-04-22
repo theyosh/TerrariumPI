@@ -10,9 +10,8 @@ import time
 import glob
 
 import logging.config
-from gevent import monkey
-monkey.patch_all()
-
+#from gevent import monkey
+#monkey.patch_all()
 
 class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandler):
     """
