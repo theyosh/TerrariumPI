@@ -6,12 +6,11 @@ import zipfile
 import codecs
 import sys
 import os
+import os.path
 import time
 import glob
 
 import logging.config
-#from gevent import monkey
-#monkey.patch_all()
 
 class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandler):
     """
@@ -54,3 +53,5 @@ class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandl
         os.remove(dfn)
 
 logging.config.fileConfig('logging.cfg')
+if os.path.isfile('logging.debug.cfg'):
+  logging.config.fileConfig('logging.debug.cfg')

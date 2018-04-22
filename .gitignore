@@ -6,3 +6,4 @@ log/*.log*
 audio/*
 description.txt
 weather.txt
+logging.debug.cfg
