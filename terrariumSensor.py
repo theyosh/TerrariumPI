@@ -186,7 +186,10 @@ class terrariumSensor:
               hardwaresensor = terrariumSi7021Sensor(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
 
             with hardwaresensor as sensor:
-              current = float(sensor.read_temperature())
+              current = sensor.read_temperature()
+              if terrariumUtils.is_float(current):
+                current = float(current)
+
               # This will 'automatically' close the connection to the sensor
 
           elif self.get_hardware_type() == 'w1':
@@ -225,7 +228,10 @@ class terrariumSensor:
               hardwaresensor = terrariumSi7021Sensor(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
 
             with hardwaresensor as sensor:
-              current = float(sensor.read_humidity())
+              current = sensor.read_humidity()
+              if terrariumUtils.is_float(current):
+                current = float(current)
+
               # This will 'automatically' close the connection to the sensor
 
           elif self.get_hardware_type() == 'w1':
