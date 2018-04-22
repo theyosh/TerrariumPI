@@ -1022,6 +1022,13 @@ function history_graph(name, data, type) {
     type = 'temperature';
   }
 
+  var graph_ticks = 8;
+  if (type === 'door') {
+    graph_ticks = [[0, '{{_('Closed')}}'], [1, '{{_('Open')}}']];
+  } else if (type === 'moisture') {
+    graph_ticks = [[0, '{{_('Wet')}}'], [1, '{{_('Dry')}}']];
+  }
+
   var graph_data = [];
   var graph_options = {
     tootip: true,
@@ -1057,7 +1064,7 @@ function history_graph(name, data, type) {
       //inverseTransform: function (v) { return -v; }
     },
     yaxis: {
-      ticks: (type === 'door' ? [[0, '{{_('Closed')}}'], [1, '{{_('Open')}}']] : 8),
+      ticks: graph_ticks,
       tickColor: "rgba(51, 51, 51, 0.06)",
       tickDecimals: 1,
       tickFormatter: function(val, axis) {
@@ -1102,6 +1109,10 @@ function history_graph(name, data, type) {
 
           case 'door':
             val = (val ? '{{_('Open')}}' : '{{_('Closed')}}');
+            break;
+
+          case 'moisture':
+            val = (val ? '{{_('Dry')}}' : '{{_('Wet')}}');
             break;
         }
         return val;
@@ -1216,6 +1227,20 @@ function history_graph(name, data, type) {
       graph_data = [{
         label: '{{_('Door status')}}',
         data: data.state
+      }];
+      break;
+
+    case 'moisture':
+      graph_options.series.lines = {
+        show: true,
+        lineWidth: 2,
+        fill: true
+      };
+      graph_options.yaxis.min = 0;
+      graph_options.yaxis.max = 1;
+      graph_data = [{
+        label: '{{_('Moisture status')}}',
+        data: data.current
       }];
       break;
   }

@@ -41,6 +41,7 @@ class terrariumEngine():
     self.__units = {'temperature' : 'C',
                     'distance'    : 'cm',
                     'humidity'    : '%',
+                    'moisture'    : '',
                     'ph'          : 'Ph'}
 
     # List of queues for websocket communication
@@ -902,6 +903,9 @@ class terrariumEngine():
 
   def get_humidity_indicator(self):
     return self.__unit_type('humidity')
+
+  def get_moisture_indicator(self):
+    return self.__unit_type('moisture')
 
   def get_distance_indicator(self):
     return self.__unit_type('distance')
