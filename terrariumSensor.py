@@ -38,18 +38,14 @@ class terrariumSensorYTXXDigital():
       logger.debug('Enabling power control management on sensor type \'%s\' with GPIO power address %s' % (self.__class__.__name__,self.__gpio_power))
       GPIO.setup(terrariumUtils.to_BCM_port_number(self.__gpio_power), GPIO.OUT)
 
-
-
     #GPIO.add_event_detect(terrariumUtils.to_BCM_port_number(self.__gpionummer), GPIO.BOTH, bouncetime=300)
     #GPIO.add_event_callback(terrariumUtils.to_BCM_port_number(self.__gpionummer), self.__state_change)
-
-
 
   def __get_raw_data(self):
     if self.__gpio_power is not None:
       logger.debug('Powering up sensor type \'%s\' with GPIO address %s' % (self.__class__.__name__,self.__gpionummer))
       GPIO.output(terrariumUtils.to_BCM_port_number(self.__gpio_power),1)
-      # Time to get power flowing
+      # Time to get power flowing. Not sure what the right amount time would be....
       time.sleep(0.5)
 
     self.__alarm = True if not GPIO.input(terrariumUtils.to_BCM_port_number(self.__gpionummer)) else False
@@ -331,7 +327,7 @@ class terrariumSensor:
         elif 'moisture' == self.get_type():
           if terrariumSensorYTXXDigital.hardwaretype == self.get_hardware_type():
             address = [self.sensor_address,None]
-            if ',' in address:
+            if ',' in self.sensor_address:
               address = self.sensor_address.split(',')
 
             hardwaresensor = terrariumSensorYTXXDigital(address[0],address[1])
