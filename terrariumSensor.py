@@ -10,6 +10,7 @@ import Adafruit_DHT as dht
 import glob
 import re
 import RPi.GPIO as GPIO
+import thread
 
 from hashlib import md5
 from gpiozero import MCP3008
@@ -17,9 +18,48 @@ from gpiozero import MCP3008
 from terrariumUtils import terrariumUtils
 from terrariumI2CSensor import terrariumSHT2XSensor,terrariumHTU21DSensor,terrariumSi7021Sensor
 
+from gevent import monkey, sleep
+monkey.patch_all()
+
+class terrariumSensorYTXXDigital():
+
+  hardwaretype = 'ytxx-digital'
+
+  def __init__(self,gpionummer):
+    self.__gpionummer = gpionummer
+    self.__alarm = None
+
+    logger.debug('Initializing sensor type \'%s\' with GPIO address %s' % (self.__class__.__name__,self.__gpionummer))
+    GPIO.setup(terrariumUtils.to_BCM_port_number(self.__gpionummer), GPIO.IN,pull_up_down=GPIO.PUD_UP)
+    #GPIO.add_event_detect(terrariumUtils.to_BCM_port_number(self.__gpionummer), GPIO.BOTH, bouncetime=300)
+    #GPIO.add_event_callback(terrariumUtils.to_BCM_port_number(self.__gpionummer), self.__state_change)
+
+    self.__alarm = True if not GPIO.input(terrariumUtils.to_BCM_port_number(self.__gpionummer)) else False
+
+  def __enter__(self):
+    """used to enable python's with statement support"""
+    return self
+
+  def __exit__(self, type, value, traceback):
+    """with support"""
+    self.close()
+
+  def close(self):
+    logger.debug('Close sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__gpionummer))
+    GPIO.cleanup(terrariumUtils.to_BCM_port_number(self.__gpionummer))
+
+  def get_alarm(self):
+    return self.__alarm is True
+
+  def get_state(self):
+    return (_('Dry') if self.get_alarm() else _('Wet'))
+
+  def get_current(self):
+    return 1 if self.get_alarm() else 0
+
 class terrariumSensor:
   UPDATE_TIMEOUT = 30
-  VALID_SENSOR_TYPES   = ['temperature','humidity','distance','ph']
+  VALID_SENSOR_TYPES   = ['temperature','humidity','moisture','distance','ph']
   VALID_DHT_SENSORS    = { 'dht11' : dht.DHT11,
                            'dht22' : dht.DHT22,
                            'am2302': dht.AM2302 }
@@ -29,6 +69,9 @@ class terrariumSensor:
   VALID_HARDWARE_TYPES.append(terrariumSHT2XSensor.hardwaretype)
   VALID_HARDWARE_TYPES.append(terrariumHTU21DSensor.hardwaretype)
   VALID_HARDWARE_TYPES.append(terrariumSi7021Sensor.hardwaretype)
+
+  # Append moisture sensor(s) to the list of valid sensors
+  VALID_HARDWARE_TYPES.append(terrariumSensorYTXXDigital.hardwaretype)
 
   W1_BASE_PATH = '/sys/bus/w1/devices/'
   W1_TEMP_REGEX = re.compile(r'(?P<type>t|f)=(?P<value>[0-9\-]+)',re.IGNORECASE)
@@ -246,6 +289,16 @@ class terrariumSensor:
             if humidity is not None:
               current = float(humidity)
 
+
+        elif 'moisture' == self.get_type():
+          if terrariumSensorYTXXDigital.hardwaretype == self.get_hardware_type():
+            hardwaresensor = terrariumSensorYTXXDigital(int(self.sensor_address))
+
+          with hardwaresensor as sensor:
+            current = sensor.get_current()
+            if terrariumUtils.is_float(current):
+              current = float(current)
+
         if current is None or not (self.get_limit_min() <= current <= self.get_limit_max()):
           # Invalid current value.... log and ingore
           logger.warn('Measured value %s%s from %s sensor \'%s\' is outside valid range %.2f%s - %.2f%s in %.5f seconds.' % (current,
@@ -355,24 +408,40 @@ class terrariumSensor:
     return self.alarm_min
 
   def set_alarm_min(self,limit):
+    if terrariumSensorYTXXDigital.hardwaretype == self.get_hardware_type():
+      # Hard limit for better gauge graphs. Sensor can only return 0 or 1
+      limit = -1.05
+
     self.alarm_min = float(limit)
 
   def get_alarm_max(self):
     return self.alarm_max
 
   def set_alarm_max(self,limit):
+    if terrariumSensorYTXXDigital.hardwaretype == self.get_hardware_type():
+      # Hard limit for better gauge graphs. Sensor can only return 0 or 1
+      limit = 1.05
+
     self.alarm_max = float(limit)
 
   def get_limit_min(self):
     return self.limit_min
 
   def set_limit_min(self,limit):
+    if terrariumSensorYTXXDigital.hardwaretype == self.get_hardware_type():
+      # Hard limit for better gauge graphs. Sensor can only return 0 or 1
+      limit = -1.1
+
     self.limit_min = float(limit)
 
   def get_limit_max(self):
     return self.limit_max
 
   def set_limit_max(self,limit):
+    if terrariumSensorYTXXDigital.hardwaretype == self.get_hardware_type():
+      # Hard limit for better gauge graphs. Sensor can only return 0 or 1
+      limit = 1.1
+
     self.limit_max = float(limit)
 
   def get_current(self, force = False):

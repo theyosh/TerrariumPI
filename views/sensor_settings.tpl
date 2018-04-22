@@ -73,6 +73,7 @@
                       <div class="x_title">
                         <h2 class="temperature"><span aria-hidden="true" class="glyphicon glyphicon-fire"></span> {{_('Temperature sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <h2 class="humidity" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Humidity sensor')}} <span class="title">{{_('new')}}</span></h2>
+                        <h2 class="moisture" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Moisture sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <h2 class="distance" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-signal"></span> {{_('Distance sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <h2 class="ph" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-scale"></span> {{_('pH sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <ul class="nav navbar-right panel_toolbox">
@@ -99,6 +100,7 @@
                               <option value="htu21d">{{_('HTU21D')}}</option>
                               <option value="si7021">{{_('SI7021')}}</option>
                               <option value="w1">{{_('1Wire')}}</option>
+                              <option value="ytxx-digital">{{_('YTXX-digital')}}</option>
                               <option value="remote">{{_('Remote')}}</option>
                               <option value="hc-sr04">{{_('HC-SR04')}}</option>
                               <option value="sku-sen0161">{{_('pH SKU-SEN0161')}}</option>
@@ -117,6 +119,7 @@
                               <option value="">{{_('Select an option')}}</option>
                               <option value="temperature">{{_('Temperature')}}</option>
                               <option value="humidity">{{_('Humidity')}}</option>
+                              <option value="moisture">{{_('Moisture')}}</option>
                               <option value="distance">{{_('Distance')}}</option>
                               <option value="ph">{{_('pH')}}</option>
                             </select>
