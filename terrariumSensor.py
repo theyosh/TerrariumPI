@@ -13,8 +13,9 @@ import RPi.GPIO as GPIO
 
 from hashlib import md5
 from gpiozero import MCP3008
+
 from terrariumUtils import terrariumUtils
-from sht2x import SHT21
+from terrariumI2CSensor import terrariumSHT2XSensor,terrariumHTU21DSensor,terrariumSi7021Sensor
 
 class terrariumSensor:
   UPDATE_TIMEOUT = 30
@@ -22,7 +23,12 @@ class terrariumSensor:
   VALID_DHT_SENSORS    = { 'dht11' : dht.DHT11,
                            'dht22' : dht.DHT22,
                            'am2302': dht.AM2302 }
-  VALID_HARDWARE_TYPES = ['owfs','w1','remote','hc-sr04','sku-sen0161','sht2x'] + VALID_DHT_SENSORS.keys()
+  VALID_HARDWARE_TYPES = ['owfs','w1','remote','hc-sr04','sku-sen0161'] + VALID_DHT_SENSORS.keys()
+
+  # Append I2C sensors to the list of valid sensors
+  VALID_HARDWARE_TYPES.append(terrariumSHT2XSensor.sensortype)
+  VALID_HARDWARE_TYPES.append(terrariumHTU21DSensor.sensortype)
+  VALID_HARDWARE_TYPES.append(terrariumSi7021Sensor.sensortype)
 
   W1_BASE_PATH = '/sys/bus/w1/devices/'
   W1_TEMP_REGEX = re.compile(r'(?P<type>t|f)=(?P<value>[0-9\-]+)',re.IGNORECASE)
@@ -30,6 +36,7 @@ class terrariumSensor:
   def __init__(self, id, hardware_type, sensor_type, sensor, name = '', callback_indicator = None):
     self.id = id
     self.set_hardware_type(hardware_type)
+    self.set_address(sensor)
 
     if 'owfs' == self.get_hardware_type():
       # OW Sensor object
@@ -39,23 +46,11 @@ class terrariumSensor:
     elif 'w1' == self.get_hardware_type():
       # Dirty hack to replace OWFS sensor object for W1 path
       self.sensor_address = sensor
-    elif 'hc-sr04' == self.get_hardware_type():
-      # Dirty hack to set sensor address
-      self.set_address(sensor)
-    elif 'sku-sen0161' == self.get_hardware_type():
-      # Dirty hack to set sensor address
-      self.set_address(sensor)
-    elif 'remote' == self.get_hardware_type():
-      # Dirty hack to set sensor address
-      self.set_address(sensor)
-    elif 'sht2x' == self.get_hardware_type():
-      # Dirty hack to set sensor address
-      self.set_address(sensor)
     elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
       # Adafruit_DHT
       self.sensor = dht
       # Dirty hack to set sensor address
-      self.set_address(sensor)
+      #self.set_address(sensor)
 
     self.set_name(name)
     self.set_type(sensor_type,callback_indicator)
@@ -181,8 +176,18 @@ class terrariumSensor:
           if self.get_hardware_type() == 'owfs':
             current = float(self.sensor.temperature)
 
-          elif self.get_hardware_type() == 'sht2x':
-            current = float(self.sensor.read_temperature())
+          elif self.get_hardware_type() in ['sht2x','hdt21d','si7021']:
+            # This will open a new connection to the sensor
+            if 'sht2x' == self.get_hardware_type():
+              hwsensor = terrariumSHT2XSensor(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
+            elif 'hdt21d' == self.get_hardware_type():
+              hwsensor = terrariumHTU21DSensor(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
+            elif 'si7021' == self.get_hardware_type():
+              hwsensor = terrariumSi7021Sensor(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
+
+            with hwsensor as sensor:
+              current = float(sensor.read_temperature())
+              # This will 'automatically' close the connection to the sensor
 
           elif self.get_hardware_type() == 'w1':
             data = ''
@@ -210,8 +215,20 @@ class terrariumSensor:
           if self.get_hardware_type() == 'owfs':
             current = float(self.sensor.humidity)
 
-          elif self.get_hardware_type() == 'sht2x':
-            current = float(self.sensor.read_humidity())
+          elif self.get_hardware_type() in ['sht2x','hdt21d','si7021']:
+            # This will open a new connection to the sensor
+            if 'sht2x' == self.get_hardware_type():
+              hwsensor = terrariumSHT2XSensor(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
+            elif 'hdt21d' == self.get_hardware_type():
+              hwsensor = terrariumHTU21DSensor(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
+            elif 'si7021' == self.get_hardware_type():
+              hwsensor = terrariumSi7021Sensor(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
+
+            with hwsensor as sensor:
+              current = float(sensor.read_humidity())
+              # This will 'automatically' close the connection to the sensor
+
+            #current = float(self.sensor.read_humidity())
 
           elif self.get_hardware_type() == 'w1':
             # Not tested / No hardware to test with
@@ -317,18 +334,12 @@ class terrariumSensor:
         except Exception, err:
           logger.warning(err)
           pass
-      elif 'sht2x' == self.get_hardware_type():
+      elif self.get_hardware_type() in ['sht2x','hdt21d','si7021']:
         sensor = address.split(',')
         if len(sensor) == 2:
           self.sensor_address = {'device' : sensor[0] , 'address' : sensor[1]}
         else:
           self.sensor_address = {'device' : 1 , 'address' : address}
-
-        try:
-          self.sensor = SHT21(int(self.sensor_address['device']),int('0x' + self.sensor_address['address'],16))
-        except Exception, err:
-          logger.exception(err)
-          pass
 
   def set_name(self,name):
     self.name = str(name)
@@ -378,8 +389,6 @@ class terrariumSensor:
     if 'hc-sr04' == self.get_hardware_type():
       GPIO.cleanup(terrariumUtils.to_BCM_port_number(self.sensor_address['TRIG']))
       GPIO.cleanup(terrariumUtils.to_BCM_port_number(self.sensor_address['ECHO']))
-    elif 'sht2x' == self.get_hardware_type():
-      self.sensor.close()
     elif self.get_hardware_type() in terrariumSensor.VALID_DHT_SENSORS.keys():
       GPIO.cleanup(terrariumUtils.to_BCM_port_number(self.sensor_address))
 
