@@ -1102,6 +1102,11 @@ function history_graph(name, data, type) {
           case 'average_ph':
             val = formatNumber(val) + ' pH';
             break;
+			
+          case 'conductivity':
+          case 'average_conductivity':
+            val = formatNumber(val) + ' mS';
+            break;			
 
           case 'switch':
             val = formatNumber(val) + ' W';
@@ -1136,6 +1141,18 @@ function history_graph(name, data, type) {
         data: data.alarm_max
       }];
       break;
+    case 'conductivity':
+      graph_data = [{
+        label: '{{_('Current')}}',
+        data: data.current
+      }, {
+        label: '{{_('Alarm min')}}',
+        data: data.alarm_min
+      }, {
+        label: '{{_('Alarm max')}}',
+        data: data.alarm_max
+      }];
+      break;	  
 
     case 'weather':
       graph_options.series.curvedLines.apply = true;
