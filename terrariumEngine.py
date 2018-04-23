@@ -42,6 +42,7 @@ class terrariumEngine():
                     'distance'    : 'cm',
                     'humidity'    : '%',
                     'moisture'    : '',
+					'conductivity': 'mS',					
                     'ph'          : 'Ph'}
 
     # List of queues for websocket communication
