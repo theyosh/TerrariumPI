@@ -82,7 +82,7 @@ class terrariumSensorYTXXDigital():
 
 class terrariumSensor:
   UPDATE_TIMEOUT = 30
-  VALID_SENSOR_TYPES   = ['temperature','humidity','moisture','distance','ph']
+  VALID_SENSOR_TYPES   = ['temperature','humidity','moisture','conductivity','distance','ph']
   VALID_DHT_SENSORS    = { 'dht11' : dht.DHT11,
                            'dht22' : dht.DHT22,
                            'am2302': dht.AM2302 }
