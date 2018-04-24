@@ -73,7 +73,8 @@
                       <div class="x_title">
                         <h2 class="temperature"><span aria-hidden="true" class="glyphicon glyphicon-fire"></span> {{_('Temperature sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <h2 class="humidity" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Humidity sensor')}} <span class="title">{{_('new')}}</span></h2>
-                        <h2 class="moisture" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Moisture sensor')}} <span class="title">{{_('new')}}</span></h2>
+						<h2 class="moisture" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Moisture sensor')}} <span class="title">{{_('new')}}</span></h2>
+                        <h2 class="conductivity" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Conductivity sensor')}} <span class="title">{{_('new')}}</span></h2>						
                         <h2 class="distance" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-signal"></span> {{_('Distance sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <h2 class="ph" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-scale"></span> {{_('pH sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <ul class="nav navbar-right panel_toolbox">
@@ -121,6 +122,7 @@
                               <option value="temperature">{{_('Temperature')}}</option>
                               <option value="humidity">{{_('Humidity')}}</option>
                               <option value="moisture">{{_('Moisture')}}</option>
+							  <option value="conductivity">{{_('Conductivity')}}</option>							  
                               <option value="distance">{{_('Distance')}}</option>
                               <option value="ph">{{_('pH')}}</option>
                             </select>
