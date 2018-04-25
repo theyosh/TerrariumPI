@@ -17,7 +17,7 @@ from terrariumUtils import terrariumUtils
 from gevent import monkey, sleep
 monkey.patch_all()
 
-class terrariumWeatherSource():
+class terrariumWeatherSource(object):
 
   update_timeout = 30 * 60 # Default update timeout of 30 minutes
 
@@ -231,7 +231,7 @@ class terrariumWeatherOpenWeathermap(terrariumWeatherSource):
 
     return True
 
-class terrariumWeather():
+class terrariumWeather(object):
   # Weather data expects temperature in celcius degrees and windspeed in meters per second
   weather_update_timeout = 4 * 60 * 60 # In seconds (4 hours)
 
