@@ -181,6 +181,22 @@ class terrariumEnvironment(object):
     self.cooler['sensors']    = [sensorid for sensorid in self.cooler['sensors'] if sensorid in self.sensors]
     self.watertank['sensors'] = [sensorid for sensorid in self.watertank['sensors'] if sensorid in self.sensors]
 
+  def __check_active_sensors(self,part):
+    sensorlist = self.sprayer['sensors']
+
+    if 'heater' == part:
+      sensorlist = self.heater['sensors']
+    elif 'cooler' == part:
+      sensorlist = self.cooler['sensors']
+    elif 'watertank' == part:
+      sensorlist = self.watertank['sensors']
+    elif 'moisture' == part:
+      sensorlist = self.moisture['sensors']
+    elif 'ph' == part:
+      sensorlist = self.ph['sensors']
+
+    return len(sensorlist) == 0 or any(self.sensors[sensor].is_active() for sensor in sensorlist)
+
   def __update_timing(self,part = None):
     if part is None or part == 'light':
       if self.light['mode'] == 'weather':
@@ -253,7 +269,7 @@ class terrariumEnvironment(object):
     self.__update_timing()
 
   def __update_environment_state(self):
-    self.sprayer['humidity'] = self.get_average_humidity(self.sprayer['sensors'])
+    self.sprayer['humidity']   = self.get_average_humidity(self.sprayer['sensors'])
     self.heater['temperature'] = self.get_average_temperature(self.heater['sensors'])
     self.cooler['temperature'] = self.get_average_temperature(self.cooler['sensors'])
     self.watertank['distance'] = self.get_average_distance(self.watertank['sensors'])
@@ -297,13 +313,17 @@ class terrariumEnvironment(object):
         logger.debug('Environment spraying is enabled.')
         logger.debug('Environment spraying is based on: %s' % self.sprayer['mode'])
         if 'sensor' == self.sprayer['mode']:
-          # Only spray when the lights are on. Or when explicit enabled during the nights.
-          if self.sprayer['night_enabled'] or self.is_light_on():
-            # Spray based on the average humidity values of the used sensors
-            toggle_on = self.sprayer['humidity']['current'] < self.sprayer['humidity']['alarm_min']
-            if toggle_on:
-              extra_logging_message = 'Sprayer humdity value %f%% is lower then alarm %f%%.' % (self.sprayer['humidity']['current'],
-                                                                                        self.sprayer['humidity']['alarm_min'])
+          if not self.__check_active_sensors('sprayer'):
+            logger.error('Environment spraying sensors are not up to date. Check you sensors on the sensor page So force the power down to be sure!')
+            toggle_on = False
+          else:
+            # Only spray when the lights are on. Or when explicit enabled during the nights.
+            if self.sprayer['night_enabled'] or self.is_light_on():
+              # Spray based on the average humidity values of the used sensors
+              toggle_on = self.sprayer['humidity']['current'] < self.sprayer['humidity']['alarm_min']
+              if toggle_on:
+                extra_logging_message = 'Sprayer humdity value %f%% is lower then alarm %f%%.' % (self.sprayer['humidity']['current'],
+                                                                                          self.sprayer['humidity']['alarm_min'])
         else:
           # Spray based on time table
           toggle_on = terrariumUtils.is_time(self.sprayer['time_table'])
@@ -348,11 +368,15 @@ class terrariumEnvironment(object):
         logger.debug('Environment watertank is enabled.')
         logger.debug('Environment watertank is based on: %s' % self.watertank['mode'])
         if 'sensor' == self.watertank['mode']:
-          # Spray based on the average humidity values of the used sensors
-          toggle_on = self.watertank['height'] - self.watertank['distance']['current'] < self.watertank['distance']['alarm_min']
-          if toggle_on:
-            extra_logging_message = 'Water tank level value %f%% is lower then alarm %f%%.' % (self.watertank['height'] - self.watertank['distance']['current'],
-                                                                                        self.watertank['distance']['alarm_min'])
+          if not self.__check_active_sensors('watertank'):
+            logger.error('Environment watertank sensors are not up to date. Check you sensors on the sensor page So force the power down to be sure!')
+            toggle_on = False
+          else:
+            # Spray based on the average humidity values of the used sensors
+            toggle_on = self.watertank['height'] - self.watertank['distance']['current'] < self.watertank['distance']['alarm_min']
+            if toggle_on:
+              extra_logging_message = 'Water tank level value %f%% is lower then alarm %f%%.' % (self.watertank['height'] - self.watertank['distance']['current'],
+                                                                                          self.watertank['distance']['alarm_min'])
         else:
           # Spray based on time table
           toggle_on = terrariumUtils.is_time(self.watertank['time_table'])
@@ -416,24 +440,27 @@ class terrariumEnvironment(object):
               self.heater['night_modus'] = is_night
 
         if 'sensor' == self.heater['mode']:
-          # Only heat when the lights are off. Or when explicit enabled during the day.
-          if self.heater['day_enabled'] or self.is_light_off():
-            # Heat based on the average temperature values of the used sensors
-            if self.heater['temperature']['current'] < self.heater['temperature']['alarm_min']:
-              toggle_on = True
-              extra_logging_message = 'Heater temperature value %f%% is lower then alarm %f%%.' % (self.heater['temperature']['current'],
-                                                                                            self.heater['temperature']['alarm_min'])
-            elif self.heater['temperature']['current'] > self.heater['temperature']['alarm_max']:
-              toggle_on = False
-              extra_logging_message = 'Heater temperature value %f%% is higher then alarm %f%%.' % (self.heater['temperature']['current'],
-                                                                                             self.heater['temperature']['alarm_max'])
-          else:
-            # Force off when lights are on!
-            if self.is_heater_on():
-              logger.info('Environment is turning off the heater due to lights on based on %s mode.' % (self.heater['mode'],))
-
+          if not self.__check_active_sensors('heater'):
+            logger.error('Environment heater sensors are not up to date. Check you sensors on the sensor page So force the power down to be sure!')
             toggle_on = False
+          else:
+            # Only heat when the lights are off. Or when explicit enabled during the day.
+            if self.heater['day_enabled'] or self.is_light_off():
+              # Heat based on the average temperature values of the used sensors
+              if self.heater['temperature']['current'] < self.heater['temperature']['alarm_min']:
+                toggle_on = True
+                extra_logging_message = 'Heater temperature value %f%% is lower then alarm %f%%.' % (self.heater['temperature']['current'],
+                                                                                              self.heater['temperature']['alarm_min'])
+              elif self.heater['temperature']['current'] > self.heater['temperature']['alarm_max']:
+                toggle_on = False
+                extra_logging_message = 'Heater temperature value %f%% is higher then alarm %f%%.' % (self.heater['temperature']['current'],
+                                                                                               self.heater['temperature']['alarm_max'])
+            else:
+              # Force off when lights are on!
+              if self.is_heater_on():
+                logger.info('Environment is turning off the heater due to lights on based on %s mode.' % (self.heater['mode'],))
 
+              toggle_on = False
 
         else:
           # Heat based on time table
@@ -481,23 +508,28 @@ class terrariumEnvironment(object):
         logger.debug('Environment cooler is enabled.')
         logger.debug('Environment cooler is based on: %s' % self.cooler['mode'])
         if 'sensor' == self.cooler['mode']:
-          # Only cool when the lights are on. Or when explicit enabled during the night.
-          if self.cooler['night_enabled'] or self.is_light_on():
-            # Cooler based on the average temperature values of the used sensors
-            if self.cooler['temperature']['current'] < self.cooler['temperature']['alarm_min']:
-              toggle_on = False
-              extra_logging_message = 'Cooler temperature value %f%% is lower then alarm %f%%.' % (self.cooler['temperature']['current'],
-                                                                                            self.cooler['temperature']['alarm_min'])
-            elif self.cooler['temperature']['current'] > self.cooler['temperature']['alarm_max']:
-              toggle_on = True
-              extra_logging_message = 'Cooler temperature value %f%% is higher then alarm %f%%.' % (self.cooler['temperature']['current'],
-                                                                                             self.cooler['temperature']['alarm_max'])
-          else:
-            # Force off when lights are on!
-            if self.is_cooler_on():
-              logger.info('Environment is turning off the cooler due to lights on based on %s mode.' % (self.cooler['mode'],))
-
+          if not self.__check_active_sensors('cooler'):
+            logger.error('Environment cooler sensors are not up to date. Check you sensors on the sensor page So force the power down to be sure!')
             toggle_on = False
+          else:
+
+            # Only cool when the lights are on. Or when explicit enabled during the night.
+            if self.cooler['night_enabled'] or self.is_light_on():
+              # Cooler based on the average temperature values of the used sensors
+              if self.cooler['temperature']['current'] < self.cooler['temperature']['alarm_min']:
+                toggle_on = False
+                extra_logging_message = 'Cooler temperature value %f%% is lower then alarm %f%%.' % (self.cooler['temperature']['current'],
+                                                                                              self.cooler['temperature']['alarm_min'])
+              elif self.cooler['temperature']['current'] > self.cooler['temperature']['alarm_max']:
+                toggle_on = True
+                extra_logging_message = 'Cooler temperature value %f%% is higher then alarm %f%%.' % (self.cooler['temperature']['current'],
+                                                                                               self.cooler['temperature']['alarm_max'])
+            else:
+              # Force off when lights are on!
+              if self.is_cooler_on():
+                logger.info('Environment is turning off the cooler due to lights on based on %s mode.' % (self.cooler['mode'],))
+
+              toggle_on = False
 
 
         else:
@@ -634,6 +666,7 @@ class terrariumEnvironment(object):
 
     # Reset alarm for to high mudity and sprayer, to hot and heater, or to cool and cooling
     if part != 'light':
+      return_data['error'] = not self.__check_active_sensors(part)
       if 'alarm' not in return_data or \
           return_data['mode'] == 'disabled' or \
          (part in ['sprayer','heater','watertank'] and return_data['current'] >= return_data['alarm_max']) or \

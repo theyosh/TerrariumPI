@@ -109,7 +109,7 @@
                     </table>
                   </div>
                   <div class="row environment_sprayer">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-umbrella"></i> {{_('Sprayer')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}}</span></small></h4>
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-umbrella"></i> {{_('Sprayer')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}} <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign orange" title="{{_('Error')}}"></span></span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
@@ -150,7 +150,7 @@
                     </table>
                   </div>
                   <div class="row environment_watertank">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-tint"></i> {{_('Water tank')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}}</span></small></h4>
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-tint"></i> {{_('Water tank')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}} <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign orange" title="{{_('Error')}}"></span></span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
@@ -191,7 +191,7 @@
                     </table>
                   </div>
                   <div class="row environment_heater">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-fire"></i> {{_('Heater')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}}</span></small></h4>
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-fire"></i> {{_('Heater')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}} <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign orange" title="{{_('Error')}}"></span></span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
@@ -238,7 +238,7 @@
                     </table>
                   </div>
                   <div class="row environment_cooler">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-flag-o"></i> {{_('Cooler')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}}</span></small></h4>
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-flag-o"></i> {{_('Cooler')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}} <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign orange" title="{{_('Error')}}"></span></span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>

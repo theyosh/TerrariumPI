@@ -173,6 +173,8 @@ class terrariumOWFSSensor(object):
 
 class terrariumSensor(object):
   UPDATE_TIMEOUT = 30
+  ERROR_TIMEOUT = 10
+
   VALID_SENSOR_TYPES   = ['temperature','humidity','moisture','conductivity','distance','ph']
   VALID_HARDWARE_TYPES = []
 
@@ -365,7 +367,8 @@ class terrariumSensor(object):
             'alarm_max' : self.get_alarm_max(),
             'limit_min' : self.get_limit_min(),
             'limit_max' : self.get_limit_max(),
-            'alarm' : self.get_alarm()
+            'alarm' : self.get_alarm(),
+            'error' : not self.is_active()
             }
 
     return data
@@ -463,6 +466,9 @@ class terrariumSensor(object):
 
   def get_alarm(self):
     return not self.get_alarm_min() < self.get_current() < self.get_alarm_max()
+
+  def is_active(self):
+    return datetime.datetime.now() - self.last_update < datetime.timedelta(minutes=terrariumSensor.ERROR_TIMEOUT)
 
   def stop(self):
     logger.info('Cleaned up sensor %s at location %s' % (self.get_name(), self.get_address()))
