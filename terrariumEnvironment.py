@@ -343,8 +343,8 @@ class terrariumEnvironment(object):
     self.heater['temperature'] = self.get_average_temperature(self.heater['sensors'])
     self.cooler['temperature'] = self.get_average_temperature(self.cooler['sensors'])
     self.watertank['distance'] = self.get_average_distance(self.watertank['sensors'])
-    self.moisture['moisture'] = self.get_average_moisture(self.moisture['sensors'])
-    self.ph['distance'] = self.get_average_ph(self.ph['sensors'])
+    self.moisture['moisture']  = self.get_average_moisture(self.moisture['sensors'])
+    self.ph['ph']              = self.get_average_ph(self.ph['sensors'])
 
   def __engine_loop(self):
     logger.info('Starting engine')
@@ -678,14 +678,14 @@ class terrariumEnvironment(object):
             # Only on when the lights are off. Or when explicit enabled during the day.
             if self.ph['day_enabled'] or self.is_light_off():
               # On based on the average temperature values of the used sensors
-              if self.ph['temperature']['current'] < self.ph['temperature']['alarm_min']:
+              if self.ph['ph']['current'] < self.ph['ph']['alarm_min']:
                 toggle_on = True
-                extra_logging_message = 'Ph value %f%% is lower then alarm %f%%.' % (self.ph['temperature']['current'],
-                                                                                              self.ph['temperature']['alarm_min'])
-              elif self.ph['temperature']['current'] > self.ph['temperature']['alarm_max']:
+                extra_logging_message = 'Ph value %f%% is lower then alarm %f%%.' % (self.ph['ph']['current'],
+                                                                                              self.ph['ph']['alarm_min'])
+              elif self.ph['ph']['current'] > self.ph['ph']['alarm_max']:
                 toggle_on = False
-                extra_logging_message = 'Ph value %f%% is higher then alarm %f%%.' % (self.ph['temperature']['current'],
-                                                                                               self.ph['temperature']['alarm_max'])
+                extra_logging_message = 'Ph value %f%% is higher then alarm %f%%.' % (self.ph['ph']['current'],
+                                                                                               self.ph['ph']['alarm_max'])
             else:
               # Force off when lights are on!
               if self.is_ph_on():
@@ -703,14 +703,14 @@ class terrariumEnvironment(object):
             # Reset toggle based on the extra available sensors
             toggle_on = None
             # Use the extra added sensors for finetuning the trigger action
-            if self.ph['temperature']['current'] < self.ph['temperature']['alarm_min']:
+            if self.ph['ph']['current'] < self.ph['ph']['alarm_min']:
               toggle_on = True
-              extra_logging_message = 'Ph value %f%% is lower then alarm %f%%.' % (self.ph['temperature']['current'],
-                                                                                            self.ph['temperature']['alarm_min'])
-            elif self.ph['temperature']['current'] > self.ph['temperature']['alarm_max']:
+              extra_logging_message = 'Ph value %f%% is lower then alarm %f%%.' % (self.ph['ph']['current'],
+                                                                                            self.ph['ph']['alarm_min'])
+            elif self.ph['ph']['current'] > self.ph['ph']['alarm_max']:
               toggle_on = False
-              extra_logging_message = 'Ph value %f%% is higher then alarm %f%%.' % (self.ph['temperature']['current'],
-                                                                                             self.ph['temperature']['alarm_max'])
+              extra_logging_message = 'Ph value %f%% is higher then alarm %f%%.' % (self.ph['ph']['current'],
+                                                                                             self.ph['ph']['alarm_max'])
 
         if toggle_on is True:
           if not self.is_ph_on():
