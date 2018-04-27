@@ -132,6 +132,7 @@ div#dashboard .row.tile_count .progress {
 }
 
 div#dashboard div.row.environment h4 span.glyphicon-warning-sign,
+div#dashboard div.row.environment h4 span.glyphicon-exclamation-sign,
 div#dashboard div.row.environment small span,
 div#dashboard div.row.environment table.tile_info,
 div#dashboard div.row.environment table.tile_info tr{

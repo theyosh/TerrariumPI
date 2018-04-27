@@ -939,7 +939,8 @@ function sensor_gauge(name, data) {
     if (name == 'system_disk' || name == 'system_memory') {
       $('#' + name + ' .gauge-value').text(formatBytes(data.current))
     }
-    $('div#' + name + ' .x_title h2 .badge').toggle(data.alarm);
+    $('div#' + name + ' .x_title h2 .badge.bg-red').toggle(data.alarm);
+    $('div#' + name + ' .x_title h2 .badge.bg-orange').toggle(data.error);
   }
 }
 
@@ -1571,9 +1572,15 @@ function update_dashboard_environment(name, data) {
         // Find all i elements withing the .state table row. Hide them all, then filter the enabled one and show that. Then go up and show the complete state table row... Nice!
         systempart.find('.state i').hide().filter('.' + (value == 'on' ? 'green' : 'red')).show().parent().parent().toggle(data.enabled && data.power_switches.length > 0);
         break;
+
       case 'alarm':
         systempart.find('span.glyphicon-warning-sign').toggle(value);
         break;
+
+      case 'error':
+        systempart.find('span.glyphicon-exclamation-sign').toggle(value);
+        break;
+
       case 'on':
       case 'off':
         systempart.find('.' + key).text(moment(value,'HH:mm').format('LT')).parent().toggle(data.mode != 'sensor');
