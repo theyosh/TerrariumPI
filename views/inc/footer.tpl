@@ -60,6 +60,7 @@
     globals.temperature_indicator = '{{temperature_indicator}}';
     globals.distance_indicator = '{{distance_indicator}}';
     globals.language = '{{lang}}';
+    globals.horizontal_legend = {{horizontal_graph_legend}};
   </script>
 </body>
 </html>

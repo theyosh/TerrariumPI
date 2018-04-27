@@ -13,7 +13,8 @@ var globals = {
   online_timer: null,
   current_version: null,
   language: null,
-  ajaxloader: 0
+  ajaxloader: 0,
+  horizontal_legend: 0,
 };
 // Single variable that is used for loading the status and settings rows for: sensors, power switches, door indicators etc
 var source_row = null;
@@ -1029,8 +1030,13 @@ function history_graph(name, data, type) {
     graph_ticks = [[0, '{{_('Wet')}}'], [1, '{{_('Dry')}}']];
   }
 
+  var legend_data = {show: true, noColumns: globals.horizontal_legend ? 0 : 1}
+  if (globals.horizontal_legend) {
+    legend_data.margin = [0, -15];
+  }
   var graph_data = [];
   var graph_options = {
+    legend: legend_data,
     tootip: true,
     series: {
       curvedLines: {
@@ -1102,11 +1108,11 @@ function history_graph(name, data, type) {
           case 'average_ph':
             val = formatNumber(val) + ' pH';
             break;
-			
+
           case 'conductivity':
           case 'average_conductivity':
             val = formatNumber(val) + ' mS';
-            break;			
+            break;
 
           case 'switch':
             val = formatNumber(val) + ' W';
@@ -1152,7 +1158,7 @@ function history_graph(name, data, type) {
         label: '{{_('Alarm max')}}',
         data: data.alarm_max
       }];
-      break;	  
+      break;
 
     case 'weather':
       graph_options.series.curvedLines.apply = true;
@@ -1270,6 +1276,7 @@ function history_graph(name, data, type) {
   if ($('#' + name + ' .history_graph').length == 1) {
     $('#' + name + ' .history_graph').html('').removeClass('loading');
     $.plot($('#' + name + ' .history_graph'), graph_data, graph_options);
+    $('#' + name + ' .history_graph .legend').toggleClass('horizontal',globals.horizontal_legend);
 
     if (type == 'switch') {
       var usage = '';

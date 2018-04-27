@@ -184,8 +184,13 @@ iframe.external_calendar {
 }
 .history_graph .legend .legendLabel {
   color: #73879c;
-  padding-left: .3em;
+  padding: 0em .3em;
 }
+
+.history_graph .legend.horizontal .legendLabel {
+  padding-right: 2em;
+}
+
 .history_graph .flot-x-axis .flot-tick-label {
   white-space: nowrap;
   transform: translate(-9px,0) rotate(-45deg);
