@@ -258,6 +258,8 @@ class terrariumSensor(object):
         starttime = time.time()
         hardwaresensor = None
         address = [self.get_address(),None,None] if ',' not in self.get_address() else self.get_address().split(',')
+        if len(address) == 2:
+          address.append(None)
 
         if terrariumRemoteSensor.hardwaretype == self.get_hardware_type():
           hardwaresensor = terrariumRemoteSensor(address[0])
