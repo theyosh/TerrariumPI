@@ -102,6 +102,15 @@ class terrariumTranslations(object):
     self.translations['environment_field_sprayer_power_switches'] = _('Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the sprayer. Select all needed switches below.')
     self.translations['environment_field_sprayer_humidity_sensors'] = _('Select the humidity sensors that are used to control the humidity. When selecting multiple sensors, the average is calculated to determine the final humidity.')
 
+    self.translations['environment_field_moisture_enable_during_night'] = _('Enabled when the lights are off. This can cause water flow when there is not enough heat to vaporize the water.')
+    self.translations['environment_field_moisture_mode'] = _('Select the operating mode.')
+
+    self.translations['environment_field_moisture_on_duration'] = _('Holds the period in minutes that the moisture is on withing the total timer window.')
+    self.translations['environment_field_moisture_off_duration'] = _('Holds the period in minutes that the moisture is off withing the total timer window')
+    self.translations['environment_field_moisture_delay'] = _('How much time must there be between two actions and after start up. Enter the amount of seconds in which the environment can settle.')
+    self.translations['environment_field_moisture_duration'] = _('How long is the system running. Enter the amount of seconds that the system is on when the value is too low.')
+    self.translations['environment_field_moisture_power_switches'] = _('Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the moisture. Select all needed switches below.')
+    self.translations['environment_field_moisture_moisture_sensors'] = _('Select the sensors that are used to control the value. When selecting multiple sensors, the average is calculated to determine the final value.')
 
     self.translations['environment_field_watertank_mode'] = _('Select the operating mode. Use \'%s\' mode to select the time period in which the water pump is running. Select \'%s\' mode to use the sun rise and sun set as on and off times. Use \'%s\' mode to have the water pump running when the water level is to low.') % (_('Timer'),_('Weather'),_('Sensor'))
     self.translations['environment_field_watertank_on'] = _('Enter the time when the water pump should be put on. Only available when running in \'%s\' mode.') % _('Timer')
@@ -123,6 +132,7 @@ class terrariumTranslations(object):
     self.translations['environment_field_heater_off_duration'] = _('Holds the period in minutes that the heater is off withing the total timer window')
     self.translations['environment_field_heater_settle_timeout'] = _('Holds the period in seconds in which the heating will wait to settle the new temperature before changing again.')
     self.translations['environment_field_heater_night_difference'] = _('Holds the dirrence in degrees that the night temperature should change. Use positive and negative values.')
+    self.translations['environment_field_heater_night_source'] = _('Holds the soure that is used to determing when it is day or night.')
     self.translations['environment_field_heater_power_switches'] = _('Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the heater. Select all needed switches below.')
     self.translations['environment_field_heater_temperature_sensors'] = _('Select the temperature sensors that are used to control the temperature. When selecting multiple sensors, the average is calculated to determine the final temperature.')
 
@@ -135,6 +145,19 @@ class terrariumTranslations(object):
     self.translations['environment_field_cooler_off_duration'] = _('Holds the period in minutes that the cooler is off withing the total timer window')
     self.translations['environment_field_cooler_power_switches'] = _('Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the cooler. Select all needed switches below.')
     self.translations['environment_field_cooler_temperature_sensors'] = _('Select the temperature sensors that are used to control the temperature. When selecting multiple sensors, the average is calculated to determine the final temperature.')
+
+
+    self.translations['environment_field_ph_enable_during_day'] = _('Enabled when the lights are on.')
+    self.translations['environment_field_ph_mode'] = _('Select the operating mode. Use \'%s\' mode to select the time period in which the ph is running. Select \'%s\' mode to use the sun rise and sun set as on and off times. When the sun rises the ph system will stop. Use \'%s\' mode to have the ph running when the lights are off.') % (_('Timer'),_('Weather'),_('Sensor'))
+    self.translations['environment_field_ph_on'] = _('Enter the time when the ph should be put on. Only available when running in \'%s\' mode.') % _('Timer')
+    self.translations['environment_field_ph_off'] = _('Enter the time when the ph should be put off. Only available when running in \'%s\' mode.') % _('Timer')
+    self.translations['environment_field_ph_on_duration'] = _('Holds the period in minutes that the ph is on withing the total timer window.')
+    self.translations['environment_field_ph_off_duration'] = _('Holds the period in minutes that the ph is off withing the total timer window')
+    self.translations['environment_field_ph_settle_timeout'] = _('Holds the period in seconds in which the ph will wait to settle the new value before changing again.')
+    self.translations['environment_field_ph_night_difference'] = _('Holds the difference that the night value should change. Use positive and negative values.')
+    self.translations['environment_field_ph_night_source'] = _('Holds the soure that is used to determing when it is day or night.')
+    self.translations['environment_field_ph_power_switches'] = _('Select the power switches that should be toggled on the selected times above. Normally these are the switches connected to the ph. Select all needed switches below.')
+    self.translations['environment_field_ph_ph_sensors'] = _('Select the sensors that are used to control the value. When selecting multiple sensors, the average is calculated to determine the final value.')
     # End environment
 
     # System
