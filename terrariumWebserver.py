@@ -44,7 +44,7 @@ class terrariumWebserverHeaders(object):
 
     return webserver_headers
 
-class terrariumWebserver():
+class terrariumWebserver(object):
 
   app = Bottle()
   app.install(terrariumWebserverHeaders())

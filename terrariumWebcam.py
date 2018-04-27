@@ -24,7 +24,7 @@ from terrariumUtils import terrariumUtils
 from gevent import monkey, sleep
 monkey.patch_all()
 
-class terrariumWebcam():
+class terrariumWebcam(object):
   TILE_LOCATION = 'webcam/'
   ARCHIVE_LOCATION = TILE_LOCATION + 'archive/'
   JPEG_QUALITY = 95

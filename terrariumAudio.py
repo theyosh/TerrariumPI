@@ -17,7 +17,7 @@ from terrariumUtils import terrariumUtils
 from gevent import monkey, sleep
 monkey.patch_all()
 
-class terrariumAudioPlayer():
+class terrariumAudioPlayer(object):
 
   AUDIO_FOLDER = 'audio'
   VALID_EXTENSION = ['mp3','m4a','ogg']
@@ -214,7 +214,7 @@ class terrariumAudioPlayer():
   def get_active_playlist(self):
     return self.__active_playlist
 
-class terrariumAudioPlaylist():
+class terrariumAudioPlaylist(object):
 
   def __init__(self, id, name = None, start = None, stop = None, volume = None, repeat = False, shuffle = False, files = None):
     self.__id = id
@@ -341,7 +341,7 @@ class terrariumAudioPlaylist():
 
     return data
 
-class terrariumAudioFile():
+class terrariumAudioFile(object):
 
   META_FIELDS = ['Format','Duration','Overall bit rate mode','Overall bit rate','Album','Track name','Format profile','Channel(s)','Sampling rate']
   VALID_EXTENSION = terrariumAudioPlayer.VALID_EXTENSION
