@@ -166,6 +166,7 @@ class terrariumWebserver(object):
                   'page_title' : _(template.replace('_',' ').capitalize()),
                   'temperature_indicator' : self.__terrariumEngine.get_temperature_indicator(),
                   'distance_indicator' : self.__terrariumEngine.get_distance_indicator(),
+                  'horizontal_graph_legend' : 1 if self.__terrariumEngine.get_horizontal_graph_legend() else 0,
                   'translations': self.__translations,
                   'device': self.__terrariumEngine.device}
 

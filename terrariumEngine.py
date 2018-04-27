@@ -27,6 +27,7 @@ from terrariumWebcam import terrariumWebcam
 from terrariumAudio import terrariumAudioPlayer
 from terrariumCollector import terrariumCollector
 from terrariumEnvironment import terrariumEnvironment
+from terrariumUtils import terrariumUtils
 
 from gevent import monkey, sleep
 monkey.patch_all()
@@ -913,6 +914,13 @@ class terrariumEngine(object):
 
   def set_distance_indicator(self,value):
     self.__units['distance'] = value
+
+  def get_horizontal_graph_legend(self):
+    config_data = self.config.get_system()
+    if 'horizontal_graph_legend' not in config_data:
+      config_data['horizontal_graph_legend'] = False;
+
+    return terrariumUtils.is_true(config_data['horizontal_graph_legend'])
 
   # End system functions part
 
