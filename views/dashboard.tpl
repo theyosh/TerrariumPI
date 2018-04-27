@@ -721,6 +721,7 @@
                   load_history_graph('average_' + sensor_data.type,sensor_data.type,'/api/history/sensors/average/' + sensor_data.type);
                 }
               });
+              reload_reload_theme();
             });
 
             websocket_message({
