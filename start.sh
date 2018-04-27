@@ -13,7 +13,7 @@ RESTART_ATTEMPTS=0
 BASEDIR=$(dirname $(readlink -nf $0))
 SCRIPT=$(basename $(readlink -nf $0))
 RUN=$1
-IP=`ip -4 addr | grep inet | grep -v "127.0.0.1" | grep -o -P "inet \K([0-9.]+)"`
+IP=`ip -4 addr | grep inet | grep -v "127.0.0.1" | grep -o -P "inet \K([0-9.]+)" | head -n1`
 # Overrule default user based on the installation directory user rights
 RUN_AS_USER=`stat -c "%U" "${BASEDIR}"`
 
