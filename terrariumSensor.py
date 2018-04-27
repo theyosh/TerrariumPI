@@ -63,6 +63,9 @@ class terrariumRemoteSensor(object):
   def get_distance(self):
     return self.get_current()
 
+  def get_ph(self):
+    return self.get_current()
+
 class terrarium1WSensor(object):
   hardwaretype = 'w1'
 
