@@ -294,7 +294,7 @@ class terrariumConfig(object):
     for environment_part in data:
       for part in data[environment_part]:
         # Do not save the following settings
-        if part in ['enabled','time_table','state','amount','current','temperature','humidity','distance','alarm','type','night_modus']:
+        if part in ['enabled','time_table','state','amount','current','temperature','humidity','distance','alarm','alarm_min','alarm_max','limit_max','limit_min','type','night_modus','error','lastaction']:
           continue
 
         if data[environment_part][part] is None:
@@ -306,7 +306,7 @@ class terrariumConfig(object):
 
   def get_environment(self):
     config = self.__get_config('environment')
-    data = {'light' : {}, 'sprayer' : {}, 'heater' : {} , 'cooler' : {}, 'watertank' : {}, 'moisture' : {}}
+    data = {'light' : {}, 'sprayer' : {}, 'heater' : {} , 'cooler' : {}, 'watertank' : {}, 'moisture' : {}, 'ph' : {}}
     for key in config:
       config_keys = key.split('_')
       part = config_keys[0]

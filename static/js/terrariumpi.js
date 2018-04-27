@@ -408,7 +408,7 @@ function websocket_init(reconnect) {
         break;
 
       case 'environment':
-        $.each(['heater','sprayer','light','cooler','watertank','moisture'], function(index, value) {
+        $.each(['heater','sprayer','light','cooler','watertank','moisture','ph'], function(index, value) {
           update_dashboard_environment(value, data.data[value]);
         });
         break;
@@ -679,7 +679,7 @@ function process_form() {
 function prepare_form_data(form) {
   var formdata = [];
   var form_type = form.attr('action').split('/').pop();
-  var re = /(sensor|switch|webcam|light|sprayer|watertank|moisture|heater|cooler|door|profile|playlist)(_\d+)?_(.*)/i;
+  var re = /(sensor|switch|webcam|light|sprayer|watertank|moisture|heater|cooler|ph|door|profile|playlist)(_\d+)?_(.*)/i;
   var matches = null;
   var objectdata = {};
   var prev_nr = -1;
@@ -1558,6 +1558,9 @@ function update_dashboard_environment(name, data) {
       indicator = 'L';
     case 'cooler':
       enabledColor = 'blue';
+      break;
+    case 'ph':
+      enabledColor = 'green';
       break;
   }
 

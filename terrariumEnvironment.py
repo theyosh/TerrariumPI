@@ -182,6 +182,31 @@ class terrariumEnvironment(object):
 
     self.cooler['enabled']        =  'disabled' != self.cooler['mode']
 
+
+    if len(config_data['ph'].keys()) == 0 or not reloading:
+      self.ph = {}
+
+    self.ph['mode']             = 'disabled' if 'mode' not in config_data['ph'] else config_data['ph']['mode']
+    self.ph['on']               = '00:00'    if 'on' not in config_data['ph'] else config_data['ph']['on']
+    self.ph['off']              = '00:00'    if 'off' not in config_data['ph'] else config_data['ph']['off']
+    self.ph['on_duration']      = 60.0       if 'on_duration' not in config_data['ph'] else float(config_data['ph']['on_duration'])
+    self.ph['off_duration']     = 60.0       if 'off_duration' not in config_data['ph'] else float(config_data['ph']['off_duration'])
+    self.ph['day_enabled']      = False      if 'day_enabled' not in config_data['ph'] else terrariumUtils.is_true(config_data['ph']['day_enabled'])
+    self.ph['settle_timeout']   = 120.0      if 'settle_timeout' not in config_data['ph'] else float(config_data['ph']['settle_timeout'])
+    self.ph['night_difference'] = 0.0        if 'night_difference' not in config_data['ph'] else float(config_data['ph']['night_difference'])
+    self.ph['night_source']     = 'weather'  if 'night_source' not in config_data['ph'] else config_data['ph']['night_source']
+    self.ph['power_switches']   = []         if ('power_switches' not in config_data['ph'] or config_data['ph']['power_switches'] in ['',None]) else config_data['ph']['power_switches']
+    self.ph['sensors']          = []         if ('sensors' not in config_data['ph'] or config_data['ph']['sensors'] in ['',None]) else config_data['ph']['sensors']
+
+    if not isinstance(self.ph['power_switches'], list):
+      self.ph['power_switches'] = self.ph['power_switches'].split(',')
+    if not isinstance(self.ph['sensors'], list):
+      self.ph['sensors'] = self.ph['sensors'].split(',')
+
+    self.ph['enabled']        =  'disabled' != self.ph['mode']
+    self.ph['night_modus']    = False
+    self.ph['lastaction']     = int(time.time())
+
     self.__check_available_power_switches()
     self.__check_available_sensors()
     self.__update_timing()
@@ -197,7 +222,7 @@ class terrariumEnvironment(object):
     self.cooler['power_switches']    = [switchid for switchid in self.cooler['power_switches'] if switchid in self.power_switches]
     self.watertank['power_switches'] = [switchid for switchid in self.watertank['power_switches'] if switchid in self.power_switches]
     self.moisture['power_switches']  = [switchid for switchid in self.moisture['power_switches'] if switchid in self.power_switches]
-    #self.ph['power_switches']        = [switchid for switchid in self.ph['power_switches'] if switchid in self.power_switches]
+    self.ph['power_switches']        = [switchid for switchid in self.ph['power_switches'] if switchid in self.power_switches]
 
   def __check_available_sensors(self):
     # Filter out the non existing sensors
@@ -206,7 +231,7 @@ class terrariumEnvironment(object):
     self.cooler['sensors']    = [sensorid for sensorid in self.cooler['sensors'] if sensorid in self.sensors]
     self.watertank['sensors'] = [sensorid for sensorid in self.watertank['sensors'] if sensorid in self.sensors]
     self.moisture['sensors']  = [sensorid for sensorid in self.moisture['sensors'] if sensorid in self.sensors]
-    #self.ph['sensors']        = [sensorid for sensorid in self.ph['sensors'] if sensorid in self.sensors]
+    self.ph['sensors']        = [sensorid for sensorid in self.ph['sensors'] if sensorid in self.sensors]
 
   def __check_active_sensors(self,part):
     sensorlist = self.sprayer['sensors']
@@ -298,6 +323,18 @@ class terrariumEnvironment(object):
 
       self.cooler['duration'] = terrariumUtils.duration(self.cooler['time_table'])
 
+    if part is None or part == 'ph':
+      if self.ph['mode'] == 'weather':
+        self.ph['on']  = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['set']).strftime('%H:%M')
+        self.ph['off'] = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['rise']).strftime('%H:%M')
+
+
+      self.ph['time_table']  = terrariumUtils.calculate_time_table(self.ph['on'],self.ph['off'],
+                                                                       None if self.ph['mode'] == 'weather' else self.ph['on_duration'],
+                                                                       None if self.ph['mode'] == 'weather' else self.ph['off_duration'])
+
+      self.ph['duration'] = terrariumUtils.duration(self.ph['time_table'])
+
   def update_timing(self):
     self.__update_timing()
 
@@ -307,7 +344,7 @@ class terrariumEnvironment(object):
     self.cooler['temperature'] = self.get_average_temperature(self.cooler['sensors'])
     self.watertank['distance'] = self.get_average_distance(self.watertank['sensors'])
     self.moisture['moisture'] = self.get_average_moisture(self.moisture['sensors'])
-    #self.ph['distance'] = self.get_average_ph(self.ph['sensors'])
+    self.ph['distance'] = self.get_average_ph(self.ph['sensors'])
 
   def __engine_loop(self):
     logger.info('Starting engine')
@@ -535,7 +572,6 @@ class terrariumEnvironment(object):
       #  self.heater_off()
 
 
-
      # Cooler checks and actions
       if self.cooler['enabled']:
         toggle_on = None
@@ -604,6 +640,96 @@ class terrariumEnvironment(object):
       #    logger.info('Environment is turning off the cooler due to disabling it')
       #  self.cooler_off()
 
+      # Ph checks and actions
+      if self.ph['enabled']:
+        toggle_on = None
+        extra_logging_message = ''
+        logger.debug('Environment ph is enabled.')
+        logger.debug('Environment ph is based on: %s.' % self.ph['mode'])
+
+        if self.ph['night_difference'] != 0.0:
+          is_night = False
+          if self.ph['night_source'] == 'weather':
+            is_night = self.is_night()
+          elif self.ph['night_source'] == 'lights':
+            is_night = not self.is_light_on()
+
+          if self.ph['night_modus'] != is_night:
+            logger.info('Changing ph to %s modus. Changing the min and max alarm %s by %s degrees.' % (
+                  ('night' if is_night else 'day'),
+                  ('up' if is_night else 'down'),
+                  self.ph['night_difference']))
+            # Change sensors when switching from day to night and vise versa
+            for sensorid in self.ph['sensors']:
+              if is_night:
+                self.sensors[sensorid].set_alarm_min(self.sensors[sensorid].get_alarm_min() + self.ph['night_difference'])
+                self.sensors[sensorid].set_alarm_max(self.sensors[sensorid].get_alarm_max() + self.ph['night_difference'])
+              else:
+                self.sensors[sensorid].set_alarm_min(self.sensors[sensorid].get_alarm_min() - self.ph['night_difference'])
+                self.sensors[sensorid].set_alarm_max(self.sensors[sensorid].get_alarm_max() - self.ph['night_difference'])
+
+              self.ph['night_modus'] = is_night
+
+        if 'sensor' == self.ph['mode']:
+          if not self.__check_active_sensors('ph'):
+            logger.error('Environment ph sensors are not up to date. Check you sensors on the sensor page So force the power down to be sure!')
+            toggle_on = False
+          else:
+            # Only on when the lights are off. Or when explicit enabled during the day.
+            if self.ph['day_enabled'] or self.is_light_off():
+              # On based on the average temperature values of the used sensors
+              if self.ph['temperature']['current'] < self.ph['temperature']['alarm_min']:
+                toggle_on = True
+                extra_logging_message = 'Ph value %f%% is lower then alarm %f%%.' % (self.ph['temperature']['current'],
+                                                                                              self.ph['temperature']['alarm_min'])
+              elif self.ph['temperature']['current'] > self.ph['temperature']['alarm_max']:
+                toggle_on = False
+                extra_logging_message = 'Ph value %f%% is higher then alarm %f%%.' % (self.ph['temperature']['current'],
+                                                                                               self.ph['temperature']['alarm_max'])
+            else:
+              # Force off when lights are on!
+              if self.is_ph_on():
+                logger.info('Environment is turning off the ph due to lights on based on %s mode.' % (self.ph['mode'],))
+
+              toggle_on = False
+
+        else:
+          # Heat based on time table
+          toggle_on = terrariumUtils.is_time(self.ph['time_table'])
+          if toggle_on is None:
+            self.__update_timing('ph')
+
+          if toggle_on and len(self.ph['sensors']) > 0:
+            # Reset toggle based on the extra available sensors
+            toggle_on = None
+            # Use the extra added sensors for finetuning the trigger action
+            if self.ph['temperature']['current'] < self.ph['temperature']['alarm_min']:
+              toggle_on = True
+              extra_logging_message = 'Ph value %f%% is lower then alarm %f%%.' % (self.ph['temperature']['current'],
+                                                                                            self.ph['temperature']['alarm_min'])
+            elif self.ph['temperature']['current'] > self.ph['temperature']['alarm_max']:
+              toggle_on = False
+              extra_logging_message = 'Ph value %f%% is higher then alarm %f%%.' % (self.ph['temperature']['current'],
+                                                                                             self.ph['temperature']['alarm_max'])
+
+        if toggle_on is True:
+          if not self.is_ph_on():
+            logger.info('Environment is turning on the ph based on %s mode. %s' % (self.ph['mode'],
+                                                                                      extra_logging_message))
+          self.heater_on()
+
+        elif toggle_on is False:
+          if self.is_ph_on():
+            logger.info('Environment is turning off the ph based on %s mode. %s' % (self.ph['mode'],
+                                                                                       extra_logging_message))
+          self.ph_off()
+
+      #else:
+      #  logger.debug('Make sure that the heating is off when not enabled at all.')
+      #  if self.is_heater_on():
+      #    logger.info('Environment is turning off the heater due to disabling it')
+      #  self.heater_off()
+
       duration = time.time() - starttime
       if duration < terrariumEnvironment.LOOP_TIMEOUT:
         logger.info('Update done in %.5f seconds. Waiting for %.5f seconds for next round' % (duration,terrariumEnvironment.LOOP_TIMEOUT - duration))
@@ -625,6 +751,8 @@ class terrariumEnvironment(object):
       power_switches = self.watertank['power_switches']
     elif 'moisture' == part:
       power_switches = self.moisture['power_switches']
+    elif 'ph' == part:
+      power_switches = self.ph['power_switches']
 
     is_on = len(power_switches) > 0
     for switch_id in power_switches:
@@ -698,6 +826,10 @@ class terrariumEnvironment(object):
       state_data = self.cooler
       average = self.get_average_temperature(self.cooler['sensors'])
       state = self.is_cooler_on()
+    elif part == 'ph':
+      state_data = self.ph
+      average = self.get_average_ph(self.ph['sensors'])
+      state = self.is_ph_on()
 
     for key in state_data:
       if key not in exclude_fields:
@@ -710,7 +842,7 @@ class terrariumEnvironment(object):
       return_data['error'] = not self.__check_active_sensors(part)
       if 'alarm' not in return_data or \
           return_data['mode'] == 'disabled' or \
-         (part in ['sprayer','heater','watertank','moisture'] and return_data['current'] >= return_data['alarm_max']) or \
+         (part in ['sprayer','heater','watertank','moisture','ph'] and return_data['current'] >= return_data['alarm_max']) or \
          (part == 'cooler'  and return_data['current'] <= return_data['alarm_max']):
         return_data['alarm'] = False
 
@@ -737,7 +869,8 @@ class terrariumEnvironment(object):
             'heater'    : self.get_heater_config(),
             'cooler'    : self.get_cooler_config(),
             'watertank' : self.get_watertank_config(),
-            'moisture'  : self.get_moisture_config()}
+            'moisture'  : self.get_moisture_config(),
+            'ph'        : self.get_ph_config()}
 
     return data
 
@@ -794,10 +927,23 @@ class terrariumEnvironment(object):
             'amount'    : 0.0,
             'alarm'     : False}
 
+  def get_average_ph(self,sensors = []):
+    data = self.get_average(sensors)
+    if 'ph' in data:
+      return data['ph']
+
+    return {'current'   : 0.0,
+            'alarm_min' : 0.0,
+            'alarm_max' : 0.0,
+            'limit_min' : 0.0,
+            'limit_max' : 0.0,
+            'amount'    : 0.0,
+            'alarm'     : False}
+
   def get_average(self,sensors_filter = []):
     average = {}
     # Make a set, in order to get a list of unique sensorids. In other words, set will remove duplicate sensorids
-    for sensorid in set(self.sprayer['sensors'] + self.heater['sensors'] + self.cooler['sensors'] + self.watertank['sensors'] + self.moisture['sensors']):
+    for sensorid in set(self.sprayer['sensors'] + self.heater['sensors'] + self.cooler['sensors'] + self.watertank['sensors'] + self.moisture['sensors'] + self.ph['sensors']):
       if len(sensors_filter) > 0 and sensorid not in sensors_filter:
         # If we want to filter, we only count the ones that are giving as parameter
         continue
@@ -813,7 +959,9 @@ class terrariumEnvironment(object):
         if sensorid in self.watertank['sensors']:
           part += 'watertank,'
         if sensorid in self.moisture['sensors']:
-          part += 'moisture,'
+          part += 'moisture',
+        if sensorid in self.ph['sensors']:
+          part += 'ph,'
 
         part = part[:-1]
 
@@ -1003,6 +1151,7 @@ class terrariumEnvironment(object):
     return self.__is_off('watertank')
   # End watertank functions
 
+
   # Heater functions
   def get_heater_config(self):
     return self.__get_state('heater',['time_table','enabled','state','duration'])
@@ -1073,3 +1222,40 @@ class terrariumEnvironment(object):
   def is_cooler_off(self):
     return self.__is_off('cooler')
   # End cooler functions
+
+
+  # Ph functions
+  def get_ph_config(self):
+    return self.__get_state('ph',['time_table','enabled','state','duration'])
+
+  def set_ph_config(self,data):
+    self.__set_config('ph',data)
+
+  def get_ph_state(self):
+    cleanup_fields = []
+
+    if 'weather' == self.ph['mode']:
+      cleanup_fields = ['on_duration','off_duration','time_table']
+
+    elif 'timer' == self.ph['mode']:
+      cleanup_fields = ['min_hours','max_hours','hours_shift']
+
+    elif 'sensor' == self.ph['mode']:
+      cleanup_fields = ['min_hours','max_hours','hours_shift','time_table']
+
+    return self.__get_state('ph',cleanup_fields)
+
+  def ph_on(self):
+    if int(time.time()) - self.ph['lastaction'] > self.ph['settle_timeout']:
+      self.__switch_on('ph')
+      self.ph['lastaction'] = int(time.time())
+
+  def ph_off(self):
+    self.__switch_off('ph')
+
+  def is_ph_on(self):
+    return self.__is_on('ph')
+
+  def is_ph_off(self):
+    return self.__is_off('ph')
+  # End ph functions

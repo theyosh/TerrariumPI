@@ -327,6 +327,53 @@
                       </tr>
                     </table>
                   </div>
+                  <div class="row environment_ph">
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-tachometer"></i> {{_('Ph')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}} <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign orange" title="{{_('Error')}}"></span></span></small></h4>
+                    <table class="tile_info">
+                      <tr>
+                        <td>
+                          <p>{{_('Status')}}</p>
+                        </td>
+                        <td class="state"><i class="fa fa-square green" title="{{_('On')}}"></i><i class="fa fa-square red" title="{{_('Off')}}"></i></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('On')}}</p>
+                        </td>
+                        <td class="on">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Off')}}</p>
+                        </td>
+                        <td class="off">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Duration')}}</p>
+                        </td>
+                        <td class="duration">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Current')}}</p>
+                        </td>
+                        <td class="current">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Range')}}</p>
+                        </td>
+                        <td class="alarm_min alarm_max">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Day/night difference')}}</p>
+                        </td>
+                        <td class="night_difference">...</td>
+                      </tr>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
