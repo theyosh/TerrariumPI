@@ -306,7 +306,7 @@ class terrariumConfig(object):
 
   def get_environment(self):
     config = self.__get_config('environment')
-    data = {'light' : {}, 'sprayer' : {}, 'heater' : {} , 'cooler' : {}, 'watertank' : {}}
+    data = {'light' : {}, 'sprayer' : {}, 'heater' : {} , 'cooler' : {}, 'watertank' : {}, 'moisture' : {}}
     for key in config:
       config_keys = key.split('_')
       part = config_keys[0]

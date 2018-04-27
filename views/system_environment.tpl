@@ -184,6 +184,86 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
+                  <h2 class="blue"><i class="fa fa-umbrella"></i> {{_('Moisture')}} <small class="data_update">{{_('Settings')}}</small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                      <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_mode">{{_('Moisture mode')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_moisture_mode')}}">
+                        <select class="form-control" name="moisture_mode" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option value="disabled">{{_('Disabled')}}</option>
+                          <option value="timer">{{_('Timer')}}</option>
+                          <option value="sensor">{{_('Sensor')}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Enabled when lights are off')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_moisture_enable_during_night')}}">
+                      <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="moisture_night_enabled" type="radio" value="true">{{_('Yes')}}</label>
+                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="moisture_night_enabled" type="radio" value="false">{{_('No')}}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_on_duration">{{_('Timer on duration')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="moisture_on_duration" required="required" type="text" placeholder="{{_('Timer on duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_moisture_on_duration')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_off_duration">{{_('Timer off duration')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="moisture_off_duration" required="required" type="text" placeholder="{{_('Timer off duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_moisture_off_duration')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_spray_timeout">{{_('Moisture wait timeout (seconds)')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="moisture_spray_timeout" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Moisture wait timeout (seconds)')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_moisture_delay')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_spray_duration">{{_('Spray duration (seconds)')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="moisture_spray_duration" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Sprayer spray duration (seconds)')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_moisture_duration')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_power_switches">{{_('Power switches')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_moisture_power_switches')}}">
+                        <select class="form-control" multiple="multiple" name="moisture_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_sensors">{{_('Moisture sensors')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_moisture_moisture_sensors')}}">
+                        <select class="form-control" multiple="multiple" name="moisture_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
                   <h2 class="blue"><i class="fa fa-tint"></i> {{_('Water tank')}} <small class="data_update">{{_('Settings')}}</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
@@ -470,6 +550,7 @@
           var humidity_sensors_loaded = false;
           var temperature_sensors_loaded = false;
           var distance_sensors_loaded = false;
+          var moisture_sensors_loaded = false;
 
           $(document).ready(function() {
             init_form_settings('environment');
@@ -561,13 +642,21 @@
               distance_sensors_loaded = true;
             });
 
+            $.get('/api/sensors/moisture',function(data){
+              var select_boxes = $('select[name="moisture_sensors"]');
+              $.each(data.sensors,function (index,sensor){
+                select_boxes.append($('<option>').attr({'value':sensor.id}).text(sensor.name));
+              });
+              moisture_sensors_loaded = true;
+            });
+
             setContentHeight();
             load_environment_settings();
           });
 
           function load_environment_settings() {
             // Wait with loading the environment settings until all selectors are loaded
-            if (switches_loaded && humidity_sensors_loaded && temperature_sensors_loaded && distance_sensors_loaded) {
+            if (switches_loaded && humidity_sensors_loaded && temperature_sensors_loaded && distance_sensors_loaded && moisture_sensors_loaded) {
               $.get('/api/config/environment',function(data){
                 $.each(data,function (environmentpart,environmentdata){
                   $.each(environmentdata,function(name,value) {

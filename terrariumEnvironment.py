@@ -115,6 +115,29 @@ class terrariumEnvironment(object):
     self.watertank['lastaction']     = int(time.time())
 
 
+    if len(config_data['moisture'].keys()) == 0 or not reloading:
+      self.moisture = {}
+
+    self.moisture['mode']           = 'disabled' if 'mode' not in config_data['moisture'] else config_data['moisture']['mode']
+    self.moisture['on']             = '00:00'    if 'on' not in config_data['moisture'] else config_data['moisture']['on']
+    self.moisture['off']            = '00:00'    if 'off' not in config_data['moisture'] else config_data['moisture']['off']
+    self.moisture['on_duration']    =  1.0       if 'on_duration' not in config_data['moisture'] else float(config_data['moisture']['on_duration'])
+    self.moisture['off_duration']   = 59.0       if 'off_duration' not in config_data['moisture'] else float(config_data['moisture']['off_duration'])
+    self.moisture['night_enabled']  = False      if 'night_enabled' not in config_data['moisture'] else terrariumUtils.is_true(config_data['moisture']['night_enabled'])
+    self.moisture['spray_duration'] = 0.0        if 'spray_duration' not in config_data['moisture'] else float(config_data['moisture']['spray_duration'])
+    self.moisture['spray_timeout']  = 120.0      if 'spray_timeout' not in config_data['moisture'] else float(config_data['moisture']['spray_timeout'])
+    self.moisture['power_switches'] = []         if ('power_switches' not in config_data['moisture'] or config_data['moisture']['power_switches'] in ['',None]) else config_data['moisture']['power_switches']
+    self.moisture['sensors']        = []         if ('sensors' not in config_data['moisture'] or config_data['moisture']['sensors'] in ['',None]) else config_data['moisture']['sensors']
+
+    if not isinstance(self.moisture['power_switches'], list):
+      self.moisture['power_switches'] = self.moisture['power_switches'].split(',')
+    if not isinstance(self.moisture['sensors'], list):
+      self.moisture['sensors'] = self.moisture['sensors'].split(',')
+
+    self.moisture['enabled']        =  'disabled' != self.moisture['mode']
+    self.moisture['lastaction']     = int(time.time())
+
+
     if len(config_data['heater'].keys()) == 0 or not reloading:
       self.heater = {}
 
@@ -173,6 +196,8 @@ class terrariumEnvironment(object):
     self.heater['power_switches']    = [switchid for switchid in self.heater['power_switches'] if switchid in self.power_switches]
     self.cooler['power_switches']    = [switchid for switchid in self.cooler['power_switches'] if switchid in self.power_switches]
     self.watertank['power_switches'] = [switchid for switchid in self.watertank['power_switches'] if switchid in self.power_switches]
+    self.moisture['power_switches']  = [switchid for switchid in self.moisture['power_switches'] if switchid in self.power_switches]
+    #self.ph['power_switches']        = [switchid for switchid in self.ph['power_switches'] if switchid in self.power_switches]
 
   def __check_available_sensors(self):
     # Filter out the non existing sensors
@@ -180,6 +205,8 @@ class terrariumEnvironment(object):
     self.heater['sensors']    = [sensorid for sensorid in self.heater['sensors'] if sensorid in self.sensors]
     self.cooler['sensors']    = [sensorid for sensorid in self.cooler['sensors'] if sensorid in self.sensors]
     self.watertank['sensors'] = [sensorid for sensorid in self.watertank['sensors'] if sensorid in self.sensors]
+    self.moisture['sensors']  = [sensorid for sensorid in self.moisture['sensors'] if sensorid in self.sensors]
+    #self.ph['sensors']        = [sensorid for sensorid in self.ph['sensors'] if sensorid in self.sensors]
 
   def __check_active_sensors(self,part):
     sensorlist = self.sprayer['sensors']
@@ -236,6 +263,12 @@ class terrariumEnvironment(object):
 
       self.sprayer['duration'] = terrariumUtils.duration(self.sprayer['time_table'])
 
+    if part is None or part == 'moisture':
+      self.moisture['time_table'] = terrariumUtils.calculate_time_table(self.moisture['on'],self.moisture['off'],
+                                                                        self.moisture['on_duration'],self.moisture['off_duration'])
+
+      self.moisture['duration'] = terrariumUtils.duration(self.moisture['time_table'])
+
     if part is None or part == 'watertank':
       self.watertank['time_table'] = terrariumUtils.calculate_time_table(self.watertank['on'],self.watertank['off'],
                                                                        self.watertank['on_duration'],self.watertank['off_duration'])
@@ -273,6 +306,8 @@ class terrariumEnvironment(object):
     self.heater['temperature'] = self.get_average_temperature(self.heater['sensors'])
     self.cooler['temperature'] = self.get_average_temperature(self.cooler['sensors'])
     self.watertank['distance'] = self.get_average_distance(self.watertank['sensors'])
+    self.moisture['moisture'] = self.get_average_moisture(self.moisture['sensors'])
+    #self.ph['distance'] = self.get_average_ph(self.ph['sensors'])
 
   def __engine_loop(self):
     logger.info('Starting engine')
@@ -588,6 +623,8 @@ class terrariumEnvironment(object):
       power_switches = self.cooler['power_switches']
     elif 'watertank' == part:
       power_switches = self.watertank['power_switches']
+    elif 'moisture' == part:
+      power_switches = self.moisture['power_switches']
 
     is_on = len(power_switches) > 0
     for switch_id in power_switches:
@@ -636,6 +673,10 @@ class terrariumEnvironment(object):
       state_data = self.sprayer
       average = self.get_average_humidity(self.sprayer['sensors'])
       state = self.is_sprayer_on()
+    elif part == 'moisture':
+      state_data = self.moisture
+      average = self.get_average_moisture(self.moisture['sensors'])
+      state = self.is_moisture_on()
     elif part == 'watertank':
       state_data = self.watertank
       average = self.get_average_distance(self.watertank['sensors'])
@@ -669,7 +710,7 @@ class terrariumEnvironment(object):
       return_data['error'] = not self.__check_active_sensors(part)
       if 'alarm' not in return_data or \
           return_data['mode'] == 'disabled' or \
-         (part in ['sprayer','heater','watertank'] and return_data['current'] >= return_data['alarm_max']) or \
+         (part in ['sprayer','heater','watertank','moisture'] and return_data['current'] >= return_data['alarm_max']) or \
          (part == 'cooler'  and return_data['current'] <= return_data['alarm_max']):
         return_data['alarm'] = False
 
@@ -695,7 +736,8 @@ class terrariumEnvironment(object):
             'sprayer'   : self.get_sprayer_config() ,
             'heater'    : self.get_heater_config(),
             'cooler'    : self.get_cooler_config(),
-            'watertank' : self.get_watertank_config()}
+            'watertank' : self.get_watertank_config(),
+            'moisture'  : self.get_moisture_config()}
 
     return data
 
@@ -726,6 +768,19 @@ class terrariumEnvironment(object):
             'amount'    : 0.0,
             'alarm'     : False}
 
+  def get_average_moisture(self,sensors = []):
+    data = self.get_average(sensors)
+    if 'moisture' in data:
+      return data['moisture']
+
+    return {'current'   : 0.0,
+            'alarm_min' : 0.0,
+            'alarm_max' : 0.0,
+            'limit_min' : 0.0,
+            'limit_max' : 0.0,
+            'amount'    : 0.0,
+            'alarm'     : False}
+
   def get_average_distance(self,sensors = []):
     data = self.get_average(sensors)
     if 'distance' in data:
@@ -742,7 +797,7 @@ class terrariumEnvironment(object):
   def get_average(self,sensors_filter = []):
     average = {}
     # Make a set, in order to get a list of unique sensorids. In other words, set will remove duplicate sensorids
-    for sensorid in set(self.sprayer['sensors'] + self.heater['sensors'] + self.cooler['sensors'] + self.watertank['sensors']):
+    for sensorid in set(self.sprayer['sensors'] + self.heater['sensors'] + self.cooler['sensors'] + self.watertank['sensors'] + self.moisture['sensors']):
       if len(sensors_filter) > 0 and sensorid not in sensors_filter:
         # If we want to filter, we only count the ones that are giving as parameter
         continue
@@ -757,6 +812,8 @@ class terrariumEnvironment(object):
           part += 'cooler,'
         if sensorid in self.watertank['sensors']:
           part += 'watertank,'
+        if sensorid in self.moisture['sensors']:
+          part += 'moisture,'
 
         part = part[:-1]
 
@@ -870,6 +927,44 @@ class terrariumEnvironment(object):
   def is_sprayer_off(self):
     return self.__is_off('sprayer')
   # End sprayer functions
+
+  # Moisture functions
+  def get_moisture_config(self):
+    return self.__get_state('moisture',['time_table','enabled','state','lastaction','duration'])
+
+  def set_moisture_config(self,data):
+    self.__set_config('moisture',data)
+
+  def get_moisture_state(self):
+    cleanup_fields = []
+
+    if 'weather' == self.moisture['mode']:
+      cleanup_fields = ['on_duration','off_duration','time_table']
+
+    elif 'timer' == self.moisture['mode']:
+      cleanup_fields = ['min_hours','max_hours','hours_shift']
+
+    elif 'sensor' == self.moisture['mode']:
+      cleanup_fields = ['min_hours','max_hours','hours_shift','time_table']
+
+    return self.__get_state('moisture',cleanup_fields)
+
+  def moisture_on(self):
+    if int(time.time()) - self.moisture['lastaction'] > self.moisture['spray_timeout']:
+      self.__switch_on('moisture')
+      (Timer(self.moisture['spray_duration'], self.moisture_off)).start()
+      self.moisture['lastaction'] = int(time.time())
+
+  def moisture_off(self):
+    self.__switch_off('moisture')
+
+  def is_moisture_on(self):
+    return self.__is_on('moisture')
+
+  def is_moisture_off(self):
+    return self.__is_off('moisture')
+  # End moisture functions
+
 
   # Watertank functions
   def get_watertank_config(self):
