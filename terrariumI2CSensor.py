@@ -6,7 +6,9 @@ logger = terrariumLogging.logging.getLogger(__name__)
 import smbus
 import time
 
-class terrariumI2CSensor():
+from terrariumUtils import terrariumUtils
+
+class terrariumI2CSensor(object):
   # control constants
   __SOFTRESET = 0xFE
   __SOFTRESET_TIMEOUT = 0.1
@@ -19,11 +21,12 @@ class terrariumI2CSensor():
 
   hardwaretype = None
 
-  def __init__(self, device_number=1, address=0x40, softreset_timeout=__SOFTRESET_TIMEOUT,
-                                                    temperature_timeout=__TEMPERATURE_WAIT_TIME,
-                                                    humidity_timeout=__HUMIDITY_WAIT_TIME):
-    self.__device_number = device_number
-    self.__address = address
+  def __init__(self, address = 40, device_number = 1, softreset_timeout   = __SOFTRESET_TIMEOUT,
+                                                      temperature_timeout = __TEMPERATURE_WAIT_TIME,
+                                                      humidity_timeout    = __HUMIDITY_WAIT_TIME):
+
+    self.__address = int('0x' + str(address),16)
+    self.__device_number = 1 if device_number is None else int(device_number)
 
     self.__softreset_timeout = softreset_timeout
     self.__temperature_timeout = temperature_timeout
@@ -62,23 +65,23 @@ class terrariumI2CSensor():
     logger.debug('Close sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
     self.__bus.close()
 
-  def read_temperature(self):
+  def get_temperature(self):
     #From datasheet convert this in human view. Temp C = ((Temp_Code*175.72)/65536)-46.85 / T = -46.82 + (172.72 * (ST/2^16))
     #For convert 2 byte in number need MSB*256+LSB.
     logger.debug('Read temperature value from sensor type \'%s\' at device %s with address %s with command %s and timeout %s' % (self.__class__.__name__,self.__device_number,self.__address,self.__TRIGGER_TEMPERATURE_NO_HOLD,self.__temperature_timeout))
     bytedata = self.__get_raw_data(self.__TRIGGER_TEMPERATURE_NO_HOLD,self.__temperature_timeout)
     temperature = ((bytedata[0]*256.0+bytedata[1])*175.72/65536.0)-46.85
     logger.debug('Got data from temperature sensor type \'%s\' at device %s with address %s: byte data: %s, temperature: %s' % (self.__class__.__name__,self.__device_number,self.__address,bytedata,temperature))
-    return temperature
+    return None if not terrariumUtils.is_float(temperature) else float(temperature)
 
-  def read_humidity(self):
+  def get_humidity(self):
     #From datasheet convert this in human view. RH% = ((RH*125)/65536)-6 / RH = -6 + (125 * (SRH / 2 ^16))
     #For convert 2 byte in number need MSB*256+LSB.
     logger.debug('Read humidity value from sensor type \'%s\' at device %s with address %s with command %s and timeout %s' % (self.__class__.__name__,self.__device_number,self.__address,self.__TRIGGER_HUMIDITY_NO_HOLD,self.__humidity_timeout))
     bytedata = self.__get_raw_data(self.__TRIGGER_HUMIDITY_NO_HOLD,self.__humidity_timeout)
     humidity = ((bytedata[0]*256.0+bytedata[1])*125.0/65536.0)-6.0
     logger.debug('Got data from humidity sensor type \'%s\' at device %s with address %s: byte data: %s, humidity: %s' % (self.__class__.__name__,self.__device_number,self.__address,bytedata,humidity))
-    return humidity
+    return None if not terrariumUtils.is_float(humidity) else float(humidity)
 
 class terrariumSHT2XSensor(terrariumI2CSensor):
   # SHT2XX - 3.3 Volt VCC
@@ -97,10 +100,10 @@ class terrariumSHT2XSensor(terrariumI2CSensor):
   __HUMIDITY_WAIT_TIME = 0.030     # (datasheet: typ=22, max=29 in ms)
   __SOFTRESET_TIMEOUT = 0.016      # (datasheet: typ=??, max=15 in ms)
 
-  def __init__(self,device_number=1, address=0x40):
-    terrariumI2CSensor.__init__(self,device_number,address,terrariumSHT2XSensor.__SOFTRESET_TIMEOUT,
-                                                           terrariumSHT2XSensor.__TEMPERATURE_WAIT_TIME,
-                                                           terrariumSHT2XSensor.__HUMIDITY_WAIT_TIME)
+  def __init__(self, address = 40, device_number = 1):
+    super(terrariumSHT2XSensor, self).__init__(address,device_number,terrariumSHT2XSensor.__SOFTRESET_TIMEOUT,
+                                                                     terrariumSHT2XSensor.__TEMPERATURE_WAIT_TIME,
+                                                                     terrariumSHT2XSensor.__HUMIDITY_WAIT_TIME)
 
 class terrariumHTU21DSensor(terrariumI2CSensor):
   hardwaretype = 'htu21d'
@@ -109,10 +112,10 @@ class terrariumHTU21DSensor(terrariumI2CSensor):
   __HUMIDITY_WAIT_TIME = 0.019     # (datasheet: typ=14, max=18 in ms)
   __SOFTRESET_TIMEOUT = 0.016      # (datasheet: typ=??, max=15 in ms)
 
-  def __init__(self,device_number=1, address=0x40):
-    terrariumI2CSensor.__init__(self,device_number,address,terrariumHTU21DSensor.__SOFTRESET_TIMEOUT,
-                                                           terrariumHTU21DSensor.__TEMPERATURE_WAIT_TIME,
-                                                           terrariumHTU21DSensor.__HUMIDITY_WAIT_TIME)
+  def __init__(self, address = 40, device_number = 1):
+    super(terrariumHTU21DSensor, self).__init__(address,device_number,terrariumHTU21DSensor.__SOFTRESET_TIMEOUT,
+                                                                      terrariumHTU21DSensor.__TEMPERATURE_WAIT_TIME,
+                                                                      terrariumHTU21DSensor.__HUMIDITY_WAIT_TIME)
 
 class terrariumSi7021Sensor(terrariumI2CSensor):
   hardwaretype = 'si7021'
@@ -121,10 +124,10 @@ class terrariumSi7021Sensor(terrariumI2CSensor):
   __HUMIDITY_WAIT_TIME = 0.013     # (datasheet: typ=10, max=12 in ms)
   __SOFTRESET_TIMEOUT = 0.016      # (datasheet: typ=5, max=15 in ms)
 
-  def __init__(self,device_number=1, address=0x40):
-    terrariumI2CSensor.__init__(self,device_number,address,terrariumSi7021Sensor.__SOFTRESET_TIMEOUT,
-                                                           terrariumSi7021Sensor.__TEMPERATURE_WAIT_TIME,
-                                                           terrariumSi7021Sensor.__HUMIDITY_WAIT_TIME)
+  def __init__(self, address = 40, device_number = 1):
+    super(terrariumI2CSensor, self).__init__(address,device_number,terrariumSi7021Sensor.__SOFTRESET_TIMEOUT,
+                                                                   terrariumSi7021Sensor.__TEMPERATURE_WAIT_TIME,
+                                                                   terrariumSi7021Sensor.__HUMIDITY_WAIT_TIME)
 
 class terrariumBME280Sensor():
   hardwaretype = 'bme280'
@@ -132,9 +135,9 @@ class terrariumBME280Sensor():
 
   __SOFTRESET = 0xFE
 
-  def __init__(self,device_number=1, address=0x40):
-    self.__device_number = device_number
-    self.__address = address
+  def __init__(self, address = 40, device_number = 1):
+    self.__address = int('0x' + str(address),16)
+    self.__device_number = 1 if device_number is None else int(device_number)
 
     # BMP280 does not have humidity sensor
     self.__has_humidity = None
@@ -313,18 +316,18 @@ class terrariumBME280Sensor():
     logger.debug('Close sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
     self.__bus.close()
 
-  def read_temperature(self):
+  def get_temperature(self):
     self.__get_raw_data()
-    return self.__current_temperature
+    return None if not terrariumUtils.is_float(self.__current_temperature) else float(self.__current_temperature)
 
-  def read_humidity(self):
+  def get_humidity(self):
     self.__get_raw_data()
-    return self.__current_humidity
+    return None if not terrariumUtils.is_float(self.__current_humidity) else float(self.__current_humidity)
 
-  def read_presure(self):
+  def get_presure(self):
     self.__get_raw_data()
-    return self.__current_presure
+    return None if not terrariumUtils.is_float(self.__current_presure) else float(self.__current_presure)
 
-  def read_altitude(self):
+  def get_altitude(self):
     self.__get_raw_data()
-    return self.__current_altitude
+    return None if not terrariumUtils.is_float(self.__current_altitude) else float(self.__current_altitude)
