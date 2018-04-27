@@ -430,22 +430,23 @@
                           <option value="lights">{{_('Lights')}}</option>
                         </select>
                       </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_power_switches">{{_('Power switches')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_power_switches')}}">
-                        <select class="form-control" multiple="multiple" name="heater_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
-                        </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_power_switches">{{_('Power switches')}}</label>
+                      <div class="col-md-7 col-sm-6 col-xs-10">
+                        <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_power_switches')}}">
+                          <select class="form-control" multiple="multiple" name="heater_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          </select>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_sensors">{{_('Temperature sensors')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_temperature_sensors')}}">
-                        <select class="form-control" multiple="multiple" name="heater_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
-                        </select>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_sensors">{{_('Temperature sensors')}}</label>
+                      <div class="col-md-7 col-sm-6 col-xs-10">
+                        <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_temperature_sensors')}}">
+                          <select class="form-control" multiple="multiple" name="heater_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          </select>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -534,6 +535,109 @@
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2 class="green"><i class="fa fa-tachometer"></i> {{_('Ph')}} <small class="data_update">{{_('Settings')}}</small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                      <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_mode">{{_('Ph mode')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_mode')}}">
+                        <select class="form-control" name="ph_mode" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option value="disabled">{{_('Disabled')}}</option>
+                          <option value="timer">{{_('Timer')}}</option>
+                          <option value="weather">{{_('Weather')}}</option>
+                          <option value="sensor">{{_('Sensor')}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Enabled when lights are on')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_enable_during_day')}}">
+                      <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="ph_day_enabled" type="radio" value="true">{{_('Yes')}}</label>
+                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="ph_day_enabled" type="radio" value="false">{{_('No')}}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_on">{{_('Power on')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="ph_on" required="required" type="text" placeholder="{{_('Power on')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_on')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_off">{{_('Power off')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="ph_off" required="required" type="text" placeholder="{{_('Power off')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_off')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_on_duration">{{_('Timer on duration')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="ph_on_duration" required="required" type="text" placeholder="{{_('Timer on duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_on_duration')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_off_duration">{{_('Timer off duration')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="ph_off_duration" required="required" type="text" placeholder="{{_('Timer off duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_off_duration')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_settle_timeout">{{_('Sensor(s) settle time')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="ph_settle_timeout" required="required" type="text" placeholder="{{_('Sensor(s) settle time')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_settle_timeout')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_night_difference">{{_('Day/night difference')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="ph_night_difference" required="required" type="text" placeholder="{{_('Temperature difference during the night')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_night_difference')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_night_source">{{_('Day/night difference source')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('ph_night_source')}}">
+                        <select class="form-control" name="ph_night_source" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option value="weather">{{_('Weather')}}</option>
+                          <option value="lights">{{_('Lights')}}</option>
+                        </select>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_power_switches">{{_('Power switches')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_power_switches')}}">
+                        <select class="form-control" multiple="multiple" name="ph_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_sensors">{{_('Ph sensors')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_ph_sensors')}}">
+                        <select class="form-control" multiple="multiple" name="ph_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="row submit">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="ln_solid"></div>
@@ -551,11 +655,12 @@
           var temperature_sensors_loaded = false;
           var distance_sensors_loaded = false;
           var moisture_sensors_loaded = false;
+          var ph_sensors_loaded = false;
 
           $(document).ready(function() {
             init_form_settings('environment');
 
-            $('select[name="heater_night_source"]').select2({
+            $('select[name$="_night_source"]').select2({
               placeholder: '{{_('Select an option')}}',
               allowClear: false,
               minimumResultsForSearch: Infinity
@@ -650,13 +755,21 @@
               moisture_sensors_loaded = true;
             });
 
+            $.get('/api/sensors/ph',function(data){
+              var select_boxes = $('select[name="ph_sensors"]');
+              $.each(data.sensors,function (index,sensor){
+                select_boxes.append($('<option>').attr({'value':sensor.id}).text(sensor.name));
+              });
+              ph_sensors_loaded = true;
+            });
+
             setContentHeight();
             load_environment_settings();
           });
 
           function load_environment_settings() {
             // Wait with loading the environment settings until all selectors are loaded
-            if (switches_loaded && humidity_sensors_loaded && temperature_sensors_loaded && distance_sensors_loaded && moisture_sensors_loaded) {
+            if (switches_loaded && humidity_sensors_loaded && temperature_sensors_loaded && distance_sensors_loaded && moisture_sensors_loaded && ph_sensors_loaded) {
               $.get('/api/config/environment',function(data){
                 $.each(data,function (environmentpart,environmentdata){
                   $.each(environmentdata,function(name,value) {
