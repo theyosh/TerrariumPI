@@ -1033,7 +1033,7 @@ function history_graph(name, data, type) {
 
   var legend_data = {show: true, noColumns: globals.horizontal_legend ? 0 : 1}
   if (globals.horizontal_legend) {
-    legend_data.margin = [0, -15];
+    legend_data.margin = [0, -20];
   }
   var graph_data = [];
   var graph_options = {
