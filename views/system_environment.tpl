@@ -424,7 +424,7 @@
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_night_source">{{_('Day/night difference source')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('heater_night_source')}}">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_night_source')}}">
                         <select class="form-control" name="heater_night_source" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="weather">{{_('Weather')}}</option>
                           <option value="lights">{{_('Lights')}}</option>
@@ -609,7 +609,7 @@
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_night_source">{{_('Day/night difference source')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('ph_night_source')}}">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_night_source')}}">
                         <select class="form-control" name="ph_night_source" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="weather">{{_('Weather')}}</option>
                           <option value="lights">{{_('Lights')}}</option>
