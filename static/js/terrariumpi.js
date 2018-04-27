@@ -408,7 +408,7 @@ function websocket_init(reconnect) {
         break;
 
       case 'environment':
-        $.each(['heater','sprayer','light','cooler','watertank'], function(index, value) {
+        $.each(['heater','sprayer','light','cooler','watertank','moisture'], function(index, value) {
           update_dashboard_environment(value, data.data[value]);
         });
         break;
@@ -679,7 +679,7 @@ function process_form() {
 function prepare_form_data(form) {
   var formdata = [];
   var form_type = form.attr('action').split('/').pop();
-  var re = /(sensor|switch|webcam|light|sprayer|watertank|heater|cooler|door|profile|playlist)(_\d+)?_(.*)/i;
+  var re = /(sensor|switch|webcam|light|sprayer|watertank|moisture|heater|cooler|door|profile|playlist)(_\d+)?_(.*)/i;
   var matches = null;
   var objectdata = {};
   var prev_nr = -1;
@@ -1550,6 +1550,7 @@ function update_dashboard_environment(name, data) {
       enabledColor = 'red';
       break;
     case 'sprayer':
+    case 'moisture':
       indicator = '%';
       enabledColor = 'blue';
       break;
@@ -1588,7 +1589,11 @@ function update_dashboard_environment(name, data) {
         break;
 
       case 'current':
-        systempart.find('.' + key).text(formatNumber(value,3) + ' ' + indicator).parent().toggle(data.mode === 'sensor' || data.sensors.length > 0);
+        if ('moisture' == name) {
+          systempart.find('.' + key).text(data > 0 ? '{{_('Dry')}}' : '{{_('Wet')}}').parent().toggle(data.mode === 'sensor' || data.sensors.length > 0);
+        } else {
+          systempart.find('.' + key).text(formatNumber(value,3) + ' ' + indicator).parent().toggle(data.mode === 'sensor' || data.sensors.length > 0);
+        }
         break;
 
       case 'alarm_min':

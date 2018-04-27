@@ -764,6 +764,7 @@ class terrariumEngine(object):
     data['heater']    = self.environment.get_heater_state()
     data['cooler']    = self.environment.get_cooler_state()
     data['watertank'] = self.environment.get_watertank_state()
+    data['moisture']  = self.environment.get_moisture_state()
 
     if filter is not None and filter in data:
       data = { filter : data[filter]}
