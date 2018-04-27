@@ -8,7 +8,7 @@ from terrariumSwitch import terrariumSwitch
 from terrariumDoor import terrariumDoor
 from terrariumWebcam import terrariumWebcam
 
-class terrariumTranslations():
+class terrariumTranslations(object):
 
   def __init__(self):
     logger.info('Initialize TerariumPI translations')

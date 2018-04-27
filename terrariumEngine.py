@@ -31,7 +31,7 @@ from terrariumEnvironment import terrariumEnvironment
 from gevent import monkey, sleep
 monkey.patch_all()
 
-class terrariumEngine():
+class terrariumEngine(object):
 
   LOOP_TIMEOUT = 30
 
@@ -42,7 +42,7 @@ class terrariumEngine():
                     'distance'    : 'cm',
                     'humidity'    : '%',
                     'moisture'    : '',
-					'conductivity': 'mS',					
+                    'conductivity': 'mS',
                     'ph'          : 'Ph'}
 
     # List of queues for websocket communication

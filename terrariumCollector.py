@@ -8,7 +8,7 @@ import json
 import copy
 import os
 
-class terrariumCollector():
+class terrariumCollector(object):
   DATABASE = 'history.db'
   # Store data every Xth minute. Except switches and doors
   STORE_MODULO = 1 * 60

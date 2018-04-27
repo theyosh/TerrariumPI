@@ -12,7 +12,7 @@ from terrariumUtils import terrariumUtils
 from gevent import monkey, sleep
 monkey.patch_all()
 
-class terrariumEnvironment():
+class terrariumEnvironment(object):
   LOOP_TIMEOUT = 15
 
   def __init__(self, sensors, power_switches, weather, door_status, config):

@@ -26,7 +26,7 @@ import energenieconnector
 #from gevent import monkey, sleep
 #monkey.patch_all()
 
-class terrariumSwitch():
+class terrariumSwitch(object):
   VALID_HARDWARE_TYPES = ['ftdi','gpio','gpio-inverse','pwm-dimmer','remote','remote-dimmer','eg-pm-usb','eg-pm-lan']
 
   OFF = False

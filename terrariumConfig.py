@@ -8,7 +8,7 @@ import datetime
 
 from terrariumUtils import terrariumUtils
 
-class terrariumConfig:
+class terrariumConfig(object):
   DEFAULT_CONFIG = 'defaults.cfg'
   CUSTOM_CONFIG = 'settings.cfg'
 

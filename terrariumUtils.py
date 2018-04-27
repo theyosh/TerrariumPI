@@ -21,6 +21,9 @@ class terrariumUtils():
 
   @staticmethod
   def is_float(value):
+    if value is None:
+      return False
+
     try:
       float(value)
       return True

@@ -11,7 +11,7 @@ from terrariumUtils import terrariumUtils
 from gevent import monkey, sleep
 monkey.patch_all()
 
-class terrariumDoor():
+class terrariumDoor(object):
   VALID_HARDWARE_TYPES = ['gpio','remote']
   CHECKER_TIMEOUT = 0.5
 
