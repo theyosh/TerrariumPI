@@ -125,11 +125,11 @@ class terrariumSi7021Sensor(terrariumI2CSensor):
   __SOFTRESET_TIMEOUT = 0.016      # (datasheet: typ=5, max=15 in ms)
 
   def __init__(self, address = 40, device_number = 1):
-    super(terrariumI2CSensor, self).__init__(address,device_number,terrariumSi7021Sensor.__SOFTRESET_TIMEOUT,
-                                                                   terrariumSi7021Sensor.__TEMPERATURE_WAIT_TIME,
-                                                                   terrariumSi7021Sensor.__HUMIDITY_WAIT_TIME)
+    super(terrariumSi7021Sensor, self).__init__(address,device_number,terrariumSi7021Sensor.__SOFTRESET_TIMEOUT,
+                                                                      terrariumSi7021Sensor.__TEMPERATURE_WAIT_TIME,
+                                                                      terrariumSi7021Sensor.__HUMIDITY_WAIT_TIME)
 
-class terrariumBME280Sensor():
+class terrariumBME280Sensor(object):
   hardwaretype = 'bme280'
   # Datasheet: https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME280_DS001-12.pdf
 
