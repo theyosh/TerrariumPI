@@ -311,20 +311,7 @@ class terrariumSensor(object):
             elif 'ph' == self.get_type():
               current = sensor.get_ph()
 
-        #elif 'sku-sen0161' == self.get_hardware_type():
-          # Do multiple measurements...
-        #  values = []
-        #  for counter in range(5):
-        #    analog_port = MCP3008(channel=int(self.get_address()))
-            # https://github.com/theyosh/TerrariumPI/issues/108
-            # We measure the values in volts already, so no deviding by 1000 as original script does
-        #    values.append((analog_port.value * ( 5000.0 / 1024.0)) * 3.3 + 0.1614)
-        #    time.sleep(0.2)
-
-          # sort values from low to high
-        #  values.sort()
-          # Calculate average. Exclude the min and max value. And therefore devide by 3
-        #  current = round((sum(values[1:-1]) / 3.0),2)
+          del hardwaresensor
 
         if current is None or not (self.get_limit_min() <= current <= self.get_limit_max()):
           # Invalid current value.... log and ingore
@@ -419,7 +406,7 @@ class terrariumSensor(object):
   def set_alarm_min(self,limit):
     if terrariumYTXXSensorDigital.hardwaretype == self.get_hardware_type():
       # Hard limit for better gauge graphs. Sensor can only return 0 or 1
-      limit = -1.05
+      limit = -1.0
 
     self.alarm_min = float(limit)
 
@@ -429,7 +416,7 @@ class terrariumSensor(object):
   def set_alarm_max(self,limit):
     if terrariumYTXXSensorDigital.hardwaretype == self.get_hardware_type():
       # Hard limit for better gauge graphs. Sensor can only return 0 or 1
-      limit = 1.05
+      limit = 1.0
 
     self.alarm_max = float(limit)
 
