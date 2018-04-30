@@ -325,9 +325,8 @@ class terrariumEnvironment(object):
 
     if part is None or part == 'ph':
       if self.ph['mode'] == 'weather':
-        self.ph['on']  = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['set']).strftime('%H:%M')
-        self.ph['off'] = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['rise']).strftime('%H:%M')
-
+        self.ph['on']  = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['rise']).strftime('%H:%M')
+        self.ph['off'] = datetime.datetime.fromtimestamp(self.weather.get_data()['sun']['set']).strftime('%H:%M')
 
       self.ph['time_table']  = terrariumUtils.calculate_time_table(self.ph['on'],self.ph['off'],
                                                                        None if self.ph['mode'] == 'weather' else self.ph['on_duration'],
@@ -842,7 +841,7 @@ class terrariumEnvironment(object):
       return_data['error'] = not self.__check_active_sensors(part)
       if 'alarm' not in return_data or \
           return_data['mode'] == 'disabled' or \
-         (part in ['sprayer','heater','watertank','moisture','ph'] and return_data['current'] >= return_data['alarm_max']) or \
+         (part in ['sprayer','heater','watertank'] and return_data['current'] >= return_data['alarm_max']) or \
          (part == 'cooler'  and return_data['current'] <= return_data['alarm_max']):
         return_data['alarm'] = False
 
@@ -993,7 +992,7 @@ class terrariumEnvironment(object):
       for field in average[averagetype]:
         average[averagetype][field] /= amount
 
-      average[averagetype]['alarm'] = not (average[averagetype]['alarm_min'] <= average[averagetype]['current'] <= average[averagetype]['alarm_max'])
+      average[averagetype]['alarm'] = not (average[averagetype]['alarm_min'] < average[averagetype]['current'] < average[averagetype]['alarm_max'])
       average[averagetype]['type'] = averagetype
       #average[averagetype]['indicator'] = self.__unit_type(averagetype)
 
