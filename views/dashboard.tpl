@@ -713,19 +713,22 @@
         </div>
         <script type="text/javascript">
           $(document).ready(function() {
-            $.get('/api/sensors',function(json_data) {
-              $('div#dashboard div.pull-left div.x_panel').hide();
-              $.each(json_data.sensors,function(index,sensor_data){
-                if ($('div#average_' + sensor_data.type + ':hidden')) {
-                  $('div#average_' + sensor_data.type).show();
-                  load_history_graph('average_' + sensor_data.type,sensor_data.type,'/api/history/sensors/average/' + sensor_data.type);
-                }
-              });
-              reload_reload_theme();
-            });
 
             websocket_message({
               'type': 'show_dashboard'
+            });
+
+            $.get('/api/sensors/average',function(json_data) {
+              $('div#dashboard div.pull-left div.x_panel').hide();
+              $.each(json_data.sensors,function(index,sensor_data){
+                if ($('div#' + sensor_data.type + ':hidden')) {
+                  $('div#' + sensor_data.type).show();
+                }
+                var sensortype = sensor_data.type.replace('average_','');
+                sensor_gauge(sensor_data.type, sensor_data);
+                load_history_graph(sensor_data.type,sensortype,'/api/history/sensors/average/' + sensortype);
+              });
+              reload_reload_theme();
             });
           });
         </script>
