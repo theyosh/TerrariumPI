@@ -453,8 +453,12 @@ class terrariumEngine(object):
         logger.warning('Updating took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEngine.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
 
   def __send_message(self,message):
-    for queue in self.subscribed_queues:
+    clients = self.subscribed_queues
+    for queue in clients:
       queue.put(message)
+      # If more then 50 messages in queue, looks like connection is gone and remove the queue from the list
+      if queue.qsize() > 50:
+        self.subscribed_queues.remove(queue)
 
   def __log_tail(self):
     logger.info('Start terrariumPI engine log')
