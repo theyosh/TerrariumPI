@@ -8,12 +8,10 @@ import time
 from hashlib import md5
 from terrariumUtils import terrariumUtils
 
-from gevent import monkey, sleep
-monkey.patch_all()
-
 class terrariumDoor(object):
   VALID_HARDWARE_TYPES = ['gpio','remote']
-  CHECKER_TIMEOUT = 0.5
+  CHECKER_TIMEOUT = 0.25
+  REMOTE_TIMEOUT = 30
 
   CLOSED = 'closed'
   OPEN = 'open'
@@ -38,7 +36,8 @@ class terrariumDoor(object):
 
     try:
       # Add detetion with callback !!!!THIS WILL CRASH THE GEVENT LOOP SOMEHOW!!!!!!
-      # GPIO.add_event_detect(gpio_pin, GPIO.BOTH, callback=callback, bouncetime=300)
+      # New problem: SQLlite threads restrictions... :(
+      # GPIO.add_event_detect(terrariumUtils.to_BCM_port_number(address), GPIO.BOTH, callback=self.__bla, bouncetime=300)
       thread.start_new_thread(self.__checker, ())
     except Exception:
       logger.exception('Error in door \'%s\' with message:' % (self.get_name(),))
@@ -49,10 +48,11 @@ class terrariumDoor(object):
   def __checker(self):
     logger.info('Start terrariumPI door checker for door \'%s\'' % self.get_name())
     while True:
+      current_status = None
       if self.get_hardware_type() == 'gpio':
         current_status = terrariumDoor.OPEN if GPIO.input(terrariumUtils.to_BCM_port_number(self.get_address())) else terrariumDoor.CLOSED
 
-      elif self.get_hardware_type() == 'remote' and (int(time.time()) - self.__last_check) >= 30:
+      elif self.get_hardware_type() == 'remote' and (int(time.time()) - self.__last_check) >= terrariumDoor.REMOTE_TIMEOUT:
         current_status = None
         url_data = terrariumUtils.parse_url(self.get_address())
         if url_data is False:
@@ -73,7 +73,7 @@ class terrariumDoor(object):
         if self.callback is not None:
           self.callback(self.get_data())
 
-      sleep(terrariumDoor.CHECKER_TIMEOUT)
+      time.sleep(terrariumDoor.CHECKER_TIMEOUT)
 
   def get_data(self):
     return {'id': self.get_id(),

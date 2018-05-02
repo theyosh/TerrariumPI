@@ -9,9 +9,6 @@ import time
 from threading import Timer
 from terrariumUtils import terrariumUtils
 
-from gevent import monkey, sleep
-monkey.patch_all()
-
 class terrariumEnvironment(object):
   LOOP_TIMEOUT = 15
 
@@ -732,7 +729,7 @@ class terrariumEnvironment(object):
       duration = time.time() - starttime
       if duration < terrariumEnvironment.LOOP_TIMEOUT:
         logger.info('Update done in %.5f seconds. Waiting for %.5f seconds for next round' % (duration,terrariumEnvironment.LOOP_TIMEOUT - duration))
-        sleep(terrariumEnvironment.LOOP_TIMEOUT - duration) # TODO: Config setting
+        time.sleep(terrariumEnvironment.LOOP_TIMEOUT - duration) # TODO: Config setting
       else:
         logger.warning('Update took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEnvironment.LOOP_TIMEOUT,terrariumEnvironment.LOOP_TIMEOUT))
 

@@ -14,9 +14,6 @@ import re
 
 from terrariumUtils import terrariumUtils
 
-from gevent import monkey, sleep
-monkey.patch_all()
-
 class terrariumWeatherSource(object):
 
   update_timeout = 30 * 60 # Default update timeout of 30 minutes

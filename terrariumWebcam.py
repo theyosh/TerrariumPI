@@ -21,9 +21,6 @@ from shutil import copyfile
 
 from terrariumUtils import terrariumUtils
 
-from gevent import monkey, sleep
-monkey.patch_all()
-
 class terrariumWebcam(object):
   TILE_LOCATION = 'webcam/'
   ARCHIVE_LOCATION = TILE_LOCATION + 'archive/'
@@ -100,7 +97,7 @@ class terrariumWebcam(object):
                         self.get_type(),
                         self.get_name(),
                         self.get_location()))
-        sleep(1)
+        time.sleep(1)
       else:
         break
 
@@ -180,7 +177,7 @@ class terrariumWebcam(object):
         logger.debug('Open rpicam')
         camera.start_preview()
         logger.debug('Wait %s seconds for preview' % (self.webcam_warm_up,))
-        sleep(self.webcam_warm_up)
+        time.sleep(self.webcam_warm_up)
         logger.debug('Save rpicam to jpeg')
         camera.capture(stream, format='jpeg')
         logger.debug('Done creating RPICAM image')
@@ -204,7 +201,7 @@ class terrariumWebcam(object):
       logger.debug('Set USB width to 720')
       camera.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, float(self.resolution['height']))
       logger.debug('Wait 2 seconds for preview')
-      sleep(self.webcam_warm_up)
+      time.sleep(self.webcam_warm_up)
       logger.debug('Save USB to raw data')
       readok, image = camera.read()
 
