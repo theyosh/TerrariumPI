@@ -16,9 +16,6 @@ from terrariumAnalogSensor import terrariumSKUSEN0161Sensor
 from terrariumGPIOSensor import terrariumYTXXSensorDigital, terrariumDHT11Sensor, terrariumDHT22Sensor, terrariumAM2302Sensor, terrariumHCSR04Sensor
 from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor
 
-from gevent import monkey, sleep
-monkey.patch_all()
-
 class terrariumRemoteSensor(object):
   hardwaretype = 'remote'
 

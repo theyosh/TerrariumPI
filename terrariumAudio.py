@@ -14,9 +14,6 @@ from hashlib import md5
 from MediaInfoDLL import MediaInfo, Stream
 from terrariumUtils import terrariumUtils
 
-from gevent import monkey, sleep
-monkey.patch_all()
-
 class terrariumAudioPlayer(object):
 
   AUDIO_FOLDER = 'audio'
@@ -127,7 +124,7 @@ class terrariumAudioPlayer(object):
       duration = time.time() - starttime
       if duration < terrariumAudioPlayer.LOOP_TIMEOUT:
         logger.info('Update done in %.5f seconds. Waiting for %.5f seconds for next round' % (duration,terrariumAudioPlayer.LOOP_TIMEOUT - duration))
-        sleep(terrariumAudioPlayer.LOOP_TIMEOUT - duration)
+        time.sleep(terrariumAudioPlayer.LOOP_TIMEOUT - duration)
       else:
         logger.warning('Updating took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumAudioPlayer.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
 
