@@ -410,6 +410,7 @@ class terrariumWebserver(object):
 
     while True:
       try:
+
         message = socket.receive()
       except Exception, err:
         break
@@ -424,7 +425,6 @@ class terrariumWebserver(object):
         terrariumWebserver.app.terrarium.get_doors_status(socket=True)
         terrariumWebserver.app.terrarium.get_uptime(socket=True)
         terrariumWebserver.app.terrarium.get_environment(socket=True)
-        terrariumWebserver.app.terrarium.get_sensors(['average'],socket=True)
         terrariumWebserver.app.terrarium.get_power_usage_water_flow(socket=True)
 
   def start(self):
