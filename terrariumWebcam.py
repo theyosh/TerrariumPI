@@ -10,6 +10,7 @@ import datetime
 import urllib2
 import base64
 import os
+import os.path
 import glob
 import re
 
@@ -161,7 +162,15 @@ class terrariumWebcam(object):
             cv2.rectangle(raw_image, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
           if motion_detected:
-            cv2.imwrite(self.get_raw_image(True),raw_image)
+            image_path = terrariumWebcam.ARCHIVE_LOCATION + (datetime.datetime.now()).strftime("%Y/%m/%d")
+            if not os.path.isdir(image_path):
+              try:
+                os.makedirs(image_path)
+              except Exception, ex:
+                print ex
+
+            imagelocation = image_path + '/' + self.get_id() + '_archive_' + str(int(time.time())) + '.jpg'
+            cv2.imwrite(imagelocation,raw_image)
             logger.info('Saved webcam %s image for archive due to motion detection' % (self.get_name(),))
 
         except Exception, ex:
@@ -350,6 +359,7 @@ class terrariumWebcam(object):
 
   def get_archive_images(self):
     file_filter = re.sub(r"archive_\d+\.jpg$", "archive_*.jpg", self.get_raw_image(True))
+    file_filter = file_filter.replace(terrariumWebcam.ARCHIVE_LOCATION,terrariumWebcam.ARCHIVE_LOCATION + '*/*/*/')
     files = glob.glob(file_filter)
     files.sort(key=os.path.getmtime,reverse = True)
     return files
