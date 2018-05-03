@@ -713,13 +713,13 @@
         </div>
         <script type="text/javascript">
           $(document).ready(function() {
+            $('div#dashboard div.pull-left div.x_panel').hide();
 
             websocket_message({
               'type': 'show_dashboard'
             });
 
             $.get('/api/sensors/average',function(json_data) {
-              $('div#dashboard div.pull-left div.x_panel').hide();
               $.each(json_data.sensors,function(index,sensor_data){
                 if ($('div#' + sensor_data.type + ':hidden')) {
                   $('div#' + sensor_data.type).show();
