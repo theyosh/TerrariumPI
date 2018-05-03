@@ -70,7 +70,7 @@ class terrariumYTXXSensorDigital(terrariumGPIOSensor):
     # Invert the value
     # Return 1 for dry
     # Return 0 for wet
-    return 0.0 if self.get_current() == 1.0 else 1.0
+    return self.get_current()
 
   def get_alarm(self):
     return self.get_moisture() == 1.0
