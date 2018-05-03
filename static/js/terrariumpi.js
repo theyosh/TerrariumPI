@@ -1593,7 +1593,7 @@ function update_dashboard_environment(name, data) {
 
       case 'current':
         if ('moisture' == name) {
-          systempart.find('.' + key).text(data > 0 ? '{{_('Dry')}}' : '{{_('Wet')}}').parent().toggle(data.mode === 'sensor' || data.sensors.length > 0);
+          systempart.find('.' + key).text(value == 1 ? '{{_('Dry')}}' : '{{_('Wet')}}').parent().toggle(data.mode === 'sensor' || data.sensors.length > 0);
         } else {
           systempart.find('.' + key).text(formatNumber(value,3) + ' ' + indicator).parent().toggle(data.mode === 'sensor' || data.sensors.length > 0);
         }
