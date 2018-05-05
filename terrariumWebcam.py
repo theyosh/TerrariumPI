@@ -169,8 +169,8 @@ class terrariumWebcam(object):
               except Exception, ex:
                 print ex
 
-            imagelocation = image_path + '/' + self.get_id() + '_archive_' + str(int(time.time())) + '.jpg'
-            cv2.imwrite(imagelocation,raw_image)
+            image_path += '/' + self.get_id() + '_archive_' + str(int(time.time())) + '.jpg'
+            cv2.imwrite(image_path,raw_image)
             logger.info('Saved webcam %s image for archive due to motion detection' % (self.get_name(),))
 
         except Exception, ex:
