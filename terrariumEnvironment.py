@@ -429,6 +429,51 @@ class terrariumEnvironment(object):
       #  self.sprayer_off()
 
 
+      # Moisture checks and actions
+      if self.moisture['enabled']:
+        toggle_on = False
+        extra_logging_message = ''
+        logger.debug('Environment moisture is enabled.')
+        logger.debug('Environment moisture is based on: %s' % self.moisture['mode'])
+        if 'sensor' == self.moisture['mode']:
+          if not self.__check_active_sensors('moisture'):
+            logger.error('Environment moisture sensors are not up to date. Check you sensors on the sensor page So force the power down to be sure!')
+            toggle_on = False
+          else:
+            # Only spray when the lights are on. Or when explicit enabled during the nights.
+            if self.moisture['night_enabled'] or self.is_light_on():
+              # Spray based on the average humidity values of the used sensors
+              toggle_on = self.moisture['moisture']['current'] < self.moisture['moisture']['alarm_min']
+              if toggle_on:
+                extra_logging_message = 'Moisture value %f%% is lower then alarm %f%%.' % (self.moisture['moisture']['current'],
+                                                                                          self.moisture['moisture']['alarm_min'])
+        else:
+          # Spray based on time table
+          toggle_on = terrariumUtils.is_time(self.moisture['time_table'])
+          if toggle_on is None:
+            self.__update_timing('moisture')
+
+          if toggle_on and len(self.moisture['sensors']) > 0:
+            # Use the extra added sensors for finetuning the trigger action
+            toggle_on = self.moisture['moisture']['current'] < self.moisture['moisture']['alarm_min']
+            if toggle_on:
+              extra_logging_message = 'Moisture value %f%% is lower then alarm %f%%.' % (self.moisture['moisture']['current'],
+                                                                                        self.moisture['moisture']['alarm_min'])
+
+        if toggle_on:
+            self.moisture_on()
+        else:
+          if self.is_moisture_on():
+            logger.info('Environment is turning off the moisture based on %s mode.' % (self.moisture['mode'],))
+
+          self.moisture_off()
+
+      #else:
+      #  logger.debug('Make sure that the spayer is off when not enabled at all.')
+      #  if self.is_sprayer_on():
+      #    logger.info('Environment is turning off the sprayer due to disabling it')
+      #  self.sprayer_off()
+
       # Watertank checks and actions
       if self.watertank['enabled']:
         toggle_on = False
