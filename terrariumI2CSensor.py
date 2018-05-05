@@ -121,7 +121,7 @@ class terrariumSi7021Sensor(terrariumI2CSensor):
   hardwaretype = 'si7021'
   # Datasheet - https://www.silabs.com/documents/public/data-sheets/Si7021-A20.pdf
   __TEMPERATURE_WAIT_TIME = 0.012  # (datasheet: typ=7, max=10.8 in ms)
-  __HUMIDITY_WAIT_TIME = 0.013     # (datasheet: typ=10, max=12 in ms)
+  __HUMIDITY_WAIT_TIME = 0.13     # (datasheet: typ=10, max=12 in ms) -> Not correct??
   __SOFTRESET_TIMEOUT = 0.016      # (datasheet: typ=5, max=15 in ms)
 
   def __init__(self, address = 40, device_number = 1):
