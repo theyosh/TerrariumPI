@@ -1,6 +1,104 @@
 Changelog
 =========
 
+3.5.9 (2018-05-05)
+------------------
+
+**New**
+------
+- Add moisture environment. [#133](https://github.com/theyosh/TerrariumPI/issues/133). [theyosh]
+- Add Ph environment part. [#135](https://github.com/theyosh/TerrariumPI/issues/135). [theyosh]
+- Add moisture environment system. [#133](https://github.com/theyosh/TerrariumPI/issues/133). [theyosh]
+- Add extra check if sensors are operational when used in environment
+  system. This will add an error indicator per environmentpart on the
+  dashboard and an error badge on each graph that has a not working
+  sensor. A sensor is not working when there are no updates for 10
+  minutes. When there are zero working sensors in the environmentpart,
+  it will we forced to be put to off. [#142](https://github.com/theyosh/TerrariumPI/issues/142). [theyosh]
+- Add horizontal graph legends option. [#143](https://github.com/theyosh/TerrariumPI/issues/143). [theyosh]
+- Add remote PH sensor support. [theyosh]
+- Add EC (Electrical conductivity) expressed in mS (microSiemens)
+  [nke69]
+- Add EC (Electrical conductivity) expressed in mS (microSiemens)
+  [nke69]
+- Add power management options to YT-XX sensors through extra use of
+  GPIO port for power. [theyosh]
+- Add moisture support for YT-XX sensors through digital port. Either
+  sensing dry or wet. [#133](https://github.com/theyosh/TerrariumPI/issues/133). [theyosh]
+- Add extra debug logging check. [theyosh]
+- Add extra float check. [theyosh]
+- Add option for selecting source for day and night temperature shift.
+  [#139](https://github.com/theyosh/TerrariumPI/issues/139). [TheYOSH]
+- Add files via upload. [TheYOSH]
+
+**Fixes**
+------
+- Fixed moisture sensor. [#133](https://github.com/theyosh/TerrariumPI/issues/133). [theyosh]
+- Finally found the memory leak!! Fixed!! [theyosh]
+- Fix memory leaks and moisture limits changes. [theyosh]
+- Fix Si7021 sensor. [#129](https://github.com/theyosh/TerrariumPI/issues/129). [theyosh]
+- Fix pH environmentpart [#145](https://github.com/theyosh/TerrariumPI/issues/145). [theyosh]
+- Fix dashboard loading. [theyosh]
+- Fix IP number in startup script. [theyosh]
+- Fix terrariumHCSR04Sensor. [theyosh]
+- Fix power management. [#133](https://github.com/theyosh/TerrariumPI/issues/133). [theyosh]
+- Fix I2C settings per sensor. [#129](https://github.com/theyosh/TerrariumPI/issues/129). [theyosh]
+- Fix stupid Apple rendering bug! Fix [#134](https://github.com/theyosh/TerrariumPI/issues/134). [TheYOSH]
+- Fix image motion detection with image rotations. [#137](https://github.com/theyosh/TerrariumPI/issues/137). [TheYOSH]
+- Do not overwrite image resolutions after rotations. [TheYOSH]
+
+**Updates**
+------
+- Update translations. [theyosh]
+- Update version number. [theyosh]
+- Update README.md. [TheYOSH]
+- Update library fancybox. [TheYOSH]
+- Update dashboard page. [theyosh]
+- Update submodules. [theyosh]
+- Update translations. [theyosh]
+- Update icons. [theyosh]
+- Update dashboard to show all averagetypes. [theyosh]
+- Updated I2C sensor support. Rewritten existing code. And added
+  (untested) support for si7021 and hdu21d. [#129](https://github.com/theyosh/TerrariumPI/issues/129). [theyosh]
+- Update installer. Add option to skip cleanup of existing unneeded
+  programs. [TheYOSH]
+- Update German translations. [#115](https://github.com/theyosh/TerrariumPI/issues/115). Close [#138](https://github.com/theyosh/TerrariumPI/issues/138). [TheYOSH]
+- Updated the installer with graphical dialog. [TheYOSH]
+- Update webcam archiving. Add better exception handling. [TheYOSH]
+- Small webcam update. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update translation files. [nke69]
+
+  Update translation files for 3.4.2
+
+**Other**
+------
+- Code cleanup. [theyosh]
+- Increase humidity time read out. [#129](https://github.com/theyosh/TerrariumPI/issues/129). [theyosh]
+- Save motion images to new folder structure in Y/M/D format. [theyosh]
+- Speedup dashboard loading. [theyosh]
+- Code cleanup. [theyosh]
+- Merge branch 'master' of ssh://github.com/theyosh/TerrariumPI.
+  [theyosh]
+- Refactoring terrariumpi sensors code. [theyosh]
+- Objects new style. [theyosh]
+- New style python objects. [theyosh]
+- Merge pull request [#144](https://github.com/theyosh/TerrariumPI/issues/144) from nke69/master. [TheYOSH]
+
+  Add EC (Electrical conductivity) expressed in mS (microSiemens)
+- Add EC (Electrical conductivity) expressed in mS (microSiemens)
+  [nke69]
+- Add EC (Electrical conductivity) expressed in mS (microSiemens)
+  [nke69]
+- First attempt adding support for BME280/BMP280 chips.This code is
+  UNTESTED [#129](https://github.com/theyosh/TerrariumPI/issues/129). [theyosh]
+- Merge branch 'master' of ssh://github.com/theyosh/TerrariumPI.
+  [TheYOSH]
+- Merge pull request [#136](https://github.com/theyosh/TerrariumPI/issues/136) from nke69/master. [TheYOSH]
+
+  Update translation files
+
 
 3.4.2 (2018-04-09)
 ------------------
@@ -34,6 +132,9 @@ Changelog
 
 **Updates**
 ------
+- Update README.md. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update changelog. [TheYOSH]
 - Update translation files. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update submodules. [TheYOSH]
@@ -41,6 +142,8 @@ Changelog
 
 **Other**
 ------
+- Merge branch 'master' of ssh://github.com/theyosh/TerrariumPI.
+  [TheYOSH]
 - Different motion detection. Should work better with low light (2)
   [TheYOSH]
 - Different motion detection. Should work better with low light.
