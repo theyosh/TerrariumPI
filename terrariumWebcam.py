@@ -11,6 +11,7 @@ import urllib2
 import base64
 import os
 import os.path
+import shutil
 import glob
 import re
 
@@ -48,6 +49,7 @@ class terrariumWebcam(object):
     self.last_update = None
     self.state = None
     self.__previous_image = None
+    self.__last_archive = 0
 
     # Per webcam config
     self.set_location(location)
@@ -68,14 +70,6 @@ class terrariumWebcam(object):
     self.update()
 
   def __get_raw_image(self):
-    def image_entropy(img):
-      w,h = img.size
-      a = np.array(img.convert('RGB')).reshape((w*h,3))
-      h,e = np.histogramdd(a, bins=(16,)*3, range=((0,256),)*3)
-      prob = h/np.sum(h) # normalize
-      prob = prob[prob>0] # remove zeros
-      return -np.sum(prob*np.log2(prob))
-
     logger.debug('Start getting raw image data from location: %s' % (self.location,))
     stream = BytesIO()
     oldstate = self.state
@@ -131,50 +125,57 @@ class terrariumWebcam(object):
       self.raw_image.save(self.get_raw_image(),'jpeg',quality=terrariumWebcam.JPEG_QUALITY)
       logger.debug('Saved raw image %s to disk: %s' % (self.get_name(),self.get_raw_image()))
 
-      if self.get_archive():
-        # https://www.pyimagesearch.com/2015/05/25/basic-motion-detection-and-tracking-with-python-and-opencv/
-        try:
-          current_image = cv2.imread(self.get_raw_image())
-          current_image = cv2.cvtColor(current_image, cv2.COLOR_BGR2GRAY)
-          current_image = cv2.GaussianBlur(current_image, (21, 21), 0)
+      if self.get_archive() != 'disabled':
+        image_path = terrariumWebcam.ARCHIVE_LOCATION + (datetime.datetime.now()).strftime("%Y/%m/%d")
+        if not os.path.isdir(image_path):
+          try:
+            os.makedirs(image_path)
+          except Exception, ex:
+            print ex
 
-          # Reset previous image. This is needed/happening when resolution of image changes due to rotation or settings update
-          if self.__previous_image is None or self.__previous_image.shape[0] != current_image.shape[0] or self.__previous_image.shape[1] != current_image.shape[1]:
+        image_path += '/' + self.get_id() + '_archive_' + str(int(time.time())) + '.jpg'
+
+        if self.get_archive() == 'motion':
+          # https://www.pyimagesearch.com/2015/05/25/basic-motion-detection-and-tracking-with-python-and-opencv/
+          try:
+            current_image = cv2.imread(self.get_raw_image())
+            current_image = cv2.cvtColor(current_image, cv2.COLOR_BGR2GRAY)
+            current_image = cv2.GaussianBlur(current_image, (21, 21), 0)
+
+            # Reset previous image. This is needed/happening when resolution of image changes due to rotation or settings update
+            if self.__previous_image is None or self.__previous_image.shape[0] != current_image.shape[0] or self.__previous_image.shape[1] != current_image.shape[1]:
+              self.__previous_image = current_image
+
+            thresh = cv2.threshold(cv2.absdiff(self.__previous_image, current_image), 25, 255, cv2.THRESH_BINARY)[1]
+            thresh = cv2.dilate(thresh, None, iterations=2)
+
+            (cnts, _) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
             self.__previous_image = current_image
+            motion_detected = False
+            raw_image = cv2.imread(self.get_raw_image())
+            # loop over the contours
+            for c in cnts:
+              # if the contour is too small, ignore it
+              if cv2.contourArea(c) < 500:
+                continue
 
-          thresh = cv2.threshold(cv2.absdiff(self.__previous_image, current_image), 25, 255, cv2.THRESH_BINARY)[1]
-          thresh = cv2.dilate(thresh, None, iterations=2)
+              motion_detected = True
+              # compute the bounding box for the contour, draw it on the frame,
+              (x, y, w, h) = cv2.boundingRect(c)
+              cv2.rectangle(raw_image, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
-          (cnts, _) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            if motion_detected:
+              cv2.imwrite(image_path,raw_image)
+              logger.info('Saved webcam %s image for archive due to motion detection' % (self.get_name(),))
 
-          self.__previous_image = current_image
-          motion_detected = False
-          raw_image = cv2.imread(self.get_raw_image())
-          # loop over the contours
-          for c in cnts:
-            # if the contour is too small, ignore it
-            if cv2.contourArea(c) < 500:
-              continue
+          except Exception, ex:
+            print ex
 
-            motion_detected = True
-            # compute the bounding box for the contour, draw it on the frame,
-            (x, y, w, h) = cv2.boundingRect(c)
-            cv2.rectangle(raw_image, (x, y), (x + w, y + h), (0, 255, 0), 2)
-
-          if motion_detected:
-            image_path = terrariumWebcam.ARCHIVE_LOCATION + (datetime.datetime.now()).strftime("%Y/%m/%d")
-            if not os.path.isdir(image_path):
-              try:
-                os.makedirs(image_path)
-              except Exception, ex:
-                print ex
-
-            image_path += '/' + self.get_id() + '_archive_' + str(int(time.time())) + '.jpg'
-            cv2.imwrite(image_path,raw_image)
-            logger.info('Saved webcam %s image for archive due to motion detection' % (self.get_name(),))
-
-        except Exception, ex:
-          print ex
+        elif int(time.time()) - self.__last_archive > int(self.get_archive()):
+          shutil.copyfile(self.get_raw_image(),image_path)
+          logger.info('Saved webcam %s image for archive due to timer interval %s seconds' % (self.get_name(),self.get_archive()))
+          self.__last_archive = int(time.time())
 
     self.last_update = int(time.time())
 
@@ -437,10 +438,10 @@ class terrariumWebcam(object):
     return self.max_zoom
 
   def get_archive(self):
-    return self.archive == True
+    return self.archive
 
-  def set_archive(self,enabled = True):
-    self.archive = terrariumUtils.is_true(enabled)
+  def set_archive(self,enabled):
+    self.archive = enabled
 
   def get_state(self):
     return terrariumWebcam.ONLINE if self.state else terrariumWebcam.OFFLINE
@@ -448,9 +449,9 @@ class terrariumWebcam(object):
   def get_last_update(self):
     return self.last_update
 
-  def get_raw_image(self,motion = False):
+  def get_raw_image(self,archive = False):
     image = terrariumWebcam.TILE_LOCATION + self.get_id() + '_raw.jpg'
-    if motion:
+    if archive:
       image = terrariumWebcam.ARCHIVE_LOCATION + self.get_id() + '_archive_' + str(int(time.time())) + '.jpg'
 
     return image
