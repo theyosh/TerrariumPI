@@ -171,7 +171,7 @@ class terrariumWebcam(object):
           except Exception, ex:
             print ex
 
-        elif int(time.time()) - self.__last_archive > int(self.get_archive()):
+        elif int(time.time()) - self.__last_archive >= int(self.get_archive()):
           shutil.copyfile(self.get_raw_image(),image_path)
           logger.info('Saved webcam %s image for archive due to timer interval %s seconds' % (self.get_name(),self.get_archive()))
           self.__last_archive = int(time.time())
