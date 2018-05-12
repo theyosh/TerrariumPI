@@ -122,6 +122,14 @@ class terrariumConfig(object):
               self.__config.set(section, 'cooler_on',  str(datetime.datetime.fromtimestamp(float(environment_data['cooler_on'])).strftime('%H:%M')))
               self.__config.set(section, 'cooler_off', str(datetime.datetime.fromtimestamp(float(environment_data['cooler_off'])).strftime('%H:%M')))
 
+        elif version == 351:
+          logger.info('Updating configuration file to version: %s' % (version,))
+          for section in self.__config.sections():
+            if section[:6] == 'webcam':
+              data = self.__get_config(section)
+              if 'archive' in data:
+                self.__config.set(section, 'archive', 'motion' if terrariumUtils.is_true(data['archive']) else 'disabled')
+
       # Update version number
       self.__config.set('terrariumpi', 'version', str(to_version))
       self.__save_config()
