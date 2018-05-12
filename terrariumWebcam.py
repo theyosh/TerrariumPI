@@ -84,7 +84,6 @@ class terrariumWebcam(object):
       elif 'online' == self.get_type():
         stream = self.__get_raw_image_url(stream)
 
-
       if not self.state:
         logger.warning('Attempt %s of %s for getting raw for %s type \'%s\' did not succeed at location %s. Will retry in 1 second.' %
                        (trying+1,
