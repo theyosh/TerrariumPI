@@ -117,8 +117,17 @@
                           <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('webcam_field_archive')}}">
                             <select class="form-control" name="webcam_[nr]_archive" tabindex="-1" placeholder="{{_('Select an option')}}">
                               <option value="">{{_('Select an option')}}</option>
-                              <option value="false">{{_('Disabled')}}</option>
-                              <option value="true">{{_('Enabled')}}</option>
+                              <option value="disabled">{{_('Disabled')}}</option>
+                              <option value="motion">{{_('Motion')}}</option>
+                              <option value="60">{{_('1 minute')}}</option>
+                              <option value="300">{{_('5 minutes')}}</option>
+                              <option value="900">{{_('15 minutes')}}</option>
+                              <option value="1800">{{_('30 minutes')}}</option>
+                              <option value="3600">{{_('1 hour')}}</option>
+                              <option value="10800">{{_('3 hours')}}</option>
+                              <option value="21600">{{_('6 hours')}}</option>
+                              <option value="43200">{{_('12 hours')}}</option>
+                              <option value="86400">{{_('1 day')}}</option>
                             </select>
                           </div>
                         </div>
