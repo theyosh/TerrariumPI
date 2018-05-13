@@ -401,40 +401,24 @@ class terrariumSensor(object):
     return self.alarm_min
 
   def set_alarm_min(self,limit):
-    if terrariumYTXXSensorDigital.hardwaretype == self.get_hardware_type():
-      # Hard limit for better gauge graphs. Sensor can only return 0 or 1
-      limit = -1.0
-
     self.alarm_min = float(limit)
 
   def get_alarm_max(self):
     return self.alarm_max
 
   def set_alarm_max(self,limit):
-    if terrariumYTXXSensorDigital.hardwaretype == self.get_hardware_type():
-      # Hard limit for better gauge graphs. Sensor can only return 0 or 1
-      limit = 1.0
-
     self.alarm_max = float(limit)
 
   def get_limit_min(self):
     return self.limit_min
 
   def set_limit_min(self,limit):
-    if terrariumYTXXSensorDigital.hardwaretype == self.get_hardware_type():
-      # Hard limit for better gauge graphs. Sensor can only return 0 or 1
-      limit = -1.1
-
     self.limit_min = float(limit)
 
   def get_limit_max(self):
     return self.limit_max
 
   def set_limit_max(self,limit):
-    if terrariumYTXXSensorDigital.hardwaretype == self.get_hardware_type():
-      # Hard limit for better gauge graphs. Sensor can only return 0 or 1
-      limit = 1.1
-
     self.limit_max = float(limit)
 
   def get_current(self, force = False):
@@ -449,7 +433,7 @@ class terrariumSensor(object):
     return float(current)
 
   def get_alarm(self):
-    return not self.get_alarm_min() < self.get_current() < self.get_alarm_max()
+    return not self.get_alarm_min() <= self.get_current() <= self.get_alarm_max()
 
   def is_active(self):
     return datetime.datetime.now() - self.last_update < datetime.timedelta(minutes=terrariumSensor.ERROR_TIMEOUT)
