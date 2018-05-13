@@ -42,7 +42,7 @@ class terrariumEngine(object):
     self.__units = {'temperature' : 'C',
                     'distance'    : 'cm',
                     'humidity'    : '%',
-                    'moisture'    : '',
+                    'moisture'    : '%',
                     'conductivity': 'mS',
                     'ph'          : 'Ph'}
 

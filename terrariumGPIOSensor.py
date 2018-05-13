@@ -67,13 +67,13 @@ class terrariumYTXXSensorDigital(terrariumGPIOSensor):
   hardwaretype = 'ytxx-digital'
 
   def get_moisture(self):
-    # Invert the value
-    # Return 1 for dry
-    # Return 0 for wet
-    return self.get_current()
+    # Convert the value
+    # Return 0 for dry (value get_current = 1)
+    # Return 100 for wet (value get_current = 0)
+    return 0.0 if self.get_current() == 1.0 else 100.0
 
   def get_alarm(self):
-    return self.get_moisture() == 1.0
+    return self.get_moisture() == 0.0
 
   def get_state(self):
     return (_('Dry') if self.get_alarm() else _('Wet'))

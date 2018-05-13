@@ -1027,8 +1027,6 @@ function history_graph(name, data, type) {
   var graph_ticks = 8;
   if (type === 'door') {
     graph_ticks = [[0, '{{_('Closed')}}'], [1, '{{_('Open')}}']];
-  } else if (type === 'moisture') {
-    graph_ticks = [[0, '{{_('Wet')}}'], [1, '{{_('Dry')}}']];
   }
 
   var legend_data = {show: true, noColumns: globals.horizontal_legend ? 0 : 1}
@@ -1097,6 +1095,7 @@ function history_graph(name, data, type) {
 
           case 'humidity':
           case 'average_humidity':
+          case 'moisture':
             val = formatNumber(val) + ' %';
             break;
 
@@ -1122,10 +1121,6 @@ function history_graph(name, data, type) {
           case 'door':
             val = (val ? '{{_('Open')}}' : '{{_('Closed')}}');
             break;
-
-          case 'moisture':
-            val = (val ? '{{_('Dry')}}' : '{{_('Wet')}}');
-            break;
         }
         return val;
       }
@@ -1137,6 +1132,7 @@ function history_graph(name, data, type) {
     case 'temperature':
     case 'distance':
     case 'ph':
+    case 'moisture':
       graph_data = [{
         label: '{{_('Current')}}',
         data: data.current
@@ -1251,20 +1247,6 @@ function history_graph(name, data, type) {
       graph_data = [{
         label: '{{_('Door status')}}',
         data: data.state
-      }];
-      break;
-
-    case 'moisture':
-      graph_options.series.lines = {
-        show: true,
-        lineWidth: 2,
-        fill: true
-      };
-      graph_options.yaxis.min = 0;
-      graph_options.yaxis.max = 1;
-      graph_data = [{
-        label: '{{_('Moisture status')}}',
-        data: data.current
       }];
       break;
   }
@@ -1592,11 +1574,7 @@ function update_dashboard_environment(name, data) {
         break;
 
       case 'current':
-        if ('moisture' == name) {
-          systempart.find('.' + key).text(value == 1 ? '{{_('Dry')}}' : '{{_('Wet')}}').parent().toggle(data.mode === 'sensor' || data.sensors.length > 0);
-        } else {
-          systempart.find('.' + key).text(formatNumber(value,3) + ' ' + indicator).parent().toggle(data.mode === 'sensor' || data.sensors.length > 0);
-        }
+        systempart.find('.' + key).text(formatNumber(value,3) + ' ' + indicator).parent().toggle(data.mode === 'sensor' || data.sensors.length > 0);
         break;
 
       case 'alarm_min':

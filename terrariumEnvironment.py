@@ -461,6 +461,11 @@ class terrariumEnvironment(object):
                                                                                         self.moisture['moisture']['alarm_min'])
 
         if toggle_on:
+          if not self.is_moisture_on():
+            logger.info('Environment is turning on the moisture for %f seconds based on %s mode.%s' % (self.moisture['spray_duration'],
+                                                                                                       self.moisture['mode'],
+                                                                                                       extra_logging_message))
+
             self.moisture_on()
         else:
           if self.is_moisture_on():
@@ -1034,9 +1039,8 @@ class terrariumEnvironment(object):
       for field in average[averagetype]:
         average[averagetype][field] /= amount
 
-      average[averagetype]['alarm'] = not (average[averagetype]['alarm_min'] < average[averagetype]['current'] < average[averagetype]['alarm_max'])
+      average[averagetype]['alarm'] = not (average[averagetype]['alarm_min'] <= average[averagetype]['current'] <= average[averagetype]['alarm_max'])
       average[averagetype]['type'] = averagetype
-      #average[averagetype]['indicator'] = self.__unit_type(averagetype)
 
     return average
 
