@@ -1,9 +1,14 @@
 #!/bin/bash
 BASEDIR=$(dirname $(readlink -nf $0))
 SCRIPT_USER=`who -m | awk '{print $1}'`
+SCRIPT_USER_ID=`id -u ${SCRIPT_USER}`
 VERSION=`grep ^version defaults.cfg | cut -d' ' -f 3`
-
 WHOAMI=`whoami`
+
+LOGFILE="${BASEDIR}/log/terrariumpi.log"
+ACCESSLOGFILE="${BASEDIR}/log/terrariumpi.access.log"
+TMPFS="/run/user/${SCRIPT_USER_ID}"
+
 if [ "${WHOAMI}" != "root" ]; then
   echo "Start TerrariumPI installation as user root"
   echo "sudo ./install.sh"
@@ -74,7 +79,7 @@ git submodule update > /dev/null
 cd "${BASEDIR}/.."
 
 
-PIP_MODULES="gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio"
+PIP_MODULES="gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial"
 for PIP_MODULE in ${PIP_MODULES}
 do
   PROGRESS=$((PROGRESS + 2))
@@ -212,6 +217,28 @@ update-rc.d -f owfhttpd remove
 
 # Set the timezone
 dpkg-reconfigure tzdata
+
+# Move log file to temprorary mount
+if grep -qs "${TMPFS} " /proc/mounts; then
+  # TMPFS user dir is available....
+  if ! [ -h "${LOGFILE}" ]; then
+    # There is not a symlink to tmpfs partition
+    if [ -f "${LOGFILE}" ]; then
+      # There is an existing logfile already. Move it
+      mv ${LOGFILE} ${TMPFS}
+    fi
+    ln -s "${TMPFS}/terrariumpi.log" "${LOGFILE}"
+  fi
+
+  if ! [ -h "${ACCESSLOGFILE}" ]; then
+    # There is not a symlink to tmpfs partition
+    if [ -f "${ACCESSLOGFILE}" ]; then
+      # There is an existing logfile already. Move it
+      mv ${ACCESSLOGFILE} ${TMPFS}
+    fi
+    ln -s "${TMPFS}/terrariumpi.access.log" "${ACCESSLOGFILE}"
+  fi
+fi
 
 # Make TerrariumPI start during boot
 if [ `grep -ic "start.sh" /etc/rc.local` -eq 0 ]; then
