@@ -48,12 +48,15 @@
                     </li>
                     <li>
                       <a href="sensor_conductivity.html">{{_('Conductivity')}}</a>
-                    </li>					
+                    </li>
                     <li>
                       <a href="sensor_distance.html">{{_('Distance')}}</a>
                     </li>
                     <li>
                       <a href="sensor_ph.html">{{_('pH')}}</a>
+                    </li>
+                    <li>
+                      <a href="sensor_light.html">{{_('Light')}}</a>
                     </li>
                     <li>
                       <a href="sensor_settings.html">{{_('Settings')}}</a>

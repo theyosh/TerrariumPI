@@ -5,8 +5,13 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 import smbus
 import time
-
+import sys
 from terrariumUtils import terrariumUtils
+
+# Dirty hack to include someone his code... to lazy to make it myself :)
+# https://github.com/ageir/chirp-rpi
+sys.path.insert(0, './chirp-rpi')
+import chirp
 
 class terrariumI2CSensor(object):
   # control constants
@@ -331,3 +336,73 @@ class terrariumBME280Sensor(object):
   def get_altitude(self):
     self.__get_raw_data()
     return None if not terrariumUtils.is_float(self.__current_altitude) else float(self.__current_altitude)
+
+class terrariumChirpSensor(object):
+  hardwaretype = 'chirp'
+  # Datasheet: https://wemakethings.net/chirp/
+
+  def __init__(self, address = 20, device_number = 1):
+    self.__address = int('0x' + str(address),16)
+    self.__device_number = 1 if device_number is None else int(device_number)
+
+    logger.debug('Initializing sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
+
+
+  def __enter__(self):
+    """used to enable python's with statement support"""
+    return self
+
+  def __exit__(self, type, value, traceback):
+    """with support"""
+    self.close()
+
+  def close(self):
+    """Closes the i2c connection"""
+    logger.debug('Close sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
+    #self.__bus.close()
+
+  def __get_raw_data(self,part):
+    # min_moist and max_moist are 'best guess' for now
+    sensor = chirp.Chirp(bus=self.__device_number,
+                  address=self.__address,
+                  read_moist=False,
+                  read_temp=False,
+                  read_light=False,
+                  min_moist=200,
+                  max_moist=700,
+                  temp_scale='celsius',
+                  temp_offset=0)
+    value = None
+
+    sensor.read_temp  = 'temperature' == part
+    sensor.read_moist = 'moisture' == part
+    sensor.read_light = 'light' == part
+
+    sensor.trigger()
+
+    if 'temperate' == part:
+      value = sensor.temp
+    if 'moisture' == part:
+      value = sensor.moist_percent
+    if 'light' == part:
+      value = sensor.light
+
+    return value
+
+  def get_temperature(self):
+    logger.debug('Read temperature value from sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
+    temperature = self.__get_raw_data('temperature')
+    logger.debug('Got data from temperature sensor type \'%s\' at device %s with address %s: temperature: %s' % (self.__class__.__name__,self.__device_number,self.__address,temperature))
+    return None if not terrariumUtils.is_float(temperature) else float(temperature)
+
+  def get_moisture(self):
+    logger.debug('Read moisture value from sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
+    moisture = self.__get_raw_data('moisture')
+    logger.debug('Got data from moisture sensor type \'%s\' at device %s with address %s: moisture: %s' % (self.__class__.__name__,self.__device_number,self.__address,moisture))
+    return None if not terrariumUtils.is_float(moisture) else float(moisture)
+
+  def get_light(self):
+    logger.debug('Read brightness value from sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
+    light = self.__get_raw_data('light')
+    logger.debug('Got data from brightness sensor type \'%s\' at device %s with address %s: brightness: %s' % (self.__class__.__name__,self.__device_number,self.__address,light))
+    return None if not terrariumUtils.is_float(light) else float(light)

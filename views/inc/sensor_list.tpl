@@ -14,6 +14,7 @@
                 <h2 class="conductivity"><span aria-hidden="true" class="glyphicon glyphicon-oil"></span> {{_('Conductivity sensor')}} <span class="title">{{_('new')}}</span> <small>...</small> <span class="badge bg-red">{{_('warning')}}</span> <span class="badge bg-orange">{{_('error')}}</span></h2>
                 <h2 class="distance"><span aria-hidden="true" class="glyphicon glyphicon-signal"></span> {{_('Distance sensor')}} <span class="title">{{_('new')}}</span> <small>...</small> <span class="badge bg-red">{{_('warning')}}</span> <span class="badge bg-orange">{{_('error')}}</span></h2>
                 <h2 class="ph"><span aria-hidden="true" class="glyphicon glyphicon-scale"></span> {{_('pH sensor')}} <span class="title">{{_('new')}}</span> <small>...</small> <span class="badge bg-red">{{_('warning')}}</span> <span class="badge bg-orange">{{_('error')}}</span></h2>
+                <h2 class="light"><span aria-hidden="true" class="glyphicon glyphicon-adjust"></span> {{_('Light sensor')}} <span class="title">{{_('new')}}</span> <small>...</small> <span class="badge bg-red">{{_('warning')}}</span> <span class="badge bg-orange">{{_('error')}}</span></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>

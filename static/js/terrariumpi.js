@@ -408,7 +408,7 @@ function websocket_init(reconnect) {
         break;
 
       case 'environment':
-        $.each(['heater','sprayer','light','cooler','watertank','moisture','ph'], function(index, value) {
+        $.each(['heater','humidity','light','cooler','watertank','moisture','ph','light'], function(index, value) {
           update_dashboard_environment(value, data.data[value]);
         });
         break;
@@ -679,7 +679,7 @@ function process_form() {
 function prepare_form_data(form) {
   var formdata = [];
   var form_type = form.attr('action').split('/').pop();
-  var re = /(sensor|switch|webcam|light|sprayer|watertank|moisture|heater|cooler|ph|door|profile|playlist)(_\d+)?_(.*)/i;
+  var re = /(sensor|switch|webcam|light|humidity|watertank|moisture|heater|cooler|ph|door|profile|playlist)(_\d+)?_(.*)/i;
   var matches = null;
   var objectdata = {};
   var prev_nr = -1;
@@ -752,6 +752,7 @@ function prepare_form_data(form) {
     console.log(error);
     return false;
   }
+
   return formdata;
 }
 /* General functions - End form functions */
@@ -1118,6 +1119,10 @@ function history_graph(name, data, type) {
             val = formatNumber(val) + ' W';
             break;
 
+          case 'light':
+            val = formatNumber(val) + '';
+            break;
+
           case 'door':
             val = (val ? '{{_('Open')}}' : '{{_('Closed')}}');
             break;
@@ -1133,18 +1138,8 @@ function history_graph(name, data, type) {
     case 'distance':
     case 'ph':
     case 'moisture':
-      graph_data = [{
-        label: '{{_('Current')}}',
-        data: data.current
-      }, {
-        label: '{{_('Alarm min')}}',
-        data: data.alarm_min
-      }, {
-        label: '{{_('Alarm max')}}',
-        data: data.alarm_max
-      }];
-      break;
     case 'conductivity':
+    case 'light':
       graph_data = [{
         label: '{{_('Current')}}',
         data: data.current
@@ -1521,6 +1516,10 @@ function update_dashboard_water_flow(data) {
 
 /* Dashboard code - Environment */
 function update_dashboard_environment(name, data) {
+  if (data === undefined) {
+    return false;
+  }
+
   var systempart = $('div.environment_' + name);
   var enabledColor = '';
   var indicator = globals.temperature_indicator;
@@ -1531,7 +1530,7 @@ function update_dashboard_environment(name, data) {
     case 'heater':
       enabledColor = 'red';
       break;
-    case 'sprayer':
+    case 'humidity':
     case 'moisture':
       indicator = '%';
       enabledColor = 'blue';

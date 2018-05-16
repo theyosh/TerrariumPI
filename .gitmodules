@@ -13,3 +13,6 @@
 [submodule "energenie-connect0r"]
 	path = energenie-connect0r
 	url = https://github.com/perryflynn/energenie-connect0r.git
+[submodule "chirp-rpi"]
+	path = chirp-rpi
+	url = https://github.com/ageir/chirp-rpi.git
