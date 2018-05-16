@@ -44,7 +44,8 @@ class terrariumEngine(object):
                     'humidity'    : '%',
                     'moisture'    : '%',
                     'conductivity': 'mS',
-                    'ph'          : 'Ph'}
+                    'ph'          : 'Ph',
+                    'light'       :  ''}
 
     # List of queues for websocket communication
     self.subscribed_queues = []
