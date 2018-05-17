@@ -173,25 +173,24 @@ iframe.external_calendar {
 .focus a {
   font-weight: bold !important;
 }
-
 #tooltip span {
   cursor: default;
 }
-
 .history_graph {
   min-height: 175px;
   display: block !important;
   position: relative;
 }
+.history_graph .legend .legendColorBox {
+  background-color: white;
+}
 .history_graph .legend .legendLabel {
   color: #73879c;
   padding: 0em .3em;
 }
-
 .history_graph .legend.horizontal .legendLabel {
   padding-right: 2em;
 }
-
 .history_graph .flot-x-axis .flot-tick-label {
   white-space: nowrap;
   transform: translate(-9px,0) rotate(-45deg);
