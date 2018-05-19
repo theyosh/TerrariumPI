@@ -380,12 +380,12 @@ class terrariumChirpSensor(object):
 
     sensor.trigger()
 
-    if 'temperate' == part:
-      value = sensor.temp
+    if 'temperature' == part:
+      value = float(sensor.temp)
     if 'moisture' == part:
-      value = sensor.moist_percent
+      value = float(sensor.moist_percent)
     if 'light' == part:
-      value = sensor.light
+      value = float(sensor.light)
 
     return value
 
@@ -404,5 +404,7 @@ class terrariumChirpSensor(object):
   def get_light(self):
     logger.debug('Read brightness value from sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
     light = self.__get_raw_data('light')
+    if light is not None:
+      light = 100.0 - ((light / 65536.0) * 100.0)
     logger.debug('Got data from brightness sensor type \'%s\' at device %s with address %s: brightness: %s' % (self.__class__.__name__,self.__device_number,self.__address,light))
     return None if not terrariumUtils.is_float(light) else float(light)
