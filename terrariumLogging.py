@@ -9,6 +9,7 @@ import os
 import os.path
 import time
 import glob
+import shutil
 
 import logging.config
 
@@ -25,31 +26,40 @@ class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandl
         the one with the oldest suffix.
         """
 
-        self.stream.close()
         # get the time that this sequence started at and make it a TimeTuple
         t = self.rolloverAt - self.interval
         timeTuple = time.localtime(t)
-        dfn = self.baseFilename + "." + time.strftime(self.suffix, timeTuple)
+        dfn = self.baseFilename + '.' + time.strftime(self.suffix, timeTuple)
         if os.path.exists(dfn):
             os.remove(dfn)
-        os.rename(self.baseFilename, dfn)
-        if self.backupCount > 0:
-            # find the oldest log file and delete it
-            s = glob.glob(self.baseFilename + ".20*")
-            if len(s) > self.backupCount:
-                s.sort()
-                os.remove(s[0])
-        #print "%s -> %s" % (self.baseFilename, dfn)
+
+        self.stream.close()
+
+        shutil.copyfile(os.path.realpath(self.baseFilename), os.path.abspath(dfn))
+        # Empty source file for new day
+        open(self.baseFilename, 'w').close()
+
         if self.encoding:
             self.stream = codecs.open(self.baseFilename, 'w', self.encoding)
         else:
             self.stream = open(self.baseFilename, 'w')
+
         self.rolloverAt = self.rolloverAt + self.interval
-        if os.path.exists(dfn + ".zip"):
-            os.remove(dfn + ".zip")
-        file = zipfile.ZipFile(dfn + ".zip", "w")
-        file.write(dfn, os.path.basename(dfn), zipfile.ZIP_DEFLATED)
-        file.close()
+
+        if self.backupCount > 0:
+            # find the oldest log file and delete it
+            s = glob.glob(self.baseFilename + '.20*')
+            if len(s) > self.backupCount:
+                s.sort()
+                os.remove(s[0])
+
+        if os.path.exists(dfn + '.zip'):
+            os.remove(dfn + '.zip')
+
+        log_archive = zipfile.ZipFile(dfn + '.zip', 'w')
+        log_archive.write(dfn, os.path.basename(dfn), zipfile.ZIP_DEFLATED)
+        log_archive.close()
+
         os.remove(dfn)
 
 logging.config.fileConfig('logging.cfg')
