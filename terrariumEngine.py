@@ -500,7 +500,7 @@ class terrariumEngine(object):
 
   def get_weather(self, parameters = [], socket = False):
     data = self.weather.get_data()
-    self.environment.update_timing()
+    self.environment.update()
 
     if socket:
       self.__send_message({'type':'update_weather','data':data})
@@ -763,14 +763,7 @@ class terrariumEngine(object):
     if len(parameters) > 0 and parameters[0] is not None:
       filter = parameters[0]
 
-    data = self.get_sensors(['average'])['sensors']
-    data['light']     = self.environment.get_light_state()
-    data['sprayer']   = self.environment.get_sprayer_state()
-    data['heater']    = self.environment.get_heater_state()
-    data['cooler']    = self.environment.get_cooler_state()
-    data['watertank'] = self.environment.get_watertank_state()
-    data['moisture']  = self.environment.get_moisture_state()
-    data['ph']  = self.environment.get_ph_state()
+    data = self.environment.get_data()
 
     if filter is not None and filter in data:
       data = { filter : data[filter]}

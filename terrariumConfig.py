@@ -130,6 +130,14 @@ class terrariumConfig(object):
               if 'archive' in data:
                 self.__config.set(section, 'archive', 'motion' if terrariumUtils.is_true(data['archive']) else 'disabled')
 
+        elif version == 360:
+          logger.info('Updating configuration file to version: %s' % (version,))
+          for section in self.__config.sections():
+            if section == 'environment':
+              data = self.__get_config(section)
+
+
+
       # Update version number
       self.__config.set('terrariumpi', 'version', str(to_version))
       self.__save_config()
@@ -294,34 +302,31 @@ class terrariumConfig(object):
     return config['port']
 
   # Environment functions
+
   def save_environment(self,data):
     '''Save the terrariumPI environment config
 
     '''
     config = {}
-    for environment_part in data:
-      for part in data[environment_part]:
-        # Do not save the following settings
-        if part in ['enabled','time_table','state','amount','current','temperature','humidity','distance','alarm','alarm_min','alarm_max','limit_max','limit_min','type','night_modus','error','lastaction']:
-          continue
-
-        if data[environment_part][part] is None:
-          data[environment_part][part] = ''
-        config[environment_part + '_' + part] = data[environment_part][part]
+    for key, value in terrariumUtils.flatten_dict(data).iteritems():
+      config[key] = value
 
     self.__config.remove_section('environment')
     return self.__update_config('environment',config,[])
 
   def get_environment(self):
-    config = self.__get_config('environment')
-    data = {'light' : {}, 'sprayer' : {}, 'heater' : {} , 'cooler' : {}, 'watertank' : {}, 'moisture' : {}, 'ph' : {}}
-    for key in config:
+    config = {}
+    for key, value in self.__get_config('environment').iteritems():
       config_keys = key.split('_')
       part = config_keys[0]
       del(config_keys[0])
-      data[part]['_'.join(config_keys)] = config[key]
 
-    return data
+      if part not in config:
+        config[part] = {}
+
+      config[part]['_'.join(config_keys)] = value
+
+    return config
   # End Environment functions
 
   # Profile functions
