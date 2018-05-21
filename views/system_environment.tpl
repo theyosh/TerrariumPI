@@ -20,7 +20,7 @@
           </div>
         </div>
         <form action="/api/config/environment" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
-          <div class="row">
+          <div class="row" id="environment_light">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
@@ -34,49 +34,26 @@
                 </div>
                 <div class="x_content">
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_mode">{{_('Light mode')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_mode">{{_('Mode')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_mode')}}">
+                      <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_mode')}}">
                         <select class="form-control" name="light_mode" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="disabled">{{_('Disabled')}}</option>
                           <option value="timer">{{_('Timer')}}</option>
+                          <!-- <option value="sensor">{{_('Sensor')}}</option> -->
                           <option value="weather">{{_('Weather')}}</option>
                         </select>
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_on">{{_('Lights on')}} </label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="light_on" required="required" type="text" placeholder="{{_('Lights on')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_on')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_off">{{_('Lights off')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="light_off" required="required" type="text" placeholder="{{_('Lights off')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_off')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_on_duration">{{_('Timer on duration')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="light_on_duration" required="required" type="text" placeholder="{{_('Timer on duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_on_duration')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_off_duration">{{_('Timer off duration')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="light_off_duration" required="required" type="text" placeholder="{{_('Timer off duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_off_duration')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_max_hours">{{_('Maximum lights hours')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_max_hours">{{_('Maximum hours')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control col-md-7 col-xs-12" name="light_max_hours" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Maximum lights hours')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_max_hours')}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_min_hours">{{_('Minimum light hours')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_min_hours">{{_('Minimum hours')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <input class="form-control col-md-7 col-xs-12" name="light_min_hours" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Minimum light hours')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_min_hours')}}">
                     </div>
@@ -87,24 +64,99 @@
                       <input class="form-control col-md-7 col-xs-12" name="light_hours_shift" required="required" type="text" pattern="[\-0-9\.]+" placeholder="{{_('Hours shift')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_hour_shift')}}">
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_power_switches">{{_('Power switches')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_lights_power_switches')}}">
-                        <select class="form-control" multiple="multiple" name="light_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
-                        </select>
+                  <!-- start accordion -->
+                    <div class="accordion" id="light_accordion" role="tablist" aria-multiselectable="true">
+                      <div class="panel">
+                        <a class="panel-heading" role="tab" id="light_heading_one" data-toggle="collapse" data-parent="#light_accordion" href="#light_collapse_one" aria-expanded="true" aria-controls="light_collapse_one"><h4 class="panel-title">{{_('Day')}}</h4></a>
+                        <div id="light_collapse_one" class="panel-collapse collapse" role="tabpanel" aria-labelledby="light_heading_one">
+                          <div class="panel-body">
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_alarm_min_timer_start">{{_('Start')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="light_alarm_min_timer_start" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_start')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_alarm_min_timer_stop">{{_('Stop')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="light_alarm_min_timer_stop" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_stop')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_alarm_min_timer_on">{{_('Timer on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="light_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_alarm_min_timer_off">{{_('Timer off')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="light_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_alarm_min_powerswitches">{{_('Power switches')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_switches')}}">
+                                  <select class="form-control" multiple="multiple" name="light_alarm_min_powerswitches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel">
+                        <a class="panel-heading collapsed" role="tab" id="light_heading_two" data-toggle="collapse" data-parent="#light_accordion" href="#light_collapse_two" aria-expanded="false" aria-controls="light_collapse_two"><h4 class="panel-title">{{_('Night')}}</h4></a>
+                        <div id="light_collapse_two" class="panel-collapse collapse" role="tabpanel" aria-labelledby="light_heading_two">
+                          <div class="panel-body">
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_alarm_max_timer_start">{{_('Start')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="light_alarm_max_timer_start" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_start')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_alarm_max_timer_stop">{{_('Stop')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="light_alarm_max_timer_stop" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_stop')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_alarm_max_timer_on">{{_('Timer on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="light_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_alarm_max_timer_off">{{_('Timer off')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="light_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_alarm_max_powerswitches">{{_('Power switches')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_switches')}}">
+                                  <select class="form-control" multiple="multiple" name="light_alarm_max_powerswitches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                    <!-- end of accordion -->
                 </div>
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row" id="environment_temperature">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2 class="blue"><i class="fa fa-umbrella"></i> {{_('Sprayer')}} <small class="data_update">{{_('Settings')}}</small></h2>
+                  <h2 class="red"><i class="fa fa-fire"></i> {{_('Temperature')}} <small class="data_update">{{_('Settings')}}</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -114,77 +166,212 @@
                 </div>
                 <div class="x_content">
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_mode">{{_('Sprayer mode')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_mode">{{_('Mode')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sprayer_mode')}}">
-                        <select class="form-control" name="sprayer_mode" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                      <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_mode')}}">
+                        <select class="form-control" name="temperature_mode" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="disabled">{{_('Disabled')}}</option>
                           <option value="timer">{{_('Timer')}}</option>
                           <option value="sensor">{{_('Sensor')}}</option>
+                          <option value="weather">{{_('Weather')}}</option>
                         </select>
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Enabled when lights are off')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sprayer_enable_during_night')}}">
-                      <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="sprayer_night_enabled" type="radio" value="true">{{_('Yes')}}</label>
-                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="sprayer_night_enabled" type="radio" value="false">{{_('No')}}</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_on_duration">{{_('Timer on duration')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_sensors">{{_('Sensors')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="sprayer_on_duration" required="required" type="text" placeholder="{{_('Timer on duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sprayer_on_duration')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_off_duration">{{_('Timer off duration')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="sprayer_off_duration" required="required" type="text" placeholder="{{_('Timer off duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sprayer_off_duration')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_spray_timeout">{{_('Sprayer wait timeout (seconds)')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="sprayer_spray_timeout" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Sprayer wait timeout (seconds)')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sprayer_delay')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_spray_duration">{{_('Spray duration (seconds)')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="sprayer_spray_duration" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Sprayer spray duration (seconds)')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sprayer_duration')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_power_switches">{{_('Power switches')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sprayer_power_switches')}}">
-                        <select class="form-control" multiple="multiple" name="sprayer_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                      <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sensors')}}">
+                        <select class="form-control" multiple="multiple" name="temperature_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
                         </select>
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_sensors">{{_('Humidity sensors')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_day_night_difference">{{_('Day/night difference')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sprayer_humidity_sensors')}}">
-                        <select class="form-control" multiple="multiple" name="sprayer_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
+                      <input class="form-control col-md-7 col-xs-12" name="temperature_day_night_difference" required="required" type="text" placeholder="{{_('Value difference during the night')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_difference')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_day_night_source">{{_('Day/night source')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                        <select class="form-control" name="temperature_day_night_source" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option value="weather">{{_('Weather')}}</option>
+                          <option value="lights">{{_('Lights')}}</option>
                         </select>
                       </div>
                     </div>
                   </div>
+                  <!-- start accordion -->
+                    <div class="accordion" id="temperature_accordion" role="tablist" aria-multiselectable="true">
+                      <div class="panel">
+                        <a class="panel-heading" role="tab" id="temperature_heading_one" data-toggle="collapse" data-parent="#temperature_accordion" href="#temperature_collapse_one" aria-expanded="true" aria-controls="temperature_collapse_one"><h4 class="panel-title">Low alarm</h4></a>
+                        <div id="temperature_collapse_one" class="panel-collapse collapse" role="tabpanel" aria-labelledby="temperature_heading_one">
+                          <div class="panel-body">
+
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_min_timer_start">{{_('Start')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_min_timer_start" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_start')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_min_timer_stop">{{_('Stop')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_min_timer_stop" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_stop')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_min_timer_on">{{_('Timer on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_min_timer_off">{{_('Timer off')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_min_light_state">{{_('Light state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="temperature_alarm_min_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="on">{{_('On')}}</option>
+                                    <option value="off">{{_('Off')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_min_door_state">{{_('Door state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="temperature_alarm_min_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="open">{{_('Open')}}</option>
+                                    <option value="closed">{{_('Closed')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_min_duration_on">{{_('Power on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_min_duration_on" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_min_settle">{{_('Settle timeout')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_min_settle" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_temperature_delay')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_min_powerswitches">{{_('Power switches')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_switches')}}">
+                                  <select class="form-control" multiple="multiple" name="temperature_alarm_min_powerswitches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel">
+                        <a class="panel-heading collapsed" role="tab" id="temperature_heading_two" data-toggle="collapse" data-parent="#temperature_accordion" href="#temperature_collapse_two" aria-expanded="false" aria-controls="temperature_collapse_two"><h4 class="panel-title">High alarm</h4></a>
+                        <div id="temperature_collapse_two" class="panel-collapse collapse" role="tabpanel" aria-labelledby="temperature_heading_two">
+                          <div class="panel-body">
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_max_timer_start">{{_('Start')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_max_timer_start" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_start')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_max_timer_stop">{{_('Stop')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_max_timer_stop" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_stop')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_max_timer_on">{{_('Timer on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_max_timer_off">{{_('Timer off')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_max_light_state">{{_('Light state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="temperature_alarm_max_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="on">{{_('On')}}</option>
+                                    <option value="off">{{_('Off')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_max_door_state">{{_('Door state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="temperature_alarm_max_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="open">{{_('Open')}}</option>
+                                    <option value="closed">{{_('Closed')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_max_duration_on">{{_('Power on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_max_duration_on" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_max_settle">{{_('Settle timeout')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_max_settle" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_temperature_delay')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_max_powerswitches">{{_('Power switches')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_switches')}}">
+                                  <select class="form-control" multiple="multiple" name="temperature_alarm_max_powerswitches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end of accordion -->
                 </div>
               </div>
             </div>
           </div>
-          <div class="row">
+
+
+          <div class="row" id="environment_humidity">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2 class="blue"><i class="fa fa-umbrella"></i> {{_('Moisture')}} <small class="data_update">{{_('Settings')}}</small></h2>
+                  <h2 class="blue"><i class="fa fa-tint"></i> {{_('Humidity')}} <small class="data_update">{{_('Settings')}}</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -194,271 +381,426 @@
                 </div>
                 <div class="x_content">
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_mode">{{_('Moisture mode')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_mode">{{_('Mode')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_moisture_mode')}}">
+                      <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_mode')}}">
+                        <select class="form-control" name="humidity_mode" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option value="disabled">{{_('Disabled')}}</option>
+                          <option value="timer">{{_('Timer')}}</option>
+                          <option value="sensor">{{_('Sensor')}}</option>
+                          <option value="weather">{{_('Weather')}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_sensors">{{_('Sensors')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sensors')}}">
+                        <select class="form-control" multiple="multiple" name="humidity_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_day_night_difference">{{_('Day/night difference')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="humidity_day_night_difference" required="required" type="text" placeholder="{{_('Value difference during the night')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_difference')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_day_night_source">{{_('Day/night source')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                        <select class="form-control" name="humidity_day_night_source" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option value="weather">{{_('Weather')}}</option>
+                          <option value="lights">{{_('Lights')}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- start accordion -->
+                    <div class="accordion" id="humidity_accordion" role="tablist" aria-multiselectable="true">
+                      <div class="panel">
+                        <a class="panel-heading" role="tab" id="humidity_heading_one" data-toggle="collapse" data-parent="#humidity_accordion" href="#humidity_collapse_one" aria-expanded="true" aria-controls="humidity_collapse_one"><h4 class="panel-title">Low alarm</h4></a>
+                        <div id="humidity_collapse_one" class="panel-collapse collapse" role="tabpanel" aria-labelledby="humidity_heading_one">
+                          <div class="panel-body">
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_min_timer_start">{{_('Start')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_min_timer_start" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_start')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_min_timer_stop">{{_('Stop')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_min_timer_stop" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_stop')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_min_timer_on">{{_('Timer on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_min_timer_off">{{_('Timer off')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_min_light_state">{{_('Light state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="humidity_alarm_min_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="on">{{_('On')}}</option>
+                                    <option value="off">{{_('Off')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_min_door_state">{{_('Door state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="humidity_alarm_min_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="open">{{_('Open')}}</option>
+                                    <option value="closed">{{_('Closed')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_min_duration_on">{{_('Power on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_min_duration_on" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_min_settle">{{_('Settle timeout')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_min_settle" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_humidity_delay')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_min_powerswitches">{{_('Power switches')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_switches')}}">
+                                  <select class="form-control" multiple="multiple" name="humidity_alarm_min_powerswitches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel">
+                        <a class="panel-heading collapsed" role="tab" id="humidity_heading_two" data-toggle="collapse" data-parent="#humidity_accordion" href="#humidity_collapse_two" aria-expanded="false" aria-controls="humidity_collapse_two"><h4 class="panel-title">High alarm</h4></a>
+                        <div id="humidity_collapse_two" class="panel-collapse collapse" role="tabpanel" aria-labelledby="humidity_heading_two">
+                          <div class="panel-body">
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_max_timer_start">{{_('Start')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_max_timer_start" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_start')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_max_timer_stop">{{_('Stop')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_max_timer_stop" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_stop')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_max_timer_on">{{_('Timer on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_max_timer_off">{{_('Timer off')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_max_light_state">{{_('Light state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="humidity_alarm_max_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="on">{{_('On')}}</option>
+                                    <option value="off">{{_('Off')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_max_door_state">{{_('Door state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="humidity_alarm_max_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="open">{{_('Open')}}</option>
+                                    <option value="closed">{{_('Closed')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_max_duration_on">{{_('Power on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_max_duration_on" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_max_settle">{{_('Settle timeout')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_max_settle" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_humidity_delay')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_max_powerswitches">{{_('Power switches')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_switches')}}">
+                                  <select class="form-control" multiple="multiple" name="humidity_alarm_max_powerswitches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end of accordion -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="row" id="environment_moisture">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2 class="blue"><i class="fa fa-tint"></i> {{_('Moisture')}} <small class="data_update">{{_('Settings')}}</small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                      <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_mode">{{_('Mode')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_mode')}}">
                         <select class="form-control" name="moisture_mode" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="disabled">{{_('Disabled')}}</option>
                           <option value="timer">{{_('Timer')}}</option>
                           <option value="sensor">{{_('Sensor')}}</option>
+                          <option value="weather">{{_('Weather')}}</option>
                         </select>
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Enabled when lights are off')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_moisture_enable_during_night')}}">
-                      <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="moisture_night_enabled" type="radio" value="true">{{_('Yes')}}</label>
-                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="moisture_night_enabled" type="radio" value="false">{{_('No')}}</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_on_duration">{{_('Timer on duration')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_sensors">{{_('Sensors')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="moisture_on_duration" required="required" type="text" placeholder="{{_('Timer on duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_moisture_on_duration')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_off_duration">{{_('Timer off duration')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="moisture_off_duration" required="required" type="text" placeholder="{{_('Timer off duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_moisture_off_duration')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_spray_timeout">{{_('Moisture wait timeout (seconds)')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="moisture_spray_timeout" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Moisture wait timeout (seconds)')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_moisture_delay')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_spray_duration">{{_('Spray duration (seconds)')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="moisture_spray_duration" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Sprayer spray duration (seconds)')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_moisture_duration')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_power_switches">{{_('Power switches')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_moisture_power_switches')}}">
-                        <select class="form-control" multiple="multiple" name="moisture_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sprayer_sensors">{{_('Moisture sensors')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_moisture_moisture_sensors')}}">
+                      <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sensors')}}">
                         <select class="form-control" multiple="multiple" name="moisture_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
                         </select>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2 class="blue"><i class="fa fa-tint"></i> {{_('Water tank')}} <small class="data_update">{{_('Settings')}}</small></h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li>
-                      <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_mode">{{_('Water tank mode')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_day_night_difference">{{_('Day/night difference')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_mode')}}">
-                        <select class="form-control" name="watertank_mode" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
-                          <option value="disabled">{{_('Disabled')}}</option>
-                          <option value="weather">{{_('Weather')}}</option>
-                          <option value="timer">{{_('Timer')}}</option>
-                          <option value="sensor">{{_('Sensor')}}</option>
-                        </select>
-                      </div>
+                      <input class="form-control col-md-7 col-xs-12" name="moisture_day_night_difference" required="required" type="text" placeholder="{{_('Value difference during the night')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_difference')}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_on">{{_('Water pump on')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_day_night_source">{{_('Day/night source')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="watertank_on" required="required" type="text" placeholder="{{_('Water pump on')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_on')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_off">{{_('Water pump off')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="watertank_off" required="required" type="text" placeholder="{{_('Water pump off')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_off')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_on_duration">{{_('Timer on duration')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="watertank_on_duration" required="required" type="text" placeholder="{{_('Timer on duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_on_duration')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_off_duration">{{_('Timer off duration')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="watertank_off_duration" required="required" type="text" placeholder="{{_('Timer off duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_off_duration')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_pump_duration">{{_('Water tank pump duration (seconds)')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="watertank_pump_duration" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Water tank pump duration (seconds)')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_duration')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_volume">{{_('Water tank volume in liters')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="watertank_volume" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Water tank volume in liters')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_volume')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_height">{{_('Water tank height')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="watertank_height" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Water tank height')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_height')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_power_switches">{{_('Power switches')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_power_switches')}}">
-                        <select class="form-control" multiple="multiple" name="watertank_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_sensors">{{_('Distance sensors')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_distance_sensors')}}">
-                        <select class="form-control" multiple="multiple" name="watertank_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2 class="red"><i class="fa fa-fire"></i> {{_('Heater')}} <small class="data_update">{{_('Settings')}}</small></h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li>
-                      <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_mode">{{_('Heater mode')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_mode')}}">
-                        <select class="form-control" name="heater_mode" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
-                          <option value="disabled">{{_('Disabled')}}</option>
-                          <option value="timer">{{_('Timer')}}</option>
-                          <option value="weather">{{_('Weather')}}</option>
-                          <option value="sensor">{{_('Sensor')}}</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Enabled when lights are on')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_enable_during_day')}}">
-                      <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="heater_day_enabled" type="radio" value="true">{{_('Yes')}}</label>
-                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="heater_day_enabled" type="radio" value="false">{{_('No')}}</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_on">{{_('Heater on')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="heater_on" required="required" type="text" placeholder="{{_('Heater on')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_on')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_off">{{_('Heater off')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="heater_off" required="required" type="text" placeholder="{{_('Heater off')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_off')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_on_duration">{{_('Timer on duration')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="heater_on_duration" required="required" type="text" placeholder="{{_('Timer on duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_on_duration')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_off_duration">{{_('Timer off duration')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="heater_off_duration" required="required" type="text" placeholder="{{_('Timer off duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_off_duration')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_settle_timeout">{{_('Temperature settle time')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="heater_settle_timeout" required="required" type="text" placeholder="{{_('Temperature settle time')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_settle_timeout')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_night_difference">{{_('Day/night difference temperature')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="heater_night_difference" required="required" type="text" placeholder="{{_('Temperature difference during the night')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_night_difference')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_night_source">{{_('Day/night difference source')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_night_source')}}">
-                        <select class="form-control" name="heater_night_source" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                      <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                        <select class="form-control" name="moisture_day_night_source" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="weather">{{_('Weather')}}</option>
                           <option value="lights">{{_('Lights')}}</option>
                         </select>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_power_switches">{{_('Power switches')}}</label>
-                      <div class="col-md-7 col-sm-6 col-xs-10">
-                        <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_power_switches')}}">
-                          <select class="form-control" multiple="multiple" name="heater_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heater_sensors">{{_('Temperature sensors')}}</label>
-                      <div class="col-md-7 col-sm-6 col-xs-10">
-                        <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_heater_temperature_sensors')}}">
-                          <select class="form-control" multiple="multiple" name="heater_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
-                          </select>
-                        </div>
-                      </div>
-                    </div>
                   </div>
+                  <!-- start accordion -->
+                    <div class="accordion" id="moisture_accordion" role="tablist" aria-multiselectable="true">
+                      <div class="panel">
+                        <a class="panel-heading" role="tab" id="moisture_heading_one" data-toggle="collapse" data-parent="#moisture_accordion" href="#moisture_collapse_one" aria-expanded="true" aria-controls="moisture_collapse_one"><h4 class="panel-title">Low alarm</h4></a>
+                        <div id="moisture_collapse_one" class="panel-collapse collapse" role="tabpanel" aria-labelledby="moisture_heading_one">
+                          <div class="panel-body">
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_min_timer_start">{{_('Start')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_min_timer_start" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_start')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_min_timer_stop">{{_('Stop')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_min_timer_stop" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_stop')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_min_timer_on">{{_('Timer on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_min_timer_off">{{_('Timer off')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_min_light_state">{{_('Light state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="moisture_alarm_min_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="on">{{_('On')}}</option>
+                                    <option value="off">{{_('Off')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_min_door_state">{{_('Door state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="moisture_alarm_min_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="open">{{_('Open')}}</option>
+                                    <option value="closed">{{_('Closed')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_min_duration_on">{{_('Power on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_min_duration_on" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_min_settle">{{_('Settle timeout')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_min_settle" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_moisture_delay')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_min_powerswitches">{{_('Power switches')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_switches')}}">
+                                  <select class="form-control" multiple="multiple" name="moisture_alarm_min_powerswitches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel">
+                        <a class="panel-heading collapsed" role="tab" id="moisture_heading_two" data-toggle="collapse" data-parent="#moisture_accordion" href="#moisture_collapse_two" aria-expanded="false" aria-controls="moisture_collapse_two"><h4 class="panel-title">High alarm</h4></a>
+                        <div id="moisture_collapse_two" class="panel-collapse collapse" role="tabpanel" aria-labelledby="moisture_heading_two">
+                          <div class="panel-body">
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_max_timer_start">{{_('Start')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_max_timer_start" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_start')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_max_timer_stop">{{_('Stop')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_max_timer_stop" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_stop')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_max_timer_on">{{_('Timer on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_max_timer_off">{{_('Timer off')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_max_light_state">{{_('Light state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="moisture_alarm_max_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="on">{{_('On')}}</option>
+                                    <option value="off">{{_('Off')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_max_door_state">{{_('Door state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="moisture_alarm_max_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="open">{{_('Open')}}</option>
+                                    <option value="closed">{{_('Closed')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_max_duration_on">{{_('Power on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_max_duration_on" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_max_settle">{{_('Settle timeout')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_max_settle" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_moisture_delay')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_max_powerswitches">{{_('Power switches')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_switches')}}">
+                                  <select class="form-control" multiple="multiple" name="moisture_alarm_max_powerswitches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end of accordion -->
                 </div>
               </div>
             </div>
           </div>
-          <div class="row">
+
+          <div class="row" id="environment_conductivity">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2 class="blue"><i class="fa fa-flag-o"></i> {{_('Cooling')}} <small class="data_update">{{_('Settings')}}</small></h2>
+                  <h2 class="orange"><i class="fa fa-flash"></i> {{_('Conductivity')}} <small class="data_update">{{_('Settings')}}</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -468,78 +810,211 @@
                 </div>
                 <div class="x_content">
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cooler_mode">{{_('Cooler mode')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_mode">{{_('Mode')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_cooler_mode')}}">
-                        <select class="form-control" name="cooler_mode" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                      <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_mode')}}">
+                        <select class="form-control" name="conductivity_mode" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="disabled">{{_('Disabled')}}</option>
                           <option value="timer">{{_('Timer')}}</option>
-                          <option value="weather">{{_('Weather')}}</option>
                           <option value="sensor">{{_('Sensor')}}</option>
+                          <option value="weather">{{_('Weather')}}</option>
                         </select>
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Enabled when lights are off')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_cooler_enable_during_night')}}">
-                      <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="cooler_night_enabled" type="radio" value="true">{{_('Yes')}}</label>
-                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="cooler_night_enabled" type="radio" value="false">{{_('No')}}</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cooler_on">{{_('Cooler on')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_sensors">{{_('Sensors')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="cooler_on" required="required" type="text" placeholder="{{_('Cooler on')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_cooler_on')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cooler_off">{{_('Cooler off')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="cooler_off" required="required" type="text" placeholder="{{_('Cooler off')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_cooler_off')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cooler_on_duration">{{_('Timer on duration')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="cooler_on_duration" required="required" type="text" placeholder="{{_('Timer on duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_cooler_on_duration')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cooler_off_duration">{{_('Timer off duration')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="cooler_off_duration" required="required" type="text" placeholder="{{_('Timer off duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_cooler_off_duration')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cooler_power_switches">{{_('Power switches')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_cooler_power_switches')}}">
-                        <select class="form-control" multiple="multiple" name="cooler_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                      <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sensors')}}">
+                        <select class="form-control" multiple="multiple" name="conductivity_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
                         </select>
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cooler_sensors">{{_('Temperature sensors')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_day_night_difference">{{_('Day/night difference')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_cooler_temperature_sensors')}}">
-                        <select class="form-control" multiple="multiple" name="cooler_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
+                      <input class="form-control col-md-7 col-xs-12" name="conductivity_day_night_difference" required="required" type="text" placeholder="{{_('Value difference during the night')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_difference')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_day_night_source">{{_('Day/night source')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                        <select class="form-control" name="conductivity_day_night_source" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option value="weather">{{_('Weather')}}</option>
+                          <option value="lights">{{_('Lights')}}</option>
                         </select>
                       </div>
                     </div>
                   </div>
+                  <!-- start accordion -->
+                    <div class="accordion" id="conductivity_accordion" role="tablist" aria-multiselectable="true">
+                      <div class="panel">
+                        <a class="panel-heading" role="tab" id="conductivity_heading_one" data-toggle="collapse" data-parent="#conductivity_accordion" href="#conductivity_collapse_one" aria-expanded="true" aria-controls="conductivity_collapse_one"><h4 class="panel-title">Low alarm</h4></a>
+                        <div id="conductivity_collapse_one" class="panel-collapse collapse" role="tabpanel" aria-labelledby="conductivity_heading_one">
+                          <div class="panel-body">
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_min_timer_start">{{_('Start')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_min_timer_start" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_start')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_min_timer_stop">{{_('Stop')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_min_timer_stop" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_stop')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_min_timer_on">{{_('Timer on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_min_timer_off">{{_('Timer off')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_min_light_state">{{_('Light state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="conductivity_alarm_min_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="on">{{_('On')}}</option>
+                                    <option value="off">{{_('Off')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_min_door_state">{{_('Door state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="conductivity_alarm_min_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="open">{{_('Open')}}</option>
+                                    <option value="closed">{{_('Closed')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_min_duration_on">{{_('Power on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_min_duration_on" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_min_settle">{{_('Settle timeout')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_min_settle" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_conductivity_delay')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_min_powerswitches">{{_('Power switches')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_switches')}}">
+                                  <select class="form-control" multiple="multiple" name="conductivity_alarm_min_powerswitches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel">
+                        <a class="panel-heading collapsed" role="tab" id="conductivity_heading_two" data-toggle="collapse" data-parent="#conductivity_accordion" href="#conductivity_collapse_two" aria-expanded="false" aria-controls="conductivity_collapse_two"><h4 class="panel-title">High alarm</h4></a>
+                        <div id="conductivity_collapse_two" class="panel-collapse collapse" role="tabpanel" aria-labelledby="conductivity_heading_two">
+                          <div class="panel-body">
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_max_timer_start">{{_('Start')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_max_timer_start" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_start')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_max_timer_stop">{{_('Stop')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_max_timer_stop" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_stop')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_max_timer_on">{{_('Timer on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_max_timer_off">{{_('Timer off')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_max_light_state">{{_('Light state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="conductivity_alarm_max_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="on">{{_('On')}}</option>
+                                    <option value="off">{{_('Off')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_max_door_state">{{_('Door state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="conductivity_alarm_max_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="open">{{_('Open')}}</option>
+                                    <option value="closed">{{_('Closed')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_max_duration_on">{{_('Power on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_max_duration_on" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_max_settle">{{_('Settle timeout')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_max_settle" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_conductivity_delay')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_max_powerswitches">{{_('Power switches')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_switches')}}">
+                                  <select class="form-control" multiple="multiple" name="conductivity_alarm_max_powerswitches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end of accordion -->
                 </div>
               </div>
             </div>
           </div>
-          <div class="row">
+
+
+          <div class="row" id="environment_ph">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2 class="green"><i class="fa fa-tachometer"></i> {{_('Ph')}} <small class="data_update">{{_('Settings')}}</small></h2>
+                  <h2 class="green"><i class="fa fa-tachometer"></i> {{_('pH')}} <small class="data_update">{{_('Settings')}}</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -549,91 +1024,422 @@
                 </div>
                 <div class="x_content">
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_mode">{{_('Ph mode')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_mode">{{_('Mode')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_mode')}}">
+                      <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_mode')}}">
                         <select class="form-control" name="ph_mode" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="disabled">{{_('Disabled')}}</option>
                           <option value="timer">{{_('Timer')}}</option>
-                          <option value="weather">{{_('Weather')}}</option>
                           <option value="sensor">{{_('Sensor')}}</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Enabled when lights are on')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_enable_during_day')}}">
-                      <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="ph_day_enabled" type="radio" value="true">{{_('Yes')}}</label>
-                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="ph_day_enabled" type="radio" value="false">{{_('No')}}</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_on">{{_('Power on')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="ph_on" required="required" type="text" placeholder="{{_('Power on')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_on')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_off">{{_('Power off')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="ph_off" required="required" type="text" placeholder="{{_('Power off')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_off')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_on_duration">{{_('Timer on duration')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="ph_on_duration" required="required" type="text" placeholder="{{_('Timer on duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_on_duration')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_off_duration">{{_('Timer off duration')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="ph_off_duration" required="required" type="text" placeholder="{{_('Timer off duration')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_off_duration')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_settle_timeout">{{_('Sensor(s) settle time')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="ph_settle_timeout" required="required" type="text" placeholder="{{_('Sensor(s) settle time')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_settle_timeout')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_night_difference">{{_('Day/night difference')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control col-md-7 col-xs-12" name="ph_night_difference" required="required" type="text" placeholder="{{_('Temperature difference during the night')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_night_difference')}}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_night_source">{{_('Day/night difference source')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_night_source')}}">
-                        <select class="form-control" name="ph_night_source" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="weather">{{_('Weather')}}</option>
-                          <option value="lights">{{_('Lights')}}</option>
-                        </select>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_power_switches">{{_('Power switches')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_power_switches')}}">
-                        <select class="form-control" multiple="multiple" name="ph_power_switches" tabindex="-1" placeholder="{{_('Select an option')}}">
                         </select>
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_sensors">{{_('Ph sensors')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_sensors">{{_('Sensors')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_ph_ph_sensors')}}">
+                      <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sensors')}}">
                         <select class="form-control" multiple="multiple" name="ph_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
                         </select>
                       </div>
                     </div>
                   </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_day_night_difference">{{_('Day/night difference')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="ph_day_night_difference" required="required" type="text" placeholder="{{_('Value difference during the night')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_difference')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_day_night_source">{{_('Day/night source')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                        <select class="form-control" name="ph_day_night_source" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option value="weather">{{_('Weather')}}</option>
+                          <option value="lights">{{_('Lights')}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- start accordion -->
+                    <div class="accordion" id="ph_accordion" role="tablist" aria-multiselectable="true">
+                      <div class="panel">
+                        <a class="panel-heading" role="tab" id="ph_heading_one" data-toggle="collapse" data-parent="#ph_accordion" href="#ph_collapse_one" aria-expanded="true" aria-controls="ph_collapse_one"><h4 class="panel-title">Low alarm</h4></a>
+                        <div id="ph_collapse_one" class="panel-collapse collapse" role="tabpanel" aria-labelledby="ph_heading_one">
+                          <div class="panel-body">
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_min_timer_start">{{_('Start')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="ph_alarm_min_timer_start" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_start')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_min_timer_stop">{{_('Stop')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="ph_alarm_min_timer_stop" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_stop')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_min_timer_on">{{_('Timer on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="ph_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_min_timer_off">{{_('Timer off')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="ph_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_min_light_state">{{_('Light state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="ph_alarm_min_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="on">{{_('On')}}</option>
+                                    <option value="off">{{_('Off')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_min_door_state">{{_('Door state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="ph_alarm_min_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="open">{{_('Open')}}</option>
+                                    <option value="closed">{{_('Closed')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_min_duration_on">{{_('Power on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="ph_alarm_min_duration_on" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_min_settle">{{_('Settle timeout')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="ph_alarm_min_settle" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_ph_delay')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_min_powerswitches">{{_('Power switches')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_switches')}}">
+                                  <select class="form-control" multiple="multiple" name="ph_alarm_min_powerswitches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel">
+                        <a class="panel-heading collapsed" role="tab" id="ph_heading_two" data-toggle="collapse" data-parent="#ph_accordion" href="#ph_collapse_two" aria-expanded="false" aria-controls="ph_collapse_two"><h4 class="panel-title">High alarm</h4></a>
+                        <div id="ph_collapse_two" class="panel-collapse collapse" role="tabpanel" aria-labelledby="ph_heading_two">
+                          <div class="panel-body">
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_max_timer_start">{{_('Start')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="ph_alarm_max_timer_start" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_start')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_max_timer_stop">{{_('Stop')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="ph_alarm_max_timer_stop" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_stop')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_max_timer_on">{{_('Timer on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="ph_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_max_timer_off">{{_('Timer off')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="ph_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_max_light_state">{{_('Light state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="ph_alarm_max_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="on">{{_('On')}}</option>
+                                    <option value="off">{{_('Off')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_max_door_state">{{_('Door state')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                  <select class="form-control" name="ph_alarm_max_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                    <option value="open">{{_('Open')}}</option>
+                                    <option value="closed">{{_('Closed')}}</option>
+                                    <option value="always">{{_('Always')}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_max_duration_on">{{_('Power on')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="ph_alarm_max_duration_on" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_on_duration')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_max_settle">{{_('Settle timeout')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <input class="form-control col-md-7 col-xs-12" name="ph_alarm_max_settle" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_ph_delay')}}">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_max_powerswitches">{{_('Power switches')}}</label>
+                              <div class="col-md-7 col-sm-6 col-xs-10">
+                                <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_switches')}}">
+                                  <select class="form-control" multiple="multiple" name="ph_alarm_max_powerswitches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end of accordion -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row" id="environment_watertank">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2 class="blue"><i class="fa fa-tint"></i> {{_('Watertank')}} <small class="data_update">{{_('Settings')}}</small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                      <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_mode">{{_('Mode')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_mode')}}">
+                        <select class="form-control" name="watertank_mode" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option value="disabled">{{_('Disabled')}}</option>
+                          <option value="timer">{{_('Timer')}}</option>
+                          <option value="sensor">{{_('Sensor')}}</option>
+                          <option value="weather">{{_('Weather')}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_sensors">{{_('Sensors')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_sensors')}}">
+                        <select class="form-control" multiple="multiple" name="watertank_sensors" tabindex="-1" placeholder="{{_('Select an option')}}">
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_volume">{{_('Volume')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="watertank_volume" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Volume in liters')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_volume')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_height">{{_('Height')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="watertank_height" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Height in cm')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_height')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_offset">{{_('Offset')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control col-md-7 col-xs-12" name="watertank_offset" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Offset in cm')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_watertank_offset')}}">
+                    </div>
+                  </div>
+                  <!-- start accordion -->
+                  <div class="accordion" id="watertank_accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel">
+                      <a class="panel-heading" role="tab" id="watertank_heading_one" data-toggle="collapse" data-parent="#watertank_accordion" href="#watertank_collapse_one" aria-expanded="true" aria-controls="watertank_collapse_one"><h4 class="panel-title">Low alarm</h4></a>
+                      <div id="watertank_collapse_one" class="panel-collapse collapse" role="tabpanel" aria-labelledby="watertank_heading_one">
+                        <div class="panel-body">
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_min_timer_start">{{_('Start')}}</label>
+                            <div class="col-md-7 col-sm-6 col-xs-10">
+                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_min_timer_start" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_start')}}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_min_timer_stop">{{_('Stop')}}</label>
+                            <div class="col-md-7 col-sm-6 col-xs-10">
+                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_min_timer_stop" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_stop')}}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_min_timer_on">{{_('Timer on')}}</label>
+                            <div class="col-md-7 col-sm-6 col-xs-10">
+                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_min_timer_off">{{_('Timer off')}}</label>
+                            <div class="col-md-7 col-sm-6 col-xs-10">
+                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                            </div>
+                          </div>
+<!--
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_min_light_state">{{_('Light state')}}</label>
+                            <div class="col-md-7 col-sm-6 col-xs-10">
+                              <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                <select class="form-control" name="watertank_alarm_min_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                  <option value="on">{{_('On')}}</option>
+                                  <option value="off">{{_('Off')}}</option>
+                                  <option value="always">{{_('Always')}}</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_min_door_state">{{_('Door state')}}</label>
+                            <div class="col-md-7 col-sm-6 col-xs-10">
+                              <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                <select class="form-control" name="watertank_alarm_min_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                  <option value="open">{{_('Open')}}</option>
+                                  <option value="closed">{{_('Closed')}}</option>
+                                  <option value="always">{{_('Always')}}</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          -->
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_min_duration_on">{{_('Power on')}}</label>
+                            <div class="col-md-7 col-sm-6 col-xs-10">
+                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_min_duration_on" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_on_duration')}}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_min_settle">{{_('Settle timeout')}}</label>
+                            <div class="col-md-7 col-sm-6 col-xs-10">
+                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_min_settle" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_watertank_delay')}}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_min_powerswitches">{{_('Power switches')}}</label>
+                            <div class="col-md-7 col-sm-6 col-xs-10">
+                              <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_switches')}}">
+                                <select class="form-control" multiple="multiple" name="watertank_alarm_min_powerswitches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel">
+                      <a class="panel-heading collapsed" role="tab" id="watertank_heading_two" data-toggle="collapse" data-parent="#watertank_accordion" href="#watertank_collapse_two" aria-expanded="false" aria-controls="watertank_collapse_two"><h4 class="panel-title">High alarm</h4></a>
+                      <div id="watertank_collapse_two" class="panel-collapse collapse" role="tabpanel" aria-labelledby="watertank_heading_two">
+                        <div class="panel-body">
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_max_timer_start">{{_('Start')}}</label>
+                            <div class="col-md-7 col-sm-6 col-xs-10">
+                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_max_timer_start" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_start')}}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_max_timer_stop">{{_('Stop')}}</label>
+                            <div class="col-md-7 col-sm-6 col-xs-10">
+                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_max_timer_stop" required="required" type="text" placeholder="{{_('Timestamp')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_stop')}}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_max_timer_on">{{_('Timer on')}}</label>
+                            <div class="col-md-7 col-sm-6 col-xs-10">
+                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_max_timer_off">{{_('Timer off')}}</label>
+                            <div class="col-md-7 col-sm-6 col-xs-10">
+                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                            </div>
+                          </div>
+                          <!--
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_max_light_state">{{_('Light state')}}</label>
+                            <div class="col-md-7 col-sm-6 col-xs-10">
+                              <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                <select class="form-control" name="watertank_alarm_max_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                  <option value="on">{{_('On')}}</option>
+                                  <option value="off">{{_('Off')}}</option>
+                                  <option value="always">{{_('Always')}}</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_max_door_state">{{_('Door state')}}</label>
+                            <div class="col-md-7 col-sm-6 col-xs-10">
+                              <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_day_night_source')}}">
+                                <select class="form-control" name="watertank_alarm_max_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                  <option value="open">{{_('Open')}}</option>
+                                  <option value="closed">{{_('Closed')}}</option>
+                                  <option value="always">{{_('Always')}}</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          -->
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_max_duration_on">{{_('Power on')}}</label>
+                            <div class="col-md-7 col-sm-6 col-xs-10">
+                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_max_duration_on" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_on_duration')}}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_max_settle">{{_('Settle timeout')}}</label>
+                            <div class="col-md-7 col-sm-6 col-xs-10">
+                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_max_settle" required="required" type="text" pattern="[0-9\.]+" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_watertank_delay')}}">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_max_powerswitches">{{_('Power switches')}}</label>
+                            <div class="col-md-7 col-sm-6 col-xs-10">
+                              <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_power_switches')}}">
+                                <select class="form-control" multiple="multiple" name="watertank_alarm_max_powerswitches" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- end of accordion -->
                 </div>
               </div>
             </div>
@@ -651,16 +1457,12 @@
         </form>
         <script type="text/javascript">
           var switches_loaded = false;
-          var humidity_sensors_loaded = false;
-          var temperature_sensors_loaded = false;
-          var distance_sensors_loaded = false;
-          var moisture_sensors_loaded = false;
-          var ph_sensors_loaded = false;
+          var sensors_loaded = false;
 
           $(document).ready(function() {
             init_form_settings('environment');
 
-            $('select[name$="_night_source"]').select2({
+            $('select[name$="_source"],select[name$="_state"]').select2({
               placeholder: '{{_('Select an option')}}',
               allowClear: false,
               minimumResultsForSearch: Infinity
@@ -671,49 +1473,52 @@
               allowClear: false,
               minimumResultsForSearch: Infinity
             }).on('change',function() {
-              var part = this.name.replace('_mode','')
-              $('input[name^="' + part + '"], select[name^="' + part + '"]').removeAttr('readonly','disabled');
+              var part = this.name.replace('_mode','');
+              var environment_part = $('div#environment_' + part);
+              environment_part.find('input,select').removeAttr('readonly','disabled');
+
               switch (this.value) {
                 case 'disabled':
-                  $('input[name^="' + part + '"], select[name^="' + part + '"]:not(:first)').attr('readonly','readonly');
+                  environment_part.find('input,select:not(:first)').attr('readonly','readonly');
                   break;
 
                 case 'timer':
-                  $('input[name="' + part + '_max_hours"]').attr('readonly','readonly');
-                  $('input[name="' + part + '_min_hours"]').attr('readonly','readonly');
-                  $('input[name="' + part + '_hours_shift"]').attr('readonly','readonly');
+                  //$('input[name="' + part + '_max_hours"]').attr('readonly','readonly');
+                  //$('input[name="' + part + '_min_hours"]').attr('readonly','readonly');
+                  //$('input[name="' + part + '_hours_shift"]').attr('readonly','readonly');
                   break;
 
                 case 'weather':
                   // Load current sun rise and sun set based on weather data
                   $.get('/api/weather',function(data){
-                    if (part == 'heater') {
-                      // For heater we swap the times, because heater should not be running when it is 'day'
-                      $('input[name="' + part + '_on"]').val(moment(data.sun.set * 1000).format('LT'));
-                      $('input[name="' + part + '_off"]').val(moment(data.sun.rise * 1000).format('LT'));
-                    } else {
-                      $('input[name="' + part + '_on"]').val(moment(data.sun.rise * 1000).format('LT'));
-                      $('input[name="' + part + '_off"]').val(moment(data.sun.set * 1000).format('LT'));
+                    environment_part.find('input[name*="_timer_start"]').val(moment(data.sun.rise * 1000).format('LT'));
+                    environment_part.find('input[name*="_timer_stop"]').val(moment(data.sun.set * 1000).format('LT'));
+
+                    if (part == 'light') {
+                      // Set the Night lights to oppesite of day lights
+                      environment_part.find('input[name*="_alarm_max_timer_start"]').val(environment_part.find('input[name*="_alarm_min_timer_stop"]').val());
+                      environment_part.find('input[name*="_alarm_max_timer_stop"]').val(environment_part.find('input[name*="_alarm_min_timer_start"]').val());
                     }
                   });
 
                 case 'sensor':
-                  $('input[name="' + part + '_on"]').attr('readonly','readonly');
-                  $('input[name="' + part + '_off"]').attr('readonly','readonly');
-                  $('input[name="' + part + '_on_duration"]').attr('readonly','readonly');
-                  $('input[name="' + part + '_off_duration"]').attr('readonly','readonly');
+                  environment_part.find('input[name*="_timer_start"]').attr('readonly','readonly');
+                  environment_part.find('input[name*="_timer_stop"]').attr('readonly','readonly');
+                  environment_part.find('input[name*="_timer_on"]').attr('readonly','readonly');
+                  environment_part.find('input[name*="_timer_off"]').attr('readonly','readonly');
                   break;
               }
-            });
+            }).val('disabled').trigger('change');
 
-            $('select[name$="_power_switches"],select[name$="_sensors"]').select2({
+            $('select[name*="_powerswitches"],select[name$="_sensors"]').select2({
               placeholder: '{{_('Select an option')}}',
               allowClear: false,
               minimumResultsForSearch: Infinity
             });
 
             $.get('/api/switches',function(data){
-              var select_boxes = $('select[name$="_power_switches"]');
+              var select_boxes = $('select[name*="_powerswitches"]');
+
               $.each(data.switches,function (index,powerswitch){
                 if (!powerswitch.timer_enabled) {
                   // We can't use timer enabled switches. They have there own schedule
@@ -723,67 +1528,35 @@
               switches_loaded = true;
             });
 
-            $.get('/api/sensors/humidity',function(data){
-              var select_boxes = $('select[name="sprayer_sensors"]');
+            $.get('/api/sensors',function(data){
               $.each(data.sensors,function (index,sensor){
-                select_boxes.append($('<option>').attr({'value':sensor.id}).text(sensor.name));
+                $('select[name="' + sensor.type + '_sensors"]').append($('<option>').attr({'value':sensor.id}).text(sensor.name));
+                if ('distance' == sensor.type) {
+                  $('select[name="watertank_sensors"]').append($('<option>').attr({'value':sensor.id}).text(sensor.name));
+                }
               });
-              humidity_sensors_loaded = true;
+              sensors_loaded = true;
             });
-
-            $.get('/api/sensors/temperature',function(data){
-              var select_boxes = $('select[name="heater_sensors"],select[name="cooler_sensors"]');
-              $.each(data.sensors,function (index,sensor){
-                select_boxes.append($('<option>').attr({'value':sensor.id}).text(sensor.name));
-              });
-              temperature_sensors_loaded = true;
-            });
-
-            $.get('/api/sensors/distance',function(data){
-              var select_boxes = $('select[name="watertank_sensors"]');
-              $.each(data.sensors,function (index,sensor){
-                select_boxes.append($('<option>').attr({'value':sensor.id}).text(sensor.name));
-              });
-              distance_sensors_loaded = true;
-            });
-
-            $.get('/api/sensors/moisture',function(data){
-              var select_boxes = $('select[name="moisture_sensors"]');
-              $.each(data.sensors,function (index,sensor){
-                select_boxes.append($('<option>').attr({'value':sensor.id}).text(sensor.name));
-              });
-              moisture_sensors_loaded = true;
-            });
-
-            $.get('/api/sensors/ph',function(data){
-              var select_boxes = $('select[name="ph_sensors"]');
-              $.each(data.sensors,function (index,sensor){
-                select_boxes.append($('<option>').attr({'value':sensor.id}).text(sensor.name));
-              });
-              ph_sensors_loaded = true;
-            });
-
-            setContentHeight();
             load_environment_settings();
           });
 
           function load_environment_settings() {
             // Wait with loading the environment settings until all selectors are loaded
-            if (switches_loaded && humidity_sensors_loaded && temperature_sensors_loaded && distance_sensors_loaded && moisture_sensors_loaded && ph_sensors_loaded) {
+            if (switches_loaded && sensors_loaded) {
               $.get('/api/config/environment',function(data){
                 $.each(data,function (environmentpart,environmentdata){
-                  $.each(environmentdata,function(name,value) {
+                  $.each(flatten(environmentdata),function(name,value) {
                     var config_field = $('form [name="' + environmentpart + '_' + name + '"]');
                     if (config_field.length >= 1) {
                       switch (config_field.prop('type').toLowerCase()) {
                         case 'text':
                           config_field.val(value);
                           break;
-
+/*
                         case 'radio':
                           $('input[name="' + environmentpart + '_' + name + '"][value="' + value + '"]').attr('checked','checked').parent().addClass('active');
                           break;
-
+*/
                         case 'select-one':
                         case 'select-multiple':
                           config_field.val(value).trigger('change');

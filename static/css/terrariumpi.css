@@ -144,7 +144,16 @@ div#dashboard div.row.environment small span:first-child {
 }
 
 div#dashboard div.row.environment table.tile_info td:first-child {
-  width: 70%;
+  width: 55%;
+}
+
+div#dashboard div.row.environment table.tile_info td span.day i.fa,
+div#dashboard div.row.environment table.tile_info td span.night i.fa {
+  font-size: 0.8em;
+  float:none;
+  margin-right: 0px;
+  width: auto;
+  line-height: auto;
 }
 
 /* End Dashboard */

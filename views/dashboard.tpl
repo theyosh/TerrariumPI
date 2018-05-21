@@ -90,26 +90,34 @@
                       </tr>
                       <tr>
                         <td>
-                          <p>{{_('On')}}</p>
+                          <p>{{_('Day')}}</p>
                         </td>
-                        <td class="on">...</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>{{_('Off')}}</p>
-                        </td>
-                        <td class="off">...</td>
+                        <td class="timer_min">...</td>
                       </tr>
                       <tr>
                         <td>
                           <p>{{_('Duration')}}</p>
                         </td>
-                        <td class="duration">...</td>
+                        <td class="timer_min duration">...</td>
                       </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Night')}}</p>
+                        </td>
+                        <td class="timer_max">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Duration')}}</p>
+                        </td>
+                        <td class="timer_max duration">...</td>
+                      </tr>
+
                     </table>
                   </div>
-                  <div class="row environment_sprayer">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-umbrella"></i> {{_('Sprayer')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}} <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign orange" title="{{_('Error')}}"></span></span></small></h4>
+
+                  <div class="row environment_temperature">
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-fire"></i> {{_('Temperature')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}} <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign orange" title="{{_('Error')}}"></span></span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
@@ -119,15 +127,50 @@
                       </tr>
                       <tr>
                         <td>
+                          <p>{{_('On')}}</p>
+                        </td>
+                        <td class="on">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Off')}}</p>
+                        </td>
+                        <td class="off">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Duration')}}</p>
+                        </td>
+                        <td class="duration">...</td>
+                      </tr>
+                      <tr>
+                        <td>
                           <p>{{_('Current')}}</p>
                         </td>
                         <td class="current">...</td>
                       </tr>
                       <tr>
                         <td>
-                          <p>{{_('Alarm min')}}</p>
+                          <p>{{_('Range')}}</p>
                         </td>
-                        <td class="alarm_min">...</td>
+                        <td class="alarm_min alarm_max">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Day/night difference')}} <span class="day" title="{{_('Day')}}"><i class="fa fa-sun-o"></i></span><span class="night" title="{{_('Night')}}"><i class="fa fa-moon-o"></i></span></p>
+                        </td>
+                        <td class="day_night_difference">...</td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="row environment_humidity">
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-tint"></i> {{_('Humidity')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}} <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign orange" title="{{_('Error')}}"></span></span></small></h4>
+                    <table class="tile_info">
+                      <tr>
+                        <td>
+                          <p>{{_('Status')}}</p>
+                        </td>
+                        <td class="state"><i class="fa fa-square green" title="{{_('On')}}"></i><i class="fa fa-square red" title="{{_('Off')}}"></i></td>
                       </tr>
                       <tr>
                         <td>
@@ -147,10 +190,29 @@
                         </td>
                         <td class="duration">...</td>
                       </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Current')}}</p>
+                        </td>
+                        <td class="current">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Range')}}</p>
+                        </td>
+                        <td class="alarm_min alarm_max">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Day/night difference')}} <span class="day" title="{{_('Day')}}"><i class="fa fa-sun-o"></i></span><span class="night" title="{{_('Night')}}"><i class="fa fa-moon-o"></i></span></p>
+                        </td>
+                        <td class="night_difference">...</td>
+                      </tr>
                     </table>
+
                   </div>
                   <div class="row environment_moisture">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-umbrella"></i> {{_('Moisture')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}} <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign orange" title="{{_('Error')}}"></span></span></small></h4>
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-tint"></i> {{_('Moisture')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}} <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign orange" title="{{_('Error')}}"></span></span></small></h4>
                     <table class="tile_info">
                       <tr>
                         <td>
@@ -158,20 +220,6 @@
                         </td>
                         <td class="state"><i class="fa fa-square green" title="{{_('On')}}"></i><i class="fa fa-square red" title="{{_('Off')}}"></i></td>
                       </tr>
-                      <tr>
-                        <td>
-                          <p>{{_('Current')}}</p>
-                        </td>
-                        <td class="current">...</td>
-                      </tr>
-                      <!--
-                      <tr>
-                        <td>
-                          <p>{{_('Alarm min')}}</p>
-                        </td>
-                        <td class="alarm_min">...</td>
-                      </tr>
-                      -->
                       <tr>
                         <td>
                           <p>{{_('On')}}</p>
@@ -189,6 +237,24 @@
                           <p>{{_('Duration')}}</p>
                         </td>
                         <td class="duration">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Current')}}</p>
+                        </td>
+                        <td class="current">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Range')}}</p>
+                        </td>
+                        <td class="alarm_min alarm_max">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Day/night difference')}} <span class="day" title="{{_('Day')}}"><i class="fa fa-sun-o"></i></span><span class="night" title="{{_('Night')}}"><i class="fa fa-moon-o"></i></span></p>
+                        </td>
+                        <td class="night_difference">...</td>
                       </tr>
                     </table>
                   </div>
@@ -203,47 +269,6 @@
                       </tr>
                       <tr>
                         <td>
-                          <p>{{_('Current')}}</p>
-                        </td>
-                        <td class="current">...</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>{{_('Alarm min')}}</p>
-                        </td>
-                        <td class="alarm_min">...</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>{{_('On')}}</p>
-                        </td>
-                        <td class="on">...</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>{{_('Off')}}</p>
-                        </td>
-                        <td class="off">...</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>{{_('Duration')}}</p>
-                        </td>
-                        <td class="duration">...</td>
-                      </tr>
-                    </table>
-                  </div>
-                  <div class="row environment_heater">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-fire"></i> {{_('Heater')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}} <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign orange" title="{{_('Error')}}"></span></span></small></h4>
-                    <table class="tile_info">
-                      <tr>
-                        <td>
-                          <p>{{_('Status')}}</p>
-                        </td>
-                        <td class="state"><i class="fa fa-square green" title="{{_('On')}}"></i><i class="fa fa-square red" title="{{_('Off')}}"></i></td>
-                      </tr>
-                      <tr>
-                        <td>
                           <p>{{_('On')}}</p>
                         </td>
                         <td class="on">...</td>
@@ -274,54 +299,7 @@
                       </tr>
                       <tr>
                         <td>
-                          <p>{{_('Day/night difference')}}</p>
-                        </td>
-                        <td class="night_difference">...</td>
-                      </tr>
-                    </table>
-                  </div>
-                  <div class="row environment_cooler">
-                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-flag-o"></i> {{_('Cooler')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}} <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign orange" title="{{_('Error')}}"></span></span></small></h4>
-                    <table class="tile_info">
-                      <tr>
-                        <td>
-                          <p>{{_('Status')}}</p>
-                        </td>
-                        <td class="state"><i class="fa fa-square green" title="{{_('On')}}"></i><i class="fa fa-square red" title="{{_('Off')}}"></i></td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>{{_('On')}}</p>
-                        </td>
-                        <td class="on">...</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>{{_('Off')}}</p>
-                        </td>
-                        <td class="off">...</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>{{_('Duration')}}</p>
-                        </td>
-                        <td class="duration">...</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>{{_('Current')}}</p>
-                        </td>
-                        <td class="current">...</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>{{_('Range')}}</p>
-                        </td>
-                        <td class="alarm_min alarm_max">...</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>{{_('Day/night difference')}}</p>
+                          <p>{{_('Day/night difference')}} <span class="day" title="{{_('Day')}}"><i class="fa fa-sun-o"></i></span><span class="night" title="{{_('Night')}}"><i class="fa fa-moon-o"></i></span></p>
                         </td>
                         <td class="night_difference">...</td>
                       </tr>
@@ -368,7 +346,7 @@
                       </tr>
                       <tr>
                         <td>
-                          <p>{{_('Day/night difference')}}</p>
+                          <p>{{_('Day/night difference')}} <span class="day" title="{{_('Day')}}"><i class="fa fa-sun-o"></i></span><span class="night" title="{{_('Night')}}"><i class="fa fa-moon-o"></i></span></p>
                         </td>
                         <td class="night_difference">...</td>
                       </tr>
