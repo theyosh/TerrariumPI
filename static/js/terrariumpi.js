@@ -408,8 +408,14 @@ function websocket_init(reconnect) {
         break;
 
       case 'environment':
-        $.each(['light','temperature','humidity','watertank','moisture','ph','conductivity'], function(index, value) {
-          update_dashboard_environment(value, data.data[value]);
+        $.each(data.data, function(key, value) {
+          update_dashboard_environment(key, value);
+        });
+        $('div.row.environment div.pull-right div.x_content div').each(function(index,value){
+          var move = index > 0 && $(value).find('table:hidden').length === 0 && $(value).prev().find('table:hidden').length === 1;
+          if (move) {
+            $(value).insertBefore($(value).prev());
+          }
         });
         break;
       case 'sensor_gauge':
@@ -636,7 +642,6 @@ function init_form_settings(pType) {
       });
       break;
   }
-
 }
 
 function check_form_data(form) {
@@ -731,7 +736,7 @@ function prepare_form_data(form) {
                   prev_nr = current_nr;
                 }
 
-                if (['timer_start','timer_stop','start','stop','on','off'].indexOf(matches[3]) != -1) {
+                if (matches[3].match(/timer_(start|stop)$/)) {
                   // Load from local format, and store in 24h format. Do not use UNIX timestamp formats
                   field_value = moment(field_value, 'LT').format('HH:mm');
                 }
@@ -1549,7 +1554,11 @@ function update_dashboard_environment(name, data) {
   switch (name) {
     case 'light':
       enabledColor = 'orange';
-      break;
+      break
+    case 'conductivity':
+      enabledColor = 'orange';
+      indicator = 'mS';
+      break
     case 'temperature':
       enabledColor = 'red';
       break;
@@ -1608,8 +1617,8 @@ function update_dashboard_environment(name, data) {
 
       case 'timer_min':
       case 'timer_max':
-        if (data.mode != 'sensor') {
-          systempart.find('.' + key).text(moment(value.time_table[0][0] * 1000).format('LT') + ' - ' + moment(value.time_table[0][1] * 1000).format('LT')).parent().toggle(data.mode != 'sensor');
+        if (value.time_table != undefined && !(data.mode == 'weather' && key == 'timer_max' && name != 'light')) {
+          systempart.find('.' + key).text(moment(value.time_table[0][0] * 1000).format('LT') + ' - ' + moment(value.time_table[value.time_table.length-1][1] * 1000).format('LT')).parent().toggle(data.mode != 'sensor');
           systempart.find('.' + key + '.duration').text(moment.duration(value.duration * 1000).humanize()).parent().toggle(data.mode != 'sensor');
         }
         break;
