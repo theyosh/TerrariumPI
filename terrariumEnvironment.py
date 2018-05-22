@@ -27,7 +27,7 @@ class terrariumEnvironmentPart(object):
 
     self.last_update = 0
 
-  def __toggle_powerswitches(self,switches,action):
+  def __toggle_powerswitches(self,switches,action = None):
     is_on = len(switches) > 0
     for powerswitch in switches:
       if 'on' == action:
@@ -68,20 +68,22 @@ class terrariumEnvironmentPart(object):
     if len(powerswitches) == 0:
       return
 
-    if 'off' == action or now - lastaction > settletime:
+    if action is None or 'off' == action or now - lastaction > settletime:
       powerstate = self.__toggle_powerswitches([powerswitchlist[switchid] for switchid in powerswitches if switchid in powerswitchlist],action)
 
       if 'min' == part:
         self.timer_min_data['power_state'] = powerstate
-        self.timer_min_data['lastaction'] = now
-        if 'on' == action and onduration > 0:
-          (Timer(onduration, self.toggle_off_alarm_min, (powerswitchlist,))).start()
+        if action is not None:
+          self.timer_min_data['lastaction'] = now
+          if 'on' == action and onduration > 0:
+            (Timer(onduration, self.toggle_off_alarm_min, (powerswitchlist,))).start()
 
       elif 'max' == part:
         self.timer_max_data['power_state'] = powerstate
-        self.timer_max_data['lastaction'] = now
-        if 'on' == action and onduration > 0:
-          (Timer(onduration, self.toggle_off_alarm_max, (powerswitchlist,))).start()
+        if action is not None:
+          self.timer_max_data['lastaction'] = now
+          if 'on' == action and onduration > 0:
+            (Timer(onduration, self.toggle_off_alarm_max, (powerswitchlist,))).start()
 
   def set_alarm_min(self,start,stop,timer_on,timer_off,light_state,door_state,duration_on,settle,powerswitches):
     self.config['alarm_min'] = {'timer_start':start,
@@ -111,19 +113,24 @@ class terrariumEnvironmentPart(object):
     self.timer_max_data['lastaction'] = 0
     self.timer_max_data['power_state'] = False
 
-  def update(self,sensorlist,weather,light):
+  def update(self,sensorlist,powerswitchlist,weather,light):
     self.update_timer_data(weather)
     self.update_day_night_data(sensorlist,weather,light)
     self.update_average_data(sensorlist)
+    self.update_powerswitches_data(powerswitchlist)
     self.last_update = int(time.time())
 
   def update_timer_data(self,weather):
     logger.debug('Updating timer data for %s running in mode: %s' % (self.get_type(),self.get_mode()))
-    if self.in_weather_mode():
+    if self.in_weather_mode() or self.in_weather_inverse_mode():
 
       # Upate times based on weather
-      self.config['alarm_min']['timer_start']  = datetime.datetime.fromtimestamp(weather.get_sun_rise())
-      self.config['alarm_min']['timer_stop'] = datetime.datetime.fromtimestamp(weather.get_sun_set())
+      if self.in_weather_inverse_mode():
+        self.config['alarm_min']['timer_start']  = datetime.datetime.fromtimestamp(weather.get_sun_set())
+        self.config['alarm_min']['timer_stop'] = datetime.datetime.fromtimestamp(weather.get_sun_rise())
+      else:
+        self.config['alarm_min']['timer_start']  = datetime.datetime.fromtimestamp(weather.get_sun_rise())
+        self.config['alarm_min']['timer_stop'] = datetime.datetime.fromtimestamp(weather.get_sun_set())
 
       self.config['alarm_min']['timer_on'] = None
       self.config['alarm_min']['timer_off'] = None
@@ -216,6 +223,10 @@ class terrariumEnvironmentPart(object):
 
     self.sensors_error = amount_of_sensors == 0 and len(self.get_sensors()) > 0
 
+  def update_powerswitches_data(self,powerswitchList):
+    self.__toggle_alarm('min',None,powerswitchList)
+    self.__toggle_alarm('max',None,powerswitchList)
+
   def get_type(self):
     return None
 
@@ -285,6 +296,9 @@ class terrariumEnvironmentPart(object):
 
   def in_weather_mode(self):
     return self.get_mode() == 'weather'
+
+  def in_weather_inverse_mode(self):
+    return self.get_mode() == 'weatherinverse'
 
   def get_day_night_difference(self):
     return self.config['day_night_difference']
@@ -608,7 +622,7 @@ class terrariumEnvironment(object):
       if environment_part.is_enabled():
         logger.debug('Environment %s is enabled and based on: %s. Trigger update!' % (environment_part.get_type(),
                                                                                       environment_part.get_mode()))
-        environment_part.update(self.sensors,self.weather,self.__environment_parts['light'])
+        environment_part.update(self.sensors,self.powerswitches,self.weather,self.__environment_parts['light'])
         toggle_on_alarm_min = None
         toggle_on_alarm_max = None
 
@@ -652,6 +666,9 @@ class terrariumEnvironment(object):
             if light_check_ok and door_check_ok:
               logger.info('Environment %s is turning on the alarm min powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
               environment_part.toggle_on_alarm_min(self.powerswitches)
+            else:
+              environment_part.toggle_off_alarm_min(self.powerswitches)
+
           else:
             logger.info('Environment %s is turning off the alarm min powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
             environment_part.toggle_off_alarm_min(self.powerswitches)
@@ -667,6 +684,8 @@ class terrariumEnvironment(object):
             if light_check_ok and door_check_ok:
               logger.info('Environment %s is turning on the alarm max powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
               environment_part.toggle_on_alarm_max(self.powerswitches)
+            else:
+              environment_part.toggle_off_alarm_max(self.powerswitches)
           else:
             logger.info('Environment %s is turning off the alarm max powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
             environment_part.toggle_off_alarm_max(self.powerswitches)
@@ -683,7 +702,7 @@ class terrariumEnvironment(object):
   def set_sensors(self,sensorlist):
     self.sensors = sensorlist
 
-  def set_powers_witches(self,powerswitchlist):
+  def set_power_switches(self,powerswitchlist):
     self.powerswitches = powerswitchlist
 
   def __engine_loop(self):

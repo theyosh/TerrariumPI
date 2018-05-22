@@ -596,6 +596,7 @@ class terrariumEngine(object):
     self.get_power_usage_water_flow(socket=True)
 
     if self.environment is not None:
+      self.environment.update()
       self.get_environment(socket=True)
   # End switches part
 

@@ -41,7 +41,8 @@
                           <option value="disabled">{{_('Disabled')}}</option>
                           <option value="timer">{{_('Timer')}}</option>
                           <!-- <option value="sensor">{{_('Sensor')}}</option> -->
-                          <option value="weather">{{_('Weather')}}</option>
+                          <option value="weather">{{_('Weather day/night')}}</option>
+                          <option value="weatherinverse">{{_('Weather night/day')}}</option>
                         </select>
                       </div>
                     </div>
@@ -173,7 +174,8 @@
                           <option value="disabled">{{_('Disabled')}}</option>
                           <option value="timer">{{_('Timer')}}</option>
                           <option value="sensor">{{_('Sensor')}}</option>
-                          <option value="weather">{{_('Weather')}}</option>
+                          <option value="weather">{{_('Weather day/night')}}</option>
+                          <option value="weatherinverse">{{_('Weather night/day')}}</option>
                         </select>
                       </div>
                     </div>
@@ -365,8 +367,6 @@
               </div>
             </div>
           </div>
-
-
           <div class="row" id="environment_humidity">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -388,7 +388,8 @@
                           <option value="disabled">{{_('Disabled')}}</option>
                           <option value="timer">{{_('Timer')}}</option>
                           <option value="sensor">{{_('Sensor')}}</option>
-                          <option value="weather">{{_('Weather')}}</option>
+                          <option value="weather">{{_('Weather day/night')}}</option>
+                          <option value="weatherinverse">{{_('Weather night/day')}}</option>
                         </select>
                       </div>
                     </div>
@@ -579,10 +580,6 @@
               </div>
             </div>
           </div>
-
-
-
-
           <div class="row" id="environment_moisture">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -604,7 +601,8 @@
                           <option value="disabled">{{_('Disabled')}}</option>
                           <option value="timer">{{_('Timer')}}</option>
                           <option value="sensor">{{_('Sensor')}}</option>
-                          <option value="weather">{{_('Weather')}}</option>
+                          <option value="weather">{{_('Weather day/night')}}</option>
+                          <option value="weatherinverse">{{_('Weather night/day')}}</option>
                         </select>
                       </div>
                     </div>
@@ -795,7 +793,6 @@
               </div>
             </div>
           </div>
-
           <div class="row" id="environment_conductivity">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -817,7 +814,8 @@
                           <option value="disabled">{{_('Disabled')}}</option>
                           <option value="timer">{{_('Timer')}}</option>
                           <option value="sensor">{{_('Sensor')}}</option>
-                          <option value="weather">{{_('Weather')}}</option>
+                          <option value="weather">{{_('Weather day/night')}}</option>
+                          <option value="weatherinverse">{{_('Weather night/day')}}</option>
                         </select>
                       </div>
                     </div>
@@ -1008,8 +1006,6 @@
               </div>
             </div>
           </div>
-
-
           <div class="row" id="environment_ph">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -1031,7 +1027,8 @@
                           <option value="disabled">{{_('Disabled')}}</option>
                           <option value="timer">{{_('Timer')}}</option>
                           <option value="sensor">{{_('Sensor')}}</option>
-                          <option value="weather">{{_('Weather')}}</option>
+                          <option value="weather">{{_('Weather day/night')}}</option>
+                          <option value="weatherinverse">{{_('Weather night/day')}}</option>
                         </select>
                       </div>
                     </div>
@@ -1092,7 +1089,6 @@
                                 <input class="form-control col-md-7 col-xs-12" name="ph_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                               </div>
                             </div>
-
                             <div class="form-group">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_min_light_state">{{_('Light state')}}</label>
                               <div class="col-md-7 col-sm-6 col-xs-10">
@@ -1223,8 +1219,6 @@
               </div>
             </div>
           </div>
-
-
           <div class="row" id="environment_watertank">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -1246,7 +1240,8 @@
                           <option value="disabled">{{_('Disabled')}}</option>
                           <option value="timer">{{_('Timer')}}</option>
                           <option value="sensor">{{_('Sensor')}}</option>
-                          <option value="weather">{{_('Weather')}}</option>
+                          <option value="weather">{{_('Weather day/night')}}</option>
+                          <option value="weatherinverse">{{_('Weather night/day')}}</option>
                         </select>
                       </div>
                     </div>
@@ -1260,8 +1255,6 @@
                       </div>
                     </div>
                   </div>
-
-
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_volume">{{_('Volume')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
@@ -1475,25 +1468,31 @@
             }).on('change',function() {
               var part = this.name.replace('_mode','');
               var environment_part = $('div#environment_' + part);
+              var value = this.value
               environment_part.find('input,select').removeAttr('readonly','disabled');
 
-              switch (this.value) {
+              switch (value) {
                 case 'disabled':
                   environment_part.find('input,select:not(:first)').attr('readonly','readonly');
                   break;
 
                 case 'timer':
-                  //$('input[name="' + part + '_max_hours"]').attr('readonly','readonly');
-                  //$('input[name="' + part + '_min_hours"]').attr('readonly','readonly');
-                  //$('input[name="' + part + '_hours_shift"]').attr('readonly','readonly');
+                  environment_part.find('input[name*="_max_hours"]').attr('readonly','readonly');
+                  environment_part.find('input[name*="_min_hours"]').attr('readonly','readonly');
+                  environment_part.find('input[name*="_hours_shift"]').attr('readonly','readonly');
                   break;
 
                 case 'weather':
+                case 'weatherinverse':
                   // Load current sun rise and sun set based on weather data
                   $.get('/api/weather',function(data){
-                    environment_part.find('input[name*="_timer_start"]').val(moment(data.sun.rise * 1000).format('LT'));
-                    environment_part.find('input[name*="_timer_stop"]').val(moment(data.sun.set * 1000).format('LT'));
-
+                    if ('weatherinverse' == value) {
+                      environment_part.find('input[name*="_timer_start"]').val(moment(data.sun.set * 1000).format('LT'));
+                      environment_part.find('input[name*="_timer_stop"]').val(moment(data.sun.rise * 1000).format('LT'));
+                    } else {
+                      environment_part.find('input[name*="_timer_start"]').val(moment(data.sun.rise * 1000).format('LT'));
+                      environment_part.find('input[name*="_timer_stop"]').val(moment(data.sun.set * 1000).format('LT'));
+                    }
                     if (part == 'light') {
                       // Set the Night lights to oppesite of day lights
                       environment_part.find('input[name*="_alarm_max_timer_start"]').val(environment_part.find('input[name*="_alarm_min_timer_stop"]').val());
@@ -1548,6 +1547,10 @@
                   $.each(flatten(environmentdata),function(name,value) {
                     var config_field = $('form [name="' + environmentpart + '_' + name + '"]');
                     if (config_field.length >= 1) {
+                      if (name.match(/timer_(start|stop)$/)) {
+                        // Load 24H format to local format
+                        value = moment(value,'HH:mm').format('LT');
+                      }
                       switch (config_field.prop('type').toLowerCase()) {
                         case 'text':
                           config_field.val(value);
