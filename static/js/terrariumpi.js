@@ -1617,7 +1617,7 @@ function update_dashboard_environment(name, data) {
 
       case 'timer_min':
       case 'timer_max':
-        if (value.time_table != undefined && !(data.mode == 'weather' && key == 'timer_max' && name != 'light')) {
+        if (value.time_table != undefined && !((data.mode.indexOf('weather') != -1) && key == 'timer_max' && name != 'light')) {
           systempart.find('.' + key).text(moment(value.time_table[0][0] * 1000).format('LT') + ' - ' + moment(value.time_table[value.time_table.length-1][1] * 1000).format('LT')).parent().toggle(data.mode != 'sensor');
           systempart.find('.' + key + '.duration').text(moment.duration(value.duration * 1000).humanize()).parent().toggle(data.mode != 'sensor');
         }
