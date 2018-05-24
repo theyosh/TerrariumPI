@@ -22,8 +22,8 @@ class terrariumEnvironmentPart(object):
     self.sensor_data = {'current': 0, 'alarm_min' : 0, 'alarm_max' : 0, 'limit_min' : 0, 'limit_max' : 0}
     self.night_mode = False
     self.sensors_error = False
-    self.timer_min_data = {}
-    self.timer_max_data = {}
+    self.timer_min_data = {'lastaction' : 0, 'power_state' : None}
+    self.timer_max_data = {'lastaction' : 0, 'power_state' : None}
 
     self.last_update = 0
 
@@ -127,10 +127,11 @@ class terrariumEnvironmentPart(object):
       # Upate times based on weather
       if self.in_weather_inverse_mode():
         self.config['alarm_min']['timer_start']  = datetime.datetime.fromtimestamp(weather.get_sun_set())
-        self.config['alarm_min']['timer_stop'] = datetime.datetime.fromtimestamp(weather.get_sun_rise())
+        self.config['alarm_min']['timer_stop']   = datetime.datetime.fromtimestamp(weather.get_sun_rise())
+
       else:
         self.config['alarm_min']['timer_start']  = datetime.datetime.fromtimestamp(weather.get_sun_rise())
-        self.config['alarm_min']['timer_stop'] = datetime.datetime.fromtimestamp(weather.get_sun_set())
+        self.config['alarm_min']['timer_stop']   = datetime.datetime.fromtimestamp(weather.get_sun_set())
 
       self.config['alarm_min']['timer_on'] = None
       self.config['alarm_min']['timer_off'] = None
@@ -159,14 +160,9 @@ class terrariumEnvironmentPart(object):
       self.config['alarm_min']['timer_start'] = self.config['alarm_min']['timer_start'].strftime('%H:%M')
       self.config['alarm_min']['timer_stop'] = self.config['alarm_min']['timer_stop'].strftime('%H:%M')
 
-      if self.get_type() == 'light':
-        # Swap weather times..... for night period
-        self.config['alarm_max']['timer_start'] = self.config['alarm_min']['timer_stop']
-        self.config['alarm_max']['timer_stop'] = self.config['alarm_min']['timer_start']
-      else:
-        self.config['alarm_max']['timer_start'] = self.config['alarm_min']['timer_start']
-        self.config['alarm_max']['timer_stop'] = self.config['alarm_min']['timer_stop']
-
+      # Swap weather times..... for night period
+      self.config['alarm_max']['timer_start'] = self.config['alarm_min']['timer_stop'] if self.get_type() == 'light' else self.config['alarm_min']['timer_start']
+      self.config['alarm_max']['timer_stop'] = self.config['alarm_min']['timer_start'] if self.get_type() == 'light' else self.config['alarm_min']['timer_stop']
 
     if not self.in_sensor_mode() and len(self.config['alarm_min'].keys()) > 0:
       self.timer_min_data['time_table'] = terrariumUtils.calculate_time_table(self.config['alarm_min']['timer_start'],
@@ -467,7 +463,7 @@ class terrariumEnvironment(object):
   LOOP_TIMEOUT = 15
   VALID_ENVIRONMENT_TYPES = []
 
-  # Append
+  # Append environment parts
   VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentLight.env_type)
   VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentTemperature.env_type)
   VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentHumidity.env_type)
@@ -495,6 +491,24 @@ class terrariumEnvironment(object):
     self.load_environment()
     thread.start_new_thread(self.__engine_loop, ())
 
+  def __engine_loop(self):
+    logger.info('Starting engine')
+    self.__running = True
+    while self.__running:
+      logger.debug('Start updating')
+      starttime = time.time()
+      self.update()
+
+      duration = time.time() - starttime
+      if duration < terrariumEnvironment.LOOP_TIMEOUT:
+        logger.info('Update done in %.5f seconds. Waiting for %.5f seconds for next update' % (duration,terrariumEnvironment.LOOP_TIMEOUT - duration))
+        time.sleep(terrariumEnvironment.LOOP_TIMEOUT - duration) # TODO: Config setting
+      else:
+        logger.warning('Update took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEnvironment.LOOP_TIMEOUT,terrariumEnvironment.LOOP_TIMEOUT))
+
+  # End private functions
+
+  # System functions
   def load_environment(self, data = None):
     # Load Sensors, with ID as index
     starttime = time.time()
@@ -602,6 +616,8 @@ class terrariumEnvironment(object):
 
     logger.info('Done %s terrariumPI Environment %.3f seconds' % ('reloading' if reloading else 'loading',
                                                                                       time.time()-starttime))
+    if reloading:
+      self.update()
 
   def update(self):
     starttime = time.time()
@@ -636,12 +652,11 @@ class terrariumEnvironment(object):
           else:
             toggle_on_alarm_min = environment_part.is_alarm_min()
             toggle_on_alarm_max = environment_part.is_alarm_max()
-            logger.debug('Environment %s alarms: Min: %s, Max: %s' % (environment_part.get_type(),toggle_on_alarm_min,toggle_on_alarm_max))
 
 #              if toggle_on_alarm_min:
 #                extra_logging_message = 'Sprayer humdity value %f%% is lower then alarm %f%%.' % (self.sprayer['humidity']['current'],
 #                                                                                          self.sprayer['humidity']['alarm_min'])
-        elif environment_part.in_timer_mode() or environment_part.in_weather_mode():
+        elif environment_part.in_timer_mode() or environment_part.in_weather_mode() or environment_part.in_weather_inverse_mode():
           toggle_on_alarm_min = environment_part.is_time_min()
           toggle_on_alarm_max = environment_part.is_time_max()
 
@@ -662,16 +677,24 @@ class terrariumEnvironment(object):
             door_check_ok = 'always' == environment_part.get_alarm_min_door_state() or \
                             (environment_part.get_alarm_min_door_state() == ('open' if self.is_door_open() else 'closed'))
 
-
             if light_check_ok and door_check_ok:
-              logger.info('Environment %s is turning on the alarm min powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
-              environment_part.toggle_on_alarm_min(self.powerswitches)
+              if not environment_part.timer_min_data['power_state']:
+                logger.info('Environment %s is turning on the alarm min powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
+                environment_part.toggle_on_alarm_min(self.powerswitches)
             else:
-              environment_part.toggle_off_alarm_min(self.powerswitches)
+              if environment_part.timer_min_data['power_state']:
+                if not light_check_ok:
+                  logger.info('Environment %s is turning off the alarm min powerswitches due to light state %s' % (environment_part.get_type(),environment_part.get_alarm_min_light_state()))
+
+                elif not door_check_ok:
+                  logger.warning('Environment %s is turning off the alarm min powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_min_door_state()))
+
+                environment_part.toggle_off_alarm_min(self.powerswitches)
 
           else:
-            logger.info('Environment %s is turning off the alarm min powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
-            environment_part.toggle_off_alarm_min(self.powerswitches)
+            if environment_part.timer_min_data['power_state']:
+              logger.info('Environment %s is turning off the alarm min powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
+              environment_part.toggle_off_alarm_min(self.powerswitches)
 
         if toggle_on_alarm_max is not None:
           if toggle_on_alarm_max:
@@ -682,18 +705,25 @@ class terrariumEnvironment(object):
                             (environment_part.get_alarm_max_door_state() == ('open' if self.is_door_open() else 'closed'))
 
             if light_check_ok and door_check_ok:
-              logger.info('Environment %s is turning on the alarm max powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
-              environment_part.toggle_on_alarm_max(self.powerswitches)
+              if not environment_part.timer_max_data['power_state']:
+                logger.info('Environment %s is turning on the alarm max powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
+                environment_part.toggle_on_alarm_max(self.powerswitches)
             else:
-              environment_part.toggle_off_alarm_max(self.powerswitches)
-          else:
-            logger.info('Environment %s is turning off the alarm max powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
-            environment_part.toggle_off_alarm_max(self.powerswitches)
+              if environment_part.timer_max_data['power_state']:
+                if not light_check_ok:
+                  logger.info('Environment %s is turning off the alarm max powerswitches due to light state %s' % (environment_part.get_type(),environment_part.get_alarm_max_light_state()))
 
-    logger.info('Update done in %.5f seconds.' % (time.time()-starttime,))
+                elif not door_check_ok:
+                  logger.warning('Environment %s is turning off the alarm max powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_max_door_state()))
+                environment_part.toggle_off_alarm_max(self.powerswitches)
+          else:
+            if environment_part.timer_max_data['power_state']:
+              logger.info('Environment %s is turning off the alarm max powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
+              environment_part.toggle_off_alarm_max(self.powerswitches)
 
   def light_on(self):
-    on = False
+    # Default is on, works better when no lights are configured
+    on = True
     if isinstance(self.__environment_parts['light'],terrariumEnvironmentLight):
       on = self.__environment_parts['light'].is_alarm_min_on()
 
@@ -701,28 +731,12 @@ class terrariumEnvironment(object):
 
   def set_sensors(self,sensorlist):
     self.sensors = sensorlist
+    self.update()
 
   def set_power_switches(self,powerswitchlist):
     self.powerswitches = powerswitchlist
+    self.update()
 
-  def __engine_loop(self):
-    logger.info('Starting engine')
-    self.__running = True
-    while self.__running:
-      logger.debug('Environment starts new updates')
-      starttime = time.time()
-      self.update()
-
-      duration = time.time() - starttime
-      if duration < terrariumEnvironment.LOOP_TIMEOUT:
-        logger.info('Engine run done in %.5f seconds. Waiting for %.5f seconds for next round' % (duration,terrariumEnvironment.LOOP_TIMEOUT - duration))
-        time.sleep(terrariumEnvironment.LOOP_TIMEOUT - duration) # TODO: Config setting
-      else:
-        logger.warning('Engine run took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEnvironment.LOOP_TIMEOUT,terrariumEnvironment.LOOP_TIMEOUT))
-
-  # End private functions
-
-  # System functions
   def stop(self):
     self.__running = False
     logger.info('Shutdown environment')
