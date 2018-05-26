@@ -1,4 +1,4 @@
-# TerrariumPI 3.5
+# TerrariumPI 3.6
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
 
 For humidity control there is support for a spraying system. The sprayer can be configured to spray for an X amount of seconds and there is a minumal period between two spray actions. Use at least one humitidy sensors to get a constant humidity value.
@@ -48,6 +48,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Support for BME280
   - Support for HTU21D
   - Support for Si7021
+  - Support for Chirp
 - Open door detection (sprayer will not spray when a door is open)
 - Total power and water usage for costs calculation
 - Lights control based on sun rise and sun set or timers
