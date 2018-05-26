@@ -456,6 +456,18 @@ class terrariumSwitch(object):
 
     return waterflow
 
+  def is_at_max_power(self):
+    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+      return self.get_state() >= self.get_dimmer_on_percentage()
+    else:
+      return self.is_on()
+
+  def is_at_min_power(self):
+    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+      return self.get_state() <= self.get_dimmer_off_percentage()
+    else:
+      return self.is_off()
+
   def set_water_flow(self,value):
     try:
       self.water_flow = float(value)

@@ -392,6 +392,7 @@ class terrariumEngine(object):
     return totals
 
   def __engine_loop(self):
+    time_short = 0
     logger.info('Start terrariumPI engine')
     while self.__running:
       starttime = time.time()
@@ -446,12 +447,14 @@ class terrariumEngine(object):
       except Exception, err:
         print err
 
-      duration = time.time() - starttime
+      duration = (time.time() - starttime) + time_short
       if duration < terrariumEngine.LOOP_TIMEOUT:
         logger.info('Update done in %.5f seconds. Waiting for %.5f seconds for next round' % (duration,terrariumEngine.LOOP_TIMEOUT - duration))
+        time_short = 0
         sleep(terrariumEngine.LOOP_TIMEOUT - duration) # TODO: Config setting
       else:
         logger.warning('Updating took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEngine.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
+        time_short = duration - terrariumEngine.LOOP_TIMEOUT
 
   def __send_message(self,message):
     clients = self.subscribed_queues
@@ -596,7 +599,7 @@ class terrariumEngine(object):
     self.get_power_usage_water_flow(socket=True)
 
     if self.environment is not None:
-      self.environment.update()
+      self.environment.update(False)
       self.get_environment(socket=True)
   # End switches part
 
