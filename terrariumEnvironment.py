@@ -27,8 +27,27 @@ class terrariumEnvironmentPart(object):
 
     self.last_update = 0
 
+  def __get_power_state(self,powerswitchlist):
+    self.timer_min_data['max_power'] = False
+    self.timer_min_data['min_power'] = True
+
+    self.timer_max_data['max_power'] = False
+    self.timer_max_data['min_power'] = True
+
+    if len(self.config['alarm_min']['powerswitches']) > 0 or True:
+      self.timer_min_data['max_power'] = all([powerswitchlist[switchid].is_at_max_power() for switchid in self.config['alarm_min']['powerswitches'] if switchid in powerswitchlist])
+
+      self.timer_min_data['min_power'] = all([powerswitchlist[switchid].is_at_min_power() for switchid in self.config['alarm_min']['powerswitches'] if switchid in powerswitchlist])
+
+    if len(self.config['alarm_max']['powerswitches']) > 0 or True:
+      self.timer_max_data['max_power'] = all([powerswitchlist[switchid].is_at_max_power() for switchid in self.config['alarm_max']['powerswitches'] if switchid in powerswitchlist])
+
+      self.timer_max_data['min_power'] = all([powerswitchlist[switchid].is_at_min_power() for switchid in self.config['alarm_max']['powerswitches'] if switchid in powerswitchlist])
+
+    self.timer_min_data['power_state'] = not self.timer_min_data['min_power']
+    self.timer_max_data['power_state'] = not self.timer_max_data['min_power']
+
   def __toggle_powerswitches(self,switches,action = None):
-    is_on = len(switches) > 0
     for powerswitch in switches:
       if 'on' == action:
         if 'dimmer' in powerswitch.get_hardware_type():
@@ -42,9 +61,7 @@ class terrariumEnvironmentPart(object):
         else:
           powerswitch.off()
 
-      is_on = is_on and powerswitch.is_on()
-
-    return is_on
+    self.__get_power_state(switches)
 
   def __toggle_alarm(self,part,action,powerswitchlist):
     now = int(time.time())
@@ -52,38 +69,33 @@ class terrariumEnvironmentPart(object):
     lastaction = 0
     settletime = 0
     onduration = 0
-    powerstate = False
 
     if 'min' == part:
       powerswitches = self.config['alarm_min']['powerswitches']
-      lastaction = self.timer_min_data['lastaction']
       settletime = self.config['alarm_min']['settle']
       onduration = self.config['alarm_min']['duration_on']
+      lastaction = self.timer_min_data['lastaction']
     elif 'max' == part:
       powerswitches = self.config['alarm_max']['powerswitches']
-      lastaction = self.timer_max_data['lastaction']
       settletime = self.config['alarm_max']['settle']
       onduration = self.config['alarm_max']['duration_on']
+      lastaction = self.timer_max_data['lastaction']
 
     if len(powerswitches) == 0:
       return
 
-    if action is None or 'off' == action or now - lastaction > settletime:
-      powerstate = self.__toggle_powerswitches([powerswitchlist[switchid] for switchid in powerswitches if switchid in powerswitchlist],action)
+    if now - lastaction > settletime or 'off' == action:
+      self.__toggle_powerswitches([powerswitchlist[switchid] for switchid in powerswitches if switchid in powerswitchlist],action)
 
       if 'min' == part:
-        self.timer_min_data['power_state'] = powerstate
-        if action is not None:
-          self.timer_min_data['lastaction'] = now
-          if 'on' == action and onduration > 0:
-            (Timer(onduration, self.toggle_off_alarm_min, (powerswitchlist,))).start()
+        self.timer_min_data['lastaction'] = now
+        if 'on' == action and onduration > 0:
+          (Timer(onduration, self.toggle_off_alarm_min, (powerswitchlist,))).start()
 
       elif 'max' == part:
-        self.timer_max_data['power_state'] = powerstate
-        if action is not None:
-          self.timer_max_data['lastaction'] = now
-          if 'on' == action and onduration > 0:
-            (Timer(onduration, self.toggle_off_alarm_max, (powerswitchlist,))).start()
+        self.timer_max_data['lastaction'] = now
+        if 'on' == action and onduration > 0:
+          (Timer(onduration, self.toggle_off_alarm_max, (powerswitchlist,))).start()
 
   def set_alarm_min(self,start,stop,timer_on,timer_off,light_state,door_state,duration_on,settle,powerswitches):
     self.config['alarm_min'] = {'timer_start':start,
@@ -220,8 +232,7 @@ class terrariumEnvironmentPart(object):
     self.sensors_error = amount_of_sensors == 0 and len(self.get_sensors()) > 0
 
   def update_powerswitches_data(self,powerswitchList):
-    self.__toggle_alarm('min',None,powerswitchList)
-    self.__toggle_alarm('max',None,powerswitchList)
+    self.__get_power_state(powerswitchList)
 
   def get_type(self):
     return None
@@ -340,6 +351,24 @@ class terrariumEnvironmentPart(object):
 
   def toggle_off_alarm_max(self,powerswitches):
     self.__toggle_alarm('max','off',powerswitches)
+
+  def has_alarm_min_powerswitches(self):
+    return len(self.config['alarm_min']['powerswitches']) > 0
+
+  def has_alarm_max_powerswitches(self):
+    return len(self.config['alarm_max']['powerswitches']) > 0
+
+  def is_alarm_min_at_min_power(self):
+    return self.timer_min_data['min_power'] == True
+
+  def is_alarm_min_at_max_power(self):
+    return self.timer_min_data['max_power'] == True
+
+  def is_alarm_max_at_min_power(self):
+    return self.timer_max_data['min_power'] == True
+
+  def is_alarm_max_at_max_power(self):
+    return self.timer_max_data['max_power'] == True
 
   def get_config(self):
     return self.config
@@ -619,7 +648,7 @@ class terrariumEnvironment(object):
     if reloading:
       self.update()
 
-  def update(self):
+  def update(self, trigger = True):
     starttime = time.time()
     # Make sure that the light environment part is run first in order to determen 'day' or 'night' state
     environment_parts = self.__environment_parts.keys()
@@ -636,8 +665,8 @@ class terrariumEnvironment(object):
       logger.debug('Checking environment part %s: enabled: %s' % (environment_part.get_type(),
                                                                   environment_part.is_enabled()))
       if environment_part.is_enabled():
-        logger.debug('Environment %s is enabled and based on: %s. Trigger update!' % (environment_part.get_type(),
-                                                                                      environment_part.get_mode()))
+        logger.debug('Environment %s is enabled and based on: %s.' % (environment_part.get_type(),
+                                                                      environment_part.get_mode()))
         environment_part.update(self.sensors,self.powerswitches,self.weather,self.__environment_parts['light'])
         toggle_on_alarm_min = None
         toggle_on_alarm_max = None
@@ -646,7 +675,7 @@ class terrariumEnvironment(object):
           logger.debug('Environment %s sensors ok? %s' % (environment_part.get_type(),
                                                           environment_part.sensors_in_error()))
           if environment_part.sensors_in_error():
-            logger.error('Environment %s sensors are not up to date. Check your sensors on the sensor page. So force the power down to be sure!' % (environment_part,))
+            logger.error('Environment %s sensors are not up to date. Check your sensors on the sensor page. So force the power down to be sure!' % (environment_part.get_type(),))
             toggle_on_alarm_min = False
             toggle_on_alarm_max = False
           else:
@@ -668,58 +697,74 @@ class terrariumEnvironment(object):
             # Use the extra added sensors for finetuning the trigger action
             toggle_on_alarm_max = environment_part.is_alarm_max()
 
-        logger.debug('Environment %s is has alarm_min: %s' % (environment_part.get_type(),toggle_on_alarm_min))
-        if toggle_on_alarm_min is not None:
-          if toggle_on_alarm_min:
-            light_check_ok = 'always' == environment_part.get_alarm_min_light_state() or \
-                             (environment_part.get_alarm_min_light_state() == ('on' if self.light_on() else 'off'))
+        logger.debug('Environment %s is has alarm_min: %s, alarm_max: %s, trigger?: %s' % (environment_part.get_type(),toggle_on_alarm_min,toggle_on_alarm_max,trigger))
+        if trigger:
+          if toggle_on_alarm_min is not None and environment_part.has_alarm_min_powerswitches():
+            if toggle_on_alarm_min:
+              light_check_ok = 'always' == environment_part.get_alarm_min_light_state() or \
+                               (environment_part.get_alarm_min_light_state() == ('on' if self.light_on() else 'off'))
 
-            door_check_ok = 'always' == environment_part.get_alarm_min_door_state() or \
-                            (environment_part.get_alarm_min_door_state() == ('open' if self.is_door_open() else 'closed'))
+              door_check_ok = 'always' == environment_part.get_alarm_min_door_state() or \
+                              (environment_part.get_alarm_min_door_state() == ('open' if self.is_door_open() else 'closed'))
 
-            if light_check_ok and door_check_ok:
-              if not environment_part.timer_min_data['power_state']:
-                logger.info('Environment %s is turning on the alarm min powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
-                environment_part.toggle_on_alarm_min(self.powerswitches)
+              if light_check_ok and door_check_ok:
+                if not environment_part.is_alarm_min_at_max_power():
+                  logger.info('Environment %s is turning on the alarm min powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
+                  environment_part.toggle_on_alarm_min(self.powerswitches)
+              else:
+                if not environment_part.is_alarm_min_at_min_power():
+                  if not light_check_ok:
+                    logger.info('Environment %s is turning off the alarm min powerswitches due to light state %s' % (environment_part.get_type(),environment_part.get_alarm_min_light_state()))
+
+                  elif not door_check_ok:
+                    logger.warning('Environment %s is turning off the alarm min powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_min_door_state()))
+
+                  environment_part.toggle_off_alarm_min(self.powerswitches)
+                else:
+                  logger.info('Environment %s should turn on the alarm min but is blocked by: door %s, light %s' % (environment_part.get_type(),not door_check_ok, not light_check_ok))
+
             else:
-              if environment_part.timer_min_data['power_state']:
-                if not light_check_ok:
-                  logger.info('Environment %s is turning off the alarm min powerswitches due to light state %s' % (environment_part.get_type(),environment_part.get_alarm_min_light_state()))
-
-                elif not door_check_ok:
-                  logger.warning('Environment %s is turning off the alarm min powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_min_door_state()))
-
+              if not environment_part.is_alarm_min_at_min_power():
+                logger.info('Environment %s is turning off the alarm min powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
                 environment_part.toggle_off_alarm_min(self.powerswitches)
-
           else:
-            if environment_part.timer_min_data['power_state']:
-              logger.info('Environment %s is turning off the alarm min powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
-              environment_part.toggle_off_alarm_min(self.powerswitches)
+            if toggle_on_alarm_min is not None:
+              logger.info('Environment %s alarm min is triggered to state %s, but has no powerswitches configured' % (environment_part.get_type(),toggle_on_alarm_min))
 
-        if toggle_on_alarm_max is not None:
-          if toggle_on_alarm_max:
-            light_check_ok = 'always' == environment_part.get_alarm_max_light_state() or \
-                             (environment_part.get_alarm_max_light_state() == ('on' if self.light_on() else 'off'))
 
-            door_check_ok = 'always' == environment_part.get_alarm_max_door_state() or \
-                            (environment_part.get_alarm_max_door_state() == ('open' if self.is_door_open() else 'closed'))
 
-            if light_check_ok and door_check_ok:
-              if not environment_part.timer_max_data['power_state']:
-                logger.info('Environment %s is turning on the alarm max powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
-                environment_part.toggle_on_alarm_max(self.powerswitches)
+          if toggle_on_alarm_max is not None and environment_part.has_alarm_max_powerswitches():
+
+            if toggle_on_alarm_max:
+              light_check_ok = 'always' == environment_part.get_alarm_max_light_state() or \
+                               (environment_part.get_alarm_max_light_state() == ('on' if self.light_on() else 'off'))
+
+              door_check_ok = 'always' == environment_part.get_alarm_max_door_state() or \
+                              (environment_part.get_alarm_max_door_state() == ('open' if self.is_door_open() else 'closed'))
+
+              if light_check_ok and door_check_ok:
+                if not environment_part.is_alarm_max_at_max_power():
+                  logger.info('Environment %s is turning on the alarm max powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
+                  environment_part.toggle_on_alarm_max(self.powerswitches)
+              else:
+                if not environment_part.is_alarm_max_at_min_power():
+                  if not light_check_ok:
+                    logger.info('Environment %s is turning off the alarm max powerswitches due to light state %s' % (environment_part.get_type(),environment_part.get_alarm_max_light_state()))
+
+                  elif not door_check_ok:
+                    logger.warning('Environment %s is turning off the alarm max powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_max_door_state()))
+                  environment_part.toggle_off_alarm_max(self.powerswitches)
+
+                else:
+                  logger.info('Environment %s should turn on the alarm max but is blocked by: door %s, light %s' % (environment_part.get_type(),not door_check_ok, not light_check_ok))
             else:
-              if environment_part.timer_max_data['power_state']:
-                if not light_check_ok:
-                  logger.info('Environment %s is turning off the alarm max powerswitches due to light state %s' % (environment_part.get_type(),environment_part.get_alarm_max_light_state()))
-
-                elif not door_check_ok:
-                  logger.warning('Environment %s is turning off the alarm max powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_max_door_state()))
+              if not environment_part.is_alarm_max_at_min_power():
+                logger.info('Environment %s is turning off the alarm max powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
                 environment_part.toggle_off_alarm_max(self.powerswitches)
+
           else:
-            if environment_part.timer_max_data['power_state']:
-              logger.info('Environment %s is turning off the alarm max powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
-              environment_part.toggle_off_alarm_max(self.powerswitches)
+            if toggle_on_alarm_max is not None:
+              logger.info('Environment %s alarm max is triggered to state %s, but has no powerswitches configured' % (environment_part.get_type(),toggle_on_alarm_max))
 
   def light_on(self):
     # Default is on, works better when no lights are configured

@@ -198,7 +198,7 @@ class terrariumUtils():
       timer_time_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(minutes=on_duration)).strftime('%s'))))
     else:
       # Create time periods based on both duration between start and stop time
-      while starttime < stoptime:
+      while starttime <= stoptime:
         if (starttime + datetime.timedelta(minutes=on_duration)) > stoptime:
           on_duration = (stoptime - starttime).total_seconds() / 60
 
