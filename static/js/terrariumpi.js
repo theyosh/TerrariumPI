@@ -408,20 +408,12 @@ function websocket_init(reconnect) {
         break;
 
       case 'environment':
-        function rearange(part) {
-          var move = $(part).find('table:hidden').length === 0 && $(part).prev().find('table:hidden').length === 1;
-          if (move) {
-            $(part).insertBefore($(part).prev());
-            rearange(part);
-          }
-        }
-
+        var dashboard = $('div.row.environment div.pull-right div.x_content');
         $.each(data.data, function(key, value) {
           update_dashboard_environment(key, value);
-        });
-
-        $('div.row.environment div.pull-right div.x_content div.row').each(function(index,value){
-          rearange(value);
+          if ('disabled' == value.config.mode) {
+            dashboard.find('div.row.environment_' + key).detach().appendTo(dashboard);
+          }
         });
         break;
       case 'sensor_gauge':
