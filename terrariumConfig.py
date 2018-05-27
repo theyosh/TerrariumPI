@@ -147,7 +147,7 @@ class terrariumConfig(object):
                   newdata['temperature_sensors'] = data['cooler_sensors']
 
               if 'cooler_night_enabled' in data:
-                newdata['temperature_alarm_max_light_state'] = 'always' if terrariumUtils.is_true(data['cooler_night_enabled']) else 'off'
+                newdata['temperature_alarm_max_light_state'] = 'ignore' if terrariumUtils.is_true(data['cooler_night_enabled']) else 'off'
 
               if 'cooler_power_switches' in data:
                 newdata['temperature_alarm_max_powerswitches'] = data['cooler_power_switches']
@@ -184,7 +184,7 @@ class terrariumConfig(object):
                 newdata['temperature_sensors'] = data['heater_sensors']
 
               if 'heater_day_enabled' in data:
-                newdata['temperature_alarm_min_light_state'] = 'always' if terrariumUtils.is_true(data['heater_day_enabled']) else 'off'
+                newdata['temperature_alarm_min_light_state'] = 'ignore' if terrariumUtils.is_true(data['heater_day_enabled']) else 'off'
 
               if 'heater_power_switches' in data:
                 newdata['temperature_alarm_min_powerswitches'] = data['heater_power_switches']
@@ -228,7 +228,7 @@ class terrariumConfig(object):
               newdata['moisture_alarm_min_duration_on'] = data['moisture_spray_duration']
               newdata['moisture_alarm_min_settle'] = data['moisture_spray_timeout']
 
-              newdata['moisture_alarm_min_light_state'] = 'always' if terrariumUtils.is_true(data['moisture_night_enabled']) else 'off'
+              newdata['moisture_alarm_min_light_state'] = 'ignore' if terrariumUtils.is_true(data['moisture_night_enabled']) else 'off'
 
               newdata['ph_mode'] = data['ph_mode']
               newdata['ph_sensors'] = data['ph_sensors']
@@ -241,7 +241,7 @@ class terrariumConfig(object):
 
               newdata['ph_alarm_min_settle'] = data['ph_settle_timeout']
 
-              newdata['ph_alarm_min_light_state'] = 'always' if terrariumUtils.is_true(data['ph_day_enabled']) else 'off'
+              newdata['ph_alarm_min_light_state'] = 'ignore' if terrariumUtils.is_true(data['ph_day_enabled']) else 'off'
 
               newdata['humidity_mode'] = data['sprayer_mode']
               newdata['humidity_sensors'] = data['sprayer_sensors']
@@ -255,7 +255,7 @@ class terrariumConfig(object):
               newdata['humidity_alarm_min_duration_on'] = data['sprayer_spray_duration']
               newdata['humidity_alarm_min_settle'] = data['sprayer_spray_timeout']
 
-              newdata['humidity_alarm_min_light_state'] = 'always' if terrariumUtils.is_true(data['sprayer_night_enabled']) else 'off'
+              newdata['humidity_alarm_min_light_state'] = 'ignore' if terrariumUtils.is_true(data['sprayer_night_enabled']) else 'off'
 
               newdata['watertank_mode'] = data['watertank_mode']
               newdata['watertank_sensors'] = data['watertank_sensors']
