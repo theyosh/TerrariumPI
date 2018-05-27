@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.6.0\n"
-"POT-Creation-Date: 2018-05-26 21:52+CEST\n"
+"POT-Creation-Date: 2018-05-27 14:24+CEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -881,8 +881,9 @@ msgstr ""
 msgid "Moisture"
 msgstr ""
 
-#: views/dashboard.tpl:277
-msgid "Ph"
+#: views/dashboard.tpl:277 views/inc/menu.tpl:56 views/sensor_settings.tpl:129
+#: views/system_environment.tpl:1003
+msgid "pH"
 msgstr ""
 
 #: views/dashboard.tpl:330 views/inc/menu.tpl:50 views/sensor_settings.tpl:127
@@ -890,7 +891,7 @@ msgstr ""
 msgid "Conductivity"
 msgstr ""
 
-#: views/dashboard.tpl:383
+#: views/dashboard.tpl:383 views/system_environment.tpl:1214
 msgid "Water tank"
 msgstr ""
 
@@ -1221,11 +1222,6 @@ msgstr ""
 
 #: views/inc/menu.tpl:53 views/sensor_settings.tpl:128
 msgid "Distance"
-msgstr ""
-
-#: views/inc/menu.tpl:56 views/sensor_settings.tpl:129
-#: views/system_environment.tpl:1003
-msgid "pH"
 msgstr ""
 
 #: views/inc/menu.tpl:59 views/sensor_settings.tpl:130
@@ -2302,7 +2298,7 @@ msgstr ""
 #: views/system_environment.tpl:953 views/system_environment.tpl:965
 #: views/system_environment.tpl:1088 views/system_environment.tpl:1100
 #: views/system_environment.tpl:1164 views/system_environment.tpl:1176
-msgid "Always"
+msgid "Ignore"
 msgstr ""
 
 #: views/system_environment.tpl:250 views/system_environment.tpl:326
@@ -2345,10 +2341,6 @@ msgstr ""
 #: views/system_environment.tpl:1112 views/system_environment.tpl:1188
 #: views/system_environment.tpl:1300 views/system_environment.tpl:1352
 msgid "Settle timeout"
-msgstr ""
-
-#: views/system_environment.tpl:1214
-msgid "Watertank"
 msgstr ""
 
 #: views/system_environment.tpl:1253

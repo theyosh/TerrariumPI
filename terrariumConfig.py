@@ -329,6 +329,8 @@ class terrariumConfig(object):
               if 'sprayer_night_enabled' in data:
                 newdata['humidity_alarm_min_light_state'] = 'ignore' if terrariumUtils.is_true(data['sprayer_night_enabled']) else 'on'
 
+              newdata['humidity_alarm_min_door_state'] = 'closed'
+
 
               if 'watertank_mode' in data:
                 newdata['watertank_mode'] = data['watertank_mode']
