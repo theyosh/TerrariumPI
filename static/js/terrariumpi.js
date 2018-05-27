@@ -1613,10 +1613,10 @@ function update_dashboard_environment(name, data) {
         systempart.find('.' + key).text(formatNumber(data.alarm_min,1) + ' - ' + formatNumber(data.alarm_max,1) + ' ' + indicator).parent().toggle(data.config.mode === 'sensor' || data.config.sensors.length > 0);
         break;
 
-      case 'day_night_difference':
-        systempart.find('.' + key).text(formatNumber(value,3) + ' ' + indicator).parent().toggle(value != 0);
-        break;
       case 'is_night':
+        if (data.config.day_night_difference > 0) {
+          systempart.find('.day_night_difference').text(formatNumber(data.config.day_night_difference,3) + ' ' + indicator).parent().toggle(data.config.day_night_difference != 0);
+        }
         systempart.find('span.day, span.night').hide();
         systempart.find('span.' + (value ? 'night' : 'day')).show();
         break;
