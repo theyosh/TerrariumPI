@@ -100,12 +100,12 @@ class terrariumEnvironmentPart(object):
   def set_alarm_min(self,start,stop,timer_on,timer_off,light_state,door_state,duration_on,settle,powerswitches):
     self.config['alarm_min'] = {'timer_start':start,
                            'timer_stop':stop,
-                           'timer_on': float(timer_on),
-                           'timer_off':float(timer_off),
+                           'timer_on': None if not terrariumUtils.is_float(timer_on) else float(timer_on),
+                           'timer_off':None if not terrariumUtils.is_float(timer_off) else float(timer_off),
                            'light_state' : light_state,
                            'door_state' : door_state,
-                           'duration_on':float(duration_on),
-                           'settle':float(settle),
+                           'duration_on':None if not terrariumUtils.is_float(duration_on) else float(duration_on),
+                           'settle':None if not terrariumUtils.is_float(settle) else float(settle),
                            'powerswitches': powerswitches if isinstance(powerswitches, list) else powerswitches.split(',')
                            }
     self.timer_min_data['lastaction'] = 0
@@ -114,12 +114,12 @@ class terrariumEnvironmentPart(object):
   def set_alarm_max(self,start,stop,timer_on,timer_off,light_state,door_state,duration_on,settle,powerswitches):
     self.config['alarm_max'] = {'timer_start':start,
                            'timer_stop':stop,
-                           'timer_on':float(timer_on),
-                           'timer_off':float(timer_off),
+                           'timer_on':None if not terrariumUtils.is_float(timer_on) else float(timer_on),
+                           'timer_off':None if not terrariumUtils.is_float(timer_off) else float(timer_off),
                            'light_state' : light_state,
                            'door_state' : door_state,
-                           'duration_on':float(duration_on),
-                           'settle':float(settle),
+                           'duration_on':None if not terrariumUtils.is_float(duration_on) else float(duration_on),
+                           'settle':None if not terrariumUtils.is_float(settle) else float(settle),
                            'powerswitches': powerswitches if isinstance(powerswitches, list) else powerswitches.split(','),
                            }
     self.timer_max_data['lastaction'] = 0
@@ -626,8 +626,8 @@ class terrariumEnvironment(object):
                                       '00:00'  if 'alarm_min_timer_stop' not in env_conf else env_conf['alarm_min_timer_stop'],
                                       1.0      if 'alarm_min_timer_on' not in env_conf else env_conf['alarm_min_timer_on'],
                                       59.0     if 'alarm_min_timer_off' not in env_conf else env_conf['alarm_min_timer_off'],
-                                      'always' if 'alarm_min_light_state' not in env_conf else env_conf['alarm_min_light_state'],
-                                      'always' if 'alarm_min_door_state' not in env_conf else env_conf['alarm_min_door_state'],
+                                      'ignore' if 'alarm_min_light_state' not in env_conf else env_conf['alarm_min_light_state'],
+                                      'ignore' if 'alarm_min_door_state' not in env_conf else env_conf['alarm_min_door_state'],
                                       0.0      if 'alarm_min_duration_on' not in env_conf else env_conf['alarm_min_duration_on'],
                                       120.0    if 'alarm_min_settle' not in env_conf else env_conf['alarm_min_settle'],
                                       []       if ('alarm_min_powerswitches' not in env_conf or env_conf['alarm_min_powerswitches'] in ['',None]) else env_conf['alarm_min_powerswitches'])
@@ -637,8 +637,8 @@ class terrariumEnvironment(object):
                                       '00:00'  if 'alarm_max_timer_stop' not in env_conf else env_conf['alarm_max_timer_stop'],
                                       1.0      if 'alarm_max_timer_on' not in env_conf else env_conf['alarm_max_timer_on'],
                                       59.0     if 'alarm_max_timer_off' not in env_conf else env_conf['alarm_max_timer_off'],
-                                      'always' if 'alarm_max_light_state' not in env_conf else env_conf['alarm_max_light_state'],
-                                      'always' if 'alarm_max_door_state' not in env_conf else env_conf['alarm_max_door_state'],
+                                      'ignore' if 'alarm_max_light_state' not in env_conf else env_conf['alarm_max_light_state'],
+                                      'ignore' if 'alarm_max_door_state' not in env_conf else env_conf['alarm_max_door_state'],
                                       0.0      if 'alarm_max_duration_on' not in env_conf else env_conf['alarm_max_duration_on'],
                                       120.0    if 'alarm_max_settle' not in env_conf else env_conf['alarm_max_settle'],
                                       []       if ('alarm_max_powerswitches' not in env_conf or env_conf['alarm_max_powerswitches'] in ['',None]) else env_conf['alarm_max_powerswitches'])
@@ -701,10 +701,10 @@ class terrariumEnvironment(object):
         if trigger:
           if toggle_on_alarm_min is not None and environment_part.has_alarm_min_powerswitches():
             if toggle_on_alarm_min:
-              light_check_ok = 'always' == environment_part.get_alarm_min_light_state() or \
+              light_check_ok = 'ignore' == environment_part.get_alarm_min_light_state() or \
                                (environment_part.get_alarm_min_light_state() == ('on' if self.light_on() else 'off'))
 
-              door_check_ok = 'always' == environment_part.get_alarm_min_door_state() or \
+              door_check_ok = 'ignore' == environment_part.get_alarm_min_door_state() or \
                               (environment_part.get_alarm_min_door_state() == ('open' if self.is_door_open() else 'closed'))
 
               if light_check_ok and door_check_ok:
@@ -736,10 +736,10 @@ class terrariumEnvironment(object):
           if toggle_on_alarm_max is not None and environment_part.has_alarm_max_powerswitches():
 
             if toggle_on_alarm_max:
-              light_check_ok = 'always' == environment_part.get_alarm_max_light_state() or \
+              light_check_ok = 'ignore' == environment_part.get_alarm_max_light_state() or \
                                (environment_part.get_alarm_max_light_state() == ('on' if self.light_on() else 'off'))
 
-              door_check_ok = 'always' == environment_part.get_alarm_max_door_state() or \
+              door_check_ok = 'ignore' == environment_part.get_alarm_max_door_state() or \
                               (environment_part.get_alarm_max_door_state() == ('open' if self.is_door_open() else 'closed'))
 
               if light_check_ok and door_check_ok:

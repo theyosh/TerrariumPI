@@ -241,7 +241,7 @@
                                 <select class="form-control" name="temperature_alarm_min_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="on">{{_('On')}}</option>
                                   <option value="off">{{_('Off')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -253,7 +253,7 @@
                                 <select class="form-control" name="temperature_alarm_min_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="open">{{_('Open')}}</option>
                                   <option value="closed">{{_('Closed')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -317,7 +317,7 @@
                                 <select class="form-control" name="temperature_alarm_max_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="on">{{_('On')}}</option>
                                   <option value="off">{{_('Off')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -329,7 +329,7 @@
                                 <select class="form-control" name="temperature_alarm_max_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="open">{{_('Open')}}</option>
                                   <option value="closed">{{_('Closed')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -452,7 +452,7 @@
                                 <select class="form-control" name="humidity_alarm_min_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="on">{{_('On')}}</option>
                                   <option value="off">{{_('Off')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -464,7 +464,7 @@
                                 <select class="form-control" name="humidity_alarm_min_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="open">{{_('Open')}}</option>
                                   <option value="closed">{{_('Closed')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -528,7 +528,7 @@
                                 <select class="form-control" name="humidity_alarm_max_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="on">{{_('On')}}</option>
                                   <option value="off">{{_('Off')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -540,7 +540,7 @@
                                 <select class="form-control" name="humidity_alarm_max_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="open">{{_('Open')}}</option>
                                   <option value="closed">{{_('Closed')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -663,7 +663,7 @@
                                 <select class="form-control" name="moisture_alarm_min_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="on">{{_('On')}}</option>
                                   <option value="off">{{_('Off')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -675,7 +675,7 @@
                                 <select class="form-control" name="moisture_alarm_min_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="open">{{_('Open')}}</option>
                                   <option value="closed">{{_('Closed')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -739,7 +739,7 @@
                                 <select class="form-control" name="moisture_alarm_max_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="on">{{_('On')}}</option>
                                   <option value="off">{{_('Off')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -751,7 +751,7 @@
                                 <select class="form-control" name="moisture_alarm_max_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="open">{{_('Open')}}</option>
                                   <option value="closed">{{_('Closed')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -874,7 +874,7 @@
                                 <select class="form-control" name="conductivity_alarm_min_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="on">{{_('On')}}</option>
                                   <option value="off">{{_('Off')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -886,7 +886,7 @@
                                 <select class="form-control" name="conductivity_alarm_min_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="open">{{_('Open')}}</option>
                                   <option value="closed">{{_('Closed')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -950,7 +950,7 @@
                                 <select class="form-control" name="conductivity_alarm_max_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="on">{{_('On')}}</option>
                                   <option value="off">{{_('Off')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -962,7 +962,7 @@
                                 <select class="form-control" name="conductivity_alarm_max_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="open">{{_('Open')}}</option>
                                   <option value="closed">{{_('Closed')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -1085,7 +1085,7 @@
                                 <select class="form-control" name="ph_alarm_min_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="on">{{_('On')}}</option>
                                   <option value="off">{{_('Off')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -1097,7 +1097,7 @@
                                 <select class="form-control" name="ph_alarm_min_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="open">{{_('Open')}}</option>
                                   <option value="closed">{{_('Closed')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -1161,7 +1161,7 @@
                                 <select class="form-control" name="ph_alarm_max_light_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="on">{{_('On')}}</option>
                                   <option value="off">{{_('Off')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
@@ -1173,7 +1173,7 @@
                                 <select class="form-control" name="ph_alarm_max_door_state" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                                   <option value="open">{{_('Open')}}</option>
                                   <option value="closed">{{_('Closed')}}</option>
-                                  <option value="always">{{_('Always')}}</option>
+                                  <option value="ignore">{{_('Ignore')}}</option>
                                 </select>
                               </div>
                             </div>
