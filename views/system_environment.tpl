@@ -1497,7 +1497,8 @@
                     }
                   });
                   if ('disabled' == environmentdata.mode) {
-                    // Hide disabled parts...
+                    // Move and hide disabled parts...
+                    $('div.row#environment_' + environmentpart).detach().insertBefore('div.row.submit');
                     $('div.row#environment_' + environmentpart + ' a.collapse-link').click();
                   }
                 });
