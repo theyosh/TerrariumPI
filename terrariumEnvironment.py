@@ -381,7 +381,7 @@ class terrariumEnvironmentPart(object):
             'is_night'    : self.is_in_night_mode(),
             'last_update' : self.last_update}
 
-    data = dict(data, **self.config)
+    data = dict(data, **{'config' : self.config})
     data = dict(data, **self.sensor_data)
     data = dict(data, **{'timer_min' : self.timer_min_data})
     data = dict(data, **{'timer_max' : self.timer_max_data})
