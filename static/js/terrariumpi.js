@@ -408,14 +408,20 @@ function websocket_init(reconnect) {
         break;
 
       case 'environment':
+        function rearange(part) {
+          var move = $(part).find('table:hidden').length === 0 && $(part).prev().find('table:hidden').length === 1;
+          if (move) {
+            $(part).insertBefore($(part).prev());
+            rearange(part);
+          }
+        }
+
         $.each(data.data, function(key, value) {
           update_dashboard_environment(key, value);
         });
-        $('div.row.environment div.pull-right div.x_content div').each(function(index,value){
-          var move = index > 0 && $(value).find('table:hidden').length === 0 && $(value).prev().find('table:hidden').length === 1;
-          if (move) {
-            $(value).insertBefore($(value).prev());
-          }
+
+        $('div.row.environment div.pull-right div.x_content div.row').each(function(index,value){
+          rearange(value);
         });
         break;
       case 'sensor_gauge':
@@ -1577,9 +1583,9 @@ function update_dashboard_environment(name, data) {
   }
 
   systempart.find('h4').removeClass('orange blue red').addClass(data.enabled ? enabledColor : '');
-  systempart.find('h4 small span').hide().filter('.' + data.mode).show();
+  systempart.find('h4 small span').hide().filter('.' + data.config.mode).show();
 
-  if (data.sensors !== undefined && data.sensors.length > 0) {
+  if (data.config.sensors !== undefined && data.config.sensors.length > 0) {
     systempart.find('h4 small span.sensor').show();
   }
 
@@ -1599,12 +1605,12 @@ function update_dashboard_environment(name, data) {
         break;
 
       case 'current':
-        systempart.find('.' + key).text(formatNumber(value,3) + ' ' + indicator).parent().toggle(data.mode === 'sensor' || data.sensors.length > 0);
+        systempart.find('.' + key).text(formatNumber(value,3) + ' ' + indicator).parent().toggle(data.config.mode === 'sensor' || data.config.sensors.length > 0);
         break;
 
       case 'alarm_min':
       case 'alarm_max':
-        systempart.find('.' + key).text(formatNumber(data.alarm_min,1) + ' - ' + formatNumber(data.alarm_max,1) + ' ' + indicator).parent().toggle(data.mode === 'sensor' || data.sensors.length > 0);
+        systempart.find('.' + key).text(formatNumber(data.alarm_min,1) + ' - ' + formatNumber(data.alarm_max,1) + ' ' + indicator).parent().toggle(data.config.mode === 'sensor' || data.config.sensors.length > 0);
         break;
 
       case 'day_night_difference':
@@ -1617,9 +1623,9 @@ function update_dashboard_environment(name, data) {
 
       case 'timer_min':
       case 'timer_max':
-        if (value.time_table != undefined && !((data.mode.indexOf('weather') != -1) && key == 'timer_max' && name != 'light')) {
-          systempart.find('.' + key).text(moment(value.time_table[0][0] * 1000).format('LT') + ' - ' + moment(value.time_table[value.time_table.length-1][1] * 1000).format('LT')).parent().toggle(data.mode != 'sensor');
-          systempart.find('.' + key + '.duration').text(moment.duration(value.duration * 1000).humanize()).parent().toggle(data.mode != 'sensor');
+        if (value.time_table != undefined && ('timer_min' == key && data.config.alarm_min.powerswitches.length > 0 || 'timer_max' == key && data.config.alarm_max.powerswitches.length > 0 )) {
+          systempart.find('.' + key).text(moment(value.time_table[0][0] * 1000).format('LT') + ' - ' + moment(value.time_table[value.time_table.length-1][1] * 1000).format('LT')).parent().toggle(data.config.mode != 'sensor');
+          systempart.find('.' + key + '.duration').text(moment.duration(value.duration * 1000).humanize()).parent().toggle(data.config.mode != 'sensor');
         }
         break;
     }
