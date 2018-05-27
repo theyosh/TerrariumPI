@@ -1489,11 +1489,6 @@
                         case 'text':
                           config_field.val(value);
                           break;
-/*
-                        case 'radio':
-                          $('input[name="' + environmentpart + '_' + name + '"][value="' + value + '"]').attr('checked','checked').parent().addClass('active');
-                          break;
-*/
                         case 'select-one':
                         case 'select-multiple':
                           config_field.val(value).trigger('change');
@@ -1501,6 +1496,10 @@
                       }
                     }
                   });
+                  if ('disabled' == environmentdata.mode) {
+                    // Hide disabled parts...
+                    $('div.row#environment_' + environmentpart + ' a.collapse-link').click();
+                  }
                 });
               });
             } else {
