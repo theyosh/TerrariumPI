@@ -50,20 +50,20 @@ class terrariumEnvironmentPart(object):
   def __toggle_powerswitches(self,switches,action = None):
     for powerswitch in switches:
       if 'on' == action:
-        if 'dimmer' in powerswitch.get_hardware_type():
+        if 'dimmer' in powerswitch.get_hardware_type() and 'light' != self.get_type():
           powerswitch.go_up()
         else:
           powerswitch.on()
 
       elif 'off' == action:
-        if 'dimmer' in powerswitch.get_hardware_type():
+        if 'dimmer' in powerswitch.get_hardware_type() and 'light' != self.get_type():
           powerswitch.go_down()
         else:
           powerswitch.off()
 
     self.__get_power_state(switches)
 
-  def __toggle_alarm(self,part,action,powerswitchlist):
+  def __toggle_alarm(self,part,action,powerswitchlist,timer = False):
     now = int(time.time())
     powerswitches = {}
     lastaction = 0
@@ -84,18 +84,18 @@ class terrariumEnvironmentPart(object):
     if len(powerswitches) == 0:
       return
 
-    if now - lastaction > settletime or 'off' == action:
+    if now - lastaction > settletime or timer:
       self.__toggle_powerswitches([powerswitchlist[switchid] for switchid in powerswitches if switchid in powerswitchlist],action)
 
       if 'min' == part:
         self.timer_min_data['lastaction'] = now
         if 'on' == action and onduration > 0:
-          (Timer(onduration, self.toggle_off_alarm_min, (powerswitchlist,))).start()
+          (Timer(onduration, self.toggle_off_alarm_min, (powerswitchlist,True))).start()
 
       elif 'max' == part:
         self.timer_max_data['lastaction'] = now
         if 'on' == action and onduration > 0:
-          (Timer(onduration, self.toggle_off_alarm_max, (powerswitchlist,))).start()
+          (Timer(onduration, self.toggle_off_alarm_max, (powerswitchlist,True))).start()
 
   def set_alarm_min(self,start,stop,timer_on,timer_off,light_state,door_state,duration_on,settle,powerswitches):
     self.config['alarm_min'] = {'timer_start':start,
@@ -340,17 +340,17 @@ class terrariumEnvironmentPart(object):
   def is_alarm_max_off(self):
     return not self.is_alarm_max_on()
 
-  def toggle_on_alarm_min(self,powerswitches):
-    self.__toggle_alarm('min','on',powerswitches)
+  def toggle_on_alarm_min(self,powerswitches,timer = False):
+    self.__toggle_alarm('min','on',powerswitches,timer)
 
-  def toggle_off_alarm_min(self,powerswitches):
-    self.__toggle_alarm('min','off',powerswitches)
+  def toggle_off_alarm_min(self,powerswitches,timer = False):
+    self.__toggle_alarm('min','off',powerswitches,timer)
 
-  def toggle_on_alarm_max(self,powerswitches):
-    self.__toggle_alarm('max','on',powerswitches)
+  def toggle_on_alarm_max(self,powerswitches,timer = False):
+    self.__toggle_alarm('max','on',powerswitches,timer)
 
-  def toggle_off_alarm_max(self,powerswitches):
-    self.__toggle_alarm('max','off',powerswitches)
+  def toggle_off_alarm_max(self,powerswitches,timer = False):
+    self.__toggle_alarm('max','off',powerswitches,timer)
 
   def has_alarm_min_powerswitches(self):
     return len(self.config['alarm_min']['powerswitches']) > 0
