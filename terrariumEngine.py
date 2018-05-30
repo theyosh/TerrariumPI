@@ -491,9 +491,9 @@ class terrariumEngine(object):
 
   # Weather part
   def set_weather_config(self,data):
-    update_ok = self.config.save_weather(data)
+    update_ok = self.weather.set_source(data['location']) and self.config.save_weather(data)
     if update_ok:
-      self.weather.set_source(self.config.get_weather_location())
+      #self.weather.set_source(self.config.get_weather_location())
       self.weather.set_windspeed_indicator(self.config.get_weather_windspeed())
 
     return update_ok
@@ -998,9 +998,7 @@ class terrariumEngine(object):
           return False
 
       # Update weather data
-      self.set_weather_config({'location' : data['location'], 'windspeed' : data['windspeed']})
-
-      update_ok = self.set_system_config(data)
+      update_ok = self.set_weather_config({'location' : data['location'], 'windspeed' : data['windspeed']}) and self.set_system_config(data)
       if update_ok:
         # Update config settings
         self.pi_power_wattage = float(self.config.get_pi_power_wattage())
