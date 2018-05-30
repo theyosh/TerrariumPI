@@ -262,7 +262,7 @@ class terrariumWeather(object):
     for source_type in terrariumWeather.valid_sources:
       data = terrariumWeather.valid_sources[source_type].match(source)
       if data:
-        self.source = source
+        self.source = source.replace('http://','https://')
         self.type = source_type
 
         if self.get_type() == 'yr.no':
@@ -414,6 +414,9 @@ class terrariumWeather(object):
   def set_source(self,url):
     if self.__set_source(url):
       self.refresh()
+      return True
+
+    return False
 
   def get_windspeed_indicator(self):
     return self.windspeed
