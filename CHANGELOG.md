@@ -1,7 +1,66 @@
 Changelog
 =========
 
-3.5.9 (2018-05-05)
+
+3.6.0 (2018-05-05)
+------------------
+
+**New**
+------
+- Add support for Chirp moisture/temperature/brightness sensors.
+  https://wemakethings.net/chirp/ [#133](https://github.com/theyosh/TerrariumPI/issues/133). [theyosh]
+- Add new package dependency. [#149](https://github.com/theyosh/TerrariumPI/issues/149). [theyosh]
+- Add webcam config upgrade. [theyosh]
+- Add archive timer for webcams. [theyosh]
+- Add Telegram bot contribution. Thanks to [@BashSer.](https://github.com/BashSer.) [theyosh]
+
+**Fixes**
+------
+- Fix HTTP vs HTTPS urls and give visual feedback when wrong url is
+  used. [#154](https://github.com/theyosh/TerrariumPI/issues/154). [theyosh]
+- Fix dashboard. [theyosh]
+- Fix data and config values for environment. [theyosh]
+- Fix file uploading. [theyosh]
+- Quick fix sprayer info. [TheYOSH]
+- Fix logrotating on tmpfs. [#148](https://github.com/theyosh/TerrariumPI/issues/148). [theyosh]
+- Fix graph legend backgrond. [theyosh]
+
+**Updates**
+------
+- Update environment page. [theyosh]
+- Update environment page. [theyosh]
+- Update README.md. [TheYOSH]
+- Update languages. [theyosh]
+- Better update migration. [theyosh]
+- Update translations. [theyosh]
+- Update README.md. [TheYOSH]
+- Update environment system. [#150](https://github.com/theyosh/TerrariumPI/issues/150). [theyosh]
+- Update I2C timing to double the max timeouts. [theyosh]
+- Update environment. [#150](https://github.com/theyosh/TerrariumPI/issues/150). [theyosh]
+- Update environment engine. Complete rewrite of code. Now you can
+  select power switches for low alarm and high alarm. [#150](https://github.com/theyosh/TerrariumPI/issues/150). [theyosh]
+- Updated 100% italian translation + corrections, compiled MO file.
+  [Lorenzo Faleschini]
+
+**Other**
+------
+- Merge for release. [theyosh]
+- Small environment adjustments. [theyosh]
+- Merge branch 'development' of ssh://github.com/theyosh/TerrariumPI
+  into development. [theyosh]
+- Better light and door dependency description. [theyosh]
+- Make log symlink as running user. [theyosh]
+- Second part of new environment. [#150](https://github.com/theyosh/TerrariumPI/issues/150). [theyosh]
+- Better Chirp support. [theyosh]
+- Change accesslogfile. [#148](https://github.com/theyosh/TerrariumPI/issues/148). [theyosh]
+- Changed moisture logic. [#133](https://github.com/theyosh/TerrariumPI/issues/133). [theyosh]
+- Finetune webcam archive. [theyosh]
+- Merge pull request [#147](https://github.com/theyosh/TerrariumPI/issues/147) from penzoiders/master. [TheYOSH]
+
+  updated 100% italian translation + corrections, compiled MO file
+
+
+3.5.0 (2018-05-05)
 ------------------
 
 **New**
@@ -49,6 +108,7 @@ Changelog
 
 **Updates**
 ------
+- Update changelog. [theyosh]
 - Update translations. [theyosh]
 - Update version number. [theyosh]
 - Update README.md. [TheYOSH]
