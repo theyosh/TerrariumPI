@@ -408,8 +408,12 @@ function websocket_init(reconnect) {
         break;
 
       case 'environment':
-        $.each(['heater','sprayer','light','cooler','watertank','moisture','ph','light'], function(index, value) {
-          update_dashboard_environment(value, data.data[value]);
+        var dashboard = $('div.row.environment div.pull-right div.x_content');
+        $.each(data.data, function(key, value) {
+          update_dashboard_environment(key, value);
+          if ('disabled' == value.config.mode) {
+            dashboard.find('div.row.environment_' + key).detach().appendTo(dashboard);
+          }
         });
         break;
       case 'sensor_gauge':
@@ -636,7 +640,6 @@ function init_form_settings(pType) {
       });
       break;
   }
-
 }
 
 function check_form_data(form) {
@@ -679,7 +682,7 @@ function process_form() {
 function prepare_form_data(form) {
   var formdata = [];
   var form_type = form.attr('action').split('/').pop();
-  var re = /(sensor|switch|webcam|light|sprayer|watertank|moisture|heater|cooler|ph|door|profile|playlist)(_\d+)?_(.*)/i;
+  var re = /(sensor|switch|webcam|light|humidity|temperature|watertank|moisture|conductivity|ph|door|profile|playlist)(_\d+)?_(.*)/i;
   var matches = null;
   var objectdata = {};
   var prev_nr = -1;
@@ -702,6 +705,7 @@ function prepare_form_data(form) {
             break;
           case 'sensors':
           case 'switches':
+          case 'powerswitches':
           case 'environment':
           case 'webcams':
           case 'doors':
@@ -730,7 +734,7 @@ function prepare_form_data(form) {
                   prev_nr = current_nr;
                 }
 
-                if (['timer_start','timer_stop','start','stop','on','off'].indexOf(matches[3]) != -1) {
+                if (matches[3].match(/timer_(start|stop)$/)) {
                   // Load from local format, and store in 24h format. Do not use UNIX timestamp formats
                   field_value = moment(field_value, 'LT').format('HH:mm');
                 }
@@ -756,6 +760,21 @@ function prepare_form_data(form) {
   return formdata;
 }
 /* General functions - End form functions */
+
+function flatten (obj) {
+  var newObj = {};
+  for (var key in obj) {
+    if (obj[key] !== null && obj[key].constructor === Object) {
+      var temp = flatten(obj[key])
+      for (var key2 in temp) {
+        newObj[key+"_"+key2] = temp[key2];
+      }
+    } else {
+      newObj[key] = obj[key];
+    }
+  }
+  return newObj;
+}
 
 /* General functions - System functions */
 function online_updater() {
@@ -1095,7 +1114,6 @@ function history_graph(name, data, type) {
             break;
 
           case 'humidity':
-          case 'sprayer':
           case 'average_humidity':
           case 'moisture':
             val = formatNumber(val) + ' %';
@@ -1134,7 +1152,6 @@ function history_graph(name, data, type) {
   };
 
   switch (type) {
-    case 'sprayer':
     case 'humidity':
     case 'temperature':
     case 'distance':
@@ -1521,18 +1538,28 @@ function update_dashboard_environment(name, data) {
   if (data === undefined) {
     return false;
   }
-
   var systempart = $('div.environment_' + name);
+  if (!data.enabled) {
+    systempart.find('h4').removeClass('orange blue red').addClass('');
+    systempart.find('h4 small span').hide().filter('.disabled').show();
+    systempart.find('table').toggle(false);
+    setContentHeight();
+    return false;
+  }
+
   var enabledColor = '';
   var indicator = globals.temperature_indicator;
   switch (name) {
     case 'light':
       enabledColor = 'orange';
-      break;
-    case 'heater':
+      break
+    case 'conductivity':
+      enabledColor = 'orange';
+      indicator = 'mS';
+      break
+    case 'temperature':
       enabledColor = 'red';
       break;
-    case 'sprayer':
     case 'humidity':
     case 'moisture':
       indicator = '%';
@@ -1540,7 +1567,6 @@ function update_dashboard_environment(name, data) {
       break;
     case 'watertank':
       indicator = 'L';
-    case 'cooler':
       enabledColor = 'blue';
       break;
     case 'ph':
@@ -1549,8 +1575,9 @@ function update_dashboard_environment(name, data) {
   }
 
   systempart.find('h4').removeClass('orange blue red').addClass(data.enabled ? enabledColor : '');
-  systempart.find('h4 small span').hide().filter('.' + (data.enabled ? data.mode : 'disabled')).show();
-  if (data.sensors !== undefined && data.sensors.length > 0) {
+  systempart.find('h4 small span').hide().filter('.' + data.config.mode).show();
+
+  if (data.config.sensors !== undefined && data.config.sensors.length > 0) {
     systempart.find('h4 small span.sensor').show();
   }
 
@@ -1558,7 +1585,7 @@ function update_dashboard_environment(name, data) {
     switch (key) {
       case 'state':
         // Find all i elements withing the .state table row. Hide them all, then filter the enabled one and show that. Then go up and show the complete state table row... Nice!
-        systempart.find('.state i').hide().filter('.' + (value == 'on' ? 'green' : 'red')).show().parent().parent().toggle(data.enabled && data.power_switches.length > 0);
+        systempart.find('.state i').hide().filter('.' + (value ? 'green' : 'red')).show().parent().parent().toggle(true);
         break;
 
       case 'alarm':
@@ -1569,30 +1596,33 @@ function update_dashboard_environment(name, data) {
         systempart.find('span.glyphicon-exclamation-sign').toggle(value);
         break;
 
-      case 'on':
-      case 'off':
-        systempart.find('.' + key).text(moment(value,'HH:mm').format('LT')).parent().toggle(data.mode != 'sensor');
-        systempart.find('.duration').text(moment.duration(data.duration * 1000).humanize()).parent().toggle(data.mode != 'sensor');
-        break;
-
       case 'current':
-        systempart.find('.' + key).text(formatNumber(value,3) + ' ' + indicator).parent().toggle(data.mode === 'sensor' || data.sensors.length > 0);
+        systempart.find('.' + key).text(formatNumber(value,3) + ' ' + indicator).parent().toggle(data.config.mode === 'sensor' || data.config.sensors.length > 0);
         break;
 
       case 'alarm_min':
       case 'alarm_max':
-        if (['heater','cooler'].indexOf(name) != -1) {
-          systempart.find('.' + key).text(formatNumber(data.alarm_min,1) + ' - ' + formatNumber(data.alarm_max,1) + ' ' + indicator).parent().toggle(data.mode === 'sensor' || data.sensors.length > 0);
-        } else {
-          systempart.find('.' + key).text(formatNumber(value,3) + ' ' + indicator).parent().toggle(data.mode === 'sensor' || data.sensors.length > 0);
-        }
+        systempart.find('.' + key).text(formatNumber(data.alarm_min,1) + ' - ' + formatNumber(data.alarm_max,1) + ' ' + indicator).parent().toggle(data.config.mode === 'sensor' || data.config.sensors.length > 0);
         break;
 
-      case 'night_difference':
-        systempart.find('.' + key).text(formatNumber(value,3) + ' ' + indicator).parent().toggle(data.night_difference != 0);
+      case 'is_night':
+        if (data.config.day_night_difference > 0) {
+          systempart.find('.day_night_difference').text(formatNumber(data.config.day_night_difference,3) + ' ' + indicator).parent().toggle(data.config.day_night_difference != 0);
+        }
+        systempart.find('span.day, span.night').hide();
+        systempart.find('span.' + (value ? 'night' : 'day')).show();
+        break;
+
+      case 'timer_min':
+      case 'timer_max':
+        if (value.time_table != undefined && ('timer_min' == key && data.config.alarm_min.powerswitches.length > 0 || 'timer_max' == key && data.config.alarm_max.powerswitches.length > 0 )) {
+          systempart.find('.' + key).text(moment(value.time_table[0][0] * 1000).format('LT') + ' - ' + moment(value.time_table[value.time_table.length-1][1] * 1000).format('LT')).parent().toggle(data.config.mode != 'sensor');
+          systempart.find('.' + key + '.duration').text(moment.duration(value.duration * 1000).humanize()).parent().toggle(data.config.mode != 'sensor');
+        }
         break;
     }
   });
+
   systempart.find('table').toggle(data.enabled);
   setContentHeight();
 }

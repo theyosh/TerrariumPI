@@ -41,9 +41,9 @@ class terrariumI2CSensor(object):
     self.__bus = smbus.SMBus(self.__device_number)
 
     #Datasheet recommend do Soft Reset before measurment:
-    logger.debug('Send soft reset command %s with a timeout of %s seconds' % (self.__SOFTRESET,self.__softreset_timeout))
+    logger.debug('Send soft reset command %s with a timeout of %s seconds' % (self.__SOFTRESET,self.__softreset_timeout * 2.0))
     self.__bus.write_byte(self.__address, self.__SOFTRESET)
-    time.sleep(self.__softreset_timeout)
+    time.sleep(self.__softreset_timeout * 2.0)
 
   def __enter__(self):
     """used to enable python's with statement support"""
@@ -55,7 +55,7 @@ class terrariumI2CSensor(object):
 
   def __get_raw_data(self,trigger,timeout):
     self.__bus.write_byte(self.__address, trigger)
-    time.sleep(timeout)
+    time.sleep(timeout * 2.0)
     data1 = self.__bus.read_byte(self.__address)
     try:
       data2 = self.__bus.read_byte(self.__address)
@@ -74,7 +74,7 @@ class terrariumI2CSensor(object):
     #From datasheet convert this in human view. Temp C = ((Temp_Code*175.72)/65536)-46.85 / T = -46.82 + (172.72 * (ST/2^16))
     #For convert 2 byte in number need MSB*256+LSB.
     logger.debug('Read temperature value from sensor type \'%s\' at device %s with address %s with command %s and timeout %s' % (self.__class__.__name__,self.__device_number,self.__address,self.__TRIGGER_TEMPERATURE_NO_HOLD,self.__temperature_timeout))
-    bytedata = self.__get_raw_data(self.__TRIGGER_TEMPERATURE_NO_HOLD,self.__temperature_timeout)
+    bytedata = self.__get_raw_data(self.__TRIGGER_TEMPERATURE_NO_HOLD,self.__temperature_timeout * 2.0)
     temperature = ((bytedata[0]*256.0+bytedata[1])*175.72/65536.0)-46.85
     logger.debug('Got data from temperature sensor type \'%s\' at device %s with address %s: byte data: %s, temperature: %s' % (self.__class__.__name__,self.__device_number,self.__address,bytedata,temperature))
     return None if not terrariumUtils.is_float(temperature) else float(temperature)
@@ -83,7 +83,7 @@ class terrariumI2CSensor(object):
     #From datasheet convert this in human view. RH% = ((RH*125)/65536)-6 / RH = -6 + (125 * (SRH / 2 ^16))
     #For convert 2 byte in number need MSB*256+LSB.
     logger.debug('Read humidity value from sensor type \'%s\' at device %s with address %s with command %s and timeout %s' % (self.__class__.__name__,self.__device_number,self.__address,self.__TRIGGER_HUMIDITY_NO_HOLD,self.__humidity_timeout))
-    bytedata = self.__get_raw_data(self.__TRIGGER_HUMIDITY_NO_HOLD,self.__humidity_timeout)
+    bytedata = self.__get_raw_data(self.__TRIGGER_HUMIDITY_NO_HOLD,self.__humidity_timeout * 2.0)
     humidity = ((bytedata[0]*256.0+bytedata[1])*125.0/65536.0)-6.0
     logger.debug('Got data from humidity sensor type \'%s\' at device %s with address %s: byte data: %s, humidity: %s' % (self.__class__.__name__,self.__device_number,self.__address,bytedata,humidity))
     return None if not terrariumUtils.is_float(humidity) else float(humidity)
@@ -126,7 +126,7 @@ class terrariumSi7021Sensor(terrariumI2CSensor):
   hardwaretype = 'si7021'
   # Datasheet - https://www.silabs.com/documents/public/data-sheets/Si7021-A20.pdf
   __TEMPERATURE_WAIT_TIME = 0.012  # (datasheet: typ=7, max=10.8 in ms)
-  __HUMIDITY_WAIT_TIME = 0.13     # (datasheet: typ=10, max=12 in ms) -> Not correct??
+  __HUMIDITY_WAIT_TIME = 0.07     # (datasheet: typ=10, max=12 in ms) -> Not correct??
   __SOFTRESET_TIMEOUT = 0.016      # (datasheet: typ=5, max=15 in ms)
 
   def __init__(self, address = 40, device_number = 1):
@@ -160,9 +160,9 @@ class terrariumBME280Sensor(object):
     self.__bus = smbus.SMBus(self.__device_number)
 
     #Datasheet recommend do Soft Reset before measurment:
-    logger.debug('Send soft reset command %s with a timeout of %s seconds' % (self.__SOFTRESET,self.__softreset_timeout))
+    logger.debug('Send soft reset command %s with a timeout of %s seconds' % (self.__SOFTRESET,self.__softreset_timeout * 2.0))
     self.__bus.write_byte(self.__address, self.__SOFTRESET)
-    time.sleep(self.__softreset_timeout)
+    time.sleep(self.__softreset_timeout * 2.0)
 
   def __enter__(self):
     """used to enable python's with statement support"""
@@ -263,7 +263,7 @@ class terrariumBME280Sensor(object):
     #Stand_by time = 1000 ms -> 101(datasheet) -> in HEX =A0
     self.__bus.write_byte_data(self.__address, 0xF5, 0xA0)
 
-    time.sleep(self.__temperature_timeout)
+    time.sleep(self.__temperature_timeout * 2.0)
 
     # Read data back from 0xF7(247), 8 bytes
     # Pressure MSB, LSB, xLSB, Temperature MSB, LSB, xLSB, Humidity MSB, LSB
@@ -378,6 +378,7 @@ class terrariumChirpSensor(object):
     sensor.read_moist = 'moisture' == part
     sensor.read_light = 'light' == part
 
+#    sensor.reset()
     sensor.trigger()
 
     if 'temperature' == part:

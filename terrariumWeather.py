@@ -262,7 +262,7 @@ class terrariumWeather(object):
     for source_type in terrariumWeather.valid_sources:
       data = terrariumWeather.valid_sources[source_type].match(source)
       if data:
-        self.source = source
+        self.source = source.replace('http://','https://')
         self.type = source_type
 
         if self.get_type() == 'yr.no':
@@ -414,6 +414,9 @@ class terrariumWeather(object):
   def set_source(self,url):
     if self.__set_source(url):
       self.refresh()
+      return True
+
+    return False
 
   def get_windspeed_indicator(self):
     return self.windspeed
@@ -430,8 +433,14 @@ class terrariumWeather(object):
     if indicator('temperature').upper() in terrariumWeather.valid_temperature_indicators:
       self.temperature_indicator = indicator
 
+  def get_sun_rise(self):
+    return self.sun['rise']
+
+  def get_sun_set(self):
+    return self.sun['set']
+
   def is_day(self):
-    return self.sun['rise'] < int(time.time()) < self.sun['set']
+    return self.get_sun_rise() < int(time.time()) < self.get_sun_set()
 
   def is_night(self):
     return not self.is_day()
