@@ -227,7 +227,7 @@ if grep -qs "${TMPFS} " /proc/mounts; then
       # There is an existing logfile already. Move it
       mv ${LOGFILE} ${TMPFS}
     fi
-    ln -s "${TMPFS}/terrariumpi.log" "${LOGFILE}"
+    su -c "ln -s ${TMPFS}/terrariumpi.log ${LOGFILE}" -s /bin/bash ${SCRIPT_USER}
   fi
 
   if ! [ -h "${ACCESSLOGFILE}" ]; then
@@ -236,7 +236,7 @@ if grep -qs "${TMPFS} " /proc/mounts; then
       # There is an existing logfile already. Move it
       mv ${ACCESSLOGFILE} ${TMPFS}
     fi
-    ln -s "${TMPFS}/terrariumpi.access.log" "${ACCESSLOGFILE}"
+    su -c "ln -s ${TMPFS}/terrariumpi.access.log ${ACCESSLOGFILE}" -s /bin/bash ${SCRIPT_USER}
   fi
 fi
 

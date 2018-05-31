@@ -392,6 +392,7 @@ class terrariumEngine(object):
     return totals
 
   def __engine_loop(self):
+    time_short = 0
     logger.info('Start terrariumPI engine')
     while self.__running:
       starttime = time.time()
@@ -446,12 +447,14 @@ class terrariumEngine(object):
       except Exception, err:
         print err
 
-      duration = time.time() - starttime
+      duration = (time.time() - starttime) + time_short
       if duration < terrariumEngine.LOOP_TIMEOUT:
         logger.info('Update done in %.5f seconds. Waiting for %.5f seconds for next round' % (duration,terrariumEngine.LOOP_TIMEOUT - duration))
+        time_short = 0
         sleep(terrariumEngine.LOOP_TIMEOUT - duration) # TODO: Config setting
       else:
         logger.warning('Updating took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEngine.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
+        time_short = duration - terrariumEngine.LOOP_TIMEOUT
 
   def __send_message(self,message):
     clients = self.subscribed_queues
@@ -488,9 +491,9 @@ class terrariumEngine(object):
 
   # Weather part
   def set_weather_config(self,data):
-    update_ok = self.config.save_weather(data)
+    update_ok = self.weather.set_source(data['location']) and self.config.save_weather(data)
     if update_ok:
-      self.weather.set_source(self.config.get_weather_location())
+      #self.weather.set_source(self.config.get_weather_location())
       self.weather.set_windspeed_indicator(self.config.get_weather_windspeed())
 
     return update_ok
@@ -500,7 +503,7 @@ class terrariumEngine(object):
 
   def get_weather(self, parameters = [], socket = False):
     data = self.weather.get_data()
-    self.environment.update_timing()
+    self.environment.update()
 
     if socket:
       self.__send_message({'type':'update_weather','data':data})
@@ -596,6 +599,7 @@ class terrariumEngine(object):
     self.get_power_usage_water_flow(socket=True)
 
     if self.environment is not None:
+      self.environment.update(False)
       self.get_environment(socket=True)
   # End switches part
 
@@ -763,14 +767,7 @@ class terrariumEngine(object):
     if len(parameters) > 0 and parameters[0] is not None:
       filter = parameters[0]
 
-    data = self.get_sensors(['average'])['sensors']
-    data['light']     = self.environment.get_light_state()
-    data['sprayer']   = self.environment.get_sprayer_state()
-    data['heater']    = self.environment.get_heater_state()
-    data['cooler']    = self.environment.get_cooler_state()
-    data['watertank'] = self.environment.get_watertank_state()
-    data['moisture']  = self.environment.get_moisture_state()
-    data['ph']  = self.environment.get_ph_state()
+    data = self.environment.get_data()
 
     if filter is not None and filter in data:
       data = { filter : data[filter]}
@@ -1001,9 +998,7 @@ class terrariumEngine(object):
           return False
 
       # Update weather data
-      self.set_weather_config({'location' : data['location'], 'windspeed' : data['windspeed']})
-
-      update_ok = self.set_system_config(data)
+      update_ok = self.set_weather_config({'location' : data['location'], 'windspeed' : data['windspeed']}) and self.set_system_config(data)
       if update_ok:
         # Update config settings
         self.pi_power_wattage = float(self.config.get_pi_power_wattage())

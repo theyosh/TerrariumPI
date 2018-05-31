@@ -130,6 +130,241 @@ class terrariumConfig(object):
               if 'archive' in data:
                 self.__config.set(section, 'archive', 'motion' if terrariumUtils.is_true(data['archive']) else 'disabled')
 
+        elif version == 360:
+          logger.info('Updating configuration file to version: %s' % (version,))
+          for section in self.__config.sections():
+            if section == 'environment':
+              data = self.__get_config(section)
+              newdata = {}
+
+              if 'temperature_mode' not in newdata:
+                newdata['temperature_mode'] = 'weatherinverse' if data['cooler_mode'] == 'weather' else data['cooler_mode']
+
+              if 'cooler_night_difference' in data:
+                newdata['temperature_day_night_difference'] = data['cooler_night_difference']
+              if 'cooler_night_source' in data:
+                newdata['temperature_day_night_source'] = data['cooler_night_source']
+              if 'cooler_sensors' in data:
+                newdata['temperature_sensors'] = data['cooler_sensors']
+
+              if 'cooler_night_enabled' in data:
+                newdata['temperature_alarm_max_light_state'] = 'ignore' if terrariumUtils.is_true(data['cooler_night_enabled']) else 'on'
+
+              if 'cooler_power_switches' in data:
+                newdata['temperature_alarm_max_powerswitches'] = data['cooler_power_switches']
+
+              if 'cooler_settle_timeout' in data:
+                newdata['temperature_alarm_max_settle'] = data['cooler_settle_timeout']
+
+              if 'cooler_off_duration' in data:
+                newdata['temperature_alarm_max_timer_off'] = data['cooler_off_duration']
+
+              if 'cooler_on_duration' in data:
+                newdata['temperature_alarm_max_timer_on'] = data['cooler_on_duration']
+
+              if 'cooler_on' in data:
+                newdata['temperature_alarm_max_timer_start'] = data['cooler_on']
+
+              if 'cooler_off' in data:
+                newdata['temperature_alarm_max_timer_stop'] = data['cooler_off']
+
+
+              if 'temperature_mode' not in newdata or 'disabled' == newdata['temperature_mode']:
+                newdata['temperature_mode'] = 'weatherinverse' if data['heater_mode'] == 'weather' else data['heater_mode']
+
+              if 'heater_night_difference' in data:
+                if 'temperature_day_night_difference' in newdata and terrariumUtils.is_float(newdata['temperature_day_night_difference']):
+                  newdata['temperature_day_night_difference'] = (float(newdata['temperature_day_night_difference']) + float(data['heater_night_difference'])) / 2.0
+                else:
+                  newdata['temperature_day_night_difference'] = data['heater_night_difference']
+
+              if 'heater_night_source' in data and 'temperature_day_night_source' not in newdata or newdata['temperature_day_night_source'] == '':
+                newdata['temperature_day_night_source'] = data['heater_night_source']
+
+              if 'heater_sensors' in data:
+                if 'temperature_sensors' in newdata and newdata['temperature_sensors'] != '':
+                  newdata['temperature_sensors'] += ',' + data['heater_sensors']
+                else:
+                  newdata['temperature_sensors'] = data['heater_sensors']
+
+              if 'heater_day_enabled' in data:
+                newdata['temperature_alarm_min_light_state'] = 'ignore' if terrariumUtils.is_true(data['heater_day_enabled']) else 'off'
+
+              if 'heater_power_switches' in data:
+                newdata['temperature_alarm_min_powerswitches'] = data['heater_power_switches']
+
+              if 'heater_settle_timeout' in data:
+                newdata['temperature_alarm_min_settle'] = data['heater_settle_timeout']
+
+              if 'heater_off_duration' in data:
+                newdata['temperature_alarm_min_timer_off'] = data['heater_off_duration']
+
+              if 'heater_on_duration' in data:
+                newdata['temperature_alarm_min_timer_on'] = data['heater_on_duration']
+
+              if 'heater_on' in data:
+                newdata['temperature_alarm_min_timer_start'] = data['heater_on']
+
+              if 'heater_off' in data:
+                newdata['temperature_alarm_min_timer_stop'] = data['heater_off']
+
+
+              if 'light_mode' in data:
+                newdata['light_mode'] = data['light_mode']
+
+              if 'light_min_hours' in data:
+                newdata['light_min_hours'] = data['light_min_hours']
+
+              if 'light_max_hours' in data:
+                newdata['light_max_hours'] = data['light_max_hours']
+
+              if 'light_hours_shift' in data:
+                newdata['light_hours_shift'] = data['light_hours_shift']
+
+              if 'light_power_switches' in data:
+                newdata['light_alarm_min_powerswitches'] = data['light_power_switches']
+
+              if 'light_on' in data:
+                newdata['light_alarm_min_timer_start'] = data['light_on']
+
+              if 'light_off' in data:
+                newdata['light_alarm_min_timer_stop'] = data['light_off']
+
+              if 'light_on_duration' in data:
+                newdata['light_alarm_min_timer_on'] = data['light_on_duration']
+
+              if 'light_off_duration' in data:
+                newdata['light_alarm_min_timer_off'] = data['light_off_duration']
+
+              newdata['light_alarm_min_settle'] = 10
+              newdata['light_alarm_max_settle'] = 10
+
+
+              if 'moisture_mode' in data:
+                newdata['moisture_mode'] = data['moisture_mode']
+
+              if 'moisture_sensors' in data:
+                newdata['moisture_sensors'] = data['moisture_sensors']
+
+              if 'moisture_power_switches' in data:
+                newdata['moisture_alarm_min_powerswitches'] = data['moisture_power_switches']
+
+              if 'moisture_on' in data:
+                newdata['moisture_alarm_min_timer_start'] = data['moisture_on']
+
+              if 'moisture_off' in data:
+                newdata['moisture_alarm_min_timer_stop'] = data['moisture_off']
+
+              if 'moisture_on_duration' in data:
+                newdata['moisture_alarm_min_timer_on'] = data['moisture_on_duration']
+
+              if 'moisture_off_duration' in data:
+                newdata['moisture_alarm_min_timer_off'] = data['moisture_off_duration']
+
+              if 'moisture_spray_duration' in data:
+                newdata['moisture_alarm_min_duration_on'] = data['moisture_spray_duration']
+
+              if 'moisture_spray_timeout' in data:
+                newdata['moisture_alarm_min_settle'] = data['moisture_spray_timeout']
+
+              if 'moisture_night_enabled' in data:
+                newdata['moisture_alarm_min_light_state'] = 'ignore' if terrariumUtils.is_true(data['moisture_night_enabled']) else 'on'
+
+
+              if 'ph_mode' in data:
+                newdata['ph_mode'] = data['ph_mode']
+
+              if 'ph_sensors' in data:
+                newdata['ph_sensors'] = data['ph_sensors']
+
+              if 'ph_power_switches' in data:
+                newdata['ph_alarm_min_powerswitches'] = data['ph_power_switches']
+
+              if 'ph_on' in data:
+                newdata['ph_alarm_min_timer_start'] = data['ph_on']
+
+              if 'ph_off' in data:
+                newdata['ph_alarm_min_timer_stop'] = data['ph_off']
+
+              if 'ph_on_duration' in data:
+                newdata['ph_alarm_min_timer_on'] = data['ph_on_duration']
+
+              if 'ph_off_duration' in data:
+                newdata['ph_alarm_min_timer_off'] = data['ph_off_duration']
+
+              if 'ph_settle_timeout' in data:
+                newdata['ph_alarm_min_settle'] = data['ph_settle_timeout']
+
+              if 'ph_day_enabled' in data:
+                newdata['ph_alarm_min_light_state'] = 'ignore' if terrariumUtils.is_true(data['ph_day_enabled']) else 'on'
+
+
+              if 'sprayer_mode' in data:
+                newdata['humidity_mode'] = data['sprayer_mode']
+
+              if 'sprayer_sensors' in data:
+                newdata['humidity_sensors'] = data['sprayer_sensors']
+
+              if 'sprayer_power_switches' in data:
+                newdata['humidity_alarm_min_powerswitches'] = data['sprayer_power_switches']
+
+              if 'sprayer_on' in data:
+                newdata['humidity_alarm_min_timer_start'] = data['sprayer_on']
+
+              if 'sprayer_off' in data:
+                newdata['humidity_alarm_min_timer_stop'] = data['sprayer_off']
+
+              if 'sprayer_on_duration' in data:
+                newdata['humidity_alarm_min_timer_on'] = data['sprayer_on_duration']
+
+              if 'sprayer_off_duration' in data:
+                newdata['humidity_alarm_min_timer_off'] = data['sprayer_off_duration']
+
+              if 'sprayer_spray_duration' in data:
+                newdata['humidity_alarm_min_duration_on'] = data['sprayer_spray_duration']
+
+              if 'sprayer_spray_timeout' in data:
+                newdata['humidity_alarm_min_settle'] = data['sprayer_spray_timeout']
+
+              if 'sprayer_night_enabled' in data:
+                newdata['humidity_alarm_min_light_state'] = 'ignore' if terrariumUtils.is_true(data['sprayer_night_enabled']) else 'on'
+
+              newdata['humidity_alarm_min_door_state'] = 'closed'
+
+
+              if 'watertank_mode' in data:
+                newdata['watertank_mode'] = data['watertank_mode']
+
+              if 'watertank_sensors' in data:
+                newdata['watertank_sensors'] = data['watertank_sensors']
+
+              if 'watertank_height' in data:
+                newdata['watertank_height'] = data['watertank_height']
+
+              if 'watertank_volume' in data:
+                newdata['watertank_volume'] = data['watertank_volume']
+
+              if 'watertank_power_switches' in data:
+                newdata['watertank_alarm_min_powerswitches'] = data['watertank_power_switches']
+
+              if 'watertank_on' in data:
+                newdata['watertank_alarm_min_timer_start'] = data['watertank_on']
+
+              if 'watertank_off' in data:
+                newdata['watertank_alarm_min_timer_stop'] = data['watertank_off']
+
+              if 'watertank_on_duration' in data:
+                newdata['watertank_alarm_min_timer_on'] = data['watertank_on_duration']
+
+              if 'watertank_off_duration' in data:
+                newdata['watertank_alarm_min_timer_off'] = data['watertank_off_duration']
+
+              if 'watertank_pump_duration' in data:
+                newdata['watertank_alarm_min_duration_on'] = data['watertank_pump_duration']
+
+              self.save_environment(newdata)
+              break
+
       # Update version number
       self.__config.set('terrariumpi', 'version', str(to_version))
       self.__save_config()
@@ -294,34 +529,31 @@ class terrariumConfig(object):
     return config['port']
 
   # Environment functions
+
   def save_environment(self,data):
     '''Save the terrariumPI environment config
 
     '''
     config = {}
-    for environment_part in data:
-      for part in data[environment_part]:
-        # Do not save the following settings
-        if part in ['enabled','time_table','state','amount','current','temperature','humidity','distance','alarm','alarm_min','alarm_max','limit_max','limit_min','type','night_modus','error','lastaction']:
-          continue
-
-        if data[environment_part][part] is None:
-          data[environment_part][part] = ''
-        config[environment_part + '_' + part] = data[environment_part][part]
+    for key, value in terrariumUtils.flatten_dict(data).iteritems():
+      config[key] = value
 
     self.__config.remove_section('environment')
     return self.__update_config('environment',config,[])
 
   def get_environment(self):
-    config = self.__get_config('environment')
-    data = {'light' : {}, 'sprayer' : {}, 'heater' : {} , 'cooler' : {}, 'watertank' : {}, 'moisture' : {}, 'ph' : {}}
-    for key in config:
+    config = {}
+    for key, value in self.__get_config('environment').iteritems():
       config_keys = key.split('_')
       part = config_keys[0]
       del(config_keys[0])
-      data[part]['_'.join(config_keys)] = config[key]
 
-    return data
+      if part not in config:
+        config[part] = {}
+
+      config[part]['_'.join(config_keys)] = value
+
+    return config
   # End Environment functions
 
   # Profile functions

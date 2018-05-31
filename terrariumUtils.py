@@ -198,7 +198,7 @@ class terrariumUtils():
       timer_time_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(minutes=on_duration)).strftime('%s'))))
     else:
       # Create time periods based on both duration between start and stop time
-      while starttime < stoptime:
+      while starttime <= stoptime:
         if (starttime + datetime.timedelta(minutes=on_duration)) > stoptime:
           on_duration = (stoptime - starttime).total_seconds() / 60
 
@@ -227,3 +227,11 @@ class terrariumUtils():
       duration += time_schedule[1] - time_schedule[0]
 
     return duration
+
+  @staticmethod
+  # https://stackoverflow.com/a/19647596
+  def flatten_dict(dd, separator='_', prefix=''):
+    return { prefix + separator + k if prefix else k : v
+             for kk, vv in dd.items()
+             for k, v in terrariumUtils.flatten_dict(vv, separator, kk).items()
+             } if isinstance(dd, dict) else { prefix : dd if not isinstance(dd,list) else  ','.join(dd)}
