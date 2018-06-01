@@ -369,7 +369,7 @@ class terrariumChirpSensor(object):
                   read_temp=False,
                   read_light=False,
                   min_moist=200,
-                  max_moist=700,
+                  max_moist=750,
                   temp_scale='celsius',
                   temp_offset=0)
     value = None
