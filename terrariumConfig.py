@@ -178,7 +178,7 @@ class terrariumConfig(object):
                 else:
                   newdata['temperature_day_night_difference'] = data['heater_night_difference']
 
-              if 'heater_night_source' in data and 'temperature_day_night_source' not in newdata or newdata['temperature_day_night_source'] == '':
+              if 'heater_night_source' in data and ('temperature_day_night_source' not in newdata or newdata['temperature_day_night_source'] == ''):
                 newdata['temperature_day_night_source'] = data['heater_night_source']
 
               if 'heater_sensors' in data:
