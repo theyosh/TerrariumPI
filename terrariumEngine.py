@@ -27,6 +27,7 @@ from terrariumWebcam import terrariumWebcam
 from terrariumAudio import terrariumAudioPlayer
 from terrariumCollector import terrariumCollector
 from terrariumEnvironment import terrariumEnvironment
+from terrariumNotification import terrariumNotification
 from terrariumUtils import terrariumUtils
 
 from gevent import monkey, sleep
@@ -64,6 +65,8 @@ class terrariumEngine(object):
     self.pi_power_wattage = 5
 
     self.environment = None
+
+    self.notification = terrariumNotification()
 
     # Load config
     logger.info('Loading terrariumPI config')
@@ -113,7 +116,7 @@ class terrariumEngine(object):
 
     # Load the environment system. This will controll the lights, sprayer and heaters
     logger.debug('Loading terrariumPI environment system')
-    self.environment = terrariumEnvironment(self.sensors, self.power_switches, self.weather, self.is_door_open, self.config.get_environment)
+    self.environment = terrariumEnvironment(self.sensors, self.power_switches, self.weather, self.is_door_open, self.config.get_environment,self.notification)
     logger.debug('Done loading terrariumPI environment system')
 
     # Load webcams from config

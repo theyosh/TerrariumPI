@@ -234,4 +234,4 @@ class terrariumUtils():
     return { prefix + separator + k if prefix else k : v
              for kk, vv in dd.items()
              for k, v in terrariumUtils.flatten_dict(vv, separator, kk).items()
-             } if isinstance(dd, dict) else { prefix : dd if not isinstance(dd,list) else  ','.join(dd)}
+             } if isinstance(dd, dict) else { prefix : dd if not isinstance(dd,list) else ','.join(dd)}
