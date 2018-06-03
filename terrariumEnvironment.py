@@ -373,7 +373,7 @@ class terrariumEnvironmentPart(object):
   def get_config(self):
     return self.config
 
-  def get_data(self):
+  def get_data(self, alarm_part = None):
     data = {'enabled'     : self.is_enabled(),
             'state'       : self.timer_min_data['power_state'] or self.timer_max_data['power_state'],
             'alarm'       : self.is_alarm_min() == True or self.is_alarm_max() == True,
@@ -381,10 +381,19 @@ class terrariumEnvironmentPart(object):
             'is_night'    : self.is_in_night_mode(),
             'last_update' : self.last_update}
 
-    data = dict(data, **{'config' : self.config})
-    data = dict(data, **self.sensor_data)
-    data = dict(data, **{'timer_min' : self.timer_min_data})
-    data = dict(data, **{'timer_max' : self.timer_max_data})
+    data = dict(data, **{'config' : dict(self.config)})
+
+    if alarm_part is not None:
+      del(data['config']['alarm_min' if alarm_part == 'max' else 'alarm_max'])
+      data['config'] = dict(data['config'], **dict(data['config']['alarm_min' if alarm_part == 'min' else 'alarm_max']))
+      del(data['config']['alarm_min' if alarm_part == 'min' else 'alarm_max'])
+
+    data = dict(data, **dict(self.sensor_data))
+
+    if alarm_part is None or alarm_part == 'min':
+      data = dict(data, **{'timer_min' : dict(self.timer_min_data)})
+    if alarm_part is None or alarm_part == 'max':
+      data = dict(data, **{'timer_max' : dict(self.timer_max_data)})
 
     return data
 
@@ -502,7 +511,7 @@ class terrariumEnvironment(object):
   VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentDistance.env_type)
   VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentWatertank.env_type)
 
-  def __init__(self, sensors, powerswitches, weather, door_status, config):
+  def __init__(self, sensors, powerswitches, weather, door_status, config, notification):
     logger.debug('Init terrariumPI environment')
     self.__environment_parts = {}
     for env_part in terrariumEnvironment.VALID_ENVIRONMENT_TYPES:
@@ -512,6 +521,8 @@ class terrariumEnvironment(object):
     self.config = config
     # Door status callback
     self.is_door_open = door_status
+
+    self.notification = notification
 
     self.sensors = sensors
     self.powerswitches = powerswitches
@@ -711,6 +722,9 @@ class terrariumEnvironment(object):
                 if not environment_part.is_alarm_min_at_max_power():
                   logger.info('Environment %s is turning on the alarm min powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
                   environment_part.toggle_on_alarm_min(self.powerswitches)
+
+                  self.notification.message('environment_' + environment_part.get_type() + '_alarm_low_on',environment_part.get_data('min'))
+
               else:
                 if not environment_part.is_alarm_min_at_min_power():
                   if not light_check_ok:
@@ -720,6 +734,7 @@ class terrariumEnvironment(object):
                     logger.warning('Environment %s is turning off the alarm min powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_min_door_state()))
 
                   environment_part.toggle_off_alarm_min(self.powerswitches)
+                  self.notification.message('environment_' + environment_part.get_type() + '_alarm_low_off',environment_part.get_data('min'))
                 else:
                   logger.info('Environment %s should turn on the alarm min but is blocked by: door %s, light %s' % (environment_part.get_type(),not door_check_ok, not light_check_ok))
 
@@ -727,6 +742,7 @@ class terrariumEnvironment(object):
               if not environment_part.is_alarm_min_at_min_power():
                 logger.info('Environment %s is turning off the alarm min powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
                 environment_part.toggle_off_alarm_min(self.powerswitches)
+                self.notification.message('environment_' + environment_part.get_type() + '_alarm_low_off',environment_part.get_data('min'))
           else:
             if toggle_on_alarm_min is not None:
               logger.info('Environment %s alarm min is triggered to state %s, but has no powerswitches configured' % (environment_part.get_type(),toggle_on_alarm_min))
@@ -746,6 +762,7 @@ class terrariumEnvironment(object):
                 if not environment_part.is_alarm_max_at_max_power():
                   logger.info('Environment %s is turning on the alarm max powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
                   environment_part.toggle_on_alarm_max(self.powerswitches)
+                  self.notification.message('environment_' + environment_part.get_type() + '_alarm_high_on',environment_part.get_data('max'))
               else:
                 if not environment_part.is_alarm_max_at_min_power():
                   if not light_check_ok:
@@ -754,6 +771,7 @@ class terrariumEnvironment(object):
                   elif not door_check_ok:
                     logger.warning('Environment %s is turning off the alarm max powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_max_door_state()))
                   environment_part.toggle_off_alarm_max(self.powerswitches)
+                  self.notification.message('environment_' + environment_part.get_type() + '_alarm_high_off',environment_part.get_data('max'))
 
                 else:
                   logger.info('Environment %s should turn on the alarm max but is blocked by: door %s, light %s' % (environment_part.get_type(),not door_check_ok, not light_check_ok))
@@ -761,6 +779,7 @@ class terrariumEnvironment(object):
               if not environment_part.is_alarm_max_at_min_power():
                 logger.info('Environment %s is turning off the alarm max powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
                 environment_part.toggle_off_alarm_max(self.powerswitches)
+                self.notification.message('environment_' + environment_part.get_type() + '_alarm_high_off',environment_part.get_data('max'))
 
           else:
             if toggle_on_alarm_max is not None:
