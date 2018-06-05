@@ -7,3 +7,4 @@ audio/*
 description.txt
 weather.txt
 logging.debug.cfg
+notifications.cfg

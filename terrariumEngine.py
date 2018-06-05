@@ -66,6 +66,7 @@ class terrariumEngine(object):
 
     self.environment = None
 
+    # Notification engine
     self.notification = terrariumNotification()
 
     # Load config
@@ -633,6 +634,11 @@ class terrariumEngine(object):
     return self.config.save_doors(self.doors)
 
   def toggle_door_status(self, data):
+    if 'state' in data and 'open' == data['state']:
+      self.notification.message('door_toggle_open',data)
+    elif 'state' in data and 'closed' == data['state']:
+      self.notification.message('door_toggle_closed',data)
+
     self.collector.log_door_data(data)
     self.get_doors_status(socket=True)
     self.get_doors(socket=True)
@@ -825,6 +831,15 @@ class terrariumEngine(object):
     return update_ok
   # End profile part
 
+
+  # Notifications part
+  def get_notifications_config(self):
+    return self.notification.get_config()
+
+  def set_notifications(self,data):
+    return self.notification.set_config(data)
+  # End notifications part
+
   # System functions part
   def authenticate(self,username, password):
     return password and (username in self.authentication) and self.authentication[username] == password
@@ -961,6 +976,9 @@ class terrariumEngine(object):
     if 'environment' == part or part is None:
       data.update(self.get_environment_config())
 
+    if 'notifications' == part or part is None:
+      data.update({'notifications' : self.get_notifications_config()})
+
     return data
 
   def set_config(self,part,data,files = None):
@@ -988,6 +1006,9 @@ class terrariumEngine(object):
 
     elif 'profile' == part:
       update_ok = self.set_profile(data,files)
+
+    elif 'notifications' == part:
+      update_ok = self.set_notifications(data)
 
     elif 'system' == part:
       if 'new_password' in data and data['new_password'] != '' and 'cur_password' in data and data['cur_password'] != '' and data['new_password'] != data['cur_password']:

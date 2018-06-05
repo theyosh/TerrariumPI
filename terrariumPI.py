@@ -10,7 +10,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 from terrariumEngine import terrariumEngine
 from terrariumWebserver import terrariumWebserver
-logger.info('Starting terrariumPI version' )
+logger.info('Starting terrariumPI')
 
 if __name__  == "__main__":
   logger.debug('Starting terrariumPI engine')
