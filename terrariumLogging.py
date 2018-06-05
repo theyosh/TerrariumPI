@@ -2,6 +2,8 @@
 
 import logging
 import logging.handlers
+import logging.config
+
 import zipfile
 import codecs
 import sys
@@ -11,7 +13,7 @@ import time
 import glob
 import shutil
 
-import logging.config
+from terrariumNotification import terrariumNotification
 
 class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandler):
     """
@@ -61,6 +63,17 @@ class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandl
         log_archive.close()
 
         os.remove(dfn)
+
+class NotificationLogger(logging.StreamHandler):
+
+  def __init__(self,*args, **kwargs):
+    self.notification = terrariumNotification()
+    super(NotificationLogger,self).__init__(*args, **kwargs)
+
+  def emit(self,data):
+    if data.name not in ['terrariumTranslations']:
+      #print data.levelname
+      self.notification.message('system_' + str(data.levelname).lower() , {'message':data.getMessage()} )
 
 logging.config.fileConfig('logging.cfg')
 if os.path.isfile('logging.debug.cfg'):

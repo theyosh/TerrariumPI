@@ -128,7 +128,7 @@ class terrariumWebserver(object):
                      apply=self.__authenticate(True)
                     )
 
-    self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|doors|audio|environment|profile)>',
+    self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|doors|audio|environment|profile|notifications)>',
                      method=['PUT','POST','DELETE'],
                      callback=self.__update_api_call,
                      apply=self.__authenticate(True)

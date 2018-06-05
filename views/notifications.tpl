@@ -31,36 +31,30 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-
-
-                    <div class="col-md-2 col-sm-3 col-xs-12 form-group">
-                      <label for="email_to">{{_('Receiver email')}}</label>
-                      <input class="form-control" name="email_to" placeholder="{{_('Receiver email')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_email_to')}}">
-                    </div>
-
-
-                    <div class="col-md-2 col-sm-3 col-xs-12 form-group">
-                      <label for="email_server">{{_('SMTP server')}}</label>
-                      <input class="form-control" name="email_server" placeholder="{{_('SMTP srever')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_email_server')}}">
-                    </div>
-
-                    <div class="col-md-2 col-sm-3 col-xs-12 form-group">
-                      <label for="email_to">{{_('SMTP username')}}</label>
-                      <input class="form-control" name="email_server_username" placeholder="{{_('SMTP userame')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_email_email_server_username')}}">
-                    </div>
-
-                    <div class="col-md-2 col-sm-3 col-xs-12 form-group">
-                      <label for="email_to">{{_('SMTP password')}}</label>
-                      <input class="form-control" name="email_server_password" placeholder="{{_('SMTP password')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_email_email_server_password')}}">
-                    </div>
-
-
-
+                  <div class="col-md-2 col-sm-3 col-xs-12 form-group">
+                    <label for="email_to">{{_('Receiver email')}}</label>
+                    <input class="form-control" name="email_receiver" placeholder="{{_('Receiver email')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_email_receiver')}}">
+                  </div>
+                  <div class="col-md-2 col-sm-3 col-xs-12 form-group">
+                    <label for="email_server">{{_('SMTP server')}}</label>
+                    <input class="form-control" name="email_server" placeholder="{{_('SMTP server')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_email_server')}}">
+                  </div>
+                  <div class="col-md-2 col-sm-3 col-xs-12 form-group">
+                    <label for="email_server">{{_('SMTP server port')}}</label>
+                    <input class="form-control" name="email_serverport" placeholder="{{_('SMTP server port')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_email_serverport')}}">
+                  </div>
+                  <div class="col-md-2 col-sm-3 col-xs-12 form-group">
+                    <label for="email_to">{{_('SMTP username')}}</label>
+                    <input class="form-control" name="email_username" placeholder="{{_('SMTP userame')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_email_email_username')}}">
+                  </div>
+                  <div class="col-md-2 col-sm-3 col-xs-12 form-group">
+                    <label for="email_to">{{_('SMTP password')}}</label>
+                    <input class="form-control" name="email_password" placeholder="{{_('SMTP password')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_email_email_password')}}">
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
           <div class="row" id="notifications_twiter">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -74,11 +68,26 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
+                  <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                    <label for="email_to">{{_('Consumer key')}}</label>
+                    <input class="form-control" name="twitter_consumer_key" placeholder="{{_('Receiver email')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_twitter_consumer_key')}}">
+                  </div>
+                  <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                    <label for="email_server">{{_('Consumer secret')}}</label>
+                    <input class="form-control" name="twitter_consumer_secret" placeholder="{{_('Consumer secret')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_twitter_consumer_secret')}}">
+                  </div>
+                  <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                    <label for="email_server">{{_('Access token')}}</label>
+                    <input class="form-control" name="twitter_access_token" placeholder="{{_('Access token')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_twitter_access_token')}}">
+                  </div>
+                  <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                    <label for="email_to">{{_('Access token secret')}}</label>
+                    <input class="form-control" name="twitter_access_token_secret" placeholder="{{_('Access token secret')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_twitter_access_token_secret')}}">
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
           <div class="row" id="notifications_pushover">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -92,11 +101,18 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
+                  <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                    <label for="email_to">{{_('API Token')}}</label>
+                    <input class="form-control" name="pushover_api_token" placeholder="{{_('API Token')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_pushover_api_token')}}">
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                    <label for="email_server">{{_('User key')}}</label>
+                    <input class="form-control" name="pushover_user_key" placeholder="{{_('User key')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_pushover_user_key')}}">
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
           <div class="row" id="notifications_telegram">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -110,12 +126,18 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
+                  <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                    <label for="email_to">{{_('Bot Token')}}</label>
+                    <input class="form-control" name="telegram_bot_token" placeholder="{{_('Bot Token')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_telegram_bot_token')}}">
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                    <label for="email_server">{{_('User id')}}</label>
+                    <input class="form-control" name="telegram_userid" placeholder="{{_('User id')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_telegram_userid')}}">
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-
           <div class="row" id="notifications_messages">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -142,34 +164,25 @@
                   </div>
 % for message in notifications.get_messages():
                   <div class="row">
-                    <div class="col-md-2 col-sm-3 col-xs-12 form-group">
-                      <input type="checkbox" class="js-switch" id="{{message['id']}}" />
+                    <div class="col-md-2 col-sm-3 col-xs-12 form-group"s>
+                      <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="{{message['id']}}_enabled" type="radio" value="true">{{_('Yes')}}</label>
+                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="{{message['id']}}_enabled" type="radio" value="false">{{_('No')}}</label>
+                      </div>
                     </div>
-
                     <div class="col-md-3 col-sm-3 col-xs-12 form-group">
                       {{message['title']}}
+                      <input type="hidden" value="" name="{{message['id']}}_title">
                     </div>
                     <div class="col-md-7 col-sm-6 col-xs-12 form-group">
-                      <textarea required="required" class="form-control" name="message" id="{{message['id']}}_message" >{{message['message']}}</textarea>
+                      <textarea required="required" class="form-control" name="{{message['id']}}_message" ></textarea>
                     </div>
                   </div>
 % end
-
-
-
-
-
-
-
                 </div>
               </div>
             </div>
           </div>
-
-
-
-
-
           <div class="row submit">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="ln_solid"></div>
@@ -182,12 +195,56 @@
           </div>
         </form>
         <script type="text/javascript">
+          $(document).ready(function() {
+            init_form_settings('notifications');
 
-var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+            $.get($('form').attr('action'),function(data){
+              $.each(data.notifications,function(part,partdata) {
+                switch (part) {
+                  case 'email':
+                  case 'twitter':
+                  case 'pushover':
+                  case 'telegram':
+                    $.each(partdata,function(key,value){
+                      var config_field = $('form [name="' + part + '_' + key + '"]');
+                      if (config_field.length >= 1) {
+                        switch (config_field.prop('type').toLowerCase()) {
+                          case 'text':
+                            config_field.val(value);
+                            break;
+                        }
+                      }
+                    });
+                    break;
 
-elems.forEach(function(html) {
-  var switchery = new Switchery(html);
-});
+                  case 'messages':
+                    $.each(partdata,function(key,value){
+                      $.each(value,function(index,data){
+                        var config_field = $('form [name="' + value.id + '_' + index + '"]');
+                        if (config_field.length >= 1) {
+                          switch (config_field.prop('type').toLowerCase()) {
+                            case 'text':
+                            case 'textarea':
+                            case 'hidden':
+                              config_field.val(data);
+                              break;
 
+                          case 'radio':
+                            $('input[name="' + value.id + '_' + index + '"][value="' + data + '"]').attr('checked','checked').parent().addClass('active');
+                            break;
+
+                          case 'select-one':
+                          case 'select-multiple':
+                            config_field.val(data[value]).trigger('change');
+                            break;
+                          }
+                        }
+                      });
+                    });
+                    break;
+                }
+              });
+            });
+          });
         </script>
 % include('inc/page_footer.tpl')
