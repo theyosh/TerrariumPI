@@ -32,7 +32,6 @@ class terrariumNotificationMessage(object):
     self.title = title.strip()
     self.message = message.strip()
 
-
   def get_id(self):
     return self.id
 
@@ -53,7 +52,7 @@ class terrariumNotificationMessage(object):
             }
 
 class terrariumNotification(object):
-  __regex_parse = re.compile(r"%(?P<index>[^%]+)%")
+  __regex_parse = re.compile(r"%(?P<index>[^% ]+)%")
 
   __default_notifications = {
     'environment_light_alarm_low_on' : terrariumNotificationMessage('environment_light_alarm_low_on',_('Environment light day on'),'%raw_data%'),
@@ -217,7 +216,7 @@ class terrariumNotification(object):
                   'password'   : password}
 
   def send_email(self,subject,message):
-    mailserver = smtplib.SMTP(self.email['server'],self.email['serverport'])
+    mailserver = smtplib.SMTP(self.email['server'],self.email['serverport'],timeout=15)
     mailserver.ehlo()
     try:
       mailserver.starttls()
@@ -226,7 +225,11 @@ class terrariumNotification(object):
       pass
 
     if self.email['username'] is not None and self.email['password'] is not None and '' != self.email['username'] and '' != self.email['password']:
-      mailserver.login(self.email['username'], self.email['password'])
+      try:
+        mailserver.login(self.email['username'], self.email['password'])
+      except Exception, ex:
+        print ex
+        logger.exception(ex)
 
     for receiver in self.email['receiver']:
       msg = MIMEMultipart()
@@ -235,7 +238,11 @@ class terrariumNotification(object):
       msg['Subject'] = subject
       msg.attach(MIMEText(message))
 
-      mailserver.sendmail(receiver,re.sub(r"(.*)@(.*)", "\\1+terrariumpi@\\2", receiver, 0, re.MULTILINE),msg.as_string())
+      try:
+        mailserver.sendmail(receiver,re.sub(r"(.*)@(.*)", "\\1+terrariumpi@\\2", receiver, 0, re.MULTILINE),msg.as_string())
+      except Exception, ex:
+        print ex
+        logger.exception(ex)
 
     mailserver.quit()
 
@@ -249,14 +256,20 @@ class terrariumNotification(object):
     # For now, disable during development
     return
 
-    api = twitter.Api(consumer_key=self.twitter['consumer_key'],
-                      consumer_secret=self.twitter['consumer_secret'],
-                      access_token_key=self.twitter['access_token'],
-                      access_token_secret=self.twitter['access_token_secret'])
+    try:
+      api = twitter.Api(consumer_key=self.twitter['consumer_key'],
+                        consumer_secret=self.twitter['consumer_secret'],
+                        access_token_key=self.twitter['access_token'],
+                        access_token_secret=self.twitter['access_token_secret'])
 
-    if api.VerifyCredentials() is not None:
-      status = api.PostUpdates(message)
-      # [Status(ID=1003393079041314816, ScreenName=MadagascarGecko, Created=Sun Jun 03 21:48:46 +0000 2018, Text=u'Environment watertank sensors are not up to date. Check your sensors on the sensor page. So force the power down to be sure!')]
+      if api.VerifyCredentials() is not None:
+        status = api.PostUpdates(message)
+        # [Status(ID=1003393079041314816, ScreenName=MadagascarGecko, Created=Sun Jun 03 21:48:46 +0000 2018, Text=u'Environment watertank sensors are not up to date. Check your sensors on the sensor page. So force the power down to be sure!')]
+    except Exception, ex:
+      print ex
+      logger.exception(ex)
+
+
 
   def set_pushover(self,api_token,user_key):
     self.pushover = {'api_token' : api_token,
@@ -266,10 +279,14 @@ class terrariumNotification(object):
     # For now, disable during development
     return
 
-    client = pushover.Client(self.pushover['user_key'], api_token=self.pushover['api_token'])
-    if client.verify():
-      status = client.send_message(message, title=subject)
-      # {u'status': 1, u'request': u'daad6828-3efe-44d9-89eb-9922fa8e0dda'}
+    try:
+      client = pushover.Client(self.pushover['user_key'], api_token=self.pushover['api_token'])
+      if client.verify():
+        status = client.send_message(message, title=subject)
+        # {u'status': 1, u'request': u'daad6828-3efe-44d9-89eb-9922fa8e0dda'}
+    except Exception, ex:
+      print ex
+      logger.exception(ex)
 
   def set_telegram(self,bot_token,userid):
     self.telegram = {'bot_token' : bot_token,
@@ -279,9 +296,13 @@ class terrariumNotification(object):
     # For now, disable during development
     return
 
-    updater = Updater(self.telegram['bot_token'])
-    status = updater.bot.send_message(chat_id=self.telegram['userid'], text=message)
-    # {'delete_chat_photo': False, 'new_chat_photo': [], 'from': {'username': u'terrariumpi_bot', 'first_name': u'TerrariumPI', 'is_bot': True, 'id': 519390339}, 'text': u'Dimmer PWM Dimmer is already working. Ignoring state change!. Will switch to latest state value when done', 'caption_entities': [], 'entities': [], 'channel_chat_created': False, 'new_chat_members': [], 'supergroup_chat_created': False, 'chat': {'first_name': u'Yoshie', 'last_name': u'Online', 'type': u'private', 'id': 508490874}, 'photo': [], 'date': 1528062541, 'group_chat_created': False, 'message_id': 14}
+    try:
+      updater = Updater(self.telegram['bot_token'])
+      status = updater.bot.send_message(chat_id=self.telegram['userid'], text=message)
+      # {'delete_chat_photo': False, 'new_chat_photo': [], 'from': {'username': u'terrariumpi_bot', 'first_name': u'TerrariumPI', 'is_bot': True, 'id': 519390339}, 'text': u'Dimmer PWM Dimmer is already working. Ignoring state change!. Will switch to latest state value when done', 'caption_entities': [], 'entities': [], 'channel_chat_created': False, 'new_chat_members': [], 'supergroup_chat_created': False, 'chat': {'first_name': u'Yoshie', 'last_name': u'Online', 'type': u'private', 'id': 508490874}, 'photo': [], 'date': 1528062541, 'group_chat_created': False, 'message_id': 14}
+    except Exception, ex:
+      print ex
+      logger.exception(ex)
 
   def message(self,message_id,data = None):
     if message_id not in self.messages or not self.messages[message_id].is_enabled():
