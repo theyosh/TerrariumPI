@@ -340,6 +340,12 @@ class terrariumEnvironmentPart(object):
   def is_alarm_max_off(self):
     return not self.is_alarm_max_on()
 
+  def has_settled_alarm_min(self):
+    return int(time.time()) - self.timer_min_data['lastaction'] > self.config['alarm_min']['settle']
+
+  def has_settled_alarm_max(self):
+    return int(time.time()) - self.timer_max_data['lastaction'] > self.config['alarm_max']['settle']
+
   def toggle_on_alarm_min(self,powerswitches,timer = False):
     self.__toggle_alarm('min','on',powerswitches,timer)
 
@@ -404,6 +410,11 @@ class terrariumEnvironmentLight(terrariumEnvironmentPart):
   def get_type(self):
     return terrariumEnvironmentLight.env_type
 
+  def set_alarm_min(self,start,stop,timer_on,timer_off,light_state,door_state,duration_on,settle,powerswitches):
+    super(terrariumEnvironmentLight, self).set_alarm_min(start,stop,timer_on,timer_off,'ignore',door_state,0,0,powerswitches)
+
+  def set_alarm_max(self,start,stop,timer_on,timer_off,light_state,door_state,duration_on,settle,powerswitches):
+    super(terrariumEnvironmentLight, self).set_alarm_max(start,stop,timer_on,timer_off,'ignore',door_state,0,0,powerswitches)
 
   def set_hours_limits(self,max_hours,min_hours,hours_shift):
     self.config['max_hours']   = float(max_hours)
@@ -693,9 +704,6 @@ class terrariumEnvironment(object):
             toggle_on_alarm_min = environment_part.is_alarm_min()
             toggle_on_alarm_max = environment_part.is_alarm_max()
 
-#              if toggle_on_alarm_min:
-#                extra_logging_message = 'Sprayer humdity value %f%% is lower then alarm %f%%.' % (self.sprayer['humidity']['current'],
-#                                                                                          self.sprayer['humidity']['alarm_min'])
         elif environment_part.in_timer_mode() or environment_part.in_weather_mode() or environment_part.in_weather_inverse_mode():
           toggle_on_alarm_min = environment_part.is_time_min()
           toggle_on_alarm_max = environment_part.is_time_max()
@@ -709,81 +717,81 @@ class terrariumEnvironment(object):
             toggle_on_alarm_max = environment_part.is_alarm_max()
 
         logger.debug('Environment %s is has alarm_min: %s, alarm_max: %s, trigger?: %s' % (environment_part.get_type(),toggle_on_alarm_min,toggle_on_alarm_max,trigger))
-        if trigger:
-          if toggle_on_alarm_min is not None and environment_part.has_alarm_min_powerswitches():
+
+        if not trigger:
+          return
+
+        if toggle_on_alarm_min is not None and not environment_part.has_alarm_min_powerswitches():
+          logger.debug('Environment %s alarm min is triggered to state %s, but has no powerswitches configured' % (environment_part.get_type(),toggle_on_alarm_min))
+        elif toggle_on_alarm_min is not None:
+          settle_check = (environment_part.in_sensor_mode() or environment_part.has_sensors()) and not (environment_part.is_alarm_min_on() and not toggle_on_alarm_min)
+
+          if settle_check and not environment_part.has_settled_alarm_min():
+            logger.info('Environment %s alarm min is triggered to state %s, but the settle time has not passed: %s seconds.' % (environment_part.get_type(),toggle_on_alarm_min,environment_part.get_config()['alarm_min']['settle']))
+
+          else:
             if toggle_on_alarm_min:
-              light_check_ok = 'ignore' == environment_part.get_alarm_min_light_state() or \
-                               (environment_part.get_alarm_min_light_state() == ('on' if self.light_on() else 'off'))
 
-              door_check_ok = 'ignore' == environment_part.get_alarm_min_door_state() or \
-                              (environment_part.get_alarm_min_door_state() == ('open' if self.is_door_open() else 'closed'))
+              if not environment_part.is_alarm_min_at_max_power():
+                light_check_ok = 'ignore' == environment_part.get_alarm_min_light_state() or \
+                                 (environment_part.get_alarm_min_light_state() == ('on' if self.light_on() else 'off'))
+                door_check_ok  = 'ignore' == environment_part.get_alarm_min_door_state() or \
+                                 (environment_part.get_alarm_min_door_state() == ('open' if self.is_door_open() else 'closed'))
 
-              if light_check_ok and door_check_ok:
-                if not environment_part.is_alarm_min_at_max_power():
+                if light_check_ok and door_check_ok:
                   logger.info('Environment %s is turning on the alarm min powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
                   environment_part.toggle_on_alarm_min(self.powerswitches)
-
                   self.notification.message('environment_' + environment_part.get_type() + '_alarm_low_on',environment_part.get_data('min'))
+                else:
+                  if not light_check_ok:
+                    logger.info('Environment %s has blocked the alarm min powerswitches due to light state %s' % (environment_part.get_type(),environment_part.get_alarm_min_light_state()))
+                  if not door_check_ok:
+                    logger.warning('Environment %s ahs blocked the alarm min powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_min_door_state()))
 
               else:
-                if not environment_part.is_alarm_min_at_min_power():
-                  if not light_check_ok:
-                    logger.info('Environment %s is turning off the alarm min powerswitches due to light state %s' % (environment_part.get_type(),environment_part.get_alarm_min_light_state()))
+                logger.debug('Environment %s alarm low is already at max power.' % environment_part.get_type())
 
-                  elif not door_check_ok:
-                    logger.warning('Environment %s is turning off the alarm min powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_min_door_state()))
+            elif not toggle_on_alarm_min and not environment_part.is_alarm_min_at_min_power():
+              logger.info('Environment %s is turning off the alarm min powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
+              environment_part.toggle_off_alarm_min(self.powerswitches)
+              self.notification.message('environment_' + environment_part.get_type() + '_alarm_low_off',environment_part.get_data('min'))
 
-                  environment_part.toggle_off_alarm_min(self.powerswitches)
-                  self.notification.message('environment_' + environment_part.get_type() + '_alarm_low_off',environment_part.get_data('min'))
-                else:
-                  logger.info('Environment %s should turn on the alarm min but is blocked by: door %s, light %s' % (environment_part.get_type(),not door_check_ok, not light_check_ok))
 
-            else:
-              if not environment_part.is_alarm_min_at_min_power():
-                logger.info('Environment %s is turning off the alarm min powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
-                environment_part.toggle_off_alarm_min(self.powerswitches)
-                self.notification.message('environment_' + environment_part.get_type() + '_alarm_low_off',environment_part.get_data('min'))
+        if toggle_on_alarm_max is not None and not environment_part.has_alarm_max_powerswitches():
+          logger.debug('Environment %s alarm max is triggered to state %s, but has no powerswitches configured' % (environment_part.get_type(),toggle_on_alarm_max))
+        elif toggle_on_alarm_max is not None:
+          settle_check = (environment_part.in_sensor_mode() or environment_part.has_sensors()) and not (environment_part.is_alarm_max_on() and not toggle_on_alarm_max)
+
+          if settle_check and not environment_part.has_settled_alarm_max():
+            logger.info('Environment %s alarm max is triggered to state %s, but the settle time has not passed: %s seconds.' % (environment_part.get_type(),toggle_on_alarm_max,environment_part.get_config()['alarm_max']['settle']))
+
           else:
-            if toggle_on_alarm_min is not None:
-              logger.info('Environment %s alarm min is triggered to state %s, but has no powerswitches configured' % (environment_part.get_type(),toggle_on_alarm_min))
-
-
-
-          if toggle_on_alarm_max is not None and environment_part.has_alarm_max_powerswitches():
-
             if toggle_on_alarm_max:
-              light_check_ok = 'ignore' == environment_part.get_alarm_max_light_state() or \
-                               (environment_part.get_alarm_max_light_state() == ('on' if self.light_on() else 'off'))
 
-              door_check_ok = 'ignore' == environment_part.get_alarm_max_door_state() or \
-                              (environment_part.get_alarm_max_door_state() == ('open' if self.is_door_open() else 'closed'))
+              if not environment_part.is_alarm_max_at_max_power():
+                light_check_ok = 'ignore' == environment_part.get_alarm_max_light_state() or \
+                                 (environment_part.get_alarm_max_light_state() == ('on' if self.light_on() else 'off'))
+                door_check_ok  = 'ignore' == environment_part.get_alarm_max_door_state() or \
+                                 (environment_part.get_alarm_max_door_state() == ('open' if self.is_door_open() else 'closed'))
 
-              if light_check_ok and door_check_ok:
-                if not environment_part.is_alarm_max_at_max_power():
+                if light_check_ok and door_check_ok:
                   logger.info('Environment %s is turning on the alarm max powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
                   environment_part.toggle_on_alarm_max(self.powerswitches)
                   self.notification.message('environment_' + environment_part.get_type() + '_alarm_high_on',environment_part.get_data('max'))
-              else:
-                if not environment_part.is_alarm_max_at_min_power():
-                  if not light_check_ok:
-                    logger.info('Environment %s is turning off the alarm max powerswitches due to light state %s' % (environment_part.get_type(),environment_part.get_alarm_max_light_state()))
-
-                  elif not door_check_ok:
-                    logger.warning('Environment %s is turning off the alarm max powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_max_door_state()))
-                  environment_part.toggle_off_alarm_max(self.powerswitches)
-                  self.notification.message('environment_' + environment_part.get_type() + '_alarm_high_off',environment_part.get_data('max'))
-
                 else:
-                  logger.info('Environment %s should turn on the alarm max but is blocked by: door %s, light %s' % (environment_part.get_type(),not door_check_ok, not light_check_ok))
-            else:
-              if not environment_part.is_alarm_max_at_min_power():
-                logger.info('Environment %s is turning off the alarm max powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
-                environment_part.toggle_off_alarm_max(self.powerswitches)
-                self.notification.message('environment_' + environment_part.get_type() + '_alarm_high_off',environment_part.get_data('max'))
+                  if not light_check_ok:
+                    logger.info('Environment %s has blocked the alarm max powerswitches due to light state %s' % (environment_part.get_type(),environment_part.get_alarm_max_light_state()))
+                  if not door_check_ok:
+                    logger.warning('Environment %s ahs blocked the alarm max powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_max_door_state()))
 
-          else:
-            if toggle_on_alarm_max is not None:
-              logger.info('Environment %s alarm max is triggered to state %s, but has no powerswitches configured' % (environment_part.get_type(),toggle_on_alarm_max))
+              else:
+                logger.debug('Environment %s alarm high is already at max power.' % environment_part.get_type())
+
+            elif not toggle_on_alarm_max and not environment_part.is_alarm_max_at_min_power():
+              logger.info('Environment %s is turning off the alarm max powerswitches based on %s' % (environment_part.get_type(),environment_part.get_mode()))
+              environment_part.toggle_off_alarm_max(self.powerswitches)
+              self.notification.message('environment_' + environment_part.get_type() + '_alarm_high_off',environment_part.get_data('max'))
+
 
   def light_on(self):
     # Default is on, works better when no lights are configured
