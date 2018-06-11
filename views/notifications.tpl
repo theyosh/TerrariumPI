@@ -13,8 +13,7 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <p>
-            </p>
+            <p>Use %rawdata% to get all the possible replacement values. Then create your own message with variables like %now% and %current%</p>
           </div>
         </div>
         <form action="/api/config/notifications" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
@@ -152,30 +151,44 @@
                 </div>
                 <div class="x_content">
                    <div class="row">
-                    <div class="col-md-2 col-sm-2 col-xs-12 form-group">
-                      <label>{{_('Enabled')}}</label>
-                    </div>
                     <div class="col-md-3 col-sm-3 col-xs-12 form-group">
                       <label>{{_('Trigger')}}</label>
                     </div>
                     <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                      <label>{{_('Title')}}</label>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                       <label>{{_('Message')}}</label>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-12 form-group">
+                      <label>{{_('Service')}}</label>
                     </div>
                   </div>
 % for message in notifications.get_messages():
                   <div class="row">
-                    <div class="col-md-2 col-sm-3 col-xs-12 form-group"s>
-                      <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="{{message['id']}}_enabled" type="radio" value="true">{{_('Yes')}}</label>
-                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="{{message['id']}}_enabled" type="radio" value="false">{{_('No')}}</label>
-                      </div>
-                    </div>
                     <div class="col-md-3 col-sm-3 col-xs-12 form-group">
-                      {{message['title']}}
-                      <input type="hidden" value="" name="{{message['id']}}_title">
+                      {{message['id']}}
                     </div>
-                    <div class="col-md-7 col-sm-6 col-xs-12 form-group">
+                    <div class="col-md-3 col-sm-2 col-xs-12 form-group">
+                      <input class="form-control" name="{{message['id']}}_title"  value="{{message['title']}}" placeholder="{{_('Title')}}" type="text">
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12 form-group">
                       <textarea required="required" class="form-control" name="{{message['id']}}_message" ></textarea>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-12 form-group notification_services text-center" >
+                      <input type="hidden" name="{{message['id']}}_services" value="">
+                      <label>
+                        <i class="fa fa-send orange disabled" id="{{message['id']}}_services_email" title="{{_('Email')}}"></i>
+                      </label>
+                      <label>
+                        <i class="fa fa-twitter blue disabled" id="{{message['id']}}_services_twitter" title="{{_('Twitter')}}"></i>
+                      </label>
+                      <label>
+                        <i class="fa fa-pinterest blue disabled" id="{{message['id']}}_services_pushover" title="{{_('Pushover')}}"></i>
+                      </label>
+                      <label>
+                        <i class="fa fa-send blue disabled" id="{{message['id']}}_services_telegram" title="{{_('Telegram')}}"></i>
+                      </label>
                     </div>
                   </div>
 % end
@@ -195,8 +208,31 @@
           </div>
         </form>
         <script type="text/javascript">
+          function toggleService(id) {
+            // Toggle icon
+            $('#' + id).toggleClass('disabled');
+
+            id = id.split('_');
+            var type = id.pop()
+            var hidden_field_id = id.join('_');
+
+            // Update hidden field
+            var field = $('input[name="' + hidden_field_id + '"]');
+            if ($('#' + hidden_field_id + '_' + type).hasClass('disabled')) {
+              field.val(field.val().replace(type + ',','').replace(',' + type, ''));
+            } else {
+              if (field.val().indexOf(type) == -1) {
+                field.val(field.val() + (field.val() == '' ? '' : ',') + type);
+              }
+            }
+          }
+
           $(document).ready(function() {
             init_form_settings('notifications');
+
+            $('div.notification_services i.fa').on('click',function(event){
+              toggleService(this.id)
+            });
 
             $.get($('form').attr('action'),function(data){
               $.each(data.notifications,function(part,partdata) {
@@ -225,13 +261,14 @@
                           switch (config_field.prop('type').toLowerCase()) {
                             case 'text':
                             case 'textarea':
-                            case 'hidden':
                               config_field.val(data);
                               break;
 
-                          case 'radio':
-                            $('input[name="' + value.id + '_' + index + '"][value="' + data + '"]').attr('checked','checked').parent().addClass('active');
-                            break;
+                            case 'hidden':
+                              $.each(data.split(','),function(counter,service){
+                                toggleService(value.id + '_services_' + service);
+                              });
+                              break;
 
                           case 'select-one':
                           case 'select-multiple':
