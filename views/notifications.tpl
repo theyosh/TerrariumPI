@@ -167,7 +167,7 @@
 % for message in notifications.get_messages():
                   <div class="row">
                     <div class="col-md-3 col-sm-3 col-xs-12 form-group">
-                      {{message['id']}}
+                      {{message['id'].replace('_',' ').capitalize()}}
                     </div>
                     <div class="col-md-3 col-sm-2 col-xs-12 form-group">
                       <input class="form-control" name="{{message['id']}}_title"  value="{{message['title']}}" placeholder="{{_('Title')}}" type="text">
@@ -219,7 +219,7 @@
             // Update hidden field
             var field = $('input[name="' + hidden_field_id + '"]');
             if ($('#' + hidden_field_id + '_' + type).hasClass('disabled')) {
-              field.val(field.val().replace(type + ',','').replace(',' + type, ''));
+              field.val(field.val().replace(type + ',','').replace(',' + type, '').replace(type,''));
             } else {
               if (field.val().indexOf(type) == -1) {
                 field.val(field.val() + (field.val() == '' ? '' : ',') + type);
