@@ -216,7 +216,22 @@ class terrariumNotification(object):
                   'password'   : password}
 
   def send_email(self,subject,message):
-    mailserver = smtplib.SMTP(self.email['server'],self.email['serverport'],timeout=15)
+    mailserver = None
+    try:
+      mailserver = smtplib.SMTP(self.email['server'],self.email['serverport'],timeout=15)
+    except Exception, ex:
+      print ex
+      try:
+        mailserver = smtplib.SMTP_SSL(self.email['server'],self.email['serverport'],timeout=15)
+      except Exception, ex:
+        print ex
+        print 'ERROR Mailserver is not reachable!'
+        return
+
+    if mailserver is None:
+      print 'ERROR Mailserver is not reachable!'
+      return
+
     mailserver.ehlo()
     try:
       mailserver.starttls()
@@ -229,7 +244,8 @@ class terrariumNotification(object):
         mailserver.login(self.email['username'], self.email['password'])
       except Exception, ex:
         print ex
-        logger.exception(ex)
+        print 'ERROR Mailserver login credentials are invalid. Cannot sent mail!'
+        return
 
     for receiver in self.email['receiver']:
       msg = MIMEMultipart()
@@ -242,7 +258,6 @@ class terrariumNotification(object):
         mailserver.sendmail(receiver,re.sub(r"(.*)@(.*)", "\\1+terrariumpi@\\2", receiver, 0, re.MULTILINE),msg.as_string())
       except Exception, ex:
         print ex
-        logger.exception(ex)
 
     mailserver.quit()
 
