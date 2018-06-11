@@ -376,11 +376,12 @@ table.dataTable .glyphicon-play {
   margin: 0.2em;
   cursor: pointer;
 }
-
 .notification_services {
   font-size: 200%;
 }
-
+.notification_services i.fa {
+  cursor: pointer;
+}
 .notification_services i.fa.disabled {
   color: #73879C;
 }
