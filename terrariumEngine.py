@@ -453,7 +453,7 @@ class terrariumEngine(object):
 
       duration = (time.time() - starttime) + time_short
       if duration < terrariumEngine.LOOP_TIMEOUT:
-        logger.info('Update done in %.5f seconds. Waiting for %.5f seconds for next round' % (duration,terrariumEngine.LOOP_TIMEOUT - duration))
+        logger.info('Update done in %.5f seconds. Waiting for %.5f seconds for next update' % (duration,terrariumEngine.LOOP_TIMEOUT - duration))
         time_short = 0
         sleep(terrariumEngine.LOOP_TIMEOUT - duration) # TODO: Config setting
       else:

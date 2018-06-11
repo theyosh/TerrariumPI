@@ -58,7 +58,7 @@ XXX
 EOF
 
 
-PROGRESS=$((PROGRESS + 10))
+PROGRESS=$((PROGRESS + 5))
 cat <<EOF
 XXX
 $PROGRESS
@@ -68,7 +68,7 @@ EOF
 git submodule init > /dev/null
 
 
-PROGRESS=$((PROGRESS + 10))
+PROGRESS=$((PROGRESS + 5))
 cat <<EOF
 XXX
 $PROGRESS
@@ -87,7 +87,7 @@ do
   cat <<EOF
 XXX
 $PROGRESS
-Install required software\n\nInstalling python module ${PIP_MODULE} ...
+Install required software (gevent will take 5-10 min.)\n\nInstalling python module ${PIP_MODULE} ...
 XXX
 EOF
   pip install -q --upgrade ${PIP_MODULE}
