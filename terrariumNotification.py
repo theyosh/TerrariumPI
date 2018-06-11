@@ -2,10 +2,8 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-import gettext
-gettext.install('terrariumpi', 'locales/', unicode=True)
-
 import re
+import datetime
 import ConfigParser
 
 # Email support
@@ -26,11 +24,12 @@ from terrariumUtils import terrariumUtils
 
 class terrariumNotificationMessage(object):
 
-  def __init__(self,message_id, title, message, enabled = False):
-    self.enabled = terrariumUtils.is_true(enabled)
+  def __init__(self,message_id, title, message, services = ''):
     self.id = message_id
     self.title = title.strip()
     self.message = message.strip()
+    self.services = services.split(',') if '' != services else []
+    self.enabled = len(self.services) > 0
 
   def get_id(self):
     return self.id
@@ -44,67 +43,80 @@ class terrariumNotificationMessage(object):
   def is_enabled(self):
     return self.message != '' and self.enabled == True
 
+  def is_email_enabled(self):
+    return self.message != '' and 'email' in self.services
+
+  def is_twitter_enabled(self):
+    return self.message != '' and 'twitter' in self.services
+
+  def is_pushover_enabled(self):
+    return self.message != '' and 'pushover' in self.services
+
+  def is_telegram_enabled(self):
+    return self.message != '' and 'telegram' in self.services
+
   def get_data(self):
     return {'id':self.get_id(),
             'title':self.get_title(),
             'message':self.get_message(),
             'enabled':self.is_enabled(),
+            'services' : ','.join(self.services)
             }
 
 class terrariumNotification(object):
   __regex_parse = re.compile(r"%(?P<index>[^% ]+)%")
 
   __default_notifications = {
-    'environment_light_alarm_low_on' : terrariumNotificationMessage('environment_light_alarm_low_on',_('Environment light day on'),'%raw_data%'),
-    'environment_light_alarm_low_off' : terrariumNotificationMessage('environment_light_alarm_low_off',_('Environment light day off'),'%raw_data%'),
-    'environment_light_alarm_high_on' : terrariumNotificationMessage('environment_light_alarm_high_on',_('Environment light night on'),'%raw_data%'),
-    'environment_light_alarm_high_off' : terrariumNotificationMessage('environment_light_alarm_high_off',_('Environment light night off'),'%raw_data%'),
+    'environment_light_alarm_low_on' : terrariumNotificationMessage('environment_light_alarm_low_on','Environment light day on','%raw_data%'),
+    'environment_light_alarm_low_off' : terrariumNotificationMessage('environment_light_alarm_low_off','Environment light day off','%raw_data%'),
+    'environment_light_alarm_high_on' : terrariumNotificationMessage('environment_light_alarm_high_on','Environment light night on','%raw_data%'),
+    'environment_light_alarm_high_off' : terrariumNotificationMessage('environment_light_alarm_high_off','Environment light night off','%raw_data%'),
 
-    'environment_temperature_alarm_low_on' : terrariumNotificationMessage('environment_temperature_alarm_low_on',_('Environment temperature alarm low on'),'%raw_data%'),
-    'environment_temperature_alarm_low_off' : terrariumNotificationMessage('environment_temperature_alarm_low_off',_('Environment temperature alarm low off'),'%raw_data%'),
-    'environment_temperature_alarm_high_on' : terrariumNotificationMessage('environment_temperature_alarm_high_on',_('Environment temperature alarm high on'),'%raw_data%'),
-    'environment_temperature_alarm_high_off' : terrariumNotificationMessage('environment_temperature_alarm_high_off',_('Environment temperature alarm high off'),'%raw_data%'),
+    'environment_temperature_alarm_low_on' : terrariumNotificationMessage('environment_temperature_alarm_low_on','Environment temperature alarm low on','%raw_data%'),
+    'environment_temperature_alarm_low_off' : terrariumNotificationMessage('environment_temperature_alarm_low_off','Environment temperature alarm low off','%raw_data%'),
+    'environment_temperature_alarm_high_on' : terrariumNotificationMessage('environment_temperature_alarm_high_on','Environment temperature alarm high on','%raw_data%'),
+    'environment_temperature_alarm_high_off' : terrariumNotificationMessage('environment_temperature_alarm_high_off','Environment temperature alarm high off','%raw_data%'),
 
-    'environment_humidity_alarm_low_on' : terrariumNotificationMessage('environment_humidity_alarm_low_on',_('Environment humidity alarm low on'),'%raw_data%'),
-    'environment_humidity_alarm_low_off' : terrariumNotificationMessage('environment_humidity_alarm_low_off',_('Environment humidity alarm low off'),'%raw_data%'),
-    'environment_humidity_alarm_high_on' : terrariumNotificationMessage('environment_humidity_alarm_high_on',_('Environment humidity alarm high on'),'%raw_data%'),
-    'environment_humidity_alarm_high_off' : terrariumNotificationMessage('environment_humidity_alarm_high_off',_('Environment humidity alarm high off'),'%raw_data%'),
+    'environment_humidity_alarm_low_on' : terrariumNotificationMessage('environment_humidity_alarm_low_on','Environment humidity alarm low on','%raw_data%'),
+    'environment_humidity_alarm_low_off' : terrariumNotificationMessage('environment_humidity_alarm_low_off','Environment humidity alarm low off','%raw_data%'),
+    'environment_humidity_alarm_high_on' : terrariumNotificationMessage('environment_humidity_alarm_high_on','Environment humidity alarm high on','%raw_data%'),
+    'environment_humidity_alarm_high_off' : terrariumNotificationMessage('environment_humidity_alarm_high_off','Environment humidity alarm high off','%raw_data%'),
 
-    'environment_moisture_alarm_low_on' : terrariumNotificationMessage('environment_moisture_alarm_low_on',_('Environment moisture alarm low on'),'%raw_data%'),
-    'environment_moisture_alarm_low_off' : terrariumNotificationMessage('environment_moisture_alarm_low_off',_('Environment moisture alarm low off'),'%raw_data%'),
-    'environment_moisture_alarm_high_on' : terrariumNotificationMessage('environment_moisture_alarm_high_on',_('Environment moisture alarm high on'),'%raw_data%'),
-    'environment_moisture_alarm_high_off' : terrariumNotificationMessage('environment_moisture_alarm_high_off',_('Environment moisture alarm high off'),'%raw_data%'),
+    'environment_moisture_alarm_low_on' : terrariumNotificationMessage('environment_moisture_alarm_low_on','Environment moisture alarm low on','%raw_data%'),
+    'environment_moisture_alarm_low_off' : terrariumNotificationMessage('environment_moisture_alarm_low_off','Environment moisture alarm low off','%raw_data%'),
+    'environment_moisture_alarm_high_on' : terrariumNotificationMessage('environment_moisture_alarm_high_on','Environment moisture alarm high on','%raw_data%'),
+    'environment_moisture_alarm_high_off' : terrariumNotificationMessage('environment_moisture_alarm_high_off','Environment moisture alarm high off','%raw_data%'),
 
-    'environment_conductivity_alarm_low_on' : terrariumNotificationMessage('environment_conductivity_alarm_low_on',_('Environment conductivity alarm low on'),'%raw_data%'),
-    'environment_conductivity_alarm_low_off' : terrariumNotificationMessage('environment_conductivity_alarm_low_off',_('Environment conductivity alarm low off'),'%raw_data%'),
-    'environment_conductivity_alarm_high_on' : terrariumNotificationMessage('environment_conductivity_alarm_high_on',_('Environment conductivity alarm high on'),'%raw_data%'),
-    'environment_conductivity_alarm_high_off' : terrariumNotificationMessage('environment_conductivity_alarm_high_off',_('Environment conductivity alarm high off'),'%raw_data%'),
+    'environment_conductivity_alarm_low_on' : terrariumNotificationMessage('environment_conductivity_alarm_low_on','Environment conductivity alarm low on','%raw_data%'),
+    'environment_conductivity_alarm_low_off' : terrariumNotificationMessage('environment_conductivity_alarm_low_off','Environment conductivity alarm low off','%raw_data%'),
+    'environment_conductivity_alarm_high_on' : terrariumNotificationMessage('environment_conductivity_alarm_high_on','Environment conductivity alarm high on','%raw_data%'),
+    'environment_conductivity_alarm_high_off' : terrariumNotificationMessage('environment_conductivity_alarm_high_off','Environment conductivity alarm high off','%raw_data%'),
 
-    'environment_ph_alarm_low_on' : terrariumNotificationMessage('environment_ph_alarm_low_on',_('Environment pH alarm low on'),'%raw_data%'),
-    'environment_ph_alarm_low_off' : terrariumNotificationMessage('environment_ph_alarm_low_off',_('Environment pH alarm low off'),'%raw_data%'),
-    'environment_ph_alarm_high_on' : terrariumNotificationMessage('environment_ph_alarm_high_on',_('Environment pH alarm high on'),'%raw_data%'),
-    'environment_ph_alarm_high_off' : terrariumNotificationMessage('environment_ph_alarm_high_off',_('Environment pH alarm high off'),'%raw_data%'),
+    'environment_ph_alarm_low_on' : terrariumNotificationMessage('environment_ph_alarm_low_on','Environment pH alarm low on','%raw_data%'),
+    'environment_ph_alarm_low_off' : terrariumNotificationMessage('environment_ph_alarm_low_off','Environment pH alarm low off','%raw_data%'),
+    'environment_ph_alarm_high_on' : terrariumNotificationMessage('environment_ph_alarm_high_on','Environment pH alarm high on','%raw_data%'),
+    'environment_ph_alarm_high_off' : terrariumNotificationMessage('environment_ph_alarm_high_off','Environment pH alarm high off','%raw_data%'),
 
-    'environment_watertank_alarm_low_on' : terrariumNotificationMessage('environment_watertank_alarm_low_on',_('Environment watertank alarm low on'),'%raw_data%'),
-    'environment_watertank_alarm_low_off' : terrariumNotificationMessage('environment_watertank_alarm_low_off',_('Environment watertank alarm low off'),'%raw_data%'),
-    'environment_watertank_alarm_high_on' : terrariumNotificationMessage('environment_watertank_alarm_high_on',_('Environment watertank alarm high on'),'%raw_data%'),
-    'environment_watertank_alarm_high_off' : terrariumNotificationMessage('environment_watertank_alarm_high_off',_('Environment watertank alarm high off'),'%raw_data%'),
+    'environment_watertank_alarm_low_on' : terrariumNotificationMessage('environment_watertank_alarm_low_on','Environment watertank alarm low on','%raw_data%'),
+    'environment_watertank_alarm_low_off' : terrariumNotificationMessage('environment_watertank_alarm_low_off','Environment watertank alarm low off','%raw_data%'),
+    'environment_watertank_alarm_high_on' : terrariumNotificationMessage('environment_watertank_alarm_high_on','Environment watertank alarm high on','%raw_data%'),
+    'environment_watertank_alarm_high_off' : terrariumNotificationMessage('environment_watertank_alarm_high_off','Environment watertank alarm high off','%raw_data%'),
 
-    'system_warning' : terrariumNotificationMessage('system_warning',_('System warning messages'),'%message%'),
-    'system_error' : terrariumNotificationMessage('system_error',_('System error messages'),'%message%'),
+    'system_warning' : terrariumNotificationMessage('system_warning','System warning messages','%message%'),
+    'system_error' : terrariumNotificationMessage('system_error','System error messages','%message%'),
 
-    'sensor_alarm_low_on' : terrariumNotificationMessage('sensor_alarm_low_on',_('Sensor alarm low on'),'%raw_data%'),
-    'sensor_alarm_low_off' : terrariumNotificationMessage('sensor_alarm_low_off',_('Sensor alarm low off'),'%raw_data%'),
-    'sensor_alarm_high_on' : terrariumNotificationMessage('sensor_alarm_high_on',_('Sensor alarm high on'),'%raw_data%'),
-    'sensor_alarm_high_off' : terrariumNotificationMessage('sensor_alarm_high_off',_('Sensor alarm high off'),'%raw_data%'),
+    'sensor_alarm_low_on' : terrariumNotificationMessage('sensor_alarm_low_on','Sensor alarm low on','%raw_data%'),
+    'sensor_alarm_low_off' : terrariumNotificationMessage('sensor_alarm_low_off','Sensor alarm low off','%raw_data%'),
+    'sensor_alarm_high_on' : terrariumNotificationMessage('sensor_alarm_high_on','Sensor alarm high on','%raw_data%'),
+    'sensor_alarm_high_off' : terrariumNotificationMessage('sensor_alarm_high_off','Sensor alarm high off','%raw_data%'),
 
-    'switch_toggle_on' : terrariumNotificationMessage('switch_toggle_on',_('Powerswitch toggle on'),'%raw_data%'),
-    'switch_toggle_off' : terrariumNotificationMessage('switch_toggle_off',_('Powerswitch toggle off'),'%raw_data%'),
+    'switch_toggle_on' : terrariumNotificationMessage('switch_toggle_on','Powerswitch toggle on','%raw_data%'),
+    'switch_toggle_off' : terrariumNotificationMessage('switch_toggle_off','Powerswitch toggle off','%raw_data%'),
 
-    'door_toggle_open' : terrariumNotificationMessage('door_toggle_open',_('Door open'),'%raw_data%'),
-    'door_toggle_closed' : terrariumNotificationMessage('door_toggle_closed',_('Door closed'),'%raw_data%'),
+    'door_toggle_open' : terrariumNotificationMessage('door_toggle_open','Door open','%raw_data%'),
+    'door_toggle_closed' : terrariumNotificationMessage('door_toggle_closed','Door closed','%raw_data%'),
 
-    'webcam_archive' : terrariumNotificationMessage('webcam_archive',_('Webcam archive'),'%raw_data%'),
+    'webcam_archive' : terrariumNotificationMessage('webcam_archive','Webcam archive','%raw_data%'),
 
   }
 
@@ -149,7 +161,7 @@ class terrariumNotification(object):
         self.messages[message_id] = terrariumNotificationMessage(message_id,
                                                                  self.__data.get('message' + message_id,'title'),
                                                                  self.__data.get('message' + message_id,'message'),
-                                                                 self.__data.get('message' + message_id,'enabled'))
+                                                                 self.__data.get('message' + message_id,'services'))
       else:
         self.messages[message_id] = self.__default_notifications[message_id]
 
@@ -169,6 +181,12 @@ class terrariumNotification(object):
       pass
 
     data = terrariumUtils.flatten_dict(data)
+    data['now'] = str(datetime.datetime.now())
+
+    for dateitem in ['timer_min_lastaction','timer_max_lastaction','last_update']:
+      if dateitem in data:
+        data[dateitem] = str(datetime.datetime.fromtimestamp(int(data[dateitem])))
+
     for item in terrariumNotification.__regex_parse.findall(message):
       if 'raw_data' == item:
         message = message.replace('%' + item + '%',str(data)
@@ -209,13 +227,17 @@ class terrariumNotification(object):
       self.__data.set(section, str(setting), str(data[setting]))
 
   def set_email(self,receiver,server,serverport = 25,username = None,password = None):
-    self.email = {'receiver'   : receiver.split(','),
-                  'server'     : server,
-                  'serverport' : serverport,
-                  'username'   : username,
-                  'password'   : password}
+    if '' != receiver and '' != server:
+      self.email = {'receiver'   : receiver.split(','),
+                    'server'     : server,
+                    'serverport' : serverport,
+                    'username'   : username,
+                    'password'   : password}
 
   def send_email(self,subject,message):
+    if self.email is None:
+      return
+
     mailserver = None
     try:
       mailserver = smtplib.SMTP(self.email['server'],self.email['serverport'],timeout=15)
@@ -262,14 +284,15 @@ class terrariumNotification(object):
     mailserver.quit()
 
   def set_twitter(self,consumer_key,consumer_secret,access_token,access_token_secret):
-    self.twitter = {'consumer_key'        : consumer_key,
-                    'consumer_secret'     : consumer_secret,
-                    'access_token'        : access_token,
-                    'access_token_secret' : access_token_secret}
+    if '' != consumer_key and '' != consumer_secret and '' != access_token and '' != access_token_secret:
+      self.twitter = {'consumer_key'        : consumer_key,
+                      'consumer_secret'     : consumer_secret,
+                      'access_token'        : access_token,
+                      'access_token_secret' : access_token_secret}
 
   def send_tweet(self,message):
-    # For now, disable during development
-    return
+    if self.twitter is None:
+      return
 
     try:
       api = twitter.Api(consumer_key=self.twitter['consumer_key'],
@@ -287,12 +310,13 @@ class terrariumNotification(object):
 
 
   def set_pushover(self,api_token,user_key):
-    self.pushover = {'api_token' : api_token,
-                     'user_key'  : user_key}
+    if '' != api_token and '' != user_key:
+      self.pushover = {'api_token' : api_token,
+                       'user_key'  : user_key}
 
   def send_pushover(self,subject,message):
-    # For now, disable during development
-    return
+    if self.pushover is None:
+      return
 
     try:
       client = pushover.Client(self.pushover['user_key'], api_token=self.pushover['api_token'])
@@ -304,12 +328,13 @@ class terrariumNotification(object):
       logger.exception(ex)
 
   def set_telegram(self,bot_token,userid):
-    self.telegram = {'bot_token' : bot_token,
-                     'userid'  : userid}
+    if '' != bot_token and '' != userid:
+      self.telegram = {'bot_token' : bot_token,
+                       'userid'  : userid}
 
   def send_telegram(self,subject,message):
-    # For now, disable during development
-    return
+    if self.telegram is None:
+      return
 
     try:
       updater = Updater(self.telegram['bot_token'])
@@ -326,16 +351,16 @@ class terrariumNotification(object):
     title = self.__parse_message(self.messages[message_id].get_title(),data)
     message = self.__parse_message(self.messages[message_id].get_message(),data)
 
-    if self.email is not None:
+    if self.messages[message_id].is_email_enabled():
       self.send_email(title,message)
 
-    if self.twitter is not None:
+    if self.messages[message_id].is_twitter_enabled():
       self.send_tweet(message)
 
-    if self.pushover is not None:
+    if self.messages[message_id].is_pushover_enabled():
       self.send_pushover(title,message)
 
-    if self.telegram is not None:
+    if self.messages[message_id].is_telegram_enabled():
       self.send_telegram(title,message)
 
   def get_messages(self):
@@ -368,19 +393,18 @@ class terrariumNotification(object):
       print ex
 
     for message_id in data:
-      if message_id[-8:] == '_enabled':
-        message_id = message_id[:-8]
-        if message_id in self.messages:
-          self.messages[message_id] = terrariumNotificationMessage(message_id,
-                                                                   data[message_id + '_title'],
-                                                                   data[message_id + '_message'],
-                                                                   terrariumUtils.is_true(data[message_id + '_enabled']))
+      message_id = message_id[:-8]
+      if message_id in self.messages:
+        self.messages[message_id] = terrariumNotificationMessage(message_id,
+                                                                 data[message_id + '_title'],
+                                                                 data[message_id + '_message'],
+                                                                 data[message_id + '_services'])
 
-          self.__data.remove_section('message' + message_id)
-          self.__update_config('message' + message_id,{'id'      : message_id,
-                                                       'title'   : data[message_id + '_title'],
-                                                       'message' : data[message_id + '_message'],
-                                                       'enabled' : data[message_id + '_enabled']})
+        self.__data.remove_section('message' + message_id)
+        self.__update_config('message' + message_id,{'id'       : message_id,
+                                                     'title'    : data[message_id + '_title'],
+                                                     'message'  : data[message_id + '_message'],
+                                                     'services' : data[message_id + '_services']})
 
     with open('notifications.cfg', 'wb') as configfile:
       self.__data.write(configfile)
@@ -396,5 +420,7 @@ class terrariumNotification(object):
       'telegram' : dict(self.telegram) if self.telegram is not None else {},
       'messages' : self.get_messages() }
 
-    data['email']['receiver'] = ','.join(data['email']['receiver'])
+    if self.email is not None:
+      data['email']['receiver'] = ','.join(data['email']['receiver'])
+
     return data

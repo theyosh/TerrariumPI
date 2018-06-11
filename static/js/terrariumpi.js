@@ -626,12 +626,10 @@ function init_form_settings(pType) {
 
     case 'environment':
     case 'system':
-    case 'notifications':
       $('form').on('submit',function() {
         $(this).find('input[type="radio"]').removeAttr('checked').removeAttr('disabled');
         $(this).find('label.active > input[type="radio"]').attr('checked','checked');
         $(this).find('label:not(.active) > input[type="radio"]').attr('disabled','disabled');
-
       });
       break;
   }

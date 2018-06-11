@@ -377,6 +377,13 @@ table.dataTable .glyphicon-play {
   cursor: pointer;
 }
 
+.notification_services {
+  font-size: 200%;
+}
+
+.notification_services i.fa.disabled {
+  color: #73879C;
+}
 
 
 @media only screen and (max-width: 700px) {
