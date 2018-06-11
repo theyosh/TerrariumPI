@@ -18,7 +18,7 @@ IP=`ip -4 addr | grep inet | grep -v "127.0.0.1" | grep -o -P "inet \K([0-9.]+)"
 RUN_AS_USER=`stat -c "%U" "${BASEDIR}"`
 
 function message {
-  echo "$(date +"%Y-%m-%d %T,000") - INFO - terrariumWrapper - $1"
+  echo "$(date +"%Y-%m-%d %T,000") - INFO    - terrariumWrapper     - $1"
 }
 
 function update_software {
