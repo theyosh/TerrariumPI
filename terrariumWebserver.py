@@ -437,7 +437,7 @@ class terrariumWebserver(object):
   def start(self):
     # Start the webserver
     logger.info('Running webserver at %s:%s' % (self.__config['host'],self.__config['port']))
-    print '%s - INFO - terrariumWebserver - Running webserver at %s:%s' % (datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S,000'),
+    print '%s - INFO    - terrariumWebserver   - Running webserver at %s:%s' % (datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S,000'),
                                              self.__config['host'],
                                              self.__config['port'])
     self.__app.run(host=self.__config['host'],
