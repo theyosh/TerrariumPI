@@ -416,6 +416,10 @@ class terrariumEngine(object):
           self.collector.log_sensor_data(self.sensors[sensorid].get_data())
           # Websocket callback
           self.get_sensors([sensorid],socket=True)
+          # Send notification when needed and enabled
+          if self.sensors[sensorid].is_active() and self.sensors[sensorid].notification_enabled() and self.sensors[sensorid].get_alarm():
+            self.notification.message('sensor_alarm_' + ('low' if self.sensors[sensorid].get_current() < self.sensors[sensorid].get_alarm_min() else 'high'),self.sensors[sensorid].get_data())
+
           # Make time for other web request
           sleep(0.1)
 
@@ -605,6 +609,8 @@ class terrariumEngine(object):
     if self.environment is not None:
       self.environment.update(False)
       self.get_environment(socket=True)
+
+    self.notification.message('switch_toggle_' + ('off' if data['state'] == 0 else 'on'),data)
   # End switches part
 
   # Doors part
