@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-import terrariumLogging
-logger = terrariumLogging.logging.getLogger(__name__)
-
 import re
 import datetime
 import ConfigParser
@@ -102,21 +99,17 @@ class terrariumNotification(object):
     'environment_watertank_alarm_high_on' : terrariumNotificationMessage('environment_watertank_alarm_high_on','Environment watertank alarm high on','%raw_data%'),
     'environment_watertank_alarm_high_off' : terrariumNotificationMessage('environment_watertank_alarm_high_off','Environment watertank alarm high off','%raw_data%'),
 
-    'system_warning' : terrariumNotificationMessage('system_warning','System warning messages','%message%'),
-    'system_error' : terrariumNotificationMessage('system_error','System error messages','%message%'),
+    'system_warning' : terrariumNotificationMessage('system_warning','System warning message','%message%'),
+    'system_error' : terrariumNotificationMessage('system_error','System error message','%message%'),
 
-    'sensor_alarm_low_on' : terrariumNotificationMessage('sensor_alarm_low_on','Sensor alarm low on','%raw_data%'),
-    'sensor_alarm_low_off' : terrariumNotificationMessage('sensor_alarm_low_off','Sensor alarm low off','%raw_data%'),
-    'sensor_alarm_high_on' : terrariumNotificationMessage('sensor_alarm_high_on','Sensor alarm high on','%raw_data%'),
-    'sensor_alarm_high_off' : terrariumNotificationMessage('sensor_alarm_high_off','Sensor alarm high off','%raw_data%'),
+    'sensor_alarm_low' : terrariumNotificationMessage('sensor_alarm_low','Sensor %name% alarm low','%raw_data%'),
+    'sensor_alarm_high' : terrariumNotificationMessage('sensor_alarm_high','Sensor %name% alarm high','%raw_data%'),
 
-    'switch_toggle_on' : terrariumNotificationMessage('switch_toggle_on','Powerswitch toggle on','%raw_data%'),
-    'switch_toggle_off' : terrariumNotificationMessage('switch_toggle_off','Powerswitch toggle off','%raw_data%'),
+    'switch_toggle_on' : terrariumNotificationMessage('switch_toggle_on','Powerswitch %name% toggled on','%raw_data%'),
+    'switch_toggle_off' : terrariumNotificationMessage('switch_toggle_off','Powerswitch %name% toggled off','%raw_data%'),
 
-    'door_toggle_open' : terrariumNotificationMessage('door_toggle_open','Door open','%raw_data%'),
-    'door_toggle_closed' : terrariumNotificationMessage('door_toggle_closed','Door closed','%raw_data%'),
-
-    'webcam_archive' : terrariumNotificationMessage('webcam_archive','Webcam archive','%raw_data%'),
+    'door_toggle_open' : terrariumNotificationMessage('door_toggle_open','Door %name% is open','%raw_data%'),
+    'door_toggle_closed' : terrariumNotificationMessage('door_toggle_closed','Door %name% is closed','%raw_data%'),
 
   }
 
@@ -305,9 +298,6 @@ class terrariumNotification(object):
         # [Status(ID=1003393079041314816, ScreenName=MadagascarGecko, Created=Sun Jun 03 21:48:46 +0000 2018, Text=u'Environment watertank sensors are not up to date. Check your sensors on the sensor page. So force the power down to be sure!')]
     except Exception, ex:
       print ex
-      logger.exception(ex)
-
-
 
   def set_pushover(self,api_token,user_key):
     if '' != api_token and '' != user_key:
@@ -325,7 +315,6 @@ class terrariumNotification(object):
         # {u'status': 1, u'request': u'daad6828-3efe-44d9-89eb-9922fa8e0dda'}
     except Exception, ex:
       print ex
-      logger.exception(ex)
 
   def set_telegram(self,bot_token,userid):
     if '' != bot_token and '' != userid:
@@ -342,7 +331,6 @@ class terrariumNotification(object):
       # {'delete_chat_photo': False, 'new_chat_photo': [], 'from': {'username': u'terrariumpi_bot', 'first_name': u'TerrariumPI', 'is_bot': True, 'id': 519390339}, 'text': u'Dimmer PWM Dimmer is already working. Ignoring state change!. Will switch to latest state value when done', 'caption_entities': [], 'entities': [], 'channel_chat_created': False, 'new_chat_members': [], 'supergroup_chat_created': False, 'chat': {'first_name': u'Yoshie', 'last_name': u'Online', 'type': u'private', 'id': 508490874}, 'photo': [], 'date': 1528062541, 'group_chat_created': False, 'message_id': 14}
     except Exception, ex:
       print ex
-      logger.exception(ex)
 
   def message(self,message_id,data = None):
     if message_id not in self.messages or not self.messages[message_id].is_enabled():
