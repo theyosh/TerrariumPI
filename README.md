@@ -1,4 +1,4 @@
-# TerrariumPI 3.6.0
+# TerrariumPI 3.7.0
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
 
 For humidity control there is support for a spraying system. The sprayer can be configured to spray for an X amount of seconds and there is a minumal period between two spray actions. Use at least one humitidy sensors to get a constant humidity value. In order to lower the humidity you can add a dehumidifier.
@@ -74,6 +74,18 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Uploading audio files through webinterface
   - Audio meta data support (mediainfo)
 - Remote temperature and humidity sensors through HTTP(S) JSON API's. JSON Data format can be found on [Remote data wiki](https://github.com/theyosh/TerrariumPI/wiki/Remote-data).
+- Notifications system. Custom messages for custom actions with use of variables in the messages
+  - Get notifications through
+    - Email
+    - Twitter (DM)
+    - Pushover
+    - Telegram bot
+  - Notifications for
+    - Environment part low and high alarm
+    - Sensor high and low measurements
+    - Power switch toggle on and off
+    - Open and close doors
+    - System error and warning messages
 
 It is currently controling my reptile terrarium for more then three years! And my Madagascar Day Gecko is very happy with it!
 
@@ -119,7 +131,7 @@ This updating is based on that the software is installed with the steps in the I
   `sudo ./install.sh`
 4. Restart TerrariumPI according to: https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-restart-terrariumpi
 
-Now clear your browser cache and reload the webinterface. A brand new version should be running.
+Now **clear your browser cache** and reload the webinterface. A brand new version should be running.
 
 ## Hardware
 This software requires a Raspberry Pi and some extra hardware in order to run and work. The bare minimun and tested hardware is
