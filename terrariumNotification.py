@@ -61,6 +61,9 @@ class terrariumNotificationMessage(object):
             }
 
 class terrariumNotification(object):
+  __MAX_MESSAGES_TOTAL_PER_MINUTE = 3
+  __MAX_MESSAGES_PER_MINUTE = 2
+
   __regex_parse = re.compile(r"%(?P<index>[^% ]+)%")
 
   __default_notifications = {
@@ -119,8 +122,28 @@ class terrariumNotification(object):
     self.pushover = None
     self.telegram = None
 
+    self.__ratelimit_messages = {}
+
     self.__load_config()
     self.__load_messages()
+
+  def __current_minute(self):
+    # Get timestamp of current minute with 00 seconds.
+    now = int(datetime.datetime.now().strftime('%s'))
+    now -= now % 60
+    return now
+
+  def __ratelimit(self):
+    now = str(self.__current_minute())
+    total = 0
+    for messageItem in sorted(self.__ratelimit_messages):
+      for timestamp in sorted(self.__ratelimit_messages[messageItem],reverse=True):
+        if timestamp == now:
+          total += self.__ratelimit_messages[messageItem][timestamp]
+        else:
+          del(self.__ratelimit_messages[messageItem][timestamp])
+
+    return total
 
   def __load_config(self):
     self.__data = ConfigParser.SafeConfigParser()
@@ -336,8 +359,25 @@ class terrariumNotification(object):
     if message_id not in self.messages or not self.messages[message_id].is_enabled():
       return
 
+    now = str(self.__current_minute())
     title = self.__parse_message(self.messages[message_id].get_title(),data)
     message = self.__parse_message(self.messages[message_id].get_message(),data)
+
+    if title not in self.__ratelimit_messages:
+      self.__ratelimit_messages[title] = {}
+
+    if now not in self.__ratelimit_messages[title]:
+      self.__ratelimit_messages[title][now] = 0
+
+    if self.__ratelimit_messages[title][now] > terrariumNotification.__MAX_MESSAGES_PER_MINUTE:
+      print 'WARNING: Max messages per minute %s reached for %s' % (terrariumNotification.__MAX_MESSAGES_PER_MINUTE, title)
+      return
+
+    if self.__ratelimit() > terrariumNotification.__MAX_MESSAGES_TOTAL_PER_MINUTE:
+      print 'WARNING: Max total messages per minute %s reached' % (terrariumNotification.__MAX_MESSAGES_TOTAL_PER_MINUTE)
+      return
+
+    self.__ratelimit_messages[title][now] += 1
 
     if self.messages[message_id].is_email_enabled():
       self.send_email(title,message)
