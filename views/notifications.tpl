@@ -13,7 +13,10 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <p>Use %rawdata% to get all the possible replacement values. Then create your own message with variables like %now% and %current%</p>
+            <p>{{_('Enter the values per service that you want to use. Per service are all fields required, except mail port and mail authentication values.')}}</p>
+            <p>{{_('Select per message the service so send the notification. You can have everyting per email, and important ones per pushover or telegram.')}}</p>
+            <p>{{_('Use %rawdata% to get all the possible replacement values. Then create your own message with variables like %now% and %current%. This can be done in either the title and message.')}}</p>
+            <p>{{_('Make sure you submit the form after making changes!')}}</p>
           </div>
         </div>
         <form action="/api/config/notifications" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
@@ -150,7 +153,7 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                   <div class="row">
+                  <div class="row">
                     <div class="col-md-3 col-sm-3 col-xs-12 form-group">
                       <label>{{_('Trigger')}}</label>
                     </div>

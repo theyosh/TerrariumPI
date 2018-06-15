@@ -102,6 +102,25 @@ class terrariumTranslations(object):
     self.translations['environment_field_door_state'] = _('Select when the power switches can toggle. When the door is open, cosed or just always')
     # End environment
 
+    # Notifications
+    self.translations['notification_email_receiver'] = _('Holds the email address on which you would like to receive messages.')
+    self.translations['notification_email_server'] = _('Holds the mail server hostname or IP.')
+    self.translations['notification_email_serverport'] = _('Holds the mail server portnumber. SSL and TLS will be autodetected.')
+    self.translations['notification_email_email_username'] = _('Holds the username for authentication with the mailserver if needed.')
+    self.translations['notification_email_email_password'] = _('Holds the password for authentication with the mailserver if needed.')
+
+    self.translations['notification_twitter_consumer_key'] = _('Holds your Twitter consumer key. More information %shere%s' % ('<a href=\'https://apps.twitter.com/\' target=\'_blank\'>','</a>'))
+    self.translations['notification_twitter_consumer_secret'] = _('Holds your Twitter consumer secret. More information %shere%s' % ('<a href=\'https://apps.twitter.com/\' target=\'_blank\'>','</a>'))
+    self.translations['notification_twitter_access_token'] = _('Holds your Twitter access token. More information %shere%s' % ('<a href=\'https://apps.twitter.com/\' target=\'_blank\'>','</a>'))
+    self.translations['notification_twitter_access_token_secret'] = _('Holds your Twitter access token secret. More information %shere%s' % ('<a href=\'https://apps.twitter.com/\' target=\'_blank\'>','</a>'))
+
+    self.translations['notification_pushover_api_token'] = _('Holds the PushOver API token. More information %shere%s' % ('<a href=\'https://pushover.net/api\' target=\'_blank\'>','</a>'))
+    self.translations['notification_pushover_user_key'] =  _('Holds the PushOver API user key. More information %shere%s' % ('<a href=\'https://pushover.net/api\' target=\'_blank\'>','</a>'))
+
+    self.translations['notification_telegram_bot_token'] =  _('Holds the Telegram Bot token. More information %shere%s' % ('<a href=\'https://core.telegram.org/bots#6-botfather\' target=\'_blank\'>','</a>'))
+    self.translations['notification_telegram_userid'] =  _('Holds the Telegram userid for receiving messages. More information %shere%s' % ('<a href=\'https://core.telegram.org/bots#6-botfather\' target=\'_blank\'>','</a>'))
+    # End notifications
+
     # System
     self.translations['system_field_language'] = _('Choose your interface language.')
     self.translations['system_field_distance_indicator'] = _('Holds the distance type used by distance sensors.')
