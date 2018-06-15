@@ -2,6 +2,8 @@
 import re
 import datetime
 import ConfigParser
+import RPi.GPIO as GPIO
+import time
 
 # Email support
 import smtplib
@@ -61,7 +63,7 @@ class terrariumNotificationMessage(object):
             }
 
 class terrariumNotification(object):
-  __MAX_MESSAGES_TOTAL_PER_MINUTE = 3
+  __MAX_MESSAGES_TOTAL_PER_MINUTE = 5
   __MAX_MESSAGES_PER_MINUTE = 2
 
   __regex_parse = re.compile(r"%(?P<index>[^% ]+)%")
@@ -116,16 +118,24 @@ class terrariumNotification(object):
 
   }
 
-  def __init__(self):
+  def __init__(self,trafficlights = []):
     self.email = None
     self.twitter = None
     self.pushover = None
     self.telegram = None
 
     self.__ratelimit_messages = {}
+    self.__notification_leds = {'info'      : {'pin' : None, 'state' : False, 'lastaction' : 0},
+                                'warning'   : {'pin' : None, 'state' : False, 'lastaction' : 0},
+                                'error'     : {'pin' : None, 'state' : False, 'lastaction' : 0},
+                                'exception' : {'pin' : None, 'state' : False, 'lastaction' : 0},
+                                }
 
     self.__load_config()
     self.__load_messages()
+
+    if trafficlights is not None and len(trafficlights) == 3:
+      self.set_notification_leds(trafficlights[0],trafficlights[1],trafficlights[2])
 
   def __current_minute(self):
     # Get timestamp of current minute with 00 seconds.
@@ -215,12 +225,6 @@ class terrariumNotification(object):
     return message
 
   def __update_config(self,section,data,exclude = []):
-    '''Update terrariumPI config with new values
-
-    Keyword arguments:
-    section -- section in configuration. If not exists it will be created
-    data -- data to save in dict form'''
-
     if not self.__data.has_section(section):
       self.__data.add_section(section)
 
@@ -237,10 +241,43 @@ class terrariumNotification(object):
         try:
           data[setting] = data[setting].encode('utf-8').replace('%','%%')
         except Exception, ex:
-          'Not sure what to do... but it seams already utf-8...??'
+          # 'Not sure what to do... but it seams already utf-8...??'
           pass
 
       self.__data.set(section, str(setting), str(data[setting]))
+
+  def set_notification_leds(self,green,orange,red):
+    self.__notification_leds['info']['pin'] = terrariumUtils.to_BCM_port_number(green)
+    self.__notification_leds['warning']['pin'] = terrariumUtils.to_BCM_port_number(orange)
+    self.__notification_leds['error']['pin'] = terrariumUtils.to_BCM_port_number(red)
+
+    # Initialize leds and run them all for 1 second to test
+    GPIO.setmode(GPIO.BCM)
+    for messagetype in ['info','warning','error']:
+      lednr = self.__notification_leds[messagetype]['pin']
+      if lednr is not None:
+        GPIO.setup(lednr, GPIO.OUT)
+        GPIO.output(lednr,1)
+        time.sleep(1)
+        GPIO.output(lednr,0)
+
+  def send_notication_led(self,message_id):
+    message_type = message_id.replace('system_','')
+    now = int(time.time())
+    if message_type in ['info','error','warning']:
+      if self.__notification_leds[message_type]['pin'] is not None:
+        GPIO.output(self.__notification_leds[message_type]['pin'],1)
+        self.__notification_leds[message_type]['state'] = True
+        self.__notification_leds[message_type]['lastaction'] = now
+
+    for message_type in self.__notification_leds:
+      if self.__notification_leds[message_type]['state'] and \
+          ( ('warning' == message_type and now - self.__notification_leds[message_type]['lastaction'] > 10 * 60) or \
+            ('error'   == message_type and now - self.__notification_leds[message_type]['lastaction'] > 30 * 60) ):
+
+        GPIO.output(self.__notification_leds[message_type]['pin'],0)
+        self.__notification_leds[message_type]['state'] = False
+        self.__notification_leds[message_type]['lastaction'] = now
 
   def set_email(self,receiver,server,serverport = 25,username = None,password = None):
     if '' != receiver and '' != server:
@@ -263,11 +300,11 @@ class terrariumNotification(object):
         mailserver = smtplib.SMTP_SSL(self.email['server'],self.email['serverport'],timeout=15)
       except Exception, ex:
         print ex
-        print 'ERROR Mailserver is not reachable!'
+        print '%s - ERROR  - terrariumNotificatio - Mailserver is not reachable!' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23])
         return
 
     if mailserver is None:
-      print 'ERROR Mailserver is not reachable!'
+      print '%s - ERROR  - terrariumNotificatio - Mailserver is not reachable!' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23])
       return
 
     mailserver.ehlo()
@@ -282,7 +319,7 @@ class terrariumNotification(object):
         mailserver.login(self.email['username'], self.email['password'])
       except Exception, ex:
         print ex
-        print 'ERROR Mailserver login credentials are invalid. Cannot sent mail!'
+        print '%s - ERROR  - terrariumNotificatio - Mailserver login credentials are invalid. Cannot sent mail!' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23])
         return
 
     for receiver in self.email['receiver']:
@@ -356,6 +393,8 @@ class terrariumNotification(object):
       print ex
 
   def message(self,message_id,data = None):
+    self.send_notication_led(message_id)
+
     if message_id not in self.messages or not self.messages[message_id].is_enabled():
       return
 
@@ -370,11 +409,13 @@ class terrariumNotification(object):
       self.__ratelimit_messages[title][now] = 0
 
     if self.__ratelimit_messages[title][now] > terrariumNotification.__MAX_MESSAGES_PER_MINUTE:
-      print 'WARNING: Max messages per minute %s reached for %s' % (terrariumNotification.__MAX_MESSAGES_PER_MINUTE, title)
+      print '%s - WARNING - terrariumNotificatio - Max messages per minute %s reached for \'%s\'' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],
+                                                                                                 terrariumNotification.__MAX_MESSAGES_PER_MINUTE, title)
       return
 
     if self.__ratelimit() > terrariumNotification.__MAX_MESSAGES_TOTAL_PER_MINUTE:
-      print 'WARNING: Max total messages per minute %s reached' % (terrariumNotification.__MAX_MESSAGES_TOTAL_PER_MINUTE)
+      print '%s - WARNING - terrariumNotificatio - Max total messages per minute %s reached' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],
+                                                                                                terrariumNotification.__MAX_MESSAGES_TOTAL_PER_MINUTE)
       return
 
     self.__ratelimit_messages[title][now] += 1
