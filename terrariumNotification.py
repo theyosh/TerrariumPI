@@ -134,11 +134,11 @@ class terrariumNotification(object):
     self.pushover = None
     self.telegram = None
 
-    if profile_image is not None:
-      self.set_profile_image(profile_image)
-
     self.__load_config()
     self.__load_messages()
+
+    if profile_image is not None:
+      self.set_profile_image(profile_image)
 
     if trafficlights is not None and len(trafficlights) == 3:
       self.set_notification_leds(trafficlights[0],trafficlights[1],trafficlights[2])
@@ -255,7 +255,10 @@ class terrariumNotification(object):
   def set_profile_image(self,imagefile):
     if imagefile[0] == '/':
       imagefile = imagefile[1:]
-    self.__profile_image = imagefile
+
+    if os.path.isfile(imagefile):
+      self.__profile_image = imagefile
+      self.update_twitter_profile_image()
 
   def set_notification_leds(self,green,orange,red):
     self.__notification_leds['info']['pin'] = terrariumUtils.to_BCM_port_number(green)
@@ -379,6 +382,21 @@ class terrariumNotification(object):
                       'consumer_secret'     : consumer_secret,
                       'access_token'        : access_token,
                       'access_token_secret' : access_token_secret}
+
+  def update_twitter_profile_image(self):
+    if self.__profile_image is not None and self.twitter is not None:
+      try:
+        api = twitter.Api(consumer_key=self.twitter['consumer_key'],
+                          consumer_secret=self.twitter['consumer_secret'],
+                          access_token_key=self.twitter['access_token'],
+                          access_token_secret=self.twitter['access_token_secret'])
+
+        if api.VerifyCredentials() is not None:
+          status = api.UpdateImage(self.__profile_image)
+
+      except Exception, ex:
+        print ex
+
 
   def send_tweet(self,message):
     if self.twitter is None:
