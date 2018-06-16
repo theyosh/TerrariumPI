@@ -4,11 +4,13 @@ import datetime
 import ConfigParser
 import RPi.GPIO as GPIO
 import time
+import os.path
 
 # Email support
 import smtplib
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
+from email.MIMEImage import MIMEImage
 
 # Twitter support
 import twitter
@@ -118,18 +120,22 @@ class terrariumNotification(object):
 
   }
 
-  def __init__(self,trafficlights = []):
-    self.email = None
-    self.twitter = None
-    self.pushover = None
-    self.telegram = None
-
+  def __init__(self,trafficlights = [], profile_image = None):
+    self.__profile_image = None
     self.__ratelimit_messages = {}
     self.__notification_leds = {'info'      : {'pin' : None, 'state' : False, 'lastaction' : 0},
                                 'warning'   : {'pin' : None, 'state' : False, 'lastaction' : 0},
                                 'error'     : {'pin' : None, 'state' : False, 'lastaction' : 0},
                                 'exception' : {'pin' : None, 'state' : False, 'lastaction' : 0},
                                 }
+
+    self.email = None
+    self.twitter = None
+    self.pushover = None
+    self.telegram = None
+
+    if profile_image is not None:
+      self.set_profile_image(profile_image)
 
     self.__load_config()
     self.__load_messages()
@@ -207,11 +213,11 @@ class terrariumNotification(object):
       pass
 
     data = terrariumUtils.flatten_dict(data)
-    data['now'] = str(datetime.datetime.now())
+    data['now'] = datetime.datetime.now().strftime('%c')
 
     for dateitem in ['timer_min_lastaction','timer_max_lastaction','last_update']:
       if dateitem in data:
-        data[dateitem] = str(datetime.datetime.fromtimestamp(int(data[dateitem])))
+        data[dateitem] = datetime.datetime.fromtimestamp(int(data[dateitem])).strftime('%c')
 
     for item in terrariumNotification.__regex_parse.findall(message):
       if 'raw_data' == item:
@@ -222,7 +228,7 @@ class terrariumNotification(object):
       elif item in data:
         message = message.replace('%' + item + '%',str(data[item]))
 
-    return message
+    return message.encode('utf8')
 
   def __update_config(self,section,data,exclude = []):
     if not self.__data.has_section(section):
@@ -245,6 +251,9 @@ class terrariumNotification(object):
           pass
 
       self.__data.set(section, str(setting), str(data[setting]))
+
+  def set_profile_image(self,imagefile):
+    self.__profile_image = imagefile
 
   def set_notification_leds(self,green,orange,red):
     self.__notification_leds['info']['pin'] = terrariumUtils.to_BCM_port_number(green)
@@ -322,15 +331,41 @@ class terrariumNotification(object):
         print '%s - ERROR  - terrariumNotificatio - Mailserver login credentials are invalid. Cannot sent mail!' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23])
         return
 
+    htmlbody = '<html><head><title>%s</title></head><body>%s%s</body></html>'
+    htmlimage = ''
+    textimage = ''
+
+    if self.__profile_image is not None:
+      with open(self.__profile_image, 'rb') as fp:
+        msgImage = MIMEImage(fp.read(), filename=os.path.basename(self.__profile_image))
+        msgImage.add_header('Content-ID', 'profileimage')
+        msgImage.add_header('Content-Disposition', 'inline', filename=os.path.basename(self.__profile_image))
+
+        htmlimage = '<img src="cid:profileimage" alt="Profile image" title="Profile image" align="right">'
+        textimage = '[cid:profileimage]\n'
+
     for receiver in self.email['receiver']:
-      msg = MIMEMultipart()
-      msg['From'] = receiver
-      msg['To'] = re.sub(r"(.*)@(.*)", "\\1+terrariumpi@\\2", receiver, 0, re.MULTILINE)
-      msg['Subject'] = subject
-      msg.attach(MIMEText(message))
+
+      emailMessage = MIMEMultipart('mixed')
+      emailMessageRelated = MIMEMultipart('related')
+      emailMessageAlternative = MIMEMultipart('alternative')
+
+      emailMessage['From'] = receiver
+      emailMessage['To'] = re.sub(r"(.*)@(.*)", "\\1+terrariumpi@\\2", receiver, 0, re.MULTILINE)
+      emailMessage['Subject'] = subject
+
+      emailMessageAlternative.attach(MIMEText(textimage.encode('utf8') + message, 'plain'))
+      emailMessageAlternative.attach(MIMEText(htmlbody.encode('utf8') % (subject,htmlimage,message.replace('\n','<br />')), 'html'))
+
+      emailMessageRelated.attach(emailMessageAlternative)
+
+      if self.__profile_image is not None:
+        emailMessageRelated.attach(msgImage)
+
+      emailMessage.attach(emailMessageRelated)
 
       try:
-        mailserver.sendmail(receiver,re.sub(r"(.*)@(.*)", "\\1+terrariumpi@\\2", receiver, 0, re.MULTILINE),msg.as_string())
+        mailserver.sendmail(receiver,re.sub(r"(.*)@(.*)", "\\1+terrariumpi@\\2", receiver, 0, re.MULTILINE),emailMessage.as_string())
       except Exception, ex:
         print ex
 

@@ -13,6 +13,7 @@ import time
 import glob
 import shutil
 
+from terrariumConfig import terrariumConfig
 from terrariumNotification import terrariumNotification
 
 class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandler):
@@ -69,7 +70,8 @@ class NotificationLogger(logging.StreamHandler):
   def __init__(self,trafficlights,*args, **kwargs):
     super(NotificationLogger,self).__init__(*args, **kwargs)
 
-    self.notification = terrariumNotification(trafficlights)
+    terrariumpi_config = terrariumConfig()
+    self.notification = terrariumNotification(trafficlights,terrariumpi_config.get_profile_image())
 
   def emit(self,data):
     if data.name not in ['terrariumTranslations']:

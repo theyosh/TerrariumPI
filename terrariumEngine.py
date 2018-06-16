@@ -66,13 +66,13 @@ class terrariumEngine(object):
 
     self.environment = None
 
-    # Notification engine
-    self.notification = terrariumNotification()
-
     # Load config
     logger.info('Loading terrariumPI config')
     self.config = terrariumConfig()
     logger.info('Done Loading terrariumPI config')
+
+     # Notification engine
+    self.notification = terrariumNotification(profile_image = self.get_profile_image())
 
     logger.info('Setting terrariumPI authentication')
     self.set_authentication(self.config.get_admin(),self.config.get_password())
@@ -834,6 +834,8 @@ class terrariumEngine(object):
         del(data['description'])
 
     update_ok = self.config.save_profile(data)
+    if update_ok:
+      self.notification.set_profile_image(self.get_profile_image())
     return update_ok
   # End profile part
 
