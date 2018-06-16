@@ -253,6 +253,8 @@ class terrariumNotification(object):
       self.__data.set(section, str(setting), str(data[setting]))
 
   def set_profile_image(self,imagefile):
+    if imagefile[0] == '/':
+      imagefile = imagefile[1:]
     self.__profile_image = imagefile
 
   def set_notification_leds(self,green,orange,red):
