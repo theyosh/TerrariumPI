@@ -118,7 +118,7 @@ class terrariumTranslations(object):
     self.translations['notification_pushover_user_key'] =  _('Holds the PushOver API user key. More information %shere%s' % ('<a href=\'https://pushover.net/api\' target=\'_blank\'>','</a>'))
 
     self.translations['notification_telegram_bot_token'] =  _('Holds the Telegram Bot token. More information %shere%s' % ('<a href=\'https://core.telegram.org/bots#6-botfather\' target=\'_blank\'>','</a>'))
-    self.translations['notification_telegram_username'] =  _('Holds the Telegram username that is allowed for receiving messages. Can be multiple usernames sperated by a comma. More information %shere%s' % ('<a href=\'https://core.telegram.org/bots#6-botfather\' target=\'_blank\'>','</a>'))
+    self.translations['notification_telegram_username'] =  _('Holds the Telegram username that is allowed for receiving messages. Can be multiple usernames seperated by a comma. More information %shere%s' % ('<a href=\'https://core.telegram.org/bots#6-botfather\' target=\'_blank\'>','</a>'))
     # End notifications
 
     # System
