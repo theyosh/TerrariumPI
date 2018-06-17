@@ -133,8 +133,8 @@
                     <input class="form-control" name="telegram_bot_token" placeholder="{{_('Bot Token')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_telegram_bot_token')}}">
                   </div>
                   <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                    <label for="email_server">{{_('User id')}}</label>
-                    <input class="form-control" name="telegram_userid" placeholder="{{_('User id')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_telegram_userid')}}">
+                    <label for="email_server">{{_('Username')}}</label>
+                    <input class="form-control" name="telegram_userid" placeholder="{{_('Username')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_telegram_username')}}">
                   </div>
                 </div>
               </div>

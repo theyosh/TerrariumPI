@@ -485,15 +485,20 @@ class terrariumEngine(object):
     return None
 
   def stop(self):
+    # Stop engine processing first....
+    self.__running = False
+
     self.environment.stop()
+
     for sensorid in self.sensors:
       self.sensors[sensorid].stop()
 
     for power_switch_id in self.power_switches:
       self.power_switches[power_switch_id].stop()
 
+    self.notification.stop()
     self.collector.stop()
-    self.__running = False
+
     logger.info('Shutdown engine')
   # End private/internal functions
 

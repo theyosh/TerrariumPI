@@ -78,7 +78,6 @@ class NotificationLogger(logging.StreamHandler):
       #print data.levelname
       self.notification.message('system_' + str(data.levelname).lower() , {'message':data.getMessage()} )
 
-
 logging.config.fileConfig('logging.cfg')
 if os.path.isfile('logging.custom.cfg'):
   logging.config.fileConfig('logging.custom.cfg')
