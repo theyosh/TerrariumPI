@@ -5,6 +5,10 @@ import ConfigParser
 import RPi.GPIO as GPIO
 import time
 import os.path
+import threading
+import json
+import requests
+import urllib
 
 # Email support
 import smtplib
@@ -18,10 +22,17 @@ import twitter
 # Pushover support
 import pushover
 
-# Telegram support
-from telegram.ext import Updater
-
 from terrariumUtils import terrariumUtils
+
+from gevent import monkey, sleep
+monkey.patch_all()
+
+class Singleton(type):
+  _instances = {}
+  def __call__(cls, *args, **kwargs):
+    if cls not in cls._instances:
+      cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+    return cls._instances[cls]
 
 class terrariumNotificationMessage(object):
 
@@ -63,6 +74,92 @@ class terrariumNotificationMessage(object):
             'enabled':self.is_enabled(),
             'services' : ','.join(self.services)
             }
+
+class terrariumNotificationTelegramBot(threading.Thread):
+  __metaclass__ = Singleton
+
+  __POLL_TIMEOUT = 120
+
+  def __init__(self,bot_token,valid_users = None):
+    super(terrariumNotificationTelegramBot,self).__init__()
+    self.__running = False
+    self.__bot_token = bot_token
+    self.__bot_url = 'https://api.telegram.org/bot{}/'.format(self.__bot_token)
+    self.__chat_ids = []
+
+    self.__last_update_check = int(time.time())
+
+    self.set_valid_users(valid_users)
+    self.start()
+
+  def __get_url(self,url):
+    response = requests.get(url)
+    return response.content.decode("utf8")
+
+  def __get_json_from_url(self,url):
+    content = self.__get_url(url)
+    return json.loads(content)
+
+  def __get_updates(self,offset=None):
+    self.__last_update_check = int(time.time())
+    url = self.__bot_url + "getUpdates?timeout={}".format(terrariumNotificationTelegramBot.__POLL_TIMEOUT)
+    if offset:
+      url += "&offset={}".format(offset)
+
+    return self.__get_json_from_url(url)
+
+  def __process_messages(self,messages):
+    for update in messages:
+      user = update["message"]["from"]['username']
+      text = update["message"]["text"]
+      chat = int(update["message"]["chat"]["id"])
+
+      if user not in self.__valid_users:
+        self.send_message('Sorry, you are not a valid user for this TerrariumPI.', chat)
+
+      else:
+        if chat not in self.__chat_ids:
+          self.__chat_ids.append(chat)
+
+        self.send_message(('Hi %s, you are now getting messages from TerrariumPI. I do not accept commands.' % (user,)), chat)
+
+  def get_config(self):
+    return {'bot_token' : self.__bot_token,
+            'userid': ','.join(self.__valid_users) if self.__valid_users is not None else ''}
+
+  def send_message(self,text, chat_id = None):
+    if self.__running:
+      chat_ids = self.__chat_ids if chat_id is None else [int(chat_id)]
+      text = urllib.quote_plus(text)
+      for chat_id in chat_ids:
+        url = self.__bot_url + "sendMessage?text={}&chat_id={}".format(text, chat_id)
+        self.__get_url(url)
+
+  def set_valid_users(self,users = None):
+    self.__valid_users = users.split(',') if users is not None else []
+
+  def stop(self):
+    self.__running = False
+    print '%s - INFO    - terrariumNotificatio - Stopping TelegramBot. This can take up to %s seconds...' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],(terrariumNotificationTelegramBot.__POLL_TIMEOUT - (int(time.time()) - self.__last_update_check)))
+
+  def run(self):
+    self.__running = True
+    last_update_id = None
+
+    while self.__running:
+      updates = self.__get_updates(last_update_id)
+      if 'result' in updates and len(updates["result"]) > 0:
+        last_update_id = max([int(update["update_id"]) for update in updates["result"]]) + 1
+        self.__process_messages(updates["result"])
+
+      elif 'description' in updates:
+        print updates
+        print '%s - ERROR  - terrariumNotificatio - TelegramBot has issues: %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],updates['description'])
+        self.stop()
+
+      time.sleep(0.5)
+
+    print '%s - INFO    - terrariumNotificatio - TelegramBot is stopped' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],)
 
 class terrariumNotification(object):
   __MAX_MESSAGES_TOTAL_PER_MINUTE = 5
@@ -134,11 +231,10 @@ class terrariumNotification(object):
     self.pushover = None
     self.telegram = None
 
+    self.set_profile_image(profile_image)
+
     self.__load_config()
     self.__load_messages()
-
-    if profile_image is not None:
-      self.set_profile_image(profile_image)
 
     if trafficlights is not None and len(trafficlights) == 3:
       self.set_notification_leds(trafficlights[0],trafficlights[1],trafficlights[2])
@@ -252,7 +348,14 @@ class terrariumNotification(object):
 
       self.__data.set(section, str(setting), str(data[setting]))
 
+  def stop(self):
+    if self.telegram is not None:
+      self.telegram.stop()
+
   def set_profile_image(self,imagefile):
+    if imagefile is None:
+      return
+
     if imagefile[0] == '/':
       imagefile = imagefile[1:]
 
@@ -427,25 +530,21 @@ class terrariumNotification(object):
       client = pushover.Client(self.pushover['user_key'], api_token=self.pushover['api_token'])
       if client.verify():
         status = client.send_message(message, title=subject)
-        # {u'status': 1, u'request': u'daad6828-3efe-44d9-89eb-9922fa8e0dda'}
     except Exception, ex:
       print ex
 
   def set_telegram(self,bot_token,userid):
     if '' != bot_token and '' != userid:
-      self.telegram = {'bot_token' : bot_token,
-                       'userid'  : userid}
+      if self.telegram is None:
+        self.telegram = terrariumNotificationTelegramBot(bot_token,userid)
+      else:
+        self.telegram.set_valid_users(userid)
 
   def send_telegram(self,subject,message):
     if self.telegram is None:
       return
 
-    try:
-      updater = Updater(self.telegram['bot_token'])
-      status = updater.bot.send_message(chat_id=self.telegram['userid'], text=message)
-      # {'delete_chat_photo': False, 'new_chat_photo': [], 'from': {'username': u'terrariumpi_bot', 'first_name': u'TerrariumPI', 'is_bot': True, 'id': 519390339}, 'text': u'Dimmer PWM Dimmer is already working. Ignoring state change!. Will switch to latest state value when done', 'caption_entities': [], 'entities': [], 'channel_chat_created': False, 'new_chat_members': [], 'supergroup_chat_created': False, 'chat': {'first_name': u'Yoshie', 'last_name': u'Online', 'type': u'private', 'id': 508490874}, 'photo': [], 'date': 1528062541, 'group_chat_created': False, 'message_id': 14}
-    except Exception, ex:
-      print ex
+    self.telegram.send_message(message)
 
   def message(self,message_id,data = None):
     self.send_notication_led(message_id)
@@ -541,7 +640,7 @@ class terrariumNotification(object):
       'email' : dict(self.email) if self.email is not None else {},
       'twitter' : dict(self.twitter) if self.twitter is not None else {},
       'pushover' : dict(self.pushover) if self.pushover is not None else {},
-      'telegram' : dict(self.telegram) if self.telegram is not None else {},
+      'telegram' : self.telegram.get_config() if self.telegram is not None else {},
       'messages' : self.get_messages() }
 
     if self.email is not None:
