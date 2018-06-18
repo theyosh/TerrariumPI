@@ -237,6 +237,28 @@
               toggleService(this.id)
             });
 
+            $('div#notifications_telegram input[name="telegram_bot_token"]').on('change',function() {
+              if (this.value != '') {
+                $.get('https://api.telegram.org/bot' + this.value + '/getMe', function(data){
+                  console.log(data);
+                  if (data.ok) {
+                    var link = $('div#notifications_telegram small.data_update a');
+                    if (link.length == 0) {
+                      link = $('<a>').attr({'target':'_blank','href':'#'}).css('margin-left' , '0.6em');
+                      $('div#notifications_telegram small.data_update').append(link);
+                    }
+                    link.attr({'title':data.result.first_name,'href':'http://t.me/' + data.result.username}).text('Telegram Bot: ' + data.result.first_name);
+                  } else {
+                    $('div#notifications_telegram small.data_update a').remove();
+                  }
+                }).fail(function() {
+                    $('div#notifications_telegram small.data_update a').remove();
+                });
+              } else {
+                $('div#notifications_telegram small.data_update a').remove();
+              }
+            });
+
             $.get($('form').attr('action'),function(data){
               $.each(data.notifications,function(part,partdata) {
                 switch (part) {
@@ -249,7 +271,7 @@
                       if (config_field.length >= 1) {
                         switch (config_field.prop('type').toLowerCase()) {
                           case 'text':
-                            config_field.val(value);
+                            config_field.val(value).trigger('change');
                             break;
                         }
                       }
