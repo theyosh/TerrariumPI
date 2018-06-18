@@ -4,6 +4,7 @@ import datetime
 import ConfigParser
 import RPi.GPIO as GPIO
 import time
+import os
 import os.path
 import threading
 import json
@@ -353,7 +354,8 @@ class terrariumNotification(object):
       self.telegram.stop()
 
   def set_profile_image(self,imagefile):
-    if imagefile is None:
+    self.__profile_image = imagefile
+    if self.__profile_image is None:
       return
 
     if imagefile[0] == '/':
@@ -442,15 +444,21 @@ class terrariumNotification(object):
     htmlbody = '<html><head><title>%s</title></head><body>%s%s</body></html>'
     htmlimage = ''
     textimage = ''
+    msgImage = None
 
     if self.__profile_image is not None:
-      with open(self.__profile_image, 'rb') as fp:
-        msgImage = MIMEImage(fp.read(), filename=os.path.basename(self.__profile_image))
-        msgImage.add_header('Content-ID', 'profileimage')
-        msgImage.add_header('Content-Disposition', 'inline', filename=os.path.basename(self.__profile_image))
+      try:
+        with open(self.__profile_image, 'rb') as fp:
+          filename, file_extension = os.path.splitext(self.__profile_image)
+          msgImage = MIMEImage(fp.read(), filename=os.path.basename(self.__profile_image),_subtype=file_extension.replace('.',''))
+          msgImage.add_header('Content-ID', 'profileimage')
+          msgImage.add_header('Content-Disposition', 'inline', filename=os.path.basename(self.__profile_image))
 
-        htmlimage = '<img src="cid:profileimage" alt="Profile image" title="Profile image" align="right">'
-        textimage = '[cid:profileimage]\n'
+          htmlimage = '<img src="cid:profileimage" alt="Profile image" title="Profile image" align="right" width="300">'
+          textimage = '[cid:profileimage]\n'
+      except Exception, ex:
+        print '%s - ERROR  - terrariumNotificatio - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex)
+        # No images unfortunally...
 
     for receiver in self.email['receiver']:
 
@@ -467,7 +475,7 @@ class terrariumNotification(object):
 
       emailMessageRelated.attach(emailMessageAlternative)
 
-      if self.__profile_image is not None:
+      if msgImage is not None:
         emailMessageRelated.attach(msgImage)
 
       emailMessage.attach(emailMessageRelated)
