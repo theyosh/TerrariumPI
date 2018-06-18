@@ -454,7 +454,7 @@ class terrariumNotification(object):
           msgImage.add_header('Content-ID', 'profileimage')
           msgImage.add_header('Content-Disposition', 'inline', filename=os.path.basename(self.__profile_image))
 
-          htmlimage = '<img src="cid:profileimage" alt="Profile image" title="Profile image" align="right" width="300">'
+          htmlimage = '<img src="cid:profileimage" alt="Profile image" title="Profile image" align="right" style="max-width:300px;border-radius:25%;">'
           textimage = '[cid:profileimage]\n'
       except Exception, ex:
         print '%s - ERROR  - terrariumNotificatio - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex)
