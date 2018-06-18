@@ -240,7 +240,6 @@
             $('div#notifications_telegram input[name="telegram_bot_token"]').on('change',function() {
               if (this.value != '') {
                 $.get('https://api.telegram.org/bot' + this.value + '/getMe', function(data){
-                  console.log(data);
                   if (data.ok) {
                     var link = $('div#notifications_telegram small.data_update a');
                     if (link.length == 0) {
