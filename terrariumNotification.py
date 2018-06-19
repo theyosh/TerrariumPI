@@ -94,12 +94,24 @@ class terrariumNotificationTelegramBot(threading.Thread):
     self.start()
 
   def __get_url(self,url):
-    response = requests.get(url)
-    return response.content.decode("utf8")
+    data = ''
+    try:
+      response = requests.get(url)
+      data = response.content.decode("utf8")
+    except Exception, ex:
+      print ex
+
+    return data
 
   def __get_json_from_url(self,url):
-    content = self.__get_url(url)
-    return json.loads(content)
+    data = {'description' : 'Did not receive valid JSON data'}
+    try:
+      content = self.__get_url(url)
+      data = json.loads(content)
+    except Exception, ex:
+      print ex
+
+    return data
 
   def __get_updates(self,offset=None):
     self.__last_update_check = int(time.time())
