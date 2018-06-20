@@ -6,4 +6,5 @@ log/*.log*
 audio/*
 description.txt
 weather.txt
-logging.debug.cfg
+logging.custom.cfg
+notifications.cfg

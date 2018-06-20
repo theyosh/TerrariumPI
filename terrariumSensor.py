@@ -207,6 +207,9 @@ class terrariumSensor(object):
 
   def __init__(self, id, hardware_type, sensor_type, sensor, name = '', callback_indicator = None):
     self.id = id
+
+    self.notification = True
+
     self.set_hardware_type(hardware_type)
     self.set_address(sensor)
     self.set_name(name)
@@ -446,6 +449,9 @@ class terrariumSensor(object):
 
   def is_active(self):
     return datetime.datetime.now() - self.last_update < datetime.timedelta(minutes=terrariumSensor.ERROR_TIMEOUT)
+
+  def notification_enabled(self):
+    return self.notification == True
 
   def stop(self):
     logger.info('Cleaned up sensor %s at location %s' % (self.get_name(), self.get_address()))
