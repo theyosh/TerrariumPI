@@ -2,7 +2,68 @@ Changelog
 =========
 
 
-3.6.0 (2018-05-05)
+3.7.0 (2018-06-20)
+------------------
+
+**New**
+------
+- Add some extra checks. [theyosh]
+- Add link to Telegram bot. [#101](https://github.com/theyosh/TerrariumPI/issues/101). [theyosh]
+- Add logging explanations. [theyosh]
+- Add notification message rate limits. [#101](https://github.com/theyosh/TerrariumPI/issues/101). [theyosh]
+- Add NTP to the installation. [theyosh]
+- Add better error logging for notifications. Fixed message parsing for
+  variables. [theyosh]
+- Add notifications page. [theyosh]
+
+**Fixes**
+------
+- Fix not recogniced images. [#101](https://github.com/theyosh/TerrariumPI/issues/101). [theyosh]
+- Fix profile image path. [#101](https://github.com/theyosh/TerrariumPI/issues/101). [theyosh]
+- Fix 1 minute timer actions. [theyosh]
+- Fix config upgrade. [#155](https://github.com/theyosh/TerrariumPI/issues/155). [theyosh]
+
+**Updates**
+------
+- Update version number. [theyosh]
+- Update twitter image based on profile image. [#101](https://github.com/theyosh/TerrariumPI/issues/101). [theyosh]
+- Update notification translations. [#101](https://github.com/theyosh/TerrariumPI/issues/101). [theyosh]
+- Update README.md. [TheYOSH]
+
+  Add notification information
+- Update notification system. [#101](https://github.com/theyosh/TerrariumPI/issues/101). [theyosh]
+- Updated some logging and installer messages. [theyosh]
+- Next rounds of updates for notifications. [#101](https://github.com/theyosh/TerrariumPI/issues/101). [theyosh]
+- Update terrariumUtils.py. [TheYOSH]
+
+  Fix bug [#155](https://github.com/theyosh/TerrariumPI/issues/155)
+
+**Other**
+------
+- Some cosmetic touchups... [#101](https://github.com/theyosh/TerrariumPI/issues/101). [theyosh]
+- Remove debug. [theyosh]
+- Typo. [theyosh]
+- Rewritten TelegramBot. [#101](https://github.com/theyosh/TerrariumPI/issues/101). [theyosh]
+- Support for HTML multipart email messages with profile image. [#101](https://github.com/theyosh/TerrariumPI/issues/101).
+  [theyosh]
+- More notifications finetuning. Adding traffic light support for system
+  messages. [#101](https://github.com/theyosh/TerrariumPI/issues/101). [theyosh]
+- Merge branch 'development' of ssh://github.com/theyosh/TerrariumPI
+  into development. [theyosh]
+- Enable powerswitches and sensors to send notifications. [#101](https://github.com/theyosh/TerrariumPI/issues/101).
+  [theyosh]
+- Finetuning notifications. [theyosh]
+- Better log formatting. [theyosh]
+- Move mail checks and options. [theyosh]
+- Better environment logic for messaging. [theyosh]
+- Secure the notification config data with authentication due to private
+  tokens. [theyosh]
+- Merge branch 'master' into notifications. [theyosh]
+- Stash first part notifications. [#101](https://github.com/theyosh/TerrariumPI/issues/101). [theyosh]
+- Fine tune chirp sensor. [theyosh]
+
+
+3.6.0 (2018-05-31)
 ------------------
 
 **New**
@@ -27,6 +88,7 @@ Changelog
 
 **Updates**
 ------
+- Update changelog. [theyosh]
 - Update environment page. [theyosh]
 - Update environment page. [theyosh]
 - Update README.md. [TheYOSH]
