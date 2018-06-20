@@ -27,6 +27,7 @@ from terrariumWebcam import terrariumWebcam
 from terrariumAudio import terrariumAudioPlayer
 from terrariumCollector import terrariumCollector
 from terrariumEnvironment import terrariumEnvironment
+from terrariumNotification import terrariumNotification
 from terrariumUtils import terrariumUtils
 
 from gevent import monkey, sleep
@@ -69,6 +70,9 @@ class terrariumEngine(object):
     logger.info('Loading terrariumPI config')
     self.config = terrariumConfig()
     logger.info('Done Loading terrariumPI config')
+
+     # Notification engine
+    self.notification = terrariumNotification(profile_image = self.get_profile_image())
 
     logger.info('Setting terrariumPI authentication')
     self.set_authentication(self.config.get_admin(),self.config.get_password())
@@ -113,7 +117,7 @@ class terrariumEngine(object):
 
     # Load the environment system. This will controll the lights, sprayer and heaters
     logger.debug('Loading terrariumPI environment system')
-    self.environment = terrariumEnvironment(self.sensors, self.power_switches, self.weather, self.is_door_open, self.config.get_environment)
+    self.environment = terrariumEnvironment(self.sensors, self.power_switches, self.weather, self.is_door_open, self.config.get_environment,self.notification)
     logger.debug('Done loading terrariumPI environment system')
 
     # Load webcams from config
@@ -412,6 +416,10 @@ class terrariumEngine(object):
           self.collector.log_sensor_data(self.sensors[sensorid].get_data())
           # Websocket callback
           self.get_sensors([sensorid],socket=True)
+          # Send notification when needed and enabled
+          if self.sensors[sensorid].is_active() and self.sensors[sensorid].notification_enabled() and self.sensors[sensorid].get_alarm():
+            self.notification.message('sensor_alarm_' + ('low' if self.sensors[sensorid].get_current() < self.sensors[sensorid].get_alarm_min() else 'high'),self.sensors[sensorid].get_data())
+
           # Make time for other web request
           sleep(0.1)
 
@@ -449,7 +457,7 @@ class terrariumEngine(object):
 
       duration = (time.time() - starttime) + time_short
       if duration < terrariumEngine.LOOP_TIMEOUT:
-        logger.info('Update done in %.5f seconds. Waiting for %.5f seconds for next round' % (duration,terrariumEngine.LOOP_TIMEOUT - duration))
+        logger.info('Update done in %.5f seconds. Waiting for %.5f seconds for next update' % (duration,terrariumEngine.LOOP_TIMEOUT - duration))
         time_short = 0
         sleep(terrariumEngine.LOOP_TIMEOUT - duration) # TODO: Config setting
       else:
@@ -477,15 +485,20 @@ class terrariumEngine(object):
     return None
 
   def stop(self):
+    # Stop engine processing first....
+    self.__running = False
+
     self.environment.stop()
+
     for sensorid in self.sensors:
       self.sensors[sensorid].stop()
 
     for power_switch_id in self.power_switches:
       self.power_switches[power_switch_id].stop()
 
+    self.notification.stop()
     self.collector.stop()
-    self.__running = False
+
     logger.info('Shutdown engine')
   # End private/internal functions
 
@@ -601,6 +614,8 @@ class terrariumEngine(object):
     if self.environment is not None:
       self.environment.update(False)
       self.get_environment(socket=True)
+
+    self.notification.message('switch_toggle_' + ('off' if data['state'] == 0 else 'on'),data)
   # End switches part
 
   # Doors part
@@ -630,6 +645,11 @@ class terrariumEngine(object):
     return self.config.save_doors(self.doors)
 
   def toggle_door_status(self, data):
+    if 'state' in data and 'open' == data['state']:
+      self.notification.message('door_toggle_open',data)
+    elif 'state' in data and 'closed' == data['state']:
+      self.notification.message('door_toggle_closed',data)
+
     self.collector.log_door_data(data)
     self.get_doors_status(socket=True)
     self.get_doors(socket=True)
@@ -819,8 +839,19 @@ class terrariumEngine(object):
         del(data['description'])
 
     update_ok = self.config.save_profile(data)
+    if update_ok:
+      self.notification.set_profile_image(self.get_profile_image())
     return update_ok
   # End profile part
+
+
+  # Notifications part
+  def get_notifications_config(self):
+    return self.notification.get_config()
+
+  def set_notifications(self,data):
+    return self.notification.set_config(data)
+  # End notifications part
 
   # System functions part
   def authenticate(self,username, password):
@@ -958,6 +989,9 @@ class terrariumEngine(object):
     if 'environment' == part or part is None:
       data.update(self.get_environment_config())
 
+    if 'notifications' == part or part is None:
+      data.update({'notifications' : self.get_notifications_config()})
+
     return data
 
   def set_config(self,part,data,files = None):
@@ -985,6 +1019,9 @@ class terrariumEngine(object):
 
     elif 'profile' == part:
       update_ok = self.set_profile(data,files)
+
+    elif 'notifications' == part:
+      update_ok = self.set_notifications(data)
 
     elif 'system' == part:
       if 'new_password' in data and data['new_password'] != '' and 'cur_password' in data and data['cur_password'] != '' and data['new_password'] != data['cur_password']:

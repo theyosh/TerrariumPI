@@ -169,10 +169,10 @@ class terrariumUtils():
 
     now = datetime.datetime.now()
     starttime = start.split(':')
-    starttime = now.replace(hour=int(starttime[0]), minute=int(starttime[1]))
+    starttime = now.replace(hour=int(starttime[0]), minute=int(starttime[1]), second=0)
 
     stoptime = stop.split(':')
-    stoptime = now.replace(hour=int(stoptime[0]), minute=int(stoptime[1]))
+    stoptime = now.replace(hour=int(stoptime[0]), minute=int(stoptime[1]),second=0)
 
     if starttime == stoptime:
       stoptime += datetime.timedelta(hours=24)
@@ -211,14 +211,14 @@ class terrariumUtils():
   def is_time(time_table):
     now = int(datetime.datetime.now().strftime('%s'))
     for time_schedule in time_table:
-      if time_schedule[0] < now < time_schedule[1]:
+      if time_schedule[0] <= now < time_schedule[1]:
         return True
 
       elif now < time_schedule[0]:
         return False
 
     #End of time_table. No data to decide for today
-    return None
+    return False
 
   @staticmethod
   def duration(time_table):
@@ -234,4 +234,4 @@ class terrariumUtils():
     return { prefix + separator + k if prefix else k : v
              for kk, vv in dd.items()
              for k, v in terrariumUtils.flatten_dict(vv, separator, kk).items()
-             } if isinstance(dd, dict) else { prefix : dd if not isinstance(dd,list) else  ','.join(dd)}
+             } if isinstance(dd, dict) else { prefix : dd if not isinstance(dd,list) else ','.join(dd)}

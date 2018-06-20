@@ -571,7 +571,7 @@ function update_online_indicator(online) {
 
 /* General functions - Form functions */
 function init_form_settings(pType) {
-  if (['environment','system'].indexOf(pType) == -1) {
+  if (['environment','system','notifications'].indexOf(pType) == -1) {
     $('.page-title').append('<div class="title_right"><h3><button type="button" class="btn btn-primary alignright" data-toggle="modal" data-target=".add-form"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></h3> </div>');
   }
 
@@ -625,13 +625,6 @@ function init_form_settings(pType) {
       break;
 
     case 'environment':
-      $('form').on('submit',function() {
-        $(this).find('input[type="radio"]').removeAttr('checked').removeAttr('disabled');
-        $(this).find('label.active > input[type="radio"]').attr('checked','checked');
-        $(this).find('label:not(.active) > input[type="radio"]').attr('disabled','disabled');
-      });
-      break;
-
     case 'system':
       $('form').on('submit',function() {
         $(this).find('input[type="radio"]').removeAttr('checked').removeAttr('disabled');
@@ -686,11 +679,11 @@ function prepare_form_data(form) {
   var matches = null;
   var objectdata = {};
   var prev_nr = -1;
-  if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'profile') {
+  if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'profile' || form_type === 'notifications') {
     formdata = {};
   }
   try {
-    form.find('div:visible input:not([disabled="disabled"]),div:visible select:not([disabled="disabled"])').each(function() {
+    form.find('div:visible input:not([disabled="disabled"]),div:visible select:not([disabled="disabled"]),div:visible textarea:not([disabled="disabled"])').each(function() {
       var field_name = $(this).attr('name');
       if (field_name !== undefined) {
         var field_value = $(this).val();
@@ -698,6 +691,7 @@ function prepare_form_data(form) {
           case 'profile':
           case 'weather':
           case 'system':
+          case 'notifications':
             if (field_name == 'age') {
               field_value = moment(field_value,'L').unix();
             }
@@ -746,7 +740,7 @@ function prepare_form_data(form) {
       }
     });
     if (Object.keys(objectdata).length > 1) {
-      if (form_type === 'weather' || form_type === 'environment' || form_type === 'system') {
+      if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'notifications') {
         formdata[prev_nr] = $.extend(true, {}, objectdata);
       } else {
         formdata.push($.extend(true, {}, objectdata));

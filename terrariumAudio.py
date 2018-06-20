@@ -123,7 +123,7 @@ class terrariumAudioPlayer(object):
 
       duration = time.time() - starttime
       if duration < terrariumAudioPlayer.LOOP_TIMEOUT:
-        logger.info('Update done in %.5f seconds. Waiting for %.5f seconds for next round' % (duration,terrariumAudioPlayer.LOOP_TIMEOUT - duration))
+        logger.info('Update done in %.5f seconds. Waiting for %.5f seconds for next update' % (duration,terrariumAudioPlayer.LOOP_TIMEOUT - duration))
         time.sleep(terrariumAudioPlayer.LOOP_TIMEOUT - duration)
       else:
         logger.warning('Updating took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumAudioPlayer.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
@@ -310,7 +310,7 @@ class terrariumAudioPlaylist(object):
       self.__calculate_time_table()
       is_time = False
 
-    logger.info('Timer action is done for switch %s. Is it time to play?: %s.', self.get_name(),('Yes' if is_time else 'Nope'))
+    logger.debug('Timer action is done for switch %s. Is it time to play?: %s.', self.get_name(),('Yes' if is_time else 'Nope'))
     return is_time
 
   def get_duration(self):

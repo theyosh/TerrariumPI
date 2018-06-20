@@ -44,7 +44,7 @@ esac
 # Install required packages to get the terrarium software running
 debconf-apt-progress -- apt-get -y update
 debconf-apt-progress -- apt-get -y full-upgrade
-debconf-apt-progress -- apt-get -y install libftdi1 screen git subversion watchdog build-essential i2c-tools owfs ow-shell sqlite3 vlc-nox libasound2-dev sispmctl lshw python-imaging python-dateutil python-ow python-rpi.gpio python-psutil python-dev python-picamera python-opencv python-pip python-pigpio python-requests python-mediainfodll python-gpiozero python-smbus libffi-dev
+debconf-apt-progress -- apt-get -y install libftdi1 screen git subversion watchdog build-essential i2c-tools owfs ow-shell sqlite3 vlc-nox libasound2-dev sispmctl lshw python-imaging python-dateutil python-ow python-rpi.gpio python-psutil python-dev python-picamera python-opencv python-pip python-pigpio python-requests python-mediainfodll python-gpiozero python-smbus libffi-dev ntp
 
 PROGRESS=55
 # Update submodules if downloaded through tar or zip
@@ -58,7 +58,7 @@ XXX
 EOF
 
 
-PROGRESS=$((PROGRESS + 10))
+PROGRESS=$((PROGRESS + 5))
 cat <<EOF
 XXX
 $PROGRESS
@@ -68,7 +68,7 @@ EOF
 git submodule init > /dev/null
 
 
-PROGRESS=$((PROGRESS + 10))
+PROGRESS=$((PROGRESS + 5))
 cat <<EOF
 XXX
 $PROGRESS
@@ -79,7 +79,7 @@ git submodule update > /dev/null
 cd "${BASEDIR}/.."
 
 
-PIP_MODULES="gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial"
+PIP_MODULES="gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover"
 for PIP_MODULE in ${PIP_MODULES}
 do
   PROGRESS=$((PROGRESS + 2))
@@ -87,7 +87,7 @@ do
   cat <<EOF
 XXX
 $PROGRESS
-Install required software\n\nInstalling python module ${PIP_MODULE} ...
+Install required software (gevent will take 5-10 min.)\n\nInstalling python module ${PIP_MODULE} ...
 XXX
 EOF
   pip install -q --upgrade ${PIP_MODULE}

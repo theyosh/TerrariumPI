@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.6.0\n"
-"POT-Creation-Date: 2018-05-27 14:24+CEST\n"
+"POT-Creation-Date: 2018-06-15 21:59+CEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -308,98 +308,118 @@ msgid "Select when the power switches can toggle. When the door is open, cosed o
 msgstr ""
 
 #: terrariumTranslations.py:106
-msgid "Choose your interface language."
+msgid "Holds the email address on which you would like to receive messages."
 msgstr ""
 
 #: terrariumTranslations.py:107
-msgid "Holds the distance type used by distance sensors."
+msgid "Holds the mail server hostname or IP."
 msgstr ""
 
-#: terrariumTranslations.py:108 terrariumTranslations.py:109
-msgid "Holds the username which can make changes (Administrator)."
+#: terrariumTranslations.py:108
+msgid "Holds the mail server portnumber. SSL and TLS will be autodetected."
+msgstr ""
+
+#: terrariumTranslations.py:109
+msgid "Holds the username for authentication with the mailserver if needed."
 msgstr ""
 
 #: terrariumTranslations.py:110
-msgid "Enter the new password for the administration user. Leaving empty will not change the password!"
+msgid "Holds the password for authentication with the mailserver if needed."
 msgstr ""
 
-#: terrariumTranslations.py:111
-msgid "Enter the current password in order to change the password."
-msgstr ""
-
-#: terrariumTranslations.py:112
-msgid "Toggle on or off full authentication. When on, you need to authenticate at all times."
-msgstr ""
-
-#: terrariumTranslations.py:113
-msgid "Holds the external calendar url."
-msgstr ""
-
-#: terrariumTranslations.py:114
-msgid "Toggle on or off horizontal graph legends. Reload the webinterface after changing the setting."
-msgstr ""
-
-#: terrariumTranslations.py:115
-msgid "Holds the soundcard that is used for playing audio."
-msgstr ""
-
-#: terrariumTranslations.py:116
-msgid "Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment."
-msgstr ""
-
-#: terrariumTranslations.py:117
-msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
-msgstr ""
-
-#: terrariumTranslations.py:118
-msgid "Holds the amount of euro/dollar per 1000 liters water."
-msgstr ""
-
-#: terrariumTranslations.py:119
-msgid "Choose the temperature indicator. The software will recalculate to the chosen indicator."
-msgstr ""
-
-#: terrariumTranslations.py:120
-msgid "Holds the host name or IP address on which the software will listen for connections. Enter :: for all addresses to bind."
-msgstr ""
-
-#: terrariumTranslations.py:121
-msgid "Holds the port number on which the software is listening for connections."
-msgstr ""
-
-#: terrariumTranslations.py:122
-msgid "Holds the port number on which the OWFS software is running. Leave empty to disable OWFS support."
+#: terrariumTranslations.py:125
+msgid "Choose your interface language."
 msgstr ""
 
 #: terrariumTranslations.py:126
-msgid "Holds the name of the animal."
+msgid "Holds the distance type used by distance sensors."
 msgstr ""
 
-#: terrariumTranslations.py:127
-msgid "Holds the type of the animal"
-msgstr ""
-
-#: terrariumTranslations.py:128
-msgid "Holds the gender of the animal."
+#: terrariumTranslations.py:127 terrariumTranslations.py:128
+msgid "Holds the username which can make changes (Administrator)."
 msgstr ""
 
 #: terrariumTranslations.py:129
-msgid "Holds the day of birth of the animal."
+msgid "Enter the new password for the administration user. Leaving empty will not change the password!"
 msgstr ""
 
 #: terrariumTranslations.py:130
-msgid "Holds the species name of the animal."
+msgid "Enter the current password in order to change the password."
 msgstr ""
 
 #: terrariumTranslations.py:131
-msgid "Holds the latin name of the animal."
+msgid "Toggle on or off full authentication. When on, you need to authenticate at all times."
 msgstr ""
 
 #: terrariumTranslations.py:132
-msgid "Holds a small description about the animal."
+msgid "Holds the external calendar url."
 msgstr ""
 
 #: terrariumTranslations.py:133
+msgid "Toggle on or off horizontal graph legends. Reload the webinterface after changing the setting."
+msgstr ""
+
+#: terrariumTranslations.py:134
+msgid "Holds the soundcard that is used for playing audio."
+msgstr ""
+
+#: terrariumTranslations.py:135
+msgid "Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment."
+msgstr ""
+
+#: terrariumTranslations.py:136
+msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
+msgstr ""
+
+#: terrariumTranslations.py:137
+msgid "Holds the amount of euro/dollar per 1000 liters water."
+msgstr ""
+
+#: terrariumTranslations.py:138
+msgid "Choose the temperature indicator. The software will recalculate to the chosen indicator."
+msgstr ""
+
+#: terrariumTranslations.py:139
+msgid "Holds the host name or IP address on which the software will listen for connections. Enter :: for all addresses to bind."
+msgstr ""
+
+#: terrariumTranslations.py:140
+msgid "Holds the port number on which the software is listening for connections."
+msgstr ""
+
+#: terrariumTranslations.py:141
+msgid "Holds the port number on which the OWFS software is running. Leave empty to disable OWFS support."
+msgstr ""
+
+#: terrariumTranslations.py:145
+msgid "Holds the name of the animal."
+msgstr ""
+
+#: terrariumTranslations.py:146
+msgid "Holds the type of the animal"
+msgstr ""
+
+#: terrariumTranslations.py:147
+msgid "Holds the gender of the animal."
+msgstr ""
+
+#: terrariumTranslations.py:148
+msgid "Holds the day of birth of the animal."
+msgstr ""
+
+#: terrariumTranslations.py:149
+msgid "Holds the species name of the animal."
+msgstr ""
+
+#: terrariumTranslations.py:150
+msgid "Holds the latin name of the animal."
+msgstr ""
+
+#: terrariumTranslations.py:151
+msgid "Holds a small description about the animal."
+msgstr ""
+
+#: terrariumTranslations.py:152
 msgid "Holds a link to more information."
 msgstr ""
 
@@ -407,74 +427,74 @@ msgstr ""
 msgid "Offline since"
 msgstr ""
 
-#: terrariumWebserver.py:88 terrariumWebserver.py:159
+#: terrariumWebserver.py:88 terrariumWebserver.py:165
 msgid "Authenticate to make any changes"
 msgstr ""
 
-#: terrariumWebserver.py:88 terrariumWebserver.py:159
+#: terrariumWebserver.py:88 terrariumWebserver.py:165
 msgid "Authentication"
 msgstr ""
 
-#: terrariumWebserver.py:88 terrariumWebserver.py:159
+#: terrariumWebserver.py:88 terrariumWebserver.py:165
 #: views/system_settings.tpl:36
 msgid "TerrariumPI"
 msgstr ""
 
-#: terrariumWebserver.py:211
+#: terrariumWebserver.py:218
 msgid "Player command could ot be executed!"
 msgstr ""
 
-#: terrariumWebserver.py:211 terrariumWebserver.py:231
-#: terrariumWebserver.py:243 terrariumWebserver.py:251
+#: terrariumWebserver.py:218 terrariumWebserver.py:238
+#: terrariumWebserver.py:250 terrariumWebserver.py:258
 msgid "Error!"
 msgstr ""
 
-#: terrariumWebserver.py:219 terrariumWebserver.py:222
+#: terrariumWebserver.py:226 terrariumWebserver.py:229
 msgid "OK!"
 msgstr ""
 
-#: terrariumWebserver.py:219 terrariumWebserver.py:222
+#: terrariumWebserver.py:226 terrariumWebserver.py:229
 msgid "Player command executed!"
 msgstr ""
 
-#: terrariumWebserver.py:231
+#: terrariumWebserver.py:238
 msgid "File is not uploaded!"
 msgstr ""
 
-#: terrariumWebserver.py:236 terrariumWebserver.py:246
+#: terrariumWebserver.py:243 terrariumWebserver.py:253
 msgid "Success!"
 msgstr ""
 
-#: terrariumWebserver.py:243
+#: terrariumWebserver.py:250
 msgid "Action could not be satisfied"
 msgstr ""
 
-#: terrariumWebserver.py:246
+#: terrariumWebserver.py:253
 msgid "Audio file is deleted"
 msgstr ""
 
-#: terrariumWebserver.py:251
+#: terrariumWebserver.py:258
 msgid "Data could not be saved"
 msgstr ""
 
-#: terrariumWebserver.py:259
+#: terrariumWebserver.py:266
 msgid "Data saved"
 msgstr ""
 
-#: terrariumWebserver.py:260
+#: terrariumWebserver.py:267
 msgid "Your changes are saved"
 msgstr ""
 
-#: terrariumWebserver.py:381 views/inc/menu.tpl:159
+#: terrariumWebserver.py:388 views/inc/menu.tpl:162
 msgid "Log out"
 msgstr ""
 
-#: terrariumWebserver.py:382
+#: terrariumWebserver.py:389
 msgid "You are now logged out"
 msgstr ""
 
 #: views/audio_files.tpl:4 views/audio_playlist.tpl:4
-#: views/door_settings.tpl:4 views/inc/menu.tpl:138
+#: views/door_settings.tpl:4 views/inc/menu.tpl:141 views/notifications.tpl:4
 #: views/sensor_settings.tpl:4 views/switch_settings.tpl:4
 #: views/system_environment.tpl:4 views/system_settings.tpl:4
 #: views/webcam_settings.tpl:4
@@ -629,9 +649,10 @@ msgid "Files"
 msgstr ""
 
 #: views/audio_playlist.tpl:48 views/door_settings.tpl:36
-#: views/profile.tpl:179 views/sensor_settings.tpl:54
-#: views/switch_settings.tpl:72 views/system_environment.tpl:1379
-#: views/system_settings.tpl:184 views/webcam_settings.tpl:47
+#: views/notifications.tpl:205 views/profile.tpl:179
+#: views/sensor_settings.tpl:54 views/switch_settings.tpl:72
+#: views/system_environment.tpl:1379 views/system_settings.tpl:184
+#: views/webcam_settings.tpl:47
 msgid "Submit"
 msgstr ""
 
@@ -684,8 +705,8 @@ msgstr ""
 #: views/dashboard.tpl:522 views/dashboard.tpl:577 views/dashboard.tpl:632
 #: views/dashboard.tpl:687 views/dashboard.tpl:742 views/dashboard.tpl:797
 #: views/door_status.tpl:37 views/inc/menu.tpl:62 views/inc/menu.tpl:73
-#: views/inc/menu.tpl:84 views/inc/menu.tpl:95 views/inc/menu.tpl:128
-#: views/inc/menu.tpl:156 views/inc/sensor_list.tpl:43
+#: views/inc/menu.tpl:84 views/inc/menu.tpl:95 views/inc/menu.tpl:125
+#: views/inc/menu.tpl:159 views/inc/sensor_list.tpl:43
 #: views/inc/usage_doors.tpl:48 views/inc/usage_doors.tpl:92
 #: views/inc/usage_doors.tpl:148 views/inc/usage_sensors.tpl:52
 #: views/inc/usage_sensors.tpl:103 views/inc/usage_sensors.tpl:212
@@ -693,14 +714,16 @@ msgstr ""
 #: views/inc/usage_switches.tpl:169 views/inc/usage_weather.tpl:34
 #: views/inc/usage_weather.tpl:94 views/inc/usage_webcams.tpl:46
 #: views/inc/usage_webcams.tpl:88 views/inc/usage_webcams.tpl:163
-#: views/switch_status.tpl:37 views/system_environment.tpl:27
-#: views/system_environment.tpl:158 views/system_environment.tpl:370
-#: views/system_environment.tpl:581 views/system_environment.tpl:792
-#: views/system_environment.tpl:1003 views/system_environment.tpl:1214
-#: views/system_log.tpl:15 views/system_status.tpl:32
-#: views/system_status.tpl:88 views/system_status.tpl:144
-#: views/system_status.tpl:200 views/system_status.tpl:256
-#: views/weather.tpl:16 views/webcam.tpl:20
+#: views/notifications.tpl:27 views/notifications.tpl:64
+#: views/notifications.tpl:97 views/notifications.tpl:122
+#: views/notifications.tpl:147 views/switch_status.tpl:37
+#: views/system_environment.tpl:27 views/system_environment.tpl:158
+#: views/system_environment.tpl:370 views/system_environment.tpl:581
+#: views/system_environment.tpl:792 views/system_environment.tpl:1003
+#: views/system_environment.tpl:1214 views/system_log.tpl:15
+#: views/system_status.tpl:32 views/system_status.tpl:88
+#: views/system_status.tpl:144 views/system_status.tpl:200
+#: views/system_status.tpl:256 views/weather.tpl:16 views/webcam.tpl:20
 msgid "Settings"
 msgstr ""
 
@@ -749,7 +772,7 @@ msgstr ""
 msgid "Current"
 msgstr ""
 
-#: views/dashboard.tpl:62 views/inc/menu.tpl:125
+#: views/dashboard.tpl:62 views/inc/menu.tpl:122
 #: views/inc/usage_dashboard.tpl:118 views/inc/usage_dashboard.tpl:211
 #: views/usage.tpl:31
 msgid "Environment"
@@ -763,7 +786,7 @@ msgstr ""
 
 #: views/dashboard.tpl:83 views/dashboard.tpl:118 views/dashboard.tpl:171
 #: views/dashboard.tpl:224 views/dashboard.tpl:277 views/dashboard.tpl:330
-#: views/dashboard.tpl:383 views/inc/menu.tpl:193 views/inc/menu.tpl:219
+#: views/dashboard.tpl:383 views/inc/menu.tpl:196 views/inc/menu.tpl:222
 #: views/inc/usage_environment.tpl:25 views/inc/usage_environment.tpl:121
 #: views/inc/usage_environment.tpl:129 views/inc/usage_environment.tpl:213
 #: views/inc/usage_environment.tpl:221 views/inc/usage_environment.tpl:307
@@ -984,7 +1007,7 @@ msgid "Here you can configure your doors."
 msgstr ""
 
 #: views/door_settings.tpl:19 views/door_settings.tpl:70 views/hardware.tpl:7
-#: views/hardware.tpl:30 views/inc/menu.tpl:147 views/inc/usage_doors.tpl:98
+#: views/hardware.tpl:30 views/inc/menu.tpl:150 views/inc/usage_doors.tpl:98
 #: views/inc/usage_doors.tpl:119 views/inc/usage_sensors.tpl:109
 #: views/inc/usage_sensors.tpl:165 views/inc/usage_switches.tpl:103
 #: views/inc/usage_switches.tpl:134 views/sensor_settings.tpl:19
@@ -1240,61 +1263,65 @@ msgstr ""
 msgid "System"
 msgstr ""
 
-#: views/inc/menu.tpl:122
+#: views/inc/menu.tpl:128
+msgid "Notifications"
+msgstr ""
+
+#: views/inc/menu.tpl:131
 msgid "Log"
 msgstr ""
 
-#: views/inc/menu.tpl:135
+#: views/inc/menu.tpl:138
 msgid "About"
 msgstr ""
 
-#: views/inc/menu.tpl:141
+#: views/inc/menu.tpl:144
 msgid "Info"
 msgstr ""
 
-#: views/inc/menu.tpl:144
+#: views/inc/menu.tpl:147
 msgid "Usage"
 msgstr ""
 
-#: views/inc/menu.tpl:157
+#: views/inc/menu.tpl:160
 msgid "FullScreen"
 msgstr ""
 
-#: views/inc/menu.tpl:158
+#: views/inc/menu.tpl:161
 msgid "Lock"
 msgstr ""
 
-#: views/inc/menu.tpl:171
+#: views/inc/menu.tpl:174
 msgid "date/time"
 msgstr ""
 
-#: views/inc/menu.tpl:176 views/inc/usage_dashboard.tpl:19
+#: views/inc/menu.tpl:179 views/inc/usage_dashboard.tpl:19
 msgid "Online"
 msgstr ""
 
-#: views/inc/menu.tpl:179 views/inc/usage_dashboard.tpl:26
+#: views/inc/menu.tpl:182 views/inc/usage_dashboard.tpl:26
 msgid "Offline"
 msgstr ""
 
-#: views/inc/menu.tpl:185 views/inc/menu.tpl:205 views/inc/menu.tpl:225
+#: views/inc/menu.tpl:188 views/inc/menu.tpl:208 views/inc/menu.tpl:228
 msgid "No messages"
 msgstr ""
 
-#: views/inc/menu.tpl:196 views/inc/usage_dashboard.tpl:43
+#: views/inc/menu.tpl:199 views/inc/usage_dashboard.tpl:43
 #: views/inc/usage_doors.tpl:82
 msgid "Door is closed"
 msgstr ""
 
-#: views/inc/menu.tpl:199 views/inc/usage_dashboard.tpl:50
+#: views/inc/menu.tpl:202 views/inc/usage_dashboard.tpl:50
 #: views/inc/usage_doors.tpl:81
 msgid "Door is open"
 msgstr ""
 
-#: views/inc/menu.tpl:213
+#: views/inc/menu.tpl:216
 msgid "Playing"
 msgstr ""
 
-#: views/inc/menu.tpl:216
+#: views/inc/menu.tpl:219
 msgid "Stopped"
 msgstr ""
 
@@ -1508,6 +1535,7 @@ msgstr ""
 #: views/inc/usage_sensors.tpl:17 views/inc/usage_sensors.tpl:203
 #: views/inc/usage_switches.tpl:13 views/inc/usage_switches.tpl:160
 #: views/inc/usage_webcams.tpl:13 views/inc/usage_webcams.tpl:154
+#: views/notifications.tpl:161
 msgid "Title"
 msgstr ""
 
@@ -2073,6 +2101,106 @@ msgstr ""
 
 #: views/info.tpl:88
 msgid "Here are some photos how you can use it."
+msgstr ""
+
+#: views/notifications.tpl:16
+msgid "Enter the values per service that you want to use. Per service are all fields required, except mail port and mail authentication values."
+msgstr ""
+
+#: views/notifications.tpl:17
+msgid "Select per message the service so send the notification. You can have everyting per email, and important ones per pushover or telegram."
+msgstr ""
+
+#: views/notifications.tpl:18
+msgid "Use %rawdata% to get all the possible replacement values. Then create your own message with variables like %now% and %current%. This can be done in either the title and message."
+msgstr ""
+
+#: views/notifications.tpl:19
+msgid "Make sure you submit the form after making changes!"
+msgstr ""
+
+#: views/notifications.tpl:27
+msgid "Email"
+msgstr ""
+
+#: views/notifications.tpl:37
+msgid "Receiver email"
+msgstr ""
+
+#: views/notifications.tpl:41
+msgid "SMTP server"
+msgstr ""
+
+#: views/notifications.tpl:45
+msgid "SMTP server port"
+msgstr ""
+
+#: views/notifications.tpl:49
+msgid "SMTP username"
+msgstr ""
+
+#: views/notifications.tpl:53
+msgid "SMTP password"
+msgstr ""
+
+#: views/notifications.tpl:64
+msgid "Twitter"
+msgstr ""
+
+#: views/notifications.tpl:74
+msgid "Consumer key"
+msgstr ""
+
+#: views/notifications.tpl:78
+msgid "Consumer secret"
+msgstr ""
+
+#: views/notifications.tpl:82
+msgid "Access token"
+msgstr ""
+
+#: views/notifications.tpl:86
+msgid "Access token secret"
+msgstr ""
+
+#: views/notifications.tpl:97
+msgid "Pushover"
+msgstr ""
+
+#: views/notifications.tpl:107
+msgid "API Token"
+msgstr ""
+
+#: views/notifications.tpl:111
+msgid "User key"
+msgstr ""
+
+#: views/notifications.tpl:122
+msgid "Telegram"
+msgstr ""
+
+#: views/notifications.tpl:132
+msgid "Bot Token"
+msgstr ""
+
+#: views/notifications.tpl:136
+msgid "User id"
+msgstr ""
+
+#: views/notifications.tpl:147
+msgid "Messages"
+msgstr ""
+
+#: views/notifications.tpl:158
+msgid "Trigger"
+msgstr ""
+
+#: views/notifications.tpl:164
+msgid "Message"
+msgstr ""
+
+#: views/notifications.tpl:167
+msgid "Service"
 msgstr ""
 
 #: views/profile.tpl:15
@@ -2696,6 +2824,38 @@ msgid "Height in cm"
 msgstr ""
 
 #: Missing text string
+msgid "Holds the PushOver API token. More information %shere%s' % ('<a href='https://pushover.net/api' target='_blank'>','</a>"
+msgstr ""
+
+#: Missing text string
+msgid "Holds the PushOver API user key. More information %shere%s' % ('<a href='https://pushover.net/api' target='_blank'>','</a>"
+msgstr ""
+
+#: Missing text string
+msgid "Holds the Telegram Bot token. More information %shere%s' % ('<a href='https://core.telegram.org/bots#6-botfather' target='_blank'>','</a>"
+msgstr ""
+
+#: Missing text string
+msgid "Holds the Telegram userid for receiving messages. More information %shere%s' % ('<a href='https://core.telegram.org/bots#6-botfather' target='_blank'>','</a>"
+msgstr ""
+
+#: Missing text string
+msgid "Holds your Twitter access token. More information %shere%s' % ('<a href='https://apps.twitter.com/' target='_blank'>','</a>"
+msgstr ""
+
+#: Missing text string
+msgid "Holds your Twitter access token secret. More information %shere%s' % ('<a href='https://apps.twitter.com/' target='_blank'>','</a>"
+msgstr ""
+
+#: Missing text string
+msgid "Holds your Twitter consumer key. More information %shere%s' % ('<a href='https://apps.twitter.com/' target='_blank'>','</a>"
+msgstr ""
+
+#: Missing text string
+msgid "Holds your Twitter consumer secret. More information %shere%s' % ('<a href='https://apps.twitter.com/' target='_blank'>','</a>"
+msgstr ""
+
+#: Missing text string
 msgid "I2C bus"
 msgstr ""
 
@@ -2777,6 +2937,10 @@ msgstr ""
 
 #: Missing text string
 msgid "Server could not process the upload. Error code {{statusCode}}"
+msgstr ""
+
+#: Missing text string
+msgid "SMTP userame"
 msgstr ""
 
 #: Missing text string

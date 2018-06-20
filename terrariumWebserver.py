@@ -111,6 +111,12 @@ class terrariumWebserver(object):
                      callback=self.__static_file,
                      apply=self.__authenticate(False))
 
+    self.__app.route('/api/<path:re:(config/notifications)>',
+                     method=['GET'],
+                     callback=self.__get_api_call,
+                     apply=self.__authenticate(True)
+                    )
+
     self.__app.route('/api/<path:path>',
                      method=['GET'],
                      callback=self.__get_api_call,
@@ -128,7 +134,7 @@ class terrariumWebserver(object):
                      apply=self.__authenticate(True)
                     )
 
-    self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|doors|audio|environment|profile)>',
+    self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|doors|audio|environment|profile|notifications)>',
                      method=['PUT','POST','DELETE'],
                      callback=self.__update_api_call,
                      apply=self.__authenticate(True)
@@ -168,7 +174,8 @@ class terrariumWebserver(object):
                   'distance_indicator' : self.__terrariumEngine.get_distance_indicator(),
                   'horizontal_graph_legend' : 1 if self.__terrariumEngine.get_horizontal_graph_legend() else 0,
                   'translations': self.__translations,
-                  'device': self.__terrariumEngine.device}
+                  'device': self.__terrariumEngine.device,
+                  'notifications' : self.__terrariumEngine.notification}
 
     if 'index' == template or 'profile' == template:
       variables['person_name'] = self.__terrariumEngine.get_profile_name()
@@ -430,7 +437,7 @@ class terrariumWebserver(object):
   def start(self):
     # Start the webserver
     logger.info('Running webserver at %s:%s' % (self.__config['host'],self.__config['port']))
-    print '%s - INFO - terrariumWebserver - Running webserver at %s:%s' % (datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S,000'),
+    print '%s - INFO    - terrariumWebserver   - Running webserver at %s:%s' % (datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S,000'),
                                              self.__config['host'],
                                              self.__config['port'])
     self.__app.run(host=self.__config['host'],
