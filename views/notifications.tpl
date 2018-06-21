@@ -128,13 +128,17 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                  <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                     <label for="email_to">{{_('Bot Token')}}</label>
                     <input class="form-control" name="telegram_bot_token" placeholder="{{_('Bot Token')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_telegram_bot_token')}}">
                   </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                  <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                     <label for="email_server">{{_('Username')}}</label>
                     <input class="form-control" name="telegram_userid" placeholder="{{_('Username')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_telegram_username')}}">
+                  </div>
+                  <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                    <label for="email_server">{{_('Proxy')}}</label>
+                    <input class="form-control" name="telegram_proxy" placeholder="{{_('Proxy')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_telegram_proxy')}}">
                   </div>
                 </div>
               </div>
