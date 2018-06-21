@@ -81,7 +81,7 @@ class terrariumNotificationTelegramBot(threading.Thread):
 
   __POLL_TIMEOUT = 120
 
-  def __init__(self,bot_token,valid_users = None):
+  def __init__(self,bot_token,valid_users = None, proxy = None):
     super(terrariumNotificationTelegramBot,self).__init__()
     self.__running = False
     self.__bot_token = bot_token
@@ -91,12 +91,17 @@ class terrariumNotificationTelegramBot(threading.Thread):
     self.__last_update_check = int(time.time())
 
     self.set_valid_users(valid_users)
+    self.set_proxy(proxy)
     self.start()
 
   def __get_url(self,url):
     data = ''
     try:
-      response = requests.get(url)
+      if self.__proxy is not None:
+        response = requests.get(url,proxies=self.__proxy)
+      else:
+        response = requests.get(url)
+
       data = response.content.decode("utf8")
     except Exception, ex:
       print ex
@@ -138,7 +143,8 @@ class terrariumNotificationTelegramBot(threading.Thread):
 
   def get_config(self):
     return {'bot_token' : self.__bot_token,
-            'userid': ','.join(self.__valid_users) if self.__valid_users is not None else ''}
+            'userid': ','.join(self.__valid_users) if self.__valid_users is not None else '',
+            'proxy' : self.__proxy}
 
   def send_message(self,text, chat_id = None):
     if self.__running:
@@ -150,6 +156,12 @@ class terrariumNotificationTelegramBot(threading.Thread):
 
   def set_valid_users(self,users = None):
     self.__valid_users = users.split(',') if users is not None else []
+
+  def set_proxy(self,proxy):
+    self.__proxy = None
+    if proxy is not None and '' != proxy:
+      self.__proxy = {'http' : proxy,
+                      'https': proxy}
 
   def stop(self):
     self.__running = False
@@ -292,8 +304,13 @@ class terrariumNotification(object):
                         self.__data.get('pushover','user_key'))
 
     if self.__data.has_section('telegram'):
+      proxy = None
+      if self.__data.has_option('telegram', 'proxy'):
+        proxy = self.__data.get('telegram','proxy')
+
       self.set_telegram(self.__data.get('telegram','bot_token'),
-                        self.__data.get('telegram','userid'))
+                        self.__data.get('telegram','userid'),
+                        proxy)
 
   def __load_messages(self,data = None):
     self.messages = {}
@@ -553,10 +570,10 @@ class terrariumNotification(object):
     except Exception, ex:
       print ex
 
-  def set_telegram(self,bot_token,userid):
+  def set_telegram(self,bot_token,userid,proxy):
     if '' != bot_token and '' != userid:
       if self.telegram is None:
-        self.telegram = terrariumNotificationTelegramBot(bot_token,userid)
+        self.telegram = terrariumNotificationTelegramBot(bot_token,userid,proxy)
       else:
         self.telegram.set_valid_users(userid)
 
@@ -630,7 +647,8 @@ class terrariumNotification(object):
                                        'user_key'  : data['pushover_user_key']})
 
       self.__update_config('telegram',{'bot_token' : data['telegram_bot_token'],
-                                       'userid'  : data['telegram_userid']})
+                                       'userid'    : data['telegram_userid'],
+                                       'proxy'     : data['telegram_proxy']})
 
     except Exception, ex:
       print ex
