@@ -102,7 +102,7 @@ class terrariumNotificationTelegramBot(threading.Thread):
       else:
         response = requests.get(url)
 
-      data = response.content.decode("utf8")
+      data = response.content.decode('utf8')
     except Exception, ex:
       print ex
 
@@ -120,17 +120,17 @@ class terrariumNotificationTelegramBot(threading.Thread):
 
   def __get_updates(self,offset=None):
     self.__last_update_check = int(time.time())
-    url = self.__bot_url + "getUpdates?timeout={}".format(terrariumNotificationTelegramBot.__POLL_TIMEOUT)
+    url = self.__bot_url + 'getUpdates?timeout={}'.format(terrariumNotificationTelegramBot.__POLL_TIMEOUT)
     if offset:
-      url += "&offset={}".format(offset)
+      url += '&offset={}'.format(offset)
 
     return self.__get_json_from_url(url)
 
   def __process_messages(self,messages):
     for update in messages:
-      user = update["message"]["from"]['username']
-      text = update["message"]["text"]
-      chat = int(update["message"]["chat"]["id"])
+      user = update['message']['from']['username']
+      text = update['message']['text']
+      chat = int(update['message']['chat']['id'])
 
       if user not in self.__valid_users:
         self.send_message('Sorry, you are not a valid user for this TerrariumPI.', chat)
@@ -151,7 +151,7 @@ class terrariumNotificationTelegramBot(threading.Thread):
       chat_ids = self.__chat_ids if chat_id is None else [int(chat_id)]
       text = urllib.quote_plus(text)
       for chat_id in chat_ids:
-        url = self.__bot_url + "sendMessage?text={}&chat_id={}".format(text, chat_id)
+        url = self.__bot_url + 'sendMessage?text={}&chat_id={}'.format(text, chat_id)
         self.__get_url(url)
 
   def set_valid_users(self,users = None):
@@ -174,9 +174,9 @@ class terrariumNotificationTelegramBot(threading.Thread):
     while self.__running:
       try:
         updates = self.__get_updates(last_update_id)
-        if 'result' in updates and len(updates["result"]) > 0:
-          last_update_id = max([int(update["update_id"]) for update in updates["result"]]) + 1
-          self.__process_messages(updates["result"])
+        if 'result' in updates and len(updates['result']) > 0:
+          last_update_id = max([int(update['update_id']) for update in updates['result']]) + 1
+          self.__process_messages(updates['result'])
 
         elif 'description' in updates:
           print updates
@@ -194,7 +194,7 @@ class terrariumNotification(object):
   __MAX_MESSAGES_TOTAL_PER_MINUTE = 5
   __MAX_MESSAGES_PER_MINUTE = 2
 
-  __regex_parse = re.compile(r"%(?P<index>[^% ]+)%")
+  __regex_parse = re.compile(r'%(?P<index>[^% ]+)%')
 
   __default_notifications = {
     'environment_light_alarm_low_on' : terrariumNotificationMessage('environment_light_alarm_low_on','Environment light day on','%raw_data%'),
@@ -500,7 +500,7 @@ class terrariumNotification(object):
       emailMessageAlternative = MIMEMultipart('alternative')
 
       emailMessage['From'] = receiver
-      emailMessage['To'] = re.sub(r"(.*)@(.*)", "\\1+terrariumpi@\\2", receiver, 0, re.MULTILINE)
+      emailMessage['To'] = re.sub(r'(.*)@(.*)', '\\1+terrariumpi@\\2', receiver, 0, re.MULTILINE)
       emailMessage['Subject'] = subject
 
       emailMessageAlternative.attach(MIMEText(textimage.encode('utf8') + message, 'plain'))
@@ -514,7 +514,7 @@ class terrariumNotification(object):
       emailMessage.attach(emailMessageRelated)
 
       try:
-        mailserver.sendmail(receiver,re.sub(r"(.*)@(.*)", "\\1+terrariumpi@\\2", receiver, 0, re.MULTILINE),emailMessage.as_string())
+        mailserver.sendmail(receiver,re.sub(r'(.*)@(.*)', '\\1+terrariumpi@\\2', receiver, 0, re.MULTILINE),emailMessage.as_string())
       except Exception, ex:
         print ex
 
