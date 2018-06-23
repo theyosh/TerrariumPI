@@ -27,8 +27,8 @@ class terrariumCollector(object):
     logger.info('Database connection created to database %s' % (terrariumCollector.DATABASE,))
 
   def __create_database_structure(self):
-    with self.db:
-      cur = self.db.cursor()
+    with self.db as db:
+      cur = db.cursor()
       cur.execute('''CREATE TABLE IF NOT EXISTS sensor_data
                       (id VARCHAR(50),
                        type VARCHAR(15),
@@ -38,34 +38,32 @@ class terrariumCollector(object):
                        limit_max FLOAT(4),
                        alarm_min FLOAT(4),
                        alarm_max FLOAT(4),
-                       alarm INTEGER(1) )''')
+                       alarm INTEGER(1))''')
 
       cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS sensor_data_unique ON sensor_data(id,type,timestamp ASC)')
       cur.execute('CREATE INDEX IF NOT EXISTS sensor_data_timestamp ON sensor_data(timestamp ASC)')
-      cur.execute('CREATE INDEX IF NOT EXISTS sensor_data_type ON sensor_data(type)')
-      cur.execute('CREATE INDEX IF NOT EXISTS sensor_data_id ON sensor_data(id)')
+      cur.execute('CREATE INDEX IF NOT EXISTS sensor_data_avg ON sensor_data(type,timestamp ASC)')
+      cur.execute('CREATE INDEX IF NOT EXISTS sensor_data_id ON sensor_data(id,timestamp ASC)')
 
       cur.execute('''CREATE TABLE IF NOT EXISTS switch_data
                       (id VARCHAR(50),
                        timestamp INTEGER(4),
                        state INTERGER(1),
                        power_wattage FLOAT(2),
-                       water_flow FLOAT(2)
-                        )''')
+                       water_flow FLOAT(2))''')
 
       cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS switch_data_unique ON switch_data(id,timestamp ASC)')
       cur.execute('CREATE INDEX IF NOT EXISTS switch_data_timestamp ON switch_data(timestamp ASC)')
-      cur.execute('CREATE INDEX IF NOT EXISTS switch_data_id ON switch_data(id)')
+      cur.execute('CREATE INDEX IF NOT EXISTS switch_data_id ON switch_data(id,timestamp ASC)')
 
       cur.execute('''CREATE TABLE IF NOT EXISTS door_data
                       (id INTEGER(4),
                        timestamp INTEGER(4),
-                       state TEXT CHECK( state IN ('open','closed') ) NOT NULL DEFAULT 'closed'
-                       )''')
+                       state TEXT CHECK( state IN ('open','closed') ) NOT NULL DEFAULT 'closed')''')
 
       cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS door_data_unique ON door_data(id,timestamp ASC)')
       cur.execute('CREATE INDEX IF NOT EXISTS door_data_timestamp ON door_data(timestamp ASC)')
-      cur.execute('CREATE INDEX IF NOT EXISTS door_data_id ON door_data(id)')
+      cur.execute('CREATE INDEX IF NOT EXISTS door_data_id ON door_data(id,timestamp ASC)')
 
       cur.execute('''CREATE TABLE IF NOT EXISTS weather_data
                       (timestamp INTEGER(4),
@@ -74,8 +72,7 @@ class terrariumCollector(object):
                        pressure FLOAT(4),
                        wind_direction VARCHAR(50),
                        weather VARCHAR(50),
-                       icon VARCHAR(50)
-                        )''')
+                       icon VARCHAR(50))''')
 
       cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS weather_data_unique ON weather_data(timestamp ASC)')
 
@@ -93,22 +90,30 @@ class terrariumCollector(object):
                        memory_free INTEGER(6),
                        disk_total INTEGER(6),
                        disk_used INTEGER(6),
-                       disk_free INTEGER(6)
-                        )''')
+                       disk_free INTEGER(6))''')
 
       cur.execute('CREATE UNIQUE INDEX IF NOT EXISTS system_data_unique ON system_data(timestamp ASC)')
 
-    self.db.commit()
+    db.commit()
 
   def __upgrade(self,to_version):
     # Set minimal version to 3.0.0
     current_version = 300
     table_upgrades = {'310' : ['ALTER TABLE system_data ADD COLUMN disk_total INTEGER(6)',
                                'ALTER TABLE system_data ADD COLUMN disk_used INTEGER(6)',
-                               'ALTER TABLE system_data ADD COLUMN disk_free INTEGER(6)']}
+                               'ALTER TABLE system_data ADD COLUMN disk_free INTEGER(6)'],
 
-    with self.db:
-      cur = self.db.cursor()
+                      '380' : ['DROP INDEX IF EXISTS sensor_data_type',
+                               'CREATE INDEX IF NOT EXISTS sensor_data_avg ON sensor_data (type, timestamp ASC)',
+                               'DROP INDEX IF EXISTS sensor_data_id',
+                               'CREATE INDEX IF NOT EXISTS sensor_data_id ON sensor_data (id, timestamp ASC)',
+                               'DROP INDEX IF EXISTS switch_data_id',
+                               'CREATE INDEX IF NOT EXISTS switch_data_id ON switch_data (id, timestamp ASC)',
+                               'DROP INDEX IF EXISTS door_data_id',
+                               'CREATE INDEX IF NOT EXISTS door_data_id ON door_data (id, timestamp ASC)']}
+
+    with self.db as db:
+      cur = db.cursor()
       db_version = int(cur.execute('PRAGMA user_version').fetchall()[0][0])
       if db_version > current_version:
         current_version = db_version
@@ -118,8 +123,8 @@ class terrariumCollector(object):
     elif current_version < to_version:
       logger.info('Collector database is out of date. Running updates from %s to %s' % (current_version,to_version))
       # Execute updates
-      with self.db:
-        cur = self.db.cursor()
+      with self.db as db:
+        cur = db.cursor()
         for update_version in table_upgrades.keys():
           if current_version < int(update_version) <= to_version:
             # Execute all updates between the versions
@@ -131,12 +136,49 @@ class terrariumCollector(object):
                 if 'duplicate column name' not in str(ex):
                   logger.error('Error updating collector database. Please contact support. Error message: %s' % (ex,))
 
-        logger.info('Cleaning up disk space. This will take a couple of minutes depending on the database size and sd card disk speed.')
-        cur.execute('VACUUM')
+          if '380' == update_version:
+            self.__upgrade_to_380()
+
+        if int(update_version) % 10 == 0:
+          logger.info('Cleaning up disk space. This will take a couple of minutes depending on the database size and sd card disk speed.')
+          cur.execute('VACUUM')
+
         cur.execute('PRAGMA user_version = ' + str(to_version))
         logger.info('Updated collector database. Set version to: %s' % (to_version,))
 
-      self.db.commit()
+      db.commit()
+
+  def __upgrade_to_380(self):
+    # This update will remove 'duplicate' records that where added for better graphing... This will now be done at the collecting the data
+    tables = ['door_data','switch_data']
+
+    with self.db as db:
+      for table in tables:
+        cur = db.cursor()
+        data = cur.execute('SELECT id, timestamp, state FROM ' + table + ' ORDER BY id ASC, timestamp ASC')
+        data = data.fetchall()
+
+        prev_state = None
+        prev_id = None
+        for row in data:
+          if prev_id is None:
+            prev_id = row['id']
+
+          elif prev_id != row['id']:
+            prev_id = row['id']
+            prev_state = None
+
+          if prev_state is None:
+            prev_state = row['state']
+            continue
+
+          if row['state'] == prev_state:
+            cur.execute('DELETE FROM ' + table + ' WHERE id = ? AND timestamp = ? AND state = ?', (row['id'],row['timestamp'],row['state']))
+
+          prev_state = row['state']
+          prev_id = row['id']
+
+        db.commit()
 
   def __recover(self):
     starttime = time.time()
@@ -174,6 +216,8 @@ class terrariumCollector(object):
     logger.warn('TerrariumPI Collecter recovery mode is finished in %s seconds!', (time.time()-starttime,))
 
   def __log_data(self,type,id,newdata):
+    timer = time.time()
+
     if self.__recovery:
       logger.warn('TerrariumPI Collecter is in recovery mode. Cannot store new logging data!')
       return
@@ -184,8 +228,8 @@ class terrariumCollector(object):
       now -= (now % terrariumCollector.STORE_MODULO)
 
     try:
-      with self.db:
-        cur = self.db.cursor()
+      with self.db as db:
+        cur = db.cursor()
 
         if type in ['humidity','moisture','temperature','distance','ph','conductivity','light']:
           cur.execute('REPLACE INTO sensor_data (id, type, timestamp, current, limit_min, limit_max, alarm_min, alarm_max, alarm) VALUES (?,?,?,?,?,?,?,?,?)',
@@ -203,107 +247,51 @@ class terrariumCollector(object):
           if 'time' in newdata:
             now = newdata['time']
 
-          # Make a duplicate of last state and save it with 1 sec back in time to smooth the graphs
-          cur.execute('''REPLACE INTO switch_data (id,timestamp,state,power_wattage,water_flow)
-                          SELECT id, ? as curtimestamp,state,power_wattage,water_flow
-                          FROM switch_data
-                          WHERE id = ? ORDER BY timestamp DESC LIMIT 1''', (now-1, id))
-
           cur.execute('REPLACE INTO switch_data (id, timestamp, state, power_wattage, water_flow) VALUES (?,?,?,?,?)',
                       (id, now, newdata['state'], newdata['power_wattage'], newdata['water_flow']))
 
         if type in ['door']:
-          # Make a duplicate of last state and save it with 1 sec back in time to smooth the graphs
-          cur.execute('''REPLACE INTO door_data (id,timestamp,state)
-                          SELECT id, ? as curtimestamp,state
-                          FROM door_data
-                          WHERE id = ? ORDER BY timestamp DESC LIMIT 1''', (now-1, id))
-
           cur.execute('REPLACE INTO door_data (id, timestamp, state) VALUES (?,?,?)',
                       (id, now, newdata))
 
-        self.db.commit()
+        db.commit()
     except sqlite3.DatabaseError as ex:
       logger.error('TerrariumPI Collecter exception! %s', (ex,))
       if 'database disk image is malformed' == str(ex):
         self.__recover()
 
-  def __calculate_power_and_water_usage(self,history):
-    if 'switches' not in history:
-      return
-
-    now = int(time.time()) * 1000
-    for switchid in history['switches']:
-      # First add a new element to all the data arrays with the current timestamp. This is needed for:
-      # - Better power usage calculation
-      # - Better graphs in the interface
-      history['switches'][switchid]['power_wattage'].append([now,history['switches'][switchid]['power_wattage'][-1][1]])
-      history['switches'][switchid]['water_flow'].append([now,history['switches'][switchid]['water_flow'][-1][1]])
-      history['switches'][switchid]['state'].append([now,history['switches'][switchid]['state'][-1][1]])
-
-      totals = {'power_wattage' : {'duration' : 0.0 , 'wattage' : 0.0},
-                'water_flow'    : {'duration' : 0.0 , 'water'   : 0.0}}
-      power_on_time = None
-      for counter,state in enumerate(history['switches'][switchid]['state']):
-        if state[1] > 0 and power_on_time is None: # Power went on! The value could be variable from zero to 100. Above zero is 'on'
-          power_on_time = counter
-        elif power_on_time is not None: # Now check if the power went off, or put on a second time...
-          power_wattage_start = history['switches'][switchid]['power_wattage'][power_on_time][1] * (history['switches'][switchid]['state'][power_on_time][1] / 100.0)
-          power_wattage_end = history['switches'][switchid]['power_wattage'][counter][1] * (state[1] / 100.0)
-          power_wattage = (power_wattage_start + power_wattage_end) / 2.0
-
-          water_flow_start = history['switches'][switchid]['water_flow'][power_on_time][1] * (history['switches'][switchid]['state'][power_on_time][1] / 100.0)
-          water_flow_end = history['switches'][switchid]['water_flow'][counter][1] * (state[1] / 100.0)
-          water_flow = (water_flow_start + water_flow_end) / 2.0
-
-          duration = (state[0] - history['switches'][switchid]['state'][power_on_time][0]) / 1000.0 # Devide by 1000 because history is using Javascript timestamps
-
-          totals['power_wattage']['duration'] += duration
-          totals['power_wattage']['wattage'] += (duration * power_wattage)
-
-          totals['water_flow']['duration'] += duration
-          totals['water_flow']['water'] += (duration * (water_flow / 60)) # Water flow is in Liter per minute. So devide by 60 to get per seconds
-
-          if state[1] == 0:
-            power_on_time = None # Power went down. Reset so we can measure new period
-          else:
-            power_on_time = counter # Change in power useage (dimmer)
-
-        # Here we change the wattage and water flow to zero if the switch was off. This is needed for drawing the right graphs
-        if state[1] == 0:
-          history['switches'][switchid]['power_wattage'][counter][1] = 0
-          history['switches'][switchid]['water_flow'][counter][1] = 0
-        else:
-          history['switches'][switchid]['power_wattage'][counter][1] *= (state[1] / 100.0)
-          history['switches'][switchid]['water_flow'][counter][1] *= (state[1] / 100.0)
-
-      history['switches'][switchid]['totals'] = totals
-
-  def __calculate_door_usage(self,history):
-    if 'doors' not in history:
-      return
-
-    now = int(time.time()) * 1000
-    for doorid in history['doors']:
-      history['doors'][doorid]['state'].append([now,history['doors'][doorid]['state'][-1][1]])
-
-      totals = {'duration': 0}
-      door_open_on_time = None
-      for counter,state in enumerate(history['doors'][doorid]['state']):
-        if state[1] != 'closed' and door_open_on_time is None: # Door went open!
-          door_open_on_time = counter
-        elif state[1] == 'closed' and door_open_on_time is not None: # Door is closed. Calc period and data
-          totals['duration'] += (state[0] - history['doors'][doorid]['state'][door_open_on_time][0]) / 1000.0 # Devide by 1000 because history is using Javascript timestamps
-          door_open_on_time = None # Reset so we can measure new period
-
-        # Here we translate closed to zero and open to one. Else the graphs will not work
-        history['doors'][doorid]['state'][counter][1] = (0 if state[1] == 'closed' else 1)
-
-      history['doors'][doorid]['totals'] = totals
+    logger.debug('Timing: updating %s data in %s seconds.' % (type,time.time()-timer))
 
   def stop(self):
     self.db.close()
     logger.info('Shutdown data collector')
+
+  def get_total_power_water_usage(self):
+    timer = time.time()
+
+    totals = {'power_wattage' : {'duration' : int(time.time()) , 'wattage' : 0.0},
+              'water_flow'    : {'duration' : int(time.time()) , 'water'   : 0.0}}
+
+    sql = '''SELECT SUM(total_wattage) AS Watt, SUM(total_water) AS Water, SUM(duration_in_seconds) AS TotalTime FROM (
+                SELECT
+                  t1.timestamp-t2.timestamp AS duration_in_seconds,
+                  (t1.timestamp-t2.timestamp)           * (t2.state / 100.0) * t2.power_wattage AS total_wattage,
+                  ((t1.timestamp-t2.timestamp) / 60.0)  * (t2.state / 100.0) * t2.water_flow AS total_water
+                FROM switch_data AS t1
+                LEFT JOIN switch_data AS t2
+                ON t2.id = t1.id
+                AND t2.timestamp = (SELECT MAX(timestamp) FROM switch_data WHERE timestamp < t1.timestamp AND id = t1.id)
+                WHERE t2.state > 0)'''
+
+    with self.db as db:
+      cur = db.cursor()
+      cur.execute(sql)
+      row = cur.fetchone()
+      totals = {'power_wattage' : {'duration' : int(row['TotalTime']) , 'wattage' : float(row['Watt'])},
+                'water_flow'    : {'duration' : int(row['TotalTime']) , 'water'   : float(row['Water'])}}
+
+    logger.debug('Timing: Total power and water usage calculation done in %s seconds.' % ((time.time() - timer),))
+    return totals
 
   def log_switch_data(self,data):
     if data['hardwaretype'] not in ['pwm-dimmer','remote-dimmer']:
@@ -381,15 +369,40 @@ class terrariumCollector(object):
         filters = (stoptime,starttime,parameters[0],)
 
     elif logtype == 'switches':
-      fields = { 'power_wattage' : [], 'water_flow' : [] , 'state' : []}
-      sql = 'SELECT id, "switches" as type, timestamp, ' + ', '.join(fields.keys()) + ' FROM switch_data WHERE timestamp >= ? and timestamp <= ? '
+      fields = { 'power_wattage' : [], 'water_flow' : [] }
+      sql = '''SELECT id, "switches" as type, timestamp, timestamp2, state, ''' + ', '.join(fields.keys()) + ''' FROM (
+                 SELECT
+                   t2.id AS id,
+                   t2.timestamp AS timestamp,
+                   t1.timestamp AS timestamp2,
+                   (t2.state / 100.0) * t2.power_wattage AS power_wattage,
+                   (t2.state / 100.0) * t2.water_flow AS water_flow,
+                   t2.state AS state
+                 FROM switch_data AS t1
+                 LEFT JOIN switch_data AS t2
+                 ON t2.id = t1.id
+                 AND t2.timestamp = (SELECT MAX(timestamp) FROM switch_data WHERE timestamp < t1.timestamp AND id = t1.id) )
+              WHERE id IS NOT NULL
+              AND timestamp >= ? AND timestamp <= ?'''
+
       if len(parameters) > 0 and parameters[0] is not None:
         sql = sql + ' and id = ?'
         filters = (stoptime,starttime,parameters[0],)
 
     elif logtype == 'doors':
-      fields = { 'state' : []}
-      sql = 'SELECT id, "doors" as type, timestamp, ' + ', '.join(fields.keys()) + ' FROM door_data WHERE timestamp >= ? and timestamp <= ? '
+      fields = {'state' : []}
+      sql = '''SELECT id, "doors" as type, timestamp, timestamp2, (CASE WHEN state == 'open' THEN 1 ELSE 0 END) AS state FROM (
+                 SELECT
+                   t2.id AS id,
+                   t2.timestamp AS timestamp,
+                   t1.timestamp AS timestamp2,
+                   t2.state AS state
+                 FROM door_data AS t1
+                 LEFT JOIN door_data AS t2
+                 ON t2.id = t1.id
+                 AND t2.timestamp = (SELECT MAX(timestamp) FROM door_data WHERE timestamp < t1.timestamp AND id = t1.id) )
+              WHERE id IS NOT NULL
+              AND timestamp >= ? AND timestamp <= ?'''
 
       if len(parameters) > 0 and parameters[0] is not None:
         sql = sql + ' and id = ?'
@@ -418,55 +431,83 @@ class terrariumCollector(object):
 
       sql = 'SELECT "system" as type, timestamp, ' + ', '.join(fields) + ' FROM system_data WHERE timestamp >= ? and timestamp <= ?'
 
-    sql = sql + ' ORDER BY timestamp ASC'
+    sql = sql + ' ORDER BY timestamp ASC, type ASC' + (', id ASC' if logtype != 'system' else '')
 
-    rows = []
     if not self.__recovery:
       try:
-        with self.db:
-          cur = self.db.cursor()
-          cur.execute(sql, filters)
-          rows = cur.fetchall()
-          logger.debug('TerrariumPI Collecter history query:  %s seconds, %s records -> %s, %s' % (time.time()-timer,len(rows),sql,filters))
+        with self.db as db:
+          cur = db.cursor()
+          for row in cur.execute(sql, filters):
+            #if logtype == 'switches' and len(row) == len(fields)+1:
+            #  for field in fields:
+            #    history[field] = row[field]
+
+            #  return history
+
+            if row['type'] not in history:
+              history[row['type']] = {}
+
+            if logtype == 'system':
+              for field in fields:
+                system_parts = field.split('_')
+                if system_parts[0] not in history[row['type']]:
+                  history[row['type']][system_parts[0]] = {} if len(system_parts) == 2 else []
+
+                if len(system_parts) == 2:
+                  if system_parts[1] not in history[row['type']][system_parts[0]]:
+                    history[row['type']][system_parts[0]][system_parts[1]] = []
+
+                  history[row['type']][system_parts[0]][system_parts[1]].append([row['timestamp'] * 1000,row[field]])
+                else:
+                  history[row['type']][system_parts[0]].append([row['timestamp'] * 1000,row[field]])
+
+            else:
+              if row['id'] not in history[row['type']]:
+                history[row['type']][row['id']] = copy.deepcopy(fields)
+
+                if row['type'] in ['switches','doors']:
+                  history[row['type']][row['id']]['totals'] = {'duration' : 0, 'power_wattage' : 0, 'water_flow' : 0}
+
+              if row['type'] in ['switches','doors'] and row['state'] > 0:
+                # Update totals data
+                history[row['type']][row['id']]['totals']['duration'] += (row['timestamp2'] - row['timestamp'])
+                if 'switches' == row['type']:
+                  history[row['type']][row['id']]['totals']['power_wattage'] += (row['timestamp2'] - row['timestamp']) * row['power_wattage']
+                  history[row['type']][row['id']]['totals']['water_flow'] += (row['timestamp2'] - row['timestamp']) * row['water_flow']
+
+              for field in fields:
+                history[row['type']][row['id']][field].append([row['timestamp'] * 1000,row[field]])
+
+                if row['type'] in ['switches','doors']:
+                  # Add extra point for nicer graphing of doors and power switches
+                  history[row['type']][row['id']][field].append([row['timestamp2'] * 1000,row[field]])
+
+          logger.debug('Timing: history %s query: %s seconds' % (logtype,time.time()-timer))
       except sqlite3.DatabaseError as ex:
         logger.error('TerrariumPI Collecter exception! %s', (ex,))
         if 'database disk image is malformed' == str(ex):
           self.__recover()
 
-    for row in rows:
-      if logtype == 'switches' and len(row) == len(fields)+1:
+    # In order to get nicer graphs, we are adding a start and end time based on the selected time range if needed
+    if logtype in ['switches','doors']:
+      if logtype in history:
+        for data_id in history[logtype]:
+          for field in fields:
+            first_item = history[logtype][data_id][field][0]
+            last_item  = history[logtype][data_id][field][len(history[logtype][data_id][field])-1]
+
+            if first_item[0] > stoptime:
+              history[logtype][data_id][field].insert(0,[stoptime * 1000 ,first_item[1]])
+
+            if last_item[0] < starttime:
+              history[logtype][data_id][field].append([starttime * 1000 ,last_item[1]])
+
+      elif len(parameters) > 0:
+        # Create 'empty' history array if single id is requested
+        history[logtype] = {}
+        history[logtype][parameters[0]] = copy.deepcopy(fields)
         for field in fields:
-          history[field] = row[field]
-
-        return history
-
-      if row['type'] not in history:
-        history[row['type']] = {}
-
-      if logtype == 'system':
-        for field in fields:
-          system_parts = field.split('_')
-          if system_parts[0] not in history[row['type']]:
-            history[row['type']][system_parts[0]] = {} if len(system_parts) == 2 else []
-
-          if len(system_parts) == 2:
-            if system_parts[1] not in history[row['type']][system_parts[0]]:
-              history[row['type']][system_parts[0]][system_parts[1]] = []
-
-            history[row['type']][system_parts[0]][system_parts[1]].append([row['timestamp'] * 1000,row[field]])
-          else:
-            history[row['type']][system_parts[0]].append([row['timestamp'] * 1000,row[field]])
-
-      else:
-        if row['id'] not in history[row['type']]:
-          history[row['type']][row['id']] = copy.deepcopy(fields)
-
-        for field in fields:
-          history[row['type']][row['id']][field].append([row['timestamp'] * 1000,row[field]])
-
-    if logtype == 'switches':
-      self.__calculate_power_and_water_usage(history)
-    elif logtype == 'doors':
-      self.__calculate_door_usage(history)
+          history[logtype][parameters[0]][field].append([stoptime  * 1000,0])
+          history[logtype][parameters[0]][field].append([starttime * 1000,0])
 
     return history

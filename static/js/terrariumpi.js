@@ -1272,21 +1272,23 @@ function history_graph(name, data, type) {
     if (type == 'switch') {
       var usage = '';
       if (data.totals !== undefined) {
-        if (data.totals.power_wattage.duration > 0) {
-          usage = '{{_('Duration')}}: ' + moment.duration(data.totals.power_wattage.duration * 1000).humanize()
+        if (data.totals.duration > 0) {
+          usage = '{{_('Duration')}}: ' + moment.duration(data.totals.duration * 1000).humanize()
         }
-        if (data.totals.power_wattage.wattage > 0) {
-          usage += (usage != '' ? ' - ' : '') + '{{_('Total power in kWh')}}: ' + formatNumber(data.totals.power_wattage.wattage / (3600 * 1000));
+        if (data.totals.power_wattage > 0) {
+          usage += (usage != '' ? ' - ' : '') + '{{_('Total power in kWh')}}: ' + formatNumber(data.totals.power_wattage / (3600 * 1000));
         }
-        if (data.totals.water_flow.water > 0) {
-          usage += (usage != '' ? ' - ' : '') + '{{_('Total water in L')}}: ' + formatNumber(data.totals.water_flow.water);
+        if (data.totals.water_flow > 0) {
+          usage += (usage != '' ? ' - ' : '') + '{{_('Total water in L')}}: ' + formatNumber(data.totals.water_flow);
         }
       }
       $('#' + name + ' .total_usage').text(usage);
     } else if (type == 'door') {
       var usage = '';
       if (data.totals !== undefined) {
-        usage = '{{_('Total open for')}}: ' + moment.duration(data.totals.duration * 1000).humanize();
+        if (data.totals.duration > 0) {
+          usage = '{{_('Total open for')}}: ' + moment.duration(data.totals.duration * 1000).humanize();
+        }
       }
       $('#' + name + ' .total_usage').text(usage);
     }
