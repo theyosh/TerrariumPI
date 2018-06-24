@@ -139,6 +139,7 @@ class terrariumCollector(object):
           if '380' == update_version:
             self.__upgrade_to_380()
 
+        db.commit()
         if int(update_version) % 10 == 0:
           logger.info('Cleaning up disk space. This will take a couple of minutes depending on the database size and sd card disk speed.')
           cur.execute('VACUUM')
@@ -179,6 +180,7 @@ class terrariumCollector(object):
           prev_id = row['id']
 
         db.commit()
+      logger.info('Collector database upgrade for version 3.8.0 succeeded! Removed duplicate records')
 
   def __recover(self):
     starttime = time.time()
