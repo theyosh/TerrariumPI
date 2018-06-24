@@ -580,6 +580,7 @@ class terrariumNotification(object):
         self.telegram = terrariumNotificationTelegramBot(bot_token,userid,proxy)
       else:
         self.telegram.set_valid_users(userid)
+        self.telegram.set_proxy(proxy)
 
   def send_telegram(self,subject,message):
     if self.telegram is None:
