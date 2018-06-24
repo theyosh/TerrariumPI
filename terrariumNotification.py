@@ -144,7 +144,7 @@ class terrariumNotificationTelegramBot(threading.Thread):
   def get_config(self):
     return {'bot_token' : self.__bot_token,
             'userid': ','.join(self.__valid_users) if self.__valid_users is not None else '',
-            'proxy' : self.__proxy}
+            'proxy' : self.__proxy['https'] if self.__proxy is not None else None}
 
   def send_message(self,text, chat_id = None):
     if self.__running:
