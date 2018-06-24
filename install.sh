@@ -22,6 +22,8 @@ if ! hash whiptail 2>/dev/null; then
   aptitude -y install whiptail
 fi
 
+clear
+
 whiptail --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to be installed to run with user '${SCRIPT_USER}'. If this is not the right user stop the installation now!\n\nDo you want to continue?" 0 60
 
 case $? in
@@ -104,7 +106,7 @@ EOF
 
 if [ ! -d Adafruit_Python_DHT ]
 then
-  git clone https://github.com/adafruit/Adafruit_Python_DHT.git >/dev/null
+  git clone https://github.com/adafruit/Adafruit_Python_DHT.git 2>/dev/null
 fi
 
 
@@ -116,7 +118,7 @@ Install required software\n\nUpdating Adafruit DHT python library ...
 XXX
 EOF
 cd Adafruit_Python_DHT
-git pull  > /dev/null
+git pull > /dev/null
 
 
 PROGRESS=$((PROGRESS + 2))

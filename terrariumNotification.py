@@ -676,6 +676,7 @@ class terrariumNotification(object):
       self.__data.write(configfile)
 
     self.__load_config()
+    self.__load_messages()
     return True
 
   def get_config(self):
