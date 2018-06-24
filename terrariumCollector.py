@@ -385,11 +385,11 @@ class terrariumCollector(object):
                  ON t2.id = t1.id
                  AND t2.timestamp = (SELECT MAX(timestamp) FROM switch_data WHERE timestamp < t1.timestamp AND id = t1.id) )
               WHERE id IS NOT NULL
-              AND timestamp >= ? AND timestamp <= ?'''
+              AND timestamp > ? AND timestamp <= ?'''
 
       if len(parameters) > 0 and parameters[0] is not None:
         sql = sql + ' and id = ?'
-        filters = (stoptime,starttime,parameters[0],)
+        filters = (stoptime - (24 * 60 * 60),starttime,parameters[0],)
 
     elif logtype == 'doors':
       fields = {'state' : []}
@@ -404,11 +404,11 @@ class terrariumCollector(object):
                  ON t2.id = t1.id
                  AND t2.timestamp = (SELECT MAX(timestamp) FROM door_data WHERE timestamp < t1.timestamp AND id = t1.id) )
               WHERE id IS NOT NULL
-              AND timestamp >= ? AND timestamp <= ?'''
+              AND timestamp > ? AND timestamp <= ?'''
 
       if len(parameters) > 0 and parameters[0] is not None:
         sql = sql + ' and id = ?'
-        filters = (stoptime,starttime,parameters[0],)
+        filters = (stoptime - (24 * 60 * 60),starttime,parameters[0],)
 
     elif logtype == 'weather':
       fields = { 'wind_speed' : [], 'temperature' : [], 'pressure' : [] , 'wind_direction' : [], 'rain' : [],
@@ -440,6 +440,10 @@ class terrariumCollector(object):
         with self.db as db:
           cur = db.cursor()
           for row in cur.execute(sql, filters):
+            if row['timestamp'] < stoptime:
+              continue
+
+
             #if logtype == 'switches' and len(row) == len(fields)+1:
             #  for field in fields:
             #    history[field] = row[field]
@@ -495,12 +499,7 @@ class terrariumCollector(object):
       if logtype in history:
         for data_id in history[logtype]:
           for field in fields:
-            first_item = history[logtype][data_id][field][0]
             last_item  = history[logtype][data_id][field][len(history[logtype][data_id][field])-1]
-
-            if first_item[0] > stoptime:
-              history[logtype][data_id][field].insert(0,[stoptime * 1000 ,first_item[1]])
-
             if last_item[0] < starttime:
               history[logtype][data_id][field].append([starttime * 1000 ,last_item[1]])
 
