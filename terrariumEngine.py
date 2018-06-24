@@ -371,10 +371,6 @@ class terrariumEngine(object):
 
   def __get_total_power_usage_water_flow(self):
     totals = self.collector.get_total_power_water_usage()
-
-    totals['power_wattage']['duration'] = max(self.get_uptime()['uptime'],int(time.time()) - totals['power_wattage']['duration'],int(time.time()) - totals['water_flow']['duration'])
-    totals['water_flow']['duration'] = totals['power_wattage']['duration']
-
     totals['power_wattage']['wattage'] += totals['power_wattage']['duration'] * self.pi_power_wattage
 
     return totals
@@ -905,7 +901,7 @@ class terrariumEngine(object):
 
     data['power']['total'] = totaldata['power_wattage']['wattage']
     data['power']['duration'] = totaldata['power_wattage']['duration']
-    data['power']['price'] = self.config.get_power_price() * (totaldata['power_wattage']['wattage'] / (3600.0 * 1000.0))
+    data['power']['price'] = self.config.get_power_price() * (totaldata['power_wattage']['wattage'] / (3600.0 / 1000.0))
 
     data['water']['total'] = totaldata['water_flow']['water']
     data['water']['duration'] = totaldata['water_flow']['duration']
