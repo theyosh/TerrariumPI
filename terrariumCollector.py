@@ -437,11 +437,20 @@ class terrariumCollector(object):
 
     if not self.__recovery:
       try:
+        first_item = None
         with self.db as db:
           cur = db.cursor()
           for row in cur.execute(sql, filters):
-            if row['timestamp'] < stoptime:
+
+            if row['type'] in ['switches','doors'] and row['timestamp'] < stoptime:
+              first_item = {}
+              for field in fields:
+                first_item[field] = row[field]
+
+
+
               continue
+
 
 
             #if logtype == 'switches' and len(row) == len(fields)+1:
@@ -499,8 +508,15 @@ class terrariumCollector(object):
       if logtype in history:
         for data_id in history[logtype]:
           for field in fields:
+            #first_item  = history[logtype][data_id][field][0]
             last_item  = history[logtype][data_id][field][len(history[logtype][data_id][field])-1]
-            if last_item[0] < starttime:
+
+            #if first_item is not None:
+            #  history[logtype][data_id][field].insert(0,[stoptime * 1000 ,first_item[field]])
+
+            #print 'Logtype: %s, lastitem timestamp %s, < graph last timestampt %s' % (logtype,last_item[0]/1000,starttime)
+
+            if (last_item[0] / 1000) < starttime:
               history[logtype][data_id][field].append([starttime * 1000 ,last_item[1]])
 
       elif len(parameters) > 0:
