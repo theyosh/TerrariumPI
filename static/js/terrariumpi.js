@@ -1516,7 +1516,7 @@ function update_dashboard_power_usage(data) {
   update_dashboard_tile('power_wattage', formatNumber(data.current) + '/' + formatNumber(data.max));
   $("#power_wattage .progress-bar-success").css('height', (data.max > 0 ? (data.current / data.max) * 100 : 0) + '%');
 
-  update_dashboard_tile('total_power',formatNumber(data.total / (3600 / 1000))); // from total watt to KiloWattHours
+  update_dashboard_tile('total_power',formatNumber(data.total / 3600 / 1000)); // from total watt to KiloWattHours
   $("#total_power .count_bottom .costs").text(formatCurrency(data.price,2,3));
   $("#total_power .count_bottom .duration").text(moment.duration(data.duration * 1000).humanize());
 }
