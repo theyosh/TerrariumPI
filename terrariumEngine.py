@@ -901,7 +901,7 @@ class terrariumEngine(object):
 
     data['power']['total'] = totaldata['power_wattage']['wattage']
     data['power']['duration'] = totaldata['power_wattage']['duration']
-    data['power']['price'] = self.config.get_power_price() * (totaldata['power_wattage']['wattage'] / (3600.0 / 1000.0))
+    data['power']['price'] = self.config.get_power_price() * (totaldata['power_wattage']['wattage'] / 3600.0 / 1000.0)
 
     data['water']['total'] = totaldata['water_flow']['water']
     data['water']['duration'] = totaldata['water_flow']['duration']
