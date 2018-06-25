@@ -1511,8 +1511,6 @@ function update_dashboard_uptime(data) {
 }
 
 function update_dashboard_power_usage(data) {
-  console.log(data);
-
   update_dashboard_tile('power_wattage', formatNumber(data.current) + '/' + formatNumber(data.max));
   $("#power_wattage .progress-bar-success").css('height', (data.max > 0 ? (data.current / data.max) * 100 : 0) + '%');
 
