@@ -2609,10 +2609,6 @@ $(document).ready(function() {
     $(this).on('click', load_page).attr('title',$(this).parents('li').find('a:first').text());
   });
 
-  $("<div id='tooltip'><span title='tooltip' id='tooltiptext' data-toggle='tooltip'>&nbsp;&nbsp;&nbsp;</span></div>").css({
-      position: "absolute",
-	}).appendTo("body");
-
   load_door_history();
   load_player_status();
   load_page('dashboard.html');
