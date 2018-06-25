@@ -276,14 +276,14 @@ class terrariumCollector(object):
 
     sql = '''SELECT SUM(total_wattage) AS Watt, SUM(total_water) AS Water, SUM(duration_in_seconds) AS TotalTime FROM (
                 SELECT
-                  t1.timestamp-t2.timestamp AS duration_in_seconds,
-                  (t1.timestamp-t2.timestamp)           * (t2.state / 100.0) * t2.power_wattage AS total_wattage,
-                  ((t1.timestamp-t2.timestamp) / 60.0)  * (t2.state / 100.0) * t2.water_flow AS total_water
+                    t2.timestamp-t1.timestamp AS duration_in_seconds,
+                   (t2.timestamp-t1.timestamp)          * (t1.state / 100.0) * t1.power_wattage AS total_wattage,
+                  ((t2.timestamp-t1.timestamp) / 60.0)  * (t1.state / 100.0) * t1.water_flow AS total_water
                 FROM switch_data AS t1
                 LEFT JOIN switch_data AS t2
                 ON t2.id = t1.id
-                AND t2.timestamp = (SELECT MAX(timestamp) FROM switch_data WHERE timestamp < t1.timestamp AND id = t1.id)
-                WHERE t2.state > 0)'''
+                AND t2.timestamp = (SELECT MIN(timestamp) FROM switch_data WHERE timestamp > t1.timestamp AND id = t1.id)
+                WHERE t1.state > 0)'''
 
     with self.db as db:
       cur = db.cursor()
@@ -374,18 +374,17 @@ class terrariumCollector(object):
       fields = { 'power_wattage' : [], 'water_flow' : [] }
       sql = '''SELECT id, "switches" as type, timestamp, timestamp2, state, ''' + ', '.join(fields.keys()) + ''' FROM (
                  SELECT
-                   t2.id AS id,
-                   t2.timestamp AS timestamp,
-                   t1.timestamp AS timestamp2,
-                   (t2.state / 100.0) * t2.power_wattage AS power_wattage,
-                   (t2.state / 100.0) * t2.water_flow AS water_flow,
-                   t2.state AS state
+                   t1.id AS id,
+                   t1.timestamp AS timestamp,
+                   t2.timestamp AS timestamp2,
+                   (t1.state / 100.0) * t1.power_wattage AS power_wattage,
+                   (t1.state / 100.0) * t1.water_flow AS water_flow,
+                   t1.state AS state
                  FROM switch_data AS t1
                  LEFT JOIN switch_data AS t2
                  ON t2.id = t1.id
-                 AND t2.timestamp = (SELECT MAX(timestamp) FROM switch_data WHERE timestamp < t1.timestamp AND id = t1.id) )
-              WHERE id IS NOT NULL
-              AND timestamp > ? AND timestamp <= ?'''
+                 AND t2.timestamp = (SELECT MIN(timestamp) FROM switch_data WHERE timestamp > t1.timestamp AND id = t1.id) )
+              WHERE timestamp > ? AND timestamp <= ?'''
 
       if len(parameters) > 0 and parameters[0] is not None:
         sql = sql + ' and id = ?'
@@ -395,16 +394,15 @@ class terrariumCollector(object):
       fields = {'state' : []}
       sql = '''SELECT id, "doors" as type, timestamp, timestamp2, (CASE WHEN state == 'open' THEN 1 ELSE 0 END) AS state FROM (
                  SELECT
-                   t2.id AS id,
-                   t2.timestamp AS timestamp,
-                   t1.timestamp AS timestamp2,
-                   t2.state AS state
+                   t1.id AS id,
+                   t1.timestamp AS timestamp,
+                   t2.timestamp AS timestamp2,
+                   t1.state AS state
                  FROM door_data AS t1
                  LEFT JOIN door_data AS t2
                  ON t2.id = t1.id
-                 AND t2.timestamp = (SELECT MAX(timestamp) FROM door_data WHERE timestamp < t1.timestamp AND id = t1.id) )
-              WHERE id IS NOT NULL
-              AND timestamp > ? AND timestamp <= ?'''
+                 AND t2.timestamp = (SELECT MIN(timestamp) FROM door_data WHERE timestamp > t1.timestamp AND id = t1.id) )
+              WHERE timestamp > ? AND timestamp <= ?'''
 
       if len(parameters) > 0 and parameters[0] is not None:
         sql = sql + ' and id = ?'
@@ -442,13 +440,7 @@ class terrariumCollector(object):
           cur = db.cursor()
           for row in cur.execute(sql, filters):
 
-            if row['type'] in ['switches','doors'] and row['timestamp'] < stoptime:
-              first_item = {}
-              for field in fields:
-                first_item[field] = row[field]
-
-
-
+            if row['type'] in ['switches','doors'] and row['timestamp2'] is not None and '' != row['timestamp2'] and row['timestamp2'] < stoptime:
               continue
 
 
@@ -483,9 +475,10 @@ class terrariumCollector(object):
                 if row['type'] in ['switches','doors']:
                   history[row['type']][row['id']]['totals'] = {'duration' : 0, 'power_wattage' : 0, 'water_flow' : 0}
 
-              if row['type'] in ['switches','doors'] and row['state'] > 0:
+              if row['type'] in ['switches','doors'] and row['state'] > 0 and row['timestamp2'] is not None and '' != row['timestamp2']:
                 # Update totals data
                 history[row['type']][row['id']]['totals']['duration'] += (row['timestamp2'] - row['timestamp'])
+
                 if 'switches' == row['type']:
                   history[row['type']][row['id']]['totals']['power_wattage'] += (row['timestamp2'] - row['timestamp']) * row['power_wattage']
                   history[row['type']][row['id']]['totals']['water_flow'] += (row['timestamp2'] - row['timestamp']) * row['water_flow']
@@ -493,7 +486,7 @@ class terrariumCollector(object):
               for field in fields:
                 history[row['type']][row['id']][field].append([row['timestamp'] * 1000,row[field]])
 
-                if row['type'] in ['switches','doors']:
+                if row['type'] in ['switches','doors'] and row['timestamp2'] is not None and '' != row['timestamp2']:
                   # Add extra point for nicer graphing of doors and power switches
                   history[row['type']][row['id']][field].append([row['timestamp2'] * 1000,row[field]])
 
@@ -508,14 +501,10 @@ class terrariumCollector(object):
       if logtype in history:
         for data_id in history[logtype]:
           for field in fields:
-            #first_item  = history[logtype][data_id][field][0]
+            # For each field, shift the first timestamp to the start of the query time
+            history[logtype][data_id][field][0][0] = stoptime * 1000
+
             last_item  = history[logtype][data_id][field][len(history[logtype][data_id][field])-1]
-
-            #if first_item is not None:
-            #  history[logtype][data_id][field].insert(0,[stoptime * 1000 ,first_item[field]])
-
-            #print 'Logtype: %s, lastitem timestamp %s, < graph last timestampt %s' % (logtype,last_item[0]/1000,starttime)
-
             if (last_item[0] / 1000) < starttime:
               history[logtype][data_id][field].append([starttime * 1000 ,last_item[1]])
 
