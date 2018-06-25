@@ -185,6 +185,10 @@ iframe.external_calendar {
 #tooltip span {
   cursor: default;
 }
+
+#tooltipGraph {
+  cursor: default;
+}
 .history_graph {
   min-height: 175px;
   display: block !important;

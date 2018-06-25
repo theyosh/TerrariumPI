@@ -1294,8 +1294,8 @@ function history_graph(name, data, type) {
     }
     $('#' + name + ' .history_graph').bind('plothover', function (event, pos, item) {
       if (item) {
-        $('#tooltip').css({top: item.pageY-5, left: item.pageX-5});
-        $('#tooltip span').attr('data-original-title',moment(item.datapoint[0]).format('LLL') + '<br />' + item.series.label + ' ' + item.series.yaxis.tickFormatter(item.datapoint[1],item.series.yaxis));
+        $('#tooltipGraph').attr('data-original-title',moment(item.datapoint[0]).format('LLL') + '<br />' + item.series.label + ' ' + item.series.yaxis.tickFormatter(item.datapoint[1],item.series.yaxis));
+        $('#tooltipGraph').css({top: item.pageY-5, left: item.pageX-5, display:'block'});
       }
     });
   }
@@ -2608,6 +2608,12 @@ $(document).ready(function() {
   $('#sidebar-menu a').each(function() {
     $(this).on('click', load_page).attr('title',$(this).parents('li').find('a:first').text());
   });
+
+  $("<div id='tooltipGraph' title='tooltip'>&nbsp;&nbsp;&nbsp;</div>").css({
+      position: "absolute",
+  }).appendTo("body").tooltip({html:true}).on('hidden.bs.tooltip',function(event){
+    $('#tooltipGraph').hide();
+  })
 
   load_door_history();
   load_player_status();
