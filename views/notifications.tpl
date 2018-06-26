@@ -171,7 +171,7 @@
                       <label>{{_('Service')}}</label>
                     </div>
                   </div>
-% for message in notifications.get_messages():
+                  % for message in notifications.get_messages():
                   <div class="row">
                     <div class="col-md-3 col-sm-3 col-xs-12 form-group">
                       {{message['id'].replace('_',' ').capitalize()}}
@@ -198,7 +198,7 @@
                       </label>
                     </div>
                   </div>
-% end
+                  % end
                 </div>
               </div>
             </div>
