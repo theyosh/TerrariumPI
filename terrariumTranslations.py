@@ -109,16 +109,17 @@ class terrariumTranslations(object):
     self.translations['notification_email_email_username'] = _('Holds the username for authentication with the mailserver if needed.')
     self.translations['notification_email_email_password'] = _('Holds the password for authentication with the mailserver if needed.')
 
-    self.translations['notification_twitter_consumer_key'] = _('Holds your Twitter consumer key. More information %shere%s' % ('<a href=\'https://apps.twitter.com/\' target=\'_blank\'>','</a>'))
-    self.translations['notification_twitter_consumer_secret'] = _('Holds your Twitter consumer secret. More information %shere%s' % ('<a href=\'https://apps.twitter.com/\' target=\'_blank\'>','</a>'))
-    self.translations['notification_twitter_access_token'] = _('Holds your Twitter access token. More information %shere%s' % ('<a href=\'https://apps.twitter.com/\' target=\'_blank\'>','</a>'))
-    self.translations['notification_twitter_access_token_secret'] = _('Holds your Twitter access token secret. More information %shere%s' % ('<a href=\'https://apps.twitter.com/\' target=\'_blank\'>','</a>'))
+    self.translations['notification_twitter_consumer_key'] = _('Holds your Twitter consumer key. More information %shere%s') % ('<a href=\'https://apps.twitter.com/\' target=\'_blank\'>','</a>')
+    self.translations['notification_twitter_consumer_secret'] = _('Holds your Twitter consumer secret. More information %shere%s') % ('<a href=\'https://apps.twitter.com/\' target=\'_blank\'>','</a>')
+    self.translations['notification_twitter_access_token'] = _('Holds your Twitter access token. More information %shere%s') % ('<a href=\'https://apps.twitter.com/\' target=\'_blank\'>','</a>')
+    self.translations['notification_twitter_access_token_secret'] = _('Holds your Twitter access token secret. More information %shere%s') % ('<a href=\'https://apps.twitter.com/\' target=\'_blank\'>','</a>')
 
-    self.translations['notification_pushover_api_token'] = _('Holds the PushOver API token. More information %shere%s' % ('<a href=\'https://pushover.net/api\' target=\'_blank\'>','</a>'))
-    self.translations['notification_pushover_user_key'] =  _('Holds the PushOver API user key. More information %shere%s' % ('<a href=\'https://pushover.net/api\' target=\'_blank\'>','</a>'))
+    self.translations['notification_pushover_api_token'] = _('Holds the PushOver API token. More information %shere%s') % ('<a href=\'https://pushover.net/api\' target=\'_blank\'>','</a>')
+    self.translations['notification_pushover_user_key'] =  _('Holds the PushOver API user key. More information %shere%s') % ('<a href=\'https://pushover.net/api\' target=\'_blank\'>','</a>')
 
-    self.translations['notification_telegram_bot_token'] =  _('Holds the Telegram Bot token. More information %shere%s' % ('<a href=\'https://core.telegram.org/bots#6-botfather\' target=\'_blank\'>','</a>'))
-    self.translations['notification_telegram_username'] =  _('Holds the Telegram username that is allowed for receiving messages. Can be multiple usernames seperated by a comma. More information %shere%s' % ('<a href=\'https://core.telegram.org/bots#6-botfather\' target=\'_blank\'>','</a>'))
+    self.translations['notification_telegram_bot_token'] =  _('Holds the Telegram Bot token. More information %shere%s') % ('<a href=\'https://core.telegram.org/bots#6-botfather\' target=\'_blank\'>','</a>')
+    self.translations['notification_telegram_username'] =  _('Holds the Telegram username that is allowed for receiving messages. Can be multiple usernames seperated by a comma. More information %shere%s') % ('<a href=\'https://core.telegram.org/bots#6-botfather\' target=\'_blank\'>','</a>')
+    self.translations['notification_telegram_proxy'] =  _('Holds the proxy address in form of [schema]://[user]:[password]@[server.com]:[port]. Can either be socks5 or http(s) for schema.')
     # End notifications
 
     # System
@@ -151,7 +152,7 @@ class terrariumTranslations(object):
     self.translations['profile_description'] = _('Holds a small description about the animal.')
     self.translations['profile_more_information'] = _('Holds a link to more information.')
 
-    logger.info('Loaded TerrariumPI %s translations' % (len(self.translations),))
+    logger.info('Loaded TerrariumPI with %s translations' % (len(self.translations),))
 
   def get_translation(self,translation):
     if translation in self.translations:
