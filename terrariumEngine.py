@@ -224,6 +224,8 @@ class terrariumEngine(object):
 
       if 'dimmer_duration' in switchdata and switchdata['dimmer_duration'] is not None:
         power_switch.set_dimmer_duration(switchdata['dimmer_duration'])
+      if 'dimmer_step' in switchdata and switchdata['dimmer_step'] is not None:
+        power_switch.set_dimmer_step(switchdata['dimmer_step'])
       if 'dimmer_on_duration' in switchdata and switchdata['dimmer_on_duration'] is not None:
         power_switch.set_dimmer_on_duration(switchdata['dimmer_on_duration'])
       if 'dimmer_on_percentage' in switchdata and switchdata['dimmer_on_percentage'] is not None:
