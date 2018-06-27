@@ -4,7 +4,6 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 import sqlite3
 import time
-import json
 import copy
 import os
 
@@ -208,6 +207,7 @@ class terrariumCollector(object):
     # Reconnect will recreate the db
     logger.warn('TerrariumPI Collecter recovery mode starts reconnecting database to create a new clean database at %s', (terrariumCollector.DATABASE,))
     self.__connect()
+    self.__create_database_structure()
     cur = self.db.cursor()
     # Load the SQL data back to db
     cur.executescript(sqldump)
@@ -439,17 +439,8 @@ class terrariumCollector(object):
         with self.db as db:
           cur = db.cursor()
           for row in cur.execute(sql, filters):
-
             if row['type'] in ['switches','doors'] and row['timestamp2'] is not None and '' != row['timestamp2'] and row['timestamp2'] < stoptime:
               continue
-
-
-
-            #if logtype == 'switches' and len(row) == len(fields)+1:
-            #  for field in fields:
-            #    history[field] = row[field]
-
-            #  return history
 
             if row['type'] not in history:
               history[row['type']] = {}
