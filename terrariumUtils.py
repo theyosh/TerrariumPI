@@ -21,13 +21,13 @@ class terrariumUtils():
 
   @staticmethod
   def is_float(value):
-    if value is None:
+    if value is None or '' == value:
       return False
 
     try:
       float(value)
       return True
-    except ValueError:
+    except Exception:
       return False
 
   @staticmethod
@@ -137,24 +137,32 @@ class terrariumUtils():
     return time
 
   @staticmethod
-  def get_remote_data(url):
+  def get_remote_data(url, timeout = 3, proxy = None):
     data = None
     try:
       url_data = terrariumUtils.parse_url(url)
-      data = requests.get(url,auth=(url_data['username'],url_data['password']),timeout=3)
+      proxies = {'http' : proxy, 'https' : proxy}
 
-      if data.status_code == 200:
-        data = data.json()
-        json_path = url_data['fragment'].split('/') if 'fragment' in url_data and url_data['fragment'] is not None else []
+      print 'Get data from %s' % url
+      print proxies
 
-        for item in json_path:
-          # Dirty hack to process array data....
-          try:
-            item = int(item)
-          except Exception, ex:
-            item = str(item)
+      request = requests.get(url,auth=(url_data['username'],url_data['password']),timeout=timeout,proxies=proxies)
 
-          data = data[item]
+      if request.status_code == 200:
+        if 'application/json' in request.headers['content-type']:
+          data = request.json()
+          json_path = url_data['fragment'].split('/') if 'fragment' in url_data and url_data['fragment'] is not None else []
+          for item in json_path:
+            # Dirty hack to process array data....
+            try:
+              item = int(item)
+            except Exception, ex:
+              item = str(item)
+
+            data = data[item]
+        else:
+          return request.content.decode('utf8')
+
       else:
         data = None
 
