@@ -157,7 +157,7 @@ class terrariumUtils():
 
             data = data[item]
         else:
-          data = response.content.decode('utf8')
+          data = response.text
 
       else:
         data = None
