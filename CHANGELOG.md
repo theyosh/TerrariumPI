@@ -2,6 +2,69 @@ Changelog
 =========
 
 
+3.8.0 (2018-06-30)
+------------------
+
+**New**
+------
+- Added support for LCD screens through notification system. [#164](https://github.com/theyosh/TerrariumPI/issues/164) [#101](https://github.com/theyosh/TerrariumPI/issues/101).
+  [theyosh]
+- Add proxy support for Telegram. [#161](https://github.com/theyosh/TerrariumPI/issues/161). [theyosh]
+
+**Fixes**
+------
+- Fixing hanging Telegram Bot. [theyosh]
+- Rewriting getting remote data. Trying to fix proxy issues with
+  Telegram. [#161](https://github.com/theyosh/TerrariumPI/issues/161). [theyosh]
+- Fix missing dimmer step setting. [theyosh]
+- Fix database recovery. [theyosh]
+- Fix environment status for manual power switch toggling. [theyosh]
+- Better fix for tooltips in graphs. [theyosh]
+- Fix tooltip HTML code. [theyosh]
+- Fix telegram bot socks setting [#161](https://github.com/theyosh/TerrariumPI/issues/161). [theyosh]
+- Fix total power usage (2) [theyosh]
+- Fix total power usage. [theyosh]
+- Fixing telegram bot to be more resistant to errors. [theyosh]
+
+**Updates**
+------
+- Update README.md. [TheYOSH]
+- Update translations. [theyosh]
+- Small update to installer and reload message settings after saving.
+  [#101](https://github.com/theyosh/TerrariumPI/issues/101) [#161](https://github.com/theyosh/TerrariumPI/issues/161). [theyosh]
+- Small update to installer and reload message settings after saving.
+  [#101](https://github.com/theyosh/TerrariumPI/issues/101) [#161](https://github.com/theyosh/TerrariumPI/issues/161). [theyosh]
+- Update Telegram box proxy settings. [theyosh]
+- Better and safer upgrade. [theyosh]
+- Update version number. [theyosh]
+- Updated data collector:   - Removed duplicate data records for power
+  switches and doors   - Added and changed indexes for faster quering
+  - Put more logic in queries and less in code. [theyosh]
+
+  This will improve the overall query time with 50%. And improve the average query times with 400%!!
+
+**Other**
+------
+- Smoothen the dimmer. [theyosh]
+- Auto decode HTML content. [theyosh]
+- Restart Telegram Bot after changing settings if needed. [theyosh]
+- Stop after 2 errors. [theyosh]
+- Code cleanup. [theyosh]
+- Move timestamp to LCD code. [theyosh]
+- Merge branch 'development' of ssh://github.com/theyosh/TerrariumPI
+  into development. [theyosh]
+- Remove debig. [theyosh]
+- Final collector code. And good looking graphs. [theyosh]
+- Merge branch 'master' into development. [theyosh]
+- Merge pull request [#162](https://github.com/theyosh/TerrariumPI/issues/162) from theyosh/development. [TheYOSH]
+
+  Add proxy support for Telegram. [#161](https://github.com/theyosh/TerrariumPI/issues/161)
+- Stash. [theyosh]
+- Another attempt to get the powerswitches and door nicer graphs.
+  [theyosh]
+- Change quotes. [theyosh]
+
+
 3.7.0 (2018-06-20)
 ------------------
 
@@ -25,6 +88,7 @@ Changelog
 
 **Updates**
 ------
+- Update CHANGELOG. [theyosh]
 - Update version number. [theyosh]
 - Update twitter image based on profile image. [#101](https://github.com/theyosh/TerrariumPI/issues/101). [theyosh]
 - Update notification translations. [#101](https://github.com/theyosh/TerrariumPI/issues/101). [theyosh]
@@ -40,6 +104,9 @@ Changelog
 
 **Other**
 ------
+- Merge pull request [#160](https://github.com/theyosh/TerrariumPI/issues/160) from theyosh/development. [TheYOSH]
+
+  New release
 - Some cosmetic touchups... [#101](https://github.com/theyosh/TerrariumPI/issues/101). [theyosh]
 - Remove debug. [theyosh]
 - Typo. [theyosh]
