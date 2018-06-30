@@ -6,7 +6,7 @@ import RPi.GPIO as GPIO
 import time
 import os
 import os.path
-import threading
+import thread
 import json
 import requests
 import urllib
@@ -73,13 +73,12 @@ class terrariumNotificationMessage(object):
             'services' : ','.join(self.services)
             }
 
-class terrariumNotificationTelegramBot(threading.Thread):
+class terrariumNotificationTelegramBot(object):
   __metaclass__ = terrariumSingleton
 
   __POLL_TIMEOUT = 120
 
   def __init__(self,bot_token,valid_users = None, proxy = None):
-    super(terrariumNotificationTelegramBot,self).__init__()
     self.__running = False
     self.__proxy = None
 
@@ -91,7 +90,8 @@ class terrariumNotificationTelegramBot(threading.Thread):
 
     self.set_valid_users(valid_users)
     self.set_proxy(proxy)
-    self.start()
+
+    thread.start_new_thread(self.__run, ())
 
   def __get_updates(self,offset=None):
     self.__last_update_check = int(time.time())
@@ -145,7 +145,7 @@ class terrariumNotificationTelegramBot(threading.Thread):
     self.__running = False
     print '%s - INFO    - terrariumNotificatio - Stopping TelegramBot. This can take up to %s seconds...' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],(terrariumNotificationTelegramBot.__POLL_TIMEOUT - (int(time.time()) - self.__last_update_check)))
 
-  def run(self):
+  def __run(self):
     self.__running = True
     last_update_id = None
 
@@ -159,12 +159,12 @@ class terrariumNotificationTelegramBot(threading.Thread):
         elif 'description' in updates:
           print updates
           print '%s - ERROR  - terrariumNotificatio - TelegramBot has issues: %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],updates['description'])
-          time.sleep(5)
+          sleep(5)
 
-        time.sleep(0.5)
+        sleep(0.5)
       except Exception, ex:
         print ex
-        time.sleep(5)
+        sleep(5)
 
     print '%s - INFO    - terrariumNotificatio - TelegramBot is stopped' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],)
 
