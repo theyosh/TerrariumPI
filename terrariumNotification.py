@@ -90,8 +90,7 @@ class terrariumNotificationTelegramBot(object):
 
     self.set_valid_users(valid_users)
     self.set_proxy(proxy)
-
-    thread.start_new_thread(self.__run, ())
+    self.start()
 
   def __get_updates(self,offset=None):
     self.__last_update_check = int(time.time())
@@ -141,6 +140,10 @@ class terrariumNotificationTelegramBot(object):
     if proxy is not None and '' != proxy:
       self.__proxy = proxy
 
+  def start(self):
+    if not self.__running:
+      thread.start_new_thread(self.__run, ())
+
   def stop(self):
     self.__running = False
     print '%s - INFO    - terrariumNotificatio - Stopping TelegramBot. This can take up to %s seconds...' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],(terrariumNotificationTelegramBot.__POLL_TIMEOUT - (int(time.time()) - self.__last_update_check)))
@@ -150,7 +153,6 @@ class terrariumNotificationTelegramBot(object):
     last_update_id = None
 
     error_counter = 0
-
     while self.__running and error_counter < 2:
       try:
         updates = self.__get_updates(last_update_id)
@@ -171,6 +173,7 @@ class terrariumNotificationTelegramBot(object):
         print ex
         sleep(5)
 
+    self.__running = False
     print '%s - INFO    - terrariumNotificatio - TelegramBot is stopped' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],)
 
 class terrariumNotification(object):
@@ -569,6 +572,7 @@ class terrariumNotification(object):
       else:
         self.telegram.set_valid_users(userid)
         self.telegram.set_proxy(proxy)
+        self.telegram.start()
 
   def send_telegram(self,subject,message):
     if self.telegram is None:
