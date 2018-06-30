@@ -438,7 +438,7 @@ class terrariumEngine(object):
       except Exception, err:
         print err
 
-      lcd_message = [datetime.datetime.now().strftime('%c')]
+      lcd_message = []
       for env_part in average_data:
         if 'light' not in env_part:
           lcd_message.append('%s %.2f%s' % (_(env_part.replace('average_','').title()), average_data[env_part]['current'],average_data[env_part]['indicator']))
