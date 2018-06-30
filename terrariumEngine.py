@@ -11,6 +11,7 @@ logger.debug('Done setting terrariumPI GPIO Mode to %s' % (GPIO.BCM,))
 
 import thread
 import time
+import datetime
 import uptime
 import os
 import psutil
@@ -436,6 +437,13 @@ class terrariumEngine(object):
 
       except Exception, err:
         print err
+
+      lcd_message = [datetime.datetime.now().strftime('%c')]
+      for env_part in average_data:
+        if 'light' not in env_part:
+          lcd_message.append('%s %.2f%s' % (_(env_part.replace('average_','').title()), average_data[env_part]['current'],average_data[env_part]['indicator']))
+
+      self.notification.send_lcd(lcd_message)
 
       duration = (time.time() - starttime) + time_short
       if duration < terrariumEngine.LOOP_TIMEOUT:

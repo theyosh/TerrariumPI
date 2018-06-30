@@ -235,3 +235,10 @@ class terrariumUtils():
              for kk, vv in dd.items()
              for k, v in terrariumUtils.flatten_dict(vv, separator, kk).items()
              } if isinstance(dd, dict) else { prefix : dd if not isinstance(dd,list) else ','.join(dd)}
+
+class terrariumSingleton(type):
+  _instances = {}
+  def __call__(cls, *args, **kwargs):
+    if cls not in cls._instances:
+      cls._instances[cls] = super(terrariumSingleton, cls).__call__(*args, **kwargs)
+    return cls._instances[cls]
