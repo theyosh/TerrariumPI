@@ -149,20 +149,25 @@ class terrariumNotificationTelegramBot(object):
     self.__running = True
     last_update_id = None
 
-    while self.__running:
+    error_counter = 0
+
+    while self.__running and error_counter < 2:
       try:
         updates = self.__get_updates(last_update_id)
         if 'result' in updates and len(updates['result']) > 0:
           last_update_id = max([int(update['update_id']) for update in updates['result']]) + 1
           self.__process_messages(updates['result'])
+          if error_counter > 0:
+            error_counter -= 1
 
         elif 'description' in updates:
-          print updates
+          error_counter += 1
           print '%s - ERROR  - terrariumNotificatio - TelegramBot has issues: %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],updates['description'])
           sleep(5)
 
         sleep(0.5)
       except Exception, ex:
+        error_counter += 1
         print ex
         sleep(5)
 
