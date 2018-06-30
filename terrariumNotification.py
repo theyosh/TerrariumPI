@@ -93,31 +93,6 @@ class terrariumNotificationTelegramBot(threading.Thread):
     self.set_proxy(proxy)
     self.start()
 
-  '''def __get_url(self,url):
-    data = ''
-    try:
-      if self.__proxy is not None:
-        response = requests.get(url,proxies=self.__proxy)
-      else:
-        response = requests.get(url)
-
-      data = response.content.decode('utf8')
-    except Exception, ex:
-      print ex
-
-    return data'''
-
-  '''def __get_json_from_url(self,url):
-    data = {'description' : 'Did not receive valid JSON data'}
-    try:
-      #content = self.__get_url(url)
-      data =
-      #data = json.loads(content)
-    except Exception, ex:
-      print ex
-
-    return data'''
-
   def __get_updates(self,offset=None):
     self.__last_update_check = int(time.time())
     url = self.__bot_url + 'getUpdates?timeout={}'.format(terrariumNotificationTelegramBot.__POLL_TIMEOUT)
@@ -148,7 +123,7 @@ class terrariumNotificationTelegramBot(threading.Thread):
   def get_config(self):
     return {'bot_token' : self.__bot_token,
             'userid': ','.join(self.__valid_users) if self.__valid_users is not None else '',
-            'proxy' : self.__proxy if self.__proxy is not None else None}
+            'proxy' : self.__proxy if self.__proxy is not None else ''}
 
   def send_message(self,text, chat_id = None):
     if self.__running:
@@ -157,8 +132,6 @@ class terrariumNotificationTelegramBot(threading.Thread):
       for chat_id in chat_ids:
         url = self.__bot_url + 'sendMessage?text={}&chat_id={}'.format(text, chat_id)
         terrariumUtils.get_remote_data(url,proxy=self.__proxy)
-
-        #self.__get_url(url)
 
   def set_valid_users(self,users = None):
     self.__valid_users = users.split(',') if users is not None else []
