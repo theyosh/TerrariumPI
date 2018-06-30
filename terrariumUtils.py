@@ -142,15 +142,11 @@ class terrariumUtils():
     try:
       url_data = terrariumUtils.parse_url(url)
       proxies = {'http' : proxy, 'https' : proxy}
+      response = requests.get(url,auth=(url_data['username'],url_data['password']),timeout=timeout,proxies=proxies)
 
-      print 'Get data from %s' % url
-      print proxies
-
-      request = requests.get(url,auth=(url_data['username'],url_data['password']),timeout=timeout,proxies=proxies)
-
-      if request.status_code == 200:
-        if 'application/json' in request.headers['content-type']:
-          data = request.json()
+      if response.status_code == 200:
+        if 'application/json' in response.headers['content-type']:
+          data = response.json()
           json_path = url_data['fragment'].split('/') if 'fragment' in url_data and url_data['fragment'] is not None else []
           for item in json_path:
             # Dirty hack to process array data....
@@ -161,7 +157,7 @@ class terrariumUtils():
 
             data = data[item]
         else:
-          return request.content.decode('utf8')
+          data = response.content.decode('utf8')
 
       else:
         data = None
