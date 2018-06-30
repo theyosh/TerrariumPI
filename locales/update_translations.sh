@@ -9,7 +9,7 @@ cd -
 for translation in `grep -r -h -o -e "_('[^)]\+')" ../views/*.tpl ../views/inc/*.tpl ../static/js/terrariumpi.js ../*.py | sort | uniq | sed "s/\\\\\'/\\'/g" | sed "s/ /%20/g" `; do
   translation=${translation:3:-2}
   translation=${translation//\%20/ }
-  if [ `grep -c "\"${translation}\"" terrariumpi.pot` -eq 0 ]; then
+  if [ `grep -c -F "\"${translation}\"" terrariumpi.pot` -eq 0 ]; then
     echo "Adding missing ${translation}"
     echo "#: Missing text string" >> terrariumpi.pot
     echo "msgid \"${translation}\"" >> terrariumpi.pot
