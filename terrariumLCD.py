@@ -190,7 +190,7 @@ class terrariumLCD():
 
     self.__text_animation = False
     self.__rotation_timeout = 10
-    self.__messages = [datetime.datetime.now().strftime('%c'),'Starting terrariumPI...']
+    self.__messages = ['Starting terrariumPI...']
     thread.start_new_thread(self.__rotate_messages, ())
 
   def __rotate_messages(self):
@@ -200,6 +200,7 @@ class terrariumLCD():
     while True:
       starttime = time.time()
       messages = [message for message in self.__messages]
+      messages.insert(0,datetime.datetime.now().strftime('%c'))
 
       for messagenr in xrange(0,len(messages)):
         if messagenr >= max_lines:
