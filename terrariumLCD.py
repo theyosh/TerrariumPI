@@ -194,7 +194,6 @@ class terrariumLCD():
     thread.start_new_thread(self.__rotate_messages, ())
 
   def __rotate_messages(self):
-    max_chars = int(self.__resolution[0])
     max_lines = int(self.__resolution[1])
 
     while True:
