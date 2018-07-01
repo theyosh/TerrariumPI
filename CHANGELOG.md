@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-3.8.0 (2018-06-30)
+3.8.0 (2018-07-01)
 ------------------
 
 **New**
@@ -28,6 +28,7 @@ Changelog
 
 **Updates**
 ------
+- Update changelog. [theyosh]
 - Update README.md. [TheYOSH]
 - Update translations. [theyosh]
 - Small update to installer and reload message settings after saving.
@@ -45,6 +46,7 @@ Changelog
 
 **Other**
 ------
+- Finetuning. [theyosh]
 - Smoothen the dimmer. [theyosh]
 - Auto decode HTML content. [theyosh]
 - Restart Telegram Bot after changing settings if needed. [theyosh]
