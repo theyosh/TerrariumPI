@@ -21,13 +21,13 @@ class terrariumUtils():
 
   @staticmethod
   def is_float(value):
-    if value is None:
+    if value is None or '' == value:
       return False
 
     try:
       float(value)
       return True
-    except ValueError:
+    except Exception:
       return False
 
   @staticmethod
@@ -137,24 +137,28 @@ class terrariumUtils():
     return time
 
   @staticmethod
-  def get_remote_data(url):
+  def get_remote_data(url, timeout = 3, proxy = None):
     data = None
     try:
       url_data = terrariumUtils.parse_url(url)
-      data = requests.get(url,auth=(url_data['username'],url_data['password']),timeout=3)
+      proxies = {'http' : proxy, 'https' : proxy}
+      response = requests.get(url,auth=(url_data['username'],url_data['password']),timeout=timeout,proxies=proxies)
 
-      if data.status_code == 200:
-        data = data.json()
-        json_path = url_data['fragment'].split('/') if 'fragment' in url_data and url_data['fragment'] is not None else []
+      if response.status_code == 200:
+        if 'application/json' in response.headers['content-type']:
+          data = response.json()
+          json_path = url_data['fragment'].split('/') if 'fragment' in url_data and url_data['fragment'] is not None else []
+          for item in json_path:
+            # Dirty hack to process array data....
+            try:
+              item = int(item)
+            except Exception, ex:
+              item = str(item)
 
-        for item in json_path:
-          # Dirty hack to process array data....
-          try:
-            item = int(item)
-          except Exception, ex:
-            item = str(item)
+            data = data[item]
+        else:
+          data = response.text
 
-          data = data[item]
       else:
         data = None
 
@@ -235,3 +239,14 @@ class terrariumUtils():
              for kk, vv in dd.items()
              for k, v in terrariumUtils.flatten_dict(vv, separator, kk).items()
              } if isinstance(dd, dict) else { prefix : dd if not isinstance(dd,list) else ','.join(dd)}
+
+  @staticmethod
+  def format_uptime(value):
+    return str(datetime.timedelta(seconds=int(value)))
+
+class terrariumSingleton(type):
+  _instances = {}
+  def __call__(cls, *args, **kwargs):
+    if cls not in cls._instances:
+      cls._instances[cls] = super(terrariumSingleton, cls).__call__(*args, **kwargs)
+    return cls._instances[cls]

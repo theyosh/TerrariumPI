@@ -47,25 +47,25 @@ class terrariumEnvironmentPart(object):
     self.timer_min_data['power_state'] = not self.timer_min_data['min_power']
     self.timer_max_data['power_state'] = not self.timer_max_data['min_power']
 
-  def __toggle_powerswitches(self,switches,action = None):
-    for powerswitch in switches:
+  def __toggle_powerswitches(self,powerswitches,action = None):
+    for switchid in powerswitches:
       if 'on' == action:
-        if 'dimmer' in powerswitch.get_hardware_type() and 'light' != self.get_type():
-          powerswitch.go_up()
+        if 'dimmer' in powerswitches[switchid].get_hardware_type():
+          powerswitches[switchid].go_up()
         else:
-          powerswitch.on()
+          powerswitches[switchid].on()
 
       elif 'off' == action:
-        if 'dimmer' in powerswitch.get_hardware_type() and 'light' != self.get_type():
-          powerswitch.go_down()
+        if 'dimmer' in powerswitches[switchid].get_hardware_type():
+          powerswitches[switchid].go_down()
         else:
-          powerswitch.off()
+          powerswitches[switchid].off()
 
-    self.__get_power_state(switches)
+    self.__get_power_state(powerswitches)
 
   def __toggle_alarm(self,part,action,powerswitchlist,timer = False):
     now = int(time.time())
-    powerswitches = {}
+    switches = {}
     lastaction = 0
     settletime = 0
     onduration = 0
@@ -85,7 +85,10 @@ class terrariumEnvironmentPart(object):
       return
 
     if now - lastaction > settletime or timer:
-      self.__toggle_powerswitches([powerswitchlist[switchid] for switchid in powerswitches if switchid in powerswitchlist],action)
+      for powerswitch in powerswitches:
+        switches[powerswitch] = powerswitchlist[powerswitch]
+
+      self.__toggle_powerswitches(switches,action)
 
       if 'min' == part:
         self.timer_min_data['lastaction'] = now
@@ -537,6 +540,7 @@ class terrariumEnvironment(object):
 
     self.sensors = sensors
     self.powerswitches = powerswitches
+
     self.weather = weather
 
     self.load_environment()
@@ -690,6 +694,9 @@ class terrariumEnvironment(object):
         logger.debug('Environment %s is enabled and based on: %s.' % (environment_part.get_type(),
                                                                       environment_part.get_mode()))
         environment_part.update(self.sensors,self.powerswitches,self.weather,self.__environment_parts['light'])
+        if not trigger:
+          continue
+
         toggle_on_alarm_min = None
         toggle_on_alarm_max = None
 
@@ -717,9 +724,6 @@ class terrariumEnvironment(object):
             toggle_on_alarm_max = environment_part.is_alarm_max()
 
         logger.debug('Environment %s is has alarm_min: %s, alarm_max: %s, trigger?: %s' % (environment_part.get_type(),toggle_on_alarm_min,toggle_on_alarm_max,trigger))
-
-        if not trigger:
-          return
 
         if toggle_on_alarm_min is not None and not environment_part.has_alarm_min_powerswitches():
           logger.debug('Environment %s alarm min is triggered to state %s, but has no powerswitches configured' % (environment_part.get_type(),toggle_on_alarm_min))

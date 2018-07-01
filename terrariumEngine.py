@@ -11,6 +11,7 @@ logger.debug('Done setting terrariumPI GPIO Mode to %s' % (GPIO.BCM,))
 
 import thread
 import time
+import datetime
 import uptime
 import os
 import psutil
@@ -71,7 +72,7 @@ class terrariumEngine(object):
     self.config = terrariumConfig()
     logger.info('Done Loading terrariumPI config')
 
-     # Notification engine
+    # Notification engine
     self.notification = terrariumNotification(profile_image = self.get_profile_image())
 
     logger.info('Setting terrariumPI authentication')
@@ -224,6 +225,8 @@ class terrariumEngine(object):
 
       if 'dimmer_duration' in switchdata and switchdata['dimmer_duration'] is not None:
         power_switch.set_dimmer_duration(switchdata['dimmer_duration'])
+      if 'dimmer_step' in switchdata and switchdata['dimmer_step'] is not None:
+        power_switch.set_dimmer_step(switchdata['dimmer_step'])
       if 'dimmer_on_duration' in switchdata and switchdata['dimmer_on_duration'] is not None:
         power_switch.set_dimmer_on_duration(switchdata['dimmer_on_duration'])
       if 'dimmer_on_percentage' in switchdata and switchdata['dimmer_on_percentage'] is not None:
@@ -370,27 +373,7 @@ class terrariumEngine(object):
     return data
 
   def __get_total_power_usage_water_flow(self):
-    totals = {'power_wattage' : {'duration' : int(time.time()) , 'wattage' : 0.0},
-              'water_flow'    : {'duration' : int(time.time()) , 'water'   : 0.0}}
-
-    history = self.collector.get_history(['switches'],int(time.time()),0)
-
-    if 'switches' not in history:
-      return totals
-
-    for switchid in history['switches']:
-      totals['power_wattage']['wattage'] += history['switches'][switchid]['totals']['power_wattage']['wattage']
-      totals['water_flow']['water'] += history['switches'][switchid]['totals']['water_flow']['water']
-
-      if history['switches'][switchid]['power_wattage'][0][0] / 1000.0 < totals['power_wattage']['duration']:
-        totals['power_wattage']['duration'] = history['switches'][switchid]['power_wattage'][0][0] / 1000.0
-
-      if history['switches'][switchid]['water_flow'][0][0] / 1000.0 < totals['water_flow']['duration']:
-        totals['water_flow']['duration'] = history['switches'][switchid]['water_flow'][0][0] / 1000.0
-
-    totals['power_wattage']['duration'] = max(self.get_uptime()['uptime'],int(time.time()) - totals['power_wattage']['duration'],int(time.time()) - totals['water_flow']['duration'])
-    totals['water_flow']['duration'] = totals['power_wattage']['duration']
-
+    totals = self.collector.get_total_power_water_usage()
     totals['power_wattage']['wattage'] += totals['power_wattage']['duration'] * self.pi_power_wattage
 
     return totals
@@ -445,7 +428,8 @@ class terrariumEngine(object):
         self.get_audio_playing(socket=True)
 
         # Log system stats
-        self.collector.log_system_data(self.get_system_stats())
+        system_data = self.get_system_stats()
+        self.collector.log_system_data(system_data)
         self.get_system_stats(socket=True)
 
         for webcamid in self.webcams:
@@ -454,6 +438,16 @@ class terrariumEngine(object):
 
       except Exception, err:
         print err
+
+      lcd_message = ['%s %s' % (_('Uptime'),terrariumUtils.format_uptime(system_data['uptime']),),
+                     '%s %s %s %s' % (_('Load'),system_data['load']['load1'],system_data['load']['load5'],system_data['load']['load15']),
+                     '%s %.2f%s' % (_('CPU Temp.'),system_data['temperature'],self.get_temperature_indicator())]
+
+      for env_part in average_data:
+        alarm_icon = '!' if average_data[env_part]['alarm'] else ''
+        lcd_message.append('%s%s %.2f%s%s' % (alarm_icon,_(env_part.replace('average_','').title()), average_data[env_part]['current'],average_data[env_part]['indicator'],alarm_icon))
+
+      self.notification.send_lcd(lcd_message)
 
       duration = (time.time() - starttime) + time_short
       if duration < terrariumEngine.LOOP_TIMEOUT:
@@ -921,7 +915,7 @@ class terrariumEngine(object):
 
     data['power']['total'] = totaldata['power_wattage']['wattage']
     data['power']['duration'] = totaldata['power_wattage']['duration']
-    data['power']['price'] = self.config.get_power_price() * (totaldata['power_wattage']['wattage'] / (3600.0 * 1000.0))
+    data['power']['price'] = self.config.get_power_price() * (totaldata['power_wattage']['wattage'] / 3600.0 / 1000.0)
 
     data['water']['total'] = totaldata['water_flow']['water']
     data['water']['duration'] = totaldata['water_flow']['duration']

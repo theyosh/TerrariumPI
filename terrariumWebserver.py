@@ -240,9 +240,9 @@ class terrariumWebserver(object):
     try:
       upload.save(terrariumAudioPlayer.AUDIO_FOLDER)
       self.__terrariumEngine.reload_audio_files()
-      result = {'ok' : True, 'title' : _('Success!'), 'message' : _('File \'%s\' is uploaded' % (upload.filename,))}
+      result = {'ok' : True, 'title' : _('Success!'), 'message' : _('File \'%s\' is uploaded') % (upload.filename,)}
     except IOError, message:
-      result['message'] = _('Duplicate file \'%s\'' % (upload.filename,))
+      result['message'] = _('Duplicate file \'%s\'') % (upload.filename,)
 
     return result
 
