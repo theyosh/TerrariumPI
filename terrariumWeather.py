@@ -77,13 +77,22 @@ class terrariumWeatherSource(object):
 class terrariumWeatherYRno(terrariumWeatherSource):
 
   def load_data(self):
+    self.sunrise = int(datetime.now().replace(hour=8, minute=0, second=0).strftime('%s'))
+    self.sunset  = self.sunrise + (12 * 60 * 60)
+
     starttime = time.time()
     logger.info('Update YR.no data from ONLINE refreshing cache.')
     self.type = 'yr.no'
 
-    try:
+    xmldata = terrariumUtils.get_remote_data(self.source_url.strip('/') + '/forecast_hour_by_hour.xml')
+    if xmldata is not None:
+      try:
+        xmldata = untangle.parse(xmldata)
+      except Exception:
+        logger.exception('Error getting online data from yr.no')
+        return False
+
       # Parse hour forecast
-      xmldata = untangle.parse(self.source_url.strip('/') + '/forecast_hour_by_hour.xml')
       # Parse general data information
       self.city = xmldata.weatherdata.location.name.cdata
       self.country = xmldata.weatherdata.location.country.cdata
@@ -109,20 +118,30 @@ class terrariumWeatherYRno(terrariumWeatherSource):
 
       # Parse week forecast
       self.week_forecast = []
-      xmldata = untangle.parse(self.source_url.strip('/') + '/forecast.xml')
-      for forecast in xmldata.weatherdata.forecast.tabular.time:
-        self.week_forecast.append({ 'from' : time.mktime(dateutil.parser.parse(forecast['from']).timetuple()),
-                                    'to' : time.mktime(dateutil.parser.parse(forecast['to']).timetuple()),
-                                    'weather' : forecast.symbol['name'],
-                                    'rain' : float(forecast.precipitation['value']),
-                                    'humidity' : 0,
-                                    'wind_direction' : forecast.windDirection['name'],
-                                    'wind_speed' : float(forecast.windSpeed['mps']),
-                                    'temperature' : float(forecast.temperature['value']),
-                                    'pressure' : float(forecast.pressure['value'])
-                                  })
-    except Exception:
-      logger.exception('Error getting online data from yr.no')
+      xmldata = terrariumUtils.get_remote_data(self.source_url.strip('/') + '/forecast.xml')
+      if xmldata is not None:
+        try:
+          xmldata = untangle.parse(xmldata)
+        except Exception:
+          logger.exception('Error getting online data from yr.no')
+
+
+        #xmldata = untangle.parse(self.source_url.strip('/') + '/forecast.xml')
+        for forecast in xmldata.weatherdata.forecast.tabular.time:
+          self.week_forecast.append({ 'from' : time.mktime(dateutil.parser.parse(forecast['from']).timetuple()),
+                                      'to' : time.mktime(dateutil.parser.parse(forecast['to']).timetuple()),
+                                      'weather' : forecast.symbol['name'],
+                                      'rain' : float(forecast.precipitation['value']),
+                                      'humidity' : 0,
+                                      'wind_direction' : forecast.windDirection['name'],
+                                      'wind_speed' : float(forecast.windSpeed['mps']),
+                                      'temperature' : float(forecast.temperature['value']),
+                                      'pressure' : float(forecast.pressure['value'])
+                                    })
+      else:
+        logger.error('Error getting online data from yr.no')
+    else:
+      logger.error('Error getting online data from yr.no')
       return False
 
     return True
@@ -130,14 +149,15 @@ class terrariumWeatherYRno(terrariumWeatherSource):
 class terrariumWeatherWunderground(terrariumWeatherSource):
 
   def load_data(self):
+    self.sunrise = int(datetime.now().replace(hour=8, minute=0, second=0).strftime('%s'))
+    self.sunset  = self.sunrise + (12 * 60 * 60)
+
     logger.info('Update Wunderground data from ONLINE refreshing cache.')
     self.type = 'weather.com'
     self.copyright = {'text' : 'Wunderground weather data', 'url' : ''}
 
-    try:
-      json_data = urllib2.urlopen(self.source_url)
-      parsed_json = json.loads(json_data.read())
-
+    parsed_json = terrariumUtils.get_remote_data(self.source_url)
+    if parsed_json is not None:
       # Parse general data information
       self.city = parsed_json['location']['city']
       self.country = parsed_json['location']['country_name']
@@ -174,8 +194,8 @@ class terrariumWeatherWunderground(terrariumWeatherSource):
         if forecast_hour['to'] <= datelimit:
           self.hour_forecast.append(copy.deepcopy(forecast_hour))
 
-    except Exception:
-      logger.exception('Error getting online data from weather.com')
+    else:
+      logger.error('Error getting online data from weather.com')
       return False
 
     return True
@@ -183,14 +203,15 @@ class terrariumWeatherWunderground(terrariumWeatherSource):
 class terrariumWeatherOpenWeathermap(terrariumWeatherSource):
 
   def load_data(self):
+    self.sunrise = int(datetime.now().replace(hour=8, minute=0, second=0).strftime('%s'))
+    self.sunset  = self.sunrise + (12 * 60 * 60)
+
     logger.info('Update OpenWeatherMap data from ONLINE refreshing cache.')
     self.type = 'openweathermap.org'
     self.copyright = {'text' : 'OpenWeatherMap data', 'url' : 'https://openweathermap.org/city/'}
 
-    try:
-      json_data = urllib2.urlopen(self.source_url)
-      parsed_json = json.loads(json_data.read())
-
+    parsed_json = terrariumUtils.get_remote_data(self.source_url)
+    if parsed_json is not None:
       # Parse general data information
       self.city = parsed_json['name']
       self.country = parsed_json['sys']['country']
@@ -200,30 +221,30 @@ class terrariumWeatherOpenWeathermap(terrariumWeatherSource):
       self.sunrise = parsed_json['sys']['sunrise']
       self.sunset = parsed_json['sys']['sunset']
 
-      # Parse hourly and week forecast
-      json_data = urllib2.urlopen(self.source_url.replace('/weather?q','/forecast?q'))
-      parsed_json = json.loads(json_data.read())
-
       self.hour_forecast = []
       self.week_forecast = []
-      datelimit = int(time.time()) + (2 * 24 * 60 * 60) # Hourly forecast limit of 2 days
-      for forecast in parsed_json['list']:
-        forecast_hour = { 'from' : forecast['dt'],
-                          'to' : forecast['dt'] + (3 * 60 * 60),  # Data is provided per 3 hours
-                          'weather' : forecast['weather'][0]['description'],
-                          'rain' : (float(forecast['rain']['3h']) / 3.0) if '3h' in forecast['rain'] else 0,  # Guess in mm
-                          'humidity' : float(forecast['main']['humidity']),
-                          'wind_direction' : forecast['wind']['deg'],
-                          'wind_speed' : float(forecast['wind']['speed']) / 3.6,
-                          'temperature' : float(forecast['main']['temp']),
-                          'pressure' : float(forecast['main']['pressure'])
-                        }
-        self.week_forecast.append(copy.deepcopy(forecast_hour))
-        if forecast_hour['to'] <= datelimit:
-          self.hour_forecast.append(copy.deepcopy(forecast_hour))
 
-    except Exception:
-      logger.exception('Error getting online data from openweathermap.org')
+      parsed_json = terrariumUtils.get_remote_data(self.source_url.replace('/weather?q','/forecast?q'))
+      if parsed_json is not None:
+        # Parse hourly and week forecast
+        datelimit = int(time.time()) + (2 * 24 * 60 * 60) # Hourly forecast limit of 2 days
+        for forecast in parsed_json['list']:
+          forecast_hour = { 'from' : forecast['dt'],
+                            'to' : forecast['dt'] + (3 * 60 * 60),  # Data is provided per 3 hours
+                            'weather' : forecast['weather'][0]['description'],
+                            'rain' : (float(forecast['rain']['3h']) / 3.0) if 'rain' in forecast and '3h' in forecast['rain'] else 0,  # Guess in mm
+                            'humidity' : float(forecast['main']['humidity']),
+                            'wind_direction' : forecast['wind']['deg'],
+                            'wind_speed' : float(forecast['wind']['speed']) / 3.6,
+                            'temperature' : float(forecast['main']['temp']),
+                            'pressure' : float(forecast['main']['pressure'])
+                          }
+          self.week_forecast.append(copy.deepcopy(forecast_hour))
+          if forecast_hour['to'] <= datelimit:
+            self.hour_forecast.append(copy.deepcopy(forecast_hour))
+
+    else:
+      logger.error('Error getting online data from openweathermap.org')
       return False
 
     return True

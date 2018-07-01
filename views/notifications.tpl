@@ -57,6 +57,45 @@
               </div>
             </div>
           </div>
+          <div class="row" id="notifications_lcd">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2><i class="fa fa-newspaper-o"></i> {{_('LCD')}} <small class="data_update">{{_('Settings')}}</small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                      <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                    <label for="lcd_address">{{_('I2C address')}}</label>
+                    <input class="form-control" name="lcd_address" placeholder="{{_('I2C address')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_lcd_address')}}">
+                  </div>
+                  <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                    <label for="lcd_resolution">{{_('Screen resolution')}}</label>
+                    <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('notification_lcd_resolution')}}">
+                      <select class="form-control" name="lcd_resolution" tabindex="-1" placeholder="{{_('Select an option')}}">
+                        <option value="16x2">{{_('16 Characters, 2 Lines')}}</option>
+                        <option value="20x4">{{_('20 Characters, 4 Lines')}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                    <label for="lcd_title">{{_('Title')}}</label>
+                    <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('notification_lcd_title')}}">
+                      <select class="form-control" name="lcd_title" tabindex="-1" placeholder="{{_('Select an option')}}">
+                        <option value="true">{{_('Enabled')}}</option>
+                        <option value="false">{{_('Disabled')}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="row" id="notifications_twiter">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -171,7 +210,7 @@
                       <label>{{_('Service')}}</label>
                     </div>
                   </div>
-% for message in notifications.get_messages():
+                  % for message in notifications.get_messages():
                   <div class="row">
                     <div class="col-md-3 col-sm-3 col-xs-12 form-group">
                       {{message['id'].replace('_',' ').capitalize()}}
@@ -198,7 +237,7 @@
                       </label>
                     </div>
                   </div>
-% end
+                  % end
                 </div>
               </div>
             </div>
@@ -241,6 +280,12 @@
               toggleService(this.id)
             });
 
+            $("select").select2({
+                placeholder: '{{_('Select an option')}}',
+                allowClear: false,
+                minimumResultsForSearch: Infinity
+            });
+
             $('div#notifications_telegram input[name="telegram_bot_token"]').on('change',function() {
               if (this.value != '') {
                 $.get('https://api.telegram.org/bot' + this.value + '/getMe', function(data){
@@ -266,6 +311,7 @@
               $.each(data.notifications,function(part,partdata) {
                 switch (part) {
                   case 'email':
+                  case 'lcd':
                   case 'twitter':
                   case 'pushover':
                   case 'telegram':
@@ -274,7 +320,9 @@
                       if (config_field.length >= 1) {
                         switch (config_field.prop('type').toLowerCase()) {
                           case 'text':
-                            config_field.val(value).trigger('change');
+                          case 'select-one':
+                          case 'select-multiple':
+                            config_field.val(value + '').trigger('change');
                             break;
                         }
                       }

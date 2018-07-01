@@ -6,7 +6,7 @@ import RPi.GPIO as GPIO
 import time
 import os
 import os.path
-import threading
+import thread
 import json
 import requests
 import urllib
@@ -23,17 +23,11 @@ import twitter
 # Pushover support
 import pushover
 
-from terrariumUtils import terrariumUtils
+from terrariumUtils import terrariumUtils, terrariumSingleton
+from terrariumLCD import terrariumLCD
 
 from gevent import monkey, sleep
 monkey.patch_all()
-
-class Singleton(type):
-  _instances = {}
-  def __call__(cls, *args, **kwargs):
-    if cls not in cls._instances:
-      cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
-    return cls._instances[cls]
 
 class terrariumNotificationMessage(object):
 
@@ -68,6 +62,9 @@ class terrariumNotificationMessage(object):
   def is_telegram_enabled(self):
     return self.message != '' and 'telegram' in self.services
 
+  def is_lcd_enabled(self):
+    return self.message != '' and 'lcd' in self.services
+
   def get_data(self):
     return {'id':self.get_id(),
             'title':self.get_title(),
@@ -76,14 +73,15 @@ class terrariumNotificationMessage(object):
             'services' : ','.join(self.services)
             }
 
-class terrariumNotificationTelegramBot(threading.Thread):
-  __metaclass__ = Singleton
+class terrariumNotificationTelegramBot(object):
+  __metaclass__ = terrariumSingleton
 
   __POLL_TIMEOUT = 120
 
   def __init__(self,bot_token,valid_users = None, proxy = None):
-    super(terrariumNotificationTelegramBot,self).__init__()
     self.__running = False
+    self.__proxy = None
+
     self.__bot_token = bot_token
     self.__bot_url = 'https://api.telegram.org/bot{}/'.format(self.__bot_token)
     self.__chat_ids = []
@@ -94,37 +92,17 @@ class terrariumNotificationTelegramBot(threading.Thread):
     self.set_proxy(proxy)
     self.start()
 
-  def __get_url(self,url):
-    data = ''
-    try:
-      if self.__proxy is not None:
-        response = requests.get(url,proxies=self.__proxy)
-      else:
-        response = requests.get(url)
-
-      data = response.content.decode('utf8')
-    except Exception, ex:
-      print ex
-
-    return data
-
-  def __get_json_from_url(self,url):
-    data = {'description' : 'Did not receive valid JSON data'}
-    try:
-      content = self.__get_url(url)
-      data = json.loads(content)
-    except Exception, ex:
-      print ex
-
-    return data
-
   def __get_updates(self,offset=None):
     self.__last_update_check = int(time.time())
     url = self.__bot_url + 'getUpdates?timeout={}'.format(terrariumNotificationTelegramBot.__POLL_TIMEOUT)
     if offset:
       url += '&offset={}'.format(offset)
 
-    return self.__get_json_from_url(url)
+    data = terrariumUtils.get_remote_data(url,terrariumNotificationTelegramBot.__POLL_TIMEOUT + 3,proxy=self.__proxy)
+    if data is None:
+      data = {'description' : 'Did not receive valid JSON data'}
+
+    return data
 
   def __process_messages(self,messages):
     for update in messages:
@@ -144,7 +122,7 @@ class terrariumNotificationTelegramBot(threading.Thread):
   def get_config(self):
     return {'bot_token' : self.__bot_token,
             'userid': ','.join(self.__valid_users) if self.__valid_users is not None else '',
-            'proxy' : self.__proxy['https'] if self.__proxy is not None else None}
+            'proxy' : self.__proxy if self.__proxy is not None else ''}
 
   def send_message(self,text, chat_id = None):
     if self.__running:
@@ -152,7 +130,7 @@ class terrariumNotificationTelegramBot(threading.Thread):
       text = urllib.quote_plus(text)
       for chat_id in chat_ids:
         url = self.__bot_url + 'sendMessage?text={}&chat_id={}'.format(text, chat_id)
-        self.__get_url(url)
+        terrariumUtils.get_remote_data(url,proxy=self.__proxy)
 
   def set_valid_users(self,users = None):
     self.__valid_users = users.split(',') if users is not None else []
@@ -160,34 +138,42 @@ class terrariumNotificationTelegramBot(threading.Thread):
   def set_proxy(self,proxy):
     self.__proxy = None
     if proxy is not None and '' != proxy:
-      self.__proxy = {'http' : proxy,
-                      'https': proxy}
+      self.__proxy = proxy
+
+  def start(self):
+    if not self.__running:
+      thread.start_new_thread(self.__run, ())
 
   def stop(self):
     self.__running = False
     print '%s - INFO    - terrariumNotificatio - Stopping TelegramBot. This can take up to %s seconds...' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],(terrariumNotificationTelegramBot.__POLL_TIMEOUT - (int(time.time()) - self.__last_update_check)))
 
-  def run(self):
+  def __run(self):
     self.__running = True
     last_update_id = None
 
-    while self.__running:
+    error_counter = 0
+    while self.__running and error_counter < 2:
       try:
         updates = self.__get_updates(last_update_id)
         if 'result' in updates and len(updates['result']) > 0:
           last_update_id = max([int(update['update_id']) for update in updates['result']]) + 1
           self.__process_messages(updates['result'])
+          if error_counter > 0:
+            error_counter -= 1
 
         elif 'description' in updates:
-          print updates
+          error_counter += 1
           print '%s - ERROR  - terrariumNotificatio - TelegramBot has issues: %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],updates['description'])
-          time.sleep(5)
+          sleep(5)
 
-        time.sleep(0.5)
+        sleep(0.5)
       except Exception, ex:
+        error_counter += 1
         print ex
-        time.sleep(5)
+        sleep(5)
 
+    self.__running = False
     print '%s - INFO    - terrariumNotificatio - TelegramBot is stopped' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],)
 
 class terrariumNotification(object):
@@ -259,14 +245,15 @@ class terrariumNotification(object):
     self.twitter = None
     self.pushover = None
     self.telegram = None
-
-    self.set_profile_image(profile_image)
+    self.lcd = None
 
     self.__load_config()
     self.__load_messages()
 
     if trafficlights is not None and len(trafficlights) == 3:
       self.set_notification_leds(trafficlights[0],trafficlights[1],trafficlights[2])
+
+    self.set_profile_image(profile_image)
 
   def __current_minute(self):
     # Get timestamp of current minute with 00 seconds.
@@ -315,6 +302,11 @@ class terrariumNotification(object):
       self.set_telegram(self.__data.get('telegram','bot_token'),
                         self.__data.get('telegram','userid'),
                         proxy)
+
+    if self.__data.has_section('lcd'):
+      self.set_lcd(self.__data.get('lcd','address'),
+                   self.__data.get('lcd','resolution'),
+                   self.__data.get('lcd','title'))
 
   def __load_messages(self,data = None):
     self.messages = {}
@@ -541,7 +533,6 @@ class terrariumNotification(object):
       except Exception, ex:
         print ex
 
-
   def send_tweet(self,message):
     if self.twitter is None:
       return
@@ -581,12 +572,26 @@ class terrariumNotification(object):
       else:
         self.telegram.set_valid_users(userid)
         self.telegram.set_proxy(proxy)
+        self.telegram.start()
 
   def send_telegram(self,subject,message):
     if self.telegram is None:
       return
 
     self.telegram.send_message(message)
+
+  def set_lcd(self,address,resolution,title):
+    if address is not None and '' != address:
+      if self.lcd is None:
+        self.lcd = terrariumLCD(address,resolution,title)
+      else:
+        self.lcd.set_address(address)
+        self.lcd.set_resolution(resolution)
+        self.lcd.set_title(title)
+
+  def send_lcd(self,messages):
+    if self.lcd is not None:
+      self.lcd.message(messages)
 
   def message(self,message_id,data = None):
     self.send_notication_led(message_id)
@@ -628,6 +633,9 @@ class terrariumNotification(object):
     if self.messages[message_id].is_telegram_enabled():
       self.send_telegram(title,message)
 
+    if self.messages[message_id].is_lcd_enabled():
+      self.send_lcd(message)
+
   def get_messages(self):
     data = []
     for message_id in sorted(self.messages.keys()):
@@ -655,6 +663,10 @@ class terrariumNotification(object):
                                        'userid'    : data['telegram_userid'],
                                        'proxy'     : data['telegram_proxy']})
 
+      self.__update_config('lcd',{'address'    : data['lcd_address'],
+                                  'resolution' : data['lcd_resolution'],
+                                  'title'      : data['lcd_title']})
+
     except Exception, ex:
       print ex
 
@@ -681,8 +693,9 @@ class terrariumNotification(object):
 
   def get_config(self):
     data = {
-      'email' : dict(self.email) if self.email is not None else {},
-      'twitter' : dict(self.twitter) if self.twitter is not None else {},
+      'email'    : dict(self.email) if self.email is not None else {},
+      'lcd'      : self.lcd.get_config() if self.lcd is not None else {},
+      'twitter'  : dict(self.twitter) if self.twitter is not None else {},
       'pushover' : dict(self.pushover) if self.pushover is not None else {},
       'telegram' : self.telegram.get_config() if self.telegram is not None else {},
       'messages' : self.get_messages() }

@@ -1272,28 +1272,30 @@ function history_graph(name, data, type) {
     if (type == 'switch') {
       var usage = '';
       if (data.totals !== undefined) {
-        if (data.totals.power_wattage.duration > 0) {
-          usage = '{{_('Duration')}}: ' + moment.duration(data.totals.power_wattage.duration * 1000).humanize()
+        if (data.totals.duration > 0) {
+          usage = '{{_('Duration')}}: ' + moment.duration(data.totals.duration * 1000).humanize()
         }
-        if (data.totals.power_wattage.wattage > 0) {
-          usage += (usage != '' ? ' - ' : '') + '{{_('Total power in kWh')}}: ' + formatNumber(data.totals.power_wattage.wattage / (3600 * 1000));
+        if (data.totals.power_wattage > 0) {
+          usage += (usage != '' ? ' - ' : '') + '{{_('Total power in kWh')}}: ' + formatNumber(data.totals.power_wattage / (3600 * 1000));
         }
-        if (data.totals.water_flow.water > 0) {
-          usage += (usage != '' ? ' - ' : '') + '{{_('Total water in L')}}: ' + formatNumber(data.totals.water_flow.water);
+        if (data.totals.water_flow > 0) {
+          usage += (usage != '' ? ' - ' : '') + '{{_('Total water in L')}}: ' + formatNumber(data.totals.water_flow);
         }
       }
       $('#' + name + ' .total_usage').text(usage);
     } else if (type == 'door') {
       var usage = '';
       if (data.totals !== undefined) {
-        usage = '{{_('Total open for')}}: ' + moment.duration(data.totals.duration * 1000).humanize();
+        if (data.totals.duration > 0) {
+          usage = '{{_('Total open for')}}: ' + moment.duration(data.totals.duration * 1000).humanize();
+        }
       }
       $('#' + name + ' .total_usage').text(usage);
     }
     $('#' + name + ' .history_graph').bind('plothover', function (event, pos, item) {
       if (item) {
-        $('#tooltip').css({top: item.pageY-5, left: item.pageX-5});
-        $('#tooltip span').attr('data-original-title',moment(item.datapoint[0]).format('LLL') + '<br />' + item.series.label + ' ' + item.series.yaxis.tickFormatter(item.datapoint[1],item.series.yaxis));
+        $('#tooltipGraph').attr('data-original-title',moment(item.datapoint[0]).format('LLL') + '<br />' + item.series.label + ' ' + item.series.yaxis.tickFormatter(item.datapoint[1],item.series.yaxis));
+        $('#tooltipGraph').css({top: item.pageY-5, left: item.pageX-5, display:'block'});
       }
     });
   }
@@ -1512,7 +1514,7 @@ function update_dashboard_power_usage(data) {
   update_dashboard_tile('power_wattage', formatNumber(data.current) + '/' + formatNumber(data.max));
   $("#power_wattage .progress-bar-success").css('height', (data.max > 0 ? (data.current / data.max) * 100 : 0) + '%');
 
-  update_dashboard_tile('total_power',formatNumber(data.total / (3600 * 1000))); // from total watt to KiloWattHours
+  update_dashboard_tile('total_power',formatNumber(data.total / 3600 / 1000)); // from total watt to KiloWattHours
   $("#total_power .count_bottom .costs").text(formatCurrency(data.price,2,3));
   $("#total_power .count_bottom .duration").text(moment.duration(data.duration * 1000).humanize());
 }
@@ -2607,9 +2609,11 @@ $(document).ready(function() {
     $(this).on('click', load_page).attr('title',$(this).parents('li').find('a:first').text());
   });
 
-  $("<div id='tooltip'><span title='tooltip' id='tooltiptext' data-toggle='tooltip'>&nbsp;&nbsp;&nbsp;</span></div>").css({
+  $("<div id='tooltipGraph' title='tooltip'>&nbsp;&nbsp;&nbsp;</div>").css({
       position: "absolute",
-	}).appendTo("body");
+  }).appendTo("body").tooltip({html:true}).on('hidden.bs.tooltip',function(event){
+    $('#tooltipGraph').hide();
+  })
 
   load_door_history();
   load_player_status();
