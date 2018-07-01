@@ -215,6 +215,7 @@ class terrariumLCD():
 
         else:
           self.__animate_text(messages[messagenr],(messagenr % max_lines) + 1)
+          starttime = time.time()
 
       timeout = float(self.__rotation_timeout) - (time.time() - starttime)
       if timeout >= 0.0:
