@@ -240,6 +240,10 @@ class terrariumUtils():
              for k, v in terrariumUtils.flatten_dict(vv, separator, kk).items()
              } if isinstance(dd, dict) else { prefix : dd if not isinstance(dd,list) else ','.join(dd)}
 
+  @staticmethod
+  def format_uptime(value):
+    return str(datetime.timedelta(seconds=int(value)))
+
 class terrariumSingleton(type):
   _instances = {}
   def __call__(cls, *args, **kwargs):

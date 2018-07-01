@@ -8,6 +8,9 @@ import time
 from hashlib import md5
 from terrariumUtils import terrariumUtils
 
+from gevent import monkey, sleep
+monkey.patch_all()
+
 class terrariumDoor(object):
   VALID_HARDWARE_TYPES = ['gpio','remote']
   CHECKER_TIMEOUT = 0.25
@@ -73,7 +76,7 @@ class terrariumDoor(object):
         if self.callback is not None:
           self.callback(self.get_data())
 
-      time.sleep(terrariumDoor.CHECKER_TIMEOUT)
+      sleep(terrariumDoor.CHECKER_TIMEOUT)
 
   def get_data(self):
     return {'id': self.get_id(),
