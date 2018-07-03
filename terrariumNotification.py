@@ -153,14 +153,14 @@ class terrariumNotificationTelegramBot(object):
     last_update_id = None
 
     error_counter = 0
-    while self.__running and error_counter < 2:
+    while self.__running and error_counter < 3:
       try:
         updates = self.__get_updates(last_update_id)
+        if error_counter > 0:
+          error_counter -= 1
         if 'result' in updates and len(updates['result']) > 0:
           last_update_id = max([int(update['update_id']) for update in updates['result']]) + 1
           self.__process_messages(updates['result'])
-          if error_counter > 0:
-            error_counter -= 1
 
         elif 'description' in updates:
           error_counter += 1
