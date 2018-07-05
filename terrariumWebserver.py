@@ -274,7 +274,7 @@ class terrariumWebserver(object):
     return result
 
   def __get_api_call(self,path):
-    response.headers['Expires'] = (datetime.datetime.utcnow() + datetime.timedelta(minutes=1)).strftime('%a, %d %b %Y %H:%M:%S GMT')
+    response.headers['Expires'] = (datetime.datetime.utcnow() + datetime.timedelta(seconds=10)).strftime('%a, %d %b %Y %H:%M:%S GMT')
     response.headers['Access-Control-Allow-Origin'] = '*'
 
     result = {}
@@ -332,6 +332,10 @@ class terrariumWebserver(object):
     elif 'system' == action:
       result = self.__terrariumEngine.get_system_stats()
 
+    elif 'config' == action:
+      # TODO: New way of data processing.... fix other config options
+      result = self.__terrariumEngine.get_config(parameters[0] if len(parameters) == 1 else None)
+
     elif 'history' == action or 'export' == action:
       response.headers['Expires'] = (datetime.datetime.utcnow() + datetime.timedelta(minutes=5)).strftime('%a, %d %b %Y %H:%M:%S GMT')
       if 'export' == action:
@@ -362,10 +366,6 @@ class terrariumWebserver(object):
         response.headers['Content-Type'] = 'application/csv';
         response.headers['Content-Disposition'] = 'attachment; filename=' + export_name;
         return csv
-
-    elif 'config' == action:
-      # TODO: New way of data processing.... fix other config options
-      result = self.__terrariumEngine.get_config(parameters[0] if len(parameters) == 1 else None)
 
     return result
 
