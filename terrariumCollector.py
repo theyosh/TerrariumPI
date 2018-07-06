@@ -289,8 +289,9 @@ class terrariumCollector(object):
       cur = db.cursor()
       cur.execute(sql)
       row = cur.fetchone()
-      totals = {'power_wattage' : {'duration' : int(row['TotalTime']) , 'wattage' : float(row['Watt'])},
-                'water_flow'    : {'duration' : int(row['TotalTime']) , 'water'   : float(row['Water'])}}
+      if row['TotalTime'] is not None and row['Watt'] is not None:
+        totals = {'power_wattage' : {'duration' : int(row['TotalTime']) , 'wattage' : float(row['Watt'])},
+                  'water_flow'    : {'duration' : int(row['TotalTime']) , 'water'   : float(row['Water'])}}
 
     logger.debug('Timing: Total power and water usage calculation done in %s seconds.' % ((time.time() - timer),))
     return totals
