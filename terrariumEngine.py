@@ -73,7 +73,8 @@ class terrariumEngine(object):
     logger.info('Done Loading terrariumPI config')
 
     # Notification engine
-    self.notification = terrariumNotification(profile_image = self.get_profile_image())
+    self.notification = terrariumNotification()
+    self.notification.set_profile_image(self.get_profile_image())
 
     logger.info('Setting terrariumPI authentication')
     self.set_authentication(self.config.get_admin(),self.config.get_password())
@@ -439,15 +440,15 @@ class terrariumEngine(object):
       except Exception, err:
         print err
 
-      lcd_message = ['%s %s' % (_('Uptime'),terrariumUtils.format_uptime(system_data['uptime']),),
-                     '%s %s %s %s' % (_('Load'),system_data['load']['load1'],system_data['load']['load5'],system_data['load']['load15']),
-                     '%s %.2f%s' % (_('CPU Temp.'),system_data['temperature'],self.get_temperature_indicator())]
+      display_message = ['%s %s' % (_('Uptime'),terrariumUtils.format_uptime(system_data['uptime']),),
+                         '%s %s %s %s' % (_('Load'),system_data['load']['load1'],system_data['load']['load5'],system_data['load']['load15']),
+                         '%s %.2f%s' % (_('CPU Temp.'),system_data['temperature'],self.get_temperature_indicator())]
 
       for env_part in average_data:
         alarm_icon = '!' if average_data[env_part]['alarm'] else ''
-        lcd_message.append('%s%s %.2f%s%s' % (alarm_icon,_(env_part.replace('average_','').title()), average_data[env_part]['current'],average_data[env_part]['indicator'],alarm_icon))
+        display_message.append('%s%s %.2f%s%s' % (alarm_icon,_(env_part.replace('average_','').title()), average_data[env_part]['current'],average_data[env_part]['indicator'],alarm_icon))
 
-      self.notification.send_lcd(lcd_message)
+      self.notification.send_display(display_message)
 
       duration = (time.time() - starttime) + time_short
       if duration < terrariumEngine.LOOP_TIMEOUT:
