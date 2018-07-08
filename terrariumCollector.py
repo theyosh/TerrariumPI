@@ -346,34 +346,34 @@ class terrariumCollector(object):
     filters = (stoptime,starttime,)
     if logtype == 'sensors':
       fields = { 'current' : [], 'alarm_min' : [], 'alarm_max' : [] , 'limit_min' : [], 'limit_max' : []}
-      sql = 'SELECT id, type, timestamp,' + ', '.join(fields.keys()) + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ?'
+      sql = 'SELECT id, type, timestamp,' + ', '.join(fields.keys()) + ' FROM sensor_data WHERE timestamp >= ? AND timestamp <= ?'
 
       if len(parameters) > 0 and parameters[0] == 'average':
-        sql = 'SELECT "average" as id, type, timestamp'
+        sql = 'SELECT "average" AS id, type, timestamp'
         for field in fields:
           sql = sql + ', AVG(' + field + ') as ' + field
-        sql = sql + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ?'
+        sql = sql + ' FROM sensor_data WHERE timestamp >= ? AND timestamp <= ?'
 
         if len(parameters) == 2:
-          sql = sql + ' and type = ?'
+          sql = sql + ' AND type = ?'
           filters = (stoptime,starttime,parameters[1],)
 
         sql = sql + ' GROUP BY type, timestamp'
 
       elif len(parameters) == 2 and parameters[0] in ['temperature','humidity','distance','ph','conductivity','light']:
-        sql = sql + ' and type = ? and id = ?'
+        sql = sql + ' AND type = ? AND id = ?'
         filters = (stoptime,starttime,parameters[0],parameters[1],)
       elif len(parameters) == 1 and parameters[0] in ['temperature','humidity','distance','ph','conductivity','light']:
-        sql = sql + ' and type = ?'
+        sql = sql + ' AND type = ?'
         filters = (stoptime,starttime,parameters[0],)
 
       elif len(parameters) == 1:
-        sql = sql + ' and id = ?'
+        sql = sql + ' AND id = ?'
         filters = (stoptime,starttime,parameters[0],)
 
     elif logtype == 'switches':
       fields = { 'power_wattage' : [], 'water_flow' : [] }
-      sql = '''SELECT id, "switches" as type, timestamp, timestamp2, state, ''' + ', '.join(fields.keys()) + ''' FROM (
+      sql = '''SELECT id, "switches" AS type, timestamp, timestamp2, state, ''' + ', '.join(fields.keys()) + ''' FROM (
                  SELECT
                    t1.id AS id,
                    t1.timestamp AS timestamp,
@@ -385,15 +385,16 @@ class terrariumCollector(object):
                  LEFT JOIN switch_data AS t2
                  ON t2.id = t1.id
                  AND t2.timestamp = (SELECT MIN(timestamp) FROM switch_data WHERE timestamp > t1.timestamp AND id = t1.id) )
-              WHERE timestamp > ? AND timestamp <= ?'''
+              WHERE timestamp >= (SELECT MAX(timestamp) AS timelimit FROM door_data AS ttable WHERE ttable.id = id AND ttable.timestamp < ?)
+              AND   timestamp <= ?'''
 
       if len(parameters) > 0 and parameters[0] is not None:
-        sql = sql + ' and id = ?'
-        filters = (stoptime - (24 * 60 * 60),starttime,parameters[0],)
+        sql = sql + ' AND id = ?'
+        filters = (stoptime,starttime,parameters[0],)
 
     elif logtype == 'doors':
       fields = {'state' : []}
-      sql = '''SELECT id, "doors" as type, timestamp, timestamp2, (CASE WHEN state == 'open' THEN 1 ELSE 0 END) AS state FROM (
+      sql = '''SELECT id, "doors" AS type, timestamp, timestamp2, (CASE WHEN state == 'open' THEN 1 ELSE 0 END) AS state FROM (
                  SELECT
                    t1.id AS id,
                    t1.timestamp AS timestamp,
@@ -403,16 +404,17 @@ class terrariumCollector(object):
                  LEFT JOIN door_data AS t2
                  ON t2.id = t1.id
                  AND t2.timestamp = (SELECT MIN(timestamp) FROM door_data WHERE timestamp > t1.timestamp AND id = t1.id) )
-              WHERE timestamp > ? AND timestamp <= ?'''
+              WHERE timestamp >= (SELECT MAX(timestamp) AS timelimit FROM door_data AS ttable WHERE ttable.id = id AND ttable.timestamp < ?)
+              AND   timestamp <= ?'''
 
       if len(parameters) > 0 and parameters[0] is not None:
-        sql = sql + ' and id = ?'
-        filters = (stoptime - (24 * 60 * 60),starttime,parameters[0],)
+        sql = sql + ' AND id = ?'
+        filters = (stoptime,starttime,parameters[0],)
 
     elif logtype == 'weather':
       fields = { 'wind_speed' : [], 'temperature' : [], 'pressure' : [] , 'wind_direction' : [], 'rain' : [],
                  'weather' : [], 'icon' : []}
-      sql = 'SELECT "city" as id, "weather" as type, timestamp, ' + ', '.join(fields.keys()) + ' FROM weather_data WHERE timestamp >= ? and timestamp <= ?'
+      sql = 'SELECT "city" AS id, "weather" AS type, timestamp, ' + ', '.join(fields.keys()) + ' FROM weather_data WHERE timestamp >= ? AND timestamp <= ?'
 
     elif logtype == 'system':
       fields = ['load_load1', 'load_load5','load_load15','uptime', 'temperature','cores', 'memory_total', 'memory_used' , 'memory_free', 'disk_total', 'disk_used' , 'disk_free']
@@ -430,7 +432,7 @@ class terrariumCollector(object):
       elif len(parameters) > 0 and parameters[0] == 'disk':
         fields = ['disk_total', 'disk_used' , 'disk_free']
 
-      sql = 'SELECT "system" as type, timestamp, ' + ', '.join(fields) + ' FROM system_data WHERE timestamp >= ? and timestamp <= ?'
+      sql = 'SELECT "system" AS type, timestamp, ' + ', '.join(fields) + ' FROM system_data WHERE timestamp >= ? AND timestamp <= ?'
 
     sql = sql + ' ORDER BY timestamp ASC, type ASC' + (', id ASC' if logtype != 'system' else '')
 
