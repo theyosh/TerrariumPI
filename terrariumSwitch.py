@@ -507,7 +507,7 @@ class terrariumSwitch(object):
       return self.is_off()
 
   def go_down(self):
-    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] and not self.__dimmer_running:
       new_value = self.get_state() - self.get_dimmer_step()
       if new_value > self.get_dimmer_on_percentage():
         new_value = self.get_dimmer_on_percentage()
@@ -518,7 +518,7 @@ class terrariumSwitch(object):
       self.set_state(new_value)
 
   def go_up(self):
-    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] and not self.__dimmer_running:
       new_value = self.get_state() + self.get_dimmer_step()
       if new_value > self.get_dimmer_on_percentage():
         new_value = self.get_dimmer_on_percentage()
