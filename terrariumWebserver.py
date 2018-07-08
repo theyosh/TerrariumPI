@@ -337,7 +337,7 @@ class terrariumWebserver(object):
       result = self.__terrariumEngine.get_config(parameters[0] if len(parameters) == 1 else None)
 
     elif 'history' == action or 'export' == action:
-      response.headers['Expires'] = (datetime.datetime.utcnow() + datetime.timedelta(minutes=5)).strftime('%a, %d %b %Y %H:%M:%S GMT')
+      response.headers['Expires'] = (datetime.datetime.utcnow() + datetime.timedelta(minutes=1)).strftime('%a, %d %b %Y %H:%M:%S GMT')
       if 'export' == action:
         parameters.append('all')
       result = self.__terrariumEngine.get_history(parameters)
