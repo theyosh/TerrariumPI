@@ -750,7 +750,7 @@ class terrariumEnvironment(object):
                   if not light_check_ok:
                     logger.info('Environment %s has blocked the alarm min powerswitches due to light state %s' % (environment_part.get_type(),environment_part.get_alarm_min_light_state()))
                   if not door_check_ok:
-                    logger.warning('Environment %s ahs blocked the alarm min powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_min_door_state()))
+                    logger.warning('Environment %s has blocked the alarm min powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_min_door_state()))
 
               else:
                 logger.debug('Environment %s alarm low is already at max power.' % environment_part.get_type())
@@ -786,7 +786,7 @@ class terrariumEnvironment(object):
                   if not light_check_ok:
                     logger.info('Environment %s has blocked the alarm max powerswitches due to light state %s' % (environment_part.get_type(),environment_part.get_alarm_max_light_state()))
                   if not door_check_ok:
-                    logger.warning('Environment %s ahs blocked the alarm max powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_max_door_state()))
+                    logger.warning('Environment %s has blocked the alarm max powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_max_door_state()))
 
               else:
                 logger.debug('Environment %s alarm high is already at max power.' % environment_part.get_type())

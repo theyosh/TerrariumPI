@@ -119,13 +119,13 @@
                       <a href="system_status.html">{{_('Status')}}</a>
                     </li>
                     <li>
+                      <a href="notifications.html">{{_('Notifications')}}</a>
+                    </li>
+                    <li>
                       <a href="system_environment.html">{{_('Environment')}}</a>
                     </li>
                     <li>
                       <a href="system_settings.html">{{_('Settings')}}</a>
-                    </li>
-                    <li>
-                      <a href="notifications.html">{{_('Notifications')}}</a>
                     </li>
                     <li>
                       <a href="system_log.html">{{_('Log')}}</a>
