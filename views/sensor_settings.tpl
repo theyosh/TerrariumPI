@@ -193,7 +193,7 @@
 
             // Load existing switches
             $.get($('form').attr('action'),function(json_data){
-              $.each(json_data.sensors, function(index,sensor_data) {
+              $.each(sortByKey(json_data.sensors,'name'), function(index,sensor_data) {
                 add_sensor_setting_row(sensor_data);
                 update_sensor(sensor_data);
               });

@@ -76,7 +76,7 @@
 
             $.get('/api/sensors/{{sensor_type}}',function(json_data) {
               $('div.row.jumbotron').toggle(json_data.sensors.length == 0);
-              $.each(json_data.sensors,function(index,sensor_data){
+              $.each(sortByKey(json_data.sensors,'name'),function(index,sensor_data){
                 add_sensor_status_row(sensor_data);
                 update_sensor(sensor_data);
                 sensor_gauge('sensor_' + sensor_data.id, sensor_data);

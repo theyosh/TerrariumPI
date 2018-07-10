@@ -155,7 +155,7 @@
             });
 
             $.get($('form').attr('action'),function(json_data){
-              $.each(json_data.webcams, function(index,webcam_data) {
+              $.each(sortByKey(json_data.webcams,'name'), function(index,webcam_data) {
                 add_webcam_setting_row(webcam_data);
                 update_webcam(webcam_data);
               });
