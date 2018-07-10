@@ -1,4 +1,4 @@
-# TerrariumPI 3.8.0
+# TerrariumPI 3.8.1
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
 
 For humidity control there is support for a spraying system. The sprayer can be configured to spray for an X amount of seconds and there is a minumal period between two spray actions. Use at least one humitidy sensors to get a constant humidity value. In order to lower the humidity you can add a dehumidifier.
@@ -37,29 +37,23 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Predefined start and stop times based on timer or weather
   - Predefined on and off durations in minutes
 - Support for Energenie USB and LAN powerswitches [EG-PM(s)2](http://energenie.com/item.aspx?id=7556)
-- Support for multiple temperature and humidity sensors
-- Support for ultrasonic sound range sensors
-- Support for ph sensors
-- Support for conductivity sensors
-- Support for moisture sensors
-- support for light sensors
-- Support for native Raspberry Pi cam out of the box
-- Support for USB and remote webcams
+- Support for [multiple type of sensors](https://github.com/theyosh/TerrariumPI/wiki/Hardware#sensors)
+  - Temperature
+  - Humidity
+  - Moisture
+  - Conductivity
+  - Distance
+  - pH
+  - Light intensity
+- Support for webcams and native Raspberry Pi cam out of the box
 - Support for analog devices through a MCP3008
   - Support for PH probe SKU SEN0161
-- Support for digital devices through a I2c
-  - Support for SHT2X
-  - Support for BME280
-  - Support for HTU21D
-  - Support for Si7021
-  - Support for Chirp
 - Open door detection. This can be used in different environment parts
 - Total power and water usage for costs calculation
 - Lights control based on sun rise and sun set or timers
 - Rain control based on humidity sensors and timers
-- Heater control based on temperature sensors or timers
+- Temperature control based on temperature sensors or timers
   - Variable day and night difference for min and max temperature
-- Cooling control based on temperature sensors or timers
 - Watertank level control based on ultrasonic sound range sensors
 - Weather forecast from external source for lighting schema
   - Supports https://yr.no
@@ -74,12 +68,16 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Uploading audio files through webinterface
   - Audio meta data support (mediainfo)
 - Remote temperature and humidity sensors through HTTP(S) JSON API's. JSON Data format can be found on [Remote data wiki](https://github.com/theyosh/TerrariumPI/wiki/Remote-data).
+- Display support
+  - LCD 16x2 or 20x4 screens
+  - OLED based on SSD1306
 - Notifications system. Custom messages for custom actions with use of variables in the messages
   - Get notifications through
     - Email
     - Twitter (DM)
     - Pushover
     - Telegram bot
+    - Display
   - Notifications for
     - Environment part low and high alarm
     - Sensor high and low measurements
