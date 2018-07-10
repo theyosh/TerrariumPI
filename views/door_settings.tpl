@@ -108,7 +108,7 @@
             });
             // Load existing switches
             $.get($('form').attr('action'),function(json_data){
-              $.each(json_data.doors, function(index,door_data) {
+              $.each(sortByKey(json_data.doors,'name'), function(index,door_data) {
                 add_door_setting_row(door_data);
                 update_door(door_data);
               });

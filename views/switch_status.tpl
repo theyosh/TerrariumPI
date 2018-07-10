@@ -67,7 +67,7 @@
 
             $.get('/api/switches',function(json_data) {
               $('div.row.jumbotron').toggle(json_data.switches.length == 0);
-              $.each(json_data.switches,function(index,switch_data){
+              $.each(sortByKey(json_data.switches,'name'),function(index,switch_data){
                 add_power_switch_status_row(switch_data);
                 update_power_switch(switch_data);
                 load_history_graph('powerswitch_' + switch_data.id,'switch','/api/history/switches/' + switch_data.id);

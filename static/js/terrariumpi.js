@@ -379,6 +379,14 @@ function formatUptime(uptime) {
 function capitalizeFirstLetter(string) {
     return string[0].toUpperCase() + string.slice(1);
 }
+
+// https://stackoverflow.com/questions/8837454/sort-array-of-objects-by-single-key-with-date-value
+function sortByKey(array, key) {
+  return array.sort(function(a, b) {
+    var x = a[key]; var y = b[key];
+    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+  });
+}
 /* General functions - End numbers, currency, etc formatting  */
 
 /* General functions - Websockets  */

@@ -244,7 +244,7 @@
 
             // Load existing switches
             $.get($('form').attr('action'),function(json_data){
-              $.each(json_data.switches, function(index,switch_data) {
+              $.each(sortByKey(json_data.switches,'name'), function(index,switch_data) {
                 add_power_switch_setting_row(switch_data);
                 update_power_switch(switch_data);
               });
