@@ -135,11 +135,11 @@ class terrariumCollector(object):
                 if 'duplicate column name' not in str(ex):
                   logger.error('Error updating collector database. Please contact support. Error message: %s' % (ex,))
 
-          if '380' == update_version:
-            self.__upgrade_to_380()
+            if '380' == update_version:
+              self.__upgrade_to_380()
 
         db.commit()
-        if int(update_version) % 10 == 0:
+        if int(to_version) % 10 == 0:
           logger.info('Cleaning up disk space. This will take a couple of minutes depending on the database size and sd card disk speed.')
           cur.execute('VACUUM')
 
