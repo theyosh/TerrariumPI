@@ -2,6 +2,35 @@ Changelog
 =========
 
 
+3.8.1 (2018-07-10)
+------------------
+
+**New**
+------
+- Add sorting on different pages. [theyosh]
+
+**Fixes**
+------
+- Fix typo. [theyosh]
+- Fix starting up with no data in the database. [#168](https://github.com/theyosh/TerrariumPI/issues/168). [theyosh]
+- Fixed caching issue when chaning settings. [#167](https://github.com/theyosh/TerrariumPI/issues/167). [theyosh]
+- Fix Telegram Bot going to soon. [theyosh]
+
+**Updates**
+------
+- Update version. [theyosh]
+- Update README.md. [TheYOSH]
+- Update data gaphing and finetuning SQL. [theyosh]
+- Update installer for OLED displays. [theyosh]
+
+**Other**
+------
+- Do not change dimmer up or down when running. On and off is still
+  possible. [theyosh]
+- Finetuning Notifications. Renamed LCD to Display for general name and
+  support OLED screens. [#164](https://github.com/theyosh/TerrariumPI/issues/164). [theyosh]
+
+
 3.8.0 (2018-07-01)
 ------------------
 
@@ -29,6 +58,7 @@ Changelog
 **Updates**
 ------
 - Update changelog. [theyosh]
+- Update changelog. [theyosh]
 - Update README.md. [TheYOSH]
 - Update translations. [theyosh]
 - Small update to installer and reload message settings after saving.
@@ -46,6 +76,9 @@ Changelog
 
 **Other**
 ------
+- Merge pull request [#165](https://github.com/theyosh/TerrariumPI/issues/165) from theyosh/development. [TheYOSH]
+
+  Release 3.8.0
 - Finetuning. [theyosh]
 - Smoothen the dimmer. [theyosh]
 - Auto decode HTML content. [theyosh]
