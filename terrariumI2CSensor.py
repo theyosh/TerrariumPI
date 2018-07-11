@@ -4,7 +4,6 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 import smbus
-import time
 import sys
 from terrariumUtils import terrariumUtils
 
@@ -12,6 +11,9 @@ from terrariumUtils import terrariumUtils
 # https://github.com/ageir/chirp-rpi
 sys.path.insert(0, './chirp-rpi')
 import chirp
+
+from gevent import monkey, sleep
+monkey.patch_all()
 
 class terrariumI2CSensor(object):
   # control constants
@@ -43,7 +45,7 @@ class terrariumI2CSensor(object):
     #Datasheet recommend do Soft Reset before measurment:
     logger.debug('Send soft reset command %s with a timeout of %s seconds' % (self.__SOFTRESET,self.__softreset_timeout * 2.0))
     self.__bus.write_byte(self.__address, self.__SOFTRESET)
-    time.sleep(self.__softreset_timeout * 2.0)
+    sleep(self.__softreset_timeout * 2.0)
 
   def __enter__(self):
     """used to enable python's with statement support"""
@@ -55,7 +57,7 @@ class terrariumI2CSensor(object):
 
   def __get_raw_data(self,trigger,timeout):
     self.__bus.write_byte(self.__address, trigger)
-    time.sleep(timeout * 2.0)
+    sleep(timeout * 2.0)
     data1 = self.__bus.read_byte(self.__address)
     try:
       data2 = self.__bus.read_byte(self.__address)
@@ -139,6 +141,8 @@ class terrariumBME280Sensor(object):
   # Datasheet: https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME280_DS001-12.pdf
 
   __SOFTRESET = 0xFE
+  __TEMPERATURE_WAIT_TIME = 0.5
+  __SOFTRESET_TIMEOUT = 0.002  # (datasheet: typ=??, max=2 in ms)
 
   def __init__(self, address = 40, device_number = 1):
     self.__address = int('0x' + str(address),16)
@@ -147,8 +151,8 @@ class terrariumBME280Sensor(object):
     # BMP280 does not have humidity sensor
     self.__has_humidity = None
 
-    self.__softreset_timeout = 0.002 # (datasheet: typ=??, max=2 in ms)
-    self.__temperature_timeout = 0.5
+    self.__softreset_timeout = __SOFTRESET_TIMEOUT
+    self.__temperature_timeout = __TEMPERATURE_WAIT_TIME
     self.__humidity_timeout = self.__temperature_timeout
 
     self.__current_temperature = None
@@ -162,7 +166,7 @@ class terrariumBME280Sensor(object):
     #Datasheet recommend do Soft Reset before measurment:
     logger.debug('Send soft reset command %s with a timeout of %s seconds' % (self.__SOFTRESET,self.__softreset_timeout * 2.0))
     self.__bus.write_byte(self.__address, self.__SOFTRESET)
-    time.sleep(self.__softreset_timeout * 2.0)
+    sleep(self.__softreset_timeout * 2.0)
 
   def __enter__(self):
     """used to enable python's with statement support"""
@@ -263,7 +267,7 @@ class terrariumBME280Sensor(object):
     #Stand_by time = 1000 ms -> 101(datasheet) -> in HEX =A0
     self.__bus.write_byte_data(self.__address, 0xF5, 0xA0)
 
-    time.sleep(self.__temperature_timeout * 2.0)
+    sleep(self.__temperature_timeout * 2.0)
 
     # Read data back from 0xF7(247), 8 bytes
     # Pressure MSB, LSB, xLSB, Temperature MSB, LSB, xLSB, Humidity MSB, LSB
@@ -336,6 +340,166 @@ class terrariumBME280Sensor(object):
   def get_altitude(self):
     self.__get_raw_data()
     return None if not terrariumUtils.is_float(self.__current_altitude) else float(self.__current_altitude)
+
+class terrariumVEML6075Sensor(object):
+  # Rewritten based on https://github.com/alexhla/uva-uvb-sensor-veml6075-driver/
+  hardwaretype = 'veml6075'
+
+  # Register Addresses
+  __REGISTER_CONF = 0x00
+  __REGISTER_UVA = 0x07
+  __REGISTER_UVB = 0x09
+  __REGISTER_VISIBLE_NOISE = 0x0A
+  __REGISTER_IR_NOISE = 0x0B
+
+  # Config Register Bit Masks
+  __POWER_ON = 0x00
+  __POWER_OFF = 0x01
+  __SENSITIVITY_NORMAL_DYNAMIC = 0x00
+  __SENSITIVITY_HIGH_DYNAMIC = 0x08
+  __SENSITIVITY_INTEGRATION_800 = 0x40
+  __SENSITIVITY_INTEGRATION_400 = 0x30
+  __SENSITIVITY_INTEGRATION_200 = 0x20
+  __SENSITIVITY_INTEGRATION_100 = 0x10
+  __SENSITIVITY_INTEGRATION_50 = 0x00
+
+  # UV Coefficents, Responsivity
+  __UV_COEFFICENT_UVA_VISIBLE = 2.22
+  __UV_COEFFICENT_UVA_IR = 1.33
+  __UV_COEFFICENT_UVB_VISIBLE = 2.95
+  __UV_COEFFICENT_UVB_IR = 1.74
+
+  # Conversion Factors (VEML6075 Datasheet Rev. 1.2, 23-Nov-16)
+  __UVA_COUNTS_PER_UWCM = 0.93
+  __UVB_COUNTS_PER_UWCM = 2.10
+
+  __SENSITIVITY_MODE = 0
+
+  def __init__(self, address = 10, device_number = 1):
+    self.__address = int('0x' + str(address),16)
+    self.__device_number = 1 if device_number is None else int(device_number)
+
+    self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_800
+    self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_NORMAL_DYNAMIC
+    self.__wait_time = 1.920
+    self.__divisor = 16.0
+
+  def __enter__(self):
+    """used to enable python's with statement support"""
+    self.__bus = smbus.SMBus(self.__device_number)
+    return self
+
+  def __exit__(self, type, value, traceback):
+    """with support"""
+    self.close()
+
+  def close(self):
+    """Closes the i2c connection"""
+    logger.debug('Close sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
+    self.__bus.close()
+
+  def __set_sensitivity(self):
+    if terrariumVEML6075Sensor.__SENSITIVITY_MODE == 0:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_800  # Most Sensitive
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_NORMAL_DYNAMIC
+      self.__wait_time = 1.920
+      self.__divisor = 16.0
+    elif terrariumVEML6075Sensor.__SENSITIVITY_MODE == 1:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_400
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_NORMAL_DYNAMIC
+      self.__wait_time = 0.960
+      self.__divisor = 8.0
+    elif terrariumVEML6075Sensor.__SENSITIVITY_MODE == 2:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_200
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_NORMAL_DYNAMIC
+      self.__wait_time = 0.480
+      self.__divisor = 4.0
+    elif terrariumVEML6075Sensor.__SENSITIVITY_MODE == 3:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_100
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_NORMAL_DYNAMIC
+      self.__wait_time = 0.240
+      self.__divisor = 2.0
+    elif terrariumVEML6075Sensor.__SENSITIVITY_MODE == 4:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_50
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_NORMAL_DYNAMIC
+      self.__wait_time = 0.120
+      self.__divisor = 1.0
+    elif terrariumVEML6075Sensor.__SENSITIVITY_MODE == 5:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_800
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_HIGH_DYNAMIC
+      self.__wait_time = 1.920
+      self.__divisor = 16.0
+    elif terrariumVEML6075Sensor.__SENSITIVITY_MODE == 6:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_400
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_HIGH_DYNAMIC
+      self.__wait_time = 0.960
+      self.__divisor = 8.0
+    elif terrariumVEML6075Sensor.__SENSITIVITY_MODE == 7:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_200
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_HIGH_DYNAMIC
+      self.__wait_time = 0.480
+      self.__divisor = 4.0
+    elif terrariumVEML6075Sensor.__SENSITIVITY_MODE == 8:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_100
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_HIGH_DYNAMIC
+      self.__wait_time = 0.240
+      self.__divisor = 2.0
+    elif terrariumVEML6075Sensor.__SENSITIVITY_MODE == 9:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_50  # Least Sensitive
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_HIGH_DYNAMIC
+      self.__wait_time = 0.120
+      self.__divisor = 1.0
+
+  def __get_raw_data(self,part):
+    self.__set_sensitivity()
+
+    # Write Dynamic and Integration Time Settings to Sensor
+    self.__bus.write_byte_data(self.__address, terrariumVEML6075Sensor.__REGISTER_CONF, self.__integTimeSelect|self.__dynamicSelect|terrariumVEML6075Sensor.__POWER_ON)
+    # Wait for ADC to finish first and second conversions, discarding the first
+    sleep(self.__wait_time)
+    # Power OFF
+    self.__bus.write_byte_data(self.__address, terrariumVEML6075Sensor.__REGISTER_CONF, terrariumVEML6075Sensor.__POWER_OFF)
+
+    # Get RAW data
+    if 'uva' == part:
+      __register = terrariumVEML6075Sensor.__REGISTER_UVA
+      __compensate_light = terrariumVEML6075Sensor.__UV_COEFFICENT_UVA_VISIBLE
+      __compensate_ir = terrariumVEML6075Sensor.__UV_COEFFICENT_UVA_IR
+      __counts_per_uWcm = terrariumVEML6075Sensor.__UVA_COUNTS_PER_UWCM
+
+    if 'uvb' == part:
+      __register = terrariumVEML6075Sensor.__REGISTER_UVB
+      __compensate_light = terrariumVEML6075Sensor.__UV_COEFFICENT_UVB_VISIBLE
+      __compensate_ir = terrariumVEML6075Sensor.__UV_COEFFICENT_UVB_IR
+      __counts_per_uWcm = terrariumVEML6075Sensor.__UVB_COUNTS_PER_UWCM
+
+    try:
+      value = float(self.__bus.read_word_data(self.__address,__register))
+      compensate_visible_light = float(self.__bus.read_word_data(self.__address,terrariumVEML6075Sensor.__REGISTER_VISIBLE_NOISE))  # visible noise
+      compensate_ir_light = float(self.__bus.read_word_data(self.__address,terrariumVEML6075Sensor.__REGISTER_IR_NOISE))  # infrared noise
+    except Exception, ex:
+      print ex
+      return None
+
+    # Scale down
+    value /= self.__divisor
+    compensate_visible_light /= self.__divisor
+    compensate_ir_light /= self.__divisor
+
+    # Compensate
+    value = value - (__compensate_light * compensate_visible_light) - (__compensate_ir * compensate_ir_light)
+    if value < 0.0:
+      return 0
+
+    # Convert to  uWcm^2
+    value /= __counts_per_uWcm
+    return value
+
+  def get_uva(self):
+    return self.__get_raw_data('uva')
+
+  def get_uvb(self):
+    return self.__get_raw_data('uvb')
 
 class terrariumChirpSensor(object):
   hardwaretype = 'chirp'

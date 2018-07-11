@@ -1144,6 +1144,11 @@ function history_graph(name, data, type) {
             val = formatNumber(val) + '';
             break;
 
+          case 'uva':
+          case 'uvb':
+            val = formatNumber(val) + 'uWcm^2';
+            break;
+
           case 'door':
             val = (val ? '{{_('Open')}}' : '{{_('Closed')}}');
             break;
@@ -1161,6 +1166,8 @@ function history_graph(name, data, type) {
     case 'moisture':
     case 'conductivity':
     case 'light':
+    case 'uva':
+    case 'uvb':
       graph_data = [{
         label: '{{_('Current')}}',
         data: data.current
