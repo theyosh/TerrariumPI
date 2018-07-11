@@ -1146,7 +1146,7 @@ function history_graph(name, data, type) {
 
           case 'uva':
           case 'uvb':
-            val = formatNumber(val) + 'uWcm^2';
+            val = formatNumber(val) + 'µWcm^2';
             break;
 
           case 'door':

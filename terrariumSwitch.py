@@ -5,7 +5,6 @@ logger = terrariumLogging.logging.getLogger(__name__)
 import RPi.GPIO as GPIO
 import pigpio
 import thread
-import time
 import math
 import requests
 import datetime
@@ -22,6 +21,9 @@ from terrariumUtils import terrariumUtils
 # https://github.com/perryflynn/energenie-connect0r
 sys.path.insert(0, './energenie-connect0r')
 import energenieconnector
+
+from gevent import monkey, sleep
+monkey.patch_all()
 
 class terrariumSwitch(object):
   VALID_HARDWARE_TYPES = ['ftdi','gpio','gpio-inverse','pwm-dimmer','remote','remote-dimmer','eg-pm-usb','eg-pm-lan']
@@ -158,7 +160,7 @@ class terrariumSwitch(object):
           dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - from_value) / 100.0)
           logger.debug('Dimmer animation: Step: %s, value %s%%, Dim value: %s, timeout %s',counter+1, from_value, dim_value, duration)
           self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
-          time.sleep(duration)
+          sleep(duration)
 
         # For impatient people... Put the dimmer at the current state value if it has changed during the animation
         dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - self.get_state()) / 100.0)

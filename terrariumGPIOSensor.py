@@ -8,6 +8,9 @@ import Adafruit_DHT
 
 from terrariumUtils import terrariumUtils
 
+from gevent import monkey, sleep
+monkey.patch_all()
+
 class terrariumGPIOSensor(object):
 
   hardwaretype = None
@@ -42,7 +45,7 @@ class terrariumGPIOSensor(object):
       logger.debug('Powering up sensor type \'%s\' with GPIO address %s' % (self.__class__.__name__,self.__powerpin))
       GPIO.output(terrariumUtils.to_BCM_port_number(self.__powerpin),1)
       # Time to get power flowing. Not sure what the right amount time would be....
-      time.sleep(0.5)
+      sleep(0.5)
 
     self.__value = GPIO.input(terrariumUtils.to_BCM_port_number(self.__datapin))
     logger.debug('Read state sensor type \'%s\' with GPIO address %s with current alarm: %s' % (self.__class__.__name__,self.__datapin,self.__value))
@@ -99,7 +102,7 @@ class terrariumDHTSensor(terrariumGPIOSensor):
 
   def __get_raw_data(self):
     # Need some extra timeout to get the chip to relax....:(
-    time.sleep(2.1)
+    sleep(2.1)
     self.__humidity, self.__temperature = Adafruit_DHT.read_retry(self.__dhttype, terrariumUtils.to_BCM_port_number(self.__datapin),5)
 
   def get_temperature(self):
@@ -145,9 +148,9 @@ class terrariumHCSR04Sensor(terrariumGPIOSensor):
 
   def __get_raw_data(self):
     GPIO.output(terrariumUtils.to_BCM_port_number(self.__triggerpin), False)
-    time.sleep(2)
+    sleep(2)
     GPIO.output(terrariumUtils.to_BCM_port_number(self.__triggerpin), True)
-    time.sleep(0.00001)
+    sleep(0.00001)
     GPIO.output(terrariumUtils.to_BCM_port_number(self.__triggerpin), False)
     pulse_start = time.time()
     while GPIO.input(terrariumUtils.to_BCM_port_number(self.__datapin))==0:
