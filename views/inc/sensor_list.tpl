@@ -74,16 +74,16 @@
             source_row = $('div.row.sensor').html();
             $('div.row.sensor').remove();
 
-            var licht_sensors = '{{sensor_type}}'.split(',');
-            $.each(licht_sensors,function(counter,sensor_type){
+            var sensor_types = '{{sensor_type}}'.split(',');
+            $.each(sensor_types,function(counter,sensor_type){
               $.get('/api/sensors/' + sensor_type,function(json_data) {
-                $('div.row.jumbotron').toggle($('div.row.sensor:visible').length == 0);
                 $.each(sortByKey(json_data.sensors,'name'),function(index,sensor_data){
                   add_sensor_status_row(sensor_data);
                   update_sensor(sensor_data);
                   sensor_gauge('sensor_' + sensor_data.id, sensor_data);
                   load_history_graph('sensor_' + sensor_data.id,sensor_type,'/api/history/sensors/' + sensor_data.id);
                 });
+                $('div.row.jumbotron').toggle($('div.row.sensor:visible').length == 0);
                 reload_reload_theme();
               });
             });
