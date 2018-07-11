@@ -14,7 +14,7 @@
                 <h2 class="conductivity"><span aria-hidden="true" class="glyphicon glyphicon-oil"></span> {{_('Conductivity sensor')}} <span class="title">{{_('new')}}</span> <small>...</small> <span class="badge bg-red">{{_('warning')}}</span> <span class="badge bg-orange">{{_('error')}}</span></h2>
                 <h2 class="distance"><span aria-hidden="true" class="glyphicon glyphicon-signal"></span> {{_('Distance sensor')}} <span class="title">{{_('new')}}</span> <small>...</small> <span class="badge bg-red">{{_('warning')}}</span> <span class="badge bg-orange">{{_('error')}}</span></h2>
                 <h2 class="ph"><span aria-hidden="true" class="glyphicon glyphicon-scale"></span> {{_('pH sensor')}} <span class="title">{{_('new')}}</span> <small>...</small> <span class="badge bg-red">{{_('warning')}}</span> <span class="badge bg-orange">{{_('error')}}</span></h2>
-                <h2 class="light"><span aria-hidden="true" class="glyphicon glyphicon-adjust"></span> {{_('Light sensor')}} <span class="title">{{_('new')}}</span> <small>...</small> <span class="badge bg-red">{{_('warning')}}</span> <span class="badge bg-orange">{{_('error')}}</span></h2>
+                <h2 class="light uva uvb"><span aria-hidden="true" class="glyphicon glyphicon-adjust"></span> {{_('Light sensor')}} <span class="title">{{_('new')}}</span> <small>...</small> <span class="badge bg-red">{{_('warning')}}</span> <span class="badge bg-orange">{{_('error')}}</span></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -74,15 +74,18 @@
             source_row = $('div.row.sensor').html();
             $('div.row.sensor').remove();
 
-            $.get('/api/sensors/{{sensor_type}}',function(json_data) {
-              $('div.row.jumbotron').toggle(json_data.sensors.length == 0);
-              $.each(sortByKey(json_data.sensors,'name'),function(index,sensor_data){
-                add_sensor_status_row(sensor_data);
-                update_sensor(sensor_data);
-                sensor_gauge('sensor_' + sensor_data.id, sensor_data);
-                load_history_graph('sensor_' + sensor_data.id,'{{sensor_type}}','/api/history/sensors/' + sensor_data.id);
+            var licht_sensors = '{{sensor_type}}'.split(',');
+            $.each(licht_sensors,function(counter,sensor_type){
+              $.get('/api/sensors/' + sensor_type,function(json_data) {
+                $('div.row.jumbotron').toggle($('div.row.sensor:visible').length == 0);
+                $.each(sortByKey(json_data.sensors,'name'),function(index,sensor_data){
+                  add_sensor_status_row(sensor_data);
+                  update_sensor(sensor_data);
+                  sensor_gauge('sensor_' + sensor_data.id, sensor_data);
+                  load_history_graph('sensor_' + sensor_data.id,sensor_type,'/api/history/sensors/' + sensor_data.id);
+                });
+                reload_reload_theme();
               });
-              reload_reload_theme();
             });
           });
         </script>

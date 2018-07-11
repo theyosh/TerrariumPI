@@ -233,7 +233,7 @@ class terrariumCollector(object):
       with self.db as db:
         cur = db.cursor()
 
-        if type in ['humidity','moisture','temperature','distance','ph','conductivity','light']:
+        if type in ['humidity','moisture','temperature','distance','ph','conductivity','light','uva','uvb']:
           cur.execute('REPLACE INTO sensor_data (id, type, timestamp, current, limit_min, limit_max, alarm_min, alarm_max, alarm) VALUES (?,?,?,?,?,?,?,?,?)',
                       (id, type, now, newdata['current'], newdata['limit_min'], newdata['limit_max'], newdata['alarm_min'], newdata['alarm_max'], newdata['alarm']))
 
@@ -360,10 +360,10 @@ class terrariumCollector(object):
 
         sql = sql + ' GROUP BY type, timestamp'
 
-      elif len(parameters) == 2 and parameters[0] in ['temperature','humidity','distance','ph','conductivity','light']:
+      elif len(parameters) == 2 and parameters[0] in ['temperature','humidity','distance','ph','conductivity','light','uva','uvb']:
         sql = sql + ' AND type = ? AND id = ?'
         filters = (stoptime,starttime,parameters[0],parameters[1],)
-      elif len(parameters) == 1 and parameters[0] in ['temperature','humidity','distance','ph','conductivity','light']:
+      elif len(parameters) == 1 and parameters[0] in ['temperature','humidity','distance','ph','conductivity','light','uva','uvb']:
         sql = sql + ' AND type = ?'
         filters = (stoptime,starttime,parameters[0],)
 

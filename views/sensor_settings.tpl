@@ -77,7 +77,7 @@
                         <h2 class="conductivity" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Conductivity sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <h2 class="distance" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-signal"></span> {{_('Distance sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <h2 class="ph" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-scale"></span> {{_('pH sensor')}} <span class="title">{{_('new')}}</span></h2>
-                        <h2 class="light" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-adjust"></span> {{_('Light sensor')}} <span class="title">{{_('new')}}</span></h2>
+                        <h2 class="light uva uvb" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-adjust"></span> {{_('Light sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <ul class="nav navbar-right panel_toolbox">
                           <li>
                             <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -108,6 +108,7 @@
                               <option value="remote">{{_('Remote')}}</option>
                               <option value="hc-sr04">{{_('HC-SR04')}}</option>
                               <option value="sku-sen0161">{{_('pH SKU-SEN0161')}}</option>
+                              <option value="veml6075">{{_('VEML6075')}}</option>
                             </select>
                           </div>
                         </div>
@@ -128,6 +129,8 @@
                               <option value="distance">{{_('Distance')}}</option>
                               <option value="ph">{{_('pH')}}</option>
                               <option value="light">{{_('Light')}}</option>
+                              <option value="uva">{{_('UVA')}}</option>
+                              <option value="uvb">{{_('UVB')}}</option>
                             </select>
                           </div>
                         </div>

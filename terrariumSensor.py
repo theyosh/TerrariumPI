@@ -14,7 +14,7 @@ from hashlib import md5
 from terrariumUtils import terrariumUtils
 from terrariumAnalogSensor import terrariumSKUSEN0161Sensor
 from terrariumGPIOSensor import terrariumYTXXSensorDigital, terrariumDHT11Sensor, terrariumDHT22Sensor, terrariumAM2302Sensor, terrariumHCSR04Sensor
-from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor
+from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor
 
 class terrariumRemoteSensor(object):
   hardwaretype = 'remote'
@@ -172,7 +172,7 @@ class terrariumSensor(object):
   UPDATE_TIMEOUT = 30
   ERROR_TIMEOUT = 10
 
-  VALID_SENSOR_TYPES   = ['temperature','humidity','moisture','conductivity','distance','ph','light']
+  VALID_SENSOR_TYPES   = ['temperature','humidity','moisture','conductivity','distance','ph','light','uva','uvb']
   VALID_HARDWARE_TYPES = []
 
   # Append OWFS to the list of valid sensors
@@ -195,6 +195,7 @@ class terrariumSensor(object):
   VALID_HARDWARE_TYPES.append(terrariumSi7021Sensor.hardwaretype)
   VALID_HARDWARE_TYPES.append(terrariumBME280Sensor.hardwaretype)
   VALID_HARDWARE_TYPES.append(terrariumChirpSensor.hardwaretype)
+  VALID_HARDWARE_TYPES.append(terrariumVEML6075Sensor.hardwaretype)
 
   # Append YTXX sensor(s) to the list of valid sensors
   VALID_HARDWARE_TYPES.append(terrariumYTXXSensorDigital.hardwaretype)
@@ -285,6 +286,8 @@ class terrariumSensor(object):
           hardwaresensor = terrariumBME280Sensor(address[0],address[1])
         elif terrariumChirpSensor.hardwaretype == self.get_hardware_type():
           hardwaresensor = terrariumChirpSensor(address[0],address[1])
+        elif terrariumVEML6075Sensor.hardwaretype == self.get_hardware_type():
+          hardwaresensor = terrariumVEML6075Sensor(address[0],address[1])
 
 
         elif terrariumYTXXSensorDigital.hardwaretype == self.get_hardware_type():
@@ -319,6 +322,10 @@ class terrariumSensor(object):
               current = sensor.get_ph()
             elif 'light' == self.get_type():
               current = sensor.get_light()
+            elif 'uva' == self.get_type():
+              current = sensor.get_uva()
+            elif 'uvb' == self.get_type():
+              current = sensor.get_uvb()
 
           del hardwaresensor
 
