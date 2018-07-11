@@ -401,7 +401,7 @@ class terrariumNotification(object):
       if lednr is not None:
         GPIO.setup(lednr, GPIO.OUT)
         GPIO.output(lednr,1)
-        time.sleep(1)
+        sleep(1)
         GPIO.output(lednr,0)
 
   def send_notication_led(self,message_id):

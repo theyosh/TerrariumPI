@@ -2,10 +2,12 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-import time
 from gpiozero import MCP3008
 
 from terrariumUtils import terrariumUtils
+
+from gevent import monkey, sleep
+monkey.patch_all()
 
 class terrariumAnalogSensor(object):
 
@@ -34,7 +36,7 @@ class terrariumAnalogSensor(object):
       value = self.__sensor.value
       if terrariumUtils.is_float(value):
         values.append(float(value))
-      time.sleep(0.2)
+      sleep(0.2)
 
     # sort values from low to high
     values.sort()

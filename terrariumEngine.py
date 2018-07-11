@@ -460,6 +460,9 @@ class terrariumEngine(object):
       else:
         logger.warning('Updating took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEngine.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
         time_short = duration - terrariumEngine.LOOP_TIMEOUT
+        if time_short > 12:
+          # More then 12 seconds to late.... probably never fast enough...
+          time_short = 0
 
   def __send_message(self,message):
     clients = self.subscribed_queues
