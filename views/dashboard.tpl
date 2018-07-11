@@ -548,7 +548,7 @@
               </div>
               <div class="x_panel" id="average_moisture">
                 <div class="x_title">
-                  <h2><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> <span class="title">{{_('Average Mositure')}}</span> <small class="data_update">...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> <span class="title">{{_('Average Moisture')}}</span> <small class="data_update">...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
