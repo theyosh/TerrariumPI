@@ -183,6 +183,9 @@ class lcd:
 
 class terrariumScreen(object):
 
+  __MAX_SHOW_LINE_TIMEOUT = 7
+  __MAX_SHOW_CHAR_TIMEOUT = 0.01
+
   def __init__(self,id,address,name,resolution = '16x2',title = False):
     self.id = id
     self.font_size = 1
@@ -263,10 +266,31 @@ class terrariumScreen(object):
     return data
 
   def message(self,messages):
-    if isinstance(messages,basestring):
-      messages = [messages]
+    if self.animating:
+      return
 
-    self.messages = [datetime.datetime.now().strftime('%c')] + messages
+    if isinstance(messages,basestring):
+      if len(messages) > 2 * self.get_max_chars():
+        # Split long messages on a 'dot', creating multiple lines
+        messages = messages.split('. ')
+        if len(messages) == 1:
+          # When it is one long sentence, split it in have on a space
+          splitpos = messages[0].find(' ',len(messages[0])/2)
+          messages = [messages[0][:splitpos].strip(),messages[0][splitpos:].strip()]
+
+      else:
+        messages = [messages.strip()]
+
+    # Set 'now' timestamp
+    self.messages = [datetime.datetime.now().strftime('%c')]
+    # Add messages to queue
+    for message in messages:
+      # If there are new lines in a message, split it up to multiple lines
+      message = message.split("\n")
+      for submessage in message:
+        if '' != submessage.strip():
+          self.messages.append(submessage.strip())
+
     thread.start_new_thread(self.display_messages, ())
 
   def display_messages(self):
@@ -278,7 +302,6 @@ class terrariumScreen(object):
     max_chars = self.get_max_chars()
     max_lines = self.get_max_lines()
 
-    max_timeout = 10
     line_counter = 0
     animate_lines = []
 
@@ -298,7 +321,7 @@ class terrariumScreen(object):
         if len(animate_lines) > 0:
           self.animate_lines(animate_lines)
 
-        timeout = float(max_timeout) - (time.time() - starttime)
+        timeout = float(terrariumScreen.__MAX_SHOW_LINE_TIMEOUT) - (time.time() - starttime)
         if timeout >= 0.0:
           sleep(timeout)
 
@@ -319,11 +342,11 @@ class terrariumScreen(object):
     for line in lines:
       for counter in xrange(1,len(line['message'])-max_chars):
         self.write_line(line['linenr'],line['message'][counter:max_chars+counter])
-        sleep(0.1)
+        sleep(terrariumScreen.__MAX_SHOW_CHAR_TIMEOUT)
 
       for counter in xrange(len(line['message'])-max_chars,0,-1):
         self.write_line(line['linenr'],line['message'][counter:max_chars+counter])
-        sleep(0.1)
+        sleep(terrariumScreen.__MAX_SHOW_CHAR_TIMEOUT)
 
       self.write_line(line['linenr'],line['message'][:max_chars])
 

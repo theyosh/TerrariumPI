@@ -236,6 +236,9 @@
                       <label>
                         <i class="fa fa-send blue disabled" id="{{message['id']}}_services_telegram" title="{{_('Telegram')}}"></i>
                       </label>
+                      <label>
+                        <i class="fa fa-newspaper-o disabled" id="{{message['id']}}_services_display" title="{{_('Display')}}"></i>
+                      </label>
                     </div>
                   </div>
                   % end
