@@ -32,6 +32,9 @@ class terrariumTranslations(object):
     self.translations['sensor_field_limit_min'] = _('Holds the sensor lowest value that should be used in the graphs.')
     self.translations['sensor_field_limit_max'] = _('Holds the sensor maximum value that should be used in the graphs.')
     self.translations['sensor_field_current'] = _('Shows the sensor current value in temperature or humidity (read only).')
+    self.translations['sensor_field_min_moist'] = _('Holds the sensor lowest moisture value measured in dry air. %s') % ('<a href="https://github.com/ageir/chirp-rpi#calibration" target="_blank" title="' + _('More calibration information') + '"><i>' + _('More calibration information') + '</i></a>')
+    self.translations['sensor_field_max_moist'] = _('Holds the sensor highest moisture value measured in full water. %s') % ('<a href="https://github.com/ageir/chirp-rpi#calibration" target="_blank" title="' + _('More calibration information') + '"><i>' + _('More calibration information') + '</i></a>')
+    self.translations['sensor_field_temperature_offset'] = _('Holds the temperature offset value.')
     # End sensors
 
     # Switches
