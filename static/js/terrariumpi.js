@@ -1722,6 +1722,14 @@ function update_sensor(data) {
       }
     }
   });
+
+  // Open or hide the dimmer values (will not trigger on the select field)
+  if ('chirp' === data.hardwaretype) {
+    content_row.find('.row.chirp_calibration').show();
+  } else {
+    // Remove dimmer row, else form submit is 'stuck' on hidden fields that have invalid patterns... :(
+    content_row.find('.row.chirp_calibration').remove();
+  }
 }
 
 function add_sensor_setting_row(data) {
@@ -1742,8 +1750,17 @@ function add_sensor_setting_row(data) {
     minimumResultsForSearch: Infinity
   }).on('change',function() {
     if (this.name.indexOf('hardwaretype') >= 0) {
+      var chirp_sensor = ('chirp' === this.value);
+      if (chirp_sensor) {
+        $(this).parents('.x_content').find('.row.chirp_calibration input').attr('required','required');
+      } else {
+        $(this).parents('.x_content').find('.row.chirp_calibration input').removeAttr('required');
+      }
+      $(this).parents('.x_content').find('.row.chirp_calibration').toggle(chirp_sensor);
+
       var address_field = $("input[name='" + this.name.replace('hardwaretype','address') + "']");
       address_field.attr("readonly", this.value == 'owfs' || this.value == 'w1').off('change');
+
 /*
       if ('remote' === this.value) {
         address_field.on('change',function(){

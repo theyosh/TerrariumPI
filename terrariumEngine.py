@@ -180,6 +180,14 @@ class terrariumEngine(object):
       sensor.set_limit_min(sensordata['limit_min'])
       sensor.set_limit_max(sensordata['limit_max'])
 
+      if 'chirp' == sensor.get_hardware_type():
+        if 'min_moist' in sensordata and sensordata['min_moist'] is not None:
+          sensor.set_min_moist_calibration(sensordata['min_moist'])
+        if 'max_moist' in sensordata and sensordata['max_moist'] is not None:
+          sensor.set_max_moist_calibration(sensordata['max_moist'])
+        if 'temp_offset' in sensordata and sensordata['temp_offset'] is not None:
+          sensor.set_temperature_offset_calibration(sensordata['temp_offset'])
+
       seen_sensors.append(sensor.get_id())
 
     if reloading:
