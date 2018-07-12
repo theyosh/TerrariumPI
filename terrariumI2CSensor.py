@@ -505,9 +505,13 @@ class terrariumChirpSensor(object):
   hardwaretype = 'chirp'
   # Datasheet: https://wemakethings.net/chirp/
 
-  def __init__(self, address = 20, device_number = 1):
+  def __init__(self, address = 20, device_number = 1, min_moist = 160, max_moist = 720, temp_offset = 2):
     self.__address = int('0x' + str(address),16)
     self.__device_number = 1 if device_number is None else int(device_number)
+
+    self.__min_moist = min_moist
+    self.__max_moist = max_moist
+    self.__temp_offset = temp_offset
 
     logger.debug('Initializing sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
 
@@ -532,10 +536,10 @@ class terrariumChirpSensor(object):
                   read_moist=False,
                   read_temp=False,
                   read_light=False,
-                  min_moist=200,
-                  max_moist=770,
+                  min_moist=self.__min_moist,
+                  max_moist=self.__max_moist,
                   temp_scale='celsius',
-                  temp_offset=0)
+                  temp_offset=self.__temp_offset)
     value = None
 
     sensor.read_temp  = 'temperature' == part

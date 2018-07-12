@@ -221,6 +221,12 @@ class terrariumSensor(object):
     # For hc-sr04 set at 10 meters else just '100' value
     self.set_limit_max(100000 if terrariumHCSR04Sensor.hardwaretype == self.get_hardware_type() else 100)
 
+    # Set custom Chirp calibration values to default
+    if 'chirp' == self.get_hardware_type():
+      self.set_min_moist_calibration(160)
+      self.set_max_moist_calibration(720)
+      self.set_temperature_offset_calibration(0)
+
     if self.id is None:
       self.id = md5(b'' + self.get_address().replace('-','').upper() + self.get_type()).hexdigest()
 
@@ -284,11 +290,13 @@ class terrariumSensor(object):
           hardwaresensor = terrariumSi7021Sensor(address[0],address[1])
         elif terrariumBME280Sensor.hardwaretype == self.get_hardware_type():
           hardwaresensor = terrariumBME280Sensor(address[0],address[1])
-        elif terrariumChirpSensor.hardwaretype == self.get_hardware_type():
-          hardwaresensor = terrariumChirpSensor(address[0],address[1])
         elif terrariumVEML6075Sensor.hardwaretype == self.get_hardware_type():
           hardwaresensor = terrariumVEML6075Sensor(address[0],address[1])
 
+        elif terrariumChirpSensor.hardwaretype == self.get_hardware_type():
+          hardwaresensor = terrariumChirpSensor(address[0],address[1],self.get_min_moist_calibration(),
+                                                                      self.get_max_moist_calibration(),
+                                                                      self.get_temperature_offset_calibration())
 
         elif terrariumYTXXSensorDigital.hardwaretype == self.get_hardware_type():
           hardwaresensor = terrariumYTXXSensorDigital(address[0],address[1])
@@ -374,6 +382,11 @@ class terrariumSensor(object):
             'error' : not self.is_active()
             }
 
+    if 'chirp' == self.get_hardware_type():
+      data['min_moist'] = self.get_min_moist_calibration()
+      data['max_moist'] = self.get_max_moist_calibration()
+      data['temp_offset'] = self.get_temperature_offset_calibration()
+
     return data
 
   def get_id(self):
@@ -439,6 +452,24 @@ class terrariumSensor(object):
 
   def set_limit_max(self,limit):
     self.limit_max = float(limit)
+
+  def set_min_moist_calibration(self,limit):
+    self.__min_moist = float(limit)
+
+  def get_min_moist_calibration(self):
+    return self.__min_moist
+
+  def set_max_moist_calibration(self,limit):
+    self.__max_moist = float(limit)
+
+  def get_max_moist_calibration(self):
+    return self.__max_moist
+
+  def set_temperature_offset_calibration(self,limit):
+    self.__temp_offset = float(limit)
+
+  def get_temperature_offset_calibration(self):
+    return self.__temp_offset
 
   def get_current(self, force = False):
     current = self.current
