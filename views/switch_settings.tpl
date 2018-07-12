@@ -221,7 +221,6 @@
                   $(this).parents('.x_content').find('.row.dimmer input').removeAttr('required');
                 }
 
-
                 $(this).parents('.x_content').find('.row.dimmer').toggle(dimmer);
 
                 var address_field = $("input[name='" + this.name.replace('hardwaretype','address') + "']");
