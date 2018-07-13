@@ -2583,8 +2583,10 @@ function edit_profile() {
   $('form#profile').toggleClass('edit');
   if ($('form#profile').hasClass('edit')) {
     init_wysiwyg();
+
     $('input[name="age"]').daterangepicker({
       singleDatePicker: true,
+
     });
   }
   return false;

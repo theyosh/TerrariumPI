@@ -56,21 +56,21 @@
                           <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{_('Name')}} </label>
                           <div class="col-md-8 col-sm-8 col-xs-12">
                             <span class="text">{{person_name}}</span>
-                            <input class="form-control" name="name" placeholder="{{_('Name')}}" value="{{person_name}}" required="required" type="text" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('profile_name')}}">
+                            <input class="form-control" name="name" placeholder="{{_('Name')}}" value="{{person_name}}" type="text" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('profile_name')}}">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="control-label col-md-2 col-sm-2 col-xs-12" for="type">{{_('Type')}} </label>
                           <div class="col-md-8 col-sm-8 col-xs-12">
                             <span class="text"></span>
-                            <input class="form-control" name="type" placeholder="{{_('Type')}}" value="" required="required" type="text" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('profile_type')}}">
+                            <input class="form-control" name="type" placeholder="{{_('Type')}}" value="" type="text" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('profile_type')}}">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="control-label col-md-2 col-sm-2 col-xs-12" for="gender">{{_('Gender')}} </label>
                           <div class="col-md-8 col-sm-8 col-xs-12">
                             <span class="text"></span>
-                            <input class="form-control" name="gender" placeholder="{{_('Gender')}}" value="" required="required" type="text" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('profile_gender')}}">
+                            <input class="form-control" name="gender" placeholder="{{_('Gender')}}" value="" type="text" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('profile_gender')}}">
                           </div>
                         </div>
                         <div class="form-group">
@@ -88,20 +88,20 @@
                           <label class="control-label col-md-2 col-sm-2 col-xs-12" for="species">{{_('Species')}} </label>
                           <div class="col-md-8 col-sm-8 col-xs-12">
                             <span class="text"></span>
-                            <input class="form-control" name="species" placeholder="{{_('Species')}}" value="" required="required" type="text" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('profile_species')}}">
+                            <input class="form-control" name="species" placeholder="{{_('Species')}}" value="" type="text" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('profile_species')}}">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="control-label col-md-2 col-sm-2 col-xs-12" for="latin">{{_('Latin name')}} </label>
                           <div class="col-md-8 col-sm-8 col-xs-12">
                             <span class="text"></span>
-                            <input class="form-control" name="latin" placeholder="{{_('Latin name')}}" value="" required="required" type="text" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('profile_latin_name')}}">
+                            <input class="form-control" name="latin" placeholder="{{_('Latin name')}}" value="" type="text" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('profile_latin_name')}}">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="control-label col-md-2 col-sm-2 col-xs-12" for="description">{{_('Description')}} </label>
                           <div class="col-md-8 col-sm-8 col-xs-12">
-                            <span class="text"></span>
+                            <span class="text pidescription"></span>
                             <div class="btn-toolbar editor" data-role="editor-toolbar" data-target="#editor-one">
                               <div class="btn-group">
                                 <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="fa fa-font"></i><b class="caret"></b></a>
@@ -171,7 +171,7 @@
                           <label class="control-label col-md-2 col-sm-2 col-xs-12" for="moreinfo">{{_('More information')}} </label>
                           <div class="col-md-8 col-sm-8 col-xs-12">
                             <span class="text"></span>
-                            <input class="form-control" name="moreinfo" placeholder="{{_('More information')}}" value="" required="required" type="text" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('profile_more_information')}}">
+                            <input class="form-control" name="moreinfo" placeholder="{{_('More information')}}" value="" type="text" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('profile_more_information')}}">
                           </div>
                         </div>
                         <div class="form-group submit">
@@ -226,6 +226,10 @@
                     } else if (key === 'image') {
                       $('img.avatar-view').attr('src',data[key]);
                     }
+                  });
+                  // Add fanycbox to images
+                  $('span.text.pidescription img').wrap(function(){
+                    return $('<a>').attr({'href': $(this).attr('src'), 'data-fancybox':'gallery'})
                   });
                 });
                 $.get('/api/weather',function(data){

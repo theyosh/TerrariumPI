@@ -73,6 +73,12 @@ form#profile.edit label{
   padding-top: 8px;
 }
 
+form#profile .pidescription img{
+  max-width: 33%;
+  float:left;
+  margin-left: 10px;
+}
+
 .x_panel.help .x_content {
   display: none;
 }
