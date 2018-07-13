@@ -74,9 +74,9 @@ form#profile.edit label{
 }
 
 form#profile .pidescription img{
-  max-width: 33%;
+  max-width: 30%;
   float:left;
-  margin-left: 10px;
+  margin-left: 1%;
 }
 
 .x_panel.help .x_content {
