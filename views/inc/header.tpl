@@ -38,6 +38,8 @@
   <link href="/gentelella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
   <!-- Switchery -->
   <link href="/gentelella/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+  <!-- bootstrap-daterangepicker -->
+  <link href="/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
   <!-- Custom Theme Style -->
   <link href="/gentelella/build/css/custom.min.css" rel="stylesheet">
   <!-- TerrariumPI Style -->
