@@ -100,7 +100,7 @@
                         </div>
                         <div class="form-group">
                           <label class="control-label col-md-2 col-sm-2 col-xs-12" for="description">{{_('Description')}} </label>
-                          <div class="col-md-8 col-sm-8 col-xs-12">
+                          <div class="col-md-10 col-sm-10 col-xs-12">
                             <span class="text pidescription"></span>
                             <div class="btn-toolbar editor" data-role="editor-toolbar" data-target="#editor-one">
                               <div class="btn-group">
