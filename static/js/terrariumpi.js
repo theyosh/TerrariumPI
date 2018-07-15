@@ -1592,11 +1592,21 @@ function update_dashboard_environment(name, data) {
     systempart.find('h4 small span.sensor').show();
   }
 
+  // Hide power state when there are no power switches enabled
+  var power_switches = false;
+  if (data.config.alarm_min !== undefined && data.config.alarm_min.powerswitches !== undefined) {
+    power_switches = power_switches || data.config.alarm_min.powerswitches.length > 0;
+  }
+  if (data.config.alarm_max !== undefined && data.config.alarm_max.powerswitches !== undefined) {
+    power_switches = power_switches || data.config.alarm_max.powerswitches.length > 0;
+  }
+  systempart.find('td.state').parent().toggle(power_switches);
+
   $.each(data, function(key, value) {
     switch (key) {
       case 'state':
         // Find all i elements withing the .state table row. Hide them all, then filter the enabled one and show that. Then go up and show the complete state table row... Nice!
-        systempart.find('.state i').hide().filter('.' + (value ? 'green' : 'red')).show().parent().parent().toggle(true);
+        if (power_switches) systempart.find('.state i').hide().filter('.' + (value ? 'green' : 'red')).show().parent().parent().toggle(true);
         break;
 
       case 'alarm':
