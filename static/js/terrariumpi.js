@@ -1141,7 +1141,7 @@ function history_graph(name, data, type) {
             break;
 
           case 'light':
-            val = formatNumber(val) + '';
+            val = formatNumber(val) + ' %';
             break;
 
           case 'uva':

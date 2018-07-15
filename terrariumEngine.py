@@ -47,7 +47,7 @@ class terrariumEngine(object):
                     'moisture'    : '%',
                     'conductivity': 'mS',
                     'ph'          : 'Ph',
-                    'light'       :  '',
+                    'light'       :  '%',
                     'uva'         : 'uWcm^2',
                     'uvb'         : 'uWcm^2'}
 
