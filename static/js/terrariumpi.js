@@ -1256,7 +1256,17 @@ function history_graph(name, data, type) {
       }, {
         label: '{{_('Water flow in L/m')}}',
         data: data.water_flow,
+	yaxis: 2
       }];
+
+      graph_options.xaxes = [jQuery.extend(true, {}, graph_options.xaxes)];
+
+      var yaxis2 = jQuery.extend(true, {}, graph_options.yaxes);
+      yaxis2.alignTicksWithAxis = 1;
+      yaxis2.position = 'right';
+      yaxis2.tickFormatter = function(val, axis) { return val.toFixed(axis.tickDecimals) + " L/m";}
+
+      graph_options.yaxes = [jQuery.extend(true, {}, graph_options.yaxes),yaxis2];
       break;
 
     case 'door':
@@ -1276,6 +1286,14 @@ function history_graph(name, data, type) {
 
   if (graph_data[0].data != undefined && graph_data[0].data.length > 0) {
     var total_data_duration = (graph_data[0].data[graph_data[0].data.length - 1][0] - graph_data[0].data[0][0]) / 3600000;
+/*
+    if (type == 'switch') {
+      console.log(graph_options.xaxis);
+      graph_options.xaxis[0].tickSize[0] = Math.round(total_data_duration * 2.5);
+    } else {
+      graph_options.xaxis.tickSize[0] = Math.round(total_data_duration * 2.5);
+    }
+*/
     graph_options.xaxis.tickSize[0] = Math.round(total_data_duration * 2.5);
   }
 
