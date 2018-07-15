@@ -385,7 +385,7 @@ class terrariumCollector(object):
                  LEFT JOIN switch_data AS t2
                  ON t2.id = t1.id
                  AND t2.timestamp = (SELECT MIN(timestamp) FROM switch_data WHERE timestamp > t1.timestamp AND id = t1.id) )
-              WHERE timestamp >= (SELECT MAX(timestamp) AS timelimit FROM door_data AS ttable WHERE ttable.id = id AND ttable.timestamp < ?)
+              WHERE timestamp >= IFNULL((SELECT MAX(timestamp) AS timelimit FROM door_data AS ttable WHERE ttable.id = id AND ttable.timestamp < ?),0)
               AND   timestamp <= ?'''
 
       if len(parameters) > 0 and parameters[0] is not None:
@@ -405,7 +405,7 @@ class terrariumCollector(object):
                  ON t2.id = t1.id
                  AND t1.state != t2.state
                  AND t2.timestamp = (SELECT MIN(timestamp) FROM door_data WHERE timestamp > t1.timestamp AND id = t1.id) )
-              WHERE timestamp >= (SELECT MAX(timestamp) AS timelimit FROM door_data AS ttable WHERE ttable.id = id AND ttable.timestamp < ?)
+              WHERE timestamp >= IFNULL((SELECT MAX(timestamp) AS timelimit FROM door_data AS ttable WHERE ttable.id = id AND ttable.timestamp < ?),0)
               AND   timestamp <= ?'''
 
       if len(parameters) > 0 and parameters[0] is not None:
