@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.8.1\n"
-"POT-Creation-Date: 2018-07-12 18:34+CEST\n"
+"POT-Creation-Date: 2018-07-17 21:19+CEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,16 +15,16 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: terrariumEngine.py:453 views/dashboard.tpl:7
+#: terrariumEngine.py:454 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
 msgid "Uptime"
 msgstr ""
 
-#: terrariumEngine.py:454
+#: terrariumEngine.py:455
 msgid "Load"
 msgstr ""
 
-#: terrariumEngine.py:455
+#: terrariumEngine.py:456
 msgid "CPU Temp."
 msgstr ""
 
