@@ -2,6 +2,47 @@ Changelog
 =========
 
 
+3.8.2 (2018-07-17)
+------------------
+
+**New**
+------
+- Add engine error counter and warning. [theyosh]
+- Add dual axis support in powerswitch graphs. [TheYOSH]
+- Add Chirp calibration translations. [theyosh]
+- Add support for Chirp calibration. [theyosh]
+- Add support for UVA and UVB sensors using VEML6075 sensors. [#90](https://github.com/theyosh/TerrariumPI/issues/90).
+  [theyosh]
+- Add diplay toggle for notification messages and more display
+  finetuning in showing messages. [theyosh]
+
+**Fixes**
+------
+- Fix powerswitch and door yearly graphs. [TheYOSH]
+- Fix sensor pages. [#90](https://github.com/theyosh/TerrariumPI/issues/90). [theyosh]
+- Fix typo. [theyosh]
+- Fix Collector upgrades. [theyosh]
+
+**Updates**
+------
+- Update version number. [theyosh]
+- Update translations. [theyosh]
+- Update README.md. [TheYOSH]
+
+**Other**
+------
+- Only load dashboard average and graphs for used sensors. [theyosh]
+- Display normal light in % strength. [TheYOSH]
+- Hide power status for environment parts that do not have power
+  switches configured. [TheYOSH]
+- Finetune profile page. [theyosh]
+- Finetune profile page. [theyosh]
+- Finetune profile page. [theyosh]
+- Cleanup. [theyosh]
+- Finetuning power switch timer icon. [theyosh]
+- Trying to speed things up... [theyosh]
+
+
 3.8.1 (2018-07-10)
 ------------------
 
@@ -18,6 +59,7 @@ Changelog
 
 **Updates**
 ------
+- Update changelog. [theyosh]
 - Update version. [theyosh]
 - Update README.md. [TheYOSH]
 - Update data gaphing and finetuning SQL. [theyosh]
