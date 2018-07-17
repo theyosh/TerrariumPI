@@ -832,14 +832,14 @@
               $.each(json_data.sensors,function(index,sensor_data){
                 if ($('div#' + sensor_data.type + ':hidden')) {
                   $('div#' + sensor_data.type).show();
+
+                  var sensortype = sensor_data.type.replace('average_','');
+                  sensor_gauge(sensor_data.type, sensor_data);
+                  load_history_graph(sensor_data.type,sensortype,'/api/history/sensors/average/' + sensortype);
                 }
-                var sensortype = sensor_data.type.replace('average_','');
-                sensor_gauge(sensor_data.type, sensor_data);
-                load_history_graph(sensor_data.type,sensortype,'/api/history/sensors/average/' + sensortype);
               });
               reload_reload_theme();
             });
-
             websocket_message({
               'type': 'show_dashboard'
             });
