@@ -391,6 +391,7 @@ class terrariumEngine(object):
 
   def __engine_loop(self):
     time_short = 0
+    error_counter = 0
     logger.info('Start terrariumPI engine')
     while self.__running:
       starttime = time.time()
@@ -462,10 +463,16 @@ class terrariumEngine(object):
 
       duration = (time.time() - starttime) + time_short
       if duration < terrariumEngine.LOOP_TIMEOUT:
+        if error_counter > 0:
+          error_counter -= 1
         logger.info('Update done in %.5f seconds. Waiting for %.5f seconds for next update' % (duration,terrariumEngine.LOOP_TIMEOUT - duration))
         time_short = 0
         sleep(terrariumEngine.LOOP_TIMEOUT - duration) # TODO: Config setting
       else:
+        error_counter += 1
+        if error_counter > 9:
+          logger.error('Updating is having problems keeping up. Could not update in 30 seconds for %s times!' % error_counter)
+
         logger.warning('Updating took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEngine.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
         time_short = duration - terrariumEngine.LOOP_TIMEOUT
         if time_short > 12:
