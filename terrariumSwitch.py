@@ -291,6 +291,7 @@ class terrariumSwitch(object):
   def timer(self):
     if self.get_timer_enabled():
       logger.debug('Checking timer time table for switch %s with %s entries.', self.get_name(),len(self.__timer_time_table))
+
       switch_state = terrariumUtils.is_time(self.__timer_time_table)
 
       logmessage = 'State not changed.'
