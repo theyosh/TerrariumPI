@@ -6,7 +6,7 @@ For humidity control there is support for a spraying system. The sprayer can be 
 The software is that flexible that there is no limit in amount of sensors, relay boards or door sensors. The usage can be endless. All power switches have support for timers to trigger based on a time pattern.
 
 Think off:
-- Terrarium (wet of dry)
+- Terrarium (wet or dry)
 - Aquarium
 - Tanks with animals or plants
 - Growhouse
