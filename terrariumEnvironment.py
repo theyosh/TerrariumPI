@@ -293,10 +293,10 @@ class terrariumEnvironmentPart(object):
     return alarm
 
   def is_time_min(self):
-    return terrariumUtils.is_time(self.timer_min_data['time_table'])
+    return terrariumUtils.is_true(terrariumUtils.is_time(self.timer_min_data['time_table']))
 
   def is_time_max(self):
-    return terrariumUtils.is_time(self.timer_max_data['time_table'])
+    return terrariumUtils.is_true(terrariumUtils.is_time(self.timer_max_data['time_table']))
 
   def get_mode(self):
     return self.config['mode']

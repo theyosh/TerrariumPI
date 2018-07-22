@@ -222,7 +222,7 @@ class terrariumUtils():
         return False
 
     #End of time_table. No data to decide for today
-    return False
+    return None
 
   @staticmethod
   def duration(time_table):
