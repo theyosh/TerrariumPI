@@ -8,7 +8,7 @@ var globals = {
   gauges: [],
   webcams: [],
   graphs: {},
-  graph_cache: 5 * 60,
+  graph_cache: 1 * 60,
   websocket_timer: null,
   online_timer: null,
   current_version: null,
@@ -1017,7 +1017,7 @@ function load_history_graph(id,type,data_url,nocache) {
       clearTimeout(globals.graphs[id].timer);
       globals.graphs[id].timer = setTimeout(function() {
           load_history_graph(id,type,data_url);
-      }, 1 * 60 * 1000);
+      }, globals.graph_cache * 1000);
 
     } else {
       // Load fresh data...
@@ -1033,7 +1033,7 @@ function load_history_graph(id,type,data_url,nocache) {
         clearTimeout(globals.graphs[id].timer);
         globals.graphs[id].timer = setTimeout(function() {
           load_history_graph(id,type,data_url);
-        }, 1 * 60 * 1000);
+        }, globals.graph_cache * 1000);
       });
     }
 
