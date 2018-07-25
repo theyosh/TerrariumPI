@@ -14,6 +14,7 @@ import os.path
 import shutil
 import glob
 import re
+import thread
 
 from picamera import PiCamera, PiCameraError
 from io import BytesIO
@@ -364,7 +365,7 @@ class terrariumWebcam(object):
     files.sort(key=os.path.getmtime,reverse = True)
     return files
 
-  def update(self):
+  def __update(self):
     starttime = time.time()
     if self.last_update is None or (int(starttime) - self.get_last_update()) > terrariumWebcam.UPDATE_TIMEOUT:
       logger.debug('Updating webcam \'%s\' at location %s' % (self.get_name(), self.get_location(),))
@@ -372,6 +373,9 @@ class terrariumWebcam(object):
       if self.get_state() == 'online':
         self.__tile_image()
       logger.info('Done updating webcam \'%s\' at location %s in %.5f seconds' % (self.get_name(), self.get_location(),time.time()-starttime))
+
+  def update(self):
+    thread.start_new_thread(self.__update, ())
 
   def get_data(self,archive = False):
     data = {'id': self.get_id(),
