@@ -1144,6 +1144,10 @@ function history_graph(name, data, type) {
             val = formatNumber(val) + ' %';
             break;
 
+          case 'fertility':
+            val = formatNumber(val) + ' µS/cm';
+            break;
+
           case 'uva':
           case 'uvb':
             val = formatNumber(val) + 'µWcm^2';
@@ -1168,6 +1172,7 @@ function history_graph(name, data, type) {
     case 'light':
     case 'uva':
     case 'uvb':
+    case 'fertility':
       graph_data = [{
         label: '{{_('Current')}}',
         data: data.current
@@ -1256,7 +1261,7 @@ function history_graph(name, data, type) {
       }, {
         label: '{{_('Water flow in L/m')}}',
         data: data.water_flow,
-	yaxis: 2
+        yaxis: 2
       }];
 
       graph_options.xaxes = [jQuery.extend(true, {}, graph_options.xaxes)];
@@ -1731,6 +1736,10 @@ function update_sensor(data) {
   content_row.find('h2').hide().filter('.' + data.type).show();
   // Update title
   content_row.find('h2 span.title').text(data.name);
+  if ('miflora' == data.hardwaretype) {
+    content_row.find('h2 span.title').append(' <span class="small">' + data.firmware + ' <i class="fa fa-plug"></i>' + data.battery + '%</span>')
+  }
+
   // Set the values only when empty
   content_row.find('input:not(.knob), select').each(function(counter,item) {
     if (item.name !== undefined && item.name !== '') {
@@ -1758,6 +1767,9 @@ function update_sensor(data) {
     // Remove dimmer row, else form submit is 'stuck' on hidden fields that have invalid patterns... :(
     content_row.find('.row.chirp_calibration').remove();
   }
+
+
+
 }
 
 function add_sensor_setting_row(data) {
