@@ -161,9 +161,6 @@ class terrariumOWFSSensor(object):
 
   def __exit__(self, type, value, traceback):
     """with support"""
-    self.__sensor = None
-    self.__temperature = None
-    self.__humidity = None
 
   def get_temperature(self):
     self.__get_raw_data()
