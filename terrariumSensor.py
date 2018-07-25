@@ -13,6 +13,7 @@ from hashlib import md5
 
 from terrariumUtils import terrariumUtils
 from terrariumAnalogSensor import terrariumSKUSEN0161Sensor
+from terrariumBluetoothSensor import terrariumMiFloraSensor
 from terrariumGPIOSensor import terrariumYTXXSensorDigital, terrariumDHT11Sensor, terrariumDHT22Sensor, terrariumAM2302Sensor, terrariumHCSR04Sensor
 from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor
 
@@ -172,7 +173,7 @@ class terrariumSensor(object):
   UPDATE_TIMEOUT = 30
   ERROR_TIMEOUT = 10
 
-  VALID_SENSOR_TYPES   = ['temperature','humidity','moisture','conductivity','distance','ph','light','uva','uvb']
+  VALID_SENSOR_TYPES   = ['temperature','humidity','moisture','conductivity','distance','ph','light','uva','uvb','fertility']
   VALID_HARDWARE_TYPES = []
 
   # Append OWFS to the list of valid sensors
@@ -206,8 +207,14 @@ class terrariumSensor(object):
   # Appand analog sensor(s) to the list of valid sensors
   VALID_HARDWARE_TYPES.append(terrariumSKUSEN0161Sensor.hardwaretype)
 
+  # Appand analog sensor(s) to the list of valid sensors
+  VALID_HARDWARE_TYPES.append(terrariumMiFloraSensor.hardwaretype)
+
   def __init__(self, id, hardware_type, sensor_type, sensor, name = '', callback_indicator = None):
     self.id = id
+
+    self.__miflora_firmware = None
+    self.__miflora_battery = None
 
     self.notification = True
 
@@ -256,6 +263,14 @@ class terrariumSensor(object):
                                          'w1',
                                          w1type,
                                          w1sensor,
+                                         callback_indicator=unit_indicator))
+
+    # Scanning bluetooth devices
+    for (sensor,sensortype) in terrariumMiFloraSensor.scan():
+      sensor_list.append(terrariumSensor(None,
+                                         terrariumMiFloraSensor.hardwaretype,
+                                         sensortype,
+                                         sensor,
                                          callback_indicator=unit_indicator))
 
     logger.info('Found %d temperature/humidity sensors in %.5f seconds' % (len(sensor_list),time.time() - starttime))
@@ -314,6 +329,11 @@ class terrariumSensor(object):
         elif terrariumHCSR04Sensor.hardwaretype == self.get_hardware_type():
           hardwaresensor = terrariumHCSR04Sensor(address[0],address[1],address[2])
 
+        elif terrariumMiFloraSensor.hardwaretype == self.get_hardware_type():
+          hardwaresensor = terrariumMiFloraSensor(address[0])
+          self.__miflora_firmware = hardwaresensor.get_firmware()
+          self.__miflora_battery = hardwaresensor.get_battery()
+
         if hardwaresensor is not None:
           with hardwaresensor as sensor:
             if 'temperature' == self.get_type():
@@ -334,6 +354,8 @@ class terrariumSensor(object):
               current = sensor.get_uva()
             elif 'uvb' == self.get_type():
               current = sensor.get_uvb()
+            elif 'fertility' == self.get_type():
+              current = sensor.get_fertility()
 
           del hardwaresensor
 
@@ -386,6 +408,10 @@ class terrariumSensor(object):
       data['min_moist'] = self.get_min_moist_calibration()
       data['max_moist'] = self.get_max_moist_calibration()
       data['temp_offset'] = self.get_temperature_offset_calibration()
+
+    if 'miflora' == self.get_hardware_type():
+      data['firmware'] = self.__miflora_firmware
+      data['battery'] = self.__miflora_battery
 
     return data
 

@@ -59,6 +59,9 @@
                       <a href="sensor_light.html">{{_('Light')}}</a>
                     </li>
                     <li>
+                      <a href="sensor_fertility.html">{{_('Fertility')}}</a>
+                    </li>
+                    <li>
                       <a href="sensor_settings.html">{{_('Settings')}}</a>
                     </li>
                   </ul>

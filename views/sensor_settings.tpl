@@ -78,6 +78,7 @@
                         <h2 class="distance" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-signal"></span> {{_('Distance sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <h2 class="ph" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-scale"></span> {{_('pH sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <h2 class="light uva uvb" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-adjust"></span> {{_('Light sensor')}} <span class="title">{{_('new')}}</span></h2>
+                        <h2 class="fertility" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-grain"></span> {{_('Fertility sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <ul class="nav navbar-right panel_toolbox">
                           <li>
                             <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -110,6 +111,7 @@
                                 <option value="hc-sr04">{{_('HC-SR04')}}</option>
                                 <option value="sku-sen0161">{{_('pH SKU-SEN0161')}}</option>
                                 <option value="veml6075">{{_('VEML6075')}}</option>
+                                <option value="miflora">{{_('MiFlora')}}</option>
                               </select>
                             </div>
                           </div>
@@ -132,6 +134,7 @@
                                 <option value="light">{{_('Light')}}</option>
                                 <option value="uva">{{_('UVA')}}</option>
                                 <option value="uvb">{{_('UVB')}}</option>
+                                <option value="fertility">{{_('Fertility')}}</option>
                               </select>
                             </div>
                           </div>
@@ -160,7 +163,6 @@
                             <input class="form-control" name="sensor_[nr]_current" placeholder="{{_('Current')}}" readonly="readonly" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_current')}}">
                           </div>
                         </div>
-
                         <div class="row chirp_calibration" style="display:none;">
                           <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                             <label for="sensor_[nr]_min_moist">{{_('Min moist value')}}</label>
@@ -174,9 +176,7 @@
                             <label for="sensor_[nr]_temperature_offset">{{_('Temperature offset')}}</label>
                             <input class="form-control" name="sensor_[nr]_temp_offset" placeholder="{{_('Temperature offset')}}" required="required" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_temperature_offset')}}">
                           </div>
-
                         </div>
-
                       </div>
                     </div>
                   </div>
