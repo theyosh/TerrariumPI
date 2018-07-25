@@ -100,10 +100,11 @@ class terrariumMiFloraSensor(object):
   @staticmethod
   def scan():
     SCANTIME = 5
+    MIN_DB = -90
     logger.info('Scanning %s seconds for MiFlora bluetooth devices' % SCANTIME)
 
     for device in Scanner().scan(SCANTIME):
-      if device.getValueText(9).lower() in ['flower mate','flower care']:
+      if device.rssi > MIN_DB and device.getValueText(9).lower() in ['flower mate','flower care']:
         address = device.addr
         device = None
         logger.info('Found MiFlora bluetooth device at address %s' % address)

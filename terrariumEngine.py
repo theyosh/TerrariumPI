@@ -48,8 +48,8 @@ class terrariumEngine(object):
                     'conductivity': 'mS',
                     'ph'          : 'Ph',
                     'light'       :  '%',
-                    'uva'         : 'uWcm^2',
-                    'uvb'         : 'uWcm^2',
+                    'uva'         : 'uW/cm^2',
+                    'uvb'         : 'uW/cm^2',
                     'fertility'   : 'uS/cm'}
 
     # List of queues for websocket communication
