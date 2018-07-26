@@ -157,11 +157,15 @@ class terrariumMiFloraSensor(object):
     MIN_DB = -90
     logger.info('Scanning %s seconds for MiFlora bluetooth devices' % SCANTIME)
 
-    for device in Scanner().scan(SCANTIME):
-      if device.rssi > MIN_DB and device.getValueText(9).lower() in ['flower mate','flower care']:
-        address = device.addr
-        device = None
-        logger.info('Found MiFlora bluetooth device at address %s' % address)
-        yield (address,'temperature')
-        yield (address,'moisture')
-        yield (address,'fertility')
+    try:
+      for device in Scanner().scan(SCANTIME):
+        if device.rssi > MIN_DB and device.getValueText(9).lower() in ['flower mate','flower care']:
+          address = device.addr
+          device = None
+          logger.info('Found MiFlora bluetooth device at address %s' % address)
+          yield (address,'temperature')
+          yield (address,'moisture')
+          yield (address,'fertility')
+    except Exception, ex:
+      logger.error('Bluetooth scanning is not enabled for normal users.... scanning is disabled!')
+      print ex
