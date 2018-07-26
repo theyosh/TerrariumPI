@@ -167,5 +167,5 @@ class terrariumMiFloraSensor(object):
           yield (address,'moisture')
           yield (address,'fertility')
     except Exception, ex:
-      logger.error('Bluetooth scanning is not enabled for normal users.... scanning is disabled!')
+      logger.warning('Bluetooth scanning is not enabled for normal users or there zero Bluetooth LE device available.... bluetooth is disabled!')
       print ex
