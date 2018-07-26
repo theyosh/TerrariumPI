@@ -148,6 +148,8 @@ This software requires a Raspberry Pi and some extra hardware in order to run an
   - 1 Wire interface
   - MCP3008 ([RasPiO Analog Zero](https://github.com/raspitv/analogzero))
   
+[Full list of supported hardware](https://github.com/theyosh/TerrariumPI/wiki/Hardware)
+  
 ### GPIO numbering
 All hardware that connects to the GPIO pins use **Physical GPIO numbering** (1 - 40). The software will translate it to BCM if needed for a supported device or sensor. [More information about GPIO pin numbering](https://pinout.xyz/)
 
