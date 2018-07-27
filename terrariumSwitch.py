@@ -245,17 +245,20 @@ class terrariumSwitch(object):
 
             logger.debug('Change remote Energenie LAN power switch nr %s to state %s' % (address,state))
 
-            webstatus = self.device.getstatus()
-            if webstatus['login'] == 1:
-              logger.debug('Logged in at remote Energenie LAN power switch  %s' % (self.sensor_address,))
-              if self.device.login():
-                webstatus = self.device.getstatus()
+            try:
+              webstatus = self.device.getstatus()
+              if webstatus['login'] == 1:
+                logger.debug('Logged in at remote Energenie LAN power switch  %s' % (self.sensor_address,))
+                if self.device.login():
+                  webstatus = self.device.getstatus()
 
-            if webstatus['login'] == 0:
-              self.device.changesocket(address, ( 1 if state is terrariumSwitch.ON else 0 ))
-              self.device.logout()
-            else:
-              logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.sensor_address,webstatus['logintxt'],webstatus['login']))
+              if webstatus['login'] == 0:
+                self.device.changesocket(address, ( 1 if state is terrariumSwitch.ON else 0 ))
+                self.device.logout()
+              else:
+                logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.sensor_address,webstatus['logintxt'],webstatus['login']))
+            except Exception, ex:
+              logger.exception('Could not login to the Energenie LAN device %s at location %s. Error status %s' % (self.get_name(),self.sensor_address,ex))
 
       elif self.get_hardware_type() == 'gpio':
         GPIO.output(terrariumUtils.to_BCM_port_number(self.get_address()), ( GPIO.HIGH if state is terrariumSwitch.ON else GPIO.LOW ))
