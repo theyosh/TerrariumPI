@@ -151,7 +151,7 @@ class terrariumNotificationTelegramBot(object):
     last_update_id = None
 
     error_counter = 0
-    while self.__running and error_counter < 3:
+    while self.__running and error_counter < 5:
       try:
         updates = self.__get_updates(last_update_id)
         if error_counter > 0:
