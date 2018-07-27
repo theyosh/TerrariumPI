@@ -2,6 +2,66 @@ Changelog
 =========
 
 
+3.8.3 (2018-07-27)
+------------------
+
+**New**
+------
+- Add extra random genertor for cryptographic actions. [theyosh]
+- Add sensor data caching for sensors with multiple sensor types. Should
+  speedup the engine. [theyosh]
+- Add MiFlora support. Missing light support for now in favour of Chirp.
+  [theyosh]
+
+**Fixes**
+------
+- Fix timers with zero on and off durations. [theyosh]
+- Another startup fix. [theyosh]
+- Fix remote power switch code when not reachable during startup.
+  Referenced to [#175](https://github.com/theyosh/TerrariumPI/issues/175). [theyosh]
+- Fix mailserver quit action when mail sending has failed due to not
+  initialized random generator. [#175](https://github.com/theyosh/TerrariumPI/issues/175). [theyosh]
+- Fix total water usage in power switch graphs. [theyosh]
+- Fix bluetooth scanning when rights are not correct somehow... [#175](https://github.com/theyosh/TerrariumPI/issues/175).
+  [theyosh]
+- Fix OWFS sensors caching. [theyosh]
+- Fix typo. [TheYOSH]
+- Fix updating power switch timer data. [#171](https://github.com/theyosh/TerrariumPI/issues/171). [theyosh]
+
+**Updates**
+------
+- Update README.md. [TheYOSH]
+- Update version number. [theyosh]
+- Update light sensors to use LUX value as default. This means that
+  Chirp light sensors are not used for average calculation and should
+  also not being used in the environment settings. Average light values
+  will only be calculated from LUX enabled light sensors. [#156](https://github.com/theyosh/TerrariumPI/issues/156).
+  [theyosh]
+- Update README.md. [TheYOSH]
+- Small update graphs. [theyosh]
+- Update German translations. Thanks to [@Barbara1984.](https://github.com/Barbara1984.) Close [#174](https://github.com/theyosh/TerrariumPI/issues/174).
+  [theyosh]
+- Update webcam to use a thread for updating for speeding up the engine.
+  Add minimal signal strength for MiFlora [#156](https://github.com/theyosh/TerrariumPI/issues/156). [theyosh]
+- Update graphs once every minute. [theyosh]
+- Update submodules. [theyosh]
+
+**Other**
+------
+- Swap UVA and UVB colors. [theyosh]
+- Increase Telegambot retries. Is needed for SSL issues during startups
+  after reboot. [theyosh]
+- Make timers with zero on and off duration period run for the whole
+  period. [theyosh]
+- Better logging in the TerrariumUtils class. [theyosh]
+- Better error message. [theyosh]
+- Merge branch 'master' of ssh://github.com/theyosh/TerrariumPI.
+  [theyosh]
+- Merge branch 'sensor_caching' [theyosh]
+- Merge branch 'master' of ssh://github.com/theyosh/TerrariumPI.
+  [theyosh]
+
+
 3.8.2 (2018-07-17)
 ------------------
 
@@ -25,6 +85,7 @@ Changelog
 
 **Updates**
 ------
+- Update changelog. [theyosh]
 - Update version number. [theyosh]
 - Update translations. [theyosh]
 - Update README.md. [TheYOSH]
