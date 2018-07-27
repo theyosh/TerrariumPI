@@ -194,7 +194,7 @@ class terrariumUtils():
       starttime += datetime.timedelta(hours=24)
       stoptime += datetime.timedelta(hours=24)
 
-    if on_duration is None and off_duration is None:
+    if (on_duration is None and off_duration is None) or (0 == on_duration and 0 == off_duration):
       # Only start and stop time. No periods
       timer_time_table.append((int(starttime.strftime('%s')),int(stoptime.strftime('%s'))))
     elif on_duration is not None and off_duration is None:
