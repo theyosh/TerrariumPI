@@ -315,7 +315,7 @@ class terrariumCollector(object):
   def log_system_data(self, data):
     self.__log_data('system',None,data)
 
-  def get_history(self, parameters = [], starttime = None, stoptime = None):
+  def get_history(self, parameters = [], starttime = None, stoptime = None, exclude_ids = None):
     # Default return object
     timer = time.time()
     history = {}
@@ -353,6 +353,9 @@ class terrariumCollector(object):
         for field in fields:
           sql = sql + ', AVG(' + field + ') as ' + field
         sql = sql + ' FROM sensor_data WHERE timestamp >= ? AND timestamp <= ?'
+
+        if exclude_ids is not None:
+          sql = sql + ' AND sensor_data.id NOT IN (\'' + '\',\''.join(exclude_ids) +'\')'
 
         if len(parameters) == 2:
           sql = sql + ' AND type = ?'

@@ -245,8 +245,15 @@ class terrariumSensor(object):
     self.set_alarm_min(0)
     self.set_alarm_max(0)
     self.set_limit_min(0)
+
     # For hc-sr04 set at 10 meters else just '100' value
-    self.set_limit_max(100000 if terrariumHCSR04Sensor.hardwaretype == self.get_hardware_type() else 100)
+    if terrariumHCSR04Sensor.hardwaretype == self.get_hardware_type():
+      self.set_limit_max(100000)
+    # Lux light and fertility values
+    elif 'light' == self.get_type() or 'fertility' == self.get_type():
+      self.set_limit_max(5000)
+    else :
+      self.set_limit_max(100)
 
     # Set custom Chirp calibration values to default
     if 'chirp' == self.get_hardware_type():

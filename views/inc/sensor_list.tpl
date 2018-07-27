@@ -82,7 +82,7 @@
                   add_sensor_status_row(sensor_data);
                   update_sensor(sensor_data);
                   sensor_gauge('sensor_' + sensor_data.id, sensor_data);
-                  load_history_graph('sensor_' + sensor_data.id,sensor_type,'/api/history/sensors/' + sensor_data.id);
+                  load_history_graph('sensor_' + sensor_data.id,sensor_type + (sensor_type == 'light' && sensor_data.firmware === undefined ? '_percentage' : '') ,'/api/history/sensors/' + sensor_data.id);
                 });
                 $('div.row.jumbotron').toggle($('div.row.sensor:visible').length == 0);
                 reload_reload_theme();
