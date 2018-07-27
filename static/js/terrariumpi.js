@@ -1218,7 +1218,7 @@ function history_graph(name, data, type) {
           yaxis: 2
         }];
 
-        graph_options.colors = ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 206, 0.38)", "rgba(3, 88, 106, 0.38)"]
+        graph_options.colors = ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)", "rgba(3, 88, 206, 0.38)"]
         graph_options.xaxes = [jQuery.extend(true, {}, graph_options.xaxes)];
 
         var yaxis2 = jQuery.extend(true, {}, graph_options.yaxes);
