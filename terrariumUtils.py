@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import terrariumLogging
+logger = terrariumLogging.logging.getLogger(__name__)
+
 import re
 import datetime
 import requests
@@ -130,9 +133,8 @@ class terrariumUtils():
       try:
         value = value.split(':')
         time = "{:0>2}:{:0>2}".format(int(value[0])%24,int(value[1])%60)
-      except Exception, err:
-        print 'Error in terrariumUtils.parse_time'
-        print err
+      except Exception, ex:
+        logger.exception('Error parsing time value %s. Exception %s' % (value, ex))
 
     return time
 
@@ -163,7 +165,7 @@ class terrariumUtils():
         data = None
 
     except Exception, ex:
-      print ex
+      logger.exception('Error parsing remote data at url %s. Exception %s' % (url, ex))
 
     return data
 
