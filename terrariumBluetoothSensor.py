@@ -165,6 +165,7 @@ class terrariumMiFloraSensor(object):
           logger.info('Found MiFlora bluetooth device at address %s' % address)
           yield (address,'temperature')
           yield (address,'moisture')
+          yield (address,'light')
           yield (address,'fertility')
     except Exception, ex:
       logger.warning('Bluetooth scanning is not enabled for normal users or there zero Bluetooth LE device available.... bluetooth is disabled!')

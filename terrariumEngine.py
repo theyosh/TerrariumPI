@@ -47,7 +47,7 @@ class terrariumEngine(object):
                     'moisture'    : '%',
                     'conductivity': 'mS',
                     'ph'          : 'Ph',
-                    'light'       :  '%',
+                    'light'       : 'lux',
                     'uva'         : 'uW/cm^2',
                     'uvb'         : 'uW/cm^2',
                     'fertility'   : 'uS/cm'}
@@ -554,7 +554,8 @@ class terrariumEngine(object):
     else:
       for sensorid in self.sensors:
         # Filter based on sensor type
-        if filtertype is None or filtertype == 'average' or filtertype == self.sensors[sensorid].get_type():
+        # Exclude Chirp light sensors for average calculation in favour of Lux measurements
+        if filtertype is None or (filtertype == 'average' and not (self.sensors[sensorid].get_type() == 'light' and self.sensors[sensorid].get_hardware_type() == 'chirp')) or filtertype == self.sensors[sensorid].get_type():
           data.append(self.sensors[sensorid].get_data())
 
     if 'average' == filtertype or len(parameters) == 2 and parameters[1] == 'average':
@@ -1080,7 +1081,15 @@ class terrariumEngine(object):
     if len(parameters) == 0:
       data = {'history' : 'ERROR, select a history type'}
     else:
-      data = self.collector.get_history(parameters)
+      exclude_ids = None
+      # We exclude Chirp light sensors for average calculations as they are less reliable
+      if 'sensors' in parameters and 'average' in parameters and 'light' in parameters:
+        exclude_ids = []
+        for sensorid in self.sensors:
+          if 'chirp' == self.sensors[sensorid].get_hardware_type() and 'light' == self.sensors[sensorid].get_type():
+            exclude_ids.append(self.sensors[sensorid].get_id())
+
+      data = self.collector.get_history(parameters=parameters,exclude_ids=exclude_ids)
 
     if socket:
       self.__send_message({'type':'history_graph','data': data})

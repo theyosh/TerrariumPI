@@ -956,6 +956,11 @@ function sensor_gauge(name, data) {
     if (name == 'system_load') {
       data.current /= data.cores;
     }
+    // Chirp light sensor is based on backscattering and is not able to produce LUX values
+    if ('light' == data.type && 'chirp' == data.hardwaretype) {
+      data.indicator = '%';
+    }
+
     $('#' + name + ' .gauge-indicator').text(data.indicator);
     globals.gauges[name].set(data.current);
     if (name == 'system_disk' || name == 'system_memory') {
@@ -1029,7 +1034,31 @@ function load_history_graph(id,type,data_url,nocache) {
           });
         });
 
-        history_graph(id, globals.graphs[id].data, type);
+        if ('light' == type && data_url.indexOf('/average/') > 0) {
+          globals.graphs[id].data.light_average = true;
+
+          $.getJSON(data_url.replace('/light','/uva'), function(online_data) {
+            $.each(online_data, function(dummy, value) {
+              $.each(value, function(dummy, data_array) {
+                globals.graphs[id].timestamp = now;
+                globals.graphs[id].data['alarm_min'] = data_array.current;
+              });
+            })
+
+            $.getJSON(data_url.replace('/light','/uvb'), function(online_data) {
+              $.each(online_data, function(dummy, value) {
+                $.each(value, function(dummy, data_array) {
+                  globals.graphs[id].timestamp = now;
+                  globals.graphs[id].data['alarm_max'] = data_array.current;
+                });
+              })
+              history_graph(id, globals.graphs[id].data, type);
+            });
+          });
+        } else {
+          history_graph(id, globals.graphs[id].data, type);
+        }
+
         clearTimeout(globals.graphs[id].timer);
         globals.graphs[id].timer = setTimeout(function() {
           load_history_graph(id,type,data_url);
@@ -1141,6 +1170,10 @@ function history_graph(name, data, type) {
             break;
 
           case 'light':
+            val = formatNumber(val) + ' lux';
+            break;
+
+          case 'light_percentage':
             val = formatNumber(val) + ' %';
             break;
 
@@ -1170,6 +1203,46 @@ function history_graph(name, data, type) {
     case 'moisture':
     case 'conductivity':
     case 'light':
+      if (data.light_average !== undefined && data.light_average) {
+
+        graph_data = [{
+          label: '{{_('Light')}}',
+          data: data.current
+        }, {
+          label: '{{_('UVA')}}',
+          data: data.alarm_min,
+          yaxis: 2
+        }, {
+          label: '{{_('UVB')}}',
+          data: data.alarm_max,
+          yaxis: 2
+        }];
+
+        graph_options.colors = ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 206, 0.38)", "rgba(3, 88, 106, 0.38)"]
+        graph_options.xaxes = [jQuery.extend(true, {}, graph_options.xaxes)];
+
+        var yaxis2 = jQuery.extend(true, {}, graph_options.yaxes);
+        yaxis2.alignTicksWithAxis = 1;
+        yaxis2.position = 'right';
+        yaxis2.tickFormatter = function(val, axis) { return val.toFixed(axis.tickDecimals) + ' µW/cm^2';}
+
+        graph_options.yaxes = [jQuery.extend(true, {}, graph_options.yaxes),yaxis2];
+
+      } else {
+        graph_data = [{
+          label: '{{_('Current')}}',
+          data: data.current
+        }, {
+          label: '{{_('Alarm min')}}',
+          data: data.alarm_min
+        }, {
+          label: '{{_('Alarm max')}}',
+          data: data.alarm_max
+        }];
+      }
+      break;
+
+    case 'light_percentage':
     case 'uva':
     case 'uvb':
     case 'fertility':
@@ -1289,8 +1362,17 @@ function history_graph(name, data, type) {
       break;
   }
 
-  if (graph_data[0].data != undefined && graph_data[0].data.length > 0) {
+  if (graph_data[0].data !== undefined && graph_data[0].data.length > 0) {
     var total_data_duration = (graph_data[0].data[graph_data[0].data.length - 1][0] - graph_data[0].data[0][0]) / 3600000;
+    if (graph_data.length > 1 && graph_data[1].data !== undefined) {
+      var new_duration = (graph_data[1].data[graph_data[1].data.length - 1][0] - graph_data[1].data[1][0]) / 3600000;
+      total_data_duration = new_duration > total_data_duration ? new_duration : total_data_duration
+    }
+    if (graph_data.length > 2 && graph_data[2].data !== undefined) {
+      var new_duration = (graph_data[2].data[graph_data[2].data.length - 1][0] - graph_data[2].data[2][0]) / 3600000;
+      total_data_duration = new_duration > total_data_duration ? new_duration : total_data_duration
+    }
+
 /*
     if (type == 'switch') {
       console.log(graph_options.xaxis);
