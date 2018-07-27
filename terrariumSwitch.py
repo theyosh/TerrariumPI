@@ -174,8 +174,7 @@ class terrariumSwitch(object):
   def __calculate_time_table(self):
     self.__timer_time_table = []
     if self.state is None or \
-       not self.get_timer_enabled() or \
-       (self.get_timer_on_duration() == 0 and self.get_timer_off_duration() == 0):
+       not self.get_timer_enabled():
 
       return False
 
