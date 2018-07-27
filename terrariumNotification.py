@@ -509,7 +509,10 @@ class terrariumNotification(object):
       except Exception, ex:
         print ex
 
-    mailserver.quit()
+    try:
+      mailserver.quit()
+    except Exception, ex:
+      pass
 
   def set_twitter(self,consumer_key,consumer_secret,access_token,access_token_secret):
     if '' != consumer_key and '' != consumer_secret and '' != access_token and '' != access_token_secret:
