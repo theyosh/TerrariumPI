@@ -406,18 +406,21 @@ class terrariumSwitch(object):
         if 'passwd' not in data:
           data['passwd'] = ''
 
-        # https://github.com/perryflynn/energenie-connect0r
-        self.device = energenieconnector.EnergenieConnector('http://' + data['host'],data['passwd'])
-        status = self.device.getstatus()
+        try:
+          # https://github.com/perryflynn/energenie-connect0r
+          self.device = energenieconnector.EnergenieConnector('http://' + data['host'],data['passwd'])
+          status = self.device.getstatus()
 
-        if status['login'] == 1:
-          if self.device.login():
-            logger.info('Connection to remote Energenie LAN \'%s\' is successfull at location %s' % (self.get_name(), self.sensor_address))
-            status = self.device.getstatus()
+          if status['login'] == 1:
+            if self.device.login():
+              logger.info('Connection to remote Energenie LAN \'%s\' is successfull at location %s' % (self.get_name(), self.sensor_address))
+              status = self.device.getstatus()
 
-        if status['login'] != 0:
-          logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.sensor_address,status['logintxt'],status['login']))
-          self.device = None
+          if status['login'] != 0:
+            logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.sensor_address,status['logintxt'],status['login']))
+            self.device = None
+        except Exception, ex:
+          logger.exception('Could not login to the Energenie LAN device %s at location %s. Error status %s' % (self.get_name(),self.sensor_address,ex))
 
     elif 'gpio' in self.get_hardware_type():
       try:
