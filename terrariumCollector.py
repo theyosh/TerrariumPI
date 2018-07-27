@@ -472,11 +472,13 @@ class terrariumCollector(object):
 
               if row['type'] in ['switches','doors'] and row['state'] > 0 and row['timestamp2'] is not None and '' != row['timestamp2']:
                 # Update totals data
-                history[row['type']][row['id']]['totals']['duration'] += (row['timestamp2'] - row['timestamp'])
+                duration = float(row['timestamp2'] - row['timestamp'])
+                history[row['type']][row['id']]['totals']['duration'] += duration
 
                 if 'switches' == row['type']:
-                  history[row['type']][row['id']]['totals']['power_wattage'] += (row['timestamp2'] - row['timestamp']) * row['power_wattage']
-                  history[row['type']][row['id']]['totals']['water_flow'] += (row['timestamp2'] - row['timestamp']) * row['water_flow']
+                  history[row['type']][row['id']]['totals']['power_wattage'] += duration * float(row['power_wattage'])
+                  # Devide by 60 to get Liters water used per minute based on seconds durations
+                  history[row['type']][row['id']]['totals']['water_flow'] += (duration / 60.0) * float(row['water_flow'])
 
               for field in fields:
                 history[row['type']][row['id']][field].append([row['timestamp'] * 1000,row[field]])
