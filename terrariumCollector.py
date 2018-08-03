@@ -380,15 +380,15 @@ class terrariumCollector(object):
                  SELECT
                    t1.id AS id,
                    t1.timestamp AS timestamp,
-                   t2.timestamp AS timestamp2,
+                   IFNULL(t2.timestamp, ''' + str(starttime) + ''') as timestamp2,
                    (t1.state / 100.0) * t1.power_wattage AS power_wattage,
                    (t1.state / 100.0) * t1.water_flow AS water_flow,
                    t1.state AS state
                  FROM switch_data AS t1
                  LEFT JOIN switch_data AS t2
                  ON t2.id = t1.id
-                 AND t2.timestamp = (SELECT MIN(timestamp) FROM switch_data WHERE timestamp > t1.timestamp AND id = t1.id) )
-              WHERE timestamp >= IFNULL((SELECT MAX(timestamp) AS timelimit FROM door_data AS ttable WHERE ttable.id = id AND ttable.timestamp < ?),0)
+                 AND t2.timestamp = (SELECT MIN(timestamp) FROM switch_data WHERE switch_data.timestamp > t1.timestamp AND switch_data.id = t1.id) )
+              WHERE timestamp2 > IFNULL((SELECT MAX(timestamp) AS timelimit FROM switch_data AS ttable WHERE ttable.id = id AND ttable.timestamp < ?),0)
               AND   timestamp <= ?'''
 
       if len(parameters) > 0 and parameters[0] is not None:
@@ -401,14 +401,13 @@ class terrariumCollector(object):
                  SELECT
                    t1.id AS id,
                    t1.timestamp AS timestamp,
-                   t2.timestamp AS timestamp2,
+                   IFNULL(t2.timestamp, ''' + str(starttime) + ''') as timestamp2,
                    t1.state AS state
                  FROM door_data AS t1
                  LEFT JOIN door_data AS t2
                  ON t2.id = t1.id
-                 AND t1.state != t2.state
-                 AND t2.timestamp = (SELECT MIN(timestamp) FROM door_data WHERE timestamp > t1.timestamp AND id = t1.id) )
-              WHERE timestamp >= IFNULL((SELECT MAX(timestamp) AS timelimit FROM door_data AS ttable WHERE ttable.id = id AND ttable.timestamp < ?),0)
+                 AND t2.timestamp = (SELECT MIN(timestamp) FROM door_data WHERE door_data.timestamp > t1.timestamp AND door_data.id = t1.id) )
+              WHERE timestamp2 > IFNULL((SELECT MAX(timestamp) AS timelimit FROM door_data AS ttable WHERE ttable.id = id AND ttable.timestamp < ?),0)
               AND   timestamp <= ?'''
 
       if len(parameters) > 0 and parameters[0] is not None:
@@ -446,9 +445,6 @@ class terrariumCollector(object):
         with self.db as db:
           cur = db.cursor()
           for row in cur.execute(sql, filters):
-            if row['type'] in ['switches','doors'] and row['timestamp2'] is not None and '' != row['timestamp2'] and row['timestamp2'] < stoptime:
-              continue
-
             if row['type'] not in history:
               history[row['type']] = {}
 
@@ -475,7 +471,7 @@ class terrariumCollector(object):
 
               if row['type'] in ['switches','doors'] and row['state'] > 0 and row['timestamp2'] is not None and '' != row['timestamp2']:
                 # Update totals data
-                duration = float(row['timestamp2'] - row['timestamp'])
+                duration = float(row['timestamp2'] - (row['timestamp'] if row['timestamp'] >= stoptime else stoptime))
                 history[row['type']][row['id']]['totals']['duration'] += duration
 
                 if 'switches' == row['type']:
@@ -484,7 +480,7 @@ class terrariumCollector(object):
                   history[row['type']][row['id']]['totals']['water_flow'] += (duration / 60.0) * float(row['water_flow'])
 
               for field in fields:
-                history[row['type']][row['id']][field].append([row['timestamp'] * 1000,row[field]])
+                history[row['type']][row['id']][field].append([ (row['timestamp'] if row['timestamp'] >= stoptime else stoptime) * 1000,row[field]])
 
                 if row['type'] in ['switches','doors'] and row['timestamp2'] is not None and '' != row['timestamp2']:
                   # Add extra point for nicer graphing of doors and power switches
@@ -497,23 +493,12 @@ class terrariumCollector(object):
           self.__recover()
 
     # In order to get nicer graphs, we are adding a start and end time based on the selected time range if needed
-    if logtype in ['switches','doors']:
-      if logtype in history:
-        for data_id in history[logtype]:
-          for field in fields:
-            # For each field, shift the first timestamp to the start of the query time
-            history[logtype][data_id][field][0][0] = stoptime * 1000
-
-            last_item  = history[logtype][data_id][field][len(history[logtype][data_id][field])-1]
-            if (last_item[0] / 1000) < starttime:
-              history[logtype][data_id][field].append([starttime * 1000 ,last_item[1]])
-
-      elif len(parameters) > 0:
-        # Create 'empty' history array if single id is requested
-        history[logtype] = {}
-        history[logtype][parameters[0]] = copy.deepcopy(fields)
-        for field in fields:
-          history[logtype][parameters[0]][field].append([stoptime  * 1000,0])
-          history[logtype][parameters[0]][field].append([starttime * 1000,0])
+    if logtype in ['switches','doors'] and logtype not in history and len(parameters) > 0:
+      # Create 'empty' history array if single id is requested
+      history[logtype] = {}
+      history[logtype][parameters[0]] = copy.deepcopy(fields)
+      for field in fields:
+        history[logtype][parameters[0]][field].append([stoptime  * 1000,0])
+        history[logtype][parameters[0]][field].append([starttime * 1000,0])
 
     return history
