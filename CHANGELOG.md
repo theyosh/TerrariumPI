@@ -2,6 +2,32 @@ Changelog
 =========
 
 
+3.8.4 (2018-07-04)
+------------------
+
+**Fixes**
+------
+- Fix date calendar at profile editing page. [theyosh]
+- Fix installer when updating with git. [theyosh]
+- Small JS fix for empty graphs. [theyosh]
+- Fix dashboard duration information for power and water usage.
+  [theyosh]
+- Finally fixed door and powerswitches graphs. [TheYOSH]
+
+**Updates**
+------
+- Update version number. [theyosh]
+- Update translation files. [theyosh]
+- Update translation files. [theyosh]
+- Update translation files. [theyosh]
+
+**Other**
+------
+- Partly done Dutch translation. [theyosh]
+- Change settings page for better UX. [theyosh]
+- Set default weather location to somewhere in Madagascar. [theyosh]
+
+
 3.8.3 (2018-07-27)
 ------------------
 
@@ -30,6 +56,7 @@ Changelog
 
 **Updates**
 ------
+- Update changelog. [theyosh]
 - Update README.md. [TheYOSH]
 - Update version number. [theyosh]
 - Update light sensors to use LUX value as default. This means that
