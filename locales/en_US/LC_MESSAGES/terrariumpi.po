@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.8.3\n"
-"POT-Creation-Date: 2018-08-04 15:06+CEST\n"
-"PO-Revision-Date: 2018-08-04 15:06+0200\n"
+"POT-Creation-Date: 2018-08-04 16:01+CEST\n"
+"PO-Revision-Date: 2018-08-04 16:01+0200\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -3062,10 +3062,6 @@ msgstr "Sensors overview screenshot"
 #: Missing text string
 msgid "Server could not process the upload. Error code {{statusCode}}"
 msgstr "Server could not process the upload. Error code {{statusCode}}"
-
-#: Missing text string
-msgid "SMTP userame"
-msgstr "SMTP userame"
 
 #: Missing text string
 msgid "Switches overview screenshot"
