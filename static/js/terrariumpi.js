@@ -1364,12 +1364,13 @@ function history_graph(name, data, type) {
 
   if (graph_data[0].data !== undefined && graph_data[0].data.length > 0) {
     var total_data_duration = (graph_data[0].data[graph_data[0].data.length - 1][0] - graph_data[0].data[0][0]) / 3600000;
-    if (graph_data.length > 1 && graph_data[1].data !== undefined) {
-      var new_duration = (graph_data[1].data[graph_data[1].data.length - 1][0] - graph_data[1].data[1][0]) / 3600000;
+
+    if (graph_data.length > 1 && graph_data[1].data !== undefined && graph_data[1].data.length > 0) {
+      var new_duration = (graph_data[1].data[graph_data[1].data.length - 1][0] - graph_data[1].data[0][0]) / 3600000;
       total_data_duration = new_duration > total_data_duration ? new_duration : total_data_duration
     }
-    if (graph_data.length > 2 && graph_data[2].data !== undefined) {
-      var new_duration = (graph_data[2].data[graph_data[2].data.length - 1][0] - graph_data[2].data[2][0]) / 3600000;
+    if (graph_data.length > 2 && graph_data[2].data !== undefined && graph_data[2].data.length > 0) {
+      var new_duration = (graph_data[2].data[graph_data[2].data.length - 1][0] - graph_data[2].data[0][0]) / 3600000;
       total_data_duration = new_duration > total_data_duration ? new_duration : total_data_duration
     }
 
