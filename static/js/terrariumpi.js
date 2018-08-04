@@ -2709,7 +2709,6 @@ function edit_profile() {
 
     $('input[name="age"]').daterangepicker({
       singleDatePicker: true,
-
     });
   }
   return false;
