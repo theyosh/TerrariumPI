@@ -52,7 +52,6 @@
   <script type="text/javascript" src="/gentelella/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
   <script type="text/javascript" src="/gentelella/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
   <!-- bootstrap-daterangepicker -->
-  <script type="text/javascript" src="/gentelella/vendors/moment/min/moment.min.js"></script>
   <script type="text/javascript" src="/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 
   <!-- Switchery -->

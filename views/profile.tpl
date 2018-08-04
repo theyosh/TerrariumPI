@@ -196,10 +196,12 @@
                     if (field.length == 1) {
                       if (key == 'age') {
                         var date = moment.unix(data[key]);
-                        field.val(date.format('L'));
-                        field.parents('.form-group').find('span.text').text(
-                          date.format('L') + ', ' + moment.duration(moment.now() - date).humanize()
-                        );
+                        if (date.isValid()) {
+                          field.val(date.format('L'));
+                          field.parents('.form-group').find('span.text').text(
+                            date.format('L') + ', ' + moment.duration(moment.now() - date).humanize()
+                          );
+                        }
                       } else if (key == 'moreinfo') {
                         field.val(data[key]);
                         field.parents('.form-group').find('span.text').html('<a href="' + data[key] + '" target="_blank" title="More information">' + data[key] + '</a>');
