@@ -118,7 +118,7 @@ Install required software\n\nUpdating Adafruit DHT python library ...
 XXX
 EOF
 cd Adafruit_Python_DHT
-git pull > /dev/null
+git pull 2>/dev/null
 
 
 PROGRESS=$((PROGRESS + 2))
