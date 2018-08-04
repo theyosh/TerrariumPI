@@ -271,11 +271,13 @@ class terrariumCollector(object):
   def get_total_power_water_usage(self):
     timer = time.time()
 
-    totals = {'power_wattage' : {'duration' : int(time.time()) , 'wattage' : 0.0},
-              'water_flow'    : {'duration' : int(time.time()) , 'water'   : 0.0}}
+    totals = {'power_wattage' : {'duration' : 0 , 'wattage' : 0.0},
+              'water_flow'    : {'duration' : 0 , 'water'   : 0.0}}
 
-    sql = '''SELECT SUM(total_wattage) AS Watt, SUM(total_water) AS Water, SUM(duration_in_seconds) AS TotalTime FROM (
+    sql = '''SELECT SUM(total_wattage) AS Watt, SUM(total_water) AS Water, MAX(timestamp2)-MIN(timestamp) AS TotalTime FROM (
                 SELECT
+                    t1.timestamp as timestamp,
+                    t2.timestamp as timestamp2,
                     t2.timestamp-t1.timestamp AS duration_in_seconds,
                    (t2.timestamp-t1.timestamp)          * (t1.state / 100.0) * t1.power_wattage AS total_wattage,
                   ((t2.timestamp-t1.timestamp) / 60.0)  * (t1.state / 100.0) * t1.water_flow AS total_water
