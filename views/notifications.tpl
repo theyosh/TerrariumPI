@@ -47,7 +47,7 @@
                   </div>
                   <div class="col-md-2 col-sm-3 col-xs-12 form-group">
                     <label for="email_to">{{_('SMTP username')}}</label>
-                    <input class="form-control" name="email_username" placeholder="{{_('SMTP userame')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_email_email_username')}}">
+                    <input class="form-control" name="email_username" placeholder="{{_('SMTP username')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_email_email_username')}}">
                   </div>
                   <div class="col-md-2 col-sm-3 col-xs-12 form-group">
                     <label for="email_to">{{_('SMTP password')}}</label>
