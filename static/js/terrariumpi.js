@@ -1693,6 +1693,14 @@ function update_dashboard_environment(name, data) {
     case 'ph':
       enabledColor = 'green';
       break;
+    case 'fertility':
+      enabledColor = 'green';
+      indicator = 'µS/cm';
+      break;
+    case 'co2':
+      enabledColor = 'green';
+      indicator = 'ppm';
+      break;
   }
 
   systempart.find('h4').removeClass('orange blue red').addClass(data.enabled ? enabledColor : '');
