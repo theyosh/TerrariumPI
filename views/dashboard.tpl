@@ -432,6 +432,112 @@
                       </tr>
                     </table>
                   </div>
+                  <div class="row environment_fertility">
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-fire"></i> {{_('Fertility')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather day/night')}}</span><span class="weatherinverse">{{_('Weather night/day')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}} <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign orange" title="{{_('Error')}}"></span></span></small></h4>
+                    <table class="tile_info">
+                      <tr>
+                        <td>
+                          <p>{{_('Status')}}</p>
+                        </td>
+                        <td class="state"><i class="fa fa-square green" title="{{_('On')}}"></i><i class="fa fa-square red" title="{{_('Off')}}"></i></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Period')}}</p>
+                        </td>
+                        <td class="timer_min">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Duration')}}</p>
+                        </td>
+                        <td class="timer_min duration">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Period')}}</p>
+                        </td>
+                        <td class="timer_max">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Duration')}}</p>
+                        </td>
+                        <td class="timer_max duration">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Current')}}</p>
+                        </td>
+                        <td class="current">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Range')}}</p>
+                        </td>
+                        <td class="alarm_min alarm_max">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Day/night difference')}} <span class="day" title="{{_('Day')}}"><i class="fa fa-sun-o"></i></span><span class="night" title="{{_('Night')}}"><i class="fa fa-moon-o"></i></span></p>
+                        </td>
+                        <td class="day_night_difference">...</td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="row environment_co2">
+                    <h4><span aria-hidden="true" class="glyphicon glyphicon-warning-sign red" title="{{_('Alarm')}}"></span> <i class="fa fa-fire"></i> {{_('CO2')}} <small>{{_('mode')}}: <span class="disabled">{{_('Disabled')}}</span><span class="weather">{{_('Weather day/night')}}</span><span class="weatherinverse">{{_('Weather night/day')}}</span><span class="timer">{{_('Timer')}}</span> <span class="sensor">{{_('Sensor')}} <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign orange" title="{{_('Error')}}"></span></span></small></h4>
+                    <table class="tile_info">
+                      <tr>
+                        <td>
+                          <p>{{_('Status')}}</p>
+                        </td>
+                        <td class="state"><i class="fa fa-square green" title="{{_('On')}}"></i><i class="fa fa-square red" title="{{_('Off')}}"></i></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Period')}}</p>
+                        </td>
+                        <td class="timer_min">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Duration')}}</p>
+                        </td>
+                        <td class="timer_min duration">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Period')}}</p>
+                        </td>
+                        <td class="timer_max">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Duration')}}</p>
+                        </td>
+                        <td class="timer_max duration">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Current')}}</p>
+                        </td>
+                        <td class="current">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Range')}}</p>
+                        </td>
+                        <td class="alarm_min alarm_max">...</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p>{{_('Day/night difference')}} <span class="day" title="{{_('Day')}}"><i class="fa fa-sun-o"></i></span><span class="night" title="{{_('Night')}}"><i class="fa fa-moon-o"></i></span></p>
+                        </td>
+                        <td class="day_night_difference">...</td>
+                      </tr>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
@@ -824,6 +930,61 @@
               <div class="x_panel" id="average_fertility">
                 <div class="x_title">
                   <h2><span aria-hidden="true" class="glyphicon glyphicon-grain"></span> <span class="title">{{_('Average Fertility')}}</span> <small class="data_update">...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                      <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-calendar" title="{{_('Period')}}"></i></a>
+                      <ul class="dropdown-menu period" role="menu">
+                        <li>
+                          <a href="javascript:;" >{{_('Day')}}</a>
+                        </li>
+                        <li>
+                          <a href="javascript:;" >{{_('Week')}}</a>
+                        </li>
+                        <li>
+                          <a href="javascript:;" >{{_('Month')}}</a>
+                        </li>
+                        <li>
+                          <a href="javascript:;" >{{_('Year')}}</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="dropdown">
+                      <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-wrench" title="{{_('Options')}}"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li>
+                          <a href="javascript:;" onclick="menu_click('sensor_settings.html')">{{_('Settings')}}</a>
+                        </li>
+                        <li>
+                          <a href="javascript:;" class="export">{{_('Export data')}}</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="col-md-4 col-sm-5 col-xs-12">
+                    <div class="sidebar-widget text-center">
+                      <canvas class="gauge"></canvas>
+                      <div class="goal-wrapper">
+                        <span class="gauge-value">...</span> <span class="gauge-indicator"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-8 col-sm-7 col-xs-12">
+                    <div class="history_graph loading"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="x_panel" id="average_co2">
+                <div class="x_title">
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-tree-conifer"></span> <span class="title">{{_('Average CO2')}}</span> <small class="data_update">...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>

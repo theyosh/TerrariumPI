@@ -1181,6 +1181,10 @@ function history_graph(name, data, type) {
             val = formatNumber(val) + ' µS/cm';
             break;
 
+          case 'co2':
+            val = formatNumber(val) + ' ppm';
+            break
+
           case 'uva':
           case 'uvb':
             val = formatNumber(val) + 'µW/cm^2';
@@ -1196,12 +1200,6 @@ function history_graph(name, data, type) {
   };
 
   switch (type) {
-    case 'humidity':
-    case 'temperature':
-    case 'distance':
-    case 'ph':
-    case 'moisture':
-    case 'conductivity':
     case 'light':
       if (data.light_average !== undefined && data.light_average) {
 
@@ -1241,11 +1239,17 @@ function history_graph(name, data, type) {
         }];
       }
       break;
-
+    case 'humidity':
+    case 'temperature':
+    case 'distance':
+    case 'ph':
+    case 'moisture':
+    case 'conductivity':
     case 'light_percentage':
     case 'uva':
     case 'uvb':
     case 'fertility':
+    case 'co2':
       graph_data = [{
         label: '{{_('Current')}}',
         data: data.current

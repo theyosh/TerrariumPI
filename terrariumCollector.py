@@ -233,7 +233,7 @@ class terrariumCollector(object):
       with self.db as db:
         cur = db.cursor()
 
-        if type in ['humidity','moisture','temperature','distance','ph','conductivity','light','uva','uvb','fertility']:
+        if type in ['humidity','moisture','temperature','distance','ph','conductivity','light','uva','uvb','fertility','co2']:
           cur.execute('REPLACE INTO sensor_data (id, type, timestamp, current, limit_min, limit_max, alarm_min, alarm_max, alarm) VALUES (?,?,?,?,?,?,?,?,?)',
                       (id, type, now, newdata['current'], newdata['limit_min'], newdata['limit_max'], newdata['alarm_min'], newdata['alarm_max'], newdata['alarm']))
 
