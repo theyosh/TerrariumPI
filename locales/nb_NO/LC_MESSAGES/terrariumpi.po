@@ -1,0 +1,3837 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2016-2018 TheYOSH
+# Joshua (TheYOSH) Rubingh, <terrariumpi@theyosh.nl>, 2016-2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TerrariumPI 3.8.3\n"
+"POT-Creation-Date: 2018-08-04 16:01+CEST\n"
+"PO-Revision-Date: 2018-08-11 10:22+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 2.1.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nb_NO\n"
+
+#: terrariumEngine.py:455 views/dashboard.tpl:7
+#: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
+msgid "Uptime"
+msgstr "Oppetid"
+
+#: terrariumEngine.py:456
+msgid "Load"
+msgstr "Last"
+
+#: terrariumEngine.py:457
+msgid "CPU Temp."
+msgstr "CPU Temp."
+
+#: terrariumGPIOSensor.py:84
+msgid "Dry"
+msgstr "Tørt"
+
+#: terrariumGPIOSensor.py:84
+msgid "Wet"
+msgstr "Vått"
+
+#: terrariumTranslations.py:21
+msgid "Holds the external source URL. Supported sources are: %s."
+msgstr "Vis den eksterne kilde-URLen. Støttede kilder er: %s."
+
+#: terrariumTranslations.py:22
+msgid ""
+"Choose the wind speed indicator. The software will recalculate to the chosen "
+"indicator."
+msgstr ""
+"Velg indikator for vindhastighet. Programvaren vil omberegne til den valgte "
+"indikatoren."
+
+#: terrariumTranslations.py:26
+msgid "Holds the sensor hardware type. Supported hardware types are: %s."
+msgstr "Vis maskinvaretype sensor. Maskinvaretyper som støttes er: %s."
+
+#: terrariumTranslations.py:27
+msgid ""
+"Holds the sensor address. Depending on hardware type, it is either a read "
+"only hex number, a GPIO pin, a GPIO pin combination of %s or a full HTTP(S) "
+"adress. Full url specification can be found on the %s wiki page. For GPIO "
+"use <strong>physical</strong> GPIO pin numbering."
+msgstr ""
+"Holder sensor adressen. Avhengig av maskinvaretype, er det enten et "
+"skrivebeskyttet hex-nummer, en GPIO PIN, en GPIO PIN-kombinasjon av %s eller "
+"en fullstendig HTTP(S)-adresse. Fullstendig URL-spesifikasjon finnes på "
+"siden %s wiki. For GPIO Bruk <strong>fysisk</strong> GPIO PIN nummerering."
+
+#: terrariumTranslations.py:27
+msgid "Remote data"
+msgstr "Ekstern data"
+
+#: terrariumTranslations.py:28
+msgid "Holds the sensor type. Supported sensor types are: %s."
+msgstr "Vis sensor typen. Støttede sensor typer er: %s."
+
+#: terrariumTranslations.py:29
+msgid "Holds the name of the sensor."
+msgstr "Vis navnet på sensoren."
+
+#: terrariumTranslations.py:30
+msgid ""
+"Holds the sensor lower alarm value of the sensor. When below this value, "
+"alarms can be triggered."
+msgstr ""
+"Holder sensorens lavere alarm verdi av sensoren. Når du er under denne "
+"verdien, kan alarmer utløses."
+
+#: terrariumTranslations.py:31
+msgid ""
+"Holds the sensor maximum alarm value of the sensor. When above this value, "
+"alarms can be triggered."
+msgstr ""
+"Holder sensorens maksimale alarm verdi på sensoren. Over denne verdien, kan "
+"alarmer kan utløses."
+
+#: terrariumTranslations.py:32
+msgid "Holds the sensor lowest value that should be used in the graphs."
+msgstr "Holder sensorens laveste verdien som skal brukes i grafene."
+
+#: terrariumTranslations.py:33
+msgid "Holds the sensor maximum value that should be used in the graphs."
+msgstr "Holder sensorens maksimumsverdi som skal brukes i diagrammene."
+
+#: terrariumTranslations.py:34
+msgid "Shows the sensor current value in temperature or humidity (read only)."
+msgstr ""
+"Viser sensorens gjeldende verdi i temperatur eller fuktighet "
+"(skrivebeskyttet)."
+
+#: terrariumTranslations.py:35
+msgid "Holds the sensor lowest moisture value measured in dry air. %s"
+msgstr "Har sensorens laveste fukt verdi målt i tørr luft. %s"
+
+#: terrariumTranslations.py:35 terrariumTranslations.py:36
+msgid "More calibration information"
+msgstr "Mer Kalibreringsinformasjon"
+
+#: terrariumTranslations.py:36
+msgid "Holds the sensor highest moisture value measured in full water. %s"
+msgstr "Holder sensorens høyeste fukt verdi målt i fullt vann. %s"
+
+#: terrariumTranslations.py:37
+msgid "Holds the temperature offset value."
+msgstr "Vis temperatur offset verdi."
+
+#: terrariumTranslations.py:41
+msgid "Holds the switch hardware type. Supported hardware types are: %s."
+msgstr "Vis maskinvaretypen for bryter. Maskinvaretyper som støttes er: %s."
+
+#: terrariumTranslations.py:42
+msgid ""
+"Holds the switch address. Depending on hardware type, it is either a number "
+"or GPIO pin. For GPIO and PWM-Dimmer use <strong>physical</strong> GPIO pin "
+"numbering."
+msgstr ""
+"Vis Switch-adressen. Avhengig av maskinvaretype, er det enten et nummer "
+"eller GPIO PIN. For GPIO og PWM-dimmer bruker <strong> fysiske </strong> "
+"GPIO PIN nummerering."
+
+#: terrariumTranslations.py:43
+msgid "Holds the switch name."
+msgstr "Vis bryter navnet."
+
+#: terrariumTranslations.py:44
+msgid "Holds the switch power usage in Watt when switched on."
+msgstr "Vis bryterens strømforbruk i watt når den slås på."
+
+#: terrariumTranslations.py:45
+msgid "Holds the switch water flow in liters per minute when switched on"
+msgstr "Vis bryteren for vannstrøm i liter per minutt når den slås på"
+
+#: terrariumTranslations.py:46
+msgid ""
+"Enable or disable timer functionality. When enabled you can specify the "
+"timing below."
+msgstr ""
+"Aktiver eller deaktiver tidtaker funksjonalitet. Når aktivert kan du "
+"spesifisere timingen nedenfor."
+
+#: terrariumTranslations.py:47
+msgid "Holds the timer start time. The timer will run after this start time."
+msgstr ""
+"Vis tidtakerens starttidspunkt. Tidtakeren vil kjøre etter dette "
+"starttidspunktet."
+
+#: terrariumTranslations.py:48
+msgid "Holds the timer stop time. The timer will stop after this start time."
+msgstr ""
+"Vis tidtaker stopp tid. Tidtakeren vil stoppe etter dette starttidspunktet."
+
+#: terrariumTranslations.py:49
+msgid ""
+"Holds the period in minutes that the power switch is on withing the total "
+"timer window."
+msgstr ""
+"Vis perioden i minutter som strømbryteren er på med det totale tidtaker "
+"vinduet."
+
+#: terrariumTranslations.py:50
+msgid ""
+"Holds the period in minutes that the power switch is off withing the total "
+"timer window."
+msgstr ""
+"Vis perioden i minutter når strømbryteren er slått av med det totale "
+"tidtaker vinduet."
+
+#: terrariumTranslations.py:51
+msgid ""
+"Holds the amount of seconds for the duration in which the dimmer changes to "
+"the new value."
+msgstr ""
+"Vis antall sekunder for varigheten som dimmeren endrer til den nye verdien."
+
+#: terrariumTranslations.py:52
+msgid ""
+"Holds the amount in percentage to change the dimmer by the heater "
+"environment."
+msgstr "Vis verdien i prosent for å endre dimmeren fra varme miljøet."
+
+#: terrariumTranslations.py:53
+msgid ""
+"Holds the amount of seconds for the duration in which it increases the power."
+msgstr "Vis antall sekunder for varigheten den øker strømmen til."
+
+#: terrariumTranslations.py:54
+msgid "Holds the amount in percentage to go to when switched on."
+msgstr "Vis verdien i prosent for å gå til når slått på."
+
+#: terrariumTranslations.py:55
+msgid ""
+"Holds the amount of seconds for the duration in which it decresses the power."
+msgstr "Vis antall sekunder for varigheten som strømmen skal reduseres."
+
+#: terrariumTranslations.py:56
+msgid "Holds the amount in percentage to go to when switched off."
+msgstr "Vis verdien i prosent å gå til når slått av."
+
+#: terrariumTranslations.py:60
+msgid "Holds the door hardware type. Supported hardware types are: %s."
+msgstr "Vis maskinvaretypen for dør. Maskinvaretyper som støttes er: %s."
+
+#: terrariumTranslations.py:61
+msgid ""
+"Holds the door address. When using GPIO use <strong>physical</strong> GPIO "
+"pin numbering as address."
+msgstr ""
+"Vis dør adressen. Når GPIO benyttes, bruk <strong> fysisk </strong> GPIO PIN "
+"nummereringen som adresse."
+
+#: terrariumTranslations.py:62
+msgid "Holds the door name."
+msgstr "Vis dør navnet."
+
+#: terrariumTranslations.py:66
+msgid "Holds the webcam location source. Supported sources are: %s"
+msgstr "Vis webkamera plassering kilde. Støttede kilder er: %s"
+
+#: terrariumTranslations.py:67
+msgid "Holds the webcam name."
+msgstr "Vis webkamera navnet."
+
+#: terrariumTranslations.py:68
+msgid "Holds the webcam resolution."
+msgstr "Vis webkamera oppløsningen."
+
+#: terrariumTranslations.py:69
+msgid "Holds the webcam resolution width in pixels."
+msgstr "Vis webkamera oppløsning bredde i piksler."
+
+#: terrariumTranslations.py:70
+msgid "Holds the webcam resolution height in pixels."
+msgstr "Vis webkamera oppløsning høyde piksler."
+
+#: terrariumTranslations.py:71
+msgid "Holds the webcam rotation of the image."
+msgstr "Vis webkamera rotasjon av bildet."
+
+#: terrariumTranslations.py:72
+msgid "Shows the webcam preview image."
+msgstr "Viser webkamera forhåndsvisning."
+
+#: terrariumTranslations.py:73
+msgid "Enabled or disable image archiving based on motion detection."
+msgstr ""
+"Aktiver eller deaktivere bilde arkivering basert på bevegelsesdeteksjon."
+
+#: terrariumTranslations.py:77
+msgid "Holds the audio playlist name."
+msgstr "Vis navnet på lyd spillelisten."
+
+#: terrariumTranslations.py:78
+msgid "Holds the time when the playlist should be started."
+msgstr "Vis tid når spillelisten skal startes."
+
+#: terrariumTranslations.py:79
+msgid "Holds the time when the playlist should be stopped."
+msgstr "Vis tid når spillelisten skal stoppes."
+
+#: terrariumTranslations.py:80
+msgid "Holds the volume for this playlist."
+msgstr "Vis volumet for denne spillelisten."
+
+#: terrariumTranslations.py:81
+msgid "Toggle on to enable repeating of the audio files."
+msgstr "Aktiver/deaktiver for å aktivere gjentagelse av lydfilene."
+
+#: terrariumTranslations.py:82
+msgid "Toggle on to enable shuffeling of the audio files."
+msgstr "Aktiver/deaktiver shuffeling av lydfilene."
+
+#: terrariumTranslations.py:83
+msgid ""
+"Select the audio files for this playlist. It is possible to select the same "
+"audio file in multiple playlists."
+msgstr ""
+"Velg lydfilene for denne spillelisten. Det er mulig å velge den samme "
+"lydfilen i flere spillelister."
+
+#: terrariumTranslations.py:87
+msgid ""
+"Select the mode on which this environment part be put on and off. Select "
+"'%s' to use the sun rise and sun set at your location. This will make the "
+"amount of lighting variable to the actual amount of daylight. When selecting "
+"'%s', the light will put on and off at selected times."
+msgstr ""
+"Velg modusen som denne miljø delen skal settes på og av. Velg ‘%s’ for å "
+"bruke soloppgang og solnedgang der du befinner deg. Dette vil gjøre mengden "
+"belysning variabel til den faktiske mengden av dagslys. Når du velger ' %s', "
+"settes lyset på og av på valgte tider."
+
+#: terrariumTranslations.py:87 terrariumTranslations.py:91
+#: terrariumTranslations.py:92 views/dashboard.tpl:83 views/dashboard.tpl:118
+#: views/dashboard.tpl:171 views/dashboard.tpl:224 views/dashboard.tpl:277
+#: views/dashboard.tpl:330 views/dashboard.tpl:383
+#: views/inc/usage_environment.tpl:34 views/inc/usage_environment.tpl:230
+#: views/inc/usage_environment.tpl:324 views/switch_settings.tpl:34
+#: views/switch_settings.tpl:139 views/system_environment.tpl:42
+#: views/system_environment.tpl:173 views/system_environment.tpl:385
+#: views/system_environment.tpl:596 views/system_environment.tpl:807
+#: views/system_environment.tpl:1018 views/system_environment.tpl:1229
+msgid "Timer"
+msgstr "Timer"
+
+#: terrariumTranslations.py:87 terrariumTranslations.py:99
+#: views/inc/menu.tpl:30 views/inc/usage_environment.tpl:35
+#: views/inc/usage_environment.tpl:231 views/inc/usage_environment.tpl:325
+#: views/inc/usage_weather.tpl:13 views/inc/usage_weather.tpl:82
+#: views/inc/usage_weather.tpl:85 views/system_environment.tpl:201
+#: views/system_environment.tpl:413 views/system_environment.tpl:624
+#: views/system_environment.tpl:835 views/system_environment.tpl:1046
+#: views/usage.tpl:10 views/weather.tpl:7
+msgid "Weather"
+msgstr "Vær"
+
+#: terrariumTranslations.py:88
+msgid ""
+"Select the sensors that are used to control this environment part. When "
+"selecting multiple sensors, the average is calculated to determine the final "
+"values."
+msgstr ""
+"Velg sensorene som brukes til å kontrollere denne miljø delen. Når du velger "
+"flere sensorer, beregnes gjennomsnittet for å bestemme de endelige verdiene."
+
+#: terrariumTranslations.py:89
+msgid ""
+"Holds the value in degrees which the sensors are changing when it become "
+"night. Use positive numbers to increase the values and negative numbers to "
+"lower the values."
+msgstr ""
+"Vis verdien i grader som sensorene endres når det blir natt. Bruk positive "
+"tall til å øke verdiene og negative tall for å redusere verdiene."
+
+#: terrariumTranslations.py:90
+msgid "Holds the soure that is used to determing when it is day or night."
+msgstr "Vis soure som brukes til å avtegne når det er dag eller natt."
+
+#: terrariumTranslations.py:91
+msgid ""
+"Enter the time when this environment part should be put on. Only available "
+"when running in '%s' mode."
+msgstr ""
+"Angi klokkeslettet når denne miljø delen skal settes på. Bare tilgjengelig "
+"når du kjører i ‘%s’ modus."
+
+#: terrariumTranslations.py:92
+msgid ""
+"Enter the time when this environment part should be put off. Only available "
+"when running in '%s' mode."
+msgstr ""
+"Angi klokkeslettet når denne miljø delen skal settes av. Bare tilgjengelig "
+"når du kjører i ‘%s’ modus."
+
+#: terrariumTranslations.py:93
+msgid ""
+"Holds the period in minutes that this environment part is powered on withing "
+"the total timer window."
+msgstr ""
+"Vis perioden i minutter som denne miljø delen er slått på med det totale "
+"tidtaker vinduet."
+
+#: terrariumTranslations.py:94
+msgid ""
+"Holds the period in minutes that this environment part is powered off "
+"withing the total timer window."
+msgstr ""
+"Vis perioden i minutter som denne miljø delen er slått av med det totale "
+"tidtaker vinduet."
+
+#: terrariumTranslations.py:95
+msgid ""
+"How much time must there be between two actions and after start up. Enter "
+"the amount of seconds in which this environment part can settle."
+msgstr ""
+"Hvor mye tid må det være mellom to handlinger og etter oppstart. Angi hvor "
+"mange sekunder denne miljø delen kan utlignes."
+
+#: terrariumTranslations.py:96
+msgid ""
+"Holds the amount of seconds that this environment part is powered on when "
+"the value is out of range."
+msgstr ""
+"Vis antall sekunder som denne miljø delen er slått på når verdien er utenfor "
+"området."
+
+#: terrariumTranslations.py:97
+msgid ""
+"Enter the maximum amount of time in hours. When the time between on and off "
+"is more then this maximum, the on and off time will be shifted more to each "
+"other."
+msgstr ""
+"Angi maksimal tid i timer. Når tiden mellom av og på er mer enn dette "
+"maksimum, vil på og av tid bli flyttet mer til hverandre."
+
+#: terrariumTranslations.py:98
+msgid ""
+"Enter the minimum amount of time in hours. When the time between on and off "
+"is less then this amount of hours, the on and off time will be widened until "
+"the minimum amount of hours entered here."
+msgstr ""
+"Angi minimumstiden i timer. Når tiden mellom av og på er mindre enn denne "
+"mengden timer, vil på og av tid bli utvidet til minimum antall timer angitt "
+"her."
+
+#: terrariumTranslations.py:99
+msgid ""
+"Enter the amount of hours that the power on and off times should shift. Is "
+"only needed when running in the '%s' mode. Enter a positive number for "
+"adding hours to the start time. Use negative numbers for subtracting from "
+"the start time."
+msgstr ""
+"Angi hvor mange timer strøm- av og på tidspunkter skal skifte. Trengs bare "
+"ved kjøring i ‘%s’ modus. Angi et positivt tall for å legge til timer på "
+"starttidspunktet. Bruk negative tall for å trekke fra starttidspunktet."
+
+#: terrariumTranslations.py:100
+msgid ""
+"Select the power switches that should be used when the alarms or timers are "
+"hit. Select all needed switches below."
+msgstr ""
+"Velg strøm bryterne som skal brukes når alarmer eller tidtakere er truffet. "
+"Velg alle nødvendige brytere nedenfor."
+
+#: terrariumTranslations.py:101
+msgid "Holds the water volume in liters."
+msgstr "Vis vann volumet i liter."
+
+#: terrariumTranslations.py:102
+msgid "Holds the water tank height in cm or inches."
+msgstr "Viser vannbeholder høyden i cm eller tommer."
+
+#: terrariumTranslations.py:103
+msgid ""
+"Holds the distance between top of the liquid when full and the sensor in cm "
+"or inches."
+msgstr ""
+"Viser avstanden mellom toppen av væsken når full og sensoren i cm eller "
+"inches."
+
+#: terrariumTranslations.py:104
+msgid ""
+"Select when the power switches can toggle. When lights are on, off or just "
+"always"
+msgstr ""
+"Velg når strøm brytere kan veksle. Når lysene er på, av eller bare alltid"
+
+#: terrariumTranslations.py:105
+msgid ""
+"Select when the power switches can toggle. When the door is open, cosed or "
+"just always"
+msgstr ""
+"Velg når strøm brytere kan veksle. Når døren er åpen, lukket eller bare "
+"alltid"
+
+#: terrariumTranslations.py:109
+msgid "Holds the email address on which you would like to receive messages."
+msgstr "Viser e-postadressen du vil motta meldinger på."
+
+#: terrariumTranslations.py:110
+msgid "Holds the mail server hostname or IP."
+msgstr "Viser epostserver hostname eller IP."
+
+#: terrariumTranslations.py:111
+msgid "Holds the mail server portnumber. SSL and TLS will be autodetected."
+msgstr "Viser e-postserveren portnummer. SSL og TLS vil bli oppdaget."
+
+#: terrariumTranslations.py:112
+msgid "Holds the username for authentication with the mailserver if needed."
+msgstr ""
+"Viser brukernavnet for godkjenning med mailserveren hvis det er nødvendig."
+
+#: terrariumTranslations.py:113
+msgid "Holds the password for authentication with the mailserver if needed."
+msgstr ""
+"Viser passordet for godkjenning med mailserveren hvis det er nødvendig."
+
+#: terrariumTranslations.py:115
+msgid ""
+"Holds the I2C address of the LCD screen. Use the value found with i2cdetect. "
+"Add ,[NR] to change the I2C bus."
+msgstr ""
+"Viser I2C-adressen til LCD-skjermen. Bruk verdien som ble funnet med "
+"i2cdetect. Legg til, [nr] for å endre I2C-bussen."
+
+#: terrariumTranslations.py:116
+msgid "Holds the LCD screen resolution."
+msgstr "Viser LCD-skjermens oppløsning."
+
+#: terrariumTranslations.py:117
+msgid "Reserve first LCD line for static title."
+msgstr "Reserver første LCD-linje for statisk tittel."
+
+#: terrariumTranslations.py:119
+msgid "Holds your Twitter consumer key. More information %shere%s"
+msgstr "Viser din Twitter bruker nøkkel. Mer informasjon %shere%s"
+
+#: terrariumTranslations.py:120
+msgid "Holds your Twitter consumer secret. More information %shere%s"
+msgstr "Viser din Twitter bruker hemmelighet. Mer informasjon %shere%s"
+
+#: terrariumTranslations.py:121
+msgid "Holds your Twitter access token. More information %shere%s"
+msgstr "Viser din Twitter-tilgang token. Mer informasjon %shere%s"
+
+#: terrariumTranslations.py:122
+msgid "Holds your Twitter access token secret. More information %shere%s"
+msgstr "Viser din Twitter-tilgang token hemmelighet. Mer informasjon %shere%s"
+
+#: terrariumTranslations.py:124
+msgid "Holds the PushOver API token. More information %shere%s"
+msgstr "Viser det PushOver API-tokenet. Mer informasjon %shere%s"
+
+#: terrariumTranslations.py:125
+msgid "Holds the PushOver API user key. More information %shere%s"
+msgstr "Viser PushOver API bruker nøkkel. Mer informasjon %shere%s"
+
+#: terrariumTranslations.py:127
+msgid "Holds the Telegram Bot token. More information %shere%s"
+msgstr "Viser Telegram Bot token. Mer informasjon %shere%s"
+
+#: terrariumTranslations.py:128
+msgid ""
+"Holds the Telegram username that is allowed for receiving messages. Can be "
+"multiple usernames seperated by a comma. More information %shere%s"
+msgstr ""
+"Viser Telegram-brukernavnet som er tillatt for mottak av meldinger. Kan være "
+"flere brukernavn adskilt med et komma. Mer informasjon %shere%s"
+
+#: terrariumTranslations.py:129
+msgid ""
+"Holds the proxy address in form of [schema]://[user]:[password]@[server.com]:"
+"[port]. Can either be socks5 or http(s) for schema."
+msgstr ""
+"Viser proxy-adressen i form av [schema]://[user]:[password]@[server.com]:"
+"[port]. Kan enten være socks5 eller http (s) for schema."
+
+#: terrariumTranslations.py:133
+msgid "Choose your interface language."
+msgstr "Velg ditt grensesnittspråk."
+
+#: terrariumTranslations.py:134
+msgid "Holds the distance type used by distance sensors."
+msgstr "Viser avstands typen som brukes av avstandsensorer."
+
+#: terrariumTranslations.py:135 terrariumTranslations.py:136
+msgid "Holds the username which can make changes (Administrator)."
+msgstr "Viser det brukernavnet som kan lage endringer (Administrator)."
+
+#: terrariumTranslations.py:137
+msgid ""
+"Enter the new password for the administration user. Leaving empty will not "
+"change the password!"
+msgstr ""
+"Skriv inn det nye passordet for administrasjonsbrukeren. Passordet blir ikke "
+"endret om det står tomt!"
+
+#: terrariumTranslations.py:138
+msgid "Enter the current password in order to change the password."
+msgstr "Angi gjeldende passord for å endre passordet."
+
+#: terrariumTranslations.py:139
+msgid ""
+"Toggle on or off full authentication. When on, you need to authenticate at "
+"all times."
+msgstr ""
+"Slå av eller på full godkjenning. Når det er på, må du godkjenne til enhver "
+"tid."
+
+#: terrariumTranslations.py:140
+msgid "Holds the external calendar url."
+msgstr "Viser URL-adressen for den eksterne kalenderen."
+
+#: terrariumTranslations.py:141
+msgid ""
+"Toggle on or off horizontal graph legends. Reload the webinterface after "
+"changing the setting."
+msgstr ""
+"Slå på eller av vannrett graf-legender. Last inn webgrensesnittet på nytt "
+"etter at du har endret innstillingen."
+
+#: terrariumTranslations.py:142
+msgid "Holds the soundcard that is used for playing audio."
+msgstr "Viser lydkortet som brukes til å spille av lyd."
+
+#: terrariumTranslations.py:143
+msgid ""
+"Holds the amount of power in Wattage that the Raspberry PI uses including "
+"all USB equipment."
+msgstr ""
+"Viser mengden strøm i Watt som Raspberry Pi bruker, inkludert alt USB-utstyr."
+
+#: terrariumTranslations.py:144
+msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
+msgstr "Viser mengden euro/dollar per 1 kW/t (1 kilowatt per time)."
+
+#: terrariumTranslations.py:145
+msgid "Holds the amount of euro/dollar per 1000 liters water."
+msgstr "Viser mengden av euro/dollar per 1000 liter vann."
+
+#: terrariumTranslations.py:146
+msgid ""
+"Choose the temperature indicator. The software will recalculate to the "
+"chosen indicator."
+msgstr ""
+"Velg temperatur indikatoren. Programvaren vil omberegne til den valgte "
+"indikatoren."
+
+#: terrariumTranslations.py:147
+msgid ""
+"Holds the host name or IP address on which the software will listen for "
+"connections. Enter :: for all addresses to bind."
+msgstr ""
+"Viser vertsnavnet eller IP-adressen som programvaren vil lytte til for "
+"tilkoblinger. Skriv :: for alle adresser som skal bindes."
+
+#: terrariumTranslations.py:148
+msgid ""
+"Holds the port number on which the software is listening for connections."
+msgstr "Viser portnummeret som programvaren lytter etter tilkoblinger på."
+
+#: terrariumTranslations.py:149
+msgid ""
+"Holds the port number on which the OWFS software is running. Leave empty to "
+"disable OWFS support."
+msgstr ""
+"Viser portnummeret som OWFS-programvaren kjører på. La det stå tomt for å "
+"deaktivere OWFS støtte."
+
+#: terrariumTranslations.py:153
+msgid "Holds the name of the animal."
+msgstr "Viser navnet på dyret."
+
+#: terrariumTranslations.py:154
+msgid "Holds the type of the animal"
+msgstr "Viser typen dyr"
+
+#: terrariumTranslations.py:155
+msgid "Holds the gender of the animal."
+msgstr "Viser kjønnet på dyret."
+
+#: terrariumTranslations.py:156
+msgid "Holds the day of birth of the animal."
+msgstr "Viser dagen for fødselen av dyret."
+
+#: terrariumTranslations.py:157
+msgid "Holds the species name of the animal."
+msgstr "Viser dyrearten på dyret."
+
+#: terrariumTranslations.py:158
+msgid "Holds the latin name of the animal."
+msgstr "Viser det latinske navnet på dyret."
+
+#: terrariumTranslations.py:159
+msgid "Holds a small description about the animal."
+msgstr "Har en liten beskrivelse om dyret."
+
+#: terrariumTranslations.py:160
+msgid "Holds a link to more information."
+msgstr "Viser en kobling til mer informasjon."
+
+#: terrariumWebcam.py:279
+msgid "Offline since"
+msgstr "Frakoblet siden"
+
+#: terrariumWebserver.py:88 terrariumWebserver.py:165
+msgid "Authenticate to make any changes"
+msgstr "Godkjenn for å gjøre endringer"
+
+#: terrariumWebserver.py:88 terrariumWebserver.py:165
+#: views/system_settings.tpl:36
+msgid "TerrariumPI"
+msgstr "TerrariumPI"
+
+#: terrariumWebserver.py:88 terrariumWebserver.py:165
+#: views/system_settings.tpl:113
+msgid "Authentication"
+msgstr "Autentisering"
+
+#: terrariumWebserver.py:218
+msgid "Player command could ot be executed!"
+msgstr "Spiller kommandoen kan ikke utføres!"
+
+#: terrariumWebserver.py:218 terrariumWebserver.py:238
+#: terrariumWebserver.py:250 terrariumWebserver.py:258
+msgid "Error!"
+msgstr "Feil!"
+
+#: terrariumWebserver.py:226 terrariumWebserver.py:229
+msgid "OK!"
+msgstr "OK!"
+
+#: terrariumWebserver.py:226 terrariumWebserver.py:229
+msgid "Player command executed!"
+msgstr "Spiller kommandoen utført!"
+
+#: terrariumWebserver.py:238
+msgid "File is not uploaded!"
+msgstr "Filen ble ikke lastet opp!"
+
+#: terrariumWebserver.py:243
+msgid "File '%s' is uploaded"
+msgstr "Filen ‘%s’ er lastet opp"
+
+#: terrariumWebserver.py:243 terrariumWebserver.py:253
+msgid "Success!"
+msgstr "Suksess!"
+
+#: terrariumWebserver.py:245
+msgid "Duplicate file '%s'"
+msgstr "Dupliser fil ' %s'"
+
+#: terrariumWebserver.py:250
+msgid "Action could not be satisfied"
+msgstr "Handlingen kunne ikke gjennomført"
+
+#: terrariumWebserver.py:253
+msgid "Audio file is deleted"
+msgstr "Lydfilen er slettet"
+
+#: terrariumWebserver.py:258
+msgid "Data could not be saved"
+msgstr "Data ble ikke lagret"
+
+#: terrariumWebserver.py:266
+msgid "Data saved"
+msgstr "Data lagret"
+
+#: terrariumWebserver.py:267
+msgid "Your changes are saved"
+msgstr "Dine endringer er lagret"
+
+#: terrariumWebserver.py:388 views/inc/menu.tpl:165
+msgid "Log out"
+msgstr "Logg ut"
+
+#: terrariumWebserver.py:389
+msgid "You are now logged out"
+msgstr "Du er nå logget ut"
+
+#: views/audio_files.tpl:4 views/audio_playlist.tpl:4 views/door_settings.tpl:4
+#: views/inc/menu.tpl:144 views/notifications.tpl:4 views/sensor_settings.tpl:4
+#: views/switch_settings.tpl:4 views/system_environment.tpl:4
+#: views/system_settings.tpl:4 views/webcam_settings.tpl:4
+msgid "Help"
+msgstr "Hjelp"
+
+#: views/audio_files.tpl:16
+msgid "Here you can upload and manange your audio files."
+msgstr "Her kan du laste opp og organisere dine lydfiler."
+
+#: views/audio_files.tpl:16
+msgid ""
+"In the existing audio files list you can see which files are uploaded. By "
+"clicking on the trashbin (%s) icon you can delete the file."
+msgstr ""
+"I den eksisterende listen over lydfiler kan du se hvilke filer som er lastet "
+"opp. Ved å klikke på papirkurv (%s) ikonet kan du slette filen."
+
+#: views/audio_files.tpl:16
+msgid "Open the dropzone multiple file uploader to upload new audio files."
+msgstr "Åpen dropzone multi-fil opplaster for å laste opp nye lydfiler."
+
+#: views/audio_files.tpl:23
+msgid "Dropzone multiple file uploader"
+msgstr "Dropzone multi-fil opplaster"
+
+#: views/audio_files.tpl:35
+msgid ""
+"Drag multiple files to the box below for multi upload or click to select "
+"files."
+msgstr ""
+"Dra flere filer til boksen nedenfor for multi opplasting eller klikk for å "
+"velge filer."
+
+#: views/audio_files.tpl:45
+msgid "Existing audio files"
+msgstr "Eksisterende lydfiler"
+
+#: views/audio_files.tpl:61
+msgid "Action"
+msgstr "Handling"
+
+#: views/audio_files.tpl:62
+msgid "Filename"
+msgstr "Filnavn"
+
+#: views/audio_files.tpl:63
+msgid "Size"
+msgstr "Størrelse"
+
+#: views/audio_files.tpl:64
+msgid "Upload date"
+msgstr "Dato opplastet"
+
+#: views/audio_files.tpl:65 views/dashboard.tpl:99 views/dashboard.tpl:111
+#: views/dashboard.tpl:134 views/dashboard.tpl:146 views/dashboard.tpl:187
+#: views/dashboard.tpl:199 views/dashboard.tpl:240 views/dashboard.tpl:252
+#: views/dashboard.tpl:293 views/dashboard.tpl:305 views/dashboard.tpl:346
+#: views/dashboard.tpl:358 views/dashboard.tpl:399 views/dashboard.tpl:411
+msgid "Duration"
+msgstr "Varighet"
+
+#: views/audio_files.tpl:66 views/audio_playlist.tpl:19
+#: views/audio_playlist.tpl:82 views/door_settings.tpl:25
+#: views/door_settings.tpl:84 views/inc/usage_doors.tpl:111
+#: views/inc/usage_doors.tpl:125 views/inc/usage_sensors.tpl:137
+#: views/inc/usage_sensors.tpl:174 views/inc/usage_switches.tpl:117
+#: views/inc/usage_switches.tpl:140 views/inc/usage_webcams.tpl:104
+#: views/inc/usage_webcams.tpl:134 views/profile.tpl:56
+#: views/sensor_settings.tpl:28 views/sensor_settings.tpl:142
+#: views/switch_settings.tpl:25 views/switch_settings.tpl:127
+#: views/webcam_settings.tpl:27 views/webcam_settings.tpl:89
+msgid "Name"
+msgstr "Navn"
+
+#: views/audio_files.tpl:67
+msgid "Album"
+msgstr "Album"
+
+#: views/audio_files.tpl:68 views/inc/usage_dashboard.tpl:153
+#: views/inc/usage_sensors.tpl:128 views/inc/usage_sensors.tpl:171
+#: views/profile.tpl:63 views/sensor_settings.tpl:25
+#: views/sensor_settings.tpl:124
+msgid "Type"
+msgstr "Type"
+
+#: views/audio_files.tpl:69
+msgid "Bitrate"
+msgstr "Bitrate"
+
+#: views/audio_files.tpl:70
+msgid "Channels"
+msgstr "Kanaler"
+
+#: views/audio_files.tpl:71
+msgid "Frequency"
+msgstr "Frekvens"
+
+#: views/audio_files.tpl:86
+msgid "Preview player"
+msgstr "Forhåndsvis spiller"
+
+#: views/audio_playlist.tpl:16
+msgid "Here you can configure your audio playlists."
+msgstr "Her kan du konfigurere lyd-spillelister."
+
+#: views/audio_playlist.tpl:16
+msgid "Make sure you do not overlap playlists in time!"
+msgstr "Pass på at du ikke overoverlapper spillelister på tiden!"
+
+#: views/audio_playlist.tpl:16 views/door_settings.tpl:16
+#: views/sensor_settings.tpl:16 views/switch_settings.tpl:16
+#: views/system_environment.tpl:17 views/system_settings.tpl:16
+#: views/webcam_settings.tpl:16
+msgid "Required fields are marked with '%s'."
+msgstr "Obligatoriske felt er merket med ‘%s’."
+
+#: views/audio_playlist.tpl:16 views/switch_settings.tpl:19
+msgid ""
+"When you have a %s type switch added the audio player will not work. More "
+"information can be found here: %s."
+msgstr ""
+"Når du har lagt til en %s type bryter, vil ikke lyd spilleren fungere. Du "
+"finner mer informasjon her: %s."
+
+#: views/audio_playlist.tpl:22 views/audio_playlist.tpl:87
+#: views/system_environment.tpl:74 views/system_environment.tpl:114
+#: views/system_environment.tpl:214 views/system_environment.tpl:290
+#: views/system_environment.tpl:425 views/system_environment.tpl:501
+#: views/system_environment.tpl:636 views/system_environment.tpl:712
+#: views/system_environment.tpl:847 views/system_environment.tpl:923
+#: views/system_environment.tpl:1058 views/system_environment.tpl:1134
+#: views/system_environment.tpl:1270 views/system_environment.tpl:1322
+msgid "Start"
+msgstr "Start"
+
+#: views/audio_playlist.tpl:25 views/audio_playlist.tpl:91
+#: views/system_environment.tpl:80 views/system_environment.tpl:120
+#: views/system_environment.tpl:220 views/system_environment.tpl:296
+#: views/system_environment.tpl:431 views/system_environment.tpl:507
+#: views/system_environment.tpl:642 views/system_environment.tpl:718
+#: views/system_environment.tpl:853 views/system_environment.tpl:929
+#: views/system_environment.tpl:1064 views/system_environment.tpl:1140
+#: views/system_environment.tpl:1276 views/system_environment.tpl:1328
+msgid "Stop"
+msgstr "Stopp"
+
+#: views/audio_playlist.tpl:28 views/audio_playlist.tpl:95
+#: views/system_environment.tpl:1247
+msgid "Volume"
+msgstr "Volum"
+
+#: views/audio_playlist.tpl:31 views/audio_playlist.tpl:99
+msgid "Repeat"
+msgstr "Gjenta"
+
+#: views/audio_playlist.tpl:34 views/audio_playlist.tpl:103
+msgid "Shuffle"
+msgstr "Stokk"
+
+#: views/audio_playlist.tpl:37 views/audio_playlist.tpl:109
+#: views/inc/menu.tpl:114
+msgid "Files"
+msgstr "Filer"
+
+#: views/audio_playlist.tpl:48 views/door_settings.tpl:36
+#: views/notifications.tpl:254 views/profile.tpl:179
+#: views/sensor_settings.tpl:54 views/switch_settings.tpl:72
+#: views/system_environment.tpl:1379 views/system_settings.tpl:188
+#: views/webcam_settings.tpl:47
+msgid "Submit"
+msgstr "Send"
+
+#: views/audio_playlist.tpl:61
+msgid "Add new audio playlist"
+msgstr "Legg til ny lyd spilleliste"
+
+#: views/audio_playlist.tpl:68
+msgid "Audio playlist"
+msgstr "Lyd spilleliste"
+
+#: views/audio_playlist.tpl:68 views/inc/sensor_list.tpl:11
+#: views/inc/sensor_list.tpl:12 views/inc/sensor_list.tpl:13
+#: views/inc/sensor_list.tpl:14 views/inc/sensor_list.tpl:15
+#: views/inc/sensor_list.tpl:16 views/inc/sensor_list.tpl:17
+#: views/inc/sensor_list.tpl:18 views/sensor_settings.tpl:74
+#: views/sensor_settings.tpl:75 views/sensor_settings.tpl:76
+#: views/sensor_settings.tpl:77 views/sensor_settings.tpl:78
+#: views/sensor_settings.tpl:79 views/sensor_settings.tpl:80
+#: views/sensor_settings.tpl:81 views/switch_settings.tpl:92
+#: views/webcam_settings.tpl:67
+msgid "new"
+msgstr "ny"
+
+#: views/audio_playlist.tpl:112 views/sensor_settings.tpl:98
+#: views/sensor_settings.tpl:127 views/switch_settings.tpl:109
+#: views/switch_settings.tpl:142 views/webcam_settings.tpl:105
+#: views/webcam_settings.tpl:119
+msgid "Select an option"
+msgstr "Merk et valg"
+
+#: views/audio_playlist.tpl:123 views/door_settings.tpl:94
+#: views/inc/usage_doors.tpl:70 views/inc/usage_sensors.tpl:81
+#: views/inc/usage_switches.tpl:70 views/inc/usage_webcams.tpl:66
+#: views/sensor_settings.tpl:186 views/switch_settings.tpl:199
+#: views/webcam_settings.tpl:140
+msgid "Close"
+msgstr "Lukk"
+
+#: views/audio_playlist.tpl:124 views/door_settings.tpl:95
+#: views/sensor_settings.tpl:187 views/switch_settings.tpl:200
+#: views/webcam_settings.tpl:141
+msgid "Add"
+msgstr "Legg til"
+
+#: views/calendar.tpl:6 views/inc/menu.tpl:33
+msgid "Calendar"
+msgstr "Kalender"
+
+#: views/calendar.tpl:15 views/dashboard.tpl:71 views/dashboard.tpl:467
+#: views/dashboard.tpl:522 views/dashboard.tpl:577 views/dashboard.tpl:632
+#: views/dashboard.tpl:687 views/dashboard.tpl:742 views/dashboard.tpl:797
+#: views/dashboard.tpl:852 views/door_status.tpl:37 views/inc/menu.tpl:65
+#: views/inc/menu.tpl:76 views/inc/menu.tpl:87 views/inc/menu.tpl:98
+#: views/inc/menu.tpl:131 views/inc/menu.tpl:162 views/inc/sensor_list.tpl:44
+#: views/inc/usage_doors.tpl:48 views/inc/usage_doors.tpl:92
+#: views/inc/usage_doors.tpl:148 views/inc/usage_sensors.tpl:52
+#: views/inc/usage_sensors.tpl:103 views/inc/usage_sensors.tpl:212
+#: views/inc/usage_switches.tpl:48 views/inc/usage_switches.tpl:96
+#: views/inc/usage_switches.tpl:169 views/inc/usage_weather.tpl:34
+#: views/inc/usage_weather.tpl:94 views/inc/usage_webcams.tpl:46
+#: views/inc/usage_webcams.tpl:88 views/inc/usage_webcams.tpl:163
+#: views/notifications.tpl:27 views/notifications.tpl:64
+#: views/notifications.tpl:104 views/notifications.tpl:137
+#: views/notifications.tpl:162 views/notifications.tpl:191
+#: views/switch_status.tpl:37 views/system_environment.tpl:27
+#: views/system_environment.tpl:158 views/system_environment.tpl:370
+#: views/system_environment.tpl:581 views/system_environment.tpl:792
+#: views/system_environment.tpl:1003 views/system_environment.tpl:1214
+#: views/system_log.tpl:15 views/system_status.tpl:32
+#: views/system_status.tpl:88 views/system_status.tpl:144
+#: views/system_status.tpl:200 views/system_status.tpl:256 views/weather.tpl:16
+#: views/webcam.tpl:20
+msgid "Settings"
+msgstr "Innstillinger"
+
+#: views/calendar.tpl:28
+msgid "No calendar available"
+msgstr "Ingen kalender tilgjengelig"
+
+#: views/dashboard.tpl:24 views/inc/usage_dashboard.tpl:93
+#: views/inc/usage_switches.tpl:121 views/inc/usage_switches.tpl:143
+#: views/switch_settings.tpl:28 views/switch_settings.tpl:131
+msgid "Power usage in Watt"
+msgstr "Strømforbruk i watt"
+
+#: views/dashboard.tpl:35 views/inc/usage_dashboard.tpl:99
+#: views/inc/usage_switches.tpl:125 views/inc/usage_switches.tpl:146
+#: views/switch_settings.tpl:31 views/switch_settings.tpl:135
+msgid "Water flow in L/m"
+msgstr "Vannføring i L/m"
+
+#: views/dashboard.tpl:45 views/inc/usage_dashboard.tpl:105
+#: views/inc/usage_switches.tpl:21
+msgid "Total power in kWh"
+msgstr "Total strøm i kWh"
+
+#: views/dashboard.tpl:47 views/dashboard.tpl:54
+msgid "in"
+msgstr "i"
+
+#: views/dashboard.tpl:52 views/inc/usage_dashboard.tpl:111
+#: views/inc/usage_switches.tpl:21
+msgid "Total water in L"
+msgstr "Totalt vann i L"
+
+#: views/dashboard.tpl:62 views/dashboard.tpl:152 views/dashboard.tpl:205
+#: views/dashboard.tpl:258 views/dashboard.tpl:311 views/dashboard.tpl:364
+#: views/dashboard.tpl:417 views/inc/usage_sensors.tpl:85
+#: views/inc/usage_sensors.tpl:157 views/inc/usage_sensors.tpl:189
+#: views/inc/usage_sensors.tpl:206 views/inc/usage_weather.tpl:13
+#: views/inc/usage_weather.tpl:85 views/sensor_settings.tpl:43
+#: views/sensor_settings.tpl:162 views/weather.tpl:7
+msgid "Current"
+msgstr "Aktuelle"
+
+#: views/dashboard.tpl:62 views/inc/menu.tpl:128
+#: views/inc/usage_dashboard.tpl:118 views/inc/usage_dashboard.tpl:211
+#: views/usage.tpl:31
+msgid "Environment"
+msgstr "Miljø"
+
+#: views/dashboard.tpl:83 views/dashboard.tpl:118 views/dashboard.tpl:171
+#: views/dashboard.tpl:224 views/dashboard.tpl:277 views/dashboard.tpl:330
+#: views/dashboard.tpl:383
+msgid "mode"
+msgstr "modus"
+
+#: views/dashboard.tpl:83 views/dashboard.tpl:118 views/dashboard.tpl:171
+#: views/dashboard.tpl:224 views/dashboard.tpl:277 views/dashboard.tpl:330
+#: views/dashboard.tpl:383 views/inc/menu.tpl:199 views/inc/menu.tpl:225
+#: views/inc/usage_environment.tpl:25 views/inc/usage_environment.tpl:121
+#: views/inc/usage_environment.tpl:129 views/inc/usage_environment.tpl:213
+#: views/inc/usage_environment.tpl:221 views/inc/usage_environment.tpl:307
+#: views/inc/usage_environment.tpl:315 views/notifications.tpl:92
+#: views/switch_settings.tpl:144 views/system_environment.tpl:41
+#: views/system_environment.tpl:172 views/system_environment.tpl:384
+#: views/system_environment.tpl:595 views/system_environment.tpl:806
+#: views/system_environment.tpl:1017 views/system_environment.tpl:1228
+#: views/webcam_settings.tpl:120
+msgid "Disabled"
+msgstr "Deaktivert"
+
+#: views/dashboard.tpl:83 views/dashboard.tpl:118 views/dashboard.tpl:171
+#: views/dashboard.tpl:224 views/dashboard.tpl:277 views/dashboard.tpl:330
+#: views/dashboard.tpl:383 views/inc/usage_environment.tpl:138
+#: views/inc/usage_environment.tpl:232 views/inc/usage_environment.tpl:326
+#: views/inc/usage_sensors.tpl:23 views/system_environment.tpl:43
+#: views/system_environment.tpl:174 views/system_environment.tpl:386
+#: views/system_environment.tpl:597 views/system_environment.tpl:808
+#: views/system_environment.tpl:1019 views/system_environment.tpl:1230
+msgid "Sensor"
+msgstr "Sensor"
+
+#: views/dashboard.tpl:83 views/dashboard.tpl:118 views/dashboard.tpl:171
+#: views/dashboard.tpl:224 views/dashboard.tpl:277 views/dashboard.tpl:330
+#: views/dashboard.tpl:383 views/system_environment.tpl:44
+#: views/system_environment.tpl:175 views/system_environment.tpl:387
+#: views/system_environment.tpl:598 views/system_environment.tpl:809
+#: views/system_environment.tpl:1020 views/system_environment.tpl:1231
+msgid "Weather day/night"
+msgstr "Været dag/natt"
+
+#: views/dashboard.tpl:83 views/dashboard.tpl:118 views/dashboard.tpl:171
+#: views/dashboard.tpl:224 views/dashboard.tpl:277 views/dashboard.tpl:330
+#: views/dashboard.tpl:383 views/system_environment.tpl:45
+#: views/system_environment.tpl:176 views/system_environment.tpl:388
+#: views/system_environment.tpl:599 views/system_environment.tpl:810
+#: views/system_environment.tpl:1021 views/system_environment.tpl:1232
+msgid "Weather night/day"
+msgstr "Været natt/dag"
+
+#: views/dashboard.tpl:83 views/inc/usage_dashboard.tpl:122
+#: views/inc/usage_environment.tpl:15 views/inc/usage_environment.tpl:398
+#: views/system_environment.tpl:27 views/system_environment.tpl:202
+#: views/system_environment.tpl:414 views/system_environment.tpl:625
+#: views/system_environment.tpl:836 views/system_environment.tpl:1047
+msgid "Lights"
+msgstr "Lys"
+
+#: views/dashboard.tpl:87 views/dashboard.tpl:122 views/dashboard.tpl:175
+#: views/dashboard.tpl:228 views/dashboard.tpl:281 views/dashboard.tpl:334
+#: views/dashboard.tpl:387 views/inc/menu.tpl:73 views/inc/menu.tpl:84
+#: views/inc/menu.tpl:107 views/inc/menu.tpl:122 views/inc/usage_doors.tpl:74
+#: views/inc/usage_doors.tpl:79 views/inc/usage_doors.tpl:142
+#: views/inc/usage_environment.tpl:22 views/inc/usage_environment.tpl:84
+#: views/inc/usage_environment.tpl:118 views/inc/usage_environment.tpl:178
+#: views/inc/usage_environment.tpl:210 views/inc/usage_environment.tpl:272
+#: views/inc/usage_environment.tpl:304 views/inc/usage_environment.tpl:366
+#: views/inc/usage_switches.tpl:83
+msgid "Status"
+msgstr "Status"
+
+#: views/dashboard.tpl:93 views/dashboard.tpl:450 views/dashboard.tpl:505
+#: views/dashboard.tpl:560 views/dashboard.tpl:615 views/dashboard.tpl:670
+#: views/dashboard.tpl:725 views/dashboard.tpl:780 views/dashboard.tpl:835
+#: views/door_status.tpl:20 views/inc/sensor_list.tpl:27
+#: views/inc/usage_dashboard.tpl:67 views/inc/usage_dashboard.tpl:181
+#: views/inc/usage_doors.tpl:31 views/inc/usage_sensors.tpl:35
+#: views/inc/usage_switches.tpl:31 views/inc/usage_webcams.tpl:29
+#: views/switch_status.tpl:20 views/system_environment.tpl:70
+#: views/system_status.tpl:15 views/system_status.tpl:71
+#: views/system_status.tpl:127 views/system_status.tpl:183
+#: views/system_status.tpl:239
+msgid "Day"
+msgstr "Dag"
+
+#: views/dashboard.tpl:105 views/inc/usage_dashboard.tpl:74
+#: views/system_environment.tpl:110
+msgid "Night"
+msgstr "Natt"
+
+#: views/dashboard.tpl:118 views/inc/menu.tpl:41
+#: views/inc/usage_dashboard.tpl:159 views/inc/usage_sensors.tpl:131
+#: views/sensor_settings.tpl:128 views/system_environment.tpl:158
+msgid "Temperature"
+msgstr "Temperatur"
+
+#: views/dashboard.tpl:128 views/dashboard.tpl:140 views/dashboard.tpl:181
+#: views/dashboard.tpl:193 views/dashboard.tpl:234 views/dashboard.tpl:246
+#: views/dashboard.tpl:287 views/dashboard.tpl:299 views/dashboard.tpl:340
+#: views/dashboard.tpl:352 views/dashboard.tpl:393 views/dashboard.tpl:405
+#: views/inc/usage_dashboard.tpl:175
+msgid "Period"
+msgstr "Periode"
+
+#: views/dashboard.tpl:158 views/dashboard.tpl:211 views/dashboard.tpl:264
+#: views/dashboard.tpl:317 views/dashboard.tpl:370 views/dashboard.tpl:423
+msgid "Range"
+msgstr "Område"
+
+#: views/dashboard.tpl:164 views/dashboard.tpl:217 views/dashboard.tpl:270
+#: views/dashboard.tpl:323 views/dashboard.tpl:376 views/dashboard.tpl:429
+#: views/system_environment.tpl:191 views/system_environment.tpl:403
+#: views/system_environment.tpl:614 views/system_environment.tpl:825
+#: views/system_environment.tpl:1036
+msgid "Day/night difference"
+msgstr "Dag/natt forskjell"
+
+#: views/dashboard.tpl:171 views/inc/menu.tpl:44
+#: views/inc/usage_dashboard.tpl:158 views/inc/usage_sensors.tpl:132
+#: views/sensor_settings.tpl:129 views/system_environment.tpl:370
+msgid "Humidity"
+msgstr "Luftfuktighet"
+
+#: views/dashboard.tpl:224 views/inc/menu.tpl:47 views/sensor_settings.tpl:130
+#: views/system_environment.tpl:581
+msgid "Moisture"
+msgstr "Fuktighet"
+
+#: views/dashboard.tpl:277 views/inc/menu.tpl:56 views/sensor_settings.tpl:133
+#: views/system_environment.tpl:1003
+msgid "pH"
+msgstr "pH"
+
+#: views/dashboard.tpl:330 views/inc/menu.tpl:50 views/sensor_settings.tpl:131
+#: views/system_environment.tpl:792
+msgid "Conductivity"
+msgstr "Ledningsevne"
+
+#: views/dashboard.tpl:383 views/system_environment.tpl:1214
+msgid "Water tank"
+msgstr "Vanntank"
+
+#: views/dashboard.tpl:441
+msgid "Average Temperature"
+msgstr "Gjennomsnittstemperatur"
+
+#: views/dashboard.tpl:441 views/dashboard.tpl:496 views/dashboard.tpl:551
+#: views/dashboard.tpl:606 views/dashboard.tpl:661 views/dashboard.tpl:716
+#: views/dashboard.tpl:771 views/dashboard.tpl:826 views/inc/sensor_list.tpl:11
+#: views/inc/sensor_list.tpl:12 views/inc/sensor_list.tpl:13
+#: views/inc/sensor_list.tpl:14 views/inc/sensor_list.tpl:15
+#: views/inc/sensor_list.tpl:16 views/inc/sensor_list.tpl:17
+#: views/inc/sensor_list.tpl:18 views/inc/usage_dashboard.tpl:169
+#: views/inc/usage_doors.tpl:21 views/inc/usage_sensors.tpl:25
+#: views/system_status.tpl:6 views/system_status.tpl:62
+#: views/system_status.tpl:118 views/system_status.tpl:174
+msgid "warning"
+msgstr "advarsel"
+
+#: views/dashboard.tpl:453 views/dashboard.tpl:508 views/dashboard.tpl:563
+#: views/dashboard.tpl:618 views/dashboard.tpl:673 views/dashboard.tpl:728
+#: views/dashboard.tpl:783 views/dashboard.tpl:838 views/door_status.tpl:23
+#: views/inc/sensor_list.tpl:30 views/inc/usage_dashboard.tpl:182
+#: views/inc/usage_doors.tpl:34 views/inc/usage_sensors.tpl:38
+#: views/inc/usage_switches.tpl:34 views/inc/usage_webcams.tpl:32
+#: views/switch_status.tpl:23 views/system_status.tpl:18
+#: views/system_status.tpl:74 views/system_status.tpl:130
+#: views/system_status.tpl:186 views/system_status.tpl:242
+msgid "Week"
+msgstr "Uke"
+
+#: views/dashboard.tpl:456 views/dashboard.tpl:511 views/dashboard.tpl:566
+#: views/dashboard.tpl:621 views/dashboard.tpl:676 views/dashboard.tpl:731
+#: views/dashboard.tpl:786 views/dashboard.tpl:841 views/door_status.tpl:26
+#: views/inc/sensor_list.tpl:33 views/inc/usage_dashboard.tpl:183
+#: views/inc/usage_doors.tpl:37 views/inc/usage_sensors.tpl:41
+#: views/inc/usage_switches.tpl:37 views/inc/usage_webcams.tpl:35
+#: views/switch_status.tpl:26 views/system_status.tpl:21
+#: views/system_status.tpl:77 views/system_status.tpl:133
+#: views/system_status.tpl:189 views/system_status.tpl:245
+msgid "Month"
+msgstr "Måned"
+
+#: views/dashboard.tpl:459 views/dashboard.tpl:514 views/dashboard.tpl:569
+#: views/dashboard.tpl:624 views/dashboard.tpl:679 views/dashboard.tpl:734
+#: views/dashboard.tpl:789 views/dashboard.tpl:844 views/door_status.tpl:29
+#: views/inc/sensor_list.tpl:36 views/inc/usage_dashboard.tpl:184
+#: views/inc/usage_doors.tpl:40 views/inc/usage_sensors.tpl:44
+#: views/inc/usage_switches.tpl:40 views/inc/usage_webcams.tpl:38
+#: views/switch_status.tpl:29 views/system_status.tpl:24
+#: views/system_status.tpl:80 views/system_status.tpl:136
+#: views/system_status.tpl:192 views/system_status.tpl:248
+msgid "Year"
+msgstr "År"
+
+#: views/dashboard.tpl:470 views/dashboard.tpl:525 views/dashboard.tpl:580
+#: views/dashboard.tpl:635 views/dashboard.tpl:690 views/dashboard.tpl:745
+#: views/dashboard.tpl:800 views/dashboard.tpl:855 views/door_status.tpl:40
+#: views/inc/sensor_list.tpl:47 views/switch_status.tpl:40
+msgid "Export data"
+msgstr "Eksportere data"
+
+#: views/dashboard.tpl:496
+msgid "Average Humidity"
+msgstr "Gjennomsnittlig luftfuktighet"
+
+#: views/dashboard.tpl:551
+msgid "Average Moisture"
+msgstr "Gjennomsnittlig fuktighet"
+
+#: views/dashboard.tpl:606
+msgid "Average Conductivity"
+msgstr "Gjennomsnittlig ledningsevne"
+
+#: views/dashboard.tpl:661
+msgid "Average Distance"
+msgstr "Gjennomsnittlig avstand"
+
+#: views/dashboard.tpl:716
+msgid "Average pH"
+msgstr "Gjennomsnittlig pH"
+
+#: views/dashboard.tpl:771
+msgid "Average Light"
+msgstr "Gjennomsnittlig lys"
+
+#: views/dashboard.tpl:826
+msgid "Average Fertility"
+msgstr "Gjennomsnittlig fruktbarhet"
+
+#: views/door_settings.tpl:16
+msgid "Here you can configure your doors."
+msgstr "Her kan du konfigurere dørene."
+
+#: views/door_settings.tpl:19 views/door_settings.tpl:70 views/hardware.tpl:7
+#: views/hardware.tpl:30 views/inc/menu.tpl:153 views/inc/usage_doors.tpl:98
+#: views/inc/usage_doors.tpl:119 views/inc/usage_sensors.tpl:109
+#: views/inc/usage_sensors.tpl:165 views/inc/usage_switches.tpl:103
+#: views/inc/usage_switches.tpl:134 views/sensor_settings.tpl:19
+#: views/sensor_settings.tpl:95 views/switch_settings.tpl:19
+#: views/switch_settings.tpl:106
+msgid "Hardware"
+msgstr "Maskinvare"
+
+#: views/door_settings.tpl:22 views/door_settings.tpl:79
+#: views/inc/usage_doors.tpl:106 views/inc/usage_doors.tpl:122
+#: views/inc/usage_sensors.tpl:123 views/inc/usage_sensors.tpl:168
+#: views/inc/usage_switches.tpl:112 views/inc/usage_switches.tpl:137
+#: views/sensor_settings.tpl:22 views/sensor_settings.tpl:119
+#: views/switch_settings.tpl:22 views/switch_settings.tpl:122
+msgid "Address"
+msgstr "Adresse"
+
+#: views/door_settings.tpl:49
+msgid "Add new door sensor"
+msgstr "Legg til ny dør sensor"
+
+#: views/door_settings.tpl:56 views/door_status.tpl:11
+#: views/inc/usage_doors.tpl:19
+msgid "Door"
+msgstr "Dør"
+
+#: views/door_settings.tpl:73 views/hardware.tpl:66 views/hardware.tpl:91
+#: views/inc/usage_doors.tpl:101 views/inc/usage_switches.tpl:107
+#: views/switch_settings.tpl:111
+msgid "GPIO"
+msgstr "GPIO"
+
+#: views/door_settings.tpl:74 views/inc/usage_sensors.tpl:117
+#: views/sensor_settings.tpl:110 views/switch_settings.tpl:114
+msgid "Remote"
+msgstr "Fjern"
+
+#: views/door_status.tpl:4
+msgid "No doors available"
+msgstr "Ingen dører tilgjengelige"
+
+#: views/hardware.tpl:10 views/hardware.tpl:47
+msgid "Raspberry Pi"
+msgstr "Raspberry Pi"
+
+#: views/hardware.tpl:13 views/hardware.tpl:53 views/inc/menu.tpl:38
+#: views/system_environment.tpl:182 views/system_environment.tpl:394
+#: views/system_environment.tpl:605 views/system_environment.tpl:816
+#: views/system_environment.tpl:1027 views/system_environment.tpl:1238
+#: views/usage.tpl:16
+msgid "Sensors"
+msgstr "Sensorer"
+
+#: views/hardware.tpl:16 views/hardware.tpl:87 views/inc/menu.tpl:70
+#: views/usage.tpl:19
+msgid "Switches"
+msgstr "Brytere"
+
+#: views/hardware.tpl:19 views/hardware.tpl:119 views/inc/menu.tpl:81
+#: views/usage.tpl:22
+msgid "Doors"
+msgstr "Dører"
+
+#: views/hardware.tpl:22
+msgid "Webcams"
+msgstr "Nettkamera"
+
+#: views/hardware.tpl:25 views/hardware.tpl:138 views/inc/menu.tpl:103
+#: views/usage.tpl:28
+msgid "Audio"
+msgstr "Lyd"
+
+#: views/hardware.tpl:31
+msgid "Hover over the image below to read more about the supported hardware."
+msgstr ""
+"Hold musepekeren over bildet nedenfor for å lese mer om den støttede "
+"maskinvaren."
+
+#: views/hardware.tpl:48
+msgid ""
+"TerrariumPI software is designed to run on a Raspberry Pi. It has been "
+"tested on a Raspberry Pi 2 and 3 with %s. Raspberry Pi Zero is not tested."
+msgstr ""
+"TerrariumPI programvare er designet for å kjøre på en Raspberry Pi. Det har "
+"blitt testet på en Raspberry Pi 2 og 3 med %s. Raspberry Pi Zero er ikke "
+"testet."
+
+#: views/hardware.tpl:48 views/info.tpl:34
+msgid "Raspbian OS"
+msgstr "Raspbian OS"
+
+#: views/hardware.tpl:49
+msgid ""
+"The Raspberry Pi should have network connection and optionally SSH enabled "
+"for remote management. Also a strong power adapter is needed (+2Amps)."
+msgstr ""
+"Raspberry Pi bør ha nettverkstilkobling og eventuelt SSH aktivert for "
+"ekstern administrasjon. Også en sterk strømadapter er nødvendig (+ 2Amps)."
+
+#: views/hardware.tpl:54
+msgid ""
+"TerrariumPI software has support for different kind of sensors. The "
+"following sensors below are tested with TerrariumPI software."
+msgstr ""
+"TerrariumPI programvare har støtte for ulike typer sensorer. Følgende "
+"sensorer nedenfor er testet med TerrariumPI programvare."
+
+#: views/hardware.tpl:57 views/inc/usage_sensors.tpl:116
+#: views/sensor_settings.tpl:108
+msgid "1Wire"
+msgstr "1Wire"
+
+#: views/hardware.tpl:58
+msgid ""
+"The 1wire bus will be scanned automatically during start up to load the "
+"connected and supported sensors. The DS18B20 sensors can share the GPIO pin "
+"by putting the sensors in parallel."
+msgstr ""
+"1wire bus vil bli skannet etter automatisk i løpet av oppstart å laste "
+"sensorer som er koblet til og støttet. DS18B20 sensorer kan dele GPIO PIN "
+"ved å sette sensorer parallelt."
+
+#: views/hardware.tpl:59
+msgid ""
+"Through the 1wire bus of the Raspberry Pi you can use the following hardware "
+"sensors"
+msgstr ""
+"Gjennom 1wire Bus av Raspberry Pi kan du bruke følgende maskinvare sensorer"
+
+#: views/hardware.tpl:61 views/hardware.tpl:81
+msgid "DS18B20"
+msgstr "DS18B20"
+
+#: views/hardware.tpl:67
+msgid ""
+"GPIO sensors has to added manually to TerrariumPI software. That can done in "
+"the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and "
+"DHT22 needs an extra resistor"
+msgstr ""
+"GPIO sensorer må legges til manuelt til TerrariumPI programvare. Dette kan "
+"gjøres i webgrensesnittet. GPIO-sensorene kan ikke dele GPIO-pins. DHT11 og "
+"DHT22 trenger en ekstra motstand"
+
+#: views/hardware.tpl:68
+msgid ""
+"Through the GPIO bus of the Raspberry Pi you can use the following hardware "
+"sensors"
+msgstr ""
+"Gjennom GPIO bus av Raspberry Pi kan du bruke følgende maskinvare sensorer"
+
+#: views/hardware.tpl:70 views/inc/usage_sensors.tpl:113
+#: views/sensor_settings.tpl:100
+msgid "DHT11"
+msgstr "DHT11"
+
+#: views/hardware.tpl:71 views/inc/usage_sensors.tpl:114
+#: views/sensor_settings.tpl:101
+msgid "DHT22"
+msgstr "DHT22"
+
+#: views/hardware.tpl:72 views/inc/usage_sensors.tpl:115
+#: views/sensor_settings.tpl:102
+msgid "AM2302"
+msgstr "AM2302"
+
+#: views/hardware.tpl:77 views/inc/usage_sensors.tpl:112
+#: views/sensor_settings.tpl:99
+msgid "OWFS"
+msgstr "OWFS"
+
+#: views/hardware.tpl:78
+msgid ""
+"The OWFS server will be scanned automatically during start up to load the "
+"connected and supported sensors. There can be all kind of sensors connected "
+"to this server. All supported sensors will be shown."
+msgstr ""
+"OWFS server vil bli skannet etter automatisk i løpet av oppstart å laste "
+"sensorer som er koblet til og støttet. Det kan være alle slags sensorer "
+"koblet til denne serveren. Alle støttede sensorer vil vises."
+
+#: views/hardware.tpl:79
+msgid ""
+"Through the I2C bus of the Raspberry Pi you can use the following hardware "
+"sensors with OWFS software"
+msgstr ""
+"Gjennom I2C bus på Raspberry Pi kan du bruke følgende maskinvare sensorer "
+"med OWFS programvare"
+
+#: views/hardware.tpl:82
+msgid "HIH400"
+msgstr "HIH400"
+
+#: views/hardware.tpl:88
+msgid ""
+"TerrariumPI software has support for different kind of relay boards. The "
+"following relay boards below are tested with TerrariumPI software."
+msgstr ""
+"TerrariumPI Software har støtte for ulike typer relé kort. Relé kortene "
+"nedenfor er testet med TerrariumPI programvare."
+
+#: views/hardware.tpl:92
+msgid ""
+"For every relay on the board there is need for a dedicated GPIO pin. For a 4 "
+"ports relay board there are 4 control GPIO pins and 2 pins for power and "
+"ground needed. This makes that it needs 6 GPIO pins in total."
+msgstr ""
+"For hvert relè på kortet er det behov for en dedikert GPIO PIN. For et 4 "
+"porter relé kort er det 4 kontroll GPIO pins og 2 pins for strøm og jord er "
+"nødvendig. Dette gjør at den trenger 6 GPIO pins totalt."
+
+#: views/hardware.tpl:93 views/hardware.tpl:102 views/hardware.tpl:111
+msgid "The following boards are tested"
+msgstr "Følgende kort er testet"
+
+#: views/hardware.tpl:95
+msgid "VMA400"
+msgstr "VMA400"
+
+#: views/hardware.tpl:100 views/hardware.tpl:132
+msgid "USB"
+msgstr "USB"
+
+#: views/hardware.tpl:101
+msgid ""
+"The USB relay board does not need GPIO pins. It only needs one USB "
+"connection. The TerrariumPI software supports boards that are either running "
+"in Serial or BitBang. This is automatically detected when adding power "
+"switches."
+msgstr ""
+"USB Relè kortet trenger ikke GPIO pins. Den trenger bare én USB-tilkobling. "
+"TerrariumPI programvaren støtter kort som enten kjører i seriell eller "
+"BitBang. Dette oppdages automatisk ved tillegging av strøm brytere."
+
+#: views/hardware.tpl:104
+msgid "Denkovi"
+msgstr "Denkovi"
+
+#: views/hardware.tpl:109
+msgid "PWM"
+msgstr "PWM"
+
+#: views/hardware.tpl:110
+msgid "With PWM controlled boards it is possible to support dimming devices."
+msgstr "Med PWM kontrollerte kort er det mulig å støtte dimming av enheter."
+
+#: views/hardware.tpl:113
+msgid "Nextevo"
+msgstr "Nextevo"
+
+#: views/hardware.tpl:120
+msgid ""
+"TerrariumPI software has support for magnetic door sensors. Only versions "
+"with two wires are supported. Connect one wire to the ground and the other "
+"wire to any GPIO pin that is free (except power and ground pins)."
+msgstr ""
+"TerrariumPI programvare har støtte for magnetiske dør sensorer. Bare "
+"versjoner med to ledninger støttes. Koble en ledning til jord og den andre "
+"ledningen til en GPIO PIN som er fri (unntatt strøm og jord pins)."
+
+#: views/hardware.tpl:123 views/inc/menu.tpl:92 views/inc/usage_webcams.tpl:19
+#: views/usage.tpl:25 views/webcam.tpl:11 views/webcam_settings.tpl:67
+msgid "Webcam"
+msgstr "Webkamera"
+
+#: views/hardware.tpl:124
+msgid ""
+"TerrariumPI software has support for different kind of cameras. The "
+"following cameras below are tested with TerrariumPI software."
+msgstr ""
+"TerrariumPI programvare har støtte for ulike typer kameraer. Følgende "
+"kameraer nedenfor er testet med TerrariumPI programvare."
+
+#: views/hardware.tpl:127 views/inc/usage_webcams.tpl:128
+#: views/webcam_settings.tpl:21
+msgid "RPICam"
+msgstr "RPICam"
+
+#: views/hardware.tpl:128
+msgid ""
+"There are different Raspberry Pi cameras available. If the camera is "
+"Raspberry Pi compatible, it can be used with TerrariumPI software."
+msgstr ""
+"Det er ulike Raspberry Pi kameraer tilgjengelig. Hvis kameraet er Raspberry "
+"Pi-kompatibel, kan den brukes med TerrariumPI programvare."
+
+#: views/hardware.tpl:133
+msgid ""
+"All kind of USB cameras can be used. Enter physical path of the device like /"
+"dev/videoX."
+msgstr ""
+"Alle typer USB-kameraer kan brukes. Angi fysisk bane for enheten som /dev/"
+"videoX."
+
+#: views/inc/menu.tpl:10
+msgid "Welcome"
+msgstr "Velkommen"
+
+#: views/inc/menu.tpl:18
+msgid "General"
+msgstr "Generell"
+
+#: views/inc/menu.tpl:21 views/inc/usage_dashboard.tpl:202 views/usage.tpl:7
+msgid "Home"
+msgstr "Hjem"
+
+#: views/inc/menu.tpl:24
+msgid "Dashboard"
+msgstr "Kontrollpanel"
+
+#: views/inc/menu.tpl:27 views/profile.tpl:6 views/usage.tpl:13
+msgid "Profile"
+msgstr "Profil"
+
+#: views/inc/menu.tpl:53 views/sensor_settings.tpl:132
+msgid "Distance"
+msgstr "Avstand"
+
+#: views/inc/menu.tpl:59 views/sensor_settings.tpl:134
+msgid "Light"
+msgstr "Lys"
+
+#: views/inc/menu.tpl:62 views/sensor_settings.tpl:137
+msgid "Fertility"
+msgstr "Fertilitet"
+
+#: views/inc/menu.tpl:95
+msgid "Show"
+msgstr "Vis"
+
+#: views/inc/menu.tpl:111
+msgid "Playlist"
+msgstr "Spilleliste"
+
+#: views/inc/menu.tpl:119
+msgid "System"
+msgstr "System"
+
+#: views/inc/menu.tpl:125
+msgid "Notifications"
+msgstr "Varsler"
+
+#: views/inc/menu.tpl:134
+msgid "Log"
+msgstr "Logg"
+
+#: views/inc/menu.tpl:141
+msgid "About"
+msgstr "Om"
+
+#: views/inc/menu.tpl:147
+msgid "Info"
+msgstr "Info"
+
+#: views/inc/menu.tpl:150
+msgid "Usage"
+msgstr "Forbruk"
+
+#: views/inc/menu.tpl:163
+msgid "FullScreen"
+msgstr "Fullskjerm"
+
+#: views/inc/menu.tpl:164
+msgid "Lock"
+msgstr "Lås"
+
+#: views/inc/menu.tpl:177
+msgid "date/time"
+msgstr "dato/tid"
+
+#: views/inc/menu.tpl:182 views/inc/usage_dashboard.tpl:19
+msgid "Online"
+msgstr "Online"
+
+#: views/inc/menu.tpl:185 views/inc/usage_dashboard.tpl:26
+msgid "Offline"
+msgstr "Avlogget"
+
+#: views/inc/menu.tpl:191 views/inc/menu.tpl:211 views/inc/menu.tpl:231
+msgid "No messages"
+msgstr "Ingen meldinger"
+
+#: views/inc/menu.tpl:202 views/inc/usage_dashboard.tpl:43
+#: views/inc/usage_doors.tpl:82
+msgid "Door is closed"
+msgstr "Døren er lukket"
+
+#: views/inc/menu.tpl:205 views/inc/usage_dashboard.tpl:50
+#: views/inc/usage_doors.tpl:81
+msgid "Door is open"
+msgstr "Døren er åpen"
+
+#: views/inc/menu.tpl:219
+msgid "Playing"
+msgstr "Spiller av"
+
+#: views/inc/menu.tpl:222
+msgid "Stopped"
+msgstr "Stoppet"
+
+#: views/inc/sensor_list.tpl:4
+msgid "No sensors available"
+msgstr "Ingen sensorer er tilgjengelige"
+
+#: views/inc/sensor_list.tpl:11 views/inc/sensor_list.tpl:12
+#: views/inc/sensor_list.tpl:13 views/inc/sensor_list.tpl:14
+#: views/inc/sensor_list.tpl:15 views/inc/sensor_list.tpl:16
+#: views/inc/sensor_list.tpl:17 views/inc/sensor_list.tpl:18
+msgid "error"
+msgstr "feil"
+
+#: views/inc/sensor_list.tpl:11 views/inc/usage_sensors.tpl:68
+#: views/sensor_settings.tpl:74
+msgid "Temperature sensor"
+msgstr "Temperatursensor"
+
+#: views/inc/sensor_list.tpl:12 views/inc/usage_sensors.tpl:67
+#: views/sensor_settings.tpl:75
+msgid "Humidity sensor"
+msgstr "Fuktighet sensor"
+
+#: views/inc/sensor_list.tpl:13 views/sensor_settings.tpl:76
+msgid "Moisture sensor"
+msgstr "Luftfuktighet sensor"
+
+#: views/inc/sensor_list.tpl:14 views/sensor_settings.tpl:77
+msgid "Conductivity sensor"
+msgstr "Ledningsevne sensor"
+
+#: views/inc/sensor_list.tpl:15 views/inc/usage_sensors.tpl:69
+#: views/sensor_settings.tpl:78
+msgid "Distance sensor"
+msgstr "Avstand sensor"
+
+#: views/inc/sensor_list.tpl:16 views/sensor_settings.tpl:79
+msgid "pH sensor"
+msgstr "pH sensor"
+
+#: views/inc/sensor_list.tpl:17 views/sensor_settings.tpl:80
+msgid "Light sensor"
+msgstr "Lyssensor"
+
+#: views/inc/sensor_list.tpl:18 views/sensor_settings.tpl:81
+msgid "Fertility sensor"
+msgstr "Fruktbarhet sensor"
+
+#: views/inc/usage_dashboard.tpl:14 views/inc/usage_dashboard.tpl:205
+msgid "Top indicators"
+msgstr "Topp indikatorer"
+
+#: views/inc/usage_dashboard.tpl:15
+msgid ""
+"The dashboard has two indicators and a clock on the top row at the right "
+"site."
+msgstr ""
+"Dashbordet har to indikatorer og en klokke på øverste rad på høyre side."
+
+#: views/inc/usage_dashboard.tpl:17
+msgid "Status indicator"
+msgstr "Statusindikator"
+
+#: views/inc/usage_dashboard.tpl:23
+msgid ""
+"The first green round check mark shows that the interface is connected with "
+"the server and that it is working as expected."
+msgstr ""
+"Den første grønne avmerkingen viser at grensesnittet er koblet til serveren, "
+"og at det fungerer som forventet."
+
+#: views/inc/usage_dashboard.tpl:30
+msgid ""
+"When there is a connection problem, the first round check mark will turn to "
+"a red explanation mark which indicates that there is a problem."
+msgstr ""
+"Når det er et tilkoblingsproblem, vil den første runde avmerkingen slå til "
+"en rød forklaring-indikator som angir at det er et problem."
+
+#: views/inc/usage_dashboard.tpl:33 views/inc/usage_dashboard.tpl:57
+msgid "History"
+msgstr "Historikk"
+
+#: views/inc/usage_dashboard.tpl:37
+msgid ""
+"Click on the online/offline indicator to get some history. The history is "
+"cleared when the web interface is reloaded."
+msgstr ""
+"Klikk på online/offline indikator for å få litt historie. Loggen tømmes når "
+"webgrensesnittet lastes inn på nytt."
+
+#: views/inc/usage_dashboard.tpl:41
+msgid "Door indicator"
+msgstr "Dør indikator"
+
+#: views/inc/usage_dashboard.tpl:47
+msgid ""
+"The second indicator is a lock that shows the status of the door(s). It is "
+"green when all doors are closed."
+msgstr ""
+"Den andre indikatoren er en lås som viser statusen til døren (e). Det er "
+"grønt når alle dørene er lukket."
+
+#: views/inc/usage_dashboard.tpl:54
+msgid ""
+"When a door is opened, the indicator will change to a red open lock. This "
+"indicator is near real time, so when you open the door, the indicator will "
+"change."
+msgstr ""
+"Når en dør åpnes, vil indikatoren bytte til en rød åpen lås. Denne "
+"indikatoren er nær sanntid, så når du åpner døren, vil indikatoren endres."
+
+#: views/inc/usage_dashboard.tpl:61
+msgid ""
+"Click on the door indicator to see the last 6 notifications. During loading "
+"of the dashboard the door changes for the last 24 hours are loaded from "
+"history."
+msgstr ""
+"Klikk på dør-indikatoren for å se de 6 siste meldingene. Under lasting av "
+"dashbordet vil dør endringene for de siste 24 timene lastes inn fra loggen."
+
+#: views/inc/usage_dashboard.tpl:65
+msgid "Date and time"
+msgstr "Dato og tid"
+
+#: views/inc/usage_dashboard.tpl:71
+msgid ""
+"The last indicator is the current time. When it is day time, a sun is shown."
+msgstr ""
+"Den siste indikatoren er gjeldende klokkeslett. Når det er dagtid, vises en "
+"sol."
+
+#: views/inc/usage_dashboard.tpl:78
+msgid "When the sun sets, the icon of the date time indicator in a moon."
+msgstr "Ved soloppgang vises ikonet for dato tid indikatoren i en måne."
+
+#: views/inc/usage_dashboard.tpl:83 views/inc/usage_dashboard.tpl:208
+msgid "Top tiles"
+msgstr "Topp fliser"
+
+#: views/inc/usage_dashboard.tpl:84
+msgid ""
+"All tiles will be updated in real time. When a switch is toggled, either by "
+"hand or by the system, the tiles will update instantly."
+msgstr ""
+"Alle flisene vil bli oppdatert i sanntid. Når en svitsj veksles, enten for "
+"hånd eller av systemet, vil flisene oppdateres umiddelbart."
+
+#: views/inc/usage_dashboard.tpl:89
+msgid ""
+"The first tile shows the hardware uptime. And it shows three bars which "
+"indicates the load off the hardware. First bar is actual load, second is "
+"load during 5 minutes and last is load during 15 minutes."
+msgstr ""
+"Den første flisen viser maskinvare oppetid. Og den viser tre søyler for å "
+"indikere belastningen av maskinvaren. Første linjen er faktisk belastning, "
+"andre er last i løpet av 5 minutter og siste er last i løpet av 15 minutter."
+
+#: views/inc/usage_dashboard.tpl:95
+msgid ""
+"The second tile shows the current power usage in Watts. The amount is "
+"calculated based on the power switch settings and what the state is of the "
+"switches. The bar shows a percentage of the max usage."
+msgstr ""
+"Den andre brikken viser gjeldende strømforbruk i watt. Beløpet er beregnet "
+"basert på strøm bryter instillingene og hva tilstanden til bryterene er. "
+"Linjen viser en prosentandel av maksimal bruk."
+
+#: views/inc/usage_dashboard.tpl:101
+msgid ""
+"The third tile shows the current water flow in liters per minute. The amount "
+"is calculated based on the power switch settings and what the state is of "
+"the switches. The bar shows a percentage of the max usage."
+msgstr ""
+"Den tredje flisen viser gjeldende vannstrøm i liter per minutt. Beløpet er "
+"beregnet basert på strøm bryter instillingene og hva tilstanden til "
+"bryterene er. Linjen viser en prosentandel av maksimal bruk."
+
+#: views/inc/usage_dashboard.tpl:107
+msgid ""
+"The fourth tile shows the total power usage from the start of using this "
+"software. It will calculate the total power usage every 10 minutes based on "
+"all historical data. It is shown in kilo Watt per hour. When the power price "
+"is entered, it will show the costs of the power bill and the amount of days "
+"it is calculated on."
+msgstr ""
+"Den fjerde flisen viser den totale strømforbruket fra en begynnte å bruke "
+"programvaren. Den beregner det toltale strømforbruket hvert 10 minutt basert "
+"på alle historisk data. Den er vist i kilo watt per time. Når strømprisen er "
+"angitt, vil det vise kostnadene for strømregningen og antall dager det er "
+"beregnet på."
+
+#: views/inc/usage_dashboard.tpl:113
+msgid ""
+"The fifth tile shows the total water usage from the start of using this "
+"software. It will calculate the total water usage every 10 minutes based on "
+"all historical data. It is shown in liters. When the water price is entered, "
+"it will show the costs of the water bill and the amount of days it is "
+"calculated on."
+msgstr ""
+"Den femte flis viser den totale vannforbruk fra en begynnte å bruke "
+"programvaren. Den beregner det totale vannforbruket hvert 10 minutter basert "
+"på alle historiske data. Det er vist i liter. Når vannprisen er angitt, vil "
+"den vise kostnadene for vannregningen og antall dager det er beregnet på."
+
+#: views/inc/usage_dashboard.tpl:120
+msgid ""
+"The environment section shows the current state of the environment. The "
+"environment is divided in three parts. There is a lighting system, a spray "
+"system and a heating system."
+msgstr ""
+"Miljø-delen viser gjeldende miljø status. Miljøet er delt i tre deler. Det "
+"er et belysnings system, et spray system og et varmesystem."
+
+#: views/inc/usage_dashboard.tpl:121
+msgid ""
+"When a part is active the title is in color. If the title is gray that part "
+"is than not running or configured."
+msgstr ""
+"Når en del er aktiv, er tittelen i farger. Hvis tittelen er grå er den delen "
+"ikke konfigurert eller kjører ikke."
+
+#: views/inc/usage_dashboard.tpl:124
+msgid ""
+"The lights part give the basic information about how the light system is "
+"configured. It shows the chosen mode out of 'clock' or 'weather'. There are "
+"no triggers or warnings used by the light system."
+msgstr ""
+"Lys delen gir grunnleggende informasjon om hvordan lyssystemet er "
+"konfigurert. Den viser valgt modus ut av ' klokke ' eller ' Vær '. Det er "
+"ingen utløsere eller advarsler som blir brukt av lyssystemet."
+
+#: views/inc/usage_dashboard.tpl:125
+msgid ""
+"The state indicator is either green or red. Green means that it is switched "
+"on. When it is red, the lights are switched off."
+msgstr ""
+"Statusindikatoren er enten grønn eller rød. Grønt betyr at den er slått på. "
+"Når den er rød, er lysene skrudd av."
+
+#: views/inc/usage_dashboard.tpl:126
+msgid "The on value is the time stamp when the lights are turned on."
+msgstr "På-verdien er tidsangivelsen når lysene er slått på."
+
+#: views/inc/usage_dashboard.tpl:127
+msgid "The off value is the time stamp when the lights will be turned off."
+msgstr "Av-verdien er tidsangivelsen når lysene blir slått av."
+
+#: views/inc/usage_dashboard.tpl:128
+msgid "The duration holds the amount of hours that the lights are on."
+msgstr "Varigheten inneholder antall timer lysene lyser."
+
+#: views/inc/usage_dashboard.tpl:130 views/inc/usage_environment.tpl:110
+#: views/inc/usage_environment.tpl:401
+msgid "Sprayer"
+msgstr "Sprayer"
+
+#: views/inc/usage_dashboard.tpl:137 views/inc/usage_environment.tpl:201
+#: views/inc/usage_environment.tpl:404
+msgid "Heater"
+msgstr "Varmer"
+
+#: views/inc/usage_dashboard.tpl:148 views/inc/usage_dashboard.tpl:214
+msgid "Graphs"
+msgstr "Grafer"
+
+#: views/inc/usage_dashboard.tpl:149
+msgid ""
+"The graphs on the home are combined graphs from all temperature and humidity "
+"sensors. The gauge meters are real time and show the current value. The "
+"historical graphs shows also the minimum and maximum value and will be "
+"updated once every 5 minutes."
+msgstr ""
+"Grafene på hjemmesiden er kombinerte grafer fra alle temperatur og "
+"luftfuktighet sensorer. Nålene er sanntid og viser den gjeldende verdien. "
+"Den historiske grafer viser også minimum og maksimum verdi og vil bli "
+"oppdatert en gang hvert 5. minutt."
+
+#: views/inc/usage_dashboard.tpl:150
+msgid ""
+"Every sensor has his own type and a minimum and maximum value. To get the "
+"graph data all the data is combined and divided by the amount of sensors. "
+"This way the average of the sensors is used."
+msgstr ""
+"Hver sensor har sin egen type og en minimums-og maksimumsverdi. For å få "
+"grafen, blir alle dataene kombinert og delt på mengden av sensorer. På denne "
+"måten er gjennomsnittet av sensorer brukt."
+
+#: views/inc/usage_dashboard.tpl:155
+msgid ""
+"There are multiple graph times. On the home there is a humidity and a "
+"temperature graph shown."
+msgstr ""
+"Det er flere Graf tider. På hjemmesiden vises det en luftfuktighet og en "
+"temperatur grafe."
+
+#: views/inc/usage_dashboard.tpl:163 views/system_log.tpl:6
+msgid "Last update"
+msgstr "Siste oppdatering"
+
+#: views/inc/usage_dashboard.tpl:165
+msgid ""
+"When there is new data, the gauge part of the graph is updated and will also "
+"update the last update time stamp."
+msgstr ""
+"Når det er nye data, oppdateres nåle-delen av diagrammet og oppdaterer også "
+"den siste oppdateringstiden."
+
+#: views/inc/usage_dashboard.tpl:171
+msgid ""
+"When the current value is outside the minimum of maximum value a red warning "
+"badge is shown."
+msgstr ""
+"Når den gjeldende verdien er utenfor minimum eller maksimumsverdien vil et "
+"rødt varsel merke vises."
+
+#: views/inc/usage_dashboard.tpl:178
+msgid ""
+"With the calendar icon you can select multiple periods for the historical "
+"graph. The valid periods are:"
+msgstr ""
+"Med kalenderikonet kan du velge flere perioder for den historiske grafen. De "
+"gyldige periodene er:"
+
+#: views/inc/usage_dashboard.tpl:188 views/inc/usage_doors.tpl:65
+#: views/inc/usage_sensors.tpl:76 views/inc/usage_switches.tpl:65
+#: views/inc/usage_webcams.tpl:61
+msgid "Options"
+msgstr "Alternativer"
+
+#: views/inc/usage_dashboard.tpl:191
+msgid "With the wrench you will get an options menu."
+msgstr "Med skiftenøkkelen får du en valg meny."
+
+#: views/inc/usage_doors.tpl:13 views/inc/usage_doors.tpl:139
+#: views/inc/usage_sensors.tpl:17 views/inc/usage_sensors.tpl:203
+#: views/inc/usage_switches.tpl:13 views/inc/usage_switches.tpl:160
+#: views/inc/usage_webcams.tpl:13 views/inc/usage_webcams.tpl:154
+#: views/notifications.tpl:88 views/notifications.tpl:205
+msgid "Title"
+msgstr "Tittel"
+
+#: views/inc/usage_doors.tpl:14
+msgid "Per door the title holds shows some values and options."
+msgstr "Per dør tittelen gjelder viser noen verdier og alternativer."
+
+#: views/inc/usage_doors.tpl:59 views/inc/usage_sensors.tpl:63
+#: views/inc/usage_switches.tpl:59 views/inc/usage_webcams.tpl:57
+msgid "Left side"
+msgstr "Venstre side"
+
+#: views/inc/usage_doors.tpl:59 views/inc/usage_sensors.tpl:63
+#: views/inc/usage_switches.tpl:59 views/inc/usage_webcams.tpl:57
+msgid "values"
+msgstr "verdier"
+
+#: views/inc/usage_doors.tpl:61 views/inc/usage_sensors.tpl:72
+#: views/inc/usage_switches.tpl:61 views/inc/usage_webcams.tpl:59
+msgid "The configured name"
+msgstr "Det konfigurerte navnet"
+
+#: views/inc/usage_doors.tpl:62
+msgid "The total time the door has been open"
+msgstr "Den totale tiden døren har vært åpen"
+
+#: views/inc/usage_doors.tpl:63
+msgid "Warning badge when the door is open"
+msgstr "Advarsels skilt når døren er åpen"
+
+#: views/inc/usage_doors.tpl:65 views/inc/usage_sensors.tpl:76
+#: views/inc/usage_switches.tpl:65 views/inc/usage_webcams.tpl:61
+msgid "Right side"
+msgstr "Høyre side"
+
+#: views/inc/usage_doors.tpl:67 views/inc/usage_webcams.tpl:63
+msgid "Show or hide the door"
+msgstr "Vise eller skjule dør"
+
+#: views/inc/usage_doors.tpl:68 views/inc/usage_sensors.tpl:79
+#: views/inc/usage_switches.tpl:68 views/inc/usage_webcams.tpl:64
+msgid "Select history graph period"
+msgstr "Velg tidsperiode for historisk graf"
+
+#: views/inc/usage_doors.tpl:69 views/inc/usage_sensors.tpl:80
+#: views/inc/usage_switches.tpl:69 views/inc/usage_webcams.tpl:65
+msgid "Options menu"
+msgstr "Alternativer meny"
+
+#: views/inc/usage_doors.tpl:77
+msgid ""
+"On the door page there is a list of door sensors that show the current "
+"status of the doors. There can be as much doors added to the system as "
+"needed."
+msgstr ""
+"På dører siden er det en liste over dør sensorer som viser gjeldende status "
+"for dørene. Det kan være så mange dører i systemet som det er behov for."
+
+#: views/inc/usage_doors.tpl:78
+msgid ""
+"The list is also updating when a door is opened by hand. The state off the "
+"door is shown here in real time."
+msgstr ""
+"Listen oppdateres også når en dør åpnes for hånd. Status for døren er vist "
+"her i sanntid."
+
+#: views/inc/usage_doors.tpl:86 views/inc/usage_sensors.tpl:97
+#: views/inc/usage_sensors.tpl:209 views/inc/usage_switches.tpl:90
+#: views/inc/usage_switches.tpl:166
+msgid "History graph"
+msgstr "Historie grafe"
+
+#: views/inc/usage_doors.tpl:88
+msgid "The history graph will shows when a door was opened."
+msgstr "Historie grafen vil vise når en dør ble åpnet."
+
+#: views/inc/usage_doors.tpl:89 views/inc/usage_sensors.tpl:100
+#: views/inc/usage_switches.tpl:93 views/inc/usage_weather.tpl:25
+#: views/inc/usage_weather.tpl:31
+msgid ""
+"Use the calendar icon %s in the title to select the period for the history "
+"graph."
+msgstr ""
+"Bruk kalender ikonet %s i tittelen for å velge perioden for logg grafen."
+
+#: views/inc/usage_doors.tpl:93 views/inc/usage_sensors.tpl:104
+msgid ""
+"On the door settings page you can configure all needed doors. Click on %s "
+"button to add a new door. And empty form like below is shown and has to be "
+"filled in. Make sure the right values are filled in. All fields with a %s "
+"are required."
+msgstr ""
+"På siden dør-innstillinger kan du konfigurere alle nødvendige dører. Klikk "
+"%s knappen for å legge til en ny dør. Et tom skjema som vist nedenfor vises "
+"og må fylles ut. Kontroller at de riktige verdiene er fylt ut. Alle felt med "
+"%s kreves."
+
+#: views/inc/usage_doors.tpl:136 views/inc/usage_environment.tpl:395
+#: views/inc/usage_sensors.tpl:200 views/inc/usage_switches.tpl:157
+#: views/inc/usage_webcams.tpl:151 views/profile.tpl:6
+msgid "Overview"
+msgstr "Oversikt"
+
+#: views/inc/usage_doors.tpl:145
+msgid "Graph"
+msgstr "Graf"
+
+#: views/inc/usage_environment.tpl:16
+msgid ""
+"The light system always works on time. You can use the weather sun rise and "
+"sun set as time values or fixed time values. When selecting weather it can "
+"happen that the lights will be on for to long or to short. Use the desired "
+"values for the maximum and minimum hours. And the hours shift will shift the "
+"hours for on and off by the amount of hours  entered here."
+msgstr ""
+"Lyssystemet vil alltid fungerer i tide. Du kan bruke værets soloppgang og "
+"solnedgang som tidsverdier eller faste tidsverdier. Når du velger vær, kan "
+"det være at lysene vil være på for lenge eller for lite. Bruk de ønskede "
+"verdiene for maksimums-og minimums timer. Og time skiftet vil skifte timer "
+"for på og av ved antall timer angitt her."
+
+#: views/inc/usage_environment.tpl:17 views/inc/usage_environment.tpl:113
+#: views/inc/usage_environment.tpl:205 views/inc/usage_environment.tpl:299
+#: views/inc/usage_weather.tpl:36
+msgid "All fields with a %s are required."
+msgstr "Alle felt med %s kreves."
+
+#: views/inc/usage_environment.tpl:25 views/inc/usage_environment.tpl:121
+#: views/inc/usage_environment.tpl:129 views/inc/usage_environment.tpl:213
+#: views/inc/usage_environment.tpl:221 views/inc/usage_environment.tpl:307
+#: views/inc/usage_environment.tpl:315 views/notifications.tpl:91
+#: views/switch_settings.tpl:143
+msgid "Enabled"
+msgstr "Aktivert"
+
+#: views/inc/usage_environment.tpl:30 views/inc/usage_environment.tpl:87
+msgid "Light mode"
+msgstr "Lys modus"
+
+#: views/inc/usage_environment.tpl:41 views/inc/usage_environment.tpl:90
+msgid "Lights on"
+msgstr "Lysene på"
+
+#: views/inc/usage_environment.tpl:47 views/inc/usage_environment.tpl:93
+msgid "Lights off"
+msgstr "Lysene av"
+
+#: views/inc/usage_environment.tpl:53 views/inc/usage_environment.tpl:96
+msgid "Maximum lights hours"
+msgstr "Maksimalt antall lys timer"
+
+#: views/inc/usage_environment.tpl:59 views/inc/usage_environment.tpl:99
+msgid "Minimum light hours"
+msgstr "Minimum lys timer"
+
+#: views/inc/usage_environment.tpl:65 views/inc/usage_environment.tpl:102
+#: views/system_environment.tpl:63
+msgid "Hours shift"
+msgstr "Timer skifte"
+
+#: views/inc/usage_environment.tpl:71 views/inc/usage_environment.tpl:105
+#: views/inc/usage_environment.tpl:156 views/inc/usage_environment.tpl:193
+#: views/inc/usage_environment.tpl:250 views/inc/usage_environment.tpl:287
+#: views/inc/usage_environment.tpl:344 views/inc/usage_environment.tpl:381
+#: views/system_environment.tpl:98 views/system_environment.tpl:138
+#: views/system_environment.tpl:274 views/system_environment.tpl:350
+#: views/system_environment.tpl:485 views/system_environment.tpl:561
+#: views/system_environment.tpl:696 views/system_environment.tpl:772
+#: views/system_environment.tpl:907 views/system_environment.tpl:983
+#: views/system_environment.tpl:1118 views/system_environment.tpl:1194
+#: views/system_environment.tpl:1306 views/system_environment.tpl:1358
+msgid "Power switches"
+msgstr "Strøm brytere"
+
+#: views/inc/usage_environment.tpl:111
+msgid ""
+"The sprayer is only working in sensor mode. This means it needs to have at "
+"least one humidity sensor and one switch to activate a spray system. When "
+"multiple humidity sensors are used, the averages of the minimum, maximum and "
+"current values are used."
+msgstr ""
+"Sprøyting virker vare i sensor-modus. Dette betyr det er nødvendig å ha "
+"minst en luftfuktighet sensor og en bryter for å aktivere en sprøyte system. "
+"Når det brukes flere luftfuktighets sensorer, brukes gjennomsnittsverdien av "
+"maksimum og minimum verdien og den nåværende verdien."
+
+#: views/inc/usage_environment.tpl:112
+msgid "The sprayer will not operate when a door is open."
+msgstr "Sprøyta vil ikke virke når en dør er åpen."
+
+#: views/inc/usage_environment.tpl:126 views/inc/usage_environment.tpl:181
+#: views/inc/usage_environment.tpl:312
+msgid "Enabled when lights are off"
+msgstr "Aktivert når lysene er av"
+
+#: views/inc/usage_environment.tpl:134 views/inc/usage_environment.tpl:184
+msgid "Sprayer mode"
+msgstr "Sprayer modus"
+
+#: views/inc/usage_environment.tpl:144 views/inc/usage_environment.tpl:187
+msgid "Sprayer wait timeout (seconds)"
+msgstr "Tidsavbrudd for sprøyter (sekunder)"
+
+#: views/inc/usage_environment.tpl:150 views/inc/usage_environment.tpl:190
+msgid "Spray duration (seconds)"
+msgstr "Spray varighet (sekunder)"
+
+#: views/inc/usage_environment.tpl:165 views/inc/usage_environment.tpl:196
+msgid "Humidity sensors"
+msgstr "Luftfuktighet sensorer"
+
+#: views/inc/usage_environment.tpl:202
+msgid ""
+"When the heater is used in sensor mode the system will toggle the switches "
+"based on the alarms of the sensors. When the temperature is to cold it will "
+"toggle on the switches. Until the temperature gets above the maximum value "
+"the switch stays on. When the maximum temperature is reached, the switches "
+"will be toggled off and stay out until the temperature hits the minimum "
+"value."
+msgstr ""
+"Når varmeapparatet brukes i sensor modus vil systemet veksle mellom "
+"bryterene basert på alarmene til sensorene. Når temperaturen er for kald vil "
+"det veksle på bryterne. Frem til temperaturen blir over maksimumsverdien vil "
+"bryteren forbli på. Når den maksimale temperaturen er nådd, vil bryterne bli "
+"slått av og holde seg av til temperaturen treffer minimumsverdien."
+
+#: views/inc/usage_environment.tpl:203 views/inc/usage_environment.tpl:297
+msgid ""
+"When used in Timer or Weather mode, the switches will be toggled on and of "
+"on the selected times regardless of the temperature."
+msgstr ""
+"Når den brukes i timer eller Vær-modus, vil bryterne bli slått på og av på "
+"valgte tider uavhengig av temperatur."
+
+#: views/inc/usage_environment.tpl:204 views/inc/usage_environment.tpl:298
+msgid ""
+"But when there are sensors used in combination with Timer or Weather mode "
+"the switches will toggle on and off when there is an alarm based on the "
+"sensors and within the selected time frame."
+msgstr ""
+"Bortsett fra når der er sensorer brukt i kombinasjon med Timer eller Vær-"
+"modus vil bryterene slås av og av når det er en alarm tilknyttet på "
+"sensorene og innenfor den valgte tidsrammen."
+
+#: views/inc/usage_environment.tpl:218 views/inc/usage_environment.tpl:275
+#: views/inc/usage_environment.tpl:369
+msgid "Enabled when lights are on"
+msgstr "Aktivert når lysene er på"
+
+#: views/inc/usage_environment.tpl:226 views/inc/usage_environment.tpl:278
+#: views/inc/usage_environment.tpl:372
+msgid "Heater mode"
+msgstr "Varmeapparat modus"
+
+#: views/inc/usage_environment.tpl:238 views/inc/usage_environment.tpl:281
+#: views/inc/usage_environment.tpl:375
+msgid "Heater on"
+msgstr "Varmeapparatet på"
+
+#: views/inc/usage_environment.tpl:244 views/inc/usage_environment.tpl:284
+#: views/inc/usage_environment.tpl:378
+msgid "Heater off"
+msgstr "Varmeapparatet av"
+
+#: views/inc/usage_environment.tpl:259 views/inc/usage_environment.tpl:290
+#: views/inc/usage_environment.tpl:353 views/inc/usage_environment.tpl:384
+msgid "Temperature sensors"
+msgstr "Temperatur sensorer"
+
+#: views/inc/usage_environment.tpl:295 views/inc/usage_environment.tpl:407
+msgid "Cooling"
+msgstr "Kjøling"
+
+#: views/inc/usage_environment.tpl:296
+msgid ""
+"When the cooler is used in sensor mode the system will toggle the switches "
+"based on the alarms of the sensors. When the temperature is to hot it will "
+"toggle on the switches. Until the temperature drops below the minimum value "
+"the switch stays on. When the minimum temperature is reached, the switches "
+"will be toggled off and stay out until the temperature hits the maximum "
+"value."
+msgstr ""
+"Når kjøleanlegget brukes i sensor modus vil systemet veksle mellom bryterne "
+"basert på alarmene til sensorene. Når temperaturen er for varm, vil den "
+"veksle på bryterne. Inntil temperaturen synker under minimumsverdien vil "
+"bryteren forblir på. Når minimumstemperaturen er nådd, vil bryterne bli "
+"slått av og holde seg av til temperaturen treffer maksimumsverdien."
+
+#: views/inc/usage_environment.tpl:320
+msgid "Cooler mode"
+msgstr "Kjøler modus"
+
+#: views/inc/usage_environment.tpl:332
+msgid "Cooler on"
+msgstr "Kjøler på"
+
+#: views/inc/usage_environment.tpl:338
+msgid "Cooler off"
+msgstr "Kjøler av"
+
+#: views/inc/usage_sensors.tpl:13
+msgid ""
+"On the sensors page you can find all the available sensors page grouped by "
+"type. Select temperature from the menu to get all the temperature sensors. "
+"Select humidity for all humidity sensors."
+msgstr ""
+"På sensorer-siden kan du finne alle tilgjengelige sensorer gruppert etter "
+"type. Velg temperatur fra menyen for å få alle temperatursensorer. Velg "
+"luftfuktighet for alle luft luftfuktighets sensorer."
+
+#: views/inc/usage_sensors.tpl:14
+msgid "Per graph you have the following options and indicators."
+msgstr "Per graf har du følgende alternativer og indikatorer."
+
+#: views/inc/usage_sensors.tpl:18
+msgid "Per sensor the title shows some values and options."
+msgstr "Per sensor vil tittelen viser noen verdier og alternativer."
+
+#: views/inc/usage_sensors.tpl:65
+msgid "The sensor type"
+msgstr "Sensor typen"
+
+#: views/inc/usage_sensors.tpl:73
+msgid "The time stamp of the last measurement."
+msgstr "Tidsangivelsen for den siste målingen."
+
+#: views/inc/usage_sensors.tpl:74
+msgid ""
+"Warning badge when the sensor value is outside the defined save operating "
+"values."
+msgstr ""
+"Advarsels merket når sensor verdien er utenfor de definerte lagring "
+"operasjons verdiene."
+
+#: views/inc/usage_sensors.tpl:78
+msgid "Show or hide the sensor"
+msgstr "Vis eller skjul sensoren"
+
+#: views/inc/usage_sensors.tpl:92
+msgid ""
+"The gauge graph shows the current temperature or humidity value. The color "
+"of the graph depends on the current value and the alarm values. When the "
+"value gets more to the minimum or maximum value, it will gets more red/"
+"orange."
+msgstr ""
+"Nåle grafen viser gjeldende temperatur eller luftfuktighet verdi. Fargen på "
+"grafen avhenger av gjeldende verdi og alarm verdiene. Når verdieni kommer "
+"nærmere minimum eller maksimumsverdien, vil den bli mer rød/organge."
+
+#: views/inc/usage_sensors.tpl:93
+msgid ""
+"The values are updated every 30 seconds and updated in real time on the page."
+msgstr "Verdiene oppdateres hvert 30. sekund og oppdateres i sanntid på siden."
+
+#: views/inc/usage_sensors.tpl:94
+msgid ""
+"The current value is also written below the graph in degrees, percentage or "
+"distance."
+msgstr ""
+"Den gjeldende verdien skrives også under diagrammet i grader, prosent eller "
+"avstand."
+
+#: views/inc/usage_sensors.tpl:99
+msgid ""
+"The history graph will shows the measured value. The flat lines are the "
+"minimum and maximum values that are configured. When the measured value is "
+"outside this range an alarm will be given. Hover above the graph lines to "
+"get detailed information."
+msgstr ""
+"Historie grafen vil vise den målte verdien. De flate linjene er de minste og "
+"høyeste verdiene som er konfigurert. Når den målte verdien er utenfor dette "
+"området vil det bli gitt en alarm. Beveg pekeren over graf linjene for å få "
+"detaljert informasjon."
+
+#: views/inc/usage_sensors.tpl:118 views/sensor_settings.tpl:111
+msgid "HC-SR04"
+msgstr "HC-SR04"
+
+#: views/inc/usage_sensors.tpl:141 views/inc/usage_sensors.tpl:177
+#: views/sensor_settings.tpl:31 views/sensor_settings.tpl:146
+msgid "Alarm min"
+msgstr "Alarm min"
+
+#: views/inc/usage_sensors.tpl:145 views/inc/usage_sensors.tpl:180
+#: views/sensor_settings.tpl:34 views/sensor_settings.tpl:150
+msgid "Alarm max"
+msgstr "Alarm Max"
+
+#: views/inc/usage_sensors.tpl:149 views/inc/usage_sensors.tpl:183
+#: views/sensor_settings.tpl:37 views/sensor_settings.tpl:154
+msgid "Limit min"
+msgstr "Begrens min"
+
+#: views/inc/usage_sensors.tpl:153 views/inc/usage_sensors.tpl:186
+#: views/sensor_settings.tpl:40 views/sensor_settings.tpl:158
+msgid "Limit max"
+msgstr "Begrens max"
+
+#: views/inc/usage_switches.tpl:14
+msgid "Per switch the title holds shows some values and options."
+msgstr "Per bryter tittelen har viser noen verdier og alternativer."
+
+#: views/inc/usage_switches.tpl:19 views/switch_settings.tpl:92
+#: views/switch_status.tpl:11
+msgid "Switch"
+msgstr "Bryter"
+
+#: views/inc/usage_switches.tpl:62
+msgid "The power usage and/or water flow per minute when switched on"
+msgstr "Strømforbruket og/eller vannstrømmen per minutt når den slås på"
+
+#: views/inc/usage_switches.tpl:63
+msgid ""
+"The total amount of power usage and/or water usage for the selected history "
+"period"
+msgstr ""
+"Total mengde strømforbruk og/eller vannforbruk for den valgte logg perioden"
+
+#: views/inc/usage_switches.tpl:67
+msgid "Show or hide the switch"
+msgstr "Vis eller skjul bryteren"
+
+#: views/inc/usage_switches.tpl:74 views/inc/usage_switches.tpl:163
+msgid "Status and toggle"
+msgstr "Status og veksle"
+
+#: views/inc/usage_switches.tpl:81
+msgid ""
+"On the switch page there are power buttons that toggle the power switches. "
+"Every switch will be listed, and can be controlled from the status page. In "
+"order to toggle the switch, a request for a username and password is being "
+"made. Use here the username and password that are configured at the system "
+"configuration page."
+msgstr ""
+"På bryter siden er det strømknapper som veksler mellom strøm bryterne. Hver "
+"bryter vil bli oppført, og kan styres fra status siden. For å veksle mellom "
+"bryterne blir det gjort en forespørsel om brukernavn og passord. Bruk "
+"brukernavnet og passordet som er konfigurert på systemkonfigurasjon siden."
+
+#: views/inc/usage_switches.tpl:82
+msgid ""
+"The list is also updating when the environment toggles a switch. The state "
+"off the switch is shown here in real time."
+msgstr ""
+"Listen oppdateres også når miljøet veksler en bryter. Status for bryteren er "
+"vist her i sanntid."
+
+#: views/inc/usage_switches.tpl:85
+msgid "Switch is on"
+msgstr "Bryteren er på"
+
+#: views/inc/usage_switches.tpl:86
+msgid "Switch is off"
+msgstr "Bryteren er av"
+
+#: views/inc/usage_switches.tpl:92
+msgid ""
+"The history graph will shows when a switch was powered on. It will show the "
+"power usage on the y-axis and time on the x-axis. When hovering over the "
+"graph it will also show the water usage."
+msgstr ""
+"Historie grafen vil vise når en bryter var slått på. Den viser strømforbruk "
+"på y-akse og tid på x-akse. Når peker holdes over grafen det vil også "
+"vannforbruket vise."
+
+#: views/inc/usage_switches.tpl:97
+msgid ""
+"On the switch settings page you can configure all needed switches. Click on "
+"%s button to add a new switch. And empty form like below is shown and has to "
+"be filled in. Make sure the right values are filled in. All fields with a %s "
+"are required."
+msgstr ""
+"Du kan konfigurere alle nødvendige brytere på innstillingssiden for brytere. "
+"Klikk %s knappen for å legge til en ny bryter. Et tomt skjema som nedenfor "
+"vises og må fylles ut. Kontroller at de riktige verdiene er fylt ut. Alle "
+"felt med %s kreves."
+
+#: views/inc/usage_switches.tpl:106 views/switch_settings.tpl:110
+msgid "FTDI"
+msgstr "FTDI"
+
+#: views/inc/usage_weather.tpl:15
+msgid ""
+"The forecast widgets shows the forecast at current time and the location for "
+"which the forecast is valid. The data is loaded external from the external "
+"API source and is not measured by the software."
+msgstr ""
+"Widgetene for værvarsel viser værvarsel på gjeldende tidspunkt og lokasjonen "
+"der værvarselet er gyldig. Dataene lastes inn eksternt fra den eksterne API-"
+"kilden og måles ikke av programvaren."
+
+#: views/inc/usage_weather.tpl:16
+msgid ""
+"It shows the current day and time for which the forecast is valid. And what "
+"temperature indicator is used."
+msgstr ""
+"Den viser gjeldende dag og klokkeslett da værvarselet er gyldig. Og hvilken "
+"temperatur indikator som brukes."
+
+#: views/inc/usage_weather.tpl:17
+msgid ""
+"The forecast is based on the time of the day. During the day, a sun is used "
+"in the animation. During the night a moon is used."
+msgstr ""
+"Værvarsel er basert tiden på dagen. I løpet av dagen, brukes en sol i "
+"animasjonen. I løpet av natten brukes en måne."
+
+#: views/inc/usage_weather.tpl:18
+msgid ""
+"The sun rise and sun set are shown on the right side. The line that is bold "
+"is indicating the current state."
+msgstr ""
+"Soloppgang og solnedgang er vist på høyre side. Linjen som er fet, angir "
+"gjeldende status."
+
+#: views/inc/usage_weather.tpl:19
+msgid "The week forecast is shown at 13:00 hours of each day."
+msgstr "Ukevarsel vises 13:00 for hver dag."
+
+#: views/inc/usage_weather.tpl:22 views/inc/usage_weather.tpl:88
+#: views/weather.tpl:112
+msgid "Day forecast"
+msgstr "Dag varsel"
+
+#: views/inc/usage_weather.tpl:24
+msgid ""
+"The day forecast shows the temperature per hour for 24 / 36 hours from now. "
+"The title holds the graph period."
+msgstr ""
+"Dagsvarsel viser temperaturen per time for 24/36 timer fra nå. Tittelen har "
+"grafen for perioden."
+
+#: views/inc/usage_weather.tpl:28 views/inc/usage_weather.tpl:91
+#: views/weather.tpl:130
+msgid "Week forecast"
+msgstr "Uke varsel"
+
+#: views/inc/usage_weather.tpl:30
+msgid ""
+"The week forecast shows the temperature per hour for 10 days from now. The "
+"title holds the graph period."
+msgstr ""
+"Ukevarselet viser temperaturen per timen for 10 dager fra nå av. Tittelen "
+"har grafen i perioden."
+
+#: views/inc/usage_weather.tpl:35
+msgid ""
+"Enter the full URL of the API weather server. For use with Weather.com you "
+"need to get a free API key from %s. The temperature are read in Celsius "
+"degrees. It can be converted to Fahrenheit."
+msgstr ""
+"Angi hele URL av API for vær tjener. For bruk med Weather.com trenger du å "
+"skaffe en gratis API-nøkkel fra %s. Temperaturen er lest i Celsius grader. "
+"Den kan konverteres til Fahrenheit."
+
+#: views/inc/usage_weather.tpl:42 views/inc/usage_weather.tpl:64
+#: views/inc/usage_webcams.tpl:99 views/inc/usage_webcams.tpl:126
+#: views/webcam_settings.tpl:19 views/webcam_settings.tpl:84
+msgid "Location"
+msgstr "Sted"
+
+#: views/inc/usage_weather.tpl:48 views/inc/usage_weather.tpl:71
+msgid "Wind speed"
+msgstr "Vindhastighet"
+
+#: views/inc/usage_weather.tpl:52 views/system_settings.tpl:66
+msgid "m/s"
+msgstr "m/s"
+
+#: views/inc/usage_weather.tpl:53 views/system_settings.tpl:67
+msgid "Km/h"
+msgstr "Km/t"
+
+#: views/inc/usage_webcams.tpl:14
+msgid "Per webcam the title holds shows some values and options."
+msgstr "Per webkamera tittelen har viser noen verdier og alternativer."
+
+#: views/inc/usage_webcams.tpl:70 views/inc/usage_webcams.tpl:157
+msgid "Zoom"
+msgstr "Zoom"
+
+#: views/inc/usage_webcams.tpl:71
+msgid "Use the zooming control to zoom in and out."
+msgstr "Bruk zoomkontrollen til å zoome inn og ut."
+
+#: views/inc/usage_webcams.tpl:72 views/inc/usage_webcams.tpl:82
+msgid "Controls"
+msgstr "Kontroller"
+
+#: views/inc/usage_webcams.tpl:74
+msgid "Zooming control"
+msgstr "Zoome kontroll"
+
+#: views/inc/usage_webcams.tpl:75
+msgid "Zoom at minimum level"
+msgstr "Zoom på minimumsnivå"
+
+#: views/inc/usage_webcams.tpl:76
+msgid "Zoom at maximum level"
+msgstr "Zoom på høyeste nivå"
+
+#: views/inc/usage_webcams.tpl:80 views/inc/usage_webcams.tpl:160
+msgid "Full screen"
+msgstr "Full skjerm"
+
+#: views/inc/usage_webcams.tpl:81
+msgid "Use the full screen control to toggle full screen on or off."
+msgstr ""
+"Bruk full skjerm kontrollen til å aktivere eller deaktivere "
+"fullskjermvisning."
+
+#: views/inc/usage_webcams.tpl:84
+msgid "Full screen control"
+msgstr "Fullskjermkontroll"
+
+#: views/inc/usage_webcams.tpl:89
+msgid ""
+"On the webcam settings page you can configure all needed webcams. Click on "
+"%s button to add a new webcam. And empty form like below is shown and has to "
+"be filled in. Make sure the right values are filled in. All fields with a %s "
+"are required."
+msgstr ""
+"På siden Innstillinger for webkamera kan du konfigurere alle nødvendige "
+"webkameraer. Klikk %s knappen for å legge til et nytt webkamera. Et tomt "
+"skjema som nedenfor vises og må fylles ut. Kontroller at de riktige verdiene "
+"er fylt ut. Alle felt med %s kreves."
+
+#: views/inc/usage_webcams.tpl:95 views/inc/usage_webcams.tpl:140
+#: views/webcam_settings.tpl:36 views/webcam_settings.tpl:80
+msgid "Preview"
+msgstr "Forhåndsvisning"
+
+#: views/inc/usage_webcams.tpl:108 views/inc/usage_webcams.tpl:137
+#: views/webcam_settings.tpl:33 views/webcam_settings.tpl:102
+msgid "Picture rotation"
+msgstr "Bilderotasjon"
+
+#: views/inc/usage_webcams.tpl:111 views/inc/usage_webcams.tpl:112
+#: views/inc/usage_webcams.tpl:113 views/inc/usage_webcams.tpl:114
+#: views/webcam_settings.tpl:106 views/webcam_settings.tpl:107
+#: views/webcam_settings.tpl:108 views/webcam_settings.tpl:109
+msgid "degrees"
+msgstr "grader"
+
+#: views/inc/usage_webcams.tpl:115 views/webcam_settings.tpl:110
+msgid "Flip Horizontal"
+msgstr "Speilvend vannrett"
+
+#: views/inc/usage_webcams.tpl:116 views/webcam_settings.tpl:111
+msgid "Flip Vertical"
+msgstr "Speilvend loddrett"
+
+#: views/inc/usage_webcams.tpl:129 views/webcam_settings.tpl:22
+msgid "V4L"
+msgstr "V4l"
+
+#: views/inc/usage_webcams.tpl:130 views/webcam_settings.tpl:23
+msgid "Remote source"
+msgstr "Ekstern kilde"
+
+#: views/info.tpl:7 views/info.tpl:21
+msgid "TerrariumPI %s"
+msgstr "TerrariumPI %s"
+
+#: views/info.tpl:10 views/info.tpl:26
+msgid "Used software"
+msgstr "Brukt programvare"
+
+#: views/info.tpl:13 views/info.tpl:79
+msgid "Contact"
+msgstr "Kontakt"
+
+#: views/info.tpl:16 views/info.tpl:87
+msgid "Example setup"
+msgstr "Eksempel oppsett"
+
+#: views/info.tpl:22
+msgid ""
+"Use TerrariumPI to automate your own reptile environment. The software can "
+"handle a combination of multiple temperature and humidity sensors and relay "
+"switches to control a closed environment."
+msgstr ""
+"Bruk TerrariumPI til å automatisere din egen reptil miljø. Programvaren kan "
+"håndtere en kombinasjon av flere temperatur-og luftfuktighet sensorer og "
+"relé brytere for å styre et lukket miljø."
+
+#: views/info.tpl:27
+msgid ""
+"TerrariumPI is mainly written in Python version 2.7. The web interface is a "
+"bootstrap 3 template. It can be downloaded from %s."
+msgstr ""
+"TerrariumPI er hovedsakelig skrevet i Python versjon 2.7. Webgrensesnittet "
+"er en bootstrap 3-mal. Den kan lastes ned fra %s."
+
+#: views/info.tpl:27 views/info.tpl:80 views/info.tpl:82
+msgid "Download TerrariumPI on Github"
+msgstr "Last ned TerrariumPI på GitHub"
+
+#: views/info.tpl:32 views/info.tpl:70
+msgid "Python modules"
+msgstr "Python moduler"
+
+#: views/info.tpl:33
+msgid "The following external Python libraries are used"
+msgstr "Følgende eksterne Python-biblioteker brukes"
+
+#: views/info.tpl:43
+msgid "PIP"
+msgstr "PIP"
+
+#: views/info.tpl:51
+msgid "Source"
+msgstr "Kilde"
+
+#: views/info.tpl:57 views/info.tpl:73
+msgid "Web interface"
+msgstr "Nettgrensesnitt"
+
+#: views/info.tpl:58
+msgid ""
+"Gentellela Admin is a free to use Bootstrap admin template. This template "
+"uses the default Bootstrap 3 styles along with a variety of powerful jQuery "
+"plugins and tools to create a powerful framework for creating admin panels "
+"or back-end dashboards."
+msgstr ""
+"Gentellela Admin er en gratis bootstrap admin mal. Denne malen bruker "
+"standard Bootstrap 3 stiler sammen med en rekke kraftige jQuery plugins og "
+"verktøy for å lage et kraftig rammeverk for å lage admin paneler eller back-"
+"end oversikter."
+
+#: views/info.tpl:59
+msgid ""
+"Theme uses several libraries for charts, calendar, form validation, wizard "
+"style interface, off-canvas navigation menu, text forms, date range, upload "
+"area, form autocomplete, range slider, progress bars, notifications and much "
+"more."
+msgstr ""
+"Temaet bruker flere biblioteker for diagrammer, kalender, skjema validering, "
+"veiviseren stil-grensesnitt, off-canvas navigeringsmeny, tekst skjemaer, "
+"datoperiode, opplastings området, skjema autofullfør, område-skyvekontroll, "
+"fremdriftsindikatorer, varsler og mye mer."
+
+#: views/info.tpl:60
+msgid ""
+"We would love to see how you use this awesome admin template. You can notify "
+"us about your site, app or service by tweeting to @colorlib. Once the list "
+"will grown long enough we will write a post similar to this to showcase the "
+"best examples."
+msgstr ""
+"Vi setter stor pris på å se hvordan du bruker denne geniale admin malen. Du "
+"kan gi oss en lyd om nettstedet, appen eller tjenesten ved å tweete til "
+"@colorlib. Når listen har vokst lenge nok vil vi skrive et innlegg som "
+"ligner på dette for å vise de beste eksemplene."
+
+#: views/info.tpl:80
+msgid "Questions or problems? Contact me at %s or open an issue on %s."
+msgstr ""
+"Spørsmål eller problemer? Kontakt meg på %s eller åpne et problem på %s."
+
+#: views/info.tpl:81
+msgid "Feature request"
+msgstr "Funksjonsforespørsel"
+
+#: views/info.tpl:82
+msgid ""
+"Missing something? Drop a feature request on %s and we will see what can be "
+"done."
+msgstr ""
+"Mangler du noe? Send en funksjonsforespørsel på %s og vi vil se hva som kan "
+"gjøres."
+
+#: views/info.tpl:83
+msgid "Copyright"
+msgstr "Opphavsrett"
+
+#: views/info.tpl:88
+msgid "Here are some photos how you can use it."
+msgstr "Her er noen bilder hvordan du kan bruke den."
+
+#: views/notifications.tpl:16
+msgid ""
+"Enter the values per service that you want to use. Per service are all "
+"fields required, except mail port and mail authentication values."
+msgstr ""
+"Angi verdiene per tjeneste du vil bruke. Per tjeneste krever alle felt, "
+"unntatt e-post port og epost godkjenning verdier."
+
+#: views/notifications.tpl:17
+msgid ""
+"Select per message the service so send the notification. You can have "
+"everyting per email, and important ones per pushover or telegram."
+msgstr ""
+"Velg per melding tjenesten for å sende varselet. Du kan ha allt per e-post, "
+"og de viktigste per pushover eller Telegram."
+
+#: views/notifications.tpl:18
+msgid ""
+"Use %rawdata% to get all the possible replacement values. Then create your "
+"own message with variables like %now% and %current%. This can be done in "
+"either the title and message."
+msgstr ""
+"Bruk %rawdata% for å få alle mulige erstatnings verdier. Så kan du opprette "
+"din egen beskjed med variabler som %now% og %current%. Dette kan gjøres i "
+"enten tittel eller melding."
+
+#: views/notifications.tpl:19
+msgid "Make sure you submit the form after making changes!"
+msgstr "Pass på at du sender inn skjemaet etter du har utført endringer!"
+
+#: views/notifications.tpl:27
+msgid "Email"
+msgstr "E-post"
+
+#: views/notifications.tpl:37
+msgid "Receiver email"
+msgstr "Mottakers Email"
+
+#: views/notifications.tpl:41
+msgid "SMTP server"
+msgstr "SMTP- tjener"
+
+#: views/notifications.tpl:45
+msgid "SMTP server port"
+msgstr "SMTP-serverporten"
+
+#: views/notifications.tpl:49
+msgid "SMTP username"
+msgstr "SMTP brukernavn"
+
+#: views/notifications.tpl:53
+msgid "SMTP password"
+msgstr "SMTP passord"
+
+#: views/notifications.tpl:64
+msgid "Display"
+msgstr "Display"
+
+#: views/notifications.tpl:74
+msgid "I2C address"
+msgstr "I2C-adresse"
+
+#: views/notifications.tpl:78
+msgid "Screen resolution"
+msgstr "Skjermoppløsning"
+
+#: views/notifications.tpl:81
+msgid "LCD 16 Characters, 2 Lines"
+msgstr "16-tommers LCD-tegn, 2 linjer"
+
+#: views/notifications.tpl:82
+msgid "LCD 20 Characters, 4 Lines"
+msgstr "LCD 20 tegn, 4 linjer"
+
+#: views/notifications.tpl:83
+msgid "OLED 128 x 64 pixels"
+msgstr "OLED 128 x 64 piksler"
+
+#: views/notifications.tpl:104
+msgid "Twitter"
+msgstr "Twitter"
+
+#: views/notifications.tpl:114
+msgid "Consumer key"
+msgstr "Bruker Nøkkel"
+
+#: views/notifications.tpl:118
+msgid "Consumer secret"
+msgstr "Bruker hemlighet"
+
+#: views/notifications.tpl:122
+msgid "Access token"
+msgstr "Tilgang Token"
+
+#: views/notifications.tpl:126
+msgid "Access token secret"
+msgstr "Tilgang token hemlighet"
+
+#: views/notifications.tpl:137
+msgid "Pushover"
+msgstr "Pushover"
+
+#: views/notifications.tpl:147
+msgid "API Token"
+msgstr "API-token"
+
+#: views/notifications.tpl:151
+msgid "User key"
+msgstr "Brukernøkkel"
+
+#: views/notifications.tpl:162
+msgid "Telegram"
+msgstr "Telegram"
+
+#: views/notifications.tpl:172
+msgid "Bot Token"
+msgstr "Bot token"
+
+#: views/notifications.tpl:176
+msgid "Username"
+msgstr "Brukernavn"
+
+#: views/notifications.tpl:180
+msgid "Proxy"
+msgstr "Mellomtjener"
+
+#: views/notifications.tpl:191
+msgid "Messages"
+msgstr "Meldinger"
+
+#: views/notifications.tpl:202
+msgid "Trigger"
+msgstr "Utløser"
+
+#: views/notifications.tpl:208
+msgid "Message"
+msgstr "Melding"
+
+#: views/notifications.tpl:211
+msgid "Service"
+msgstr "Tjeneste"
+
+#: views/profile.tpl:15
+msgid "Edit"
+msgstr "Rediger"
+
+#: views/profile.tpl:52
+msgid "General information"
+msgstr "Generell informasjon"
+
+#: views/profile.tpl:70
+msgid "Gender"
+msgstr "Kjønn"
+
+#: views/profile.tpl:77
+msgid "Age"
+msgstr "Alder"
+
+#: views/profile.tpl:88
+msgid "Species"
+msgstr "Arter"
+
+#: views/profile.tpl:95
+msgid "Latin name"
+msgstr "Latinsk navn"
+
+#: views/profile.tpl:102
+msgid "Description"
+msgstr "Beskrivelse"
+
+#: views/profile.tpl:171
+msgid "More information"
+msgstr "Mer informasjon"
+
+#: views/sensor_settings.tpl:16
+msgid "Here you can configure your sensors."
+msgstr "Her kan du konfigurere sensorene."
+
+#: views/sensor_settings.tpl:67
+msgid "Add new sensor"
+msgstr "Legg til ny sensor"
+
+#: views/sensor_settings.tpl:103
+msgid "SHT2X"
+msgstr "SHT2X"
+
+#: views/sensor_settings.tpl:104
+msgid "HTU21D"
+msgstr "HTU21D"
+
+#: views/sensor_settings.tpl:105
+msgid "SI7021"
+msgstr "SI7021"
+
+#: views/sensor_settings.tpl:106
+msgid "BME280 / BMP280"
+msgstr "BME280/BMP280"
+
+#: views/sensor_settings.tpl:107
+msgid "Chirp"
+msgstr "Kvitter"
+
+#: views/sensor_settings.tpl:109
+msgid "YTXX-digital"
+msgstr "YTXX-Digital"
+
+#: views/sensor_settings.tpl:112
+msgid "pH SKU-SEN0161"
+msgstr "pH SKU-SEN0161"
+
+#: views/sensor_settings.tpl:113
+msgid "VEML6075"
+msgstr "VEML6075"
+
+#: views/sensor_settings.tpl:114
+msgid "MiFlora"
+msgstr "MiFlora"
+
+#: views/sensor_settings.tpl:135
+msgid "UVA"
+msgstr "UVA"
+
+#: views/sensor_settings.tpl:136
+msgid "UVB"
+msgstr "UVB"
+
+#: views/sensor_settings.tpl:168
+msgid "Min moist value"
+msgstr "Min fukt verdi"
+
+#: views/sensor_settings.tpl:172
+msgid "Max moist value"
+msgstr "Maksimal fukt verdi"
+
+#: views/sensor_settings.tpl:176
+msgid "Temperature offset"
+msgstr "Temperatur forskyvning"
+
+#: views/switch_settings.tpl:16
+msgid "Here you can configure your power switches."
+msgstr "Her kan du konfigurere din strøm vekslere."
+
+#: views/switch_settings.tpl:37 views/switch_settings.tpl:177
+msgid "Timer start time"
+msgstr "Tidtaker start tid"
+
+#: views/switch_settings.tpl:40 views/switch_settings.tpl:181
+msgid "Timer stop time"
+msgstr "Tidtaker stopp tid"
+
+#: views/switch_settings.tpl:43 views/switch_settings.tpl:185
+msgid "Timer on duration"
+msgstr "Tidtaker på varighet"
+
+#: views/switch_settings.tpl:46 views/switch_settings.tpl:189
+msgid "Timer off duration"
+msgstr "Tidtaker av varighet"
+
+#: views/switch_settings.tpl:49 views/switch_settings.tpl:151
+msgid "Dimmer action duration"
+msgstr "Varighet for dimmer handling"
+
+#: views/switch_settings.tpl:52 views/switch_settings.tpl:159
+msgid "Dimmer on duration"
+msgstr "Dimmer på varighet"
+
+#: views/switch_settings.tpl:55 views/switch_settings.tpl:163
+msgid "Dimmer on percentage"
+msgstr "Dimmer på prosent"
+
+#: views/switch_settings.tpl:58 views/switch_settings.tpl:167
+msgid "Dimmer off duration"
+msgstr "Dimmer av varighet"
+
+#: views/switch_settings.tpl:61 views/switch_settings.tpl:171
+msgid "Dimmer off percentage"
+msgstr "Dimmer av prosent"
+
+#: views/switch_settings.tpl:85
+msgid "Add new switch"
+msgstr "Legg til ny bryter"
+
+#: views/switch_settings.tpl:112
+msgid "GPIO Inverse"
+msgstr "GPIO Inversere"
+
+#: views/switch_settings.tpl:113
+msgid "PWM Dimmer"
+msgstr "PWM Dimmer"
+
+#: views/switch_settings.tpl:115
+msgid "Remote Dimmer"
+msgstr "Ekstern dimmer"
+
+#: views/switch_settings.tpl:116
+msgid "Energenie USB"
+msgstr "Energenie USB"
+
+#: views/switch_settings.tpl:117
+msgid "Energenie LAN"
+msgstr "Energenie LAN"
+
+#: views/switch_settings.tpl:155
+msgid "Dimmer environment step"
+msgstr "Dimmer-miljø trinn"
+
+#: views/switch_status.tpl:4
+msgid "No switches available"
+msgstr "Ingen brytere er tilgjengelige"
+
+#: views/system_environment.tpl:16
+msgid "Here you can configure your environment."
+msgstr "Her kan du konfigurere ditt miljø."
+
+#: views/system_environment.tpl:18
+msgid "Hover over the fields to get extra information."
+msgstr "Hold musepekeren over feltene for å få ekstra informasjon."
+
+#: views/system_environment.tpl:37 views/system_environment.tpl:168
+#: views/system_environment.tpl:380 views/system_environment.tpl:591
+#: views/system_environment.tpl:802 views/system_environment.tpl:1013
+#: views/system_environment.tpl:1224
+msgid "Mode"
+msgstr "Modus"
+
+#: views/system_environment.tpl:51
+msgid "Maximum hours"
+msgstr "Maksimalt antall timer"
+
+#: views/system_environment.tpl:57
+msgid "Minimum hours"
+msgstr "Minste antall timer"
+
+#: views/system_environment.tpl:86 views/system_environment.tpl:126
+#: views/system_environment.tpl:226 views/system_environment.tpl:302
+#: views/system_environment.tpl:437 views/system_environment.tpl:513
+#: views/system_environment.tpl:648 views/system_environment.tpl:724
+#: views/system_environment.tpl:859 views/system_environment.tpl:935
+#: views/system_environment.tpl:1070 views/system_environment.tpl:1146
+#: views/system_environment.tpl:1282 views/system_environment.tpl:1334
+msgid "Timer on"
+msgstr "Timer på"
+
+#: views/system_environment.tpl:92 views/system_environment.tpl:132
+#: views/system_environment.tpl:232 views/system_environment.tpl:308
+#: views/system_environment.tpl:443 views/system_environment.tpl:519
+#: views/system_environment.tpl:654 views/system_environment.tpl:730
+#: views/system_environment.tpl:865 views/system_environment.tpl:941
+#: views/system_environment.tpl:1076 views/system_environment.tpl:1152
+#: views/system_environment.tpl:1288 views/system_environment.tpl:1340
+msgid "Timer off"
+msgstr "Timer av"
+
+#: views/system_environment.tpl:197 views/system_environment.tpl:409
+#: views/system_environment.tpl:620 views/system_environment.tpl:831
+#: views/system_environment.tpl:1042
+msgid "Day/night source"
+msgstr "Dag/natt kilde"
+
+#: views/system_environment.tpl:238 views/system_environment.tpl:314
+#: views/system_environment.tpl:449 views/system_environment.tpl:525
+#: views/system_environment.tpl:660 views/system_environment.tpl:736
+#: views/system_environment.tpl:871 views/system_environment.tpl:947
+#: views/system_environment.tpl:1082 views/system_environment.tpl:1158
+msgid "Light state"
+msgstr "Lys tilstand"
+
+#: views/system_environment.tpl:242 views/system_environment.tpl:318
+#: views/system_environment.tpl:453 views/system_environment.tpl:529
+#: views/system_environment.tpl:664 views/system_environment.tpl:740
+#: views/system_environment.tpl:875 views/system_environment.tpl:951
+#: views/system_environment.tpl:1086 views/system_environment.tpl:1162
+msgid "On"
+msgstr "På"
+
+#: views/system_environment.tpl:243 views/system_environment.tpl:319
+#: views/system_environment.tpl:454 views/system_environment.tpl:530
+#: views/system_environment.tpl:665 views/system_environment.tpl:741
+#: views/system_environment.tpl:876 views/system_environment.tpl:952
+#: views/system_environment.tpl:1087 views/system_environment.tpl:1163
+msgid "Off"
+msgstr "Av"
+
+#: views/system_environment.tpl:244 views/system_environment.tpl:256
+#: views/system_environment.tpl:320 views/system_environment.tpl:332
+#: views/system_environment.tpl:455 views/system_environment.tpl:467
+#: views/system_environment.tpl:531 views/system_environment.tpl:543
+#: views/system_environment.tpl:666 views/system_environment.tpl:678
+#: views/system_environment.tpl:742 views/system_environment.tpl:754
+#: views/system_environment.tpl:877 views/system_environment.tpl:889
+#: views/system_environment.tpl:953 views/system_environment.tpl:965
+#: views/system_environment.tpl:1088 views/system_environment.tpl:1100
+#: views/system_environment.tpl:1164 views/system_environment.tpl:1176
+msgid "Ignore"
+msgstr "Ignorer"
+
+#: views/system_environment.tpl:250 views/system_environment.tpl:326
+#: views/system_environment.tpl:461 views/system_environment.tpl:537
+#: views/system_environment.tpl:672 views/system_environment.tpl:748
+#: views/system_environment.tpl:883 views/system_environment.tpl:959
+#: views/system_environment.tpl:1094 views/system_environment.tpl:1170
+msgid "Door state"
+msgstr "Dør tilstand"
+
+#: views/system_environment.tpl:254 views/system_environment.tpl:330
+#: views/system_environment.tpl:465 views/system_environment.tpl:541
+#: views/system_environment.tpl:676 views/system_environment.tpl:752
+#: views/system_environment.tpl:887 views/system_environment.tpl:963
+#: views/system_environment.tpl:1098 views/system_environment.tpl:1174
+msgid "Open"
+msgstr "Åpen"
+
+#: views/system_environment.tpl:255 views/system_environment.tpl:331
+#: views/system_environment.tpl:466 views/system_environment.tpl:542
+#: views/system_environment.tpl:677 views/system_environment.tpl:753
+#: views/system_environment.tpl:888 views/system_environment.tpl:964
+#: views/system_environment.tpl:1099 views/system_environment.tpl:1175
+msgid "Closed"
+msgstr "Lukket"
+
+#: views/system_environment.tpl:262 views/system_environment.tpl:338
+#: views/system_environment.tpl:473 views/system_environment.tpl:549
+#: views/system_environment.tpl:684 views/system_environment.tpl:760
+#: views/system_environment.tpl:895 views/system_environment.tpl:971
+#: views/system_environment.tpl:1106 views/system_environment.tpl:1182
+#: views/system_environment.tpl:1294 views/system_environment.tpl:1346
+msgid "Power on"
+msgstr "Slå på"
+
+#: views/system_environment.tpl:268 views/system_environment.tpl:344
+#: views/system_environment.tpl:479 views/system_environment.tpl:555
+#: views/system_environment.tpl:690 views/system_environment.tpl:766
+#: views/system_environment.tpl:901 views/system_environment.tpl:977
+#: views/system_environment.tpl:1112 views/system_environment.tpl:1188
+#: views/system_environment.tpl:1300 views/system_environment.tpl:1352
+msgid "Settle timeout"
+msgstr "Tidsavbrudd for utligning"
+
+#: views/system_environment.tpl:1253
+msgid "Height"
+msgstr "Høyde"
+
+#: views/system_environment.tpl:1259
+msgid "Offset"
+msgstr "Forskyvning"
+
+#: views/system_log.tpl:18
+msgid "Download"
+msgstr "Last ned"
+
+#: views/system_settings.tpl:16
+msgid "Here you can configure your TerrariumPI server."
+msgstr "Her kan du konfigurere din TerrariumPI server."
+
+#: views/system_settings.tpl:19 views/system_settings.tpl:56
+msgid "Weather location"
+msgstr "Vær lokasjon"
+
+#: views/system_settings.tpl:27 views/system_settings.tpl:62
+msgid "Wind speed indicator"
+msgstr "Indikator for vindhastighet"
+
+#: views/system_settings.tpl:47
+msgid "Language"
+msgstr "Språk"
+
+#: views/system_settings.tpl:73
+msgid "Temperature indicator"
+msgstr "Temperatur indikator"
+
+#: views/system_settings.tpl:77
+msgid "Celsius"
+msgstr "Celsius"
+
+#: views/system_settings.tpl:78
+msgid "Fahrenheit"
+msgstr "Fahrenheit"
+
+#: views/system_settings.tpl:84
+msgid "Distance indicator"
+msgstr "Avstand indikator"
+
+#: views/system_settings.tpl:88
+msgid "Centimetre"
+msgstr "Centimeter"
+
+#: views/system_settings.tpl:89
+msgid "Inches"
+msgstr "Tommer"
+
+#: views/system_settings.tpl:95
+msgid "Admin name"
+msgstr "Admin navn"
+
+#: views/system_settings.tpl:101
+msgid "New admin password"
+msgstr "Nytt admin passord"
+
+#: views/system_settings.tpl:107
+msgid "Current admin password"
+msgstr "Nåværende admin passord"
+
+#: views/system_settings.tpl:117
+msgid "Full authentication"
+msgstr "Fullstendig godkjenning"
+
+#: views/system_settings.tpl:118
+msgid "Changes only"
+msgstr "Kun endring"
+
+#: views/system_settings.tpl:124
+msgid "Soundcard"
+msgstr "Lydkort"
+
+#: views/system_settings.tpl:133
+msgid "External calendar"
+msgstr "Ekstern kalender"
+
+#: views/system_settings.tpl:139
+msgid "Graph legend layout"
+msgstr "Oppsett for Graph-forklaring"
+
+#: views/system_settings.tpl:143
+msgid "Horizontal"
+msgstr "Horisontal"
+
+#: views/system_settings.tpl:144
+msgid "Vertical"
+msgstr "Vertikal"
+
+#: views/system_settings.tpl:150
+msgid "Pi power usage in W"
+msgstr "Pi strømforbruk i W"
+
+#: views/system_settings.tpl:156
+msgid "Power price"
+msgstr "Strømpris"
+
+#: views/system_settings.tpl:162
+msgid "Water price"
+msgstr "Vannpris"
+
+#: views/system_settings.tpl:168
+msgid "IP or hostname"
+msgstr "IP eller vertsnavn"
+
+#: views/system_settings.tpl:174
+msgid "Port number"
+msgstr "Port nummer"
+
+#: views/system_settings.tpl:180
+msgid "OWFS server port"
+msgstr "OWFS server port"
+
+#: views/system_status.tpl:6
+msgid "CPU Load"
+msgstr "CPU Last"
+
+#: views/system_status.tpl:62
+msgid "CPU Temperature"
+msgstr "CPU Temperatur"
+
+#: views/system_status.tpl:118
+msgid "Memory usage"
+msgstr "Minnebruk"
+
+#: views/system_status.tpl:174
+msgid "Disk usage"
+msgstr "Harddisk bruk"
+
+#: views/weather.tpl:39
+msgid "City"
+msgstr "By"
+
+#: views/weather.tpl:58
+msgid "Mon"
+msgstr "Man"
+
+#: views/weather.tpl:66
+msgid "Tue"
+msgstr "Tir"
+
+#: views/weather.tpl:74
+msgid "Wed"
+msgstr "Ons"
+
+#: views/weather.tpl:82
+msgid "Thu"
+msgstr "Tors"
+
+#: views/weather.tpl:90
+msgid "Fri"
+msgstr "Fre"
+
+#: views/weather.tpl:98
+msgid "Sat"
+msgstr "Lør"
+
+#: views/webcam.tpl:4
+msgid "No webcams available"
+msgstr "Ingen webkameraer tilgjengelig"
+
+#: views/webcam_settings.tpl:16
+msgid "Here you can configure your webcams."
+msgstr "Her kan du konfigurere webkameraer."
+
+#: views/webcam_settings.tpl:30 views/webcam_settings.tpl:93
+msgid "Resolution"
+msgstr "Oppløsning"
+
+#: views/webcam_settings.tpl:60
+msgid "Add new webcam"
+msgstr "Legg til nytt webkamera"
+
+#: views/webcam_settings.tpl:116
+msgid "Archive"
+msgstr "Arkiv"
+
+#: views/webcam_settings.tpl:121
+msgid "Motion"
+msgstr "Bevegelse"
+
+#: views/webcam_settings.tpl:122
+msgid "1 minute"
+msgstr "1 minutt"
+
+#: views/webcam_settings.tpl:123
+msgid "5 minutes"
+msgstr "5 minutter"
+
+#: views/webcam_settings.tpl:124
+msgid "15 minutes"
+msgstr "15 minutter"
+
+#: views/webcam_settings.tpl:125
+msgid "30 minutes"
+msgstr "30 minutter"
+
+#: views/webcam_settings.tpl:126
+msgid "1 hour"
+msgstr "1 time"
+
+#: views/webcam_settings.tpl:127
+msgid "3 hours"
+msgstr "3 timer"
+
+#: views/webcam_settings.tpl:128
+msgid "6 hours"
+msgstr "6 timer"
+
+#: views/webcam_settings.tpl:129
+msgid "12 hours"
+msgstr "12 timer"
+
+#: views/webcam_settings.tpl:130
+msgid "1 day"
+msgstr "1 dag"
+
+#: Missing text string
+msgid "1Wire bus"
+msgstr "1Wire Bus"
+
+#: Missing text string
+msgid "1Wire DS18B20 wiring scheme"
+msgstr "1Wire DS18B20 koblingsskjema"
+
+#: Missing text string
+msgid "1Wire sensor 1"
+msgstr "1Wire sensor 1"
+
+#: Missing text string
+msgid "1Wire sensor 2"
+msgstr "1Wire sensor 2"
+
+#: Missing text string
+msgid "4 Ports GPIO relay board"
+msgstr "4 porter GPIO relé kort"
+
+#: Missing text string
+msgid "4 Ports USB relay board"
+msgstr "4 porter USB Relè kort"
+
+#: Missing text string
+msgid "Alarm"
+msgstr "Alarm"
+
+#: Missing text string
+msgid "Are you sure to delete the file"
+msgstr "Er du sikker på at du vil slette filen"
+
+#: Missing text string
+msgid "Avatar"
+msgstr "Avatar"
+
+#: Missing text string
+msgid "Click to change image"
+msgstr "Trykk for å endre bilde"
+
+#: Missing text string
+msgid "Connection lost"
+msgstr "Forbindelsen brutt"
+
+#: Missing text string
+msgid "Connection restored"
+msgstr "Tilkobling gjenopprettet"
+
+#: Missing text string
+msgid "Cooler"
+msgstr "Kjøler"
+
+#: Missing text string
+msgid "Current value"
+msgstr "Nåværende verdi"
+
+#: Missing text string
+msgid "Current weather widget screenshot"
+msgstr "Nåværende vær widget skjermbilde"
+
+#: Missing text string
+msgid "Delete file"
+msgstr "Slett fil"
+
+#: Missing text string
+msgid "DHT22 GPIO wiring scheme"
+msgstr "DHT22 GPIO koblingsskjema"
+
+#: Missing text string
+msgid "DHT22 temperature and humidity sensor"
+msgstr "DHT22 temperatur og luftfuktighet sensor"
+
+#: Missing text string
+msgid "Dimmer environment step in %"
+msgstr "Dimmer-miljø trinn i %"
+
+#: Missing text string
+msgid "Door history graph"
+msgstr "Diagram over dør loggen"
+
+#: Missing text string
+msgid "Doors overview screenshot"
+msgstr "Skjermbilde av dører oversikt"
+
+#: Missing text string
+msgid "Door status"
+msgstr "Dør status"
+
+#: Missing text string
+msgid "Drop files here to upload"
+msgstr "Slipp filer her for å laste opp"
+
+#: Missing text string
+msgid "Duration in seconds"
+msgstr "Varighet i sekunder"
+
+#: Missing text string
+msgid ""
+"Either add audio files and playlists. Or you have a pwm-dimmer switch "
+"configured."
+msgstr ""
+"Enten legge til lydfiler og spillelister. Eller har du en PWM-dimmer bryter "
+"konfigurert."
+
+#: Missing text string
+msgid "Error"
+msgstr "Feil"
+
+#: Missing text string
+msgid "External calendar url"
+msgstr "URL-adresse for ekstern kalender"
+
+#: Missing text string
+msgid "File is to big. Filesize {{filesize}} is more then max {{maxFilesize}}"
+msgstr ""
+"Filen er for stor. Filstørrelse {{filesize}} er mer enn maks {{maxFilesize}}"
+
+#: Missing text string
+msgid "Free memory"
+msgstr "Ledig minne"
+
+#: Missing text string
+msgid "Free space"
+msgstr "Ledig plass"
+
+#: Missing text string
+msgid "Github"
+msgstr "GitHub"
+
+#: Missing text string
+msgid "GPIO Magnetic door sensor"
+msgstr "GPIO Magnetisk dør sensor"
+
+#: Missing text string
+msgid "GPIO relay board wiring scheme"
+msgstr "GPIO relé kort koblingsskjema"
+
+#: Missing text string
+msgid "Height in cm"
+msgstr "Høyde i cm"
+
+#: Missing text string
+msgid "I2C bus"
+msgstr "I2C Bus"
+
+#: Missing text string
+msgid "I2C bus adapter"
+msgstr "I2C Bus Adapter"
+
+#: Missing text string
+msgid "ID"
+msgstr "ID"
+
+#: Missing text string
+msgid "Information"
+msgstr "Informasjon"
+
+#: Missing text string
+msgid "Invalid filetype"
+msgstr "Ugyldig filetype"
+
+#: Missing text string
+msgid "Load 15"
+msgstr "Last 15"
+
+#: Missing text string
+msgid "Load 5"
+msgstr "Last 5"
+
+#: Missing text string
+msgid "No error messages"
+msgstr "Ingen feilmeldinger"
+
+#: Missing text string
+msgid "Not playing"
+msgstr "Spiller ikke"
+
+#: Missing text string
+msgid "No warning messages"
+msgstr "Ingen advarsler"
+
+#: Missing text string
+msgid "Offset in cm"
+msgstr "Forskyvning i cm"
+
+#: Missing text string
+msgid "Press browse button to select files"
+msgstr "Trykk på Bla igjennom for å velge filer"
+
+#: Missing text string
+msgid "Preview file"
+msgstr "Forhåndsvis fil"
+
+#: Missing text string
+msgid "Raspberry Pi 3 camera"
+msgstr "Raspberry Pi 3 kamera"
+
+#: Missing text string
+msgid "Raspberry Pi 3 specifications"
+msgstr "Raspberry Pi 3 spesifikasjoner"
+
+#: Missing text string
+msgid "Raspberry Pi camera"
+msgstr "Raspberry Pi 3 kamera"
+
+#: Missing text string
+msgid "Save RAW photo"
+msgstr "Lagre RAW-bilde"
+
+#: Missing text string
+msgid "Sensor history graph"
+msgstr "Sensor historie graf"
+
+#: Missing text string
+msgid "Sensors overview screenshot"
+msgstr "Skjermbilde av sensor oversikt"
+
+#: Missing text string
+msgid "Server could not process the upload. Error code {{statusCode}}"
+msgstr "Serveren kan ikke behandle opplastingen. Feilkode {{statusCode}}"
+
+#: Missing text string
+msgid "Switches overview screenshot"
+msgstr "Skjermbilde av brytere oversikt"
+
+#: Missing text string
+msgid "Switch history graph"
+msgstr "Bryter logg graf"
+
+#: Missing text string
+msgid "System environment screenshot"
+msgstr "Skjermbilde av system miljø"
+
+#: Missing text string
+msgid "TerrariumPI test setup"
+msgstr "TerrariumPI testoppsett"
+
+#: Missing text string
+msgid "There are zero door sensors configured."
+msgstr "Det er ikke konfigurert noen dør sensorer."
+
+#: Missing text string
+msgid "Timer period off duration in minutes"
+msgstr "Tidtaker periode av varighet i minutter"
+
+#: Missing text string
+msgid "Timer period on duration in minutes"
+msgstr "Tidtaker periode på varighet i minutter"
+
+#: Missing text string
+msgid "Timestamp"
+msgstr "Tidsstempel"
+
+#: Missing text string
+msgid "Toggle power switch"
+msgstr "Slå av/på strømbryteren"
+
+#: Missing text string
+msgid "Total memory"
+msgstr "Totalt minne"
+
+#: Missing text string
+msgid "Total open for"
+msgstr "Totalt åpent i"
+
+#: Missing text string
+msgid "Total space"
+msgstr "Total plass"
+
+#: Missing text string
+msgid "Universal AC MAINS Dimmer - MPDMv4.1"
+msgstr "Universal AC nettstrøm dimmer-mpdmv 4.1"
+
+#: Missing text string
+msgid "Unknown date"
+msgstr "Ukjent dato"
+
+#: Missing text string
+msgid "USB Relay board"
+msgstr "USB Relay kort"
+
+#: Missing text string
+msgid "USB Webcam"
+msgstr "USB Webcam"
+
+#: Missing text string
+msgid "Used memory"
+msgstr "Brukt minne"
+
+#: Missing text string
+msgid "Used space"
+msgstr "Brukt plass"
+
+#: Missing text string
+msgid "Value difference during the night"
+msgstr "Verdi forskjell gjennom natt"
+
+#: Missing text string
+msgid "Volume in liters"
+msgstr "Volum i liter"
+
+#: Missing text string
+msgid "Weather day forecast screenshot"
+msgstr "Vær dag varsel skjermbilde"
+
+#: Missing text string
+msgid "Weather forecast screenshot"
+msgstr "Skjermbilde av værvarsel"
+
+#: Missing text string
+msgid "Webcam overview screenshot"
+msgstr "Skjermbilde webkamera oversikt"
+
+#: Missing text string
+msgid "Week forecast screenshot"
+msgstr "Skjermbilde av uke varsel"
+
+#: Missing text string
+msgid "Width"
+msgstr "Bredde"
+
+#: Missing text string
+msgid "Sensor temperature"
+msgstr "Sensor temperatur"
+
+#: Missing text string
+msgid "Sensor humidity"
+msgstr "Sensor luftfuktighet"
+
+#: Missing text string
+msgid "Sensor distance"
+msgstr "Sensor avstand"
+
+#: Missing text string
+msgid "Sensor ph"
+msgstr "Sensor pH"
+
+#: Missing text string
+msgid "Sensor settings"
+msgstr "Sensor innstillinger"
+
+#: Missing text string
+msgid "Switch status"
+msgstr "Bryter status"
+
+#: Missing text string
+msgid "Switch settings"
+msgstr "Bryter innstillinger"
+
+#: Missing text string
+msgid "Door settings"
+msgstr "Dør innstillinger"
+
+#: Missing text string
+msgid "Webcam settings"
+msgstr "Innstillinger for webkamera"
+
+#: Missing text string
+msgid "Audio files"
+msgstr "Lydfiler"
+
+#: Missing text string
+msgid "System status"
+msgstr "Systemstatus"
+
+#: Missing text string
+msgid "System log"
+msgstr "Systemlogg"
+
+#: Missing text string
+msgid "System environment"
+msgstr "System miljø"
+
+#: Missing text string
+msgid "System settings"
+msgstr "Systeminnsillinger"
