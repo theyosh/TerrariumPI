@@ -62,6 +62,9 @@
                       <a href="sensor_fertility.html">{{_('Fertility')}}</a>
                     </li>
                     <li>
+                      <a href="sensor_co2.html">{{_('CO2')}}</a>
+                    </li>
+                    <li>
                       <a href="sensor_settings.html">{{_('Settings')}}</a>
                     </li>
                   </ul>

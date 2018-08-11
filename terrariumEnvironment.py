@@ -483,6 +483,20 @@ class terrariumEnvironmentDistance(terrariumEnvironmentPart):
   def get_type(self):
     return terrariumEnvironmentDistance.env_type
 
+class terrariumEnvironmentFertility(terrariumEnvironmentPart):
+
+  env_type = 'fertility'
+
+  def get_type(self):
+    return terrariumEnvironmentMoisture.env_type
+
+class terrariumEnvironmentCO2(terrariumEnvironmentPart):
+
+  env_type = 'co2'
+
+  def get_type(self):
+    return terrariumEnvironmentMoisture.env_type
+
 class terrariumEnvironmentWatertank(terrariumEnvironmentDistance):
 
   env_type = 'watertank'
@@ -527,6 +541,9 @@ class terrariumEnvironment(object):
   VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentConductivity.env_type)
   VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentDistance.env_type)
   VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentWatertank.env_type)
+
+  VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentFertility.env_type)
+  VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentCO2.env_type)
 
   def __init__(self, sensors, powerswitches, weather, door_status, config, notification):
     logger.debug('Init terrariumPI environment')
@@ -634,6 +651,20 @@ class terrariumEnvironment(object):
 
       elif env_part == terrariumEnvironmentConductivity.env_type:
         self.__environment_parts[env_part] = terrariumEnvironmentConductivity(
+                                                'disabled' if 'mode' not in env_conf else env_conf['mode'],
+                                                []         if ('sensors' not in env_conf or env_conf['sensors'] in ['',None]) else env_conf['sensors'],
+                                                0.0        if 'day_night_difference' not in env_conf else env_conf['day_night_difference'],
+                                                'weather'  if 'day_night_source' not in env_conf else env_conf['day_night_source'])
+
+      elif env_part == terrariumEnvironmentFertility.env_type:
+        self.__environment_parts[env_part] = terrariumEnvironmentFertility(
+                                                'disabled' if 'mode' not in env_conf else env_conf['mode'],
+                                                []         if ('sensors' not in env_conf or env_conf['sensors'] in ['',None]) else env_conf['sensors'],
+                                                0.0        if 'day_night_difference' not in env_conf else env_conf['day_night_difference'],
+                                                'weather'  if 'day_night_source' not in env_conf else env_conf['day_night_source'])
+
+      elif env_part == terrariumEnvironmentCO2.env_type:
+        self.__environment_parts[env_part] = terrariumEnvironmentCO2(
                                                 'disabled' if 'mode' not in env_conf else env_conf['mode'],
                                                 []         if ('sensors' not in env_conf or env_conf['sensors'] in ['',None]) else env_conf['sensors'],
                                                 0.0        if 'day_night_difference' not in env_conf else env_conf['day_night_difference'],
