@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+# https://untangle.readthedocs.io/en/latest/#encoding
+import sys
+reload(sys) # just to be sure
+sys.setdefaultencoding('utf-8')
+
 '''
 Install extra modules:
 aptitude install python-dateutil python-ow python-rpi.gpio python-psutil python-pip
