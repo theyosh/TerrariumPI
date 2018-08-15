@@ -11,10 +11,27 @@ import ow
 
 from hashlib import md5
 
-from terrariumUtils import terrariumUtils
+from terrariumUtils import terrariumUtils, terrariumSingleton
 from terrariumAnalogSensor import terrariumSKUSEN0161Sensor
+from terrariumBluetoothSensor import terrariumMiFloraSensor
 from terrariumGPIOSensor import terrariumYTXXSensorDigital, terrariumDHT11Sensor, terrariumDHT22Sensor, terrariumAM2302Sensor, terrariumHCSR04Sensor
-from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor
+from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor
+
+class terrariumSensorCache(object):
+  __metaclass__ = terrariumSingleton
+
+  def __init__(self):
+    self.__cache = {}
+
+  def add_sensor(self,address,sensor,force = False):
+    if force or address not in self.__cache:
+      self.__cache[address] = sensor
+
+  def get_sensor(self,address):
+    if address in self.__cache:
+      return self.__cache[address]
+
+    return None
 
 class terrariumRemoteSensor(object):
   hardwaretype = 'remote'
@@ -35,8 +52,6 @@ class terrariumRemoteSensor(object):
 
   def __exit__(self, type, value, traceback):
     """with support"""
-    self.__url = None
-    self.__value = None
 
   def get_current(self):
     self.__get_raw_data()
@@ -57,10 +72,22 @@ class terrariumRemoteSensor(object):
   def get_distance(self):
     return self.get_current()
 
-  def get_distance(self):
+  def get_ph(self):
     return self.get_current()
 
-  def get_ph(self):
+  def get_light(self):
+    return self.get_current()
+
+  def get_uva(self):
+    return self.get_current()
+
+  def get_uvb(self):
+    return self.get_current()
+
+  def get_fertility(self):
+    return self.get_current()
+
+  def get_co2(self):
     return self.get_current()
 
 class terrarium1WSensor(object):
@@ -91,8 +118,6 @@ class terrarium1WSensor(object):
 
   def __exit__(self, type, value, traceback):
     """with support"""
-    self.__path = None
-    self.__value = None
 
   def get_current(self):
     self.__get_raw_data()
@@ -139,9 +164,6 @@ class terrariumOWFSSensor(object):
 
   def __exit__(self, type, value, traceback):
     """with support"""
-    self.__sensor = None
-    self.__temperature = None
-    self.__humidity = None
 
   def get_temperature(self):
     self.__get_raw_data()
@@ -172,7 +194,7 @@ class terrariumSensor(object):
   UPDATE_TIMEOUT = 30
   ERROR_TIMEOUT = 10
 
-  VALID_SENSOR_TYPES   = ['temperature','humidity','moisture','conductivity','distance','ph','light']
+  VALID_SENSOR_TYPES   = ['temperature','humidity','moisture','conductivity','distance','ph','light','uva','uvb','fertility','co2']
   VALID_HARDWARE_TYPES = []
 
   # Append OWFS to the list of valid sensors
@@ -195,6 +217,7 @@ class terrariumSensor(object):
   VALID_HARDWARE_TYPES.append(terrariumSi7021Sensor.hardwaretype)
   VALID_HARDWARE_TYPES.append(terrariumBME280Sensor.hardwaretype)
   VALID_HARDWARE_TYPES.append(terrariumChirpSensor.hardwaretype)
+  VALID_HARDWARE_TYPES.append(terrariumVEML6075Sensor.hardwaretype)
 
   # Append YTXX sensor(s) to the list of valid sensors
   VALID_HARDWARE_TYPES.append(terrariumYTXXSensorDigital.hardwaretype)
@@ -205,8 +228,16 @@ class terrariumSensor(object):
   # Appand analog sensor(s) to the list of valid sensors
   VALID_HARDWARE_TYPES.append(terrariumSKUSEN0161Sensor.hardwaretype)
 
+  # Appand analog sensor(s) to the list of valid sensors
+  VALID_HARDWARE_TYPES.append(terrariumMiFloraSensor.hardwaretype)
+
   def __init__(self, id, hardware_type, sensor_type, sensor, name = '', callback_indicator = None):
+    self.__sensor_cache = terrariumSensorCache()
+
     self.id = id
+
+    self.__miflora_firmware = None
+    self.__miflora_battery = None
 
     self.notification = True
 
@@ -217,8 +248,21 @@ class terrariumSensor(object):
     self.set_alarm_min(0)
     self.set_alarm_max(0)
     self.set_limit_min(0)
+
     # For hc-sr04 set at 10 meters else just '100' value
-    self.set_limit_max(100000 if terrariumHCSR04Sensor.hardwaretype == self.get_hardware_type() else 100)
+    if terrariumHCSR04Sensor.hardwaretype == self.get_hardware_type():
+      self.set_limit_max(100000)
+    # Lux light and fertility values
+    elif 'light' == self.get_type() or 'fertility' == self.get_type():
+      self.set_limit_max(5000)
+    else :
+      self.set_limit_max(100)
+
+    # Set custom Chirp calibration values to default
+    if 'chirp' == self.get_hardware_type():
+      self.set_min_moist_calibration(160)
+      self.set_max_moist_calibration(720)
+      self.set_temperature_offset_calibration(0)
 
     if self.id is None:
       self.id = md5(b'' + self.get_address().replace('-','').upper() + self.get_type()).hexdigest()
@@ -226,6 +270,7 @@ class terrariumSensor(object):
     self.current = float(0)
     self.last_update = datetime.datetime.fromtimestamp(0)
     logger.info('Loaded %s %s sensor \'%s\' on location %s.' % (self.get_hardware_type(),self.get_type(),self.get_name(),self.get_address()))
+
     self.update()
 
   @staticmethod
@@ -251,6 +296,14 @@ class terrariumSensor(object):
                                          w1sensor,
                                          callback_indicator=unit_indicator))
 
+    # Scanning bluetooth devices
+    for (sensor,sensortype) in terrariumMiFloraSensor.scan():
+      sensor_list.append(terrariumSensor(None,
+                                         terrariumMiFloraSensor.hardwaretype,
+                                         sensortype,
+                                         sensor,
+                                         callback_indicator=unit_indicator))
+
     logger.info('Found %d temperature/humidity sensors in %.5f seconds' % (len(sensor_list),time.time() - starttime))
     return sensor_list
 
@@ -260,6 +313,7 @@ class terrariumSensor(object):
       logger.debug('Updating %s %s sensor \'%s\'' % (self.get_hardware_type(),self.get_type(), self.get_name()))
       old_current = self.get_current()
       current = None
+
       try:
         starttime = time.time()
         hardwaresensor = None
@@ -267,43 +321,60 @@ class terrariumSensor(object):
         if len(address) == 2:
           address.append(None)
 
-        if terrariumRemoteSensor.hardwaretype == self.get_hardware_type():
-          hardwaresensor = terrariumRemoteSensor(address[0])
-        elif terrarium1WSensor.hardwaretype == self.get_hardware_type():
-          hardwaresensor = terrarium1WSensor(address[0])
-        elif terrariumOWFSSensor.hardwaretype == self.get_hardware_type():
-          # Dirty hack for OWFS sensors.... ;)
-          hardwaresensor = terrariumOWFSSensor(self.__sensor)
+        cache_hash = md5(b'' + self.get_address().replace('-','').upper() + self.get_hardware_type()).hexdigest()
+        hardwaresensor = self.__sensor_cache.get_sensor(cache_hash)
 
-        elif terrariumSHT2XSensor.hardwaretype == self.get_hardware_type():
-          hardwaresensor = terrariumSHT2XSensor(address[0],address[1])
-        elif terrariumHTU21DSensor.hardwaretype == self.get_hardware_type():
-          hardwaresensor = terrariumHTU21DSensor(address[0],address[1])
-        elif terrariumSi7021Sensor.hardwaretype == self.get_hardware_type():
-          hardwaresensor = terrariumSi7021Sensor(address[0],address[1])
-        elif terrariumBME280Sensor.hardwaretype == self.get_hardware_type():
-          hardwaresensor = terrariumBME280Sensor(address[0],address[1])
-        elif terrariumChirpSensor.hardwaretype == self.get_hardware_type():
-          hardwaresensor = terrariumChirpSensor(address[0],address[1])
+        if hardwaresensor is None:
+          if terrariumRemoteSensor.hardwaretype == self.get_hardware_type():
+            hardwaresensor = terrariumRemoteSensor(address[0])
+          elif terrarium1WSensor.hardwaretype == self.get_hardware_type():
+            hardwaresensor = terrarium1WSensor(address[0])
+          elif terrariumOWFSSensor.hardwaretype == self.get_hardware_type():
+            # Dirty hack for OWFS sensors.... ;)
+            hardwaresensor = terrariumOWFSSensor(self.__sensor)
 
+          elif terrariumSHT2XSensor.hardwaretype == self.get_hardware_type():
+            hardwaresensor = terrariumSHT2XSensor(address[0],address[1])
+          elif terrariumHTU21DSensor.hardwaretype == self.get_hardware_type():
+            hardwaresensor = terrariumHTU21DSensor(address[0],address[1])
+          elif terrariumSi7021Sensor.hardwaretype == self.get_hardware_type():
+            hardwaresensor = terrariumSi7021Sensor(address[0],address[1])
+          elif terrariumBME280Sensor.hardwaretype == self.get_hardware_type():
+            hardwaresensor = terrariumBME280Sensor(address[0],address[1])
+          elif terrariumVEML6075Sensor.hardwaretype == self.get_hardware_type():
+            hardwaresensor = terrariumVEML6075Sensor(address[0],address[1])
 
-        elif terrariumYTXXSensorDigital.hardwaretype == self.get_hardware_type():
-          hardwaresensor = terrariumYTXXSensorDigital(address[0],address[1])
+          elif terrariumChirpSensor.hardwaretype == self.get_hardware_type():
+            hardwaresensor = terrariumChirpSensor(address[0],address[1],self.get_min_moist_calibration(),
+                                                                        self.get_max_moist_calibration(),
+                                                                        self.get_temperature_offset_calibration())
 
-        elif terrariumDHT11Sensor.hardwaretype == self.get_hardware_type():
-          hardwaresensor = terrariumDHT11Sensor(address[0],address[1])
-        elif terrariumDHT22Sensor.hardwaretype == self.get_hardware_type():
-          hardwaresensor = terrariumDHT22Sensor(address[0],address[1])
-        elif terrariumAM2302Sensor.hardwaretype == self.get_hardware_type():
-          hardwaresensor = terrariumAM2302Sensor(address[0],address[1])
+          elif terrariumYTXXSensorDigital.hardwaretype == self.get_hardware_type():
+            hardwaresensor = terrariumYTXXSensorDigital(address[0],address[1])
 
-        elif terrariumSKUSEN0161Sensor.hardwaretype == self.get_hardware_type():
-          hardwaresensor = terrariumSKUSEN0161Sensor(address[0],address[1])
+          elif terrariumDHT11Sensor.hardwaretype == self.get_hardware_type():
+            hardwaresensor = terrariumDHT11Sensor(address[0],address[1])
+          elif terrariumDHT22Sensor.hardwaretype == self.get_hardware_type():
+            hardwaresensor = terrariumDHT22Sensor(address[0],address[1])
+          elif terrariumAM2302Sensor.hardwaretype == self.get_hardware_type():
+            hardwaresensor = terrariumAM2302Sensor(address[0],address[1])
 
-        elif terrariumHCSR04Sensor.hardwaretype == self.get_hardware_type():
-          hardwaresensor = terrariumHCSR04Sensor(address[0],address[1],address[2])
+          elif terrariumSKUSEN0161Sensor.hardwaretype == self.get_hardware_type():
+            hardwaresensor = terrariumSKUSEN0161Sensor(address[0],address[1])
+
+          elif terrariumHCSR04Sensor.hardwaretype == self.get_hardware_type():
+            hardwaresensor = terrariumHCSR04Sensor(address[0],address[1],address[2])
+
+          elif terrariumMiFloraSensor.hardwaretype == self.get_hardware_type():
+            hardwaresensor = terrariumMiFloraSensor(address[0])
+
+          self.__sensor_cache.add_sensor(cache_hash,hardwaresensor)
 
         if hardwaresensor is not None:
+          if terrariumMiFloraSensor.hardwaretype == self.get_hardware_type():
+            self.__miflora_firmware = hardwaresensor.get_firmware()
+            self.__miflora_battery = hardwaresensor.get_battery()
+
           with hardwaresensor as sensor:
             if 'temperature' == self.get_type():
               current = sensor.get_temperature()
@@ -319,6 +390,14 @@ class terrariumSensor(object):
               current = sensor.get_ph()
             elif 'light' == self.get_type():
               current = sensor.get_light()
+            elif 'uva' == self.get_type():
+              current = sensor.get_uva()
+            elif 'uvb' == self.get_type():
+              current = sensor.get_uvb()
+            elif 'fertility' == self.get_type():
+              current = sensor.get_fertility()
+            elif 'co2' == self.get_type():
+              current = sensor.get_co2()
 
           del hardwaresensor
 
@@ -366,6 +445,15 @@ class terrariumSensor(object):
             'alarm' : self.get_alarm(),
             'error' : not self.is_active()
             }
+
+    if 'chirp' == self.get_hardware_type():
+      data['min_moist'] = self.get_min_moist_calibration()
+      data['max_moist'] = self.get_max_moist_calibration()
+      data['temp_offset'] = self.get_temperature_offset_calibration()
+
+    if 'miflora' == self.get_hardware_type():
+      data['firmware'] = self.__miflora_firmware
+      data['battery'] = self.__miflora_battery
 
     return data
 
@@ -432,6 +520,24 @@ class terrariumSensor(object):
 
   def set_limit_max(self,limit):
     self.limit_max = float(limit)
+
+  def set_min_moist_calibration(self,limit):
+    self.__min_moist = float(limit)
+
+  def get_min_moist_calibration(self):
+    return self.__min_moist
+
+  def set_max_moist_calibration(self,limit):
+    self.__max_moist = float(limit)
+
+  def get_max_moist_calibration(self):
+    return self.__max_moist
+
+  def set_temperature_offset_calibration(self,limit):
+    self.__temp_offset = float(limit)
+
+  def get_temperature_offset_calibration(self):
+    return self.__temp_offset
 
   def get_current(self, force = False):
     current = self.current

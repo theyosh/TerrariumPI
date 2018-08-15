@@ -2,6 +2,165 @@ Changelog
 =========
 
 
+3.8.4 (2018-07-04)
+------------------
+
+**Fixes**
+------
+- Fix date calendar at profile editing page. [theyosh]
+- Fix installer when updating with git. [theyosh]
+- Small JS fix for empty graphs. [theyosh]
+- Fix dashboard duration information for power and water usage.
+  [theyosh]
+- Finally fixed door and powerswitches graphs. [TheYOSH]
+
+**Updates**
+------
+- Update version number. [theyosh]
+- Update translation files. [theyosh]
+- Update translation files. [theyosh]
+- Update translation files. [theyosh]
+
+**Other**
+------
+- Partly done Dutch translation. [theyosh]
+- Change settings page for better UX. [theyosh]
+- Set default weather location to somewhere in Madagascar. [theyosh]
+
+
+3.8.3 (2018-07-27)
+------------------
+
+**New**
+------
+- Add extra random genertor for cryptographic actions. [theyosh]
+- Add sensor data caching for sensors with multiple sensor types. Should
+  speedup the engine. [theyosh]
+- Add MiFlora support. Missing light support for now in favour of Chirp.
+  [theyosh]
+
+**Fixes**
+------
+- Fix timers with zero on and off durations. [theyosh]
+- Another startup fix. [theyosh]
+- Fix remote power switch code when not reachable during startup.
+  Referenced to [#175](https://github.com/theyosh/TerrariumPI/issues/175). [theyosh]
+- Fix mailserver quit action when mail sending has failed due to not
+  initialized random generator. [#175](https://github.com/theyosh/TerrariumPI/issues/175). [theyosh]
+- Fix total water usage in power switch graphs. [theyosh]
+- Fix bluetooth scanning when rights are not correct somehow... [#175](https://github.com/theyosh/TerrariumPI/issues/175).
+  [theyosh]
+- Fix OWFS sensors caching. [theyosh]
+- Fix typo. [TheYOSH]
+- Fix updating power switch timer data. [#171](https://github.com/theyosh/TerrariumPI/issues/171). [theyosh]
+
+**Updates**
+------
+- Update changelog. [theyosh]
+- Update README.md. [TheYOSH]
+- Update version number. [theyosh]
+- Update light sensors to use LUX value as default. This means that
+  Chirp light sensors are not used for average calculation and should
+  also not being used in the environment settings. Average light values
+  will only be calculated from LUX enabled light sensors. [#156](https://github.com/theyosh/TerrariumPI/issues/156).
+  [theyosh]
+- Update README.md. [TheYOSH]
+- Small update graphs. [theyosh]
+- Update German translations. Thanks to [@Barbara1984.](https://github.com/Barbara1984.) Close [#174](https://github.com/theyosh/TerrariumPI/issues/174).
+  [theyosh]
+- Update webcam to use a thread for updating for speeding up the engine.
+  Add minimal signal strength for MiFlora [#156](https://github.com/theyosh/TerrariumPI/issues/156). [theyosh]
+- Update graphs once every minute. [theyosh]
+- Update submodules. [theyosh]
+
+**Other**
+------
+- Swap UVA and UVB colors. [theyosh]
+- Increase Telegambot retries. Is needed for SSL issues during startups
+  after reboot. [theyosh]
+- Make timers with zero on and off duration period run for the whole
+  period. [theyosh]
+- Better logging in the TerrariumUtils class. [theyosh]
+- Better error message. [theyosh]
+- Merge branch 'master' of ssh://github.com/theyosh/TerrariumPI.
+  [theyosh]
+- Merge branch 'sensor_caching' [theyosh]
+- Merge branch 'master' of ssh://github.com/theyosh/TerrariumPI.
+  [theyosh]
+
+
+3.8.2 (2018-07-17)
+------------------
+
+**New**
+------
+- Add engine error counter and warning. [theyosh]
+- Add dual axis support in powerswitch graphs. [TheYOSH]
+- Add Chirp calibration translations. [theyosh]
+- Add support for Chirp calibration. [theyosh]
+- Add support for UVA and UVB sensors using VEML6075 sensors. [#90](https://github.com/theyosh/TerrariumPI/issues/90).
+  [theyosh]
+- Add diplay toggle for notification messages and more display
+  finetuning in showing messages. [theyosh]
+
+**Fixes**
+------
+- Fix powerswitch and door yearly graphs. [TheYOSH]
+- Fix sensor pages. [#90](https://github.com/theyosh/TerrariumPI/issues/90). [theyosh]
+- Fix typo. [theyosh]
+- Fix Collector upgrades. [theyosh]
+
+**Updates**
+------
+- Update changelog. [theyosh]
+- Update version number. [theyosh]
+- Update translations. [theyosh]
+- Update README.md. [TheYOSH]
+
+**Other**
+------
+- Only load dashboard average and graphs for used sensors. [theyosh]
+- Display normal light in % strength. [TheYOSH]
+- Hide power status for environment parts that do not have power
+  switches configured. [TheYOSH]
+- Finetune profile page. [theyosh]
+- Finetune profile page. [theyosh]
+- Finetune profile page. [theyosh]
+- Cleanup. [theyosh]
+- Finetuning power switch timer icon. [theyosh]
+- Trying to speed things up... [theyosh]
+
+
+3.8.1 (2018-07-10)
+------------------
+
+**New**
+------
+- Add sorting on different pages. [theyosh]
+
+**Fixes**
+------
+- Fix typo. [theyosh]
+- Fix starting up with no data in the database. [#168](https://github.com/theyosh/TerrariumPI/issues/168). [theyosh]
+- Fixed caching issue when chaning settings. [#167](https://github.com/theyosh/TerrariumPI/issues/167). [theyosh]
+- Fix Telegram Bot going to soon. [theyosh]
+
+**Updates**
+------
+- Update changelog. [theyosh]
+- Update version. [theyosh]
+- Update README.md. [TheYOSH]
+- Update data gaphing and finetuning SQL. [theyosh]
+- Update installer for OLED displays. [theyosh]
+
+**Other**
+------
+- Do not change dimmer up or down when running. On and off is still
+  possible. [theyosh]
+- Finetuning Notifications. Renamed LCD to Display for general name and
+  support OLED screens. [#164](https://github.com/theyosh/TerrariumPI/issues/164). [theyosh]
+
+
 3.8.0 (2018-07-01)
 ------------------
 
@@ -29,6 +188,7 @@ Changelog
 **Updates**
 ------
 - Update changelog. [theyosh]
+- Update changelog. [theyosh]
 - Update README.md. [TheYOSH]
 - Update translations. [theyosh]
 - Small update to installer and reload message settings after saving.
@@ -46,6 +206,9 @@ Changelog
 
 **Other**
 ------
+- Merge pull request [#165](https://github.com/theyosh/TerrariumPI/issues/165) from theyosh/development. [TheYOSH]
+
+  Release 3.8.0
 - Finetuning. [theyosh]
 - Smoothen the dimmer. [theyosh]
 - Auto decode HTML content. [theyosh]

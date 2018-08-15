@@ -8,7 +8,7 @@ var globals = {
   gauges: [],
   webcams: [],
   graphs: {},
-  graph_cache: 5 * 60,
+  graph_cache: 1 * 60,
   websocket_timer: null,
   online_timer: null,
   current_version: null,
@@ -378,6 +378,14 @@ function formatUptime(uptime) {
 
 function capitalizeFirstLetter(string) {
     return string[0].toUpperCase() + string.slice(1);
+}
+
+// https://stackoverflow.com/questions/8837454/sort-array-of-objects-by-single-key-with-date-value
+function sortByKey(array, key) {
+  return array.sort(function(a, b) {
+    var x = a[key]; var y = b[key];
+    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+  });
 }
 /* General functions - End numbers, currency, etc formatting  */
 
@@ -948,6 +956,11 @@ function sensor_gauge(name, data) {
     if (name == 'system_load') {
       data.current /= data.cores;
     }
+    // Chirp light sensor is based on backscattering and is not able to produce LUX values
+    if ('light' == data.type && 'chirp' == data.hardwaretype) {
+      data.indicator = '%';
+    }
+
     $('#' + name + ' .gauge-indicator').text(data.indicator);
     globals.gauges[name].set(data.current);
     if (name == 'system_disk' || name == 'system_memory') {
@@ -1009,7 +1022,7 @@ function load_history_graph(id,type,data_url,nocache) {
       clearTimeout(globals.graphs[id].timer);
       globals.graphs[id].timer = setTimeout(function() {
           load_history_graph(id,type,data_url);
-      }, 1 * 60 * 1000);
+      }, globals.graph_cache * 1000);
 
     } else {
       // Load fresh data...
@@ -1021,11 +1034,35 @@ function load_history_graph(id,type,data_url,nocache) {
           });
         });
 
-        history_graph(id, globals.graphs[id].data, type);
+        if ('light' == type && data_url.indexOf('/average/') > 0) {
+          globals.graphs[id].data.light_average = true;
+
+          $.getJSON(data_url.replace('/light','/uva'), function(online_data) {
+            $.each(online_data, function(dummy, value) {
+              $.each(value, function(dummy, data_array) {
+                globals.graphs[id].timestamp = now;
+                globals.graphs[id].data['alarm_min'] = data_array.current;
+              });
+            })
+
+            $.getJSON(data_url.replace('/light','/uvb'), function(online_data) {
+              $.each(online_data, function(dummy, value) {
+                $.each(value, function(dummy, data_array) {
+                  globals.graphs[id].timestamp = now;
+                  globals.graphs[id].data['alarm_max'] = data_array.current;
+                });
+              })
+              history_graph(id, globals.graphs[id].data, type);
+            });
+          });
+        } else {
+          history_graph(id, globals.graphs[id].data, type);
+        }
+
         clearTimeout(globals.graphs[id].timer);
         globals.graphs[id].timer = setTimeout(function() {
           load_history_graph(id,type,data_url);
-        }, 1 * 60 * 1000);
+        }, globals.graph_cache * 1000);
       });
     }
 
@@ -1133,7 +1170,24 @@ function history_graph(name, data, type) {
             break;
 
           case 'light':
-            val = formatNumber(val) + '';
+            val = formatNumber(val) + ' lux';
+            break;
+
+          case 'light_percentage':
+            val = formatNumber(val) + ' %';
+            break;
+
+          case 'fertility':
+            val = formatNumber(val) + ' µS/cm';
+            break;
+
+          case 'co2':
+            val = formatNumber(val) + ' ppm';
+            break
+
+          case 'uva':
+          case 'uvb':
+            val = formatNumber(val) + 'µW/cm^2';
             break;
 
           case 'door':
@@ -1146,13 +1200,56 @@ function history_graph(name, data, type) {
   };
 
   switch (type) {
+    case 'light':
+      if (data.light_average !== undefined && data.light_average) {
+
+        graph_data = [{
+          label: '{{_('Light')}}',
+          data: data.current
+        }, {
+          label: '{{_('UVA')}}',
+          data: data.alarm_min,
+          yaxis: 2
+        }, {
+          label: '{{_('UVB')}}',
+          data: data.alarm_max,
+          yaxis: 2
+        }];
+
+        graph_options.colors = ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)", "rgba(3, 88, 206, 0.38)"]
+        graph_options.xaxes = [jQuery.extend(true, {}, graph_options.xaxes)];
+
+        var yaxis2 = jQuery.extend(true, {}, graph_options.yaxes);
+        yaxis2.alignTicksWithAxis = 1;
+        yaxis2.position = 'right';
+        yaxis2.tickFormatter = function(val, axis) { return val.toFixed(axis.tickDecimals) + ' µW/cm^2';}
+
+        graph_options.yaxes = [jQuery.extend(true, {}, graph_options.yaxes),yaxis2];
+
+      } else {
+        graph_data = [{
+          label: '{{_('Current')}}',
+          data: data.current
+        }, {
+          label: '{{_('Alarm min')}}',
+          data: data.alarm_min
+        }, {
+          label: '{{_('Alarm max')}}',
+          data: data.alarm_max
+        }];
+      }
+      break;
     case 'humidity':
     case 'temperature':
     case 'distance':
     case 'ph':
     case 'moisture':
     case 'conductivity':
-    case 'light':
+    case 'light_percentage':
+    case 'uva':
+    case 'uvb':
+    case 'fertility':
+    case 'co2':
       graph_data = [{
         label: '{{_('Current')}}',
         data: data.current
@@ -1241,7 +1338,17 @@ function history_graph(name, data, type) {
       }, {
         label: '{{_('Water flow in L/m')}}',
         data: data.water_flow,
+        yaxis: 2
       }];
+
+      graph_options.xaxes = [jQuery.extend(true, {}, graph_options.xaxes)];
+
+      var yaxis2 = jQuery.extend(true, {}, graph_options.yaxes);
+      yaxis2.alignTicksWithAxis = 1;
+      yaxis2.position = 'right';
+      yaxis2.tickFormatter = function(val, axis) { return val.toFixed(axis.tickDecimals) + " L/m";}
+
+      graph_options.yaxes = [jQuery.extend(true, {}, graph_options.yaxes),yaxis2];
       break;
 
     case 'door':
@@ -1259,8 +1366,26 @@ function history_graph(name, data, type) {
       break;
   }
 
-  if (graph_data[0].data != undefined && graph_data[0].data.length > 0) {
+  if (graph_data[0].data !== undefined && graph_data[0].data.length > 0) {
     var total_data_duration = (graph_data[0].data[graph_data[0].data.length - 1][0] - graph_data[0].data[0][0]) / 3600000;
+
+    if (graph_data.length > 1 && graph_data[1].data !== undefined && graph_data[1].data.length > 0) {
+      var new_duration = (graph_data[1].data[graph_data[1].data.length - 1][0] - graph_data[1].data[0][0]) / 3600000;
+      total_data_duration = new_duration > total_data_duration ? new_duration : total_data_duration
+    }
+    if (graph_data.length > 2 && graph_data[2].data !== undefined && graph_data[2].data.length > 0) {
+      var new_duration = (graph_data[2].data[graph_data[2].data.length - 1][0] - graph_data[2].data[0][0]) / 3600000;
+      total_data_duration = new_duration > total_data_duration ? new_duration : total_data_duration
+    }
+
+/*
+    if (type == 'switch') {
+      console.log(graph_options.xaxis);
+      graph_options.xaxis[0].tickSize[0] = Math.round(total_data_duration * 2.5);
+    } else {
+      graph_options.xaxis.tickSize[0] = Math.round(total_data_duration * 2.5);
+    }
+*/
     graph_options.xaxis.tickSize[0] = Math.round(total_data_duration * 2.5);
   }
 
@@ -1568,6 +1693,14 @@ function update_dashboard_environment(name, data) {
     case 'ph':
       enabledColor = 'green';
       break;
+    case 'fertility':
+      enabledColor = 'green';
+      indicator = 'µS/cm';
+      break;
+    case 'co2':
+      enabledColor = 'green';
+      indicator = 'ppm';
+      break;
   }
 
   systempart.find('h4').removeClass('orange blue red').addClass(data.enabled ? enabledColor : '');
@@ -1577,11 +1710,21 @@ function update_dashboard_environment(name, data) {
     systempart.find('h4 small span.sensor').show();
   }
 
+  // Hide power state when there are no power switches enabled
+  var power_switches = false;
+  if (data.config.alarm_min !== undefined && data.config.alarm_min.powerswitches !== undefined) {
+    power_switches = power_switches || data.config.alarm_min.powerswitches.length > 0;
+  }
+  if (data.config.alarm_max !== undefined && data.config.alarm_max.powerswitches !== undefined) {
+    power_switches = power_switches || data.config.alarm_max.powerswitches.length > 0;
+  }
+  systempart.find('td.state').parent().toggle(power_switches);
+
   $.each(data, function(key, value) {
     switch (key) {
       case 'state':
         // Find all i elements withing the .state table row. Hide them all, then filter the enabled one and show that. Then go up and show the complete state table row... Nice!
-        systempart.find('.state i').hide().filter('.' + (value ? 'green' : 'red')).show().parent().parent().toggle(true);
+        if (power_switches) systempart.find('.state i').hide().filter('.' + (value ? 'green' : 'red')).show().parent().parent().toggle(true);
         break;
 
       case 'alarm':
@@ -1688,6 +1831,10 @@ function update_sensor(data) {
   content_row.find('h2').hide().filter('.' + data.type).show();
   // Update title
   content_row.find('h2 span.title').text(data.name);
+  if ('miflora' == data.hardwaretype) {
+    content_row.find('h2 span.title').append(' <span class="small">' + data.firmware + ' <i class="fa fa-plug"></i>' + data.battery + '%</span>')
+  }
+
   // Set the values only when empty
   content_row.find('input:not(.knob), select').each(function(counter,item) {
     if (item.name !== undefined && item.name !== '') {
@@ -1707,6 +1854,17 @@ function update_sensor(data) {
       }
     }
   });
+
+  // Open or hide the dimmer values (will not trigger on the select field)
+  if ('chirp' === data.hardwaretype) {
+    content_row.find('.row.chirp_calibration').show();
+  } else {
+    // Remove dimmer row, else form submit is 'stuck' on hidden fields that have invalid patterns... :(
+    content_row.find('.row.chirp_calibration').remove();
+  }
+
+
+
 }
 
 function add_sensor_setting_row(data) {
@@ -1727,8 +1885,17 @@ function add_sensor_setting_row(data) {
     minimumResultsForSearch: Infinity
   }).on('change',function() {
     if (this.name.indexOf('hardwaretype') >= 0) {
+      var chirp_sensor = ('chirp' === this.value);
+      if (chirp_sensor) {
+        $(this).parents('.x_content').find('.row.chirp_calibration input').attr('required','required');
+      } else {
+        $(this).parents('.x_content').find('.row.chirp_calibration input').removeAttr('required');
+      }
+      $(this).parents('.x_content').find('.row.chirp_calibration').toggle(chirp_sensor);
+
       var address_field = $("input[name='" + this.name.replace('hardwaretype','address') + "']");
       address_field.attr("readonly", this.value == 'owfs' || this.value == 'w1').off('change');
+
 /*
       if ('remote' === this.value) {
         address_field.on('change',function(){
@@ -2551,6 +2718,7 @@ function edit_profile() {
   $('form#profile').toggleClass('edit');
   if ($('form#profile').hasClass('edit')) {
     init_wysiwyg();
+
     $('input[name="age"]').daterangepicker({
       singleDatePicker: true,
     });

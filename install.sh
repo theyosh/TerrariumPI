@@ -46,7 +46,7 @@ esac
 # Install required packages to get the terrarium software running
 debconf-apt-progress -- apt-get -y update
 debconf-apt-progress -- apt-get -y full-upgrade
-debconf-apt-progress -- apt-get -y install libftdi1 screen git subversion watchdog build-essential i2c-tools owfs ow-shell sqlite3 vlc-nox libasound2-dev sispmctl lshw python-imaging python-dateutil python-ow python-rpi.gpio python-psutil python-dev python-picamera python-opencv python-pip python-pigpio python-requests python-mediainfodll python-gpiozero python-smbus libffi-dev ntp
+debconf-apt-progress -- apt-get -y install libftdi1 screen git subversion watchdog build-essential i2c-tools owfs ow-shell sqlite3 vlc-nox libasound2-dev sispmctl lshw python-imaging python-dateutil python-ow python-rpi.gpio python-psutil python-dev python-picamera python-opencv python-pip python-pigpio python-requests python-mediainfodll python-gpiozero python-smbus libffi-dev ntp libglib2.0-dev rng-tools
 
 PROGRESS=55
 # Update submodules if downloaded through tar or zip
@@ -81,7 +81,7 @@ git submodule update > /dev/null
 cd "${BASEDIR}/.."
 
 
-PIP_MODULES="gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks]"
+PIP_MODULES="gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_SSD1306 bluepy"
 for PIP_MODULE in ${PIP_MODULES}
 do
   PROGRESS=$((PROGRESS + 2))
@@ -118,7 +118,7 @@ Install required software\n\nUpdating Adafruit DHT python library ...
 XXX
 EOF
 cd Adafruit_Python_DHT
-git pull > /dev/null
+git pull 2>/dev/null
 
 
 PROGRESS=$((PROGRESS + 2))
@@ -212,6 +212,9 @@ fi
 # Make sure pigpiod is started at boot, and that user PI can restart it with sudo command
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/sbin/service pigpiod restart" > /etc/sudoers.d/terrariumpi
 systemctl enable pigpiod
+
+# To run this as non-root run the following, https://github.com/marcelrv/miflora, https://github.com/IanHarvey/bluepy/issues/218
+setcap 'cap_net_raw,cap_net_admin+eip' /usr/local/lib/python2.7/dist-packages/bluepy/bluepy-helper
 
 # Remove unneeded OWS services
 update-rc.d -f owftpd remove

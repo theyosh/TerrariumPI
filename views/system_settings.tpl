@@ -110,11 +110,13 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Always authenticate')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_always_authentication')}}">
-                      <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="always_authenticate" type="radio" value="true">{{_('Yes')}}</label>
-                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="always_authenticate" type="radio" value="false">{{_('No')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="always_authenticate">{{_('Authentication')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_always_authentication')}}">
+                        <select class="form-control" name="always_authenticate" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option value="true">{{_('Full authentication')}}</option>
+                          <option value="false">{{_('Changes only')}}</option>
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -134,11 +136,13 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{_('Horizontal graph legend')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_horizontal_graph_legend')}}">
-                      <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="horizontal_graph_legend" type="radio" value="true">{{_('Yes')}}</label>
-                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"><input name="horizontal_graph_legend" type="radio" value="false">{{_('No')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="horizontal_graph_legend">{{_('Graph legend layout')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_horizontal_graph_legend')}}">
+                        <select class="form-control" name="horizontal_graph_legend" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option value="true">{{_('Horizontal')}}</option>
+                          <option value="false">{{_('Vertical')}}</option>
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -205,19 +209,14 @@
                 minimumResultsForSearch: Infinity
             });
 
-            var temperature_indicator = $("select[name='temperature_indicator']").select2({
-                placeholder: '{{_('Select an option')}}',
-                allowClear: false,
-                minimumResultsForSearch: Infinity
-            });
-
-            var distance_indicator = $("select[name='distance_indicator']").select2({
-                placeholder: '{{_('Select an option')}}',
-                allowClear: false,
-                minimumResultsForSearch: Infinity
-            });
 
             var soundcard_selector = $("select[name='soundcard']").select2({
+                placeholder: '{{_('Select an option')}}',
+                allowClear: false,
+                minimumResultsForSearch: Infinity
+            });
+
+            $("select[name='temperature_indicator'],select[name='distance_indicator'],select[name='always_authenticate'],select[name='horizontal_graph_legend']").select2({
                 placeholder: '{{_('Select an option')}}',
                 allowClear: false,
                 minimumResultsForSearch: Infinity
@@ -242,10 +241,6 @@
                       switch (config_field.prop('type').toLowerCase()) {
                         case 'text':
                           config_field.val(data[value]);
-                          break;
-
-                        case 'radio':
-                          $('input[name="' + value + '"][value="' + data[value] + '"]').attr('checked','checked').parent().addClass('active');
                           break;
 
                         case 'select-one':

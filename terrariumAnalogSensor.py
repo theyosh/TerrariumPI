@@ -2,10 +2,12 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-import time
 from gpiozero import MCP3008
 
 from terrariumUtils import terrariumUtils
+
+from gevent import monkey, sleep
+monkey.patch_all()
 
 class terrariumAnalogSensor(object):
 
@@ -17,7 +19,6 @@ class terrariumAnalogSensor(object):
     self.__value = None
 
     logger.debug('Initializing sensor type \'%s\' with Analog address %s,%s' % (self.__class__.__name__,self.__datapin,self.__device))
-    self.__sensor = MCP3008(channel=int(self.__datapin), device=int(self.__device))
 
   def __enter__(self):
     """used to enable python's with statement support"""
@@ -29,12 +30,15 @@ class terrariumAnalogSensor(object):
 
   def __get_raw_data(self):
     # Read 5 samples of data and get an average of it
+    sensor = MCP3008(channel=int(self.__datapin), device=int(self.__device))
     values = []
     for counter in range(5):
-      value = self.__sensor.value
+      value = sensor.value
       if terrariumUtils.is_float(value):
         values.append(float(value))
-      time.sleep(0.2)
+      sleep(0.2)
+
+    sensor = None
 
     # sort values from low to high
     values.sort()
@@ -46,7 +50,6 @@ class terrariumAnalogSensor(object):
     return None if not terrariumUtils.is_float(self.__value) else float(self.__value)
 
   def close(self):
-    self.__sensor = None
     logger.debug('Closed sensor type \'%s\' with address %s,%s' % (self.__class__.__name__,self.__datapin,self.__device))
 
 class terrariumSKUSEN0161Sensor(terrariumAnalogSensor):

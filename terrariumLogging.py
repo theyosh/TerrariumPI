@@ -75,9 +75,9 @@ class NotificationLogger(logging.StreamHandler):
 
   def emit(self,data):
     if data.name not in ['terrariumTranslations']:
-      #print data.levelname
       self.notification.message('system_' + str(data.levelname).lower() , {'message':data.getMessage()} )
 
-logging.config.fileConfig('logging.cfg')
 if os.path.isfile('logging.custom.cfg'):
   logging.config.fileConfig('logging.custom.cfg')
+else:
+  logging.config.fileConfig('logging.cfg')

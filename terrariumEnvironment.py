@@ -9,6 +9,9 @@ import time
 from threading import Timer
 from terrariumUtils import terrariumUtils
 
+from gevent import monkey, sleep
+monkey.patch_all()
+
 class terrariumEnvironmentPart(object):
 
   env_type = None
@@ -290,10 +293,10 @@ class terrariumEnvironmentPart(object):
     return alarm
 
   def is_time_min(self):
-    return terrariumUtils.is_time(self.timer_min_data['time_table'])
+    return terrariumUtils.is_true(terrariumUtils.is_time(self.timer_min_data['time_table']))
 
   def is_time_max(self):
-    return terrariumUtils.is_time(self.timer_max_data['time_table'])
+    return terrariumUtils.is_true(terrariumUtils.is_time(self.timer_max_data['time_table']))
 
   def get_mode(self):
     return self.config['mode']
@@ -480,6 +483,20 @@ class terrariumEnvironmentDistance(terrariumEnvironmentPart):
   def get_type(self):
     return terrariumEnvironmentDistance.env_type
 
+class terrariumEnvironmentFertility(terrariumEnvironmentPart):
+
+  env_type = 'fertility'
+
+  def get_type(self):
+    return terrariumEnvironmentMoisture.env_type
+
+class terrariumEnvironmentCO2(terrariumEnvironmentPart):
+
+  env_type = 'co2'
+
+  def get_type(self):
+    return terrariumEnvironmentMoisture.env_type
+
 class terrariumEnvironmentWatertank(terrariumEnvironmentDistance):
 
   env_type = 'watertank'
@@ -525,6 +542,9 @@ class terrariumEnvironment(object):
   VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentDistance.env_type)
   VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentWatertank.env_type)
 
+  VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentFertility.env_type)
+  VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentCO2.env_type)
+
   def __init__(self, sensors, powerswitches, weather, door_status, config, notification):
     logger.debug('Init terrariumPI environment')
     self.__environment_parts = {}
@@ -557,7 +577,7 @@ class terrariumEnvironment(object):
       duration = time.time() - starttime
       if duration < terrariumEnvironment.LOOP_TIMEOUT:
         logger.info('Update done in %.5f seconds. Waiting for %.5f seconds for next update' % (duration,terrariumEnvironment.LOOP_TIMEOUT - duration))
-        time.sleep(terrariumEnvironment.LOOP_TIMEOUT - duration) # TODO: Config setting
+        sleep(terrariumEnvironment.LOOP_TIMEOUT - duration) # TODO: Config setting
       else:
         logger.warning('Update took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEnvironment.LOOP_TIMEOUT,terrariumEnvironment.LOOP_TIMEOUT))
 
@@ -631,6 +651,20 @@ class terrariumEnvironment(object):
 
       elif env_part == terrariumEnvironmentConductivity.env_type:
         self.__environment_parts[env_part] = terrariumEnvironmentConductivity(
+                                                'disabled' if 'mode' not in env_conf else env_conf['mode'],
+                                                []         if ('sensors' not in env_conf or env_conf['sensors'] in ['',None]) else env_conf['sensors'],
+                                                0.0        if 'day_night_difference' not in env_conf else env_conf['day_night_difference'],
+                                                'weather'  if 'day_night_source' not in env_conf else env_conf['day_night_source'])
+
+      elif env_part == terrariumEnvironmentFertility.env_type:
+        self.__environment_parts[env_part] = terrariumEnvironmentFertility(
+                                                'disabled' if 'mode' not in env_conf else env_conf['mode'],
+                                                []         if ('sensors' not in env_conf or env_conf['sensors'] in ['',None]) else env_conf['sensors'],
+                                                0.0        if 'day_night_difference' not in env_conf else env_conf['day_night_difference'],
+                                                'weather'  if 'day_night_source' not in env_conf else env_conf['day_night_source'])
+
+      elif env_part == terrariumEnvironmentCO2.env_type:
+        self.__environment_parts[env_part] = terrariumEnvironmentCO2(
                                                 'disabled' if 'mode' not in env_conf else env_conf['mode'],
                                                 []         if ('sensors' not in env_conf or env_conf['sensors'] in ['',None]) else env_conf['sensors'],
                                                 0.0        if 'day_night_difference' not in env_conf else env_conf['day_night_difference'],
@@ -750,7 +784,7 @@ class terrariumEnvironment(object):
                   if not light_check_ok:
                     logger.info('Environment %s has blocked the alarm min powerswitches due to light state %s' % (environment_part.get_type(),environment_part.get_alarm_min_light_state()))
                   if not door_check_ok:
-                    logger.warning('Environment %s ahs blocked the alarm min powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_min_door_state()))
+                    logger.warning('Environment %s has blocked the alarm min powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_min_door_state()))
 
               else:
                 logger.debug('Environment %s alarm low is already at max power.' % environment_part.get_type())
@@ -786,7 +820,7 @@ class terrariumEnvironment(object):
                   if not light_check_ok:
                     logger.info('Environment %s has blocked the alarm max powerswitches due to light state %s' % (environment_part.get_type(),environment_part.get_alarm_max_light_state()))
                   if not door_check_ok:
-                    logger.warning('Environment %s ahs blocked the alarm max powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_max_door_state()))
+                    logger.warning('Environment %s has blocked the alarm max powerswitches due to door state %s' % (environment_part.get_type(),environment_part.get_alarm_max_door_state()))
 
               else:
                 logger.debug('Environment %s alarm high is already at max power.' % environment_part.get_type())

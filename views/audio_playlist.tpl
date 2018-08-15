@@ -152,7 +152,7 @@
               });
 
               $.get($('form').attr('action'),function(json_data){
-                $.each(json_data.playlists, function(index,playlist_data) {
+                $.each(sortByKey(json_data.playlists,'name'), function(index,playlist_data) {
                   add_audio_playlist_setting_row(playlist_data);
                   update_audio_playlist(playlist_data);
                 });

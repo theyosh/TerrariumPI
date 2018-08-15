@@ -5,7 +5,6 @@ logger = terrariumLogging.logging.getLogger(__name__)
 import RPi.GPIO as GPIO
 import pigpio
 import thread
-import time
 import math
 import requests
 import datetime
@@ -22,6 +21,9 @@ from terrariumUtils import terrariumUtils
 # https://github.com/perryflynn/energenie-connect0r
 sys.path.insert(0, './energenie-connect0r')
 import energenieconnector
+
+from gevent import monkey, sleep
+monkey.patch_all()
 
 class terrariumSwitch(object):
   VALID_HARDWARE_TYPES = ['ftdi','gpio','gpio-inverse','pwm-dimmer','remote','remote-dimmer','eg-pm-usb','eg-pm-lan']
@@ -158,7 +160,7 @@ class terrariumSwitch(object):
           dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - from_value) / 100.0)
           logger.debug('Dimmer animation: Step: %s, value %s%%, Dim value: %s, timeout %s',counter+1, from_value, dim_value, duration)
           self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
-          time.sleep(duration)
+          sleep(duration)
 
         # For impatient people... Put the dimmer at the current state value if it has changed during the animation
         dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - self.get_state()) / 100.0)
@@ -172,8 +174,7 @@ class terrariumSwitch(object):
   def __calculate_time_table(self):
     self.__timer_time_table = []
     if self.state is None or \
-       not self.get_timer_enabled() or \
-       (self.get_timer_on_duration() == 0 and self.get_timer_off_duration() == 0):
+       not self.get_timer_enabled():
 
       return False
 
@@ -243,17 +244,20 @@ class terrariumSwitch(object):
 
             logger.debug('Change remote Energenie LAN power switch nr %s to state %s' % (address,state))
 
-            webstatus = self.device.getstatus()
-            if webstatus['login'] == 1:
-              logger.debug('Logged in at remote Energenie LAN power switch  %s' % (self.sensor_address,))
-              if self.device.login():
-                webstatus = self.device.getstatus()
+            try:
+              webstatus = self.device.getstatus()
+              if webstatus['login'] == 1:
+                logger.debug('Logged in at remote Energenie LAN power switch  %s' % (self.sensor_address,))
+                if self.device.login():
+                  webstatus = self.device.getstatus()
 
-            if webstatus['login'] == 0:
-              self.device.changesocket(address, ( 1 if state is terrariumSwitch.ON else 0 ))
-              self.device.logout()
-            else:
-              logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.sensor_address,webstatus['logintxt'],webstatus['login']))
+              if webstatus['login'] == 0:
+                self.device.changesocket(address, ( 1 if state is terrariumSwitch.ON else 0 ))
+                self.device.logout()
+              else:
+                logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.sensor_address,webstatus['logintxt'],webstatus['login']))
+            except Exception, ex:
+              logger.exception('Could not login to the Energenie LAN device %s at location %s. Error status %s' % (self.get_name(),self.sensor_address,ex))
 
       elif self.get_hardware_type() == 'gpio':
         GPIO.output(terrariumUtils.to_BCM_port_number(self.get_address()), ( GPIO.HIGH if state is terrariumSwitch.ON else GPIO.LOW ))
@@ -289,6 +293,7 @@ class terrariumSwitch(object):
   def timer(self):
     if self.get_timer_enabled():
       logger.debug('Checking timer time table for switch %s with %s entries.', self.get_name(),len(self.__timer_time_table))
+
       switch_state = terrariumUtils.is_time(self.__timer_time_table)
 
       logmessage = 'State not changed.'
@@ -400,18 +405,21 @@ class terrariumSwitch(object):
         if 'passwd' not in data:
           data['passwd'] = ''
 
-        # https://github.com/perryflynn/energenie-connect0r
-        self.device = energenieconnector.EnergenieConnector('http://' + data['host'],data['passwd'])
-        status = self.device.getstatus()
+        try:
+          # https://github.com/perryflynn/energenie-connect0r
+          self.device = energenieconnector.EnergenieConnector('http://' + data['host'],data['passwd'])
+          status = self.device.getstatus()
 
-        if status['login'] == 1:
-          if self.device.login():
-            logger.info('Connection to remote Energenie LAN \'%s\' is successfull at location %s' % (self.get_name(), self.sensor_address))
-            status = self.device.getstatus()
+          if status['login'] == 1:
+            if self.device.login():
+              logger.info('Connection to remote Energenie LAN \'%s\' is successfull at location %s' % (self.get_name(), self.sensor_address))
+              status = self.device.getstatus()
 
-        if status['login'] != 0:
-          logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.sensor_address,status['logintxt'],status['login']))
-          self.device = None
+          if status['login'] != 0:
+            logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.sensor_address,status['logintxt'],status['login']))
+            self.device = None
+        except Exception, ex:
+          logger.exception('Could not login to the Energenie LAN device %s at location %s. Error status %s' % (self.get_name(),self.sensor_address,ex))
 
     elif 'gpio' in self.get_hardware_type():
       try:
@@ -507,7 +515,7 @@ class terrariumSwitch(object):
       return self.is_off()
 
   def go_down(self):
-    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] and not self.__dimmer_running:
       new_value = self.get_state() - self.get_dimmer_step()
       if new_value > self.get_dimmer_on_percentage():
         new_value = self.get_dimmer_on_percentage()
@@ -518,7 +526,7 @@ class terrariumSwitch(object):
       self.set_state(new_value)
 
   def go_up(self):
-    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] and not self.__dimmer_running:
       new_value = self.get_state() + self.get_dimmer_step()
       if new_value > self.get_dimmer_on_percentage():
         new_value = self.get_dimmer_on_percentage()

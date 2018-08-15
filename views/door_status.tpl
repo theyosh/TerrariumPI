@@ -67,7 +67,7 @@
 
             $.get('/api/doors',function(json_data) {
               $('div.row.jumbotron').toggle(json_data.doors.length == 0);
-              $.each(json_data.doors,function(index,door_data){
+              $.each(sortByKey(json_data.doors,'name'),function(index,door_data){
                 add_door_status_row(door_data);
                 update_door(door_data);
                 load_history_graph('door_' + door_data.id,'door','/api/history/doors/' + door_data.id);
