@@ -47,7 +47,7 @@
                   </div>
                   <div class="col-md-2 col-sm-3 col-xs-12 form-group">
                     <label for="email_to">{{_('SMTP username')}}</label>
-                    <input class="form-control" name="email_username" placeholder="{{_('SMTP userame')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_email_email_username')}}">
+                    <input class="form-control" name="email_username" placeholder="{{_('SMTP username')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_email_email_username')}}">
                   </div>
                   <div class="col-md-2 col-sm-3 col-xs-12 form-group">
                     <label for="email_to">{{_('SMTP password')}}</label>
@@ -57,11 +57,11 @@
               </div>
             </div>
           </div>
-          <div class="row" id="notifications_lcd">
+          <div class="row" id="notifications_display">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2><i class="fa fa-newspaper-o"></i> {{_('LCD')}} <small class="data_update">{{_('Settings')}}</small></h2>
+                  <h2><i class="fa fa-newspaper-o"></i> {{_('Display')}} <small class="data_update">{{_('Settings')}}</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -71,22 +71,23 @@
                 </div>
                 <div class="x_content">
                   <div class="col-md-3 col-sm-3 col-xs-12 form-group">
-                    <label for="lcd_address">{{_('I2C address')}}</label>
-                    <input class="form-control" name="lcd_address" placeholder="{{_('I2C address')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_lcd_address')}}">
+                    <label for="display_address">{{_('I2C address')}}</label>
+                    <input class="form-control" name="display_address" placeholder="{{_('I2C address')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_display_address')}}">
                   </div>
                   <div class="col-md-3 col-sm-3 col-xs-12 form-group">
-                    <label for="lcd_resolution">{{_('Screen resolution')}}</label>
-                    <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('notification_lcd_resolution')}}">
-                      <select class="form-control" name="lcd_resolution" tabindex="-1" placeholder="{{_('Select an option')}}">
-                        <option value="16x2">{{_('16 Characters, 2 Lines')}}</option>
-                        <option value="20x4">{{_('20 Characters, 4 Lines')}}</option>
+                    <label for="display_resolution">{{_('Screen resolution')}}</label>
+                    <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('notification_display_resolution')}}">
+                      <select class="form-control" name="display_resolution" tabindex="-1" placeholder="{{_('Select an option')}}">
+                        <option value="16x2">{{_('LCD 16 Characters, 2 Lines')}}</option>
+                        <option value="20x4">{{_('LCD 20 Characters, 4 Lines')}}</option>
+                        <option value="128x64">{{_('OLED 128 x 64 pixels')}}</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-md-3 col-sm-3 col-xs-12 form-group">
-                    <label for="lcd_title">{{_('Title')}}</label>
-                    <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('notification_lcd_title')}}">
-                      <select class="form-control" name="lcd_title" tabindex="-1" placeholder="{{_('Select an option')}}">
+                    <label for="display_title">{{_('Title')}}</label>
+                    <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('notification_display_title')}}">
+                      <select class="form-control" name="display_title" tabindex="-1" placeholder="{{_('Select an option')}}">
                         <option value="true">{{_('Enabled')}}</option>
                         <option value="false">{{_('Disabled')}}</option>
                       </select>
@@ -235,6 +236,9 @@
                       <label>
                         <i class="fa fa-send blue disabled" id="{{message['id']}}_services_telegram" title="{{_('Telegram')}}"></i>
                       </label>
+                      <label>
+                        <i class="fa fa-newspaper-o disabled" id="{{message['id']}}_services_display" title="{{_('Display')}}"></i>
+                      </label>
                     </div>
                   </div>
                   % end
@@ -311,7 +315,7 @@
               $.each(data.notifications,function(part,partdata) {
                 switch (part) {
                   case 'email':
-                  case 'lcd':
+                  case 'display':
                   case 'twitter':
                   case 'pushover':
                   case 'telegram':

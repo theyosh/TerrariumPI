@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import terrariumLogging
+logger = terrariumLogging.logging.getLogger(__name__)
+
 import re
 import datetime
 import requests
@@ -130,9 +133,8 @@ class terrariumUtils():
       try:
         value = value.split(':')
         time = "{:0>2}:{:0>2}".format(int(value[0])%24,int(value[1])%60)
-      except Exception, err:
-        print 'Error in terrariumUtils.parse_time'
-        print err
+      except Exception, ex:
+        logger.exception('Error parsing time value %s. Exception %s' % (value, ex))
 
     return time
 
@@ -163,7 +165,7 @@ class terrariumUtils():
         data = None
 
     except Exception, ex:
-      print ex
+      logger.exception('Error parsing remote data at url %s. Exception %s' % (url, ex))
 
     return data
 
@@ -192,7 +194,7 @@ class terrariumUtils():
       starttime += datetime.timedelta(hours=24)
       stoptime += datetime.timedelta(hours=24)
 
-    if on_duration is None and off_duration is None:
+    if (on_duration is None and off_duration is None) or (0 == on_duration and 0 == off_duration):
       # Only start and stop time. No periods
       timer_time_table.append((int(starttime.strftime('%s')),int(stoptime.strftime('%s'))))
     elif on_duration is not None and off_duration is None:
@@ -222,7 +224,7 @@ class terrariumUtils():
         return False
 
     #End of time_table. No data to decide for today
-    return False
+    return None
 
   @staticmethod
   def duration(time_table):

@@ -41,7 +41,7 @@
 
             $.get('/api/webcams',function(json_data) {
               $('div.row.jumbotron').toggle(json_data.webcams.length == 0);
-              $.each(json_data.webcams,function(index,webcam_data){
+              $.each(sortByKey(json_data.webcams,'name'),function(index,webcam_data){
                 initWebcam(webcam_data);
               });
               reload_reload_theme();

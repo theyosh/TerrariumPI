@@ -24,7 +24,7 @@ import twitter
 import pushover
 
 from terrariumUtils import terrariumUtils, terrariumSingleton
-from terrariumLCD import terrariumLCD
+from terrariumDisplay import terrariumDisplay
 
 from gevent import monkey, sleep
 monkey.patch_all()
@@ -62,8 +62,8 @@ class terrariumNotificationMessage(object):
   def is_telegram_enabled(self):
     return self.message != '' and 'telegram' in self.services
 
-  def is_lcd_enabled(self):
-    return self.message != '' and 'lcd' in self.services
+  def is_display_enabled(self):
+    return self.message != '' and 'display' in self.services
 
   def get_data(self):
     return {'id':self.get_id(),
@@ -74,8 +74,6 @@ class terrariumNotificationMessage(object):
             }
 
 class terrariumNotificationTelegramBot(object):
-  __metaclass__ = terrariumSingleton
-
   __POLL_TIMEOUT = 120
 
   def __init__(self,bot_token,valid_users = None, proxy = None):
@@ -153,14 +151,14 @@ class terrariumNotificationTelegramBot(object):
     last_update_id = None
 
     error_counter = 0
-    while self.__running and error_counter < 2:
+    while self.__running and error_counter < 5:
       try:
         updates = self.__get_updates(last_update_id)
+        if error_counter > 0:
+          error_counter -= 1
         if 'result' in updates and len(updates['result']) > 0:
           last_update_id = max([int(update['update_id']) for update in updates['result']]) + 1
           self.__process_messages(updates['result'])
-          if error_counter > 0:
-            error_counter -= 1
 
         elif 'description' in updates:
           error_counter += 1
@@ -177,6 +175,8 @@ class terrariumNotificationTelegramBot(object):
     print '%s - INFO    - terrariumNotificatio - TelegramBot is stopped' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],)
 
 class terrariumNotification(object):
+  __metaclass__ = terrariumSingleton
+
   __MAX_MESSAGES_TOTAL_PER_MINUTE = 5
   __MAX_MESSAGES_PER_MINUTE = 2
 
@@ -245,15 +245,14 @@ class terrariumNotification(object):
     self.twitter = None
     self.pushover = None
     self.telegram = None
-    self.lcd = None
+    self.display = None
 
-    self.__load_config()
-    self.__load_messages()
-
+    self.set_profile_image(profile_image)
     if trafficlights is not None and len(trafficlights) == 3:
       self.set_notification_leds(trafficlights[0],trafficlights[1],trafficlights[2])
 
-    self.set_profile_image(profile_image)
+    self.__load_config()
+    self.__load_messages()
 
   def __current_minute(self):
     # Get timestamp of current minute with 00 seconds.
@@ -303,10 +302,10 @@ class terrariumNotification(object):
                         self.__data.get('telegram','userid'),
                         proxy)
 
-    if self.__data.has_section('lcd'):
-      self.set_lcd(self.__data.get('lcd','address'),
-                   self.__data.get('lcd','resolution'),
-                   self.__data.get('lcd','title'))
+    if self.__data.has_section('display'):
+      self.set_display(self.__data.get('display','address'),
+                       self.__data.get('display','resolution'),
+                       self.__data.get('display','title'))
 
   def __load_messages(self,data = None):
     self.messages = {}
@@ -402,7 +401,7 @@ class terrariumNotification(object):
       if lednr is not None:
         GPIO.setup(lednr, GPIO.OUT)
         GPIO.output(lednr,1)
-        time.sleep(1)
+        sleep(1)
         GPIO.output(lednr,0)
 
   def send_notication_led(self,message_id):
@@ -510,7 +509,10 @@ class terrariumNotification(object):
       except Exception, ex:
         print ex
 
-    mailserver.quit()
+    try:
+      mailserver.quit()
+    except Exception, ex:
+      pass
 
   def set_twitter(self,consumer_key,consumer_secret,access_token,access_token_secret):
     if '' != consumer_key and '' != consumer_secret and '' != access_token and '' != access_token_secret:
@@ -580,18 +582,17 @@ class terrariumNotification(object):
 
     self.telegram.send_message(message)
 
-  def set_lcd(self,address,resolution,title):
+  def set_display(self,address,resolution,title):
+    self.display = None
     if address is not None and '' != address:
-      if self.lcd is None:
-        self.lcd = terrariumLCD(address,resolution,title)
-      else:
-        self.lcd.set_address(address)
-        self.lcd.set_resolution(resolution)
-        self.lcd.set_title(title)
+      self.display = terrariumDisplay(None,address,'notification',resolution,title)
 
-  def send_lcd(self,messages):
-    if self.lcd is not None:
-      self.lcd.message(messages)
+      if self.__profile_image is not None:
+        self.display.write_image(self.__profile_image)
+
+  def send_display(self,messages):
+    if self.display is not None:
+      self.display.message(messages)
 
   def message(self,message_id,data = None):
     self.send_notication_led(message_id)
@@ -633,8 +634,8 @@ class terrariumNotification(object):
     if self.messages[message_id].is_telegram_enabled():
       self.send_telegram(title,message)
 
-    if self.messages[message_id].is_lcd_enabled():
-      self.send_lcd(message)
+    if self.messages[message_id].is_display_enabled():
+      self.send_display(message)
 
   def get_messages(self):
     data = []
@@ -663,9 +664,9 @@ class terrariumNotification(object):
                                        'userid'    : data['telegram_userid'],
                                        'proxy'     : data['telegram_proxy']})
 
-      self.__update_config('lcd',{'address'    : data['lcd_address'],
-                                  'resolution' : data['lcd_resolution'],
-                                  'title'      : data['lcd_title']})
+      self.__update_config('display',{'address'    : data['display_address'],
+                                      'resolution' : data['display_resolution'],
+                                      'title'      : data['display_title']})
 
     except Exception, ex:
       print ex
@@ -694,7 +695,7 @@ class terrariumNotification(object):
   def get_config(self):
     data = {
       'email'    : dict(self.email) if self.email is not None else {},
-      'lcd'      : self.lcd.get_config() if self.lcd is not None else {},
+      'display'  : self.display.get_config() if self.display is not None else {},
       'twitter'  : dict(self.twitter) if self.twitter is not None else {},
       'pushover' : dict(self.pushover) if self.pushover is not None else {},
       'telegram' : self.telegram.get_config() if self.telegram is not None else {},

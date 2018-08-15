@@ -32,6 +32,9 @@ class terrariumTranslations(object):
     self.translations['sensor_field_limit_min'] = _('Holds the sensor lowest value that should be used in the graphs.')
     self.translations['sensor_field_limit_max'] = _('Holds the sensor maximum value that should be used in the graphs.')
     self.translations['sensor_field_current'] = _('Shows the sensor current value in temperature or humidity (read only).')
+    self.translations['sensor_field_min_moist'] = _('Holds the sensor lowest moisture value measured in dry air. %s') % ('<a href="https://github.com/ageir/chirp-rpi#calibration" target="_blank" title="' + _('More calibration information') + '"><i>' + _('More calibration information') + '</i></a>')
+    self.translations['sensor_field_max_moist'] = _('Holds the sensor highest moisture value measured in full water. %s') % ('<a href="https://github.com/ageir/chirp-rpi#calibration" target="_blank" title="' + _('More calibration information') + '"><i>' + _('More calibration information') + '</i></a>')
+    self.translations['sensor_field_temperature_offset'] = _('Holds the temperature offset value.')
     # End sensors
 
     # Switches
@@ -109,9 +112,9 @@ class terrariumTranslations(object):
     self.translations['notification_email_email_username'] = _('Holds the username for authentication with the mailserver if needed.')
     self.translations['notification_email_email_password'] = _('Holds the password for authentication with the mailserver if needed.')
 
-    self.translations['notification_lcd_address'] = _('Holds the I2C address of the LCD screen. Use the value found with i2cdetect. Add ,[NR] to change the I2C bus.')
-    self.translations['notification_lcd_resolution'] = _('Holds the LCD screen resolution.')
-    self.translations['notification_lcd_title'] = _('Reserve first LCD line for static title.')
+    self.translations['notification_display_address'] = _('Holds the I2C address of the LCD screen. Use the value found with i2cdetect. Add ,[NR] to change the I2C bus.')
+    self.translations['notification_display_resolution'] = _('Holds the LCD screen resolution.')
+    self.translations['notification_display_title'] = _('Reserve first LCD line for static title.')
 
     self.translations['notification_twitter_consumer_key'] = _('Holds your Twitter consumer key. More information %shere%s') % ('<a href=\'https://apps.twitter.com/\' target=\'_blank\'>','</a>')
     self.translations['notification_twitter_consumer_secret'] = _('Holds your Twitter consumer secret. More information %shere%s') % ('<a href=\'https://apps.twitter.com/\' target=\'_blank\'>','</a>')

@@ -59,6 +59,12 @@
                       <a href="sensor_light.html">{{_('Light')}}</a>
                     </li>
                     <li>
+                      <a href="sensor_fertility.html">{{_('Fertility')}}</a>
+                    </li>
+                    <li>
+                      <a href="sensor_co2.html">{{_('CO2')}}</a>
+                    </li>
+                    <li>
                       <a href="sensor_settings.html">{{_('Settings')}}</a>
                     </li>
                   </ul>
@@ -119,13 +125,13 @@
                       <a href="system_status.html">{{_('Status')}}</a>
                     </li>
                     <li>
+                      <a href="notifications.html">{{_('Notifications')}}</a>
+                    </li>
+                    <li>
                       <a href="system_environment.html">{{_('Environment')}}</a>
                     </li>
                     <li>
                       <a href="system_settings.html">{{_('Settings')}}</a>
-                    </li>
-                    <li>
-                      <a href="notifications.html">{{_('Notifications')}}</a>
                     </li>
                     <li>
                       <a href="system_log.html">{{_('Log')}}</a>

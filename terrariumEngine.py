@@ -47,7 +47,11 @@ class terrariumEngine(object):
                     'moisture'    : '%',
                     'conductivity': 'mS',
                     'ph'          : 'Ph',
-                    'light'       :  ''}
+                    'light'       : 'lux',
+                    'uva'         : 'uW/cm^2',
+                    'uvb'         : 'uW/cm^2',
+                    'fertility'   : 'uS/cm',
+                    'co2'         : 'ppm'}
 
     # List of queues for websocket communication
     self.subscribed_queues = []
@@ -73,7 +77,8 @@ class terrariumEngine(object):
     logger.info('Done Loading terrariumPI config')
 
     # Notification engine
-    self.notification = terrariumNotification(profile_image = self.get_profile_image())
+    self.notification = terrariumNotification()
+    self.notification.set_profile_image(self.get_profile_image())
 
     logger.info('Setting terrariumPI authentication')
     self.set_authentication(self.config.get_admin(),self.config.get_password())
@@ -176,6 +181,14 @@ class terrariumEngine(object):
       sensor.set_alarm_max(sensordata['alarm_max'])
       sensor.set_limit_min(sensordata['limit_min'])
       sensor.set_limit_max(sensordata['limit_max'])
+
+      if 'chirp' == sensor.get_hardware_type():
+        if 'min_moist' in sensordata and sensordata['min_moist'] is not None:
+          sensor.set_min_moist_calibration(sensordata['min_moist'])
+        if 'max_moist' in sensordata and sensordata['max_moist'] is not None:
+          sensor.set_max_moist_calibration(sensordata['max_moist'])
+        if 'temp_offset' in sensordata and sensordata['temp_offset'] is not None:
+          sensor.set_temperature_offset_calibration(sensordata['temp_offset'])
 
       seen_sensors.append(sensor.get_id())
 
@@ -380,6 +393,7 @@ class terrariumEngine(object):
 
   def __engine_loop(self):
     time_short = 0
+    error_counter = 0
     logger.info('Start terrariumPI engine')
     while self.__running:
       starttime = time.time()
@@ -439,24 +453,33 @@ class terrariumEngine(object):
       except Exception, err:
         print err
 
-      lcd_message = ['%s %s' % (_('Uptime'),terrariumUtils.format_uptime(system_data['uptime']),),
-                     '%s %s %s %s' % (_('Load'),system_data['load']['load1'],system_data['load']['load5'],system_data['load']['load15']),
-                     '%s %.2f%s' % (_('CPU Temp.'),system_data['temperature'],self.get_temperature_indicator())]
+      display_message = ['%s %s' % (_('Uptime'),terrariumUtils.format_uptime(system_data['uptime']),),
+                         '%s %s %s %s' % (_('Load'),system_data['load']['load1'],system_data['load']['load5'],system_data['load']['load15']),
+                         '%s %.2f%s' % (_('CPU Temp.'),system_data['temperature'],self.get_temperature_indicator())]
 
       for env_part in average_data:
         alarm_icon = '!' if average_data[env_part]['alarm'] else ''
-        lcd_message.append('%s%s %.2f%s%s' % (alarm_icon,_(env_part.replace('average_','').title()), average_data[env_part]['current'],average_data[env_part]['indicator'],alarm_icon))
+        display_message.append('%s%s %.2f%s%s' % (alarm_icon,_(env_part.replace('average_','').title()), average_data[env_part]['current'],average_data[env_part]['indicator'],alarm_icon))
 
-      self.notification.send_lcd(lcd_message)
+      self.notification.send_display(display_message)
 
       duration = (time.time() - starttime) + time_short
       if duration < terrariumEngine.LOOP_TIMEOUT:
+        if error_counter > 0:
+          error_counter -= 1
         logger.info('Update done in %.5f seconds. Waiting for %.5f seconds for next update' % (duration,terrariumEngine.LOOP_TIMEOUT - duration))
         time_short = 0
         sleep(terrariumEngine.LOOP_TIMEOUT - duration) # TODO: Config setting
       else:
+        error_counter += 1
+        if error_counter > 9:
+          logger.error('Updating is having problems keeping up. Could not update in 30 seconds for %s times!' % error_counter)
+
         logger.warning('Updating took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEngine.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
         time_short = duration - terrariumEngine.LOOP_TIMEOUT
+        if time_short > 12:
+          # More then 12 seconds to late.... probably never fast enough...
+          time_short = 0
 
   def __send_message(self,message):
     clients = self.subscribed_queues
@@ -532,7 +555,8 @@ class terrariumEngine(object):
     else:
       for sensorid in self.sensors:
         # Filter based on sensor type
-        if filtertype is None or filtertype == 'average' or filtertype == self.sensors[sensorid].get_type():
+        # Exclude Chirp light sensors for average calculation in favour of Lux measurements
+        if filtertype is None or (filtertype == 'average' and not (self.sensors[sensorid].get_type() == 'light' and self.sensors[sensorid].get_hardware_type() == 'chirp')) or filtertype == self.sensors[sensorid].get_type():
           data.append(self.sensors[sensorid].get_data())
 
     if 'average' == filtertype or len(parameters) == 2 and parameters[1] == 'average':
@@ -1058,7 +1082,15 @@ class terrariumEngine(object):
     if len(parameters) == 0:
       data = {'history' : 'ERROR, select a history type'}
     else:
-      data = self.collector.get_history(parameters)
+      exclude_ids = None
+      # We exclude Chirp light sensors for average calculations as they are less reliable
+      if 'sensors' in parameters and 'average' in parameters and 'light' in parameters:
+        exclude_ids = []
+        for sensorid in self.sensors:
+          if 'chirp' == self.sensors[sensorid].get_hardware_type() and 'light' == self.sensors[sensorid].get_type():
+            exclude_ids.append(self.sensors[sensorid].get_id())
+
+      data = self.collector.get_history(parameters=parameters,exclude_ids=exclude_ids)
 
     if socket:
       self.__send_message({'type':'history_graph','data': data})

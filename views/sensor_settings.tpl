@@ -77,7 +77,9 @@
                         <h2 class="conductivity" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Conductivity sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <h2 class="distance" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-signal"></span> {{_('Distance sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <h2 class="ph" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-scale"></span> {{_('pH sensor')}} <span class="title">{{_('new')}}</span></h2>
-                        <h2 class="light" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-adjust"></span> {{_('Light sensor')}} <span class="title">{{_('new')}}</span></h2>
+                        <h2 class="light uva uvb" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-adjust"></span> {{_('Light sensor')}} <span class="title">{{_('new')}}</span></h2>
+                        <h2 class="fertility" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-grain"></span> {{_('Fertility sensor')}} <span class="title">{{_('new')}}</span></h2>
+                        <h2 class="co2" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-tree-conifer"></span> {{_('CO2 sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <ul class="nav navbar-right panel_toolbox">
                           <li>
                             <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -89,71 +91,93 @@
                         <div class="clearfix"></div>
                       </div>
                       <div class="x_content">
-                        <div class="col-md-1 col-sm-1 col-xs-12 form-group">
-                          <label for="sensor_[nr]_hardwaretype">{{_('Hardware')}}</label>
-                          <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{!translations.get_translation('sensor_field_hardware')}}">
-                            <select class="form-control" name="sensor_[nr]_hardwaretype" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
-                              <option value="">{{_('Select an option')}}</option>
-                              <option value="owfs">{{_('OWFS')}}</option>
-                              <option value="dht11">{{_('DHT11')}}</option>
-                              <option value="dht22">{{_('DHT22')}}</option>
-                              <option value="am2302">{{_('AM2302')}}</option>
-                              <option value="sht2x">{{_('SHT2X')}}</option>
-                              <option value="htu21d">{{_('HTU21D')}}</option>
-                              <option value="si7021">{{_('SI7021')}}</option>
-                              <option value="bme280">{{_('BME280 / BMP280')}}</option>
-                              <option value="chirp">{{_('Chirp')}}</option>
-                              <option value="w1">{{_('1Wire')}}</option>
-                              <option value="ytxx-digital">{{_('YTXX-digital')}}</option>
-                              <option value="remote">{{_('Remote')}}</option>
-                              <option value="hc-sr04">{{_('HC-SR04')}}</option>
-                              <option value="sku-sen0161">{{_('pH SKU-SEN0161')}}</option>
-                            </select>
+                        <div class="row">
+                          <div class="col-md-1 col-sm-1 col-xs-12 form-group">
+                            <label for="sensor_[nr]_hardwaretype">{{_('Hardware')}}</label>
+                            <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{!translations.get_translation('sensor_field_hardware')}}">
+                              <select class="form-control" name="sensor_[nr]_hardwaretype" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
+                                <option value="">{{_('Select an option')}}</option>
+                                <option value="owfs">{{_('OWFS')}}</option>
+                                <option value="dht11">{{_('DHT11')}}</option>
+                                <option value="dht22">{{_('DHT22')}}</option>
+                                <option value="am2302">{{_('AM2302')}}</option>
+                                <option value="sht2x">{{_('SHT2X')}}</option>
+                                <option value="htu21d">{{_('HTU21D')}}</option>
+                                <option value="si7021">{{_('SI7021')}}</option>
+                                <option value="bme280">{{_('BME280 / BMP280')}}</option>
+                                <option value="chirp">{{_('Chirp')}}</option>
+                                <option value="w1">{{_('1Wire')}}</option>
+                                <option value="ytxx-digital">{{_('YTXX-digital')}}</option>
+                                <option value="remote">{{_('Remote')}}</option>
+                                <option value="hc-sr04">{{_('HC-SR04')}}</option>
+                                <option value="sku-sen0161">{{_('pH SKU-SEN0161')}}</option>
+                                <option value="veml6075">{{_('VEML6075')}}</option>
+                                <option value="miflora">{{_('MiFlora')}}</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-2 col-sm-2 col-xs-12 form-group">
+                            <label for="sensor_[nr]_address">{{_('Address')}}</label>
+                            <input class="form-control" name="sensor_[nr]_address" placeholder="{{_('Address')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_address')}}">
+                            <input class="form-control" name="sensor_[nr]_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
+                          </div>
+                          <div class="col-md-2 col-sm-2 col-xs-12 form-group">
+                            <label for="sensor_[nr]_type">{{_('Type')}}</label>
+                            <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{!translations.get_translation('sensor_field_type')}}">
+                              <select class="form-control" name="sensor_[nr]_type" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
+                                <option value="">{{_('Select an option')}}</option>
+                                <option value="temperature">{{_('Temperature')}}</option>
+                                <option value="humidity">{{_('Humidity')}}</option>
+                                <option value="moisture">{{_('Moisture')}}</option>
+                                <option value="conductivity">{{_('Conductivity')}}</option>
+                                <option value="distance">{{_('Distance')}}</option>
+                                <option value="ph">{{_('pH')}}</option>
+                                <option value="light">{{_('Light')}}</option>
+                                <option value="uva">{{_('UVA')}}</option>
+                                <option value="uvb">{{_('UVB')}}</option>
+                                <option value="fertility">{{_('Fertility')}}</option>
+                                <option value="co2">{{_('CO2')}}</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-2 col-sm-2 col-xs-12 form-group">
+                            <label for="sensor_[nr]_name">{{_('Name')}}</label>
+                            <input class="form-control" name="sensor_[nr]_name" placeholder="{{_('Name')}}" type="text" required="required" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{!translations.get_translation('sensor_field_name')}}">
+                          </div>
+                          <div class="col-md-1 col-sm-1 col-xs-12 form-group">
+                            <label for="sensor_[nr]_alarm_min">{{_('Alarm min')}}</label>
+                            <input class="form-control" name="sensor_[nr]_alarm_min" placeholder="{{_('Alarm min')}}" type="text" required="required" pattern="[0-9\.-]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_alarm_min')}}">
+                          </div>
+                          <div class="col-md-1 col-sm-1 col-xs-12 form-group">
+                            <label for="sensor_[nr]_alarm_max">{{_('Alarm max')}}</label>
+                            <input class="form-control" name="sensor_[nr]_alarm_max" placeholder="{{_('Alarm max')}}" type="text" required="required" pattern="[0-9\.-]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_alarm_max')}}">
+                          </div>
+                          <div class="col-md-1 col-sm-1 col-xs-12 form-group">
+                            <label for="sensor_[nr]_min">{{_('Limit min')}}</label>
+                            <input class="form-control" name="sensor_[nr]_limit_min" placeholder="{{_('Limit min')}}" type="text" required="required" pattern="[0-9\.-]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_limit_min')}}">
+                          </div>
+                          <div class="col-md-1 col-sm-1 col-xs-12 form-group">
+                            <label for="sensor_[nr]_max">{{_('Limit max')}}</label>
+                            <input class="form-control" name="sensor_[nr]_limit_max" placeholder="{{_('Limit max')}}" type="text" required="required" pattern="[0-9\.-]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_limit_max')}}">
+                          </div>
+                          <div class="col-md-1 col-sm-1 col-xs-12 form-group">
+                            <label for="sensor_[nr]_current">{{_('Current')}}</label>
+                            <input class="form-control" name="sensor_[nr]_current" placeholder="{{_('Current')}}" readonly="readonly" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_current')}}">
                           </div>
                         </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12 form-group">
-                          <label for="sensor_[nr]_address">{{_('Address')}}</label>
-                          <input class="form-control" name="sensor_[nr]_address" placeholder="{{_('Address')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_address')}}">
-                          <input class="form-control" name="sensor_[nr]_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12 form-group">
-                          <label for="sensor_[nr]_type">{{_('Type')}}</label>
-                          <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{!translations.get_translation('sensor_field_type')}}">
-                            <select class="form-control" name="sensor_[nr]_type" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
-                              <option value="">{{_('Select an option')}}</option>
-                              <option value="temperature">{{_('Temperature')}}</option>
-                              <option value="humidity">{{_('Humidity')}}</option>
-                              <option value="moisture">{{_('Moisture')}}</option>
-                              <option value="conductivity">{{_('Conductivity')}}</option>
-                              <option value="distance">{{_('Distance')}}</option>
-                              <option value="ph">{{_('pH')}}</option>
-                              <option value="light">{{_('Light')}}</option>
-                            </select>
+                        <div class="row chirp_calibration" style="display:none;">
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                            <label for="sensor_[nr]_min_moist">{{_('Min moist value')}}</label>
+                            <input class="form-control" name="sensor_[nr]_min_moist" placeholder="{{_('Min moist value')}}" required="required" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_min_moist')}}">
                           </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12 form-group">
-                          <label for="sensor_[nr]_name">{{_('Name')}}</label>
-                          <input class="form-control" name="sensor_[nr]_name" placeholder="{{_('Name')}}" type="text" required="required" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{!translations.get_translation('sensor_field_name')}}">
-                        </div>
-                        <div class="col-md-1 col-sm-1 col-xs-12 form-group">
-                          <label for="sensor_[nr]_alarm_min">{{_('Alarm min')}}</label>
-                          <input class="form-control" name="sensor_[nr]_alarm_min" placeholder="{{_('Alarm min')}}" type="text" required="required" pattern="[0-9\.-]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_alarm_min')}}">
-                        </div>
-                        <div class="col-md-1 col-sm-1 col-xs-12 form-group">
-                          <label for="sensor_[nr]_alarm_max">{{_('Alarm max')}}</label>
-                          <input class="form-control" name="sensor_[nr]_alarm_max" placeholder="{{_('Alarm max')}}" type="text" required="required" pattern="[0-9\.-]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_alarm_max')}}">
-                        </div>
-                        <div class="col-md-1 col-sm-1 col-xs-12 form-group">
-                          <label for="sensor_[nr]_min">{{_('Limit min')}}</label>
-                          <input class="form-control" name="sensor_[nr]_limit_min" placeholder="{{_('Limit min')}}" type="text" required="required" pattern="[0-9\.-]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_limit_min')}}">
-                        </div>
-                        <div class="col-md-1 col-sm-1 col-xs-12 form-group">
-                          <label for="sensor_[nr]_max">{{_('Limit max')}}</label>
-                          <input class="form-control" name="sensor_[nr]_limit_max" placeholder="{{_('Limit max')}}" type="text" required="required" pattern="[0-9\.-]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_limit_max')}}">
-                        </div>
-                        <div class="col-md-1 col-sm-1 col-xs-12 form-group">
-                          <label for="sensor_[nr]_current">{{_('Current')}}</label>
-                          <input class="form-control" name="sensor_[nr]_current" placeholder="{{_('Current')}}" readonly="readonly" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_current')}}">
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                            <label for="sensor_[nr]_max_moist">{{_('Max moist value')}}</label>
+                            <input class="form-control" name="sensor_[nr]_max_moist" placeholder="{{_('Max moist value')}}" required="required" type="text" pattern="[0-9\.-]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_max_moist')}}">
+                          </div>
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                            <label for="sensor_[nr]_temperature_offset">{{_('Temperature offset')}}</label>
+                            <input class="form-control" name="sensor_[nr]_temp_offset" placeholder="{{_('Temperature offset')}}" required="required" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_temperature_offset')}}">
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -178,6 +202,14 @@
               minimumResultsForSearch: Infinity
             }).on('change',function() {
               if (this.name.indexOf('hardwaretype') >= 0) {
+                var chirp_sensor = ('chirp' === this.value);
+                if (chirp_sensor) {
+                  $(this).parents('.x_content').find('.row.chirp_calibration input').attr('required','required');
+                } else {
+                  $(this).parents('.x_content').find('.row.chirp_calibration input').removeAttr('required');
+                }
+                $(this).parents('.x_content').find('.row.chirp_calibration').toggle(chirp_sensor);
+
                 var address_field = $("input[name='" + this.name.replace('hardwaretype','address') + "']");
                 address_field.attr("readonly", this.value == 'owfs' || this.value == 'w1').off('change');
 
@@ -193,7 +225,7 @@
 
             // Load existing switches
             $.get($('form').attr('action'),function(json_data){
-              $.each(json_data.sensors, function(index,sensor_data) {
+              $.each(sortByKey(json_data.sensors,'name'), function(index,sensor_data) {
                 add_sensor_setting_row(sensor_data);
                 update_sensor(sensor_data);
               });

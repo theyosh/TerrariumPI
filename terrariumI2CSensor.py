@@ -4,14 +4,18 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 import smbus
-import time
 import sys
+import time
+
 from terrariumUtils import terrariumUtils
 
 # Dirty hack to include someone his code... to lazy to make it myself :)
 # https://github.com/ageir/chirp-rpi
 sys.path.insert(0, './chirp-rpi')
 import chirp
+
+from gevent import monkey, sleep
+monkey.patch_all()
 
 class terrariumI2CSensor(object):
   # control constants
@@ -38,15 +42,14 @@ class terrariumI2CSensor(object):
     self.__humidity_timeout = humidity_timeout
 
     logger.debug('Initializing sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
-    self.__bus = smbus.SMBus(self.__device_number)
-
-    #Datasheet recommend do Soft Reset before measurment:
-    logger.debug('Send soft reset command %s with a timeout of %s seconds' % (self.__SOFTRESET,self.__softreset_timeout * 2.0))
-    self.__bus.write_byte(self.__address, self.__SOFTRESET)
-    time.sleep(self.__softreset_timeout * 2.0)
 
   def __enter__(self):
     """used to enable python's with statement support"""
+    logger.debug('Send soft reset command %s with a timeout of %s seconds' % (self.__SOFTRESET,self.__softreset_timeout * 2.0))
+    #Datasheet recommend do Soft Reset before measurment:
+    self.__bus = smbus.SMBus(self.__device_number)
+    self.__bus.write_byte(self.__address, self.__SOFTRESET)
+    sleep(self.__softreset_timeout * 2.0)
     return self
 
   def __exit__(self, type, value, traceback):
@@ -55,7 +58,7 @@ class terrariumI2CSensor(object):
 
   def __get_raw_data(self,trigger,timeout):
     self.__bus.write_byte(self.__address, trigger)
-    time.sleep(timeout * 2.0)
+    sleep(timeout * 2.0)
     data1 = self.__bus.read_byte(self.__address)
     try:
       data2 = self.__bus.read_byte(self.__address)
@@ -74,7 +77,7 @@ class terrariumI2CSensor(object):
     #From datasheet convert this in human view. Temp C = ((Temp_Code*175.72)/65536)-46.85 / T = -46.82 + (172.72 * (ST/2^16))
     #For convert 2 byte in number need MSB*256+LSB.
     logger.debug('Read temperature value from sensor type \'%s\' at device %s with address %s with command %s and timeout %s' % (self.__class__.__name__,self.__device_number,self.__address,self.__TRIGGER_TEMPERATURE_NO_HOLD,self.__temperature_timeout))
-    bytedata = self.__get_raw_data(self.__TRIGGER_TEMPERATURE_NO_HOLD,self.__temperature_timeout * 2.0)
+    bytedata = self.__get_raw_data(self.__TRIGGER_TEMPERATURE_NO_HOLD,self.__temperature_timeout)
     temperature = ((bytedata[0]*256.0+bytedata[1])*175.72/65536.0)-46.85
     logger.debug('Got data from temperature sensor type \'%s\' at device %s with address %s: byte data: %s, temperature: %s' % (self.__class__.__name__,self.__device_number,self.__address,bytedata,temperature))
     return None if not terrariumUtils.is_float(temperature) else float(temperature)
@@ -83,7 +86,7 @@ class terrariumI2CSensor(object):
     #From datasheet convert this in human view. RH% = ((RH*125)/65536)-6 / RH = -6 + (125 * (SRH / 2 ^16))
     #For convert 2 byte in number need MSB*256+LSB.
     logger.debug('Read humidity value from sensor type \'%s\' at device %s with address %s with command %s and timeout %s' % (self.__class__.__name__,self.__device_number,self.__address,self.__TRIGGER_HUMIDITY_NO_HOLD,self.__humidity_timeout))
-    bytedata = self.__get_raw_data(self.__TRIGGER_HUMIDITY_NO_HOLD,self.__humidity_timeout * 2.0)
+    bytedata = self.__get_raw_data(self.__TRIGGER_HUMIDITY_NO_HOLD,self.__humidity_timeout)
     humidity = ((bytedata[0]*256.0+bytedata[1])*125.0/65536.0)-6.0
     logger.debug('Got data from humidity sensor type \'%s\' at device %s with address %s: byte data: %s, humidity: %s' % (self.__class__.__name__,self.__device_number,self.__address,bytedata,humidity))
     return None if not terrariumUtils.is_float(humidity) else float(humidity)
@@ -139,6 +142,8 @@ class terrariumBME280Sensor(object):
   # Datasheet: https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME280_DS001-12.pdf
 
   __SOFTRESET = 0xFE
+  __TEMPERATURE_WAIT_TIME = 0.5
+  __SOFTRESET_TIMEOUT = 0.002  # (datasheet: typ=??, max=2 in ms)
 
   def __init__(self, address = 40, device_number = 1):
     self.__address = int('0x' + str(address),16)
@@ -147,8 +152,8 @@ class terrariumBME280Sensor(object):
     # BMP280 does not have humidity sensor
     self.__has_humidity = None
 
-    self.__softreset_timeout = 0.002 # (datasheet: typ=??, max=2 in ms)
-    self.__temperature_timeout = 0.5
+    self.__softreset_timeout = __SOFTRESET_TIMEOUT
+    self.__temperature_timeout = __TEMPERATURE_WAIT_TIME
     self.__humidity_timeout = self.__temperature_timeout
 
     self.__current_temperature = None
@@ -157,15 +162,15 @@ class terrariumBME280Sensor(object):
     self.__current_altitude = None
 
     logger.debug('Initializing sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
+
+  def __enter__(self):
+    """used to enable python's with statement support"""
     self.__bus = smbus.SMBus(self.__device_number)
 
     #Datasheet recommend do Soft Reset before measurment:
     logger.debug('Send soft reset command %s with a timeout of %s seconds' % (self.__SOFTRESET,self.__softreset_timeout * 2.0))
     self.__bus.write_byte(self.__address, self.__SOFTRESET)
-    time.sleep(self.__softreset_timeout * 2.0)
-
-  def __enter__(self):
-    """used to enable python's with statement support"""
+    sleep(self.__softreset_timeout * 2.0)
     return self
 
   def __exit__(self, type, value, traceback):
@@ -263,7 +268,7 @@ class terrariumBME280Sensor(object):
     #Stand_by time = 1000 ms -> 101(datasheet) -> in HEX =A0
     self.__bus.write_byte_data(self.__address, 0xF5, 0xA0)
 
-    time.sleep(self.__temperature_timeout * 2.0)
+    sleep(self.__temperature_timeout * 2.0)
 
     # Read data back from 0xF7(247), 8 bytes
     # Pressure MSB, LSB, xLSB, Temperature MSB, LSB, xLSB, Humidity MSB, LSB
@@ -337,13 +342,205 @@ class terrariumBME280Sensor(object):
     self.__get_raw_data()
     return None if not terrariumUtils.is_float(self.__current_altitude) else float(self.__current_altitude)
 
+class terrariumVEML6075Sensor(object):
+  __CACHE_TIMEOUT = 29
+
+  # Rewritten based on https://github.com/alexhla/uva-uvb-sensor-veml6075-driver/
+  hardwaretype = 'veml6075'
+
+  # Register Addresses
+  __REGISTER_CONF = 0x00
+  __REGISTER_UVA = 0x07
+  __REGISTER_UVB = 0x09
+  __REGISTER_VISIBLE_NOISE = 0x0A
+  __REGISTER_IR_NOISE = 0x0B
+
+  # Config Register Bit Masks
+  __POWER_ON = 0x00
+  __POWER_OFF = 0x01
+  __SENSITIVITY_NORMAL_DYNAMIC = 0x00
+  __SENSITIVITY_HIGH_DYNAMIC = 0x08
+  __SENSITIVITY_INTEGRATION_800 = 0x40
+  __SENSITIVITY_INTEGRATION_400 = 0x30
+  __SENSITIVITY_INTEGRATION_200 = 0x20
+  __SENSITIVITY_INTEGRATION_100 = 0x10
+  __SENSITIVITY_INTEGRATION_50 = 0x00
+
+  # UV Coefficents, Responsivity
+  __UV_COEFFICENT_UVA_VISIBLE = 2.22
+  __UV_COEFFICENT_UVA_IR = 1.33
+  __UV_COEFFICENT_UVB_VISIBLE = 2.95
+  __UV_COEFFICENT_UVB_IR = 1.74
+
+  # Conversion Factors (VEML6075 Datasheet Rev. 1.2, 23-Nov-16)
+  __UVA_COUNTS_PER_UWCM = 0.93
+  __UVB_COUNTS_PER_UWCM = 2.10
+
+  __SENSITIVITY_MODE = 0
+
+  def __init__(self, address = 10, device_number = 1):
+    self.__cached_data = {'uva'         : None,
+                          'uvb'         : None,
+                          'last_update' : 0}
+
+    self.__address = int('0x' + str(address),16)
+    self.__device_number = 1 if device_number is None else int(device_number)
+
+    self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_800
+    self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_NORMAL_DYNAMIC
+    self.__wait_time = 1.920
+    self.__divisor = 16.0
+
+  def __enter__(self):
+    """used to enable python's with statement support"""
+
+    return self
+
+  def __exit__(self, type, value, traceback):
+    """with support"""
+    self.close()
+
+  def close(self):
+    """Closes the i2c connection"""
+    logger.debug('Close sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
+
+
+  def __set_sensitivity(self):
+    if terrariumVEML6075Sensor.__SENSITIVITY_MODE == 0:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_800  # Most Sensitive
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_NORMAL_DYNAMIC
+      self.__wait_time = 1.920
+      self.__divisor = 16.0
+    elif terrariumVEML6075Sensor.__SENSITIVITY_MODE == 1:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_400
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_NORMAL_DYNAMIC
+      self.__wait_time = 0.960
+      self.__divisor = 8.0
+    elif terrariumVEML6075Sensor.__SENSITIVITY_MODE == 2:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_200
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_NORMAL_DYNAMIC
+      self.__wait_time = 0.480
+      self.__divisor = 4.0
+    elif terrariumVEML6075Sensor.__SENSITIVITY_MODE == 3:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_100
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_NORMAL_DYNAMIC
+      self.__wait_time = 0.240
+      self.__divisor = 2.0
+    elif terrariumVEML6075Sensor.__SENSITIVITY_MODE == 4:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_50
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_NORMAL_DYNAMIC
+      self.__wait_time = 0.120
+      self.__divisor = 1.0
+    elif terrariumVEML6075Sensor.__SENSITIVITY_MODE == 5:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_800
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_HIGH_DYNAMIC
+      self.__wait_time = 1.920
+      self.__divisor = 16.0
+    elif terrariumVEML6075Sensor.__SENSITIVITY_MODE == 6:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_400
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_HIGH_DYNAMIC
+      self.__wait_time = 0.960
+      self.__divisor = 8.0
+    elif terrariumVEML6075Sensor.__SENSITIVITY_MODE == 7:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_200
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_HIGH_DYNAMIC
+      self.__wait_time = 0.480
+      self.__divisor = 4.0
+    elif terrariumVEML6075Sensor.__SENSITIVITY_MODE == 8:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_100
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_HIGH_DYNAMIC
+      self.__wait_time = 0.240
+      self.__divisor = 2.0
+    elif terrariumVEML6075Sensor.__SENSITIVITY_MODE == 9:
+      self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_50  # Least Sensitive
+      self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_HIGH_DYNAMIC
+      self.__wait_time = 0.120
+      self.__divisor = 1.0
+
+  def __get_raw_data(self,force_update = False):
+    if self.__address is None:
+      return
+
+    starttime = int(time.time())
+    if force_update or starttime - self.__cached_data['last_update'] > terrariumVEML6075Sensor.__CACHE_TIMEOUT:
+      self.__set_sensitivity()
+      try:
+        self.__bus = smbus.SMBus(self.__device_number)
+
+        # Write Dynamic and Integration Time Settings to Sensor
+        self.__bus.write_byte_data(self.__address, terrariumVEML6075Sensor.__REGISTER_CONF, self.__integTimeSelect|self.__dynamicSelect|terrariumVEML6075Sensor.__POWER_ON)
+        # Wait for ADC to finish first and second conversions, discarding the first
+        sleep(self.__wait_time)
+        # Power OFF
+        self.__bus.write_byte_data(self.__address, terrariumVEML6075Sensor.__REGISTER_CONF, terrariumVEML6075Sensor.__POWER_OFF)
+
+        value_uva = float(self.__bus.read_word_data(self.__address,terrariumVEML6075Sensor.__REGISTER_UVA))
+        value_uvb = float(self.__bus.read_word_data(self.__address,terrariumVEML6075Sensor.__REGISTER_UVB))
+
+        compensate_visible_light = float(self.__bus.read_word_data(self.__address,terrariumVEML6075Sensor.__REGISTER_VISIBLE_NOISE))  # visible noise
+        compensate_ir_light = float(self.__bus.read_word_data(self.__address,terrariumVEML6075Sensor.__REGISTER_IR_NOISE))  # infrared noise
+
+        self.__bus.close()
+
+        # Scale down
+        value_uva /= self.__divisor
+        value_uvb /= self.__divisor
+        compensate_visible_light /= self.__divisor
+        compensate_ir_light /= self.__divisor
+
+        # Compensate
+        value_uva = value_uva - (terrariumVEML6075Sensor.__UV_COEFFICENT_UVA_VISIBLE * compensate_visible_light) - (terrariumVEML6075Sensor.__UV_COEFFICENT_UVA_IR * compensate_ir_light)
+        value_uvb = value_uvb - (terrariumVEML6075Sensor.__UV_COEFFICENT_UVB_VISIBLE * compensate_visible_light) - (terrariumVEML6075Sensor.__UV_COEFFICENT_UVB_IR * compensate_ir_light)
+
+        # Convert to  uW/cm^2
+        value_uva /= terrariumVEML6075Sensor.__UVA_COUNTS_PER_UWCM
+        value_uvb /= terrariumVEML6075Sensor.__UVB_COUNTS_PER_UWCM
+
+        self.__cached_data['uva'] = value_uva if value_uva > 0.0 else 0.0
+        self.__cached_data['uvb'] = value_uvb if value_uvb > 0.0 else 0.0
+        self.__cached_data['last_update'] = starttime
+
+      except Exception, ex:
+        print ex
+
+  def get_uva(self):
+    value = None
+    logger.debug('Read UVA value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
+    self.__get_raw_data()
+    if terrariumUtils.is_float(self.__cached_data['uva']):
+      value = float(self.__cached_data['uva'])
+
+    logger.debug('Got data from UVA sensor type \'%s\' with address %s: UVA: %s' % (self.__class__.__name__,self.__address,value))
+    return value
+
+  def get_uvb(self):
+    value = None
+    logger.debug('Read UVB value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
+    self.__get_raw_data()
+    if terrariumUtils.is_float(self.__cached_data['uvb']):
+      value = float(self.__cached_data['uvb'])
+
+    logger.debug('Got data from UVA sensor type \'%s\' with address %s: UVB: %s' % (self.__class__.__name__,self.__address,value))
+    return value
+
 class terrariumChirpSensor(object):
+  __CACHE_TIMEOUT = 29
+
   hardwaretype = 'chirp'
   # Datasheet: https://wemakethings.net/chirp/
 
-  def __init__(self, address = 20, device_number = 1):
+  def __init__(self, address = 20, device_number = 1, min_moist = 160, max_moist = 720, temp_offset = 2):
+    self.__cached_data = {'temperature' : None,
+                          'light'       : None,
+                          'moisture'    : None,
+                          'last_update' : 0}
+
     self.__address = int('0x' + str(address),16)
     self.__device_number = 1 if device_number is None else int(device_number)
+
+    self.__min_moist = min_moist
+    self.__max_moist = max_moist
+    self.__temp_offset = temp_offset
 
     logger.debug('Initializing sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
 
@@ -361,51 +558,62 @@ class terrariumChirpSensor(object):
     logger.debug('Close sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
     #self.__bus.close()
 
-  def __get_raw_data(self,part):
-    # min_moist and max_moist are 'best guess' for now
-    sensor = chirp.Chirp(bus=self.__device_number,
-                  address=self.__address,
-                  read_moist=False,
-                  read_temp=False,
-                  read_light=False,
-                  min_moist=200,
-                  max_moist=770,
-                  temp_scale='celsius',
-                  temp_offset=0)
-    value = None
+  def __get_raw_data(self,force_update = False):
+    if self.__address is None:
+      return
 
-    sensor.read_temp  = 'temperature' == part
-    sensor.read_moist = 'moisture' == part
-    sensor.read_light = 'light' == part
+    starttime = int(time.time())
+    if force_update or starttime - self.__cached_data['last_update'] > terrariumChirpSensor.__CACHE_TIMEOUT:
 
-#    sensor.reset()
-    sensor.trigger()
+      # min_moist and max_moist are 'best guess' for now
+      sensor = chirp.Chirp(bus=self.__device_number,
+                    address=self.__address,
+                    read_moist=False,
+                    read_temp=False,
+                    read_light=False,
+                    min_moist=self.__min_moist,
+                    max_moist=self.__max_moist,
+                    temp_scale='celsius',
+                    temp_offset=self.__temp_offset)
 
-    if 'temperature' == part:
-      value = float(sensor.temp)
-    if 'moisture' == part:
-      value = float(sensor.moist_percent)
-    if 'light' == part:
-      value = float(sensor.light)
+      sensor.read_temp  = True
+      sensor.read_moist = True
+      sensor.read_light = True
 
-    return value
+  #    sensor.reset()
+      sensor.trigger()
+
+      self.__cached_data['temperature'] = float(sensor.temp)
+      self.__cached_data['moisture'] = float(sensor.moist_percent)
+      self.__cached_data['light'] = 100.0 - ((float(sensor.light) / 65536.0) * 100.0)
+      self.__cached_data['last_update'] = starttime
 
   def get_temperature(self):
-    logger.debug('Read temperature value from sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
-    temperature = self.__get_raw_data('temperature')
-    logger.debug('Got data from temperature sensor type \'%s\' at device %s with address %s: temperature: %s' % (self.__class__.__name__,self.__device_number,self.__address,temperature))
-    return None if not terrariumUtils.is_float(temperature) else float(temperature)
+    value = None
+    logger.debug('Read temperature value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
+    self.__get_raw_data()
+    if terrariumUtils.is_float(self.__cached_data['temperature']):
+      value = float(self.__cached_data['temperature'])
+
+    logger.debug('Got data from temperature sensor type \'%s\' with address %s: temperature: %s' % (self.__class__.__name__,self.__address,value))
+    return value
 
   def get_moisture(self):
-    logger.debug('Read moisture value from sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
-    moisture = self.__get_raw_data('moisture')
-    logger.debug('Got data from moisture sensor type \'%s\' at device %s with address %s: moisture: %s' % (self.__class__.__name__,self.__device_number,self.__address,moisture))
-    return None if not terrariumUtils.is_float(moisture) else float(moisture)
+    value = None
+    logger.debug('Read moisture value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
+    self.__get_raw_data()
+    if terrariumUtils.is_float(self.__cached_data['moisture']):
+      value = float(self.__cached_data['moisture'])
+
+    logger.debug('Got data from moisture sensor type \'%s\' with address %s: moisture: %s' % (self.__class__.__name__,self.__address,value))
+    return value
 
   def get_light(self):
-    logger.debug('Read brightness value from sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
-    light = self.__get_raw_data('light')
-    if light is not None:
-      light = 100.0 - ((light / 65536.0) * 100.0)
-    logger.debug('Got data from brightness sensor type \'%s\' at device %s with address %s: brightness: %s' % (self.__class__.__name__,self.__device_number,self.__address,light))
-    return None if not terrariumUtils.is_float(light) else float(light)
+    value = None
+    logger.debug('Read brightness value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
+    self.__get_raw_data()
+    if terrariumUtils.is_float(self.__cached_data['light']):
+      value = float(self.__cached_data['light'])
+
+    logger.debug('Got data from brightness sensor type \'%s\' with address %s: brightness: %s' % (self.__class__.__name__,self.__address,value))
+    return value

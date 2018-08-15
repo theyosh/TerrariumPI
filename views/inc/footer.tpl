@@ -51,6 +51,9 @@
   <script type="text/javascript" src="/gentelella/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
   <script type="text/javascript" src="/gentelella/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
   <script type="text/javascript" src="/gentelella/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+  <!-- bootstrap-daterangepicker -->
+  <script type="text/javascript" src="/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
   <!-- Switchery -->
   <script type="text/javascript" src="/gentelella/vendors/switchery/dist/switchery.min.js"></script>
   <!-- Load the terrariumPI JS script-->

@@ -135,11 +135,11 @@ class terrariumCollector(object):
                 if 'duplicate column name' not in str(ex):
                   logger.error('Error updating collector database. Please contact support. Error message: %s' % (ex,))
 
-          if '380' == update_version:
-            self.__upgrade_to_380()
+            if '380' == update_version:
+              self.__upgrade_to_380()
 
         db.commit()
-        if int(update_version) % 10 == 0:
+        if int(to_version) % 10 == 0:
           logger.info('Cleaning up disk space. This will take a couple of minutes depending on the database size and sd card disk speed.')
           cur.execute('VACUUM')
 
@@ -233,7 +233,7 @@ class terrariumCollector(object):
       with self.db as db:
         cur = db.cursor()
 
-        if type in ['humidity','moisture','temperature','distance','ph','conductivity','light']:
+        if type in ['humidity','moisture','temperature','distance','ph','conductivity','light','uva','uvb','fertility','co2']:
           cur.execute('REPLACE INTO sensor_data (id, type, timestamp, current, limit_min, limit_max, alarm_min, alarm_max, alarm) VALUES (?,?,?,?,?,?,?,?,?)',
                       (id, type, now, newdata['current'], newdata['limit_min'], newdata['limit_max'], newdata['alarm_min'], newdata['alarm_max'], newdata['alarm']))
 
@@ -271,11 +271,13 @@ class terrariumCollector(object):
   def get_total_power_water_usage(self):
     timer = time.time()
 
-    totals = {'power_wattage' : {'duration' : int(time.time()) , 'wattage' : 0.0},
-              'water_flow'    : {'duration' : int(time.time()) , 'water'   : 0.0}}
+    totals = {'power_wattage' : {'duration' : 0 , 'wattage' : 0.0},
+              'water_flow'    : {'duration' : 0 , 'water'   : 0.0}}
 
-    sql = '''SELECT SUM(total_wattage) AS Watt, SUM(total_water) AS Water, SUM(duration_in_seconds) AS TotalTime FROM (
+    sql = '''SELECT SUM(total_wattage) AS Watt, SUM(total_water) AS Water, MAX(timestamp2)-MIN(timestamp) AS TotalTime FROM (
                 SELECT
+                    t1.timestamp as timestamp,
+                    t2.timestamp as timestamp2,
                     t2.timestamp-t1.timestamp AS duration_in_seconds,
                    (t2.timestamp-t1.timestamp)          * (t1.state / 100.0) * t1.power_wattage AS total_wattage,
                   ((t2.timestamp-t1.timestamp) / 60.0)  * (t1.state / 100.0) * t1.water_flow AS total_water
@@ -289,8 +291,9 @@ class terrariumCollector(object):
       cur = db.cursor()
       cur.execute(sql)
       row = cur.fetchone()
-      totals = {'power_wattage' : {'duration' : int(row['TotalTime']) , 'wattage' : float(row['Watt'])},
-                'water_flow'    : {'duration' : int(row['TotalTime']) , 'water'   : float(row['Water'])}}
+      if row['TotalTime'] is not None and row['Watt'] is not None:
+        totals = {'power_wattage' : {'duration' : int(row['TotalTime']) , 'wattage' : float(row['Watt'])},
+                  'water_flow'    : {'duration' : int(row['TotalTime']) , 'water'   : float(row['Water'])}}
 
     logger.debug('Timing: Total power and water usage calculation done in %s seconds.' % ((time.time() - timer),))
     return totals
@@ -314,7 +317,7 @@ class terrariumCollector(object):
   def log_system_data(self, data):
     self.__log_data('system',None,data)
 
-  def get_history(self, parameters = [], starttime = None, stoptime = None):
+  def get_history(self, parameters = [], starttime = None, stoptime = None, exclude_ids = None):
     # Default return object
     timer = time.time()
     history = {}
@@ -345,73 +348,78 @@ class terrariumCollector(object):
     filters = (stoptime,starttime,)
     if logtype == 'sensors':
       fields = { 'current' : [], 'alarm_min' : [], 'alarm_max' : [] , 'limit_min' : [], 'limit_max' : []}
-      sql = 'SELECT id, type, timestamp,' + ', '.join(fields.keys()) + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ?'
+      sql = 'SELECT id, type, timestamp,' + ', '.join(fields.keys()) + ' FROM sensor_data WHERE timestamp >= ? AND timestamp <= ?'
 
       if len(parameters) > 0 and parameters[0] == 'average':
-        sql = 'SELECT "average" as id, type, timestamp'
+        sql = 'SELECT "average" AS id, type, timestamp'
         for field in fields:
           sql = sql + ', AVG(' + field + ') as ' + field
-        sql = sql + ' FROM sensor_data WHERE timestamp >= ? and timestamp <= ?'
+        sql = sql + ' FROM sensor_data WHERE timestamp >= ? AND timestamp <= ?'
+
+        if exclude_ids is not None:
+          sql = sql + ' AND sensor_data.id NOT IN (\'' + '\',\''.join(exclude_ids) +'\')'
 
         if len(parameters) == 2:
-          sql = sql + ' and type = ?'
+          sql = sql + ' AND type = ?'
           filters = (stoptime,starttime,parameters[1],)
 
         sql = sql + ' GROUP BY type, timestamp'
 
-      elif len(parameters) == 2 and parameters[0] in ['temperature','humidity','distance','ph','conductivity','light']:
-        sql = sql + ' and type = ? and id = ?'
+      elif len(parameters) == 2 and parameters[0] in ['temperature','humidity','distance','ph','conductivity','light','uva','uvb','fertility']:
+        sql = sql + ' AND type = ? AND id = ?'
         filters = (stoptime,starttime,parameters[0],parameters[1],)
-      elif len(parameters) == 1 and parameters[0] in ['temperature','humidity','distance','ph','conductivity','light']:
-        sql = sql + ' and type = ?'
+      elif len(parameters) == 1 and parameters[0] in ['temperature','humidity','distance','ph','conductivity','light','uva','uvb','fertility']:
+        sql = sql + ' AND type = ?'
         filters = (stoptime,starttime,parameters[0],)
 
       elif len(parameters) == 1:
-        sql = sql + ' and id = ?'
+        sql = sql + ' AND id = ?'
         filters = (stoptime,starttime,parameters[0],)
 
     elif logtype == 'switches':
       fields = { 'power_wattage' : [], 'water_flow' : [] }
-      sql = '''SELECT id, "switches" as type, timestamp, timestamp2, state, ''' + ', '.join(fields.keys()) + ''' FROM (
+      sql = '''SELECT id, "switches" AS type, timestamp, timestamp2, state, ''' + ', '.join(fields.keys()) + ''' FROM (
                  SELECT
                    t1.id AS id,
                    t1.timestamp AS timestamp,
-                   t2.timestamp AS timestamp2,
+                   IFNULL(t2.timestamp, ''' + str(starttime) + ''') as timestamp2,
                    (t1.state / 100.0) * t1.power_wattage AS power_wattage,
                    (t1.state / 100.0) * t1.water_flow AS water_flow,
                    t1.state AS state
                  FROM switch_data AS t1
                  LEFT JOIN switch_data AS t2
                  ON t2.id = t1.id
-                 AND t2.timestamp = (SELECT MIN(timestamp) FROM switch_data WHERE timestamp > t1.timestamp AND id = t1.id) )
-              WHERE timestamp > ? AND timestamp <= ?'''
+                 AND t2.timestamp = (SELECT MIN(timestamp) FROM switch_data WHERE switch_data.timestamp > t1.timestamp AND switch_data.id = t1.id) )
+              WHERE timestamp2 > IFNULL((SELECT MAX(timestamp) AS timelimit FROM switch_data AS ttable WHERE ttable.id = id AND ttable.timestamp < ?),0)
+              AND   timestamp <= ?'''
 
       if len(parameters) > 0 and parameters[0] is not None:
-        sql = sql + ' and id = ?'
-        filters = (stoptime - (24 * 60 * 60),starttime,parameters[0],)
+        sql = sql + ' AND id = ?'
+        filters = (stoptime,starttime,parameters[0],)
 
     elif logtype == 'doors':
       fields = {'state' : []}
-      sql = '''SELECT id, "doors" as type, timestamp, timestamp2, (CASE WHEN state == 'open' THEN 1 ELSE 0 END) AS state FROM (
+      sql = '''SELECT id, "doors" AS type, timestamp, timestamp2, (CASE WHEN state == 'open' THEN 1 ELSE 0 END) AS state FROM (
                  SELECT
                    t1.id AS id,
                    t1.timestamp AS timestamp,
-                   t2.timestamp AS timestamp2,
+                   IFNULL(t2.timestamp, ''' + str(starttime) + ''') as timestamp2,
                    t1.state AS state
                  FROM door_data AS t1
                  LEFT JOIN door_data AS t2
                  ON t2.id = t1.id
-                 AND t2.timestamp = (SELECT MIN(timestamp) FROM door_data WHERE timestamp > t1.timestamp AND id = t1.id) )
-              WHERE timestamp > ? AND timestamp <= ?'''
+                 AND t2.timestamp = (SELECT MIN(timestamp) FROM door_data WHERE door_data.timestamp > t1.timestamp AND door_data.id = t1.id) )
+              WHERE timestamp2 > IFNULL((SELECT MAX(timestamp) AS timelimit FROM door_data AS ttable WHERE ttable.id = id AND ttable.timestamp < ?),0)
+              AND   timestamp <= ?'''
 
       if len(parameters) > 0 and parameters[0] is not None:
-        sql = sql + ' and id = ?'
-        filters = (stoptime - (24 * 60 * 60),starttime,parameters[0],)
+        sql = sql + ' AND id = ?'
+        filters = (stoptime,starttime,parameters[0],)
 
     elif logtype == 'weather':
       fields = { 'wind_speed' : [], 'temperature' : [], 'pressure' : [] , 'wind_direction' : [], 'rain' : [],
                  'weather' : [], 'icon' : []}
-      sql = 'SELECT "city" as id, "weather" as type, timestamp, ' + ', '.join(fields.keys()) + ' FROM weather_data WHERE timestamp >= ? and timestamp <= ?'
+      sql = 'SELECT "city" AS id, "weather" AS type, timestamp, ' + ', '.join(fields.keys()) + ' FROM weather_data WHERE timestamp >= ? AND timestamp <= ?'
 
     elif logtype == 'system':
       fields = ['load_load1', 'load_load5','load_load15','uptime', 'temperature','cores', 'memory_total', 'memory_used' , 'memory_free', 'disk_total', 'disk_used' , 'disk_free']
@@ -429,7 +437,7 @@ class terrariumCollector(object):
       elif len(parameters) > 0 and parameters[0] == 'disk':
         fields = ['disk_total', 'disk_used' , 'disk_free']
 
-      sql = 'SELECT "system" as type, timestamp, ' + ', '.join(fields) + ' FROM system_data WHERE timestamp >= ? and timestamp <= ?'
+      sql = 'SELECT "system" AS type, timestamp, ' + ', '.join(fields) + ' FROM system_data WHERE timestamp >= ? AND timestamp <= ?'
 
     sql = sql + ' ORDER BY timestamp ASC, type ASC' + (', id ASC' if logtype != 'system' else '')
 
@@ -439,9 +447,6 @@ class terrariumCollector(object):
         with self.db as db:
           cur = db.cursor()
           for row in cur.execute(sql, filters):
-            if row['type'] in ['switches','doors'] and row['timestamp2'] is not None and '' != row['timestamp2'] and row['timestamp2'] < stoptime:
-              continue
-
             if row['type'] not in history:
               history[row['type']] = {}
 
@@ -468,14 +473,16 @@ class terrariumCollector(object):
 
               if row['type'] in ['switches','doors'] and row['state'] > 0 and row['timestamp2'] is not None and '' != row['timestamp2']:
                 # Update totals data
-                history[row['type']][row['id']]['totals']['duration'] += (row['timestamp2'] - row['timestamp'])
+                duration = float(row['timestamp2'] - (row['timestamp'] if row['timestamp'] >= stoptime else stoptime))
+                history[row['type']][row['id']]['totals']['duration'] += duration
 
                 if 'switches' == row['type']:
-                  history[row['type']][row['id']]['totals']['power_wattage'] += (row['timestamp2'] - row['timestamp']) * row['power_wattage']
-                  history[row['type']][row['id']]['totals']['water_flow'] += (row['timestamp2'] - row['timestamp']) * row['water_flow']
+                  history[row['type']][row['id']]['totals']['power_wattage'] += duration * float(row['power_wattage'])
+                  # Devide by 60 to get Liters water used per minute based on seconds durations
+                  history[row['type']][row['id']]['totals']['water_flow'] += (duration / 60.0) * float(row['water_flow'])
 
               for field in fields:
-                history[row['type']][row['id']][field].append([row['timestamp'] * 1000,row[field]])
+                history[row['type']][row['id']][field].append([ (row['timestamp'] if row['timestamp'] >= stoptime else stoptime) * 1000,row[field]])
 
                 if row['type'] in ['switches','doors'] and row['timestamp2'] is not None and '' != row['timestamp2']:
                   # Add extra point for nicer graphing of doors and power switches
@@ -488,23 +495,12 @@ class terrariumCollector(object):
           self.__recover()
 
     # In order to get nicer graphs, we are adding a start and end time based on the selected time range if needed
-    if logtype in ['switches','doors']:
-      if logtype in history:
-        for data_id in history[logtype]:
-          for field in fields:
-            # For each field, shift the first timestamp to the start of the query time
-            history[logtype][data_id][field][0][0] = stoptime * 1000
-
-            last_item  = history[logtype][data_id][field][len(history[logtype][data_id][field])-1]
-            if (last_item[0] / 1000) < starttime:
-              history[logtype][data_id][field].append([starttime * 1000 ,last_item[1]])
-
-      elif len(parameters) > 0:
-        # Create 'empty' history array if single id is requested
-        history[logtype] = {}
-        history[logtype][parameters[0]] = copy.deepcopy(fields)
-        for field in fields:
-          history[logtype][parameters[0]][field].append([stoptime  * 1000,0])
-          history[logtype][parameters[0]][field].append([starttime * 1000,0])
+    if logtype in ['switches','doors'] and logtype not in history and len(parameters) > 0:
+      # Create 'empty' history array if single id is requested
+      history[logtype] = {}
+      history[logtype][parameters[0]] = copy.deepcopy(fields)
+      for field in fields:
+        history[logtype][parameters[0]][field].append([stoptime  * 1000,0])
+        history[logtype][parameters[0]][field].append([starttime * 1000,0])
 
     return history
