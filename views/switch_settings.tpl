@@ -111,6 +111,7 @@
                                 <option value="gpio">{{_('GPIO')}}</option>
                                 <option value="gpio-inverse">{{_('GPIO Inverse')}}</option>
                                 <option value="pwm-dimmer">{{_('PWM Dimmer')}}</option>
+                                <option value="dc-dimmer">{{_('DC Dimmer')}}</option>
                                 <option value="remote">{{_('Remote')}}</option>
                                 <option value="remote-dimmer">{{_('Remote Dimmer')}}</option>
                                 <option value="eg-pm-usb">{{_('Energenie USB')}}</option>

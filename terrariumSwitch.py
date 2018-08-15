@@ -26,15 +26,17 @@ from gevent import monkey, sleep
 monkey.patch_all()
 
 class terrariumSwitch(object):
-  VALID_HARDWARE_TYPES = ['ftdi','gpio','gpio-inverse','pwm-dimmer','remote','remote-dimmer','eg-pm-usb','eg-pm-lan']
+  VALID_HARDWARE_TYPES = ['ftdi','gpio','gpio-inverse','pwm-dimmer','remote','remote-dimmer','eg-pm-usb','eg-pm-lan','dc-dimmer']
 
   OFF = False
   ON = True
 
   # PWM Dimmer settings
   PWM_DIMMER_MAXDIM = 895 # http://www.esp8266-projects.com/2017/04/raspberry-pi-domoticz-ac-dimmer-part-1/
-  PWM_DIMMER_MIN_TIMEOUT=0.1
-  PWM_DIMMER_MIN_STEP=0.1
+  DIMMER_MIN_TIMEOUT=0.1
+  DIMMER_MIN_STEP=0.1
+
+  DC_DIMMER_MAXDIM = 1000 # https://github.com/theyosh/TerrariumPI/issues/178#issuecomment-412667010
 
   BITBANG_ADDRESSES = {
     "1":"2",
@@ -61,6 +63,8 @@ class terrariumSwitch(object):
       self.__load_eg_pm_usb_device()
     elif self.get_hardware_type() == 'pwm-dimmer':
       self.__load_pwm_device()
+    elif self.get_hardware_type() == 'dc-dimmer':
+      self.__load_dc_dimmer_device()
     elif 'remote' in self.get_hardware_type():
       pass
     elif 'gpio' in self.get_hardware_type():
@@ -78,7 +82,7 @@ class terrariumSwitch(object):
     self.set_timer_on_duration(0)
     self.set_timer_off_duration(0)
 
-    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+    if self.__is_dimmer():
       # Init system default dimmer settings
       self.set_dimmer_duration(10)
       self.set_dimmer_step(10)
@@ -125,6 +129,9 @@ class terrariumSwitch(object):
 
     pigpio.exceptions = True
 
+  def __load_dc_dimmer_device(self):
+    self.__load_pwm_device()
+
   def __dim_switch(self,from_value,to_value,duration):
     # When the dimmer is working, ignore new state changes.
     if not self.__dimmer_running:
@@ -134,9 +141,14 @@ class terrariumSwitch(object):
       if from_value is None or duration == 0:
         logger.info('Switching dimmer \'%s\' from %s%% to %s%% instantly',
                   self.get_name(),from_value,to_value)
-        # Geen animatie, gelijk to_value
-        dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - float(to_value)) / 100.0)
+        # No dimming, straight to_value
+        if 'pwm-dimmer' == self.get_hardware_type():
+          dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - float(to_value)) / 100.0)
+        elif 'dc-dimmer' == self.get_hardware_type():
+          dim_value = terrariumSwitch.DC_DIMMER_MAXDIM * (float(to_value) / 100.0)
+
         self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
+
       else:
         from_value = float(from_value)
         to_value = float(to_value)
@@ -148,8 +160,8 @@ class terrariumSwitch(object):
         if duration == 0.0 or distance == 0.0:
           steps = 1.0
         else:
-          steps = math.floor(min( (abs(duration) / terrariumSwitch.PWM_DIMMER_MIN_TIMEOUT),
-                                  (distance / terrariumSwitch.PWM_DIMMER_MIN_STEP)))
+          steps = math.floor(min( (abs(duration) / terrariumSwitch.DIMMER_MIN_TIMEOUT),
+                                  (distance / terrariumSwitch.DIMMER_MIN_STEP)))
           distance /= steps
           duration /= steps
 
@@ -157,14 +169,17 @@ class terrariumSwitch(object):
 
         for counter in range(int(steps)):
           from_value += (direction * distance)
-          dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - from_value) / 100.0)
+          if 'pwm-dimmer' == self.get_hardware_type():
+            dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - from_value) / 100.0)
+          elif 'dc-dimmer' == self.get_hardware_type():
+            dim_value = terrariumSwitch.DC_DIMMER_MAXDIM * (float(to_value) / 100.0)
           logger.debug('Dimmer animation: Step: %s, value %s%%, Dim value: %s, timeout %s',counter+1, from_value, dim_value, duration)
           self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
           sleep(duration)
 
-        # For impatient people... Put the dimmer at the current state value if it has changed during the animation
-        dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - self.get_state()) / 100.0)
-        self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
+        # For impatient people... Put the dimmer at the current state value if it has changed during the animation (DISABLED FOR NOW)
+        # dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - self.get_state()) / 100.0)
+        # self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
 
       self.__dimmer_running = False
       logger.info('Dimmer \'%s\' is done at value %s%%',self.get_name(),self.get_state())
@@ -191,6 +206,10 @@ class terrariumSwitch(object):
                                                                   self.get_timer_on_duration(),
                                                                   self.get_timer_off_duration())
     logger.info('Timer time table loaded for switch \'%s\' with %s entries.', self.get_name(),len(self.__timer_time_table))
+
+
+  def __is_dimmer(self):
+    return 'dimmer' in self.get_hardware_type()
 
   def stop(self):
     if self.get_hardware_type() in ['gpio','gpio-inverse']:
@@ -265,7 +284,7 @@ class terrariumSwitch(object):
       elif self.get_hardware_type() == 'gpio-inverse':
         GPIO.output(terrariumUtils.to_BCM_port_number(self.get_address()), ( GPIO.LOW if state is terrariumSwitch.ON else GPIO.HIGH ))
 
-      elif self.get_hardware_type() == 'pwm-dimmer' and self.__pigpio is not False:
+      elif self.get_hardware_type() in ['pwm-dimmer','dc-dimmer'] and self.__pigpio is not False:
         duration = self.get_dimmer_duration()
         # State 100 = full on which means 0 dim.
         # State is inverse of dim
@@ -282,7 +301,7 @@ class terrariumSwitch(object):
         pass
 
       self.state = state
-      if self.get_hardware_type() != 'pwm-dimmer':
+      if not self.__is_dimmer():
         logger.info('Toggle switch \'%s\' from %s',self.get_name(),('off to on' if self.is_on() else 'on to off'))
       if self.callback is not None:
         data = self.get_data()
@@ -331,7 +350,7 @@ class terrariumSwitch(object):
             'timer_off_duration': self.get_timer_off_duration()
             }
 
-    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+    if self.__is_dimmer():
       data.update({ 'dimmer_duration'      : self.get_dimmer_duration(),
                     'dimmer_step'          : self.get_dimmer_step(),
                     'dimmer_on_duration'   : self.get_dimmer_on_duration(),
@@ -439,7 +458,7 @@ class terrariumSwitch(object):
 
   def get_current_power_wattage(self):
     wattage = 0.0
-    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+    if self.__is_dimmer():
       wattage = self.get_power_wattage() * (self.get_state() / 100.0)
     else:
       wattage = self.get_power_wattage()
@@ -457,7 +476,7 @@ class terrariumSwitch(object):
 
   def get_current_water_flow(self):
     waterflow = 0.0
-    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+    if self.__is_dimmer():
       waterflow = self.get_water_flow() * (self.get_state() / 100.0)
     else:
       waterflow = self.get_water_flow()
@@ -465,13 +484,13 @@ class terrariumSwitch(object):
     return waterflow
 
   def is_at_max_power(self):
-    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+    if self.__is_dimmer():
       return self.get_state() >= self.get_dimmer_on_percentage()
     else:
       return self.is_on()
 
   def is_at_min_power(self):
-    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+    if self.__is_dimmer():
       return self.get_state() <= self.get_dimmer_off_percentage()
     else:
       return self.is_off()
@@ -493,13 +512,13 @@ class terrariumSwitch(object):
     return None
 
   def is_on(self):
-    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+    if self.__is_dimmer():
       return self.get_state() > self.get_dimmer_off_percentage()
     else:
       return self.get_state() is terrariumSwitch.ON
 
   def is_off(self):
-    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer']:
+    if self.__is_dimmer():
       return self.get_state() <= self.get_dimmer_off_percentage()
     else:
       return self.get_state() is terrariumSwitch.OFF
@@ -515,7 +534,7 @@ class terrariumSwitch(object):
       return self.is_off()
 
   def go_down(self):
-    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] and not self.__dimmer_running:
+    if self.__is_dimmer() and not self.__dimmer_running:
       new_value = self.get_state() - self.get_dimmer_step()
       if new_value > self.get_dimmer_on_percentage():
         new_value = self.get_dimmer_on_percentage()
@@ -526,7 +545,7 @@ class terrariumSwitch(object):
       self.set_state(new_value)
 
   def go_up(self):
-    if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] and not self.__dimmer_running:
+    if self.__is_dimmer() and not self.__dimmer_running:
       new_value = self.get_state() + self.get_dimmer_step()
       if new_value > self.get_dimmer_on_percentage():
         new_value = self.get_dimmer_on_percentage()
@@ -548,42 +567,42 @@ class terrariumSwitch(object):
     self.__dimmer_step = value if value >= 0.0 else 100.0
 
   def get_dimmer_step(self):
-    return (self.__dimmer_step if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] else 100.0)
+    return (self.__dimmer_step if self.__is_dimmer() else 100.0)
 
   def set_dimmer_duration(self,value):
     value = float(value) if terrariumUtils.is_float(value) else 0.0
     self.__dimmer_duration = value if value >= 0.0 else 0.0
 
   def get_dimmer_duration(self):
-    return (self.__dimmer_duration if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] else 0.0)
+    return (self.__dimmer_duration if self.__is_dimmer() else 0.0)
 
   def set_dimmer_on_duration(self,value):
     value = float(value) if terrariumUtils.is_float(value) else 0.0
     self.__dimmer_on_duration = value if value >= 0.0 else 0.0
 
   def get_dimmer_on_duration(self):
-    return (self.__dimmer_on_duration if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] else 0.0)
+    return (self.__dimmer_on_duration if self.__is_dimmer() else 0.0)
 
   def set_dimmer_off_duration(self,value):
     value = float(value) if terrariumUtils.is_float(value) else 0.0
     self.__dimmer_off_duration = value if value >= 0.0 else 0.0
 
   def get_dimmer_off_duration(self):
-    return (self.__dimmer_off_duration if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] else 0.0)
+    return (self.__dimmer_off_duration if self.__is_dimmer() else 0.0)
 
   def set_dimmer_on_percentage(self,value):
     value = float(value) if terrariumUtils.is_float(value) else 0.0
     self.__dimmer_on_percentage = value if (0.0 <= value <= 100.0) else 100.0
 
   def get_dimmer_on_percentage(self):
-    return (self.__dimmer_on_percentage if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] else 100.0)
+    return (self.__dimmer_on_percentage if self.__is_dimmer() else 100.0)
 
   def set_dimmer_off_percentage(self,value):
     value = float(value) if terrariumUtils.is_float(value) else 0.0
     self.__dimmer_off_percentage = value if (0.0 <= value <= 100.0) else 100.0
 
   def get_dimmer_off_percentage(self):
-    return (self.__dimmer_off_percentage if self.get_hardware_type() in ['pwm-dimmer','remote-dimmer'] else 0.0)
+    return (self.__dimmer_off_percentage if self.__is_dimmer() else 0.0)
 
   def set_timer_enabled(self,value):
     self.__timer_enabled = terrariumUtils.is_true(value)
