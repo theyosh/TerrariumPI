@@ -1,9 +1,15 @@
 /* @preserve
- * Leaflet 1.3.2+Detached: 19247955dff7db871a0c0c100bf48ad11b8c59b8.1924795, a JS library for interactive maps. http://leafletjs.com
+ * Leaflet 1.3.3+Detached: b22aef4aa71afd640bf8e91915b78899bf64ff89.b22aef4, a JS library for interactive maps. http://leafletjs.com
  * (c) 2010-2018 Vladimir Agafonkin, (c) 2010-2011 CloudMade
  */
 
-var version = "1.3.2+HEAD.1924795";
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+	typeof define === 'function' && define.amd ? define(['exports'], factory) :
+	(factory((global.L = {})));
+}(this, (function (exports) { 'use strict';
+
+var version = "1.3.3+HEAD.b22aef4";
 
 /*
  * @namespace Util
@@ -13754,5 +13760,91 @@ Map.TouchZoom = TouchZoom;
 
 Object.freeze = freeze;
 
-export { version, Control, control, Browser, Evented, Mixin, Util, Class, Handler, extend, bind, stamp, setOptions, DomEvent, DomUtil, PosAnimation, Draggable, LineUtil, PolyUtil, Point, toPoint as point, Bounds, toBounds as bounds, Transformation, toTransformation as transformation, index as Projection, LatLng, toLatLng as latLng, LatLngBounds, toLatLngBounds as latLngBounds, CRS, GeoJSON, geoJSON, geoJson, Layer, LayerGroup, layerGroup, FeatureGroup, featureGroup, ImageOverlay, imageOverlay, VideoOverlay, videoOverlay, DivOverlay, Popup, popup, Tooltip, tooltip, Icon, icon, DivIcon, divIcon, Marker, marker, TileLayer, tileLayer, GridLayer, gridLayer, SVG, svg$1 as svg, Renderer, Canvas, canvas$1 as canvas, Path, CircleMarker, circleMarker, Circle, circle, Polyline, polyline, Polygon, polygon, Rectangle, rectangle, Map, createMap as map };
-//# sourceMappingURL=leaflet-src.esm.js.map
+exports.version = version;
+exports.Control = Control;
+exports.control = control;
+exports.Browser = Browser;
+exports.Evented = Evented;
+exports.Mixin = Mixin;
+exports.Util = Util;
+exports.Class = Class;
+exports.Handler = Handler;
+exports.extend = extend;
+exports.bind = bind;
+exports.stamp = stamp;
+exports.setOptions = setOptions;
+exports.DomEvent = DomEvent;
+exports.DomUtil = DomUtil;
+exports.PosAnimation = PosAnimation;
+exports.Draggable = Draggable;
+exports.LineUtil = LineUtil;
+exports.PolyUtil = PolyUtil;
+exports.Point = Point;
+exports.point = toPoint;
+exports.Bounds = Bounds;
+exports.bounds = toBounds;
+exports.Transformation = Transformation;
+exports.transformation = toTransformation;
+exports.Projection = index;
+exports.LatLng = LatLng;
+exports.latLng = toLatLng;
+exports.LatLngBounds = LatLngBounds;
+exports.latLngBounds = toLatLngBounds;
+exports.CRS = CRS;
+exports.GeoJSON = GeoJSON;
+exports.geoJSON = geoJSON;
+exports.geoJson = geoJson;
+exports.Layer = Layer;
+exports.LayerGroup = LayerGroup;
+exports.layerGroup = layerGroup;
+exports.FeatureGroup = FeatureGroup;
+exports.featureGroup = featureGroup;
+exports.ImageOverlay = ImageOverlay;
+exports.imageOverlay = imageOverlay;
+exports.VideoOverlay = VideoOverlay;
+exports.videoOverlay = videoOverlay;
+exports.DivOverlay = DivOverlay;
+exports.Popup = Popup;
+exports.popup = popup;
+exports.Tooltip = Tooltip;
+exports.tooltip = tooltip;
+exports.Icon = Icon;
+exports.icon = icon;
+exports.DivIcon = DivIcon;
+exports.divIcon = divIcon;
+exports.Marker = Marker;
+exports.marker = marker;
+exports.TileLayer = TileLayer;
+exports.tileLayer = tileLayer;
+exports.GridLayer = GridLayer;
+exports.gridLayer = gridLayer;
+exports.SVG = SVG;
+exports.svg = svg$1;
+exports.Renderer = Renderer;
+exports.Canvas = Canvas;
+exports.canvas = canvas$1;
+exports.Path = Path;
+exports.CircleMarker = CircleMarker;
+exports.circleMarker = circleMarker;
+exports.Circle = Circle;
+exports.circle = circle;
+exports.Polyline = Polyline;
+exports.polyline = polyline;
+exports.Polygon = Polygon;
+exports.polygon = polygon;
+exports.Rectangle = Rectangle;
+exports.rectangle = rectangle;
+exports.Map = Map;
+exports.map = createMap;
+
+var oldL = window.L;
+exports.noConflict = function() {
+	window.L = oldL;
+	return this;
+}
+
+// Always export us to window global (see #2364)
+window.L = exports;
+
+})));
+//# sourceMappingURL=leaflet-src.js.map
