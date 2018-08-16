@@ -1956,7 +1956,7 @@ function add_power_switch_status_row(data) {
   new_row.attr('id','powerswitch_' + data.id);
 
   // Change the toggle icon with a slider knob
-  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype) {
+  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype || 'dc-dimmer' === data.hardwaretype) {
     new_row.find('div.x_content div.power_switch')
       .removeClass('big')
       .addClass('dimmer')
@@ -2033,7 +2033,7 @@ function update_power_switch(data) {
   });
 
   // Open or hide the dimmer values (will not trigger on the select field)
-  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype) {
+  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype || 'dc-dimmer' === data.hardwaretype) {
     content_row.find('.row.dimmer').show();
   } else {
     // Remove dimmer row, else form submit is 'stuck' on hidden fields that have invalid patterns... :(
