@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.8.3\n"
 "POT-Creation-Date: 2018-08-04 16:01+CEST\n"
-"PO-Revision-Date: 2018-08-11 10:22+0200\n"
+"PO-Revision-Date: 2018-08-17 17:32+0200\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,7 +52,7 @@ msgstr ""
 
 #: terrariumTranslations.py:26
 msgid "Holds the sensor hardware type. Supported hardware types are: %s."
-msgstr "Vis maskinvaretype sensor. Maskinvaretyper som støttes er: %s."
+msgstr "Viser maskinvaretype sensor. Maskinvaretyper som støttes er: %s."
 
 #: terrariumTranslations.py:27
 msgid ""
@@ -61,7 +61,7 @@ msgid ""
 "adress. Full url specification can be found on the %s wiki page. For GPIO "
 "use <strong>physical</strong> GPIO pin numbering."
 msgstr ""
-"Holder sensor adressen. Avhengig av maskinvaretype, er det enten et "
+"Viser sensor adressen. Avhengig av maskinvaretype, er det enten et "
 "skrivebeskyttet hex-nummer, en GPIO PIN, en GPIO PIN-kombinasjon av %s eller "
 "en fullstendig HTTP(S)-adresse. Fullstendig URL-spesifikasjon finnes på "
 "siden %s wiki. For GPIO Bruk <strong>fysisk</strong> GPIO PIN nummerering."
@@ -83,7 +83,7 @@ msgid ""
 "Holds the sensor lower alarm value of the sensor. When below this value, "
 "alarms can be triggered."
 msgstr ""
-"Holder sensorens lavere alarm verdi av sensoren. Når du er under denne "
+"Viser sensorens lavest alarm verdi av sensoren. Når den er under denne "
 "verdien, kan alarmer utløses."
 
 #: terrariumTranslations.py:31
@@ -91,16 +91,16 @@ msgid ""
 "Holds the sensor maximum alarm value of the sensor. When above this value, "
 "alarms can be triggered."
 msgstr ""
-"Holder sensorens maksimale alarm verdi på sensoren. Over denne verdien, kan "
+"Viser sensorens maksimale alarm verdi på sensoren. Over denne verdien, kan "
 "alarmer kan utløses."
 
 #: terrariumTranslations.py:32
 msgid "Holds the sensor lowest value that should be used in the graphs."
-msgstr "Holder sensorens laveste verdien som skal brukes i grafene."
+msgstr "Viser sensorens laveste verdien som skal brukes i grafene."
 
 #: terrariumTranslations.py:33
 msgid "Holds the sensor maximum value that should be used in the graphs."
-msgstr "Holder sensorens maksimumsverdi som skal brukes i diagrammene."
+msgstr "Viser sensorens maksimumsverdi som skal brukes i diagrammene."
 
 #: terrariumTranslations.py:34
 msgid "Shows the sensor current value in temperature or humidity (read only)."
@@ -118,7 +118,7 @@ msgstr "Mer Kalibreringsinformasjon"
 
 #: terrariumTranslations.py:36
 msgid "Holds the sensor highest moisture value measured in full water. %s"
-msgstr "Holder sensorens høyeste fukt verdi målt i fullt vann. %s"
+msgstr "Viser sensorens høyeste fukt verdi målt i fullt vann. %s"
 
 #: terrariumTranslations.py:37
 msgid "Holds the temperature offset value."
@@ -560,7 +560,7 @@ msgstr "Velg ditt grensesnittspråk."
 
 #: terrariumTranslations.py:134
 msgid "Holds the distance type used by distance sensors."
-msgstr "Viser avstands typen som brukes av avstandsensorer."
+msgstr "Viser avstands typen som brukes av avstand sensorer."
 
 #: terrariumTranslations.py:135 terrariumTranslations.py:136
 msgid "Holds the username which can make changes (Administrator)."
@@ -1042,7 +1042,7 @@ msgstr "Totalt vann i L"
 #: views/inc/usage_weather.tpl:85 views/sensor_settings.tpl:43
 #: views/sensor_settings.tpl:162 views/weather.tpl:7
 msgid "Current"
-msgstr "Aktuelle"
+msgstr "Nåværende"
 
 #: views/dashboard.tpl:62 views/inc/menu.tpl:128
 #: views/inc/usage_dashboard.tpl:118 views/inc/usage_dashboard.tpl:211
@@ -1609,7 +1609,7 @@ msgstr "Lys"
 
 #: views/inc/menu.tpl:62 views/sensor_settings.tpl:137
 msgid "Fertility"
-msgstr "Fertilitet"
+msgstr "Fruktbarhet"
 
 #: views/inc/menu.tpl:95
 msgid "Show"
