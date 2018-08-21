@@ -329,6 +329,7 @@ class terrariumWeather(object):
              'rain' : 'rain',
              'chanceofrain' : 'rain',
              'moderaterain' : 'rain',
+             'rainshowersandthunder' : 'rain',
 
              'sleet' : 'sleet',
              'sleetshowers' : 'sleet',
