@@ -20,11 +20,12 @@ var globals = {
 var source_row = null;
 // Translations for dataTable module
 var dataTableTranslations = {
-  'en' : '//cdn.datatables.net/plug-ins/1.10.16/i18n/English.json',
-  'nl' : '//cdn.datatables.net/plug-ins/1.10.16/i18n/Dutch.json',
-  'de' : '//cdn.datatables.net/plug-ins/1.10.16/i18n/German.json',
-  'it' : '//cdn.datatables.net/plug-ins/1.10.16/i18n/Italian.json',
-  'fr' : '//cdn.datatables.net/plug-ins/1.10.16/i18n/France.json'
+  'en' : '//cdn.datatables.net/plug-ins/1.10.19/i18n/English.json',
+  'nl' : '//cdn.datatables.net/plug-ins/1.10.19/i18n/Dutch.json',
+  'de' : '//cdn.datatables.net/plug-ins/1.10.19/i18n/German.json',
+  'it' : '//cdn.datatables.net/plug-ins/1.10.19/i18n/Italian.json',
+  'fr' : '//cdn.datatables.net/plug-ins/1.10.19/i18n/France.json',
+  'no' : '//cdn.datatables.net/plug-ins/1.10.19/i18n/Norwegian-Bokmal.json'
 };
 
 /**
