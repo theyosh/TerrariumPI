@@ -33,10 +33,15 @@ class terrariumSwitch(object):
 
   # PWM Dimmer settings
   PWM_DIMMER_MAXDIM = 895 # http://www.esp8266-projects.com/2017/04/raspberry-pi-domoticz-ac-dimmer-part-1/
+  PWM_DIMMER_FREQ = 5000
+
+  # DC Dimmer settings
+  DC_DIMMER_MAXDIM = 1000 # https://github.com/theyosh/TerrariumPI/issues/178#issuecomment-412667010
+  DC_DIMMER_FREQ = 15000 # https://github.com/theyosh/TerrariumPI/issues/178#issuecomment-413697246
+
+  # General Dimmer settings
   DIMMER_MIN_TIMEOUT=0.1
   DIMMER_MIN_STEP=0.1
-
-  DC_DIMMER_MAXDIM = 1000 # https://github.com/theyosh/TerrariumPI/issues/178#issuecomment-412667010
 
   BITBANG_ADDRESSES = {
     "1":"2",
@@ -144,10 +149,12 @@ class terrariumSwitch(object):
         # No dimming, straight to_value
         if 'pwm-dimmer' == self.get_hardware_type():
           dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - float(to_value)) / 100.0)
+          dim_freq = terrariumSwitch.PWM_DIMMER_FREQ
         elif 'dc-dimmer' == self.get_hardware_type():
           dim_value = terrariumSwitch.DC_DIMMER_MAXDIM * (float(to_value) / 100.0)
+          dim_freq = terrariumSwitch.DC_DIMMER_FREQ
 
-        self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
+        self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), dim_freq, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
 
       else:
         from_value = float(from_value)
@@ -171,10 +178,13 @@ class terrariumSwitch(object):
           from_value += (direction * distance)
           if 'pwm-dimmer' == self.get_hardware_type():
             dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - from_value) / 100.0)
+            dim_freq = terrariumSwitch.PWM_DIMMER_FREQ
           elif 'dc-dimmer' == self.get_hardware_type():
             dim_value = terrariumSwitch.DC_DIMMER_MAXDIM * (float(to_value) / 100.0)
+            dim_freq = terrariumSwitch.DC_DIMMER_FREQ
+
           logger.debug('Dimmer animation: Step: %s, value %s%%, Dim value: %s, timeout %s',counter+1, from_value, dim_value, duration)
-          self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
+          self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), dim_freq, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
           sleep(duration)
 
         # For impatient people... Put the dimmer at the current state value if it has changed during the animation (DISABLED FOR NOW)
