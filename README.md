@@ -97,6 +97,7 @@ The software has support for the following languages:
 - German
 - Italian
 - France
+- Norwegian
 
 Your language not in the list or not up to date? [Create your own language translation](https://github.com/theyosh/TerrariumPI/wiki/Translations)
 
