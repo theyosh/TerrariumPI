@@ -1,7 +1,7 @@
 *.pyc
 settings.cfg
 history.db*
-static/webcam/*.jpg
+webcam
 log/*.log*
 audio/*
 description.txt
