@@ -112,15 +112,13 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-md-4 col-sm-4 col-xs-6 form-group">
+                        <div class="col-md-2 col-sm-2 col-xs-6 form-group">
                           <label for="webcam_[nr]_archive">{{_('Archive')}}</label>
                           <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('webcam_field_archive')}}">
                             <select class="form-control" name="webcam_[nr]_archive" tabindex="-1" placeholder="{{_('Select an option')}}">
                               <option value="">{{_('Select an option')}}</option>
                               <option value="disabled">{{_('Disabled')}}</option>
                               <option value="motion">{{_('Motion')}}</option>
-                              <option value="motion-day">{{_('Motion daytime')}}</option>
-                              <option value="motion-night">{{_('Motion nighttime')}}</option>
                               <option value="60">{{_('1 minute')}}</option>
                               <option value="300">{{_('5 minutes')}}</option>
                               <option value="900">{{_('15 minutes')}}</option>
@@ -131,6 +129,18 @@
                               <option value="43200">{{_('12 hours')}}</option>
                               <option value="86400">{{_('1 day')}}</option>
                             </select>
+                          </div>
+                        </div>
+                          <div class="col-md-2 col-sm-2 col-xs-6 form-group">
+                            <label for="webcam_[nr]_archivelight">{{_('Archive light state')}}</label>
+                            <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('webcam_field_archive_light')}}">
+                              <select class="form-control" name="webcam_[nr]_archivelight" tabindex="-1" placeholder="{{_('Select an option')}}">
+                                <option value="">{{_('Select an option')}}</option>
+                                <option value="ignore">{{_('Ignore')}}</option>
+                                <option value="on">{{_('On')}}</option>
+                                <option value="off">{{_('Off')}}</option>
+                              </select>
+                            </div>
                           </div>
                         </div>
                       </div>
