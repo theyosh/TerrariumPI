@@ -119,6 +119,8 @@
                               <option value="">{{_('Select an option')}}</option>
                               <option value="disabled">{{_('Disabled')}}</option>
                               <option value="motion">{{_('Motion')}}</option>
+                              <option value="motion-day">{{_('Motion daytime')}}</option>
+                              <option value="motion-night">{{_('Motion nighttime')}}</option>
                               <option value="60">{{_('1 minute')}}</option>
                               <option value="300">{{_('5 minutes')}}</option>
                               <option value="900">{{_('15 minutes')}}</option>

@@ -343,13 +343,14 @@ class terrariumEngine(object):
                                  webcamdata['name'],
                                  webcamdata['rotation'],
                                  width,height,
-                                 archive)
+                                 archive,
+                                 self.environment)
         self.webcams[webcam.get_id()] = webcam
       else:
-        # Existing switch
+        # Existing webcam
         webcam = self.webcams[webcamdata['id']]
         # Should not be able to change setings
-        #door.set_hardware_type(doordata['hardwaretype'])
+        #webcam.set_hardware_type(doordata['hardwaretype'])
         webcam.set_location(webcamdata['location'])
         webcam.set_name(webcamdata['name'])
 
