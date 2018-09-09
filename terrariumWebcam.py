@@ -33,9 +33,10 @@ class terrariumWebcam(object):
   UPDATE_TIMEOUT = 60
   VALID_ROTATIONS = ['0','90','180','270','h','v']
 
-  def __init__(self, id, location, name = '', rotation = '0', width = 640, height = 480, archive = False):
+  def __init__(self, id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, environment = None):
     self.id = id
     self.type = None
+    self.environment = environment
 
     # Main config
     self.tile_size = 256 # Smaller tile sizes does not work with LeafJS
@@ -135,7 +136,9 @@ class terrariumWebcam(object):
 
         image_path += '/' + self.get_id() + '_archive_' + str(int(time.time())) + '.jpg'
 
-        if self.get_archive() == 'motion':
+        if (self.get_archive() == 'motion') or \
+           (self.get_archive() == 'motion-day' and self.environment is not None and self.environment.light_on()) or \
+           (self.get_archive() == 'motion-night' and self.environment is not None and not self.environment.light_on()):
           # https://www.pyimagesearch.com/2015/05/25/basic-motion-detection-and-tracking-with-python-and-opencv/
           try:
             current_image = cv2.imread(self.get_raw_image())
@@ -172,7 +175,7 @@ class terrariumWebcam(object):
           except Exception, ex:
             print ex
 
-        elif int(time.time()) - self.__last_archive >= int(self.get_archive()):
+        elif 'motion' not in self.get_archive() and int(time.time()) - self.__last_archive >= int(self.get_archive()):
           shutil.copyfile(self.get_raw_image(),image_path)
           logger.info('Saved webcam %s image for archive due to timer interval %s seconds' % (self.get_name(),self.get_archive()))
           self.__last_archive = int(time.time())

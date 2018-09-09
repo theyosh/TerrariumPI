@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.8.4\n"
-"POT-Creation-Date: 2018-08-21 23:49+CEST\n"
-"PO-Revision-Date: 2018-08-21 23:49+0200\n"
+"POT-Creation-Date: 2018-09-09 13:52+CEST\n"
+"PO-Revision-Date: 2018-09-09 13:52+0200\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -16,16 +16,16 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: terrariumEngine.py:456 views/dashboard.tpl:7
+#: terrariumEngine.py:457 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
 msgid "Uptime"
 msgstr "Uptime"
 
-#: terrariumEngine.py:457
+#: terrariumEngine.py:458
 msgid "Load"
 msgstr "Load"
 
-#: terrariumEngine.py:458
+#: terrariumEngine.py:459
 msgid "CPU Temp."
 msgstr "CPU Temp."
 
@@ -504,7 +504,7 @@ msgstr "Holds a small description about the animal."
 msgid "Holds a link to more information."
 msgstr "Holds a link to more information."
 
-#: terrariumWebcam.py:279
+#: terrariumWebcam.py:282
 msgid "Offline since"
 msgstr "Offline since"
 
@@ -785,13 +785,13 @@ msgstr "Select an option"
 #: views/inc/usage_doors.tpl:70 views/inc/usage_sensors.tpl:81
 #: views/inc/usage_switches.tpl:70 views/inc/usage_webcams.tpl:66
 #: views/sensor_settings.tpl:188 views/switch_settings.tpl:200
-#: views/webcam_settings.tpl:140
+#: views/webcam_settings.tpl:142
 msgid "Close"
 msgstr "Close"
 
 #: views/audio_playlist.tpl:124 views/door_settings.tpl:95
 #: views/sensor_settings.tpl:189 views/switch_settings.tpl:201
-#: views/webcam_settings.tpl:141
+#: views/webcam_settings.tpl:143
 msgid "Add"
 msgstr "Add"
 
@@ -2890,38 +2890,46 @@ msgid "Motion"
 msgstr "Motion"
 
 #: views/webcam_settings.tpl:122
+msgid "Motion daytime"
+msgstr "Motion daytime"
+
+#: views/webcam_settings.tpl:123
+msgid "Motion nighttime"
+msgstr "Motion nighttime"
+
+#: views/webcam_settings.tpl:124
 msgid "1 minute"
 msgstr "1 minute"
 
-#: views/webcam_settings.tpl:123
+#: views/webcam_settings.tpl:125
 msgid "5 minutes"
 msgstr "5 minutes"
 
-#: views/webcam_settings.tpl:124
+#: views/webcam_settings.tpl:126
 msgid "15 minutes"
 msgstr "15 minutes"
 
-#: views/webcam_settings.tpl:125
+#: views/webcam_settings.tpl:127
 msgid "30 minutes"
 msgstr "30 minutes"
 
-#: views/webcam_settings.tpl:126
+#: views/webcam_settings.tpl:128
 msgid "1 hour"
 msgstr "1 hour"
 
-#: views/webcam_settings.tpl:127
+#: views/webcam_settings.tpl:129
 msgid "3 hours"
 msgstr "3 hours"
 
-#: views/webcam_settings.tpl:128
+#: views/webcam_settings.tpl:130
 msgid "6 hours"
 msgstr "6 hours"
 
-#: views/webcam_settings.tpl:129
+#: views/webcam_settings.tpl:131
 msgid "12 hours"
 msgstr "12 hours"
 
-#: views/webcam_settings.tpl:130
+#: views/webcam_settings.tpl:132
 msgid "1 day"
 msgstr "1 day"
 
