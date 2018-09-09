@@ -33,7 +33,7 @@ class terrariumWebcam(object):
   UPDATE_TIMEOUT = 60
   VALID_ROTATIONS = ['0','90','180','270','h','v']
 
-  def __init__(self, id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, environment = None):
+  def __init__(self, id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', environment = None):
     self.id = id
     self.type = None
     self.environment = environment
@@ -58,6 +58,7 @@ class terrariumWebcam(object):
     self.set_name(name)
     self.set_rotation(rotation)
     self.set_archive(archive)
+    self.set_archive_light(archive_light)
 
     if self.id is None:
       self.id = md5(b'' + self.get_location()).hexdigest()
@@ -126,7 +127,10 @@ class terrariumWebcam(object):
       self.raw_image.save(self.get_raw_image(),'jpeg',quality=terrariumWebcam.JPEG_QUALITY)
       logger.debug('Saved raw image %s to disk: %s' % (self.get_name(),self.get_raw_image()))
 
-      if self.get_archive() != 'disabled':
+      if self.get_archive() != 'disabled' and \
+         (self.get_archive_light() == 'ignore' or \
+          self.get_archive_light() == 'on' and self.environment is not None and self.environment.light_on() or \
+          self.get_archive_light() == 'off' and self.environment is not None and not self.environment.light_on()):
         image_path = terrariumWebcam.ARCHIVE_LOCATION + (datetime.datetime.now()).strftime("%Y/%m/%d")
         if not os.path.isdir(image_path):
           try:
@@ -136,9 +140,7 @@ class terrariumWebcam(object):
 
         image_path += '/' + self.get_id() + '_archive_' + str(int(time.time())) + '.jpg'
 
-        if (self.get_archive() == 'motion') or \
-           (self.get_archive() == 'motion-day' and self.environment is not None and self.environment.light_on()) or \
-           (self.get_archive() == 'motion-night' and self.environment is not None and not self.environment.light_on()):
+        if self.get_archive() == 'motion':
           # https://www.pyimagesearch.com/2015/05/25/basic-motion-detection-and-tracking-with-python-and-opencv/
           try:
             current_image = cv2.imread(self.get_raw_image())
@@ -175,7 +177,7 @@ class terrariumWebcam(object):
           except Exception, ex:
             print ex
 
-        elif 'motion' not in self.get_archive() and int(time.time()) - self.__last_archive >= int(self.get_archive()):
+        elif int(time.time()) - self.__last_archive >= int(self.get_archive()):
           shutil.copyfile(self.get_raw_image(),image_path)
           logger.info('Saved webcam %s image for archive due to timer interval %s seconds' % (self.get_name(),self.get_archive()))
           self.__last_archive = int(time.time())
@@ -392,6 +394,7 @@ class terrariumWebcam(object):
             'image': self.get_raw_image(),
             'preview': self.get_preview_image(),
             'archive': self.get_archive(),
+            'archivelight': self.get_archive_light(),
             'archive_images' : []
             }
 
@@ -448,6 +451,12 @@ class terrariumWebcam(object):
 
   def set_archive(self,enabled):
     self.archive = enabled
+
+  def get_archive_light(self):
+    return self.archive_state
+
+  def set_archive_light(self,state):
+    self.archive_state = state
 
   def get_state(self):
     return terrariumWebcam.ONLINE if self.state else terrariumWebcam.OFFLINE

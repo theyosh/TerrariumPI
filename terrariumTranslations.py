@@ -71,6 +71,7 @@ class terrariumTranslations(object):
     self.translations['webcam_field_rotation'] = _('Holds the webcam rotation of the image.')
     self.translations['webcam_field_preview'] = _('Shows the webcam preview image.')
     self.translations['webcam_field_archive'] = _('Enabled or disable image archiving based on motion detection.')
+    self.translations['webcam_field_archive_light'] = _('Select the environment light state when enabling archiving.')
     # End webcam
 
     # Audio
