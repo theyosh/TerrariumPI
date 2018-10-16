@@ -19,6 +19,7 @@ import smbus
 import time
 import datetime
 import thread
+import serial
 
 import Adafruit_SSD1306
 from PIL import Image
@@ -220,7 +221,6 @@ class terrariumScreen(object):
     self.address = None
     self.bus = None
     if address is not None and '' != address:
-      # Expect for now always I2C
       address = address.split(',')
       self.address = address[0]
       self.bus = 1 if len(address) == 1 else int(address[1])
@@ -359,6 +359,21 @@ class terrariumLCD(terrariumScreen):
     text = text[:int(self.resolution[0])].ljust(int(self.resolution[0]))
     self.__screen.lcd_display_string(text,linenr)
 
+class terrariumLCDSerial(terrariumScreen):
+  def set_address(self,address):
+    super(terrariumLCD,self).set_address(address)
+    self.__screen = serial.Serial(self.address, self.bus)
+
+  def clear(self):
+    self.__screen.write('00clr')
+    sleep(1)
+
+  def write_line(self,linenr,text):
+    text = text[:int(self.resolution[0])].ljust(int(self.resolution[0]))
+    self.__screen.write('0' + str(linenr) + text)
+    # Always sleep 1 sec due to slow serial: https://www.instructables.com/id/Raspberry-Pi-Arduino-LCD-Screen/
+    sleep(1)
+
 class terrariumOLED(terrariumScreen):
   def set_address(self,address):
     super(terrariumOLED,self).set_address(address)
@@ -416,7 +431,10 @@ class terrariumDisplay(object):
 
   def __new__(self,id,address,name,resolution = '16x2',title = False):
     if resolution in ['16x2','20x4']:
-      return terrariumLCD(id,address,name,resolution,title)
+      if address.startswith('/dev/'):
+        return terrariumLCDSerial(id,address,name,resolution,title)
+      else:
+        return terrariumLCD(id,address,name,resolution,title)
     elif resolution in ['128x64']:
       return terrariumOLED(id,address,name,resolution,title)
 
