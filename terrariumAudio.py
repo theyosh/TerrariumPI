@@ -135,9 +135,14 @@ class terrariumAudioPlayer(object):
   def get_sound_cards():
     soundcards = {}
     for i in alsaaudio.card_indexes():
-      if 'PCM' in alsaaudio.mixers(**{'cardindex': i}):
-        (name, longname) = alsaaudio.card_name(i)
-        soundcards[name] = {'hwid' : int(i), 'name' : longname}
+      try:
+        if 'PCM' in alsaaudio.mixers(i):
+          (name, longname) = alsaaudio.card_name(i)
+          soundcards[name] = {'hwid' : int(i), 'name' : longname}
+
+      except Exception, ex:
+        # Just ignore error, and skip it
+        pass
 
     return soundcards
 
