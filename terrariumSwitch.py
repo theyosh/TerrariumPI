@@ -12,6 +12,7 @@ import os
 import sys
 import subprocess
 import re
+import pywemo
 
 from hashlib import md5
 from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
@@ -26,7 +27,7 @@ from gevent import monkey, sleep
 monkey.patch_all()
 
 class terrariumSwitch(object):
-  VALID_HARDWARE_TYPES = ['ftdi','gpio','gpio-inverse','pwm-dimmer','remote','remote-dimmer','eg-pm-usb','eg-pm-lan','dc-dimmer']
+  VALID_HARDWARE_TYPES = ['ftdi','gpio','gpio-inverse','pwm-dimmer','remote','remote-dimmer','eg-pm-usb','eg-pm-lan','dc-dimmer','wemo']
 
   OFF = False
   ON = True
@@ -97,7 +98,10 @@ class terrariumSwitch(object):
       self.set_dimmer_off_percentage(0)
 
     if self.id is None:
-      self.id = md5(b'' + self.get_hardware_type() + self.get_address()).hexdigest()
+      if 'wemo' == self.get_hardware_type():
+        pass
+      else:
+        self.id = md5(b'' + self.get_hardware_type() + self.get_address()).hexdigest()
 
     logger.info('Loaded switch \'%s\' with values: power %.2fW and waterflow %.3fL/s' %
                 (self.get_name(),
@@ -106,6 +110,17 @@ class terrariumSwitch(object):
 
     # Force to off state!
     self.set_state(terrariumSwitch.OFF,True)
+
+  @staticmethod
+  def scan_wemo_switches(callback=None):
+    for device in pywemo.discover_devices():
+      yield terrariumSwitch(md5(b'' + 'wemo' + device.serialnumber).hexdigest(),
+                            'wemo',
+                            device.host,
+                            device.name,
+                            0,
+                            0,
+                            callback)
 
   def __load_ftdi_device(self):
     for device in Driver().list_devices():
@@ -310,6 +325,15 @@ class terrariumSwitch(object):
         # Not yet implemented
         pass
 
+      elif 'wemo' == self.get_hardware_type():
+        port = pywemo.ouimeaux_device.probe_wemo(self.get_address())
+        url = 'http://%s:%i/setup.xml' % (self.get_address(), port)
+        device = pywemo.discovery.device_from_description(url, None)
+        if state is terrariumSwitch.ON:
+          device.on()
+        else:
+          device.off()
+
       self.state = state
       if not self.__is_dimmer():
         logger.info('Toggle switch \'%s\' from %s',self.get_name(),('off to on' if self.is_on() else 'on to off'))
@@ -372,6 +396,8 @@ class terrariumSwitch(object):
     return data
 
   def update(self):
+    data = None
+
     if 'remote' in self.get_hardware_type():
       url_data = terrariumUtils.parse_url(self.get_address())
       if url_data is False:
@@ -393,15 +419,22 @@ class terrariumSwitch(object):
 
               data = data[item]
 
-            if 'remote' == self.get_hardware_type():
-              self.set_state(terrariumUtils.is_true(data))
-            elif 'remote-dimmer' == self.get_hardware_type():
-              self.set_state(int(data))
-
           else:
             logger.warning('Remote switch \'%s\' got error from remote source \'%s\':' % (self.get_name(),self.get_address(),data.status_code))
         except Exception:
           logger.exception('Remote switch \'%s\' got error from remote source \'%s\':' % (self.get_name(),self.get_address()))
+
+    elif 'wemo' == self.get_hardware_type():
+      port = pywemo.ouimeaux_device.probe_wemo(self.get_address())
+      url = 'http://%s:%i/setup.xml' % (self.get_address(), port)
+      device = pywemo.discovery.device_from_description(url, None)
+      data = device.get_state()
+
+    if data is not None:
+      if 'dimmer' in self.get_hardware_type():
+        self.set_state(int(data))
+      else:
+        self.set_state(terrariumUtils.is_true(data))
 
   def get_id(self):
     return self.id

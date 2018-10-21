@@ -215,6 +215,9 @@ class terrariumEngine(object):
       self.power_switches = {}
 
     seen_switches = []
+    for power_switch in terrariumSwitch.scan_wemo_switches(self.toggle_switch):
+      self.power_switches[power_switch.get_id()] = power_switch
+
     for switchdata in switch_config:
       if switchdata['id'] is None or switchdata['id'] == 'None' or switchdata['id'] not in self.power_switches:
         # New switch (add)
