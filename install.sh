@@ -48,7 +48,7 @@ debconf-apt-progress -- apt-get -y update
 debconf-apt-progress -- apt-get -y full-upgrade
 debconf-apt-progress -- apt-get -y install libftdi1 screen git subversion watchdog build-essential i2c-tools owfs ow-shell sqlite3 vlc-nox libasound2-dev sispmctl lshw python-imaging python-dateutil python-ow python-rpi.gpio python-psutil python-dev python-picamera python-opencv python-pip python-pigpio python-requests python-mediainfodll python-gpiozero python-smbus libffi-dev ntp libglib2.0-dev rng-tools
 
-PROGRESS=55
+PROGRESS=45
 # Update submodules if downloaded through tar or zip
 (
 cd "${BASEDIR}/"
@@ -81,20 +81,18 @@ git submodule update > /dev/null
 cd "${BASEDIR}/.."
 
 
-PIP_MODULES="gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_SSD1306 bluepy"
+PIP_MODULES="gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_SSD1306 bluepy git+https://github.com/pavoni/pywemo.git#egg=pywemo"
 for PIP_MODULE in ${PIP_MODULES}
 do
   PROGRESS=$((PROGRESS + 2))
-
   cat <<EOF
 XXX
 $PROGRESS
-Install required software (gevent will take 5-10 min.)\n\nInstalling python module ${PIP_MODULE} ...
+Install required software (some modules will take 5-10 min.)\n\nInstalling python module ${PIP_MODULE} ...
 XXX
 EOF
   pip install -q --upgrade ${PIP_MODULE}
 done
-
 
 PROGRESS=$((PROGRESS + 2))
 cat <<EOF
@@ -144,7 +142,7 @@ XXX
 EOF
 
 sleep 1
-) | whiptail --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --gauge "Install required software\n\nInstalling python module ${PIP_MODULE} ..." 0 60 0
+) | whiptail --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --gauge "Install required software\n\nInstalling python module ${PIP_MODULE} ..." 0 78 0
 
 # Basic config:
 # Enable 1Wire en I2C during boot
