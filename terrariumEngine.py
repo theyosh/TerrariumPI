@@ -221,7 +221,7 @@ class terrariumEngine(object):
     for switchdata in switch_config:
       if switchdata['id'] is None or switchdata['id'] == 'None' or switchdata['id'] not in self.power_switches:
         # New switch (add)
-        power_switch = terrariumSwitch(None,
+        power_switch = terrariumSwitch(switchdata['id'],
                                        switchdata['hardwaretype'],
                                        switchdata['address'],
                                        switchdata['name'],
