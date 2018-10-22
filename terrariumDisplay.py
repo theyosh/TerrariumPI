@@ -223,7 +223,7 @@ class terrariumScreen(object):
     if address is not None and '' != address:
       address = address.split(',')
       self.address = address[0]
-      self.bus = 1 if len(address) == 1 else int(address[1])
+      self.bus = 1 if len(address) == 1 else address[1]
 
   def get_address(self):
     data = str(self.address)
@@ -353,7 +353,7 @@ class terrariumScreen(object):
 class terrariumLCD(terrariumScreen):
   def set_address(self,address):
     super(terrariumLCD,self).set_address(address)
-    self.__screen = lcd(int('0x' + str(self.address),16),self.bus)
+    self.__screen = lcd(int('0x' + str(self.address),16),int(self.bus))
 
   def write_line(self,linenr,text):
     text = text[:int(self.resolution[0])].ljust(int(self.resolution[0]))
@@ -361,8 +361,10 @@ class terrariumLCD(terrariumScreen):
 
 class terrariumLCDSerial(terrariumScreen):
   def set_address(self,address):
-    super(terrariumLCD,self).set_address(address)
-    self.__screen = serial.Serial(self.address, self.bus)
+    super(terrariumLCDSerial,self).set_address(address)
+    if self.bus == 1:
+      self.bus = 9600
+    self.__screen = serial.Serial(self.address, int(self.bus))
 
   def clear(self):
     self.__screen.write('00clr')
@@ -377,7 +379,7 @@ class terrariumLCDSerial(terrariumScreen):
 class terrariumOLED(terrariumScreen):
   def set_address(self,address):
     super(terrariumOLED,self).set_address(address)
-    self.__screen = Adafruit_SSD1306.SSD1306_128_64(rst=None, i2c_address=int('0x' + str(self.address),16), i2c_bus=self.bus)
+    self.__screen = Adafruit_SSD1306.SSD1306_128_64(rst=None, i2c_address=int('0x' + str(self.address),16), i2c_bus=int(self.bus))
     self.init()
 
   def loading(self):
