@@ -81,7 +81,7 @@ git submodule update > /dev/null
 cd "${BASEDIR}/.."
 
 
-PIP_MODULES="gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_SSD1306 bluepy git+https://github.com/pavoni/pywemo.git#egg=pywemo"
+PIP_MODULES="gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_DHT Adafruit_SSD1306 bluepy git+https://github.com/pavoni/pywemo.git#egg=pywemo"
 for PIP_MODULE in ${PIP_MODULES}
 do
   PROGRESS=$((PROGRESS + 2))
@@ -94,40 +94,6 @@ EOF
   pip install -q --upgrade ${PIP_MODULE}
 done
 
-PROGRESS=$((PROGRESS + 2))
-cat <<EOF
-XXX
-$PROGRESS
-Install required software\n\nCloning Adafruit DHT python library ...
-XXX
-EOF
-
-if [ ! -d Adafruit_Python_DHT ]
-then
-  git clone https://github.com/adafruit/Adafruit_Python_DHT.git 2>/dev/null
-fi
-
-
-PROGRESS=$((PROGRESS + 2))
-cat <<EOF
-XXX
-$PROGRESS
-Install required software\n\nUpdating Adafruit DHT python library ...
-XXX
-EOF
-cd Adafruit_Python_DHT
-git pull 2>/dev/null
-
-
-PROGRESS=$((PROGRESS + 2))
-cat <<EOF
-XXX
-$PROGRESS
-Install required software\n\nCompiling Adafruit DHT python library ...
-XXX
-EOF
-
-python setup.py -q install 2> /dev/null
 cd "${BASEDIR}"
 chown ${SCRIPT_USER}. .
 chown ${SCRIPT_USER}. * -Rf
