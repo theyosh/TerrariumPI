@@ -103,8 +103,11 @@ class terrariumWebserver(object):
 
     self.__app.route('/<filename:re:robots\.txt>',
                      method="GET",
-                     callback=self.__static_file,
-                     apply=self.__authenticate(False))
+                     callback=self.__static_file)
+
+    self.__app.route('/<root:re:static/extern>/<filename:path>',
+                     method="GET",
+                     callback=self.__static_file)
 
     self.__app.route('/<root:re:(static|gentelella|webcam|audio|log)>/<filename:path>',
                      method="GET",
