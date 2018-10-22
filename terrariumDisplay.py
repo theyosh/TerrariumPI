@@ -367,12 +367,13 @@ class terrariumLCDSerial(terrariumScreen):
     self.__screen = serial.Serial(self.address, int(self.bus))
 
   def clear(self):
-    self.__screen.write('00clr')
+    self.__screen.write(str.encode('00clr'))
     sleep(1)
 
   def write_line(self,linenr,text):
     text = text[:int(self.resolution[0])].ljust(int(self.resolution[0]))
-    self.__screen.write('0' + str(linenr) + text)
+    data = str.encode('0' + str(linenr) + str(text))
+    self.__screen.write(data)
     # Always sleep 1 sec due to slow serial: https://www.instructables.com/id/Raspberry-Pi-Arduino-LCD-Screen/
     sleep(1)
 
