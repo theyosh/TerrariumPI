@@ -97,7 +97,7 @@ class terrariumSwitch(object):
       self.set_dimmer_off_duration(5)
       self.set_dimmer_off_percentage(0)
 
-    if self.id is None:
+    if self.id is None or '' == self.id:
       if 'wemo' == self.get_hardware_type():
         pass
       else:
@@ -327,12 +327,15 @@ class terrariumSwitch(object):
 
       elif 'wemo' == self.get_hardware_type():
         port = pywemo.ouimeaux_device.probe_wemo(self.get_address())
-        url = 'http://%s:%i/setup.xml' % (self.get_address(), port)
-        device = pywemo.discovery.device_from_description(url, None)
-        if state is terrariumSwitch.ON:
-          device.on()
+        if port is not None:
+          url = 'http://%s:%i/setup.xml' % (self.get_address(), port)
+          device = pywemo.discovery.device_from_description(url, None)
+          if state is terrariumSwitch.ON:
+            device.on()
+          else:
+            device.off()
         else:
-          device.off()
+          logger.error('Could not toggle WeMo switch \'%s\' could not connect to remote source \'%s\'' % (self.get_name(),self.get_address()))
 
       self.state = state
       if not self.__is_dimmer():
@@ -426,9 +429,12 @@ class terrariumSwitch(object):
 
     elif 'wemo' == self.get_hardware_type():
       port = pywemo.ouimeaux_device.probe_wemo(self.get_address())
-      url = 'http://%s:%i/setup.xml' % (self.get_address(), port)
-      device = pywemo.discovery.device_from_description(url, None)
-      data = device.get_state()
+      if port is not None:
+        url = 'http://%s:%i/setup.xml' % (self.get_address(), port)
+        device = pywemo.discovery.device_from_description(url, None)
+        data = device.get_state()
+      else:
+        logger.error('Remote WeMo switch \'%s\' could not connect to remote source \'%s\'' % (self.get_name(),self.get_address()))
 
     if data is not None:
       if 'dimmer' in self.get_hardware_type():
