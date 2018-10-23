@@ -14,7 +14,6 @@ import os.path
 import shutil
 import glob
 import re
-import thread
 
 from picamera import PiCamera, PiCameraError
 from io import BytesIO
@@ -37,7 +36,6 @@ class terrariumWebcam(object):
     self.id = id
     self.type = None
     self.environment = environment
-    self.__camera = None
 
     # Main config
     self.tile_size = 256 # Smaller tile sizes does not work with LeafJS
@@ -51,6 +49,7 @@ class terrariumWebcam(object):
     self.resolution = {'width': width, 'height': height}
     self.last_update = None
     self.state = None
+    self.__running = False
     self.__previous_image = None
     self.__last_archive = 0
 
@@ -208,10 +207,19 @@ class terrariumWebcam(object):
     logger.debug('Using USB device: %s' % (self.location,))
     readok = False
     stream = StringIO.StringIO()
+    camera = None
 
     try:
+      logger.debug('Open USB')
+      camera = cv2.VideoCapture(int(self.location[10:]))
+      logger.debug('Set USB height to 1280')
+      camera.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, float(self.resolution['width']))
+      logger.debug('Set USB width to 720')
+      camera.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, float(self.resolution['height']))
+      logger.debug('Wait 2 seconds for preview')
+      time.sleep(self.webcam_warm_up)
       logger.debug('Save USB to raw data')
-      readok, image = self.__camera.read()
+      readok, image = camera.read()
 
       if readok:
         logger.debug('Save USB to jpeg')
@@ -219,6 +227,10 @@ class terrariumWebcam(object):
         jpeg.save(stream,'JPEG')
         logger.debug('Done creating USB image')
 
+      logger.debug('Release USB camera')
+      camera.release()
+      logger.debug('Done release USB camera')
+      del(camera)
       self.state = readok
     except Exception:
       logger.exception('Error getting raw USB image from webcam \'%s\' with error message:' % (self.get_name(),))
@@ -362,15 +374,17 @@ class terrariumWebcam(object):
 
   def __update(self):
     starttime = time.time()
-    if self.last_update is None or (int(starttime) - self.get_last_update()) > terrariumWebcam.UPDATE_TIMEOUT:
+    if not self.__running and (self.last_update is None or (int(starttime) - self.get_last_update()) > terrariumWebcam.UPDATE_TIMEOUT):
+      self.__running = True
       logger.debug('Updating webcam \'%s\' at location %s' % (self.get_name(), self.get_location(),))
       self.__get_raw_image()
       if self.get_state() == 'online':
         self.__tile_image()
       logger.info('Done updating webcam \'%s\' at location %s in %.5f seconds' % (self.get_name(), self.get_location(),time.time()-starttime))
+      self.__running = False
 
   def update(self):
-    thread.start_new_thread(self.__update, ())
+    self.__update()
 
   def get_data(self,archive = False):
     data = {'id': self.get_id(),
@@ -413,7 +427,6 @@ class terrariumWebcam(object):
     elif location.startswith('/dev/video'):
       self.location = location
       self.type = 'usb'
-      self.__camera = cv2.VideoCapture(int(self.location[10:]))
     elif location.startswith('http://') or location.startswith('https://'):
       self.location = location
       self.type = 'online'
@@ -429,9 +442,6 @@ class terrariumWebcam(object):
       self.rotation = rotation
 
   def set_resolution(self,width,height):
-    if self.type == 'usb' and self.__camera is not None:
-      self.__camera.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, float(self.resolution['width']))
-      self.__camera.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, float(self.resolution['height']))
     self.resolution = {'width' : int(width), 'height' : int(height)}
 
   def get_resolution(self):

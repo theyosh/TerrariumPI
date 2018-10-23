@@ -131,16 +131,15 @@
                             </select>
                           </div>
                         </div>
-                          <div class="col-md-2 col-sm-2 col-xs-6 form-group">
-                            <label for="webcam_[nr]_archivelight">{{_('Archive light state')}}</label>
-                            <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('webcam_field_archive_light')}}">
-                              <select class="form-control" name="webcam_[nr]_archivelight" tabindex="-1" placeholder="{{_('Select an option')}}">
-                                <option value="">{{_('Select an option')}}</option>
-                                <option value="ignore">{{_('Ignore')}}</option>
-                                <option value="on">{{_('On')}}</option>
-                                <option value="off">{{_('Off')}}</option>
-                              </select>
-                            </div>
+                        <div class="col-md-2 col-sm-2 col-xs-6 form-group">
+                          <label for="webcam_[nr]_archivelight">{{_('Archive light state')}}</label>
+                          <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('webcam_field_archive_light')}}">
+                            <select class="form-control" name="webcam_[nr]_archivelight" tabindex="-1" placeholder="{{_('Select an option')}}">
+                              <option value="">{{_('Select an option')}}</option>
+                              <option value="ignore">{{_('Ignore')}}</option>
+                              <option value="on">{{_('On')}}</option>
+                              <option value="off">{{_('Off')}}</option>
+                            </select>
                           </div>
                         </div>
                       </div>
