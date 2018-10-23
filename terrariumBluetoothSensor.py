@@ -56,7 +56,7 @@ class terrariumMiFloraSensor(object):
       miflora_dev.disconnect()
       return True
     except Exception, ex:
-      print ex
+      logger.exception('Error checking online state sensor at address: \'%s\'. Error: %s' % (self.__address,ex))
 
     return False
 
@@ -77,7 +77,6 @@ class terrariumMiFloraSensor(object):
 
         #Read plant data
         self.__cached_data['temperature'], self.__cached_data['light'], self.__cached_data['moisture'], self.__cached_data['fertility'] = unpack('<hxIBHxxxxxx',miflora_dev.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_GET_DATA))
-#        temperature, sunlight, moisture, fertility = unpack('<hxIBHxxxxxx',miflora_dev.readCharacteristic(53))
 
         # Close connection...
         miflora_dev.disconnect()
@@ -85,7 +84,7 @@ class terrariumMiFloraSensor(object):
         self.__cached_data['last_update'] = starttime
 
       except Exception, ex:
-        print ex
+        logger.exception('Error getting new data from sensor at address: \'%s\'. Error: %s' % (self.__address,ex))
 
   def get_temperature(self):
     value = None
@@ -168,5 +167,4 @@ class terrariumMiFloraSensor(object):
           yield (address,'light')
           yield (address,'fertility')
     except Exception, ex:
-      logger.warning('Bluetooth scanning is not enabled for normal users or there zero Bluetooth LE device available.... bluetooth is disabled!')
-      print ex
+      logger.warning('Bluetooth scanning is not enabled for normal users or there are 0 Bluetooth LE device available.... bluetooth is disabled!')
