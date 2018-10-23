@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2018-07-17 21:19+CEST\n"
-"PO-Revision-Date: 2018-07-25 00:03+0200\n"
+"PO-Revision-Date: 2018-10-23 10:11+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_AT\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: Poedit 2.1\n"
+"X-Generator: Poedit 2.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: terrariumEngine.py:454 views/dashboard.tpl:7
@@ -24,7 +24,7 @@ msgstr "Betriebszeit"
 
 #: terrariumEngine.py:455
 msgid "Load"
-msgstr "Last jetzt"
+msgstr "Lade"
 
 #: terrariumEngine.py:456
 msgid "CPU Temp."
@@ -106,8 +106,8 @@ msgstr "Maximaler Wert des Sensors, der in der Grafik verwendet werden soll."
 #: terrariumTranslations.py:34
 msgid "Shows the sensor current value in temperature or humidity (read only)."
 msgstr ""
-"Zeigt den aktuellen Wert des Sensors in Temperatur oder Feuchtigkeit an (nur "
-"lesbar)."
+"Zeigt den aktuellen Wert des Sensors in Temperatur oder Luftfeuchtigkeit an "
+"(nur lesbar)."
 
 #: terrariumTranslations.py:35
 msgid "Holds the sensor lowest moisture value measured in dry air. %s"
@@ -591,11 +591,13 @@ msgstr "Benutzername der Änderungen vornehmen kann (Admin)."
 msgid ""
 "Enter the new password for the administration user. Leaving empty will not "
 "change the password!"
-msgstr "Geben Sie das neue Passwort für den Administrationsbenutzer ein!"
+msgstr ""
+"Geben Sie das neue Passwort für den Administrationsbenutzer ein. Keine "
+"Eingabe ändert das Passwort nicht!"
 
 #: terrariumTranslations.py:138
 msgid "Enter the current password in order to change the password."
-msgstr "Geben Sie das aktuelle Passwort ein, um das Passwort zu ändern"
+msgstr "Geben Sie das aktuelle Passwort ein, um das Passwort zu ändern."
 
 #: terrariumTranslations.py:139
 msgid ""
@@ -668,31 +670,31 @@ msgstr ""
 
 #: terrariumTranslations.py:153
 msgid "Holds the name of the animal."
-msgstr "Namen"
+msgstr "Namen des Tieres."
 
 #: terrariumTranslations.py:154
 msgid "Holds the type of the animal"
-msgstr "Art"
+msgstr "Art des Tieres."
 
 #: terrariumTranslations.py:155
 msgid "Holds the gender of the animal."
-msgstr "Geschlecht"
+msgstr "Geschlecht des Tieres."
 
 #: terrariumTranslations.py:156
 msgid "Holds the day of birth of the animal."
-msgstr "Tag der Geburt"
+msgstr "Tag der Geburt des Tieres."
 
 #: terrariumTranslations.py:157
 msgid "Holds the species name of the animal."
-msgstr "Artennamen"
+msgstr "Artennamen des Tieres."
 
 #: terrariumTranslations.py:158
 msgid "Holds the latin name of the animal."
-msgstr "lateinischer Namen"
+msgstr "lateinischer Namen des Tieres."
 
 #: terrariumTranslations.py:159
 msgid "Holds a small description about the animal."
-msgstr "Beschreibung"
+msgstr "Eine kurze Beschreibung des Tieres."
 
 #: terrariumTranslations.py:160
 msgid "Holds a link to more information."
@@ -1191,7 +1193,7 @@ msgstr "Tag / Nacht-Unterschied"
 #: views/inc/usage_dashboard.tpl:158 views/inc/usage_sensors.tpl:132
 #: views/sensor_settings.tpl:127 views/system_environment.tpl:370
 msgid "Humidity"
-msgstr "Feuchtigkeit"
+msgstr "Luftfeuchtigkeit"
 
 #: views/dashboard.tpl:224 views/inc/menu.tpl:47 views/sensor_settings.tpl:128
 #: views/system_environment.tpl:581
@@ -1722,7 +1724,7 @@ msgstr "Temperatursensor"
 #: views/inc/sensor_list.tpl:12 views/inc/usage_sensors.tpl:67
 #: views/sensor_settings.tpl:75
 msgid "Humidity sensor"
-msgstr "Feuchtigkeitssensor"
+msgstr "Luftfeuchtigkeitssensor"
 
 #: views/inc/sensor_list.tpl:13 views/sensor_settings.tpl:76
 msgid "Moisture sensor"
@@ -2260,7 +2262,7 @@ msgstr "Sprühdauer (Sekunden)"
 
 #: views/inc/usage_environment.tpl:165 views/inc/usage_environment.tpl:196
 msgid "Humidity sensors"
-msgstr "Feuchtigkeitssensoren"
+msgstr "Luftfeuchtigkeitssensoren"
 
 #: views/inc/usage_environment.tpl:202
 msgid ""
@@ -2397,10 +2399,10 @@ msgid ""
 "value gets more to the minimum or maximum value, it will gets more red/"
 "orange."
 msgstr ""
-"Die Messkurve zeigt den aktuellen Temperatur oder Feuchtigkeitswert an. Die "
-"Farbe der Grafik hängt vom aktuellen Wert und den Alarmwerten ab. Wenn der "
-"Wert näher auf den minimalen oder maximalen Wert kommt, wird die Farbe rot / "
-"orange."
+"Die Messkurve zeigt die aktuelle Temperatur oder Luftfeuchtigkeitswerte an. "
+"Die Farbe der Grafik hängt vom aktuellen Wert und den Alarmwerten ab. Wenn "
+"der Wert näher auf den minimalen oder maximalen Wert kommt, wird die Farbe "
+"rot / orange."
 
 #: views/inc/usage_sensors.tpl:93
 msgid ""
@@ -2938,7 +2940,7 @@ msgstr "Verbrauchergeheimnis"
 
 #: views/notifications.tpl:122
 msgid "Access token"
-msgstr "Verbraucherschlüssel"
+msgstr "Zugriffs-Schlüssel"
 
 #: views/notifications.tpl:126
 msgid "Access token secret"
@@ -3006,7 +3008,7 @@ msgstr "Alter"
 
 #: views/profile.tpl:88
 msgid "Species"
-msgstr "Spezielles"
+msgstr "Spezies"
 
 #: views/profile.tpl:95
 msgid "Latin name"
@@ -3201,7 +3203,7 @@ msgstr "Timer aus"
 #: views/system_environment.tpl:620 views/system_environment.tpl:831
 #: views/system_environment.tpl:1042
 msgid "Day/night source"
-msgstr "Tag / Nachtquelle"
+msgstr "Tag / Nacht Quelle"
 
 #: views/system_environment.tpl:238 views/system_environment.tpl:314
 #: views/system_environment.tpl:449 views/system_environment.tpl:525
@@ -3262,7 +3264,7 @@ msgstr "Offen"
 #: views/system_environment.tpl:888 views/system_environment.tpl:964
 #: views/system_environment.tpl:1099 views/system_environment.tpl:1175
 msgid "Closed"
-msgstr "Abgeschlossen"
+msgstr "Geschlossen"
 
 #: views/system_environment.tpl:262 views/system_environment.tpl:338
 #: views/system_environment.tpl:473 views/system_environment.tpl:549
@@ -3336,7 +3338,7 @@ msgstr "Zoll"
 
 #: views/system_settings.tpl:95
 msgid "Admin name"
-msgstr "Benutzername"
+msgstr "Administratorenname"
 
 #: views/system_settings.tpl:101
 msgid "New admin password"
@@ -3621,7 +3623,7 @@ msgstr "Freier Speicher"
 
 #: Missing text string
 msgid "Free space"
-msgstr "Freier speicher"
+msgstr "Freier Festplattenspeicher"
 
 #: Missing text string
 msgid "Github"
@@ -3661,11 +3663,11 @@ msgstr "Ungültiger Dateityp"
 
 #: Missing text string
 msgid "Load 15"
-msgstr "Last 15 min"
+msgstr "Lade 15 min"
 
 #: Missing text string
 msgid "Load 5"
-msgstr "Last 5 min"
+msgstr "Lade 5 min"
 
 #: Missing text string
 msgid "No error messages"
@@ -3770,7 +3772,7 @@ msgstr "Gesamt offen für"
 
 #: Missing text string
 msgid "Total space"
-msgstr "Gesamtspeicher"
+msgstr "Gesamtfestplattenspeicher"
 
 #: Missing text string
 msgid "Universal AC MAINS Dimmer - MPDMv4.1"
@@ -3794,7 +3796,7 @@ msgstr "Verwendeter Speicher"
 
 #: Missing text string
 msgid "Used space"
-msgstr "Belegter Speicherplatz"
+msgstr "Belegter Festplattenspeicherplatz"
 
 #: Missing text string
 msgid "Value difference during the night"
