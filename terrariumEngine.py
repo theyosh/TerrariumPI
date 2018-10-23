@@ -138,6 +138,7 @@ class terrariumEngine(object):
     # Start system update loop
     self.__running = True
     thread.start_new_thread(self.__engine_loop, ())
+    thread.start_new_thread(self.__webcam_loop, ())
     thread.start_new_thread(self.__log_tail, ())
     logger.info('TerrariumPI engine is running')
 
@@ -404,6 +405,35 @@ class terrariumEngine(object):
 
     return totals
 
+  def __webcam_loop(self):
+    time_short = 0
+    error_counter = 0
+    logger.info('Start terrariumPI webcams')
+    while self.__running:
+      starttime = time.time()
+      for webcamid in self.webcams:
+        self.webcams[webcamid].update()
+        sleep(0.1)
+
+      duration = (time.time() - starttime) + time_short
+      if duration < terrariumEngine.LOOP_TIMEOUT:
+        if error_counter > 0:
+          error_counter -= 1
+        logger.info('Webcam update(s) done in %.5f seconds. Waiting for %.5f seconds for next update' % (duration,terrariumEngine.LOOP_TIMEOUT - duration))
+        time_short = 0
+        sleep(terrariumEngine.LOOP_TIMEOUT - duration) # TODO: Config setting
+      else:
+        error_counter += 1
+        if error_counter > 9:
+          logger.error('Webcam update(s) is having problems keeping up. Could not update in 30 seconds for %s times!' % error_counter)
+
+        logger.warning('Webcam update(s) took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEngine.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
+        time_short = duration - terrariumEngine.LOOP_TIMEOUT
+        if time_short > 12:
+          # More then 12 seconds to late.... probably never fast enough...
+          time_short = 0
+
+
   def __engine_loop(self):
     time_short = 0
     error_counter = 0
@@ -458,10 +488,6 @@ class terrariumEngine(object):
         system_data = self.get_system_stats()
         self.collector.log_system_data(system_data)
         self.get_system_stats(socket=True)
-
-        for webcamid in self.webcams:
-          self.webcams[webcamid].update()
-          sleep(0.1)
 
       except Exception, err:
         print err
