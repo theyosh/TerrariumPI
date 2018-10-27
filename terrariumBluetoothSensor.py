@@ -56,7 +56,7 @@ class terrariumMiFloraSensor(object):
       miflora_dev.disconnect()
       return True
     except Exception, ex:
-      logger.exception('Error checking online state sensor at address: \'%s\'. Error: %s' % (self.__address,ex))
+      logger.error('Error checking online state sensor at address: \'%s\'. Error: %s' % (self.__address,ex))
 
     return False
 
@@ -84,7 +84,7 @@ class terrariumMiFloraSensor(object):
         self.__cached_data['last_update'] = starttime
 
       except Exception, ex:
-        logger.exception('Error getting new data from sensor at address: \'%s\'. Error: %s' % (self.__address,ex))
+        logger.error('Error getting new data from sensor at address: \'%s\'. Error: %s' % (self.__address,ex))
 
   def get_temperature(self):
     value = None
