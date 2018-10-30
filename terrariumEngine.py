@@ -212,12 +212,12 @@ class terrariumEngine(object):
     logger.info('%s terrariumPI switches' % ('Reloading' if reloading else 'Loading',))
 
     switch_config = (self.config.get_power_switches() if not reloading else data)
+    seen_switches = []
+
     if not reloading:
       self.power_switches = {}
-
-    seen_switches = []
-    for power_switch in terrariumSwitch.scan_wemo_switches(self.toggle_switch):
-      self.power_switches[power_switch.get_id()] = power_switch
+      for power_switch in terrariumSwitch.scan_wemo_switches(self.toggle_switch):
+        self.power_switches[power_switch.get_id()] = power_switch
 
     for switchdata in switch_config:
       if switchdata['id'] is None or switchdata['id'] == 'None' or switchdata['id'] not in self.power_switches:
@@ -228,7 +228,8 @@ class terrariumEngine(object):
                                        switchdata['name'],
                                        switchdata['power_wattage'],
                                        switchdata['water_flow'],
-                                       callback=self.toggle_switch)
+                                       callback=self.toggle_switch,
+                                       poweroff=not reloading)
         self.power_switches[power_switch.get_id()] = power_switch
       else:
         # Existing switch
@@ -239,6 +240,8 @@ class terrariumEngine(object):
         power_switch.set_name(switchdata['name'])
         power_switch.set_power_wattage(switchdata['power_wattage'])
         power_switch.set_water_flow(switchdata['water_flow'])
+        if not reloading:
+          power_switch.off()
 
       if 'dimmer_duration' in switchdata and switchdata['dimmer_duration'] is not None:
         power_switch.set_dimmer_duration(switchdata['dimmer_duration'])
