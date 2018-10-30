@@ -56,7 +56,7 @@ class terrariumSwitch(object):
     "all":"FF"
   }
 
-  def __init__(self, id, hardware_type, address, name = '', power_wattage = 0.0, water_flow = 0.0, callback = None):
+  def __init__(self, id, hardware_type, address, name = '', power_wattage = 0.0, water_flow = 0.0, callback = None, poweroff = False):
     self.id = id
     self.state = None
     self.callback = callback
@@ -109,7 +109,8 @@ class terrariumSwitch(object):
                  self.get_water_flow()))
 
     # Force to off state!
-    self.set_state(terrariumSwitch.OFF,True)
+    if poweroff:
+      self.set_state(terrariumSwitch.OFF,True)
 
   @staticmethod
   def scan_wemo_switches(callback=None):
