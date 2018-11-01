@@ -16,6 +16,7 @@ import pywemo
 
 from hashlib import md5
 from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
+from gpiozero import Energenie
 from terrariumUtils import terrariumUtils
 
 # Dirty hack to include someone his code... to lazy to make it myself :)
@@ -27,7 +28,7 @@ from gevent import monkey, sleep
 monkey.patch_all()
 
 class terrariumSwitch(object):
-  VALID_HARDWARE_TYPES = ['ftdi','gpio','gpio-inverse','pwm-dimmer','remote','remote-dimmer','eg-pm-usb','eg-pm-lan','dc-dimmer','wemo']
+  VALID_HARDWARE_TYPES = ['ftdi','gpio','gpio-inverse','pwm-dimmer','remote','remote-dimmer','eg-pm-usb','eg-pm-lan','eg-pm-rf','dc-dimmer','wemo']
 
   OFF = False
   ON = True
@@ -242,6 +243,8 @@ class terrariumSwitch(object):
       GPIO.cleanup(int(self.get_address()))
     elif self.get_hardware_type() == 'eg-pm-lan':
       self.device.logout()
+    elif self.get_hardware_type() == 'eg-pm-rf':
+      self.device.close()
 
     logger.info('Shutdown power switch %s' % self.get_name())
 
@@ -276,6 +279,13 @@ class terrariumSwitch(object):
 
         logger.debug('Change remote Energenie USB power switch nr %s, on device nr %s, to state %s' % (address,self.device,state))
         subprocess.call(['/usr/bin/sispmctl', '-d',str(self.device),('-o' if state is terrariumSwitch.ON else '-f'),str(address)],stdout=open(os.devnull, 'w'), stderr=subprocess.STDOUT)
+
+      elif self.get_hardware_type() == 'eg-pm-rf':
+        logger.debug('Change remote Energenie RF power switch nr %s, to state %s' % (self.get_address(),state))
+        if state:
+          self.device.on()
+        else:
+          self.device.off()
 
       elif self.get_hardware_type() == 'eg-pm-lan':
         if self.device is None:
@@ -458,10 +468,13 @@ class terrariumSwitch(object):
 
   def set_address(self,address):
     self.sensor_address = address
-    if 'eg-pm-usb' in self.get_hardware_type():
+    if 'eg-pm-usb' == self.get_hardware_type():
       self.device = (int(self.sensor_address)-1) / 4
 
-    elif 'eg-pm-lan' in self.get_hardware_type():
+    elif 'eg-pm-rf' == self.get_hardware_type():
+      self.device = Energenie(int(self.sensor_address))
+
+    elif 'eg-pm-lan' == self.get_hardware_type():
       # Input format should be either:
       # - http://[HOST]#[POWER_SWITCH_NR]
       # - http://[HOST]/#[POWER_SWITCH_NR]
