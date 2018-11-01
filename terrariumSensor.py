@@ -15,7 +15,7 @@ from terrariumUtils import terrariumUtils, terrariumSingleton
 from terrariumAnalogSensor import terrariumSKUSEN0161Sensor
 from terrariumBluetoothSensor import terrariumMiFloraSensor
 from terrariumGPIOSensor import terrariumYTXXSensorDigital, terrariumDHT11Sensor, terrariumDHT22Sensor, terrariumAM2302Sensor, terrariumHCSR04Sensor
-from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor
+from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor, terrariumSHT3XSensor
 
 class terrariumSensorCache(object):
   __metaclass__ = terrariumSingleton
@@ -218,6 +218,7 @@ class terrariumSensor(object):
   VALID_HARDWARE_TYPES.append(terrariumBME280Sensor.hardwaretype)
   VALID_HARDWARE_TYPES.append(terrariumChirpSensor.hardwaretype)
   VALID_HARDWARE_TYPES.append(terrariumVEML6075Sensor.hardwaretype)
+  VALID_HARDWARE_TYPES.append(terrariumSHT3XSensor.hardwaretype)
 
   # Append YTXX sensor(s) to the list of valid sensors
   VALID_HARDWARE_TYPES.append(terrariumYTXXSensorDigital.hardwaretype)
@@ -230,6 +231,8 @@ class terrariumSensor(object):
 
   # Appand analog sensor(s) to the list of valid sensors
   VALID_HARDWARE_TYPES.append(terrariumMiFloraSensor.hardwaretype)
+
+
 
   def __init__(self, id, hardware_type, sensor_type, sensor, name = '', callback_indicator = None):
     self.__sensor_cache = terrariumSensorCache()
@@ -343,6 +346,8 @@ class terrariumSensor(object):
             hardwaresensor = terrariumBME280Sensor(address[0],address[1])
           elif terrariumVEML6075Sensor.hardwaretype == self.get_hardware_type():
             hardwaresensor = terrariumVEML6075Sensor(address[0],address[1])
+          elif terrariumSHT3XSensor.hardwaretype == self.get_hardware_type():
+            hardwaresensor = terrariumSHT3XSensor(address[0],address[1])
 
           elif terrariumChirpSensor.hardwaretype == self.get_hardware_type():
             hardwaresensor = terrariumChirpSensor(address[0],address[1],self.get_min_moist_calibration(),

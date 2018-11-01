@@ -81,7 +81,7 @@ git submodule update > /dev/null
 cd "${BASEDIR}/.."
 
 
-PIP_MODULES="gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_DHT Adafruit_SSD1306 bluepy pywemo"
+PIP_MODULES="gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_DHT Adafruit_SSD1306 Adafruit_SHT31 bluepy pywemo"
 for PIP_MODULE in ${PIP_MODULES}
 do
   PROGRESS=$((PROGRESS + 2))
