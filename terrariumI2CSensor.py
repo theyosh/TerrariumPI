@@ -6,6 +6,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 import smbus
 import sys
 import time
+import Adafruit_SHT31
 
 from terrariumUtils import terrariumUtils
 
@@ -616,4 +617,64 @@ class terrariumChirpSensor(object):
       value = float(self.__cached_data['light'])
 
     logger.debug('Got data from brightness sensor type \'%s\' with address %s: brightness: %s' % (self.__class__.__name__,self.__address,value))
+    return value
+
+class terrariumSHT3XSensor(object):
+  __CACHE_TIMEOUT = 29
+
+  hardwaretype = 'sht3x'
+  # Datasheet: https://cdn-shop.adafruit.com/product-files/2857/Sensirion_Humidity_SHT3x_Datasheet_digital-767294.pdf
+
+  def __init__(self, address = 44, device_number = 1):
+    self.__cached_data = {'temperature' : None,
+                          'humidity'    : None,
+                          'last_update' : 0}
+
+    self.__address = int('0x' + str(address),16)
+    self.__device_number = 1 if device_number is None else int(device_number)
+
+    logger.debug('Initializing sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
+
+  def __enter__(self):
+    """used to enable python's with statement support"""
+    self.__bus = SHT31(self.__address)
+    return self
+
+  def __exit__(self, type, value, traceback):
+    """with support"""
+    self.close()
+
+  def close(self):
+    """Closes the i2c connection"""
+    logger.debug('Close sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
+    self.__bus = None
+
+  def __get_raw_data(self,force_update = False):
+    if self.__address is None:
+      return
+
+    starttime = int(time.time())
+    if force_update or starttime - self.__cached_data['last_update'] > terrariumSHT3XSensor.__CACHE_TIMEOUT:
+      self.__cached_data['temperature'] = float(self.__bus.read_temperature())
+      self.__cached_data['humidity'] = float(self.__bus.read_humidity())
+      self.__cached_data['last_update'] = starttime
+
+  def get_temperature(self):
+    value = None
+    logger.debug('Read temperature value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
+    self.__get_raw_data()
+    if terrariumUtils.is_float(self.__cached_data['temperature']):
+      value = float(self.__cached_data['temperature'])
+
+    logger.debug('Got data from temperature sensor type \'%s\' with address %s: temperature: %s' % (self.__class__.__name__,self.__address,value))
+    return value
+
+  def get_humidity(self):
+    value = None
+    logger.debug('Read humidity value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
+    self.__get_raw_data()
+    if terrariumUtils.is_float(self.__cached_data['humidity']):
+      value = float(self.__cached_data['humidity'])
+
+    logger.debug('Got data from humidity sensor type \'%s\' with address %s: humidity: %s' % (self.__class__.__name__,self.__address,value))
     return value

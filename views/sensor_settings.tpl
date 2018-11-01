@@ -102,6 +102,7 @@
                                 <option value="dht22">{{_('DHT22')}}</option>
                                 <option value="am2302">{{_('AM2302')}}</option>
                                 <option value="sht2x">{{_('SHT2X')}}</option>
+                                <option value="sht3x">{{_('SHT3X')}}</option>
                                 <option value="htu21d">{{_('HTU21D')}}</option>
                                 <option value="si7021">{{_('SI7021')}}</option>
                                 <option value="bme280">{{_('BME280 / BMP280')}}</option>
