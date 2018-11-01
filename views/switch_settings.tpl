@@ -116,6 +116,7 @@
                                 <option value="remote-dimmer">{{_('Remote Dimmer')}}</option>
                                 <option value="eg-pm-usb">{{_('Energenie USB')}}</option>
                                 <option value="eg-pm-lan">{{_('Energenie LAN')}}</option>
+                                <option value="eg-pm-rf">{{_('Energenie Pi-Mote')}}</option>
                                 <option value="wemo">{{_('WeMo')}}</option>
                               </select>
                             </div>
