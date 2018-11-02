@@ -637,7 +637,7 @@ class terrariumSHT3XSensor(object):
 
   def __enter__(self):
     """used to enable python's with statement support"""
-    self.__bus = SHT31(self.__address)
+    self.__bus = Adafruit_SHT31.SHT31(self.__address)
     return self
 
   def __exit__(self, type, value, traceback):
