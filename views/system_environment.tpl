@@ -996,8 +996,6 @@
               </div>
             </div>
           </div>
-
-
           <div class="row" id="environment_ph">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -1888,7 +1886,7 @@
             $.get('/api/sensors',function(data){
               $.each(data.sensors,function (index,sensor){
                 $('select[name="' + sensor.type + '_sensors"]').append($('<option>').attr({'value':sensor.id}).text(sensor.name));
-                if ('distance' == sensor.type) {
+                if ('distance' == sensor.type || 'volume' == sensor.type) {
                   $('select[name="watertank_sensors"]').append($('<option>').attr({'value':sensor.id}).text(sensor.name));
                 }
               });

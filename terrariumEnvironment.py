@@ -488,16 +488,48 @@ class terrariumEnvironmentFertility(terrariumEnvironmentPart):
   env_type = 'fertility'
 
   def get_type(self):
-    return terrariumEnvironmentMoisture.env_type
+    return terrariumEnvironmentFertility.env_type
 
 class terrariumEnvironmentCO2(terrariumEnvironmentPart):
 
   env_type = 'co2'
 
   def get_type(self):
-    return terrariumEnvironmentMoisture.env_type
+    return terrariumEnvironmentCO2.env_type
 
-class terrariumEnvironmentWatertank(terrariumEnvironmentDistance):
+class terrariumEnvironmentVolume(terrariumEnvironmentPart):
+
+  env_type = 'volume'
+
+  def get_type(self):
+    return terrariumEnvironmentVolume.env_type
+
+# Factory class
+class terrariumEnvironmentWatertank(object):
+
+  env_type = 'watertank'
+
+  def __new__(self,mode,sensors,day_night_difference,day_night_source,tank_type):
+    if 'distance' == tank_type:
+      return terrariumEnvironmentWatertankDistance(mode,sensors,day_night_difference,day_night_source)
+    elif 'volume' == tank_type:
+      return terrariumEnvironmentWatertankVolume(mode,sensors,day_night_difference,day_night_source)
+
+    raise Exception()
+
+class terrariumEnvironmentWatertankVolume(terrariumEnvironmentVolume):
+
+  env_type = 'watertank'
+
+  def get_type(self):
+    return terrariumEnvironmentWatertank.env_type
+
+  def set_volume(self,volume,height,offset):
+    self.config['volume'] = float(volume)
+    self.config['height'] = float(height)
+    self.config['offset'] = float(offset)
+
+class terrariumEnvironmentWatertankDistance(terrariumEnvironmentDistance):
 
   env_type = 'watertank'
 
@@ -511,7 +543,7 @@ class terrariumEnvironmentWatertank(terrariumEnvironmentDistance):
 
   # Overrule the sensor data here...
   def update_average_data(self,sensorlist):
-    super(terrariumEnvironmentWatertank, self).update_average_data(sensorlist)
+    super(terrariumEnvironmentWatertankDistance, self).update_average_data(sensorlist)
 
     # The current value is the distance between sensor and water surface
     # To get the amount of volume:
@@ -541,9 +573,9 @@ class terrariumEnvironment(object):
   VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentConductivity.env_type)
   VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentDistance.env_type)
   VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentWatertank.env_type)
-
   VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentFertility.env_type)
   VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentCO2.env_type)
+  VALID_ENVIRONMENT_TYPES.append(terrariumEnvironmentVolume.env_type)
 
   def __init__(self, sensors, powerswitches, weather, door_status, config, notification):
     logger.debug('Init terrariumPI environment')
@@ -670,12 +702,22 @@ class terrariumEnvironment(object):
                                                 0.0        if 'day_night_difference' not in env_conf else env_conf['day_night_difference'],
                                                 'weather'  if 'day_night_source' not in env_conf else env_conf['day_night_source'])
 
-      elif env_part == terrariumEnvironmentWatertank.env_type:
-        self.__environment_parts[env_part] = terrariumEnvironmentWatertank(
+      elif env_part == terrariumEnvironmentVolume.env_type:
+        self.__environment_parts[env_part] = terrariumEnvironmentVolume(
                                                 'disabled' if 'mode' not in env_conf else env_conf['mode'],
                                                 []         if ('sensors' not in env_conf or env_conf['sensors'] in ['',None]) else env_conf['sensors'],
                                                 0.0        if 'day_night_difference' not in env_conf else env_conf['day_night_difference'],
                                                 'weather'  if 'day_night_source' not in env_conf else env_conf['day_night_source'])
+
+      elif env_part == terrariumEnvironmentWatertank.env_type:
+        all_sensors = [] if ('sensors' not in env_conf or env_conf['sensors'] in ['',None]) else (env_conf['sensors'] if isinstance(env_conf['sensors'], list) else env_conf['sensors'].split(','))
+        tank_type = 'distance' if all([self.sensors[sensor].get_type() == 'distance' for sensor in all_sensors]) else 'volume'
+        self.__environment_parts[env_part] = terrariumEnvironmentWatertank(
+                                                'disabled' if 'mode' not in env_conf else env_conf['mode'],
+                                                []         if ('sensors' not in env_conf or env_conf['sensors'] in ['',None]) else env_conf['sensors'],
+                                                0.0        if 'day_night_difference' not in env_conf else env_conf['day_night_difference'],
+                                                'weather'  if 'day_night_source' not in env_conf else env_conf['day_night_source'],
+                                                tank_type)
 
         self.__environment_parts[env_part].set_volume(10.0 if 'volume'   not in env_conf else env_conf['volume'],
                                                       20.0 if 'height'   not in env_conf else env_conf['height'],

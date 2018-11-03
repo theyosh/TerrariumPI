@@ -138,6 +138,7 @@
                                 <option value="uvb">{{_('UVB')}}</option>
                                 <option value="fertility">{{_('Fertility')}}</option>
                                 <option value="co2">{{_('CO2')}}</option>
+                                <option value="volume">{{_('Volume')}}</option>
                               </select>
                             </div>
                           </div>

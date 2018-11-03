@@ -51,7 +51,8 @@ class terrariumEngine(object):
                     'uva'         : 'uW/cm^2',
                     'uvb'         : 'uW/cm^2',
                     'fertility'   : 'uS/cm',
-                    'co2'         : 'ppm'}
+                    'co2'         : 'ppm',
+                    'volume'      : 'L'}
 
     # List of queues for websocket communication
     self.subscribed_queues = []
