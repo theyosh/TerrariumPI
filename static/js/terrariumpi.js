@@ -1186,6 +1186,10 @@ function history_graph(name, data, type) {
             val = formatNumber(val) + ' ppm';
             break
 
+          case 'volume':
+            val = formatNumber(val) + ' L';
+            break
+
           case 'uva':
           case 'uvb':
             val = formatNumber(val) + 'µW/cm^2';
@@ -1251,6 +1255,7 @@ function history_graph(name, data, type) {
     case 'uvb':
     case 'fertility':
     case 'co2':
+    case 'volume':
       graph_data = [{
         label: '{{_('Current')}}',
         data: data.current
@@ -1701,6 +1706,10 @@ function update_dashboard_environment(name, data) {
     case 'co2':
       enabledColor = 'green';
       indicator = 'ppm';
+      break;
+    case 'volume':
+      enabledColor = 'blue';
+      indicator = 'L';
       break;
   }
 

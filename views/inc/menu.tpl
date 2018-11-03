@@ -65,6 +65,9 @@
                       <a href="sensor_co2.html">{{_('CO2')}}</a>
                     </li>
                     <li>
+                      <a href="sensor_volume.html">{{_('Volume')}}</a>
+                    </li>
+                    <li>
                       <a href="sensor_settings.html">{{_('Settings')}}</a>
                     </li>
                   </ul>

@@ -90,6 +90,9 @@ class terrariumRemoteSensor(object):
   def get_co2(self):
     return self.get_current()
 
+  def get_volume(self):
+    return self.get_current()
+
 class terrarium1WSensor(object):
   hardwaretype = 'w1'
 
@@ -194,7 +197,7 @@ class terrariumSensor(object):
   UPDATE_TIMEOUT = 30
   ERROR_TIMEOUT = 10
 
-  VALID_SENSOR_TYPES   = ['temperature','humidity','moisture','conductivity','distance','ph','light','uva','uvb','fertility','co2']
+  VALID_SENSOR_TYPES   = ['temperature','humidity','moisture','conductivity','distance','ph','light','uva','uvb','fertility','co2','volume']
   VALID_HARDWARE_TYPES = []
 
   # Append OWFS to the list of valid sensors
@@ -403,6 +406,8 @@ class terrariumSensor(object):
               current = sensor.get_fertility()
             elif 'co2' == self.get_type():
               current = sensor.get_co2()
+            elif 'volume' == self.get_type():
+              current = sensor.get_volume()
 
           del hardwaresensor
 
