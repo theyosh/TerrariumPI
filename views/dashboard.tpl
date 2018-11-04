@@ -1153,6 +1153,7 @@
             $('div#dashboard div.pull-left div.x_panel').hide();
 
             $.get('/api/sensors/average',function(json_data) {
+              var active_sensor_types = ['settings'];
               $.each(json_data.sensors,function(index,sensor_data){
                 if ($('div#' + sensor_data.type + ':hidden')) {
                   $('div#' + sensor_data.type).show();
@@ -1160,6 +1161,18 @@
                   var sensortype = sensor_data.type.replace('average_','');
                   sensor_gauge(sensor_data.type, sensor_data);
                   load_history_graph(sensor_data.type,sensortype,'/api/history/sensors/average/' + sensortype);
+                  if (sensortype == 'uva' || sensortype == 'uvb') {
+                    sensortype = 'light';
+                  }
+                  active_sensor_types.push(sensortype);
+                }
+              });
+
+              var regex = /\/sensor_(.*)\.html/gm;
+              $('div#sidebar-menu li a[href^="sensor_"]').each(function(index,data){
+                var sensor_type = regex.exec(this.href);
+                if (sensor_type.length >= 2 && active_sensor_types.indexOf(sensor_type[1]) === -1) {
+                  $(this).hide();
                 }
               });
               reload_reload_theme();
@@ -1167,7 +1180,6 @@
             websocket_message({
               'type': 'show_dashboard'
             });
-
           });
         </script>
 % include('inc/page_footer.tpl')
