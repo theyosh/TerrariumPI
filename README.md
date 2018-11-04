@@ -47,6 +47,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Light intensity
   - UV A and B
   - Fertility
+  - Volume
 - Support for webcams and native Raspberry Pi cam out of the box
 - Support for analog devices through a MCP3008
   - Support for PH probe SKU SEN0161
