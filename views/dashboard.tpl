@@ -1168,11 +1168,13 @@
                 }
               });
 
-              var regex = /\/sensor_(.*)\.html/gm;
+              const regex = /\/sensor_([^\.]+)\.html/;
+              var sensor_type;
               $('div#sidebar-menu li a[href^="sensor_"]').each(function(index,data){
-                var sensor_type = regex.exec(this.href);
-                if (sensor_type.length >= 2 && active_sensor_types.indexOf(sensor_type[1]) === -1) {
-                  $(this).hide();
+                if ((sensor_type = regex.exec(this.href)) !== null) {
+                  if (active_sensor_types.indexOf(sensor_type[1]) === -1) {
+                    $(this).hide();
+                  }
                 }
               });
               reload_reload_theme();
