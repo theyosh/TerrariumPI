@@ -119,7 +119,7 @@ class terrariumUtils():
     if '' == url:
       return False
 
-    regex = ur"^((?P<scheme>https?|ftp):\/)?\/?((?P<username>.*?)(:(?P<password>.*?)|)@)?(?P<hostname>[^:\/\s]+)(:(?P<port>(\d*))?)?(?P<path>(\/\w+)*\/)(?P<filename>[-\w.]+[^#?\s]*)?(?P<query>\?([^#]*))?(#(?P<fragment>(.*))?)?$"
+    regex = r"^((?P<scheme>https?|ftp):\/)?\/?((?P<username>.*?)(:(?P<password>.*?)|)@)?(?P<hostname>[^:\/\s]+)(:(?P<port>(\d*))?)?(?P<path>(\/\w+)*\/)(?P<filename>[-\w.]+[^#?\s]*)?(?P<query>\?([^#]*))?(#(?P<fragment>(.*))?)?$"
     matches = re.search(regex, url)
     if matches:
       return matches.groupdict()
@@ -133,7 +133,7 @@ class terrariumUtils():
       try:
         value = value.split(':')
         time = "{:0>2}:{:0>2}".format(int(value[0])%24,int(value[1])%60)
-      except Exception, ex:
+      except Exception as ex:
         logger.exception('Error parsing time value %s. Exception %s' % (value, ex))
 
     return time
@@ -144,7 +144,10 @@ class terrariumUtils():
     try:
       url_data = terrariumUtils.parse_url(url)
       proxies = {'http' : proxy, 'https' : proxy}
-      response = requests.get(url,auth=(url_data['username'],url_data['password']),timeout=timeout,proxies=proxies)
+      if url_data['username'] is None:
+        response = requests.get(url,timeout=timeout,proxies=proxies)
+      else:
+        response = requests.get(url,auth=(url_data['username'],url_data['password']),timeout=timeout,proxies=proxies)
 
       if response.status_code == 200:
         if 'application/json' in response.headers['content-type']:
@@ -154,17 +157,19 @@ class terrariumUtils():
             # Dirty hack to process array data....
             try:
               item = int(item)
-            except Exception, ex:
+            except Exception as ex:
               item = str(item)
 
             data = data[item]
-        else:
+        elif 'text' in response.headers['content-type']:
           data = response.text
+        else:
+          data = response.content
 
       else:
         data = None
 
-    except Exception, ex:
+    except Exception as ex:
       logger.exception('Error parsing remote data at url %s. Exception %s' % (url, ex))
 
     return data
@@ -238,8 +243,8 @@ class terrariumUtils():
   # https://stackoverflow.com/a/19647596
   def flatten_dict(dd, separator='_', prefix=''):
     return { prefix + separator + k if prefix else k : v
-             for kk, vv in dd.items()
-             for k, v in terrariumUtils.flatten_dict(vv, separator, kk).items()
+             for kk, vv in list(dd.items())
+             for k, v in list(terrariumUtils.flatten_dict(vv, separator, kk).items())
              } if isinstance(dd, dict) else { prefix : dd if not isinstance(dd,list) else ','.join(dd)}
 
   @staticmethod
@@ -252,3 +257,10 @@ class terrariumSingleton(type):
     if cls not in cls._instances:
       cls._instances[cls] = super(terrariumSingleton, cls).__call__(*args, **kwargs)
     return cls._instances[cls]
+
+class terrariumSingletonNew(object):
+  _instance = None
+  def __new__(cls, *args, **kwargs):
+    if not cls._instance:
+      cls._instance = object.__new__(cls, *args, **kwargs)
+    return cls._instance

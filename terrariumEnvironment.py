@@ -2,7 +2,7 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-import thread
+import _thread
 import datetime
 import time
 
@@ -182,7 +182,7 @@ class terrariumEnvironmentPart(object):
       self.config['alarm_max']['timer_start'] = self.config['alarm_min']['timer_stop'] if self.get_type() == 'light' else self.config['alarm_min']['timer_start']
       self.config['alarm_max']['timer_stop'] = self.config['alarm_min']['timer_start'] if self.get_type() == 'light' else self.config['alarm_min']['timer_stop']
 
-    if not self.in_sensor_mode() and len(self.config['alarm_min'].keys()) > 0:
+    if not self.in_sensor_mode() and len(list(self.config['alarm_min'].keys())) > 0:
       self.timer_min_data['time_table'] = terrariumUtils.calculate_time_table(self.config['alarm_min']['timer_start'],
                                                                               self.config['alarm_min']['timer_stop'],
                                                                               self.config['alarm_min']['timer_on'],
@@ -190,7 +190,7 @@ class terrariumEnvironmentPart(object):
 
       self.timer_min_data['duration'] = terrariumUtils.duration(self.timer_min_data['time_table'])
 
-    if not self.in_sensor_mode() and len(self.config['alarm_max'].keys()) > 0:
+    if not self.in_sensor_mode() and len(list(self.config['alarm_max'].keys())) > 0:
       self.timer_max_data['time_table'] = terrariumUtils.calculate_time_table(self.config['alarm_max']['timer_start'],
                                                                               self.config['alarm_max']['timer_stop'],
                                                                               self.config['alarm_max']['timer_on'],
@@ -596,7 +596,7 @@ class terrariumEnvironment(object):
     self.weather = weather
 
     self.load_environment()
-    thread.start_new_thread(self.__engine_loop, ())
+    _thread.start_new_thread(self.__engine_loop, ())
 
   def __engine_loop(self):
     logger.info('Starting engine')
@@ -753,7 +753,7 @@ class terrariumEnvironment(object):
   def update(self, trigger = True):
     starttime = time.time()
     # Make sure that the light environment part is run first in order to determen 'day' or 'night' state
-    environment_parts = self.__environment_parts.keys()
+    environment_parts = list(self.__environment_parts.keys())
     environment_parts.remove('light')
     environment_parts = ['light'] + environment_parts
 

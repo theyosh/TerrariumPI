@@ -18,7 +18,7 @@ Made available under GNU GENERAL PUBLIC LICENSE
 import smbus
 import time
 import datetime
-import thread
+import _thread
 import serial
 
 import Adafruit_SSD1306
@@ -26,7 +26,7 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
-from terrariumUtils import terrariumUtils,terrariumSingleton
+from terrariumUtils import terrariumUtils
 
 from gevent import monkey, sleep
 monkey.patch_all()
@@ -209,10 +209,10 @@ class terrariumScreen(object):
     pass
 
   def get_max_chars(self):
-    return int(self.resolution[0]) / self.font_size
+    return int(float(self.resolution[0]) / float(self.font_size))
 
   def get_max_lines(self):
-    return int(self.resolution[1]) / self.font_size
+    return int(float(self.resolution[1]) / float(self.font_size))
 
   def get_id(self):
     return self.id
@@ -269,7 +269,7 @@ class terrariumScreen(object):
     if self.animating:
       return
 
-    if isinstance(messages,basestring):
+    if isinstance(messages,str):
       if len(messages) > 2 * self.get_max_chars():
         # Split long messages on a 'dot', creating multiple lines
         messages = messages.split('. ')
@@ -291,7 +291,7 @@ class terrariumScreen(object):
         if '' != submessage.strip():
           self.messages.append(submessage.strip())
 
-    thread.start_new_thread(self.display_messages, ())
+    _thread.start_new_thread(self.display_messages, ())
 
   def display_messages(self):
     if self.animating:
@@ -308,7 +308,7 @@ class terrariumScreen(object):
     starttime = time.time()
     empty_lines = []
     if max_lines > 0 and len(self.messages) > 0:
-      empty_lines = [''] * ((max_lines - (len(self.messages) % max_lines)) - (0 if not self.get_title() else len(self.messages) / max_lines))
+      empty_lines = [''] * int((max_lines - (len(self.messages) % max_lines)) - (0 if not self.get_title() else len(self.messages) / max_lines))
 
     for message in self.messages + empty_lines:
       self.write_line((line_counter % max_lines)+1,message)
@@ -340,11 +340,11 @@ class terrariumScreen(object):
     max_chars = self.get_max_chars()
 
     for line in lines:
-      for counter in xrange(1,len(line['message'])-max_chars):
+      for counter in range(1,len(line['message'])-max_chars):
         self.write_line(line['linenr'],line['message'][counter:max_chars+counter])
         sleep(terrariumScreen.__MAX_SHOW_CHAR_TIMEOUT)
 
-      for counter in xrange(len(line['message'])-max_chars,0,-1):
+      for counter in range(len(line['message'])-max_chars,0,-1):
         self.write_line(line['linenr'],line['message'][counter:max_chars+counter])
         sleep(terrariumScreen.__MAX_SHOW_CHAR_TIMEOUT)
 

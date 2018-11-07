@@ -55,7 +55,7 @@ class terrariumMiFloraSensor(object):
       self.__cached_data['battery'], self.__cached_data['firmware'] = unpack('<xB5s',miflora_dev.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_FIRMWARE_AND_BATTERY))
       miflora_dev.disconnect()
       return True
-    except Exception, ex:
+    except Exception as ex:
       logger.error('Error checking online state sensor at address: \'%s\'. Error: %s' % (self.__address,ex))
 
     return False
@@ -73,7 +73,7 @@ class terrariumMiFloraSensor(object):
         self.__cached_data['battery'], self.__cached_data['firmware'] = unpack('<xB5s',miflora_dev.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_FIRMWARE_AND_BATTERY))
 
         #Enable real-time data reading
-        miflora_dev.writeCharacteristic(terrariumMiFloraSensor.__MIFLORA_REALTIME_DATA_TRIGGER, str(bytearray([0xa0, 0x1f])), True)
+        miflora_dev.writeCharacteristic(terrariumMiFloraSensor.__MIFLORA_REALTIME_DATA_TRIGGER, bytearray([0xa0, 0x1f]), True)
 
         #Read plant data
         self.__cached_data['temperature'], self.__cached_data['light'], self.__cached_data['moisture'], self.__cached_data['fertility'] = unpack('<hxIBHxxxxxx',miflora_dev.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_GET_DATA))
@@ -83,7 +83,8 @@ class terrariumMiFloraSensor(object):
 
         self.__cached_data['last_update'] = starttime
 
-      except Exception, ex:
+      except Exception as ex:
+        print(ex)
         logger.error('Error getting new data from sensor at address: \'%s\'. Error: %s' % (self.__address,ex))
 
   def get_temperature(self):
@@ -131,7 +132,7 @@ class terrariumMiFloraSensor(object):
     logger.debug('Read firmware value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
     self.__get_raw_data()
     if self.__cached_data['firmware'] is not None:
-      value = self.__cached_data['firmware']
+      value = self.__cached_data['firmware'].decode()
 
     logger.debug('Got data from firmware sensor type \'%s\' with address %s: fertility: %s' % (self.__class__.__name__,self.__address,value))
     return value
@@ -166,5 +167,6 @@ class terrariumMiFloraSensor(object):
           yield (address,'moisture')
           yield (address,'light')
           yield (address,'fertility')
-    except Exception, ex:
+    except Exception as ex:
+      print(ex)
       logger.warning('Bluetooth scanning is not enabled for normal users or there are 0 Bluetooth LE device available.... bluetooth is disabled!')

@@ -3,15 +3,11 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 import time
-import StringIO
 import cv2
 import math
 import datetime
-import urllib2
-import base64
 import os
 import os.path
-import shutil
 import glob
 import re
 
@@ -61,7 +57,7 @@ class terrariumWebcam(object):
     self.set_archive_light(archive_light)
 
     if self.id is None:
-      self.id = md5(b'' + self.get_location()).hexdigest()
+      self.id = md5(self.get_location().encode()).hexdigest()
     else:
       self.id = id
 
@@ -135,8 +131,8 @@ class terrariumWebcam(object):
         if not os.path.isdir(image_path):
           try:
             os.makedirs(image_path)
-          except Exception, ex:
-            print ex
+          except Exception as ex:
+            print(ex)
 
         image_path += '/' + self.get_id() + '_archive_' + str(int(time.time())) + '.jpg'
 
@@ -174,11 +170,11 @@ class terrariumWebcam(object):
               cv2.imwrite(image_path,raw_image)
               logger.info('Saved webcam %s image for archive due to motion detection' % (self.get_name(),))
 
-          except Exception, ex:
-            print ex
+          except Exception as ex:
+            print(ex)
 
         elif int(time.time()) - self.__last_archive >= int(self.get_archive()):
-          shutil.copyfile(self.get_raw_image(),image_path)
+          copyfile(self.get_raw_image(),image_path)
           logger.info('Saved webcam %s image for archive due to timer interval %s seconds' % (self.get_name(),self.get_archive()))
           self.__last_archive = int(time.time())
 
@@ -206,16 +202,16 @@ class terrariumWebcam(object):
   def __get_raw_image_usb(self):
     logger.debug('Using USB device: %s' % (self.location,))
     readok = False
-    stream = StringIO.StringIO()
+    stream = BytesIO()
     camera = None
 
     try:
       logger.debug('Open USB')
       camera = cv2.VideoCapture(int(self.location[10:]))
       logger.debug('Set USB height to 1280')
-      camera.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, float(self.resolution['width']))
+      camera.set(cv2.CAP_PROP_FRAME_WIDTH, float(self.resolution['width']))
       logger.debug('Set USB width to 720')
-      camera.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, float(self.resolution['height']))
+      camera.set(cv2.CAP_PROP_FRAME_HEIGHT, float(self.resolution['height']))
       logger.debug('Wait 2 seconds for preview')
       time.sleep(self.webcam_warm_up)
       logger.debug('Save USB to raw data')
@@ -240,20 +236,9 @@ class terrariumWebcam(object):
 
   def __get_raw_image_url(self,stream):
     logger.debug('Using URL: %s' % (self.location,))
-    stream = StringIO.StringIO()
+    stream = BytesIO()
     try:
-      if '@' in self.location:
-        start = self.location.find('://') + 3
-        end = self.location.find('@', start)
-        auth = self.location[start:end]
-        webcamurl = urllib2.Request(self.location.replace(auth+'@',''))
-        auth = auth.split(':')
-        base64string = base64.encodestring('%s:%s' % (auth[0], auth[1])).replace('\n', '')
-        webcamurl.add_header("Authorization", "Basic %s" % base64string)
-      else:
-        webcamurl = urllib2.Request(self.location)
-
-      stream = StringIO.StringIO(urllib2.urlopen(webcamurl,None,15).read())
+      stream = BytesIO(terrariumUtils.get_remote_data(self.location))
       self.state = True
     except Exception:
       logger.exception('Error getting raw online image from webcam \'%s\' with error message:' % (self.get_name(),))
@@ -344,8 +329,8 @@ class terrariumWebcam(object):
 
       # Loop over the canvas to create the tiles
       logger.debug('Creating the lose tiles with dimensions %sx%s' % (canvas_width, canvas_height,))
-      for row in xrange(0,int(math.ceil(canvas_height/self.tile_size))):
-        for column in xrange(0,int(math.ceil(canvas_width/self.tile_size))):
+      for row in range(0,int(math.ceil(canvas_height/self.tile_size))):
+        for column in range(0,int(math.ceil(canvas_width/self.tile_size))):
           crop_size = ( int(row*self.tile_size), int(column*self.tile_size) ,int((row+1)*self.tile_size), int((column+1)*self.tile_size))
           logger.debug('Cropping image from position %s' % (crop_size,))
           tile = canvas.crop(crop_size)
