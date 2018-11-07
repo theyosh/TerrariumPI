@@ -2,7 +2,11 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-import ConfigParser
+try:
+  import configparser
+except ImportError as ex:
+  import ConfigParser as configparser
+
 from glob import glob
 import datetime
 
@@ -27,7 +31,7 @@ class terrariumConfig(object):
     logger.info('Setting up configuration')
     self.__cache_available_languages = None
 
-    self.__config = ConfigParser.SafeConfigParser()
+    self.__config = configparser.ConfigParser()
     # Read defaults config file
     self.__config.readfp(open(terrariumConfig.DEFAULT_CONFIG))
     logger.info('Loaded default settings from %s' % (terrariumConfig.DEFAULT_CONFIG,))
@@ -53,7 +57,7 @@ class terrariumConfig(object):
       logger.info('Configuration is up to date')
     else:
       logger.info('Configuration is out of date. Running updates from %s to %s' % (current_version,new_version))
-      for version in xrange(current_version+1,new_version+1):
+      for version in range(current_version+1,new_version+1):
         if version == 300:
           logger.info('Updating configuration file to version: %s' % (version,))
           # Upgrade: Move temperature indicator from weather to system
@@ -376,7 +380,7 @@ class terrariumConfig(object):
 
   def __save_config(self):
     '''Write terrariumPI config to settings.cfg file'''
-    with open(terrariumConfig.CUSTOM_CONFIG, 'wb') as configfile:
+    with open(terrariumConfig.CUSTOM_CONFIG, 'w') as configfile:
       self.__config.write(configfile)
 
     return True
@@ -391,7 +395,7 @@ class terrariumConfig(object):
     if not self.__config.has_section(section):
       self.__config.add_section(section)
 
-    keys = data.keys()
+    keys = list(data.keys())
     keys.sort()
     for setting in keys:
       if setting in exclude:
@@ -400,10 +404,10 @@ class terrariumConfig(object):
       if type(data[setting]) is list:
         data[setting] = ','.join(data[setting])
 
-      if isinstance(data[setting], basestring):
+      if isinstance(data[setting], str):
         try:
-          data[setting] = data[setting].encode('utf-8')
-        except Exception, ex:
+          data[setting] = data[setting].encode('utf-8').decode()
+        except Exception as ex:
           'Not sure what to do... but it seams already utf-8...??'
           pass
 
@@ -535,7 +539,7 @@ class terrariumConfig(object):
 
     '''
     config = {}
-    for key, value in terrariumUtils.flatten_dict(data).iteritems():
+    for key, value in terrariumUtils.flatten_dict(data).items():
       config[key] = value
 
     self.__config.remove_section('environment')
@@ -543,7 +547,7 @@ class terrariumConfig(object):
 
   def get_environment(self):
     config = {}
-    for key, value in self.__get_config('environment').iteritems():
+    for key, value in self.__get_config('environment').items():
       config_keys = key.split('_')
       part = config_keys[0]
       del(config_keys[0])

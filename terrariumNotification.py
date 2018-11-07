@@ -1,21 +1,30 @@
 # -*- coding: utf-8 -*-
 import re
 import datetime
-import ConfigParser
 import RPi.GPIO as GPIO
 import time
 import os
 import os.path
-import thread
+import _thread
 import json
-import requests
-import urllib
+#import requests
+import urllib.parse
+
+try:
+  import configparser
+except ImportError as ex:
+  import ConfigParser as configparser
 
 # Email support
 import smtplib
-from email.MIMEMultipart import MIMEMultipart
-from email.MIMEText import MIMEText
-from email.MIMEImage import MIMEImage
+#Python2
+#from email.MIMEMultipart import MIMEMultipart
+#from email.MIMEText import MIMEText
+#from email.MIMEImage import MIMEImage
+#Python3
+from email.message import EmailMessage
+from email.headerregistry import Address
+from email.utils import make_msgid
 
 # Twitter support
 import twitter
@@ -125,7 +134,7 @@ class terrariumNotificationTelegramBot(object):
   def send_message(self,text, chat_id = None):
     if self.__running:
       chat_ids = self.__chat_ids if chat_id is None else [int(chat_id)]
-      text = urllib.quote_plus(text)
+      text = urllib.parse.quote_plus(text)
       for chat_id in chat_ids:
         url = self.__bot_url + 'sendMessage?text={}&chat_id={}'.format(text, chat_id)
         terrariumUtils.get_remote_data(url,proxy=self.__proxy)
@@ -140,11 +149,11 @@ class terrariumNotificationTelegramBot(object):
 
   def start(self):
     if not self.__running:
-      thread.start_new_thread(self.__run, ())
+      _thread.start_new_thread(self.__run, ())
 
   def stop(self):
     self.__running = False
-    print '%s - INFO    - terrariumNotificatio - Stopping TelegramBot. This can take up to %s seconds...' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],(terrariumNotificationTelegramBot.__POLL_TIMEOUT - (int(time.time()) - self.__last_update_check)))
+    print('%s - INFO    - terrariumNotificatio - Stopping TelegramBot. This can take up to %s seconds...' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],(terrariumNotificationTelegramBot.__POLL_TIMEOUT - (int(time.time()) - self.__last_update_check))))
 
   def __run(self):
     self.__running = True
@@ -162,21 +171,19 @@ class terrariumNotificationTelegramBot(object):
 
         elif 'description' in updates:
           error_counter += 1
-          print '%s - ERROR  - terrariumNotificatio - TelegramBot has issues: %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],updates['description'])
+          print('%s - ERROR  - terrariumNotificatio - TelegramBot has issues: %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],updates['description']))
           sleep(5)
 
         sleep(0.5)
-      except Exception, ex:
+      except Exception as ex:
         error_counter += 1
-        print ex
+        print(ex)
         sleep(5)
 
     self.__running = False
-    print '%s - INFO    - terrariumNotificatio - TelegramBot is stopped' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],)
+    print('%s - INFO    - terrariumNotificatio - TelegramBot is stopped' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],))
 
-class terrariumNotification(object):
-  __metaclass__ = terrariumSingleton
-
+class terrariumNotification(object, metaclass=terrariumSingleton):
   __MAX_MESSAGES_TOTAL_PER_MINUTE = 5
   __MAX_MESSAGES_PER_MINUTE = 2
 
@@ -273,7 +280,7 @@ class terrariumNotification(object):
     return total
 
   def __load_config(self):
-    self.__data = ConfigParser.SafeConfigParser()
+    self.__data = configparser.ConfigParser()
     self.__data.read('notifications.cfg')
 
     if self.__data.has_section('email'):
@@ -355,7 +362,7 @@ class terrariumNotification(object):
     if not self.__data.has_section(section):
       self.__data.add_section(section)
 
-    keys = data.keys()
+    keys = list(data.keys())
     keys.sort()
     for setting in keys:
       if setting in exclude:
@@ -364,14 +371,14 @@ class terrariumNotification(object):
       if type(data[setting]) is list:
         data[setting] = ','.join(data[setting])
 
-      if isinstance(data[setting], basestring):
+      if isinstance(data[setting], str):
         try:
-          data[setting] = data[setting].encode('utf-8').replace('%','%%')
-        except Exception, ex:
+          data[setting] = data[setting].encode('utf-8').decode()
+        except Exception as ex:
           # 'Not sure what to do... but it seams already utf-8...??'
           pass
 
-      self.__data.set(section, str(setting), str(data[setting]))
+      self.__data.set(section, str(setting), str(data[setting].replace('%','%%')))
 
   def stop(self):
     if self.telegram is not None:
@@ -437,17 +444,17 @@ class terrariumNotification(object):
     mailserver = None
     try:
       mailserver = smtplib.SMTP(self.email['server'],self.email['serverport'],timeout=15)
-    except Exception, ex:
-      print ex
+    except Exception as ex:
+      print(ex)
       try:
         mailserver = smtplib.SMTP_SSL(self.email['server'],self.email['serverport'],timeout=15)
-      except Exception, ex:
-        print ex
-        print '%s - ERROR  - terrariumNotificatio - Mailserver is not reachable!' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23])
+      except Exception as ex:
+        print(ex)
+        print('%s - ERROR  - terrariumNotificatio - Mailserver is not reachable!' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23]))
         return
 
     if mailserver is None:
-      print '%s - ERROR  - terrariumNotificatio - Mailserver is not reachable!' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23])
+      print('%s - ERROR  - terrariumNotificatio - Mailserver is not reachable!' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23]))
       return
 
     mailserver.ehlo()
@@ -460,58 +467,50 @@ class terrariumNotification(object):
     if self.email['username'] is not None and self.email['password'] is not None and '' != self.email['username'] and '' != self.email['password']:
       try:
         mailserver.login(self.email['username'], self.email['password'])
-      except Exception, ex:
-        print ex
-        print '%s - ERROR  - terrariumNotificatio - Mailserver login credentials are invalid. Cannot sent mail!' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23])
+      except Exception as ex:
+        print(ex)
+        print('%s - ERROR  - terrariumNotificatio - Mailserver login credentials are invalid. Cannot sent mail!' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23]))
         return
 
     htmlbody = '<html><head><title>%s</title></head><body>%s%s</body></html>'
     htmlimage = ''
     textimage = ''
-    msgImage = None
+    profile_image = None
 
     if self.__profile_image is not None:
       try:
-        with open(self.__profile_image, 'rb') as fp:
-          filename, file_extension = os.path.splitext(self.__profile_image)
-          msgImage = MIMEImage(fp.read(), filename=os.path.basename(self.__profile_image),_subtype=file_extension.replace('.',''))
-          msgImage.add_header('Content-ID', 'profileimage')
-          msgImage.add_header('Content-Disposition', 'inline', filename=os.path.basename(self.__profile_image))
+        with open(self.__profile_image, 'rb') as imagefile:
+          profile_image = imagefile.read()
+          htmlimage = '<img src="cid:{profileimage}" alt="Profile image" title="Profile image" align="right" style="max-width:300px;border-radius:25%;">'
+          textimage = '[cid:{profileimage}]\n'
 
-          htmlimage = '<img src="cid:profileimage" alt="Profile image" title="Profile image" align="right" style="max-width:300px;border-radius:25%;">'
-          textimage = '[cid:profileimage]\n'
-      except Exception, ex:
-        print '%s - ERROR  - terrariumNotificatio - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex)
+      except Exception as ex:
+        print('%s - ERROR  - terrariumNotificatio - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
         # No images unfortunally...
 
     for receiver in self.email['receiver']:
+      profile_image_cid = make_msgid()
 
-      emailMessage = MIMEMultipart('mixed')
-      emailMessageRelated = MIMEMultipart('related')
-      emailMessageAlternative = MIMEMultipart('alternative')
+      emailmessage = EmailMessage()
+      emailmessage['Subject'] = subject.decode()
+      emailmessage['From'] = receiver
+      emailmessage['To'] = re.sub(r'(.*)@(.*)', '\\1+terrariumpi@\\2', receiver, 0, re.MULTILINE)
 
-      emailMessage['From'] = receiver
-      emailMessage['To'] = re.sub(r'(.*)@(.*)', '\\1+terrariumpi@\\2', receiver, 0, re.MULTILINE)
-      emailMessage['Subject'] = subject
+      textmessage = (textimage + message.decode()).format(profileimage=profile_image_cid[1:-1])
+      htmlmessage = (htmlbody % (subject.decode(),htmlimage,message.decode().replace('\n','<br />'))).format(profileimage=profile_image_cid[1:-1])
 
-      emailMessageAlternative.attach(MIMEText(textimage.encode('utf8') + message, 'plain'))
-      emailMessageAlternative.attach(MIMEText(htmlbody.encode('utf8') % (subject,htmlimage,message.replace('\n','<br />')), 'html'))
-
-      emailMessageRelated.attach(emailMessageAlternative)
-
-      if msgImage is not None:
-        emailMessageRelated.attach(msgImage)
-
-      emailMessage.attach(emailMessageRelated)
+      emailmessage.set_content(textmessage, subtype='text')
+      emailmessage.add_alternative( htmlmessage, subtype='html')
+      emailmessage.get_payload()[1].add_related(profile_image, 'image', 'jpeg', cid=profile_image_cid)
 
       try:
-        mailserver.sendmail(receiver,re.sub(r'(.*)@(.*)', '\\1+terrariumpi@\\2', receiver, 0, re.MULTILINE),emailMessage.as_string())
-      except Exception, ex:
-        print ex
+        mailserver.send_message(emailmessage)
+      except Exception as ex:
+        print(ex)
 
     try:
       mailserver.quit()
-    except Exception, ex:
+    except Exception as ex:
       pass
 
   def set_twitter(self,consumer_key,consumer_secret,access_token,access_token_secret):
@@ -532,8 +531,8 @@ class terrariumNotification(object):
         if api.VerifyCredentials() is not None:
           status = api.UpdateImage(self.__profile_image)
 
-      except Exception, ex:
-        print ex
+      except Exception as ex:
+        print(ex)
 
   def send_tweet(self,message):
     if self.twitter is None:
@@ -548,8 +547,8 @@ class terrariumNotification(object):
       if api.VerifyCredentials() is not None:
         status = api.PostUpdates(message)
         # [Status(ID=1003393079041314816, ScreenName=MadagascarGecko, Created=Sun Jun 03 21:48:46 +0000 2018, Text=u'Environment watertank sensors are not up to date. Check your sensors on the sensor page. So force the power down to be sure!')]
-    except Exception, ex:
-      print ex
+    except Exception as ex:
+      print(ex)
 
   def set_pushover(self,api_token,user_key):
     if '' != api_token and '' != user_key:
@@ -564,8 +563,8 @@ class terrariumNotification(object):
       client = pushover.Client(self.pushover['user_key'], api_token=self.pushover['api_token'])
       if client.verify():
         status = client.send_message(message, title=subject)
-    except Exception, ex:
-      print ex
+    except Exception as ex:
+      print(ex)
 
   def set_telegram(self,bot_token,userid,proxy):
     if '' != bot_token and '' != userid:
@@ -611,13 +610,13 @@ class terrariumNotification(object):
       self.__ratelimit_messages[title][now] = 0
 
     if self.__ratelimit_messages[title][now] > terrariumNotification.__MAX_MESSAGES_PER_MINUTE:
-      print '%s - WARNING - terrariumNotificatio - Max messages per minute %s reached for \'%s\'' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],
-                                                                                                 terrariumNotification.__MAX_MESSAGES_PER_MINUTE, title)
+      print('%s - WARNING - terrariumNotificatio - Max messages per minute %s reached for \'%s\'' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],
+                                                                                                 terrariumNotification.__MAX_MESSAGES_PER_MINUTE, title))
       return
 
     if self.__ratelimit() > terrariumNotification.__MAX_MESSAGES_TOTAL_PER_MINUTE:
-      print '%s - WARNING - terrariumNotificatio - Max total messages per minute %s reached' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],
-                                                                                                terrariumNotification.__MAX_MESSAGES_TOTAL_PER_MINUTE)
+      print('%s - WARNING - terrariumNotificatio - Max total messages per minute %s reached' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],
+                                                                                                terrariumNotification.__MAX_MESSAGES_TOTAL_PER_MINUTE))
       return
 
     self.__ratelimit_messages[title][now] += 1
@@ -668,8 +667,8 @@ class terrariumNotification(object):
                                       'resolution' : data['display_resolution'],
                                       'title'      : data['display_title']})
 
-    except Exception, ex:
-      print ex
+    except Exception as ex:
+      print(ex)
 
     for message_id in data:
       message_id = message_id[:-8]
@@ -685,7 +684,7 @@ class terrariumNotification(object):
                                                      'message'  : data[message_id + '_message'],
                                                      'services' : data[message_id + '_services']})
 
-    with open('notifications.cfg', 'wb') as configfile:
+    with open('notifications.cfg', 'w') as configfile:
       self.__data.write(configfile)
 
     self.__load_config()

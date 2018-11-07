@@ -63,7 +63,7 @@ class terrariumI2CSensor(object):
     data1 = self.__bus.read_byte(self.__address)
     try:
       data2 = self.__bus.read_byte(self.__address)
-    except Exception, ex:
+    except Exception as ex:
       data2 = data1
       logger.exception('Error getting second part of data in bytes from sensor \'%s\' at device %s with address %s with error: %s',(self.__class__.__name__,self.__device_number,self.__address,ex))
 
@@ -229,7 +229,7 @@ class terrariumBME280Sensor(object):
     try:
       dig_H1 = self.__bus.read_byte_data(self.__address, 0xA1)#Comment this and this work on BMP280.
       self.__has_humidity = True
-    except Exception, ex:
+    except Exception as ex:
       self.__has_humidity = False
 
     #Datasheet table 16, table 18.
@@ -501,8 +501,8 @@ class terrariumVEML6075Sensor(object):
         self.__cached_data['uvb'] = value_uvb if value_uvb > 0.0 else 0.0
         self.__cached_data['last_update'] = starttime
 
-      except Exception, ex:
-        print ex
+      except Exception as ex:
+        print(ex)
 
   def get_uva(self):
     value = None

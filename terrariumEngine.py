@@ -9,7 +9,7 @@ logger.debug('Setting terrariumPI GPIO Mode to %s' % (GPIO.BCM,))
 GPIO.setmode(GPIO.BCM)
 logger.debug('Done setting terrariumPI GPIO Mode to %s' % (GPIO.BCM,))
 
-import thread
+import _thread
 import time
 import datetime
 import uptime
@@ -138,9 +138,9 @@ class terrariumEngine(object):
 
     # Start system update loop
     self.__running = True
-    thread.start_new_thread(self.__engine_loop, ())
-    thread.start_new_thread(self.__webcam_loop, ())
-    thread.start_new_thread(self.__log_tail, ())
+    _thread.start_new_thread(self.__engine_loop, ())
+    _thread.start_new_thread(self.__webcam_loop, ())
+    _thread.start_new_thread(self.__log_tail, ())
     logger.info('TerrariumPI engine is running')
 
   # Private/internal functions
@@ -493,8 +493,8 @@ class terrariumEngine(object):
         self.collector.log_system_data(system_data)
         self.get_system_stats(socket=True)
 
-      except Exception, err:
-        print err
+      except Exception as err:
+        print(err)
 
       display_message = ['%s %s' % (_('Uptime'),terrariumUtils.format_uptime(system_data['uptime']),),
                          '%s %s %s %s' % (_('Load'),system_data['load']['load1'],system_data['load']['load5'],system_data['load']['load15']),
@@ -885,7 +885,7 @@ class terrariumEngine(object):
     return self.get_profile_config()['image']
 
   def set_profile(self,data,files):
-    if 'profile_image' in files.keys():
+    if 'profile_image' in files:
       profile_image = files.get('profile_image')
       name, ext = os.path.splitext(profile_image.filename)
       if ext not in ('.png','.jpg','.jpeg'):

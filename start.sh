@@ -6,6 +6,7 @@ SCREEN_NAME="TerrariumPI"
 RESTART_TIME=10
 MAX_RESTARTS=5
 RESTART_TIMEOUT=45
+PYTHON=3
 # End settings
 
 # Main program
@@ -51,7 +52,11 @@ then
 
     # Start terrarium software
     message "Starting TerrariumPI server at location: http://${IP}:8090 ..."
-    python ${BASEDIR}/terrariumPI.py
+    if [ $PYTHON -eq 2 ]; then
+      python ${BASEDIR}/terrariumPI.py
+    elif [ $PYTHON -eq 3 ]; then
+      python3 ${BASEDIR}/terrariumPI.py
+    fi
 
     # Check after run if there is an update. If so, show message and exit
     if update_software ; then

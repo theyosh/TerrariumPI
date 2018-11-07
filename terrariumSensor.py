@@ -7,7 +7,10 @@ import time
 import os.path
 import glob
 import re
-import ow
+
+
+#import ow
+from pyownet import protocol
 
 from hashlib import md5
 
@@ -17,9 +20,7 @@ from terrariumBluetoothSensor import terrariumMiFloraSensor
 from terrariumGPIOSensor import terrariumYTXXSensorDigital, terrariumDHT11Sensor, terrariumDHT22Sensor, terrariumAM2302Sensor, terrariumHCSR04Sensor
 from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor, terrariumSHT3XSensor
 
-class terrariumSensorCache(object):
-  __metaclass__ = terrariumSingleton
-
+class terrariumSensorCache(object, metaclass=terrariumSingleton):
   def __init__(self):
     self.__cache = {}
 
@@ -180,18 +181,42 @@ class terrariumOWFSSensor(object):
   def scan(port):
     if port > 0:
       try:
-        ow.init(str(port));
-        sensorsList = ow.Sensor('/').sensorList()
-        for sensor in sensorsList:
-          if 'temperature' in sensor.entryList():
+        proxy = protocol.proxy('localhost', port)
+
+
+
+        #ow.init(str(port));
+        #sensorsList = ow.Sensor('/').sensorList()
+
+        for sensor in proxy.dir(slash=False, bus=False):
+          stype = proxy.read(sensor + '/type').decode()
+          try:
+            temp = float(proxy.read(sensor + '/temperature'))
             yield(sensor,'temperature')
 
-          if 'humidity' in sensor.entryList():
+            #temp = "{0:.2f}".format(temp)
+          except protocol.OwnetError:
+            pass
+
+          try:
+            humidity = float(proxy.read(sensor + '/humidity'))
             yield(sensor,'humidity')
 
-      except ow.exNoController:
+            #temp = "{0:.2f}".format(temp)
+          except protocol.OwnetError:
+            pass
+
+
+        #for sensor in sensorsList:
+        #  if 'temperature' in sensor.entryList():
+        #    yield(sensor,'temperature')
+
+        #  if 'humidity' in sensor.entryList():
+        #    yield(sensor,'humidity')
+
+      except Exception as ex:
         logger.debug('OWFS file system is not actve / installed on this device!')
-        pass
+        print(ex)
 
 class terrariumSensor(object):
   UPDATE_TIMEOUT = 30
@@ -271,7 +296,7 @@ class terrariumSensor(object):
       self.set_temperature_offset_calibration(0)
 
     if self.id is None:
-      self.id = md5(b'' + self.get_address().replace('-','').upper() + self.get_type()).hexdigest()
+      self.id = md5((self.get_address().replace('-','').upper() + self.get_type()).encode()).hexdigest()
 
     self.current = float(0)
     self.last_update = datetime.datetime.fromtimestamp(0)
@@ -327,7 +352,7 @@ class terrariumSensor(object):
         if len(address) == 2:
           address.append(None)
 
-        cache_hash = md5(b'' + self.get_address().replace('-','').upper() + self.get_hardware_type()).hexdigest()
+        cache_hash = self.id
         hardwaresensor = self.__sensor_cache.get_sensor(cache_hash)
 
         if hardwaresensor is None:
@@ -413,15 +438,15 @@ class terrariumSensor(object):
 
         if current is None or not (self.get_limit_min() <= current <= self.get_limit_max()):
           # Invalid current value.... log and ingore
-          logger.warn('Measured value %s%s from %s sensor \'%s\' is outside valid range %.2f%s - %.2f%s in %.5f seconds.' % (current,
-                                                                                                                             self.get_indicator(),
-                                                                                                                             self.get_type(),
-                                                                                                                             self.get_name(),
-                                                                                                                             self.get_limit_min(),
-                                                                                                                             self.get_indicator(),
-                                                                                                                             self.get_limit_max(),
-                                                                                                                             self.get_indicator(),
-                                                                                                                             time.time()-starttime))
+          logger.warning('Measured value %s%s from %s sensor \'%s\' is outside valid range %.2f%s - %.2f%s in %.5f seconds.' % (current,
+                                                                                                                                self.get_indicator(),
+                                                                                                                                self.get_type(),
+                                                                                                                                self.get_name(),
+                                                                                                                                self.get_limit_min(),
+                                                                                                                                self.get_indicator(),
+                                                                                                                                self.get_limit_max(),
+                                                                                                                                self.get_indicator(),
+                                                                                                                                time.time()-starttime))
 
         else:
           self.current = current
@@ -433,8 +458,8 @@ class terrariumSensor(object):
                                                                                           self.get_current(),
                                                                                           self.get_indicator(),
                                                                                           time.time()-starttime))
-      except Exception, ex:
-        print ex
+      except Exception as ex:
+        print(ex)
         logger.exception('Error updating %s %s sensor \'%s\' with error:' % (self.get_hardware_type(),
                                                                               self.get_type(),
                                                                               self.get_name()))
@@ -493,10 +518,10 @@ class terrariumSensor(object):
     return self.sensor_address
 
   def set_address(self,address):
-    if isinstance(address, basestring):
+    if isinstance(address, str):
       self.sensor_address = address
 
-    elif terrariumOWFSSensor.hardwaretype == self.get_hardware_type() and not isinstance(address, basestring):
+    elif terrariumOWFSSensor.hardwaretype == self.get_hardware_type() and not isinstance(address, str):
       # OW Sensor object
       self.__sensor = address
       self.sensor_address = self.__sensor.address

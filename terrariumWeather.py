@@ -5,10 +5,10 @@ logger = terrariumLogging.logging.getLogger(__name__)
 import untangle
 from datetime import datetime, timedelta
 import dateutil.parser
-import thread
+import _thread
 import time
 import copy
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import json
 import re
 
