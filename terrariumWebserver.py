@@ -416,7 +416,7 @@ class terrariumWebserver(object):
 
         try:
           socket.send(json.dumps(message))
-        except Exception as err:
+        except Exception as ex:
           # Socket connection is lost, stop looping....
           break
 
@@ -426,7 +426,7 @@ class terrariumWebserver(object):
       try:
 
         message = socket.receive()
-      except Exception as err:
+      except Exception as ex:
         break
 
       if message is not None:

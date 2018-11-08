@@ -205,7 +205,6 @@ class terrariumOWFSSensor(object):
 
       except Exception as ex:
         logger.warning('OWFS file system is not actve / installed on this device!')
-        print(ex)
 
 class terrariumSensor(object):
   UPDATE_TIMEOUT = 30
