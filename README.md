@@ -33,10 +33,11 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Predefined on and off dimming durations
   - Predefined on and off dimming percentages
   - Predefined dimming steps for environment system (heater and cooler)
-- Support for timmers in powerswitches and environment #72
+- Support for timmers in power switches and environment #72
   - Predefined start and stop times based on timer or weather
   - Predefined on and off durations in minutes
-- Support for Energenie USB and LAN powerswitches [EG-PM(s)2](http://energenie.com/item.aspx?id=7556)
+- Support for Energenie USB and LAN power switches [EG-PM(s)2](http://energenie.com/item.aspx?id=7556)
+- Support for WeMo Wifi power switches
 - Support for [multiple type of sensors](https://github.com/theyosh/TerrariumPI/wiki/Hardware#sensors)
   - Temperature
   - Humidity
@@ -47,6 +48,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Light intensity
   - UV A and B
   - Fertility
+  - Volume
 - Support for webcams and native Raspberry Pi cam out of the box
 - Support for analog devices through a MCP3008
   - Support for PH probe SKU SEN0161
@@ -57,7 +59,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
 - Rain control based on humidity sensors and timers
 - Temperature control based on temperature sensors or timers
   - Variable day and night difference for min and max temperature
-- Watertank level control based on ultrasonic sound range sensors
+- Watertank level control based on ultrasonic sound range sensors or volume sensors
 - Weather forecast from external source for lighting schema
   - Supports https://yr.no
   - Supports https://wunderground.com
