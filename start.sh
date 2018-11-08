@@ -6,14 +6,18 @@ SCREEN_NAME="TerrariumPI"
 RESTART_TIME=10
 MAX_RESTARTS=5
 RESTART_TIMEOUT=45
-PYTHON=3
+PYTHON=2
+PYTHON_VERSION=$1
+if [ "${PYTHON_VERSION}" == "3" ]; then
+  PYTHON=3
+fi
 # End settings
 
 # Main program
 RESTART_ATTEMPTS=0
 BASEDIR=$(dirname $(readlink -nf $0))
 SCRIPT=$(basename $(readlink -nf $0))
-RUN=$1
+RUN=$2
 IP=`ip -4 addr | grep inet | grep -v "127.0.0.1" | grep -o -P "inet \K([0-9.]+)" | head -n1`
 # Overrule default user based on the installation directory user rights
 RUN_AS_USER=`stat -c "%U" "${BASEDIR}"`
@@ -116,5 +120,5 @@ else
   message "Starting TerrariumPI server running as user '${RUN_AS_USER}' at location: http://${IP}:8090 ..."
   cd "${BASEDIR}"
 
-  su ${RUN_AS_USER} -c "screen -dmS ${SCREEN_NAME} ./${SCRIPT} run"
+  su ${RUN_AS_USER} -c "screen -dmS ${SCREEN_NAME} ./${SCRIPT} ${PYTHON} run"
 fi

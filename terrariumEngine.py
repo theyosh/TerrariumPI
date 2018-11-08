@@ -539,7 +539,7 @@ class terrariumEngine(object):
     logger.info('Start terrariumPI engine log')
     logtail = subprocess.Popen(['tail','-F','log/terrariumpi.log'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     for line in logtail.stdout:
-      self.__send_message({'type':'logtail','data':line.strip()})
+      self.__send_message({'type':'logtail','data':line.strip().decode('utf-8')})
 
   def __unit_type(self,unittype):
     if unittype in self.__units:

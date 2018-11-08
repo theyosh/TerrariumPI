@@ -489,7 +489,7 @@ class terrariumNotification(terrariumSingletonNew):
           profile_image = imagefile.read()
           if sys.version_info.major == 2:
             filename, file_extension = os.path.splitext(self.__profile_image)
-            profile_image = MIMEImage(profile_image,filename=os.path.basename(self.__profile_image),_subtype=file_extension.replace('.',''))
+            profile_image = MIMEImage(profile_image,_subtype=file_extension.replace('.',''))
             profile_image_cid = '<profileimage>'
             profile_image.add_header('Content-ID', profile_image_cid)
             profile_image.add_header('Content-Disposition', 'inline', filename=os.path.basename(self.__profile_image))
