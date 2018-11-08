@@ -18,7 +18,10 @@ from terrariumTranslations import terrariumTranslations
 from terrariumAudio import terrariumAudioPlayer
 from terrariumUtils import terrariumUtils
 
-import _thread
+try:
+  import thread as _thread
+except ImportError as ex:
+  import _thread
 import json
 import os
 import datetime

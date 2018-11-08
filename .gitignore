@@ -8,3 +8,4 @@ description.txt
 weather.txt
 logging.custom.cfg
 notifications.cfg
+__pycache__

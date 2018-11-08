@@ -4,7 +4,11 @@ SCRIPT_USER=`who -m | awk '{print $1}'`
 SCRIPT_USER_ID=`id -u ${SCRIPT_USER}`
 VERSION=`grep ^version defaults.cfg | cut -d' ' -f 3`
 WHOAMI=`whoami`
-PYTHON=3
+PYTHON=2
+PYTHON_VERSION=$1
+if [ "${PYTHON_VERSION}" == "3" ]; then
+  PYTHON=3
+fi
 LOGFILE="${BASEDIR}/log/terrariumpi.log"
 ACCESSLOGFILE="${BASEDIR}/log/terrariumpi.access.log"
 TMPFS="/run/user/${SCRIPT_USER_ID}"
@@ -40,6 +44,8 @@ case $? in
   0) whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --infobox "TerrariumPI is removing not needed programs" 0 0
 
      debconf-apt-progress -- apt-get -y remove wolfram-engine sonic-pi oracle-java8-jdk desktop-base gnome-desktop3-data libgnome-desktop-3-10 epiphany-browser-data epiphany-browser nuscratch scratch wiringpi "^libreoffice.*"
+     # Remove previous python 2.X packages to make sure pip installed libraries are used
+     debconf-apt-progress -- apt-get -y python-gpiozero python-dateutil python-imaging python-ow python-picamera python-pigpio python-psutil python-requests python-rpi.gpio
      debconf-apt-progress -- apt-get -y autoremove
   ;;
 esac
@@ -47,14 +53,14 @@ esac
 # Install required packages to get the terrarium software running
 PYTHON_LIBS=""
 if [ $PYTHON -eq 2 ]; then
-  PYTHON_LIBS="python-pip python-dev python-mediainfodll python-smbus "
+  PYTHON_LIBS="python-pip python-dev python-mediainfodll python-smbus python-pil python-opencv python-numpy"
 elif [ $PYTHON -eq 3 ]; then
-  PYTHON_LIBS="python3-pip python3-dev python3-mediainfodll python3-smbus "
+  PYTHON_LIBS="python3-pip python3-dev python3-mediainfodll python3-smbus python3-pil python3-numpy"
 fi
 
 debconf-apt-progress -- apt-get -y update
 debconf-apt-progress -- apt-get -y full-upgrade
-debconf-apt-progress -- apt-get -y install libftdi1 screen git subversion watchdog build-essential i2c-tools owserver sqlite3 vlc-nox libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libjasper1 libgstreamer0.10-0 libgtk-3-0 $PYTHON_LIBS
+debconf-apt-progress -- apt-get -y install libftdi1 screen git subversion watchdog build-essential i2c-tools pigpio owserver sqlite3 vlc-nox libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libjasper1 libgstreamer0.10-0 libgtk-3-0 $PYTHON_LIBS
 
 PROGRESS=35
 # Update submodules if downloaded through tar or zip
@@ -88,7 +94,10 @@ EOF
 git submodule update > /dev/null
 cd "${BASEDIR}/.."
 
-PIP_MODULES="python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_DHT Adafruit_SSD1306 Adafruit_SHT31 bluepy pywemo pyownet opencv-python-headless"
+PIP_MODULES="python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_DHT Adafruit_SSD1306 Adafruit_SHT31 bluepy pywemo pyownet"
+if [ $PYTHON -eq 3 ]; then
+  PIP_MODULES="${PIP_MODULES} opencv-python-headless"
+fi
 for PIP_MODULE in ${PIP_MODULES}
 do
   PROGRESS=$((PROGRESS + 2))

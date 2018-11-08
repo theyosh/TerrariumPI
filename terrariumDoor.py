@@ -3,7 +3,10 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 import RPi.GPIO as GPIO
-import _thread
+try:
+  import thread as _thread
+except ImportError as ex:
+  import _thread
 import time
 from hashlib import md5
 from terrariumUtils import terrariumUtils
