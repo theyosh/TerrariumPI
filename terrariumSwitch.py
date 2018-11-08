@@ -4,7 +4,10 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 import RPi.GPIO as GPIO
 import pigpio
-import _thread
+try:
+  import thread as _thread
+except ImportError as ex:
+  import _thread
 import math
 import requests
 import datetime
@@ -278,7 +281,12 @@ class terrariumSwitch(object):
           address = 4
 
         logger.debug('Change remote Energenie USB power switch nr %s, on device nr %s, to state %s' % (address,self.device,state))
-        subprocess.run(['/usr/bin/sispmctl', '-d',str(self.device),('-o' if state is terrariumSwitch.ON else '-f'),str(address)],capture_output=True)
+
+        if sys.version_info.major == 2:
+          with open(os.devnull, 'w') as devnull:
+            subprocess.call(['/usr/bin/sispmctl', '-d',str(self.device),('-o' if state is terrariumSwitch.ON else '-f'),str(address)],stdout=devnull, stderr=subprocess.STDOUT)
+        elif sys.version_info.major == 3:
+          subprocess.run(['/usr/bin/sispmctl', '-d',str(self.device),('-o' if state is terrariumSwitch.ON else '-f'),str(address)],capture_output=True)
 
       elif self.get_hardware_type() == 'eg-pm-rf':
         logger.debug('Change remote Energenie RF power switch nr %s, to state %s' % (self.get_address(),state))

@@ -258,9 +258,13 @@ class terrariumSingleton(type):
       cls._instances[cls] = super(terrariumSingleton, cls).__call__(*args, **kwargs)
     return cls._instances[cls]
 
-class terrariumSingletonNew(object):
-  _instance = None
-  def __new__(cls, *args, **kwargs):
-    if not cls._instance:
-      cls._instance = object.__new__(cls, *args, **kwargs)
-    return cls._instance
+# works in Python 2 & 3
+class _Singleton(type):
+    """ A metaclass that creates a Singleton base class when called. """
+    _instances = {}
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(_Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+class terrariumSingletonNew(_Singleton('SingletonMeta', (object,), {})): pass

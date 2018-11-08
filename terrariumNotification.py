@@ -7,8 +7,9 @@ import os
 import os.path
 import _thread
 import json
+import sys
 #import requests
-import urllib.parse
+#import urllib.parse
 
 try:
   import configparser
@@ -17,14 +18,18 @@ except ImportError as ex:
 
 # Email support
 import smtplib
+
 #Python2
-#from email.MIMEMultipart import MIMEMultipart
-#from email.MIMEText import MIMEText
-#from email.MIMEImage import MIMEImage
+if sys.version_info.major == 2:
+  from email.mime.multipart import MIMEMultipart
+  from email.mime.text import MIMEText
+  from email.MIMEImage import MIMEImage
+
 #Python3
-from email.message import EmailMessage
-from email.headerregistry import Address
-from email.utils import make_msgid
+if sys.version_info.major == 3:
+  from email.message import EmailMessage
+  from email.headerregistry import Address
+  from email.utils import make_msgid
 
 # Twitter support
 import twitter
@@ -32,7 +37,7 @@ import twitter
 # Pushover support
 import pushover
 
-from terrariumUtils import terrariumUtils, terrariumSingleton
+from terrariumUtils import terrariumUtils, terrariumSingleton, terrariumSingletonNew
 from terrariumDisplay import terrariumDisplay
 
 from gevent import monkey, sleep
@@ -134,7 +139,7 @@ class terrariumNotificationTelegramBot(object):
   def send_message(self,text, chat_id = None):
     if self.__running:
       chat_ids = self.__chat_ids if chat_id is None else [int(chat_id)]
-      text = urllib.parse.quote_plus(text)
+#      text = urllib.parse.quote_plus(text)
       for chat_id in chat_ids:
         url = self.__bot_url + 'sendMessage?text={}&chat_id={}'.format(text, chat_id)
         terrariumUtils.get_remote_data(url,proxy=self.__proxy)
@@ -183,7 +188,7 @@ class terrariumNotificationTelegramBot(object):
     self.__running = False
     print('%s - INFO    - terrariumNotificatio - TelegramBot is stopped' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],))
 
-class terrariumNotification(object, metaclass=terrariumSingleton):
+class terrariumNotification(terrariumSingletonNew):
   __MAX_MESSAGES_TOTAL_PER_MINUTE = 5
   __MAX_MESSAGES_PER_MINUTE = 2
 
@@ -319,9 +324,9 @@ class terrariumNotification(object, metaclass=terrariumSingleton):
     for message_id in self.__default_notifications:
       if self.__data.has_section('message' + message_id):
         self.messages[message_id] = terrariumNotificationMessage(message_id,
-                                                                 self.__data.get('message' + message_id,'title'),
-                                                                 self.__data.get('message' + message_id,'message'),
-                                                                 self.__data.get('message' + message_id,'services'))
+                                                                 self.__data.get('message' + message_id,'title').replace('%%','%'),
+                                                                 self.__data.get('message' + message_id,'message').replace('%%','%'),
+                                                                 self.__data.get('message' + message_id,'services').replace('%%','%'))
       else:
         self.messages[message_id] = self.__default_notifications[message_id]
 
@@ -476,11 +481,21 @@ class terrariumNotification(object, metaclass=terrariumSingleton):
     htmlimage = ''
     textimage = ''
     profile_image = None
+    profile_image_cid = ''
 
     if self.__profile_image is not None:
       try:
         with open(self.__profile_image, 'rb') as imagefile:
           profile_image = imagefile.read()
+          if sys.version_info.major == 2:
+            filename, file_extension = os.path.splitext(self.__profile_image)
+            profile_image = MIMEImage(profile_image,filename=os.path.basename(self.__profile_image),_subtype=file_extension.replace('.',''))
+            profile_image_cid = '<profileimage>'
+            profile_image.add_header('Content-ID', profile_image_cid)
+            profile_image.add_header('Content-Disposition', 'inline', filename=os.path.basename(self.__profile_image))
+          elif sys.version_info.major == 3:
+            profile_image_cid = make_msgid()
+
           htmlimage = '<img src="cid:{profileimage}" alt="Profile image" title="Profile image" align="right" style="max-width:300px;border-radius:25%;">'
           textimage = '[cid:{profileimage}]\n'
 
@@ -488,25 +503,48 @@ class terrariumNotification(object, metaclass=terrariumSingleton):
         print('%s - ERROR  - terrariumNotificatio - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
         # No images unfortunally...
 
+    textmessage = (textimage + message.decode()).format(profileimage=profile_image_cid[1:-1])
+    htmlmessage = (htmlbody % (subject.decode(),htmlimage,message.decode().replace('\n','<br />'))).format(profileimage=profile_image_cid[1:-1])
     for receiver in self.email['receiver']:
-      profile_image_cid = make_msgid()
+      if sys.version_info.major == 2:
+        emailmessage = MIMEMultipart('mixed')
+        emailmessagerelated = MIMEMultipart('related')
+        emailmessagealternative = MIMEMultipart('alternative')
 
-      emailmessage = EmailMessage()
-      emailmessage['Subject'] = subject.decode()
-      emailmessage['From'] = receiver
-      emailmessage['To'] = re.sub(r'(.*)@(.*)', '\\1+terrariumpi@\\2', receiver, 0, re.MULTILINE)
+        emailmessage['Subject'] = subject.decode()
+        emailmessage['From'] = receiver
+        emailmessage['To'] = re.sub(r'(.*)@(.*)', '\\1+terrariumpi@\\2', receiver, 0, re.MULTILINE)
 
-      textmessage = (textimage + message.decode()).format(profileimage=profile_image_cid[1:-1])
-      htmlmessage = (htmlbody % (subject.decode(),htmlimage,message.decode().replace('\n','<br />'))).format(profileimage=profile_image_cid[1:-1])
+        emailmessagealternative.attach(MIMEText(textmessage, 'plain'))
+        emailmessagealternative.attach(MIMEText(htmlmessage, 'html'))
 
-      emailmessage.set_content(textmessage, subtype='text')
-      emailmessage.add_alternative( htmlmessage, subtype='html')
-      emailmessage.get_payload()[1].add_related(profile_image, 'image', 'jpeg', cid=profile_image_cid)
+        emailmessagerelated.attach(emailmessagealternative)
 
-      try:
-        mailserver.send_message(emailmessage)
-      except Exception as ex:
-        print(ex)
+        if profile_image is not None:
+          emailmessagerelated.attach(profile_image)
+
+        emailmessage.attach(emailmessagerelated)
+
+        try:
+          mailserver.sendmail(receiver,re.sub(r'(.*)@(.*)', '\\1+terrariumpi@\\2', receiver, 0, re.MULTILINE),emailmessage.as_string())
+        except Exception as ex:
+          print(ex)
+
+      elif sys.version_info.major == 3:
+        emailmessage = EmailMessage()
+        emailmessage['Subject'] = subject.decode()
+        emailmessage['From'] = receiver
+        emailmessage['To'] = re.sub(r'(.*)@(.*)', '\\1+terrariumpi@\\2', receiver, 0, re.MULTILINE)
+
+        emailmessage.set_content(textmessage, subtype='text')
+        emailmessage.add_alternative( htmlmessage, subtype='html')
+        if profile_image is not None:
+          emailmessage.get_payload()[1].add_related(profile_image, 'image', 'jpeg', cid=profile_image_cid)
+
+        try:
+          mailserver.send_message(emailmessage)
+        except Exception as ex:
+          print(ex)
 
     try:
       mailserver.quit()

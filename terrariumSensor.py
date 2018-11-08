@@ -14,13 +14,13 @@ from pyownet import protocol
 
 from hashlib import md5
 
-from terrariumUtils import terrariumUtils, terrariumSingleton
+from terrariumUtils import terrariumUtils, terrariumSingleton, terrariumSingletonNew
 from terrariumAnalogSensor import terrariumSKUSEN0161Sensor
 from terrariumBluetoothSensor import terrariumMiFloraSensor
 from terrariumGPIOSensor import terrariumYTXXSensorDigital, terrariumDHT11Sensor, terrariumDHT22Sensor, terrariumAM2302Sensor, terrariumHCSR04Sensor
 from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor, terrariumSHT3XSensor
 
-class terrariumSensorCache(object, metaclass=terrariumSingleton):
+class terrariumSensorCache(terrariumSingletonNew):
   def __init__(self):
     self.__cache = {}
 
@@ -182,9 +182,6 @@ class terrariumOWFSSensor(object):
     if port > 0:
       try:
         proxy = protocol.proxy('localhost', port)
-
-
-
         #ow.init(str(port));
         #sensorsList = ow.Sensor('/').sensorList()
 
@@ -206,16 +203,8 @@ class terrariumOWFSSensor(object):
           except protocol.OwnetError:
             pass
 
-
-        #for sensor in sensorsList:
-        #  if 'temperature' in sensor.entryList():
-        #    yield(sensor,'temperature')
-
-        #  if 'humidity' in sensor.entryList():
-        #    yield(sensor,'humidity')
-
       except Exception as ex:
-        logger.debug('OWFS file system is not actve / installed on this device!')
+        logger.warning('OWFS file system is not actve / installed on this device!')
         print(ex)
 
 class terrariumSensor(object):
@@ -332,7 +321,7 @@ class terrariumSensor(object):
       sensor_list.append(terrariumSensor(None,
                                          terrariumMiFloraSensor.hardwaretype,
                                          sensortype,
-                                         sensor,
+                                         str(sensor),
                                          callback_indicator=unit_indicator))
 
     logger.info('Found %d temperature/humidity sensors in %.5f seconds' % (len(sensor_list),time.time() - starttime))
@@ -498,13 +487,13 @@ class terrariumSensor(object):
   def get_hardware_type(self):
     return self.hardwaretype
 
-  def set_hardware_type(self,type):
-    if type in terrariumSensor.VALID_HARDWARE_TYPES:
-      self.hardwaretype = type
+  def set_hardware_type(self,hwtype):
+    if hwtype in terrariumSensor.VALID_HARDWARE_TYPES:
+      self.hardwaretype = hwtype
 
-  def set_type(self,type,indicator):
-    if type in terrariumSensor.VALID_SENSOR_TYPES:
-      self.type = type
+  def set_type(self,sensortype,indicator):
+    if sensortype in terrariumSensor.VALID_SENSOR_TYPES:
+      self.type = sensortype
       self.__indicator = indicator
 
   def get_type(self):

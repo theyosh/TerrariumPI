@@ -2,7 +2,10 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-import _thread
+try:
+  import thread as _thread
+except ImportError as ex:
+  import _thread
 import time
 import psutil
 import os

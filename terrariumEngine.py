@@ -9,7 +9,10 @@ logger.debug('Setting terrariumPI GPIO Mode to %s' % (GPIO.BCM,))
 GPIO.setmode(GPIO.BCM)
 logger.debug('Done setting terrariumPI GPIO Mode to %s' % (GPIO.BCM,))
 
-import _thread
+try:
+  import thread as _thread
+except ImportError as ex:
+  import _thread
 import time
 import datetime
 import uptime
