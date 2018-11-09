@@ -589,8 +589,8 @@ class terrariumConfig(object):
 
 
   # Sensor config functions
-  def get_owfs_port(self):
-    return int(self.get_system()['owfs_port'])
+  #def get_owfs_port(self):
+  #  return int(self.get_system()['owfs_port'])
 
   def save_sensor(self,data):
     return self.__update_config('sensor' + data['id'],data,['current','indicator'])

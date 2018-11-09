@@ -159,7 +159,7 @@ class terrariumEngine(object):
       self.sensors = {}
 
     seen_sensors = []
-    for sensor in terrariumSensor.scan(self.config.get_owfs_port(), self.__unit_type):
+    for sensor in terrariumSensor.scan(self.__unit_type):
       self.sensors[sensor.get_id()] = sensor
 
     for sensordata in sensor_config:

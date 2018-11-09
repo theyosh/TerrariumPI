@@ -18,7 +18,10 @@ Made available under GNU GENERAL PUBLIC LICENSE
 import smbus
 import time
 import datetime
-import _thread
+try:
+  import thread as _thread
+except ImportError as ex:
+  import _thread
 import serial
 
 import Adafruit_SSD1306
