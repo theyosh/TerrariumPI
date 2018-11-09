@@ -10,19 +10,21 @@ import re
 from pyownet import protocol
 from hashlib import md5
 
-from terrariumUtils import terrariumUtils, terrariumSingleton, terrariumSingletonNew
+from terrariumUtils import terrariumUtils, terrariumSingleton
 from terrariumAnalogSensor import terrariumSKUSEN0161Sensor
 from terrariumBluetoothSensor import terrariumMiFloraSensor
 from terrariumGPIOSensor import terrariumYTXXSensorDigital, terrariumDHT11Sensor, terrariumDHT22Sensor, terrariumAM2302Sensor, terrariumHCSR04Sensor
 from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor, terrariumSHT3XSensor
 
-class terrariumSensorCache(terrariumSingletonNew):
+class terrariumSensorCache(terrariumSingleton):
   def __init__(self):
     self.__cache = {}
+    logger.debug('Initialized sensors cache')
 
   def add_sensor(self,address,sensor,force = False):
     if force or address not in self.__cache:
       self.__cache[address] = sensor
+      logger.debug('Added new sensor to sensors cache with hash: {}. Total in cache: {}'.format(address,len(self.__cache)))
 
   def get_sensor(self,address):
     if address in self.__cache:
@@ -143,6 +145,8 @@ class terrarium1WSensor(object):
         yield (os.path.basename(address),'temperature' if 't' == w1data.group('type') else 'humidity')
 
 class terrariumOWFSSensor(object):
+  __CACHE_TIMEOUT = 29
+
   hardwaretype = 'owfs'
 
   def __init__(self,sensor,host='localhost',port=4304):
@@ -152,22 +156,30 @@ class terrariumOWFSSensor(object):
     self.__temperature = None
     self.__humidity = None
 
-  def __get_raw_data(self):
-    if self.__port > 0:
-      try:
-        proxy = protocol.proxy(self.__host, self.__port)
-        try:
-          self.__temperature = float(proxy.read('/{}/temperature'.format(self.__sensor[:-2])))
-        except protocol.OwnetError:
-          pass
+    self.__cached_data = {'temperature' : None,
+                          'humidity'    : None,
+                          'last_update' : 0}
 
+  def __get_raw_data(self,force_update = False):
+    starttime = int(time.time())
+    if force_update or starttime - self.__cached_data['last_update'] > terrariumOWFSSensor.__CACHE_TIMEOUT:
+      if self.__port > 0:
         try:
-          self.__humidity = float(proxy.read('/{}/humidity'.format(self.__sensor[:-2])))
-        except protocol.OwnetError:
-          pass
+          proxy = protocol.proxy(self.__host, self.__port)
+          try:
+            self.__cached_data['temperature'] = float(proxy.read('/{}/temperature'.format(self.__sensor[:-2])))
+            self.__cached_data['last_update'] = starttime
+          except protocol.OwnetError:
+            pass
 
-      except Exception as ex:
-        logger.warning('OWFS file system is not actve / installed on this device!')
+          try:
+            self.__cached_data['humidity'] = float(proxy.read('/{}/humidity'.format(self.__sensor[:-2])))
+            self.__cached_data['last_update'] = starttime
+          except protocol.OwnetError:
+            pass
+
+        except Exception as ex:
+          logger.warning('OWFS file system is not actve / installed on this device!')
 
   def __enter__(self):
     """used to enable python's with statement support"""
@@ -177,12 +189,33 @@ class terrariumOWFSSensor(object):
     """with support"""
 
   def get_temperature(self):
+    value = None
+    logger.debug('Read temperature value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
     self.__get_raw_data()
-    return None if not terrariumUtils.is_float(self.__temperature) else float(self.__temperature)
+    if terrariumUtils.is_float(self.__cached_data['temperature']):
+      value = float(self.__cached_data['temperature'])
+
+    logger.debug('Got data from temperature sensor type \'%s\' with address %s: temperature: %s' % (self.__class__.__name__,self.__address,value))
+    return value
+
+
+
+    #self.__get_raw_data()
+    #return None if not terrariumUtils.is_float(self.__cached_data['temperature']) else float(self.__cached_data['temperature'])
 
   def get_humidity(self):
+    value = None
+    logger.debug('Read humidity value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
     self.__get_raw_data()
-    return None if not terrariumUtils.is_float(self.__humidity) else float(self.__humidity)
+    if terrariumUtils.is_float(self.__cached_data['humidity']):
+      value = float(self.__cached_data['humidity'])
+
+    logger.debug('Got data from humidity sensor type \'%s\' with address %s: moisture: %s' % (self.__class__.__name__,self.__address,value))
+    return value
+
+
+    #self.__get_raw_data()
+    #return None if not terrariumUtils.is_float(self.__humidity) else float(self.__humidity)
 
   @staticmethod
   def scan():
@@ -344,7 +377,7 @@ class terrariumSensor(object):
         if len(address) == 2:
           address.append(None)
 
-        cache_hash = self.id
+        cache_hash = md5((self.get_hardware_type() + self.get_address()).encode()).hexdigest()
         hardwaresensor = self.__sensor_cache.get_sensor(cache_hash)
 
         if hardwaresensor is None:
