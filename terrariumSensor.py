@@ -7,11 +7,7 @@ import time
 import os.path
 import glob
 import re
-
-
-#import ow
 from pyownet import protocol
-
 from hashlib import md5
 
 from terrariumUtils import terrariumUtils, terrariumSingleton, terrariumSingletonNew
@@ -149,18 +145,29 @@ class terrarium1WSensor(object):
 class terrariumOWFSSensor(object):
   hardwaretype = 'owfs'
 
-  def __init__(self,sensor):
+  def __init__(self,sensor,host='localhost',port=4304):
     self.__sensor = sensor
-    #self.__sensor.useCache(True)
+    self.__host = host
+    self.__port = port
     self.__temperature = None
     self.__humidity = None
 
   def __get_raw_data(self):
-    if 'temperature' in self.__sensor.entryList():
-      self.__temperature = self.__sensor.temperature
+    if self.__port > 0:
+      try:
+        proxy = protocol.proxy(self.__host, self.__port)
+        try:
+          self.__temperature = float(proxy.read('/{}/temperature'.format(self.__sensor[:-2])))
+        except protocol.OwnetError:
+          pass
 
-    if 'humidity' in self.__sensor.entryList():
-      self.__humidity = self.__sensor.humidity
+        try:
+          self.__humidity = float(proxy.read('/{}/humidity'.format(self.__sensor[:-2])))
+        except protocol.OwnetError:
+          pass
+
+      except Exception as ex:
+        logger.warning('OWFS file system is not actve / installed on this device!')
 
   def __enter__(self):
     """used to enable python's with statement support"""
@@ -178,33 +185,30 @@ class terrariumOWFSSensor(object):
     return None if not terrariumUtils.is_float(self.__humidity) else float(self.__humidity)
 
   @staticmethod
-  def scan(port):
-    if port > 0:
-      try:
-        proxy = protocol.proxy('localhost', port)
-        #ow.init(str(port));
-        #sensorsList = ow.Sensor('/').sensorList()
+  def scan():
+    try:
+      proxy = protocol.proxy('localhost', 4304)
+      for sensor in proxy.dir(slash=False, bus=False):
+        stype = proxy.read(sensor + '/type').decode()
+        address = proxy.read(sensor + '/address').decode()
+        try:
+          temp = float(proxy.read(sensor + '/temperature'))
+          yield(address,'temperature')
 
-        for sensor in proxy.dir(slash=False, bus=False):
-          stype = proxy.read(sensor + '/type').decode()
-          try:
-            temp = float(proxy.read(sensor + '/temperature'))
-            yield(sensor,'temperature')
+          #temp = "{0:.2f}".format(temp)
+        except protocol.OwnetError:
+          pass
 
-            #temp = "{0:.2f}".format(temp)
-          except protocol.OwnetError:
-            pass
+        try:
+          humidity = float(proxy.read(sensor + '/humidity'))
+          yield(address,'humidity')
 
-          try:
-            humidity = float(proxy.read(sensor + '/humidity'))
-            yield(sensor,'humidity')
+          #temp = "{0:.2f}".format(temp)
+        except protocol.OwnetError:
+          pass
 
-            #temp = "{0:.2f}".format(temp)
-          except protocol.OwnetError:
-            pass
-
-      except Exception as ex:
-        logger.warning('OWFS file system is not actve / installed on this device!')
+    except Exception as ex:
+      logger.warning('OWFS file system is not actve / installed on this device!')
 
 class terrariumSensor(object):
   UPDATE_TIMEOUT = 30
@@ -248,8 +252,6 @@ class terrariumSensor(object):
   # Appand analog sensor(s) to the list of valid sensors
   VALID_HARDWARE_TYPES.append(terrariumMiFloraSensor.hardwaretype)
 
-
-
   def __init__(self, id, hardware_type, sensor_type, sensor, name = '', callback_indicator = None):
     self.__sensor_cache = terrariumSensorCache()
 
@@ -284,7 +286,10 @@ class terrariumSensor(object):
       self.set_temperature_offset_calibration(0)
 
     if self.id is None:
-      self.id = md5((self.get_address().replace('-','').upper() + self.get_type()).encode()).hexdigest()
+      sensorid = self.get_address().upper() + self.get_type()
+      if self.get_hardware_type() in [terrariumOWFSSensor.hardwaretype,terrarium1WSensor.hardwaretype]:
+        sensorid = sensorid.replace('-','').replace('.','')
+      self.id = md5(sensorid.encode()).hexdigest()
 
     self.current = float(0)
     self.last_update = datetime.datetime.fromtimestamp(0)
@@ -293,26 +298,25 @@ class terrariumSensor(object):
     self.update()
 
   @staticmethod
-  def scan(port,unit_indicator):
+  def scan(unit_indicator):
     starttime = time.time()
     logger.debug('Start scanning for temperature/humidity sensors')
     sensor_list = []
 
     # Scanning OWFS sensors
-    if port > 0:
-      for (owfssensor,owfstype) in terrariumOWFSSensor.scan(port):
-        sensor_list.append(terrariumSensor(None,
-                                           'owfs',
-                                           owfstype,
-                                           owfssensor,
-                                           callback_indicator=unit_indicator))
+    for (sensor,sensortype) in terrariumOWFSSensor.scan():
+      sensor_list.append(terrariumSensor(None,
+                                         terrariumOWFSSensor.hardwaretype,
+                                         sensortype,
+                                         str(sensor),
+                                         callback_indicator=unit_indicator))
 
     # Scanning w1 system bus
-    for (w1sensor,w1type) in terrarium1WSensor.scan():
+    for (sensor,sensortype) in terrarium1WSensor.scan():
       sensor_list.append(terrariumSensor(None,
-                                         'w1',
-                                         w1type,
-                                         w1sensor,
+                                         terrarium1WSensor.hardwaretype,
+                                         sensortype,
+                                         str(sensor),
                                          callback_indicator=unit_indicator))
 
     # Scanning bluetooth devices
@@ -350,7 +354,7 @@ class terrariumSensor(object):
             hardwaresensor = terrarium1WSensor(address[0])
           elif terrariumOWFSSensor.hardwaretype == self.get_hardware_type():
             # Dirty hack for OWFS sensors.... ;)
-            hardwaresensor = terrariumOWFSSensor(self.__sensor)
+            hardwaresensor = terrariumOWFSSensor(address[0])
 
           elif terrariumSHT2XSensor.hardwaretype == self.get_hardware_type():
             hardwaresensor = terrariumSHT2XSensor(address[0],address[1])
@@ -509,10 +513,10 @@ class terrariumSensor(object):
     if isinstance(address, str):
       self.sensor_address = address
 
-    elif terrariumOWFSSensor.hardwaretype == self.get_hardware_type() and not isinstance(address, str):
+    #elif terrariumOWFSSensor.hardwaretype == self.get_hardware_type() and not isinstance(address, str):
       # OW Sensor object
-      self.__sensor = address
-      self.sensor_address = self.__sensor.address
+    #  self.__sensor = address
+    #  self.sensor_address = self.__sensor.address
 
   def set_name(self,name):
     self.name = str(name)

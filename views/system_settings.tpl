@@ -176,12 +176,6 @@
                       <input class="form-control" name="port" required="required" type="text" placeholder="{{_('Port number')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_port_number')}}">
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="owfs_port">{{_('OWFS server port')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control" name="owfs_port" type="text" placeholder="{{_('OWFS server port')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_owfs_port')}}">
-                    </div>
-                  </div>
                   <div class="ln_solid"></div>
                   <div class="form-group">
                     <div class="col-md-11 col-sm-11 col-xs-12 text-center">
@@ -208,7 +202,6 @@
                 allowClear: false,
                 minimumResultsForSearch: Infinity
             });
-
 
             var soundcard_selector = $("select[name='soundcard']").select2({
                 placeholder: '{{_('Select an option')}}',
