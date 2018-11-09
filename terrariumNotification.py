@@ -37,7 +37,7 @@ import twitter
 # Pushover support
 import pushover
 
-from terrariumUtils import terrariumUtils, terrariumSingleton, terrariumSingletonNew
+from terrariumUtils import terrariumUtils, terrariumSingleton
 from terrariumDisplay import terrariumDisplay
 
 from gevent import monkey, sleep
@@ -188,7 +188,7 @@ class terrariumNotificationTelegramBot(object):
     self.__running = False
     print('%s - INFO    - terrariumNotificatio - TelegramBot is stopped' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],))
 
-class terrariumNotification(terrariumSingletonNew):
+class terrariumNotification(terrariumSingleton):
   __MAX_MESSAGES_TOTAL_PER_MINUTE = 5
   __MAX_MESSAGES_PER_MINUTE = 2
 
