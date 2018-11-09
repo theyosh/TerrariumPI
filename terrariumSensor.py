@@ -190,32 +190,23 @@ class terrariumOWFSSensor(object):
 
   def get_temperature(self):
     value = None
-    logger.debug('Read temperature value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
+    logger.debug('Read temperature value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__sensor))
     self.__get_raw_data()
     if terrariumUtils.is_float(self.__cached_data['temperature']):
       value = float(self.__cached_data['temperature'])
 
-    logger.debug('Got data from temperature sensor type \'%s\' with address %s: temperature: %s' % (self.__class__.__name__,self.__address,value))
+    logger.debug('Got data from temperature sensor type \'%s\' with address %s: temperature: %s' % (self.__class__.__name__,self.__sensor,value))
     return value
-
-
-
-    #self.__get_raw_data()
-    #return None if not terrariumUtils.is_float(self.__cached_data['temperature']) else float(self.__cached_data['temperature'])
 
   def get_humidity(self):
     value = None
-    logger.debug('Read humidity value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
+    logger.debug('Read humidity value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__sensor))
     self.__get_raw_data()
     if terrariumUtils.is_float(self.__cached_data['humidity']):
       value = float(self.__cached_data['humidity'])
 
-    logger.debug('Got data from humidity sensor type \'%s\' with address %s: moisture: %s' % (self.__class__.__name__,self.__address,value))
+    logger.debug('Got data from humidity sensor type \'%s\' with address %s: moisture: %s' % (self.__class__.__name__,self.__sensor,value))
     return value
-
-
-    #self.__get_raw_data()
-    #return None if not terrariumUtils.is_float(self.__humidity) else float(self.__humidity)
 
   @staticmethod
   def scan():
