@@ -16,6 +16,9 @@ from terrariumBluetoothSensor import terrariumMiFloraSensor
 from terrariumGPIOSensor import terrariumYTXXSensorDigital, terrariumDHT11Sensor, terrariumDHT22Sensor, terrariumAM2302Sensor, terrariumHCSR04Sensor
 from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor, terrariumSHT3XSensor
 
+from gevent import monkey, sleep
+monkey.patch_all()
+
 class terrariumSensorCache(terrariumSingleton):
   def __init__(self):
     self.__cache = {}
@@ -471,8 +474,7 @@ class terrariumSensor(object):
                                                                                           self.get_indicator(),
                                                                                           time.time()-starttime))
       except Exception as ex:
-        print(ex)
-        logger.exception('Error updating %s %s sensor \'%s\' with error:' % (self.get_hardware_type(),
+        logger.error('Error updating %s %s sensor \'%s\' with error:' % (self.get_hardware_type(),
                                                                               self.get_type(),
                                                                               self.get_name()))
         logger.exception(ex)

@@ -589,7 +589,7 @@ class terrariumEnvironment(object):
     # Config callback
     self.config = config
     # Door status callback
-    self.is_door_open = door_status
+    self.__is_door_open = door_status
 
     self.notification = notification
 
@@ -917,4 +917,10 @@ class terrariumEnvironment(object):
 
   def is_night(self):
     return not self.is_day()
+
+  def is_door_open(self):
+    return self.__is_door_open()
+
+  def is_door_closed(self):
+    return not self.is_door_open()
   # End system functions

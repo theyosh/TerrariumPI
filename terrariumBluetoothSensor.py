@@ -84,7 +84,6 @@ class terrariumMiFloraSensor(object):
         self.__cached_data['last_update'] = starttime
 
       except Exception as ex:
-        print(ex)
         logger.error('Error getting new data from sensor at address: \'%s\'. Error: %s' % (self.__address,ex))
 
   def get_temperature(self):
@@ -168,5 +167,4 @@ class terrariumMiFloraSensor(object):
           yield (address,'light')
           yield (address,'fertility')
     except Exception as ex:
-      print(ex)
       logger.warning('Bluetooth scanning is not enabled for normal users or there are 0 Bluetooth LE device available.... bluetooth is disabled!')
