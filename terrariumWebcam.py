@@ -13,11 +13,14 @@ import re
 
 from picamera import PiCamera, PiCameraError
 from io import BytesIO
-from PIL import Image, ImageDraw, ImageFont, ImageChops
+from PIL import Image, ImageDraw, ImageFont
 from hashlib import md5
 from shutil import copyfile
 
 from terrariumUtils import terrariumUtils
+
+from gevent import monkey, sleep
+monkey.patch_all()
 
 class terrariumWebcam(object):
   TILE_LOCATION = 'webcam/'
@@ -28,7 +31,7 @@ class terrariumWebcam(object):
   UPDATE_TIMEOUT = 60
   VALID_ROTATIONS = ['0','90','180','270','h','v']
 
-  def __init__(self, id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', environment = None):
+  def __init__(self, id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
     self.id = id
     self.type = None
     self.environment = environment
@@ -55,6 +58,7 @@ class terrariumWebcam(object):
     self.set_rotation(rotation)
     self.set_archive(archive)
     self.set_archive_light(archive_light)
+    self.set_archive_door(archive_door)
 
     if self.id is None:
       self.id = md5(self.get_location().encode()).hexdigest()
@@ -124,15 +128,18 @@ class terrariumWebcam(object):
       logger.debug('Saved raw image %s to disk: %s' % (self.get_name(),self.get_raw_image()))
 
       if self.get_archive() != 'disabled' and \
-         (self.get_archive_light() == 'ignore' or \
-          self.get_archive_light() == 'on' and self.environment is not None and self.environment.light_on() or \
-          self.get_archive_light() == 'off' and self.environment is not None and not self.environment.light_on()):
+         ((self.get_archive_light() == 'ignore' or \
+           self.get_archive_light() == 'on'     and self.environment is not None and self.environment.light_on() or \
+           self.get_archive_light() == 'off'    and self.environment is not None and not self.environment.light_on()) and \
+          (self.get_archive_door()  == 'ignore' or \
+           self.get_archive_door()  == 'open'   and self.environment is not None and self.environment.is_door_open() or \
+           self.get_archive_door()  == 'closed' and self.environment is not None and not self.environment.is_door_open())):
         image_path = terrariumWebcam.ARCHIVE_LOCATION + (datetime.datetime.now()).strftime("%Y/%m/%d")
         if not os.path.isdir(image_path):
           try:
             os.makedirs(image_path)
           except Exception as ex:
-            print(ex)
+            pass
 
         image_path += '/' + self.get_id() + '_archive_' + str(int(time.time())) + '.jpg'
 
@@ -171,7 +178,7 @@ class terrariumWebcam(object):
               logger.info('Saved webcam %s image for archive due to motion detection' % (self.get_name(),))
 
           except Exception as ex:
-            print(ex)
+            logger.exception('Error in motion detection for webcam \'%s\' with error message: %s' % (self.get_name(),ex))
 
         elif int(time.time()) - self.__last_archive >= int(self.get_archive()):
           copyfile(self.get_raw_image(),image_path)
@@ -384,6 +391,7 @@ class terrariumWebcam(object):
             'preview': self.get_preview_image(),
             'archive': self.get_archive(),
             'archivelight': self.get_archive_light(),
+            'archivedoor': self.get_archive_door(),
             'archive_images' : []
             }
 
@@ -442,10 +450,16 @@ class terrariumWebcam(object):
     self.archive = enabled
 
   def get_archive_light(self):
-    return self.archive_state
+    return self.archive_light_state
 
   def set_archive_light(self,state):
-    self.archive_state = state
+    self.archive_light_state = state
+
+  def set_archive_door(self,state):
+    self.archive_door_state = state
+
+  def get_archive_door(self):
+    return self.archive_door_state
 
   def get_state(self):
     return terrariumWebcam.ONLINE if self.state else terrariumWebcam.OFFLINE

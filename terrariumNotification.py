@@ -617,7 +617,7 @@ class terrariumNotification(terrariumSingleton):
     if self.telegram is None:
       return
 
-    self.telegram.send_message(message)
+    self.telegram.send_message(message.encode('utf-8'))
 
   def set_display(self,address,resolution,title):
     self.display = None

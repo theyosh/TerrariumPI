@@ -502,6 +502,7 @@ class terrariumVEML6075Sensor(object):
         self.__cached_data['last_update'] = starttime
 
       except Exception as ex:
+        print('UVA UVB ERROR')
         print(ex)
 
   def get_uva(self):

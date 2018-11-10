@@ -139,12 +139,10 @@ class terrariumSwitch(object):
 
   def __load_gpio_device(self):
     pass
-#    GPIO.setmode(GPIO.BOARD)
 
   def __load_pwm_device(self):
     self.__dimmer_running = False
     pigpio.exceptions = False
-    # localhost will not work always due to IPv6. Explicit 127.0.0.1 host
     self.__pigpio = pigpio.pi('localhost')
     if not self.__pigpio.connected:
       self.__pigpio = pigpio.pi()

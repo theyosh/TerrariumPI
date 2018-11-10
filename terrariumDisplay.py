@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # Source: https://gist.github.com/DenisFromHR/cc863375a6e19dce359d
 
-# -*- coding: utf-8 -*-
 """
 Compiled, mashed and generally mutilated 2014-2015 by Denis Pleic
 Made available under GNU GENERAL PUBLIC LICENSE
@@ -25,9 +24,7 @@ except ImportError as ex:
 import serial
 
 import Adafruit_SSD1306
-from PIL import Image
-from PIL import ImageDraw
-from PIL import ImageFont
+from PIL import Image, ImageDraw, ImageFont
 
 from terrariumUtils import terrariumUtils
 
