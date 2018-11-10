@@ -55,7 +55,7 @@ PYTHON_LIBS=""
 if [ $PYTHON -eq 2 ]; then
   PYTHON_LIBS="python-pip python-dev python-mediainfodll python-smbus python-pil python-opencv python-numpy"
 elif [ $PYTHON -eq 3 ]; then
-  PYTHON_LIBS="python3-pip python3-dev python3-mediainfodll python3-smbus python3-pil python3-numpy"
+  PYTHON_LIBS="libgstreamer1.0-0 python3-pip python3-dev python3-mediainfodll python3-smbus python3-pil python3-numpy"
 fi
 
 debconf-apt-progress -- apt-get -y update
