@@ -218,16 +218,12 @@ class terrariumOWFSSensor(object):
         try:
           temp = float(proxy.read(sensor + '/temperature'))
           yield(address,'temperature')
-
-          #temp = "{0:.2f}".format(temp)
         except protocol.OwnetError:
           pass
 
         try:
           humidity = float(proxy.read(sensor + '/humidity'))
           yield(address,'humidity')
-
-          #temp = "{0:.2f}".format(temp)
         except protocol.OwnetError:
           pass
 
@@ -536,11 +532,6 @@ class terrariumSensor(object):
   def set_address(self,address):
     if isinstance(address, str):
       self.sensor_address = address
-
-    #elif terrariumOWFSSensor.hardwaretype == self.get_hardware_type() and not isinstance(address, str):
-      # OW Sensor object
-    #  self.__sensor = address
-    #  self.sensor_address = self.__sensor.address
 
   def set_name(self,name):
     self.name = str(name)
