@@ -5,11 +5,12 @@ import RPi.GPIO as GPIO
 import time
 import os
 import os.path
-import _thread
+try:
+  import thread as _thread
+except ImportError as ex:
+  import _thread
 import json
 import sys
-#import requests
-#import urllib.parse
 
 try:
   import configparser
@@ -28,6 +29,7 @@ if sys.version_info.major == 2:
 #Python3
 if sys.version_info.major == 3:
   from email.message import EmailMessage
+  from email.mime.image import MIMEImage
   from email.headerregistry import Address
   from email.utils import make_msgid
 
@@ -139,7 +141,6 @@ class terrariumNotificationTelegramBot(object):
   def send_message(self,text, chat_id = None):
     if self.__running:
       chat_ids = self.__chat_ids if chat_id is None else [int(chat_id)]
-#      text = urllib.parse.quote_plus(text)
       for chat_id in chat_ids:
         url = self.__bot_url + 'sendMessage?text={}&chat_id={}'.format(text, chat_id)
         terrariumUtils.get_remote_data(url,proxy=self.__proxy)
@@ -242,6 +243,8 @@ class terrariumNotification(terrariumSingleton):
     'door_toggle_open' : terrariumNotificationMessage('door_toggle_open','Door %name% is open','%raw_data%'),
     'door_toggle_closed' : terrariumNotificationMessage('door_toggle_closed','Door %name% is closed','%raw_data%'),
 
+
+    'webcam_motion' : terrariumNotificationMessage('webcam_motion','Movement at webcam %name%','%raw_data%'),
   }
 
   def __init__(self,trafficlights = [], profile_image = None):
@@ -355,8 +358,9 @@ class terrariumNotification(terrariumSingleton):
     for item in terrariumNotification.__regex_parse.findall(message):
       if 'raw_data' == item:
         message = message.replace('%' + item + '%',str(data)
-                                                    .replace(',',"\n")
-                                                    .replace('{',' ')
+                                                    .replace(', ',"\n")
+                                                    .replace('\': ','\':')
+                                                    .replace('{','')
                                                     .replace('}',''))
       elif item in data:
         message = message.replace('%' + item + '%',str(data[item]))
@@ -442,7 +446,7 @@ class terrariumNotification(terrariumSingleton):
                     'username'   : username,
                     'password'   : password}
 
-  def send_email(self,subject,message):
+  def send_email(self,subject,message,files = []):
     if self.email is None:
       return
 
@@ -525,6 +529,11 @@ class terrariumNotification(terrariumSingleton):
 
         emailmessage.attach(emailmessagerelated)
 
+        for attachement in files:
+          with open(attachement,'rb') as attachement_file:
+            attachement, file_extension = os.path.splitext(attachement)
+            emailmessage.attach(MIMEImage(attachement_file.read(), filename=os.path.basename(attachement) + file_extension,_subtype=file_extension.replace('.','')))
+
         try:
           mailserver.sendmail(receiver,re.sub(r'(.*)@(.*)', '\\1+terrariumpi@\\2', receiver, 0, re.MULTILINE),emailmessage.as_string())
         except Exception as ex:
@@ -537,7 +546,13 @@ class terrariumNotification(terrariumSingleton):
         emailmessage['To'] = re.sub(r'(.*)@(.*)', '\\1+terrariumpi@\\2', receiver, 0, re.MULTILINE)
 
         emailmessage.set_content(textmessage, subtype='text')
-        emailmessage.add_alternative( htmlmessage, subtype='html')
+        emailmessage.add_alternative(htmlmessage, subtype='html')
+
+        for attachement in files:
+          with open(attachement,'rb') as attachement_file:
+            attachement, file_extension = os.path.splitext(attachement)
+            emailmessage.attach(MIMEImage(attachement_file.read(), filename=os.path.basename(attachement) + file_extension,_subtype=file_extension.replace('.','')))
+
         if profile_image is not None:
           emailmessage.get_payload()[1].add_related(profile_image, 'image', 'jpeg', cid=profile_image_cid)
 
@@ -572,7 +587,7 @@ class terrariumNotification(terrariumSingleton):
       except Exception as ex:
         print(ex)
 
-  def send_tweet(self,message):
+  def send_tweet(self,title,message,files = []):
     if self.twitter is None:
       return
 
@@ -583,8 +598,10 @@ class terrariumNotification(terrariumSingleton):
                         access_token_secret=self.twitter['access_token_secret'])
 
       if api.VerifyCredentials() is not None:
-        status = api.PostUpdates(message)
-        # [Status(ID=1003393079041314816, ScreenName=MadagascarGecko, Created=Sun Jun 03 21:48:46 +0000 2018, Text=u'Environment watertank sensors are not up to date. Check your sensors on the sensor page. So force the power down to be sure!')]
+        if len(files) > 0:
+          status = api.PostUpdate(title[:278 - (title.decode('utf-8').count("\n"))],media=files)
+        else:
+          status = api.PostUpdate(message[:278 - (message.decode('utf-8').count("\n"))])
     except Exception as ex:
       print(ex)
 
@@ -593,7 +610,7 @@ class terrariumNotification(terrariumSingleton):
       self.pushover = {'api_token' : api_token,
                        'user_key'  : user_key}
 
-  def send_pushover(self,subject,message):
+  def send_pushover(self,subject,message,files = []):
     if self.pushover is None:
       return
 
@@ -613,11 +630,11 @@ class terrariumNotification(terrariumSingleton):
         self.telegram.set_proxy(proxy)
         self.telegram.start()
 
-  def send_telegram(self,subject,message):
+  def send_telegram(self,subject,message,files = []):
     if self.telegram is None:
       return
 
-    self.telegram.send_message(message.encode('utf-8'))
+    self.telegram.send_message(message.decode('utf-8'))
 
   def set_display(self,address,resolution,title):
     self.display = None
@@ -631,7 +648,7 @@ class terrariumNotification(terrariumSingleton):
     if self.display is not None:
       self.display.message(messages)
 
-  def message(self,message_id,data = None):
+  def message(self,message_id,data = None,files = []):
     self.send_notication_led(message_id)
 
     if message_id not in self.messages or not self.messages[message_id].is_enabled():
@@ -660,16 +677,16 @@ class terrariumNotification(terrariumSingleton):
     self.__ratelimit_messages[title][now] += 1
 
     if self.messages[message_id].is_email_enabled():
-      self.send_email(title,message)
+      self.send_email(title,message,files)
 
     if self.messages[message_id].is_twitter_enabled():
-      self.send_tweet(message)
+      self.send_tweet(title,message,files)
 
     if self.messages[message_id].is_pushover_enabled():
-      self.send_pushover(title,message)
+      self.send_pushover(title,message,files)
 
     if self.messages[message_id].is_telegram_enabled():
-      self.send_telegram(title,message)
+      self.send_telegram(title,message,files)
 
     if self.messages[message_id].is_display_enabled():
       self.send_display(message)

@@ -134,6 +134,7 @@ class terrariumWebcam(object):
           (self.get_archive_door()  == 'ignore' or \
            self.get_archive_door()  == 'open'   and self.environment is not None and self.environment.is_door_open() or \
            self.get_archive_door()  == 'closed' and self.environment is not None and not self.environment.is_door_open())):
+
         image_path = terrariumWebcam.ARCHIVE_LOCATION + (datetime.datetime.now()).strftime("%Y/%m/%d")
         if not os.path.isdir(image_path):
           try:
@@ -176,6 +177,8 @@ class terrariumWebcam(object):
             if motion_detected:
               cv2.imwrite(image_path,raw_image)
               logger.info('Saved webcam %s image for archive due to motion detection' % (self.get_name(),))
+              self.last_update = int(time.time())
+              self.environment.notification.message('webcam_motion',self.get_data(),[image_path])
 
           except Exception as ex:
             logger.exception('Error in motion detection for webcam \'%s\' with error message: %s' % (self.get_name(),ex))
@@ -184,6 +187,8 @@ class terrariumWebcam(object):
           copyfile(self.get_raw_image(),image_path)
           logger.info('Saved webcam %s image for archive due to timer interval %s seconds' % (self.get_name(),self.get_archive()))
           self.__last_archive = int(time.time())
+          self.last_update = int(time.time())
+          self.environment.notification.message('webcam_motion',self.get_data(),[image_path])
 
     self.last_update = int(time.time())
 
