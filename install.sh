@@ -45,7 +45,7 @@ case $? in
 
      debconf-apt-progress -- apt-get -y remove wolfram-engine sonic-pi oracle-java8-jdk desktop-base gnome-desktop3-data libgnome-desktop-3-10 epiphany-browser-data epiphany-browser nuscratch scratch wiringpi "^libreoffice.*"
      # Remove previous python 2.X packages to make sure pip installed libraries are used
-     debconf-apt-progress -- apt-get -y python-gpiozero python-dateutil python-imaging python-ow python-picamera python-pigpio python-psutil python-requests python-rpi.gpio
+     debconf-apt-progress -- apt-get -y remove python-gpiozero python-dateutil python-imaging python-ow python-picamera python-pigpio python-psutil python-requests python-rpi.gpio
      debconf-apt-progress -- apt-get -y autoremove
   ;;
 esac
@@ -60,7 +60,7 @@ fi
 
 debconf-apt-progress -- apt-get -y update
 debconf-apt-progress -- apt-get -y full-upgrade
-debconf-apt-progress -- apt-get -y install libftdi1 screen git subversion watchdog build-essential i2c-tools pigpio owserver sqlite3 vlc-nox libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libjasper1 libgstreamer0.10-0 libgtk-3-0 $PYTHON_LIBS
+debconf-apt-progress -- apt-get -y install libftdi1 screen git subversion watchdog build-essential i2c-tools pigpio owserver sqlite3 vlc-nox libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libjasper1 libgstreamer0.10-0 libgtk-3-0 libxml2-dev libxslt1-dev $PYTHON_LIBS
 
 PROGRESS=35
 # Update submodules if downloaded through tar or zip
@@ -94,7 +94,7 @@ EOF
 git submodule update > /dev/null
 cd "${BASEDIR}/.."
 
-PIP_MODULES="python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_DHT Adafruit_SSD1306 Adafruit_SHT31 bluepy pywemo pyownet"
+PIP_MODULES="python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_DHT Adafruit_SSD1306 Adafruit_SHT31 bluepy pywemo pyownet emails"
 if [ $PYTHON -eq 3 ]; then
   PIP_MODULES="${PIP_MODULES} opencv-python-headless"
 fi
