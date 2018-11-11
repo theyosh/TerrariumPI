@@ -684,7 +684,7 @@ function process_form() {
 function prepare_form_data(form) {
   var formdata = [];
   var form_type = form.attr('action').split('/').pop();
-  var re = /(sensor|switch|webcam|light|humidity|temperature|watertank|moisture|conductivity|ph|door|profile|playlist)(_\d+)?_(.*)/i;
+  var re = /(sensor|switch|webcam|light|humidity|temperature|watertank|moisture|conductivity|ph|co2|fertility|door|profile|playlist)(_\d+)?_(.*)/i;
   var matches = null;
   var objectdata = {};
   var prev_nr = -1;
