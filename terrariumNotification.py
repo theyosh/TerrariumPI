@@ -11,6 +11,7 @@ except ImportError as ex:
   import _thread
 import json
 import sys
+import requests
 
 try:
   import configparser
@@ -144,6 +145,18 @@ class terrariumNotificationTelegramBot(object):
       for chat_id in chat_ids:
         url = self.__bot_url + 'sendMessage?text={}&chat_id={}'.format(text, chat_id)
         terrariumUtils.get_remote_data(url,proxy=self.__proxy)
+
+  def send_image(self,text,files = [], chat_id = None):
+    if self.__running:
+      chat_ids = self.__chat_ids if chat_id is None else [int(chat_id)]
+      for image in files:
+        post_file = {'photo': open(image, 'rb')}
+        for chat_id in chat_ids:
+          url = self.__bot_url + 'sendPhoto?caption={}&chat_id={}'.format(text, chat_id)
+          try:
+            r = requests.post(url, files=post_file)
+          except Exception as ex:
+            print(ex)
 
   def set_valid_users(self,users = None):
     self.__valid_users = users.split(',') if users is not None else []
@@ -634,7 +647,10 @@ class terrariumNotification(terrariumSingleton):
     if self.telegram is None:
       return
 
-    self.telegram.send_message(message.decode('utf-8'))
+    if (files is None or len(files) == 0):
+      self.telegram.send_message(message.decode('utf-8'))
+    else:
+      self.telegram.send_image(subject.decode('utf-8'),files)
 
   def set_display(self,address,resolution,title):
     self.display = None
