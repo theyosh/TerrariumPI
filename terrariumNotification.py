@@ -9,9 +9,6 @@ try:
   import thread as _thread
 except ImportError as ex:
   import _thread
-import json
-import sys
-import requests
 
 try:
   import configparser
@@ -19,26 +16,17 @@ except ImportError as ex:
   import ConfigParser as configparser
 
 # Email support
-import smtplib
-
-#Python2
-if sys.version_info.major == 2:
-  from email.mime.multipart import MIMEMultipart
-  from email.mime.text import MIMEText
-  from email.MIMEImage import MIMEImage
-
-#Python3
-if sys.version_info.major == 3:
-  from email.message import EmailMessage
-  from email.mime.image import MIMEImage
-  from email.headerregistry import Address
-  from email.utils import make_msgid
+import emails
 
 # Twitter support
 import twitter
 
 # Pushover support
 import pushover
+
+# Telegram Bot
+import json
+import requests
 
 from terrariumUtils import terrariumUtils, terrariumSingleton
 from terrariumDisplay import terrariumDisplay
@@ -150,7 +138,10 @@ class terrariumNotificationTelegramBot(object):
     if self.__running:
       chat_ids = self.__chat_ids if chat_id is None else [int(chat_id)]
       for image in files:
-        post_file = {'photo': open(image, 'rb')}
+        with open(image,'rb') as fp:
+          photo = fp.read()
+          post_file = {'photo': photo}
+
         for chat_id in chat_ids:
           url = self.__bot_url + 'sendPhoto?caption={}&chat_id={}'.format(text, chat_id)
           try:
@@ -463,121 +454,42 @@ class terrariumNotification(terrariumSingleton):
     if self.email is None:
       return
 
-    mailserver = None
-    try:
-      mailserver = smtplib.SMTP(self.email['server'],self.email['serverport'],timeout=15)
-    except Exception as ex:
-      print(ex)
-      try:
-        mailserver = smtplib.SMTP_SSL(self.email['server'],self.email['serverport'],timeout=15)
-      except Exception as ex:
-        print(ex)
-        print('%s - ERROR  - terrariumNotificatio - Mailserver is not reachable!' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23]))
-        return
+    htmlbody = '<html><head><title>{}</title></head><body><img src="cid:{}" alt="Profile image" title="Profile image" align="right" style="max-width:300px;border-radius:25%;">{}</body></html>'
 
-    if mailserver is None:
-      print('%s - ERROR  - terrariumNotificatio - Mailserver is not reachable!' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23]))
-      return
-
-    mailserver.ehlo()
-    try:
-      mailserver.starttls()
-      mailserver.ehlo()
-    except:
-      pass
-
-    if self.email['username'] is not None and self.email['password'] is not None and '' != self.email['username'] and '' != self.email['password']:
-      try:
-        mailserver.login(self.email['username'], self.email['password'])
-      except Exception as ex:
-        print(ex)
-        print('%s - ERROR  - terrariumNotificatio - Mailserver login credentials are invalid. Cannot sent mail!' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23]))
-        return
-
-    htmlbody = '<html><head><title>%s</title></head><body>%s%s</body></html>'
-    htmlimage = ''
-    textimage = ''
-    profile_image = None
-    profile_image_cid = ''
-
-    if self.__profile_image is not None:
-      try:
-        with open(self.__profile_image, 'rb') as imagefile:
-          profile_image = imagefile.read()
-          if sys.version_info.major == 2:
-            filename, file_extension = os.path.splitext(self.__profile_image)
-            profile_image = MIMEImage(profile_image,_subtype=file_extension.replace('.',''))
-            profile_image_cid = '<profileimage>'
-            profile_image.add_header('Content-ID', profile_image_cid)
-            profile_image.add_header('Content-Disposition', 'inline', filename=os.path.basename(self.__profile_image))
-          elif sys.version_info.major == 3:
-            profile_image_cid = make_msgid()
-
-          htmlimage = '<img src="cid:{profileimage}" alt="Profile image" title="Profile image" align="right" style="max-width:300px;border-radius:25%;">'
-          textimage = '[cid:{profileimage}]\n'
-
-      except Exception as ex:
-        print('%s - ERROR  - terrariumNotificatio - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
-        # No images unfortunally...
-
-    textmessage = (textimage + message.decode()).format(profileimage=profile_image_cid[1:-1])
-    htmlmessage = (htmlbody % (subject.decode(),htmlimage,message.decode().replace('\n','<br />'))).format(profileimage=profile_image_cid[1:-1])
     for receiver in self.email['receiver']:
-      if sys.version_info.major == 2:
-        emailmessage = MIMEMultipart('mixed')
-        emailmessagerelated = MIMEMultipart('related')
-        emailmessagealternative = MIMEMultipart('alternative')
+      mail_tls_ssl = ['tls','ssl',None]
+      while not len(mail_tls_ssl) == 0:
+        email_message = emails.Message(
+                        html=htmlbody.format(subject,os.path.basename(self.__profile_image),message.decode().replace('\n','<br />')),
+                        text=message,
+                        subject=subject,
+                        mail_from=('TerrariumPI', receiver))
+        with open(self.__profile_image,'rb') as fp:
+          profile_image = fp.read()
+          email_message.attach(filename=os.path.basename(self.__profile_image), content_disposition="inline", data=profile_image)
 
-        emailmessage['Subject'] = subject.decode()
-        emailmessage['From'] = receiver
-        emailmessage['To'] = re.sub(r'(.*)@(.*)', '\\1+terrariumpi@\\2', receiver, 0, re.MULTILINE)
+        for attachment in files:
+          with open(attachment,'rb') as fp:
+            attachment_data = fp.read()
+            email_message.attach(filename=os.path.basename(attachment), data=attachment_data)
 
-        emailmessagealternative.attach(MIMEText(textmessage, 'plain'))
-        emailmessagealternative.attach(MIMEText(htmlmessage, 'html'))
+        smtp_settings = {'host':self.email['server'],
+                         'port':self.email['serverport']}
 
-        emailmessagerelated.attach(emailmessagealternative)
+        smtp_security = mail_tls_ssl.pop(0)
+        if smtp_security is not None:
+          smtp_settings[smtp_security] = True
 
-        if profile_image is not None:
-          emailmessagerelated.attach(profile_image)
+        if '' != self.email['username']:
+          smtp_settings['user'] = self.email['username']
+          smtp_settings['password'] = self.email['password']
 
-        emailmessage.attach(emailmessagerelated)
+        response = email_message.send(to=re.sub(r'(.*)@(.*)', '\\1+terrariumpi@\\2', receiver, 0, re.MULTILINE),
+                                      smtp=smtp_settings)
 
-        for attachement in files:
-          with open(attachement,'rb') as attachement_file:
-            attachement, file_extension = os.path.splitext(attachement)
-            emailmessage.attach(MIMEImage(attachement_file.read(), filename=os.path.basename(attachement) + file_extension,_subtype=file_extension.replace('.','')))
-
-        try:
-          mailserver.sendmail(receiver,re.sub(r'(.*)@(.*)', '\\1+terrariumpi@\\2', receiver, 0, re.MULTILINE),emailmessage.as_string())
-        except Exception as ex:
-          print(ex)
-
-      elif sys.version_info.major == 3:
-        emailmessage = EmailMessage()
-        emailmessage['Subject'] = subject.decode()
-        emailmessage['From'] = receiver
-        emailmessage['To'] = re.sub(r'(.*)@(.*)', '\\1+terrariumpi@\\2', receiver, 0, re.MULTILINE)
-
-        emailmessage.set_content(textmessage, subtype='text')
-        emailmessage.add_alternative(htmlmessage, subtype='html')
-
-        for attachement in files:
-          with open(attachement,'rb') as attachement_file:
-            attachement, file_extension = os.path.splitext(attachement)
-            emailmessage.attach(MIMEImage(attachement_file.read(), filename=os.path.basename(attachement) + file_extension,_subtype=file_extension.replace('.','')))
-
-        if profile_image is not None:
-          emailmessage.get_payload()[1].add_related(profile_image, 'image', 'jpeg', cid=profile_image_cid)
-
-        try:
-          mailserver.send_message(emailmessage)
-        except Exception as ex:
-          print(ex)
-
-    try:
-      mailserver.quit()
-    except Exception as ex:
-      pass
+        if response.status_code == 250:
+          # Mail sent, clear remaining connection types
+          mail_tls_ssl = []
 
   def set_twitter(self,consumer_key,consumer_secret,access_token,access_token_secret):
     if '' != consumer_key and '' != consumer_secret and '' != access_token and '' != access_token_secret:
