@@ -10,6 +10,7 @@ import os
 import os.path
 import glob
 import re
+import sys
 
 from picamera import PiCamera, PiCameraError
 from io import BytesIO
@@ -158,7 +159,13 @@ class terrariumWebcam(object):
             thresh = cv2.threshold(cv2.absdiff(self.__previous_image, current_image), 25, 255, cv2.THRESH_BINARY)[1]
             thresh = cv2.dilate(thresh, None, iterations=2)
 
-            (cnts, _) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            if sys.version_info.major == 2:
+              # On pyton2 we use OpenCV2. Is different then Python 3 with OpenCV3
+              (cnts,_) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            elif sys.version_info.major == 3:
+              # On pyton2 we use OpenCV2. Is different then Python 3 with OpenCV3
+              (_,cnts,__) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
             self.__previous_image = current_image
             motion_detected = False
