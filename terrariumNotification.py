@@ -630,7 +630,13 @@ class terrariumNotification(terrariumSingleton):
     try:
       client = pushover.Client(self.pushover['user_key'], api_token=self.pushover['api_token'])
       if client.verify():
-        status = client.send_message(message, title=subject)
+        if files is None or len(files) == 0:
+          status = client.send_message(message, title=subject)
+        elif len(files) > 0:
+          for image in files:
+            with open(image,'rb') as image:
+              status = client.send_message(message, title=subject,attachment=image)
+
     except Exception as ex:
       print(ex)
 
