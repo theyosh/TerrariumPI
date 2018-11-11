@@ -474,7 +474,10 @@ class terrariumNotification(terrariumSingleton):
             email_message.attach(filename=os.path.basename(attachment), data=attachment_data)
 
         smtp_settings = {'host':self.email['server'],
-                         'port':self.email['serverport']}
+                         'port': 25}
+
+        if '' != self.email['serverport']:
+          smtp_settings['port'] = self.email['serverport']
 
         smtp_security = mail_tls_ssl.pop(0)
         if smtp_security is not None:
