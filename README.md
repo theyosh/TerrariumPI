@@ -110,7 +110,7 @@ The installation expects a Pi with working network and ssh. It is tested with [R
 2. Install git  
   `sudo apt -y install git`
 3. Clone this repository and submodules!  
-  `git clone --recursive https://github.com/theyosh/TerrariumPI.git`
+  `git clone --recursive --depth 1 https://github.com/theyosh/TerrariumPI.git`
 4. Enter the new TerrariumPI folder  
   `cd TerrariumPI`
 5. Run the installer script and wait  
