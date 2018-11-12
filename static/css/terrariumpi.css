@@ -39,6 +39,11 @@ canvas.gauge {
 .history_graph.loading span.glyphicon {
   font-size: 100%;
 }
+.history_graph {
+  margin-top: 10px;
+}
+
+
 footer {
   margin-bottom: -20px;
 }
@@ -196,7 +201,7 @@ iframe.external_calendar {
   cursor: default;
 }
 .history_graph {
-  min-height: 175px;
+  min-height: 155px;
   display: block !important;
   position: relative;
 }
