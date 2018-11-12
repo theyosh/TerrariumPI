@@ -31,6 +31,7 @@ class terrariumMiFloraSensor(object):
                           'last_update' : 0}
 
     self.__address = address
+    self.__errors = 0
     if not self.__check_connection():
       self.__address = None
       logger.error('Initializing failed for sensor type \'%s\' at address %s after %s seconds' % (self.__class__.__name__,self.__address,int(time.time())-starttime))
@@ -82,9 +83,14 @@ class terrariumMiFloraSensor(object):
         miflora_dev.disconnect()
 
         self.__cached_data['last_update'] = starttime
+        self.__errors = 0
 
       except Exception as ex:
-        logger.error('Error getting new data from sensor at address: \'%s\'. Error: %s' % (self.__address,ex))
+        self.__errors += 1
+        if self.__errors > 3:
+          logger.error('Error getting new data from sensor at address: \'%s\'. Error: %s' % (self.__address,ex))
+        else:
+          logger.warning('Error getting new data from sensor at address: \'%s\'. Error: %s' % (self.__address,ex))
 
   def get_temperature(self):
     value = None
