@@ -104,7 +104,7 @@ class terrariumMiFloraSensor(object):
     logger.debug('Read %s value from sensor type \'%s\' with address %s' % (sensortype,self.__class__.__name__,self.__address))
     self.__get_raw_data()
     if 'firmware' == sensortype:
-      value = self.__cached_data[sensortype]
+      value = self.__cached_data[sensortype].decode()
     elif terrariumUtils.is_float(self.__cached_data[sensortype]):
       value = float(self.__cached_data[sensortype])
       if 'temperate' == sensortype:
