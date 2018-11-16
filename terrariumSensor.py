@@ -314,7 +314,7 @@ class terrariumSensor(object):
         sensorid = sensorid.replace('-','').replace('.','')
       self.id = md5(sensorid.encode()).hexdigest()
 
-    self.current = float(0)
+    self.current = None
     self.last_update = datetime.datetime.fromtimestamp(0)
     logger.info('Loaded %s %s sensor \'%s\' on location %s.' % (self.get_hardware_type(),self.get_type(),self.get_name(),self.get_address()))
 
@@ -463,6 +463,15 @@ class terrariumSensor(object):
                                                                                                                                 self.get_indicator(),
                                                                                                                                 time.time()-starttime))
 
+        elif not self.__withing_limits(current,10):
+          logger.warning('Measured value %s%s from %s sensor \'%s\' is erratic compared to previous value %s%s in %.5f seconds.' % (current,
+                                                                                                                                self.get_indicator(),
+                                                                                                                                self.get_type(),
+                                                                                                                                self.get_name(),
+                                                                                                                                self.get_current(),
+                                                                                                                                self.get_indicator(),
+                                                                                                                                time.time()-starttime))
+
         else:
           self.current = current
           self.last_update = now
@@ -478,6 +487,18 @@ class terrariumSensor(object):
                                                                               self.get_type(),
                                                                               self.get_name()))
         logger.exception(ex)
+
+  def __withing_limits(self,current_value, percentage = 10.0):
+    if self.current is None:
+      return True
+
+    total_area = abs(self.get_limit_max() - self.get_limit_min()) # 100%
+    diff = abs(self.current - current_value)
+
+    diff_percentage = (diff / total_area) * 100.0
+
+    return diff_percentage < percentage
+
 
   def get_data(self):
     data = {'id' : self.get_id(),
@@ -584,7 +605,7 @@ class terrariumSensor(object):
     return self.__temp_offset
 
   def get_current(self, force = False):
-    current = self.current
+    current = 0 if self.current is None else self.current
     indicator = self.get_indicator().lower()
 
     if 'f' == indicator:
