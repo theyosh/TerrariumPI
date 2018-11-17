@@ -54,10 +54,10 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="windspeed">{{_('Wind speed indicator')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="windspeed_indicator">{{_('Wind speed indicator')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('weather_field_wind_speed')}}">
-                        <select class="form-control" name="windspeed" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                        <select class="form-control" name="windspeed_indicator" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="ms">{{_('m/s')}}</option>
                           <option value="kmh">{{_('Km/h')}}</option>
                         </select>

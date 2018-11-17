@@ -369,6 +369,11 @@ class terrariumConfig(object):
               self.save_environment(newdata)
               break
 
+        elif version == 385:
+          logger.info('Updating configuration file to version: %s' % (version,))
+          self.__config.set('terrariumpi', 'windspeed_indicator',  self.__get_config('weather').get('windspeed'))
+          self.__config.remove_option('weather','windspeed')
+
       # Update version number
       self.__config.set('terrariumpi', 'version', str(to_version))
       self.__save_config()
@@ -473,20 +478,24 @@ class terrariumConfig(object):
     return config['language']
 
   def get_weather_location(self):
-    data = self.get_weather()
-    return data['location'] if 'location' in data else None
+    config = self.get_weather()
+    return config['location'] if 'location' in config else None
 
   def get_weather_windspeed(self):
-    data = self.get_weather()
-    return data['windspeed'] if 'windspeed' in data else None
+    config = self.get_system()
+    return config['windspeed_indicator'] if 'windspeed_indicator' in config else None
+
+  def get_windspeed_indicator(self):
+    config = self.get_system()
+    return config['windspeed_indicator'] if 'windspeed_indicator' in config else None
 
   def get_temperature_indicator(self):
     config = self.get_system()
-    return config['temperature_indicator']
+    return config['temperature_indicator'] if 'temperature_indicator' in config else None
 
   def get_distance_indicator(self):
     config = self.get_system()
-    return config['distance_indicator']
+    return config['distance_indicator'] if 'distance_indicator' in config else None
 
   def get_admin(self):
     '''Get terrariumPI admin name'''
@@ -579,19 +588,14 @@ class terrariumConfig(object):
 
   # Weather config functions
   def save_weather(self,data):
-    return self.__update_config('weather',data,['type'])
+    return self.__update_config('weather',data,['type','windspeed_indicator','windspeed'])
 
   def get_weather(self):
     return self.__get_config('weather')
-
-
   # End weather config functions
 
 
   # Sensor config functions
-  #def get_owfs_port(self):
-  #  return int(self.get_system()['owfs_port'])
-
   def save_sensor(self,data):
     return self.__update_config('sensor' + data['id'],data,['current','indicator'])
 

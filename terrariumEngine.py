@@ -109,6 +109,11 @@ class terrariumEngine(object):
     self.set_distance_indicator(self.config.get_distance_indicator())
     logger.info('Done loading terrariumPI PI distance indicator')
 
+    # Set the system windspeed indicator
+    logger.info('Loading terrariumPI PI windspeed indicator')
+    self.set_windspeed_indicator(self.config.get_windspeed_indicator())
+    logger.info('Done loading terrariumPI PI windspeed indicator')
+
     # Load Weather part
     logger.info('Loading terrariumPI weather data')
     self.weather = terrariumWeather(self.config.get_weather_location(),
@@ -576,12 +581,7 @@ class terrariumEngine(object):
 
   # Weather part
   def set_weather_config(self,data):
-    update_ok = self.weather.set_source(data['location']) and self.config.save_weather(data)
-    if update_ok:
-      #self.weather.set_source(self.config.get_weather_location())
-      self.weather.set_windspeed_indicator(self.config.get_weather_windspeed())
-
-    return update_ok
+    return self.weather.set_source(data['location'],True) and self.config.save_weather(data)
 
   def get_weather_config(self):
     return self.weather.get_config()
@@ -1114,7 +1114,7 @@ class terrariumEngine(object):
           return False
 
       # Update weather data
-      update_ok = self.set_weather_config({'location' : data['location'], 'windspeed' : data['windspeed']}) and self.set_system_config(data)
+      update_ok = self.set_weather_config({'location' : data['location']}) and self.set_system_config(data)
       if update_ok:
         # Update config settings
         self.pi_power_wattage = float(self.config.get_pi_power_wattage())
@@ -1122,14 +1122,13 @@ class terrariumEngine(object):
 
         self.set_temperature_indicator(self.config.get_temperature_indicator())
         self.set_distance_indicator(self.config.get_distance_indicator())
-
-        #self.temperature_indicator = self.config.get_temperature_indicator()
+        self.set_windspeed_indicator(self.config.get_windspeed_indicator())
 
     return update_ok
 
   def get_system_config(self):
     data = self.config.get_system()
-    data['windspeed'] = self.get_windspeed_indicator()
+#    data['windspeed'] = self.get_windspeed_indicator()
     data['windspeed_indicator'] = self.get_windspeed_indicator()
 
     del(data['password'])
