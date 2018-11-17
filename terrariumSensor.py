@@ -489,7 +489,7 @@ class terrariumSensor(object):
         logger.exception(ex)
 
   def __within_limits(self,current_value, percentage = 10.0):
-    if self.get_type() in ['uva','uvb','light'] or self.current is None:
+    if self.current is None or self.get_type() in ['uva','uvb','light'] or self.get_hardware_type() in ['ytxx-digital']:
       return True
 
     total_area = abs(self.get_limit_max() - self.get_limit_min()) # 100%

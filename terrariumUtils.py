@@ -10,11 +10,15 @@ class terrariumUtils():
 
   @staticmethod
   def to_fahrenheit(value):
-    return float(9.0 / 5.0 * value + 32.0)
+    return 9.0 / 5.0 * float(value) + 32.0
 
   @staticmethod
   def to_celsius(value):
-    return float((value - 32) * 5.0 / 9.0)
+    return (float(value) - 32) * 5.0 / 9.0
+
+  @staticmethod
+  def to_kelvin(value):
+    return float(value) + 273.15
 
   @staticmethod
   def to_inches(value):
