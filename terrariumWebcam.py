@@ -511,15 +511,13 @@ class terrariumWebcamRAWUpdateException(Exception):
 
 # Factory class
 class terrariumWebcam(object):
+  SOURCES = {terrariumWebcamRPI,
+             terrariumWebcamUSB,
+             terrariumWebcamRemote}
 
   def __new__(self,webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
-    if re.search(terrariumWebcamRPI.VALID_SOURCE,location):
-      return terrariumWebcamRPI(webcam_id,location,name,rotation,width,height,archive,archive_light,archive_door,environment)
-
-    elif re.search(terrariumWebcamUSB.VALID_SOURCE,location):
-      return terrariumWebcamUSB(webcam_id,location,name,rotation,width,height,archive,archive_light,archive_door,environment)
-
-    elif re.search(terrariumWebcamRemote.VALID_SOURCE,location, re.IGNORECASE):
-      return terrariumWebcamRemote(webcam_id,location,name,rotation,width,height,archive,archive_light,archive_door,environment)
+    for webcam_source in terrariumWebcam.SOURCES:
+      if re.search(webcam_source.VALID_SOURCE, location, re.IGNORECASE):
+        return webcam_source(webcam_id,location,name,rotation,width,height,archive,archive_light,archive_door,environment)
 
     raise terrariumWebcamSourceException()
