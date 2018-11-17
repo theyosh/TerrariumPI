@@ -185,6 +185,8 @@ class terrariumWeatherSource(object):
     if refresh:
       self.update()
 
+    return True
+
   def get_temperature_indicator(self):
     return self.temperature_indicator()
 
