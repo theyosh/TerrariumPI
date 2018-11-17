@@ -55,7 +55,8 @@ class terrariumEngine(object):
                     'uvb'         : 'uW/cm^2',
                     'fertility'   : 'uS/cm',
                     'co2'         : 'ppm',
-                    'volume'      : 'L'}
+                    'volume'      : 'L',
+                    'windspeed'   : 'kmh'}
 
     # List of queues for websocket communication
     self.subscribed_queues = []
@@ -111,8 +112,8 @@ class terrariumEngine(object):
     # Load Weather part
     logger.info('Loading terrariumPI weather data')
     self.weather = terrariumWeather(self.config.get_weather_location(),
-                                    self.config.get_weather_windspeed(),
-                                    self.__unit_type,
+                                    self.get_temperature_indicator,
+                                    self.get_windspeed_indicator,
                                     self.get_weather)
     logger.info('Done loading terrariumPI weather data')
 
@@ -1010,6 +1011,12 @@ class terrariumEngine(object):
   def set_temperature_indicator(self,value):
     self.__units['temperature'] = value
 
+  def get_windspeed_indicator(self):
+    return self.__unit_type('windspeed')
+
+  def set_windspeed_indicator(self,value):
+    self.__units['windspeed'] = value
+
   def get_humidity_indicator(self):
     return self.__unit_type('humidity')
 
@@ -1122,6 +1129,9 @@ class terrariumEngine(object):
 
   def get_system_config(self):
     data = self.config.get_system()
+    data['windspeed'] = self.get_windspeed_indicator()
+    data['windspeed_indicator'] = self.get_windspeed_indicator()
+
     del(data['password'])
     return data
 

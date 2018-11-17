@@ -18,7 +18,14 @@ class terrariumTranslations(object):
   def __load(self):
     logger.debug('Loading TerariumPI translations')
     # Weather
-    self.translations['weather_field_location'] = _('Holds the external source URL. Supported sources are: %s.') % ('<strong>' + '</strong>, <strong>'.join(list(terrariumWeather.valid_sources.keys())) + '</strong>')
+    weather_sources = terrariumWeather.valid_sources()
+    self.translations['weather_field_location'] = _('Holds the external source URL. Supported sources are: %s.') % ('<strong>' + '</strong>, <strong>'.join(list(weather_sources.keys())) + '</strong>')
+
+    weather_sources_list = ''
+    for weather_source in weather_sources:
+      weather_sources_list += '<li><strong>{}</strong>: {}</li>'.format(weather_source,weather_sources[weather_source])
+
+    self.translations['weather_field_location'] += '<ul>' + weather_sources_list + '</ul>'
     self.translations['weather_field_wind_speed'] = _('Choose the wind speed indicator. The software will recalculate to the chosen indicator.')
     # End weather
 

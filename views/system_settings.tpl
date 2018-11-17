@@ -17,11 +17,6 @@
             <ul>
               <li>
                 <strong>{{_('Weather location')}}</strong>: {{!translations.get_translation('weather_field_location')}}
-                <ul>
-                  <li><strong>YR.no</strong>: https://www.yr.no/place/[COUNTRY]/[PROVANCE]/[CITY]</li>
-                  <li><strong>Weather underground</strong>: http://api.wunderground.com/api/[YOUR_API_KEY]/<strong>geolookup/astronomy/hourly10day</strong>/q/[COUNTRY]/[CITY].json</li>
-                  <li><strong>OpenWeatherMap</strong>: https://api.openweathermap.org/data/2.5/weather?q=[CITY],[COUNTRY_2LETTER]&units=metric&appid=[YOUR_API_KEY]</li>
-                </ul>
               </li>
               <li>
                 <strong>{{_('Wind speed indicator')}}</strong>: {{translations.get_translation('weather_field_wind_speed')}}
