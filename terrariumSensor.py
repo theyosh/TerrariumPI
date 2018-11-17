@@ -463,7 +463,7 @@ class terrariumSensor(object):
                                                                                                                                 self.get_indicator(),
                                                                                                                                 time.time()-starttime))
 
-        elif not self.__withing_limits(current,10):
+        elif not self.__within_limits(current,20):
           logger.warning('Measured value %s%s from %s sensor \'%s\' is erratic compared to previous value %s%s in %.5f seconds.' % (current,
                                                                                                                                 self.get_indicator(),
                                                                                                                                 self.get_type(),
@@ -488,8 +488,8 @@ class terrariumSensor(object):
                                                                               self.get_name()))
         logger.exception(ex)
 
-  def __withing_limits(self,current_value, percentage = 10.0):
-    if self.current is None:
+  def __within_limits(self,current_value, percentage = 10.0):
+    if self.get_type() in ['uva','uvb','light'] or self.current is None:
       return True
 
     total_area = abs(self.get_limit_max() - self.get_limit_min()) # 100%
