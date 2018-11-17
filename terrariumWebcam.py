@@ -81,7 +81,7 @@ class terrariumWebcamSource(object):
     # Create black box on the bottom of the image
     draw.rectangle([0,source_height-(terrariumWebcamSource.FONT_SIZE+2),source_width,source_height],fill='black')
     # Draw the current time stamp on the image
-    draw.text((1, source_height-(terrariumWebcamSource.FONT_SIZE+1)), self.name + ' @ ' + (datetime.datetime.now()).strftime("%d/%m/%Y %H:%M:%S") ,(255,255,255),font=font)
+    draw.text((1, source_height-(terrariumWebcamSource.FONT_SIZE+1)), self.name + ' @ ' + (datetime.datetime.now()).strftime('%d/%m/%Y %H:%M:%S') ,(255,255,255),font=font)
 
   def __tile_image(self):
     starttime = time.time()
@@ -408,8 +408,8 @@ class terrariumWebcamSource(object):
     return terrariumWebcamSource.TILE_LOCATION + self.get_id() + '_tile_0_0_0.jpg'
 
 class terrariumWebcamRPI(terrariumWebcamSource):
-  TYPE = "rpicam"
-  VALID_SOURCE="^rpicam$"
+  TYPE = 'rpicam'
+  VALID_SOURCE = '^rpicam$'
 
   def set_resolution(self,width,height):
     self.resolution = {'width' : 1920,
@@ -441,8 +441,8 @@ class terrariumWebcamRPI(terrariumWebcamSource):
     return terrariumWebcamRPI.VALID_SOURCE[1:-1]
 
 class terrariumWebcamUSB(terrariumWebcamSource):
-  TYPE = "usb"
-  VALID_SOURCE="^/dev/video\d+"
+  TYPE = 'usb'
+  VALID_SOURCE = '^/dev/video\d+'
 
   def get_raw_data(self):
     logger.debug('Using USB device: %s' % (self.location,))
@@ -483,8 +483,8 @@ class terrariumWebcamUSB(terrariumWebcamSource):
     return terrariumWebcamUSB.TYPE
 
 class terrariumWebcamRemote(terrariumWebcamSource):
-  TYPE = "remote"
-  VALID_SOURCE="^http(s)?://"
+  TYPE = 'remote'
+  VALID_SOURCE = '^http(s)?://'
 
   def get_raw_data(self):
     logger.debug('Using URL: %s' % (self.location,))
@@ -519,7 +519,7 @@ class terrariumWebcam(object):
     elif re.search(terrariumWebcamUSB.VALID_SOURCE,location):
       return terrariumWebcamUSB(webcam_id,location,name,rotation,width,height,archive,archive_light,archive_door,environment)
 
-    elif re.search(terrariumWebcamRemote.VALID_SOURCE,location):
+    elif re.search(terrariumWebcamRemote.VALID_SOURCE,location, re.IGNORECASE):
       return terrariumWebcamRemote(webcam_id,location,name,rotation,width,height,archive,archive_light,archive_door,environment)
 
     raise terrariumWebcamSourceException()
