@@ -45,7 +45,7 @@ case $? in
 
      debconf-apt-progress -- apt-get -y remove wolfram-engine sonic-pi oracle-java8-jdk desktop-base gnome-desktop3-data libgnome-desktop-3-10 epiphany-browser-data epiphany-browser nuscratch scratch wiringpi "^libreoffice.*"
      # Remove previous python 2.X packages to make sure pip installed libraries are used
-     debconf-apt-progress -- apt-get -y remove python-gpiozero python-dateutil python-imaging python-ow python-picamera python-pigpio python-psutil python-requests python-rpi.gpio
+     debconf-apt-progress -- apt-get -y remove owhttpd owftpd python-gpiozero python-dateutil python-imaging python-ow python-picamera python-pigpio python-psutil python-requests python-rpi.gpio
      debconf-apt-progress -- apt-get -y autoremove
   ;;
 esac
