@@ -6,13 +6,18 @@ SCREEN_NAME="TerrariumPI"
 RESTART_TIME=10
 MAX_RESTARTS=5
 RESTART_TIMEOUT=45
+PYTHON=2
+PYTHON_VERSION=$1
+if [ "${PYTHON_VERSION}" == "3" ]; then
+  PYTHON=3
+fi
 # End settings
 
 # Main program
 RESTART_ATTEMPTS=0
 BASEDIR=$(dirname $(readlink -nf $0))
 SCRIPT=$(basename $(readlink -nf $0))
-RUN=$1
+RUN=$2
 IP=`ip -4 addr | grep inet | grep -v "127.0.0.1" | grep -o -P "inet \K([0-9.]+)" | head -n1`
 # Overrule default user based on the installation directory user rights
 RUN_AS_USER=`stat -c "%U" "${BASEDIR}"`
@@ -51,7 +56,11 @@ then
 
     # Start terrarium software
     message "Starting TerrariumPI server at location: http://${IP}:8090 ..."
-    python ${BASEDIR}/terrariumPI.py
+    if [ $PYTHON -eq 2 ]; then
+      python ${BASEDIR}/terrariumPI.py
+    elif [ $PYTHON -eq 3 ]; then
+      python3 ${BASEDIR}/terrariumPI.py
+    fi
 
     # Check after run if there is an update. If so, show message and exit
     if update_software ; then
@@ -99,8 +108,9 @@ else
   # Update version?
   if update_software ; then
     message "TerrariumPI has detected an update and will now run the installer to update all dependencies and libraries."
-    ./install.sh
-    message "Updating TerrariumPI software is done and will now start in 5 seconds."
+    ./install.sh ${PYTHON}
+
+    message "Updating TerrariumPI software is done and will now start in 5 seconds. Press Ctrl+C to abort."
     for (( counter=5; counter>0; counter-- ))
     do
       echo -n "${counter} "
@@ -111,5 +121,5 @@ else
   message "Starting TerrariumPI server running as user '${RUN_AS_USER}' at location: http://${IP}:8090 ..."
   cd "${BASEDIR}"
 
-  su ${RUN_AS_USER} -c "screen -dmS ${SCREEN_NAME} ./${SCRIPT} run"
+  su ${RUN_AS_USER} -c "screen -dmS ${SCREEN_NAME} ./${SCRIPT} ${PYTHON} run"
 fi

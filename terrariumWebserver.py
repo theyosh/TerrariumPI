@@ -3,7 +3,8 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 import gettext
-gettext.install('terrariumpi', 'locales/', unicode=True)
+#gettext.install('terrariumpi', 'locales/', str=True)
+gettext.install('terrariumpi', 'locales/')
 
 from bottle import BaseRequest, Bottle, request, abort, static_file, template, error, response, auth_basic, HTTPError
 #Increase bottle memory to max 5MB to process images in WYSIWYG editor
@@ -11,13 +12,16 @@ BaseRequest.MEMFILE_MAX = 5 * 1024 * 1024
 
 from bottle.ext.websocket import GeventWebSocketServer
 from bottle.ext.websocket import websocket
-from Queue import Queue
+from queue import Queue
 
 from terrariumTranslations import terrariumTranslations
 from terrariumAudio import terrariumAudioPlayer
 from terrariumUtils import terrariumUtils
 
-import thread
+try:
+  import thread as _thread
+except ImportError as ex:
+  import _thread
 import json
 import os
 import datetime
@@ -38,7 +42,7 @@ class terrariumWebserverHeaders(object):
         t = os.path.getmtime(template_file)
         #response.headers['Expires'] = (datetime.datetime.now() + datetime.timedelta(days=1)).strftime('%a, %d %b %Y %H:%M:%S GMT')
         response.headers['Last-Modified'] = datetime.datetime.fromtimestamp(t).strftime( '%a, %d %b %Y %H:%M:%S GMT')
-        response.headers['Etag'] = hashlib.md5(response.headers['Last-Modified']).hexdigest()
+        response.headers['Etag'] = hashlib.md5(response.headers['Last-Modified'].encode()).hexdigest()
 
       return fn(*args, **kwargs)
 
@@ -175,6 +179,7 @@ class terrariumWebserver(object):
                   'page_title' : _(template.replace('_',' ').capitalize()),
                   'temperature_indicator' : self.__terrariumEngine.get_temperature_indicator(),
                   'distance_indicator' : self.__terrariumEngine.get_distance_indicator(),
+                  'volume_indicator' : self.__terrariumEngine.get_volume_indicator(),
                   'horizontal_graph_legend' : 1 if self.__terrariumEngine.get_horizontal_graph_legend() else 0,
                   'translations': self.__translations,
                   'device': self.__terrariumEngine.device,
@@ -213,7 +218,7 @@ class terrariumWebserver(object):
       staticfile.add_header('Expires',(datetime.datetime.utcnow() + datetime.timedelta(days=self.__caching_days)).strftime('%a, %d %b %Y %H:%M:%S GMT'))
 
     if staticfile.get_header('Last-Modified') is not None:
-      staticfile.add_header('Etag',hashlib.md5(staticfile.get_header('Last-Modified')).hexdigest())
+      staticfile.add_header('Etag',hashlib.md5(staticfile.get_header('Last-Modified').encode()).hexdigest())
 
     return staticfile
 
@@ -244,7 +249,7 @@ class terrariumWebserver(object):
       upload.save(terrariumAudioPlayer.AUDIO_FOLDER)
       self.__terrariumEngine.reload_audio_files()
       result = {'ok' : True, 'title' : _('Success!'), 'message' : _('File \'%s\' is uploaded') % (upload.filename,)}
-    except IOError, message:
+    except IOError as message:
       result['message'] = _('Duplicate file \'%s\'') % (upload.filename,)
 
     return result
@@ -352,12 +357,12 @@ class terrariumWebserver(object):
           for dataid in result[datatype]:
             export_name = datatype + '_' + dataid + '.csv'
             # Header
-            fields = result[datatype][dataid].keys()
+            fields = list(result[datatype][dataid].keys())
             if 'totals' in fields:
               fields.remove('totals')
             csv = '"' + '","'.join(['timestamp'] + fields) + "\"\n"
 
-            for counter in xrange(0,len(result[datatype][dataid][fields[0]])):
+            for counter in range(0,len(result[datatype][dataid][fields[0]])):
               # Timestamp
               row = [datetime.datetime.fromtimestamp(int(str(int(result[datatype][dataid][fields[0]][counter][0]/1000)))).strftime('%Y-%m-%d %H:%M:%S')]
               for field in fields:
@@ -412,7 +417,7 @@ class terrariumWebserver(object):
 
         try:
           socket.send(json.dumps(message))
-        except Exception, err:
+        except Exception as ex:
           # Socket connection is lost, stop looping....
           break
 
@@ -422,14 +427,14 @@ class terrariumWebserver(object):
       try:
 
         message = socket.receive()
-      except Exception, err:
+      except Exception as ex:
         break
 
       if message is not None:
         message = json.loads(message)
 
         if message['type'] == 'client_init':
-          thread.start_new_thread(listen_for_messages, (messages,socket))
+          _thread.start_new_thread(listen_for_messages, (messages,socket))
           terrariumWebserver.app.terrarium.subscribe(messages)
 
         terrariumWebserver.app.terrarium.get_doors_status(socket=True)
@@ -440,9 +445,9 @@ class terrariumWebserver(object):
   def start(self):
     # Start the webserver
     logger.info('Running webserver at %s:%s' % (self.__config['host'],self.__config['port']))
-    print '%s - INFO    - terrariumWebserver   - Running webserver at %s:%s' % (datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S,000'),
+    print('%s - INFO    - terrariumWebserver   - Running webserver at %s:%s' % (datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S,000'),
                                              self.__config['host'],
-                                             self.__config['port'])
+                                             self.__config['port']))
     self.__app.run(host=self.__config['host'],
                    port=self.__config['port'],
                    server=GeventWebSocketServer,

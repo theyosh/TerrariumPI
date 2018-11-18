@@ -18,7 +18,14 @@ class terrariumTranslations(object):
   def __load(self):
     logger.debug('Loading TerariumPI translations')
     # Weather
-    self.translations['weather_field_location'] = _('Holds the external source URL. Supported sources are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumWeather.valid_sources.keys()) + '</strong>')
+    weather_sources = terrariumWeather.valid_sources()
+    self.translations['weather_field_location'] = _('Holds the external source URL. Supported sources are: %s.') % ('<strong>' + '</strong>, <strong>'.join(list(weather_sources.keys())) + '</strong>')
+
+    weather_sources_list = ''
+    for weather_source in weather_sources:
+      weather_sources_list += '<li><strong>{}</strong>: {}</li>'.format(weather_source,weather_sources[weather_source])
+
+    self.translations['weather_field_location_long'] = self.translations['weather_field_location'] + '<ul>' + weather_sources_list + '</ul>'
     self.translations['weather_field_wind_speed'] = _('Choose the wind speed indicator. The software will recalculate to the chosen indicator.')
     # End weather
 
@@ -72,6 +79,7 @@ class terrariumTranslations(object):
     self.translations['webcam_field_preview'] = _('Shows the webcam preview image.')
     self.translations['webcam_field_archive'] = _('Enabled or disable image archiving based on motion detection.')
     self.translations['webcam_field_archive_light'] = _('Select the environment light state when enabling archiving.')
+    self.translations['webcam_field_archive_door'] = _('Select the environment door state when enabling archiving.')
     # End webcam
 
     # Audio
@@ -145,9 +153,11 @@ class terrariumTranslations(object):
     self.translations['system_field_power_price'] = _('Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour).')
     self.translations['system_field_water_price'] = _('Holds the amount of euro/dollar per 1000 liters water.')
     self.translations['system_field_temperature_indicator'] = _('Choose the temperature indicator. The software will recalculate to the chosen indicator.')
+    self.translations['system_field_windspeed_indicator'] = _('Choose the windspeed indicator. The software will recalculate to the chosen indicator.')
+    self.translations['system_field_volume_indicator'] = _('Choose the volume (liquid) indicator. The software will recalculate to the chosen indicator.')
     self.translations['system_field_hostname'] = _('Holds the host name or IP address on which the software will listen for connections. Enter :: for all addresses to bind.')
     self.translations['system_field_port_number'] = _('Holds the port number on which the software is listening for connections.')
-    self.translations['system_field_owfs_port'] = _('Holds the port number on which the OWFS software is running. Leave empty to disable OWFS support.')
+    #self.translations['system_field_owfs_port'] = _('Holds the port number on which the OWFS software is running. Leave empty to disable OWFS support.')
     # End system
 
 

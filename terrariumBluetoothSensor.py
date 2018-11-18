@@ -31,6 +31,7 @@ class terrariumMiFloraSensor(object):
                           'last_update' : 0}
 
     self.__address = address
+    self.__errors = 0
     if not self.__check_connection():
       self.__address = None
       logger.error('Initializing failed for sensor type \'%s\' at address %s after %s seconds' % (self.__class__.__name__,self.__address,int(time.time())-starttime))
@@ -55,7 +56,7 @@ class terrariumMiFloraSensor(object):
       self.__cached_data['battery'], self.__cached_data['firmware'] = unpack('<xB5s',miflora_dev.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_FIRMWARE_AND_BATTERY))
       miflora_dev.disconnect()
       return True
-    except Exception, ex:
+    except Exception as ex:
       logger.error('Error checking online state sensor at address: \'%s\'. Error: %s' % (self.__address,ex))
 
     return False
@@ -68,83 +69,67 @@ class terrariumMiFloraSensor(object):
 
     if force_update or starttime - self.__cached_data['last_update'] > terrariumMiFloraSensor.__CACHE_TIMEOUT:
       try:
+        cached_data = {}
+        for item in self.__cached_data:
+          cached_data[item] = None
+
         miflora_dev = Peripheral(self.__address)
         #Read battery and firmware version attribute
-        self.__cached_data['battery'], self.__cached_data['firmware'] = unpack('<xB5s',miflora_dev.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_FIRMWARE_AND_BATTERY))
+        cached_data['battery'], cached_data['firmware'] = unpack('<xB5s',miflora_dev.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_FIRMWARE_AND_BATTERY))
 
         #Enable real-time data reading
-        miflora_dev.writeCharacteristic(terrariumMiFloraSensor.__MIFLORA_REALTIME_DATA_TRIGGER, str(bytearray([0xa0, 0x1f])), True)
+        miflora_dev.writeCharacteristic(terrariumMiFloraSensor.__MIFLORA_REALTIME_DATA_TRIGGER, bytearray([0xa0, 0x1f]), True)
 
         #Read plant data
-        self.__cached_data['temperature'], self.__cached_data['light'], self.__cached_data['moisture'], self.__cached_data['fertility'] = unpack('<hxIBHxxxxxx',miflora_dev.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_GET_DATA))
+        cached_data['temperature'], cached_data['light'], cached_data['moisture'], cached_data['fertility'] = unpack('<hxIBHxxxxxx',miflora_dev.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_GET_DATA))
 
         # Close connection...
         miflora_dev.disconnect()
 
-        self.__cached_data['last_update'] = starttime
+        cached_data['last_update'] = starttime
+        for item in self.__cached_data:
+          self.__cached_data[item] = cached_data[item]
 
-      except Exception, ex:
-        logger.error('Error getting new data from sensor at address: \'%s\'. Error: %s' % (self.__address,ex))
+        self.__errors = 0
+
+      except Exception as ex:
+        self.__errors += 1
+        if self.__errors > 3:
+          logger.error('Error getting new data from sensor at address: \'%s\'. Error: %s' % (self.__address,ex))
+        else:
+          logger.warning('Error getting new data from sensor at address: \'%s\'. Error: %s' % (self.__address,ex))
+
+  def __get_data(self,sensortype):
+    value = None
+    logger.debug('Read %s value from sensor type \'%s\' with address %s' % (sensortype,self.__class__.__name__,self.__address))
+    self.__get_raw_data()
+    if 'firmware' == sensortype:
+      value = self.__cached_data[sensortype].decode()
+    elif terrariumUtils.is_float(self.__cached_data[sensortype]):
+      value = float(self.__cached_data[sensortype])
+      if 'temperature' == sensortype:
+        value /= 10.0
+
+    logger.debug('Got data from %s sensor type \'%s\' with address %s: temperature: %s' % (sensortype,self.__class__.__name__,self.__address,value))
+    return value
 
   def get_temperature(self):
-    value = None
-    logger.debug('Read temperature value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
-    self.__get_raw_data()
-    if terrariumUtils.is_float(self.__cached_data['temperature']):
-      value = float(self.__cached_data['temperature']) / 10.0
-
-    logger.debug('Got data from temperature sensor type \'%s\' with address %s: temperature: %s' % (self.__class__.__name__,self.__address,value))
-    return value
+    return self.__get_data('temperature')
 
   def get_moisture(self):
-    value = None
-    logger.debug('Read moisture value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
-    self.__get_raw_data()
-    if terrariumUtils.is_float(self.__cached_data['moisture']):
-      value = float(self.__cached_data['moisture'])
-
-    logger.debug('Got data from moisture sensor type \'%s\' with address %s: moisture: %s' % (self.__class__.__name__,self.__address,value))
-    return value
+    return self.__get_data('moisture')
 
   def get_light(self):
-    value = None
-    logger.debug('Read brightness value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
-    self.__get_raw_data()
-    if terrariumUtils.is_float(self.__cached_data['light']):
-      value = float(self.__cached_data['light'])
-
-    logger.debug('Got data from brightness sensor type \'%s\' with address %s: brightness: %s' % (self.__class__.__name__,self.__address,value))
-    return value
+    return self.__get_data('light')
 
   def get_fertility(self):
-    value = None
-    logger.debug('Read fertility value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
-    self.__get_raw_data()
-    if terrariumUtils.is_float(self.__cached_data['fertility']):
-      value = float(self.__cached_data['fertility'])
-
-    logger.debug('Got data from fertility sensor type \'%s\' with address %s: fertility: %s' % (self.__class__.__name__,self.__address,value))
-    return value
+    return self.__get_data('fertility')
 
   def get_firmware(self):
-    value = None
-    logger.debug('Read firmware value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
-    self.__get_raw_data()
-    if self.__cached_data['firmware'] is not None:
-      value = self.__cached_data['firmware']
-
-    logger.debug('Got data from firmware sensor type \'%s\' with address %s: fertility: %s' % (self.__class__.__name__,self.__address,value))
-    return value
+    return self.__get_data('firmware')
 
   def get_battery(self):
-    value = None
-    logger.debug('Read firmware value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
-    self.__get_raw_data()
-    if terrariumUtils.is_float(self.__cached_data['battery']):
-      value = float(self.__cached_data['battery'])
-
-    logger.debug('Got data from firmware sensor type \'%s\' with address %s: fertility: %s' % (self.__class__.__name__,self.__address,value))
-    return value
+    return self.__get_data('battery')
 
   def close(self):
     """Closes the connection"""
@@ -166,5 +151,5 @@ class terrariumMiFloraSensor(object):
           yield (address,'moisture')
           yield (address,'light')
           yield (address,'fertility')
-    except Exception, ex:
+    except Exception as ex:
       logger.warning('Bluetooth scanning is not enabled for normal users or there are 0 Bluetooth LE device available.... bluetooth is disabled!')

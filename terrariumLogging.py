@@ -16,6 +16,9 @@ import shutil
 from terrariumConfig import terrariumConfig
 from terrariumNotification import terrariumNotification
 
+from gevent import monkey, sleep
+monkey.patch_all()
+
 class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandler):
     """
     Extended version of TimedRotatingFileHandler that compress logs on rollover.

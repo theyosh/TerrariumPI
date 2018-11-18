@@ -111,8 +111,6 @@ class terrariumDHTSensor(terrariumGPIOSensor):
     # Need some extra timeout to get the chip to relax....:(
     starttime = int(time.time())
     if force_update or starttime - self.__cached_data['last_update'] > terrariumDHTSensor.__CACHE_TIMEOUT:
-
-      #sleep(2.1)
       self.__cached_data['humidity'], self.__cached_data['temperature'] = Adafruit_DHT.read_retry(self.__dhttype, terrariumUtils.to_BCM_port_number(self.__datapin),5)
       self.__cached_data['last_update'] = starttime
 

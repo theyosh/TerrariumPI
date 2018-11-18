@@ -4,10 +4,15 @@ SCRIPT_USER=`who -m | awk '{print $1}'`
 SCRIPT_USER_ID=`id -u ${SCRIPT_USER}`
 VERSION=`grep ^version defaults.cfg | cut -d' ' -f 3`
 WHOAMI=`whoami`
-
+PYTHON=2
+PYTHON_VERSION=$1
+if [ "${PYTHON_VERSION}" == "3" ]; then
+  PYTHON=3
+fi
 LOGFILE="${BASEDIR}/log/terrariumpi.log"
 ACCESSLOGFILE="${BASEDIR}/log/terrariumpi.access.log"
 TMPFS="/run/user/${SCRIPT_USER_ID}"
+INSTALLER_TITLE="TerrariumPI v. ${VERSION} (Python${PYTHON})"
 
 if [ "${WHOAMI}" != "root" ]; then
   echo "Start TerrariumPI installation as user root"
@@ -24,31 +29,40 @@ fi
 
 clear
 
-whiptail --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to be installed to run with user '${SCRIPT_USER}'. If this is not the right user stop the installation now!\n\nDo you want to continue?" 0 60
+whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to be installed to run with user '${SCRIPT_USER}'. If this is not the right user stop the installation now!\n\nDo you want to continue?" 0 60
 
 case $? in
-  1|255) whiptail --backtitle "TerrariumPI v. ${VERSION}"  --title " TerrariumPI Installer " --msgbox "TerrariumPI installation is aborted" 0 60
+  1|255) whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --msgbox "TerrariumPI installation is aborted" 0 60
          exit 0
   ;;
 esac
 
 # Clean up first
-whiptail --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to remove not needed programs in order to free up diskspace and make future updates faster. All desktop software will be removed.\n\nDo you want to remove not needed programs?" 0 0
+whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to remove not needed programs in order to free up diskspace and make future updates faster. All desktop software will be removed.\n\nDo you want to remove not needed programs?" 0 0
 
 case $? in
-  0) whiptail --backtitle "TerrariumPI v. ${VERSION}"  --title " TerrariumPI Installer " --infobox "TerrariumPI is removing not needed programs" 0 0
+  0) whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --infobox "TerrariumPI is removing not needed programs" 0 0
 
      debconf-apt-progress -- apt-get -y remove wolfram-engine sonic-pi oracle-java8-jdk desktop-base gnome-desktop3-data libgnome-desktop-3-10 epiphany-browser-data epiphany-browser nuscratch scratch wiringpi "^libreoffice.*"
+     # Remove previous python 2.X packages to make sure pip installed libraries are used
+     debconf-apt-progress -- apt-get -y remove owhttpd owftpd python-gpiozero python-dateutil python-imaging python-ow python-picamera python-pigpio python-psutil python-requests python-rpi.gpio
      debconf-apt-progress -- apt-get -y autoremove
   ;;
 esac
 
 # Install required packages to get the terrarium software running
+PYTHON_LIBS=""
+if [ $PYTHON -eq 2 ]; then
+  PYTHON_LIBS="python-pip python-dev python-mediainfodll python-smbus python-pil python-opencv python-numpy"
+elif [ $PYTHON -eq 3 ]; then
+  PYTHON_LIBS="libgstreamer1.0-0 python3-pip python3-dev python3-mediainfodll python3-smbus python3-pil python3-numpy"
+fi
+
 debconf-apt-progress -- apt-get -y update
 debconf-apt-progress -- apt-get -y full-upgrade
-debconf-apt-progress -- apt-get -y install libftdi1 screen git subversion watchdog build-essential i2c-tools owfs ow-shell sqlite3 vlc-nox libasound2-dev sispmctl lshw python-imaging python-dateutil python-ow python-rpi.gpio python-psutil python-dev python-picamera python-opencv python-pip python-pigpio python-requests python-mediainfodll python-gpiozero python-smbus libffi-dev ntp libglib2.0-dev rng-tools
+debconf-apt-progress -- apt-get -y install libftdi1 screen git subversion watchdog build-essential i2c-tools pigpio owserver sqlite3 vlc-nox libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libjasper1 libgstreamer0.10-0 libgtk-3-0 libxml2-dev libxslt1-dev $PYTHON_LIBS
 
-PROGRESS=45
+PROGRESS=35
 # Update submodules if downloaded through tar or zip
 (
 cd "${BASEDIR}/"
@@ -80,24 +94,29 @@ EOF
 git submodule update > /dev/null
 cd "${BASEDIR}/.."
 
-
-PIP_MODULES="gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_DHT Adafruit_SSD1306 Adafruit_SHT31 bluepy pywemo"
+PIP_MODULES="python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_DHT Adafruit_SSD1306 Adafruit_SHT31 bluepy pywemo pyownet emails"
+if [ $PYTHON -eq 3 ]; then
+  PIP_MODULES="${PIP_MODULES} opencv-python-headless"
+fi
 for PIP_MODULE in ${PIP_MODULES}
 do
   PROGRESS=$((PROGRESS + 2))
   cat <<EOF
 XXX
 $PROGRESS
-Install required software (some modules will take 5-10 min.)\n\nInstalling python module ${PIP_MODULE} ...
+Install required software (some modules will take 5-10 min.)\n\nInstalling python${PYTHON} module ${PIP_MODULE} ...
 XXX
 EOF
-  pip install -q --upgrade ${PIP_MODULE}
+  if [ $PYTHON -eq 2 ]; then
+    pip2 install -q --upgrade ${PIP_MODULE}
+  elif [ $PYTHON -eq 3 ]; then
+    pip3 install -q --upgrade ${PIP_MODULE}
+  fi
 done
 
 cd "${BASEDIR}"
 chown ${SCRIPT_USER}. .
 chown ${SCRIPT_USER}. * -Rf
-
 
 PROGRESS=100
 cat <<EOF
@@ -108,7 +127,7 @@ XXX
 EOF
 
 sleep 1
-) | whiptail --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --gauge "Install required software\n\nInstalling python module ${PIP_MODULE} ..." 0 78 0
+) | whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --gauge "Install required software\n\nInstalling python module ${PIP_MODULE} ..." 0 78 0
 
 # Basic config:
 # Enable 1Wire en I2C during boot
@@ -179,14 +198,16 @@ echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/sbin/service pigpiod restart" > /e
 systemctl enable pigpiod
 
 # To run this as non-root run the following, https://github.com/marcelrv/miflora, https://github.com/IanHarvey/bluepy/issues/218
-setcap 'cap_net_raw,cap_net_admin+eip' /usr/local/lib/python2.7/dist-packages/bluepy/bluepy-helper
+if [ $PYTHON -eq 2 ]; then
+  setcap 'cap_net_raw,cap_net_admin+eip' /usr/local/lib/python2.7/dist-packages/bluepy/bluepy-helper
+elif [ $PYTHON -eq 3 ]; then
+  setcap 'cap_net_raw,cap_net_admin+eip' /usr/local/lib/python3.5/dist-packages/bluepy/bluepy-helper
+fi
+
 
 # Remove unneeded OWS services
 update-rc.d -f owftpd remove
 update-rc.d -f owfhttpd remove
-
-# Set the timezone
-dpkg-reconfigure tzdata
 
 # Move log file to temprorary mount
 if grep -qs "${TMPFS} " /proc/mounts; then
@@ -215,10 +236,13 @@ if [ `grep -ic "start.sh" /etc/rc.local` -eq 0 ]; then
   sed -i.bak "s@^exit 0@# Starting TerrariumPI server\n${BASEDIR}/start.sh\n\nexit 0@" /etc/rc.local
 fi
 
+# Set the timezone
+dpkg-reconfigure tzdata
+
 # We are done!
 sync
 
-whiptail --backtitle "TerrariumPI v. ${VERSION}" --title " TerrariumPI Installer " --yesno "TerrariumPI is installed/upgraded. To make sure that all is working please reboot.\n\nDo you want to reboot now?" 0 60
+whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is installed/upgraded. To make sure that all is working please reboot.\n\nDo you want to reboot now?" 0 60
 
 case $? in
   0)

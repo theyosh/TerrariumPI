@@ -2,8 +2,10 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-import thread
-import datetime
+try:
+  import thread as _thread
+except ImportError as ex:
+  import _thread
 import time
 import psutil
 import os
@@ -11,7 +13,11 @@ import json
 import alsaaudio
 
 from hashlib import md5
-from MediaInfoDLL import MediaInfo, Stream
+try:
+  from MediaInfoDLL import MediaInfo, Stream
+except ImportError as ex:
+  from MediaInfoDLL3 import MediaInfo, Stream
+
 from terrariumUtils import terrariumUtils
 
 from gevent import monkey, sleep
@@ -40,7 +46,7 @@ class terrariumAudioPlayer(object):
       else:
         self.__load_audio_mixer()
         logger.info('Player loaded with %s audio files and %s playlists. Starting engine.' % (len(self.__audio_files),len(self.__playlists)))
-        thread.start_new_thread(self.__engine_loop, ())
+        _thread.start_new_thread(self.__engine_loop, ())
 
   def __load_audio_files(self):
     self.__audio_files = {}
@@ -140,7 +146,7 @@ class terrariumAudioPlayer(object):
           (name, longname) = alsaaudio.card_name(i)
           soundcards[name] = {'hwid' : int(i), 'name' : longname}
 
-      except Exception, ex:
+      except Exception as ex:
         # Just ignore error, and skip it
         pass
 
@@ -153,7 +159,7 @@ class terrariumAudioPlayer(object):
     if self.__audio_mixer is not None:
       try:
         value = int(value)
-      except Exception, ex:
+      except Exception as ex:
         value = -1
 
       if 0 <= value <= 100:
@@ -211,7 +217,7 @@ class terrariumAudioPlayer(object):
     if self.__audio_mixer is not None:
       try:
         running = self.__audio_player.status() in ['running','sleeping','disk-sleep']
-      except Exception, ex:
+      except Exception as ex:
         pass
 
     return running
@@ -308,7 +314,7 @@ class terrariumAudioPlaylist(object):
     return self.__shuffle == True
 
   def set_started(self):
-    self.__is_started_at = datetime.datetime.now()
+    self.__is_started_at = int(time.time())
 
   def is_time(self):
     logger.debug('Checking timer time table for switch %s with %s entries.', self.get_name(),len(self.__timer_time_table))
@@ -336,7 +342,7 @@ class terrariumAudioPlaylist(object):
             'start'   : self.get_start(),
             'stop'    : self.get_stop(),
             'volume'  : self.get_volume(),
-            'files'   : self.get_files().keys(),
+            'files'   : list(self.get_files().keys()),
             'repeat'  : self.get_repeat(),
             'shuffle' : self.get_shuffle(),
             'is_time' : self.is_time(),

@@ -10,17 +10,31 @@ class terrariumUtils():
 
   @staticmethod
   def to_fahrenheit(value):
-    return float(9.0 / 5.0 * value + 32.0)
+    return 9.0 / 5.0 * float(value) + 32.0
 
   @staticmethod
   def to_celsius(value):
-    return float((value - 32) * 5.0 / 9.0)
+    return (float(value) - 32) * 5.0 / 9.0
+
+  @staticmethod
+  def to_kelvin(value):
+    return float(value) + 273.15
 
   @staticmethod
   def to_inches(value):
     # https://www.convertunits.com/from/cm/to/inches , http://www.manuelsweb.com/in_cm.htm
     # Input value is in cm
     return (39.370078740157 / 100.0) * float(value)
+
+  @staticmethod
+  def to_us_gallons(value):
+    # https://www.asknumbers.com/gallons-to-liters.aspx
+    return float(value) / 3.7854118
+
+  @staticmethod
+  def to_uk_gallons(value):
+    # https://www.asknumbers.com/gallons-to-liters.aspx
+    return float(value) / 4.54609
 
   @staticmethod
   def is_float(value):
@@ -119,7 +133,7 @@ class terrariumUtils():
     if '' == url:
       return False
 
-    regex = ur"^((?P<scheme>https?|ftp):\/)?\/?((?P<username>.*?)(:(?P<password>.*?)|)@)?(?P<hostname>[^:\/\s]+)(:(?P<port>(\d*))?)?(?P<path>(\/\w+)*\/)(?P<filename>[-\w.]+[^#?\s]*)?(?P<query>\?([^#]*))?(#(?P<fragment>(.*))?)?$"
+    regex = r"^((?P<scheme>https?|ftp):\/)?\/?((?P<username>.*?)(:(?P<password>.*?)|)@)?(?P<hostname>[^:\/\s]+)(:(?P<port>(\d*))?)?(?P<path>(\/\w+)*\/)(?P<filename>[-\w.]+[^#?\s]*)?(?P<query>\?([^#]*))?(#(?P<fragment>(.*))?)?$"
     matches = re.search(regex, url)
     if matches:
       return matches.groupdict()
@@ -133,7 +147,7 @@ class terrariumUtils():
       try:
         value = value.split(':')
         time = "{:0>2}:{:0>2}".format(int(value[0])%24,int(value[1])%60)
-      except Exception, ex:
+      except Exception as ex:
         logger.exception('Error parsing time value %s. Exception %s' % (value, ex))
 
     return time
@@ -144,7 +158,10 @@ class terrariumUtils():
     try:
       url_data = terrariumUtils.parse_url(url)
       proxies = {'http' : proxy, 'https' : proxy}
-      response = requests.get(url,auth=(url_data['username'],url_data['password']),timeout=timeout,proxies=proxies)
+      if url_data['username'] is None:
+        response = requests.get(url,timeout=timeout,proxies=proxies)
+      else:
+        response = requests.get(url,auth=(url_data['username'],url_data['password']),timeout=timeout,proxies=proxies)
 
       if response.status_code == 200:
         if 'application/json' in response.headers['content-type']:
@@ -154,17 +171,19 @@ class terrariumUtils():
             # Dirty hack to process array data....
             try:
               item = int(item)
-            except Exception, ex:
+            except Exception as ex:
               item = str(item)
 
             data = data[item]
-        else:
+        elif 'text' in response.headers['content-type']:
           data = response.text
+        else:
+          data = response.content
 
       else:
         data = None
 
-    except Exception, ex:
+    except Exception as ex:
       logger.exception('Error parsing remote data at url %s. Exception %s' % (url, ex))
 
     return data
@@ -238,17 +257,21 @@ class terrariumUtils():
   # https://stackoverflow.com/a/19647596
   def flatten_dict(dd, separator='_', prefix=''):
     return { prefix + separator + k if prefix else k : v
-             for kk, vv in dd.items()
-             for k, v in terrariumUtils.flatten_dict(vv, separator, kk).items()
+             for kk, vv in list(dd.items())
+             for k, v in list(terrariumUtils.flatten_dict(vv, separator, kk).items())
              } if isinstance(dd, dict) else { prefix : dd if not isinstance(dd,list) else ','.join(dd)}
 
   @staticmethod
   def format_uptime(value):
     return str(datetime.timedelta(seconds=int(value)))
 
-class terrariumSingleton(type):
-  _instances = {}
-  def __call__(cls, *args, **kwargs):
-    if cls not in cls._instances:
-      cls._instances[cls] = super(terrariumSingleton, cls).__call__(*args, **kwargs)
-    return cls._instances[cls]
+# works in Python 2 & 3
+class _Singleton(type):
+    """ A metaclass that creates a Singleton base class when called. """
+    _instances = {}
+    def __call__(cls, *args, **kwargs):
+      if cls not in cls._instances:
+        cls._instances[cls] = super(_Singleton, cls).__call__(*args, **kwargs)
+      return cls._instances[cls]
+
+class terrariumSingleton(_Singleton('terrariumSingletonMeta', (object,), {})): pass

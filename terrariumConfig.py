@@ -2,7 +2,11 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-import ConfigParser
+try:
+  import configparser
+except ImportError as ex:
+  import ConfigParser as configparser
+
 from glob import glob
 import datetime
 
@@ -27,7 +31,7 @@ class terrariumConfig(object):
     logger.info('Setting up configuration')
     self.__cache_available_languages = None
 
-    self.__config = ConfigParser.SafeConfigParser()
+    self.__config = configparser.ConfigParser()
     # Read defaults config file
     self.__config.readfp(open(terrariumConfig.DEFAULT_CONFIG))
     logger.info('Loaded default settings from %s' % (terrariumConfig.DEFAULT_CONFIG,))
@@ -53,7 +57,7 @@ class terrariumConfig(object):
       logger.info('Configuration is up to date')
     else:
       logger.info('Configuration is out of date. Running updates from %s to %s' % (current_version,new_version))
-      for version in xrange(current_version+1,new_version+1):
+      for version in range(current_version+1,new_version+1):
         if version == 300:
           logger.info('Updating configuration file to version: %s' % (version,))
           # Upgrade: Move temperature indicator from weather to system
@@ -365,6 +369,18 @@ class terrariumConfig(object):
               self.save_environment(newdata)
               break
 
+        elif version == 385:
+          logger.info('Updating configuration file to version: %s' % (version,))
+
+          windspeed_indicator = self.__get_config('weather').get('windspeed')
+          if windspeed_indicator is None:
+            windspeed_indicator = self.__get_config('terrariumpi').get('windspeed_indicator')
+            if windspeed_indicator is None:
+                windspeed_indicator = 'kmh'
+
+          self.__config.set('terrariumpi', 'windspeed_indicator',  windspeed_indicator)
+          self.__config.remove_option('weather','windspeed')
+
       # Update version number
       self.__config.set('terrariumpi', 'version', str(to_version))
       self.__save_config()
@@ -376,7 +392,7 @@ class terrariumConfig(object):
 
   def __save_config(self):
     '''Write terrariumPI config to settings.cfg file'''
-    with open(terrariumConfig.CUSTOM_CONFIG, 'wb') as configfile:
+    with open(terrariumConfig.CUSTOM_CONFIG, 'w') as configfile:
       self.__config.write(configfile)
 
     return True
@@ -391,7 +407,7 @@ class terrariumConfig(object):
     if not self.__config.has_section(section):
       self.__config.add_section(section)
 
-    keys = data.keys()
+    keys = list(data.keys())
     keys.sort()
     for setting in keys:
       if setting in exclude:
@@ -400,10 +416,10 @@ class terrariumConfig(object):
       if type(data[setting]) is list:
         data[setting] = ','.join(data[setting])
 
-      if isinstance(data[setting], basestring):
+      if isinstance(data[setting], str):
         try:
-          data[setting] = data[setting].encode('utf-8')
-        except Exception, ex:
+          data[setting] = data[setting].encode('utf-8').decode()
+        except Exception as ex:
           'Not sure what to do... but it seams already utf-8...??'
           pass
 
@@ -469,20 +485,28 @@ class terrariumConfig(object):
     return config['language']
 
   def get_weather_location(self):
-    data = self.get_weather()
-    return data['location'] if 'location' in data else None
+    config = self.get_weather()
+    return config['location'] if 'location' in config else None
 
-  def get_weather_windspeed(self):
-    data = self.get_weather()
-    return data['windspeed'] if 'windspeed' in data else None
+  '''def get_weather_windspeed(self):
+    config = self.get_system()
+    return config['windspeed_indicator'] if 'windspeed_indicator' in config else None'''
+
+  def get_windspeed_indicator(self):
+    config = self.get_system()
+    return config['windspeed_indicator'] if 'windspeed_indicator' in config else None
+
+  def get_volume_indicator(self):
+    config = self.get_system()
+    return config['volume_indicator'] if 'volume_indicator' in config else None
 
   def get_temperature_indicator(self):
     config = self.get_system()
-    return config['temperature_indicator']
+    return config['temperature_indicator'] if 'temperature_indicator' in config else None
 
   def get_distance_indicator(self):
     config = self.get_system()
-    return config['distance_indicator']
+    return config['distance_indicator'] if 'distance_indicator' in config else None
 
   def get_admin(self):
     '''Get terrariumPI admin name'''
@@ -535,7 +559,7 @@ class terrariumConfig(object):
 
     '''
     config = {}
-    for key, value in terrariumUtils.flatten_dict(data).iteritems():
+    for key, value in terrariumUtils.flatten_dict(data).items():
       config[key] = value
 
     self.__config.remove_section('environment')
@@ -543,7 +567,7 @@ class terrariumConfig(object):
 
   def get_environment(self):
     config = {}
-    for key, value in self.__get_config('environment').iteritems():
+    for key, value in self.__get_config('environment').items():
       config_keys = key.split('_')
       part = config_keys[0]
       del(config_keys[0])
@@ -575,19 +599,14 @@ class terrariumConfig(object):
 
   # Weather config functions
   def save_weather(self,data):
-    return self.__update_config('weather',data,['type'])
+    return self.__update_config('weather',data,['type','windspeed_indicator','windspeed'])
 
   def get_weather(self):
     return self.__get_config('weather')
-
-
   # End weather config functions
 
 
   # Sensor config functions
-  def get_owfs_port(self):
-    return int(self.get_system()['owfs_port'])
-
   def save_sensor(self,data):
     return self.__update_config('sensor' + data['id'],data,['current','indicator'])
 

@@ -7,8 +7,7 @@ import time
 import os.path
 import glob
 import re
-import ow
-
+from pyownet import protocol
 from hashlib import md5
 
 from terrariumUtils import terrariumUtils, terrariumSingleton
@@ -17,15 +16,18 @@ from terrariumBluetoothSensor import terrariumMiFloraSensor
 from terrariumGPIOSensor import terrariumYTXXSensorDigital, terrariumDHT11Sensor, terrariumDHT22Sensor, terrariumAM2302Sensor, terrariumHCSR04Sensor
 from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor, terrariumSHT3XSensor
 
-class terrariumSensorCache(object):
-  __metaclass__ = terrariumSingleton
+from gevent import monkey, sleep
+monkey.patch_all()
 
+class terrariumSensorCache(terrariumSingleton):
   def __init__(self):
     self.__cache = {}
+    logger.debug('Initialized sensors cache')
 
   def add_sensor(self,address,sensor,force = False):
     if force or address not in self.__cache:
       self.__cache[address] = sensor
+      logger.debug('Added new sensor to sensors cache with hash: {}. Total in cache: {}'.format(address,len(self.__cache)))
 
   def get_sensor(self,address):
     if address in self.__cache:
@@ -146,20 +148,41 @@ class terrarium1WSensor(object):
         yield (os.path.basename(address),'temperature' if 't' == w1data.group('type') else 'humidity')
 
 class terrariumOWFSSensor(object):
+  __CACHE_TIMEOUT = 29
+
   hardwaretype = 'owfs'
 
-  def __init__(self,sensor):
+  def __init__(self,sensor,host='localhost',port=4304):
     self.__sensor = sensor
-    #self.__sensor.useCache(True)
+    self.__host = host
+    self.__port = port
     self.__temperature = None
     self.__humidity = None
 
-  def __get_raw_data(self):
-    if 'temperature' in self.__sensor.entryList():
-      self.__temperature = self.__sensor.temperature
+    self.__cached_data = {'temperature' : None,
+                          'humidity'    : None,
+                          'last_update' : 0}
 
-    if 'humidity' in self.__sensor.entryList():
-      self.__humidity = self.__sensor.humidity
+  def __get_raw_data(self,force_update = False):
+    starttime = int(time.time())
+    if force_update or starttime - self.__cached_data['last_update'] > terrariumOWFSSensor.__CACHE_TIMEOUT:
+      if self.__port > 0:
+        try:
+          proxy = protocol.proxy(self.__host, self.__port)
+          try:
+            self.__cached_data['temperature'] = float(proxy.read('/{}/temperature'.format(self.__sensor[:-2])))
+            self.__cached_data['last_update'] = starttime
+          except protocol.OwnetError:
+            pass
+
+          try:
+            self.__cached_data['humidity'] = float(proxy.read('/{}/humidity'.format(self.__sensor[:-2])))
+            self.__cached_data['last_update'] = starttime
+          except protocol.OwnetError:
+            pass
+
+        except Exception as ex:
+          logger.warning('OWFS file system is not actve / installed on this device!')
 
   def __enter__(self):
     """used to enable python's with statement support"""
@@ -169,29 +192,46 @@ class terrariumOWFSSensor(object):
     """with support"""
 
   def get_temperature(self):
+    value = None
+    logger.debug('Read temperature value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__sensor))
     self.__get_raw_data()
-    return None if not terrariumUtils.is_float(self.__temperature) else float(self.__temperature)
+    if terrariumUtils.is_float(self.__cached_data['temperature']):
+      value = float(self.__cached_data['temperature'])
+
+    logger.debug('Got data from temperature sensor type \'%s\' with address %s: temperature: %s' % (self.__class__.__name__,self.__sensor,value))
+    return value
 
   def get_humidity(self):
+    value = None
+    logger.debug('Read humidity value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__sensor))
     self.__get_raw_data()
-    return None if not terrariumUtils.is_float(self.__humidity) else float(self.__humidity)
+    if terrariumUtils.is_float(self.__cached_data['humidity']):
+      value = float(self.__cached_data['humidity'])
+
+    logger.debug('Got data from humidity sensor type \'%s\' with address %s: moisture: %s' % (self.__class__.__name__,self.__sensor,value))
+    return value
 
   @staticmethod
-  def scan(port):
-    if port > 0:
-      try:
-        ow.init(str(port));
-        sensorsList = ow.Sensor('/').sensorList()
-        for sensor in sensorsList:
-          if 'temperature' in sensor.entryList():
-            yield(sensor,'temperature')
+  def scan():
+    try:
+      proxy = protocol.proxy('localhost', 4304)
+      for sensor in proxy.dir(slash=False, bus=False):
+        stype = proxy.read(sensor + '/type').decode()
+        address = proxy.read(sensor + '/address').decode()
+        try:
+          temp = float(proxy.read(sensor + '/temperature'))
+          yield(address,'temperature')
+        except protocol.OwnetError:
+          pass
 
-          if 'humidity' in sensor.entryList():
-            yield(sensor,'humidity')
+        try:
+          humidity = float(proxy.read(sensor + '/humidity'))
+          yield(address,'humidity')
+        except protocol.OwnetError:
+          pass
 
-      except ow.exNoController:
-        logger.debug('OWFS file system is not actve / installed on this device!')
-        pass
+    except Exception as ex:
+      logger.warning('OWFS file system is not actve / installed on this device!')
 
 class terrariumSensor(object):
   UPDATE_TIMEOUT = 30
@@ -235,8 +275,6 @@ class terrariumSensor(object):
   # Appand analog sensor(s) to the list of valid sensors
   VALID_HARDWARE_TYPES.append(terrariumMiFloraSensor.hardwaretype)
 
-
-
   def __init__(self, id, hardware_type, sensor_type, sensor, name = '', callback_indicator = None):
     self.__sensor_cache = terrariumSensorCache()
 
@@ -271,35 +309,37 @@ class terrariumSensor(object):
       self.set_temperature_offset_calibration(0)
 
     if self.id is None:
-      self.id = md5(b'' + self.get_address().replace('-','').upper() + self.get_type()).hexdigest()
+      sensorid = self.get_address().upper() + self.get_type()
+      if self.get_hardware_type() in [terrariumOWFSSensor.hardwaretype,terrarium1WSensor.hardwaretype]:
+        sensorid = sensorid.replace('-','').replace('.','')
+      self.id = md5(sensorid.encode()).hexdigest()
 
-    self.current = float(0)
+    self.current = None
     self.last_update = datetime.datetime.fromtimestamp(0)
     logger.info('Loaded %s %s sensor \'%s\' on location %s.' % (self.get_hardware_type(),self.get_type(),self.get_name(),self.get_address()))
 
     self.update()
 
   @staticmethod
-  def scan(port,unit_indicator):
+  def scan(unit_indicator):
     starttime = time.time()
     logger.debug('Start scanning for temperature/humidity sensors')
     sensor_list = []
 
     # Scanning OWFS sensors
-    if port > 0:
-      for (owfssensor,owfstype) in terrariumOWFSSensor.scan(port):
-        sensor_list.append(terrariumSensor(None,
-                                           'owfs',
-                                           owfstype,
-                                           owfssensor,
-                                           callback_indicator=unit_indicator))
+    for (sensor,sensortype) in terrariumOWFSSensor.scan():
+      sensor_list.append(terrariumSensor(None,
+                                         terrariumOWFSSensor.hardwaretype,
+                                         sensortype,
+                                         str(sensor),
+                                         callback_indicator=unit_indicator))
 
     # Scanning w1 system bus
-    for (w1sensor,w1type) in terrarium1WSensor.scan():
+    for (sensor,sensortype) in terrarium1WSensor.scan():
       sensor_list.append(terrariumSensor(None,
-                                         'w1',
-                                         w1type,
-                                         w1sensor,
+                                         terrarium1WSensor.hardwaretype,
+                                         sensortype,
+                                         str(sensor),
                                          callback_indicator=unit_indicator))
 
     # Scanning bluetooth devices
@@ -307,7 +347,7 @@ class terrariumSensor(object):
       sensor_list.append(terrariumSensor(None,
                                          terrariumMiFloraSensor.hardwaretype,
                                          sensortype,
-                                         sensor,
+                                         str(sensor),
                                          callback_indicator=unit_indicator))
 
     logger.info('Found %d temperature/humidity sensors in %.5f seconds' % (len(sensor_list),time.time() - starttime))
@@ -327,7 +367,7 @@ class terrariumSensor(object):
         if len(address) == 2:
           address.append(None)
 
-        cache_hash = md5(b'' + self.get_address().replace('-','').upper() + self.get_hardware_type()).hexdigest()
+        cache_hash = md5((self.get_hardware_type() + self.get_address()).encode()).hexdigest()
         hardwaresensor = self.__sensor_cache.get_sensor(cache_hash)
 
         if hardwaresensor is None:
@@ -337,7 +377,7 @@ class terrariumSensor(object):
             hardwaresensor = terrarium1WSensor(address[0])
           elif terrariumOWFSSensor.hardwaretype == self.get_hardware_type():
             # Dirty hack for OWFS sensors.... ;)
-            hardwaresensor = terrariumOWFSSensor(self.__sensor)
+            hardwaresensor = terrariumOWFSSensor(address[0])
 
           elif terrariumSHT2XSensor.hardwaretype == self.get_hardware_type():
             hardwaresensor = terrariumSHT2XSensor(address[0],address[1])
@@ -413,15 +453,24 @@ class terrariumSensor(object):
 
         if current is None or not (self.get_limit_min() <= current <= self.get_limit_max()):
           # Invalid current value.... log and ingore
-          logger.warn('Measured value %s%s from %s sensor \'%s\' is outside valid range %.2f%s - %.2f%s in %.5f seconds.' % (current,
-                                                                                                                             self.get_indicator(),
-                                                                                                                             self.get_type(),
-                                                                                                                             self.get_name(),
-                                                                                                                             self.get_limit_min(),
-                                                                                                                             self.get_indicator(),
-                                                                                                                             self.get_limit_max(),
-                                                                                                                             self.get_indicator(),
-                                                                                                                             time.time()-starttime))
+          logger.warning('Measured value %s%s from %s sensor \'%s\' is outside valid range %.2f%s - %.2f%s in %.5f seconds.' % (current,
+                                                                                                                                self.get_indicator(),
+                                                                                                                                self.get_type(),
+                                                                                                                                self.get_name(),
+                                                                                                                                self.get_limit_min(),
+                                                                                                                                self.get_indicator(),
+                                                                                                                                self.get_limit_max(),
+                                                                                                                                self.get_indicator(),
+                                                                                                                                time.time()-starttime))
+
+        elif not self.__within_limits(current,20):
+          logger.warning('Measured value %s%s from %s sensor \'%s\' is erratic compared to previous value %s%s in %.5f seconds.' % (current,
+                                                                                                                                self.get_indicator(),
+                                                                                                                                self.get_type(),
+                                                                                                                                self.get_name(),
+                                                                                                                                self.get_current(),
+                                                                                                                                self.get_indicator(),
+                                                                                                                                time.time()-starttime))
 
         else:
           self.current = current
@@ -433,12 +482,23 @@ class terrariumSensor(object):
                                                                                           self.get_current(),
                                                                                           self.get_indicator(),
                                                                                           time.time()-starttime))
-      except Exception, ex:
-        print ex
-        logger.exception('Error updating %s %s sensor \'%s\' with error:' % (self.get_hardware_type(),
+      except Exception as ex:
+        logger.error('Error updating %s %s sensor \'%s\' with error:' % (self.get_hardware_type(),
                                                                               self.get_type(),
                                                                               self.get_name()))
         logger.exception(ex)
+
+  def __within_limits(self,current_value, percentage = 10.0):
+    if self.current is None or self.get_type() in ['uva','uvb','light'] or self.get_hardware_type() in ['ytxx-digital']:
+      return True
+
+    total_area = abs(self.get_limit_max() - self.get_limit_min()) # 100%
+    diff = abs(self.current - current_value)
+
+    diff_percentage = (diff / total_area) * 100.0
+
+    return diff_percentage < percentage
+
 
   def get_data(self):
     data = {'id' : self.get_id(),
@@ -473,13 +533,13 @@ class terrariumSensor(object):
   def get_hardware_type(self):
     return self.hardwaretype
 
-  def set_hardware_type(self,type):
-    if type in terrariumSensor.VALID_HARDWARE_TYPES:
-      self.hardwaretype = type
+  def set_hardware_type(self,hwtype):
+    if hwtype in terrariumSensor.VALID_HARDWARE_TYPES:
+      self.hardwaretype = hwtype
 
-  def set_type(self,type,indicator):
-    if type in terrariumSensor.VALID_SENSOR_TYPES:
-      self.type = type
+  def set_type(self,sensortype,indicator):
+    if sensortype in terrariumSensor.VALID_SENSOR_TYPES:
+      self.type = sensortype
       self.__indicator = indicator
 
   def get_type(self):
@@ -493,13 +553,8 @@ class terrariumSensor(object):
     return self.sensor_address
 
   def set_address(self,address):
-    if isinstance(address, basestring):
+    if isinstance(address, str):
       self.sensor_address = address
-
-    elif terrariumOWFSSensor.hardwaretype == self.get_hardware_type() and not isinstance(address, basestring):
-      # OW Sensor object
-      self.__sensor = address
-      self.sensor_address = self.__sensor.address
 
   def set_name(self,name):
     self.name = str(name)
@@ -550,13 +605,19 @@ class terrariumSensor(object):
     return self.__temp_offset
 
   def get_current(self, force = False):
-    current = self.current
+    current = 0 if self.current is None else self.current
     indicator = self.get_indicator().lower()
 
     if 'f' == indicator:
-      current = terrariumUtils.to_fahrenheit(self.current)
+      current = terrariumUtils.to_fahrenheit(current)
+    elif 'k' == indicator:
+      current = terrariumUtils.to_kelvin(current)
     elif 'inch' == indicator:
-      current = terrariumUtils.to_inches(self.current)
+      current = terrariumUtils.to_inches(current)
+    elif 'usgall' == indicator:
+      current = terrariumUtils.to_us_gallons(current)
+    elif 'ukgall' == indicator:
+      current = terrariumUtils.to_uk_gallons(current)
 
     return float(current)
 
