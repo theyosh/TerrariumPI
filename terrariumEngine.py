@@ -23,11 +23,11 @@ import re
 from hashlib import md5
 
 from terrariumConfig import terrariumConfig
-from terrariumWeather import terrariumWeather
+from terrariumWeather import terrariumWeather, terrariumWeatherSourceException
 from terrariumSensor import terrariumSensor
 from terrariumSwitch import terrariumSwitch
 from terrariumDoor import terrariumDoor
-from terrariumWebcam import terrariumWebcam
+from terrariumWebcam import terrariumWebcam, terrariumWebcamSourceException
 from terrariumAudio import terrariumAudioPlayer
 from terrariumCollector import terrariumCollector
 from terrariumEnvironment import terrariumEnvironment
@@ -586,7 +586,15 @@ class terrariumEngine(object):
 
   # Weather part
   def set_weather_config(self,data):
-    return self.weather.set_source(data['location'],True) and self.config.save_weather(data)
+    try:
+      self.weather = terrariumWeather(data['location'],
+                                      self.get_temperature_indicator,
+                                      self.get_windspeed_indicator,
+                                      self.get_weather)
+    except terrariumWeatherSourceException as ex:
+      return False
+
+    return self.config.save_weather(data)
 
   def get_weather_config(self):
     return self.weather.get_config()
