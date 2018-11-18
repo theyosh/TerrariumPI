@@ -9,7 +9,10 @@ logger.debug('Setting terrariumPI GPIO Mode to %s' % (GPIO.BCM,))
 GPIO.setmode(GPIO.BCM)
 logger.debug('Done setting terrariumPI GPIO Mode to %s' % (GPIO.BCM,))
 
-import thread
+try:
+  import thread as _thread
+except ImportError as ex:
+  import _thread
 import time
 import datetime
 import uptime
@@ -52,7 +55,8 @@ class terrariumEngine(object):
                     'uvb'         : 'uW/cm^2',
                     'fertility'   : 'uS/cm',
                     'co2'         : 'ppm',
-                    'volume'      : 'L'}
+                    'volume'      : 'L',
+                    'windspeed'   : 'kmh'}
 
     # List of queues for websocket communication
     self.subscribed_queues = []
@@ -105,11 +109,21 @@ class terrariumEngine(object):
     self.set_distance_indicator(self.config.get_distance_indicator())
     logger.info('Done loading terrariumPI PI distance indicator')
 
+    # Set the system windspeed indicator
+    logger.info('Loading terrariumPI PI windspeed indicator')
+    self.set_windspeed_indicator(self.config.get_windspeed_indicator())
+    logger.info('Done loading terrariumPI PI windspeed indicator')
+
+    # Set the system volume indicator
+    logger.info('Loading terrariumPI PI volume indicator')
+    self.set_volume_indicator(self.config.get_volume_indicator())
+    logger.info('Done loading terrariumPI PI volume indicator')
+
     # Load Weather part
     logger.info('Loading terrariumPI weather data')
     self.weather = terrariumWeather(self.config.get_weather_location(),
-                                    self.config.get_weather_windspeed(),
-                                    self.__unit_type,
+                                    self.get_temperature_indicator,
+                                    self.get_windspeed_indicator,
                                     self.get_weather)
     logger.info('Done loading terrariumPI weather data')
 
@@ -138,9 +152,9 @@ class terrariumEngine(object):
 
     # Start system update loop
     self.__running = True
-    thread.start_new_thread(self.__engine_loop, ())
-    thread.start_new_thread(self.__webcam_loop, ())
-    thread.start_new_thread(self.__log_tail, ())
+    _thread.start_new_thread(self.__engine_loop, ())
+    _thread.start_new_thread(self.__webcam_loop, ())
+    _thread.start_new_thread(self.__log_tail, ())
     logger.info('TerrariumPI engine is running')
 
   # Private/internal functions
@@ -156,7 +170,7 @@ class terrariumEngine(object):
       self.sensors = {}
 
     seen_sensors = []
-    for sensor in terrariumSensor.scan(self.config.get_owfs_port(), self.__unit_type):
+    for sensor in terrariumSensor.scan(self.__unit_type):
       self.sensors[sensor.get_id()] = sensor
 
     for sensordata in sensor_config:
@@ -340,6 +354,7 @@ class terrariumEngine(object):
         height = 480
         archive = False
         archive_light = 'ignore'
+        archive_door = 'ignore'
 
         if 'resolution_width' in webcamdata and 'resolution_height' in webcamdata:
           width = webcamdata['resolution_width']
@@ -351,6 +366,9 @@ class terrariumEngine(object):
         if 'archivelight' in webcamdata:
           archive_light = webcamdata['archivelight']
 
+        if 'archivedoor' in webcamdata:
+          archive_door = webcamdata['archivedoor']
+
         webcam = terrariumWebcam(None,
                                  webcamdata['location'],
                                  webcamdata['name'],
@@ -358,6 +376,7 @@ class terrariumEngine(object):
                                  width,height,
                                  archive,
                                  archive_light,
+                                 archive_door,
                                  self.environment)
         self.webcams[webcam.get_id()] = webcam
       else:
@@ -378,6 +397,9 @@ class terrariumEngine(object):
 
       if 'archivelight' in webcamdata:
         webcam.set_archive_light(webcamdata['archivelight'])
+
+      if 'archivedoor' in webcamdata:
+        webcam.set_archive_door(webcamdata['archivedoor'])
 
       seen_webcams.append(webcam.get_id())
 
@@ -493,8 +515,8 @@ class terrariumEngine(object):
         self.collector.log_system_data(system_data)
         self.get_system_stats(socket=True)
 
-      except Exception, err:
-        print err
+      except Exception as err:
+        print(err)
 
       display_message = ['%s %s' % (_('Uptime'),terrariumUtils.format_uptime(system_data['uptime']),),
                          '%s %s %s %s' % (_('Load'),system_data['load']['load1'],system_data['load']['load5'],system_data['load']['load15']),
@@ -536,7 +558,7 @@ class terrariumEngine(object):
     logger.info('Start terrariumPI engine log')
     logtail = subprocess.Popen(['tail','-F','log/terrariumpi.log'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     for line in logtail.stdout:
-      self.__send_message({'type':'logtail','data':line.strip()})
+      self.__send_message({'type':'logtail','data':line.strip().decode('utf-8')})
 
   def __unit_type(self,unittype):
     if unittype in self.__units:
@@ -564,12 +586,7 @@ class terrariumEngine(object):
 
   # Weather part
   def set_weather_config(self,data):
-    update_ok = self.weather.set_source(data['location']) and self.config.save_weather(data)
-    if update_ok:
-      #self.weather.set_source(self.config.get_weather_location())
-      self.weather.set_windspeed_indicator(self.config.get_weather_windspeed())
-
-    return update_ok
+    return self.weather.set_source(data['location'],True) and self.config.save_weather(data)
 
   def get_weather_config(self):
     return self.weather.get_config()
@@ -885,7 +902,7 @@ class terrariumEngine(object):
     return self.get_profile_config()['image']
 
   def set_profile(self,data,files):
-    if 'profile_image' in files.keys():
+    if 'profile_image' in files:
       profile_image = files.get('profile_image')
       name, ext = os.path.splitext(profile_image.filename)
       if ext not in ('.png','.jpg','.jpeg'):
@@ -999,6 +1016,18 @@ class terrariumEngine(object):
   def set_temperature_indicator(self,value):
     self.__units['temperature'] = value
 
+  def get_windspeed_indicator(self):
+    return self.__unit_type('windspeed')
+
+  def set_windspeed_indicator(self,value):
+    self.__units['windspeed'] = value
+
+  def get_volume_indicator(self):
+    return self.__unit_type('volume')
+
+  def set_volume_indicator(self,value):
+    self.__units['volume'] = value
+
   def get_humidity_indicator(self):
     return self.__unit_type('humidity')
 
@@ -1096,7 +1125,7 @@ class terrariumEngine(object):
           return False
 
       # Update weather data
-      update_ok = self.set_weather_config({'location' : data['location'], 'windspeed' : data['windspeed']}) and self.set_system_config(data)
+      update_ok = self.set_weather_config({'location' : data['location']}) and self.set_system_config(data)
       if update_ok:
         # Update config settings
         self.pi_power_wattage = float(self.config.get_pi_power_wattage())
@@ -1104,13 +1133,15 @@ class terrariumEngine(object):
 
         self.set_temperature_indicator(self.config.get_temperature_indicator())
         self.set_distance_indicator(self.config.get_distance_indicator())
-
-        #self.temperature_indicator = self.config.get_temperature_indicator()
+        self.set_windspeed_indicator(self.config.get_windspeed_indicator())
+        self.set_volume_indicator(self.config.get_volume_indicator())
 
     return update_ok
 
   def get_system_config(self):
     data = self.config.get_system()
+    data['windspeed_indicator'] = self.get_windspeed_indicator()
+
     del(data['password'])
     return data
 

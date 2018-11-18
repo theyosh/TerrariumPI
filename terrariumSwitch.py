@@ -4,7 +4,10 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 import RPi.GPIO as GPIO
 import pigpio
-import thread
+try:
+  import thread as _thread
+except ImportError as ex:
+  import _thread
 import math
 import requests
 import datetime
@@ -116,7 +119,7 @@ class terrariumSwitch(object):
   @staticmethod
   def scan_wemo_switches(callback=None):
     for device in pywemo.discover_devices():
-      yield terrariumSwitch(md5(b'' + 'wemo' + device.serialnumber).hexdigest(),
+      yield terrariumSwitch(md5(('wemo' + device.serialnumber).encode()).hexdigest(),
                             'wemo',
                             device.host,
                             device.name,
@@ -126,7 +129,7 @@ class terrariumSwitch(object):
 
   def __load_ftdi_device(self):
     for device in Driver().list_devices():
-      vendor, product, self.device = map(lambda x: x.decode('latin1'), device)
+      vendor, product, self.device = [x.decode('latin1') for x in device]
       self.device_type = 'Serial' if product.endswith('UART') else 'BitBang'
       logger.debug('Found switch board %s, %s, %s, of type %s' % (vendor,product,self.device,self.device_type))
       break # For now, we only support 1 switch board!
@@ -136,12 +139,10 @@ class terrariumSwitch(object):
 
   def __load_gpio_device(self):
     pass
-#    GPIO.setmode(GPIO.BOARD)
 
   def __load_pwm_device(self):
     self.__dimmer_running = False
     pigpio.exceptions = False
-    # localhost will not work always due to IPv6. Explicit 127.0.0.1 host
     self.__pigpio = pigpio.pi('localhost')
     if not self.__pigpio.connected:
       self.__pigpio = pigpio.pi()
@@ -268,7 +269,7 @@ class terrariumSwitch(object):
               device.write(cmd)
               device.close()
 
-        except Exception, err:
+        except Exception as err:
           # Ignore for now
           pass
 
@@ -278,7 +279,12 @@ class terrariumSwitch(object):
           address = 4
 
         logger.debug('Change remote Energenie USB power switch nr %s, on device nr %s, to state %s' % (address,self.device,state))
-        subprocess.call(['/usr/bin/sispmctl', '-d',str(self.device),('-o' if state is terrariumSwitch.ON else '-f'),str(address)],stdout=open(os.devnull, 'w'), stderr=subprocess.STDOUT)
+
+        if sys.version_info.major == 2:
+          with open(os.devnull, 'w') as devnull:
+            subprocess.call(['/usr/bin/sispmctl', '-d',str(self.device),('-o' if state is terrariumSwitch.ON else '-f'),str(address)],stdout=devnull, stderr=subprocess.STDOUT)
+        elif sys.version_info.major == 3:
+          subprocess.run(['/usr/bin/sispmctl', '-d',str(self.device),('-o' if state is terrariumSwitch.ON else '-f'),str(address)],capture_output=True)
 
       elif self.get_hardware_type() == 'eg-pm-rf':
         logger.debug('Change remote Energenie RF power switch nr %s, to state %s' % (self.get_address(),state))
@@ -311,7 +317,7 @@ class terrariumSwitch(object):
                 self.device.logout()
               else:
                 logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.sensor_address,webstatus['logintxt'],webstatus['login']))
-            except Exception, ex:
+            except Exception as ex:
               logger.exception('Could not login to the Energenie LAN device %s at location %s. Error status %s' % (self.get_name(),self.sensor_address,ex))
 
       elif self.get_hardware_type() == 'gpio':
@@ -331,7 +337,7 @@ class terrariumSwitch(object):
           state = self.get_dimmer_off_percentage()
           duration = self.get_dimmer_off_duration()
 
-        thread.start_new_thread(self.__dim_switch, (self.state,state,duration))
+        _thread.start_new_thread(self.__dim_switch, (self.state,state,duration))
       elif 'remote' in self.get_hardware_type():
         # Not yet implemented
         pass
@@ -428,7 +434,7 @@ class terrariumSwitch(object):
               # Dirty hack to process array data....
               try:
                 item = int(item)
-              except Exception, ex:
+              except Exception as ex:
                 item = str(item)
 
               data = data[item]
@@ -500,13 +506,13 @@ class terrariumSwitch(object):
           if status['login'] != 0:
             logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.sensor_address,status['logintxt'],status['login']))
             self.device = None
-        except Exception, ex:
+        except Exception as ex:
           logger.exception('Could not login to the Energenie LAN device %s at location %s. Error status %s' % (self.get_name(),self.sensor_address,ex))
 
     elif 'gpio' in self.get_hardware_type():
       try:
         GPIO.setup(terrariumUtils.to_BCM_port_number(self.get_address()), GPIO.OUT)
-      except Exception, err:
+      except Exception as err:
         logger.warning(err)
         pass
 

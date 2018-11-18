@@ -62,6 +62,7 @@
     globals.current_version = '{{version}}';
     globals.temperature_indicator = '{{temperature_indicator}}';
     globals.distance_indicator = '{{distance_indicator}}';
+    globals.volume_indicator = '{{volume_indicator}}';
     globals.language = '{{lang}}';
     globals.horizontal_legend = {{horizontal_graph_legend}};
   </script>

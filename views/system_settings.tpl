@@ -16,15 +16,7 @@
             <p>{{_('Here you can configure your TerrariumPI server.')}} {{!_('Required fields are marked with \'%s\'.') % ('<span class="required">*</span>',)}}</p>
             <ul>
               <li>
-                <strong>{{_('Weather location')}}</strong>: {{!translations.get_translation('weather_field_location')}}
-                <ul>
-                  <li><strong>YR.no</strong>: https://www.yr.no/place/[COUNTRY]/[PROVANCE]/[CITY]</li>
-                  <li><strong>Weather underground</strong>: http://api.wunderground.com/api/[YOUR_API_KEY]/<strong>geolookup/astronomy/hourly10day</strong>/q/[COUNTRY]/[CITY].json</li>
-                  <li><strong>OpenWeatherMap</strong>: https://api.openweathermap.org/data/2.5/weather?q=[CITY],[COUNTRY_2LETTER]&units=metric&appid=[YOUR_API_KEY]</li>
-                </ul>
-              </li>
-              <li>
-                <strong>{{_('Wind speed indicator')}}</strong>: {{translations.get_translation('weather_field_wind_speed')}}
+                <strong>{{_('Weather location')}}</strong>: {{!translations.get_translation('weather_field_location_long')}}
               </li>
             </ul>
           </div>
@@ -59,10 +51,10 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="windspeed">{{_('Wind speed indicator')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="windspeed_indicator">{{_('Wind speed indicator')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('weather_field_wind_speed')}}">
-                        <select class="form-control" name="windspeed" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                        <select class="form-control" name="windspeed_indicator" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="ms">{{_('m/s')}}</option>
                           <option value="kmh">{{_('Km/h')}}</option>
                         </select>
@@ -76,6 +68,7 @@
                         <select class="form-control" required="required" name="temperature_indicator" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="C">{{_('Celsius')}}</option>
                           <option value="F">{{_('Fahrenheit')}}</option>
+                          <option value="K">{{_('Kelvin')}}</option>
                         </select>
                       </div>
                     </div>
@@ -91,6 +84,20 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="volume_indicator">{{_('Volume indicator')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_volume_indicator')}}">
+                        <select class="form-control" required="required" name="volume_indicator" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option value="L">{{_('Litres')}}</option>
+                          <option value="usgall">{{_('US Gallons')}}</option>
+                          <option value="ukgall">{{_('UK Gallons')}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="admin">{{_('Admin name')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
@@ -176,12 +183,6 @@
                       <input class="form-control" name="port" required="required" type="text" placeholder="{{_('Port number')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_port_number')}}">
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="owfs_port">{{_('OWFS server port')}}</label>
-                    <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control" name="owfs_port" type="text" placeholder="{{_('OWFS server port')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_owfs_port')}}">
-                    </div>
-                  </div>
                   <div class="ln_solid"></div>
                   <div class="form-group">
                     <div class="col-md-11 col-sm-11 col-xs-12 text-center">
@@ -203,12 +204,17 @@
                 minimumResultsForSearch: Infinity
             });
 
-            var windspeed_indicator = $("select[name='windspeed']").select2({
+            var windspeed_indicator = $("select[name='windspeed_indicator']").select2({
                 placeholder: '{{_('Select an option')}}',
                 allowClear: false,
                 minimumResultsForSearch: Infinity
             });
 
+            var volume_indicator = $("select[name='volume_indicator']").select2({
+                placeholder: '{{_('Select an option')}}',
+                allowClear: false,
+                minimumResultsForSearch: Infinity
+            });
 
             var soundcard_selector = $("select[name='soundcard']").select2({
                 placeholder: '{{_('Select an option')}}',
@@ -229,7 +235,8 @@
 
               $.get('/api/config/weather',function(data) {
                 $('input[name="location"]').val(data.location);
-                windspeed_indicator.val(data.windspeed).trigger('change');
+                windspeed_indicator.val(data.windspeed_indicator).trigger('change');
+                volume_indicator.val(data.volume_indicator).trigger('change');
 
                 $.get($('form').attr('action'),function(data){
                   $.each(data.available_languages,function(index,value){

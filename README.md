@@ -1,9 +1,11 @@
-# TerrariumPI 3.8.4
+# TerrariumPI 3.9.0
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
 
 For humidity control there is support for a spraying system. The sprayer can be configured to spray for an X amount of seconds and there is a minumal period between two spray actions. Use at least one humitidy sensors to get a constant humidity value. In order to lower the humidity you can add a dehumidifier.
 
 The software is that flexible that there is no limit in amount of sensors, relay boards or door sensors. The usage can be endless. All power switches have support for timers to trigger based on a time pattern.
+
+It can either run on Python 2.7 or [Python 3.5+](https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-use-python-35)
 
 Think off:
 - Terrarium (wet or dry)
@@ -33,7 +35,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Predefined on and off dimming durations
   - Predefined on and off dimming percentages
   - Predefined dimming steps for environment system (heater and cooler)
-- Support for timmers in power switches and environment #72
+- Support for timmers in power switches and environment [#72](https://github.com/theyosh/TerrariumPI/issues/72)
   - Predefined start and stop times based on timer or weather
   - Predefined on and off durations in minutes
 - Support for Energenie USB and LAN power switches [EG-PM(s)2](http://energenie.com/item.aspx?id=7556)
@@ -67,7 +69,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
 - Temperatures in Celsius or Fahrenheit
 - Distances in centimetres or inches
 - Alarm detections
-- Audio support through interal audio jack or USB soundcards #42
+- Audio support through interal audio jack or USB soundcards [#42](https://github.com/theyosh/TerrariumPI/issues/42)
   - Create playlists (loop and repeat)
   - Volume controle in the webinterface
   - Uploading audio files through webinterface

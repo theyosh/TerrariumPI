@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 # https://untangle.readthedocs.io/en/latest/#encoding
-import sys
-reload(sys) # just to be sure
-sys.setdefaultencoding('utf-8')
+try:
+  # This is python2 only...
+  import sys
+  reload(sys) # just to be sure
+  sys.setdefaultencoding('utf-8')
+except Exception as ex:
+  pass
 
 '''
 Install extra modules:
