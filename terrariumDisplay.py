@@ -429,6 +429,9 @@ class terrariumOLED(terrariumScreen):
     self.__screen.image(image)
     self.__screen.display()
 
+class terrariumDisplaySourceException(Exception):
+  '''The entered display source is not known or invalid'''
+
 # Factory class
 class terrariumDisplay(object):
 
@@ -441,4 +444,4 @@ class terrariumDisplay(object):
     elif resolution in ['128x64']:
       return terrariumOLED(id,address,name,resolution,title)
 
-    raise Exception()
+    raise terrariumDisplaySourceException()

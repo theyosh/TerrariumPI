@@ -29,7 +29,7 @@ import json
 import requests
 
 from terrariumUtils import terrariumUtils, terrariumSingleton
-from terrariumDisplay import terrariumDisplay
+from terrariumDisplay import terrariumDisplay, terrariumDisplaySourceException
 
 from gevent import monkey, sleep
 monkey.patch_all()
@@ -576,7 +576,10 @@ class terrariumNotification(terrariumSingleton):
   def set_display(self,address,resolution,title):
     self.display = None
     if address is not None and '' != address:
-      self.display = terrariumDisplay(None,address,'notification',resolution,title)
+      try:
+        self.display = terrariumDisplay(None,address,'notification',resolution,title)
+      except terrariumDisplaySourceException as ex:
+        self.display = None
 
       if self.__profile_image is not None:
         self.display.write_image(self.__profile_image)
