@@ -27,6 +27,16 @@ class terrariumUtils():
     return (39.370078740157 / 100.0) * float(value)
 
   @staticmethod
+  def to_us_gallons(value):
+    # https://www.asknumbers.com/gallons-to-liters.aspx
+    return float(value) / 3.7854118
+
+  @staticmethod
+  def to_uk_gallons(value):
+    # https://www.asknumbers.com/gallons-to-liters.aspx
+    return float(value) / 4.54609
+
+  @staticmethod
   def is_float(value):
     if value is None or '' == value:
       return False

@@ -609,9 +609,15 @@ class terrariumSensor(object):
     indicator = self.get_indicator().lower()
 
     if 'f' == indicator:
-      current = terrariumUtils.to_fahrenheit(self.current)
+      current = terrariumUtils.to_fahrenheit(current)
+    elif 'k' == indicator:
+      current = terrariumUtils.to_kelvin(current)
     elif 'inch' == indicator:
-      current = terrariumUtils.to_inches(self.current)
+      current = terrariumUtils.to_inches(current)
+    elif 'usgall' == indicator:
+      current = terrariumUtils.to_us_gallons(current)
+    elif 'ukgall' == indicator:
+      current = terrariumUtils.to_uk_gallons(current)
 
     return float(current)
 

@@ -116,10 +116,7 @@ class terrariumWeatherSource(object):
     now = int(starttime)
     send_message = False
     for period in sorted(self.hour_forecast.keys(),key=int):
-      print('check period: {} => {} > {}'.format(period,now,self.hour_forecast[period]['to']))
       if now > self.hour_forecast[period]['to']:
-        print('Deleting old weahter data:')
-        print(self.hour_forecast[period])
         del(self.hour_forecast[period])
         send_message = True
       elif now < self.hour_forecast[period]['to']:
@@ -127,10 +124,7 @@ class terrariumWeatherSource(object):
 
     # Update week forecast
     for period in sorted(self.week_forecast.keys(),key=int):
-      print('check period: {} => {} > {}'.format(period,now,self.week_forecast[period]['to']))
       if now > self.week_forecast[period]['to']:
-        print('Deleting old weahter data:')
-        print(self.week_forecast[period])
         del(self.week_forecast[period])
         send_message = True
       elif now < self.week_forecast[period]['to']:
@@ -160,13 +154,23 @@ class terrariumWeatherSource(object):
     for period in sorted(self.hour_forecast.keys(),key=int):
       item = copy.deepcopy(self.hour_forecast[period])
       item['wind_speed'] *= (3.6 if self.get_windspeed_indicator() == 'kmh' else 1.0)
-      item['temperature'] = item['temperature'] if self.get_temperature_indicator() == 'C' else terrariumUtils.to_fahrenheit(item['temperature'])
+
+      if self.get_temperature_indicator() == 'F':
+        item['temperature'] = terrariumUtils.to_fahrenheit(item['temperature'])
+      elif self.get_temperature_indicator() == 'K':
+        item['temperature'] = terrariumUtils.to_kelvin(item['temperature'])
+
       data['hour_forecast'].append(item)
 
     for period in sorted(self.week_forecast.keys(),key=int):
       item = copy.deepcopy(self.week_forecast[period])
       item['wind_speed'] *= (3.6 if self.get_windspeed_indicator() == 'kmh' else 1.0)
-      item['temperature'] = item['temperature'] if self.get_temperature_indicator() == 'C' else terrariumUtils.to_fahrenheit(item['temperature'])
+
+      if self.get_temperature_indicator() == 'F':
+        item['temperature'] = terrariumUtils.to_fahrenheit(item['temperature'])
+      elif self.get_temperature_indicator() == 'K':
+        item['temperature'] = terrariumUtils.to_kelvin(item['temperature'])
+
       data['week_forecast'].append(item)
 
     return data

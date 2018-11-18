@@ -71,6 +71,7 @@
                         <select class="form-control" required="required" name="temperature_indicator" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="C">{{_('Celsius')}}</option>
                           <option value="F">{{_('Fahrenheit')}}</option>
+                          <option value="K">{{_('Kelvin')}}</option>
                         </select>
                       </div>
                     </div>
@@ -86,6 +87,20 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="volume_indicator">{{_('Volume indicator')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_volume_indicator')}}">
+                        <select class="form-control" required="required" name="volume_indicator" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option value="L">{{_('Litres')}}</option>
+                          <option value="usgall">{{_('US Gallons')}}</option>
+                          <option value="ukgall">{{_('UK Gallons')}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="admin">{{_('Admin name')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
@@ -192,7 +207,13 @@
                 minimumResultsForSearch: Infinity
             });
 
-            var windspeed_indicator = $("select[name='windspeed']").select2({
+            var windspeed_indicator = $("select[name='windspeed_indicator']").select2({
+                placeholder: '{{_('Select an option')}}',
+                allowClear: false,
+                minimumResultsForSearch: Infinity
+            });
+
+            var volume_indicator = $("select[name='volume_indicator']").select2({
                 placeholder: '{{_('Select an option')}}',
                 allowClear: false,
                 minimumResultsForSearch: Infinity
@@ -217,7 +238,8 @@
 
               $.get('/api/config/weather',function(data) {
                 $('input[name="location"]').val(data.location);
-                windspeed_indicator.val(data.windspeed).trigger('change');
+                windspeed_indicator.val(data.windspeed_indicator).trigger('change');
+                volume_indicator.val(data.volume_indicator).trigger('change');
 
                 $.get($('form').attr('action'),function(data){
                   $.each(data.available_languages,function(index,value){
