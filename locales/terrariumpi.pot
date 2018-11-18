@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.0\n"
-"POT-Creation-Date: 2018-11-18 14:49+CET\n"
+"POT-Creation-Date: 2018-11-18 16:52+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -472,42 +472,46 @@ msgid "Choose the windspeed indicator. The software will recalculate to the chos
 msgstr ""
 
 #: terrariumTranslations.py:157
-msgid "Holds the host name or IP address on which the software will listen for connections. Enter :: for all addresses to bind."
+msgid "Choose the volume (liquid) indicator. The software will recalculate to the chosen indicator."
 msgstr ""
 
 #: terrariumTranslations.py:158
+msgid "Holds the host name or IP address on which the software will listen for connections. Enter :: for all addresses to bind."
+msgstr ""
+
+#: terrariumTranslations.py:159
 msgid "Holds the port number on which the software is listening for connections."
 msgstr ""
 
-#: terrariumTranslations.py:163
+#: terrariumTranslations.py:164
 msgid "Holds the name of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:164
+#: terrariumTranslations.py:165
 msgid "Holds the type of the animal"
 msgstr ""
 
-#: terrariumTranslations.py:165
+#: terrariumTranslations.py:166
 msgid "Holds the gender of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:166
+#: terrariumTranslations.py:167
 msgid "Holds the day of birth of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:167
+#: terrariumTranslations.py:168
 msgid "Holds the species name of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:168
+#: terrariumTranslations.py:169
 msgid "Holds the latin name of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:169
+#: terrariumTranslations.py:170
 msgid "Holds a small description about the animal."
 msgstr ""
 
-#: terrariumTranslations.py:170
+#: terrariumTranslations.py:171
 msgid "Holds a link to more information."
 msgstr ""
 
