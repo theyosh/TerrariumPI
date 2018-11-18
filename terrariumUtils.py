@@ -5,6 +5,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 import re
 import datetime
 import requests
+from math import log
 
 class terrariumUtils():
 
@@ -264,6 +265,11 @@ class terrariumUtils():
   @staticmethod
   def format_uptime(value):
     return str(datetime.timedelta(seconds=int(value)))
+
+  @staticmethod
+  def format_filesize(n,pow=0,b=1024,u='B',pre=['']+[p+'i'for p in'KMGTPEZY']):
+    pow,n=min(int(log(max(n*b**pow,1),b)),len(pre)-1),n*b**pow
+    return "%%.%if %%s%%s"%abs(pow%(-pow-1))%(n/b**float(pow),pre[pow],u)
 
 # works in Python 2 & 3
 class _Singleton(type):

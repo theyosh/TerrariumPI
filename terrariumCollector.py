@@ -7,6 +7,8 @@ import time
 import copy
 import os
 
+from terrariumUtils import terrariumUtils
+
 class terrariumCollector(object):
   DATABASE = 'history.db'
   # Store data every Xth minute. Except switches and doors
@@ -140,7 +142,11 @@ class terrariumCollector(object):
 
         db.commit()
         if int(to_version) % 10 == 0:
-          logger.info('Cleaning up disk space. This will take a couple of minutes depending on the database size and sd card disk speed.')
+          logger.warning('Cleaning up disk space. This will take a couple of minutes depending on the database size and sd card disk speed.')
+          filesize = os.path.getsize(terrariumCollector.DATABASE)
+          speed = 2 # MBps
+          duration = filesize / 1024.0 / 1024.0 / speed
+          logger.warning('Current database is {} in size and with a speed of {}MBps it will take {} to complete'.format(terrariumUtils.format_filesize(filesize),speed,terrariumUtils.format_uptime(duration)))
           cur.execute('VACUUM')
 
         cur.execute('PRAGMA user_version = ' + str(to_version))
