@@ -114,6 +114,11 @@ class terrariumEngine(object):
     self.set_windspeed_indicator(self.config.get_windspeed_indicator())
     logger.info('Done loading terrariumPI PI windspeed indicator')
 
+    # Set the system volume indicator
+    logger.info('Loading terrariumPI PI volume indicator')
+    self.set_volume_indicator(self.config.get_volume_indicator())
+    logger.info('Done loading terrariumPI PI volume indicator')
+
     # Load Weather part
     logger.info('Loading terrariumPI weather data')
     self.weather = terrariumWeather(self.config.get_weather_location(),
@@ -1017,6 +1022,12 @@ class terrariumEngine(object):
   def set_windspeed_indicator(self,value):
     self.__units['windspeed'] = value
 
+  def get_volume_indicator(self):
+    return self.__unit_type('volume')
+
+  def set_volume_indicator(self,value):
+    self.__units['volume'] = value
+
   def get_humidity_indicator(self):
     return self.__unit_type('humidity')
 
@@ -1123,12 +1134,12 @@ class terrariumEngine(object):
         self.set_temperature_indicator(self.config.get_temperature_indicator())
         self.set_distance_indicator(self.config.get_distance_indicator())
         self.set_windspeed_indicator(self.config.get_windspeed_indicator())
+        self.set_volume_indicator(self.config.get_volume_indicator())
 
     return update_ok
 
   def get_system_config(self):
     data = self.config.get_system()
-#    data['windspeed'] = self.get_windspeed_indicator()
     data['windspeed_indicator'] = self.get_windspeed_indicator()
 
     del(data['password'])

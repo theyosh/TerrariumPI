@@ -1187,7 +1187,7 @@ function history_graph(name, data, type) {
             break
 
           case 'volume':
-            val = formatNumber(val) + ' L';
+            val = formatNumber(val) + ' ' + globals.volume_indicator;
             break
 
           case 'uva':

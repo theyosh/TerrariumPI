@@ -481,13 +481,17 @@ class terrariumConfig(object):
     config = self.get_weather()
     return config['location'] if 'location' in config else None
 
-  def get_weather_windspeed(self):
+  '''def get_weather_windspeed(self):
     config = self.get_system()
-    return config['windspeed_indicator'] if 'windspeed_indicator' in config else None
+    return config['windspeed_indicator'] if 'windspeed_indicator' in config else None'''
 
   def get_windspeed_indicator(self):
     config = self.get_system()
     return config['windspeed_indicator'] if 'windspeed_indicator' in config else None
+
+  def get_volume_indicator(self):
+    config = self.get_system()
+    return config['volume_indicator'] if 'volume_indicator' in config else None
 
   def get_temperature_indicator(self):
     config = self.get_system()
