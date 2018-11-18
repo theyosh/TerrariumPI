@@ -16,10 +16,7 @@
             <p>{{_('Here you can configure your TerrariumPI server.')}} {{!_('Required fields are marked with \'%s\'.') % ('<span class="required">*</span>',)}}</p>
             <ul>
               <li>
-                <strong>{{_('Weather location')}}</strong>: {{!translations.get_translation('weather_field_location')}}
-              </li>
-              <li>
-                <strong>{{_('Wind speed indicator')}}</strong>: {{translations.get_translation('weather_field_wind_speed')}}
+                <strong>{{_('Weather location')}}</strong>: {{!translations.get_translation('weather_field_location_long')}}
               </li>
             </ul>
           </div>
