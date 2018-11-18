@@ -108,8 +108,9 @@ else
   # Update version?
   if update_software ; then
     message "TerrariumPI has detected an update and will now run the installer to update all dependencies and libraries."
-    ./install.sh
-    message "Updating TerrariumPI software is done and will now start in 5 seconds."
+    ./install.sh ${PYTHON}
+
+    message "Updating TerrariumPI software is done and will now start in 5 seconds. Press Ctrl+C to abort."
     for (( counter=5; counter>0; counter-- ))
     do
       echo -n "${counter} "

@@ -371,7 +371,14 @@ class terrariumConfig(object):
 
         elif version == 385:
           logger.info('Updating configuration file to version: %s' % (version,))
-          self.__config.set('terrariumpi', 'windspeed_indicator',  self.__get_config('weather').get('windspeed'))
+
+          windspeed_indicator = self.__get_config('weather').get('windspeed')
+          if windspeed_indicator is None:
+            windspeed_indicator = self.__get_config('terrariumpi').get('windspeed_indicator')
+            if windspeed_indicator is None:
+                windspeed_indicator = 'kmh'
+
+          self.__config.set('terrariumpi', 'windspeed_indicator',  windspeed_indicator)
           self.__config.remove_option('weather','windspeed')
 
       # Update version number
