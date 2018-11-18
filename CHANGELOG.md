@@ -2,7 +2,134 @@ Changelog
 =========
 
 
-3.8.4 (2018-07-04)
+3.9.0 (2018-11-18)
+------------------
+
+**New**
+------
+- Add Kelvin and Gallons to unit values. Code cleanup. [TheYOSH]
+- Add remote JSON example file. [TheYOSH]
+- Add image support for Pushover. [TheYOSH]
+- Add support for sending images trough telegram. [TheYOSH]
+- Add missing package. [TheYOSH]
+- Add volume sensor type through remote sensors. [#198](https://github.com/theyosh/TerrariumPI/issues/198). [TheYOSH]
+- Add support for SHT3X sensors. (untested) [#201](https://github.com/theyosh/TerrariumPI/issues/201). [TheYOSH]
+- Add support for Energenie Pi-Mote. [#199](https://github.com/theyosh/TerrariumPI/issues/199). [TheYOSH]
+- Add files via upload. [Marvv90]
+- Add watchdog script with cron example. [#185](https://github.com/theyosh/TerrariumPI/issues/185). [TheYOSH]
+- Added some checks for offline WeMo devices. [#187](https://github.com/theyosh/TerrariumPI/issues/187). [TheYOSH]
+- Add extra dev line for new EnerGenie ID. [#195](https://github.com/theyosh/TerrariumPI/issues/195). [TheYOSH]
+- Add WeMo power switch support. [#187](https://github.com/theyosh/TerrariumPI/issues/187). [theyosh]
+- Add serial LCD display support (un tested). [#193](https://github.com/theyosh/TerrariumPI/issues/193). [theyosh]
+- Add motion detection for day or night only. [#184](https://github.com/theyosh/TerrariumPI/issues/184). [theyosh]
+- Add support to Norwegian datatables in audio files list. [#181](https://github.com/theyosh/TerrariumPI/issues/181).
+  [theyosh]
+- Add missing skyicon. [theyosh]
+- Add CO2 support and update fertility environments. [#177](https://github.com/theyosh/TerrariumPI/issues/177). [theyosh]
+- Add CO2 support and update fertility environments. [#177](https://github.com/theyosh/TerrariumPI/issues/177). [theyosh]
+- Add CO2 support and update fertility environments. [#177](https://github.com/theyosh/TerrariumPI/issues/177). [theyosh]
+
+**Fixes**
+------
+- Fix quoting. [TheYOSH]
+- Fixing erratic measurements. Testing right now. [#205](https://github.com/theyosh/TerrariumPI/issues/205). [TheYOSH]
+- Fix graphs on mobile. [TheYOSH]
+- Fixed email messaging with attatchments with external mail module.
+  [TheYOSH]
+- Fix saving CO2 and fertility environment settings. [#198](https://github.com/theyosh/TerrariumPI/issues/198). [TheYOSH]
+- Fix JSON example. [TheYOSH]
+- Fix Python3 and OpenCV3 combination. [TheYOSH]
+- Fix logging. [TheYOSH]
+- Fix major sensors caching bug.... this should improve a lot. [TheYOSH]
+- Python2/3 fixes part(3) [TheYOSH]
+- More Python3 fixes. [TheYOSH]
+- Serial LCD fix. [#193](https://github.com/theyosh/TerrariumPI/issues/193). [TheYOSH]
+- Fix SHT3X sensor. [#201](https://github.com/theyosh/TerrariumPI/issues/201). [TheYOSH]
+- Fix saving dc-dimmer settings. [#178](https://github.com/theyosh/TerrariumPI/issues/178). [TheYOSH]
+- Fix installer (2) [TheYOSH]
+- Fix installer. [TheYOSH]
+- Fixed broken webcam due to threading issues. [#192](https://github.com/theyosh/TerrariumPI/issues/192). [TheYOSH]
+- Fix broken Webcam. [#192](https://github.com/theyosh/TerrariumPI/issues/192). [theyosh]
+- Fix leaflet (3) [theyosh]
+- Fix leaflet (2) [theyosh]
+- Fix Leaflet code. [theyosh]
+- Fix graphs for dc-dimmer. [#178](https://github.com/theyosh/TerrariumPI/issues/178). [theyosh]
+- Fix DC-dimmer settings. [#178](https://github.com/theyosh/TerrariumPI/issues/178). [theyosh]
+- Fix UTF-8 XML parsing. Now the software is fully UTF-8 supported.
+  [#179](https://github.com/theyosh/TerrariumPI/issues/179). [theyosh]
+
+**Updates**
+------
+- Update translations. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update weather and system config. Moving windspeed indicator from
+  weather to system. [TheYOSH]
+- Update translations. [TheYOSH]
+- Small updates. [TheYOSH]
+- Update webcam factory code. [TheYOSH]
+- Update submodules. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update translations. [TheYOSH]
+- Update for LCD serial. [#193](https://github.com/theyosh/TerrariumPI/issues/193). [TheYOSH]
+- Update LCD Serial. [#193](https://github.com/theyosh/TerrariumPI/issues/193). [TheYOSH]
+- Update install.sh. [TheYOSH]
+
+  Adafruit_DHT through pip install
+- Update submodules. [theyosh]
+- Update README.md. [TheYOSH]
+- Update base translation files. [theyosh]
+- Norwegian language update. [Bjørnar Fonn]
+- Update Leaflet to version 1.3.4. [theyosh]
+- Update leaflet to version 1.3.3. [theyosh]
+- Update submodules. [theyosh]
+
+**Other**
+------
+- More cleanup. [TheYOSH]
+- Changes for new release. [TheYOSH]
+- Refactor terrariumWeather code. [TheYOSH]
+- Refactor webcam code. [TheYOSH]
+- Exclude light sensors from erratic limiter. [#205](https://github.com/theyosh/TerrariumPI/issues/205). [TheYOSH]
+- Refactor MiFlora sensor (3) [TheYOSH]
+- Refactor MiFlora sensor (2) [TheYOSH]
+- Refactor MiFlora sensor. [TheYOSH]
+- Relaxing bluetooth connection errors. [TheYOSH]
+- Check if custom mail port settings is given. [TheYOSH]
+- Post webcam archive images to Twitter. [TheYOSH]
+- Support for door status for webcams. [#203](https://github.com/theyosh/TerrariumPI/issues/203). [TheYOSH]
+- Code cleanup. [TheYOSH]
+- Merge branch 'master' into python3. [TheYOSH]
+- Make it Python 2.7 and 3.5+ compatible. [TheYOSH]
+- First attempt python3. [TheYOSH]
+- Hide empty sensor pages from menu (2) [TheYOSH]
+- Hide empty sensor pages from menu. [TheYOSH]
+- Only scan for WeMo devices during startup. Do not change the state of
+  WeMo switches during startup. [#187](https://github.com/theyosh/TerrariumPI/issues/187). [TheYOSH]
+- Change logging bluetooth errors. [TheYOSH]
+- Cleanup bluetooth code. [TheYOSH]
+- Merge branch 'master' of github.com:theyosh/TerrariumPI. [TheYOSH]
+- Merge pull request [#196](https://github.com/theyosh/TerrariumPI/issues/196) from Marvv90/master. [TheYOSH]
+
+  German Language
+- No authentication on /static/external/ folder for use with remote
+  data. [#194](https://github.com/theyosh/TerrariumPI/issues/194). [TheYOSH]
+- Ignore non usefull audio devices. [#191](https://github.com/theyosh/TerrariumPI/issues/191). [theyosh]
+- Ignore webcam images and archive. [theyosh]
+- Second attempt light state for webcams. [#184](https://github.com/theyosh/TerrariumPI/issues/184). [theyosh]
+- Merge branch 'master' of ssh://github.com/theyosh/TerrariumPI.
+  [theyosh]
+- Merge pull request [#181](https://github.com/theyosh/TerrariumPI/issues/181) from bjornarfonn/master. [TheYOSH]
+
+  Added Norwegian language
+- Norwegian translation. [Bjørnar Fonn]
+- Updating dimming frequency based on issue [#178](https://github.com/theyosh/TerrariumPI/issues/178). [theyosh]
+- Support for DC-dimmer through PWM. [#178](https://github.com/theyosh/TerrariumPI/issues/178). [theyosh]
+- MErge. [theyosh]
+- Merge branch 'master' into development. [theyosh]
+
+
+3.8.4 (2018-08-04)
 ------------------
 
 **Fixes**
@@ -16,6 +143,8 @@ Changelog
 
 **Updates**
 ------
+- Update README.md. [TheYOSH]
+- Update changelog. [theyosh]
 - Update version number. [theyosh]
 - Update translation files. [theyosh]
 - Update translation files. [theyosh]
