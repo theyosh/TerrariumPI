@@ -283,6 +283,8 @@ class terrariumSensor(object):
     self.__miflora_firmware = None
     self.__miflora_battery = None
 
+    self.__erratic_errors = 0
+
     self.notification = True
 
     self.set_hardware_type(hardware_type)
@@ -464,15 +466,29 @@ class terrariumSensor(object):
                                                                                                                                 time.time()-starttime))
 
         elif not self.__within_limits(current,20):
+          self.__erratic_errors += 1
           logger.warning('Measured value %s%s from %s sensor \'%s\' is erratic compared to previous value %s%s in %.5f seconds.' % (current,
-                                                                                                                                self.get_indicator(),
-                                                                                                                                self.get_type(),
-                                                                                                                                self.get_name(),
-                                                                                                                                self.get_current(),
-                                                                                                                                self.get_indicator(),
-                                                                                                                                time.time()-starttime))
+                                                                                                                                    self.get_indicator(),
+                                                                                                                                    self.get_type(),
+                                                                                                                                    self.get_name(),
+                                                                                                                                    self.get_current(),
+                                                                                                                                    self.get_indicator(),
+                                                                                                                                    time.time()-starttime))
+          if self.__erratic_errors >= 5:
+            logger.warning('After %s erratic measurements is the current value %s%s is promoted to a valid value for %s sensor \'%s\' in %.5f seconds.' %
+                                                                                                                                     (self.__erratic_errors,
+                                                                                                                                      current,
+                                                                                                                                      self.get_indicator(),
+                                                                                                                                      self.get_type(),
+                                                                                                                                      self.get_name(),
+                                                                                                                                      time.time()-starttime))
+            self.__erratic_errors = 0
+            self.current = current
+            self.last_update = now
+
 
         else:
+          self.__erratic_errors = 0
           self.current = current
           self.last_update = now
           logger.info('Updated %s sensor \'%s\' from %.2f%s to %.2f%s in %.5f seconds' % (self.get_type(),
