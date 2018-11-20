@@ -192,11 +192,14 @@ class terrariumEngine(object):
         sensor.set_type(sensordata['type'],self.__unit_type)
         sensor.set_address(sensordata['address'])
         sensor.set_name(sensordata['name'])
+        sensor.set_max_diff(sensordata['max_diff'])
 
       sensor.set_alarm_min(sensordata['alarm_min'])
       sensor.set_alarm_max(sensordata['alarm_max'])
       sensor.set_limit_min(sensordata['limit_min'])
       sensor.set_limit_max(sensordata['limit_max'])
+      if 'max_diff' in sensordata:
+        sensor.set_max_diff(sensordata['max_diff'])
 
       if 'chirp' == sensor.get_hardware_type():
         if 'min_moist' in sensordata and sensordata['min_moist'] is not None:

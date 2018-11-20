@@ -24,8 +24,13 @@ canvas.gauge {
 .top_nav .navbar-right {
   width: 80% !important;
 }
-.modal-lg {
-  width: 80% !important;
+@media (min-width: 600px) {
+  .modal-lg {
+    width: 80% !important;
+  }
+}
+.page-title .title_left h3 {
+  white-space: nowrap;
 }
 .page-title .title_right h3 button {
   margin: 0px 1px 1px 0px !important;
@@ -41,6 +46,18 @@ canvas.gauge {
 }
 .history_graph {
   margin-top: 10px;
+}
+
+.x_panel > .x_content > .row > .form-group > .form-group {
+  margin-bottom: 0px;
+}
+
+.select2-container {
+  height: 34px;
+}
+
+.form-group label {
+  white-space: nowrap;
 }
 
 
