@@ -89,19 +89,19 @@
                           <label for="webcam_[nr]_name">{{_('Name')}}</label>
                           <input class="form-control" name="webcam_[nr]_name" placeholder="{{_('Name')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('webcam_field_name')}}">
                         </div>
-                        <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                           <label for="webcam_[nr]_resolution">{{_('Resolution')}}</label>
+                          <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12" style="padding-left: 0px;padding-right: 0px">
+                              <input class="form-control" name="webcam_[nr]_resolution_width" placeholder="{{_('Width')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" pattern="[0-9]+" data-original-title="{{translations.get_translation('webcam_field_resolution_width')}}">
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12" style="padding-left: 0px;padding-right: 0px">
+                              <input class="form-control" name="webcam_[nr]_resolution_height" placeholder="{{_('Height')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" pattern="[0-9]+"  data-original-title="{{translations.get_translation('webcam_field_resolution_height')}}">
+                            </div>
+                          </div>
                         </div>
-                        <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                           <label for="webcam_[nr]_rotation">{{_('Picture rotation')}}</label>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-6 form-group">
-                          <input class="form-control " name="webcam_[nr]_resolution_width" placeholder="{{_('Width')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" pattern="[0-9]+" data-original-title="{{translations.get_translation('webcam_field_resolution_width')}}">
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-6 form-group">
-                          <input class="form-control" name="webcam_[nr]_resolution_height" placeholder="{{_('Height')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" pattern="[0-9]+"  data-original-title="{{translations.get_translation('webcam_field_resolution_height')}}">
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-6 form-group">
                           <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('webcam_field_rotation')}}">
                             <select class="form-control" name="webcam_[nr]_rotation" tabindex="-1" placeholder="{{_('Select an option')}}">
                               <option value="">{{_('Select an option')}}</option>

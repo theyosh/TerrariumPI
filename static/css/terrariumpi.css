@@ -60,6 +60,10 @@ canvas.gauge {
   white-space: nowrap;
 }
 
+.form-control.half {
+ width: 40%
+}
+
 
 footer {
   margin-bottom: -20px;
