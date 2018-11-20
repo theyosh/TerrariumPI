@@ -304,6 +304,9 @@ class terrariumSensor(object):
     else :
       self.set_limit_max(100)
 
+    # Default max diff: abs(limit_min-limit_max) * 25%
+    self.set_max_diff(abs(self.get_limit_max() - self.get_limit_min()) / 4.0)
+
     # Set custom Chirp calibration values to default
     if 'chirp' == self.get_hardware_type():
       self.set_min_moist_calibration(160)
@@ -465,7 +468,7 @@ class terrariumSensor(object):
                                                                                                                                 self.get_indicator(),
                                                                                                                                 time.time()-starttime))
 
-        elif not self.__within_limits(current,20):
+        elif not self.__within_limits(current):
           self.__erratic_errors += 1
           logger.warning('Measured value %s%s from %s sensor \'%s\' is erratic compared to previous value %s%s in %.5f seconds.' % (current,
                                                                                                                                     self.get_indicator(),
@@ -504,17 +507,11 @@ class terrariumSensor(object):
                                                                               self.get_name()))
         logger.exception(ex)
 
-  def __within_limits(self,current_value, percentage = 10.0):
+  def __within_limits(self,current_value):
     if self.current is None or self.get_type() in ['uva','uvb','light'] or self.get_hardware_type() in ['ytxx-digital']:
       return True
 
-    total_area = abs(self.get_limit_max() - self.get_limit_min()) # 100%
-    diff = abs(self.current - current_value)
-
-    diff_percentage = (diff / total_area) * 100.0
-
-    return diff_percentage < percentage
-
+    return abs(self.get_current() - current_value) < self.get_max_diff()
 
   def get_data(self):
     data = {'id' : self.get_id(),
@@ -528,6 +525,7 @@ class terrariumSensor(object):
             'alarm_max' : self.get_alarm_max(),
             'limit_min' : self.get_limit_min(),
             'limit_max' : self.get_limit_max(),
+            'max_diff' : self.get_max_diff(),
             'alarm' : self.get_alarm(),
             'error' : not self.is_active()
             }
@@ -601,6 +599,12 @@ class terrariumSensor(object):
 
   def set_limit_max(self,limit):
     self.limit_max = float(limit)
+
+  def set_max_diff(self,value):
+    self.max_diff = value
+
+  def get_max_diff(self):
+    return self.max_diff
 
   def set_min_moist_calibration(self,limit):
     self.__min_moist = float(limit)
