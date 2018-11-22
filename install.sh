@@ -55,12 +55,12 @@ PYTHON_LIBS=""
 if [ $PYTHON -eq 2 ]; then
   PYTHON_LIBS="python-pip python-dev python-mediainfodll python-smbus python-pil python-opencv python-numpy"
 elif [ $PYTHON -eq 3 ]; then
-  PYTHON_LIBS="libgstreamer1.0-0 python3-pip python3-dev python3-mediainfodll python3-smbus python3-pil python3-numpy"
+  PYTHON_LIBS="python3-pip python3-dev python3-mediainfodll python3-smbus python3-pil python3-numpy"
 fi
 
 debconf-apt-progress -- apt-get -y update
 debconf-apt-progress -- apt-get -y full-upgrade
-debconf-apt-progress -- apt-get -y install libftdi1 screen git subversion watchdog build-essential i2c-tools pigpio owserver sqlite3 vlc-nox libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libjasper1 libgstreamer0.10-0 libgtk-3-0 libxml2-dev libxslt1-dev $PYTHON_LIBS
+debconf-apt-progress -- apt-get -y install libftdi1 screen git subversion watchdog build-essential i2c-tools pigpio owserver sqlite3 vlc-nox libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libjasper1 libgstreamer0.10-0 libgstreamer1.0-0 libilmbase12 libopenexr22 libgtk-3-0 libxml2-dev libxslt1-dev $PYTHON_LIBS
 
 PROGRESS=35
 # Update submodules if downloaded through tar or zip
