@@ -601,7 +601,7 @@ class terrariumSensor(object):
     self.limit_max = float(limit)
 
   def set_max_diff(self,value):
-    self.max_diff = value
+    self.max_diff = float(value)
 
   def get_max_diff(self):
     return self.max_diff
