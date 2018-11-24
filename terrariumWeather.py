@@ -111,6 +111,8 @@ class terrariumWeatherSource(object):
                                                                                                                           time.time()-starttime,
                                                                                                                           len(self.get_forecast('day')),
                                                                                                                           len(self.get_forecast('all'))))
+      self.__running = False
+      self.__last_update = int(starttime)
 
     # Update hourly forecast for today
     now = int(starttime)
@@ -129,9 +131,6 @@ class terrariumWeatherSource(object):
         send_message = True
       elif now < self.week_forecast[period]['to']:
         break
-
-    self.__last_update = int(starttime)
-    self.__running = False
 
     # Send message when there where changes
     if send_message:
