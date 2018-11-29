@@ -386,8 +386,15 @@ class terrariumWebserver(object):
 
   def __state_switch(self,switchid,value):
     if switchid in self.__terrariumEngine.power_switches:
-      self.__terrariumEngine.power_switches[switchid].set_state(value)
-      return {'ok' : True}
+      if value == 1:
+        self.__terrariumEngine.power_switches[switchid].set_state(True)
+        return {'ok' : True}
+      elif value == 0:
+        self.__terrariumEngine.power_switches[switchid].set_state(False)
+        return {'ok' : True}
+      else:
+        self.__terrariumEngine.power_switches[switchid].set_state(value)
+        return {'ok' : True}
 
     return {'ok' : False}
 
