@@ -56,16 +56,10 @@ class terrariumEnvironmentPart(object):
   def __toggle_powerswitches(self,powerswitches,action = None):
     for switchid in powerswitches:
       if 'on' == action:
-        if 'dimmer' in powerswitches[switchid].get_hardware_type():
-          powerswitches[switchid].go_up()
-        else:
-          powerswitches[switchid].on()
+        powerswitches[switchid].go_up()
 
       elif 'off' == action:
-        if 'dimmer' in powerswitches[switchid].get_hardware_type():
-          powerswitches[switchid].go_down()
-        else:
-          powerswitches[switchid].off()
+        powerswitches[switchid].go_down()
 
     self.__get_power_state(powerswitches)
 

@@ -4,7 +4,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 from terrariumWeather import terrariumWeather
 from terrariumSensor import terrariumSensor
-from terrariumSwitch import terrariumSwitch
+from terrariumSwitch import terrariumPowerSwitch
 from terrariumDoor import terrariumDoor
 from terrariumWebcam import terrariumWebcam
 
@@ -45,7 +45,7 @@ class terrariumTranslations(object):
     # End sensors
 
     # Switches
-    self.translations['switch_field_hardware'] = _('Holds the switch hardware type. Supported hardware types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSwitch.VALID_HARDWARE_TYPES) + '</strong>')
+    self.translations['switch_field_hardware'] = _('Holds the switch hardware type. Supported hardware types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumPowerSwitch.valid_hardware_types()) + '</strong>')
     self.translations['switch_field_address'] = _('Holds the switch address. Depending on hardware type, it is either a number or GPIO pin. For GPIO and PWM-Dimmer use <strong>physical</strong> GPIO pin numbering.')
     self.translations['switch_field_name'] = _('Holds the switch name.')
     self.translations['switch_field_power_wattage'] = _('Holds the switch power usage in Watt when switched on.')
