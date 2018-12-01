@@ -568,8 +568,6 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
       direction = (1.0 if self.__dimmer_state <= value else -1.0)
       distance  = abs(self.__dimmer_state - value)
 
-      #print('Dim from: {} to: {} in: {} seconds -> distance {}'.format(self.__dimmer_state,value,duration,distance))
-
       if int(duration) == 0 or int(distance) == 0:
         steps = 1.0
       else:
@@ -578,8 +576,7 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
         distance /= steps
         duration /= steps
 
-      #logger.info('Dimmer settings: Steps: %s, Distance per step: %s%%, Time per step: %s, Direction: %s',steps, distance, duration, direction)
-      #print('Dimmer settings: Steps: %s, Distance per step: %s%%, Time per step: %s, Direction: %s'%(steps, distance, duration, direction))
+      logger.debug('Dimmer settings: Steps: %s, Distance per step: %s%%, Time per step: %s, Direction: %s',steps, distance, duration, direction)
 
       for counter in range(int(steps)):
         self.__dimmer_state += (direction * distance)
@@ -591,7 +588,6 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
           dim_freq = terrariumPowerDimmerDC.DIMMER_FREQ
 
         logger.debug('Dimmer animation: Step: %s, value %s%%, Dim value: %s, timeout %s',counter+1, self.__dimmer_state, dim_value, duration)
-        #print('Dimmer animation: Step: %s, value %s%%, Dim value: %s, timeout %s'%(counter+1, self.__dimmer_state, dim_value, duration))
         self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), dim_freq, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
 
         if duration > 0.0:
