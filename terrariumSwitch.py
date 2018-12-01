@@ -159,7 +159,7 @@ class terrariumPowerSwitchSource(object):
                                                                                                                                 self.get_type(),
                                                                                                                                 self.get_address(),
                                                                                                                                 old_state,
-                                                                                                                                self.get_state(),
+                                                                                                                                state,
                                                                                                                                 force))
 
 
@@ -605,7 +605,10 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
       self.__dimmer_running = False
       if self.callback is not None:
         self.callback(self.get_data())
-      logger.info('Dimmer \'%s\' is done at value %s%%',self.get_name(),self.get_state())
+      logger.info('Power switch \'{}\' at address \'{}\' is done at value {}% in {} seconds'.format(self.get_name(),
+                                                                                                    self.get_addres(),
+                                                                                                    self.get_state(),
+                                                                                                    duration*steps))
     #else:
     #  logger.warning('Dimmer %s is already working. Ignoring state change!. Will switch to latest state value when done', self.get_name())
 
