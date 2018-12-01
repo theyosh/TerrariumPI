@@ -606,7 +606,7 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
       if self.callback is not None:
         self.callback(self.get_data())
       logger.info('Power switch \'{}\' at address \'{}\' is done at value {}% in {} seconds'.format(self.get_name(),
-                                                                                                    self.get_addres(),
+                                                                                                    self.get_address(),
                                                                                                     self.get_state(),
                                                                                                     duration*steps))
     #else:
