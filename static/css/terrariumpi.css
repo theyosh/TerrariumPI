@@ -48,6 +48,11 @@ canvas.gauge {
   margin-top: 10px;
 }
 
+.select2-container--default .select2-selection--multiple,
+.select2-container--default .select2-selection--single {
+  min-height: 34px !important
+}
+
 .x_panel > .x_content > .row > .form-group > .form-group {
   margin-bottom: 0px;
 }
