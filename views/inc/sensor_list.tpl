@@ -17,6 +17,7 @@
                 <h2 class="light uva uvb"><span aria-hidden="true" class="glyphicon glyphicon-adjust"></span> {{_('Light sensor')}} <span class="title">{{_('new')}}</span> <small>...</small> <span class="badge bg-red">{{_('warning')}}</span> <span class="badge bg-orange">{{_('error')}}</span></h2>
                 <h2 class="fertility"><span aria-hidden="true" class="glyphicon glyphicon-grain"></span> {{_('Fertility sensor')}} <span class="title">{{_('new')}}</span> <small>...</small> <span class="badge bg-red">{{_('warning')}}</span> <span class="badge bg-orange">{{_('error')}}</span></h2>
                 <h2 class="co2"><span aria-hidden="true" class="glyphicon glyphicon-tree-conifer"></span> {{_('CO2 sensor')}} <span class="title">{{_('new')}}</span> <small>...</small> <span class="badge bg-red">{{_('warning')}}</span> <span class="badge bg-orange">{{_('error')}}</span></h2>
+                <h2 class="volume"><span aria-hidden="true" class="glyphicon glyphicon-signal"></span> {{_('Volume sensor')}} <span class="title">{{_('new')}}</span> <small>...</small> <span class="badge bg-red">{{_('warning')}}</span> <span class="badge bg-orange">{{_('error')}}</span></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
