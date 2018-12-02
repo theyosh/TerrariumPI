@@ -567,8 +567,7 @@ class terrariumSensor(object):
     return self.sensor_address
 
   def set_address(self,address):
-    if isinstance(address, str):
-      self.sensor_address = address
+    self.sensor_address = address
 
   def set_name(self,name):
     self.name = str(name)
