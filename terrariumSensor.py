@@ -231,7 +231,7 @@ class terrariumOWFSSensor(object):
           pass
 
     except Exception as ex:
-      logger.warning('OWFS file system is not actve / installed on this device!')
+      logger.warning('OWFS file system is not actve / installed on this device! If this is not correct, try \'i2cdetect -y 1\' to see if device is connected.')
 
 class terrariumSensor(object):
   UPDATE_TIMEOUT = 30
