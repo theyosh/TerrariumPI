@@ -523,13 +523,17 @@ class terrariumWebcamRPILive(terrariumWebcamSource):
   TYPE = 'rpicam_live'
   VALID_SOURCE = '^rpicam_live$'
 
-  TILE_LOCATION = os.path.dirname(__file__) + '/' + terrariumWebcamSource.TILE_LOCATION
+  TILE_LOCATION = terrariumWebcamSource.TILE_LOCATION
+  STORE_LOCATION = '/dev/shm/' + terrariumWebcamSource.TILE_LOCATION
 
   def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
     super(terrariumWebcamRPILive,self).__init__(webcam_id, location, name, rotation, width, height, archive, archive_light, archive_door, environment)
 
-    if not os.path.isdir(terrariumWebcamRPILive.TILE_LOCATION + self.get_id()):
-      os.makedirs(terrariumWebcamRPILive.TILE_LOCATION + self.get_id())
+    if not os.path.isdir(terrariumWebcamRPILive.STORE_LOCATION + self.get_id()):
+      os.makedirs(terrariumWebcamRPILive.STORE_LOCATION + self.get_id())
+
+    if not os.path.islink(terrariumWebcamSource.TILE_LOCATION + self.get_id()):
+      os.symlink(terrariumWebcamRPILive.STORE_LOCATION + self.get_id(),terrariumWebcamSource.TILE_LOCATION + self.get_id())
 
     self.__start()
 
@@ -538,7 +542,7 @@ class terrariumWebcamRPILive(terrariumWebcamSource):
 
   def __run(self):
     resolution = self.get_resolution()
-    cmd = './live_rpicam.sh {} {} {} {}'.format(resolution['width'],resolution['height'],self.get_rotation(),terrariumWebcamRPILive.TILE_LOCATION + self.get_id())
+    cmd = './live_rpicam.sh {} {} {} {}'.format(resolution['width'],resolution['height'],self.get_rotation(),terrariumWebcamRPILive.STORE_LOCATION + self.get_id())
     if sys.version_info.major == 2:
       with open(os.devnull, 'w') as devnull:
         subprocess.call(cmd.split(' '),stdout=devnull, stderr=subprocess.STDOUT)
