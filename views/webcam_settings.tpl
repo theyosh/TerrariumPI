@@ -19,8 +19,9 @@
                 <strong>{{_('Location')}}</strong>: {{!translations.get_translation('webcam_field_location')}}
                 <ul>
                   <li><strong>{{_('RPICam')}}:</strong> rpicam</li>
+                  <li><strong>{{_('RPICam')}}:</strong> rpicam_live</li>
                   <li><strong>{{_('V4L')}}:</strong> /dev/videoX</li>
-                  <li><strong>{{_('Remote source')}}:</strong> http://source.web.cam/stream</li>
+                  <li><strong>{{_('Remote source')}}:</strong> http://source.web.cam/stream.jpg</li>
                 </ul>
               </li>
               <li>

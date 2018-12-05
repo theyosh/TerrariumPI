@@ -2324,51 +2324,62 @@ function initWebcam(data) {
   // Resize the height to get the maps working
   webcam_row.find('div.webcam_player').attr('id','webcam_' + data.id).height(webcam_row.width()-webcam_row.find('.x_title').height());
 
-  // Load Leaflet webcam code
-  var webcam = new L.Map('webcam_' + data.id, {
-    layers: [createWebcamLayer(data.id, data.max_zoom)],
-    fullscreenControl: true,
-  }).setView([0, 0], 1);
+  if (data.is_live) {
+    // Load HLS player
+    var player = new Clappr.Player({source: 'webcam/' + data.id + '/stream.m3u8',
+                                    parentId: '#webcam_' + data.id,
+                                    width: '100%',
+                                    height: '100%',
+                                    autoPlay: true,
+                                    chromeless: false});
 
-  L.Control.ExtraWebcamControls = L.Control.extend({
-    options: {
-      position: 'topleft',
-      archive: data.archive
-    },
-    initialize: function (options) {
-      // constructor
-      L.Util.setOptions(this, options);
-    },
-    onAdd: function (map) {
-      var container = L.DomUtil.create('div', 'leaflet-control-takephoto leaflet-bar leaflet-control');
+  } else {
+    // Load Leaflet webcam code
+    var webcam = new L.Map('webcam_' + data.id, {
+      layers: [createWebcamLayer(data.id, data.max_zoom)],
+      fullscreenControl: true,
+    }).setView([0, 0], 1);
 
-      this.photo_link = L.DomUtil.create('a', 'leaflet-control-takephoto-button leaflet-bar-part', container);
-      this.photo_link.title = '{{_('Save RAW photo')}}';
-      this.photo_link.target = '_blank';
-      this.photo_link.href = '/webcam/' + data.id + '_raw.jpg';
-      L.DomUtil.create('i', 'fa fa-camera', this.photo_link);
+    L.Control.ExtraWebcamControls = L.Control.extend({
+      options: {
+        position: 'topleft',
+        archive: data.archive
+      },
+      initialize: function (options) {
+        // constructor
+        L.Util.setOptions(this, options);
+      },
+      onAdd: function (map) {
+        var container = L.DomUtil.create('div', 'leaflet-control-takephoto leaflet-bar leaflet-control');
 
-      if (this.options.archive) {
-        this.archive_link = L.DomUtil.create('a', 'leaflet-control-archive-button leaflet-bar-part', container);
-        this.archive_link.href = '#';
-        this.archive_link.title = '{{_('Archive')}}';
-        L.DomEvent.on(this.archive_link, 'click', this._start_archive, this);
-        L.DomUtil.create('i', 'fa fa-archive', this.archive_link);
+        this.photo_link = L.DomUtil.create('a', 'leaflet-control-takephoto-button leaflet-bar-part', container);
+        this.photo_link.title = '{{_('Save RAW photo')}}';
+        this.photo_link.target = '_blank';
+        this.photo_link.href = '/webcam/' + data.id + '_raw.jpg';
+        L.DomUtil.create('i', 'fa fa-camera', this.photo_link);
+
+        if (this.options.archive) {
+          this.archive_link = L.DomUtil.create('a', 'leaflet-control-archive-button leaflet-bar-part', container);
+          this.archive_link.href = '#';
+          this.archive_link.title = '{{_('Archive')}}';
+          L.DomEvent.on(this.archive_link, 'click', this._start_archive, this);
+          L.DomUtil.create('i', 'fa fa-archive', this.archive_link);
+        }
+
+        return container;
+      },
+      _start_archive: function (e) {
+          L.DomEvent.stopPropagation(e);
+          L.DomEvent.preventDefault(e);
+          webcamArchive(data.id);
       }
+    });
+    webcam.addControl(new L.Control.ExtraWebcamControls());
+    webcam.addControl(L.Control.loading({separate: true}));
 
-      return container;
-    },
-    _start_archive: function (e) {
-        L.DomEvent.stopPropagation(e);
-        L.DomEvent.preventDefault(e);
-        webcamArchive(data.id);
-    }
-  });
-  webcam.addControl(new L.Control.ExtraWebcamControls());
-  webcam.addControl(L.Control.loading({separate: true}));
-
-  globals.webcams[webcam._container.id] = null;
-  updateWebcamView(webcam);
+    globals.webcams[webcam._container.id] = null;
+    updateWebcamView(webcam);
+  }
 }
 
 function updateWebcamView(webcam) {
