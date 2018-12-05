@@ -5,14 +5,13 @@ HEIGHT=$2
 ROTATION=$3
 DIR=$4
 
-if [ "{ROTATION}" == "h"];
+if [[ "{ROTATION}" == "h" ]];
 then
   ROTATION="-hf"
-elif [ "{ROTATION}" == "v"];
+elif [[ "{ROTATION}" == "v" ]];
 then
   ROTATION="-vf"
 else
-then
   ROTATION="-rot ${ROTATION}"
 fi
 
