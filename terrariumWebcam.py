@@ -537,7 +537,11 @@ class terrariumWebcamRPILive(terrariumWebcamSource):
     _thread.start_new_thread(self.__run, ())
 
   def __run(self):
-    cmd = './live_rpicam.sh ' + terrariumWebcamRPILive.TILE_LOCATION + self.get_id()
+    resolution = self.get_resolution()
+    cmd = './live_rpicam.sh {} {} {} {}'.format(resolution['width'],resolution['height'],self.get_rotation(),terrariumWebcamRPILive.TILE_LOCATION + self.get_id())
+    #cmd = './live_rpicam.sh {}'.format(terrariumWebcamRPILive.TILE_LOCATION + self.get_id())
+
+    print(cmd)
     if sys.version_info.major == 2:
       with open(os.devnull, 'w') as devnull:
         subprocess.call(cmd.split(' '),stdout=devnull, stderr=subprocess.STDOUT)
