@@ -53,9 +53,10 @@
   <script type="text/javascript" src="/gentelella/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
   <!-- bootstrap-daterangepicker -->
   <script type="text/javascript" src="/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-
   <!-- Switchery -->
   <script type="text/javascript" src="/gentelella/vendors/switchery/dist/switchery.min.js"></script>
+  <!-- Clappr HLS player -->
+  <script type="text/javascript" src="static/clappr/clappr.min.js"></script>
   <!-- Load the terrariumPI JS script-->
   <script type="text/javascript" src="/static/js/terrariumpi.js"></script>
   <script type="text/javascript">
