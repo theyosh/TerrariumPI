@@ -233,6 +233,7 @@ class terrariumPowerSwitchFTDI(terrariumPowerSwitchSource):
     return terrariumPowerSwitchFTDI.TYPE
 
   def load_hardware(self):
+    self.__device_type = None
     for device in Driver().list_devices():
       vendor, product, self.__device = [x.decode('latin1') for x in device]
       self.__device_type = 'Serial' if product.endswith('UART') else 'BitBang'
