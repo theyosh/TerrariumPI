@@ -184,6 +184,27 @@
               </div>
             </div>
           </div>
+          <div class="row" id="notifications_webhook">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2><i class="fa fa-cloud-upload"></i> {{_('Webhook')}} <small class="data_update">{{_('Settings')}}</small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                      <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                    <label for="email_to">{{_('Full post url')}}</label>
+                    <input class="form-control" name="webhook_address" placeholder="{{_('Full post url')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_webhook_address')}}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="row" id="notifications_messages">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -238,6 +259,9 @@
                       </label>
                       <label>
                         <i class="fa fa-newspaper-o disabled" id="{{message['id']}}_services_display" title="{{_('Display')}}"></i>
+                      </label>
+                      <label>
+                        <i class="fa fa-cloud-upload disabled" id="{{message['id']}}_services_webhook" title="{{_('Webhook')}}"></i>
                       </label>
                     </div>
                   </div>
@@ -319,6 +343,7 @@
                   case 'twitter':
                   case 'pushover':
                   case 'telegram':
+                  case 'webhook':
                     $.each(partdata,function(key,value){
                       var config_field = $('form [name="' + part + '_' + key + '"]');
                       if (config_field.length >= 1) {
