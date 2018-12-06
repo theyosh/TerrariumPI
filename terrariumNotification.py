@@ -600,7 +600,6 @@ class terrariumNotification(terrariumSingleton):
 
   def send_webhook(self,subject,message,files = []):
     url = subject
-    print('Webhook url: {}'.format(url))
     webhook = terrariumUtils.parse_url(url)
     if not webhook:
       return
