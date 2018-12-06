@@ -331,7 +331,7 @@ class terrariumNotification(terrariumSingleton):
                        self.__data.get('display','title'))
 
     if self.__data.has_section('webhook'):
-      self.set_webhook(self.__data.get('webhook','address'))
+      self.set_webhook(self.__data.get('webhook','address').replace('%%','%'))
 
   def __load_messages(self,data = None):
     self.messages = {}
@@ -599,7 +599,9 @@ class terrariumNotification(terrariumSingleton):
       self.webhook = {'address' : address}
 
   def send_webhook(self,subject,message,files = []):
-    webhook = terrariumUtils.parse_url(self.webhook['address'])
+    url = subject
+    print('Webhook url: {}'.format(url))
+    webhook = terrariumUtils.parse_url(url)
     if not webhook:
       return
 
@@ -610,7 +612,7 @@ class terrariumNotification(terrariumSingleton):
       message = json.loads(message)
 
       headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-      r = requests.post(self.webhook['address'], data=json.dumps(message), headers=headers)
+      r = requests.post(url, data=json.dumps(message), headers=headers)
 
     except Exception as ex:
       print (ex)
@@ -628,7 +630,7 @@ class terrariumNotification(terrariumSingleton):
     # Do not rate limit webhooks
     if self.messages[message_id].is_webhook_enabled():
       # Always use raw_data for webhooks
-      self.send_webhook(title,self.__parse_message('%raw_data%',data),files)
+      self.send_webhook(self.__parse_message(self.webhook['address'],data),self.__parse_message('%raw_data%',data),files)
 
     if title not in self.__ratelimit_messages:
       self.__ratelimit_messages[title] = {}
