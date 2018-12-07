@@ -599,22 +599,24 @@ class terrariumNotification(terrariumSingleton):
       self.webhook = {'address' : address}
 
   def send_webhook(self,subject,message,files = []):
-    url = subject
+    url = subject.decode()
     webhook = terrariumUtils.parse_url(url)
     if not webhook:
       return
 
     try:
-      message = ','.join(message.split('\n'))
-      message = '{' + message + '}'
-      message = message.replace(':False',':false').replace(':True',':true').replace('\'','"')
+      message = ','.join(message.decode().split('\n'))
+      message = '{' + message.replace(':False',':false').replace(':True',':true').replace('\'','"') + '}'
       message = json.loads(message)
 
       headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
       r = requests.post(url, data=json.dumps(message), headers=headers)
+      if r.status_code != 200:
+        print('Error sending webhook to url \'\' with status code: {}'.format(url,r.status_code))
 
     except Exception as ex:
-      print (ex)
+      print('send_webhook exception:')
+      print(ex)
 
   def message(self,message_id,data = None,files = []):
     self.send_notication_led(message_id)
@@ -625,6 +627,9 @@ class terrariumNotification(terrariumSingleton):
     now = str(self.__current_minute())
     title = self.__parse_message(self.messages[message_id].get_title(),data)
     message = self.__parse_message(self.messages[message_id].get_message(),data)
+
+    if '' == title:
+      title = 'no_title'
 
     # Do not rate limit webhooks
     if self.messages[message_id].is_webhook_enabled():
@@ -639,7 +644,7 @@ class terrariumNotification(terrariumSingleton):
 
     if self.__ratelimit_messages[title][now] > terrariumNotification.__MAX_MESSAGES_PER_MINUTE:
       print('%s - WARNING - terrariumNotificatio - Max messages per minute %s reached for \'%s\'' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],
-                                                                                                 terrariumNotification.__MAX_MESSAGES_PER_MINUTE, title))
+                                                                                                 terrariumNotification.__MAX_MESSAGES_PER_MINUTE, title.decode()))
       return
 
     if self.__ratelimit() > terrariumNotification.__MAX_MESSAGES_TOTAL_PER_MINUTE:
