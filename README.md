@@ -77,7 +77,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Audio meta data support (mediainfo)
 - Remote temperature and humidity sensors through HTTP(S) JSON API's. JSON Data format can be found on [Remote data wiki](https://github.com/theyosh/TerrariumPI/wiki/Remote-data).
 - Display support
-  - LCD 16x2 or 20x4 screens
+  - LCD 16x2 or 20x4 screens either through I2C or [Serial](https://www.instructables.com/id/Raspberry-Pi-Arduino-LCD-Screen/)
   - OLED based on SSD1306
 - Notifications system. Custom messages for custom actions with use of variables in the messages
   - Get notifications through
