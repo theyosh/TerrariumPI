@@ -176,7 +176,7 @@ class terrariumWebcamSource(object):
     mask_width, mask_height = mask.size
     source_width, source_height = self.raw_image.size
 
-    self.raw_image.paste(mask, ((source_width/2)-(mask_width/2),(source_height/2)-(mask_height/2)), mask)
+    self.raw_image.paste(mask, (int((source_width/2)-(mask_width/2)),int((source_height/2)-(mask_height/2))), mask)
 
   def get_archive_images(self):
     regex = r'(' + terrariumWebcamSource.ARCHIVE_LOCATION + ')\d+/\d+/\d+/([^_]+_archive_)\d+(\..*)'
@@ -270,9 +270,6 @@ class terrariumWebcamSource(object):
     logger.debug('Rotated raw image %s to %s' % (self.get_name(),self.get_rotation()))
 
   def update(self):
-    if self.is_live():
-      return
-
     starttime = time.time()
     if not self.__running and ((int(starttime) - self.get_last_update()) >= terrariumWebcamSource.UPDATE_TIMEOUT):
       self.__running = True
@@ -282,8 +279,6 @@ class terrariumWebcamSource(object):
       for trying in range(0,terrariumWebcamSource.RETRIES):
         try:
           if self.get_raw_data():
-            # Webcam is online
-            state = terrariumWebcamSource.ONLINE
             # "Rewind" the stream to the beginning so we can read its content
             logger.debug('Resetting raw image %s' % (self.get_name(),))
             self.raw_image.seek(0)
@@ -298,11 +293,15 @@ class terrariumWebcamSource(object):
             # Store archive image if needed based on time or motion and door detection
             self.archive_image()
             # Tile the images for Leaflet.js
-            self.__tile_image()
+            if not self.is_live():
+              self.__tile_image()
+
+            # Webcam is online
+            state = terrariumWebcamSource.ONLINE
             break
 
         except Exception as ex:
-          pass
+          print(ex)
 
       if self.get_state() != state and state == terrariumWebcamSource.OFFLINE:
         logger.error('Raw image \'%s\' at location %s is not available!' % (self.get_name(),self.get_location(),))
@@ -317,10 +316,6 @@ class terrariumWebcamSource(object):
       self.__last_update = int(starttime)
       self.__running = False
       logger.info('Done updating webcam \'%s\' at location %s in %.5f seconds' % (self.get_name(), self.get_location(),time.time()-starttime))
-
-  def get_raw_image(self):
-    self.set_offline_image()
-    return True
 
   def get_data(self,archive = False):
     data = {'id': self.get_id(),
@@ -409,12 +404,11 @@ class terrariumWebcamSource(object):
     return self.__last_update
 
   def get_raw_image(self,archive = False):
-    if not self.is_live():
-      image = terrariumWebcamSource.TILE_LOCATION + self.get_id() + '_raw.jpg'
-      if archive:
-        image = terrariumWebcamSource.ARCHIVE_LOCATION + (datetime.datetime.now()).strftime("%Y/%m/%d") + '/' + self.get_id() + '_archive_' + str(int(time.time())) + '.jpg'
+    image = terrariumWebcamSource.TILE_LOCATION + self.get_id() + '_raw.jpg'
+    if archive:
+      image = terrariumWebcamSource.ARCHIVE_LOCATION + (datetime.datetime.now()).strftime("%Y/%m/%d") + '/' + self.get_id() + '_archive_' + str(int(time.time())) + '.jpg'
 
-      return image
+    return image
 
   def get_preview_image(self):
     if not self.is_live():
@@ -549,7 +543,29 @@ class terrariumWebcamRPILive(terrariumWebcamSource):
     elif sys.version_info.major == 3:
       subprocess.run(cmd.split(' '),capture_output=True)
 
+  def rotate_image(self):
+    # Live webcam is rotated with raspivid command
+    pass
+
   def get_raw_data(self):
+    logger.debug('Using Raspberry PI Cam device: %s' % (self.location,))
+    readok = False
+    stream = BytesIO()
+    camera = None
+
+    try:
+      cmd = 'ffmpeg -hide_banner -loglevel panic -i http://localhost:8090/{}/{}/stream.m3u8 -vframes 1 -f image2 -'.format(terrariumWebcamSource.TILE_LOCATION,
+                                                                                                                           self.get_id())
+
+      proc = subprocess.Popen(cmd.split(' '), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+      out, err = proc.communicate()
+      self.raw_image = BytesIO(out)
+      return True
+    except Exception as ex:
+      print(ex)
+      logger.exception('Error getting raw Raspberry PI Cam image from webcam \'%s\' with error message:' % (self.get_name(),))
+
+    print('Return false webcam')
     return False
 
   def get_type(self):
