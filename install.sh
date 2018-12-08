@@ -98,20 +98,43 @@ PIP_MODULES="python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero g
 if [ $PYTHON -eq 3 ]; then
   PIP_MODULES="${PIP_MODULES} opencv-python-headless"
 fi
+NUMBER_OF_MODULES=($PIP_MODULES)
+NUMBER_OF_MODULES=${#NUMBER_OF_MODULES[@]}
+MODULE_COUNTER=1
 for PIP_MODULE in ${PIP_MODULES}
 do
   PROGRESS=$((PROGRESS + 2))
-  cat <<EOF
+  ATTEMPT=1
+  MAX_ATTEMPTS=5
+  while [ $ATTEMPT -le $MAX_ATTEMPTS ]
+  do
+
+    cat <<EOF
 XXX
 $PROGRESS
-Install required software (some modules will take 5-10 min.)\n\nInstalling python${PYTHON} module ${PIP_MODULE} ...
+Install required software (some modules will take 5-10 min.)
+
+Installing python${PYTHON} module ${MODULE_COUNTER} out of ${NUMBER_OF_MODULES}: ${PIP_MODULE} (attempt ${ATTEMPT}) ...
 XXX
 EOF
-  if [ $PYTHON -eq 2 ]; then
-    pip2 install -q --upgrade ${PIP_MODULE}
-  elif [ $PYTHON -eq 3 ]; then
-    pip3 install -q --upgrade ${PIP_MODULE}
-  fi
+    if [ $PYTHON -eq 2 ]; then
+      pip2 install -q --upgrade ${PIP_MODULE}
+    elif [ $PYTHON -eq 3 ]; then
+      pip3 install -q --upgrade ${PIP_MODULE}
+    fi
+
+    if [ $? -eq 0 ]; then
+      # PIP install succeeded normally
+      ATTEMPT=$((ATTEMPT + 99))
+    else
+      # PIP install failure... retry..
+      ATTEMPT=$((ATTEMPT + 1))
+    fi
+
+  done
+
+  MODULE_COUNTER=$((MODULE_COUNTER + 1))
+
 done
 
 cd "${BASEDIR}"
