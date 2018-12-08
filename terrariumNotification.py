@@ -628,6 +628,9 @@ class terrariumNotification(terrariumSingleton):
     title = self.__parse_message(self.messages[message_id].get_title(),data)
     message = self.__parse_message(self.messages[message_id].get_message(),data)
 
+    if '' == title:
+      title = 'no_title'
+
     # Do not rate limit webhooks
     if self.messages[message_id].is_webhook_enabled():
       # Always use raw_data for webhooks
