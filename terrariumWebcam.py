@@ -542,10 +542,7 @@ class terrariumWebcamRPILive(terrariumWebcamSource):
                                                    resolution['height'],
                                                    self.get_rotation(),
                                                    terrariumWebcamRPILive.STORE_LOCATION + self.get_id())
-    print('Start live wbcam: {}'.format(cmd))
     cmd = shlex.split(cmd)
-    print('Start live wbcam: {}'.format(cmd))
-
     if sys.version_info.major == 2:
       with open(os.devnull, 'w') as devnull:
         subprocess.call(cmd,stdout=devnull, stderr=subprocess.STDOUT)
