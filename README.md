@@ -53,6 +53,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Volume
 - Support for webcams and native Raspberry Pi cam out of the box
   - Raspberry Pi cam can be streamed live with 6 seconds delay
+  - Archiving images based on motion or time interval
 - Support for analog devices through a MCP3008
   - Support for PH probe SKU SEN0161
 - Support for MiFlora Bluetooth sensors
