@@ -17,6 +17,7 @@ import re
 import sys
 import subprocess
 import sys
+import shlex
 
 from picamera import PiCamera, PiCameraError
 from io import BytesIO
@@ -301,7 +302,7 @@ class terrariumWebcamSource(object):
             break
 
         except Exception as ex:
-          print(ex)
+          pass
 
       if self.get_state() != state and state == terrariumWebcamSource.OFFLINE:
         logger.error('Raw image \'%s\' at location %s is not available!' % (self.get_name(),self.get_location(),))
@@ -536,12 +537,17 @@ class terrariumWebcamRPILive(terrariumWebcamSource):
 
   def __run(self):
     resolution = self.get_resolution()
-    cmd = './live_rpicam.sh {} {} {} {}'.format(resolution['width'],resolution['height'],self.get_rotation(),terrariumWebcamRPILive.STORE_LOCATION + self.get_id())
+    cmd = './live_rpicam.sh "{}" {} {} {} {}'.format(self.get_name(),
+                                                   resolution['width'],
+                                                   resolution['height'],
+                                                   self.get_rotation(),
+                                                   terrariumWebcamRPILive.STORE_LOCATION + self.get_id())
+    cmd = shlex.split(cmd)
     if sys.version_info.major == 2:
       with open(os.devnull, 'w') as devnull:
-        subprocess.call(cmd.split(' '),stdout=devnull, stderr=subprocess.STDOUT)
+        subprocess.call(cmd,stdout=devnull, stderr=subprocess.STDOUT)
     elif sys.version_info.major == 3:
-      subprocess.run(cmd.split(' '),capture_output=True)
+      subprocess.run(cmd,capture_output=True)
 
   def rotate_image(self):
     # Live webcam is rotated with raspivid command
@@ -549,23 +555,19 @@ class terrariumWebcamRPILive(terrariumWebcamSource):
 
   def get_raw_data(self):
     logger.debug('Using Raspberry PI Cam device: %s' % (self.location,))
-    readok = False
-    stream = BytesIO()
-    camera = None
-
     try:
       cmd = 'ffmpeg -hide_banner -loglevel panic -i http://localhost:8090/{}/{}/stream.m3u8 -vframes 1 -f image2 -'.format(terrariumWebcamSource.TILE_LOCATION,
                                                                                                                            self.get_id())
+      cmd = shlex.split(cmd)
+      with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE) as proc:
+        out, err = proc.communicate()
+        self.raw_image = BytesIO(out)
 
-      proc = subprocess.Popen(cmd.split(' '), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-      out, err = proc.communicate()
-      self.raw_image = BytesIO(out)
       return True
     except Exception as ex:
       print(ex)
-      logger.exception('Error getting raw Raspberry PI Cam image from webcam \'%s\' with error message:' % (self.get_name(),))
+      logger.exception('Error getting raw Raspberry PI Cam image from webcam \'%s\' with error message: {}'.format(self.get_name(),ex))
 
-    print('Return false webcam')
     return False
 
   def get_type(self):
