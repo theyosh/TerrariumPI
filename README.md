@@ -5,6 +5,8 @@ For humidity control there is support for a spraying system. The sprayer can be 
 
 The software is that flexible that there is no limit in amount of sensors, relay boards or door sensors. The usage can be endless. All power switches have support for timers to trigger based on a time pattern.
 
+If you are using this software for your animals or plants, **[please post some pictures](https://github.com/theyosh/TerrariumPI/issues/210)**
+
 It can either run on Python 2.7 or [Python 3.5+](https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-use-python-35)
 
 Think off:
