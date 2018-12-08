@@ -555,23 +555,19 @@ class terrariumWebcamRPILive(terrariumWebcamSource):
 
   def get_raw_data(self):
     logger.debug('Using Raspberry PI Cam device: %s' % (self.location,))
-    readok = False
-    stream = BytesIO()
-    camera = None
-
     try:
       cmd = 'ffmpeg -hide_banner -loglevel panic -i http://localhost:8090/{}/{}/stream.m3u8 -vframes 1 -f image2 -'.format(terrariumWebcamSource.TILE_LOCATION,
                                                                                                                            self.get_id())
+      cmd = shlex.split(cmd)
+      with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE) as proc:
+        out, err = proc.communicate()
+        self.raw_image = BytesIO(out)
 
-      proc = subprocess.Popen(cmd.split(' '), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-      out, err = proc.communicate()
-      self.raw_image = BytesIO(out)
       return True
     except Exception as ex:
       print(ex)
-      logger.exception('Error getting raw Raspberry PI Cam image from webcam \'%s\' with error message:' % (self.get_name(),))
+      logger.exception('Error getting raw Raspberry PI Cam image from webcam \'%s\' with error message: {}'.format(self.get_name(),ex))
 
-    print('Return false webcam')
     return False
 
   def get_type(self):
