@@ -1,9 +1,11 @@
-# TerrariumPI 3.9.0
+# TerrariumPI 3.9.1
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
 
 For humidity control there is support for a spraying system. The sprayer can be configured to spray for an X amount of seconds and there is a minumal period between two spray actions. Use at least one humitidy sensors to get a constant humidity value. In order to lower the humidity you can add a dehumidifier.
 
 The software is that flexible that there is no limit in amount of sensors, relay boards or door sensors. The usage can be endless. All power switches have support for timers to trigger based on a time pattern.
+
+If you are using this software for your animals or plants, **[please post some pictures](https://github.com/theyosh/TerrariumPI/issues/210)**
 
 It can either run on Python 2.7 or [Python 3.5+](https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-use-python-35)
 
@@ -52,6 +54,8 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Fertility
   - Volume
 - Support for webcams and native Raspberry Pi cam out of the box
+  - Raspberry Pi cam can be streamed live with 6 seconds delay
+  - Archiving images based on motion or time interval
 - Support for analog devices through a MCP3008
   - Support for PH probe SKU SEN0161
 - Support for MiFlora Bluetooth sensors
@@ -76,7 +80,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Audio meta data support (mediainfo)
 - Remote temperature and humidity sensors through HTTP(S) JSON API's. JSON Data format can be found on [Remote data wiki](https://github.com/theyosh/TerrariumPI/wiki/Remote-data).
 - Display support
-  - LCD 16x2 or 20x4 screens
+  - LCD 16x2 or 20x4 screens either through I2C or [Serial](https://www.instructables.com/id/Raspberry-Pi-Arduino-LCD-Screen/)
   - OLED based on SSD1306
 - Notifications system. Custom messages for custom actions with use of variables in the messages
   - Get notifications through
@@ -85,6 +89,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
     - Pushover
     - Telegram bot
     - Display
+    - Webhooks
   - Notifications for
     - Environment part low and high alarm
     - Sensor high and low measurements

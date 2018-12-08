@@ -256,7 +256,7 @@ class terrariumCollector(object):
             now = newdata['time']
 
           cur.execute('REPLACE INTO switch_data (id, timestamp, state, power_wattage, water_flow) VALUES (?,?,?,?,?)',
-                      (id, now, newdata['state'], newdata['power_wattage'], newdata['water_flow']))
+                      (id, now, newdata['state'], newdata['current_power_wattage'], newdata['current_water_flow']))
 
         if type in ['door']:
           cur.execute('REPLACE INTO door_data (id, timestamp, state) VALUES (?,?,?)',

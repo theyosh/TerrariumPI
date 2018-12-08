@@ -7,6 +7,91 @@ import datetime
 import requests
 from math import log
 
+class terrariumTimer(object):
+  def __init__(self,start,stop,on_duration,off_duration,enabled):
+    self.__start = start
+    self.__stop = stop
+    self.__on_duration = on_duration
+    self.__off_duration = off_duration
+
+    self.__enabled = terrariumUtils.is_true(enabled)
+
+    self.__timer_table = []
+    self.__calculate_time_table()
+
+  def __calculate_time_table(self):
+    starttime = self.__start.split(':')
+    stoptime = self.__stop.split(':')
+    on_duration = float(self.__on_duration)
+    off_duration = float(self.__off_duration)
+
+    self.__timer_table = []
+    now = datetime.datetime.now()
+    starttime = now.replace(hour=int(starttime[0]), minute=int(starttime[1]), second=0)
+    stoptime = now.replace(hour=int(stoptime[0]), minute=int(stoptime[1]),second=0)
+
+    if starttime == stoptime:
+      stoptime += datetime.timedelta(hours=24)
+
+    elif starttime > stoptime:
+      if now > stoptime:
+        stoptime += datetime.timedelta(hours=24)
+      else:
+        starttime -= datetime.timedelta(hours=24)
+
+    # Calculate next day when current day is done...
+    if now > stoptime:
+      starttime += datetime.timedelta(hours=24)
+      stoptime += datetime.timedelta(hours=24)
+
+    if (on_duration is None and off_duration is None) or (0 == on_duration and 0 == off_duration):
+      # Only start and stop time. No periods
+      self.__timer_table.append((int(starttime.strftime('%s')),int(stoptime.strftime('%s'))))
+    elif on_duration is not None and off_duration is None:
+
+      if (starttime + datetime.timedelta(minutes=on_duration)) > stoptime:
+        on_duration = (stoptime - starttime).total_seconds() / 60
+      self.__timer_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(minutes=on_duration)).strftime('%s'))))
+    else:
+      # Create time periods based on both duration between start and stop time
+      while starttime < stoptime:
+        if (starttime + datetime.timedelta(minutes=on_duration)) > stoptime:
+          on_duration = (stoptime - starttime).total_seconds() / 60
+
+        self.__timer_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(minutes=on_duration)).strftime('%s'))))
+        starttime += datetime.timedelta(minutes=on_duration + off_duration)
+
+  def is_enabled(self):
+    return terrariumUtils.is_true(self.__enabled)
+
+  def is_time(self):
+    now = int(datetime.datetime.now().strftime('%s'))
+    for time_schedule in self.__timer_table:
+      if time_schedule[0] <= now < time_schedule[1]:
+        return True
+
+      elif now < time_schedule[0]:
+        return False
+
+    #End of time_table. No data to decide for today
+    self.__calculate_time_table()
+    return None
+
+  def duration(time_table):
+    duration = 0
+    for time_schedule in self.__timer_table:
+      duration += time_schedule[1] - time_schedule[0]
+
+    return duration
+
+  def get_data(self):
+    return {'timer_enabled': self.is_enabled(),
+            'timer_start': self.__start,
+            'timer_stop' : self.__stop,
+            'timer_on_duration': self.__on_duration,
+            'timer_off_duration': self.__off_duration}
+
+
 class terrariumUtils():
 
   @staticmethod
