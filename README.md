@@ -1,4 +1,4 @@
-# TerrariumPI 3.9.0
+# TerrariumPI 3.9.1
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
 
 For humidity control there is support for a spraying system. The sprayer can be configured to spray for an X amount of seconds and there is a minumal period between two spray actions. Use at least one humitidy sensors to get a constant humidity value. In order to lower the humidity you can add a dehumidifier.
@@ -52,6 +52,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Fertility
   - Volume
 - Support for webcams and native Raspberry Pi cam out of the box
+  - Raspberry Pi cam can be streamed live with 6 seconds delay
 - Support for analog devices through a MCP3008
   - Support for PH probe SKU SEN0161
 - Support for MiFlora Bluetooth sensors
@@ -85,6 +86,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
     - Pushover
     - Telegram bot
     - Display
+    - Webhooks
   - Notifications for
     - Environment part low and high alarm
     - Sensor high and low measurements
