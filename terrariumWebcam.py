@@ -17,6 +17,7 @@ import re
 import sys
 import subprocess
 import sys
+import shlex
 
 from picamera import PiCamera, PiCameraError
 from io import BytesIO
@@ -301,7 +302,7 @@ class terrariumWebcamSource(object):
             break
 
         except Exception as ex:
-          print(ex)
+          pass
 
       if self.get_state() != state and state == terrariumWebcamSource.OFFLINE:
         logger.error('Raw image \'%s\' at location %s is not available!' % (self.get_name(),self.get_location(),))
@@ -536,12 +537,20 @@ class terrariumWebcamRPILive(terrariumWebcamSource):
 
   def __run(self):
     resolution = self.get_resolution()
-    cmd = './live_rpicam.sh {} {} {} {}'.format(resolution['width'],resolution['height'],self.get_rotation(),terrariumWebcamRPILive.STORE_LOCATION + self.get_id())
+    cmd = './live_rpicam.sh "{}" {} {} {} {}'.format(self.get_name(),
+                                                   resolution['width'],
+                                                   resolution['height'],
+                                                   self.get_rotation(),
+                                                   terrariumWebcamRPILive.STORE_LOCATION + self.get_id())
+    print('Start live wbcam: {}'.format(cmd))
+    cmd = shlex.split(cmd)
+    print('Start live wbcam: {}'.format(cmd))
+
     if sys.version_info.major == 2:
       with open(os.devnull, 'w') as devnull:
-        subprocess.call(cmd.split(' '),stdout=devnull, stderr=subprocess.STDOUT)
+        subprocess.call(cmd,stdout=devnull, stderr=subprocess.STDOUT)
     elif sys.version_info.major == 3:
-      subprocess.run(cmd.split(' '),capture_output=True)
+      subprocess.run(cmd,capture_output=True)
 
   def rotate_image(self):
     # Live webcam is rotated with raspivid command
