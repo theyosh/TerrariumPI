@@ -2333,6 +2333,8 @@ function initWebcam(data) {
                                     autoPlay: true,
                                     chromeless: false});
 
+    webcam_row.find('ul.nav.navbar-right.panel_toolbox li.dropdown ul.dropdown-menu' ).append('<li><a href="/webcam/' + data.id + '_raw.jpg" target="_blank">{{_('Save RAW photo')}}</a></li>')
+    webcam_row.find('ul.nav.navbar-right.panel_toolbox li.dropdown ul.dropdown-menu' ).append('<li><a href="javascript:;" onclick="webcamArchive(\'' + data.id + '\');">{{_('Archive')}}</a></li>')
   } else {
     // Load Leaflet webcam code
     var webcam = new L.Map('webcam_' + data.id, {
