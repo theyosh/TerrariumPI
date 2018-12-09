@@ -169,7 +169,7 @@ class terrariumUtils():
               'gpio40' : 21
               }
 
-    index = 'gpio' + str(value)
+    index = 'gpio' + str(value).strip()
     if index in pinout:
       return pinout[index]
 
@@ -207,7 +207,7 @@ class terrariumUtils():
               'BCM21' : 40
               }
 
-    index = 'BCM' + str(value)
+    index = 'BCM' + str(value).strip()
     if index in pinout:
       return pinout[index]
 
