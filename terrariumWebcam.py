@@ -421,6 +421,7 @@ class terrariumWebcamSource(object):
 class terrariumWebcamRPI(terrariumWebcamSource):
   TYPE = 'rpicam'
   VALID_SOURCE = '^rpicam$'
+  INFO_SOURCE = 'rpicam'
 
   def set_resolution(self,width,height):
     self.resolution = {'width' : 1920,
@@ -454,6 +455,7 @@ class terrariumWebcamRPI(terrariumWebcamSource):
 class terrariumWebcamUSB(terrariumWebcamSource):
   TYPE = 'usb'
   VALID_SOURCE = '^/dev/video\d+'
+  INFO_SOURCE = '/dev/video0'
 
   def get_raw_data(self):
     logger.debug('Using USB device: %s' % (self.location,))
@@ -496,6 +498,7 @@ class terrariumWebcamUSB(terrariumWebcamSource):
 class terrariumWebcamRemote(terrariumWebcamSource):
   TYPE = 'remote'
   VALID_SOURCE = '^https?://.*\.[^m3u8]*$'
+  INFO_SOURCE = 'https://server.com/stream.jpg'
 
   def get_raw_data(self):
     logger.debug('Using URL: %s' % (self.location,))
@@ -517,6 +520,7 @@ class terrariumWebcamRemote(terrariumWebcamSource):
 class terrariumWebcamRPILive(terrariumWebcamSource):
   TYPE = 'rpicam_live'
   VALID_SOURCE = '^rpicam_live$'
+  INFO_SOURCE = 'rpicam_live'
 
   TILE_LOCATION = terrariumWebcamSource.TILE_LOCATION
   STORE_LOCATION = '/dev/shm/' + terrariumWebcamSource.TILE_LOCATION
@@ -579,6 +583,7 @@ class terrariumWebcamRPILive(terrariumWebcamSource):
 class terrariumWebcamRemoteLive(terrariumWebcamSource):
   TYPE = 'remote_live'
   VALID_SOURCE = '^https?://.*\.m3u8$'
+  INFO_SOURCE = 'https://server.com/stream/playlist.m3u8'
 
   def get_raw_data(self):
     logger.debug('Using URL: %s' % (self.location,))
@@ -621,3 +626,11 @@ class terrariumWebcam(object):
         return webcam_source(webcam_id,location,name,rotation,width,height,archive,archive_light,archive_door,environment)
 
     raise terrariumWebcamSourceException()
+
+  @staticmethod
+  def valid_sources():
+    data = {}
+    for webcam_source in terrariumWebcam.SOURCES:
+      data[webcam_source.TYPE] = webcam_source.INFO_SOURCE
+
+    return data

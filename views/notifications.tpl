@@ -70,11 +70,11 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                  <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                     <label for="display_address">{{_('I2C address')}}</label>
                     <input class="form-control" name="display_address" placeholder="{{_('I2C address')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_display_address')}}">
                   </div>
-                  <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                  <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                     <label for="display_resolution">{{_('Screen resolution')}}</label>
                     <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('notification_display_resolution')}}">
                       <select class="form-control" name="display_resolution" tabindex="-1" placeholder="{{_('Select an option')}}">
@@ -84,7 +84,7 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                  <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                     <label for="display_title">{{_('Title')}}</label>
                     <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('notification_display_title')}}">
                       <select class="form-control" name="display_title" tabindex="-1" placeholder="{{_('Select an option')}}">
