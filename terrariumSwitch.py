@@ -589,7 +589,7 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
           dim_freq = terrariumPowerDimmerDC.DIMMER_FREQ
 
         for gpiopin in self.get_address().split(','):
-          if '' == gpiopin.strip():
+          if terrariumUtils.to_BCM_port_number(gpiopin) is False:
             continue
           logger.debug('Dimmer animation: Step: %s, value %s%%, Dim value: %s, timeout %s',counter+1, self.__dimmer_state, dim_value, duration)
           self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(gpiopin), dim_freq, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
