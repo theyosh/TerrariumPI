@@ -33,8 +33,9 @@ class terrariumMiFloraSensor(terrariumSensorSource):
     data = None
 
     if self.get_address() is not None:
-      sensor = Peripheral(self.get_address())
+
       try:
+        sensor = Peripheral(self.get_address())
         data = {}
         #Read battery and firmware version attribute
         data['battery'], data['firmware'] = unpack('<xB5s',sensor.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_FIRMWARE_AND_BATTERY))
@@ -45,6 +46,8 @@ class terrariumMiFloraSensor(terrariumSensorSource):
         sensor.writeCharacteristic(terrariumMiFloraSensor.__MIFLORA_REALTIME_DATA_TRIGGER, bytearray([0xa0, 0x1f]), True)
         #Read plant data
         data['temperature'], data['light'], data['moisture'], data['fertility'] = unpack('<hxIBHxxxxxx',sensor.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_GET_DATA))
+        # Close connection...
+        sensor.disconnect()
 
         # Clean up
         data['temperature'] = float(data['temperature']) / 10.0
@@ -53,9 +56,7 @@ class terrariumMiFloraSensor(terrariumSensorSource):
         data['fertility']   = float(data['fertility'])
       except Exception as ex:
         logger.warning('Error getting new data from {} sensor \'{}\'. Error message: {}'.format(self.get_type(),self.get_name(),ex))
-      finally:
-        # Close connection...
-        sensor.disconnect()
+
 
     return data
 
@@ -69,10 +70,10 @@ class terrariumMiFloraSensor(terrariumSensorSource):
   def get_firmware(self):
     cached_data = self.__sensor_cache.get_sensor_data(self.get_sensor_cache_key())
     if cached_data is not None:
-      self.__firmware = cached_data['firmware'].decode("utf-8")
+      self.__firmware = cached_data['firmware']
 
     if self.__firmware is not None:
-      return self.__firmware
+      return self.__firmware.decode("utf-8")
 
     return None
 

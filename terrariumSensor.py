@@ -17,6 +17,7 @@ monkey.patch_all()
 class terrariumSensorCache(terrariumSingleton):
   def __init__(self):
     self.__cache = {}
+    self.__running = {}
     logger.debug('Initialized sensors cache')
 
   def set_sensor_data(self,sensor_hash,sensor_data,cache_timeout = 30):
@@ -27,7 +28,21 @@ class terrariumSensorCache(terrariumSingleton):
     if sensor_hash in self.__cache and self.__cache[sensor_hash]['expire'] > int(time()):
       return self.__cache[sensor_hash]['data']
 
-    return None
+  def clear_sensor_data(self,sensor_hash):
+    if sensor_hash in self.__cache:
+      del(self.__cache[sensor_hash])
+
+  def is_running(self,sensor_hash):
+    if sensor_hash in self.__running:
+      return True
+
+    return False
+
+  def set_running(self,sensor_hash):
+    self.__running[sensor_hash] = True
+
+  def clear_running(self,sensor_hash):
+    del(self.__running[sensor_hash])
 
 class terrariumSensorSource(object):
   TYPE = None
@@ -40,7 +55,7 @@ class terrariumSensorSource(object):
     self.__current_value = None
     self.__erratic_errors = 0
     self.__last_update = 0
-    self.__running = False
+    #self.__running = False
 
     self.sensor_id = sensor_id
     self.notification = True
@@ -81,8 +96,8 @@ class terrariumSensorSource(object):
     starttime = time()
     cached_data = self.__sensor_cache.get_sensor_data(self.get_sensor_cache_key())
 
-    if (cached_data is None or force) and not self.__running:
-      self.__running = True
+    if (cached_data is None or force) and not self.__sensor_cache.is_running(self.get_sensor_cache_key()):
+      self.__sensor_cache.set_running(self.get_sensor_cache_key())
       logger.debug('Start getting new {} sensor data from location: \'{}\''.format(self.get_sensor_type(),self.get_address()))
       new_data = self.load_data()
 
@@ -90,11 +105,12 @@ class terrariumSensorSource(object):
         self.__sensor_cache.set_sensor_data(self.get_sensor_cache_key(),new_data,terrariumSensor.UPDATE_TIMEOUT)
         cached_data = new_data
 
-      self.__running = False
+      self.__sensor_cache.clear_running(self.get_sensor_cache_key())
 
     current = None if cached_data is None or self.get_sensor_type() not in cached_data else cached_data[self.get_sensor_type()]
     if current is None or not (self.get_limit_min() <= current <= self.get_limit_max()):
       # Invalid current value.... log and ingore
+      self.__sensor_cache.clear_sensor_data(self.get_sensor_cache_key())
       logger.warning('Measured value %s%s from %s sensor \'%s\' is outside valid range %.2f%s - %.2f%s in %.5f seconds.' % (current,
                                                                                                                             self.get_indicator(),
                                                                                                                             self.get_type(),
@@ -126,6 +142,9 @@ class terrariumSensorSource(object):
         self.__erratic_errors = 0
         self.__current_value = current
         self.__last_update = int(starttime)
+
+      else:
+        self.__sensor_cache.clear_sensor_data(self.get_sensor_cache_key())
 
     else:
       self.__erratic_errors = 0
