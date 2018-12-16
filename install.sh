@@ -137,6 +137,13 @@ EOF
 
 done
 
+if [ $PYTHON -eq 3 ]; then
+  # Remove pip numpy install that comes with an upgrade of another module. Does not work
+  # Removing this will fallback to OS default
+  pip3 uninstall -y -q numpy
+fi
+
+
 cd "${BASEDIR}"
 chown ${SCRIPT_USER}. .
 chown ${SCRIPT_USER}. * -Rf
