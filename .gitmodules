@@ -16,3 +16,6 @@
 [submodule "chirp-rpi"]
 	path = chirp-rpi
 	url = https://github.com/ageir/chirp-rpi.git
+[submodule "hls-proxy"]
+	path = hls-proxy
+	url = https://github.com/Viblast/hls-proxy.git
