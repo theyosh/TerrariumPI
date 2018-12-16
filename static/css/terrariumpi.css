@@ -321,13 +321,17 @@ div.door_status i {
 
 /* Webcam */
 
+
+div.bar-container.seek-disabled {
+  display: none !important;
+}
+
 /* Webcam Preview */
 .webcam_preview {
   overflow: hidden;
   max-height: 250px;
   width: 100%;
 }
-
 
 .webcam_preview img {
   width: 100%;
