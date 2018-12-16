@@ -93,9 +93,9 @@ class terrariumDHTSensor(terrariumGPIOSensor):
       data = {}
 
       sensor_device = Adafruit_DHT.DHT11
-      if 'dht22' == self.get_type():
+      if terrariumDHT22Sensor.TYPE == self.get_type():
         sensor_device = Adafruit_DHT.DHT22
-      elif 'am2302' == self.get_type():
+      elif terrariumAM2302Sensor.TYPE == self.get_type():
         sensor_device = Adafruit_DHT.AM2302
 
       data['humidity'], data['temperature'] = Adafruit_DHT.read_retry(sensor_device, terrariumUtils.to_BCM_port_number(gpio_pins[0]),5)
