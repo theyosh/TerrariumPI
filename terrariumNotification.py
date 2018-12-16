@@ -197,8 +197,8 @@ class terrariumNotificationTelegramBot(object):
     print('%s - INFO    - terrariumNotificatio - TelegramBot is stopped' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],))
 
 class terrariumNotification(terrariumSingleton):
-  __MAX_MESSAGES_TOTAL_PER_MINUTE = 5
-  __MAX_MESSAGES_PER_MINUTE = 2
+  __MAX_MESSAGES_TOTAL_PER_MINUTE = 12
+  __MAX_MESSAGES_PER_MINUTE = 6
 
   __regex_parse = re.compile(r'%(?P<index>[^% ]+)%')
 
@@ -652,6 +652,7 @@ class terrariumNotification(terrariumSingleton):
                                                                                                 terrariumNotification.__MAX_MESSAGES_TOTAL_PER_MINUTE))
       return
 
+    #print('Rate limit messages: title \'{}\', time {}'.format(title,now))
     self.__ratelimit_messages[title][now] += 1
 
     if self.messages[message_id].is_email_enabled():
