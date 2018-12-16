@@ -42,6 +42,7 @@ class terrariumTranslations(object):
     self.translations['sensor_field_min_moist'] = _('Holds the sensor lowest moisture value measured in dry air. %s') % ('<a href="https://github.com/ageir/chirp-rpi#calibration" target="_blank" title="' + _('More calibration information') + '"><i>' + _('More calibration information') + '</i></a>')
     self.translations['sensor_field_max_moist'] = _('Holds the sensor highest moisture value measured in full water. %s') % ('<a href="https://github.com/ageir/chirp-rpi#calibration" target="_blank" title="' + _('More calibration information') + '"><i>' + _('More calibration information') + '</i></a>')
     self.translations['sensor_field_temperature_offset'] = _('Holds the temperature offset value.')
+    self.translations['sensor_field_max_diff'] = _('Holds the maximum numbber that a sensor may change in value up or down.')
     # End sensors
 
     # Switches
@@ -136,6 +137,9 @@ class terrariumTranslations(object):
     self.translations['notification_telegram_bot_token'] =  _('Holds the Telegram Bot token. More information %shere%s') % ('<a href=\'https://core.telegram.org/bots#6-botfather\' target=\'_blank\'>','</a>')
     self.translations['notification_telegram_username'] =  _('Holds the Telegram username that is allowed for receiving messages. Can be multiple usernames seperated by a comma. More information %shere%s') % ('<a href=\'https://core.telegram.org/bots#6-botfather\' target=\'_blank\'>','</a>')
     self.translations['notification_telegram_proxy'] =  _('Holds the proxy address in form of [schema]://[user]:[password]@[server.com]:[port]. Can either be socks5 or http(s) for schema.')
+
+    self.translations['notification_webhook_address'] =  _('Holds the url to post notification data to. You can use %name% variables in the post url')
+
     # End notifications
 
     # System
