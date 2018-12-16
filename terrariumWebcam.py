@@ -33,9 +33,11 @@ monkey.patch_all()
 class terrariumWebcamSource(object):
   TYPE = None
   # Class defaults
-  TILE_SIZE = 256
   TILE_LOCATION = 'webcam/'
   ARCHIVE_LOCATION = TILE_LOCATION + 'archive/'
+  STORE_LOCATION = '/dev/shm/' + TILE_LOCATION
+
+  TILE_SIZE = 256
   JPEG_QUALITY = 95
   FONT_SIZE = 10
   RETRIES = 3
@@ -72,6 +74,12 @@ class terrariumWebcamSource(object):
       self.__id = md5(self.get_location().encode()).hexdigest()
     else:
       self.__id = id
+
+    if not os.path.isdir(terrariumWebcamSource.STORE_LOCATION + self.get_id()):
+      os.makedirs(terrariumWebcamSource.STORE_LOCATION + self.get_id())
+
+    if not os.path.islink(terrariumWebcamSource.TILE_LOCATION + self.get_id()):
+      os.symlink(terrariumWebcamSource.STORE_LOCATION + self.get_id(),terrariumWebcamSource.TILE_LOCATION + self.get_id())
 
     logger.info('Initialized %s webcam \'%s\' on location %s' %
                 (self.get_type(),
@@ -138,7 +146,7 @@ class terrariumWebcamSource(object):
           logger.debug('Cropping image from position %s' % (crop_size,))
           tile = canvas.crop(crop_size)
           logger.debug('Saving cropped image to %s' % (terrariumWebcamSource.TILE_LOCATION + self.__id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg',))
-          tile.save(terrariumWebcamSource.TILE_LOCATION + self.__id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg','jpeg',quality=terrariumWebcamSource.JPEG_QUALITY)
+          tile.save(terrariumWebcamSource.STORE_LOCATION + self.get_id() + '/' + self.__id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg','jpeg',quality=terrariumWebcamSource.JPEG_QUALITY)
           logger.debug('Done saving %s' % (terrariumWebcamSource.TILE_LOCATION + self.__id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg',))
 
       # Scale down by 50%
@@ -406,7 +414,7 @@ class terrariumWebcamSource(object):
     return self.__last_update
 
   def get_raw_image(self,archive = False):
-    image = terrariumWebcamSource.TILE_LOCATION + self.get_id() + '_raw.jpg'
+    image = terrariumWebcamSource.TILE_LOCATION + self.get_id() + '/' + self.get_id() + '_raw.jpg'
     if archive:
       image = terrariumWebcamSource.ARCHIVE_LOCATION + (datetime.datetime.now()).strftime("%Y/%m/%d") + '/' + self.get_id() + '_archive_' + str(int(time.time())) + '.jpg'
 
@@ -514,18 +522,8 @@ class terrariumWebcamRPILive(terrariumWebcamSource):
   VALID_SOURCE = '^rpicam_live$'
   INFO_SOURCE = 'rpicam_live'
 
-  TILE_LOCATION = terrariumWebcamSource.TILE_LOCATION
-  STORE_LOCATION = '/dev/shm/' + terrariumWebcamSource.TILE_LOCATION
-
   def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
     super(terrariumWebcamRPILive,self).__init__(webcam_id, location, name, rotation, width, height, archive, archive_light, archive_door, environment)
-
-    if not os.path.isdir(terrariumWebcamRPILive.STORE_LOCATION + self.get_id()):
-      os.makedirs(terrariumWebcamRPILive.STORE_LOCATION + self.get_id())
-
-    if not os.path.islink(terrariumWebcamSource.TILE_LOCATION + self.get_id()):
-      os.symlink(terrariumWebcamRPILive.STORE_LOCATION + self.get_id(),terrariumWebcamSource.TILE_LOCATION + self.get_id())
-
     self.__start()
 
   def __start(self):
@@ -574,18 +572,8 @@ class terrariumWebcamHLSLive(terrariumWebcamSource):
   VALID_SOURCE = '^https?://.*\.m3u8$'
   INFO_SOURCE = 'https://server.com/stream/playlist.m3u8'
 
-  TILE_LOCATION = terrariumWebcamSource.TILE_LOCATION
-  STORE_LOCATION = '/dev/shm/' + terrariumWebcamSource.TILE_LOCATION
-
   def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
     super(terrariumWebcamHLSLive,self).__init__(webcam_id, location, name, rotation, width, height, archive, archive_light, archive_door, environment)
-
-    if not os.path.isdir(terrariumWebcamHLSLive.STORE_LOCATION + self.get_id()):
-      os.makedirs(terrariumWebcamHLSLive.STORE_LOCATION + self.get_id())
-
-    if not os.path.islink(terrariumWebcamSource.TILE_LOCATION + self.get_id()):
-      os.symlink(terrariumWebcamHLSLive.STORE_LOCATION + self.get_id(),terrariumWebcamSource.TILE_LOCATION + self.get_id())
-
     self.__start()
 
   def __start(self):
