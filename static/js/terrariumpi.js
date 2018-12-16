@@ -1697,6 +1697,7 @@ function update_dashboard_environment(name, data) {
       enabledColor = 'blue';
       break;
     case 'ph':
+      indicator = 'pH';
       enabledColor = 'green';
       break;
     case 'fertility':
