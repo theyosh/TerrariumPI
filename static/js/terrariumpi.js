@@ -2270,7 +2270,7 @@ function add_door() {
 
 /* Webcam code */
 function createWebcamLayer(webcamid, maxzoom) {
-  return L.tileLayer('/webcam/{id}_tile_{z}_{x}_{y}.jpg?_{time}', {
+  return L.tileLayer('/webcam/{id}/{id}_tile_{z}_{x}_{y}.jpg?_{time}', {
     time: function() {
       return (new Date()).valueOf();
     },
