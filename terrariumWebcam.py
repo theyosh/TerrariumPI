@@ -7,6 +7,12 @@ try:
 except ImportError as ex:
   import _thread
 
+try:
+  from subprocess import DEVNULL # py3k
+except ImportError:
+  import os
+  DEVNULL = open(os.devnull, 'wb')
+
 import time
 import cv2
 import math
@@ -427,6 +433,51 @@ class terrariumWebcamSource(object):
   def is_live(self):
     return False
 
+class terrariumWebcamLiveSource(terrariumWebcamSource):
+  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
+    super(terrariumWebcamLiveSource,self).__init__(webcam_id, location, name, rotation, width, height, archive, archive_light, archive_door, environment)
+    self.process_id = None
+    self.start()
+
+  def start(self):
+    if self.process_id is not None:
+      subprocess.Popen(['/usr/bin/pkill', '-P',str(self.process_id.pid)])
+      sleep(1)
+
+    _thread.start_new_thread(self.run, ())
+
+  def run(self):
+    cmd = shlex.split(self.cmd())
+    self.process_id = subprocess.Popen(cmd,stdout=DEVNULL,stderr=DEVNULL)
+
+  def get_raw_data(self):
+    logger.debug('Using HLS Live Cam device: %s' % (self.get_location(),))
+    try:
+      location = self.get_location()
+      if 'rpicam_live' == location:
+        location = 'http://localhost:8090/{}/{}/stream.m3u8'.format(terrariumWebcamSource.TILE_LOCATION, self.get_id())
+
+      cmd = 'ffmpeg -hide_banner -loglevel panic -i {} -vframes 1 -f image2 -'.format(location)
+      cmd = shlex.split(cmd)
+      with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE) as proc:
+        out, err = proc.communicate()
+        self.raw_image = BytesIO(out)
+
+      return True
+    except Exception as ex:
+      print(ex)
+      logger.exception('Error getting raw HLS Live Cam image from webcam \'%s\' with error message: {}'.format(self.get_name(),ex))
+
+    return False
+
+  def rotate_image(self):
+    # Live webcam is rotated with raspivid command
+    pass
+
+  def is_live(self):
+    return True
+
+
 class terrariumWebcamRPI(terrariumWebcamSource):
   TYPE = 'rpicam'
   VALID_SOURCE = '^rpicam$'
@@ -517,102 +568,28 @@ class terrariumWebcamRemote(terrariumWebcamSource):
 
     return False
 
-class terrariumWebcamRPILive(terrariumWebcamSource):
+class terrariumWebcamRPILive(terrariumWebcamLiveSource):
   TYPE = 'rpicam_live'
   VALID_SOURCE = '^rpicam_live$'
   INFO_SOURCE = 'rpicam_live'
 
-  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
-    super(terrariumWebcamRPILive,self).__init__(webcam_id, location, name, rotation, width, height, archive, archive_light, archive_door, environment)
-    self.__start()
-
-  def __start(self):
-    _thread.start_new_thread(self.__run, ())
-
-  def __run(self):
+  def cmd(self):
     resolution = self.get_resolution()
-    cmd = './live_rpicam.sh "{}" {} {} {} {}'.format(self.get_name(),
-                                                   resolution['width'],
-                                                   resolution['height'],
-                                                   self.get_rotation(),
-                                                   terrariumWebcamRPILive.STORE_LOCATION + self.get_id())
-    cmd = shlex.split(cmd)
-    if sys.version_info.major == 2:
-      with open(os.devnull, 'w') as devnull:
-        subprocess.call(cmd,stdout=devnull, stderr=subprocess.STDOUT)
-    elif sys.version_info.major == 3:
-      subprocess.run(cmd,capture_output=True)
+    return './live_rpicam.sh "{}" {} {} {} {}'.format(self.get_name(),
+                                                      resolution['width'] if self.get_rotation() not in ['90','270'] else resolution['height'],
+                                                      resolution['height'] if self.get_rotation() not in ['90','270'] else resolution['width'],
+                                                      self.get_rotation(),
+                                                      terrariumWebcamRPILive.STORE_LOCATION + self.get_id())
 
-  def rotate_image(self):
-    # Live webcam is rotated with raspivid command
-    pass
-
-  def get_raw_data(self):
-    logger.debug('Using Raspberry PI Cam device: %s' % (self.location,))
-    try:
-      cmd = 'ffmpeg -hide_banner -loglevel panic -i http://localhost:8090/{}/{}/stream.m3u8 -vframes 1 -f image2 -'.format(terrariumWebcamSource.TILE_LOCATION,
-                                                                                                                           self.get_id())
-      cmd = shlex.split(cmd)
-      with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE) as proc:
-        out, err = proc.communicate()
-        self.raw_image = BytesIO(out)
-
-      return True
-    except Exception as ex:
-      print(ex)
-      logger.exception('Error getting raw Raspberry PI Cam image from webcam \'%s\' with error message: {}'.format(self.get_name(),ex))
-
-    return False
-
-  def is_live(self):
-    return True
-
-class terrariumWebcamHLSLive(terrariumWebcamSource):
+class terrariumWebcamHLSLive(terrariumWebcamLiveSource):
   TYPE = 'hls_live'
   VALID_SOURCE = '^https?://.*\.m3u8$'
   INFO_SOURCE = 'https://server.com/stream/playlist.m3u8'
 
-  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
-    super(terrariumWebcamHLSLive,self).__init__(webcam_id, location, name, rotation, width, height, archive, archive_light, archive_door, environment)
-    self.__start()
-
-  def __start(self):
-    _thread.start_new_thread(self.__run, ())
-
-  def __run(self):
-    cmd = './hls-proxy/hlsproxy.py "{}" {} {}'.format(self.get_location(),
-                                                      '-o',
-                                                      terrariumWebcamRPILive.STORE_LOCATION + self.get_id())
-
-    cmd = shlex.split(cmd)
-    if sys.version_info.major == 2:
-      with open(os.devnull, 'w') as devnull:
-        subprocess.call(cmd,stdout=devnull, stderr=subprocess.STDOUT)
-    elif sys.version_info.major == 3:
-      subprocess.run(cmd,capture_output=True)
-
-  def rotate_image(self):
-    # Live webcam is rotated with raspivid command
-    pass
-
-  def get_raw_data(self):
-    logger.debug('Using HLS Live Cam device: %s' % (self.get_location(),))
-    try:
-      cmd = 'ffmpeg -hide_banner -loglevel panic -i {} -vframes 1 -f image2 -'.format(self.get_location())
-      cmd = shlex.split(cmd)
-      with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE) as proc:
-        out, err = proc.communicate()
-        self.raw_image = BytesIO(out)
-
-      return True
-    except Exception as ex:
-      print(ex)
-      logger.exception('Error getting raw HLS Live Cam image from webcam \'%s\' with error message: {}'.format(self.get_name(),ex))
-
-    return False
-
-  def is_live(self):
-    return True
+  def cmd(self):
+    return './hls-proxy/hlsproxy.py "{}" {} {}'.format(self.get_location(),
+                                                       '-o',
+                                                       terrariumWebcamRPILive.STORE_LOCATION + self.get_id())
 
 class terrariumWebcamSourceException(Exception):
   '''The entered online webcam source is not known or invalid'''
