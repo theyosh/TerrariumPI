@@ -390,6 +390,9 @@ class terrariumEngine(object):
 
       seen_webcams.append(webcam.get_id())
 
+      if reloading and webcam.is_live():
+        webcam.start()
+
     if reloading:
       for webcam_id in set(self.webcams) - set(seen_webcams):
         # clean up old deleted switches
