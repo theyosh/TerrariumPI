@@ -652,13 +652,11 @@ class terrariumNotification(terrariumSingleton):
                                                                                                 terrariumNotification.__MAX_MESSAGES_TOTAL_PER_MINUTE))
       return
 
-    #print('Rate limit messages: title \'{}\', time {}'.format(title,now))
     try:
       self.__ratelimit_messages[title][now] += 1
     except KeyError as ex:
-      print('Missed something...')
-      print('title: {}, now: {}'.format(title,now))
-      print(self.__ratelimit_messages[title])
+      # Somehow we get a key error while it should be there....
+      self.__ratelimit_messages[title][now] = 1
 
     if self.messages[message_id].is_email_enabled():
       self.send_email(title,message,files)
