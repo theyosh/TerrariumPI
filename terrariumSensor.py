@@ -348,7 +348,7 @@ class terrariumOWFSSensor(terrariumSensorSource):
   def __init__(self, sensor_id, sensor_type, address, name = '', callback_indicator = None):
     self.__host = 'localhost'
     self.__port = 4304
-    super(terrariumOWFSSensor,self).__init__(self, sensor_id, sensor_type, address, name, callback_indicator)
+    super(terrariumOWFSSensor,self).__init__(sensor_id, sensor_type, address, name, callback_indicator)
 
   def load_data(self):
     data = None
@@ -357,12 +357,12 @@ class terrariumOWFSSensor(terrariumSensorSource):
       try:
         proxy = protocol.proxy(self.__host, self.__port)
         try:
-          data['temperature'] = float(proxy.read('/{}/temperature'.format(self.__sensor[:-2])))
+          data['temperature'] = float(proxy.read('/{}/temperature'.format(self.get_address())))
         except protocol.OwnetError:
           pass
 
         try:
-          data['humidity'] = float(proxy.read('/{}/temperature'.format(self.__sensor[:-2])))
+          data['humidity'] = float(proxy.read('/{}/humidity'.format(self.get_address())))
         except protocol.OwnetError:
           pass
 
