@@ -1,6 +1,9 @@
 #!/bin/bash
 BASEDIR=$(dirname $(readlink -nf $0))
 SCRIPT_USER=`who -m | awk '{print $1}'`
+if [ "" == "${SCRIPT_USER}" ]; then
+  SCRIPT_USER="pi"
+fi
 SCRIPT_USER_ID=`id -u ${SCRIPT_USER}`
 VERSION=`grep ^version defaults.cfg | cut -d' ' -f 3`
 WHOAMI=`whoami`
