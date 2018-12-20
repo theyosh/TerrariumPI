@@ -387,6 +387,7 @@ class terrariumConfig(object):
           logger.info('Updating configuration file to version: %s' % (version,))
           # Only change IDs of sensors that can be scanned
           collector_update_sql = ''
+          sensor_rename_list = {}
           for section in self.__config.sections():
             if section[:6] == 'sensor':
               data = self.__get_config(section)
@@ -395,6 +396,9 @@ class terrariumConfig(object):
                 new_id = md5((data['hardwaretype'] + data['address'] + data['type']).encode()).hexdigest()
 
                 if old_id != new_id:
+                  if old_id not in sensor_rename_list:
+                    sensor_rename_list[old_id] = new_id
+
                   data['id'] = new_id
                   new_section = 'sensor' + new_id
                   if not self.__config.has_section(new_section):
@@ -414,6 +418,16 @@ class terrariumConfig(object):
                   collector_update_sql += 'UPDATE sensor_data SET id = \'{}\' WHERE id = \'{}\';\n'.format(new_id,old_id)
 
                   self.__config.remove_section(section)
+
+          # Update environment sensor settings
+          environment = self.__get_config('environment')
+          keys = list(environment.keys())
+          for setting in keys:
+            if '_sensors' in setting:
+              for old_id in sensor_rename_list:
+                environment[setting] = environment[setting].replace(old_id,sensor_rename_list[old_id])
+
+              self.__config.set('environment', str(setting), str(environment[setting]))
 
           if '' != collector_update_sql:
             config_ok = self.__save_config()
