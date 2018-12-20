@@ -471,7 +471,7 @@ class terrariumWebcamLiveSource(terrariumWebcamSource):
     return False
 
   def rotate_image(self):
-    # Live webcam is rotated with raspivid command
+    # Live webcam is remotely rotated
     pass
 
   def is_live(self):
@@ -482,10 +482,6 @@ class terrariumWebcamRPI(terrariumWebcamSource):
   TYPE = 'rpicam'
   VALID_SOURCE = '^rpicam$'
   INFO_SOURCE = 'rpicam'
-
-  def set_resolution(self,width,height):
-    self.resolution = {'width' : width,
-                       'height' : height}
 
   def get_raw_data(self):
     logger.debug('Using RPICAM')
@@ -505,9 +501,6 @@ class terrariumWebcamRPI(terrariumWebcamSource):
       logger.exception('Error getting raw RPI image from webcam \'%s\' with error message:' % (self.get_name(),))
 
     return False
-
-  def get_location(self):
-    return terrariumWebcamRPI.VALID_SOURCE[1:-1]
 
 class terrariumWebcamUSB(terrariumWebcamSource):
   TYPE = 'usb'
