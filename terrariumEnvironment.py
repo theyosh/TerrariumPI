@@ -708,7 +708,7 @@ class terrariumEnvironment(object):
 
       elif env_part == terrariumEnvironmentWatertank.env_type:
         all_sensors = [] if ('sensors' not in env_conf or env_conf['sensors'] in ['',None]) else (env_conf['sensors'] if isinstance(env_conf['sensors'], list) else env_conf['sensors'].split(','))
-        tank_type = 'distance' if all([self.sensors[sensor].get_type() == 'distance' for sensor in all_sensors]) else 'volume'
+        tank_type = 'distance' if all([self.sensors[sensor].get_sensor_type() == 'distance' for sensor in all_sensors]) else 'volume'
         self.__environment_parts[env_part] = terrariumEnvironmentWatertank(
                                                 'disabled' if 'mode' not in env_conf else env_conf['mode'],
                                                 []         if ('sensors' not in env_conf or env_conf['sensors'] in ['',None]) else env_conf['sensors'],
