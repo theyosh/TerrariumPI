@@ -15,6 +15,7 @@ class terrariumMiFloraSensor(terrariumSensorSource):
   VALID_SENSOR_TYPES = ['temperature','light','moisture','fertility']
 
   __SCANTIME = 5
+  __MIN_DB = -90
   __MIFLORA_FIRMWARE_AND_BATTERY = 56
   __MIFLORA_REALTIME_DATA_TRIGGER = 51
   __MIFLORA_GET_DATA = 53
@@ -108,7 +109,7 @@ class terrariumMiFloraSensor(terrariumSensorSource):
 
     try:
       for device in Scanner().scan(terrariumMiFloraSensor.__SCANTIME):
-        if device.getValueText(9) is not None and device.getValueText(9).lower() in ['flower mate','flower care']:
+        if device.rssi > terrariumMiFloraSensor.__MIN_DB and device.getValueText(9) is not None and device.getValueText(9).lower() in ['flower mate','flower care']:
           address = device.addr
           device = None
           logger.info('Found MiFlora bluetooth device at address {}'.format(address))
