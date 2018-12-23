@@ -960,7 +960,6 @@ function sensor_gauge(name, data) {
     }
 
     $('#' + name + ' .gauge-indicator').text(data.indicator);
-    console.log('Gauge value:',data.current);
     globals.gauges[name].set(data.current);
     if (name == 'system_disk' || name == 'system_memory') {
       $('#' + name + ' .gauge-value').text(formatBytes(data.current))
