@@ -946,9 +946,6 @@ function sensor_gauge(name, data) {
       $('#' + name + ' .gauge').attr('done',1);
       //$('#' + name + ' .goal-wrapper span:nth-child(2)').text('°' + globals.temperature_indicator);
       globals.gauges[name] = new Gauge($('#' + name + ' .gauge')[0]).setOptions(opts);
-      if (name != 'system_disk' && name != 'system_memory') {
-        globals.gauges[name].setTextField($('#' + name + ' .gauge-value')[0]);
-      }
       // Only set min and max only once. Else the gauge will flicker each data update
       globals.gauges[name].maxValue = data.limit_max;
       globals.gauges[name].setMinValue(data.limit_min);
@@ -963,9 +960,12 @@ function sensor_gauge(name, data) {
     }
 
     $('#' + name + ' .gauge-indicator').text(data.indicator);
+    console.log('Gauge value:',data.current);
     globals.gauges[name].set(data.current);
     if (name == 'system_disk' || name == 'system_memory') {
       $('#' + name + ' .gauge-value').text(formatBytes(data.current))
+    } else {
+      $('#' + name + ' .gauge-value').text(formatNumber(data.current,0,3))
     }
     $('div#' + name + ' .x_title h2 .badge.bg-red').toggle(data.alarm);
     $('div#' + name + ' .x_title h2 .badge.bg-orange').toggle(data.error);
