@@ -119,6 +119,6 @@ class terrariumMiFloraSensor(terrariumSensorSource):
                                          address,
                                          callback_indicator = callback)
     except Exception as ex:
-      if 'Failed to connect to peripheral' not in ex:
+      if 'Failed to connect to peripheral' not in str(ex):
         print(ex)
         logger.warning('Bluetooth scanning is not enabled for normal users or there are zero Bluetooth LE devices available.... bluetooth is disabled!')
