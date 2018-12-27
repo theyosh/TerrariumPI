@@ -7,6 +7,12 @@ try:
 except ImportError as ex:
   import _thread
 
+try:
+  from subprocess import DEVNULL # py3k
+except ImportError:
+  import os
+  DEVNULL = open(os.devnull, 'wb')
+
 import time
 import cv2
 import math
@@ -31,10 +37,13 @@ from gevent import monkey, sleep
 monkey.patch_all()
 
 class terrariumWebcamSource(object):
+  TYPE = None
   # Class defaults
-  TILE_SIZE = 256
   TILE_LOCATION = 'webcam/'
   ARCHIVE_LOCATION = TILE_LOCATION + 'archive/'
+  STORE_LOCATION = '/dev/shm/' + TILE_LOCATION
+
+  TILE_SIZE = 256
   JPEG_QUALITY = 95
   FONT_SIZE = 10
   RETRIES = 3
@@ -71,6 +80,12 @@ class terrariumWebcamSource(object):
       self.__id = md5(self.get_location().encode()).hexdigest()
     else:
       self.__id = id
+
+    if not os.path.isdir(terrariumWebcamSource.STORE_LOCATION + self.get_id()):
+      os.makedirs(terrariumWebcamSource.STORE_LOCATION + self.get_id())
+
+    if not os.path.islink(terrariumWebcamSource.TILE_LOCATION + self.get_id()):
+      os.symlink(terrariumWebcamSource.STORE_LOCATION + self.get_id(),terrariumWebcamSource.TILE_LOCATION + self.get_id())
 
     logger.info('Initialized %s webcam \'%s\' on location %s' %
                 (self.get_type(),
@@ -137,7 +152,7 @@ class terrariumWebcamSource(object):
           logger.debug('Cropping image from position %s' % (crop_size,))
           tile = canvas.crop(crop_size)
           logger.debug('Saving cropped image to %s' % (terrariumWebcamSource.TILE_LOCATION + self.__id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg',))
-          tile.save(terrariumWebcamSource.TILE_LOCATION + self.__id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg','jpeg',quality=terrariumWebcamSource.JPEG_QUALITY)
+          tile.save(terrariumWebcamSource.STORE_LOCATION + self.get_id() + '/' + self.__id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg','jpeg',quality=terrariumWebcamSource.JPEG_QUALITY)
           logger.debug('Done saving %s' % (terrariumWebcamSource.TILE_LOCATION + self.__id + '_tile_' + str(zoom_factor) + '_' + str(row) + '_' + str(column) + '.jpg',))
 
       # Scale down by 50%
@@ -305,7 +320,7 @@ class terrariumWebcamSource(object):
           pass
 
       if self.get_state() != state and state == terrariumWebcamSource.OFFLINE:
-        logger.error('Raw image \'%s\' at location %s is not available!' % (self.get_name(),self.get_location(),))
+        logger.warning('Raw image \'%s\' at location %s is not available!' % (self.get_name(),self.get_location(),))
         # Set the offline message
         self.set_offline_image()
         # Store copy on disk
@@ -345,7 +360,7 @@ class terrariumWebcamSource(object):
     return self.__id
 
   def get_type(self):
-    return None
+    return self.TYPE
 
   def get_name(self):
     return self.name
@@ -405,7 +420,7 @@ class terrariumWebcamSource(object):
     return self.__last_update
 
   def get_raw_image(self,archive = False):
-    image = terrariumWebcamSource.TILE_LOCATION + self.get_id() + '_raw.jpg'
+    image = terrariumWebcamSource.TILE_LOCATION + self.get_id() + '/' + self.get_id() + '_raw.jpg'
     if archive:
       image = terrariumWebcamSource.ARCHIVE_LOCATION + (datetime.datetime.now()).strftime("%Y/%m/%d") + '/' + self.get_id() + '_archive_' + str(int(time.time())) + '.jpg'
 
@@ -418,14 +433,55 @@ class terrariumWebcamSource(object):
   def is_live(self):
     return False
 
+class terrariumWebcamLiveSource(terrariumWebcamSource):
+  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
+    super(terrariumWebcamLiveSource,self).__init__(webcam_id, location, name, rotation, width, height, archive, archive_light, archive_door, environment)
+    self.process_id = None
+    self.start()
+
+  def start(self):
+    if self.process_id is not None:
+      subprocess.Popen(['/usr/bin/pkill', '-P',str(self.process_id.pid)])
+      sleep(1)
+
+    _thread.start_new_thread(self.run, ())
+
+  def run(self):
+    cmd = shlex.split(self.cmd())
+    self.process_id = subprocess.Popen(cmd,stdout=DEVNULL,stderr=DEVNULL)
+
+  def get_raw_data(self):
+    logger.debug('Using HLS Live Cam device: %s' % (self.get_location(),))
+    try:
+      location = self.get_location()
+      if 'rpicam_live' == location:
+        location = 'http://localhost:8090/{}/{}/stream.m3u8'.format(terrariumWebcamSource.TILE_LOCATION, self.get_id())
+
+      cmd = 'ffmpeg -hide_banner -loglevel panic -i {} -vframes 1 -f image2 -'.format(location)
+      cmd = shlex.split(cmd)
+      with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE) as proc:
+        out, err = proc.communicate()
+        self.raw_image = BytesIO(out)
+
+      return True
+    except Exception as ex:
+      print(ex)
+      logger.exception('Error getting raw HLS Live Cam image from webcam \'%s\' with error message: {}'.format(self.get_name(),ex))
+
+    return False
+
+  def rotate_image(self):
+    # Live webcam is remotely rotated
+    pass
+
+  def is_live(self):
+    return True
+
+
 class terrariumWebcamRPI(terrariumWebcamSource):
   TYPE = 'rpicam'
   VALID_SOURCE = '^rpicam$'
   INFO_SOURCE = 'rpicam'
-
-  def set_resolution(self,width,height):
-    self.resolution = {'width' : 1920,
-                       'height' : 1080}
 
   def get_raw_data(self):
     logger.debug('Using RPICAM')
@@ -445,12 +501,6 @@ class terrariumWebcamRPI(terrariumWebcamSource):
       logger.exception('Error getting raw RPI image from webcam \'%s\' with error message:' % (self.get_name(),))
 
     return False
-
-  def get_type(self):
-    return terrariumWebcamRPI.TYPE
-
-  def get_location(self):
-    return terrariumWebcamRPI.VALID_SOURCE[1:-1]
 
 class terrariumWebcamUSB(terrariumWebcamSource):
   TYPE = 'usb'
@@ -492,9 +542,6 @@ class terrariumWebcamUSB(terrariumWebcamSource):
 
     return False
 
-  def get_type(self):
-    return terrariumWebcamUSB.TYPE
-
 class terrariumWebcamRemote(terrariumWebcamSource):
   TYPE = 'remote'
   VALID_SOURCE = '^https?://.*\.[^m3u8]*$'
@@ -514,97 +561,28 @@ class terrariumWebcamRemote(terrariumWebcamSource):
 
     return False
 
-  def get_type(self):
-    return terrariumWebcamRemote.TYPE
-
-class terrariumWebcamRPILive(terrariumWebcamSource):
+class terrariumWebcamRPILive(terrariumWebcamLiveSource):
   TYPE = 'rpicam_live'
   VALID_SOURCE = '^rpicam_live$'
   INFO_SOURCE = 'rpicam_live'
 
-  TILE_LOCATION = terrariumWebcamSource.TILE_LOCATION
-  STORE_LOCATION = '/dev/shm/' + terrariumWebcamSource.TILE_LOCATION
-
-  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
-    super(terrariumWebcamRPILive,self).__init__(webcam_id, location, name, rotation, width, height, archive, archive_light, archive_door, environment)
-
-    if not os.path.isdir(terrariumWebcamRPILive.STORE_LOCATION + self.get_id()):
-      os.makedirs(terrariumWebcamRPILive.STORE_LOCATION + self.get_id())
-
-    if not os.path.islink(terrariumWebcamSource.TILE_LOCATION + self.get_id()):
-      os.symlink(terrariumWebcamRPILive.STORE_LOCATION + self.get_id(),terrariumWebcamSource.TILE_LOCATION + self.get_id())
-
-    self.__start()
-
-  def __start(self):
-    _thread.start_new_thread(self.__run, ())
-
-  def __run(self):
+  def cmd(self):
     resolution = self.get_resolution()
-    cmd = './live_rpicam.sh "{}" {} {} {} {}'.format(self.get_name(),
-                                                   resolution['width'],
-                                                   resolution['height'],
-                                                   self.get_rotation(),
-                                                   terrariumWebcamRPILive.STORE_LOCATION + self.get_id())
-    cmd = shlex.split(cmd)
-    if sys.version_info.major == 2:
-      with open(os.devnull, 'w') as devnull:
-        subprocess.call(cmd,stdout=devnull, stderr=subprocess.STDOUT)
-    elif sys.version_info.major == 3:
-      subprocess.run(cmd,capture_output=True)
+    return './live_rpicam.sh "{}" {} {} {} {}'.format(self.get_name(),
+                                                      resolution['width'] if self.get_rotation() not in ['90','270'] else resolution['height'],
+                                                      resolution['height'] if self.get_rotation() not in ['90','270'] else resolution['width'],
+                                                      self.get_rotation(),
+                                                      terrariumWebcamRPILive.STORE_LOCATION + self.get_id())
 
-  def rotate_image(self):
-    # Live webcam is rotated with raspivid command
-    pass
-
-  def get_raw_data(self):
-    logger.debug('Using Raspberry PI Cam device: %s' % (self.location,))
-    try:
-      cmd = 'ffmpeg -hide_banner -loglevel panic -i http://localhost:8090/{}/{}/stream.m3u8 -vframes 1 -f image2 -'.format(terrariumWebcamSource.TILE_LOCATION,
-                                                                                                                           self.get_id())
-      cmd = shlex.split(cmd)
-      with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE) as proc:
-        out, err = proc.communicate()
-        self.raw_image = BytesIO(out)
-
-      return True
-    except Exception as ex:
-      print(ex)
-      logger.exception('Error getting raw Raspberry PI Cam image from webcam \'%s\' with error message: {}'.format(self.get_name(),ex))
-
-    return False
-
-  def get_type(self):
-    return terrariumWebcamRemoteLive.TYPE
-
-  def is_live(self):
-    return True
-
-class terrariumWebcamRemoteLive(terrariumWebcamSource):
-  TYPE = 'remote_live'
+class terrariumWebcamHLSLive(terrariumWebcamLiveSource):
+  TYPE = 'hls_live'
   VALID_SOURCE = '^https?://.*\.m3u8$'
   INFO_SOURCE = 'https://server.com/stream/playlist.m3u8'
 
-  def get_raw_data(self):
-    logger.debug('Using URL: %s' % (self.location,))
-    try:
-      remote_image = terrariumUtils.get_remote_data(self.location)
-      if remote_image is None:
-        raise terrariumWebcamRAWUpdateException()
-
-      self.raw_image = BytesIO(remote_image)
-      return True
-    except terrariumWebcamRAWUpdateException as ex:
-      logger.warning('Error getting raw online image from webcam \'%s\' with error message: %s' % (self.get_name(),ex))
-
-    return False
-
-  def get_type(self):
-    return terrariumWebcamRemoteLive.TYPE
-
-  def is_live(self):
-    return True
-
+  def cmd(self):
+    return './hls-proxy/hlsproxy.py "{}" {} {}'.format(self.get_location(),
+                                                       '-o',
+                                                       terrariumWebcamRPILive.STORE_LOCATION + self.get_id())
 
 class terrariumWebcamSourceException(Exception):
   '''The entered online webcam source is not known or invalid'''
@@ -618,7 +596,7 @@ class terrariumWebcam(object):
              terrariumWebcamUSB,
              terrariumWebcamRemote,
              terrariumWebcamRPILive,
-             terrariumWebcamRemoteLive}
+             terrariumWebcamHLSLive}
 
   def __new__(self,webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
     for webcam_source in terrariumWebcam.SOURCES:

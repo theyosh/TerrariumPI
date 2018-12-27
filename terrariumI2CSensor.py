@@ -5,9 +5,10 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 import smbus
 import sys
-import time
+#import time
 import Adafruit_SHT31
 
+from terrariumSensor import terrariumSensorSource
 from terrariumUtils import terrariumUtils
 
 # Dirty hack to include someone his code... to lazy to make it myself :)
@@ -18,337 +19,319 @@ import chirp
 from gevent import monkey, sleep
 monkey.patch_all()
 
-class terrariumI2CSensor(object):
+class terrariumI2CSensor(terrariumSensorSource):
+  TYPE = None
+  VALID_SENSOR_TYPES = ['temperature','humidity']
+
   # control constants
-  __SOFTRESET = 0xFE
-  __SOFTRESET_TIMEOUT = 0.1
+  SOFTRESET = 0xFE
+  SOFTRESET_TIMEOUT = 0.1
 
-  __TRIGGER_TEMPERATURE_NO_HOLD = 0xF3
-  __TEMPERATURE_WAIT_TIME = 0.1
+  TRIGGER_TEMPERATURE_NO_HOLD = 0xF3
+  TEMPERATURE_WAIT_TIME = 0.1
 
-  __TRIGGER_HUMIDITY_NO_HOLD = 0xF5
-  __HUMIDITY_WAIT_TIME = 0.1
+  TRIGGER_HUMIDITY_NO_HOLD = 0xF5
+  HUMIDITY_WAIT_TIME = 0.1
 
-  hardwaretype = None
+  def load_data(self):
+    self.i2c_bus = None
 
-  def __init__(self, address = 40, device_number = 1, softreset_timeout   = __SOFTRESET_TIMEOUT,
-                                                      temperature_timeout = __TEMPERATURE_WAIT_TIME,
-                                                      humidity_timeout    = __HUMIDITY_WAIT_TIME):
+    data = None
+    if self.open():
+      data = self.load_raw_data()
+      self.close()
 
-    self.__address = int('0x' + str(address),16)
-    self.__device_number = 1 if device_number is None else int(device_number)
+    return data
 
-    self.__softreset_timeout = softreset_timeout
-    self.__temperature_timeout = temperature_timeout
-    self.__humidity_timeout = humidity_timeout
-
-    logger.debug('Initializing sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
-
-  def __enter__(self):
-    """used to enable python's with statement support"""
-    logger.debug('Send soft reset command %s with a timeout of %s seconds' % (self.__SOFTRESET,self.__softreset_timeout * 2.0))
-    #Datasheet recommend do Soft Reset before measurment:
-    self.__bus = smbus.SMBus(self.__device_number)
-    self.__bus.write_byte(self.__address, self.__SOFTRESET)
-    sleep(self.__softreset_timeout * 2.0)
-    return self
-
-  def __exit__(self, type, value, traceback):
-    """with support"""
-    self.close()
-
-  def __get_raw_data(self,trigger,timeout):
-    self.__bus.write_byte(self.__address, trigger)
-    sleep(timeout * 2.0)
-    data1 = self.__bus.read_byte(self.__address)
+  def open(self):
     try:
-      data2 = self.__bus.read_byte(self.__address)
+      gpio_pins = self.get_address().split(',')
+      logger.debug('Open sensor type \'{}\' with address {}'.format(self.get_type(),gpio_pins))
+      logger.debug('Send soft reset command \'{}\' with a timeout of {} seconds'.format(self.SOFTRESET,self.SOFTRESET_TIMEOUT * 2.0))
+      #Datasheet recommend do Soft Reset before measurment:
+      self.i2c_bus = smbus.SMBus(1 if len(gpio_pins) == 1 else int(gpio_pins[1]))
+      if self.SOFTRESET_TIMEOUT > 0.0:
+        self.i2c_bus.write_byte(int('0x' + gpio_pins[0],16), self.SOFTRESET)
+        sleep(self.SOFTRESET_TIMEOUT * 2.0)
+
+    except Exception as ex:
+      logger.warning('Error opening {} sensor \'{}\'. Error message: {}'.format(self.get_type(),self.get_name(),ex))
+      return False
+
+    return True
+
+  def get_raw_data(self,trigger,timeout):
+    gpio_pins = self.get_address().split(',')
+    self.i2c_bus.write_byte(int('0x' + gpio_pins[0],16), trigger)
+    sleep(timeout * 2.0)
+    data1 = self.i2c_bus.read_byte(int('0x' + gpio_pins[0],16))
+    try:
+      data2 = self.i2c_bus.read_byte(int('0x' + gpio_pins[0],16))
     except Exception as ex:
       data2 = data1
       logger.exception('Error getting second part of data in bytes from sensor \'%s\' at device %s with address %s with error: %s',(self.__class__.__name__,self.__device_number,self.__address,ex))
 
     return (data1,data2)
 
+  def load_raw_data(self):
+    data = None
+
+    try:
+      data = {}
+      bytedata = self.get_raw_data(self.TRIGGER_TEMPERATURE_NO_HOLD,self.TEMPERATURE_WAIT_TIME)
+      data['temperature'] = ((bytedata[0]*256.0+bytedata[1])*175.72/65536.0)-46.85
+    except Exception as ex:
+      print('load_raw_data temp:')
+      print(ex)
+
+    try:
+      if data is None:
+        data = {}
+      bytedata = self.get_raw_data(self.TRIGGER_HUMIDITY_NO_HOLD,self.HUMIDITY_WAIT_TIME)
+      data['humidity'] = ((bytedata[0]*256.0+bytedata[1])*125.0/65536.0)-6.0
+    except Exception as ex:
+      print('load_raw_data humid:')
+      print(ex)
+
+    return data
+
   def close(self):
-    """Closes the i2c connection"""
-    logger.debug('Close sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
-    self.__bus.close()
+    try:
+      self.i2c_bus.close()
 
-  def get_temperature(self):
-    #From datasheet convert this in human view. Temp C = ((Temp_Code*175.72)/65536)-46.85 / T = -46.82 + (172.72 * (ST/2^16))
-    #For convert 2 byte in number need MSB*256+LSB.
-    logger.debug('Read temperature value from sensor type \'%s\' at device %s with address %s with command %s and timeout %s' % (self.__class__.__name__,self.__device_number,self.__address,self.__TRIGGER_TEMPERATURE_NO_HOLD,self.__temperature_timeout))
-    bytedata = self.__get_raw_data(self.__TRIGGER_TEMPERATURE_NO_HOLD,self.__temperature_timeout)
-    temperature = ((bytedata[0]*256.0+bytedata[1])*175.72/65536.0)-46.85
-    logger.debug('Got data from temperature sensor type \'%s\' at device %s with address %s: byte data: %s, temperature: %s' % (self.__class__.__name__,self.__device_number,self.__address,bytedata,temperature))
-    return None if not terrariumUtils.is_float(temperature) else float(temperature)
-
-  def get_humidity(self):
-    #From datasheet convert this in human view. RH% = ((RH*125)/65536)-6 / RH = -6 + (125 * (SRH / 2 ^16))
-    #For convert 2 byte in number need MSB*256+LSB.
-    logger.debug('Read humidity value from sensor type \'%s\' at device %s with address %s with command %s and timeout %s' % (self.__class__.__name__,self.__device_number,self.__address,self.__TRIGGER_HUMIDITY_NO_HOLD,self.__humidity_timeout))
-    bytedata = self.__get_raw_data(self.__TRIGGER_HUMIDITY_NO_HOLD,self.__humidity_timeout)
-    humidity = ((bytedata[0]*256.0+bytedata[1])*125.0/65536.0)-6.0
-    logger.debug('Got data from humidity sensor type \'%s\' at device %s with address %s: byte data: %s, humidity: %s' % (self.__class__.__name__,self.__device_number,self.__address,bytedata,humidity))
-    return None if not terrariumUtils.is_float(humidity) else float(humidity)
+    except Exception as ex:
+      logger.warning('Error closing {} sensor \'{}\'. Error message: {}'.format(self.get_type(),self.get_name(),ex))
 
 class terrariumSHT2XSensor(terrariumI2CSensor):
+  TYPE = 'sht2x'
   # SHT2XX - 3.3 Volt VCC
   # 黄 = Yellow = DATA
   # 蓝 = Blue   = CLK
   # 黑 = Black  = GND
   # 棕 = Brown  = VCC
 
-  hardwaretype = 'sht2x'
   # datasheet (v4), page 9, table 7, thanks to Martin Milata
   # for suggesting the use of these better values
   # code copied from https://github.com/mmilata/growd
   # http://www.farnell.com/datasheets/1780639.pdf
   # https://cdn-shop.adafruit.com/datasheets/Sensirion_Humidity_SHT1x_Datasheet_V5.pdf
-  __TEMPERATURE_WAIT_TIME = 0.086  # (datasheet: typ=66, max=85 in ms)
-  __HUMIDITY_WAIT_TIME = 0.030     # (datasheet: typ=22, max=29 in ms)
-  __SOFTRESET_TIMEOUT = 0.016      # (datasheet: typ=??, max=15 in ms)
+  TEMPERATURE_WAIT_TIME = 0.086  # (datasheet: typical=66, max=85 in ms)
+  HUMIDITY_WAIT_TIME = 0.030     # (datasheet: typical=22, max=29 in ms)
+  SOFTRESET_TIMEOUT = 0.016      # (datasheet: typical=??, max=15 in ms)
 
-  def __init__(self, address = 40, device_number = 1):
-    super(terrariumSHT2XSensor, self).__init__(address,device_number,terrariumSHT2XSensor.__SOFTRESET_TIMEOUT,
-                                                                     terrariumSHT2XSensor.__TEMPERATURE_WAIT_TIME,
-                                                                     terrariumSHT2XSensor.__HUMIDITY_WAIT_TIME)
+class terrariumSHT3XSensor(terrariumSensorSource):
+  TYPE = 'sht3x'
+  VALID_SENSOR_TYPES = ['temperature','humidity']
+
+  # Datasheet: https://cdn-shop.adafruit.com/product-files/2857/Sensirion_Humidity_SHT3x_Datasheet_digital-767294.pdf
+  def load_data(self):
+    data = None
+    try:
+      data = {}
+      gpio_pins = self.get_address().split(',')
+      sensor = Adafruit_SHT31.SHT31(int('0x' + gpio_pins[0],16))
+
+      data['temperature'] = float(sensor.read_temperature())
+      data['humidity'] = float(sensor.read_humidity())
+
+    except Exception as ex:
+      print(ex)
+
+    return data
 
 class terrariumHTU21DSensor(terrariumI2CSensor):
-  hardwaretype = 'htu21d'
-  # Datasheet - https://datasheet.octopart.com/HPP845E131R5-TE-Connectivity-datasheet-15137552.pdf
-  __TEMPERATURE_WAIT_TIME = 0.059  # (datasheet: typ=44, max=58 in ms)
-  __HUMIDITY_WAIT_TIME = 0.019     # (datasheet: typ=14, max=18 in ms)
-  __SOFTRESET_TIMEOUT = 0.016      # (datasheet: typ=??, max=15 in ms)
+  TYPE = 'htu21d'
 
-  def __init__(self, address = 40, device_number = 1):
-    super(terrariumHTU21DSensor, self).__init__(address,device_number,terrariumHTU21DSensor.__SOFTRESET_TIMEOUT,
-                                                                      terrariumHTU21DSensor.__TEMPERATURE_WAIT_TIME,
-                                                                      terrariumHTU21DSensor.__HUMIDITY_WAIT_TIME)
+  # Datasheet - https://datasheet.octopart.com/HPP845E131R5-TE-Connectivity-datasheet-15137552.pdf
+  TEMPERATURE_WAIT_TIME = 0.059  # (datasheet: typ=44, max=58 in ms)
+  HUMIDITY_WAIT_TIME = 0.019     # (datasheet: typ=14, max=18 in ms)
+  SOFTRESET_TIMEOUT = 0.016      # (datasheet: typ=??, max=15 in ms)
 
 class terrariumSi7021Sensor(terrariumI2CSensor):
-  hardwaretype = 'si7021'
+  TYPE = 'si7021'
+
   # Datasheet - https://www.silabs.com/documents/public/data-sheets/Si7021-A20.pdf
-  __TEMPERATURE_WAIT_TIME = 0.012  # (datasheet: typ=7, max=10.8 in ms)
-  __HUMIDITY_WAIT_TIME = 0.07     # (datasheet: typ=10, max=12 in ms) -> Not correct??
-  __SOFTRESET_TIMEOUT = 0.016      # (datasheet: typ=5, max=15 in ms)
+  TEMPERATURE_WAIT_TIME = 0.012  # (datasheet: typ=7, max=10.8 in ms)
+  HUMIDITY_WAIT_TIME = 0.07     # (datasheet: typ=10, max=12 in ms) -> Not correct??
+  SOFTRESET_TIMEOUT = 0.016      # (datasheet: typ=5, max=15 in ms)
 
-  def __init__(self, address = 40, device_number = 1):
-    super(terrariumSi7021Sensor, self).__init__(address,device_number,terrariumSi7021Sensor.__SOFTRESET_TIMEOUT,
-                                                                      terrariumSi7021Sensor.__TEMPERATURE_WAIT_TIME,
-                                                                      terrariumSi7021Sensor.__HUMIDITY_WAIT_TIME)
+class terrariumBME280Sensor(terrariumI2CSensor):
+  TYPE = 'bme280'
+  VALID_SENSOR_TYPES = ['temperature','humidity','altitude','presure']
 
-class terrariumBME280Sensor(object):
-  hardwaretype = 'bme280'
   # Datasheet: https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME280_DS001-12.pdf
+  SOFTRESET = 0xFE
+  SOFTRESET_TIMEOUT = 0.002  # (datasheet: typ=??, max=2 in ms)
 
-  __SOFTRESET = 0xFE
-  __TEMPERATURE_WAIT_TIME = 0.5
-  __SOFTRESET_TIMEOUT = 0.002  # (datasheet: typ=??, max=2 in ms)
+  TEMPERATURE_WAIT_TIME = 0.5
+  HUMIDITY_WAIT_TIME = 0.5
 
-  def __init__(self, address = 40, device_number = 1):
-    self.__address = int('0x' + str(address),16)
-    self.__device_number = 1 if device_number is None else int(device_number)
+  def load_raw_data(self):
+    sensor_data = None
 
-    # BMP280 does not have humidity sensor
-    self.__has_humidity = None
-
-    self.__softreset_timeout = __SOFTRESET_TIMEOUT
-    self.__temperature_timeout = __TEMPERATURE_WAIT_TIME
-    self.__humidity_timeout = self.__temperature_timeout
-
-    self.__current_temperature = None
-    self.__current_humidity = None
-    self.__current_presure = None
-    self.__current_altitude = None
-
-    logger.debug('Initializing sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
-
-  def __enter__(self):
-    """used to enable python's with statement support"""
-    self.__bus = smbus.SMBus(self.__device_number)
-
-    #Datasheet recommend do Soft Reset before measurment:
-    logger.debug('Send soft reset command %s with a timeout of %s seconds' % (self.__SOFTRESET,self.__softreset_timeout * 2.0))
-    self.__bus.write_byte(self.__address, self.__SOFTRESET)
-    sleep(self.__softreset_timeout * 2.0)
-    return self
-
-  def __exit__(self, type, value, traceback):
-    """with support"""
-    self.close()
-
-  def __get_raw_data(self):
-    #Address of BME280 on bus "0x76", but also some sensors uses 0x77.
-    #See in "i2cdetect -y 0" (where "0" - needed bus, standart bus - "1").
-    #0x88..0x9F - temperature(dig_T1..dig_T3) and pressure(dig_P1..dig_p9).
-    #Read "compensation parameter storage" from 0x88, 24 bytes. Table 16, 18 in datasheet.
-    b1 = self.__bus.read_i2c_block_data(self.__address, 0x88, 24)
-
-    # Convert "compensation word"=16 bit=2 bytes -> MSB*256+LSB. 4.2.2 in datasheet.
-    # Temp coefficients.
-    dig_T1 = b1[1] * 256 + b1[0]
-    dig_T2 = b1[3] * 256 + b1[2]
-    if dig_T2 > 32767 :
-        dig_T2 -= 65536
-    dig_T3 = b1[5] * 256 + b1[4]
-    if dig_T3 > 32767 :
-        dig_T3 -= 65536
-
-    #And again with pressure.
-    # Pressure coefficients.
-    dig_P1 = b1[7] * 256 + b1[6]
-    dig_P2 = b1[9] * 256 + b1[8]
-    if dig_P2 > 32767 :
-        dig_P2 -= 65536
-    dig_P3 = b1[11] * 256 + b1[10]
-    if dig_P3 > 32767 :
-        dig_P3 -= 65536
-    dig_P4 = b1[13] * 256 + b1[12]
-    if dig_P4 > 32767 :
-        dig_P4 -= 65536
-    dig_P5 = b1[15] * 256 + b1[14]
-    if dig_P5 > 32767 :
-        dig_P5 -= 65536
-    dig_P6 = b1[17] * 256 + b1[16]
-    if dig_P6 > 32767 :
-        dig_P6 -= 65536
-    dig_P7 = b1[19] * 256 + b1[18]
-    if dig_P7 > 32767 :
-        dig_P7 -= 65536
-    dig_P8 = b1[21] * 256 + b1[20]
-    if dig_P8 > 32767 :
-        dig_P8 -= 65536
-    dig_P9 = b1[23] * 256 + b1[22]
-    if dig_P9 > 32767 :
-        dig_P9 -= 65536
-
-    #Datasheet table 16, table 18.
-    #0xA1 - humidity(dig_H1).
-    #Read "compensation parameter storage" from 0xA1, 1 byte.
     try:
-      dig_H1 = self.__bus.read_byte_data(self.__address, 0xA1)#Comment this and this work on BMP280.
-      self.__has_humidity = True
-    except Exception as ex:
-      self.__has_humidity = False
+      has_humidity = False
+      sensor_data = {}
+      gpio_pins = self.get_address().split(',')
 
-    #Datasheet table 16, table 18.
-    #0xE1..0xE7 - humidity(dig_H2..dig_H6).
-    #Read "compensation parameter storage" from 0xE1, 7 bytes.
-    if self.__has_humidity:
-      b1 = self.__bus.read_i2c_block_data(self.__address, 0xE1, 7)#Comment this and this work on BMP280.
+      #Address of BME280 on bus "0x76", but also some sensors uses 0x77.
+      #See in "i2cdetect -y 0" (where "0" - needed bus, standart bus - "1").
+      #0x88..0x9F - temperature(dig_T1..dig_T3) and pressure(dig_P1..dig_p9).
+      #Read "compensation parameter storage" from 0x88, 24 bytes. Table 16, 18 in datasheet.
+      b1 = self.i2c_bus.read_i2c_block_data(int('0x' + gpio_pins[0],16), 0x88, 24)
 
-      #And again...
-      #Humidity coefficients.
+      # Convert "compensation word"=16 bit=2 bytes -> MSB*256+LSB. 4.2.2 in datasheet.
+      # Temp coefficients.
+      dig_T1 = b1[1] * 256 + b1[0]
+      dig_T2 = b1[3] * 256 + b1[2]
+      if dig_T2 > 32767 :
+          dig_T2 -= 65536
+      dig_T3 = b1[5] * 256 + b1[4]
+      if dig_T3 > 32767 :
+          dig_T3 -= 65536
+
+      #And again with pressure.
+      # Pressure coefficients.
+      dig_P1 = b1[7] * 256 + b1[6]
+      dig_P2 = b1[9] * 256 + b1[8]
+      if dig_P2 > 32767 :
+          dig_P2 -= 65536
+      dig_P3 = b1[11] * 256 + b1[10]
+      if dig_P3 > 32767 :
+          dig_P3 -= 65536
+      dig_P4 = b1[13] * 256 + b1[12]
+      if dig_P4 > 32767 :
+          dig_P4 -= 65536
+      dig_P5 = b1[15] * 256 + b1[14]
+      if dig_P5 > 32767 :
+          dig_P5 -= 65536
+      dig_P6 = b1[17] * 256 + b1[16]
+      if dig_P6 > 32767 :
+          dig_P6 -= 65536
+      dig_P7 = b1[19] * 256 + b1[18]
+      if dig_P7 > 32767 :
+          dig_P7 -= 65536
+      dig_P8 = b1[21] * 256 + b1[20]
+      if dig_P8 > 32767 :
+          dig_P8 -= 65536
+      dig_P9 = b1[23] * 256 + b1[22]
+      if dig_P9 > 32767 :
+          dig_P9 -= 65536
+
+      #Datasheet table 16, table 18.
+      #0xA1 - humidity(dig_H1).
+      #Read "compensation parameter storage" from 0xA1, 1 byte.
+      try:
+        dig_H1 = self.i2c_bus.read_byte_data(int('0x' + gpio_pins[0],16), 0xA1)#Comment this and this work on BMP280.
+        has_humidity = True
+      except Exception as ex:
+        has_humidity = False
+
+      #Datasheet table 16, table 18.
+      #0xE1..0xE7 - humidity(dig_H2..dig_H6).
+      #Read "compensation parameter storage" from 0xE1, 7 bytes.
+      if has_humidity:
+        b1 = self.i2c_bus.read_i2c_block_data(int('0x' + gpio_pins[0],16), 0xE1, 7)#Comment this and this work on BMP280.
+
+        #And again...
+        #Humidity coefficients.
+        #Comment this and this work on BMP280.
+        dig_H2 = b1[1] * 256 + b1[0]
+        if dig_H2 > 32767 :
+            dig_H2 -= 65536
+        dig_H3 = (b1[2] &  0xFF)
+        dig_H4 = (b1[3] * 16) + (b1[4] & 0xF)
+        if dig_H4 > 32767 :
+            dig_H4 -= 65536
+        dig_H5 = (b1[4] / 16) + (b1[5] * 16)
+        if dig_H5 > 32767 :
+            dig_H5 -= 65536
+        dig_H6 = b1[6]
+        if dig_H6 > 127 :
+            dig_H6 -= 256
+
+        #Select control humidity register, 0xF2
+        #Humidity Oversampling = 1(001 in datasheet table 20) -> in HEX = 01.
+        self.i2c_bus.write_byte_data(int('0x' + gpio_pins[0],16), 0xF2, 0x01)#Comment this and this work on BMP280.
+
+      # Select Control measurement register, 0xF4.
+      #Temperature + Pressure + Select Mode (Table 22,23,24,25 in datasheet).
+      #7,6,5 bits for oversampling temp, 4,3,2 bit for oversampling pressure and 1,0 bit for select mode.
+      #Temp oversampling 001, pressure oversampling 001, normal mode 11 -> 001 001 11 -> in HEX = 27.
+      self.i2c_bus.write_byte_data(int('0x' + gpio_pins[0],16), 0xF4, 0x27)
+
+      #Select Configuration register, 0xF5(Table 26, 27, 28 in datasheet)
+      #Stand_by time = 1000 ms -> 101(datasheet) -> in HEX =A0
+      self.i2c_bus.write_byte_data(int('0x' + gpio_pins[0],16), 0xF5, 0xA0)
+
+      sleep(self.TEMPERATURE_WAIT_TIME * 2.0)
+
+      # Read data back from 0xF7(247), 8 bytes
+      # Pressure MSB, LSB, xLSB, Temperature MSB, LSB, xLSB, Humidity MSB, LSB
+      #Table 18, 29, 30, 31
+      data = self.i2c_bus.read_i2c_block_data(int('0x' + gpio_pins[0],16), 0xF7, 8)
+
+      # Convert pressure and temperature data to 19-bits
+      adc_p = ((data[0] * 65536) + (data[1] * 256) + (data[2] & 0xF0)) / 16
+      adc_t = ((data[3] * 65536) + (data[4] * 256) + (data[5] & 0xF0)) / 16
+
+      # Convert the humidity data
+      if has_humidity:
+        adc_h = data[6] * 256 + data[7]#Comment this and this work on BMP280.
+
+      #Formulas from Appendix in datasheet.
+      # Temperature offset calculations
+      var1 = ((adc_t) / 16384.0 - (dig_T1) / 1024.0) * (dig_T2)
+      var2 = (((adc_t) / 131072.0 - (dig_T1) / 8192.0) * ((adc_t)/131072.0 - (dig_T1)/8192.0)) * (dig_T3)
+      t_fine = (var1 + var2)
+      sensor_data['temperature'] = (var1 + var2) / 5120.0
+
+      #Formulas from Appendix in datasheet.
+      # Pressure offset calculations
+      var1 = (t_fine / 2.0) - 64000.0
+      var2 = var1 * var1 * (dig_P6) / 32768.0
+      var2 = var2 + var1 * (dig_P5) * 2.0
+      var2 = (var2 / 4.0) + ((dig_P4) * 65536.0)
+      var1 = ((dig_P3) * var1 * var1 / 524288.0 + ( dig_P2) * var1) / 524288.0
+      var1 = (1.0 + var1 / 32768.0) * (dig_P1)
+      p = 1048576.0 - adc_p
+      p = (p - (var2 / 4096.0)) * 6250.0 / var1
+      var1 = (dig_P9) * p * p / 2147483648.0
+      var2 = p * (dig_P8) / 32768.0
+      sensor_data['presure'] = (p + (var1 + var2 + (dig_P7)) / 16.0) / 100.0
+
+      #Formulas from Appendix in datasheet.
+      # Humidity offset calculations
       #Comment this and this work on BMP280.
-      dig_H2 = b1[1] * 256 + b1[0]
-      if dig_H2 > 32767 :
-          dig_H2 -= 65536
-      dig_H3 = (b1[2] &  0xFF)
-      dig_H4 = (b1[3] * 16) + (b1[4] & 0xF)
-      if dig_H4 > 32767 :
-          dig_H4 -= 65536
-      dig_H5 = (b1[4] / 16) + (b1[5] * 16)
-      if dig_H5 > 32767 :
-          dig_H5 -= 65536
-      dig_H6 = b1[6]
-      if dig_H6 > 127 :
-          dig_H6 -= 256
+      if has_humidity:
+        var_H = ((t_fine) - 76800.0)
+        var_H = (adc_h - (dig_H4 * 64.0 + dig_H5 / 16384.0 * var_H)) * (dig_H2 / 65536.0 * (1.0 + dig_H6 / 67108864.0 * var_H * (1.0 + dig_H3 / 67108864.0 * var_H)))
+        sensor_data['humidity'] = var_H * (1.0 -  dig_H1 * var_H / 524288.0)
+        #self.__current_humidity = var_H * (1.0 -  dig_H1 * var_H / 524288.0)
+        if sensor_data['humidity'] > 100.0 :
+          sensor_data['humidity'] = 100.0
+        elif sensor_data['humidity'] < 0.0 :
+          sensor_data['humidity'] = 0.0
 
-      #Select control humidity register, 0xF2
-      #Humidity Oversampling = 1(001 in datasheet table 20) -> in HEX = 01.
-      self.__bus.write_byte_data(self.__address, 0xF2, 0x01)#Comment this and this work on BMP280.
+      # https://github.com/avislab/sensorstest/blob/master/BME280/BME280.py#L176
+      sensor_data['altitude'] = sensor_data['presure']/101325.0
+      sensor_data['altitude'] = 1 - pow(sensor_data['altitude'], 0.19029)
+      sensor_data['altitude'] = round(44330.0*sensor_data['altitude'], 3)
 
-    # Select Control measurement register, 0xF4.
-    #Temperature + Pressure + Select Mode (Table 22,23,24,25 in datasheet).
-    #7,6,5 bits for oversampling temp, 4,3,2 bit for oversampling pressure and 1,0 bit for select mode.
-    #Temp oversampling 001, pressure oversampling 001, normal mode 11 -> 001 001 11 -> in HEX = 27.
-    self.__bus.write_byte_data(self.__address, 0xF4, 0x27)
+    except Exception as ex:
+      print('load_raw_data temp:')
+      print(ex)
 
-    #Select Configuration register, 0xF5(Table 26, 27, 28 in datasheet)
-    #Stand_by time = 1000 ms -> 101(datasheet) -> in HEX =A0
-    self.__bus.write_byte_data(self.__address, 0xF5, 0xA0)
+    return sensor_data
 
-    sleep(self.__temperature_timeout * 2.0)
+class terrariumVEML6075Sensor(terrariumI2CSensor):
+  TYPE = 'veml6075'
+  VALID_SENSOR_TYPES = ['uva','uvb']
 
-    # Read data back from 0xF7(247), 8 bytes
-    # Pressure MSB, LSB, xLSB, Temperature MSB, LSB, xLSB, Humidity MSB, LSB
-    #Table 18, 29, 30, 31
-    data = self.__bus.read_i2c_block_data(self.__address, 0xF7, 8)
-
-    # Convert pressure and temperature data to 19-bits
-    adc_p = ((data[0] * 65536) + (data[1] * 256) + (data[2] & 0xF0)) / 16
-    adc_t = ((data[3] * 65536) + (data[4] * 256) + (data[5] & 0xF0)) / 16
-
-    # Convert the humidity data
-    if self.__has_humidity:
-      adc_h = data[6] * 256 + data[7]#Comment this and this work on BMP280.
-
-    #Formulas from Appendix in datasheet.
-    # Temperature offset calculations
-    var1 = ((adc_t) / 16384.0 - (dig_T1) / 1024.0) * (dig_T2)
-    var2 = (((adc_t) / 131072.0 - (dig_T1) / 8192.0) * ((adc_t)/131072.0 - (dig_T1)/8192.0)) * (dig_T3)
-    t_fine = (var1 + var2)
-    self.__current_temperature = (var1 + var2) / 5120.0
-
-    #Formulas from Appendix in datasheet.
-    # Pressure offset calculations
-    var1 = (t_fine / 2.0) - 64000.0
-    var2 = var1 * var1 * (dig_P6) / 32768.0
-    var2 = var2 + var1 * (dig_P5) * 2.0
-    var2 = (var2 / 4.0) + ((dig_P4) * 65536.0)
-    var1 = ((dig_P3) * var1 * var1 / 524288.0 + ( dig_P2) * var1) / 524288.0
-    var1 = (1.0 + var1 / 32768.0) * (dig_P1)
-    p = 1048576.0 - adc_p
-    p = (p - (var2 / 4096.0)) * 6250.0 / var1
-    var1 = (dig_P9) * p * p / 2147483648.0
-    var2 = p * (dig_P8) / 32768.0
-    self.__current_presure = (p + (var1 + var2 + (dig_P7)) / 16.0) / 100.0
-
-    #Formulas from Appendix in datasheet.
-    # Humidity offset calculations
-    #Comment this and this work on BMP280.
-    if self.__has_humidity:
-      var_H = ((t_fine) - 76800.0)
-      var_H = (adc_h - (dig_H4 * 64.0 + dig_H5 / 16384.0 * var_H)) * (dig_H2 / 65536.0 * (1.0 + dig_H6 / 67108864.0 * var_H * (1.0 + dig_H3 / 67108864.0 * var_H)))
-      self.__current_humidity = var_H * (1.0 -  dig_H1 * var_H / 524288.0)
-      if self.__current_humidity > 100.0 :
-        self.__current_humidity = 100.0
-      elif self.__current_humidity < 0.0 :
-        self.__current_humidity = 0.0
-
-    # https://github.com/avislab/sensorstest/blob/master/BME280/BME280.py#L176
-    altitude = self.__current_presure/101325.0
-    altitude = 1 - pow(altitude, 0.19029)
-    self.__current_altitude = round(44330.0*altitude, 3)
-
-  def close(self):
-    """Closes the i2c connection"""
-    logger.debug('Close sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
-    self.__bus.close()
-
-  def get_temperature(self):
-    self.__get_raw_data()
-    return None if not terrariumUtils.is_float(self.__current_temperature) else float(self.__current_temperature)
-
-  def get_humidity(self):
-    self.__get_raw_data()
-    return None if not terrariumUtils.is_float(self.__current_humidity) else float(self.__current_humidity)
-
-  def get_presure(self):
-    self.__get_raw_data()
-    return None if not terrariumUtils.is_float(self.__current_presure) else float(self.__current_presure)
-
-  def get_altitude(self):
-    self.__get_raw_data()
-    return None if not terrariumUtils.is_float(self.__current_altitude) else float(self.__current_altitude)
-
-class terrariumVEML6075Sensor(object):
-  __CACHE_TIMEOUT = 29
+  # Disable the I2C softreset
+  SOFTRESET_TIMEOUT = 0
 
   # Rewritten based on https://github.com/alexhla/uva-uvb-sensor-veml6075-driver/
-  hardwaretype = 'veml6075'
-
   # Register Addresses
   __REGISTER_CONF = 0x00
   __REGISTER_UVA = 0x07
@@ -378,33 +361,6 @@ class terrariumVEML6075Sensor(object):
   __UVB_COUNTS_PER_UWCM = 2.10
 
   __SENSITIVITY_MODE = 0
-
-  def __init__(self, address = 10, device_number = 1):
-    self.__cached_data = {'uva'         : None,
-                          'uvb'         : None,
-                          'last_update' : 0}
-
-    self.__address = int('0x' + str(address),16)
-    self.__device_number = 1 if device_number is None else int(device_number)
-
-    self.__integTimeSelect = terrariumVEML6075Sensor.__SENSITIVITY_INTEGRATION_800
-    self.__dynamicSelect = terrariumVEML6075Sensor.__SENSITIVITY_NORMAL_DYNAMIC
-    self.__wait_time = 1.920
-    self.__divisor = 16.0
-
-  def __enter__(self):
-    """used to enable python's with statement support"""
-
-    return self
-
-  def __exit__(self, type, value, traceback):
-    """with support"""
-    self.close()
-
-  def close(self):
-    """Closes the i2c connection"""
-    logger.debug('Close sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
-
 
   def __set_sensitivity(self):
     if terrariumVEML6075Sensor.__SENSITIVITY_MODE == 0:
@@ -458,224 +414,112 @@ class terrariumVEML6075Sensor(object):
       self.__wait_time = 0.120
       self.__divisor = 1.0
 
-  def __get_raw_data(self,force_update = False):
-    if self.__address is None:
-      return
+  def load_raw_data(self):
+    data = None
 
-    starttime = int(time.time())
-    if force_update or starttime - self.__cached_data['last_update'] > terrariumVEML6075Sensor.__CACHE_TIMEOUT:
+    try:
+      data = {}
+      gpio_pins = self.get_address().split(',')
+
       self.__set_sensitivity()
-      try:
-        self.__bus = smbus.SMBus(self.__device_number)
+      # Write Dynamic and Integration Time Settings to Sensor
+      self.i2c_bus.write_byte_data(int('0x' + gpio_pins[0],16), terrariumVEML6075Sensor.__REGISTER_CONF, self.__integTimeSelect|self.__dynamicSelect|terrariumVEML6075Sensor.__POWER_ON)
+      # Wait for ADC to finish first and second conversions, discarding the first
+      sleep(self.__wait_time)
+      # Power OFF
+      self.i2c_bus.write_byte_data(int('0x' + gpio_pins[0],16), terrariumVEML6075Sensor.__REGISTER_CONF, terrariumVEML6075Sensor.__POWER_OFF)
 
-        # Write Dynamic and Integration Time Settings to Sensor
-        self.__bus.write_byte_data(self.__address, terrariumVEML6075Sensor.__REGISTER_CONF, self.__integTimeSelect|self.__dynamicSelect|terrariumVEML6075Sensor.__POWER_ON)
-        # Wait for ADC to finish first and second conversions, discarding the first
-        sleep(self.__wait_time)
-        # Power OFF
-        self.__bus.write_byte_data(self.__address, terrariumVEML6075Sensor.__REGISTER_CONF, terrariumVEML6075Sensor.__POWER_OFF)
+      value_uva = float(self.i2c_bus.read_word_data(int('0x' + gpio_pins[0],16),terrariumVEML6075Sensor.__REGISTER_UVA))
+      value_uvb = float(self.i2c_bus.read_word_data(int('0x' + gpio_pins[0],16),terrariumVEML6075Sensor.__REGISTER_UVB))
 
-        value_uva = float(self.__bus.read_word_data(self.__address,terrariumVEML6075Sensor.__REGISTER_UVA))
-        value_uvb = float(self.__bus.read_word_data(self.__address,terrariumVEML6075Sensor.__REGISTER_UVB))
+      compensate_visible_light = float(self.i2c_bus.read_word_data(int('0x' + gpio_pins[0],16),terrariumVEML6075Sensor.__REGISTER_VISIBLE_NOISE))  # visible noise
+      compensate_ir_light = float(self.i2c_bus.read_word_data(int('0x' + gpio_pins[0],16),terrariumVEML6075Sensor.__REGISTER_IR_NOISE))  # infrared noise
 
-        compensate_visible_light = float(self.__bus.read_word_data(self.__address,terrariumVEML6075Sensor.__REGISTER_VISIBLE_NOISE))  # visible noise
-        compensate_ir_light = float(self.__bus.read_word_data(self.__address,terrariumVEML6075Sensor.__REGISTER_IR_NOISE))  # infrared noise
+      # Scale down
+      value_uva /= self.__divisor
+      value_uvb /= self.__divisor
+      compensate_visible_light /= self.__divisor
+      compensate_ir_light /= self.__divisor
 
-        self.__bus.close()
+      # Compensate
+      value_uva = value_uva - (terrariumVEML6075Sensor.__UV_COEFFICENT_UVA_VISIBLE * compensate_visible_light) - (terrariumVEML6075Sensor.__UV_COEFFICENT_UVA_IR * compensate_ir_light)
+      value_uvb = value_uvb - (terrariumVEML6075Sensor.__UV_COEFFICENT_UVB_VISIBLE * compensate_visible_light) - (terrariumVEML6075Sensor.__UV_COEFFICENT_UVB_IR * compensate_ir_light)
 
-        # Scale down
-        value_uva /= self.__divisor
-        value_uvb /= self.__divisor
-        compensate_visible_light /= self.__divisor
-        compensate_ir_light /= self.__divisor
+      # Convert to  uW/cm^2
+      value_uva /= terrariumVEML6075Sensor.__UVA_COUNTS_PER_UWCM
+      value_uvb /= terrariumVEML6075Sensor.__UVB_COUNTS_PER_UWCM
 
-        # Compensate
-        value_uva = value_uva - (terrariumVEML6075Sensor.__UV_COEFFICENT_UVA_VISIBLE * compensate_visible_light) - (terrariumVEML6075Sensor.__UV_COEFFICENT_UVA_IR * compensate_ir_light)
-        value_uvb = value_uvb - (terrariumVEML6075Sensor.__UV_COEFFICENT_UVB_VISIBLE * compensate_visible_light) - (terrariumVEML6075Sensor.__UV_COEFFICENT_UVB_IR * compensate_ir_light)
+      data['uva'] = value_uva if value_uva > 0.0 else 0.0
+      data['uvb'] = value_uvb if value_uvb > 0.0 else 0.0
 
-        # Convert to  uW/cm^2
-        value_uva /= terrariumVEML6075Sensor.__UVA_COUNTS_PER_UWCM
-        value_uvb /= terrariumVEML6075Sensor.__UVB_COUNTS_PER_UWCM
+    except Exception as ex:
+      print('load_raw_data temp:')
+      print(ex)
 
-        self.__cached_data['uva'] = value_uva if value_uva > 0.0 else 0.0
-        self.__cached_data['uvb'] = value_uvb if value_uvb > 0.0 else 0.0
-        self.__cached_data['last_update'] = starttime
+    return data
 
-      except Exception as ex:
-        print('UVA UVB ERROR')
-        print(ex)
+class terrariumChirpSensor(terrariumSensorSource):
+  TYPE = 'chirp'
+  VALID_SENSOR_TYPES = ['temperature','moisture','light']
 
-  def get_uva(self):
-    value = None
-    logger.debug('Read UVA value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
-    self.__get_raw_data()
-    if terrariumUtils.is_float(self.__cached_data['uva']):
-      value = float(self.__cached_data['uva'])
-
-    logger.debug('Got data from UVA sensor type \'%s\' with address %s: UVA: %s' % (self.__class__.__name__,self.__address,value))
-    return value
-
-  def get_uvb(self):
-    value = None
-    logger.debug('Read UVB value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
-    self.__get_raw_data()
-    if terrariumUtils.is_float(self.__cached_data['uvb']):
-      value = float(self.__cached_data['uvb'])
-
-    logger.debug('Got data from UVA sensor type \'%s\' with address %s: UVB: %s' % (self.__class__.__name__,self.__address,value))
-    return value
-
-class terrariumChirpSensor(object):
-  __CACHE_TIMEOUT = 29
-
-  hardwaretype = 'chirp'
   # Datasheet: https://wemakethings.net/chirp/
+  def __init__(self, sensor_id, sensor_type, address, name = '', callback_indicator = None):
+    self.set_min_moist_calibration(160)
+    self.set_max_moist_calibration(720)
+    self.set_temperature_offset_calibration(2)
 
-  def __init__(self, address = 20, device_number = 1, min_moist = 160, max_moist = 720, temp_offset = 2):
-    self.__cached_data = {'temperature' : None,
-                          'light'       : None,
-                          'moisture'    : None,
-                          'last_update' : 0}
+    if sensor_type in ['light']:
+      self.set_limit_max(1000)
 
-    self.__address = int('0x' + str(address),16)
-    self.__device_number = 1 if device_number is None else int(device_number)
+    super(terrariumChirpSensor,self).__init__(sensor_id, sensor_type, address, name, callback_indicator)
 
-    self.__min_moist = min_moist
-    self.__max_moist = max_moist
-    self.__temp_offset = temp_offset
+  def set_min_moist_calibration(self,limit):
+    self.__min_moist = float(limit)
 
-    logger.debug('Initializing sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
+  def get_min_moist_calibration(self):
+    return self.__min_moist
 
+  def set_max_moist_calibration(self,limit):
+    self.__max_moist = float(limit)
 
-  def __enter__(self):
-    """used to enable python's with statement support"""
-    return self
+  def get_max_moist_calibration(self):
+    return self.__max_moist
 
-  def __exit__(self, type, value, traceback):
-    """with support"""
-    self.close()
+  def set_temperature_offset_calibration(self,limit):
+    self.__temp_offset = float(limit)
 
-  def close(self):
-    """Closes the i2c connection"""
-    logger.debug('Close sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
-    #self.__bus.close()
+  def get_temperature_offset_calibration(self):
+    return self.__temp_offset
 
-  def __get_raw_data(self,force_update = False):
-    if self.__address is None:
-      return
+  def load_data(self):
+    data = None
+    try:
+      data = {}
+      gpio_pins = self.get_address().split(',')
+      sensor = chirp.Chirp(bus=1 if len(gpio_pins) == 1 else int(gpio_pins[1]),
+                           address=int('0x' + gpio_pins[0],16),
+                           read_moist=True,
+                           read_temp=True,
+                           read_light=True,
+                           min_moist=self.get_min_moist_calibration(),
+                           max_moist=self.get_max_moist_calibration(),
+                           temp_scale='celsius',
+                           temp_offset=self.get_temperature_offset_calibration())
 
-    starttime = int(time.time())
-    if force_update or starttime - self.__cached_data['last_update'] > terrariumChirpSensor.__CACHE_TIMEOUT:
-
-      # min_moist and max_moist are 'best guess' for now
-      sensor = chirp.Chirp(bus=self.__device_number,
-                    address=self.__address,
-                    read_moist=False,
-                    read_temp=False,
-                    read_light=False,
-                    min_moist=self.__min_moist,
-                    max_moist=self.__max_moist,
-                    temp_scale='celsius',
-                    temp_offset=self.__temp_offset)
-
-      sensor.read_temp  = True
-      sensor.read_moist = True
-      sensor.read_light = True
-
-  #    sensor.reset()
       sensor.trigger()
+      data['temperature'] = float(sensor.temp)
+      data['moisture'] = float(sensor.moist_percent)
+      data['light'] = 100.0 - ((float(sensor.light) / 65536.0) * 100.0)
 
-      self.__cached_data['temperature'] = float(sensor.temp)
-      self.__cached_data['moisture'] = float(sensor.moist_percent)
-      self.__cached_data['light'] = 100.0 - ((float(sensor.light) / 65536.0) * 100.0)
-      self.__cached_data['last_update'] = starttime
+    except Exception as ex:
+      print(ex)
 
-  def get_temperature(self):
-    value = None
-    logger.debug('Read temperature value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
-    self.__get_raw_data()
-    if terrariumUtils.is_float(self.__cached_data['temperature']):
-      value = float(self.__cached_data['temperature'])
+    return data
 
-    logger.debug('Got data from temperature sensor type \'%s\' with address %s: temperature: %s' % (self.__class__.__name__,self.__address,value))
-    return value
+  def get_data(self):
+    data = super(terrariumChirpSensor,self).get_data()
+    data['min_moist'] = self.get_min_moist_calibration()
+    data['max_moist']  = self.get_max_moist_calibration()
+    data['temp_offset']  = self.get_temperature_offset_calibration()
 
-  def get_moisture(self):
-    value = None
-    logger.debug('Read moisture value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
-    self.__get_raw_data()
-    if terrariumUtils.is_float(self.__cached_data['moisture']):
-      value = float(self.__cached_data['moisture'])
-
-    logger.debug('Got data from moisture sensor type \'%s\' with address %s: moisture: %s' % (self.__class__.__name__,self.__address,value))
-    return value
-
-  def get_light(self):
-    value = None
-    logger.debug('Read brightness value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
-    self.__get_raw_data()
-    if terrariumUtils.is_float(self.__cached_data['light']):
-      value = float(self.__cached_data['light'])
-
-    logger.debug('Got data from brightness sensor type \'%s\' with address %s: brightness: %s' % (self.__class__.__name__,self.__address,value))
-    return value
-
-class terrariumSHT3XSensor(object):
-  __CACHE_TIMEOUT = 29
-
-  hardwaretype = 'sht3x'
-  # Datasheet: https://cdn-shop.adafruit.com/product-files/2857/Sensirion_Humidity_SHT3x_Datasheet_digital-767294.pdf
-
-  def __init__(self, address = 44, device_number = 1):
-    self.__cached_data = {'temperature' : None,
-                          'humidity'    : None,
-                          'last_update' : 0}
-
-    self.__address = int('0x' + str(address),16)
-    self.__device_number = 1 if device_number is None else int(device_number)
-
-    logger.debug('Initializing sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
-
-  def __enter__(self):
-    """used to enable python's with statement support"""
-    self.__bus = Adafruit_SHT31.SHT31(self.__address)
-    return self
-
-  def __exit__(self, type, value, traceback):
-    """with support"""
-    self.close()
-
-  def close(self):
-    """Closes the i2c connection"""
-    logger.debug('Close sensor type \'%s\' at device %s with address %s' % (self.__class__.__name__,self.__device_number,self.__address))
-    self.__bus = None
-
-  def __get_raw_data(self,force_update = False):
-    if self.__address is None:
-      return
-
-    starttime = int(time.time())
-    if force_update or starttime - self.__cached_data['last_update'] > terrariumSHT3XSensor.__CACHE_TIMEOUT:
-      self.__cached_data['temperature'] = float(self.__bus.read_temperature())
-      self.__cached_data['humidity'] = float(self.__bus.read_humidity())
-      self.__cached_data['last_update'] = starttime
-
-  def get_temperature(self):
-    value = None
-    logger.debug('Read temperature value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
-    self.__get_raw_data()
-    if terrariumUtils.is_float(self.__cached_data['temperature']):
-      value = float(self.__cached_data['temperature'])
-
-    logger.debug('Got data from temperature sensor type \'%s\' with address %s: temperature: %s' % (self.__class__.__name__,self.__address,value))
-    return value
-
-  def get_humidity(self):
-    value = None
-    logger.debug('Read humidity value from sensor type \'%s\' with address %s' % (self.__class__.__name__,self.__address))
-    self.__get_raw_data()
-    if terrariumUtils.is_float(self.__cached_data['humidity']):
-      value = float(self.__cached_data['humidity'])
-
-    logger.debug('Got data from humidity sensor type \'%s\' with address %s: humidity: %s' % (self.__class__.__name__,self.__address,value))
-    return value
+    return data

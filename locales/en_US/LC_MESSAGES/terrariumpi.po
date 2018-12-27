@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: TerrariumPI 3.9.0\n"
-"POT-Creation-Date: 2018-12-08 15:13+CET\n"
-"PO-Revision-Date: 2018-12-08 15:13+0100\n"
+"Project-Id-Version: TerrariumPI 3.9.3\n"
+"POT-Creation-Date: 2018-12-16 19:22+CET\n"
+"PO-Revision-Date: 2018-12-16 19:23+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -16,26 +16,18 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: terrariumEngine.py:511 views/dashboard.tpl:7
+#: terrariumEngine.py:508 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
 msgid "Uptime"
 msgstr "Uptime"
 
-#: terrariumEngine.py:512
+#: terrariumEngine.py:509
 msgid "Load"
 msgstr "Load"
 
-#: terrariumEngine.py:513
+#: terrariumEngine.py:510
 msgid "CPU Temp."
 msgstr "CPU Temp."
-
-#: terrariumGPIOSensor.py:84
-msgid "Dry"
-msgstr "Dry"
-
-#: terrariumGPIOSensor.py:84
-msgid "Wet"
-msgstr "Wet"
 
 #: terrariumTranslations.py:22
 msgid "Holds the external source URL. Supported sources are: %s."
@@ -101,156 +93,160 @@ msgstr "Holds the sensor highest moisture value measured in full water. %s"
 msgid "Holds the temperature offset value."
 msgstr "Holds the temperature offset value."
 
-#: terrariumTranslations.py:48
+#: terrariumTranslations.py:45
+msgid "Holds the maximum numbber that a sensor may change in value up or down."
+msgstr "Holds the maximum numbber that a sensor may change in value up or down."
+
+#: terrariumTranslations.py:49
 msgid "Holds the switch hardware type. Supported hardware types are: %s."
 msgstr "Holds the switch hardware type. Supported hardware types are: %s."
 
-#: terrariumTranslations.py:49
+#: terrariumTranslations.py:50
 msgid "Holds the switch address. Depending on hardware type, it is either a number or GPIO pin. For GPIO and PWM-Dimmer use <strong>physical</strong> GPIO pin numbering."
 msgstr "Holds the switch address. Depending on hardware type, it is either a number or GPIO pin. For GPIO and PWM-Dimmer use <strong>physical</strong> GPIO pin numbering."
 
-#: terrariumTranslations.py:50
+#: terrariumTranslations.py:51
 msgid "Holds the switch name."
 msgstr "Holds the switch name."
 
-#: terrariumTranslations.py:51
+#: terrariumTranslations.py:52
 msgid "Holds the switch power usage in Watt when switched on."
 msgstr "Holds the switch power usage in Watt when switched on."
 
-#: terrariumTranslations.py:52
+#: terrariumTranslations.py:53
 msgid "Holds the switch water flow in liters per minute when switched on"
 msgstr "Holds the switch water flow in liters per minute when switched on"
 
-#: terrariumTranslations.py:53
+#: terrariumTranslations.py:54
 msgid "Enable or disable timer functionality. When enabled you can specify the timing below."
 msgstr "Enable or disable timer functionality. When enabled you can specify the timing below."
 
-#: terrariumTranslations.py:54
+#: terrariumTranslations.py:55
 msgid "Holds the timer start time. The timer will run after this start time."
 msgstr "Holds the timer start time. The timer will run after this start time."
 
-#: terrariumTranslations.py:55
+#: terrariumTranslations.py:56
 msgid "Holds the timer stop time. The timer will stop after this start time."
 msgstr "Holds the timer stop time. The timer will stop after this start time."
 
-#: terrariumTranslations.py:56
+#: terrariumTranslations.py:57
 msgid "Holds the period in minutes that the power switch is on withing the total timer window."
 msgstr "Holds the period in minutes that the power switch is on withing the total timer window."
 
-#: terrariumTranslations.py:57
+#: terrariumTranslations.py:58
 msgid "Holds the period in minutes that the power switch is off withing the total timer window."
 msgstr "Holds the period in minutes that the power switch is off withing the total timer window."
 
-#: terrariumTranslations.py:58
+#: terrariumTranslations.py:59
 msgid "Holds the amount of seconds for the duration in which the dimmer changes to the new value."
 msgstr "Holds the amount of seconds for the duration in which the dimmer changes to the new value."
 
-#: terrariumTranslations.py:59
+#: terrariumTranslations.py:60
 msgid "Holds the amount in percentage to change the dimmer by the heater environment."
 msgstr "Holds the amount in percentage to change the dimmer by the heater environment."
 
-#: terrariumTranslations.py:60
+#: terrariumTranslations.py:61
 msgid "Holds the amount of seconds for the duration in which it increases the power."
 msgstr "Holds the amount of seconds for the duration in which it increases the power."
 
-#: terrariumTranslations.py:61
+#: terrariumTranslations.py:62
 msgid "Holds the amount in percentage to go to when switched on."
 msgstr "Holds the amount in percentage to go to when switched on."
 
-#: terrariumTranslations.py:62
+#: terrariumTranslations.py:63
 msgid "Holds the amount of seconds for the duration in which it decresses the power."
 msgstr "Holds the amount of seconds for the duration in which it decresses the power."
 
-#: terrariumTranslations.py:63
+#: terrariumTranslations.py:64
 msgid "Holds the amount in percentage to go to when switched off."
 msgstr "Holds the amount in percentage to go to when switched off."
 
-#: terrariumTranslations.py:67
+#: terrariumTranslations.py:68
 msgid "Holds the door hardware type. Supported hardware types are: %s."
 msgstr "Holds the door hardware type. Supported hardware types are: %s."
 
-#: terrariumTranslations.py:68
+#: terrariumTranslations.py:69
 msgid "Holds the door address. When using GPIO use <strong>physical</strong> GPIO pin numbering as address."
 msgstr "Holds the door address. When using GPIO use <strong>physical</strong> GPIO pin numbering as address."
 
-#: terrariumTranslations.py:69
+#: terrariumTranslations.py:70
 msgid "Holds the door name."
 msgstr "Holds the door name."
 
-#: terrariumTranslations.py:73
+#: terrariumTranslations.py:74
 msgid "Holds the webcam location source. Supported sources are: %s"
 msgstr "Holds the webcam location source. Supported sources are: %s"
 
-#: terrariumTranslations.py:74
+#: terrariumTranslations.py:75
 msgid "Holds the webcam name."
 msgstr "Holds the webcam name."
 
-#: terrariumTranslations.py:75
+#: terrariumTranslations.py:76
 msgid "Holds the webcam resolution."
 msgstr "Holds the webcam resolution."
 
-#: terrariumTranslations.py:76
+#: terrariumTranslations.py:77
 msgid "Holds the webcam resolution width in pixels."
 msgstr "Holds the webcam resolution width in pixels."
 
-#: terrariumTranslations.py:77
+#: terrariumTranslations.py:78
 msgid "Holds the webcam resolution height in pixels."
 msgstr "Holds the webcam resolution height in pixels."
 
-#: terrariumTranslations.py:78
+#: terrariumTranslations.py:79
 msgid "Holds the webcam rotation of the image."
 msgstr "Holds the webcam rotation of the image."
 
-#: terrariumTranslations.py:79
+#: terrariumTranslations.py:80
 msgid "Shows the webcam preview image."
 msgstr "Shows the webcam preview image."
 
-#: terrariumTranslations.py:80
+#: terrariumTranslations.py:81
 msgid "Enabled or disable image archiving based on motion detection."
 msgstr "Enabled or disable image archiving based on motion detection."
 
-#: terrariumTranslations.py:81
+#: terrariumTranslations.py:82
 msgid "Select the environment light state when enabling archiving."
 msgstr "Select the environment light state when enabling archiving."
 
-#: terrariumTranslations.py:82
+#: terrariumTranslations.py:83
 msgid "Select the environment door state when enabling archiving."
 msgstr "Select the environment door state when enabling archiving."
 
-#: terrariumTranslations.py:86
+#: terrariumTranslations.py:87
 msgid "Holds the audio playlist name."
 msgstr "Holds the audio playlist name."
 
-#: terrariumTranslations.py:87
+#: terrariumTranslations.py:88
 msgid "Holds the time when the playlist should be started."
 msgstr "Holds the time when the playlist should be started."
 
-#: terrariumTranslations.py:88
+#: terrariumTranslations.py:89
 msgid "Holds the time when the playlist should be stopped."
 msgstr "Holds the time when the playlist should be stopped."
 
-#: terrariumTranslations.py:89
+#: terrariumTranslations.py:90
 msgid "Holds the volume for this playlist."
 msgstr "Holds the volume for this playlist."
 
-#: terrariumTranslations.py:90
+#: terrariumTranslations.py:91
 msgid "Toggle on to enable repeating of the audio files."
 msgstr "Toggle on to enable repeating of the audio files."
 
-#: terrariumTranslations.py:91
+#: terrariumTranslations.py:92
 msgid "Toggle on to enable shuffeling of the audio files."
 msgstr "Toggle on to enable shuffeling of the audio files."
 
-#: terrariumTranslations.py:92
+#: terrariumTranslations.py:93
 msgid "Select the audio files for this playlist. It is possible to select the same audio file in multiple playlists."
 msgstr "Select the audio files for this playlist. It is possible to select the same audio file in multiple playlists."
 
-#: terrariumTranslations.py:96
+#: terrariumTranslations.py:97
 msgid "Select the mode on which this environment part be put on and off. Select '%s' to use the sun rise and sun set at your location. This will make the amount of lighting variable to the actual amount of daylight. When selecting '%s', the light will put on and off at selected times."
 msgstr "Select the mode on which this environment part be put on and off. Select '%s' to use the sun rise and sun set at your location. This will make the amount of lighting variable to the actual amount of daylight. When selecting '%s', the light will put on and off at selected times."
 
-#: terrariumTranslations.py:96 terrariumTranslations.py:100
-#: terrariumTranslations.py:101 views/dashboard.tpl:83 views/dashboard.tpl:118
+#: terrariumTranslations.py:97 terrariumTranslations.py:101
+#: terrariumTranslations.py:102 views/dashboard.tpl:83 views/dashboard.tpl:118
 #: views/dashboard.tpl:171 views/dashboard.tpl:224 views/dashboard.tpl:277
 #: views/dashboard.tpl:330 views/dashboard.tpl:383 views/dashboard.tpl:436
 #: views/dashboard.tpl:489 views/dashboard.tpl:542
@@ -264,7 +260,7 @@ msgstr "Select the mode on which this environment part be put on and off. Select
 msgid "Timer"
 msgstr "Timer"
 
-#: terrariumTranslations.py:96 terrariumTranslations.py:108
+#: terrariumTranslations.py:97 terrariumTranslations.py:109
 #: views/inc/menu.tpl:30 views/inc/usage_environment.tpl:35
 #: views/inc/usage_environment.tpl:231 views/inc/usage_environment.tpl:325
 #: views/inc/usage_weather.tpl:13 views/inc/usage_weather.tpl:82
@@ -276,247 +272,251 @@ msgstr "Timer"
 msgid "Weather"
 msgstr "Weather"
 
-#: terrariumTranslations.py:97
+#: terrariumTranslations.py:98
 msgid "Select the sensors that are used to control this environment part. When selecting multiple sensors, the average is calculated to determine the final values."
 msgstr "Select the sensors that are used to control this environment part. When selecting multiple sensors, the average is calculated to determine the final values."
 
-#: terrariumTranslations.py:98
+#: terrariumTranslations.py:99
 msgid "Holds the value in degrees which the sensors are changing when it become night. Use positive numbers to increase the values and negative numbers to lower the values."
 msgstr "Holds the value in degrees which the sensors are changing when it become night. Use positive numbers to increase the values and negative numbers to lower the values."
 
-#: terrariumTranslations.py:99
+#: terrariumTranslations.py:100
 msgid "Holds the soure that is used to determing when it is day or night."
 msgstr "Holds the soure that is used to determing when it is day or night."
 
-#: terrariumTranslations.py:100
+#: terrariumTranslations.py:101
 msgid "Enter the time when this environment part should be put on. Only available when running in '%s' mode."
 msgstr "Enter the time when this environment part should be put on. Only available when running in '%s' mode."
 
-#: terrariumTranslations.py:101
+#: terrariumTranslations.py:102
 msgid "Enter the time when this environment part should be put off. Only available when running in '%s' mode."
 msgstr "Enter the time when this environment part should be put off. Only available when running in '%s' mode."
 
-#: terrariumTranslations.py:102
+#: terrariumTranslations.py:103
 msgid "Holds the period in minutes that this environment part is powered on withing the total timer window."
 msgstr "Holds the period in minutes that this environment part is powered on withing the total timer window."
 
-#: terrariumTranslations.py:103
+#: terrariumTranslations.py:104
 msgid "Holds the period in minutes that this environment part is powered off withing the total timer window."
 msgstr "Holds the period in minutes that this environment part is powered off withing the total timer window."
 
-#: terrariumTranslations.py:104
+#: terrariumTranslations.py:105
 msgid "How much time must there be between two actions and after start up. Enter the amount of seconds in which this environment part can settle."
 msgstr "How much time must there be between two actions and after start up. Enter the amount of seconds in which this environment part can settle."
 
-#: terrariumTranslations.py:105
+#: terrariumTranslations.py:106
 msgid "Holds the amount of seconds that this environment part is powered on when the value is out of range."
 msgstr "Holds the amount of seconds that this environment part is powered on when the value is out of range."
 
-#: terrariumTranslations.py:106
+#: terrariumTranslations.py:107
 msgid "Enter the maximum amount of time in hours. When the time between on and off is more then this maximum, the on and off time will be shifted more to each other."
 msgstr "Enter the maximum amount of time in hours. When the time between on and off is more then this maximum, the on and off time will be shifted more to each other."
 
-#: terrariumTranslations.py:107
+#: terrariumTranslations.py:108
 msgid "Enter the minimum amount of time in hours. When the time between on and off is less then this amount of hours, the on and off time will be widened until the minimum amount of hours entered here."
 msgstr "Enter the minimum amount of time in hours. When the time between on and off is less then this amount of hours, the on and off time will be widened until the minimum amount of hours entered here."
 
-#: terrariumTranslations.py:108
+#: terrariumTranslations.py:109
 msgid "Enter the amount of hours that the power on and off times should shift. Is only needed when running in the '%s' mode. Enter a positive number for adding hours to the start time. Use negative numbers for subtracting from the start time."
 msgstr "Enter the amount of hours that the power on and off times should shift. Is only needed when running in the '%s' mode. Enter a positive number for adding hours to the start time. Use negative numbers for subtracting from the start time."
 
-#: terrariumTranslations.py:109
+#: terrariumTranslations.py:110
 msgid "Select the power switches that should be used when the alarms or timers are hit. Select all needed switches below."
 msgstr "Select the power switches that should be used when the alarms or timers are hit. Select all needed switches below."
 
-#: terrariumTranslations.py:110
+#: terrariumTranslations.py:111
 msgid "Holds the water volume in liters."
 msgstr "Holds the water volume in liters."
 
-#: terrariumTranslations.py:111
+#: terrariumTranslations.py:112
 msgid "Holds the water tank height in cm or inches."
 msgstr "Holds the water tank height in cm or inches."
 
-#: terrariumTranslations.py:112
+#: terrariumTranslations.py:113
 msgid "Holds the distance between top of the liquid when full and the sensor in cm or inches."
 msgstr "Holds the distance between top of the liquid when full and the sensor in cm or inches."
 
-#: terrariumTranslations.py:113
+#: terrariumTranslations.py:114
 msgid "Select when the power switches can toggle. When lights are on, off or just always"
 msgstr "Select when the power switches can toggle. When lights are on, off or just always"
 
-#: terrariumTranslations.py:114
+#: terrariumTranslations.py:115
 msgid "Select when the power switches can toggle. When the door is open, cosed or just always"
 msgstr "Select when the power switches can toggle. When the door is open, cosed or just always"
 
-#: terrariumTranslations.py:118
+#: terrariumTranslations.py:119
 msgid "Holds the email address on which you would like to receive messages."
 msgstr "Holds the email address on which you would like to receive messages."
 
-#: terrariumTranslations.py:119
+#: terrariumTranslations.py:120
 msgid "Holds the mail server hostname or IP."
 msgstr "Holds the mail server hostname or IP."
 
-#: terrariumTranslations.py:120
+#: terrariumTranslations.py:121
 msgid "Holds the mail server portnumber. SSL and TLS will be autodetected."
 msgstr "Holds the mail server portnumber. SSL and TLS will be autodetected."
 
-#: terrariumTranslations.py:121
+#: terrariumTranslations.py:122
 msgid "Holds the username for authentication with the mailserver if needed."
 msgstr "Holds the username for authentication with the mailserver if needed."
 
-#: terrariumTranslations.py:122
+#: terrariumTranslations.py:123
 msgid "Holds the password for authentication with the mailserver if needed."
 msgstr "Holds the password for authentication with the mailserver if needed."
 
-#: terrariumTranslations.py:124
+#: terrariumTranslations.py:125
 msgid "Holds the I2C address of the LCD screen. Use the value found with i2cdetect. Add ,[NR] to change the I2C bus."
 msgstr "Holds the I2C address of the LCD screen. Use the value found with i2cdetect. Add ,[NR] to change the I2C bus."
 
-#: terrariumTranslations.py:125
+#: terrariumTranslations.py:126
 msgid "Holds the LCD screen resolution."
 msgstr "Holds the LCD screen resolution."
 
-#: terrariumTranslations.py:126
+#: terrariumTranslations.py:127
 msgid "Reserve first LCD line for static title."
 msgstr "Reserve first LCD line for static title."
 
-#: terrariumTranslations.py:128
+#: terrariumTranslations.py:129
 msgid "Holds your Twitter consumer key. More information %shere%s"
 msgstr "Holds your Twitter consumer key. More information %shere%s"
 
-#: terrariumTranslations.py:129
+#: terrariumTranslations.py:130
 msgid "Holds your Twitter consumer secret. More information %shere%s"
 msgstr "Holds your Twitter consumer secret. More information %shere%s"
 
-#: terrariumTranslations.py:130
+#: terrariumTranslations.py:131
 msgid "Holds your Twitter access token. More information %shere%s"
 msgstr "Holds your Twitter access token. More information %shere%s"
 
-#: terrariumTranslations.py:131
+#: terrariumTranslations.py:132
 msgid "Holds your Twitter access token secret. More information %shere%s"
 msgstr "Holds your Twitter access token secret. More information %shere%s"
 
-#: terrariumTranslations.py:133
+#: terrariumTranslations.py:134
 msgid "Holds the PushOver API token. More information %shere%s"
 msgstr "Holds the PushOver API token. More information %shere%s"
 
-#: terrariumTranslations.py:134
+#: terrariumTranslations.py:135
 msgid "Holds the PushOver API user key. More information %shere%s"
 msgstr "Holds the PushOver API user key. More information %shere%s"
 
-#: terrariumTranslations.py:136
+#: terrariumTranslations.py:137
 msgid "Holds the Telegram Bot token. More information %shere%s"
 msgstr "Holds the Telegram Bot token. More information %shere%s"
 
-#: terrariumTranslations.py:137
+#: terrariumTranslations.py:138
 msgid "Holds the Telegram username that is allowed for receiving messages. Can be multiple usernames seperated by a comma. More information %shere%s"
 msgstr "Holds the Telegram username that is allowed for receiving messages. Can be multiple usernames seperated by a comma. More information %shere%s"
 
-#: terrariumTranslations.py:138
+#: terrariumTranslations.py:139
 msgid "Holds the proxy address in form of [schema]://[user]:[password]@[server.com]:[port]. Can either be socks5 or http(s) for schema."
 msgstr "Holds the proxy address in form of [schema]://[user]:[password]@[server.com]:[port]. Can either be socks5 or http(s) for schema."
 
-#: terrariumTranslations.py:142
+#: terrariumTranslations.py:141
+msgid "Holds the url to post notification data to. You can use %name% variables in the post url"
+msgstr "Holds the url to post notification data to. You can use %name% variables in the post url"
+
+#: terrariumTranslations.py:146
 msgid "Choose your interface language."
 msgstr "Choose your interface language."
 
-#: terrariumTranslations.py:143
+#: terrariumTranslations.py:147
 msgid "Holds the distance type used by distance sensors."
 msgstr "Holds the distance type used by distance sensors."
 
-#: terrariumTranslations.py:144 terrariumTranslations.py:145
+#: terrariumTranslations.py:148 terrariumTranslations.py:149
 msgid "Holds the username which can make changes (Administrator)."
 msgstr "Holds the username which can make changes (Administrator)."
 
-#: terrariumTranslations.py:146
+#: terrariumTranslations.py:150
 msgid "Enter the new password for the administration user. Leaving empty will not change the password!"
 msgstr "Enter the new password for the administration user. Leaving empty will not change the password!"
 
-#: terrariumTranslations.py:147
+#: terrariumTranslations.py:151
 msgid "Enter the current password in order to change the password."
 msgstr "Enter the current password in order to change the password."
 
-#: terrariumTranslations.py:148
+#: terrariumTranslations.py:152
 msgid "Toggle on or off full authentication. When on, you need to authenticate at all times."
 msgstr "Toggle on or off full authentication. When on, you need to authenticate at all times."
 
-#: terrariumTranslations.py:149
+#: terrariumTranslations.py:153
 msgid "Holds the external calendar url."
 msgstr "Holds the external calendar url."
 
-#: terrariumTranslations.py:150
+#: terrariumTranslations.py:154
 msgid "Toggle on or off horizontal graph legends. Reload the webinterface after changing the setting."
 msgstr "Toggle on or off horizontal graph legends. Reload the webinterface after changing the setting."
 
-#: terrariumTranslations.py:151
+#: terrariumTranslations.py:155
 msgid "Holds the soundcard that is used for playing audio."
 msgstr "Holds the soundcard that is used for playing audio."
 
-#: terrariumTranslations.py:152
+#: terrariumTranslations.py:156
 msgid "Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment."
 msgstr "Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment."
 
-#: terrariumTranslations.py:153
+#: terrariumTranslations.py:157
 msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
 msgstr "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
 
-#: terrariumTranslations.py:154
+#: terrariumTranslations.py:158
 msgid "Holds the amount of euro/dollar per 1000 liters water."
 msgstr "Holds the amount of euro/dollar per 1000 liters water."
 
-#: terrariumTranslations.py:155
+#: terrariumTranslations.py:159
 msgid "Choose the temperature indicator. The software will recalculate to the chosen indicator."
 msgstr "Choose the temperature indicator. The software will recalculate to the chosen indicator."
 
-#: terrariumTranslations.py:156
+#: terrariumTranslations.py:160
 msgid "Choose the windspeed indicator. The software will recalculate to the chosen indicator."
 msgstr "Choose the windspeed indicator. The software will recalculate to the chosen indicator."
 
-#: terrariumTranslations.py:157
+#: terrariumTranslations.py:161
 msgid "Choose the volume (liquid) indicator. The software will recalculate to the chosen indicator."
 msgstr "Choose the volume (liquid) indicator. The software will recalculate to the chosen indicator."
 
-#: terrariumTranslations.py:158
+#: terrariumTranslations.py:162
 msgid "Holds the host name or IP address on which the software will listen for connections. Enter :: for all addresses to bind."
 msgstr "Holds the host name or IP address on which the software will listen for connections. Enter :: for all addresses to bind."
 
-#: terrariumTranslations.py:159
+#: terrariumTranslations.py:163
 msgid "Holds the port number on which the software is listening for connections."
 msgstr "Holds the port number on which the software is listening for connections."
 
-#: terrariumTranslations.py:164
+#: terrariumTranslations.py:168
 msgid "Holds the name of the animal."
 msgstr "Holds the name of the animal."
 
-#: terrariumTranslations.py:165
+#: terrariumTranslations.py:169
 msgid "Holds the type of the animal"
 msgstr "Holds the type of the animal"
 
-#: terrariumTranslations.py:166
+#: terrariumTranslations.py:170
 msgid "Holds the gender of the animal."
 msgstr "Holds the gender of the animal."
 
-#: terrariumTranslations.py:167
+#: terrariumTranslations.py:171
 msgid "Holds the day of birth of the animal."
 msgstr "Holds the day of birth of the animal."
 
-#: terrariumTranslations.py:168
+#: terrariumTranslations.py:172
 msgid "Holds the species name of the animal."
 msgstr "Holds the species name of the animal."
 
-#: terrariumTranslations.py:169
+#: terrariumTranslations.py:173
 msgid "Holds the latin name of the animal."
 msgstr "Holds the latin name of the animal."
 
-#: terrariumTranslations.py:170
+#: terrariumTranslations.py:174
 msgid "Holds a small description about the animal."
 msgstr "Holds a small description about the animal."
 
-#: terrariumTranslations.py:171
+#: terrariumTranslations.py:175
 msgid "Holds a link to more information."
 msgstr "Holds a link to more information."
 
-#: terrariumWebcam.py:174
+#: terrariumWebcam.py:175
 msgid "Offline since"
 msgstr "Offline since"
 

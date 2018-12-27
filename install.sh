@@ -1,6 +1,9 @@
 #!/bin/bash
 BASEDIR=$(dirname $(readlink -nf $0))
 SCRIPT_USER=`who -m | awk '{print $1}'`
+if [ "" == "${SCRIPT_USER}" ]; then
+  SCRIPT_USER="pi"
+fi
 SCRIPT_USER_ID=`id -u ${SCRIPT_USER}`
 VERSION=`grep ^version defaults.cfg | cut -d' ' -f 3`
 WHOAMI=`whoami`
@@ -60,7 +63,7 @@ fi
 
 debconf-apt-progress -- apt-get -y update
 debconf-apt-progress -- apt-get -y full-upgrade
-debconf-apt-progress -- apt-get -y install libftdi1 screen git subversion watchdog build-essential i2c-tools pigpio owserver sqlite3 vlc-nox ffmpeg libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libjasper1 libgstreamer0.10-0 libgstreamer1.0-0 libilmbase12 libopenexr22 libgtk-3-0 libxml2-dev libxslt1-dev $PYTHON_LIBS
+debconf-apt-progress -- apt-get -y install libftdi1 screen git subversion watchdog build-essential i2c-tools pigpio owserver sqlite3 vlc-nox ffmpeg libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libjasper1 libgstreamer0.10-0 libgstreamer1.0-0 libilmbase12 libopenexr22 libgtk-3-0 libxml2-dev libxslt1-dev python-twisted $PYTHON_LIBS
 
 PROGRESS=35
 # Update submodules if downloaded through tar or zip
@@ -136,6 +139,13 @@ EOF
   MODULE_COUNTER=$((MODULE_COUNTER + 1))
 
 done
+
+if [ $PYTHON -eq 3 ]; then
+  # Remove pip numpy install that comes with an upgrade of another module. Does not work
+  # Removing this will fallback to OS default
+  pip3 uninstall -y -q numpy
+fi
+
 
 cd "${BASEDIR}"
 chown ${SCRIPT_USER}. .

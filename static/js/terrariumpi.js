@@ -946,9 +946,6 @@ function sensor_gauge(name, data) {
       $('#' + name + ' .gauge').attr('done',1);
       //$('#' + name + ' .goal-wrapper span:nth-child(2)').text('°' + globals.temperature_indicator);
       globals.gauges[name] = new Gauge($('#' + name + ' .gauge')[0]).setOptions(opts);
-      if (name != 'system_disk' && name != 'system_memory') {
-        globals.gauges[name].setTextField($('#' + name + ' .gauge-value')[0]);
-      }
       // Only set min and max only once. Else the gauge will flicker each data update
       globals.gauges[name].maxValue = data.limit_max;
       globals.gauges[name].setMinValue(data.limit_min);
@@ -966,6 +963,8 @@ function sensor_gauge(name, data) {
     globals.gauges[name].set(data.current);
     if (name == 'system_disk' || name == 'system_memory') {
       $('#' + name + ' .gauge-value').text(formatBytes(data.current))
+    } else {
+      $('#' + name + ' .gauge-value').text(formatNumber(data.current,0,3))
     }
     $('div#' + name + ' .x_title h2 .badge.bg-red').toggle(data.alarm);
     $('div#' + name + ' .x_title h2 .badge.bg-orange').toggle(data.error);
@@ -1697,6 +1696,7 @@ function update_dashboard_environment(name, data) {
       enabledColor = 'blue';
       break;
     case 'ph':
+      indicator = 'pH';
       enabledColor = 'green';
       break;
     case 'fertility':
@@ -2269,7 +2269,7 @@ function add_door() {
 
 /* Webcam code */
 function createWebcamLayer(webcamid, maxzoom) {
-  return L.tileLayer('/webcam/{id}_tile_{z}_{x}_{y}.jpg?_{time}', {
+  return L.tileLayer('/webcam/{id}/{id}_tile_{z}_{x}_{y}.jpg?_{time}', {
     time: function() {
       return (new Date()).valueOf();
     },
@@ -2333,7 +2333,7 @@ function initWebcam(data) {
                                     autoPlay: true,
                                     chromeless: false});
 
-    webcam_row.find('ul.nav.navbar-right.panel_toolbox li.dropdown ul.dropdown-menu' ).append('<li><a href="/webcam/' + data.id + '_raw.jpg" target="_blank">{{_('Save RAW photo')}}</a></li>')
+    webcam_row.find('ul.nav.navbar-right.panel_toolbox li.dropdown ul.dropdown-menu' ).append('<li><a href="/webcam/' + data.id + '/' + data.id + '_raw.jpg" target="_blank">{{_('Save RAW photo')}}</a></li>')
     webcam_row.find('ul.nav.navbar-right.panel_toolbox li.dropdown ul.dropdown-menu' ).append('<li><a href="javascript:;" onclick="webcamArchive(\'' + data.id + '\');">{{_('Archive')}}</a></li>')
   } else {
     // Load Leaflet webcam code

@@ -186,11 +186,11 @@
                           </div>
                           <div class="col-md-3 col-sm-2 col-xs-6 form-group">
                             <label for="switch_[nr]_timer_on_duration">{{_('Timer on duration')}}</label>
-                            <input class="form-control" name="switch_[nr]_timer_on_duration" placeholder="{{_('Timer period on duration in minutes')}}" required="required" type="text" value="0" pattern="[0-9]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_on_duration')}}">
+                            <input class="form-control" name="switch_[nr]_timer_on_duration" placeholder="{{_('Timer period on duration in minutes')}}" required="required" type="text" value="0" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_on_duration')}}">
                           </div>
                           <div class="col-md-3 col-sm-2 col-xs-6 form-group">
                             <label for="switch_[nr]_timer_off_duration">{{_('Timer off duration')}}</label>
-                            <input class="form-control" name="switch_[nr]_timer_off_duration" placeholder="{{_('Timer period off duration in minutes')}}" required="required" type="text" value="0" pattern="[0-9]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_off_duration')}}">
+                            <input class="form-control" name="switch_[nr]_timer_off_duration" placeholder="{{_('Timer period off duration in minutes')}}" required="required" type="text" value="0" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('switch_field_timer_off_duration')}}">
                           </div>
                         </div>
                       </div>

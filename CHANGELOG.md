@@ -2,6 +2,52 @@ Changelog
 =========
 
 
+3.9.3 (2018-12-27)
+------------------
+
+**New**
+------
+- Add more precise values in gauge graphs. [#227](https://github.com/theyosh/TerrariumPI/issues/227). [TheYOSH]
+- Add missing translations. [#226](https://github.com/theyosh/TerrariumPI/issues/226). [TheYOSH]
+- Add helper for live hls webcam [#223](https://github.com/theyosh/TerrariumPI/issues/223). [TheYOSH]
+- Add remote HLS live streaming webcams. [#223](https://github.com/theyosh/TerrariumPI/issues/223). [TheYOSH]
+
+**Fixes**
+------
+- Fix bluetooth scanning. [TheYOSH]
+- Fix watertank measurement based on sensor type. [TheYOSH]
+- Fix OWFS sensors. [TheYOSH]
+- Fix empty sudoers file due to missing username. [#228](https://github.com/theyosh/TerrariumPI/issues/228). [TheYOSH]
+- Fix raw webcam image link. [#223](https://github.com/theyosh/TerrariumPI/issues/223). [TheYOSH]
+- Notification fix. [TheYOSH]
+- Fix pH indicator. [#227](https://github.com/theyosh/TerrariumPI/issues/227). [TheYOSH]
+
+**Updates**
+------
+- Update Dutch language. [TheYOSH]
+- Update environment sensors after upgrade. [TheYOSH]
+- Update live webcam streaming. [TheYOSH]
+- Update sensor refactoring. [TheYOSH]
+- Update README.md. [TheYOSH]
+
+**Other**
+------
+- Allow 30 seconds timer. Lower values are not possible. [#231](https://github.com/theyosh/TerrariumPI/issues/231). [TheYOSH]
+- Remove debug. [#227](https://github.com/theyosh/TerrariumPI/issues/227). [TheYOSH]
+- Return of the minimal 90dB receiver level for Bluetooth devices.
+  [TheYOSH]
+- Cleanup webcam code. [TheYOSH]
+- Write webcam images data to memory to save SD card wearing. Only
+  archived images will be saved on the SD card. [TheYOSH]
+- Full sensors code refactor... [#202](https://github.com/theyosh/TerrariumPI/issues/202). [TheYOSH]
+- Finetuning rate limits. [TheYOSH]
+- Code cleanup. [TheYOSH]
+- Remove timebar from live webcam. [TheYOSH]
+- Uninstall incompatible python3 pip numpy. [TheYOSH]
+- Finetuning... [TheYOSH]
+- Support LED dimming through DC Dimmer switch. [#200](https://github.com/theyosh/TerrariumPI/issues/200). [TheYOSH]
+
+
 3.9.1 (2018-12-08)
 ------------------
 
@@ -34,6 +80,7 @@ Changelog
 
 **Updates**
 ------
+- Update changelog. [TheYOSH]
 - Update version. [TheYOSH]
 - Update translations. [TheYOSH]
 - Update README.md. [TheYOSH]
@@ -50,6 +97,9 @@ Changelog
 
 **Other**
 ------
+- Merge pull request [#224](https://github.com/theyosh/TerrariumPI/issues/224) from theyosh/development. [TheYOSH]
+
+  New release 3.9.1
 - Code cleanup. [TheYOSH]
 - Remove debug. [TheYOSH]
 - Merge branch 'master' into development. [TheYOSH]
@@ -1933,3 +1983,5 @@ Changelog
 - Living on the edge.... use latest beta of Leaflet. [TheYOSH]
 - Initial release. [TheYOSH]
 - Initial commit. [TheYOSH]
+
+

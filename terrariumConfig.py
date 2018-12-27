@@ -8,6 +8,8 @@ except ImportError as ex:
   import ConfigParser as configparser
 
 from glob import glob
+from hashlib import md5
+
 import datetime
 
 from terrariumUtils import terrariumUtils
@@ -381,6 +383,60 @@ class terrariumConfig(object):
           self.__config.set('terrariumpi', 'windspeed_indicator',  windspeed_indicator)
           self.__config.remove_option('weather','windspeed')
 
+        elif version == 393:
+          logger.info('Updating configuration file to version: %s' % (version,))
+          # Only change IDs of sensors that can be scanned
+          collector_update_sql = ''
+          sensor_rename_list = {}
+          for section in self.__config.sections():
+            if section[:6] == 'sensor':
+              data = self.__get_config(section)
+              if data['hardwaretype'] in ['w1','owfs','miflora']:
+                old_id = data['id']
+                new_id = md5((data['hardwaretype'] + data['address'] + data['type']).encode()).hexdigest()
+
+                if old_id != new_id:
+                  if old_id not in sensor_rename_list:
+                    sensor_rename_list[old_id] = new_id
+
+                  data['id'] = new_id
+                  new_section = 'sensor' + new_id
+                  if not self.__config.has_section(new_section):
+                    self.__config.add_section(new_section)
+
+                  keys = list(data.keys())
+                  keys.sort()
+                  for setting in keys:
+                    if setting in ['firmware','battery']:
+                      continue
+
+                    self.__config.set(new_section, str(setting), str(data[setting]))
+
+                  # Clear any existing new data (should not happen)
+                  collector_update_sql += 'DELETE FROM sensor_data WHERE id = \'{}\';\n'.format(new_id)
+                  # Rename the sensor ID in the database
+                  collector_update_sql += 'UPDATE sensor_data SET id = \'{}\' WHERE id = \'{}\';\n'.format(new_id,old_id)
+
+                  self.__config.remove_section(section)
+
+          # Update environment sensor settings
+          environment = self.__get_config('environment')
+          keys = list(environment.keys())
+          for setting in keys:
+            if '_sensors' in setting:
+              for old_id in sensor_rename_list:
+                environment[setting] = environment[setting].replace(old_id,sensor_rename_list[old_id])
+
+              self.__config.set('environment', str(setting), str(environment[setting]))
+
+          if '' != collector_update_sql:
+            config_ok = self.__save_config()
+            if config_ok:
+              self.__reload_config()
+
+              with open('.collector.update.{}.sql'.format(version),'w') as sql_file:
+                sql_file.write(collector_update_sql.strip())
+
       # Update version number
       self.__config.set('terrariumpi', 'version', str(to_version))
       self.__save_config()
@@ -608,7 +664,7 @@ class terrariumConfig(object):
 
   # Sensor config functions
   def save_sensor(self,data):
-    return self.__update_config('sensor' + data['id'],data,['current','indicator'])
+    return self.__update_config('sensor' + data['id'],data,['current','indicator','firmware','battery'])
 
   def save_sensors(self,data):
     update_ok = True
