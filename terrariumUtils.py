@@ -22,8 +22,8 @@ class terrariumTimer(object):
   def __calculate_time_table(self):
     starttime = self.__start.split(':')
     stoptime = self.__stop.split(':')
-    on_duration = float(self.__on_duration)
-    off_duration = float(self.__off_duration)
+    on_duration = float(self.__on_duration) * 60.0
+    off_duration = float(self.__off_duration) * 60.0
 
     self.__timer_table = []
     now = datetime.datetime.now()
@@ -49,17 +49,17 @@ class terrariumTimer(object):
       self.__timer_table.append((int(starttime.strftime('%s')),int(stoptime.strftime('%s'))))
     elif on_duration is not None and off_duration is None:
 
-      if (starttime + datetime.timedelta(minutes=on_duration)) > stoptime:
-        on_duration = (stoptime - starttime).total_seconds() / 60
-      self.__timer_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(minutes=on_duration)).strftime('%s'))))
+      if (starttime + datetime.timedelta(seconds=on_duration)) > stoptime:
+        on_duration = (stoptime - starttime).total_seconds()
+      self.__timer_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(seconds=on_duration)).strftime('%s'))))
     else:
       # Create time periods based on both duration between start and stop time
       while starttime < stoptime:
-        if (starttime + datetime.timedelta(minutes=on_duration)) > stoptime:
-          on_duration = (stoptime - starttime).total_seconds() / 60
+        if (starttime + datetime.timedelta(seconds=on_duration)) > stoptime:
+          on_duration = (stoptime - starttime).total_seconds()
 
-        self.__timer_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(minutes=on_duration)).strftime('%s'))))
-        starttime += datetime.timedelta(minutes=on_duration + off_duration)
+        self.__timer_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(seconds=on_duration)).strftime('%s'))))
+        starttime += datetime.timedelta(seconds=on_duration + off_duration)
 
   def is_enabled(self):
     return terrariumUtils.is_true(self.__enabled)

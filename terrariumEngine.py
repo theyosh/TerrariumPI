@@ -49,7 +49,7 @@ class terrariumEngine(object):
                     'humidity'    : '%',
                     'moisture'    : '%',
                     'conductivity': 'mS',
-                    'ph'          : 'Ph',
+                    'ph'          : 'pH',
                     'light'       : 'lux',
                     'uva'         : 'uW/cm^2',
                     'uvb'         : 'uW/cm^2',
@@ -170,13 +170,13 @@ class terrariumEngine(object):
       self.sensors = {}
 
     seen_sensors = []
-    for sensor in terrariumSensor.scan(self.__unit_type):
+    for sensor in terrariumSensor.scan_sensors(self.__unit_type):
       self.sensors[sensor.get_id()] = sensor
 
     for sensordata in sensor_config:
-      if sensordata['id'] is None or sensordata['id'] == 'None' or sensordata['id'] not in self.sensors:
+      if sensordata['id'] not in self.sensors:
         # New sensor (add)
-        sensor = terrariumSensor( None,
+        sensor = terrariumSensor(sensordata['id'],
                                  sensordata['hardwaretype'],
                                  sensordata['type'],
                                  sensordata['address'],
@@ -189,21 +189,17 @@ class terrariumEngine(object):
         sensor = self.sensors[sensordata['id']]
         # Should not be able to change setings
         #sensor.set_hardware_type(sensordata['hardwaretype'])
-        sensor.set_type(sensordata['type'],self.__unit_type)
+        #sensor.set_type(sensordata['type'],self.__unit_type)
         sensor.set_address(sensordata['address'])
-        sensor.set_name(sensordata['name'])
-        if 'max_diff' in sensordata:
-          sensor.set_max_diff(sensordata['max_diff'])
 
+      sensor.set_name(sensordata['name'])
+      sensor.set_max_diff(sensordata['max_diff'])
       sensor.set_alarm_min(sensordata['alarm_min'])
       sensor.set_alarm_max(sensordata['alarm_max'])
       sensor.set_limit_min(sensordata['limit_min'])
       sensor.set_limit_max(sensordata['limit_max'])
 
-      if 'max_diff' in sensordata:
-        sensor.set_max_diff(sensordata['max_diff'])
-
-      if 'chirp' == sensor.get_hardware_type():
+      if 'chirp' == sensor.get_type():
         if 'min_moist' in sensordata and sensordata['min_moist'] is not None:
           sensor.set_min_moist_calibration(sensordata['min_moist'])
         if 'max_moist' in sensordata and sensordata['max_moist'] is not None:
@@ -212,6 +208,7 @@ class terrariumEngine(object):
           sensor.set_temperature_offset_calibration(sensordata['temp_offset'])
 
       seen_sensors.append(sensor.get_id())
+
 
     if reloading:
       for sensor_id in set(self.sensors) - set(seen_sensors):
@@ -392,6 +389,9 @@ class terrariumEngine(object):
         webcam.set_archive_door(webcamdata['archivedoor'])
 
       seen_webcams.append(webcam.get_id())
+
+      if reloading and webcam.is_live():
+        webcam.start()
 
     if reloading:
       for webcam_id in set(self.webcams) - set(seen_webcams):
@@ -614,12 +614,15 @@ class terrariumEngine(object):
       for sensorid in self.sensors:
         # Filter based on sensor type
         # Exclude Chirp light sensors for average calculation in favour of Lux measurements
-        if filtertype is None or (filtertype == 'average' and not (self.sensors[sensorid].get_type() == 'light' and self.sensors[sensorid].get_hardware_type() == 'chirp')) or filtertype == self.sensors[sensorid].get_type():
+        if filtertype is None or (filtertype == 'average' and not (self.sensors[sensorid].get_sensor_type() == 'light' and self.sensors[sensorid].get_type() == 'chirp')) or filtertype == self.sensors[sensorid].get_sensor_type():
           data.append(self.sensors[sensorid].get_data())
 
     if 'average' == filtertype or len(parameters) == 2 and parameters[1] == 'average':
       average = {}
       for sensor in data:
+        if sensor['current'] is None:
+          continue
+
         sensor['type'] = 'average_' +  sensor['type']
         if sensor['type'] not in average:
           average[sensor['type']] = {'current' : 0.0, 'alarm_min' : 0.0, 'alarm_max' : 0.0, 'limit_min' : 0.0, 'limit_max':0.0, 'amount' : 0.0}
@@ -1159,7 +1162,7 @@ class terrariumEngine(object):
       if 'sensors' in parameters and 'average' in parameters and 'light' in parameters:
         exclude_ids = []
         for sensorid in self.sensors:
-          if 'chirp' == self.sensors[sensorid].get_hardware_type() and 'light' == self.sensors[sensorid].get_type():
+          if 'chirp' == self.sensors[sensorid].get_type() and 'light' == self.sensors[sensorid].get_sensor_type():
             exclude_ids.append(self.sensors[sensorid].get_id())
 
       data = self.collector.get_history(parameters=parameters,exclude_ids=exclude_ids)

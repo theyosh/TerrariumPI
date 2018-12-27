@@ -33,7 +33,7 @@ monkey.patch_all()
 class terrariumPowerSwitchSource(object):
   TYPE = None
 
-  def __init__(self, switchid, hardware_type, address, name = '', callback = None):
+  def __init__(self, switchid, address, name = '', callback = None):
     logger.info('Initialising \'{}\' power switch object'.format(self.get_type()))
     self.power_wattage = 0.0
     self.water_flow = 0.0
@@ -55,7 +55,7 @@ class terrariumPowerSwitchSource(object):
     logger.info('Loaded power switch \'{}\' with values: power {}W and waterflow {}L/s'.format(self.get_name(),self.get_power_wattage(),self.get_water_flow()))
 
   def get_type(self):
-    return terrariumPowerSwitchSource.TYPE
+    return self.TYPE
 
   def get_id(self):
     if self.switchid in [None,'None','']:
@@ -229,9 +229,6 @@ class terrariumPowerSwitchFTDI(terrariumPowerSwitchSource):
     "all":"FF"
   }
 
-  def get_type(self):
-    return terrariumPowerSwitchFTDI.TYPE
-
   def load_hardware(self):
     self.__device_type = None
     for device in Driver().list_devices():
@@ -270,9 +267,6 @@ class terrariumPowerSwitchGPIO(terrariumPowerSwitchSource):
   def stop(self):
     GPIO.cleanup(terrariumUtils.to_BCM_port_number(self.get_address()))
 
-  def get_type(self):
-    return terrariumPowerSwitchGPIO.TYPE
-
   def set_hardware_state(self, state):
     if self.get_type() == terrariumPowerSwitchGPIO.TYPE:
       GPIO.output(terrariumUtils.to_BCM_port_number(self.get_address()), ( GPIO.HIGH if state is terrariumPowerSwitch.ON else GPIO.LOW ))
@@ -283,15 +277,9 @@ class terrariumPowerSwitchGPIO(terrariumPowerSwitchSource):
 class terrariumPowerSwitchGPIOInverse(terrariumPowerSwitchGPIO):
   TYPE = 'gpio-inverse'
 
-  def get_type(self):
-    return terrariumPowerSwitchGPIOInverse.TYPE
-
 class terrariumPowerSwitchWeMo(terrariumPowerSwitchSource):
   TYPE = 'wemo'
   URL = 'http://{}:{}/setup.xml'
-
-  def get_type(self):
-    return terrariumPowerSwitchWeMo.TYPE
 
   def set_hardware_state(self, state):
     port = pywemo.ouimeaux_device.probe_wemo(self.get_address())
@@ -327,9 +315,6 @@ class terrariumPowerSwitchWeMo(terrariumPowerSwitchSource):
 class terrariumPowerSwitchEnergenieUSB(terrariumPowerSwitchSource):
   TYPE = 'eg-pm-usb'
 
-  def get_type(self):
-    return terrariumPowerSwitchEnergenieUSB.TYPE
-
   def load_hardware(self):
     # We have per device 4 outlets.... so outlet 7 is device 1
     self.__device = (int(self.get_address())-1) / 4
@@ -350,9 +335,6 @@ class terrariumPowerSwitchEnergenieUSB(terrariumPowerSwitchSource):
 class terrariumPowerSwitchEnergenieLAN(terrariumPowerSwitchSource):
   TYPE = 'eg-pm-lan'
   VALID_SOURCE = '^http:\/\/((?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?#(?P<switch>[1-4])$'
-
-  def get_type(self):
-    return terrariumPowerSwitchEnergenieLAN.TYPE
 
   def load_hardware(self):
     self.__device = None
@@ -425,9 +407,6 @@ class terrariumPowerSwitchEnergenieLAN(terrariumPowerSwitchSource):
 class terrariumPowerSwitchEnergenieRF(terrariumPowerSwitchSource):
   TYPE = 'eg-pm-rf'
 
-  def get_type(self):
-    return terrariumPowerSwitchEnergenieRF.TYPE
-
   def load_hardware(self):
     self.__device = Energenie(int(self.get_address()))
 
@@ -447,7 +426,7 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
   DIMMER_MIN_TIMEOUT = 0.1
   DIMMER_MIN_STEP    = 0.1
 
-  def __init__(self, switchid, hardware_type, address, name = '', callback = None):
+  def __init__(self, switchid, address, name = '', callback = None):
     self.duration       = 0.0
     self.step           = 0.0
     self.on_duration    = 0.0
@@ -456,10 +435,7 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
     self.off_percentage = 0.0
 
     self.__dimmer_state = 0.0
-    super(terrariumPowerDimmerSource,self).__init__(switchid, hardware_type, address, name, callback)
-
-  def get_type(self):
-    return terrariumPowerDimmerSource.TYPE
+    super(terrariumPowerDimmerSource,self).__init__(switchid, address, name, callback)
 
   def get_state(self):
     return self.__dimmer_state
@@ -630,11 +606,10 @@ class terrariumPowerDimmerPWM(terrariumPowerDimmerSource):
   TYPE = 'pwm-dimmer'
 
   # PWM dimmer settings
-  DIMMER_MAXDIM = 895 # http://www.esp8266-projects.com/2017/04/raspberry-pi-domoticz-ac-dimmer-part-1/
+  # According to http://www.esp8266-projects.com/2017/04/raspberry-pi-domoticz-ac-dimmer-part-1/
+  # is 860 DIM value equal to 95% dimming -> 905 is 100% dimming
+  DIMMER_MAXDIM = 905
   DIMMER_FREQ   = 5000
-
-  def get_type(self):
-    return terrariumPowerDimmerPWM.TYPE
 
 class terrariumPowerDimmerDC(terrariumPowerDimmerSource):
   TYPE = 'dc-dimmer'
@@ -643,14 +618,8 @@ class terrariumPowerDimmerDC(terrariumPowerDimmerSource):
   DIMMER_MAXDIM = 1000 # https://github.com/theyosh/TerrariumPI/issues/178#issuecomment-412667010
   DIMMER_FREQ   = 15000 # https://github.com/theyosh/TerrariumPI/issues/178#issuecomment-413697246
 
-  def get_type(self):
-    return terrariumPowerDimmerDC.TYPE
-
 class terrariumPowerSwitchRemote(terrariumPowerSwitchSource):
   TYPE = 'remote'
-
-  def get_type(self):
-    return terrariumPowerSwitchRemote.TYPE
 
   def set_hardware_state(self, state):
     pass
@@ -691,7 +660,7 @@ class terrariumPowerSwitch(object):
   def __new__(self, switch_id, hardware_type, address, name = '', callback = None):
     for powerswitch in terrariumPowerSwitch.POWER_SWITCHES:
       if hardware_type == powerswitch.TYPE:
-        return powerswitch(switch_id, hardware_type, address, name, callback)
+        return powerswitch(switch_id, address, name, callback)
 
     raise terrariumPowerSwitchTypeException('Power switch of type {} is unknown. We cannot controll this power switch.'.format(hardware_type))
 

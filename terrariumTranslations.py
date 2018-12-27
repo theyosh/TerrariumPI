@@ -30,9 +30,9 @@ class terrariumTranslations(object):
     # End weather
 
     # Sensors
-    self.translations['sensor_field_hardware'] = _('Holds the sensor hardware type. Supported hardware types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSensor.VALID_HARDWARE_TYPES) + '</strong>')
+    self.translations['sensor_field_hardware'] = _('Holds the sensor hardware type. Supported hardware types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSensor.valid_hardware_types()) + '</strong>')
     self.translations['sensor_field_address'] = _('Holds the sensor address. Depending on hardware type, it is either a read only hex number, a GPIO pin, a GPIO pin combination of %s or a full HTTP(S) adress. Full url specification can be found on the %s wiki page. For GPIO use <strong>physical</strong> GPIO pin numbering.') % ('<a href="https://www.modmypi.com/blog/hc-sr04-ultrasonic-range-sensor-on-the-raspberry-pi" target="_blank">\'<i>TRIG,ECHO</i>\'</a>','<a href="https://github.com/theyosh/TerrariumPI/wiki/Remote-data#temperature-and-humidity-sensors" target="_blank">\'<i>' + _('Remote data') + '</i>\'</a>')
-    self.translations['sensor_field_type'] = _('Holds the sensor type. Supported sensor types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSensor.VALID_SENSOR_TYPES) + '</strong>')
+    self.translations['sensor_field_type'] = _('Holds the sensor type. Supported sensor types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSensor.valid_sensor_types()) + '</strong>')
     self.translations['sensor_field_name'] = _('Holds the name of the sensor.')
     self.translations['sensor_field_alarm_min'] = _('Holds the sensor lower alarm value of the sensor. When below this value, alarms can be triggered.')
     self.translations['sensor_field_alarm_max'] = _('Holds the sensor maximum alarm value of the sensor. When above this value, alarms can be triggered.')
@@ -42,6 +42,7 @@ class terrariumTranslations(object):
     self.translations['sensor_field_min_moist'] = _('Holds the sensor lowest moisture value measured in dry air. %s') % ('<a href="https://github.com/ageir/chirp-rpi#calibration" target="_blank" title="' + _('More calibration information') + '"><i>' + _('More calibration information') + '</i></a>')
     self.translations['sensor_field_max_moist'] = _('Holds the sensor highest moisture value measured in full water. %s') % ('<a href="https://github.com/ageir/chirp-rpi#calibration" target="_blank" title="' + _('More calibration information') + '"><i>' + _('More calibration information') + '</i></a>')
     self.translations['sensor_field_temperature_offset'] = _('Holds the temperature offset value.')
+    self.translations['sensor_field_max_diff'] = _('Holds the maximum numbber that a sensor may change in value up or down.')
     # End sensors
 
     # Switches
@@ -136,6 +137,9 @@ class terrariumTranslations(object):
     self.translations['notification_telegram_bot_token'] =  _('Holds the Telegram Bot token. More information %shere%s') % ('<a href=\'https://core.telegram.org/bots#6-botfather\' target=\'_blank\'>','</a>')
     self.translations['notification_telegram_username'] =  _('Holds the Telegram username that is allowed for receiving messages. Can be multiple usernames seperated by a comma. More information %shere%s') % ('<a href=\'https://core.telegram.org/bots#6-botfather\' target=\'_blank\'>','</a>')
     self.translations['notification_telegram_proxy'] =  _('Holds the proxy address in form of [schema]://[user]:[password]@[server.com]:[port]. Can either be socks5 or http(s) for schema.')
+
+    self.translations['notification_webhook_address'] =  _('Holds the url to post notification data to. You can use %name% variables in the post url')
+
     # End notifications
 
     # System

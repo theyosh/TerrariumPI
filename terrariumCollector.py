@@ -113,6 +113,18 @@ class terrariumCollector(object):
                                'DROP INDEX IF EXISTS door_data_id',
                                'CREATE INDEX IF NOT EXISTS door_data_id ON door_data (id, timestamp ASC)']}
 
+    try:
+      with open('.collector.update.{}.sql'.format('393'),'r') as sql_file:
+        table_upgrades['393'] = [line.strip() for line in sql_file.readlines()]
+
+      os.remove('.collector.update.{}.sql'.format('393'))
+      logger.warning('There are {} sensors that have an updated ID and needs to be renamed in the database. This can take a lot of time! Please wait...'
+                     .format(len(table_upgrades['393'])/2))
+
+    except IOError as ex:
+      # No updates... just ignore
+      pass
+
     with self.db as db:
       cur = db.cursor()
       db_version = int(cur.execute('PRAGMA user_version').fetchall()[0][0])

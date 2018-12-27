@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2018-08-21 23:51+0200\n"
-"PO-Revision-Date: 2018-08-22 00:01+0200\n"
+"PO-Revision-Date: 2018-12-23 13:29+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -73,7 +73,7 @@ msgstr "Bevat het sensor type. Ondersteunde sensor types zijn: %s."
 
 #: terrariumTranslations.py:29
 msgid "Holds the name of the sensor."
-msgstr "Bevat de naam van de sensor"
+msgstr "Bevat de naam van de sensor."
 
 #: terrariumTranslations.py:30
 msgid ""
@@ -151,7 +151,7 @@ msgstr "Bevat het schakelvermogensverbruik in Watt wanneer ingeschakeld."
 #: terrariumTranslations.py:45
 msgid "Holds the switch water flow in liters per minute when switched on"
 msgstr ""
-"Houd de schakelaar waterstroom in liter per minuut wanneer ingeschakeld."
+"Houd de schakelaar waterstroom in liter per minuut wanneer ingeschakeld"
 
 #: terrariumTranslations.py:46
 msgid ""
@@ -175,7 +175,7 @@ msgid ""
 "timer window."
 msgstr ""
 "Bevat de tijdsuur in minuten dat de schakelaar aan is in de totale timer "
-"tijdsduur"
+"tijdsduur."
 
 #: terrariumTranslations.py:50
 msgid ""
@@ -183,7 +183,7 @@ msgid ""
 "timer window."
 msgstr ""
 "Bevat de tijdsuur in minuten dat de schakelaar uit is in de totale timer "
-"tijdsduur"
+"tijdsduur."
 
 #: terrariumTranslations.py:51
 msgid ""
@@ -418,7 +418,7 @@ msgstr ""
 
 #: terrariumTranslations.py:101
 msgid "Holds the water volume in liters."
-msgstr "Bevat de watertank volume in liters"
+msgstr "Bevat de watertank volume in liters."
 
 #: terrariumTranslations.py:102
 msgid "Holds the water tank height in cm or inches."
@@ -615,7 +615,7 @@ msgstr "Bevat de dier naam."
 
 #: terrariumTranslations.py:154
 msgid "Holds the type of the animal"
-msgstr "Bevat de type van het dier."
+msgstr "Bevat de type van het dier"
 
 #: terrariumTranslations.py:155
 msgid "Holds the gender of the animal."
@@ -1542,7 +1542,7 @@ msgstr "PWM"
 
 #: views/hardware.tpl:110
 msgid "With PWM controlled boards it is possible to support dimming devices."
-msgstr "Met PWM relais borden is het mogelijk om apparaten te dimmen"
+msgstr "Met PWM relais borden is het mogelijk om apparaten te dimmen."
 
 #: views/hardware.tpl:113
 msgid "Nextevo"
@@ -2633,7 +2633,7 @@ msgstr "Windsnelheid"
 
 #: views/inc/usage_weather.tpl:52 views/system_settings.tpl:66
 msgid "m/s"
-msgstr "m/s."
+msgstr "m/s"
 
 #: views/inc/usage_weather.tpl:53 views/system_settings.tpl:67
 msgid "Km/h"
@@ -3096,11 +3096,11 @@ msgstr "Klok stop tijd"
 
 #: views/switch_settings.tpl:43 views/switch_settings.tpl:186
 msgid "Timer on duration"
-msgstr "Timer uit tijdsduur"
+msgstr "Timer aan tijdsduur"
 
 #: views/switch_settings.tpl:46 views/switch_settings.tpl:190
 msgid "Timer off duration"
-msgstr "Timer aan tijdsduur"
+msgstr "Timer uit tijdsduur"
 
 #: views/switch_settings.tpl:49 views/switch_settings.tpl:152
 msgid "Dimmer action duration"
@@ -3406,7 +3406,7 @@ msgstr "Verticaal"
 
 #: views/system_settings.tpl:150
 msgid "Pi power usage in W"
-msgstr "Stroomverbruik Pi in W."
+msgstr "Stroomverbruik Pi in W"
 
 #: views/system_settings.tpl:156
 msgid "Power price"
