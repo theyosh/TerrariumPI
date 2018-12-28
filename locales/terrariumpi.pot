@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.3\n"
-"POT-Creation-Date: 2018-12-16 19:22+CET\n"
+"POT-Creation-Date: 2018-12-28 14:27+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,16 +15,16 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: terrariumEngine.py:508 views/dashboard.tpl:7
+#: terrariumEngine.py:516 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
 msgid "Uptime"
 msgstr ""
 
-#: terrariumEngine.py:509
+#: terrariumEngine.py:517
 msgid "Load"
 msgstr ""
 
-#: terrariumEngine.py:510
+#: terrariumEngine.py:518
 msgid "CPU Temp."
 msgstr ""
 
@@ -515,7 +515,7 @@ msgstr ""
 msgid "Holds a link to more information."
 msgstr ""
 
-#: terrariumWebcam.py:175
+#: terrariumWebcam.py:189
 msgid "Offline since"
 msgstr ""
 
