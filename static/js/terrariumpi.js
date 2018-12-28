@@ -2357,7 +2357,7 @@ function initWebcam(data) {
         this.photo_link = L.DomUtil.create('a', 'leaflet-control-takephoto-button leaflet-bar-part', container);
         this.photo_link.title = '{{_('Save RAW photo')}}';
         this.photo_link.target = '_blank';
-        this.photo_link.href = '/webcam/' + data.id + '_raw.jpg';
+        this.photo_link.href = '/webcam/' + data.id + '/' + data.id + '_raw.jpg';
         L.DomUtil.create('i', 'fa fa-camera', this.photo_link);
 
         if (this.options.archive) {
