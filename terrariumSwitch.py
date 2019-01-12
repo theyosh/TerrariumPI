@@ -363,6 +363,7 @@ class terrariumPowerSwitchEnergenieLAN(terrariumPowerSwitchSource):
           if self.__device.login():
             logger.info('Connection to remote Energenie LAN \'%s\' is successfull at location %s' % (self.get_name(), self.get_address()))
             status = self.__device.getstatus()
+            self.__device.logout()
 
         if status['login'] != 0:
           logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.get_address(),status['logintxt'],status['login']))
