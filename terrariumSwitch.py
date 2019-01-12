@@ -336,6 +336,10 @@ class terrariumPowerSwitchEnergenieLAN(terrariumPowerSwitchSource):
   TYPE = 'eg-pm-lan'
   VALID_SOURCE = '^http:\/\/((?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?#(?P<switch>[1-4])$'
 
+  def set_address(self,value):
+    super(terrariumPowerSwitchEnergenieLAN, self).set_address(value)
+    self.load_hardware()
+
   def load_hardware(self):
     self.__device = None
     # Input format should be either:
