@@ -972,6 +972,12 @@ class terrariumEngine(object):
             'temperature' : cpu_temp,
             'external_calendar_url': self.config.get_external_calender_url()}
 
+    indicator = self.__unit_type('temperature').lower()
+    if 'f' == indicator:
+      data['temperature'] = terrariumUtils.to_fahrenheit(data['temperature'])
+    elif 'k' == indicator:
+      data['temperature'] = terrariumUtils.to_kelvin(data['temperature'])
+
     if socket:
       gauge_data = {'system_load'        : {'current' : data['load']['load1'] * 100, 'alarm_min' : 0, 'alarm_max': 80, 'limit_min' : 0, 'limit_max': 100, 'cores' : data['cores']},
                     'system_temperature' : {'current' : data['temperature'], 'alarm_min' : 30, 'alarm_max': 60, 'limit_min' : 0, 'limit_max': 80},
