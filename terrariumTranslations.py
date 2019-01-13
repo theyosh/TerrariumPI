@@ -122,8 +122,8 @@ class terrariumTranslations(object):
     self.translations['notification_email_email_username'] = _('Holds the username for authentication with the mailserver if needed.')
     self.translations['notification_email_email_password'] = _('Holds the password for authentication with the mailserver if needed.')
 
+    self.translations['notification_display_hardwaretype'] = _('Holds the display chip that is used.')
     self.translations['notification_display_address'] = _('Holds the I2C address of the LCD screen. Use the value found with i2cdetect. Add ,[NR] to change the I2C bus.')
-    self.translations['notification_display_resolution'] = _('Holds the LCD screen resolution.')
     self.translations['notification_display_title'] = _('Reserve first LCD line for static title.')
 
     self.translations['notification_twitter_consumer_key'] = _('Holds your Twitter consumer key. More information %shere%s') % ('<a href=\'https://apps.twitter.com/\' target=\'_blank\'>','</a>')

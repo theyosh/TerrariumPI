@@ -2770,6 +2770,27 @@ function uploadProfileImage() {
 }
 /* End profile code */
 
+/**
+ * Sort values alphabetically in select
+ * source: http://stackoverflow.com/questions/12073270/sorting-options-elements-alphabetically-using-jquery
+ */
+$.fn.extend({
+  sortSelect() {
+    let options = this.find("option"),
+      arr = options.map(function(_, o) { return { t: $(o).text(), v: o.value }; }).get();
+
+    arr.sort((o1, o2) => { // sort select
+      let t1 = o1.t.toLowerCase(),
+          t2 = o2.t.toLowerCase();
+      return t1 > t2 ? 1 : t1 < t2 ? -1 : 0;
+    });
+
+    options.each((i, o) => {
+      o.value = arr[i].v;
+      $(o).text(arr[i].t);
+    });
+  }
+});
 
 // Start it all.....
 $(document).ready(function() {
