@@ -521,7 +521,7 @@ class terrariumEngine(object):
         alarm_icon = '!' if average_data[env_part]['alarm'] else ''
         display_message.append('%s%s %.2f%s%s' % (alarm_icon,_(env_part.replace('average_','').title()), average_data[env_part]['current'],average_data[env_part]['indicator'],alarm_icon))
 
-      self.notification.send_display(display_message)
+      self.notification.send_display("\n".join(display_message))
 
       duration = (time.time() - starttime) + time_short
       if duration < terrariumEngine.LOOP_TIMEOUT:

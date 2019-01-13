@@ -326,8 +326,22 @@ class terrariumNotification(terrariumSingleton):
                         proxy)
 
     if self.__data.has_section('display'):
+
+      try:
+        self.__data.get('display','hardwaretype')
+      except Exception as ex:
+        address = self.__data.get('display','address')
+        resolution = self.__data.get('display','resolution')
+
+        if '/dev/' in address:
+          self.__data.set('display', 'hardwaretype', 'LCDSerial16x2')
+        elif '128x64' in resolution:
+          self.__data.set('display', 'hardwaretype', 'SSD1306')
+        else:
+          self.__data.set('display', 'hardwaretype', 'LCD16x2')
+
       self.set_display(self.__data.get('display','address'),
-                       self.__data.get('display','resolution'),
+                       self.__data.get('display','hardwaretype'),
                        self.__data.get('display','title'))
 
     if self.__data.has_section('webhook'):
@@ -580,20 +594,21 @@ class terrariumNotification(terrariumSingleton):
     else:
       self.telegram.send_image(subject.decode('utf-8'),files)
 
-  def set_display(self,address,resolution,title):
+  def set_display(self,address,hardwaretype,title):
     self.display = None
     if address is not None and '' != address:
       try:
-        self.display = terrariumDisplay(None,address,'notification',resolution,title)
+        self.display = terrariumDisplay(None,hardwaretype,address,'notification',title)
       except terrariumDisplaySourceException as ex:
+        print(ex)
         self.display = None
 
       if self.__profile_image is not None:
         self.display.write_image(self.__profile_image)
 
-  def send_display(self,messages):
+  def send_display(self,message):
     if self.display is not None:
-      self.display.message(messages)
+      self.display.message(message)
 
   def set_webhook(self,address):
       self.webhook = {'address' : address}
@@ -701,8 +716,9 @@ class terrariumNotification(terrariumSingleton):
                                        'proxy'     : data['telegram_proxy']})
 
       self.__update_config('display',{'address'    : data['display_address'],
-                                      'resolution' : data['display_resolution'],
-                                      'title'      : data['display_title']})
+                                      'hardwaretype' : data['display_hardwaretype'],
+                                      'title'      : data['display_title']},
+                           ['resolution'])
 
       self.__update_config('webhook',{'address'    : data['webhook_address']})
 

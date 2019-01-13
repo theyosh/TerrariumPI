@@ -71,18 +71,15 @@
                 </div>
                 <div class="x_content">
                   <div class="col-md-4 col-sm-4 col-xs-12 form-group">
-                    <label for="display_address">{{_('I2C address')}}</label>
-                    <input class="form-control" name="display_address" placeholder="{{_('I2C address')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_display_address')}}">
-                  </div>
-                  <div class="col-md-4 col-sm-4 col-xs-12 form-group">
-                    <label for="display_resolution">{{_('Screen resolution')}}</label>
-                    <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('notification_display_resolution')}}">
-                      <select class="form-control" name="display_resolution" tabindex="-1" placeholder="{{_('Select an option')}}">
-                        <option value="16x2">{{_('LCD 16 Characters, 2 Lines')}}</option>
-                        <option value="20x4">{{_('LCD 20 Characters, 4 Lines')}}</option>
-                        <option value="128x64">{{_('OLED 128 x 64 pixels')}}</option>
+                    <label for="display_hardwaretype">{{_('Hardware')}}</label>
+                    <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('notification_display_hardwaretype')}}">
+                      <select class="form-control" name="display_hardwaretype" tabindex="-1" placeholder="{{_('Select an option')}}">
                       </select>
                     </div>
+                  </div>
+                  <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                    <label for="display_address">{{_('Address')}}</label>
+                    <input class="form-control" name="display_address" placeholder="{{_('Address')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('notification_display_address')}}">
                   </div>
                   <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                     <label for="display_title">{{_('Title')}}</label>
@@ -340,6 +337,10 @@
                 switch (part) {
                   case 'email':
                   case 'display':
+                    $.each(partdata.supported,function(key,value){
+                      $('select[name="display_hardwaretype"]').append($('<option>').val(value).text(value));
+                    });
+                    $('select[name="display_hardwaretype"]').sortSelect();
                   case 'twitter':
                   case 'pushover':
                   case 'telegram':
