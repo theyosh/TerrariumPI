@@ -421,22 +421,24 @@ class terrariumOLED(terrariumScreen):
     if self.get_title():
       title = text_lines.pop(0)
 
-    while len(text_lines) > self.get_max_lines() - (1 if self.get_title() else 0):
+    while len(text_lines) >= self.get_max_lines() - (1 if self.get_title() else 0):
       with canvas(self.device) as draw:
         draw.rectangle(self.device.bounding_box, outline='white', fill='black')
-        linenr = 0
 
         if self.get_title():
           draw.rectangle((0,0,self.resolution[0],self.font_size), fill='white')
-          draw.text((1, linenr * self.font_size), title, font=self.font, fill='black')
+          draw.text((1,0), title, font=self.font, fill='black')
+          print(title)
+
+        linenr = 0
+        while linenr < len(text_lines) and linenr < self.get_max_lines()- (1 if self.get_title() else 0):
+          draw.text((1, (linenr + (1 if self.get_title() else 0)) * self.font_size), text_lines[linenr], font=self.font, fill='white')
+          print(text_lines[linenr])
           linenr += 1
 
-        while linenr < len(text_lines) and linenr < self.get_max_lines():
-          draw.text((1, linenr * self.font_size), text_lines[linenr], font=self.font, fill='white')
-          linenr += 1
-
+      print('')
       text_lines.pop(0)
-      sleep(1)
+      sleep(0.75)
 
     self.animating = False
 
