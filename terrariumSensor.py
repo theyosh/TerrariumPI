@@ -264,7 +264,7 @@ class terrariumSensorSource(object):
     elif 'ukgall' == indicator:
       current = terrariumUtils.to_uk_gallons(self.__current_value)
 
-    return float(self.__current_value)
+    return float(current)
 
   def get_alarm(self):
     if self.get_current() is None:
