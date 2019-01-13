@@ -332,6 +332,7 @@ class terrariumNotification(terrariumSingleton):
       except Exception as ex:
         address = self.__data.get('display','address')
         resolution = self.__data.get('display','resolution')
+        self.__data.remove_option('display','resolution')
 
         if '/dev/' in address:
           self.__data.set('display', 'hardwaretype', 'LCDSerial16x2')
