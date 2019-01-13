@@ -377,7 +377,6 @@ class terrariumLCDSerial(terrariumScreen):
         linenr += 1
 
       text_lines.pop(0)
-      sleep(0.5)
 
     self.animating = False
 
