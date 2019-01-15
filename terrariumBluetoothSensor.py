@@ -56,7 +56,6 @@ class terrariumMiFloraSensor(terrariumSensorSource):
       except Exception as ex:
         logger.warning('Error getting new data from {} sensor \'{}\'. Error message: {}'.format(self.get_type(),self.get_name(),ex))
 
-
     return data
 
   def get_data(self):
@@ -68,22 +67,20 @@ class terrariumMiFloraSensor(terrariumSensorSource):
 
   def get_firmware(self):
     cached_data = self.__sensor_cache.get_sensor_data(self.get_sensor_cache_key())
-    if cached_data is not None:
-      return cached_data['firmware']
+    if cached_data is not None and 'firmware' in cached_data:
+      self.__firmware = cached_data['firmware']
 
-    return None
+    return self.__firmware
 
   def get_battery(self):
     cached_data = self.__sensor_cache.get_sensor_data(self.get_sensor_cache_key())
-    if cached_data is not None:
-      return cached_data['battery']
+    if cached_data is not None and 'battery' in cached_data:
+      self.__battery = cached_data['battery']
 
-    return None
+    return self.__battery
 
   @staticmethod
   def check_connection(address):
-    tmp = {}
-
     try:
       miflora_dev = Peripheral(address)
       #Read battery and firmware version attribute
