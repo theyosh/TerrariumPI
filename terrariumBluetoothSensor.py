@@ -37,11 +37,9 @@ class terrariumMiFloraSensor(terrariumSensorSource):
 
       try:
         sensor = Peripheral(self.get_address())
-        data = {}
         #Read battery and firmware version attribute
-        data['battery'], data['firmware'] = unpack('<xB5s',sensor.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_FIRMWARE_AND_BATTERY))
-        self.__firmware = data['firmware']
-        self.__battery = data['battery']
+        data = sensor.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_FIRMWARE_AND_BATTERY).decode('utf-8')
+        data = {'battery': ord(data[0]), 'firmware' : data[2:]}
 
         #Enable real-time data reading
         sensor.writeCharacteristic(terrariumMiFloraSensor.__MIFLORA_REALTIME_DATA_TRIGGER, bytearray([0xa0, 0x1f]), True)
@@ -71,20 +69,14 @@ class terrariumMiFloraSensor(terrariumSensorSource):
   def get_firmware(self):
     cached_data = self.__sensor_cache.get_sensor_data(self.get_sensor_cache_key())
     if cached_data is not None:
-      self.__firmware = cached_data['firmware']
-
-    if self.__firmware is not None:
-      return self.__firmware.decode("utf-8")
+      return cached_data['firmware']
 
     return None
 
   def get_battery(self):
     cached_data = self.__sensor_cache.get_sensor_data(self.get_sensor_cache_key())
     if cached_data is not None:
-      self.__battery = cached_data['battery']
-
-    if self.__battery is not None:
-      return self.__battery
+      return cached_data['battery']
 
     return None
 
@@ -95,7 +87,7 @@ class terrariumMiFloraSensor(terrariumSensorSource):
     try:
       miflora_dev = Peripheral(address)
       #Read battery and firmware version attribute
-      tmp['battery'], tmp['firmware'] = unpack('<xB5s',miflora_dev.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_FIRMWARE_AND_BATTERY))
+      sensor.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_FIRMWARE_AND_BATTERY)
       miflora_dev.disconnect()
       return True
     except Exception as ex:

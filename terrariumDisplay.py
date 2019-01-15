@@ -427,15 +427,15 @@ class terrariumOLED(terrariumScreen):
         if self.get_title():
           draw.rectangle((0,0,self.resolution[0],self.font_size), fill='white')
           draw.text((1,0), title, font=self.font, fill='black')
-          print(title)
+          #print(title)
 
         linenr = 0
         while linenr < len(text_lines) and linenr < self.get_max_lines()- (1 if self.get_title() else 0):
           draw.text((1, (linenr + (1 if self.get_title() else 0)) * self.font_size), text_lines[linenr], font=self.font, fill='white')
-          print(text_lines[linenr])
+          #print(text_lines[linenr])
           linenr += 1
 
-      print('')
+      #print('')
       text_lines.pop(0)
       sleep(0.75)
 
