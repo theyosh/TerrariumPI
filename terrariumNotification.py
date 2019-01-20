@@ -750,7 +750,7 @@ class terrariumNotification(terrariumSingleton):
   def get_config(self):
     data = {
       'email'    : dict(self.email) if self.email is not None else {},
-      'display'  : self.display.get_config() if self.display is not None else {},
+      'display'  : self.display.get_config() if self.display is not None else {'supported'   : terrariumDisplay.valid_hardware_types()},
       'twitter'  : dict(self.twitter) if self.twitter is not None else {},
       'pushover' : dict(self.pushover) if self.pushover is not None else {},
       'telegram' : self.telegram.get_config() if self.telegram is not None else {},
