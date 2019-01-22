@@ -6,10 +6,42 @@ HEIGHT=$3
 ROTATION=$4
 DIR=$5
 
-if [[ "{ROTATION}" == "h" ]];
+# Test defaults
+if [[ "${NAME}" == "" ]];
+then
+  NAME="Test"
+fi
+
+if [[ "${WIDTH}" == "" ]];
+then
+  WIDTH="1920"
+fi
+
+if [[ "${HEIGHT}" == "" ]];
+then
+  HEIGHT="1080"
+fi
+
+if [[ "${ROTATION}" == "" ]];
+then
+  ROTATION="0"
+fi
+
+if [[ "${DIR}" == "" ]];
+then
+  DIR="/dev/shm/test"
+fi
+
+if [[ ! -d "${DIR}" ]];
+then
+  mkdir -p "${DIR}"
+fi
+
+
+if [[ "${ROTATION}" == "h" ]];
 then
   ROTATION="-hf"
-elif [[ "{ROTATION}" == "v" ]];
+elif [[ "${ROTATION}" == "v" ]];
 then
   ROTATION="-vf"
 else
