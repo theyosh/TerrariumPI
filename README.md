@@ -111,7 +111,7 @@ The software has support for the following languages:
 Your language not in the list or not up to date? [Create your own language translation](https://github.com/theyosh/TerrariumPI/wiki/Translations)
 
 ## Installation
-The installation expects a Pi with working network and ssh. It is tested with [Raspbian Stretch Lite](https://www.raspberrypi.org/downloads/raspbian/). For now the Full version is not working somehow.... So use the lite image!
+The installation expects a Pi with working network and ssh. It is tested with [Raspbian Stretch Lite](https://www.raspberrypi.org/downloads/raspbian/). For now the Full version is not working somehow.... So use the lite image! A new installation will take about 45 minutes. This is due to manually compiling python modules for the latest versions. Upgrades will go much faster.
 1. Get a working Raspberry Pi and login as user 'pi'  
   `ssh pi@[raspberry_ip]`
 2. Install git  
@@ -146,7 +146,7 @@ Now **clear your browser cache** and reload the webinterface. A brand new versio
 
 ## Hardware
 This software requires a Raspberry Pi and some extra hardware in order to run and work. The bare minimun and tested hardware is
-- Raspberry PI
+- Raspberry PI with at least **4GB SD card**
   - Pi 2
   - Pi 3
   - Zero
