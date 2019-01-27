@@ -29,6 +29,7 @@ from hashlib import md5
 from PIL import Image, ImageFont
 from luma.core.interface.serial import i2c
 from luma.core.render import canvas
+from luma.core.error import DeviceNotFoundError
 from luma.oled.device import ssd1306, ssd1309, ssd1322, ssd1325, ssd1327, ssd1331, ssd1351, sh1106
 
 from terrariumUtils import terrariumUtils
@@ -287,6 +288,9 @@ class terrariumScreen(object):
     return lines
 
   def message(self,text):
+    if self.get_max_chars() == 0:
+      return
+
     text_lines = []
     if self.get_title():
       # Set 'now' timestamp as title
@@ -299,10 +303,17 @@ class terrariumLCD(terrariumScreen):
 
   def set_address(self,address):
     super(terrariumLCD,self).set_address(address)
-    self.device = lcd(int('0x' + str(self.address),16),int(self.bus))
+    try:
+      self.device = lcd(int('0x' + str(self.address),16),int(self.bus))
+    except OSError as ex:
+      print('%s - WARNING - terrariumDisplay     - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
+      self.device = None
+    except IOError as ex:
+      print('%s - WARNING - terrariumDisplay     - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
+      self.device = None
 
   def display_message(self,text_lines):
-    if self.animating:
+    if self.device is None or self.animating:
       return
 
     self.animating = True
@@ -347,14 +358,22 @@ class terrariumLCDSerial(terrariumScreen):
     super(terrariumLCDSerial,self).set_address(address)
     if self.bus == 1:
       self.bus = 9600
-    self.device = serial.Serial(self.address, int(self.bus))
+
+    try:
+      self.device = serial.Serial(self.address, int(self.bus))
+    except serial.serialutil.SerialException as ex:
+      print('%s - WARNING - terrariumDisplay     - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
+      self.device = None
 
   def clear(self):
+    if self.device is None:
+      return
+
     self.device.write(str.encode('00clr'))
     sleep(1)
 
   def display_message(self,text_lines):
-    if self.animating:
+    if self.device is None or self.animating:
       return
 
     self.animating = True
@@ -397,6 +416,31 @@ class terrariumLCDSerial20x4(terrariumLCDSerial):
 class terrariumOLED(terrariumScreen):
   def set_address(self,address):
     super(terrariumOLED,self).set_address(address)
+    try:
+      address = i2c(port=int(self.bus), address=int('0x' + str(self.address),16))
+
+      if self.get_type() == terrariumOLEDSSD1306.TYPE:
+        self.device = ssd1306(address)
+      elif self.get_type() == terrariumOLEDSSD1309.TYPE:
+        self.device = ssd1309(address)
+      elif self.get_type() == terrariumOLEDSSD1322.TYPE:
+        self.device = ssd1322(address)
+      elif self.get_type() == terrariumOLEDSSD1325.TYPE:
+        self.device = ssd1325(address)
+      elif self.get_type() == terrariumOLEDSSD1327.TYPE:
+        self.device = ssd1327(address)
+      elif self.get_type() == terrariumOLEDSSD1331.TYPE:
+        self.device = ssd1331(address)
+      elif self.get_type() == terrariumOLEDSSD1351.TYPE:
+        self.device = ssd1351(address)
+      elif self.get_type() == terrariumOLEDSH1106.TYPE:
+        self.device = sh1106(address)
+
+    except DeviceNotFoundError as ex:
+      print('%s - WARNING - terrariumDisplay     - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
+      self.device = None
+
+    self.init()
 
   def loading(self):
     self.write_image('static/images/profile_image.jpg')
@@ -405,14 +449,20 @@ class terrariumOLED(terrariumScreen):
     return int(math.floor(float(self.resolution[0]) / (self.font_size/2.0)))
 
   def init(self):
+    if self.device is None:
+      return
+
     self.font_size = 10
     self.font = ImageFont.truetype('fonts/DejaVuSans.ttf', self.font_size)
-    self.resolution = [self.device.width,self.device.height]
-    self.device.clear()
-    self.device.show()
+    try:
+      self.resolution = [self.device.width,self.device.height]
+      self.device.clear()
+      self.device.show()
+    except Exception as ex:
+      print('%s - WARNING - terrariumDisplay     - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
 
   def display_message(self,text_lines):
-    if self.animating:
+    if self.device is None or self.animating:
       return
 
     self.animating = True
@@ -442,6 +492,9 @@ class terrariumOLED(terrariumScreen):
     self.animating = False
 
   def write_image(self,imagefile):
+    if self.device is None:
+      return
+
     image = Image.open(imagefile)
     scale = max(float(self.resolution[0]) / float(image.size[0]),float(self.resolution[1]) / float(image.size[1]))
     image = image.resize((int(scale * float(image.size[0])),int(scale * float(image.size[1]))),Image.ANTIALIAS)
@@ -455,66 +508,26 @@ class terrariumOLED(terrariumScreen):
 class terrariumOLEDSSD1306(terrariumOLED):
   TYPE = 'SSD1306'
 
-  def set_address(self,address):
-    super(terrariumOLEDSSD1306,self).set_address(address)
-    self.device = ssd1306(i2c(port=int(self.bus), address=int('0x' + str(self.address),16)))
-    self.init()
-
 class terrariumOLEDSSD1309(terrariumOLED):
   TYPE = 'SSD1309'
-
-  def set_address(self,address):
-    super(terrariumOLEDSSD1309,self).set_address(address)
-    self.device = ssd1309(i2c(port=int(self.bus), address=int('0x' + str(self.address),16)))
-    self.init()
 
 class terrariumOLEDSSD1322(terrariumOLED):
   TYPE = 'SSD1322'
 
-  def set_address(self,address):
-    super(terrariumOLEDSSD1322,self).set_address(address)
-    self.device = ssd1322(i2c(port=int(self.bus), address=int('0x' + str(self.address),16)))
-    self.init()
-
 class terrariumOLEDSSD1325(terrariumOLED):
   TYPE = 'SSD1325'
-
-  def set_address(self,address):
-    super(terrariumOLEDSSD1325,self).set_address(address)
-    self.device = ssd1325(i2c(port=int(self.bus), address=int('0x' + str(self.address),16)))
-    self.init()
 
 class terrariumOLEDSSD1327(terrariumOLED):
   TYPE = 'SSD1327'
 
-  def set_address(self,address):
-    super(terrariumOLEDSSD1327,self).set_address(address)
-    self.device = ssd1327(i2c(port=int(self.bus), address=int('0x' + str(self.address),16)))
-    self.init()
-
 class terrariumOLEDSSD1331(terrariumOLED):
   TYPE = 'SSD1331'
-
-  def set_address(self,address):
-    super(terrariumOLEDSSD1331,self).set_address(address)
-    self.device = ssd1331(i2c(port=int(self.bus), address=int('0x' + str(self.address),16)))
-    self.init()
 
 class terrariumOLEDSSD1351(terrariumOLED):
   TYPE = 'SSD1351'
 
-  def set_address(self,address):
-    super(terrariumOLEDSSD1351,self).set_address(address)
-    self.device = ssd1351(i2c(port=int(self.bus), address=int('0x' + str(self.address),16)))
-    self.init()
-
 class terrariumOLEDSH1106(terrariumOLED):
   TYPE = 'SH1106'
-
-  def set_address(self,address):
-    super(terrariumOLEDSH1106,self).set_address(address)
-    self.device = sh1106(i2c(port=int(self.bus), address=int('0x' + str(self.address),16)))
-    self.init()
 
 class terrariumDisplaySourceException(Exception):
   '''The entered display source is not known or invalid'''
