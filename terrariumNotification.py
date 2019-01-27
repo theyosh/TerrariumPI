@@ -604,7 +604,7 @@ class terrariumNotification(terrariumSingleton):
         print(ex)
         self.display = None
 
-      if self.__profile_image is not None:
+      if self.__profile_image is not None and self.display is not None:
         self.display.write_image(self.__profile_image)
 
   def send_display(self,message):

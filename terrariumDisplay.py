@@ -365,12 +365,12 @@ class terrariumLCDSerial(terrariumScreen):
       print('%s - WARNING - terrariumDisplay     - %s' % (datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[:23],ex))
       self.device = None
 
-  def clear(self):
-    if self.device is None:
-      return
+  #def clear(self):
+  #  if self.device is None:
+  #    return
 
-    self.device.write(str.encode('00clr'))
-    sleep(1)
+  #  self.device.write(str.encode('00clr'))
+  #  sleep(1)
 
   def display_message(self,text_lines):
     if self.device is None or self.animating:
