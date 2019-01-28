@@ -37,6 +37,7 @@ class terrariumPowerSwitchSource(object):
     logger.info('Initialising \'{}\' power switch object'.format(self.get_type()))
     self.power_wattage = 0.0
     self.water_flow = 0.0
+    self.manual_mode = False
 
     self.switchid = switchid
     self.set_name(name)
@@ -182,6 +183,12 @@ class terrariumPowerSwitchSource(object):
   def stop(self):
     pass
 
+  def in_manual_mode(self):
+    return terrariumUtils.is_true(self.manual_mode)
+
+  def set_manual_mode(self,mode):
+    self.manual_mode = terrariumUtils.is_true(mode)
+
   def update(self):
     self.timer_update()
     data = self.get_hardware_state()
@@ -208,7 +215,8 @@ class terrariumPowerSwitchSource(object):
             'current_power_wattage' : self.get_current_power_wattage(),
             'water_flow' : self.get_water_flow(),
             'current_water_flow' : self.get_current_water_flow(),
-            'state' : self.get_state()}
+            'state' : self.get_state(),
+            'manual_mode' : self.in_manual_mode()}
 
     data.update(self.timer.get_data())
 

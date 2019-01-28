@@ -1955,6 +1955,14 @@ function toggle_power_switch(id) {
   });
 }
 
+function toggle_power_manual_mode(id) {
+  $.post('/api/switch/manual_mode/' + id,function(data){
+    if (data.ok) {
+      $('div.row.switch#powerswitch_' + id).find('h2 span.manual_mode').toggle();
+    }
+  });
+}
+
 function add_power_switch_status_row(data) {
   if (source_row === null || source_row === '') {
     return false;
@@ -1991,6 +1999,10 @@ function add_power_switch_status_row(data) {
       toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
     });
   }
+  new_row.find('a.manual_mode').on('click',function(){
+    toggle_power_manual_mode($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
+  });
+
   if (data.timer_enabled) {
       new_row.find('div.power_switch span.glyphicon').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'));
       new_row.find('div.power_switch.dimmer div').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'));
@@ -2017,6 +2029,7 @@ function update_power_switch(data) {
   content_row.find('span.glyphicon').removeClass('blue green').addClass((on ? 'green' : 'blue'));
   content_row.find('h2 span.title').text(data.name);
   content_row.find('h2 small.current_usage').text(current_status_data);
+  content_row.find('h2 span.manual_mode').toggle(data.manual_mode);
   //switch_row.find('.knob').val(power_switch.state).trigger('change');
 
   // Set the values only when empty

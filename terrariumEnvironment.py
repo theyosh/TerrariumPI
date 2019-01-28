@@ -55,6 +55,10 @@ class terrariumEnvironmentPart(object):
 
   def __toggle_powerswitches(self,powerswitches,action = None):
     for switchid in powerswitches:
+      if powerswitches[switchid].in_manual_mode():
+        logger.warning('Power switch \'{}\' is in manual mode and will not change state.'.format(powerswitches[switchid].get_name()))
+        continue
+
       if 'on' == action:
         powerswitches[switchid].go_up()
 

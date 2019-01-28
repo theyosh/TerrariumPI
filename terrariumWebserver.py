@@ -135,6 +135,12 @@ class terrariumWebserver(object):
                      apply=self.__authenticate(True)
                     )
 
+    self.__app.route('/api/switch/manual_mode/<switchid:path>',
+                     method=['POST'],
+                     callback=self.__manual_mode_switch,
+                     apply=self.__authenticate(True)
+                    )
+
     self.__app.route('/api/switch/state/<switchid:path>/<value:int>',
                      method=['POST'],
                      callback=self.__state_switch,
@@ -380,6 +386,13 @@ class terrariumWebserver(object):
   def __toggle_switch(self,switchid):
     if switchid in self.__terrariumEngine.power_switches:
       self.__terrariumEngine.power_switches[switchid].toggle()
+      return {'ok' : True}
+
+    return {'ok' : False}
+
+  def __manual_mode_switch(self,switchid):
+    if switchid in self.__terrariumEngine.power_switches:
+      self.__terrariumEngine.power_switches[switchid].set_manual_mode(not self.__terrariumEngine.power_switches[switchid].in_manual_mode())
       return {'ok' : True}
 
     return {'ok' : False}

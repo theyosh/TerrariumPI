@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.3\n"
-"POT-Creation-Date: 2019-01-13 16:33+CET\n"
+"POT-Creation-Date: 2019-01-28 22:45+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -519,78 +519,78 @@ msgstr ""
 msgid "Offline since"
 msgstr ""
 
-#: terrariumWebserver.py:92 terrariumWebserver.py:172
+#: terrariumWebserver.py:92 terrariumWebserver.py:178
 msgid "Authenticate to make any changes"
 msgstr ""
 
-#: terrariumWebserver.py:92 terrariumWebserver.py:172
+#: terrariumWebserver.py:92 terrariumWebserver.py:178
 #: views/system_settings.tpl:28
 msgid "TerrariumPI"
 msgstr ""
 
-#: terrariumWebserver.py:92 terrariumWebserver.py:172
+#: terrariumWebserver.py:92 terrariumWebserver.py:178
 #: views/system_settings.tpl:120
 msgid "Authentication"
 msgstr ""
 
-#: terrariumWebserver.py:226
+#: terrariumWebserver.py:232
 msgid "Player command could ot be executed!"
 msgstr ""
 
-#: terrariumWebserver.py:226 terrariumWebserver.py:246
-#: terrariumWebserver.py:258 terrariumWebserver.py:266
+#: terrariumWebserver.py:232 terrariumWebserver.py:252
+#: terrariumWebserver.py:264 terrariumWebserver.py:272
 msgid "Error!"
 msgstr ""
 
-#: terrariumWebserver.py:234 terrariumWebserver.py:237
+#: terrariumWebserver.py:240 terrariumWebserver.py:243
 msgid "OK!"
 msgstr ""
 
-#: terrariumWebserver.py:234 terrariumWebserver.py:237
+#: terrariumWebserver.py:240 terrariumWebserver.py:243
 msgid "Player command executed!"
 msgstr ""
 
-#: terrariumWebserver.py:246
+#: terrariumWebserver.py:252
 msgid "File is not uploaded!"
 msgstr ""
 
-#: terrariumWebserver.py:251
+#: terrariumWebserver.py:257
 msgid "File '%s' is uploaded"
 msgstr ""
 
-#: terrariumWebserver.py:251 terrariumWebserver.py:261
+#: terrariumWebserver.py:257 terrariumWebserver.py:267
 msgid "Success!"
 msgstr ""
 
-#: terrariumWebserver.py:253
+#: terrariumWebserver.py:259
 msgid "Duplicate file '%s'"
 msgstr ""
 
-#: terrariumWebserver.py:258
+#: terrariumWebserver.py:264
 msgid "Action could not be satisfied"
 msgstr ""
 
-#: terrariumWebserver.py:261
+#: terrariumWebserver.py:267
 msgid "Audio file is deleted"
 msgstr ""
 
-#: terrariumWebserver.py:266
+#: terrariumWebserver.py:272
 msgid "Data could not be saved"
 msgstr ""
 
-#: terrariumWebserver.py:274
+#: terrariumWebserver.py:280
 msgid "Data saved"
 msgstr ""
 
-#: terrariumWebserver.py:275
+#: terrariumWebserver.py:281
 msgid "Your changes are saved"
 msgstr ""
 
-#: terrariumWebserver.py:403 views/inc/menu.tpl:171
+#: terrariumWebserver.py:416 views/inc/menu.tpl:171
 msgid "Log out"
 msgstr ""
 
-#: terrariumWebserver.py:404
+#: terrariumWebserver.py:417
 msgid "You are now logged out"
 msgstr ""
 
@@ -1119,7 +1119,7 @@ msgstr ""
 #: views/dashboard.tpl:794 views/dashboard.tpl:849 views/dashboard.tpl:904
 #: views/dashboard.tpl:959 views/dashboard.tpl:1014 views/dashboard.tpl:1069
 #: views/dashboard.tpl:1124 views/door_status.tpl:40
-#: views/inc/sensor_list.tpl:49 views/switch_status.tpl:40
+#: views/inc/sensor_list.tpl:49 views/switch_status.tpl:43
 msgid "Export data"
 msgstr ""
 
@@ -2582,6 +2582,14 @@ msgstr ""
 msgid "No switches available"
 msgstr ""
 
+#: views/switch_status.tpl:11
+msgid "in manual mode"
+msgstr ""
+
+#: views/switch_status.tpl:40
+msgid "Manual mode"
+msgstr ""
+
 #: views/system_environment.tpl:16
 msgid "Here you can configure your environment."
 msgstr ""
@@ -2998,11 +3006,11 @@ msgid "When closed"
 msgstr ""
 
 #: Missing text string
-msgid "1Wire bus"
+msgid "1Wire DS18B20 wiring scheme"
 msgstr ""
 
 #: Missing text string
-msgid "1Wire DS18B20 wiring scheme"
+msgid "1Wire bus"
 msgstr ""
 
 #: Missing text string
@@ -3058,15 +3066,15 @@ msgid "Current weather widget screenshot"
 msgstr ""
 
 #: Missing text string
-msgid "Delete file"
-msgstr ""
-
-#: Missing text string
 msgid "DHT22 GPIO wiring scheme"
 msgstr ""
 
 #: Missing text string
 msgid "DHT22 temperature and humidity sensor"
+msgstr ""
+
+#: Missing text string
+msgid "Delete file"
 msgstr ""
 
 #: Missing text string
@@ -3078,11 +3086,11 @@ msgid "Door history graph"
 msgstr ""
 
 #: Missing text string
-msgid "Doors overview screenshot"
+msgid "Door status"
 msgstr ""
 
 #: Missing text string
-msgid "Door status"
+msgid "Doors overview screenshot"
 msgstr ""
 
 #: Missing text string
@@ -3118,15 +3126,15 @@ msgid "Free space"
 msgstr ""
 
 #: Missing text string
-msgid "Github"
-msgstr ""
-
-#: Missing text string
 msgid "GPIO Magnetic door sensor"
 msgstr ""
 
 #: Missing text string
 msgid "GPIO relay board wiring scheme"
+msgstr ""
+
+#: Missing text string
+msgid "Github"
 msgstr ""
 
 #: Missing text string
@@ -3138,11 +3146,11 @@ msgid "Holds the port number on which the OWFS software is running. Leave empty 
 msgstr ""
 
 #: Missing text string
-msgid "I2C bus"
+msgid "I2C bus adapter"
 msgstr ""
 
 #: Missing text string
-msgid "I2C bus adapter"
+msgid "I2C bus"
 msgstr ""
 
 #: Missing text string
@@ -3170,11 +3178,11 @@ msgid "No error messages"
 msgstr ""
 
 #: Missing text string
-msgid "Not playing"
+msgid "No warning messages"
 msgstr ""
 
 #: Missing text string
-msgid "No warning messages"
+msgid "Not playing"
 msgstr ""
 
 #: Missing text string
@@ -3218,11 +3226,11 @@ msgid "Server could not process the upload. Error code {{statusCode}}"
 msgstr ""
 
 #: Missing text string
-msgid "Switches overview screenshot"
+msgid "Switch history graph"
 msgstr ""
 
 #: Missing text string
-msgid "Switch history graph"
+msgid "Switches overview screenshot"
 msgstr ""
 
 #: Missing text string
@@ -3266,19 +3274,19 @@ msgid "Total space"
 msgstr ""
 
 #: Missing text string
-msgid "Universal AC MAINS Dimmer - MPDMv4.1"
-msgstr ""
-
-#: Missing text string
-msgid "Unknown date"
-msgstr ""
-
-#: Missing text string
 msgid "USB Relay board"
 msgstr ""
 
 #: Missing text string
 msgid "USB Webcam"
+msgstr ""
+
+#: Missing text string
+msgid "Universal AC MAINS Dimmer - MPDMv4.1"
+msgstr ""
+
+#: Missing text string
+msgid "Unknown date"
 msgstr ""
 
 #: Missing text string
