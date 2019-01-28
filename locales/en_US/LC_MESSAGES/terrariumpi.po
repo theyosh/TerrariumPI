@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.3\n"
-"POT-Creation-Date: 2019-01-13 16:33+CET\n"
-"PO-Revision-Date: 2019-01-13 16:34+0100\n"
+"POT-Creation-Date: 2019-01-28 22:45+CET\n"
+"PO-Revision-Date: 2019-01-28 22:45+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -520,78 +520,78 @@ msgstr "Holds a link to more information."
 msgid "Offline since"
 msgstr "Offline since"
 
-#: terrariumWebserver.py:92 terrariumWebserver.py:172
+#: terrariumWebserver.py:92 terrariumWebserver.py:178
 msgid "Authenticate to make any changes"
 msgstr "Authenticate to make any changes"
 
-#: terrariumWebserver.py:92 terrariumWebserver.py:172
+#: terrariumWebserver.py:92 terrariumWebserver.py:178
 #: views/system_settings.tpl:28
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:92 terrariumWebserver.py:172
+#: terrariumWebserver.py:92 terrariumWebserver.py:178
 #: views/system_settings.tpl:120
 msgid "Authentication"
 msgstr "Authentication"
 
-#: terrariumWebserver.py:226
+#: terrariumWebserver.py:232
 msgid "Player command could ot be executed!"
 msgstr "Player command could ot be executed!"
 
-#: terrariumWebserver.py:226 terrariumWebserver.py:246
-#: terrariumWebserver.py:258 terrariumWebserver.py:266
+#: terrariumWebserver.py:232 terrariumWebserver.py:252
+#: terrariumWebserver.py:264 terrariumWebserver.py:272
 msgid "Error!"
 msgstr "Error!"
 
-#: terrariumWebserver.py:234 terrariumWebserver.py:237
+#: terrariumWebserver.py:240 terrariumWebserver.py:243
 msgid "OK!"
 msgstr "OK!"
 
-#: terrariumWebserver.py:234 terrariumWebserver.py:237
+#: terrariumWebserver.py:240 terrariumWebserver.py:243
 msgid "Player command executed!"
 msgstr "Player command executed!"
 
-#: terrariumWebserver.py:246
+#: terrariumWebserver.py:252
 msgid "File is not uploaded!"
 msgstr "File is not uploaded!"
 
-#: terrariumWebserver.py:251
+#: terrariumWebserver.py:257
 msgid "File '%s' is uploaded"
 msgstr "File '%s' is uploaded"
 
-#: terrariumWebserver.py:251 terrariumWebserver.py:261
+#: terrariumWebserver.py:257 terrariumWebserver.py:267
 msgid "Success!"
 msgstr "Success!"
 
-#: terrariumWebserver.py:253
+#: terrariumWebserver.py:259
 msgid "Duplicate file '%s'"
 msgstr "Duplicate file '%s'"
 
-#: terrariumWebserver.py:258
+#: terrariumWebserver.py:264
 msgid "Action could not be satisfied"
 msgstr "Action could not be satisfied"
 
-#: terrariumWebserver.py:261
+#: terrariumWebserver.py:267
 msgid "Audio file is deleted"
 msgstr "Audio file is deleted"
 
-#: terrariumWebserver.py:266
+#: terrariumWebserver.py:272
 msgid "Data could not be saved"
 msgstr "Data could not be saved"
 
-#: terrariumWebserver.py:274
+#: terrariumWebserver.py:280
 msgid "Data saved"
 msgstr "Data saved"
 
-#: terrariumWebserver.py:275
+#: terrariumWebserver.py:281
 msgid "Your changes are saved"
 msgstr "Your changes are saved"
 
-#: terrariumWebserver.py:403 views/inc/menu.tpl:171
+#: terrariumWebserver.py:416 views/inc/menu.tpl:171
 msgid "Log out"
 msgstr "Log out"
 
-#: terrariumWebserver.py:404
+#: terrariumWebserver.py:417
 msgid "You are now logged out"
 msgstr "You are now logged out"
 
@@ -1120,7 +1120,7 @@ msgstr "Year"
 #: views/dashboard.tpl:794 views/dashboard.tpl:849 views/dashboard.tpl:904
 #: views/dashboard.tpl:959 views/dashboard.tpl:1014 views/dashboard.tpl:1069
 #: views/dashboard.tpl:1124 views/door_status.tpl:40
-#: views/inc/sensor_list.tpl:49 views/switch_status.tpl:40
+#: views/inc/sensor_list.tpl:49 views/switch_status.tpl:43
 msgid "Export data"
 msgstr "Export data"
 
@@ -2583,6 +2583,14 @@ msgstr "Dimmer environment step"
 msgid "No switches available"
 msgstr "No switches available"
 
+#: views/switch_status.tpl:11
+msgid "in manual mode"
+msgstr "in manual mode"
+
+#: views/switch_status.tpl:40
+msgid "Manual mode"
+msgstr "Manual mode"
+
 #: views/system_environment.tpl:16
 msgid "Here you can configure your environment."
 msgstr "Here you can configure your environment."
@@ -2999,12 +3007,12 @@ msgid "When closed"
 msgstr "When closed"
 
 #: Missing text string
-msgid "1Wire bus"
-msgstr "1Wire bus"
-
-#: Missing text string
 msgid "1Wire DS18B20 wiring scheme"
 msgstr "1Wire DS18B20 wiring scheme"
+
+#: Missing text string
+msgid "1Wire bus"
+msgstr "1Wire bus"
 
 #: Missing text string
 msgid "1Wire sensor 1"
@@ -3059,16 +3067,16 @@ msgid "Current weather widget screenshot"
 msgstr "Current weather widget screenshot"
 
 #: Missing text string
-msgid "Delete file"
-msgstr "Delete file"
-
-#: Missing text string
 msgid "DHT22 GPIO wiring scheme"
 msgstr "DHT22 GPIO wiring scheme"
 
 #: Missing text string
 msgid "DHT22 temperature and humidity sensor"
 msgstr "DHT22 temperature and humidity sensor"
+
+#: Missing text string
+msgid "Delete file"
+msgstr "Delete file"
 
 #: Missing text string
 msgid "Dimmer environment step in %"
@@ -3079,12 +3087,12 @@ msgid "Door history graph"
 msgstr "Door history graph"
 
 #: Missing text string
-msgid "Doors overview screenshot"
-msgstr "Doors overview screenshot"
-
-#: Missing text string
 msgid "Door status"
 msgstr "Door status"
+
+#: Missing text string
+msgid "Doors overview screenshot"
+msgstr "Doors overview screenshot"
 
 #: Missing text string
 msgid "Drop files here to upload"
@@ -3119,16 +3127,16 @@ msgid "Free space"
 msgstr "Free space"
 
 #: Missing text string
-msgid "Github"
-msgstr "Github"
-
-#: Missing text string
 msgid "GPIO Magnetic door sensor"
 msgstr "GPIO Magnetic door sensor"
 
 #: Missing text string
 msgid "GPIO relay board wiring scheme"
 msgstr "GPIO relay board wiring scheme"
+
+#: Missing text string
+msgid "Github"
+msgstr "Github"
 
 #: Missing text string
 msgid "Height in cm"
@@ -3139,12 +3147,12 @@ msgid "Holds the port number on which the OWFS software is running. Leave empty 
 msgstr "Holds the port number on which the OWFS software is running. Leave empty to disable OWFS support."
 
 #: Missing text string
-msgid "I2C bus"
-msgstr "I2C bus"
-
-#: Missing text string
 msgid "I2C bus adapter"
 msgstr "I2C bus adapter"
+
+#: Missing text string
+msgid "I2C bus"
+msgstr "I2C bus"
 
 #: Missing text string
 msgid "ID"
@@ -3171,12 +3179,12 @@ msgid "No error messages"
 msgstr "No error messages"
 
 #: Missing text string
-msgid "Not playing"
-msgstr "Not playing"
-
-#: Missing text string
 msgid "No warning messages"
 msgstr "No warning messages"
+
+#: Missing text string
+msgid "Not playing"
+msgstr "Not playing"
 
 #: Missing text string
 msgid "Offset in cm"
@@ -3219,12 +3227,12 @@ msgid "Server could not process the upload. Error code {{statusCode}}"
 msgstr "Server could not process the upload. Error code {{statusCode}}"
 
 #: Missing text string
-msgid "Switches overview screenshot"
-msgstr "Switches overview screenshot"
-
-#: Missing text string
 msgid "Switch history graph"
 msgstr "Switch history graph"
+
+#: Missing text string
+msgid "Switches overview screenshot"
+msgstr "Switches overview screenshot"
 
 #: Missing text string
 msgid "System environment screenshot"
@@ -3267,20 +3275,20 @@ msgid "Total space"
 msgstr "Total space"
 
 #: Missing text string
-msgid "Universal AC MAINS Dimmer - MPDMv4.1"
-msgstr "Universal AC MAINS Dimmer - MPDMv4.1"
-
-#: Missing text string
-msgid "Unknown date"
-msgstr "Unknown date"
-
-#: Missing text string
 msgid "USB Relay board"
 msgstr "USB Relay board"
 
 #: Missing text string
 msgid "USB Webcam"
 msgstr "USB Webcam"
+
+#: Missing text string
+msgid "Universal AC MAINS Dimmer - MPDMv4.1"
+msgstr "Universal AC MAINS Dimmer - MPDMv4.1"
+
+#: Missing text string
+msgid "Unknown date"
+msgstr "Unknown date"
 
 #: Missing text string
 msgid "Used memory"

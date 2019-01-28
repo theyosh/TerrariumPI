@@ -686,7 +686,7 @@ class terrariumConfig(object):
 
   # Switches config functions
   def save_power_switch(self,data):
-    clearfields = ['state','current_power_wattage','current_water_flow']
+    clearfields = ['state','current_power_wattage','current_water_flow','manual_mode']
     if 'dimmer' not in data['hardwaretype']:
       clearfields += ['dimmer_duration','dimmer_off_duration','dimmer_off_percentage','dimmer_on_duration','dimmer_on_percentage']
 

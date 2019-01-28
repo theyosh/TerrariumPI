@@ -8,7 +8,7 @@
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2><span aria-hidden="true" class="glyphicon glyphicon-flash"></span> {{_('Switch')}} <span class="title"></span> <small class="current_usage"></small> <small class="total_usage"></small></h2>
+                <h2><span aria-hidden="true" class="glyphicon glyphicon-flash"></span>{{_('Switch')}} <span class="title"></span> <span class="badge bg-red manual_mode">{{_('in manual mode')}}</span><small class="current_usage"></small><small class="total_usage"></small></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -35,6 +35,9 @@
                     <ul class="dropdown-menu" role="menu">
                       <li>
                         <a href="javascript:;" onclick="menu_click('switch_settings.html')">{{_('Settings')}}</a>
+                      </li>
+                      <li>
+                        <a href="javascript:;" class="manual_mode">{{_('Manual mode')}}</a>
                       </li>
                       <li>
                         <a href="javascript:;" class="export">{{_('Export data')}}</a>
