@@ -595,7 +595,12 @@ class terrariumEngine(object):
     return self.weather.get_config()
 
   def get_weather(self, parameters = [], socket = False):
-    data = self.weather.get_data()
+    try:
+      data = self.weather.get_data()
+    except Exception as ex:
+      logger.error('Strange weather.. error https://github.com/theyosh/TerrariumPI/issues/246: {}'.format(ex))
+      return None
+
     self.environment.update()
 
     if socket:
