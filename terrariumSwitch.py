@@ -196,7 +196,7 @@ class terrariumPowerSwitchSource(object):
       self.set_state(data)
 
   def timer_update(self):
-    if self.timer.is_enabled():
+    if not self.in_manual_mode() and self.timer.is_enabled():
       if self.timer.is_time():
         self.on()
       else:
