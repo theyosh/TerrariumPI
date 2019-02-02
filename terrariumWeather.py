@@ -105,7 +105,12 @@ class terrariumWeatherSource(object):
       # Some default sun rise and sun set when there no valid weather data. This is the bear minimum to keep the software running
       self.sun['rise'] = int(datetime.now().replace(hour=8, minute=0, second=0).strftime('%s'))
       self.sun['set']  = self.sun['rise'] + (12 * 60 * 60)
-      self.load_data()
+
+      load_counter = 0
+      while load_counter < 3 and not self.load_data():
+        load_counter +=1
+        sleep(1)
+
       self.__update_weather_icons()
       logger.info('Done loading {} weather data in {} seconds. Hour forcecast items: {}, week forecast items: {}.'.format(self.get_type(),
                                                                                                                           time.time()-starttime,
@@ -138,7 +143,7 @@ class terrariumWeatherSource(object):
 
   def load_data(self):
     # Here custom code per type should be created
-    pass
+    return True
 
   def get_data(self):
     data = {'city' : self.location,
