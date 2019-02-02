@@ -5,7 +5,6 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 import smbus
 import sys
-#import time
 import Adafruit_SHT31
 
 from terrariumSensor import terrariumSensorSource
