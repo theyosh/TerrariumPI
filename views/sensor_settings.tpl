@@ -118,6 +118,7 @@
                                 <option value="sku-sen0161">{{_('pH SKU-SEN0161')}}</option>
                                 <option value="veml6075">{{_('VEML6075')}}</option>
                                 <option value="miflora">{{_('MiFlora')}}</option>
+                                <option value="mh-z19">{{_('mh-z19')}}</option>
                               </select>
                             </div>
                           </div>

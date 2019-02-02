@@ -405,6 +405,25 @@ class terrariumOWFSSensor(terrariumSensorSource):
     except Exception as ex:
       logger.warning('OWFS file system is not actve / installed on this device! If this is not correct, try \'i2cdetect -y 1\' to see if device is connected.')
 
+class terrariumMHZ19Sensor(terrariumSensorSource):
+  TYPE = 'mh-z19'
+  VALID_SENSOR_TYPES = ['co2']
+
+  def set_address(self,address):
+    # Address is not needed according to source....
+    self.sensor_address = 'N/A'
+
+  def load_data(self):
+    data = None
+    if self.get_address() is not None:
+      data = mh_z19.read()
+
+    if data is None:
+      return None
+    else:
+      data = data['co2']
+
+    return { self.get_sensor_type() : data}
 
 from terrariumAnalogSensor import terrariumSKUSEN0161Sensor
 from terrariumBluetoothSensor import terrariumMiFloraSensor
@@ -444,7 +463,8 @@ class terrariumSensor(object):
              terrariumBME280Sensor,
              terrariumVEML6075Sensor,
              terrariumChirpSensor,
-             terrariumSHT3XSensor}
+             terrariumSHT3XSensor,
+             terrariumMHZ19Sensor}
 
   def __new__(self, sensor_id, hardware_type, sensor_type, address, name = '', callback_indicator = None):
     for sensor in terrariumSensor.SENSORS:
@@ -469,8 +489,7 @@ class terrariumSensor(object):
       for sensor_type in sensor_types:
         data[sensor_type] = sensor_type
 
-    # CO2 and volume is only through remote
-    data['co2']    = 'co2'
+    # Volume is only through remote
     data['volume'] = 'volume'
     return data
 
