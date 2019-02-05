@@ -119,6 +119,7 @@
                                 <option value="veml6075">{{_('VEML6075')}}</option>
                                 <option value="miflora">{{_('MiFlora')}}</option>
                                 <option value="mh-z19">{{_('mh-z19')}}</option>
+                                <option value="mlx90614">{{_('MLX90614')}}</option>
                               </select>
                             </div>
                           </div>
