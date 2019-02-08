@@ -2805,6 +2805,14 @@ $.fn.extend({
   }
 });
 
+function terrariumpi_select2_option(state){
+  console.log(state);
+  if (!state.id) {
+    return state.text;
+  }
+  return $('<div class="terrariumpi_select2_option" title="' + state.text + '">' + state.text + '</div>');
+}
+$.fn.select2.defaults.set("templateResult", terrariumpi_select2_option);
 // Start it all.....
 $(document).ready(function() {
   moment.locale(globals.language);
