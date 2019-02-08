@@ -1955,6 +1955,14 @@ function toggle_power_switch(id) {
   });
 }
 
+function toggle_power_manual_mode(id) {
+  $.post('/api/switch/manual_mode/' + id,function(data){
+    if (data.ok) {
+      $('div.row.switch#powerswitch_' + id).find('h2 span.manual_mode').toggle();
+    }
+  });
+}
+
 function add_power_switch_status_row(data) {
   if (source_row === null || source_row === '') {
     return false;
@@ -1991,6 +1999,10 @@ function add_power_switch_status_row(data) {
       toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
     });
   }
+  new_row.find('a.manual_mode').on('click',function(){
+    toggle_power_manual_mode($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
+  });
+
   if (data.timer_enabled) {
       new_row.find('div.power_switch span.glyphicon').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'));
       new_row.find('div.power_switch.dimmer div').append($('<span>').addClass('glyphicon glyphicon glyphicon-time'));
@@ -2017,6 +2029,7 @@ function update_power_switch(data) {
   content_row.find('span.glyphicon').removeClass('blue green').addClass((on ? 'green' : 'blue'));
   content_row.find('h2 span.title').text(data.name);
   content_row.find('h2 small.current_usage').text(current_status_data);
+  content_row.find('h2 span.manual_mode').toggle(data.manual_mode);
   //switch_row.find('.knob').val(power_switch.state).trigger('change');
 
   // Set the values only when empty
@@ -2357,7 +2370,7 @@ function initWebcam(data) {
         this.photo_link = L.DomUtil.create('a', 'leaflet-control-takephoto-button leaflet-bar-part', container);
         this.photo_link.title = '{{_('Save RAW photo')}}';
         this.photo_link.target = '_blank';
-        this.photo_link.href = '/webcam/' + data.id + '_raw.jpg';
+        this.photo_link.href = '/webcam/' + data.id + '/' + data.id + '_raw.jpg';
         L.DomUtil.create('i', 'fa fa-camera', this.photo_link);
 
         if (this.options.archive) {
@@ -2770,7 +2783,37 @@ function uploadProfileImage() {
 }
 /* End profile code */
 
+/**
+ * Sort values alphabetically in select
+ * source: http://stackoverflow.com/questions/12073270/sorting-options-elements-alphabetically-using-jquery
+ */
+$.fn.extend({
+  sortSelect() {
+    let options = this.find("option"),
+      arr = options.map(function(_, o) { return { t: $(o).text(), v: o.value }; }).get();
 
+    arr.sort((o1, o2) => { // sort select
+      let t1 = o1.t.toLowerCase(),
+          t2 = o2.t.toLowerCase();
+      return t1 > t2 ? 1 : t1 < t2 ? -1 : 0;
+    });
+
+    options.each((i, o) => {
+      o.value = arr[i].v;
+      $(o).text(arr[i].t);
+    });
+  }
+});
+
+function terrariumpi_select2_option(state){
+  console.log(state);
+  if (!state.id) {
+    return state.text;
+  }
+  return $('<div class="terrariumpi_select2_option" title="' + state.text + '">' + state.text + '</div>');
+}
+
+$.fn.select2.defaults.set("templateResult", terrariumpi_select2_option);
 // Start it all.....
 $(document).ready(function() {
   moment.locale(globals.language);
