@@ -336,6 +336,10 @@ class terrariumPowerSwitchEnergenieLAN(terrariumPowerSwitchSource):
   TYPE = 'eg-pm-lan'
   VALID_SOURCE = '^http:\/\/((?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?#(?P<switch>[1-4])$'
 
+  def set_address(self,value):
+    super(terrariumPowerSwitchEnergenieLAN, self).set_address(value)
+    self.load_hardware()
+
   def load_hardware(self):
     self.__device = None
     # Input format should be either:
@@ -359,6 +363,7 @@ class terrariumPowerSwitchEnergenieLAN(terrariumPowerSwitchSource):
           if self.__device.login():
             logger.info('Connection to remote Energenie LAN \'%s\' is successfull at location %s' % (self.get_name(), self.get_address()))
             status = self.__device.getstatus()
+            self.__device.logout()
 
         if status['login'] != 0:
           logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.get_address(),status['logintxt'],status['login']))

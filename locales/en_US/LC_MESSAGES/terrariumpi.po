@@ -1,12 +1,12 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2016-2018 TheYOSH
-# Joshua (TheYOSH) Rubingh, <terrariumpi@theyosh.nl>, 2016-2018.
+# Copyright (C) 2016-2019 TheYOSH
+# Joshua (TheYOSH) Rubingh, <terrariumpi@theyosh.nl>, 2016-2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.3\n"
-"POT-Creation-Date: 2018-12-16 19:22+CET\n"
-"PO-Revision-Date: 2018-12-16 19:23+0100\n"
+"POT-Creation-Date: 2019-01-13 16:33+CET\n"
+"PO-Revision-Date: 2019-01-13 16:34+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -16,16 +16,16 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: terrariumEngine.py:508 views/dashboard.tpl:7
+#: terrariumEngine.py:516 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
 msgid "Uptime"
 msgstr "Uptime"
 
-#: terrariumEngine.py:509
+#: terrariumEngine.py:517
 msgid "Load"
 msgstr "Load"
 
-#: terrariumEngine.py:510
+#: terrariumEngine.py:518
 msgid "CPU Temp."
 msgstr "CPU Temp."
 
@@ -365,12 +365,12 @@ msgid "Holds the password for authentication with the mailserver if needed."
 msgstr "Holds the password for authentication with the mailserver if needed."
 
 #: terrariumTranslations.py:125
-msgid "Holds the I2C address of the LCD screen. Use the value found with i2cdetect. Add ,[NR] to change the I2C bus."
-msgstr "Holds the I2C address of the LCD screen. Use the value found with i2cdetect. Add ,[NR] to change the I2C bus."
+msgid "Holds the display chip that is used."
+msgstr "Holds the display chip that is used."
 
 #: terrariumTranslations.py:126
-msgid "Holds the LCD screen resolution."
-msgstr "Holds the LCD screen resolution."
+msgid "Holds the I2C address of the LCD screen. Use the value found with i2cdetect. Add ,[NR] to change the I2C bus."
+msgstr "Holds the I2C address of the LCD screen. Use the value found with i2cdetect. Add ,[NR] to change the I2C bus."
 
 #: terrariumTranslations.py:127
 msgid "Reserve first LCD line for static title."
@@ -516,7 +516,7 @@ msgstr "Holds a small description about the animal."
 msgid "Holds a link to more information."
 msgstr "Holds a link to more information."
 
-#: terrariumWebcam.py:175
+#: terrariumWebcam.py:189
 msgid "Offline since"
 msgstr "Offline since"
 
@@ -758,7 +758,7 @@ msgid "Files"
 msgstr "Files"
 
 #: views/audio_playlist.tpl:48 views/door_settings.tpl:36
-#: views/notifications.tpl:278 views/profile.tpl:179
+#: views/notifications.tpl:275 views/profile.tpl:179
 #: views/sensor_settings.tpl:57 views/switch_settings.tpl:72
 #: views/system_environment.tpl:1801 views/system_settings.tpl:189
 #: views/webcam_settings.tpl:48
@@ -829,9 +829,9 @@ msgstr "Calendar"
 #: views/inc/usage_weather.tpl:94 views/inc/usage_webcams.tpl:46
 #: views/inc/usage_webcams.tpl:88 views/inc/usage_webcams.tpl:163
 #: views/notifications.tpl:27 views/notifications.tpl:64
-#: views/notifications.tpl:104 views/notifications.tpl:137
-#: views/notifications.tpl:162 views/notifications.tpl:191
-#: views/notifications.tpl:212 views/switch_status.tpl:37
+#: views/notifications.tpl:101 views/notifications.tpl:134
+#: views/notifications.tpl:159 views/notifications.tpl:188
+#: views/notifications.tpl:209 views/switch_status.tpl:37
 #: views/system_environment.tpl:27 views/system_environment.tpl:158
 #: views/system_environment.tpl:370 views/system_environment.tpl:581
 #: views/system_environment.tpl:792 views/system_environment.tpl:1003
@@ -904,7 +904,7 @@ msgstr "mode"
 #: views/inc/usage_environment.tpl:25 views/inc/usage_environment.tpl:121
 #: views/inc/usage_environment.tpl:129 views/inc/usage_environment.tpl:213
 #: views/inc/usage_environment.tpl:221 views/inc/usage_environment.tpl:307
-#: views/inc/usage_environment.tpl:315 views/notifications.tpl:92
+#: views/inc/usage_environment.tpl:315 views/notifications.tpl:89
 #: views/switch_settings.tpl:147 views/system_environment.tpl:41
 #: views/system_environment.tpl:172 views/system_environment.tpl:384
 #: views/system_environment.tpl:595 views/system_environment.tpl:806
@@ -1168,9 +1168,9 @@ msgstr "Here you can configure your doors."
 #: views/hardware.tpl:30 views/inc/menu.tpl:159 views/inc/usage_doors.tpl:98
 #: views/inc/usage_doors.tpl:119 views/inc/usage_sensors.tpl:109
 #: views/inc/usage_sensors.tpl:165 views/inc/usage_switches.tpl:103
-#: views/inc/usage_switches.tpl:134 views/sensor_settings.tpl:19
-#: views/sensor_settings.tpl:100 views/switch_settings.tpl:19
-#: views/switch_settings.tpl:106
+#: views/inc/usage_switches.tpl:134 views/notifications.tpl:74
+#: views/sensor_settings.tpl:19 views/sensor_settings.tpl:100
+#: views/switch_settings.tpl:19 views/switch_settings.tpl:106
 msgid "Hardware"
 msgstr "Hardware"
 
@@ -1178,8 +1178,9 @@ msgstr "Hardware"
 #: views/inc/usage_doors.tpl:106 views/inc/usage_doors.tpl:122
 #: views/inc/usage_sensors.tpl:123 views/inc/usage_sensors.tpl:168
 #: views/inc/usage_switches.tpl:112 views/inc/usage_switches.tpl:137
-#: views/sensor_settings.tpl:22 views/sensor_settings.tpl:125
-#: views/switch_settings.tpl:22 views/switch_settings.tpl:125
+#: views/notifications.tpl:81 views/sensor_settings.tpl:22
+#: views/sensor_settings.tpl:125 views/switch_settings.tpl:22
+#: views/switch_settings.tpl:125
 msgid "Address"
 msgstr "Address"
 
@@ -1707,7 +1708,7 @@ msgstr "With the wrench you will get an options menu."
 #: views/inc/usage_sensors.tpl:17 views/inc/usage_sensors.tpl:203
 #: views/inc/usage_switches.tpl:13 views/inc/usage_switches.tpl:160
 #: views/inc/usage_webcams.tpl:13 views/inc/usage_webcams.tpl:154
-#: views/notifications.tpl:88 views/notifications.tpl:226
+#: views/notifications.tpl:85 views/notifications.tpl:223
 msgid "Title"
 msgstr "Title"
 
@@ -1808,7 +1809,7 @@ msgstr "All fields with a %s are required."
 #: views/inc/usage_environment.tpl:25 views/inc/usage_environment.tpl:121
 #: views/inc/usage_environment.tpl:129 views/inc/usage_environment.tpl:213
 #: views/inc/usage_environment.tpl:221 views/inc/usage_environment.tpl:307
-#: views/inc/usage_environment.tpl:315 views/notifications.tpl:91
+#: views/inc/usage_environment.tpl:315 views/notifications.tpl:88
 #: views/switch_settings.tpl:146
 msgid "Enabled"
 msgstr "Enabled"
@@ -2322,95 +2323,75 @@ msgstr "SMTP password"
 msgid "Display"
 msgstr "Display"
 
-#: views/notifications.tpl:74
-msgid "I2C address"
-msgstr "I2C address"
-
-#: views/notifications.tpl:78
-msgid "Screen resolution"
-msgstr "Screen resolution"
-
-#: views/notifications.tpl:81
-msgid "LCD 16 Characters, 2 Lines"
-msgstr "LCD 16 Characters, 2 Lines"
-
-#: views/notifications.tpl:82
-msgid "LCD 20 Characters, 4 Lines"
-msgstr "LCD 20 Characters, 4 Lines"
-
-#: views/notifications.tpl:83
-msgid "OLED 128 x 64 pixels"
-msgstr "OLED 128 x 64 pixels"
-
-#: views/notifications.tpl:104
+#: views/notifications.tpl:101
 msgid "Twitter"
 msgstr "Twitter"
 
-#: views/notifications.tpl:114
+#: views/notifications.tpl:111
 msgid "Consumer key"
 msgstr "Consumer key"
 
-#: views/notifications.tpl:118
+#: views/notifications.tpl:115
 msgid "Consumer secret"
 msgstr "Consumer secret"
 
-#: views/notifications.tpl:122
+#: views/notifications.tpl:119
 msgid "Access token"
 msgstr "Access token"
 
-#: views/notifications.tpl:126
+#: views/notifications.tpl:123
 msgid "Access token secret"
 msgstr "Access token secret"
 
-#: views/notifications.tpl:137
+#: views/notifications.tpl:134
 msgid "Pushover"
 msgstr "Pushover"
 
-#: views/notifications.tpl:147
+#: views/notifications.tpl:144
 msgid "API Token"
 msgstr "API Token"
 
-#: views/notifications.tpl:151
+#: views/notifications.tpl:148
 msgid "User key"
 msgstr "User key"
 
-#: views/notifications.tpl:162
+#: views/notifications.tpl:159
 msgid "Telegram"
 msgstr "Telegram"
 
-#: views/notifications.tpl:172
+#: views/notifications.tpl:169
 msgid "Bot Token"
 msgstr "Bot Token"
 
-#: views/notifications.tpl:176
+#: views/notifications.tpl:173
 msgid "Username"
 msgstr "Username"
 
-#: views/notifications.tpl:180
+#: views/notifications.tpl:177
 msgid "Proxy"
 msgstr "Proxy"
 
-#: views/notifications.tpl:191
+#: views/notifications.tpl:188
 msgid "Webhook"
 msgstr "Webhook"
 
-#: views/notifications.tpl:201
+#: views/notifications.tpl:198
 msgid "Full post url"
 msgstr "Full post url"
 
-#: views/notifications.tpl:212
+#: views/notifications.tpl:209
 msgid "Messages"
 msgstr "Messages"
 
-#: views/notifications.tpl:223
+#: views/notifications.tpl:220
 msgid "Trigger"
 msgstr "Trigger"
 
-#: views/notifications.tpl:229
+#: views/notifications.tpl:226
 msgid "Message"
 msgstr "Message"
 
-#: views/notifications.tpl:232
+#: views/notifications.tpl:229
 msgid "Service"
 msgstr "Service"
 

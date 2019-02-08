@@ -160,8 +160,14 @@ class terrariumHCSR04Sensor(terrariumGPIOSensor):
       sleep(0.00001)
       GPIO.output(terrariumUtils.to_BCM_port_number(gpio_pins[0]), False)
       pulse_start = time()
+      starttime = pulse_start
       while GPIO.input(terrariumUtils.to_BCM_port_number(gpio_pins[1])) == 0:
         pulse_start = time()
+        # Somehow, sometimes this will end in an endless loop. The value will never go to '0' (zero). So wrong measurement and return none...
+        if pulse_start - starttime > 2:
+          logger.warn('Sensor {} \'{}\' is failing to get in the right state. Abort!'.format(self.get_type(),self.get_name()))
+          return data
+
       pulse_end = time()
       while GPIO.input(terrariumUtils.to_BCM_port_number(gpio_pins[1])) == 1:
         pulse_end = time()
