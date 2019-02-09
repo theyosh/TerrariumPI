@@ -534,8 +534,7 @@ class terrariumDisplaySourceException(Exception):
 
 # Factory class
 class terrariumDisplay(object):
-
-  DISPLAYS = {terrariumLCD16x2,
+  DISPLAYS = [terrariumLCD16x2,
               terrariumLCD20x4,
               terrariumLCDSerial16x2,
               terrariumLCDSerial20x4,
@@ -546,7 +545,7 @@ class terrariumDisplay(object):
               terrariumOLEDSSD1327,
               terrariumOLEDSSD1331,
               terrariumOLEDSSD1351,
-              terrariumOLEDSH1106 }
+              terrariumOLEDSH1106 ]
 
   def __new__(self, display_id, hardware_type, address, name = '', title = False):
     for display in terrariumDisplay.DISPLAYS:

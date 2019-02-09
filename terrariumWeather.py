@@ -420,9 +420,9 @@ class terrariumWeatherSourceException(Exception):
 
 # Factory class
 class terrariumWeather(object):
-  SOURCES = {terrariumWeatherYRno,
+  SOURCES = [terrariumWeatherYRno,
              terrariumWeatherWunderground,
-             terrariumWeatherOpenWeathermap}
+             terrariumWeatherOpenWeathermap]
 
   def __new__(self,source, temperature_indicator, windspeed_indicator, callback = None):
     for weather_source in terrariumWeather.SOURCES:

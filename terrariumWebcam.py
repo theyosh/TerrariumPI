@@ -592,11 +592,11 @@ class terrariumWebcamRAWUpdateException(Exception):
 
 # Factory class
 class terrariumWebcam(object):
-  SOURCES = {terrariumWebcamRPI,
+  SOURCES = [terrariumWebcamRPI,
              terrariumWebcamUSB,
              terrariumWebcamRemote,
              terrariumWebcamRPILive,
-             terrariumWebcamHLSLive}
+             terrariumWebcamHLSLive]
 
   def __new__(self,webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
     for webcam_source in terrariumWebcam.SOURCES:

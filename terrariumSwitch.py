@@ -659,7 +659,7 @@ class terrariumPowerSwitch(object):
   OFF = False
   ON = True
 
-  POWER_SWITCHES = {terrariumPowerSwitchFTDI,
+  POWER_SWITCHES = [terrariumPowerSwitchFTDI,
                     terrariumPowerSwitchGPIO,
                     terrariumPowerSwitchGPIOInverse,
                     terrariumPowerSwitchEnergenieUSB,
@@ -668,7 +668,7 @@ class terrariumPowerSwitch(object):
                     terrariumPowerSwitchWeMo,
                     terrariumPowerSwitchRemote,
                     terrariumPowerDimmerPWM,
-                    terrariumPowerDimmerDC}
+                    terrariumPowerDimmerDC]
 
   def __new__(self, switch_id, hardware_type, address, name = '', callback = None):
     for powerswitch in terrariumPowerSwitch.POWER_SWITCHES:
