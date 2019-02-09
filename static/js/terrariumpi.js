@@ -968,6 +968,7 @@ function sensor_gauge(name, data) {
     }
     $('div#' + name + ' .x_title h2 .badge.bg-red').toggle(data.alarm);
     $('div#' + name + ' .x_title h2 .badge.bg-orange').toggle(data.error);
+    $('div#' + name + ' .x_title h2 .badge.bg-blue').toggle(data.exclude_avg);
   }
 }
 
@@ -1872,9 +1873,6 @@ function update_sensor(data) {
     // Remove dimmer row, else form submit is 'stuck' on hidden fields that have invalid patterns... :(
     content_row.find('.row.chirp_calibration').remove();
   }
-
-
-
 }
 
 function add_sensor_setting_row(data) {
@@ -2805,6 +2803,14 @@ $.fn.extend({
   }
 });
 
+function terrariumpi_select2_option(state){
+  console.log(state);
+  if (!state.id) {
+    return state.text;
+  }
+  return $('<div class="terrariumpi_select2_option" title="' + state.text + '">' + state.text + '</div>');
+}
+$.fn.select2.defaults.set("templateResult", terrariumpi_select2_option);
 // Start it all.....
 $(document).ready(function() {
   moment.locale(globals.language);
