@@ -55,7 +55,8 @@ class terrariumSensorSource(object):
     self.__current_value = None
     self.__erratic_errors = 0
     self.__last_update = 0
-    #self.__running = False
+
+    self.exclude_avg = False
 
     self.sensor_id = sensor_id
     self.notification = True
@@ -173,7 +174,8 @@ class terrariumSensorSource(object):
             'limit_max' : self.get_limit_max(),
             'max_diff' : self.get_max_diff(),
             'alarm' : self.get_alarm(),
-            'error' : not self.is_active()
+            'error' : not self.is_active(),
+            'exclude_avg' : self.get_exclude_avg()
             }
 
     return data
@@ -242,6 +244,12 @@ class terrariumSensorSource(object):
 
   def get_max_diff(self):
     return self.max_diff
+
+  def set_exclude_avg(self,value):
+    self.exclude_avg = terrariumUtils.is_true(value)
+
+  def get_exclude_avg(self):
+    return self.exclude_avg
 
   def get_indicator(self):
     # Use a callback from terrariumEngine for 'realtime' updates
