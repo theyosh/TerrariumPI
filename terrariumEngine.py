@@ -243,7 +243,8 @@ class terrariumEngine(object):
     if starting_up:
       self.power_switches = {}
       for power_switch in terrariumPowerSwitch.scan_power_switches(self.toggle_power_switch):
-        self.power_switches[power_switch.get_id()] = power_switch
+        if power_switch.get_id() not in self.power_switches:
+          self.power_switches[power_switch.get_id()] = power_switch
 
     for power_switch_config in power_switches_config:
       if power_switch_config['id'] in [None,'None',''] or power_switch_config['id'] not in self.power_switches:
