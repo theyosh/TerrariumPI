@@ -171,7 +171,8 @@ class terrariumEngine(object):
 
     seen_sensors = []
     for sensor in terrariumSensor.scan_sensors(self.__unit_type):
-      self.sensors[sensor.get_id()] = sensor
+      if sensor.get_id() not in self.sensors:
+        self.sensors[sensor.get_id()] = sensor
 
     for sensordata in sensor_config:
       if sensordata['id'] not in self.sensors:
@@ -212,6 +213,9 @@ class terrariumEngine(object):
         if 'temp_offset' in sensordata and sensordata['temp_offset'] is not None:
           sensor.set_temperature_offset_calibration(sensordata['temp_offset'])
 
+      if 'exclude_avg' in sensordata and sensordata['exclude_avg'] is not None:
+        sensor.set_exclude_avg(sensordata['exclude_avg'])
+
       seen_sensors.append(sensor.get_id())
 
 
@@ -239,7 +243,8 @@ class terrariumEngine(object):
     if starting_up:
       self.power_switches = {}
       for power_switch in terrariumPowerSwitch.scan_power_switches(self.toggle_power_switch):
-        self.power_switches[power_switch.get_id()] = power_switch
+        if power_switch.get_id() not in self.power_switches:
+          self.power_switches[power_switch.get_id()] = power_switch
 
     for power_switch_config in power_switches_config:
       if power_switch_config['id'] in [None,'None',''] or power_switch_config['id'] not in self.power_switches:
@@ -624,7 +629,7 @@ class terrariumEngine(object):
       for sensorid in self.sensors:
         # Filter based on sensor type
         # Exclude Chirp light sensors for average calculation in favour of Lux measurements
-        if filtertype is None or (filtertype == 'average' and not (self.sensors[sensorid].get_sensor_type() == 'light' and self.sensors[sensorid].get_type() == 'chirp')) or filtertype == self.sensors[sensorid].get_sensor_type():
+        if filtertype is None or (filtertype == 'average' and not (self.sensors[sensorid].get_exclude_avg() or (self.sensors[sensorid].get_sensor_type() == 'light' and self.sensors[sensorid].get_type() == 'chirp'))) or filtertype == self.sensors[sensorid].get_sensor_type():
           data.append(self.sensors[sensorid].get_data())
 
     if 'average' == filtertype or len(parameters) == 2 and parameters[1] == 'average':
@@ -1175,10 +1180,10 @@ class terrariumEngine(object):
     else:
       exclude_ids = None
       # We exclude Chirp light sensors for average calculations as they are less reliable
-      if 'sensors' in parameters and 'average' in parameters and 'light' in parameters:
+      if 'sensors' in parameters and 'average' in parameters:
         exclude_ids = []
         for sensorid in self.sensors:
-          if 'chirp' == self.sensors[sensorid].get_type() and 'light' == self.sensors[sensorid].get_sensor_type():
+          if self.sensors[sensorid].get_exclude_avg() or ('chirp' == self.sensors[sensorid].get_type() and 'light' == self.sensors[sensorid].get_sensor_type()):
             exclude_ids.append(self.sensors[sensorid].get_id())
 
       data = self.collector.get_history(parameters=parameters,exclude_ids=exclude_ids)

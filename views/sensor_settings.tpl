@@ -96,7 +96,7 @@
                       </div>
                       <div class="x_content">
                         <div class="row">
-                          <div class="col-md-1 col-sm-2 col-xs-6 form-group">
+                          <div class="col-md-2 col-sm-2 col-xs-6 form-group">
                             <label for="sensor_[nr]_hardwaretype">{{_('Hardware')}}</label>
                             <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{!translations.get_translation('sensor_field_hardware')}}">
                               <select class="form-control" name="sensor_[nr]_hardwaretype" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
@@ -123,12 +123,7 @@
                               </select>
                             </div>
                           </div>
-                          <div class="col-md-2 col-sm-4 col-xs-6 form-group">
-                            <label for="sensor_[nr]_address">{{_('Address')}}</label>
-                            <input class="form-control" name="sensor_[nr]_address" placeholder="{{_('Address')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_address')}}">
-                            <input class="form-control" name="sensor_[nr]_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
-                          </div>
-                          <div class="col-md-1 col-sm-2 col-xs-12 form-group">
+                          <div class="col-md-2 col-sm-2 col-xs-6 form-group">
                             <label for="sensor_[nr]_type">{{_('Type')}}</label>
                             <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{!translations.get_translation('sensor_field_type')}}">
                               <select class="form-control" name="sensor_[nr]_type" tabindex="-1" placeholder="{{_('Select an option')}}" required="required">
@@ -148,31 +143,36 @@
                               </select>
                             </div>
                           </div>
-                          <div class="col-md-2 col-sm-4 col-xs-12 form-group">
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                            <label for="sensor_[nr]_address">{{_('Address')}}</label>
+                            <input class="form-control" name="sensor_[nr]_address" placeholder="{{_('Address')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_address')}}">
+                            <input class="form-control" name="sensor_[nr]_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
+                          </div>
+                          <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                             <label for="sensor_[nr]_name">{{_('Name')}}</label>
                             <input class="form-control" name="sensor_[nr]_name" placeholder="{{_('Name')}}" type="text" required="required" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{!translations.get_translation('sensor_field_name')}}">
                           </div>
-                          <div class="col-md-1 col-sm-2 col-xs-6 form-group">
+                          <div class="col-md-2 col-sm-2 col-xs-6 form-group">
                             <label for="sensor_[nr]_alarm_min">{{_('Alarm min')}}</label>
                             <input class="form-control" name="sensor_[nr]_alarm_min" placeholder="{{_('Alarm min')}}" type="text" required="required" pattern="[0-9\.-]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_alarm_min')}}">
                           </div>
-                          <div class="col-md-1 col-sm-2 col-xs-6 form-group">
+                          <div class="col-md-2 col-sm-2 col-xs-6 form-group">
                             <label for="sensor_[nr]_alarm_max">{{_('Alarm max')}}</label>
                             <input class="form-control" name="sensor_[nr]_alarm_max" placeholder="{{_('Alarm max')}}" type="text" required="required" pattern="[0-9\.-]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_alarm_max')}}">
                           </div>
-                          <div class="col-md-1 col-sm-2 col-xs-6 form-group">
+                          <div class="col-md-2 col-sm-2 col-xs-6 form-group">
                             <label for="sensor_[nr]_min">{{_('Limit min')}}</label>
                             <input class="form-control" name="sensor_[nr]_limit_min" placeholder="{{_('Limit min')}}" type="text" required="required" pattern="[0-9\.-]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_limit_min')}}">
                           </div>
-                          <div class="col-md-1 col-sm-2 col-xs-6 form-group">
+                          <div class="col-md-2 col-sm-2 col-xs-6 form-group">
                             <label for="sensor_[nr]_max">{{_('Limit max')}}</label>
                             <input class="form-control" name="sensor_[nr]_limit_max" placeholder="{{_('Limit max')}}" type="text" required="required" pattern="[0-9\.-]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_limit_max')}}">
                           </div>
-                          <div class="col-md-1 col-sm-2 col-xs-6 form-group">
+                          <div class="col-md-2 col-sm-2 col-xs-6 form-group">
                             <label for="sensor_[nr]_max_diff">{{_('Max diff')}}</label>
                             <input class="form-control" name="sensor_[nr]_max_diff" placeholder="{{_('Max diff')}}" type="text" required="required" pattern="[0-9\.-]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_max_diff')}}">
                           </div>
-                          <div class="col-md-1 col-sm-2 col-xs-6 form-group">
+                          <div class="col-md-2 col-sm-2 col-xs-6 form-group">
                             <label for="sensor_[nr]_current">{{_('Current')}}</label>
                             <input class="form-control" name="sensor_[nr]_current" placeholder="{{_('Current')}}" readonly="readonly" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_current')}}">
                           </div>
