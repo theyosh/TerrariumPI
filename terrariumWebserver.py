@@ -71,19 +71,22 @@ class terrariumWebserver(object):
 
     def decorator(func):
 
-        @functools.wraps(func)
-        def wrapper(*a, **ka):
-            user, password = request.auth or (None, None)
-            if required or terrariumUtils.is_true(self.__terrariumEngine.config.get_system()['always_authenticate']):
+      @functools.wraps(func)
+      def wrapper(*a, **ka):
 
-              if user is None or not check(user, password):
-                  err = HTTPError(401, text)
-                  err.add_header('WWW-Authenticate', 'Basic realm="%s"' % realm)
-                  return err
+        if required or terrariumUtils.is_true(self.__terrariumEngine.config.get_system()['always_authenticate']):
+          user, password = request.auth or (None, None)
+          ip = request.remote_addr if request.get_header('X-Real-Ip') is None else request.get_header('X-Real-Ip')
+          if user is None or not check(user, password):
+            err = HTTPError(401, text)
+            err.add_header('WWW-Authenticate', 'Basic realm="%s"' % realm)
+            if user is not None or password is not None:
+              logger.warning('Incorrect login detected using username \'{}\' and password \'{}\' from ip {}'.format(user,password,ip))
+            return err
 
-            return func(*a, **ka)
+        return func(*a, **ka)
 
-        return wrapper
+      return wrapper
 
     return decorator
 
