@@ -297,8 +297,8 @@ class terrariumCollector(object):
                     t1.timestamp as timestamp,
                     t2.timestamp as timestamp2,
                     t2.timestamp-t1.timestamp AS duration_in_seconds,
-                   (t2.timestamp-t1.timestamp)          * (t1.state / 100.0) * t1.power_wattage AS total_wattage,
-                  ((t2.timestamp-t1.timestamp) / 60.0)  * (t1.state / 100.0) * t1.water_flow AS total_water
+                   (t2.timestamp-t1.timestamp)          * t1.power_wattage AS total_wattage,
+                  ((t2.timestamp-t1.timestamp) / 60.0)  * t1.water_flow AS total_water
                 FROM switch_data AS t1
                 LEFT JOIN switch_data AS t2
                 ON t2.id = t1.id
@@ -401,8 +401,8 @@ class terrariumCollector(object):
                    t1.id AS id,
                    t1.timestamp AS timestamp,
                    IFNULL(t2.timestamp, ''' + str(starttime) + ''') as timestamp2,
-                   (t1.state / 100.0) * t1.power_wattage AS power_wattage,
-                   (t1.state / 100.0) * t1.water_flow AS water_flow,
+                   t1.power_wattage AS power_wattage,
+                   t1.water_flow AS water_flow,
                    t1.state AS state
                  FROM switch_data AS t1
                  LEFT JOIN switch_data AS t2

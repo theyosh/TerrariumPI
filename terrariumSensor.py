@@ -462,6 +462,14 @@ class terrariumSensor(object):
     raise terrariumSensorTypeException('Power switch of type \'{}\' is unknown. We cannot controll this sensor.'.format(hardware_type))
 
   @staticmethod
+  def valid_hardware_types2():
+    data = {}
+    for sensor in terrariumSensor.SENSORS:
+      data[sensor.TYPE] = sensor.VALID_SENSOR_TYPES
+
+    return data
+
+  @staticmethod
   def valid_hardware_types():
     data = {}
     for sensor in terrariumSensor.SENSORS:

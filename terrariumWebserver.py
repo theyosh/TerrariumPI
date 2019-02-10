@@ -3,7 +3,6 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 import gettext
-#gettext.install('terrariumpi', 'locales/', str=True)
 gettext.install('terrariumpi', 'locales/')
 
 from bottle import BaseRequest, Bottle, request, abort, static_file, template, error, response, auth_basic, HTTPError

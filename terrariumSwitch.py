@@ -33,7 +33,7 @@ monkey.patch_all()
 class terrariumPowerSwitchSource(object):
   TYPE = None
 
-  def __init__(self, switchid, address, name = '', callback = None):
+  def __init__(self, switchid, address, name = '', prev_state = None, callback = None):
     logger.info('Initialising \'{}\' power switch object'.format(self.get_type()))
     self.power_wattage = 0.0
     self.water_flow = 0.0
@@ -51,7 +51,8 @@ class terrariumPowerSwitchSource(object):
     self.state = None
     if self.get_type() != terrariumPowerSwitchWeMo.TYPE:
       # Do not toggle off Wemo switches during scanning.....
-      self.set_state(terrariumPowerSwitch.OFF,True)
+      prev_state = prev_state if prev_state is not None else terrariumPowerSwitch.OFF
+      self.set_state(prev_state,True)
 
     logger.info('Loaded power switch \'{}\' with values: power {}W and waterflow {}L/s'.format(self.get_name(),self.get_power_wattage(),self.get_water_flow()))
 
@@ -135,7 +136,7 @@ class terrariumPowerSwitchSource(object):
   def load_hardware(self):
     pass
 
-  def set_hardware_state(self):
+  def set_hardware_state(self, value, force = False):
     pass
 
   def get_hardware_state(self):
@@ -152,7 +153,7 @@ class terrariumPowerSwitchSource(object):
     if self.get_state() is not state or terrariumUtils.is_true(force):
       try:
         old_state = self.get_state()
-        self.set_hardware_state(state)
+        self.set_hardware_state(state,force)
         self.state = state
         changed = True
 
@@ -249,7 +250,7 @@ class terrariumPowerSwitchFTDI(terrariumPowerSwitchSource):
     if value in terrariumPowerSwitchFTDI.BITBANG_ADDRESSES:
       self.address = value
 
-  def set_hardware_state(self, state):
+  def set_hardware_state(self, state, force = False):
     if 'BitBang' == self.__device_type:
       with BitBangDevice(self.__device) as device:
         device.baudrate = 9600
@@ -275,7 +276,7 @@ class terrariumPowerSwitchGPIO(terrariumPowerSwitchSource):
   def stop(self):
     GPIO.cleanup(terrariumUtils.to_BCM_port_number(self.get_address()))
 
-  def set_hardware_state(self, state):
+  def set_hardware_state(self, state, force = False):
     if self.get_type() == terrariumPowerSwitchGPIO.TYPE:
       GPIO.output(terrariumUtils.to_BCM_port_number(self.get_address()), ( GPIO.HIGH if state is terrariumPowerSwitch.ON else GPIO.LOW ))
 
@@ -289,7 +290,7 @@ class terrariumPowerSwitchWeMo(terrariumPowerSwitchSource):
   TYPE = 'wemo'
   URL = 'http://{}:{}/setup.xml'
 
-  def set_hardware_state(self, state):
+  def set_hardware_state(self, state, force = False):
     port = pywemo.ouimeaux_device.probe_wemo(self.get_address())
     device = pywemo.discovery.device_from_description(terrariumPowerSwitchWeMo.URL.format(self.get_address(), port), None)
     if state is terrariumPowerSwitch.ON:
@@ -329,7 +330,7 @@ class terrariumPowerSwitchEnergenieUSB(terrariumPowerSwitchSource):
     if self.__device < 0:
       self.__device = 0
 
-  def set_hardware_state(self, state):
+  def set_hardware_state(self, state, force = False):
     address = int(self.get_address()) % 4
     if address == 0:
       address = 4
@@ -380,7 +381,7 @@ class terrariumPowerSwitchEnergenieLAN(terrariumPowerSwitchSource):
       except Exception as ex:
         logger.exception('Could not login to the Energenie LAN device %s at location %s. Error status %s' % (self.get_name(),self.get_address(),ex))
 
-  def set_hardware_state(self, state):
+  def set_hardware_state(self, state, force = False):
     changed = True
 
     if self.__device is None:
@@ -423,7 +424,7 @@ class terrariumPowerSwitchEnergenieRF(terrariumPowerSwitchSource):
   def load_hardware(self):
     self.__device = Energenie(int(self.get_address()))
 
-  def set_hardware_state(self, state):
+  def set_hardware_state(self, state, force = False):
     if state:
       self.__device.on()
     else:
@@ -439,7 +440,7 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
   DIMMER_MIN_TIMEOUT = 0.1
   DIMMER_MIN_STEP    = 0.1
 
-  def __init__(self, switchid, address, name = '', callback = None):
+  def __init__(self, switchid, address, name = '', prev_state = None, callback = None):
     self.duration       = 0.0
     self.step           = 0.0
     self.on_duration    = 0.0
@@ -448,7 +449,7 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
     self.off_percentage = 0.0
 
     self.__dimmer_state = 0.0
-    super(terrariumPowerDimmerSource,self).__init__(switchid, address, name, callback)
+    super(terrariumPowerDimmerSource,self).__init__(switchid, address, name, prev_state, callback)
 
   def get_state(self):
     return self.__dimmer_state
@@ -530,7 +531,7 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
   def get_dimmer_off_percentage(self):
     return self.off_percentage
 
-  def set_hardware_state(self,value):
+  def set_hardware_state(self, value, force = False):
     if not self.__dimmer_running:
       duration = self.get_dimmer_duration()
       # State 100 = full on which means 0 dim.
@@ -542,6 +543,8 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
         value = self.get_dimmer_off_percentage()
         duration = self.get_dimmer_off_duration()
 
+      if force:
+        duration = 0
       _thread.start_new_thread(self.__dim_switch, (value,duration))
 
     return True
@@ -634,7 +637,7 @@ class terrariumPowerDimmerDC(terrariumPowerDimmerSource):
 class terrariumPowerSwitchRemote(terrariumPowerSwitchSource):
   TYPE = 'remote'
 
-  def set_hardware_state(self, state):
+  def set_hardware_state(self, state, force = False):
     pass
 
   def get_hardware_state(self):
@@ -670,10 +673,10 @@ class terrariumPowerSwitch(object):
                     terrariumPowerDimmerPWM,
                     terrariumPowerDimmerDC]
 
-  def __new__(self, switch_id, hardware_type, address, name = '', callback = None):
+  def __new__(self, switch_id, hardware_type, address, name = '', prev_state = None, callback = None):
     for powerswitch in terrariumPowerSwitch.POWER_SWITCHES:
       if hardware_type == powerswitch.TYPE:
-        return powerswitch(switch_id, address, name, callback)
+        return powerswitch(switch_id, address, name, prev_state, callback)
 
     raise terrariumPowerSwitchTypeException('Power switch of type {} is unknown. We cannot controll this power switch.'.format(hardware_type))
 
