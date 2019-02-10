@@ -432,9 +432,9 @@ class terrariumNotification(terrariumSingleton):
       self.update_twitter_profile_image()
 
   def set_notification_leds(self,green,orange,red):
-    self.__notification_leds['info']['pin'] = terrariumUtils.to_BCM_port_number(green)
-    self.__notification_leds['warning']['pin'] = terrariumUtils.to_BCM_port_number(orange)
-    self.__notification_leds['error']['pin'] = terrariumUtils.to_BCM_port_number(red)
+    self.__notification_leds['info']['pin'] = None if green is None else terrariumUtils.to_BCM_port_number(green)
+    self.__notification_leds['warning']['pin'] = None if orange is None else terrariumUtils.to_BCM_port_number(orange)
+    self.__notification_leds['error']['pin'] = None if red is None else terrariumUtils.to_BCM_port_number(red)
 
     # Initialize leds and run them all for 1 second to test
     GPIO.setmode(GPIO.BCM)
