@@ -20,6 +20,12 @@ try:
 except ImportError as ex:
   import _thread
 
+try:
+  from meross_iot.api import MerossHttpClient, UnauthorizedException
+except ImportError as ex:
+  # Python 2 does not support Meross XXX Power Switches
+  pass
+
 from terrariumUtils import terrariumUtils, terrariumTimer
 
 # Dirty hack to include someone his code... to lazy to make it myself :)
@@ -49,7 +55,7 @@ class terrariumPowerSwitchSource(object):
     self.load_hardware()
 
     self.state = None
-    if self.get_type() != terrariumPowerSwitchWeMo.TYPE:
+    if self.get_type() not in [terrariumPowerSwitchWeMo.TYPE, terrariumPowerSwitchMSS425E.TYPE]:
       # Do not toggle off Wemo switches during scanning.....
       prev_state = prev_state if prev_state is not None else terrariumPowerSwitch.OFF
       self.set_state(prev_state,True)
@@ -313,12 +319,13 @@ class terrariumPowerSwitchWeMo(terrariumPowerSwitchSource):
     return terrariumPowerSwitch.ON if terrariumUtils.is_true(data) else terrariumPowerSwitch.OFF
 
   @staticmethod
-  def scan_power_switches(callback=None):
+  def scan_power_switches(callback=None, **kwargs):
     for device in pywemo.discover_devices():
       yield terrariumPowerSwitch(md5((terrariumPowerSwitchWeMo.TYPE + device.serialnumber).encode()).hexdigest(),
                                  terrariumPowerSwitchWeMo.TYPE,
                                  device.host,
                                  device.name,
+                                 None,
                                  callback)
 
 class terrariumPowerSwitchEnergenieUSB(terrariumPowerSwitchSource):
@@ -650,6 +657,237 @@ class terrariumPowerSwitchRemote(terrariumPowerSwitchSource):
 
     return terrariumPowerSwitch.ON if terrariumUtils.is_true(data) else terrariumPowerSwitch.OFF
 
+class terrariumPowerSwitchMSS425E():
+  TYPE = 'mss425e'
+
+  '''
+  {'all':{
+    'digest':{
+       'togglex':[
+          {
+             'onoff':0,
+             'lmTime':1549815186,
+             'channel':0
+          },
+          {
+             'onoff':0,
+             'lmTime':1549815186,
+             'channel':1
+          },
+          {
+             'onoff':0,
+             'lmTime':1549815186,
+             'channel':2
+          },
+          {
+             'onoff':0,
+             'lmTime':1549815186,
+             'channel':3
+          },
+          {
+             'onoff':0,
+             'lmTime':1549815186,
+             'channel':4
+          }
+       ],
+       'timerx':[
+
+       ],
+       'triggerx':[
+
+       ]
+    },
+    'system':{
+       'online':{
+          'status':1
+       },
+       'hardware':{
+          'subType':'eu',
+          'version':'2.0.0',
+          'macAddress':'34:29:8f:18:90:c4',
+          'type':'mss425e',
+          'uuid':'1812018909413029087234298f1890c4',
+          'chipType':'mt7682'
+       },
+       'time':{
+          'timestamp':1549816557,
+          'timezone':'Europe/Bucharest',
+          'timeRule':[
+             [
+                1540688400,
+                7200,
+                0
+             ],
+             [
+                1553994000,
+                10800,
+                1
+             ],
+             [
+                1572138000,
+                7200,
+                0
+             ],
+             [
+                1585443600,
+                10800,
+                1
+             ],
+             [
+                1603587600,
+                7200,
+                0
+             ],
+             [
+                1616893200,
+                10800,
+                1
+             ],
+             [
+                1635642000,
+                7200,
+                0
+             ],
+             [
+                1648342800,
+                10800,
+                1
+             ],
+             [
+                1667091600,
+                7200,
+                0
+             ],
+             [
+                1679792400,
+                10800,
+                1
+             ],
+             [
+                1698541200,
+                7200,
+                0
+             ],
+             [
+                1711846800,
+                10800,
+                1
+             ],
+             [
+                1729990800,
+                7200,
+                0
+             ],
+             [
+                1743296400,
+                10800,
+                1
+             ],
+             [
+                1761440400,
+                7200,
+                0
+             ],
+             [
+                1774746000,
+                10800,
+                1
+             ],
+             [
+                1792890000,
+                7200,
+                0
+             ],
+             [
+                1806195600,
+                10800,
+                1
+             ],
+             [
+                1824944400,
+                7200,
+                0
+             ],
+             [
+                1837645200,
+                10800,
+                1
+             ]
+          ]
+       },
+       'firmware':{
+          'wifiMac':'c4:6e:1f:69:e9:9a',
+          'compileTime':'2018/10/19 16:49:21 GMT +08:00',
+          'innerIp':'192.168.0.106',
+          'server':'iot.meross.com',
+          'port':2001,
+          'version':'2.1.3',
+          'userId':176650
+       }
+    }
+ }
+  '''
+
+  def __init__(self, switch_id, address, name = '', prev_state = None, callback = None):
+    self.__channel_id = address[1]
+    self.__device = address[0]
+
+    address = self.__channelid
+    super(terrariumPowerSwitchMSS425E,self).__init__(switch_id, address, name, prev_state, callback)
+
+  def set_hardware_state(self, state, force = False):
+    if state is terrariumPowerSwitch.ON:
+      self.__device.turn_on_channel(self.__channel_id)
+    else:
+      self.__device.turn_off_channel(self.__channel_id)
+
+  def get_hardware_state(self):
+    data = None
+
+    try:
+      tmpdata = self.__device.get_sys_data()
+      if tmpdata['all']['system']['hardware']['type'] == terrariumPowerSwitchMSS425E.TYPE:
+        for channel_data in data['all']['digest']['togglex']:
+          if self.__channel_id == channel_data['channel']:
+            data = channel_data['onoff']
+            break
+
+    except Exception as ex:
+      print('Get hardware ex')
+      print(ex)
+
+    return terrariumPowerSwitch.ON if terrariumUtils.is_true(data) else terrariumPowerSwitch.OFF
+
+  @staticmethod
+  def scan_power_switches(callback=None, **kwargs):
+    if '' == kwargs['merros_username'] or '' == kwargs['merros_password']:
+      return
+
+    try:
+      httpHandler = MerossHttpClient(email=kwargs['merros_username'], password=kwargs['merros_password'])
+
+      devices = httpHandler.list_supported_devices()
+      for counter, device in enumerate(devices):
+        data = device.get_sys_data()
+
+        try:
+          if data['all']['system']['hardware']['type'] == terrariumPowerSwitchMSS425E.TYPE:
+            for channel_data in data['all']['digest']['togglex']:
+              if channel_data['channel'] > 0:
+                yield terrariumPowerSwitch(md5((terrariumPowerSwitchMSS425E.TYPE + data['all']['system']['hardware']['macAddress'] + channel_data['channel']).encode()).hexdigest(),
+                                           terrariumPowerSwitchMSS425E.TYPE,
+                                           (device,channel_data['channel']),
+                                           'Channel {}'.format(channel_data['channel']),
+                                           None,
+                                           callback)
+
+        except Exception as ex:
+          print('Scan error in terrariumPowerSwitchMSS425E')
+          print(ex)
+
+    except UnauthorizedException as ex:
+      logger.error('Authentication error with Merros cloud for \'{}\' type power switch. Please check username and password.'.format(terrariumPowerSwitchMSS425E.TYPE))
+
 class terrariumPowerSwitchTypeException(TypeError):
   '''There is a problem with loading a hardware switch. Invalid hardware type.'''
 
@@ -673,6 +911,10 @@ class terrariumPowerSwitch(object):
                     terrariumPowerDimmerPWM,
                     terrariumPowerDimmerDC]
 
+  if sys.version_info >= (3, 3):
+    # Merros IoT library needs Python 3.3+
+    POWER_SWITCHES.append(terrariumPowerSwitchMSS425E)
+
   def __new__(self, switch_id, hardware_type, address, name = '', prev_state = None, callback = None):
     for powerswitch in terrariumPowerSwitch.POWER_SWITCHES:
       if hardware_type == powerswitch.TYPE:
@@ -689,10 +931,10 @@ class terrariumPowerSwitch(object):
     return data
 
   @staticmethod
-  def scan_power_switches(callback=None):
+  def scan_power_switches(callback=None, **kwargs):
     for power_switch_device in terrariumPowerSwitch.POWER_SWITCHES:
       try:
-        for power_switch in power_switch_device.scan_power_switches(callback):
+        for power_switch in power_switch_device.scan_power_switches(callback, **kwargs):
           yield power_switch
       except AttributeError as ex:
         logger.debug('Device \'{}\' does not support hardware scanning'.format(power_switch_device.TYPE))
