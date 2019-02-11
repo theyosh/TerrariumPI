@@ -250,7 +250,7 @@ class terrariumEngine(object):
         prev_state[switch] = prev_data['switches'][switch]['power_wattage'][-1:][0][1]
 
       self.power_switches = {}
-      for power_switch in terrariumPowerSwitch.scan_power_switches(self.toggle_power_switch):
+      for power_switch in terrariumPowerSwitch.scan_power_switches(self.toggle_power_switch,**self.config.get_merros_cloud()):
         if power_switch.get_id() not in self.power_switches:
           self.power_switches[power_switch.get_id()] = power_switch
 
@@ -1183,12 +1183,13 @@ class terrariumEngine(object):
   def get_system_config(self):
     data = self.config.get_system()
     data['windspeed_indicator'] = self.get_windspeed_indicator()
+    data.update(self.config.get_merros_cloud())
 
     del(data['password'])
     return data
 
   def set_system_config(self,data):
-    return self.config.set_system(data)
+    return self.config.set_system(data) and self.config.set_merros_cloud(data)
 
   # End system functions part
 
