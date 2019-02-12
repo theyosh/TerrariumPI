@@ -853,7 +853,7 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
       print('tmpdata')
       print(tmpdata)
       if tmpdata['all']['system']['hardware']['type'] == terrariumPowerSwitchMSS425E.TYPE:
-        for channel_data in data['all']['digest']['togglex']:
+        for channel_data in tmpdata['all']['digest']['togglex']:
           if self.__channel_id == channel_data['channel']:
             data = channel_data['onoff']
             break
