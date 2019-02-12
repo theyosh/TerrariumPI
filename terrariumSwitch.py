@@ -834,8 +834,7 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
     self.__channel_id = address[1]
     self.__device = address[0]
 
-    address = self.__channel_id
-    super(terrariumPowerSwitchMSS425E,self).__init__(switch_id, address, name, prev_state, callback)
+    super(terrariumPowerSwitchMSS425E,self).__init__(switch_id, self.__channel_id, name, prev_state, callback)
 
   def set_hardware_state(self, state, force = False):
     if state is terrariumPowerSwitch.ON:
@@ -846,8 +845,13 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
   def get_hardware_state(self):
     data = None
 
+    print('Hardware state channel: {}'.format(self.__channel_id))
+    print(self.__device)
+
     try:
       tmpdata = self.__device.get_sys_data()
+      print('tmpdata')
+      print(tmpdata)
       if tmpdata['all']['system']['hardware']['type'] == terrariumPowerSwitchMSS425E.TYPE:
         for channel_data in data['all']['digest']['togglex']:
           if self.__channel_id == channel_data['channel']:
