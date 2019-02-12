@@ -19,9 +19,6 @@ span.select2.select2-container {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.modal {
-  z-index: 99999;
-}
 input.form-control:focus {
   box-shadow: 0px 0px 5px 1px #cccccc !important;
 }

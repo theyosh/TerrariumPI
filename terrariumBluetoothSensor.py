@@ -94,20 +94,28 @@ class terrariumMiFloraSensor(terrariumSensorSource):
 
   @staticmethod
   def scan_sensors(callback = None):
+    # Due to multiple bluetooth dongles, we are looping 10 times to see which devices can scan. Exit after first success
     logger.info('Scanning {} seconds for MiFlora bluetooth devices'.format(terrariumMiFloraSensor.__SCANTIME))
+    ok = False
+    for counter in range(10):
+      try:
+        for device in Scanner(counter).scan(terrariumMiFloraSensor.__SCANTIME):
+          if device.rssi > terrariumMiFloraSensor.__MIN_DB and device.getValueText(9) is not None and device.getValueText(9).lower() in ['flower mate','flower care']:
+            address = device.addr
+            device = None
+            logger.info('Found MiFlora bluetooth device at address {}'.format(address))
+            ok = True
+            for sensor_type in terrariumMiFloraSensor.VALID_SENSOR_TYPES:
+              yield terrariumMiFloraSensor(None,
+                                           sensor_type,
+                                           address,
+                                           callback_indicator = callback)
 
-    try:
-      for device in Scanner().scan(terrariumMiFloraSensor.__SCANTIME):
-        if device.rssi > terrariumMiFloraSensor.__MIN_DB and device.getValueText(9) is not None and device.getValueText(9).lower() in ['flower mate','flower care']:
-          address = device.addr
-          device = None
-          logger.info('Found MiFlora bluetooth device at address {}'.format(address))
-          for sensor_type in terrariumMiFloraSensor.VALID_SENSOR_TYPES:
-            yield terrariumMiFloraSensor(None,
-                                         sensor_type,
-                                         address,
-                                         callback_indicator = callback)
-    except Exception as ex:
-      if 'Failed to connect to peripheral' not in str(ex):
-        print(ex)
-        logger.warning('Bluetooth scanning is not enabled for normal users or there are zero Bluetooth LE devices available.... bluetooth is disabled!')
+        # Done here...
+        break
+
+      except Exception as ex:
+        pass
+
+    if not ok:
+      logger.warning('Bluetooth scanning is not enabled for normal users or there are zero Bluetooth LE devices available.... bluetooth is disabled!')
