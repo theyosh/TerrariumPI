@@ -834,7 +834,7 @@ class terrariumPowerSwitchMSS425E():
     self.__channel_id = address[1]
     self.__device = address[0]
 
-    address = self.__channelid
+    address = self.__channel_id
     super(terrariumPowerSwitchMSS425E,self).__init__(switch_id, address, name, prev_state, callback)
 
   def set_hardware_state(self, state, force = False):
