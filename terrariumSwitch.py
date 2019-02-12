@@ -660,177 +660,7 @@ class terrariumPowerSwitchRemote(terrariumPowerSwitchSource):
 class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
   TYPE = 'mss425e'
 
-  '''
-  {'all':{
-    'digest':{
-       'togglex':[
-          {
-             'onoff':0,
-             'lmTime':1549815186,
-             'channel':0
-          },
-          {
-             'onoff':0,
-             'lmTime':1549815186,
-             'channel':1
-          },
-          {
-             'onoff':0,
-             'lmTime':1549815186,
-             'channel':2
-          },
-          {
-             'onoff':0,
-             'lmTime':1549815186,
-             'channel':3
-          },
-          {
-             'onoff':0,
-             'lmTime':1549815186,
-             'channel':4
-          }
-       ],
-       'timerx':[
-
-       ],
-       'triggerx':[
-
-       ]
-    },
-    'system':{
-       'online':{
-          'status':1
-       },
-       'hardware':{
-          'subType':'eu',
-          'version':'2.0.0',
-          'macAddress':'34:29:8f:18:90:c4',
-          'type':'mss425e',
-          'uuid':'1812018909413029087234298f1890c4',
-          'chipType':'mt7682'
-       },
-       'time':{
-          'timestamp':1549816557,
-          'timezone':'Europe/Bucharest',
-          'timeRule':[
-             [
-                1540688400,
-                7200,
-                0
-             ],
-             [
-                1553994000,
-                10800,
-                1
-             ],
-             [
-                1572138000,
-                7200,
-                0
-             ],
-             [
-                1585443600,
-                10800,
-                1
-             ],
-             [
-                1603587600,
-                7200,
-                0
-             ],
-             [
-                1616893200,
-                10800,
-                1
-             ],
-             [
-                1635642000,
-                7200,
-                0
-             ],
-             [
-                1648342800,
-                10800,
-                1
-             ],
-             [
-                1667091600,
-                7200,
-                0
-             ],
-             [
-                1679792400,
-                10800,
-                1
-             ],
-             [
-                1698541200,
-                7200,
-                0
-             ],
-             [
-                1711846800,
-                10800,
-                1
-             ],
-             [
-                1729990800,
-                7200,
-                0
-             ],
-             [
-                1743296400,
-                10800,
-                1
-             ],
-             [
-                1761440400,
-                7200,
-                0
-             ],
-             [
-                1774746000,
-                10800,
-                1
-             ],
-             [
-                1792890000,
-                7200,
-                0
-             ],
-             [
-                1806195600,
-                10800,
-                1
-             ],
-             [
-                1824944400,
-                7200,
-                0
-             ],
-             [
-                1837645200,
-                10800,
-                1
-             ]
-          ]
-       },
-       'firmware':{
-          'wifiMac':'c4:6e:1f:69:e9:9a',
-          'compileTime':'2018/10/19 16:49:21 GMT +08:00',
-          'innerIp':'192.168.0.106',
-          'server':'iot.meross.com',
-          'port':2001,
-          'version':'2.1.3',
-          'userId':176650
-       }
-    }
- }
-  '''
-
   def __init__(self, switch_id, address, name = '', prev_state = None, callback = None):
-    print('Meross switch init')
-    print(address)
     self.__channel_id = address[1]
     self.__device = address[0]
 
@@ -845,8 +675,6 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
   def get_hardware_state(self):
     data = None
 
-    print('Hardware get state channel: {}'.format(self.__channel_id))
-
     try:
       tmpdata = self.__device.get_sys_data()
       if tmpdata['all']['system']['hardware']['type'] == terrariumPowerSwitchMSS425E.TYPE:
@@ -859,15 +687,12 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
       print('Get hardware ex')
       print(ex)
 
-    print('Return current state: {}'.format(terrariumPowerSwitch.ON if terrariumUtils.is_true(data) else terrariumPowerSwitch.OFF))
     return terrariumPowerSwitch.ON if terrariumUtils.is_true(data) else terrariumPowerSwitch.OFF
 
   @staticmethod
   def scan_power_switches(callback=None, **kwargs):
     if '' == kwargs['merros_username'] or '' == kwargs['merros_password']:
       return
-
-    print('Start scanning')
 
     try:
       httpHandler = MerossHttpClient(email=kwargs['merros_username'], password=kwargs['merros_password'])
@@ -880,7 +705,6 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
           if data['all']['system']['hardware']['type'] == terrariumPowerSwitchMSS425E.TYPE:
             for channel_data in data['all']['digest']['togglex']:
               if int(channel_data['channel']) > 0:
-                print('Add new channel: {}'.format(channel_data['channel']))
                 yield terrariumPowerSwitch(md5((terrariumPowerSwitchMSS425E.TYPE + data['all']['system']['hardware']['macAddress'] + str(channel_data['channel'])).encode()).hexdigest(),
                                            terrariumPowerSwitchMSS425E.TYPE,
                                            (device,int(channel_data['channel'])),
@@ -894,8 +718,6 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
 
     except UnauthorizedException as ex:
       logger.error('Authentication error with Merros cloud for \'{}\' type power switch. Please check username and password.'.format(terrariumPowerSwitchMSS425E.TYPE))
-
-    print('DONE scanning')
 
 class terrariumPowerSwitchTypeException(TypeError):
   '''There is a problem with loading a hardware switch. Invalid hardware type.'''
