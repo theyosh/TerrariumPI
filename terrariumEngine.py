@@ -246,8 +246,9 @@ class terrariumEngine(object):
       start = int(time.time())
       prev_data = self.collector.get_history(['switches'],start,start-120)
 
-      for switch in prev_data['switches']:
-        prev_state[switch] = prev_data['switches'][switch]['power_wattage'][-1:][0][1]
+      if 'switches' in prev_data:
+        for switch in prev_data['switches']:
+          prev_state[switch] = prev_data['switches'][switch]['power_wattage'][-1:][0][1]
 
       self.power_switches = {}
       for power_switch in terrariumPowerSwitch.scan_power_switches(self.toggle_power_switch):
