@@ -829,6 +829,8 @@ class terrariumPowerSwitchMSS425E():
   '''
 
   def __init__(self, switch_id, address, name = '', prev_state = None, callback = None):
+    print('Meross switch init')
+    print(address)
     self.__channel_id = address[1]
     self.__device = address[0]
 
