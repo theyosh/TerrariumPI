@@ -873,10 +873,10 @@ class terrariumPowerSwitchMSS425E():
         try:
           if data['all']['system']['hardware']['type'] == terrariumPowerSwitchMSS425E.TYPE:
             for channel_data in data['all']['digest']['togglex']:
-              if channel_data['channel'] > 0:
-                yield terrariumPowerSwitch(md5((terrariumPowerSwitchMSS425E.TYPE + data['all']['system']['hardware']['macAddress'] + channel_data['channel']).encode()).hexdigest(),
+              if int(channel_data['channel']) > 0:
+                yield terrariumPowerSwitch(md5((terrariumPowerSwitchMSS425E.TYPE + data['all']['system']['hardware']['macAddress'] + str(channel_data['channel'])).encode()).hexdigest(),
                                            terrariumPowerSwitchMSS425E.TYPE,
-                                           (device,channel_data['channel']),
+                                           (device,int(channel_data['channel'])),
                                            'Channel {}'.format(channel_data['channel']),
                                            None,
                                            callback)
