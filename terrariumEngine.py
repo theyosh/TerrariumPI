@@ -246,16 +246,31 @@ class terrariumEngine(object):
       start = int(time.time())
       prev_data = self.collector.get_history(['switches'],start,start-120)
 
+      logger.info('Loading excluding IDs')
+      exclude_ids = []
+      for switch_data in power_switches_config:
+        if 'exclude' in switch_data and terrariumUtils.is_true(switch_data['exclude']):
+          logger.info('Excluding power switch type {} with ID {}'.format(switch_data['hardwaretype'],switch_data['id']))
+          exclude_ids.append(switch_data['id'])
+
+      logger.info('Loaded {} excluding IDs: {}'.format(len(exclude_ids),exclude_ids))
+
       if 'switches' in prev_data:
         for switch in prev_data['switches']:
+          if switch in exclude_ids:
+            continue
+
           prev_state[switch] = prev_data['switches'][switch]['power_wattage'][-1:][0][1]
 
       self.power_switches = {}
       for power_switch in terrariumPowerSwitch.scan_power_switches(self.toggle_power_switch):
-        if power_switch.get_id() not in self.power_switches:
+        if power_switch.get_id() not in exclude_ids and power_switch.get_id() not in self.power_switches:
           self.power_switches[power_switch.get_id()] = power_switch
 
     for power_switch_config in power_switches_config:
+      if power_switch_config['id'] in exclude_ids:
+        continue
+
       prev_power_state = terrariumPowerSwitch.OFF
 
       if power_switch_config['id'] in prev_state and prev_state[power_switch_config['id']] > 0:
@@ -302,8 +317,9 @@ class terrariumEngine(object):
 
     if not starting_up:
       for power_switch_id in set(self.power_switches) - set(seen_power_switches):
-        # clean up old deleted switches
-        del(self.power_switches[power_switch_id])
+        # clean up old deleted switches only when NOT in the included list else we do not know that it SHOULD BE excluded
+        if power_switch_id not in exclude_ids:
+          del(self.power_switches[power_switch_id])
 
       # Should not be needed.... environment needs callback to engine to get this information
       self.environment.set_power_switches(self.power_switches)
