@@ -240,20 +240,20 @@ class terrariumEngine(object):
     power_switches_config = (self.config.get_power_switches() if starting_up else data)
     seen_power_switches = []
 
+    logger.info('Loading excluding IDs')
+    exclude_ids = []
+    for switch_data in power_switches_config:
+      if 'exclude' in switch_data and terrariumUtils.is_true(switch_data['exclude']):
+        logger.info('Excluding power switch with ID {}'.format(switch_data['id']))
+        exclude_ids.append(switch_data['id'])
+
+    logger.info('Loaded {} excluding IDs: {}'.format(len(exclude_ids),exclude_ids))
+
+    prev_state = {}
     if starting_up:
       logger.info('Loading previous power switch states from the last 2 minutes')
-      prev_state = {}
       start = int(time.time())
       prev_data = self.collector.get_history(['switches'],start,start-120)
-
-      logger.info('Loading excluding IDs')
-      exclude_ids = []
-      for switch_data in power_switches_config:
-        if 'exclude' in switch_data and terrariumUtils.is_true(switch_data['exclude']):
-          logger.info('Excluding power switch type {} with ID {}'.format(switch_data['hardwaretype'],switch_data['id']))
-          exclude_ids.append(switch_data['id'])
-
-      logger.info('Loaded {} excluding IDs: {}'.format(len(exclude_ids),exclude_ids))
 
       if 'switches' in prev_data:
         for switch in prev_data['switches']:
@@ -293,8 +293,8 @@ class terrariumEngine(object):
         power_switch = self.power_switches[power_switch_config['id']]
         power_switch.set_address(power_switch_config['address'])
         power_switch.set_name(power_switch_config['name'])
-        # TODO: Is this needed?
-        power_switch.set_state(prev_power_state)
+        if starting_up:
+          power_switch.set_state(prev_power_state)
 
       power_switch.set_power_wattage(power_switch_config['power_wattage'])
       power_switch.set_water_flow(power_switch_config['water_flow'])
@@ -317,9 +317,8 @@ class terrariumEngine(object):
 
     if not starting_up:
       for power_switch_id in set(self.power_switches) - set(seen_power_switches):
-        # clean up old deleted switches only when NOT in the included list else we do not know that it SHOULD BE excluded
-        if power_switch_id not in exclude_ids:
-          del(self.power_switches[power_switch_id])
+        # clean up old deleted switches
+        del(self.power_switches[power_switch_id])
 
       # Should not be needed.... environment needs callback to engine to get this information
       self.environment.set_power_switches(self.power_switches)
