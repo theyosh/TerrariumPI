@@ -875,7 +875,6 @@ class terrariumPowerSwitchMSS425E():
             for channel_data in data['all']['digest']['togglex']:
               if int(channel_data['channel']) > 0:
                 yield terrariumPowerSwitch(md5((terrariumPowerSwitchMSS425E.TYPE + data['all']['system']['hardware']['macAddress'] + str(channel_data['channel'])).encode()).hexdigest(),
-                                           terrariumPowerSwitchMSS425E.TYPE,
                                            (device,int(channel_data['channel'])),
                                            'Channel {}'.format(channel_data['channel']),
                                            None,
