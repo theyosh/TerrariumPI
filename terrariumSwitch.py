@@ -867,6 +867,8 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
     if '' == kwargs['merros_username'] or '' == kwargs['merros_password']:
       return
 
+    print('Start scanning')
+
     try:
       httpHandler = MerossHttpClient(email=kwargs['merros_username'], password=kwargs['merros_password'])
 
@@ -878,6 +880,7 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
           if data['all']['system']['hardware']['type'] == terrariumPowerSwitchMSS425E.TYPE:
             for channel_data in data['all']['digest']['togglex']:
               if int(channel_data['channel']) > 0:
+                print('Add new channel: {}'.format(channel_data['channel']))
                 yield terrariumPowerSwitch(md5((terrariumPowerSwitchMSS425E.TYPE + data['all']['system']['hardware']['macAddress'] + str(channel_data['channel'])).encode()).hexdigest(),
                                            terrariumPowerSwitchMSS425E.TYPE,
                                            (device,int(channel_data['channel'])),
@@ -891,6 +894,8 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
 
     except UnauthorizedException as ex:
       logger.error('Authentication error with Merros cloud for \'{}\' type power switch. Please check username and password.'.format(terrariumPowerSwitchMSS425E.TYPE))
+
+    print('DONE scanning')
 
 class terrariumPowerSwitchTypeException(TypeError):
   '''There is a problem with loading a hardware switch. Invalid hardware type.'''
