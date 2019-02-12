@@ -2804,7 +2804,6 @@ $.fn.extend({
 });
 
 function terrariumpi_select2_option(state){
-  console.log(state);
   if (!state.id) {
     return state.text;
   }

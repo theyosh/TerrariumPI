@@ -240,19 +240,52 @@ class terrariumEngine(object):
     power_switches_config = (self.config.get_power_switches() if starting_up else data)
     seen_power_switches = []
 
+    logger.info('Loading excluding IDs')
+    exclude_ids = []
+    for switch_data in power_switches_config:
+      if 'exclude' in switch_data and terrariumUtils.is_true(switch_data['exclude']):
+        logger.info('Excluding power switch with ID {}'.format(switch_data['id']))
+        exclude_ids.append(switch_data['id'])
+
+    logger.info('Loaded {} excluding IDs: {}'.format(len(exclude_ids),exclude_ids))
+
+    prev_state = {}
     if starting_up:
+      logger.info('Loading previous power switch states from the last 2 minutes')
+      start = int(time.time())
+      prev_data = self.collector.get_history(['switches'],start,start-120)
+
+      if 'switches' in prev_data:
+        for switch in prev_data['switches']:
+          if switch in exclude_ids:
+            continue
+
+          prev_state[switch] = prev_data['switches'][switch]['power_wattage'][-1:][0][1]
+
       self.power_switches = {}
       for power_switch in terrariumPowerSwitch.scan_power_switches(self.toggle_power_switch):
-        if power_switch.get_id() not in self.power_switches:
+        if power_switch.get_id() not in exclude_ids and power_switch.get_id() not in self.power_switches:
           self.power_switches[power_switch.get_id()] = power_switch
 
     for power_switch_config in power_switches_config:
+      if power_switch_config['id'] in exclude_ids:
+        continue
+
+      prev_power_state = terrariumPowerSwitch.OFF
+
+      if power_switch_config['id'] in prev_state and prev_state[power_switch_config['id']] > 0:
+        prev_power_state = terrariumPowerSwitch.ON
+
+        if 'dimmer' in power_switch_config['hardwaretype']:
+          prev_power_state = (float(prev_state[power_switch_config['id']]) / float(power_switch_config['power_wattage'])) * 100
+
       if power_switch_config['id'] in [None,'None',''] or power_switch_config['id'] not in self.power_switches:
         # New switch (add)
         power_switch = terrariumPowerSwitch(power_switch_config['id'],
                                             power_switch_config['hardwaretype'],
                                             power_switch_config['address'],
                                             power_switch_config['name'],
+                                            prev_power_state,
                                             callback=self.toggle_power_switch)
         self.power_switches[power_switch.get_id()] = power_switch
       else:
@@ -260,6 +293,8 @@ class terrariumEngine(object):
         power_switch = self.power_switches[power_switch_config['id']]
         power_switch.set_address(power_switch_config['address'])
         power_switch.set_name(power_switch_config['name'])
+        if starting_up:
+          power_switch.set_state(prev_power_state)
 
       power_switch.set_power_wattage(power_switch_config['power_wattage'])
       power_switch.set_water_flow(power_switch_config['water_flow'])
@@ -1085,6 +1120,7 @@ class terrariumEngine(object):
 
     if 'sensors' == part or part is None:
       data.update(self.get_sensors_config())
+      data.update({'hardware' : terrariumSensor.valid_hardware_types2()})
 
     if 'webcams' == part or part is None:
       data.update(self.get_webcams_config())
