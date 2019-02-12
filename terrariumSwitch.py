@@ -657,7 +657,7 @@ class terrariumPowerSwitchRemote(terrariumPowerSwitchSource):
 
     return terrariumPowerSwitch.ON if terrariumUtils.is_true(data) else terrariumPowerSwitch.OFF
 
-class terrariumPowerSwitchMSS425E():
+class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
   TYPE = 'mss425e'
 
   '''
