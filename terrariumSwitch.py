@@ -56,7 +56,7 @@ class terrariumPowerSwitchSource(object):
 
     self.state = None
     if self.get_type() not in [terrariumPowerSwitchWeMo.TYPE, terrariumPowerSwitchMSS425E.TYPE]:
-      # Do not toggle off Wemo switches during scanning.....
+      # Do not toggle off switches during scanning.....
       prev_state = prev_state if prev_state is not None else terrariumPowerSwitch.OFF
       self.set_state(prev_state,True)
 
@@ -845,13 +845,10 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
   def get_hardware_state(self):
     data = None
 
-    print('Hardware state channel: {}'.format(self.__channel_id))
-    print(self.__device)
+    print('Hardware get state channel: {}'.format(self.__channel_id))
 
     try:
       tmpdata = self.__device.get_sys_data()
-      print('tmpdata')
-      print(tmpdata)
       if tmpdata['all']['system']['hardware']['type'] == terrariumPowerSwitchMSS425E.TYPE:
         for channel_data in tmpdata['all']['digest']['togglex']:
           if self.__channel_id == channel_data['channel']:
@@ -862,6 +859,7 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
       print('Get hardware ex')
       print(ex)
 
+    print('Return current state: {}'.format(terrariumPowerSwitch.ON if terrariumUtils.is_true(data) else terrariumPowerSwitch.OFF))
     return terrariumPowerSwitch.ON if terrariumUtils.is_true(data) else terrariumPowerSwitch.OFF
 
   @staticmethod
