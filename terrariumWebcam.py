@@ -194,10 +194,10 @@ class terrariumWebcamSource(object):
 
     self.raw_image.paste(mask, (int((source_width/2)-(mask_width/2)),int((source_height/2)-(mask_height/2))), mask)
 
-  def get_archive_images(self):
+  def get_archive_images(self,prefix = None):
     regex = r'(' + terrariumWebcamSource.ARCHIVE_LOCATION + ')\d+/\d+/\d+/([^_]+_archive_)\d+(\..*)'
-    subst = '\\1*/*/*/\\2*\\3'
-    file_filter = re.sub(regex, subst, self.get_raw_image(True))
+    subst = '\\1/' + str(prefix[0]) + '/' + str(prefix[1]) + '/' + str(prefix[2]) + '/\\2*\\3'
+    file_filter = re.sub(regex, subst, self.get_raw_image(True)).replace('//','/')
     files = glob.glob(file_filter)
     files.sort(key=os.path.getmtime,reverse = True)
     return files
@@ -352,7 +352,7 @@ class terrariumWebcamSource(object):
             }
 
     if archive:
-      data['archive_images'] = self.get_archive_images()
+      data['archive_images'] = self.get_archive_images(archive)
 
     return data
 
