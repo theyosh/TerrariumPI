@@ -2293,9 +2293,28 @@ function createWebcamLayer(webcamid, maxzoom) {
 }
 
 function webcamArchive(webcamid) {
-   $.getJSON('api/webcams/' + webcamid + '/archive', function(data) {
+
+  var now = new Date();
+  var max_days_back = 50;
+  var no_data_counter = 0;
+  var fancybox = null;
+
+  function getImages(date) {
+
+    $.getJSON('api/webcams/' + webcamid + '/archive/'+ date.getFullYear() + '/' + (date.getMonth() < 9 ? '0' : '') + (date.getMonth() + 1) + '/' + (date.getDate() < 10 ? '0' : '') + date.getDate(), function(data) {
     var photos = [];
     var date_match = /archive_(\d+)\.jpg$/g;
+
+    no_data_counter += (data.webcams[0].archive_images.length > 0 ? 0 : 1);
+    max_days_back--
+
+    if (no_data_counter > 10 || max_days_back < 0) {
+
+      console.log('Done lading:',no_data_counter,max_days_back);
+
+      return false;
+    }
+
     $.each(data.webcams[0].archive_images, function(index,value) {
       value.match(date_match);
       var date_photo = date_match.exec(value);
@@ -2304,22 +2323,35 @@ function webcamArchive(webcamid) {
       } else {
         date_photo = '{{_('Unknown date')}}';
       }
-      photos.push({src : value,
-                  opts: { caption: '{{_('Webcam')}}' + ' ' + data.webcams[0].name + ': ' + date_photo}})
+
+      if (fancybox == null) {
+      fancybox = $.fancybox.open(
+        [{src : value,opts: { caption: '{{_('Webcam')}}' + ' ' + data.webcams[0].name + ': ' + date_photo}}],
+        {loop : false,
+         buttons : [
+                   //'slideShow',
+                   'fullScreen',
+                   'thumbs',
+                   //'share',
+                   'download',
+                   'zoom',
+                   'close'
+                ],
+         thumbs : {
+           autoStart : true
+          }
+        });
+      } else {
+        fancybox.addContent({src : value, opts: { caption: '{{_('Webcam')}}' + ' ' + data.webcams[0].name + ': ' + date_photo}});
+      }
     });
-    $.fancybox.open(photos,
-                    {loop : false,
-                     buttons : [
-                        'slideShow',
-                        'fullScreen',
-                        'thumbs',
-                        //'share',
-                        'download',
-                        'zoom',
-                        'close'
-                     ]}
-                );
-  });
+    // recursive
+    setTimeout(function(){
+      getImages(new Date(date.getTime() - (24 * 60 * 60 * 1000)));
+      }, 5000);
+    });
+  }
+  getImages(now);
 }
 
 function initWebcam(data) {

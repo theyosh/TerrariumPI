@@ -809,7 +809,7 @@ class terrariumEngine(object):
 
     if filter is not None and filter in self.webcams:
       archive = len(parameters) > 1 and 'archive' == parameters[1]
-      data.append(self.webcams[filter].get_data(archive))
+      data.append(self.webcams[filter].get_data(parameters[2:]))
 
     else:
       for webcamid in self.webcams:
