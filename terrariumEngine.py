@@ -240,7 +240,7 @@ class terrariumEngine(object):
     power_switches_config = (self.config.get_power_switches() if starting_up else data)
     seen_power_switches = []
 
-    logger.info('Loading excluding IDs')
+    logger.debug('Loading excluding IDs')
     exclude_ids = []
     for switch_data in power_switches_config:
       if 'exclude' in switch_data and terrariumUtils.is_true(switch_data['exclude']):
