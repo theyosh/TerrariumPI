@@ -1226,7 +1226,7 @@ function history_graph(name, data, type) {
 
         graph_options.colors = ['rgba(38, 185, 154, 0.38)'];
 
-        if (data.light_uvi) {
+        if (data.light_uvi !== undefined && data.light_uvi) {
           graph_data.push({ label: '{{_('UV')}}',
                              data: data.alarm_max,
                              yaxis: 2});
@@ -1250,7 +1250,7 @@ function history_graph(name, data, type) {
         yaxis2.alignTicksWithAxis = 1;
         yaxis2.position = 'right';
 
-        yaxis2.tickFormatter = function(val, axis) { return val.toFixed(axis.tickDecimals) + (!data.light_uvi ? ' µW/cm^2' : '');}
+        yaxis2.tickFormatter = function(val, axis) { return val.toFixed(axis.tickDecimals) + (!(data.light_uvi !== undefined && data.light_uvi) ? ' µW/cm^2' : '');}
 
         graph_options.yaxes = [jQuery.extend(true, {}, graph_options.yaxes),yaxis2];
 
