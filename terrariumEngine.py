@@ -282,7 +282,7 @@ class terrariumEngine(object):
 
       if power_switch_config['id'] in [None,'None',''] or power_switch_config['id'] not in self.power_switches:
         # New switch (add)
-        if power_switch.get_id() in prev_state:
+        if power_switch_config['id'] in prev_state:
           logger.info('Starting up switch {} with state {}'.format(power_switch_config['name'],prev_power_state))
 
         power_switch = terrariumPowerSwitch(power_switch_config['id'],
