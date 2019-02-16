@@ -1037,29 +1037,36 @@ function load_history_graph(id,type,data_url,nocache) {
 
         if ('light' == type && data_url.indexOf('/average/') > 0) {
           globals.graphs[id].data.light_average = true;
+          globals.graphs[id].data.light_uvi = false;
 
-          $.getJSON(data_url.replace('/light','/uva'), function(online_data) {
-            $.each(online_data, function(dummy, value) {
-              $.each(value, function(dummy, data_array) {
+          $.getJSON(data_url.replace('/light','/uvi'), function(online_data) {
+            if (online_data['uvi']['average']['current'].length > 0) {
+              // Have UV Index, use that
+              globals.graphs[id].data.light_uvi = true;
+              $.each(online_data['uvi'], function(name, data) {
                 globals.graphs[id].timestamp = now;
-                globals.graphs[id].data['alarm_min'] = data_array.current;
+                globals.graphs[id].data['alarm_max'] = data.current;
               });
-            })
-
-            $.getJSON(data_url.replace('/light','/uvb'), function(online_data) {
-              $.each(online_data, function(dummy, value) {
-                $.each(value, function(dummy, data_array) {
-                  globals.graphs[id].timestamp = now;
-                  globals.graphs[id].data['alarm_max'] = data_array.current;
-                });
-              })
               history_graph(id, globals.graphs[id].data, type);
-            });
+            } else {
+              $.getJSON(data_url.replace('/light','/uva'), function(online_data) {
+                $.each(online_data['uva'], function(name, data) {
+                  globals.graphs[id].timestamp = now;
+                  globals.graphs[id].data['alarm_min'] = data.current;
+                });
+                $.getJSON(data_url.replace('/light','/uvb'), function(online_data) {
+                  $.each(online_data['uvb'], function(name, data) {
+                    globals.graphs[id].timestamp = now;
+                    globals.graphs[id].data['alarm_max'] = data.current;
+                  });
+                  history_graph(id, globals.graphs[id].data, type);
+                });
+              });
+            }
           });
         } else {
           history_graph(id, globals.graphs[id].data, type);
         }
-
         clearTimeout(globals.graphs[id].timer);
         globals.graphs[id].timer = setTimeout(function() {
           load_history_graph(id,type,data_url);
@@ -1192,7 +1199,11 @@ function history_graph(name, data, type) {
 
           case 'uva':
           case 'uvb':
-            val = formatNumber(val) + 'µW/cm^2';
+            val = formatNumber(val) + ' µW/cm^2';
+            break;
+
+          case 'uvi':
+            val = formatNumber(val);
             break;
 
           case 'door':
@@ -1211,23 +1222,35 @@ function history_graph(name, data, type) {
         graph_data = [{
           label: '{{_('Light')}}',
           data: data.current
-        }, {
-          label: '{{_('UVA')}}',
-          data: data.alarm_min,
-          yaxis: 2
-        }, {
-          label: '{{_('UVB')}}',
-          data: data.alarm_max,
-          yaxis: 2
         }];
 
-        graph_options.colors = ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)", "rgba(3, 88, 206, 0.38)"]
+        graph_options.colors = ['rgba(38, 185, 154, 0.38)'];
+
+        if (data.light_uvi) {
+          graph_data.push({ label: '{{_('UV')}}',
+                             data: data.alarm_max,
+                             yaxis: 2});
+
+          graph_options.colors.push('rgba(3, 88, 206, 0.38)');
+        } else {
+          graph_data.push({ label: '{{_('UVA')}}',
+                             data: data.alarm_min,
+                             yaxis: 2});
+          graph_data.push({ label: '{{_('UVB')}}',
+                             data: data.alarm_max,
+                             yaxis: 2});
+
+          graph_options.colors.push('rgba(3, 88, 106, 0.38)')
+          graph_options.colors.push('rgba(3, 88, 206, 0.38)')
+        }
+
         graph_options.xaxes = [jQuery.extend(true, {}, graph_options.xaxes)];
 
         var yaxis2 = jQuery.extend(true, {}, graph_options.yaxes);
         yaxis2.alignTicksWithAxis = 1;
         yaxis2.position = 'right';
-        yaxis2.tickFormatter = function(val, axis) { return val.toFixed(axis.tickDecimals) + ' µW/cm^2';}
+
+        yaxis2.tickFormatter = function(val, axis) { return val.toFixed(axis.tickDecimals) + (!data.light_uvi ? ' µW/cm^2' : '');}
 
         graph_options.yaxes = [jQuery.extend(true, {}, graph_options.yaxes),yaxis2];
 
@@ -1253,6 +1276,7 @@ function history_graph(name, data, type) {
     case 'light_percentage':
     case 'uva':
     case 'uvb':
+    case 'uvi':
     case 'fertility':
     case 'co2':
     case 'volume':
@@ -1383,15 +1407,6 @@ function history_graph(name, data, type) {
       var new_duration = (graph_data[2].data[graph_data[2].data.length - 1][0] - graph_data[2].data[0][0]) / 3600000;
       total_data_duration = new_duration > total_data_duration ? new_duration : total_data_duration
     }
-
-/*
-    if (type == 'switch') {
-      console.log(graph_options.xaxis);
-      graph_options.xaxis[0].tickSize[0] = Math.round(total_data_duration * 2.5);
-    } else {
-      graph_options.xaxis.tickSize[0] = Math.round(total_data_duration * 2.5);
-    }
-*/
     graph_options.xaxis.tickSize[0] = Math.round(total_data_duration * 2.5);
   }
 

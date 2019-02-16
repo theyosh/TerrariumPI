@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.3\n"
-"POT-Creation-Date: 2019-02-09 01:04+CET\n"
-"PO-Revision-Date: 2019-02-09 01:04+0100\n"
+"POT-Creation-Date: 2019-02-16 14:31+CET\n"
+"PO-Revision-Date: 2019-02-16 14:31+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -16,16 +16,16 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: terrariumEngine.py:520 views/dashboard.tpl:7
+#: terrariumEngine.py:557 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
 msgid "Uptime"
 msgstr "Uptime"
 
-#: terrariumEngine.py:521
+#: terrariumEngine.py:558
 msgid "Load"
 msgstr "Load"
 
-#: terrariumEngine.py:522
+#: terrariumEngine.py:559
 msgid "CPU Temp."
 msgstr "CPU Temp."
 
@@ -520,78 +520,78 @@ msgstr "Holds a link to more information."
 msgid "Offline since"
 msgstr "Offline since"
 
-#: terrariumWebserver.py:92 terrariumWebserver.py:178
+#: terrariumWebserver.py:94 terrariumWebserver.py:180
 msgid "Authenticate to make any changes"
 msgstr "Authenticate to make any changes"
 
-#: terrariumWebserver.py:92 terrariumWebserver.py:178
+#: terrariumWebserver.py:94 terrariumWebserver.py:180
 #: views/system_settings.tpl:28
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:92 terrariumWebserver.py:178
+#: terrariumWebserver.py:94 terrariumWebserver.py:180
 #: views/system_settings.tpl:120
 msgid "Authentication"
 msgstr "Authentication"
 
-#: terrariumWebserver.py:232
+#: terrariumWebserver.py:234
 msgid "Player command could ot be executed!"
 msgstr "Player command could ot be executed!"
 
-#: terrariumWebserver.py:232 terrariumWebserver.py:252
-#: terrariumWebserver.py:264 terrariumWebserver.py:272
+#: terrariumWebserver.py:234 terrariumWebserver.py:254
+#: terrariumWebserver.py:266 terrariumWebserver.py:274
 msgid "Error!"
 msgstr "Error!"
 
-#: terrariumWebserver.py:240 terrariumWebserver.py:243
+#: terrariumWebserver.py:242 terrariumWebserver.py:245
 msgid "OK!"
 msgstr "OK!"
 
-#: terrariumWebserver.py:240 terrariumWebserver.py:243
+#: terrariumWebserver.py:242 terrariumWebserver.py:245
 msgid "Player command executed!"
 msgstr "Player command executed!"
 
-#: terrariumWebserver.py:252
+#: terrariumWebserver.py:254
 msgid "File is not uploaded!"
 msgstr "File is not uploaded!"
 
-#: terrariumWebserver.py:257
+#: terrariumWebserver.py:259
 msgid "File '%s' is uploaded"
 msgstr "File '%s' is uploaded"
 
-#: terrariumWebserver.py:257 terrariumWebserver.py:267
+#: terrariumWebserver.py:259 terrariumWebserver.py:269
 msgid "Success!"
 msgstr "Success!"
 
-#: terrariumWebserver.py:259
+#: terrariumWebserver.py:261
 msgid "Duplicate file '%s'"
 msgstr "Duplicate file '%s'"
 
-#: terrariumWebserver.py:264
+#: terrariumWebserver.py:266
 msgid "Action could not be satisfied"
 msgstr "Action could not be satisfied"
 
-#: terrariumWebserver.py:267
+#: terrariumWebserver.py:269
 msgid "Audio file is deleted"
 msgstr "Audio file is deleted"
 
-#: terrariumWebserver.py:272
+#: terrariumWebserver.py:274
 msgid "Data could not be saved"
 msgstr "Data could not be saved"
 
-#: terrariumWebserver.py:280
+#: terrariumWebserver.py:282
 msgid "Data saved"
 msgstr "Data saved"
 
-#: terrariumWebserver.py:281
+#: terrariumWebserver.py:283
 msgid "Your changes are saved"
 msgstr "Your changes are saved"
 
-#: terrariumWebserver.py:416 views/inc/menu.tpl:171
+#: terrariumWebserver.py:418 views/inc/menu.tpl:171
 msgid "Log out"
 msgstr "Log out"
 
-#: terrariumWebserver.py:417
+#: terrariumWebserver.py:419
 msgid "You are now logged out"
 msgstr "You are now logged out"
 
@@ -660,7 +660,7 @@ msgstr "Duration"
 #: views/inc/usage_sensors.tpl:174 views/inc/usage_switches.tpl:117
 #: views/inc/usage_switches.tpl:140 views/inc/usage_webcams.tpl:104
 #: views/inc/usage_webcams.tpl:134 views/profile.tpl:56
-#: views/sensor_settings.tpl:28 views/sensor_settings.tpl:152
+#: views/sensor_settings.tpl:28 views/sensor_settings.tpl:153
 #: views/switch_settings.tpl:25 views/switch_settings.tpl:130
 #: views/webcam_settings.tpl:28 views/webcam_settings.tpl:90
 msgid "Name"
@@ -739,7 +739,7 @@ msgid "Stop"
 msgstr "Stop"
 
 #: views/audio_playlist.tpl:28 views/audio_playlist.tpl:95
-#: views/dashboard.tpl:542 views/inc/menu.tpl:68 views/sensor_settings.tpl:142
+#: views/dashboard.tpl:542 views/inc/menu.tpl:68 views/sensor_settings.tpl:143
 #: views/system_environment.tpl:1247
 msgid "Volume"
 msgstr "Volume"
@@ -799,13 +799,13 @@ msgstr "Select an option"
 #: views/audio_playlist.tpl:123 views/door_settings.tpl:94
 #: views/inc/usage_doors.tpl:70 views/inc/usage_sensors.tpl:81
 #: views/inc/usage_switches.tpl:70 views/inc/usage_webcams.tpl:66
-#: views/sensor_settings.tpl:200 views/switch_settings.tpl:202
+#: views/sensor_settings.tpl:201 views/switch_settings.tpl:202
 #: views/webcam_settings.tpl:165
 msgid "Close"
 msgstr "Close"
 
 #: views/audio_playlist.tpl:124 views/door_settings.tpl:95
-#: views/sensor_settings.tpl:201 views/switch_settings.tpl:203
+#: views/sensor_settings.tpl:202 views/switch_settings.tpl:203
 #: views/webcam_settings.tpl:166
 msgid "Add"
 msgstr "Add"
@@ -880,7 +880,7 @@ msgstr "Total water in L"
 #: views/inc/usage_sensors.tpl:157 views/inc/usage_sensors.tpl:189
 #: views/inc/usage_sensors.tpl:206 views/inc/usage_weather.tpl:13
 #: views/inc/usage_weather.tpl:85 views/sensor_settings.tpl:46
-#: views/sensor_settings.tpl:176 views/weather.tpl:7
+#: views/sensor_settings.tpl:177 views/weather.tpl:7
 msgid "Current"
 msgstr "Current"
 
@@ -1048,12 +1048,12 @@ msgstr "Conductivity"
 msgid "Water tank"
 msgstr "Water tank"
 
-#: views/dashboard.tpl:436 views/inc/menu.tpl:62 views/sensor_settings.tpl:140
+#: views/dashboard.tpl:436 views/inc/menu.tpl:62 views/sensor_settings.tpl:141
 #: views/system_environment.tpl:1378
 msgid "Fertility"
 msgstr "Fertility"
 
-#: views/dashboard.tpl:489 views/inc/menu.tpl:65 views/sensor_settings.tpl:141
+#: views/dashboard.tpl:489 views/inc/menu.tpl:65 views/sensor_settings.tpl:142
 #: views/system_environment.tpl:1589
 msgid "CO2"
 msgstr "CO2"
@@ -1179,7 +1179,7 @@ msgstr "Hardware"
 #: views/inc/usage_sensors.tpl:123 views/inc/usage_sensors.tpl:168
 #: views/inc/usage_switches.tpl:112 views/inc/usage_switches.tpl:137
 #: views/notifications.tpl:81 views/sensor_settings.tpl:22
-#: views/sensor_settings.tpl:147 views/switch_settings.tpl:22
+#: views/sensor_settings.tpl:148 views/switch_settings.tpl:22
 #: views/switch_settings.tpl:125
 msgid "Address"
 msgstr "Address"
@@ -1998,22 +1998,22 @@ msgid "HC-SR04"
 msgstr "HC-SR04"
 
 #: views/inc/usage_sensors.tpl:141 views/inc/usage_sensors.tpl:177
-#: views/sensor_settings.tpl:31 views/sensor_settings.tpl:156
+#: views/sensor_settings.tpl:31 views/sensor_settings.tpl:157
 msgid "Alarm min"
 msgstr "Alarm min"
 
 #: views/inc/usage_sensors.tpl:145 views/inc/usage_sensors.tpl:180
-#: views/sensor_settings.tpl:34 views/sensor_settings.tpl:160
+#: views/sensor_settings.tpl:34 views/sensor_settings.tpl:161
 msgid "Alarm max"
 msgstr "Alarm max"
 
 #: views/inc/usage_sensors.tpl:149 views/inc/usage_sensors.tpl:183
-#: views/sensor_settings.tpl:37 views/sensor_settings.tpl:164
+#: views/sensor_settings.tpl:37 views/sensor_settings.tpl:165
 msgid "Limit min"
 msgstr "Limit min"
 
 #: views/inc/usage_sensors.tpl:153 views/inc/usage_sensors.tpl:186
-#: views/sensor_settings.tpl:40 views/sensor_settings.tpl:168
+#: views/sensor_settings.tpl:40 views/sensor_settings.tpl:169
 msgid "Limit max"
 msgstr "Limit max"
 
@@ -2439,7 +2439,7 @@ msgstr "More information"
 msgid "Here you can configure your sensors."
 msgstr "Here you can configure your sensors."
 
-#: views/sensor_settings.tpl:43 views/sensor_settings.tpl:172
+#: views/sensor_settings.tpl:43 views/sensor_settings.tpl:173
 msgid "Max diff"
 msgstr "Max diff"
 
@@ -2503,15 +2503,19 @@ msgstr "UVA"
 msgid "UVB"
 msgstr "UVB"
 
-#: views/sensor_settings.tpl:182
+#: views/sensor_settings.tpl:140
+msgid "UV Index"
+msgstr "UV Index"
+
+#: views/sensor_settings.tpl:183
 msgid "Min moist value"
 msgstr "Min moist value"
 
-#: views/sensor_settings.tpl:186
+#: views/sensor_settings.tpl:187
 msgid "Max moist value"
 msgstr "Max moist value"
 
-#: views/sensor_settings.tpl:190
+#: views/sensor_settings.tpl:191
 msgid "Temperature offset"
 msgstr "Temperature offset"
 
@@ -3301,6 +3305,10 @@ msgstr "USB Relay board"
 #: Missing text string
 msgid "USB Webcam"
 msgstr "USB Webcam"
+
+#: Missing text string
+msgid "UV"
+msgstr "UV"
 
 #: Missing text string
 msgid "Universal AC MAINS Dimmer - MPDMv4.1"
