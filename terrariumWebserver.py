@@ -81,6 +81,7 @@ class terrariumWebserver(object):
             err = HTTPError(401, text)
             err.add_header('WWW-Authenticate', 'Basic realm="%s"' % realm)
             if user is not None or password is not None:
+              self.__terrariumEngine.notification.message('authentication_warning',{'ip' : ip, 'username' : user, 'password' : password},[])
               logger.warning('Incorrect login detected using username \'{}\' and password \'{}\' from ip {}'.format(user,password,ip))
             return err
 
