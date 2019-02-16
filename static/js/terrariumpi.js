@@ -1040,7 +1040,7 @@ function load_history_graph(id,type,data_url,nocache) {
           globals.graphs[id].data.light_uvi = false;
 
           $.getJSON(data_url.replace('/light','/uvi'), function(online_data) {
-            if (online_data['uvi']['average']['current'].length > 0) {
+            if (online_data['uvi']['average']['current'] != undefined && online_data['uvi']['average']['current'].length > 0) {
               // Have UV Index, use that
               globals.graphs[id].data.light_uvi = true;
               $.each(online_data['uvi'], function(name, data) {
