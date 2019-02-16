@@ -53,6 +53,7 @@ class terrariumEngine(object):
                     'light'       : 'lux',
                     'uva'         : 'uW/cm^2',
                     'uvb'         : 'uW/cm^2',
+                    'uvi'         : '',
                     'fertility'   : 'uS/cm',
                     'co2'         : 'ppm',
                     'volume'      : 'L',

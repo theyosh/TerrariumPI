@@ -80,7 +80,7 @@
                         <h2 class="conductivity" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> {{_('Conductivity sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <h2 class="distance" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-signal"></span> {{_('Distance sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <h2 class="ph" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-scale"></span> {{_('pH sensor')}} <span class="title">{{_('new')}}</span></h2>
-                        <h2 class="light uva uvb" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-adjust"></span> {{_('Light sensor')}} <span class="title">{{_('new')}}</span></h2>
+                        <h2 class="light uva uvb uvi" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-adjust"></span> {{_('Light sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <h2 class="fertility" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-grain"></span> {{_('Fertility sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <h2 class="co2" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-tree-conifer"></span> {{_('CO2 sensor')}} <span class="title">{{_('new')}}</span></h2>
                         <h2 class="volume" style="display:none"><span aria-hidden="true" class="glyphicon glyphicon-signal"></span> {{_('Volume sensor')}} <span class="title">{{_('new')}}</span></h2>
@@ -137,6 +137,7 @@
                                 <option value="light">{{_('Light')}}</option>
                                 <option value="uva">{{_('UVA')}}</option>
                                 <option value="uvb">{{_('UVB')}}</option>
+                                <option value="uvi">{{_('UV Index')}}</option>
                                 <option value="fertility">{{_('Fertility')}}</option>
                                 <option value="co2">{{_('CO2')}}</option>
                                 <option value="volume">{{_('Volume')}}</option>
