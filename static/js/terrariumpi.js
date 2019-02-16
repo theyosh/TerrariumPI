@@ -1130,7 +1130,7 @@ function history_graph(name, data, type) {
     yaxis: {
       ticks: graph_ticks,
       tickColor: "rgba(51, 51, 51, 0.06)",
-      tickDecimals: 1,
+      tickDecimals: 2,
       tickFormatter: function(val, axis) {
         switch(type) {
           case 'system_memory':
