@@ -42,6 +42,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
   - Predefined on and off durations in minutes
 - Support for Energenie USB and LAN power switches [EG-PM(s)2](http://energenie.com/item.aspx?id=7556)
 - Support for WeMo Wifi power switches
+- Support for [Meross MSS425E Power Switches](https://www.meross.com/product/16/article/)
 - Support for [multiple type of sensors](https://github.com/theyosh/TerrariumPI/wiki/Hardware#sensors)
   - Temperature
   - Humidity
