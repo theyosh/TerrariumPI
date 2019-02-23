@@ -22,19 +22,20 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2 id="deviceid">{{_('TerrariumPI')}} <small>{{device}}</small></h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li>
-                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                  </li>
-                </ul>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <form action="/api/config/system" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
+          <form action="/api/config/system" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2 id="deviceid">{{_('TerrariumPI')}} <small>{{device}}</small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                      <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="language">{{_('Language')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
@@ -84,7 +85,6 @@
                       </div>
                     </div>
                   </div>
-
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="volume_indicator">{{_('Volume indicator')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
@@ -97,7 +97,6 @@
                       </div>
                     </div>
                   </div>
-
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="admin">{{_('Admin name')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
@@ -183,16 +182,45 @@
                       <input class="form-control" name="port" required="required" type="text" placeholder="{{_('Port number')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_port_number')}}">
                     </div>
                   </div>
-                  <div class="ln_solid"></div>
-                  <div class="form-group">
-                    <div class="col-md-11 col-sm-11 col-xs-12 text-center">
-                      <button class="btn btn-success" type="submit">{{_('Submit')}}</button>
-                    </div>
-                  </div>
-                </form>
+                </div>
               </div>
             </div>
-          </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-cloud-download"></span> {{_('Merros Cloud')}}</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                      <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                  <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="merros_username">{{_('Merros Cloud username')}}</label>
+                      <div class="col-md-7 col-sm-6 col-xs-10">
+                        <input class="form-control" name="merros_username" type="text" placeholder="{{_('Merros Cloud username')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_merros_username')}}">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="merros_password">{{_('Merros Cloud password')}}</label>
+                      <div class="col-md-7 col-sm-6 col-xs-10">
+                        <input class="form-control" name="merros_password" type="password" placeholder="{{_('Merros Cloud password')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_merros_password')}}">
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-11 col-sm-11 col-xs-12 text-center">
+                <button class="btn btn-success" type="submit">{{_('Submit')}}</button>
+              </div>
+            </div>
+          </form>
         </div>
         <script type="text/javascript">
           $(document).ready(function() {
@@ -247,6 +275,7 @@
                     if (config_field.length >= 1) {
                       switch (config_field.prop('type').toLowerCase()) {
                         case 'text':
+                        case 'password':
                           config_field.val(data[value]);
                           break;
 

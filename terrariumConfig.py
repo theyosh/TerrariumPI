@@ -609,6 +609,16 @@ class terrariumConfig(object):
     return config['port']
   # End system functions
 
+  def get_merros_cloud(self):
+    return self.__get_config('merros_cloud')
+
+  def set_merros_cloud(self,data):
+    data = {'merros_username' : data['merros_username'],
+            'merros_password' : data['merros_password']}
+
+    return self.__update_config('merros_cloud',data)
+  # End system functions
+
   # Environment functions
 
   def save_environment(self,data):
