@@ -38,6 +38,9 @@
                   <a><i class="fa fa-tint"></i> {{_('Sensors')}} <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li>
+                      <a href="sensor_gauge_overview.html">{{_('All')}}</a>
+                    </li>
+                    <li>
                       <a href="sensor_temperature.html">{{_('Temperature')}}</a>
                     </li>
                     <li>

@@ -192,7 +192,8 @@ class terrariumWebserver(object):
                   'horizontal_graph_legend' : 1 if self.__terrariumEngine.get_horizontal_graph_legend() else 0,
                   'translations': self.__translations,
                   'device': self.__terrariumEngine.device,
-                  'notifications' : self.__terrariumEngine.notification}
+                  'notifications' : self.__terrariumEngine.notification,
+                  'show_gauge_overview' : terrariumUtils.is_true(self.__config['sensor_gauge_overview'])}
 
     if 'index' == template or 'profile' == template:
       variables['person_name'] = self.__terrariumEngine.get_profile_name()

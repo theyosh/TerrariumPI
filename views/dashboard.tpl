@@ -1154,6 +1154,11 @@
 
             $.get('/api/sensors/average',function(json_data) {
               var active_sensor_types = ['settings'];
+
+              % if show_gauge_overview:
+                active_sensor_types.push('gauge_overview');
+              % end
+
               $.each(json_data.sensors,function(index,sensor_data){
                 if ($('div#' + sensor_data.type + ':hidden')) {
                   $('div#' + sensor_data.type).show();
