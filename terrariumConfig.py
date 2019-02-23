@@ -607,6 +607,7 @@ class terrariumConfig(object):
   def get_port_number(self):
     config = self.get_system()
     return config['port']
+  # End system functions
 
   # Environment functions
 
