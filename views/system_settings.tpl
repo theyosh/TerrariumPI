@@ -23,7 +23,6 @@
         </div>
         <div class="row">
           <form action="/api/config/system" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
-
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
