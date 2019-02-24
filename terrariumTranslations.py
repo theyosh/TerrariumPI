@@ -161,6 +161,12 @@ class terrariumTranslations(object):
     self.translations['system_field_volume_indicator'] = _('Choose the volume (liquid) indicator. The software will recalculate to the chosen indicator.')
     self.translations['system_field_hostname'] = _('Holds the host name or IP address on which the software will listen for connections. Enter :: for all addresses to bind.')
     self.translations['system_field_port_number'] = _('Holds the port number on which the software is listening for connections.')
+
+
+    self.translations['system_field_meross_username'] = _('Enter the e-mail address that is used for your Meross devices.')
+    self.translations['system_field_meross_password'] = _('Enter the password that is used for your Meross devices. Password is stored in plain text!')
+
+
     #self.translations['system_field_owfs_port'] = _('Holds the port number on which the OWFS software is running. Leave empty to disable OWFS support.')
     # End system
 

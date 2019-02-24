@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.4\n"
-"POT-Creation-Date: 2019-02-24 12:13+CET\n"
-"PO-Revision-Date: 2019-02-24 12:13+0100\n"
+"POT-Creation-Date: 2019-02-24 12:27+CET\n"
+"PO-Revision-Date: 2019-02-24 12:27+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -484,35 +484,43 @@ msgstr "Holds the host name or IP address on which the software will listen for 
 msgid "Holds the port number on which the software is listening for connections."
 msgstr "Holds the port number on which the software is listening for connections."
 
-#: terrariumTranslations.py:168
+#: terrariumTranslations.py:166
+msgid "Enter the e-mail address that is used for your Meross devices."
+msgstr "Enter the e-mail address that is used for your Meross devices."
+
+#: terrariumTranslations.py:167
+msgid "Enter the password that is used for your Meross devices. Password is stored in plain text!"
+msgstr "Enter the password that is used for your Meross devices. Password is stored in plain text!"
+
+#: terrariumTranslations.py:174
 msgid "Holds the name of the animal."
 msgstr "Holds the name of the animal."
 
-#: terrariumTranslations.py:169
+#: terrariumTranslations.py:175
 msgid "Holds the type of the animal"
 msgstr "Holds the type of the animal"
 
-#: terrariumTranslations.py:170
+#: terrariumTranslations.py:176
 msgid "Holds the gender of the animal."
 msgstr "Holds the gender of the animal."
 
-#: terrariumTranslations.py:171
+#: terrariumTranslations.py:177
 msgid "Holds the day of birth of the animal."
 msgstr "Holds the day of birth of the animal."
 
-#: terrariumTranslations.py:172
+#: terrariumTranslations.py:178
 msgid "Holds the species name of the animal."
 msgstr "Holds the species name of the animal."
 
-#: terrariumTranslations.py:173
+#: terrariumTranslations.py:179
 msgid "Holds the latin name of the animal."
 msgstr "Holds the latin name of the animal."
 
-#: terrariumTranslations.py:174
+#: terrariumTranslations.py:180
 msgid "Holds a small description about the animal."
 msgstr "Holds a small description about the animal."
 
-#: terrariumTranslations.py:175
+#: terrariumTranslations.py:181
 msgid "Holds a link to more information."
 msgstr "Holds a link to more information."
 
@@ -525,12 +533,12 @@ msgid "Authenticate to make any changes"
 msgstr "Authenticate to make any changes"
 
 #: terrariumWebserver.py:95 terrariumWebserver.py:181
-#: views/system_settings.tpl:30
+#: views/system_settings.tpl:29
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
 #: terrariumWebserver.py:95 terrariumWebserver.py:181
-#: views/system_settings.tpl:119
+#: views/system_settings.tpl:118
 msgid "Authentication"
 msgstr "Authentication"
 
@@ -760,7 +768,7 @@ msgstr "Files"
 #: views/audio_playlist.tpl:48 views/door_settings.tpl:36
 #: views/notifications.tpl:275 views/profile.tpl:179
 #: views/sensor_settings.tpl:57 views/switch_settings.tpl:72
-#: views/system_environment.tpl:1801 views/system_settings.tpl:218
+#: views/system_environment.tpl:1801 views/system_settings.tpl:217
 #: views/webcam_settings.tpl:48
 msgid "Submit"
 msgstr "Submit"
@@ -2127,11 +2135,11 @@ msgstr "Location"
 msgid "Wind speed"
 msgstr "Wind speed"
 
-#: views/inc/usage_weather.tpl:52 views/system_settings.tpl:59
+#: views/inc/usage_weather.tpl:52 views/system_settings.tpl:58
 msgid "m/s"
 msgstr "m/s"
 
-#: views/inc/usage_weather.tpl:53 views/system_settings.tpl:60
+#: views/inc/usage_weather.tpl:53 views/system_settings.tpl:59
 msgid "Km/h"
 msgstr "Km/h"
 
@@ -2791,133 +2799,133 @@ msgstr "Download"
 msgid "Here you can configure your TerrariumPI server."
 msgstr "Here you can configure your TerrariumPI server."
 
-#: views/system_settings.tpl:19 views/system_settings.tpl:49
+#: views/system_settings.tpl:19 views/system_settings.tpl:48
 msgid "Weather location"
 msgstr "Weather location"
 
-#: views/system_settings.tpl:40
+#: views/system_settings.tpl:39
 msgid "Language"
 msgstr "Language"
 
-#: views/system_settings.tpl:55
+#: views/system_settings.tpl:54
 msgid "Wind speed indicator"
 msgstr "Wind speed indicator"
 
-#: views/system_settings.tpl:66
+#: views/system_settings.tpl:65
 msgid "Temperature indicator"
 msgstr "Temperature indicator"
 
-#: views/system_settings.tpl:70
+#: views/system_settings.tpl:69
 msgid "Celsius"
 msgstr "Celsius"
 
-#: views/system_settings.tpl:71
+#: views/system_settings.tpl:70
 msgid "Fahrenheit"
 msgstr "Fahrenheit"
 
-#: views/system_settings.tpl:72
+#: views/system_settings.tpl:71
 msgid "Kelvin"
 msgstr "Kelvin"
 
-#: views/system_settings.tpl:78
+#: views/system_settings.tpl:77
 msgid "Distance indicator"
 msgstr "Distance indicator"
 
-#: views/system_settings.tpl:82
+#: views/system_settings.tpl:81
 msgid "Centimetre"
 msgstr "Centimetre"
 
-#: views/system_settings.tpl:83
+#: views/system_settings.tpl:82
 msgid "Inches"
 msgstr "Inches"
 
-#: views/system_settings.tpl:89
+#: views/system_settings.tpl:88
 msgid "Volume indicator"
 msgstr "Volume indicator"
 
-#: views/system_settings.tpl:93
+#: views/system_settings.tpl:92
 msgid "Litres"
 msgstr "Litres"
 
-#: views/system_settings.tpl:94
+#: views/system_settings.tpl:93
 msgid "US Gallons"
 msgstr "US Gallons"
 
-#: views/system_settings.tpl:95
+#: views/system_settings.tpl:94
 msgid "UK Gallons"
 msgstr "UK Gallons"
 
-#: views/system_settings.tpl:101
+#: views/system_settings.tpl:100
 msgid "Admin name"
 msgstr "Admin name"
 
-#: views/system_settings.tpl:107
+#: views/system_settings.tpl:106
 msgid "New admin password"
 msgstr "New admin password"
 
-#: views/system_settings.tpl:113
+#: views/system_settings.tpl:112
 msgid "Current admin password"
 msgstr "Current admin password"
 
-#: views/system_settings.tpl:123
+#: views/system_settings.tpl:122
 msgid "Full authentication"
 msgstr "Full authentication"
 
-#: views/system_settings.tpl:124
+#: views/system_settings.tpl:123
 msgid "Changes only"
 msgstr "Changes only"
 
-#: views/system_settings.tpl:130
+#: views/system_settings.tpl:129
 msgid "Soundcard"
 msgstr "Soundcard"
 
-#: views/system_settings.tpl:139
+#: views/system_settings.tpl:138
 msgid "External calendar"
 msgstr "External calendar"
 
-#: views/system_settings.tpl:145
+#: views/system_settings.tpl:144
 msgid "Graph legend layout"
 msgstr "Graph legend layout"
 
-#: views/system_settings.tpl:149
+#: views/system_settings.tpl:148
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: views/system_settings.tpl:150
+#: views/system_settings.tpl:149
 msgid "Vertical"
 msgstr "Vertical"
 
-#: views/system_settings.tpl:156
+#: views/system_settings.tpl:155
 msgid "Pi power usage in W"
 msgstr "Pi power usage in W"
 
-#: views/system_settings.tpl:162
+#: views/system_settings.tpl:161
 msgid "Power price"
 msgstr "Power price"
 
-#: views/system_settings.tpl:168
+#: views/system_settings.tpl:167
 msgid "Water price"
 msgstr "Water price"
 
-#: views/system_settings.tpl:174
+#: views/system_settings.tpl:173
 msgid "IP or hostname"
 msgstr "IP or hostname"
 
-#: views/system_settings.tpl:180
+#: views/system_settings.tpl:179
 msgid "Port number"
 msgstr "Port number"
 
-#: views/system_settings.tpl:191
-msgid "Merros Cloud"
-msgstr "Merros Cloud"
+#: views/system_settings.tpl:190
+msgid "Meross Cloud"
+msgstr "Meross Cloud"
 
-#: views/system_settings.tpl:201
-msgid "Merros Cloud username"
-msgstr "Merros Cloud username"
+#: views/system_settings.tpl:200
+msgid "Meross Cloud username"
+msgstr "Meross Cloud username"
 
-#: views/system_settings.tpl:207
-msgid "Merros Cloud password"
-msgstr "Merros Cloud password"
+#: views/system_settings.tpl:206
+msgid "Meross Cloud password"
+msgstr "Meross Cloud password"
 
 #: views/system_status.tpl:6
 msgid "CPU Load"

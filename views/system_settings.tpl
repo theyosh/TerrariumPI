@@ -187,7 +187,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2><span aria-hidden="true" class="glyphicon glyphicon-cloud-download"></span> {{_('Merros Cloud')}}</h2>
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-cloud-download"></span> {{_('Meross Cloud')}}</h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -197,15 +197,15 @@
                 </div>
                 <div class="x_content">
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="merros_username">{{_('Merros Cloud username')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="meross_username">{{_('Meross Cloud username')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control" name="merros_username" type="text" placeholder="{{_('Merros Cloud username')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_merros_username')}}">
+                      <input class="form-control" name="meross_username" type="text" placeholder="{{_('Meross Cloud username')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_meross_username')}}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="merros_password">{{_('Merros Cloud password')}}</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="meross_password">{{_('Meross Cloud password')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control" name="merros_password" type="password" placeholder="{{_('Merros Cloud password')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_merros_password')}}">
+                      <input class="form-control" name="meross_password" type="password" placeholder="{{_('Meross Cloud password')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_meross_password')}}">
                       </div>
                   </div>
                 </div>

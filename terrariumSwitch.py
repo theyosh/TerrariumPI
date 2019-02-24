@@ -690,11 +690,11 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
 
   @staticmethod
   def scan_power_switches(callback=None, **kwargs):
-    if '' == kwargs['merros_username'] or '' == kwargs['merros_password']:
+    if '' == kwargs['meross_username'] or '' == kwargs['meross_password']:
       return
 
     try:
-      httpHandler = MerossHttpClient(email=kwargs['merros_username'], password=kwargs['merros_password'])
+      httpHandler = MerossHttpClient(email=kwargs['meross_username'], password=kwargs['meross_password'])
 
       devices = httpHandler.list_supported_devices()
       for counter, device in enumerate(devices):
