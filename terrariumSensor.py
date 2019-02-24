@@ -4,6 +4,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 import os.path
 import re
+import mh_z19
 from glob import iglob
 from time import time
 from pyownet import protocol
@@ -447,7 +448,7 @@ class terrariumSensorTypeException(TypeError):
 
   def __init__(self, message, *args):
     self.message = message
-    super(terrariumPowerSwitchTypeException, self).__init__(message, *args)
+    super(terrariumSensorTypeException, self).__init__(message, *args)
 
 
 # Factory class
@@ -480,7 +481,7 @@ class terrariumSensor(object):
       if hardware_type == sensor.TYPE:
         return sensor(sensor_id, sensor_type, address, name, callback_indicator)
 
-    raise terrariumSensorTypeException('Power switch of type \'{}\' is unknown. We cannot controll this sensor.'.format(hardware_type))
+    raise terrariumSensorTypeException('Sensor of type \'{}\' is unknown. We cannot controll this sensor.'.format(hardware_type))
 
   @staticmethod
   def valid_hardware_types2():
