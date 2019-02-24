@@ -4,7 +4,8 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 import os.path
 import re
-import mh_z19
+import subprocess
+import json
 from glob import iglob
 from time import time
 from pyownet import protocol
@@ -350,7 +351,6 @@ class terrarium1WSensor(terrariumSensorSource):
                                 os.path.basename(address),
                                 callback_indicator = callback)
 
-
 class terrariumOWFSSensor(terrariumSensorSource):
   TYPE = 'owfs'
   VALID_SENSOR_TYPES = ['temperature','humidity']
@@ -425,7 +425,10 @@ class terrariumMHZ19Sensor(terrariumSensorSource):
   def load_data(self):
     data = None
     if self.get_address() is not None:
-      data = mh_z19.read()
+      try:
+        data = json.loads(subprocess.check_output(['sudo', 'python', '-m', 'mh_z19']).decode('utf-8').replace("'",'"'))
+      except Exception as ex:
+        print(ex)
 
     if data is None:
       return None
