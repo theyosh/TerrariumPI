@@ -118,6 +118,7 @@
                                 <option value="eg-pm-lan">{{_('Energenie LAN')}}</option>
                                 <option value="eg-pm-rf">{{_('Energenie Pi-Mote')}}</option>
                                 <option value="wemo">{{_('WeMo')}}</option>
+                                <option value="mss425e">{{_('MSS425E')}}</option>
                               </select>
                             </div>
                           </div>

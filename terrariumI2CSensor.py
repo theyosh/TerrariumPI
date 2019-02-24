@@ -327,7 +327,7 @@ class terrariumBME280Sensor(terrariumI2CSensor):
 
 class terrariumVEML6075Sensor(terrariumI2CSensor):
   TYPE = 'veml6075'
-  VALID_SENSOR_TYPES = ['uva','uvb']
+  VALID_SENSOR_TYPES = ['uva','uvb','uvi']
 
   # Disable the I2C softreset
   SOFTRESET_TIMEOUT = 0
@@ -356,6 +356,9 @@ class terrariumVEML6075Sensor(terrariumI2CSensor):
   __UV_COEFFICENT_UVA_IR = 1.33
   __UV_COEFFICENT_UVB_VISIBLE = 2.95
   __UV_COEFFICENT_UVB_IR = 1.74
+
+  __UVA_RESP = 0.001461
+  __UVB_RESP = 0.002591
 
   # Conversion Factors (VEML6075 Datasheet Rev. 1.2, 23-Nov-16)
   __UVA_COUNTS_PER_UWCM = 0.93
@@ -446,12 +449,18 @@ class terrariumVEML6075Sensor(terrariumI2CSensor):
       value_uva = value_uva - (terrariumVEML6075Sensor.__UV_COEFFICENT_UVA_VISIBLE * compensate_visible_light) - (terrariumVEML6075Sensor.__UV_COEFFICENT_UVA_IR * compensate_ir_light)
       value_uvb = value_uvb - (terrariumVEML6075Sensor.__UV_COEFFICENT_UVB_VISIBLE * compensate_visible_light) - (terrariumVEML6075Sensor.__UV_COEFFICENT_UVB_IR * compensate_ir_light)
 
+      value_uva = value_uva if value_uva > 0.0 else 0.0
+      value_uvb = value_uvb if value_uvb > 0.0 else 0.0
+
+      # Calculate UV Index value
+      data['uvi'] = ((value_uva * terrariumVEML6075Sensor.__UVA_RESP) + (value_uvb * terrariumVEML6075Sensor.__UVB_RESP)) / 2
+
       # Convert to  uW/cm^2
       value_uva /= terrariumVEML6075Sensor.__UVA_COUNTS_PER_UWCM
       value_uvb /= terrariumVEML6075Sensor.__UVB_COUNTS_PER_UWCM
 
-      data['uva'] = value_uva if value_uva > 0.0 else 0.0
-      data['uvb'] = value_uvb if value_uvb > 0.0 else 0.0
+      data['uva'] = value_uva
+      data['uvb'] = value_uvb
 
     except Exception as ex:
       print('load_raw_data temp:')

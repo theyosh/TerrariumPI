@@ -98,7 +98,7 @@ class terrariumDHTSensor(terrariumGPIOSensor):
       elif terrariumAM2302Sensor.TYPE == self.get_type():
         sensor_device = Adafruit_DHT.AM2302
 
-      data['humidity'], data['temperature'] = Adafruit_DHT.read_retry(sensor_device, terrariumUtils.to_BCM_port_number(gpio_pins[0]),5)
+      data['humidity'], data['temperature'] = Adafruit_DHT.read_retry(sensor_device, terrariumUtils.to_BCM_port_number(gpio_pins[0]),4)
 
     except Exception as ex:
       logger.warning('Error getting new data from {} sensor \'{}\'. Error message: {}'.format(self.get_type(),self.get_name(),ex))

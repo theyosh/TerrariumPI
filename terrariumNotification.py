@@ -238,6 +238,8 @@ class terrariumNotification(terrariumSingleton):
     'environment_watertank_alarm_high_on' : terrariumNotificationMessage('environment_watertank_alarm_high_on','Environment watertank alarm high on','%raw_data%'),
     'environment_watertank_alarm_high_off' : terrariumNotificationMessage('environment_watertank_alarm_high_off','Environment watertank alarm high off','%raw_data%'),
 
+    'authentication_warning' : terrariumNotificationMessage('authentication_warning','Authentication warning message','%raw_data%'),
+
     'system_warning' : terrariumNotificationMessage('system_warning','System warning message','%message%'),
     'system_error' : terrariumNotificationMessage('system_error','System error message','%message%'),
 

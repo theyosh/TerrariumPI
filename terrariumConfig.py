@@ -607,6 +607,17 @@ class terrariumConfig(object):
   def get_port_number(self):
     config = self.get_system()
     return config['port']
+  # End system functions
+
+  def get_meross_cloud(self):
+    return self.__get_config('meross_cloud')
+
+  def set_meross_cloud(self,data):
+    data = {'meross_username' : data['meross_username'],
+            'meross_password' : data['meross_password']}
+
+    return self.__update_config('meross_cloud',data)
+  # End system functions
 
   # Environment functions
 
