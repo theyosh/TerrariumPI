@@ -144,6 +144,7 @@ if [ -f /etc/modules ]; then
   fi
 fi
 
+
 # Make sure pigpiod is started at boot, and that user PI can restart it with sudo command
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/sbin/service pigpiod restart" > /etc/sudoers.d/terrariumpi
 # https://github.com/UedaTakeyuki/mh-z19/blob/master/pypi/mh_z19/__init__.py#L18
