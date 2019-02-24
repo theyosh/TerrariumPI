@@ -53,6 +53,7 @@ class terrariumEngine(object):
                     'light'       : 'lux',
                     'uva'         : 'uW/cm^2',
                     'uvb'         : 'uW/cm^2',
+                    'uvi'         : '',
                     'fertility'   : 'uS/cm',
                     'co2'         : 'ppm',
                     'volume'      : 'L',
@@ -240,7 +241,7 @@ class terrariumEngine(object):
     power_switches_config = (self.config.get_power_switches() if starting_up else data)
     seen_power_switches = []
 
-    logger.info('Loading excluding IDs')
+    logger.debug('Loading excluding IDs')
     exclude_ids = []
     for switch_data in power_switches_config:
       if 'exclude' in switch_data and terrariumUtils.is_true(switch_data['exclude']):
@@ -263,7 +264,7 @@ class terrariumEngine(object):
           prev_state[switch] = prev_data['switches'][switch]['power_wattage'][-1:][0][1]
 
       self.power_switches = {}
-      for power_switch in terrariumPowerSwitch.scan_power_switches(self.toggle_power_switch):
+      for power_switch in terrariumPowerSwitch.scan_power_switches(self.toggle_power_switch,**self.config.get_meross_cloud()):
         if power_switch.get_id() not in exclude_ids and power_switch.get_id() not in self.power_switches:
           self.power_switches[power_switch.get_id()] = power_switch
 
@@ -281,6 +282,9 @@ class terrariumEngine(object):
 
       if power_switch_config['id'] in [None,'None',''] or power_switch_config['id'] not in self.power_switches:
         # New switch (add)
+        if power_switch_config['id'] in prev_state:
+          logger.info('Starting up switch {} with state {}'.format(power_switch_config['name'],prev_power_state))
+
         power_switch = terrariumPowerSwitch(power_switch_config['id'],
                                             power_switch_config['hardwaretype'],
                                             power_switch_config['address'],
@@ -293,7 +297,8 @@ class terrariumEngine(object):
         power_switch = self.power_switches[power_switch_config['id']]
         power_switch.set_address(power_switch_config['address'])
         power_switch.set_name(power_switch_config['name'])
-        if starting_up:
+        if power_switch.get_id() in prev_state:
+          logger.info('Starting up switch {} with state {}'.format(power_switch_config['name'],prev_power_state))
           power_switch.set_state(prev_power_state)
 
       power_switch.set_power_wattage(power_switch_config['power_wattage'])
@@ -809,7 +814,7 @@ class terrariumEngine(object):
 
     if filter is not None and filter in self.webcams:
       archive = len(parameters) > 1 and 'archive' == parameters[1]
-      data.append(self.webcams[filter].get_data(archive))
+      data.append(self.webcams[filter].get_data(parameters[2:]))
 
     else:
       for webcamid in self.webcams:
@@ -1199,12 +1204,13 @@ class terrariumEngine(object):
   def get_system_config(self):
     data = self.config.get_system()
     data['windspeed_indicator'] = self.get_windspeed_indicator()
+    data.update(self.config.get_meross_cloud())
 
     del(data['password'])
     return data
 
   def set_system_config(self,data):
-    return self.config.set_system(data)
+    return self.config.set_system(data) and self.config.set_meross_cloud(data)
 
   # End system functions part
 

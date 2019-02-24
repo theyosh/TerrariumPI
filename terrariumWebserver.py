@@ -81,6 +81,7 @@ class terrariumWebserver(object):
             err = HTTPError(401, text)
             err.add_header('WWW-Authenticate', 'Basic realm="%s"' % realm)
             if user is not None or password is not None:
+              self.__terrariumEngine.notification.message('authentication_warning',{'ip' : ip, 'username' : user, 'password' : password},[])
               logger.warning('Incorrect login detected using username \'{}\' and password \'{}\' from ip {}'.format(user,password,ip))
             return err
 
@@ -191,7 +192,8 @@ class terrariumWebserver(object):
                   'horizontal_graph_legend' : 1 if self.__terrariumEngine.get_horizontal_graph_legend() else 0,
                   'translations': self.__translations,
                   'device': self.__terrariumEngine.device,
-                  'notifications' : self.__terrariumEngine.notification}
+                  'notifications' : self.__terrariumEngine.notification,
+                  'show_gauge_overview' : terrariumUtils.is_true(self.__config['sensor_gauge_overview'])}
 
     if 'index' == template or 'profile' == template:
       variables['person_name'] = self.__terrariumEngine.get_profile_name()
