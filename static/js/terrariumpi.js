@@ -2317,53 +2317,54 @@ function webcamArchive(webcamid) {
   function getImages(date) {
 
     $.getJSON('api/webcams/' + webcamid + '/archive/'+ date.getFullYear() + '/' + (date.getMonth() < 9 ? '0' : '') + (date.getMonth() + 1) + '/' + (date.getDate() < 10 ? '0' : '') + date.getDate(), function(data) {
-    var photos = [];
-    var date_match = /archive_(\d+)\.jpg$/g;
+      var photos = [];
+      var date_match = /archive_(\d+)\.jpg$/g;
 
-    no_data_counter += (data.webcams[0].archive_images.length > 0 ? 0 : 1);
-    max_days_back--
+      no_data_counter += (data.webcams[0].archive_images.length > 0 ? 0 : 1);
+      max_days_back--;
 
-    if (no_data_counter > 10 || max_days_back < 0) {
-
-      console.log('Done lading:',no_data_counter,max_days_back);
-
-      return false;
-    }
-
-    $.each(data.webcams[0].archive_images, function(index,value) {
-      value.match(date_match);
-      var date_photo = date_match.exec(value);
-      if (date_photo != null && date_photo.length == 2) {
-        date_photo = moment(date_photo[1]* 1000).format('LLL');
-      } else {
-        date_photo = '{{_('Unknown date')}}';
+      if (no_data_counter > 10 || max_days_back < 0) {
+        console.log('Done lading:',no_data_counter,max_days_back);
+        return false;
       }
 
-      if (fancybox == null) {
-      fancybox = $.fancybox.open(
-        [{src : value,opts: { caption: '{{_('Webcam')}}' + ' ' + data.webcams[0].name + ': ' + date_photo}}],
-        {loop : false,
-         buttons : [
-                   //'slideShow',
-                   'fullScreen',
-                   'thumbs',
-                   //'share',
-                   'download',
-                   'zoom',
-                   'close'
-                ],
-         thumbs : {
-           autoStart : true
+      $.each(data.webcams[0].archive_images, function(index,value) {
+        value.match(date_match);
+        var date_photo = date_match.exec(value);
+        if (date_photo != null && date_photo.length == 2) {
+          date_photo = moment(date_photo[1]* 1000).format('LLL');
+        } else {
+          date_photo = '{{_('Unknown date')}}';
+        }
+
+        if (fancybox == null) {
+          fancybox = $.fancybox.open(
+            [{src : value,opts: { caption: '{{_('Webcam')}}' + ' ' + data.webcams[0].name + ': ' + date_photo}}],
+            {loop : false,
+             buttons : [
+                     //'slideShow',
+                     'fullScreen',
+                     'thumbs',
+                     //'share',
+                     'download',
+                     'zoom',
+                     'close']
+             }
+          );
+        } else {
+          if ($.fancybox.getInstance()) {
+            fancybox.addContent({src : value, opts: { caption: '{{_('Webcam')}}' + ' ' + data.webcams[0].name + ': ' + date_photo}});
           }
-        });
+        }
+      });
+      // recursive
+      if ($.fancybox.getInstance()) {
+        setTimeout(function(){
+          getImages(new Date(date.getTime() - (24 * 60 * 60 * 1000)));
+          }, 5000);
       } else {
-        fancybox.addContent({src : value, opts: { caption: '{{_('Webcam')}}' + ' ' + data.webcams[0].name + ': ' + date_photo}});
+        fancybox == null;
       }
-    });
-    // recursive
-    setTimeout(function(){
-      getImages(new Date(date.getTime() - (24 * 60 * 60 * 1000)));
-      }, 5000);
     });
   }
   getImages(now);
