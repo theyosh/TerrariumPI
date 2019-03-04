@@ -245,12 +245,23 @@ class terrariumUtils():
       url_data = terrariumUtils.parse_url(url)
       proxies = {'http' : proxy, 'https' : proxy}
       if url_data['username'] is None:
-        response = requests.get(url,timeout=timeout,proxies=proxies)
+        response = requests.get(url,timeout=timeout,proxies=proxies,stream=True)
       else:
-        response = requests.get(url,auth=(url_data['username'],url_data['password']),timeout=timeout,proxies=proxies)
+        response = requests.get(url,auth=(url_data['username'],url_data['password']),timeout=timeout,proxies=proxies,stream=True)
 
       if response.status_code == 200:
-        if 'application/json' in response.headers['content-type']:
+        if 'multipart/x-mixed-replace' in response.headers['content-type']:
+          # Motion JPEG stream....
+          # https://stackoverflow.com/a/36675148
+          frame = bytes()
+          for chunk in response.iter_content(chunk_size=1024):
+            frame += chunk
+            a = frame.find(b'\xff\xd8')
+            b = frame.find(b'\xff\xd9')
+            if a != -1 and b != -1:
+              return frame[a:b+2]
+
+        elif 'application/json' in response.headers['content-type']:
           data = response.json()
           json_path = url_data['fragment'].split('/') if 'fragment' in url_data and url_data['fragment'] is not None else []
           for item in json_path:
@@ -270,6 +281,7 @@ class terrariumUtils():
         data = None
 
     except Exception as ex:
+      print(ex)
       logger.exception('Error parsing remote data at url %s. Exception %s' % (url, ex))
 
     return data

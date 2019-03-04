@@ -544,7 +544,7 @@ class terrariumWebcamUSB(terrariumWebcamSource):
 
 class terrariumWebcamRemote(terrariumWebcamSource):
   TYPE = 'remote'
-  VALID_SOURCE = '^https?://.*\.[^m3u8]*$'
+  VALID_SOURCE = '^https?://(?!.*\.(?:m3u8))'
   INFO_SOURCE = 'https://server.com/stream.jpg'
 
   def get_raw_data(self):
