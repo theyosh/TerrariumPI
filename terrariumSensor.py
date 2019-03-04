@@ -6,6 +6,7 @@ import os.path
 import re
 import subprocess
 import json
+import sys
 from glob import iglob
 from time import time
 from pyownet import protocol
@@ -416,7 +417,7 @@ class terrariumOWFSSensor(terrariumSensorSource):
 
 class terrariumMHZ19Sensor(terrariumSensorSource):
   TYPE = 'mh-z19'
-  VALID_SENSOR_TYPES = ['co2']
+  VALID_SENSOR_TYPES = ['co2','temperature']
 
   def set_address(self,address):
     # Address is not needed according to source....
@@ -426,16 +427,18 @@ class terrariumMHZ19Sensor(terrariumSensorSource):
     data = None
     if self.get_address() is not None:
       try:
-        data = json.loads(subprocess.check_output(['sudo', 'python', '-m', 'mh_z19']).decode('utf-8').replace("'",'"'))
+        data = json.loads(subprocess.check_output(['sudo', 'python' + ('3' if sys.version_info.major == 3 else '2'), '-m', 'mh_z19','--all']).decode('utf-8').replace("'",'"'))
       except Exception as ex:
         print(ex)
 
     if data is None:
       return None
     else:
-      data = data['co2']
+      del(data['SS'])
+      del(data['UhUl'])
+      del(data['TT'])
 
-    return { self.get_sensor_type() : data}
+    return data
 
 from terrariumAnalogSensor import terrariumSKUSEN0161Sensor
 from terrariumBluetoothSensor import terrariumMiFloraSensor
