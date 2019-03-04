@@ -631,7 +631,7 @@ class terrariumPowerDimmerPWM(terrariumPowerDimmerSource):
   # PWM dimmer settings
   # According to http://www.esp8266-projects.com/2017/04/raspberry-pi-domoticz-ac-dimmer-part-1/
   # is 860 DIM value equal to 95% dimming -> 905 is 100% dimming
-  DIMMER_MAXDIM = 905
+  DIMMER_MAXDIM = 870
   DIMMER_FREQ   = 5000
 
 class terrariumPowerDimmerDC(terrariumPowerDimmerSource):
