@@ -5,7 +5,6 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 import smbus
 import sys
-#import time
 import Adafruit_SHT31
 
 from terrariumSensor import terrariumSensorSource
@@ -15,6 +14,8 @@ from terrariumUtils import terrariumUtils
 # https://github.com/ageir/chirp-rpi
 sys.path.insert(0, './chirp-rpi')
 import chirp
+sys.path.insert(0, './python-MLX90614')
+from mlx90614 import MLX90614
 
 from gevent import monkey, sleep
 monkey.patch_all()
@@ -530,5 +531,45 @@ class terrariumChirpSensor(terrariumSensorSource):
     data['min_moist'] = self.get_min_moist_calibration()
     data['max_moist']  = self.get_max_moist_calibration()
     data['temp_offset']  = self.get_temperature_offset_calibration()
+
+    return data
+
+class terrariumMLX90614Sensor(terrariumSensorSource):
+  TYPE = 'mlx90614'
+  VALID_SENSOR_TYPES = ['temperature']
+
+  def set_address(self,address):
+    super(terrariumMLX90614Sensor,self).set_address(address)
+    data = self.get_address().split(',')
+    self.i2c_address = int('0x' + data[0],16)
+    self.i2c_bus = 1
+    self.temp_type = 'object'
+    if len(data) == 3:
+      _, self.i2c_bus, self.temp_type = data
+    elif len(data) == 2:
+      if 'a' == data[1]:
+        self.temp_type = 'ambient'
+      elif 'o' == data[1]:
+        self.temp_type = 'object'
+      else:
+        self.i2c_bus = data[1]
+
+  def load_data(self):
+    data = None
+
+    try:
+      data = {}
+      sensor = MLX90614(self.i2c_address,int(self.i2c_bus))
+
+      # we cannot cache data here.... as both are 'temperature' values
+      if 'object' == self.temp_type:
+        data['temperature'] = float(sensor.get_obj_temp())
+      elif 'ambient' == self.temp_type:
+        data['temperature'] = float(sensor.get_amb_temp())
+      else:
+        data = None
+
+    except Exception as ex:
+      print(ex)
 
     return data
