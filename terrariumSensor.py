@@ -4,6 +4,9 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 import os.path
 import re
+import subprocess
+import json
+import sys
 from glob import iglob
 from time import time
 from pyownet import protocol
@@ -349,7 +352,6 @@ class terrarium1WSensor(terrariumSensorSource):
                                 os.path.basename(address),
                                 callback_indicator = callback)
 
-
 class terrariumOWFSSensor(terrariumSensorSource):
   TYPE = 'owfs'
   VALID_SENSOR_TYPES = ['temperature','humidity']
@@ -413,11 +415,35 @@ class terrariumOWFSSensor(terrariumSensorSource):
     except Exception as ex:
       logger.warning('OWFS file system is not actve / installed on this device! If this is not correct, try \'i2cdetect -y 1\' to see if device is connected.')
 
+class terrariumMHZ19Sensor(terrariumSensorSource):
+  TYPE = 'mh-z19'
+  VALID_SENSOR_TYPES = ['co2','temperature']
+
+  def set_address(self,address):
+    # Address is not needed according to source....
+    self.sensor_address = 'N/A'
+
+  def load_data(self):
+    data = None
+    if self.get_address() is not None:
+      try:
+        data = json.loads(subprocess.check_output(['sudo', 'python' + ('3' if sys.version_info.major == 3 else '2'), '-m', 'mh_z19','--all']).decode('utf-8').replace("'",'"'))
+      except Exception as ex:
+        print(ex)
+
+    if data is None:
+      return None
+    else:
+      del(data['SS'])
+      del(data['UhUl'])
+      del(data['TT'])
+
+    return data
 
 from terrariumAnalogSensor import terrariumSKUSEN0161Sensor
 from terrariumBluetoothSensor import terrariumMiFloraSensor
 from terrariumGPIOSensor import terrariumYTXXSensorDigital, terrariumDHT11Sensor, terrariumDHT22Sensor, terrariumAM2302Sensor, terrariumHCSR04Sensor
-from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor, terrariumSHT3XSensor
+from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor, terrariumSHT3XSensor, terrariumMLX90614Sensor
 
 # Not sure if this is needed here again....?
 monkey.patch_all()
@@ -428,7 +454,7 @@ class terrariumSensorTypeException(TypeError):
 
   def __init__(self, message, *args):
     self.message = message
-    super(terrariumPowerSwitchTypeException, self).__init__(message, *args)
+    super(terrariumSensorTypeException, self).__init__(message, *args)
 
 
 # Factory class
@@ -452,14 +478,16 @@ class terrariumSensor(object):
              terrariumBME280Sensor,
              terrariumVEML6075Sensor,
              terrariumChirpSensor,
-             terrariumSHT3XSensor]
+             terrariumSHT3XSensor,
+             terrariumMHZ19Sensor,
+             terrariumMLX90614Sensor]
 
   def __new__(self, sensor_id, hardware_type, sensor_type, address, name = '', callback_indicator = None):
     for sensor in terrariumSensor.SENSORS:
       if hardware_type == sensor.TYPE:
         return sensor(sensor_id, sensor_type, address, name, callback_indicator)
 
-    raise terrariumSensorTypeException('Power switch of type \'{}\' is unknown. We cannot controll this sensor.'.format(hardware_type))
+    raise terrariumSensorTypeException('Sensor of type \'{}\' is unknown. We cannot controll this sensor.'.format(hardware_type))
 
   @staticmethod
   def valid_hardware_types2():
@@ -485,8 +513,7 @@ class terrariumSensor(object):
       for sensor_type in sensor_types:
         data[sensor_type] = sensor_type
 
-    # CO2 and volume is only through remote
-    data['co2']    = 'co2'
+    # Volume is only through remote
     data['volume'] = 'volume'
     return data
 

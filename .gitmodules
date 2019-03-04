@@ -19,3 +19,6 @@
 [submodule "hls-proxy"]
 	path = hls-proxy
 	url = https://github.com/Viblast/hls-proxy.git
+[submodule "python-MLX90614"]
+	path = python-MLX90614
+	url = https://github.com/CRImier/python-MLX90614.git

@@ -421,6 +421,11 @@ class terrariumNotification(terrariumSingleton):
     if self.telegram is not None:
       self.telegram.stop()
 
+    for messagetype in self.__notification_leds:
+      if self.__notification_leds[messagetype]['pin'] is not None:
+        GPIO.cleanup(self.__notification_leds[messagetype]['pin'])
+        self.__notification_leds[messagetype]['pin'] = None
+
   def set_profile_image(self,imagefile):
     self.__profile_image = imagefile
     if self.__profile_image is None:
