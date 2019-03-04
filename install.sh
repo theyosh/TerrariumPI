@@ -109,7 +109,6 @@ groupadd -f gpio 2> /dev/null
 # Add user to all groupds
 usermod -a -G dialout,sispmctl,gpio ${SCRIPT_USER} 2> /dev/null
 
-
 # Docu https://pylibftdi.readthedocs.io/
 # Make sure that the normal Pi user can read and write to the usb driver
 echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", GROUP="dialout", MODE="0660"' > /etc/udev/rules.d/99-libftdi.rules
@@ -159,7 +158,7 @@ systemctl enable pigpiod
 update-rc.d -f owftpd remove
 update-rc.d -f owfhttpd remove
 
-PROGRESS=35
+PROGRESS=30
 # Update submodules if downloaded through tar or zip
 (
 cd "${BASEDIR}/"
