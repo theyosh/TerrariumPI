@@ -121,7 +121,7 @@ class terrariumWebserver(object):
                      callback=self.__static_file,
                      apply=self.__authenticate(False))
 
-    self.__app.route('/api/<path:re:(config/notifications)>',
+    self.__app.route('/api/<path:re:config.*>',
                      method=['GET'],
                      callback=self.__get_api_call,
                      apply=self.__authenticate(True)
