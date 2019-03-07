@@ -440,6 +440,37 @@ class terrariumPowerSwitchEnergenieRF(terrariumPowerSwitchSource):
   def stop(self):
     self.__device.close()
 
+class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchSource):
+  TYPE = 'denkovi_v2_4'
+
+  def _get_relay_count(self):
+    return int(self.TYPE[-1:])
+
+  def load_hardware(self):
+    # We have per device 4 outlets.... so outlet 7 is device 1
+    self.__device = (int(self.get_address())-1) / self._get_relay_count()
+    if self.__device < 0:
+      self.__device = 0
+
+  def set_hardware_state(self, state, force = False):
+    address = int(self.get_address()) % self._get_relay_count()
+    if address == 0:
+      address = 4
+
+    cmd = ['java','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',str(self.__device),str(self._get_relay_count()),str(address),str(1 if state is terrariumPowerSwitch.ON else 0)]
+
+    if sys.version_info.major == 2:
+      with open(os.devnull, 'w') as devnull:
+        subprocess.call(cmd,stdout=devnull, stderr=subprocess.STDOUT)
+    elif sys.version_info.major == 3:
+      subprocess.run(cmd,capture_output=True)
+
+class terrariumPowerSwitchDenkoviV2_8(terrariumPowerSwitchDenkoviV2_4):
+  TYPE = 'denkovi_v2_8'
+
+class terrariumPowerSwitchDenkoviV2_16(terrariumPowerSwitchDenkoviV2_4):
+  TYPE = 'denkovi_v2_16'
+
 class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
   TYPE = 'dimmer'
 
@@ -739,7 +770,10 @@ class terrariumPowerSwitch(object):
                     terrariumPowerSwitchWeMo,
                     terrariumPowerSwitchRemote,
                     terrariumPowerDimmerPWM,
-                    terrariumPowerDimmerDC]
+                    terrariumPowerDimmerDC,
+                    terrariumPowerSwitchDenkoviV2_4,
+                    terrariumPowerSwitchDenkoviV2_8,
+                    terrariumPowerSwitchDenkoviV2_16]
 
   if sys.version_info >= (3, 3):
     # Merros IoT library needs Python 3.3+
