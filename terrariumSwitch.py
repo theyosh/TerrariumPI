@@ -452,6 +452,18 @@ class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchSource):
     if self.__device < 0:
       self.__device = 0
 
+  def get_hardware_state(self):
+    data = None
+    cmd = ['java','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',str(self.__device),str(self._get_relay_count()),str(address),'status']
+    try:
+      data = subprocess.check_output(cmd).strip().decode('utf-8')
+
+    except Exception as err:
+      # Ignore for now
+      print(err)
+
+    return terrariumPowerSwitch.ON if terrariumUtils.is_true(data) else terrariumPowerSwitch.OFF
+
   def set_hardware_state(self, state, force = False):
     address = int(self.get_address()) % self._get_relay_count()
     if address == 0:
