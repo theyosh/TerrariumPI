@@ -119,9 +119,9 @@
                                 <option value="eg-pm-rf">{{_('Energenie Pi-Mote')}}</option>
                                 <option value="wemo">{{_('WeMo')}}</option>
                                 <option value="mss425e">{{_('MSS425E')}}</option>
-                                <option value="denkovi_v2_4">{{_('DenkoviV2_4')}}</option>
-                                <option value="denkovi_v2_8">{{_('DenkoviV2_8')}}</option>
-                                <option value="denkovi_v2_16">{{_('DenkoviV2_16')}}</option>
+                                <option value="denkovi_v2_4">{{_('DenkoviV2 4 relays')}}</option>
+                                <option value="denkovi_v2_8">{{_('DenkoviV2 8 relays')}}</option>
+                                <option value="denkovi_v2_16">{{_('DenkoviV2 16 relays')}}</option>
                               </select>
                             </div>
                           </div>
