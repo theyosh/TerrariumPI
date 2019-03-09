@@ -453,7 +453,7 @@ class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchSource):
     serial_regex = r"^(?P<serial>[^ ]+)\W(\[[^\]]+\])\W\[id=\d\]$"
 
     # We only support one board for now...
-    cmd = ['sudo','java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar','list']
+    cmd = ['sudo','/usr/bin/java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar','list']
 
     print('Get power switch serial data:')
     print(cmd)
@@ -483,7 +483,7 @@ class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchSource):
       address = self._get_relay_count()
 
     data = None
-    cmd = ['sudo','java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),str(address),'status']
+    cmd = ['sudo','/usr/bin/java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),str(address),'status']
     print('Get power switch state cmd:')
     print(cmd)
 
@@ -504,7 +504,7 @@ class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchSource):
     if address == 0:
       address = self._get_relay_count()
 
-    cmd = ['sudo','java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),str(address),str(1 if state is terrariumPowerSwitch.ON else 0)]
+    cmd = ['sudo','/usr/bin/java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),str(address),str(1 if state is terrariumPowerSwitch.ON else 0)]
 
     print('Set power switch state cmd:')
     print(cmd)
