@@ -119,6 +119,7 @@
                                 <option value="eg-pm-rf">{{_('Energenie Pi-Mote')}}</option>
                                 <option value="wemo">{{_('WeMo')}}</option>
                                 <option value="mss425e">{{_('MSS425E')}}</option>
+                                <option value="sonoff">{{_('Sonoff')}}</option>
                               </select>
                             </div>
                           </div>

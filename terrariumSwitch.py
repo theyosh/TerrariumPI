@@ -352,9 +352,9 @@ class terrariumPowerSwitchEnergenieLAN(terrariumPowerSwitchSource):
   TYPE = 'eg-pm-lan'
   VALID_SOURCE = '^http:\/\/((?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?#(?P<switch>[1-4])$'
 
-  def set_address(self,value):
-    super(terrariumPowerSwitchEnergenieLAN, self).set_address(value)
-    self.load_hardware()
+ # def set_address(self,value):
+ #   super(terrariumPowerSwitchEnergenieLAN, self).set_address(value)
+ #   self.load_hardware()
 
   def load_hardware(self):
     self.__device = None
@@ -439,6 +439,134 @@ class terrariumPowerSwitchEnergenieRF(terrariumPowerSwitchSource):
 
   def stop(self):
     self.__device.close()
+
+class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
+  TYPE = 'sonoff'
+  VALID_SOURCE = '^http:\/\/((?P<user>[^:]+):(?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?$'
+
+  def load_hardware(self):
+    self.__device = None
+    self.__firmware = None
+    # Input format should be either:
+    # - http://[HOST]#[POWER_SWITCH_NR]
+    # - http://[HOST]/#[POWER_SWITCH_NR]
+    # - http://[PASSWORD]@[HOST]#[POWER_SWITCH_NR]
+    # - http://[PASSWORD]@[HOST]/#[POWER_SWITCH_NR]
+
+    data = re.match(self.VALID_SOURCE,self.get_address())
+    if data:
+      data = data.groupdict()
+
+      try:
+        # Try Tasmota
+
+        # http://sonoff/cm?cmnd=Power%20TOGGLE
+        # http://sonoff/cm?cmnd=Power%20On
+        # http://sonoff/cm?cmnd=Power%20off
+        # http://sonoff/cm?user=admin&password=joker&cmnd=Power%20Toggle
+
+        print('Test Tasmota')
+
+        url = 'http://{}/cm?cmnd=Power'.format(data['host'])
+        if 'user' in data and 'password' in data:
+          url += '&user={}&password={}'.format(data['user'],data['password'])
+
+        print(url)
+        state = terriumUtils.get_remote_data(url)
+        print('Result')
+        print(state)
+
+        self.__firmware = 'tasmota'
+
+      except Exception as ex:
+        print('Tasmota exceptions')
+        print(ex)
+
+
+      if self.__firmware is None:
+        try:
+          # Try ESP Easy
+
+          # url_switch_on  = 'http://192.168.1.42/control?cmd=event,T1'
+          # url_switch_off  = 'http://192.168.1.42/control?cmd=event,T0'
+
+          print('Test ESP Easy')
+
+          url = 'http://{}/json'.format(data['host'])
+          # No information about using username and password:
+          # https://www.letscontrolit.com/wiki/index.php?title=ESPEasy_Command_Reference
+          # https://www.letscontrolit.com/wiki/index.php?title=ESP_Easy_web_interface#JSON_page_.28hidden_prior_to_version_2.0.2B.29
+
+          print(url)
+          state = terriumUtils.get_remote_data(url)
+          print('Result')
+          print(state)
+
+          self.__firmware = 'espeasy'
+
+        except Exception as ex:
+          print('ESP Easy exceptions')
+          print(ex)
+
+      if self.__firmware is None:
+        try:
+          # Try ESPurna
+          # https://github.com/xoseperez/espurna/wiki/RESTAPI
+
+          # http://192.168.1.108/apis?apikey=C62ED7BE7593B658
+          # http://192.168.1.108/api/relay/0?apikey=C62ED7BE7593B658&value=0 (off)
+          # http://192.168.1.108/api/relay/0?apikey=C62ED7BE7593B658&value=1 (on)
+          # http://192.168.1.108/api/relay/0?apikey=C62ED7BE7593B658&value=2 (toggle)
+
+
+          print('Test ESPurna')
+
+          url = 'http://{}/apis?apikey={}'.format(data['host'],data['password'])
+
+          print(url)
+          state = terriumUtils.get_remote_data(url,json=True)
+          print('Result')
+          print(state)
+
+          self.__firmware = 'espurna'
+
+        except Exception as ex:
+          print('ESPurna exceptions')
+          print(ex)
+
+  def set_hardware_state(self, state, force = False):
+    changed = True
+
+    if self.__device is None:
+      logger.error('Sonoff device is not connected. Cannot trigger power switch')
+      changed = False
+    else:
+      data = re.match(self.VALID_SOURCE,self.get_address())
+      if data:
+
+        url = None
+
+        if 'tasmota' == self.__firmware:
+          url = 'http://{}/cm?cmnd=Power%20{}'.format(data['host'],('1' if state else '0'))
+          if 'user' in data and 'password' in data:
+            url += '&user={}&password={}'.format(data['user'],data['password'])
+
+        elif 'espeasy' == self.__firmware:
+          url = 'http://{}/control?cmd=event,T{}'.format(data['host'],('1' if state else '0'))
+
+        elif 'espurna' == self.__firmware:
+          url = 'http://{}/api/relay/0?apikey={}&value={}'.format(data['host'],data['password'],('1' if state else '0'))
+
+        print('Toggle Sonoff')
+        print(url)
+
+        state = erriumUtils.get_remote_data(url)
+        print('State')
+        print(state)
+
+    return changed
+
+
 
 class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
   TYPE = 'dimmer'
