@@ -444,7 +444,7 @@ class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchSource):
   TYPE = 'denkovi_v2_4'
 
   def _get_relay_count(self):
-    return int(self.TYPE[-1:])
+    return int(self.TYPE.split('_')[-1])
 
   def load_hardware(self):
     # We have per device 4 outlets.... so outlet 7 is device 1
@@ -454,12 +454,16 @@ class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchSource):
 
   def get_hardware_state(self):
     data = None
-    cmd = ['java','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',str(self.__device),str(self._get_relay_count()),str(address),'status']
+    cmd = ['sudo','java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',str(self.__device),str(self._get_relay_count()),str(address),'status']
     try:
+      print('Get power switch state cmd:')
+      print(cmd)
       data = subprocess.check_output(cmd).strip().decode('utf-8')
+      print(data)
 
     except Exception as err:
       # Ignore for now
+      print('Get state error')
       print(err)
 
     return terrariumPowerSwitch.ON if terrariumUtils.is_true(data) else terrariumPowerSwitch.OFF
@@ -469,13 +473,23 @@ class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchSource):
     if address == 0:
       address = 4
 
-    cmd = ['java','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',str(self.__device),str(self._get_relay_count()),str(address),str(1 if state is terrariumPowerSwitch.ON else 0)]
+    cmd = ['sudo','java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',str(self.__device),str(self._get_relay_count()),str(address),str(1 if state is terrariumPowerSwitch.ON else 0)]
 
-    if sys.version_info.major == 2:
-      with open(os.devnull, 'w') as devnull:
-        subprocess.call(cmd,stdout=devnull, stderr=subprocess.STDOUT)
-    elif sys.version_info.major == 3:
-      subprocess.run(cmd,capture_output=True)
+    print('Set power switch state cmd:')
+    print(cmd)
+
+    try:
+      if sys.version_info.major == 2:
+        with open(os.devnull, 'w') as devnull:
+          subprocess.call(cmd,stdout=devnull, stderr=subprocess.STDOUT)
+      elif sys.version_info.major == 3:
+        subprocess.run(cmd,capture_output=True)
+    except Exception as err:
+      # Ignore for now
+      print('Set state error')
+      print(err)
+
+    print('Set state done!')
 
 class terrariumPowerSwitchDenkoviV2_8(terrariumPowerSwitchDenkoviV2_4):
   TYPE = 'denkovi_v2_8'
