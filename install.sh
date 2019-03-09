@@ -151,6 +151,9 @@ echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl stop serial-getty@ttyS0.
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl start serial-getty@ttyS0.service" >> /etc/sudoers.d/terrariumpi
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl stop serial-getty@ttyAMA0.service" >> /etc/sudoers.d/terrariumpi
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl start serial-getty@ttyAMA0.service" >> /etc/sudoers.d/terrariumpi
+# http://denkovi.com/denkovi-relay-command-line-tool
+echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/bin/java -jar DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar" >> /etc/sudoers.d/terrariumpi
+
 
 systemctl enable pigpiod
 
