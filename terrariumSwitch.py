@@ -447,7 +447,7 @@ class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchSource):
     return int(self.TYPE.split('_')[-1])
 
   def _get_board_type(self):
-    return '{}v2'.format(self._get_relay_count)
+    return '{}v2'.format(self._get_relay_count())
 
   def load_hardware(self):
     serial_regex = r"^(?P<serial>[^ ]+)\W(\[[^\]]+\])\W\[id=\d\]$"
