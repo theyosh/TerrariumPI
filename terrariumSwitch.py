@@ -342,19 +342,12 @@ class terrariumPowerSwitchEnergenieUSB(terrariumPowerSwitchSource):
     if address == 0:
       address = 4
 
-    if sys.version_info.major == 2:
-      with open(os.devnull, 'w') as devnull:
-        subprocess.call(['/usr/bin/sispmctl', '-d',str(self.__device),('-o' if state is terrariumPowerSwitch.ON else '-f'),str(address)],stdout=devnull, stderr=subprocess.STDOUT)
-    elif sys.version_info.major == 3:
-      subprocess.run(['/usr/bin/sispmctl', '-d',str(self.__device),('-o' if state is terrariumPowerSwitch.ON else '-f'),str(address)],capture_output=True)
+    cmd = ['/usr/bin/sispmctl', '-d',str(self.__device),('-o' if state is terrariumPowerSwitch.ON else '-f'),str(address)]
+    subprocess.check_output(cmd)
 
 class terrariumPowerSwitchEnergenieLAN(terrariumPowerSwitchSource):
   TYPE = 'eg-pm-lan'
   VALID_SOURCE = '^http:\/\/((?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?#(?P<switch>[1-4])$'
-
-  def set_address(self,value):
-    super(terrariumPowerSwitchEnergenieLAN, self).set_address(value)
-    self.load_hardware()
 
   def load_hardware(self):
     self.__device = None
@@ -416,10 +409,6 @@ class terrariumPowerSwitchEnergenieLAN(terrariumPowerSwitchSource):
         # raise exception here...
         logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.get_address(),webstatus['logintxt'],webstatus['login']))
 
-      #except Exception as ex:
-      #  logger.exception('Could not login to the Energenie LAN device %s at location %s. Error status %s' % (self.get_name(),self.get_address(),ex))
-      #  changed = False
-
     return changed
 
   def stop(self):
@@ -440,44 +429,35 @@ class terrariumPowerSwitchEnergenieRF(terrariumPowerSwitchSource):
   def stop(self):
     self.__device.close()
 
-class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchSource):
-  TYPE = 'denkovi_v2_4'
+class terrariumPowerSwitchDenkoviV2(terrariumPowerSwitchSource):
+  TYPE = 'denkovi_v2'
 
   def _get_relay_count(self):
     return int(self.TYPE.split('_')[-1])
 
   def _get_board_type(self):
-    return '{}{}'.format(self._get_relay_count(),self.__chip)
+    return '{}{}'.format(self._get_relay_count(),self.__version)
 
   def load_hardware(self):
     serial_regex = r"^(?P<serial>[^ ]+)\W(\[[^\]]+\])\W\[id=\d\]$"
     self.__device = None
-    self.__chip = ''
+    self.__version = ''
 
     # We only support one board for now...
     cmd = ['/usr/bin/sudo','/usr/bin/java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar','list']
     logger.debug('Running load hardware command {}'.format(cmd))
 
-#    print('Get power switch serial data:')
-#    print(cmd)
-
     try:
       data = subprocess.check_output(cmd).strip().decode('utf-8')
-#      print(data)
-
       for line in data.split("\n"):
-#        print(line)
         match = re.match(r"^(?P<serial>[^ ]+)\W(?P<device>\[[^\]]+\])\W\[id=\d\]$",line,re.MULTILINE)
-#        print(match)
         if match:
           self.__device = str(match.group('serial'))
-          self.__chip = 'v2' if 'MCP2200' in match.group('device') else ''
+          self.__version = 'v2' if 'MCP2200' in match.group('device') else ''
           break
 
     except Exception as err:
       # Ignore for now
-#      print('Get serial error')
-#      print(err)
       logger.error('Error loading hardware for switch type {}, with error: {}'.format(self.get_type(),err))
 
 
@@ -490,20 +470,11 @@ class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchSource):
     cmd = ['/usr/bin/sudo','/usr/bin/java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),str(address),'status']
     logger.debug('Running get hardware state command {}'.format(cmd))
 
-#    print('Get power switch state cmd:')
-#    print(cmd)
-
     try:
-
       data = subprocess.check_output(cmd).strip().decode('utf-8')
-#      print(data)
-
     except Exception as err:
       # Ignore for now
       logger.error('Error getting hardware state for switch type {}, with error: {}'.format(self.get_type(),err))
-
-#      print('Get state error')
-#      print(err)
 
     return terrariumPowerSwitch.ON if terrariumUtils.is_true(data) else terrariumPowerSwitch.OFF
 
@@ -515,9 +486,6 @@ class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchSource):
     cmd = ['/usr/bin/sudo','/usr/bin/java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),str(address),str(1 if state is terrariumPowerSwitch.ON else 0)]
     logger.debug('Running set hardware state command {}'.format(cmd))
 
-#    print('Set power switch state cmd:')
-#    print(cmd)
-
     try:
       subprocess.check_output(cmd)
       return True
@@ -526,17 +494,13 @@ class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchSource):
       # Ignore for now
       logger.error('Error setting hardware state for switch type {}, with error: {}'.format(self.get_type(),err))
 
+class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchDenkoviV2):
+  TYPE = 'denkovi_v2_4'
 
-#      print('Set state error')
-#      print(err)
-
-#    print('Set state done!')
-
-
-class terrariumPowerSwitchDenkoviV2_8(terrariumPowerSwitchDenkoviV2_4):
+class terrariumPowerSwitchDenkoviV2_8(terrariumPowerSwitchDenkoviV2):
   TYPE = 'denkovi_v2_8'
 
-class terrariumPowerSwitchDenkoviV2_16(terrariumPowerSwitchDenkoviV2_4):
+class terrariumPowerSwitchDenkoviV2_16(terrariumPowerSwitchDenkoviV2):
   TYPE = 'denkovi_v2_16'
 
 class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
