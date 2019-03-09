@@ -446,18 +446,49 @@ class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchSource):
   def _get_relay_count(self):
     return int(self.TYPE.split('_')[-1])
 
+  def _get_board_type(self):
+    return '{}v2'.format(self._get_relay_count)
+
   def load_hardware(self):
-    # We have per device 4 outlets.... so outlet 7 is device 1
-    self.__device = (int(self.get_address())-1) / self._get_relay_count()
-    if self.__device < 0:
-      self.__device = 0
+    serial_regex = r"^(?P<serial>[^ ]+)\W(\[[^\]]+\])\W\[id=\d\]$"
+
+    # We only support one board for now...
+    cmd = ['sudo','java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar','list']
+
+    print('Get power switch serial data:')
+    print(cmd)
+
+    try:
+      data = subprocess.check_output(cmd).strip().decode('utf-8')
+      print(data)
+
+      data = data.split("\n")
+      for line in data:
+        print(line)
+        match = re.match(r"^(?P<serial>[^ ]+)\W(\[[^\]]+\])\W\[id=\d\]$",line,re.MULTILINE)
+        print(match)
+        if match:
+          self.__device = str(match.group('serial'))
+          break
+
+    except Exception as err:
+      # Ignore for now
+      print('Get serial error')
+      print(err)
+
 
   def get_hardware_state(self):
+    address = int(self.get_address()) % self._get_relay_count()
+    if address == 0:
+      address = self._get_relay_count()
+
     data = None
-    cmd = ['sudo','java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',str(self.__device),str(self._get_relay_count()),str(address),'status']
+    cmd = ['sudo','java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),str(address),'status']
+    print('Get power switch state cmd:')
+    print(cmd)
+
     try:
-      print('Get power switch state cmd:')
-      print(cmd)
+
       data = subprocess.check_output(cmd).strip().decode('utf-8')
       print(data)
 
@@ -471,9 +502,9 @@ class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchSource):
   def set_hardware_state(self, state, force = False):
     address = int(self.get_address()) % self._get_relay_count()
     if address == 0:
-      address = 4
+      address = self._get_relay_count()
 
-    cmd = ['sudo','java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',str(self.__device),str(self._get_relay_count()),str(address),str(1 if state is terrariumPowerSwitch.ON else 0)]
+    cmd = ['sudo','java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),str(address),str(1 if state is terrariumPowerSwitch.ON else 0)]
 
     print('Set power switch state cmd:')
     print(cmd)
