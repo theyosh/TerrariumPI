@@ -14,6 +14,7 @@ import pywemo
 from hashlib import md5
 from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
 from gpiozero import Energenie
+from time import time
 
 try:
   import thread as _thread
@@ -26,7 +27,7 @@ except ImportError as ex:
   # Python 2 does not support Meross XXX Power Switches
   pass
 
-from terrariumUtils import terrariumUtils, terrariumTimer
+from terrariumUtils import terrariumUtils, terrariumTimer, terrariumCache
 
 # Dirty hack to include someone his code... to lazy to make it myself :)
 # https://github.com/perryflynn/energenie-connect0r
@@ -35,6 +36,7 @@ import energenieconnector
 
 from gevent import monkey, sleep
 monkey.patch_all()
+
 
 class terrariumPowerSwitchSource(object):
   TYPE = None
@@ -432,6 +434,17 @@ class terrariumPowerSwitchEnergenieRF(terrariumPowerSwitchSource):
 class terrariumPowerSwitchDenkoviV2(terrariumPowerSwitchSource):
   TYPE = 'denkovi_v2'
 
+  def __init__(self, switchid, address, name = '', prev_state = None, callback = None):
+    super(terrariumPowerSwitchDenkoviV2,self).__init__(switchid, address, name, prev_state, callback)
+    print('Adding status cache')
+    self.__cache = terrariumCache()
+    print('Done adding status cache')
+
+  def __get_cache_key(self):
+    key = md5((self.get_type() + str(self.__device)).encode()).hexdigest()
+    print('Get cache key {}'.format(key))
+    return key
+
   def _get_relay_count(self):
     return int(self.TYPE.split('_')[-1])
 
@@ -462,32 +475,54 @@ class terrariumPowerSwitchDenkoviV2(terrariumPowerSwitchSource):
 
 
   def get_hardware_state(self):
-    data = None
+    #data = None
+    print('Get hardware state cache data')
+    data = self.__cache.get_data(self.__get_cache_key())
+    print(data)
+    print('IS running: {}' .format(self.__cache.is_running(self.__get_cache_key())))
+
+    if data is None and not self.__cache.is_running(self.__get_cache_key()):
+      self.__cache.set_running(self.__get_cache_key())
+
+      cmd = ['/usr/bin/sudo','/usr/bin/java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),'all','status']
+      logger.debug('Running get hardware state command {}'.format(cmd))
+      print('Running cmd: {}'.format(cmd))
+
+      try:
+        data = subprocess.check_output(cmd).strip().decode('utf-8')
+        
+        print('Got data: *{}*'.format(data))
+        self.__cache.set_data(self.__get_cache_key(),data)
+      except Exception as err:
+        # Ignore for now
+        logger.error('Error getting hardware state for switch type {}, with error: {}'.format(self.get_type(),err))
+
+
+      self.__cache.clear_running(self.__get_cache_key())
+
+    if data is None:
+      return terrariumPowerSwitch.OFF
+
     address = int(self.get_address()) % self._get_relay_count()
     if address == 0:
       address = self._get_relay_count()
 
-    cmd = ['/usr/bin/sudo','/usr/bin/java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),str(address),'status']
-    logger.debug('Running get hardware state command {}'.format(cmd))
+    print('Final state data at address : {}'.format(address,data[address-1:1]))
 
-    try:
-      data = subprocess.check_output(cmd).strip().decode('utf-8')
-    except Exception as err:
-      # Ignore for now
-      logger.error('Error getting hardware state for switch type {}, with error: {}'.format(self.get_type(),err))
-
-    return terrariumPowerSwitch.ON if terrariumUtils.is_true(data) else terrariumPowerSwitch.OFF
+    return terrariumPowerSwitch.ON if terrariumUtils.is_true(data[address-1:1]) else terrariumPowerSwitch.OFF
 
   def set_hardware_state(self, state, force = False):
     address = int(self.get_address()) % self._get_relay_count()
     if address == 0:
       address = self._get_relay_count()
 
-    cmd = ['/usr/bin/sudo','/usr/bin/java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),str(address),str(1 if state is terrariumPowerSwitch.ON else 0)]
+    cmd = ['/usr/bin/sudo','/usr/bin/java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),str(address-1),str(1 if state is terrariumPowerSwitch.ON else 0)]
     logger.debug('Running set hardware state command {}'.format(cmd))
 
     try:
       subprocess.check_output(cmd)
+      # After change, clear the cache so next run actual data is forced fetched
+      self.__cache.clear_data(self.__get_cache_key())
       return True
 
     except Exception as err:
