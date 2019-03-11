@@ -443,9 +443,10 @@ class terrariumPowerSwitchDenkoviV2(terrariumPowerSwitchSource):
   TYPE = 'denkovi_v2'
 
   def __init__(self, switchid, address, name = '', prev_state = None, callback = None):
+    self.__cache = terrariumCache()
     super(terrariumPowerSwitchDenkoviV2,self).__init__(switchid, address, name, prev_state, callback)
 #    print('Adding status cache')
-    self.__cache = terrariumCache()
+
 #    print('Done adding status cache')
 
   def __get_cache_key(self):
