@@ -199,10 +199,18 @@ class terrariumPowerSwitchSource(object):
     self.manual_mode = terrariumUtils.is_true(mode)
 
   def update(self):
+    starttime = time()
+    old_state = self.get_state()
+
     self.timer_update()
     data = self.get_hardware_state()
     if data is not None:
       self.set_state(data)
+
+    if self.get_state() != old_state:
+      logger.info('Power switch changed from {} state to new {} state'.format(old_state,self.get_state()))
+
+    logger.info('Updated {} power switch \'{}\' status in {:.5f} seconds'.format(self.get_type(),self.get_name(),time()-starttime))
 
   def timer_update(self):
     if not self.in_manual_mode() and self.timer.is_enabled():
@@ -436,13 +444,13 @@ class terrariumPowerSwitchDenkoviV2(terrariumPowerSwitchSource):
 
   def __init__(self, switchid, address, name = '', prev_state = None, callback = None):
     super(terrariumPowerSwitchDenkoviV2,self).__init__(switchid, address, name, prev_state, callback)
-    print('Adding status cache')
+#    print('Adding status cache')
     self.__cache = terrariumCache()
-    print('Done adding status cache')
+#    print('Done adding status cache')
 
   def __get_cache_key(self):
     key = md5((self.get_type() + str(self.__device)).encode()).hexdigest()
-    print('Get cache key {}'.format(key))
+#    print('Get cache key {}'.format(key))
     return key
 
   def _get_relay_count(self):
@@ -476,22 +484,22 @@ class terrariumPowerSwitchDenkoviV2(terrariumPowerSwitchSource):
 
   def get_hardware_state(self):
     #data = None
-    print('Get hardware state cache data')
+    #print('Get hardware state cache data')
     data = self.__cache.get_data(self.__get_cache_key())
-    print(data)
-    print('IS running: {}' .format(self.__cache.is_running(self.__get_cache_key())))
+    #print(data)
+    #print('IS running: {}' .format(self.__cache.is_running(self.__get_cache_key())))
 
     if data is None and not self.__cache.is_running(self.__get_cache_key()):
       self.__cache.set_running(self.__get_cache_key())
 
       cmd = ['/usr/bin/sudo','/usr/bin/java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),'all','status']
       logger.debug('Running get hardware state command {}'.format(cmd))
-      print('Running cmd: {}'.format(cmd))
+      #print('Running cmd: {}'.format(cmd))
 
       try:
         data = subprocess.check_output(cmd).strip().decode('utf-8')
 
-        print('Got data: *{}*'.format(data))
+        #print('Got data: *{}*'.format(data))
         self.__cache.set_data(self.__get_cache_key(),data)
       except Exception as err:
         # Ignore for now
@@ -507,7 +515,7 @@ class terrariumPowerSwitchDenkoviV2(terrariumPowerSwitchSource):
     if address == 0:
       address = self._get_relay_count()
 
-    print('Final state data at address{} : {}'.format(address,data[address-1:address]))
+    #print('Final state data at address{} : {}'.format(address,data[address-1:address]))
 
     return terrariumPowerSwitch.ON if terrariumUtils.is_true(data[address-1:address]) else terrariumPowerSwitch.OFF
 
@@ -518,21 +526,21 @@ class terrariumPowerSwitchDenkoviV2(terrariumPowerSwitchSource):
 
     cmd = ['/usr/bin/sudo','/usr/bin/java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),str(address),str(1 if state is terrariumPowerSwitch.ON else 0)]
     logger.debug('Running set hardware state command {}'.format(cmd))
-    print('Running set hardware state cmd: {}'.format(cmd))
+    #print('Running set hardware state cmd: {}'.format(cmd))
 
     try:
       subprocess.check_output(cmd)
 
       # After change, clear the cache so next run actual data is forced fetched
-      print('Clear caching')
+      #print('Clear caching')
       self.__cache.clear_data(self.__get_cache_key())
-      print('Clear caching DONE!')
+      #print('Clear caching DONE!')
       return True
 
     except Exception as err:
       # Ignore for now
       logger.error('Error setting hardware state for switch type {}, with error: {}'.format(self.get_type(),err))
-      print(err)
+      #print(err)
 
 class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchDenkoviV2):
   TYPE = 'denkovi_v2_4'
