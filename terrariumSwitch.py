@@ -516,7 +516,7 @@ class terrariumPowerSwitchDenkoviV2(terrariumPowerSwitchSource):
     if address == 0:
       address = self._get_relay_count()
 
-    cmd = ['/usr/bin/sudo','/usr/bin/java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),str(address-1),str(1 if state is terrariumPowerSwitch.ON else 0)]
+    cmd = ['/usr/bin/sudo','/usr/bin/java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),str(address),str(1 if state is terrariumPowerSwitch.ON else 0)]
     logger.debug('Running set hardware state command {}'.format(cmd))
     print('Running set hardware state cmd: {}'.format(cmd))
 
@@ -532,6 +532,7 @@ class terrariumPowerSwitchDenkoviV2(terrariumPowerSwitchSource):
     except Exception as err:
       # Ignore for now
       logger.error('Error setting hardware state for switch type {}, with error: {}'.format(self.get_type(),err))
+      print(err)
 
 class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchDenkoviV2):
   TYPE = 'denkovi_v2_4'
