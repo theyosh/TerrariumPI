@@ -490,7 +490,7 @@ class terrariumPowerSwitchDenkoviV2(terrariumPowerSwitchSource):
 
       try:
         data = subprocess.check_output(cmd).strip().decode('utf-8')
-        
+
         print('Got data: *{}*'.format(data))
         self.__cache.set_data(self.__get_cache_key(),data)
       except Exception as err:
@@ -518,11 +518,15 @@ class terrariumPowerSwitchDenkoviV2(terrariumPowerSwitchSource):
 
     cmd = ['/usr/bin/sudo','/usr/bin/java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),str(address-1),str(1 if state is terrariumPowerSwitch.ON else 0)]
     logger.debug('Running set hardware state command {}'.format(cmd))
+    print('Running set hardware state cmd: {}'.format(cmd))
 
     try:
       subprocess.check_output(cmd)
+
       # After change, clear the cache so next run actual data is forced fetched
+      print('Clear caching')
       self.__cache.clear_data(self.__get_cache_key())
+      print('Clear caching DONE!')
       return True
 
     except Exception as err:
