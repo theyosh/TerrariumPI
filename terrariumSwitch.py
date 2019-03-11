@@ -507,7 +507,7 @@ class terrariumPowerSwitchDenkoviV2(terrariumPowerSwitchSource):
     if address == 0:
       address = self._get_relay_count()
 
-    print('Final state data at address : {}'.format(address,data[address-1:1]))
+    print('Final state data at address{} : {}'.format(address,data[address-1:1]))
 
     return terrariumPowerSwitch.ON if terrariumUtils.is_true(data[address-1:1]) else terrariumPowerSwitch.OFF
 
