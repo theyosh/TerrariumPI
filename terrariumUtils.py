@@ -6,6 +6,18 @@ import re
 import datetime
 import requests
 from math import log
+from time import time
+
+# works in Python 2 & 3
+class _Singleton(type):
+    """ A metaclass that creates a Singleton base class when called. """
+    _instances = {}
+    def __call__(cls, *args, **kwargs):
+      if cls not in cls._instances:
+        cls._instances[cls] = super(_Singleton, cls).__call__(*args, **kwargs)
+      return cls._instances[cls]
+
+class terrariumSingleton(_Singleton('terrariumSingletonMeta', (object,), {})): pass
 
 class terrariumTimer(object):
   def __init__(self,start,stop,on_duration,off_duration,enabled):
@@ -91,6 +103,35 @@ class terrariumTimer(object):
             'timer_on_duration': self.__on_duration,
             'timer_off_duration': self.__off_duration}
 
+class terrariumCache(terrariumSingleton):
+  def __init__(self):
+    self.__cache = {}
+    self.__running = {}
+    logger.debug('Initialized cache')
+
+  def set_data(self,hash_key,data,cache_timeout = 30):
+    self.__cache[hash_key] = { 'data' : data, 'expire' : int(time()) + cache_timeout}
+    logger.debug('Added new cache data with hash: {}. Total in cache: {}'.format(hash_key,len(self.__cache)))
+
+  def get_data(self,hash_key):
+    if hash in self.__cache and self.__cache[hash_key]['expire'] > int(time()):
+      return self.__cache[hash_key]['data']
+
+  def clear_data(self,hash_key):
+    if hash_key in self.__cache:
+      del(self.__cache[hash_key])
+
+  def is_running(self,hash_key):
+    if hash_key in self.__running:
+      return True
+
+    return False
+
+  def set_running(self,hash_key):
+    self.__running[hash_key] = True
+
+  def clear_running(self,hash_key):
+    del(self.__running[hash_key])
 
 class terrariumUtils():
 
@@ -368,13 +409,4 @@ class terrariumUtils():
     pow,n=min(int(log(max(n*b**pow,1),b)),len(pre)-1),n*b**pow
     return "%%.%if %%s%%s"%abs(pow%(-pow-1))%(n/b**float(pow),pre[pow],u)
 
-# works in Python 2 & 3
-class _Singleton(type):
-    """ A metaclass that creates a Singleton base class when called. """
-    _instances = {}
-    def __call__(cls, *args, **kwargs):
-      if cls not in cls._instances:
-        cls._instances[cls] = super(_Singleton, cls).__call__(*args, **kwargs)
-      return cls._instances[cls]
 
-class terrariumSingleton(_Singleton('terrariumSingletonMeta', (object,), {})): pass

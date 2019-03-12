@@ -427,7 +427,7 @@ class terrariumMHZ19Sensor(terrariumSensorSource):
     data = None
     if self.get_address() is not None:
       try:
-        data = json.loads(subprocess.check_output(['sudo', 'python' + ('3' if sys.version_info.major == 3 else '2'), '-m', 'mh_z19','--all']).decode('utf-8').replace("'",'"'))
+        data = json.loads(subprocess.check_output(['/usr/bin/sudo', '/usr/bin/python' + ('3' if sys.version_info.major == 3 else '2'), '-m', 'mh_z19','--all']).decode('utf-8').replace("'",'"'))
       except Exception as ex:
         print(ex)
 

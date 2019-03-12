@@ -706,7 +706,7 @@ class terrariumConfig(object):
   def save_power_switches(self,data):
     update_ok = True
     for power_switch in self.get_power_switches():
-      if 'exclude' in power_switch and not terrariumUtils.is_true(power_switch['exclude']):
+      if 'exclude' not in power_switch or not terrariumUtils.is_true(power_switch['exclude']):
         self.__config.remove_section('switch' + power_switch['id'])
 
     for power_switch_id in data:
