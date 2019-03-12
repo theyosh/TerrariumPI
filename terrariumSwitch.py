@@ -445,13 +445,9 @@ class terrariumPowerSwitchDenkoviV2(terrariumPowerSwitchSource):
   def __init__(self, switchid, address, name = '', prev_state = None, callback = None):
     self.__cache = terrariumCache()
     super(terrariumPowerSwitchDenkoviV2,self).__init__(switchid, address, name, prev_state, callback)
-#    print('Adding status cache')
-
-#    print('Done adding status cache')
 
   def __get_cache_key(self):
     key = md5((self.get_type() + str(self.__device)).encode()).hexdigest()
-#    print('Get cache key {}'.format(key))
     return key
 
   def _get_relay_count(self):
@@ -481,7 +477,6 @@ class terrariumPowerSwitchDenkoviV2(terrariumPowerSwitchSource):
     except Exception as err:
       # Ignore for now
       logger.error('Error loading hardware for switch type {}, with error: {}'.format(self.get_type(),err))
-
 
   def get_hardware_state(self):
     #data = None
