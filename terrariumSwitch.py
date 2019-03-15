@@ -806,6 +806,8 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
       logger.info('Logged into Meross cloud successfull.')
 
       devices = httpHandler.list_supported_devices()
+      print('Devices')
+      print(devices)
       for counter, device in enumerate(devices):
         data = device.get_sys_data()
         print('Device data')
