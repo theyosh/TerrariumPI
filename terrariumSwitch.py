@@ -798,10 +798,12 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
   @staticmethod
   def scan_power_switches(callback=None, **kwargs):
     if '' == kwargs['meross_username'] or '' == kwargs['meross_password']:
+      logger.info('Meross cloud is not enabled.')
       return
 
     try:
       httpHandler = MerossHttpClient(email=kwargs['meross_username'], password=kwargs['meross_password'])
+      logger.info('Logged into Meross cloud successfull.')
 
       devices = httpHandler.list_supported_devices()
       for counter, device in enumerate(devices):
