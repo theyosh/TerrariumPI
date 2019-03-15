@@ -808,9 +808,11 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
       devices = httpHandler.list_supported_devices()
       for counter, device in enumerate(devices):
         data = device.get_sys_data()
+        print('Device data')
+        print(data)
 
         try:
-          if data['all']['system']['hardware']['type'] == terrariumPowerSwitchMSS425E.TYPE:
+          if data['all']['system']['hardware']['type'] == self.TYPE:
             for channel_data in data['all']['digest']['togglex']:
               if int(channel_data['channel']) > 0:
                 yield terrariumPowerSwitch(md5((terrariumPowerSwitchMSS425E.TYPE + data['all']['system']['hardware']['macAddress'] + str(channel_data['channel'])).encode()).hexdigest(),
