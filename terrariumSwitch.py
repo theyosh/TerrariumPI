@@ -806,12 +806,10 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
       logger.info('Logged into Meross cloud successfull.')
 
       devices = httpHandler.list_supported_devices()
-      print('Devices')
-      print(devices)
+      if len(devices) == 0:
+        logger.warning('Unfortunaly your Meross device is not supported by this software. We found zero power switches.')
       for counter, device in enumerate(devices):
         data = device.get_sys_data()
-        print('Device data')
-        print(data)
 
         try:
           if data['all']['system']['hardware']['type'] == self.TYPE:
