@@ -969,7 +969,7 @@ class terrariumEngine(object):
 
     if 'description' in data:
       with open('description.txt', 'wb') as description_file:
-        description_file.write(data['description'])
+        description_file.write(data['description'].encode())
         del(data['description'])
 
     update_ok = self.config.save_profile(data)
