@@ -8,7 +8,10 @@
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2><span aria-hidden="true" class="glyphicon glyphicon-flash"></span>{{_('Switch')}} <span class="title"></span> <span class="badge bg-red manual_mode">{{_('in manual mode')}}</span><small class="current_usage"></small><small class="total_usage"></small></h2>
+                <h2><span aria-hidden="true" class="glyphicon glyphicon-flash"></span>{{_('Switch')}} <span class="title"></span>
+                <span class="badge bg-red manual_mode">{{_('in manual mode')}}</span>
+                <span class="small current_usage"></span>
+                <span class="small total_usage"></span></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
