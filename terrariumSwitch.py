@@ -812,15 +812,15 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
         data = device.get_sys_data()
 
         try:
-          if data['all']['system']['hardware']['type'] == self.TYPE:
-            for channel_data in data['all']['digest']['togglex']:
-              if int(channel_data['channel']) > 0:
-                yield terrariumPowerSwitch(md5((terrariumPowerSwitchMSS425E.TYPE + data['all']['system']['hardware']['macAddress'] + str(channel_data['channel'])).encode()).hexdigest(),
-                                           terrariumPowerSwitchMSS425E.TYPE,
-                                           (device,int(channel_data['channel'])),
-                                           'Channel {}'.format(channel_data['channel']),
-                                           None,
-                                           callback)
+          #if data['all']['system']['hardware']['type'] == self.TYPE:
+          for channel_data in data['all']['digest']['togglex']:
+            if int(channel_data['channel']) > 0:
+              yield terrariumPowerSwitch(md5((terrariumPowerSwitchMSS425E.TYPE + data['all']['system']['hardware']['macAddress'] + str(channel_data['channel'])).encode()).hexdigest(),
+                                         terrariumPowerSwitchMSS425E.TYPE,
+                                         (device,int(channel_data['channel'])),
+                                         'Channel {}'.format(channel_data['channel']),
+                                         None,
+                                         callback)
 
         except Exception as ex:
           print('Scan error in terrariumPowerSwitchMSS425E')
