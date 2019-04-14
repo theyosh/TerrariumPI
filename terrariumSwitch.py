@@ -783,11 +783,10 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
 
     try:
       tmpdata = self.__device.get_sys_data()
-      if tmpdata['all']['system']['hardware']['type'] == terrariumPowerSwitchMSS425E.TYPE:
-        for channel_data in tmpdata['all']['digest']['togglex']:
-          if int(self.get_address()) == int(channel_data['channel']):
-            data = channel_data['onoff']
-            break
+      for channel_data in tmpdata['all']['digest']['togglex']:
+        if int(self.get_address()) == int(channel_data['channel']):
+          data = channel_data['onoff']
+          break
 
     except Exception as ex:
       print('Get hardware ex')
@@ -812,7 +811,6 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
         data = device.get_sys_data()
 
         try:
-          #if data['all']['system']['hardware']['type'] == self.TYPE:
           for channel_data in data['all']['digest']['togglex']:
             if int(channel_data['channel']) > 0:
               yield terrariumPowerSwitch(md5((terrariumPowerSwitchMSS425E.TYPE + data['all']['system']['hardware']['macAddress'] + str(channel_data['channel'])).encode()).hexdigest(),
