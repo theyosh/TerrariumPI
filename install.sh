@@ -8,8 +8,7 @@ SCRIPT_USER_ID=`id -u ${SCRIPT_USER}`
 VERSION=`grep ^version defaults.cfg | cut -d' ' -f 3`
 WHOAMI=`whoami`
 PYTHON=2
-PYTHON_VERSION=$1
-if [ "${PYTHON_VERSION}" == "3" ]; then
+if [ "${1}" == "3" ]; then
   PYTHON=3
 fi
 LOGFILE="${BASEDIR}/log/terrariumpi.log"
@@ -151,6 +150,12 @@ echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl stop serial-getty@ttyS0.
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl start serial-getty@ttyS0.service" >> /etc/sudoers.d/terrariumpi
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl stop serial-getty@ttyAMA0.service" >> /etc/sudoers.d/terrariumpi
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl start serial-getty@ttyAMA0.service" >> /etc/sudoers.d/terrariumpi
+# http://denkovi.com/denkovi-relay-command-line-tool
+echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/bin/java -jar DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar *" >> /etc/sudoers.d/terrariumpi
+# mh-z19 sensor
+echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/bin/python -m mh_z19 --all" >> /etc/sudoers.d/terrariumpi
+echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/bin/python2 -m mh_z19 --all" >> /etc/sudoers.d/terrariumpi
+echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/bin/python3 -m mh_z19 --all" >> /etc/sudoers.d/terrariumpi
 
 systemctl enable pigpiod
 

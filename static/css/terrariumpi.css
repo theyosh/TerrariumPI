@@ -1,9 +1,16 @@
 /* General overrule */
+
+.row.switch .x_title h2 {
+ width: 85%;
+}
+
 .dropdown-menu {
   min-width: auto !important;
 }
 .panel_toolbox {
   min-width: auto !important;
+  position: absolute;
+  right: 1em;
 }
 td {
   white-space: nowrap;
@@ -204,7 +211,7 @@ div#dashboard div.row.environment table.tile_info td span.night i.fa {
 /* End Dashboard */
 
 div.row.logtail div.x_content pre{
-  max-height: 550px;
+ height: 600px;
 }
 
 iframe.external_calendar {
