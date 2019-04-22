@@ -1108,6 +1108,13 @@ class terrariumEngine(object):
       config_data['horizontal_graph_legend'] = False;
 
     return terrariumUtils.is_true(config_data['horizontal_graph_legend'])
+  
+  def get_hide_environment_on_dashboard(self):
+    config_data = self.config.get_system()
+    if 'hide_environment_on_dashboard' not in config_data:
+      config_data['hide_environment_on_dashboard'] = False;
+
+    return terrariumUtils.is_true(config_data['hide_environment_on_dashboard'])
 
   # End system functions part
 
