@@ -449,7 +449,6 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
   VALID_SOURCE = '^http:\/\/((?P<user>[^:]+):(?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?$'
 
   def load_hardware(self):
-    #self.__device = None
     self.__firmware = None
     # Input format should be either:
     # - http://[HOST]#[POWER_SWITCH_NR]
@@ -469,18 +468,13 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
         # http://sonoff/cm?cmnd=Power%20off
         # http://sonoff/cm?user=admin&password=joker&cmnd=Power%20Toggle
 
-        print('Test Tasmota')
-
         url = 'http://{}/cm?cmnd=Power'.format(data['host'])
         if 'user' in data and 'password' in data:
           url += '&user={}&password={}'.format(data['user'],data['password'])
 
-        print(url)
         state = terrariumUtils.get_remote_data(url)
-        print('Result')
-        print(state)
         if state is None:
-          raise Exception('Lame jump to next test')
+          raise Exception('No data, jump to next test')
 
         self.__firmware = 'tasmota'
 
@@ -508,7 +502,7 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
           print('Result')
           print(state)
           if state is None:
-            raise Exception('Lame jump to next test')
+            raise Exception('No data, jump to next test')
 
           self.__firmware = 'espeasy'
 
@@ -540,7 +534,7 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
           print('Result')
           print(state)
           if state is None:
-            raise Exception('Lame jump to next test')
+            raise Exception('No data, this was the last attempt...')
 
           self.__firmware = 'espurna'
 
@@ -558,7 +552,6 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
       data = re.match(self.VALID_SOURCE,self.get_address())
       if data:
         data = data.groupdict()
-
         url = None
 
         if 'tasmota' == self.__firmware:
@@ -572,12 +565,9 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
         elif 'espurna' == self.__firmware:
           url = 'http://{}/api/relay/0?apikey={}&value={}'.format(data['host'],data['password'],('1' if state else '0'))
 
-        print('Toggle Sonoff')
-        print(url)
-
         state = terrariumUtils.get_remote_data(url)
-        print('State')
-        print(state)
+        if state is None:
+          changed = False
 
     return changed
 
@@ -591,7 +581,6 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
       data = re.match(self.VALID_SOURCE,self.get_address())
       if data:
         data = data.groupdict()
-
         url = None
 
         if 'tasmota' == self.__firmware:
@@ -609,12 +598,7 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
 
           url = 'http://{}/apis?apikey={}'.format(data['host'],data['password'])
 
-        print('Get Sonoff current remote state')
-        print(url)
-
         state = terrariumUtils.get_remote_data(url)
-        print('Current State')
-        print(state)
 
         if 'tasmota' == self.__firmware:
           return terrariumPowerSwitch.ON if terrariumUtils.is_true(state['POWER']) else terrariumPowerSwitch.OFF
@@ -622,7 +606,6 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
           return terrariumPowerSwitch.ON if terrariumUtils.is_true(state['POWER']) else terrariumPowerSwitch.OFF
         elif 'espurna' == self.__firmware:
           return terrariumPowerSwitch.ON if terrariumUtils.is_true(state['POWER']) else terrariumPowerSwitch.OFF
-
 
     return terrariumPowerSwitch.OFF
 
