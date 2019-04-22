@@ -1150,14 +1150,19 @@
         </div>
         <script type="text/javascript">
           $(document).ready(function() {
+          % if hide_environment:
+            $('div#dashboard div.row.environment div.pull-right').remove();
+            $('div#dashboard div.row.environment div.pull-left').removeClass().addClass('col-md-12 col-sm-12 col-xs-12 pull-left');
+          % end
+
             $('div#dashboard div.pull-left div.x_panel').hide();
 
             $.get('/api/sensors/average',function(json_data) {
               var active_sensor_types = ['settings'];
 
-              % if show_gauge_overview:
-                active_sensor_types.push('gauge_overview');
-              % end
+            % if show_gauge_overview:
+              active_sensor_types.push('gauge_overview');
+            % end
 
               $.each(json_data.sensors,function(index,sensor_data){
                 if ($('div#' + sensor_data.type + ':hidden')) {

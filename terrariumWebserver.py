@@ -193,7 +193,8 @@ class terrariumWebserver(object):
                   'translations': self.__translations,
                   'device': self.__terrariumEngine.device,
                   'notifications' : self.__terrariumEngine.notification,
-                  'show_gauge_overview' : terrariumUtils.is_true(self.__config['sensor_gauge_overview'])}
+                  'show_gauge_overview' : terrariumUtils.is_true(self.__config['sensor_gauge_overview']),
+                  'hide_environment' : self.__terrariumEngine.get_hide_environment_on_dashboard()}
 
     if 'index' == template or 'profile' == template:
       variables['person_name'] = self.__terrariumEngine.get_profile_name()

@@ -4,8 +4,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: TerrariumPI 3.9.5\n"
-"POT-Creation-Date: 2019-03-20 20:37+CET\n"
+"Project-Id-Version: TerrariumPI 3.9.6\n"
+"POT-Creation-Date: 2019-04-22 11:35+CEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -448,78 +448,82 @@ msgid "Toggle on or off horizontal graph legends. Reload the webinterface after 
 msgstr ""
 
 #: terrariumTranslations.py:155
-msgid "Holds the soundcard that is used for playing audio."
+msgid "Toggle on or off the environment summary on the dashboard. Reload the webinterface after changing the setting."
 msgstr ""
 
 #: terrariumTranslations.py:156
-msgid "Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment."
+msgid "Holds the soundcard that is used for playing audio."
 msgstr ""
 
 #: terrariumTranslations.py:157
-msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
+msgid "Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment."
 msgstr ""
 
 #: terrariumTranslations.py:158
-msgid "Holds the amount of euro/dollar per 1000 liters water."
+msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
 msgstr ""
 
 #: terrariumTranslations.py:159
-msgid "Choose the temperature indicator. The software will recalculate to the chosen indicator."
+msgid "Holds the amount of euro/dollar per 1000 liters water."
 msgstr ""
 
 #: terrariumTranslations.py:160
-msgid "Choose the windspeed indicator. The software will recalculate to the chosen indicator."
+msgid "Choose the temperature indicator. The software will recalculate to the chosen indicator."
 msgstr ""
 
 #: terrariumTranslations.py:161
-msgid "Choose the volume (liquid) indicator. The software will recalculate to the chosen indicator."
+msgid "Choose the windspeed indicator. The software will recalculate to the chosen indicator."
 msgstr ""
 
 #: terrariumTranslations.py:162
-msgid "Holds the host name or IP address on which the software will listen for connections. Enter :: for all addresses to bind."
+msgid "Choose the volume (liquid) indicator. The software will recalculate to the chosen indicator."
 msgstr ""
 
 #: terrariumTranslations.py:163
-msgid "Holds the port number on which the software is listening for connections."
+msgid "Holds the host name or IP address on which the software will listen for connections. Enter :: for all addresses to bind."
 msgstr ""
 
 #: terrariumTranslations.py:164
-msgid "Enter the e-mail address that is used for your Meross devices."
+msgid "Holds the port number on which the software is listening for connections."
 msgstr ""
 
 #: terrariumTranslations.py:165
+msgid "Enter the e-mail address that is used for your Meross devices."
+msgstr ""
+
+#: terrariumTranslations.py:166
 msgid "Enter the password that is used for your Meross devices. Password is stored in plain text!"
 msgstr ""
 
-#: terrariumTranslations.py:170
+#: terrariumTranslations.py:171
 msgid "Holds the name of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:171
+#: terrariumTranslations.py:172
 msgid "Holds the type of the animal"
 msgstr ""
 
-#: terrariumTranslations.py:172
+#: terrariumTranslations.py:173
 msgid "Holds the gender of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:173
+#: terrariumTranslations.py:174
 msgid "Holds the day of birth of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:174
+#: terrariumTranslations.py:175
 msgid "Holds the species name of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:175
+#: terrariumTranslations.py:176
 msgid "Holds the latin name of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:176
+#: terrariumTranslations.py:177
 msgid "Holds a small description about the animal."
 msgstr ""
 
-#: terrariumTranslations.py:177
+#: terrariumTranslations.py:178
 msgid "Holds a link to more information."
 msgstr ""
 
@@ -541,64 +545,64 @@ msgstr ""
 msgid "Authentication"
 msgstr ""
 
-#: terrariumWebserver.py:236
+#: terrariumWebserver.py:237
 msgid "Player command could ot be executed!"
 msgstr ""
 
-#: terrariumWebserver.py:236 terrariumWebserver.py:256
-#: terrariumWebserver.py:268 terrariumWebserver.py:276
+#: terrariumWebserver.py:237 terrariumWebserver.py:257
+#: terrariumWebserver.py:269 terrariumWebserver.py:277
 msgid "Error!"
 msgstr ""
 
-#: terrariumWebserver.py:244 terrariumWebserver.py:247
+#: terrariumWebserver.py:245 terrariumWebserver.py:248
 msgid "OK!"
 msgstr ""
 
-#: terrariumWebserver.py:244 terrariumWebserver.py:247
+#: terrariumWebserver.py:245 terrariumWebserver.py:248
 msgid "Player command executed!"
 msgstr ""
 
-#: terrariumWebserver.py:256
+#: terrariumWebserver.py:257
 msgid "File is not uploaded!"
 msgstr ""
 
-#: terrariumWebserver.py:261
+#: terrariumWebserver.py:262
 msgid "File '%s' is uploaded"
 msgstr ""
 
-#: terrariumWebserver.py:261 terrariumWebserver.py:271
+#: terrariumWebserver.py:262 terrariumWebserver.py:272
 msgid "Success!"
 msgstr ""
 
-#: terrariumWebserver.py:263
+#: terrariumWebserver.py:264
 msgid "Duplicate file '%s'"
 msgstr ""
 
-#: terrariumWebserver.py:268
+#: terrariumWebserver.py:269
 msgid "Action could not be satisfied"
 msgstr ""
 
-#: terrariumWebserver.py:271
+#: terrariumWebserver.py:272
 msgid "Audio file is deleted"
 msgstr ""
 
-#: terrariumWebserver.py:276
+#: terrariumWebserver.py:277
 msgid "Data could not be saved"
 msgstr ""
 
-#: terrariumWebserver.py:284
+#: terrariumWebserver.py:285
 msgid "Data saved"
 msgstr ""
 
-#: terrariumWebserver.py:285
+#: terrariumWebserver.py:286
 msgid "Your changes are saved"
 msgstr ""
 
-#: terrariumWebserver.py:420 views/inc/menu.tpl:174
+#: terrariumWebserver.py:421 views/inc/menu.tpl:174
 msgid "Log out"
 msgstr ""
 
-#: terrariumWebserver.py:421
+#: terrariumWebserver.py:422
 msgid "You are now logged out"
 msgstr ""
 
@@ -767,7 +771,7 @@ msgstr ""
 #: views/audio_playlist.tpl:48 views/door_settings.tpl:36
 #: views/notifications.tpl:275 views/profile.tpl:179
 #: views/sensor_settings.tpl:57 views/switch_settings.tpl:72
-#: views/system_environment.tpl:1801 views/system_settings.tpl:217
+#: views/system_environment.tpl:1801 views/system_settings.tpl:228
 #: views/webcam_settings.tpl:48
 msgid "Submit"
 msgstr ""
@@ -2907,34 +2911,46 @@ msgid "Vertical"
 msgstr ""
 
 #: views/system_settings.tpl:155
+msgid "Hide environment summary on the dashboard"
+msgstr ""
+
+#: views/system_settings.tpl:159
+msgid "True"
+msgstr ""
+
+#: views/system_settings.tpl:160
+msgid "False"
+msgstr ""
+
+#: views/system_settings.tpl:166
 msgid "Pi power usage in W"
 msgstr ""
 
-#: views/system_settings.tpl:161
+#: views/system_settings.tpl:172
 msgid "Power price"
 msgstr ""
 
-#: views/system_settings.tpl:167
+#: views/system_settings.tpl:178
 msgid "Water price"
 msgstr ""
 
-#: views/system_settings.tpl:173
+#: views/system_settings.tpl:184
 msgid "IP or hostname"
 msgstr ""
 
-#: views/system_settings.tpl:179
+#: views/system_settings.tpl:190
 msgid "Port number"
 msgstr ""
 
-#: views/system_settings.tpl:190
+#: views/system_settings.tpl:201
 msgid "Meross Cloud"
 msgstr ""
 
-#: views/system_settings.tpl:200
+#: views/system_settings.tpl:211
 msgid "Meross Cloud username"
 msgstr ""
 
-#: views/system_settings.tpl:206
+#: views/system_settings.tpl:217
 msgid "Meross Cloud password"
 msgstr ""
 
