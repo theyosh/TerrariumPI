@@ -57,6 +57,9 @@
   <script type="text/javascript" src="/gentelella/vendors/switchery/dist/switchery.min.js"></script>
   <!-- Clappr HLS player -->
   <script type="text/javascript" src="static/clappr/clappr.min.js"></script>
+
+  <script type="text/javascript" src="/static/js/js.cookie.js"></script>
+
   <!-- Load the terrariumPI JS script-->
   <script type="text/javascript" src="/static/js/terrariumpi.js"></script>
   <script type="text/javascript">
