@@ -557,6 +557,7 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
     else:
       data = re.match(self.VALID_SOURCE,self.get_address())
       if data:
+        data = data.groupdict()
 
         url = None
 
