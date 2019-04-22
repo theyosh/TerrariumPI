@@ -914,7 +914,7 @@ function sensor_gauge(name, data) {
 
   if ($('#' + name + ' .gauge').length == 1) {
     // Update timestamp indicator
-    $('#' + name + ' small').text(moment().format('LLL'));
+    $('#' + name + ' span.small:visible:last').text(moment().format('LLL'));
     // Setup a new gauge if needed
     if ($('#' + name + ' .gauge').attr('done') === undefined) {
       var total_area = data.limit_max - data.limit_min;
@@ -2041,7 +2041,7 @@ function update_power_switch(data) {
   }
   content_row.find('span.glyphicon').removeClass('blue green').addClass((on ? 'green' : 'blue'));
   content_row.find('h2 span.title').text(data.name);
-  content_row.find('h2 small.current_usage').text(current_status_data);
+  content_row.find('h2 span.current_usage').text(current_status_data);
   content_row.find('h2 span.manual_mode').toggle(data.manual_mode);
   //switch_row.find('.knob').val(power_switch.state).trigger('change');
 

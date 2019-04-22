@@ -190,7 +190,7 @@
                 $('#editor-one').on('change',function(){
                   $('input[name="description"]').val(this.innerHTML);
                 });
-                $.get($('form').attr('action'),function(data){
+                $.get($('form').attr('action').replace('/config/','/'),function(data){
                   $.each(Object.keys(data), function(index,key){
                     var field = $('input[name="' + key + '"]');
                     if (field.length == 1) {

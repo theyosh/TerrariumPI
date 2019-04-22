@@ -14,6 +14,7 @@ import pywemo
 from hashlib import md5
 from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
 from gpiozero import Energenie
+from time import time
 
 try:
   import thread as _thread
@@ -26,7 +27,7 @@ except ImportError as ex:
   # Python 2 does not support Meross XXX Power Switches
   pass
 
-from terrariumUtils import terrariumUtils, terrariumTimer
+from terrariumUtils import terrariumUtils, terrariumTimer, terrariumCache
 
 # Dirty hack to include someone his code... to lazy to make it myself :)
 # https://github.com/perryflynn/energenie-connect0r
@@ -35,6 +36,7 @@ import energenieconnector
 
 from gevent import monkey, sleep
 monkey.patch_all()
+
 
 class terrariumPowerSwitchSource(object):
   TYPE = None
@@ -197,10 +199,18 @@ class terrariumPowerSwitchSource(object):
     self.manual_mode = terrariumUtils.is_true(mode)
 
   def update(self):
+    starttime = time()
+    old_state = self.get_state()
+
     self.timer_update()
     data = self.get_hardware_state()
     if data is not None:
       self.set_state(data)
+
+    if self.get_state() != old_state:
+      logger.info('Power switch changed from {} state to new {} state'.format(old_state,self.get_state()))
+
+    logger.info('Updated {} power switch \'{}\' status in {:.5f} seconds'.format(self.get_type(),self.get_name(),time()-starttime))
 
   def timer_update(self):
     if not self.in_manual_mode() and self.timer.is_enabled():
@@ -342,11 +352,8 @@ class terrariumPowerSwitchEnergenieUSB(terrariumPowerSwitchSource):
     if address == 0:
       address = 4
 
-    if sys.version_info.major == 2:
-      with open(os.devnull, 'w') as devnull:
-        subprocess.call(['/usr/bin/sispmctl', '-d',str(self.__device),('-o' if state is terrariumPowerSwitch.ON else '-f'),str(address)],stdout=devnull, stderr=subprocess.STDOUT)
-    elif sys.version_info.major == 3:
-      subprocess.run(['/usr/bin/sispmctl', '-d',str(self.__device),('-o' if state is terrariumPowerSwitch.ON else '-f'),str(address)],capture_output=True)
+    cmd = ['/usr/bin/sispmctl', '-d',str(self.__device),('-o' if state is terrariumPowerSwitch.ON else '-f'),str(address)]
+    subprocess.check_output(cmd)
 
 class terrariumPowerSwitchEnergenieLAN(terrariumPowerSwitchSource):
   TYPE = 'eg-pm-lan'
@@ -416,10 +423,6 @@ class terrariumPowerSwitchEnergenieLAN(terrariumPowerSwitchSource):
         # raise exception here...
         logger.error('Could not login to the Energenie LAN device %s at location %s. Error status %s(%s)' % (self.get_name(),self.get_address(),webstatus['logintxt'],webstatus['login']))
 
-      #except Exception as ex:
-      #  logger.exception('Could not login to the Energenie LAN device %s at location %s. Error status %s' % (self.get_name(),self.get_address(),ex))
-      #  changed = False
-
     return changed
 
   def stop(self):
@@ -440,12 +443,13 @@ class terrariumPowerSwitchEnergenieRF(terrariumPowerSwitchSource):
   def stop(self):
     self.__device.close()
 
+
 class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
   TYPE = 'sonoff'
   VALID_SOURCE = '^http:\/\/((?P<user>[^:]+):(?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?$'
 
   def load_hardware(self):
-    self.__device = None
+    #self.__device = None
     self.__firmware = None
     # Input format should be either:
     # - http://[HOST]#[POWER_SWITCH_NR]
@@ -472,9 +476,11 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
           url += '&user={}&password={}'.format(data['user'],data['password'])
 
         print(url)
-        state = terriumUtils.get_remote_data(url)
+        state = terrariumUtils.get_remote_data(url)
         print('Result')
         print(state)
+        if state is None:
+          raise Exception('Lame jump to next test')
 
         self.__firmware = 'tasmota'
 
@@ -498,9 +504,11 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
           # https://www.letscontrolit.com/wiki/index.php?title=ESP_Easy_web_interface#JSON_page_.28hidden_prior_to_version_2.0.2B.29
 
           print(url)
-          state = terriumUtils.get_remote_data(url)
+          state = terrariumUtils.get_remote_data(url)
           print('Result')
           print(state)
+          if state is None:
+            raise Exception('Lame jump to next test')
 
           self.__firmware = 'espeasy'
 
@@ -521,12 +529,18 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
 
           print('Test ESPurna')
 
+          if 'password' not in data:
+            # Just add dummy value...
+            data['password'] = 'password'
+
           url = 'http://{}/apis?apikey={}'.format(data['host'],data['password'])
 
           print(url)
-          state = terriumUtils.get_remote_data(url,json=True)
+          state = terrariumUtils.get_remote_data(url,json=True)
           print('Result')
           print(state)
+          if state is None:
+            raise Exception('Lame jump to next test')
 
           self.__firmware = 'espurna'
 
@@ -537,7 +551,7 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
   def set_hardware_state(self, state, force = False):
     changed = True
 
-    if self.__device is None:
+    if self.__firmware is None:
       logger.error('Sonoff device is not connected. Cannot trigger power switch')
       changed = False
     else:
@@ -560,13 +574,120 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
         print('Toggle Sonoff')
         print(url)
 
-        state = erriumUtils.get_remote_data(url)
+        state = terrariumUtils.get_remote_data(url)
         print('State')
         print(state)
 
     return changed
 
 
+class terrariumPowerSwitchDenkoviV2(terrariumPowerSwitchSource):
+  TYPE = 'denkovi_v2'
+
+  def __init__(self, switchid, address, name = '', prev_state = None, callback = None):
+    self.__cache = terrariumCache()
+    super(terrariumPowerSwitchDenkoviV2,self).__init__(switchid, address, name, prev_state, callback)
+
+  def __get_cache_key(self):
+    key = md5((self.get_type() + str(self.__device)).encode()).hexdigest()
+    return key
+
+  def _get_relay_count(self):
+    return int(self.TYPE.split('_')[-1])
+
+  def _get_board_type(self):
+    return '{}{}'.format(self._get_relay_count(),self.__version)
+
+  def load_hardware(self):
+    serial_regex = r"^(?P<serial>[^ ]+)\W(\[[^\]]+\])\W\[id=\d\]$"
+    self.__device = None
+    self.__version = ''
+
+    # We only support one board for now...
+    cmd = ['/usr/bin/sudo','/usr/bin/java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar','list']
+    logger.debug('Running load hardware command {}'.format(cmd))
+
+    try:
+      data = subprocess.check_output(cmd).strip().decode('utf-8')
+      for line in data.split("\n"):
+        match = re.match(r"^(?P<serial>[^ ]+)\W(?P<device>\[[^\]]+\])\W\[id=\d\]$",line,re.MULTILINE)
+        if match:
+          self.__device = str(match.group('serial'))
+          self.__version = 'v2' if 'MCP2200' in match.group('device') else ''
+          break
+
+    except Exception as err:
+      # Ignore for now
+      logger.error('Error loading hardware for switch type {}, with error: {}'.format(self.get_type(),err))
+
+  def get_hardware_state(self):
+    #data = None
+    #print('Get hardware state cache data')
+    data = self.__cache.get_data(self.__get_cache_key())
+    #print(data)
+    #print('IS running: {}' .format(self.__cache.is_running(self.__get_cache_key())))
+
+    if data is None and not self.__cache.is_running(self.__get_cache_key()):
+      self.__cache.set_running(self.__get_cache_key())
+
+      cmd = ['/usr/bin/sudo','/usr/bin/java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),'all','status']
+      logger.debug('Running get hardware state command {}'.format(cmd))
+      #print('Running cmd: {}'.format(cmd))
+
+      try:
+        data = subprocess.check_output(cmd).strip().decode('utf-8')
+
+        #print('Got data: *{}*'.format(data))
+        self.__cache.set_data(self.__get_cache_key(),data)
+      except Exception as err:
+        # Ignore for now
+        logger.error('Error getting hardware state for switch type {}, with error: {}'.format(self.get_type(),err))
+
+
+      self.__cache.clear_running(self.__get_cache_key())
+
+    if data is None:
+      return terrariumPowerSwitch.OFF
+
+    address = int(self.get_address()) % self._get_relay_count()
+    if address == 0:
+      address = self._get_relay_count()
+
+    #print('Final state data at address{} : {}'.format(address,data[address-1:address]))
+
+    return terrariumPowerSwitch.ON if terrariumUtils.is_true(data[address-1:address]) else terrariumPowerSwitch.OFF
+
+  def set_hardware_state(self, state, force = False):
+    address = int(self.get_address()) % self._get_relay_count()
+    if address == 0:
+      address = self._get_relay_count()
+
+    cmd = ['/usr/bin/sudo','/usr/bin/java','-jar','DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar',self.__device,self._get_board_type(),str(address),str(1 if state is terrariumPowerSwitch.ON else 0)]
+    logger.debug('Running set hardware state command {}'.format(cmd))
+    #print('Running set hardware state cmd: {}'.format(cmd))
+
+    try:
+      subprocess.check_output(cmd)
+
+      # After change, clear the cache so next run actual data is forced fetched
+      #print('Clear caching')
+      self.__cache.clear_data(self.__get_cache_key())
+      #print('Clear caching DONE!')
+      return True
+
+    except Exception as err:
+      # Ignore for now
+      logger.error('Error setting hardware state for switch type {}, with error: {}'.format(self.get_type(),err))
+      #print(err)
+
+class terrariumPowerSwitchDenkoviV2_4(terrariumPowerSwitchDenkoviV2):
+  TYPE = 'denkovi_v2_4'
+
+class terrariumPowerSwitchDenkoviV2_8(terrariumPowerSwitchDenkoviV2):
+  TYPE = 'denkovi_v2_8'
+
+class terrariumPowerSwitchDenkoviV2_16(terrariumPowerSwitchDenkoviV2):
+  TYPE = 'denkovi_v2_16'
 
 class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
   TYPE = 'dimmer'
@@ -804,11 +925,10 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
 
     try:
       tmpdata = self.__device.get_sys_data()
-      if tmpdata['all']['system']['hardware']['type'] == terrariumPowerSwitchMSS425E.TYPE:
-        for channel_data in tmpdata['all']['digest']['togglex']:
-          if int(self.get_address()) == int(channel_data['channel']):
-            data = channel_data['onoff']
-            break
+      for channel_data in tmpdata['all']['digest']['togglex']:
+        if int(self.get_address()) == int(channel_data['channel']):
+          data = channel_data['onoff']
+          break
 
     except Exception as ex:
       print('Get hardware ex')
@@ -819,25 +939,28 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
   @staticmethod
   def scan_power_switches(callback=None, **kwargs):
     if '' == kwargs['meross_username'] or '' == kwargs['meross_password']:
+      logger.info('Meross cloud is not enabled.')
       return
 
     try:
       httpHandler = MerossHttpClient(email=kwargs['meross_username'], password=kwargs['meross_password'])
+      logger.info('Logged into Meross cloud successfull.')
 
       devices = httpHandler.list_supported_devices()
+      if len(devices) == 0:
+        logger.warning('Unfortunaly your Meross device is not supported by this software. We found zero power switches.')
       for counter, device in enumerate(devices):
         data = device.get_sys_data()
 
         try:
-          if data['all']['system']['hardware']['type'] == terrariumPowerSwitchMSS425E.TYPE:
-            for channel_data in data['all']['digest']['togglex']:
-              if int(channel_data['channel']) > 0:
-                yield terrariumPowerSwitch(md5((terrariumPowerSwitchMSS425E.TYPE + data['all']['system']['hardware']['macAddress'] + str(channel_data['channel'])).encode()).hexdigest(),
-                                           terrariumPowerSwitchMSS425E.TYPE,
-                                           (device,int(channel_data['channel'])),
-                                           'Channel {}'.format(channel_data['channel']),
-                                           None,
-                                           callback)
+          for channel_data in data['all']['digest']['togglex']:
+            if int(channel_data['channel']) > 0:
+              yield terrariumPowerSwitch(md5((terrariumPowerSwitchMSS425E.TYPE + data['all']['system']['hardware']['macAddress'] + str(channel_data['channel'])).encode()).hexdigest(),
+                                         terrariumPowerSwitchMSS425E.TYPE,
+                                         (device,int(channel_data['channel'])),
+                                         'Channel {}'.format(channel_data['channel']),
+                                         None,
+                                         callback)
 
         except Exception as ex:
           print('Scan error in terrariumPowerSwitchMSS425E')
@@ -867,7 +990,11 @@ class terrariumPowerSwitch(object):
                     terrariumPowerSwitchWeMo,
                     terrariumPowerSwitchRemote,
                     terrariumPowerDimmerPWM,
-                    terrariumPowerDimmerDC]
+                    terrariumPowerDimmerDC,
+                    terrariumPowerSwitchDenkoviV2_4,
+                    terrariumPowerSwitchDenkoviV2_8,
+                    terrariumPowerSwitchDenkoviV2_16,
+                    terrariumPowerSwitchSonoff]
 
   if sys.version_info >= (3, 3):
     # Merros IoT library needs Python 3.3+

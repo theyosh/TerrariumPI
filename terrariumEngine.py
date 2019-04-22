@@ -254,7 +254,7 @@ class terrariumEngine(object):
     if starting_up:
       logger.info('Loading previous power switch states from the last 2 minutes')
       start = int(time.time())
-      prev_data = self.collector.get_history(['switches'],start,start-120)
+      prev_data = self.collector.get_history(['switches'],start,start-840)
 
       if 'switches' in prev_data:
         for switch in prev_data['switches']:
@@ -969,7 +969,7 @@ class terrariumEngine(object):
 
     if 'description' in data:
       with open('description.txt', 'wb') as description_file:
-        description_file.write(data['description'])
+        description_file.write(data['description'].encode())
         del(data['description'])
 
     update_ok = self.config.save_profile(data)
@@ -1108,6 +1108,13 @@ class terrariumEngine(object):
       config_data['horizontal_graph_legend'] = False;
 
     return terrariumUtils.is_true(config_data['horizontal_graph_legend'])
+  
+  def get_hide_environment_on_dashboard(self):
+    config_data = self.config.get_system()
+    if 'hide_environment_on_dashboard' not in config_data:
+      config_data['hide_environment_on_dashboard'] = False;
+
+    return terrariumUtils.is_true(config_data['hide_environment_on_dashboard'])
 
   # End system functions part
 
