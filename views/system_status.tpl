@@ -290,9 +290,9 @@
 
                     case 'temperature':
                       gauge_data.current = value;
-                      gauge_data.alarm_min = 30;
-                      gauge_data.alarm_max = 60;
-                      gauge_data.limit_max = 80;
+                      gauge_data.alarm_min = (globals.temperature_indicator == 'C' ? 30 : 86);
+                      gauge_data.alarm_max = (globals.temperature_indicator == 'C' ? 60 : 140);
+                      gauge_data.limit_max = (globals.temperature_indicator == 'C' ? 80 : 176);
                       break;
 
                     case 'memory':
