@@ -91,10 +91,10 @@ class terrariumSensorSource(object):
     return self.__sensor_cache_key
 
   def __within_limits(self,current_value):
-    if self.__current_value is None or self.get_sensor_type() in ['uva','uvb','light'] or self.get_type() in ['ytxx-digital']:
+    if self.get_current() is None or self.get_sensor_type() in ['uva','uvb','light'] or self.get_type() in ['ytxx-digital']:
       return True
 
-    return abs(self.__current_value - current_value) < self.get_max_diff()
+    return abs(self.get_current() - current_value) < self.get_max_diff()
 
   def update(self, force = False):
     starttime = time()
@@ -112,10 +112,10 @@ class terrariumSensorSource(object):
       self.__sensor_cache.clear_running(self.get_sensor_cache_key())
 
     current = None if cached_data is None or self.get_sensor_type() not in cached_data else cached_data[self.get_sensor_type()]
-    if current is None or not (self.get_limit_min() <= current <= self.get_limit_max()):
+    if current is None or not (self.get_limit_min() <= terrariumUtils.conver_to_value(current,self.get_indicator()) <= self.get_limit_max()):
       # Invalid current value.... log and ingore
       self.__sensor_cache.clear_sensor_data(self.get_sensor_cache_key())
-      logger.warning('Measured value %s%s from %s sensor \'%s\' is outside valid range %.2f%s - %.2f%s in %.5f seconds.' % (current,
+      logger.warning('Measured value %s%s from %s sensor \'%s\' is outside valid range %.2f%s - %.2f%s in %.5f seconds.' % (terrariumUtils.conver_to_value(current,self.get_indicator()),
                                                                                                                             self.get_indicator(),
                                                                                                                             self.get_type(),
                                                                                                                             self.get_name(),
@@ -125,9 +125,9 @@ class terrariumSensorSource(object):
                                                                                                                             self.get_indicator(),
                                                                                                                             time()-starttime))
 
-    elif not self.__within_limits(current):
+    elif not self.__within_limits(terrariumUtils.conver_to_value(current,self.get_indicator())):
       self.__erratic_errors += 1
-      logger.warning('Measured value %s%s from %s sensor \'%s\' is erratic compared to previous value %s%s in %.5f seconds.' % (current,
+      logger.warning('Measured value %s%s from %s sensor \'%s\' is erratic compared to previous value %s%s in %.5f seconds.' % (terrariumUtils.conver_to_value(current,self.get_indicator()),
                                                                                                                                 self.get_indicator(),
                                                                                                                                 self.get_type(),
                                                                                                                                 self.get_name(),
@@ -135,17 +135,18 @@ class terrariumSensorSource(object):
                                                                                                                                 self.get_indicator(),
                                                                                                                                 time()-starttime))
       if self.__erratic_errors >= 5:
-        logger.warning('After %s erratic measurements is the current value %s%s is promoted to a valid value for %s sensor \'%s\' in %.5f seconds.' %
-                                                                                                                                   (self.__erratic_errors,
-                                                                                                                                    current,
-                                                                                                                                    self.get_indicator(),
-                                                                                                                                    self.get_type(),
-                                                                                                                                    self.get_name(),
-                                                                                                                                    time()-starttime))
         # After 5 times, use the current value as the new truth
         self.__erratic_errors = 0
         self.__current_value = current
         self.__last_update = int(starttime)
+        logger.warning('After %s erratic measurements is the current value %s%s is promoted to a valid value for %s sensor \'%s\' in %.5f seconds.' %
+                                                                                                                                   (self.__erratic_errors,
+                                                                                                                                    self.get_current(),
+                                                                                                                                    self.get_indicator(),
+                                                                                                                                    self.get_type(),
+                                                                                                                                    self.get_name(),
+                                                                                                                                    time()-starttime))
+
 
       else:
         self.__sensor_cache.clear_sensor_data(self.get_sensor_cache_key())
@@ -156,9 +157,9 @@ class terrariumSensorSource(object):
       self.__last_update = int(starttime)
       logger.info('Updated %s sensor \'%s\' from %.2f%s to %.2f%s in %.5f seconds' % (self.get_type(),
                                                                                       self.get_name(),
-                                                                                      0 if self.__current_value is None else self.__current_value,
+                                                                                      0 if self.get_current() is None else self.get_current(),
                                                                                       self.get_indicator(),
-                                                                                      current,
+                                                                                      terrariumUtils.conver_to_value(current,self.get_indicator()),
                                                                                       self.get_indicator(),
                                                                                       time()-starttime))
       self.__current_value = current
@@ -262,21 +263,8 @@ class terrariumSensorSource(object):
     if self.__current_value is None:
       return None
 
-    indicator = self.get_indicator().lower()
-    current = self.__current_value
+    return terrariumUtils.conver_to_value(self.__current_value,self.get_indicator())
 
-    if 'f' == indicator:
-      current = terrariumUtils.to_fahrenheit(current)
-    elif 'k' == indicator:
-      current = terrariumUtils.to_kelvin(current)
-    elif 'inch' == indicator:
-      current = terrariumUtils.to_inches(current)
-    elif 'usgall' == indicator:
-      current = terrariumUtils.to_us_gallons(current)
-    elif 'ukgall' == indicator:
-      current = terrariumUtils.to_uk_gallons(current)
-
-    return float(current)
 
   def get_alarm(self):
     if self.get_current() is None:

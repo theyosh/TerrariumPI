@@ -164,6 +164,25 @@ class terrariumUtils():
     return float(value) / 4.54609
 
   @staticmethod
+  def conver_to_value(current,indicator):
+    if not terrariumUtils.is_float(current):
+      return None
+
+    indicator = indicator.lower()
+    if 'f' == indicator:
+      current = terrariumUtils.to_fahrenheit(current)
+    elif 'k' == indicator:
+      current = terrariumUtils.to_kelvin(current)
+    elif 'inch' == indicator:
+      current = terrariumUtils.to_inches(current)
+    elif 'usgall' == indicator:
+      current = terrariumUtils.to_us_gallons(current)
+    elif 'ukgall' == indicator:
+      current = terrariumUtils.to_uk_gallons(current)
+
+    return float(current)
+
+  @staticmethod
   def is_float(value):
     if value is None or '' == value:
       return False
@@ -412,5 +431,3 @@ class terrariumUtils():
   def format_filesize(n,pow=0,b=1024,u='B',pre=['']+[p+'i'for p in'KMGTPEZY']):
     pow,n=min(int(log(max(n*b**pow,1),b)),len(pre)-1),n*b**pow
     return "%%.%if %%s%%s"%abs(pow%(-pow-1))%(n/b**float(pow),pre[pow],u)
-
-
