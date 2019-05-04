@@ -20,6 +20,7 @@ import os
 import psutil
 import subprocess
 import re
+import json
 from hashlib import md5
 
 from terrariumConfig import terrariumConfig
@@ -32,6 +33,8 @@ from terrariumAudio import terrariumAudioPlayer
 from terrariumCollector import terrariumCollector
 from terrariumEnvironment import terrariumEnvironment
 from terrariumNotification import terrariumNotification
+from terrariumCalendar import terrariumCalendar
+
 from terrariumUtils import terrariumUtils
 
 from gevent import monkey, sleep
@@ -85,6 +88,9 @@ class terrariumEngine(object):
     # Notification engine
     self.notification = terrariumNotification()
     self.notification.set_profile_image(self.get_profile_image())
+
+    # Calendar engine
+    self.calendar = terrariumCalendar()
 
     logger.info('Setting terrariumPI authentication')
     self.set_authentication(self.config.get_admin(),self.config.get_password())
@@ -805,6 +811,30 @@ class terrariumEngine(object):
     return not self.is_door_open()
   # End doors part
 
+
+
+  def get_calendar(self,start,end):
+    data = self.calendar.get_events(datetime.datetime.strptime(start,'%Y-%m-%d'),
+                                    datetime.datetime.strptime(end,'%Y-%m-%d'))
+
+    events = []
+    for event_data in data:
+      event = {'id': event_data.uid,
+               'title': event_data.summary}
+
+      if terrariumUtils.parse_url(event_data.location):
+        event['url'] = event_data.location
+
+      if event_data.all_day:
+        event['start'] = event_data.start.strftime('%Y-%m-%d')
+      else:
+        event['start'] = event_data.start.strftime('%Y-%m-%dT%H:%M')
+        event['end'] = event_data.end.strftime('%Y-%m-%dT%H:%M')
+
+      events.append(event)
+
+    return json.dumps(events)
+
   # Webcams part
   def get_webcams(self, parameters = [], socket = False):
     data = []
@@ -1108,7 +1138,7 @@ class terrariumEngine(object):
       config_data['horizontal_graph_legend'] = False;
 
     return terrariumUtils.is_true(config_data['horizontal_graph_legend'])
-  
+
   def get_hide_environment_on_dashboard(self):
     config_data = self.config.get_system()
     if 'hide_environment_on_dashboard' not in config_data:

@@ -314,6 +314,9 @@ class terrariumWebserver(object):
     elif 'profile' == action:
       result = self.__terrariumEngine.get_profile()
 
+    elif 'calendar' == action:
+      result = self.__terrariumEngine.get_calendar(request.query.get('start'),request.query.get('end'))
+
     elif 'sensors' == action:
       result = self.__terrariumEngine.get_sensors(parameters)
 
