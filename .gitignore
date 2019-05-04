@@ -1,5 +1,6 @@
 *.pyc
 settings.cfg
+calendar.ics
 history.db*
 webcam
 log/*.log*
@@ -9,3 +10,4 @@ weather.txt
 logging.custom.cfg
 notifications.cfg
 __pycache__
+.cache
