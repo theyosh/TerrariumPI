@@ -814,13 +814,19 @@ class terrariumEngine(object):
 
 
   def get_calendar(self,start,end):
-    data = self.calendar.get_events(datetime.datetime.strptime(start,'%Y-%m-%d'),
-                                    datetime.datetime.strptime(end,'%Y-%m-%d'))
+    if start is not None:
+      start = datetime.datetime.strptime(start,'%Y-%m-%d')
+
+    if end is not None:
+      end = datetime.datetime.strptime(end,'%Y-%m-%d')
+
+    data = self.calendar.get_events(start,end)
 
     events = []
     for event_data in data:
       event = {'id': event_data.uid,
-               'title': event_data.summary}
+               'title': event_data.summary,
+               'description' : event_data.description}
 
       if terrariumUtils.parse_url(event_data.location):
         event['url'] = event_data.location
@@ -834,6 +840,42 @@ class terrariumEngine(object):
       events.append(event)
 
     return json.dumps(events)
+
+
+  def replace_hardware_calender_event(self,switch_id,device,reminder_amount,reminder_period):
+    # Two events:
+    # 1. When it happend
+    # 2. Reminder for next time
+
+    current_time = datetime.date.today()
+    switch = self.power_switches[switch_id]
+    self.calendar.create_event(switch_id,
+                               '{} hardware replacement'.format(switch.get_name()),
+                               'Replaced \'{}\' at power switch {}'.format(device,switch.get_name()),
+                               None,
+                               current_time)
+
+    reminder = None
+    try:
+      if 'days' == reminder_period:
+        reminder = datetime.timedelta(days=int(reminder_amount))
+      elif 'weeks' == reminder_period:
+        reminder = datetime.timedelta(days=(int(reminder_amount) * 7))
+      elif 'months' == reminder_period:
+        reminder = datetime.timedelta(days=(int(reminder_amount) * 30))
+      elif 'years' == reminder_period:
+        reminder = datetime.timedelta(days=(int(reminder_amount) * 365))
+    except Exception as ex:
+      print(ex)
+
+    if reminder is not None:
+      current_time += reminder
+      self.calendar.create_event(switch_id,
+                                 'Reminder {} hardware replacement'.format(switch.get_name()),
+                                 'Replace \'{}\' at power switch {}'.format(device,switch.get_name()),
+                                 None,
+                                 current_time)
+
 
   # Webcams part
   def get_webcams(self, parameters = [], socket = False):

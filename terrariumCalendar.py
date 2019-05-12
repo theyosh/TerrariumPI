@@ -2,6 +2,7 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
+from operator import attrgetter
 from icalendar import Calendar, Event
 from icalevents.icalevents import events
 
@@ -34,6 +35,38 @@ class terrariumCalendar(object):
       with open(terrariumCalendar.ICS_FILE, 'wb') as fp:
         fp.write(ical.to_ical())
 
+    self.__ical_data = None
+    with open(terrariumCalendar.ICS_FILE, 'rb') as fp:
+      self.__ical_data = fp.read()
 
   def get_events(self,start,end):
-    return events(file=terrariumCalendar.ICS_FILE,start=start,end=end)
+    return sorted(events(string_content=self.__ical_data,start=start,end=end), key=attrgetter('start'))
+
+  def create_event(self,uid,title,message,location = None,start = None,stop = None):
+    ical = Calendar.from_ical(self.__ical_data)
+
+    if start is None:
+      start = datetime.now()
+
+    if stop is None:
+      stop = start
+
+    event = Event()
+    event.add('uid',str(datetime.now()) + '/' + str(start) + '/' + str(uid))
+
+    event.add('summary', title)
+    event.add('description', message)
+
+    if location is not None:
+      event.add('location', location)
+
+    event.add('dtstart', start)
+    event.add('dtend', stop)
+    event.add('dtstamp', datetime.now())
+
+    ical.add_component(event)
+
+    with open(terrariumCalendar.ICS_FILE, 'wb') as fp:
+      fp.write(ical.to_ical())
+
+    self.__ical_data = ical.to_ical()
