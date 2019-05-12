@@ -150,6 +150,12 @@ class terrariumWebserver(object):
                      apply=self.__authenticate(True)
                     )
 
+    self.__app.route('/api/config/switches/hardware',
+                     method=['PUT'],
+                     callback=self.__replace_switch_hardware,
+                     apply=self.__authenticate(True)
+                    )
+
     self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|doors|audio|environment|profile|notifications)>',
                      method=['PUT','POST','DELETE'],
                      callback=self.__update_api_call,
@@ -289,6 +295,24 @@ class terrariumWebserver(object):
       if 'language' in postdata:
         gettext.translation('terrariumpi', 'locales/', languages=[self.__terrariumEngine.config.get_language()]).install(True)
         self.__translations.reload()
+
+    return result
+
+  def __replace_switch_hardware(self):
+    postdata = None
+    if request.json is not None:
+      postdata = request.json
+
+    self.__terrariumEngine.replace_hardware_calender_event(postdata['switch']['id'],
+                                                           postdata['switch']['device'],
+                                                           postdata['switch']['reminder_amount'],
+                                                           postdata['switch']['reminder_period'])
+    result = {'ok' : True,
+              'title' : _('Hardware is replaced'),
+              'message' : _('Hardware replacement is logged in the calendar')}
+
+    if '' != postdata['switch']['reminder_amount']:
+      result['message'] += '<br />' + _('A new replacement reminder is created')
 
     return result
 

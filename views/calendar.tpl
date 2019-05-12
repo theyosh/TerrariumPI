@@ -23,7 +23,6 @@
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
-
                 <div class="row jumbotron">
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <h1>{{_('No calendar available')}}</h1>
@@ -36,94 +35,31 @@
         <script type="text/javascript">
           $(document).ready(function() {
             $.get('api/system',function(data){
-
               if (data.external_calendar_url != '' && data.external_calendar_url != null) {
                 $('div.x_content').html($('<iframe>').addClass('external_calendar').attr('src',data.external_calendar_url));
               } else {
-                /*
-                var date = new Date(),
-                        d = date.getDate(),
-                        m = date.getMonth(),
-                        y = date.getFullYear(),
-                        started,
-                        categoryClass;
-*/
                 var calendar = $('div.x_content').fullCalendar({
                   header: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'month,agendaWeek,agendaDay,listMonth'
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay,listMonth'
+                  },
+                  eventRender: function(eventObj, $el) {
+                    $el.popover({
+                       title: eventObj.title,
+                       content: eventObj.description,
+                       trigger: 'hover',
+                       placement: 'top',
+                       container: 'body'
+                     });
                   },
                   selectable: true,
                   selectHelper: true,
                   editable: true,
-
                   events: {
-                    url: '/api/calendar/', // use the `url` property
+                    url: '/api/calendar/'
                   },
-
-                  /*
-                  select: function(start, end, allDay) {
-                        $('#fc_create').click();
-
-                        started = start;
-                        ended = end;
-
-                        $(".antosubmit").on("click", function() {
-                          var title = $("#title").val();
-                          if (end) {
-                                ended = end;
-                          }
-
-                          categoryClass = $("#event_type").val();
-
-                          if (title) {
-                                calendar.fullCalendar('renderEvent', {
-                                        title: title,
-                                        start: started,
-                                        end: end,
-                                        allDay: allDay
-                                  },
-                                  true // make the event "stick"
-                                );
-                          }
-
-                          $('#title').val('');
-
-                          calendar.fullCalendar('unselect');
-
-                          $('.antoclose').click();
-
-                          return false;
-                        });
-                  },
-                  */
-
-                  /*
-                  eventClick: function(calEvent, jsEvent, view) {
-                        $('#fc_edit').click();
-                        $('#title2').val(calEvent.title);
-
-                        categoryClass = $("#event_type").val();
-
-                        $(".antosubmit2").on("click", function() {
-                          calEvent.title = $("#title2").val();
-
-                          calendar.fullCalendar('updateEvent', calEvent);
-                          $('.antoclose2').click();
-                        });
-
-                        calendar.fullCalendar('unselect');
-                  },
-
-                  */
-
-
                 });
-
-
-                //calendar.fullCalendar('option', 'locale', 'fr');
-
               }
             });
             reload_reload_theme();
