@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.6\n"
-"POT-Creation-Date: 2019-05-04 12:04+CEST\n"
-"PO-Revision-Date: 2019-05-04 12:04+0200\n"
+"POT-Creation-Date: 2019-05-13 22:43+CEST\n"
+"PO-Revision-Date: 2019-05-13 22:43+0200\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -16,16 +16,16 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: terrariumEngine.py:561 views/dashboard.tpl:7
+#: terrariumEngine.py:570 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
 msgid "Uptime"
 msgstr "Uptime"
 
-#: terrariumEngine.py:562
+#: terrariumEngine.py:571
 msgid "Load"
 msgstr "Load"
 
-#: terrariumEngine.py:563
+#: terrariumEngine.py:572
 msgid "CPU Temp."
 msgstr "CPU Temp."
 
@@ -532,78 +532,90 @@ msgstr "Holds a link to more information."
 msgid "Offline since"
 msgstr "Offline since"
 
-#: terrariumWebserver.py:95 terrariumWebserver.py:181
+#: terrariumWebserver.py:95 terrariumWebserver.py:187
 msgid "Authenticate to make any changes"
 msgstr "Authenticate to make any changes"
 
-#: terrariumWebserver.py:95 terrariumWebserver.py:181
+#: terrariumWebserver.py:95 terrariumWebserver.py:187
 #: views/system_settings.tpl:29
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:95 terrariumWebserver.py:181
+#: terrariumWebserver.py:95 terrariumWebserver.py:187
 #: views/system_settings.tpl:118
 msgid "Authentication"
 msgstr "Authentication"
 
-#: terrariumWebserver.py:237
+#: terrariumWebserver.py:243
 msgid "Player command could ot be executed!"
 msgstr "Player command could ot be executed!"
 
-#: terrariumWebserver.py:237 terrariumWebserver.py:257
-#: terrariumWebserver.py:269 terrariumWebserver.py:277
+#: terrariumWebserver.py:243 terrariumWebserver.py:263
+#: terrariumWebserver.py:275 terrariumWebserver.py:283
 msgid "Error!"
 msgstr "Error!"
 
-#: terrariumWebserver.py:245 terrariumWebserver.py:248
+#: terrariumWebserver.py:251 terrariumWebserver.py:254
 msgid "OK!"
 msgstr "OK!"
 
-#: terrariumWebserver.py:245 terrariumWebserver.py:248
+#: terrariumWebserver.py:251 terrariumWebserver.py:254
 msgid "Player command executed!"
 msgstr "Player command executed!"
 
-#: terrariumWebserver.py:257
+#: terrariumWebserver.py:263
 msgid "File is not uploaded!"
 msgstr "File is not uploaded!"
 
-#: terrariumWebserver.py:262
+#: terrariumWebserver.py:268
 msgid "File '%s' is uploaded"
 msgstr "File '%s' is uploaded"
 
-#: terrariumWebserver.py:262 terrariumWebserver.py:272
+#: terrariumWebserver.py:268 terrariumWebserver.py:278
 msgid "Success!"
 msgstr "Success!"
 
-#: terrariumWebserver.py:264
+#: terrariumWebserver.py:270
 msgid "Duplicate file '%s'"
 msgstr "Duplicate file '%s'"
 
-#: terrariumWebserver.py:269
+#: terrariumWebserver.py:275
 msgid "Action could not be satisfied"
 msgstr "Action could not be satisfied"
 
-#: terrariumWebserver.py:272
+#: terrariumWebserver.py:278
 msgid "Audio file is deleted"
 msgstr "Audio file is deleted"
 
-#: terrariumWebserver.py:277
+#: terrariumWebserver.py:283
 msgid "Data could not be saved"
 msgstr "Data could not be saved"
 
-#: terrariumWebserver.py:285
+#: terrariumWebserver.py:291
 msgid "Data saved"
 msgstr "Data saved"
 
-#: terrariumWebserver.py:286
+#: terrariumWebserver.py:292
 msgid "Your changes are saved"
 msgstr "Your changes are saved"
 
-#: terrariumWebserver.py:421 views/inc/menu.tpl:174
+#: terrariumWebserver.py:311
+msgid "Hardware is replaced"
+msgstr "Hardware is replaced"
+
+#: terrariumWebserver.py:312
+msgid "Hardware replacement is logged in the calendar"
+msgstr "Hardware replacement is logged in the calendar"
+
+#: terrariumWebserver.py:315
+msgid "A new replacement reminder is created"
+msgstr "A new replacement reminder is created"
+
+#: terrariumWebserver.py:448 views/inc/menu.tpl:174
 msgid "Log out"
 msgstr "Log out"
 
-#: terrariumWebserver.py:422
+#: terrariumWebserver.py:449
 msgid "You are now logged out"
 msgstr "You are now logged out"
 
@@ -802,9 +814,9 @@ msgstr "new"
 
 #: views/audio_playlist.tpl:112 views/sensor_settings.tpl:103
 #: views/sensor_settings.tpl:130 views/switch_settings.tpl:109
-#: views/switch_settings.tpl:150 views/webcam_settings.tpl:108
-#: views/webcam_settings.tpl:122 views/webcam_settings.tpl:141
-#: views/webcam_settings.tpl:152
+#: views/switch_settings.tpl:150 views/switch_status.tpl:116
+#: views/webcam_settings.tpl:108 views/webcam_settings.tpl:122
+#: views/webcam_settings.tpl:141 views/webcam_settings.tpl:152
 msgid "Select an option"
 msgstr "Select an option"
 
@@ -812,7 +824,7 @@ msgstr "Select an option"
 #: views/inc/usage_doors.tpl:70 views/inc/usage_sensors.tpl:81
 #: views/inc/usage_switches.tpl:70 views/inc/usage_webcams.tpl:66
 #: views/sensor_settings.tpl:201 views/switch_settings.tpl:207
-#: views/webcam_settings.tpl:165
+#: views/switch_status.tpl:132 views/webcam_settings.tpl:165
 msgid "Close"
 msgstr "Close"
 
@@ -822,7 +834,7 @@ msgstr "Close"
 msgid "Add"
 msgstr "Add"
 
-#: views/calendar.tpl:6 views/inc/menu.tpl:33
+#: views/calendar.tpl:6 views/inc/menu.tpl:33 views/inc/menu.tpl:228
 msgid "Calendar"
 msgstr "Calendar"
 
@@ -843,7 +855,7 @@ msgstr "Calendar"
 #: views/notifications.tpl:27 views/notifications.tpl:64
 #: views/notifications.tpl:101 views/notifications.tpl:134
 #: views/notifications.tpl:159 views/notifications.tpl:188
-#: views/notifications.tpl:209 views/switch_status.tpl:40
+#: views/notifications.tpl:209 views/switch_status.tpl:43
 #: views/system_environment.tpl:27 views/system_environment.tpl:158
 #: views/system_environment.tpl:370 views/system_environment.tpl:581
 #: views/system_environment.tpl:792 views/system_environment.tpl:1003
@@ -912,7 +924,7 @@ msgstr "mode"
 #: views/dashboard.tpl:83 views/dashboard.tpl:118 views/dashboard.tpl:171
 #: views/dashboard.tpl:224 views/dashboard.tpl:277 views/dashboard.tpl:330
 #: views/dashboard.tpl:383 views/dashboard.tpl:436 views/dashboard.tpl:489
-#: views/dashboard.tpl:542 views/inc/menu.tpl:208 views/inc/menu.tpl:234
+#: views/dashboard.tpl:542 views/inc/menu.tpl:208 views/inc/menu.tpl:249
 #: views/inc/usage_environment.tpl:25 views/inc/usage_environment.tpl:121
 #: views/inc/usage_environment.tpl:129 views/inc/usage_environment.tpl:213
 #: views/inc/usage_environment.tpl:221 views/inc/usage_environment.tpl:307
@@ -1132,7 +1144,7 @@ msgstr "Year"
 #: views/dashboard.tpl:794 views/dashboard.tpl:849 views/dashboard.tpl:904
 #: views/dashboard.tpl:959 views/dashboard.tpl:1014 views/dashboard.tpl:1069
 #: views/dashboard.tpl:1124 views/door_status.tpl:40
-#: views/inc/sensor_list.tpl:49 views/switch_status.tpl:46
+#: views/inc/sensor_list.tpl:49 views/switch_status.tpl:49
 msgid "Export data"
 msgstr "Export data"
 
@@ -1480,7 +1492,7 @@ msgstr "Online"
 msgid "Offline"
 msgstr "Offline"
 
-#: views/inc/menu.tpl:200 views/inc/menu.tpl:220 views/inc/menu.tpl:240
+#: views/inc/menu.tpl:200 views/inc/menu.tpl:220 views/inc/menu.tpl:255
 msgid "No messages"
 msgstr "No messages"
 
@@ -1494,11 +1506,15 @@ msgstr "Door is closed"
 msgid "Door is open"
 msgstr "Door is open"
 
-#: views/inc/menu.tpl:228
+#: views/inc/menu.tpl:235
+msgid "No events"
+msgstr "No events"
+
+#: views/inc/menu.tpl:243
 msgid "Playing"
 msgstr "Playing"
 
-#: views/inc/menu.tpl:231
+#: views/inc/menu.tpl:246
 msgid "Stopped"
 msgstr "Stopped"
 
@@ -2039,7 +2055,7 @@ msgid "Per switch the title holds shows some values and options."
 msgstr "Per switch the title holds shows some values and options."
 
 #: views/inc/usage_switches.tpl:19 views/switch_settings.tpl:92
-#: views/switch_status.tpl:11
+#: views/switch_status.tpl:11 views/switch_status.tpl:90
 msgid "Switch"
 msgstr "Switch"
 
@@ -2644,9 +2660,45 @@ msgstr "No switches available"
 msgid "in manual mode"
 msgstr "in manual mode"
 
-#: views/switch_status.tpl:43
+#: views/switch_status.tpl:35
+msgid "Last replacement"
+msgstr "Last replacement"
+
+#: views/switch_status.tpl:46
 msgid "Manual mode"
 msgstr "Manual mode"
+
+#: views/switch_status.tpl:52 views/switch_status.tpl:83
+msgid "Replace hardware"
+msgstr "Replace hardware"
+
+#: views/switch_status.tpl:104
+msgid "With new device"
+msgstr "With new device"
+
+#: views/switch_status.tpl:109
+msgid "Remind in"
+msgstr "Remind in"
+
+#: views/switch_status.tpl:117
+msgid "Days"
+msgstr "Days"
+
+#: views/switch_status.tpl:118
+msgid "Weeks"
+msgstr "Weeks"
+
+#: views/switch_status.tpl:119
+msgid "Months"
+msgstr "Months"
+
+#: views/switch_status.tpl:120
+msgid "Years"
+msgstr "Years"
+
+#: views/switch_status.tpl:133
+msgid "Replace"
+msgstr "Replace"
 
 #: views/system_environment.tpl:16
 msgid "Here you can configure your environment."
@@ -3116,6 +3168,10 @@ msgid "Alarm"
 msgstr "Alarm"
 
 #: Missing text string
+msgid "Amount"
+msgstr "Amount"
+
+#: Missing text string
 msgid "Are you sure to delete the file"
 msgstr "Are you sure to delete the file"
 
@@ -3178,6 +3234,10 @@ msgstr "Door status"
 #: Missing text string
 msgid "Drop files here to upload"
 msgstr "Drop files here to upload"
+
+#: Missing text string
+msgid "Duration in hours"
+msgstr "Duration in hours"
 
 #: Missing text string
 msgid "Duration in minutes"

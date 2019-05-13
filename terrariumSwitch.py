@@ -10,6 +10,7 @@ import sys
 import subprocess
 import re
 import pywemo
+import datetime
 
 from hashlib import md5
 from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
@@ -46,6 +47,7 @@ class terrariumPowerSwitchSource(object):
     self.power_wattage = 0.0
     self.water_flow = 0.0
     self.manual_mode = False
+    self.hardware_replacement = '2019-01-01'
 
     self.switchid = switchid
     self.set_name(name)
@@ -150,6 +152,15 @@ class terrariumPowerSwitchSource(object):
   def get_hardware_state(self):
     return None
 
+  def set_last_hardware_replacement(self,replacement_date = None):
+    if replacement_date is None:
+      replacement_date = datetime.date.today().strftime('%Y-%m-%d')
+
+    self.hardware_replacement = replacement_date
+
+  def get_last_hardware_replacement(self):
+    return self.hardware_replacement
+
   def set_state(self, state, force = False):
     changed = False
     logger.debug('Changing power switch \'{}\' of type \'{}\' at address \'{}\' from state \'{}\' to state \'{}\' (Forced:{})'.format(self.get_name(),
@@ -233,7 +244,8 @@ class terrariumPowerSwitchSource(object):
             'water_flow' : self.get_water_flow(),
             'current_water_flow' : self.get_current_water_flow(),
             'state' : self.get_state(),
-            'manual_mode' : self.in_manual_mode()}
+            'manual_mode' : self.in_manual_mode(),
+            'last_replacement_date' : self.get_last_hardware_replacement()}
 
     data.update(self.timer.get_data())
 
