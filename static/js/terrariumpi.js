@@ -1000,16 +1000,20 @@ function load_history_graph(id,type,data_url,nocache) {
     if ($('#' + id + ' .history_graph.loading').length === 1) {
     // Create period menu items
       var menu_items = $('#' + id + ' ul.dropdown-menu.period a');
-      $.each(['day','week','month','year'],function(index,value){
-        if (index === 0) {
-          $(menu_items[index]).parent().addClass('focus');
+      $.each(['day','week','month','year','lr'],function(index,value){
+        if (index < menu_items.length){
+          if (index === 0) {
+            $(menu_items[index]).parent().addClass('focus');
+          }
+
+          $(menu_items[index]).attr('title',$(menu_items[index]).text());
+          $(menu_items[index]).off('click');
+          $(menu_items[index]).on('click', function(){
+            $(this).parent().siblings().removeClass('focus');
+            $(this).parent().addClass('focus');
+            load_history_graph(id,type,data_url + '/' + value ,1);
+          });
         }
-        $(menu_items[index]).off('click');
-        $(menu_items[index]).on('click', function(){
-          $(this).parent().siblings().removeClass('focus');
-          $(this).parent().addClass('focus');
-          load_history_graph(id,type,data_url + '/' + value ,1);
-        });
       });
       $('#' + id + ' ul.dropdown-menu a.export').off('click').on('click',function(){
         var download = $('iframe#history_export');
@@ -1427,7 +1431,7 @@ function history_graph(name, data, type) {
       var usage = '';
       if (data.totals !== undefined) {
         if (data.totals.duration > 0) {
-          usage = '{{_('Duration')}}: ' + moment.duration(data.totals.duration * 1000).humanize()
+          usage = '{{_('Duration in hours')}}: ' + Math.round(moment.duration(data.totals.duration * 1000).as('hours')*100)/100;
         }
         if (data.totals.power_wattage > 0) {
           usage += (usage != '' ? ' - ' : '') + '{{_('Total power in kWh')}}: ' + formatNumber(data.totals.power_wattage / (3600 * 1000));

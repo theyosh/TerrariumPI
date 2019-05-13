@@ -31,6 +31,9 @@
                       <li>
                         <a href="javascript:;" >{{_('Year')}}</a>
                       </li>
+                      <li>
+                        <a href="javascript:;" >{{_('Last replacement')}}</a>
+                      </li>
                     </ul>
                   </li>
                   <li class="dropdown">

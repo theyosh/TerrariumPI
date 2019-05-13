@@ -310,6 +310,9 @@ class terrariumEngine(object):
       power_switch.set_power_wattage(power_switch_config['power_wattage'])
       power_switch.set_water_flow(power_switch_config['water_flow'])
 
+      if 'last_replacement_date' in power_switch_config:
+        power_switch.set_last_hardware_replacement(power_switch_config['last_replacement_date'])
+
       power_switch.set_timer(power_switch_config['timer_start'],
                              power_switch_config['timer_stop'],
                              power_switch_config['timer_on_duration'],
@@ -849,6 +852,8 @@ class terrariumEngine(object):
 
     current_time = datetime.date.today()
     switch = self.power_switches[switch_id]
+    switch.set_last_hardware_replacement()
+    self.config.save_power_switch(switch.get_data())
     self.calendar.create_event(switch_id,
                                '{} hardware replacement'.format(switch.get_name()),
                                'Replaced \'{}\' at power switch {}'.format(device,switch.get_name()),
@@ -1307,10 +1312,74 @@ class terrariumEngine(object):
           if self.sensors[sensorid].get_exclude_avg() or ('chirp' == self.sensors[sensorid].get_type() and 'light' == self.sensors[sensorid].get_sensor_type()):
             exclude_ids.append(self.sensors[sensorid].get_id())
 
-      data = self.collector.get_history(parameters=parameters,exclude_ids=exclude_ids)
+      stoptime = None
+      if 'switches' in parameters and 'lr' in parameters:
+        stoptime = int(datetime.datetime.strptime(self.power_switches[parameters[1]].get_last_hardware_replacement(),'%Y-%m-%d').strftime('%s'))
+
+      data = self.collector.get_history(parameters=parameters,stoptime=stoptime,exclude_ids=exclude_ids)
 
     if socket:
       self.__send_message({'type':'history_graph','data': data})
     else:
       return data
   # End Histroy part (Collector)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -40,6 +40,9 @@ class terrariumCalendar(object):
       self.__ical_data = fp.read()
 
   def get_events(self,start,end):
+    if start is None:
+      start = datetime.now() - timedelta(days=1)
+
     return sorted(events(string_content=self.__ical_data,start=start,end=end), key=attrgetter('start'))
 
   def create_event(self,uid,title,message,location = None,start = None,stop = None):
