@@ -12,6 +12,9 @@
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-wrench" title="{{_('Options')}}"></i></a>
                     <ul class="dropdown-menu" role="menu">
                       <li>
+                        <a href="/api/calendar/ical" target="_blank">{{_('iCal')}}</a>
+                      </li>
+                      <li>
                         <a href="javascript:;" onclick="menu_click('system_settings.html')">{{_('Settings')}}</a>
                       </li>
                     </ul>

@@ -339,7 +339,11 @@ class terrariumWebserver(object):
       result = self.__terrariumEngine.get_profile()
 
     elif 'calendar' == action:
-      result = self.__terrariumEngine.get_calendar(request.query.get('start'),request.query.get('end'))
+      if 'ical' in parameters:
+        response.headers['Content-Type'] = 'text/calendar'
+        response.headers['Content-Disposition'] = 'attachment; filename=terrariumpi.ical.ics'
+
+      result = self.__terrariumEngine.get_calendar(parameters,**{'start':request.query.get('start'),'end':request.query.get('end')})
 
     elif 'sensors' == action:
       result = self.__terrariumEngine.get_sensors(parameters)
@@ -409,8 +413,8 @@ class terrariumWebserver(object):
 
               csv += '"' + '","'.join(row) + "\"\n"
 
-        response.headers['Content-Type'] = 'application/csv';
-        response.headers['Content-Disposition'] = 'attachment; filename=' + export_name;
+        response.headers['Content-Type'] = 'application/csv'
+        response.headers['Content-Disposition'] = 'attachment; filename=' + export_name
         return csv
 
     return result

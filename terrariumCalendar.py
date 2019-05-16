@@ -73,3 +73,6 @@ class terrariumCalendar(object):
       fp.write(ical.to_ical())
 
     self.__ical_data = ical.to_ical()
+
+  def get_ical(self):
+    return self.__ical_data
