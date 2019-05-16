@@ -816,12 +816,17 @@ class terrariumEngine(object):
 
 
 
-  def get_calendar(self,start,end):
-    if start is not None:
-      start = datetime.datetime.strptime(start,'%Y-%m-%d')
+  def get_calendar(self,parameters,**parameters2):
+    if 'ical' in parameters:
+      return self.calendar.get_ical()
 
-    if end is not None:
-      end = datetime.datetime.strptime(end,'%Y-%m-%d')
+    start = None
+    if 'start' in parameters2 and parameters2['start'] is not None:
+      start = datetime.datetime.strptime(parameters2['start'],'%Y-%m-%d')
+
+    end = None
+    if 'end' in parameters2 and parameters2['end'] is not None:
+      end = datetime.datetime.strptime(parameters2['end'],'%Y-%m-%d')
 
     data = self.calendar.get_events(start,end)
 
@@ -1323,63 +1328,3 @@ class terrariumEngine(object):
     else:
       return data
   # End Histroy part (Collector)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
