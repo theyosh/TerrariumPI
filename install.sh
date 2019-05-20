@@ -197,7 +197,7 @@ cd "${BASEDIR}/.."
 
 PIP_MODULES="python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_DHT Adafruit_SHT31 luma.oled bluepy pywemo pyownet emails mh-z19"
 if [ $PYTHON -eq 3 ]; then
-  PIP_MODULES="${PIP_MODULES} opencv-python-headless meross_iot"
+  PIP_MODULES="${PIP_MODULES} opencv-python-headless meross-iot==0.2.2.3"
 fi
 NUMBER_OF_MODULES=($PIP_MODULES)
 NUMBER_OF_MODULES=${#NUMBER_OF_MODULES[@]}
