@@ -93,12 +93,6 @@ if [ -f /boot/config.txt ]; then
     echo "enable_uart=1" >> /boot/config.txt
   fi
 
-  # Make TerrariumPI start during boot
-if [ `grep -ic "start.sh" /etc/rc.local` -eq 0 ]; then
-  sed -i.bak "s@^exit 0@# Starting TerrariumPI server\n${BASEDIR}/start.sh\n\nexit 0@" /etc/rc.local
-fi
-
-
 fi
 
 # Create needed groups
@@ -140,6 +134,11 @@ if [ -f /etc/modules ]; then
   if [ `grep -ic "i2c-dev" /etc/modules` -eq 0 ]; then
     echo "i2c-dev" >> /etc/modules
   fi
+fi
+
+# Increase swap file size
+if [ -f /etc/dphys-swapfile ]; then
+  sed -i.bak 's/^CONF_SWAPSIZE=100/CONF_SWAPSIZE=512/' /etc/dphys-swapfile
 fi
 
 
