@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.6\n"
-"POT-Creation-Date: 2019-05-04 12:04+CEST\n"
-"PO-Revision-Date: 2019-05-04 12:04+0200\n"
+"POT-Creation-Date: 2019-06-01 14:09+CEST\n"
+"PO-Revision-Date: 2019-06-01 14:09+0200\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -496,35 +496,43 @@ msgstr "Enter the e-mail address that is used for your Meross devices."
 msgid "Enter the password that is used for your Meross devices. Password is stored in plain text!"
 msgstr "Enter the password that is used for your Meross devices. Password is stored in plain text!"
 
-#: terrariumTranslations.py:171
+#: terrariumTranslations.py:167
+msgid "Holds the amount of datapoints (each 30 sec) to use for smoothing. The higher the value, the smoother the graph. Enter 0 to disable. Reload the webinterface after changing the setting."
+msgstr "Holds the amount of datapoints (each 30 sec) to use for smoothing. The higher the value, the smoother the graph. Enter 0 to disable. Reload the webinterface after changing the setting."
+
+#: terrariumTranslations.py:168
+msgid "Select true or false to show an extra sensor page which holds all the sensors with there gauges. Reload the webinterface after changing the setting."
+msgstr "Select true or false to show an extra sensor page which holds all the sensors with there gauges. Reload the webinterface after changing the setting."
+
+#: terrariumTranslations.py:173
 msgid "Holds the name of the animal."
 msgstr "Holds the name of the animal."
 
-#: terrariumTranslations.py:172
+#: terrariumTranslations.py:174
 msgid "Holds the type of the animal"
 msgstr "Holds the type of the animal"
 
-#: terrariumTranslations.py:173
+#: terrariumTranslations.py:175
 msgid "Holds the gender of the animal."
 msgstr "Holds the gender of the animal."
 
-#: terrariumTranslations.py:174
+#: terrariumTranslations.py:176
 msgid "Holds the day of birth of the animal."
 msgstr "Holds the day of birth of the animal."
 
-#: terrariumTranslations.py:175
+#: terrariumTranslations.py:177
 msgid "Holds the species name of the animal."
 msgstr "Holds the species name of the animal."
 
-#: terrariumTranslations.py:176
+#: terrariumTranslations.py:178
 msgid "Holds the latin name of the animal."
 msgstr "Holds the latin name of the animal."
 
-#: terrariumTranslations.py:177
+#: terrariumTranslations.py:179
 msgid "Holds a small description about the animal."
 msgstr "Holds a small description about the animal."
 
-#: terrariumTranslations.py:178
+#: terrariumTranslations.py:180
 msgid "Holds a link to more information."
 msgstr "Holds a link to more information."
 
@@ -546,64 +554,64 @@ msgstr "TerrariumPI"
 msgid "Authentication"
 msgstr "Authentication"
 
-#: terrariumWebserver.py:237
+#: terrariumWebserver.py:238
 msgid "Player command could ot be executed!"
 msgstr "Player command could ot be executed!"
 
-#: terrariumWebserver.py:237 terrariumWebserver.py:257
-#: terrariumWebserver.py:269 terrariumWebserver.py:277
+#: terrariumWebserver.py:238 terrariumWebserver.py:258
+#: terrariumWebserver.py:270 terrariumWebserver.py:278
 msgid "Error!"
 msgstr "Error!"
 
-#: terrariumWebserver.py:245 terrariumWebserver.py:248
+#: terrariumWebserver.py:246 terrariumWebserver.py:249
 msgid "OK!"
 msgstr "OK!"
 
-#: terrariumWebserver.py:245 terrariumWebserver.py:248
+#: terrariumWebserver.py:246 terrariumWebserver.py:249
 msgid "Player command executed!"
 msgstr "Player command executed!"
 
-#: terrariumWebserver.py:257
+#: terrariumWebserver.py:258
 msgid "File is not uploaded!"
 msgstr "File is not uploaded!"
 
-#: terrariumWebserver.py:262
+#: terrariumWebserver.py:263
 msgid "File '%s' is uploaded"
 msgstr "File '%s' is uploaded"
 
-#: terrariumWebserver.py:262 terrariumWebserver.py:272
+#: terrariumWebserver.py:263 terrariumWebserver.py:273
 msgid "Success!"
 msgstr "Success!"
 
-#: terrariumWebserver.py:264
+#: terrariumWebserver.py:265
 msgid "Duplicate file '%s'"
 msgstr "Duplicate file '%s'"
 
-#: terrariumWebserver.py:269
+#: terrariumWebserver.py:270
 msgid "Action could not be satisfied"
 msgstr "Action could not be satisfied"
 
-#: terrariumWebserver.py:272
+#: terrariumWebserver.py:273
 msgid "Audio file is deleted"
 msgstr "Audio file is deleted"
 
-#: terrariumWebserver.py:277
+#: terrariumWebserver.py:278
 msgid "Data could not be saved"
 msgstr "Data could not be saved"
 
-#: terrariumWebserver.py:285
+#: terrariumWebserver.py:286
 msgid "Data saved"
 msgstr "Data saved"
 
-#: terrariumWebserver.py:286
+#: terrariumWebserver.py:287
 msgid "Your changes are saved"
 msgstr "Your changes are saved"
 
-#: terrariumWebserver.py:421 views/inc/menu.tpl:174
+#: terrariumWebserver.py:422 views/inc/menu.tpl:174
 msgid "Log out"
 msgstr "Log out"
 
-#: terrariumWebserver.py:422
+#: terrariumWebserver.py:423
 msgid "You are now logged out"
 msgstr "You are now logged out"
 
@@ -772,7 +780,7 @@ msgstr "Files"
 #: views/audio_playlist.tpl:48 views/door_settings.tpl:36
 #: views/notifications.tpl:275 views/profile.tpl:179
 #: views/sensor_settings.tpl:57 views/switch_settings.tpl:72
-#: views/system_environment.tpl:1801 views/system_settings.tpl:228
+#: views/system_environment.tpl:1801 views/system_settings.tpl:245
 #: views/webcam_settings.tpl:48
 msgid "Submit"
 msgstr "Submit"
@@ -2916,46 +2924,54 @@ msgid "Vertical"
 msgstr "Vertical"
 
 #: views/system_settings.tpl:155
+msgid "Graph smoothing value"
+msgstr "Graph smoothing value"
+
+#: views/system_settings.tpl:161
 msgid "Hide environment summary on the dashboard"
 msgstr "Hide environment summary on the dashboard"
 
-#: views/system_settings.tpl:159
+#: views/system_settings.tpl:165 views/system_settings.tpl:176
 msgid "True"
 msgstr "True"
 
-#: views/system_settings.tpl:160
+#: views/system_settings.tpl:166 views/system_settings.tpl:177
 msgid "False"
 msgstr "False"
 
-#: views/system_settings.tpl:166
+#: views/system_settings.tpl:172
+msgid "Show all sensors gauges on 1 page"
+msgstr "Show all sensors gauges on 1 page"
+
+#: views/system_settings.tpl:183
 msgid "Pi power usage in W"
 msgstr "Pi power usage in W"
 
-#: views/system_settings.tpl:172
+#: views/system_settings.tpl:189
 msgid "Power price"
 msgstr "Power price"
 
-#: views/system_settings.tpl:178
+#: views/system_settings.tpl:195
 msgid "Water price"
 msgstr "Water price"
 
-#: views/system_settings.tpl:184
+#: views/system_settings.tpl:201
 msgid "IP or hostname"
 msgstr "IP or hostname"
 
-#: views/system_settings.tpl:190
+#: views/system_settings.tpl:207
 msgid "Port number"
 msgstr "Port number"
 
-#: views/system_settings.tpl:201
+#: views/system_settings.tpl:218
 msgid "Meross Cloud"
 msgstr "Meross Cloud"
 
-#: views/system_settings.tpl:211
+#: views/system_settings.tpl:228
 msgid "Meross Cloud username"
 msgstr "Meross Cloud username"
 
-#: views/system_settings.tpl:217
+#: views/system_settings.tpl:234
 msgid "Meross Cloud password"
 msgstr "Meross Cloud password"
 
