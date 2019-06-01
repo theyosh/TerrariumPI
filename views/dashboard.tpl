@@ -1155,14 +1155,19 @@
             $('div#dashboard div.row.environment div.pull-left').removeClass().addClass('col-md-12 col-sm-12 col-xs-12 pull-left');
           % end
 
+            // The a click event is not working due to template system. So bind it to the inner i object
+            $('div#dashboard div.row.environment div.pull-right a.close-link i').on('click',function(event){
+              $('div#dashboard div.row.environment div.pull-left').removeClass().addClass('col-md-12 col-sm-12 col-xs-12 pull-left');
+            });
+
             $('div#dashboard div.pull-left div.x_panel').hide();
 
             $.get('/api/sensors/average',function(json_data) {
               var active_sensor_types = ['settings'];
 
-            % if show_gauge_overview:
-              active_sensor_types.push('gauge_overview');
-            % end
+              if (globals.show_gauge_overview) {
+                active_sensor_types.push('gauge_overview');
+              }
 
               $.each(json_data.sensors,function(index,sensor_data){
                 if ($('div#' + sensor_data.type + ':hidden')) {

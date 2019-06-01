@@ -1108,7 +1108,7 @@ class terrariumEngine(object):
       config_data['horizontal_graph_legend'] = False;
 
     return terrariumUtils.is_true(config_data['horizontal_graph_legend'])
-  
+
   def get_hide_environment_on_dashboard(self):
     config_data = self.config.get_system()
     if 'hide_environment_on_dashboard' not in config_data:
@@ -1116,6 +1116,20 @@ class terrariumEngine(object):
 
     return terrariumUtils.is_true(config_data['hide_environment_on_dashboard'])
 
+  def get_show_gauge_overview(self):
+    config_data = self.config.get_system()
+    if 'sensor_gauge_overview' not in config_data:
+      config_data['sensor_gauge_overview'] = False;
+
+    return terrariumUtils.is_true(config_data['sensor_gauge_overview'])
+
+  def get_graph_smooth_value(self):
+    config_data = self.config.get_system()
+    if 'graph_smooth_value' not in config_data:
+      # Default 'no' smoothing
+      config_data['graph_smooth_value'] = 0;
+
+    return config_data['graph_smooth_value'] * 1
   # End system functions part
 
   # API Config calls

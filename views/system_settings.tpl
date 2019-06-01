@@ -152,10 +152,27 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="graph_smooth_value">{{_('Graph smoothing value')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <input class="form-control" name="graph_smooth_value" required="required" type="text" pattern="[0-9]+" placeholder="{{_('Graph smoothing value')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_graph_smooth_value')}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="hide_environment_on_dashboard">{{_('Hide environment summary on the dashboard')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_hide_environment_on_dashboard')}}">
                         <select class="form-control" name="hide_environment_on_dashboard" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option value="true">{{_('True')}}</option>
+                          <option value="false">{{_('False')}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sensor_gauge_overview">{{_('Show all sensors gauges on 1 page')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_all_sensors_gauges_page')}}">
+                        <select class="form-control" name="sensor_gauge_overview" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
                           <option value="true">{{_('True')}}</option>
                           <option value="false">{{_('False')}}</option>
                         </select>
@@ -258,7 +275,7 @@
                 minimumResultsForSearch: Infinity
             });
 
-            $("select[name='temperature_indicator'],select[name='distance_indicator'],select[name='always_authenticate'],select[name='horizontal_graph_legend'],select[name='hide_environment_on_dashboard']").select2({
+            $("select[name='temperature_indicator'],select[name='distance_indicator'],select[name='always_authenticate'],select[name='horizontal_graph_legend'],select[name='sensor_gauge_overview'],select[name='hide_environment_on_dashboard']").select2({
                 placeholder: '{{_('Select an option')}}',
                 allowClear: false,
                 minimumResultsForSearch: Infinity

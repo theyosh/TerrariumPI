@@ -193,8 +193,9 @@ class terrariumWebserver(object):
                   'translations': self.__translations,
                   'device': self.__terrariumEngine.device,
                   'notifications' : self.__terrariumEngine.notification,
-                  'show_gauge_overview' : terrariumUtils.is_true(self.__config['sensor_gauge_overview']),
-                  'hide_environment' : self.__terrariumEngine.get_hide_environment_on_dashboard()}
+                  'show_gauge_overview' : 1 if self.__terrariumEngine.get_show_gauge_overview() else 0,
+                  'hide_environment' : self.__terrariumEngine.get_hide_environment_on_dashboard(),
+                  'graph_smooth_value' : self.__terrariumEngine.get_graph_smooth_value()}
 
     if 'index' == template or 'profile' == template:
       variables['person_name'] = self.__terrariumEngine.get_profile_name()
