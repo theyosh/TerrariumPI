@@ -84,6 +84,11 @@ canvas.gauge {
  width: 40%
 }
 
+.badge {
+ position: relative;
+ top: -4px;
+ margin-bottom: -4px;
+}
 
 footer {
   margin-bottom: -20px;

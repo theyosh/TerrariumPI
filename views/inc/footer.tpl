@@ -69,6 +69,8 @@
     globals.volume_indicator = '{{volume_indicator}}';
     globals.language = '{{lang}}';
     globals.horizontal_legend = {{horizontal_graph_legend}};
+    globals.show_gauge_overview = {{show_gauge_overview}};
+    globals.graph_smooth_value = {{graph_smooth_value}};
   </script>
 </body>
 </html>

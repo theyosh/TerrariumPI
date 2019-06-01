@@ -972,6 +972,39 @@ function sensor_gauge(name, data) {
   }
 }
 
+/**
+    * returns an array with moving average of the input array
+    * @param array - the input array
+    * @param count - the number of elements to include in the moving average calculation
+    * @param qualifier - an optional function that will be called on each
+    *  value to determine whether it should be used
+    */
+    function movingAvg(array, count, qualifier){
+
+        // calculate average for subarray
+        var avg = function(array, qualifier){
+
+            var sum = 0, count = 0, val;
+            for (var i in array){
+                val = array[i][1];
+                if (!qualifier || qualifier(val)){
+                    sum += val;
+                    count++;
+                }
+            }
+
+            return [array[0][0],sum / count];
+        };
+        var result = [], val;
+
+        // calculate average for each subarray and add to result
+        for (var i=0, len=array.length - count; i <= len; i++){
+            val = avg(array.slice(i, i + count), qualifier);
+            result.push(val);
+        }
+        return result;
+    }
+
 function load_history_graph(id,type,data_url,nocache) {
   if ($('#' + id + ' .history_graph').length === 1) {
     var now = + new Date();
@@ -1083,7 +1116,7 @@ function history_graph(name, data, type) {
     type = 'temperature';
   }
 
-  var graph_ticks = 8;
+  var graph_ticks = 8, smooth = false;
   if (type === 'door') {
     graph_ticks = [[0, '{{_('Closed')}}'], [1, '{{_('Open')}}']];
   }
@@ -1217,6 +1250,7 @@ function history_graph(name, data, type) {
 
   switch (type) {
     case 'light':
+      smooth = true;
       if (data.light_average !== undefined && data.light_average) {
 
         graph_data = [{
@@ -1280,6 +1314,7 @@ function history_graph(name, data, type) {
     case 'fertility':
     case 'co2':
     case 'volume':
+      smooth = true;
       graph_data = [{
         label: '{{_('Current')}}',
         data: data.current
@@ -1295,6 +1330,7 @@ function history_graph(name, data, type) {
     case 'weather':
       graph_options.series.curvedLines.apply = true;
     case 'system_temperature':
+      smooth = true;
       graph_data = [{
         label: '{{_('Temperature')}}',
         data: data
@@ -1317,6 +1353,7 @@ function history_graph(name, data, type) {
       break;
 
     case 'system_load':
+      smooth = true;
       graph_data = [{
         label: '{{_('Load')}}',
         data: data.load1
@@ -1408,6 +1445,17 @@ function history_graph(name, data, type) {
       total_data_duration = new_duration > total_data_duration ? new_duration : total_data_duration
     }
     graph_options.xaxis.tickSize[0] = Math.round(total_data_duration * 2.5);
+  }
+
+  if (smooth && globals.graph_smooth_value > 0) {
+    graph_data[0].data = movingAvg(graph_data[0].data.reverse(),globals.graph_smooth_value);
+    try {
+      graph_data[1].data = graph_data[1].data.splice(globals.graph_smooth_value);
+    } catch (e) {}
+    try {
+      graph_data[2].data = graph_data[2].data.splice(globals.graph_smooth_value);
+    } catch (e) {}
+
   }
 
   if ($('#' + name + ' .history_graph').length == 1) {
