@@ -48,10 +48,10 @@ class terrariumI2CSensor(terrariumSensorSource):
     try:
       gpio_pins = self.get_address().split(',')
       logger.debug('Open sensor type \'{}\' with address {}'.format(self.get_type(),gpio_pins))
-      logger.debug('Send soft reset command \'{}\' with a timeout of {} seconds'.format(self.SOFTRESET,self.SOFTRESET_TIMEOUT * 2.0))
       #Datasheet recommend do Soft Reset before measurment:
       self.i2c_bus = smbus.SMBus(1 if len(gpio_pins) == 1 else int(gpio_pins[1]))
       if self.SOFTRESET_TIMEOUT > 0.0:
+        logger.debug('Send soft reset command \'{}\' with a timeout of {} seconds'.format(self.SOFTRESET,self.SOFTRESET_TIMEOUT * 2.0))
         self.i2c_bus.write_byte(int('0x' + gpio_pins[0],16), self.SOFTRESET)
         sleep(self.SOFTRESET_TIMEOUT * 2.0)
 
@@ -570,6 +570,61 @@ class terrariumMLX90614Sensor(terrariumSensorSource):
         data = None
 
     except Exception as ex:
+      print(ex)
+
+    return data
+
+class terrariumAM2320Sensor(terrariumI2CSensor):
+  TYPE = 'am2320'
+
+  SOFTRESET_TIMEOUT = 0.0
+
+  PARAM_AM2320_READ = 0x03
+  REG_AM2320_HUMIDITY_MSB = 0x00
+
+  def _am_crc16(self, buf):
+    crc = 0xFFFF
+    for c in buf:
+      crc ^= c
+      for i in range(8):
+        if crc & 0x01:
+          crc >>= 1
+          crc ^= 0xA001
+        else:
+          crc >>= 1
+    return crc
+
+  def get_raw_data(self,command, regaddr, regcount):
+    gpio_pins = self.get_address().split(',')
+    try:
+      self.i2c_bus.write_i2c_block_data(int('0x' + gpio_pins[0],16), 0x00, [])
+      self.i2c_bus.write_i2c_block_data(int('0x' + gpio_pins[0],16), command, [regaddr, regcount])
+
+      sleep(0.002)
+
+      buf = self.i2c_bus.read_i2c_block_data(int('0x' + gpio_pins[0],16), 0, 8)
+    except IOError as ex:
+      print('load_raw_data temp:')
+      print(ex)
+
+    buf_str = "".join(chr(x) for x in buf)
+
+    crc = unpack('<H', buf_str[-2:])[0]
+    if crc != self._am_crc16(buf[:-2]):
+      print('AM2320 CRC error.')
+
+    return buf_str[2:-2]
+
+  def load_raw_data(self):
+    data = None
+
+    try:
+      data = {}
+      raw_data = self.get_raw_data(PARAM_AM2320_READ, REG_AM2320_HUMIDITY_MSB, 4)
+      data['temperature'] = unpack('>H', raw_data[-2:])[0] / 10.0
+      data['humidity'] = unpack('>H', raw_data[-4:2])[0] / 10.0
+    except Exception as ex:
+      print('load_raw_data humid:')
       print(ex)
 
     return data
