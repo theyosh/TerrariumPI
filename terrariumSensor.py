@@ -431,7 +431,7 @@ class terrariumMHZ19Sensor(terrariumSensorSource):
 from terrariumAnalogSensor import terrariumSKUSEN0161Sensor
 from terrariumBluetoothSensor import terrariumMiFloraSensor
 from terrariumGPIOSensor import terrariumYTXXSensorDigital, terrariumDHT11Sensor, terrariumDHT22Sensor, terrariumAM2302Sensor, terrariumHCSR04Sensor
-from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor, terrariumSHT3XSensor, terrariumMLX90614Sensor
+from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor, terrariumSHT3XSensor, terrariumMLX90614Sensor, terrariumAM2320Sensor
 
 # Not sure if this is needed here again....?
 monkey.patch_all()
@@ -468,7 +468,8 @@ class terrariumSensor(object):
              terrariumChirpSensor,
              terrariumSHT3XSensor,
              terrariumMHZ19Sensor,
-             terrariumMLX90614Sensor]
+             terrariumMLX90614Sensor,
+             terrariumAM2320Sensor]
 
   def __new__(self, sensor_id, hardware_type, sensor_type, address, name = '', callback_indicator = None):
     for sensor in terrariumSensor.SENSORS:
