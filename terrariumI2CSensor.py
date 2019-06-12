@@ -597,6 +597,7 @@ class terrariumAM2320Sensor(terrariumI2CSensor):
 
   def get_raw_data(self,command, regaddr, regcount):
     gpio_pins = self.get_address().split(',')
+    print('Debug I2C address: {}'.format(gpio_pins[0]))
     try:
       self.i2c_bus.write_i2c_block_data(int('0x' + gpio_pins[0],16), 0x00, [])
       self.i2c_bus.write_i2c_block_data(int('0x' + gpio_pins[0],16), command, [regaddr, regcount])
@@ -604,7 +605,7 @@ class terrariumAM2320Sensor(terrariumI2CSensor):
       sleep(0.002)
 
       buf = self.i2c_bus.read_i2c_block_data(int('0x' + gpio_pins[0],16), 0, 8)
-    except IOError as ex:
+    except Exception as ex:
       print('get_raw_data error:')
       print(ex)
       return ''
