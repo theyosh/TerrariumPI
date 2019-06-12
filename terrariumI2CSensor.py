@@ -16,6 +16,7 @@ sys.path.insert(0, './chirp-rpi')
 import chirp
 sys.path.insert(0, './python-MLX90614')
 from mlx90614 import MLX90614
+from struct import unpack
 
 from gevent import monkey, sleep
 monkey.patch_all()
@@ -604,14 +605,16 @@ class terrariumAM2320Sensor(terrariumI2CSensor):
 
       buf = self.i2c_bus.read_i2c_block_data(int('0x' + gpio_pins[0],16), 0, 8)
     except IOError as ex:
-      print('load_raw_data temp:')
+      print('get_raw_data error:')
       print(ex)
+      return ''
 
     buf_str = "".join(chr(x) for x in buf)
 
     crc = unpack('<H', buf_str[-2:])[0]
     if crc != self._am_crc16(buf[:-2]):
       print('AM2320 CRC error.')
+      return ''
 
     return buf_str[2:-2]
 
@@ -620,11 +623,11 @@ class terrariumAM2320Sensor(terrariumI2CSensor):
 
     try:
       data = {}
-      raw_data = self.get_raw_data(PARAM_AM2320_READ, REG_AM2320_HUMIDITY_MSB, 4)
+      raw_data = self.get_raw_data(self.PARAM_AM2320_READ, self.REG_AM2320_HUMIDITY_MSB, 4)
       data['temperature'] = unpack('>H', raw_data[-2:])[0] / 10.0
       data['humidity'] = unpack('>H', raw_data[-4:2])[0] / 10.0
     except Exception as ex:
-      print('load_raw_data humid:')
+      print('load_raw_data error:')
       print(ex)
 
     return data
