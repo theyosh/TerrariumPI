@@ -597,25 +597,29 @@ class terrariumAM2320Sensor(terrariumI2CSensor):
 
   def get_raw_data(self,command, regaddr, regcount):
     gpio_pins = self.get_address().split(',')
-    print('Debug I2C address: {}'.format(gpio_pins[0]))
     try:
-      self.i2c_bus.write_i2c_block_data(int('0x' + gpio_pins[0],16), 0x00, [])
+      try:
+        # wake AM2320 up, goes to sleep to not warm up and affect the humidity sensor
+        # This write will fail as AM2320 won't ACK this write
+        self.i2c_bus.write_i2c_block_data(int('0x' + gpio_pins[0],16), 0x00, [])
+      except Exception as ex:
+        pass # As this is expected
+
       self.i2c_bus.write_i2c_block_data(int('0x' + gpio_pins[0],16), command, [regaddr, regcount])
 
       sleep(0.002)
 
       buf = self.i2c_bus.read_i2c_block_data(int('0x' + gpio_pins[0],16), 0, 8)
     except Exception as ex:
-      print('get_raw_data error:')
-      print(ex)
-      return ''
+      #logger.error('Error reading sensor {}'.format(self.get_name()))
+      return None
 
     buf_str = "".join(chr(x) for x in buf)
 
     crc = unpack('<H', buf_str[-2:])[0]
     if crc != self._am_crc16(buf[:-2]):
-      print('AM2320 CRC error.')
-      return ''
+      logger.warning('AM2320 CRC error for sensor {}'.format(self.get_name()))
+      return None
 
     return buf_str[2:-2]
 
@@ -623,8 +627,11 @@ class terrariumAM2320Sensor(terrariumI2CSensor):
     data = None
 
     try:
-      data = {}
       raw_data = self.get_raw_data(self.PARAM_AM2320_READ, self.REG_AM2320_HUMIDITY_MSB, 4)
+      if raw_data is None:
+        return raw_data
+
+      data = {}
       data['temperature'] = unpack('>H', raw_data[-2:])[0] / 10.0
       data['humidity'] = unpack('>H', raw_data[-4:2])[0] / 10.0
     except Exception as ex:
