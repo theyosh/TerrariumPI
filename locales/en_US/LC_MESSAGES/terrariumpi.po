@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.6\n"
-"POT-Creation-Date: 2019-06-01 14:09+CEST\n"
-"PO-Revision-Date: 2019-06-01 14:09+0200\n"
+"POT-Creation-Date: 2019-06-18 11:11+AEST\n"
+"PO-Revision-Date: 2019-06-18 11:11+1000\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -680,7 +680,7 @@ msgstr "Duration"
 #: views/inc/usage_sensors.tpl:174 views/inc/usage_switches.tpl:117
 #: views/inc/usage_switches.tpl:140 views/inc/usage_webcams.tpl:104
 #: views/inc/usage_webcams.tpl:134 views/profile.tpl:56
-#: views/sensor_settings.tpl:28 views/sensor_settings.tpl:153
+#: views/sensor_settings.tpl:28 views/sensor_settings.tpl:155
 #: views/switch_settings.tpl:25 views/switch_settings.tpl:135
 #: views/webcam_settings.tpl:28 views/webcam_settings.tpl:90
 msgid "Name"
@@ -693,7 +693,7 @@ msgstr "Album"
 #: views/audio_files.tpl:68 views/inc/usage_dashboard.tpl:153
 #: views/inc/usage_sensors.tpl:128 views/inc/usage_sensors.tpl:171
 #: views/profile.tpl:63 views/sensor_settings.tpl:25
-#: views/sensor_settings.tpl:127
+#: views/sensor_settings.tpl:129
 msgid "Type"
 msgstr "Type"
 
@@ -759,7 +759,7 @@ msgid "Stop"
 msgstr "Stop"
 
 #: views/audio_playlist.tpl:28 views/audio_playlist.tpl:95
-#: views/dashboard.tpl:542 views/inc/menu.tpl:71 views/sensor_settings.tpl:143
+#: views/dashboard.tpl:542 views/inc/menu.tpl:71 views/sensor_settings.tpl:145
 #: views/system_environment.tpl:1247
 msgid "Volume"
 msgstr "Volume"
@@ -809,7 +809,7 @@ msgid "new"
 msgstr "new"
 
 #: views/audio_playlist.tpl:112 views/sensor_settings.tpl:103
-#: views/sensor_settings.tpl:130 views/switch_settings.tpl:109
+#: views/sensor_settings.tpl:132 views/switch_settings.tpl:109
 #: views/switch_settings.tpl:150 views/webcam_settings.tpl:108
 #: views/webcam_settings.tpl:122 views/webcam_settings.tpl:141
 #: views/webcam_settings.tpl:152
@@ -819,13 +819,13 @@ msgstr "Select an option"
 #: views/audio_playlist.tpl:123 views/door_settings.tpl:94
 #: views/inc/usage_doors.tpl:70 views/inc/usage_sensors.tpl:81
 #: views/inc/usage_switches.tpl:70 views/inc/usage_webcams.tpl:66
-#: views/sensor_settings.tpl:201 views/switch_settings.tpl:207
+#: views/sensor_settings.tpl:203 views/switch_settings.tpl:207
 #: views/webcam_settings.tpl:165
 msgid "Close"
 msgstr "Close"
 
 #: views/audio_playlist.tpl:124 views/door_settings.tpl:95
-#: views/sensor_settings.tpl:202 views/switch_settings.tpl:208
+#: views/sensor_settings.tpl:204 views/switch_settings.tpl:208
 #: views/webcam_settings.tpl:166
 msgid "Add"
 msgstr "Add"
@@ -900,7 +900,7 @@ msgstr "Total water in L"
 #: views/inc/usage_sensors.tpl:157 views/inc/usage_sensors.tpl:189
 #: views/inc/usage_sensors.tpl:206 views/inc/usage_weather.tpl:13
 #: views/inc/usage_weather.tpl:85 views/sensor_settings.tpl:46
-#: views/sensor_settings.tpl:177 views/weather.tpl:7
+#: views/sensor_settings.tpl:179 views/weather.tpl:7
 msgid "Current"
 msgstr "Current"
 
@@ -1013,7 +1013,7 @@ msgstr "Night"
 
 #: views/dashboard.tpl:118 views/inc/menu.tpl:44
 #: views/inc/usage_dashboard.tpl:159 views/inc/usage_sensors.tpl:131
-#: views/sensor_settings.tpl:131 views/system_environment.tpl:158
+#: views/sensor_settings.tpl:133 views/system_environment.tpl:158
 msgid "Temperature"
 msgstr "Temperature"
 
@@ -1045,21 +1045,21 @@ msgstr "Day/night difference"
 
 #: views/dashboard.tpl:171 views/inc/menu.tpl:47
 #: views/inc/usage_dashboard.tpl:158 views/inc/usage_sensors.tpl:132
-#: views/sensor_settings.tpl:132 views/system_environment.tpl:370
+#: views/sensor_settings.tpl:134 views/system_environment.tpl:370
 msgid "Humidity"
 msgstr "Humidity"
 
-#: views/dashboard.tpl:224 views/inc/menu.tpl:50 views/sensor_settings.tpl:133
+#: views/dashboard.tpl:224 views/inc/menu.tpl:50 views/sensor_settings.tpl:135
 #: views/system_environment.tpl:581
 msgid "Moisture"
 msgstr "Moisture"
 
-#: views/dashboard.tpl:277 views/inc/menu.tpl:59 views/sensor_settings.tpl:136
+#: views/dashboard.tpl:277 views/inc/menu.tpl:59 views/sensor_settings.tpl:138
 #: views/system_environment.tpl:1003
 msgid "pH"
 msgstr "pH"
 
-#: views/dashboard.tpl:330 views/inc/menu.tpl:53 views/sensor_settings.tpl:134
+#: views/dashboard.tpl:330 views/inc/menu.tpl:53 views/sensor_settings.tpl:136
 #: views/system_environment.tpl:792
 msgid "Conductivity"
 msgstr "Conductivity"
@@ -1068,12 +1068,12 @@ msgstr "Conductivity"
 msgid "Water tank"
 msgstr "Water tank"
 
-#: views/dashboard.tpl:436 views/inc/menu.tpl:65 views/sensor_settings.tpl:141
+#: views/dashboard.tpl:436 views/inc/menu.tpl:65 views/sensor_settings.tpl:143
 #: views/system_environment.tpl:1378
 msgid "Fertility"
 msgstr "Fertility"
 
-#: views/dashboard.tpl:489 views/inc/menu.tpl:68 views/sensor_settings.tpl:142
+#: views/dashboard.tpl:489 views/inc/menu.tpl:68 views/sensor_settings.tpl:144
 #: views/system_environment.tpl:1589
 msgid "CO2"
 msgstr "CO2"
@@ -1199,7 +1199,7 @@ msgstr "Hardware"
 #: views/inc/usage_sensors.tpl:123 views/inc/usage_sensors.tpl:168
 #: views/inc/usage_switches.tpl:112 views/inc/usage_switches.tpl:137
 #: views/notifications.tpl:81 views/sensor_settings.tpl:22
-#: views/sensor_settings.tpl:148 views/switch_settings.tpl:22
+#: views/sensor_settings.tpl:150 views/switch_settings.tpl:22
 #: views/switch_settings.tpl:130
 msgid "Address"
 msgstr "Address"
@@ -1428,11 +1428,11 @@ msgstr "Profile"
 msgid "All"
 msgstr "All"
 
-#: views/inc/menu.tpl:56 views/sensor_settings.tpl:135
+#: views/inc/menu.tpl:56 views/sensor_settings.tpl:137
 msgid "Distance"
 msgstr "Distance"
 
-#: views/inc/menu.tpl:62 views/sensor_settings.tpl:137
+#: views/inc/menu.tpl:62 views/sensor_settings.tpl:139
 msgid "Light"
 msgstr "Light"
 
@@ -2018,27 +2018,27 @@ msgstr "The current value is also written below the graph in degrees, percentage
 msgid "The history graph will shows the measured value. The flat lines are the minimum and maximum values that are configured. When the measured value is outside this range an alarm will be given. Hover above the graph lines to get detailed information."
 msgstr "The history graph will shows the measured value. The flat lines are the minimum and maximum values that are configured. When the measured value is outside this range an alarm will be given. Hover above the graph lines to get detailed information."
 
-#: views/inc/usage_sensors.tpl:118 views/sensor_settings.tpl:117
+#: views/inc/usage_sensors.tpl:118 views/sensor_settings.tpl:118
 msgid "HC-SR04"
 msgstr "HC-SR04"
 
 #: views/inc/usage_sensors.tpl:141 views/inc/usage_sensors.tpl:177
-#: views/sensor_settings.tpl:31 views/sensor_settings.tpl:157
+#: views/sensor_settings.tpl:31 views/sensor_settings.tpl:159
 msgid "Alarm min"
 msgstr "Alarm min"
 
 #: views/inc/usage_sensors.tpl:145 views/inc/usage_sensors.tpl:180
-#: views/sensor_settings.tpl:34 views/sensor_settings.tpl:161
+#: views/sensor_settings.tpl:34 views/sensor_settings.tpl:163
 msgid "Alarm max"
 msgstr "Alarm max"
 
 #: views/inc/usage_sensors.tpl:149 views/inc/usage_sensors.tpl:183
-#: views/sensor_settings.tpl:37 views/sensor_settings.tpl:165
+#: views/sensor_settings.tpl:37 views/sensor_settings.tpl:167
 msgid "Limit min"
 msgstr "Limit min"
 
 #: views/inc/usage_sensors.tpl:153 views/inc/usage_sensors.tpl:186
-#: views/sensor_settings.tpl:40 views/sensor_settings.tpl:169
+#: views/sensor_settings.tpl:40 views/sensor_settings.tpl:171
 msgid "Limit max"
 msgstr "Limit max"
 
@@ -2464,7 +2464,7 @@ msgstr "More information"
 msgid "Here you can configure your sensors."
 msgstr "Here you can configure your sensors."
 
-#: views/sensor_settings.tpl:43 views/sensor_settings.tpl:173
+#: views/sensor_settings.tpl:43 views/sensor_settings.tpl:175
 msgid "Max diff"
 msgstr "Max diff"
 
@@ -2500,47 +2500,55 @@ msgstr "Chirp"
 msgid "YTXX-digital"
 msgstr "YTXX-digital"
 
-#: views/sensor_settings.tpl:118
+#: views/sensor_settings.tpl:117
+msgid "Script"
+msgstr "Script"
+
+#: views/sensor_settings.tpl:119
 msgid "pH SKU-SEN0161"
 msgstr "pH SKU-SEN0161"
 
-#: views/sensor_settings.tpl:119
+#: views/sensor_settings.tpl:120
 msgid "VEML6075"
 msgstr "VEML6075"
 
-#: views/sensor_settings.tpl:120
+#: views/sensor_settings.tpl:121
 msgid "MiFlora"
 msgstr "MiFlora"
 
-#: views/sensor_settings.tpl:121
+#: views/sensor_settings.tpl:122
 msgid "mh-z19"
 msgstr "mh-z19"
 
-#: views/sensor_settings.tpl:122
+#: views/sensor_settings.tpl:123
 msgid "MLX90614"
 msgstr "MLX90614"
 
-#: views/sensor_settings.tpl:138
+#: views/sensor_settings.tpl:124
+msgid "AM2320"
+msgstr "AM2320"
+
+#: views/sensor_settings.tpl:140
 msgid "UVA"
 msgstr "UVA"
 
-#: views/sensor_settings.tpl:139
+#: views/sensor_settings.tpl:141
 msgid "UVB"
 msgstr "UVB"
 
-#: views/sensor_settings.tpl:140
+#: views/sensor_settings.tpl:142
 msgid "UV Index"
 msgstr "UV Index"
 
-#: views/sensor_settings.tpl:183
+#: views/sensor_settings.tpl:185
 msgid "Min moist value"
 msgstr "Min moist value"
 
-#: views/sensor_settings.tpl:187
+#: views/sensor_settings.tpl:189
 msgid "Max moist value"
 msgstr "Max moist value"
 
-#: views/sensor_settings.tpl:191
+#: views/sensor_settings.tpl:193
 msgid "Temperature offset"
 msgstr "Temperature offset"
 
