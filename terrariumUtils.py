@@ -5,6 +5,7 @@ logger = terrariumLogging.logging.getLogger(__name__)
 import re
 import datetime
 import requests
+import subprocess
 from math import log
 from time import time
 
@@ -347,6 +348,19 @@ class terrariumUtils():
     except Exception as ex:
       print(ex)
       logger.exception('Error parsing remote data at url %s. Exception %s' % (url, ex))
+
+    return data
+
+  @staticmethod
+  def get_script_data(script):
+    data = None
+    try:
+      logger.info('Running script: %s.' % (script))
+      data = subprocess.check_output(script, shell=True)
+      logger.info('Output was: %s.' % (data))
+    except Exception as ex:
+      print(ex)
+      logger.exception('Error parsing script data for script %s. Exception %s' % (script, ex))
 
     return data
 

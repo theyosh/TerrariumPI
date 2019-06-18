@@ -296,6 +296,17 @@ class terrariumRemoteSensor(terrariumSensorSource):
 
     return { self.get_sensor_type() : data}
 
+class terrariumScriptSensor(terrariumSensorSource):
+  TYPE = 'script'
+  VALID_SENSOR_TYPES = []
+
+  def load_data(self):
+    data = terrariumUtils.get_script_data(self.get_address())
+    if data is None:
+      return None
+
+    return { self.get_sensor_type() : data}
+
 class terrarium1WSensor(terrariumSensorSource):
   TYPE = 'w1'
   VALID_SENSOR_TYPES = ['temperature']
@@ -451,6 +462,7 @@ class terrariumSensor(object):
   ERROR_TIMEOUT = 10 * 60 # 10 minutes
 
   SENSORS = [terrariumRemoteSensor,
+             terrariumScriptSensor,
              terrarium1WSensor,
              terrariumOWFSSensor,
              terrariumMiFloraSensor,
