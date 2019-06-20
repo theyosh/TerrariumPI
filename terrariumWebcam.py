@@ -53,7 +53,7 @@ class terrariumWebcamSource(object):
   UPDATE_TIMEOUT = 60
   VALID_ROTATIONS = ['0','90','180','270','h','v']
 
-  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
+  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None, motion_boxes = True):
     # Variables per webcam
     self.raw_image = None
 
@@ -75,6 +75,7 @@ class terrariumWebcamSource(object):
     self.set_archive(archive)
     self.set_archive_light(archive_light)
     self.set_archive_door(archive_door)
+    self.set_motion_boxes(motion_boxes)
 
     if webcam_id is None:
       self.__id = md5(self.get_location().encode()).hexdigest()
@@ -251,8 +252,10 @@ class terrariumWebcamSource(object):
 
             motion_detected = True
             # compute the bounding box for the contour, draw it on the frame,
-            (x, y, w, h) = cv2.boundingRect(c)
-            cv2.rectangle(raw_image, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            # don't draw if motion boxes is disabled
+            if self.get_motion_boxes():
+              (x, y, w, h) = cv2.boundingRect(c)
+              cv2.rectangle(raw_image, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
           if motion_detected:
             cv2.imwrite(archive_image,raw_image)
@@ -348,7 +351,8 @@ class terrariumWebcamSource(object):
             'archive': self.get_archive(),
             'archivelight': self.get_archive_light(),
             'archivedoor': self.get_archive_door(),
-            'archive_images' : []
+            'archive_images' : [],
+            'motionboxes': self.get_motion_boxes()
             }
 
     if archive:
@@ -413,6 +417,12 @@ class terrariumWebcamSource(object):
   def get_archive_door(self):
     return self.archive_door_state
 
+  def get_motion_boxes(self):
+    return terrariumUtils.is_true(self.motion_boxes)
+
+  def set_motion_boxes(self,state):
+    self.motion_boxes = terrariumUtils.is_true(state)
+
   def get_state(self):
     return self.__state
 
@@ -434,8 +444,8 @@ class terrariumWebcamSource(object):
     return False
 
 class terrariumWebcamLiveSource(terrariumWebcamSource):
-  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
-    super(terrariumWebcamLiveSource,self).__init__(webcam_id, location, name, rotation, width, height, archive, archive_light, archive_door, environment)
+  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None, motion_boxes = True):
+    super(terrariumWebcamLiveSource,self).__init__(webcam_id, location, name, rotation, width, height, archive, archive_light, archive_door, environment, motion_boxes)
     self.process_id = None
     self.start()
 
@@ -598,10 +608,10 @@ class terrariumWebcam(object):
              terrariumWebcamRPILive,
              terrariumWebcamHLSLive]
 
-  def __new__(self,webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
+  def __new__(self,webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None, motion_boxes = True):
     for webcam_source in terrariumWebcam.SOURCES:
       if re.search(webcam_source.VALID_SOURCE, location, re.IGNORECASE):
-        return webcam_source(webcam_id,location,name,rotation,width,height,archive,archive_light,archive_door,environment)
+        return webcam_source(webcam_id,location,name,rotation,width,height,archive,archive_light,archive_door,environment, motion_boxes)
 
     raise terrariumWebcamSourceException()
 
