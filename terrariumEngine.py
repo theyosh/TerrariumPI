@@ -392,6 +392,7 @@ class terrariumEngine(object):
         archive = False
         archive_light = 'ignore'
         archive_door = 'ignore'
+        motion_boxes = True
 
         if 'resolution_width' in webcamdata and 'resolution_height' in webcamdata:
           width = webcamdata['resolution_width']
@@ -406,16 +407,25 @@ class terrariumEngine(object):
         if 'archivedoor' in webcamdata:
           archive_door = webcamdata['archivedoor']
 
-        webcam = terrariumWebcam(None,
-                                 webcamdata['location'],
-                                 webcamdata['name'],
-                                 webcamdata['rotation'],
-                                 width,height,
-                                 archive,
-                                 archive_light,
-                                 archive_door,
-                                 self.environment)
-        self.webcams[webcam.get_id()] = webcam
+        if 'motionboxes' in webcamdata:
+          motion_boxes = webcamdata['motionboxes']
+
+        # don't let bad location data kill the system
+        try:
+          webcam = terrariumWebcam(None,
+                                   webcamdata['location'],
+                                   webcamdata['name'],
+                                   webcamdata['rotation'],
+                                   width,height,
+                                   archive,
+                                   archive_light,
+                                   archive_door,
+                                   self.environment,
+                                   motion_boxes)
+          self.webcams[webcam.get_id()] = webcam
+        except Exception as err:
+          print(err)
+          continue
       else:
         # Existing webcam
         webcam = self.webcams[webcamdata['id']]
@@ -437,6 +447,9 @@ class terrariumEngine(object):
 
       if 'archivedoor' in webcamdata:
         webcam.set_archive_door(webcamdata['archivedoor'])
+
+      if 'motionboxes' in webcamdata:
+        webcam.set_motion_boxes(webcamdata['motionboxes'])
 
       seen_webcams.append(webcam.get_id())
 

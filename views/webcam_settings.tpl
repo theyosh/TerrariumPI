@@ -156,6 +156,16 @@
                             </select>
                           </div>
                         </div>
+                        <div class="col-md-2 col-sm-2 col-xs-6 form-group">
+                          <label for="webcam_[nr]_motionboxes">{{_('Motion boxes')}}</label>
+                          <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('webcam_field_motion_boxes')}}">
+                            <select class="form-control" name="webcam_[nr]_motionboxes" tabindex="-1" placeholder="{{_('Select an option')}}">
+                              <option value="">{{_('Select an option')}}</option>
+                              <option value="true">{{_('Enabled')}}</option>
+                              <option value="false">{{_('Disabled')}}</option>
+                            </select>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
