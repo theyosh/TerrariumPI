@@ -81,6 +81,7 @@ class terrariumTranslations(object):
     self.translations['webcam_field_archive'] = _('Enabled or disable image archiving based on motion detection.')
     self.translations['webcam_field_archive_light'] = _('Select the environment light state when enabling archiving.')
     self.translations['webcam_field_archive_door'] = _('Select the environment door state when enabling archiving.')
+    self.translations['webcam_field_motion_boxes'] = _('Enable or disable motion boxes for Motion archiving.')
     # End webcam
 
     # Audio
