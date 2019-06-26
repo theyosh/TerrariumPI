@@ -1975,23 +1975,11 @@ function add_sensor_setting_row(data) {
 
       var address_field = $("input[name='" + this.name.replace('hardwaretype','address') + "']");
       address_field.attr("readonly", this.value == 'owfs' || this.value == 'w1').off('change');
-
-/*
-      if ('remote' === this.value) {
-        address_field.on('change',function(){
-            parse_remote_data('sensor',this.value);
-        });
-      }
-      */
     }
   });
 
   // Disable hardware select box
-  setting_row.find('select').each(function () {
-    if (this.name.indexOf('hardwaretype') >= 0) {
-      $(this).attr("disabled", true);
-    }
-  });
+  setting_row.find('select[name*="hardwaretype"]').attr("disabled", true);
 
   // Add on the bottom before the submit row
   setting_row.insertBefore('div.row.submit');
@@ -2151,13 +2139,6 @@ function add_power_switch_setting_row(data) {
   if (data.id !== undefined) {
     // Set ID
     setting_row.attr('id','powerswitch_' + data.id);
-
-    // Set toggle (disabled in 'edit' modus)
-    /*
-    power_switch_row.find('div.power_switch span.glyphicon').on('click',function(){
-      toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
-    });
-    */
   }
   // Re-initialize the select pulldowns
   //setting_row.find('span.select2.select2-container').remove();
@@ -2175,6 +2156,9 @@ function add_power_switch_setting_row(data) {
         }
       }
   });
+  // Disable hardware select box
+  setting_row.find('select[name*="hardwaretype"]').attr("disabled", true);
+
   // Add on the bottom before the submit row
   setting_row.insertBefore('div.row.submit');
 }
@@ -2324,6 +2308,9 @@ function add_door_setting_row(data) {
     allowClear: false,
     minimumResultsForSearch: Infinity
   });
+  // Disable hardware select box
+  setting_row.find('select[name*="hardwaretype"]').attr("disabled", true);
+
   // Add on the bottom before the submit row
   setting_row.insertBefore('div.row.submit');
 }
