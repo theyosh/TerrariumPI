@@ -1985,6 +1985,14 @@ function add_sensor_setting_row(data) {
       */
     }
   });
+
+  // Disable hardware select box
+  setting_row.find('select').each(function () {
+    if (this.name.indexOf('hardwaretype') >= 0) {
+      $(this).attr("disabled", true);
+    }
+  });
+
   // Add on the bottom before the submit row
   setting_row.insertBefore('div.row.submit');
 }
