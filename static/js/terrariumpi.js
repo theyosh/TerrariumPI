@@ -2002,6 +2002,8 @@ function add_sensor() {
 
   // Add new row
   add_sensor_setting_row(data);
+
+  $('select[name*="hardwaretype"]:disabled:last').attr("disabled", false);
   // Update new row with new values
   update_sensor(data);
 
@@ -2441,6 +2443,9 @@ function initWebcam(data) {
                                     parentId: '#webcam_' + data.id,
                                     width: '100%',
                                     height: '100%',
+                                    playInline: true,
+                                    disableVideoTagContextMenu: true,
+                                    recycleVideo: false,
                                     autoPlay: true,
                                     chromeless: false});
 
