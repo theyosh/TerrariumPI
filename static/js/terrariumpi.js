@@ -2161,6 +2161,8 @@ function add_power_switch_setting_row(data) {
   // Disable hardware select box
   setting_row.find('select[name*="hardwaretype"]').attr("disabled", true);
 
+  $('select[name*="hardwaretype"]:disabled:last').attr("disabled", false);
+
   // Add on the bottom before the submit row
   setting_row.insertBefore('div.row.submit');
 }
@@ -2312,6 +2314,8 @@ function add_door_setting_row(data) {
   });
   // Disable hardware select box
   setting_row.find('select[name*="hardwaretype"]').attr("disabled", true);
+
+  $('select[name*="hardwaretype"]:disabled:last').attr("disabled", false);
 
   // Add on the bottom before the submit row
   setting_row.insertBefore('div.row.submit');
