@@ -36,6 +36,10 @@
 
         <script type="text/javascript">
           $(document).ready(function() {
+            $(window).on('unload',function(){
+               console.log('unload');
+            });
+
             source_row = $('div.row.webcam').html();
             // Do not remove it, but clean it
             $('div.row.webcam').html('');
