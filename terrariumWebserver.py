@@ -156,6 +156,12 @@ class terrariumWebserver(object):
                      apply=self.__authenticate(True)
                     )
 
+    self.__app.route('/api/config/switches/hardware',
+                     method=['PUT'],
+                     callback=self.__replace_switch_hardware,
+                     apply=self.__authenticate(True)
+                    )
+
     self.__app.route('/api/config/<path:re:(system|weather|switches|sensors|webcams|doors|audio|environment|profile|notifications)>',
                      method=['PUT','POST','DELETE'],
                      callback=self.__update_api_call,
@@ -302,6 +308,24 @@ class terrariumWebserver(object):
 
     return result
 
+  def __replace_switch_hardware(self):
+    postdata = None
+    if request.json is not None:
+      postdata = request.json
+
+    self.__terrariumEngine.replace_hardware_calender_event(postdata['switch']['id'],
+                                                           postdata['switch']['device'],
+                                                           postdata['switch']['reminder_amount'],
+                                                           postdata['switch']['reminder_period'])
+    result = {'ok' : True,
+              'title' : _('Hardware is replaced'),
+              'message' : _('Hardware replacement is logged in the calendar')}
+
+    if '' != postdata['switch']['reminder_amount']:
+      result['message'] += '<br />' + _('A new replacement reminder is created')
+
+    return result
+
   def __get_api_call(self,path):
     response.headers['Expires'] = (datetime.datetime.utcnow() + datetime.timedelta(seconds=10)).strftime('%a, %d %b %Y %H:%M:%S GMT')
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -323,6 +347,13 @@ class terrariumWebserver(object):
 
     elif 'profile' == action:
       result = self.__terrariumEngine.get_profile()
+
+    elif 'calendar' == action:
+      if 'ical' in parameters:
+        response.headers['Content-Type'] = 'text/calendar'
+        response.headers['Content-Disposition'] = 'attachment; filename=terrariumpi.ical.ics'
+
+      result = self.__terrariumEngine.get_calendar(parameters,**{'start':request.query.get('start'),'end':request.query.get('end')})
 
     elif 'sensors' == action:
       result = self.__terrariumEngine.get_sensors(parameters)
@@ -392,8 +423,8 @@ class terrariumWebserver(object):
 
               csv += '"' + '","'.join(row) + "\"\n"
 
-        response.headers['Content-Type'] = 'application/csv';
-        response.headers['Content-Disposition'] = 'attachment; filename=' + export_name;
+        response.headers['Content-Type'] = 'application/csv'
+        response.headers['Content-Disposition'] = 'attachment; filename=' + export_name
         return csv
 
     return result

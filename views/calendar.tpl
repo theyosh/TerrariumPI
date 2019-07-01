@@ -12,6 +12,9 @@
                     <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button"><i class="fa fa-wrench" title="{{_('Options')}}"></i></a>
                     <ul class="dropdown-menu" role="menu">
                       <li>
+                        <a href="/api/calendar/ical" target="_blank">{{_('iCal')}}</a>
+                      </li>
+                      <li>
                         <a href="javascript:;" onclick="menu_click('system_settings.html')">{{_('Settings')}}</a>
                       </li>
                     </ul>
@@ -38,7 +41,28 @@
               if (data.external_calendar_url != '' && data.external_calendar_url != null) {
                 $('div.x_content').html($('<iframe>').addClass('external_calendar').attr('src',data.external_calendar_url));
               } else {
-                $('div.x_content .jumbotron').show();
+                var calendar = $('div.x_content').fullCalendar({
+                  header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay,listMonth'
+                  },
+                  eventRender: function(eventObj, $el) {
+                    $el.popover({
+                       title: eventObj.title,
+                       content: eventObj.description,
+                       trigger: 'hover',
+                       placement: 'top',
+                       container: 'body'
+                     });
+                  },
+                  selectable: true,
+                  selectHelper: true,
+                  editable: true,
+                  events: {
+                    url: '/api/calendar/'
+                  },
+                });
               }
             });
             reload_reload_theme();

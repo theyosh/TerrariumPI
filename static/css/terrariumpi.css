@@ -37,7 +37,7 @@ canvas.gauge {
   height: 35px;
 }
 .top_nav .navbar-right {
-  width: 80% !important;
+  width: 85% !important;
 }
 @media (min-width: 600px) {
   .modal-lg {
@@ -241,6 +241,13 @@ iframe.external_calendar {
   display:none;
 }
 
+.top_nav .nav_menu ul.nav.navbar-nav.navbar-right li span.notification_timestamp {
+  margin-right: -2.4em;
+}
+
+.top_nav .nav_menu ul.nav.navbar-nav.navbar-right .badge {
+  margin-top: 0.3em;
+}
 
 /* Graphs */
 .focus a {
@@ -463,8 +470,7 @@ table.dataTable .glyphicon-play {
   color: #D5E2ED;
 }
 
-
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 780px) {
   /* Small screen hide disabled elements */
   .top_nav .nav_menu ul.nav.navbar-nav.navbar-right li.dropdown.disabled {
     display:none;
@@ -474,8 +480,6 @@ table.dataTable .glyphicon-play {
     width: 60px;
   }
 }
-
-
 
 
 

@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.6\n"
-"POT-Creation-Date: 2019-06-20 14:33+AEST\n"
-"PO-Revision-Date: 2019-06-20 14:34+1000\n"
+"POT-Creation-Date: 2019-07-01 22:45+CEST\n"
+"PO-Revision-Date: 2019-07-01 22:45+0200\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -16,16 +16,16 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: terrariumEngine.py:574 views/dashboard.tpl:7
+#: terrariumEngine.py:583 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
 msgid "Uptime"
 msgstr "Uptime"
 
-#: terrariumEngine.py:575
+#: terrariumEngine.py:584
 msgid "Load"
 msgstr "Load"
 
-#: terrariumEngine.py:576
+#: terrariumEngine.py:585
 msgid "CPU Temp."
 msgstr "CPU Temp."
 
@@ -544,78 +544,90 @@ msgstr "Holds a link to more information."
 msgid "Offline since"
 msgstr "Offline since"
 
-#: terrariumWebserver.py:95 terrariumWebserver.py:181
+#: terrariumWebserver.py:95 terrariumWebserver.py:193
 msgid "Authenticate to make any changes"
 msgstr "Authenticate to make any changes"
 
-#: terrariumWebserver.py:95 terrariumWebserver.py:181
-#: views/system_settings.tpl:29
+#: terrariumWebserver.py:95 terrariumWebserver.py:193
+#: views/system_settings.tpl:49
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:95 terrariumWebserver.py:181
-#: views/system_settings.tpl:118
+#: terrariumWebserver.py:95 terrariumWebserver.py:193
+#: views/system_settings.tpl:138
 msgid "Authentication"
 msgstr "Authentication"
 
-#: terrariumWebserver.py:238
+#: terrariumWebserver.py:253
 msgid "Player command could ot be executed!"
 msgstr "Player command could ot be executed!"
 
-#: terrariumWebserver.py:238 terrariumWebserver.py:258
-#: terrariumWebserver.py:270 terrariumWebserver.py:278
+#: terrariumWebserver.py:253 terrariumWebserver.py:273
+#: terrariumWebserver.py:285 terrariumWebserver.py:293
 msgid "Error!"
 msgstr "Error!"
 
-#: terrariumWebserver.py:246 terrariumWebserver.py:249
+#: terrariumWebserver.py:261 terrariumWebserver.py:264
 msgid "OK!"
 msgstr "OK!"
 
-#: terrariumWebserver.py:246 terrariumWebserver.py:249
+#: terrariumWebserver.py:261 terrariumWebserver.py:264
 msgid "Player command executed!"
 msgstr "Player command executed!"
 
-#: terrariumWebserver.py:258
+#: terrariumWebserver.py:273
 msgid "File is not uploaded!"
 msgstr "File is not uploaded!"
 
-#: terrariumWebserver.py:263
+#: terrariumWebserver.py:278
 msgid "File '%s' is uploaded"
 msgstr "File '%s' is uploaded"
 
-#: terrariumWebserver.py:263 terrariumWebserver.py:273
+#: terrariumWebserver.py:278 terrariumWebserver.py:288
 msgid "Success!"
 msgstr "Success!"
 
-#: terrariumWebserver.py:265
+#: terrariumWebserver.py:280
 msgid "Duplicate file '%s'"
 msgstr "Duplicate file '%s'"
 
-#: terrariumWebserver.py:270
+#: terrariumWebserver.py:285
 msgid "Action could not be satisfied"
 msgstr "Action could not be satisfied"
 
-#: terrariumWebserver.py:273
+#: terrariumWebserver.py:288
 msgid "Audio file is deleted"
 msgstr "Audio file is deleted"
 
-#: terrariumWebserver.py:278
+#: terrariumWebserver.py:293
 msgid "Data could not be saved"
 msgstr "Data could not be saved"
 
-#: terrariumWebserver.py:286
+#: terrariumWebserver.py:301
 msgid "Data saved"
 msgstr "Data saved"
 
-#: terrariumWebserver.py:287
+#: terrariumWebserver.py:302
 msgid "Your changes are saved"
 msgstr "Your changes are saved"
 
-#: terrariumWebserver.py:422 views/inc/menu.tpl:174
+#: terrariumWebserver.py:321
+msgid "Hardware is replaced"
+msgstr "Hardware is replaced"
+
+#: terrariumWebserver.py:322
+msgid "Hardware replacement is logged in the calendar"
+msgstr "Hardware replacement is logged in the calendar"
+
+#: terrariumWebserver.py:325
+msgid "A new replacement reminder is created"
+msgstr "A new replacement reminder is created"
+
+#: terrariumWebserver.py:462 views/inc/menu.tpl:174
 msgid "Log out"
 msgstr "Log out"
 
-#: terrariumWebserver.py:423
+#: terrariumWebserver.py:463
 msgid "You are now logged out"
 msgstr "You are now logged out"
 
@@ -784,7 +796,7 @@ msgstr "Files"
 #: views/audio_playlist.tpl:48 views/door_settings.tpl:36
 #: views/notifications.tpl:275 views/profile.tpl:179
 #: views/sensor_settings.tpl:57 views/switch_settings.tpl:72
-#: views/system_environment.tpl:1801 views/system_settings.tpl:245
+#: views/system_environment.tpl:1801 views/system_settings.tpl:265
 #: views/webcam_settings.tpl:48
 msgid "Submit"
 msgstr "Submit"
@@ -814,9 +826,10 @@ msgstr "new"
 
 #: views/audio_playlist.tpl:112 views/sensor_settings.tpl:103
 #: views/sensor_settings.tpl:132 views/switch_settings.tpl:109
-#: views/switch_settings.tpl:150 views/webcam_settings.tpl:108
-#: views/webcam_settings.tpl:122 views/webcam_settings.tpl:141
-#: views/webcam_settings.tpl:152 views/webcam_settings.tpl:163
+#: views/switch_settings.tpl:150 views/switch_status.tpl:116
+#: views/webcam_settings.tpl:108 views/webcam_settings.tpl:122
+#: views/webcam_settings.tpl:141 views/webcam_settings.tpl:152
+#: views/webcam_settings.tpl:163
 msgid "Select an option"
 msgstr "Select an option"
 
@@ -824,7 +837,7 @@ msgstr "Select an option"
 #: views/inc/usage_doors.tpl:70 views/inc/usage_sensors.tpl:81
 #: views/inc/usage_switches.tpl:70 views/inc/usage_webcams.tpl:66
 #: views/sensor_settings.tpl:203 views/switch_settings.tpl:207
-#: views/webcam_settings.tpl:175
+#: views/switch_status.tpl:132 views/webcam_settings.tpl:175
 msgid "Close"
 msgstr "Close"
 
@@ -834,11 +847,15 @@ msgstr "Close"
 msgid "Add"
 msgstr "Add"
 
-#: views/calendar.tpl:6 views/inc/menu.tpl:33
+#: views/calendar.tpl:6 views/inc/menu.tpl:33 views/inc/menu.tpl:228
 msgid "Calendar"
 msgstr "Calendar"
 
-#: views/calendar.tpl:15 views/dashboard.tpl:71 views/dashboard.tpl:626
+#: views/calendar.tpl:15
+msgid "iCal"
+msgstr "iCal"
+
+#: views/calendar.tpl:18 views/dashboard.tpl:71 views/dashboard.tpl:626
 #: views/dashboard.tpl:681 views/dashboard.tpl:736 views/dashboard.tpl:791
 #: views/dashboard.tpl:846 views/dashboard.tpl:901 views/dashboard.tpl:956
 #: views/dashboard.tpl:1011 views/dashboard.tpl:1066 views/dashboard.tpl:1121
@@ -855,7 +872,7 @@ msgstr "Calendar"
 #: views/notifications.tpl:27 views/notifications.tpl:64
 #: views/notifications.tpl:101 views/notifications.tpl:134
 #: views/notifications.tpl:159 views/notifications.tpl:188
-#: views/notifications.tpl:209 views/switch_status.tpl:40
+#: views/notifications.tpl:209 views/switch_status.tpl:43
 #: views/system_environment.tpl:27 views/system_environment.tpl:158
 #: views/system_environment.tpl:370 views/system_environment.tpl:581
 #: views/system_environment.tpl:792 views/system_environment.tpl:1003
@@ -867,7 +884,7 @@ msgstr "Calendar"
 msgid "Settings"
 msgstr "Settings"
 
-#: views/calendar.tpl:28
+#: views/calendar.tpl:31
 msgid "No calendar available"
 msgstr "No calendar available"
 
@@ -924,7 +941,7 @@ msgstr "mode"
 #: views/dashboard.tpl:83 views/dashboard.tpl:118 views/dashboard.tpl:171
 #: views/dashboard.tpl:224 views/dashboard.tpl:277 views/dashboard.tpl:330
 #: views/dashboard.tpl:383 views/dashboard.tpl:436 views/dashboard.tpl:489
-#: views/dashboard.tpl:542 views/inc/menu.tpl:208 views/inc/menu.tpl:234
+#: views/dashboard.tpl:542 views/inc/menu.tpl:208 views/inc/menu.tpl:249
 #: views/inc/usage_environment.tpl:25 views/inc/usage_environment.tpl:121
 #: views/inc/usage_environment.tpl:129 views/inc/usage_environment.tpl:213
 #: views/inc/usage_environment.tpl:221 views/inc/usage_environment.tpl:307
@@ -1144,7 +1161,7 @@ msgstr "Year"
 #: views/dashboard.tpl:794 views/dashboard.tpl:849 views/dashboard.tpl:904
 #: views/dashboard.tpl:959 views/dashboard.tpl:1014 views/dashboard.tpl:1069
 #: views/dashboard.tpl:1124 views/door_status.tpl:40
-#: views/inc/sensor_list.tpl:49 views/switch_status.tpl:46
+#: views/inc/sensor_list.tpl:49 views/switch_status.tpl:49
 msgid "Export data"
 msgstr "Export data"
 
@@ -1492,7 +1509,7 @@ msgstr "Online"
 msgid "Offline"
 msgstr "Offline"
 
-#: views/inc/menu.tpl:200 views/inc/menu.tpl:220 views/inc/menu.tpl:240
+#: views/inc/menu.tpl:200 views/inc/menu.tpl:220 views/inc/menu.tpl:255
 msgid "No messages"
 msgstr "No messages"
 
@@ -1506,11 +1523,15 @@ msgstr "Door is closed"
 msgid "Door is open"
 msgstr "Door is open"
 
-#: views/inc/menu.tpl:228
+#: views/inc/menu.tpl:235
+msgid "No events"
+msgstr "No events"
+
+#: views/inc/menu.tpl:243
 msgid "Playing"
 msgstr "Playing"
 
-#: views/inc/menu.tpl:231
+#: views/inc/menu.tpl:246
 msgid "Stopped"
 msgstr "Stopped"
 
@@ -2051,7 +2072,7 @@ msgid "Per switch the title holds shows some values and options."
 msgstr "Per switch the title holds shows some values and options."
 
 #: views/inc/usage_switches.tpl:19 views/switch_settings.tpl:92
-#: views/switch_status.tpl:11
+#: views/switch_status.tpl:11 views/switch_status.tpl:90
 msgid "Switch"
 msgstr "Switch"
 
@@ -2151,11 +2172,11 @@ msgstr "Location"
 msgid "Wind speed"
 msgstr "Wind speed"
 
-#: views/inc/usage_weather.tpl:52 views/system_settings.tpl:58
+#: views/inc/usage_weather.tpl:52 views/system_settings.tpl:78
 msgid "m/s"
 msgstr "m/s"
 
-#: views/inc/usage_weather.tpl:53 views/system_settings.tpl:59
+#: views/inc/usage_weather.tpl:53 views/system_settings.tpl:79
 msgid "Km/h"
 msgstr "Km/h"
 
@@ -2664,9 +2685,45 @@ msgstr "No switches available"
 msgid "in manual mode"
 msgstr "in manual mode"
 
-#: views/switch_status.tpl:43
+#: views/switch_status.tpl:35
+msgid "Last replacement"
+msgstr "Last replacement"
+
+#: views/switch_status.tpl:46
 msgid "Manual mode"
 msgstr "Manual mode"
+
+#: views/switch_status.tpl:52 views/switch_status.tpl:83
+msgid "Replace hardware"
+msgstr "Replace hardware"
+
+#: views/switch_status.tpl:104
+msgid "With new device"
+msgstr "With new device"
+
+#: views/switch_status.tpl:109
+msgid "Remind in"
+msgstr "Remind in"
+
+#: views/switch_status.tpl:117
+msgid "Days"
+msgstr "Days"
+
+#: views/switch_status.tpl:118
+msgid "Weeks"
+msgstr "Weeks"
+
+#: views/switch_status.tpl:119
+msgid "Months"
+msgstr "Months"
+
+#: views/switch_status.tpl:120
+msgid "Years"
+msgstr "Years"
+
+#: views/switch_status.tpl:133
+msgid "Replace"
+msgstr "Replace"
 
 #: views/system_environment.tpl:16
 msgid "Here you can configure your environment."
@@ -2839,151 +2896,159 @@ msgstr "Download"
 msgid "Here you can configure your TerrariumPI server."
 msgstr "Here you can configure your TerrariumPI server."
 
-#: views/system_settings.tpl:19 views/system_settings.tpl:48
+#: views/system_settings.tpl:19 views/system_settings.tpl:68
 msgid "Weather location"
 msgstr "Weather location"
 
-#: views/system_settings.tpl:39
+#: views/system_settings.tpl:26
+msgid "Reboot"
+msgstr "Reboot"
+
+#: views/system_settings.tpl:38
+msgid "Here you can reboot your TerrariumPI server. You will have to confirm the action when clicked."
+msgstr "Here you can reboot your TerrariumPI server. You will have to confirm the action when clicked."
+
+#: views/system_settings.tpl:59
 msgid "Language"
 msgstr "Language"
 
-#: views/system_settings.tpl:54
+#: views/system_settings.tpl:74
 msgid "Wind speed indicator"
 msgstr "Wind speed indicator"
 
-#: views/system_settings.tpl:65
+#: views/system_settings.tpl:85
 msgid "Temperature indicator"
 msgstr "Temperature indicator"
 
-#: views/system_settings.tpl:69
+#: views/system_settings.tpl:89
 msgid "Celsius"
 msgstr "Celsius"
 
-#: views/system_settings.tpl:70
+#: views/system_settings.tpl:90
 msgid "Fahrenheit"
 msgstr "Fahrenheit"
 
-#: views/system_settings.tpl:71
+#: views/system_settings.tpl:91
 msgid "Kelvin"
 msgstr "Kelvin"
 
-#: views/system_settings.tpl:77
+#: views/system_settings.tpl:97
 msgid "Distance indicator"
 msgstr "Distance indicator"
 
-#: views/system_settings.tpl:81
+#: views/system_settings.tpl:101
 msgid "Centimetre"
 msgstr "Centimetre"
 
-#: views/system_settings.tpl:82
+#: views/system_settings.tpl:102
 msgid "Inches"
 msgstr "Inches"
 
-#: views/system_settings.tpl:88
+#: views/system_settings.tpl:108
 msgid "Volume indicator"
 msgstr "Volume indicator"
 
-#: views/system_settings.tpl:92
+#: views/system_settings.tpl:112
 msgid "Litres"
 msgstr "Litres"
 
-#: views/system_settings.tpl:93
+#: views/system_settings.tpl:113
 msgid "US Gallons"
 msgstr "US Gallons"
 
-#: views/system_settings.tpl:94
+#: views/system_settings.tpl:114
 msgid "UK Gallons"
 msgstr "UK Gallons"
 
-#: views/system_settings.tpl:100
+#: views/system_settings.tpl:120
 msgid "Admin name"
 msgstr "Admin name"
 
-#: views/system_settings.tpl:106
+#: views/system_settings.tpl:126
 msgid "New admin password"
 msgstr "New admin password"
 
-#: views/system_settings.tpl:112
+#: views/system_settings.tpl:132
 msgid "Current admin password"
 msgstr "Current admin password"
 
-#: views/system_settings.tpl:122
+#: views/system_settings.tpl:142
 msgid "Full authentication"
 msgstr "Full authentication"
 
-#: views/system_settings.tpl:123
+#: views/system_settings.tpl:143
 msgid "Changes only"
 msgstr "Changes only"
 
-#: views/system_settings.tpl:129
+#: views/system_settings.tpl:149
 msgid "Soundcard"
 msgstr "Soundcard"
 
-#: views/system_settings.tpl:138
+#: views/system_settings.tpl:158
 msgid "External calendar"
 msgstr "External calendar"
 
-#: views/system_settings.tpl:144
+#: views/system_settings.tpl:164
 msgid "Graph legend layout"
 msgstr "Graph legend layout"
 
-#: views/system_settings.tpl:148
+#: views/system_settings.tpl:168
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: views/system_settings.tpl:149
+#: views/system_settings.tpl:169
 msgid "Vertical"
 msgstr "Vertical"
 
-#: views/system_settings.tpl:155
+#: views/system_settings.tpl:175
 msgid "Graph smoothing value"
 msgstr "Graph smoothing value"
 
-#: views/system_settings.tpl:161
+#: views/system_settings.tpl:181
 msgid "Hide environment summary on the dashboard"
 msgstr "Hide environment summary on the dashboard"
 
-#: views/system_settings.tpl:165 views/system_settings.tpl:176
+#: views/system_settings.tpl:185 views/system_settings.tpl:196
 msgid "True"
 msgstr "True"
 
-#: views/system_settings.tpl:166 views/system_settings.tpl:177
+#: views/system_settings.tpl:186 views/system_settings.tpl:197
 msgid "False"
 msgstr "False"
 
-#: views/system_settings.tpl:172
+#: views/system_settings.tpl:192
 msgid "Show all sensors gauges on 1 page"
 msgstr "Show all sensors gauges on 1 page"
 
-#: views/system_settings.tpl:183
+#: views/system_settings.tpl:203
 msgid "Pi power usage in W"
 msgstr "Pi power usage in W"
 
-#: views/system_settings.tpl:189
+#: views/system_settings.tpl:209
 msgid "Power price"
 msgstr "Power price"
 
-#: views/system_settings.tpl:195
+#: views/system_settings.tpl:215
 msgid "Water price"
 msgstr "Water price"
 
-#: views/system_settings.tpl:201
+#: views/system_settings.tpl:221
 msgid "IP or hostname"
 msgstr "IP or hostname"
 
-#: views/system_settings.tpl:207
+#: views/system_settings.tpl:227
 msgid "Port number"
 msgstr "Port number"
 
-#: views/system_settings.tpl:218
+#: views/system_settings.tpl:238
 msgid "Meross Cloud"
 msgstr "Meross Cloud"
 
-#: views/system_settings.tpl:228
+#: views/system_settings.tpl:248
 msgid "Meross Cloud username"
 msgstr "Meross Cloud username"
 
-#: views/system_settings.tpl:234
+#: views/system_settings.tpl:254
 msgid "Meross Cloud password"
 msgstr "Meross Cloud password"
 
@@ -3148,6 +3213,10 @@ msgid "Alarm"
 msgstr "Alarm"
 
 #: Missing text string
+msgid "Amount"
+msgstr "Amount"
+
+#: Missing text string
 msgid "Are you sure to delete the file"
 msgstr "Are you sure to delete the file"
 
@@ -3210,6 +3279,10 @@ msgstr "Door status"
 #: Missing text string
 msgid "Drop files here to upload"
 msgstr "Drop files here to upload"
+
+#: Missing text string
+msgid "Duration in hours"
+msgstr "Duration in hours"
 
 #: Missing text string
 msgid "Duration in minutes"

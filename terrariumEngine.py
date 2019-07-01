@@ -20,6 +20,7 @@ import os
 import psutil
 import subprocess
 import re
+import json
 from hashlib import md5
 
 from terrariumConfig import terrariumConfig
@@ -32,6 +33,8 @@ from terrariumAudio import terrariumAudioPlayer
 from terrariumCollector import terrariumCollector
 from terrariumEnvironment import terrariumEnvironment
 from terrariumNotification import terrariumNotification
+from terrariumCalendar import terrariumCalendar
+
 from terrariumUtils import terrariumUtils
 
 from gevent import monkey, sleep
@@ -85,6 +88,9 @@ class terrariumEngine(object):
     # Notification engine
     self.notification = terrariumNotification()
     self.notification.set_profile_image(self.get_profile_image())
+
+    # Calendar engine
+    self.calendar = terrariumCalendar()
 
     logger.info('Setting terrariumPI authentication')
     self.set_authentication(self.config.get_admin(),self.config.get_password())
@@ -303,6 +309,9 @@ class terrariumEngine(object):
 
       power_switch.set_power_wattage(power_switch_config['power_wattage'])
       power_switch.set_water_flow(power_switch_config['water_flow'])
+
+      if 'last_replacement_date' in power_switch_config:
+        power_switch.set_last_hardware_replacement(power_switch_config['last_replacement_date'])
 
       power_switch.set_timer(power_switch_config['timer_start'],
                              power_switch_config['timer_stop'],
@@ -818,6 +827,79 @@ class terrariumEngine(object):
     return not self.is_door_open()
   # End doors part
 
+
+
+  def get_calendar(self,parameters,**parameters2):
+    if 'ical' in parameters:
+      return self.calendar.get_ical()
+
+    start = None
+    if 'start' in parameters2 and parameters2['start'] is not None:
+      start = datetime.datetime.strptime(parameters2['start'],'%Y-%m-%d')
+
+    end = None
+    if 'end' in parameters2 and parameters2['end'] is not None:
+      end = datetime.datetime.strptime(parameters2['end'],'%Y-%m-%d')
+
+    data = self.calendar.get_events(start,end)
+
+    events = []
+    for event_data in data:
+      event = {'id': event_data.uid,
+               'title': event_data.summary,
+               'description' : event_data.description}
+
+      if terrariumUtils.parse_url(event_data.location):
+        event['url'] = event_data.location
+
+      if event_data.all_day:
+        event['start'] = event_data.start.strftime('%Y-%m-%d')
+      else:
+        event['start'] = event_data.start.strftime('%Y-%m-%dT%H:%M')
+        event['end'] = event_data.end.strftime('%Y-%m-%dT%H:%M')
+
+      events.append(event)
+
+    return json.dumps(events)
+
+
+  def replace_hardware_calender_event(self,switch_id,device,reminder_amount,reminder_period):
+    # Two events:
+    # 1. When it happend
+    # 2. Reminder for next time
+
+    current_time = datetime.date.today()
+    switch = self.power_switches[switch_id]
+    switch.set_last_hardware_replacement()
+    self.config.save_power_switch(switch.get_data())
+    self.calendar.create_event(switch_id,
+                               '{} hardware replacement'.format(switch.get_name()),
+                               'Replaced \'{}\' at power switch {}'.format(device,switch.get_name()),
+                               None,
+                               current_time)
+
+    reminder = None
+    try:
+      if 'days' == reminder_period:
+        reminder = datetime.timedelta(days=int(reminder_amount))
+      elif 'weeks' == reminder_period:
+        reminder = datetime.timedelta(days=(int(reminder_amount) * 7))
+      elif 'months' == reminder_period:
+        reminder = datetime.timedelta(days=(int(reminder_amount) * 30))
+      elif 'years' == reminder_period:
+        reminder = datetime.timedelta(days=(int(reminder_amount) * 365))
+    except Exception as ex:
+      print(ex)
+
+    if reminder is not None:
+      current_time += reminder
+      self.calendar.create_event(switch_id,
+                                 'Reminder {} hardware replacement'.format(switch.get_name()),
+                                 'Replace \'{}\' at power switch {}'.format(device,switch.get_name()),
+                                 None,
+                                 current_time)
+
+
   # Webcams part
   def get_webcams(self, parameters = [], socket = False):
     data = []
@@ -1262,7 +1344,11 @@ class terrariumEngine(object):
           if self.sensors[sensorid].get_exclude_avg() or ('chirp' == self.sensors[sensorid].get_type() and 'light' == self.sensors[sensorid].get_sensor_type()):
             exclude_ids.append(self.sensors[sensorid].get_id())
 
-      data = self.collector.get_history(parameters=parameters,exclude_ids=exclude_ids)
+      stoptime = None
+      if 'switches' in parameters and 'lr' in parameters:
+        stoptime = int(datetime.datetime.strptime(self.power_switches[parameters[1]].get_last_hardware_replacement(),'%Y-%m-%d').strftime('%s'))
+
+      data = self.collector.get_history(parameters=parameters,stoptime=stoptime,exclude_ids=exclude_ids)
 
     if socket:
       self.__send_message({'type':'history_graph','data': data})

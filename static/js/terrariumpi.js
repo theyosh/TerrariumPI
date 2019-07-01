@@ -410,6 +410,7 @@ function websocket_init(reconnect) {
         break;
       case 'uptime':
         update_dashboard_uptime(data.data);
+        load_calendar_history();
         break;
       case 'power_usage_water_flow':
         update_dashboard_power_usage(data.data.power);
@@ -509,8 +510,9 @@ function info_notification_bubble(title,message) {
 /* General functions - End notification bubbles */
 
 /* General functions - Notification messages */
-function add_notification_message(type, title, message, icon, color, date) {
+function add_notification_message(type, title, message, icon, color, date, link) {
   var notification_date = date || new Date().getTime();
+  link = link || false;
   var menu = $('ul#' + type);
   if (menu.find('li:first a span.message').text() == message) {
     // Skip duplicate messages
@@ -520,14 +522,18 @@ function add_notification_message(type, title, message, icon, color, date) {
   var notification = $('<a>');
   if (type != 'player_messages') {
     notification.on('click', function() {
-      close_notification_message(this);
+      if (link !== false) {
+        load_page(link);
+      } else {
+        close_notification_message(this);
+      }
     });
   }
 
   notification.append($('<span>').addClass('image').append($('<img>').attr({
     'src': $('div.profile_pic img').attr('src')
   })));
-  notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('data-timestamp',notification_date).text('...')));
+  notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('data-timestamp',notification_date)) );
   notification.append($('<span>').addClass('message').text(message).append($('<span>').addClass('pull-right').html('<i class="fa ' + icon + ' ' + color + '"></i>')));
 
   // Remove no messages line
@@ -545,12 +551,12 @@ function close_notification_message(notification) {
   notification = $(notification).parent();
   var list = notification.parent('ul');
   notification.remove();
-  menu.find('li.no_message').toggle(list.find('li.notification').length === 0);
+  list.find('li.no_message').toggle(list.find('li.notification:not(.no_message)').length === 0);
 }
 
 function notification_timestamps() {
   var now = (new Date()).getTime();
-  $('span.notification_timestamp').each(function() {
+  $('span.notification_timestamp,strong.notification_timestamp').each(function() {
     var timestamp = $(this).attr('data-timestamp') * 1;
     var duration = moment.duration((now - timestamp) * -1);
     $(this).text(duration.humanize(true));
@@ -684,11 +690,12 @@ function process_form() {
 function prepare_form_data(form) {
   var formdata = [];
   var form_type = form.attr('action').split('/').pop();
+
   var re = /(sensor|switch|webcam|light|humidity|temperature|watertank|moisture|conductivity|ph|co2|fertility|door|profile|playlist)(_\d+)?_(.*)/i;
   var matches = null;
   var objectdata = {};
   var prev_nr = -1;
-  if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'profile' || form_type === 'notifications') {
+  if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'profile' || form_type === 'notifications' || form_type === 'hardware') {
     formdata = {};
   }
   try {
@@ -706,6 +713,7 @@ function prepare_form_data(form) {
             }
             formdata[field_name] = field_value;
             break;
+          case 'hardware':
           case 'sensors':
           case 'switches':
           case 'powerswitches':
@@ -749,7 +757,7 @@ function prepare_form_data(form) {
       }
     });
     if (Object.keys(objectdata).length > 1) {
-      if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'notifications') {
+      if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'notifications' || form_type === 'hardware') {
         formdata[prev_nr] = $.extend(true, {}, objectdata);
       } else {
         formdata.push($.extend(true, {}, objectdata));
@@ -1025,16 +1033,20 @@ function load_history_graph(id,type,data_url,nocache) {
     if ($('#' + id + ' .history_graph.loading').length === 1) {
     // Create period menu items
       var menu_items = $('#' + id + ' ul.dropdown-menu.period a');
-      $.each(['day','week','month','year'],function(index,value){
-        if (index === 0) {
-          $(menu_items[index]).parent().addClass('focus');
+      $.each(['day','week','month','year','lr'],function(index,value){
+        if (index < menu_items.length){
+          if (index === 0) {
+            $(menu_items[index]).parent().addClass('focus');
+          }
+
+          $(menu_items[index]).attr('title',$(menu_items[index]).text());
+          $(menu_items[index]).off('click');
+          $(menu_items[index]).on('click', function(){
+            $(this).parent().siblings().removeClass('focus');
+            $(this).parent().addClass('focus');
+            load_history_graph(id,type,data_url + '/' + value ,1);
+          });
         }
-        $(menu_items[index]).off('click');
-        $(menu_items[index]).on('click', function(){
-          $(this).parent().siblings().removeClass('focus');
-          $(this).parent().addClass('focus');
-          load_history_graph(id,type,data_url + '/' + value ,1);
-        });
       });
       $('#' + id + ' ul.dropdown-menu a.export').off('click').on('click',function(){
         var download = $('iframe#history_export');
@@ -1467,7 +1479,7 @@ function history_graph(name, data, type) {
       var usage = '';
       if (data.totals !== undefined) {
         if (data.totals.duration > 0) {
-          usage = '{{_('Duration')}}: ' + moment.duration(data.totals.duration * 1000).humanize()
+          usage = '{{_('Duration in hours')}}: ' + Math.round(moment.duration(data.totals.duration * 1000).as('hours')*100)/100;
         }
         if (data.totals.power_wattage > 0) {
           usage += (usage != '' ? ' - ' : '') + '{{_('Total power in kWh')}}: ' + formatNumber(data.totals.power_wattage / (3600 * 1000));
@@ -2377,7 +2389,6 @@ function webcamArchive(webcamid) {
       max_days_back--;
 
       if (no_data_counter > 10 || max_days_back < 0) {
-        console.log('Done lading:',no_data_counter,max_days_back);
         return false;
       }
 
@@ -2885,6 +2896,24 @@ function uploadProfileImage() {
 }
 /* End profile code */
 
+function load_calendar_history() {
+  $.getJSON('/api/calendar', function(data) {
+    $('ul.nav.navbar-nav.navbar-right ul#calendar_messages li.notification:not(.no_message)').remove();
+    $.each(data.reverse(), function(counter, calendardata) {
+      var event_date = new Date(calendardata.start);
+      add_notification_message('calendar_messages',
+                               calendardata.title,
+                               calendardata.description,
+                               'fa-calendar',
+                               'green',
+                               event_date.getTime() + (event_date.getTimezoneOffset() * 60000),
+                               'calendar.html');
+    });
+    $('ul.nav.navbar-nav.navbar-right li#calendar span.badge.bg-green').text(data.length);
+    $('ul.nav.navbar-nav.navbar-right ul#calendar_messages li.no_message').toggle(data.length==0);
+  });
+}
+
 /**
  * Sort values alphabetically in select
  * source: http://stackoverflow.com/questions/12073270/sorting-options-elements-alphabetically-using-jquery
@@ -2949,6 +2978,7 @@ $(document).ready(function() {
   })
 
   load_door_history();
+  load_calendar_history();
   load_player_status();
   load_page('dashboard.html');
 
