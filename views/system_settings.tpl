@@ -21,6 +21,26 @@
             </ul>
           </div>
         </div>
+        <div class="x_panel reboot">
+          <div class="x_title">
+            <h2><span class="glyphicon glyphicon-info-sign" aria-hidden="true" title="{{_('Reboot')}}"></span> {{_('Reboot')}}<small></small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li>
+                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li>
+                <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content" style="text-align: center">
+            <p>{{_('Here you can reboot your TerrariumPI server. You will have to confirm the action when clicked.')}}</p>
+            <p>
+              <button type="button" id="reboot_pi"><span class="glyphicon glyphicon-off red" style="font-size: 12rem" aria-hidden="true" title="{{_('Reboot')}}"></button>
+            </p>
+          </div>
+        </div>
         <div class="row">
           <form action="/api/config/system" class="form-horizontal form-label-left" data-parsley-validate="" method="put">
             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -314,6 +334,12 @@
                   setContentHeight();
                 });
               });
+            });
+
+            $('button#reboot_pi').on('click',function(){
+              if (confirm('Are you sure you want to reboot Terrarium PI?')) {
+                $.post('/api/reboot');
+              }
             });
           });
         </script>
