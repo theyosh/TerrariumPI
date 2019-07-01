@@ -1907,7 +1907,7 @@ function add_sensor_status_row(data) {
   $('div#maincontent').append(new_row);
 }
 
-function update_sensor(data) {
+function update_sensor(data,) {
   // Load the switch row to update the data
   var content_row = $('div.row.sensor#' + 'sensor_' + data.id);
   // Show either the temperature or humidity header and icon
@@ -1947,12 +1947,12 @@ function update_sensor(data) {
   }
 }
 
-function add_sensor_setting_row(data) {
+function add_sensor_setting_row(data,is_new) {
   if (source_row === null || source_row === '') {
     return false;
   }
   // Create new row
-  var setting_row = $('<div>').addClass('row sensor').html(source_row.replace(/\[nr\]/g, $('form div.row.sensor').length));
+  var setting_row = $('<div>').addClass('row sensor' + (is_new ? ' new' : '')).html(source_row.replace(/\[nr\]/g, $('form div.row.sensor').length));
   if (data.id !== undefined) {
     // Set ID
     setting_row.attr('id','sensor_' + data.id);
@@ -1979,7 +1979,7 @@ function add_sensor_setting_row(data) {
   });
 
   // Disable hardware select box
-  setting_row.find('select[name*="hardwaretype"]').attr("disabled", true);
+  setting_row.find('select[name*="hardwaretype"]').attr("disabled", !is_new);
 
   // Add on the bottom before the submit row
   setting_row.insertBefore('div.row.submit');
@@ -2001,9 +2001,8 @@ function add_sensor() {
   data['id'] = Math.floor(Date.now() / 1000);
 
   // Add new row
-  add_sensor_setting_row(data);
+  add_sensor_setting_row(data,true);
 
-  $('select[name*="hardwaretype"]:disabled:last').attr("disabled", false);
   // Update new row with new values
   update_sensor(data);
 
@@ -2132,12 +2131,12 @@ function update_power_switch(data) {
   }
 }
 
-function add_power_switch_setting_row(data) {
+function add_power_switch_setting_row(data,is_new) {
   if (source_row === null || source_row === '') {
     return false;
   }
   // Create new row
-  var setting_row = $('<div>').addClass('row switch').html(source_row.replace(/\[nr\]/g, $('form div.row.switch').length));
+  var setting_row = $('<div>').addClass('row switch' + (is_new ? ' new' : '')).html(source_row.replace(/\[nr\]/g, $('form div.row.switch').length));
   if (data.id !== undefined) {
     // Set ID
     setting_row.attr('id','powerswitch_' + data.id);
@@ -2159,9 +2158,7 @@ function add_power_switch_setting_row(data) {
       }
   });
   // Disable hardware select box
-  setting_row.find('select[name*="hardwaretype"]').attr("disabled", true);
-
-  $('select[name*="hardwaretype"]:disabled:last').attr("disabled", false);
+  setting_row.find('select[name*="hardwaretype"]').attr("disabled", !is_new);
 
   // Add on the bottom before the submit row
   setting_row.insertBefore('div.row.submit');
@@ -2183,7 +2180,7 @@ function add_power_switch() {
   data['id'] = Math.floor(Date.now() / 1000);
 
   // Add new row
-  add_power_switch_setting_row(data);
+  add_power_switch_setting_row(data,true);
   // Update new row with new values
   update_power_switch(data);
 
@@ -2295,12 +2292,12 @@ function update_door(data) {
   });
 }
 
-function add_door_setting_row(data) {
+function add_door_setting_row(data,is_new) {
   if (source_row === null || source_row === '') {
     return false;
   }
   // Create new row
-  var setting_row = $('<div>').addClass('row door').html(source_row.replace(/\[nr\]/g, $('form div.row.door').length));
+  var setting_row = $('<div>').addClass('row door' + (is_new ? ' new' : '')).html(source_row.replace(/\[nr\]/g, $('form div.row.door').length));
   if (data.id !== undefined) {
     // Set ID
     setting_row.attr('id','door_' + data.id);
@@ -2313,9 +2310,7 @@ function add_door_setting_row(data) {
     minimumResultsForSearch: Infinity
   });
   // Disable hardware select box
-  setting_row.find('select[name*="hardwaretype"]').attr("disabled", true);
-
-  $('select[name*="hardwaretype"]:disabled:last').attr("disabled", false);
+  setting_row.find('select[name*="hardwaretype"]').attr("disabled", !is_new);
 
   // Add on the bottom before the submit row
   setting_row.insertBefore('div.row.submit');
@@ -2337,7 +2332,7 @@ function add_door() {
   data['id'] = Math.floor(Date.now() / 1000);
 
   // Add new row
-  add_door_setting_row(data);
+  add_door_setting_row(data,true);
   // Update new row with new values
   update_door(data);
 
@@ -2514,12 +2509,12 @@ function updateWebcamView(webcam) {
   }
 }
 
-function add_webcam_setting_row(data) {
+function add_webcam_setting_row(data,is_new) {
   if (source_row === null || source_row === '') {
     return false;
   }
   // Create new row
-  var setting_row = $('<div>').addClass('row webcam').html(source_row.replace(/\[nr\]/g, $('form div.row.webcam').length));
+  var setting_row = $('<div>').addClass('row webcam' + (is_new ? ' new' : '')).html(source_row.replace(/\[nr\]/g, $('form div.row.webcam').length));
   if (data.id !== undefined) {
     // Set ID
     setting_row.attr('id','webcam_' + data.id);
@@ -2584,7 +2579,7 @@ function add_webcam() {
   data.resolution = {'width' : data.resolution_width, 'height' : data.resolution_height};
 
   // Add new row
-  add_webcam_setting_row(data);
+  add_webcam_setting_row(data,true);
   // Update new row with new values
   update_webcam(data);
 
@@ -2698,12 +2693,12 @@ function update_audio_playlist(data) {
   });
 }
 
-function add_audio_playlist_setting_row(data) {
+function add_audio_playlist_setting_row(data,is_new) {
   if (source_row === null || source_row === '') {
     return false;
   }
   // Create new row
-  var setting_row = $('<div>').addClass('row playlist').html(source_row.replace(/\[nr\]/g, $('form div.row.playlist').length));
+  var setting_row = $('<div>').addClass('row playlist' + (is_new ? ' new' : '')).html(source_row.replace(/\[nr\]/g, $('form div.row.playlist').length));
   if (data.id !== undefined) {
     // Set ID
     setting_row.attr('id','playlist_' + data.id);
@@ -2746,7 +2741,7 @@ function add_audio_playlist() {
   data['id'] = Math.floor(Date.now() / 1000);
 
   // Add new row
-  add_audio_playlist_setting_row(data);
+  add_audio_playlist_setting_row(data,true);
   // Update new row with new values
   update_audio_playlist(data);
 

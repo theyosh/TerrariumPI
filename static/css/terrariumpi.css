@@ -157,6 +157,13 @@ footer .pull-right .label {
 
 /* End general overrule */
 
+div.row.new  .x_panel{
+ /* box-shadow: 0 4px 8px 0 rgba(51, 122, 183, 0.2), 0 6px 20px 0 rgba(51, 122, 183, 0.19);*/
+
+  box-shadow: 0px 0px 3px 1px #26B99A;
+
+}
+
 div.modal div.row.sensor,
 div.modal div.row.switch,
 div.modal div.row.door,
