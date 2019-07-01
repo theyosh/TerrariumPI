@@ -8,8 +8,7 @@ SCRIPT_USER_ID=`id -u ${SCRIPT_USER}`
 VERSION=`grep ^version defaults.cfg | cut -d' ' -f 3`
 WHOAMI=`whoami`
 PYTHON=2
-PYTHON_VERSION=$1
-if [ "${PYTHON_VERSION}" == "3" ]; then
+if [ "${1}" == "3" ]; then
   PYTHON=3
 fi
 LOGFILE="${BASEDIR}/log/terrariumpi.log"
@@ -74,13 +73,12 @@ dpkg-reconfigure tzdata
 # Enable 1Wire en I2C during boot
 if [ -f /boot/config.txt ]; then
 
-  if [ `grep -ic "#dtparam=i2c_arm=on" /boot/config.txt` -eq 1 ]; then
-    sed -i.bak 's/^#dtparam=i2c_arm=on/dtparam=i2c_arm=on/' /boot/config.txt
-  fi
+  # Enable I2C
   if [ `grep -ic "dtparam=i2c_arm=on" /boot/config.txt` -eq 0 ]; then
     echo "dtparam=i2c_arm=on" >> /boot/config.txt
   fi
 
+  # Enable 1-Wire
   if [ `grep -ic "dtoverlay=w1-gpio" /boot/config.txt` -eq 0 ]; then
     echo "dtoverlay=w1-gpio" >> /boot/config.txt
   fi
@@ -88,6 +86,11 @@ if [ -f /boot/config.txt ]; then
   # Enable camera
   if [ `grep -ic "gpu_mem=" /boot/config.txt` -eq 0 ]; then
     echo "gpu_mem=128" >> /boot/config.txt
+  fi
+
+  # Enable serial
+  if [ `grep -ic "enable_uart=1" /boot/config.txt` -eq 0 ]; then
+    echo "enable_uart=1" >> /boot/config.txt
   fi
 
 fi
@@ -98,7 +101,6 @@ groupadd -f sispmctl 2> /dev/null
 groupadd -f gpio 2> /dev/null
 # Add user to all groupds
 usermod -a -G dialout,sispmctl,gpio ${SCRIPT_USER} 2> /dev/null
-
 
 # Docu https://pylibftdi.readthedocs.io/
 # Make sure that the normal Pi user can read and write to the usb driver
@@ -134,15 +136,35 @@ if [ -f /etc/modules ]; then
   fi
 fi
 
+# Increase swap file size
+if [ -f /etc/dphys-swapfile ]; then
+  sed -i.bak 's/^CONF_SWAPSIZE=100/CONF_SWAPSIZE=512/' /etc/dphys-swapfile
+fi
+
+
 # Make sure pigpiod is started at boot, and that user PI can restart it with sudo command
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/sbin/service pigpiod restart" > /etc/sudoers.d/terrariumpi
+# Make rebooting from webinterface possible
+echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /sbin/reboot" >> /etc/sudoers.d/terrariumpi
+# https://github.com/UedaTakeyuki/mh-z19/blob/master/pypi/mh_z19/__init__.py#L18
+echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl stop serial-getty@ttyS0.service" >> /etc/sudoers.d/terrariumpi
+echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl start serial-getty@ttyS0.service" >> /etc/sudoers.d/terrariumpi
+echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl stop serial-getty@ttyAMA0.service" >> /etc/sudoers.d/terrariumpi
+echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl start serial-getty@ttyAMA0.service" >> /etc/sudoers.d/terrariumpi
+# http://denkovi.com/denkovi-relay-command-line-tool
+echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/bin/java -jar DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar *" >> /etc/sudoers.d/terrariumpi
+# mh-z19 sensor
+echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/bin/python -m mh_z19 --all" >> /etc/sudoers.d/terrariumpi
+echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/bin/python2 -m mh_z19 --all" >> /etc/sudoers.d/terrariumpi
+echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/bin/python3 -m mh_z19 --all" >> /etc/sudoers.d/terrariumpi
+
 systemctl enable pigpiod
 
 # Remove unneeded OWS services
 update-rc.d -f owftpd remove
 update-rc.d -f owfhttpd remove
 
-PROGRESS=35
+PROGRESS=30
 # Update submodules if downloaded through tar or zip
 (
 cd "${BASEDIR}/"
@@ -174,9 +196,9 @@ EOF
 git submodule update > /dev/null
 cd "${BASEDIR}/.."
 
-PIP_MODULES="python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_DHT Adafruit_SHT31 luma.oled bluepy pywemo pyownet emails"
+PIP_MODULES="python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_DHT Adafruit_SHT31 luma.oled bluepy pywemo pyownet emails mh-z19"
 if [ $PYTHON -eq 3 ]; then
-  PIP_MODULES="${PIP_MODULES} opencv-python-headless meross_iot"
+  PIP_MODULES="${PIP_MODULES} opencv-python-headless meross-iot==0.2.2.3 iCalEvents"
 fi
 NUMBER_OF_MODULES=($PIP_MODULES)
 NUMBER_OF_MODULES=${#NUMBER_OF_MODULES[@]}

@@ -607,15 +607,16 @@ class terrariumConfig(object):
   def get_port_number(self):
     config = self.get_system()
     return config['port']
+  # End system functions
 
-  def get_merros_cloud(self):
-    return self.__get_config('merros_cloud')
+  def get_meross_cloud(self):
+    return self.__get_config('meross_cloud')
 
-  def set_merros_cloud(self,data):
-    data = {'merros_username' : data['merros_username'],
-            'merros_password' : data['merros_password']}
+  def set_meross_cloud(self,data):
+    data = {'meross_username' : data['meross_username'],
+            'meross_password' : data['meross_password']}
 
-    return self.__update_config('merros_cloud',data)
+    return self.__update_config('meross_cloud',data)
   # End system functions
 
   # Environment functions
@@ -705,7 +706,7 @@ class terrariumConfig(object):
   def save_power_switches(self,data):
     update_ok = True
     for power_switch in self.get_power_switches():
-      if 'exclude' in power_switch and not terrariumUtils.is_true(power_switch['exclude']):
+      if 'exclude' not in power_switch or not terrariumUtils.is_true(power_switch['exclude']):
         self.__config.remove_section('switch' + power_switch['id'])
 
     for power_switch_id in data:

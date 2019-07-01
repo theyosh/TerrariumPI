@@ -597,7 +597,7 @@
             <div class="col-md-9 col-sm-9 col-xs-12 pull-left">
               <div class="x_panel" id="average_temperature">
                 <div class="x_title">
-                  <h2><span aria-hidden="true" class="glyphicon glyphicon-fire"></span> <span class="title">{{_('Average Temperature')}}</span> <small class="data_update">...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-fire"></span> <span class="title">{{_('Average Temperature')}}</span> <span class="small data_update">...</span> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -652,7 +652,7 @@
               </div>
               <div class="x_panel" id="average_humidity">
                 <div class="x_title">
-                  <h2><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> <span class="title">{{_('Average Humidity')}}</span> <small class="data_update">...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> <span class="title">{{_('Average Humidity')}}</span> <span class="small data_update">...</span> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -707,7 +707,7 @@
               </div>
               <div class="x_panel" id="average_moisture">
                 <div class="x_title">
-                  <h2><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> <span class="title">{{_('Average Moisture')}}</span> <small class="data_update">...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-tint"></span> <span class="title">{{_('Average Moisture')}}</span> <span class="small data_update">...</span> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -762,7 +762,7 @@
               </div>
               <div class="x_panel" id="average_conductivity">
                 <div class="x_title">
-                  <h2><span aria-hidden="true" class="glyphicon glyphicon-oil"></span> <span class="title">{{_('Average Conductivity')}}</span> <small class="data_update">...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-oil"></span> <span class="title">{{_('Average Conductivity')}}</span> <span class="small data_update">...</span> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -817,7 +817,7 @@
               </div>
               <div class="x_panel" id="average_distance">
                 <div class="x_title">
-                  <h2><span aria-hidden="true" class="glyphicon glyphicon-signal"></span> <span class="title">{{_('Average Distance')}}</span> <small class="data_update">...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-signal"></span> <span class="title">{{_('Average Distance')}}</span> <span class="small data_update">...</span> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -872,7 +872,7 @@
               </div>
               <div class="x_panel" id="average_ph">
                 <div class="x_title">
-                  <h2><span aria-hidden="true" class="glyphicon glyphicon-scale"></span> <span class="title">{{_('Average pH')}}</span> <small class="data_update">...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-scale"></span> <span class="title">{{_('Average pH')}}</span> <span class="small data_update">...</span> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -927,7 +927,7 @@
               </div>
               <div class="x_panel" id="average_light">
                 <div class="x_title">
-                  <h2><span aria-hidden="true" class="glyphicon glyphicon-adjust"></span> <span class="title">{{_('Average Light')}}</span> <small class="data_update">...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-adjust"></span> <span class="title">{{_('Average Light')}}</span> <span class="small data_update">...</span> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -982,7 +982,7 @@
               </div>
               <div class="x_panel" id="average_fertility">
                 <div class="x_title">
-                  <h2><span aria-hidden="true" class="glyphicon glyphicon-grain"></span> <span class="title">{{_('Average Fertility')}}</span> <small class="data_update">...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-grain"></span> <span class="title">{{_('Average Fertility')}}</span> <span class="small data_update">...</span> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -1037,7 +1037,7 @@
               </div>
               <div class="x_panel" id="average_co2">
                 <div class="x_title">
-                  <h2><span aria-hidden="true" class="glyphicon glyphicon-tree-conifer"></span> <span class="title">{{_('Average CO2')}}</span> <small class="data_update">...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-tree-conifer"></span> <span class="title">{{_('Average CO2')}}</span> <span class="small data_update">...</span> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -1092,7 +1092,7 @@
               </div>
               <div class="x_panel" id="average_volume">
                 <div class="x_title">
-                  <h2><span aria-hidden="true" class="glyphicon glyphicon-signal"></span> <span class="title">{{_('Average Volume')}}</span> <small class="data_update">...</small> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
+                  <h2><span aria-hidden="true" class="glyphicon glyphicon-signal"></span> <span class="title">{{_('Average Volume')}}</span> <span class="small data_update">...</span> <span class="badge bg-red" style="display:none;">{{_('warning')}}</span></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                       <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -1150,10 +1150,25 @@
         </div>
         <script type="text/javascript">
           $(document).ready(function() {
+          % if hide_environment:
+            $('div#dashboard div.row.environment div.pull-right').remove();
+            $('div#dashboard div.row.environment div.pull-left').removeClass().addClass('col-md-12 col-sm-12 col-xs-12 pull-left');
+          % end
+
+            // The a click event is not working due to template system. So bind it to the inner i object
+            $('div#dashboard div.row.environment div.pull-right a.close-link i').on('click',function(event){
+              $('div#dashboard div.row.environment div.pull-left').removeClass().addClass('col-md-12 col-sm-12 col-xs-12 pull-left');
+            });
+
             $('div#dashboard div.pull-left div.x_panel').hide();
 
             $.get('/api/sensors/average',function(json_data) {
               var active_sensor_types = ['settings'];
+
+              if (globals.show_gauge_overview) {
+                active_sensor_types.push('gauge_overview');
+              }
+
               $.each(json_data.sensors,function(index,sensor_data){
                 if ($('div#' + sensor_data.type + ':hidden')) {
                   $('div#' + sensor_data.type).show();

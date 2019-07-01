@@ -38,6 +38,9 @@
                   <a><i class="fa fa-tint"></i> {{_('Sensors')}} <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li>
+                      <a href="sensor_gauge_overview.html">{{_('All')}}</a>
+                    </li>
+                    <li>
                       <a href="sensor_temperature.html">{{_('Temperature')}}</a>
                     </li>
                     <li>
@@ -215,6 +218,21 @@
                   <li class="no_message">
                     <div class="text-center">
                       <a><strong>{{_('No messages')}}</strong></a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li class="dropdown" role="presentation" id="calendar">
+                <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;">
+                  <span class="online">
+                    <i class="fa fa-calendar green"></i> <span>{{_('Calendar')}}</span>
+                    <span class="badge bg-green">0</span>
+                  </span>
+                </a>
+                <ul class="dropdown-menu list-unstyled msg_list" id="calendar_messages" role="menu">
+                  <li class="no_message">
+                    <div class="text-center">
+                      <a><strong>{{_('No events')}}</strong></a>
                     </div>
                   </li>
                 </ul>

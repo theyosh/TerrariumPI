@@ -55,8 +55,13 @@
   <script type="text/javascript" src="/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
   <!-- Switchery -->
   <script type="text/javascript" src="/gentelella/vendors/switchery/dist/switchery.min.js"></script>
+  <!-- FullCalendar -->
+  <script type="text/javascript" src="/gentelella/vendors/fullcalendar/dist/fullcalendar.min.js"></script>
   <!-- Clappr HLS player -->
   <script type="text/javascript" src="static/clappr/clappr.min.js"></script>
+
+  <script type="text/javascript" src="/static/js/js.cookie.js"></script>
+
   <!-- Load the terrariumPI JS script-->
   <script type="text/javascript" src="/static/js/terrariumpi.js"></script>
   <script type="text/javascript">
@@ -66,6 +71,8 @@
     globals.volume_indicator = '{{volume_indicator}}';
     globals.language = '{{lang}}';
     globals.horizontal_legend = {{horizontal_graph_legend}};
+    globals.show_gauge_overview = {{show_gauge_overview}};
+    globals.graph_smooth_value = {{graph_smooth_value}};
   </script>
 </body>
 </html>
