@@ -144,6 +144,8 @@ fi
 
 # Make sure pigpiod is started at boot, and that user PI can restart it with sudo command
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/sbin/service pigpiod restart" > /etc/sudoers.d/terrariumpi
+# Make rebooting from webinterface possible
+echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /sbin/reboot" >> /etc/sudoers.d/terrariumpi
 # https://github.com/UedaTakeyuki/mh-z19/blob/master/pypi/mh_z19/__init__.py#L18
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl stop serial-getty@ttyS0.service" >> /etc/sudoers.d/terrariumpi
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl start serial-getty@ttyS0.service" >> /etc/sudoers.d/terrariumpi
