@@ -222,6 +222,21 @@
                   </li>
                 </ul>
               </li>
+              <li class="dropdown" role="presentation" id="calendar">
+                <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;">
+                  <span class="online">
+                    <i class="fa fa-calendar green"></i> <span>{{_('Calendar')}}</span>
+                    <span class="badge bg-green">0</span>
+                  </span>
+                </a>
+                <ul class="dropdown-menu list-unstyled msg_list" id="calendar_messages" role="menu">
+                  <li class="no_message">
+                    <div class="text-center">
+                      <a><strong>{{_('No events')}}</strong></a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
               <li class="dropdown disabled" role="presentation" id="player_indicator">
                 <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;">
                   <span class="running">

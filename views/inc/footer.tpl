@@ -55,6 +55,8 @@
   <script type="text/javascript" src="/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
   <!-- Switchery -->
   <script type="text/javascript" src="/gentelella/vendors/switchery/dist/switchery.min.js"></script>
+  <!-- FullCalendar -->
+  <script type="text/javascript" src="/gentelella/vendors/fullcalendar/dist/fullcalendar.min.js"></script>
   <!-- Clappr HLS player -->
   <script type="text/javascript" src="static/clappr/clappr.min.js"></script>
 
