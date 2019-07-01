@@ -5,7 +5,6 @@ logger = terrariumLogging.logging.getLogger(__name__)
 
 import smbus
 import sys
-#import time
 import Adafruit_SHT31
 
 from terrariumSensor import terrariumSensorSource
@@ -15,6 +14,9 @@ from terrariumUtils import terrariumUtils
 # https://github.com/ageir/chirp-rpi
 sys.path.insert(0, './chirp-rpi')
 import chirp
+sys.path.insert(0, './python-MLX90614')
+from mlx90614 import MLX90614
+from struct import unpack
 
 from gevent import monkey, sleep
 monkey.patch_all()
@@ -47,10 +49,10 @@ class terrariumI2CSensor(terrariumSensorSource):
     try:
       gpio_pins = self.get_address().split(',')
       logger.debug('Open sensor type \'{}\' with address {}'.format(self.get_type(),gpio_pins))
-      logger.debug('Send soft reset command \'{}\' with a timeout of {} seconds'.format(self.SOFTRESET,self.SOFTRESET_TIMEOUT * 2.0))
       #Datasheet recommend do Soft Reset before measurment:
       self.i2c_bus = smbus.SMBus(1 if len(gpio_pins) == 1 else int(gpio_pins[1]))
       if self.SOFTRESET_TIMEOUT > 0.0:
+        logger.debug('Send soft reset command \'{}\' with a timeout of {} seconds'.format(self.SOFTRESET,self.SOFTRESET_TIMEOUT * 2.0))
         self.i2c_bus.write_byte(int('0x' + gpio_pins[0],16), self.SOFTRESET)
         sleep(self.SOFTRESET_TIMEOUT * 2.0)
 
@@ -530,5 +532,110 @@ class terrariumChirpSensor(terrariumSensorSource):
     data['min_moist'] = self.get_min_moist_calibration()
     data['max_moist']  = self.get_max_moist_calibration()
     data['temp_offset']  = self.get_temperature_offset_calibration()
+
+    return data
+
+class terrariumMLX90614Sensor(terrariumSensorSource):
+  TYPE = 'mlx90614'
+  VALID_SENSOR_TYPES = ['temperature']
+
+  def set_address(self,address):
+    super(terrariumMLX90614Sensor,self).set_address(address)
+    data = self.get_address().split(',')
+    self.i2c_address = int('0x' + data[0],16)
+    self.i2c_bus = 1
+    self.temp_type = 'object'
+    if len(data) == 3:
+      _, self.i2c_bus, self.temp_type = data
+    elif len(data) == 2:
+      if 'a' == data[1]:
+        self.temp_type = 'ambient'
+      elif 'o' == data[1]:
+        self.temp_type = 'object'
+      else:
+        self.i2c_bus = data[1]
+
+  def load_data(self):
+    data = None
+
+    try:
+      data = {}
+      sensor = MLX90614(self.i2c_address,int(self.i2c_bus))
+
+      # we cannot cache data here.... as both are 'temperature' values
+      if 'object' == self.temp_type:
+        data['temperature'] = float(sensor.get_obj_temp())
+      elif 'ambient' == self.temp_type:
+        data['temperature'] = float(sensor.get_amb_temp())
+      else:
+        data = None
+
+    except Exception as ex:
+      print(ex)
+
+    return data
+
+class terrariumAM2320Sensor(terrariumI2CSensor):
+  TYPE = 'am2320'
+
+  SOFTRESET_TIMEOUT = 0.0
+
+  PARAM_AM2320_READ = 0x03
+  REG_AM2320_HUMIDITY_MSB = 0x00
+
+  def _am_crc16(self, buf):
+    crc = 0xFFFF
+    for c in buf:
+      crc ^= c
+      for i in range(8):
+        if crc & 0x01:
+          crc >>= 1
+          crc ^= 0xA001
+        else:
+          crc >>= 1
+    return crc
+
+  def get_raw_data(self,command, regaddr, regcount):
+    gpio_pins = self.get_address().split(',')
+    try:
+      try:
+        # wake AM2320 up, goes to sleep to not warm up and affect the humidity sensor
+        # This write will fail as AM2320 won't ACK this write
+        self.i2c_bus.write_i2c_block_data(int('0x' + gpio_pins[0],16), 0x00, [])
+      except Exception as ex:
+        pass # As this is expected
+
+      self.i2c_bus.write_i2c_block_data(int('0x' + gpio_pins[0],16), command, [regaddr, regcount])
+
+      sleep(0.002)
+
+      buf = self.i2c_bus.read_i2c_block_data(int('0x' + gpio_pins[0],16), 0, 8)
+    except Exception as ex:
+      #logger.error('Error reading sensor {}'.format(self.get_name()))
+      return None
+
+    buf_str = "".join(chr(x) for x in buf)
+
+    crc = unpack('<H', buf_str[-2:])[0]
+    if crc != self._am_crc16(buf[:-2]):
+      logger.warning('AM2320 CRC error for sensor {}'.format(self.get_name()))
+      return None
+
+    return buf_str[2:-2]
+
+  def load_raw_data(self):
+    data = None
+
+    try:
+      raw_data = self.get_raw_data(self.PARAM_AM2320_READ, self.REG_AM2320_HUMIDITY_MSB, 4)
+      if raw_data is None:
+        return raw_data
+
+      data = {}
+      data['temperature'] = unpack('>H', raw_data[-2:])[0] / 10.0
+      data['humidity'] = unpack('>H', raw_data[-4:2])[0] / 10.0
+    except Exception as ex:
+      print('load_raw_data error:')
+      print(ex)
 
     return data

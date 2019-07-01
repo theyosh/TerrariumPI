@@ -410,6 +410,7 @@ function websocket_init(reconnect) {
         break;
       case 'uptime':
         update_dashboard_uptime(data.data);
+        load_calendar_history();
         break;
       case 'power_usage_water_flow':
         update_dashboard_power_usage(data.data.power);
@@ -509,8 +510,9 @@ function info_notification_bubble(title,message) {
 /* General functions - End notification bubbles */
 
 /* General functions - Notification messages */
-function add_notification_message(type, title, message, icon, color, date) {
+function add_notification_message(type, title, message, icon, color, date, link) {
   var notification_date = date || new Date().getTime();
+  link = link || false;
   var menu = $('ul#' + type);
   if (menu.find('li:first a span.message').text() == message) {
     // Skip duplicate messages
@@ -520,14 +522,18 @@ function add_notification_message(type, title, message, icon, color, date) {
   var notification = $('<a>');
   if (type != 'player_messages') {
     notification.on('click', function() {
-      close_notification_message(this);
+      if (link !== false) {
+        load_page(link);
+      } else {
+        close_notification_message(this);
+      }
     });
   }
 
   notification.append($('<span>').addClass('image').append($('<img>').attr({
     'src': $('div.profile_pic img').attr('src')
   })));
-  notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('data-timestamp',notification_date).text('...')));
+  notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('data-timestamp',notification_date)) );
   notification.append($('<span>').addClass('message').text(message).append($('<span>').addClass('pull-right').html('<i class="fa ' + icon + ' ' + color + '"></i>')));
 
   // Remove no messages line
@@ -545,12 +551,12 @@ function close_notification_message(notification) {
   notification = $(notification).parent();
   var list = notification.parent('ul');
   notification.remove();
-  menu.find('li.no_message').toggle(list.find('li.notification').length === 0);
+  list.find('li.no_message').toggle(list.find('li.notification:not(.no_message)').length === 0);
 }
 
 function notification_timestamps() {
   var now = (new Date()).getTime();
-  $('span.notification_timestamp').each(function() {
+  $('span.notification_timestamp,strong.notification_timestamp').each(function() {
     var timestamp = $(this).attr('data-timestamp') * 1;
     var duration = moment.duration((now - timestamp) * -1);
     $(this).text(duration.humanize(true));
@@ -684,11 +690,12 @@ function process_form() {
 function prepare_form_data(form) {
   var formdata = [];
   var form_type = form.attr('action').split('/').pop();
+
   var re = /(sensor|switch|webcam|light|humidity|temperature|watertank|moisture|conductivity|ph|co2|fertility|door|profile|playlist)(_\d+)?_(.*)/i;
   var matches = null;
   var objectdata = {};
   var prev_nr = -1;
-  if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'profile' || form_type === 'notifications') {
+  if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'profile' || form_type === 'notifications' || form_type === 'hardware') {
     formdata = {};
   }
   try {
@@ -706,6 +713,7 @@ function prepare_form_data(form) {
             }
             formdata[field_name] = field_value;
             break;
+          case 'hardware':
           case 'sensors':
           case 'switches':
           case 'powerswitches':
@@ -749,7 +757,7 @@ function prepare_form_data(form) {
       }
     });
     if (Object.keys(objectdata).length > 1) {
-      if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'notifications') {
+      if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'notifications' || form_type === 'hardware') {
         formdata[prev_nr] = $.extend(true, {}, objectdata);
       } else {
         formdata.push($.extend(true, {}, objectdata));
@@ -914,7 +922,7 @@ function sensor_gauge(name, data) {
 
   if ($('#' + name + ' .gauge').length == 1) {
     // Update timestamp indicator
-    $('#' + name + ' small').text(moment().format('LLL'));
+    $('#' + name + ' span.small:visible:last').text(moment().format('LLL'));
     // Setup a new gauge if needed
     if ($('#' + name + ' .gauge').attr('done') === undefined) {
       var total_area = data.limit_max - data.limit_min;
@@ -972,6 +980,39 @@ function sensor_gauge(name, data) {
   }
 }
 
+/**
+    * returns an array with moving average of the input array
+    * @param array - the input array
+    * @param count - the number of elements to include in the moving average calculation
+    * @param qualifier - an optional function that will be called on each
+    *  value to determine whether it should be used
+    */
+    function movingAvg(array, count, qualifier){
+
+        // calculate average for subarray
+        var avg = function(array, qualifier){
+
+            var sum = 0, count = 0, val;
+            for (var i in array){
+                val = array[i][1];
+                if (!qualifier || qualifier(val)){
+                    sum += val;
+                    count++;
+                }
+            }
+
+            return [array[0][0],sum / count];
+        };
+        var result = [], val;
+
+        // calculate average for each subarray and add to result
+        for (var i=0, len=array.length - count; i <= len; i++){
+            val = avg(array.slice(i, i + count), qualifier);
+            result.push(val);
+        }
+        return result;
+    }
+
 function load_history_graph(id,type,data_url,nocache) {
   if ($('#' + id + ' .history_graph').length === 1) {
     var now = + new Date();
@@ -992,16 +1033,20 @@ function load_history_graph(id,type,data_url,nocache) {
     if ($('#' + id + ' .history_graph.loading').length === 1) {
     // Create period menu items
       var menu_items = $('#' + id + ' ul.dropdown-menu.period a');
-      $.each(['day','week','month','year'],function(index,value){
-        if (index === 0) {
-          $(menu_items[index]).parent().addClass('focus');
+      $.each(['day','week','month','year','lr'],function(index,value){
+        if (index < menu_items.length){
+          if (index === 0) {
+            $(menu_items[index]).parent().addClass('focus');
+          }
+
+          $(menu_items[index]).attr('title',$(menu_items[index]).text());
+          $(menu_items[index]).off('click');
+          $(menu_items[index]).on('click', function(){
+            $(this).parent().siblings().removeClass('focus');
+            $(this).parent().addClass('focus');
+            load_history_graph(id,type,data_url + '/' + value ,1);
+          });
         }
-        $(menu_items[index]).off('click');
-        $(menu_items[index]).on('click', function(){
-          $(this).parent().siblings().removeClass('focus');
-          $(this).parent().addClass('focus');
-          load_history_graph(id,type,data_url + '/' + value ,1);
-        });
       });
       $('#' + id + ' ul.dropdown-menu a.export').off('click').on('click',function(){
         var download = $('iframe#history_export');
@@ -1083,7 +1128,7 @@ function history_graph(name, data, type) {
     type = 'temperature';
   }
 
-  var graph_ticks = 8;
+  var graph_ticks = 8, smooth = false;
   if (type === 'door') {
     graph_ticks = [[0, '{{_('Closed')}}'], [1, '{{_('Open')}}']];
   }
@@ -1217,6 +1262,7 @@ function history_graph(name, data, type) {
 
   switch (type) {
     case 'light':
+      smooth = true;
       if (data.light_average !== undefined && data.light_average) {
 
         graph_data = [{
@@ -1280,6 +1326,7 @@ function history_graph(name, data, type) {
     case 'fertility':
     case 'co2':
     case 'volume':
+      smooth = true;
       graph_data = [{
         label: '{{_('Current')}}',
         data: data.current
@@ -1295,6 +1342,7 @@ function history_graph(name, data, type) {
     case 'weather':
       graph_options.series.curvedLines.apply = true;
     case 'system_temperature':
+      smooth = true;
       graph_data = [{
         label: '{{_('Temperature')}}',
         data: data
@@ -1317,6 +1365,7 @@ function history_graph(name, data, type) {
       break;
 
     case 'system_load':
+      smooth = true;
       graph_data = [{
         label: '{{_('Load')}}',
         data: data.load1
@@ -1410,6 +1459,17 @@ function history_graph(name, data, type) {
     graph_options.xaxis.tickSize[0] = Math.round(total_data_duration * 2.5);
   }
 
+  if (smooth && globals.graph_smooth_value > 0) {
+    graph_data[0].data = movingAvg(graph_data[0].data.reverse(),globals.graph_smooth_value);
+    try {
+      graph_data[1].data = graph_data[1].data.splice(globals.graph_smooth_value);
+    } catch (e) {}
+    try {
+      graph_data[2].data = graph_data[2].data.splice(globals.graph_smooth_value);
+    } catch (e) {}
+
+  }
+
   if ($('#' + name + ' .history_graph').length == 1) {
     $('#' + name + ' .history_graph').html('').removeClass('loading');
     $.plot($('#' + name + ' .history_graph'), graph_data, graph_options);
@@ -1419,7 +1479,7 @@ function history_graph(name, data, type) {
       var usage = '';
       if (data.totals !== undefined) {
         if (data.totals.duration > 0) {
-          usage = '{{_('Duration')}}: ' + moment.duration(data.totals.duration * 1000).humanize()
+          usage = '{{_('Duration in hours')}}: ' + Math.round(moment.duration(data.totals.duration * 1000).as('hours')*100)/100;
         }
         if (data.totals.power_wattage > 0) {
           usage += (usage != '' ? ' - ' : '') + '{{_('Total power in kWh')}}: ' + formatNumber(data.totals.power_wattage / (3600 * 1000));
@@ -1554,20 +1614,20 @@ function init_sidebar() {
     }
 
     $BODY.toggleClass('nav-md nav-sm');
+    Cookies.set('hide_menu',$BODY.hasClass('nav-sm'));
 
     setContentHeight();
 
     $('.dataTable').each ( function () { $(this).dataTable().fnDraw(); });
   });
 
-	// check active menu
-	$SIDEBAR_MENU.find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('current-page');
+  $SIDEBAR_MENU.find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('current-page');
 
-	$SIDEBAR_MENU.find('a').filter(function () {
-		return this.href == CURRENT_URL;
-	}).parent('li').addClass('current-page').parents('ul').slideDown(function() {
-		setContentHeight();
-	}).parent().addClass('active');
+  $SIDEBAR_MENU.find('a').filter(function () {
+    return this.href == CURRENT_URL;
+  }).parent('li').addClass('current-page').parents('ul').slideDown(function() {
+    setContentHeight();
+  }).parent().addClass('active');
 
 	// recompute content when resizing
 	$(window).smartresize(function(){
@@ -1584,6 +1644,15 @@ function init_sidebar() {
 			mouseWheel:{ preventDefault: true }
 		});
 	}
+
+  // Hide menu bar based on cookie value
+  if ($BODY.hasClass('nav-md') && 'true' == Cookies.get('hide_menu')) {
+    $('ul.nav.side-menu li:first a:first').trigger('click');
+    $MENU_TOGGLE.trigger('click');
+  } else {
+    $('ul.nav.side-menu li:first a:first').trigger('click');
+  }
+
 };
 // /Sidebar
 
@@ -1850,7 +1919,7 @@ function add_sensor_status_row(data) {
   $('div#maincontent').append(new_row);
 }
 
-function update_sensor(data) {
+function update_sensor(data,) {
   // Load the switch row to update the data
   var content_row = $('div.row.sensor#' + 'sensor_' + data.id);
   // Show either the temperature or humidity header and icon
@@ -1890,12 +1959,12 @@ function update_sensor(data) {
   }
 }
 
-function add_sensor_setting_row(data) {
+function add_sensor_setting_row(data,is_new) {
   if (source_row === null || source_row === '') {
     return false;
   }
   // Create new row
-  var setting_row = $('<div>').addClass('row sensor').html(source_row.replace(/\[nr\]/g, $('form div.row.sensor').length));
+  var setting_row = $('<div>').addClass('row sensor' + (is_new ? ' new' : '')).html(source_row.replace(/\[nr\]/g, $('form div.row.sensor').length));
   if (data.id !== undefined) {
     // Set ID
     setting_row.attr('id','sensor_' + data.id);
@@ -1918,16 +1987,12 @@ function add_sensor_setting_row(data) {
 
       var address_field = $("input[name='" + this.name.replace('hardwaretype','address') + "']");
       address_field.attr("readonly", this.value == 'owfs' || this.value == 'w1').off('change');
-
-/*
-      if ('remote' === this.value) {
-        address_field.on('change',function(){
-            parse_remote_data('sensor',this.value);
-        });
-      }
-      */
     }
   });
+
+  // Disable hardware select box
+  setting_row.find('select[name*="hardwaretype"]').attr("disabled", !is_new);
+
   // Add on the bottom before the submit row
   setting_row.insertBefore('div.row.submit');
 }
@@ -1948,7 +2013,8 @@ function add_sensor() {
   data['id'] = Math.floor(Date.now() / 1000);
 
   // Add new row
-  add_sensor_setting_row(data);
+  add_sensor_setting_row(data,true);
+
   // Update new row with new values
   update_sensor(data);
 
@@ -2041,7 +2107,7 @@ function update_power_switch(data) {
   }
   content_row.find('span.glyphicon').removeClass('blue green').addClass((on ? 'green' : 'blue'));
   content_row.find('h2 span.title').text(data.name);
-  content_row.find('h2 small.current_usage').text(current_status_data);
+  content_row.find('h2 span.current_usage').text(current_status_data);
   content_row.find('h2 span.manual_mode').toggle(data.manual_mode);
   //switch_row.find('.knob').val(power_switch.state).trigger('change');
 
@@ -2077,22 +2143,15 @@ function update_power_switch(data) {
   }
 }
 
-function add_power_switch_setting_row(data) {
+function add_power_switch_setting_row(data,is_new) {
   if (source_row === null || source_row === '') {
     return false;
   }
   // Create new row
-  var setting_row = $('<div>').addClass('row switch').html(source_row.replace(/\[nr\]/g, $('form div.row.switch').length));
+  var setting_row = $('<div>').addClass('row switch' + (is_new ? ' new' : '')).html(source_row.replace(/\[nr\]/g, $('form div.row.switch').length));
   if (data.id !== undefined) {
     // Set ID
     setting_row.attr('id','powerswitch_' + data.id);
-
-    // Set toggle (disabled in 'edit' modus)
-    /*
-    power_switch_row.find('div.power_switch span.glyphicon').on('click',function(){
-      toggle_power_switch($(this).parentsUntil('div.row.switch').parent().attr('id').split('_')[1]);
-    });
-    */
   }
   // Re-initialize the select pulldowns
   //setting_row.find('span.select2.select2-container').remove();
@@ -2110,6 +2169,9 @@ function add_power_switch_setting_row(data) {
         }
       }
   });
+  // Disable hardware select box
+  setting_row.find('select[name*="hardwaretype"]').attr("disabled", !is_new);
+
   // Add on the bottom before the submit row
   setting_row.insertBefore('div.row.submit');
 }
@@ -2130,7 +2192,7 @@ function add_power_switch() {
   data['id'] = Math.floor(Date.now() / 1000);
 
   // Add new row
-  add_power_switch_setting_row(data);
+  add_power_switch_setting_row(data,true);
   // Update new row with new values
   update_power_switch(data);
 
@@ -2242,12 +2304,12 @@ function update_door(data) {
   });
 }
 
-function add_door_setting_row(data) {
+function add_door_setting_row(data,is_new) {
   if (source_row === null || source_row === '') {
     return false;
   }
   // Create new row
-  var setting_row = $('<div>').addClass('row door').html(source_row.replace(/\[nr\]/g, $('form div.row.door').length));
+  var setting_row = $('<div>').addClass('row door' + (is_new ? ' new' : '')).html(source_row.replace(/\[nr\]/g, $('form div.row.door').length));
   if (data.id !== undefined) {
     // Set ID
     setting_row.attr('id','door_' + data.id);
@@ -2259,6 +2321,9 @@ function add_door_setting_row(data) {
     allowClear: false,
     minimumResultsForSearch: Infinity
   });
+  // Disable hardware select box
+  setting_row.find('select[name*="hardwaretype"]').attr("disabled", !is_new);
+
   // Add on the bottom before the submit row
   setting_row.insertBefore('div.row.submit');
 }
@@ -2279,7 +2344,7 @@ function add_door() {
   data['id'] = Math.floor(Date.now() / 1000);
 
   // Add new row
-  add_door_setting_row(data);
+  add_door_setting_row(data,true);
   // Update new row with new values
   update_door(data);
 
@@ -2317,53 +2382,53 @@ function webcamArchive(webcamid) {
   function getImages(date) {
 
     $.getJSON('api/webcams/' + webcamid + '/archive/'+ date.getFullYear() + '/' + (date.getMonth() < 9 ? '0' : '') + (date.getMonth() + 1) + '/' + (date.getDate() < 10 ? '0' : '') + date.getDate(), function(data) {
-    var photos = [];
-    var date_match = /archive_(\d+)\.jpg$/g;
+      var photos = [];
+      var date_match = /archive_(\d+)\.jpg$/g;
 
-    no_data_counter += (data.webcams[0].archive_images.length > 0 ? 0 : 1);
-    max_days_back--
+      no_data_counter += (data.webcams[0].archive_images.length > 0 ? 0 : 1);
+      max_days_back--;
 
-    if (no_data_counter > 10 || max_days_back < 0) {
-
-      console.log('Done lading:',no_data_counter,max_days_back);
-
-      return false;
-    }
-
-    $.each(data.webcams[0].archive_images, function(index,value) {
-      value.match(date_match);
-      var date_photo = date_match.exec(value);
-      if (date_photo != null && date_photo.length == 2) {
-        date_photo = moment(date_photo[1]* 1000).format('LLL');
-      } else {
-        date_photo = '{{_('Unknown date')}}';
+      if (no_data_counter > 10 || max_days_back < 0) {
+        return false;
       }
 
-      if (fancybox == null) {
-      fancybox = $.fancybox.open(
-        [{src : value,opts: { caption: '{{_('Webcam')}}' + ' ' + data.webcams[0].name + ': ' + date_photo}}],
-        {loop : false,
-         buttons : [
-                   //'slideShow',
-                   'fullScreen',
-                   'thumbs',
-                   //'share',
-                   'download',
-                   'zoom',
-                   'close'
-                ],
-         thumbs : {
-           autoStart : true
+      $.each(data.webcams[0].archive_images, function(index,value) {
+        value.match(date_match);
+        var date_photo = date_match.exec(value);
+        if (date_photo != null && date_photo.length == 2) {
+          date_photo = moment(date_photo[1]* 1000).format('LLL');
+        } else {
+          date_photo = '{{_('Unknown date')}}';
+        }
+
+        if (fancybox == null) {
+          fancybox = $.fancybox.open(
+            [{src : value,opts: { caption: '{{_('Webcam')}}' + ' ' + data.webcams[0].name + ': ' + date_photo}}],
+            {loop : false,
+             buttons : [
+                     //'slideShow',
+                     'fullScreen',
+                     'thumbs',
+                     //'share',
+                     'download',
+                     'zoom',
+                     'close']
+             }
+          );
+        } else {
+          if ($.fancybox.getInstance()) {
+            fancybox.addContent({src : value, opts: { caption: '{{_('Webcam')}}' + ' ' + data.webcams[0].name + ': ' + date_photo}});
           }
-        });
+        }
+      });
+      // recursive
+      if ($.fancybox.getInstance()) {
+        setTimeout(function(){
+          getImages(new Date(date.getTime() - (24 * 60 * 60 * 1000)));
+          }, 5000);
       } else {
-        fancybox.addContent({src : value, opts: { caption: '{{_('Webcam')}}' + ' ' + data.webcams[0].name + ': ' + date_photo}});
+        fancybox == null;
       }
-    });
-    // recursive
-    setTimeout(function(){
-      getImages(new Date(date.getTime() - (24 * 60 * 60 * 1000)));
-      }, 5000);
     });
   }
   getImages(now);
@@ -2388,6 +2453,9 @@ function initWebcam(data) {
                                     parentId: '#webcam_' + data.id,
                                     width: '100%',
                                     height: '100%',
+                                    playInline: true,
+                                    disableVideoTagContextMenu: true,
+                                    recycleVideo: false,
                                     autoPlay: true,
                                     chromeless: false});
 
@@ -2452,12 +2520,12 @@ function updateWebcamView(webcam) {
   }
 }
 
-function add_webcam_setting_row(data) {
+function add_webcam_setting_row(data,is_new) {
   if (source_row === null || source_row === '') {
     return false;
   }
   // Create new row
-  var setting_row = $('<div>').addClass('row webcam').html(source_row.replace(/\[nr\]/g, $('form div.row.webcam').length));
+  var setting_row = $('<div>').addClass('row webcam' + (is_new ? ' new' : '')).html(source_row.replace(/\[nr\]/g, $('form div.row.webcam').length));
   if (data.id !== undefined) {
     // Set ID
     setting_row.attr('id','webcam_' + data.id);
@@ -2522,7 +2590,7 @@ function add_webcam() {
   data.resolution = {'width' : data.resolution_width, 'height' : data.resolution_height};
 
   // Add new row
-  add_webcam_setting_row(data);
+  add_webcam_setting_row(data,true);
   // Update new row with new values
   update_webcam(data);
 
@@ -2636,12 +2704,12 @@ function update_audio_playlist(data) {
   });
 }
 
-function add_audio_playlist_setting_row(data) {
+function add_audio_playlist_setting_row(data,is_new) {
   if (source_row === null || source_row === '') {
     return false;
   }
   // Create new row
-  var setting_row = $('<div>').addClass('row playlist').html(source_row.replace(/\[nr\]/g, $('form div.row.playlist').length));
+  var setting_row = $('<div>').addClass('row playlist' + (is_new ? ' new' : '')).html(source_row.replace(/\[nr\]/g, $('form div.row.playlist').length));
   if (data.id !== undefined) {
     // Set ID
     setting_row.attr('id','playlist_' + data.id);
@@ -2684,7 +2752,7 @@ function add_audio_playlist() {
   data['id'] = Math.floor(Date.now() / 1000);
 
   // Add new row
-  add_audio_playlist_setting_row(data);
+  add_audio_playlist_setting_row(data,true);
   // Update new row with new values
   update_audio_playlist(data);
 
@@ -2828,6 +2896,24 @@ function uploadProfileImage() {
 }
 /* End profile code */
 
+function load_calendar_history() {
+  $.getJSON('/api/calendar', function(data) {
+    $('ul.nav.navbar-nav.navbar-right ul#calendar_messages li.notification:not(.no_message)').remove();
+    $.each(data.reverse(), function(counter, calendardata) {
+      var event_date = new Date(calendardata.start);
+      add_notification_message('calendar_messages',
+                               calendardata.title,
+                               calendardata.description,
+                               'fa-calendar',
+                               'green',
+                               event_date.getTime() + (event_date.getTimezoneOffset() * 60000),
+                               'calendar.html');
+    });
+    $('ul.nav.navbar-nav.navbar-right li#calendar span.badge.bg-green').text(data.length);
+    $('ul.nav.navbar-nav.navbar-right ul#calendar_messages li.no_message').toggle(data.length==0);
+  });
+}
+
 /**
  * Sort values alphabetically in select
  * source: http://stackoverflow.com/questions/12073270/sorting-options-elements-alphabetically-using-jquery
@@ -2877,7 +2963,6 @@ $(document).ready(function() {
   });
 
   init_sidebar();
-  $('ul.nav.side-menu li:first a:first').trigger('click');
 
   $('#system_time span').text(moment().format('LLLL'));
   websocket_init(false);
@@ -2893,6 +2978,7 @@ $(document).ready(function() {
   })
 
   load_door_history();
+  load_calendar_history();
   load_player_status();
   load_page('dashboard.html');
 

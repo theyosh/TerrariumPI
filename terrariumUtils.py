@@ -5,7 +5,20 @@ logger = terrariumLogging.logging.getLogger(__name__)
 import re
 import datetime
 import requests
+import subprocess
 from math import log
+from time import time
+
+# works in Python 2 & 3
+class _Singleton(type):
+    """ A metaclass that creates a Singleton base class when called. """
+    _instances = {}
+    def __call__(cls, *args, **kwargs):
+      if cls not in cls._instances:
+        cls._instances[cls] = super(_Singleton, cls).__call__(*args, **kwargs)
+      return cls._instances[cls]
+
+class terrariumSingleton(_Singleton('terrariumSingletonMeta', (object,), {})): pass
 
 class terrariumTimer(object):
   def __init__(self,start,stop,on_duration,off_duration,enabled):
@@ -91,6 +104,35 @@ class terrariumTimer(object):
             'timer_on_duration': self.__on_duration,
             'timer_off_duration': self.__off_duration}
 
+class terrariumCache(terrariumSingleton):
+  def __init__(self):
+    self.__cache = {}
+    self.__running = {}
+    logger.debug('Initialized cache')
+
+  def set_data(self,hash_key,data,cache_timeout = 30):
+    self.__cache[hash_key] = { 'data' : data, 'expire' : int(time()) + cache_timeout}
+    logger.debug('Added new cache data with hash: {}. Total in cache: {}'.format(hash_key,len(self.__cache)))
+
+  def get_data(self,hash_key):
+    if hash in self.__cache and self.__cache[hash_key]['expire'] > int(time()):
+      return self.__cache[hash_key]['data']
+
+  def clear_data(self,hash_key):
+    if hash_key in self.__cache:
+      del(self.__cache[hash_key])
+
+  def is_running(self,hash_key):
+    if hash_key in self.__running:
+      return True
+
+    return False
+
+  def set_running(self,hash_key):
+    self.__running[hash_key] = True
+
+  def clear_running(self,hash_key):
+    del(self.__running[hash_key])
 
 class terrariumUtils():
 
@@ -121,6 +163,25 @@ class terrariumUtils():
   def to_uk_gallons(value):
     # https://www.asknumbers.com/gallons-to-liters.aspx
     return float(value) / 4.54609
+
+  @staticmethod
+  def conver_to_value(current,indicator):
+    if not terrariumUtils.is_float(current):
+      return None
+
+    indicator = indicator.lower()
+    if 'f' == indicator:
+      current = terrariumUtils.to_fahrenheit(current)
+    elif 'k' == indicator:
+      current = terrariumUtils.to_kelvin(current)
+    elif 'inch' == indicator:
+      current = terrariumUtils.to_inches(current)
+    elif 'usgall' == indicator:
+      current = terrariumUtils.to_us_gallons(current)
+    elif 'ukgall' == indicator:
+      current = terrariumUtils.to_uk_gallons(current)
+
+    return float(current)
 
   @staticmethod
   def is_float(value):
@@ -239,18 +300,33 @@ class terrariumUtils():
     return time
 
   @staticmethod
-  def get_remote_data(url, timeout = 3, proxy = None):
+  def get_remote_data(url, timeout = 3, proxy = None, json = False):
     data = None
     try:
       url_data = terrariumUtils.parse_url(url)
       proxies = {'http' : proxy, 'https' : proxy}
+      headers = {}
+      if json:
+        headers['Accept'] = 'application/json'
+
       if url_data['username'] is None:
-        response = requests.get(url,timeout=timeout,proxies=proxies)
+        response = requests.get(url,headers=headers,timeout=timeout,proxies=proxies,stream=True)
       else:
-        response = requests.get(url,auth=(url_data['username'],url_data['password']),timeout=timeout,proxies=proxies)
+        response = requests.get(url,auth=(url_data['username'],url_data['password']),headers=headers,timeout=timeout,proxies=proxies,stream=True)
 
       if response.status_code == 200:
-        if 'application/json' in response.headers['content-type']:
+        if 'multipart/x-mixed-replace' in response.headers['content-type']:
+          # Motion JPEG stream....
+          # https://stackoverflow.com/a/36675148
+          frame = bytes()
+          for chunk in response.iter_content(chunk_size=1024):
+            frame += chunk
+            a = frame.find(b'\xff\xd8')
+            b = frame.find(b'\xff\xd9')
+            if a != -1 and b != -1:
+              return frame[a:b+2]
+
+        elif 'application/json' in response.headers['content-type']:
           data = response.json()
           json_path = url_data['fragment'].split('/') if 'fragment' in url_data and url_data['fragment'] is not None else []
           for item in json_path:
@@ -270,7 +346,21 @@ class terrariumUtils():
         data = None
 
     except Exception as ex:
+      print(ex)
       logger.exception('Error parsing remote data at url %s. Exception %s' % (url, ex))
+
+    return data
+
+  @staticmethod
+  def get_script_data(script):
+    data = None
+    try:
+      logger.info('Running script: %s.' % (script))
+      data = subprocess.check_output(script, shell=True)
+      logger.info('Output was: %s.' % (data))
+    except Exception as ex:
+      print(ex)
+      logger.exception('Error parsing script data for script %s. Exception %s' % (script, ex))
 
     return data
 
@@ -355,14 +445,3 @@ class terrariumUtils():
   def format_filesize(n,pow=0,b=1024,u='B',pre=['']+[p+'i'for p in'KMGTPEZY']):
     pow,n=min(int(log(max(n*b**pow,1),b)),len(pre)-1),n*b**pow
     return "%%.%if %%s%%s"%abs(pow%(-pow-1))%(n/b**float(pow),pre[pow],u)
-
-# works in Python 2 & 3
-class _Singleton(type):
-    """ A metaclass that creates a Singleton base class when called. """
-    _instances = {}
-    def __call__(cls, *args, **kwargs):
-      if cls not in cls._instances:
-        cls._instances[cls] = super(_Singleton, cls).__call__(*args, **kwargs)
-      return cls._instances[cls]
-
-class terrariumSingleton(_Singleton('terrariumSingletonMeta', (object,), {})): pass

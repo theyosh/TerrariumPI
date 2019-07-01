@@ -1,9 +1,15 @@
 /* @preserve
- * Leaflet 1.3.4+Detached: 0e566b2ad5e696ba9f79a9d48a7e51c8f4892441.0e566b2, a JS library for interactive maps. http://leafletjs.com
+ * Leaflet 1.5.1+Detached: 2e3e0ffbe87f246eb76d86d2633ddd59b262830b.2e3e0ff, a JS library for interactive maps. http://leafletjs.com
  * (c) 2010-2018 Vladimir Agafonkin, (c) 2010-2011 CloudMade
  */
 
-var version = "1.3.4+HEAD.0e566b2";
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+	typeof define === 'function' && define.amd ? define(['exports'], factory) :
+	(factory((global.L = {})));
+}(this, (function (exports) { 'use strict';
+
+var version = "1.5.1+HEAD.2e3e0ff";
 
 /*
  * @namespace Util
@@ -121,8 +127,8 @@ function falseFn() { return false; }
 // @function formatNum(num: Number, digits?: Number): Number
 // Returns the number `num` rounded to `digits` decimals, or to 6 decimals by default.
 function formatNum(num, digits) {
-	var pow = Math.pow(10, (digits === undefined ? 6 : digits));
-	return Math.round(num * pow) / pow;
+	digits = (digits === undefined ? 6 : digits);
+	return +(Math.round(num + ('e+' + digits)) + ('e-' + digits));
 }
 
 // @function trim(str: String): String
@@ -462,7 +468,7 @@ var Events = {
 	 *
 	 * @alternative
 	 * @method off: this
-	 * Removes all listeners to all events on the object.
+	 * Removes all listeners to all events on the object. This includes implicitly attached events.
 	 */
 	off: function (types, fn, context) {
 
@@ -1642,9 +1648,11 @@ var Earth = extend({}, CRS, {
  * a sphere. Used by the `EPSG:3857` CRS.
  */
 
+var earthRadius = 6378137;
+
 var SphericalMercator = {
 
-	R: 6378137,
+	R: earthRadius,
 	MAX_LATITUDE: 85.0511287798,
 
 	project: function (latlng) {
@@ -1667,7 +1675,7 @@ var SphericalMercator = {
 	},
 
 	bounds: (function () {
-		var d = 6378137 * Math.PI;
+		var d = earthRadius * Math.PI;
 		return new Bounds([-d, -d], [d, d]);
 	})()
 };
@@ -2165,6 +2173,7 @@ function addDoubleTapListener(obj, handler, id) {
 				touch$$1 = newTouch;
 			}
 			touch$$1.type = 'dblclick';
+			touch$$1.button = 0;
 			handler(touch$$1);
 			last = null;
 		}
@@ -2284,7 +2293,7 @@ function empty(el) {
 // Makes `el` the last child of its parent, so it renders in front of the other children.
 function toFront(el) {
 	var parent = el.parentNode;
-	if (parent.lastChild !== el) {
+	if (parent && parent.lastChild !== el) {
 		parent.appendChild(el);
 	}
 }
@@ -2293,7 +2302,7 @@ function toFront(el) {
 // Makes `el` the first child of its parent, so it renders behind the other children.
 function toBack(el) {
 	var parent = el.parentNode;
-	if (parent.firstChild !== el) {
+	if (parent && parent.firstChild !== el) {
 		parent.insertBefore(el, parent.firstChild);
 	}
 }
@@ -2346,6 +2355,11 @@ function setClass(el, name) {
 // @function getClass(el: HTMLElement): String
 // Returns the element's class.
 function getClass(el) {
+	// Check if the element is an SVGElementInstance and use the correspondingElement instead
+	// (Required for linked SVG elements in IE11.)
+	if (el.correspondingElement) {
+		el = el.correspondingElement;
+	}
 	return el.className.baseVal === undefined ? el.className : el.className.baseVal;
 }
 
@@ -3107,6 +3121,13 @@ var Map = Evented.extend({
 	initialize: function (id, options) { // (HTMLElement or String, Object)
 		options = setOptions(this, options);
 
+		// Make sure to assign internal flags at the beginning,
+		// to avoid inconsistent state in some edge cases.
+		this._handlers = [];
+		this._layers = {};
+		this._zoomBoundLayers = {};
+		this._sizeChanged = true;
+
 		this._initContainer(id);
 		this._initLayout();
 
@@ -3126,11 +3147,6 @@ var Map = Evented.extend({
 		if (options.center && options.zoom !== undefined) {
 			this.setView(toLatLng(options.center), options.zoom, {reset: true});
 		}
-
-		this._handlers = [];
-		this._layers = {};
-		this._zoomBoundLayers = {};
-		this._sizeChanged = true;
 
 		this.callInitHooks();
 
@@ -3487,6 +3503,51 @@ var Map = Evented.extend({
 		}
 
 		this._enforcingBounds = false;
+		return this;
+	},
+
+	// @method panInside(latlng: LatLng, options?: options): this
+	// Pans the map the minimum amount to make the `latlng` visible. Use
+	// `padding`, `paddingTopLeft` and `paddingTopRight` options to fit
+	// the display to more restricted bounds, like [`fitBounds`](#map-fitbounds).
+	// If `latlng` is already within the (optionally padded) display bounds,
+	// the map will not be panned.
+	panInside: function (latlng, options) {
+		options = options || {};
+
+		var paddingTL = toPoint(options.paddingTopLeft || options.padding || [0, 0]),
+		    paddingBR = toPoint(options.paddingBottomRight || options.padding || [0, 0]),
+		    center = this.getCenter(),
+		    pixelCenter = this.project(center),
+		    pixelPoint = this.project(latlng),
+		    pixelBounds = this.getPixelBounds(),
+		    halfPixelBounds = pixelBounds.getSize().divideBy(2),
+		    paddedBounds = toBounds([pixelBounds.min.add(paddingTL), pixelBounds.max.subtract(paddingBR)]);
+
+		if (!paddedBounds.contains(pixelPoint)) {
+			this._enforcingBounds = true;
+			var diff = pixelCenter.subtract(pixelPoint),
+			    newCenter = toPoint(pixelPoint.x + diff.x, pixelPoint.y + diff.y);
+
+			if (pixelPoint.x < paddedBounds.min.x || pixelPoint.x > paddedBounds.max.x) {
+				newCenter.x = pixelCenter.x - diff.x;
+				if (diff.x > 0) {
+					newCenter.x += halfPixelBounds.x - paddingTL.x;
+				} else {
+					newCenter.x -= halfPixelBounds.x - paddingBR.x;
+				}
+			}
+			if (pixelPoint.y < paddedBounds.min.y || pixelPoint.y > paddedBounds.max.y) {
+				newCenter.y = pixelCenter.y - diff.y;
+				if (diff.y > 0) {
+					newCenter.y += halfPixelBounds.y - paddingTL.y;
+				} else {
+					newCenter.y -= halfPixelBounds.y - paddingBR.y;
+				}
+			}
+			this.panTo(this.unproject(newCenter), options);
+			this._enforcingBounds = false;
+		}
 		return this;
 	},
 
@@ -4250,9 +4311,15 @@ var Map = Evented.extend({
 		// this event. Also fired on mobile when the user holds a single touch
 		// for a second (also called long press).
 		// @event keypress: KeyboardEvent
-		// Fired when the user presses a key from the keyboard while the map is focused.
+		// Fired when the user presses a key from the keyboard that produces a character value while the map is focused.
+		// @event keydown: KeyboardEvent
+		// Fired when the user presses a key from the keyboard while the map is focused. Unlike the `keypress` event,
+		// the `keydown` event is fired for keys that produce a character value and for keys
+		// that do not produce a character value.
+		// @event keyup: KeyboardEvent
+		// Fired when the user releases a key from the keyboard while the map is focused.
 		onOff(this._container, 'click dblclick mousedown mouseup ' +
-			'mouseover mouseout mousemove contextmenu keypress', this._handleDOMEvent, this);
+			'mouseover mouseout mousemove contextmenu keypress keydown keyup', this._handleDOMEvent, this);
 
 		if (this.options.trackResize) {
 			onOff(window, 'resize', this._onResize, this);
@@ -4316,7 +4383,7 @@ var Map = Evented.extend({
 
 		var type = e.type;
 
-		if (type === 'mousedown' || type === 'keypress') {
+		if (type === 'mousedown' || type === 'keypress' || type === 'keyup' || type === 'keydown') {
 			// prevents outline when clicking on keyboard-focusable element
 			preventOutline(e.target || e.srcElement);
 		}
@@ -4355,7 +4422,7 @@ var Map = Evented.extend({
 			originalEvent: e
 		};
 
-		if (e.type !== 'keypress') {
+		if (e.type !== 'keypress' && e.type !== 'keydown' && e.type !== 'keyup') {
 			var isMarker = target.getLatLng && (!target._radius || target._radius <= 10);
 			data.containerPoint = isMarker ?
 				this.latLngToContainerPoint(target.getLatLng()) : this.mouseEventToContainerPoint(e);
@@ -4608,7 +4675,7 @@ var Map = Evented.extend({
 		}
 
 		// @event zoomanim: ZoomAnimEvent
-		// Fired on every frame of a zoom animation
+		// Fired at least once per zoom animation. For continuous zoom, like pinch zooming, fired once per frame during zoom.
 		this.fire('zoomanim', {
 			center: center,
 			zoom: zoom,
@@ -4726,6 +4793,8 @@ var Control = Class.extend({
 			corner.appendChild(container);
 		}
 
+		this._map.on('unload', this.remove, this);
+
 		return this;
 	},
 
@@ -4742,6 +4811,7 @@ var Control = Class.extend({
 			this.onRemove(this._map);
 		}
 
+		this._map.off('unload', this.remove, this);
 		this._map = null;
 
 		return this;
@@ -4964,13 +5034,13 @@ var Layers = Control.extend({
 	// Expand the control container if collapsed.
 	expand: function () {
 		addClass(this._container, 'leaflet-control-layers-expanded');
-		this._form.style.height = null;
+		this._section.style.height = null;
 		var acceptableHeight = this._map.getSize().y - (this._container.offsetTop + 50);
-		if (acceptableHeight < this._form.clientHeight) {
-			addClass(this._form, 'leaflet-control-layers-scrollbar');
-			this._form.style.height = acceptableHeight + 'px';
+		if (acceptableHeight < this._section.clientHeight) {
+			addClass(this._section, 'leaflet-control-layers-scrollbar');
+			this._section.style.height = acceptableHeight + 'px';
 		} else {
-			removeClass(this._form, 'leaflet-control-layers-scrollbar');
+			removeClass(this._section, 'leaflet-control-layers-scrollbar');
 		}
 		this._checkDisabledLayers();
 		return this;
@@ -4994,7 +5064,7 @@ var Layers = Control.extend({
 		disableClickPropagation(container);
 		disableScrollPropagation(container);
 
-		var form = this._form = create$1('form', className + '-list');
+		var section = this._section = create$1('section', className + '-list');
 
 		if (collapsed) {
 			this._map.on('click', this.collapse, this);
@@ -5022,11 +5092,11 @@ var Layers = Control.extend({
 			this.expand();
 		}
 
-		this._baseLayersList = create$1('div', className + '-base', form);
-		this._separator = create$1('div', className + '-separator', form);
-		this._overlaysList = create$1('div', className + '-overlays', form);
+		this._baseLayersList = create$1('div', className + '-base', section);
+		this._separator = create$1('div', className + '-separator', section);
+		this._overlaysList = create$1('div', className + '-overlays', section);
 
-		container.appendChild(form);
+		container.appendChild(section);
 	},
 
 	_getLayer: function (id) {
@@ -5139,7 +5209,7 @@ var Layers = Control.extend({
 			input.className = 'leaflet-control-layers-selector';
 			input.defaultChecked = checked;
 		} else {
-			input = this._createRadioElement('leaflet-base-layers', checked);
+			input = this._createRadioElement('leaflet-base-layers_' + stamp(this), checked);
 		}
 
 		this._layerControlInputs.push(input);
@@ -5524,7 +5594,7 @@ var Attribution = Control.extend({
 
 		// @option prefix: String = 'Leaflet'
 		// The HTML text shown before the attributions. Pass `false` to disable.
-		prefix: '<a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>'
+		prefix: '<a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>'
 	},
 
 	initialize: function (options) {
@@ -6269,7 +6339,7 @@ var LonLat = {
  * @namespace Projection
  * @projection L.Projection.Mercator
  *
- * Elliptical Mercator projection — more complex than Spherical Mercator. Takes into account that Earth is a geoid, not a perfect sphere. Used by the EPSG:3395 CRS.
+ * Elliptical Mercator projection — more complex than Spherical Mercator. Assumes that Earth is an ellipsoid. Used by the EPSG:3395 CRS.
  */
 
 var Mercator = {
@@ -6429,7 +6499,7 @@ CRS.Simple = Simple;
  * @example
  *
  * ```js
- * var layer = L.Marker(latlng).addTo(map);
+ * var layer = L.marker(latlng).addTo(map);
  * layer.addTo(map);
  * layer.remove();
  * ```
@@ -6451,7 +6521,7 @@ var Layer = Evented.extend({
 		pane: 'overlayPane',
 
 		// @option attribution: String = null
-		// String to be shown in the attribution control, describes the layer data, e.g. "© Mapbox".
+		// String to be shown in the attribution control, e.g. "© OpenStreetMap contributors". It describes the layer data and is often a legal obligation towards copyright holders and tile providers.
 		attribution: null,
 
 		bubblingMouseEvents: true
@@ -7360,6 +7430,10 @@ var Marker = Layer.extend({
 		// `Map pane` where the markers icon will be added.
 		pane: 'markerPane',
 
+		// @option pane: String = 'shadowPane'
+		// `Map pane` where the markers shadow will be added.
+		shadowPane: 'shadowPane',
+
 		// @option bubblingMouseEvents: Boolean = false
 		// When `true`, a mouse event on this marker will trigger the same event on the map
 		// (unless [`L.DomEvent.stopPropagation`](#domevent-stoppropagation) is used).
@@ -7450,6 +7524,12 @@ var Marker = Layer.extend({
 	setZIndexOffset: function (offset) {
 		this.options.zIndexOffset = offset;
 		return this.update();
+	},
+
+	// @method getIcon: Icon
+	// Returns the current icon used by the marker
+	getIcon: function () {
+		return this.options.icon;
 	},
 
 	// @method setIcon(icon: Icon): this
@@ -7547,7 +7627,7 @@ var Marker = Layer.extend({
 		}
 		this._initInteraction();
 		if (newShadow && addShadow) {
-			this.getPane('shadowPane').appendChild(this._shadow);
+			this.getPane(options.shadowPane).appendChild(this._shadow);
 		}
 	},
 
@@ -7631,7 +7711,9 @@ var Marker = Layer.extend({
 	_updateOpacity: function () {
 		var opacity = this.options.opacity;
 
-		setOpacity(this._icon, opacity);
+		if (this._icon) {
+			setOpacity(this._icon, opacity);
+		}
 
 		if (this._shadow) {
 			setOpacity(this._shadow, opacity);
@@ -7768,6 +7850,9 @@ var Path = Layer.extend({
 		setOptions(this, style);
 		if (this._renderer) {
 			this._renderer._updateStyle(this);
+			if (this.options.stroke && style.hasOwnProperty('weight')) {
+				this._updateBounds();
+			}
 		}
 		return this;
 	},
@@ -8209,14 +8294,19 @@ var Polyline = Path.extend({
 		this._rings = [];
 		this._projectLatlngs(this._latlngs, this._rings, pxBounds);
 
+		if (this._bounds.isValid() && pxBounds.isValid()) {
+			this._rawPxBounds = pxBounds;
+			this._updateBounds();
+		}
+	},
+
+	_updateBounds: function () {
 		var w = this._clickTolerance(),
 		    p = new Point(w, w);
-
-		if (this._bounds.isValid() && pxBounds.isValid()) {
-			pxBounds.min._subtract(p);
-			pxBounds.max._add(p);
-			this._pxBounds = pxBounds;
-		}
+		this._pxBounds = new Bounds([
+			this._rawPxBounds.min.subtract(p),
+			this._rawPxBounds.max.add(p)
+		]);
 	},
 
 	// recursively turns latlngs into a set of rings with projected coordinates
@@ -8646,10 +8736,10 @@ var GeoJSON = FeatureGroup.extend({
 	},
 
 	_setLayerStyle: function (layer, style) {
-		if (typeof style === 'function') {
-			style = style(layer.feature);
-		}
 		if (layer.setStyle) {
+			if (typeof style === 'function') {
+				style = style(layer.feature);
+			}
 			layer.setStyle(style);
 		}
 	}
@@ -8799,19 +8889,25 @@ var PointToGeoJSON = {
 };
 
 // @namespace Marker
-// @method toGeoJSON(): Object
+// @method toGeoJSON(precision?: Number): Object
+// `precision` is the number of decimal places for coordinates.
+// The default value is 6 places.
 // Returns a [`GeoJSON`](http://en.wikipedia.org/wiki/GeoJSON) representation of the marker (as a GeoJSON `Point` Feature).
 Marker.include(PointToGeoJSON);
 
 // @namespace CircleMarker
-// @method toGeoJSON(): Object
+// @method toGeoJSON(precision?: Number): Object
+// `precision` is the number of decimal places for coordinates.
+// The default value is 6 places.
 // Returns a [`GeoJSON`](http://en.wikipedia.org/wiki/GeoJSON) representation of the circle marker (as a GeoJSON `Point` Feature).
 Circle.include(PointToGeoJSON);
 CircleMarker.include(PointToGeoJSON);
 
 
 // @namespace Polyline
-// @method toGeoJSON(): Object
+// @method toGeoJSON(precision?: Number): Object
+// `precision` is the number of decimal places for coordinates.
+// The default value is 6 places.
 // Returns a [`GeoJSON`](http://en.wikipedia.org/wiki/GeoJSON) representation of the polyline (as a GeoJSON `LineString` or `MultiLineString` Feature).
 Polyline.include({
 	toGeoJSON: function (precision) {
@@ -8827,7 +8923,9 @@ Polyline.include({
 });
 
 // @namespace Polygon
-// @method toGeoJSON(): Object
+// @method toGeoJSON(precision?: Number): Object
+// `precision` is the number of decimal places for coordinates.
+// The default value is 6 places.
 // Returns a [`GeoJSON`](http://en.wikipedia.org/wiki/GeoJSON) representation of the polygon (as a GeoJSON `Polygon` or `MultiPolygon` Feature).
 Polygon.include({
 	toGeoJSON: function (precision) {
@@ -8863,7 +8961,9 @@ LayerGroup.include({
 		});
 	},
 
-	// @method toGeoJSON(): Object
+	// @method toGeoJSON(precision?: Number): Object
+	// `precision` is the number of decimal places for coordinates.
+	// The default value is 6 places.
 	// Returns a [`GeoJSON`](http://en.wikipedia.org/wiki/GeoJSON) representation of the layer group (as a GeoJSON `FeatureCollection`, `GeometryCollection`, or `MultiPoint`).
 	toGeoJSON: function (precision) {
 
@@ -9208,7 +9308,12 @@ var VideoOverlay = ImageOverlay.extend({
 
 		// @option loop: Boolean = true
 		// Whether the video will loop back to the beginning when played.
-		loop: true
+		loop: true,
+
+		// @option keepAspectRatio: Boolean = true
+		// Whether the video will save aspect ratio after the projection.
+		// Relevant for supported browsers. Browser compatibility- https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
+		keepAspectRatio: true
 	},
 
 	_initImage: function () {
@@ -9238,6 +9343,7 @@ var VideoOverlay = ImageOverlay.extend({
 
 		if (!isArray(this._url)) { this._url = [this._url]; }
 
+		if (!this.options.keepAspectRatio && vid.style.hasOwnProperty('objectFit')) { vid.style['objectFit'] = 'fill'; }
 		vid.autoplay = !!this.options.autoplay;
 		vid.loop = !!this.options.loop;
 		for (var i = 0; i < this._url.length; i++) {
@@ -9259,6 +9365,49 @@ var VideoOverlay = ImageOverlay.extend({
 
 function videoOverlay(video, bounds, options) {
 	return new VideoOverlay(video, bounds, options);
+}
+
+/*
+ * @class SVGOverlay
+ * @aka L.SVGOverlay
+ * @inherits ImageOverlay
+ *
+ * Used to load, display and provide DOM access to an SVG file over specific bounds of the map. Extends `ImageOverlay`.
+ *
+ * An SVG overlay uses the [`<svg>`](https://developer.mozilla.org/docs/Web/SVG/Element/svg) element.
+ *
+ * @example
+ *
+ * ```js
+ * var element = '<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><image xlink:href="https://mdn.mozillademos.org/files/6457/mdn_logo_only_color.png" height="200" width="200"/></svg>',
+ * 		 elementBounds = [ [ 32, -130 ], [ 13, -100 ] ];
+ * L.svgOverlay(element, elementBounds).addTo(map);
+ * ```
+ */
+
+var SVGOverlay = ImageOverlay.extend({
+	_initImage: function () {
+		var el = this._image = this._url;
+
+		addClass(el, 'leaflet-image-layer');
+		if (this._zoomAnimated) { addClass(el, 'leaflet-zoom-animated'); }
+
+		el.onselectstart = falseFn;
+		el.onmousemove = falseFn;
+	}
+
+	// @method getElement(): SVGElement
+	// Returns the instance of [`SVGElement`](https://developer.mozilla.org/docs/Web/API/SVGElement)
+	// used by this overlay.
+});
+
+
+// @factory L.svgOverlay(svg: String|SVGElement, bounds: LatLngBounds, options?: SVGOverlay options)
+// Instantiates an image overlay object given an SVG element and the geographical bounds it is tied to.
+// A viewBox attribute is required on the SVG element to zoom in and out properly.
+
+function svgOverlay(el, bounds, options) {
+	return new SVGOverlay(el, bounds, options);
 }
 
 /*
@@ -9413,6 +9562,38 @@ var DivOverlay = Layer.extend({
 			toBack(this._container);
 		}
 		return this;
+	},
+
+	_prepareOpen: function (parent, layer, latlng) {
+		if (!(layer instanceof Layer)) {
+			latlng = layer;
+			layer = parent;
+		}
+
+		if (layer instanceof FeatureGroup) {
+			for (var id in parent._layers) {
+				layer = parent._layers[id];
+				break;
+			}
+		}
+
+		if (!latlng) {
+			if (layer.getCenter) {
+				latlng = layer.getCenter();
+			} else if (layer.getLatLng) {
+				latlng = layer.getLatLng();
+			} else {
+				throw new Error('Unable to get source layer LatLng.');
+			}
+		}
+
+		// set overlay source to this layer
+		this._source = layer;
+
+		// update the overlay (content, layout, ect...)
+		this.update();
+
+		return latlng;
 	},
 
 	_updateContent: function () {
@@ -9686,7 +9867,8 @@ var Popup = DivOverlay.extend({
 	},
 
 	_adjustPan: function () {
-		if (!this.options.autoPan || (this._map._panAnim && this._map._panAnim._inProgress)) { return; }
+		if (!this.options.autoPan) { return; }
+		if (this._map._panAnim) { this._map._panAnim.stop(); }
 
 		var map = this._map,
 		    marginBottom = parseInt(getStyle(this._container, 'marginBottom'), 10) || 0,
@@ -9868,28 +10050,8 @@ Layer.include({
 	// @method openPopup(latlng?: LatLng): this
 	// Opens the bound popup at the specified `latlng` or at the default popup anchor if no `latlng` is passed.
 	openPopup: function (layer, latlng) {
-		if (!(layer instanceof Layer)) {
-			latlng = layer;
-			layer = this;
-		}
-
-		if (layer instanceof FeatureGroup) {
-			for (var id in this._layers) {
-				layer = this._layers[id];
-				break;
-			}
-		}
-
-		if (!latlng) {
-			latlng = layer.getCenter ? layer.getCenter() : layer.getLatLng();
-		}
-
 		if (this._popup && this._map) {
-			// set popup source to this layer
-			this._popup._source = layer;
-
-			// update the popup (content, layout, ect...)
-			this._popup.update();
+			latlng = this._popup._prepareOpen(this, layer, latlng);
 
 			// open the popup on the map
 			this._map.openPopup(this._popup, latlng);
@@ -10286,29 +10448,8 @@ Layer.include({
 	// @method openTooltip(latlng?: LatLng): this
 	// Opens the bound tooltip at the specified `latlng` or at the default tooltip anchor if no `latlng` is passed.
 	openTooltip: function (layer, latlng) {
-		if (!(layer instanceof Layer)) {
-			latlng = layer;
-			layer = this;
-		}
-
-		if (layer instanceof FeatureGroup) {
-			for (var id in this._layers) {
-				layer = this._layers[id];
-				break;
-			}
-		}
-
-		if (!latlng) {
-			latlng = layer.getCenter ? layer.getCenter() : layer.getLatLng();
-		}
-
 		if (this._tooltip && this._map) {
-
-			// set tooltip source to this layer
-			this._tooltip._source = layer;
-
-			// update the tooltip (content, layout, ect...)
-			this._tooltip.update();
+			latlng = this._tooltip._prepareOpen(this, layer, latlng);
 
 			// open the tooltip on the map
 			this._map.openTooltip(this._tooltip, latlng);
@@ -10419,8 +10560,9 @@ var DivIcon = Icon.extend({
 		// iconAnchor: (Point),
 		// popupAnchor: (Point),
 
-		// @option html: String = ''
-		// Custom HTML code to put inside the div element, empty by default.
+		// @option html: String|HTMLElement = ''
+		// Custom HTML code to put inside the div element, empty by default. Alternatively,
+		// an instance of `HTMLElement`.
 		html: false,
 
 		// @option bgPos: Point = [0, 0]
@@ -10434,7 +10576,12 @@ var DivIcon = Icon.extend({
 		var div = (oldIcon && oldIcon.tagName === 'DIV') ? oldIcon : document.createElement('div'),
 		    options = this.options;
 
-		div.innerHTML = options.html !== false ? options.html : '';
+		if (options.html instanceof Element) {
+			empty(div);
+			div.appendChild(options.html);
+		} else {
+			div.innerHTML = options.html !== false ? options.html : '';
+		}
 
 		if (options.bgPos) {
 			var bgPos = toPoint(options.bgPos);
@@ -11377,12 +11524,12 @@ function gridLayer(options) {
  * @class TileLayer
  * @inherits GridLayer
  * @aka L.TileLayer
- * Used to load and display tile layers on the map. Extends `GridLayer`.
+ * Used to load and display tile layers on the map. Note that most tile servers require attribution, which you can set under `Layer`. Extends `GridLayer`.
  *
  * @example
  *
  * ```js
- * L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar'}).addTo(map);
+ * L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'}).addTo(map);
  * ```
  *
  * @section URL template
@@ -11482,7 +11629,13 @@ var TileLayer = GridLayer.extend({
 
 	// @method setUrl(url: String, noRedraw?: Boolean): this
 	// Updates the layer's URL template and redraws it (unless `noRedraw` is set to `true`).
+	// If the URL does not change, the layer will not be redrawn unless
+	// the noRedraw parameter is set to false.
 	setUrl: function (url, noRedraw) {
+		if (this._url === url && noRedraw === undefined) {
+			noRedraw = true;
+		}
+
 		this._url = url;
 
 		if (!noRedraw) {
@@ -11989,8 +12142,6 @@ var Canvas = Renderer.extend({
 	_update: function () {
 		if (this._map._animatingZoom && this._bounds) { return; }
 
-		this._drawnLayers = {};
-
 		Renderer.prototype._update.call(this);
 
 		var b = this._bounds,
@@ -12060,8 +12211,6 @@ var Canvas = Renderer.extend({
 			this._drawFirst = next;
 		}
 
-		delete this._drawnLayers[layer._leaflet_id];
-
 		delete layer._order;
 
 		delete this._layers[stamp(layer)];
@@ -12089,9 +12238,13 @@ var Canvas = Renderer.extend({
 		if (typeof layer.options.dashArray === 'string') {
 			var parts = layer.options.dashArray.split(/[, ]+/),
 			    dashArray = [],
+			    dashValue,
 			    i;
 			for (i = 0; i < parts.length; i++) {
-				dashArray.push(Number(parts[i]));
+				dashValue = Number(parts[i]);
+				// Ignore dash array containing invalid lengths
+				if (isNaN(dashValue)) { return; }
+				dashArray.push(dashValue);
 			}
 			layer.options._dashArray = dashArray;
 		} else {
@@ -12173,8 +12326,6 @@ var Canvas = Renderer.extend({
 
 		if (!len) { return; }
 
-		this._drawnLayers[layer._leaflet_id] = layer;
-
 		ctx.beginPath();
 
 		for (i = 0; i < len; i++) {
@@ -12200,8 +12351,6 @@ var Canvas = Renderer.extend({
 		    ctx = this._ctx,
 		    r = Math.max(Math.round(layer._radius), 1),
 		    s = (Math.max(Math.round(layer._radiusY), 1) || r) / r;
-
-		this._drawnLayers[layer._leaflet_id] = layer;
 
 		if (s !== 1) {
 			ctx.save();
@@ -12307,6 +12456,9 @@ var Canvas = Renderer.extend({
 
 	_bringToFront: function (layer) {
 		var order = layer._order;
+
+		if (!order) { return; }
+
 		var next = order.next;
 		var prev = order.prev;
 
@@ -12335,6 +12487,9 @@ var Canvas = Renderer.extend({
 
 	_bringToBack: function (layer) {
 		var order = layer._order;
+
+		if (!order) { return; }
+
 		var next = order.next;
 		var prev = order.prev;
 
@@ -12390,7 +12545,6 @@ var vmlCreate = (function () {
 /*
  * @class SVG
  *
- * Although SVG is not available on IE7 and IE8, these browsers support [VML](https://en.wikipedia.org/wiki/Vector_Markup_Language), and the SVG renderer will fall back to VML in this case.
  *
  * VML was deprecated in 2012, which means VML functionality exists only for backwards compatibility
  * with old versions of Internet Explorer.
@@ -13774,5 +13928,93 @@ Map.TouchZoom = TouchZoom;
 
 Object.freeze = freeze;
 
-export { version, Control, control, Browser, Evented, Mixin, Util, Class, Handler, extend, bind, stamp, setOptions, DomEvent, DomUtil, PosAnimation, Draggable, LineUtil, PolyUtil, Point, toPoint as point, Bounds, toBounds as bounds, Transformation, toTransformation as transformation, index as Projection, LatLng, toLatLng as latLng, LatLngBounds, toLatLngBounds as latLngBounds, CRS, GeoJSON, geoJSON, geoJson, Layer, LayerGroup, layerGroup, FeatureGroup, featureGroup, ImageOverlay, imageOverlay, VideoOverlay, videoOverlay, DivOverlay, Popup, popup, Tooltip, tooltip, Icon, icon, DivIcon, divIcon, Marker, marker, TileLayer, tileLayer, GridLayer, gridLayer, SVG, svg$1 as svg, Renderer, Canvas, canvas$1 as canvas, Path, CircleMarker, circleMarker, Circle, circle, Polyline, polyline, Polygon, polygon, Rectangle, rectangle, Map, createMap as map };
-//# sourceMappingURL=leaflet-src.esm.js.map
+exports.version = version;
+exports.Control = Control;
+exports.control = control;
+exports.Browser = Browser;
+exports.Evented = Evented;
+exports.Mixin = Mixin;
+exports.Util = Util;
+exports.Class = Class;
+exports.Handler = Handler;
+exports.extend = extend;
+exports.bind = bind;
+exports.stamp = stamp;
+exports.setOptions = setOptions;
+exports.DomEvent = DomEvent;
+exports.DomUtil = DomUtil;
+exports.PosAnimation = PosAnimation;
+exports.Draggable = Draggable;
+exports.LineUtil = LineUtil;
+exports.PolyUtil = PolyUtil;
+exports.Point = Point;
+exports.point = toPoint;
+exports.Bounds = Bounds;
+exports.bounds = toBounds;
+exports.Transformation = Transformation;
+exports.transformation = toTransformation;
+exports.Projection = index;
+exports.LatLng = LatLng;
+exports.latLng = toLatLng;
+exports.LatLngBounds = LatLngBounds;
+exports.latLngBounds = toLatLngBounds;
+exports.CRS = CRS;
+exports.GeoJSON = GeoJSON;
+exports.geoJSON = geoJSON;
+exports.geoJson = geoJson;
+exports.Layer = Layer;
+exports.LayerGroup = LayerGroup;
+exports.layerGroup = layerGroup;
+exports.FeatureGroup = FeatureGroup;
+exports.featureGroup = featureGroup;
+exports.ImageOverlay = ImageOverlay;
+exports.imageOverlay = imageOverlay;
+exports.VideoOverlay = VideoOverlay;
+exports.videoOverlay = videoOverlay;
+exports.SVGOverlay = SVGOverlay;
+exports.svgOverlay = svgOverlay;
+exports.DivOverlay = DivOverlay;
+exports.Popup = Popup;
+exports.popup = popup;
+exports.Tooltip = Tooltip;
+exports.tooltip = tooltip;
+exports.Icon = Icon;
+exports.icon = icon;
+exports.DivIcon = DivIcon;
+exports.divIcon = divIcon;
+exports.Marker = Marker;
+exports.marker = marker;
+exports.TileLayer = TileLayer;
+exports.tileLayer = tileLayer;
+exports.GridLayer = GridLayer;
+exports.gridLayer = gridLayer;
+exports.SVG = SVG;
+exports.svg = svg$1;
+exports.Renderer = Renderer;
+exports.Canvas = Canvas;
+exports.canvas = canvas$1;
+exports.Path = Path;
+exports.CircleMarker = CircleMarker;
+exports.circleMarker = circleMarker;
+exports.Circle = Circle;
+exports.circle = circle;
+exports.Polyline = Polyline;
+exports.polyline = polyline;
+exports.Polygon = Polygon;
+exports.polygon = polygon;
+exports.Rectangle = Rectangle;
+exports.rectangle = rectangle;
+exports.Map = Map;
+exports.map = createMap;
+
+var oldL = window.L;
+exports.noConflict = function() {
+	window.L = oldL;
+	return this;
+}
+
+// Always export us to window global (see #2364)
+window.L = exports;
+
+})));
+//# sourceMappingURL=leaflet-src.js.map

@@ -85,13 +85,13 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_alarm_min_timer_on">{{_('Timer on')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="light_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="light_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_alarm_min_timer_off">{{_('Timer off')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="light_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="light_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
@@ -125,13 +125,13 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_alarm_max_timer_on">{{_('Timer on')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="light_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="light_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="light_alarm_max_timer_off">{{_('Timer off')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="light_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="light_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
@@ -225,13 +225,13 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_min_timer_on">{{_('Timer on')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_min_timer_off">{{_('Timer off')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
@@ -301,13 +301,13 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_max_timer_on">{{_('Timer on')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temperature_alarm_max_timer_off">{{_('Timer off')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="temperature_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
@@ -436,13 +436,13 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_min_timer_on">{{_('Timer on')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_min_timer_off">{{_('Timer off')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
@@ -512,13 +512,13 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_max_timer_on">{{_('Timer on')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="humidity_alarm_max_timer_off">{{_('Timer off')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="humidity_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
@@ -647,13 +647,13 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_min_timer_on">{{_('Timer on')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_min_timer_off">{{_('Timer off')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
@@ -723,13 +723,13 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_max_timer_on">{{_('Timer on')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="moisture_alarm_max_timer_off">{{_('Timer off')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="moisture_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
@@ -858,13 +858,13 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_min_timer_on">{{_('Timer on')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_min_timer_off">{{_('Timer off')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
@@ -934,13 +934,13 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_max_timer_on">{{_('Timer on')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="conductivity_alarm_max_timer_off">{{_('Timer off')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="conductivity_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
@@ -1069,13 +1069,13 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_min_timer_on">{{_('Timer on')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="ph_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="ph_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_min_timer_off">{{_('Timer off')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="ph_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="ph_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
@@ -1145,13 +1145,13 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_max_timer_on">{{_('Timer on')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="ph_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="ph_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ph_alarm_max_timer_off">{{_('Timer off')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="ph_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="ph_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
@@ -1281,13 +1281,13 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_min_timer_on">{{_('Timer on')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_min_timer_off">{{_('Timer off')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
@@ -1333,13 +1333,13 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_max_timer_on">{{_('Timer on')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="watertank_alarm_max_timer_off">{{_('Timer off')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="watertank_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
@@ -1444,13 +1444,13 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fertility_alarm_min_timer_on">{{_('Timer on')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="fertility_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="fertility_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fertility_alarm_min_timer_off">{{_('Timer off')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="fertility_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="fertility_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
@@ -1520,13 +1520,13 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fertility_alarm_max_timer_on">{{_('Timer on')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="fertility_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="fertility_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fertility_alarm_max_timer_off">{{_('Timer off')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="fertility_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="fertility_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
@@ -1655,13 +1655,13 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="co2_alarm_min_timer_on">{{_('Timer on')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="co2_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="co2_alarm_min_timer_on" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="co2_alarm_min_timer_off">{{_('Timer off')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="co2_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="co2_alarm_min_timer_off" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
@@ -1731,13 +1731,13 @@
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="co2_alarm_max_timer_on">{{_('Timer on')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="co2_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="co2_alarm_max_timer_on" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_on_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="co2_alarm_max_timer_off">{{_('Timer off')}}</label>
                             <div class="col-md-7 col-sm-6 col-xs-10">
-                              <input class="form-control col-md-7 col-xs-12" name="co2_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in seconds')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
+                              <input class="form-control col-md-7 col-xs-12" name="co2_alarm_max_timer_off" required="required" type="text" placeholder="{{_('Duration in minutes')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('environment_field_off_duration')}}">
                             </div>
                           </div>
                           <div class="form-group">
