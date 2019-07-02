@@ -2909,7 +2909,11 @@ function load_calendar_history() {
                                event_date.getTime() + (event_date.getTimezoneOffset() * 60000),
                                'calendar.html');
     });
-    $('ul.nav.navbar-nav.navbar-right li#calendar span.badge.bg-green').text(data.length);
+    if (data.length == 0) {
+      $('ul.nav.navbar-nav.navbar-right li#calendar span.badge.bg-green').addClass('hidden');
+    } else {
+      $('ul.nav.navbar-nav.navbar-right li#calendar span.badge.bg-green').removeClass('hidden').text(data.length);
+    }
     $('ul.nav.navbar-nav.navbar-right ul#calendar_messages li.no_message').toggle(data.length==0);
   });
 }
