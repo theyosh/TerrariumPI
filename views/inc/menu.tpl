@@ -226,7 +226,7 @@
                 <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown" href="javascript:;">
                   <span class="online">
                     <i class="fa fa-calendar green"></i> <span>{{_('Calendar')}}</span>
-                    <span class="badge bg-green">0</span>
+                    <span class="badge bg-green hidden">0</span>
                   </span>
                 </a>
                 <ul class="dropdown-menu list-unstyled msg_list" id="calendar_messages" role="menu">
