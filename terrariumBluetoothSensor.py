@@ -38,8 +38,8 @@ class terrariumMiFloraSensor(terrariumSensorSource):
       try:
         sensor = Peripheral(self.get_address())
         #Read battery and firmware version attribute
-        data = sensor.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_FIRMWARE_AND_BATTERY).decode('utf-8')
-        data = {'battery': ord(data[0]), 'firmware' : data[2:]}
+        data = unpack('<xB5s',sensor.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_FIRMWARE_AND_BATTERY))
+        data = {'battery': data[0], 'firmware' : data[1]}
 
         #Enable real-time data reading
         sensor.writeCharacteristic(terrariumMiFloraSensor.__MIFLORA_REALTIME_DATA_TRIGGER, bytearray([0xa0, 0x1f]), True)
@@ -53,6 +53,9 @@ class terrariumMiFloraSensor(terrariumSensorSource):
         data['light']       = float(data['light'])
         data['moisture']    = float(data['moisture'])
         data['fertility']   = float(data['fertility'])
+        data['battery']     = float(data['battery'])
+        data['firmware']    = data['firmware'].decode('utf8')
+
       except Exception as ex:
         logger.warning('Error getting new data from {} sensor \'{}\'. Error message: {}'.format(self.get_type(),self.get_name(),ex))
 
