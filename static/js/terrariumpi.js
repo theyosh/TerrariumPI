@@ -15,6 +15,7 @@ var globals = {
   language: null,
   ajaxloader: 0,
   horizontal_legend: 0,
+  reboot: false,
 };
 // Single variable that is used for loading the status and settings rows for: sensors, power switches, door indicators etc
 var source_row = null;
@@ -402,6 +403,11 @@ function websocket_init(reconnect) {
   };
 
   globals.websocket.onmessage = function(evt) {
+    if (globals.reboot) {
+      // When a reboot is triggered, the first connection message is also a trigger that the reboot has finished. So reload the page!
+      location.reload();
+    }
+
     online_updater();
     var data = JSON.parse(evt.data);
     switch (data.type) {

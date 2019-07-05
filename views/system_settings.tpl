@@ -344,14 +344,33 @@
               });
             });
 
+            var reboot_html = $('<div class="offline_animation"><div class="message"></div><div class="blackscreen"></div></div>');
             $('button#reboot_pi').on('click',function(){
               if (confirm('{{_("Are you sure you want to reboot Terrarium PI?")}}')) {
+
+                $('html').addClass('_off');
+                $('body').addClass('_off').append(reboot_html);
+
+                $('.message').html('<h1>{{_("Rebooting")}}...</h1><span class="timer">0 {{_("seconds")}}</span>');
+
+                var timer = 1;
+                setInterval(function(){
+                  globals.reboot = true;
+                  $('body._off div.offline_animation div.message span.timer').text(timer++ + ' {{_("seconds")}}');
+                },1000);
+
                 $.post('/api/reboot');
               }
             });
 
             $('button#shutdown_pi').on('click',function(){
               if (confirm('{{_("Are you sure you want to shutdown Terrarium PI?")}}')) {
+
+                $('html').addClass('_off');
+                $('body').addClass('_off').append(reboot_html);
+
+                $('.message').html('<h1>{{_("Shutdown!")}}</h1>{{_("bye bye")}}');
+
                 $.post('/api/shutdown');
               }
             });
