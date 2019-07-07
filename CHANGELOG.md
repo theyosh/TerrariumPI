@@ -2,6 +2,263 @@ Changelog
 =========
 
 
+3.9.7 (2019-07-07)
+------------
+
+**New**
+------
+- Add shutdown option. Needs a rerun of the installer. [#306](https://github.com/theyosh/TerrariumPI/issues/306). [TheYOSH]
+- Add icalender explicit in the python libraries installation. [#308](https://github.com/theyosh/TerrariumPI/issues/308).
+  [TheYOSH]
+- Add first attempt for hardware changing reminders. When changing
+  hardare, use the option under the wrench icon at the power switch.
+  [#253](https://github.com/theyosh/TerrariumPI/issues/253). [TheYOSH]
+- Add iCal support for external calendars (readonly) [TheYOSH]
+- Add new graph period to power switches based on last hardware
+  replacement. [#253](https://github.com/theyosh/TerrariumPI/issues/253). [TheYOSH]
+- Add example difference script for script sensor usage. [#300](https://github.com/theyosh/TerrariumPI/issues/300). [TheYOSH]
+- Add option to disable motion boxes. [tvStatic]
+- Add script sensor type. [tvStatic]
+- Add support for AM2320 (untested) [#296](https://github.com/theyosh/TerrariumPI/issues/296). [TheYOSH]
+- Add graphs smoothing option. [TheYOSH]
+- Add missing Clappr.io parts. [TheYOSH]
+- Add reading out the remote state. [#274](https://github.com/theyosh/TerrariumPI/issues/274). [TheYOSH]
+- Add option to hide the environment summary on the dashboard. [#281](https://github.com/theyosh/TerrariumPI/issues/281).
+  [TheYOSH]
+- Add Sonoff support for Tasmota, ESP Easy and ESPurna firmware.
+  [TheYOSH]
+
+**Fixes**
+------
+- Fix MiFlore battery status. [TheYOSH]
+- Fix adding new sensors. [TheYOSH]
+- Fix adding new sensors. [TheYOSH]
+- Final fixes for [#296](https://github.com/theyosh/TerrariumPI/issues/296). [TheYOSH]
+- Fixes for [#296](https://github.com/theyosh/TerrariumPI/issues/296). [TheYOSH]
+- Fixes for [#296](https://github.com/theyosh/TerrariumPI/issues/296). [TheYOSH]
+- For now, we keep the old Merioss library. Should fix issues. [#286](https://github.com/theyosh/TerrariumPI/issues/286).
+  [TheYOSH]
+- Fix bug in values conversion. [#283](https://github.com/theyosh/TerrariumPI/issues/283). [TheYOSH]
+- Fix 1. [#274](https://github.com/theyosh/TerrariumPI/issues/274). [TheYOSH]
+- Fix some Sonoff issues. [#274](https://github.com/theyosh/TerrariumPI/issues/274). [TheYOSH]
+
+**Updates**
+------
+- Update version number. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update submodules. [TheYOSH]
+- Next update for calendar system. [#253](https://github.com/theyosh/TerrariumPI/issues/253). [TheYOSH]
+- Update webcam code. [TheYOSH]
+- Update clappr.io player to version 0.3.6. [TheYOSH]
+- Update submodules and libraries. [TheYOSH]
+- Update translations. [TheYOSH]
+- Update help information. [#285](https://github.com/theyosh/TerrariumPI/issues/285). [TheYOSH]
+- Update modules. [TheYOSH]
+
+**Other**
+------
+- Fancy reboot and shutdown screens.... reboot will also reload the
+  interface when the server is back. [#306](https://github.com/theyosh/TerrariumPI/issues/306). [TheYOSH]
+- Support custom scripts for power switches. [#309](https://github.com/theyosh/TerrariumPI/issues/309). [TheYOSH]
+- Hide zero calender badge. [TheYOSH]
+- First step calendar system. [TheYOSH]
+- Make webbased rebooting possible. Needs a re-run from the installer.
+  [#306](https://github.com/theyosh/TerrariumPI/issues/306). [TheYOSH]
+- Changed disabled/enable hardware type in edit scren for settings,
+  switches, doors. [#307](https://github.com/theyosh/TerrariumPI/issues/307) [#299](https://github.com/theyosh/TerrariumPI/issues/299). [TheYOSH]
+- Disable hardware changes for existing sensors, switches and doors.
+  [#299](https://github.com/theyosh/TerrariumPI/issues/299). [TheYOSH]
+- Merge pull request [#302](https://github.com/theyosh/TerrariumPI/issues/302) from tvStatic/issue/299. [TheYOSH]
+
+  Disable Hardware select box after hardware creation
+- Disable Hardware select box after sensor creation. [tvStatic]
+- Better UX for webcam motion boxes. [TheYOSH]
+- Merge pull request [#304](https://github.com/theyosh/TerrariumPI/issues/304) from tvStatic/feature/disable_motion_boxes.
+  [TheYOSH]
+
+  Add option to disable motion boxes
+- Merge pull request [#301](https://github.com/theyosh/TerrariumPI/issues/301) from tvStatic/feature/script_sensor. [TheYOSH]
+
+  Add script sensor type
+- Increase swap space for Raspberry PI Zero support. [#290](https://github.com/theyosh/TerrariumPI/issues/290). [TheYOSH]
+- Better system temperature gauge. [#283](https://github.com/theyosh/TerrariumPI/issues/283). [TheYOSH]
+- Sticky hide menu through cookies. [#281](https://github.com/theyosh/TerrariumPI/issues/281). [TheYOSH]
+- Remove some debug. [TheYOSH]
+- Remove explicit type check. So it would work with more hardware
+  variants. [#276](https://github.com/theyosh/TerrariumPI/issues/276). [TheYOSH]
+- Remove buggy check. [#276](https://github.com/theyosh/TerrariumPI/issues/276). [TheYOSH]
+
+
+3.9.6 (2019-03-20)
+------------------
+
+**New**
+------
+- Add debug [#276](https://github.com/theyosh/TerrariumPI/issues/276). [TheYOSH]
+- Add debug [#276](https://github.com/theyosh/TerrariumPI/issues/276). [TheYOSH]
+- Add some more logging for Meross Cloud [#276](https://github.com/theyosh/TerrariumPI/issues/276). [TheYOSH]
+- Add power switch updating time information to logging and removed
+  console debug. [TheYOSH]
+- Add status caching. [#275](https://github.com/theyosh/TerrariumPI/issues/275). [TheYOSH]
+- Add some debug. [TheYOSH]
+- Add realtime readout. [TheYOSH]
+- Add authentication on all settings pages. [#271](https://github.com/theyosh/TerrariumPI/issues/271). [TheYOSH]
+- Add support for MLX90614 sensor. [#247](https://github.com/theyosh/TerrariumPI/issues/247). [TheYOSH]
+- Add support for sensor mh-z19. [#247](https://github.com/theyosh/TerrariumPI/issues/247). [TheYOSH]
+- Add missing file [#260](https://github.com/theyosh/TerrariumPI/issues/260). [TheYOSH]
+- Add some debug. [#254](https://github.com/theyosh/TerrariumPI/issues/254). [TheYOSH]
+- Add some debug. [#254](https://github.com/theyosh/TerrariumPI/issues/254). [TheYOSH]
+- Add support for Merros Cloud enabled power switch MSS425E (untested).
+  [#254](https://github.com/theyosh/TerrariumPI/issues/254). [TheYOSH]
+- Add sensor gauge overview page. [#260](https://github.com/theyosh/TerrariumPI/issues/260). [TheYOSH]
+- Add extra logging for starting up with previous state. [#239](https://github.com/theyosh/TerrariumPI/issues/239). [TheYOSH]
+- Add seperate notification type for logins. [#258](https://github.com/theyosh/TerrariumPI/issues/258). [TheYOSH]
+- Add UV Index support for VEML6075 sensors. [#257](https://github.com/theyosh/TerrariumPI/issues/257). [TheYOSH]
+- Add option to exclude certain power switches like scanned WeMo power
+  switches. [#187](https://github.com/theyosh/TerrariumPI/issues/187). [TheYOSH]
+- Add logging for incorrect logins. [#256](https://github.com/theyosh/TerrariumPI/issues/256). [TheYOSH]
+- Add support for starting power switches from previous state. Also
+  found BIG BUG for total power and water usage calculation... [#239](https://github.com/theyosh/TerrariumPI/issues/239).
+  [TheYOSH]
+- Add syslog example. [#256](https://github.com/theyosh/TerrariumPI/issues/256). [TheYOSH]
+- Add support for excluding sensors from average calculation and graphs.
+  [#251](https://github.com/theyosh/TerrariumPI/issues/251). [TheYOSH]
+- Add manual mode also overwrite own timer settings. [#239](https://github.com/theyosh/TerrariumPI/issues/239). [TheYOSH]
+- Add manual overwrite option in the settings menu at every powerswitch.
+  This will disable environment power actions when enabled. [#239](https://github.com/theyosh/TerrariumPI/issues/239).
+  [TheYOSH]
+- Add display error handling so the software will continue to work when
+  wrong settings are entered. [#193](https://github.com/theyosh/TerrariumPI/issues/193). [TheYOSH]
+- Add webcam testing. [#234](https://github.com/theyosh/TerrariumPI/issues/234). [TheYOSH]
+- Add support for more OLED displays. [#232](https://github.com/theyosh/TerrariumPI/issues/232), [#193](https://github.com/theyosh/TerrariumPI/issues/193). [TheYOSH]
+
+**Fixes**
+------
+- Fix miflora battery status. [TheYOSH]
+- Fix updating profile. [TheYOSH]
+- Fix removing power switches. [TheYOSH]
+- Fix caching. [TheYOSH]
+- Fix caching state data. [TheYOSH]
+- Fix python version and added temperature readout. [#247](https://github.com/theyosh/TerrariumPI/issues/247). [TheYOSH]
+- Fix error messages. [#247](https://github.com/theyosh/TerrariumPI/issues/247). [TheYOSH]
+- Fix webcam archive loading. [TheYOSH]
+- Fixed typo in Meross devices. [TheYOSH]
+- Another fix. [#254](https://github.com/theyosh/TerrariumPI/issues/254). [TheYOSH]
+- Another fix. [#254](https://github.com/theyosh/TerrariumPI/issues/254). [TheYOSH]
+- Another fix. [#254](https://github.com/theyosh/TerrariumPI/issues/254). [TheYOSH]
+- Another fix. [#254](https://github.com/theyosh/TerrariumPI/issues/254). [TheYOSH]
+- Another fix. [#254](https://github.com/theyosh/TerrariumPI/issues/254). [TheYOSH]
+- Another fix. [#254](https://github.com/theyosh/TerrariumPI/issues/254). [TheYOSH]
+- Another fix. [#254](https://github.com/theyosh/TerrariumPI/issues/254). [TheYOSH]
+- Fixes [#254](https://github.com/theyosh/TerrariumPI/issues/254). [TheYOSH]
+- Fix exclude badge. [#251](https://github.com/theyosh/TerrariumPI/issues/251). [TheYOSH]
+- Fix js UV Index. [TheYOSH]
+- Fix js UV Index. [TheYOSH]
+- Fix js UV Index. [TheYOSH]
+- Fix bug [#262](https://github.com/theyosh/TerrariumPI/issues/262). [TheYOSH]
+- Fix loading previous power switch state for the first run. [#254](https://github.com/theyosh/TerrariumPI/issues/254).
+  [TheYOSH]
+- Small fixes. [TheYOSH]
+- Fix again Fahrenheit values. [#252](https://github.com/theyosh/TerrariumPI/issues/252). [TheYOSH]
+- Trying to fix strange weahter behavior. [#246](https://github.com/theyosh/TerrariumPI/issues/246). [TheYOSH]
+- Fix populating Display hardware chips. [#193](https://github.com/theyosh/TerrariumPI/issues/193). [TheYOSH]
+- Refix caching firmware and battery data for MiFlora. [TheYOSH]
+- Fix MiFlora battery status and remove display bedug. [TheYOSH]
+- Fix CPU temp indicator. [#238](https://github.com/theyosh/TerrariumPI/issues/238). [TheYOSH]
+- Fixing oled displays. [#232](https://github.com/theyosh/TerrariumPI/issues/232). [TheYOSH]
+- Better fix temperture values. [#238](https://github.com/theyosh/TerrariumPI/issues/238). [TheYOSH]
+- Fix sensor values other then Celcius. [#238](https://github.com/theyosh/TerrariumPI/issues/238). [TheYOSH]
+- Fix hanging hight sensor. Should fix hanging system according to issue
+  [#185](https://github.com/theyosh/TerrariumPI/issues/185). [TheYOSH]
+- Fix webcam raw image. [TheYOSH]
+- Fix missing max diff value. [#236](https://github.com/theyosh/TerrariumPI/issues/236). [TheYOSH]
+
+**Updates**
+------
+- Update release. [TheYOSH]
+- Update translation files. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update styles. [TheYOSH]
+- Update README. [TheYOSH]
+- Update sudoers file for use with Java. Added full path to java. [#275](https://github.com/theyosh/TerrariumPI/issues/275).
+  [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update clappr to latest version. [TheYOSH]
+- Update submodule. [TheYOSH]
+- Update translation files. [TheYOSH]
+- Update Leaflet to version 1.4.0. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update power switch settings hardware type. [TheYOSH]
+- Update submodules. [TheYOSH]
+- Update excluding power switches. [TheYOSH]
+- Update reloading powerswichtes with scanning. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update translations. [#226](https://github.com/theyosh/TerrariumPI/issues/226). [TheYOSH]
+
+**Other**
+------
+- Test with 14 hours history for powerswitch when restarting. [TheYOSH]
+- Remove debug and add extra warning for unsupported Meross cloud
+  device. [#276](https://github.com/theyosh/TerrariumPI/issues/276). [TheYOSH]
+- Merge branch 'denkovi_v2' [TheYOSH]
+- Remove debug. [TheYOSH]
+- A. [TheYOSH]
+- Readme. [TheYOSH]
+- A. [TheYOSH]
+- A. [TheYOSH]
+- New debug. [TheYOSH]
+- Code cleanup. [TheYOSH]
+- Disable printing and some clean up. [#275](https://github.com/theyosh/TerrariumPI/issues/275). [TheYOSH]
+- Allow sudo without password and detect different devices. [#275](https://github.com/theyosh/TerrariumPI/issues/275).
+  [TheYOSH]
+- New attempt 2. [#275](https://github.com/theyosh/TerrariumPI/issues/275). [TheYOSH]
+- New attempt. [#275](https://github.com/theyosh/TerrariumPI/issues/275). [TheYOSH]
+- Better naming. [TheYOSH]
+- First attempt to support Denkovi V2 power relays. [TheYOSH]
+- New version due to new needed modules. [TheYOSH]
+- Merge branch 'issue/247' [TheYOSH]
+- Merge branch 'master' into issue/247. [TheYOSH]
+- New way of reading out MH_Z19 sensor. [#247](https://github.com/theyosh/TerrariumPI/issues/247). [TheYOSH]
+- Merge branch 'master' into issue/247. [TheYOSH]
+- Merge with master. [TheYOSH]
+- Merge branch 'master' into issue/247. [TheYOSH]
+- Support for MJPEG webcams. [#269](https://github.com/theyosh/TerrariumPI/issues/269). [TheYOSH]
+- Change max dim value. [#230](https://github.com/theyosh/TerrariumPI/issues/230). [TheYOSH]
+- Clear whitspace. [TheYOSH]
+- Remove whitespace. [TheYOSH]
+- New version. [TheYOSH]
+- Merge branch 'issue/254' [TheYOSH]
+- Some optimization. [TheYOSH]
+- Trying to get of the Meross IoI debug logging. [TheYOSH]
+- Remove debugging . [#254](https://github.com/theyosh/TerrariumPI/issues/254). [TheYOSH]
+- Merge. [TheYOSH]
+- Merge branch 'master' into issue/254. [TheYOSH]
+- Better UV Index graph view. [TheYOSH]
+- A bit less measurement time DHT sensors. [TheYOSH]
+- Change logging. [TheYOSH]
+- Faster fancybox loading. [TheYOSH]
+- Allow to exclude one traffic light in notifications. [TheYOSH]
+- Code refactor. [TheYOSH]
+- Better bluetooth scanning with multiple bluetooth dongles. [TheYOSH]
+- Merge branch 'development' [TheYOSH]
+- Disable display debug. [TheYOSH]
+- Change sensor settings screen. [TheYOSH]
+- Retry 3 times to get new weater data. [TheYOSH]
+- Remove unused clear functions. [#193](https://github.com/theyosh/TerrariumPI/issues/193). [TheYOSH]
+- Merge branch 'master' of ssh://github.com/theyosh/TerrariumPI.
+  [TheYOSH]
+- Changed installation order for taking a cup of coffe ;) [TheYOSH]
+- Merge branch 'master' into feature/oled. [TheYOSH]
+- Small speedup serial lcd. [TheYOSH]
+- Remove old configuration setting after converting. [#232](https://github.com/theyosh/TerrariumPI/issues/232). [TheYOSH]
+- Merge branch 'master' into feature/oled. [TheYOSH]
+- Merge branch 'master' into feature/oled. [TheYOSH]
+- Logout from the EnergenieLAN switch after address check. [TheYOSH]
+- Reload EnergenieLAN switch after changing address. [TheYOSH]
+
+
 3.9.3 (2018-12-27)
 ------------------
 
@@ -24,6 +281,8 @@ Changelog
 
 **Updates**
 ------
+- Update changelog. [TheYOSH]
+- Update changelog. [TheYOSH]
 - Update Dutch language. [TheYOSH]
 - Update environment sensors after upgrade. [TheYOSH]
 - Update live webcam streaming. [TheYOSH]
@@ -32,6 +291,9 @@ Changelog
 
 **Other**
 ------
+- Merge pull request [#235](https://github.com/theyosh/TerrariumPI/issues/235) from theyosh/development. [TheYOSH]
+
+  New release
 - Allow 30 seconds timer. Lower values are not possible. [#231](https://github.com/theyosh/TerrariumPI/issues/231). [TheYOSH]
 - Remove debug. [#227](https://github.com/theyosh/TerrariumPI/issues/227). [TheYOSH]
 - Return of the minimal 90dB receiver level for Bluetooth devices.
@@ -1983,5 +2245,3 @@ Changelog
 - Living on the edge.... use latest beta of Leaflet. [TheYOSH]
 - Initial release. [TheYOSH]
 - Initial commit. [TheYOSH]
-
-
