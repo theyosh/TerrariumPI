@@ -730,6 +730,21 @@ class terrariumPowerSwitchDenkoviV2_8(terrariumPowerSwitchDenkoviV2):
 class terrariumPowerSwitchDenkoviV2_16(terrariumPowerSwitchDenkoviV2):
   TYPE = 'denkovi_v2_16'
 
+class terrariumPowerSwitchScript(terrariumPowerSwitchSource):
+  TYPE = 'script'
+
+  def set_hardware_state(self, state, force = False):
+    value = (100 if state else 0)
+
+    try:
+      logger.info('Running script: %s.' % (self.get_address()))
+      data = subprocess.check_output('{} {}'.format(self.get_address(),value), shell=True)
+      logger.info('Output was: %s.' % (data))
+    except Exception as ex:
+      logger.exception('Error parsing script data for script %s. Exception %s' % (self.get_address(), ex))
+
+    return state
+
 class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
   TYPE = 'dimmer'
 
@@ -1035,7 +1050,8 @@ class terrariumPowerSwitch(object):
                     terrariumPowerSwitchDenkoviV2_4,
                     terrariumPowerSwitchDenkoviV2_8,
                     terrariumPowerSwitchDenkoviV2_16,
-                    terrariumPowerSwitchSonoff]
+                    terrariumPowerSwitchSonoff,
+                    terrariumPowerSwitchScript]
 
   if sys.version_info >= (3, 3):
     # Merros IoT library needs Python 3.3+

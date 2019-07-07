@@ -23,7 +23,7 @@
         </div>
         <div class="x_panel reboot">
           <div class="x_title">
-            <h2><span class="glyphicon glyphicon-info-sign" aria-hidden="true" title="{{_('Reboot')}}"></span> {{_('Reboot')}}<small></small></h2>
+            <h2><span class="glyphicon glyphicon-info-sign" aria-hidden="true" title="{{_('System actions')}}"></span> {{_('System actions')}}<small></small></h2>
             <ul class="nav navbar-right panel_toolbox">
               <li>
                 <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -35,10 +35,18 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content" style="text-align: center">
-            <p>{{_('Here you can reboot your TerrariumPI server. You will have to confirm the action when clicked.')}}</p>
-            <p>
-              <button type="button" id="reboot_pi"><span class="glyphicon glyphicon-off red" style="font-size: 12rem" aria-hidden="true" title="{{_('Reboot')}}"></button>
-            </p>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <p>{{_('Here you can reboot your TerrariumPI server. You will have to confirm the action when clicked.')}}</p>
+              <p>
+                <button type="button" id="reboot_pi"><span class="glyphicon glyphicon-refresh red" style="font-size: 12rem" aria-hidden="true" title="{{_('Reboot')}}"></button>
+              </p>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <p>{{_('Here you can shutdown your TerrariumPI server. You will have to confirm the action when clicked.')}}</p>
+              <p>
+                <button type="button" id="shutdown_pi"><span class="glyphicon glyphicon-off red" style="font-size: 12rem" aria-hidden="true" title="{{_('Shutdown')}}"></button>
+              </p>
+            </div>
           </div>
         </div>
         <div class="row">
@@ -336,9 +344,34 @@
               });
             });
 
+            var reboot_html = $('<div class="offline_animation"><div class="message"></div><div class="blackscreen"></div></div>');
             $('button#reboot_pi').on('click',function(){
-              if (confirm('Are you sure you want to reboot Terrarium PI?')) {
+              if (confirm('{{_("Are you sure you want to reboot Terrarium PI?")}}')) {
+
+                $('html').addClass('_off');
+                $('body').addClass('_off').append(reboot_html);
+
+                $('.message').html('<h1>{{_("Rebooting")}}...</h1><span class="timer">0 {{_("seconds")}}</span>');
+
+                var timer = 1;
+                setInterval(function(){
+                  globals.reboot = true;
+                  $('body._off div.offline_animation div.message span.timer').text(timer++ + ' {{_("seconds")}}');
+                },1000);
+
                 $.post('/api/reboot');
+              }
+            });
+
+            $('button#shutdown_pi').on('click',function(){
+              if (confirm('{{_("Are you sure you want to shutdown Terrarium PI?")}}')) {
+
+                $('html').addClass('_off');
+                $('body').addClass('_off').append(reboot_html);
+
+                $('.message').html('<h1>{{_("Shutdown!")}}</h1>{{_("bye bye")}}');
+
+                $.post('/api/shutdown');
               }
             });
           });

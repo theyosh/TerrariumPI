@@ -138,6 +138,12 @@ class terrariumWebserver(object):
                      apply=self.__authenticate(True)
                     )
 
+    self.__app.route('/api/shutdown',
+                     method=['POST'],
+                     callback=self.__shutdown,
+                     apply=self.__authenticate(True)
+                    )
+
     self.__app.route('/api/switch/toggle/<switchid:path>',
                      method=['POST'],
                      callback=self.__toggle_switch,
@@ -189,12 +195,14 @@ class terrariumWebserver(object):
     self.__app.route('/logout',
                      method=['GET'],
                      callback=self.__logout_url,
-
                      apply=auth_basic(self.__logout_authenticate,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
                     )
 
   def __reboot(self):
     terrariumUtils.get_script_data('sudo reboot')
+
+  def __shutdown(self):
+    terrariumUtils.get_script_data('sudo shutdown')
 
   def __template_variables(self, template):
     variables = { 'lang' : self.__terrariumEngine.config.get_language(),

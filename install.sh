@@ -146,6 +146,7 @@ fi
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/sbin/service pigpiod restart" > /etc/sudoers.d/terrariumpi
 # Make rebooting from webinterface possible
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /sbin/reboot" >> /etc/sudoers.d/terrariumpi
+echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /sbin/shutdown" >> /etc/sudoers.d/terrariumpi
 # https://github.com/UedaTakeyuki/mh-z19/blob/master/pypi/mh_z19/__init__.py#L18
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl stop serial-getty@ttyS0.service" >> /etc/sudoers.d/terrariumpi
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl start serial-getty@ttyS0.service" >> /etc/sudoers.d/terrariumpi
@@ -196,9 +197,9 @@ EOF
 git submodule update > /dev/null
 cd "${BASEDIR}/.."
 
-PIP_MODULES="python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_DHT Adafruit_SHT31 luma.oled bluepy pywemo pyownet emails mh-z19"
+PIP_MODULES="python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_DHT Adafruit_SHT31 luma.oled bluepy pywemo pyownet emails mh-z19 icalendar iCalEvents"
 if [ $PYTHON -eq 3 ]; then
-  PIP_MODULES="${PIP_MODULES} opencv-python-headless meross-iot==0.2.2.3 iCalEvents"
+  PIP_MODULES="${PIP_MODULES} opencv-python-headless meross-iot==0.2.2.3"
 fi
 NUMBER_OF_MODULES=($PIP_MODULES)
 NUMBER_OF_MODULES=${#NUMBER_OF_MODULES[@]}

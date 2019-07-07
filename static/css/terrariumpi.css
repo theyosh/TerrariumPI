@@ -482,6 +482,127 @@ table.dataTable .glyphicon-play {
 }
 
 
+body._off,
+html._off {
+  overflow: hidden;
+}
+
+body._off .offline_animation {
+  position: absolute;
+  z-index: 999;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 200%;
+  background-color: black;
+  text-align:center;
+  vertical-align:middle;
+}
+
+body._off .blackscreen {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: black;
+}
+
+body._off .offline_animation .blackscreen:after {
+  width: 100%;
+  height: 100%;
+  content: "";
+  position: absolute;
+  background: white;
+  opacity: 0;
+  left: 0;
+  top: 0;
+}
+
+body._off .offline_animation .message {
+  color:red;
+  position: relative;
+  top: 40%;
+}
+
+body._off .offline_animation  .blackscreen{
+  -webkit-animation: shutdown 1600ms linear;
+  animation: shutdown 1600ms linear;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+body._off .offline_animation .blackscreen:after {
+  -webkit-animation: shutdown-opa 1600ms linear;
+  animation: shutdown-opa 1600ms linear;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes
+shutdown {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  20% {
+    -webkit-transform: scale3d(1, 1.6, 1);
+    transform: scale3d(1, 1.6, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1, 0.005, 1);
+    transform: scale3d(1, 0.005, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(0, 0, 1);
+    transform: scale3d(0, 0, 1);
+  }
+}
+
+@keyframes
+shutdown {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  20% {
+    -webkit-transform: scale3d(1, 1.6, 1);
+    transform: scale3d(1, 1.6, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1, 0.005, 1);
+    transform: scale3d(1, 0.005, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(0, 0, 1);
+    transform: scale3d(0, 0, 1);
+  }
+}
+
+@-webkit-keyframes
+shutdown-opa {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes
+shutdown-opa {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 
 /* Documentation */
 
