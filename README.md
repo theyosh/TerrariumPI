@@ -43,7 +43,8 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
 - Support for Energenie USB, LAN and RF power switches [EG-PM(s)2](http://energenie.com/item.aspx?id=7556)
 - Support for WeMo Wifi power switches
 - Support for [Meross MSS425E Power Switches](https://www.meross.com/product/16/article/) (Requires Python 3 setup)
-- Support for Sonof remote power devices
+- Support for Sonoff remote power devices
+  - [Tasmota](https://github.com/arendst/Sonoff-Tasmota)
 - Support for [multiple type of sensors](https://github.com/theyosh/TerrariumPI/wiki/Hardware#sensors)
   - Temperature
   - Humidity
