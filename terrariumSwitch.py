@@ -170,12 +170,11 @@ class terrariumPowerSwitchSource(object):
                                                                                                                               state,force))
 
     if self.get_state() is not state or terrariumUtils.is_true(force):
+      old_state = self.get_state()
+
       try:
-        old_state = self.get_state()
         self.set_hardware_state(state,force)
         self.state = state
-        changed = True
-
         logger.info('Changed power switch \'{}\' of type \'{}\' at address \'{}\' from state \'{}\' to state \'{}\' (Forced:{})'.format(self.get_name(),
                                                                                                                                 self.get_type(),
                                                                                                                                 self.get_address(),
@@ -191,6 +190,11 @@ class terrariumPowerSwitchSource(object):
                                                                                                                                          self.get_address(),
                                                                                                                                          self.get_state(),
                                                                                                                                          state,force))
+
+      if (old_state is not None) or (old_state is None and state == 0):
+        # This is due to a bug that will graph 0 watt usage in the graph after rebooting.
+        # Fix is to add power and water usage in constructor
+        changed = old_state != self.get_state()
 
     if changed and self.callback is not None:
       self.callback(self.get_data())
