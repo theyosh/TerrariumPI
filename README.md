@@ -1,4 +1,4 @@
-# TerrariumPI 3.9.6
+# TerrariumPI 3.9.7
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
 
 For humidity control there is support for a spraying system. The sprayer can be configured to spray for an X amount of seconds and there is a minumal period between two spray actions. Use at least one humitidy sensors to get a constant humidity value. In order to lower the humidity you can add a dehumidifier.
@@ -43,6 +43,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
 - Support for Energenie USB, LAN and RF power switches [EG-PM(s)2](http://energenie.com/item.aspx?id=7556)
 - Support for WeMo Wifi power switches
 - Support for [Meross MSS425E Power Switches](https://www.meross.com/product/16/article/) (Requires Python 3 setup)
+- Support for Sonof remote power devices
 - Support for [multiple type of sensors](https://github.com/theyosh/TerrariumPI/wiki/Hardware#sensors)
   - Temperature
   - Humidity
@@ -83,6 +84,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
 - Display support
   - LCD 16x2 or 20x4 screens either through I2C or [Serial](https://www.instructables.com/id/Raspberry-Pi-Arduino-LCD-Screen/)
   - OLED based on SSD1306
+- Calendar system when hardware is replacement and when new hardware needs to be installed
 - Notifications system. Custom messages for custom actions with use of variables in the messages
   - Get notifications through
     - Email
