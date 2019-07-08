@@ -22,6 +22,7 @@
                   <li><strong>{{_('RPICam')}}:</strong> rpicam_live</li>
                   <li><strong>{{_('V4L')}}:</strong> /dev/videoX</li>
                   <li><strong>{{_('Remote source')}}:</strong> http://source.web.cam/stream.jpg</li>
+                  <li><strong>{{_('Local source')}}:</strong> local://image.jpg</li>
                 </ul>
               </li>
               <li>

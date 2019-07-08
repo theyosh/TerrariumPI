@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: TerrariumPI 3.9.6\n"
-"POT-Creation-Date: 2019-07-05 23:28+CEST\n"
-"PO-Revision-Date: 2019-07-05 23:28+0200\n"
+"Project-Id-Version: TerrariumPI 3.9.7\n"
+"POT-Creation-Date: 2019-07-08 19:19+AEST\n"
+"PO-Revision-Date: 2019-07-08 19:20+1000\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -698,7 +698,7 @@ msgstr "Duration"
 #: views/inc/usage_webcams.tpl:134 views/profile.tpl:56
 #: views/sensor_settings.tpl:28 views/sensor_settings.tpl:155
 #: views/switch_settings.tpl:25 views/switch_settings.tpl:136
-#: views/webcam_settings.tpl:28 views/webcam_settings.tpl:90
+#: views/webcam_settings.tpl:29 views/webcam_settings.tpl:91
 msgid "Name"
 msgstr "Name"
 
@@ -797,7 +797,7 @@ msgstr "Files"
 #: views/notifications.tpl:275 views/profile.tpl:179
 #: views/sensor_settings.tpl:57 views/switch_settings.tpl:72
 #: views/system_environment.tpl:1801 views/system_settings.tpl:273
-#: views/webcam_settings.tpl:48
+#: views/webcam_settings.tpl:49
 msgid "Submit"
 msgstr "Submit"
 
@@ -820,16 +820,16 @@ msgstr "Audio playlist"
 #: views/sensor_settings.tpl:82 views/sensor_settings.tpl:83
 #: views/sensor_settings.tpl:84 views/sensor_settings.tpl:85
 #: views/sensor_settings.tpl:86 views/switch_settings.tpl:92
-#: views/webcam_settings.tpl:68
+#: views/webcam_settings.tpl:69
 msgid "new"
 msgstr "new"
 
 #: views/audio_playlist.tpl:112 views/sensor_settings.tpl:103
 #: views/sensor_settings.tpl:132 views/switch_settings.tpl:109
 #: views/switch_settings.tpl:151 views/switch_status.tpl:116
-#: views/webcam_settings.tpl:108 views/webcam_settings.tpl:122
-#: views/webcam_settings.tpl:141 views/webcam_settings.tpl:152
-#: views/webcam_settings.tpl:163
+#: views/webcam_settings.tpl:109 views/webcam_settings.tpl:123
+#: views/webcam_settings.tpl:142 views/webcam_settings.tpl:153
+#: views/webcam_settings.tpl:164
 msgid "Select an option"
 msgstr "Select an option"
 
@@ -837,13 +837,13 @@ msgstr "Select an option"
 #: views/inc/usage_doors.tpl:70 views/inc/usage_sensors.tpl:81
 #: views/inc/usage_switches.tpl:70 views/inc/usage_webcams.tpl:66
 #: views/sensor_settings.tpl:203 views/switch_settings.tpl:208
-#: views/switch_status.tpl:132 views/webcam_settings.tpl:175
+#: views/switch_status.tpl:132 views/webcam_settings.tpl:176
 msgid "Close"
 msgstr "Close"
 
 #: views/audio_playlist.tpl:124 views/door_settings.tpl:95
 #: views/sensor_settings.tpl:204 views/switch_settings.tpl:209
-#: views/webcam_settings.tpl:176
+#: views/webcam_settings.tpl:177
 msgid "Add"
 msgstr "Add"
 
@@ -951,7 +951,7 @@ msgstr "mode"
 #: views/system_environment.tpl:595 views/system_environment.tpl:806
 #: views/system_environment.tpl:1017 views/system_environment.tpl:1228
 #: views/system_environment.tpl:1392 views/system_environment.tpl:1603
-#: views/webcam_settings.tpl:123 views/webcam_settings.tpl:165
+#: views/webcam_settings.tpl:124 views/webcam_settings.tpl:166
 msgid "Disabled"
 msgstr "Disabled"
 
@@ -1404,7 +1404,7 @@ msgstr "TerrariumPI software has support for magnetic door sensors. Only version
 
 #: views/hardware.tpl:123 views/inc/menu.tpl:101
 #: views/inc/usage_webcams.tpl:19 views/usage.tpl:25 views/webcam.tpl:11
-#: views/webcam_settings.tpl:68
+#: views/webcam_settings.tpl:69
 msgid "Webcam"
 msgstr "Webcam"
 
@@ -1868,7 +1868,7 @@ msgstr "All fields with a %s are required."
 #: views/inc/usage_environment.tpl:129 views/inc/usage_environment.tpl:213
 #: views/inc/usage_environment.tpl:221 views/inc/usage_environment.tpl:307
 #: views/inc/usage_environment.tpl:315 views/notifications.tpl:88
-#: views/switch_settings.tpl:152 views/webcam_settings.tpl:164
+#: views/switch_settings.tpl:152 views/webcam_settings.tpl:165
 msgid "Enabled"
 msgstr "Enabled"
 
@@ -2164,7 +2164,7 @@ msgstr "Enter the full URL of the API weather server. For use with Weather.com y
 
 #: views/inc/usage_weather.tpl:42 views/inc/usage_weather.tpl:64
 #: views/inc/usage_webcams.tpl:99 views/inc/usage_webcams.tpl:126
-#: views/webcam_settings.tpl:19 views/webcam_settings.tpl:85
+#: views/webcam_settings.tpl:19 views/webcam_settings.tpl:86
 msgid "Location"
 msgstr "Location"
 
@@ -2225,27 +2225,27 @@ msgid "On the webcam settings page you can configure all needed webcams. Click o
 msgstr "On the webcam settings page you can configure all needed webcams. Click on %s button to add a new webcam. And empty form like below is shown and has to be filled in. Make sure the right values are filled in. All fields with a %s are required."
 
 #: views/inc/usage_webcams.tpl:95 views/inc/usage_webcams.tpl:140
-#: views/webcam_settings.tpl:37 views/webcam_settings.tpl:81
+#: views/webcam_settings.tpl:38 views/webcam_settings.tpl:82
 msgid "Preview"
 msgstr "Preview"
 
 #: views/inc/usage_webcams.tpl:108 views/inc/usage_webcams.tpl:137
-#: views/webcam_settings.tpl:34 views/webcam_settings.tpl:105
+#: views/webcam_settings.tpl:35 views/webcam_settings.tpl:106
 msgid "Picture rotation"
 msgstr "Picture rotation"
 
 #: views/inc/usage_webcams.tpl:111 views/inc/usage_webcams.tpl:112
 #: views/inc/usage_webcams.tpl:113 views/inc/usage_webcams.tpl:114
-#: views/webcam_settings.tpl:109 views/webcam_settings.tpl:110
-#: views/webcam_settings.tpl:111 views/webcam_settings.tpl:112
+#: views/webcam_settings.tpl:110 views/webcam_settings.tpl:111
+#: views/webcam_settings.tpl:112 views/webcam_settings.tpl:113
 msgid "degrees"
 msgstr "degrees"
 
-#: views/inc/usage_webcams.tpl:115 views/webcam_settings.tpl:113
+#: views/inc/usage_webcams.tpl:115 views/webcam_settings.tpl:114
 msgid "Flip Horizontal"
 msgstr "Flip Horizontal"
 
-#: views/inc/usage_webcams.tpl:116 views/webcam_settings.tpl:114
+#: views/inc/usage_webcams.tpl:116 views/webcam_settings.tpl:115
 msgid "Flip Vertical"
 msgstr "Flip Vertical"
 
@@ -2824,7 +2824,7 @@ msgstr "Off"
 #: views/system_environment.tpl:1539 views/system_environment.tpl:1551
 #: views/system_environment.tpl:1674 views/system_environment.tpl:1686
 #: views/system_environment.tpl:1750 views/system_environment.tpl:1762
-#: views/webcam_settings.tpl:142 views/webcam_settings.tpl:153
+#: views/webcam_settings.tpl:143 views/webcam_settings.tpl:154
 msgid "Ignore"
 msgstr "Ignore"
 
@@ -3108,83 +3108,87 @@ msgstr "No webcams available"
 msgid "Here you can configure your webcams."
 msgstr "Here you can configure your webcams."
 
-#: views/webcam_settings.tpl:31 views/webcam_settings.tpl:94
+#: views/webcam_settings.tpl:25
+msgid "Local source"
+msgstr "Local source"
+
+#: views/webcam_settings.tpl:32 views/webcam_settings.tpl:95
 msgid "Resolution"
 msgstr "Resolution"
 
-#: views/webcam_settings.tpl:61
+#: views/webcam_settings.tpl:62
 msgid "Add new webcam"
 msgstr "Add new webcam"
 
-#: views/webcam_settings.tpl:119
+#: views/webcam_settings.tpl:120
 msgid "Archive"
 msgstr "Archive"
 
-#: views/webcam_settings.tpl:124
+#: views/webcam_settings.tpl:125
 msgid "Motion"
 msgstr "Motion"
 
-#: views/webcam_settings.tpl:125
+#: views/webcam_settings.tpl:126
 msgid "1 minute"
 msgstr "1 minute"
 
-#: views/webcam_settings.tpl:126
+#: views/webcam_settings.tpl:127
 msgid "5 minutes"
 msgstr "5 minutes"
 
-#: views/webcam_settings.tpl:127
+#: views/webcam_settings.tpl:128
 msgid "15 minutes"
 msgstr "15 minutes"
 
-#: views/webcam_settings.tpl:128
+#: views/webcam_settings.tpl:129
 msgid "30 minutes"
 msgstr "30 minutes"
 
-#: views/webcam_settings.tpl:129
+#: views/webcam_settings.tpl:130
 msgid "1 hour"
 msgstr "1 hour"
 
-#: views/webcam_settings.tpl:130
+#: views/webcam_settings.tpl:131
 msgid "3 hours"
 msgstr "3 hours"
 
-#: views/webcam_settings.tpl:131
+#: views/webcam_settings.tpl:132
 msgid "6 hours"
 msgstr "6 hours"
 
-#: views/webcam_settings.tpl:132
+#: views/webcam_settings.tpl:133
 msgid "12 hours"
 msgstr "12 hours"
 
-#: views/webcam_settings.tpl:133
+#: views/webcam_settings.tpl:134
 msgid "1 day"
 msgstr "1 day"
 
-#: views/webcam_settings.tpl:138
+#: views/webcam_settings.tpl:139
 msgid "Archive light state"
 msgstr "Archive light state"
 
-#: views/webcam_settings.tpl:143
+#: views/webcam_settings.tpl:144
 msgid "When on"
 msgstr "When on"
 
-#: views/webcam_settings.tpl:144
+#: views/webcam_settings.tpl:145
 msgid "When off"
 msgstr "When off"
 
-#: views/webcam_settings.tpl:149
+#: views/webcam_settings.tpl:150
 msgid "Archive door state"
 msgstr "Archive door state"
 
-#: views/webcam_settings.tpl:154
+#: views/webcam_settings.tpl:155
 msgid "When open"
 msgstr "When open"
 
-#: views/webcam_settings.tpl:155
+#: views/webcam_settings.tpl:156
 msgid "When closed"
 msgstr "When closed"
 
-#: views/webcam_settings.tpl:160
+#: views/webcam_settings.tpl:161
 msgid "Motion boxes"
 msgstr "Motion boxes"
 

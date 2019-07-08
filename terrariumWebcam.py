@@ -549,6 +549,25 @@ class terrariumWebcamUSB(terrariumWebcamSource):
 
     return False
 
+class terrariumWebcamLocal(terrariumWebcamSource):
+  TYPE = 'local'
+  VALID_SOURCE = '^local://(.*)'
+  INFO_SOURCE = 'local://image.jpg'
+
+  def get_raw_filename(self):
+    return re.search(terrariumWebcamLocal.VALID_SOURCE, self.location, re.IGNORECASE).group(1)
+
+  def get_raw_data(self):
+    location = self.get_raw_filename()
+    logger.debug('Using local location: %s' % (location))
+    try:
+      self.raw_image = open(location, "rb")
+      return True
+    except terrariumWebcamRAWUpdateException as ex:
+      logger.warning('Error getting raw local image from webcam \'%s\' with error message: %s' % (self.get_name(),ex))
+
+    return False
+
 class terrariumWebcamRemote(terrariumWebcamSource):
   TYPE = 'remote'
   VALID_SOURCE = '^https?://(?!.*\.(?:m3u8))'
@@ -601,6 +620,7 @@ class terrariumWebcamRAWUpdateException(Exception):
 class terrariumWebcam(object):
   SOURCES = [terrariumWebcamRPI,
              terrariumWebcamUSB,
+             terrariumWebcamLocal,
              terrariumWebcamRemote,
              terrariumWebcamRPILive,
              terrariumWebcamHLSLive]
