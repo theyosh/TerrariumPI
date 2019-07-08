@@ -2,15 +2,14 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-from time import time
 import RPi.GPIO as GPIO
 import Adafruit_DHT
 
+from gevent import sleep
+from time import time
+
 from terrariumSensor import terrariumSensorSource
 from terrariumUtils import terrariumUtils
-
-from gevent import monkey, sleep
-monkey.patch_all()
 
 class terrariumGPIOSensor(terrariumSensorSource):
   TYPE = None

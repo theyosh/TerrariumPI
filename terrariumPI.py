@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+from gevent import monkey, sleep
+monkey.patch_all()
+
 # https://untangle.readthedocs.io/en/latest/#encoding
 try:
   # This is python2 only...

@@ -13,7 +13,6 @@ Made available under GNU GENERAL PUBLIC LICENSE
 # 2015-02-10, ver 0.1
 
 """
-
 import smbus
 import time
 import datetime
@@ -25,6 +24,7 @@ except ImportError as ex:
   import _thread
 import serial
 
+from gevent import sleep
 from hashlib import md5
 from PIL import Image, ImageFont
 from luma.core.interface.serial import i2c
@@ -33,9 +33,6 @@ from luma.core.error import DeviceNotFoundError
 from luma.oled.device import ssd1306, ssd1309, ssd1322, ssd1325, ssd1327, ssd1331, ssd1351, sh1106
 
 from terrariumUtils import terrariumUtils
-
-from gevent import monkey, sleep
-monkey.patch_all()
 
 class i2c_device:
   def __init__(self, addr, port=1):

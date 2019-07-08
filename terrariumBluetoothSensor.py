@@ -7,9 +7,6 @@ from bluepy.btle import Scanner, Peripheral
 
 from terrariumSensor import terrariumSensorSource, terrariumSensorCache
 
-from gevent import monkey
-monkey.patch_all()
-
 class terrariumMiFloraSensor(terrariumSensorSource):
   TYPE = 'miflora'
   VALID_SENSOR_TYPES = ['temperature','light','moisture','fertility']
