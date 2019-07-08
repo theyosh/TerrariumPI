@@ -21,7 +21,9 @@ import psutil
 import subprocess
 import re
 import json
+
 from hashlib import md5
+from gevent import sleep
 
 from terrariumConfig import terrariumConfig
 from terrariumWeather import terrariumWeather, terrariumWeatherSourceException
@@ -36,9 +38,6 @@ from terrariumNotification import terrariumNotification
 from terrariumCalendar import terrariumCalendar
 
 from terrariumUtils import terrariumUtils
-
-from gevent import monkey, sleep
-monkey.patch_all()
 
 class terrariumEngine(object):
 

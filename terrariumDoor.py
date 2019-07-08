@@ -8,11 +8,11 @@ try:
 except ImportError as ex:
   import _thread
 import time
-from hashlib import md5
-from terrariumUtils import terrariumUtils
 
-from gevent import monkey, sleep
-monkey.patch_all()
+from hashlib import md5
+from gevent import sleep
+
+from terrariumUtils import terrariumUtils
 
 class terrariumDoor(object):
   VALID_HARDWARE_TYPES = ['gpio','remote']

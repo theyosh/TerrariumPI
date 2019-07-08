@@ -13,15 +13,13 @@ import json
 import alsaaudio
 
 from hashlib import md5
+from gevent import sleep
 try:
   from MediaInfoDLL import MediaInfo, Stream
 except ImportError as ex:
   from MediaInfoDLL3 import MediaInfo, Stream
 
 from terrariumUtils import terrariumUtils
-
-from gevent import monkey, sleep
-monkey.patch_all()
 
 class terrariumAudioPlayer(object):
 

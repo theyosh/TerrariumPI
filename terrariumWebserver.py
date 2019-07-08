@@ -5,18 +5,6 @@ logger = terrariumLogging.logging.getLogger(__name__)
 import gettext
 gettext.install('terrariumpi', 'locales/')
 
-from bottle import BaseRequest, Bottle, request, abort, static_file, template, error, response, auth_basic, HTTPError
-#Increase bottle memory to max 5MB to process images in WYSIWYG editor
-BaseRequest.MEMFILE_MAX = 5 * 1024 * 1024
-
-from bottle.ext.websocket import GeventWebSocketServer
-from bottle.ext.websocket import websocket
-from queue import Queue
-
-from terrariumTranslations import terrariumTranslations
-from terrariumAudio import terrariumAudioPlayer
-from terrariumUtils import terrariumUtils
-
 try:
   import thread as _thread
 except ImportError as ex:
@@ -27,8 +15,18 @@ import datetime
 import hashlib
 import functools
 
-from gevent import monkey, sleep
-monkey.patch_all()
+from bottle import BaseRequest, Bottle, request, abort, static_file, template, error, response, auth_basic, HTTPError
+#Increase bottle memory to max 5MB to process images in WYSIWYG editor
+BaseRequest.MEMFILE_MAX = 5 * 1024 * 1024
+
+from bottle.ext.websocket import GeventWebSocketServer
+from bottle.ext.websocket import websocket
+from queue import Queue
+from gevent import sleep
+
+from terrariumTranslations import terrariumTranslations
+from terrariumAudio import terrariumAudioPlayer
+from terrariumUtils import terrariumUtils
 
 class terrariumWebserverHeaders(object):
   name = 'webserver_headers'

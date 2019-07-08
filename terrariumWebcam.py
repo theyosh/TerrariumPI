@@ -7,12 +7,6 @@ try:
 except ImportError as ex:
   import _thread
 
-try:
-  from subprocess import DEVNULL # py3k
-except ImportError:
-  import os
-  DEVNULL = open(os.devnull, 'wb')
-
 import time
 import cv2
 import math
@@ -30,11 +24,14 @@ from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont
 from hashlib import md5
 from shutil import copyfile
+from gevent import sleep
+try:
+  from subprocess import DEVNULL # py3k
+except ImportError:
+  import os
+  DEVNULL = open(os.devnull, 'wb')
 
 from terrariumUtils import terrariumUtils
-
-from gevent import monkey, sleep
-monkey.patch_all()
 
 class terrariumWebcamSource(object):
   TYPE = None

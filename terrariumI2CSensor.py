@@ -7,9 +7,6 @@ import smbus
 import sys
 import Adafruit_SHT31
 
-from terrariumSensor import terrariumSensorSource
-from terrariumUtils import terrariumUtils
-
 # Dirty hack to include someone his code... to lazy to make it myself :)
 # https://github.com/ageir/chirp-rpi
 sys.path.insert(0, './chirp-rpi')
@@ -17,9 +14,10 @@ import chirp
 sys.path.insert(0, './python-MLX90614')
 from mlx90614 import MLX90614
 from struct import unpack
+from gevent import sleep
 
-from gevent import monkey, sleep
-monkey.patch_all()
+from terrariumSensor import terrariumSensorSource
+from terrariumUtils import terrariumUtils
 
 class terrariumI2CSensor(terrariumSensorSource):
   TYPE = None

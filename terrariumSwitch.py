@@ -11,16 +11,21 @@ import subprocess
 import re
 import pywemo
 import datetime
+try:
+  import thread as _thread
+except ImportError as ex:
+  import _thread
+
+# Dirty hack to include someone his code... to lazy to make it myself :)
+# https://github.com/perryflynn/energenie-connect0r
+sys.path.insert(0, './energenie-connect0r')
+import energenieconnector
 
 from hashlib import md5
 from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
 from gpiozero import Energenie
 from time import time
-
-try:
-  import thread as _thread
-except ImportError as ex:
-  import _thread
+from gevent import sleep
 
 try:
   from meross_iot.api import MerossHttpClient, UnauthorizedException
@@ -29,15 +34,6 @@ except ImportError as ex:
   pass
 
 from terrariumUtils import terrariumUtils, terrariumTimer, terrariumCache
-
-# Dirty hack to include someone his code... to lazy to make it myself :)
-# https://github.com/perryflynn/energenie-connect0r
-sys.path.insert(0, './energenie-connect0r')
-import energenieconnector
-
-from gevent import monkey, sleep
-monkey.patch_all()
-
 
 class terrariumPowerSwitchSource(object):
   TYPE = None
