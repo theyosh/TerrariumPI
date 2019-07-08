@@ -71,7 +71,7 @@ class terrariumTranslations(object):
     # End doors
 
     # Webcam
-    self.translations['webcam_field_location'] = _('Holds the webcam location source. Supported sources are: %s') % ('<strong>RPICam</strong>, <strong>V4L device</strong>, <strong>Remote URL</strong>')
+    self.translations['webcam_field_location'] = _('Holds the webcam location source. Supported sources are: %s') % ('<strong>RPICam</strong>, <strong>V4L device</strong>, <strong>Remote URL</strong>, <strong>Local URL</strong>')
     self.translations['webcam_field_name'] = _('Holds the webcam name.')
     self.translations['webcam_field_resolution'] = _('Holds the webcam resolution.')
     self.translations['webcam_field_resolution_width'] = _('Holds the webcam resolution width in pixels.')
