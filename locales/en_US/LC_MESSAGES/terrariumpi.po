@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
-"POT-Creation-Date: 2019-07-08 19:19+AEST\n"
-"PO-Revision-Date: 2019-07-08 19:20+1000\n"
+"POT-Creation-Date: 2019-07-08 19:40+CEST\n"
+"PO-Revision-Date: 2019-07-08 19:40+0200\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -16,16 +16,16 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: terrariumEngine.py:583 views/dashboard.tpl:7
+#: terrariumEngine.py:582 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
 msgid "Uptime"
 msgstr "Uptime"
 
-#: terrariumEngine.py:584
+#: terrariumEngine.py:583
 msgid "Load"
 msgstr "Load"
 
-#: terrariumEngine.py:585
+#: terrariumEngine.py:584
 msgid "CPU Temp."
 msgstr "CPU Temp."
 
@@ -540,94 +540,94 @@ msgstr "Holds a small description about the animal."
 msgid "Holds a link to more information."
 msgstr "Holds a link to more information."
 
-#: terrariumWebcam.py:190
+#: terrariumWebcam.py:187
 msgid "Offline since"
 msgstr "Offline since"
 
-#: terrariumWebserver.py:95 terrariumWebserver.py:198
+#: terrariumWebserver.py:93 terrariumWebserver.py:196
 msgid "Authenticate to make any changes"
 msgstr "Authenticate to make any changes"
 
-#: terrariumWebserver.py:95 terrariumWebserver.py:198
+#: terrariumWebserver.py:93 terrariumWebserver.py:196
 #: views/system_settings.tpl:57
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:95 terrariumWebserver.py:198
+#: terrariumWebserver.py:93 terrariumWebserver.py:196
 #: views/system_settings.tpl:146
 msgid "Authentication"
 msgstr "Authentication"
 
-#: terrariumWebserver.py:261
+#: terrariumWebserver.py:259
 msgid "Player command could ot be executed!"
 msgstr "Player command could ot be executed!"
 
-#: terrariumWebserver.py:261 terrariumWebserver.py:281
-#: terrariumWebserver.py:293 terrariumWebserver.py:301
+#: terrariumWebserver.py:259 terrariumWebserver.py:279
+#: terrariumWebserver.py:291 terrariumWebserver.py:299
 msgid "Error!"
 msgstr "Error!"
 
-#: terrariumWebserver.py:269 terrariumWebserver.py:272
+#: terrariumWebserver.py:267 terrariumWebserver.py:270
 msgid "OK!"
 msgstr "OK!"
 
-#: terrariumWebserver.py:269 terrariumWebserver.py:272
+#: terrariumWebserver.py:267 terrariumWebserver.py:270
 msgid "Player command executed!"
 msgstr "Player command executed!"
 
-#: terrariumWebserver.py:281
+#: terrariumWebserver.py:279
 msgid "File is not uploaded!"
 msgstr "File is not uploaded!"
 
-#: terrariumWebserver.py:286
+#: terrariumWebserver.py:284
 msgid "File '%s' is uploaded"
 msgstr "File '%s' is uploaded"
 
-#: terrariumWebserver.py:286 terrariumWebserver.py:296
+#: terrariumWebserver.py:284 terrariumWebserver.py:294
 msgid "Success!"
 msgstr "Success!"
 
-#: terrariumWebserver.py:288
+#: terrariumWebserver.py:286
 msgid "Duplicate file '%s'"
 msgstr "Duplicate file '%s'"
 
-#: terrariumWebserver.py:293
+#: terrariumWebserver.py:291
 msgid "Action could not be satisfied"
 msgstr "Action could not be satisfied"
 
-#: terrariumWebserver.py:296
+#: terrariumWebserver.py:294
 msgid "Audio file is deleted"
 msgstr "Audio file is deleted"
 
-#: terrariumWebserver.py:301
+#: terrariumWebserver.py:299
 msgid "Data could not be saved"
 msgstr "Data could not be saved"
 
-#: terrariumWebserver.py:309
+#: terrariumWebserver.py:307
 msgid "Data saved"
 msgstr "Data saved"
 
-#: terrariumWebserver.py:310
+#: terrariumWebserver.py:308
 msgid "Your changes are saved"
 msgstr "Your changes are saved"
 
-#: terrariumWebserver.py:329
+#: terrariumWebserver.py:327
 msgid "Hardware is replaced"
 msgstr "Hardware is replaced"
 
-#: terrariumWebserver.py:330
+#: terrariumWebserver.py:328
 msgid "Hardware replacement is logged in the calendar"
 msgstr "Hardware replacement is logged in the calendar"
 
-#: terrariumWebserver.py:333
+#: terrariumWebserver.py:331
 msgid "A new replacement reminder is created"
 msgstr "A new replacement reminder is created"
 
-#: terrariumWebserver.py:470 views/inc/menu.tpl:174
+#: terrariumWebserver.py:468 views/inc/menu.tpl:174
 msgid "Log out"
 msgstr "Log out"
 
-#: terrariumWebserver.py:471
+#: terrariumWebserver.py:469
 msgid "You are now logged out"
 msgstr "You are now logged out"
 
