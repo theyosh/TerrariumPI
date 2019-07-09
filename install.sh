@@ -65,7 +65,7 @@ debconf-apt-progress -- apt-get -y full-upgrade
 
 APT_PACKAGES="libftdi1 screen git subversion watchdog build-essential i2c-tools pigpio owserver sqlite3 vlc-nox ffmpeg libfreetype6-dev libjpeg-dev \
   libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libjasper1 libgstreamer0.10-0 libgstreamer1.0-0 libilmbase12 \
-  libopenexr22 libgtk-3-0 libxml2-dev libxslt1-dev python-twisted $PYTHON_LIBS"
+  libopenexr22 libgtk-3-0 libxml2-dev libxslt1-dev python-twisted python-zope.interface $PYTHON_LIBS"
 
 if [ `grep -ic " buster " /etc/apt/sources.list` -eq 2 ]; then
   # Remove not existing packages in Debian buster
@@ -287,9 +287,6 @@ sleep 1
 for BLUETOOTH_HELPER in `ls /usr/local/lib/python*/dist-packages/bluepy/bluepy-helper`; do
   setcap 'cap_net_raw,cap_net_admin+eip' "${BLUETOOTH_HELPER}"
 done
-
-# HLS Porxy will ook nog wat extra files...... uitzoeken wat extr installatie nodig is
-
 
 # Move log file to temprorary mount
 if grep -qs "${TMPFS} " /proc/mounts; then
