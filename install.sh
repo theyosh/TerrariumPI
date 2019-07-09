@@ -1,21 +1,22 @@
 #!/bin/bash
-BASEDIR=$(dirname $(readlink -nf $0))
 SCRIPT_USER=`who -m | awk '{print $1}'`
+SCRIPT_USER_ID=`id -u ${SCRIPT_USER}`
 if [ "" == "${SCRIPT_USER}" ]; then
   SCRIPT_USER="pi"
 fi
-SCRIPT_USER_ID=`id -u ${SCRIPT_USER}`
-VERSION=`grep ^version defaults.cfg | cut -d' ' -f 3`
-WHOAMI=`whoami`
 PYTHON=2
 if [ "${1}" == "3" ]; then
   PYTHON=3
 fi
+
+BASEDIR=$(dirname $(readlink -nf $0))
+VERSION=`grep ^version "${BASEDIR}/defaults.cfg" | cut -d' ' -f 3`
 LOGFILE="${BASEDIR}/log/terrariumpi.log"
 ACCESSLOGFILE="${BASEDIR}/log/terrariumpi.access.log"
 TMPFS="/run/user/${SCRIPT_USER_ID}"
 INSTALLER_TITLE="TerrariumPI v. ${VERSION} (Python${PYTHON})"
 
+WHOAMI=`whoami`
 if [ "${WHOAMI}" != "root" ]; then
   echo "Start TerrariumPI installation as user root"
   echo "sudo ./install.sh"
@@ -40,7 +41,7 @@ case $? in
 esac
 
 # Clean up first
-whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to remove not needed programs in order to free up diskspace and make future updates faster. All desktop software will be removed.\n\nDo you want to remove not needed programs?" 0 0
+whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --yesno "TerrariumPI is going to remove not needed programs in order to free up disk space and make future updates faster. All desktop software will be removed.\n\nDo you want to remove not needed programs?" 0 0
 
 case $? in
   0) whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --infobox "TerrariumPI is removing not needed programs" 0 0
@@ -54,22 +55,23 @@ esac
 debconf-apt-progress -- apt-get -y remove owhttpd owftpd python-gpiozero python-dateutil python-imaging python-ow python-picamera python-pigpio python-psutil python-requests python-rpi.gpio
 
 # Install required packages to get the terrarium software running
-PYTHON_LIBS=""
-if [ $PYTHON -eq 2 ]; then
-  PYTHON_LIBS="python-pip python-dev python-mediainfodll python-smbus python-pil python-opencv python-numpy python-lxml"
-elif [ $PYTHON -eq 3 ]; then
+PYTHON_LIBS="python-pip python-dev python-mediainfodll python-smbus python-pil python-opencv python-numpy python-lxml"
+if [ $PYTHON -eq 3 ]; then
   PYTHON_LIBS="python3-pip python3-dev python3-mediainfodll python3-smbus python3-pil python3-opencv python3-numpy python3-lxml"
 fi
 
 debconf-apt-progress -- apt-get -y update
 debconf-apt-progress -- apt-get -y full-upgrade
 
-APT_PACKAGES="libftdi1 screen git subversion watchdog build-essential i2c-tools pigpio owserver sqlite3 vlc-bin ffmpeg libfreetype6-dev libjpeg-dev \
-  libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libjasper1 libgstreamer0.10-0 libgstreamer1.0-0 libilmbase12 libopenexr22 libgtk-3-0 \
-  libxml2-dev libxslt1-dev python-twisted ${PYTHON_LIBS}"
+APT_PACKAGES="libftdi1 screen git subversion watchdog build-essential i2c-tools pigpio owserver sqlite3 vlc-nox ffmpeg libfreetype6-dev libjpeg-dev \
+  libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libjasper1 libgstreamer0.10-0 libgstreamer1.0-0 libilmbase12 \
+  libopenexr22 libgtk-3-0 libxml2-dev libxslt1-dev python-twisted $PYTHON_LIBS"
 
 if [ `grep -ic " buster " /etc/apt/sources.list` -eq 2 ]; then
+  # Remove not existing packages in Debian buster
   APT_PACKAGES="${APT_PACKAGES/libcblas3/}"
+  APT_PACKAGES="${APT_PACKAGES/libilmbase12/}"
+  APT_PACKAGES="${APT_PACKAGES/libopenexr22/}"
 fi
 
 debconf-apt-progress -- apt-get -y install $APT_PACKAGES
@@ -83,22 +85,26 @@ dpkg-reconfigure tzdata
 if [ -f /boot/config.txt ]; then
 
   # Enable I2C
-  if [ `grep -ic "dtparam=i2c_arm=on" /boot/config.txt` -eq 0 ]; then
+  if [ `grep -ic "^dtparam=i2c_arm=on" /boot/config.txt` -eq 0 ]; then
     echo "dtparam=i2c_arm=on" >> /boot/config.txt
   fi
 
   # Enable 1-Wire
-  if [ `grep -ic "dtoverlay=w1-gpio" /boot/config.txt` -eq 0 ]; then
+  if [ `grep -ic "^dtoverlay=w1-gpio" /boot/config.txt` -eq 0 ]; then
     echo "dtoverlay=w1-gpio" >> /boot/config.txt
   fi
 
   # Enable camera
-  if [ `grep -ic "gpu_mem=" /boot/config.txt` -eq 0 ]; then
+  if [ `grep -ic "^gpu_mem=" /boot/config.txt` -eq 0 ]; then
     echo "gpu_mem=128" >> /boot/config.txt
   fi
 
+  if [ `grep -ic "^start_x=1" /boot/config.txt` -eq 0 ]; then
+    echo "start_x=1" >> /boot/config.txt
+  fi
+
   # Enable serial
-  if [ `grep -ic "enable_uart=1" /boot/config.txt` -eq 0 ]; then
+  if [ `grep -ic "^enable_uart=1" /boot/config.txt` -eq 0 ]; then
     echo "enable_uart=1" >> /boot/config.txt
   fi
 
@@ -210,6 +216,12 @@ PIP_MODULES="python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero g
 if [ $PYTHON -eq 3 ]; then
   PIP_MODULES="${PIP_MODULES} opencv-python-headless meross-iot==0.2.2.3"
 fi
+
+if [ `grep -ic " buster " /etc/apt/sources.list` -eq 2 ]; then
+  # Does not work on Buster, so we use the deb package version.... lets hope that it will stay working
+  PIP_MODULES="${PIP_MODULES/opencv-python-headless/}"
+fi
+
 NUMBER_OF_MODULES=($PIP_MODULES)
 NUMBER_OF_MODULES=${#NUMBER_OF_MODULES[@]}
 MODULE_COUNTER=1
@@ -272,11 +284,12 @@ sleep 1
 
 
 # To run this as non-root run the following, https://github.com/marcelrv/miflora, https://github.com/IanHarvey/bluepy/issues/218
-if [ $PYTHON -eq 2 ]; then
-  setcap 'cap_net_raw,cap_net_admin+eip' /usr/local/lib/python2.7/dist-packages/bluepy/bluepy-helper
-elif [ $PYTHON -eq 3 ]; then
-  setcap 'cap_net_raw,cap_net_admin+eip' /usr/local/lib/python3.5/dist-packages/bluepy/bluepy-helper
-fi
+for BLUETOOTH_HELPER in `ls /usr/local/lib/python*/dist-packages/bluepy/bluepy-helper`; do
+  setcap 'cap_net_raw,cap_net_admin+eip' "${BLUETOOTH_HELPER}"
+done
+
+# HLS Porxy will ook nog wat extra files...... uitzoeken wat extr installatie nodig is
+
 
 # Move log file to temprorary mount
 if grep -qs "${TMPFS} " /proc/mounts; then
@@ -302,7 +315,7 @@ fi
 
 # Make TerrariumPI start during boot
 if [ `grep -ic "start.sh" /etc/rc.local` -eq 0 ]; then
-  sed -i.bak "s@^exit 0@# Starting TerrariumPI server\n${BASEDIR}/start.sh\n\nexit 0@" /etc/rc.local
+  sed -i.bak "s@^exit 0@# Starting TerrariumPI server\n${BASEDIR}/start.sh ${PYTHON}\n\nexit 0@" /etc/rc.local
 fi
 
 # We are done!

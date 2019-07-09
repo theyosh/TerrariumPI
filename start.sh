@@ -28,11 +28,11 @@ function message {
 
 function update_software {
   # Initial run, no settings file, always up to date
-  if [ -f "{BASEDIR}/settings.cfg" ]; then
+  if [ -f "${BASEDIR}/settings.cfg" ]; then
 
     # Read out the new and current versions
-    NEW_VERSION=`grep ^version "{BASEDIR}/settings.cfg" | cut -d' ' -f 3 | sed "s/\.//g"`
-    CURRENT_VERSION=`grep ^version "{BASEDIR}/settings.cfg" | cut -d' ' -f 3 | sed "s/\.//g"`
+    NEW_VERSION=`grep ^version "${BASEDIR}/settings.cfg" | cut -d' ' -f 3 | sed "s/\.//g"`
+    CURRENT_VERSION=`grep ^version "${BASEDIR}/settings.cfg" | cut -d' ' -f 3 | sed "s/\.//g"`
 
     # New version detected? Return true for updating
     if [ "${CURRENT_VERSION}" -lt "${NEW_VERSION}" ]; then
