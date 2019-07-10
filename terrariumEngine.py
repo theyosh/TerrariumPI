@@ -401,6 +401,9 @@ class terrariumEngine(object):
         archive_light = 'ignore'
         archive_door = 'ignore'
         motion_boxes = True
+        motion_delta_threshold = 25
+        motion_min_area = 500
+        motion_compare_frame = 'last'
 
         if 'resolution_width' in webcamdata and 'resolution_height' in webcamdata:
           width = webcamdata['resolution_width']
@@ -418,6 +421,15 @@ class terrariumEngine(object):
         if 'motionboxes' in webcamdata:
           motion_boxes = webcamdata['motionboxes']
 
+        if 'motion_delta_threshold' in webcamdata:
+          motion_delta_threshold = webcamdata['motiondeltathreshold']
+
+        if 'motion_min_area' in webcamdata:
+          motion_min_area = webcamdata['motionminarea']
+
+        if 'motion_compare_frame' in webcamdata:
+          motion_compare_frame = webcamdata['motioncompareframe']
+
         # don't let bad location data kill the system
         try:
           webcam = terrariumWebcam(None,
@@ -429,7 +441,10 @@ class terrariumEngine(object):
                                    archive_light,
                                    archive_door,
                                    self.environment,
-                                   motion_boxes)
+                                   motion_boxes,
+                                   motion_delta_threshold,
+                                   motion_min_area,
+                                   motion_compare_frame)
           self.webcams[webcam.get_id()] = webcam
         except Exception as err:
           print(err)
@@ -458,6 +473,15 @@ class terrariumEngine(object):
 
       if 'motionboxes' in webcamdata:
         webcam.set_motion_boxes(webcamdata['motionboxes'])
+
+      if 'motiondeltathreshold' in webcamdata:
+        webcam.set_motion_delta_threshold(webcamdata['motiondeltathreshold'])
+
+      if 'motionminarea' in webcamdata:
+        webcam.set_motion_min_area(webcamdata['motionminarea'])
+
+      if 'motioncompareframe' in webcamdata:
+        webcam.set_motion_compare_frame(webcamdata['motioncompareframe'])
 
       seen_webcams.append(webcam.get_id())
 
