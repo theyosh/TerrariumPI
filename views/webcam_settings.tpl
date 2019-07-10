@@ -167,6 +167,28 @@
                             </select>
                           </div>
                         </div>
+                        <div class="col-md-2 col-sm-2 col-xs-6 form-group">
+                          <label for="webcam_[nr]_motiondeltathreshold">{{_('Motion delta threshold')}}</label>
+                          <div class="form-group">
+                            <input class="form-control" name="webcam_[nr]_motiondeltathreshold" placeholder="{{_('Threshold')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" pattern="[0-9]+" data-original-title="{{translations.get_translation('webcam_field_motion_delta_threshold')}}">
+                          </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-6 form-group">
+                          <label for="webcam_[nr]_motionminarea">{{_('Motion minimum area')}}</label>
+                          <div class="form-group">
+                            <input class="form-control" name="webcam_[nr]_motionminarea" placeholder="{{_('Minimum area')}}" type="text" data-toggle="tooltip" data-placement="bottom" title="" pattern="[0-9]+" data-original-title="{{translations.get_translation('webcam_field_motion_min_area')}}">
+                          </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-6 form-group">
+                          <label for="webcam_[nr]_motioncompareframe">{{_('Motion comparison frame')}}</label>
+                          <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('webcam_field_motion_compare_frame')}}">
+                            <select class="form-control" name="webcam_[nr]_motioncompareframe" tabindex="-1" placeholder="{{_('Select an option')}}">
+                              <option value="">{{_('Select an option')}}</option>
+                              <option value="last">{{_('Last frame')}}</option>
+                              <option value="archived">{{_('Last archived frame')}}</option>
+                            </select>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
