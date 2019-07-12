@@ -50,7 +50,7 @@ class terrariumWebcamSource(object):
   UPDATE_TIMEOUT = 60
   VALID_ROTATIONS = ['0','90','180','270','h','v']
 
-  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None, motion_boxes = True, motion_delta_threshold = 25, motion_min_area = 500, motion_compare_frame = 'last'):
+  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
     # Variables per webcam
     self.raw_image = None
 
@@ -64,6 +64,12 @@ class terrariumWebcamSource(object):
     self.__state = None
     self.__environment = environment
 
+    # set defaults
+    self.set_motion_boxes(True)
+    self.set_motion_delta_threshold(25)
+    self.set_motion_min_area(500)
+    self.set_motion_compare_frame('last')
+
     # Per webcam config
     self.set_location(location)
     self.set_name(name)
@@ -72,10 +78,6 @@ class terrariumWebcamSource(object):
     self.set_archive(archive)
     self.set_archive_light(archive_light)
     self.set_archive_door(archive_door)
-    self.set_motion_boxes(motion_boxes)
-    self.set_motion_delta_threshold(motion_delta_threshold)
-    self.set_motion_min_area(motion_min_area)
-    self.set_motion_compare_frame(motion_compare_frame)
 
     if webcam_id is None:
       self.__id = md5(self.get_location().encode()).hexdigest()
@@ -473,8 +475,8 @@ class terrariumWebcamSource(object):
     return False
 
 class terrariumWebcamLiveSource(terrariumWebcamSource):
-  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None, motion_boxes = True, motion_delta_threshold = 25, motion_min_area = 500, motion_compare_frame = 'last'):
-    super(terrariumWebcamLiveSource,self).__init__(webcam_id, location, name, rotation, width, height, archive, archive_light, archive_door, environment, motion_boxes, motion_delta_threshold, motion_min_area, motion_compare_frame)
+  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
+    super(terrariumWebcamLiveSource,self).__init__(webcam_id, location, name, rotation, width, height, archive, archive_light, archive_door, environment)
     self.process_id = None
     self.start()
 
@@ -657,10 +659,10 @@ class terrariumWebcam(object):
              terrariumWebcamRPILive,
              terrariumWebcamHLSLive]
 
-  def __new__(self,webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None, motion_boxes = True, motion_delta_threshold = 25, motion_min_area = 500, motion_compare_frame = 'last'):
+  def __new__(self,webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
     for webcam_source in terrariumWebcam.SOURCES:
       if re.search(webcam_source.VALID_SOURCE, location, re.IGNORECASE):
-        return webcam_source(webcam_id,location,name,rotation,width,height,archive,archive_light,archive_door,environment, motion_boxes, motion_delta_threshold, motion_min_area, motion_compare_frame)
+        return webcam_source(webcam_id,location,name,rotation,width,height,archive,archive_light,archive_door,environment)
 
     raise terrariumWebcamSourceException()
 
