@@ -440,11 +440,11 @@ class terrariumEngine(object):
                                    archive,
                                    archive_light,
                                    archive_door,
-                                   self.environment,
-                                   motion_boxes,
-                                   motion_delta_threshold,
-                                   motion_min_area,
-                                   motion_compare_frame)
+                                   self.environment)
+          webcam.set_motion_boxes(motion_boxes)
+          webcam.set_motion_delta_threshold(motion_delta_threshold)
+          webcam.set_motion_min_area(motion_min_area)
+          webcam.set_motion_compare_frame(motion_compare_frame)
           self.webcams[webcam.get_id()] = webcam
         except Exception as err:
           print(err)
