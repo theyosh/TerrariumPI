@@ -50,7 +50,7 @@ class terrariumWebcamSource(object):
   UPDATE_TIMEOUT = 60
   VALID_ROTATIONS = ['0','90','180','270','h','v']
 
-  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None, motion_boxes = True):
+  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
     # Variables per webcam
     self.raw_image = None
 
@@ -64,6 +64,12 @@ class terrariumWebcamSource(object):
     self.__state = None
     self.__environment = environment
 
+    # set defaults
+    self.set_motion_boxes(True)
+    self.set_motion_delta_threshold(25)
+    self.set_motion_min_area(500)
+    self.set_motion_compare_frame('last')
+
     # Per webcam config
     self.set_location(location)
     self.set_name(name)
@@ -72,7 +78,6 @@ class terrariumWebcamSource(object):
     self.set_archive(archive)
     self.set_archive_light(archive_light)
     self.set_archive_door(archive_door)
-    self.set_motion_boxes(motion_boxes)
 
     if webcam_id is None:
       self.__id = md5(self.get_location().encode()).hexdigest()
@@ -227,7 +232,7 @@ class terrariumWebcamSource(object):
           if self.__previous_image is None or self.__previous_image.shape[0] != current_image.shape[0] or self.__previous_image.shape[1] != current_image.shape[1]:
             self.__previous_image = current_image
 
-          thresh = cv2.threshold(cv2.absdiff(self.__previous_image, current_image), 25, 255, cv2.THRESH_BINARY)[1]
+          thresh = cv2.threshold(cv2.absdiff(self.__previous_image, current_image), self.motion_delta_threshold, 255, cv2.THRESH_BINARY)[1]
           thresh = cv2.dilate(thresh, None, iterations=2)
 
           cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -238,13 +243,17 @@ class terrariumWebcamSource(object):
             # On pyton2 we use OpenCV2. Is different then Python 3 with OpenCV3
             (_,cnts,__) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-          self.__previous_image = current_image
+          # if comparison frame is "last frame", then set the previous
+          # frame now
+          if self.motion_compare_frame == 'last':
+            self.__previous_image = current_image
+
           motion_detected = False
           raw_image = cv2.imread(self.get_raw_image())
           # loop over the contours
           for c in cnts:
             # if the contour is too small, ignore it
-            if cv2.contourArea(c) < 500:
+            if cv2.contourArea(c) < self.motion_min_area:
               continue
 
             motion_detected = True
@@ -255,6 +264,10 @@ class terrariumWebcamSource(object):
               cv2.rectangle(raw_image, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
           if motion_detected:
+            # if compare frame is set to archived, then we save it here
+            if self.motion_compare_frame == 'archived':
+              self.__previous_image = current_image
+
             cv2.imwrite(archive_image,raw_image)
             logger.info('Saved webcam %s image for archive due to motion detection' % (self.get_name(),))
             self.__last_update = int(time.time())
@@ -349,7 +362,10 @@ class terrariumWebcamSource(object):
             'archivelight': self.get_archive_light(),
             'archivedoor': self.get_archive_door(),
             'archive_images' : [],
-            'motionboxes': self.get_motion_boxes()
+            'motionboxes': self.get_motion_boxes(),
+            'motiondeltathreshold': self.get_motion_delta_threshold(),
+            'motionminarea': self.get_motion_min_area(),
+            'motioncompareframe': self.get_motion_compare_frame()
             }
 
     if archive:
@@ -420,6 +436,24 @@ class terrariumWebcamSource(object):
   def set_motion_boxes(self,state):
     self.motion_boxes = terrariumUtils.is_true(state)
 
+  def get_motion_delta_threshold(self):
+    return self.motion_delta_threshold
+
+  def set_motion_delta_threshold(self, state):
+    self.motion_delta_threshold = int(state)
+
+  def get_motion_min_area(self):
+    return self.motion_min_area
+
+  def set_motion_min_area(self, state):
+    self.motion_min_area = int(state)
+
+  def get_motion_compare_frame(self):
+    return self.motion_compare_frame
+
+  def set_motion_compare_frame(self, state):
+    self.motion_compare_frame = state
+
   def get_state(self):
     return self.__state
 
@@ -441,8 +475,8 @@ class terrariumWebcamSource(object):
     return False
 
 class terrariumWebcamLiveSource(terrariumWebcamSource):
-  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None, motion_boxes = True):
-    super(terrariumWebcamLiveSource,self).__init__(webcam_id, location, name, rotation, width, height, archive, archive_light, archive_door, environment, motion_boxes)
+  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
+    super(terrariumWebcamLiveSource,self).__init__(webcam_id, location, name, rotation, width, height, archive, archive_light, archive_door, environment)
     self.process_id = None
     self.start()
 
@@ -625,10 +659,10 @@ class terrariumWebcam(object):
              terrariumWebcamRPILive,
              terrariumWebcamHLSLive]
 
-  def __new__(self,webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None, motion_boxes = True):
+  def __new__(self,webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
     for webcam_source in terrariumWebcam.SOURCES:
       if re.search(webcam_source.VALID_SOURCE, location, re.IGNORECASE):
-        return webcam_source(webcam_id,location,name,rotation,width,height,archive,archive_light,archive_door,environment, motion_boxes)
+        return webcam_source(webcam_id,location,name,rotation,width,height,archive,archive_light,archive_door,environment)
 
     raise terrariumWebcamSourceException()
 

@@ -82,6 +82,9 @@ class terrariumTranslations(object):
     self.translations['webcam_field_archive_light'] = _('Select the environment light state when enabling archiving.')
     self.translations['webcam_field_archive_door'] = _('Select the environment door state when enabling archiving.')
     self.translations['webcam_field_motion_boxes'] = _('Enable or disable motion boxes for Motion archiving.')
+    self.translations['webcam_field_motion_delta_threshold'] = _('Minimum difference between frames to be identified as motion. Higher value means that the image must be more different for motion to be detected.')
+    self.translations['webcam_field_motion_min_area'] = _('Minimum area of an image in pixels for a region to be considered motion. Larger values mean that only larger areas will be detected as motion.')
+    self.translations['webcam_field_motion_compare_frame'] = _('Last frame means that only consecutive frames will be compared for motion. Last archived frame means that the current frame will be compared to the last archived frame. Setting to last frame will ignore motion when it is very gradual.')
     # End webcam
 
     # Audio

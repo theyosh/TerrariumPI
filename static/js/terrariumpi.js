@@ -2545,6 +2545,11 @@ function add_webcam_setting_row(data,is_new) {
     minimumResultsForSearch: Infinity
   }).on('change',function() {
     $(this).parents('.x_content').find('img').removeClass('webcam_90 webcam_180 webcam_270 webcam_H webcam_V').addClass('webcam_' + this.value);
+
+    if (this.name.endsWith('_archive')) {
+      var motionEnabled = ('motion' === this.value);
+      $(this).parents('.x_content').find('.motion_option').toggle(motionEnabled);
+    }
   });
   // Add on the bottom before the submit row
   setting_row.insertBefore('div.row.submit');
