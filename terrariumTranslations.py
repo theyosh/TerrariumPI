@@ -170,7 +170,7 @@ class terrariumTranslations(object):
     self.translations['system_field_meross_password'] = _('Enter the password that is used for your Meross devices. Password is stored in plain text!')
     self.translations['system_field_graph_smooth_value'] = _('Holds the amount of datapoints (each 30 sec) to use for smoothing. The higher the value, the smoother the graph. Enter 0 to disable. Reload the webinterface after changing the setting.')
     self.translations['system_field_all_sensors_gauges_page'] = _('Select true or false to show an extra sensor page which holds all the sensors with there gauges. Reload the webinterface after changing the setting.')
-    #self.translations['system_field_owfs_port'] = _('Holds the port number on which the OWFS software is running. Leave empty to disable OWFS support.')
+    self.translations['system_field_graph_show_min_max_gauge'] = _('Toggle on or off the min and max measured value in the gauge graphs.')
     # End system
 
 

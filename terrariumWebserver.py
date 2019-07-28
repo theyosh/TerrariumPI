@@ -216,7 +216,8 @@ class terrariumWebserver(object):
                   'notifications' : self.__terrariumEngine.notification,
                   'show_gauge_overview' : 1 if self.__terrariumEngine.get_show_gauge_overview() else 0,
                   'hide_environment' : self.__terrariumEngine.get_hide_environment_on_dashboard(),
-                  'graph_smooth_value' : self.__terrariumEngine.get_graph_smooth_value()}
+                  'graph_smooth_value' : self.__terrariumEngine.get_graph_smooth_value(),
+                  'graph_show_min_max_gauge': 1 if self.__terrariumEngine.get_graph_show_min_max_gauge() else 0}
 
     if 'index' == template or 'profile' == template:
       variables['person_name'] = self.__terrariumEngine.get_profile_name()

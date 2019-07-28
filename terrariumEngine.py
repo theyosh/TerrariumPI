@@ -1248,6 +1248,13 @@ class terrariumEngine(object):
       config_data['graph_smooth_value'] = 0;
 
     return config_data['graph_smooth_value'] * 1
+
+  def get_graph_show_min_max_gauge(self):
+    config_data = self.config.get_system()
+    if 'graph_show_min_max_gauge' not in config_data:
+      config_data['graph_show_min_max_gauge'] = False;
+
+    return terrariumUtils.is_true(config_data['graph_show_min_max_gauge'])
   # End system functions part
 
   # API Config calls
