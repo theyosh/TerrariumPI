@@ -1020,6 +1020,24 @@ function sensor_gauge(name, data) {
     }
 
 function load_history_graph(id,type,data_url,nocache) {
+  function getMin(ret, thisVal) {
+    thisVal = thisVal[1];
+    return ret < thisVal ? ret : thisVal;
+  }
+
+  function getMax(ret, thisVal) {
+    thisVal = thisVal[1]
+    return ret > thisVal ? ret : thisVal;
+  }
+
+  function getDecimalDigits(val) {
+    if (Math.floor(val) !== val) {
+      return val.toString().split(".")[1].length || 0;
+    } else {
+      return 0;
+    }
+  }
+
   if ($('#' + id + ' .history_graph').length === 1) {
     var now = + new Date();
     var data = [];
@@ -1083,8 +1101,23 @@ function load_history_graph(id,type,data_url,nocache) {
           $.each(value, function(dummy, data_array) {
             globals.graphs[id].timestamp = now;
             globals.graphs[id].data = data_array;
+
+            if (globals.gauges[id]) {
+              // set the min/max values in the guage
+              var minVal = data_array.current.reduce(getMin);
+              var maxVal = data_array.current.reduce(getMax);
+              var fractionDigits = Math.min(3, Math.max(getDecimalDigits(minVal), getDecimalDigits(maxVal)));
+
+              globals.gauges[id].options.staticLabels = {
+                labels: [minVal, maxVal],
+                font: "12px sans-serif",
+                fractionDigits: fractionDigits
+              };
+              globals.gauges[id].render();
+            }
           });
         });
+
 
         if ('light' == type && data_url.indexOf('/average/') > 0) {
           globals.graphs[id].data.light_average = true;
