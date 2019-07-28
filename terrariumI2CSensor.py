@@ -7,9 +7,6 @@ import smbus
 import sys
 import Adafruit_SHT31
 
-from terrariumSensor import terrariumSensorSource
-from terrariumUtils import terrariumUtils
-
 # Dirty hack to include someone his code... to lazy to make it myself :)
 # https://github.com/ageir/chirp-rpi
 sys.path.insert(0, './chirp-rpi')
@@ -17,9 +14,10 @@ import chirp
 sys.path.insert(0, './python-MLX90614')
 from mlx90614 import MLX90614
 from struct import unpack
+from gevent import sleep
 
-from gevent import monkey, sleep
-monkey.patch_all()
+from terrariumSensor import terrariumSensorSource
+from terrariumUtils import terrariumUtils
 
 class terrariumI2CSensor(terrariumSensorSource):
   TYPE = None
@@ -71,7 +69,7 @@ class terrariumI2CSensor(terrariumSensorSource):
       data2 = self.i2c_bus.read_byte(int('0x' + gpio_pins[0],16))
     except Exception as ex:
       data2 = data1
-      logger.exception('Error getting second part of data in bytes from sensor \'%s\' at device %s with address %s with error: %s',(self.__class__.__name__,self.__device_number,self.__address,ex))
+      logger.warning('Error getting second part of data in bytes from sensor \'{}\' with address {} with error: {}'.format(self.get_name(),self.get_address(),ex))
 
     return (data1,data2)
 

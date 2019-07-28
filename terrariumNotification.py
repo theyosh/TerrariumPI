@@ -28,11 +28,10 @@ import pushover
 import json
 import requests
 
+from gevent import sleep
+
 from terrariumUtils import terrariumUtils, terrariumSingleton
 from terrariumDisplay import terrariumDisplay, terrariumDisplaySourceException
-
-from gevent import monkey, sleep
-monkey.patch_all()
 
 class terrariumNotificationMessage(object):
 

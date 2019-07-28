@@ -9,11 +9,10 @@ except ImportError as ex:
 import datetime
 import time
 
+from gevent import sleep
+
 from threading import Timer
 from terrariumUtils import terrariumUtils
-
-from gevent import monkey, sleep
-monkey.patch_all()
 
 class terrariumEnvironmentPart(object):
 

@@ -11,16 +11,21 @@ import subprocess
 import re
 import pywemo
 import datetime
+try:
+  import thread as _thread
+except ImportError as ex:
+  import _thread
+
+# Dirty hack to include someone his code... to lazy to make it myself :)
+# https://github.com/perryflynn/energenie-connect0r
+sys.path.insert(0, './energenie-connect0r')
+import energenieconnector
 
 from hashlib import md5
 from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
 from gpiozero import Energenie
 from time import time
-
-try:
-  import thread as _thread
-except ImportError as ex:
-  import _thread
+from gevent import sleep
 
 try:
   from meross_iot.api import MerossHttpClient, UnauthorizedException
@@ -29,15 +34,6 @@ except ImportError as ex:
   pass
 
 from terrariumUtils import terrariumUtils, terrariumTimer, terrariumCache
-
-# Dirty hack to include someone his code... to lazy to make it myself :)
-# https://github.com/perryflynn/energenie-connect0r
-sys.path.insert(0, './energenie-connect0r')
-import energenieconnector
-
-from gevent import monkey, sleep
-monkey.patch_all()
-
 
 class terrariumPowerSwitchSource(object):
   TYPE = None
@@ -170,12 +166,11 @@ class terrariumPowerSwitchSource(object):
                                                                                                                               state,force))
 
     if self.get_state() is not state or terrariumUtils.is_true(force):
+      old_state = self.get_state()
+
       try:
-        old_state = self.get_state()
         self.set_hardware_state(state,force)
         self.state = state
-        changed = True
-
         logger.info('Changed power switch \'{}\' of type \'{}\' at address \'{}\' from state \'{}\' to state \'{}\' (Forced:{})'.format(self.get_name(),
                                                                                                                                 self.get_type(),
                                                                                                                                 self.get_address(),
@@ -191,6 +186,11 @@ class terrariumPowerSwitchSource(object):
                                                                                                                                          self.get_address(),
                                                                                                                                          self.get_state(),
                                                                                                                                          state,force))
+
+      if (old_state is not None) or (old_state is None and state == 0):
+        # This is due to a bug that will graph 0 watt usage in the graph after rebooting.
+        # Fix is to add power and water usage in constructor
+        changed = old_state != self.get_state()
 
     if changed and self.callback is not None:
       self.callback(self.get_data())

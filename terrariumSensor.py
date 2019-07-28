@@ -7,15 +7,14 @@ import re
 import subprocess
 import json
 import sys
+
 from glob import iglob
 from time import time
 from pyownet import protocol
 from hashlib import md5
+from gevent import sleep
 
 from terrariumUtils import terrariumUtils, terrariumSingleton
-
-from gevent import monkey, sleep
-monkey.patch_all()
 
 class terrariumSensorCache(terrariumSingleton):
   def __init__(self):
@@ -443,9 +442,6 @@ from terrariumAnalogSensor import terrariumSKUSEN0161Sensor
 from terrariumBluetoothSensor import terrariumMiFloraSensor
 from terrariumGPIOSensor import terrariumYTXXSensorDigital, terrariumDHT11Sensor, terrariumDHT22Sensor, terrariumAM2302Sensor, terrariumHCSR04Sensor
 from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor, terrariumSHT3XSensor, terrariumMLX90614Sensor, terrariumAM2320Sensor
-
-# Not sure if this is needed here again....?
-monkey.patch_all()
 
 # terrariumSensor
 class terrariumSensorTypeException(TypeError):

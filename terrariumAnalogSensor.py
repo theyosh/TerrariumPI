@@ -3,12 +3,10 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 from gpiozero import MCP3008
+from gevent import sleep
 
 from terrariumUtils import terrariumUtils
 from terrariumSensor import terrariumSensorSource
-
-from gevent import monkey, sleep
-monkey.patch_all()
 
 class terrariumAnalogSensor(terrariumSensorSource):
   TYPE = None
