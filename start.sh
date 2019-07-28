@@ -28,11 +28,11 @@ function message {
 
 function update_software {
   # Initial run, no settings file, always up to date
-  if [ -f settings.cfg ]; then
+  if [ -f "${BASEDIR}/settings.cfg" ]; then
 
     # Read out the new and current versions
-    NEW_VERSION=`grep ^version defaults.cfg | cut -d' ' -f 3 | sed "s/\.//g"`
-    CURRENT_VERSION=`grep ^version settings.cfg | cut -d' ' -f 3 | sed "s/\.//g"`
+    NEW_VERSION=`grep ^version "${BASEDIR}/settings.cfg" | cut -d' ' -f 3 | sed "s/\.//g"`
+    CURRENT_VERSION=`grep ^version "${BASEDIR}/settings.cfg" | cut -d' ' -f 3 | sed "s/\.//g"`
 
     # New version detected? Return true for updating
     if [ "${CURRENT_VERSION}" -lt "${NEW_VERSION}" ]; then
@@ -57,9 +57,9 @@ then
     # Start terrarium software
     message "Starting TerrariumPI server at location: http://${IP}:8090 ..."
     if [ $PYTHON -eq 2 ]; then
-      python ${BASEDIR}/terrariumPI.py
+      python "${BASEDIR}/terrariumPI.py"
     elif [ $PYTHON -eq 3 ]; then
-      python3 ${BASEDIR}/terrariumPI.py
+      python3 "${BASEDIR}/terrariumPI.py"
     fi
 
     # Check after run if there is an update. If so, show message and exit

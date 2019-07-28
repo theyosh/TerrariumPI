@@ -3,17 +3,16 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 import untangle
-from datetime import datetime, timedelta
 import dateutil.parser
 import time
 import copy
 import json
 import re
 
-from terrariumUtils import terrariumUtils
+from datetime import datetime, timedelta
+from gevent import sleep
 
-from gevent import monkey, sleep
-monkey.patch_all()
+from terrariumUtils import terrariumUtils
 
 class terrariumWeatherSource(object):
   TYPE = None

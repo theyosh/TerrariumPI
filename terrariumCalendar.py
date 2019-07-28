@@ -2,15 +2,12 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
+from datetime import datetime, timedelta, date
 from operator import attrgetter
 from icalendar import Calendar, Event
 from icalevents.icalevents import events
 
 import os.path
-
-
-from datetime import datetime, timedelta, date
-#from dateutil.tz import UTC
 
 class terrariumCalendar(object):
 

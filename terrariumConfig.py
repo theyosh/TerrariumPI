@@ -2,6 +2,7 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
+import datetime
 try:
   import configparser
 except ImportError as ex:
@@ -9,8 +10,6 @@ except ImportError as ex:
 
 from glob import glob
 from hashlib import md5
-
-import datetime
 
 from terrariumUtils import terrariumUtils
 

@@ -21,7 +21,9 @@ import psutil
 import subprocess
 import re
 import json
+
 from hashlib import md5
+from gevent import sleep
 
 from terrariumConfig import terrariumConfig
 from terrariumWeather import terrariumWeather, terrariumWeatherSourceException
@@ -36,9 +38,6 @@ from terrariumNotification import terrariumNotification
 from terrariumCalendar import terrariumCalendar
 
 from terrariumUtils import terrariumUtils
-
-from gevent import monkey, sleep
-monkey.patch_all()
 
 class terrariumEngine(object):
 
@@ -258,9 +257,9 @@ class terrariumEngine(object):
 
     prev_state = {}
     if starting_up:
-      logger.info('Loading previous power switch states from the last 2 minutes')
+      logger.info('Loading previous power switch states from the last 12 hours')
       start = int(time.time())
-      prev_data = self.collector.get_history(['switches'],start,start-840)
+      prev_data = self.collector.get_history(['switches'],start,start-43200)
 
       if 'switches' in prev_data:
         for switch in prev_data['switches']:

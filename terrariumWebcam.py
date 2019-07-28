@@ -7,12 +7,6 @@ try:
 except ImportError as ex:
   import _thread
 
-try:
-  from subprocess import DEVNULL # py3k
-except ImportError:
-  import os
-  DEVNULL = open(os.devnull, 'wb')
-
 import time
 import cv2
 import math
@@ -30,11 +24,14 @@ from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont
 from hashlib import md5
 from shutil import copyfile
+from gevent import sleep
+try:
+  from subprocess import DEVNULL # py3k
+except ImportError:
+  import os
+  DEVNULL = open(os.devnull, 'wb')
 
 from terrariumUtils import terrariumUtils
-
-from gevent import monkey, sleep
-monkey.patch_all()
 
 class terrariumWebcamSource(object):
   TYPE = None
@@ -552,6 +549,25 @@ class terrariumWebcamUSB(terrariumWebcamSource):
 
     return False
 
+class terrariumWebcamLocal(terrariumWebcamSource):
+  TYPE = 'local'
+  VALID_SOURCE = '^local://(.*)'
+  INFO_SOURCE = 'local://image.jpg'
+
+  def get_raw_filename(self):
+    return re.search(terrariumWebcamLocal.VALID_SOURCE, self.location, re.IGNORECASE).group(1)
+
+  def get_raw_data(self):
+    location = self.get_raw_filename()
+    logger.debug('Using local location: %s' % (location))
+    try:
+      self.raw_image = open(location, "rb")
+      return True
+    except terrariumWebcamRAWUpdateException as ex:
+      logger.warning('Error getting raw local image from webcam \'%s\' with error message: %s' % (self.get_name(),ex))
+
+    return False
+
 class terrariumWebcamRemote(terrariumWebcamSource):
   TYPE = 'remote'
   VALID_SOURCE = '^https?://(?!.*\.(?:m3u8))'
@@ -604,6 +620,7 @@ class terrariumWebcamRAWUpdateException(Exception):
 class terrariumWebcam(object):
   SOURCES = [terrariumWebcamRPI,
              terrariumWebcamUSB,
+             terrariumWebcamLocal,
              terrariumWebcamRemote,
              terrariumWebcamRPILive,
              terrariumWebcamHLSLive]
