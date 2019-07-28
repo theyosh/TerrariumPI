@@ -73,6 +73,7 @@
     globals.horizontal_legend = {{horizontal_graph_legend}};
     globals.show_gauge_overview = {{show_gauge_overview}};
     globals.graph_smooth_value = {{graph_smooth_value}};
+    globals.graph_show_min_max_gauge = {{graph_show_min_max_gauge}};
   </script>
 </body>
 </html>

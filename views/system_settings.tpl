@@ -186,6 +186,17 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="graph_show_min_max_gauge">{{_('Show min and max values in gauge graphs')}}</label>
+                    <div class="col-md-7 col-sm-6 col-xs-10">
+                      <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_graph_show_min_max_gauge')}}">
+                        <select class="form-control" name="graph_show_min_max_gauge" required="required" tabindex="-1" placeholder="{{_('Select an option')}}">
+                          <option value="true">{{_('True')}}</option>
+                          <option value="false">{{_('False')}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="hide_environment_on_dashboard">{{_('Hide environment summary on the dashboard')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
                       <div class="form-group" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('system_field_hide_environment_on_dashboard')}}">
@@ -303,7 +314,7 @@
                 minimumResultsForSearch: Infinity
             });
 
-            $("select[name='temperature_indicator'],select[name='distance_indicator'],select[name='always_authenticate'],select[name='horizontal_graph_legend'],select[name='sensor_gauge_overview'],select[name='hide_environment_on_dashboard']").select2({
+            $("select[name='temperature_indicator'],select[name='distance_indicator'],select[name='always_authenticate'],select[name='horizontal_graph_legend'],select[name='sensor_gauge_overview'],select[name='hide_environment_on_dashboard'],select[name='graph_show_min_max_gauge']").select2({
                 placeholder: '{{_('Select an option')}}',
                 allowClear: false,
                 minimumResultsForSearch: Infinity

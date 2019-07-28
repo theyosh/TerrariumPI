@@ -1020,24 +1020,6 @@ function sensor_gauge(name, data) {
     }
 
 function load_history_graph(id,type,data_url,nocache) {
-  function getMin(ret, thisVal) {
-    thisVal = thisVal[1];
-    return ret < thisVal ? ret : thisVal;
-  }
-
-  function getMax(ret, thisVal) {
-    thisVal = thisVal[1]
-    return ret > thisVal ? ret : thisVal;
-  }
-
-  function getDecimalDigits(val) {
-    if (Math.floor(val) !== val) {
-      return val.toString().split(".")[1].length || 0;
-    } else {
-      return 0;
-    }
-  }
-
   if ($('#' + id + ' .history_graph').length === 1) {
     var now = + new Date();
     var data = [];
@@ -1101,23 +1083,8 @@ function load_history_graph(id,type,data_url,nocache) {
           $.each(value, function(dummy, data_array) {
             globals.graphs[id].timestamp = now;
             globals.graphs[id].data = data_array;
-
-            if (globals.gauges[id]) {
-              // set the min/max values in the guage
-              var minVal = data_array.current.reduce(getMin);
-              var maxVal = data_array.current.reduce(getMax);
-              var fractionDigits = Math.min(3, Math.max(getDecimalDigits(minVal), getDecimalDigits(maxVal)));
-
-              globals.gauges[id].options.staticLabels = {
-                labels: [minVal, maxVal],
-                font: "12px sans-serif",
-                fractionDigits: fractionDigits
-              };
-              globals.gauges[id].render();
-            }
           });
         });
-
 
         if ('light' == type && data_url.indexOf('/average/') > 0) {
           globals.graphs[id].data.light_average = true;
@@ -1163,6 +1130,16 @@ function load_history_graph(id,type,data_url,nocache) {
 }
 
 function history_graph(name, data, type) {
+  function getMin(ret, thisVal) {
+    thisVal = thisVal[1] || ret;
+    return ret < thisVal ? ret : thisVal;
+  }
+
+  function getMax(ret, thisVal) {
+    thisVal = thisVal[1] || ret;
+    return ret > thisVal ? ret : thisVal;
+  }
+
   if (type === undefined) {
     type = 'temperature';
   }
@@ -1506,7 +1483,17 @@ function history_graph(name, data, type) {
     try {
       graph_data[2].data = graph_data[2].data.splice(globals.graph_smooth_value);
     } catch (e) {}
+  }
 
+  if (globals.graph_show_min_max_gauge && name.indexOf('system_') === -1 && globals.gauges[name]) {
+    // set the min/max values in the guage
+    globals.gauges[name].options.staticLabels = {
+      labels: [graph_data[0].data.reduce(getMin), graph_data[0].data.reduce(getMax)],
+      font: '10px Helvetica Neue,sans-serif',
+      color: '#73879C',
+      fractionDigits: 3
+    };
+    globals.gauges[name].render();
   }
 
   if ($('#' + name + ' .history_graph').length == 1) {
