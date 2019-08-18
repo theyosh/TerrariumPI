@@ -269,13 +269,12 @@ if [ $PYTHON -eq 3 ]; then
   pip3 uninstall -y -q numpy
 fi
 
-cd Bright-Pi
+cd "${BASEDIR}/Bright-Pi"
 if [ $PYTHON -eq 2 ]; then
   sudo python2 setup.py install
 elif [ $PYTHON -eq 3 ]; then
   sudo python3 setup.py install
 fi
-cd ..
 
 cd "${BASEDIR}"
 chown ${SCRIPT_USER}. .
