@@ -65,7 +65,7 @@ fi
 debconf-apt-progress -- apt-get -y update
 debconf-apt-progress -- apt-get -y full-upgrade
 
-APT_PACKAGES="libftdi1 screen git subversion watchdog build-essential i2c-tools pigpio owserver sqlite3 vlc-nox ffmpeg libfreetype6-dev libjpeg-dev \
+APT_PACKAGES="libftdi1 screen git subversion watchdog build-essential i2c-tools pigpio owserver sqlite3 vlc-bin ffmpeg libfreetype6-dev libjpeg-dev \
   libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libjasper1 libgstreamer0.10-0 libgstreamer1.0-0 libilmbase12 \
   libopenexr22 libgtk-3-0 libxml2-dev libxslt1-dev python-twisted python-zope.interface $PYTHON_LIBS"
 
