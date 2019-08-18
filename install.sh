@@ -52,7 +52,9 @@ case $? in
 esac
 
 # Remove previous python 2.X packages to make sure pip installed libraries are used
-debconf-apt-progress -- apt-get -y remove owhttpd owftpd python-gpiozero python-dateutil python-imaging python-ow python-picamera python-pigpio python-psutil python-requests python-rpi.gpio
+debconf-apt-progress -- apt-get -y remove owhttpd owftpd
+
+#python-gpiozero python-dateutil python-imaging python-ow python-picamera python-pigpio python-psutil python-requests python-rpi.gpio
 
 # Install required packages to get the terrarium software running
 PYTHON_LIBS="python-pip python-dev python-mediainfodll python-smbus python-pil python-opencv python-numpy python-lxml"
