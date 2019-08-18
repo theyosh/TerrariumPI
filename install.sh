@@ -272,7 +272,7 @@ if [ $PYTHON -eq 3 ]; then
   # Removing this will fallback to OS default
   pip3 uninstall -y -q numpy
 fi
-sleep 10
+
 cd "${BASEDIR}/Bright-Pi"
 if [ $PYTHON -eq 2 ]; then
   sudo python2 setup.py install
@@ -280,7 +280,7 @@ elif [ $PYTHON -eq 3 ]; then
   sudo python3 setup.py install
 fi
 
-sleep 10
+
 cat <<EOF
 XXX
 $PROGRESS
@@ -295,7 +295,6 @@ PROGRESS=98
 cd "${BASEDIR}/"
 chown ${SCRIPT_USER}. .
 chown ${SCRIPT_USER}. * -Rf
-sleep 10
 cat <<EOF
 XXX
 $PROGRESS
