@@ -263,12 +263,16 @@ EOF
 
 done
 
+PROGRESS=96
+# Update submodules if downloaded through tar or zip
+cd "${BASEDIR}/"
+
 if [ $PYTHON -eq 3 ]; then
   # Remove pip numpy install that comes with an upgrade of another module. Does not work
   # Removing this will fallback to OS default
   pip3 uninstall -y -q numpy
 fi
-
+sleep 10
 cd "${BASEDIR}/Bright-Pi"
 if [ $PYTHON -eq 2 ]; then
   sudo python2 setup.py install
@@ -276,9 +280,28 @@ elif [ $PYTHON -eq 3 ]; then
   sudo python3 setup.py install
 fi
 
-cd "${BASEDIR}"
+sleep 10
+cat <<EOF
+XXX
+$PROGRESS
+Install required software (some modules will take 5-10 min.)
+
+Installing python${PYTHON} module: Bright-Pi ...
+XXX
+EOF
+
+PROGRESS=98
+# Update submodules if downloaded through tar or zip
+cd "${BASEDIR}/"
 chown ${SCRIPT_USER}. .
 chown ${SCRIPT_USER}. * -Rf
+sleep 10
+cat <<EOF
+XXX
+$PROGRESS
+Setting file rights ...
+XXX
+EOF
 
 PROGRESS=100
 cat <<EOF
