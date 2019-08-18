@@ -11,6 +11,7 @@ import subprocess
 import re
 import pywemo
 import datetime
+import brightpi
 try:
   import thread as _thread
 except ImportError as ex:
@@ -502,17 +503,17 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
           # url_switch_on  = 'http://192.168.1.42/control?cmd=event,T1'
           # url_switch_off  = 'http://192.168.1.42/control?cmd=event,T0'
 
-          print('Test ESP Easy')
+          #print('Test ESP Easy')
 
           url = 'http://{}/json'.format(data['host'])
           # No information about using username and password:
           # https://www.letscontrolit.com/wiki/index.php?title=ESPEasy_Command_Reference
           # https://www.letscontrolit.com/wiki/index.php?title=ESP_Easy_web_interface#JSON_page_.28hidden_prior_to_version_2.0.2B.29
 
-          print(url)
+          #print(url)
           state = terrariumUtils.get_remote_data(url)
-          print('Result')
-          print(state)
+          #print('Result')
+          #print(state)
           if state is None:
             raise Exception('No data, jump to next test')
 
@@ -533,7 +534,7 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
           # http://192.168.1.108/api/relay/0?apikey=C62ED7BE7593B658&value=2 (toggle)
 
 
-          print('Test ESPurna')
+          #print('Test ESPurna')
 
           if 'password' not in data:
             # Just add dummy value...
@@ -541,10 +542,10 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
 
           url = 'http://{}/apis?apikey={}'.format(data['host'],data['password'])
 
-          print(url)
+          #print(url)
           state = terrariumUtils.get_remote_data(url,json=True)
-          print('Result')
-          print(state)
+          #print('Result')
+          #print(state)
           if state is None:
             raise Exception('No data, this was the last attempt...')
 
@@ -760,24 +761,14 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
     self.on_percentage  = 100.0
     self.off_percentage = 0.0
 
-    self.__dimmer_state = 0.0
+    self._dimmer_state = 0.0
     super(terrariumPowerDimmerSource,self).__init__(switchid, address, name, prev_state, callback)
 
   def get_state(self):
-    return self.__dimmer_state
+    return self._dimmer_state
 
   def load_hardware(self):
-    self.__dimmer_running = False
-    pigpio.exceptions = False
-    self.__pigpio = pigpio.pi('localhost')
-    if not self.__pigpio.connected:
-      self.__pigpio = pigpio.pi()
-      if not self.__pigpio.connected:
-        logger.error('PiGPIOd process is not running')
-        self.__pigpio = False
-
-    pigpio.exceptions = True
-    self.__pigpio.set_pull_up_down(terrariumUtils.to_BCM_port_number(self.get_address()), pigpio.PUD_OFF)
+    self.__device = None
 
   def is_dimmer(self):
     return True
@@ -801,7 +792,7 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
     return self.is_at_max_power()
 
   def __go_up_down(self,direction):
-    if not self.__dimmer_running:
+    if not self._dimmer_running:
       new_value = self.get_state() + (direction * self.get_dimmer_step())
       if new_value > self.get_dimmer_on_percentage():
         new_value = self.get_dimmer_on_percentage()
@@ -844,7 +835,8 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
     return self.off_percentage
 
   def set_hardware_state(self, value, force = False):
-    if not self.__dimmer_running:
+    print('set_hardware_state(self, value, force = False):')
+    if not self._dimmer_running:
       duration = self.get_dimmer_duration()
       # State 100 = full on which means 0 dim.
       # State is inverse of dim
@@ -857,21 +849,24 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
 
       if force:
         duration = 0
-      _thread.start_new_thread(self.__dim_switch, (value,duration))
+
+      print('Starting thread')
+      _thread.start_new_thread(self._dim_switch, (value,duration))
 
     return True
 
-  def __dim_switch(self,value,duration):
+  def _dim_switch(self,value,duration):
     # When the dimmer is working, ignore new state changes.
-    if not self.__dimmer_running:
-      self.__dimmer_running = True
+    prev_value = -1
+    if not self._dimmer_running:
+      self._dimmer_running = True
 
-      self.__dimmer_state = (0.0 if not terrariumUtils.is_float(self.get_state()) else float(self.get_state()))
+      self._dimmer_state = (0.0 if not terrariumUtils.is_float(self.get_state()) else float(self.get_state()))
       value    = (0.0 if not terrariumUtils.is_float(value) else float(value))
       duration = (0.0 if not terrariumUtils.is_float(duration) else float(duration))
 
-      direction = (1.0 if self.__dimmer_state <= value else -1.0)
-      distance  = abs(self.__dimmer_state - value)
+      direction = (1.0 if self._dimmer_state <= value else -1.0)
+      distance  = abs(self._dimmer_state - value)
 
       if int(duration) == 0 or int(distance) == 0:
         steps = 1.0
@@ -884,29 +879,43 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
       logger.debug('Dimmer settings: Steps: %s, Distance per step: %s%%, Time per step: %s, Direction: %s',steps, distance, duration, direction)
 
       for counter in range(int(steps)):
-        self.__dimmer_state += (direction * distance)
+        self._dimmer_state += (direction * distance)
         if self.get_type() == terrariumPowerDimmerPWM.TYPE:
-          dim_value = terrariumPowerDimmerPWM.DIMMER_MAXDIM * ((100.0 - float(self.__dimmer_state)) / 100.0)
+          dim_value = terrariumPowerDimmerPWM.DIMMER_MAXDIM * ((100.0 - float(self._dimmer_state)) / 100.0)
           dim_freq = terrariumPowerDimmerPWM.DIMMER_FREQ
         elif self.get_type() == terrariumPowerDimmerDC.TYPE:
-          dim_value = terrariumPowerDimmerDC.DIMMER_MAXDIM * (float(self.__dimmer_state) / 100.0)
+          dim_value = terrariumPowerDimmerDC.DIMMER_MAXDIM * (float(self._dimmer_state) / 100.0)
           dim_freq = terrariumPowerDimmerDC.DIMMER_FREQ
 
+        elif self.get_type() == terrariumPowerDimmerBrightPi.TYPE:
+          dim_value = int(50 * (float(self._dimmer_state) / 100.0))
+
         for gpiopin in self.get_address().split(','):
-          if terrariumUtils.to_BCM_port_number(gpiopin) is False:
-            continue
-          logger.debug('Dimmer animation: Step: %s, value %s%%, Dim value: %s, timeout %s',counter+1, self.__dimmer_state, dim_value, duration)
-          self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(gpiopin), dim_freq, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
+          logger.debug('Dimmer animation: Step: %s, value %s%%, Dim value: %s, timeout %s',counter+1, self._dimmer_state, dim_value, duration)
+          if self.get_type() in [terrariumPowerDimmerPWM.TYPE,terrariumPowerDimmerDC.TYPE]:
+            if terrariumUtils.to_BCM_port_number(gpiopin) is False:
+              continue
+
+            self._device.hardware_PWM(terrariumUtils.to_BCM_port_number(gpiopin), dim_freq, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
+          elif self.get_type() == terrariumPowerDimmerBrightPi.TYPE:
+
+            if dim_value != prev_value:
+              leds = brightpi.LED_WHITE
+              if self.get_address().split(',')[-1].lower() == 'ir':
+                leds = brightpi.LED_IR
+
+              self._device.set_led_dim(leds, dim_value)
+              prev_value = dim_value
 
         if duration > 0.0:
           sleep(duration)
 
         # For impatient people... Put the dimmer at the current state value if it has changed during the animation (DISABLED FOR NOW)
         # dim_value = terrariumSwitch.PWM_DIMMER_MAXDIM * ((100.0 - self.get_state()) / 100.0)
-        # self.__pigpio.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
+        # self.__device.hardware_PWM(terrariumUtils.to_BCM_port_number(self.get_address()), 5000, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
 
-      self.__dimmer_state = value
-      self.__dimmer_running = False
+      self._dimmer_state = value
+      self._dimmer_running = False
       if self.callback is not None:
         self.callback(self.get_data())
       logger.info('Power switch \'{}\' at address \'{}\' is done at value {}% in {} seconds'.format(self.get_name(),
@@ -930,7 +939,27 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
 
     return data
 
-class terrariumPowerDimmerPWM(terrariumPowerDimmerSource):
+
+class terrariumPowerDimmerPiGPIOSource(terrariumPowerDimmerSource):
+  TYPE = 'pigpio-dimmer'
+
+  def load_hardware(self):
+    print('Loading dimmer hardware terrariumPowerDimmerPiGPIOSource')
+    self._dimmer_running = False
+    pigpio.exceptions = False
+    self._device = pigpio.pi('localhost')
+    if not self._device.connected:
+      self._device = pigpio.pi()
+      if not self._device.connected:
+        logger.error('PiGPIOd process is not running')
+        self._device = None
+
+    if self._device is not None:
+      pigpio.exceptions = True
+      self._device.set_pull_up_down(terrariumUtils.to_BCM_port_number(self.get_address()), pigpio.PUD_OFF)
+
+
+class terrariumPowerDimmerPWM(terrariumPowerDimmerPiGPIOSource):
   TYPE = 'pwm-dimmer'
 
   # PWM dimmer settings
@@ -939,12 +968,26 @@ class terrariumPowerDimmerPWM(terrariumPowerDimmerSource):
   DIMMER_MAXDIM = 870
   DIMMER_FREQ   = 5000
 
-class terrariumPowerDimmerDC(terrariumPowerDimmerSource):
+class terrariumPowerDimmerDC(terrariumPowerDimmerPiGPIOSource):
   TYPE = 'dc-dimmer'
 
   # DC dimmer settings
   DIMMER_MAXDIM = 1000 # https://github.com/theyosh/TerrariumPI/issues/178#issuecomment-412667010
   DIMMER_FREQ   = 15000 # https://github.com/theyosh/TerrariumPI/issues/178#issuecomment-413697246
+
+class terrariumPowerDimmerBrightPi(terrariumPowerDimmerSource):
+  TYPE = 'brightpi'
+
+  def load_hardware(self):
+    self._dimmer_running = False
+    self._device = brightpi.BrightPi()
+    self._device.reset()
+    self._device.set_gain(5)
+    leds = brightpi.LED_WHITE
+    if self.get_address().split(',')[-1].lower() == 'ir':
+      leds = brightpi.LED_IR
+
+    self._device.set_led_on_off(leds, brightpi.ON)
 
 class terrariumPowerSwitchRemote(terrariumPowerSwitchSource):
   TYPE = 'remote'
@@ -1047,6 +1090,7 @@ class terrariumPowerSwitch(object):
                     terrariumPowerSwitchRemote,
                     terrariumPowerDimmerPWM,
                     terrariumPowerDimmerDC,
+                    terrariumPowerDimmerBrightPi,
                     terrariumPowerSwitchDenkoviV2_4,
                     terrariumPowerSwitchDenkoviV2_8,
                     terrariumPowerSwitchDenkoviV2_16,
