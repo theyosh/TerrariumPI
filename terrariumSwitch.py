@@ -835,7 +835,6 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
     return self.off_percentage
 
   def set_hardware_state(self, value, force = False):
-    print('set_hardware_state(self, value, force = False):')
     if not self._dimmer_running:
       duration = self.get_dimmer_duration()
       # State 100 = full on which means 0 dim.
@@ -850,7 +849,6 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
       if force:
         duration = 0
 
-      print('Starting thread')
       _thread.start_new_thread(self._dim_switch, (value,duration))
 
     return True
@@ -944,7 +942,6 @@ class terrariumPowerDimmerPiGPIOSource(terrariumPowerDimmerSource):
   TYPE = 'pigpio-dimmer'
 
   def load_hardware(self):
-    print('Loading dimmer hardware terrariumPowerDimmerPiGPIOSource')
     self._dimmer_running = False
     pigpio.exceptions = False
     self._device = pigpio.pi('localhost')
