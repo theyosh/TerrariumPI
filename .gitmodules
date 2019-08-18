@@ -22,3 +22,6 @@
 [submodule "python-MLX90614"]
 	path = python-MLX90614
 	url = https://github.com/CRImier/python-MLX90614.git
+[submodule "Bright-Pi"]
+	path = Bright-Pi
+	url = https://github.com/PiSupply/Bright-Pi.git
