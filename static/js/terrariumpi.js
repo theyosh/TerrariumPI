@@ -987,37 +987,37 @@ function sensor_gauge(name, data) {
 }
 
 /**
-    * returns an array with moving average of the input array
-    * @param array - the input array
-    * @param count - the number of elements to include in the moving average calculation
-    * @param qualifier - an optional function that will be called on each
-    *  value to determine whether it should be used
-    */
-    function movingAvg(array, count, qualifier){
+* returns an array with moving average of the input array
+* @param array - the input array
+* @param count - the number of elements to include in the moving average calculation
+* @param qualifier - an optional function that will be called on each
+*  value to determine whether it should be used
+*/
+function movingAvg(array, count, qualifier){
 
-        // calculate average for subarray
-        var avg = function(array, qualifier){
+    // calculate average for subarray
+    var avg = function(array, qualifier){
 
-            var sum = 0, count = 0, val;
-            for (var i in array){
-                val = array[i][1];
-                if (!qualifier || qualifier(val)){
-                    sum += val;
-                    count++;
-                }
+        var sum = 0, count = 0, val;
+        for (var i in array){
+            val = array[i][1];
+            if (!qualifier || qualifier(val)){
+                sum += val;
+                count++;
             }
-
-            return [array[0][0],sum / count];
-        };
-        var result = [], val;
-
-        // calculate average for each subarray and add to result
-        for (var i=0, len=array.length - count; i <= len; i++){
-            val = avg(array.slice(i, i + count), qualifier);
-            result.push(val);
         }
-        return result;
+
+        return [array[0][0],sum / count];
+    };
+    var result = [], val;
+
+    // calculate average for each subarray and add to result
+    for (var i=0, len=array.length - count; i <= len; i++){
+        val = avg(array.slice(i, i + count), qualifier);
+        result.push(val);
     }
+    return result;
+}
 
 function load_history_graph(id,type,data_url,nocache) {
   if ($('#' + id + ' .history_graph').length === 1) {
