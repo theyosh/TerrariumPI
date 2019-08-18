@@ -282,7 +282,7 @@ class terrariumEngine(object):
       if power_switch_config['id'] in prev_state and prev_state[power_switch_config['id']] > 0:
         prev_power_state = terrariumPowerSwitch.ON
 
-        if 'dimmer' in power_switch_config['hardwaretype']:
+        if 'dimmer' in power_switch_config['hardwaretype'] or 'brightpi' == power_switch_config['hardwaretype']:
           prev_power_state = (float(prev_state[power_switch_config['id']]) / float(power_switch_config['power_wattage'])) * 100
 
       if power_switch_config['id'] in [None,'None',''] or power_switch_config['id'] not in self.power_switches:
