@@ -856,6 +856,10 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
   def _dim_switch(self,value,duration):
     # When the dimmer is working, ignore new state changes.
     prev_value = -1
+    if self._device is not None:
+      logger.error('Dimmer device {} is not loaded... cannot dimm'.format(self.get_name()))
+
+
     if not self._dimmer_running:
       self._dimmer_running = True
 
@@ -977,14 +981,19 @@ class terrariumPowerDimmerBrightPi(terrariumPowerDimmerSource):
 
   def load_hardware(self):
     self._dimmer_running = False
-    self._device = brightpi.BrightPi()
-    self._device.reset()
-    self._device.set_gain(5)
-    leds = brightpi.LED_WHITE
-    if self.get_address().split(',')[-1].lower() == 'ir':
-      leds = brightpi.LED_IR
+    self._device = None
+    try:
+      self._device = brightpi.BrightPi()
+      self._device.reset()
+      self._device.set_gain(5)
+      leds = brightpi.LED_WHITE
+      if self.get_address().split(',')[-1].lower() == 'ir':
+        leds = brightpi.LED_IR
 
-    self._device.set_led_on_off(leds, brightpi.ON)
+      self._device.set_led_on_off(leds, brightpi.ON)
+    except Exception as ex:
+      print('load_hardware exception')
+      print(ex)
 
 class terrariumPowerSwitchRemote(terrariumPowerSwitchSource):
   TYPE = 'remote'
