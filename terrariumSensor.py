@@ -313,18 +313,18 @@ class terrarium1WSensor(terrariumSensorSource):
   W1_BASE_PATH = '/sys/bus/w1/devices/'
   W1_TEMP_REGEX = re.compile(r'(?P<type>t|f)=(?P<value>[0-9\-]+)',re.IGNORECASE)
 
-  def set_address(self,address):
-    self.sensor_address = address if os.path.isfile(os.path.join(terrarium1WSensor.W1_BASE_PATH,address,'w1_slave')) else None
-
   def load_data(self):
     data = None
-    if self.get_address() is not None:
-      with open(os.path.join(terrarium1WSensor.W1_BASE_PATH,self.get_address(),'w1_slave'), 'r') as w1data:
-        data = w1data.read()
-        w1data = terrarium1WSensor.W1_TEMP_REGEX.search(data)
-        if w1data:
-          # Found data
-          data = float(w1data.group('value')) / 1000.0
+    try:
+      if self.get_address() is not None:
+        with open(os.path.join(terrarium1WSensor.W1_BASE_PATH,self.get_address(),'w1_slave'), 'r') as w1data:
+          data = w1data.read()
+          w1data = terrarium1WSensor.W1_TEMP_REGEX.search(data)
+          if w1data:
+            # Found data
+            data = float(w1data.group('value')) / 1000.0
+    except Exception as ex:
+      logger.exception('Error loading 1 Wire data at location: {} with error: {}'.format(os.path.join(terrarium1WSensor.W1_BASE_PATH,self.get_address(),'w1_slave'),ex))
 
     if data is None:
       return None
