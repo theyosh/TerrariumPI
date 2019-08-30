@@ -278,11 +278,11 @@ class terrariumSensorSource(object):
     return self.notification == True
 
   def start(self):
-    logger.info('Start up sensor %s at location %s' % (self.get_name(), self.get_address()))
+    logger.debug('Start up sensor %s at location %s' % (self.get_name(), self.get_address()))
     return self
 
   def stop(self):
-    logger.info('Cleaned up sensor %s at location %s' % (self.get_name(), self.get_address()))
+    logger.debug('Cleaned up sensor %s at location %s' % (self.get_name(), self.get_address()))
 
 class terrariumRemoteSensor(terrariumSensorSource):
   TYPE = 'remote'

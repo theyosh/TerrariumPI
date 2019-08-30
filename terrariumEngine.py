@@ -644,6 +644,9 @@ class terrariumEngine(object):
     logtail = subprocess.Popen(['tail','-F','log/terrariumpi.log'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     for line in logtail.stdout:
       self.__send_message({'type':'logtail','data':line.strip().decode('utf-8')})
+      if not self.__running:
+        logger.info('Stopped terrariumPI engine log')
+        logtail.kill()
 
   def __unit_type(self,unittype):
     if unittype in self.__units:
@@ -659,9 +662,19 @@ class terrariumEngine(object):
 
     for sensorid in self.sensors:
       self.sensors[sensorid].stop()
+      logger.info('Stopped type {} {} sensor {} at address {}'.format(self.sensors[sensorid].get_type(),self.sensors[sensorid].get_sensor_type(),self.sensors[sensorid].get_name(),self.sensors[sensorid].get_address()))
 
     for power_switch_id in self.power_switches:
       self.power_switches[power_switch_id].stop()
+      logger.info('Stopped power switch {} at address {}'.format(self.power_switches[power_switch_id].get_name(),self.power_switches[power_switch_id].get_address()))
+
+    for door_id in self.doors:
+      self.doors[door_id].stop()
+      logger.info('Stopped door {} at address {}'.format(self.doors[door_id].get_name(),self.doors[door_id].get_address()))
+
+    for webcam_id in self.webcams:
+      self.webcams[webcam_id].stop()
+      logger.info('Stopped webcam {} at address {}'.format(self.webcams[webcam_id].get_name(),self.webcams[webcam_id].get_location()))
 
     self.notification.stop()
     self.collector.stop()

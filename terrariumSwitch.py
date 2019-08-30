@@ -202,7 +202,7 @@ class terrariumPowerSwitchSource(object):
     return self.state
 
   def stop(self):
-    pass
+    logger.debug('Stopping power switch {} at location {}'.format(self.get_name(), self.get_address()))
 
   def in_manual_mode(self):
     return terrariumUtils.is_true(self.manual_mode)
@@ -304,6 +304,7 @@ class terrariumPowerSwitchGPIO(terrariumPowerSwitchSource):
 
   def stop(self):
     GPIO.cleanup(terrariumUtils.to_BCM_port_number(self.get_address()))
+    super(terrariumPowerSwitchGPIO,self).stop()
 
   def set_hardware_state(self, state, force = False):
     if self.get_type() == terrariumPowerSwitchGPIO.TYPE:
@@ -440,6 +441,7 @@ class terrariumPowerSwitchEnergenieLAN(terrariumPowerSwitchSource):
 
   def stop(self):
     self.__device.logout()
+    super(terrariumPowerSwitchEnergenieLAN,self).stop()
 
 class terrariumPowerSwitchEnergenieRF(terrariumPowerSwitchSource):
   TYPE = 'eg-pm-rf'
@@ -455,6 +457,7 @@ class terrariumPowerSwitchEnergenieRF(terrariumPowerSwitchSource):
 
   def stop(self):
     self.__device.close()
+    super(terrariumPowerSwitchEnergenieRF,self).stop()
 
 
 class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
@@ -1016,7 +1019,6 @@ class terrariumPowerSwitchMSS425E(terrariumPowerSwitchSource):
 
   def __init__(self, switch_id, address, name = '', prev_state = None, callback = None):
     self.__device = address[0]
-
     super(terrariumPowerSwitchMSS425E,self).__init__(switch_id, address[1], name, prev_state, callback)
 
   def set_hardware_state(self, state, force = False):

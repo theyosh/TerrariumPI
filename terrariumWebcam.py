@@ -474,6 +474,9 @@ class terrariumWebcamSource(object):
   def is_live(self):
     return False
 
+  def stop(self):
+    pass
+
 class terrariumWebcamLiveSource(terrariumWebcamSource):
   def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
     super(terrariumWebcamLiveSource,self).__init__(webcam_id, location, name, rotation, width, height, archive, archive_light, archive_door, environment)
@@ -486,6 +489,10 @@ class terrariumWebcamLiveSource(terrariumWebcamSource):
       sleep(1)
 
     _thread.start_new_thread(self.run, ())
+
+  def stop(self):
+    if self.process_id is not None:
+        subprocess.Popen(['/usr/bin/pkill', '-P',str(self.process_id.pid)])
 
   def run(self):
     cmd = shlex.split(self.cmd())
