@@ -102,6 +102,10 @@ class terrariumI2CSensor(terrariumSensorSource):
     except Exception as ex:
       logger.warning('Error closing {} sensor \'{}\'. Error message: {}'.format(self.get_type(),self.get_name(),ex))
 
+  def stop(self):
+    self.close()
+    super(terrariumI2CSensor,self).stop()
+
 class terrariumSHT2XSensor(terrariumI2CSensor):
   TYPE = 'sht2x'
   # SHT2XX - 3.3 Volt VCC

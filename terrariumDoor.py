@@ -31,6 +31,7 @@ class terrariumDoor(object):
     self.set_name(name)
 
     self.__last_check = 0
+    self.__run = True
 
     if self.id is None:
       self.id = md5((self.get_hardware_type() + self.get_address()).encode()).hexdigest()
@@ -53,7 +54,7 @@ class terrariumDoor(object):
 
   def __checker(self):
     logger.info('Start terrariumPI door checker for door \'%s\'' % self.get_name())
-    while True:
+    while self.__run:
       current_status = None
       if self.get_hardware_type() == 'gpio':
         current_status = terrariumDoor.OPEN if GPIO.input(terrariumUtils.to_BCM_port_number(self.get_address())) else terrariumDoor.CLOSED
@@ -125,3 +126,10 @@ class terrariumDoor(object):
 
   def is_closed(self):
     return self.door_status == terrariumDoor.CLOSED
+
+  def stop(self):
+    self.__run = False
+    if self.get_hardware_type() == 'gpio':
+      GPIO.cleanup(terrariumUtils.to_BCM_port_number(self.get_address()))
+
+    logger.debug('Stopped door sensor {}'.format(self.get_name()))
