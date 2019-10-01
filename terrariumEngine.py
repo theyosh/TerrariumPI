@@ -183,14 +183,19 @@ class terrariumEngine(object):
     for sensordata in sensor_config:
       if sensordata['id'] not in self.sensors:
         # New sensor (add)
-        sensor = terrariumSensor(sensordata['id'],
-                                 sensordata['hardwaretype'],
-                                 sensordata['type'],
-                                 sensordata['address'],
-                                 sensordata['name'],
-                                 self.__unit_type)
+        try:
+          sensor = terrariumSensor(sensordata['id'],
+                                   sensordata['hardwaretype'],
+                                   sensordata['type'],
+                                   sensordata['address'],
+                                   sensordata['name'],
+                                   self.__unit_type)
 
-        self.sensors[sensor.get_id()] = sensor
+          self.sensors[sensor.get_id()] = sensor
+        except Exception as ex:
+          logger.exception('Error adding sensor type {} with name {}'.format(sensordata['type'],sensordata['name']))
+          continue
+
       else:
         # Existing sensor
         sensor = self.sensors[sensordata['id']]
