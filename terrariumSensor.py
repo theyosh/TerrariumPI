@@ -512,6 +512,7 @@ class terrariumSensor(object):
 
     # Volume is only through remote
     data['volume'] = 'volume'
+    data['conductivity'] = 'conductivity'
     return data
 
   @staticmethod
