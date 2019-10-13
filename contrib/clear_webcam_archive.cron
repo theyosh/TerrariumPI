@@ -1,4 +1,8 @@
 #!/bin/sh
 
 #this will delete all jpg files in the webcam archive folder. Use with care!
+# Install it as root user with the command:
+#
+# ln -s /home/pi/TerrariumPI/contrib/clear_webcam_archive.cron /etc/cron.daily/
+
 find /home/pi/TerrariumPI/webcam/archive -type f -name "*.jpg" -delete
