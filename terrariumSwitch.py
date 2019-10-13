@@ -857,11 +857,12 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
     return True
 
   def _dim_switch(self,value,duration):
-    # When the dimmer is working, ignore new state changes.
-    prev_value = -1
     if self._device is None:
       logger.error('Dimmer device {} is not loaded... cannot dimm'.format(self.get_name()))
+      return
 
+    # When the dimmer is working, ignore new state changes.
+    prev_value = -1
 
     if not self._dimmer_running:
       self._dimmer_running = True
