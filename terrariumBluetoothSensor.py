@@ -5,8 +5,11 @@ logger = terrariumLogging.logging.getLogger(__name__)
 from struct import unpack
 from bluepy.btle import Scanner, Peripheral
 
-from btlewrap.bluepy import BluepyBackend
-from mitemp_bt.mitemp_bt_poller import MiTempBtPoller, MI_TEMPERATURE, MI_HUMIDITY, MI_BATTERY
+try:
+  from btlewrap.bluepy import BluepyBackend
+  from mitemp_bt.mitemp_bt_poller import MiTempBtPoller, MI_TEMPERATURE, MI_HUMIDITY, MI_BATTERY
+except Exception as ex:
+  pass
 
 from terrariumSensor import terrariumSensorSource, terrariumSensorCache
 
