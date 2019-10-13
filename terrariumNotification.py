@@ -638,7 +638,7 @@ class terrariumNotification(terrariumSingleton):
         for attachment in files:
           with open(attachment,'rb') as fp:
             attachment_data = fp.read()
-            message.files.push({'name' : os.path.basename(attachment), data : b64encode(attachment_data).decode('utf-8')})
+            message.files.push({'name' : os.path.basename(attachment), 'data' : b64encode(attachment_data).decode('utf-8')})
 
       headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
       r = requests.post(url, data=json.dumps(message), headers=headers)
