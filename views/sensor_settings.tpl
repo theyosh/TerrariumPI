@@ -119,6 +119,7 @@
                                 <option value="sku-sen0161">{{_('pH SKU-SEN0161')}}</option>
                                 <option value="veml6075">{{_('VEML6075')}}</option>
                                 <option value="miflora">{{_('MiFlora')}}</option>
+                                <option value="mitemp">{{_('Mi Temperature & Humidity')}}</option>
                                 <option value="mh-z19">{{_('mh-z19')}}</option>
                                 <option value="mlx90614">{{_('MLX90614')}}</option>
                                 <option value="am2320">{{_('AM2320')}}</option>
