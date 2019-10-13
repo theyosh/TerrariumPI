@@ -27,6 +27,7 @@ import pushover
 # Telegram Bot
 import json
 import requests
+from base64 import b64encode
 
 from gevent import sleep
 
@@ -630,6 +631,14 @@ class terrariumNotification(terrariumSingleton):
       message = ','.join(message.decode().split('\n'))
       message = '{' + message.replace(':False',':false').replace(':True',':true').replace('\'','"') + '}'
       message = json.loads(message)
+
+      if len(files) > 0:
+        message.files = []
+
+        for attachment in files:
+          with open(attachment,'rb') as fp:
+            attachment_data = fp.read()
+            message.files.push({'name' : os.path.basename(attachment), data : b64encode(attachment_data).decode('utf-8')})
 
       headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
       r = requests.post(url, data=json.dumps(message), headers=headers)
