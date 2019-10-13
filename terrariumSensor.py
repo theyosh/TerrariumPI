@@ -439,7 +439,7 @@ class terrariumMHZ19Sensor(terrariumSensorSource):
     return data
 
 from terrariumAnalogSensor import terrariumSKUSEN0161Sensor
-from terrariumBluetoothSensor import terrariumMiFloraSensor
+from terrariumBluetoothSensor import terrariumMiFloraSensor, terrariumMiTempSensor
 from terrariumGPIOSensor import terrariumYTXXSensorDigital, terrariumDHT11Sensor, terrariumDHT22Sensor, terrariumAM2302Sensor, terrariumHCSR04Sensor
 from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor, terrariumSHT3XSensor, terrariumMLX90614Sensor, terrariumAM2320Sensor
 
@@ -462,6 +462,7 @@ class terrariumSensor(object):
              terrarium1WSensor,
              terrariumOWFSSensor,
              terrariumMiFloraSensor,
+             terrariumMiTempSensor,
              terrariumSKUSEN0161Sensor,
              terrariumDHT11Sensor,
              terrariumDHT22Sensor,
@@ -518,6 +519,7 @@ class terrariumSensor(object):
   @staticmethod
   def scan_sensors(callback=None):
     for sensor_device in terrariumSensor.SENSORS:
+      print('Scan {}'.format(sensor_device.TYPE))
       try:
         for sensor in sensor_device.scan_sensors(callback):
           yield sensor
