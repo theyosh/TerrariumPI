@@ -557,15 +557,15 @@ class terrariumEngine(object):
     while self.__running:
       starttime = time.time()
 
-      try:
-        # Update weather
-        self.weather.update()
-        weather_data = self.weather.get_data()
-        if 'hour_forecast' in weather_data and len(weather_data['hour_forecast']) > 0:
-          self.collector.log_weather_data(weather_data['hour_forecast'][0])
+      # Update weather
+      self.weather.update()
+      weather_data = self.weather.get_data()
+      if 'hour_forecast' in weather_data and len(weather_data['hour_forecast']) > 0:
+        self.collector.log_weather_data(weather_data['hour_forecast'][0])
 
-        # Update sensors
-        for sensorid in self.sensors:
+      # Update sensors
+      for sensorid in self.sensors:
+        try:
           # Update the current sensor.
           self.sensors[sensorid].update()
           # Save new data to database
@@ -576,37 +576,41 @@ class terrariumEngine(object):
           if self.sensors[sensorid].is_active() and self.sensors[sensorid].notification_enabled() and self.sensors[sensorid].get_alarm():
             self.notification.message('sensor_alarm_' + ('low' if self.sensors[sensorid].get_current() < self.sensors[sensorid].get_alarm_min() else 'high'),self.sensors[sensorid].get_data())
 
-          # Make time for other web request
-          sleep(0.1)
+        except Exception as err:
+          logger.exception('Engine loop: Sensor has problems: {}'.format(err))
 
-        # Get the current average temperatures
-        average_data = self.get_sensors(['average'])['sensors']
+        # Make time for other web request
+        sleep(0.1)
 
-        # Websocket callback
-        self.__send_message({'type':'sensor_gauge','data':average_data})
-
-        # Update (remote) power switches
-        for power_switch_id in self.power_switches:
+      # Update (remote) power switches
+      for power_switch_id in self.power_switches:
+        try:
           # Update timer trigger if activated
           #self.power_switches[power_switch_id].timer()
           # Update the current sensor.
           self.power_switches[power_switch_id].update()
-          # Make time for other web request
-          sleep(0.1)
+        except Exception as err:
+          logger.exception('Engine loop: Power switch has problems: {}'.format(err))
 
-        # Websocket messages back
-        self.get_uptime(socket=True)
-        self.get_power_usage_water_flow(socket=True)
-        self.get_environment(socket=True)
-        self.get_audio_playing(socket=True)
+        # Make time for other web request
+        sleep(0.1)
 
-        # Log system stats
-        system_data = self.get_system_stats()
-        self.collector.log_system_data(system_data)
-        self.get_system_stats(socket=True)
+      # Get the current average temperatures
+      average_data = self.get_sensors(['average'])['sensors']
 
-      except Exception as err:
-        print(err)
+      # Websocket callback
+      self.__send_message({'type':'sensor_gauge','data':average_data})
+
+      # Websocket messages back
+      self.get_uptime(socket=True)
+      self.get_power_usage_water_flow(socket=True)
+      self.get_environment(socket=True)
+      self.get_audio_playing(socket=True)
+
+      # Log system stats
+      system_data = self.get_system_stats()
+      self.collector.log_system_data(system_data)
+      self.get_system_stats(socket=True)
 
       display_message = ['%s %s' % (_('Uptime'),terrariumUtils.format_uptime(system_data['uptime']),),
                          '%s %s %s %s' % (_('Load'),system_data['load']['load1'],system_data['load']['load5'],system_data['load']['load15']),
