@@ -1,0 +1,14 @@
+[Unit]
+Description=TerrariumPI
+After=network.target
+
+[Service]
+User=pi
+Group=pi
+ExecStart=/usr/bin/python3 /home/pi/TerrariumPI/terrariumPI.py
+Restart=always
+RestartSec=5
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target
