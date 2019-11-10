@@ -446,6 +446,7 @@ class terrariumWebserver(object):
   def __manual_mode_switch(self,switchid):
     if switchid in self.__terrariumEngine.power_switches:
       self.__terrariumEngine.power_switches[switchid].set_manual_mode(not self.__terrariumEngine.power_switches[switchid].in_manual_mode())
+      self.__terrariumEngine.config.save_power_switch(self.__terrariumEngine.power_switches[switchid].get_data())
       return {'ok' : True}
 
     return {'ok' : False}

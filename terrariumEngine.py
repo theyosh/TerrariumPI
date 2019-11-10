@@ -317,6 +317,9 @@ class terrariumEngine(object):
       if 'last_replacement_date' in power_switch_config:
         power_switch.set_last_hardware_replacement(power_switch_config['last_replacement_date'])
 
+      if 'manual_mode' in power_switch_config:
+        power_switch.set_manual_mode(power_switch_config['manual_mode'])
+
       power_switch.set_timer(power_switch_config['timer_start'],
                              power_switch_config['timer_stop'],
                              power_switch_config['timer_on_duration'],
