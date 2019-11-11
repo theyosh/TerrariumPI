@@ -270,7 +270,7 @@ class terrariumPowerSwitchFTDI(terrariumPowerSwitchSource):
   def load_hardware(self):
     self.__device_type = None
     for device in Driver().list_devices():
-      vendor, product, self.__device = [x.decode('latin1') for x in device]
+      vendor, product, self.__device = [x for x in device]
       self.__device_type = 'Serial' if product.endswith('UART') else 'BitBang'
       logger.debug('Found switch board {}, {}, {}, of type {}'.format(vendor,product,self.__device,self.__device_type))
       break # For now, we only support 1 switch board!
