@@ -108,7 +108,6 @@ class terrariumMiFloraSensor(terrariumSensorSource):
         for device in Scanner(counter).scan(terrariumMiFloraSensor.__SCANTIME):
           if device.rssi > terrariumMiFloraSensor.__MIN_DB and device.getValueText(9) is not None and device.getValueText(9).lower() in ['flower mate','flower care']:
             address = device.addr
-            device = None
             logger.info('Found MiFlora bluetooth device at address {}'.format(address))
             ok = True
             for sensor_type in terrariumMiFloraSensor.VALID_SENSOR_TYPES:
@@ -130,6 +129,9 @@ class terrariumMiFloraSensor(terrariumSensorSource):
 class terrariumMiTempSensor(terrariumSensorSource):
   TYPE = 'mitemp'
   VALID_SENSOR_TYPES = ['temperature','humidity']
+
+  __SCANTIME = 5
+  __MIN_DB = -90
 
 
   def __init__(self, sensor_id, sensor_type, address, name = '', callback_indicator = None):
@@ -195,23 +197,29 @@ class terrariumMiTempSensor(terrariumSensorSource):
   #
   @staticmethod
   def scan_sensors(callback = None):
-    # Due to multiple bluetooth dongles, we are looping 10 times to see which devices can scan. Exit after first success
-    logger.info('Scanning {} seconds for Mi Temperature and Humidity bluetooth devices'.format(terrariumMiFloraSensor.__SCANTIME))
-    ok = False
     print('start scanning mi temps')
+    # Due to multiple bluetooth dongles, we are looping 10 times to see which devices can scan. Exit after first success
+    logger.info('Scanning {} seconds for Mi Temperature and Humidity bluetooth devices'.format(terrariumMiTempSensor.__SCANTIME))
+    ok = False
     for counter in range(10):
       try:
-        for device in Scanner(counter).scan(terrariumMiFloraSensor.__SCANTIME):
+        for device in Scanner(counter).scan(terrariumMiTempSensor.__SCANTIME):
+          ok = True
           print('Found device type {}'.format(device.getValueText(9)) )
-          print(device)
-          print(dir(device))
-
-#          if device.rssi > terrariumMiFloraSensor.__MIN_DB and device.getValueText(9) is not None and device.getValueText(9).lower() in ['flower mate','flower care']:
+          if device.rssi > terrariumMiTempSensor.__MIN_DB and device.getValueText(9) is not None and device.getValueText(9).lower() in ['test']:
+            for sensor_type in terrariumMiTempSensor.VALID_SENSOR_TYPES:
+              yield terrariumMiTempSensor(None,
+                                           sensor_type,
+                                           address,
+                                           callback_indicator = callback)
 
       except Exception as ex:
         print('terrariumMiTempSensor exception')
         print(ex)
  #       pass
+
+      # For now we break first run due to testing....
+      break
 
     if not ok:
       logger.warning('Bluetooth scanning is not enabled for normal users or there are zero Bluetooth LE devices available.... bluetooth is disabled!')
