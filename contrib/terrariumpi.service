@@ -1,6 +1,6 @@
 [Unit]
 Description=TerrariumPI
-After=network.target
+After=network.target local-fs.target
 
 [Service]
 User=pi
