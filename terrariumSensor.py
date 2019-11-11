@@ -441,7 +441,7 @@ class terrariumMHZ19Sensor(terrariumSensorSource):
 from terrariumAnalogSensor import terrariumSKUSEN0161Sensor
 from terrariumBluetoothSensor import terrariumMiFloraSensor, terrariumMiTempSensor
 from terrariumGPIOSensor import terrariumYTXXSensorDigital, terrariumDHT11Sensor, terrariumDHT22Sensor, terrariumAM2302Sensor, terrariumHCSR04Sensor
-from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor, terrariumSHT3XSensor, terrariumMLX90614Sensor, terrariumAM2320Sensor
+from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor, terrariumSHT3XSensor, terrariumMLX90614Sensor, terrariumAM2320Sensor, terrariumAMG8833Sensor
 
 # terrariumSensor
 class terrariumSensorTypeException(TypeError):
@@ -478,7 +478,8 @@ class terrariumSensor(object):
              terrariumSHT3XSensor,
              terrariumMHZ19Sensor,
              terrariumMLX90614Sensor,
-             terrariumAM2320Sensor]
+             terrariumAM2320Sensor,
+             terrariumAMG8833Sensor]
 
   def __new__(self, sensor_id, hardware_type, sensor_type, address, name = '', callback_indicator = None):
     for sensor in terrariumSensor.SENSORS:
@@ -511,7 +512,7 @@ class terrariumSensor(object):
       for sensor_type in sensor_types:
         data[sensor_type] = sensor_type
 
-    # Volume is only through remote
+    # Volume and conductivity is only through remote for now
     data['volume'] = 'volume'
     data['conductivity'] = 'conductivity'
     return data
@@ -519,7 +520,6 @@ class terrariumSensor(object):
   @staticmethod
   def scan_sensors(callback=None):
     for sensor_device in terrariumSensor.SENSORS:
-      print('Scan {}'.format(sensor_device.TYPE))
       try:
         for sensor in sensor_device.scan_sensors(callback):
           yield sensor

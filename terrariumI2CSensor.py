@@ -15,6 +15,10 @@ sys.path.insert(0, './python-MLX90614')
 from mlx90614 import MLX90614
 from struct import unpack
 from gevent import sleep
+try:
+  import melopero_amg8833 as mp
+except Exception:
+  pass # Needs python3
 
 from terrariumSensor import terrariumSensorSource
 from terrariumUtils import terrariumUtils
@@ -638,6 +642,31 @@ class terrariumAM2320Sensor(terrariumI2CSensor):
       data['humidity'] = unpack('>H', raw_data[-4:2])[0] / 10.0
     except Exception as ex:
       print('load_raw_data error:')
+      print(ex)
+
+    return data
+
+class terrariumAMG8833Sensor(terrariumSensorSource):
+  TYPE = 'amg8833'
+  VALID_SENSOR_TYPES = ['temperature']
+
+  def set_address(self,address):
+    super(terrariumAMG8833Sensor,self).set_address(address)
+    data = self.get_address().split(',')
+    self.i2c_address = int('0x' + data[0],16)
+    self.i2c_bus = 1
+
+  def load_data(self):
+    data = None
+
+    try:
+      data = {}
+      sensor = mp.AMGGridEye(self.i2c_address,self.i2c_bus)
+      sensor.set_fps_mode(mp.AMGGridEye.FPS_1_MODE)
+      sensor.update_temperature()
+      data['temperature'] = float(sensor.get_temperature())
+
+    except Exception as ex:
       print(ex)
 
     return data
