@@ -134,9 +134,10 @@ class terrariumMiTempSensor(terrariumSensorSource):
   __MIN_DB = -90
 
 
-  def __init__(self, sensor_id, sensor_type, address, name = '', callback_indicator = None):
+  def __init__(self, sensor_id, sensor_type, address, name = '', callback_indicator = None, adapter = 0):
     self.__firmware = None
     self.__battery = None
+    self.__adaptor = 'hci{}'.format(adapter)
     self.__sensor_cache = terrariumSensorCache()
 
     super(terrariumMiTempSensor,self).__init__(sensor_id, sensor_type, address, name, callback_indicator)
@@ -145,15 +146,16 @@ class terrariumMiTempSensor(terrariumSensorSource):
     data = None
 
     if self.get_address() is not None:
-
       try:
-        sensor = MiTempBtPoller(self.get_address(), BluepyBackend)
+        sensor = MiTempBtPoller(self.get_address(), BluepyBackend, 60, adapter=self.__adaptor)
 
         data = {}
         data['temperature'] = sensor.parameter_value(MI_TEMPERATURE)
         data['humidity']    = sensor.parameter_value(MI_HUMIDITY)
         data['battery']     = sensor.parameter_value(MI_BATTERY)
         data['firmware']    = sensor.firmware_version()
+
+        del(sensor)
 
       except Exception as ex:
         logger.warning('Error getting new data from {} sensor \'{}\'. Error message: {}'.format(self.get_type(),self.get_name(),ex))
@@ -181,23 +183,8 @@ class terrariumMiTempSensor(terrariumSensorSource):
 
     return self.__battery
 
-  #
-  # @staticmethod
-  # def check_connection(address):
-  #   try:
-  #     miflora_dev = Peripheral(address)
-  #     #Read battery and firmware version attribute
-  #     sensor.readCharacteristic(terrariumMiFloraSensor.__MIFLORA_FIRMWARE_AND_BATTERY)
-  #     miflora_dev.disconnect()
-  #     return True
-  #   except Exception as ex:
-  #     logger.error('Error checking online state sensor at address: \'{}\'. Error: {}'.format(address,ex))
-  #
-  #   return False
-  #
   @staticmethod
   def scan_sensors(callback = None):
-    print('start scanning mi temps')
     # Due to multiple bluetooth dongles, we are looping 10 times to see which devices can scan. Exit after first success
     logger.info('Scanning {} seconds for Mi Temperature and Humidity bluetooth devices'.format(terrariumMiTempSensor.__SCANTIME))
     ok = False
@@ -206,20 +193,23 @@ class terrariumMiTempSensor(terrariumSensorSource):
         for device in Scanner(counter).scan(terrariumMiTempSensor.__SCANTIME):
           ok = True
           print('Found device type {}'.format(device.getValueText(9)) )
-          if device.rssi > terrariumMiTempSensor.__MIN_DB and device.getValueText(9) is not None and device.getValueText(9).lower() in ['test']:
+          if device.rssi > terrariumMiTempSensor.__MIN_DB and device.getValueText(9) is not None and device.getValueText(9).lower() in ['mj_ht_v1']:
+            address = device.addr
+            logger.info('Found Mi Temperature and Humidity bluetooth device at address {}'.format(address))
+            ok = True
             for sensor_type in terrariumMiTempSensor.VALID_SENSOR_TYPES:
               yield terrariumMiTempSensor(None,
-                                           sensor_type,
-                                           address,
-                                           callback_indicator = callback)
+                                          sensor_type,
+                                          address,
+                                          callback_indicator = callback,
+                                          adapter = counter)
+
+        break
 
       except Exception as ex:
         print('terrariumMiTempSensor exception')
         print(ex)
- #       pass
 
-      # For now we break first run due to testing....
-      break
 
     if not ok:
       logger.warning('Bluetooth scanning is not enabled for normal users or there are zero Bluetooth LE devices available.... bluetooth is disabled!')
