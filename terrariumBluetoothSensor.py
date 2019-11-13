@@ -192,7 +192,6 @@ class terrariumMiTempSensor(terrariumSensorSource):
       try:
         for device in Scanner(counter).scan(terrariumMiTempSensor.__SCANTIME):
           ok = True
-          print('Found device type {}'.format(device.getValueText(9)) )
           if device.rssi > terrariumMiTempSensor.__MIN_DB and device.getValueText(9) is not None and device.getValueText(9).lower() in ['mj_ht_v1']:
             address = device.addr
             logger.info('Found Mi Temperature and Humidity bluetooth device at address {}'.format(address))
