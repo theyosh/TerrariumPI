@@ -441,7 +441,7 @@ class terrariumMHZ19Sensor(terrariumSensorSource):
 from terrariumAnalogSensor import terrariumSKUSEN0161Sensor
 from terrariumBluetoothSensor import terrariumMiFloraSensor, terrariumMiTempSensor
 from terrariumGPIOSensor import terrariumYTXXSensorDigital, terrariumDHT11Sensor, terrariumDHT22Sensor, terrariumAM2302Sensor, terrariumHCSR04Sensor
-from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor, terrariumSHT3XSensor, terrariumMLX90614Sensor, terrariumAM2320Sensor, terrariumAMG8833Sensor
+from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor, terrariumSHT3XSensor, terrariumSHT3XDSensor, terrariumMLX90614Sensor, terrariumAM2320Sensor, terrariumAMG8833Sensor
 
 # terrariumSensor
 class terrariumSensorTypeException(TypeError):
@@ -476,6 +476,7 @@ class terrariumSensor(object):
              terrariumVEML6075Sensor,
              terrariumChirpSensor,
              terrariumSHT3XSensor,
+             terrariumSHT3XDSensor,
              terrariumMHZ19Sensor,
              terrariumMLX90614Sensor,
              terrariumAM2320Sensor,
