@@ -17,6 +17,9 @@ from struct import unpack
 from gevent import sleep
 try:
   import melopero_amg8833 as mp
+  import adafruit_sht31d
+  import board
+  import busio
 except Exception:
   pass # Needs python3
 
@@ -141,6 +144,29 @@ class terrariumSHT3XSensor(terrariumSensorSource):
 
       data['temperature'] = float(sensor.read_temperature())
       data['humidity'] = float(sensor.read_humidity())
+
+    except Exception as ex:
+      print(ex)
+
+    return data
+
+class terrariumSHT3XDSensor(terrariumSensorSource):
+  TYPE = 'sht3xd'
+  VALID_SENSOR_TYPES = ['temperature','humidity']
+
+  # https://github.com/adafruit/Adafruit_CircuitPython_SHT31D/
+  def load_data(self):
+    data = None
+    try:
+      data = {}
+      # Used 2 fixed known addresses
+      i2c = busio.I2C(board.SCL, board.SDA)
+      sensor = adafruit_sht31d.SHT31D(i2c)
+      sensor.repeatability = adafruit_sht31d.REP_MED
+      sensor.mode = adafruit_sht31d.MODE_SINGLE
+
+      data['temperature'] = float(sensor.temperature)
+      data['humidity'] = float(sensor.relative_humidity)
 
     except Exception as ex:
       print(ex)

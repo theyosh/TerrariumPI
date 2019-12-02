@@ -182,7 +182,7 @@ systemctl enable pigpiod
 update-rc.d -f owftpd remove
 update-rc.d -f owfhttpd remove
 
-PROGRESS=30
+PROGRESS=25
 # Update submodules if downloaded through tar or zip
 (
 cd "${BASEDIR}/"
@@ -194,7 +194,7 @@ XXX
 EOF
 
 
-PROGRESS=$((PROGRESS + 5))
+PROGRESS=$((PROGRESS + 3))
 cat <<EOF
 XXX
 $PROGRESS
@@ -204,7 +204,7 @@ EOF
 git submodule init > /dev/null
 
 
-PROGRESS=$((PROGRESS + 5))
+PROGRESS=$((PROGRESS + 3))
 cat <<EOF
 XXX
 $PROGRESS
@@ -219,7 +219,7 @@ if [ $PYTHON -eq 2 ]; then
   PIP_MODULES="${PIP_MODULES} iCalEvents==0.1.21"
 fi
 if [ $PYTHON -eq 3 ]; then
-  PIP_MODULES="${PIP_MODULES} opencv-python-headless meross-iot==0.2.2.3 iCalEvents mitemp_bt melopero-amg8833"
+  PIP_MODULES="${PIP_MODULES} opencv-python-headless meross-iot==0.2.2.3 iCalEvents mitemp_bt melopero-amg8833 adafruit-circuitpython-sht31d"
 fi
 
 if [ `grep -ic " buster " /etc/apt/sources.list` -eq 2 ]; then
