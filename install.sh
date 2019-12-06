@@ -194,7 +194,7 @@ XXX
 EOF
 
 
-PROGRESS=$((PROGRESS + 3))
+PROGRESS=$((PROGRESS + 2))
 cat <<EOF
 XXX
 $PROGRESS
@@ -204,7 +204,7 @@ EOF
 git submodule init > /dev/null
 
 
-PROGRESS=$((PROGRESS + 3))
+PROGRESS=$((PROGRESS + 2))
 cat <<EOF
 XXX
 $PROGRESS
@@ -212,6 +212,16 @@ Install required software\n\nInstalling base software ...
 XXX
 EOF
 git submodule update > /dev/null
+cd "${BASEDIR}/.."
+
+PROGRESS=$((PROGRESS + 2))
+cat <<EOF
+XXX
+$PROGRESS
+Install required software\n\nInstalling base software ...
+XXX
+EOF
+cd "${BASEDIR}/gentelella; git checkout -b 1.4.0 > /dev/null"
 cd "${BASEDIR}/.."
 
 PIP_MODULES="python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_DHT Adafruit-SHT31 luma.oled bluepy pywemo pyownet emails mh-z19 icalendar"
