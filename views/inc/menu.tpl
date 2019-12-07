@@ -14,6 +14,7 @@
               <h2>{{person_name}}</h2>
             </div>
           </div><!-- /menu profile quick info -->
+          <canvas id="fireworks" width="100%"></canvas>
           <br>
           <!-- sidebar menu -->
           <div class="main_menu_side hidden-print main_menu" id="sidebar-menu">

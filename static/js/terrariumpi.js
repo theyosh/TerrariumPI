@@ -3028,5 +3028,9 @@ $(document).ready(function() {
     }
   }, 30 * 1000);
 
+  if ('12-31' == moment().format('MM-DD') || '01-01' == moment().format('MM-DD')) {
+    $('body').append('<script src="/static/js/fireworks.js" type="text/javascript"></script>');
+  }
+
   version_check();
 });
