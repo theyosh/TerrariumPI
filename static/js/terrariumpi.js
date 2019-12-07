@@ -3020,6 +3020,12 @@ $(document).ready(function() {
   setInterval(function() {
     notification_timestamps();
     $('#system_time span').text(moment().format('LLLL'));
+
+    if (moment(moment().year() + '-12-25').week() == moment().week()) {
+      $('img.christmashat').show();
+    } else {
+      $('img.christmashat').hide();
+    }
   }, 30 * 1000);
 
   version_check();
