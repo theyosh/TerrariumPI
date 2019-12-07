@@ -179,6 +179,17 @@ img.christmashat {
   display: none;
 }
 
+.nav-sm #fireworks {
+ display:none;
+}
+
+#fireworks {
+ position: absolute;
+ top: 0px;
+ left: 0px;
+ width: 100%;
+}
+
 /* System time */
 #system_time {
   display: block;
@@ -186,7 +197,6 @@ img.christmashat {
   position: relative;
   line-height: 32px;
 }
-
 
 /* Dashboard */
 div#dashboard .tile_count .tile_stats_count {
