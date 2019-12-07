@@ -140,25 +140,34 @@ class terrariumMiTempSensor(terrariumSensorSource):
     self.__adaptor = 'hci{}'.format(adapter)
     self.__sensor_cache = terrariumSensorCache()
 
+    self.__device = None
+
     super(terrariumMiTempSensor,self).__init__(sensor_id, sensor_type, address, name, callback_indicator)
 
   def load_data(self):
     data = None
 
     if self.get_address() is not None:
-      try:
-        sensor = MiTempBtPoller(self.get_address(), BluepyBackend, 60, adapter=self.__adaptor)
+      if self.__device is None:
+        try:
+          self.__device = MiTempBtPoller(self.get_address(), BluepyBackend, 60, adapter=self.__adaptor)
+        except Exception as ex:
+          logger.warning('Error connecting to {} sensor \'{}\'. Error message: {}'.format(self.get_type(),self.get_name(),ex))
 
-        data = {}
-        data['temperature'] = sensor.parameter_value(MI_TEMPERATURE)
-        data['humidity']    = sensor.parameter_value(MI_HUMIDITY)
-        data['battery']     = sensor.parameter_value(MI_BATTERY)
-        data['firmware']    = sensor.firmware_version()
+      if self.__device is not None:
+        try:
+          #sensor = MiTempBtPoller(self.get_address(), BluepyBackend, 60, adapter=self.__adaptor)
 
-        del(sensor)
+          data = {}
+          data['temperature'] = self.__device.parameter_value(MI_TEMPERATURE)
+          data['humidity']    = self.__device.parameter_value(MI_HUMIDITY)
+          data['battery']     = self.__device.parameter_value(MI_BATTERY)
+          data['firmware']    = self.__device.firmware_version()
 
-      except Exception as ex:
-        logger.warning('Error getting new data from {} sensor \'{}\'. Error message: {}'.format(self.get_type(),self.get_name(),ex))
+          #del(sensor)
+
+        except Exception as ex:
+          logger.warning('Error getting new data from {} sensor \'{}\'. Error message: {}'.format(self.get_type(),self.get_name(),ex))
 
     return data
 
