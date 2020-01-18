@@ -296,6 +296,67 @@ class terrariumPowerSwitchFTDI(terrariumPowerSwitchSource):
         device.write(cmd)
         device.close()
 
+  def __get_relay_state(self,data, relay ):
+
+    def testBit(int_type, offset):
+        mask = 1 << offset
+        return(int_type & mask)
+
+
+    if relay == "1":
+        return testBit(data, 1)
+    if relay == "2":
+        return testBit(data, 3)
+    if relay == "3":
+        return testBit(data, 5)
+    if relay == "4":
+        return testBit(data, 7)
+    if relay == "5":
+        return testBit(data, 2)
+    if relay == "6":
+        return testBit(data, 4)
+    if relay == "7":
+        return testBit(data, 6)
+    if relay == "8":
+        return testBit(data, 8)
+
+
+  def get_hardware_state(self):
+    def get_relay_state(data, relay ):
+
+      def testBit(int_type, offset):
+        mask = 1 << offset
+        return(int_type & mask)
+
+      if relay == "1":
+        return testBit(data, 1)
+      if relay == "2":
+        return testBit(data, 3)
+      if relay == "3":
+        return testBit(data, 5)
+      if relay == "4":
+        return testBit(data, 7)
+      if relay == "5":
+        return testBit(data, 2)
+      if relay == "6":
+        return testBit(data, 4)
+      if relay == "7":
+        return testBit(data, 6)
+      if relay == "8":
+        return testBit(data, 8)
+
+    data = None
+    if 'BitBang' == self.__device_type:
+      with BitBangDevice(self.__device) as device:
+        device.baudrate = 9600
+        data = get_relay_state( device.port, self.get_address() )
+        device.close()
+
+    elif 'Serial' == self.__device_type:
+      return None
+
+    return terrariumPowerSwitch.OFF if data is None or data == 0 else terrariumPowerSwitch.ON
+
 class terrariumPowerSwitchGPIO(terrariumPowerSwitchSource):
   TYPE = 'gpio'
 
