@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2020-01-26 23:32+CET\n"
-"PO-Revision-Date: 2020-01-26 23:25+0000\n"
-"Last-Translator: TheYOSH <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2020-01-27 09:25+0000\n"
+"Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <http://weblate.theyosh.nl/projects/terrariumpi/"
 "webinterface/nl/>\n"
 "Language: nl_NL\n"
@@ -284,12 +284,17 @@ msgid ""
 "Minimum difference between frames to be identified as motion. Higher value "
 "means that the image must be more different for motion to be detected."
 msgstr ""
+"Minimaal verschil tussen frames worden geïdentificeerd als beweging. Een "
+"hogere waarde betekend dat er meer verschil nodig is voor bewegingsdetectie."
 
 #: terrariumTranslations.py:86
 msgid ""
 "Minimum area of an image in pixels for a region to be considered motion. "
 "Larger values mean that only larger areas will be detected as motion."
 msgstr ""
+"Minimaal oppervlakte van een afbeelding in pixels voor een gebied dat als "
+"beweging moet worden beschouwd. Grotere waardes betekend dat grotere "
+"oppervlaktes worden gedetecteerd."
 
 #: terrariumTranslations.py:87
 msgid ""
@@ -428,6 +433,8 @@ msgid ""
 "How much time must there be between two actions and after start up. Enter "
 "the amount of seconds in which this environment part can settle."
 msgstr ""
+"Hoeveel tijd moet er zijn tussen twee acties en na het opstarten. Enter de "
+"waarde in seconden waarin de omgeving kan bijkomen."
 
 #: terrariumTranslations.py:110
 msgid ""
@@ -488,12 +495,16 @@ msgid ""
 "Select when the power switches can toggle. When lights are on, off or just "
 "always"
 msgstr ""
+"Selecteer wanneer de stroomschakelaars kunnen schakelen. Wanneer de lampen "
+"aan zijn, uit zijn of altijd"
 
 #: terrariumTranslations.py:119
 msgid ""
 "Select when the power switches can toggle. When the door is open, cosed or "
 "just always"
 msgstr ""
+"Selecteer wanneer de stroomschakelaars kunnen schakelen. Wanneer de deur is "
+"open, gesloten of altijd"
 
 #: terrariumTranslations.py:123
 msgid "Holds the email address on which you would like to receive messages."
@@ -558,7 +569,7 @@ msgstr ""
 
 #: terrariumTranslations.py:141
 msgid "Holds the Telegram Bot token. More information %shere%s"
-msgstr ""
+msgstr "Bevat het Telegram Bot token. Meer informatie %shier%s"
 
 #: terrariumTranslations.py:142
 msgid ""
@@ -584,7 +595,7 @@ msgstr "Kies uw interface taal."
 
 #: terrariumTranslations.py:151
 msgid "Holds the distance type used by distance sensors."
-msgstr ""
+msgstr "Bevat het afstandstype dat wordt gebruikt door afstandssensoren."
 
 #: terrariumTranslations.py:152 terrariumTranslations.py:153
 msgid "Holds the username which can make changes (Administrator)."
@@ -689,13 +700,15 @@ msgstr "Bevat het poortnummer waarop de software luistert naar verbindingen."
 
 #: terrariumTranslations.py:169
 msgid "Enter the e-mail address that is used for your Meross devices."
-msgstr ""
+msgstr "Voer het e-mailadres in dat wordt gebruikt voor uw Meross-apparaten."
 
 #: terrariumTranslations.py:170
 msgid ""
 "Enter the password that is used for your Meross devices. Password is stored "
 "in plain text!"
 msgstr ""
+"Voer het wachtwoord in dat wordt gebruikt voor uw Meross-apparaten. Het "
+"wachtwoord wordt in platte tekst opgeslagen!"
 
 #: terrariumTranslations.py:171
 msgid ""
@@ -717,6 +730,8 @@ msgstr ""
 #: terrariumTranslations.py:173
 msgid "Toggle on or off the min and max measured value in the gauge graphs."
 msgstr ""
+"Schakel de minimale en maximale gemeten waarde in of uit in de grafiek "
+"diagrammen."
 
 #: terrariumTranslations.py:177
 msgid "Holds the name of the animal."
@@ -823,15 +838,15 @@ msgstr "Je wijzigingen zijn opgeslagen"
 
 #: terrariumWebserver.py:328
 msgid "Hardware is replaced"
-msgstr ""
+msgstr "Hardware is vervangen"
 
 #: terrariumWebserver.py:329
 msgid "Hardware replacement is logged in the calendar"
-msgstr ""
+msgstr "Vervanging van hardware wordt vastgelegd in de kalender"
 
 #: terrariumWebserver.py:332
 msgid "A new replacement reminder is created"
-msgstr ""
+msgstr "Er wordt een nieuwe vervangingsherinnering gemaakt"
 
 #: terrariumWebserver.py:470 views/inc/menu.tpl:178
 msgid "Log out"
@@ -1077,7 +1092,7 @@ msgstr "Kalender"
 
 #: views/calendar.tpl:15
 msgid "iCal"
-msgstr ""
+msgstr "iCal"
 
 #: views/calendar.tpl:18 views/dashboard.tpl:71 views/dashboard.tpl:626
 #: views/dashboard.tpl:681 views/dashboard.tpl:736 views/dashboard.tpl:791
@@ -1754,7 +1769,7 @@ msgstr "Profiel"
 
 #: views/inc/menu.tpl:45
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: views/inc/menu.tpl:60 views/sensor_settings.tpl:140
 msgid "Distance"
@@ -1832,7 +1847,7 @@ msgstr "Deur is geopend"
 
 #: views/inc/menu.tpl:239
 msgid "No events"
-msgstr ""
+msgstr "Geen evenementen"
 
 #: views/inc/menu.tpl:247
 msgid "Playing"
@@ -1860,7 +1875,7 @@ msgstr "error"
 #: views/inc/sensor_list.tpl:17 views/inc/sensor_list.tpl:18
 #: views/inc/sensor_list.tpl:19 views/inc/sensor_list.tpl:20
 msgid "excl. avg"
-msgstr ""
+msgstr "excl. gem"
 
 #: views/inc/sensor_list.tpl:11 views/inc/usage_sensors.tpl:68
 #: views/sensor_settings.tpl:77
@@ -3110,11 +3125,11 @@ msgstr "PRoxy"
 
 #: views/notifications.tpl:188
 msgid "Webhook"
-msgstr ""
+msgstr "Webhook"
 
 #: views/notifications.tpl:198
 msgid "Full post url"
-msgstr ""
+msgstr "Volledige bericht-URL (post)"
 
 #: views/notifications.tpl:209
 msgid "Messages"
@@ -3122,7 +3137,7 @@ msgstr "Berichten"
 
 #: views/notifications.tpl:220
 msgid "Trigger"
-msgstr ""
+msgstr "Trigger"
 
 #: views/notifications.tpl:226
 msgid "Message"
@@ -3170,7 +3185,7 @@ msgstr "Hier kunt u uw sensoren configureren."
 
 #: views/sensor_settings.tpl:43 views/sensor_settings.tpl:178
 msgid "Max diff"
-msgstr ""
+msgstr "Max verschil"
 
 #: views/sensor_settings.tpl:70
 msgid "Add new sensor"
@@ -3182,11 +3197,11 @@ msgstr "SHT2X"
 
 #: views/sensor_settings.tpl:109
 msgid "SHT3X"
-msgstr ""
+msgstr "SHT3X"
 
 #: views/sensor_settings.tpl:110
 msgid "SHT3XD"
-msgstr ""
+msgstr "SHT3XD"
 
 #: views/sensor_settings.tpl:111
 msgid "HTU21D"
@@ -3210,7 +3225,7 @@ msgstr "YTXX-digital"
 
 #: views/sensor_settings.tpl:118 views/switch_settings.tpl:127
 msgid "Custom script"
-msgstr ""
+msgstr "Aangepast script"
 
 #: views/sensor_settings.tpl:120
 msgid "pH SKU-SEN0161"
@@ -3230,11 +3245,11 @@ msgstr "Mi temperatuur en vochtigheid"
 
 #: views/sensor_settings.tpl:124
 msgid "mh-z19"
-msgstr ""
+msgstr "mh-Z19"
 
 #: views/sensor_settings.tpl:125
 msgid "MLX90614"
-msgstr ""
+msgstr "MLX90614"
 
 #: views/sensor_settings.tpl:126
 msgid "AM2320"
@@ -3242,7 +3257,7 @@ msgstr "AM2302"
 
 #: views/sensor_settings.tpl:127
 msgid "AMG8833"
-msgstr ""
+msgstr "AMG8833"
 
 #: views/sensor_settings.tpl:143
 msgid "UVA"
@@ -3254,7 +3269,7 @@ msgstr "UVB"
 
 #: views/sensor_settings.tpl:145
 msgid "UV Index"
-msgstr ""
+msgstr "UV-index"
 
 #: views/sensor_settings.tpl:188
 msgid "Min moist value"
@@ -3346,27 +3361,27 @@ msgstr "Energenie Pi-Mote"
 
 #: views/switch_settings.tpl:121
 msgid "WeMo"
-msgstr ""
+msgstr "WeMo"
 
 #: views/switch_settings.tpl:122
 msgid "MSS425E"
-msgstr ""
+msgstr "MSS425E"
 
 #: views/switch_settings.tpl:123
 msgid "Sonoff"
-msgstr ""
+msgstr "Sonoff"
 
 #: views/switch_settings.tpl:124
 msgid "DenkoviV2 4 relays"
-msgstr ""
+msgstr "DenkoviV2 4 relais"
 
 #: views/switch_settings.tpl:125
 msgid "DenkoviV2 8 relays"
-msgstr ""
+msgstr "DenkoviV2 8 relais"
 
 #: views/switch_settings.tpl:126
 msgid "DenkoviV2 16 relays"
-msgstr ""
+msgstr "DenkoviV2 16 relais"
 
 #: views/switch_settings.tpl:165
 msgid "Dimmer environment step"
@@ -3378,31 +3393,31 @@ msgstr "Geen schakelaars beschikbaar"
 
 #: views/switch_status.tpl:12
 msgid "in manual mode"
-msgstr ""
+msgstr "in handmatige modus"
 
 #: views/switch_status.tpl:35
 msgid "Last replacement"
-msgstr ""
+msgstr "Laatste vervanging"
 
 #: views/switch_status.tpl:46
 msgid "Manual mode"
-msgstr ""
+msgstr "Handmatige bediening"
 
 #: views/switch_status.tpl:52 views/switch_status.tpl:83
 msgid "Replace hardware"
-msgstr ""
+msgstr "Vervang hardware"
 
 #: views/switch_status.tpl:104
 msgid "With new device"
-msgstr ""
+msgstr "Met nieuw apparaat"
 
 #: views/switch_status.tpl:109
 msgid "Remind in"
-msgstr ""
+msgstr "Herinneren in"
 
 #: views/switch_status.tpl:117
 msgid "Days"
-msgstr ""
+msgstr "Dagen"
 
 #: views/switch_status.tpl:118
 msgid "Weeks"
@@ -3418,7 +3433,7 @@ msgstr "Jaren"
 
 #: views/switch_status.tpl:133
 msgid "Replace"
-msgstr ""
+msgstr "Vervangen"
 
 #: views/system_environment.tpl:16
 msgid "Here you can configure your environment."
@@ -3426,7 +3441,7 @@ msgstr "Hier kunt u uw omgeving configureren."
 
 #: views/system_environment.tpl:18
 msgid "Hover over the fields to get extra information."
-msgstr ""
+msgstr "Beweeg over de velden om extra informatie te krijgen."
 
 #: views/system_environment.tpl:37 views/system_environment.tpl:168
 #: views/system_environment.tpl:380 views/system_environment.tpl:591
@@ -3633,7 +3648,7 @@ msgstr "Fahrenheit"
 
 #: views/system_settings.tpl:99
 msgid "Kelvin"
-msgstr ""
+msgstr "Kelvin"
 
 #: views/system_settings.tpl:105
 msgid "Distance indicator"
@@ -3657,11 +3672,11 @@ msgstr "Liters"
 
 #: views/system_settings.tpl:121
 msgid "US Gallons"
-msgstr ""
+msgstr "Amerikaanse gallons"
 
 #: views/system_settings.tpl:122
 msgid "UK Gallons"
-msgstr ""
+msgstr "Britse gallons"
 
 #: views/system_settings.tpl:128
 msgid "Admin name"
@@ -3709,7 +3724,7 @@ msgstr "Waarde voor het vloeiend maken van grafieken"
 
 #: views/system_settings.tpl:189
 msgid "Show min and max values in gauge graphs"
-msgstr ""
+msgstr "Toon min- en max- waarden in meter grafieken"
 
 #: views/system_settings.tpl:193 views/system_settings.tpl:204
 #: views/system_settings.tpl:215
