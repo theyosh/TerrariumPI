@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2020-01-26 23:32+CET\n"
-"PO-Revision-Date: 2020-01-26 22:05+0000\n"
+"PO-Revision-Date: 2020-01-26 23:25+0000\n"
 "Last-Translator: TheYOSH <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <http://weblate.theyosh.nl/projects/terrariumpi/"
 "webinterface/nl/>\n"
@@ -269,18 +269,15 @@ msgstr ""
 #: terrariumTranslations.py:82
 msgid "Select the environment light state when enabling archiving."
 msgstr ""
+"Selecteer de omgevingslichtstatus wanneer archiveren wordt ingeschakeld."
 
 #: terrariumTranslations.py:83
 msgid "Select the environment door state when enabling archiving."
-msgstr ""
+msgstr "Selecteer de omgevingsdeurstatus wanneer archiveren wordt ingeschakeld."
 
 #: terrariumTranslations.py:84
-#, fuzzy
-#| msgid "Enabled or disable image archiving based on motion detection."
 msgid "Enable or disable motion boxes for Motion archiving."
-msgstr ""
-"Beeld archivering op basis van bewegingsdetectie geactiveerd of "
-"uitgeschakeld."
+msgstr "Toon of verberg de beweging boxen tijdens het archiveren."
 
 #: terrariumTranslations.py:85
 msgid ""
@@ -390,10 +387,9 @@ msgstr ""
 "getallen om de waarden te verlagen."
 
 #: terrariumTranslations.py:104
-#, fuzzy
-#| msgid "Holds the soundcard that is used for playing audio."
 msgid "Holds the source that is used to determing when it is day or night."
-msgstr "Bevat de geluidskaart dat wordt gebruikt voor het afspelen van audio."
+msgstr ""
+"Bevat de bron die wordt gebruikt om te bepalen wanneer het dag of nacht is."
 
 #: terrariumTranslations.py:105
 msgid ""
@@ -438,6 +434,8 @@ msgid ""
 "Holds the amount of seconds that this environment part is powered on when "
 "the value is out of range."
 msgstr ""
+"Bevat het aantal seconden dat dit omgevingsdeel is ingeschakeld wanneer de "
+"waarde buiten bereik is."
 
 #: terrariumTranslations.py:111
 msgid ""
@@ -466,6 +464,8 @@ msgid ""
 "Select the power switches that should be used when the alarms or timers are "
 "hit. Select all needed switches below."
 msgstr ""
+"Selecteer de stroomschakelaars die moeten worden gebruikt wanneer de alarmen "
+"of timers worden geactiveerd. Kies alle schakelaars hieronder."
 
 #: terrariumTranslations.py:115
 msgid "Holds the water volume in liters."
@@ -480,6 +480,8 @@ msgid ""
 "Holds the distance between top of the liquid when full and the sensor in cm "
 "or inches."
 msgstr ""
+"Houdt de afstand tussen de bovenkant van de vloeistof wanneer deze vol is en "
+"de sensor in cm of inches."
 
 #: terrariumTranslations.py:118
 msgid ""
@@ -495,29 +497,30 @@ msgstr ""
 
 #: terrariumTranslations.py:123
 msgid "Holds the email address on which you would like to receive messages."
-msgstr ""
+msgstr "Bevat het e-mailadres waarop u berichten wilt ontvangen."
 
 #: terrariumTranslations.py:124
 msgid "Holds the mail server hostname or IP."
-msgstr ""
+msgstr "Bevat de hostnaam of IP van de mailserver."
 
 #: terrariumTranslations.py:125
 msgid "Holds the mail server portnumber. SSL and TLS will be autodetected."
 msgstr ""
+"Bevat het poortnummer van de mailserver. SSL en/of TLS wordt automatisch "
+"gedetecteerd."
 
 #: terrariumTranslations.py:126
 msgid "Holds the username for authentication with the mailserver if needed."
 msgstr ""
+"Bevat indien nodig de gebruikersnaam voor authenticatie met de mailserver."
 
 #: terrariumTranslations.py:127
 msgid "Holds the password for authentication with the mailserver if needed."
-msgstr ""
+msgstr "Bevat indien nodig het wachtwoord voor authenticatie bij de mailserver."
 
 #: terrariumTranslations.py:129
-#, fuzzy
-#| msgid "Holds the audio playlist name."
 msgid "Holds the display chip that is used."
-msgstr "Bevat de naam van de audio afspeellijst."
+msgstr "Bevat de display-chip die wordt gebruikt."
 
 #: terrariumTranslations.py:130
 msgid ""
@@ -531,7 +534,7 @@ msgstr "Reserve eerste LCD-lijn voor statische titel."
 
 #: terrariumTranslations.py:133
 msgid "Holds your Twitter consumer key. More information %shere%s"
-msgstr ""
+msgstr "Bevat uw Twitter-consumentensleutel. Meer informatie %shier%s"
 
 #: terrariumTranslations.py:134
 msgid "Holds your Twitter consumer secret. More information %shere%s"
@@ -539,7 +542,7 @@ msgstr ""
 
 #: terrariumTranslations.py:135
 msgid "Holds your Twitter access token. More information %shere%s"
-msgstr ""
+msgstr "Bevat uw Twitter-toegangstoken. Meer informatie %shier%s"
 
 #: terrariumTranslations.py:136
 msgid "Holds your Twitter access token secret. More information %shere%s"
@@ -620,16 +623,12 @@ msgstr ""
 "wijzigen van de instelling."
 
 #: terrariumTranslations.py:159
-#, fuzzy
-#| msgid ""
-#| "Toggle on or off horizontal graph legends. Reload the webinterface after "
-#| "changing the setting."
 msgid ""
 "Toggle on or off the environment summary on the dashboard. Reload the "
 "webinterface after changing the setting."
 msgstr ""
-"Schakel horizontale legendes in of uit. Herlaad de webinterface na het "
-"wijzigen van de instelling."
+"Schakel het omgevingsoverzicht op het dashboard in of uit. Herlaad de web-"
+"interface na het wijzigen van de instelling."
 
 #: terrariumTranslations.py:160
 msgid "Holds the soundcard that is used for playing audio."
@@ -660,10 +659,6 @@ msgstr ""
 "gekozen indicator."
 
 #: terrariumTranslations.py:165
-#, fuzzy
-#| msgid ""
-#| "Choose the wind speed indicator. The software will recalculate to the "
-#| "chosen indicator."
 msgid ""
 "Choose the windspeed indicator. The software will recalculate to the chosen "
 "indicator."
@@ -672,16 +667,12 @@ msgstr ""
 "de gekozen indicator."
 
 #: terrariumTranslations.py:166
-#, fuzzy
-#| msgid ""
-#| "Choose the temperature indicator. The software will recalculate to the "
-#| "chosen indicator."
 msgid ""
 "Choose the volume (liquid) indicator. The software will recalculate to the "
 "chosen indicator."
 msgstr ""
-"Kies de temperatuurindicator. De software zal opnieuw worden berekend op de "
-"gekozen indicator."
+"Kies de volume (vloeistof) indicator. De software zal opnieuw worden "
+"berekend op de gekozen indicator."
 
 #: terrariumTranslations.py:167
 msgid ""
@@ -714,17 +705,14 @@ msgid ""
 msgstr ""
 
 #: terrariumTranslations.py:172
-#, fuzzy
-#| msgid ""
-#| "Toggle on or off horizontal graph legends. Reload the webinterface after "
-#| "changing the setting."
 msgid ""
 "Select true or false to show an extra sensor page which holds all the "
 "sensors with there gauges. Reload the webinterface after changing the "
 "setting."
 msgstr ""
-"Schakel horizontale legendes in of uit. Herlaad de webinterface na het "
-"wijzigen van de instelling."
+"Selecteer waar of onwaar om een extra sensorpagina weer te geven die alle "
+"sensoren met hun meters bevat. Herlaad de web-interface na het wijzigen van "
+"de instelling."
 
 #: terrariumTranslations.py:173
 msgid "Toggle on or off the min and max measured value in the gauge graphs."
@@ -1434,10 +1422,8 @@ msgid "Average CO2"
 msgstr "Gemiddelde CO2"
 
 #: views/dashboard.tpl:1095
-#, fuzzy
-#| msgid "Average Moisture"
 msgid "Average Volume"
-msgstr "Gemiddelde vochtigheid"
+msgstr "Gemiddeld volume"
 
 #: views/door_settings.tpl:16
 msgid "Here you can configure your doors."
@@ -1916,10 +1902,8 @@ msgid "CO2 sensor"
 msgstr "CO2 sensor"
 
 #: views/inc/sensor_list.tpl:20 views/sensor_settings.tpl:86
-#, fuzzy
-#| msgid "Moisture sensor"
 msgid "Volume sensor"
-msgstr "Vochtigheid sensor"
+msgstr "Volume sensor"
 
 #: views/inc/usage_dashboard.tpl:14 views/inc/usage_dashboard.tpl:205
 msgid "Top indicators"
@@ -3241,10 +3225,8 @@ msgid "MiFlora"
 msgstr "MiFlora"
 
 #: views/sensor_settings.tpl:123
-#, fuzzy
-#| msgid "Temperature indicator"
 msgid "Mi Temperature & Humidity"
-msgstr "Temperatuur indicator"
+msgstr "Mi temperatuur en vochtigheid"
 
 #: views/sensor_settings.tpl:124
 msgid "mh-z19"
@@ -3255,8 +3237,6 @@ msgid "MLX90614"
 msgstr ""
 
 #: views/sensor_settings.tpl:126
-#, fuzzy
-#| msgid "AM2302"
 msgid "AM2320"
 msgstr "AM2302"
 
@@ -3345,10 +3325,8 @@ msgid "DC Dimmer"
 msgstr "DC Dimmer"
 
 #: views/switch_settings.tpl:115
-#, fuzzy
-#| msgid "Right side"
 msgid "Bright Pi"
-msgstr "Rechter kant"
+msgstr "Bright Pi"
 
 #: views/switch_settings.tpl:117
 msgid "Remote Dimmer"
@@ -3363,10 +3341,8 @@ msgid "Energenie LAN"
 msgstr "Energenie LAN"
 
 #: views/switch_settings.tpl:120
-#, fuzzy
-#| msgid "Energenie USB"
 msgid "Energenie Pi-Mote"
-msgstr "Energenie USB"
+msgstr "Energenie Pi-Mote"
 
 #: views/switch_settings.tpl:121
 msgid "WeMo"
@@ -3429,22 +3405,16 @@ msgid "Days"
 msgstr ""
 
 #: views/switch_status.tpl:118
-#, fuzzy
-#| msgid "Week"
 msgid "Weeks"
-msgstr "Week"
+msgstr "Weken"
 
 #: views/switch_status.tpl:119
-#, fuzzy
-#| msgid "Month"
 msgid "Months"
-msgstr "Maand"
+msgstr "Maanden"
 
 #: views/switch_status.tpl:120
-#, fuzzy
-#| msgid "Year"
 msgid "Years"
-msgstr "Jaar"
+msgstr "Jaren"
 
 #: views/switch_status.tpl:133
 msgid "Replace"
@@ -3626,10 +3596,8 @@ msgid "Weather location"
 msgstr "Weer location"
 
 #: views/system_settings.tpl:26
-#, fuzzy
-#| msgid "System settings"
 msgid "System actions"
-msgstr "Systeem instellingen"
+msgstr "Systeem acties"
 
 #: views/system_settings.tpl:39
 msgid ""
@@ -3680,14 +3648,12 @@ msgid "Inches"
 msgstr "Inches"
 
 #: views/system_settings.tpl:116
-#, fuzzy
-#| msgid "Volume in liters"
 msgid "Volume indicator"
-msgstr "Volume in liter"
+msgstr "Volume-indicator"
 
 #: views/system_settings.tpl:120
 msgid "Litres"
-msgstr ""
+msgstr "Liters"
 
 #: views/system_settings.tpl:121
 msgid "US Gallons"
@@ -3738,10 +3704,8 @@ msgid "Vertical"
 msgstr "Verticaal"
 
 #: views/system_settings.tpl:183
-#, fuzzy
-#| msgid "Max moist value"
 msgid "Graph smoothing value"
-msgstr "Maximale vochtwaarde"
+msgstr "Waarde voor het vloeiend maken van grafieken"
 
 #: views/system_settings.tpl:189
 msgid "Show min and max values in gauge graphs"
@@ -3750,20 +3714,20 @@ msgstr ""
 #: views/system_settings.tpl:193 views/system_settings.tpl:204
 #: views/system_settings.tpl:215
 msgid "True"
-msgstr ""
+msgstr "Juist"
 
 #: views/system_settings.tpl:194 views/system_settings.tpl:205
 #: views/system_settings.tpl:216
 msgid "False"
-msgstr ""
+msgstr "Onjuist"
 
 #: views/system_settings.tpl:200
 msgid "Hide environment summary on the dashboard"
-msgstr ""
+msgstr "Verberg omgevingssamenvatting op het dashboard"
 
 #: views/system_settings.tpl:211
 msgid "Show all sensors gauges on 1 page"
-msgstr ""
+msgstr "Toon alle sensoren op 1 pagina"
 
 #: views/system_settings.tpl:222
 msgid "Pi power usage in W"
@@ -3787,17 +3751,15 @@ msgstr "Poort nummer"
 
 #: views/system_settings.tpl:257
 msgid "Meross Cloud"
-msgstr ""
+msgstr "Meross Cloud"
 
 #: views/system_settings.tpl:267
 msgid "Meross Cloud username"
-msgstr ""
+msgstr "Meross Cloud-gebruikersnaam"
 
 #: views/system_settings.tpl:273
-#, fuzzy
-#| msgid "New admin password"
 msgid "Meross Cloud password"
-msgstr "Nieuw beheerswachtwoord"
+msgstr "Meross Cloud-wachtwoord"
 
 #: views/system_status.tpl:6
 msgid "CPU Load"
@@ -3852,10 +3814,8 @@ msgid "Here you can configure your webcams."
 msgstr "Hier kunt u uw webcams configureren."
 
 #: views/webcam_settings.tpl:25
-#, fuzzy
-#| msgid "Remote source"
 msgid "Local source"
-msgstr "Externe bron"
+msgstr "Lokale bron"
 
 #: views/webcam_settings.tpl:32 views/webcam_settings.tpl:95
 msgid "Resolution"
@@ -3910,62 +3870,52 @@ msgid "1 day"
 msgstr "1 dag"
 
 #: views/webcam_settings.tpl:139
-#, fuzzy
-#| msgid "Light state"
 msgid "Archive light state"
-msgstr "Licht status"
+msgstr "Archief licht status"
 
 #: views/webcam_settings.tpl:144
 msgid "When on"
-msgstr ""
+msgstr "Wanneer aan"
 
 #: views/webcam_settings.tpl:145
 msgid "When off"
-msgstr ""
+msgstr "Wanneer uitgeschakeld"
 
 #: views/webcam_settings.tpl:150
-#, fuzzy
-#| msgid "Door state"
 msgid "Archive door state"
-msgstr "Deur status"
+msgstr "Archief deur status"
 
 #: views/webcam_settings.tpl:155
 msgid "When open"
-msgstr ""
+msgstr "Wanneer open"
 
 #: views/webcam_settings.tpl:156
 msgid "When closed"
-msgstr ""
+msgstr "Wanneer gesloten"
 
 #: views/webcam_settings.tpl:162
-#, fuzzy
-#| msgid "Motion"
 msgid "Show motion boxes"
-msgstr "Beweging"
+msgstr "Bewegingsvakken weergeven"
 
 #: views/webcam_settings.tpl:172
 msgid "Motion delta threshold"
-msgstr ""
+msgstr "Drempel bewegingsdelta"
 
 #: views/webcam_settings.tpl:178
-#, fuzzy
-#| msgid "Zoom at minimum level"
 msgid "Motion minimum area"
-msgstr "Zoom op minimumniveau"
+msgstr "Beweging minimaal oppervlakte"
 
 #: views/webcam_settings.tpl:184
 msgid "Motion comparison frame"
-msgstr ""
+msgstr "Afbeelding voor bewegingsvergelijking"
 
 #: views/webcam_settings.tpl:188
-#, fuzzy
-#| msgid "Last update"
 msgid "Last frame"
-msgstr "Laatste wijziging"
+msgstr "Laatste beeld"
 
 #: views/webcam_settings.tpl:189
 msgid "Last archived frame"
-msgstr ""
+msgstr "Laatst gearchiveerde afbeelding"
 
 #: Missing text string
 msgid "1Wire bus"
@@ -3997,7 +3947,7 @@ msgstr "Alarm"
 
 #: Missing text string
 msgid "Amount"
-msgstr ""
+msgstr "Aantal"
 
 #: Missing text string
 msgid "Are you sure to delete the file"
@@ -4064,16 +4014,12 @@ msgid "Drop files here to upload"
 msgstr "Sleep bestanden hier naar toe om te uploaden"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Duration in seconds"
 msgid "Duration in hours"
-msgstr "Looptijd in seconden"
+msgstr "Duur in uren"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Duration in seconds"
 msgid "Duration in minutes"
-msgstr "Looptijd in seconden"
+msgstr "Duur in minuten"
 
 #: Missing text string
 msgid "Duration in seconds"
@@ -4093,7 +4039,7 @@ msgstr "Error"
 
 #: Missing text string
 msgid "Excluded from average calculation"
-msgstr ""
+msgstr "Uitgesloten van gemiddelde berekening"
 
 #: Missing text string
 msgid "External calendar url"
@@ -4158,10 +4104,8 @@ msgid "Load 5"
 msgstr "Belasting 5"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Minimum hours"
 msgid "Minimum area"
-msgstr "Minimale uren"
+msgstr "Minimum oppervlakte"
 
 #: Missing text string
 msgid "No error messages"
@@ -4201,7 +4145,7 @@ msgstr "Raspberry Pi camera"
 
 #: Missing text string
 msgid "Reboot"
-msgstr ""
+msgstr "Opnieuw opstarten"
 
 #: Missing text string
 msgid "Save RAW photo"
@@ -4221,7 +4165,7 @@ msgstr "De server kon de upload niet verwerken. Error code {{statusCode}}"
 
 #: Missing text string
 msgid "Shutdown"
-msgstr ""
+msgstr "Uitschakelen"
 
 #: Missing text string
 msgid "Switches overview screenshot"
@@ -4245,7 +4189,7 @@ msgstr "Er zijn geen deursensoren geconfigureerd."
 
 #: Missing text string
 msgid "Threshold"
-msgstr ""
+msgstr "Drempel"
 
 #: Missing text string
 msgid "Timer period off duration in minutes"
@@ -4300,10 +4244,8 @@ msgid "Used space"
 msgstr "Gebruikte ruimte"
 
 #: Missing text string
-#, fuzzy
-#| msgid "UVA"
 msgid "UV"
-msgstr "UVA"
+msgstr "UV"
 
 #: Missing text string
 msgid "Value difference during the night"
