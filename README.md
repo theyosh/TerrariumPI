@@ -114,7 +114,7 @@ The software has support for the following languages:
 - France
 - Norwegian
 
-Your language not in the list or not up to date? [Create your own language translation](https://github.com/theyosh/TerrariumPI/wiki/Translations)
+Your language not in the list or not up to date? [Create your own language translation](https://github.com/theyosh/TerrariumPI/wiki/Translations) <a href="https://weblate.theyosh.nl/engage/terrariumpi/?utm_source=widget"><img src="https://weblate.theyosh.nl/widgets/terrariumpi/-/webinterface/svg-badge.svg" alt="Translation status" /></a>
 
 ## Installation
 The installation expects a Pi with working network and ssh. It is tested with [Raspbian Stretch Lite](https://www.raspberrypi.org/downloads/raspbian/). For now the Full version is not working somehow.... So use the lite image! A new installation will take about 45 minutes. This is due to manually compiling python modules for the latest versions. Upgrades will go much faster.
