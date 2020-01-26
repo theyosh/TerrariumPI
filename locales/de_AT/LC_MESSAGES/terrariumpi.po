@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-01-26 23:32+CET\n"
-"PO-Revision-Date: 2020-01-26 22:05+0000\n"
+"PO-Revision-Date: 2020-01-26 23:56+0000\n"
 "Last-Translator: Weblate Admin <weblate@theyosh.nl>\n"
 "Language-Team: German (Austria) <http://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/de_AT/>\n"
@@ -782,7 +782,7 @@ msgstr "Namen des Tieres."
 
 #: terrariumTranslations.py:178
 msgid "Holds the type of the animal"
-msgstr "Art des Tieres."
+msgstr "Hält den Typ des Tieres"
 
 #: terrariumTranslations.py:179
 msgid "Holds the gender of the animal."
@@ -1640,8 +1640,7 @@ msgid ""
 msgstr ""
 "GPIO-Sensoren müssen manuell der TerrariumPI Software hinzugefügt werden. "
 "Das kann man im Web Interface machen. Die GPIO-Sensoren können sich keine "
-"GPIO-Pins teilen. Die DHT11 und DHT22 benötigen einen zusätzlichen "
-"Widerstand."
+"GPIO-Pins teilen. Die DHT11 und DHT22 benötigen einen zusätzlichen Widerstand"
 
 #: views/hardware.tpl:68
 msgid ""
@@ -1699,7 +1698,7 @@ msgid ""
 "following relay boards below are tested with TerrariumPI software."
 msgstr ""
 "Die TerrariumPI Software unterstützt verschiedene Art von Relais Boards. Die "
-"folgenden Relais Boards wurden mit TerrariumPI Software getestet:"
+"folgenden Relais Boards wurden mit TerrariumPI Software getestet."
 
 #: views/hardware.tpl:92
 msgid ""
