@@ -5,45 +5,38 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2018-08-21 23:51+0200\n"
-"PO-Revision-Date: 2018-12-23 13:29+0100\n"
-"Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2019-07-10 18:23+AEST\n"
+"PO-Revision-Date: 2020-01-26 22:05+0000\n"
+"Last-Translator: TheYOSH <github.com@theyosh.nl>\n"
+"Language-Team: Dutch <http://weblate.theyosh.nl/projects/terrariumpi/"
+"webinterface/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.10.3\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: Poedit 2.0.6\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: terrariumEngine.py:456 views/dashboard.tpl:7
+#: terrariumEngine.py:606 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
 msgid "Uptime"
 msgstr "Actief"
 
-#: terrariumEngine.py:457
+#: terrariumEngine.py:607
 msgid "Load"
 msgstr "Belasting"
 
-#: terrariumEngine.py:458
+#: terrariumEngine.py:608
 msgid "CPU Temp."
 msgstr "CPU Temp."
 
-#: terrariumGPIOSensor.py:84
-msgid "Dry"
-msgstr "Droog"
-
-#: terrariumGPIOSensor.py:84
-msgid "Wet"
-msgstr "Nat"
-
-#: terrariumTranslations.py:21
+#: terrariumTranslations.py:22
 msgid "Holds the external source URL. Supported sources are: %s."
 msgstr "Bevat de externe bron URL. Ondersteunde bronnen zijn: %s."
 
-#: terrariumTranslations.py:22
+#: terrariumTranslations.py:29
 msgid ""
 "Choose the wind speed indicator. The software will recalculate to the chosen "
 "indicator."
@@ -51,11 +44,11 @@ msgstr ""
 "Kies de windsnelheid indicator. De software zal opnieuw worden berekend op "
 "de gekozen indicator."
 
-#: terrariumTranslations.py:26
+#: terrariumTranslations.py:33
 msgid "Holds the sensor hardware type. Supported hardware types are: %s."
 msgstr "Bevat de sensor hardware type. Ondersteunde hardware types zijn: %s."
 
-#: terrariumTranslations.py:27
+#: terrariumTranslations.py:34
 msgid ""
 "Holds the sensor address. Depending on hardware type, it is either a read "
 "only hex number, a GPIO pin, a GPIO pin combination of %s or a full HTTP(S) "
@@ -63,19 +56,19 @@ msgid ""
 "use <strong>physical</strong> GPIO pin numbering."
 msgstr ""
 
-#: terrariumTranslations.py:27
+#: terrariumTranslations.py:34
 msgid "Remote data"
 msgstr "Externe data"
 
-#: terrariumTranslations.py:28
+#: terrariumTranslations.py:35
 msgid "Holds the sensor type. Supported sensor types are: %s."
 msgstr "Bevat het sensor type. Ondersteunde sensor types zijn: %s."
 
-#: terrariumTranslations.py:29
+#: terrariumTranslations.py:36
 msgid "Holds the name of the sensor."
 msgstr "Bevat de naam van de sensor."
 
-#: terrariumTranslations.py:30
+#: terrariumTranslations.py:37
 msgid ""
 "Holds the sensor lower alarm value of the sensor. When below this value, "
 "alarms can be triggered."
@@ -83,7 +76,7 @@ msgstr ""
 "Bevat de sensor onderste alarmwaarde van de sensor. Onder deze waarde kunnen "
 "alarmen worden geactiveerd."
 
-#: terrariumTranslations.py:31
+#: terrariumTranslations.py:38
 msgid ""
 "Holds the sensor maximum alarm value of the sensor. When above this value, "
 "alarms can be triggered."
@@ -91,46 +84,50 @@ msgstr ""
 "Bevat de sensor maximale alarmwaarde van de sensor. Boven deze waarde kunnen "
 "alarmen worden geactiveerd."
 
-#: terrariumTranslations.py:32
+#: terrariumTranslations.py:39
 msgid "Holds the sensor lowest value that should be used in the graphs."
 msgstr ""
 "Bevat de laagste waarde van de sensor die in de grafieken moet worden "
 "gebruikt."
 
-#: terrariumTranslations.py:33
+#: terrariumTranslations.py:40
 msgid "Holds the sensor maximum value that should be used in the graphs."
 msgstr ""
 "Bevat de maximale waarde van de sensor die in de grafieken moet worden "
 "gebruikt."
 
-#: terrariumTranslations.py:34
+#: terrariumTranslations.py:41
 msgid "Shows the sensor current value in temperature or humidity (read only)."
 msgstr ""
 "Toont de sensor huidige waarde in temperatuur of luchtvochtigheid (alleen "
 "lezen)."
 
-#: terrariumTranslations.py:35
+#: terrariumTranslations.py:42
 msgid "Holds the sensor lowest moisture value measured in dry air. %s"
-msgstr ""
+msgstr "Bevat de laagste vochtigheidswaarde gemeten in droge lucht. %s"
 
-#: terrariumTranslations.py:35 terrariumTranslations.py:36
+#: terrariumTranslations.py:42 terrariumTranslations.py:43
 msgid "More calibration information"
 msgstr "Meer informatie over kalibratie"
 
-#: terrariumTranslations.py:36
+#: terrariumTranslations.py:43
 msgid "Holds the sensor highest moisture value measured in full water. %s"
-msgstr ""
+msgstr "Bevat de hoogste vochtigheidswaarde gemeten in volledig water. %s"
 
-#: terrariumTranslations.py:37
+#: terrariumTranslations.py:44
 msgid "Holds the temperature offset value."
+msgstr "Bevat de temperatuur verschil waarde."
+
+#: terrariumTranslations.py:45
+msgid "Holds the maximum numbber that a sensor may change in value up or down."
 msgstr ""
 
-#: terrariumTranslations.py:41
+#: terrariumTranslations.py:49
 msgid "Holds the switch hardware type. Supported hardware types are: %s."
 msgstr ""
 "Bevat de schakelaar hardware type. Ondersteunde hardware types zijn: %s."
 
-#: terrariumTranslations.py:42
+#: terrariumTranslations.py:50
 msgid ""
 "Holds the switch address. Depending on hardware type, it is either a number "
 "or GPIO pin. For GPIO and PWM-Dimmer use <strong>physical</strong> GPIO pin "
@@ -140,20 +137,20 @@ msgstr ""
 "of een GPIO-pin. Voor GPIO en PWM-Dimmer gebruikt u <strong>fysieke</strong> "
 "GPIO pin nummering."
 
-#: terrariumTranslations.py:43
+#: terrariumTranslations.py:51
 msgid "Holds the switch name."
 msgstr "Bevat de schakelaar naam."
 
-#: terrariumTranslations.py:44
+#: terrariumTranslations.py:52
 msgid "Holds the switch power usage in Watt when switched on."
 msgstr "Bevat het schakelvermogensverbruik in Watt wanneer ingeschakeld."
 
-#: terrariumTranslations.py:45
+#: terrariumTranslations.py:53
 msgid "Holds the switch water flow in liters per minute when switched on"
 msgstr ""
 "Houd de schakelaar waterstroom in liter per minuut wanneer ingeschakeld"
 
-#: terrariumTranslations.py:46
+#: terrariumTranslations.py:54
 msgid ""
 "Enable or disable timer functionality. When enabled you can specify the "
 "timing below."
@@ -161,15 +158,15 @@ msgstr ""
 "Activeer timer functionaliteit. Wanneer geactiveerd kun je de timer tijden "
 "hieronder invullen."
 
-#: terrariumTranslations.py:47
+#: terrariumTranslations.py:55
 msgid "Holds the timer start time. The timer will run after this start time."
 msgstr "Bevat de timer start tijd. De timer start op dit tijdstip."
 
-#: terrariumTranslations.py:48
+#: terrariumTranslations.py:56
 msgid "Holds the timer stop time. The timer will stop after this start time."
 msgstr "Bevat de timer stop tijd. De timer stop op dit tijdstip."
 
-#: terrariumTranslations.py:49
+#: terrariumTranslations.py:57
 msgid ""
 "Holds the period in minutes that the power switch is on withing the total "
 "timer window."
@@ -177,7 +174,7 @@ msgstr ""
 "Bevat de tijdsuur in minuten dat de schakelaar aan is in de totale timer "
 "tijdsduur."
 
-#: terrariumTranslations.py:50
+#: terrariumTranslations.py:58
 msgid ""
 "Holds the period in minutes that the power switch is off withing the total "
 "timer window."
@@ -185,7 +182,7 @@ msgstr ""
 "Bevat de tijdsuur in minuten dat de schakelaar uit is in de totale timer "
 "tijdsduur."
 
-#: terrariumTranslations.py:51
+#: terrariumTranslations.py:59
 msgid ""
 "Holds the amount of seconds for the duration in which the dimmer changes to "
 "the new value."
@@ -193,35 +190,37 @@ msgstr ""
 "Bevat het aantal seconden dat gebruikt wordt om de stroom naar de nieuwe "
 "waarde te zetten."
 
-#: terrariumTranslations.py:52
+#: terrariumTranslations.py:60
 msgid ""
 "Holds the amount in percentage to change the dimmer by the heater "
 "environment."
 msgstr ""
+"Bevat de hoeveelheid in percentage de dimmer te verandert door de "
+"temperatuur omgeving."
 
-#: terrariumTranslations.py:53
+#: terrariumTranslations.py:61
 msgid ""
 "Holds the amount of seconds for the duration in which it increases the power."
 msgstr "Bevat het aantal seconden dat gebruikt wordt om de stroom te verlagen."
 
-#: terrariumTranslations.py:54
+#: terrariumTranslations.py:62
 msgid "Holds the amount in percentage to go to when switched on."
 msgstr "Bevat de percentage wanneer de schakelaar aan wordt gezet."
 
-#: terrariumTranslations.py:55
+#: terrariumTranslations.py:63
 msgid ""
 "Holds the amount of seconds for the duration in which it decresses the power."
 msgstr "Bevat het aantal seconden dat gebruikt wordt om de stroom te verhogen."
 
-#: terrariumTranslations.py:56
+#: terrariumTranslations.py:64
 msgid "Holds the amount in percentage to go to when switched off."
 msgstr "Bevat de percentage wanneer de schakelaar uit wordt gezet."
 
-#: terrariumTranslations.py:60
+#: terrariumTranslations.py:68
 msgid "Holds the door hardware type. Supported hardware types are: %s."
 msgstr "Bevat de deurhardware type. Ondersteunde hardware types zijn: %s."
 
-#: terrariumTranslations.py:61
+#: terrariumTranslations.py:69
 msgid ""
 "Holds the door address. When using GPIO use <strong>physical</strong> GPIO "
 "pin numbering as address."
@@ -229,69 +228,105 @@ msgstr ""
 "Bevat het deuradres. Wanneer u GPIO gebruikt, gebruikt u <strong>fysieke</"
 "strong> GPIO pin nummering als adres."
 
-#: terrariumTranslations.py:62
+#: terrariumTranslations.py:70
 msgid "Holds the door name."
 msgstr "Bevat de deur naam."
 
-#: terrariumTranslations.py:66
+#: terrariumTranslations.py:74
 msgid "Holds the webcam location source. Supported sources are: %s"
 msgstr "Bevat de webcam locatie bron. Ondersteunde bronnen zijn: %s"
 
-#: terrariumTranslations.py:67
+#: terrariumTranslations.py:75
 msgid "Holds the webcam name."
 msgstr "Bevat de webcam naam."
 
-#: terrariumTranslations.py:68
+#: terrariumTranslations.py:76
 msgid "Holds the webcam resolution."
 msgstr "Bevat de resolutie van de webcam."
 
-#: terrariumTranslations.py:69
+#: terrariumTranslations.py:77
 msgid "Holds the webcam resolution width in pixels."
 msgstr "Bevat de resolutie breedte van de webcam in pixels."
 
-#: terrariumTranslations.py:70
+#: terrariumTranslations.py:78
 msgid "Holds the webcam resolution height in pixels."
 msgstr "Bevat de resolutie hoogte van de webcam in pixels."
 
-#: terrariumTranslations.py:71
+#: terrariumTranslations.py:79
 msgid "Holds the webcam rotation of the image."
 msgstr "Bevat de webcam rotatie van de afbeelding."
 
-#: terrariumTranslations.py:72
+#: terrariumTranslations.py:80
 msgid "Shows the webcam preview image."
 msgstr "Toont de webcam voorbeeld afbeelding."
 
-#: terrariumTranslations.py:73
+#: terrariumTranslations.py:81
 msgid "Enabled or disable image archiving based on motion detection."
 msgstr ""
 "Beeld archivering op basis van bewegingsdetectie geactiveerd of "
 "uitgeschakeld."
 
-#: terrariumTranslations.py:77
+#: terrariumTranslations.py:82
+msgid "Select the environment light state when enabling archiving."
+msgstr ""
+
+#: terrariumTranslations.py:83
+msgid "Select the environment door state when enabling archiving."
+msgstr ""
+
+#: terrariumTranslations.py:84
+#, fuzzy
+#| msgid "Enabled or disable image archiving based on motion detection."
+msgid "Enable or disable motion boxes for Motion archiving."
+msgstr ""
+"Beeld archivering op basis van bewegingsdetectie geactiveerd of "
+"uitgeschakeld."
+
+#: terrariumTranslations.py:85
+msgid ""
+"Minimum difference between frames to be identified as motion. Higher value "
+"means that the image must be more different for motion to be detected."
+msgstr ""
+
+#: terrariumTranslations.py:86
+msgid ""
+"Minimum area of an image in pixels for a region to be considered motion. "
+"Larger values mean that only larger areas will be detected as motion."
+msgstr ""
+
+#: terrariumTranslations.py:87
+msgid ""
+"Last frame means that only consecutive frames will be compared for motion. "
+"Last archived frame means that the current frame will be compared to the "
+"last archived frame. Setting to last frame will ignore motion when it is "
+"very gradual."
+msgstr ""
+
+#: terrariumTranslations.py:91
 msgid "Holds the audio playlist name."
 msgstr "Bevat de naam van de audio afspeellijst."
 
-#: terrariumTranslations.py:78
+#: terrariumTranslations.py:92
 msgid "Holds the time when the playlist should be started."
 msgstr "Bevat de tijd wanneer de afspeellijst moet starten."
 
-#: terrariumTranslations.py:79
+#: terrariumTranslations.py:93
 msgid "Holds the time when the playlist should be stopped."
 msgstr "Bevat de tijd wanneer de afspeellijst moet stoppen."
 
-#: terrariumTranslations.py:80
+#: terrariumTranslations.py:94
 msgid "Holds the volume for this playlist."
 msgstr "Bevat de volume van dit afspeellijst."
 
-#: terrariumTranslations.py:81
+#: terrariumTranslations.py:95
 msgid "Toggle on to enable repeating of the audio files."
 msgstr "Zet aan om de afspeellijst te laten herladen als deze is afgelopen."
 
-#: terrariumTranslations.py:82
+#: terrariumTranslations.py:96
 msgid "Toggle on to enable shuffeling of the audio files."
 msgstr "Zet aan om de afspeellijst te laten shufflen."
 
-#: terrariumTranslations.py:83
+#: terrariumTranslations.py:97
 msgid ""
 "Select the audio files for this playlist. It is possible to select the same "
 "audio file in multiple playlists."
@@ -299,7 +334,7 @@ msgstr ""
 "Selecteer de audio bestanden voor dit afspeellijst. Het is mogelijk om "
 "dezelfde audio bestand in meerdere afspeellijsten te hebben."
 
-#: terrariumTranslations.py:87
+#: terrariumTranslations.py:101
 msgid ""
 "Select the mode on which this environment part be put on and off. Select "
 "'%s' to use the sun rise and sun set at your location. This will make the "
@@ -307,102 +342,116 @@ msgid ""
 "'%s', the light will put on and off at selected times."
 msgstr ""
 
-#: terrariumTranslations.py:87 terrariumTranslations.py:91
-#: terrariumTranslations.py:92 views/dashboard.tpl:83 views/dashboard.tpl:118
+#: terrariumTranslations.py:101 terrariumTranslations.py:105
+#: terrariumTranslations.py:106 views/dashboard.tpl:83 views/dashboard.tpl:118
 #: views/dashboard.tpl:171 views/dashboard.tpl:224 views/dashboard.tpl:277
 #: views/dashboard.tpl:330 views/dashboard.tpl:383 views/dashboard.tpl:436
-#: views/dashboard.tpl:489 views/inc/usage_environment.tpl:34
-#: views/inc/usage_environment.tpl:230 views/inc/usage_environment.tpl:324
-#: views/switch_settings.tpl:34 views/switch_settings.tpl:140
-#: views/system_environment.tpl:42 views/system_environment.tpl:173
-#: views/system_environment.tpl:385 views/system_environment.tpl:596
-#: views/system_environment.tpl:807 views/system_environment.tpl:1020
-#: views/system_environment.tpl:1231 views/system_environment.tpl:1395
-#: views/system_environment.tpl:1606
+#: views/dashboard.tpl:489 views/dashboard.tpl:542
+#: views/inc/usage_environment.tpl:34 views/inc/usage_environment.tpl:230
+#: views/inc/usage_environment.tpl:324 views/switch_settings.tpl:34
+#: views/switch_settings.tpl:148 views/system_environment.tpl:42
+#: views/system_environment.tpl:173 views/system_environment.tpl:385
+#: views/system_environment.tpl:596 views/system_environment.tpl:807
+#: views/system_environment.tpl:1018 views/system_environment.tpl:1229
+#: views/system_environment.tpl:1393 views/system_environment.tpl:1604
 msgid "Timer"
 msgstr "Klok"
 
-#: terrariumTranslations.py:87 terrariumTranslations.py:99
+#: terrariumTranslations.py:101 terrariumTranslations.py:113
 #: views/inc/menu.tpl:30 views/inc/usage_environment.tpl:35
 #: views/inc/usage_environment.tpl:231 views/inc/usage_environment.tpl:325
 #: views/inc/usage_weather.tpl:13 views/inc/usage_weather.tpl:82
 #: views/inc/usage_weather.tpl:85 views/system_environment.tpl:201
 #: views/system_environment.tpl:413 views/system_environment.tpl:624
-#: views/system_environment.tpl:835 views/system_environment.tpl:1048
-#: views/system_environment.tpl:1423 views/system_environment.tpl:1634
+#: views/system_environment.tpl:835 views/system_environment.tpl:1046
+#: views/system_environment.tpl:1421 views/system_environment.tpl:1632
 #: views/usage.tpl:10 views/weather.tpl:7
 msgid "Weather"
 msgstr "Weer"
 
-#: terrariumTranslations.py:88
+#: terrariumTranslations.py:102
 msgid ""
 "Select the sensors that are used to control this environment part. When "
 "selecting multiple sensors, the average is calculated to determine the final "
 "values."
 msgstr ""
+"Selecteer de sensoren die worden gebruikt om dit omgevingsdeel te besturen. "
+"Wanneer er meerdere sensors worden gebruikt, wordt het gemiddelde genomen "
+"voor de waardes."
 
-#: terrariumTranslations.py:89
+#: terrariumTranslations.py:103
 msgid ""
 "Holds the value in degrees which the sensors are changing when it become "
 "night. Use positive numbers to increase the values and negative numbers to "
 "lower the values."
 msgstr ""
+"Houdt de waarde in graden die de sensoren veranderen wanneer het nacht "
+"wordt. Gebruik positieve getallen om de waarden te verhogen en negatieve "
+"getallen om de waarden te verlagen."
 
-#: terrariumTranslations.py:90
+#: terrariumTranslations.py:104
 msgid "Holds the soure that is used to determing when it is day or night."
 msgstr ""
 
-#: terrariumTranslations.py:91
+#: terrariumTranslations.py:105
 msgid ""
 "Enter the time when this environment part should be put on. Only available "
 "when running in '%s' mode."
 msgstr ""
+"Voer het tijdstip in waarop dit omgevingsdeel moet worden gestart. Alleen "
+"beschikbaar in '%s' mode."
 
-#: terrariumTranslations.py:92
+#: terrariumTranslations.py:106
 msgid ""
 "Enter the time when this environment part should be put off. Only available "
 "when running in '%s' mode."
 msgstr ""
+"Voer het tijdstip in waarop dit omgevingsdeel moet worden uitgeschakeld. "
+"Alleen beschikbaar in '%s' mode."
 
-#: terrariumTranslations.py:93
+#: terrariumTranslations.py:107
 msgid ""
 "Holds the period in minutes that this environment part is powered on withing "
 "the total timer window."
 msgstr ""
+"Bevat de periode in minuten dat dit omgevingsdeel is ingeschakeld binnen het "
+"totale tijdvenster."
 
-#: terrariumTranslations.py:94
+#: terrariumTranslations.py:108
 msgid ""
 "Holds the period in minutes that this environment part is powered off "
 "withing the total timer window."
 msgstr ""
+"Bevat de periode in minuten dat dit omgevingsdeel is uitgeschakeld binnen "
+"het totale tijdvenster."
 
-#: terrariumTranslations.py:95
+#: terrariumTranslations.py:109
 msgid ""
 "How much time must there be between two actions and after start up. Enter "
 "the amount of seconds in which this environment part can settle."
 msgstr ""
 
-#: terrariumTranslations.py:96
+#: terrariumTranslations.py:110
 msgid ""
 "Holds the amount of seconds that this environment part is powered on when "
 "the value is out of range."
 msgstr ""
 
-#: terrariumTranslations.py:97
+#: terrariumTranslations.py:111
 msgid ""
 "Enter the maximum amount of time in hours. When the time between on and off "
 "is more then this maximum, the on and off time will be shifted more to each "
 "other."
 msgstr ""
 
-#: terrariumTranslations.py:98
+#: terrariumTranslations.py:112
 msgid ""
 "Enter the minimum amount of time in hours. When the time between on and off "
 "is less then this amount of hours, the on and off time will be widened until "
 "the minimum amount of hours entered here."
 msgstr ""
 
-#: terrariumTranslations.py:99
+#: terrariumTranslations.py:113
 msgid ""
 "Enter the amount of hours that the power on and off times should shift. Is "
 "only needed when running in the '%s' mode. Enter a positive number for "
@@ -410,125 +459,133 @@ msgid ""
 "the start time."
 msgstr ""
 
-#: terrariumTranslations.py:100
+#: terrariumTranslations.py:114
 msgid ""
 "Select the power switches that should be used when the alarms or timers are "
 "hit. Select all needed switches below."
 msgstr ""
 
-#: terrariumTranslations.py:101
+#: terrariumTranslations.py:115
 msgid "Holds the water volume in liters."
 msgstr "Bevat de watertank volume in liters."
 
-#: terrariumTranslations.py:102
+#: terrariumTranslations.py:116
 msgid "Holds the water tank height in cm or inches."
-msgstr ""
+msgstr "Bevat de hoogte van de water tank in cm of inches."
 
-#: terrariumTranslations.py:103
+#: terrariumTranslations.py:117
 msgid ""
 "Holds the distance between top of the liquid when full and the sensor in cm "
 "or inches."
 msgstr ""
 
-#: terrariumTranslations.py:104
+#: terrariumTranslations.py:118
 msgid ""
 "Select when the power switches can toggle. When lights are on, off or just "
 "always"
 msgstr ""
 
-#: terrariumTranslations.py:105
+#: terrariumTranslations.py:119
 msgid ""
 "Select when the power switches can toggle. When the door is open, cosed or "
 "just always"
 msgstr ""
 
-#: terrariumTranslations.py:109
+#: terrariumTranslations.py:123
 msgid "Holds the email address on which you would like to receive messages."
 msgstr ""
 
-#: terrariumTranslations.py:110
+#: terrariumTranslations.py:124
 msgid "Holds the mail server hostname or IP."
 msgstr ""
 
-#: terrariumTranslations.py:111
+#: terrariumTranslations.py:125
 msgid "Holds the mail server portnumber. SSL and TLS will be autodetected."
 msgstr ""
 
-#: terrariumTranslations.py:112
+#: terrariumTranslations.py:126
 msgid "Holds the username for authentication with the mailserver if needed."
 msgstr ""
 
-#: terrariumTranslations.py:113
+#: terrariumTranslations.py:127
 msgid "Holds the password for authentication with the mailserver if needed."
 msgstr ""
 
-#: terrariumTranslations.py:115
+#: terrariumTranslations.py:129
+#, fuzzy
+#| msgid "Holds the audio playlist name."
+msgid "Holds the display chip that is used."
+msgstr "Bevat de naam van de audio afspeellijst."
+
+#: terrariumTranslations.py:130
 msgid ""
 "Holds the I2C address of the LCD screen. Use the value found with i2cdetect. "
 "Add ,[NR] to change the I2C bus."
 msgstr ""
 
-#: terrariumTranslations.py:116
-msgid "Holds the LCD screen resolution."
-msgstr ""
-
-#: terrariumTranslations.py:117
+#: terrariumTranslations.py:131
 msgid "Reserve first LCD line for static title."
 msgstr "Reserve eerste LCD-lijn voor statische titel."
 
-#: terrariumTranslations.py:119
+#: terrariumTranslations.py:133
 msgid "Holds your Twitter consumer key. More information %shere%s"
 msgstr ""
 
-#: terrariumTranslations.py:120
+#: terrariumTranslations.py:134
 msgid "Holds your Twitter consumer secret. More information %shere%s"
 msgstr ""
 
-#: terrariumTranslations.py:121
+#: terrariumTranslations.py:135
 msgid "Holds your Twitter access token. More information %shere%s"
 msgstr ""
 
-#: terrariumTranslations.py:122
+#: terrariumTranslations.py:136
 msgid "Holds your Twitter access token secret. More information %shere%s"
 msgstr ""
 
-#: terrariumTranslations.py:124
+#: terrariumTranslations.py:138
 msgid "Holds the PushOver API token. More information %shere%s"
 msgstr ""
 
-#: terrariumTranslations.py:125
+#: terrariumTranslations.py:139
 msgid "Holds the PushOver API user key. More information %shere%s"
 msgstr ""
 
-#: terrariumTranslations.py:127
+#: terrariumTranslations.py:141
 msgid "Holds the Telegram Bot token. More information %shere%s"
 msgstr ""
 
-#: terrariumTranslations.py:128
+#: terrariumTranslations.py:142
 msgid ""
 "Holds the Telegram username that is allowed for receiving messages. Can be "
 "multiple usernames seperated by a comma. More information %shere%s"
 msgstr ""
 
-#: terrariumTranslations.py:129
+#: terrariumTranslations.py:143
 msgid ""
 "Holds the proxy address in form of [schema]://[user]:[password]@[server.com]:"
 "[port]. Can either be socks5 or http(s) for schema."
 msgstr ""
 
-#: terrariumTranslations.py:133
+#: terrariumTranslations.py:145
+msgid ""
+"Holds the url to post notification data to. You can use %name% variables in "
+"the post url"
+msgstr ""
+
+#: terrariumTranslations.py:150
 msgid "Choose your interface language."
 msgstr "Kies uw interface taal."
 
-#: terrariumTranslations.py:134
+#: terrariumTranslations.py:151
 msgid "Holds the distance type used by distance sensors."
 msgstr ""
 
-#: terrariumTranslations.py:135 terrariumTranslations.py:136
+#: terrariumTranslations.py:152 terrariumTranslations.py:153
 msgid "Holds the username which can make changes (Administrator)."
 msgstr "Bevat de gebruikersnaam die wijzigingen kan doen (Administrator)."
 
-#: terrariumTranslations.py:137
+#: terrariumTranslations.py:154
 msgid ""
 "Enter the new password for the administration user. Leaving empty will not "
 "change the password!"
@@ -536,11 +593,11 @@ msgstr ""
 "Voer het nieuwe wachtwoord in voor de beheerder. Als u het leeg gaat, "
 "verandert het wachtwoord niet!"
 
-#: terrariumTranslations.py:138
+#: terrariumTranslations.py:155
 msgid "Enter the current password in order to change the password."
 msgstr "Voer het huidige wachtwoord in om het wachtwoord te wijzigen."
 
-#: terrariumTranslations.py:139
+#: terrariumTranslations.py:156
 msgid ""
 "Toggle on or off full authentication. When on, you need to authenticate at "
 "all times."
@@ -548,11 +605,11 @@ msgstr ""
 "Schakel volledige verificatie in of uit. Wanneer deze optie is ingeschakeld, "
 "moet u te allen tijde verifiëren."
 
-#: terrariumTranslations.py:140
+#: terrariumTranslations.py:157
 msgid "Holds the external calendar url."
 msgstr "Bevat de externe kalender url."
 
-#: terrariumTranslations.py:141
+#: terrariumTranslations.py:158
 msgid ""
 "Toggle on or off horizontal graph legends. Reload the webinterface after "
 "changing the setting."
@@ -560,11 +617,23 @@ msgstr ""
 "Schakel horizontale legendes in of uit. Herlaad de webinterface na het "
 "wijzigen van de instelling."
 
-#: terrariumTranslations.py:142
+#: terrariumTranslations.py:159
+#, fuzzy
+#| msgid ""
+#| "Toggle on or off horizontal graph legends. Reload the webinterface after "
+#| "changing the setting."
+msgid ""
+"Toggle on or off the environment summary on the dashboard. Reload the "
+"webinterface after changing the setting."
+msgstr ""
+"Schakel horizontale legendes in of uit. Herlaad de webinterface na het "
+"wijzigen van de instelling."
+
+#: terrariumTranslations.py:160
 msgid "Holds the soundcard that is used for playing audio."
 msgstr "Bevat de geluidskaart dat wordt gebruikt voor het afspelen van audio."
 
-#: terrariumTranslations.py:143
+#: terrariumTranslations.py:161
 msgid ""
 "Holds the amount of power in Wattage that the Raspberry PI uses including "
 "all USB equipment."
@@ -572,15 +641,15 @@ msgstr ""
 "Bevat de hoeveelheid energie in watt die de Raspberry PI gebruikt, inclusief "
 "alle USB-apparatuur."
 
-#: terrariumTranslations.py:144
+#: terrariumTranslations.py:162
 msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
 msgstr "Bevat de hoeveelheid euro/dollar per 1 kW/h (1 Kilowatt per uur)."
 
-#: terrariumTranslations.py:145
+#: terrariumTranslations.py:163
 msgid "Holds the amount of euro/dollar per 1000 liters water."
 msgstr "Bevat de hoeveelheid euro/dollar per 1000 liter water."
 
-#: terrariumTranslations.py:146
+#: terrariumTranslations.py:164
 msgid ""
 "Choose the temperature indicator. The software will recalculate to the "
 "chosen indicator."
@@ -588,7 +657,31 @@ msgstr ""
 "Kies de temperatuurindicator. De software zal opnieuw worden berekend op de "
 "gekozen indicator."
 
-#: terrariumTranslations.py:147
+#: terrariumTranslations.py:165
+#, fuzzy
+#| msgid ""
+#| "Choose the wind speed indicator. The software will recalculate to the "
+#| "chosen indicator."
+msgid ""
+"Choose the windspeed indicator. The software will recalculate to the chosen "
+"indicator."
+msgstr ""
+"Kies de windsnelheid indicator. De software zal opnieuw worden berekend op "
+"de gekozen indicator."
+
+#: terrariumTranslations.py:166
+#, fuzzy
+#| msgid ""
+#| "Choose the temperature indicator. The software will recalculate to the "
+#| "chosen indicator."
+msgid ""
+"Choose the volume (liquid) indicator. The software will recalculate to the "
+"chosen indicator."
+msgstr ""
+"Kies de temperatuurindicator. De software zal opnieuw worden berekend op de "
+"gekozen indicator."
+
+#: terrariumTranslations.py:167
 msgid ""
 "Holds the host name or IP address on which the software will listen for "
 "connections. Enter :: for all addresses to bind."
@@ -596,132 +689,166 @@ msgstr ""
 "Bevat de hostnaam of het IP-adres waarop de software naar verbindingen "
 "luistert. Vul in :: voor alle adressen om te luisteren."
 
-#: terrariumTranslations.py:148
+#: terrariumTranslations.py:168
 msgid ""
 "Holds the port number on which the software is listening for connections."
 msgstr "Bevat het poortnummer waarop de software luistert naar verbindingen."
 
-#: terrariumTranslations.py:149
-msgid ""
-"Holds the port number on which the OWFS software is running. Leave empty to "
-"disable OWFS support."
+#: terrariumTranslations.py:169
+msgid "Enter the e-mail address that is used for your Meross devices."
 msgstr ""
-"Bevat het poortnummer waarop de OWFS-software draait. Laat leeg om OWFS-"
-"ondersteuning uit te schakelen."
 
-#: terrariumTranslations.py:153
+#: terrariumTranslations.py:170
+msgid ""
+"Enter the password that is used for your Meross devices. Password is stored "
+"in plain text!"
+msgstr ""
+
+#: terrariumTranslations.py:171
+msgid ""
+"Holds the amount of datapoints (each 30 sec) to use for smoothing. The "
+"higher the value, the smoother the graph. Enter 0 to disable. Reload the "
+"webinterface after changing the setting."
+msgstr ""
+
+#: terrariumTranslations.py:172
+#, fuzzy
+#| msgid ""
+#| "Toggle on or off horizontal graph legends. Reload the webinterface after "
+#| "changing the setting."
+msgid ""
+"Select true or false to show an extra sensor page which holds all the "
+"sensors with there gauges. Reload the webinterface after changing the "
+"setting."
+msgstr ""
+"Schakel horizontale legendes in of uit. Herlaad de webinterface na het "
+"wijzigen van de instelling."
+
+#: terrariumTranslations.py:177
 msgid "Holds the name of the animal."
 msgstr "Bevat de dier naam."
 
-#: terrariumTranslations.py:154
+#: terrariumTranslations.py:178
 msgid "Holds the type of the animal"
 msgstr "Bevat de type van het dier"
 
-#: terrariumTranslations.py:155
+#: terrariumTranslations.py:179
 msgid "Holds the gender of the animal."
 msgstr "Bevat het geslacht van het dier."
 
-#: terrariumTranslations.py:156
+#: terrariumTranslations.py:180
 msgid "Holds the day of birth of the animal."
 msgstr "Bevat de geboortedatum van het dier."
 
-#: terrariumTranslations.py:157
+#: terrariumTranslations.py:181
 msgid "Holds the species name of the animal."
 msgstr "Bevat de soortnaam van het dier."
 
-#: terrariumTranslations.py:158
+#: terrariumTranslations.py:182
 msgid "Holds the latin name of the animal."
 msgstr "Bevat de Latijnse naam van het dier."
 
-#: terrariumTranslations.py:159
+#: terrariumTranslations.py:183
 msgid "Holds a small description about the animal."
 msgstr "Bevat een kleine beschrijving over het dier."
 
-#: terrariumTranslations.py:160
+#: terrariumTranslations.py:184
 msgid "Holds a link to more information."
 msgstr "Bevat een link naar meer informatie."
 
-#: terrariumWebcam.py:279
+#: terrariumWebcam.py:190
 msgid "Offline since"
 msgstr "Offline sinds"
 
-#: terrariumWebserver.py:88 terrariumWebserver.py:165
+#: terrariumWebserver.py:93 terrariumWebserver.py:196
 msgid "Authenticate to make any changes"
 msgstr "Login om wijzigingen te kunnen maken"
 
-#: terrariumWebserver.py:88 terrariumWebserver.py:165
-#: views/system_settings.tpl:36
+#: terrariumWebserver.py:93 terrariumWebserver.py:196
+#: views/system_settings.tpl:57
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:88 terrariumWebserver.py:165
-#: views/system_settings.tpl:113
+#: terrariumWebserver.py:93 terrariumWebserver.py:196
+#: views/system_settings.tpl:146
 msgid "Authentication"
 msgstr "Authenticatie"
 
-#: terrariumWebserver.py:218
+#: terrariumWebserver.py:259
 msgid "Player command could ot be executed!"
 msgstr "De audio speler commando kon niet worden uitgevoerd!"
 
-#: terrariumWebserver.py:218 terrariumWebserver.py:238
-#: terrariumWebserver.py:250 terrariumWebserver.py:258
+#: terrariumWebserver.py:259 terrariumWebserver.py:279
+#: terrariumWebserver.py:291 terrariumWebserver.py:299
 msgid "Error!"
 msgstr "Fout!"
 
-#: terrariumWebserver.py:226 terrariumWebserver.py:229
+#: terrariumWebserver.py:267 terrariumWebserver.py:270
 msgid "OK!"
 msgstr "OK!"
 
-#: terrariumWebserver.py:226 terrariumWebserver.py:229
+#: terrariumWebserver.py:267 terrariumWebserver.py:270
 msgid "Player command executed!"
 msgstr "De audio speler commando is uitgevoerd!"
 
-#: terrariumWebserver.py:238
+#: terrariumWebserver.py:279
 msgid "File is not uploaded!"
 msgstr "Bestand is niet geüpload!"
 
-#: terrariumWebserver.py:243
+#: terrariumWebserver.py:284
 msgid "File '%s' is uploaded"
 msgstr "Bestand '%s' is geüpload"
 
-#: terrariumWebserver.py:243 terrariumWebserver.py:253
+#: terrariumWebserver.py:284 terrariumWebserver.py:294
 msgid "Success!"
-msgstr "Success!"
+msgstr "Gelukt!"
 
-#: terrariumWebserver.py:245
+#: terrariumWebserver.py:286
 msgid "Duplicate file '%s'"
 msgstr "Duplicaat bestand '%s'"
 
-#: terrariumWebserver.py:250
+#: terrariumWebserver.py:291
 msgid "Action could not be satisfied"
 msgstr "Actie kon niet worden uitgevoerd"
 
-#: terrariumWebserver.py:253
+#: terrariumWebserver.py:294
 msgid "Audio file is deleted"
 msgstr "Audio bestand is verwijderd"
 
-#: terrariumWebserver.py:258
+#: terrariumWebserver.py:299
 msgid "Data could not be saved"
 msgstr "Data kon niet worden opgeslagen"
 
-#: terrariumWebserver.py:266
+#: terrariumWebserver.py:307
 msgid "Data saved"
 msgstr "Data is opgeslagen"
 
-#: terrariumWebserver.py:267
+#: terrariumWebserver.py:308
 msgid "Your changes are saved"
 msgstr "Je wijzigingen zijn opgeslagen"
 
-#: terrariumWebserver.py:388 views/inc/menu.tpl:168
+#: terrariumWebserver.py:327
+msgid "Hardware is replaced"
+msgstr ""
+
+#: terrariumWebserver.py:328
+msgid "Hardware replacement is logged in the calendar"
+msgstr ""
+
+#: terrariumWebserver.py:331
+msgid "A new replacement reminder is created"
+msgstr ""
+
+#: terrariumWebserver.py:468 views/inc/menu.tpl:174
 msgid "Log out"
 msgstr "Log uit"
 
-#: terrariumWebserver.py:389
+#: terrariumWebserver.py:469
 msgid "You are now logged out"
 msgstr "Je bent nu uitgelogd"
 
 #: views/audio_files.tpl:4 views/audio_playlist.tpl:4 views/door_settings.tpl:4
-#: views/inc/menu.tpl:147 views/notifications.tpl:4 views/sensor_settings.tpl:4
+#: views/inc/menu.tpl:153 views/notifications.tpl:4 views/sensor_settings.tpl:4
 #: views/switch_settings.tpl:4 views/system_environment.tpl:4
 #: views/system_settings.tpl:4 views/webcam_settings.tpl:4
 msgid "Help"
@@ -784,7 +911,7 @@ msgstr "Upload datum"
 #: views/dashboard.tpl:293 views/dashboard.tpl:305 views/dashboard.tpl:346
 #: views/dashboard.tpl:358 views/dashboard.tpl:399 views/dashboard.tpl:411
 #: views/dashboard.tpl:452 views/dashboard.tpl:464 views/dashboard.tpl:505
-#: views/dashboard.tpl:517
+#: views/dashboard.tpl:517 views/dashboard.tpl:558 views/dashboard.tpl:570
 msgid "Duration"
 msgstr "Tijdsduur"
 
@@ -795,9 +922,9 @@ msgstr "Tijdsduur"
 #: views/inc/usage_sensors.tpl:174 views/inc/usage_switches.tpl:117
 #: views/inc/usage_switches.tpl:140 views/inc/usage_webcams.tpl:104
 #: views/inc/usage_webcams.tpl:134 views/profile.tpl:56
-#: views/sensor_settings.tpl:28 views/sensor_settings.tpl:144
-#: views/switch_settings.tpl:25 views/switch_settings.tpl:128
-#: views/webcam_settings.tpl:27 views/webcam_settings.tpl:89
+#: views/sensor_settings.tpl:28 views/sensor_settings.tpl:155
+#: views/switch_settings.tpl:25 views/switch_settings.tpl:136
+#: views/webcam_settings.tpl:29 views/webcam_settings.tpl:91
 msgid "Name"
 msgstr "Naam"
 
@@ -808,7 +935,7 @@ msgstr "Album"
 #: views/audio_files.tpl:68 views/inc/usage_dashboard.tpl:153
 #: views/inc/usage_sensors.tpl:128 views/inc/usage_sensors.tpl:171
 #: views/profile.tpl:63 views/sensor_settings.tpl:25
-#: views/sensor_settings.tpl:125
+#: views/sensor_settings.tpl:129
 msgid "Type"
 msgstr "Type"
 
@@ -857,10 +984,10 @@ msgstr ""
 #: views/system_environment.tpl:425 views/system_environment.tpl:501
 #: views/system_environment.tpl:636 views/system_environment.tpl:712
 #: views/system_environment.tpl:847 views/system_environment.tpl:923
-#: views/system_environment.tpl:1060 views/system_environment.tpl:1136
-#: views/system_environment.tpl:1272 views/system_environment.tpl:1324
-#: views/system_environment.tpl:1435 views/system_environment.tpl:1511
-#: views/system_environment.tpl:1646 views/system_environment.tpl:1722
+#: views/system_environment.tpl:1058 views/system_environment.tpl:1134
+#: views/system_environment.tpl:1270 views/system_environment.tpl:1322
+#: views/system_environment.tpl:1433 views/system_environment.tpl:1509
+#: views/system_environment.tpl:1644 views/system_environment.tpl:1720
 msgid "Start"
 msgstr "Start"
 
@@ -870,15 +997,16 @@ msgstr "Start"
 #: views/system_environment.tpl:431 views/system_environment.tpl:507
 #: views/system_environment.tpl:642 views/system_environment.tpl:718
 #: views/system_environment.tpl:853 views/system_environment.tpl:929
-#: views/system_environment.tpl:1066 views/system_environment.tpl:1142
-#: views/system_environment.tpl:1278 views/system_environment.tpl:1330
-#: views/system_environment.tpl:1441 views/system_environment.tpl:1517
-#: views/system_environment.tpl:1652 views/system_environment.tpl:1728
+#: views/system_environment.tpl:1064 views/system_environment.tpl:1140
+#: views/system_environment.tpl:1276 views/system_environment.tpl:1328
+#: views/system_environment.tpl:1439 views/system_environment.tpl:1515
+#: views/system_environment.tpl:1650 views/system_environment.tpl:1726
 msgid "Stop"
 msgstr "Stop"
 
 #: views/audio_playlist.tpl:28 views/audio_playlist.tpl:95
-#: views/system_environment.tpl:1249
+#: views/dashboard.tpl:542 views/inc/menu.tpl:71 views/sensor_settings.tpl:145
+#: views/system_environment.tpl:1247
 msgid "Volume"
 msgstr "Volume"
 
@@ -888,18 +1016,18 @@ msgstr "Herhaal"
 
 #: views/audio_playlist.tpl:34 views/audio_playlist.tpl:103
 msgid "Shuffle"
-msgstr "Shuffle"
+msgstr "Random"
 
 #: views/audio_playlist.tpl:37 views/audio_playlist.tpl:109
-#: views/inc/menu.tpl:117
+#: views/inc/menu.tpl:123
 msgid "Files"
 msgstr "Bestanden"
 
 #: views/audio_playlist.tpl:48 views/door_settings.tpl:36
-#: views/notifications.tpl:254 views/profile.tpl:179
-#: views/sensor_settings.tpl:54 views/switch_settings.tpl:72
-#: views/system_environment.tpl:1803 views/system_settings.tpl:188
-#: views/webcam_settings.tpl:47
+#: views/notifications.tpl:275 views/profile.tpl:179
+#: views/sensor_settings.tpl:57 views/switch_settings.tpl:72
+#: views/system_environment.tpl:1801 views/system_settings.tpl:273
+#: views/webcam_settings.tpl:49
 msgid "Submit"
 msgstr "Opslaan"
 
@@ -916,88 +1044,96 @@ msgstr "Audio afspeellijst"
 #: views/inc/sensor_list.tpl:14 views/inc/sensor_list.tpl:15
 #: views/inc/sensor_list.tpl:16 views/inc/sensor_list.tpl:17
 #: views/inc/sensor_list.tpl:18 views/inc/sensor_list.tpl:19
-#: views/sensor_settings.tpl:74 views/sensor_settings.tpl:75
-#: views/sensor_settings.tpl:76 views/sensor_settings.tpl:77
+#: views/inc/sensor_list.tpl:20 views/sensor_settings.tpl:77
 #: views/sensor_settings.tpl:78 views/sensor_settings.tpl:79
 #: views/sensor_settings.tpl:80 views/sensor_settings.tpl:81
-#: views/sensor_settings.tpl:82 views/switch_settings.tpl:92
-#: views/webcam_settings.tpl:67
+#: views/sensor_settings.tpl:82 views/sensor_settings.tpl:83
+#: views/sensor_settings.tpl:84 views/sensor_settings.tpl:85
+#: views/sensor_settings.tpl:86 views/switch_settings.tpl:92
+#: views/webcam_settings.tpl:69
 msgid "new"
 msgstr "nieuw"
 
-#: views/audio_playlist.tpl:112 views/sensor_settings.tpl:99
-#: views/sensor_settings.tpl:128 views/switch_settings.tpl:109
-#: views/switch_settings.tpl:143 views/webcam_settings.tpl:105
-#: views/webcam_settings.tpl:119
+#: views/audio_playlist.tpl:112 views/sensor_settings.tpl:103
+#: views/sensor_settings.tpl:132 views/switch_settings.tpl:109
+#: views/switch_settings.tpl:151 views/switch_status.tpl:116
+#: views/webcam_settings.tpl:109 views/webcam_settings.tpl:123
+#: views/webcam_settings.tpl:142 views/webcam_settings.tpl:153
+#: views/webcam_settings.tpl:164 views/webcam_settings.tpl:186
 msgid "Select an option"
 msgstr "Maak een keuze"
 
 #: views/audio_playlist.tpl:123 views/door_settings.tpl:94
 #: views/inc/usage_doors.tpl:70 views/inc/usage_sensors.tpl:81
 #: views/inc/usage_switches.tpl:70 views/inc/usage_webcams.tpl:66
-#: views/sensor_settings.tpl:188 views/switch_settings.tpl:200
-#: views/webcam_settings.tpl:140
+#: views/sensor_settings.tpl:203 views/switch_settings.tpl:208
+#: views/switch_status.tpl:132 views/webcam_settings.tpl:198
 msgid "Close"
 msgstr "Sluiten"
 
 #: views/audio_playlist.tpl:124 views/door_settings.tpl:95
-#: views/sensor_settings.tpl:189 views/switch_settings.tpl:201
-#: views/webcam_settings.tpl:141
+#: views/sensor_settings.tpl:204 views/switch_settings.tpl:209
+#: views/webcam_settings.tpl:199
 msgid "Add"
 msgstr "Voeg toe"
 
-#: views/calendar.tpl:6 views/inc/menu.tpl:33
+#: views/calendar.tpl:6 views/inc/menu.tpl:33 views/inc/menu.tpl:228
 msgid "Calendar"
 msgstr "Kalender"
 
-#: views/calendar.tpl:15 views/dashboard.tpl:71 views/dashboard.tpl:573
-#: views/dashboard.tpl:628 views/dashboard.tpl:683 views/dashboard.tpl:738
-#: views/dashboard.tpl:793 views/dashboard.tpl:848 views/dashboard.tpl:903
-#: views/dashboard.tpl:958 views/dashboard.tpl:1013 views/door_status.tpl:37
-#: views/inc/menu.tpl:68 views/inc/menu.tpl:79 views/inc/menu.tpl:90
-#: views/inc/menu.tpl:101 views/inc/menu.tpl:134 views/inc/menu.tpl:165
-#: views/inc/sensor_list.tpl:45 views/inc/usage_doors.tpl:48
-#: views/inc/usage_doors.tpl:92 views/inc/usage_doors.tpl:148
-#: views/inc/usage_sensors.tpl:52 views/inc/usage_sensors.tpl:103
-#: views/inc/usage_sensors.tpl:212 views/inc/usage_switches.tpl:48
-#: views/inc/usage_switches.tpl:96 views/inc/usage_switches.tpl:169
-#: views/inc/usage_weather.tpl:34 views/inc/usage_weather.tpl:94
-#: views/inc/usage_webcams.tpl:46 views/inc/usage_webcams.tpl:88
-#: views/inc/usage_webcams.tpl:163 views/notifications.tpl:27
-#: views/notifications.tpl:64 views/notifications.tpl:104
-#: views/notifications.tpl:137 views/notifications.tpl:162
-#: views/notifications.tpl:191 views/switch_status.tpl:37
+#: views/calendar.tpl:15
+msgid "iCal"
+msgstr ""
+
+#: views/calendar.tpl:18 views/dashboard.tpl:71 views/dashboard.tpl:626
+#: views/dashboard.tpl:681 views/dashboard.tpl:736 views/dashboard.tpl:791
+#: views/dashboard.tpl:846 views/dashboard.tpl:901 views/dashboard.tpl:956
+#: views/dashboard.tpl:1011 views/dashboard.tpl:1066 views/dashboard.tpl:1121
+#: views/door_status.tpl:37 views/inc/menu.tpl:74 views/inc/menu.tpl:85
+#: views/inc/menu.tpl:96 views/inc/menu.tpl:107 views/inc/menu.tpl:140
+#: views/inc/menu.tpl:171 views/inc/sensor_list.tpl:46
+#: views/inc/usage_doors.tpl:48 views/inc/usage_doors.tpl:92
+#: views/inc/usage_doors.tpl:148 views/inc/usage_sensors.tpl:52
+#: views/inc/usage_sensors.tpl:103 views/inc/usage_sensors.tpl:212
+#: views/inc/usage_switches.tpl:48 views/inc/usage_switches.tpl:96
+#: views/inc/usage_switches.tpl:169 views/inc/usage_weather.tpl:34
+#: views/inc/usage_weather.tpl:94 views/inc/usage_webcams.tpl:46
+#: views/inc/usage_webcams.tpl:88 views/inc/usage_webcams.tpl:163
+#: views/notifications.tpl:27 views/notifications.tpl:64
+#: views/notifications.tpl:101 views/notifications.tpl:134
+#: views/notifications.tpl:159 views/notifications.tpl:188
+#: views/notifications.tpl:209 views/switch_status.tpl:43
 #: views/system_environment.tpl:27 views/system_environment.tpl:158
 #: views/system_environment.tpl:370 views/system_environment.tpl:581
-#: views/system_environment.tpl:792 views/system_environment.tpl:1005
-#: views/system_environment.tpl:1216 views/system_environment.tpl:1380
-#: views/system_environment.tpl:1591 views/system_log.tpl:15
+#: views/system_environment.tpl:792 views/system_environment.tpl:1003
+#: views/system_environment.tpl:1214 views/system_environment.tpl:1378
+#: views/system_environment.tpl:1589 views/system_log.tpl:15
 #: views/system_status.tpl:32 views/system_status.tpl:88
 #: views/system_status.tpl:144 views/system_status.tpl:200
 #: views/system_status.tpl:256 views/weather.tpl:16 views/webcam.tpl:20
 msgid "Settings"
 msgstr "Instellingen"
 
-#: views/calendar.tpl:28
+#: views/calendar.tpl:31
 msgid "No calendar available"
 msgstr "Geen kalender beschikbaar"
 
 #: views/dashboard.tpl:24 views/inc/usage_dashboard.tpl:93
 #: views/inc/usage_switches.tpl:121 views/inc/usage_switches.tpl:143
-#: views/switch_settings.tpl:28 views/switch_settings.tpl:132
+#: views/switch_settings.tpl:28 views/switch_settings.tpl:140
 msgid "Power usage in Watt"
 msgstr "Stroomverbruik in Watt"
 
 #: views/dashboard.tpl:35 views/inc/usage_dashboard.tpl:99
 #: views/inc/usage_switches.tpl:125 views/inc/usage_switches.tpl:146
-#: views/switch_settings.tpl:31 views/switch_settings.tpl:136
+#: views/switch_settings.tpl:31 views/switch_settings.tpl:144
 msgid "Water flow in L/m"
 msgstr "Waterverbruik in L/m"
 
 #: views/dashboard.tpl:45 views/inc/usage_dashboard.tpl:105
 #: views/inc/usage_switches.tpl:21
 msgid "Total power in kWh"
-msgstr "Totaal stroomverbruik in kWh."
+msgstr "Totaal stroomverbruik in kWh"
 
 #: views/dashboard.tpl:47 views/dashboard.tpl:54
 msgid "in"
@@ -1011,15 +1147,15 @@ msgstr "Totaal waterverbruik in L"
 #: views/dashboard.tpl:62 views/dashboard.tpl:152 views/dashboard.tpl:205
 #: views/dashboard.tpl:258 views/dashboard.tpl:311 views/dashboard.tpl:364
 #: views/dashboard.tpl:417 views/dashboard.tpl:470 views/dashboard.tpl:523
-#: views/inc/usage_sensors.tpl:85 views/inc/usage_sensors.tpl:157
-#: views/inc/usage_sensors.tpl:189 views/inc/usage_sensors.tpl:206
-#: views/inc/usage_weather.tpl:13 views/inc/usage_weather.tpl:85
-#: views/sensor_settings.tpl:43 views/sensor_settings.tpl:164
-#: views/weather.tpl:7
+#: views/dashboard.tpl:576 views/inc/usage_sensors.tpl:85
+#: views/inc/usage_sensors.tpl:157 views/inc/usage_sensors.tpl:189
+#: views/inc/usage_sensors.tpl:206 views/inc/usage_weather.tpl:13
+#: views/inc/usage_weather.tpl:85 views/sensor_settings.tpl:46
+#: views/sensor_settings.tpl:179 views/weather.tpl:7
 msgid "Current"
 msgstr "Huidig"
 
-#: views/dashboard.tpl:62 views/inc/menu.tpl:131
+#: views/dashboard.tpl:62 views/inc/menu.tpl:137
 #: views/inc/usage_dashboard.tpl:118 views/inc/usage_dashboard.tpl:211
 #: views/usage.tpl:31
 msgid "Environment"
@@ -1028,58 +1164,59 @@ msgstr "Omgeving"
 #: views/dashboard.tpl:83 views/dashboard.tpl:118 views/dashboard.tpl:171
 #: views/dashboard.tpl:224 views/dashboard.tpl:277 views/dashboard.tpl:330
 #: views/dashboard.tpl:383 views/dashboard.tpl:436 views/dashboard.tpl:489
+#: views/dashboard.tpl:542
 msgid "mode"
 msgstr "modus"
 
 #: views/dashboard.tpl:83 views/dashboard.tpl:118 views/dashboard.tpl:171
 #: views/dashboard.tpl:224 views/dashboard.tpl:277 views/dashboard.tpl:330
 #: views/dashboard.tpl:383 views/dashboard.tpl:436 views/dashboard.tpl:489
-#: views/inc/menu.tpl:202 views/inc/menu.tpl:228
+#: views/dashboard.tpl:542 views/inc/menu.tpl:208 views/inc/menu.tpl:249
 #: views/inc/usage_environment.tpl:25 views/inc/usage_environment.tpl:121
 #: views/inc/usage_environment.tpl:129 views/inc/usage_environment.tpl:213
 #: views/inc/usage_environment.tpl:221 views/inc/usage_environment.tpl:307
-#: views/inc/usage_environment.tpl:315 views/notifications.tpl:92
-#: views/switch_settings.tpl:145 views/system_environment.tpl:41
+#: views/inc/usage_environment.tpl:315 views/notifications.tpl:89
+#: views/switch_settings.tpl:153 views/system_environment.tpl:41
 #: views/system_environment.tpl:172 views/system_environment.tpl:384
 #: views/system_environment.tpl:595 views/system_environment.tpl:806
-#: views/system_environment.tpl:1019 views/system_environment.tpl:1230
-#: views/system_environment.tpl:1394 views/system_environment.tpl:1605
-#: views/webcam_settings.tpl:120
+#: views/system_environment.tpl:1017 views/system_environment.tpl:1228
+#: views/system_environment.tpl:1392 views/system_environment.tpl:1603
+#: views/webcam_settings.tpl:124 views/webcam_settings.tpl:166
 msgid "Disabled"
 msgstr "Gedeactiveerd"
 
 #: views/dashboard.tpl:83 views/dashboard.tpl:118 views/dashboard.tpl:171
 #: views/dashboard.tpl:224 views/dashboard.tpl:277 views/dashboard.tpl:330
 #: views/dashboard.tpl:383 views/dashboard.tpl:436 views/dashboard.tpl:489
-#: views/inc/usage_environment.tpl:138 views/inc/usage_environment.tpl:232
-#: views/inc/usage_environment.tpl:326 views/inc/usage_sensors.tpl:23
-#: views/system_environment.tpl:43 views/system_environment.tpl:174
-#: views/system_environment.tpl:386 views/system_environment.tpl:597
-#: views/system_environment.tpl:808 views/system_environment.tpl:1021
-#: views/system_environment.tpl:1232 views/system_environment.tpl:1396
-#: views/system_environment.tpl:1607
+#: views/dashboard.tpl:542 views/inc/usage_environment.tpl:138
+#: views/inc/usage_environment.tpl:232 views/inc/usage_environment.tpl:326
+#: views/inc/usage_sensors.tpl:23 views/system_environment.tpl:43
+#: views/system_environment.tpl:174 views/system_environment.tpl:386
+#: views/system_environment.tpl:597 views/system_environment.tpl:808
+#: views/system_environment.tpl:1019 views/system_environment.tpl:1230
+#: views/system_environment.tpl:1394 views/system_environment.tpl:1605
 msgid "Sensor"
 msgstr "Sensor"
 
 #: views/dashboard.tpl:83 views/dashboard.tpl:118 views/dashboard.tpl:171
 #: views/dashboard.tpl:224 views/dashboard.tpl:277 views/dashboard.tpl:330
 #: views/dashboard.tpl:383 views/dashboard.tpl:436 views/dashboard.tpl:489
-#: views/system_environment.tpl:44 views/system_environment.tpl:175
-#: views/system_environment.tpl:387 views/system_environment.tpl:598
-#: views/system_environment.tpl:809 views/system_environment.tpl:1022
-#: views/system_environment.tpl:1233 views/system_environment.tpl:1397
-#: views/system_environment.tpl:1608
+#: views/dashboard.tpl:542 views/system_environment.tpl:44
+#: views/system_environment.tpl:175 views/system_environment.tpl:387
+#: views/system_environment.tpl:598 views/system_environment.tpl:809
+#: views/system_environment.tpl:1020 views/system_environment.tpl:1231
+#: views/system_environment.tpl:1395 views/system_environment.tpl:1606
 msgid "Weather day/night"
 msgstr "Weer dag / nacht"
 
 #: views/dashboard.tpl:83 views/dashboard.tpl:118 views/dashboard.tpl:171
 #: views/dashboard.tpl:224 views/dashboard.tpl:277 views/dashboard.tpl:330
 #: views/dashboard.tpl:383 views/dashboard.tpl:436 views/dashboard.tpl:489
-#: views/system_environment.tpl:45 views/system_environment.tpl:176
-#: views/system_environment.tpl:388 views/system_environment.tpl:599
-#: views/system_environment.tpl:810 views/system_environment.tpl:1023
-#: views/system_environment.tpl:1234 views/system_environment.tpl:1398
-#: views/system_environment.tpl:1609
+#: views/dashboard.tpl:542 views/system_environment.tpl:45
+#: views/system_environment.tpl:176 views/system_environment.tpl:388
+#: views/system_environment.tpl:599 views/system_environment.tpl:810
+#: views/system_environment.tpl:1021 views/system_environment.tpl:1232
+#: views/system_environment.tpl:1396 views/system_environment.tpl:1607
 msgid "Weather night/day"
 msgstr "Weer nacht / dag"
 
@@ -1087,16 +1224,16 @@ msgstr "Weer nacht / dag"
 #: views/inc/usage_environment.tpl:15 views/inc/usage_environment.tpl:398
 #: views/system_environment.tpl:27 views/system_environment.tpl:202
 #: views/system_environment.tpl:414 views/system_environment.tpl:625
-#: views/system_environment.tpl:836 views/system_environment.tpl:1049
-#: views/system_environment.tpl:1424 views/system_environment.tpl:1635
+#: views/system_environment.tpl:836 views/system_environment.tpl:1047
+#: views/system_environment.tpl:1422 views/system_environment.tpl:1633
 msgid "Lights"
 msgstr "Lampen"
 
 #: views/dashboard.tpl:87 views/dashboard.tpl:122 views/dashboard.tpl:175
 #: views/dashboard.tpl:228 views/dashboard.tpl:281 views/dashboard.tpl:334
 #: views/dashboard.tpl:387 views/dashboard.tpl:440 views/dashboard.tpl:493
-#: views/inc/menu.tpl:76 views/inc/menu.tpl:87 views/inc/menu.tpl:110
-#: views/inc/menu.tpl:125 views/inc/usage_doors.tpl:74
+#: views/dashboard.tpl:546 views/inc/menu.tpl:82 views/inc/menu.tpl:93
+#: views/inc/menu.tpl:116 views/inc/menu.tpl:131 views/inc/usage_doors.tpl:74
 #: views/inc/usage_doors.tpl:79 views/inc/usage_doors.tpl:142
 #: views/inc/usage_environment.tpl:22 views/inc/usage_environment.tpl:84
 #: views/inc/usage_environment.tpl:118 views/inc/usage_environment.tpl:178
@@ -1106,14 +1243,14 @@ msgstr "Lampen"
 msgid "Status"
 msgstr "Status"
 
-#: views/dashboard.tpl:93 views/dashboard.tpl:556 views/dashboard.tpl:611
-#: views/dashboard.tpl:666 views/dashboard.tpl:721 views/dashboard.tpl:776
-#: views/dashboard.tpl:831 views/dashboard.tpl:886 views/dashboard.tpl:941
-#: views/dashboard.tpl:996 views/door_status.tpl:20
-#: views/inc/sensor_list.tpl:28 views/inc/usage_dashboard.tpl:67
+#: views/dashboard.tpl:93 views/dashboard.tpl:609 views/dashboard.tpl:664
+#: views/dashboard.tpl:719 views/dashboard.tpl:774 views/dashboard.tpl:829
+#: views/dashboard.tpl:884 views/dashboard.tpl:939 views/dashboard.tpl:994
+#: views/dashboard.tpl:1049 views/dashboard.tpl:1104 views/door_status.tpl:20
+#: views/inc/sensor_list.tpl:29 views/inc/usage_dashboard.tpl:67
 #: views/inc/usage_dashboard.tpl:181 views/inc/usage_doors.tpl:31
 #: views/inc/usage_sensors.tpl:35 views/inc/usage_switches.tpl:31
-#: views/inc/usage_webcams.tpl:29 views/switch_status.tpl:20
+#: views/inc/usage_webcams.tpl:29 views/switch_status.tpl:23
 #: views/system_environment.tpl:70 views/system_status.tpl:15
 #: views/system_status.tpl:71 views/system_status.tpl:127
 #: views/system_status.tpl:183 views/system_status.tpl:239
@@ -1125,9 +1262,9 @@ msgstr "Dag"
 msgid "Night"
 msgstr "Nacht"
 
-#: views/dashboard.tpl:118 views/inc/menu.tpl:41
+#: views/dashboard.tpl:118 views/inc/menu.tpl:44
 #: views/inc/usage_dashboard.tpl:159 views/inc/usage_sensors.tpl:131
-#: views/sensor_settings.tpl:129 views/system_environment.tpl:158
+#: views/sensor_settings.tpl:133 views/system_environment.tpl:158
 msgid "Temperature"
 msgstr "Temperatuur"
 
@@ -1136,169 +1273,177 @@ msgstr "Temperatuur"
 #: views/dashboard.tpl:287 views/dashboard.tpl:299 views/dashboard.tpl:340
 #: views/dashboard.tpl:352 views/dashboard.tpl:393 views/dashboard.tpl:405
 #: views/dashboard.tpl:446 views/dashboard.tpl:458 views/dashboard.tpl:499
-#: views/dashboard.tpl:511 views/inc/usage_dashboard.tpl:175
+#: views/dashboard.tpl:511 views/dashboard.tpl:552 views/dashboard.tpl:564
+#: views/inc/usage_dashboard.tpl:175
 msgid "Period"
 msgstr "Periode"
 
 #: views/dashboard.tpl:158 views/dashboard.tpl:211 views/dashboard.tpl:264
 #: views/dashboard.tpl:317 views/dashboard.tpl:370 views/dashboard.tpl:423
-#: views/dashboard.tpl:476 views/dashboard.tpl:529
+#: views/dashboard.tpl:476 views/dashboard.tpl:529 views/dashboard.tpl:582
 msgid "Range"
 msgstr "Bereik"
 
 #: views/dashboard.tpl:164 views/dashboard.tpl:217 views/dashboard.tpl:270
 #: views/dashboard.tpl:323 views/dashboard.tpl:376 views/dashboard.tpl:429
-#: views/dashboard.tpl:482 views/dashboard.tpl:535
+#: views/dashboard.tpl:482 views/dashboard.tpl:535 views/dashboard.tpl:588
 #: views/system_environment.tpl:191 views/system_environment.tpl:403
 #: views/system_environment.tpl:614 views/system_environment.tpl:825
-#: views/system_environment.tpl:1038 views/system_environment.tpl:1413
-#: views/system_environment.tpl:1624
+#: views/system_environment.tpl:1036 views/system_environment.tpl:1411
+#: views/system_environment.tpl:1622
 msgid "Day/night difference"
 msgstr "Dag/nacht verschil"
 
-#: views/dashboard.tpl:171 views/inc/menu.tpl:44
+#: views/dashboard.tpl:171 views/inc/menu.tpl:47
 #: views/inc/usage_dashboard.tpl:158 views/inc/usage_sensors.tpl:132
-#: views/sensor_settings.tpl:130 views/system_environment.tpl:370
+#: views/sensor_settings.tpl:134 views/system_environment.tpl:370
 msgid "Humidity"
 msgstr "Luchtvochtigheid"
 
-#: views/dashboard.tpl:224 views/inc/menu.tpl:47 views/sensor_settings.tpl:131
+#: views/dashboard.tpl:224 views/inc/menu.tpl:50 views/sensor_settings.tpl:135
 #: views/system_environment.tpl:581
 msgid "Moisture"
 msgstr "Vochtigheid"
 
-#: views/dashboard.tpl:277 views/inc/menu.tpl:56 views/sensor_settings.tpl:134
-#: views/system_environment.tpl:1005
+#: views/dashboard.tpl:277 views/inc/menu.tpl:59 views/sensor_settings.tpl:138
+#: views/system_environment.tpl:1003
 msgid "pH"
 msgstr "pH"
 
-#: views/dashboard.tpl:330 views/inc/menu.tpl:50 views/sensor_settings.tpl:132
+#: views/dashboard.tpl:330 views/inc/menu.tpl:53 views/sensor_settings.tpl:136
 #: views/system_environment.tpl:792
 msgid "Conductivity"
 msgstr "Geleidingsvermogen"
 
-#: views/dashboard.tpl:383 views/system_environment.tpl:1216
+#: views/dashboard.tpl:383 views/system_environment.tpl:1214
 msgid "Water tank"
 msgstr "Watertank"
 
-#: views/dashboard.tpl:436 views/inc/menu.tpl:62 views/sensor_settings.tpl:138
-#: views/system_environment.tpl:1380
+#: views/dashboard.tpl:436 views/inc/menu.tpl:65 views/sensor_settings.tpl:143
+#: views/system_environment.tpl:1378
 msgid "Fertility"
 msgstr "Vruchtbaarheid"
 
-#: views/dashboard.tpl:489 views/inc/menu.tpl:65 views/sensor_settings.tpl:139
-#: views/system_environment.tpl:1591
+#: views/dashboard.tpl:489 views/inc/menu.tpl:68 views/sensor_settings.tpl:144
+#: views/system_environment.tpl:1589
 msgid "CO2"
 msgstr "CO2"
 
-#: views/dashboard.tpl:547
+#: views/dashboard.tpl:600
 msgid "Average Temperature"
 msgstr "Gemiddelde temperatuur"
 
-#: views/dashboard.tpl:547 views/dashboard.tpl:602 views/dashboard.tpl:657
-#: views/dashboard.tpl:712 views/dashboard.tpl:767 views/dashboard.tpl:822
-#: views/dashboard.tpl:877 views/dashboard.tpl:932 views/dashboard.tpl:987
-#: views/inc/sensor_list.tpl:11 views/inc/sensor_list.tpl:12
-#: views/inc/sensor_list.tpl:13 views/inc/sensor_list.tpl:14
-#: views/inc/sensor_list.tpl:15 views/inc/sensor_list.tpl:16
-#: views/inc/sensor_list.tpl:17 views/inc/sensor_list.tpl:18
-#: views/inc/sensor_list.tpl:19 views/inc/usage_dashboard.tpl:169
+#: views/dashboard.tpl:600 views/dashboard.tpl:655 views/dashboard.tpl:710
+#: views/dashboard.tpl:765 views/dashboard.tpl:820 views/dashboard.tpl:875
+#: views/dashboard.tpl:930 views/dashboard.tpl:985 views/dashboard.tpl:1040
+#: views/dashboard.tpl:1095 views/inc/sensor_list.tpl:11
+#: views/inc/sensor_list.tpl:12 views/inc/sensor_list.tpl:13
+#: views/inc/sensor_list.tpl:14 views/inc/sensor_list.tpl:15
+#: views/inc/sensor_list.tpl:16 views/inc/sensor_list.tpl:17
+#: views/inc/sensor_list.tpl:18 views/inc/sensor_list.tpl:19
+#: views/inc/sensor_list.tpl:20 views/inc/usage_dashboard.tpl:169
 #: views/inc/usage_doors.tpl:21 views/inc/usage_sensors.tpl:25
 #: views/system_status.tpl:6 views/system_status.tpl:62
 #: views/system_status.tpl:118 views/system_status.tpl:174
 msgid "warning"
 msgstr "waarschuwing"
 
-#: views/dashboard.tpl:559 views/dashboard.tpl:614 views/dashboard.tpl:669
-#: views/dashboard.tpl:724 views/dashboard.tpl:779 views/dashboard.tpl:834
-#: views/dashboard.tpl:889 views/dashboard.tpl:944 views/dashboard.tpl:999
-#: views/door_status.tpl:23 views/inc/sensor_list.tpl:31
-#: views/inc/usage_dashboard.tpl:182 views/inc/usage_doors.tpl:34
-#: views/inc/usage_sensors.tpl:38 views/inc/usage_switches.tpl:34
-#: views/inc/usage_webcams.tpl:32 views/switch_status.tpl:23
-#: views/system_status.tpl:18 views/system_status.tpl:74
-#: views/system_status.tpl:130 views/system_status.tpl:186
-#: views/system_status.tpl:242
+#: views/dashboard.tpl:612 views/dashboard.tpl:667 views/dashboard.tpl:722
+#: views/dashboard.tpl:777 views/dashboard.tpl:832 views/dashboard.tpl:887
+#: views/dashboard.tpl:942 views/dashboard.tpl:997 views/dashboard.tpl:1052
+#: views/dashboard.tpl:1107 views/door_status.tpl:23
+#: views/inc/sensor_list.tpl:32 views/inc/usage_dashboard.tpl:182
+#: views/inc/usage_doors.tpl:34 views/inc/usage_sensors.tpl:38
+#: views/inc/usage_switches.tpl:34 views/inc/usage_webcams.tpl:32
+#: views/switch_status.tpl:26 views/system_status.tpl:18
+#: views/system_status.tpl:74 views/system_status.tpl:130
+#: views/system_status.tpl:186 views/system_status.tpl:242
 msgid "Week"
 msgstr "Week"
 
-#: views/dashboard.tpl:562 views/dashboard.tpl:617 views/dashboard.tpl:672
-#: views/dashboard.tpl:727 views/dashboard.tpl:782 views/dashboard.tpl:837
-#: views/dashboard.tpl:892 views/dashboard.tpl:947 views/dashboard.tpl:1002
-#: views/door_status.tpl:26 views/inc/sensor_list.tpl:34
-#: views/inc/usage_dashboard.tpl:183 views/inc/usage_doors.tpl:37
-#: views/inc/usage_sensors.tpl:41 views/inc/usage_switches.tpl:37
-#: views/inc/usage_webcams.tpl:35 views/switch_status.tpl:26
-#: views/system_status.tpl:21 views/system_status.tpl:77
-#: views/system_status.tpl:133 views/system_status.tpl:189
-#: views/system_status.tpl:245
+#: views/dashboard.tpl:615 views/dashboard.tpl:670 views/dashboard.tpl:725
+#: views/dashboard.tpl:780 views/dashboard.tpl:835 views/dashboard.tpl:890
+#: views/dashboard.tpl:945 views/dashboard.tpl:1000 views/dashboard.tpl:1055
+#: views/dashboard.tpl:1110 views/door_status.tpl:26
+#: views/inc/sensor_list.tpl:35 views/inc/usage_dashboard.tpl:183
+#: views/inc/usage_doors.tpl:37 views/inc/usage_sensors.tpl:41
+#: views/inc/usage_switches.tpl:37 views/inc/usage_webcams.tpl:35
+#: views/switch_status.tpl:29 views/system_status.tpl:21
+#: views/system_status.tpl:77 views/system_status.tpl:133
+#: views/system_status.tpl:189 views/system_status.tpl:245
 msgid "Month"
 msgstr "Maand"
 
-#: views/dashboard.tpl:565 views/dashboard.tpl:620 views/dashboard.tpl:675
-#: views/dashboard.tpl:730 views/dashboard.tpl:785 views/dashboard.tpl:840
-#: views/dashboard.tpl:895 views/dashboard.tpl:950 views/dashboard.tpl:1005
-#: views/door_status.tpl:29 views/inc/sensor_list.tpl:37
-#: views/inc/usage_dashboard.tpl:184 views/inc/usage_doors.tpl:40
-#: views/inc/usage_sensors.tpl:44 views/inc/usage_switches.tpl:40
-#: views/inc/usage_webcams.tpl:38 views/switch_status.tpl:29
-#: views/system_status.tpl:24 views/system_status.tpl:80
-#: views/system_status.tpl:136 views/system_status.tpl:192
-#: views/system_status.tpl:248
+#: views/dashboard.tpl:618 views/dashboard.tpl:673 views/dashboard.tpl:728
+#: views/dashboard.tpl:783 views/dashboard.tpl:838 views/dashboard.tpl:893
+#: views/dashboard.tpl:948 views/dashboard.tpl:1003 views/dashboard.tpl:1058
+#: views/dashboard.tpl:1113 views/door_status.tpl:29
+#: views/inc/sensor_list.tpl:38 views/inc/usage_dashboard.tpl:184
+#: views/inc/usage_doors.tpl:40 views/inc/usage_sensors.tpl:44
+#: views/inc/usage_switches.tpl:40 views/inc/usage_webcams.tpl:38
+#: views/switch_status.tpl:32 views/system_status.tpl:24
+#: views/system_status.tpl:80 views/system_status.tpl:136
+#: views/system_status.tpl:192 views/system_status.tpl:248
 msgid "Year"
 msgstr "Jaar"
 
-#: views/dashboard.tpl:576 views/dashboard.tpl:631 views/dashboard.tpl:686
-#: views/dashboard.tpl:741 views/dashboard.tpl:796 views/dashboard.tpl:851
-#: views/dashboard.tpl:906 views/dashboard.tpl:961 views/dashboard.tpl:1016
-#: views/door_status.tpl:40 views/inc/sensor_list.tpl:48
-#: views/switch_status.tpl:40
+#: views/dashboard.tpl:629 views/dashboard.tpl:684 views/dashboard.tpl:739
+#: views/dashboard.tpl:794 views/dashboard.tpl:849 views/dashboard.tpl:904
+#: views/dashboard.tpl:959 views/dashboard.tpl:1014 views/dashboard.tpl:1069
+#: views/dashboard.tpl:1124 views/door_status.tpl:40
+#: views/inc/sensor_list.tpl:49 views/switch_status.tpl:49
 msgid "Export data"
 msgstr "Exporteer data"
 
-#: views/dashboard.tpl:602
+#: views/dashboard.tpl:655
 msgid "Average Humidity"
 msgstr "Gemiddelde luchtvochtigheid"
 
-#: views/dashboard.tpl:657
+#: views/dashboard.tpl:710
 msgid "Average Moisture"
 msgstr "Gemiddelde vochtigheid"
 
-#: views/dashboard.tpl:712
+#: views/dashboard.tpl:765
 msgid "Average Conductivity"
 msgstr "Gemiddelde geleidingsvermogen"
 
-#: views/dashboard.tpl:767
+#: views/dashboard.tpl:820
 msgid "Average Distance"
 msgstr "Gemiddelde afstand"
 
-#: views/dashboard.tpl:822
+#: views/dashboard.tpl:875
 msgid "Average pH"
 msgstr "Gemiddelde pH"
 
-#: views/dashboard.tpl:877
+#: views/dashboard.tpl:930
 msgid "Average Light"
 msgstr "Gemiddelde licht"
 
-#: views/dashboard.tpl:932
+#: views/dashboard.tpl:985
 msgid "Average Fertility"
 msgstr "Gemiddelde vruchtbaarheid"
 
-#: views/dashboard.tpl:987
+#: views/dashboard.tpl:1040
 msgid "Average CO2"
 msgstr "Gemiddelde CO2"
+
+#: views/dashboard.tpl:1095
+#, fuzzy
+#| msgid "Average Moisture"
+msgid "Average Volume"
+msgstr "Gemiddelde vochtigheid"
 
 #: views/door_settings.tpl:16
 msgid "Here you can configure your doors."
 msgstr "Hier kunt u uw deuren configureren."
 
 #: views/door_settings.tpl:19 views/door_settings.tpl:70 views/hardware.tpl:7
-#: views/hardware.tpl:30 views/inc/menu.tpl:156 views/inc/usage_doors.tpl:98
+#: views/hardware.tpl:30 views/inc/menu.tpl:162 views/inc/usage_doors.tpl:98
 #: views/inc/usage_doors.tpl:119 views/inc/usage_sensors.tpl:109
 #: views/inc/usage_sensors.tpl:165 views/inc/usage_switches.tpl:103
-#: views/inc/usage_switches.tpl:134 views/sensor_settings.tpl:19
-#: views/sensor_settings.tpl:96 views/switch_settings.tpl:19
-#: views/switch_settings.tpl:106
+#: views/inc/usage_switches.tpl:134 views/notifications.tpl:74
+#: views/sensor_settings.tpl:19 views/sensor_settings.tpl:100
+#: views/switch_settings.tpl:19 views/switch_settings.tpl:106
 msgid "Hardware"
 msgstr "Hardware"
 
@@ -1306,8 +1451,9 @@ msgstr "Hardware"
 #: views/inc/usage_doors.tpl:106 views/inc/usage_doors.tpl:122
 #: views/inc/usage_sensors.tpl:123 views/inc/usage_sensors.tpl:168
 #: views/inc/usage_switches.tpl:112 views/inc/usage_switches.tpl:137
-#: views/sensor_settings.tpl:22 views/sensor_settings.tpl:120
-#: views/switch_settings.tpl:22 views/switch_settings.tpl:123
+#: views/notifications.tpl:81 views/sensor_settings.tpl:22
+#: views/sensor_settings.tpl:150 views/switch_settings.tpl:22
+#: views/switch_settings.tpl:131
 msgid "Address"
 msgstr "Adres"
 
@@ -1327,7 +1473,7 @@ msgid "GPIO"
 msgstr "GPIO"
 
 #: views/door_settings.tpl:74 views/inc/usage_sensors.tpl:117
-#: views/sensor_settings.tpl:111 views/switch_settings.tpl:115
+#: views/sensor_settings.tpl:116 views/switch_settings.tpl:115
 msgid "Remote"
 msgstr "Extern"
 
@@ -1342,18 +1488,18 @@ msgstr "Raspberry Pi"
 #: views/hardware.tpl:13 views/hardware.tpl:53 views/inc/menu.tpl:38
 #: views/system_environment.tpl:182 views/system_environment.tpl:394
 #: views/system_environment.tpl:605 views/system_environment.tpl:816
-#: views/system_environment.tpl:1029 views/system_environment.tpl:1240
-#: views/system_environment.tpl:1404 views/system_environment.tpl:1615
+#: views/system_environment.tpl:1027 views/system_environment.tpl:1238
+#: views/system_environment.tpl:1402 views/system_environment.tpl:1613
 #: views/usage.tpl:16
 msgid "Sensors"
 msgstr "Sensoren"
 
-#: views/hardware.tpl:16 views/hardware.tpl:87 views/inc/menu.tpl:73
+#: views/hardware.tpl:16 views/hardware.tpl:87 views/inc/menu.tpl:79
 #: views/usage.tpl:19
 msgid "Switches"
 msgstr "Schakelaars"
 
-#: views/hardware.tpl:19 views/hardware.tpl:119 views/inc/menu.tpl:84
+#: views/hardware.tpl:19 views/hardware.tpl:119 views/inc/menu.tpl:90
 #: views/usage.tpl:22
 msgid "Doors"
 msgstr "Deuren"
@@ -1362,7 +1508,7 @@ msgstr "Deuren"
 msgid "Webcams"
 msgstr "Webcams"
 
-#: views/hardware.tpl:25 views/hardware.tpl:138 views/inc/menu.tpl:106
+#: views/hardware.tpl:25 views/hardware.tpl:138 views/inc/menu.tpl:112
 #: views/usage.tpl:28
 msgid "Audio"
 msgstr "Audio"
@@ -1403,7 +1549,7 @@ msgstr ""
 "software."
 
 #: views/hardware.tpl:57 views/inc/usage_sensors.tpl:116
-#: views/sensor_settings.tpl:109
+#: views/sensor_settings.tpl:114
 msgid "1Wire"
 msgstr "1Wire"
 
@@ -1448,22 +1594,22 @@ msgstr ""
 "gebruiken"
 
 #: views/hardware.tpl:70 views/inc/usage_sensors.tpl:113
-#: views/sensor_settings.tpl:101
+#: views/sensor_settings.tpl:105
 msgid "DHT11"
 msgstr "DHT11"
 
 #: views/hardware.tpl:71 views/inc/usage_sensors.tpl:114
-#: views/sensor_settings.tpl:102
+#: views/sensor_settings.tpl:106
 msgid "DHT22"
 msgstr "DHT22"
 
 #: views/hardware.tpl:72 views/inc/usage_sensors.tpl:115
-#: views/sensor_settings.tpl:103
+#: views/sensor_settings.tpl:107
 msgid "AM2302"
 msgstr "AM2302"
 
 #: views/hardware.tpl:77 views/inc/usage_sensors.tpl:112
-#: views/sensor_settings.tpl:100
+#: views/sensor_settings.tpl:104
 msgid "OWFS"
 msgstr "OWFS"
 
@@ -1559,8 +1705,8 @@ msgstr ""
 "grond en de andere draad aan op een GPIO-pin die vrij is (behalve power en "
 "grond pinnen)."
 
-#: views/hardware.tpl:123 views/inc/menu.tpl:95 views/inc/usage_webcams.tpl:19
-#: views/usage.tpl:25 views/webcam.tpl:11 views/webcam_settings.tpl:67
+#: views/hardware.tpl:123 views/inc/menu.tpl:101 views/inc/usage_webcams.tpl:19
+#: views/usage.tpl:25 views/webcam.tpl:11 views/webcam_settings.tpl:69
 msgid "Webcam"
 msgstr "Webcam"
 
@@ -1573,7 +1719,7 @@ msgstr ""
 "camera's. De onderstaande camera's zijn getest met TerrariumPI software."
 
 #: views/hardware.tpl:127 views/inc/usage_webcams.tpl:128
-#: views/webcam_settings.tpl:21
+#: views/webcam_settings.tpl:21 views/webcam_settings.tpl:22
 msgid "RPICam"
 msgstr "RPICam"
 
@@ -1614,89 +1760,97 @@ msgstr "Overzicht"
 msgid "Profile"
 msgstr "Profiel"
 
-#: views/inc/menu.tpl:53 views/sensor_settings.tpl:133
+#: views/inc/menu.tpl:41
+msgid "All"
+msgstr ""
+
+#: views/inc/menu.tpl:56 views/sensor_settings.tpl:137
 msgid "Distance"
 msgstr "Afstand"
 
-#: views/inc/menu.tpl:59 views/sensor_settings.tpl:135
+#: views/inc/menu.tpl:62 views/sensor_settings.tpl:139
 msgid "Light"
 msgstr "Licht"
 
-#: views/inc/menu.tpl:98
+#: views/inc/menu.tpl:104
 msgid "Show"
 msgstr "Toon"
 
-#: views/inc/menu.tpl:114
+#: views/inc/menu.tpl:120
 msgid "Playlist"
 msgstr "Afspeellijst"
 
-#: views/inc/menu.tpl:122
+#: views/inc/menu.tpl:128
 msgid "System"
 msgstr "Systeem"
 
-#: views/inc/menu.tpl:128
+#: views/inc/menu.tpl:134
 msgid "Notifications"
 msgstr "Meldingen"
 
-#: views/inc/menu.tpl:137
+#: views/inc/menu.tpl:143
 msgid "Log"
 msgstr "Log"
 
-#: views/inc/menu.tpl:144
+#: views/inc/menu.tpl:150
 msgid "About"
 msgstr "Over"
 
-#: views/inc/menu.tpl:150
+#: views/inc/menu.tpl:156
 msgid "Info"
 msgstr "Informatie"
 
-#: views/inc/menu.tpl:153
+#: views/inc/menu.tpl:159
 msgid "Usage"
 msgstr "Gebruik"
 
-#: views/inc/menu.tpl:166
+#: views/inc/menu.tpl:172
 msgid "FullScreen"
 msgstr "Volledig scherm"
 
-#: views/inc/menu.tpl:167
+#: views/inc/menu.tpl:173
 msgid "Lock"
 msgstr "Vergrendelen"
 
-#: views/inc/menu.tpl:180
+#: views/inc/menu.tpl:186
 msgid "date/time"
 msgstr "datum/tijd"
 
-#: views/inc/menu.tpl:185 views/inc/usage_dashboard.tpl:19
+#: views/inc/menu.tpl:191 views/inc/usage_dashboard.tpl:19
 msgid "Online"
 msgstr "Online"
 
-#: views/inc/menu.tpl:188 views/inc/usage_dashboard.tpl:26
+#: views/inc/menu.tpl:194 views/inc/usage_dashboard.tpl:26
 msgid "Offline"
 msgstr "Offline"
 
-#: views/inc/menu.tpl:194 views/inc/menu.tpl:214 views/inc/menu.tpl:234
+#: views/inc/menu.tpl:200 views/inc/menu.tpl:220 views/inc/menu.tpl:255
 msgid "No messages"
 msgstr "Geen berichten"
 
-#: views/inc/menu.tpl:205 views/inc/usage_dashboard.tpl:43
+#: views/inc/menu.tpl:211 views/inc/usage_dashboard.tpl:43
 #: views/inc/usage_doors.tpl:82
 msgid "Door is closed"
 msgstr "Deur is gesloten"
 
-#: views/inc/menu.tpl:208 views/inc/usage_dashboard.tpl:50
+#: views/inc/menu.tpl:214 views/inc/usage_dashboard.tpl:50
 #: views/inc/usage_doors.tpl:81
 msgid "Door is open"
 msgstr "Deur is geopend"
 
-#: views/inc/menu.tpl:222
+#: views/inc/menu.tpl:235
+msgid "No events"
+msgstr ""
+
+#: views/inc/menu.tpl:243
 msgid "Playing"
 msgstr "Spelen"
 
-#: views/inc/menu.tpl:225
+#: views/inc/menu.tpl:246
 msgid "Stopped"
 msgstr "Gestopt"
 
-#: views/inc/sensor_list.tpl:4
+#: views/inc/sensor_list.tpl:4 views/sensor_gauge_overview.tpl:4
 msgid "No sensors available"
 msgstr "Geen sensoren beschikbaar"
 
@@ -1704,48 +1858,62 @@ msgstr "Geen sensoren beschikbaar"
 #: views/inc/sensor_list.tpl:13 views/inc/sensor_list.tpl:14
 #: views/inc/sensor_list.tpl:15 views/inc/sensor_list.tpl:16
 #: views/inc/sensor_list.tpl:17 views/inc/sensor_list.tpl:18
-#: views/inc/sensor_list.tpl:19
+#: views/inc/sensor_list.tpl:19 views/inc/sensor_list.tpl:20
 msgid "error"
 msgstr "error"
 
+#: views/inc/sensor_list.tpl:11 views/inc/sensor_list.tpl:12
+#: views/inc/sensor_list.tpl:13 views/inc/sensor_list.tpl:14
+#: views/inc/sensor_list.tpl:15 views/inc/sensor_list.tpl:16
+#: views/inc/sensor_list.tpl:17 views/inc/sensor_list.tpl:18
+#: views/inc/sensor_list.tpl:19 views/inc/sensor_list.tpl:20
+msgid "excl. avg"
+msgstr ""
+
 #: views/inc/sensor_list.tpl:11 views/inc/usage_sensors.tpl:68
-#: views/sensor_settings.tpl:74
+#: views/sensor_settings.tpl:77
 msgid "Temperature sensor"
 msgstr "Temperatuur sensor"
 
 #: views/inc/sensor_list.tpl:12 views/inc/usage_sensors.tpl:67
-#: views/sensor_settings.tpl:75
+#: views/sensor_settings.tpl:78
 msgid "Humidity sensor"
 msgstr "Luchtvochtigheid sensor"
 
-#: views/inc/sensor_list.tpl:13 views/sensor_settings.tpl:76
+#: views/inc/sensor_list.tpl:13 views/sensor_settings.tpl:79
 msgid "Moisture sensor"
 msgstr "Vochtigheid sensor"
 
-#: views/inc/sensor_list.tpl:14 views/sensor_settings.tpl:77
+#: views/inc/sensor_list.tpl:14 views/sensor_settings.tpl:80
 msgid "Conductivity sensor"
 msgstr "Geleidingsvermogen sensor"
 
 #: views/inc/sensor_list.tpl:15 views/inc/usage_sensors.tpl:69
-#: views/sensor_settings.tpl:78
+#: views/sensor_settings.tpl:81
 msgid "Distance sensor"
 msgstr "Afstand sensor"
 
-#: views/inc/sensor_list.tpl:16 views/sensor_settings.tpl:79
+#: views/inc/sensor_list.tpl:16 views/sensor_settings.tpl:82
 msgid "pH sensor"
 msgstr "pH sensor"
 
-#: views/inc/sensor_list.tpl:17 views/sensor_settings.tpl:80
+#: views/inc/sensor_list.tpl:17 views/sensor_settings.tpl:83
 msgid "Light sensor"
 msgstr "Licht sesnor"
 
-#: views/inc/sensor_list.tpl:18 views/sensor_settings.tpl:81
+#: views/inc/sensor_list.tpl:18 views/sensor_settings.tpl:84
 msgid "Fertility sensor"
 msgstr "Vruchtbaarheid sensor"
 
-#: views/inc/sensor_list.tpl:19 views/sensor_settings.tpl:82
+#: views/inc/sensor_list.tpl:19 views/sensor_settings.tpl:85
 msgid "CO2 sensor"
 msgstr "CO2 sensor"
+
+#: views/inc/sensor_list.tpl:20 views/sensor_settings.tpl:86
+#, fuzzy
+#| msgid "Moisture sensor"
+msgid "Volume sensor"
+msgstr "Vochtigheid sensor"
 
 #: views/inc/usage_dashboard.tpl:14 views/inc/usage_dashboard.tpl:205
 msgid "Top indicators"
@@ -2050,7 +2218,7 @@ msgstr "Met de moersleutel krijgt u een opties menu."
 #: views/inc/usage_sensors.tpl:17 views/inc/usage_sensors.tpl:203
 #: views/inc/usage_switches.tpl:13 views/inc/usage_switches.tpl:160
 #: views/inc/usage_webcams.tpl:13 views/inc/usage_webcams.tpl:154
-#: views/notifications.tpl:88 views/notifications.tpl:205
+#: views/notifications.tpl:85 views/notifications.tpl:223
 msgid "Title"
 msgstr "Titel"
 
@@ -2184,8 +2352,8 @@ msgstr "Alle velden met a %s zijn verplicht."
 #: views/inc/usage_environment.tpl:25 views/inc/usage_environment.tpl:121
 #: views/inc/usage_environment.tpl:129 views/inc/usage_environment.tpl:213
 #: views/inc/usage_environment.tpl:221 views/inc/usage_environment.tpl:307
-#: views/inc/usage_environment.tpl:315 views/notifications.tpl:91
-#: views/switch_settings.tpl:144
+#: views/inc/usage_environment.tpl:315 views/notifications.tpl:88
+#: views/switch_settings.tpl:152 views/webcam_settings.tpl:165
 msgid "Enabled"
 msgstr "Geactiveerd"
 
@@ -2223,10 +2391,10 @@ msgstr "Uren opschuiven"
 #: views/system_environment.tpl:485 views/system_environment.tpl:561
 #: views/system_environment.tpl:696 views/system_environment.tpl:772
 #: views/system_environment.tpl:907 views/system_environment.tpl:983
-#: views/system_environment.tpl:1120 views/system_environment.tpl:1196
-#: views/system_environment.tpl:1308 views/system_environment.tpl:1360
-#: views/system_environment.tpl:1495 views/system_environment.tpl:1571
-#: views/system_environment.tpl:1706 views/system_environment.tpl:1782
+#: views/system_environment.tpl:1118 views/system_environment.tpl:1194
+#: views/system_environment.tpl:1306 views/system_environment.tpl:1358
+#: views/system_environment.tpl:1493 views/system_environment.tpl:1569
+#: views/system_environment.tpl:1704 views/system_environment.tpl:1780
 msgid "Power switches"
 msgstr "Stroomschakelaars"
 
@@ -2436,27 +2604,27 @@ msgstr ""
 "buiten dit bereik ligt, wordt een alarm gegeven. Beweeg boven de "
 "grafieklijnen om gedetailleerde informatie te krijgen."
 
-#: views/inc/usage_sensors.tpl:118 views/sensor_settings.tpl:112
+#: views/inc/usage_sensors.tpl:118 views/sensor_settings.tpl:118
 msgid "HC-SR04"
 msgstr "HC-SR04"
 
 #: views/inc/usage_sensors.tpl:141 views/inc/usage_sensors.tpl:177
-#: views/sensor_settings.tpl:31 views/sensor_settings.tpl:148
+#: views/sensor_settings.tpl:31 views/sensor_settings.tpl:159
 msgid "Alarm min"
 msgstr "Alarm min"
 
 #: views/inc/usage_sensors.tpl:145 views/inc/usage_sensors.tpl:180
-#: views/sensor_settings.tpl:34 views/sensor_settings.tpl:152
+#: views/sensor_settings.tpl:34 views/sensor_settings.tpl:163
 msgid "Alarm max"
 msgstr "Alarm max"
 
 #: views/inc/usage_sensors.tpl:149 views/inc/usage_sensors.tpl:183
-#: views/sensor_settings.tpl:37 views/sensor_settings.tpl:156
+#: views/sensor_settings.tpl:37 views/sensor_settings.tpl:167
 msgid "Limit min"
 msgstr "Limiet min"
 
 #: views/inc/usage_sensors.tpl:153 views/inc/usage_sensors.tpl:186
-#: views/sensor_settings.tpl:40 views/sensor_settings.tpl:160
+#: views/sensor_settings.tpl:40 views/sensor_settings.tpl:171
 msgid "Limit max"
 msgstr "Limiet max"
 
@@ -2465,7 +2633,7 @@ msgid "Per switch the title holds shows some values and options."
 msgstr "Per schakelaar bevat de titel enkele waarden en opties."
 
 #: views/inc/usage_switches.tpl:19 views/switch_settings.tpl:92
-#: views/switch_status.tpl:11
+#: views/switch_status.tpl:11 views/switch_status.tpl:90
 msgid "Switch"
 msgstr "Schakelaar"
 
@@ -2623,7 +2791,7 @@ msgstr ""
 
 #: views/inc/usage_weather.tpl:42 views/inc/usage_weather.tpl:64
 #: views/inc/usage_webcams.tpl:99 views/inc/usage_webcams.tpl:126
-#: views/webcam_settings.tpl:19 views/webcam_settings.tpl:84
+#: views/webcam_settings.tpl:19 views/webcam_settings.tpl:86
 msgid "Location"
 msgstr "Locatie"
 
@@ -2631,11 +2799,11 @@ msgstr "Locatie"
 msgid "Wind speed"
 msgstr "Windsnelheid"
 
-#: views/inc/usage_weather.tpl:52 views/system_settings.tpl:66
+#: views/inc/usage_weather.tpl:52 views/system_settings.tpl:86
 msgid "m/s"
 msgstr "m/s"
 
-#: views/inc/usage_weather.tpl:53 views/system_settings.tpl:67
+#: views/inc/usage_weather.tpl:53 views/system_settings.tpl:87
 msgid "Km/h"
 msgstr "Km/h"
 
@@ -2653,7 +2821,7 @@ msgstr "Gebruik de zoomregelaar om in en uit te zoomen."
 
 #: views/inc/usage_webcams.tpl:72 views/inc/usage_webcams.tpl:82
 msgid "Controls"
-msgstr "Controls"
+msgstr "Bediening"
 
 #: views/inc/usage_webcams.tpl:74
 msgid "Zooming control"
@@ -2694,35 +2862,35 @@ msgstr ""
 "juiste waarden zijn ingevuld. Alle velden met een %s zijn verplicht."
 
 #: views/inc/usage_webcams.tpl:95 views/inc/usage_webcams.tpl:140
-#: views/webcam_settings.tpl:36 views/webcam_settings.tpl:80
+#: views/webcam_settings.tpl:38 views/webcam_settings.tpl:82
 msgid "Preview"
 msgstr "Voorbeeld"
 
 #: views/inc/usage_webcams.tpl:108 views/inc/usage_webcams.tpl:137
-#: views/webcam_settings.tpl:33 views/webcam_settings.tpl:102
+#: views/webcam_settings.tpl:35 views/webcam_settings.tpl:106
 msgid "Picture rotation"
 msgstr "Afbeelding rotatie"
 
 #: views/inc/usage_webcams.tpl:111 views/inc/usage_webcams.tpl:112
 #: views/inc/usage_webcams.tpl:113 views/inc/usage_webcams.tpl:114
-#: views/webcam_settings.tpl:106 views/webcam_settings.tpl:107
-#: views/webcam_settings.tpl:108 views/webcam_settings.tpl:109
+#: views/webcam_settings.tpl:110 views/webcam_settings.tpl:111
+#: views/webcam_settings.tpl:112 views/webcam_settings.tpl:113
 msgid "degrees"
 msgstr "graden"
 
-#: views/inc/usage_webcams.tpl:115 views/webcam_settings.tpl:110
+#: views/inc/usage_webcams.tpl:115 views/webcam_settings.tpl:114
 msgid "Flip Horizontal"
 msgstr "Spiegel horizontaal"
 
-#: views/inc/usage_webcams.tpl:116 views/webcam_settings.tpl:111
+#: views/inc/usage_webcams.tpl:116 views/webcam_settings.tpl:115
 msgid "Flip Vertical"
 msgstr "Spiegel verticaal"
 
-#: views/inc/usage_webcams.tpl:129 views/webcam_settings.tpl:22
+#: views/inc/usage_webcams.tpl:129 views/webcam_settings.tpl:23
 msgid "V4L"
 msgstr "V4L"
 
-#: views/inc/usage_webcams.tpl:130 views/webcam_settings.tpl:23
+#: views/inc/usage_webcams.tpl:130 views/webcam_settings.tpl:24
 msgid "Remote source"
 msgstr "Externe bron"
 
@@ -2902,87 +3070,75 @@ msgstr "SMTP-wachtwoord"
 msgid "Display"
 msgstr "Beeldscherm"
 
-#: views/notifications.tpl:74
-msgid "I2C address"
-msgstr "I2C adres"
-
-#: views/notifications.tpl:78
-msgid "Screen resolution"
-msgstr "Scherm resolutie"
-
-#: views/notifications.tpl:81
-msgid "LCD 16 Characters, 2 Lines"
-msgstr "LCD 16 tekens, 2 regels"
-
-#: views/notifications.tpl:82
-msgid "LCD 20 Characters, 4 Lines"
-msgstr "LCD 20 tekens, 4 regels"
-
-#: views/notifications.tpl:83
-msgid "OLED 128 x 64 pixels"
-msgstr "OLED 128 x 64 pixels"
-
-#: views/notifications.tpl:104
+#: views/notifications.tpl:101
 msgid "Twitter"
 msgstr "Twitter"
 
-#: views/notifications.tpl:114
+#: views/notifications.tpl:111
 msgid "Consumer key"
 msgstr "Consumer key"
 
-#: views/notifications.tpl:118
+#: views/notifications.tpl:115
 msgid "Consumer secret"
 msgstr "Consumer secret"
 
-#: views/notifications.tpl:122
+#: views/notifications.tpl:119
 msgid "Access token"
 msgstr "Access token"
 
-#: views/notifications.tpl:126
+#: views/notifications.tpl:123
 msgid "Access token secret"
 msgstr "Access token secret"
 
-#: views/notifications.tpl:137
+#: views/notifications.tpl:134
 msgid "Pushover"
 msgstr "Pushover"
 
-#: views/notifications.tpl:147
+#: views/notifications.tpl:144
 msgid "API Token"
 msgstr "API Token"
 
-#: views/notifications.tpl:151
+#: views/notifications.tpl:148
 msgid "User key"
 msgstr "User key"
 
-#: views/notifications.tpl:162
+#: views/notifications.tpl:159
 msgid "Telegram"
 msgstr "Telegram"
 
-#: views/notifications.tpl:172
+#: views/notifications.tpl:169
 msgid "Bot Token"
 msgstr "Bot Token"
 
-#: views/notifications.tpl:176
+#: views/notifications.tpl:173
 msgid "Username"
 msgstr "Gebruikersnaam"
 
-#: views/notifications.tpl:180
+#: views/notifications.tpl:177
 msgid "Proxy"
 msgstr "PRoxy"
 
-#: views/notifications.tpl:191
+#: views/notifications.tpl:188
+msgid "Webhook"
+msgstr ""
+
+#: views/notifications.tpl:198
+msgid "Full post url"
+msgstr ""
+
+#: views/notifications.tpl:209
 msgid "Messages"
 msgstr "Berichten"
 
-#: views/notifications.tpl:202
+#: views/notifications.tpl:220
 msgid "Trigger"
 msgstr ""
 
-#: views/notifications.tpl:208
+#: views/notifications.tpl:226
 msgid "Message"
 msgstr "Bericht"
 
-#: views/notifications.tpl:211
+#: views/notifications.tpl:229
 msgid "Service"
 msgstr "Dienst"
 
@@ -3022,103 +3178,133 @@ msgstr "Meer informatie"
 msgid "Here you can configure your sensors."
 msgstr "Hier kunt u uw sensoren configureren."
 
-#: views/sensor_settings.tpl:67
+#: views/sensor_settings.tpl:43 views/sensor_settings.tpl:175
+msgid "Max diff"
+msgstr ""
+
+#: views/sensor_settings.tpl:70
 msgid "Add new sensor"
 msgstr "Voeg nieuwe sensor toe"
 
-#: views/sensor_settings.tpl:104
+#: views/sensor_settings.tpl:108
 msgid "SHT2X"
 msgstr "SHT2X"
 
-#: views/sensor_settings.tpl:105
+#: views/sensor_settings.tpl:109
+msgid "SHT3X"
+msgstr ""
+
+#: views/sensor_settings.tpl:110
 msgid "HTU21D"
 msgstr "HTU21D"
 
-#: views/sensor_settings.tpl:106
+#: views/sensor_settings.tpl:111
 msgid "SI7021"
 msgstr "SI7021"
 
-#: views/sensor_settings.tpl:107
+#: views/sensor_settings.tpl:112
 msgid "BME280 / BMP280"
 msgstr "BME280 / BMP280"
 
-#: views/sensor_settings.tpl:108
+#: views/sensor_settings.tpl:113
 msgid "Chirp"
 msgstr "Chirp"
 
-#: views/sensor_settings.tpl:110
+#: views/sensor_settings.tpl:115
 msgid "YTXX-digital"
 msgstr "YTXX-digital"
 
-#: views/sensor_settings.tpl:113
+#: views/sensor_settings.tpl:117 views/switch_settings.tpl:126
+msgid "Custom script"
+msgstr ""
+
+#: views/sensor_settings.tpl:119
 msgid "pH SKU-SEN0161"
 msgstr "pH SKU-SEN0161"
 
-#: views/sensor_settings.tpl:114
+#: views/sensor_settings.tpl:120
 msgid "VEML6075"
 msgstr "VEML6075"
 
-#: views/sensor_settings.tpl:115
+#: views/sensor_settings.tpl:121
 msgid "MiFlora"
 msgstr "MiFlora"
 
-#: views/sensor_settings.tpl:136
+#: views/sensor_settings.tpl:122
+msgid "mh-z19"
+msgstr ""
+
+#: views/sensor_settings.tpl:123
+msgid "MLX90614"
+msgstr ""
+
+#: views/sensor_settings.tpl:124
+#, fuzzy
+#| msgid "AM2302"
+msgid "AM2320"
+msgstr "AM2302"
+
+#: views/sensor_settings.tpl:140
 msgid "UVA"
 msgstr "UVA"
 
-#: views/sensor_settings.tpl:137
+#: views/sensor_settings.tpl:141
 msgid "UVB"
 msgstr "UVB"
 
-#: views/sensor_settings.tpl:170
+#: views/sensor_settings.tpl:142
+msgid "UV Index"
+msgstr ""
+
+#: views/sensor_settings.tpl:185
 msgid "Min moist value"
 msgstr "Minimale vochtwaarde"
 
-#: views/sensor_settings.tpl:174
+#: views/sensor_settings.tpl:189
 msgid "Max moist value"
 msgstr "Maximale vochtwaarde"
 
-#: views/sensor_settings.tpl:178
+#: views/sensor_settings.tpl:193
 msgid "Temperature offset"
-msgstr "Temperature offset"
+msgstr "Temperatuur compensatie"
 
 #: views/switch_settings.tpl:16
 msgid "Here you can configure your power switches."
 msgstr "Hier kunt u uw stroomschakelaars configureren."
 
-#: views/switch_settings.tpl:37 views/switch_settings.tpl:178
+#: views/switch_settings.tpl:37 views/switch_settings.tpl:186
 msgid "Timer start time"
 msgstr "Klok start tijd"
 
-#: views/switch_settings.tpl:40 views/switch_settings.tpl:182
+#: views/switch_settings.tpl:40 views/switch_settings.tpl:190
 msgid "Timer stop time"
 msgstr "Klok stop tijd"
 
-#: views/switch_settings.tpl:43 views/switch_settings.tpl:186
+#: views/switch_settings.tpl:43 views/switch_settings.tpl:194
 msgid "Timer on duration"
 msgstr "Timer aan tijdsduur"
 
-#: views/switch_settings.tpl:46 views/switch_settings.tpl:190
+#: views/switch_settings.tpl:46 views/switch_settings.tpl:198
 msgid "Timer off duration"
 msgstr "Timer uit tijdsduur"
 
-#: views/switch_settings.tpl:49 views/switch_settings.tpl:152
+#: views/switch_settings.tpl:49 views/switch_settings.tpl:160
 msgid "Dimmer action duration"
 msgstr "Dimmer tijd"
 
-#: views/switch_settings.tpl:52 views/switch_settings.tpl:160
+#: views/switch_settings.tpl:52 views/switch_settings.tpl:168
 msgid "Dimmer on duration"
 msgstr "Dimmer aan tijd in seconden"
 
-#: views/switch_settings.tpl:55 views/switch_settings.tpl:164
+#: views/switch_settings.tpl:55 views/switch_settings.tpl:172
 msgid "Dimmer on percentage"
 msgstr "Dimmer aan percentage"
 
-#: views/switch_settings.tpl:58 views/switch_settings.tpl:168
+#: views/switch_settings.tpl:58 views/switch_settings.tpl:176
 msgid "Dimmer off duration"
 msgstr "Dimmer uit in seconden"
 
-#: views/switch_settings.tpl:61 views/switch_settings.tpl:172
+#: views/switch_settings.tpl:61 views/switch_settings.tpl:180
 msgid "Dimmer off percentage"
 msgstr "Dimmer uit percentage"
 
@@ -3150,13 +3336,93 @@ msgstr "Energenie USB"
 msgid "Energenie LAN"
 msgstr "Energenie LAN"
 
-#: views/switch_settings.tpl:156
+#: views/switch_settings.tpl:119
+#, fuzzy
+#| msgid "Energenie USB"
+msgid "Energenie Pi-Mote"
+msgstr "Energenie USB"
+
+#: views/switch_settings.tpl:120
+msgid "WeMo"
+msgstr ""
+
+#: views/switch_settings.tpl:121
+msgid "MSS425E"
+msgstr ""
+
+#: views/switch_settings.tpl:122
+msgid "Sonoff"
+msgstr ""
+
+#: views/switch_settings.tpl:123
+msgid "DenkoviV2 4 relays"
+msgstr ""
+
+#: views/switch_settings.tpl:124
+msgid "DenkoviV2 8 relays"
+msgstr ""
+
+#: views/switch_settings.tpl:125
+msgid "DenkoviV2 16 relays"
+msgstr ""
+
+#: views/switch_settings.tpl:164
 msgid "Dimmer environment step"
 msgstr "Dimmer omgeving stap"
 
 #: views/switch_status.tpl:4
 msgid "No switches available"
 msgstr "Geen schakelaars beschikbaar"
+
+#: views/switch_status.tpl:12
+msgid "in manual mode"
+msgstr ""
+
+#: views/switch_status.tpl:35
+msgid "Last replacement"
+msgstr ""
+
+#: views/switch_status.tpl:46
+msgid "Manual mode"
+msgstr ""
+
+#: views/switch_status.tpl:52 views/switch_status.tpl:83
+msgid "Replace hardware"
+msgstr ""
+
+#: views/switch_status.tpl:104
+msgid "With new device"
+msgstr ""
+
+#: views/switch_status.tpl:109
+msgid "Remind in"
+msgstr ""
+
+#: views/switch_status.tpl:117
+msgid "Days"
+msgstr ""
+
+#: views/switch_status.tpl:118
+#, fuzzy
+#| msgid "Week"
+msgid "Weeks"
+msgstr "Week"
+
+#: views/switch_status.tpl:119
+#, fuzzy
+#| msgid "Month"
+msgid "Months"
+msgstr "Maand"
+
+#: views/switch_status.tpl:120
+#, fuzzy
+#| msgid "Year"
+msgid "Years"
+msgstr "Jaar"
+
+#: views/switch_status.tpl:133
+msgid "Replace"
+msgstr ""
 
 #: views/system_environment.tpl:16
 msgid "Here you can configure your environment."
@@ -3168,9 +3434,9 @@ msgstr ""
 
 #: views/system_environment.tpl:37 views/system_environment.tpl:168
 #: views/system_environment.tpl:380 views/system_environment.tpl:591
-#: views/system_environment.tpl:802 views/system_environment.tpl:1015
-#: views/system_environment.tpl:1226 views/system_environment.tpl:1390
-#: views/system_environment.tpl:1601
+#: views/system_environment.tpl:802 views/system_environment.tpl:1013
+#: views/system_environment.tpl:1224 views/system_environment.tpl:1388
+#: views/system_environment.tpl:1599
 msgid "Mode"
 msgstr "Modus"
 
@@ -3187,10 +3453,10 @@ msgstr "Minimale uren"
 #: views/system_environment.tpl:437 views/system_environment.tpl:513
 #: views/system_environment.tpl:648 views/system_environment.tpl:724
 #: views/system_environment.tpl:859 views/system_environment.tpl:935
-#: views/system_environment.tpl:1072 views/system_environment.tpl:1148
-#: views/system_environment.tpl:1284 views/system_environment.tpl:1336
-#: views/system_environment.tpl:1447 views/system_environment.tpl:1523
-#: views/system_environment.tpl:1658 views/system_environment.tpl:1734
+#: views/system_environment.tpl:1070 views/system_environment.tpl:1146
+#: views/system_environment.tpl:1282 views/system_environment.tpl:1334
+#: views/system_environment.tpl:1445 views/system_environment.tpl:1521
+#: views/system_environment.tpl:1656 views/system_environment.tpl:1732
 msgid "Timer on"
 msgstr "Wekker aan"
 
@@ -3199,17 +3465,17 @@ msgstr "Wekker aan"
 #: views/system_environment.tpl:443 views/system_environment.tpl:519
 #: views/system_environment.tpl:654 views/system_environment.tpl:730
 #: views/system_environment.tpl:865 views/system_environment.tpl:941
-#: views/system_environment.tpl:1078 views/system_environment.tpl:1154
-#: views/system_environment.tpl:1290 views/system_environment.tpl:1342
-#: views/system_environment.tpl:1453 views/system_environment.tpl:1529
-#: views/system_environment.tpl:1664 views/system_environment.tpl:1740
+#: views/system_environment.tpl:1076 views/system_environment.tpl:1152
+#: views/system_environment.tpl:1288 views/system_environment.tpl:1340
+#: views/system_environment.tpl:1451 views/system_environment.tpl:1527
+#: views/system_environment.tpl:1662 views/system_environment.tpl:1738
 msgid "Timer off"
 msgstr "Wekker uit"
 
 #: views/system_environment.tpl:197 views/system_environment.tpl:409
 #: views/system_environment.tpl:620 views/system_environment.tpl:831
-#: views/system_environment.tpl:1044 views/system_environment.tpl:1419
-#: views/system_environment.tpl:1630
+#: views/system_environment.tpl:1042 views/system_environment.tpl:1417
+#: views/system_environment.tpl:1628
 msgid "Day/night source"
 msgstr "Dag/nacht bron"
 
@@ -3217,9 +3483,9 @@ msgstr "Dag/nacht bron"
 #: views/system_environment.tpl:449 views/system_environment.tpl:525
 #: views/system_environment.tpl:660 views/system_environment.tpl:736
 #: views/system_environment.tpl:871 views/system_environment.tpl:947
-#: views/system_environment.tpl:1084 views/system_environment.tpl:1160
-#: views/system_environment.tpl:1459 views/system_environment.tpl:1535
-#: views/system_environment.tpl:1670 views/system_environment.tpl:1746
+#: views/system_environment.tpl:1082 views/system_environment.tpl:1158
+#: views/system_environment.tpl:1457 views/system_environment.tpl:1533
+#: views/system_environment.tpl:1668 views/system_environment.tpl:1744
 msgid "Light state"
 msgstr "Licht status"
 
@@ -3227,9 +3493,9 @@ msgstr "Licht status"
 #: views/system_environment.tpl:453 views/system_environment.tpl:529
 #: views/system_environment.tpl:664 views/system_environment.tpl:740
 #: views/system_environment.tpl:875 views/system_environment.tpl:951
-#: views/system_environment.tpl:1088 views/system_environment.tpl:1164
-#: views/system_environment.tpl:1463 views/system_environment.tpl:1539
-#: views/system_environment.tpl:1674 views/system_environment.tpl:1750
+#: views/system_environment.tpl:1086 views/system_environment.tpl:1162
+#: views/system_environment.tpl:1461 views/system_environment.tpl:1537
+#: views/system_environment.tpl:1672 views/system_environment.tpl:1748
 msgid "On"
 msgstr "Aan"
 
@@ -3237,9 +3503,9 @@ msgstr "Aan"
 #: views/system_environment.tpl:454 views/system_environment.tpl:530
 #: views/system_environment.tpl:665 views/system_environment.tpl:741
 #: views/system_environment.tpl:876 views/system_environment.tpl:952
-#: views/system_environment.tpl:1089 views/system_environment.tpl:1165
-#: views/system_environment.tpl:1464 views/system_environment.tpl:1540
-#: views/system_environment.tpl:1675 views/system_environment.tpl:1751
+#: views/system_environment.tpl:1087 views/system_environment.tpl:1163
+#: views/system_environment.tpl:1462 views/system_environment.tpl:1538
+#: views/system_environment.tpl:1673 views/system_environment.tpl:1749
 msgid "Off"
 msgstr "Uit"
 
@@ -3251,12 +3517,13 @@ msgstr "Uit"
 #: views/system_environment.tpl:742 views/system_environment.tpl:754
 #: views/system_environment.tpl:877 views/system_environment.tpl:889
 #: views/system_environment.tpl:953 views/system_environment.tpl:965
-#: views/system_environment.tpl:1090 views/system_environment.tpl:1102
-#: views/system_environment.tpl:1166 views/system_environment.tpl:1178
-#: views/system_environment.tpl:1465 views/system_environment.tpl:1477
-#: views/system_environment.tpl:1541 views/system_environment.tpl:1553
-#: views/system_environment.tpl:1676 views/system_environment.tpl:1688
-#: views/system_environment.tpl:1752 views/system_environment.tpl:1764
+#: views/system_environment.tpl:1088 views/system_environment.tpl:1100
+#: views/system_environment.tpl:1164 views/system_environment.tpl:1176
+#: views/system_environment.tpl:1463 views/system_environment.tpl:1475
+#: views/system_environment.tpl:1539 views/system_environment.tpl:1551
+#: views/system_environment.tpl:1674 views/system_environment.tpl:1686
+#: views/system_environment.tpl:1750 views/system_environment.tpl:1762
+#: views/webcam_settings.tpl:143 views/webcam_settings.tpl:154
 msgid "Ignore"
 msgstr "Negeer"
 
@@ -3264,9 +3531,9 @@ msgstr "Negeer"
 #: views/system_environment.tpl:461 views/system_environment.tpl:537
 #: views/system_environment.tpl:672 views/system_environment.tpl:748
 #: views/system_environment.tpl:883 views/system_environment.tpl:959
-#: views/system_environment.tpl:1096 views/system_environment.tpl:1172
-#: views/system_environment.tpl:1471 views/system_environment.tpl:1547
-#: views/system_environment.tpl:1682 views/system_environment.tpl:1758
+#: views/system_environment.tpl:1094 views/system_environment.tpl:1170
+#: views/system_environment.tpl:1469 views/system_environment.tpl:1545
+#: views/system_environment.tpl:1680 views/system_environment.tpl:1756
 msgid "Door state"
 msgstr "Deur status"
 
@@ -3274,9 +3541,9 @@ msgstr "Deur status"
 #: views/system_environment.tpl:465 views/system_environment.tpl:541
 #: views/system_environment.tpl:676 views/system_environment.tpl:752
 #: views/system_environment.tpl:887 views/system_environment.tpl:963
-#: views/system_environment.tpl:1100 views/system_environment.tpl:1176
-#: views/system_environment.tpl:1475 views/system_environment.tpl:1551
-#: views/system_environment.tpl:1686 views/system_environment.tpl:1762
+#: views/system_environment.tpl:1098 views/system_environment.tpl:1174
+#: views/system_environment.tpl:1473 views/system_environment.tpl:1549
+#: views/system_environment.tpl:1684 views/system_environment.tpl:1760
 msgid "Open"
 msgstr "Open"
 
@@ -3284,9 +3551,9 @@ msgstr "Open"
 #: views/system_environment.tpl:466 views/system_environment.tpl:542
 #: views/system_environment.tpl:677 views/system_environment.tpl:753
 #: views/system_environment.tpl:888 views/system_environment.tpl:964
-#: views/system_environment.tpl:1101 views/system_environment.tpl:1177
-#: views/system_environment.tpl:1476 views/system_environment.tpl:1552
-#: views/system_environment.tpl:1687 views/system_environment.tpl:1763
+#: views/system_environment.tpl:1099 views/system_environment.tpl:1175
+#: views/system_environment.tpl:1474 views/system_environment.tpl:1550
+#: views/system_environment.tpl:1685 views/system_environment.tpl:1761
 msgid "Closed"
 msgstr "Gesloten"
 
@@ -3294,10 +3561,10 @@ msgstr "Gesloten"
 #: views/system_environment.tpl:473 views/system_environment.tpl:549
 #: views/system_environment.tpl:684 views/system_environment.tpl:760
 #: views/system_environment.tpl:895 views/system_environment.tpl:971
-#: views/system_environment.tpl:1108 views/system_environment.tpl:1184
-#: views/system_environment.tpl:1296 views/system_environment.tpl:1348
-#: views/system_environment.tpl:1483 views/system_environment.tpl:1559
-#: views/system_environment.tpl:1694 views/system_environment.tpl:1770
+#: views/system_environment.tpl:1106 views/system_environment.tpl:1182
+#: views/system_environment.tpl:1294 views/system_environment.tpl:1346
+#: views/system_environment.tpl:1481 views/system_environment.tpl:1557
+#: views/system_environment.tpl:1692 views/system_environment.tpl:1768
 msgid "Power on"
 msgstr "Schakel in"
 
@@ -3305,18 +3572,18 @@ msgstr "Schakel in"
 #: views/system_environment.tpl:479 views/system_environment.tpl:555
 #: views/system_environment.tpl:690 views/system_environment.tpl:766
 #: views/system_environment.tpl:901 views/system_environment.tpl:977
-#: views/system_environment.tpl:1114 views/system_environment.tpl:1190
-#: views/system_environment.tpl:1302 views/system_environment.tpl:1354
-#: views/system_environment.tpl:1489 views/system_environment.tpl:1565
-#: views/system_environment.tpl:1700 views/system_environment.tpl:1776
+#: views/system_environment.tpl:1112 views/system_environment.tpl:1188
+#: views/system_environment.tpl:1300 views/system_environment.tpl:1352
+#: views/system_environment.tpl:1487 views/system_environment.tpl:1563
+#: views/system_environment.tpl:1698 views/system_environment.tpl:1774
 msgid "Settle timeout"
 msgstr "Wen periode"
 
-#: views/system_environment.tpl:1255
+#: views/system_environment.tpl:1253
 msgid "Height"
 msgstr "Hoogte"
 
-#: views/system_environment.tpl:1261
+#: views/system_environment.tpl:1259
 msgid "Offset"
 msgstr "Compensatie"
 
@@ -3328,105 +3595,177 @@ msgstr "Download"
 msgid "Here you can configure your TerrariumPI server."
 msgstr "Hier kunt u uw TerrariumPI server configureren."
 
-#: views/system_settings.tpl:19 views/system_settings.tpl:56
+#: views/system_settings.tpl:19 views/system_settings.tpl:76
 msgid "Weather location"
 msgstr "Weer location"
 
-#: views/system_settings.tpl:27 views/system_settings.tpl:62
-msgid "Wind speed indicator"
-msgstr "Windsnelheidsindicator"
+#: views/system_settings.tpl:26
+#, fuzzy
+#| msgid "System settings"
+msgid "System actions"
+msgstr "Systeem instellingen"
 
-#: views/system_settings.tpl:47
+#: views/system_settings.tpl:39
+msgid ""
+"Here you can reboot your TerrariumPI server. You will have to confirm the "
+"action when clicked."
+msgstr ""
+
+#: views/system_settings.tpl:45
+msgid ""
+"Here you can shutdown your TerrariumPI server. You will have to confirm the "
+"action when clicked."
+msgstr ""
+
+#: views/system_settings.tpl:67
 msgid "Language"
 msgstr "Taal"
 
-#: views/system_settings.tpl:73
+#: views/system_settings.tpl:82
+msgid "Wind speed indicator"
+msgstr "Windsnelheidsindicator"
+
+#: views/system_settings.tpl:93
 msgid "Temperature indicator"
 msgstr "Temperatuur indicator"
 
-#: views/system_settings.tpl:77
+#: views/system_settings.tpl:97
 msgid "Celsius"
 msgstr "Celsius"
 
-#: views/system_settings.tpl:78
+#: views/system_settings.tpl:98
 msgid "Fahrenheit"
 msgstr "Fahrenheit"
 
-#: views/system_settings.tpl:84
+#: views/system_settings.tpl:99
+msgid "Kelvin"
+msgstr ""
+
+#: views/system_settings.tpl:105
 msgid "Distance indicator"
 msgstr "Afstandsindicator"
 
-#: views/system_settings.tpl:88
+#: views/system_settings.tpl:109
 msgid "Centimetre"
 msgstr "Centimeter"
 
-#: views/system_settings.tpl:89
+#: views/system_settings.tpl:110
 msgid "Inches"
 msgstr "Inches"
 
-#: views/system_settings.tpl:95
+#: views/system_settings.tpl:116
+#, fuzzy
+#| msgid "Volume in liters"
+msgid "Volume indicator"
+msgstr "Volume in liter"
+
+#: views/system_settings.tpl:120
+msgid "Litres"
+msgstr ""
+
+#: views/system_settings.tpl:121
+msgid "US Gallons"
+msgstr ""
+
+#: views/system_settings.tpl:122
+msgid "UK Gallons"
+msgstr ""
+
+#: views/system_settings.tpl:128
 msgid "Admin name"
 msgstr "Beheerdersnaam"
 
-#: views/system_settings.tpl:101
+#: views/system_settings.tpl:134
 msgid "New admin password"
 msgstr "Nieuw beheerswachtwoord"
 
-#: views/system_settings.tpl:107
+#: views/system_settings.tpl:140
 msgid "Current admin password"
 msgstr "Huidige beheerswachtwoord"
 
-#: views/system_settings.tpl:117
+#: views/system_settings.tpl:150
 msgid "Full authentication"
 msgstr "Volledige authenticatie"
 
-#: views/system_settings.tpl:118
+#: views/system_settings.tpl:151
 msgid "Changes only"
 msgstr "Alleen wijzigingen"
 
-#: views/system_settings.tpl:124
+#: views/system_settings.tpl:157
 msgid "Soundcard"
 msgstr "Geluidskaart"
 
-#: views/system_settings.tpl:133
+#: views/system_settings.tpl:166
 msgid "External calendar"
 msgstr "Externe kalender"
 
-#: views/system_settings.tpl:139
+#: views/system_settings.tpl:172
 msgid "Graph legend layout"
 msgstr "Grafiek legenda opmaak"
 
-#: views/system_settings.tpl:143
+#: views/system_settings.tpl:176
 msgid "Horizontal"
 msgstr "Horizontaal"
 
-#: views/system_settings.tpl:144
+#: views/system_settings.tpl:177
 msgid "Vertical"
 msgstr "Verticaal"
 
-#: views/system_settings.tpl:150
+#: views/system_settings.tpl:183
+#, fuzzy
+#| msgid "Max moist value"
+msgid "Graph smoothing value"
+msgstr "Maximale vochtwaarde"
+
+#: views/system_settings.tpl:189
+msgid "Hide environment summary on the dashboard"
+msgstr ""
+
+#: views/system_settings.tpl:193 views/system_settings.tpl:204
+msgid "True"
+msgstr ""
+
+#: views/system_settings.tpl:194 views/system_settings.tpl:205
+msgid "False"
+msgstr ""
+
+#: views/system_settings.tpl:200
+msgid "Show all sensors gauges on 1 page"
+msgstr ""
+
+#: views/system_settings.tpl:211
 msgid "Pi power usage in W"
 msgstr "Stroomverbruik Pi in W"
 
-#: views/system_settings.tpl:156
+#: views/system_settings.tpl:217
 msgid "Power price"
 msgstr "Stroom prijs"
 
-#: views/system_settings.tpl:162
+#: views/system_settings.tpl:223
 msgid "Water price"
 msgstr "Water prijs"
 
-#: views/system_settings.tpl:168
+#: views/system_settings.tpl:229
 msgid "IP or hostname"
 msgstr "IP of hostnaam"
 
-#: views/system_settings.tpl:174
+#: views/system_settings.tpl:235
 msgid "Port number"
 msgstr "Poort nummer"
 
-#: views/system_settings.tpl:180
-msgid "OWFS server port"
-msgstr "OWFS server poort"
+#: views/system_settings.tpl:246
+msgid "Meross Cloud"
+msgstr ""
+
+#: views/system_settings.tpl:256
+msgid "Meross Cloud username"
+msgstr ""
+
+#: views/system_settings.tpl:262
+#, fuzzy
+#| msgid "New admin password"
+msgid "Meross Cloud password"
+msgstr "Nieuw beheerswachtwoord"
 
 #: views/system_status.tpl:6
 msgid "CPU Load"
@@ -3480,57 +3819,121 @@ msgstr "Geen webcams beschikbaar"
 msgid "Here you can configure your webcams."
 msgstr "Hier kunt u uw webcams configureren."
 
-#: views/webcam_settings.tpl:30 views/webcam_settings.tpl:93
+#: views/webcam_settings.tpl:25
+#, fuzzy
+#| msgid "Remote source"
+msgid "Local source"
+msgstr "Externe bron"
+
+#: views/webcam_settings.tpl:32 views/webcam_settings.tpl:95
 msgid "Resolution"
 msgstr "Resolutie"
 
-#: views/webcam_settings.tpl:60
+#: views/webcam_settings.tpl:62
 msgid "Add new webcam"
 msgstr "Voeg nieuwe webcam toe"
 
-#: views/webcam_settings.tpl:116
+#: views/webcam_settings.tpl:120
 msgid "Archive"
 msgstr "Archief"
 
-#: views/webcam_settings.tpl:121
+#: views/webcam_settings.tpl:125
 msgid "Motion"
 msgstr "Beweging"
 
-#: views/webcam_settings.tpl:122
+#: views/webcam_settings.tpl:126
 msgid "1 minute"
 msgstr "1 minuut"
 
-#: views/webcam_settings.tpl:123
+#: views/webcam_settings.tpl:127
 msgid "5 minutes"
 msgstr "5 minuten"
 
-#: views/webcam_settings.tpl:124
+#: views/webcam_settings.tpl:128
 msgid "15 minutes"
 msgstr "15 minuten"
 
-#: views/webcam_settings.tpl:125
+#: views/webcam_settings.tpl:129
 msgid "30 minutes"
 msgstr "30 minuten"
 
-#: views/webcam_settings.tpl:126
+#: views/webcam_settings.tpl:130
 msgid "1 hour"
 msgstr "1 uur"
 
-#: views/webcam_settings.tpl:127
+#: views/webcam_settings.tpl:131
 msgid "3 hours"
 msgstr "3 uren"
 
-#: views/webcam_settings.tpl:128
+#: views/webcam_settings.tpl:132
 msgid "6 hours"
 msgstr "6 uren"
 
-#: views/webcam_settings.tpl:129
+#: views/webcam_settings.tpl:133
 msgid "12 hours"
 msgstr "12 uren"
 
-#: views/webcam_settings.tpl:130
+#: views/webcam_settings.tpl:134
 msgid "1 day"
 msgstr "1 dag"
+
+#: views/webcam_settings.tpl:139
+#, fuzzy
+#| msgid "Light state"
+msgid "Archive light state"
+msgstr "Licht status"
+
+#: views/webcam_settings.tpl:144
+msgid "When on"
+msgstr ""
+
+#: views/webcam_settings.tpl:145
+msgid "When off"
+msgstr ""
+
+#: views/webcam_settings.tpl:150
+#, fuzzy
+#| msgid "Door state"
+msgid "Archive door state"
+msgstr "Deur status"
+
+#: views/webcam_settings.tpl:155
+msgid "When open"
+msgstr ""
+
+#: views/webcam_settings.tpl:156
+msgid "When closed"
+msgstr ""
+
+#: views/webcam_settings.tpl:161
+#, fuzzy
+#| msgid "Motion"
+msgid "Motion boxes"
+msgstr "Beweging"
+
+#: views/webcam_settings.tpl:171
+msgid "Motion delta threshold"
+msgstr ""
+
+#: views/webcam_settings.tpl:177
+#, fuzzy
+#| msgid "Zoom at minimum level"
+msgid "Motion minimum area"
+msgstr "Zoom op minimumniveau"
+
+#: views/webcam_settings.tpl:183
+msgid "Motion comparison frame"
+msgstr ""
+
+#: views/webcam_settings.tpl:187
+#, fuzzy
+#| msgid "Last update"
+msgid "Last frame"
+msgstr "Laatste wijziging"
+
+#: views/webcam_settings.tpl:188
+msgid "Last archived frame"
+msgstr ""
 
 #: Missing text string
 msgid "1Wire bus"
@@ -3559,6 +3962,10 @@ msgstr "4 Poorten USB relais board"
 #: Missing text string
 msgid "Alarm"
 msgstr "Alarm"
+
+#: Missing text string
+msgid "Amount"
+msgstr ""
 
 #: Missing text string
 msgid "Are you sure to delete the file"
@@ -3625,6 +4032,18 @@ msgid "Drop files here to upload"
 msgstr "Sleep bestanden hier naar toe om te uploaden"
 
 #: Missing text string
+#, fuzzy
+#| msgid "Duration in seconds"
+msgid "Duration in hours"
+msgstr "Looptijd in seconden"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Duration in seconds"
+msgid "Duration in minutes"
+msgstr "Looptijd in seconden"
+
+#: Missing text string
 msgid "Duration in seconds"
 msgstr "Looptijd in seconden"
 
@@ -3639,6 +4058,10 @@ msgstr ""
 #: Missing text string
 msgid "Error"
 msgstr "Error"
+
+#: Missing text string
+msgid "Excluded from average calculation"
+msgstr ""
 
 #: Missing text string
 msgid "External calendar url"
@@ -3675,6 +4098,14 @@ msgid "Height in cm"
 msgstr "Hoogte in cm"
 
 #: Missing text string
+msgid ""
+"Holds the port number on which the OWFS software is running. Leave empty to "
+"disable OWFS support."
+msgstr ""
+"Bevat het poortnummer waarop de OWFS-software draait. Laat leeg om OWFS-"
+"ondersteuning uit te schakelen."
+
+#: Missing text string
 msgid "I2C bus"
 msgstr "I2C bus"
 
@@ -3701,6 +4132,12 @@ msgstr "Belasting 15"
 #: Missing text string
 msgid "Load 5"
 msgstr "Belasting 5"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Minimum hours"
+msgid "Minimum area"
+msgstr "Minimale uren"
 
 #: Missing text string
 msgid "No error messages"
@@ -3739,6 +4176,10 @@ msgid "Raspberry Pi camera"
 msgstr "Raspberry Pi camera"
 
 #: Missing text string
+msgid "Reboot"
+msgstr ""
+
+#: Missing text string
 msgid "Save RAW photo"
 msgstr "Sla RAW foto op"
 
@@ -3753,6 +4194,10 @@ msgstr "Sensoren overzicht screenshot"
 #: Missing text string
 msgid "Server could not process the upload. Error code {{statusCode}}"
 msgstr "De server kon de upload niet verwerken. Error code {{statusCode}}"
+
+#: Missing text string
+msgid "Shutdown"
+msgstr ""
 
 #: Missing text string
 msgid "Switches overview screenshot"
@@ -3773,6 +4218,10 @@ msgstr "TerrariumPI test setup"
 #: Missing text string
 msgid "There are zero door sensors configured."
 msgstr "Er zijn geen deursensoren geconfigureerd."
+
+#: Missing text string
+msgid "Threshold"
+msgstr ""
 
 #: Missing text string
 msgid "Timer period off duration in minutes"
@@ -3825,6 +4274,12 @@ msgstr "Gebruikt geheugen"
 #: Missing text string
 msgid "Used space"
 msgstr "Gebruikte ruimte"
+
+#: Missing text string
+#, fuzzy
+#| msgid "UVA"
+msgid "UV"
+msgstr "UVA"
 
 #: Missing text string
 msgid "Value difference during the night"
@@ -3909,6 +4364,30 @@ msgstr "Systeem omgeving"
 #: Missing text string
 msgid "System settings"
 msgstr "Systeem instellingen"
+
+#~ msgid "Dry"
+#~ msgstr "Droog"
+
+#~ msgid "Wet"
+#~ msgstr "Nat"
+
+#~ msgid "I2C address"
+#~ msgstr "I2C adres"
+
+#~ msgid "Screen resolution"
+#~ msgstr "Scherm resolutie"
+
+#~ msgid "LCD 16 Characters, 2 Lines"
+#~ msgstr "LCD 16 tekens, 2 regels"
+
+#~ msgid "LCD 20 Characters, 4 Lines"
+#~ msgstr "LCD 20 tekens, 4 regels"
+
+#~ msgid "OLED 128 x 64 pixels"
+#~ msgstr "OLED 128 x 64 pixels"
+
+#~ msgid "OWFS server port"
+#~ msgstr "OWFS server poort"
 
 #~ msgid ""
 #~ "Select the mode on which the lights will be put on and off. Select '%s' "

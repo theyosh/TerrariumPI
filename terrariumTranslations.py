@@ -101,7 +101,7 @@ class terrariumTranslations(object):
     self.translations['environment_field_mode'] = _('Select the mode on which this environment part be put on and off. Select \'%s\' to use the sun rise and sun set at your location. This will make the amount of lighting variable to the actual amount of daylight. When selecting \'%s\', the light will put on and off at selected times.') % (_('Weather'),_('Timer'))
     self.translations['environment_field_sensors'] = _('Select the sensors that are used to control this environment part. When selecting multiple sensors, the average is calculated to determine the final values.')
     self.translations['environment_field_day_night_difference'] = _('Holds the value in degrees which the sensors are changing when it become night. Use positive numbers to increase the values and negative numbers to lower the values.')
-    self.translations['environment_field_day_night_source'] = _('Holds the soure that is used to determing when it is day or night.')
+    self.translations['environment_field_day_night_source'] = _('Holds the source that is used to determing when it is day or night.')
     self.translations['environment_field_start'] = _('Enter the time when this environment part should be put on. Only available when running in \'%s\' mode.') % _('Timer')
     self.translations['environment_field_stop'] = _('Enter the time when this environment part should be put off. Only available when running in \'%s\' mode.') % _('Timer')
     self.translations['environment_field_on_duration'] = _('Holds the period in minutes that this environment part is powered on withing the total timer window.')
