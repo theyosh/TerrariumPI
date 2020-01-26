@@ -2,15 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2020-01-26 23:32+CET\n"
-"PO-Revision-Date: 2019-09-02 00:34-0300\n"
-"Last-Translator: Cleber Tavano <clebertavano@gmail.com>\n"
-"Language-Team: cleber tavano\n"
+"PO-Revision-Date: 2020-01-26 23:25+0000\n"
+"Last-Translator: TheYOSH <github.com@theyosh.nl>\n"
+"Language-Team: Portuguese (Brazil) <http://weblate.theyosh.nl/projects/"
+"terrariumpi/webinterface/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.10.3\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: Poedit 2.0.4\n"
 
 #: terrariumEngine.py:618 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
@@ -401,8 +403,6 @@ msgstr ""
 "os valores."
 
 #: terrariumTranslations.py:104
-#, fuzzy
-#| msgid "Holds the soure that is used to determing when it is day or night."
 msgid "Holds the source that is used to determing when it is day or night."
 msgstr "Contém a fonte que é usada para determinar quando é dia ou noite."
 
@@ -997,7 +997,7 @@ msgstr "Frequência"
 
 #: views/audio_files.tpl:86
 msgid "Preview player"
-msgstr "Preview player"
+msgstr "Visualizar jogador"
 
 #: views/audio_playlist.tpl:16
 msgid "Here you can configure your audio playlists."
@@ -3220,10 +3220,8 @@ msgid "SHT3X"
 msgstr "SHT3X"
 
 #: views/sensor_settings.tpl:110
-#, fuzzy
-#| msgid "SHT3X"
 msgid "SHT3XD"
-msgstr "SHT3X"
+msgstr "SHT3XD"
 
 #: views/sensor_settings.tpl:111
 msgid "HTU21D"
@@ -3262,10 +3260,8 @@ msgid "MiFlora"
 msgstr "MiFlora"
 
 #: views/sensor_settings.tpl:123
-#, fuzzy
-#| msgid "Temperature indicator"
 msgid "Mi Temperature & Humidity"
-msgstr "Indicador de temperatura"
+msgstr "Mi Temperatura e Umidade"
 
 #: views/sensor_settings.tpl:124
 msgid "mh-z19"
@@ -3281,7 +3277,7 @@ msgstr "AM2320"
 
 #: views/sensor_settings.tpl:127
 msgid "AMG8833"
-msgstr ""
+msgstr "AMG8833"
 
 #: views/sensor_settings.tpl:143
 msgid "UVA"
@@ -3937,8 +3933,6 @@ msgid "When closed"
 msgstr "Quando fechado"
 
 #: views/webcam_settings.tpl:162
-#, fuzzy
-#| msgid "Motion boxes"
 msgid "Show motion boxes"
 msgstr "Mostrar caixas de movimento"
 
