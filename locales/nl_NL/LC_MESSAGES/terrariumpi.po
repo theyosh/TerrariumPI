@@ -6,16 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2019-07-10 18:23+AEST\n"
-"PO-Revision-Date: 2018-12-23 13:29+0100\n"
-"Last-Translator: Joshua (TheYOSH) Rubingh <theyosh@theyosh.nl>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2020-01-26 18:24+0000\n"
+"Last-Translator: Weblate Admin <admin@example.com>\n"
+"Language-Team: Dutch <http://example.com/projects/terrariumpi/webinterface/"
+"nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.10.3\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: Poedit 2.0.6\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: terrariumEngine.py:606 views/dashboard.tpl:7
@@ -103,7 +104,7 @@ msgstr ""
 
 #: terrariumTranslations.py:42
 msgid "Holds the sensor lowest moisture value measured in dry air. %s"
-msgstr ""
+msgstr "Bevat de laagste vochtigheidswaarde gemeten in droge lucht. %s"
 
 #: terrariumTranslations.py:42 terrariumTranslations.py:43
 msgid "More calibration information"
@@ -111,11 +112,11 @@ msgstr "Meer informatie over kalibratie"
 
 #: terrariumTranslations.py:43
 msgid "Holds the sensor highest moisture value measured in full water. %s"
-msgstr ""
+msgstr "Bevat de hoogste vochtigheidswaarde gemeten in volledig water. %s"
 
 #: terrariumTranslations.py:44
 msgid "Holds the temperature offset value."
-msgstr ""
+msgstr "Bevat de temperatuur verschil waarde."
 
 #: terrariumTranslations.py:45
 msgid "Holds the maximum numbber that a sensor may change in value up or down."
@@ -454,7 +455,7 @@ msgstr "Bevat de watertank volume in liters."
 
 #: terrariumTranslations.py:116
 msgid "Holds the water tank height in cm or inches."
-msgstr ""
+msgstr "Bevat de hoogte van de water tank in cm of inches."
 
 #: terrariumTranslations.py:117
 msgid ""
@@ -784,7 +785,7 @@ msgstr "Bestand '%s' is geüpload"
 
 #: terrariumWebserver.py:284 terrariumWebserver.py:294
 msgid "Success!"
-msgstr "Success!"
+msgstr "Gelukt!"
 
 #: terrariumWebserver.py:286
 msgid "Duplicate file '%s'"
@@ -999,7 +1000,7 @@ msgstr "Herhaal"
 
 #: views/audio_playlist.tpl:34 views/audio_playlist.tpl:103
 msgid "Shuffle"
-msgstr "Shuffle"
+msgstr "Random"
 
 #: views/audio_playlist.tpl:37 views/audio_playlist.tpl:109
 #: views/inc/menu.tpl:123
@@ -1116,7 +1117,7 @@ msgstr "Waterverbruik in L/m"
 #: views/dashboard.tpl:45 views/inc/usage_dashboard.tpl:105
 #: views/inc/usage_switches.tpl:21
 msgid "Total power in kWh"
-msgstr "Totaal stroomverbruik in kWh."
+msgstr "Totaal stroomverbruik in kWh"
 
 #: views/dashboard.tpl:47 views/dashboard.tpl:54
 msgid "in"
@@ -2804,7 +2805,7 @@ msgstr "Gebruik de zoomregelaar om in en uit te zoomen."
 
 #: views/inc/usage_webcams.tpl:72 views/inc/usage_webcams.tpl:82
 msgid "Controls"
-msgstr "Controls"
+msgstr "Bediening"
 
 #: views/inc/usage_webcams.tpl:74
 msgid "Zooming control"
@@ -3249,7 +3250,7 @@ msgstr "Maximale vochtwaarde"
 
 #: views/sensor_settings.tpl:193
 msgid "Temperature offset"
-msgstr "Temperature offset"
+msgstr "Temperatuur compensatie"
 
 #: views/switch_settings.tpl:16
 msgid "Here you can configure your power switches."
