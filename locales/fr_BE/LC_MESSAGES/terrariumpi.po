@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2020-01-26 23:32+CET\n"
+"POT-Creation-Date: 2020-01-27 10:28+CET\n"
 "PO-Revision-Date: 2020-01-26 22:05+0000\n"
 "Last-Translator: Weblate Admin <weblate@theyosh.nl>\n"
 "Language-Team: French (Belgium) <http://weblate.theyosh.nl/projects/"
@@ -142,7 +142,7 @@ msgid "Holds the temperature offset value."
 msgstr "Contient le genre de l'animal."
 
 #: terrariumTranslations.py:45
-msgid "Holds the maximum numbber that a sensor may change in value up or down."
+msgid "Holds the maximum number that a sensor may change in value up or down."
 msgstr ""
 
 #: terrariumTranslations.py:49

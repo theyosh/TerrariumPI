@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2020-01-26 23:32+CET\n"
+"POT-Creation-Date: 2020-01-27 10:28+CET\n"
 "PO-Revision-Date: 2020-01-27 09:25+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <http://weblate.theyosh.nl/projects/terrariumpi/"
@@ -119,7 +119,7 @@ msgid "Holds the temperature offset value."
 msgstr "Bevat de temperatuur verschil waarde."
 
 #: terrariumTranslations.py:45
-msgid "Holds the maximum numbber that a sensor may change in value up or down."
+msgid "Holds the maximum number that a sensor may change in value up or down."
 msgstr ""
 
 #: terrariumTranslations.py:49
@@ -273,7 +273,8 @@ msgstr ""
 
 #: terrariumTranslations.py:83
 msgid "Select the environment door state when enabling archiving."
-msgstr "Selecteer de omgevingsdeurstatus wanneer archiveren wordt ingeschakeld."
+msgstr ""
+"Selecteer de omgevingsdeurstatus wanneer archiveren wordt ingeschakeld."
 
 #: terrariumTranslations.py:84
 msgid "Enable or disable motion boxes for Motion archiving."
@@ -527,7 +528,8 @@ msgstr ""
 
 #: terrariumTranslations.py:127
 msgid "Holds the password for authentication with the mailserver if needed."
-msgstr "Bevat indien nodig het wachtwoord voor authenticatie bij de mailserver."
+msgstr ""
+"Bevat indien nodig het wachtwoord voor authenticatie bij de mailserver."
 
 #: terrariumTranslations.py:129
 msgid "Holds the display chip that is used."
