@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2020-01-27 10:28+CET\n"
-"PO-Revision-Date: 2020-01-27 09:25+0000\n"
+"PO-Revision-Date: 2020-01-27 09:45+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <http://weblate.theyosh.nl/projects/terrariumpi/"
 "webinterface/nl/>\n"
@@ -121,6 +121,7 @@ msgstr "Bevat de temperatuur verschil waarde."
 #: terrariumTranslations.py:45
 msgid "Holds the maximum number that a sensor may change in value up or down."
 msgstr ""
+"Bevat het maximale waarde dat een sensor omhoog of omlaag kan veranderen."
 
 #: terrariumTranslations.py:49
 msgid "Holds the switch hardware type. Supported hardware types are: %s."
@@ -551,7 +552,7 @@ msgstr "Bevat uw Twitter-consumentensleutel. Meer informatie %shier%s"
 
 #: terrariumTranslations.py:134
 msgid "Holds your Twitter consumer secret. More information %shere%s"
-msgstr ""
+msgstr "Bevat uw Twitter consumer secret. Meer informatie %shier%s"
 
 #: terrariumTranslations.py:135
 msgid "Holds your Twitter access token. More information %shere%s"
@@ -559,15 +560,15 @@ msgstr "Bevat uw Twitter-toegangstoken. Meer informatie %shier%s"
 
 #: terrariumTranslations.py:136
 msgid "Holds your Twitter access token secret. More information %shere%s"
-msgstr ""
+msgstr "Bevat uw Twitter access token secret. Meer informatie %shier%s"
 
 #: terrariumTranslations.py:138
 msgid "Holds the PushOver API token. More information %shere%s"
-msgstr ""
+msgstr "Bevat het PushOver API-token. Meer informatie %shier%s"
 
 #: terrariumTranslations.py:139
 msgid "Holds the PushOver API user key. More information %shere%s"
-msgstr ""
+msgstr "Bevat de PushOver API-gebruikerssleutel. Meer informatie %shier%s"
 
 #: terrariumTranslations.py:141
 msgid "Holds the Telegram Bot token. More information %shere%s"
@@ -578,12 +579,17 @@ msgid ""
 "Holds the Telegram username that is allowed for receiving messages. Can be "
 "multiple usernames seperated by a comma. More information %shere%s"
 msgstr ""
+"Bevat de Telegram-gebruikersnaam die is toegestaan voor het ontvangen van "
+"berichten. Kan meerdere gebruikersnamen zijn gescheiden door een komma. Meer "
+"informatie %shier%s"
 
 #: terrariumTranslations.py:143
 msgid ""
 "Holds the proxy address in form of [schema]://[user]:[password]@[server.com]:"
 "[port]. Can either be socks5 or http(s) for schema."
 msgstr ""
+"Bevat het proxy adres in de vorm van [schema]: // [gebruiker]: [wachtwoord] @"
+" [server.com]: [poort]. Schema kan zowel socks5 of http(s) zijn."
 
 #: terrariumTranslations.py:145
 msgid ""
@@ -3621,12 +3627,14 @@ msgid ""
 "Here you can reboot your TerrariumPI server. You will have to confirm the "
 "action when clicked."
 msgstr ""
+"Hier kunt u uw TerrariumPI server opnieuw opstarten. Een bevestiging is "
+"nodig."
 
 #: views/system_settings.tpl:45
 msgid ""
 "Here you can shutdown your TerrariumPI server. You will have to confirm the "
 "action when clicked."
-msgstr ""
+msgstr "Hier kunt u uw TerrariumPI server afsluiten. Een bevestiging is nodig."
 
 #: views/system_settings.tpl:67
 msgid "Language"
