@@ -6,16 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-01-26 23:32+CET\n"
-"PO-Revision-Date: 2018-05-06 21:19+0200\n"
-"Last-Translator: Lorenzo Faleschini <lorenzo@nordest.systems>\n"
-"Language-Team: \n"
-"Language: it\n"
+"PO-Revision-Date: 2020-01-27 09:25+0000\n"
+"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"Language-Team: Italian <http://weblate.theyosh.nl/projects/terrariumpi/"
+"webinterface/it/>\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.10.3\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: Poedit 2.0.7\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: terrariumEngine.py:618 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
@@ -213,7 +214,7 @@ msgid ""
 "Holds the amount in percentage to change the dimmer by the heater "
 "environment."
 msgstr ""
-"Contiene la quantità in percentuale per cambiare il dimmer del riscaldatore  "
+"Contiene la quantità in percentuale per cambiare il dimmer del riscaldatore "
 "d'ambiente."
 
 #: terrariumTranslations.py:61
@@ -686,7 +687,7 @@ msgstr "Contiene il tipo di distanza usato dai sensori di distanza."
 
 #: terrariumTranslations.py:152 terrariumTranslations.py:153
 msgid "Holds the username which can make changes (Administrator)."
-msgstr "Contiene il nome utente che può fare cambiamenti (Amministratore)"
+msgstr "Contiene il nome utente che può fare cambiamenti (Amministratore)."
 
 #: terrariumTranslations.py:154
 msgid ""
@@ -1773,7 +1774,7 @@ msgid ""
 "ports relay board there are 4 control GPIO pins and 2 pins for power and "
 "ground needed. This makes that it needs 6 GPIO pins in total."
 msgstr ""
-"Per ogni relay sulla scheda relay è necesario un pin  GPIO dedicato. Per una "
+"Per ogni relay sulla scheda relay è necesario un pin GPIO dedicato. Per una "
 "scheda a 4 relay servono 4 pin GPIO di controllo e 2 pin per power e ground "
 "per un totale di 6 pin GPIO per una scheda a 4 relay."
 
