@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-01-26 23:32+CET\n"
-"PO-Revision-Date: 2020-01-26 23:56+0000\n"
-"Last-Translator: Weblate Admin <weblate@theyosh.nl>\n"
+"PO-Revision-Date: 2020-01-27 09:25+0000\n"
+"Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: German (Austria) <http://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/de_AT/>\n"
 "Language: de_AT\n"
@@ -1626,7 +1626,7 @@ msgid ""
 "sensors"
 msgstr ""
 "Durch den 1Wire Bus des Raspberry Pi können Sie die folgenden "
-"Hardwaresensoren verwenden:"
+"Hardwaresensoren verwenden"
 
 #: views/hardware.tpl:61 views/hardware.tpl:81
 msgid "DS18B20"
@@ -1647,7 +1647,7 @@ msgid ""
 "Through the GPIO bus of the Raspberry Pi you can use the following hardware "
 "sensors"
 msgstr ""
-"Durch den GPIO-Bus des Raspberry Pi können Sie folgende Sensoren verwenden:"
+"Durch den GPIO-Bus des Raspberry Pi können Sie folgende Sensoren verwenden"
 
 #: views/hardware.tpl:70 views/inc/usage_sensors.tpl:113
 #: views/sensor_settings.tpl:105
@@ -1686,7 +1686,7 @@ msgid ""
 "sensors with OWFS software"
 msgstr ""
 "Durch den I2C Bus des Raspberry Pi können Sie folgende Hardware Sensoren mit "
-"OWFS Software verwenden:"
+"OWFS Software verwenden"
 
 #: views/hardware.tpl:82
 msgid "HIH400"
@@ -1712,7 +1712,7 @@ msgstr ""
 
 #: views/hardware.tpl:93 views/hardware.tpl:102 views/hardware.tpl:111
 msgid "The following boards are tested"
-msgstr "Mit folgenden Boards wurde es getestet:"
+msgstr "Mit folgenden Boards wurde es getestet"
 
 #: views/hardware.tpl:95
 msgid "VMA400"
