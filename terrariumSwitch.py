@@ -12,6 +12,8 @@ import re
 import pywemo
 import datetime
 import brightpi
+import pca9685_driver
+
 try:
   import thread as _thread
 except ImportError as ex:
@@ -295,7 +297,7 @@ class terrariumPowerSwitchFTDI(terrariumPowerSwitchSource):
         cmd = chr(0xff) + chr(0x0 + int(self.get_address())) + chr(0x0 + (1 if state is terrariumPowerSwitch.ON else 0))
         device.write(cmd)
         device.close()
-        
+
   def get_hardware_state(self):
     def get_relay_state(data, relay ):
 
@@ -993,6 +995,7 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
         elif self.get_type() == terrariumPowerDimmerBrightPi.TYPE:
           dim_value = int(50 * (float(self._dimmer_state) / 100.0))
 
+        skip_first = True
         for gpiopin in self.get_address().split(','):
           logger.debug('Dimmer animation: Step: %s, value %s%%, Dim value: %s, timeout %s',counter+1, self._dimmer_state, dim_value, duration)
           if self.get_type() in [terrariumPowerDimmerPWM.TYPE,terrariumPowerDimmerDC.TYPE]:
@@ -1009,6 +1012,13 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
 
               self._device.set_led_dim(leds, dim_value)
               prev_value = dim_value
+
+          elif self.get_type() == terrariumPowerDimmerPCA9685.TYPE:
+            if skip_first:
+              skip_first = False
+              continue
+
+            self._device.set_pwm(int(gpiopin), dim_value * (4095 / 100))
 
         if duration > 0.0:
           sleep(duration)
@@ -1095,6 +1105,22 @@ class terrariumPowerDimmerBrightPi(terrariumPowerDimmerSource):
     except Exception as ex:
       print('load_hardware exception')
       print(ex)
+
+class terrariumPowerDimmerPCA9685(terrariumPowerDimmerSource):
+  TYPE = 'pca9685'
+
+  def load_hardware(self):
+    self._dimmer_running = False
+    self._device = None
+    try:
+      gpio_pins = self.get_address().split(',')
+      self._device = pca9685_driver.Device(int('0x' + gpio_pins[0],16))
+      self._device.set_pwm_frequency(1000)
+
+    except Exception as ex:
+      print('load_hardware exception')
+      print(ex)
+
 
 class terrariumPowerSwitchRemote(terrariumPowerSwitchSource):
   TYPE = 'remote'
@@ -1197,6 +1223,7 @@ class terrariumPowerSwitch(object):
                     terrariumPowerDimmerPWM,
                     terrariumPowerDimmerDC,
                     terrariumPowerDimmerBrightPi,
+                    terrariumPowerDimmerPCA9685,
                     terrariumPowerSwitchDenkoviV2_4,
                     terrariumPowerSwitchDenkoviV2_8,
                     terrariumPowerSwitchDenkoviV2_16,
