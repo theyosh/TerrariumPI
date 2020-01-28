@@ -440,6 +440,7 @@ class terrariumMHZ19Sensor(terrariumSensorSource):
     return data
 
 class terrariumK30CO2Sensor(terrariumSensorSource):
+  # https://computenodes.net/2017/08/18/__trashed-4/ , https://github.com/theyosh/TerrariumPI/issues/177
   TYPE = 'k30co2'
   VALID_SENSOR_TYPES = ['co2']
 
@@ -457,6 +458,37 @@ class terrariumK30CO2Sensor(terrariumSensorSource):
         high = ord(response[3])
         low = ord(response[4])
         data = {'co2' : (high * 256) + low}
+
+      except Exception as ex:
+        print(ex)
+
+    if data is None:
+      return None
+
+    return data
+
+class terrariumCOZIRCO2Sensor(terrariumSensorSource):
+  # http://www.co2meters.com/Documentation/AppNotes/AN127-COZIR-sensor-raspberry-pi-uart.pdf
+  TYPE = 'cozirco2'
+  VALID_SENSOR_TYPES = ['co2']
+
+  def load_data(self):
+    data = None
+    multiplier = 10
+
+    if self.get_address() is not None:
+      try:
+        device = serial.Serial(self.get_address(),baudrate = 9600,timeout = 1) #serial port may vary from pi to pi
+        device.write("M 4\r\n") # set display mode to show only CO2
+        device.write("K 2\r\n") # set  operating mode
+        device.flushInput()
+        sleep(1)
+
+        device.write("Z\r\n")
+        sleep(.5)
+        response = device.read(10)
+        response = response[:8]
+        data = {'co2' : float(response[2:]) * multiplier}
 
       except Exception as ex:
         print(ex)
@@ -507,6 +539,7 @@ class terrariumSensor(object):
              terrariumSHT3XDSensor,
              terrariumMHZ19Sensor,
              terrariumK30CO2Sensor,
+             terrariumCOZIRCO2Sensor,
              terrariumMLX90614Sensor,
              terrariumAM2320Sensor,
              terrariumAMG8833Sensor]

@@ -4,6 +4,7 @@
             <a class="site_title" href="/"><i class="fa fa-paw"></i> <span>{{title}}</span></a>
           </div>
           <div class="clearfix"></div><!-- menu profile quick info -->
+
           <div class="profile">
             <div class="profile_pic">
               <img src="/static/images/christmas_hat.png" class="christmashat">
@@ -14,8 +15,6 @@
               <h2>{{person_name}}</h2>
             </div>
           </div><!-- /menu profile quick info -->
-          <canvas id="fireworks" width="100%"></canvas>
-          <br>
           <!-- sidebar menu -->
           <div class="main_menu_side hidden-print main_menu" id="sidebar-menu">
             <div class="menu_section">
