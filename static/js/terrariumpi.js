@@ -537,7 +537,7 @@ function add_notification_message(type, title, message, icon, color, date, link)
   }
 
   notification.append($('<span>').addClass('image').append($('<img>').attr({
-    'src': $('div.profile_pic img').attr('src')
+    'src': $('div.profile_pic img:last').attr('src')
   })));
   notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('data-timestamp',notification_date)) );
   notification.append($('<span>').addClass('message').text(message).append($('<span>').addClass('pull-right').html('<i class="fa ' + icon + ' ' + color + '"></i>')));
