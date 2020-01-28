@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2020-01-27 10:28+CET\n"
-"PO-Revision-Date: 2020-01-27 09:25+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2020-01-28 21:56+0000\n"
+"Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <http://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -2879,13 +2879,16 @@ msgid "Full screen control"
 msgstr "Controle em tela cheia"
 
 #: views/inc/usage_webcams.tpl:89
-#, fuzzy
 msgid ""
 "On the webcam settings page you can configure all needed webcams. Click on "
 "%s button to add a new webcam. And empty form like below is shown and has to "
 "be filled in. Make sure the right values are filled in. All fields with a %s "
 "are required."
-msgstr "Na página de configurações da webcam."
+msgstr ""
+"Na página de configurações da webcam, você pode configurar todas as webcams "
+"necessárias. Clique no botão %s para adicionar uma nova webcam. Um "
+"formulário vazio será mostrado e deve ser preenchido. Verifique se os "
+"valores corretos foram preenchidos. Todos os campos com %s são obrigatórios."
 
 #: views/inc/usage_webcams.tpl:95 views/inc/usage_webcams.tpl:140
 #: views/webcam_settings.tpl:38 views/webcam_settings.tpl:82
