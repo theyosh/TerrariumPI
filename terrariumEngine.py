@@ -709,8 +709,9 @@ echo ""
 """
 
     motd_lines = template.splitlines()
-    motd_lines.append('echo "                                    {}Version: {}{}{}"'.format(
+    motd_lines.append('echo "                                    {}{}: {}{}{}"'.format(
         '${yellow}' if self.update_available else '        ',
+        _('Version'),
         self.current_version,
         ' / {}'.format(self.update_version) if self.update_available else '',
         '${reset}' if self.update_available else ''))
@@ -721,38 +722,54 @@ echo ""
     motd_lines.append('echo ""')
 
     left_lines = []
+    left_padding = 0
     # Add average values
     avg_order = ['temperature','humidity','moisture','conductivity','distance','ph','light','fertility','co2','volume']
     for avg_type in avg_order:
       avg_key = 'average_{}'.format(avg_type)
       if avg_key in data['average']:
-        left_lines.append('  {:20} {}{:7.2f} {:5}{}'.format(_('Average {}'.format(avg_type.title()) + ':'),
-                                                                     '${yellow}' if data['average'][avg_key]['alarm'] else '',
-                                                                     data['average'][avg_key]['current'],
-                                                                     data['average'][avg_key]['indicator'],
-                                                                     '${reset}' if data['average'][avg_key]['alarm'] else ''))
+        left_lines.append({'key'   : _('Average {}'.format(avg_type.title())),
+                           'value' : '{:8.2f} {:6}'.format(data['average'][avg_key]['current'],data['average'][avg_key]['indicator']),
+                           'alarm' : data['average'][avg_key]['alarm']})
 
     right_lines = []
-    right_lines.append('   Uptime: {}'.format(terrariumUtils.format_uptime(data['system']['uptime'])))
-    right_lines.append('   Memory: {} (Free) / {} (Total)'.format(terrariumUtils.format_filesize(data['system']['memory']['free']),
-                                                                  terrariumUtils.format_filesize(data['system']['memory']['total'])))
-    right_lines.append('     Disk: {} (Free) / {} (Total)'.format(terrariumUtils.format_filesize(data['system']['disk']['free']),
-                                                                  terrariumUtils.format_filesize(data['system']['disk']['total'])))
-    right_lines.append(' CPU Load: {:.2f}, {:.2f}, {:.2f}'.format(data['system']['load']['load1'],
+    right_lines.append({'key'   : _('Uptime'),
+                        'value' : terrariumUtils.format_uptime(data['system']['uptime']),
+                        'alarm' : False})
+
+    right_lines.append({'key'   : _('Disk usage'),
+                        'value' : '{} (Free) / {} (Total)'.format(terrariumUtils.format_filesize(data['system']['disk']['free']),
+                                                                  terrariumUtils.format_filesize(data['system']['disk']['total'])),
+                        'alarm' : False})
+
+    right_lines.append({'key'   : _('Memory usage'),
+                        'value' : '{} (Free) / {} (Total)'.format(terrariumUtils.format_filesize(data['system']['memory']['free']),
+                                                                  terrariumUtils.format_filesize(data['system']['memory']['total'])),
+                        'alarm' : False})
+
+    right_lines.append({'key'   : _('CPU Load'),
+                        'value' : '{:.2f}, {:.2f}, {:.2f}'.format(data['system']['load']['load1'],
                                                                   data['system']['load']['load5'],
-                                                                  data['system']['load']['load15']))
-    right_lines.append(' CPU Temp: {:.2f} C'.format(data['system']['temperature']))
+                                                                  data['system']['load']['load15']),
+                        'alarm' : False})
+
+    right_lines.append({'key'   : _('CPU Temperature'),
+                        'value' : '{:.2f} C'.format(data['system']['temperature']),
+                        'alarm' : False})
+
+    left_padding = max([len(i['key']) for i in left_lines])
+    right_padding = max([len(i['key']) for i in right_lines])
 
     line_nr = 0
     while line_nr < max(len(left_lines),len(right_lines)):
       motd_line = 'echo "'
       if line_nr < len(left_lines):
-        motd_line += left_lines[line_nr]
+        motd_line += '  {:{width}}'.format(left_lines[line_nr]['key'] + ':',width=left_padding+1) + ('${yellow}' if left_lines[line_nr]['alarm'] else '') + left_lines[line_nr]['value'] + ('${reset}' if left_lines[line_nr]['alarm'] else '')
       else:
         motd_line += '                                    '
 
       if line_nr < len(right_lines):
-        motd_line += right_lines[line_nr]
+        motd_line += '{:{width}}'.format(right_lines[line_nr]['key'] + ':',width=right_padding+1) + ' ' + ('${yellow}' if right_lines[line_nr]['alarm'] else '') + right_lines[line_nr]['value'] + ('${reset}' if right_lines[line_nr]['alarm'] else '')
 
       motd_line += '"'
       motd_lines.append(motd_line)
