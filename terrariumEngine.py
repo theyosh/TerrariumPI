@@ -779,7 +779,7 @@ echo ""
     with open('motd.sh','w') as motdfile:
       motdfile.write('\n'.join(motd_lines))
 
-    os.chmod('motd.sh', 0755)
+    os.chmod('motd.sh', 0o755)
 
   def __send_message(self,message):
     clients = self.subscribed_queues
