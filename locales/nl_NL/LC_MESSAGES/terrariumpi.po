@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2020-01-28 22:52+CET\n"
-"PO-Revision-Date: 2020-01-27 09:45+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2020-01-28 22:05+0000\n"
+"Last-Translator: Weblate Admin <weblate@theyosh.nl>\n"
 "Language-Team: Dutch <http://weblate.theyosh.nl/projects/terrariumpi/"
 "webinterface/nl/>\n"
 "Language: nl_NL\n"
@@ -34,7 +34,7 @@ msgstr "CPU Temp."
 
 #: terrariumEngine.py:706
 msgid "Version"
-msgstr ""
+msgstr "Versie"
 
 #: terrariumEngine.py:732 views/system_status.tpl:174
 msgid "Disk usage"
@@ -616,6 +616,8 @@ msgid ""
 "Holds the url to post notification data to. You can use %name% variables in "
 "the post url"
 msgstr ""
+"Bevat de URL om notificaties te posten. Je kan gebruik maken van %name% "
+"variabelen in de url"
 
 #: terrariumTranslations.py:150
 msgid "Choose your interface language."
@@ -3277,11 +3279,11 @@ msgstr "mh-Z19"
 
 #: views/sensor_settings.tpl:125
 msgid "K30 CO2"
-msgstr ""
+msgstr "K30 CO2"
 
 #: views/sensor_settings.tpl:126
 msgid "COZIR CO2"
-msgstr ""
+msgstr "COZIR CO2"
 
 #: views/sensor_settings.tpl:127
 msgid "MLX90614"
@@ -3381,7 +3383,7 @@ msgstr "Bright Pi"
 
 #: views/switch_settings.tpl:116
 msgid "PCA9685"
-msgstr ""
+msgstr "PCA9685"
 
 #: views/switch_settings.tpl:118
 msgid "Remote Dimmer"
