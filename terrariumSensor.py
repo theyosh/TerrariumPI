@@ -7,6 +7,7 @@ import re
 import subprocess
 import json
 import sys
+import serial
 
 from glob import iglob
 from time import time
@@ -438,6 +439,33 @@ class terrariumMHZ19Sensor(terrariumSensorSource):
 
     return data
 
+class terrariumK30CO2Sensor(terrariumSensorSource):
+  TYPE = 'k30co2'
+  VALID_SENSOR_TYPES = ['co2']
+
+  def load_data(self):
+    data = None
+    if self.get_address() is not None:
+      try:
+        device = serial.Serial(self.get_address(),baudrate = 9600,timeout = 1) #serial port may vary from pi to pi
+        device.flushInput()
+        sleep(1)
+
+        device.write("\xFE\x44\x00\x08\x02\x9F\x25")
+        sleep(.5)
+        response = device.read(7)
+        high = ord(response[3])
+        low = ord(response[4])
+        data = {'co2' : (high * 256) + low}
+
+      except Exception as ex:
+        print(ex)
+
+    if data is None:
+      return None
+
+    return data
+
 from terrariumAnalogSensor import terrariumSKUSEN0161Sensor
 from terrariumBluetoothSensor import terrariumMiFloraSensor, terrariumMiTempSensor
 from terrariumGPIOSensor import terrariumYTXXSensorDigital, terrariumDHT11Sensor, terrariumDHT22Sensor, terrariumAM2302Sensor, terrariumHCSR04Sensor
@@ -478,6 +506,7 @@ class terrariumSensor(object):
              terrariumSHT3XSensor,
              terrariumSHT3XDSensor,
              terrariumMHZ19Sensor,
+             terrariumK30CO2Sensor,
              terrariumMLX90614Sensor,
              terrariumAM2320Sensor,
              terrariumAMG8833Sensor]
