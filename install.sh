@@ -182,7 +182,7 @@ systemctl enable pigpiod
 update-rc.d -f owftpd remove
 update-rc.d -f owfhttpd remove
 
-PROGRESS=25
+PROGRESS=20
 # Update submodules if downloaded through tar or zip
 (
 cd "${BASEDIR}/"
@@ -222,7 +222,7 @@ Install required software\n\nInstalling base software ...
 XXX
 EOF
 cd "${BASEDIR}/gentelella"
-git checkout 1.4.0 > /dev/null
+git checkout 1.4.0 > /dev/null 2> /dev/null
 cd "${BASEDIR}/.."
 
 PIP_MODULES="setuptools python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_DHT Adafruit-SHT31 luma.oled bluepy pywemo pyownet emails mh-z19 icalendar melopero-amg8833 PCA9685-driver"
@@ -230,7 +230,7 @@ if [ $PYTHON -eq 2 ]; then
   PIP_MODULES="${PIP_MODULES} iCalEvents==0.1.21"
 fi
 if [ $PYTHON -eq 3 ]; then
-  PIP_MODULES="${PIP_MODULES} opencv-python-headless meross-iot==0.2.2.3 iCalEvents mitemp_bt adafruit-circuitpython-sht31d"
+  PIP_MODULES="${PIP_MODULES} opencv-python-headless meross-iot==0.2.2.3 iCalEvents adafruit-circuitpython-sht31d mitemp_bt"
 fi
 
 if [ `grep -ic " buster " /etc/apt/sources.list` -eq 2 ]; then
@@ -258,9 +258,9 @@ Installing python${PYTHON} module ${MODULE_COUNTER} out of ${NUMBER_OF_MODULES}:
 XXX
 EOF
     if [ $PYTHON -eq 2 ]; then
-      pip2 install -q --upgrade ${PIP_MODULE}
+      pip2 install -q --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
     elif [ $PYTHON -eq 3 ]; then
-      pip3 install -q --upgrade ${PIP_MODULE}
+      pip3 install -q --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
     fi
 
     if [ $? -eq 0 ]; then
@@ -305,16 +305,16 @@ XXX
 EOF
 
 PROGRESS=98
-# Update submodules if downloaded through tar or zip
-cd "${BASEDIR}/"
-chown ${SCRIPT_USER}. .
-chown ${SCRIPT_USER}. * -Rf
 cat <<EOF
 XXX
 $PROGRESS
 Setting file rights ...
 XXX
 EOF
+# Update submodules if downloaded through tar or zip
+cd "${BASEDIR}/"
+chown ${SCRIPT_USER}. .
+chown ${SCRIPT_USER}. * -Rf
 
 PROGRESS=100
 cat <<EOF
