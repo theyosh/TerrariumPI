@@ -2978,6 +2978,23 @@ function terrariumpi_select2_option(state){
   return $('<div class="terrariumpi_select2_option" title="' + state.text + '">' + state.text + '</div>');
 }
 $.fn.select2.defaults.set("templateResult", terrariumpi_select2_option);
+
+function christmas() {
+  if (moment(moment().year() + '-12-25').week() == moment().week()) {
+    $('img.christmashat').show();
+  } else {
+    $('img.christmashat').hide();
+  }
+}
+
+function fireworks() {
+  if ('12-31' == moment().format('MM-DD') || '01-01' == moment().format('MM-DD')) {
+    $('div.left_col.menu div.profile').after('<canvas id="fireworks" width="100%"></canvas><br>');
+    $('body').append('<script src="/static/js/fireworks.js" type="text/javascript"></script>');
+  }
+}
+
+
 // Start it all.....
 $(document).ready(function() {
   moment.locale(globals.language);
@@ -3020,17 +3037,11 @@ $(document).ready(function() {
   setInterval(function() {
     notification_timestamps();
     $('#system_time span').text(moment().format('LLLL'));
-
-    if (moment(moment().year() + '-12-25').week() == moment().week()) {
-      $('img.christmashat').show();
-    } else {
-      $('img.christmashat').hide();
-    }
+    christmas();
+    fireworks();
   }, 30 * 1000);
 
-  if ('12-31' == moment().format('MM-DD') || '01-01' == moment().format('MM-DD')) {
-    $('body').append('<script src="/static/js/fireworks.js" type="text/javascript"></script>');
-  }
-
+  christmas();
+  fireworks();
   version_check();
 });
