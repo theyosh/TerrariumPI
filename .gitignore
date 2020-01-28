@@ -12,3 +12,4 @@ notifications.cfg
 __pycache__
 .cache
 Bright-Pi
+motd.sh
