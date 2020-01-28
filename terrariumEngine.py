@@ -9,9 +9,6 @@ logger.debug('Setting terrariumPI GPIO Mode to %s' % (GPIO.BCM,))
 GPIO.setmode(GPIO.BCM)
 logger.debug('Done setting terrariumPI GPIO Mode to %s' % (GPIO.BCM,))
 
-import gettext
-gettext.install('terrariumpi', 'locales/')
-
 try:
   import thread as _thread
 except ImportError as ex:
@@ -76,8 +73,6 @@ class terrariumEngine(object):
         break
     hw.close()
 
-
-
     # Default power usage for a PI
     self.pi_power_wattage = 5
 
@@ -87,9 +82,6 @@ class terrariumEngine(object):
     logger.info('Loading terrariumPI config')
     self.config = terrariumConfig()
     logger.info('Done Loading terrariumPI config')
-
-    # Load language
-    gettext.translation('terrariumpi', 'locales/', languages=[self.config.get_language()]).install(True)
 
     # Check for update
     self.current_version = self.config.get_system()['version']
@@ -757,8 +749,8 @@ echo ""
                         'value' : '{:.2f} C'.format(data['system']['temperature']),
                         'alarm' : False})
 
-    left_padding = max([len(i['key']) for i in left_lines])
-    right_padding = max([len(i['key']) for i in right_lines])
+    left_padding  = max([len(line['key']) for line in left_lines])
+    right_padding = max([len(line['key']) for line in right_lines])
 
     line_nr = 0
     while line_nr < max(len(left_lines),len(right_lines)):
