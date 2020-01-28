@@ -9,6 +9,9 @@ logger.debug('Setting terrariumPI GPIO Mode to %s' % (GPIO.BCM,))
 GPIO.setmode(GPIO.BCM)
 logger.debug('Done setting terrariumPI GPIO Mode to %s' % (GPIO.BCM,))
 
+import gettext
+gettext.install('terrariumpi', 'locales/')
+
 try:
   import thread as _thread
 except ImportError as ex:
@@ -44,7 +47,6 @@ class terrariumEngine(object):
   LOOP_TIMEOUT = 30
 
   def __init__(self):
-
     # Default system units
     self.__units = {'temperature' : 'C',
                     'distance'    : 'cm',
@@ -74,6 +76,8 @@ class terrariumEngine(object):
         break
     hw.close()
 
+
+
     # Default power usage for a PI
     self.pi_power_wattage = 5
 
@@ -83,6 +87,16 @@ class terrariumEngine(object):
     logger.info('Loading terrariumPI config')
     self.config = terrariumConfig()
     logger.info('Done Loading terrariumPI config')
+
+    # Load language
+    gettext.translation('terrariumpi', 'locales/', languages=[self.config.get_language()]).install(True)
+
+    # Check for update
+    self.current_version = self.config.get_system()['version']
+    self.update_available = False
+    self.update_last_check = datetime.datetime.fromtimestamp(0)
+    self.update_version = None
+    self.__update_check()
 
     # Notification engine
     self.notification = terrariumNotification()
@@ -97,7 +111,7 @@ class terrariumEngine(object):
 
     # Load data collector for historical data
     logger.info('Loading terrariumPI collector')
-    self.collector = terrariumCollector(self.config.get_system()['version'])
+    self.collector = terrariumCollector(self.current_version)
     logger.info('Done loading terrariumPI collector')
 
     # Set the Pi power usage (including usb devices directly on the PI)
@@ -162,6 +176,13 @@ class terrariumEngine(object):
     _thread.start_new_thread(self.__webcam_loop, ())
     _thread.start_new_thread(self.__log_tail, ())
     logger.info('TerrariumPI engine is running')
+
+  def __update_check(self):
+    if datetime.datetime.now() - self.update_last_check > datetime.timedelta(days=1):
+      version_data = terrariumUtils.get_remote_data('https://api.github.com/repos/theyosh/TerrariumPI/releases/latest',json=True)
+      self.update_version = version_data['tag_name']
+      self.update_available = int(self.update_version.replace('.','')) > int(self.current_version.replace('.',''))
+      self.update_last_check = datetime.datetime.now()
 
   # Private/internal functions
   def __load_sensors(self,data = None):
@@ -552,13 +573,20 @@ class terrariumEngine(object):
           # More then 12 seconds to late.... probably never fast enough...
           time_short = 0
 
-
   def __engine_loop(self):
     time_short = 0
     error_counter = 0
     logger.info('Start terrariumPI engine')
     while self.__running:
       starttime = time.time()
+
+      # Version update check
+      self.__update_check()
+
+      motddata = {'average' : [],
+                  'system' : 0,
+                  'duration' : 0,
+                  'error' : ''}
 
       # Update weather
       self.weather.update()
@@ -600,6 +628,7 @@ class terrariumEngine(object):
 
       # Get the current average temperatures
       average_data = self.get_sensors(['average'])['sensors']
+      motddata['average'] = average_data
 
       # Websocket callback
       self.__send_message({'type':'sensor_gauge','data':average_data})
@@ -612,6 +641,7 @@ class terrariumEngine(object):
 
       # Log system stats
       system_data = self.get_system_stats()
+      motddata['system'] = system_data
       self.collector.log_system_data(system_data)
       self.get_system_stats(socket=True)
 
@@ -626,6 +656,7 @@ class terrariumEngine(object):
       self.notification.send_display("\n".join(display_message))
 
       duration = (time.time() - starttime) + time_short
+      motddata['duration'] = duration
       if duration < terrariumEngine.LOOP_TIMEOUT:
         if error_counter > 0:
           error_counter -= 1
@@ -635,13 +666,111 @@ class terrariumEngine(object):
       else:
         error_counter += 1
         if error_counter > 9:
-          logger.error('Updating is having problems keeping up. Could not update in 30 seconds for %s times!' % error_counter)
+          error_message = 'Updating is having problems keeping up. Could not update in {} seconds for {} times!'.format(terrariumEngine.LOOP_TIMEOUT,error_counter)
+          motddata['error'] = error_message
+          logger.error(error_message)
 
         logger.warning('Updating took to much time. Needed %.5f seconds which is %.5f more then the limit %s' % (duration,duration-terrariumEngine.LOOP_TIMEOUT,terrariumEngine.LOOP_TIMEOUT))
         time_short = duration - terrariumEngine.LOOP_TIMEOUT
         if time_short > 12:
           # More then 12 seconds to late.... probably never fast enough...
           time_short = 0
+
+      self.__update_motd(motddata)
+
+  def __update_motd(self,data):
+    template = """#!/bin/bash
+
+# FIX Colors
+export TERM=xterm-256color
+
+# Some colors
+black=$(tput setaf 0)
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+yellow=$(tput setaf 3)
+blue=$(tput setaf 4)
+purple=$(tput setaf 5)
+cyan=$(tput setaf 6)
+white=$(tput setaf 7)
+gray=$(tput setaf 8)
+reset=$(tput sgr0)
+
+# The message
+echo ""
+echo " ${green} _____                        _                  ${red}______ _____ "
+echo " ${green}|_   _|                      (_)                 ${red}| ___ \_   _|"
+echo " ${green}  | | ___ _ __ _ __ __ _ _ __ _ _   _ _ __ ___   ${red}| |_/ / | |"
+echo " ${green}  | |/ _ \ '__| '__/ _\` | '__| | | | | '_ \` _ \  ${red}|  __/  | |"
+echo " ${green}  | |  __/ |  | | | (_| | |  | | |_| | | | | | | ${red}| |    _| |_"
+echo " ${green}  \_/\___|_|  |_|  \__,_|_|  |_|\__,_|_| |_| |_| ${red}\_|    \___/"
+echo " ${reset}"
+echo ""
+"""
+
+    motd_lines = template.splitlines()
+    motd_lines.append('echo "                                    {}Version: {}{}{}"'.format(
+        '${yellow}' if self.update_available else '        ',
+        self.current_version,
+        ' / {}'.format(self.update_version) if self.update_available else '',
+        '${reset}' if self.update_available else ''))
+
+    if self.update_available:
+      motd_lines.append('echo "  New version available: https://github.com/theyosh/TerrariumPI/releases"')
+
+    motd_lines.append('echo ""')
+
+    left_lines = []
+    # Add average values
+    avg_order = ['temperature','humidity','moisture','conductivity','distance','ph','light','fertility','co2','volume']
+    for avg_type in avg_order:
+      avg_key = 'average_{}'.format(avg_type)
+      if avg_key in data['average']:
+        left_lines.append('  {:20} {}{:7.2f} {:5}{}'.format(_('Average {}'.format(avg_type.title()) + ':'),
+                                                                     '${yellow}' if data['average'][avg_key]['alarm'] else '',
+                                                                     data['average'][avg_key]['current'],
+                                                                     data['average'][avg_key]['indicator'],
+                                                                     '${reset}' if data['average'][avg_key]['alarm'] else ''))
+
+    right_lines = []
+    right_lines.append('   Uptime: {}'.format(terrariumUtils.format_uptime(data['system']['uptime'])))
+    right_lines.append('   Memory: {} (Free) / {} (Total)'.format(terrariumUtils.format_filesize(data['system']['memory']['free']),
+                                                                  terrariumUtils.format_filesize(data['system']['memory']['total'])))
+    right_lines.append('     Disk: {} (Free) / {} (Total)'.format(terrariumUtils.format_filesize(data['system']['disk']['free']),
+                                                                  terrariumUtils.format_filesize(data['system']['disk']['total'])))
+    right_lines.append(' CPU Load: {:.2f}, {:.2f}, {:.2f}'.format(data['system']['load']['load1'],
+                                                                  data['system']['load']['load5'],
+                                                                  data['system']['load']['load15']))
+    right_lines.append(' CPU Temp: {:.2f} C'.format(data['system']['temperature']))
+
+    line_nr = 0
+    while line_nr < max(len(left_lines),len(right_lines)):
+      motd_line = 'echo "'
+      if line_nr < len(left_lines):
+        motd_line += left_lines[line_nr]
+      else:
+        motd_line += '                                    '
+
+      if line_nr < len(right_lines):
+        motd_line += right_lines[line_nr]
+
+      motd_line += '"'
+      motd_lines.append(motd_line)
+      line_nr += 1
+
+    motd_lines.append('echo ""')
+    if '' != data['error']:
+      motd_lines.append('echo "  {}{}{}"'.format('${red}',data['error'],'${reset}'))
+      motd_lines.append('echo ""')
+
+    motd_lines.append('echo "      {}Last update: {:%d-%m-%Y %H:%M:%S}{}"'.format('${blue}',datetime.datetime.now(),'${reset}'))
+    motd_lines.append('echo ""')
+
+    #print('\n'.join(motd_lines))
+    with open('motd.sh','w') as motdfile:
+      motdfile.write('\n'.join(motd_lines))
+
+    os.chmod('motd.sh', 0755)
 
   def __send_message(self,message):
     clients = self.subscribed_queues

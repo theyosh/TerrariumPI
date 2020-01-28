@@ -360,6 +360,15 @@ if [ `grep -ic "start.sh" /etc/rc.local` -eq 0 ]; then
   sed -i.bak "s@^exit 0@# Starting TerrariumPI server\n${BASEDIR}/start.sh ${PYTHON}\n\nexit 0@" /etc/rc.local
 fi
 
+# Add a nice MOTD when you login
+if [ -f /etc/motd ]; then
+  mv /etc/motd /etc/motd.old
+fi
+
+if [ ! -h /etc/update-motd.d/05-terrariumpi ]; then
+  ln -s /home/pi/TerrariumPI/motd.sh /etc/update-motd.d/05-terrariumpi
+fi
+
 # We are done!
 sync
 
