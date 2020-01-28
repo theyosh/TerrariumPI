@@ -225,12 +225,12 @@ cd "${BASEDIR}/gentelella"
 git checkout 1.4.0 > /dev/null
 cd "${BASEDIR}/.."
 
-PIP_MODULES="setuptools python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_DHT Adafruit-SHT31 luma.oled bluepy pywemo pyownet emails mh-z19 icalendar"
+PIP_MODULES="setuptools python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_DHT Adafruit-SHT31 luma.oled bluepy pywemo pyownet emails mh-z19 icalendar melopero-amg8833"
 if [ $PYTHON -eq 2 ]; then
   PIP_MODULES="${PIP_MODULES} iCalEvents==0.1.21"
 fi
 if [ $PYTHON -eq 3 ]; then
-  PIP_MODULES="${PIP_MODULES} opencv-python-headless meross-iot==0.2.2.3 iCalEvents mitemp_bt melopero-amg8833 adafruit-circuitpython-sht31d"
+  PIP_MODULES="${PIP_MODULES} opencv-python-headless meross-iot==0.2.2.3 iCalEvents mitemp_bt adafruit-circuitpython-sht31d"
 fi
 
 if [ `grep -ic " buster " /etc/apt/sources.list` -eq 2 ]; then
