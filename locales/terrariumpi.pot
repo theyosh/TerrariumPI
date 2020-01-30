@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
-"POT-Creation-Date: 2020-01-28 22:52+CET\n"
+"POT-Creation-Date: 2020-01-30 16:33+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2377,7 +2377,7 @@ msgid "Enter the values per service that you want to use. Per service are all fi
 msgstr ""
 
 #: views/notifications.tpl:17
-msgid "Select per message the service so send the notification. You can have everyting per email, and important ones per pushover or telegram."
+msgid "Select per message the service to send the notification. You can have everyting per email, and important ones per pushover or telegram."
 msgstr ""
 
 #: views/notifications.tpl:18

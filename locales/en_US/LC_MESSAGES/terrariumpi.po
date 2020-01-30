@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
-"POT-Creation-Date: 2020-01-28 22:52+CET\n"
-"PO-Revision-Date: 2020-01-28 22:52+0100\n"
+"POT-Creation-Date: 2020-01-30 16:33+CET\n"
+"PO-Revision-Date: 2020-01-30 16:33+0100\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -2378,8 +2378,8 @@ msgid "Enter the values per service that you want to use. Per service are all fi
 msgstr "Enter the values per service that you want to use. Per service are all fields required, except mail port and mail authentication values."
 
 #: views/notifications.tpl:17
-msgid "Select per message the service so send the notification. You can have everyting per email, and important ones per pushover or telegram."
-msgstr "Select per message the service so send the notification. You can have everyting per email, and important ones per pushover or telegram."
+msgid "Select per message the service to send the notification. You can have everyting per email, and important ones per pushover or telegram."
+msgstr "Select per message the service to send the notification. You can have everyting per email, and important ones per pushover or telegram."
 
 #: views/notifications.tpl:18
 msgid "Use %rawdata% to get all the possible replacement values. Then create your own message with variables like %now% and %current%. This can be done in either the title and message."
