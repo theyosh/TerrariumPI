@@ -455,8 +455,8 @@ class terrariumK30CO2Sensor(terrariumSensorSource):
         device.write(b"\xFE\x44\x00\x08\x02\x9F\x25")
         sleep(.5)
         response = device.read(7)
-        high = ord(response[3])
-        low = ord(response[4])
+        high = response[3]
+        low = response[4]
         data = {'co2' : (high * 256) + low}
 
       except Exception as ex:
