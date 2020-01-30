@@ -155,8 +155,8 @@ class terrariumTranslations(object):
     self.translations['system_field_current_password'] = _('Enter the current password in order to change the password.')
     self.translations['system_field_always_authentication'] = _('Toggle on or off full authentication. When on, you need to authenticate at all times.')
     self.translations['system_field_external_calendar_url'] = _('Holds the external calendar url.')
-    self.translations['system_field_horizontal_graph_legend'] = _('Toggle on or off horizontal graph legends. Reload the webinterface after changing the setting.')
-    self.translations['system_field_hide_environment_on_dashboard'] = _('Toggle on or off the environment summary on the dashboard. Reload the webinterface after changing the setting.')
+    self.translations['system_field_horizontal_graph_legend'] = _('Toggle on or off horizontal graph legends. Reload the web interface after changing the setting.')
+    self.translations['system_field_hide_environment_on_dashboard'] = _('Toggle on or off the environment summary on the dashboard. Reload the web interface after changing the setting.')
     self.translations['system_field_soundcard'] = _('Holds the soundcard that is used for playing audio.')
     self.translations['system_field_pi_power'] = _('Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment.')
     self.translations['system_field_power_price'] = _('Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour).')
@@ -168,8 +168,8 @@ class terrariumTranslations(object):
     self.translations['system_field_port_number'] = _('Holds the port number on which the software is listening for connections.')
     self.translations['system_field_meross_username'] = _('Enter the e-mail address that is used for your Meross devices.')
     self.translations['system_field_meross_password'] = _('Enter the password that is used for your Meross devices. Password is stored in plain text!')
-    self.translations['system_field_graph_smooth_value'] = _('Holds the amount of datapoints (each 30 sec) to use for smoothing. The higher the value, the smoother the graph. Enter 0 to disable. Reload the webinterface after changing the setting.')
-    self.translations['system_field_all_sensors_gauges_page'] = _('Select true or false to show an extra sensor page which holds all the sensors with there gauges. Reload the webinterface after changing the setting.')
+    self.translations['system_field_graph_smooth_value'] = _('Holds the amount of data points (each 30 sec) to use for smoothing. The higher the value, the smoother the graph. Enter 0 to disable. Reload the web interface after changing the setting.')
+    self.translations['system_field_all_sensors_gauges_page'] = _('Select true or false to show an extra sensor page which holds all the sensors with there gauges. Reload the web interface after changing the setting.')
     self.translations['system_field_graph_show_min_max_gauge'] = _('Toggle on or off the min and max measured value in the gauge graphs.')
     # End system
 
