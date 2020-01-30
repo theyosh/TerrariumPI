@@ -452,7 +452,7 @@ class terrariumK30CO2Sensor(terrariumSensorSource):
         device.flushInput()
         sleep(1)
 
-        device.write("\xFE\x44\x00\x08\x02\x9F\x25")
+        device.write(b"\xFE\x44\x00\x08\x02\x9F\x25")
         sleep(.5)
         response = device.read(7)
         high = ord(response[3])
@@ -479,12 +479,12 @@ class terrariumCOZIRCO2Sensor(terrariumSensorSource):
     if self.get_address() is not None:
       try:
         device = serial.Serial(self.get_address(),baudrate = 9600,timeout = 1)
-        device.write("M 4\r\n") # set display mode to show only CO2
-        device.write("K 2\r\n") # set  operating mode
+        device.write(b"M 4\r\n") # set display mode to show only CO2
+        device.write(b"K 2\r\n") # set  operating mode
         device.flushInput()
         sleep(1)
 
-        device.write("Z\r\n")
+        device.write(b"Z\r\n")
         sleep(.5)
         response = device.read(10)
         response = response[:8]
