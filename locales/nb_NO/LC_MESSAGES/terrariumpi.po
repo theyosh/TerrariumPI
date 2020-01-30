@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.8.3\n"
 "POT-Creation-Date: 2020-01-30 17:20+CET\n"
-"PO-Revision-Date: 2020-01-30 17:13+0000\n"
+"PO-Revision-Date: 2020-01-30 17:30+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Norwegian Bokmål <https://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/nb_NO/>\n"
@@ -2182,7 +2182,7 @@ msgstr "Varigheten inneholder antall timer lysene lyser."
 #: views/inc/usage_dashboard.tpl:130 views/inc/usage_environment.tpl:110
 #: views/inc/usage_environment.tpl:401
 msgid "Sprayer"
-msgstr ""
+msgstr "Åkersprøyte"
 
 #: views/inc/usage_dashboard.tpl:137 views/inc/usage_environment.tpl:201
 #: views/inc/usage_environment.tpl:404
@@ -3107,7 +3107,7 @@ msgstr "SMTP passord"
 
 #: views/notifications.tpl:64
 msgid "Display"
-msgstr ""
+msgstr "Vis alternativer"
 
 #: views/notifications.tpl:101
 msgid "Twitter"
