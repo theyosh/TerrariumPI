@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-01-30 17:20+CET\n"
-"PO-Revision-Date: 2020-01-30 16:50+0000\n"
+"PO-Revision-Date: 2020-01-30 16:57+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Italian <http://weblate.theyosh.nl/projects/terrariumpi/"
 "webinterface/it/>\n"
@@ -1690,7 +1690,7 @@ msgstr ""
 
 #: views/hardware.tpl:48 views/info.tpl:34
 msgid "Raspbian OS"
-msgstr "Raspbian OS"
+msgstr "Sistema operativo Raspbian"
 
 #: views/hardware.tpl:49
 msgid ""
