@@ -71,7 +71,7 @@ class NotificationLogger(logging.StreamHandler):
     super(NotificationLogger,self).__init__(*args, **kwargs)
 
     terrariumpi_config = terrariumConfig()
-    self.notification = terrariumNotification(trafficlights,terrariumpi_config.get_profile_image())
+    self.notification = terrariumNotification(trafficlights,terrariumpi_config.get_profile_image(),terrariumpi_config.get_system()['version'])
 
   def emit(self,data):
     if data.name not in ['terrariumTranslations']:
