@@ -624,6 +624,7 @@ class terrariumNotification(terrariumSingleton):
   def send_webhook(self,subject,message,files = []):
     url = subject.decode()
     webhook = terrariumUtils.parse_url(url)
+
     if not webhook:
       return
 
@@ -643,7 +644,7 @@ class terrariumNotification(terrariumSingleton):
       headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
       r = requests.post(url, data=json.dumps(message), headers=headers)
       if r.status_code != 200:
-        print('Error sending webhook to url \'\' with status code: {}'.format(url,r.status_code))
+        print('Error sending webhook to url \'{}\' with status code: {}'.format(url,r.status_code))
 
     except Exception as ex:
       print('send_webhook exception:')
