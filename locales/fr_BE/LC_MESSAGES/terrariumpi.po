@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2020-01-30 17:07+CET\n"
+"POT-Creation-Date: 2020-01-30 17:20+CET\n"
 "PO-Revision-Date: 2020-01-26 22:05+0000\n"
 "Last-Translator: Weblate Admin <weblate@theyosh.nl>\n"
 "Language-Team: French (Belgium) <http://weblate.theyosh.nl/projects/"
@@ -760,14 +760,14 @@ msgstr "Indiquer le chemin (URL) vers le calendrier externe"
 
 #: terrariumTranslations.py:158
 msgid ""
-"Toggle on or off horizontal graph legends. Reload the webinterface after "
+"Toggle on or off horizontal graph legends. Reload the web interface after "
 "changing the setting."
 msgstr ""
 
 #: terrariumTranslations.py:159
 msgid ""
-"Toggle on or off the environment summary on the dashboard. Reload the "
-"webinterface after changing the setting."
+"Toggle on or off the environment summary on the dashboard. Reload the web "
+"interface after changing the setting."
 msgstr ""
 
 #: terrariumTranslations.py:160
@@ -848,15 +848,15 @@ msgstr ""
 
 #: terrariumTranslations.py:171
 msgid ""
-"Holds the amount of datapoints (each 30 sec) to use for smoothing. The "
-"higher the value, the smoother the graph. Enter 0 to disable. Reload the "
-"webinterface after changing the setting."
+"Holds the amount of data points (each 30 sec) to use for smoothing. The "
+"higher the value, the smoother the graph. Enter 0 to disable. Reload the web "
+"interface after changing the setting."
 msgstr ""
 
 #: terrariumTranslations.py:172
 msgid ""
 "Select true or false to show an extra sensor page which holds all the "
-"sensors with there gauges. Reload the webinterface after changing the "
+"sensors with there gauges. Reload the web interface after changing the "
 "setting."
 msgstr ""
 
@@ -3219,7 +3219,7 @@ msgstr ""
 #: views/notifications.tpl:17
 msgid ""
 "Select per message the service to send the notification. You can have "
-"everyting per email, and important ones per pushover or telegram."
+"everything per email, and important ones per pushover or telegram."
 msgstr ""
 
 #: views/notifications.tpl:18
