@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2020-01-30 17:20+CET\n"
-"PO-Revision-Date: 2020-01-30 16:50+0000\n"
+"PO-Revision-Date: 2020-01-30 17:13+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: French (Belgium) <http://weblate.theyosh.nl/projects/"
+"Language-Team: French (Belgium) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/fr_BE/>\n"
 "Language: fr_BE\n"
 "MIME-Version: 1.0\n"
@@ -2677,11 +2677,11 @@ msgstr "Mode de refroidissement"
 
 #: views/inc/usage_environment.tpl:332
 msgid "Cooler on"
-msgstr "Cooler on"
+msgstr ""
 
 #: views/inc/usage_environment.tpl:338
 msgid "Cooler off"
-msgstr "Cooler off"
+msgstr ""
 
 #: views/inc/usage_sensors.tpl:13
 msgid ""
@@ -3325,7 +3325,7 @@ msgstr "Genre"
 
 #: views/profile.tpl:77
 msgid "Age"
-msgstr "Age"
+msgstr "Âge"
 
 #: views/profile.tpl:88
 msgid "Species"
@@ -3509,7 +3509,7 @@ msgstr "Ajouter un nouveau commutateur"
 
 #: views/switch_settings.tpl:112
 msgid "GPIO Inverse"
-msgstr "GPIO Inverse"
+msgstr ""
 
 #: views/switch_settings.tpl:113
 msgid "PWM Dimmer"
@@ -3533,7 +3533,7 @@ msgstr ""
 
 #: views/switch_settings.tpl:118
 msgid "Remote Dimmer"
-msgstr "Remote Dimmer"
+msgstr ""
 
 #: views/switch_settings.tpl:119
 msgid "Energenie USB"
@@ -3728,7 +3728,7 @@ msgstr "On"
 #: views/system_environment.tpl:1462 views/system_environment.tpl:1538
 #: views/system_environment.tpl:1673 views/system_environment.tpl:1749
 msgid "Off"
-msgstr "Off"
+msgstr ""
 
 #: views/system_environment.tpl:244 views/system_environment.tpl:256
 #: views/system_environment.tpl:320 views/system_environment.tpl:332
@@ -4056,7 +4056,7 @@ msgstr "Ajouter une nouvelle webcam"
 
 #: views/webcam_settings.tpl:120
 msgid "Archive"
-msgstr "Archive"
+msgstr ""
 
 #: views/webcam_settings.tpl:125
 #, fuzzy
@@ -4154,7 +4154,7 @@ msgstr ""
 
 #: Missing text string
 msgid "1Wire bus"
-msgstr "1Wire bus"
+msgstr ""
 
 #: Missing text string
 msgid "1Wire DS18B20 wiring scheme"
@@ -4326,7 +4326,7 @@ msgstr "I2C bus"
 
 #: Missing text string
 msgid "I2C bus adapter"
-msgstr "I2C bus adapter"
+msgstr "Adaptateur de bus I2C"
 
 #: Missing text string
 msgid "ID"
