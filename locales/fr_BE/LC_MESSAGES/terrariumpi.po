@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2020-01-30 17:20+CET\n"
-"PO-Revision-Date: 2020-01-26 22:05+0000\n"
-"Last-Translator: Weblate Admin <weblate@theyosh.nl>\n"
+"PO-Revision-Date: 2020-01-30 16:50+0000\n"
+"Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: French (Belgium) <http://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/fr_BE/>\n"
 "Language: fr_BE\n"
@@ -28,8 +28,6 @@ msgid "Load"
 msgstr "Charge"
 
 #: terrariumEngine.py:642
-#, fuzzy
-#| msgid "CPU Temperature"
 msgid "CPU Temp."
 msgstr "Température du CPU"
 
@@ -73,12 +71,6 @@ msgstr ""
 "charge sont les suivants: %s."
 
 #: terrariumTranslations.py:34
-#, fuzzy
-#| msgid ""
-#| "Holds the sensor address. Depending on hardware type, it is either a read "
-#| "only hex number, a GPIO pin, a GPIO pin combination of %s or a full "
-#| "HTTP(S) adress. Full url specification can be found on the %s wiki page. "
-#| "For GPIO use <strong>physical</strong> GPIO pin numbering."
 msgid ""
 "Holds the sensor address. Depending on hardware type, it is either a read "
 "only hex number, a GPIO pin, a GPIO pin combination of %s or a full HTTP(S) "
@@ -799,10 +791,6 @@ msgstr ""
 "l'indicateur choisi."
 
 #: terrariumTranslations.py:165
-#, fuzzy
-#| msgid ""
-#| "Choose the wind speed indicator. The software will recalculate to the "
-#| "chosen indicator."
 msgid ""
 "Choose the windspeed indicator. The software will recalculate to the chosen "
 "indicator."
@@ -1548,50 +1536,36 @@ msgid "Average Humidity"
 msgstr "Humidité moyenne"
 
 #: views/dashboard.tpl:710
-#, fuzzy
-#| msgid "Average Temperature"
 msgid "Average Moisture"
-msgstr "Température moyenne"
+msgstr "Humidité moyenne"
 
 #: views/dashboard.tpl:765
-#, fuzzy
-#| msgid "Average Humidity"
 msgid "Average Conductivity"
-msgstr "Humidité moyenne"
+msgstr "Conductivité moyenne"
 
 #: views/dashboard.tpl:820
-#, fuzzy
-#| msgid "Distance"
 msgid "Average Distance"
-msgstr "Distance"
+msgstr "Distance moyenne"
 
 #: views/dashboard.tpl:875
-#, fuzzy
-#| msgid "Average Humidity"
 msgid "Average pH"
-msgstr "Humidité moyenne"
+msgstr "PH moyenne"
 
 #: views/dashboard.tpl:930
-#, fuzzy
-#| msgid "Average Humidity"
 msgid "Average Light"
-msgstr "Humidité moyenne"
+msgstr "Lumière moyenne"
 
 #: views/dashboard.tpl:985
-#, fuzzy
-#| msgid "Average Humidity"
 msgid "Average Fertility"
-msgstr "Humidité moyenne"
+msgstr "La fertilité moyenne"
 
 #: views/dashboard.tpl:1040
 msgid "Average CO2"
 msgstr ""
 
 #: views/dashboard.tpl:1095
-#, fuzzy
-#| msgid "Average Humidity"
 msgid "Average Volume"
-msgstr "Humidité moyenne"
+msgstr "Le volume moyenne"
 
 #: views/door_settings.tpl:16
 msgid "Here you can configure your doors."
@@ -1952,10 +1926,8 @@ msgid "System"
 msgstr "Système"
 
 #: views/inc/menu.tpl:137
-#, fuzzy
-#| msgid "Location"
 msgid "Notifications"
-msgstr "Emplacement"
+msgstr "Notifications"
 
 #: views/inc/menu.tpl:146
 msgid "Log"
@@ -2028,10 +2000,8 @@ msgstr "Pas de capteurs disponibles"
 #: views/inc/sensor_list.tpl:15 views/inc/sensor_list.tpl:16
 #: views/inc/sensor_list.tpl:17 views/inc/sensor_list.tpl:18
 #: views/inc/sensor_list.tpl:19 views/inc/sensor_list.tpl:20
-#, fuzzy
-#| msgid "Error!"
 msgid "error"
-msgstr "Erreur!"
+msgstr "erreur"
 
 #: views/inc/sensor_list.tpl:11 views/inc/sensor_list.tpl:12
 #: views/inc/sensor_list.tpl:13 views/inc/sensor_list.tpl:14
@@ -2052,10 +2022,8 @@ msgid "Humidity sensor"
 msgstr "Capteur d'humidité"
 
 #: views/inc/sensor_list.tpl:13 views/sensor_settings.tpl:79
-#, fuzzy
-#| msgid "Distance sensor"
 msgid "Moisture sensor"
-msgstr "Capteur de distance"
+msgstr "Capteur de humidité"
 
 #: views/inc/sensor_list.tpl:14 views/sensor_settings.tpl:80
 #, fuzzy
