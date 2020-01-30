@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2020-01-28 22:52+CET\n"
+"POT-Creation-Date: 2020-01-30 16:33+CET\n"
 "PO-Revision-Date: 2020-01-27 09:25+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Italian <http://weblate.theyosh.nl/projects/terrariumpi/"
@@ -3178,7 +3178,7 @@ msgstr ""
 
 #: views/notifications.tpl:17
 msgid ""
-"Select per message the service so send the notification. You can have "
+"Select per message the service to send the notification. You can have "
 "everyting per email, and important ones per pushover or telegram."
 msgstr ""
 

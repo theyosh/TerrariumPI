@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
-"POT-Creation-Date: 2020-01-28 22:52+CET\n"
+"POT-Creation-Date: 2020-01-30 16:33+CET\n"
 "PO-Revision-Date: 2020-01-28 21:56+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <http://weblate.theyosh.nl/projects/"
@@ -3073,8 +3073,12 @@ msgstr ""
 "campos obrigatórios, exceto os valores de porta e autenticação de email."
 
 #: views/notifications.tpl:17
+#, fuzzy
+#| msgid ""
+#| "Select per message the service so send the notification. You can have "
+#| "everyting per email, and important ones per pushover or telegram."
 msgid ""
-"Select per message the service so send the notification. You can have "
+"Select per message the service to send the notification. You can have "
 "everyting per email, and important ones per pushover or telegram."
 msgstr ""
 "Selecione por mensagem o serviço para enviar a notificação. Você pode ter "
