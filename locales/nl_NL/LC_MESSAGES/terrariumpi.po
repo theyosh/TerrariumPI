@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2020-01-30 17:07+CET\n"
-"PO-Revision-Date: 2020-01-30 16:09+0000\n"
+"PO-Revision-Date: 2020-01-30 16:21+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <http://weblate.theyosh.nl/projects/terrariumpi/"
 "webinterface/nl/>\n"
@@ -69,12 +69,6 @@ msgid "Holds the sensor hardware type. Supported hardware types are: %s."
 msgstr "Bevat de sensor hardware type. Ondersteunde hardware types zijn: %s."
 
 #: terrariumTranslations.py:34
-#, fuzzy
-#| msgid ""
-#| "Holds the sensor address. Depending on hardware type, it is either a read "
-#| "only hex number, a GPIO pin, a GPIO pin combination of %s or a full "
-#| "HTTP(S) adress. Full url specification can be found on the %s wiki page. "
-#| "For GPIO use <strong>physical</strong> GPIO pin numbering."
 msgid ""
 "Holds the sensor address. Depending on hardware type, it is either a read "
 "only hex number, a GPIO pin, a GPIO pin combination of %s or a full HTTP(S) "
@@ -335,6 +329,10 @@ msgid ""
 "last archived frame. Setting to last frame will ignore motion when it is "
 "very gradual."
 msgstr ""
+"Laatste frame betekent dat alleen opeenvolgende frames worden vergeleken "
+"voor beweging. Laatste gearchiveerde frame betekent dat het huidige frame "
+"wordt vergeleken met het laatste gearchiveerde frame. Als u het laatste "
+"frame instelt, wordt de beweging genegeerd wanneer deze zeer geleidelijk is."
 
 #: terrariumTranslations.py:91
 msgid "Holds the audio playlist name."
@@ -375,6 +373,11 @@ msgid ""
 "amount of lighting variable to the actual amount of daylight. When selecting "
 "'%s', the light will put on and off at selected times."
 msgstr ""
+"Selecteer de modus waarin dit omgevingsgedeelte wordt in- en uitgeschakeld. "
+"Selecteer '%s' om de zonsopkomst en zonsondergang op uw locatie te "
+"gebruiken. Dit maakt de hoeveelheid verlichting variabel naar de werkelijke "
+"hoeveelheid daglicht. Wanneer u '%s' selecteert, gaat het licht op "
+"geselecteerde tijden aan en uit."
 
 #: terrariumTranslations.py:101 terrariumTranslations.py:105
 #: terrariumTranslations.py:106 views/dashboard.tpl:83 views/dashboard.tpl:118
@@ -482,6 +485,9 @@ msgid ""
 "is more then this maximum, the on and off time will be shifted more to each "
 "other."
 msgstr ""
+"Voer de maximale hoeveelheid tijd in uren in. Wanneer de tijd tussen aan en "
+"uit meer is dan dit maximum, worden de aan en uit- tijd meer naar elkaar "
+"verschoven."
 
 #: terrariumTranslations.py:112
 msgid ""
@@ -489,6 +495,9 @@ msgid ""
 "is less then this amount of hours, the on and off time will be widened until "
 "the minimum amount of hours entered here."
 msgstr ""
+"Voer de minimale hoeveelheid tijd in uren in. Als de tijd tussen aan en uit "
+"korter is dan dit aantal uren, worden de aan en uit- tijd verbreed tot het "
+"minimum aantal uren dat hier is ingevoerd."
 
 #: terrariumTranslations.py:113
 msgid ""
@@ -497,6 +506,10 @@ msgid ""
 "adding hours to the start time. Use negative numbers for subtracting from "
 "the start time."
 msgstr ""
+"Voer het aantal uren in dat de in- en uitschakel tijden moeten verschuiven. "
+"Is alleen nodig bij gebruik in de modus '% s'. Voer een positief getal in "
+"voor het toevoegen van uren aan de starttijd. Gebruik negatieve getallen om "
+"af te trekken van de starttijd."
 
 #: terrariumTranslations.py:114
 msgid ""
@@ -571,6 +584,8 @@ msgid ""
 "Holds the I2C address of the LCD screen. Use the value found with i2cdetect. "
 "Add ,[NR] to change the I2C bus."
 msgstr ""
+"Bevat het I2C-adres van het Lcd-scherm. Gebruik de waarde gevonden met "
+"i2cdetect. Voeg ,[NR] toe om de I2C-bus te wijzigen."
 
 #: terrariumTranslations.py:131
 msgid "Reserve first LCD line for static title."
@@ -756,6 +771,10 @@ msgid ""
 "higher the value, the smoother the graph. Enter 0 to disable. Reload the "
 "webinterface after changing the setting."
 msgstr ""
+"Bevat de hoeveelheid datapunten (elke 30 sec) die moet worden gebruikt voor "
+"het vloeiend maken. Hoe hoger de waarde, hoe vloeiender de grafiek. Voer 0 "
+"in om uit te schakelen. Laad de web interface opnieuw nadat u de instelling "
+"hebt gewijzigd."
 
 #: terrariumTranslations.py:172
 msgid ""
@@ -3065,12 +3084,16 @@ msgid ""
 "Enter the values per service that you want to use. Per service are all "
 "fields required, except mail port and mail authentication values."
 msgstr ""
+"Voer de waarden in per service die u wilt gebruiken. Per service zijn alle "
+"velden vereist, behalve e-mailpoort en e-mailverificatiewaarden."
 
 #: views/notifications.tpl:17
 msgid ""
 "Select per message the service to send the notification. You can have "
 "everyting per email, and important ones per pushover or telegram."
 msgstr ""
+"Selecteer per bericht de service om de melding te verzenden. Je kunt alles "
+"hebben per e-mail en belangrijke per Pushover of Telegram."
 
 #: views/notifications.tpl:18
 msgid ""
