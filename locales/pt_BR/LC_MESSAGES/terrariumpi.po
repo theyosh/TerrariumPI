@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
-"POT-Creation-Date: 2020-01-28 22:52+CET\n"
-"PO-Revision-Date: 2020-01-28 21:56+0000\n"
-"Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
+"POT-Creation-Date: 2020-01-30 16:33+CET\n"
+"PO-Revision-Date: 2020-01-30 15:49+0000\n"
+"Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Portuguese (Brazil) <http://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -29,7 +29,7 @@ msgstr "CPU Temp."
 
 #: terrariumEngine.py:706
 msgid "Version"
-msgstr ""
+msgstr "Versão"
 
 #: terrariumEngine.py:732 views/system_status.tpl:174
 msgid "Disk usage"
@@ -136,9 +136,6 @@ msgid "Holds the temperature offset value."
 msgstr "Contém o valor de compensação de temperatura."
 
 #: terrariumTranslations.py:45
-#, fuzzy
-#| msgid ""
-#| "Holds the maximum numbber that a sensor may change in value up or down."
 msgid "Holds the maximum number that a sensor may change in value up or down."
 msgstr ""
 "Contém o número máximo que um sensor pode mudar de valor para cima ou para "
@@ -790,7 +787,8 @@ msgstr ""
 
 #: terrariumTranslations.py:173
 msgid "Toggle on or off the min and max measured value in the gauge graphs."
-msgstr "Toggle on or off the min and max measured value in the gauge graphs."
+msgstr ""
+"Ative ou desative o valor mínimo e máximo medidos nos gráficos do medidor."
 
 #: terrariumTranslations.py:177
 msgid "Holds the name of the animal."
@@ -3074,7 +3072,7 @@ msgstr ""
 
 #: views/notifications.tpl:17
 msgid ""
-"Select per message the service so send the notification. You can have "
+"Select per message the service to send the notification. You can have "
 "everyting per email, and important ones per pushover or telegram."
 msgstr ""
 "Selecione por mensagem o serviço para enviar a notificação. Você pode ter "
@@ -3296,11 +3294,11 @@ msgstr "mh-z19"
 
 #: views/sensor_settings.tpl:125
 msgid "K30 CO2"
-msgstr ""
+msgstr "K30 CO2"
 
 #: views/sensor_settings.tpl:126
 msgid "COZIR CO2"
-msgstr ""
+msgstr "COZIR CO2"
 
 #: views/sensor_settings.tpl:127
 msgid "MLX90614"
@@ -3400,7 +3398,7 @@ msgstr "Bright Pi"
 
 #: views/switch_settings.tpl:116
 msgid "PCA9685"
-msgstr ""
+msgstr "PCA9685"
 
 #: views/switch_settings.tpl:118
 msgid "Remote Dimmer"
@@ -3432,15 +3430,15 @@ msgstr "Sonoff"
 
 #: views/switch_settings.tpl:125
 msgid "DenkoviV2 4 relays"
-msgstr "DenkoviV2 4 relays"
+msgstr "DenkoviV2 4 relés"
 
 #: views/switch_settings.tpl:126
 msgid "DenkoviV2 8 relays"
-msgstr "DenkoviV2 8 relays"
+msgstr "DenkoviV2 8 relés"
 
 #: views/switch_settings.tpl:127
 msgid "DenkoviV2 16 relays"
-msgstr "DenkoviV2 16 relays"
+msgstr "DenkoviV2 16 relés"
 
 #: views/switch_settings.tpl:166
 msgid "Dimmer environment step"
@@ -3787,7 +3785,7 @@ msgstr "Valor de suavização do gráfico"
 
 #: views/system_settings.tpl:189
 msgid "Show min and max values in gauge graphs"
-msgstr "Show min and max values in gauge graphs"
+msgstr "Mostrar valores mínimo e máximo em gráficos de medidor"
 
 #: views/system_settings.tpl:193 views/system_settings.tpl:204
 #: views/system_settings.tpl:215
@@ -4033,7 +4031,7 @@ msgstr "Conexão restaurada"
 
 #: Missing text string
 msgid "Cooler"
-msgstr "Cooler"
+msgstr "Refrigerador"
 
 #: Missing text string
 msgid "Current value"
