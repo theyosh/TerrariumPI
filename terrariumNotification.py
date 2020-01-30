@@ -256,8 +256,9 @@ class terrariumNotification(terrariumSingleton):
     'webcam_motion' : terrariumNotificationMessage('webcam_motion','Movement at webcam %name%','%raw_data%'),
   }
 
-  def __init__(self,trafficlights = [], profile_image = None):
+  def __init__(self,trafficlights = [], profile_image = None, version = None):
     self.__profile_image = None
+    self.__version = version
     self.__ratelimit_messages = {}
     self.__notification_leds = {'info'      : {'pin' : None, 'state' : False, 'lastaction' : 0},
                                 'warning'   : {'pin' : None, 'state' : False, 'lastaction' : 0},
@@ -489,10 +490,11 @@ class terrariumNotification(terrariumSingleton):
       mail_tls_ssl = ['tls','ssl',None]
       while not len(mail_tls_ssl) == 0:
         email_message = emails.Message(
-                        html=htmlbody.format(subject,os.path.basename(self.__profile_image),message.decode().replace('\n','<br />')),
-                        text=message,
-                        subject=subject,
-                        mail_from=('TerrariumPI', receiver))
+                        headers   = {'X-Mailer' : 'TerrariumPI version {}'.format(self.__version)},
+                        html      = htmlbody.format(subject,os.path.basename(self.__profile_image),message.decode().replace('\n','<br />')),
+                        text      = message,
+                        subject   = subject,
+                        mail_from = ('TerrariumPI', receiver))
         with open(self.__profile_image,'rb') as fp:
           profile_image = fp.read()
           email_message.attach(filename=os.path.basename(self.__profile_image), content_disposition="inline", data=profile_image)
