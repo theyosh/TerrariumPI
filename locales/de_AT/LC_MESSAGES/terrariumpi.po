@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-01-30 17:20+CET\n"
-"PO-Revision-Date: 2020-01-27 09:25+0000\n"
+"PO-Revision-Date: 2020-01-30 16:50+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: German (Austria) <http://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/de_AT/>\n"
@@ -310,6 +310,8 @@ msgid ""
 "Minimum difference between frames to be identified as motion. Higher value "
 "means that the image must be more different for motion to be detected."
 msgstr ""
+"Minimaler Unterschied zwischen zwei Frames, um als Bewegung erkannt zu "
+"werden. Ein höherer Wert bedeutet, dass die Unterschiede größer sein müssen."
 
 #: terrariumTranslations.py:86
 msgid ""
@@ -324,6 +326,10 @@ msgid ""
 "last archived frame. Setting to last frame will ignore motion when it is "
 "very gradual."
 msgstr ""
+"Letzter Frame bedeutet, dass immer nur aufeinander folgende Frames "
+"verglichen werden. Letzter archivierter Frame bedeutet, dass jeder Frame mit "
+"diesem verglichen wird. Wenn letzter Frame eingestellt ist, werden sehr "
+"geringe Veränderungen nicht als Bewegung erkannt."
 
 #: terrariumTranslations.py:91
 msgid "Holds the audio playlist name."
@@ -421,8 +427,6 @@ msgstr ""
 "um die Werte zu verringern."
 
 #: terrariumTranslations.py:104
-#, fuzzy
-#| msgid "Holds the soure that is used to determing when it is day or night."
 msgid "Holds the source that is used to determing when it is day or night."
 msgstr ""
 "Hält die Quelle, die verwendet wird, um zu bestimmen, wann es Tag oder Nacht "
@@ -646,6 +650,8 @@ msgid ""
 "Holds the url to post notification data to. You can use %name% variables in "
 "the post url"
 msgstr ""
+"Hält die Ziel-URL für Benachrichtigungen. Es können %name% Variablen "
+"verwendet werden"
 
 #: terrariumTranslations.py:150
 msgid "Choose your interface language."
@@ -774,13 +780,15 @@ msgstr "Portnummer, auf der die Software auf Verbindungen reagiert."
 
 #: terrariumTranslations.py:169
 msgid "Enter the e-mail address that is used for your Meross devices."
-msgstr ""
+msgstr "Eingabe der Ziel-Email-Adresse für die Meross-Geräte."
 
 #: terrariumTranslations.py:170
 msgid ""
 "Enter the password that is used for your Meross devices. Password is stored "
 "in plain text!"
 msgstr ""
+"Das Passwort für die Meross-Geräte. Das Passwort wird im Klartext "
+"gespeichert!"
 
 #: terrariumTranslations.py:171
 #, fuzzy
@@ -1865,7 +1873,7 @@ msgstr "Licht"
 
 #: views/inc/menu.tpl:107
 msgid "Show"
-msgstr "Show"
+msgstr "Anzeigen"
 
 #: views/inc/menu.tpl:123
 msgid "Playlist"
@@ -2713,12 +2721,12 @@ msgstr "Alarm max"
 #: views/inc/usage_sensors.tpl:149 views/inc/usage_sensors.tpl:183
 #: views/sensor_settings.tpl:37 views/sensor_settings.tpl:172
 msgid "Limit min"
-msgstr "Limit min"
+msgstr "Grenzwert Min"
 
 #: views/inc/usage_sensors.tpl:153 views/inc/usage_sensors.tpl:186
 #: views/sensor_settings.tpl:40 views/sensor_settings.tpl:176
 msgid "Limit max"
-msgstr "Limit max"
+msgstr "Grenzwert Max"
 
 #: views/inc/usage_switches.tpl:14
 msgid "Per switch the title holds shows some values and options."
@@ -3173,7 +3181,7 @@ msgstr "SMTP-Passwort"
 
 #: views/notifications.tpl:64
 msgid "Display"
-msgstr "Display"
+msgstr "Anzeige"
 
 #: views/notifications.tpl:101
 msgid "Twitter"
@@ -4328,7 +4336,7 @@ msgstr ""
 
 #: Missing text string
 msgid "Shutdown"
-msgstr ""
+msgstr "Herunterfahren"
 
 #: Missing text string
 msgid "Switches overview screenshot"
