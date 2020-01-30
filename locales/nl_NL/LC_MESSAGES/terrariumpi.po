@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2020-01-30 17:20+CET\n"
-"PO-Revision-Date: 2020-01-30 16:21+0000\n"
+"PO-Revision-Date: 2020-01-30 16:50+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <http://weblate.theyosh.nl/projects/terrariumpi/"
 "webinterface/nl/>\n"
@@ -681,27 +681,19 @@ msgid "Holds the external calendar url."
 msgstr "Bevat de externe kalender url."
 
 #: terrariumTranslations.py:158
-#, fuzzy
-#| msgid ""
-#| "Toggle on or off horizontal graph legends. Reload the webinterface after "
-#| "changing the setting."
 msgid ""
 "Toggle on or off horizontal graph legends. Reload the web interface after "
 "changing the setting."
 msgstr ""
-"Schakel horizontale legendes in of uit. Herlaad de webinterface na het "
+"Schakel horizontale legendes in of uit. Herlaad de web interface na het "
 "wijzigen van de instelling."
 
 #: terrariumTranslations.py:159
-#, fuzzy
-#| msgid ""
-#| "Toggle on or off the environment summary on the dashboard. Reload the "
-#| "webinterface after changing the setting."
 msgid ""
 "Toggle on or off the environment summary on the dashboard. Reload the web "
 "interface after changing the setting."
 msgstr ""
-"Schakel het omgevingsoverzicht op het dashboard in of uit. Herlaad de web-"
+"Schakel het omgevingsoverzicht op het dashboard in of uit. Herlaad de web "
 "interface na het wijzigen van de instelling."
 
 #: terrariumTranslations.py:160
@@ -774,11 +766,6 @@ msgstr ""
 "wachtwoord wordt in platte tekst opgeslagen!"
 
 #: terrariumTranslations.py:171
-#, fuzzy
-#| msgid ""
-#| "Holds the amount of datapoints (each 30 sec) to use for smoothing. The "
-#| "higher the value, the smoother the graph. Enter 0 to disable. Reload the "
-#| "webinterface after changing the setting."
 msgid ""
 "Holds the amount of data points (each 30 sec) to use for smoothing. The "
 "higher the value, the smoother the graph. Enter 0 to disable. Reload the web "
@@ -790,18 +777,13 @@ msgstr ""
 "hebt gewijzigd."
 
 #: terrariumTranslations.py:172
-#, fuzzy
-#| msgid ""
-#| "Select true or false to show an extra sensor page which holds all the "
-#| "sensors with there gauges. Reload the webinterface after changing the "
-#| "setting."
 msgid ""
 "Select true or false to show an extra sensor page which holds all the "
 "sensors with there gauges. Reload the web interface after changing the "
 "setting."
 msgstr ""
 "Selecteer waar of onwaar om een extra sensorpagina weer te geven die alle "
-"sensoren met hun meters bevat. Herlaad de web-interface na het wijzigen van "
+"sensoren met hun meters bevat. Herlaad de web interface na het wijzigen van "
 "de instelling."
 
 #: terrariumTranslations.py:173
@@ -3106,10 +3088,6 @@ msgstr ""
 "velden vereist, behalve e-mailpoort en e-mailverificatiewaarden."
 
 #: views/notifications.tpl:17
-#, fuzzy
-#| msgid ""
-#| "Select per message the service to send the notification. You can have "
-#| "everyting per email, and important ones per pushover or telegram."
 msgid ""
 "Select per message the service to send the notification. You can have "
 "everything per email, and important ones per pushover or telegram."
