@@ -110,6 +110,9 @@ if [ -f /boot/config.txt ]; then
     echo "enable_uart=1" >> /boot/config.txt
   fi
 
+  sed -i "/boot/cmdline.txt" -e "s@console=ttyAMA0,[0-9]\+ @@"
+  sed -i "/boot/cmdline.txt" -e "s@console=serial0,[0-9]\+ @@"
+
 fi
 
 # Create needed groups
