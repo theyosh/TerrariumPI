@@ -277,12 +277,11 @@ class terrariumUtils():
 
   @staticmethod
   def parse_url(url):
-    url = url.strip()
-    if '' == url:
+    if url is None or '' == url.strip():
       return False
 
     regex = r"^((?P<scheme>https?|ftp):\/)?\/?((?P<username>.*?)(:(?P<password>.*?)|)@)?(?P<hostname>[^:\/\s]+)(:(?P<port>(\d*))?)?(?P<path>(\/\w+)*\/)(?P<filename>[-\w.]+[^#?\s]*)?(?P<query>\?([^#]*))?(#(?P<fragment>(.*))?)?$"
-    matches = re.search(regex, url)
+    matches = re.search(regex, url.strip())
     if matches:
       return matches.groupdict()
 
