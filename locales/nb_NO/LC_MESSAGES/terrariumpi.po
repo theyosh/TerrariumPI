@@ -6,16 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.8.3\n"
 "POT-Creation-Date: 2020-01-30 17:20+CET\n"
-"PO-Revision-Date: 2018-08-17 17:32+0200\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2020-01-30 17:13+0000\n"
+"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"Language-Team: Norwegian Bokmål <https://weblate.theyosh.nl/projects/"
+"terrariumpi/webinterface/nb_NO/>\n"
 "Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.10.3\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: Poedit 2.1.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: terrariumEngine.py:640 terrariumEngine.py:728 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
@@ -2181,7 +2182,7 @@ msgstr "Varigheten inneholder antall timer lysene lyser."
 #: views/inc/usage_dashboard.tpl:130 views/inc/usage_environment.tpl:110
 #: views/inc/usage_environment.tpl:401
 msgid "Sprayer"
-msgstr "Sprayer"
+msgstr ""
 
 #: views/inc/usage_dashboard.tpl:137 views/inc/usage_environment.tpl:201
 #: views/inc/usage_environment.tpl:404
@@ -3106,7 +3107,7 @@ msgstr "SMTP passord"
 
 #: views/notifications.tpl:64
 msgid "Display"
-msgstr "Display"
+msgstr ""
 
 #: views/notifications.tpl:101
 msgid "Twitter"
@@ -4318,7 +4319,7 @@ msgstr "USB Relay kort"
 
 #: Missing text string
 msgid "USB Webcam"
-msgstr "USB Webcam"
+msgstr "USB-webkamera"
 
 #: Missing text string
 msgid "Used memory"
