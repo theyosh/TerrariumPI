@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-01-30 17:20+CET\n"
-"PO-Revision-Date: 2020-01-27 09:25+0000\n"
+"PO-Revision-Date: 2020-01-30 16:50+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Italian <http://weblate.theyosh.nl/projects/terrariumpi/"
 "webinterface/it/>\n"
@@ -1498,7 +1498,7 @@ msgstr "Temperatura media"
 #: views/system_status.tpl:6 views/system_status.tpl:62
 #: views/system_status.tpl:118 views/system_status.tpl:174
 msgid "warning"
-msgstr "warning"
+msgstr "attenzione"
 
 #: views/dashboard.tpl:612 views/dashboard.tpl:667 views/dashboard.tpl:722
 #: views/dashboard.tpl:777 views/dashboard.tpl:832 views/dashboard.tpl:887
@@ -3393,7 +3393,7 @@ msgstr ""
 
 #: views/sensor_settings.tpl:116
 msgid "YTXX-digital"
-msgstr "YTXX-digital"
+msgstr "YTXX-digitale"
 
 #: views/sensor_settings.tpl:118 views/switch_settings.tpl:128
 msgid "Custom script"
