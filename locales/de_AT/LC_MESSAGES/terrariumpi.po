@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-01-30 17:20+CET\n"
-"PO-Revision-Date: 2020-01-31 14:21+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2020-02-02 22:15+0000\n"
+"Last-Translator: kahuwi14 <karsten@wingen.net>\n"
 "Language-Team: German (Austria) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/de_AT/>\n"
 "Language: de_AT\n"
@@ -25,7 +25,7 @@ msgstr "Betriebszeit"
 
 #: terrariumEngine.py:641
 msgid "Load"
-msgstr "Lade"
+msgstr "Last"
 
 #: terrariumEngine.py:642
 msgid "CPU Temp."
@@ -60,8 +60,8 @@ msgid ""
 "Choose the wind speed indicator. The software will recalculate to the chosen "
 "indicator."
 msgstr ""
-"Wählen Sie die Windgeschwindigkeitsanzeige. Die Software wird mit dem "
-"gewählten Indikator neu berechnet."
+"Wählen Sie die Einheit für die Windgeschwindigkeit. Die Software wird die "
+"Messwerte in die gewählte Einheit umrechnen."
 
 #: terrariumTranslations.py:33
 msgid "Holds the sensor hardware type. Supported hardware types are: %s."
@@ -74,9 +74,9 @@ msgid ""
 "address. Full url specification can be found on the %s wiki page. For GPIO "
 "use <strong>physical</strong> GPIO pin numbering."
 msgstr ""
-"Haltet die Sensoradresse. Je nach Hardwaretyp handelt es sich entweder um "
-"eine schreibgeschützte Hex-Nummer, einen GPIO-Pin, eine GPIO-Pin-Kombination "
-"von %s oder eine vollständige HTTP(S) -Adresse. Die vollständige URL-"
+"Hält die Sensoradresse. Je nach Hardwaretyp handelt es sich entweder um eine "
+"schreibgeschützte Hex-Nummer, einen GPIO-Pin, eine GPIO-Pin-Kombination von %"
+"s oder eine vollständige HTTP(S) -Adresse. Die vollständige URL-"
 "Spezifikation finden Sie auf der Wiki-Seite %s. Verwenden Sie für GPIO die "
 "<strong>physische</strong> GPIO-Pin-Nummerierung."
 
@@ -90,7 +90,7 @@ msgstr "Sensortyp. Unterstützte Sensortypen sind: %s."
 
 #: terrariumTranslations.py:36
 msgid "Holds the name of the sensor."
-msgstr "Namen des Sensors."
+msgstr "Name des Sensors."
 
 #: terrariumTranslations.py:37
 msgid ""
@@ -114,13 +114,13 @@ msgstr "Niedrigster Wert des Sensors, der in der Grafik verwendet werden soll."
 
 #: terrariumTranslations.py:40
 msgid "Holds the sensor maximum value that should be used in the graphs."
-msgstr "Maximaler Wert des Sensors, der in der Grafik verwendet werden soll."
+msgstr "Höchster Wert des Sensors, der in der Grafik verwendet werden soll."
 
 #: terrariumTranslations.py:41
 msgid "Shows the sensor current value in temperature or humidity (read only)."
 msgstr ""
-"Zeigt den aktuellen Wert des Sensors in Temperatur oder Luftfeuchtigkeit an "
-"(nur lesbar)."
+"Zeigt den aktuellen Temperatur- oder Luftfeuchtigkeitswert des Sensors an ("
+"nur lesbar)."
 
 #: terrariumTranslations.py:42
 msgid "Holds the sensor lowest moisture value measured in dry air. %s"
@@ -191,16 +191,16 @@ msgid ""
 "Holds the period in minutes that the power switch is on withing the total "
 "timer window."
 msgstr ""
-"Hält den Zeitraum in Minuten, in dem der Hauptschalter eingeschaltet ist, "
-"mit dem gesamten Zeitfenster."
+"Hält den Zeitraum in Minuten, den der Schalter innerhalb des gesamten "
+"Zeitraums durchgehend eingeschaltet ist."
 
 #: terrariumTranslations.py:58
 msgid ""
 "Holds the period in minutes that the power switch is off withing the total "
 "timer window."
 msgstr ""
-"Hält den Zeitraum in Minuten, in dem der Hauptschalter ausgeschaltet ist, "
-"mit dem gesamten Zeitfenster."
+"Hält den Zeitraum in Minuten, den der Schalter innerhalb des gesamten "
+"Zeitraums durchgehend ausgeschaltet ist."
 
 #: terrariumTranslations.py:59
 msgid ""
@@ -215,7 +215,8 @@ msgid ""
 "Holds the amount in percentage to change the dimmer by the heater "
 "environment."
 msgstr ""
-"Hält den Betrag in Prozent, um den Dimmer in der Heizungsumgebung zu ändern."
+"Hält den Betrag in Prozent, um den sich der Dimmer in der Heizungsumgebung "
+"ändert."
 
 #: terrariumTranslations.py:61
 msgid ""
@@ -277,7 +278,7 @@ msgstr "Rotation des Bildes."
 
 #: terrariumTranslations.py:80
 msgid "Shows the webcam preview image."
-msgstr "Zeigt das Webcam Vorschau bild."
+msgstr "Zeigt das Webcam Vorschaubild."
 
 #: terrariumTranslations.py:81
 msgid "Enabled or disable image archiving based on motion detection."
@@ -355,8 +356,7 @@ msgstr ""
 
 #: terrariumTranslations.py:96
 msgid "Toggle on to enable shuffeling of the audio files."
-msgstr ""
-"Aktivieren Sie diese Option, um das Wechseln der Audiodateien zu aktivieren."
+msgstr "Aktivieren Sie diese Option, um die gemischte Wiedergabe zu aktivieren."
 
 #: terrariumTranslations.py:97
 msgid ""
@@ -445,24 +445,24 @@ msgid ""
 "Enter the time when this environment part should be put off. Only available "
 "when running in '%s' mode."
 msgstr ""
-"Geben Sie den Zeitpunkt ein, zu dem dieser Umgebungsteil verschoben werden "
-"soll. Nur verfügbar, wenn der Modus '%s' ausgeführt wird."
+"Geben Sie den Zeitpunkt ein, zu dem dieser Umgebungsteil ausgeschaltet "
+"werden soll. Nur verfügbar, wenn der Modus '%s' ausgeführt wird."
 
 #: terrariumTranslations.py:107
 msgid ""
 "Holds the period in minutes that this environment part is powered on withing "
 "the total timer window."
 msgstr ""
-"Hält den Zeitraum in Minuten, in dem dieser Umgebungsteil eingeschaltet ist, "
-"mit dem gesamten Zeitfenster."
+"Hält den Zeitraum in Minuten, den dieser Umgebungsteil innerhalb des "
+"gesamten Zeitraums durchgehend eingeschaltet ist."
 
 #: terrariumTranslations.py:108
 msgid ""
 "Holds the period in minutes that this environment part is powered off "
 "withing the total timer window."
 msgstr ""
-"Hält den Zeitraum in Minuten, in dem dieser Umgebungsteil abgeschaltet ist, "
-"mit dem gesamten Zeitfenster."
+"Hält den Zeitraum in Minuten, den dieser Umgebungsteil innerhalb des "
+"gesamten Zeitraums durchgehend ausgeschaltet ist."
 
 #: terrariumTranslations.py:109
 msgid ""
@@ -519,9 +519,8 @@ msgid ""
 "Select the power switches that should be used when the alarms or timers are "
 "hit. Select all needed switches below."
 msgstr ""
-"Wählen Sie die Leistungsschalter, die verwendet werden sollen, wenn die "
-"Alarme oder Timer ausgelöst werden. Wählen Sie alle erforderlichen Schalter "
-"unten aus."
+"Wählen Sie die Schalter, die verwendet werden sollen, wenn die Alarme oder "
+"Timer ausgelöst werden. Wählen Sie alle erforderlichen Schalter unten aus."
 
 #: terrariumTranslations.py:115
 msgid "Holds the water volume in liters."
@@ -536,7 +535,7 @@ msgid ""
 "Holds the distance between top of the liquid when full and the sensor in cm "
 "or inches."
 msgstr ""
-"Hält den Abstand zwischen der Oberkante der Flüssigkeit und dem Sensor in cm "
+"Hält den Abstand zwischen der Flüssigkeitsoberfläche und dem Sensor in cm "
 "oder Zoll."
 
 #: terrariumTranslations.py:118
@@ -544,20 +543,20 @@ msgid ""
 "Select when the power switches can toggle. When lights are on, off or just "
 "always"
 msgstr ""
-"Wählen Sie, wann die Netzschalter umschalten können. Wenn Lichter an sind, "
-"aus oder nur immer"
+"Wählen Sie, wann die Netzschalter umschalten können. Wenn Lichter "
+"eingeschaltet sind, ausgeschaltet sind oder immer"
 
 #: terrariumTranslations.py:119
 msgid ""
 "Select when the power switches can toggle. When the door is open, cosed or "
 "just always"
 msgstr ""
-"Wählen Sie, wann die Netzschalter umschalten können. Wenn die Tür offen ist, "
-"cosed oder einfach immer"
+"Wählen Sie, wann die Netzschalter umschalten können. Wenn die Tür geöffnet "
+"ist, geschlossen ist, oder immer"
 
 #: terrariumTranslations.py:123
 msgid "Holds the email address on which you would like to receive messages."
-msgstr "Enthält die E-Mail-Adresse, an die Sie Nachrichten erhalten möchten."
+msgstr "Enthält die E-Mail-Adresse, an der Sie Nachrichten erhalten möchten."
 
 #: terrariumTranslations.py:124
 msgid "Holds the mail server hostname or IP."
@@ -602,7 +601,7 @@ msgstr "Hält Ihren Twitter-Consumer-Schlüssel. Weitere Informationen %shree%s"
 
 #: terrariumTranslations.py:134
 msgid "Holds your Twitter consumer secret. More information %shere%s"
-msgstr "Hält Ihren Twitter-Konsumenten geheim. Weitere Informationen %shree%s"
+msgstr "Hält Ihr Twitter consumer secret. Weitere Informationen %shree%s"
 
 #: terrariumTranslations.py:135
 msgid "Holds your Twitter access token. More information %shere%s"
@@ -736,16 +735,16 @@ msgid ""
 "Choose the windspeed indicator. The software will recalculate to the chosen "
 "indicator."
 msgstr ""
-"Wählen Sie die Windgeschwindigkeitsanzeige. Die Software berechnet den "
-"ausgewählten Indikator neu."
+"Wählen Sie die Einheit für die Windgeschwindigkeit. Die Software berechnet "
+"die Werte anhand der gewählten Einheit."
 
 #: terrariumTranslations.py:166
 msgid ""
 "Choose the volume (liquid) indicator. The software will recalculate to the "
 "chosen indicator."
 msgstr ""
-"Wählen Sie den Volumenindikator (Flüssigkeit). Die Software berechnet den "
-"ausgewählten Indikator neu."
+"Wählen Sie die Einheit für das Volumen (Flüssigkeit). Die Software berechnet "
+"die Werte anhand der gewählten Einheit."
 
 #: terrariumTranslations.py:167
 msgid ""
@@ -753,7 +752,7 @@ msgid ""
 "connections. Enter :: for all addresses to bind."
 msgstr ""
 "Hostnamen oder IP-Adresse, auf der die Software auf Verbindungen reagiert. "
-"Geben Sie :: für alle zu bindenden Adressen ein."
+"Geben Sie :: für alle zu Adressen ein."
 
 #: terrariumTranslations.py:168
 msgid ""
@@ -801,11 +800,11 @@ msgstr ""
 
 #: terrariumTranslations.py:177
 msgid "Holds the name of the animal."
-msgstr "Namen des Tieres."
+msgstr "Name des Tieres."
 
 #: terrariumTranslations.py:178
 msgid "Holds the type of the animal"
-msgstr "Hält den Typ des Tieres"
+msgstr "Tierart"
 
 #: terrariumTranslations.py:179
 msgid "Holds the gender of the animal."
@@ -813,11 +812,11 @@ msgstr "Geschlecht des Tieres."
 
 #: terrariumTranslations.py:180
 msgid "Holds the day of birth of the animal."
-msgstr "Tag der Geburt des Tieres."
+msgstr "Geburtstag des Tieres."
 
 #: terrariumTranslations.py:181
 msgid "Holds the species name of the animal."
-msgstr "Artennamen des Tieres."
+msgstr "Spezies des Tieres."
 
 #: terrariumTranslations.py:182
 msgid "Holds the latin name of the animal."
@@ -868,7 +867,7 @@ msgstr "Spielbefehl ausgeführt!"
 
 #: terrariumWebserver.py:280
 msgid "File is not uploaded!"
-msgstr "Datei wird nicht hochgeladen!"
+msgstr "Datei wurde nicht hochgeladen!"
 
 #: terrariumWebserver.py:285
 msgid "File '%s' is uploaded"
@@ -888,7 +887,7 @@ msgstr "Aktion konnte nicht durchgeführt werden"
 
 #: terrariumWebserver.py:295
 msgid "Audio file is deleted"
-msgstr "Audiodatei wird gelöscht"
+msgstr "Audiodatei wurde gelöscht"
 
 #: terrariumWebserver.py:300
 msgid "Data could not be saved"
@@ -904,15 +903,15 @@ msgstr "Ihre Änderungen wurden gespeichert"
 
 #: terrariumWebserver.py:328
 msgid "Hardware is replaced"
-msgstr "Hardware wird ersetzt"
+msgstr "Hardware wurde ersetzt"
 
 #: terrariumWebserver.py:329
 msgid "Hardware replacement is logged in the calendar"
-msgstr "Der Hardwareaustausch wird im Kalender protokolliert"
+msgstr "Der Hardwareaustausch wurde im Kalender protokolliert"
 
 #: terrariumWebserver.py:332
 msgid "A new replacement reminder is created"
-msgstr "Eine neue Ersatzerinnerung wird erstellt"
+msgstr "Eine neue Ersatzerinnerung wurde erstellt"
 
 #: terrariumWebserver.py:470 views/inc/menu.tpl:177
 msgid "Log out"
@@ -939,13 +938,13 @@ msgid ""
 "clicking on the trashbin (%s) icon you can delete the file."
 msgstr ""
 "In der vorhandenen Audiodateiliste können Sie sehen, welche Dateien "
-"hochgeladen werden. Durch Klicken auf das Papierkorb-Symbol (%s) können Sie "
+"hochgeladen wurden. Durch Klicken auf das Papierkorb-Symbol (%s) können Sie "
 "die Datei löschen."
 
 #: views/audio_files.tpl:16
 msgid "Open the dropzone multiple file uploader to upload new audio files."
 msgstr ""
-"Öffnen Sie den Dropzone-Uploader für mehrere Dateien, um neue Audiodateien "
+"Öffnen Sie den Drag-and-Drop Uploader, um mehrere neue Ausiodateien "
 "hochzuladen."
 
 #: views/audio_files.tpl:23
@@ -1036,7 +1035,8 @@ msgstr "Hier können Sie Ihre Audio-Wiedergabelisten konfigurieren."
 
 #: views/audio_playlist.tpl:16
 msgid "Make sure you do not overlap playlists in time!"
-msgstr "Stellen Sie sicher, dass Sie Wiedergabelisten nicht überlappen!"
+msgstr ""
+"Stellen Sie sicher, dass sich Wiedergabelisten zeitlich nicht überlappen!"
 
 #: views/audio_playlist.tpl:16 views/door_settings.tpl:16
 #: views/sensor_settings.tpl:16 views/switch_settings.tpl:16
