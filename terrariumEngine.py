@@ -172,9 +172,10 @@ class terrariumEngine(object):
   def __update_check(self):
     if datetime.datetime.now() - self.update_last_check > datetime.timedelta(days=1):
       version_data = terrariumUtils.get_remote_data('https://api.github.com/repos/theyosh/TerrariumPI/releases/latest',json=True)
-      self.update_version = version_data['tag_name']
-      self.update_available = int(self.update_version.replace('.','')) > int(self.current_version.replace('.',''))
-      self.update_last_check = datetime.datetime.now()
+      if version_data is not None:
+        self.update_version = version_data['tag_name']
+        self.update_available = int(self.update_version.replace('.','')) > int(self.current_version.replace('.',''))
+        self.update_last_check = datetime.datetime.now()
 
   # Private/internal functions
   def __load_sensors(self,data = None):
