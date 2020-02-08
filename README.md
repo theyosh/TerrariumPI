@@ -197,6 +197,8 @@ more information is here: [Remote data wiki](https://github.com/theyosh/Terrariu
 ![TerrariumPI 2.5 Environment setup screenshot](screenshots/Environment_setup.png)
 ### System settings
 ![TerrariumPI 2.5 System setup screenshot](screenshots/System_setup.png)
+### MOTD (Message Of The Day)
+![TerrariumPI 2.5 MOTD screenshot](screenshots/terrariumpi-motd.png)
 
 More screenshots can be found [here](https://github.com/theyosh/TerrariumPI/tree/master/screenshots)
 
