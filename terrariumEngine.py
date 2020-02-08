@@ -172,10 +172,13 @@ class terrariumEngine(object):
   def __update_check(self):
     if datetime.datetime.now() - self.update_last_check > datetime.timedelta(days=1):
       version_data = terrariumUtils.get_remote_data('https://api.github.com/repos/theyosh/TerrariumPI/releases/latest',json=True)
-      if version_data is not None:
-        self.update_version = version_data['tag_name']
-        self.update_available = int(self.update_version.replace('.','')) > int(self.current_version.replace('.',''))
-        self.update_last_check = datetime.datetime.now()
+      if version_data is None:
+        logger.warning('Unable to get the latest version information from Github. Will check next round.')
+        return None
+
+      self.update_version = version_data['tag_name']
+      self.update_available = int(self.update_version.replace('.','')) > int(self.current_version.replace('.',''))
+      self.update_last_check = datetime.datetime.now()
 
   # Private/internal functions
   def __load_sensors(self,data = None):
@@ -607,12 +610,21 @@ class terrariumEngine(object):
         sleep(0.1)
 
       # Update (remote) power switches
+      motddata['power_switches'] = []
       for power_switch_id in self.power_switches:
         try:
           # Update timer trigger if activated
           #self.power_switches[power_switch_id].timer()
           # Update the current sensor.
           self.power_switches[power_switch_id].update()
+          if self.power_switches[power_switch_id].is_on():
+            power_state = '{}%'.format(self.power_switches[power_switch_id].get_state())
+            if not self.power_switches[power_switch_id].is_dimmer():
+              power_state = 'on' if self.power_switches[power_switch_id].is_on() else 'off'
+
+            motddata['power_switches'].append({'name' : self.power_switches[power_switch_id].get_name(),
+                                               'state' : power_state})
+
         except Exception as err:
           logger.exception('Engine loop: Power switch has problems: {}'.format(err))
 
@@ -767,6 +779,11 @@ echo ""
       motd_line += '"'
       motd_lines.append(motd_line)
       line_nr += 1
+
+    motd_lines.append('echo ""')
+    motd_lines.append('echo "  Amount of power switches on: {}"'.format(len(data['power_switches'])))
+    for line in data['power_switches']:
+      motd_lines.append('echo "  Power switch {} is at state: {}"'.format(line['name'],line['state']))
 
     motd_lines.append('echo ""')
     if '' != data['error']:
