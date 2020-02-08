@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.8.3\n"
 "POT-Creation-Date: 2020-01-30 17:20+CET\n"
-"PO-Revision-Date: 2020-01-30 17:30+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2020-02-02 11:48+0000\n"
+"Last-Translator: bfonn <bjornarfonn@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <https://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -33,7 +33,7 @@ msgstr "CPU Temp."
 
 #: terrariumEngine.py:706
 msgid "Version"
-msgstr ""
+msgstr "Versjon"
 
 #: terrariumEngine.py:732 views/system_status.tpl:174
 msgid "Disk usage"
@@ -68,12 +68,6 @@ msgid "Holds the sensor hardware type. Supported hardware types are: %s."
 msgstr "Viser maskinvaretype sensor. Maskinvaretyper som støttes er: %s."
 
 #: terrariumTranslations.py:34
-#, fuzzy
-#| msgid ""
-#| "Holds the sensor address. Depending on hardware type, it is either a read "
-#| "only hex number, a GPIO pin, a GPIO pin combination of %s or a full "
-#| "HTTP(S) adress. Full url specification can be found on the %s wiki page. "
-#| "For GPIO use <strong>physical</strong> GPIO pin numbering."
 msgid ""
 "Holds the sensor address. Depending on hardware type, it is either a read "
 "only hex number, a GPIO pin, a GPIO pin combination of %s or a full HTTP(S) "
@@ -82,8 +76,8 @@ msgid ""
 msgstr ""
 "Viser sensor adressen. Avhengig av maskinvaretype, er det enten et "
 "skrivebeskyttet hex-nummer, en GPIO PIN, en GPIO PIN-kombinasjon av %s eller "
-"en fullstendig HTTP(S)-adresse. Fullstendig URL-spesifikasjon finnes på "
-"siden %s wiki. For GPIO Bruk <strong>fysisk</strong> GPIO PIN nummerering."
+"en fullstendig HTTP(S)-adresse. Fullstendig URL-spesifikasjon finnes på %s "
+"wiki side. For GPIO Bruk <strong>fysisk</strong> GPIO PIN nummerering."
 
 #: terrariumTranslations.py:34
 msgid "Remote data"
@@ -146,6 +140,7 @@ msgstr "Vis temperatur offset verdi."
 #: terrariumTranslations.py:45
 msgid "Holds the maximum number that a sensor may change in value up or down."
 msgstr ""
+"Holder det maksimale nummeret som en sensor kan endre i verdi opp eller ned."
 
 #: terrariumTranslations.py:49
 msgid "Holds the switch hardware type. Supported hardware types are: %s."
@@ -163,15 +158,15 @@ msgstr ""
 
 #: terrariumTranslations.py:51
 msgid "Holds the switch name."
-msgstr "Vis bryter navnet."
+msgstr "Inneholder bryter navnet."
 
 #: terrariumTranslations.py:52
 msgid "Holds the switch power usage in Watt when switched on."
-msgstr "Vis bryterens strømforbruk i watt når den slås på."
+msgstr "Viser bryterens strømforbruk i watt når den slås på."
 
 #: terrariumTranslations.py:53
 msgid "Holds the switch water flow in liters per minute when switched on"
-msgstr "Vis bryteren for vannstrøm i liter per minutt når den slås på"
+msgstr "Viser bryteren for vannstrøm i liter per minutt når den slås på"
 
 #: terrariumTranslations.py:54
 msgid ""
@@ -184,20 +179,20 @@ msgstr ""
 #: terrariumTranslations.py:55
 msgid "Holds the timer start time. The timer will run after this start time."
 msgstr ""
-"Vis tidtakerens starttidspunkt. Tidtakeren vil kjøre etter dette "
+"Viser tidtakerens starttidspunkt. Tidtakeren vil kjøre etter dette "
 "starttidspunktet."
 
 #: terrariumTranslations.py:56
 msgid "Holds the timer stop time. The timer will stop after this start time."
 msgstr ""
-"Vis tidtaker stopp tid. Tidtakeren vil stoppe etter dette starttidspunktet."
+"Viser tidtaker stopp tid. Tidtakeren vil stoppe etter dette starttidspunktet."
 
 #: terrariumTranslations.py:57
 msgid ""
 "Holds the period in minutes that the power switch is on withing the total "
 "timer window."
 msgstr ""
-"Vis perioden i minutter som strømbryteren er på med det totale tidtaker "
+"Viser perioden i minutter som strømbryteren er på med det totale tidtaker "
 "vinduet."
 
 #: terrariumTranslations.py:58
@@ -205,7 +200,7 @@ msgid ""
 "Holds the period in minutes that the power switch is off withing the total "
 "timer window."
 msgstr ""
-"Vis perioden i minutter når strømbryteren er slått av med det totale "
+"Viser perioden i minutter når strømbryteren er slått av med det totale "
 "tidtaker vinduet."
 
 #: terrariumTranslations.py:59
@@ -213,71 +208,71 @@ msgid ""
 "Holds the amount of seconds for the duration in which the dimmer changes to "
 "the new value."
 msgstr ""
-"Vis antall sekunder for varigheten som dimmeren endrer til den nye verdien."
+"Viser antall sekunder for varigheten som dimmeren endrer til den nye verdien."
 
 #: terrariumTranslations.py:60
 msgid ""
 "Holds the amount in percentage to change the dimmer by the heater "
 "environment."
-msgstr "Vis verdien i prosent for å endre dimmeren fra varme miljøet."
+msgstr "Viser verdien i prosent for å endre dimmeren fra varme miljøet."
 
 #: terrariumTranslations.py:61
 msgid ""
 "Holds the amount of seconds for the duration in which it increases the power."
-msgstr "Vis antall sekunder for varigheten den øker strømmen til."
+msgstr "Viser antall sekunder for varigheten den øker strømmen til."
 
 #: terrariumTranslations.py:62
 msgid "Holds the amount in percentage to go to when switched on."
-msgstr "Vis verdien i prosent for å gå til når slått på."
+msgstr "Viser verdien i prosent den går til når slått på."
 
 #: terrariumTranslations.py:63
 msgid ""
 "Holds the amount of seconds for the duration in which it decresses the power."
-msgstr "Vis antall sekunder for varigheten som strømmen skal reduseres."
+msgstr "Viser antall sekunder for varigheten som strømmen skal reduseres."
 
 #: terrariumTranslations.py:64
 msgid "Holds the amount in percentage to go to when switched off."
-msgstr "Vis verdien i prosent å gå til når slått av."
+msgstr "Viser verdien i prosent å gå til når slått av."
 
 #: terrariumTranslations.py:68
 msgid "Holds the door hardware type. Supported hardware types are: %s."
-msgstr "Vis maskinvaretypen for dør. Maskinvaretyper som støttes er: %s."
+msgstr "Viser maskinvaretypen for dør. Maskinvaretyper som støttes er: %s."
 
 #: terrariumTranslations.py:69
 msgid ""
 "Holds the door address. When using GPIO use <strong>physical</strong> GPIO "
 "pin numbering as address."
 msgstr ""
-"Vis dør adressen. Når GPIO benyttes, bruk <strong> fysisk </strong> GPIO PIN "
-"nummereringen som adresse."
+"Viser dør adressen. Når GPIO benyttes, bruk <strong> fysisk </strong> GPIO "
+"PIN nummereringen som adresse."
 
 #: terrariumTranslations.py:70
 msgid "Holds the door name."
-msgstr "Vis dør navnet."
+msgstr "Viser dør navnet."
 
 #: terrariumTranslations.py:74
 msgid "Holds the webcam location source. Supported sources are: %s"
-msgstr "Vis webkamera plassering kilde. Støttede kilder er: %s"
+msgstr "Viser plasserings kilde til webcamera. Støttede kilder er: %s"
 
 #: terrariumTranslations.py:75
 msgid "Holds the webcam name."
-msgstr "Vis webkamera navnet."
+msgstr "Viser webkamera navnet."
 
 #: terrariumTranslations.py:76
 msgid "Holds the webcam resolution."
-msgstr "Vis webkamera oppløsningen."
+msgstr "Viser webkamera oppløsningen."
 
 #: terrariumTranslations.py:77
 msgid "Holds the webcam resolution width in pixels."
-msgstr "Vis webkamera oppløsning bredde i piksler."
+msgstr "Viser webkamera oppløsning bredde i piksler."
 
 #: terrariumTranslations.py:78
 msgid "Holds the webcam resolution height in pixels."
-msgstr "Vis webkamera oppløsning høyde piksler."
+msgstr "Viser webkamera oppløsning høyde piksler."
 
 #: terrariumTranslations.py:79
 msgid "Holds the webcam rotation of the image."
-msgstr "Vis webkamera rotasjon av bildet."
+msgstr "Viser webkamera rotasjon av bildet."
 
 #: terrariumTranslations.py:80
 msgid "Shows the webcam preview image."
@@ -290,30 +285,32 @@ msgstr ""
 
 #: terrariumTranslations.py:82
 msgid "Select the environment light state when enabling archiving."
-msgstr ""
+msgstr "Velg miljø lys status når arkivering er aktivert."
 
 #: terrariumTranslations.py:83
 msgid "Select the environment door state when enabling archiving."
-msgstr ""
+msgstr "Velg miljø dør status når arkivering er aktivert."
 
 #: terrariumTranslations.py:84
-#, fuzzy
-#| msgid "Enabled or disable image archiving based on motion detection."
 msgid "Enable or disable motion boxes for Motion archiving."
 msgstr ""
-"Aktiver eller deaktivere bilde arkivering basert på bevegelsesdeteksjon."
+"Aktiver eller deaktivere bevegelsesbokser for bevegelsesdeteksjon arkivering."
 
 #: terrariumTranslations.py:85
 msgid ""
 "Minimum difference between frames to be identified as motion. Higher value "
 "means that the image must be more different for motion to be detected."
 msgstr ""
+"Minimum differanse mellom bilder som identifiseres som bevegelse. Høyere "
+"verdi betyr at bildet må være vesentlig forandret før bevegelse registreres."
 
 #: terrariumTranslations.py:86
 msgid ""
 "Minimum area of an image in pixels for a region to be considered motion. "
 "Larger values mean that only larger areas will be detected as motion."
 msgstr ""
+"Minimum område for bilde i piksler før et område registreres som bevegelse. "
+"Høyere verdier betyr at bare større områder vil bli registrert som bevegelse."
 
 #: terrariumTranslations.py:87
 msgid ""
@@ -322,22 +319,26 @@ msgid ""
 "last archived frame. Setting to last frame will ignore motion when it is "
 "very gradual."
 msgstr ""
+"Siste bilde betyr at bare sammenhengende bilder vil bli sammenlignet for "
+"bevegelse. Siste arkiverte bilde betyr at det siste nåværende bilde vil bli "
+"sammenlignet med det siste arkiverte bilde. Settes den til siste bilde vil "
+"gradvis bevegelse bli ignorert."
 
 #: terrariumTranslations.py:91
 msgid "Holds the audio playlist name."
-msgstr "Vis navnet på lyd spillelisten."
+msgstr "Viser navnet på musikk spillelisten."
 
 #: terrariumTranslations.py:92
 msgid "Holds the time when the playlist should be started."
-msgstr "Vis tid når spillelisten skal startes."
+msgstr "Viser tiden når spillelisten skal startes."
 
 #: terrariumTranslations.py:93
 msgid "Holds the time when the playlist should be stopped."
-msgstr "Vis tid når spillelisten skal stoppes."
+msgstr "Viser tiden når spillelisten skal stoppes."
 
 #: terrariumTranslations.py:94
 msgid "Holds the volume for this playlist."
-msgstr "Vis volumet for denne spillelisten."
+msgstr "Viser volumet for denne spillelisten."
 
 #: terrariumTranslations.py:95
 msgid "Toggle on to enable repeating of the audio files."
@@ -345,7 +346,7 @@ msgstr "Aktiver/deaktiver for å aktivere gjentagelse av lydfilene."
 
 #: terrariumTranslations.py:96
 msgid "Toggle on to enable shuffeling of the audio files."
-msgstr "Aktiver/deaktiver shuffeling av lydfilene."
+msgstr "Aktiver/deaktiver tilfeldig rekkefølge av lydfilene."
 
 #: terrariumTranslations.py:97
 msgid ""
@@ -413,10 +414,8 @@ msgstr ""
 "tall til å øke verdiene og negative tall for å redusere verdiene."
 
 #: terrariumTranslations.py:104
-#, fuzzy
-#| msgid "Holds the soure that is used to determing when it is day or night."
 msgid "Holds the source that is used to determing when it is day or night."
-msgstr "Vis soure som brukes til å avtegne når det er dag eller natt."
+msgstr "Viser kilden som brukes til å avgjøre når det er dag eller natt."
 
 #: terrariumTranslations.py:105
 msgid ""
@@ -439,7 +438,7 @@ msgid ""
 "Holds the period in minutes that this environment part is powered on withing "
 "the total timer window."
 msgstr ""
-"Vis perioden i minutter som denne miljø delen er slått på med det totale "
+"Viser perioden i minutter som denne miljø delen er slått på med det totale "
 "tidtaker vinduet."
 
 #: terrariumTranslations.py:108
@@ -447,7 +446,7 @@ msgid ""
 "Holds the period in minutes that this environment part is powered off "
 "withing the total timer window."
 msgstr ""
-"Vis perioden i minutter som denne miljø delen er slått av med det totale "
+"Viser perioden i minutter som denne miljø delen er slått av med det totale "
 "tidtaker vinduet."
 
 #: terrariumTranslations.py:109
@@ -506,7 +505,7 @@ msgstr ""
 
 #: terrariumTranslations.py:115
 msgid "Holds the water volume in liters."
-msgstr "Vis vann volumet i liter."
+msgstr "Viser vann volumet i liter."
 
 #: terrariumTranslations.py:116
 msgid "Holds the water tank height in cm or inches."
@@ -541,7 +540,7 @@ msgstr "Viser e-postadressen du vil motta meldinger på."
 
 #: terrariumTranslations.py:124
 msgid "Holds the mail server hostname or IP."
-msgstr "Viser epostserver hostname eller IP."
+msgstr "Viser epost serverens hostname eller IP."
 
 #: terrariumTranslations.py:125
 msgid "Holds the mail server portnumber. SSL and TLS will be autodetected."
@@ -558,10 +557,8 @@ msgstr ""
 "Viser passordet for godkjenning med mailserveren hvis det er nødvendig."
 
 #: terrariumTranslations.py:129
-#, fuzzy
-#| msgid "Holds the audio playlist name."
 msgid "Holds the display chip that is used."
-msgstr "Vis navnet på lyd spillelisten."
+msgstr "Viser display chip som brukes."
 
 #: terrariumTranslations.py:130
 msgid ""
@@ -577,27 +574,27 @@ msgstr "Reserver første LCD-linje for statisk tittel."
 
 #: terrariumTranslations.py:133
 msgid "Holds your Twitter consumer key. More information %shere%s"
-msgstr "Viser din Twitter bruker nøkkel. Mer informasjon %shere%s"
+msgstr "Viser din Twitter consumer key. Mer informasjon %shere%s"
 
 #: terrariumTranslations.py:134
 msgid "Holds your Twitter consumer secret. More information %shere%s"
-msgstr "Viser din Twitter bruker hemmelighet. Mer informasjon %shere%s"
+msgstr "Viser din Twitter consumer secret. Mer informasjon %shere%s"
 
 #: terrariumTranslations.py:135
 msgid "Holds your Twitter access token. More information %shere%s"
-msgstr "Viser din Twitter-tilgang token. Mer informasjon %shere%s"
+msgstr "Viser din Twitter access token. Mer informasjon %shere%s"
 
 #: terrariumTranslations.py:136
 msgid "Holds your Twitter access token secret. More information %shere%s"
-msgstr "Viser din Twitter-tilgang token hemmelighet. Mer informasjon %shere%s"
+msgstr "Viser din Twitter access token secret. Mer informasjon %shere%s"
 
 #: terrariumTranslations.py:138
 msgid "Holds the PushOver API token. More information %shere%s"
-msgstr "Viser det PushOver API-tokenet. Mer informasjon %shere%s"
+msgstr "Viser PushOver API-token. Mer informasjon %shere%s"
 
 #: terrariumTranslations.py:139
 msgid "Holds the PushOver API user key. More information %shere%s"
-msgstr "Viser PushOver API bruker nøkkel. Mer informasjon %shere%s"
+msgstr "Viser PushOver API user key. Mer informasjon %shere%s"
 
 #: terrariumTranslations.py:141
 msgid "Holds the Telegram Bot token. More information %shere%s"
@@ -616,14 +613,17 @@ msgid ""
 "Holds the proxy address in form of [schema]://[user]:[password]@[server.com]:"
 "[port]. Can either be socks5 or http(s) for schema."
 msgstr ""
-"Viser proxy-adressen i form av [schema]://[user]:[password]@[server.com]:"
-"[port]. Kan enten være socks5 eller http (s) for schema."
+"Viser proxy-adressen i form av "
+"[schema]://[user]:[password]@[server.com]:[port]. Kan enten være socks5 "
+"eller http(s) for schema."
 
 #: terrariumTranslations.py:145
 msgid ""
 "Holds the url to post notification data to. You can use %name% variables in "
 "the post url"
 msgstr ""
+"Viser url som brukes til å poste notifikasjons data til deg. Du kan bruke "
+"%name% variabler i post url"
 
 #: terrariumTranslations.py:150
 msgid "Choose your interface language."
@@ -662,10 +662,6 @@ msgid "Holds the external calendar url."
 msgstr "Viser URL-adressen for den eksterne kalenderen."
 
 #: terrariumTranslations.py:158
-#, fuzzy
-#| msgid ""
-#| "Toggle on or off horizontal graph legends. Reload the webinterface after "
-#| "changing the setting."
 msgid ""
 "Toggle on or off horizontal graph legends. Reload the web interface after "
 "changing the setting."
@@ -674,16 +670,12 @@ msgstr ""
 "etter at du har endret innstillingen."
 
 #: terrariumTranslations.py:159
-#, fuzzy
-#| msgid ""
-#| "Toggle on or off horizontal graph legends. Reload the webinterface after "
-#| "changing the setting."
 msgid ""
 "Toggle on or off the environment summary on the dashboard. Reload the web "
 "interface after changing the setting."
 msgstr ""
-"Slå på eller av vannrett graf-legender. Last inn webgrensesnittet på nytt "
-"etter at du har endret innstillingen."
+"Slå på eller av miljø oppsummering på dashbordet. Last inn webgrensesnittet "
+"på nytt etter at du har endret innstillingen."
 
 #: terrariumTranslations.py:160
 msgid "Holds the soundcard that is used for playing audio."
@@ -713,10 +705,6 @@ msgstr ""
 "indikatoren."
 
 #: terrariumTranslations.py:165
-#, fuzzy
-#| msgid ""
-#| "Choose the wind speed indicator. The software will recalculate to the "
-#| "chosen indicator."
 msgid ""
 "Choose the windspeed indicator. The software will recalculate to the chosen "
 "indicator."
@@ -725,15 +713,11 @@ msgstr ""
 "indikatoren."
 
 #: terrariumTranslations.py:166
-#, fuzzy
-#| msgid ""
-#| "Choose the temperature indicator. The software will recalculate to the "
-#| "chosen indicator."
 msgid ""
 "Choose the volume (liquid) indicator. The software will recalculate to the "
 "chosen indicator."
 msgstr ""
-"Velg temperatur indikatoren. Programvaren vil omberegne til den valgte "
+"Velg volume (veske) indikatoren. Programvaren vil omberegne til den valgte "
 "indikatoren."
 
 #: terrariumTranslations.py:167
@@ -751,43 +735,39 @@ msgstr "Viser portnummeret som programvaren lytter etter tilkoblinger på."
 
 #: terrariumTranslations.py:169
 msgid "Enter the e-mail address that is used for your Meross devices."
-msgstr ""
+msgstr "Legg inn e-post adressen som brukes for dine Meross enheter."
 
 #: terrariumTranslations.py:170
 msgid ""
 "Enter the password that is used for your Meross devices. Password is stored "
 "in plain text!"
 msgstr ""
+"Skriv passordet som brukes til dine Meross enheter. Passord er lagret i "
+"synlig text!"
 
 #: terrariumTranslations.py:171
-#, fuzzy
-#| msgid ""
-#| "Toggle on or off horizontal graph legends. Reload the webinterface after "
-#| "changing the setting."
 msgid ""
 "Holds the amount of data points (each 30 sec) to use for smoothing. The "
 "higher the value, the smoother the graph. Enter 0 to disable. Reload the web "
 "interface after changing the setting."
 msgstr ""
-"Slå på eller av vannrett graf-legender. Last inn webgrensesnittet på nytt "
-"etter at du har endret innstillingen."
+"Viser mengden med data punkter (hver 30. sek) å bruke til utjevning. Desto "
+"høyere verdi, vil grafen bli jevnere. Skriv 0 for å deaktivere. Last "
+"websiden etter du har endret innstillingene."
 
 #: terrariumTranslations.py:172
-#, fuzzy
-#| msgid ""
-#| "Toggle on or off horizontal graph legends. Reload the webinterface after "
-#| "changing the setting."
 msgid ""
 "Select true or false to show an extra sensor page which holds all the "
 "sensors with there gauges. Reload the web interface after changing the "
 "setting."
 msgstr ""
-"Slå på eller av vannrett graf-legender. Last inn webgrensesnittet på nytt "
-"etter at du har endret innstillingen."
+"Velg sannt eller usannt for å vise ekstra sensor side som holder alle "
+"sensorene med sine målere. Last inn websiden på nytt etter du har endret "
+"innstillingene."
 
 #: terrariumTranslations.py:173
 msgid "Toggle on or off the min and max measured value in the gauge graphs."
-msgstr ""
+msgstr "Skru av eller på min og maks målt verdi i måler grafene."
 
 #: terrariumTranslations.py:177
 msgid "Holds the name of the animal."
@@ -803,7 +783,7 @@ msgstr "Viser kjønnet på dyret."
 
 #: terrariumTranslations.py:180
 msgid "Holds the day of birth of the animal."
-msgstr "Viser dagen for fødselen av dyret."
+msgstr "Viser fødselsdagen for dyret."
 
 #: terrariumTranslations.py:181
 msgid "Holds the species name of the animal."
@@ -815,7 +795,7 @@ msgstr "Viser det latinske navnet på dyret."
 
 #: terrariumTranslations.py:183
 msgid "Holds a small description about the animal."
-msgstr "Har en liten beskrivelse om dyret."
+msgstr "Viser en liten beskrivelse om dyret."
 
 #: terrariumTranslations.py:184
 msgid "Holds a link to more information."
@@ -874,7 +854,7 @@ msgstr "Dupliser fil ' %s'"
 
 #: terrariumWebserver.py:292
 msgid "Action could not be satisfied"
-msgstr "Handlingen kunne ikke gjennomført"
+msgstr "Handlingen kunne ikke gjennomføres"
 
 #: terrariumWebserver.py:295
 msgid "Audio file is deleted"
@@ -894,15 +874,15 @@ msgstr "Dine endringer er lagret"
 
 #: terrariumWebserver.py:328
 msgid "Hardware is replaced"
-msgstr ""
+msgstr "Maskinvare er endret"
 
 #: terrariumWebserver.py:329
 msgid "Hardware replacement is logged in the calendar"
-msgstr ""
+msgstr "Maskinvareendring er logget i kalenderen"
 
 #: terrariumWebserver.py:332
 msgid "A new replacement reminder is created"
-msgstr ""
+msgstr "En ny bytte påminnelse er opprettet"
 
 #: terrariumWebserver.py:470 views/inc/menu.tpl:177
 msgid "Log out"
@@ -1145,7 +1125,7 @@ msgstr "Kalender"
 
 #: views/calendar.tpl:15
 msgid "iCal"
-msgstr ""
+msgstr "iCal"
 
 #: views/calendar.tpl:18 views/dashboard.tpl:71 views/dashboard.tpl:626
 #: views/dashboard.tpl:681 views/dashboard.tpl:736 views/dashboard.tpl:791
@@ -1389,7 +1369,7 @@ msgstr "Fruktbarhet"
 #: views/dashboard.tpl:489 views/inc/menu.tpl:71 views/sensor_settings.tpl:149
 #: views/system_environment.tpl:1589
 msgid "CO2"
-msgstr ""
+msgstr "CO2"
 
 #: views/dashboard.tpl:600
 msgid "Average Temperature"
@@ -1486,16 +1466,12 @@ msgid "Average Fertility"
 msgstr "Gjennomsnittlig fruktbarhet"
 
 #: views/dashboard.tpl:1040
-#, fuzzy
-#| msgid "Average pH"
 msgid "Average CO2"
-msgstr "Gjennomsnittlig pH"
+msgstr "Gjennomsnittlig CO2"
 
 #: views/dashboard.tpl:1095
-#, fuzzy
-#| msgid "Average Moisture"
 msgid "Average Volume"
-msgstr "Gjennomsnittlig fuktighet"
+msgstr "Gjennomsnittlig Volum"
 
 #: views/door_settings.tpl:16
 msgid "Here you can configure your doors."
@@ -1820,7 +1796,7 @@ msgstr "Profil"
 
 #: views/inc/menu.tpl:44
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: views/inc/menu.tpl:59 views/sensor_settings.tpl:142
 msgid "Distance"
@@ -1898,7 +1874,7 @@ msgstr "Døren er åpen"
 
 #: views/inc/menu.tpl:238
 msgid "No events"
-msgstr ""
+msgstr "Ingen hendelser"
 
 #: views/inc/menu.tpl:246
 msgid "Playing"
@@ -1926,7 +1902,7 @@ msgstr "feil"
 #: views/inc/sensor_list.tpl:17 views/inc/sensor_list.tpl:18
 #: views/inc/sensor_list.tpl:19 views/inc/sensor_list.tpl:20
 msgid "excl. avg"
-msgstr ""
+msgstr "excl. avg"
 
 #: views/inc/sensor_list.tpl:11 views/inc/usage_sensors.tpl:68
 #: views/sensor_settings.tpl:77
@@ -1964,16 +1940,12 @@ msgid "Fertility sensor"
 msgstr "Fruktbarhet sensor"
 
 #: views/inc/sensor_list.tpl:19 views/sensor_settings.tpl:85
-#, fuzzy
-#| msgid "pH sensor"
 msgid "CO2 sensor"
-msgstr "pH sensor"
+msgstr "CO2 sensor"
 
 #: views/inc/sensor_list.tpl:20 views/sensor_settings.tpl:86
-#, fuzzy
-#| msgid "Moisture sensor"
 msgid "Volume sensor"
-msgstr "Luftfuktighet sensor"
+msgstr "Volum sensor"
 
 #: views/inc/usage_dashboard.tpl:14 views/inc/usage_dashboard.tpl:205
 msgid "Top indicators"
@@ -3056,10 +3028,6 @@ msgstr ""
 "unntatt e-post port og epost godkjenning verdier."
 
 #: views/notifications.tpl:17
-#, fuzzy
-#| msgid ""
-#| "Select per message the service so send the notification. You can have "
-#| "everyting per email, and important ones per pushover or telegram."
 msgid ""
 "Select per message the service to send the notification. You can have "
 "everything per email, and important ones per pushover or telegram."
@@ -3159,11 +3127,11 @@ msgstr "Mellomtjener"
 
 #: views/notifications.tpl:188
 msgid "Webhook"
-msgstr ""
+msgstr "Webhook"
 
 #: views/notifications.tpl:198
 msgid "Full post url"
-msgstr ""
+msgstr "Full post url"
 
 #: views/notifications.tpl:209
 msgid "Messages"
@@ -3219,7 +3187,7 @@ msgstr "Her kan du konfigurere sensorene."
 
 #: views/sensor_settings.tpl:43 views/sensor_settings.tpl:180
 msgid "Max diff"
-msgstr ""
+msgstr "Maks diff"
 
 #: views/sensor_settings.tpl:70
 msgid "Add new sensor"
@@ -3231,11 +3199,11 @@ msgstr "SHT2X"
 
 #: views/sensor_settings.tpl:109
 msgid "SHT3X"
-msgstr ""
+msgstr "SHT3X"
 
 #: views/sensor_settings.tpl:110
 msgid "SHT3XD"
-msgstr ""
+msgstr "SHT3XD"
 
 #: views/sensor_settings.tpl:111
 msgid "HTU21D"
@@ -3259,7 +3227,7 @@ msgstr "YTXX-Digital"
 
 #: views/sensor_settings.tpl:118 views/switch_settings.tpl:128
 msgid "Custom script"
-msgstr ""
+msgstr "Egendefinert script"
 
 #: views/sensor_settings.tpl:120
 msgid "pH SKU-SEN0161"
@@ -3274,36 +3242,32 @@ msgid "MiFlora"
 msgstr "MiFlora"
 
 #: views/sensor_settings.tpl:123
-#, fuzzy
-#| msgid "Temperature indicator"
 msgid "Mi Temperature & Humidity"
-msgstr "Temperatur indikator"
+msgstr "Mi Temperatur & Fuktighet"
 
 #: views/sensor_settings.tpl:124
 msgid "mh-z19"
-msgstr ""
+msgstr "mh-z19"
 
 #: views/sensor_settings.tpl:125
 msgid "K30 CO2"
-msgstr ""
+msgstr "K30 CO2"
 
 #: views/sensor_settings.tpl:126
 msgid "COZIR CO2"
-msgstr ""
+msgstr "COZIR CO2"
 
 #: views/sensor_settings.tpl:127
 msgid "MLX90614"
-msgstr ""
+msgstr "MLX90614"
 
 #: views/sensor_settings.tpl:128
-#, fuzzy
-#| msgid "AM2302"
 msgid "AM2320"
 msgstr "AM2302"
 
 #: views/sensor_settings.tpl:129
 msgid "AMG8833"
-msgstr ""
+msgstr "AMG8833"
 
 #: views/sensor_settings.tpl:145
 msgid "UVA"
@@ -3315,7 +3279,7 @@ msgstr "UVB"
 
 #: views/sensor_settings.tpl:147
 msgid "UV Index"
-msgstr ""
+msgstr "UV Indeks"
 
 #: views/sensor_settings.tpl:190
 msgid "Min moist value"
@@ -3382,20 +3346,16 @@ msgid "PWM Dimmer"
 msgstr "PWM Dimmer"
 
 #: views/switch_settings.tpl:114
-#, fuzzy
-#| msgid "PWM Dimmer"
 msgid "DC Dimmer"
-msgstr "PWM Dimmer"
+msgstr "DC Dimmer"
 
 #: views/switch_settings.tpl:115
-#, fuzzy
-#| msgid "Right side"
 msgid "Bright Pi"
-msgstr "Høyre side"
+msgstr "Bright Pi"
 
 #: views/switch_settings.tpl:116
 msgid "PCA9685"
-msgstr ""
+msgstr "PCA9685"
 
 #: views/switch_settings.tpl:118
 msgid "Remote Dimmer"
@@ -3410,34 +3370,32 @@ msgid "Energenie LAN"
 msgstr "Energenie LAN"
 
 #: views/switch_settings.tpl:121
-#, fuzzy
-#| msgid "Energenie USB"
 msgid "Energenie Pi-Mote"
-msgstr "Energenie USB"
+msgstr "Energenie Pi-Mote"
 
 #: views/switch_settings.tpl:122
 msgid "WeMo"
-msgstr ""
+msgstr "WeMo"
 
 #: views/switch_settings.tpl:123
 msgid "MSS425E"
-msgstr ""
+msgstr "MSS425E"
 
 #: views/switch_settings.tpl:124
 msgid "Sonoff"
-msgstr ""
+msgstr "Sonoff"
 
 #: views/switch_settings.tpl:125
 msgid "DenkoviV2 4 relays"
-msgstr ""
+msgstr "DenkoviV2 4 relé"
 
 #: views/switch_settings.tpl:126
 msgid "DenkoviV2 8 relays"
-msgstr ""
+msgstr "DenkoviV2 8 reléer"
 
 #: views/switch_settings.tpl:127
 msgid "DenkoviV2 16 relays"
-msgstr ""
+msgstr "DenkoviV2 16 reléer"
 
 #: views/switch_settings.tpl:166
 msgid "Dimmer environment step"
@@ -3449,53 +3407,47 @@ msgstr "Ingen brytere er tilgjengelige"
 
 #: views/switch_status.tpl:12
 msgid "in manual mode"
-msgstr ""
+msgstr "i manuell modus"
 
 #: views/switch_status.tpl:35
 msgid "Last replacement"
-msgstr ""
+msgstr "Siste utbytting"
 
 #: views/switch_status.tpl:46
 msgid "Manual mode"
-msgstr ""
+msgstr "Manuell modus"
 
 #: views/switch_status.tpl:52 views/switch_status.tpl:83
 msgid "Replace hardware"
-msgstr ""
+msgstr "Skift maskinvare"
 
 #: views/switch_status.tpl:104
 msgid "With new device"
-msgstr ""
+msgstr "Med ny enhet"
 
 #: views/switch_status.tpl:109
 msgid "Remind in"
-msgstr ""
+msgstr "Påminn innen"
 
 #: views/switch_status.tpl:117
 msgid "Days"
-msgstr ""
+msgstr "Dager"
 
 #: views/switch_status.tpl:118
-#, fuzzy
-#| msgid "Week"
 msgid "Weeks"
-msgstr "Uke"
+msgstr "Uker"
 
 #: views/switch_status.tpl:119
-#, fuzzy
-#| msgid "Month"
 msgid "Months"
-msgstr "Måned"
+msgstr "Måneder"
 
 #: views/switch_status.tpl:120
-#, fuzzy
-#| msgid "Year"
 msgid "Years"
 msgstr "År"
 
 #: views/switch_status.tpl:133
 msgid "Replace"
-msgstr ""
+msgstr "Skift ut"
 
 #: views/system_environment.tpl:16
 msgid "Here you can configure your environment."
@@ -3673,22 +3625,24 @@ msgid "Weather location"
 msgstr "Vær lokasjon"
 
 #: views/system_settings.tpl:26
-#, fuzzy
-#| msgid "System settings"
 msgid "System actions"
-msgstr "Systeminnsillinger"
+msgstr "System hendelser"
 
 #: views/system_settings.tpl:39
 msgid ""
 "Here you can reboot your TerrariumPI server. You will have to confirm the "
 "action when clicked."
 msgstr ""
+"Her kan du restarte din TerrariumPI server. Du må bekrefte hendelsen etter "
+"du har trykket."
 
 #: views/system_settings.tpl:45
 msgid ""
 "Here you can shutdown your TerrariumPI server. You will have to confirm the "
 "action when clicked."
 msgstr ""
+"Her kan du skru av din TerrariumPI server. Du må bekrefte hendelsen etter du "
+"har trykket."
 
 #: views/system_settings.tpl:67
 msgid "Language"
@@ -3712,7 +3666,7 @@ msgstr "Fahrenheit"
 
 #: views/system_settings.tpl:99
 msgid "Kelvin"
-msgstr ""
+msgstr "Kelvin"
 
 #: views/system_settings.tpl:105
 msgid "Distance indicator"
@@ -3727,22 +3681,20 @@ msgid "Inches"
 msgstr "Tommer"
 
 #: views/system_settings.tpl:116
-#, fuzzy
-#| msgid "Volume in liters"
 msgid "Volume indicator"
-msgstr "Volum i liter"
+msgstr "Volum indikator"
 
 #: views/system_settings.tpl:120
 msgid "Litres"
-msgstr ""
+msgstr "Liter"
 
 #: views/system_settings.tpl:121
 msgid "US Gallons"
-msgstr ""
+msgstr "US Gallons"
 
 #: views/system_settings.tpl:122
 msgid "UK Gallons"
-msgstr ""
+msgstr "UK Gallons"
 
 #: views/system_settings.tpl:128
 msgid "Admin name"
@@ -3785,32 +3737,30 @@ msgid "Vertical"
 msgstr "Vertikal"
 
 #: views/system_settings.tpl:183
-#, fuzzy
-#| msgid "Max moist value"
 msgid "Graph smoothing value"
-msgstr "Maksimal fukt verdi"
+msgstr "Grafe utjevning verdi"
 
 #: views/system_settings.tpl:189
 msgid "Show min and max values in gauge graphs"
-msgstr ""
+msgstr "Vis min og maks verdier i måler grafene"
 
 #: views/system_settings.tpl:193 views/system_settings.tpl:204
 #: views/system_settings.tpl:215
 msgid "True"
-msgstr ""
+msgstr "Sannt"
 
 #: views/system_settings.tpl:194 views/system_settings.tpl:205
 #: views/system_settings.tpl:216
 msgid "False"
-msgstr ""
+msgstr "Falsk"
 
 #: views/system_settings.tpl:200
 msgid "Hide environment summary on the dashboard"
-msgstr ""
+msgstr "Skjul miljø oppsummeringen på dashbordet"
 
 #: views/system_settings.tpl:211
 msgid "Show all sensors gauges on 1 page"
-msgstr ""
+msgstr "Vis alle sensor målere på 1 side"
 
 #: views/system_settings.tpl:222
 msgid "Pi power usage in W"
@@ -3834,17 +3784,15 @@ msgstr "Port nummer"
 
 #: views/system_settings.tpl:257
 msgid "Meross Cloud"
-msgstr ""
+msgstr "Meross Cloud"
 
 #: views/system_settings.tpl:267
 msgid "Meross Cloud username"
-msgstr ""
+msgstr "Meross Cloud brukernavn"
 
 #: views/system_settings.tpl:273
-#, fuzzy
-#| msgid "New admin password"
 msgid "Meross Cloud password"
-msgstr "Nytt admin passord"
+msgstr "Meross Cloud passord"
 
 #: views/weather.tpl:39
 msgid "City"
@@ -3883,10 +3831,8 @@ msgid "Here you can configure your webcams."
 msgstr "Her kan du konfigurere webkameraer."
 
 #: views/webcam_settings.tpl:25
-#, fuzzy
-#| msgid "Remote source"
 msgid "Local source"
-msgstr "Ekstern kilde"
+msgstr "Lokal kilde"
 
 #: views/webcam_settings.tpl:32 views/webcam_settings.tpl:95
 msgid "Resolution"
@@ -3941,62 +3887,52 @@ msgid "1 day"
 msgstr "1 dag"
 
 #: views/webcam_settings.tpl:139
-#, fuzzy
-#| msgid "Light state"
 msgid "Archive light state"
-msgstr "Lys tilstand"
+msgstr "Arkiver lys status"
 
 #: views/webcam_settings.tpl:144
 msgid "When on"
-msgstr ""
+msgstr "Når på"
 
 #: views/webcam_settings.tpl:145
 msgid "When off"
-msgstr ""
+msgstr "Når av"
 
 #: views/webcam_settings.tpl:150
-#, fuzzy
-#| msgid "Door state"
 msgid "Archive door state"
-msgstr "Dør tilstand"
+msgstr "Arkiver dør status"
 
 #: views/webcam_settings.tpl:155
 msgid "When open"
-msgstr ""
+msgstr "Når åpen"
 
 #: views/webcam_settings.tpl:156
 msgid "When closed"
-msgstr ""
+msgstr "Når lukket"
 
 #: views/webcam_settings.tpl:162
-#, fuzzy
-#| msgid "Motion"
 msgid "Show motion boxes"
-msgstr "Bevegelse"
+msgstr "Vis bevegelses bokser"
 
 #: views/webcam_settings.tpl:172
 msgid "Motion delta threshold"
-msgstr ""
+msgstr "Bevegelses delta grense"
 
 #: views/webcam_settings.tpl:178
-#, fuzzy
-#| msgid "Zoom at minimum level"
 msgid "Motion minimum area"
-msgstr "Zoom på minimumsnivå"
+msgstr "Bevegelse minimum område"
 
 #: views/webcam_settings.tpl:184
 msgid "Motion comparison frame"
-msgstr ""
+msgstr "Bevegelse sammenlignings bilde"
 
 #: views/webcam_settings.tpl:188
-#, fuzzy
-#| msgid "Last update"
 msgid "Last frame"
-msgstr "Siste oppdatering"
+msgstr "Siste bilde"
 
 #: views/webcam_settings.tpl:189
 msgid "Last archived frame"
-msgstr ""
+msgstr "Siste arkiverte bilde"
 
 #: Missing text string
 msgid "1Wire bus"
@@ -4028,7 +3964,7 @@ msgstr "Alarm"
 
 #: Missing text string
 msgid "Amount"
-msgstr ""
+msgstr "Mengde"
 
 #: Missing text string
 msgid "Are you sure to delete the file"
@@ -4095,16 +4031,12 @@ msgid "Drop files here to upload"
 msgstr "Slipp filer her for å laste opp"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Duration in seconds"
 msgid "Duration in hours"
-msgstr "Varighet i sekunder"
+msgstr "Varighet i timer"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Duration in seconds"
 msgid "Duration in minutes"
-msgstr "Varighet i sekunder"
+msgstr "Varighet i minutter"
 
 #: Missing text string
 msgid "Duration in seconds"
@@ -4124,7 +4056,7 @@ msgstr "Feil"
 
 #: Missing text string
 msgid "Excluded from average calculation"
-msgstr ""
+msgstr "Ekskludert fra gjennomsnitts kalkuleringen"
 
 #: Missing text string
 msgid "External calendar url"
@@ -4188,10 +4120,8 @@ msgid "Load 5"
 msgstr "Last 5"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Minimum hours"
 msgid "Minimum area"
-msgstr "Minste antall timer"
+msgstr "Minimum område"
 
 #: Missing text string
 msgid "No error messages"
@@ -4231,7 +4161,7 @@ msgstr "Raspberry Pi 3 kamera"
 
 #: Missing text string
 msgid "Reboot"
-msgstr ""
+msgstr "Start på nytt"
 
 #: Missing text string
 msgid "Save RAW photo"
@@ -4251,7 +4181,7 @@ msgstr "Serveren kan ikke behandle opplastingen. Feilkode {{statusCode}}"
 
 #: Missing text string
 msgid "Shutdown"
-msgstr ""
+msgstr "Skru av"
 
 #: Missing text string
 msgid "Switches overview screenshot"
@@ -4275,7 +4205,7 @@ msgstr "Det er ikke konfigurert noen dør sensorer."
 
 #: Missing text string
 msgid "Threshold"
-msgstr ""
+msgstr "Grense"
 
 #: Missing text string
 msgid "Timer period off duration in minutes"
@@ -4330,10 +4260,8 @@ msgid "Used space"
 msgstr "Brukt plass"
 
 #: Missing text string
-#, fuzzy
-#| msgid "UVA"
 msgid "UV"
-msgstr "UVA"
+msgstr "UV"
 
 #: Missing text string
 msgid "Value difference during the night"
