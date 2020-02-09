@@ -17,6 +17,10 @@ from struct import unpack
 from gevent import sleep
 try:
   import melopero_amg8833 as mp
+except Exception:
+  pass # Needs python3
+
+try:
   import adafruit_sht31d
   import board
   import busio
