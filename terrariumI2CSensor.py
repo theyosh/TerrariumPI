@@ -606,6 +606,9 @@ class terrariumMLX90614Sensor(terrariumSensorSource):
       else:
         data = None
 
+    # We need to close the I2C bus manually... :(
+    sensor.bus.close()
+
     except Exception as ex:
       print(ex)
 
