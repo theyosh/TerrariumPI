@@ -2,8 +2,284 @@ Changelog
 =========
 
 
-3.9.7 (2019-07-07)
+(unreleased)
 ------------
+
+**New**
+------
+- Add Raspberry PI auto white balancing setting for better NOIR camera
+  support. Both for stills and live. [#360](https://github.com/theyosh/TerrariumPI/issues/360). [theyosh]
+- Add files via upload. [TheYOSH]
+- Add extra mail headers. [theyosh]
+- Add support for COZIR CO2 sensors. [theyosh]
+- Add support for K30 CO2 sensors. [#177](https://github.com/theyosh/TerrariumPI/issues/177). [theyosh]
+- Add support for PCA9685 dimmers. First attempt, untested [#331](https://github.com/theyosh/TerrariumPI/issues/331).
+  [theyosh]
+- Add a nice collerfull MOTD (Message of the Day) [theyosh]
+- Add translation badge. [TheYOSH]
+- Add setuptools to installer to get the latest version. [#347](https://github.com/theyosh/TerrariumPI/issues/347). [TheYOSH]
+- Add read out support for FTDI devices. [#348](https://github.com/theyosh/TerrariumPI/issues/348). [TheYOSH]
+- Add readout support for FTDI devices. [#348](https://github.com/theyosh/TerrariumPI/issues/348). [theyosh]
+- Add some more fun.. [TheYOSH]
+- Add some fun... [TheYOSH]
+- Add support for SHT31D sensor. [#332](https://github.com/theyosh/TerrariumPI/issues/332). [TheYOSH]
+- Add auto detecting Xiaomi Mi bluetooth sensors. And a fix to get a
+  better stability. [TheYOSH]
+- Add support for AMG8833. [#288](https://github.com/theyosh/TerrariumPI/issues/288). [TheYOSH]
+- Add testing service system. [TheYOSH]
+- Add first attempt for Xiaomi Mi Temperature and Humidity Monitor [#335](https://github.com/theyosh/TerrariumPI/issues/335).
+  [TheYOSH]
+- Add extra test. [TheYOSH]
+- Add extra help. [TheYOSH]
+- Add files to webhooks. [#334](https://github.com/theyosh/TerrariumPI/issues/334). [TheYOSH]
+- Add files to webhooks. [#334](https://github.com/theyosh/TerrariumPI/issues/334). [TheYOSH]
+- Add example cronjob for webcam archive clean up. [#329](https://github.com/theyosh/TerrariumPI/issues/329). [TheYOSH]
+- Add missing support for remote conductivity. [#330](https://github.com/theyosh/TerrariumPI/issues/330). [TheYOSH]
+- Add extra exception for loading sensors. Refs [#330](https://github.com/theyosh/TerrariumPI/issues/330). [TheYOSH]
+- Add brazilian portuguese language. Close [#328](https://github.com/theyosh/TerrariumPI/issues/328). [TheYOSH]
+- Add small updates for proper shutdown. [TheYOSH]
+- Add more progress indication. [theyosh]
+- Add more progress indication. [theyosh]
+- Add BrightPi support. [#280](https://github.com/theyosh/TerrariumPI/issues/280). [theyosh]
+- Add installation support for Bright-Pi. [#280](https://github.com/theyosh/TerrariumPI/issues/280). [theyosh]
+- Add submodule Bright-Pi. [theyosh]
+- Add min/max values to sensor gauges. [tvStatic]
+- Add extra options for motion detection. [tvStatic]
+- Add extra python2 module for hls-proxy. [theyosh]
+- Add translations. [tvStatic]
+- Add local file webcam. [tvStatic]
+- Add example script for manual button actions. [#204](https://github.com/theyosh/TerrariumPI/issues/204). [TheYOSH]
+
+**Fixes**
+------
+- Fix to many open files. Somehow the MLX90614 sensor does not close the
+  I2C bus... So need to force it manually. [#356](https://github.com/theyosh/TerrariumPI/issues/356). [theyosh]
+- Fix startup when offline. [#353](https://github.com/theyosh/TerrariumPI/issues/353). [theyosh]
+- Fix iCal bug. [theyosh]
+- More typo fixes. [theyosh]
+- Fix typo. [theyosh]
+- Fix python3 encoding. [#177](https://github.com/theyosh/TerrariumPI/issues/177). [theyosh]
+- Fix FTDI stare readout.... removed strange duplicate code....:( [#348](https://github.com/theyosh/TerrariumPI/issues/348).
+  [theyosh]
+- Fix python3 OpenCV issues. Should fix motion detection and image
+  archiving as well. [#334](https://github.com/theyosh/TerrariumPI/issues/334). [theyosh]
+- Fix dashboard notifications. [theyosh]
+- Fix motd execute bit. [theyosh]
+- Fix lineout motd text. [theyosh]
+- Fix translation typo. [theyosh]
+- Fix gentelella install. [TheYOSH]
+- Fix Gentelella Admin interface to latest stable version. [TheYOSH]
+- Fix files in webhooks. [#334](https://github.com/theyosh/TerrariumPI/issues/334). [TheYOSH]
+- Fix bleutooth scanning. [#335](https://github.com/theyosh/TerrariumPI/issues/335). [TheYOSH]
+- Fix python2 support. [TheYOSH]
+- Fix stupid dimmer typo.... [TheYOSH]
+- Fix broken startup when  1wire sensor is missing. [#324](https://github.com/theyosh/TerrariumPI/issues/324). [TheYOSH]
+- Fix broken installer [#323](https://github.com/theyosh/TerrariumPI/issues/323). [TheYOSH]
+- Fix for installing on Buster. [#317](https://github.com/theyosh/TerrariumPI/issues/317). [TheYOSH]
+- Fix white space. [theyosh]
+- Fix installer for BrightPi. [#280](https://github.com/theyosh/TerrariumPI/issues/280). [theyosh]
+- Fixed bug due to wrong logging. [#311](https://github.com/theyosh/TerrariumPI/issues/311). [theyosh]
+- Fix update check and support spaces in installation location path.
+  [theyosh]
+- Fix monkey patching.... [TheYOSH]
+- Fixed graphing issue when rebooting/restarting TerrariumPI. [#239](https://github.com/theyosh/TerrariumPI/issues/239).
+  [TheYOSH]
+- Fixed reboot animation. [TheYOSH]
+
+**Updates**
+------
+- Update install.sh. [swekley]
+- Update README.md. [TheYOSH]
+- Update MOTD and better update check. [theyosh]
+- Update translation files. [weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translation files. [weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update language files. [theyosh]
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translations. [theyosh]
+- Small updates. [theyosh]
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translations. [theyosh]
+- Update translation files. [Weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update README.md. [TheYOSH]
+- Update leaflet. [TheYOSH]
+- Small updates. [TheYOSH]
+- Updated engine so that it will keep working when there are errors with
+  sensors. [TheYOSH]
+- Update install.sh. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update start and installer scripts. [theyosh]
+- Update translations. [TheYOSH]
+
+**Other**
+------
+- Merge pull request [#362](https://github.com/theyosh/TerrariumPI/issues/362) from swekley/patch-1. [TheYOSH]
+
+  Update install.sh
+- Indent typo. [theyosh]
+- Import Python3 only modules in different blocks. [theyosh]
+- Merge branch 'master' of github.com:theyosh/TerrariumPI. [theyosh]
+- Translated using Weblate (German (Austria)) [kahuwi14]
+
+  Currently translated at 100.0% (800 of 800 strings)
+- Translated using Weblate (Norwegian Bokmål) [bfonn]
+
+  Currently translated at 100.0% (800 of 800 strings)
+- Translated using Weblate (German (Austria)) [theyosh]
+
+  Currently translated at 100.0% (800 of 800 strings)
+- Python3 working version... [#177](https://github.com/theyosh/TerrariumPI/issues/177). [theyosh]
+- Translated using Weblate (Norwegian Bokmål) [theyosh]
+
+  Currently translated at 86.5% (692 of 800 strings)
+- Translated using Weblate (Norwegian Bokmål) [theyosh]
+
+  Currently translated at 86.2% (690 of 800 strings)
+- Translated using Weblate (French (Belgium)) [theyosh]
+
+  Currently translated at 71.1% (569 of 800 strings)
+- Translated using Weblate (Italian) [theyosh]
+
+  Currently translated at 72.1% (577 of 800 strings)
+- Translated using Weblate (Portuguese (Brazil)) [theyosh]
+
+  Currently translated at 100.0% (800 of 800 strings)
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 100.0% (800 of 800 strings)
+- Translated using Weblate (Italian) [theyosh]
+
+  Currently translated at 72.1% (577 of 800 strings)
+- Translated using Weblate (French (Belgium)) [theyosh]
+
+  Currently translated at 72.0% (576 of 800 strings)
+- Translated using Weblate (German (Austria)) [theyosh]
+
+  Currently translated at 86.2% (690 of 800 strings)
+- Translated using Weblate (Portuguese (Brazil)) [theyosh]
+
+  Currently translated at 100.0% (800 of 800 strings)
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 100.0% (800 of 800 strings)
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 98.9% (791 of 800 strings)
+- Merge branch 'master' of github.com:theyosh/TerrariumPI. [theyosh]
+- Translated using Weblate (Portuguese (Brazil)) [theyosh]
+
+  Currently translated at 100.0% (800 of 800 strings)
+- Remove comments. [theyosh]
+- Checked webcam images with webhooks. Added a PHP example for the
+  receiving end. [#334](https://github.com/theyosh/TerrariumPI/issues/334). [theyosh]
+- Enable hardware serial. [#177](https://github.com/theyosh/TerrariumPI/issues/177). [theyosh]
+- Translated using Weblate (Dutch) [Weblate Admin]
+
+  Currently translated at 98.8% (790 of 800 strings)
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 99.9% (795 of 796 strings)
+- Cleanup the installer. [theyosh]
+- Make sure module melopero-amg8833 is always installed [#288](https://github.com/theyosh/TerrariumPI/issues/288). [theyosh]
+- Cleanup. [theyosh]
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 98.6% (785 of 796 strings)
+- Translated using Weblate (Portuguese (Brazil)) [theyosh]
+
+  Currently translated at 99.9% (795 of 796 strings)
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 97.5% (776 of 796 strings)
+- Translated using Weblate (Italian) [theyosh]
+
+  Currently translated at 72.7% (579 of 796 strings)
+- Translated using Weblate (German (Austria)) [theyosh]
+
+  Currently translated at 86.2% (686 of 796 strings)
+- Translated using Weblate (German (Austria)) [Weblate Admin]
+
+  Currently translated at 86.2% (686 of 796 strings)
+- Translated using Weblate (Portuguese (Brazil)) [TheYOSH]
+
+  Currently translated at 100.0% (796 of 796 strings)
+- Translated using Weblate (Dutch) [TheYOSH]
+
+  Currently translated at 91.6% (729 of 796 strings)
+- Typo. [TheYOSH]
+- Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
+  [theyosh]
+- Translated using Weblate (Dutch) [TheYOSH]
+
+  Currently translated at 95.4% (677 of 710 strings)
+- Translated using Weblate (French (Belgium)) [Weblate Admin]
+
+  Currently translated at 100.0% (619 of 619 strings)
+- Translated using Weblate (German (Austria)) [Weblate Admin]
+
+  Currently translated at 100.0% (702 of 702 strings)
+- Translated using Weblate (Dutch) [Weblate Admin]
+
+  Currently translated at 94.4% (670 of 710 strings)
+- Typo. [TheYOSH]
+- Merge branch 'master' of https://github.com/theyosh/TerrariumPI.
+  [theyosh]
+- Keep bluetooth connection open... [#335](https://github.com/theyosh/TerrariumPI/issues/335). [TheYOSH]
+- Ignore more. [TheYOSH]
+- Ignore more. [TheYOSH]
+- Cleanup. [TheYOSH]
+- Remove debug. [TheYOSH]
+- Strange bug.... [TheYOSH]
+- Save power switch manual mode state. [#336](https://github.com/theyosh/TerrariumPI/issues/336). [TheYOSH]
+- Make sure that we only dim when hardware is found. [TheYOSH]
+- Support for BrightPi. [#280](https://github.com/theyosh/TerrariumPI/issues/280). [TheYOSH]
+- Cleanup debug code. [#280](https://github.com/theyosh/TerrariumPI/issues/280). [theyosh]
+- Remove legacy cleanup code. [theyosh]
+- Better proxying NGINX. [theyosh]
+- Refactored [#315](https://github.com/theyosh/TerrariumPI/issues/315). Now you can choose if you want the min and max
+  values. Also the min and max values are respecting the smoothing
+  factor. Also, use always 3 decimals. [theyosh]
+- Merge pull request [#315](https://github.com/theyosh/TerrariumPI/issues/315) from tvStatic/feature/min_max_gauge_values.
+  [TheYOSH]
+
+  Add min/max values to sensor gauges
+- Finetuning pull request [#313](https://github.com/theyosh/TerrariumPI/issues/313). [theyosh]
+- Merge pull request [#313](https://github.com/theyosh/TerrariumPI/issues/313) from tvStatic/feature/configure_motion_detect.
+  [TheYOSH]
+
+  Configure motion detection options
+- Set motion options explicitly instead of in constructor. [tvStatic]
+- Hide motion settings when Motion is not set. [tvStatic]
+- Merge branch 'master' into development. [theyosh]
+- Merge pull request [#310](https://github.com/theyosh/TerrariumPI/issues/310) from tvStatic/feature/local_webcam. [TheYOSH]
+
+  Allow configuration of local location for webcam images
+- Test bug [#311](https://github.com/theyosh/TerrariumPI/issues/311). [TheYOSH]
+- Support Debian Buster. [TheYOSH]
+- Renamed example script. [TheYOSH]
+- Renamed example script. [TheYOSH]
+- Merge branch 'master' into development. [TheYOSH]
+- Merge branch 'master' into development. [TheYOSH]
+- Merge branch 'issue/254' into development. [TheYOSH]
+
+
+3.9.7 (2019-07-07)
+------------------
 
 **New**
 ------
@@ -44,6 +320,7 @@ Changelog
 
 **Updates**
 ------
+- Update changelog. [TheYOSH]
 - Update version number. [TheYOSH]
 - Update README.md. [TheYOSH]
 - Update README.md. [TheYOSH]
@@ -2245,3 +2522,5 @@ Changelog
 - Living on the edge.... use latest beta of Leaflet. [TheYOSH]
 - Initial release. [TheYOSH]
 - Initial commit. [TheYOSH]
+
+
