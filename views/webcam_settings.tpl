@@ -91,18 +91,19 @@
                           <label for="webcam_[nr]_name">{{_('Name')}}</label>
                           <input class="form-control" name="webcam_[nr]_name" placeholder="{{_('Name')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('webcam_field_name')}}">
                         </div>
-                        <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                        <div class="col-md-2 col-sm-2 col-xs-6 form-group">
                           <label for="webcam_[nr]_resolution">{{_('Resolution')}}</label>
                           <div class="form-group">
-                            <div class="col-md-6 col-sm-6 col-xs-12" style="padding-left: 0px;padding-right: 0px">
-                              <input class="form-control" name="webcam_[nr]_resolution_width" placeholder="{{_('Width')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" pattern="[0-9]+" data-original-title="{{translations.get_translation('webcam_field_resolution_width')}}">
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12" style="padding-left: 0px;padding-right: 0px">
-                              <input class="form-control" name="webcam_[nr]_resolution_height" placeholder="{{_('Height')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" pattern="[0-9]+"  data-original-title="{{translations.get_translation('webcam_field_resolution_height')}}">
-                            </div>
+                            <input class="form-control" name="webcam_[nr]_resolution_width" placeholder="{{_('Width')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" pattern="[0-9]+" data-original-title="{{translations.get_translation('webcam_field_resolution_width')}}">
                           </div>
                         </div>
-                        <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                        <div class="col-md-2 col-sm-2 col-xs-6 form-group">
+                          <label for="webcam_[nr]_resolution" style="visibility:hidden"></label>
+                          <div class="form-group">
+                            <input class="form-control" name="webcam_[nr]_resolution_height" placeholder="{{_('Height')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" pattern="[0-9]+"  data-original-title="{{translations.get_translation('webcam_field_resolution_height')}}">
+                          </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-6 form-group rotation">
                           <label for="webcam_[nr]_rotation">{{_('Picture rotation')}}</label>
                           <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('webcam_field_rotation')}}">
                             <select class="form-control" name="webcam_[nr]_rotation" tabindex="-1" placeholder="{{_('Select an option')}}">
@@ -113,6 +114,25 @@
                               <option value="270">270 {{_('degrees')}}</option>
                               <option value="H">{{_('Flip Horizontal')}}</option>
                               <option value="V">{{_('Flip Vertical')}}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-6 form-group awb">
+                          <label for="webcam_[nr]_awb">{{_('White balance')}}</label>
+                          <div class="form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translations.get_translation('webcam_field_awb')}}">
+                            <select class="form-control" name="webcam_[nr]_awb" tabindex="-1" placeholder="{{_('Select an option')}}">
+                              <option value="">{{_('Select an option')}}</option>
+                              <option value="off">{{_('off')}}</option>
+                              <option value="auto">{{_('auto')}}</option>
+                              <option value="sunlight">{{_('sunlight')}}</option>
+                              <option value="cloudy">{{_('cloudy')}}</option>
+                              <option value="shade">{{_('shade')}}</option>
+                              <option value="tungsten">{{_('tungsten')}}</option>
+                              <option value="fluorescent">{{_('fluorescent')}}</option>
+                              <option value="incandescent">{{_('incandescent')}}</option>
+                              <option value="flash">{{_('flash')}}</option>
+                              <option value="horizon">{{_('horizon')}}</option>
+                              <option value="greyworld">{{_('greyworld')}}</option>
                             </select>
                           </div>
                         </div>

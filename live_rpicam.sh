@@ -4,12 +4,13 @@ NAME=$1
 WIDTH=$2
 HEIGHT=$3
 ROTATION=$4
-DIR=$5
+AWB=$5
+DIR=$6
 
 # Test defaults
 if [[ "${NAME}" == "" ]];
 then
-  NAME="Test"
+  NAME="RPI Live"
 fi
 
 if [[ "${WIDTH}" == "" ]];
@@ -25,6 +26,11 @@ fi
 if [[ "${ROTATION}" == "" ]];
 then
   ROTATION="0"
+fi
+
+if [[ "${AWB}" == "" ]];
+then
+  AWB="auto"
 fi
 
 if [[ "${DIR}" == "" ]];
@@ -48,5 +54,5 @@ else
   ROTATION="-rot ${ROTATION}"
 fi
 
-`which raspivid` -o - -b 2000000 -t 0 -w ${WIDTH} -h ${HEIGHT} ${ROTATION} --drc low -fps 30 -g 30 -pf main -lev 4.1 -ae 16,0xff,0x808000 -a 8 -a " ${NAME} @ %d/%m/%Y %X " -a 1024 | \
+`which raspivid` -o - -b 2000000 -t 0 -w ${WIDTH} -h ${HEIGHT} ${ROTATION} -awb ${AWB} --drc low -fps 30 -g 30 -pf main -lev 4.1 -ae 16,0xff,0x808000 -a 8 -a " ${NAME} @ %d/%m/%Y %X " -a 1024 | \
  `which ffmpeg` -hide_banner -nostdin -re -i - -c:v copy -f hls -hls_time 2 -hls_list_size 3 -hls_flags delete_segments+split_by_time -hls_segment_filename "${DIR}/chunk_%03d.ts" "${DIR}/stream.m3u8"

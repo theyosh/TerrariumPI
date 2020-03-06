@@ -419,9 +419,10 @@ class terrariumEngine(object):
     seen_webcams = []
     for webcamdata in webcam_config:
       if webcamdata['id'] is None or webcamdata['id'] == 'None' or webcamdata['id'] not in self.webcams:
-        # New switch (add)
+        # New webcam (add)
         width = 640
         height = 480
+        awb = 'auto'
         archive = False
         archive_light = 'ignore'
         archive_door = 'ignore'
@@ -461,7 +462,9 @@ class terrariumEngine(object):
                                    webcamdata['location'],
                                    webcamdata['name'],
                                    webcamdata['rotation'],
-                                   width,height,
+                                   width,
+                                   height,
+                                   awb,
                                    archive,
                                    archive_light,
                                    archive_door,
@@ -470,6 +473,7 @@ class terrariumEngine(object):
           webcam.set_motion_delta_threshold(motion_delta_threshold)
           webcam.set_motion_min_area(motion_min_area)
           webcam.set_motion_compare_frame(motion_compare_frame)
+         
           self.webcams[webcam.get_id()] = webcam
         except Exception as err:
           print(err)
@@ -507,6 +511,9 @@ class terrariumEngine(object):
 
       if 'motioncompareframe' in webcamdata:
         webcam.set_motion_compare_frame(webcamdata['motioncompareframe'])
+        
+      if 'awb' in webcamdata:
+        webcam.set_awb(webcamdata['awb'])
 
       seen_webcams.append(webcam.get_id())
 

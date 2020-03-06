@@ -50,11 +50,12 @@ class terrariumWebcamSource(object):
   UPDATE_TIMEOUT = 60
   VALID_ROTATIONS = ['0','90','180','270','h','v']
 
-  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
+  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, awb = 'auto', archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
     # Variables per webcam
     self.raw_image = None
 
     # 'Hidden' variables
+    self.__awb = awb
     self.__max_zoom = 0
     self.__last_update = 0
     self.__last_archive = 0
@@ -356,6 +357,7 @@ class terrariumWebcamSource(object):
             'last_update' : self.get_last_update(),
             'image': self.get_raw_image(),
             'preview': self.get_preview_image(),
+            'awb' : self.get_awb(),
             'archive': self.get_archive(),
             'archivelight': self.get_archive_light(),
             'archivedoor': self.get_archive_door(),
@@ -409,6 +411,12 @@ class terrariumWebcamSource(object):
 
   def get_max_zoom(self):
     return self.__max_zoom
+
+  def set_awb(self,mode):
+    self.__awb = mode
+
+  def get_awb(self):
+    return self.__awb
 
   def get_archive(self):
     return self.archive
@@ -476,8 +484,8 @@ class terrariumWebcamSource(object):
     pass
 
 class terrariumWebcamLiveSource(terrariumWebcamSource):
-  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
-    super(terrariumWebcamLiveSource,self).__init__(webcam_id, location, name, rotation, width, height, archive, archive_light, archive_door, environment)
+  def __init__(self, webcam_id, location, name = '', rotation = '0', width = 640, height = 480, awb = 'auto', archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
+    super(terrariumWebcamLiveSource,self).__init__(webcam_id, location, name, rotation, width, height, awb, archive, archive_light, archive_door, environment)
     self.process_id = None
     self.start()
 
@@ -523,6 +531,26 @@ class terrariumWebcamLiveSource(terrariumWebcamSource):
   def is_live(self):
     return True
 
+# Bug / Upstream
+# https://github.com/raspberrypi/firmware/issues/1167#issuecomment-511798033
+# https://github.com/waveform80/picamera/pull/576
+from picamera import mmal 
+import ctypes as ct
+
+class PiCameraUpstream(PiCamera):
+  AWB_MODES = {
+    'off':           mmal.MMAL_PARAM_AWBMODE_OFF,
+    'auto':          mmal.MMAL_PARAM_AWBMODE_AUTO,
+    'sunlight':      mmal.MMAL_PARAM_AWBMODE_SUNLIGHT,
+    'cloudy':        mmal.MMAL_PARAM_AWBMODE_CLOUDY,
+    'shade':         mmal.MMAL_PARAM_AWBMODE_SHADE,
+    'tungsten':      mmal.MMAL_PARAM_AWBMODE_TUNGSTEN,
+    'fluorescent':   mmal.MMAL_PARAM_AWBMODE_FLUORESCENT,
+    'incandescent':  mmal.MMAL_PARAM_AWBMODE_INCANDESCENT,
+    'flash':         mmal.MMAL_PARAM_AWBMODE_FLASH,
+    'horizon':       mmal.MMAL_PARAM_AWBMODE_HORIZON,
+    'greyworld':     ct.c_uint32(10)
+  }
 
 class terrariumWebcamRPI(terrariumWebcamSource):
   TYPE = 'rpicam'
@@ -533,7 +561,8 @@ class terrariumWebcamRPI(terrariumWebcamSource):
     logger.debug('Using RPICAM')
     stream = BytesIO()
     try:
-      with PiCamera(resolution=(self.resolution['width'], self.resolution['height'])) as camera:
+      with PiCameraUpstream(resolution=(self.resolution['width'], self.resolution['height'])) as camera:
+        camera.awb_mode = self.get_awb()
         logger.debug('Open rpicam')
         camera.start_preview()
         logger.debug('Wait %s seconds for preview' % (terrariumWebcamSource.WARM_UP,))
@@ -633,11 +662,12 @@ class terrariumWebcamRPILive(terrariumWebcamLiveSource):
 
   def cmd(self):
     resolution = self.get_resolution()
-    return './live_rpicam.sh "{}" {} {} {} {}'.format(self.get_name(),
-                                                      resolution['width'] if self.get_rotation() not in ['90','270'] else resolution['height'],
-                                                      resolution['height'] if self.get_rotation() not in ['90','270'] else resolution['width'],
-                                                      self.get_rotation(),
-                                                      terrariumWebcamRPILive.STORE_LOCATION + self.get_id())
+    return './live_rpicam.sh "{}" {} {} {} {} {}'.format(self.get_name(),
+                                                         resolution['width'] if self.get_rotation() not in ['90','270'] else resolution['height'],
+                                                         resolution['height'] if self.get_rotation() not in ['90','270'] else resolution['width'],
+                                                         self.get_rotation(),
+                                                         self.get_awb(),
+                                                         terrariumWebcamRPILive.STORE_LOCATION + self.get_id())
 
 class terrariumWebcamHLSLive(terrariumWebcamLiveSource):
   TYPE = 'hls_live'
@@ -664,10 +694,10 @@ class terrariumWebcam(object):
              terrariumWebcamRPILive,
              terrariumWebcamHLSLive]
 
-  def __new__(self,webcam_id, location, name = '', rotation = '0', width = 640, height = 480, archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
+  def __new__(self,webcam_id, location, name = '', rotation = '0', width = 640, height = 480, awb = 'auto', archive = False, archive_light = 'ignore', archive_door = 'ignore', environment = None):
     for webcam_source in terrariumWebcam.SOURCES:
       if re.search(webcam_source.VALID_SOURCE, location, re.IGNORECASE):
-        return webcam_source(webcam_id,location,name,rotation,width,height,archive,archive_light,archive_door,environment)
+        return webcam_source(webcam_id,location,name,rotation,width,height,awb,archive,archive_light,archive_door,environment)
 
     raise terrariumWebcamSourceException()
 
