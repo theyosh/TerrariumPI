@@ -1,5 +1,6 @@
 # TerrariumPI 3.9.7
 <a href="https://weblate.theyosh.nl/engage/terrariumpi/?utm_source=widget"><img src="https://weblate.theyosh.nl/widgets/terrariumpi/-/webinterface/svg-badge.svg" alt="Translation status" /></a>
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI?ref=badge_shield)
 
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
 
@@ -187,7 +188,6 @@ more information is here: [Remote data wiki](https://github.com/theyosh/Terrariu
 (made on a very big screen :P )
 ### Dashboard
 ![TerrariumPI 2.5 Dashboard screenshot](screenshots/Dashboard.png)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI?ref=badge_shield)
 ### Sensors
 ![TerrariumPI 2.5 Sensors settings screenshot](screenshots/Temperature_sensors_list.png)
 ### Adding sensors
