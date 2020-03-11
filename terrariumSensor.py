@@ -164,7 +164,7 @@ class terrariumSensorSource(object):
                                                                                       time()-starttime))
       self.__current_value = current
 
-  def get_data(self):
+  def get_data(self, temperature_type = None):
     data = {'id' : self.get_id(),
             'hardwaretype' : self.get_type(),
             'address' : self.get_address(),
@@ -181,6 +181,11 @@ class terrariumSensorSource(object):
             'error' : not self.is_active(),
             'exclude_avg' : self.get_exclude_avg()
             }
+
+    if 'temperature' == self.get_sensor_type() and temperature_type is not None and temperature_type != self.get_indicator():
+      data['indicator'] = temperature_type
+      for field in ['current','alarm_min','alarm_max','limit_min','limit_max']:
+        data[field] = terrariumUtils.convert_from_to(data[field],self.get_indicator(), temperature_type)
 
     return data
 

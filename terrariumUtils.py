@@ -185,6 +185,23 @@ class terrariumUtils():
     return float(current)
 
   @staticmethod
+  def convert_from_to(current, indicator_from, indicator_to):
+    indicator_from = indicator_from.lower()
+    indicator_to = indicator_to.lower()
+
+    if 'c' == indicator_from:
+      pass # Nothing to do
+    elif 'f' == indicator_from:
+      current = terrariumUtils.to_celsius(current)
+
+    if 'c' == indicator_to:
+      pass # Nothing to do
+    if 'f' == indicator_to:
+      current = terrariumUtils.to_fahrenheit(current)
+
+    return current
+
+  @staticmethod
   def is_float(value):
     if value is None or '' == value:
       return False
