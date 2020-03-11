@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2020-03-06 21:48+CET\n"
-"PO-Revision-Date: 2020-01-30 16:50+0000\n"
+"PO-Revision-Date: 2020-03-11 13:28+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <http://weblate.theyosh.nl/projects/terrariumpi/"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
 "webinterface/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.10.3\n"
+"X-Generator: Weblate 3.11.3\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -283,7 +283,7 @@ msgstr "Bevat de webcam rotatie van de afbeelding."
 
 #: terrariumTranslations.py:80
 msgid "Select the white balance type. Only for Raspberry PI camera's."
-msgstr ""
+msgstr "Selecteer het type witbalans. Alleen voor Raspberry PI-camera's."
 
 #: terrariumTranslations.py:81
 msgid "Shows the webcam preview image."
@@ -3908,57 +3908,51 @@ msgstr "Voeg nieuwe webcam toe"
 
 #: views/webcam_settings.tpl:121
 msgid "White balance"
-msgstr ""
+msgstr "Witbalans"
 
 #: views/webcam_settings.tpl:125
-#, fuzzy
-#| msgid "Off"
 msgid "off"
-msgstr "Uit"
+msgstr "uit"
 
 #: views/webcam_settings.tpl:126
 msgid "auto"
-msgstr ""
+msgstr "auto"
 
 #: views/webcam_settings.tpl:127
-#, fuzzy
-#| msgid "Night"
 msgid "sunlight"
-msgstr "Nacht"
+msgstr "zonlicht"
 
 #: views/webcam_settings.tpl:128
 msgid "cloudy"
-msgstr ""
+msgstr "bewolkt"
 
 #: views/webcam_settings.tpl:129
 msgid "shade"
-msgstr ""
+msgstr "schaduw"
 
 #: views/webcam_settings.tpl:130
 msgid "tungsten"
-msgstr ""
+msgstr "wolfraam"
 
 #: views/webcam_settings.tpl:131
 msgid "fluorescent"
-msgstr ""
+msgstr "fluorescerend"
 
 #: views/webcam_settings.tpl:132
 msgid "incandescent"
-msgstr ""
+msgstr "gloeiend"
 
 #: views/webcam_settings.tpl:133
 msgid "flash"
-msgstr ""
+msgstr "flits"
 
 #: views/webcam_settings.tpl:134
-#, fuzzy
-#| msgid "Horizontal"
 msgid "horizon"
-msgstr "Horizontaal"
+msgstr "horizon"
 
 #: views/webcam_settings.tpl:135
 msgid "greyworld"
-msgstr ""
+msgstr "grijze wereld"
 
 #: views/webcam_settings.tpl:140
 msgid "Archive"
