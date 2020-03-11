@@ -64,8 +64,8 @@ class terrariumMiFloraSensor(terrariumSensorSource):
 
     return data
 
-  def get_data(self):
-    data = super(terrariumMiFloraSensor,self).get_data()
+  def get_data(self, temperature_type = None):
+    data = super(terrariumMiFloraSensor,self).get_data(temperature_type)
     data['firmware'] = self.get_firmware()
     data['battery']  = self.get_battery()
 

@@ -891,19 +891,32 @@ echo ""
   def get_sensors(self, parameters = [], socket = False):
     data = []
     filtertype = None
+    temperature_type = None
+
+    if len(parameters) > 0 and parameters[-1] in ['celsius','fahrenheit','kelvin']:
+      temperature_type = parameters[-1].lower()
+      if 'celsius' == temperature_type:
+        temperature_type = 'C'
+      if 'fahrenheit' == temperature_type:
+        temperature_type = 'F'
+      if 'kelvin' == temperature_type:
+        temperature_type = 'K'
+
+      del(parameters[-1])
+
     if len(parameters) > 0 and parameters[0] is not None:
       filtertype = parameters[0]
 
     # Filter is based on sensorid
     if filtertype is not None and filtertype in self.sensors:
-      data.append(self.sensors[filtertype].get_data())
+      data.append(self.sensors[filtertype].get_data(temperature_type=temperature_type))
 
     else:
       for sensorid in self.sensors:
         # Filter based on sensor type
         # Exclude Chirp light sensors for average calculation in favour of Lux measurements
         if filtertype is None or (filtertype == 'average' and not (self.sensors[sensorid].get_exclude_avg() or (self.sensors[sensorid].get_sensor_type() == 'light' and self.sensors[sensorid].get_type() == 'chirp'))) or filtertype == self.sensors[sensorid].get_sensor_type():
-          data.append(self.sensors[sensorid].get_data())
+          data.append(self.sensors[sensorid].get_data(temperature_type=temperature_type))
 
     if 'average' == filtertype or len(parameters) == 2 and parameters[1] == 'average':
       average = {}
@@ -930,9 +943,17 @@ echo ""
 
         average[averagetype]['alarm'] = not (average[averagetype]['alarm_min'] <= average[averagetype]['current'] <= average[averagetype]['alarm_max'])
         average[averagetype]['type'] = averagetype
-        average[averagetype]['indicator'] = self.__unit_type(averagetype[8:])
+        average[averagetype]['indicator'] = temperature_type if 'temperature' == averagetype[8:] and temperature_type is not None else self.__unit_type(averagetype[8:])
 
       data = average
+
+#    if temperature_type is not None and temperature_type != terrariumConfig.get_temperature_indicator():
+#      if 'C' == temperature_type:
+#        pass
+#      elif 'F' == temperature_type:
+#        pass
+#      elif 'K' == temperature_type:
+#        pass
 
     if socket:
       self.__send_message({'type':'sensor_gauge','data':data})

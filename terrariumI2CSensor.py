@@ -563,8 +563,8 @@ class terrariumChirpSensor(terrariumSensorSource):
 
     return data
 
-  def get_data(self):
-    data = super(terrariumChirpSensor,self).get_data()
+  def get_data(self, temperature_type = None):
+    data = super(terrariumChirpSensor,self).get_data(temperature_type)
     data['min_moist'] = self.get_min_moist_calibration()
     data['max_moist']  = self.get_max_moist_calibration()
     data['temp_offset']  = self.get_temperature_offset_calibration()
