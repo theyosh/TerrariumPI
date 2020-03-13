@@ -2,16 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2020-03-06 21:48+CET\n"
-"PO-Revision-Date: 2020-01-30 16:50+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Portuguese (Brazil) <http://weblate.theyosh.nl/projects/"
+"PO-Revision-Date: 2020-03-14 11:03+0000\n"
+"Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
+"Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.10.3\n"
+"X-Generator: Weblate 3.11.3\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumEngine.py:660 terrariumEngine.py:748 views/dashboard.tpl:7
@@ -282,6 +282,7 @@ msgstr "Rotação da webcam na imagem."
 #: terrariumTranslations.py:80
 msgid "Select the white balance type. Only for Raspberry PI camera's."
 msgstr ""
+"Selecione o balanço de branco, disponível apenas para a Raspberry PI camera."
 
 #: terrariumTranslations.py:81
 msgid "Shows the webcam preview image."
@@ -2830,8 +2831,8 @@ msgid ""
 "The week forecast shows the temperature per hour for 10 days from now. The "
 "title holds the graph period."
 msgstr ""
-"A previsão da semana mostra a temperatura por hora daqui a 10 dias. O título "
-"contém o período do gráfico."
+"A previsão da semana mostra a temperatura por hora nos próximos 10 dias. O "
+"título contém o período do gráfico."
 
 #: views/inc/usage_weather.tpl:35
 msgid ""
@@ -3892,57 +3893,51 @@ msgstr "Adicionar nova webcam"
 
 #: views/webcam_settings.tpl:121
 msgid "White balance"
-msgstr ""
+msgstr "Balanço de branco"
 
 #: views/webcam_settings.tpl:125
-#, fuzzy
-#| msgid "Off"
 msgid "off"
 msgstr "Desl"
 
 #: views/webcam_settings.tpl:126
 msgid "auto"
-msgstr ""
+msgstr "autom"
 
 #: views/webcam_settings.tpl:127
-#, fuzzy
-#| msgid "Night"
 msgid "sunlight"
-msgstr "Noite"
+msgstr "Luz do sol"
 
 #: views/webcam_settings.tpl:128
 msgid "cloudy"
-msgstr ""
+msgstr "Entre nuvens"
 
 #: views/webcam_settings.tpl:129
 msgid "shade"
-msgstr ""
+msgstr "Sombreado"
 
 #: views/webcam_settings.tpl:130
 msgid "tungsten"
-msgstr ""
+msgstr "Tungstênio"
 
 #: views/webcam_settings.tpl:131
 msgid "fluorescent"
-msgstr ""
+msgstr "Flourescente"
 
 #: views/webcam_settings.tpl:132
 msgid "incandescent"
-msgstr ""
+msgstr "Incandescente"
 
 #: views/webcam_settings.tpl:133
 msgid "flash"
-msgstr ""
+msgstr "Flash"
 
 #: views/webcam_settings.tpl:134
-#, fuzzy
-#| msgid "Horizontal"
 msgid "horizon"
 msgstr "Horizontal"
 
 #: views/webcam_settings.tpl:135
 msgid "greyworld"
-msgstr ""
+msgstr "Opção desabilitada"
 
 #: views/webcam_settings.tpl:140
 msgid "Archive"
@@ -4376,7 +4371,7 @@ msgstr "Volume em litros"
 
 #: Missing text string
 msgid "Weather day forecast screenshot"
-msgstr "Captura de tela da previsão do tempo do dia"
+msgstr "Captura de tela da previsão do tempo diária"
 
 #: Missing text string
 msgid "Weather forecast screenshot"
