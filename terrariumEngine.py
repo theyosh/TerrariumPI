@@ -769,7 +769,8 @@ echo ""
                         'value' : '{:.2f} C'.format(data['system']['temperature']),
                         'alarm' : False})
 
-    left_padding  = max([len(line['key']) for line in left_lines])
+    if len(left_lines) > 0:
+      left_padding  = max([len(line['key']) for line in left_lines])
     right_padding = max([len(line['key']) for line in right_lines])
 
     line_nr = 0
