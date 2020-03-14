@@ -136,7 +136,6 @@ class terrariumSensorSource(object):
                                                                                                                                 time()-starttime))
       if self.__erratic_errors >= 5:
         # After 5 times, use the current value as the new truth
-        self.__erratic_errors = 0
         self.__current_value = current
         self.__last_update = int(starttime)
         logger.warning('After %s erratic measurements is the current value %s%s is promoted to a valid value for %s sensor \'%s\' in %.5f seconds.' %
@@ -146,6 +145,7 @@ class terrariumSensorSource(object):
                                                                                                                                     self.get_type(),
                                                                                                                                     self.get_name(),
                                                                                                                                     time()-starttime))
+        self.__erratic_errors = 0
 
 
       else:
