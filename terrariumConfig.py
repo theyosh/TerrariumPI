@@ -679,7 +679,8 @@ class terrariumConfig(object):
   def save_sensors(self,data):
     update_ok = True
     for sensor in self.get_sensors():
-      self.__config.remove_section('sensor' + sensor['id'])
+      if 'exclude' not in sensor or not terrariumUtils.is_true(sensor['exclude']):
+        self.__config.remove_section('sensor' + sensor['id'])
 
     for sensorid in data:
       update_ok = update_ok and self.save_sensor(data[sensorid].get_data())

@@ -192,12 +192,21 @@ class terrariumEngine(object):
     if not reloading:
       self.sensors = {}
 
+    exclude_ids = []
+    for sensor_data in sensor_config:
+      if 'exclude' in sensor_data and terrariumUtils.is_true(sensor_data['exclude']):
+        logger.info('Excluding sensor with ID {}'.format(sensor_data['id']))
+        exclude_ids.append(sensor_data['id'])
+
     seen_sensors = []
     for sensor in terrariumSensor.scan_sensors(self.__unit_type):
-      if sensor.get_id() not in self.sensors:
+      if sensor.get_id() not in self.sensors and sensor.get_id() not in exclude_ids:
         self.sensors[sensor.get_id()] = sensor
 
     for sensordata in sensor_config:
+      if sensordata['id'] in exclude_ids:
+        continue
+
       if sensordata['id'] not in self.sensors:
         # New sensor (add)
         try:
