@@ -557,6 +557,8 @@ class terrariumChirpSensor(terrariumSensorSource):
       data['temperature'] = float(sensor.temp)
       data['moisture'] = float(sensor.moist_percent)
       data['light'] = 100.0 - ((float(sensor.light) / 65536.0) * 100.0)
+      # Dirty hack. The Chirp sensor does not close it connection. We will force it here
+      sensor.bus.close()
 
     except Exception as ex:
       print(ex)
