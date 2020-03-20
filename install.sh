@@ -46,7 +46,7 @@ whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --ye
 case $? in
   0) whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --infobox "TerrariumPI is removing not needed programs" 0 0
 
-     debconf-apt-progress -- apt-get -y remove wolfram-engine sonic-pi oracle-java8-jdk desktop-base gnome-desktop3-data libgnome-desktop-3-10 epiphany-browser-data epiphany-browser nuscratch scratch wiringpi "^libreoffice.*"
+     debconf-apt-progress -- apt-get -y remove wolfram-engine sonic-pi oracle-java8-jdk desktop-base gnome-desktop3-data "^libgnome-desktop.*" epiphany-browser-data epiphany-browser nuscratch scratch wiringpi "^libreoffice.*"
      debconf-apt-progress -- apt-get -y autoremove
   ;;
 esac
