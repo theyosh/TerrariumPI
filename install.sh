@@ -46,7 +46,7 @@ whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --ye
 case $? in
   0) whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --infobox "TerrariumPI is removing not needed programs" 0 0
 
-     debconf-apt-progress -- apt-get -y remove wolfram-engine sonic-pi oracle-java8-jdk desktop-base gnome-desktop3-data "^libgnome-desktop.*" epiphany-browser-data epiphany-browser nuscratch scratch wiringpi "^libreoffice.*"
+     debconf-apt-progress -- apt-get -y remove wolfram-engine sonic-pi openbox nodered "^oracle-java.*" "^openjdk.*" "^chromium-browser.*" desktop-base gnome-desktop3-data "^libgnome-desktop.*" epiphany-browser-data epiphany-browser nuscratch "^scratch.*" wiringpi "^libreoffice.*"
      debconf-apt-progress -- apt-get -y autoremove
   ;;
 esac
@@ -64,6 +64,7 @@ fi
 
 debconf-apt-progress -- apt-get -y update
 debconf-apt-progress -- apt-get -y full-upgrade
+debconf-apt-progress -- apt-get -y autoremove
 
 APT_PACKAGES="libftdi1 screen git subversion watchdog build-essential i2c-tools pigpio owserver sqlite3 vlc-bin ffmpeg libfreetype6-dev libjpeg-dev \
   libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libjasper1 libgstreamer0.10-0 libgstreamer1.0-0 libilmbase12 \
