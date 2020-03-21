@@ -109,7 +109,8 @@ class terrariumI2CSensor(terrariumSensorSource):
   def close(self):
     try:
       self.i2c_bus.close()
-
+    except AttributeError as ex:
+      pass # Bus is already closed
     except Exception as ex:
       logger.warning('Error closing {} sensor \'{}\'. Error message: {}'.format(self.get_type(),self.get_name(),ex))
 
