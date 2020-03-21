@@ -651,6 +651,9 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
           url = 'http://{}/apis?apikey={}'.format(data['host'],data['password'])
 
         state = terrariumUtils.get_remote_data(url)
+        if state is None:
+          logger.warning('Error reading Sonoff \'{}\' power state. So retruning last known state: {}'.format(self.get_name(),self.state))
+          return self.state
 
         if 'tasmota' == self.__firmware:
           return terrariumPowerSwitch.ON if terrariumUtils.is_true(state['POWER']) else terrariumPowerSwitch.OFF
