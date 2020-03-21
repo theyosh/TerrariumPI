@@ -736,7 +736,7 @@ reset=$(tput sgr0)
     else:
       motd_title_part1 =f.renderText(system_title).split('\n')
 
-    spaces = (80 - (len(max(motd_title_part1,key=len)) + (0 if motd_title_part2 is None else len(max(motd_title_part2,key=len))))) / 2
+    spaces = int((80 - (len(max(motd_title_part1,key=len)) + (0 if motd_title_part2 is None else len(max(motd_title_part2,key=len))))) / 2)
     spaces = spaces * ' '
 
     for counter, line in enumerate(motd_title_part1):
