@@ -730,26 +730,29 @@ reset=$(tput sgr0)
     f = pyfiglet.Figlet(font='doom')
 
     if system_title.lower().endswith('pi'):
-      motd_title_part1 = f.renderText(' {} '.format(re.sub('pi','',system_title,flags=re.IGNORECASE).strip())).split('\n')
+      motd_title_part1 = f.renderText(re.sub('pi','',system_title,flags=re.IGNORECASE).strip()).split('\n')
       motd_title_part2 = f.renderText('PI').split('\n')
 
     else:
-      motd_title_part1 =f.renderText(' {} '.format(system_title))
+      motd_title_part1 =f.renderText(system_title).split('\n')
+
+    spaces = (80 - (len(max(motd_title_part1,key=len)) + (0 if motd_title_part2 is None else len(max(motd_title_part2,key=len))))) / 2
+    spaces = spaces * ' '
 
     for counter, line in enumerate(motd_title_part1):
         if len(line.strip()) == 0:
             continue
 
-        motd_line = 'echo "${green}' + line.replace('`','\`')
-        if motd_title_part2 is not None:
-            motd_line += '${red}' + motd_title_part2[counter].replace('`','\`')
+        motd_line = 'echo "' + spaces + ' ${green}' + line.replace('`','\`')
+        if motd_title_part2 is not None and counter < len(motd_title_part2):
+            motd_line += ' ${red}' + motd_title_part2[counter].replace('`','\`').strip()
 
         motd_line += '"'
         motd_lines.append(motd_line)
 
     motd_lines.append('echo "${reset} "')
 
-    motd_name = '{:<38}'.format('     ' + self.config.get_profile_name())
+    motd_name = '{:<40}'.format(spaces + '   ' + self.config.get_profile_name())
 
     motd_lines.append('echo "{}{}{}: {}{}{}"'.format(
         '${blue}' + motd_name + '${reset}',
