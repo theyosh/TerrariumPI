@@ -229,7 +229,7 @@ cd "${BASEDIR}/gentelella"
 git checkout 1.4.0 > /dev/null 2> /dev/null
 cd "${BASEDIR}/.."
 
-PIP_MODULES="setuptools python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_GPIO Adafruit_DHT Adafruit-SHT31 luma.oled bluepy pywemo pyownet emails mh-z19 icalendar melopero-amg8833 PCA9685-driver"
+PIP_MODULES="setuptools python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_GPIO Adafruit_DHT Adafruit-SHT31 luma.oled bluepy pywemo pyownet emails mh-z19 icalendar melopero-amg8833 PCA9685-driver pyfiglet"
 if [ $PYTHON -eq 2 ]; then
   PIP_MODULES="${PIP_MODULES} iCalEvents==0.1.21"
 fi

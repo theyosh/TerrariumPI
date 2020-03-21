@@ -21,6 +21,7 @@ import psutil
 import subprocess
 import re
 import json
+import pyfiglet
 
 from hashlib import md5
 from gevent import sleep
@@ -718,19 +719,40 @@ gray=$(tput setaf 8)
 reset=$(tput sgr0)
 
 # The message
-echo ""
-echo " ${green} _____                        _                  ${red}______ _____ "
-echo " ${green}|_   _|                      (_)                 ${red}| ___ \_   _|"
-echo " ${green}  | | ___ _ __ _ __ __ _ _ __ _ _   _ _ __ ___   ${red}| |_/ / | |"
-echo " ${green}  | |/ _ \ '__| '__/ _\` | '__| | | | | '_ \` _ \  ${red}|  __/  | |"
-echo " ${green}  | |  __/ |  | | | (_| | |  | | |_| | | | | | | ${red}| |    _| |_"
-echo " ${green}  \_/\___|_|  |_|  \__,_|_|  |_|\__,_|_| |_| |_| ${red}\_|    \___/"
-echo " ${reset}"
-echo ""
 """
 
     motd_lines = template.splitlines()
-    motd_lines.append('echo "                                    {}{}: {}{}{}"'.format(
+
+    system_title = self.config.get_system()['title'].replace(self.config.get_system()['version'],'').strip()
+    motd_title_part1 = None
+    motd_title_part2 = None
+
+    f = pyfiglet.Figlet(font='doom')
+
+    if system_title.lower().endswith('pi'):
+      motd_title_part1 = f.renderText(' {} '.format(re.sub('pi','',system_title,flags=re.IGNORECASE).strip())).split('\n')
+      motd_title_part2 = f.renderText('PI').split('\n')
+
+    else:
+      motd_title_part1 =f.renderText(' {} '.format(system_title))
+
+    for counter, line in enumerate(motd_title_part1):
+        if len(line.strip()) == 0:
+            continue
+
+        motd_line = 'echo "${green}' + line.replace('`','\`')
+        if motd_title_part2 is not None:
+            motd_line += '${red}' + motd_title_part2[counter].replace('`','\`')
+
+        motd_line += '"'
+        motd_lines.append(motd_line)
+
+    motd_lines.append('echo "${reset} "')
+
+    motd_name = '{:<38}'.format('     ' + self.config.get_profile_name())
+
+    motd_lines.append('echo "{}{}{}: {}{}{}"'.format(
+        '${blue}' + motd_name + '${reset}',
         '${yellow}' if self.update_available else '        ',
         _('Version'),
         self.current_version,
