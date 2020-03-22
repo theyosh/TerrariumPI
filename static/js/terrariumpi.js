@@ -697,11 +697,11 @@ function prepare_form_data(form) {
   var formdata = [];
   var form_type = form.attr('action').split('/').pop();
 
-  var re = /(sensor|switch|webcam|light|humidity|temperature|watertank|moisture|conductivity|ph|co2|fertility|door|profile|playlist)(_\d+)?_(.*)/i;
+  var re = /(calendar|sensor|switch|webcam|light|humidity|temperature|watertank|moisture|conductivity|ph|co2|fertility|door|profile|playlist)(_\d+)?_(.*)/i;
   var matches = null;
   var objectdata = {};
   var prev_nr = -1;
-  if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'profile' || form_type === 'notifications' || form_type === 'hardware') {
+  if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'profile' || form_type === 'notifications' || form_type === 'hardware' || form_type === 'calendar') {
     formdata = {};
   }
   try {
@@ -714,9 +714,15 @@ function prepare_form_data(form) {
           case 'weather':
           case 'system':
           case 'notifications':
+          case 'calendar':
             if (field_name == 'age') {
               field_value = moment(field_value,'L').unix();
             }
+            
+            if (field_name == 'calendar_date') {
+              field_value = moment(field_value,'L').unix();
+            }
+            
             formdata[field_name] = field_value;
             break;
           case 'hardware':
@@ -763,7 +769,7 @@ function prepare_form_data(form) {
       }
     });
     if (Object.keys(objectdata).length > 1) {
-      if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'notifications' || form_type === 'hardware') {
+      if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'notifications' || form_type === 'hardware' || form_type === 'calendar') {
         formdata[prev_nr] = $.extend(true, {}, objectdata);
       } else {
         formdata.push($.extend(true, {}, objectdata));
@@ -2947,6 +2953,38 @@ function load_calendar_history() {
     }
     $('ul.nav.navbar-nav.navbar-right ul#calendar_messages li.no_message').toggle(data.length==0);
   });
+}
+
+function calendar_item(options) {
+  if (options === undefined) {
+      options = {start : new Date(), id : null};
+  }
+  
+  // Create a trigger to toggle the calendar. But we have to wait until the modal window is starting to show...
+  modalWindow = $('.add-form').on('show.bs.modal',function(event) {
+    setTimeout(function(){
+      $('#calendar_date').trigger('click');
+    },1);
+  });
+  
+  $('#calendar_date').daterangepicker({
+      startDate: options.start,
+      endDate: options.start,
+      singleDatePicker: true,
+      autoUpdateInput: true,
+      autoApply: true,
+      parentEl: '#calendar_date_picker'
+  }, function(start, end, label) {
+  //console.log(start.toISOString(), end.toISOString(), label);              
+  });
+  
+  $('#calendar_date').on('hide.daterangepicker',function(event){
+      setTimeout(function(){
+        $('#calendar_date').trigger('click');
+      },1);
+  });            
+
+  modalWindow.modal('show');
 }
 
 /**

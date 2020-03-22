@@ -1095,7 +1095,7 @@ reset=$(tput sgr0)
   # End doors part
 
 
-
+  # Calender part
   def get_calendar(self,parameters,**parameters2):
     if 'ical' in parameters:
       return self.calendar.get_ical()
@@ -1128,7 +1128,15 @@ reset=$(tput sgr0)
       events.append(event)
 
     return json.dumps(events)
-
+  
+  def create_calendar_event(self, title, message = None, location = None, start = None, stop = None, uid = None):
+    if start is None:
+      start = datetime.date.today()
+      
+    else:
+      start = datetime.date.fromtimestamp(int(start))
+      
+    self.calendar.create_event(uid,title,message,location,start,stop)
 
   def replace_hardware_calender_event(self,switch_id,device,reminder_amount,reminder_period):
     # Two events:
@@ -1166,6 +1174,7 @@ reset=$(tput sgr0)
                                  None,
                                  current_time)
 
+  # End Calendar part
 
   # Webcams part
   def get_webcams(self, parameters = [], socket = False):

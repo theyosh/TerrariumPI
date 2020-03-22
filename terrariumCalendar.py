@@ -2,6 +2,9 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
+from hashlib import md5
+
+
 from datetime import datetime, timedelta, date
 from operator import attrgetter
 from icalendar import Calendar, Event
@@ -44,6 +47,9 @@ class terrariumCalendar(object):
 
   def create_event(self,uid,title,message,location = None,start = None,stop = None):
     ical = Calendar.from_ical(self.__ical_data)
+    
+    if uid is None:
+      uid = md5(title).hexdigest()
 
     if start is None:
       start = datetime.now()

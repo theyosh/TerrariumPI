@@ -155,6 +155,11 @@ footer .pull-right .label {
   opacity: 0.2;
 }
 
+#calendar_date_picker .daterangepicker {
+  position: relative;
+  top: 0px !important;
+  left: 0px !important;
+}
 /* End general overrule */
 
 div.row.new  .x_panel{
