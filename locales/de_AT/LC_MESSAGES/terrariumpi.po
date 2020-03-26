@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-03-06 21:48+CET\n"
-"PO-Revision-Date: 2020-02-02 22:15+0000\n"
-"Last-Translator: kahuwi14 <karsten@wingen.net>\n"
+"PO-Revision-Date: 2020-03-26 08:52+0000\n"
+"Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: German (Austria) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/de_AT/>\n"
 "Language: de_AT\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.10.3\n"
+"X-Generator: Weblate 3.11.3\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumEngine.py:660 terrariumEngine.py:748 views/dashboard.tpl:7
@@ -3922,47 +3922,43 @@ msgstr "Neue Webcam hinzufügen"
 
 #: views/webcam_settings.tpl:121
 msgid "White balance"
-msgstr ""
+msgstr "Weißabgleich"
 
 #: views/webcam_settings.tpl:125
-#, fuzzy
-#| msgid "Off"
 msgid "off"
-msgstr "Aus"
+msgstr "aus"
 
 #: views/webcam_settings.tpl:126
 msgid "auto"
-msgstr ""
+msgstr "Auto"
 
 #: views/webcam_settings.tpl:127
-#, fuzzy
-#| msgid "Night"
 msgid "sunlight"
-msgstr "Nacht"
+msgstr "Sonnenlicht"
 
 #: views/webcam_settings.tpl:128
 msgid "cloudy"
-msgstr ""
+msgstr "bewölkt"
 
 #: views/webcam_settings.tpl:129
 msgid "shade"
-msgstr ""
+msgstr "Tönung"
 
 #: views/webcam_settings.tpl:130
 msgid "tungsten"
-msgstr ""
+msgstr "Wolfram"
 
 #: views/webcam_settings.tpl:131
 msgid "fluorescent"
-msgstr ""
+msgstr "fluoreszierend"
 
 #: views/webcam_settings.tpl:132
 msgid "incandescent"
-msgstr ""
+msgstr "Glühkörper"
 
 #: views/webcam_settings.tpl:133
 msgid "flash"
-msgstr ""
+msgstr "Flash"
 
 #: views/webcam_settings.tpl:134
 #, fuzzy
@@ -3972,7 +3968,7 @@ msgstr "Horizontal"
 
 #: views/webcam_settings.tpl:135
 msgid "greyworld"
-msgstr ""
+msgstr "graue Welt"
 
 #: views/webcam_settings.tpl:140
 msgid "Archive"
