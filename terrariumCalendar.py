@@ -49,7 +49,7 @@ class terrariumCalendar(object):
     ical = Calendar.from_ical(self.__ical_data)
     
     if uid is None:
-      uid = md5(title).hexdigest()
+      uid = md5(title.encode()).hexdigest()
 
     if start is None:
       start = datetime.now()
