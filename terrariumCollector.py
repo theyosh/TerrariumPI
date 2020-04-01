@@ -24,6 +24,14 @@ class terrariumCollector(object):
 
   def __connect(self):
     self.db = sqlite3.connect(terrariumCollector.DATABASE)
+    # https://www.whoishostingthis.com/compare/sqlite/optimize/
+    with self.db as db:
+      cur = db.cursor()
+      cur.execute('PRAGMA journal_mode = MEMORY')
+      cur.execute('PRAGMA temp_store = MEMORY')
+      # Line below is not safe for a Pi. As this can/will corrupt the database when the Pi crashes....
+      # cur.execute('PRAGMA synchronous = OFF')
+
     self.db.row_factory = sqlite3.Row
     logger.info('Database connection created to database %s' % (terrariumCollector.DATABASE,))
 
