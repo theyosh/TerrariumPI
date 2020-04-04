@@ -539,8 +539,8 @@ function add_notification_message(type, title, message, icon, color, date, link)
   notification.append($('<span>').addClass('image').append($('<img>').attr({
     'src': $('div.profile_pic img:last').attr('src')
   })));
-  notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('data-timestamp',notification_date)) );
-  notification.append($('<span>').addClass('message').text(message).append($('<span>').addClass('pull-right').html('<i class="fa ' + icon + ' ' + color + '"></i>')));
+  notification.append($('<span>').append($('<span>').html(title)).append($('<span>').addClass('time notification_timestamp').attr('data-timestamp',notification_date)) );
+  notification.append($('<span>').addClass('message').html(message).append($('<span>').addClass('pull-right').html('<i class="fa ' + icon + ' ' + color + '"></i>')));
 
   // Remove no messages line
   menu.find('li.no_message').hide();
@@ -2959,14 +2959,14 @@ function calendar_item(options) {
   if (options === undefined) {
       options = {start : new Date(), id : null};
   }
-  
+
   // Create a trigger to toggle the calendar. But we have to wait until the modal window is starting to show...
   modalWindow = $('.add-form').on('show.bs.modal',function(event) {
     setTimeout(function(){
       $('#calendar_date').trigger('click');
-    },1);
+      init_wysiwyg();
+    },250);
   });
-  
   $('#calendar_date').daterangepicker({
       startDate: options.start,
       endDate: options.start,
@@ -2974,16 +2974,7 @@ function calendar_item(options) {
       autoUpdateInput: true,
       autoApply: true,
       parentEl: '#calendar_date_picker'
-  }, function(start, end, label) {
-  //console.log(start.toISOString(), end.toISOString(), label);              
   });
-  
-  $('#calendar_date').on('hide.daterangepicker',function(event){
-      setTimeout(function(){
-        $('#calendar_date').trigger('click');
-      },1);
-  });            
-
   modalWindow.modal('show');
 }
 
