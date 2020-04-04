@@ -160,6 +160,15 @@ footer .pull-right .label {
   top: 0px !important;
   left: 0px !important;
 }
+
+div.daterangepicker.show-calendar {
+  display:block !important;
+}
+
+li.notification span.message img,
+div.popover img {
+  width: 100%;
+}
 /* End general overrule */
 
 div.row.new  .x_panel{

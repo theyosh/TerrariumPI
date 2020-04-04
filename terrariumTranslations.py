@@ -29,6 +29,11 @@ class terrariumTranslations(object):
     self.translations['weather_field_wind_speed'] = _('Choose the wind speed indicator. The software will recalculate to the chosen indicator.')
     # End weather
 
+    # Calendar
+    self.translations['calendar_title'] = _('Holds the title of the calendar event.')
+    self.translations['calendar_description'] = _('Holds the body of the calendar event. You can include images.')
+    # End Calendar
+
     # Sensors
     self.translations['sensor_field_hardware'] = _('Holds the sensor hardware type. Supported hardware types are: %s.') % ('<strong>' + '</strong>, <strong>'.join(terrariumSensor.valid_hardware_types()) + '</strong>')
     self.translations['sensor_field_address'] = _('Holds the sensor address. Depending on hardware type, it is either a read only hex number, a GPIO pin, a GPIO pin combination of %s or a full HTTP(S) address. Full url specification can be found on the %s wiki page. For GPIO use <strong>physical</strong> GPIO pin numbering.') % ('<a href="https://www.modmypi.com/blog/hc-sr04-ultrasonic-range-sensor-on-the-raspberry-pi" target="_blank">\'<i>TRIG,ECHO</i>\'</a>','<a href="https://github.com/theyosh/TerrariumPI/wiki/Remote-data#temperature-and-humidity-sensors" target="_blank">\'<i>' + _('Remote data') + '</i>\'</a>')
@@ -62,6 +67,9 @@ class terrariumTranslations(object):
     self.translations['switch_field_dimmer_on_percentage'] = _('Holds the amount in percentage to go to when switched on.')
     self.translations['switch_field_dimmer_off_duration'] = _('Holds the amount of seconds for the duration in which it decresses the power.')
     self.translations['switch_field_dimmer_off_percentage'] = _('Holds the amount in percentage to go to when switched off.')
+    self.translations['switch_new_device'] = _('Enter the name of the hardware device that has been replace. Will be used for title in the reminder.')
+    self.translations['switch_reminder_amount'] = _('Enter the amount of days/weeks/months/years to reminder.')
+    self.translations['switch_reminder_period'] = _('Enter the period type.')
     # End switches
 
     # Doors
