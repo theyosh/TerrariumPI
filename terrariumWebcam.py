@@ -76,14 +76,15 @@ class terrariumWebcamSource(object):
     self.set_name(name)
     self.set_resolution(width,height)
     self.set_rotation(rotation)
-    self.set_archive(archive)
-    self.set_archive_light(archive_light)
-    self.set_archive_door(archive_door)
-
+    
     if webcam_id is None:
       self.__id = md5(self.get_location().encode()).hexdigest()
     else:
       self.__id = id
+      
+    self.set_archive(archive)
+    self.set_archive_light(archive_light)
+    self.set_archive_door(archive_door)
 
     if not os.path.isdir(terrariumWebcamSource.STORE_LOCATION + self.get_id()):
       os.makedirs(terrariumWebcamSource.STORE_LOCATION + self.get_id())
@@ -197,6 +198,27 @@ class terrariumWebcamSource(object):
     source_width, source_height = self.raw_image.size
 
     self.raw_image.paste(mask, (int((source_width/2)-(mask_width/2)),int((source_height/2)-(mask_height/2))), mask)
+  
+  def get_last_archive_image(self):
+    # Get last image from 'today'
+    regex = r'(' + terrariumWebcamSource.ARCHIVE_LOCATION + ')\d+/\d+/\d+/([^_]+_archive_)\d+(\..*)'
+    subst = '\\1/' + (datetime.datetime.now()).strftime("%Y/%m/%d") + '/\\2*\\3'
+    file_filter = re.sub(regex, subst, self.get_raw_image(True)).replace('//','/')
+    files = glob.glob(file_filter)
+    files.sort(key=os.path.getmtime,reverse = True)
+
+    if len(files) == 0:
+      # No images found, so look back 24 hours from 'today'
+      regex = r'(' + terrariumWebcamSource.ARCHIVE_LOCATION + ')\d+/\d+/\d+/([^_]+_archive_)\d+(\..*)'
+      subst = '\\1/' + (datetime.datetime.now()-datetime.timedelta(days=1)).strftime("%Y/%m/%d") + '/\\2*\\3'
+      file_filter = re.sub(regex, subst, self.get_raw_image(True)).replace('//','/')
+      files = glob.glob(file_filter)
+      files.sort(key=os.path.getmtime,reverse = True)
+      
+    if len(files) == 0:
+      return False
+    
+    return files[0]
 
   def get_archive_images(self,prefix = None):
     regex = r'(' + terrariumWebcamSource.ARCHIVE_LOCATION + ')\d+/\d+/\d+/([^_]+_archive_)\d+(\..*)'
@@ -421,8 +443,13 @@ class terrariumWebcamSource(object):
   def get_archive(self):
     return self.archive
 
-  def set_archive(self,enabled):
-    self.archive = enabled
+  def set_archive(self,archive):
+    if archive != 'motion':
+      last_archive_image = self.get_last_archive_image()
+      if last_archive_image is not False:
+        self.__last_archive = os.path.getmtime(last_archive_image)
+      
+    self.archive = archive
 
   def get_archive_light(self):
     return self.archive_light_state

@@ -2454,10 +2454,10 @@ function webcamArchive(webcamid) {
         }
       });
       // recursive
-      if ($.fancybox.getInstance()) {
+      if ($.fancybox.getInstance() || data.webcams[0].archive_images.length == 0) {
         setTimeout(function(){
           getImages(new Date(date.getTime() - (24 * 60 * 60 * 1000)));
-          }, 5000);
+          }, (data.webcams[0].archive_images.length == 0 ? 10 : 5000));
       } else {
         fancybox == null;
       }
