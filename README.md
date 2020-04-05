@@ -1,4 +1,4 @@
-# TerrariumPI 3.9.7
+# TerrariumPI 3.9.8
 <a href="https://weblate.theyosh.nl/engage/terrariumpi/?utm_source=widget"><img src="https://weblate.theyosh.nl/widgets/terrariumpi/-/webinterface/svg-badge.svg" alt="Translation status" /></a>
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI?ref=badge_shield)
 
