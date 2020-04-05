@@ -6,36 +6,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-03-06 21:48+CET\n"
-"PO-Revision-Date: 2020-01-30 16:57+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Italian <http://weblate.theyosh.nl/projects/terrariumpi/"
+"PO-Revision-Date: 2020-04-13 19:18+0000\n"
+"Last-Translator: Stikki <sticchio2001@libero.it>\n"
+"Language-Team: Italian <https://weblate.theyosh.nl/projects/terrariumpi/"
 "webinterface/it/>\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.10.3\n"
+"X-Generator: Weblate 3.11.3\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumEngine.py:660 terrariumEngine.py:748 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
 msgid "Uptime"
-msgstr "Uptime"
+msgstr "Tempo di funzionamento"
 
 #: terrariumEngine.py:661
 msgid "Load"
 msgstr "Carico"
 
 #: terrariumEngine.py:662
-#, fuzzy
-#| msgid "CPU Temperature"
 msgid "CPU Temp."
 msgstr "Temperatura CPU"
 
 #: terrariumEngine.py:726
 msgid "Version"
-msgstr ""
+msgstr "Versione"
 
 #: terrariumEngine.py:752 views/system_status.tpl:174
 msgid "Disk usage"
@@ -134,32 +132,28 @@ msgstr ""
 "Mostra il valore attuale del sensore in temperatura o umidità (sola lettura)."
 
 #: terrariumTranslations.py:42
-#, fuzzy
-#| msgid "Holds the sensor lowest value that should be used in the graphs."
 msgid "Holds the sensor lowest moisture value measured in dry air. %s"
-msgstr "Contiene il valore del sensore più basso che verrà usato nei grafici."
+msgstr ""
+"Contiene il valore del sensore più basso che verrà usato nei grafici. %s"
 
 #: terrariumTranslations.py:42 terrariumTranslations.py:43
-#, fuzzy
-#| msgid "More information"
 msgid "More calibration information"
-msgstr "Maggiori informazioni"
+msgstr "Maggiori informazioni sulla calibrazione"
 
 #: terrariumTranslations.py:43
-#, fuzzy
-#| msgid "Holds the sensor lowest value that should be used in the graphs."
 msgid "Holds the sensor highest moisture value measured in full water. %s"
-msgstr "Contiene il valore del sensore più basso che verrà usato nei grafici."
+msgstr ""
+"Contiene il valore del sensore più basso che verrà usato nei grafici. %s"
 
 #: terrariumTranslations.py:44
-#, fuzzy
-#| msgid "Holds the gender of the animal."
 msgid "Holds the temperature offset value."
-msgstr "Contiene il genere dell'animale."
+msgstr "Mantiene il valore di offset di temperatura."
 
 #: terrariumTranslations.py:45
 msgid "Holds the maximum number that a sensor may change in value up or down."
 msgstr ""
+"Mantiene il numero massimo che un sensore può variare da un valore basso a "
+"uno alto."
 
 #: terrariumTranslations.py:49
 msgid "Holds the switch hardware type. Supported hardware types are: %s."
@@ -308,6 +302,8 @@ msgstr "Contiene la rotazione della immagine della webcam."
 #: terrariumTranslations.py:80
 msgid "Select the white balance type. Only for Raspberry PI camera's."
 msgstr ""
+"Selezionare il tipo di bilanciamento del bianco. Solo per le fotocamere "
+"Raspberry PI."
 
 #: terrariumTranslations.py:81
 msgid "Shows the webcam preview image."
@@ -322,14 +318,15 @@ msgstr ""
 #: terrariumTranslations.py:83
 msgid "Select the environment light state when enabling archiving."
 msgstr ""
+"Selezionare lo stato della luce ambientale quando si abilita l'archiviazione."
 
 #: terrariumTranslations.py:84
 msgid "Select the environment door state when enabling archiving."
 msgstr ""
+"Selezionare lo stato della porta dell'ambiente quando si abilita "
+"l'archiviazione."
 
 #: terrariumTranslations.py:85
-#, fuzzy
-#| msgid "Enabled or disable image archiving based on motion detection."
 msgid "Enable or disable motion boxes for Motion archiving."
 msgstr ""
 "Abilita o disabilita l'archiviazione di immagini in base al rilevamento del "
@@ -340,12 +337,18 @@ msgid ""
 "Minimum difference between frames to be identified as motion. Higher value "
 "means that the image must be more different for motion to be detected."
 msgstr ""
+"Differenza minima tra i fotogrammi da identificare come movimento. Un valore "
+"più alto significa che l'immagine deve essere più diversa perché il "
+"movimento venga rilevato."
 
 #: terrariumTranslations.py:87
 msgid ""
 "Minimum area of an image in pixels for a region to be considered motion. "
 "Larger values mean that only larger areas will be detected as motion."
 msgstr ""
+"Area minima di un'immagine in pixel per una regione da considerare in "
+"movimento. Valori più grandi significano che solo aree più grandi saranno "
+"rilevate come movimento."
 
 #: terrariumTranslations.py:88
 msgid ""
@@ -354,6 +357,11 @@ msgid ""
 "last archived frame. Setting to last frame will ignore motion when it is "
 "very gradual."
 msgstr ""
+"L'ultimo fotogramma significa che per il movimento verranno confrontati solo "
+"fotogrammi consecutivi. Ultimo fotogramma archiviato significa che il "
+"fotogramma corrente verrà confrontato con l'ultimo fotogramma archiviato. "
+"L'impostazione dell'ultimo fotogramma ignorerà il movimento quando è molto "
+"graduale."
 
 #: terrariumTranslations.py:92
 msgid "Holds the audio playlist name."
@@ -452,10 +460,11 @@ msgid ""
 "night. Use positive numbers to increase the values and negative numbers to "
 "lower the values."
 msgstr ""
+"Mantiene il valore in gradi quando i sensori cambiano quando diventa notte. "
+"Usare numeri positivi per aumentare i valori e numeri negativi per abbassare "
+"i valori."
 
 #: terrariumTranslations.py:105
-#, fuzzy
-#| msgid "Holds the soure that is used to determing when it is day or night."
 msgid "Holds the source that is used to determing when it is day or night."
 msgstr ""
 "Contiene la fonte che viene utilizzata per determinare quando è giorno o "
@@ -608,22 +617,28 @@ msgid ""
 "Holds the distance between top of the liquid when full and the sensor in cm "
 "or inches."
 msgstr ""
+"Mantiene la distanza tra la parte superiore del liquido quando è pieno e il "
+"sensore in cm o pollici."
 
 #: terrariumTranslations.py:119
 msgid ""
 "Select when the power switches can toggle. When lights are on, off or just "
 "always"
 msgstr ""
+"Selezionare quando gli interruttori di alimentazione possono essere "
+"commutati. Quando le luci sono accese, spente o semplicemente sempre"
 
 #: terrariumTranslations.py:120
 msgid ""
 "Select when the power switches can toggle. When the door is open, cosed or "
 "just always"
 msgstr ""
+"Selezionare quando gli interruttori di alimentazione possono essere "
+"commutati. Quando la porta è aperta, chiusa o semplicemente sempre"
 
 #: terrariumTranslations.py:124
 msgid "Holds the email address on which you would like to receive messages."
-msgstr ""
+msgstr "Contiene l'indirizzo e-mail sul quale si desidera ricevere i messaggi."
 
 #: terrariumTranslations.py:125
 #, fuzzy
@@ -634,14 +649,19 @@ msgstr "Contiene il nome del sensore."
 #: terrariumTranslations.py:126
 msgid "Holds the mail server portnumber. SSL and TLS will be autodetected."
 msgstr ""
+"Contiene il numero di porta del server di posta. SSL e TLS saranno rilevati "
+"automaticamente."
 
 #: terrariumTranslations.py:127
 msgid "Holds the username for authentication with the mailserver if needed."
 msgstr ""
+"Conserva il nome utente per l'autenticazione con il mailserver, se "
+"necessario."
 
 #: terrariumTranslations.py:128
 msgid "Holds the password for authentication with the mailserver if needed."
 msgstr ""
+"Conserva la password per l'autenticazione con il mailserver, se necessario."
 
 #: terrariumTranslations.py:130
 #, fuzzy
@@ -654,34 +674,41 @@ msgid ""
 "Holds the I2C address of the LCD screen. Use the value found with i2cdetect. "
 "Add ,[NR] to change the I2C bus."
 msgstr ""
+"Contiene l'indirizzo I2C dello schermo LCD. Utilizzare il valore trovato con "
+"i2cdetect. Aggiungere ,[NR] per cambiare il bus I2C."
 
 #: terrariumTranslations.py:132
 msgid "Reserve first LCD line for static title."
-msgstr ""
+msgstr "Riservare la prima linea LCD per il titolo statico."
 
 #: terrariumTranslations.py:134
 msgid "Holds your Twitter consumer key. More information %shere%s"
-msgstr ""
+msgstr "Conserva la chiave personale di Twitter. Maggiori informazioni %shere%s"
 
 #: terrariumTranslations.py:135
 msgid "Holds your Twitter consumer secret. More information %shere%s"
 msgstr ""
+"Custodisce il vostro segreto dei consumatori su Twitter. Maggiori "
+"informazioni %shere%s"
 
 #: terrariumTranslations.py:136
 msgid "Holds your Twitter access token. More information %shere%s"
 msgstr ""
+"Contiene il tuo token di accesso a Twitter. Maggiori informazioni %shere%s"
 
 #: terrariumTranslations.py:137
 msgid "Holds your Twitter access token secret. More information %shere%s"
 msgstr ""
+"Contiene segreto il tuo token di accesso a Twitter. Maggiori informazioni "
+"%shere%s"
 
 #: terrariumTranslations.py:139
 msgid "Holds the PushOver API token. More information %shere%s"
-msgstr ""
+msgstr "Contiene il token PushOver API. Maggiori informazioni %shere%s"
 
 #: terrariumTranslations.py:140
 msgid "Holds the PushOver API user key. More information %shere%s"
-msgstr ""
+msgstr "Contiene la chiave utente PushOver API. Maggiori informazioni %shere%s"
 
 #: terrariumTranslations.py:142
 #, fuzzy
@@ -694,18 +721,26 @@ msgid ""
 "Holds the Telegram username that is allowed for receiving messages. Can be "
 "multiple usernames seperated by a comma. More information %shere%s"
 msgstr ""
+"Contiene il nome utente Telegram che è consentito per la ricezione di "
+"messaggi. Può essere composto da più nomi utente separati da una virgola. "
+"Maggiori informazioni %shere%s"
 
 #: terrariumTranslations.py:144
 msgid ""
 "Holds the proxy address in form of [schema]://[user]:[password]@[server.com]:"
 "[port]. Can either be socks5 or http(s) for schema."
 msgstr ""
+"Contiene l'indirizzo del proxy sotto forma di "
+"[schema]://[utente]:[password]@[server.com]:[porta]. Può essere socks5 o "
+"http(s) per lo schema."
 
 #: terrariumTranslations.py:146
 msgid ""
 "Holds the url to post notification data to. You can use %name% variables in "
 "the post url"
 msgstr ""
+"Conserva l'url a cui inviare i dati di notifica. È possibile utilizzare le "
+"variabili %name% nell'url del post"
 
 #: terrariumTranslations.py:151
 msgid "Choose your interface language."
@@ -836,13 +871,15 @@ msgstr ""
 
 #: terrariumTranslations.py:170
 msgid "Enter the e-mail address that is used for your Meross devices."
-msgstr ""
+msgstr "Inserite l'indirizzo e-mail utilizzato per i vostri dispositivi Meross."
 
 #: terrariumTranslations.py:171
 msgid ""
 "Enter the password that is used for your Meross devices. Password is stored "
 "in plain text!"
 msgstr ""
+"Inserite la password che viene utilizzata per i vostri dispositivi Meross. "
+"La password viene memorizzata in chiaro!"
 
 #: terrariumTranslations.py:172
 #, fuzzy
@@ -873,6 +910,7 @@ msgstr ""
 #: terrariumTranslations.py:174
 msgid "Toggle on or off the min and max measured value in the gauge graphs."
 msgstr ""
+"Attivare o disattivare il valore di misura minimo e massimo nei grafici."
 
 #: terrariumTranslations.py:178
 msgid "Holds the name of the animal."
@@ -983,15 +1021,15 @@ msgstr "Le tue modifiche sono state salvate"
 
 #: terrariumWebserver.py:328
 msgid "Hardware is replaced"
-msgstr ""
+msgstr "Hardware è cambiato"
 
 #: terrariumWebserver.py:329
 msgid "Hardware replacement is logged in the calendar"
-msgstr ""
+msgstr "La sostituzione dell'hardware è memorizzata nel calendario"
 
 #: terrariumWebserver.py:332
 msgid "A new replacement reminder is created"
-msgstr ""
+msgstr "Viene creato un nuovo promemoria sostitutivo"
 
 #: terrariumWebserver.py:470 views/inc/menu.tpl:177
 msgid "Log out"
@@ -1236,7 +1274,7 @@ msgstr "Calendario"
 
 #: views/calendar.tpl:15
 msgid "iCal"
-msgstr ""
+msgstr "iCal"
 
 #: views/calendar.tpl:18 views/dashboard.tpl:71 views/dashboard.tpl:626
 #: views/dashboard.tpl:681 views/dashboard.tpl:736 views/dashboard.tpl:791
@@ -1479,12 +1517,12 @@ msgstr "Riserva d'acqua"
 #: views/dashboard.tpl:436 views/inc/menu.tpl:68 views/sensor_settings.tpl:148
 #: views/system_environment.tpl:1378
 msgid "Fertility"
-msgstr ""
+msgstr "Fertilizzante"
 
 #: views/dashboard.tpl:489 views/inc/menu.tpl:71 views/sensor_settings.tpl:149
 #: views/system_environment.tpl:1589
 msgid "CO2"
-msgstr ""
+msgstr "CO2"
 
 #: views/dashboard.tpl:600
 msgid "Average Temperature"
@@ -1927,7 +1965,7 @@ msgstr "Profilo"
 
 #: views/inc/menu.tpl:44
 msgid "All"
-msgstr ""
+msgstr "Tutti"
 
 #: views/inc/menu.tpl:59 views/sensor_settings.tpl:142
 msgid "Distance"
@@ -3900,8 +3938,9 @@ msgid "Volume indicator"
 msgstr "Indicatori maggiori"
 
 #: views/system_settings.tpl:120
+#, fuzzy
 msgid "Litres"
-msgstr ""
+msgstr "Litri"
 
 #: views/system_settings.tpl:121
 msgid "US Gallons"
@@ -3964,26 +4003,31 @@ msgid "Graph smoothing value"
 msgstr ""
 
 #: views/system_settings.tpl:189
+#, fuzzy
 msgid "Show min and max values in gauge graphs"
-msgstr ""
+msgstr "Mostra il minimo e il massimo valore di misura graficamente"
 
 #: views/system_settings.tpl:193 views/system_settings.tpl:204
 #: views/system_settings.tpl:215
+#, fuzzy
 msgid "True"
-msgstr ""
+msgstr "Vero"
 
 #: views/system_settings.tpl:194 views/system_settings.tpl:205
 #: views/system_settings.tpl:216
+#, fuzzy
 msgid "False"
-msgstr ""
+msgstr "Falso"
 
 #: views/system_settings.tpl:200
+#, fuzzy
 msgid "Hide environment summary on the dashboard"
-msgstr ""
+msgstr "Nascondi sommario ambientale dalla dashboard"
 
 #: views/system_settings.tpl:211
+#, fuzzy
 msgid "Show all sensors gauges on 1 page"
-msgstr ""
+msgstr "Mostra tutti i sensori di misura attivi in pagina 1"
 
 #: views/system_settings.tpl:222
 msgid "Pi power usage in W"
@@ -4006,12 +4050,14 @@ msgid "Port number"
 msgstr "Numero porta"
 
 #: views/system_settings.tpl:257
+#, fuzzy
 msgid "Meross Cloud"
-msgstr ""
+msgstr "Meross Cloud"
 
 #: views/system_settings.tpl:267
+#, fuzzy
 msgid "Meross Cloud username"
-msgstr ""
+msgstr "username Meross Cloud"
 
 #: views/system_settings.tpl:273
 #, fuzzy
@@ -4070,8 +4116,9 @@ msgid "Add new webcam"
 msgstr "Aggiungi una nuova webcam"
 
 #: views/webcam_settings.tpl:121
+#, fuzzy
 msgid "White balance"
-msgstr ""
+msgstr "bilanciamento di bianco"
 
 #: views/webcam_settings.tpl:125
 #, fuzzy
@@ -4080,38 +4127,45 @@ msgid "off"
 msgstr "Spento"
 
 #: views/webcam_settings.tpl:126
+#, fuzzy
 msgid "auto"
-msgstr ""
+msgstr "auto"
 
 #: views/webcam_settings.tpl:127
 #, fuzzy
 #| msgid "Night"
 msgid "sunlight"
-msgstr "Notte"
+msgstr "luce del sole"
 
 #: views/webcam_settings.tpl:128
+#, fuzzy
 msgid "cloudy"
-msgstr ""
+msgstr "nuvoloso"
 
 #: views/webcam_settings.tpl:129
+#, fuzzy
 msgid "shade"
-msgstr ""
+msgstr "ombra"
 
 #: views/webcam_settings.tpl:130
+#, fuzzy
 msgid "tungsten"
-msgstr ""
+msgstr "tungsteno"
 
 #: views/webcam_settings.tpl:131
+#, fuzzy
 msgid "fluorescent"
-msgstr ""
+msgstr "fluorescenza"
 
 #: views/webcam_settings.tpl:132
+#, fuzzy
 msgid "incandescent"
-msgstr ""
+msgstr "incandescenza"
 
 #: views/webcam_settings.tpl:133
+#, fuzzy
 msgid "flash"
-msgstr ""
+msgstr "flash"
 
 #: views/webcam_settings.tpl:134
 #, fuzzy
@@ -4134,72 +4188,86 @@ msgid "Motion"
 msgstr "Località"
 
 #: views/webcam_settings.tpl:146
+#, fuzzy
 msgid "1 minute"
-msgstr ""
+msgstr "1 minuto"
 
 #: views/webcam_settings.tpl:147
+#, fuzzy
 msgid "5 minutes"
-msgstr ""
+msgstr "5 minuti"
 
 #: views/webcam_settings.tpl:148
+#, fuzzy
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minuti"
 
 #: views/webcam_settings.tpl:149
+#, fuzzy
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minuti"
 
 #: views/webcam_settings.tpl:150
+#, fuzzy
 msgid "1 hour"
-msgstr ""
+msgstr "1 ora"
 
 #: views/webcam_settings.tpl:151
+#, fuzzy
 msgid "3 hours"
-msgstr ""
+msgstr "3 ore"
 
 #: views/webcam_settings.tpl:152
+#, fuzzy
 msgid "6 hours"
-msgstr ""
+msgstr "6 ore"
 
 #: views/webcam_settings.tpl:153
+#, fuzzy
 msgid "12 hours"
-msgstr ""
+msgstr "12 ore"
 
 #: views/webcam_settings.tpl:154
+#, fuzzy
 msgid "1 day"
-msgstr ""
+msgstr "1 giorno"
 
 #: views/webcam_settings.tpl:159
 msgid "Archive light state"
 msgstr ""
 
 #: views/webcam_settings.tpl:164
+#, fuzzy
 msgid "When on"
-msgstr ""
+msgstr "Quando acceso"
 
 #: views/webcam_settings.tpl:165
+#, fuzzy
 msgid "When off"
-msgstr ""
+msgstr "Quando spento"
 
 #: views/webcam_settings.tpl:170
 msgid "Archive door state"
 msgstr ""
 
 #: views/webcam_settings.tpl:175
+#, fuzzy
 msgid "When open"
-msgstr ""
+msgstr "Quando aperto"
 
 #: views/webcam_settings.tpl:176
+#, fuzzy
 msgid "When closed"
-msgstr ""
+msgstr "Quando chiuso"
 
 #: views/webcam_settings.tpl:182
 msgid "Show motion boxes"
 msgstr ""
 
 #: views/webcam_settings.tpl:192
+#, fuzzy
 msgid "Motion delta threshold"
-msgstr ""
+msgstr "Soglia delta di movimento"
 
 #: views/webcam_settings.tpl:198
 #, fuzzy
@@ -4208,8 +4276,9 @@ msgid "Motion minimum area"
 msgstr "Zoom al minimo"
 
 #: views/webcam_settings.tpl:204
+#, fuzzy
 msgid "Motion comparison frame"
-msgstr ""
+msgstr "Confronto tra i rilevamenti"
 
 #: views/webcam_settings.tpl:208
 #, fuzzy
@@ -4218,8 +4287,9 @@ msgid "Last frame"
 msgstr "Ultimo aggiornamento"
 
 #: views/webcam_settings.tpl:209
+#, fuzzy
 msgid "Last archived frame"
-msgstr ""
+msgstr "Ultimo frame archiviato"
 
 #: Missing text string
 msgid "1Wire bus"
@@ -4251,7 +4321,7 @@ msgstr "Allarme"
 
 #: Missing text string
 msgid "Amount"
-msgstr ""
+msgstr "Importo"
 
 #: Missing text string
 msgid "Are you sure to delete the file"
@@ -4348,8 +4418,9 @@ msgid "Error"
 msgstr "Errore"
 
 #: Missing text string
+#, fuzzy
 msgid "Excluded from average calculation"
-msgstr ""
+msgstr "Escluso dal calcolo della media"
 
 #: Missing text string
 msgid "External calendar url"
@@ -4401,7 +4472,7 @@ msgstr "ID"
 
 #: Missing text string
 msgid "Information"
-msgstr "Inforamzioni"
+msgstr "Informazioni"
 
 #: Missing text string
 msgid "Invalid filetype"
@@ -4417,7 +4488,7 @@ msgstr "Carico 5"
 
 #: Missing text string
 msgid "Minimum area"
-msgstr ""
+msgstr "Area minima"
 
 #: Missing text string
 msgid "No error messages"
@@ -4433,7 +4504,7 @@ msgstr "Nessun messaggio di warning"
 
 #: Missing text string
 msgid "Offset in cm"
-msgstr ""
+msgstr "Offset in cm"
 
 #: Missing text string
 msgid "Press browse button to select files"
@@ -4457,7 +4528,7 @@ msgstr "Videocamera per Raspberry Pi"
 
 #: Missing text string
 msgid "Reboot"
-msgstr ""
+msgstr "Riavvio"
 
 #: Missing text string
 msgid "Save RAW photo"
@@ -4479,7 +4550,7 @@ msgstr ""
 
 #: Missing text string
 msgid "Shutdown"
-msgstr ""
+msgstr "Spegnimento"
 
 #: Missing text string
 msgid "Switches overview screenshot"
@@ -4503,7 +4574,7 @@ msgstr "Non ci sono sensori di porta configurati."
 
 #: Missing text string
 msgid "Threshold"
-msgstr ""
+msgstr "Soglia"
 
 #: Missing text string
 msgid "Timer period off duration in minutes"
@@ -4561,7 +4632,7 @@ msgstr "Spazio utilizzato"
 
 #: Missing text string
 msgid "UV"
-msgstr ""
+msgstr "UV"
 
 #: Missing text string
 #, fuzzy
