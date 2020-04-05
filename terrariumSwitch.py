@@ -502,6 +502,9 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
 
   def load_hardware(self):
     self.__firmware = None
+    if not hasattr(self, '__retries'):
+      self.__retries = 0
+    
     # Input format should be either:
     # - http://[HOST]#[POWER_SWITCH_NR]
     # - http://[HOST]/#[POWER_SWITCH_NR]
@@ -529,6 +532,7 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
           raise Exception('No data, jump to next test')
 
         self.__firmware = 'tasmota'
+        self.__retries = 0
 
       except Exception as ex:
         print('Tasmota exceptions')
@@ -557,6 +561,7 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
             raise Exception('No data, jump to next test')
 
           self.__firmware = 'espeasy'
+          self.__retries = 0
 
         except Exception as ex:
           print('ESP Easy exceptions')
@@ -589,6 +594,7 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
             raise Exception('No data, this was the last attempt...')
 
           self.__firmware = 'espurna'
+          self.__retries = 0
 
         except Exception as ex:
           print('ESPurna exceptions')
@@ -598,28 +604,34 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
     changed = True
 
     if self.__firmware is None:
-      logger.error('Sonoff device is not connected. Cannot trigger power switch')
-      changed = False
-    else:
-      data = re.match(self.VALID_SOURCE,self.get_address())
-      if data:
-        data = data.groupdict()
-        url = None
+      if self.__retries < 5:
+        self.__retries += 1
+        logger.warning('Sonoff device is not connected for trigger action. Reconnect attempt: {}'.format(self.__retries))
+        self.load_hardware()
+        return self.set_hardware_state(state,force)
+      else:
+        logger.error('Sonoff device is not connected. Cannot trigger power switch')
+        return False    
+  
+    data = re.match(self.VALID_SOURCE,self.get_address())
+    if data:
+      data = data.groupdict()
+      url = None
 
-        if 'tasmota' == self.__firmware:
-          url = 'http://{}/cm?cmnd=Power%20{}'.format(data['host'],('1' if state else '0'))
-          if 'user' in data and 'password' in data:
-            url += '&user={}&password={}'.format(data['user'],data['password'])
+      if 'tasmota' == self.__firmware:
+        url = 'http://{}/cm?cmnd=Power%20{}'.format(data['host'],('1' if state else '0'))
+        if 'user' in data and 'password' in data:
+          url += '&user={}&password={}'.format(data['user'],data['password'])
 
-        elif 'espeasy' == self.__firmware:
-          url = 'http://{}/control?cmd=event,T{}'.format(data['host'],('1' if state else '0'))
+      elif 'espeasy' == self.__firmware:
+        url = 'http://{}/control?cmd=event,T{}'.format(data['host'],('1' if state else '0'))
 
-        elif 'espurna' == self.__firmware:
-          url = 'http://{}/api/relay/0?apikey={}&value={}'.format(data['host'],data['password'],('1' if state else '0'))
+      elif 'espurna' == self.__firmware:
+        url = 'http://{}/api/relay/0?apikey={}&value={}'.format(data['host'],data['password'],('1' if state else '0'))
 
-        state = terrariumUtils.get_remote_data(url)
-        if state is None:
-          changed = False
+      state = terrariumUtils.get_remote_data(url)
+      if state is None:
+        changed = False
 
     return changed
 
@@ -627,40 +639,46 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
     data = None
 
     if self.__firmware is None:
-      logger.error('Sonoff device is not connected. Cannot read power switch state')
-      return terrariumPowerSwitch.OFF
-    else:
-      data = re.match(self.VALID_SOURCE,self.get_address())
-      if data:
-        data = data.groupdict()
-        url = None
+      if self.__retries < 5:
+        self.__retries += 1
+        logger.warning('Sonoff device is not connected while reading the state. Reconnect attempt: {}'.format(self.__retries))
+        self.load_hardware()
+        return self.get_hardware_state()
+      else:
+        logger.error('Sonoff device is not connected. Cannot read power switch state')
+        return terrariumPowerSwitch.OFF
 
-        if 'tasmota' == self.__firmware:
-          url = 'http://{}/cm?cmnd=Power'.format(data['host'])
-          if 'user' in data and 'password' in data:
-            url += '&user={}&password={}'.format(data['user'],data['password'])
+    data = re.match(self.VALID_SOURCE,self.get_address())
+    if data:
+      data = data.groupdict()
+      url = None
 
-        elif 'espeasy' == self.__firmware:
-          url = 'http://{}/json'.format(data['host'])
+      if 'tasmota' == self.__firmware:
+        url = 'http://{}/cm?cmnd=Power'.format(data['host'])
+        if 'user' in data and 'password' in data:
+          url += '&user={}&password={}'.format(data['user'],data['password'])
 
-        elif 'espurna' == self.__firmware:
-          if 'password' not in data:
-            # Just add dummy value...
-            data['password'] = 'password'
+      elif 'espeasy' == self.__firmware:
+        url = 'http://{}/json'.format(data['host'])
 
-          url = 'http://{}/apis?apikey={}'.format(data['host'],data['password'])
+      elif 'espurna' == self.__firmware:
+        if 'password' not in data:
+          # Just add dummy value...
+          data['password'] = 'password'
 
-        state = terrariumUtils.get_remote_data(url)
-        if state is None:
-          logger.warning('Error reading Sonoff \'{}\' power state. So retruning last known state: {}'.format(self.get_name(),self.state))
-          return self.state
+        url = 'http://{}/apis?apikey={}'.format(data['host'],data['password'])
 
-        if 'tasmota' == self.__firmware:
-          return terrariumPowerSwitch.ON if terrariumUtils.is_true(state['POWER']) else terrariumPowerSwitch.OFF
-        elif 'espeasy' == self.__firmware:
-          return terrariumPowerSwitch.ON if terrariumUtils.is_true(state['POWER']) else terrariumPowerSwitch.OFF
-        elif 'espurna' == self.__firmware:
-          return terrariumPowerSwitch.ON if terrariumUtils.is_true(state['POWER']) else terrariumPowerSwitch.OFF
+      state = terrariumUtils.get_remote_data(url)
+      if state is None:
+        logger.warning('Error reading Sonoff \'{}\' power state. So returning last known state: {}'.format(self.get_name(),self.state))
+        return self.state
+
+      if 'tasmota' == self.__firmware:
+        return terrariumPowerSwitch.ON if terrariumUtils.is_true(state['POWER']) else terrariumPowerSwitch.OFF
+      elif 'espeasy' == self.__firmware:
+        return terrariumPowerSwitch.ON if terrariumUtils.is_true(state['POWER']) else terrariumPowerSwitch.OFF
+      elif 'espurna' == self.__firmware:
+        return terrariumPowerSwitch.ON if terrariumUtils.is_true(state['POWER']) else terrariumPowerSwitch.OFF
 
     return terrariumPowerSwitch.OFF
 
