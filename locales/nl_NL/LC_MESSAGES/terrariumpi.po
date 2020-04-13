@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2020-04-13 21:21+CEST\n"
-"PO-Revision-Date: 2020-03-11 13:28+0000\n"
+"PO-Revision-Date: 2020-04-14 14:20+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
 "webinterface/nl/>\n"
@@ -65,10 +65,8 @@ msgstr ""
 "de gekozen indicator."
 
 #: terrariumTranslations.py:33
-#, fuzzy
-#| msgid "Holds the type of the animal"
 msgid "Holds the title of the calendar event."
-msgstr "Bevat de type van het dier"
+msgstr "Bevat de titel van kalender item."
 
 #: terrariumTranslations.py:34
 msgid "Holds the body of the calendar event. You can include images."
@@ -1225,10 +1223,8 @@ msgid "No calendar available"
 msgstr "Geen kalender beschikbaar"
 
 #: views/calendar.tpl:46
-#, fuzzy
-#| msgid "No calendar available"
 msgid "New calendar item"
-msgstr "Geen kalender beschikbaar"
+msgstr "Nieuwe kalender item"
 
 #: views/calendar.tpl:54 views/inc/usage_doors.tpl:13
 #: views/inc/usage_doors.tpl:139 views/inc/usage_sensors.tpl:17
@@ -1241,11 +1237,11 @@ msgstr "Titel"
 
 #: views/calendar.tpl:129
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: views/calendar.tpl:141 views/webcam_settings.tpl:266
 msgid "Save"
-msgstr ""
+msgstr "Bewaar"
 
 #: views/dashboard.tpl:24 views/inc/usage_dashboard.tpl:93
 #: views/inc/usage_switches.tpl:121 views/inc/usage_switches.tpl:143
@@ -4095,14 +4091,12 @@ msgid "Last archived frame"
 msgstr "Laatst gearchiveerde afbeelding"
 
 #: views/webcam_settings.tpl:234
-#, fuzzy
-#| msgid "Temperature sensors"
 msgid "Select sensors"
-msgstr "Temperatuur sensoren"
+msgstr "Selecteer sensoren"
 
 #: views/webcam_settings.tpl:267
 msgid "DELETE"
-msgstr ""
+msgstr "VERWIJDER"
 
 #: Missing text string
 msgid "1Wire bus"
@@ -4130,7 +4124,7 @@ msgstr "4 Poorten USB relais board"
 
 #: Missing text string
 msgid "Add marker"
-msgstr ""
+msgstr "Voeg marker toe"
 
 #: Missing text string
 msgid "Alarm"
@@ -4149,10 +4143,8 @@ msgid "Avatar"
 msgstr "Avatar"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Calendar"
 msgid "Calendar title"
-msgstr "Kalender"
+msgstr "Kalender titel"
 
 #: Missing text string
 msgid "Click to change image"
@@ -4301,10 +4293,8 @@ msgid "Load 5"
 msgstr "Belasting 5"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Load"
 msgid "Loading"
-msgstr "Belasting"
+msgstr "Laden"
 
 #: Missing text string
 msgid "Minimum area"
@@ -4347,10 +4337,8 @@ msgid "Raspberry Pi camera"
 msgstr "Raspberry Pi camera"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Remote data"
 msgid "realtimedata"
-msgstr "Externe data"
+msgstr "realtime data"
 
 #: Missing text string
 msgid "Reboot"
@@ -4414,7 +4402,7 @@ msgstr "Tijdstempel"
 
 #: Missing text string
 msgid "Toggle audio"
-msgstr ""
+msgstr "Schakel audio"
 
 #: Missing text string
 #, fuzzy
