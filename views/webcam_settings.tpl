@@ -80,12 +80,13 @@
                       <div class="x_content">
                         <div class="col-md-4 col-sm-4 col-xs-12 form-group pull-right">
                           <label for="webcam_[nr]_location">{{_('Preview')}}</label>
-                          <div class="webcam_preview"><img id="webcam_[nr]_preview" src="static/images/webcam_offline.png"></div>
+                          <div class="webcam_preview webcam_player_preview"><img id="webcam_[nr]_preview" src="static/images/webcam_offline.png"></div>
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-12 form-group">
                           <label for="webcam_[nr]_location">{{_('Location')}}</label>
                           <input class="form-control" name="webcam_[nr]_location" placeholder="{{_('Location')}}" required="required" type="text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('webcam_field_location')}}">
                           <input class="form-control" name="webcam_[nr]_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
+                          <input class="form-control" name="webcam_[nr]_realtimedata" placeholder="{{_('realtimedata')}}" readonly="readonly" type="hidden">
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-12 form-group">
                           <label for="webcam_[nr]_name">{{_('Name')}}</label>
@@ -223,6 +224,51 @@
             </div>
           </div>
         </div>
+        <div class="modal fade realtime-data-form" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">{{_('Select sensors')}}</h4>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                      <div class="x_title">
+                        <h2><span aria-hidden="true" class="glyphicon glyphicon-facetime-video"></span> {{_('Sensors')}}</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                          <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                          </li>
+                          <li>
+                            <a class="close-link"><i class="fa fa-close" title="{{_('Close')}}"></i></a>
+                          </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content">
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                          <div data-toggle="tooltip" data-placement="right" title="" data-original-title="{{translations.get_translation('webcam_realtime_sensors_list')}}">
+                            <select class="form-control" multiple="multiple" name="webcam_realtime_sensors_list" tabindex="-1" placeholder="{{_('Select an option')}}">
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{_('Close')}}</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="add_sensors">{{_('Save')}}</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal" id="del_marker">{{_('DELETE')}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <script type="text/javascript">
           $(document).ready(function() {
             // Create add button
@@ -236,14 +282,31 @@
               if (this.name.endsWith('_archive')) {
                 $(this).parents('.x_content').find('.motion_option').toggle(('motion' === this.value));
               }
-            });
+            }).on("select2:select", function (evt) {
+                var element = evt.params.data.element;
+                var $element = $(element);
+
+                $element.detach();
+                $(this).append($element);
+                $(this).trigger("change");
+              });
 
             $.get($('form').attr('action'),function(json_data){
               $.each(sortByKey(json_data.webcams,'name'), function(index,webcam_data) {
                 add_webcam_setting_row(webcam_data);
                 update_webcam(webcam_data);
+                webcam_data.edit = true;
+                initWebcam(webcam_data);
               });
               reload_reload_theme();
+            });
+
+            $.get('/api/sensors',function(data) {
+              let pull_down = $('select[name="webcam_realtime_sensors_list"]');
+              $.each(data.sensors,function (index,sensor){
+                pull_down.append($('<option>').attr({'value':sensor.id}).text(sensor.type + ' ' + sensor.name + ' ' + (Math.round((sensor.current + Number.EPSILON) * 1000) / 1000) + ' ' + sensor.indicator));
+              });
+              pull_down.trigger('change');
             });
           });
         </script>
