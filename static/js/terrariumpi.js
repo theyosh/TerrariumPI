@@ -6,7 +6,6 @@ var globals = {
   temperature_indicator: 'C',
   distance_indicator: 'cm',
   gauges: [],
-  webcams: [],
   graphs: {},
   graph_cache: 1 * 60,
   websocket_timer: null,
@@ -718,11 +717,11 @@ function prepare_form_data(form) {
             if (field_name == 'age') {
               field_value = moment(field_value,'L').unix();
             }
-            
+
             if (field_name == 'calendar_date') {
               field_value = moment(field_value,'L').unix();
             }
-            
+
             formdata[field_name] = field_value;
             break;
           case 'hardware':
@@ -2391,17 +2390,74 @@ function add_door() {
 /* End Doors code */
 
 /* Webcam code */
-function createWebcamLayer(webcamid, maxzoom) {
-  return L.tileLayer('/webcam/{id}/{id}_tile_{z}_{x}_{y}.jpg?_{time}', {
-    time: function() {
-      return (new Date()).valueOf();
-    },
-    id: webcamid,
-    noWrap: true,
-    continuousWorld: false,
-    maxNativeZoom: maxzoom,
-    maxZoom: maxzoom + 1
-  });
+function updateWebcamLabel(marker) {
+
+  function update(marker,sensors,message) {
+    let url = '/api/sensors/' + sensors.shift();
+    $.get(url,function(data) {
+      try {
+        data = data.sensors[0];
+
+        if (message === undefined) {
+          message = '<strong>' + data.name + '</strong><br />';
+
+          $(marker._icon).addClass('reset');
+          setTimeout(function(){
+            $(marker._icon).removeClass('reset');
+          },10);
+        }
+
+        message += data.type.substr(0,4) + '. ' + (Math.round((data.current + Number.EPSILON) * 1000) / 1000) + '' + data.indicator;
+
+        if (sensors.length > 0) {
+          message += '<br />';
+          update(marker,sensors,message);
+        } else {
+          marker.setTooltipContent(message);
+        }
+      } catch(e) {
+        console.log(e);
+      }
+    });
+  };
+
+  if (marker.options.sensors.length > 0) {
+    update(marker,marker.options.sensors.slice(0));
+  }
+}
+
+function createWebcamLabel(layer,x,y,sensors,edit) {
+  edit = edit === true
+  let marker_config = {
+    draggable: edit,
+    sensors: sensors.slice(0),
+    layer: layer
+  }
+
+  if (!edit) {
+    marker_config.icon = L.icon.pulse({iconSize:[10,10],color:'red'});
+  }
+
+  let marker = L.marker([x, y],marker_config).bindTooltip('<center><strong>{{_('Loading')}}...</strong></center>', {
+      permanent: true,
+      direction: y > 0 ? 'right' : 'left',
+      opacity: 0.5,
+  }).addTo(layer);
+
+  if (edit) {
+    marker.on('dragend',function(event){
+      updateWebcamMarkers(layer);
+    });
+
+    marker.on('dblclick' ,function(event) {
+      editWebcamMarker(this);
+    });
+  }
+
+  if (marker_config.sensors.length > 0) {
+    updateWebcamLabel(marker);
+  }
+  return marker;
 }
 
 function webcamArchive(webcamid) {
@@ -2466,52 +2522,127 @@ function webcamArchive(webcamid) {
   getImages(now);
 }
 
+function updateWebcamMarkers(layer) {
+  let all_markers = '';
+  layer.eachLayer(function(datamarker) {
+    let pos = datamarker.getLatLng();
+    all_markers += pos.lat + ',' + pos.lng + ',' + datamarker.options.sensors.join(',') + ';';
+  });
+  $('div.row.webcam#webcam_' + layer.options.webcamid).find('input[type="hidden"][name$="_realtimedata"]').val(all_markers.slice(0,-1));
+}
+
+function addWebcamMarker(layer) {
+  editWebcamMarker(createWebcamLabel(layer,0,0,[],true));
+}
+
+function editWebcamMarker(marker) {
+  let pull_down = $('select[name="webcam_realtime_sensors_list"]');
+  pull_down[0].marker = marker;
+  pull_down.val(marker.options.sensors).trigger('change');
+
+  $('#add_sensors').off('click').on('click',function(event){
+    marker.options.sensors = pull_down.val();
+    updateWebcamMarkers(marker.options.layer);
+    updateWebcamLabel(marker);
+  });
+
+  $('#del_marker').off('click').on('click',function(event){
+    marker.options.layer.removeLayer(marker);
+    updateWebcamMarkers(marker.options.layer);
+    marker.remove();
+  });
+  $('.realtime-data-form').modal('show');
+}
+
 function initWebcam(data) {
-  if ($('div#webcam_' + data.id).length === 1) {
-    return false;
+  if (data.edit !== true) {
+    // Init the HTML
+    var webcam_row = $(source_row).attr('id','webcam_' + data.id);
+    // Set the name and status
+    webcam_row.find('h2 span.title').text(data.name);
+    // Append the page
+    $('div.row.webcam').append(webcam_row);
+    // Resize the height to get the maps working
+    webcam_row.find('div.webcam_player').height(webcam_row.width()-webcam_row.find('.x_title').height());
   }
-  // Init the HTML
-  var webcam_row = $(source_row);
-  // Set the name and status
-  webcam_row.find('h2 span.title').text(data.name);
-  // Append the page
-  $('div.row.webcam').append(webcam_row);
-  // Resize the height to get the maps working
-  webcam_row.find('div.webcam_player').attr('id','webcam_' + data.id).height(webcam_row.width()-webcam_row.find('.x_title').height());
+
+  let webcam = L.map($('#webcam_' + data.id + ' div.webcam_player' + (data.edit === true ? '_preview' : ''))[0],{
+    id: 'map_' + data.id,
+    fullscreenControl: true,
+    refresh_timer : null
+  }).on('load',function(event){
+    this.options.refresh_timer = setInterval(function(){
+      if (!webcam._container.isConnected) {
+        clearTimeout(webcam.options.refresh_timer);
+        setTimeout(function(){
+          webcam.remove();
+        },10);
+      }
+    },30 * 1000);
+  }).setView([0, 0], 1);
 
   if (data.is_live) {
-    // Load HLS player
-    var player = new Clappr.Player({source: 'webcam/' + data.id + '/stream.m3u8',
-                                    parentId: '#webcam_' + data.id,
-                                    width: '100%',
-                                    height: '100%',
-                                    playInline: true,
-                                    disableVideoTagContextMenu: true,
-                                    recycleVideo: false,
-                                    autoPlay: true,
-                                    chromeless: false});
-
-    webcam_row.find('ul.nav.navbar-right.panel_toolbox li.dropdown ul.dropdown-menu' ).append('<li><a href="/webcam/' + data.id + '/' + data.id + '_raw.jpg" target="_blank">{{_('Save RAW photo')}}</a></li>')
-    webcam_row.find('ul.nav.navbar-right.panel_toolbox li.dropdown ul.dropdown-menu' ).append('<li><a href="javascript:;" onclick="webcamArchive(\'' + data.id + '\');">{{_('Archive')}}</a></li>')
+    L.videoOverlay('webcam/' + data.id + '/stream.m3u8', L.latLngBounds([[ 150, -180], [ -150, 180]]), {
+      id: 'overlay_' + data.id,
+      interactive: false,
+      autoplay: true,
+      className: 'webcam_live_' + data.id,
+    }).addTo(webcam);
   } else {
-    // Load Leaflet webcam code
-    var webcam = new L.Map('webcam_' + data.id, {
-      layers: [createWebcamLayer(data.id, data.max_zoom)],
-      fullscreenControl: true,
-    }).setView([0, 0], 1);
-
-    L.Control.ExtraWebcamControls = L.Control.extend({
-      options: {
-        position: 'topleft',
-        archive: data.archive
+    L.tileLayer('/webcam/{id}/{id}_tile_{z}_{x}_{y}.jpg?_{time}', {
+      time: function() {
+        return (new Date()).valueOf();
       },
-      initialize: function (options) {
-        // constructor
-        L.Util.setOptions(this, options);
-      },
-      onAdd: function (map) {
-        var container = L.DomUtil.create('div', 'leaflet-control-takephoto leaflet-bar leaflet-control');
+      id: data.id,
+      noWrap: true,
+      continuousWorld: false,
+      maxNativeZoom: data.max_zoom,
+      maxZoom: data.max_zoom + 1,
+      refresh_timer : null
+    }).on('remove',function(event){
+      clearTimeout(this.options.refresh_timer);
+    }).on('add',function(event){
+      let webcam_tiler = this;
+      this.options.refresh_timer = setInterval(function(){
+        webcam_tiler.redraw();
+      },30 * 1000)
+    }).addTo(webcam);
+  }
 
+  let realtime_data_layer = L.layerGroup([], {webcamid : data.id, refresh_timer: null});
+  realtime_data_layer.on('remove',function(event){
+    clearTimeout(this.options.refresh_timer);
+  });
+
+  realtime_data_layer.on('add',function(event) {
+    this.options.refresh_timer = setInterval(function(){
+      realtime_data_layer.eachLayer(function(marker) {
+        updateWebcamLabel(marker);
+      });
+    },30 * 1000);
+  });
+  realtime_data_layer.addTo(webcam);
+
+  if ('' !== data.realtimedata) {
+    $.each(data.realtimedata.split(';'),function(counter,bladata) {
+      let tmpdata = bladata.split(',');
+      createWebcamLabel(realtime_data_layer,tmpdata.shift(),tmpdata.shift(),tmpdata, data.edit === true);
+    });
+  }
+
+  L.Control.ExtraWebcamControls = L.Control.extend({
+    options: {
+      position: 'topleft',
+      archive: data.archive
+    },
+    initialize: function (options) {
+      // constructor
+      L.Util.setOptions(this, options);
+    },
+    onAdd: function (map) {
+      var container = L.DomUtil.create('div', 'leaflet-control-takephoto leaflet-bar leaflet-control');
+
+      if (data.edit !== true) {
         this.photo_link = L.DomUtil.create('a', 'leaflet-control-takephoto-button leaflet-bar-part', container);
         this.photo_link.title = '{{_('Save RAW photo')}}';
         this.photo_link.target = '_blank';
@@ -2525,30 +2656,92 @@ function initWebcam(data) {
           L.DomEvent.on(this.archive_link, 'click', this._start_archive, this);
           L.DomUtil.create('i', 'fa fa-archive', this.archive_link);
         }
-
-        return container;
-      },
-      _start_archive: function (e) {
-          L.DomEvent.stopPropagation(e);
-          L.DomEvent.preventDefault(e);
-          webcamArchive(data.id);
       }
-    });
-    webcam.addControl(new L.Control.ExtraWebcamControls());
-    webcam.addControl(L.Control.loading({separate: true}));
 
-    globals.webcams[webcam._container.id] = null;
-    updateWebcamView(webcam);
+      if ('' !== data.realtimedata || data.edit === true) {
+        this.info_link = L.DomUtil.create('a', 'leaflet-control-info-button leaflet-bar-part', container);
+        this.info_link.href = '#';
+        this.info_link.title = '{{_('Toggle information')}}';
+        L.DomEvent.on(this.info_link, 'click', this._toggle_realtime_info, map);
+        L.DomUtil.create('i', 'fa fa-info', this.info_link);
+      }
+
+      if (data.edit === true) {
+        this.add_marker_link = L.DomUtil.create('a', 'leaflet-control-addmarker-button leaflet-bar-part', container);
+        this.add_marker_link.href = '#';
+        this.add_marker_link.title = '{{_('Add marker')}}';
+        L.DomEvent.on(this.add_marker_link, 'click', this._add_marker, realtime_data_layer);
+        L.DomUtil.create('i', 'fa fa-map-marker', this.add_marker_link);
+      }
+
+      if (data.is_live === true) {
+        this.toggle_audio = L.DomUtil.create('a', 'leaflet-control-audio-button leaflet-bar-part', container);
+        this.toggle_audio.href = '#';
+        this.toggle_audio.title = '{{_('Toggle audio')}}';
+        L.DomEvent.on(this.toggle_audio, 'click', this._toggle_audio);
+        L.DomUtil.create('i', 'glyphicon glyphicon-volume-up', this.toggle_audio);
+      }
+
+      return container;
+    },
+    _start_archive: function (e) {
+      L.DomEvent.stopPropagation(e);
+      L.DomEvent.preventDefault(e);
+      webcamArchive(data.id);
+    },
+    _toggle_realtime_info: function (e) {
+      L.DomEvent.stopPropagation(e);
+      L.DomEvent.preventDefault(e);
+      if (this.hasLayer(realtime_data_layer)) {
+        this.removeLayer(realtime_data_layer);
+      } else {
+        this.addLayer(realtime_data_layer);
+      }
+    },
+    _add_marker: function(e) {
+      L.DomEvent.stopPropagation(e);
+      L.DomEvent.preventDefault(e);
+      editWebcamMarker(createWebcamLabel(this,0,0,[],true));
+    },
+    _toggle_audio: function(e) {
+      L.DomEvent.stopPropagation(e);
+      L.DomEvent.preventDefault(e);
+      var video = $('.webcam_live_' + data.id)[0];
+      video.muted = !video.muted;
+      $(this).find('.glyphicon').removeClass('glyphicon-volume-up glyphicon-volume-down').addClass(video.muted ? 'glyphicon-volume-up' : 'glyphicon-volume-off')
+    }
+  });
+  webcam.addControl(new L.Control.ExtraWebcamControls());
+  webcam.addControl(L.Control.loading({separate: true}));
+
+  try {
+    clearTimeout(globals.webcams[webcam.options.id]);
+  } catch(e) {
+    //alert(e);
   }
-}
 
-function updateWebcamView(webcam) {
-  if ($('div#' + webcam._container.id).length === 1) {
-    webcam.eachLayer(function(layer) {
-      layer.redraw();
-    });
-    clearTimeout(globals.webcams[webcam._container.id]);
-    globals.webcams[webcam._container.id] = setTimeout(function() { updateWebcamView(webcam);},30 * 1000);
+  if (data.is_live) {
+    var video = $('.webcam_live_' + data.id)[0];
+    video.muted = true;
+    if (Hls.isSupported()) {
+      var hls = new Hls();
+      hls.loadSource('webcam/' + data.id + '/stream.m3u8');
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, function() {
+        video.play();
+      });
+    }
+    // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
+    // When the browser has built-in HLS support (check using `canPlayType`), we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video element through the `src` property.
+    // This is using the built-in support of the plain video element, without using hls.js.
+    // Note: it would be more normal to wait on the 'canplay' event below however on Safari (where you are most likely to find built-in HLS support) the video.src URL must be on the user-driven
+    // white-list before a 'canplay' event will be emitted; the last video event that can be reliably listened-for when the URL is not on the white-list is 'loadedmetadata'.
+    else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = 'webcam/' + data.id + '/stream.m3u8';
+      video.addEventListener('loadedmetadata', function() {
+        video.play();
+      });
+    }
   }
 }
 
@@ -2586,7 +2779,6 @@ function update_webcam(data) {
   var content_row = $('div.row.webcam#' + 'webcam_' + data.id);
 
   content_row.find('h2 span.title').text(data.name);
-  content_row.find('.webcam_preview img').attr('src',data.image);
 
   // Set the values only when empty
   content_row.find('input:not(.knob), select').each(function(counter,form_field) {

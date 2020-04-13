@@ -77,6 +77,8 @@ class terrariumWebcamSource(object):
     self.set_resolution(width,height)
     self.set_rotation(rotation)
     
+    self.realtimedata = ''
+    
     if webcam_id is None:
       self.__id = md5(self.get_location().encode()).hexdigest()
     else:
@@ -367,6 +369,12 @@ class terrariumWebcamSource(object):
       self.__running = False
       logger.info('Done updating webcam \'%s\' at location %s in %.5f seconds' % (self.get_name(), self.get_location(),time.time()-starttime))
 
+  def set_realtimedata(self, data):
+    self.realtimedata = data.strip(';')
+
+  def get_realtimedata(self):
+    return self.realtimedata.strip(';')
+  
   def get_data(self,archive = False):
     data = {'id': self.get_id(),
             'location': self.get_location(),
@@ -387,8 +395,9 @@ class terrariumWebcamSource(object):
             'motionboxes': self.get_motion_boxes(),
             'motiondeltathreshold': self.get_motion_delta_threshold(),
             'motionminarea': self.get_motion_min_area(),
-            'motioncompareframe': self.get_motion_compare_frame()
-            }
+            'motioncompareframe': self.get_motion_compare_frame(),
+            'realtimedata' : self.get_realtimedata()
+          }
 
     if archive:
       data['archive_images'] = self.get_archive_images(archive)

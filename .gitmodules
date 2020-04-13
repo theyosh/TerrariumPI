@@ -25,3 +25,6 @@
 [submodule "Bright-Pi"]
 	path = Bright-Pi
 	url = https://github.com/PiSupply/Bright-Pi.git
+[submodule "static/leaflet-icon-pulse"]
+	path = static/leaflet-icon-pulse
+	url = https://github.com/mapshakers/leaflet-icon-pulse.git

@@ -524,6 +524,9 @@ class terrariumEngine(object):
         
       if 'awb' in webcamdata:
         webcam.set_awb(webcamdata['awb'])
+        
+      if 'realtimedata' in webcamdata:
+        webcam.set_realtimedata(webcamdata['realtimedata'])
 
       seen_webcams.append(webcam.get_id())
 
@@ -1121,6 +1124,7 @@ reset=$(tput sgr0)
 
       if event_data.all_day:
         event['start'] = event_data.start.strftime('%Y-%m-%d')
+        event['end'] = event_data.end.strftime('%Y-%m-%dT%H:%M')
       else:
         event['start'] = event_data.start.strftime('%Y-%m-%dT%H:%M')
         event['end'] = event_data.end.strftime('%Y-%m-%dT%H:%M')

@@ -36,6 +36,7 @@
   <script type="text/javascript" src="/static/leaflet/leaflet.js"></script>
   <script type="text/javascript" src="/static/Leaflet.loading/src/Control.Loading.js"></script>
   <script type="text/javascript" src="/static/Leaflet.fullscreen/dist/Leaflet.fullscreen.min.js"></script>
+  <script type="text/javascript" src="/static/leaflet-icon-pulse/dist/L.Icon.Pulse.js"></script>
   <!-- bootstrap-wysiwyg -->
   <script type="text/javascript" src="/gentelella/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
   <script type="text/javascript" src="/gentelella/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
@@ -57,11 +58,10 @@
   <script type="text/javascript" src="/gentelella/vendors/switchery/dist/switchery.min.js"></script>
   <!-- FullCalendar -->
   <script type="text/javascript" src="/gentelella/vendors/fullcalendar/dist/fullcalendar.min.js"></script>
-  <!-- Clappr HLS player -->
-  <script type="text/javascript" src="static/clappr/clappr.min.js"></script>
-
+  <!-- HLS streaming support -->
+  <script type="text/javascript" src="/static/js/hls.js"></script>
+  <!-- Cookie support -->
   <script type="text/javascript" src="/static/js/js.cookie.js"></script>
-
   <!-- Load the terrariumPI JS script-->
   <script type="text/javascript" src="/static/js/terrariumpi.js"></script>
   <script type="text/javascript">
