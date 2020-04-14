@@ -1950,7 +1950,7 @@ function add_sensor_status_row(data) {
   $('div#maincontent').append(new_row);
 }
 
-function update_sensor(data,) {
+function update_sensor(data) {
   // Load the switch row to update the data
   var content_row = $('div.row.sensor#' + 'sensor_' + data.id);
   // Show either the temperature or humidity header and icon
@@ -1958,7 +1958,7 @@ function update_sensor(data,) {
   // Update title
   content_row.find('h2 span.title').text(data.name);
   if ('miflora' == data.hardwaretype) {
-    content_row.find('h2 span.title').append(' <span class="small">' + data.firmware + ' <i class="fa fa-plug"></i>' + data.battery + '%</span>')
+    content_row.find('h2 span.title').append(' <span class="small">' + data.firmware + ' <i class="fa fa-plug"></i>' + data.battery + '%</span>');
   }
 
   // Set the values only when empty
@@ -2393,7 +2393,7 @@ function add_door() {
 function updateWebcamLabel(marker) {
 
   function update(marker,sensors,message) {
-    let url = '/api/sensors/' + sensors.shift();
+    var url = '/api/sensors/' + sensors.shift();
     $.get(url,function(data) {
       try {
         data = data.sensors[0];
@@ -2428,7 +2428,7 @@ function updateWebcamLabel(marker) {
 
 function createWebcamLabel(layer,x,y,sensors,edit) {
   edit = edit === true
-  let marker_config = {
+  var marker_config = {
     draggable: edit,
     sensors: sensors.slice(0),
     layer: layer
@@ -2438,7 +2438,7 @@ function createWebcamLabel(layer,x,y,sensors,edit) {
     marker_config.icon = L.icon.pulse({iconSize:[10,10],color:'red'});
   }
 
-  let marker = L.marker([x, y],marker_config).bindTooltip('<center><strong>{{_('Loading')}}...</strong></center>', {
+  var marker = L.marker([x, y],marker_config).bindTooltip('<center><strong>{{_('Loading')}}...</strong></center>', {
       permanent: true,
       direction: y > 0 ? 'right' : 'left',
       opacity: 0.5,
@@ -2523,9 +2523,9 @@ function webcamArchive(webcamid) {
 }
 
 function updateWebcamMarkers(layer) {
-  let all_markers = '';
+  var all_markers = '';
   layer.eachLayer(function(datamarker) {
-    let pos = datamarker.getLatLng();
+    var pos = datamarker.getLatLng();
     all_markers += pos.lat + ',' + pos.lng + ',' + datamarker.options.sensors.join(',') + ';';
   });
   $('div.row.webcam#webcam_' + layer.options.webcamid).find('input[type="hidden"][name$="_realtimedata"]').val(all_markers.slice(0,-1));
@@ -2536,7 +2536,7 @@ function addWebcamMarker(layer) {
 }
 
 function editWebcamMarker(marker) {
-  let pull_down = $('select[name="webcam_realtime_sensors_list"]');
+  var pull_down = $('select[name="webcam_realtime_sensors_list"]');
   pull_down[0].marker = marker;
   pull_down.val(marker.options.sensors).trigger('change');
 
@@ -2566,7 +2566,7 @@ function initWebcam(data) {
     webcam_row.find('div.webcam_player').height(webcam_row.width()-webcam_row.find('.x_title').height());
   }
 
-  let webcam = L.map($('#webcam_' + data.id + ' div.webcam_player' + (data.edit === true ? '_preview' : ''))[0],{
+  var webcam = L.map($('#webcam_' + data.id + ' div.webcam_player' + (data.edit === true ? '_preview' : ''))[0],{
     id: 'map_' + data.id,
     fullscreenControl: true,
     refresh_timer : null
@@ -2602,14 +2602,14 @@ function initWebcam(data) {
     }).on('remove',function(event){
       clearTimeout(this.options.refresh_timer);
     }).on('add',function(event){
-      let webcam_tiler = this;
+      var webcam_tiler = this;
       this.options.refresh_timer = setInterval(function(){
         webcam_tiler.redraw();
       },30 * 1000)
     }).addTo(webcam);
   }
 
-  let realtime_data_layer = L.layerGroup([], {webcamid : data.id, refresh_timer: null});
+  var realtime_data_layer = L.layerGroup([], {webcamid : data.id, refresh_timer: null});
   realtime_data_layer.on('remove',function(event){
     clearTimeout(this.options.refresh_timer);
   });
@@ -2625,7 +2625,7 @@ function initWebcam(data) {
 
   if ('' !== data.realtimedata) {
     $.each(data.realtimedata.split(';'),function(counter,bladata) {
-      let tmpdata = bladata.split(',');
+      var tmpdata = bladata.split(',');
       createWebcamLabel(realtime_data_layer,tmpdata.shift(),tmpdata.shift(),tmpdata, data.edit === true);
     });
   }
@@ -3176,16 +3176,16 @@ function calendar_item(options) {
  */
 $.fn.extend({
   sortSelect() {
-    let options = this.find("option"),
+    var options = this.find("option"),
       arr = options.map(function(_, o) { return { t: $(o).text(), v: o.value }; }).get();
 
-    arr.sort((o1, o2) => { // sort select
-      let t1 = o1.t.toLowerCase(),
+    arr.sort(function(o1, o2) { // sort select
+      var t1 = o1.t.toLowerCase(),
           t2 = o2.t.toLowerCase();
       return t1 > t2 ? 1 : t1 < t2 ? -1 : 0;
     });
 
-    options.each((i, o) => {
+    options.each(function(i, o) {
       o.value = arr[i].v;
       $(o).text(arr[i].t);
     });
