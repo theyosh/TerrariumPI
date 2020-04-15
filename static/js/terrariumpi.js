@@ -2572,13 +2572,13 @@ function initWebcam(data) {
     refresh_timer : null
   }).on('load',function(event){
     this.options.refresh_timer = setInterval(function(){
-      if (!webcam._container.isConnected) {
-        clearTimeout(webcam.options.refresh_timer);
-        setTimeout(function(){
-          webcam.remove();
-        },10);
+      if (!webcam._container.clientHeight > 0) {
+         clearTimeout(webcam.options.refresh_timer);
+         setTimeout(function(){
+           webcam.remove();
+         },10);
       }
-    },30 * 1000);
+    },10 * 1000);
   }).setView([0, 0], 1);
 
   if (data.is_live) {
@@ -2713,12 +2713,6 @@ function initWebcam(data) {
   });
   webcam.addControl(new L.Control.ExtraWebcamControls());
   webcam.addControl(L.Control.loading({separate: true}));
-
-  try {
-    clearTimeout(globals.webcams[webcam.options.id]);
-  } catch(e) {
-    //alert(e);
-  }
 
   if (data.is_live) {
     var video = $('.webcam_live_' + data.id)[0];
