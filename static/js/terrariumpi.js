@@ -714,14 +714,9 @@ function prepare_form_data(form) {
           case 'system':
           case 'notifications':
           case 'calendar':
-            if (field_name == 'age') {
+            if (['age','calendar_date','daterangepicker_start','daterangepicker_end'].indexOf(field_name) !== -1) {
               field_value = moment(field_value,'L').unix();
             }
-
-            if (field_name == 'calendar_date') {
-              field_value = moment(field_value,'L').unix();
-            }
-
             formdata[field_name] = field_value;
             break;
           case 'hardware':
@@ -3122,8 +3117,13 @@ function uploadProfileImage() {
 function load_calendar_history() {
   $.getJSON('/api/calendar', function(data) {
     $('ul.nav.navbar-nav.navbar-right ul#calendar_messages li.notification:not(.no_message)').remove();
-    $.each(data.reverse(), function(counter, calendardata) {
+    var messages_in_future = 0;
+    var now = new Date();
+    $.each(data, function(counter, calendardata) {
       var event_date = new Date(calendardata.start);
+      if (new Date(calendardata.end) > now) {
+        messages_in_future++;
+      }
       add_notification_message('calendar_messages',
                                calendardata.title,
                                calendardata.description,
@@ -3132,19 +3132,41 @@ function load_calendar_history() {
                                event_date.getTime() + (event_date.getTimezoneOffset() * 60000),
                                'calendar.html');
     });
-    if (data.length == 0) {
+    if (messages_in_future == 0) {
       $('ul.nav.navbar-nav.navbar-right li#calendar span.badge.bg-green').addClass('hidden');
     } else {
-      $('ul.nav.navbar-nav.navbar-right li#calendar span.badge.bg-green').removeClass('hidden').text(data.length);
+      $('ul.nav.navbar-nav.navbar-right li#calendar span.badge.bg-green').removeClass('hidden').text(messages_in_future);
     }
-    $('ul.nav.navbar-nav.navbar-right ul#calendar_messages li.no_message').toggle(data.length==0);
+    $('ul.nav.navbar-nav.navbar-right ul#calendar_messages li.no_message').toggle(messages_in_future==0);
   });
 }
 
 function calendar_item(options) {
   if (options === undefined) {
-      options = {start : new Date(), id : null};
+      options = {id : null,
+                 start : new Date(),
+                 end : new Date(),
+                 title: '',
+                 description: ''};
   }
+
+  if (options.end === undefined || options.end === null) {
+    options.end = options.start;
+  }
+
+  $('input[name="calendar_id"').val(options.id);
+  $('input[name="calendar_title"').val(options.title);
+  $('input[name="calendar_description"').val(options.description);
+  $('#editor-one').html(options.description);
+
+  $('#calendar_date').daterangepicker({
+    startDate: options.start,
+    endDate: options.end,
+    singleDatePicker: false,
+    autoUpdateInput: true,
+    autoApply: true,
+    parentEl: '#calendar_date_picker'
+  });
 
   // Create a trigger to toggle the calendar. But we have to wait until the modal window is starting to show...
   modalWindow = $('.add-form').on('show.bs.modal',function(event) {
@@ -3153,14 +3175,7 @@ function calendar_item(options) {
       init_wysiwyg();
     },250);
   });
-  $('#calendar_date').daterangepicker({
-      startDate: options.start,
-      endDate: options.start,
-      singleDatePicker: true,
-      autoUpdateInput: true,
-      autoApply: true,
-      parentEl: '#calendar_date_picker'
-  });
+
   modalWindow.modal('show');
 }
 

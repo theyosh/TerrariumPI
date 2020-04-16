@@ -47,9 +47,7 @@ class terrariumCalendar(object):
 
   def create_event(self,uid,title,message,location = None,start = None,stop = None):
     ical = Calendar.from_ical(self.__ical_data)
-    
-    if uid is None:
-      uid = md5(title.encode()).hexdigest()
+    create = uid is None
 
     if start is None:
       start = datetime.now()
@@ -57,20 +55,38 @@ class terrariumCalendar(object):
     if stop is None:
       stop = start
 
-    event = Event()
-    event.add('uid',str(datetime.now()) + '/' + str(start) + '/' + str(uid))
 
-    event.add('summary', title)
-    event.add('description', message)
+    if create:
+      uid = str(datetime.now()).replace(' ','@') + '/' + str(start) + '/' + str(uid)
+      event = Event()
+      event.add('uid',uid)
 
-    if location is not None:
-      event.add('location', location)
+      event.add('summary', title)
+      event.add('description', message)
 
-    event.add('dtstart', start)
-    event.add('dtend', stop)
-    event.add('dtstamp', datetime.now())
+      if location is not None:
+        event.add('location', location)
 
-    ical.add_component(event)
+      event.add('dtstart', start)
+      event.add('dtend', stop)
+      event.add('dtstamp', datetime.now())
+
+      ical.add_component(event)
+
+    else:
+      for subcomponent in ical.subcomponents:
+        if subcomponent.get('uid') == uid:
+          update_data = {
+            'summary': subcomponent._encode('summary',title),
+            'description' : subcomponent._encode('description',message),
+            'dtstart' : subcomponent._encode('dtstart',start),
+            'dtend': subcomponent._encode('dtend',stop)
+          }
+
+          if location is not None:
+            update_data['location']  = subcomponent._encode('location',location)
+
+          subcomponent.update(update_data)
 
     with open(terrariumCalendar.ICS_FILE, 'wb') as fp:
       fp.write(ical.to_ical())

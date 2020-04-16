@@ -129,7 +129,7 @@ class terrariumWebserver(object):
                      method=['GET'],
                      callback=self.__get_api_call,
                      apply=self.__authenticate(False))
-    
+
     self.__app.route('/api/calendar',
                      method=['POST'],
                      callback=self.__create_calender_event,
@@ -338,24 +338,27 @@ class terrariumWebserver(object):
       result['message'] += '<br />' + _('A new replacement reminder is created')
 
     return result
-  
+
   def __create_calender_event(self):
     postdata = None
     if request.json is not None:
       postdata = request.json
 
+    if 'daterangepicker_start' not in postdata:
+      postdata['daterangepicker_start'] = postdata['calendar_date']
+
+    if 'daterangepicker_end' not in postdata:
+      postdata['daterangepicker_end'] = postdata['calendar_date']
+
     self.__terrariumEngine.create_calendar_event(postdata['calendar_title'],
                                                  postdata['calendar_description'],
                                                  None,
-                                                 postdata['calendar_date'],
-                                                 None,
-                                                 None if 'calendar_uid' not in postdata else postdata['calendar_uid'])
+                                                 postdata['daterangepicker_start'],
+                                                 postdata['daterangepicker_end'],
+                                                 None if 'calendar_id' not in postdata else postdata['calendar_id'])
     result = {'ok' : True,
               'title' : _('Calender event created'),
               'message' : _('The calender event is created')}
-
-    # if '' != postdata['switch']['reminder_amount']:
-    #   result['message'] += '<br />' + _('A new replacement reminder is created')
 
     return result
 
@@ -386,7 +389,8 @@ class terrariumWebserver(object):
         response.headers['Content-Type'] = 'text/calendar'
         response.headers['Content-Disposition'] = 'attachment; filename=terrariumpi.ical.ics'
 
-      result = self.__terrariumEngine.get_calendar(parameters,**{'start':request.query.get('start'),'end':request.query.get('end')})
+      response.headers['Content-Type'] = 'application/json'
+      result = json.dumps(self.__terrariumEngine.get_calendar(parameters,**{'start':request.query.get('start'),'end':request.query.get('end')}))
 
     elif 'sensors' == action:
       result = self.__terrariumEngine.get_sensors(parameters)

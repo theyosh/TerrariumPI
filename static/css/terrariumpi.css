@@ -161,8 +161,16 @@ footer .pull-right .label {
   left: 0px !important;
 }
 
+.daterangepicker .calendar {
+  margin-left: 0px !important;
+}
+
 div.daterangepicker.show-calendar {
   display:block !important;
+}
+
+div.editor-wrapper img {
+  max-width: 100%;
 }
 
 li.notification span.message img,

@@ -483,7 +483,7 @@ class terrariumEngine(object):
           webcam.set_motion_delta_threshold(motion_delta_threshold)
           webcam.set_motion_min_area(motion_min_area)
           webcam.set_motion_compare_frame(motion_compare_frame)
-         
+
           self.webcams[webcam.get_id()] = webcam
         except Exception as err:
           print(err)
@@ -521,10 +521,10 @@ class terrariumEngine(object):
 
       if 'motioncompareframe' in webcamdata:
         webcam.set_motion_compare_frame(webcamdata['motioncompareframe'])
-        
+
       if 'awb' in webcamdata:
         webcam.set_awb(webcamdata['awb'])
-        
+
       if 'realtimedata' in webcamdata:
         webcam.set_realtimedata(webcamdata['realtimedata'])
 
@@ -1099,17 +1099,21 @@ reset=$(tput sgr0)
 
 
   # Calender part
-  def get_calendar(self,parameters,**parameters2):
+  def get_calendar(self, parameters, **kwargs):
     if 'ical' in parameters:
       return self.calendar.get_ical()
 
-    start = None
-    if 'start' in parameters2 and parameters2['start'] is not None:
-      start = datetime.datetime.strptime(parameters2['start'],'%Y-%m-%d')
+    start = kwargs.get('start')
+    if start is None:
+      start = datetime.datetime.utcnow() -  datetime.timedelta(days=15)
+    else:
+      start = datetime.datetime.strptime(start,'%Y-%m-%d')
 
-    end = None
-    if 'end' in parameters2 and parameters2['end'] is not None:
-      end = datetime.datetime.strptime(parameters2['end'],'%Y-%m-%d')
+    end = kwargs.get('end')
+    if end is None:
+      end = start + datetime.timedelta(days=30)
+    else:
+      end = datetime.datetime.strptime(end,'%Y-%m-%d')
 
     data = self.calendar.get_events(start,end)
 
@@ -1124,22 +1128,28 @@ reset=$(tput sgr0)
 
       if event_data.all_day:
         event['start'] = event_data.start.strftime('%Y-%m-%d')
-        event['end'] = event_data.end.strftime('%Y-%m-%dT%H:%M')
+        event['end'] = event_data.end.strftime('%Y-%m-%d')
       else:
         event['start'] = event_data.start.strftime('%Y-%m-%dT%H:%M')
         event['end'] = event_data.end.strftime('%Y-%m-%dT%H:%M')
 
       events.append(event)
 
-    return json.dumps(events)
-  
+    return events
+
   def create_calendar_event(self, title, message = None, location = None, start = None, stop = None, uid = None):
     if start is None:
       start = datetime.date.today()
-      
+
     else:
       start = datetime.date.fromtimestamp(int(start))
-      
+
+    if stop is None:
+      stop = start
+
+    else:
+      stop = datetime.date.fromtimestamp(int(stop))
+
     self.calendar.create_event(uid,title,message,location,start,stop)
 
   def replace_hardware_calender_event(self,switch_id,device,reminder_amount,reminder_period):
