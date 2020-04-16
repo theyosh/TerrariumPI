@@ -47,7 +47,7 @@
                 </div>
                 <div class="modal-body">
                   <div class="row">
-                    <div class="col-md-10 col-sm-10 col-xs-12">
+                    <div class="col-md-8 col-sm-8 col-xs-12">
                       <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group">
                           <input class="form-control" name="calendar_id" placeholder="{{_('ID')}}" readonly="readonly" type="hidden">
@@ -57,8 +57,8 @@
                       </div>
                       <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                          <label for="calendar_description">Description </label>
-                          <span class="text pidescription"></span>
+                          <label for="calendar_description">{{_('Description')}}</label>
+                          <span class="text description"></span>
                           <div class="btn-toolbar editor" data-role="editor-toolbar" data-target="#editor-one">
                             <div class="btn-group">
                               <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="fa fa-font"></i><b class="caret"></b></a>
@@ -125,7 +125,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-2 col-sm-2 col-xs-12 form-group">
+                    <div class="col-md-4 col-sm-4 col-xs-12 form-group">
                       <label for="calendar_date">{{_('Date')}}</label>
                       <input type="hidden" class="form-control" id="calendar_date"  name="calendar_date" >
                        <div id="calendar_date_picker"></div>
@@ -145,7 +145,7 @@
           </form>
         </div>
         <script type="text/javascript">
-          var modalWindow = null;      
+          var modalWindow = null;
           $(document).ready(function() {
 
             $('#editor-one').on('change',function(){
@@ -154,13 +154,16 @@
 
             $('form#new_item_form').on('submit',function(event){
                 event.preventDefault();
+                // Date range picker is including enddate, where ical is excluding it. So we add an extra dat here.... :? :(
+                var enddate = moment($(this).find('input[name="daterangepicker_end"]').val(),'L').add(1, 'days')
+                $(this).find('input[name="daterangepicker_end"]').val(enddate.format('L'))
                 modalWindow.modal('hide');
                 // Reload the calendar page...
                 setTimeout(function(){
-                  load_page('calendar.html');                
-                },1000);     
-            });    
- 
+                  load_page('calendar.html');
+                },1000);
+            });
+
             $.get('api/system',function(data){
               if (data.external_calendar_url != '' && data.external_calendar_url != null) {
                 $('div.x_content').html($('<iframe>').addClass('external_calendar').attr('src',data.external_calendar_url));
@@ -174,7 +177,7 @@
                   eventRender: function(eventObj, $el) {
                     $el.popover({
                        title: eventObj.title,
-                       content: eventObj.description,
+                       content: eventObj.description + '<br /><strong>{{_('Duration')}}:</strong> ' + moment.duration(eventObj.end - eventObj.start).humanize(),
                        html: true,
                        trigger: 'hover',
                        placement: 'top',
@@ -187,9 +190,16 @@
                   events: {
                     url: '/api/calendar/'
                   },
-                  select: function(start, end, allDay) {
-                    calendar_item({start:start});
-                  },              
+                  select: function(start, end, jsEvent, view) {
+                    calendar_item({start: start, end: end});
+                  },
+                  eventClick: function(calEvent, jsEvent, view) {
+                    // Here we go 1 day back for the date range picker. As the date range picker is inclusive the end date, where as the ical is exclusive end date
+                    if (calEvent.end === null) {
+                      calEvent.end = calEvent.start;
+                    }
+                    calendar_item({id: calEvent.id, start: calEvent.start, end: calEvent.end.subtract(1, 'days'), title: calEvent.title, description: calEvent.description});
+                  }
                 });
               }
             });
