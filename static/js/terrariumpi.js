@@ -3137,7 +3137,7 @@ function load_calendar_history() {
     } else {
       $('ul.nav.navbar-nav.navbar-right li#calendar span.badge.bg-green').removeClass('hidden').text(messages_in_future);
     }
-    $('ul.nav.navbar-nav.navbar-right ul#calendar_messages li.no_message').toggle(messages_in_future==0);
+    $('ul.nav.navbar-nav.navbar-right ul#calendar_messages li.no_message').toggle(data.length==0);
   });
 }
 
