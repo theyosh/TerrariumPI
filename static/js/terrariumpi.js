@@ -2385,39 +2385,21 @@ function add_door() {
 /* End Doors code */
 
 /* Webcam code */
+var realtime_sensor_data = {};
 function updateWebcamLabel(marker) {
-
-  function update(marker,sensors,message) {
-    var url = '/api/sensors/' + sensors.shift();
-    $.get(url,function(data) {
-      try {
-        data = data.sensors[0];
-
-        if (message === undefined) {
-          message = '<strong>' + data.name + '</strong><br />';
-
-          $(marker._icon).addClass('reset');
-          setTimeout(function(){
-            $(marker._icon).removeClass('reset');
-          },10);
-        }
-
-        message += data.type.substr(0,4) + '. ' + (Math.round((data.current + Number.EPSILON) * 1000) / 1000) + '' + data.indicator;
-
-        if (sensors.length > 0) {
-          message += '<br />';
-          update(marker,sensors,message);
-        } else {
-          marker.setTooltipContent(message);
-        }
-      } catch(e) {
-        console.log(e);
-      }
-    });
-  };
-
   if (marker.options.sensors.length > 0) {
-    update(marker,marker.options.sensors.slice(0));
+    var message = [];
+    $.each(marker.options.sensors,function(counter,value){
+      if (message.length == 0) {
+        message.push('<strong>' + realtime_sensor_data[value].name + '</strong>');
+      }
+      message.push(realtime_sensor_data[value].type.substr(0,4) + '. ' + (Math.round((realtime_sensor_data[value].current + Number.EPSILON) * 1000) / 1000) + '' + realtime_sensor_data[value].indicator);
+    });
+    marker.setTooltipContent(message.join('<br />'));
+    $(marker._icon).addClass('reset');
+    setTimeout(function(){
+      $(marker._icon).removeClass('reset');
+    },10);
   }
 }
 
@@ -2611,17 +2593,31 @@ function initWebcam(data) {
 
   realtime_data_layer.on('add',function(event) {
     this.options.refresh_timer = setInterval(function(){
-      realtime_data_layer.eachLayer(function(marker) {
-        updateWebcamLabel(marker);
-      });
+      if (realtime_data_layer.getLayers().length > 0) {
+        $.get('/api/sensors',function(data) {
+          realtime_sensor_data = {};
+          $.each(data.sensors,function(counter,value){
+            realtime_sensor_data[value.id + ''] = value;
+          });
+          realtime_data_layer.eachLayer(function(marker) {
+            updateWebcamLabel(marker);
+          });
+        });
+      }
     },30 * 1000);
   });
   realtime_data_layer.addTo(webcam);
 
   if ('' !== data.realtimedata) {
-    $.each(data.realtimedata.split(';'),function(counter,bladata) {
-      var tmpdata = bladata.split(',');
-      createWebcamLabel(realtime_data_layer,tmpdata.shift(),tmpdata.shift(),tmpdata, data.edit === true);
+    realtime_sensor_data = {};
+    $.get('/api/sensors',function(sensor_data) {
+      $.each(sensor_data.sensors,function(counter,value){
+        realtime_sensor_data[value.id + ''] = value;
+      });
+      $.each(data.realtimedata.split(';'),function(counter,value) {
+        var tmpdata = value.split(',');
+        createWebcamLabel(realtime_data_layer,tmpdata.shift(),tmpdata.shift(),tmpdata, data.edit === true);
+      });
     });
   }
 
