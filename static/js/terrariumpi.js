@@ -3146,7 +3146,7 @@ function calendar_item(options) {
                  description: ''};
   }
 
-  if (options.end === undefined || options.end === null) {
+  if (options.end === undefined || options.end === null || '' === options.end) {
     options.end = options.start;
   }
 

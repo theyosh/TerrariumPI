@@ -191,7 +191,7 @@
                     url: '/api/calendar/'
                   },
                   select: function(start, end, jsEvent, view) {
-                    calendar_item({start: start, end: end});
+                    calendar_item({start: start, end: end.subtract(1, 'days')});
                   },
                   eventClick: function(calEvent, jsEvent, view) {
                     // Here we go 1 day back for the date range picker. As the date range picker is inclusive the end date, where as the ical is exclusive end date

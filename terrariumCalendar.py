@@ -47,7 +47,7 @@ class terrariumCalendar(object):
 
   def create_event(self,uid,title,message,location = None,start = None,stop = None):
     ical = Calendar.from_ical(self.__ical_data)
-    create = uid is None
+    create = uid is None or '' == uid
 
     if start is None:
       start = datetime.now()
