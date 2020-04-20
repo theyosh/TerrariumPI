@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2020-04-13 21:21+CEST\n"
-"PO-Revision-Date: 2020-03-14 11:03+0000\n"
+"PO-Revision-Date: 2020-04-21 04:18+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/pt_BR/>\n"
@@ -60,14 +60,12 @@ msgstr ""
 "o indicador escolhido."
 
 #: terrariumTranslations.py:33
-#, fuzzy
-#| msgid "Holds the type of the animal"
 msgid "Holds the title of the calendar event."
-msgstr "Contém o tipo de animal"
+msgstr "Contém o nome do evento no calendário."
 
 #: terrariumTranslations.py:34
 msgid "Holds the body of the calendar event. You can include images."
-msgstr ""
+msgstr "Contém a descrição do evento no calendário. Pode conter imagens."
 
 #: terrariumTranslations.py:38
 msgid "Holds the sensor hardware type. Supported hardware types are: %s."
@@ -253,14 +251,16 @@ msgid ""
 "Enter the name of the hardware device that has been replace. Will be used "
 "for title in the reminder."
 msgstr ""
+"Coloque o nome do dispositivo de hardware a ser substituído. Este nome será "
+"usado como título do lembrete."
 
 #: terrariumTranslations.py:71
 msgid "Enter the amount of days/weeks/months/years to reminder."
-msgstr ""
+msgstr "Digite a quantidade de dias/semanas/meses/anos para o lembrete."
 
 #: terrariumTranslations.py:72
 msgid "Enter the period type."
-msgstr ""
+msgstr "Coloque o tipo de período."
 
 #: terrariumTranslations.py:76
 msgid "Holds the door hardware type. Supported hardware types are: %s."
@@ -936,11 +936,11 @@ msgstr "Um novo lembrete de substituição foi criado"
 
 #: terrariumWebserver.py:354
 msgid "Calender event created"
-msgstr ""
+msgstr "Evento de calendário criado"
 
 #: terrariumWebserver.py:355
 msgid "The calender event is created"
-msgstr ""
+msgstr "O evento de calendário foi criado"
 
 #: terrariumWebserver.py:496 views/inc/menu.tpl:177
 msgid "Log out"
@@ -1223,10 +1223,8 @@ msgid "No calendar available"
 msgstr "Nenhum calendário disponível"
 
 #: views/calendar.tpl:46
-#, fuzzy
-#| msgid "No calendar available"
 msgid "New calendar item"
-msgstr "Nenhum calendário disponível"
+msgstr "Novo item de calendário"
 
 #: views/calendar.tpl:54 views/inc/usage_doors.tpl:13
 #: views/inc/usage_doors.tpl:139 views/inc/usage_sensors.tpl:17
@@ -1239,11 +1237,11 @@ msgstr "Título"
 
 #: views/calendar.tpl:129
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: views/calendar.tpl:141 views/webcam_settings.tpl:266
 msgid "Save"
-msgstr ""
+msgstr "Salvar"
 
 #: views/dashboard.tpl:24 views/inc/usage_dashboard.tpl:93
 #: views/inc/usage_switches.tpl:121 views/inc/usage_switches.tpl:143
@@ -4080,14 +4078,12 @@ msgid "Last archived frame"
 msgstr "Último quadro arquivado"
 
 #: views/webcam_settings.tpl:234
-#, fuzzy
-#| msgid "Temperature sensors"
 msgid "Select sensors"
-msgstr "Sensores de temperatura"
+msgstr "Selecionar sensores"
 
 #: views/webcam_settings.tpl:267
 msgid "DELETE"
-msgstr ""
+msgstr "Apagar"
 
 #: Missing text string
 msgid "1Wire bus"
@@ -4115,7 +4111,7 @@ msgstr "Placa de relé USB de 4 portas"
 
 #: Missing text string
 msgid "Add marker"
-msgstr ""
+msgstr "Adicionar marcador"
 
 #: Missing text string
 msgid "Alarm"
@@ -4134,10 +4130,8 @@ msgid "Avatar"
 msgstr "Avatar"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Calendar"
 msgid "Calendar title"
-msgstr "Calendário"
+msgstr "Título do Calendário"
 
 #: Missing text string
 msgid "Click to change image"
@@ -4286,10 +4280,8 @@ msgid "Load 5"
 msgstr "Carregar 5"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Load"
 msgid "Loading"
-msgstr "Carga"
+msgstr "Carregando"
 
 #: Missing text string
 msgid "Minimum area"
@@ -4332,10 +4324,8 @@ msgid "Raspberry Pi camera"
 msgstr "Câmera Raspberry Pi"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Remote data"
 msgid "realtimedata"
-msgstr "Dados Remotos"
+msgstr "Dados em tempo real"
 
 #: Missing text string
 msgid "Reboot"
@@ -4399,13 +4389,11 @@ msgstr "Registro de data e hora"
 
 #: Missing text string
 msgid "Toggle audio"
-msgstr ""
+msgstr "Alternar áudio"
 
 #: Missing text string
-#, fuzzy
-#| msgid "More information"
 msgid "Toggle information"
-msgstr "Mais Informações"
+msgstr "Alternar informações"
 
 #: Missing text string
 msgid "Toggle power switch"
