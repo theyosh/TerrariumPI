@@ -2069,6 +2069,7 @@ function toggle_power_manual_mode(id) {
 }
 
 function add_power_switch_status_row(data) {
+  console.log(data);
   if (source_row === null || source_row === '') {
     return false;
   }
@@ -2079,7 +2080,7 @@ function add_power_switch_status_row(data) {
   new_row.attr('id','powerswitch_' + data.id);
 
   // Change the toggle icon with a slider knob
-  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype || 'dc-dimmer' === data.hardwaretype || 'brightpi' === data.hardwaretype || 'pca9685' == data.hardwaretype) {
+  if (data.hardwaretype.indexOf('-dimmer') !== -1 || 'brightpi' === data.hardwaretype || 'pca9685' == data.hardwaretype) {
     new_row.find('div.x_content div.power_switch')
       .removeClass('big')
       .addClass('dimmer')
@@ -2123,7 +2124,8 @@ function update_power_switch(data) {
   var on = data.state;
   // Set the name and status
   var current_status_data = '';
-  if (data.hardwaretype.indexOf('dimmer') > 0 || 'brightpi' === data.hardwaretype || 'pca9685' === data.hardwaretype) {
+  var dimmer = data.hardwaretype.indexOf('dimmer') !== -1 || 'brightpi' === data.hardwaretype || 'pca9685' === data.hardwaretype;
+  if (dimmer) {
     current_status_data = formatNumber(data.current_power_wattage) + 'W / ';
     on = data.state > data.dimmer_off_percentage;
   }
@@ -2161,7 +2163,7 @@ function update_power_switch(data) {
   });
 
   // Open or hide the dimmer values (will not trigger on the select field)
-  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype || 'dc-dimmer' === data.hardwaretype || 'brightpi' === data.hardwaretype || 'pca9685' === data.hardwaretype) {
+  if (dimmer) {
     content_row.find('.row.dimmer').show();
   } else {
     // Remove dimmer row, else form submit is 'stuck' on hidden fields that have invalid patterns... :(

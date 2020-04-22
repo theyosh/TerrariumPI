@@ -226,7 +226,7 @@
               minimumResultsForSearch: Infinity
             }).on('change',function() {
               if ('switch_[nr]_hardwaretype' === this.name) {
-                var dimmer = 'pwm-dimmer' === this.value || 'remote-dimmer' === this.value || 'dc-dimmer' === this.value || 'brightpi' === this.value || 'pca9685' == this.value;
+                var dimmer = this.value.indexOf('-dimmer') !== -1 || 'brightpi' === this.value || 'pca9685' == this.value;
                 if (dimmer) {
                   $(this).parents('.x_content').find('.row.dimmer input').attr('required','required');
                 } else {

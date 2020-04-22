@@ -503,7 +503,7 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
     self.__firmware = None
     if not hasattr(self, '__retries'):
       self.__retries = 0
-    
+
     # Input format should be either:
     # - http://[HOST]#[POWER_SWITCH_NR]
     # - http://[HOST]/#[POWER_SWITCH_NR]
@@ -610,8 +610,8 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
         return self.set_hardware_state(state,force)
       else:
         logger.error('Sonoff device is not connected. Cannot trigger power switch')
-        return False    
-  
+        return False
+
     data = re.match(self.VALID_SOURCE,self.get_address())
     if data:
       data = data.groupdict()
@@ -820,6 +820,7 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
     self.off_percentage = 0.0
 
     self._dimmer_state = 0.0
+    self._dimmer_running = False
     super(terrariumPowerDimmerSource,self).__init__(switchid, address, name, prev_state, callback)
 
   def get_state(self):
@@ -951,6 +952,10 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
         elif self.get_type() == terrariumPowerDimmerBrightPi.TYPE:
           dim_value = int(50 * (float(self._dimmer_state) / 100.0))
 
+        elif self.get_type() == terrariumPowerDimmerIRF520.TYPE:
+          dim_value = self._dimmer_state
+          dim_freq = terrariumPowerDimmerIRF520.DIMMER_FREQ
+
         skip_first = True
         for gpiopin in self.get_address().split(','):
           logger.debug('Dimmer animation: Step: %s, value %s%%, Dim value: %s, timeout %s',counter+1, self._dimmer_state, dim_value, duration)
@@ -966,7 +971,7 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
               self._device.set_pwm(int(gpiopin), self._dimmer_state * (4095 / 100))
 
             elif self.get_type() == terrariumPowerDimmerIRF520.TYPE:
-              self._device.ChangeDutyCycle(self._dimmer_state)
+              self._device.hardware_PWM(terrariumUtils.to_BCM_port_number(gpiopin), dim_freq, int(dim_value) * 10000)
 
             else:
               self._device.hardware_PWM(terrariumUtils.to_BCM_port_number(gpiopin), dim_freq, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
@@ -1048,35 +1053,14 @@ class terrariumPowerDimmerDC(terrariumPowerDimmerPiGPIOSource):
   DIMMER_MAXDIM = 1000 # https://github.com/theyosh/TerrariumPI/issues/178#issuecomment-412667010
   DIMMER_FREQ   = 15000 # https://github.com/theyosh/TerrariumPI/issues/178#issuecomment-413697246
 
-class terrariumPowerDimmerIRF520(terrariumPowerDimmerSource):
+class terrariumPowerDimmerIRF520(terrariumPowerDimmerPiGPIOSource):
   # https://opencircuit.nl/Product/IRF520-mosfet-module
   # https://github.com/DrLex0/MightyVariableFan/blob/master/pi_files/pwm_server.py#L97
   TYPE = 'irf520-dimmer'
 
   # Dimmer settings
-  DIMMER_FREQ   = 200 # https://github.com/DrLex0/MightyVariableFan/blob/master/pi_files/pwm_server.py#L48
-
-  def __del__(self):
-    self.stop()
-
-  def stop(self):
-    """To be invoked when about to stop the server."""
-    if self._device is not None:
-      self._device.stop()
-      self._device = None
-      GPIO.cleanup(terrariumUtils.to_BCM_port_number(self.get_address()))
-
-    super(terrariumPowerDimmerIRF520,self).stop()
-
-  def load_hardware(self):
-    GPIO.setup(terrariumUtils.to_BCM_port_number(self.get_address()), GPIO.OUT)
-    self._device = GPIO.PWM(terrariumUtils.to_BCM_port_number(self.get_address()), terrariumPowerDimmerIRF520.DIMMER_FREQ)
-
-    self._device.start(0)
-    self._device.stop()
-
-    # Not sure if this is handy.... but else we need to keep track if we have stopped.....
-    self._device.start(0)
+  DIMMER_MAXDIM = 100
+  DIMMER_FREQ   = 50 # Tested with a 24V PC fan.
 
 class terrariumPowerDimmerBrightPi(terrariumPowerDimmerSource):
   TYPE = 'brightpi'
@@ -1101,7 +1085,7 @@ class terrariumPowerDimmerPCA9685(terrariumPowerDimmerSource):
   TYPE = 'pca9685-dimmer'
 
   # Dimmer settings
-  DIMMER_FREQ   = 1000 
+  DIMMER_FREQ   = 1000
 
   def load_hardware(self):
     self._dimmer_running = False
