@@ -16,6 +16,21 @@ ACCESSLOGFILE="${BASEDIR}/log/terrariumpi.access.log"
 TMPFS="/run/user/${SCRIPT_USER_ID}"
 INSTALLER_TITLE="TerrariumPI v. ${VERSION} (Python${PYTHON})"
 
+CLEANUP_PACKAGES="wolfram sonic-pi openbox nodered java openjdk chromium-browser desktop-base gnome-desktop3-data libgnome-desktop epiphany-browser-data epiphany-browser nuscratch scratch wiringpi libreoffice"
+
+PIP_MODULES="setuptools python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_GPIO Adafruit_DHT Adafruit-SHT31 luma.oled bluepy pywemo pyownet emails mh-z19 icalendar melopero-amg8833 PCA9685-driver pyfiglet"
+if [ $PYTHON -eq 2 ]; then
+  PIP_MODULES="${PIP_MODULES} iCalEvents==0.1.21 gevent==1.4.0"
+fi
+if [ $PYTHON -eq 3 ]; then
+  PIP_MODULES="${PIP_MODULES} gevent opencv-python-headless meross-iot==0.2.2.3 iCalEvents adafruit-circuitpython-sht31d mitemp_bt"
+fi
+
+if [ `grep -ic " buster " /etc/apt/sources.list` -eq 2 ]; then
+  # Does not work on Buster, so we use the deb package version.... lets hope that it will stay working
+  PIP_MODULES="${PIP_MODULES/opencv-python-headless/}"
+fi
+
 WHOAMI=`whoami`
 if [ "${WHOAMI}" != "root" ]; then
   echo "Start TerrariumPI installation as user root"
@@ -46,15 +61,21 @@ whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --ye
 case $? in
   0) whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --infobox "TerrariumPI is removing not needed programs" 0 0
 
-     debconf-apt-progress -- apt-get -y remove wolfram-engine sonic-pi openbox nodered "^oracle-java.*" "^openjdk.*" "^chromium-browser.*" desktop-base gnome-desktop3-data "^libgnome-desktop.*" epiphany-browser-data epiphany-browser nuscratch "^scratch.*" wiringpi "^libreoffice.*"
-     debconf-apt-progress -- apt-get -y autoremove
+    CLEANUP=""
+    for PACKAGE in ${CLEANUP_PACKAGES}
+    do
+      CLEANUP="${CLEANUP} \"*${PACKAGE}*\""
+    done
+
+    debconf-apt-progress -- apt-get -y remove ${CLEANUP} && apt-get -y autoremove
+#    debconf-apt-progress -- apt-get -y autoremove
   ;;
 esac
 
 # Remove previous python 2.X packages to make sure pip installed libraries are used
 debconf-apt-progress -- apt-get -y remove owhttpd owftpd
 
-#python-gpiozero python-dateutil python-imaging python-ow python-picamera python-pigpio python-psutil python-requests python-rpi.gpio
+# OWServer geeft problemen met install??? Of omdat config al aangepast is... maar als deez uit is, wil de apt install niet verder... Dus killen en manueel starten. dan verder install
 
 # Install required packages to get the terrarium software running
 PYTHON_LIBS="python-pip python-dev python-mediainfodll python-smbus python-pil python-opencv python-numpy python-lxml"
@@ -62,13 +83,16 @@ if [ $PYTHON -eq 3 ]; then
   PYTHON_LIBS="python3-pip python3-dev python3-mediainfodll python3-smbus python3-pil python3-opencv python3-numpy python3-lxml"
 fi
 
+debconf-apt-progress -- apt-get -y autoremove
 debconf-apt-progress -- apt-get -y update
 debconf-apt-progress -- apt-get -y full-upgrade
-debconf-apt-progress -- apt-get -y autoremove
+
 
 APT_PACKAGES="libftdi1 screen git subversion watchdog build-essential i2c-tools pigpio owserver sqlite3 vlc-bin ffmpeg libfreetype6-dev libjpeg-dev \
-  libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libjasper1 libgstreamer0.10-0 libgstreamer1.0-0 libilmbase12 \
+  libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libgstreamer0.10-0 libgstreamer1.0-0 libilmbase12 \
   libopenexr22 libgtk-3-0 libxml2-dev libxslt1-dev python-twisted python-zope.interface $PYTHON_LIBS"
+
+# libjasper1 -> Is alleen op Raspbarry ARM....
 
 if [ `grep -ic " buster " /etc/apt/sources.list` -eq 2 ]; then
   # Remove not existing packages in Debian buster
@@ -81,7 +105,6 @@ debconf-apt-progress -- apt-get -y install $APT_PACKAGES
 
 # Set the timezone
 dpkg-reconfigure tzdata
-
 
 # Basic config:
 # Enable 1Wire en I2C during boot
@@ -111,9 +134,11 @@ if [ -f /boot/config.txt ]; then
     echo "enable_uart=1" >> /boot/config.txt
   fi
 
+fi
+
+if [ -f /boot/cmdline.txt ]; then
   sed -i "/boot/cmdline.txt" -e "s@console=ttyAMA0,[0-9]\+ @@"
   sed -i "/boot/cmdline.txt" -e "s@console=serial0,[0-9]\+ @@"
-
 fi
 
 # Create needed groups
@@ -229,19 +254,6 @@ cd "${BASEDIR}/gentelella"
 git checkout 1.4.0 > /dev/null 2> /dev/null
 cd "${BASEDIR}/.."
 
-PIP_MODULES="setuptools python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero gevent untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_GPIO Adafruit_DHT Adafruit-SHT31 luma.oled bluepy pywemo pyownet emails mh-z19 icalendar melopero-amg8833 PCA9685-driver pyfiglet"
-if [ $PYTHON -eq 2 ]; then
-  PIP_MODULES="${PIP_MODULES} iCalEvents==0.1.21"
-fi
-if [ $PYTHON -eq 3 ]; then
-  PIP_MODULES="${PIP_MODULES} opencv-python-headless meross-iot==0.2.2.3 iCalEvents adafruit-circuitpython-sht31d mitemp_bt"
-fi
-
-if [ `grep -ic " buster " /etc/apt/sources.list` -eq 2 ]; then
-  # Does not work on Buster, so we use the deb package version.... lets hope that it will stay working
-  PIP_MODULES="${PIP_MODULES/opencv-python-headless/}"
-fi
-
 NUMBER_OF_MODULES=($PIP_MODULES)
 NUMBER_OF_MODULES=${#NUMBER_OF_MODULES[@]}
 MODULE_COUNTER=1
@@ -261,10 +273,20 @@ Install required software (some modules will take 5-10 min.)
 Installing python${PYTHON} module ${MODULE_COUNTER} out of ${NUMBER_OF_MODULES}: ${PIP_MODULE} (attempt ${ATTEMPT}) ...
 XXX
 EOF
+    # use --install-option="--force-pi" to make sure the package Adafruit_DHT will install!
     if [ $PYTHON -eq 2 ]; then
-      pip2 install -q --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
+      if [ $PIP_MODULE == 'Adafruit_DHT' ]; then
+        pip2 install -q --install-option="--force-pi" --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
+      else
+        pip2 install -q --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
+      fi
+
     elif [ $PYTHON -eq 3 ]; then
-      pip3 install -q --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
+      if [ $PIP_MODULE == 'Adafruit_DHT' ]; then
+        pip3 install -q --install-option="--force-pi" --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
+      else
+        pip3 install -q --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
+      fi
     fi
 
     if [ $? -eq 0 ]; then
@@ -389,3 +411,4 @@ case $? in
   reboot
   ;;
 esac
+
