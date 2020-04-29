@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2020-04-13 21:21+CEST\n"
-"PO-Revision-Date: 2020-04-14 14:20+0000\n"
+"PO-Revision-Date: 2020-04-29 16:03+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
 "webinterface/nl/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.11.3\n"
+"X-Generator: Weblate 4.0.2\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -70,7 +70,7 @@ msgstr "Bevat de titel van kalender item."
 
 #: terrariumTranslations.py:34
 msgid "Holds the body of the calendar event. You can include images."
-msgstr ""
+msgstr "Bevat het bericht van de agenda item. Je kunt plaatjes gebruiken."
 
 #: terrariumTranslations.py:38
 msgid "Holds the sensor hardware type. Supported hardware types are: %s."
@@ -254,14 +254,16 @@ msgid ""
 "Enter the name of the hardware device that has been replace. Will be used "
 "for title in the reminder."
 msgstr ""
+"Vul de naam in van het vervangen hardware onderdeel. Dit wordt gebruikt in "
+"de titel voor de herinnering."
 
 #: terrariumTranslations.py:71
 msgid "Enter the amount of days/weeks/months/years to reminder."
-msgstr ""
+msgstr "Vul het aantal dagen/weken/maanden/jaren in voor de herinnering."
 
 #: terrariumTranslations.py:72
 msgid "Enter the period type."
-msgstr ""
+msgstr "Vul de periode type in."
 
 #: terrariumTranslations.py:76
 msgid "Holds the door hardware type. Supported hardware types are: %s."
@@ -935,11 +937,11 @@ msgstr "Er wordt een nieuwe vervangingsherinnering gemaakt"
 
 #: terrariumWebserver.py:354
 msgid "Calender event created"
-msgstr ""
+msgstr "Kalender item is aangemaakt"
 
 #: terrariumWebserver.py:355
 msgid "The calender event is created"
-msgstr ""
+msgstr "De kalender item is aangemaakt"
 
 #: terrariumWebserver.py:496 views/inc/menu.tpl:177
 msgid "Log out"
@@ -4405,10 +4407,8 @@ msgid "Toggle audio"
 msgstr "Schakel audio"
 
 #: Missing text string
-#, fuzzy
-#| msgid "More information"
 msgid "Toggle information"
-msgstr "Meer informatie"
+msgstr "Toon/verberg informatie"
 
 #: Missing text string
 msgid "Toggle power switch"
