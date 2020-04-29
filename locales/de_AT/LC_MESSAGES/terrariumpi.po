@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-04-13 21:21+CEST\n"
-"PO-Revision-Date: 2020-03-26 08:52+0000\n"
+"PO-Revision-Date: 2020-04-29 16:03+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: German (Austria) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/de_AT/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.11.3\n"
+"X-Generator: Weblate 4.0.2\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumEngine.py:673 terrariumEngine.py:785 views/dashboard.tpl:7
@@ -64,10 +64,8 @@ msgstr ""
 "Messwerte in die gewählte Einheit umrechnen."
 
 #: terrariumTranslations.py:33
-#, fuzzy
-#| msgid "Holds the type of the animal"
 msgid "Holds the title of the calendar event."
-msgstr "Tierart"
+msgstr "Enthält den Titel des Kalenderereignisses."
 
 #: terrariumTranslations.py:34
 msgid "Holds the body of the calendar event. You can include images."
