@@ -269,31 +269,48 @@ class terrariumPowerSwitchFTDI(terrariumPowerSwitchSource):
     "all":"FF"
   }
 
+  def __get_address(self):
+    data = self.get_address().strip().split(',')
+    if len(data) == 1:
+      data.append(1)
+    elif '' == data[1]:
+      data[1] = 1
+
+    data[0] = int(data[0])
+    data[1] = int(data[1])
+
+    return data
+
   def load_hardware(self):
+    address = self.__get_address()
+
     self.__device_type = None
+    counter = 1
     for device in Driver().list_devices():
+      if counter != address[1]:
+        counter += 1
+        continue
+
       vendor, product, self.__device = [x for x in device]
       self.__device_type = 'Serial' if product.endswith('UART') else 'BitBang'
       logger.debug('Found switch board {}, {}, {}, of type {}'.format(vendor,product,self.__device,self.__device_type))
       break # For now, we only support 1 switch board!
 
-  def set_address(self,value):
-    if value in terrariumPowerSwitchFTDI.BITBANG_ADDRESSES:
-      self.address = value
-
   def set_hardware_state(self, state, force = False):
+    address = self.__get_address()
+
     if 'BitBang' == self.__device_type:
       with BitBangDevice(self.__device) as device:
         device.baudrate = 9600
         if state is terrariumPowerSwitch.ON:
-          device.port |= int(terrariumPowerSwitchFTDI.BITBANG_ADDRESSES[str(self.get_address())], 16)
+          device.port |= int(terrariumPowerSwitchFTDI.BITBANG_ADDRESSES[str(address[0])], 16)
         else:
-          device.port &= ~int(terrariumPowerSwitchFTDI.BITBANG_ADDRESSES[str(self.get_address())], 16)
+          device.port &= ~int(terrariumPowerSwitchFTDI.BITBANG_ADDRESSES[str(address[0])], 16)
 
     elif 'Serial' == self.__device_type:
       with SerialDevice(self.__device) as device:
         device.baudrate = 9600
-        cmd = chr(0xff) + chr(0x0 + int(self.get_address())) + chr(0x0 + (1 if state is terrariumPowerSwitch.ON else 0))
+        cmd = chr(0xff) + chr(0x0 + int(address[0])) + chr(0x0 + (1 if state is terrariumPowerSwitch.ON else 0))
         device.write(cmd)
 
   def get_hardware_state(self):
@@ -322,10 +339,12 @@ class terrariumPowerSwitchFTDI(terrariumPowerSwitchSource):
         return testBit(data, 8)
 
     data = None
+    address = self.__get_address()
+    
     if 'BitBang' == self.__device_type:
       with BitBangDevice(self.__device) as device:
         device.baudrate = 9600
-        data = get_relay_state( device.port, str(self.get_address()) )
+        data = get_relay_state( device.port, str(address[0]) )
 
     elif 'Serial' == self.__device_type:
       return None
