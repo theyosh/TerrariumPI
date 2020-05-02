@@ -76,14 +76,14 @@ class terrariumWebcamSource(object):
     self.set_name(name)
     self.set_resolution(width,height)
     self.set_rotation(rotation)
-    
+
     self.realtimedata = ''
-    
+
     if webcam_id is None:
       self.__id = md5(self.get_location().encode()).hexdigest()
     else:
       self.__id = id
-      
+
     self.set_archive(archive)
     self.set_archive_light(archive_light)
     self.set_archive_door(archive_door)
@@ -200,7 +200,7 @@ class terrariumWebcamSource(object):
     source_width, source_height = self.raw_image.size
 
     self.raw_image.paste(mask, (int((source_width/2)-(mask_width/2)),int((source_height/2)-(mask_height/2))), mask)
-  
+
   def get_last_archive_image(self):
     # Get last image from 'today'
     regex = r'(' + terrariumWebcamSource.ARCHIVE_LOCATION + ')\d+/\d+/\d+/([^_]+_archive_)\d+(\..*)'
@@ -216,10 +216,10 @@ class terrariumWebcamSource(object):
       file_filter = re.sub(regex, subst, self.get_raw_image(True)).replace('//','/')
       files = glob.glob(file_filter)
       files.sort(key=os.path.getmtime,reverse = True)
-      
+
     if len(files) == 0:
       return False
-    
+
     return files[0]
 
   def get_archive_images(self,prefix = None):
@@ -374,7 +374,7 @@ class terrariumWebcamSource(object):
 
   def get_realtimedata(self):
     return self.realtimedata.strip(';')
-  
+
   def get_data(self,archive = False):
     data = {'id': self.get_id(),
             'location': self.get_location(),
@@ -456,8 +456,9 @@ class terrariumWebcamSource(object):
     if archive != 'motion':
       last_archive_image = self.get_last_archive_image()
       if last_archive_image is not False:
-        self.__last_archive = os.path.getmtime(last_archive_image)
-      
+        gmttime = int(os.path.splitext(last_archive_image)[0].split('_')[-1])
+        self.__last_archive = gmttime
+
     self.archive = archive
 
   def get_archive_light(self):
@@ -570,7 +571,7 @@ class terrariumWebcamLiveSource(terrariumWebcamSource):
 # Bug / Upstream
 # https://github.com/raspberrypi/firmware/issues/1167#issuecomment-511798033
 # https://github.com/waveform80/picamera/pull/576
-from picamera import mmal 
+from picamera import mmal
 import ctypes as ct
 
 class PiCameraUpstream(PiCamera):
