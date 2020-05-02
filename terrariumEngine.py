@@ -21,6 +21,7 @@ import psutil
 import subprocess
 import re
 import json
+import pyfiglet
 
 from hashlib import md5
 from gevent import sleep
@@ -192,12 +193,21 @@ class terrariumEngine(object):
     if not reloading:
       self.sensors = {}
 
+    exclude_ids = []
+    for sensor_data in sensor_config:
+      if 'exclude' in sensor_data and terrariumUtils.is_true(sensor_data['exclude']):
+        logger.info('Excluding sensor with ID {}'.format(sensor_data['id']))
+        exclude_ids.append(sensor_data['id'])
+
     seen_sensors = []
     for sensor in terrariumSensor.scan_sensors(self.__unit_type):
-      if sensor.get_id() not in self.sensors:
+      if sensor.get_id() not in self.sensors and sensor.get_id() not in exclude_ids:
         self.sensors[sensor.get_id()] = sensor
 
     for sensordata in sensor_config:
+      if sensordata['id'] in exclude_ids:
+        continue
+
       if sensordata['id'] not in self.sensors:
         # New sensor (add)
         try:
@@ -473,7 +483,7 @@ class terrariumEngine(object):
           webcam.set_motion_delta_threshold(motion_delta_threshold)
           webcam.set_motion_min_area(motion_min_area)
           webcam.set_motion_compare_frame(motion_compare_frame)
-         
+
           self.webcams[webcam.get_id()] = webcam
         except Exception as err:
           print(err)
@@ -511,9 +521,12 @@ class terrariumEngine(object):
 
       if 'motioncompareframe' in webcamdata:
         webcam.set_motion_compare_frame(webcamdata['motioncompareframe'])
-        
+
       if 'awb' in webcamdata:
         webcam.set_awb(webcamdata['awb'])
+
+      if 'realtimedata' in webcamdata:
+        webcam.set_realtimedata(webcamdata['realtimedata'])
 
       seen_webcams.append(webcam.get_id())
 
@@ -709,19 +722,43 @@ gray=$(tput setaf 8)
 reset=$(tput sgr0)
 
 # The message
-echo ""
-echo " ${green} _____                        _                  ${red}______ _____ "
-echo " ${green}|_   _|                      (_)                 ${red}| ___ \_   _|"
-echo " ${green}  | | ___ _ __ _ __ __ _ _ __ _ _   _ _ __ ___   ${red}| |_/ / | |"
-echo " ${green}  | |/ _ \ '__| '__/ _\` | '__| | | | | '_ \` _ \  ${red}|  __/  | |"
-echo " ${green}  | |  __/ |  | | | (_| | |  | | |_| | | | | | | ${red}| |    _| |_"
-echo " ${green}  \_/\___|_|  |_|  \__,_|_|  |_|\__,_|_| |_| |_| ${red}\_|    \___/"
-echo " ${reset}"
-echo ""
 """
 
     motd_lines = template.splitlines()
-    motd_lines.append('echo "                                    {}{}: {}{}{}"'.format(
+
+    system_title = self.config.get_system()['title'].replace(self.config.get_system()['version'],'').strip()
+    motd_title_part1 = None
+    motd_title_part2 = None
+
+    f = pyfiglet.Figlet(font='doom')
+
+    if system_title.lower().endswith('pi'):
+      motd_title_part1 = f.renderText(re.sub('pi','',system_title,flags=re.IGNORECASE).strip()).split('\n')
+      motd_title_part2 = f.renderText('PI').split('\n')
+
+    else:
+      motd_title_part1 =f.renderText(system_title).split('\n')
+
+    spaces = int((80 - (len(max(motd_title_part1,key=len)) + (0 if motd_title_part2 is None else len(max(motd_title_part2,key=len))))) / 2)
+    spaces = spaces * ' '
+
+    for counter, line in enumerate(motd_title_part1):
+        if len(line.strip()) == 0:
+            continue
+
+        motd_line = 'echo "' + spaces + ' ${green}' + line.replace('`','\`')
+        if motd_title_part2 is not None and counter < len(motd_title_part2):
+            motd_line += ' ${red}' + motd_title_part2[counter].replace('`','\`').strip()
+
+        motd_line += '"'
+        motd_lines.append(motd_line)
+
+    motd_lines.append('echo "${reset} "')
+
+    motd_name = '{:<40}'.format(spaces + '   ' + self.config.get_profile_name())
+
+    motd_lines.append('echo "{}{}{}: {}{}{}"'.format(
+        '${blue}' + motd_name + '${reset}',
         '${yellow}' if self.update_available else '        ',
         _('Version'),
         self.current_version,
@@ -769,7 +806,8 @@ echo ""
                         'value' : '{:.2f} C'.format(data['system']['temperature']),
                         'alarm' : False})
 
-    left_padding  = max([len(line['key']) for line in left_lines])
+    if len(left_lines) > 0:
+      left_padding  = max([len(line['key']) for line in left_lines])
     right_padding = max([len(line['key']) for line in right_lines])
 
     line_nr = 0
@@ -891,19 +929,32 @@ echo ""
   def get_sensors(self, parameters = [], socket = False):
     data = []
     filtertype = None
+    temperature_type = None
+
+    if len(parameters) > 0 and parameters[-1] in ['celsius','fahrenheit','kelvin']:
+      temperature_type = parameters[-1].lower()
+      if 'celsius' == temperature_type:
+        temperature_type = 'C'
+      if 'fahrenheit' == temperature_type:
+        temperature_type = 'F'
+      if 'kelvin' == temperature_type:
+        temperature_type = 'K'
+
+      del(parameters[-1])
+
     if len(parameters) > 0 and parameters[0] is not None:
       filtertype = parameters[0]
 
     # Filter is based on sensorid
     if filtertype is not None and filtertype in self.sensors:
-      data.append(self.sensors[filtertype].get_data())
+      data.append(self.sensors[filtertype].get_data(temperature_type=temperature_type))
 
     else:
       for sensorid in self.sensors:
         # Filter based on sensor type
         # Exclude Chirp light sensors for average calculation in favour of Lux measurements
         if filtertype is None or (filtertype == 'average' and not (self.sensors[sensorid].get_exclude_avg() or (self.sensors[sensorid].get_sensor_type() == 'light' and self.sensors[sensorid].get_type() == 'chirp'))) or filtertype == self.sensors[sensorid].get_sensor_type():
-          data.append(self.sensors[sensorid].get_data())
+          data.append(self.sensors[sensorid].get_data(temperature_type=temperature_type))
 
     if 'average' == filtertype or len(parameters) == 2 and parameters[1] == 'average':
       average = {}
@@ -930,9 +981,17 @@ echo ""
 
         average[averagetype]['alarm'] = not (average[averagetype]['alarm_min'] <= average[averagetype]['current'] <= average[averagetype]['alarm_max'])
         average[averagetype]['type'] = averagetype
-        average[averagetype]['indicator'] = self.__unit_type(averagetype[8:])
+        average[averagetype]['indicator'] = temperature_type if 'temperature' == averagetype[8:] and temperature_type is not None else self.__unit_type(averagetype[8:])
 
       data = average
+
+#    if temperature_type is not None and temperature_type != terrariumConfig.get_temperature_indicator():
+#      if 'C' == temperature_type:
+#        pass
+#      elif 'F' == temperature_type:
+#        pass
+#      elif 'K' == temperature_type:
+#        pass
 
     if socket:
       self.__send_message({'type':'sensor_gauge','data':data})
@@ -1039,18 +1098,22 @@ echo ""
   # End doors part
 
 
-
-  def get_calendar(self,parameters,**parameters2):
+  # Calender part
+  def get_calendar(self, parameters, **kwargs):
     if 'ical' in parameters:
       return self.calendar.get_ical()
 
-    start = None
-    if 'start' in parameters2 and parameters2['start'] is not None:
-      start = datetime.datetime.strptime(parameters2['start'],'%Y-%m-%d')
+    start = kwargs.get('start')
+    if start is None:
+      start = datetime.datetime.utcnow() -  datetime.timedelta(days=15)
+    else:
+      start = datetime.datetime.strptime(start,'%Y-%m-%d')
 
-    end = None
-    if 'end' in parameters2 and parameters2['end'] is not None:
-      end = datetime.datetime.strptime(parameters2['end'],'%Y-%m-%d')
+    end = kwargs.get('end')
+    if end is None:
+      end = start + datetime.timedelta(days=30)
+    else:
+      end = datetime.datetime.strptime(end,'%Y-%m-%d')
 
     data = self.calendar.get_events(start,end)
 
@@ -1065,14 +1128,29 @@ echo ""
 
       if event_data.all_day:
         event['start'] = event_data.start.strftime('%Y-%m-%d')
+        event['end'] = event_data.end.strftime('%Y-%m-%d')
       else:
         event['start'] = event_data.start.strftime('%Y-%m-%dT%H:%M')
         event['end'] = event_data.end.strftime('%Y-%m-%dT%H:%M')
 
       events.append(event)
 
-    return json.dumps(events)
+    return events
 
+  def create_calendar_event(self, title, message = None, location = None, start = None, stop = None, uid = None):
+    if start is None:
+      start = datetime.date.today()
+
+    else:
+      start = datetime.date.fromtimestamp(int(start))
+
+    if stop is None:
+      stop = start
+
+    else:
+      stop = datetime.date.fromtimestamp(int(stop))
+
+    self.calendar.create_event(uid,title,message,location,start,stop)
 
   def replace_hardware_calender_event(self,switch_id,device,reminder_amount,reminder_period):
     # Two events:
@@ -1110,6 +1188,7 @@ echo ""
                                  None,
                                  current_time)
 
+  # End Calendar part
 
   # Webcams part
   def get_webcams(self, parameters = [], socket = False):

@@ -6,7 +6,6 @@ var globals = {
   temperature_indicator: 'C',
   distance_indicator: 'cm',
   gauges: [],
-  webcams: [],
   graphs: {},
   graph_cache: 1 * 60,
   websocket_timer: null,
@@ -539,8 +538,8 @@ function add_notification_message(type, title, message, icon, color, date, link)
   notification.append($('<span>').addClass('image').append($('<img>').attr({
     'src': $('div.profile_pic img:last').attr('src')
   })));
-  notification.append($('<span>').append($('<span>').text(title)).append($('<span>').addClass('time notification_timestamp').attr('data-timestamp',notification_date)) );
-  notification.append($('<span>').addClass('message').text(message).append($('<span>').addClass('pull-right').html('<i class="fa ' + icon + ' ' + color + '"></i>')));
+  notification.append($('<span>').append($('<span>').html(title)).append($('<span>').addClass('time notification_timestamp').attr('data-timestamp',notification_date)) );
+  notification.append($('<span>').addClass('message').html(message).append($('<span>').addClass('pull-right').html('<i class="fa ' + icon + ' ' + color + '"></i>')));
 
   // Remove no messages line
   menu.find('li.no_message').hide();
@@ -697,11 +696,11 @@ function prepare_form_data(form) {
   var formdata = [];
   var form_type = form.attr('action').split('/').pop();
 
-  var re = /(sensor|switch|webcam|light|humidity|temperature|watertank|moisture|conductivity|ph|co2|fertility|door|profile|playlist)(_\d+)?_(.*)/i;
+  var re = /(calendar|sensor|switch|webcam|light|humidity|temperature|watertank|moisture|conductivity|ph|co2|fertility|door|profile|playlist)(_\d+)?_(.*)/i;
   var matches = null;
   var objectdata = {};
   var prev_nr = -1;
-  if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'profile' || form_type === 'notifications' || form_type === 'hardware') {
+  if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'profile' || form_type === 'notifications' || form_type === 'hardware' || form_type === 'calendar') {
     formdata = {};
   }
   try {
@@ -714,7 +713,8 @@ function prepare_form_data(form) {
           case 'weather':
           case 'system':
           case 'notifications':
-            if (field_name == 'age') {
+          case 'calendar':
+            if (['age','calendar_date','daterangepicker_start','daterangepicker_end'].indexOf(field_name) !== -1) {
               field_value = moment(field_value,'L').unix();
             }
             formdata[field_name] = field_value;
@@ -763,7 +763,7 @@ function prepare_form_data(form) {
       }
     });
     if (Object.keys(objectdata).length > 1) {
-      if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'notifications' || form_type === 'hardware') {
+      if (form_type === 'weather' || form_type === 'environment' || form_type === 'system' || form_type === 'notifications' || form_type === 'hardware' || form_type === 'calendar') {
         formdata[prev_nr] = $.extend(true, {}, objectdata);
       } else {
         formdata.push($.extend(true, {}, objectdata));
@@ -1945,7 +1945,7 @@ function add_sensor_status_row(data) {
   $('div#maincontent').append(new_row);
 }
 
-function update_sensor(data,) {
+function update_sensor(data) {
   // Load the switch row to update the data
   var content_row = $('div.row.sensor#' + 'sensor_' + data.id);
   // Show either the temperature or humidity header and icon
@@ -1953,7 +1953,7 @@ function update_sensor(data,) {
   // Update title
   content_row.find('h2 span.title').text(data.name);
   if ('miflora' == data.hardwaretype) {
-    content_row.find('h2 span.title').append(' <span class="small">' + data.firmware + ' <i class="fa fa-plug"></i>' + data.battery + '%</span>')
+    content_row.find('h2 span.title').append(' <span class="small">' + data.firmware + ' <i class="fa fa-plug"></i>' + data.battery + '%</span>');
   }
 
   // Set the values only when empty
@@ -2069,6 +2069,7 @@ function toggle_power_manual_mode(id) {
 }
 
 function add_power_switch_status_row(data) {
+  console.log(data);
   if (source_row === null || source_row === '') {
     return false;
   }
@@ -2079,7 +2080,7 @@ function add_power_switch_status_row(data) {
   new_row.attr('id','powerswitch_' + data.id);
 
   // Change the toggle icon with a slider knob
-  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype || 'dc-dimmer' === data.hardwaretype || 'brightpi' === data.hardwaretype || 'pca9685' == data.hardwaretype) {
+  if (data.hardwaretype.indexOf('-dimmer') !== -1 || 'brightpi' === data.hardwaretype || 'pca9685' == data.hardwaretype) {
     new_row.find('div.x_content div.power_switch')
       .removeClass('big')
       .addClass('dimmer')
@@ -2123,7 +2124,8 @@ function update_power_switch(data) {
   var on = data.state;
   // Set the name and status
   var current_status_data = '';
-  if (data.hardwaretype.indexOf('dimmer') > 0 || 'brightpi' === data.hardwaretype || 'pca9685' === data.hardwaretype) {
+  var dimmer = data.hardwaretype.indexOf('dimmer') !== -1 || 'brightpi' === data.hardwaretype || 'pca9685' === data.hardwaretype;
+  if (dimmer) {
     current_status_data = formatNumber(data.current_power_wattage) + 'W / ';
     on = data.state > data.dimmer_off_percentage;
   }
@@ -2161,7 +2163,7 @@ function update_power_switch(data) {
   });
 
   // Open or hide the dimmer values (will not trigger on the select field)
-  if ('pwm-dimmer' === data.hardwaretype || 'remote-dimmer' === data.hardwaretype || 'dc-dimmer' === data.hardwaretype || 'brightpi' === data.hardwaretype || 'pca9685' === data.hardwaretype) {
+  if (dimmer) {
     content_row.find('.row.dimmer').show();
   } else {
     // Remove dimmer row, else form submit is 'stuck' on hidden fields that have invalid patterns... :(
@@ -2385,17 +2387,56 @@ function add_door() {
 /* End Doors code */
 
 /* Webcam code */
-function createWebcamLayer(webcamid, maxzoom) {
-  return L.tileLayer('/webcam/{id}/{id}_tile_{z}_{x}_{y}.jpg?_{time}', {
-    time: function() {
-      return (new Date()).valueOf();
-    },
-    id: webcamid,
-    noWrap: true,
-    continuousWorld: false,
-    maxNativeZoom: maxzoom,
-    maxZoom: maxzoom + 1
-  });
+var realtime_sensor_data = {};
+function updateWebcamLabel(marker) {
+  if (marker.options.sensors.length > 0) {
+    var message = [];
+    $.each(marker.options.sensors,function(counter,value){
+      if (message.length == 0) {
+        message.push('<strong>' + realtime_sensor_data[value].name + '</strong>');
+      }
+      message.push(realtime_sensor_data[value].type.substr(0,4) + '. ' + (Math.round((realtime_sensor_data[value].current + Number.EPSILON) * 1000) / 1000) + '' + realtime_sensor_data[value].indicator);
+    });
+    marker.setTooltipContent(message.join('<br />'));
+    $(marker._icon).addClass('reset');
+    setTimeout(function(){
+      $(marker._icon).removeClass('reset');
+    },10);
+  }
+}
+
+function createWebcamLabel(layer,x,y,sensors,edit) {
+  edit = edit === true
+  var marker_config = {
+    draggable: edit,
+    sensors: sensors.slice(0),
+    layer: layer
+  }
+
+  if (!edit) {
+    marker_config.icon = L.icon.pulse({iconSize:[10,10],color:'red'});
+  }
+
+  var marker = L.marker([x, y],marker_config).bindTooltip('<center><strong>{{_('Loading')}}...</strong></center>', {
+      permanent: true,
+      direction: y > 0 ? 'right' : 'left',
+      opacity: 0.5,
+  }).addTo(layer);
+
+  if (edit) {
+    marker.on('dragend',function(event){
+      updateWebcamMarkers(layer);
+    });
+
+    marker.on('dblclick' ,function(event) {
+      editWebcamMarker(this);
+    });
+  }
+
+  if (marker_config.sensors.length > 0) {
+    updateWebcamLabel(marker);
+  }
+  return marker;
 }
 
 function webcamArchive(webcamid) {
@@ -2448,10 +2489,10 @@ function webcamArchive(webcamid) {
         }
       });
       // recursive
-      if ($.fancybox.getInstance()) {
+      if ($.fancybox.getInstance() || data.webcams[0].archive_images.length == 0) {
         setTimeout(function(){
           getImages(new Date(date.getTime() - (24 * 60 * 60 * 1000)));
-          }, 5000);
+          }, ((data.webcams[0].archive_images.length + 1) * 10));
       } else {
         fancybox == null;
       }
@@ -2460,52 +2501,141 @@ function webcamArchive(webcamid) {
   getImages(now);
 }
 
+function updateWebcamMarkers(layer) {
+  var all_markers = '';
+  layer.eachLayer(function(datamarker) {
+    var pos = datamarker.getLatLng();
+    all_markers += pos.lat + ',' + pos.lng + ',' + datamarker.options.sensors.join(',') + ';';
+  });
+  $('div.row.webcam#webcam_' + layer.options.webcamid).find('input[type="hidden"][name$="_realtimedata"]').val(all_markers.slice(0,-1));
+}
+
+function addWebcamMarker(layer) {
+  editWebcamMarker(createWebcamLabel(layer,0,0,[],true));
+}
+
+function editWebcamMarker(marker) {
+  var pull_down = $('select[name="webcam_realtime_sensors_list"]');
+  pull_down[0].marker = marker;
+  pull_down.val(marker.options.sensors).trigger('change');
+
+  $('#add_sensors').off('click').on('click',function(event){
+    marker.options.sensors = pull_down.val();
+    updateWebcamMarkers(marker.options.layer);
+    updateWebcamLabel(marker);
+  });
+
+  $('#del_marker').off('click').on('click',function(event){
+    marker.options.layer.removeLayer(marker);
+    updateWebcamMarkers(marker.options.layer);
+    marker.remove();
+  });
+  $('.realtime-data-form').modal('show');
+}
+
 function initWebcam(data) {
-  if ($('div#webcam_' + data.id).length === 1) {
-    return false;
+  if (data.edit !== true) {
+    // Init the HTML
+    var webcam_row = $(source_row).attr('id','webcam_' + data.id);
+    // Set the name and status
+    webcam_row.find('h2 span.title').text(data.name);
+    // Append the page
+    $('div.row.webcam').append(webcam_row);
+    // Resize the height to get the maps working
+    webcam_row.find('div.webcam_player').height(webcam_row.width()-webcam_row.find('.x_title').height());
   }
-  // Init the HTML
-  var webcam_row = $(source_row);
-  // Set the name and status
-  webcam_row.find('h2 span.title').text(data.name);
-  // Append the page
-  $('div.row.webcam').append(webcam_row);
-  // Resize the height to get the maps working
-  webcam_row.find('div.webcam_player').attr('id','webcam_' + data.id).height(webcam_row.width()-webcam_row.find('.x_title').height());
+
+  var webcam = L.map($('#webcam_' + data.id + ' div.webcam_player' + (data.edit === true ? '_preview' : ''))[0],{
+    id: 'map_' + data.id,
+    fullscreenControl: true,
+    refresh_timer : null
+  }).on('load',function(event){
+    this.options.refresh_timer = setInterval(function(){
+      if (!webcam._container.clientHeight > 0) {
+         clearTimeout(webcam.options.refresh_timer);
+         setTimeout(function(){
+           webcam.remove();
+         },10);
+      }
+    },10 * 1000);
+  }).setView([0, 0], 1);
 
   if (data.is_live) {
-    // Load HLS player
-    var player = new Clappr.Player({source: 'webcam/' + data.id + '/stream.m3u8',
-                                    parentId: '#webcam_' + data.id,
-                                    width: '100%',
-                                    height: '100%',
-                                    playInline: true,
-                                    disableVideoTagContextMenu: true,
-                                    recycleVideo: false,
-                                    autoPlay: true,
-                                    chromeless: false});
-
-    webcam_row.find('ul.nav.navbar-right.panel_toolbox li.dropdown ul.dropdown-menu' ).append('<li><a href="/webcam/' + data.id + '/' + data.id + '_raw.jpg" target="_blank">{{_('Save RAW photo')}}</a></li>')
-    webcam_row.find('ul.nav.navbar-right.panel_toolbox li.dropdown ul.dropdown-menu' ).append('<li><a href="javascript:;" onclick="webcamArchive(\'' + data.id + '\');">{{_('Archive')}}</a></li>')
+    L.videoOverlay('webcam/' + data.id + '/stream.m3u8', L.latLngBounds([[ 150, -180], [ -150, 180]]), {
+      id: 'overlay_' + data.id,
+      interactive: false,
+      autoplay: true,
+      className: 'webcam_live_' + data.id,
+    }).addTo(webcam);
   } else {
-    // Load Leaflet webcam code
-    var webcam = new L.Map('webcam_' + data.id, {
-      layers: [createWebcamLayer(data.id, data.max_zoom)],
-      fullscreenControl: true,
-    }).setView([0, 0], 1);
-
-    L.Control.ExtraWebcamControls = L.Control.extend({
-      options: {
-        position: 'topleft',
-        archive: data.archive
+    L.tileLayer('/webcam/{id}/{id}_tile_{z}_{x}_{y}.jpg?_{time}', {
+      time: function() {
+        return (new Date()).valueOf();
       },
-      initialize: function (options) {
-        // constructor
-        L.Util.setOptions(this, options);
-      },
-      onAdd: function (map) {
-        var container = L.DomUtil.create('div', 'leaflet-control-takephoto leaflet-bar leaflet-control');
+      id: data.id,
+      noWrap: true,
+      continuousWorld: false,
+      maxNativeZoom: data.max_zoom,
+      maxZoom: data.max_zoom + 1,
+      refresh_timer : null
+    }).on('remove',function(event){
+      clearTimeout(this.options.refresh_timer);
+    }).on('add',function(event){
+      var webcam_tiler = this;
+      this.options.refresh_timer = setInterval(function(){
+        webcam_tiler.redraw();
+      },30 * 1000)
+    }).addTo(webcam);
+  }
 
+  var realtime_data_layer = L.layerGroup([], {webcamid : data.id, refresh_timer: null});
+  realtime_data_layer.on('remove',function(event){
+    clearTimeout(this.options.refresh_timer);
+  });
+
+  realtime_data_layer.on('add',function(event) {
+    this.options.refresh_timer = setInterval(function(){
+      if (realtime_data_layer.getLayers().length > 0) {
+        $.get('/api/sensors',function(data) {
+          realtime_sensor_data = {};
+          $.each(data.sensors,function(counter,value){
+            realtime_sensor_data[value.id + ''] = value;
+          });
+          realtime_data_layer.eachLayer(function(marker) {
+            updateWebcamLabel(marker);
+          });
+        });
+      }
+    },30 * 1000);
+  });
+  realtime_data_layer.addTo(webcam);
+
+  if ('' !== data.realtimedata) {
+    realtime_sensor_data = {};
+    $.get('/api/sensors',function(sensor_data) {
+      $.each(sensor_data.sensors,function(counter,value){
+        realtime_sensor_data[value.id + ''] = value;
+      });
+      $.each(data.realtimedata.split(';'),function(counter,value) {
+        var tmpdata = value.split(',');
+        createWebcamLabel(realtime_data_layer,tmpdata.shift(),tmpdata.shift(),tmpdata, data.edit === true);
+      });
+    });
+  }
+
+  L.Control.ExtraWebcamControls = L.Control.extend({
+    options: {
+      position: 'topleft',
+      archive: data.archive
+    },
+    initialize: function (options) {
+      // constructor
+      L.Util.setOptions(this, options);
+    },
+    onAdd: function (map) {
+      var container = L.DomUtil.create('div', 'leaflet-control-takephoto leaflet-bar leaflet-control');
+
+      if (data.edit !== true) {
         this.photo_link = L.DomUtil.create('a', 'leaflet-control-takephoto-button leaflet-bar-part', container);
         this.photo_link.title = '{{_('Save RAW photo')}}';
         this.photo_link.target = '_blank';
@@ -2519,30 +2649,86 @@ function initWebcam(data) {
           L.DomEvent.on(this.archive_link, 'click', this._start_archive, this);
           L.DomUtil.create('i', 'fa fa-archive', this.archive_link);
         }
-
-        return container;
-      },
-      _start_archive: function (e) {
-          L.DomEvent.stopPropagation(e);
-          L.DomEvent.preventDefault(e);
-          webcamArchive(data.id);
       }
-    });
-    webcam.addControl(new L.Control.ExtraWebcamControls());
-    webcam.addControl(L.Control.loading({separate: true}));
 
-    globals.webcams[webcam._container.id] = null;
-    updateWebcamView(webcam);
-  }
-}
+      if ('' !== data.realtimedata || data.edit === true) {
+        this.info_link = L.DomUtil.create('a', 'leaflet-control-info-button leaflet-bar-part', container);
+        this.info_link.href = '#';
+        this.info_link.title = '{{_('Toggle information')}}';
+        L.DomEvent.on(this.info_link, 'click', this._toggle_realtime_info, map);
+        L.DomUtil.create('i', 'fa fa-info', this.info_link);
+      }
 
-function updateWebcamView(webcam) {
-  if ($('div#' + webcam._container.id).length === 1) {
-    webcam.eachLayer(function(layer) {
-      layer.redraw();
-    });
-    clearTimeout(globals.webcams[webcam._container.id]);
-    globals.webcams[webcam._container.id] = setTimeout(function() { updateWebcamView(webcam);},30 * 1000);
+      if (data.edit === true) {
+        this.add_marker_link = L.DomUtil.create('a', 'leaflet-control-addmarker-button leaflet-bar-part', container);
+        this.add_marker_link.href = '#';
+        this.add_marker_link.title = '{{_('Add marker')}}';
+        L.DomEvent.on(this.add_marker_link, 'click', this._add_marker, realtime_data_layer);
+        L.DomUtil.create('i', 'fa fa-map-marker', this.add_marker_link);
+      }
+
+      if (data.is_live === true) {
+        this.toggle_audio = L.DomUtil.create('a', 'leaflet-control-audio-button leaflet-bar-part', container);
+        this.toggle_audio.href = '#';
+        this.toggle_audio.title = '{{_('Toggle audio')}}';
+        L.DomEvent.on(this.toggle_audio, 'click', this._toggle_audio);
+        L.DomUtil.create('i', 'glyphicon glyphicon-volume-up', this.toggle_audio);
+      }
+
+      return container;
+    },
+    _start_archive: function (e) {
+      L.DomEvent.stopPropagation(e);
+      L.DomEvent.preventDefault(e);
+      webcamArchive(data.id);
+    },
+    _toggle_realtime_info: function (e) {
+      L.DomEvent.stopPropagation(e);
+      L.DomEvent.preventDefault(e);
+      if (this.hasLayer(realtime_data_layer)) {
+        this.removeLayer(realtime_data_layer);
+      } else {
+        this.addLayer(realtime_data_layer);
+      }
+    },
+    _add_marker: function(e) {
+      L.DomEvent.stopPropagation(e);
+      L.DomEvent.preventDefault(e);
+      editWebcamMarker(createWebcamLabel(this,0,0,[],true));
+    },
+    _toggle_audio: function(e) {
+      L.DomEvent.stopPropagation(e);
+      L.DomEvent.preventDefault(e);
+      var video = $('.webcam_live_' + data.id)[0];
+      video.muted = !video.muted;
+      $(this).find('.glyphicon').removeClass('glyphicon-volume-up glyphicon-volume-down').addClass(video.muted ? 'glyphicon-volume-up' : 'glyphicon-volume-off')
+    }
+  });
+  webcam.addControl(new L.Control.ExtraWebcamControls());
+  webcam.addControl(L.Control.loading({separate: true}));
+
+  if (data.is_live) {
+    var video = $('.webcam_live_' + data.id)[0];
+    video.muted = true;
+    if (Hls.isSupported()) {
+      var hls = new Hls();
+      hls.loadSource('webcam/' + data.id + '/stream.m3u8');
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, function() {
+        video.play();
+      });
+    }
+    // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
+    // When the browser has built-in HLS support (check using `canPlayType`), we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video element through the `src` property.
+    // This is using the built-in support of the plain video element, without using hls.js.
+    // Note: it would be more normal to wait on the 'canplay' event below however on Safari (where you are most likely to find built-in HLS support) the video.src URL must be on the user-driven
+    // white-list before a 'canplay' event will be emitted; the last video event that can be reliably listened-for when the URL is not on the white-list is 'loadedmetadata'.
+    else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = 'webcam/' + data.id + '/stream.m3u8';
+      video.addEventListener('loadedmetadata', function() {
+        video.play();
+      });
+    }
   }
 }
 
@@ -2580,7 +2766,6 @@ function update_webcam(data) {
   var content_row = $('div.row.webcam#' + 'webcam_' + data.id);
 
   content_row.find('h2 span.title').text(data.name);
-  content_row.find('.webcam_preview img').attr('src',data.image);
 
   // Set the values only when empty
   content_row.find('input:not(.knob), select').each(function(counter,form_field) {
@@ -2930,8 +3115,13 @@ function uploadProfileImage() {
 function load_calendar_history() {
   $.getJSON('/api/calendar', function(data) {
     $('ul.nav.navbar-nav.navbar-right ul#calendar_messages li.notification:not(.no_message)').remove();
-    $.each(data.reverse(), function(counter, calendardata) {
+    var messages_in_future = 0;
+    var now = new Date();
+    $.each(data, function(counter, calendardata) {
       var event_date = new Date(calendardata.start);
+      if (new Date(calendardata.end) > now) {
+        messages_in_future++;
+      }
       add_notification_message('calendar_messages',
                                calendardata.title,
                                calendardata.description,
@@ -2940,13 +3130,51 @@ function load_calendar_history() {
                                event_date.getTime() + (event_date.getTimezoneOffset() * 60000),
                                'calendar.html');
     });
-    if (data.length == 0) {
+    if (messages_in_future == 0) {
       $('ul.nav.navbar-nav.navbar-right li#calendar span.badge.bg-green').addClass('hidden');
     } else {
-      $('ul.nav.navbar-nav.navbar-right li#calendar span.badge.bg-green').removeClass('hidden').text(data.length);
+      $('ul.nav.navbar-nav.navbar-right li#calendar span.badge.bg-green').removeClass('hidden').text(messages_in_future);
     }
     $('ul.nav.navbar-nav.navbar-right ul#calendar_messages li.no_message').toggle(data.length==0);
   });
+}
+
+function calendar_item(options) {
+  if (options === undefined) {
+      options = {id : null,
+                 start : new Date(),
+                 end : new Date(),
+                 title: '',
+                 description: ''};
+  }
+
+  if (options.end === undefined || options.end === null || '' === options.end) {
+    options.end = options.start;
+  }
+
+  $('input[name="calendar_id"').val(options.id);
+  $('input[name="calendar_title"').val(options.title);
+  $('input[name="calendar_description"').val(options.description);
+  $('#editor-one').html(options.description);
+
+  $('#calendar_date').daterangepicker({
+    startDate: options.start,
+    endDate: options.end,
+    singleDatePicker: false,
+    autoUpdateInput: true,
+    autoApply: true,
+    parentEl: '#calendar_date_picker'
+  });
+
+  // Create a trigger to toggle the calendar. But we have to wait until the modal window is starting to show...
+  modalWindow = $('.add-form').on('show.bs.modal',function(event) {
+    setTimeout(function(){
+      $('#calendar_date').trigger('click');
+      init_wysiwyg();
+    },250);
+  });
+
+  modalWindow.modal('show');
 }
 
 /**
@@ -2955,16 +3183,16 @@ function load_calendar_history() {
  */
 $.fn.extend({
   sortSelect() {
-    let options = this.find("option"),
+    var options = this.find("option"),
       arr = options.map(function(_, o) { return { t: $(o).text(), v: o.value }; }).get();
 
-    arr.sort((o1, o2) => { // sort select
-      let t1 = o1.t.toLowerCase(),
+    arr.sort(function(o1, o2) { // sort select
+      var t1 = o1.t.toLowerCase(),
           t2 = o2.t.toLowerCase();
       return t1 > t2 ? 1 : t1 < t2 ? -1 : 0;
     });
 
-    options.each((i, o) => {
+    options.each(function(i, o) {
       o.value = arr[i].v;
       $(o).text(arr[i].t);
     });

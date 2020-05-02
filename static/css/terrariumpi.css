@@ -155,6 +155,51 @@ footer .pull-right .label {
   opacity: 0.2;
 }
 
+#calendar_date_picker .daterangepicker {
+  position: relative;
+  top: 0px !important;
+  left: 0px !important;
+}
+
+.daterangepicker .calendar {
+  margin-left: 0px !important;
+}
+
+div.daterangepicker.show-calendar {
+  display:block !important;
+}
+
+div.editor-wrapper img {
+  max-width: 100%;
+}
+
+li.notification span.message img,
+div.popover img {
+  width: 100%;
+}
+
+div.leaflet-pane.leaflet-shadow-pane {
+  display: none;
+}
+
+div.webcam_preview div.leaflet-pane.leaflet-shadow-pane,
+div.webcam_preview div.leaflet-pane.leaflet-marker-pane {
+  display: block !important;
+}
+
+.leaflet-pulsing-icon {
+  background-color : transparent !important;
+  box-shadow: none !important;
+}
+
+.leaflet-pulsing-icon:after {
+  animation-iteration-count: 2 !important;
+  opacity: 0;
+}
+
+.leaflet-pulsing-icon.reset:after {
+  animation: none !important;
+}
 /* End general overrule */
 
 div.row.new  .x_panel{

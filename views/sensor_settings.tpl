@@ -197,7 +197,7 @@
                           </div>
                           <div class="col-md-4 col-sm-4 col-xs-4 form-group">
                             <label for="sensor_[nr]_temperature_offset">{{_('Temperature offset')}}</label>
-                            <input class="form-control" name="sensor_[nr]_temp_offset" placeholder="{{_('Temperature offset')}}" required="required" type="text" pattern="[0-9\.]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_temperature_offset')}}">
+                            <input class="form-control" name="sensor_[nr]_temp_offset" placeholder="{{_('Temperature offset')}}" required="required" type="text" pattern="[0-9\.\-]+" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{translations.get_translation('sensor_field_temperature_offset')}}">
                           </div>
                         </div>
                       </div>

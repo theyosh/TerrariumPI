@@ -113,7 +113,8 @@
                                 <option value="pwm-dimmer">{{_('PWM Dimmer')}}</option>
                                 <option value="dc-dimmer">{{_('DC Dimmer')}}</option>
                                 <option value="brightpi">{{_('Bright Pi')}}</option>
-                                <option value="pca9685">{{_('PCA9685')}}</option>
+                                <option value="pca9685-dimmer">{{_('PCA9685 Dimmer')}}</option>
+                                <option value="irf520-dimmer">{{_('IRF520 Mosfet Dimmer')}}</option>
                                 <option value="remote">{{_('Remote')}}</option>
                                 <option value="remote-dimmer">{{_('Remote Dimmer')}}</option>
                                 <option value="eg-pm-usb">{{_('Energenie USB')}}</option>
@@ -225,7 +226,7 @@
               minimumResultsForSearch: Infinity
             }).on('change',function() {
               if ('switch_[nr]_hardwaretype' === this.name) {
-                var dimmer = 'pwm-dimmer' === this.value || 'remote-dimmer' === this.value || 'dc-dimmer' === this.value || 'brightpi' === this.value || 'pca9685' == this.value;
+                var dimmer = this.value.indexOf('-dimmer') !== -1 || 'brightpi' === this.value || 'pca9685' == this.value;
                 if (dimmer) {
                   $(this).parents('.x_content').find('.row.dimmer input').attr('required','required');
                 } else {

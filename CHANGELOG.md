@@ -2,11 +2,14 @@ Changelog
 =========
 
 
-(unreleased)
-------------
+3.9.8 (2020-04-05)
+------------------
 
 **New**
 ------
+- Add reconnect logic. It will now try up till 5 times to connect when
+  it could not load the hardware intial. [#365](https://github.com/theyosh/TerrariumPI/issues/365). [theyosh]
+- Add license scan report and status. [fossabot]
 - Add Raspberry PI auto white balancing setting for better NOIR camera
   support. Both for stills and live. [#360](https://github.com/theyosh/TerrariumPI/issues/360). [theyosh]
 - Add files via upload. [TheYOSH]
@@ -52,6 +55,14 @@ Changelog
 
 **Fixes**
 ------
+- Fix python3 unicode. [theyosh]
+- Fix error [#366](https://github.com/theyosh/TerrariumPI/issues/366). [theyosh]
+- Fix already closed i2c busses. [theyosh]
+- Fix package cleanup for RPI 4. [TheYOSH]
+- Fix not closing I2C bus. [#356](https://github.com/theyosh/TerrariumPI/issues/356). [theyosh]
+- Fix engine error running withouth any sensors. Fix bug 1 from [#363](https://github.com/theyosh/TerrariumPI/issues/363).
+  [theyosh]
+- Fix logging message. [theyosh]
 - Fix to many open files. Somehow the MLX90614 sensor does not close the
   I2C bus... So need to force it manually. [#356](https://github.com/theyosh/TerrariumPI/issues/356). [theyosh]
 - Fix startup when offline. [#353](https://github.com/theyosh/TerrariumPI/issues/353). [theyosh]
@@ -88,6 +99,20 @@ Changelog
 
 **Updates**
 ------
+- Update submodules. [theyosh]
+- Update version number. [TheYOSH]
+- Update version number. [TheYOSH]
+- Update calendar to support HTML description including images.
+  [theyosh]
+- Update translations indicator. [TheYOSH]
+- Update MOTD formatting (2) [theyosh]
+- Update MOTD formatting. [theyosh]
+- Updated MOTD so that it is more flexible. And now also shows the
+  custom title and species name. Needs a rerun of the installer due to a
+  new library pyfiglet. [theyosh]
+- Update translation files. [weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
 - Update install.sh. [swekley]
 - Update README.md. [TheYOSH]
 - Update MOTD and better update check. [theyosh]
@@ -128,6 +153,33 @@ Changelog
 
 **Other**
 ------
+- Speed up loading webcam archive. [theyosh]
+- Better logging for sensor type. [theyosh]
+- Load last archived image when archiving based on time is selected for
+  a webcam. This will respect the archive period during
+  restarts/reboots. [theyosh]
+- Reduce SD card writes by putting DB journaling to memory. [theyosh]
+- Translated using Weblate (German (Austria)) [theyosh]
+
+  Currently translated at 99.7% (811 of 813 strings)
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (813 of 813 strings)
+- First attempt simple calendar functionality. Adding events is not
+  possible. [theyosh]
+- Check if Sonoff return data is valid. [#365](https://github.com/theyosh/TerrariumPI/issues/365). [theyosh]
+- More cleanup of not needed packages..... [TheYOSH]
+- Also allow excluding of sensors like power switches. [theyosh]
+- Allow negative offset. [theyosh]
+- Merge branch 'master' of github.com:theyosh/TerrariumPI. [theyosh]
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 100.0% (813 of 813 strings)
+- Allow temperature conversions based on API url. [#359](https://github.com/theyosh/TerrariumPI/issues/359). [theyosh]
+- Replase FOSSA badge. [theyosh]
+- Merge pull request [#355](https://github.com/theyosh/TerrariumPI/issues/355) from fossabot/master. [TheYOSH]
+
+  Add license scan report and status
 - Merge pull request [#362](https://github.com/theyosh/TerrariumPI/issues/362) from swekley/patch-1. [TheYOSH]
 
   Update install.sh

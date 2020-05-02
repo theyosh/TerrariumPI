@@ -109,7 +109,8 @@ class terrariumI2CSensor(terrariumSensorSource):
   def close(self):
     try:
       self.i2c_bus.close()
-
+    except AttributeError as ex:
+      pass # Bus is already closed
     except Exception as ex:
       logger.warning('Error closing {} sensor \'{}\'. Error message: {}'.format(self.get_type(),self.get_name(),ex))
 
@@ -557,14 +558,16 @@ class terrariumChirpSensor(terrariumSensorSource):
       data['temperature'] = float(sensor.temp)
       data['moisture'] = float(sensor.moist_percent)
       data['light'] = 100.0 - ((float(sensor.light) / 65536.0) * 100.0)
+      # Dirty hack. The Chirp sensor does not close it connection. We will force it here
+      sensor.bus.close()
 
     except Exception as ex:
       print(ex)
 
     return data
 
-  def get_data(self):
-    data = super(terrariumChirpSensor,self).get_data()
+  def get_data(self, temperature_type = None):
+    data = super(terrariumChirpSensor,self).get_data(temperature_type)
     data['min_moist'] = self.get_min_moist_calibration()
     data['max_moist']  = self.get_max_moist_calibration()
     data['temp_offset']  = self.get_temperature_offset_calibration()

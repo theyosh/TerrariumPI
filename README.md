@@ -1,4 +1,4 @@
-# TerrariumPI 3.9.7
+# TerrariumPI 3.9.8
 <a href="https://weblate.theyosh.nl/engage/terrariumpi/?utm_source=widget"><img src="https://weblate.theyosh.nl/widgets/terrariumpi/-/webinterface/svg-badge.svg" alt="Translation status" /></a>
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI?ref=badge_shield)
 
@@ -108,12 +108,8 @@ It is currently controling my reptile terrarium for more then three years! And m
 
 ## Translations
 The software has support for the following languages:
-- English
-- Dutch
-- German
-- Italian
-- France
-- Norwegian
+
+[![Translation status](https://weblate.theyosh.nl/widgets/terrariumpi/-/webinterface/multi-auto.svg)](https://weblate.theyosh.nl/engage/terrariumpi/?utm_source=widget)
 
 Your language not in the list or not up to date? [Create your own language translation](https://github.com/theyosh/TerrariumPI/wiki/Translations) <a href="https://weblate.theyosh.nl/engage/terrariumpi/?utm_source=widget"><img src="https://weblate.theyosh.nl/widgets/terrariumpi/-/webinterface/svg-badge.svg" alt="Translation status" /></a>
 

@@ -4,8 +4,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: TerrariumPI 3.9.7\n"
-"POT-Creation-Date: 2020-03-06 21:48+CET\n"
+"Project-Id-Version: TerrariumPI 3.9.8\n"
+"POT-Creation-Date: 2020-04-13 21:21+CEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,36 +15,36 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: terrariumEngine.py:660 terrariumEngine.py:748 views/dashboard.tpl:7
+#: terrariumEngine.py:673 terrariumEngine.py:785 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
 msgid "Uptime"
 msgstr ""
 
-#: terrariumEngine.py:661
+#: terrariumEngine.py:674
 msgid "Load"
 msgstr ""
 
-#: terrariumEngine.py:662
+#: terrariumEngine.py:675
 msgid "CPU Temp."
 msgstr ""
 
-#: terrariumEngine.py:726
+#: terrariumEngine.py:763
 msgid "Version"
 msgstr ""
 
-#: terrariumEngine.py:752 views/system_status.tpl:174
+#: terrariumEngine.py:789 views/system_status.tpl:174
 msgid "Disk usage"
 msgstr ""
 
-#: terrariumEngine.py:757 views/system_status.tpl:118
+#: terrariumEngine.py:794 views/system_status.tpl:118
 msgid "Memory usage"
 msgstr ""
 
-#: terrariumEngine.py:762 views/system_status.tpl:6
+#: terrariumEngine.py:799 views/system_status.tpl:6
 msgid "CPU Load"
 msgstr ""
 
-#: terrariumEngine.py:768 views/system_status.tpl:62
+#: terrariumEngine.py:805 views/system_status.tpl:62
 msgid "CPU Temperature"
 msgstr ""
 
@@ -57,235 +57,255 @@ msgid "Choose the wind speed indicator. The software will recalculate to the cho
 msgstr ""
 
 #: terrariumTranslations.py:33
-msgid "Holds the sensor hardware type. Supported hardware types are: %s."
+msgid "Holds the title of the calendar event."
 msgstr ""
 
 #: terrariumTranslations.py:34
-msgid "Holds the sensor address. Depending on hardware type, it is either a read only hex number, a GPIO pin, a GPIO pin combination of %s or a full HTTP(S) address. Full url specification can be found on the %s wiki page. For GPIO use <strong>physical</strong> GPIO pin numbering."
-msgstr ""
-
-#: terrariumTranslations.py:34
-msgid "Remote data"
-msgstr ""
-
-#: terrariumTranslations.py:35
-msgid "Holds the sensor type. Supported sensor types are: %s."
-msgstr ""
-
-#: terrariumTranslations.py:36
-msgid "Holds the name of the sensor."
-msgstr ""
-
-#: terrariumTranslations.py:37
-msgid "Holds the sensor lower alarm value of the sensor. When below this value, alarms can be triggered."
+msgid "Holds the body of the calendar event. You can include images."
 msgstr ""
 
 #: terrariumTranslations.py:38
-msgid "Holds the sensor maximum alarm value of the sensor. When above this value, alarms can be triggered."
+msgid "Holds the sensor hardware type. Supported hardware types are: %s."
 msgstr ""
 
 #: terrariumTranslations.py:39
-msgid "Holds the sensor lowest value that should be used in the graphs."
+msgid "Holds the sensor address. Depending on hardware type, it is either a read only hex number, a GPIO pin, a GPIO pin combination of %s or a full HTTP(S) address. Full url specification can be found on the %s wiki page. For GPIO use <strong>physical</strong> GPIO pin numbering."
+msgstr ""
+
+#: terrariumTranslations.py:39
+msgid "Remote data"
 msgstr ""
 
 #: terrariumTranslations.py:40
-msgid "Holds the sensor maximum value that should be used in the graphs."
+msgid "Holds the sensor type. Supported sensor types are: %s."
 msgstr ""
 
 #: terrariumTranslations.py:41
-msgid "Shows the sensor current value in temperature or humidity (read only)."
+msgid "Holds the name of the sensor."
 msgstr ""
 
 #: terrariumTranslations.py:42
-msgid "Holds the sensor lowest moisture value measured in dry air. %s"
-msgstr ""
-
-#: terrariumTranslations.py:42 terrariumTranslations.py:43
-msgid "More calibration information"
+msgid "Holds the sensor lower alarm value of the sensor. When below this value, alarms can be triggered."
 msgstr ""
 
 #: terrariumTranslations.py:43
-msgid "Holds the sensor highest moisture value measured in full water. %s"
+msgid "Holds the sensor maximum alarm value of the sensor. When above this value, alarms can be triggered."
 msgstr ""
 
 #: terrariumTranslations.py:44
-msgid "Holds the temperature offset value."
+msgid "Holds the sensor lowest value that should be used in the graphs."
 msgstr ""
 
 #: terrariumTranslations.py:45
-msgid "Holds the maximum number that a sensor may change in value up or down."
+msgid "Holds the sensor maximum value that should be used in the graphs."
+msgstr ""
+
+#: terrariumTranslations.py:46
+msgid "Shows the sensor current value in temperature or humidity (read only)."
+msgstr ""
+
+#: terrariumTranslations.py:47
+msgid "Holds the sensor lowest moisture value measured in dry air. %s"
+msgstr ""
+
+#: terrariumTranslations.py:47 terrariumTranslations.py:48
+msgid "More calibration information"
+msgstr ""
+
+#: terrariumTranslations.py:48
+msgid "Holds the sensor highest moisture value measured in full water. %s"
 msgstr ""
 
 #: terrariumTranslations.py:49
-msgid "Holds the switch hardware type. Supported hardware types are: %s."
+msgid "Holds the temperature offset value."
 msgstr ""
 
 #: terrariumTranslations.py:50
-msgid "Holds the switch address. Depending on hardware type, it is either a number or GPIO pin. For GPIO and PWM-Dimmer use <strong>physical</strong> GPIO pin numbering."
-msgstr ""
-
-#: terrariumTranslations.py:51
-msgid "Holds the switch name."
-msgstr ""
-
-#: terrariumTranslations.py:52
-msgid "Holds the switch power usage in Watt when switched on."
-msgstr ""
-
-#: terrariumTranslations.py:53
-msgid "Holds the switch water flow in liters per minute when switched on"
+msgid "Holds the maximum number that a sensor may change in value up or down."
 msgstr ""
 
 #: terrariumTranslations.py:54
-msgid "Enable or disable timer functionality. When enabled you can specify the timing below."
+msgid "Holds the switch hardware type. Supported hardware types are: %s."
 msgstr ""
 
 #: terrariumTranslations.py:55
-msgid "Holds the timer start time. The timer will run after this start time."
+msgid "Holds the switch address. Depending on hardware type, it is either a number or GPIO pin. For GPIO and PWM-Dimmer use <strong>physical</strong> GPIO pin numbering."
 msgstr ""
 
 #: terrariumTranslations.py:56
-msgid "Holds the timer stop time. The timer will stop after this start time."
+msgid "Holds the switch name."
 msgstr ""
 
 #: terrariumTranslations.py:57
-msgid "Holds the period in minutes that the power switch is on withing the total timer window."
+msgid "Holds the switch power usage in Watt when switched on."
 msgstr ""
 
 #: terrariumTranslations.py:58
-msgid "Holds the period in minutes that the power switch is off withing the total timer window."
+msgid "Holds the switch water flow in liters per minute when switched on"
 msgstr ""
 
 #: terrariumTranslations.py:59
-msgid "Holds the amount of seconds for the duration in which the dimmer changes to the new value."
+msgid "Enable or disable timer functionality. When enabled you can specify the timing below."
 msgstr ""
 
 #: terrariumTranslations.py:60
-msgid "Holds the amount in percentage to change the dimmer by the heater environment."
+msgid "Holds the timer start time. The timer will run after this start time."
 msgstr ""
 
 #: terrariumTranslations.py:61
-msgid "Holds the amount of seconds for the duration in which it increases the power."
+msgid "Holds the timer stop time. The timer will stop after this start time."
 msgstr ""
 
 #: terrariumTranslations.py:62
-msgid "Holds the amount in percentage to go to when switched on."
+msgid "Holds the period in minutes that the power switch is on withing the total timer window."
 msgstr ""
 
 #: terrariumTranslations.py:63
-msgid "Holds the amount of seconds for the duration in which it decresses the power."
+msgid "Holds the period in minutes that the power switch is off withing the total timer window."
 msgstr ""
 
 #: terrariumTranslations.py:64
-msgid "Holds the amount in percentage to go to when switched off."
+msgid "Holds the amount of seconds for the duration in which the dimmer changes to the new value."
+msgstr ""
+
+#: terrariumTranslations.py:65
+msgid "Holds the amount in percentage to change the dimmer by the heater environment."
+msgstr ""
+
+#: terrariumTranslations.py:66
+msgid "Holds the amount of seconds for the duration in which it increases the power."
+msgstr ""
+
+#: terrariumTranslations.py:67
+msgid "Holds the amount in percentage to go to when switched on."
 msgstr ""
 
 #: terrariumTranslations.py:68
-msgid "Holds the door hardware type. Supported hardware types are: %s."
+msgid "Holds the amount of seconds for the duration in which it decresses the power."
 msgstr ""
 
 #: terrariumTranslations.py:69
-msgid "Holds the door address. When using GPIO use <strong>physical</strong> GPIO pin numbering as address."
+msgid "Holds the amount in percentage to go to when switched off."
 msgstr ""
 
 #: terrariumTranslations.py:70
-msgid "Holds the door name."
+msgid "Enter the name of the hardware device that has been replace. Will be used for title in the reminder."
 msgstr ""
 
-#: terrariumTranslations.py:74
-msgid "Holds the webcam location source. Supported sources are: %s"
+#: terrariumTranslations.py:71
+msgid "Enter the amount of days/weeks/months/years to reminder."
 msgstr ""
 
-#: terrariumTranslations.py:75
-msgid "Holds the webcam name."
+#: terrariumTranslations.py:72
+msgid "Enter the period type."
 msgstr ""
 
 #: terrariumTranslations.py:76
-msgid "Holds the webcam resolution."
+msgid "Holds the door hardware type. Supported hardware types are: %s."
 msgstr ""
 
 #: terrariumTranslations.py:77
-msgid "Holds the webcam resolution width in pixels."
+msgid "Holds the door address. When using GPIO use <strong>physical</strong> GPIO pin numbering as address."
 msgstr ""
 
 #: terrariumTranslations.py:78
-msgid "Holds the webcam resolution height in pixels."
-msgstr ""
-
-#: terrariumTranslations.py:79
-msgid "Holds the webcam rotation of the image."
-msgstr ""
-
-#: terrariumTranslations.py:80
-msgid "Select the white balance type. Only for Raspberry PI camera's."
-msgstr ""
-
-#: terrariumTranslations.py:81
-msgid "Shows the webcam preview image."
+msgid "Holds the door name."
 msgstr ""
 
 #: terrariumTranslations.py:82
-msgid "Enabled or disable image archiving based on motion detection."
+msgid "Holds the webcam location source. Supported sources are: %s"
 msgstr ""
 
 #: terrariumTranslations.py:83
-msgid "Select the environment light state when enabling archiving."
+msgid "Holds the webcam name."
 msgstr ""
 
 #: terrariumTranslations.py:84
-msgid "Select the environment door state when enabling archiving."
+msgid "Holds the webcam resolution."
 msgstr ""
 
 #: terrariumTranslations.py:85
-msgid "Enable or disable motion boxes for Motion archiving."
+msgid "Holds the webcam resolution width in pixels."
 msgstr ""
 
 #: terrariumTranslations.py:86
-msgid "Minimum difference between frames to be identified as motion. Higher value means that the image must be more different for motion to be detected."
+msgid "Holds the webcam resolution height in pixels."
 msgstr ""
 
 #: terrariumTranslations.py:87
-msgid "Minimum area of an image in pixels for a region to be considered motion. Larger values mean that only larger areas will be detected as motion."
+msgid "Holds the webcam rotation of the image."
 msgstr ""
 
 #: terrariumTranslations.py:88
-msgid "Last frame means that only consecutive frames will be compared for motion. Last archived frame means that the current frame will be compared to the last archived frame. Setting to last frame will ignore motion when it is very gradual."
+msgid "Select the white balance type. Only for Raspberry PI camera's."
+msgstr ""
+
+#: terrariumTranslations.py:89
+msgid "Shows the webcam preview image."
+msgstr ""
+
+#: terrariumTranslations.py:90
+msgid "Enabled or disable image archiving based on motion detection."
+msgstr ""
+
+#: terrariumTranslations.py:91
+msgid "Select the environment light state when enabling archiving."
 msgstr ""
 
 #: terrariumTranslations.py:92
-msgid "Holds the audio playlist name."
+msgid "Select the environment door state when enabling archiving."
 msgstr ""
 
 #: terrariumTranslations.py:93
-msgid "Holds the time when the playlist should be started."
+msgid "Enable or disable motion boxes for Motion archiving."
 msgstr ""
 
 #: terrariumTranslations.py:94
-msgid "Holds the time when the playlist should be stopped."
+msgid "Minimum difference between frames to be identified as motion. Higher value means that the image must be more different for motion to be detected."
 msgstr ""
 
 #: terrariumTranslations.py:95
-msgid "Holds the volume for this playlist."
+msgid "Minimum area of an image in pixels for a region to be considered motion. Larger values mean that only larger areas will be detected as motion."
 msgstr ""
 
 #: terrariumTranslations.py:96
-msgid "Toggle on to enable repeating of the audio files."
+msgid "Last frame means that only consecutive frames will be compared for motion. Last archived frame means that the current frame will be compared to the last archived frame. Setting to last frame will ignore motion when it is very gradual."
 msgstr ""
 
-#: terrariumTranslations.py:97
-msgid "Toggle on to enable shuffeling of the audio files."
+#: terrariumTranslations.py:100
+msgid "Holds the audio playlist name."
 msgstr ""
 
-#: terrariumTranslations.py:98
-msgid "Select the audio files for this playlist. It is possible to select the same audio file in multiple playlists."
+#: terrariumTranslations.py:101
+msgid "Holds the time when the playlist should be started."
 msgstr ""
 
 #: terrariumTranslations.py:102
+msgid "Holds the time when the playlist should be stopped."
+msgstr ""
+
+#: terrariumTranslations.py:103
+msgid "Holds the volume for this playlist."
+msgstr ""
+
+#: terrariumTranslations.py:104
+msgid "Toggle on to enable repeating of the audio files."
+msgstr ""
+
+#: terrariumTranslations.py:105
+msgid "Toggle on to enable shuffeling of the audio files."
+msgstr ""
+
+#: terrariumTranslations.py:106
+msgid "Select the audio files for this playlist. It is possible to select the same audio file in multiple playlists."
+msgstr ""
+
+#: terrariumTranslations.py:110
 msgid "Select the mode on which this environment part be put on and off. Select '%s' to use the sun rise and sun set at your location. This will make the amount of lighting variable to the actual amount of daylight. When selecting '%s', the light will put on and off at selected times."
 msgstr ""
 
-#: terrariumTranslations.py:102 terrariumTranslations.py:106
-#: terrariumTranslations.py:107 views/dashboard.tpl:83 views/dashboard.tpl:118
+#: terrariumTranslations.py:110 terrariumTranslations.py:114
+#: terrariumTranslations.py:115 views/dashboard.tpl:83 views/dashboard.tpl:118
 #: views/dashboard.tpl:171 views/dashboard.tpl:224 views/dashboard.tpl:277
 #: views/dashboard.tpl:330 views/dashboard.tpl:383 views/dashboard.tpl:436
 #: views/dashboard.tpl:489 views/dashboard.tpl:542
@@ -299,7 +319,7 @@ msgstr ""
 msgid "Timer"
 msgstr ""
 
-#: terrariumTranslations.py:102 terrariumTranslations.py:114
+#: terrariumTranslations.py:110 terrariumTranslations.py:122
 #: views/inc/menu.tpl:33 views/inc/usage_environment.tpl:35
 #: views/inc/usage_environment.tpl:231 views/inc/usage_environment.tpl:325
 #: views/inc/usage_weather.tpl:13 views/inc/usage_weather.tpl:82
@@ -311,362 +331,370 @@ msgstr ""
 msgid "Weather"
 msgstr ""
 
-#: terrariumTranslations.py:103
+#: terrariumTranslations.py:111
 msgid "Select the sensors that are used to control this environment part. When selecting multiple sensors, the average is calculated to determine the final values."
 msgstr ""
 
-#: terrariumTranslations.py:104
+#: terrariumTranslations.py:112
 msgid "Holds the value in degrees which the sensors are changing when it become night. Use positive numbers to increase the values and negative numbers to lower the values."
 msgstr ""
 
-#: terrariumTranslations.py:105
+#: terrariumTranslations.py:113
 msgid "Holds the source that is used to determing when it is day or night."
 msgstr ""
 
-#: terrariumTranslations.py:106
+#: terrariumTranslations.py:114
 msgid "Enter the time when this environment part should be put on. Only available when running in '%s' mode."
 msgstr ""
 
-#: terrariumTranslations.py:107
+#: terrariumTranslations.py:115
 msgid "Enter the time when this environment part should be put off. Only available when running in '%s' mode."
 msgstr ""
 
-#: terrariumTranslations.py:108
+#: terrariumTranslations.py:116
 msgid "Holds the period in minutes that this environment part is powered on withing the total timer window."
 msgstr ""
 
-#: terrariumTranslations.py:109
+#: terrariumTranslations.py:117
 msgid "Holds the period in minutes that this environment part is powered off withing the total timer window."
 msgstr ""
 
-#: terrariumTranslations.py:110
+#: terrariumTranslations.py:118
 msgid "How much time must there be between two actions and after start up. Enter the amount of seconds in which this environment part can settle."
 msgstr ""
 
-#: terrariumTranslations.py:111
+#: terrariumTranslations.py:119
 msgid "Holds the amount of seconds that this environment part is powered on when the value is out of range."
 msgstr ""
 
-#: terrariumTranslations.py:112
+#: terrariumTranslations.py:120
 msgid "Enter the maximum amount of time in hours. When the time between on and off is more then this maximum, the on and off time will be shifted more to each other."
 msgstr ""
 
-#: terrariumTranslations.py:113
+#: terrariumTranslations.py:121
 msgid "Enter the minimum amount of time in hours. When the time between on and off is less then this amount of hours, the on and off time will be widened until the minimum amount of hours entered here."
 msgstr ""
 
-#: terrariumTranslations.py:114
+#: terrariumTranslations.py:122
 msgid "Enter the amount of hours that the power on and off times should shift. Is only needed when running in the '%s' mode. Enter a positive number for adding hours to the start time. Use negative numbers for subtracting from the start time."
 msgstr ""
 
-#: terrariumTranslations.py:115
+#: terrariumTranslations.py:123
 msgid "Select the power switches that should be used when the alarms or timers are hit. Select all needed switches below."
 msgstr ""
 
-#: terrariumTranslations.py:116
+#: terrariumTranslations.py:124
 msgid "Holds the water volume in liters."
 msgstr ""
 
-#: terrariumTranslations.py:117
+#: terrariumTranslations.py:125
 msgid "Holds the water tank height in cm or inches."
 msgstr ""
 
-#: terrariumTranslations.py:118
+#: terrariumTranslations.py:126
 msgid "Holds the distance between top of the liquid when full and the sensor in cm or inches."
 msgstr ""
 
-#: terrariumTranslations.py:119
+#: terrariumTranslations.py:127
 msgid "Select when the power switches can toggle. When lights are on, off or just always"
 msgstr ""
 
-#: terrariumTranslations.py:120
+#: terrariumTranslations.py:128
 msgid "Select when the power switches can toggle. When the door is open, cosed or just always"
 msgstr ""
 
-#: terrariumTranslations.py:124
+#: terrariumTranslations.py:132
 msgid "Holds the email address on which you would like to receive messages."
 msgstr ""
 
-#: terrariumTranslations.py:125
+#: terrariumTranslations.py:133
 msgid "Holds the mail server hostname or IP."
 msgstr ""
 
-#: terrariumTranslations.py:126
+#: terrariumTranslations.py:134
 msgid "Holds the mail server portnumber. SSL and TLS will be autodetected."
 msgstr ""
 
-#: terrariumTranslations.py:127
+#: terrariumTranslations.py:135
 msgid "Holds the username for authentication with the mailserver if needed."
 msgstr ""
 
-#: terrariumTranslations.py:128
+#: terrariumTranslations.py:136
 msgid "Holds the password for authentication with the mailserver if needed."
 msgstr ""
 
-#: terrariumTranslations.py:130
+#: terrariumTranslations.py:138
 msgid "Holds the display chip that is used."
 msgstr ""
 
-#: terrariumTranslations.py:131
+#: terrariumTranslations.py:139
 msgid "Holds the I2C address of the LCD screen. Use the value found with i2cdetect. Add ,[NR] to change the I2C bus."
 msgstr ""
 
-#: terrariumTranslations.py:132
+#: terrariumTranslations.py:140
 msgid "Reserve first LCD line for static title."
 msgstr ""
 
-#: terrariumTranslations.py:134
+#: terrariumTranslations.py:142
 msgid "Holds your Twitter consumer key. More information %shere%s"
 msgstr ""
 
-#: terrariumTranslations.py:135
+#: terrariumTranslations.py:143
 msgid "Holds your Twitter consumer secret. More information %shere%s"
 msgstr ""
 
-#: terrariumTranslations.py:136
+#: terrariumTranslations.py:144
 msgid "Holds your Twitter access token. More information %shere%s"
 msgstr ""
 
-#: terrariumTranslations.py:137
+#: terrariumTranslations.py:145
 msgid "Holds your Twitter access token secret. More information %shere%s"
 msgstr ""
 
-#: terrariumTranslations.py:139
+#: terrariumTranslations.py:147
 msgid "Holds the PushOver API token. More information %shere%s"
 msgstr ""
 
-#: terrariumTranslations.py:140
+#: terrariumTranslations.py:148
 msgid "Holds the PushOver API user key. More information %shere%s"
 msgstr ""
 
-#: terrariumTranslations.py:142
+#: terrariumTranslations.py:150
 msgid "Holds the Telegram Bot token. More information %shere%s"
 msgstr ""
 
-#: terrariumTranslations.py:143
+#: terrariumTranslations.py:151
 msgid "Holds the Telegram username that is allowed for receiving messages. Can be multiple usernames seperated by a comma. More information %shere%s"
 msgstr ""
 
-#: terrariumTranslations.py:144
+#: terrariumTranslations.py:152
 msgid "Holds the proxy address in form of [schema]://[user]:[password]@[server.com]:[port]. Can either be socks5 or http(s) for schema."
 msgstr ""
 
-#: terrariumTranslations.py:146
+#: terrariumTranslations.py:154
 msgid "Holds the url to post notification data to. You can use %name% variables in the post url"
 msgstr ""
 
-#: terrariumTranslations.py:151
+#: terrariumTranslations.py:159
 msgid "Choose your interface language."
 msgstr ""
 
-#: terrariumTranslations.py:152
+#: terrariumTranslations.py:160
 msgid "Holds the distance type used by distance sensors."
 msgstr ""
 
-#: terrariumTranslations.py:153 terrariumTranslations.py:154
+#: terrariumTranslations.py:161 terrariumTranslations.py:162
 msgid "Holds the username which can make changes (Administrator)."
 msgstr ""
 
-#: terrariumTranslations.py:155
+#: terrariumTranslations.py:163
 msgid "Enter the new password for the administration user. Leaving empty will not change the password!"
 msgstr ""
 
-#: terrariumTranslations.py:156
+#: terrariumTranslations.py:164
 msgid "Enter the current password in order to change the password."
 msgstr ""
 
-#: terrariumTranslations.py:157
+#: terrariumTranslations.py:165
 msgid "Toggle on or off full authentication. When on, you need to authenticate at all times."
 msgstr ""
 
-#: terrariumTranslations.py:158
+#: terrariumTranslations.py:166
 msgid "Holds the external calendar url."
 msgstr ""
 
-#: terrariumTranslations.py:159
+#: terrariumTranslations.py:167
 msgid "Toggle on or off horizontal graph legends. Reload the web interface after changing the setting."
 msgstr ""
 
-#: terrariumTranslations.py:160
+#: terrariumTranslations.py:168
 msgid "Toggle on or off the environment summary on the dashboard. Reload the web interface after changing the setting."
 msgstr ""
 
-#: terrariumTranslations.py:161
+#: terrariumTranslations.py:169
 msgid "Holds the soundcard that is used for playing audio."
 msgstr ""
 
-#: terrariumTranslations.py:162
+#: terrariumTranslations.py:170
 msgid "Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment."
 msgstr ""
 
-#: terrariumTranslations.py:163
+#: terrariumTranslations.py:171
 msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
 msgstr ""
 
-#: terrariumTranslations.py:164
+#: terrariumTranslations.py:172
 msgid "Holds the amount of euro/dollar per 1000 liters water."
 msgstr ""
 
-#: terrariumTranslations.py:165
+#: terrariumTranslations.py:173
 msgid "Choose the temperature indicator. The software will recalculate to the chosen indicator."
 msgstr ""
 
-#: terrariumTranslations.py:166
+#: terrariumTranslations.py:174
 msgid "Choose the windspeed indicator. The software will recalculate to the chosen indicator."
 msgstr ""
 
-#: terrariumTranslations.py:167
+#: terrariumTranslations.py:175
 msgid "Choose the volume (liquid) indicator. The software will recalculate to the chosen indicator."
 msgstr ""
 
-#: terrariumTranslations.py:168
+#: terrariumTranslations.py:176
 msgid "Holds the host name or IP address on which the software will listen for connections. Enter :: for all addresses to bind."
 msgstr ""
 
-#: terrariumTranslations.py:169
+#: terrariumTranslations.py:177
 msgid "Holds the port number on which the software is listening for connections."
 msgstr ""
 
-#: terrariumTranslations.py:170
+#: terrariumTranslations.py:178
 msgid "Enter the e-mail address that is used for your Meross devices."
 msgstr ""
 
-#: terrariumTranslations.py:171
+#: terrariumTranslations.py:179
 msgid "Enter the password that is used for your Meross devices. Password is stored in plain text!"
 msgstr ""
 
-#: terrariumTranslations.py:172
+#: terrariumTranslations.py:180
 msgid "Holds the amount of data points (each 30 sec) to use for smoothing. The higher the value, the smoother the graph. Enter 0 to disable. Reload the web interface after changing the setting."
 msgstr ""
 
-#: terrariumTranslations.py:173
+#: terrariumTranslations.py:181
 msgid "Select true or false to show an extra sensor page which holds all the sensors with there gauges. Reload the web interface after changing the setting."
 msgstr ""
 
-#: terrariumTranslations.py:174
+#: terrariumTranslations.py:182
 msgid "Toggle on or off the min and max measured value in the gauge graphs."
 msgstr ""
 
-#: terrariumTranslations.py:178
+#: terrariumTranslations.py:186
 msgid "Holds the name of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:179
+#: terrariumTranslations.py:187
 msgid "Holds the type of the animal"
 msgstr ""
 
-#: terrariumTranslations.py:180
+#: terrariumTranslations.py:188
 msgid "Holds the gender of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:181
+#: terrariumTranslations.py:189
 msgid "Holds the day of birth of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:182
+#: terrariumTranslations.py:190
 msgid "Holds the species name of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:183
+#: terrariumTranslations.py:191
 msgid "Holds the latin name of the animal."
 msgstr ""
 
-#: terrariumTranslations.py:184
+#: terrariumTranslations.py:192
 msgid "Holds a small description about the animal."
 msgstr ""
 
-#: terrariumTranslations.py:185
+#: terrariumTranslations.py:193
 msgid "Holds a link to more information."
 msgstr ""
 
-#: terrariumWebcam.py:193
+#: terrariumWebcam.py:196
 msgid "Offline since"
 msgstr ""
 
-#: terrariumWebserver.py:93 terrariumWebserver.py:196
+#: terrariumWebserver.py:93 terrariumWebserver.py:202
 msgid "Authenticate to make any changes"
 msgstr ""
 
-#: terrariumWebserver.py:93 terrariumWebserver.py:196
+#: terrariumWebserver.py:93 terrariumWebserver.py:202
 #: views/system_settings.tpl:57
 msgid "TerrariumPI"
 msgstr ""
 
-#: terrariumWebserver.py:93 terrariumWebserver.py:196
+#: terrariumWebserver.py:93 terrariumWebserver.py:202
 #: views/system_settings.tpl:146
 msgid "Authentication"
 msgstr ""
 
-#: terrariumWebserver.py:260
+#: terrariumWebserver.py:266
 msgid "Player command could ot be executed!"
 msgstr ""
 
-#: terrariumWebserver.py:260 terrariumWebserver.py:280
-#: terrariumWebserver.py:292 terrariumWebserver.py:300
+#: terrariumWebserver.py:266 terrariumWebserver.py:286
+#: terrariumWebserver.py:298 terrariumWebserver.py:306
 msgid "Error!"
 msgstr ""
 
-#: terrariumWebserver.py:268 terrariumWebserver.py:271
+#: terrariumWebserver.py:274 terrariumWebserver.py:277
 msgid "OK!"
 msgstr ""
 
-#: terrariumWebserver.py:268 terrariumWebserver.py:271
+#: terrariumWebserver.py:274 terrariumWebserver.py:277
 msgid "Player command executed!"
 msgstr ""
 
-#: terrariumWebserver.py:280
+#: terrariumWebserver.py:286
 msgid "File is not uploaded!"
 msgstr ""
 
-#: terrariumWebserver.py:285
+#: terrariumWebserver.py:291
 msgid "File '%s' is uploaded"
 msgstr ""
 
-#: terrariumWebserver.py:285 terrariumWebserver.py:295
+#: terrariumWebserver.py:291 terrariumWebserver.py:301
 msgid "Success!"
 msgstr ""
 
-#: terrariumWebserver.py:287
+#: terrariumWebserver.py:293
 msgid "Duplicate file '%s'"
 msgstr ""
 
-#: terrariumWebserver.py:292
+#: terrariumWebserver.py:298
 msgid "Action could not be satisfied"
 msgstr ""
 
-#: terrariumWebserver.py:295
+#: terrariumWebserver.py:301
 msgid "Audio file is deleted"
 msgstr ""
 
-#: terrariumWebserver.py:300
+#: terrariumWebserver.py:306
 msgid "Data could not be saved"
 msgstr ""
 
-#: terrariumWebserver.py:308
+#: terrariumWebserver.py:314
 msgid "Data saved"
 msgstr ""
 
-#: terrariumWebserver.py:309
+#: terrariumWebserver.py:315
 msgid "Your changes are saved"
 msgstr ""
 
-#: terrariumWebserver.py:328
+#: terrariumWebserver.py:334
 msgid "Hardware is replaced"
 msgstr ""
 
-#: terrariumWebserver.py:329
+#: terrariumWebserver.py:335
 msgid "Hardware replacement is logged in the calendar"
 msgstr ""
 
-#: terrariumWebserver.py:332
+#: terrariumWebserver.py:338
 msgid "A new replacement reminder is created"
 msgstr ""
 
-#: terrariumWebserver.py:470 views/inc/menu.tpl:177
+#: terrariumWebserver.py:354
+msgid "Calender event created"
+msgstr ""
+
+#: terrariumWebserver.py:355
+msgid "The calender event is created"
+msgstr ""
+
+#: terrariumWebserver.py:496 views/inc/menu.tpl:177
 msgid "Log out"
 msgstr ""
 
-#: terrariumWebserver.py:471
+#: terrariumWebserver.py:497
 msgid "You are now logged out"
 msgstr ""
 
@@ -737,7 +765,7 @@ msgstr ""
 #: views/inc/usage_webcams.tpl:134 views/profile.tpl:56
 #: views/sensor_settings.tpl:28 views/sensor_settings.tpl:160
 #: views/switch_settings.tpl:25 views/switch_settings.tpl:138
-#: views/webcam_settings.tpl:29 views/webcam_settings.tpl:91
+#: views/webcam_settings.tpl:29 views/webcam_settings.tpl:92
 msgid "Name"
 msgstr ""
 
@@ -866,24 +894,25 @@ msgstr ""
 #: views/audio_playlist.tpl:112 views/sensor_settings.tpl:103
 #: views/sensor_settings.tpl:137 views/switch_settings.tpl:109
 #: views/switch_settings.tpl:153 views/switch_status.tpl:116
-#: views/webcam_settings.tpl:110 views/webcam_settings.tpl:124
-#: views/webcam_settings.tpl:143 views/webcam_settings.tpl:162
-#: views/webcam_settings.tpl:173 views/webcam_settings.tpl:185
-#: views/webcam_settings.tpl:207
+#: views/webcam_settings.tpl:111 views/webcam_settings.tpl:125
+#: views/webcam_settings.tpl:144 views/webcam_settings.tpl:163
+#: views/webcam_settings.tpl:174 views/webcam_settings.tpl:186
+#: views/webcam_settings.tpl:208
 msgid "Select an option"
 msgstr ""
 
-#: views/audio_playlist.tpl:123 views/door_settings.tpl:94
-#: views/inc/usage_doors.tpl:70 views/inc/usage_sensors.tpl:81
-#: views/inc/usage_switches.tpl:70 views/inc/usage_webcams.tpl:66
-#: views/sensor_settings.tpl:208 views/switch_settings.tpl:210
-#: views/switch_status.tpl:132 views/webcam_settings.tpl:220
+#: views/audio_playlist.tpl:123 views/calendar.tpl:140
+#: views/door_settings.tpl:94 views/inc/usage_doors.tpl:70
+#: views/inc/usage_sensors.tpl:81 views/inc/usage_switches.tpl:70
+#: views/inc/usage_webcams.tpl:66 views/sensor_settings.tpl:208
+#: views/switch_settings.tpl:210 views/switch_status.tpl:132
+#: views/webcam_settings.tpl:221 views/webcam_settings.tpl:265
 msgid "Close"
 msgstr ""
 
 #: views/audio_playlist.tpl:124 views/door_settings.tpl:95
 #: views/sensor_settings.tpl:209 views/switch_settings.tpl:211
-#: views/webcam_settings.tpl:221
+#: views/webcam_settings.tpl:222
 msgid "Add"
 msgstr ""
 
@@ -926,6 +955,27 @@ msgstr ""
 
 #: views/calendar.tpl:31
 msgid "No calendar available"
+msgstr ""
+
+#: views/calendar.tpl:46
+msgid "New calendar item"
+msgstr ""
+
+#: views/calendar.tpl:54 views/inc/usage_doors.tpl:13
+#: views/inc/usage_doors.tpl:139 views/inc/usage_sensors.tpl:17
+#: views/inc/usage_sensors.tpl:203 views/inc/usage_switches.tpl:13
+#: views/inc/usage_switches.tpl:160 views/inc/usage_webcams.tpl:13
+#: views/inc/usage_webcams.tpl:154 views/notifications.tpl:85
+#: views/notifications.tpl:223
+msgid "Title"
+msgstr ""
+
+#: views/calendar.tpl:129
+msgid "Date"
+msgstr ""
+
+#: views/calendar.tpl:141 views/webcam_settings.tpl:266
+msgid "Save"
 msgstr ""
 
 #: views/dashboard.tpl:24 views/inc/usage_dashboard.tpl:93
@@ -991,7 +1041,7 @@ msgstr ""
 #: views/system_environment.tpl:595 views/system_environment.tpl:806
 #: views/system_environment.tpl:1017 views/system_environment.tpl:1228
 #: views/system_environment.tpl:1392 views/system_environment.tpl:1603
-#: views/webcam_settings.tpl:144 views/webcam_settings.tpl:187
+#: views/webcam_settings.tpl:145 views/webcam_settings.tpl:188
 msgid "Disabled"
 msgstr ""
 
@@ -1298,7 +1348,7 @@ msgstr ""
 #: views/system_environment.tpl:605 views/system_environment.tpl:816
 #: views/system_environment.tpl:1027 views/system_environment.tpl:1238
 #: views/system_environment.tpl:1402 views/system_environment.tpl:1613
-#: views/usage.tpl:16
+#: views/usage.tpl:16 views/webcam_settings.tpl:241
 msgid "Sensors"
 msgstr ""
 
@@ -1807,14 +1857,6 @@ msgstr ""
 msgid "With the wrench you will get an options menu."
 msgstr ""
 
-#: views/inc/usage_doors.tpl:13 views/inc/usage_doors.tpl:139
-#: views/inc/usage_sensors.tpl:17 views/inc/usage_sensors.tpl:203
-#: views/inc/usage_switches.tpl:13 views/inc/usage_switches.tpl:160
-#: views/inc/usage_webcams.tpl:13 views/inc/usage_webcams.tpl:154
-#: views/notifications.tpl:85 views/notifications.tpl:223
-msgid "Title"
-msgstr ""
-
 #: views/inc/usage_doors.tpl:14
 msgid "Per door the title holds shows some values and options."
 msgstr ""
@@ -1913,7 +1955,7 @@ msgstr ""
 #: views/inc/usage_environment.tpl:129 views/inc/usage_environment.tpl:213
 #: views/inc/usage_environment.tpl:221 views/inc/usage_environment.tpl:307
 #: views/inc/usage_environment.tpl:315 views/notifications.tpl:88
-#: views/switch_settings.tpl:154 views/webcam_settings.tpl:186
+#: views/switch_settings.tpl:154 views/webcam_settings.tpl:187
 msgid "Enabled"
 msgstr ""
 
@@ -2275,22 +2317,22 @@ msgid "Preview"
 msgstr ""
 
 #: views/inc/usage_webcams.tpl:108 views/inc/usage_webcams.tpl:137
-#: views/webcam_settings.tpl:35 views/webcam_settings.tpl:107
+#: views/webcam_settings.tpl:35 views/webcam_settings.tpl:108
 msgid "Picture rotation"
 msgstr ""
 
 #: views/inc/usage_webcams.tpl:111 views/inc/usage_webcams.tpl:112
 #: views/inc/usage_webcams.tpl:113 views/inc/usage_webcams.tpl:114
-#: views/webcam_settings.tpl:111 views/webcam_settings.tpl:112
-#: views/webcam_settings.tpl:113 views/webcam_settings.tpl:114
+#: views/webcam_settings.tpl:112 views/webcam_settings.tpl:113
+#: views/webcam_settings.tpl:114 views/webcam_settings.tpl:115
 msgid "degrees"
 msgstr ""
 
-#: views/inc/usage_webcams.tpl:115 views/webcam_settings.tpl:115
+#: views/inc/usage_webcams.tpl:115 views/webcam_settings.tpl:116
 msgid "Flip Horizontal"
 msgstr ""
 
-#: views/inc/usage_webcams.tpl:116 views/webcam_settings.tpl:116
+#: views/inc/usage_webcams.tpl:116 views/webcam_settings.tpl:117
 msgid "Flip Vertical"
 msgstr ""
 
@@ -2897,7 +2939,7 @@ msgstr ""
 #: views/system_environment.tpl:1539 views/system_environment.tpl:1551
 #: views/system_environment.tpl:1674 views/system_environment.tpl:1686
 #: views/system_environment.tpl:1750 views/system_environment.tpl:1762
-#: views/webcam_settings.tpl:163 views/webcam_settings.tpl:174
+#: views/webcam_settings.tpl:164 views/webcam_settings.tpl:175
 msgid "Ignore"
 msgstr ""
 
@@ -3175,7 +3217,7 @@ msgstr ""
 msgid "Local source"
 msgstr ""
 
-#: views/webcam_settings.tpl:32 views/webcam_settings.tpl:95
+#: views/webcam_settings.tpl:32 views/webcam_settings.tpl:96
 msgid "Resolution"
 msgstr ""
 
@@ -3183,144 +3225,152 @@ msgstr ""
 msgid "Add new webcam"
 msgstr ""
 
-#: views/webcam_settings.tpl:121
+#: views/webcam_settings.tpl:122
 msgid "White balance"
 msgstr ""
 
-#: views/webcam_settings.tpl:125
+#: views/webcam_settings.tpl:126
 msgid "off"
 msgstr ""
 
-#: views/webcam_settings.tpl:126
+#: views/webcam_settings.tpl:127
 msgid "auto"
 msgstr ""
 
-#: views/webcam_settings.tpl:127
+#: views/webcam_settings.tpl:128
 msgid "sunlight"
 msgstr ""
 
-#: views/webcam_settings.tpl:128
+#: views/webcam_settings.tpl:129
 msgid "cloudy"
 msgstr ""
 
-#: views/webcam_settings.tpl:129
+#: views/webcam_settings.tpl:130
 msgid "shade"
 msgstr ""
 
-#: views/webcam_settings.tpl:130
+#: views/webcam_settings.tpl:131
 msgid "tungsten"
 msgstr ""
 
-#: views/webcam_settings.tpl:131
+#: views/webcam_settings.tpl:132
 msgid "fluorescent"
 msgstr ""
 
-#: views/webcam_settings.tpl:132
+#: views/webcam_settings.tpl:133
 msgid "incandescent"
 msgstr ""
 
-#: views/webcam_settings.tpl:133
+#: views/webcam_settings.tpl:134
 msgid "flash"
 msgstr ""
 
-#: views/webcam_settings.tpl:134
+#: views/webcam_settings.tpl:135
 msgid "horizon"
 msgstr ""
 
-#: views/webcam_settings.tpl:135
+#: views/webcam_settings.tpl:136
 msgid "greyworld"
 msgstr ""
 
-#: views/webcam_settings.tpl:140
+#: views/webcam_settings.tpl:141
 msgid "Archive"
 msgstr ""
 
-#: views/webcam_settings.tpl:145
+#: views/webcam_settings.tpl:146
 msgid "Motion"
 msgstr ""
 
-#: views/webcam_settings.tpl:146
+#: views/webcam_settings.tpl:147
 msgid "1 minute"
 msgstr ""
 
-#: views/webcam_settings.tpl:147
+#: views/webcam_settings.tpl:148
 msgid "5 minutes"
 msgstr ""
 
-#: views/webcam_settings.tpl:148
+#: views/webcam_settings.tpl:149
 msgid "15 minutes"
 msgstr ""
 
-#: views/webcam_settings.tpl:149
+#: views/webcam_settings.tpl:150
 msgid "30 minutes"
 msgstr ""
 
-#: views/webcam_settings.tpl:150
+#: views/webcam_settings.tpl:151
 msgid "1 hour"
 msgstr ""
 
-#: views/webcam_settings.tpl:151
+#: views/webcam_settings.tpl:152
 msgid "3 hours"
 msgstr ""
 
-#: views/webcam_settings.tpl:152
+#: views/webcam_settings.tpl:153
 msgid "6 hours"
 msgstr ""
 
-#: views/webcam_settings.tpl:153
+#: views/webcam_settings.tpl:154
 msgid "12 hours"
 msgstr ""
 
-#: views/webcam_settings.tpl:154
+#: views/webcam_settings.tpl:155
 msgid "1 day"
 msgstr ""
 
-#: views/webcam_settings.tpl:159
+#: views/webcam_settings.tpl:160
 msgid "Archive light state"
 msgstr ""
 
-#: views/webcam_settings.tpl:164
+#: views/webcam_settings.tpl:165
 msgid "When on"
 msgstr ""
 
-#: views/webcam_settings.tpl:165
+#: views/webcam_settings.tpl:166
 msgid "When off"
 msgstr ""
 
-#: views/webcam_settings.tpl:170
+#: views/webcam_settings.tpl:171
 msgid "Archive door state"
 msgstr ""
 
-#: views/webcam_settings.tpl:175
+#: views/webcam_settings.tpl:176
 msgid "When open"
 msgstr ""
 
-#: views/webcam_settings.tpl:176
+#: views/webcam_settings.tpl:177
 msgid "When closed"
 msgstr ""
 
-#: views/webcam_settings.tpl:182
+#: views/webcam_settings.tpl:183
 msgid "Show motion boxes"
 msgstr ""
 
-#: views/webcam_settings.tpl:192
+#: views/webcam_settings.tpl:193
 msgid "Motion delta threshold"
 msgstr ""
 
-#: views/webcam_settings.tpl:198
+#: views/webcam_settings.tpl:199
 msgid "Motion minimum area"
 msgstr ""
 
-#: views/webcam_settings.tpl:204
+#: views/webcam_settings.tpl:205
 msgid "Motion comparison frame"
 msgstr ""
 
-#: views/webcam_settings.tpl:208
+#: views/webcam_settings.tpl:209
 msgid "Last frame"
 msgstr ""
 
-#: views/webcam_settings.tpl:209
+#: views/webcam_settings.tpl:210
 msgid "Last archived frame"
+msgstr ""
+
+#: views/webcam_settings.tpl:234
+msgid "Select sensors"
+msgstr ""
+
+#: views/webcam_settings.tpl:267
+msgid "DELETE"
 msgstr ""
 
 #: Missing text string
@@ -3348,6 +3398,10 @@ msgid "4 Ports USB relay board"
 msgstr ""
 
 #: Missing text string
+msgid "Add marker"
+msgstr ""
+
+#: Missing text string
 msgid "Alarm"
 msgstr ""
 
@@ -3361,6 +3415,10 @@ msgstr ""
 
 #: Missing text string
 msgid "Avatar"
+msgstr ""
+
+#: Missing text string
+msgid "Calendar title"
 msgstr ""
 
 #: Missing text string
@@ -3504,6 +3562,10 @@ msgid "Load 5"
 msgstr ""
 
 #: Missing text string
+msgid "Loading"
+msgstr ""
+
+#: Missing text string
 msgid "Minimum area"
 msgstr ""
 
@@ -3541,6 +3603,10 @@ msgstr ""
 
 #: Missing text string
 msgid "Raspberry Pi camera"
+msgstr ""
+
+#: Missing text string
+msgid "realtimedata"
 msgstr ""
 
 #: Missing text string
@@ -3601,6 +3667,14 @@ msgstr ""
 
 #: Missing text string
 msgid "Timestamp"
+msgstr ""
+
+#: Missing text string
+msgid "Toggle audio"
+msgstr ""
+
+#: Missing text string
+msgid "Toggle information"
 msgstr ""
 
 #: Missing text string

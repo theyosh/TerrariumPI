@@ -269,31 +269,48 @@ class terrariumPowerSwitchFTDI(terrariumPowerSwitchSource):
     "all":"FF"
   }
 
+  def __get_address(self):
+    data = self.get_address().strip().split(',')
+    if len(data) == 1:
+      data.append(1)
+    elif '' == data[1]:
+      data[1] = 1
+
+    data[0] = int(data[0])
+    data[1] = int(data[1])
+
+    return data
+
   def load_hardware(self):
+    address = self.__get_address()
+
     self.__device_type = None
+    counter = 1
     for device in Driver().list_devices():
+      if counter != address[1]:
+        counter += 1
+        continue
+
       vendor, product, self.__device = [x for x in device]
       self.__device_type = 'Serial' if product.endswith('UART') else 'BitBang'
       logger.debug('Found switch board {}, {}, {}, of type {}'.format(vendor,product,self.__device,self.__device_type))
       break # For now, we only support 1 switch board!
 
-  def set_address(self,value):
-    if value in terrariumPowerSwitchFTDI.BITBANG_ADDRESSES:
-      self.address = value
-
   def set_hardware_state(self, state, force = False):
+    address = self.__get_address()
+
     if 'BitBang' == self.__device_type:
       with BitBangDevice(self.__device) as device:
         device.baudrate = 9600
         if state is terrariumPowerSwitch.ON:
-          device.port |= int(terrariumPowerSwitchFTDI.BITBANG_ADDRESSES[str(self.get_address())], 16)
+          device.port |= int(terrariumPowerSwitchFTDI.BITBANG_ADDRESSES[str(address[0])], 16)
         else:
-          device.port &= ~int(terrariumPowerSwitchFTDI.BITBANG_ADDRESSES[str(self.get_address())], 16)
+          device.port &= ~int(terrariumPowerSwitchFTDI.BITBANG_ADDRESSES[str(address[0])], 16)
 
     elif 'Serial' == self.__device_type:
       with SerialDevice(self.__device) as device:
         device.baudrate = 9600
-        cmd = chr(0xff) + chr(0x0 + int(self.get_address())) + chr(0x0 + (1 if state is terrariumPowerSwitch.ON else 0))
+        cmd = chr(0xff) + chr(0x0 + int(address[0])) + chr(0x0 + (1 if state is terrariumPowerSwitch.ON else 0))
         device.write(cmd)
 
   def get_hardware_state(self):
@@ -322,10 +339,12 @@ class terrariumPowerSwitchFTDI(terrariumPowerSwitchSource):
         return testBit(data, 8)
 
     data = None
+    address = self.__get_address()
+    
     if 'BitBang' == self.__device_type:
       with BitBangDevice(self.__device) as device:
         device.baudrate = 9600
-        data = get_relay_state( device.port, str(self.get_address()) )
+        data = get_relay_state( device.port, str(address[0]) )
 
     elif 'Serial' == self.__device_type:
       return None
@@ -495,13 +514,15 @@ class terrariumPowerSwitchEnergenieRF(terrariumPowerSwitchSource):
     self.__device.close()
     super(terrariumPowerSwitchEnergenieRF,self).stop()
 
-
 class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
   TYPE = 'sonoff'
   VALID_SOURCE = '^http:\/\/((?P<user>[^:]+):(?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?$'
 
   def load_hardware(self):
     self.__firmware = None
+    if not hasattr(self, '__retries'):
+      self.__retries = 0
+
     # Input format should be either:
     # - http://[HOST]#[POWER_SWITCH_NR]
     # - http://[HOST]/#[POWER_SWITCH_NR]
@@ -529,6 +550,7 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
           raise Exception('No data, jump to next test')
 
         self.__firmware = 'tasmota'
+        self.__retries = 0
 
       except Exception as ex:
         print('Tasmota exceptions')
@@ -557,6 +579,7 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
             raise Exception('No data, jump to next test')
 
           self.__firmware = 'espeasy'
+          self.__retries = 0
 
         except Exception as ex:
           print('ESP Easy exceptions')
@@ -589,6 +612,7 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
             raise Exception('No data, this was the last attempt...')
 
           self.__firmware = 'espurna'
+          self.__retries = 0
 
         except Exception as ex:
           print('ESPurna exceptions')
@@ -598,28 +622,34 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
     changed = True
 
     if self.__firmware is None:
-      logger.error('Sonoff device is not connected. Cannot trigger power switch')
-      changed = False
-    else:
-      data = re.match(self.VALID_SOURCE,self.get_address())
-      if data:
-        data = data.groupdict()
-        url = None
+      if self.__retries < 5:
+        self.__retries += 1
+        logger.warning('Sonoff device is not connected for trigger action. Reconnect attempt: {}'.format(self.__retries))
+        self.load_hardware()
+        return self.set_hardware_state(state,force)
+      else:
+        logger.error('Sonoff device is not connected. Cannot trigger power switch')
+        return False
 
-        if 'tasmota' == self.__firmware:
-          url = 'http://{}/cm?cmnd=Power%20{}'.format(data['host'],('1' if state else '0'))
-          if 'user' in data and 'password' in data:
-            url += '&user={}&password={}'.format(data['user'],data['password'])
+    data = re.match(self.VALID_SOURCE,self.get_address())
+    if data:
+      data = data.groupdict()
+      url = None
 
-        elif 'espeasy' == self.__firmware:
-          url = 'http://{}/control?cmd=event,T{}'.format(data['host'],('1' if state else '0'))
+      if 'tasmota' == self.__firmware:
+        url = 'http://{}/cm?cmnd=Power%20{}'.format(data['host'],('1' if state else '0'))
+        if 'user' in data and 'password' in data:
+          url += '&user={}&password={}'.format(data['user'],data['password'])
 
-        elif 'espurna' == self.__firmware:
-          url = 'http://{}/api/relay/0?apikey={}&value={}'.format(data['host'],data['password'],('1' if state else '0'))
+      elif 'espeasy' == self.__firmware:
+        url = 'http://{}/control?cmd=event,T{}'.format(data['host'],('1' if state else '0'))
 
-        state = terrariumUtils.get_remote_data(url)
-        if state is None:
-          changed = False
+      elif 'espurna' == self.__firmware:
+        url = 'http://{}/api/relay/0?apikey={}&value={}'.format(data['host'],data['password'],('1' if state else '0'))
+
+      state = terrariumUtils.get_remote_data(url)
+      if state is None:
+        changed = False
 
     return changed
 
@@ -627,40 +657,48 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
     data = None
 
     if self.__firmware is None:
-      logger.error('Sonoff device is not connected. Cannot read power switch state')
-      return terrariumPowerSwitch.OFF
-    else:
-      data = re.match(self.VALID_SOURCE,self.get_address())
-      if data:
-        data = data.groupdict()
-        url = None
+      if self.__retries < 5:
+        self.__retries += 1
+        logger.warning('Sonoff device is not connected while reading the state. Reconnect attempt: {}'.format(self.__retries))
+        self.load_hardware()
+        return self.get_hardware_state()
+      else:
+        logger.error('Sonoff device is not connected. Cannot read power switch state')
+        return terrariumPowerSwitch.OFF
 
-        if 'tasmota' == self.__firmware:
-          url = 'http://{}/cm?cmnd=Power'.format(data['host'])
-          if 'user' in data and 'password' in data:
-            url += '&user={}&password={}'.format(data['user'],data['password'])
+    data = re.match(self.VALID_SOURCE,self.get_address())
+    if data:
+      data = data.groupdict()
+      url = None
 
-        elif 'espeasy' == self.__firmware:
-          url = 'http://{}/json'.format(data['host'])
+      if 'tasmota' == self.__firmware:
+        url = 'http://{}/cm?cmnd=Power'.format(data['host'])
+        if 'user' in data and 'password' in data:
+          url += '&user={}&password={}'.format(data['user'],data['password'])
 
-        elif 'espurna' == self.__firmware:
-          if 'password' not in data:
-            # Just add dummy value...
-            data['password'] = 'password'
+      elif 'espeasy' == self.__firmware:
+        url = 'http://{}/json'.format(data['host'])
 
-          url = 'http://{}/apis?apikey={}'.format(data['host'],data['password'])
+      elif 'espurna' == self.__firmware:
+        if 'password' not in data:
+          # Just add dummy value...
+          data['password'] = 'password'
 
-        state = terrariumUtils.get_remote_data(url)
+        url = 'http://{}/apis?apikey={}'.format(data['host'],data['password'])
 
-        if 'tasmota' == self.__firmware:
-          return terrariumPowerSwitch.ON if terrariumUtils.is_true(state['POWER']) else terrariumPowerSwitch.OFF
-        elif 'espeasy' == self.__firmware:
-          return terrariumPowerSwitch.ON if terrariumUtils.is_true(state['POWER']) else terrariumPowerSwitch.OFF
-        elif 'espurna' == self.__firmware:
-          return terrariumPowerSwitch.ON if terrariumUtils.is_true(state['POWER']) else terrariumPowerSwitch.OFF
+      state = terrariumUtils.get_remote_data(url)
+      if state is None:
+        logger.warning('Error reading Sonoff \'{}\' power state. So returning last known state: {}'.format(self.get_name(),self.state))
+        return self.state
+
+      if 'tasmota' == self.__firmware:
+        return terrariumPowerSwitch.ON if terrariumUtils.is_true(state['POWER']) else terrariumPowerSwitch.OFF
+      elif 'espeasy' == self.__firmware:
+        return terrariumPowerSwitch.ON if terrariumUtils.is_true(state['POWER']) else terrariumPowerSwitch.OFF
+      elif 'espurna' == self.__firmware:
+        return terrariumPowerSwitch.ON if terrariumUtils.is_true(state['POWER']) else terrariumPowerSwitch.OFF
 
     return terrariumPowerSwitch.OFF
-
 
 class terrariumPowerSwitchDenkoviV2(terrariumPowerSwitchSource):
   TYPE = 'denkovi_v2'
@@ -801,6 +839,7 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
     self.off_percentage = 0.0
 
     self._dimmer_state = 0.0
+    self._dimmer_running = False
     super(terrariumPowerDimmerSource,self).__init__(switchid, address, name, prev_state, callback)
 
   def get_state(self):
@@ -932,14 +971,30 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
         elif self.get_type() == terrariumPowerDimmerBrightPi.TYPE:
           dim_value = int(50 * (float(self._dimmer_state) / 100.0))
 
+        elif self.get_type() == terrariumPowerDimmerIRF520.TYPE:
+          dim_value = self._dimmer_state
+          dim_freq = terrariumPowerDimmerIRF520.DIMMER_FREQ
+
         skip_first = True
         for gpiopin in self.get_address().split(','):
           logger.debug('Dimmer animation: Step: %s, value %s%%, Dim value: %s, timeout %s',counter+1, self._dimmer_state, dim_value, duration)
-          if self.get_type() in [terrariumPowerDimmerPWM.TYPE,terrariumPowerDimmerDC.TYPE]:
+          if self.get_type() in [terrariumPowerDimmerPWM.TYPE,terrariumPowerDimmerDC.TYPE, terrariumPowerDimmerPCA9685.TYPE, terrariumPowerDimmerIRF520.TYPE]:
             if terrariumUtils.to_BCM_port_number(gpiopin) is False:
               continue
 
-            self._device.hardware_PWM(terrariumUtils.to_BCM_port_number(gpiopin), dim_freq, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
+            if self.get_type() == terrariumPowerDimmerPCA9685.TYPE:
+              if skip_first:
+                skip_first = False
+                continue
+
+              self._device.set_pwm(int(gpiopin), self._dimmer_state * (4095 / 100))
+
+            elif self.get_type() == terrariumPowerDimmerIRF520.TYPE:
+              self._device.hardware_PWM(terrariumUtils.to_BCM_port_number(gpiopin), dim_freq, int(dim_value) * 10000)
+
+            else:
+              self._device.hardware_PWM(terrariumUtils.to_BCM_port_number(gpiopin), dim_freq, int(dim_value) * 1000) # 5000Hz state*1000% dutycycle
+
           elif self.get_type() == terrariumPowerDimmerBrightPi.TYPE:
 
             if dim_value != prev_value:
@@ -949,13 +1004,6 @@ class terrariumPowerDimmerSource(terrariumPowerSwitchSource):
 
               self._device.set_led_dim(leds, dim_value)
               prev_value = dim_value
-
-          elif self.get_type() == terrariumPowerDimmerPCA9685.TYPE:
-            if skip_first:
-              skip_first = False
-              continue
-
-            self._device.set_pwm(int(gpiopin), dim_value * (4095 / 100))
 
         if duration > 0.0:
           sleep(duration)
@@ -1024,6 +1072,15 @@ class terrariumPowerDimmerDC(terrariumPowerDimmerPiGPIOSource):
   DIMMER_MAXDIM = 1000 # https://github.com/theyosh/TerrariumPI/issues/178#issuecomment-412667010
   DIMMER_FREQ   = 15000 # https://github.com/theyosh/TerrariumPI/issues/178#issuecomment-413697246
 
+class terrariumPowerDimmerIRF520(terrariumPowerDimmerPiGPIOSource):
+  # https://opencircuit.nl/Product/IRF520-mosfet-module
+  # https://github.com/DrLex0/MightyVariableFan/blob/master/pi_files/pwm_server.py#L97
+  TYPE = 'irf520-dimmer'
+
+  # Dimmer settings
+  DIMMER_MAXDIM = 100
+  DIMMER_FREQ   = 50 # Tested with a 24V PC fan.
+
 class terrariumPowerDimmerBrightPi(terrariumPowerDimmerSource):
   TYPE = 'brightpi'
 
@@ -1044,7 +1101,10 @@ class terrariumPowerDimmerBrightPi(terrariumPowerDimmerSource):
       print(ex)
 
 class terrariumPowerDimmerPCA9685(terrariumPowerDimmerSource):
-  TYPE = 'pca9685'
+  TYPE = 'pca9685-dimmer'
+
+  # Dimmer settings
+  DIMMER_FREQ   = 1000
 
   def load_hardware(self):
     self._dimmer_running = False
@@ -1052,12 +1112,11 @@ class terrariumPowerDimmerPCA9685(terrariumPowerDimmerSource):
     try:
       gpio_pins = self.get_address().split(',')
       self._device = pca9685_driver.Device(int('0x' + gpio_pins[0],16))
-      self._device.set_pwm_frequency(1000)
+      self._device.set_pwm_frequency(terrariumPowerDimmerPCA9685.DIMMER_FREQ)
 
     except Exception as ex:
       print('load_hardware exception')
       print(ex)
-
 
 class terrariumPowerSwitchRemote(terrariumPowerSwitchSource):
   TYPE = 'remote'
@@ -1161,6 +1220,7 @@ class terrariumPowerSwitch(object):
                     terrariumPowerDimmerDC,
                     terrariumPowerDimmerBrightPi,
                     terrariumPowerDimmerPCA9685,
+                    terrariumPowerDimmerIRF520,
                     terrariumPowerSwitchDenkoviV2_4,
                     terrariumPowerSwitchDenkoviV2_8,
                     terrariumPowerSwitchDenkoviV2_16,
