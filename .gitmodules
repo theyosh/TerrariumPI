@@ -28,3 +28,6 @@
 [submodule "static/leaflet-icon-pulse"]
 	path = static/leaflet-icon-pulse
 	url = https://github.com/mapshakers/leaflet-icon-pulse.git
+[submodule "python-kasa"]
+	path = python-kasa
+	url = https://github.com/python-kasa/python-kasa.git
