@@ -2,8 +2,9 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
-from terriumSwitch import terrariumPowerSwitchSource
+from terrariumSwitch import terrariumPowerSwitchSource
 
+import asyncio
 from kasa import Discover
 
 class terrariumPowerSwitchTPLinkKasa(terrariumPowerSwitchSource):
@@ -70,9 +71,12 @@ class terrariumPowerSwitchTPLinkKasa(terrariumPowerSwitchSource):
 
   @staticmethod
   def scan_power_switches(callback=None, **kwargs):
+    found_devices = []
 
+#    @asyncio.coroutine
     async def scan():
       print('Start scanning.....')
+      print(found_devices)
       devices = await Discover.discover()
       for device in devices:
         print('Found device')
@@ -82,19 +86,25 @@ class terrariumPowerSwitchTPLinkKasa(terrariumPowerSwitchSource):
           # First do an update to get the total amount of power switches
           await device.update()
           for counter in range(1,len(device.plugs)+1):
-            yield terrariumPowerSwitch(md5((terrariumPowerSwitchTPLinkKasa.TYPE + device.device_id + counter).encode()).hexdigest(),
+            found_devices.append(terrariumPowerSwitch(md5((terrariumPowerSwitchTPLinkKasa.TYPE + device.device_id + counter).encode()).hexdigest(),
                                       terrariumPowerSwitchTPLinkKasa.TYPE,
                                       '{},{}'.format(device.host,counter),
                                       device.plugs[counter-1].alias,
                                       None,
-                                      callback)
+                                      callback))
 
 #      sleep(1)
       print('Done scanning')
 
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(scan())
-    loop.close()
+#    print('Start loop')
+#    loop = asyncio.get_event_loop()
+#    print('Start scan')
+#    loop.run_until_complete(scan())
+#    print('Close loop')
+#    loop.close()
+    asyncio.run(scan())
+    print('Final')
+    return found_devices
 
 #     print('Scan kasa switches')
 #     loop = asyncio.get_event_loop()

@@ -1233,7 +1233,7 @@ class terrariumPowerSwitch(object):
 
   if sys.version_info >= (3, 4):
     # Merros IoT library needs Python 3.3+
-    from terariumSwitchKasa import terrariumPowerSwitchTPLinkKasa
+    from terrariumSwitchKasa import terrariumPowerSwitchTPLinkKasa
     POWER_SWITCHES.append(terrariumPowerSwitchTPLinkKasa)
 
   def __new__(self, switch_id, hardware_type, address, name = '', prev_state = None, callback = None):
@@ -1255,7 +1255,11 @@ class terrariumPowerSwitch(object):
   def scan_power_switches(callback=None, **kwargs):
     for power_switch_device in terrariumPowerSwitch.POWER_SWITCHES:
       try:
-        for power_switch in power_switch_device.scan_power_switches(callback, **kwargs):
+        switches = power_switch_device.scan_power_switches(callback, **kwargs)
+        if switches is None:
+          continue
+
+        for power_switch in switches:
           yield power_switch
       except AttributeError as ex:
         logger.debug('Device \'{}\' does not support hardware scanning'.format(power_switch_device.TYPE))
