@@ -340,7 +340,7 @@ class terrariumPowerSwitchFTDI(terrariumPowerSwitchSource):
 
     data = None
     address = self.__get_address()
-    
+
     if 'BitBang' == self.__device_type:
       with BitBangDevice(self.__device) as device:
         device.baudrate = 9600
@@ -1230,6 +1230,11 @@ class terrariumPowerSwitch(object):
   if sys.version_info >= (3, 3):
     # Merros IoT library needs Python 3.3+
     POWER_SWITCHES.append(terrariumPowerSwitchMSS425E)
+
+  if sys.version_info >= (3, 4):
+    # Merros IoT library needs Python 3.3+
+    from terariumSwitchKasa import terrariumPowerSwitchTPLinkKasa
+    POWER_SWITCHES.append(terrariumPowerSwitchTPLinkKasa)
 
   def __new__(self, switch_id, hardware_type, address, name = '', prev_state = None, callback = None):
     for powerswitch in terrariumPowerSwitch.POWER_SWITCHES:
