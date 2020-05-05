@@ -72,17 +72,20 @@ class terrariumEnvironmentPart(object):
     lastaction = 0
     settletime = 0
     onduration = 0
+    timerdata = {}
 
     if 'min' == part:
       powerswitches = self.config['alarm_min']['powerswitches']
       settletime = self.config['alarm_min']['settle']
       onduration = self.config['alarm_min']['duration_on']
-      lastaction = self.timer_min_data['lastaction']
+      timerdata = self.timer_min_data
+      lastaction = timerdata['lastaction']      
     elif 'max' == part:
       powerswitches = self.config['alarm_max']['powerswitches']
       settletime = self.config['alarm_max']['settle']
       onduration = self.config['alarm_max']['duration_on']
-      lastaction = self.timer_max_data['lastaction']
+      timerdata = self.timer_max_data
+      lastaction = timerdata['lastaction']
 
     if len(powerswitches) == 0:
       return
@@ -93,15 +96,13 @@ class terrariumEnvironmentPart(object):
 
       self.__toggle_powerswitches(switches,action)
 
-      if 'min' == part:
-        self.timer_min_data['lastaction'] = now
-        if 'on' == action and onduration > 0:
-          (Timer(onduration, self.toggle_off_alarm_min, (powerswitchlist,True))).start()
-
-      elif 'max' == part:
-        self.timer_max_data['lastaction'] = now
-        if 'on' == action and onduration > 0:
-          (Timer(onduration, self.toggle_off_alarm_max, (powerswitchlist,True))).start()
+      timerdata['lastaction'] = now
+      if 'lasttimer' in timerdata:
+        timerdata['lasttimer'].cancel()
+      if 'on' == action and onduration > 0:
+        timer = Timer(onduration, self.toggle_off_alarm_min if 'min' == part else self.toggle_off_alarm_max, (powerswitchlist,True))
+        timer.start()
+        timerdata['lasttimer'] = timer
 
   def set_alarm_min(self,start,stop,timer_on,timer_off,light_state,door_state,duration_on,settle,powerswitches):
     self.config['alarm_min'] = {'timer_start':start,
