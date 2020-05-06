@@ -31,6 +31,7 @@ class terrariumEnvironmentPart(object):
     self.timer_max_data = {'lastaction' : 0, 'power_state' : None}
 
     self.last_update = 0
+    self.active_timer = None
 
   def __get_power_state(self,powerswitchlist):
     self.timer_min_data['max_power'] = False
@@ -97,12 +98,12 @@ class terrariumEnvironmentPart(object):
       self.__toggle_powerswitches(switches,action)
 
       timerdata['lastaction'] = now
-      if 'lasttimer' in timerdata:
-        timerdata['lasttimer'].cancel()
+      if self.active_timer != None:
+        self.active_timer.cancel()
+        self.active_timer = None
       if 'on' == action and onduration > 0:
-        timer = Timer(onduration, self.toggle_off_alarm_min if 'min' == part else self.toggle_off_alarm_max, (powerswitchlist,True))
-        timer.start()
-        timerdata['lasttimer'] = timer
+        self.active_timer = Timer(onduration, self.toggle_off_alarm_min if 'min' == part else self.toggle_off_alarm_max, (powerswitchlist,True))
+        self.active_timer.start()
 
   def set_alarm_min(self,start,stop,timer_on,timer_off,light_state,door_state,duration_on,settle,powerswitches):
     self.config['alarm_min'] = {'timer_start':start,
