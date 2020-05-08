@@ -78,7 +78,8 @@ class terrariumPowerSwitchTPLinkKasa(terrariumPowerSwitchSource):
       print('Start scanning.....')
       print(found_devices)
       devices = await Discover.discover()
-      for ip_address, device in devices:
+      for ip_address in devices:
+        device = devices[ip_address]
         print('Found device')
         print(device)
         print(dir(device))
