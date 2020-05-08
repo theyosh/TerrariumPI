@@ -78,13 +78,17 @@ class terrariumPowerSwitchTPLinkKasa(terrariumPowerSwitchSource):
       print('Start scanning.....')
       print(found_devices)
       devices = await Discover.discover()
-      for device in devices:
+      for ip_address, device in devices:
         print('Found device')
         print(device)
         print(dir(device))
+        print('Is Strip test: {}'.format(device.is_strip))
         if device.is_strip:
+          print('Do an update of the device to get all the available plugs')
           # First do an update to get the total amount of power switches
           await device.update()
+          print(device.plugs)
+          print('Amount of plugs found: {}'.format(len(device.plugs)))
           for counter in range(1,len(device.plugs)+1):
             found_devices.append(terrariumPowerSwitch(md5((terrariumPowerSwitchTPLinkKasa.TYPE + device.device_id + counter).encode()).hexdigest(),
                                       terrariumPowerSwitchTPLinkKasa.TYPE,
