@@ -60,7 +60,11 @@ class terrariumPowerSwitchTPLinkKasa(terrariumPowerSwitchSource):
         data.append(device.is_on)
 
     address = self.__get_address()
-    asyncio.run(__get_hardware_state(self._device,address))
+    try:
+      asyncio.run(__get_hardware_state(self._device,address))
+    except RuntimeError as err:
+      return None
+
     return len(data) == 1 and terrariumUtils.is_true(data[0])
 
   @staticmethod
@@ -79,7 +83,10 @@ class terrariumPowerSwitchTPLinkKasa(terrariumPowerSwitchSource):
                                       device.plugs[counter-1].alias,
                                       None,
                                       callback))
+    try:
+      asyncio.run(scan())
+    except RuntimeError as err:
+      pass
 
-    asyncio.run(scan())
     for device in found_devices:
        yield device

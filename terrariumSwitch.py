@@ -58,7 +58,11 @@ class terrariumPowerSwitchSource(object):
     self.load_hardware()
 
     self.state = None
-    if self.get_type() not in [terrariumPowerSwitchWeMo.TYPE, terrariumPowerSwitchMSS425E.TYPE]:
+    ignore_scanning = [terrariumPowerSwitchWeMo.TYPE, terrariumPowerSwitchMSS425E.TYPE]
+    if sys.version_info >= (3, 7):
+      ignore_scanning.append('tplinkkasa')
+
+    if self.get_type() not in ignore_scanning:
       # Do not toggle off switches during scanning.....
       prev_state = prev_state if prev_state is not None else terrariumPowerSwitch.OFF
       self.set_state(prev_state,True)
