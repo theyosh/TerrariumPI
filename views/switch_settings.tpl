@@ -126,6 +126,7 @@
                                 <option value="denkovi_v2_4">{{_('DenkoviV2 4 relays')}}</option>
                                 <option value="denkovi_v2_8">{{_('DenkoviV2 8 relays')}}</option>
                                 <option value="denkovi_v2_16">{{_('DenkoviV2 16 relays')}}</option>
+                                <option value="tplinkkasa">{{_('TP-Link Kasa')}}</option>
                                 <option value="script">{{_('Custom script')}}</option>
                               </select>
                             </div>
