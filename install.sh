@@ -23,7 +23,7 @@ if [ $PYTHON -eq 2 ]; then
   PIP_MODULES="${PIP_MODULES} iCalEvents==0.1.21 gevent==1.4.0"
 fi
 if [ $PYTHON -eq 3 ]; then
-  PIP_MODULES="${PIP_MODULES} gevent opencv-python-headless meross-iot==0.2.2.3 iCalEvents adafruit-circuitpython-sht31d mitemp_bt"
+  PIP_MODULES="${PIP_MODULES} gevent opencv-python-headless meross-iot==0.2.2.3 iCalEvents adafruit-circuitpython-sht31d mitemp_bt asyncio"
 fi
 
 if [ `grep -ic " buster " /etc/apt/sources.list` -eq 2 ]; then
@@ -303,7 +303,7 @@ EOF
 
 done
 
-PROGRESS=96
+PROGRESS=94
 # Update submodules if downloaded through tar or zip
 cd "${BASEDIR}/"
 
@@ -329,6 +329,25 @@ Install required software (some modules will take 5-10 min.)
 Installing python${PYTHON} module: Bright-Pi ...
 XXX
 EOF
+
+
+PROGRESS=96
+# Update submodules if downloaded through tar or zip
+if [ $PYTHON -eq 3 ]; then
+  cd "${BASEDIR}/python-kasa"
+  sudo python3 setup.py install
+fi
+
+
+cat <<EOF
+XXX
+$PROGRESS
+Install required software (some modules will take 5-10 min.)
+
+Installing python${PYTHON} module: TP Link Kasa ...
+XXX
+EOF
+
 
 PROGRESS=98
 cat <<EOF

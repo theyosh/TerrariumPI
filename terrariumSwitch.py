@@ -58,7 +58,11 @@ class terrariumPowerSwitchSource(object):
     self.load_hardware()
 
     self.state = None
-    if self.get_type() not in [terrariumPowerSwitchWeMo.TYPE, terrariumPowerSwitchMSS425E.TYPE]:
+    ignore_scanning = [terrariumPowerSwitchWeMo.TYPE, terrariumPowerSwitchMSS425E.TYPE]
+    if sys.version_info >= (3, 7):
+      ignore_scanning.append('tplinkkasa')
+
+    if self.get_type() not in ignore_scanning:
       # Do not toggle off switches during scanning.....
       prev_state = prev_state if prev_state is not None else terrariumPowerSwitch.OFF
       self.set_state(prev_state,True)
@@ -340,7 +344,7 @@ class terrariumPowerSwitchFTDI(terrariumPowerSwitchSource):
 
     data = None
     address = self.__get_address()
-    
+
     if 'BitBang' == self.__device_type:
       with BitBangDevice(self.__device) as device:
         device.baudrate = 9600
@@ -1230,6 +1234,11 @@ class terrariumPowerSwitch(object):
   if sys.version_info >= (3, 3):
     # Merros IoT library needs Python 3.3+
     POWER_SWITCHES.append(terrariumPowerSwitchMSS425E)
+
+  if sys.version_info >= (3, 7):
+    # Merros IoT library needs Python 3.3+
+    from terrariumSwitchKasa import terrariumPowerSwitchTPLinkKasa
+    POWER_SWITCHES.append(terrariumPowerSwitchTPLinkKasa)
 
   def __new__(self, switch_id, hardware_type, address, name = '', prev_state = None, callback = None):
     for powerswitch in terrariumPowerSwitch.POWER_SWITCHES:
