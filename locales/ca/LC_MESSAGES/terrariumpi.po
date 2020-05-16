@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2020-04-13 21:21+CEST\n"
-"PO-Revision-Date: 2020-05-16 08:55+0000\n"
+"PO-Revision-Date: 2020-05-16 11:54+0000\n"
 "Last-Translator: cmonicob <cmonicob@gmail.com>\n"
 "Language-Team: Catalan <https://weblate.theyosh.nl/projects/terrariumpi/"
 "webinterface/ca/>\n"
@@ -63,7 +63,7 @@ msgstr ""
 
 #: terrariumTranslations.py:33
 msgid "Holds the title of the calendar event."
-msgstr ""
+msgstr "Conté el títol de l'esdeveniment del calendari."
 
 #: terrariumTranslations.py:34
 msgid "Holds the body of the calendar event. You can include images."
@@ -116,6 +116,8 @@ msgstr ""
 #: terrariumTranslations.py:46
 msgid "Shows the sensor current value in temperature or humidity (read only)."
 msgstr ""
+"Mostra el valor actual del sensor en temperatura o humitat (només de "
+"lectura)."
 
 #: terrariumTranslations.py:47
 msgid "Holds the sensor lowest moisture value measured in dry air. %s"
@@ -151,7 +153,7 @@ msgstr ""
 
 #: terrariumTranslations.py:56
 msgid "Holds the switch name."
-msgstr ""
+msgstr "Rep el nom del commutador."
 
 #: terrariumTranslations.py:57
 msgid "Holds the switch power usage in Watt when switched on."
@@ -229,7 +231,7 @@ msgstr ""
 
 #: terrariumTranslations.py:72
 msgid "Enter the period type."
-msgstr ""
+msgstr "Introduïu el tipus de període."
 
 #: terrariumTranslations.py:76
 msgid "Holds the door hardware type. Supported hardware types are: %s."
@@ -243,7 +245,7 @@ msgstr ""
 
 #: terrariumTranslations.py:78
 msgid "Holds the door name."
-msgstr ""
+msgstr "Conté el nom de la porta."
 
 #: terrariumTranslations.py:82
 msgid "Holds the webcam location source. Supported sources are: %s"
@@ -251,11 +253,11 @@ msgstr ""
 
 #: terrariumTranslations.py:83
 msgid "Holds the webcam name."
-msgstr ""
+msgstr "Conté el nom de la càmera web."
 
 #: terrariumTranslations.py:84
 msgid "Holds the webcam resolution."
-msgstr ""
+msgstr "Conté la resolució de càmera web."
 
 #: terrariumTranslations.py:85
 msgid "Holds the webcam resolution width in pixels."
@@ -315,7 +317,7 @@ msgstr ""
 
 #: terrariumTranslations.py:100
 msgid "Holds the audio playlist name."
-msgstr ""
+msgstr "Conté el nom de la llista de reproducció d'àudio."
 
 #: terrariumTranslations.py:101
 msgid "Holds the time when the playlist should be started."
@@ -723,17 +725,17 @@ msgstr ""
 
 #: terrariumWebserver.py:93 terrariumWebserver.py:202
 msgid "Authenticate to make any changes"
-msgstr ""
+msgstr "Autentiqueu-vos per fer canvis"
 
 #: terrariumWebserver.py:93 terrariumWebserver.py:202
 #: views/system_settings.tpl:57
 msgid "TerrariumPI"
-msgstr ""
+msgstr "TerrariumPI"
 
 #: terrariumWebserver.py:93 terrariumWebserver.py:202
 #: views/system_settings.tpl:146
 msgid "Authentication"
-msgstr ""
+msgstr "Autenticació"
 
 #: terrariumWebserver.py:266
 msgid "Player command could ot be executed!"
@@ -3895,23 +3897,23 @@ msgstr ""
 
 #: Missing text string
 msgid "Load 15"
-msgstr ""
+msgstr "Càrrega 15"
 
 #: Missing text string
 msgid "Load 5"
-msgstr ""
+msgstr "Càrrega 5"
 
 #: Missing text string
 msgid "Loading"
-msgstr ""
+msgstr "S'està carregant..."
 
 #: Missing text string
 msgid "Minimum area"
-msgstr ""
+msgstr "Àrea mínima"
 
 #: Missing text string
 msgid "No error messages"
-msgstr ""
+msgstr "No hi ha missatges d&#39;error"
 
 #: Missing text string
 msgid "Not playing"
@@ -3919,11 +3921,11 @@ msgstr ""
 
 #: Missing text string
 msgid "No warning messages"
-msgstr ""
+msgstr "No hi ha missatges d’avís"
 
 #: Missing text string
 msgid "Offset in cm"
-msgstr ""
+msgstr "Desplaçament en cm"
 
 #: Missing text string
 msgid "Press browse button to select files"
@@ -3931,19 +3933,19 @@ msgstr ""
 
 #: Missing text string
 msgid "Preview file"
-msgstr ""
+msgstr "Vista prèvia del fitxer"
 
 #: Missing text string
 msgid "Raspberry Pi 3 camera"
-msgstr ""
+msgstr "Càmera de Raspberry Pi 3"
 
 #: Missing text string
 msgid "Raspberry Pi 3 specifications"
-msgstr ""
+msgstr "Raspberry Pi 3 especificacions"
 
 #: Missing text string
 msgid "Raspberry Pi camera"
-msgstr ""
+msgstr "Càmera de Raspberry Pi"
 
 #: Missing text string
 msgid "realtimedata"
@@ -3951,15 +3953,15 @@ msgstr ""
 
 #: Missing text string
 msgid "Reboot"
-msgstr ""
+msgstr "Reinicia"
 
 #: Missing text string
 msgid "Save RAW photo"
-msgstr ""
+msgstr "Desa la foto en RAW"
 
 #: Missing text string
 msgid "Sensor history graph"
-msgstr ""
+msgstr "Gràfic històric del sensor"
 
 #: Missing text string
 msgid "Sensors overview screenshot"
@@ -3971,7 +3973,7 @@ msgstr ""
 
 #: Missing text string
 msgid "Shutdown"
-msgstr ""
+msgstr "Apaga"
 
 #: Missing text string
 msgid "Switches overview screenshot"
@@ -3987,7 +3989,7 @@ msgstr ""
 
 #: Missing text string
 msgid "TerrariumPI test setup"
-msgstr ""
+msgstr "Configuració de proves TerrariumPI"
 
 #: Missing text string
 msgid "There are zero door sensors configured."
@@ -3995,7 +3997,7 @@ msgstr ""
 
 #: Missing text string
 msgid "Threshold"
-msgstr ""
+msgstr "Llindar"
 
 #: Missing text string
 msgid "Timer period off duration in minutes"
@@ -4007,11 +4009,11 @@ msgstr ""
 
 #: Missing text string
 msgid "Timestamp"
-msgstr ""
+msgstr "Data i hora"
 
 #: Missing text string
 msgid "Toggle audio"
-msgstr ""
+msgstr "Commuta l’àudio"
 
 #: Missing text string
 msgid "Toggle information"
@@ -4023,7 +4025,7 @@ msgstr ""
 
 #: Missing text string
 msgid "Total memory"
-msgstr ""
+msgstr "Memòria total"
 
 #: Missing text string
 msgid "Total open for"
@@ -4031,7 +4033,7 @@ msgstr ""
 
 #: Missing text string
 msgid "Total space"
-msgstr ""
+msgstr "Espai total"
 
 #: Missing text string
 msgid "Universal AC MAINS Dimmer - MPDMv4.1"
@@ -4039,27 +4041,27 @@ msgstr ""
 
 #: Missing text string
 msgid "Unknown date"
-msgstr ""
+msgstr "Data desconeguda"
 
 #: Missing text string
 msgid "USB Relay board"
-msgstr ""
+msgstr "Placa de relés USB"
 
 #: Missing text string
 msgid "USB Webcam"
-msgstr ""
+msgstr "Càmera web USB"
 
 #: Missing text string
 msgid "Used memory"
-msgstr ""
+msgstr "Memòria utilitzada"
 
 #: Missing text string
 msgid "Used space"
-msgstr ""
+msgstr "Espai utilitzat"
 
 #: Missing text string
 msgid "UV"
-msgstr ""
+msgstr "UV"
 
 #: Missing text string
 msgid "Value difference during the night"
@@ -4067,7 +4069,7 @@ msgstr ""
 
 #: Missing text string
 msgid "Volume in liters"
-msgstr ""
+msgstr "Volum en litres"
 
 #: Missing text string
 msgid "Weather day forecast screenshot"
@@ -4087,27 +4089,27 @@ msgstr ""
 
 #: Missing text string
 msgid "Width"
-msgstr ""
+msgstr "Amplada"
 
 #: Missing text string
 msgid "Sensor temperature"
-msgstr ""
+msgstr "Temperatura del sensor"
 
 #: Missing text string
 msgid "Sensor humidity"
-msgstr ""
+msgstr "Humitat del sensor"
 
 #: Missing text string
 msgid "Sensor distance"
-msgstr ""
+msgstr "Distància del sensor"
 
 #: Missing text string
 msgid "Sensor ph"
-msgstr ""
+msgstr "Sensor de ph"
 
 #: Missing text string
 msgid "Sensor settings"
-msgstr ""
+msgstr "Configuració del sensor"
 
 #: Missing text string
 msgid "Switch status"
@@ -4135,11 +4137,11 @@ msgstr "Estat del sistema"
 
 #: Missing text string
 msgid "System log"
-msgstr ""
+msgstr "Registre del sistema"
 
 #: Missing text string
 msgid "System environment"
-msgstr ""
+msgstr "Entorn del sistema"
 
 #: Missing text string
 msgid "System settings"
