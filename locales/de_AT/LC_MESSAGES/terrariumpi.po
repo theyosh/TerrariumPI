@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-04-13 21:21+CEST\n"
-"PO-Revision-Date: 2020-04-29 16:03+0000\n"
-"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"PO-Revision-Date: 2020-05-16 11:54+0000\n"
+"Last-Translator: Luke <luke.gangel87@gmail.com>\n"
 "Language-Team: German (Austria) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/de_AT/>\n"
 "Language: de_AT\n"
@@ -69,7 +69,7 @@ msgstr "Enthält den Titel des Kalenderereignisses."
 
 #: terrariumTranslations.py:34
 msgid "Holds the body of the calendar event. You can include images."
-msgstr ""
+msgstr "Enthält den Text des Kalenderereignisses. Sie können Bilder einfügen."
 
 #: terrariumTranslations.py:38
 msgid "Holds the sensor hardware type. Supported hardware types are: %s."
@@ -249,14 +249,17 @@ msgid ""
 "Enter the name of the hardware device that has been replace. Will be used "
 "for title in the reminder."
 msgstr ""
+"Name des Gerätes das ersetzt wurde eintragen. Wird für den Titel der "
+"Erinnerung verwendet."
 
 #: terrariumTranslations.py:71
 msgid "Enter the amount of days/weeks/months/years to reminder."
 msgstr ""
+"Geben Sie die Anzahl der Tage / Wochen / Monate / Jahre zur Erinnerung ein."
 
 #: terrariumTranslations.py:72
 msgid "Enter the period type."
-msgstr ""
+msgstr "Geben Sie den Typ der Periode ein."
 
 #: terrariumTranslations.py:76
 msgid "Holds the door hardware type. Supported hardware types are: %s."
@@ -300,7 +303,7 @@ msgstr "Rotation des Bildes."
 
 #: terrariumTranslations.py:88
 msgid "Select the white balance type. Only for Raspberry PI camera's."
-msgstr ""
+msgstr "Weißabgleich Typ einstellen. Nur für Raspberry Pi Kameras."
 
 #: terrariumTranslations.py:89
 msgid "Shows the webcam preview image."
@@ -942,11 +945,11 @@ msgstr "Eine neue Ersatzerinnerung wurde erstellt"
 
 #: terrariumWebserver.py:354
 msgid "Calender event created"
-msgstr ""
+msgstr "Kalender Eintrag erstellt"
 
 #: terrariumWebserver.py:355
 msgid "The calender event is created"
-msgstr ""
+msgstr "Der Kalender Eintrag wurde erstellt"
 
 #: terrariumWebserver.py:496 views/inc/menu.tpl:177
 msgid "Log out"
@@ -1231,10 +1234,8 @@ msgid "No calendar available"
 msgstr "Kein Kalender verfügbar"
 
 #: views/calendar.tpl:46
-#, fuzzy
-#| msgid "No calendar available"
 msgid "New calendar item"
-msgstr "Kein Kalender verfügbar"
+msgstr "Neuer Kalender Eintrag"
 
 #: views/calendar.tpl:54 views/inc/usage_doors.tpl:13
 #: views/inc/usage_doors.tpl:139 views/inc/usage_sensors.tpl:17
@@ -1247,11 +1248,11 @@ msgstr "Titel"
 
 #: views/calendar.tpl:129
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: views/calendar.tpl:141 views/webcam_settings.tpl:266
 msgid "Save"
-msgstr ""
+msgstr "Sichern"
 
 #: views/dashboard.tpl:24 views/inc/usage_dashboard.tpl:93
 #: views/inc/usage_switches.tpl:121 views/inc/usage_switches.tpl:143
@@ -4007,10 +4008,8 @@ msgid "flash"
 msgstr "Flash"
 
 #: views/webcam_settings.tpl:135
-#, fuzzy
-#| msgid "Horizontal"
 msgid "horizon"
-msgstr "Horizontal"
+msgstr "Horizont"
 
 #: views/webcam_settings.tpl:136
 msgid "greyworld"
@@ -4109,14 +4108,12 @@ msgid "Last archived frame"
 msgstr "Letztes archiviertes Bild"
 
 #: views/webcam_settings.tpl:234
-#, fuzzy
-#| msgid "Temperature sensors"
 msgid "Select sensors"
-msgstr "Temperatursensoren"
+msgstr "Sensoren auswählen"
 
 #: views/webcam_settings.tpl:267
 msgid "DELETE"
-msgstr ""
+msgstr "LÖSCHEN"
 
 #: Missing text string
 msgid "1Wire bus"
@@ -4144,7 +4141,7 @@ msgstr "Relaiskarte mit 4 USB Anschlüssen"
 
 #: Missing text string
 msgid "Add marker"
-msgstr ""
+msgstr "Markierung hinzufügen"
 
 #: Missing text string
 msgid "Alarm"
@@ -4163,10 +4160,8 @@ msgid "Avatar"
 msgstr "Benutzerbild"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Calendar"
 msgid "Calendar title"
-msgstr "Kalender"
+msgstr "Kalender Titel"
 
 #: Missing text string
 msgid "Click to change image"
@@ -4314,10 +4309,8 @@ msgid "Load 5"
 msgstr "Lade 5 min"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Load"
 msgid "Loading"
-msgstr "Last"
+msgstr "Lade"
 
 #: Missing text string
 msgid "Minimum area"
@@ -4360,10 +4353,8 @@ msgid "Raspberry Pi camera"
 msgstr "Raspberry Pi Kamera"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Remote data"
 msgid "realtimedata"
-msgstr "Remotedaten"
+msgstr "Echtzeitdaten"
 
 #: Missing text string
 msgid "Reboot"
@@ -4428,13 +4419,11 @@ msgstr "Zeitstempel"
 
 #: Missing text string
 msgid "Toggle audio"
-msgstr ""
+msgstr "Ton umschalten"
 
 #: Missing text string
-#, fuzzy
-#| msgid "More information"
 msgid "Toggle information"
-msgstr "Mehr Informationen"
+msgstr "Informationen umschalten"
 
 #: Missing text string
 msgid "Toggle power switch"
