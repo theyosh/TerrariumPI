@@ -6,47 +6,50 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2020-04-13 21:21+CEST\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2020-05-16 08:55+0000\n"
+"Last-Translator: cmonicob <cmonicob@gmail.com>\n"
+"Language-Team: Catalan <https://weblate.theyosh.nl/projects/terrariumpi/"
+"webinterface/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.0.2\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumEngine.py:673 terrariumEngine.py:785 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
 msgid "Uptime"
-msgstr ""
+msgstr "Temps en funcionament"
 
 #: terrariumEngine.py:674
 msgid "Load"
-msgstr ""
+msgstr "Càrrega"
 
 #: terrariumEngine.py:675
 msgid "CPU Temp."
-msgstr ""
+msgstr "Temp. CPU"
 
 #: terrariumEngine.py:763
 msgid "Version"
-msgstr ""
+msgstr "Versió"
 
 #: terrariumEngine.py:789 views/system_status.tpl:174
 msgid "Disk usage"
-msgstr ""
+msgstr "Ús del disc"
 
 #: terrariumEngine.py:794 views/system_status.tpl:118
 msgid "Memory usage"
-msgstr ""
+msgstr "Ús de la memòria"
 
 #: terrariumEngine.py:799 views/system_status.tpl:6
 msgid "CPU Load"
-msgstr ""
+msgstr "Càrrega de la CPU"
 
 #: terrariumEngine.py:805 views/system_status.tpl:62
 msgid "CPU Temperature"
-msgstr ""
+msgstr "Temperatura de la CPU"
 
 #: terrariumTranslations.py:22
 msgid "Holds the external source URL. Supported sources are: %s."
@@ -74,7 +77,7 @@ msgstr ""
 
 #: terrariumTranslations.py:39
 msgid "Remote data"
-msgstr ""
+msgstr "Dades remotes"
 
 #: terrariumTranslations.py:40
 msgid "Holds the sensor type. Supported sensor types are: %s."
@@ -82,7 +85,7 @@ msgstr ""
 
 #: terrariumTranslations.py:41
 msgid "Holds the name of the sensor."
-msgstr ""
+msgstr "Conté el nom del sensor."
 
 #: terrariumTranslations.py:42
 msgid "Holds the sensor lower alarm value of the sensor. When below this value, alarms can be triggered."
@@ -110,7 +113,7 @@ msgstr ""
 
 #: terrariumTranslations.py:47 terrariumTranslations.py:48
 msgid "More calibration information"
-msgstr ""
+msgstr "Més informació sobre el calibratge"
 
 #: terrariumTranslations.py:48
 msgid "Holds the sensor highest moisture value measured in full water. %s"
@@ -118,11 +121,11 @@ msgstr ""
 
 #: terrariumTranslations.py:49
 msgid "Holds the temperature offset value."
-msgstr ""
+msgstr "Manté el valor de compensació de temperatura."
 
 #: terrariumTranslations.py:50
 msgid "Holds the maximum number that a sensor may change in value up or down."
-msgstr ""
+msgstr "Conté el nombre màxim que pot canviar un sensor de valor amunt o avall."
 
 #: terrariumTranslations.py:54
 msgid "Holds the switch hardware type. Supported hardware types are: %s."
@@ -3774,19 +3777,19 @@ msgstr ""
 
 #: Missing text string
 msgid "Door settings"
-msgstr ""
+msgstr "Configuració de la porta"
 
 #: Missing text string
 msgid "Webcam settings"
-msgstr ""
+msgstr "Configuració de la webcam"
 
 #: Missing text string
 msgid "Audio files"
-msgstr ""
+msgstr "Arxius d'àudio"
 
 #: Missing text string
 msgid "System status"
-msgstr ""
+msgstr "Estat del sistema"
 
 #: Missing text string
 msgid "System log"
@@ -3798,4 +3801,4 @@ msgstr ""
 
 #: Missing text string
 msgid "System settings"
-msgstr ""
+msgstr "Configuració del sistema"
