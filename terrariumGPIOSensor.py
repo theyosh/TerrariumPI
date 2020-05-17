@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
+import sys
 
 import RPi.GPIO as GPIO
-import Adafruit_DHT
+
+if sys.version_info >= (3, 0):
+  import adafruit_dht
+else:
+  import Adafruit_DHT
 
 from gevent import sleep
 from time import time
+
 
 from terrariumSensor import terrariumSensorSource
 from terrariumUtils import terrariumUtils
@@ -91,13 +97,23 @@ class terrariumDHTSensor(terrariumGPIOSensor):
       gpio_pins = self.get_address().split(',')
       data = {}
 
-      sensor_device = Adafruit_DHT.DHT11
-      if terrariumDHT22Sensor.TYPE == self.get_type():
-        sensor_device = Adafruit_DHT.DHT22
-      elif terrariumAM2302Sensor.TYPE == self.get_type():
-        sensor_device = Adafruit_DHT.AM2302
+      if sys.version_info >= (3, 0):
+        if terrariumDHT11Sensor.TYPE == self.get_type():
+          sensor_device = adafruit_dht.DHT11(terrariumUtils.to_BCM_port_number(gpio_pins[0]))
+        else:
+          sensor_device = adafruit_dht.DHT22(terrariumUtils.to_BCM_port_number(gpio_pins[0]))
 
-      data['humidity'], data['temperature'] = Adafruit_DHT.read_retry(sensor_device, terrariumUtils.to_BCM_port_number(gpio_pins[0]),4)
+        data['temperature'] = sensor_device.temperature
+        data['humidity']    = sensor_device.humidity
+
+      else:
+        sensor_device = Adafruit_DHT.DHT11
+        if terrariumDHT22Sensor.TYPE == self.get_type():
+          sensor_device = Adafruit_DHT.DHT22
+        elif terrariumAM2302Sensor.TYPE == self.get_type():
+          sensor_device = Adafruit_DHT.AM2302
+
+        data['humidity'], data['temperature'] = Adafruit_DHT.read_retry(sensor_device, terrariumUtils.to_BCM_port_number(gpio_pins[0]),4)
 
     except Exception as ex:
       logger.warning('Error getting new data from {} sensor \'{}\'. Error message: {}'.format(self.get_type(),self.get_name(),ex))
