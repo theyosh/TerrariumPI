@@ -18,9 +18,9 @@ INSTALLER_TITLE="TerrariumPI v. ${VERSION} (Python${PYTHON})"
 
 CLEANUP_PACKAGES="wolfram sonic-pi openbox nodered java openjdk chromium-browser desktop-base gnome-desktop3-data libgnome-desktop epiphany-browser-data epiphany-browser nuscratch scratch wiringpi libreoffice"
 
-PIP_MODULES="setuptools python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_GPIO Adafruit_DHT Adafruit-SHT31 luma.oled bluepy pywemo pyownet emails mh-z19 icalendar melopero-amg8833 PCA9685-driver pyfiglet"
+PIP_MODULES="setuptools python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_GPIO Adafruit-SHT31 luma.oled bluepy pywemo pyownet emails mh-z19 icalendar melopero-amg8833 PCA9685-driver pyfiglet"
 if [ $PYTHON -eq 2 ]; then
-  PIP_MODULES="${PIP_MODULES} iCalEvents==0.1.21 gevent==1.4.0"
+  PIP_MODULES="${PIP_MODULES} iCalEvents==0.1.21 gevent==1.4.0 Adafruit_DHT"
 fi
 if [ $PYTHON -eq 3 ]; then
   PIP_MODULES="${PIP_MODULES} gevent opencv-python-headless meross-iot==0.2.2.3 iCalEvents adafruit-circuitpython-sht31d mitemp_bt asyncio adafruit-circuitpython-dht"
@@ -90,7 +90,7 @@ debconf-apt-progress -- apt-get -y full-upgrade
 
 APT_PACKAGES="libftdi1 screen git subversion watchdog build-essential i2c-tools pigpio owserver sqlite3 vlc-bin ffmpeg libfreetype6-dev libjpeg-dev \
   libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libgstreamer0.10-0 libgstreamer1.0-0 libilmbase12 \
-  libopenexr22 libgtk-3-0 libxml2-dev libxslt1-dev python-twisted python-zope.interface $PYTHON_LIBS"
+  libopenexr22 libgtk-3-0 libxml2-dev libxslt1-dev python-twisted python-zope.interface libgpiod2 $PYTHON_LIBS"
 
 # libjasper1 -> Is alleen op Raspbarry ARM....
 
