@@ -7,6 +7,7 @@ import RPi.GPIO as GPIO
 
 if sys.version_info >= (3, 0):
   import adafruit_dht
+  import board
 else:
   import Adafruit_DHT
 
@@ -99,9 +100,9 @@ class terrariumDHTSensor(terrariumGPIOSensor):
 
       if sys.version_info >= (3, 0):
         if terrariumDHT11Sensor.TYPE == self.get_type():
-          sensor_device = adafruit_dht.DHT11(terrariumUtils.to_BCM_port_number(gpio_pins[0]))
+          sensor_device = adafruit_dht.DHT11(getattr(board,'D{}'.format(terrariumUtils.to_BCM_port_number(gpio_pins[0]))))
         else:
-          sensor_device = adafruit_dht.DHT22(terrariumUtils.to_BCM_port_number(gpio_pins[0]))
+          sensor_device = adafruit_dht.DHT22(getattr(board,'D{}'.format(terrariumUtils.to_BCM_port_number(gpio_pins[0]))))
 
         data['temperature'] = sensor_device.temperature
         data['humidity']    = sensor_device.humidity
