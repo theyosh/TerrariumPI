@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2020-04-13 21:21+CEST\n"
-"PO-Revision-Date: 2020-05-17 17:56+0000\n"
+"PO-Revision-Date: 2020-05-21 19:44+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: French (Belgium) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/fr_BE/>\n"
@@ -66,7 +66,7 @@ msgstr ""
 
 #: terrariumTranslations.py:33
 msgid "Holds the title of the calendar event."
-msgstr "Titre de l'événement"
+msgstr "Contient le titre de l'événement de calendrier."
 
 #: terrariumTranslations.py:34
 msgid "Holds the body of the calendar event. You can include images."
@@ -1690,7 +1690,7 @@ msgstr "Capteurs"
 #: views/hardware.tpl:16 views/hardware.tpl:87 views/inc/menu.tpl:82
 #: views/usage.tpl:19
 msgid "Switches"
-msgstr "Switches"
+msgstr "Commutateurs"
 
 #: views/hardware.tpl:19 views/hardware.tpl:119 views/inc/menu.tpl:93
 #: views/usage.tpl:22
@@ -2728,11 +2728,11 @@ msgstr "Mode de refroidissement"
 
 #: views/inc/usage_environment.tpl:332
 msgid "Cooler on"
-msgstr ""
+msgstr "Refroidisseur allumé"
 
 #: views/inc/usage_environment.tpl:338
 msgid "Cooler off"
-msgstr ""
+msgstr "Refroidisseur éteint"
 
 #: views/inc/usage_sensors.tpl:13
 msgid ""
@@ -3560,7 +3560,7 @@ msgstr "Ajouter un nouveau commutateur"
 
 #: views/switch_settings.tpl:112
 msgid "GPIO Inverse"
-msgstr ""
+msgstr "GPIO Inverse"
 
 #: views/switch_settings.tpl:113
 msgid "PWM Dimmer"
@@ -3584,7 +3584,7 @@ msgstr ""
 
 #: views/switch_settings.tpl:118
 msgid "Remote Dimmer"
-msgstr ""
+msgstr "Gradateur à distance"
 
 #: views/switch_settings.tpl:119
 msgid "Energenie USB"
@@ -3779,7 +3779,7 @@ msgstr "On"
 #: views/system_environment.tpl:1462 views/system_environment.tpl:1538
 #: views/system_environment.tpl:1673 views/system_environment.tpl:1749
 msgid "Off"
-msgstr ""
+msgstr "Non Actif"
 
 #: views/system_environment.tpl:244 views/system_environment.tpl:256
 #: views/system_environment.tpl:320 views/system_environment.tpl:332
@@ -4159,7 +4159,7 @@ msgstr ""
 
 #: views/webcam_settings.tpl:141
 msgid "Archive"
-msgstr ""
+msgstr "Fermer"
 
 #: views/webcam_settings.tpl:146
 #, fuzzy
@@ -4267,7 +4267,7 @@ msgstr ""
 
 #: Missing text string
 msgid "1Wire bus"
-msgstr ""
+msgstr "1Wire bus"
 
 #: Missing text string
 msgid "1Wire DS18B20 wiring scheme"
