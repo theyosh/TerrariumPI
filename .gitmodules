@@ -31,3 +31,6 @@
 [submodule "python-kasa"]
 	path = python-kasa
 	url = https://github.com/python-kasa/python-kasa.git
+[submodule "Adafruit_Python_DHT"]
+	path = Adafruit_Python_DHT
+	url = https://github.com/adafruit/Adafruit_Python_DHT.git
