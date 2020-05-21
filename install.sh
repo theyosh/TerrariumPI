@@ -327,10 +327,10 @@ PROGRESS=94
 # Update submodules if downloaded through tar or zip
 cd "${BASEDIR}/Adafruit_Python_DHT"
 if [ $PYTHON -eq 2 ]; then
-  sudo pip2 uninstall -y -q Adafruit_DHT
+  sudo pip2 uninstall -y -q Adafruit_DHT 2> /dev/null
   sudo python2 setup.py install
 elif [ $PYTHON -eq 3 ]; then
-  sudo pip3 uninstall -y -q Adafruit_DHT
+  sudo pip3 uninstall -y -q Adafruit_DHT 2> /dev/null
   sudo python3 setup.py install
 fi
 
@@ -343,7 +343,6 @@ Install required software (some modules will take 5-10 min.)
 Installing python${PYTHON} module: Adafruit_Python_DHT ...
 XXX
 EOF
-
 
 
 PROGRESS=96
