@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
 "POT-Creation-Date: 2020-04-13 21:21+CEST\n"
-"PO-Revision-Date: 2020-05-16 11:54+0000\n"
+"PO-Revision-Date: 2020-05-17 17:56+0000\n"
 "Last-Translator: cmonicob <cmonicob@gmail.com>\n"
 "Language-Team: Catalan <https://weblate.theyosh.nl/projects/terrariumpi/"
 "webinterface/ca/>\n"
@@ -744,7 +744,7 @@ msgstr ""
 #: terrariumWebserver.py:266 terrariumWebserver.py:286
 #: terrariumWebserver.py:298 terrariumWebserver.py:306
 msgid "Error!"
-msgstr ""
+msgstr "Error!"
 
 #: terrariumWebserver.py:274 terrariumWebserver.py:277
 msgid "OK!"
