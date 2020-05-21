@@ -273,20 +273,12 @@ Install required software (some modules will take 5-10 min.)
 Installing python${PYTHON} module ${MODULE_COUNTER} out of ${NUMBER_OF_MODULES}: ${PIP_MODULE} (attempt ${ATTEMPT}) ...
 XXX
 EOF
-    # use --install-option="--force-pi" to make sure the package Adafruit_DHT will install!
     if [ $PYTHON -eq 2 ]; then
-      if [ $PIP_MODULE == 'Adafruit_DHT' ]; then
-        pip2 install -q --install-option="--force-pi" --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
-      else
-        pip2 install -q --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
-      fi
+      pip2 install -q --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
 
     elif [ $PYTHON -eq 3 ]; then
-      if [ $PIP_MODULE == 'Adafruit_DHT' ]; then
-        pip3 install -q --install-option="--force-pi" --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
-      else
-        pip3 install -q --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
-      fi
+      pip3 install -q --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
+
     fi
 
     if [ $? -eq 0 ]; then
@@ -335,8 +327,10 @@ PROGRESS=94
 # Update submodules if downloaded through tar or zip
 cd "${BASEDIR}/Adafruit_Python_DHT"
 if [ $PYTHON -eq 2 ]; then
+  sudo pip2 uninstall -y -q Adafruit_DHT
   sudo python2 setup.py install
 elif [ $PYTHON -eq 3 ]; then
+  sudo pip3 uninstall -y -q Adafruit_DHT
   sudo python3 setup.py install
 fi
 
