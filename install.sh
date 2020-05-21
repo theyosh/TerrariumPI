@@ -303,7 +303,7 @@ EOF
 
 done
 
-PROGRESS=94
+PROGRESS=92
 # Update submodules if downloaded through tar or zip
 cd "${BASEDIR}/"
 
@@ -329,6 +329,27 @@ Install required software (some modules will take 5-10 min.)
 Installing python${PYTHON} module: Bright-Pi ...
 XXX
 EOF
+
+
+PROGRESS=94
+# Update submodules if downloaded through tar or zip
+cd "${BASEDIR}/Adafruit_Python_DHT"
+if [ $PYTHON -eq 2 ]; then
+  sudo python2 setup.py install
+elif [ $PYTHON -eq 3 ]; then
+  sudo python3 setup.py install
+fi
+
+
+cat <<EOF
+XXX
+$PROGRESS
+Install required software (some modules will take 5-10 min.)
+
+Installing python${PYTHON} module: Adafruit_Python_DHT ...
+XXX
+EOF
+
 
 
 PROGRESS=96
