@@ -362,7 +362,8 @@ msgstr ""
 
 #: terrariumTranslations.py:97
 msgid "Select the sensors to show at the marker place on the webcam."
-msgstr "Selecione os sensores a serem mostrados no local do marcador na webcam."
+msgstr ""
+"Selecione os sensores a serem mostrados no local do marcador na webcam."
 
 #: terrariumTranslations.py:101
 msgid "Holds the audio playlist name."
