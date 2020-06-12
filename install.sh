@@ -23,7 +23,7 @@ if [ $PYTHON -eq 2 ]; then
   PIP_MODULES="${PIP_MODULES} iCalEvents==0.1.21 gevent==1.4.0 luma.core==1.12.0 luma.oled"
 fi
 if [ $PYTHON -eq 3 ]; then
-  PIP_MODULES="${PIP_MODULES} gevent opencv-python-headless meross-iot==0.2.2.3 iCalEvents adafruit-circuitpython-sht31d mitemp_bt asyncio luma.oled"
+  PIP_MODULES="${PIP_MODULES} gevent opencv-python-headless meross-iot==0.2.2.3 iCalEvents adafruit-circuitpython-sht31d mitemp_bt asyncio luma.oled poetry"
 fi
 
 if [ `grep -ic " buster " /etc/apt/sources.list` -eq 2 ]; then
@@ -80,7 +80,7 @@ debconf-apt-progress -- apt-get -y remove owhttpd owftpd
 # Install required packages to get the terrarium software running
 PYTHON_LIBS="python-pip python-dev python-mediainfodll python-smbus python-pil python-opencv python-numpy python-lxml"
 if [ $PYTHON -eq 3 ]; then
-  PYTHON_LIBS="python3-pip python3-dev python3-mediainfodll python3-smbus python3-pil python3-opencv python3-numpy python3-lxml"
+  PYTHON_LIBS="python3-pip python3-dev python3-mediainfodll python3-smbus python3-pil python3-opencv python3-numpy python3-lxml python3-venv"
 fi
 
 debconf-apt-progress -- apt-get -y autoremove
@@ -349,7 +349,8 @@ PROGRESS=96
 # Update submodules if downloaded through tar or zip
 if [ $PYTHON -eq 3 ]; then
   cd "${BASEDIR}/python-kasa"
-  sudo python3 setup.py install
+  poetry build
+  sudo pip3 install -U dist/python_kasa-*.whl
 fi
 
 

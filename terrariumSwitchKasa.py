@@ -12,7 +12,7 @@ from kasa import Discover, SmartStrip, SmartPlug
 
 class terrariumPowerSwitchTPLinkKasa(terrariumPowerSwitchSource):
   TYPE = 'tplinkkasa'
-  URL = '^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$'
+  URL = '^\d{1,3}\.\d{1,3}\.\d{1,3}(,\d{1,3})?$'
 
   def __get_address(self):
     data = self.get_address().strip().split(',')
@@ -78,11 +78,20 @@ class terrariumPowerSwitchTPLinkKasa(terrariumPowerSwitchSource):
         await device.update()
         if device.is_strip:
           for counter in range(1,len(device.plugs)+1):
-            found_devices.append(terrariumPowerSwitchTPLinkKasa(md5(('{}{}{}'.format(terrariumPowerSwitchTPLinkKasa.TYPE,device.device_id,counter)).encode()).hexdigest(),
-                                      '{},{}'.format(device.host,counter),
-                                      device.plugs[counter-1].alias,
-                                      None,
-                                      callback))
+            found_devices.append(terrariumPowerSwitchTPLinkKasa(
+                                    md5(('{}{}{}'.format(terrariumPowerSwitchTPLinkKasa.TYPE,device.device_id,counter)).encode()).hexdigest(),
+                                    '{},{}'.format(device.host,counter),
+                                    device.plugs[counter-1].alias,
+                                    None,
+                                    callback))
+
+        else:
+          found_devices.append(terrariumPowerSwitchTPLinkKasa(
+                                  md5(('{}{}'.format(terrariumPowerSwitchTPLinkKasa.TYPE,device.device_id)).encode()).hexdigest(),
+                                  '{}'.format(device.host),
+                                  device.alias,
+                                  None,
+                                  callback))
     try:
       asyncio.run(scan())
     except RuntimeError as err:

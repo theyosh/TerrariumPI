@@ -39,7 +39,7 @@ class terrariumAudioPlayer(object):
       self.__hwid = hwcards[cardid]['hwid']
       self.__callback = callback
 
-      if pwmdimmer and cardid == 'bcm2835 ALSA':
+      if pwmdimmer and cardid.startswith('bcm2835'):
         logger.warning('Disabled audio playing due to hardware conflict with PWM dimmers and onboard soundcard')
       else:
         self.__load_audio_mixer()
@@ -75,7 +75,11 @@ class terrariumAudioPlayer(object):
       self.__playlists[playlist.get_id()] = playlist
 
   def __load_audio_mixer(self):
-    self.__audio_mixer = alsaaudio.Mixer(control='PCM',cardindex=self.__hwid)
+    try:
+      self.__audio_mixer = alsaaudio.Mixer(control='PCM',cardindex=self.__hwid)
+    except alsaaudio.ALSAAudioError as ex:
+      self.__audio_mixer = alsaaudio.Mixer(control='Headphone',cardindex=self.__hwid)
+
     self.mute()
 
   def __engine_loop(self):
@@ -140,9 +144,8 @@ class terrariumAudioPlayer(object):
     soundcards = {}
     for i in alsaaudio.card_indexes():
       try:
-        if 'PCM' in alsaaudio.mixers(i):
-          (name, longname) = alsaaudio.card_name(i)
-          soundcards[name] = {'hwid' : int(i), 'name' : longname}
+        (name, longname) = alsaaudio.card_name(i)
+        soundcards[name] = {'hwid' : int(i), 'name' : longname}
 
       except Exception as ex:
         # Just ignore error, and skip it
