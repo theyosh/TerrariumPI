@@ -1937,6 +1937,8 @@
                     $('div.row#environment_' + environmentpart + ' a.collapse-link').click();
                   }
                 });
+                // Make sure all triggers are fired...
+                $('select[name$=_mode]').trigger('change');
               });
             } else {
               // Not all selectors are loaded... wait for 100 miliseconds and try again
