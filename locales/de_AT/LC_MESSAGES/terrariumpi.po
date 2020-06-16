@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-05-21 21:56+CEST\n"
-"PO-Revision-Date: 2020-05-16 11:54+0000\n"
-"Last-Translator: Luke <luke.gangel87@gmail.com>\n"
+"PO-Revision-Date: 2020-06-16 19:45+0000\n"
+"Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: German (Austria) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/de_AT/>\n"
 "Language: de_AT\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.0.2\n"
+"X-Generator: Weblate 4.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumEngine.py:673 terrariumEngine.py:785 views/dashboard.tpl:7
@@ -364,6 +364,8 @@ msgstr ""
 #: terrariumTranslations.py:97
 msgid "Select the sensors to show at the marker place on the webcam."
 msgstr ""
+"Wähle die Sensoren, um ihn an der markierten Stelle auf der Kamera "
+"anzuzeigen."
 
 #: terrariumTranslations.py:101
 msgid "Holds the audio playlist name."
@@ -3481,16 +3483,12 @@ msgid "Bright Pi"
 msgstr "Bright Pi"
 
 #: views/switch_settings.tpl:116
-#, fuzzy
-#| msgid "DC Dimmer"
 msgid "PCA9685 Dimmer"
-msgstr "DC Dimmer"
+msgstr "PCA9685 Dimmer"
 
 #: views/switch_settings.tpl:117
-#, fuzzy
-#| msgid "Remote Dimmer"
 msgid "IRF520 Mosfet Dimmer"
-msgstr "Remote Dimmer"
+msgstr "IRF520 Mosfet Dimmer"
 
 #: views/switch_settings.tpl:119
 msgid "Remote Dimmer"
@@ -3534,7 +3532,7 @@ msgstr "DenkoviV2 16 Relais"
 
 #: views/switch_settings.tpl:129
 msgid "TP-Link Kasa"
-msgstr ""
+msgstr "TP-Link Kasa"
 
 #: views/switch_settings.tpl:168
 msgid "Dimmer environment step"
