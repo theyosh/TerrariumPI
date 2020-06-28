@@ -24,6 +24,10 @@ except ImportError as ex:
 sys.path.insert(0, './energenie-connect0r')
 import energenieconnector
 
+sys.path.insert(0, './relay8-rpi/python')
+from relay8 import set as relay8SetV1
+from relay8 import get as relay8GetV1
+
 from hashlib import md5
 from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
 from gpiozero import Energenie
@@ -374,6 +378,25 @@ class terrariumPowerSwitchGPIO(terrariumPowerSwitchSource):
 
 class terrariumPowerSwitchGPIOInverse(terrariumPowerSwitchGPIO):
   TYPE = 'gpio-inverse'
+
+class terrariumPowerSwitchRelay8Stack(terrariumPowerSwitchSource):
+  TYPE = '8relay-stack_v1'
+
+  def __get_addres(self):
+    address = self.address.split(',')
+    if 1 == len(address):
+        address.append(address[0])
+        address[0] = 0
+
+    return address
+
+  def set_hardware_state(self, state, force = False):
+    address = self.__get_addres()
+    relay8SetV1(address[0], address[1], 1 if state is terrariumPowerSwitch.ON else 0)
+
+  def get_hardware_state(self):
+    address = self.__get_addres()
+    relay8GetV1(address[0], address[1])
 
 class terrariumPowerSwitchWeMo(terrariumPowerSwitchSource):
   TYPE = 'wemo'
@@ -1215,6 +1238,7 @@ class terrariumPowerSwitch(object):
   POWER_SWITCHES = [terrariumPowerSwitchFTDI,
                     terrariumPowerSwitchGPIO,
                     terrariumPowerSwitchGPIOInverse,
+                    terrariumPowerSwitchRelay8Stack,
                     terrariumPowerSwitchEnergenieUSB,
                     terrariumPowerSwitchEnergenieLAN,
                     terrariumPowerSwitchEnergenieRF,
