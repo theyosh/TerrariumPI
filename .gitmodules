@@ -34,3 +34,6 @@
 [submodule "Adafruit_Python_DHT"]
 	path = Adafruit_Python_DHT
 	url = https://github.com/adafruit/Adafruit_Python_DHT.git
+[submodule "relay8-rpi"]
+	path = relay8-rpi
+	url = https://github.com/SequentMicrosystems/relay8-rpi.git

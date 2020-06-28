@@ -110,6 +110,7 @@
                                 <option value="ftdi">{{_('FTDI')}}</option>
                                 <option value="gpio">{{_('GPIO')}}</option>
                                 <option value="gpio-inverse">{{_('GPIO Inverse')}}</option>
+                                <option value="8relay-stack_v1">{{_('8-RELAYS Stack (v1 & v2)')}}</option>
                                 <option value="pwm-dimmer">{{_('PWM Dimmer')}}</option>
                                 <option value="dc-dimmer">{{_('DC Dimmer')}}</option>
                                 <option value="brightpi">{{_('Bright Pi')}}</option>
