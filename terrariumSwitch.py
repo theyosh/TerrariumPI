@@ -28,6 +28,9 @@ sys.path.insert(0, './relay8-rpi/python')
 from relay8 import set as relay8SetV1
 from relay8 import get as relay8GetV1
 
+from lib8relay import set as relay8SetV3
+from lib8relay import get as relay8GetV3
+
 from hashlib import md5
 from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
 from gpiozero import Energenie
@@ -392,11 +395,20 @@ class terrariumPowerSwitchRelay8Stack(terrariumPowerSwitchSource):
 
   def set_hardware_state(self, state, force = False):
     address = self.__get_addres()
-    relay8SetV1(address[0], address[1], 1 if state is terrariumPowerSwitch.ON else 0)
+    if self.get_type() == terrariumPowerSwitchRelay8Stack.TYPE:
+      relay8SetV1(address[0], address[1], 1 if state is terrariumPowerSwitch.ON else 0)
+    elif self.get_type() == terrariumPowerSwitchRelay8StackV3.TYPE:
+      relay8SetV3(address[0], address[1], 1 if state is terrariumPowerSwitch.ON else 0)
 
   def get_hardware_state(self):
     address = self.__get_addres()
-    relay8GetV1(address[0], address[1])
+    if self.get_type() == terrariumPowerSwitchRelay8Stack.TYPE:
+      relay8GetV1(address[0], address[1])
+    elif self.get_type() == terrariumPowerSwitchRelay8StackV3.TYPE:
+      relay8GetV3(address[0], address[1])
+
+class terrariumPowerSwitchRelay8StackV3(terrariumPowerSwitchRelay8Stack):
+  TYPE = '8relay-stack_v3'
 
 class terrariumPowerSwitchWeMo(terrariumPowerSwitchSource):
   TYPE = 'wemo'
