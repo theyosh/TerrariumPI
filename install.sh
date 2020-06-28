@@ -365,6 +365,25 @@ EOF
 
 
 PROGRESS=98
+# Update submodules if downloaded through tar or zip
+cd "${BASEDIR}/8relay-rpi/python/8relay"
+if [ $PYTHON -eq 2 ]; then
+  sudo python2 setup.py install
+elif [ $PYTHON -eq 3 ]; then
+  sudo python3 setup.py install
+fi
+
+cat <<EOF
+XXX
+$PROGRESS
+Install required software (some modules will take 5-10 min.)
+
+Installing python${PYTHON} module: TP Link Kasa ...
+XXX
+EOF
+
+
+PROGRESS=99
 cat <<EOF
 XXX
 $PROGRESS
