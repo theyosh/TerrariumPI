@@ -555,7 +555,7 @@ class terrariumPowerSwitchEnergenieRF(terrariumPowerSwitchSource):
 
 class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
   TYPE = 'sonoff'
-  VALID_SOURCE = '^http:\/\/((?P<user>[^:]+):(?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?$'
+  VALID_SOURCE = '^http:\/\/((?P<user>[^:]+):(?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?(#(?P<nr>\d+))?$'
 
   def load_hardware(self):
     self.__firmware = None
@@ -571,6 +571,8 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
     data = re.match(self.VALID_SOURCE,self.get_address())
     if data:
       data = data.groupdict()
+      if 'nr' not in data or data['nr'] == '' or data['nr'] is None:
+        data['nr'] = 1
 
       try:
         # Try Tasmota
@@ -580,16 +582,19 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
         # http://sonoff/cm?cmnd=Power%20off
         # http://sonoff/cm?user=admin&password=joker&cmnd=Power%20Toggle
 
-        url = 'http://{}/cm?cmnd=Power'.format(data['host'])
+        url = 'http://{}/cm?'.format(data['host'])
         if 'user' in data and 'password' in data:
-          url += '&user={}&password={}'.format(data['user'],data['password'])
+          url += 'user={}&password={}&'.format(data['user'],data['password'])
 
+        url += 'cmnd=Power{}'.format(data['nr'])
+      
         state = terrariumUtils.get_remote_data(url)
         if state is None:
           raise Exception('No data, jump to next test')
 
         self.__firmware = 'tasmota'
         self.__retries = 0
+        self.url = url
 
       except Exception as ex:
         print('Tasmota exceptions')
@@ -676,9 +681,7 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
       url = None
 
       if 'tasmota' == self.__firmware:
-        url = 'http://{}/cm?cmnd=Power%20{}'.format(data['host'],('1' if state else '0'))
-        if 'user' in data and 'password' in data:
-          url += '&user={}&password={}'.format(data['user'],data['password'])
+        url = self.url + '%20{}'.format('1' if state else '0')
 
       elif 'espeasy' == self.__firmware:
         url = 'http://{}/control?cmd=event,T{}'.format(data['host'],('1' if state else '0'))
@@ -711,9 +714,7 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
       url = None
 
       if 'tasmota' == self.__firmware:
-        url = 'http://{}/cm?cmnd=Power'.format(data['host'])
-        if 'user' in data and 'password' in data:
-          url += '&user={}&password={}'.format(data['user'],data['password'])
+        url = self.url
 
       elif 'espeasy' == self.__firmware:
         url = 'http://{}/json'.format(data['host'])
