@@ -637,7 +637,7 @@ class terrariumEngine(object):
           #self.power_switches[power_switch_id].timer()
           # Update the current sensor.
           self.power_switches[power_switch_id].update()
-          if self.power_switches[power_switch_id].is_on():
+          if self.power_switches[power_switch_id].get_state() > 0:
             power_state = '{}%'.format(self.power_switches[power_switch_id].get_state())
             if not self.power_switches[power_switch_id].is_dimmer():
               power_state = 'on' if self.power_switches[power_switch_id].is_on() else 'off'
