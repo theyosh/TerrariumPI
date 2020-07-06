@@ -69,6 +69,7 @@ class terrariumI2CSensor(terrariumSensorSource):
 
     except Exception as ex:
       logger.warning('Error opening {} sensor \'{}\'. Error message: {}'.format(self.get_type(),self.get_name(),ex))
+      self.close()
       return False
 
     return True
@@ -231,7 +232,7 @@ class terrariumBME280Sensor(terrariumI2CSensor):
       sensor_data['altitude'] = round(44330.0*sensor_data['altitude'], 3)
 
     except Exception as ex:
-      print('load_raw_data temp:')
+      print('terrariumBME280Sensor Ex:')
       print(ex)
 
     return sensor_data
