@@ -10,7 +10,7 @@ The software is that flexible that there is no limit in amount of sensors, relay
 
 If you are using this software for your animals or plants, **[please post some pictures](https://github.com/theyosh/TerrariumPI/issues/210)**
 
-It can either run on Python 2.7 or [Python 3.5+](https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-use-python-35)
+It can either run on Python 2.7 or [Python 3.5+](https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-use-python-35). Prefered is Python3
 
 Think off:
 - Terrarium (wet or dry)
@@ -114,7 +114,7 @@ The software has support for the following languages:
 Your language not in the list or not up to date? [Create your own language translation](https://github.com/theyosh/TerrariumPI/wiki/Translations) <a href="https://weblate.theyosh.nl/engage/terrariumpi/?utm_source=widget"><img src="https://weblate.theyosh.nl/widgets/terrariumpi/-/webinterface/svg-badge.svg" alt="Translation status" /></a>
 
 ## Installation
-The installation expects a Pi with working network and ssh. It is tested with [Raspbian Stretch Lite](https://www.raspberrypi.org/downloads/raspbian/). For now the Full version is not working somehow.... So use the lite image! A new installation will take about 45 minutes. This is due to manually compiling python modules for the latest versions. Upgrades will go much faster.
+The installation expects a Pi with working network and ssh. It is tested with [Raspberry Pi OS Lite](https://www.raspberrypi.org/downloads/raspbian/). For now the Full version is not working somehow.... So use the lite image! A new installation will take about 45 minutes. This is due to manually compiling python modules for the latest versions. Upgrades will go much faster.
 1. Get a working Raspberry Pi and login as user 'pi'  
   `ssh pi@[raspberry_ip]`
 2. Install git  
@@ -124,7 +124,7 @@ The installation expects a Pi with working network and ssh. It is tested with [R
 4. Enter the new TerrariumPI folder  
   `cd TerrariumPI`
 5. Run the installer script and wait  
-  `sudo ./install.sh`
+  `sudo ./install.sh 3`
 6. Reboot Raspberry PI to get all the needed modules loaded  
   `sudo reboot`
 7. Go to the webinterface at http://[raspberry_ip]:8090
@@ -142,7 +142,7 @@ This updating is based on that the software is installed with the steps in the I
 3. Update the new code with git  
   `git pull`
 4. Re-run the installation script in order to update software dependencies  
-  `sudo ./install.sh`
+  `sudo ./install.sh 3`
 4. Restart TerrariumPI according to: https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-restart-terrariumpi
 
 Now **clear your browser cache** and reload the webinterface. A brand new version should be running.
@@ -152,7 +152,7 @@ This software requires a Raspberry Pi and some extra hardware in order to run an
 - Raspberry PI with at least **4GB SD card**
   - Pi 2
   - Pi 3
-  - Zero
+  - Zero (At own risk/no support)
 - Power relay board
   - USB versions (Serial and Bitbang)
   - GPIO versions
