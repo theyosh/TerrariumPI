@@ -202,9 +202,14 @@ class terrariumBME280Sensor(terrariumI2CSensor):
   VALID_SENSOR_TYPES = ['temperature','humidity','altitude','pressure']
 
   def __get_address(self):
-    (address,*bus) = self.get_address().split(',')
-    address = int('0x' + address,16)
-    bus = 1 if len(bus) == 0 else int(bus[0])
+    address = self.get_address().split(',')
+    bus = 1 if len(address) == 1 else int(address[1])
+    address = int('0x' + address[0],16)
+
+
+    # (address,*bus) = self.get_address().split(',')
+    # address = int('0x' + address,16)
+    # bus = 1 if len(bus) == 0 else int(bus[0])
     return (address,bus)
 
   def load_raw_data(self):
