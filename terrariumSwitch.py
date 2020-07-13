@@ -448,20 +448,82 @@ class terrariumPowerSwitchWeMo(terrariumPowerSwitchSource):
 
 class terrariumPowerSwitchEnergenieUSB(terrariumPowerSwitchSource):
   TYPE = 'eg-pm-usb'
+  CMD = '/usr/bin/sispmctl'
 
   def load_hardware(self):
-    # We have per device 4 outlets.... so outlet 7 is device 1
-    self.__device = (int(self.get_address())-1) / 4
-    if self.__device < 0:
-      self.__device = 0
+    address = self.get_address().strip().split(',')
+    self.__socket_nr = int(address[0].strip())
+    # Default we use the device counter option
+    self.__device_type = '-d'
+    # Check if custom device number or serial is entered
+    self.__device = 0 if len(address) == 1 else address[1].strip()
+    # If the device is not a number, it should be a string with an identifier in it
+    if not terrariumUtils.is_float(self.__device):
+      # Use the device serial identification
+      self.__device_type = '-D'
+    else:
+      # If the user has enterd a number, it is probaly 1 to high. A human will enter device number 1 and not zero....
+      self.__device = int(self.__device) - 1
 
   def set_hardware_state(self, state, force = False):
-    address = int(self.get_address()) % 4
-    if address == 0:
-      address = 4
-
-    cmd = ['/usr/bin/sispmctl', '-d',str(self.__device),('-o' if state is terrariumPowerSwitch.ON else '-f'),str(address)]
+    cmd = ['/usr/bin/sispmctl', self.__device_type, str(self.__device),('-o' if state is terrariumPowerSwitch.ON else '-f'),str(self.__socket_nr)]
     subprocess.check_output(cmd)
+
+  def get_hardware_state(self):
+    status_regex = r'Status of outlet ' + str(self.__socket_nr) + ':\s*(?P<status>[0,1])'
+
+    cmd = ['/usr/bin/sispmctl', self.__device_type, str(self.__device),'-n','-g',str(self.__socket_nr)]
+    data = subprocess.check_output(cmd).strip().decode('utf-8').split('\n')
+    for line in data:
+      line = re.match(status_regex,line)
+      if line is not None:
+        line = line.groupdict()
+        return terrariumPowerSwitch.ON if int(line['status']) == 1 else terrariumPowerSwitch.OFF
+
+    # Could not read out, so return nothing...
+    return None
+
+  @staticmethod
+  def scan_power_switches(callback=None, **kwargs):
+    switch_type = terrariumPowerSwitchEnergenieUSB.TYPE
+    scan_regex = r'^(?P<option>[^:]+):\s*(?P<value>.*)$'
+
+    cmd = [terrariumPowerSwitchEnergenieUSB.CMD,'-s']
+    data = subprocess.check_output(cmd).strip().decode('utf-8').split('\n')
+
+    amount_sockets = None
+    serial = None
+    device_nr = 0
+
+    for line in data:
+      line = re.match(scan_regex,line)
+      if line is not None:
+        line = line.groupdict()
+        if 'device type' == line['option']:
+          # By default we have 4 sockets.... not sure..
+          amount_sockets = 4
+          amount_regex = r'(?P<amount>\d+)'
+          value = re.match(scan_regex,line['value'])
+          if value is not None:
+            value = value.groupdict()
+            amount_sockets = int(value['amount'])
+
+        elif 'serial number' == line['option'] and amount_sockets is not None:
+          serial = line['value']
+
+          # New switches can be added....
+          device_nr += 1
+          for x in range(1,amount_sockets+1):
+            yield terrariumPowerSwitch(md5((switch_type + str(x) + ',' + str(serial)).encode()).hexdigest(),
+                                 switch_type,
+                                 '{},{}'.format(x,serial),
+                                 '{} device nr: {}, Socket: {}'.format(switch_type,device_nr,x),
+                                 None,
+                                 callback)
+
+          amount_sockets = None
+
+
 
 class terrariumPowerSwitchEnergenieLAN(terrariumPowerSwitchSource):
   TYPE = 'eg-pm-lan'
