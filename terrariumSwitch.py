@@ -489,7 +489,11 @@ class terrariumPowerSwitchEnergenieUSB(terrariumPowerSwitchSource):
     scan_regex = r'^(?P<option>[^:]+):\s*(?P<value>.*)$'
 
     cmd = [terrariumPowerSwitchEnergenieUSB.CMD,'-s']
-    data = subprocess.check_output(cmd).strip().decode('utf-8').split('\n')
+
+    try:
+      data = subprocess.check_output(cmd).strip().decode('utf-8').split('\n')
+    except subprocess.CalledProcessError as ex:
+      return False
 
     amount_sockets = None
     serial = None
