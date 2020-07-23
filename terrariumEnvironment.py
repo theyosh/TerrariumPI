@@ -801,6 +801,22 @@ class terrariumEnvironment(object):
             # Use the extra added sensors for finetuning the trigger action
             toggle_on_alarm_max = environment_part.is_alarm_max()
 
+        # There is an extra lights check. Only allow power on when the lights are in the same state as the environment light status, else force to off
+        if 'ignore' != environment_part.get_alarm_min_light_state() and toggle_on_alarm_min is not False:
+          # Check if the switch should be off
+          if environment_part.get_alarm_min_light_state() != 'on' if self.light_on() else 'off':
+            # Switch should be set to off... so force to False to make sure the power will be shutdown if there is still power running...
+            logger.debug('Forcing alarm low to off due to lights off')
+            toggle_on_alarm_min = False
+
+        # There is an extra lights check. Only allow power on when the lights are in the same state as the environment light status, else force to off
+        if 'ignore' != environment_part.get_alarm_max_light_state() and toggle_on_alarm_max is not False:
+          # Check if the switch should be off
+          if environment_part.get_alarm_max_light_state() != 'on' if self.light_on() else 'off':
+            # Switch should be set to off... so force to False to make sure the power will be shutdown if there is still power running...
+            logger.debug('Forcing alarm high to off due to lights off')
+            toggle_on_alarm_max = False
+
         logger.debug('Environment %s is has alarm_min: %s, alarm_max: %s, trigger?: %s' % (environment_part.get_type(),toggle_on_alarm_min,toggle_on_alarm_max,trigger))
 
         if toggle_on_alarm_min is not None and not environment_part.has_alarm_min_powerswitches():
