@@ -448,7 +448,7 @@ class terrariumPowerSwitchWeMo(terrariumPowerSwitchSource):
 
 class terrariumPowerSwitchEnergenieUSB(terrariumPowerSwitchSource):
   TYPE = 'eg-pm-usb'
-  CMD = '/usr/bin/sispmctl'
+  CMD = '/usr/local/bin/sispmctl' if os.path.exists('/usr/local/bin/sispmctl') else '/usr/bin/sispmctl'
 
   def load_hardware(self):
     address = self.get_address().strip().split(',')
@@ -466,13 +466,13 @@ class terrariumPowerSwitchEnergenieUSB(terrariumPowerSwitchSource):
       self.__device = int(self.__device) - 1
 
   def set_hardware_state(self, state, force = False):
-    cmd = ['/usr/bin/sispmctl', self.__device_type, str(self.__device),('-o' if state is terrariumPowerSwitch.ON else '-f'),str(self.__socket_nr)]
+    cmd = [self.CMD, self.__device_type, str(self.__device),('-o' if state is terrariumPowerSwitch.ON else '-f'),str(self.__socket_nr)]
     subprocess.check_output(cmd)
 
   def get_hardware_state(self):
     status_regex = r'Status of outlet ' + str(self.__socket_nr) + ':\s*(?P<status>[0,1])'
 
-    cmd = ['/usr/bin/sispmctl', self.__device_type, str(self.__device),'-n','-g',str(self.__socket_nr)]
+    cmd = [self.CMD, self.__device_type, str(self.__device),'-n','-g',str(self.__socket_nr)]
     data = subprocess.check_output(cmd).strip().decode('utf-8').split('\n')
     for line in data:
       line = re.match(status_regex,line)
