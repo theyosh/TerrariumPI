@@ -133,11 +133,14 @@ class terrariumEngine(object):
     logger.info('Done loading terrariumPI PI volume indicator')
 
     # Load Weather part
-    logger.info('Loading terrariumPI weather data')
-    self.weather = terrariumWeather(self.config.get_weather_location(),
-                                    self.get_temperature_indicator,
-                                    self.get_windspeed_indicator,
-                                    self.get_weather)
+    self.weather = None
+    if self.config.get_weather_location():
+      logger.info('Loading terrariumPI weather data')
+      self.weather = terrariumWeather(self.config.get_weather_location(),
+                                      self.get_temperature_indicator,
+                                      self.get_windspeed_indicator,
+                                      self.get_weather)
+
     logger.info('Done loading terrariumPI weather data')
 
     # Load humidity and temperature sensors
@@ -605,10 +608,11 @@ class terrariumEngine(object):
                   'error' : ''}
 
       # Update weather
-      self.weather.update()
-      weather_data = self.weather.get_data()
-      if 'hour_forecast' in weather_data and len(weather_data['hour_forecast']) > 0:
-        self.collector.log_weather_data(weather_data['hour_forecast'][0])
+      if self.weather is not None:
+        self.weather.update()
+        weather_data = self.weather.get_data()
+        if 'hour_forecast' in weather_data and len(weather_data['hour_forecast']) > 0:
+          self.collector.log_weather_data(weather_data['hour_forecast'][0])
 
       # Update sensors
       for sensorid in self.sensors:
@@ -908,13 +912,18 @@ reset=$(tput sgr0)
     return self.config.save_weather(data)
 
   def get_weather_config(self):
+    if self.weather is None:
+      return {}
+
     return self.weather.get_config()
 
   def get_weather(self, parameters = [], socket = False):
+
     try:
       data = self.weather.get_data()
     except Exception as ex:
-      logger.error('Strange weather.. error https://github.com/theyosh/TerrariumPI/issues/246: {}'.format(ex))
+      # This is happening when during startup the data changes... so save to ignore
+#      logger.error('Strange weather.. error https://github.com/theyosh/TerrariumPI/issues/246: {}'.format(ex))
       return None
 
     self.environment.update()
@@ -1431,9 +1440,11 @@ reset=$(tput sgr0)
   def get_uptime(self, socket = False):
     data = {'uptime' : uptime.uptime(),
             'timestamp' : int(time.time()),
-            'day' : self.weather.is_day(),
             'load' : os.getloadavg(),
             'cores' : psutil.cpu_count()}
+
+    if self.weather is not None:
+      data['day'] = self.weather.is_day()
 
     if socket:
       self.__send_message({'type':'uptime','data':data})
