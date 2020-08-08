@@ -527,7 +527,7 @@ class terrariumConfig(object):
   def get_available_languages(self):
     '''Get terrariumPI available languages'''
     if self.__cache_available_languages is None:
-      self.__cache_available_languages = [language.replace('locales/','').replace('/','') for language in glob("locales/*/")]
+      self.__cache_available_languages = ['en'] + [language.replace('locales/','').replace('/','') for language in glob("locales/*/")]
 
     return self.__cache_available_languages
 
