@@ -331,7 +331,7 @@
                 volume_indicator.val(data.volume_indicator).trigger('change');
 
                 $.get($('form').attr('action'),function(data){
-                  $.each(data.available_languages,function(index,value){
+                  $.each(data.available_languages.sort(),function(index,value){
                     language_selector.append($('<option>').attr({'value':value}).text(value));
                   });
                   $.each(Object.keys(data), function(key,value){

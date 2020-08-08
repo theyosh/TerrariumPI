@@ -340,9 +340,29 @@ function formatCurrency(amount,minfrac,maxfrac) {
   minfrac = minfrac || 2;
   maxfrac = maxfrac || 2;
 
+  var display = 'EUR';
+  switch (globals.language) {
+    case 'ca':
+      display = 'CAD';
+      break;
+
+    case 'en_GB':
+      display = 'GBP';
+      break;
+
+   case 'en_US':
+     display = 'USD';
+     break
+
+   case 'nb_NO':
+    display = 'NOK'
+    break;
+
+  }
+
   return (1 * amount).toLocaleString(globals.language.replace('_','-'), {
     style: 'currency',
-    currency: 'EUR',
+    currency: display,
     minimumFractionDigits: minfrac,
     maximumFractionDigits: maxfrac
   });
