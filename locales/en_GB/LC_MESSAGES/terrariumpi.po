@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
-"POT-Creation-Date: 2020-08-08 11:48+CEST\n"
+"POT-Creation-Date: 2020-08-08 13:02+CEST\n"
 "PO-Revision-Date: 2020-08-08 11:48+0200\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
@@ -14,7 +14,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-
 
 #: terrariumEngine.py:677 terrariumEngine.py:789 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
@@ -54,8 +53,12 @@ msgid "Holds the external source URL. Supported sources are: %s."
 msgstr "Holds the external source URL. Supported sources are: %s."
 
 #: terrariumTranslations.py:29
-msgid "Choose the wind speed indicator. The software will recalculate to the chosen indicator."
-msgstr "Choose the wind speed indicator. The software will recalculate to the chosen indicator."
+msgid ""
+"Choose the wind speed indicator. The software will recalculate to the chosen "
+"indicator."
+msgstr ""
+"Choose the wind speed indicator. The software will recalculate to the chosen "
+"indicator."
 
 #: terrariumTranslations.py:33
 msgid "Holds the title of the calendar event."
@@ -70,8 +73,16 @@ msgid "Holds the sensor hardware type. Supported hardware types are: %s."
 msgstr "Holds the sensor hardware type. Supported hardware types are: %s."
 
 #: terrariumTranslations.py:39
-msgid "Holds the sensor address. Depending on hardware type, it is either a read only hex number, a GPIO pin, a GPIO pin combination of %s or a full HTTP(S) address. Full url specification can be found on the %s wiki page. For GPIO use <strong>physical</strong> GPIO pin numbering."
-msgstr "Holds the sensor address. Depending on hardware type, it is either a read only hex number, a GPIO pin, a GPIO pin combination of %s or a full HTTP(S) address. Full url specification can be found on the %s wiki page. For GPIO use <strong>physical</strong> GPIO pin numbering."
+msgid ""
+"Holds the sensor address. Depending on hardware type, it is either a read "
+"only hex number, a GPIO pin, a GPIO pin combination of %s or a full HTTP(S) "
+"address. Full url specification can be found on the %s wiki page. For GPIO "
+"use <strong>physical</strong> GPIO pin numbering."
+msgstr ""
+"Holds the sensor address. Depending on hardware type, it is either a read "
+"only hex number, a GPIO pin, a GPIO pin combination of %s or a full HTTP(S) "
+"address. Full url specification can be found on the %s wiki page. For GPIO "
+"use <strong>physical</strong> GPIO pin numbering."
 
 #: terrariumTranslations.py:39
 msgid "Remote data"
@@ -86,12 +97,20 @@ msgid "Holds the name of the sensor."
 msgstr "Holds the name of the sensor."
 
 #: terrariumTranslations.py:42
-msgid "Holds the sensor lower alarm value of the sensor. When below this value, alarms can be triggered."
-msgstr "Holds the sensor lower alarm value of the sensor. When below this value, alarms can be triggered."
+msgid ""
+"Holds the sensor lower alarm value of the sensor. When below this value, "
+"alarms can be triggered."
+msgstr ""
+"Holds the sensor lower alarm value of the sensor. When below this value, "
+"alarms can be triggered."
 
 #: terrariumTranslations.py:43
-msgid "Holds the sensor maximum alarm value of the sensor. When above this value, alarms can be triggered."
-msgstr "Holds the sensor maximum alarm value of the sensor. When above this value, alarms can be triggered."
+msgid ""
+"Holds the sensor maximum alarm value of the sensor. When above this value, "
+"alarms can be triggered."
+msgstr ""
+"Holds the sensor maximum alarm value of the sensor. When above this value, "
+"alarms can be triggered."
 
 #: terrariumTranslations.py:44
 msgid "Holds the sensor lowest value that should be used in the graphs."
@@ -130,8 +149,14 @@ msgid "Holds the switch hardware type. Supported hardware types are: %s."
 msgstr "Holds the switch hardware type. Supported hardware types are: %s."
 
 #: terrariumTranslations.py:55
-msgid "Holds the switch address. Depending on hardware type, it is either a number or GPIO pin. For GPIO and PWM-Dimmer use <strong>physical</strong> GPIO pin numbering."
-msgstr "Holds the switch address. Depending on hardware type, it is either a number or GPIO pin. For GPIO and PWM-Dimmer use <strong>physical</strong> GPIO pin numbering."
+msgid ""
+"Holds the switch address. Depending on hardware type, it is either a number "
+"or GPIO pin. For GPIO and PWM-Dimmer use <strong>physical</strong> GPIO pin "
+"numbering."
+msgstr ""
+"Holds the switch address. Depending on hardware type, it is either a number "
+"or GPIO pin. For GPIO and PWM-Dimmer use <strong>physical</strong> GPIO pin "
+"numbering."
 
 #: terrariumTranslations.py:56
 msgid "Holds the switch name."
@@ -146,8 +171,12 @@ msgid "Holds the switch water flow in liters per minute when switched on"
 msgstr "Holds the switch water flow in liters per minute when switched on"
 
 #: terrariumTranslations.py:59
-msgid "Enable or disable timer functionality. When enabled you can specify the timing below."
-msgstr "Enable or disable timer functionality. When enabled you can specify the timing below."
+msgid ""
+"Enable or disable timer functionality. When enabled you can specify the "
+"timing below."
+msgstr ""
+"Enable or disable timer functionality. When enabled you can specify the "
+"timing below."
 
 #: terrariumTranslations.py:60
 msgid "Holds the timer start time. The timer will run after this start time."
@@ -158,40 +187,64 @@ msgid "Holds the timer stop time. The timer will stop after this start time."
 msgstr "Holds the timer stop time. The timer will stop after this start time."
 
 #: terrariumTranslations.py:62
-msgid "Holds the period in minutes that the power switch is on withing the total timer window."
-msgstr "Holds the period in minutes that the power switch is on withing the total timer window."
+msgid ""
+"Holds the period in minutes that the power switch is on withing the total "
+"timer window."
+msgstr ""
+"Holds the period in minutes that the power switch is on withing the total "
+"timer window."
 
 #: terrariumTranslations.py:63
-msgid "Holds the period in minutes that the power switch is off withing the total timer window."
-msgstr "Holds the period in minutes that the power switch is off withing the total timer window."
+msgid ""
+"Holds the period in minutes that the power switch is off withing the total "
+"timer window."
+msgstr ""
+"Holds the period in minutes that the power switch is off withing the total "
+"timer window."
 
 #: terrariumTranslations.py:64
-msgid "Holds the amount of seconds for the duration in which the dimmer changes to the new value."
-msgstr "Holds the amount of seconds for the duration in which the dimmer changes to the new value."
+msgid ""
+"Holds the amount of seconds for the duration in which the dimmer changes to "
+"the new value."
+msgstr ""
+"Holds the amount of seconds for the duration in which the dimmer changes to "
+"the new value."
 
 #: terrariumTranslations.py:65
-msgid "Holds the amount in percentage to change the dimmer by the heater environment."
-msgstr "Holds the amount in percentage to change the dimmer by the heater environment."
+msgid ""
+"Holds the amount in percentage to change the dimmer by the heater "
+"environment."
+msgstr ""
+"Holds the amount in percentage to change the dimmer by the heater "
+"environment."
 
 #: terrariumTranslations.py:66
-msgid "Holds the amount of seconds for the duration in which it increases the power."
-msgstr "Holds the amount of seconds for the duration in which it increases the power."
+msgid ""
+"Holds the amount of seconds for the duration in which it increases the power."
+msgstr ""
+"Holds the amount of seconds for the duration in which it increases the power."
 
 #: terrariumTranslations.py:67
 msgid "Holds the amount in percentage to go to when switched on."
 msgstr "Holds the amount in percentage to go to when switched on."
 
 #: terrariumTranslations.py:68
-msgid "Holds the amount of seconds for the duration in which it decresses the power."
-msgstr "Holds the amount of seconds for the duration in which it decresses the power."
+msgid ""
+"Holds the amount of seconds for the duration in which it decresses the power."
+msgstr ""
+"Holds the amount of seconds for the duration in which it decresses the power."
 
 #: terrariumTranslations.py:69
 msgid "Holds the amount in percentage to go to when switched off."
 msgstr "Holds the amount in percentage to go to when switched off."
 
 #: terrariumTranslations.py:70
-msgid "Enter the name of the hardware device that has been replace. Will be used for title in the reminder."
-msgstr "Enter the name of the hardware device that has been replace. Will be used for title in the reminder."
+msgid ""
+"Enter the name of the hardware device that has been replace. Will be used "
+"for title in the reminder."
+msgstr ""
+"Enter the name of the hardware device that has been replace. Will be used "
+"for title in the reminder."
 
 #: terrariumTranslations.py:71
 msgid "Enter the amount of days/weeks/months/years to reminder."
@@ -206,8 +259,12 @@ msgid "Holds the door hardware type. Supported hardware types are: %s."
 msgstr "Holds the door hardware type. Supported hardware types are: %s."
 
 #: terrariumTranslations.py:77
-msgid "Holds the door address. When using GPIO use <strong>physical</strong> GPIO pin numbering as address."
-msgstr "Holds the door address. When using GPIO use <strong>physical</strong> GPIO pin numbering as address."
+msgid ""
+"Holds the door address. When using GPIO use <strong>physical</strong> GPIO "
+"pin numbering as address."
+msgstr ""
+"Holds the door address. When using GPIO use <strong>physical</strong> GPIO "
+"pin numbering as address."
 
 #: terrariumTranslations.py:78
 msgid "Holds the door name."
@@ -262,16 +319,32 @@ msgid "Enable or disable motion boxes for Motion archiving."
 msgstr "Enable or disable motion boxes for Motion archiving."
 
 #: terrariumTranslations.py:94
-msgid "Minimum difference between frames to be identified as motion. Higher value means that the image must be more different for motion to be detected."
-msgstr "Minimum difference between frames to be identified as motion. Higher value means that the image must be more different for motion to be detected."
+msgid ""
+"Minimum difference between frames to be identified as motion. Higher value "
+"means that the image must be more different for motion to be detected."
+msgstr ""
+"Minimum difference between frames to be identified as motion. Higher value "
+"means that the image must be more different for motion to be detected."
 
 #: terrariumTranslations.py:95
-msgid "Minimum area of an image in pixels for a region to be considered motion. Larger values mean that only larger areas will be detected as motion."
-msgstr "Minimum area of an image in pixels for a region to be considered motion. Larger values mean that only larger areas will be detected as motion."
+msgid ""
+"Minimum area of an image in pixels for a region to be considered motion. "
+"Larger values mean that only larger areas will be detected as motion."
+msgstr ""
+"Minimum area of an image in pixels for a region to be considered motion. "
+"Larger values mean that only larger areas will be detected as motion."
 
 #: terrariumTranslations.py:96
-msgid "Last frame means that only consecutive frames will be compared for motion. Last archived frame means that the current frame will be compared to the last archived frame. Setting to last frame will ignore motion when it is very gradual."
-msgstr "Last frame means that only consecutive frames will be compared for motion. Last archived frame means that the current frame will be compared to the last archived frame. Setting to last frame will ignore motion when it is very gradual."
+msgid ""
+"Last frame means that only consecutive frames will be compared for motion. "
+"Last archived frame means that the current frame will be compared to the "
+"last archived frame. Setting to last frame will ignore motion when it is "
+"very gradual."
+msgstr ""
+"Last frame means that only consecutive frames will be compared for motion. "
+"Last archived frame means that the current frame will be compared to the "
+"last archived frame. Setting to last frame will ignore motion when it is "
+"very gradual."
 
 #: terrariumTranslations.py:97
 msgid "Select the sensors to show at the marker place on the webcam."
@@ -302,12 +375,24 @@ msgid "Toggle on to enable shuffeling of the audio files."
 msgstr "Toggle on to enable shuffeling of the audio files."
 
 #: terrariumTranslations.py:107
-msgid "Select the audio files for this playlist. It is possible to select the same audio file in multiple playlists."
-msgstr "Select the audio files for this playlist. It is possible to select the same audio file in multiple playlists."
+msgid ""
+"Select the audio files for this playlist. It is possible to select the same "
+"audio file in multiple playlists."
+msgstr ""
+"Select the audio files for this playlist. It is possible to select the same "
+"audio file in multiple playlists."
 
 #: terrariumTranslations.py:111
-msgid "Select the mode on which this environment part be put on and off. Select '%s' to use the sun rise and sun set at your location. This will make the amount of lighting variable to the actual amount of daylight. When selecting '%s', the light will put on and off at selected times."
-msgstr "Select the mode on which this environment part be put on and off. Select '%s' to use the sun rise and sun set at your location. This will make the amount of lighting variable to the actual amount of daylight. When selecting '%s', the light will put on and off at selected times."
+msgid ""
+"Select the mode on which this environment part be put on and off. Select "
+"'%s' to use the sun rise and sun set at your location. This will make the "
+"amount of lighting variable to the actual amount of daylight. When selecting "
+"'%s', the light will put on and off at selected times."
+msgstr ""
+"Select the mode on which this environment part be put on and off. Select "
+"'%s' to use the sun rise and sun set at your location. This will make the "
+"amount of lighting variable to the actual amount of daylight. When selecting "
+"'%s', the light will put on and off at selected times."
 
 #: terrariumTranslations.py:111 terrariumTranslations.py:115
 #: terrariumTranslations.py:116 views/dashboard.tpl:83 views/dashboard.tpl:118
@@ -337,56 +422,116 @@ msgid "Weather"
 msgstr "Weather"
 
 #: terrariumTranslations.py:112
-msgid "Select the sensors that are used to control this environment part. When selecting multiple sensors, the average is calculated to determine the final values."
-msgstr "Select the sensors that are used to control this environment part. When selecting multiple sensors, the average is calculated to determine the final values."
+msgid ""
+"Select the sensors that are used to control this environment part. When "
+"selecting multiple sensors, the average is calculated to determine the final "
+"values."
+msgstr ""
+"Select the sensors that are used to control this environment part. When "
+"selecting multiple sensors, the average is calculated to determine the final "
+"values."
 
 #: terrariumTranslations.py:113
-msgid "Holds the value in degrees which the sensors are changing when it become night. Use positive numbers to increase the values and negative numbers to lower the values."
-msgstr "Holds the value in degrees which the sensors are changing when it become night. Use positive numbers to increase the values and negative numbers to lower the values."
+msgid ""
+"Holds the value in degrees which the sensors are changing when it become "
+"night. Use positive numbers to increase the values and negative numbers to "
+"lower the values."
+msgstr ""
+"Holds the value in degrees which the sensors are changing when it become "
+"night. Use positive numbers to increase the values and negative numbers to "
+"lower the values."
 
 #: terrariumTranslations.py:114
 msgid "Holds the source that is used to determing when it is day or night."
 msgstr "Holds the source that is used to determing when it is day or night."
 
 #: terrariumTranslations.py:115
-msgid "Enter the time when this environment part should be put on. Only available when running in '%s' mode."
-msgstr "Enter the time when this environment part should be put on. Only available when running in '%s' mode."
+msgid ""
+"Enter the time when this environment part should be put on. Only available "
+"when running in '%s' mode."
+msgstr ""
+"Enter the time when this environment part should be put on. Only available "
+"when running in '%s' mode."
 
 #: terrariumTranslations.py:116
-msgid "Enter the time when this environment part should be put off. Only available when running in '%s' mode."
-msgstr "Enter the time when this environment part should be put off. Only available when running in '%s' mode."
+msgid ""
+"Enter the time when this environment part should be put off. Only available "
+"when running in '%s' mode."
+msgstr ""
+"Enter the time when this environment part should be put off. Only available "
+"when running in '%s' mode."
 
 #: terrariumTranslations.py:117
-msgid "Holds the period in minutes that this environment part is powered on withing the total timer window."
-msgstr "Holds the period in minutes that this environment part is powered on withing the total timer window."
+msgid ""
+"Holds the period in minutes that this environment part is powered on withing "
+"the total timer window."
+msgstr ""
+"Holds the period in minutes that this environment part is powered on withing "
+"the total timer window."
 
 #: terrariumTranslations.py:118
-msgid "Holds the period in minutes that this environment part is powered off withing the total timer window."
-msgstr "Holds the period in minutes that this environment part is powered off withing the total timer window."
+msgid ""
+"Holds the period in minutes that this environment part is powered off "
+"withing the total timer window."
+msgstr ""
+"Holds the period in minutes that this environment part is powered off "
+"withing the total timer window."
 
 #: terrariumTranslations.py:119
-msgid "How much time must there be between two actions and after start up. Enter the amount of seconds in which this environment part can settle."
-msgstr "How much time must there be between two actions and after start up. Enter the amount of seconds in which this environment part can settle."
+msgid ""
+"How much time must there be between two actions and after start up. Enter "
+"the amount of seconds in which this environment part can settle."
+msgstr ""
+"How much time must there be between two actions and after start up. Enter "
+"the amount of seconds in which this environment part can settle."
 
 #: terrariumTranslations.py:120
-msgid "Holds the amount of seconds that this environment part is powered on when the value is out of range."
-msgstr "Holds the amount of seconds that this environment part is powered on when the value is out of range."
+msgid ""
+"Holds the amount of seconds that this environment part is powered on when "
+"the value is out of range."
+msgstr ""
+"Holds the amount of seconds that this environment part is powered on when "
+"the value is out of range."
 
 #: terrariumTranslations.py:121
-msgid "Enter the maximum amount of time in hours. When the time between on and off is more then this maximum, the on and off time will be shifted more to each other."
-msgstr "Enter the maximum amount of time in hours. When the time between on and off is more then this maximum, the on and off time will be shifted more to each other."
+msgid ""
+"Enter the maximum amount of time in hours. When the time between on and off "
+"is more then this maximum, the on and off time will be shifted more to each "
+"other."
+msgstr ""
+"Enter the maximum amount of time in hours. When the time between on and off "
+"is more then this maximum, the on and off time will be shifted more to each "
+"other."
 
 #: terrariumTranslations.py:122
-msgid "Enter the minimum amount of time in hours. When the time between on and off is less then this amount of hours, the on and off time will be widened until the minimum amount of hours entered here."
-msgstr "Enter the minimum amount of time in hours. When the time between on and off is less then this amount of hours, the on and off time will be widened until the minimum amount of hours entered here."
+msgid ""
+"Enter the minimum amount of time in hours. When the time between on and off "
+"is less then this amount of hours, the on and off time will be widened until "
+"the minimum amount of hours entered here."
+msgstr ""
+"Enter the minimum amount of time in hours. When the time between on and off "
+"is less then this amount of hours, the on and off time will be widened until "
+"the minimum amount of hours entered here."
 
 #: terrariumTranslations.py:123
-msgid "Enter the amount of hours that the power on and off times should shift. Is only needed when running in the '%s' mode. Enter a positive number for adding hours to the start time. Use negative numbers for subtracting from the start time."
-msgstr "Enter the amount of hours that the power on and off times should shift. Is only needed when running in the '%s' mode. Enter a positive number for adding hours to the start time. Use negative numbers for subtracting from the start time."
+msgid ""
+"Enter the amount of hours that the power on and off times should shift. Is "
+"only needed when running in the '%s' mode. Enter a positive number for "
+"adding hours to the start time. Use negative numbers for subtracting from "
+"the start time."
+msgstr ""
+"Enter the amount of hours that the power on and off times should shift. Is "
+"only needed when running in the '%s' mode. Enter a positive number for "
+"adding hours to the start time. Use negative numbers for subtracting from "
+"the start time."
 
 #: terrariumTranslations.py:124
-msgid "Select the power switches that should be used when the alarms or timers are hit. Select all needed switches below."
-msgstr "Select the power switches that should be used when the alarms or timers are hit. Select all needed switches below."
+msgid ""
+"Select the power switches that should be used when the alarms or timers are "
+"hit. Select all needed switches below."
+msgstr ""
+"Select the power switches that should be used when the alarms or timers are "
+"hit. Select all needed switches below."
 
 #: terrariumTranslations.py:125
 msgid "Holds the water volume in liters."
@@ -397,16 +542,28 @@ msgid "Holds the water tank height in cm or inches."
 msgstr "Holds the water tank height in cm or inches."
 
 #: terrariumTranslations.py:127
-msgid "Holds the distance between top of the liquid when full and the sensor in cm or inches."
-msgstr "Holds the distance between top of the liquid when full and the sensor in cm or inches."
+msgid ""
+"Holds the distance between top of the liquid when full and the sensor in cm "
+"or inches."
+msgstr ""
+"Holds the distance between top of the liquid when full and the sensor in cm "
+"or inches."
 
 #: terrariumTranslations.py:128
-msgid "Select when the power switches can toggle. When lights are on, off or just always"
-msgstr "Select when the power switches can toggle. When lights are on, off or just always"
+msgid ""
+"Select when the power switches can toggle. When lights are on, off or just "
+"always"
+msgstr ""
+"Select when the power switches can toggle. When lights are on, off or just "
+"always"
 
 #: terrariumTranslations.py:129
-msgid "Select when the power switches can toggle. When the door is open, cosed or just always"
-msgstr "Select when the power switches can toggle. When the door is open, cosed or just always"
+msgid ""
+"Select when the power switches can toggle. When the door is open, cosed or "
+"just always"
+msgstr ""
+"Select when the power switches can toggle. When the door is open, cosed or "
+"just always"
 
 #: terrariumTranslations.py:133
 msgid "Holds the email address on which you would like to receive messages."
@@ -433,8 +590,12 @@ msgid "Holds the display chip that is used."
 msgstr "Holds the display chip that is used."
 
 #: terrariumTranslations.py:140
-msgid "Holds the I2C address of the LCD screen. Use the value found with i2cdetect. Add ,[NR] to change the I2C bus."
-msgstr "Holds the I2C address of the LCD screen. Use the value found with i2cdetect. Add ,[NR] to change the I2C bus."
+msgid ""
+"Holds the I2C address of the LCD screen. Use the value found with i2cdetect. "
+"Add ,[NR] to change the I2C bus."
+msgstr ""
+"Holds the I2C address of the LCD screen. Use the value found with i2cdetect. "
+"Add ,[NR] to change the I2C bus."
 
 #: terrariumTranslations.py:141
 msgid "Reserve first LCD line for static title."
@@ -469,16 +630,28 @@ msgid "Holds the Telegram Bot token. More information %shere%s"
 msgstr "Holds the Telegram Bot token. More information %shere%s"
 
 #: terrariumTranslations.py:152
-msgid "Holds the Telegram username that is allowed for receiving messages. Can be multiple usernames seperated by a comma. More information %shere%s"
-msgstr "Holds the Telegram username that is allowed for receiving messages. Can be multiple usernames seperated by a comma. More information %shere%s"
+msgid ""
+"Holds the Telegram username that is allowed for receiving messages. Can be "
+"multiple usernames seperated by a comma. More information %shere%s"
+msgstr ""
+"Holds the Telegram username that is allowed for receiving messages. Can be "
+"multiple usernames seperated by a comma. More information %shere%s"
 
 #: terrariumTranslations.py:153
-msgid "Holds the proxy address in form of [schema]://[user]:[password]@[server.com]:[port]. Can either be socks5 or http(s) for schema."
-msgstr "Holds the proxy address in form of [schema]://[user]:[password]@[server.com]:[port]. Can either be socks5 or http(s) for schema."
+msgid ""
+"Holds the proxy address in form of [schema]://[user]:[password]@[server.com]:"
+"[port]. Can either be socks5 or http(s) for schema."
+msgstr ""
+"Holds the proxy address in form of [schema]://[user]:[password]@[server.com]:"
+"[port]. Can either be socks5 or http(s) for schema."
 
 #: terrariumTranslations.py:155
-msgid "Holds the url to post notification data to. You can use %name% variables in the post url"
-msgstr "Holds the url to post notification data to. You can use %name% variables in the post url"
+msgid ""
+"Holds the url to post notification data to. You can use %name% variables in "
+"the post url"
+msgstr ""
+"Holds the url to post notification data to. You can use %name% variables in "
+"the post url"
 
 #: terrariumTranslations.py:160
 msgid "Choose your interface language."
@@ -493,36 +666,56 @@ msgid "Holds the username which can make changes (Administrator)."
 msgstr "Holds the username which can make changes (Administrator)."
 
 #: terrariumTranslations.py:164
-msgid "Enter the new password for the administration user. Leaving empty will not change the password!"
-msgstr "Enter the new password for the administration user. Leaving empty will not change the password!"
+msgid ""
+"Enter the new password for the administration user. Leaving empty will not "
+"change the password!"
+msgstr ""
+"Enter the new password for the administration user. Leaving empty will not "
+"change the password!"
 
 #: terrariumTranslations.py:165
 msgid "Enter the current password in order to change the password."
 msgstr "Enter the current password in order to change the password."
 
 #: terrariumTranslations.py:166
-msgid "Toggle on or off full authentication. When on, you need to authenticate at all times."
-msgstr "Toggle on or off full authentication. When on, you need to authenticate at all times."
+msgid ""
+"Toggle on or off full authentication. When on, you need to authenticate at "
+"all times."
+msgstr ""
+"Toggle on or off full authentication. When on, you need to authenticate at "
+"all times."
 
 #: terrariumTranslations.py:167
 msgid "Holds the external calendar url."
 msgstr "Holds the external calendar url."
 
 #: terrariumTranslations.py:168
-msgid "Toggle on or off horizontal graph legends. Reload the web interface after changing the setting."
-msgstr "Toggle on or off horizontal graph legends. Reload the web interface after changing the setting."
+msgid ""
+"Toggle on or off horizontal graph legends. Reload the web interface after "
+"changing the setting."
+msgstr ""
+"Toggle on or off horizontal graph legends. Reload the web interface after "
+"changing the setting."
 
 #: terrariumTranslations.py:169
-msgid "Toggle on or off the environment summary on the dashboard. Reload the web interface after changing the setting."
-msgstr "Toggle on or off the environment summary on the dashboard. Reload the web interface after changing the setting."
+msgid ""
+"Toggle on or off the environment summary on the dashboard. Reload the web "
+"interface after changing the setting."
+msgstr ""
+"Toggle on or off the environment summary on the dashboard. Reload the web "
+"interface after changing the setting."
 
 #: terrariumTranslations.py:170
 msgid "Holds the soundcard that is used for playing audio."
 msgstr "Holds the soundcard that is used for playing audio."
 
 #: terrariumTranslations.py:171
-msgid "Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment."
-msgstr "Holds the amount of power in Wattage that the Raspberry PI uses including all USB equipment."
+msgid ""
+"Holds the amount of power in Wattage that the Raspberry PI uses including "
+"all USB equipment."
+msgstr ""
+"Holds the amount of power in Wattage that the Raspberry PI uses including "
+"all USB equipment."
 
 #: terrariumTranslations.py:172
 msgid "Holds the amount of euro/dollar per 1 kW/h (1 Kilowatt per hour)."
@@ -533,40 +726,74 @@ msgid "Holds the amount of euro/dollar per 1000 liters water."
 msgstr "Holds the amount of euro/dollar per 1000 liters water."
 
 #: terrariumTranslations.py:174
-msgid "Choose the temperature indicator. The software will recalculate to the chosen indicator."
-msgstr "Choose the temperature indicator. The software will recalculate to the chosen indicator."
+msgid ""
+"Choose the temperature indicator. The software will recalculate to the "
+"chosen indicator."
+msgstr ""
+"Choose the temperature indicator. The software will recalculate to the "
+"chosen indicator."
 
 #: terrariumTranslations.py:175
-msgid "Choose the windspeed indicator. The software will recalculate to the chosen indicator."
-msgstr "Choose the windspeed indicator. The software will recalculate to the chosen indicator."
+msgid ""
+"Choose the windspeed indicator. The software will recalculate to the chosen "
+"indicator."
+msgstr ""
+"Choose the windspeed indicator. The software will recalculate to the chosen "
+"indicator."
 
 #: terrariumTranslations.py:176
-msgid "Choose the volume (liquid) indicator. The software will recalculate to the chosen indicator."
-msgstr "Choose the volume (liquid) indicator. The software will recalculate to the chosen indicator."
+msgid ""
+"Choose the volume (liquid) indicator. The software will recalculate to the "
+"chosen indicator."
+msgstr ""
+"Choose the volume (liquid) indicator. The software will recalculate to the "
+"chosen indicator."
 
 #: terrariumTranslations.py:177
-msgid "Holds the host name or IP address on which the software will listen for connections. Enter :: for all addresses to bind."
-msgstr "Holds the host name or IP address on which the software will listen for connections. Enter :: for all addresses to bind."
+msgid ""
+"Holds the host name or IP address on which the software will listen for "
+"connections. Enter :: for all addresses to bind."
+msgstr ""
+"Holds the host name or IP address on which the software will listen for "
+"connections. Enter :: for all addresses to bind."
 
 #: terrariumTranslations.py:178
-msgid "Holds the port number on which the software is listening for connections."
-msgstr "Holds the port number on which the software is listening for connections."
+msgid ""
+"Holds the port number on which the software is listening for connections."
+msgstr ""
+"Holds the port number on which the software is listening for connections."
 
 #: terrariumTranslations.py:179
 msgid "Enter the e-mail address that is used for your Meross devices."
 msgstr "Enter the e-mail address that is used for your Meross devices."
 
 #: terrariumTranslations.py:180
-msgid "Enter the password that is used for your Meross devices. Password is stored in plain text!"
-msgstr "Enter the password that is used for your Meross devices. Password is stored in plain text!"
+msgid ""
+"Enter the password that is used for your Meross devices. Password is stored "
+"in plain text!"
+msgstr ""
+"Enter the password that is used for your Meross devices. Password is stored "
+"in plain text!"
 
 #: terrariumTranslations.py:181
-msgid "Holds the amount of data points (each 30 sec) to use for smoothing. The higher the value, the smoother the graph. Enter 0 to disable. Reload the web interface after changing the setting."
-msgstr "Holds the amount of data points (each 30 sec) to use for smoothing. The higher the value, the smoother the graph. Enter 0 to disable. Reload the web interface after changing the setting."
+msgid ""
+"Holds the amount of data points (each 30 sec) to use for smoothing. The "
+"higher the value, the smoother the graph. Enter 0 to disable. Reload the web "
+"interface after changing the setting."
+msgstr ""
+"Holds the amount of data points (each 30 sec) to use for smoothing. The "
+"higher the value, the smoother the graph. Enter 0 to disable. Reload the web "
+"interface after changing the setting."
 
 #: terrariumTranslations.py:182
-msgid "Select true or false to show an extra sensor page which holds all the sensors with there gauges. Reload the web interface after changing the setting."
-msgstr "Select true or false to show an extra sensor page which holds all the sensors with there gauges. Reload the web interface after changing the setting."
+msgid ""
+"Select true or false to show an extra sensor page which holds all the "
+"sensors with there gauges. Reload the web interface after changing the "
+"setting."
+msgstr ""
+"Select true or false to show an extra sensor page which holds all the "
+"sensors with there gauges. Reload the web interface after changing the "
+"setting."
 
 #: terrariumTranslations.py:183
 msgid "Toggle on or off the min and max measured value in the gauge graphs."
@@ -703,11 +930,10 @@ msgstr "Log out"
 msgid "You are now logged out"
 msgstr "You are now logged out"
 
-#: views/audio_files.tpl:4 views/audio_playlist.tpl:4
-#: views/door_settings.tpl:4 views/inc/menu.tpl:156 views/notifications.tpl:4
-#: views/sensor_settings.tpl:4 views/switch_settings.tpl:4
-#: views/system_environment.tpl:4 views/system_settings.tpl:4
-#: views/webcam_settings.tpl:4
+#: views/audio_files.tpl:4 views/audio_playlist.tpl:4 views/door_settings.tpl:4
+#: views/inc/menu.tpl:156 views/notifications.tpl:4 views/sensor_settings.tpl:4
+#: views/switch_settings.tpl:4 views/system_environment.tpl:4
+#: views/system_settings.tpl:4 views/webcam_settings.tpl:4
 msgid "Help"
 msgstr "Help"
 
@@ -716,8 +942,12 @@ msgid "Here you can upload and manange your audio files."
 msgstr "Here you can upload and manange your audio files."
 
 #: views/audio_files.tpl:16
-msgid "In the existing audio files list you can see which files are uploaded. By clicking on the trashbin (%s) icon you can delete the file."
-msgstr "In the existing audio files list you can see which files are uploaded. By clicking on the trashbin (%s) icon you can delete the file."
+msgid ""
+"In the existing audio files list you can see which files are uploaded. By "
+"clicking on the trashbin (%s) icon you can delete the file."
+msgstr ""
+"In the existing audio files list you can see which files are uploaded. By "
+"clicking on the trashbin (%s) icon you can delete the file."
 
 #: views/audio_files.tpl:16
 msgid "Open the dropzone multiple file uploader to upload new audio files."
@@ -728,8 +958,12 @@ msgid "Dropzone multiple file uploader"
 msgstr "Dropzone multiple file uploader"
 
 #: views/audio_files.tpl:35
-msgid "Drag multiple files to the box below for multi upload or click to select files."
-msgstr "Drag multiple files to the box below for multi upload or click to select files."
+msgid ""
+"Drag multiple files to the box below for multi upload or click to select "
+"files."
+msgstr ""
+"Drag multiple files to the box below for multi upload or click to select "
+"files."
 
 #: views/audio_files.tpl:45
 msgid "Existing audio files"
@@ -817,8 +1051,12 @@ msgid "Required fields are marked with '%s'."
 msgstr "Required fields are marked with '%s'."
 
 #: views/audio_playlist.tpl:16 views/switch_settings.tpl:19
-msgid "When you have a %s type switch added the audio player will not work. More information can be found here: %s."
-msgstr "When you have a %s type switch added the audio player will not work. More information can be found here: %s."
+msgid ""
+"When you have a %s type switch added the audio player will not work. More "
+"information can be found here: %s."
+msgstr ""
+"When you have a %s type switch added the audio player will not work. More "
+"information can be found here: %s."
 
 #: views/audio_playlist.tpl:22 views/audio_playlist.tpl:87
 #: views/system_environment.tpl:74 views/system_environment.tpl:114
@@ -1385,20 +1623,32 @@ msgid "Hover over the image below to read more about the supported hardware."
 msgstr "Hover over the image below to read more about the supported hardware."
 
 #: views/hardware.tpl:48
-msgid "TerrariumPI software is designed to run on a Raspberry Pi. It has been tested on a Raspberry Pi 2 and 3 with %s. Raspberry Pi Zero is not tested."
-msgstr "TerrariumPI software is designed to run on a Raspberry Pi. It has been tested on a Raspberry Pi 2 and 3 with %s. Raspberry Pi Zero is not tested."
+msgid ""
+"TerrariumPI software is designed to run on a Raspberry Pi. It has been "
+"tested on a Raspberry Pi 2 and 3 with %s. Raspberry Pi Zero is not tested."
+msgstr ""
+"TerrariumPI software is designed to run on a Raspberry Pi. It has been "
+"tested on a Raspberry Pi 2 and 3 with %s. Raspberry Pi Zero is not tested."
 
 #: views/hardware.tpl:48 views/info.tpl:34
 msgid "Raspbian OS"
 msgstr "Raspbian OS"
 
 #: views/hardware.tpl:49
-msgid "The Raspberry Pi should have network connection and optionally SSH enabled for remote management. Also a strong power adapter is needed (+2Amps)."
-msgstr "The Raspberry Pi should have network connection and optionally SSH enabled for remote management. Also a strong power adapter is needed (+2Amps)."
+msgid ""
+"The Raspberry Pi should have network connection and optionally SSH enabled "
+"for remote management. Also a strong power adapter is needed (+2Amps)."
+msgstr ""
+"The Raspberry Pi should have network connection and optionally SSH enabled "
+"for remote management. Also a strong power adapter is needed (+2Amps)."
 
 #: views/hardware.tpl:54
-msgid "TerrariumPI software has support for different kind of sensors. The following sensors below are tested with TerrariumPI software."
-msgstr "TerrariumPI software has support for different kind of sensors. The following sensors below are tested with TerrariumPI software."
+msgid ""
+"TerrariumPI software has support for different kind of sensors. The "
+"following sensors below are tested with TerrariumPI software."
+msgstr ""
+"TerrariumPI software has support for different kind of sensors. The "
+"following sensors below are tested with TerrariumPI software."
 
 #: views/hardware.tpl:57 views/inc/usage_sensors.tpl:116
 #: views/sensor_settings.tpl:115
@@ -1406,24 +1656,44 @@ msgid "1Wire"
 msgstr "1Wire"
 
 #: views/hardware.tpl:58
-msgid "The 1wire bus will be scanned automatically during start up to load the connected and supported sensors. The DS18B20 sensors can share the GPIO pin by putting the sensors in parallel."
-msgstr "The 1wire bus will be scanned automatically during start up to load the connected and supported sensors. The DS18B20 sensors can share the GPIO pin by putting the sensors in parallel."
+msgid ""
+"The 1wire bus will be scanned automatically during start up to load the "
+"connected and supported sensors. The DS18B20 sensors can share the GPIO pin "
+"by putting the sensors in parallel."
+msgstr ""
+"The 1wire bus will be scanned automatically during start up to load the "
+"connected and supported sensors. The DS18B20 sensors can share the GPIO pin "
+"by putting the sensors in parallel."
 
 #: views/hardware.tpl:59
-msgid "Through the 1wire bus of the Raspberry Pi you can use the following hardware sensors"
-msgstr "Through the 1wire bus of the Raspberry Pi you can use the following hardware sensors"
+msgid ""
+"Through the 1wire bus of the Raspberry Pi you can use the following hardware "
+"sensors"
+msgstr ""
+"Through the 1wire bus of the Raspberry Pi you can use the following hardware "
+"sensors"
 
 #: views/hardware.tpl:61 views/hardware.tpl:81
 msgid "DS18B20"
 msgstr "DS18B20"
 
 #: views/hardware.tpl:67
-msgid "GPIO sensors has to added manually to TerrariumPI software. That can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra resistor"
-msgstr "GPIO sensors has to added manually to TerrariumPI software. That can done in the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and DHT22 needs an extra resistor"
+msgid ""
+"GPIO sensors has to added manually to TerrariumPI software. That can done in "
+"the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and "
+"DHT22 needs an extra resistor"
+msgstr ""
+"GPIO sensors has to added manually to TerrariumPI software. That can done in "
+"the web interface. The GPIO sensors cannot share GPIO pins. The DHT11 and "
+"DHT22 needs an extra resistor"
 
 #: views/hardware.tpl:68
-msgid "Through the GPIO bus of the Raspberry Pi you can use the following hardware sensors"
-msgstr "Through the GPIO bus of the Raspberry Pi you can use the following hardware sensors"
+msgid ""
+"Through the GPIO bus of the Raspberry Pi you can use the following hardware "
+"sensors"
+msgstr ""
+"Through the GPIO bus of the Raspberry Pi you can use the following hardware "
+"sensors"
 
 #: views/hardware.tpl:70 views/inc/usage_sensors.tpl:113
 #: views/sensor_settings.tpl:105
@@ -1446,24 +1716,44 @@ msgid "OWFS"
 msgstr "OWFS"
 
 #: views/hardware.tpl:78
-msgid "The OWFS server will be scanned automatically during start up to load the connected and supported sensors. There can be all kind of sensors connected to this server. All supported sensors will be shown."
-msgstr "The OWFS server will be scanned automatically during start up to load the connected and supported sensors. There can be all kind of sensors connected to this server. All supported sensors will be shown."
+msgid ""
+"The OWFS server will be scanned automatically during start up to load the "
+"connected and supported sensors. There can be all kind of sensors connected "
+"to this server. All supported sensors will be shown."
+msgstr ""
+"The OWFS server will be scanned automatically during start up to load the "
+"connected and supported sensors. There can be all kind of sensors connected "
+"to this server. All supported sensors will be shown."
 
 #: views/hardware.tpl:79
-msgid "Through the I2C bus of the Raspberry Pi you can use the following hardware sensors with OWFS software"
-msgstr "Through the I2C bus of the Raspberry Pi you can use the following hardware sensors with OWFS software"
+msgid ""
+"Through the I2C bus of the Raspberry Pi you can use the following hardware "
+"sensors with OWFS software"
+msgstr ""
+"Through the I2C bus of the Raspberry Pi you can use the following hardware "
+"sensors with OWFS software"
 
 #: views/hardware.tpl:82
 msgid "HIH400"
 msgstr "HIH400"
 
 #: views/hardware.tpl:88
-msgid "TerrariumPI software has support for different kind of relay boards. The following relay boards below are tested with TerrariumPI software."
-msgstr "TerrariumPI software has support for different kind of relay boards. The following relay boards below are tested with TerrariumPI software."
+msgid ""
+"TerrariumPI software has support for different kind of relay boards. The "
+"following relay boards below are tested with TerrariumPI software."
+msgstr ""
+"TerrariumPI software has support for different kind of relay boards. The "
+"following relay boards below are tested with TerrariumPI software."
 
 #: views/hardware.tpl:92
-msgid "For every relay on the board there is need for a dedicated GPIO pin. For a 4 ports relay board there are 4 control GPIO pins and 2 pins for power and ground needed. This makes that it needs 6 GPIO pins in total."
-msgstr "For every relay on the board there is need for a dedicated GPIO pin. For a 4 ports relay board there are 4 control GPIO pins and 2 pins for power and ground needed. This makes that it needs 6 GPIO pins in total."
+msgid ""
+"For every relay on the board there is need for a dedicated GPIO pin. For a 4 "
+"ports relay board there are 4 control GPIO pins and 2 pins for power and "
+"ground needed. This makes that it needs 6 GPIO pins in total."
+msgstr ""
+"For every relay on the board there is need for a dedicated GPIO pin. For a 4 "
+"ports relay board there are 4 control GPIO pins and 2 pins for power and "
+"ground needed. This makes that it needs 6 GPIO pins in total."
 
 #: views/hardware.tpl:93 views/hardware.tpl:102 views/hardware.tpl:111
 msgid "The following boards are tested"
@@ -1478,8 +1768,16 @@ msgid "USB"
 msgstr "USB"
 
 #: views/hardware.tpl:101
-msgid "The USB relay board does not need GPIO pins. It only needs one USB connection. The TerrariumPI software supports boards that are either running in Serial or BitBang. This is automatically detected when adding power switches."
-msgstr "The USB relay board does not need GPIO pins. It only needs one USB connection. The TerrariumPI software supports boards that are either running in Serial or BitBang. This is automatically detected when adding power switches."
+msgid ""
+"The USB relay board does not need GPIO pins. It only needs one USB "
+"connection. The TerrariumPI software supports boards that are either running "
+"in Serial or BitBang. This is automatically detected when adding power "
+"switches."
+msgstr ""
+"The USB relay board does not need GPIO pins. It only needs one USB "
+"connection. The TerrariumPI software supports boards that are either running "
+"in Serial or BitBang. This is automatically detected when adding power "
+"switches."
 
 #: views/hardware.tpl:104
 msgid "Denkovi"
@@ -1498,18 +1796,27 @@ msgid "Nextevo"
 msgstr "Nextevo"
 
 #: views/hardware.tpl:120
-msgid "TerrariumPI software has support for magnetic door sensors. Only versions with two wires are supported. Connect one wire to the ground and the other wire to any GPIO pin that is free (except power and ground pins)."
-msgstr "TerrariumPI software has support for magnetic door sensors. Only versions with two wires are supported. Connect one wire to the ground and the other wire to any GPIO pin that is free (except power and ground pins)."
+msgid ""
+"TerrariumPI software has support for magnetic door sensors. Only versions "
+"with two wires are supported. Connect one wire to the ground and the other "
+"wire to any GPIO pin that is free (except power and ground pins)."
+msgstr ""
+"TerrariumPI software has support for magnetic door sensors. Only versions "
+"with two wires are supported. Connect one wire to the ground and the other "
+"wire to any GPIO pin that is free (except power and ground pins)."
 
-#: views/hardware.tpl:123 views/inc/menu.tpl:104
-#: views/inc/usage_webcams.tpl:19 views/usage.tpl:25 views/webcam.tpl:11
-#: views/webcam_settings.tpl:69
+#: views/hardware.tpl:123 views/inc/menu.tpl:104 views/inc/usage_webcams.tpl:19
+#: views/usage.tpl:25 views/webcam.tpl:11 views/webcam_settings.tpl:69
 msgid "Webcam"
 msgstr "Webcam"
 
 #: views/hardware.tpl:124
-msgid "TerrariumPI software has support for different kind of cameras. The following cameras below are tested with TerrariumPI software."
-msgstr "TerrariumPI software has support for different kind of cameras. The following cameras below are tested with TerrariumPI software."
+msgid ""
+"TerrariumPI software has support for different kind of cameras. The "
+"following cameras below are tested with TerrariumPI software."
+msgstr ""
+"TerrariumPI software has support for different kind of cameras. The "
+"following cameras below are tested with TerrariumPI software."
 
 #: views/hardware.tpl:127 views/inc/usage_webcams.tpl:128
 #: views/webcam_settings.tpl:21 views/webcam_settings.tpl:22
@@ -1517,12 +1824,20 @@ msgid "RPICam"
 msgstr "RPICam"
 
 #: views/hardware.tpl:128
-msgid "There are different Raspberry Pi cameras available. If the camera is Raspberry Pi compatible, it can be used with TerrariumPI software."
-msgstr "There are different Raspberry Pi cameras available. If the camera is Raspberry Pi compatible, it can be used with TerrariumPI software."
+msgid ""
+"There are different Raspberry Pi cameras available. If the camera is "
+"Raspberry Pi compatible, it can be used with TerrariumPI software."
+msgstr ""
+"There are different Raspberry Pi cameras available. If the camera is "
+"Raspberry Pi compatible, it can be used with TerrariumPI software."
 
 #: views/hardware.tpl:133
-msgid "All kind of USB cameras can be used. Enter physical path of the device like /dev/videoX."
-msgstr "All kind of USB cameras can be used. Enter physical path of the device like /dev/videoX."
+msgid ""
+"All kind of USB cameras can be used. Enter physical path of the device like /"
+"dev/videoX."
+msgstr ""
+"All kind of USB cameras can be used. Enter physical path of the device like /"
+"dev/videoX."
 
 #: views/inc/menu.tpl:14
 msgid "Welcome"
@@ -1702,52 +2017,86 @@ msgid "Top indicators"
 msgstr "Top indicators"
 
 #: views/inc/usage_dashboard.tpl:15
-msgid "The dashboard has two indicators and a clock on the top row at the right site."
-msgstr "The dashboard has two indicators and a clock on the top row at the right site."
+msgid ""
+"The dashboard has two indicators and a clock on the top row at the right "
+"site."
+msgstr ""
+"The dashboard has two indicators and a clock on the top row at the right "
+"site."
 
 #: views/inc/usage_dashboard.tpl:17
 msgid "Status indicator"
 msgstr "Status indicator"
 
 #: views/inc/usage_dashboard.tpl:23
-msgid "The first green round check mark shows that the interface is connected with the server and that it is working as expected."
-msgstr "The first green round check mark shows that the interface is connected with the server and that it is working as expected."
+msgid ""
+"The first green round check mark shows that the interface is connected with "
+"the server and that it is working as expected."
+msgstr ""
+"The first green round check mark shows that the interface is connected with "
+"the server and that it is working as expected."
 
 #: views/inc/usage_dashboard.tpl:30
-msgid "When there is a connection problem, the first round check mark will turn to a red explanation mark which indicates that there is a problem."
-msgstr "When there is a connection problem, the first round check mark will turn to a red explanation mark which indicates that there is a problem."
+msgid ""
+"When there is a connection problem, the first round check mark will turn to "
+"a red explanation mark which indicates that there is a problem."
+msgstr ""
+"When there is a connection problem, the first round check mark will turn to "
+"a red explanation mark which indicates that there is a problem."
 
 #: views/inc/usage_dashboard.tpl:33 views/inc/usage_dashboard.tpl:57
 msgid "History"
 msgstr "History"
 
 #: views/inc/usage_dashboard.tpl:37
-msgid "Click on the online/offline indicator to get some history. The history is cleared when the web interface is reloaded."
-msgstr "Click on the online/offline indicator to get some history. The history is cleared when the web interface is reloaded."
+msgid ""
+"Click on the online/offline indicator to get some history. The history is "
+"cleared when the web interface is reloaded."
+msgstr ""
+"Click on the online/offline indicator to get some history. The history is "
+"cleared when the web interface is reloaded."
 
 #: views/inc/usage_dashboard.tpl:41
 msgid "Door indicator"
 msgstr "Door indicator"
 
 #: views/inc/usage_dashboard.tpl:47
-msgid "The second indicator is a lock that shows the status of the door(s). It is green when all doors are closed."
-msgstr "The second indicator is a lock that shows the status of the door(s). It is green when all doors are closed."
+msgid ""
+"The second indicator is a lock that shows the status of the door(s). It is "
+"green when all doors are closed."
+msgstr ""
+"The second indicator is a lock that shows the status of the door(s). It is "
+"green when all doors are closed."
 
 #: views/inc/usage_dashboard.tpl:54
-msgid "When a door is opened, the indicator will change to a red open lock. This indicator is near real time, so when you open the door, the indicator will change."
-msgstr "When a door is opened, the indicator will change to a red open lock. This indicator is near real time, so when you open the door, the indicator will change."
+msgid ""
+"When a door is opened, the indicator will change to a red open lock. This "
+"indicator is near real time, so when you open the door, the indicator will "
+"change."
+msgstr ""
+"When a door is opened, the indicator will change to a red open lock. This "
+"indicator is near real time, so when you open the door, the indicator will "
+"change."
 
 #: views/inc/usage_dashboard.tpl:61
-msgid "Click on the door indicator to see the last 6 notifications. During loading of the dashboard the door changes for the last 24 hours are loaded from history."
-msgstr "Click on the door indicator to see the last 6 notifications. During loading of the dashboard the door changes for the last 24 hours are loaded from history."
+msgid ""
+"Click on the door indicator to see the last 6 notifications. During loading "
+"of the dashboard the door changes for the last 24 hours are loaded from "
+"history."
+msgstr ""
+"Click on the door indicator to see the last 6 notifications. During loading "
+"of the dashboard the door changes for the last 24 hours are loaded from "
+"history."
 
 #: views/inc/usage_dashboard.tpl:65
 msgid "Date and time"
 msgstr "Date and time"
 
 #: views/inc/usage_dashboard.tpl:71
-msgid "The last indicator is the current time. When it is day time, a sun is shown."
-msgstr "The last indicator is the current time. When it is day time, a sun is shown."
+msgid ""
+"The last indicator is the current time. When it is day time, a sun is shown."
+msgstr ""
+"The last indicator is the current time. When it is day time, a sun is shown."
 
 #: views/inc/usage_dashboard.tpl:78
 msgid "When the sun sets, the icon of the date time indicator in a moon."
@@ -1758,44 +2107,106 @@ msgid "Top tiles"
 msgstr "Top tiles"
 
 #: views/inc/usage_dashboard.tpl:84
-msgid "All tiles will be updated in real time. When a switch is toggled, either by hand or by the system, the tiles will update instantly."
-msgstr "All tiles will be updated in real time. When a switch is toggled, either by hand or by the system, the tiles will update instantly."
+msgid ""
+"All tiles will be updated in real time. When a switch is toggled, either by "
+"hand or by the system, the tiles will update instantly."
+msgstr ""
+"All tiles will be updated in real time. When a switch is toggled, either by "
+"hand or by the system, the tiles will update instantly."
 
 #: views/inc/usage_dashboard.tpl:89
-msgid "The first tile shows the hardware uptime. And it shows three bars which indicates the load off the hardware. First bar is actual load, second is load during 5 minutes and last is load during 15 minutes."
-msgstr "The first tile shows the hardware uptime. And it shows three bars which indicates the load off the hardware. First bar is actual load, second is load during 5 minutes and last is load during 15 minutes."
+msgid ""
+"The first tile shows the hardware uptime. And it shows three bars which "
+"indicates the load off the hardware. First bar is actual load, second is "
+"load during 5 minutes and last is load during 15 minutes."
+msgstr ""
+"The first tile shows the hardware uptime. And it shows three bars which "
+"indicates the load off the hardware. First bar is actual load, second is "
+"load during 5 minutes and last is load during 15 minutes."
 
 #: views/inc/usage_dashboard.tpl:95
-msgid "The second tile shows the current power usage in Watts. The amount is calculated based on the power switch settings and what the state is of the switches. The bar shows a percentage of the max usage."
-msgstr "The second tile shows the current power usage in Watts. The amount is calculated based on the power switch settings and what the state is of the switches. The bar shows a percentage of the max usage."
+msgid ""
+"The second tile shows the current power usage in Watts. The amount is "
+"calculated based on the power switch settings and what the state is of the "
+"switches. The bar shows a percentage of the max usage."
+msgstr ""
+"The second tile shows the current power usage in Watts. The amount is "
+"calculated based on the power switch settings and what the state is of the "
+"switches. The bar shows a percentage of the max usage."
 
 #: views/inc/usage_dashboard.tpl:101
-msgid "The third tile shows the current water flow in liters per minute. The amount is calculated based on the power switch settings and what the state is of the switches. The bar shows a percentage of the max usage."
-msgstr "The third tile shows the current water flow in liters per minute. The amount is calculated based on the power switch settings and what the state is of the switches. The bar shows a percentage of the max usage."
+msgid ""
+"The third tile shows the current water flow in liters per minute. The amount "
+"is calculated based on the power switch settings and what the state is of "
+"the switches. The bar shows a percentage of the max usage."
+msgstr ""
+"The third tile shows the current water flow in liters per minute. The amount "
+"is calculated based on the power switch settings and what the state is of "
+"the switches. The bar shows a percentage of the max usage."
 
 #: views/inc/usage_dashboard.tpl:107
-msgid "The fourth tile shows the total power usage from the start of using this software. It will calculate the total power usage every 10 minutes based on all historical data. It is shown in kilo Watt per hour. When the power price is entered, it will show the costs of the power bill and the amount of days it is calculated on."
-msgstr "The fourth tile shows the total power usage from the start of using this software. It will calculate the total power usage every 10 minutes based on all historical data. It is shown in kilo Watt per hour. When the power price is entered, it will show the costs of the power bill and the amount of days it is calculated on."
+msgid ""
+"The fourth tile shows the total power usage from the start of using this "
+"software. It will calculate the total power usage every 10 minutes based on "
+"all historical data. It is shown in kilo Watt per hour. When the power price "
+"is entered, it will show the costs of the power bill and the amount of days "
+"it is calculated on."
+msgstr ""
+"The fourth tile shows the total power usage from the start of using this "
+"software. It will calculate the total power usage every 10 minutes based on "
+"all historical data. It is shown in kilo Watt per hour. When the power price "
+"is entered, it will show the costs of the power bill and the amount of days "
+"it is calculated on."
 
 #: views/inc/usage_dashboard.tpl:113
-msgid "The fifth tile shows the total water usage from the start of using this software. It will calculate the total water usage every 10 minutes based on all historical data. It is shown in liters. When the water price is entered, it will show the costs of the water bill and the amount of days it is calculated on."
-msgstr "The fifth tile shows the total water usage from the start of using this software. It will calculate the total water usage every 10 minutes based on all historical data. It is shown in liters. When the water price is entered, it will show the costs of the water bill and the amount of days it is calculated on."
+msgid ""
+"The fifth tile shows the total water usage from the start of using this "
+"software. It will calculate the total water usage every 10 minutes based on "
+"all historical data. It is shown in liters. When the water price is entered, "
+"it will show the costs of the water bill and the amount of days it is "
+"calculated on."
+msgstr ""
+"The fifth tile shows the total water usage from the start of using this "
+"software. It will calculate the total water usage every 10 minutes based on "
+"all historical data. It is shown in liters. When the water price is entered, "
+"it will show the costs of the water bill and the amount of days it is "
+"calculated on."
 
 #: views/inc/usage_dashboard.tpl:120
-msgid "The environment section shows the current state of the environment. The environment is divided in three parts. There is a lighting system, a spray system and a heating system."
-msgstr "The environment section shows the current state of the environment. The environment is divided in three parts. There is a lighting system, a spray system and a heating system."
+msgid ""
+"The environment section shows the current state of the environment. The "
+"environment is divided in three parts. There is a lighting system, a spray "
+"system and a heating system."
+msgstr ""
+"The environment section shows the current state of the environment. The "
+"environment is divided in three parts. There is a lighting system, a spray "
+"system and a heating system."
 
 #: views/inc/usage_dashboard.tpl:121
-msgid "When a part is active the title is in color. If the title is gray that part is than not running or configured."
-msgstr "When a part is active the title is in color. If the title is gray that part is than not running or configured."
+msgid ""
+"When a part is active the title is in color. If the title is gray that part "
+"is than not running or configured."
+msgstr ""
+"When a part is active the title is in color. If the title is gray that part "
+"is than not running or configured."
 
 #: views/inc/usage_dashboard.tpl:124
-msgid "The lights part give the basic information about how the light system is configured. It shows the chosen mode out of 'clock' or 'weather'. There are no triggers or warnings used by the light system."
-msgstr "The lights part give the basic information about how the light system is configured. It shows the chosen mode out of 'clock' or 'weather'. There are no triggers or warnings used by the light system."
+msgid ""
+"The lights part give the basic information about how the light system is "
+"configured. It shows the chosen mode out of 'clock' or 'weather'. There are "
+"no triggers or warnings used by the light system."
+msgstr ""
+"The lights part give the basic information about how the light system is "
+"configured. It shows the chosen mode out of 'clock' or 'weather'. There are "
+"no triggers or warnings used by the light system."
 
 #: views/inc/usage_dashboard.tpl:125
-msgid "The state indicator is either green or red. Green means that it is switched on. When it is red, the lights are switched off."
-msgstr "The state indicator is either green or red. Green means that it is switched on. When it is red, the lights are switched off."
+msgid ""
+"The state indicator is either green or red. Green means that it is switched "
+"on. When it is red, the lights are switched off."
+msgstr ""
+"The state indicator is either green or red. Green means that it is switched "
+"on. When it is red, the lights are switched off."
 
 #: views/inc/usage_dashboard.tpl:126
 msgid "The on value is the time stamp when the lights are turned on."
@@ -1824,32 +2235,62 @@ msgid "Graphs"
 msgstr "Graphs"
 
 #: views/inc/usage_dashboard.tpl:149
-msgid "The graphs on the home are combined graphs from all temperature and humidity sensors. The gauge meters are real time and show the current value. The historical graphs shows also the minimum and maximum value and will be updated once every 5 minutes."
-msgstr "The graphs on the home are combined graphs from all temperature and humidity sensors. The gauge meters are real time and show the current value. The historical graphs shows also the minimum and maximum value and will be updated once every 5 minutes."
+msgid ""
+"The graphs on the home are combined graphs from all temperature and humidity "
+"sensors. The gauge meters are real time and show the current value. The "
+"historical graphs shows also the minimum and maximum value and will be "
+"updated once every 5 minutes."
+msgstr ""
+"The graphs on the home are combined graphs from all temperature and humidity "
+"sensors. The gauge meters are real time and show the current value. The "
+"historical graphs shows also the minimum and maximum value and will be "
+"updated once every 5 minutes."
 
 #: views/inc/usage_dashboard.tpl:150
-msgid "Every sensor has his own type and a minimum and maximum value. To get the graph data all the data is combined and divided by the amount of sensors. This way the average of the sensors is used."
-msgstr "Every sensor has his own type and a minimum and maximum value. To get the graph data all the data is combined and divided by the amount of sensors. This way the average of the sensors is used."
+msgid ""
+"Every sensor has his own type and a minimum and maximum value. To get the "
+"graph data all the data is combined and divided by the amount of sensors. "
+"This way the average of the sensors is used."
+msgstr ""
+"Every sensor has his own type and a minimum and maximum value. To get the "
+"graph data all the data is combined and divided by the amount of sensors. "
+"This way the average of the sensors is used."
 
 #: views/inc/usage_dashboard.tpl:155
-msgid "There are multiple graph times. On the home there is a humidity and a temperature graph shown."
-msgstr "There are multiple graph times. On the home there is a humidity and a temperature graph shown."
+msgid ""
+"There are multiple graph times. On the home there is a humidity and a "
+"temperature graph shown."
+msgstr ""
+"There are multiple graph times. On the home there is a humidity and a "
+"temperature graph shown."
 
 #: views/inc/usage_dashboard.tpl:163 views/system_log.tpl:6
 msgid "Last update"
 msgstr "Last update"
 
 #: views/inc/usage_dashboard.tpl:165
-msgid "When there is new data, the gauge part of the graph is updated and will also update the last update time stamp."
-msgstr "When there is new data, the gauge part of the graph is updated and will also update the last update time stamp."
+msgid ""
+"When there is new data, the gauge part of the graph is updated and will also "
+"update the last update time stamp."
+msgstr ""
+"When there is new data, the gauge part of the graph is updated and will also "
+"update the last update time stamp."
 
 #: views/inc/usage_dashboard.tpl:171
-msgid "When the current value is outside the minimum of maximum value a red warning badge is shown."
-msgstr "When the current value is outside the minimum of maximum value a red warning badge is shown."
+msgid ""
+"When the current value is outside the minimum of maximum value a red warning "
+"badge is shown."
+msgstr ""
+"When the current value is outside the minimum of maximum value a red warning "
+"badge is shown."
 
 #: views/inc/usage_dashboard.tpl:178
-msgid "With the calendar icon you can select multiple periods for the historical graph. The valid periods are:"
-msgstr "With the calendar icon you can select multiple periods for the historical graph. The valid periods are:"
+msgid ""
+"With the calendar icon you can select multiple periods for the historical "
+"graph. The valid periods are:"
+msgstr ""
+"With the calendar icon you can select multiple periods for the historical "
+"graph. The valid periods are:"
 
 #: views/inc/usage_dashboard.tpl:188 views/inc/usage_doors.tpl:65
 #: views/inc/usage_sensors.tpl:76 views/inc/usage_switches.tpl:65
@@ -1908,12 +2349,22 @@ msgid "Options menu"
 msgstr "Options menu"
 
 #: views/inc/usage_doors.tpl:77
-msgid "On the door page there is a list of door sensors that show the current status of the doors. There can be as much doors added to the system as needed."
-msgstr "On the door page there is a list of door sensors that show the current status of the doors. There can be as much doors added to the system as needed."
+msgid ""
+"On the door page there is a list of door sensors that show the current "
+"status of the doors. There can be as much doors added to the system as "
+"needed."
+msgstr ""
+"On the door page there is a list of door sensors that show the current "
+"status of the doors. There can be as much doors added to the system as "
+"needed."
 
 #: views/inc/usage_doors.tpl:78
-msgid "The list is also updating when a door is opened by hand. The state off the door is shown here in real time."
-msgstr "The list is also updating when a door is opened by hand. The state off the door is shown here in real time."
+msgid ""
+"The list is also updating when a door is opened by hand. The state off the "
+"door is shown here in real time."
+msgstr ""
+"The list is also updating when a door is opened by hand. The state off the "
+"door is shown here in real time."
 
 #: views/inc/usage_doors.tpl:86 views/inc/usage_sensors.tpl:97
 #: views/inc/usage_sensors.tpl:209 views/inc/usage_switches.tpl:90
@@ -1928,12 +2379,24 @@ msgstr "The history graph will shows when a door was opened."
 #: views/inc/usage_doors.tpl:89 views/inc/usage_sensors.tpl:100
 #: views/inc/usage_switches.tpl:93 views/inc/usage_weather.tpl:25
 #: views/inc/usage_weather.tpl:31
-msgid "Use the calendar icon %s in the title to select the period for the history graph."
-msgstr "Use the calendar icon %s in the title to select the period for the history graph."
+msgid ""
+"Use the calendar icon %s in the title to select the period for the history "
+"graph."
+msgstr ""
+"Use the calendar icon %s in the title to select the period for the history "
+"graph."
 
 #: views/inc/usage_doors.tpl:93 views/inc/usage_sensors.tpl:104
-msgid "On the door settings page you can configure all needed doors. Click on %s button to add a new door. And empty form like below is shown and has to be filled in. Make sure the right values are filled in. All fields with a %s are required."
-msgstr "On the door settings page you can configure all needed doors. Click on %s button to add a new door. And empty form like below is shown and has to be filled in. Make sure the right values are filled in. All fields with a %s are required."
+msgid ""
+"On the door settings page you can configure all needed doors. Click on %s "
+"button to add a new door. And empty form like below is shown and has to be "
+"filled in. Make sure the right values are filled in. All fields with a %s "
+"are required."
+msgstr ""
+"On the door settings page you can configure all needed doors. Click on %s "
+"button to add a new door. And empty form like below is shown and has to be "
+"filled in. Make sure the right values are filled in. All fields with a %s "
+"are required."
 
 #: views/inc/usage_doors.tpl:136 views/inc/usage_environment.tpl:395
 #: views/inc/usage_sensors.tpl:200 views/inc/usage_switches.tpl:157
@@ -1946,8 +2409,18 @@ msgid "Graph"
 msgstr "Graph"
 
 #: views/inc/usage_environment.tpl:16
-msgid "The light system always works on time. You can use the weather sun rise and sun set as time values or fixed time values. When selecting weather it can happen that the lights will be on for to long or to short. Use the desired values for the maximum and minimum hours. And the hours shift will shift the hours for on and off by the amount of hours  entered here."
-msgstr "The light system always works on time. You can use the weather sun rise and sun set as time values or fixed time values. When selecting weather it can happen that the lights will be on for to long or to short. Use the desired values for the maximum and minimum hours. And the hours shift will shift the hours for on and off by the amount of hours  entered here."
+msgid ""
+"The light system always works on time. You can use the weather sun rise and "
+"sun set as time values or fixed time values. When selecting weather it can "
+"happen that the lights will be on for to long or to short. Use the desired "
+"values for the maximum and minimum hours. And the hours shift will shift the "
+"hours for on and off by the amount of hours  entered here."
+msgstr ""
+"The light system always works on time. You can use the weather sun rise and "
+"sun set as time values or fixed time values. When selecting weather it can "
+"happen that the lights will be on for to long or to short. Use the desired "
+"values for the maximum and minimum hours. And the hours shift will shift the "
+"hours for on and off by the amount of hours  entered here."
 
 #: views/inc/usage_environment.tpl:17 views/inc/usage_environment.tpl:113
 #: views/inc/usage_environment.tpl:205 views/inc/usage_environment.tpl:299
@@ -2005,8 +2478,16 @@ msgid "Power switches"
 msgstr "Power switches"
 
 #: views/inc/usage_environment.tpl:111
-msgid "The sprayer is only working in sensor mode. This means it needs to have at least one humidity sensor and one switch to activate a spray system. When multiple humidity sensors are used, the averages of the minimum, maximum and current values are used."
-msgstr "The sprayer is only working in sensor mode. This means it needs to have at least one humidity sensor and one switch to activate a spray system. When multiple humidity sensors are used, the averages of the minimum, maximum and current values are used."
+msgid ""
+"The sprayer is only working in sensor mode. This means it needs to have at "
+"least one humidity sensor and one switch to activate a spray system. When "
+"multiple humidity sensors are used, the averages of the minimum, maximum and "
+"current values are used."
+msgstr ""
+"The sprayer is only working in sensor mode. This means it needs to have at "
+"least one humidity sensor and one switch to activate a spray system. When "
+"multiple humidity sensors are used, the averages of the minimum, maximum and "
+"current values are used."
 
 #: views/inc/usage_environment.tpl:112
 msgid "The sprayer will not operate when a door is open."
@@ -2034,16 +2515,38 @@ msgid "Humidity sensors"
 msgstr "Humidity sensors"
 
 #: views/inc/usage_environment.tpl:202
-msgid "When the heater is used in sensor mode the system will toggle the switches based on the alarms of the sensors. When the temperature is to cold it will toggle on the switches. Until the temperature gets above the maximum value the switch stays on. When the maximum temperature is reached, the switches will be toggled off and stay out until the temperature hits the minimum value."
-msgstr "When the heater is used in sensor mode the system will toggle the switches based on the alarms of the sensors. When the temperature is to cold it will toggle on the switches. Until the temperature gets above the maximum value the switch stays on. When the maximum temperature is reached, the switches will be toggled off and stay out until the temperature hits the minimum value."
+msgid ""
+"When the heater is used in sensor mode the system will toggle the switches "
+"based on the alarms of the sensors. When the temperature is to cold it will "
+"toggle on the switches. Until the temperature gets above the maximum value "
+"the switch stays on. When the maximum temperature is reached, the switches "
+"will be toggled off and stay out until the temperature hits the minimum "
+"value."
+msgstr ""
+"When the heater is used in sensor mode the system will toggle the switches "
+"based on the alarms of the sensors. When the temperature is to cold it will "
+"toggle on the switches. Until the temperature gets above the maximum value "
+"the switch stays on. When the maximum temperature is reached, the switches "
+"will be toggled off and stay out until the temperature hits the minimum "
+"value."
 
 #: views/inc/usage_environment.tpl:203 views/inc/usage_environment.tpl:297
-msgid "When used in Timer or Weather mode, the switches will be toggled on and of on the selected times regardless of the temperature."
-msgstr "When used in Timer or Weather mode, the switches will be toggled on and of on the selected times regardless of the temperature."
+msgid ""
+"When used in Timer or Weather mode, the switches will be toggled on and of "
+"on the selected times regardless of the temperature."
+msgstr ""
+"When used in Timer or Weather mode, the switches will be toggled on and of "
+"on the selected times regardless of the temperature."
 
 #: views/inc/usage_environment.tpl:204 views/inc/usage_environment.tpl:298
-msgid "But when there are sensors used in combination with Timer or Weather mode the switches will toggle on and off when there is an alarm based on the sensors and within the selected time frame."
-msgstr "But when there are sensors used in combination with Timer or Weather mode the switches will toggle on and off when there is an alarm based on the sensors and within the selected time frame."
+msgid ""
+"But when there are sensors used in combination with Timer or Weather mode "
+"the switches will toggle on and off when there is an alarm based on the "
+"sensors and within the selected time frame."
+msgstr ""
+"But when there are sensors used in combination with Timer or Weather mode "
+"the switches will toggle on and off when there is an alarm based on the "
+"sensors and within the selected time frame."
 
 #: views/inc/usage_environment.tpl:218 views/inc/usage_environment.tpl:275
 #: views/inc/usage_environment.tpl:369
@@ -2075,8 +2578,20 @@ msgid "Cooling"
 msgstr "Cooling"
 
 #: views/inc/usage_environment.tpl:296
-msgid "When the cooler is used in sensor mode the system will toggle the switches based on the alarms of the sensors. When the temperature is to hot it will toggle on the switches. Until the temperature drops below the minimum value the switch stays on. When the minimum temperature is reached, the switches will be toggled off and stay out until the temperature hits the maximum value."
-msgstr "When the cooler is used in sensor mode the system will toggle the switches based on the alarms of the sensors. When the temperature is to hot it will toggle on the switches. Until the temperature drops below the minimum value the switch stays on. When the minimum temperature is reached, the switches will be toggled off and stay out until the temperature hits the maximum value."
+msgid ""
+"When the cooler is used in sensor mode the system will toggle the switches "
+"based on the alarms of the sensors. When the temperature is to hot it will "
+"toggle on the switches. Until the temperature drops below the minimum value "
+"the switch stays on. When the minimum temperature is reached, the switches "
+"will be toggled off and stay out until the temperature hits the maximum "
+"value."
+msgstr ""
+"When the cooler is used in sensor mode the system will toggle the switches "
+"based on the alarms of the sensors. When the temperature is to hot it will "
+"toggle on the switches. Until the temperature drops below the minimum value "
+"the switch stays on. When the minimum temperature is reached, the switches "
+"will be toggled off and stay out until the temperature hits the maximum "
+"value."
 
 #: views/inc/usage_environment.tpl:320
 msgid "Cooler mode"
@@ -2091,8 +2606,14 @@ msgid "Cooler off"
 msgstr "Cooler off"
 
 #: views/inc/usage_sensors.tpl:13
-msgid "On the sensors page you can find all the available sensors page grouped by type. Select temperature from the menu to get all the temperature sensors. Select humidity for all humidity sensors."
-msgstr "On the sensors page you can find all the available sensors page grouped by type. Select temperature from the menu to get all the temperature sensors. Select humidity for all humidity sensors."
+msgid ""
+"On the sensors page you can find all the available sensors page grouped by "
+"type. Select temperature from the menu to get all the temperature sensors. "
+"Select humidity for all humidity sensors."
+msgstr ""
+"On the sensors page you can find all the available sensors page grouped by "
+"type. Select temperature from the menu to get all the temperature sensors. "
+"Select humidity for all humidity sensors."
 
 #: views/inc/usage_sensors.tpl:14
 msgid "Per graph you have the following options and indicators."
@@ -2111,28 +2632,54 @@ msgid "The time stamp of the last measurement."
 msgstr "The time stamp of the last measurement."
 
 #: views/inc/usage_sensors.tpl:74
-msgid "Warning badge when the sensor value is outside the defined save operating values."
-msgstr "Warning badge when the sensor value is outside the defined save operating values."
+msgid ""
+"Warning badge when the sensor value is outside the defined save operating "
+"values."
+msgstr ""
+"Warning badge when the sensor value is outside the defined save operating "
+"values."
 
 #: views/inc/usage_sensors.tpl:78
 msgid "Show or hide the sensor"
 msgstr "Show or hide the sensor"
 
 #: views/inc/usage_sensors.tpl:92
-msgid "The gauge graph shows the current temperature or humidity value. The color of the graph depends on the current value and the alarm values. When the value gets more to the minimum or maximum value, it will gets more red/orange."
-msgstr "The gauge graph shows the current temperature or humidity value. The color of the graph depends on the current value and the alarm values. When the value gets more to the minimum or maximum value, it will gets more red/orange."
+msgid ""
+"The gauge graph shows the current temperature or humidity value. The color "
+"of the graph depends on the current value and the alarm values. When the "
+"value gets more to the minimum or maximum value, it will gets more red/"
+"orange."
+msgstr ""
+"The gauge graph shows the current temperature or humidity value. The color "
+"of the graph depends on the current value and the alarm values. When the "
+"value gets more to the minimum or maximum value, it will gets more red/"
+"orange."
 
 #: views/inc/usage_sensors.tpl:93
-msgid "The values are updated every 30 seconds and updated in real time on the page."
-msgstr "The values are updated every 30 seconds and updated in real time on the page."
+msgid ""
+"The values are updated every 30 seconds and updated in real time on the page."
+msgstr ""
+"The values are updated every 30 seconds and updated in real time on the page."
 
 #: views/inc/usage_sensors.tpl:94
-msgid "The current value is also written below the graph in degrees, percentage or distance."
-msgstr "The current value is also written below the graph in degrees, percentage or distance."
+msgid ""
+"The current value is also written below the graph in degrees, percentage or "
+"distance."
+msgstr ""
+"The current value is also written below the graph in degrees, percentage or "
+"distance."
 
 #: views/inc/usage_sensors.tpl:99
-msgid "The history graph will shows the measured value. The flat lines are the minimum and maximum values that are configured. When the measured value is outside this range an alarm will be given. Hover above the graph lines to get detailed information."
-msgstr "The history graph will shows the measured value. The flat lines are the minimum and maximum values that are configured. When the measured value is outside this range an alarm will be given. Hover above the graph lines to get detailed information."
+msgid ""
+"The history graph will shows the measured value. The flat lines are the "
+"minimum and maximum values that are configured. When the measured value is "
+"outside this range an alarm will be given. Hover above the graph lines to "
+"get detailed information."
+msgstr ""
+"The history graph will shows the measured value. The flat lines are the "
+"minimum and maximum values that are configured. When the measured value is "
+"outside this range an alarm will be given. Hover above the graph lines to "
+"get detailed information."
 
 #: views/inc/usage_sensors.tpl:118 views/sensor_settings.tpl:119
 msgid "HC-SR04"
@@ -2172,8 +2719,12 @@ msgid "The power usage and/or water flow per minute when switched on"
 msgstr "The power usage and/or water flow per minute when switched on"
 
 #: views/inc/usage_switches.tpl:63
-msgid "The total amount of power usage and/or water usage for the selected history period"
-msgstr "The total amount of power usage and/or water usage for the selected history period"
+msgid ""
+"The total amount of power usage and/or water usage for the selected history "
+"period"
+msgstr ""
+"The total amount of power usage and/or water usage for the selected history "
+"period"
 
 #: views/inc/usage_switches.tpl:67
 msgid "Show or hide the switch"
@@ -2184,12 +2735,26 @@ msgid "Status and toggle"
 msgstr "Status and toggle"
 
 #: views/inc/usage_switches.tpl:81
-msgid "On the switch page there are power buttons that toggle the power switches. Every switch will be listed, and can be controlled from the status page. In order to toggle the switch, a request for a username and password is being made. Use here the username and password that are configured at the system configuration page."
-msgstr "On the switch page there are power buttons that toggle the power switches. Every switch will be listed, and can be controlled from the status page. In order to toggle the switch, a request for a username and password is being made. Use here the username and password that are configured at the system configuration page."
+msgid ""
+"On the switch page there are power buttons that toggle the power switches. "
+"Every switch will be listed, and can be controlled from the status page. In "
+"order to toggle the switch, a request for a username and password is being "
+"made. Use here the username and password that are configured at the system "
+"configuration page."
+msgstr ""
+"On the switch page there are power buttons that toggle the power switches. "
+"Every switch will be listed, and can be controlled from the status page. In "
+"order to toggle the switch, a request for a username and password is being "
+"made. Use here the username and password that are configured at the system "
+"configuration page."
 
 #: views/inc/usage_switches.tpl:82
-msgid "The list is also updating when the environment toggles a switch. The state off the switch is shown here in real time."
-msgstr "The list is also updating when the environment toggles a switch. The state off the switch is shown here in real time."
+msgid ""
+"The list is also updating when the environment toggles a switch. The state "
+"off the switch is shown here in real time."
+msgstr ""
+"The list is also updating when the environment toggles a switch. The state "
+"off the switch is shown here in real time."
 
 #: views/inc/usage_switches.tpl:85
 msgid "Switch is on"
@@ -2200,32 +2765,64 @@ msgid "Switch is off"
 msgstr "Switch is off"
 
 #: views/inc/usage_switches.tpl:92
-msgid "The history graph will shows when a switch was powered on. It will show the power usage on the y-axis and time on the x-axis. When hovering over the graph it will also show the water usage."
-msgstr "The history graph will shows when a switch was powered on. It will show the power usage on the y-axis and time on the x-axis. When hovering over the graph it will also show the water usage."
+msgid ""
+"The history graph will shows when a switch was powered on. It will show the "
+"power usage on the y-axis and time on the x-axis. When hovering over the "
+"graph it will also show the water usage."
+msgstr ""
+"The history graph will shows when a switch was powered on. It will show the "
+"power usage on the y-axis and time on the x-axis. When hovering over the "
+"graph it will also show the water usage."
 
 #: views/inc/usage_switches.tpl:97
-msgid "On the switch settings page you can configure all needed switches. Click on %s button to add a new switch. And empty form like below is shown and has to be filled in. Make sure the right values are filled in. All fields with a %s are required."
-msgstr "On the switch settings page you can configure all needed switches. Click on %s button to add a new switch. And empty form like below is shown and has to be filled in. Make sure the right values are filled in. All fields with a %s are required."
+msgid ""
+"On the switch settings page you can configure all needed switches. Click on "
+"%s button to add a new switch. And empty form like below is shown and has to "
+"be filled in. Make sure the right values are filled in. All fields with a %s "
+"are required."
+msgstr ""
+"On the switch settings page you can configure all needed switches. Click on "
+"%s button to add a new switch. And empty form like below is shown and has to "
+"be filled in. Make sure the right values are filled in. All fields with a %s "
+"are required."
 
 #: views/inc/usage_switches.tpl:106 views/switch_settings.tpl:110
 msgid "FTDI"
 msgstr "FTDI"
 
 #: views/inc/usage_weather.tpl:15
-msgid "The forecast widgets shows the forecast at current time and the location for which the forecast is valid. The data is loaded external from the external API source and is not measured by the software."
-msgstr "The forecast widgets shows the forecast at current time and the location for which the forecast is valid. The data is loaded external from the external API source and is not measured by the software."
+msgid ""
+"The forecast widgets shows the forecast at current time and the location for "
+"which the forecast is valid. The data is loaded external from the external "
+"API source and is not measured by the software."
+msgstr ""
+"The forecast widgets shows the forecast at current time and the location for "
+"which the forecast is valid. The data is loaded external from the external "
+"API source and is not measured by the software."
 
 #: views/inc/usage_weather.tpl:16
-msgid "It shows the current day and time for which the forecast is valid. And what temperature indicator is used."
-msgstr "It shows the current day and time for which the forecast is valid. And what temperature indicator is used."
+msgid ""
+"It shows the current day and time for which the forecast is valid. And what "
+"temperature indicator is used."
+msgstr ""
+"It shows the current day and time for which the forecast is valid. And what "
+"temperature indicator is used."
 
 #: views/inc/usage_weather.tpl:17
-msgid "The forecast is based on the time of the day. During the day, a sun is used in the animation. During the night a moon is used."
-msgstr "The forecast is based on the time of the day. During the day, a sun is used in the animation. During the night a moon is used."
+msgid ""
+"The forecast is based on the time of the day. During the day, a sun is used "
+"in the animation. During the night a moon is used."
+msgstr ""
+"The forecast is based on the time of the day. During the day, a sun is used "
+"in the animation. During the night a moon is used."
 
 #: views/inc/usage_weather.tpl:18
-msgid "The sun rise and sun set are shown on the right side. The line that is bold is indicating the current state."
-msgstr "The sun rise and sun set are shown on the right side. The line that is bold is indicating the current state."
+msgid ""
+"The sun rise and sun set are shown on the right side. The line that is bold "
+"is indicating the current state."
+msgstr ""
+"The sun rise and sun set are shown on the right side. The line that is bold "
+"is indicating the current state."
 
 #: views/inc/usage_weather.tpl:19
 msgid "The week forecast is shown at 13:00 hours of each day."
@@ -2237,8 +2834,12 @@ msgid "Day forecast"
 msgstr "Day forecast"
 
 #: views/inc/usage_weather.tpl:24
-msgid "The day forecast shows the temperature per hour for 24 / 36 hours from now. The title holds the graph period."
-msgstr "The day forecast shows the temperature per hour for 24 / 36 hours from now. The title holds the graph period."
+msgid ""
+"The day forecast shows the temperature per hour for 24 / 36 hours from now. "
+"The title holds the graph period."
+msgstr ""
+"The day forecast shows the temperature per hour for 24 / 36 hours from now. "
+"The title holds the graph period."
 
 #: views/inc/usage_weather.tpl:28 views/inc/usage_weather.tpl:91
 #: views/weather.tpl:130
@@ -2246,12 +2847,22 @@ msgid "Week forecast"
 msgstr "Week forecast"
 
 #: views/inc/usage_weather.tpl:30
-msgid "The week forecast shows the temperature per hour for 10 days from now. The title holds the graph period."
-msgstr "The week forecast shows the temperature per hour for 10 days from now. The title holds the graph period."
+msgid ""
+"The week forecast shows the temperature per hour for 10 days from now. The "
+"title holds the graph period."
+msgstr ""
+"The week forecast shows the temperature per hour for 10 days from now. The "
+"title holds the graph period."
 
 #: views/inc/usage_weather.tpl:35
-msgid "Enter the full URL of the API weather server. For use with Weather.com you need to get a free API key from %s. The temperature are read in Celsius degrees. It can be converted to Fahrenheit."
-msgstr "Enter the full URL of the API weather server. For use with Weather.com you need to get a free API key from %s. The temperature are read in Celsius degrees. It can be converted to Fahrenheit."
+msgid ""
+"Enter the full URL of the API weather server. For use with Weather.com you "
+"need to get a free API key from %s. The temperature are read in Celsius "
+"degrees. It can be converted to Fahrenheit."
+msgstr ""
+"Enter the full URL of the API weather server. For use with Weather.com you "
+"need to get a free API key from %s. The temperature are read in Celsius "
+"degrees. It can be converted to Fahrenheit."
 
 #: views/inc/usage_weather.tpl:42 views/inc/usage_weather.tpl:64
 #: views/inc/usage_webcams.tpl:99 views/inc/usage_webcams.tpl:126
@@ -2312,8 +2923,16 @@ msgid "Full screen control"
 msgstr "Full screen control"
 
 #: views/inc/usage_webcams.tpl:89
-msgid "On the webcam settings page you can configure all needed webcams. Click on %s button to add a new webcam. And empty form like below is shown and has to be filled in. Make sure the right values are filled in. All fields with a %s are required."
-msgstr "On the webcam settings page you can configure all needed webcams. Click on %s button to add a new webcam. And empty form like below is shown and has to be filled in. Make sure the right values are filled in. All fields with a %s are required."
+msgid ""
+"On the webcam settings page you can configure all needed webcams. Click on "
+"%s button to add a new webcam. And empty form like below is shown and has to "
+"be filled in. Make sure the right values are filled in. All fields with a %s "
+"are required."
+msgstr ""
+"On the webcam settings page you can configure all needed webcams. Click on "
+"%s button to add a new webcam. And empty form like below is shown and has to "
+"be filled in. Make sure the right values are filled in. All fields with a %s "
+"are required."
 
 #: views/inc/usage_webcams.tpl:95 views/inc/usage_webcams.tpl:140
 #: views/webcam_settings.tpl:38 views/webcam_settings.tpl:82
@@ -2365,12 +2984,22 @@ msgid "Example setup"
 msgstr "Example setup"
 
 #: views/info.tpl:22
-msgid "Use TerrariumPI to automate your own reptile environment. The software can handle a combination of multiple temperature and humidity sensors and relay switches to control a closed environment."
-msgstr "Use TerrariumPI to automate your own reptile environment. The software can handle a combination of multiple temperature and humidity sensors and relay switches to control a closed environment."
+msgid ""
+"Use TerrariumPI to automate your own reptile environment. The software can "
+"handle a combination of multiple temperature and humidity sensors and relay "
+"switches to control a closed environment."
+msgstr ""
+"Use TerrariumPI to automate your own reptile environment. The software can "
+"handle a combination of multiple temperature and humidity sensors and relay "
+"switches to control a closed environment."
 
 #: views/info.tpl:27
-msgid "TerrariumPI is mainly written in Python version 2.7. The web interface is a bootstrap 3 template. It can be downloaded from %s."
-msgstr "TerrariumPI is mainly written in Python version 2.7. The web interface is a bootstrap 3 template. It can be downloaded from %s."
+msgid ""
+"TerrariumPI is mainly written in Python version 2.7. The web interface is a "
+"bootstrap 3 template. It can be downloaded from %s."
+msgstr ""
+"TerrariumPI is mainly written in Python version 2.7. The web interface is a "
+"bootstrap 3 template. It can be downloaded from %s."
 
 #: views/info.tpl:27 views/info.tpl:80 views/info.tpl:82
 msgid "Download TerrariumPI on Github"
@@ -2397,16 +3026,40 @@ msgid "Web interface"
 msgstr "Web interface"
 
 #: views/info.tpl:58
-msgid "Gentellela Admin is a free to use Bootstrap admin template. This template uses the default Bootstrap 3 styles along with a variety of powerful jQuery plugins and tools to create a powerful framework for creating admin panels or back-end dashboards."
-msgstr "Gentellela Admin is a free to use Bootstrap admin template. This template uses the default Bootstrap 3 styles along with a variety of powerful jQuery plugins and tools to create a powerful framework for creating admin panels or back-end dashboards."
+msgid ""
+"Gentellela Admin is a free to use Bootstrap admin template. This template "
+"uses the default Bootstrap 3 styles along with a variety of powerful jQuery "
+"plugins and tools to create a powerful framework for creating admin panels "
+"or back-end dashboards."
+msgstr ""
+"Gentellela Admin is a free to use Bootstrap admin template. This template "
+"uses the default Bootstrap 3 styles along with a variety of powerful jQuery "
+"plugins and tools to create a powerful framework for creating admin panels "
+"or back-end dashboards."
 
 #: views/info.tpl:59
-msgid "Theme uses several libraries for charts, calendar, form validation, wizard style interface, off-canvas navigation menu, text forms, date range, upload area, form autocomplete, range slider, progress bars, notifications and much more."
-msgstr "Theme uses several libraries for charts, calendar, form validation, wizard style interface, off-canvas navigation menu, text forms, date range, upload area, form autocomplete, range slider, progress bars, notifications and much more."
+msgid ""
+"Theme uses several libraries for charts, calendar, form validation, wizard "
+"style interface, off-canvas navigation menu, text forms, date range, upload "
+"area, form autocomplete, range slider, progress bars, notifications and much "
+"more."
+msgstr ""
+"Theme uses several libraries for charts, calendar, form validation, wizard "
+"style interface, off-canvas navigation menu, text forms, date range, upload "
+"area, form autocomplete, range slider, progress bars, notifications and much "
+"more."
 
 #: views/info.tpl:60
-msgid "We would love to see how you use this awesome admin template. You can notify us about your site, app or service by tweeting to @colorlib. Once the list will grown long enough we will write a post similar to this to showcase the best examples."
-msgstr "We would love to see how you use this awesome admin template. You can notify us about your site, app or service by tweeting to @colorlib. Once the list will grown long enough we will write a post similar to this to showcase the best examples."
+msgid ""
+"We would love to see how you use this awesome admin template. You can notify "
+"us about your site, app or service by tweeting to @colorlib. Once the list "
+"will grown long enough we will write a post similar to this to showcase the "
+"best examples."
+msgstr ""
+"We would love to see how you use this awesome admin template. You can notify "
+"us about your site, app or service by tweeting to @colorlib. Once the list "
+"will grown long enough we will write a post similar to this to showcase the "
+"best examples."
 
 #: views/info.tpl:80
 msgid "Questions or problems? Contact me at %s or open an issue on %s."
@@ -2417,8 +3070,12 @@ msgid "Feature request"
 msgstr "Feature request"
 
 #: views/info.tpl:82
-msgid "Missing something? Drop a feature request on %s and we will see what can be done."
-msgstr "Missing something? Drop a feature request on %s and we will see what can be done."
+msgid ""
+"Missing something? Drop a feature request on %s and we will see what can be "
+"done."
+msgstr ""
+"Missing something? Drop a feature request on %s and we will see what can be "
+"done."
 
 #: views/info.tpl:83
 msgid "Copyright"
@@ -2429,16 +3086,30 @@ msgid "Here are some photos how you can use it."
 msgstr "Here are some photos how you can use it."
 
 #: views/notifications.tpl:16
-msgid "Enter the values per service that you want to use. Per service are all fields required, except mail port and mail authentication values."
-msgstr "Enter the values per service that you want to use. Per service are all fields required, except mail port and mail authentication values."
+msgid ""
+"Enter the values per service that you want to use. Per service are all "
+"fields required, except mail port and mail authentication values."
+msgstr ""
+"Enter the values per service that you want to use. Per service are all "
+"fields required, except mail port and mail authentication values."
 
 #: views/notifications.tpl:17
-msgid "Select per message the service to send the notification. You can have everything per email, and important ones per pushover or telegram."
-msgstr "Select per message the service to send the notification. You can have everything per email, and important ones per pushover or telegram."
+msgid ""
+"Select per message the service to send the notification. You can have "
+"everything per email, and important ones per pushover or telegram."
+msgstr ""
+"Select per message the service to send the notification. You can have "
+"everything per email, and important ones per pushover or telegram."
 
 #: views/notifications.tpl:18
-msgid "Use %rawdata% to get all the possible replacement values. Then create your own message with variables like %now% and %current%. This can be done in either the title and message."
-msgstr "Use %rawdata% to get all the possible replacement values. Then create your own message with variables like %now% and %current%. This can be done in either the title and message."
+msgid ""
+"Use %rawdata% to get all the possible replacement values. Then create your "
+"own message with variables like %now% and %current%. This can be done in "
+"either the title and message."
+msgstr ""
+"Use %rawdata% to get all the possible replacement values. Then create your "
+"own message with variables like %now% and %current%. This can be done in "
+"either the title and message."
 
 #: views/notifications.tpl:19
 msgid "Make sure you submit the form after making changes!"
@@ -3036,12 +3707,20 @@ msgid "System actions"
 msgstr "System actions"
 
 #: views/system_settings.tpl:39
-msgid "Here you can reboot your TerrariumPI server. You will have to confirm the action when clicked."
-msgstr "Here you can reboot your TerrariumPI server. You will have to confirm the action when clicked."
+msgid ""
+"Here you can reboot your TerrariumPI server. You will have to confirm the "
+"action when clicked."
+msgstr ""
+"Here you can reboot your TerrariumPI server. You will have to confirm the "
+"action when clicked."
 
 #: views/system_settings.tpl:45
-msgid "Here you can shutdown your TerrariumPI server. You will have to confirm the action when clicked."
-msgstr "Here you can shutdown your TerrariumPI server. You will have to confirm the action when clicked."
+msgid ""
+"Here you can shutdown your TerrariumPI server. You will have to confirm the "
+"action when clicked."
+msgstr ""
+"Here you can shutdown your TerrariumPI server. You will have to confirm the "
+"action when clicked."
 
 #: views/system_settings.tpl:67
 msgid "Language"
@@ -3506,8 +4185,12 @@ msgid "Duration in seconds"
 msgstr "Duration in seconds"
 
 #: Missing text string
-msgid "Either add audio files and playlists. Or you have a pwm-dimmer switch configured."
-msgstr "Either add audio files and playlists. Or you have a pwm-dimmer switch configured."
+msgid ""
+"Either add audio files and playlists. Or you have a pwm-dimmer switch "
+"configured."
+msgstr ""
+"Either add audio files and playlists. Or you have a pwm-dimmer switch "
+"configured."
 
 #: Missing text string
 msgid "Error"
@@ -3820,4 +4503,3 @@ msgstr "System environment"
 #: Missing text string
 msgid "System settings"
 msgstr "System settings"
-

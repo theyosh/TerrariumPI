@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
-"POT-Creation-Date: 2020-08-08 11:48+CEST\n"
+"POT-Creation-Date: 2020-08-08 13:02+CEST\n"
 "PO-Revision-Date: 2020-05-17 17:56+0000\n"
 "Last-Translator: cmonicob <cmonicob@gmail.com>\n"
 "Language-Team: Catalan <https://weblate.theyosh.nl/projects/terrariumpi/"
