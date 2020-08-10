@@ -5,7 +5,7 @@
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
   <meta content="IE=edge" http-equiv="X-UA-Compatible">
   <meta content="width=device-width, initial-scale=1" name="viewport">
-  <title>{{title}} | {{page_title}}</title>
+  <title>{{page_title}} | {{title}} ({{version}})</title>
   <link href="{{person_image}}" rel="icon" type="image/x-icon">
   <link rel="apple-touch-icon" sizes="57x57" href="{{person_image}}" />
   <link rel="apple-touch-icon" sizes="72x72" href="{{person_image}}" />

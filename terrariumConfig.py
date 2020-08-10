@@ -32,7 +32,7 @@ class terrariumConfig(object):
     logger.info('Setting up configuration')
     self.__cache_available_languages = None
 
-    self.__config = configparser.ConfigParser()
+    self.__config = configparser.ConfigParser(interpolation=None)
     # Read defaults config file
     self.__config.readfp(open(terrariumConfig.DEFAULT_CONFIG))
     logger.info('Loaded default settings from %s' % (terrariumConfig.DEFAULT_CONFIG,))
