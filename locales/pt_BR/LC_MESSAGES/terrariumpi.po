@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2020-08-08 13:02+CEST\n"
-"PO-Revision-Date: 2020-05-26 14:26+0000\n"
+"PO-Revision-Date: 2020-08-18 16:31+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/pt_BR/>\n"
@@ -11,13 +11,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.0.2\n"
+"X-Generator: Weblate 4.1.1\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumEngine.py:677 terrariumEngine.py:789 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
 msgid "Uptime"
-msgstr "Tempo Ligado"
+msgstr "Tempo Lig"
 
 #: terrariumEngine.py:678
 msgid "Load"
@@ -3443,11 +3443,11 @@ msgstr "GPIO Inverso"
 
 #: views/switch_settings.tpl:113
 msgid "8-RELAYS Stack (v1 & v2)"
-msgstr ""
+msgstr "8-RELAYS Stack (v1 e v2)"
 
 #: views/switch_settings.tpl:114
 msgid "8-RELAYS Stack (v3)"
-msgstr ""
+msgstr "8-RELAYS Stack (ver.3)"
 
 #: views/switch_settings.tpl:115
 msgid "PWM Dimmer"
