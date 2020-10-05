@@ -514,7 +514,7 @@ class terrariumCOZIRCO2Sensor(terrariumSensorSource):
 from terrariumAnalogSensor import terrariumSKUSEN0161Sensor
 from terrariumBluetoothSensor import terrariumMiFloraSensor, terrariumMiTempSensor
 from terrariumGPIOSensor import terrariumYTXXSensorDigital, terrariumDHT11Sensor, terrariumDHT22Sensor, terrariumAM2302Sensor, terrariumHCSR04Sensor
-from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor, terrariumSHT3XSensor, terrariumSHT3XDSensor, terrariumMLX90614Sensor, terrariumAM2320Sensor, terrariumAMG8833Sensor
+from terrariumI2CSensor import terrariumSHT2XSensor, terrariumHTU21DSensor, terrariumSi7021Sensor, terrariumBME280Sensor, terrariumChirpSensor, terrariumVEML6075Sensor, terrariumSHT3XSensor, terrariumSHT3XDSensor, terrariumMLX90614Sensor, terrariumAM2320Sensor, terrariumAMG8833Sensor, terrariumCCS811Sensor
 
 # terrariumSensor
 class terrariumSensorTypeException(TypeError):
@@ -555,7 +555,8 @@ class terrariumSensor(object):
              terrariumCOZIRCO2Sensor,
              terrariumMLX90614Sensor,
              terrariumAM2320Sensor,
-             terrariumAMG8833Sensor]
+             terrariumAMG8833Sensor,
+             terrariumCCS811Sensor]
 
   def __new__(self, sensor_id, hardware_type, sensor_type, address, name = '', callback_indicator = None):
     for sensor in terrariumSensor.SENSORS:

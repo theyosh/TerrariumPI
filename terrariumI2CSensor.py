@@ -8,6 +8,7 @@ import smbus2
 import sys
 import Adafruit_SHT31
 import bme280
+from CCS811_RPi import CCS811_RPi
 
 # Dirty hack to include someone his code... to lazy to make it myself :)
 # https://github.com/ageir/chirp-rpi
@@ -585,3 +586,40 @@ class terrariumAMG8833Sensor(terrariumSensorSource):
       print(ex)
 
     return data
+
+class terrariumCCS811Sensor(terrariumI2CSensor):
+  TYPE = 'css811'
+  VALID_SENSOR_TYPES = ['co2']
+
+  def __get_address(self):
+    address = self.get_address().split(',')
+    bus = 1 if len(address) == 1 else int(address[1])
+    #address = int('0x' + address[0],16)
+    return (address,bus)
+
+  def load_raw_data(self):
+    sensor_data = None
+
+    try:
+      sensor_data = self.get_empty_data_set()
+      (address,bus) = self.__get_address()
+
+      with smbus2.SMBus(bus) as i2cbus:
+        sensor = CCS811_RPi(bus,address)
+        sensor.readStatus()
+
+        error = sensor.checkError(statusbyte)
+        if(error):
+          print('Error in measurement from terrariumCCS811Sensor')
+
+
+        data = sensor.readAlg()
+        print(data)
+        # the compensated_reading class has the following attributes
+        sensor_data['co2'] = data['eCO2']
+
+    except Exception as ex:
+      print('terrariumCCS811Sensor Ex:')
+      print(ex)
+
+    return sensor_data
