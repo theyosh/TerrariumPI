@@ -75,7 +75,7 @@
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="location">{{_('Weather location')}}</label>
                     <div class="col-md-7 col-sm-6 col-xs-10">
-                      <input class="form-control" id="location" name="location" required="required" type="text" placeholder="{{_('Weather location')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{!translations.get_translation('weather_field_location')}}">
+                      <input class="form-control" id="location" name="location" type="text" placeholder="{{_('Weather location')}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{!translations.get_translation('weather_field_location')}}">
                     </div>
                   </div>
                   <div class="form-group">
