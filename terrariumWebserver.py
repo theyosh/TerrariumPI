@@ -506,6 +506,7 @@ class terrariumWebserver(object):
     config = terrariumWebserver.app.terrarium.get_config('system')
     variables = { 'lang' : terrariumWebserver.app.terrarium.config.get_language(),
                   'title' : config['title'],
+                  'version' : config['version'],
                   'page_title' : config['title'] + ' | 404'
                 }
 
