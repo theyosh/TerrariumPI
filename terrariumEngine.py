@@ -1611,10 +1611,10 @@ reset=$(tput sgr0)
         else:
           return False
 
-      # Update weather data
-      update_ok = self.set_weather_config({'location' : data['location']}) and self.set_system_config(data)
+      update_ok = self.set_system_config(data)
       if update_ok:
         # Update config settings
+        self.set_weather_config({'location' : data['location']})
         self.pi_power_wattage = float(self.config.get_pi_power_wattage())
         self.set_authentication(self.config.get_admin(),self.config.get_password())
 
