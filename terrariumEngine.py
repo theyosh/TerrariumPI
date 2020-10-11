@@ -459,15 +459,16 @@ class terrariumEngine(object):
 
         if 'motionboxes' in webcamdata:
           motion_boxes = webcamdata['motionboxes']
+          
+          if motion_boxes == "true":
+            if 'motion_delta_threshold' in webcamdata:
+              motion_delta_threshold = webcamdata['motiondeltathreshold']
 
-        if 'motion_delta_threshold' in webcamdata:
-          motion_delta_threshold = webcamdata['motiondeltathreshold']
+            if 'motion_min_area' in webcamdata:
+              motion_min_area = webcamdata['motionminarea']
 
-        if 'motion_min_area' in webcamdata:
-          motion_min_area = webcamdata['motionminarea']
-
-        if 'motion_compare_frame' in webcamdata:
-          motion_compare_frame = webcamdata['motioncompareframe']
+            if 'motion_compare_frame' in webcamdata:
+              motion_compare_frame = webcamdata['motioncompareframe']
 
         # don't let bad location data kill the system
         try:
@@ -515,15 +516,16 @@ class terrariumEngine(object):
 
       if 'motionboxes' in webcamdata:
         webcam.set_motion_boxes(webcamdata['motionboxes'])
+      
+      if webcamdata['motionboxes'] == "true":
+          if 'motiondeltathreshold' in webcamdata:
+            webcam.set_motion_delta_threshold(webcamdata['motiondeltathreshold'])
 
-      if 'motiondeltathreshold' in webcamdata:
-        webcam.set_motion_delta_threshold(webcamdata['motiondeltathreshold'])
+          if 'motionminarea' in webcamdata:
+            webcam.set_motion_min_area(webcamdata['motionminarea'])
 
-      if 'motionminarea' in webcamdata:
-        webcam.set_motion_min_area(webcamdata['motionminarea'])
-
-      if 'motioncompareframe' in webcamdata:
-        webcam.set_motion_compare_frame(webcamdata['motioncompareframe'])
+          if 'motioncompareframe' in webcamdata:
+            webcam.set_motion_compare_frame(webcamdata['motioncompareframe'])
 
       if 'awb' in webcamdata:
         webcam.set_awb(webcamdata['awb'])
