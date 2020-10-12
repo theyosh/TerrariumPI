@@ -591,6 +591,17 @@ class terrariumCCS811Sensor(terrariumI2CSensor):
   TYPE = 'css811'
   VALID_SENSOR_TYPES = ['co2']
 
+  '''
+  MEAS MODE REGISTER AND DRIVE MODE CONFIGURATION
+  0b0       Idle (Measurements are disabled in this mode)
+  0b10000   Constant power mode, IAQ measurement every second
+  0b100000  Pulse heating mode IAQ measurement every 10 seconds
+  0b110000  Low power pulse heating mode IAQ measurement every 60
+  0b1000000 Constant power mode, sensor measurement every 250ms
+  '''
+  # Set MEAS_MODE (measurement interval)
+  MODE = 0b100000
+
   def __get_address(self):
     address = self.get_address().split(',')
     bus = 1 if len(address) == 1 else int(address[1])
@@ -606,15 +617,23 @@ class terrariumCCS811Sensor(terrariumI2CSensor):
 
       with smbus2.SMBus(bus) as i2cbus:
         sensor = CCS811_RPi(bus,address)
-        sensor.readStatus()
+        sensor.configureSensor(terrariumCCS811Sensor.MODE)
+        sensor_status = sensor.readStatus()
 
-        error = sensor.checkError(statusbyte)
-        if(error):
+        error = sensor.checkError(sensor_status)
+        if error:
           print('Error in measurement from terrariumCCS811Sensor')
+          return None
 
+        if not sensor.checkDataReady(sensor_status):
+          print ('CCS811: No new samples are ready')
+          return None
 
         data = sensor.readAlg()
-        print(data)
+        if not data:
+          print ('CCS811: Invalid result received')
+          return None
+
         # the compensated_reading class has the following attributes
         sensor_data['co2'] = data['eCO2']
 
