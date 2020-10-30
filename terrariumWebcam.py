@@ -591,11 +591,19 @@ class PiCameraUpstream(PiCamera):
 
 class terrariumWebcamRPI(terrariumWebcamSource):
   TYPE = 'rpicam'
-  VALID_SOURCE = '^rpicam$'
+  VALID_SOURCE = '^rpicam(,\d+)?$'
   INFO_SOURCE = 'rpicam'
 
   def get_raw_data(self):
     logger.debug('Using RPICAM')
+    power_mngt = None
+    if ',' in self.location:
+      power_mngt = self.location.split(',')[1]
+      # Some kind of 'power management' with the last gpio pin number :)
+      logger.debug('Enabling IR LED for webcam \'{}\' with GPIO power pin {}'.format(self.get_name(),power_mngt))
+      GPIO.setup(terrariumUtils.to_BCM_port_number(power_mngt), GPIO.OUT)
+      sleep(0.1)
+
     stream = BytesIO()
     try:
       with PiCameraUpstream(resolution=(self.resolution['width'], self.resolution['height'])) as camera:
@@ -608,7 +616,13 @@ class terrariumWebcamRPI(terrariumWebcamSource):
         camera.capture(stream, format='jpeg')
         logger.debug('Done creating RPICAM image')
         self.raw_image = stream
-        return True
+
+      if power_mngt:
+        # Shutdown the IR LEDS when done
+        logger.debug('Shutting down IR LEDS for webcam {}'.format(self.get_name()))
+        GPIO.cleanup(errariumUtils.to_BCM_port_number(power_mngt))
+
+      return True
     except PiCameraError:
       logger.exception('Error getting raw RPI image from webcam \'%s\' with error message:' % (self.get_name(),))
 
