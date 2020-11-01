@@ -80,7 +80,7 @@ class terrariumEnvironmentPart(object):
       settletime = self.config['alarm_min']['settle']
       onduration = self.config['alarm_min']['duration_on']
       timerdata = self.timer_min_data
-      lastaction = timerdata['lastaction']      
+      lastaction = timerdata['lastaction']
     elif 'max' == part:
       powerswitches = self.config['alarm_max']['powerswitches']
       settletime = self.config['alarm_max']['settle']
@@ -804,7 +804,7 @@ class terrariumEnvironment(object):
         # There is an extra lights check. Only allow power on when the lights are in the same state as the environment light status, else force to off
         if 'ignore' != environment_part.get_alarm_min_light_state() and toggle_on_alarm_min is not False:
           # Check if the switch should be off
-          if environment_part.get_alarm_min_light_state() != 'on' if self.light_on() else 'off':
+          if environment_part.get_alarm_min_light_state() != ('on' if self.light_on() else 'off'):
             # Switch should be set to off... so force to False to make sure the power will be shutdown if there is still power running...
             logger.debug('Forcing alarm low to off due to lights off')
             toggle_on_alarm_min = False
@@ -812,7 +812,7 @@ class terrariumEnvironment(object):
         # There is an extra lights check. Only allow power on when the lights are in the same state as the environment light status, else force to off
         if 'ignore' != environment_part.get_alarm_max_light_state() and toggle_on_alarm_max is not False:
           # Check if the switch should be off
-          if environment_part.get_alarm_max_light_state() != 'on' if self.light_on() else 'off':
+          if environment_part.get_alarm_max_light_state() != ('on' if self.light_on() else 'off'):
             # Switch should be set to off... so force to False to make sure the power will be shutdown if there is still power running...
             logger.debug('Forcing alarm high to off due to lights off')
             toggle_on_alarm_max = False

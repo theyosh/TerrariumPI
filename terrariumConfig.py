@@ -436,6 +436,11 @@ class terrariumConfig(object):
               with open('.collector.update.{}.sql'.format(version),'w') as sql_file:
                 sql_file.write(collector_update_sql.strip())
 
+
+        elif version == 399:
+          title = self.__get_config('terrariumpi').get('title').replace('3.9.9','').strip()
+          self.__config.set('terrariumpi', 'title', str(title))
+
       # Update version number
       self.__config.set('terrariumpi', 'version', str(to_version))
       self.__save_config()
