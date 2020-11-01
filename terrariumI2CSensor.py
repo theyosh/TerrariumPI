@@ -8,7 +8,6 @@ import smbus2
 import sys
 import Adafruit_SHT31
 import bme280
-from CCS811_RPi import CCS811_RPi
 
 # Dirty hack to include someone his code... to lazy to make it myself :)
 # https://github.com/ageir/chirp-rpi
@@ -27,6 +26,7 @@ try:
   import adafruit_sht31d
   import board
   import busio
+  import adafruit_ccs811
 except Exception:
   pass # Needs python3
 
@@ -591,51 +591,25 @@ class terrariumCCS811Sensor(terrariumI2CSensor):
   TYPE = 'css811'
   VALID_SENSOR_TYPES = ['co2']
 
-  '''
-  MEAS MODE REGISTER AND DRIVE MODE CONFIGURATION
-  0b0       Idle (Measurements are disabled in this mode)
-  0b10000   Constant power mode, IAQ measurement every second
-  0b100000  Pulse heating mode IAQ measurement every 10 seconds
-  0b110000  Low power pulse heating mode IAQ measurement every 60
-  0b1000000 Constant power mode, sensor measurement every 250ms
-  '''
-  # Set MEAS_MODE (measurement interval)
-  MODE = 0b100000
-
-  def __get_address(self):
-    address = self.get_address().split(',')
-    bus = 1 if len(address) == 1 else int(address[1])
-    #address = int('0x' + address[0],16)
-    return (address,bus)
-
   def load_raw_data(self):
     sensor_data = None
 
     try:
-      sensor_data = self.get_empty_data_set()
-      (address,bus) = self.__get_address()
+      i2c = busio.I2C(board.SCL, board.SDA)
+      ccs811 = adafruit_ccs811.CCS811(i2c)
 
-      with smbus2.SMBus(bus) as i2cbus:
-        sensor = CCS811_RPi(bus,address)
-        sensor.configureSensor(terrariumCCS811Sensor.MODE)
-        sensor_status = sensor.readStatus()
+      ccs811.drive_mode = adafruit_ccs811.DRIVE_MODE_1SEC
 
-        error = sensor.checkError(sensor_status)
-        if error:
-          print('Error in measurement from terrariumCCS811Sensor')
-          return None
+      while not ccs811.data_ready:
+        pass
 
-        if not sensor.checkDataReady(sensor_status):
-          print ('CCS811: No new samples are ready')
-          return None
+      co2 = ccs811.eco2
 
-        data = sensor.readAlg()
-        if not data:
-          print ('CCS811: Invalid result received')
-          return None
-
-        # the compensated_reading class has the following attributes
-        sensor_data['co2'] = data['eCO2']
+      if(co2 > 0 and co2 < 8192):
+        sensor_data['co2'] = co2
+#        print("CO2: {} PPM".format(ccs811.eco2))
+      else:
+        return None
 
     except Exception as ex:
       print('terrariumCCS811Sensor Ex:')
