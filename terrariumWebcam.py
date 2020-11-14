@@ -620,7 +620,7 @@ class terrariumWebcamRPI(terrariumWebcamSource):
       if power_mngt:
         # Shutdown the IR LEDS when done
         logger.debug('Shutting down IR LEDS for webcam {}'.format(self.get_name()))
-        GPIO.cleanup(errariumUtils.to_BCM_port_number(power_mngt))
+        GPIO.cleanup(terrariumUtils.to_BCM_port_number(power_mngt))
 
       return True
     except PiCameraError:
