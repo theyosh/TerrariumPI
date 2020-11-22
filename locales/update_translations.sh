@@ -100,17 +100,4 @@ sed -e "s@YEAR ORGANIZATION@2016-${YEAR} TheYOSH@g" \
     -e 's@ENCODING@8bit@g' \
     -i terrariumpi.pot
 
-echo "Creating en_US language"
-grep -v 'msgstr ""' terrariumpi.pot | sed 's@msgid "\([^"]*\)"@msgid "\1"\nmsgstr "\1"@' > en_US/LC_MESSAGES/terrariumpi.po
-sed -e "s@YEAR-MO-DA HO:MI+ZONE@${NOW}@g" \
-    -e 's@FIRST AUTHOR@Joshua (TheYOSH) Rubingh@g' \
-    -e 's@ORGANIZATION@TheYOSH@g' \
-    -e 's@FULL NAME@Joshua (TheYOSH) Rubingh@g' \
-    -e 's@EMAIL\@ADDRESS@terrariumpi\@theyosh.nl@g' \
-    -e 's@CHARSET@UTF-8@g' \
-    -e 's@ENCODING@8bit@g' \
-    -e "s@PACKAGE VERSION@TerrariumPI ${VERSION}@g" \
-    -e 's@"Language-Team: LANGUAGE <LL\@li.org>\\n"@"Language-Team: \\n"\n"Language: en_US\\n"@g' \
-    -i en_US/LC_MESSAGES/terrariumpi.po
-msgfmt en_US/LC_MESSAGES/terrariumpi.po -o en_US/LC_MESSAGES/terrariumpi.mo
 echo "Done!"

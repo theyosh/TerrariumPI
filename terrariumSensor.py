@@ -90,6 +90,10 @@ class terrariumSensorSource(object):
 
     return self.__sensor_cache_key
 
+  def get_empty_data_set(self):
+    data = { key: None for key in self.VALID_SENSOR_TYPES }
+    return data
+
   def __within_limits(self,current_value):
     if self.get_current() is None or self.get_sensor_type() in ['uva','uvb','light'] or self.get_type() in ['ytxx-digital']:
       return True

@@ -31,6 +31,7 @@ class terrariumEnvironmentPart(object):
     self.timer_max_data = {'lastaction' : 0, 'power_state' : None}
 
     self.last_update = 0
+    self.active_timer = None
 
   def __get_power_state(self,powerswitchlist):
     self.timer_min_data['max_power'] = False
@@ -72,17 +73,20 @@ class terrariumEnvironmentPart(object):
     lastaction = 0
     settletime = 0
     onduration = 0
+    timerdata = {}
 
     if 'min' == part:
       powerswitches = self.config['alarm_min']['powerswitches']
       settletime = self.config['alarm_min']['settle']
       onduration = self.config['alarm_min']['duration_on']
-      lastaction = self.timer_min_data['lastaction']
+      timerdata = self.timer_min_data
+      lastaction = timerdata['lastaction']
     elif 'max' == part:
       powerswitches = self.config['alarm_max']['powerswitches']
       settletime = self.config['alarm_max']['settle']
       onduration = self.config['alarm_max']['duration_on']
-      lastaction = self.timer_max_data['lastaction']
+      timerdata = self.timer_max_data
+      lastaction = timerdata['lastaction']
 
     if len(powerswitches) == 0:
       return
@@ -93,15 +97,13 @@ class terrariumEnvironmentPart(object):
 
       self.__toggle_powerswitches(switches,action)
 
-      if 'min' == part:
-        self.timer_min_data['lastaction'] = now
-        if 'on' == action and onduration > 0:
-          (Timer(onduration, self.toggle_off_alarm_min, (powerswitchlist,True))).start()
-
-      elif 'max' == part:
-        self.timer_max_data['lastaction'] = now
-        if 'on' == action and onduration > 0:
-          (Timer(onduration, self.toggle_off_alarm_max, (powerswitchlist,True))).start()
+      timerdata['lastaction'] = now
+      if self.active_timer != None:
+        self.active_timer.cancel()
+        self.active_timer = None
+      if 'on' == action and onduration > 0:
+        self.active_timer = Timer(onduration, self.toggle_off_alarm_min if 'min' == part else self.toggle_off_alarm_max, (powerswitchlist,True))
+        self.active_timer.start()
 
   def set_alarm_min(self,start,stop,timer_on,timer_off,light_state,door_state,duration_on,settle,powerswitches):
     self.config['alarm_min'] = {'timer_start':start,
@@ -798,6 +800,22 @@ class terrariumEnvironment(object):
           if toggle_on_alarm_max and environment_part.has_sensors() and not environment_part.sensors_in_error():
             # Use the extra added sensors for finetuning the trigger action
             toggle_on_alarm_max = environment_part.is_alarm_max()
+
+        # There is an extra lights check. Only allow power on when the lights are in the same state as the environment light status, else force to off
+        if 'ignore' != environment_part.get_alarm_min_light_state() and toggle_on_alarm_min is not False:
+          # Check if the switch should be off
+          if environment_part.get_alarm_min_light_state() != ('on' if self.light_on() else 'off'):
+            # Switch should be set to off... so force to False to make sure the power will be shutdown if there is still power running...
+            logger.debug('Forcing alarm low to off due to lights off')
+            toggle_on_alarm_min = False
+
+        # There is an extra lights check. Only allow power on when the lights are in the same state as the environment light status, else force to off
+        if 'ignore' != environment_part.get_alarm_max_light_state() and toggle_on_alarm_max is not False:
+          # Check if the switch should be off
+          if environment_part.get_alarm_max_light_state() != ('on' if self.light_on() else 'off'):
+            # Switch should be set to off... so force to False to make sure the power will be shutdown if there is still power running...
+            logger.debug('Forcing alarm high to off due to lights off')
+            toggle_on_alarm_max = False
 
         logger.debug('Environment %s is has alarm_min: %s, alarm_max: %s, trigger?: %s' % (environment_part.get_type(),toggle_on_alarm_min,toggle_on_alarm_max,trigger))
 

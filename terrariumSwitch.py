@@ -24,6 +24,13 @@ except ImportError as ex:
 sys.path.insert(0, './energenie-connect0r')
 import energenieconnector
 
+sys.path.insert(0, './relay8-rpi/python')
+from relay8 import set as relay8SetV1
+from relay8 import get as relay8GetV1
+
+from lib8relay import set as relay8SetV3
+from lib8relay import get as relay8GetV3
+
 from hashlib import md5
 from pylibftdi import Driver, BitBangDevice, SerialDevice, Device
 from gpiozero import Energenie
@@ -58,7 +65,11 @@ class terrariumPowerSwitchSource(object):
     self.load_hardware()
 
     self.state = None
-    if self.get_type() not in [terrariumPowerSwitchWeMo.TYPE, terrariumPowerSwitchMSS425E.TYPE]:
+    ignore_scanning = [terrariumPowerSwitchWeMo.TYPE, terrariumPowerSwitchMSS425E.TYPE]
+    if sys.version_info >= (3, 7):
+      ignore_scanning.append('tplinkkasa')
+
+    if self.get_type() not in ignore_scanning:
       # Do not toggle off switches during scanning.....
       prev_state = prev_state if prev_state is not None else terrariumPowerSwitch.OFF
       self.set_state(prev_state,True)
@@ -340,7 +351,7 @@ class terrariumPowerSwitchFTDI(terrariumPowerSwitchSource):
 
     data = None
     address = self.__get_address()
-    
+
     if 'BitBang' == self.__device_type:
       with BitBangDevice(self.__device) as device:
         device.baudrate = 9600
@@ -370,6 +381,34 @@ class terrariumPowerSwitchGPIO(terrariumPowerSwitchSource):
 
 class terrariumPowerSwitchGPIOInverse(terrariumPowerSwitchGPIO):
   TYPE = 'gpio-inverse'
+
+class terrariumPowerSwitchRelay8Stack(terrariumPowerSwitchSource):
+  TYPE = '8relay-stack_v1'
+
+  def __get_addres(self):
+    address = self.address.split(',')
+    if 1 == len(address):
+        address.append(address[0])
+        address[0] = 0
+
+    return address
+
+  def set_hardware_state(self, state, force = False):
+    address = self.__get_addres()
+    if self.get_type() == terrariumPowerSwitchRelay8Stack.TYPE:
+      relay8SetV1(address[0], address[1], 1 if state is terrariumPowerSwitch.ON else 0)
+    elif self.get_type() == terrariumPowerSwitchRelay8StackV3.TYPE:
+      relay8SetV3(address[0], address[1], 1 if state is terrariumPowerSwitch.ON else 0)
+
+  def get_hardware_state(self):
+    address = self.__get_addres()
+    if self.get_type() == terrariumPowerSwitchRelay8Stack.TYPE:
+      relay8GetV1(address[0], address[1])
+    elif self.get_type() == terrariumPowerSwitchRelay8StackV3.TYPE:
+      relay8GetV3(address[0], address[1])
+
+class terrariumPowerSwitchRelay8StackV3(terrariumPowerSwitchRelay8Stack):
+  TYPE = '8relay-stack_v3'
 
 class terrariumPowerSwitchWeMo(terrariumPowerSwitchSource):
   TYPE = 'wemo'
@@ -409,20 +448,86 @@ class terrariumPowerSwitchWeMo(terrariumPowerSwitchSource):
 
 class terrariumPowerSwitchEnergenieUSB(terrariumPowerSwitchSource):
   TYPE = 'eg-pm-usb'
+  CMD = '/usr/local/bin/sispmctl' if os.path.exists('/usr/local/bin/sispmctl') else '/usr/bin/sispmctl'
 
   def load_hardware(self):
-    # We have per device 4 outlets.... so outlet 7 is device 1
-    self.__device = (int(self.get_address())-1) / 4
-    if self.__device < 0:
-      self.__device = 0
+    address = self.get_address().strip().split(',')
+    self.__socket_nr = int(address[0].strip())
+    # Default we use the device counter option
+    self.__device_type = '-d'
+    # Check if custom device number or serial is entered
+    self.__device = 0 if len(address) == 1 else address[1].strip()
+    # If the device is not a number, it should be a string with an identifier in it
+    if not terrariumUtils.is_float(self.__device):
+      # Use the device serial identification
+      self.__device_type = '-D'
+    else:
+      # If the user has enterd a number, it is probaly 1 to high. A human will enter device number 1 and not zero....
+      self.__device = int(self.__device) - 1
 
   def set_hardware_state(self, state, force = False):
-    address = int(self.get_address()) % 4
-    if address == 0:
-      address = 4
-
-    cmd = ['/usr/bin/sispmctl', '-d',str(self.__device),('-o' if state is terrariumPowerSwitch.ON else '-f'),str(address)]
+    cmd = [self.CMD, self.__device_type, str(self.__device),('-o' if state is terrariumPowerSwitch.ON else '-f'),str(self.__socket_nr)]
     subprocess.check_output(cmd)
+
+  def get_hardware_state(self):
+    status_regex = r'Status of outlet ' + str(self.__socket_nr) + ':\s*(?P<status>[0,1])'
+
+    cmd = [self.CMD, self.__device_type, str(self.__device),'-n','-g',str(self.__socket_nr)]
+    data = subprocess.check_output(cmd).strip().decode('utf-8').split('\n')
+    for line in data:
+      line = re.match(status_regex,line)
+      if line is not None:
+        line = line.groupdict()
+        return terrariumPowerSwitch.ON if int(line['status']) == 1 else terrariumPowerSwitch.OFF
+
+    # Could not read out, so return nothing...
+    return None
+
+  @staticmethod
+  def scan_power_switches(callback=None, **kwargs):
+    switch_type = terrariumPowerSwitchEnergenieUSB.TYPE
+    scan_regex = r'^(?P<option>[^:]+):\s*(?P<value>.*)$'
+
+    cmd = [terrariumPowerSwitchEnergenieUSB.CMD,'-s']
+
+    try:
+      data = subprocess.check_output(cmd).strip().decode('utf-8').split('\n')
+    except subprocess.CalledProcessError as ex:
+      return False
+
+    amount_sockets = None
+    serial = None
+    device_nr = 0
+
+    for line in data:
+      line = re.match(scan_regex,line)
+      if line is not None:
+        line = line.groupdict()
+        if 'device type' == line['option']:
+          # By default we have 4 sockets.... not sure..
+          amount_sockets = 4
+          amount_regex = r'(?P<amount>\d+)'
+          value = re.match(scan_regex,line['value'])
+          if value is not None:
+            value = value.groupdict()
+            amount_sockets = int(value['amount'])
+
+        elif 'serial number' == line['option'] and amount_sockets is not None:
+          serial = line['value']
+
+          # New switches can be added....
+          device_nr += 1
+          for x in range(1,amount_sockets+1):
+            yield terrariumPowerSwitch(md5((switch_type + str(x) + ',' + str(serial)).encode()).hexdigest(),
+                                 switch_type,
+                                 '{},{}'.format(x,serial),
+                                 '{} device nr: {}, Socket: {}'.format(switch_type,device_nr,x),
+                                 None,
+                                 callback)
+
+          amount_sockets = None
+
+
 
 class terrariumPowerSwitchEnergenieLAN(terrariumPowerSwitchSource):
   TYPE = 'eg-pm-lan'
@@ -516,7 +621,7 @@ class terrariumPowerSwitchEnergenieRF(terrariumPowerSwitchSource):
 
 class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
   TYPE = 'sonoff'
-  VALID_SOURCE = '^http:\/\/((?P<user>[^:]+):(?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?$'
+  VALID_SOURCE = '^http:\/\/((?P<user>[^:]+):(?P<passwd>[^@]+)@)?(?P<host>[^#\/]+)(\/)?(#(?P<nr>\d+))?$'
 
   def load_hardware(self):
     self.__firmware = None
@@ -532,6 +637,8 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
     data = re.match(self.VALID_SOURCE,self.get_address())
     if data:
       data = data.groupdict()
+      if 'nr' not in data or data['nr'] == '' or data['nr'] is None:
+        data['nr'] = 1
 
       try:
         # Try Tasmota
@@ -541,16 +648,19 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
         # http://sonoff/cm?cmnd=Power%20off
         # http://sonoff/cm?user=admin&password=joker&cmnd=Power%20Toggle
 
-        url = 'http://{}/cm?cmnd=Power'.format(data['host'])
+        url = 'http://{}/cm?'.format(data['host'])
         if 'user' in data and 'password' in data:
-          url += '&user={}&password={}'.format(data['user'],data['password'])
+          url += 'user={}&password={}&'.format(data['user'],data['password'])
 
+        url += 'cmnd=Power{}'.format(data['nr'])
+      
         state = terrariumUtils.get_remote_data(url)
         if state is None:
           raise Exception('No data, jump to next test')
 
         self.__firmware = 'tasmota'
         self.__retries = 0
+        self.url = url
 
       except Exception as ex:
         print('Tasmota exceptions')
@@ -637,9 +747,7 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
       url = None
 
       if 'tasmota' == self.__firmware:
-        url = 'http://{}/cm?cmnd=Power%20{}'.format(data['host'],('1' if state else '0'))
-        if 'user' in data and 'password' in data:
-          url += '&user={}&password={}'.format(data['user'],data['password'])
+        url = self.url + '%20{}'.format('1' if state else '0')
 
       elif 'espeasy' == self.__firmware:
         url = 'http://{}/control?cmd=event,T{}'.format(data['host'],('1' if state else '0'))
@@ -672,9 +780,7 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
       url = None
 
       if 'tasmota' == self.__firmware:
-        url = 'http://{}/cm?cmnd=Power'.format(data['host'])
-        if 'user' in data and 'password' in data:
-          url += '&user={}&password={}'.format(data['user'],data['password'])
+        url = self.url
 
       elif 'espeasy' == self.__firmware:
         url = 'http://{}/json'.format(data['host'])
@@ -1211,6 +1317,7 @@ class terrariumPowerSwitch(object):
   POWER_SWITCHES = [terrariumPowerSwitchFTDI,
                     terrariumPowerSwitchGPIO,
                     terrariumPowerSwitchGPIOInverse,
+                    terrariumPowerSwitchRelay8Stack,
                     terrariumPowerSwitchEnergenieUSB,
                     terrariumPowerSwitchEnergenieLAN,
                     terrariumPowerSwitchEnergenieRF,
@@ -1230,6 +1337,11 @@ class terrariumPowerSwitch(object):
   if sys.version_info >= (3, 3):
     # Merros IoT library needs Python 3.3+
     POWER_SWITCHES.append(terrariumPowerSwitchMSS425E)
+
+  if sys.version_info >= (3, 7):
+    # Merros IoT library needs Python 3.3+
+    from terrariumSwitchKasa import terrariumPowerSwitchTPLinkKasa
+    POWER_SWITCHES.append(terrariumPowerSwitchTPLinkKasa)
 
   def __new__(self, switch_id, hardware_type, address, name = '', prev_state = None, callback = None):
     for powerswitch in terrariumPowerSwitch.POWER_SWITCHES:

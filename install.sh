@@ -18,12 +18,12 @@ INSTALLER_TITLE="TerrariumPI v. ${VERSION} (Python${PYTHON})"
 
 CLEANUP_PACKAGES="wolfram sonic-pi openbox nodered java openjdk chromium-browser desktop-base gnome-desktop3-data libgnome-desktop epiphany-browser-data epiphany-browser nuscratch scratch wiringpi libreoffice"
 
-PIP_MODULES="setuptools python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit_GPIO Adafruit_DHT Adafruit-SHT31 luma.oled bluepy pywemo pyownet emails mh-z19 icalendar melopero-amg8833 PCA9685-driver pyfiglet"
+PIP_MODULES="setuptools python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit-SHT31 bluepy pywemo pyownet emails mh-z19 icalendar melopero-amg8833 PCA9685-driver pyfiglet RPi.bme280"
 if [ $PYTHON -eq 2 ]; then
-  PIP_MODULES="${PIP_MODULES} iCalEvents==0.1.21 gevent==1.4.0"
+  PIP_MODULES="${PIP_MODULES} iCalEvents==0.1.21 gevent==1.4.0 luma.core==1.12.0 luma.oled"
 fi
 if [ $PYTHON -eq 3 ]; then
-  PIP_MODULES="${PIP_MODULES} gevent opencv-python-headless meross-iot==0.2.2.3 iCalEvents adafruit-circuitpython-sht31d mitemp_bt"
+  PIP_MODULES="${PIP_MODULES} gevent opencv-python-headless meross-iot==0.2.2.3 iCalEvents adafruit-circuitpython-sht31d mitemp_bt asyncio luma.oled poetry"
 fi
 
 if [ `grep -ic " buster " /etc/apt/sources.list` -eq 2 ]; then
@@ -80,7 +80,7 @@ debconf-apt-progress -- apt-get -y remove owhttpd owftpd
 # Install required packages to get the terrarium software running
 PYTHON_LIBS="python-pip python-dev python-mediainfodll python-smbus python-pil python-opencv python-numpy python-lxml"
 if [ $PYTHON -eq 3 ]; then
-  PYTHON_LIBS="python3-pip python3-dev python3-mediainfodll python3-smbus python3-pil python3-opencv python3-numpy python3-lxml"
+  PYTHON_LIBS="python3-pip python3-dev python3-mediainfodll python3-smbus python3-pil python3-opencv python3-numpy python3-lxml python3-venv"
 fi
 
 debconf-apt-progress -- apt-get -y autoremove
@@ -90,7 +90,7 @@ debconf-apt-progress -- apt-get -y full-upgrade
 
 APT_PACKAGES="libftdi1 screen git subversion watchdog build-essential i2c-tools pigpio owserver sqlite3 vlc-bin ffmpeg libfreetype6-dev libjpeg-dev \
   libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libgstreamer0.10-0 libgstreamer1.0-0 libilmbase12 \
-  libopenexr22 libgtk-3-0 libxml2-dev libxslt1-dev python-twisted python-zope.interface $PYTHON_LIBS"
+  libopenexr22 libgtk-3-0 libxml2-dev libxslt1-dev python-twisted python-zope.interface libgpiod2 $PYTHON_LIBS"
 
 # libjasper1 -> Is alleen op Raspbarry ARM....
 
@@ -273,20 +273,12 @@ Install required software (some modules will take 5-10 min.)
 Installing python${PYTHON} module ${MODULE_COUNTER} out of ${NUMBER_OF_MODULES}: ${PIP_MODULE} (attempt ${ATTEMPT}) ...
 XXX
 EOF
-    # use --install-option="--force-pi" to make sure the package Adafruit_DHT will install!
     if [ $PYTHON -eq 2 ]; then
-      if [ $PIP_MODULE == 'Adafruit_DHT' ]; then
-        pip2 install -q --install-option="--force-pi" --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
-      else
-        pip2 install -q --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
-      fi
+      pip2 install -q --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
 
     elif [ $PYTHON -eq 3 ]; then
-      if [ $PIP_MODULE == 'Adafruit_DHT' ]; then
-        pip3 install -q --install-option="--force-pi" --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
-      else
-        pip3 install -q --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
-      fi
+      pip3 install -q --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
+
     fi
 
     if [ $? -eq 0 ]; then
@@ -303,7 +295,7 @@ EOF
 
 done
 
-PROGRESS=96
+PROGRESS=92
 # Update submodules if downloaded through tar or zip
 cd "${BASEDIR}/"
 
@@ -330,7 +322,68 @@ Installing python${PYTHON} module: Bright-Pi ...
 XXX
 EOF
 
+
+PROGRESS=94
+# Update submodules if downloaded through tar or zip
+cd "${BASEDIR}/Adafruit_Python_DHT"
+if [ $PYTHON -eq 2 ]; then
+  sudo pip2 uninstall -y -q Adafruit_DHT 2> /dev/null
+  sudo python2 setup.py install
+elif [ $PYTHON -eq 3 ]; then
+  sudo pip3 uninstall -y -q Adafruit_DHT 2> /dev/null
+  sudo python3 setup.py install
+fi
+
+
+cat <<EOF
+XXX
+$PROGRESS
+Install required software (some modules will take 5-10 min.)
+
+Installing python${PYTHON} module: Adafruit_Python_DHT ...
+XXX
+EOF
+
+
+PROGRESS=96
+# Update submodules if downloaded through tar or zip
+if [ $PYTHON -eq 3 ]; then
+  cd "${BASEDIR}/python-kasa"
+  poetry build
+  sudo pip3 install -U dist/python_kasa-*.whl
+fi
+
+
+cat <<EOF
+XXX
+$PROGRESS
+Install required software (some modules will take 5-10 min.)
+
+Installing python${PYTHON} module: TP Link Kasa ...
+XXX
+EOF
+
+
 PROGRESS=98
+# Update submodules if downloaded through tar or zip
+cd "${BASEDIR}/8relay-rpi/python/8relay"
+if [ $PYTHON -eq 2 ]; then
+  sudo python2 setup.py install
+elif [ $PYTHON -eq 3 ]; then
+  sudo python3 setup.py install
+fi
+
+cat <<EOF
+XXX
+$PROGRESS
+Install required software (some modules will take 5-10 min.)
+
+Installing python${PYTHON} module: TP Link Kasa ...
+XXX
+EOF
+
+
+PROGRESS=99
 cat <<EOF
 XXX
 $PROGRESS

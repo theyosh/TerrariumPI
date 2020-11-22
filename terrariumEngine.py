@@ -133,11 +133,14 @@ class terrariumEngine(object):
     logger.info('Done loading terrariumPI PI volume indicator')
 
     # Load Weather part
-    logger.info('Loading terrariumPI weather data')
-    self.weather = terrariumWeather(self.config.get_weather_location(),
-                                    self.get_temperature_indicator,
-                                    self.get_windspeed_indicator,
-                                    self.get_weather)
+    self.weather = None
+    if self.config.get_weather_location():
+      logger.info('Loading terrariumPI weather data')
+      self.weather = terrariumWeather(self.config.get_weather_location(),
+                                      self.get_temperature_indicator,
+                                      self.get_windspeed_indicator,
+                                      self.get_weather)
+
     logger.info('Done loading terrariumPI weather data')
 
     # Load humidity and temperature sensors
@@ -456,15 +459,16 @@ class terrariumEngine(object):
 
         if 'motionboxes' in webcamdata:
           motion_boxes = webcamdata['motionboxes']
+          
+          if motion_boxes == "true":
+            if 'motion_delta_threshold' in webcamdata:
+              motion_delta_threshold = webcamdata['motiondeltathreshold']
 
-        if 'motion_delta_threshold' in webcamdata:
-          motion_delta_threshold = webcamdata['motiondeltathreshold']
+            if 'motion_min_area' in webcamdata:
+              motion_min_area = webcamdata['motionminarea']
 
-        if 'motion_min_area' in webcamdata:
-          motion_min_area = webcamdata['motionminarea']
-
-        if 'motion_compare_frame' in webcamdata:
-          motion_compare_frame = webcamdata['motioncompareframe']
+            if 'motion_compare_frame' in webcamdata:
+              motion_compare_frame = webcamdata['motioncompareframe']
 
         # don't let bad location data kill the system
         try:
@@ -512,15 +516,16 @@ class terrariumEngine(object):
 
       if 'motionboxes' in webcamdata:
         webcam.set_motion_boxes(webcamdata['motionboxes'])
+      
+      if webcamdata['motionboxes'] == "true":
+          if 'motiondeltathreshold' in webcamdata:
+            webcam.set_motion_delta_threshold(webcamdata['motiondeltathreshold'])
 
-      if 'motiondeltathreshold' in webcamdata:
-        webcam.set_motion_delta_threshold(webcamdata['motiondeltathreshold'])
+          if 'motionminarea' in webcamdata:
+            webcam.set_motion_min_area(webcamdata['motionminarea'])
 
-      if 'motionminarea' in webcamdata:
-        webcam.set_motion_min_area(webcamdata['motionminarea'])
-
-      if 'motioncompareframe' in webcamdata:
-        webcam.set_motion_compare_frame(webcamdata['motioncompareframe'])
+          if 'motioncompareframe' in webcamdata:
+            webcam.set_motion_compare_frame(webcamdata['motioncompareframe'])
 
       if 'awb' in webcamdata:
         webcam.set_awb(webcamdata['awb'])
@@ -605,10 +610,11 @@ class terrariumEngine(object):
                   'error' : ''}
 
       # Update weather
-      self.weather.update()
-      weather_data = self.weather.get_data()
-      if 'hour_forecast' in weather_data and len(weather_data['hour_forecast']) > 0:
-        self.collector.log_weather_data(weather_data['hour_forecast'][0])
+      if self.weather is not None:
+        self.weather.update()
+        weather_data = self.weather.get_data()
+        if 'hour_forecast' in weather_data and len(weather_data['hour_forecast']) > 0:
+          self.collector.log_weather_data(weather_data['hour_forecast'][0])
 
       # Update sensors
       for sensorid in self.sensors:
@@ -637,7 +643,7 @@ class terrariumEngine(object):
           #self.power_switches[power_switch_id].timer()
           # Update the current sensor.
           self.power_switches[power_switch_id].update()
-          if self.power_switches[power_switch_id].is_on():
+          if self.power_switches[power_switch_id].get_state() > 0:
             power_state = '{}%'.format(self.power_switches[power_switch_id].get_state())
             if not self.power_switches[power_switch_id].is_dimmer():
               power_state = 'on' if self.power_switches[power_switch_id].is_on() else 'off'
@@ -908,13 +914,18 @@ reset=$(tput sgr0)
     return self.config.save_weather(data)
 
   def get_weather_config(self):
+    if self.weather is None:
+      return {}
+
     return self.weather.get_config()
 
   def get_weather(self, parameters = [], socket = False):
+
     try:
       data = self.weather.get_data()
     except Exception as ex:
-      logger.error('Strange weather.. error https://github.com/theyosh/TerrariumPI/issues/246: {}'.format(ex))
+      # This is happening when during startup the data changes... so save to ignore
+#      logger.error('Strange weather.. error https://github.com/theyosh/TerrariumPI/issues/246: {}'.format(ex))
       return None
 
     self.environment.update()
@@ -1431,9 +1442,11 @@ reset=$(tput sgr0)
   def get_uptime(self, socket = False):
     data = {'uptime' : uptime.uptime(),
             'timestamp' : int(time.time()),
-            'day' : self.weather.is_day(),
             'load' : os.getloadavg(),
             'cores' : psutil.cpu_count()}
+
+    if self.weather is not None:
+      data['day'] = self.weather.is_day()
 
     if socket:
       self.__send_message({'type':'uptime','data':data})
@@ -1600,10 +1613,10 @@ reset=$(tput sgr0)
         else:
           return False
 
-      # Update weather data
-      update_ok = self.set_weather_config({'location' : data['location']}) and self.set_system_config(data)
+      update_ok = self.set_system_config(data)
       if update_ok:
         # Update config settings
+        self.set_weather_config({'location' : data['location']})
         self.pi_power_wattage = float(self.config.get_pi_power_wattage())
         self.set_authentication(self.config.get_admin(),self.config.get_password())
 

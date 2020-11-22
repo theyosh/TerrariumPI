@@ -32,7 +32,7 @@ class terrariumConfig(object):
     logger.info('Setting up configuration')
     self.__cache_available_languages = None
 
-    self.__config = configparser.ConfigParser()
+    self.__config = configparser.ConfigParser(interpolation=None)
     # Read defaults config file
     self.__config.readfp(open(terrariumConfig.DEFAULT_CONFIG))
     logger.info('Loaded default settings from %s' % (terrariumConfig.DEFAULT_CONFIG,))
@@ -436,6 +436,11 @@ class terrariumConfig(object):
               with open('.collector.update.{}.sql'.format(version),'w') as sql_file:
                 sql_file.write(collector_update_sql.strip())
 
+
+        elif version == 399:
+          title = self.__get_config('terrariumpi').get('title').replace('3.9.9','').strip()
+          self.__config.set('terrariumpi', 'title', str(title))
+
       # Update version number
       self.__config.set('terrariumpi', 'version', str(to_version))
       self.__save_config()
@@ -527,7 +532,7 @@ class terrariumConfig(object):
   def get_available_languages(self):
     '''Get terrariumPI available languages'''
     if self.__cache_available_languages is None:
-      self.__cache_available_languages = [language.replace('locales/','').replace('/','') for language in glob("locales/*/")]
+      self.__cache_available_languages = ['en'] + [language.replace('locales/','').replace('/','') for language in glob("locales/*/")]
 
     return self.__cache_available_languages
 
