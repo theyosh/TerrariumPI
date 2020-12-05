@@ -798,7 +798,9 @@ class terrariumPowerSwitchSonoff(terrariumPowerSwitchSource):
         return self.state
 
       if 'tasmota' == self.__firmware:
-        return terrariumPowerSwitch.ON if terrariumUtils.is_true(state['POWER']) else terrariumPowerSwitch.OFF
+        for state_name, state_value in state.items():
+          if state_name.startswith('POWER'):
+            return terrariumPowerSwitch.ON if terrariumUtils.is_true(state_value) else terrariumPowerSwitch.OFF
       elif 'espeasy' == self.__firmware:
         return terrariumPowerSwitch.ON if terrariumUtils.is_true(state['POWER']) else terrariumPowerSwitch.OFF
       elif 'espurna' == self.__firmware:
