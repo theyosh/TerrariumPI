@@ -596,23 +596,35 @@ class terrariumCCS811Sensor(terrariumI2CSensor):
 
     try:
       i2c = busio.I2C(board.SCL, board.SDA)
+      print('Loaded I2C')
+      print(i2c)
       ccs811 = adafruit_ccs811.CCS811(i2c)
+      print('Loaded ccs811')
+      print(ccs811)
 
       ccs811.drive_mode = adafruit_ccs811.DRIVE_MODE_1SEC
+      print('Set drive mode to 1 sec.')
 
       while not ccs811.data_ready:
+        print('Sensor not ready...... ')
         pass
 
       co2 = ccs811.eco2
+      print('CO2 measurement')
+      print(co2)
 
       if(co2 > 0 and co2 < 8192):
         sensor_data['co2'] = co2
 #        print("CO2: {} PPM".format(ccs811.eco2))
       else:
+        print('Invalid value of co2')
+        print(co2)
         return None
 
     except Exception as ex:
       print('terrariumCCS811Sensor Ex:')
       print(ex)
 
+    print('Returning data')
+    print(sensor_data)
     return sensor_data
