@@ -1876,9 +1876,9 @@
               select_boxes.on('change',function(evt) {
                 // No powerswitches selected, so no required timer fields
                 if ('' == this.value) {
-                  $('[name^="' + this.name.replace('_powerswitches','_') + '"]').removeAttr('required').attr('readonly','readonly');
+                  $('[name^="' + this.name.replace('_powerswitches','_') + '"]').removeAttr('required');
                 } else {
-                  $('[name^="' + this.name.replace('_powerswitches','_') + '"]').removeAttr('readonly','disabled').attr('required','required');
+                  $('[name^="' + this.name.replace('_powerswitches','_') + '"]').attr('required','required');
                 }
                 $('.form-group span.required').remove();
                 $('.form-group:has([required="required"]) > label').append('<span class="required"> *</span>');
