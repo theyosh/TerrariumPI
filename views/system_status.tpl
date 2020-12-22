@@ -299,14 +299,14 @@
                       gauge_data.current = value['used'];
                       gauge_data.limit_max = value['total'];
                       gauge_data.alarm_max = gauge_data.limit_max * 0.9;
-                      gauge_data.alarm_min = gauge_data.limit_max * 0.1;
+                      gauge_data.alarm_min = 0;
                       break;
 
                     case 'disk':
                       gauge_data.current = value['used'];
                       gauge_data.limit_max = value['total'];
                       gauge_data.alarm_max = gauge_data.limit_max * 0.9;
-                      gauge_data.alarm_min = gauge_data.limit_max * 0.1;
+                      gauge_data.alarm_min = 0;
                       break;
                   }
                   gauge_data.alarm = gauge_data.current < gauge_data.alarm_min || gauge_data.current > gauge_data.alarm_max
