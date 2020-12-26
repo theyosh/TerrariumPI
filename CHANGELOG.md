@@ -2,6 +2,242 @@ Changelog
 =========
 
 
+3.9.9 (2020-12-26)
+------------------
+
+**New**
+------
+- Add debug. [theyosh]
+- Add support for CCS811 C02 sensor. [#462](https://github.com/theyosh/TerrariumPI/issues/462). [theyosh]
+- Add IR LED power management [#468](https://github.com/theyosh/TerrariumPI/issues/468). [theyosh]
+- Added translation using Weblate (Spanish (Argentina)) [Marcnr1984]
+- Add support for Dollar, Pounds and other currencies. [theyosh]
+- Add multiple EG-PM2 power switch boards and also scan for connected
+  boards and switches during startup. [#425](https://github.com/theyosh/TerrariumPI/issues/425). [theyosh]
+- Added translation using Weblate (Korean) [chog john]
+- Add a DB cleanup script. [#420](https://github.com/theyosh/TerrariumPI/issues/420). [theyosh]
+- Add support for sonoff multiple relay boards. [#421](https://github.com/theyosh/TerrariumPI/issues/421). [theyosh]
+- Add support for Sequent Microsystems 8-RELAYS (v3) Stackable Card for
+  Raspberry Pi. [theyosh]
+- Add support for Sequent Microsystems 8-RELAYS (v3) Stackable Card for
+  Raspberry Pi. [theyosh]
+- Add support for Sequent Microsystems 8-RELAYS Stackable Card for
+  Raspberry Pi. [theyosh]
+- Add support for single TP Link Kasa switches. [#398](https://github.com/theyosh/TerrariumPI/issues/398). [theyosh]
+- Added translation using Weblate (Catalan) [cmonicob]
+- Add TP Link Kasa support step1. [#379](https://github.com/theyosh/TerrariumPI/issues/379). [theyosh]
+- Add TP Link Kasa support step1. [#379](https://github.com/theyosh/TerrariumPI/issues/379). [theyosh]
+- Add Python API for TP-Link Kasa Smarthome products. [#379](https://github.com/theyosh/TerrariumPI/issues/379). [theyosh]
+
+**Fixes**
+------
+- Fix disk alarm badge. Caused by to big storage SD card ;). [#493](https://github.com/theyosh/TerrariumPI/issues/493).
+  [theyosh]
+- Fix changing required/readonly settings when changing power switches
+  in the environment page. [#459](https://github.com/theyosh/TerrariumPI/issues/459). [theyosh]
+- Fix typo. [npinter]
+- Fix add webcam with motiondeltathreshold not set. [Niko Pinter]
+- Fix logic bug. [theyosh]
+- Fix bug with update config settings. [Niko Pinter]
+- Fix typo. [theyosh]
+- Fix missing variable in the 404 page. Fixes [#463](https://github.com/theyosh/TerrariumPI/issues/463). [theyosh]
+- Fix supporting % sign in config settings [#445](https://github.com/theyosh/TerrariumPI/issues/445). [theyosh]
+- Fix initial startup without weather source. [#443](https://github.com/theyosh/TerrariumPI/issues/443). [theyosh]
+- Fix stupid bug [#430](https://github.com/theyosh/TerrariumPI/issues/430). [theyosh]
+- Fix for python2 [#427](https://github.com/theyosh/TerrariumPI/issues/427). [theyosh]
+- Fix not closing I2C when there is an error. [theyosh]
+- Fix missing dimmers. [#418](https://github.com/theyosh/TerrariumPI/issues/418). [theyosh]
+- Seccond attempt to fix new alsa logic... [#400](https://github.com/theyosh/TerrariumPI/issues/400). [TheYOSH]
+- Fix installer for Kasa. [theyosh]
+- New fix for DHT sensors. Using a different installation way...[#392](https://github.com/theyosh/TerrariumPI/issues/392).
+  [theyosh]
+- Final fixed?? Removed all Adafruit DHT code. [#392](https://github.com/theyosh/TerrariumPI/issues/392). [theyosh]
+- More debug and fix discovery. [#379](https://github.com/theyosh/TerrariumPI/issues/379). [theyosh]
+- Fix adding new calendar items. [theyosh]
+- Fix environment required fields. [theyosh]
+- Fix wrong calendar pulldown message. [theyosh]
+- Fix webcam running detection (visibility) check. [theyosh]
+
+**Updates**
+------
+- Small updates based on supplied sample code. [#462](https://github.com/theyosh/TerrariumPI/issues/462). [theyosh]
+- Update translation files. [weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translation files. [weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Support alternative/update version of sispmctl. [#425](https://github.com/theyosh/TerrariumPI/issues/425). [theyosh]
+- Update translation files. [weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update issue templates. [TheYOSH]
+- Update issue templates. [TheYOSH]
+- Update issue templates. [TheYOSH]
+- Update README.md. [TheYOSH]
+- Update translation files. [weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update installer to support new TPLink Kasa installation. [#398](https://github.com/theyosh/TerrariumPI/issues/398) [#379](https://github.com/theyosh/TerrariumPI/issues/379).
+  [theyosh]
+- Update TP Link kasa library. [theyosh]
+- Update translation files. [weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translations. [theyosh]
+- Update submodules. [theyosh]
+- Update luma.oled install due to Python2 and 3 differences. The best
+  thing is just to use Pyhton3. [#394](https://github.com/theyosh/TerrariumPI/issues/394). [theyosh]
+- Update installer [#392](https://github.com/theyosh/TerrariumPI/issues/392). [theyosh]
+- Update installer. [theyosh]
+- Update translation files. [weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translation files. [weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update for supporting IRF520 dimmer. [#363](https://github.com/theyosh/TerrariumPI/issues/363). [theyosh]
+- Update calendar system. [theyosh]
+- Update translation files. [weblate]
+
+  Updated by "Update PO files to match POT (msgmerge)" hook in Weblate.
+- Update translations. [theyosh]
+- Webcam updates! Now you can add markers on the webcam to show realtime
+  sensor data. This sensor data will update every 30 seconds. Use the
+  marker icon in the settings screen to add markers and sensors. This
+  also works for live webcams. Dropped the HLS player to make the live
+  webcam with zooming possible. [theyosh]
+
+**Other**
+------
+- Merge branch 'CCS811' [theyosh]
+- Working CCS811 sensor. [#462](https://github.com/theyosh/TerrariumPI/issues/462). [theyosh]
+- Merge branch 'master' into CCS811. [theyosh]
+- Merge branch 'master' into CCS811. [theyosh]
+- Refactor CCS811 sensor. [#462](https://github.com/theyosh/TerrariumPI/issues/462). [theyosh]
+- Merge branch 'master' into CCS811. [theyosh]
+- Merge branch 'master' of github.com:theyosh/TerrariumPI. [theyosh]
+- Create codeql-analysis.yml. [TheYOSH]
+- Merge pull request [#485](https://github.com/theyosh/TerrariumPI/issues/485) from cnelsonsic/master. [TheYOSH]
+
+  Tasmota returns power status as 'POWERN' where N is the switch number
+- Tasmota returns power status as 'POWERN' where N is the switch number.
+  [Charles Nelson]
+- Delete terrariumpi.mo. [TheYOSH]
+- Delete terrariumpi.mo. [TheYOSH]
+- Deleted translation using Weblate (Catalan) [Weblate Admin]
+- Deleted translation using Weblate (Korean) [Weblate Admin]
+- Merge pull request [#478](https://github.com/theyosh/TerrariumPI/issues/478) from npinter/master. [TheYOSH]
+
+  Fix typo
+- Merge pull request [#466](https://github.com/theyosh/TerrariumPI/issues/466) from npinter/patch-1. [TheYOSH]
+
+  Fix add webcam with motiondeltathreshold not set
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (836 of 836 strings)
+- Merge pull request [#464](https://github.com/theyosh/TerrariumPI/issues/464) from npinter/npinter-patch-1. [TheYOSH]
+
+  Fix bug with update config settings
+- Remove weather requirement [#456](https://github.com/theyosh/TerrariumPI/issues/456). [theyosh]
+- Translated using Weblate (Spanish (Argentina)) [Marcnr1984]
+
+  Currently translated at 100.0% (836 of 836 strings)
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (836 of 836 strings)
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 100.0% (836 of 836 strings)
+- Remove default English language. [theyosh]
+- Translated using Weblate (German (Austria)) [theyosh]
+
+  Currently translated at 100.0% (834 of 834 strings)
+- Make sure environment parts are looking at the light status. [#419](https://github.com/theyosh/TerrariumPI/issues/419).
+  [theyosh]
+- Merge branch 'master' of github.com:theyosh/TerrariumPI. [theyosh]
+- Merge branch 'master' of github.com:theyosh/TerrariumPI. [theyosh]
+- Replace BME280 sensor code with a nice library. Makes the code a lot
+  easier to read :) Also a 5 times speed improvement when reading the
+  sensor. Needs a re-run of the installer. [#422](https://github.com/theyosh/TerrariumPI/issues/422). [theyosh]
+- Translated using Weblate (German (Austria)) [theyosh]
+
+  Currently translated at 100.0% (834 of 834 strings)
+- Merge branch 'master' of github.com:theyosh/TerrariumPI. [theyosh]
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (834 of 834 strings)
+- Show all audio devices. [#399](https://github.com/theyosh/TerrariumPI/issues/399). [TheYOSH]
+- Extra trigger to set the right values based on the selected modues.
+  [#405](https://github.com/theyosh/TerrariumPI/issues/405). [theyosh]
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 100.0% (834 of 834 strings)
+- Translated using Weblate (French (Belgium)) [theyosh]
+
+  Currently translated at 69.4% (577 of 831 strings)
+- Finetuning. [theyosh]
+- Merge branch 'master' into new_dht. [theyosh]
+- Translated using Weblate (Catalan) [cmonicob]
+
+  Currently translated at 7.9% (66 of 831 strings)
+- Translated using Weblate (French (Belgium)) [theyosh]
+
+  Currently translated at 68.5% (570 of 831 strings)
+- Updating new DHT code. [#392](https://github.com/theyosh/TerrariumPI/issues/392). [theyosh]
+- Updating DHT sensor support. [#392](https://github.com/theyosh/TerrariumPI/issues/392) [#388](https://github.com/theyosh/TerrariumPI/issues/388). [theyosh]
+- Translated using Weblate (Catalan) [cmonicob]
+
+  Currently translated at 7.8% (65 of 831 strings)
+- Translated using Weblate (German (Austria)) [Luke]
+
+  Currently translated at 100.0% (831 of 831 strings)
+- Translated using Weblate (Catalan) [cmonicob]
+
+  Currently translated at 2.1% (18 of 831 strings)
+- Merge pull request [#395](https://github.com/theyosh/TerrariumPI/issues/395) from theyosh/issue/379. [TheYOSH]
+
+  Issue/379
+- Finetuning. [#379](https://github.com/theyosh/TerrariumPI/issues/379). [theyosh]
+- Finally working TP Link HS300. [#379](https://github.com/theyosh/TerrariumPI/issues/379). [theyosh]
+- Another attempt [#379](https://github.com/theyosh/TerrariumPI/issues/379). [theyosh]
+- Make first attempt to work. [#379](https://github.com/theyosh/TerrariumPI/issues/379). [theyosh]
+- Merge pull request [#386](https://github.com/theyosh/TerrariumPI/issues/386) from mikenorgate/timer-cancel. [TheYOSH]
+
+  Cancel existing switch timer when toggling state
+- Clean up. [Mike Norgate]
+- Cancel existing switch timer when toggling state. [Mike Norgate]
+- Get last archive date from filename. [theyosh]
+- Support multiple Denkovi V1 relay boards. [#382](https://github.com/theyosh/TerrariumPI/issues/382). [theyosh]
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 100.0% (831 of 831 strings)
+- Translated using Weblate (Norwegian Bokmål) [theyosh]
+
+  Currently translated at 96.3% (801 of 831 strings)
+- Translated using Weblate (Italian) [theyosh]
+
+  Currently translated at 75.6% (629 of 831 strings)
+- Translated using Weblate (German (Austria)) [theyosh]
+
+  Currently translated at 97.7% (812 of 831 strings)
+- Translated using Weblate (Portuguese (Brazil)) [Cleber Tavano]
+
+  Currently translated at 100.0% (831 of 831 strings)
+- Translated using Weblate (Dutch) [theyosh]
+
+  Currently translated at 99.1% (824 of 831 strings)
+- Updating the installer. So work better with different version of
+  Raspian on different board versions. [theyosh]
+- Optimize realtime data fetching. [theyosh]
+- Support IRF520 Mosfet Dimmer. [#363](https://github.com/theyosh/TerrariumPI/issues/363). [theyosh]
+- Merge branch 'master' of github.com:theyosh/TerrariumPI. [theyosh]
+- Support for some older browsers :( [theyosh]
+- Translated using Weblate (Italian) [Stikki]
+
+  Currently translated at 77.2% (628 of 813 strings)
+
+
 3.9.8 (2020-04-05)
 ------------------
 
@@ -99,6 +335,7 @@ Changelog
 
 **Updates**
 ------
+- Update changelog. [theyosh]
 - Update submodules. [theyosh]
 - Update version number. [TheYOSH]
 - Update version number. [TheYOSH]
@@ -2574,5 +2811,4 @@ Changelog
 - Living on the edge.... use latest beta of Leaflet. [TheYOSH]
 - Initial release. [TheYOSH]
 - Initial commit. [TheYOSH]
-
 
