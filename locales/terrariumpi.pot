@@ -4,8 +4,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: TerrariumPI 3.9.8\n"
-"POT-Creation-Date: 2020-08-08 13:02+CEST\n"
+"Project-Id-Version: TerrariumPI 3.9.9\n"
+"POT-Creation-Date: 2020-12-28 10:57+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,36 +15,36 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: terrariumEngine.py:677 terrariumEngine.py:789 views/dashboard.tpl:7
+#: terrariumEngine.py:679 terrariumEngine.py:791 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
 msgid "Uptime"
 msgstr ""
 
-#: terrariumEngine.py:678
+#: terrariumEngine.py:680
 msgid "Load"
 msgstr ""
 
-#: terrariumEngine.py:679
+#: terrariumEngine.py:681
 msgid "CPU Temp."
 msgstr ""
 
-#: terrariumEngine.py:767
+#: terrariumEngine.py:769
 msgid "Version"
 msgstr ""
 
-#: terrariumEngine.py:793 views/system_status.tpl:174
+#: terrariumEngine.py:795 views/system_status.tpl:174
 msgid "Disk usage"
 msgstr ""
 
-#: terrariumEngine.py:798 views/system_status.tpl:118
+#: terrariumEngine.py:800 views/system_status.tpl:118
 msgid "Memory usage"
 msgstr ""
 
-#: terrariumEngine.py:803 views/system_status.tpl:6
+#: terrariumEngine.py:805 views/system_status.tpl:6
 msgid "CPU Load"
 msgstr ""
 
-#: terrariumEngine.py:809 views/system_status.tpl:62
+#: terrariumEngine.py:811 views/system_status.tpl:62
 msgid "CPU Temperature"
 msgstr ""
 
@@ -767,7 +767,7 @@ msgstr ""
 #: views/inc/usage_sensors.tpl:174 views/inc/usage_switches.tpl:117
 #: views/inc/usage_switches.tpl:140 views/inc/usage_webcams.tpl:104
 #: views/inc/usage_webcams.tpl:134 views/profile.tpl:56
-#: views/sensor_settings.tpl:28 views/sensor_settings.tpl:160
+#: views/sensor_settings.tpl:28 views/sensor_settings.tpl:161
 #: views/switch_settings.tpl:25 views/switch_settings.tpl:142
 #: views/webcam_settings.tpl:29 views/webcam_settings.tpl:92
 msgid "Name"
@@ -780,7 +780,7 @@ msgstr ""
 #: views/audio_files.tpl:68 views/inc/usage_dashboard.tpl:153
 #: views/inc/usage_sensors.tpl:128 views/inc/usage_sensors.tpl:171
 #: views/profile.tpl:63 views/sensor_settings.tpl:25
-#: views/sensor_settings.tpl:134
+#: views/sensor_settings.tpl:135
 msgid "Type"
 msgstr ""
 
@@ -846,7 +846,7 @@ msgid "Stop"
 msgstr ""
 
 #: views/audio_playlist.tpl:28 views/audio_playlist.tpl:95
-#: views/dashboard.tpl:542 views/inc/menu.tpl:74 views/sensor_settings.tpl:150
+#: views/dashboard.tpl:542 views/inc/menu.tpl:74 views/sensor_settings.tpl:151
 #: views/system_environment.tpl:1247
 msgid "Volume"
 msgstr ""
@@ -896,7 +896,7 @@ msgid "new"
 msgstr ""
 
 #: views/audio_playlist.tpl:112 views/sensor_settings.tpl:103
-#: views/sensor_settings.tpl:137 views/switch_settings.tpl:109
+#: views/sensor_settings.tpl:138 views/switch_settings.tpl:109
 #: views/switch_settings.tpl:157 views/switch_status.tpl:116
 #: views/webcam_settings.tpl:111 views/webcam_settings.tpl:125
 #: views/webcam_settings.tpl:144 views/webcam_settings.tpl:163
@@ -908,14 +908,14 @@ msgstr ""
 #: views/audio_playlist.tpl:123 views/calendar.tpl:140
 #: views/door_settings.tpl:94 views/inc/usage_doors.tpl:70
 #: views/inc/usage_sensors.tpl:81 views/inc/usage_switches.tpl:70
-#: views/inc/usage_webcams.tpl:66 views/sensor_settings.tpl:208
+#: views/inc/usage_webcams.tpl:66 views/sensor_settings.tpl:209
 #: views/switch_settings.tpl:214 views/switch_status.tpl:132
 #: views/webcam_settings.tpl:221 views/webcam_settings.tpl:265
 msgid "Close"
 msgstr ""
 
 #: views/audio_playlist.tpl:124 views/door_settings.tpl:95
-#: views/sensor_settings.tpl:209 views/switch_settings.tpl:215
+#: views/sensor_settings.tpl:210 views/switch_settings.tpl:215
 #: views/webcam_settings.tpl:222
 msgid "Add"
 msgstr ""
@@ -1019,7 +1019,7 @@ msgstr ""
 #: views/inc/usage_sensors.tpl:157 views/inc/usage_sensors.tpl:189
 #: views/inc/usage_sensors.tpl:206 views/inc/usage_weather.tpl:13
 #: views/inc/usage_weather.tpl:85 views/sensor_settings.tpl:46
-#: views/sensor_settings.tpl:184 views/weather.tpl:7
+#: views/sensor_settings.tpl:185 views/weather.tpl:7
 msgid "Current"
 msgstr ""
 
@@ -1132,7 +1132,7 @@ msgstr ""
 
 #: views/dashboard.tpl:118 views/inc/menu.tpl:47
 #: views/inc/usage_dashboard.tpl:159 views/inc/usage_sensors.tpl:131
-#: views/sensor_settings.tpl:138 views/system_environment.tpl:158
+#: views/sensor_settings.tpl:139 views/system_environment.tpl:158
 msgid "Temperature"
 msgstr ""
 
@@ -1164,21 +1164,21 @@ msgstr ""
 
 #: views/dashboard.tpl:171 views/inc/menu.tpl:50
 #: views/inc/usage_dashboard.tpl:158 views/inc/usage_sensors.tpl:132
-#: views/sensor_settings.tpl:139 views/system_environment.tpl:370
+#: views/sensor_settings.tpl:140 views/system_environment.tpl:370
 msgid "Humidity"
 msgstr ""
 
-#: views/dashboard.tpl:224 views/inc/menu.tpl:53 views/sensor_settings.tpl:140
+#: views/dashboard.tpl:224 views/inc/menu.tpl:53 views/sensor_settings.tpl:141
 #: views/system_environment.tpl:581
 msgid "Moisture"
 msgstr ""
 
-#: views/dashboard.tpl:277 views/inc/menu.tpl:62 views/sensor_settings.tpl:143
+#: views/dashboard.tpl:277 views/inc/menu.tpl:62 views/sensor_settings.tpl:144
 #: views/system_environment.tpl:1003
 msgid "pH"
 msgstr ""
 
-#: views/dashboard.tpl:330 views/inc/menu.tpl:56 views/sensor_settings.tpl:141
+#: views/dashboard.tpl:330 views/inc/menu.tpl:56 views/sensor_settings.tpl:142
 #: views/system_environment.tpl:792
 msgid "Conductivity"
 msgstr ""
@@ -1187,12 +1187,12 @@ msgstr ""
 msgid "Water tank"
 msgstr ""
 
-#: views/dashboard.tpl:436 views/inc/menu.tpl:68 views/sensor_settings.tpl:148
+#: views/dashboard.tpl:436 views/inc/menu.tpl:68 views/sensor_settings.tpl:149
 #: views/system_environment.tpl:1378
 msgid "Fertility"
 msgstr ""
 
-#: views/dashboard.tpl:489 views/inc/menu.tpl:71 views/sensor_settings.tpl:149
+#: views/dashboard.tpl:489 views/inc/menu.tpl:71 views/sensor_settings.tpl:150
 #: views/system_environment.tpl:1589
 msgid "CO2"
 msgstr ""
@@ -1318,7 +1318,7 @@ msgstr ""
 #: views/inc/usage_sensors.tpl:123 views/inc/usage_sensors.tpl:168
 #: views/inc/usage_switches.tpl:112 views/inc/usage_switches.tpl:137
 #: views/notifications.tpl:81 views/sensor_settings.tpl:22
-#: views/sensor_settings.tpl:155 views/switch_settings.tpl:22
+#: views/sensor_settings.tpl:156 views/switch_settings.tpl:22
 #: views/switch_settings.tpl:137
 msgid "Address"
 msgstr ""
@@ -1547,11 +1547,11 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: views/inc/menu.tpl:59 views/sensor_settings.tpl:142
+#: views/inc/menu.tpl:59 views/sensor_settings.tpl:143
 msgid "Distance"
 msgstr ""
 
-#: views/inc/menu.tpl:65 views/sensor_settings.tpl:144
+#: views/inc/menu.tpl:65 views/sensor_settings.tpl:145
 msgid "Light"
 msgstr ""
 
@@ -2138,22 +2138,22 @@ msgid "HC-SR04"
 msgstr ""
 
 #: views/inc/usage_sensors.tpl:141 views/inc/usage_sensors.tpl:177
-#: views/sensor_settings.tpl:31 views/sensor_settings.tpl:164
+#: views/sensor_settings.tpl:31 views/sensor_settings.tpl:165
 msgid "Alarm min"
 msgstr ""
 
 #: views/inc/usage_sensors.tpl:145 views/inc/usage_sensors.tpl:180
-#: views/sensor_settings.tpl:34 views/sensor_settings.tpl:168
+#: views/sensor_settings.tpl:34 views/sensor_settings.tpl:169
 msgid "Alarm max"
 msgstr ""
 
 #: views/inc/usage_sensors.tpl:149 views/inc/usage_sensors.tpl:183
-#: views/sensor_settings.tpl:37 views/sensor_settings.tpl:172
+#: views/sensor_settings.tpl:37 views/sensor_settings.tpl:173
 msgid "Limit min"
 msgstr ""
 
 #: views/inc/usage_sensors.tpl:153 views/inc/usage_sensors.tpl:186
-#: views/sensor_settings.tpl:40 views/sensor_settings.tpl:176
+#: views/sensor_settings.tpl:40 views/sensor_settings.tpl:177
 msgid "Limit max"
 msgstr ""
 
@@ -2575,7 +2575,7 @@ msgstr ""
 msgid "Here you can configure your sensors."
 msgstr ""
 
-#: views/sensor_settings.tpl:43 views/sensor_settings.tpl:180
+#: views/sensor_settings.tpl:43 views/sensor_settings.tpl:181
 msgid "Max diff"
 msgstr ""
 
@@ -2659,27 +2659,31 @@ msgstr ""
 msgid "AMG8833"
 msgstr ""
 
-#: views/sensor_settings.tpl:145
-msgid "UVA"
+#: views/sensor_settings.tpl:130
+msgid "CSS811"
 msgstr ""
 
 #: views/sensor_settings.tpl:146
-msgid "UVB"
+msgid "UVA"
 msgstr ""
 
 #: views/sensor_settings.tpl:147
+msgid "UVB"
+msgstr ""
+
+#: views/sensor_settings.tpl:148
 msgid "UV Index"
 msgstr ""
 
-#: views/sensor_settings.tpl:190
+#: views/sensor_settings.tpl:191
 msgid "Min moist value"
 msgstr ""
 
-#: views/sensor_settings.tpl:194
+#: views/sensor_settings.tpl:195
 msgid "Max moist value"
 msgstr ""
 
-#: views/sensor_settings.tpl:198
+#: views/sensor_settings.tpl:199
 msgid "Temperature offset"
 msgstr ""
 
