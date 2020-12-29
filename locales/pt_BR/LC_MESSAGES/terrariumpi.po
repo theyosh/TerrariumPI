@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2020-12-28 10:57+CET\n"
-"PO-Revision-Date: 2020-10-17 09:03+0000\n"
+"PO-Revision-Date: 2020-12-30 18:07+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/pt_BR/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.3\n"
+"X-Generator: Weblate 4.4\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumEngine.py:679 terrariumEngine.py:791 views/dashboard.tpl:7
@@ -25,7 +25,7 @@ msgstr "Carga"
 
 #: terrariumEngine.py:681
 msgid "CPU Temp."
-msgstr "CPU Temp."
+msgstr "Temp CPU."
 
 #: terrariumEngine.py:769
 msgid "Version"
@@ -577,8 +577,8 @@ msgid ""
 "Select when the power switches can toggle. When the door is open, cosed or "
 "just always"
 msgstr ""
-"Selecione quando os interruptores de energia puderem alternar. Quando a "
-"porta está aberta, fechada ou sempre"
+"Selecione quando os interruptores de energia podem alternar seu estado. "
+"Quando a porta está aberta, fechada ou sempre"
 
 #: terrariumTranslations.py:133
 msgid "Holds the email address on which you would like to receive messages."
@@ -3372,7 +3372,7 @@ msgstr "AMG8833"
 
 #: views/sensor_settings.tpl:130
 msgid "CSS811"
-msgstr ""
+msgstr "CSS811"
 
 #: views/sensor_settings.tpl:146
 msgid "UVA"
