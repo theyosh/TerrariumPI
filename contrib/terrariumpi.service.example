@@ -1,0 +1,15 @@
+[Unit]
+Description=TerrariumPI
+After=network.target local-fs.target
+
+[Service]
+User=pi
+Group=pi
+WorkingDirectory=/home/pi
+ExecStart=/usr/bin/python3 /home/pi/TerrariumPI/terrariumPI.py
+Restart=always
+RestartSec=5
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target

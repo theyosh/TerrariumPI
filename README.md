@@ -1,6 +1,8 @@
-# TerrariumPI 3.9.8
+# TerrariumPI 4.0.0
 <a href="https://weblate.theyosh.nl/engage/terrariumpi/?utm_source=widget"><img src="https://weblate.theyosh.nl/widgets/terrariumpi/-/webinterface/svg-badge.svg" alt="Translation status" /></a>
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI?ref=badge_shield)
+
+**WARNING: This softwar is still in Alpha/Beta state!! Use only for testing and previewing**
 
 Software for cheap home automation of your reptile terrarium or any other enclosed environment. With this software you are able to control for example a terrarium so that the temperature and humidity is of a constant value. Controlling the temperature can be done with heat lights, external heating or cooling system. As long as there is one temperature sensor available the software is able to keep a constant temperature.
 
@@ -10,7 +12,6 @@ The software is that flexible that there is no limit in amount of sensors, relay
 
 If you are using this software for your animals or plants, **[please post some pictures](https://github.com/theyosh/TerrariumPI/issues/210)**
 
-It can either run on Python 2.7 or [Python 3.5+](https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-use-python-35). Prefered is Python3
 
 Think off:
 - Terrarium (wet or dry)
@@ -18,7 +19,7 @@ Think off:
 - Tanks with animals or plants
 - Growhouse
 
-And all this is controlled with a nice webinterface based on [Gentelella a Bootstrap 3 template](https://github.com/puikinsh/gentelella/).
+And all this is controlled with a nice webinterface based on AdminLTE 3 with Bootstrap 4.
 
 ## Table of Contents
 1. [Features](#features)
@@ -104,7 +105,7 @@ And all this is controlled with a nice webinterface based on [Gentelella a Boots
     - Open and close doors
     - System error and warning messages
 
-It is currently controling my reptile terrarium for more then three years! And my Madagascar Day Gecko is very happy with it!
+It is currently controling my reptile terrarium for more then five years! And my Madagascar Day Gecko is very happy with it!
 
 ## Translations
 The software has support for the following languages:
@@ -114,18 +115,19 @@ The software has support for the following languages:
 Your language not in the list or not up to date? [Create your own language translation](https://github.com/theyosh/TerrariumPI/wiki/Translations) <a href="https://weblate.theyosh.nl/engage/terrariumpi/?utm_source=widget"><img src="https://weblate.theyosh.nl/widgets/terrariumpi/-/webinterface/svg-badge.svg" alt="Translation status" /></a>
 
 ## Installation
-The installation expects a Pi with working network and ssh. It is tested with [Raspberry Pi OS Lite](https://www.raspberrypi.org/downloads/raspbian/). For now the Full version is not working somehow.... So use the lite image! A new installation will take about 45 minutes. This is due to manually compiling python modules for the latest versions. Upgrades will go much faster.
-1. Get a working Raspberry Pi and login as user 'pi'  
+The installation expects a Pi with working network and ssh. It is tested with [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/). For now the Full version is not working somehow.... So use the lite image! A new installation will take about 45 minutes. This is due to manually compiling python modules for the latest versions. Upgrades will go much faster.
+It is possible to use USB or SSD drives to speed things up: https://www.tomshardware.com/how-to/boot-raspberry-pi-4-usb
+1. Get a working Raspberry Pi and login as user 'pi'
   `ssh pi@[raspberry_ip]`
-2. Install git  
+2. Install git
   `sudo apt -y install git`
-3. Clone this repository and submodules!  
+3. Clone this repository and submodules!
   `git clone --recursive --depth 1 https://github.com/theyosh/TerrariumPI.git`
-4. Enter the new TerrariumPI folder  
+4. Enter the new TerrariumPI folder
   `cd TerrariumPI`
-5. Run the installer script and wait  
+5. Run the installer script and wait
   `sudo ./install.sh 3`
-6. Reboot Raspberry PI to get all the needed modules loaded  
+6. Reboot Raspberry PI to get all the needed modules loaded
   `sudo reboot`
 7. Go to the webinterface at http://[raspberry_ip]:8090
 
@@ -135,13 +137,13 @@ Make sure that your Pi is secured when you put it to the Internet. Would be a sh
 
 ## Updating
 This updating is based on that the software is installed with the steps in the Installation above. When updating between release versions it will take more time due to database updates and cleanups. This can be seen in the logfile.
-1. Get a working Raspberry Pi and login as user 'pi'  
+1. Get a working Raspberry Pi and login as user 'pi'
   `ssh pi@[raspberry_ip]`
-2. Enter the TerrariumPI folder  
+2. Enter the TerrariumPI folder
   `cd TerrariumPI`
-3. Update the new code with git  
+3. Update the new code with git
   `git pull`
-4. Re-run the installation script in order to update software dependencies  
+4. Re-run the installation script in order to update software dependencies
   `sudo ./install.sh 3`
 4. Restart TerrariumPI according to: https://github.com/theyosh/TerrariumPI/wiki/FAQ#how-to-restart-terrariumpi
 
@@ -150,9 +152,10 @@ Now **clear your browser cache** and reload the webinterface. A brand new versio
 ## Hardware
 This software requires a Raspberry Pi and some extra hardware in order to run and work. The bare minimun and tested hardware is
 - Raspberry PI with at least **4GB SD card**
-  - Pi 2
-  - Pi 3
+  - Pi 2 (At own risk/no support)
+  - Pi 3 (At own risk/no support)
   - Zero (At own risk/no support)
+  - Pi 4
 - Power relay board
   - USB versions (Serial and Bitbang)
   - GPIO versions
@@ -162,16 +165,16 @@ This software requires a Raspberry Pi and some extra hardware in order to run an
   - GPIO
   - 1 Wire interface
   - MCP3008 ([RasPiO Analog Zero](https://github.com/raspitv/analogzero))
-  
+
 [Full list of supported hardware](https://github.com/theyosh/TerrariumPI/wiki/Hardware)
-  
+
 ### GPIO numbering
 All hardware that connects to the GPIO pins use **Physical GPIO numbering** (1 - 40). The software will translate it to BCM if needed for a supported device or sensor. [More information about GPIO pin numbering](https://pinout.xyz/)
 
 For the analog devices use numbers of the channel on the analog device which is from 0 to 7 (8 channels). Also the software expect the analog MCP3008 on GPIO ports 19,21,23,24 physical (default). [More information about GPIO pin numbering](https://pinout.xyz/)
 
 ### New hardware
-If there is some other hardware which is not working with TerrariumPI, open an issue on [Github](https://github.com/theyosh/TerrariumPI/issues) and we will try to support it. Raspberry Pi Zero is not tested.
+If there is some other hardware which is not working with TerrariumPI, open an issue on [Github](https://github.com/theyosh/TerrariumPI/issues) and we will try to support it. We can only test it on a Raspberry PI 4.
 
 ## Remote data
 It is possible to use external sensor data that is available through HTTP(S) in JSON format. This way you can combine multiple Raspberry Pi's with TerrariumPI running to one single system. By using multiple Rapsberry PI's you can cover a bigger area. But there are limitations.
@@ -205,7 +208,6 @@ More screenshots can be found [here](https://github.com/theyosh/TerrariumPI/tree
 
 ## About
 A live version is running at: https://terrarium.theyosh.nl/index.html. Go to 'Help' menu for more information about used hardware, software and how to setup.
-
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftheyosh%2FTerrariumPI?ref=badge_large)

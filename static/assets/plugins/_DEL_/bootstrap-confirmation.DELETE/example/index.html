@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Bootstrap Confirmation</title>
+
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <style>
+    .popover {
+      max-width: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="col-md-12 col-lg-10 offset-lg-1">
+    <div class="page-header">
+      <a class="float-right" href="https://bootstrap-confirmation.js.org/">
+        <img src="https://github.githubassets.com/images/modules/logos_page/Octocat.png" height=48px>
+      </a>
+      <h1>Bootstrap Confirmation</h1>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header">Basic</div>
+      <div class="card-body">
+        <button class="btn btn-primary" data-toggle="confirmation">Confirmation</button>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header">Link</div>
+      <div class="card-body">
+        <a class="btn btn-primary" data-toggle="confirmation"
+           href="https://google.com" target="_blank">Go to Google</a>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header">Customize</div>
+      <div class="card-body">
+        <button class="btn btn-primary" data-toggle="confirmation"
+                data-btn-ok-label="Continue" data-btn-ok-class="btn btn-success"
+                data-btn-ok-icon-class="material-icons" data-btn-ok-icon-content="check"
+                data-btn-cancel-label="Stoooop!" data-btn-cancel-class="btn btn-danger"
+                data-btn-cancel-icon-class="material-icons" data-btn-cancel-icon-content="close"
+                data-title="Is it ok?" data-content="This might be dangerous">
+          Confirmation
+        </button>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header">Directions</div>
+      <div class="card-body">
+        <button class="btn btn-primary" data-toggle="confirmation" data-placement="left">Confirmation on left</button>
+        <button class="btn btn-primary" data-toggle="confirmation" data-placement="top">Confirmation on top</button>
+        <button class="btn btn-primary" data-toggle="confirmation" data-placement="bottom">Confirmation on bottom
+        </button>
+        <button class="btn btn-primary" data-toggle="confirmation" data-placement="right">Confirmation on right</button>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header">Singleton</div>
+      <div class="card-body">
+        <button class="btn btn-primary" data-toggle="confirmation-singleton" data-singleton="true">Confirmation 1
+        </button>
+        <button class="btn btn-primary" data-toggle="confirmation-singleton" data-singleton="true">Confirmation 2
+        </button>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header">Popout</div>
+      <div class="card-body">
+        <button class="btn btn-primary" data-toggle="confirmation-popout" data-popout="true">Confirmation 1</button>
+        <button class="btn btn-primary" data-toggle="confirmation-popout" data-popout="true">Confirmation 2</button>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header">Delegation</div>
+      <div class="card-body" id="confirmation-delegate">
+        <button class="btn btn-primary">Confirmation 1</button>
+        <button class="btn btn-primary">Confirmation 2</button>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header">Custom event</div>
+      <div class="card-body">
+        <button class="btn btn-primary" data-toggle="custom-confirmation-events"
+                data-trigger="manual"
+                data-confirmation-event="myevent">
+          Confirmation
+        </button>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header">Custom buttons</div>
+      <div class="card-body">
+        <button class="btn btn-primary" id="custom-confirmation">Choose your transportation</button>
+        <button class="btn btn-primary" id="custom-confirmation-links">Share to</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="../node_modules/popper.js/dist/umd/popper.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+<script src="../dist/bootstrap-confirmation.js"></script>
+<script src="https://use.fontawesome.com/5dfc29e1bc.js"></script>
+
+<script>
+  console.log('Bootstrap ' + $.fn.popover.Constructor.VERSION);
+  console.log('Bootstrap Confirmation ' + $.fn.confirmation.Constructor.VERSION);
+
+  $('[data-toggle=confirmation]').confirmation({
+    rootSelector: '[data-toggle=confirmation]',
+    container: 'body'
+  });
+  $('[data-toggle=confirmation-singleton]').confirmation({
+    rootSelector: '[data-toggle=confirmation-singleton]',
+    container: 'body'
+  });
+  $('[data-toggle=confirmation-popout]').confirmation({
+    rootSelector: '[data-toggle=confirmation-popout]',
+    container: 'body'
+  });
+
+  $('#confirmation-delegate').confirmation({
+    selector: 'button'
+  });
+
+  $('[data-toggle=custom-confirmation-events]')
+    .confirmation({
+      rootSelector: '[data-toggle=custom-confirmation-events]',
+      container: 'body'
+    })
+    .on('mouseenter', function() {
+      $(this).confirmation('show');
+    })
+    .on('myevent', function() {
+      alert('"myevent" triggered');
+    });
+
+  $('#custom-confirmation').confirmation({
+    rootSelector: '#custom-confirmation',
+    container: 'body',
+    title: '',
+    onConfirm: function(value) {
+      alert('You choosed ' + value);
+    },
+    buttons: [
+      {
+        class: 'btn btn-sm btn-danger',
+        iconClass: 'material-icons mr-1',
+        iconContent: 'directions_railway',
+        label: 'Railway',
+        value: 'Railway'
+      },
+      {
+        class: 'btn btn-sm btn-primary',
+        iconClass: 'material-icons mr-1',
+        iconContent: 'directions_car',
+        label: 'Car',
+        value: 'Car'
+      },
+      {
+        class: 'btn btn-sm btn-warning',
+        iconClass: 'material-icons mr-1',
+        iconContent: 'directions_boat',
+        label: 'Boat',
+        value: 'Boat'
+      },
+      {
+        class: 'btn btn-sm btn-secondary',
+        iconClass: 'material-icons mr-1',
+        iconContent: 'cancel',
+        label: 'Cancel',
+        cancel: true
+      }
+    ]
+  });
+
+  $('#custom-confirmation-links').confirmation({
+    rootSelector: '#custom-confirmation-link',
+    container: 'body',
+    title: '',
+    buttons: [
+      {
+        label: 'Twitter',
+        iconClass: 'fa fa-twitter fa-lg mr-1',
+        attr: {
+          href: 'https://twitter.com',
+          target: '_blank'
+        }
+      },
+      {
+        label: 'Facebook',
+        iconClass: 'fa fa-facebook fa-lg mr-1',
+        attr: {
+          href: 'https://facebook.com',
+          target: '_blank'
+        }
+      },
+      {
+        label: 'Pinterest',
+        iconClass: 'fa fa-pinterest fa-lg mr-1',
+        attr: {
+          href: 'https://pinterest.com',
+          target: '_blank'
+        }
+      }
+    ]
+  });
+</script>
+
+</body>
+</html>

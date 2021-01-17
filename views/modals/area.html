@@ -1,0 +1,814 @@
+{# Include the modal base html template #}
+{% extends "layouts/modal.html" %}
+
+{# Set some variables #}
+{% set modal_size             = 'modal-xl' %}
+{% set modal_type             = 'area' %}
+{% set modal_form_add_action  = url_for('api:area_add') %}
+{% set modal_form_edit_action = url_for('api:area_update',area='_id_') %}
+{% set modal_reload_url       = url_for('page', page='enclosures') %}
+
+{% block modal_title %} <i class="fas fa-map" ></i> Area settings {% endblock %}
+{% block modal_body %}
+<input type="hidden" name="id" id="area_id" value="" disabled="disabled">
+<div class="row">
+  <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="form-group">
+      <label for="area_enclosure">Enclosure</label>
+      <div class="select2-primary">
+        <select class="select2" id="area_enclosure" name="enclosure" required="required" data-placeholder="Select from available enclosure" style="width: 100%;">
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="form-group">
+      <label for="area_type">Type</label>
+      <div class="select2-primary">
+        <select class="select2" id="area_type" name="type" required="required" data-placeholder="Select area type" style="width: 100%;">
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="form-group">
+      <label for="area_name">Name</label>
+      <input type="text" class="form-control" id="area_name" name="name" required="required" placeholder="Enter name">
+    </div>
+  </div>
+</div>
+
+<div class="row area_type area_lights">
+
+  <script type="text/html" id="dimmer_schema_template">
+
+    <div class="row">
+      <div class="col-4">
+        <div class="form-group">
+          <label for="area_name">Relay</label>
+          <input type="text" class="form-control" id="area_lights_day_relay" name="day_relay" required="required" readonly="readonly" placeholder="Relay" data-value="relay_name" >
+        </div>
+      </div>
+
+      <div class="col-2">
+        <div class="form-group">
+          <label for="area_name">Duration on</label>
+          <div class="pl-2 pr-2 pt-1">
+            <input type="text" class="slider_duration" id="area_lights_day_duration_on" value="0" >
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2">
+        <div class="form-group">
+          <label for="area_name">Power on</label>
+          <div class="pl-2 pr-2 pt-1">
+            <input type="text" class="slider_power" id="area_lights_day_power_on" value="0" >
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2">
+        <div class="form-group">
+          <label for="area_name">Duration off</label>
+          <div class="pl-2 pr-2 pt-1">
+            <input type="text" class="slider_duration" id="area_lights_day_duration_off" value="0" >
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2">
+        <div class="form-group">
+          <label for="area_name">Power off</label>
+          <div class="pl-2 pr-2 pt-1">
+            <input type="text" class="slider_power" id="area_lights_day_power_off" value="0" >
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+
+  <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+    <div class="form-group">
+      <label for="area_lights_mode">Mode</label>
+      <select class="select2" id="area_lights_mode" name="mode" required="required" data-placeholder="Select an mode" style="width: 100%;">
+        <option value="disabled">Disabled</option>
+        <option value="timer">Timer</option>
+        <option value="weather">Weather day/night</option>
+        <option value="weather_inverse">Weather night/day</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+    <div class="form-group">
+      <label for="area_lights_day_max_hours">Maximum hours</label>
+      <input type="number" step="0.01" min="0" max="24" class="form-control" id="area_lights_day_max_hours" name="day_max_hours" placeholder="Enter the maximum amount of hours">
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+    <div class="form-group">
+      <label for="area_lights_day_min_hours">Minimum hours</label>
+      <input type="number" step="0.01" min="0" max="24" class="form-control" id="area_lights_day_min_hours" name="day_min_hours" placeholder="Enter the minimum amount of hours">
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+    <div class="form-group">
+      <label for="area_lights_day_shift_hours">Hours shift</label>
+      <input type="number" step="0.01" min="-12.0" max="12.0" class="form-control" id="area_lights_day_shift_hours" name="day_shift_hours" placeholder="Enter the amount of hours to shift">
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-md-3 col-lg-1">
+    <div class="form-group">
+      <span class="switch">
+        <label for="area_lights_main_lights">Main lights</label>
+        <input type="checkbox" class="switch" id="area_lights_main_lights" name="main_lights">
+        <label for="area_lights_main_lights" class="mt-1"></label>
+      </span>
+    </div>
+  </div>
+
+
+</div>
+<div class="row area_type area_lights">
+  <div class="col">
+    <nav class="mb-2">
+      <div class="nav nav-tabs" role="tablist">
+        <a class="nav-item nav-link active" id="home-tab" data-toggle="tab" href="#area_lights_day" role="tab" aria-controls="day" aria-selected="true"><i class="fas fa-sun" ></i> Day settings</a>
+        <a class="nav-item nav-link" id="profile-tab" data-toggle="tab" href="#area_lights_night" role="tab" aria-controls="night" aria-selected="false"><i class="fas fa-moon" ></i> Night settings</a>
+      </div>
+    </nav>
+    <div class="tab-content">
+
+      <div class="tab-pane fade show active" id="area_lights_day" role="tabpanel" aria-labelledby="day-tab">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="area_lights_day_begin">Begin time</label>
+              <input type="time" class="form-control" id="area_lights_day_begin" name="day_begin" placeholder="Enter begin time">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="lights_day_end">End time</label>
+              <input type="time" class="form-control" id="area_lights_day_end" name="day_end" placeholder="Enter end time">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="area_lights_day_on_duration">On duration</label>
+              <input type="number" step="0.1" min="0" class="form-control" id="area_lights_day_on_duration" name="day_on_duration" placeholder="On duration">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="area_lights_day_off_duration">Off duration</label>
+              <input type="number" step="0.1" min="0" class="form-control" id="area_lights_day_off_duration" name="day_off_duration" placeholder="Off duration">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group">
+              <label for="area_lights_day_relays">Relays</label>
+              <select class="select2" id="area_lights_day_relays" name="day_relays" multiple="multiple" data-placeholder="Select relays" style="width: 100%;">
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- TODO: Fix nice schema's for timing and dimming values -->
+        <div class="area_lights_day_dimmer_schema">
+
+        </div>
+
+      </div>
+      <div class="tab-pane fade" id="area_lights_night" role="tabpanel" aria-labelledby="night-tab">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="area_lights_night_begin">Begin time</label>
+              <input type="time" class="form-control" id="area_lights_night_begin" name="night_begin" placeholder="Enter begin time">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="lights_night_end">End time</label>
+              <input type="time" class="form-control" id="area_lights_night_end" name="night_end" placeholder="Enter end time">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="area_lights_night_on_duration">On duration</label>
+              <input type="number" step="0.1" min="0" class="form-control" id="area_lights_night_on_duration" name="night_on_duration" placeholder="On duration">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="area_lights_night_off_duration">Off duration</label>
+              <input type="number" step="0.1" min="0" class="form-control" id="area_lights_night_off_duration" name="night_off_duration" placeholder="Off duration">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group">
+              <label for="area_lights_night_relays">Relays</label>
+              <select class="select2" id="area_lights_night_relays" name="night_relays" multiple="multiple" data-placeholder="Select relays" style="width: 100%;">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row area_type area_watertank area_temperature area_humidity area_co2 area_conductivity area_moisture area_ph">
+
+  <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+    <div class="form-group">
+      <label for="area_watertank_mode">Mode</label>
+      <select class="select2" id="area_watertank_mode" name="mode" required="required" data-placeholder="Select a mode" style="width: 100%;">
+        <option value="disabled">Disabled</option>
+        <option value="timer">Timer</option>
+        <option value="sensors">Sensors</option>
+        <option value="weather">Weather day/night</option>
+        <option value="weather_inverse">Weather night/day</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+    <div class="form-group">
+      <label for="area_watertank_sensors">Sensors</label>
+      <select class="select2" id="area_watertank_sensors" name="sensors" required="required" multiple="multiple" data-placeholder="Select sensors(s)" style="width: 100%;">
+      </select>
+    </div>
+  </div>
+  <div class="col col-12 col-sm-6 col-md-2 col-lg-2 area_watertank">
+    <div class="form-group">
+      <label for="area_watertank_volume">Volume</label>
+      <input type="number" step="0.01" min="0" class="form-control" id="area_watertank_volume" name="watertank_volume" required="required" placeholder="Enter the amount">
+    </div>
+  </div>
+  <div class="col col-12 col-sm-6 col-md-2 col-lg-2 area_watertank">
+    <div class="form-group">
+      <label for="area_watertank_height">Height</label>
+      <input type="number" step="0.01" min="0" class="form-control" id="area_watertank_height" name="watertank_height" required="required" placeholder="Enter ">
+    </div>
+  </div>
+
+  <div class="col col-12 col-sm-6 col-md-2 col-lg-2 area_watertank">
+    <div class="form-group">
+      <label for="area_watertank_offset">Offset</label>
+      <input type="number" step="0.01" min="0" class="form-control" id="area_watertank_offset" name="watertank_offset" required="required" placeholder="Enter ">
+    </div>
+  </div>
+
+
+
+  <div class="col col-12 col-sm-6 col-md-3 col-lg-3 area_all">
+    <div class="form-group">
+      <label for="area_day_night_difference">Day/night difference</label>
+      <input type="number" step="0.01" class="form-control" id="area_day_night_difference" name="day_night_difference" placeholder="Enter ">
+    </div>
+  </div>
+
+  <div class="col col-12 col-sm-6 col-md-3 col-lg-3 area_all">
+    <div class="form-group">
+      <label for="area_day_night_source">Day/night source</label>
+      <select class="select2" id="area_day_night_source" name="day_night_source" data-placeholder="Select a mode" style="width: 100%;">
+        <option value="lights">Lights</option>
+        <option value="weather">Weather</option>
+      </select>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+<div class="row area_type area_watertank area_temperature area_humidity area_co2 area_conductivity area_moisture area_ph">
+  <div class="col">
+    <nav class="mb-2">
+      <div class="nav nav-tabs" role="tablist">
+        <a class="nav-item nav-link active" id="home-tab" data-toggle="tab" href="#area_alarm_low" role="tab" aria-controls="low" aria-selected="true"><i class="fas fa-battery-empty" ></i> Low alarm</a>
+        <a class="nav-item nav-link" id="profile-tab" data-toggle="tab" href="#area_alarm_high" role="tab" aria-controls="high" aria-selected="false"><i class="fas fa-battery-full" ></i> High alarm</a>
+      </div>
+    </nav>
+    <div class="tab-content">
+
+      <div class="tab-pane fade show active" id="area_alarm_low" role="tabpanel" aria-labelledby="low-tab">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="area_alarm_low_begin">Begin time</label>
+              <input type="time" class="form-control" id="area_alarm_low_begin" name="low_begin" placeholder="Enter begin time">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="alarm_low_end">End time</label>
+              <input type="time" class="form-control" id="area_alarm_low_end" name="low_end" placeholder="Enter end time">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="area_alarm_low_on_duration">On duration</label>
+              <input type="number" step="0.1" min="0" class="form-control" id="area_alarm_low_on_duration" name="low_on_duration" placeholder="On duration">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="area_alarm_low_off_duration">Off duration</label>
+              <input type="number" step="0.1" min="0" class="form-control" id="area_alarm_low_off_duration" name="low_off_duration" placeholder="Off duration">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="area_alarm_low_power_on_time">Power on time</label>
+              <input type="number" step="0.1" min="0" class="form-control" id="area_alarm_low_power_on_time" name="low_power_on_time" placeholder="Off duration">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="area_alarm_low_settle_time">Settle time</label>
+              <input type="number" step="0.1" min="0" class="form-control" id="area_alarm_low_settle_time" name="low_settle_time" placeholder="Off duration">
+            </div>
+          </div>
+
+
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="area_alarm_low_light_status">Light status</label>
+              <select class="select2" id="area_alarm_low_light_status" name="low_light_status" data-placeholder="Select a state" style="width: 100%;">
+                <option value="ignore">Ignored</option>
+                <option value="on">On</option>
+                <option value="off">Off</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="area_alarm_low_door_status">Door status</label>
+              <select class="select2" id="area_alarm_low_door_status" name="low_door_status" data-placeholder="Select a state" style="width: 100%;">
+                <option value="ignore">Ignored</option>
+                <option value="open">Open</option>
+                <option value="closed">Closed</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="col">
+            <div class="form-group">
+              <label for="area_alarm_low_relays">Relays</label>
+              <select class="select2" id="area_alarm_low_relays" name="low_relays" multiple="multiple" data-placeholder="Select relays" style="width: 100%;">
+              </select>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="tab-pane fade" id="area_alarm_high" role="tabpanel" aria-labelledby="low-tab">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="area_alarm_high_begin">Begin time</label>
+              <input type="time" class="form-control" id="area_alarm_high_begin" name="high_begin" placeholder="Enter begin time">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="alarm_high_end">End time</label>
+              <input type="time" class="form-control" id="area_alarm_high_end" name="high_end" placeholder="Enter end time">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="area_alarm_high_on_duration">On duration</label>
+              <input type="number" step="0.1" min="0" class="form-control" id="area_alarm_high_on_duration" name="high_on_duration" placeholder="On duration">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="area_alarm_high_off_duration">Off duration</label>
+              <input type="number" step="0.1" min="0" class="form-control" id="area_alarm_high_off_duration" name="high_off_duration" placeholder="Off duration">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="area_alarm_high_power_on_time">Power on time</label>
+              <input type="number" step="0.1" min="0" class="form-control" id="area_alarm_high_power_on_time" name="high_power_on_time" placeholder="Off duration">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="area_alarm_high_settle_time">Settle time</label>
+              <input type="number" step="0.1" min="0" class="form-control" id="area_alarm_high_settle_time" name="high_settle_time" placeholder="Off duration">
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="area_alarm_high_light_status">Light status</label>
+              <select class="select2" id="area_alarm_high_light_status" name="high_light_status" data-placeholder="Select a state" style="width: 100%;">
+                <option value="ignore">Ignored</option>
+                <option value="on">On</option>
+                <option value="off">Off</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label for="area_alarm_high_door_status">Door status</label>
+              <select class="select2" id="area_alarm_high_door_status" name="high_door_status" data-placeholder="Select a state" style="width: 100%;">
+                <option value="ignore">Ignored</option>
+                <option value="open">Open</option>
+                <option value="closed">Closed</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="col">
+            <div class="form-group">
+              <label for="area_alarm_high_relays">Relays</label>
+              <select class="select2" id="area_alarm_high_relays" name="high_relays" multiple="multiple" data-placeholder="Select relays" style="width: 100%;">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/*Select2 ReadOnly Start*/
+
+/*
+select[readonly].select2-hidden-accessible + .select2-container {
+        pointer-events: none;
+        touch-action: none;
+    }
+
+    select[readonly].select2-hidden-accessible + .select2-container .select2-selection {
+        background: #eee;
+        box-shadow: none;
+    }
+
+    select[readonly].select2-hidden-accessible + .select2-container .select2-selection__arrow, select[readonly].select2-hidden-accessible + .select2-container .select2-selection__clear {
+        display: none;
+    } */
+
+/*Select2 ReadOnly End*/
+
+
+  .slider-selection {
+	  background: #BABABA;
+  }
+</style>
+{% endblock %}
+
+{% block modal_form_javascript_functions %}
+{% endblock %}
+
+
+{% block modal_form_javascript_pre %}
+
+let area_types = {};
+let relay_data = {};
+let sensor_data = {};
+let weather_data = {};
+
+let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors"]');
+
+// Area type toggle
+{{modal_type}}_form.find('select#area_type').on('change',function() {
+  {{modal_type}}_form.find('div.row.area_type').hide();
+  {{modal_type}}_form.removeClass('was-validated');
+
+  {{modal_type}}_form.find('div.row.area_type').find('input').prop('disabled',true);
+  {{modal_type}}_form.find('div.row.area_type').find('select').prop('disabled',true);
+
+  {{modal_type}}_sensor_select.prop('required',false);
+
+  {{modal_type}}_form.find('div.row.area_type .col.area_watertank input').prop('required',false);
+
+  {{modal_type}}_form.find('div.row.area_type.area_' + this.value).find('input').prop('disabled',false);
+  if ('watertank' != this.value) {
+    {{modal_type}}_form.find('div.row.area_type .col.area_watertank input').prop('disabled',true);
+  } else {
+    {{modal_type}}_form.find('div.row.area_type .col.area_watertank input').prop('required',true);
+  }
+
+  {{modal_type}}_form.find('div.row.area_type.area_' + this.value).find('select').prop('disabled',false);
+
+  {{modal_type}}_sensor_select.find('option').remove();
+
+  let valid_sensor_types = area_types[this.value]['sensors'];
+  let sensor_list = {{modal_type}}_form.find('div.row.area_type.area_' + this.value + ' select[id$="sensors"]');
+  jQuery.each(sensor_data,function(counter,sensor){
+    if (valid_sensor_types.indexOf(sensor.type) != -1 ) {
+      sensor_list.append(jQuery('<option>').attr('value',sensor.id).text(sensor.name));
+    }
+  });
+
+  {{modal_type}}_form.find('div.row.area_type.area_' + this.value + ' select[id$="_mode"]').trigger('change');
+
+  {{modal_type}}_form.find('.col.area_watertank').toggle('watertank' == this.value);
+  {{modal_type}}_form.find('.col.area_all').toggle('watertank' != this.value);
+
+  jQuery('div.row.area_' + this.value).show();
+});
+
+// Mode toggle
+{{modal_type}}_form.find('select[id$="_mode"]').on('change',function() {
+  let area_type = {{modal_type}}_form.find('select#area_type').val();
+
+  if ('disabled' == this.value) {
+    {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input').prop('readonly',true);
+    {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' select:not(#' + this.id + ')').prop('readonly',true);
+
+  } else if ('timer' == this.value) {
+    // Disable hours fields
+    {{modal_type}}_form.find('div.row.area_type.area_' + area_type+ ' input').prop('readonly',false);
+
+    {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id*="_hours"]').prop('readonly',true);
+
+  } else if ('sensor' == this.value) {
+    // Disable hours fields
+
+    {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input').prop('readonly',false);
+
+    //{{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id*="_hours"]').prop('readonly',true);
+
+    {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_begin"]').prop('readonly',true);
+    {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_end"]').prop('readonly',true);
+    {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_on_duration"]').prop('readonly',true);
+    {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_off_duration"]').prop('readonly',true);
+
+  } else if ('weather' == this.value || 'weather_inverse' == this.value) {
+    let sunrise        = moment(weather_data.sun.rise * 1000).format('HH:mm');
+    let sunset         = moment(weather_data.sun.set  * 1000).format('HH:mm');
+    let duration_day   = formatNumber(moment.duration(weather_data.sun.set - weather_data.sun.rise, 'seconds').asMinutes(),0,1);
+    let duration_night = formatNumber(moment.duration(weather_data.sun.rise - weather_data.sun.set, 'seconds').add(moment.duration(1,'d')).asMinutes(),0,1);
+
+    if ('weather_inverse' == this.value) {
+      let temp = sunrise;
+      sunrise = sunset;
+      sunset = temp;
+
+      temp = duration_day;
+      duration_day = duration_night;
+      duration_night = temp;
+    }
+
+    // Enable hours fields
+    {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id*="_hours"]').prop('readonly',false);
+
+    if ('lights' == area_type) {
+      // Day part
+      // Set the day begin time
+      {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_day_begin"]').val(sunrise).prop('readonly',true);
+
+      // Set the day end time
+      {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_day_end"]').val(sunset).prop('readonly',true);
+
+      // Set the day on duration time (full day light period)
+      {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_day_on_duration"]').val(duration_day).prop('readonly',true);
+
+      // Set the day off duration time
+      {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_day_off_duration"]').val(0).prop('readonly',true);
+
+      // Night part
+      // Set the night begin time
+      {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_night_begin"]').val(sunset).prop('readonly',true);
+
+      // Set the night end time
+      {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_night_end"]').val(sunrise).prop('readonly',true);
+
+
+      // Set the day on duration time (full day light period)
+      {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_night_on_duration"]').val(duration_night).prop('readonly',true);
+      // Set the day off duration time
+      {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_night_off_duration"]').val(0).prop('readonly',true);
+
+    } else {
+      {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_low_begin"]').val(sunrise).prop('readonly',true);
+      {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_low_end"]').val(sunset).prop('readonly',true);
+      {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_low_on_duration"]').val(duration_day).prop('readonly',true);
+      {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_low_off_duration"]').val(0).prop('readonly',true);
+      {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_high_begin"]').val(sunset).prop('readonly',true);
+      {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_high_end"]').val(sunrise).prop('readonly',true);
+      {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_high_on_duration"]').val(duration_night).prop('readonly',true);
+      {{modal_type}}_form.find('div.row.area_type.area_' + area_type + ' input[id$="_high_off_duration"]').val(0).prop('readonly',true);
+    }
+  }
+});
+
+
+// Day and night dimmer schemas
+{{modal_type}}_form.find('.row.area_type.area_light select[id$="relays"]').on('select2:select',function(event) {
+  let data = event.params.data;
+  if (relay_data[data.id] !== undefined && relay_data[data.id].dimmer) {
+    let test = jQuery('<div>')
+
+    jQuery(test).loadTemplate($('#dimmer_schema_template'), {
+      relay_name: relay_data[data.id].name,
+    },{ append: true, bindingOptions: {ignoreNull : true}});
+
+//    console.log(test);
+
+    $('.area_lights_day_dimmer_schema').loadTemplate($('#dimmer_schema_template'), {
+      relay_name: relay_data[data.id].name,
+    },{ append: true, bindingOptions: {ignoreNull : true}});
+  }
+
+  $(".slider_duration").bootstrapSlider({
+    min: 0,
+    max: 120,
+    value: 0,
+    formatter: function(value) {
+      return value + ' minute(s)';
+    }
+//      range: true,
+//      ticks: [0,30,60,90,120],
+});
+
+$(".slider_power").bootstrapSlider({
+  min: 0,
+  max: 100,
+  value: 0,
+  formatter: function(value) {
+    return value + ' %';
+  }
+//      range: true,
+//      ticks: [0,30,60,90,120],
+});
+
+
+});
+
+{% endblock %}
+
+
+
+
+{% block modal_form_javascript_load %}
+jQuery('.area_type').hide();
+
+jQuery.when(
+
+  jQuery.get('{{ url_for("api:area_types") }}'),
+  jQuery.get('{{ url_for("api:enclosure_list") }}'),
+  jQuery.get('{{ url_for("api:relay_list") }}'),
+  jQuery.get('{{ url_for("api:sensor_list") }}'),
+  jQuery.get('{{ url_for("api:weather") }}'),
+
+).done(function(areas, enclosures, relays, sensors, weather) {
+  jQuery.each(areas[0].data,function(counter,item){
+    area_types[item.type] = item;
+  });
+
+  let {{modal_type}}_area_select = {{modal_type}}_form.find('select#area_type');
+  {{modal_type}}_area_select.prop('disabled', false).find('option').remove();
+
+  jQuery.each(area_types,function(counter,item){
+    {{modal_type}}_area_select.append(jQuery('<option>').attr('value',item.type).text(item.name));
+  });
+  {{modal_type}}_area_select.trigger('change');
+
+  let {{modal_type}}_enclosure_select = {{modal_type}}_form.find('select#area_enclosure');
+  {{modal_type}}_enclosure_select.prop('disabled', false).find('option').remove();
+
+  jQuery.each(enclosures[0].data,function(counter,item){
+    {{modal_type}}_enclosure_select.append(jQuery('<option>').attr('value',item.id).text(item.name));
+  });
+
+  let {{modal_type}}_relay_select = {{modal_type}}_form.find('select[id$="relays"]');
+  {{modal_type}}_relay_select.prop('disabled', false).find('option').remove();
+
+  // Store which relays are dimmers
+  relay_data = [];
+  jQuery.each(relays[0].data,function(counter,item){
+    relay_data[item.id] = item;
+    {{modal_type}}_relay_select.append(jQuery('<option>').attr('value',item.id).text(item.name));
+  });
+
+  sensor_data = sensors[0].data;
+
+  weather_data = weather[0];
+
+
+  // Check if we are in edit mode.... and need to load more data....
+  if ('#' != jQuery(event.relatedTarget).attr('href')) {
+    // Load the button data
+    let url = jQuery(event.relatedTarget).attr('href');
+
+    jQuery.get(url, function(data){
+      // Enable the hidden id field
+//      console.log('Enable UUID field!')
+      {{modal_type}}_form.find('input[name="id"]').prop('disabled',false)
+      // Change the form url to an PUT (update)
+      {{modal_type}}_form.attr({'method' : 'PUT', 'action' : url});
+
+
+
+      {{modal_type}}_enclosure_select.select2({disabled:true});
+      {{modal_type}}_area_select.select2({disabled:true});
+
+
+
+
+
+      let parsed_data = { ...data };
+      delete(parsed_data['setup']);
+
+      console.log('New parsed data start', parsed_data, data);
+
+      jQuery.each(data.setup,function(key, values) {
+        // Day / night or low / high  key
+        if (typeof values === 'object' && !(values instanceof Array) && values !== null) {
+          jQuery.each(values, function(subkey, value) {
+            parsed_data[key + '_' + subkey] = value;
+          })
+        } else {
+          parsed_data[key] = values;
+        }
+
+
+        //typeof yourVariable === 'object' && yourVariable !== null
+
+
+
+      });
+
+      console.log('Done parsed data',parsed_data);
+
+
+
+
+      // Load the button values in the form
+      jQuery.each(parsed_data,function(key,value) {
+        let field = {{modal_type}}_form.find('[name="' + key + '"]');
+
+        if (field.attr('type') == 'checkbox') {
+          field.prop('checked',(1 != value)).trigger('change');
+          field.prop('checked',(1 == value)).trigger('change');
+        } else {
+
+          if ('doors' == key) {
+            // Create a new array from the doors array with only the door ids
+            value = Array.from(value, door => door.id);
+          }
+          field.val(value).trigger('change');
+        }
+      });
+      {{modal_type}}_modal.find('div.loading').removeClass('d-flex').hide();
+    });
+  } else {
+    {{modal_type}}_modal.find('div.loading').removeClass('d-flex').hide();
+  }
+});
+{% endblock %}
+
+
+
+{% block modal_form_javascript_pre_submit %}
+{% endblock %}
+
+
+
+{% block modal_form_javascript_pre_submit_formdata %}
+let exclude_field_names = ['id','mode','name','type','enclosure','setup'];
+if ('lights' == form_data['type']) {
+  form_data['setup'] = {'day': {}, 'night': {}}
+} else {
+  form_data['setup'] = {'low': {}, 'high': {}}
+}
+
+console.log('Transform form data. Start:',form_data)
+
+jQuery.each(form_data,function(field_name, value) {
+  // Exclude fields in array below from parsing
+  if (exclude_field_names.indexOf(field_name) == -1) {
+    let field_parts = field_name.split('_');
+    console.log('field_parts',field_parts);
+    if (form_data['setup'][field_parts[0]] !== undefined) {
+      form_data['setup'][field_parts[0]][field_parts.slice(1).join('_')] = value;
+    } else {
+      form_data['setup'][field_name] = value;
+    }
+
+
+    delete(form_data[field_name])
+  }
+});
+{% endblock %}

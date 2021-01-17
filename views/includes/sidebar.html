@@ -1,0 +1,328 @@
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="{{ url_for('home') }}" class="brand-link">
+      <img src="/static/assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">{{ title }}</span>
+    </a>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image pt-2">
+          <img src="/static/assets/img/christmas_hat.png" class="christmashat" title="!! Merry Christmas !!" alt="!! Merry Christmas !!">
+          <img src="{{ profile_image }}" class="img-circle elevation-2 img-thumbnail" alt="User Image">
+        </div>
+        <div class="info">
+          {% if authenticated %}
+            <a href="{{ url_for('page', page='settings')}}" >Hello {{ username }}.</a>
+            <br />
+            <a href="{{ url_for('logout') }}" title="Logout" data-action="POST" data-toggle="modal" data-target="#modal-confirm">Logout</a>
+          {% else %}
+            <a href="{{ url_for('login') }}">
+              Read only mode. <br />Login to make changes.
+            </a>
+          {% endif %}
+        </div>
+      </div>
+      <!-- SidebarSearch Form -->
+      <div class="form-inline d-none">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-flat" data-widget="treeview" role="menu" data-accordion="true">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-home"></i>
+              <p>
+                Home
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url_for('page', page='dashboard')}}" class="nav-link">
+                  <i class="fas fa-th-list nav-icon"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              {% if show_gauge_overview %}
+              <li class="nav-item">
+                <a href="{{ url_for('page', page='all_sensors')}}" class="nav-link">
+                  <i class="fas fa-tint nav-icon"></i>
+                  <p>All sensors</p>
+                </a>
+              </li>
+              {% endif %}
+              <li class="nav-item">
+                <a href="{{ url_for('page',page='weather')}}" class="nav-link">
+                  <i class="fas fa-cloud-sun nav-icon"></i>
+                  <p>Weather</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url_for('page',page='calendar')}}" class="nav-link">
+                  <i class="fas fa-calendar-alt nav-icon"></i>
+                  <p>Calendar</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="fas fa-tint nav-icon"></i>
+              <p>
+                Sensors
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" id="available_sensor_types">
+              <script type="text/html" id="sensor_type_menu">
+                <li data-class="tree" class="nav-item">
+                  <a data-href="link" class="nav-link">
+                    <i data-class="icon" class="fas nav-icon"></i>
+                    <p >
+                      <span data-content-text="title"></span>
+                      <i data-class="submenu" class="fas right"></i>
+                    </p>
+                  </a>
+                </li>
+              </script>
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
+                <a href="{{ url_for('api:sensor_add') }}" class="nav-link" title="Add a new sensor" data-toggle="modal" data-target="#modal-sensor-setup">
+                  <i class="fas fa-plus nav-icon"></i>
+                  <p>Add new sensor</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-bolt"></i>
+              <p>
+                Relays
+                <i class="fas fa-angle-left right"></i>
+                <!-- <span class="badge badge-info right">6</span> -->
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url_for('page', page='relays')}}" class="nav-link">
+                  <i class="fas fa-power-off nav-icon"></i>
+                  <p>Status</p>
+                </a>
+              </li>
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
+                <a href="#" class="nav-link" title="Add a new relay" data-toggle="modal" data-target="#modal-relay-setup">
+                  <i class="fas fa-plus nav-icon"></i>
+                  <p>Add new relay</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-thumbtack"></i>
+              <p>
+                Buttons
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url_for('page', page='buttons')}}" class="nav-link">
+                  <i class="fas fa-list nav-icon"></i>
+                  <p>Status</p>
+                </a>
+              </li>
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
+                <a href="#" class="nav-link" title="Add a new button" data-toggle="modal" data-target="#modal-button-setup">
+                  <i class="fas fa-plus nav-icon"></i>
+                  <p>Add new button</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-video"></i>
+              <p>
+                Webcams
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url_for('page', page='webcams')}}" class="nav-link">
+                  <i class="fas fa-tv nav-icon"></i>
+                  <p>Show</p>
+                </a>
+              </li>
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
+                <a href="{{ url_for('webcam_list') }}" class="nav-link" title="Add a new webcam" data-toggle="modal" data-target="#modal-webcam-setup">
+                  <i class="fas fa-plus nav-icon"></i>
+                  <p>Add new webcam</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-music"></i>
+              <p>
+                Audio
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/forms-general.html" class="nav-link">
+                  <i class="fas fa-play nav-icon"></i>
+                  <p>Players</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url_for('page', page='audio_files')}}" class="nav-link">
+                  <i class="fas fa-file-audio nav-icon"></i>
+                  <p>Files / Playlists</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-globe"></i>
+              <p>
+                Enclosures
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url_for('page', page='enclosures')}}" class="nav-link">
+                  <i class="fas fa-building nav-icon"></i>
+                  <p>List</p>
+                </a>
+              </li>
+
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
+                <a href="#" class="nav-link" title="Add a new enclosure" data-toggle="modal" data-target="#modal-enclosure-setup">
+                  <i class="fas fa-plus nav-icon"></i>
+                  <p>Add new enclosure</p>
+                </a>
+              </li>
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
+                <a href="#" class="nav-link" title="Add a new area" data-toggle="modal" data-target="#modal-area-setup">
+                  <i class="fas fa-plus nav-icon"></i>
+                  <p>Add new area</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-cog"></i>
+              <p>
+                System
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url_for('page', page='status')}}" class="nav-link">
+                  <i class="fas fa-exclamation-triangle nav-icon"></i>
+                  <p>Status</p>
+                </a>
+              </li>
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
+                <a href="{{ url_for('page', page='log')}}" class="nav-link" >
+                  <i class="fas fa-file-alt nav-icon"></i>
+                  <p>Log</p>
+                </a>
+              </li>
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
+                <a href="{{ url_for('page', page='settings')}}" class="nav-link">
+                  <i class="fas fa-cogs nav-icon"></i>
+                  <p>Settings</p>
+                </a>
+              </li>
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
+                <a href="{{ url_for('api:server_action', action='restart')}}" class="nav-link text-info" title="Restart TerrariumPI" data-action="POST" data-toggle="modal" data-target="#modal-confirm">
+                  <i class="fas fa-sync-alt nav-icon"></i>
+                  <p>Restart</p>
+                </a>
+              </li>
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
+                <a href="{{ url_for('api:server_action', action='reboot')}}" class="nav-link text-warning" title="Reboot TerrariumPI" data-action="POST" data-toggle="modal" data-target="#modal-confirm">
+                  <i class="fas fa-sync-alt nav-icon"></i>
+                  <p>Reboot</p>
+                </a>
+              </li>
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
+                <a href="{{ url_for('api:server_action', action='restart')}}" class="nav-link text-danger" title="Shutdown TerrariumPI" data-action="POST" data-toggle="modal" data-target="#modal-confirm">
+                  <i class="fas fa-power-off nav-icon"></i>
+                  <p>Shutdown</p>
+                </a>
+            </ul>
+          </li>
+          <li class="nav-header">About</li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-info"></i>
+              <p>
+                Help
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/mailbox.html" class="nav-link">
+                  <i class="fas fa-info nav-icon"></i>
+                  <p>About</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/mailbox-compose.html" class="nav-link">
+                  <i class="fas fa-book nav-icon"></i>
+                  <p>Usage</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/mailbox-read-mail.html" class="nav-link">
+                  <i class="fas fa-microchip nav-icon"></i>
+                  <p>Hardware</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+  <script>
+    jQuery(function () {
+      {% if authenticated %}
+      let post_actions = ['logout','reboot','shutdown'];
+
+      jQuery.each(post_actions,function(counter, value) {
+        jQuery('a#' + value + '_url').off('click').on('click', function(event) {
+          event.preventDefault();
+          // Needs a post command.
+          jQuery('form#' + value + '_form').submit();
+        });
+      });
+      {% endif %}
+    });
+  </script>

@@ -1,0 +1,565 @@
+<svg
+    version="1.1"
+    id="tornado"
+    class="climacon climacon_tornado"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    x="0px"
+    y="0px"
+    viewBox="15 15 70 70"
+    enable-background="new 15 15 70 70"
+    xml:space="preserve">
+    <style type="text/css"><![CDATA[
+
+        svg{
+            shape-rendering: geometricPrecision
+        }
+
+        g, path, circle, rect{
+            -webkit-transform-origin: 50% 50%;
+            -moz-transform-origin: 50% 50%;
+            -o-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+
+            -webkit-animation-duration: 12s;
+            -moz-animation-duration: 12s;
+            -o-animation-duration: 12s;
+            animation-duration: 12s;
+
+            -moz-animation-iteration-count: infinite;
+            -webkit-animation-iteration-count: infinite;
+            -o-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+
+            -moz-animation-timing-function: linear;
+            -webkit-animation-timing-function: linear;
+            -o-animation-timing-function: linear;
+            animation-timing-function: linear;
+
+            -moz-animation-direction: normal;
+            -webkit-animation-direction: normal;
+            -o-animation-direction: normal;
+            animation-direction: normal;
+        }
+
+        .climacon_component-stroke_tornadoLine{
+            -webkit-animation-name:  translateTornado1;
+            -moz-animation-name:  translateTornado1;
+            -o-animation-name:  translateTornado1;
+            animation-name:  translateTornado1;
+
+            -webkit-animation-iteration-count: infinite;
+            -moz-animation-iteration-count: infinite;
+            -o-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+
+            -webkit-animation-direction: alternate;
+            -moz-animation-direction: alternate;
+            -o-animation-direction: alternate;
+            animation-direction: alternate;
+
+            -webkit-animation-timing-function: ease-in-out;
+            -moz-animation-timing-function: ease-in-out;
+            -o-animation-timing-function: ease-in-out;
+            animation-timing-function: ease-in-out;
+
+            -webkit-animation-duration: 12s;
+            -moz-animation-duration: 12s;
+            -o-animation-duration: 12s;
+            animation-duration: 12s;
+        }
+         
+        .climacon_component-stroke_tornadoLine:nth-child(1){
+            -webkit-animation-name:  translateTornado1;
+            -moz-animation-name:  translateTornado1;
+            -o-animation-name:  translateTornado1;
+            animation-name:  translateTornado1;
+        }
+
+        .climacon_component-stroke_tornadoLine:nth-child(2){
+            -webkit-animation-name:  translateTornado2;
+            -moz-animation-name:  translateTornado2;
+            -o-animation-name:  translateTornado2;
+            animation-name:  translateTornado2;
+        }
+
+        .climacon_component-stroke_tornadoLine:nth-child(3){
+            -webkit-animation-name:  translateTornado3;
+            -moz-animation-name:  translateTornado3;
+            -o-animation-name:  translateTornado3;
+            animation-name:  translateTornado3;
+        }
+
+        .climacon_component-stroke_tornadoLine:nth-child(4){
+            -webkit-animation-name:  translateTornado4;
+            -moz-animation-name:  translateTornado4;
+            -o-animation-name:  translateTornado4;
+            animation-name:  translateTornado4;
+        }
+
+        .climacon_component-stroke_tornadoLine:nth-child(5){
+            -webkit-animation-name:  translateTornado5;
+            -moz-animation-name:  translateTornado5;
+            -o-animation-name:  translateTornado5;
+            animation-name:  translateTornado5;
+        }
+
+        .climacon_component-stroke_tornadoLine:nth-child(6){
+            -webkit-animation-name:  translateTornado6;
+            -moz-animation-name:  translateTornado6;
+            -o-animation-name:  translateTornado6;
+            animation-name:  translateTornado6;
+        }
+
+        @-webkit-keyframes translateTornado1 {
+          0% {
+            -webkit-transform: translateY(0);
+          }
+
+          25% {
+            -webkit-transform: translateX(4px);
+          }
+
+          75% {
+            -webkit-transform: translateX(-4px);
+          }
+
+          100% {
+            -webkit-transform: translateX(0);
+          }
+        }
+
+        @-webkit-keyframes translateTornado2 {
+          0% {
+            -webkit-transform: translateY(0);
+          }
+
+          25% {
+            -webkit-transform: translateX(2px);
+          }
+
+          75% {
+            -webkit-transform: translateX(-2px);
+          }
+
+          100% {
+            -webkit-transform: translateX(0);
+          }
+        }
+
+        @-webkit-keyframes translateTornado3 {
+          0% {
+           -webkit-transform: translateY(0);
+          }
+
+          25% {
+           -webkit-transform: translateX(8px);
+          }
+
+          75% {
+           -webkit-transform: translateX(-8px);
+          }
+
+          100% {
+           -webkit-transform: translateX(0);
+          }
+        }
+
+        @-webkit-keyframes translateTornado4 {
+          0% {
+            -webkit-transform: translateY(0);
+          }
+
+          25% {
+            -webkit-transform: translateX(6px);
+          }
+
+          75% {
+            -webkit-transform: translateX(-6px);
+          }
+
+          100% {
+            -webkit-transform: translateX(0);
+          }
+        }
+
+        @-webkit-keyframes translateTornado5 {
+          0% {
+            -webkit-transform: translateY(0);
+          }
+
+          25% {
+            -webkit-transform: translateX(10px);
+          }
+
+          75% {
+            -webkit-transform: translateX(-10px);
+          }
+
+          100% {
+            -webkit-transform: translateX(0);
+          }
+        }
+
+        @-webkit-keyframes translateTornado6 {
+          0% {
+            -webkit-transform: translateY(0);
+          }
+
+          25% {
+            -webkit-transform: translateX(6px);
+          }
+
+          75% {
+            -webkit-transform: translateX(-6px);
+          }
+
+          100% {
+            -webkit-transform: translateX(0);
+          }
+        }
+
+        @-moz-keyframes translateTornado1 {
+          0% {
+            -moz-transform: translateY(0);
+          }
+
+          25% {
+            -moz-transform: translateX(4px);
+          }
+
+          75% {
+            -moz-transform: translateX(-4px);
+          }
+
+          100% {
+            -moz-transform: translateX(0);
+          }
+        }
+
+        @-moz-keyframes translateTornado2 {
+          0% {
+            -moz-transform: translateY(0);
+          }
+
+          25% {
+            -moz-transform: translateX(2px);
+          }
+
+          75% {
+            -moz-transform: translateX(-2px);
+          }
+
+          100% {
+            -moz-transform: translateX(0);
+          }
+        }
+
+        @-moz-keyframes translateTornado3 {
+          0% {
+           -moz-transform: translateY(0);
+          }
+
+          25% {
+           -moz-transform: translateX(8px);
+          }
+
+          75% {
+           -moz-transform: translateX(-8px);
+          }
+
+          100% {
+           -moz-transform: translateX(0);
+          }
+        }
+
+        @-moz-keyframes translateTornado4 {
+          0% {
+            -moz-transform: translateY(0);
+          }
+
+          25% {
+            -moz-transform: translateX(6px);
+          }
+
+          75% {
+            -moz-transform: translateX(-6px);
+          }
+
+          100% {
+            -moz-transform: translateX(0);
+          }
+        }
+
+        @-moz-keyframes translateTornado5 {
+          0% {
+            -moz-transform: translateY(0);
+          }
+
+          25% {
+            -moz-transform: translateX(10px);
+          }
+
+          75% {
+            -moz-transform: translateX(-10px);
+          }
+
+          100% {
+            -moz-transform: translateX(0);
+          }
+        }
+
+        @-moz-keyframes translateTornado6 {
+          0% {
+            -moz-transform: translateY(0);
+          }
+
+          25% {
+            -moz-transform: translateX(6px);
+          }
+
+          75% {
+            -moz-transform: translateX(-6px);
+          }
+
+          100% {
+            -moz-transform: translateX(0);
+          }
+        }
+
+        @-o-keyframes translateTornado1 {
+          0% {
+            -o-transform: translateY(0);
+          }
+
+          25% {
+            -o-transform: translateX(4px);
+          }
+
+          75% {
+            -o-transform: translateX(-4px);
+          }
+
+          100% {
+            -o-transform: translateX(0);
+          }
+        }
+
+        @-o-keyframes translateTornado2 {
+          0% {
+            -o-transform: translateY(0);
+          }
+
+          25% {
+            -o-transform: translateX(2px);
+          }
+
+          75% {
+            -o-transform: translateX(-2px);
+          }
+
+          100% {
+            -o-transform: translateX(0);
+          }
+        }
+
+        @-o-keyframes translateTornado3 {
+          0% {
+           -o-transform: translateY(0);
+          }
+
+          25% {
+           -o-transform: translateX(8px);
+          }
+
+          75% {
+           -o-transform: translateX(-8px);
+          }
+
+          100% {
+           -o-transform: translateX(0);
+          }
+        }
+
+        @-o-keyframes translateTornado4 {
+          0% {
+            -o-transform: translateY(0);
+          }
+
+          25% {
+            -o-transform: translateX(6px);
+          }
+
+          75% {
+            -o-transform: translateX(-6px);
+          }
+
+          100% {
+            -o-transform: translateX(0);
+          }
+        }
+
+        @-o-keyframes translateTornado5 {
+          0% {
+            -o-transform: translateY(0);
+          }
+
+          25% {
+            -o-transform: translateX(10px);
+          }
+
+          75% {
+            -o-transform: translateX(-10px);
+          }
+
+          100% {
+            -o-transform: translateX(0);
+          }
+        }
+
+        @-o-keyframes translateTornado6 {
+          0% {
+            -o-transform: translateY(0);
+          }
+
+          25% {
+            -o-transform: translateX(6px);
+          }
+
+          75% {
+            -o-transform: translateX(-6px);
+          }
+
+          100% {
+            -o-transform: translateX(0);
+          }
+        }
+        @keyframes translateTornado1 {
+          0% {
+            transform: translateY(0);
+          }
+
+          25% {
+            transform: translateX(4px);
+          }
+
+          75% {
+            transform: translateX(-4px);
+          }
+
+          100% {
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes translateTornado2 {
+          0% {
+            transform: translateY(0);
+          }
+
+          25% {
+            transform: translateX(2px);
+          }
+
+          75% {
+            transform: translateX(-2px);
+          }
+
+          100% {
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes translateTornado3 {
+          0% {
+           transform: translateY(0);
+          }
+
+          25% {
+           transform: translateX(8px);
+          }
+
+          75% {
+           transform: translateX(-8px);
+          }
+
+          100% {
+           transform: translateX(0);
+          }
+        }
+
+        @keyframes translateTornado4 {
+          0% {
+            transform: translateY(0);
+          }
+
+          25% {
+            transform: translateX(6px);
+          }
+
+          75% {
+            transform: translateX(-6px);
+          }
+
+          100% {
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes translateTornado5 {
+          0% {
+            transform: translateY(0);
+          }
+
+          25% {
+            transform: translateX(10px);
+          }
+
+          75% {
+            transform: translateX(-10px);
+          }
+
+          100% {
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes translateTornado6 {
+          0% {
+            transform: translateY(0);
+          }
+
+          25% {
+            transform: translateX(6px);
+          }
+
+          75% {
+            transform: translateX(-6px);
+          }
+
+          100% {
+            transform: translateX(0);
+          }
+        }
+
+    ]]></style>
+    <g class="climacon_iconWrap climacon_iconWrap-tornado">
+        <g class="climacon_componentWrap climacon_componentWrap-tornado">
+            <path
+            class="climacon_component climacon_component-stroke climacon_component-stroke_tornadoLine"
+            d="M68.997,36.459H31.002c-1.104,0-2-0.896-2-1.999c0-1.104,0.896-2,2-2h37.995c1.104,0,2,0.896,2,2C70.997,35.563,70.102,36.459,68.997,36.459z"/>
+            <path
+            class="climacon_component climacon_component-stroke climacon_component-stroke_tornadoLine"
+            d="M35.002,40.459h29.996c1.104,0,2,0.896,2,2s-0.896,1.999-2,1.999H35.002c-1.104,0-2-0.896-2-1.999C33.002,41.354,33.898,40.459,35.002,40.459z"/>
+            <path
+            class="climacon_component climacon_component-stroke climacon_component-stroke_tornadoLine"
+            d="M39.001,48.458h21.998c1.104,0,1.999,0.896,1.999,1.999c0,1.104-0.896,2-1.999,2H39.001c-1.104,0-1.999-0.896-1.999-2C37.002,49.354,37.897,48.458,39.001,48.458z"/>
+            <path
+            class="climacon_component climacon_component-stroke climacon_component-stroke_tornadoLine"
+            d="M47,64.456h6c1.104,0,2,0.896,2,1.999s-0.896,2-2,2H47c-1.104,0-2-0.896-2-2S45.896,64.456,47,64.456z"/>
+            <path
+            class="climacon_component climacon_component-stroke climacon_component-stroke_tornadoLine"
+            d="M40.869,58.456c0-1.104,0.896-1.999,2-1.999h13.998c1.104,0,2,0.896,2,1.999c0,1.104-0.896,2-2,2H42.869C41.765,60.456,40.869,59.561,40.869,58.456z"/>
+        </g>
+    </g>
+</svg><!-- tornado -->

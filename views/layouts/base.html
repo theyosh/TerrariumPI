@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/static/assets/favicon.ico" type="image/x-icon">
+  <title>
+    {% block title %}{% endblock %} - {{ title }} - {{ version }}
+  </title>
+  <!-- jQuery -->
+  <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- pace-progress -->
+  <link rel="stylesheet" href="/static/assets/plugins/pace-progress/themes/black/pace-theme-flat-top.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="/static/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="/static/assets/plugins/toastr/toastr.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="/static/assets/plugins/select2/css/select2.min.css">
+  <!-- fullCalendar -->
+  <link rel="stylesheet" href="/static/assets/plugins/fullcalendar/main.min.css">
+  <link rel="stylesheet" href="/static/assets/plugins/fullcalendar-daygrid/main.min.css">
+  <link rel="stylesheet" href="/static/assets/plugins/fullcalendar-timegrid/main.min.css">
+  <link rel="stylesheet" href="/static/assets/plugins/fullcalendar-bootstrap/main.min.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="/static/assets/plugins/summernote/summernote-bs4.min.css">
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="/static/assets/plugins/leaflet/leaflet.css">
+  <link rel="stylesheet" href="/static/assets/plugins/leaflet.fullscreen/dist/leaflet.fullscreen.css">
+  <link rel="stylesheet" href="/static/assets/plugins/leaflet.loading/src/Control.Loading.css">
+  <link rel="stylesheet" href="/static/assets/plugins/leaflet.icon-pulse/dist/L.Icon.Pulse.css">
+  <!-- Fancybox -->
+  <link rel="stylesheet" href="/static/assets/plugins/fancybox/dist/jquery.fancybox.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="/static/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="/static/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <!-- Country flags -->
+  <link rel="stylesheet" href="/static/assets/plugins/flag-icon-css/css/flag-icon.min.css">
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.min.css">
+
+
+
+  <!-- adminlte-->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+  <!-- TerrariumPI CSS -->
+  <link rel="stylesheet" href="/static/assets/css/terrariumpi.css">
+  <script>
+    window.terrariumPI = {
+      language : '{{ lang }}',
+      gauges : {},
+      graphs : {},
+      logged_in : {% if authenticated %}true{% else %}false{% endif %},
+      graph_show_min_max_gauge : {{ graph_show_min_max_gauge }},
+      graph_smooth_value : {{ graph_smooth_value }},
+      online_counter : null,
+      update_timer : null,
+      websocket : null,
+      connection : '{{ url_for("websocket_connect") }}',
+      websocket_timer: null,
+      units: {{ units }}
+    };
+    jQuery(function() {
+      // Set moment.js global local
+      moment.locale(window.terrariumPI.language);
+    });
+  </script>
+  {% block stylesheets %}{% endblock stylesheets %}
+</head>
+<body class="hold-transition layout-fixed layout-navbar-fixed sidebar-mini pace-primary {% block body_class %}{% endblock body_class %}">
+<div class="wrapper">
+    {% include 'includes/navigation.html' %}
+    {% include 'includes/sidebar.html' %}
+    {% block content %}{% endblock content %}
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+    {% include 'includes/footer.html' %}
+</div>
+{% include 'includes/scripts.html' %}
+{% include 'includes/modals.html' %}
+<!-- ./wrapper -->
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+</body>
+</html>

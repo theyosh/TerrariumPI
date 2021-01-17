@@ -1,0 +1,122 @@
+<div class="modal fade" id="modal-{{modal_type}}-setup">
+  <div class="modal-dialog {{modal_size}}">
+    <div class="modal-content">
+      <div class="overlay d-flex justify-content-center align-items-center loading">
+        <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+      </div>
+
+      <form class="form-horizontal needs-validation" action="#" method="post" novalidate>
+        <div class="modal-header">
+          <h4 class="modal-title">{% block modal_title %} <i class="fas fa-heading" ></i> Modal title{% endblock %}</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {% block modal_body %}
+            Modal body
+          {% endblock %}
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Save changes
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  {% block modal_form_javascript_functions %}
+  {% endblock %}
+
+  // Modal and form globals
+  jQuery(function() {
+    let {{modal_type}}_modal = jQuery('#modal-{{modal_type}}-setup');
+    let {{modal_type}}_form  = {{modal_type}}_modal.find('form');
+
+    {% block modal_form_javascript_pre %}
+    {% endblock %}
+
+    // Process form submit
+    {{modal_type}}_form.on('submit',function(event){
+      event.preventDefault();
+      event.stopPropagation();
+
+      if ({{modal_type}}_form[0].checkValidity() === false) {
+        {{modal_type}}_form.addClass('was-validated');
+
+        let error_fields = [];
+        jQuery.each({{modal_type}}_form.find(':invalid'),function(counter,field){
+          error_fields.push(jQuery(field).prev().text());
+        });
+        toastr.error('Not all required fields are entered.<br/>' + error_fields.join('<br/>'), 'Form error');
+      } else {
+        {{modal_type}}_form.find('span.spinner-border').show();
+
+        {% block modal_form_javascript_pre_submit %}
+        {% endblock %}
+
+        let form_data = formToJSON({{modal_type}}_form);
+        // Delete the value field.
+        delete(form_data['value']);
+
+        {% block modal_form_javascript_pre_submit_formdata %}
+        {% endblock %}
+
+        jQuery.ajax({
+          type: {{modal_type}}_form.attr('method'),
+          url:  {{modal_type}}_form.attr('action'),
+          data: JSON.stringify(form_data),
+          processData: false,
+          contentType: 'application/json;charset=UTF-8',
+          dataType:'json',
+          cache: false,
+          success: function (data) {
+            // TODO: Make a better message system from the API backend
+            toastr.success("Button data is saved", "Save ok");
+            {{modal_type}}_modal.reload = true
+            {{modal_type}}_modal.modal('hide');
+          },
+          error: function (error) {
+            error = error.responseJSON;
+            console.log(error);
+            toastr.error(error.message , 'Save Error');
+          }
+        });
+      }
+    });
+
+    // On modal close
+    {{modal_type}}_modal.on('hidden.bs.modal', function(){
+      if ({{modal_type}}_modal.reload) {
+        load_page('{{modal_reload_url}}');
+      }
+    });
+
+    // Load form data when modal is opened
+    {{modal_type}}_modal.on('show.bs.modal', function(event){
+      {{modal_type}}_form.find('button span.spinner-border').hide();
+      {{modal_type}}_modal.find('div.loading').addClass('d-flex').show();
+
+      // Clear old cached form data, and set action to POST (new)
+      {{modal_type}}_form[0].reset();
+      // Form reset does not clear the readonly id which should be disabled when the form loads
+      {{modal_type}}_form.find('input[name="id"]').val('').prop('disabled',true);
+      // Clear error indicators
+      {{modal_type}}_form.removeClass('was-validated');
+      // Set the post method
+      {{modal_type}}_form.attr({'method' : 'POST', 'action' : '{{ modal_form_add_action }}'});
+      // By default do not reload. (Close button)
+      {{modal_type}}_modal.reload = false;
+
+      {% block modal_form_javascript_load %}
+      {% endblock %}
+
+    });
+  });
+</script>

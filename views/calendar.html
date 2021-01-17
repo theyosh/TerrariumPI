@@ -1,0 +1,340 @@
+{% extends "layouts/base-content.html" %}
+{% block title %} Calendar {% endblock %}
+{% block options %}
+<ol class="breadcrumb float-sm-right ">
+  {% if authenticated %}
+  <li class="breadcrumb-item"><a href="{{ url_for('api:calendar_download') }}" target="_blank"><i class="fas fa-download pt-1 mr-1"></i> Download iCal</a></li>
+  <li class="breadcrumb-item "><i class="fas fa-wrench pt-1 mr-1"></i> Settings</li>
+  {% else %}
+  <li class="breadcrumb-item "><a href="{{ url_for('login') }}"><i class="fas fa-wrench pt-1 mr-1"></i> Please login to make changes</a></li>
+  {% endif %}
+</ol>
+{% endblock options %}
+
+{% block page_content %}
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card card-primary">
+              <div class="card-body p-0">
+                <!-- THE CALENDAR -->
+                <div id="calendar"></div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  <!-- </div> -->
+  <!-- /.content-wrapper -->
+
+<!-- Specific Page JS goes HERE  -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-calendar-event">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><i class="fas fa-calendar-alt"></i> Event</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group row">
+          <div class="col-12 col-sm-9 col-md-9 col-lg-9">
+
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" class="form-control" id="summary" name="summary" placeholder="Event title">
+              <input type="hidden" id="uid" name="uid">
+            </div>
+
+            <div class="form-group">
+              <label for="description">Event</label>
+                <textarea class="textarea-disabled" placeholder="Place some text here"
+                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+            <div class="form-group">
+              <label for="title">Date</label>
+              <p class="p-2 event_date"></p>
+              <input type="hidden" class="form-control" id="date" name="date">
+            </div>
+
+            <div class="form-group">
+              <label for="amount">Repeat every</label>
+
+              <input type="number" class="form-control" id="interval" name="interval" placeholder="Select amount">
+
+              <div class="select2-primary mt-2">
+                <select class="select2 " id="freq" name="freq" data-placeholder="Select period" style="width: 100%;">
+                  <option value="_">No repeat</option>
+                  <option value="daily">Days</option>
+                  <option value="weekly">Weeks</option>
+                  <option value="monthly">Months</option>
+                  <option value="yearly">Years</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <span>
+          <button type="button" class="btn btn-danger" disabled="disabled">Delete</button>
+          <button type="button" class="btn btn-primary">Confirm</button>
+        </span>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script>
+    function save_calender_event(uid, summary, description, location, dtstart, dtend, freq, interval, event_modal) {
+
+      let event_data = {
+//          uid: uid || null,
+          summary: summary,
+          description: description || null,
+          location: location || null,
+          dtstart : dtstart,
+          dtend: dtend || null,
+          freq : freq || null,
+          interval :  interval || null
+      }
+
+      jQuery.ajax({
+          type: (event_data.uid == null ? 'post' : 'put'),
+          url: (event_data.uid == null ? '{{ url_for("api:calendar_add") }}' : '{{ url_for("api:calendar_detail", calendar="_id_") }}'.replace('_id_',event_data.uid)),
+          data: JSON.stringify(event_data),
+          processData: false,
+          contentType: 'application/json;charset=UTF-8',
+          dataType:'json',
+          cache: false,
+          success: function (data) {
+            toastr['success']('Calendar event <strong>' + event_data.summary + '</strong> ' + (event_data.uid == null ? 'created' : 'updated') , 'OK');
+            try {
+              event_modal.modal('hide');
+              setTimeout(function(){
+                load_page();
+              }, 1100)
+            } catch (e) {
+              setTimeout(function(){
+                load_page();
+              }, 100)
+            }
+          },
+          error: function (error) {
+            toastr['error']('Error:<br />' + error.message , 'ERROR');
+          }
+        });
+    }
+
+    jQuery(function () {
+      // Initialize select2 pulldowns
+      jQuery('select.select2').select2();
+      // Initialyze wysiwyg editor
+      jQuery('textarea').summernote({
+        dialogsInBody: true
+      });
+
+      // Event editing modal window
+      let event_modal = jQuery('#modal-calendar-event');
+      // When modal closes, clear the wysiwyg editor.
+
+      event_modal.on('hidden.bs.modal',function(event){
+        jQuery('textarea').summernote('destroy');
+
+        event_modal.find('input').val('');
+        event_modal.find('textarea').val('');
+        event_modal.find('select#freq').val('_').trigger('change');
+
+        jQuery('textarea').summernote({
+          dialogsInBody: true
+        });
+      });
+
+      // Bind action to the confirm/save button
+      event_modal.find('button.btn-primary').off('click').on('click',function(event) {
+        let period = event_modal.find('input#date').val().split('|');
+
+        save_calender_event(
+          event_modal.find('input#uid').val() != '' ? event_modal.find('input#uid').val() : null,
+          event_modal.find('input#summary').val() != '' ? event_modal.find('input#summary').val() : null,
+          event_modal.find('textarea').val() != '' ? event_modal.find('textarea').val() : null,
+          null,
+          period[0],
+          (period.length > 1 ? period[1] : null),
+          event_modal.find('select#freq').val() != '' ? event_modal.find('select#freq').val() : null,
+          event_modal.find('input#interval').val() != '' ? event_modal.find('input#interval').val() : null,
+          event_modal
+        );
+      });
+
+      event_modal.find('button.btn-danger').off('click').on('click',function(event) {
+
+        let uid = event_modal.find('input#uid').val();
+        let summary = event_modal.find('input#summary').val()
+
+        jQuery.ajax({
+          type: 'delete',
+          url: '{{ url_for("api:calendar_delete", calendar="_id_") }}'.replace('_id_', uid),
+          data: null,
+          processData: true,
+          contentType: 'application/json;charset=UTF-8',
+          dataType:'json',
+          cache: false,
+          success: function (data) {
+            toastr['success'](data.message, 'OK');
+            try {
+              event_modal.modal('hide');
+              setTimeout(function(){
+                load_page();
+              }, 1100)
+            } catch (e) {
+
+            }
+          },
+          error: function (error) {
+            error = error.responseJSON;
+            console.log(error);
+            toastr['error'](error.message , 'ERROR');
+          }
+        });
+      });
+
+      var calendar = new FullCalendar.Calendar(jQuery('#calendar')[0], {
+        locale: window.terrariumPI.language.substring(0,2),
+
+        plugins: [ 'bootstrap', 'interaction', 'dayGrid', 'timeGrid' ],
+        header    : {
+          left  : 'prev,next,today',
+          center: 'title',
+          right : 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        themeSystem: 'bootstrap',
+
+        events: {
+          url: '{{ url_for("api:calendar_list") }}'
+        },
+
+        droppable : false, // this allows things to be dropped onto the calendar !!!
+        {% if authenticated %}
+        editable  : true,
+        selectable: true,
+
+        dateClick: function(dateClickInfo) {
+          event_modal.find('p.event_date').text(moment(dateClickInfo.date).format('L'));
+          event_modal.find('input#date').val(moment(dateClickInfo.date).unix());
+          event_modal.modal('show');
+        },
+
+        select: function(dateClickInfo) {
+          event_modal.find('p.event_date').text(moment(dateClickInfo.start).format('L') + ' - ' + moment(dateClickInfo.end).subtract(1, 'days').format('L'));
+          event_modal.find('input#date').val(moment(dateClickInfo.start).unix() + '|' + moment(dateClickInfo.end).unix());
+          event_modal.modal('show');
+        },
+
+        eventClick: function(eventClickInfo) {
+          jQuery('textarea').summernote('destroy');
+
+          jQuery.get('{{ url_for("api:calendar_detail", calendar="_id_") }}'.replace('_id_',eventClickInfo.event.id),function(data){
+            event_modal.find('button[disabled="disabled"]').prop('disabled','');
+
+            event_modal.find('input#uid').val(data.uid);
+
+            event_modal.find('input#interval').val(data.interval);
+            event_modal.find('select#freq').val(data.freq).trigger('change');
+
+            if (!data.all_day) {
+              event_modal.find('p.event_date').text(moment(data.dtstart * 1000).format('L') + ' - ' + moment(data.dtend * 1000).subtract(1, 'days').format('L'));
+              event_modal.find('input#date').val(data.dtstart + '|' + data.dtend);
+            } else {
+              event_modal.find('p.event_date').text(moment(data.dtstart * 1000).format('L'));
+              event_modal.find('input#date').val(data.dtstart);
+            }
+            event_modal.find('input#summary').val(data.summary);
+            event_modal.find('textarea').val(data.description);
+
+            jQuery('textarea').summernote({
+              dialogsInBody: true
+            });
+
+            event_modal.modal('show');
+
+          });
+        },
+        eventDrop: function(changeInfo) {
+          jQuery.get('{{ url_for("api:calendar_detail", calendar="_id_") }}'.replace('_id_',changeInfo.event.id), function(event_data){
+            event_data.dtstart = moment(changeInfo.event.start).unix();
+            event_data.dtend = (changeInfo.event.end ? moment(changeInfo.event.end).unix() : null);
+
+            save_calender_event(
+              event_data.uid,
+              event_data.summary,
+              event_data.description,
+              event_data.location,
+              event_data.dtstart,
+              event_data.dtend,
+              event_data.freq,
+              event_data.interval
+            );
+          });
+        },
+
+        eventResize: function(changeInfo) {
+          jQuery.get('{{ url_for("api:calendar_detail", calendar="_id_") }}'.replace('_id_',changeInfo.event.id), function(event_data){
+            event_data.dtstart = moment(changeInfo.event.start).unix();
+            event_data.dtend = (changeInfo.event.end ? moment(changeInfo.event.end).unix() : null);
+
+            save_calender_event(
+              event_data.uid,
+              event_data.summary,
+              event_data.description,
+              event_data.location,
+              event_data.dtstart,
+              event_data.dtend,
+              event_data.freq,
+              event_data.interval
+            );
+          });
+        },
+
+        {% else %}
+        editable  : false,
+        selectable: false,
+        {% endif %}
+
+        eventRender: function(info) {
+          let end = info.event.end || moment(info.event.start).add(1,'days');
+          tippy(info.el, {
+            allowHTML: true,
+            followCursor: 'horizontal',
+            content: '<strong>' + info.event.title + '</strong><br />' +
+                      info.event.extendedProps.description + '<br /><strong>Duration:</strong> ' +
+                      moment.duration(end - info.event.start).humanize(),
+          });
+        },
+
+
+      });
+
+      calendar.render();
+
+    });
+  </script>
+{% endblock page_content %}

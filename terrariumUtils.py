@@ -6,9 +6,12 @@ import re
 import datetime
 import requests
 import subprocess
+import threading
+import bcrypt
 
 from math import log
-from time import time
+
+import time
 
 # works in Python 2 & 3
 class _Singleton(type):
@@ -21,89 +24,117 @@ class _Singleton(type):
 
 class terrariumSingleton(_Singleton('terrariumSingletonMeta', (object,), {})): pass
 
-class terrariumTimer(object):
-  def __init__(self,start,stop,on_duration,off_duration,enabled):
-    self.__start = start
-    self.__stop = stop
-    self.__on_duration = on_duration
-    self.__off_duration = off_duration
+class classproperty(property):
+    def __get__(self, cls, owner):
+        return classmethod(self.fget).__get__(None, owner)()
 
-    self.__enabled = terrariumUtils.is_true(enabled)
 
-    self.__timer_table = []
-    self.__calculate_time_table()
+# class terrariumTimer(object):
+#   def __init__(self, start, stop, on_duration = 0, off_duration = 0):
+#     self.__start = datetime.time.fromisoformat(start)
+#     self.__stop  = datetime.time.fromisoformat(stop)
+#     self.__on_duration  = max(0.0,float(on_duration))  * 60
+#     self.__off_duration = max(0.0,float(off_duration)) * 60
 
-  def __calculate_time_table(self):
-    starttime = self.__start.split(':')
-    stoptime = self.__stop.split(':')
-    on_duration = float(self.__on_duration) * 60.0
-    off_duration = float(self.__off_duration) * 60.0
+# #    self.__enabled = terrariumUtils.is_true(enabled)
 
-    self.__timer_table = []
-    now = datetime.datetime.now()
-    starttime = now.replace(hour=int(starttime[0]), minute=int(starttime[1]), second=0)
-    stoptime = now.replace(hour=int(stoptime[0]), minute=int(stoptime[1]),second=0)
+#     self.__timer_table = []
 
-    if starttime == stoptime:
-      stoptime += datetime.timedelta(hours=24)
+#     # print('Start time')
+#     # print(self.__start)
+#     # print(dir(self.__start))
+#     # print('Current time')
+#     # print(time.localtime())
 
-    elif starttime > stoptime:
-      if now > stoptime:
-        stoptime += datetime.timedelta(hours=24)
-      else:
-        starttime -= datetime.timedelta(hours=24)
+#     self.__calculate_time_table()
 
-    # Calculate next day when current day is done...
-    if now > stoptime:
-      starttime += datetime.timedelta(hours=24)
-      stoptime += datetime.timedelta(hours=24)
+#   def __calculate_time_table(self):
+#     # Clean timer table
+#     self.__timer_table = []
+#     # Create a datetime object
+#     now = datetime.datetime.now()
+#     # Set the begin time based on today date
+#     starttime = now.replace(hour=self.__start.hour, minute=self.__start.minute, second=self.__start.second)
+#     # Set the end time based on today date
+#     stoptime  = now.replace(hour=self.__stop.hour,  minute=self.__stop.minute,  second=self.__stop.second)
+#     # Set the prefered on time period
+#     on_duration  = self.__on_duration
+#     # Set the prefered off time period
+#     off_duration = self.__off_duration
 
-    if (on_duration is None and off_duration is None) or (0 == on_duration and 0 == off_duration):
-      # Only start and stop time. No periods
-      self.__timer_table.append((int(starttime.strftime('%s')),int(stoptime.strftime('%s'))))
-    elif on_duration is not None and off_duration is None:
+#     # If the start tiem and end time are the same, add a day to the end time (24 hours)
+#     if starttime == stoptime:
+#       stoptime += datetime.timedelta(hours=24)
 
-      if (starttime + datetime.timedelta(seconds=on_duration)) > stoptime:
-        on_duration = (stoptime - starttime).total_seconds()
-      self.__timer_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(seconds=on_duration)).strftime('%s'))))
-    else:
-      # Create time periods based on both duration between start and stop time
-      while starttime < stoptime:
-        if (starttime + datetime.timedelta(seconds=on_duration)) > stoptime:
-          on_duration = (stoptime - starttime).total_seconds()
+#     # If the start time is greater (after) the stop time, we have to reduce/add 1 day
+#     elif starttime > stoptime:
+#       # If the stop time is pased, then we add 1 day
+#       if now > stoptime:
+#         stoptime  += datetime.timedelta(hours=24)
+#       else:
+#         # Else we are in the future, so reduce start time by 1 day
+#         starttime -= datetime.timedelta(hours=24)
 
-        self.__timer_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(seconds=on_duration)).strftime('%s'))))
-        starttime += datetime.timedelta(seconds=on_duration + off_duration)
+#     # Calculate next day when current day is done...
+#     if now > stoptime:
+#       starttime += datetime.timedelta(hours=24)
+#       stoptime  += datetime.timedelta(hours=24)
 
-  def is_enabled(self):
-    return terrariumUtils.is_true(self.__enabled)
+#     if 0 == on_duration and 0 == off_duration:
+#       # Only start and stop time. No periods
+#       self.__timer_table.append((int(starttime.strftime('%s')),int(stoptime.strftime('%s'))))
 
-  def is_time(self):
-    now = int(datetime.datetime.now().strftime('%s'))
-    for time_schedule in self.__timer_table:
-      if time_schedule[0] <= now < time_schedule[1]:
-        return True
+#     # elif on_duration is not None and off_duration is None:
 
-      elif now < time_schedule[0]:
-        return False
+#     #   if (starttime + datetime.timedelta(seconds=on_duration)) > stoptime:
+#     #     on_duration = (stoptime - starttime).total_seconds()
+#     #   self.__timer_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(seconds=on_duration)).strftime('%s'))))
+#     else:
+#       # Create time periods based on both duration between start and stop time
 
-    #End of time_table. No data to decide for today
-    self.__calculate_time_table()
-    return None
+#       while starttime < stoptime:
+#         # The 'on' period is to big for the rest of the total timer time. So reduce it to the max left time
+#         if (starttime + datetime.timedelta(seconds=on_duration)) > stoptime:
+#           on_duration = (stoptime - starttime).total_seconds()
 
-  def duration(time_table):
-    duration = 0
-    for time_schedule in self.__timer_table:
-      duration += time_schedule[1] - time_schedule[0]
+#         # Add new entry int he time table
+#         self.__timer_table.append((int(starttime.strftime('%s')),int((starttime + datetime.timedelta(seconds=on_duration)).strftime('%s'))))
+#         # Increate the start time with the on and off duration for the next round
+#         starttime += datetime.timedelta(seconds=on_duration + off_duration)
 
-    return duration
+#   # def is_enabled(self):
+#   #   return terrariumUtils.is_true(self.__enabled)
 
-  def get_data(self):
-    return {'timer_enabled': self.is_enabled(),
-            'timer_start': self.__start,
-            'timer_stop' : self.__stop,
-            'timer_on_duration': self.__on_duration,
-            'timer_off_duration': self.__off_duration}
+#   def is_time(self):
+#     now = int(datetime.datetime.now().strftime('%s'))
+#     for time_schedule in self.__timer_table:
+#       if time_schedule[0] <= now < time_schedule[1]:
+#         return True
+
+#       elif now < time_schedule[0]:
+#         return False
+
+#     #End of time_table. No data to decide for today
+#     # TODO: We can create a new timetable for the next day, but that does not work with the weather sunrise/set.
+#     # self.__calculate_time_table()
+#     return None
+
+#   def duration(self):
+#     # Return the total duration in seconds
+#     duration = 0
+#     for time_schedule in self.__timer_table:
+#       duration += time_schedule[1] - time_schedule[0]
+
+#     return duration
+
+#   def begin(self):
+#     # Return the on time stamp of the first time table row
+#     return self.__timer_table[0][0]
+
+#   def end(self):
+#     # Return the off timestamp of the last time table row
+#     return self.__timer_table[-1][1]
+
 
 class terrariumCache(terrariumSingleton):
   def __init__(self):
@@ -111,12 +142,22 @@ class terrariumCache(terrariumSingleton):
     self.__running = {}
     logger.debug('Initialized cache')
 
+  def __cleanup(self):
+    now = int(time.time())
+    for key in list(self.__cache.keys()):
+      if self.__cache[key]['expire'] < now:
+        logger.debug('Delete cache key {} with expire date {}'.format(key,datetime.datetime.fromtimestamp(self.__cache[key]['expire'])))
+        del(self.__cache[key])
+
   def set_data(self,hash_key,data,cache_timeout = 30):
-    self.__cache[hash_key] = { 'data' : data, 'expire' : int(time()) + cache_timeout}
+    # When cache value is negative, cache it for one year.... should be long enough.. ;)
+    cache_timeout = cache_timeout if cache_timeout > 0 else int(datetime.timedelta(days=365).total_seconds())
+    self.__cache[hash_key] = { 'data' : data, 'expire' : int(time.time()) + cache_timeout}
     logger.debug('Added new cache data with hash: {}. Total in cache: {}'.format(hash_key,len(self.__cache)))
+    self.__cleanup()
 
   def get_data(self,hash_key):
-    if hash in self.__cache and self.__cache[hash_key]['expire'] > int(time()):
+    if hash_key in self.__cache and self.__cache[hash_key]['expire'] > int(time.time()):
       return self.__cache[hash_key]['data']
 
   def clear_data(self,hash_key):
@@ -136,6 +177,14 @@ class terrariumCache(terrariumSingleton):
     del(self.__running[hash_key])
 
 class terrariumUtils():
+
+  @staticmethod
+  def generate_password(password):
+    return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode('utf8')
+
+  @staticmethod
+  def check_password(password, hash):
+    return bcrypt.checkpw(password.encode(), hash.encode())
 
   @staticmethod
   def to_fahrenheit(value):
@@ -165,41 +214,41 @@ class terrariumUtils():
     # https://www.asknumbers.com/gallons-to-liters.aspx
     return float(value) / 4.54609
 
-  @staticmethod
-  def conver_to_value(current,indicator):
-    if not terrariumUtils.is_float(current):
-      return None
+  # @staticmethod
+  # def conver_to_value(current,indicator):
+  #   if not terrariumUtils.is_float(current):
+  #     return None
 
-    indicator = indicator.lower()
-    if 'f' == indicator:
-      current = terrariumUtils.to_fahrenheit(current)
-    elif 'k' == indicator:
-      current = terrariumUtils.to_kelvin(current)
-    elif 'inch' == indicator:
-      current = terrariumUtils.to_inches(current)
-    elif 'usgall' == indicator:
-      current = terrariumUtils.to_us_gallons(current)
-    elif 'ukgall' == indicator:
-      current = terrariumUtils.to_uk_gallons(current)
+  #   indicator = indicator.lower()
+  #   if 'f' == indicator:
+  #     current = terrariumUtils.to_fahrenheit(current)
+  #   elif 'k' == indicator:
+  #     current = terrariumUtils.to_kelvin(current)
+  #   elif 'inch' == indicator:
+  #     current = terrariumUtils.to_inches(current)
+  #   elif 'usgall' == indicator:
+  #     current = terrariumUtils.to_us_gallons(current)
+  #   elif 'ukgall' == indicator:
+  #     current = terrariumUtils.to_uk_gallons(current)
 
-    return float(current)
+  #   return float(current)
 
-  @staticmethod
-  def convert_from_to(current, indicator_from, indicator_to):
-    indicator_from = indicator_from.lower()
-    indicator_to = indicator_to.lower()
+  # @staticmethod
+  # def convert_from_to(current, indicator_from, indicator_to):
+  #   indicator_from = indicator_from.lower()
+  #   indicator_to = indicator_to.lower()
 
-    if 'c' == indicator_from:
-      pass # Nothing to do
-    elif 'f' == indicator_from:
-      current = terrariumUtils.to_celsius(current)
+  #   if 'c' == indicator_from:
+  #     pass # Nothing to do
+  #   elif 'f' == indicator_from:
+  #     current = terrariumUtils.to_celsius(current)
 
-    if 'c' == indicator_to:
-      pass # Nothing to do
-    if 'f' == indicator_to:
-      current = terrariumUtils.to_fahrenheit(current)
+  #   if 'c' == indicator_to:
+  #     pass # Nothing to do
+  #   if 'f' == indicator_to:
+  #     current = terrariumUtils.to_fahrenheit(current)
 
-    return current
+  #   return current
 
   @staticmethod
   def is_float(value):
@@ -214,7 +263,7 @@ class terrariumUtils():
 
   @staticmethod
   def is_true(value):
-    return value in [True,'True','true','1',1,'ON','On','on','YES','Yes','yes']
+    return str(value).lower() in ['true','1','on','yes']
 
   @staticmethod
   def to_BCM_port_number(value):
@@ -300,9 +349,19 @@ class terrariumUtils():
     regex = r"^((?P<scheme>https?|ftp):\/)?\/?((?P<username>.*?)(:(?P<password>.*?)|)@)?(?P<hostname>[^:\/\s]+)(:(?P<port>(\d*))?)?(?P<path>(\/\w+)*\/)(?P<filename>[-\w.]+[^#?\s]*)?(?P<query>\?([^#]*))?(#(?P<fragment>(.*))?)?$"
     matches = re.search(regex, url.strip())
     if matches:
-      return matches.groupdict()
+      data = matches.groupdict()
+      if data['query']:
+        data['query_params'] = {}
+        for query_param in data['query'][1:].split('&'):
+          query_param = query_param.split('=')
+          data['query_params'][query_param[0]] = query_param[1]
+      return data
 
     return False
+
+  @staticmethod
+  def is_valid_url(url):
+    return terrariumUtils.parse_url(url) is not False
 
   @staticmethod
   def parse_time(value):
@@ -364,7 +423,7 @@ class terrariumUtils():
 
     except Exception as ex:
       print(ex)
-      logger.exception('Error parsing remote data at url %s. Exception %s' % (url, ex))
+      #logger.exception('Error parsing remote data at url %s. Exception %s' % (url, ex))
 
     return data
 
@@ -462,3 +521,30 @@ class terrariumUtils():
   def format_filesize(n,pow=0,b=1024,u='B',pre=['']+[p+'i'for p in'KMGTPEZY']):
     pow,n=min(int(log(max(n*b**pow,1),b)),len(pre)-1),n*b**pow
     return "%%.%if %%s%%s"%abs(pow%(-pow-1))%(n/b**float(pow),pre[pow],u)
+
+  @staticmethod
+  def clean_log_line(logline):
+    # Some regex replacement to keep passwords/tokens out off the logging
+    search = [
+      r'(:\/\/)([^@]+)(@[^ ]+)',
+      r'(appid=)([^ ]+)'
+    ]
+
+    replace = [
+      '\\1*********\\3',
+      '\\1*********'
+    ]
+
+    for index in range(len(search)):
+      logline = re.sub(search[index], replace[index], logline)
+
+    return logline
+
+
+  @staticmethod
+  def clean_address(address):
+    if address is None:
+      return None
+
+    strip_regex = r'[ ,]+$'
+    return re.sub(strip_regex, '', str(address), 0, re.MULTILINE)
