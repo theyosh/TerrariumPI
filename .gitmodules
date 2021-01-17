@@ -1,42 +1,24 @@
-[submodule "gentelella"]
-	path = gentelella
-	url = https://github.com/puikinsh/gentelella.git
-[submodule "static/fancybox"]
-	path = static/fancybox
+[submodule "static/assets/plugins/fancybox"]
+	path = static/assets/plugins/fancybox
 	url = https://github.com/fancyapps/fancybox.git
-[submodule "static/Leaflet.fullscreen"]
-	path = static/Leaflet.fullscreen
+[submodule "static/assets/plugins/leaflet.fullscreen"]
+	path = static/assets/plugins/leaflet.fullscreen
 	url = https://github.com/Leaflet/Leaflet.fullscreen.git
-[submodule "static/Leaflet.loading"]
-	path = static/Leaflet.loading
+[submodule "static/assets/plugins/leaflet.loading"]
+	path = static/assets/plugins/leaflet.loading
 	url = https://github.com/ebrelsford/Leaflet.loading.git
-[submodule "energenie-connect0r"]
-	path = energenie-connect0r
-	url = https://github.com/perryflynn/energenie-connect0r.git
-[submodule "chirp-rpi"]
-	path = chirp-rpi
-	url = https://github.com/ageir/chirp-rpi.git
-[submodule "hls-proxy"]
-	path = hls-proxy
-	url = https://github.com/Viblast/hls-proxy.git
-[submodule "python-MLX90614"]
-	path = python-MLX90614
-	url = https://github.com/CRImier/python-MLX90614.git
-[submodule "Bright-Pi"]
-	path = Bright-Pi
-	url = https://github.com/PiSupply/Bright-Pi.git
-[submodule "static/leaflet-icon-pulse"]
-	path = static/leaflet-icon-pulse
+[submodule "static/assets/plugins/leaflet.icon-pulse"]
+	path = static/assets/plugins/leaflet.icon-pulse
 	url = https://github.com/mapshakers/leaflet-icon-pulse.git
-[submodule "python-kasa"]
-	path = python-kasa
-	url = https://github.com/python-kasa/python-kasa.git
-[submodule "Adafruit_Python_DHT"]
-	path = Adafruit_Python_DHT
-	url = https://github.com/adafruit/Adafruit_Python_DHT.git
-[submodule "relay8-rpi"]
-	path = relay8-rpi
-	url = https://github.com/SequentMicrosystems/relay8-rpi.git
-[submodule "8relay-rpi"]
-	path = 8relay-rpi
-	url = https://github.com/SequentMicrosystems/8relay-rpi.git
+[submodule "3rdparty/Bright-Pi"]
+	path = 3rdparty/Bright-Pi
+	url = https://github.com/PiSupply/Bright-Pi
+[submodule "3rdparty/chirp-rpi"]
+	path = 3rdparty/chirp-rpi
+	url = https://github.com/ageir/chirp-rpi.git
+[submodule "3rdparty/relay8-rpi"]
+	path = 3rdparty/relay8-rpi
+	url = https://github.com/SequentMicrosystems/relay8-rpi
+[submodule "3rdparty/energenie-connect0r"]
+	path = 3rdparty/energenie-connect0r
+	url = https://github.com/perryflynn/energenie-connect0r.git

@@ -1,0 +1,23 @@
+{
+  "name": "@sweetalert2/theme-bootstrap-4",
+  "version": "3.2.0",
+  "repository": "sweetalert2/sweetalert2-themes",
+  "homepage": "https://sweetalert2.github.io/",
+  "description": "Bootstrap 4 theme for SweetAlert2",
+  "author": "",
+  "files": [
+    "*.css",
+    "*.scss"
+  ],
+  "main": "bootstrap-4.css",
+  "keywords": [
+    "sweetalert2",
+    "bootstrap-4",
+    "theme",
+    "themes",
+    "theming",
+    "sass"
+  ],
+  "bugs": "https://github.com/sweetalert2/sweetalert2-themes/issues",
+  "license": "MIT"
+}

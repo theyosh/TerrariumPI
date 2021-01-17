@@ -1,0 +1,127 @@
+{% extends "layouts/base-content.html" %}
+{% set sensor_type = template|lower|replace("sensors_", "") %}
+{% block title %} {{ page_title }} {% endblock %}
+{% block page_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Main row -->
+        <div class="row">
+          <!-- Left col -->
+          <div class="col" id="sensor_list">
+            <script type="text/html" id="sensor_template">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title mr-1"><i class="fas fa-fw" data-class="icon"></i> <span data-content="title">...</span> <small class="ml-2 text-muted">Last update: <span class="last_update" data-content="last_update"></span></small></h3>
+                  <small class="badge badge-danger"  data-content-text="badge_error" data-message="error"></small>
+                  <small class="badge badge-warning" data-message="warning"></small>
+                  <small class="badge badge-primary" data-content-text="badge_message"></small>
+                  <div class="card-tools">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                        <i class="fas fa-calendar-alt"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right" role="menu">
+                      </div>
+                    </div>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                        <i class="fas fa-wrench"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right" role="menu">
+                        {% if authenticated %}
+                        <a href="#" class="dropdown-item export_link" title="Export">
+                          <i class="fas fa-file-export mr-1"></i> Export
+                        </a>
+                        <a data-href="sensor_edit_link" class="dropdown-item" data-title="settings_title" data-id="senor_id" data-toggle="modal" data-target="#modal-sensor-setup">
+                          <i class="fas fa-wrench mr-1"></i> Settings
+                        </a>
+                        <a data-href="sensor_ignore_link" class="dropdown-item" data-title="ignore_title" data-action="PUT" data-id="senor_id" data-field="value" data-toggle="modal" data-target="#modal-confirm">
+                          <i class="fas fa-ban mr-1"></i> Ignore
+                        </a>
+                        <a data-href="sensor_delete_link" class="dropdown-item" data-title="delete_title" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm">
+                          <i class="fas fa-trash-alt mr-1"></i> Delete
+                        </a>
+                        {% else %}
+                          <a href="{{ url_for('login') }}" class="dropdown-item">Please login to make changes</a>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                  <div class="d-md-flex">
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-3 text-center">
+                      <canvas data-id="gauge" class="gauge"></canvas>
+                    </div><!-- /.card-pane-right -->
+                    <div class="col-12 col-sm-12 col-md-8 col-lg-9">
+                      <div class="overlay">
+                        <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                      </div>
+                      <canvas data-id="graph" class="graph"></canvas>
+                    </div>
+                  </div> <!-- /.d-md-flex -->
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+          </script>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+<script>
+jQuery(function () {
+  jQuery.get('{{ url_for("api:sensor_list_filtered", filter=sensor_type) }}',function(data) {
+    data = data.data;
+    // Sort the sensors based on the given sensor name
+    data.sort((a, b) => a.name.localeCompare(b.name));
+
+    jQuery.each(data,function(counter, sensor) {
+      $('#sensor_list').loadTemplate($('#sensor_template'),{
+
+        icon: template_sensor_type_icon(sensor.type),
+        title: sensor.name,
+        last_update: moment().format('LLL'),
+        badge_message: (sensor.exclude_avg ? 'Excl. avg' : ''),
+        badge_error: (sensor.error ? 'error' : ''),
+
+        sensor_edit_link:   '{{ url_for('api:sensor_detail', sensor='_id_') }}'.replace('_id_',sensor.id),
+        sensor_ignore_link: '{{ url_for('api:setting_update', setting='exclude_ids') }}',
+        sensor_delete_link: '{{ url_for('api:sensor_delete', sensor='_id_') }}'.replace('_id_',sensor.id),
+
+        settings_title: 'Edit sensor: ' + sensor.name,
+        ignore_title: 'Ignore sensor: ' + sensor.name,
+        delete_title: 'Delete sensor: ' + sensor.name,
+
+        senor_id: sensor.id,
+        gauge: 'gauge_' + sensor.id,
+        graph: 'graph_' + sensor.id
+      },{ append: true});
+
+      new sensor_gauge('gauge_' + sensor.id,
+                       sensor.type,
+                       sensor.value,
+                       sensor.limit_min,
+                       sensor.limit_max,
+                       sensor.alarm_min,
+                       sensor.alarm_max);
+
+      new graph('graph_' + sensor.id, '{{ url_for("api:sensor_history", action="history", filter="_id_") }}'.replace('_id_',sensor.id), '{{sensor_type}}');
+    })
+  });
+});
+</script>
+
+{% endblock page_content %}

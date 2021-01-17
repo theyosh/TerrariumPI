@@ -1,0 +1,157 @@
+{% extends "layouts/base-content.html" %}
+{% block title %} Log {% endblock %}
+{% block options %}
+<ol class="breadcrumb float-sm-right ">
+  {% if authenticated %}
+  <li class="breadcrumb-item"><a href="{{ url_for('api:logfile_download') }}"><i class="fas fa-download pt-1 mr-1"></i> Download logfile</a></li>
+  <!-- <li class="breadcrumb-item "><i class="fas fa-wrench pt-1 mr-1"></i> Settings</li> -->
+  {% else %}
+    <a href="{{ url_for('login') }}" class="dropdown-item">Please login to make changes</a>
+  {% endif %}
+</ol>
+{% endblock options %}
+
+{% block page_content %}
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row" style="height: 80vh !important;">
+          <div class="col-md-12">
+            <div class="card" style="height: 95%;">
+              <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-file-alt"></i> System logging
+                  <small class="mr-2 lines_count">...</small>
+                  <small class="mr-2 last_update">...</small>
+                </h3>
+                <div class="card-tools form-inline">
+                  <label class="form-check-label mr-4">
+                    Filters:
+                  </label>
+                  <div class="input-group mr-3">
+                    <div class="form-group">
+                      <input type="text" class="form-control form-control-sm" id="text_filter" placeholder="Enter text here">
+                      <i class="form-control-clear fas fa-times" id="clear_text_filter" style="display: none;"></i>
+                    </div>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="error_filter" value="error">
+                    <label class="form-check-label" for="error_filter">errors</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="warning_filter" value="warning">
+                    <label class="form-check-label" for="warning_filter">warnings</label>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <textarea class="form-control text-monospace" style="height: 99%; font-size: 0.8rem" readonly="readonly"></textarea>
+                <textarea class="d-none" id="logdata"></textarea>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  <!-- </div> -->
+  <!-- /.content-wrapper -->
+  <style>
+    ::-ms-clear {
+      display: none;
+    }
+
+    .form-control-clear {
+      z-index: 10;
+      pointer-events: auto;
+      cursor: pointer;
+      color:gray;
+      position: absolute;
+      right: 0.5rem;
+    }
+  </style>
+    <script>
+      function update_log() {
+        let filter = jQuery('input#text_filter').val();
+        let filters = [];
+
+        if (jQuery('input#error_filter:checked').length == 1) {
+          filters.push('ERROR');
+        }
+
+        if (jQuery('input#warning_filter:checked').length == 1) {
+          filters.push('WARNING');
+        }
+
+        if ('' != filter || filters.length > 0) {
+          if ('' != filter && filters.length > 0) {
+            filter = '(.*' + filter + '.*\\s+-\\s+(' + filters.join('|') + ')\\s+-\\s+' + ')|(.*\\s+-\\s+(' + filters.join('|') + ')\\s+-\\s+.*' + filter + '.*)'
+          } else if ('' == filter || filters.length > 0) {
+            filter = '\\s+-\\s+(' + filters.join('|') + ')\\s+-\\s+';
+          }
+          filter = new RegExp(filter);
+        } else {
+          filter = false;
+        }
+
+        let logscreen = jQuery('textarea.form-control');
+        let lines = jQuery('textarea#logdata').val().split('\n');
+        let log = '';
+        let line_counter = 0;
+        jQuery.each(lines,function(index,line){
+          if (filter === false) {
+            log += line + '\n';
+            line_counter++;
+          } else {
+
+            if ((m = filter.exec(line)) !== null) {
+              log += line + '\n';
+              line_counter++;
+            }
+          }
+        });
+        jQuery('.lines_count').text(line_counter + ' lines');
+        logscreen.val(log.trim());
+      }
+
+      jQuery(function () {
+        jQuery('textarea#logdata').on('change',function(){
+          jQuery('.last_update').text(moment().format('LLLL'));
+          update_log();
+        });
+        jQuery('input[type="checkbox"]').on('change',function(){
+          update_log();
+        });
+        jQuery('input#text_filter').on('keyup',function() {
+          jQuery('i#clear_text_filter').toggle(this.value != '');
+          update_log();
+        });
+
+        jQuery('i#clear_text_filter').on('click',function(){
+          jQuery('input#text_filter').val('');
+          jQuery('i#clear_text_filter').toggle(false);
+          update_log();
+        });
+
+        // Read the last 100KB of logfile data
+        $.ajax({
+          url: '{{ url_for("api:logfile_download") }}',
+          headers: {Range: "bytes=-102400"},
+          success: function( data ) {
+            let log = '';
+            let log_lines = data.split('\n');
+            let marker = (log_lines.length < 1000 ? 0 : log_lines.length - 1000);
+            jQuery.each(log_lines,function(index,line){
+              if (index > marker) {
+                log = line + '\n' + log;
+              }
+            });
+            jQuery('textarea#logdata').val(log.trim()).trigger('change');
+          }
+        });
+      });
+    </script>
+{% endblock page_content %}

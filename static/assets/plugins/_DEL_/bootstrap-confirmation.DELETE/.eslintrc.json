@@ -1,0 +1,38 @@
+{
+  "extends": "airbnb-base",
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "rules": {
+    "no-underscore-dangle": [
+      "off"
+    ],
+    "func-names": [
+      "off"
+    ],
+    "class-methods-use-this": [
+      "off"
+    ],
+    "max-len": [
+      "error",
+      120
+    ],
+    "brace-style": [
+      "error",
+      "stroustrup"
+    ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
+    "key-spacing": [
+      "error",
+      {
+        "align": "colon"
+      }
+    ]
+  }
+}

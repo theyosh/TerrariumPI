@@ -13,13 +13,17 @@ import time
 import glob
 import shutil
 
-from terrariumConfig import terrariumConfig
 from terrariumNotification import terrariumNotification
+from terrariumUtils import terrariumUtils
 
 class TimedCompressedRotatingFileHandler(logging.handlers.TimedRotatingFileHandler):
     """
     Extended version of TimedRotatingFileHandler that compress logs on rollover.
     """
+    def emit(self,data):
+      data.msg = terrariumUtils.clean_log_line(data.msg)
+      super().emit(data)
+
     def doRollover(self):
         """
         do a rollover; in this case, a date/time stamp is appended to the filename
@@ -70,12 +74,14 @@ class NotificationLogger(logging.StreamHandler):
   def __init__(self,trafficlights,*args, **kwargs):
     super(NotificationLogger,self).__init__(*args, **kwargs)
 
-    terrariumpi_config = terrariumConfig()
-    self.notification = terrariumNotification(trafficlights,terrariumpi_config.get_profile_image(),terrariumpi_config.get_system()['version'])
+#    terrariumpi_config = terrariumConfig()
+#    self.notification = terrariumNotification(trafficlights,terrariumpi_config.get_profile_image(),terrariumpi_config.get_system()['version'])
 
   def emit(self,data):
     if data.name not in ['terrariumTranslations']:
-      self.notification.message('system_' + str(data.levelname).lower() , {'message':data.getMessage()} )
+      pass
+
+    #  self.notification.message('system_' + str(data.levelname).lower() , {'message':data.getMessage()} )
 
 if os.path.isfile('logging.custom.cfg'):
   logging.config.fileConfig('logging.custom.cfg')

@@ -1,35 +1,4 @@
 #!/bin/bash
-SCRIPT_USER=`who -m | awk '{print $1}'`
-SCRIPT_USER_ID=`id -u ${SCRIPT_USER}`
-if [ "" == "${SCRIPT_USER}" ]; then
-  SCRIPT_USER="pi"
-fi
-PYTHON=2
-if [ "${1}" == "3" ]; then
-  PYTHON=3
-fi
-
-BASEDIR=$(dirname $(readlink -nf $0))
-VERSION=`grep ^version "${BASEDIR}/defaults.cfg" | cut -d' ' -f 3`
-LOGFILE="${BASEDIR}/log/terrariumpi.log"
-ACCESSLOGFILE="${BASEDIR}/log/terrariumpi.access.log"
-TMPFS="/run/user/${SCRIPT_USER_ID}"
-INSTALLER_TITLE="TerrariumPI v. ${VERSION} (Python${PYTHON})"
-
-CLEANUP_PACKAGES="wolfram sonic-pi openbox nodered java openjdk chromium-browser desktop-base gnome-desktop3-data libgnome-desktop epiphany-browser-data epiphany-browser nuscratch scratch wiringpi libreoffice"
-
-PIP_MODULES="setuptools python-dateutil rpi.gpio psutil picamera pigpio requests gpiozero untangle uptime bottle bottle_websocket pylibftdi pyalsaaudio pyserial python-twitter python-pushover requests[socks] Adafruit-SHT31 bluepy pywemo pyownet emails mh-z19 icalendar melopero-amg8833 PCA9685-driver pyfiglet RPi.bme280"
-if [ $PYTHON -eq 2 ]; then
-  PIP_MODULES="${PIP_MODULES} iCalEvents==0.1.21 gevent==1.4.0 luma.core==1.12.0 luma.oled"
-fi
-if [ $PYTHON -eq 3 ]; then
-  PIP_MODULES="${PIP_MODULES} gevent opencv-python-headless meross-iot==0.2.2.3 iCalEvents adafruit-circuitpython-sht31d mitemp_bt asyncio luma.oled poetry"
-fi
-
-if [ `grep -ic " buster " /etc/apt/sources.list` -eq 2 ]; then
-  # Does not work on Buster, so we use the deb package version.... lets hope that it will stay working
-  PIP_MODULES="${PIP_MODULES/opencv-python-headless/}"
-fi
 
 WHOAMI=`whoami`
 if [ "${WHOAMI}" != "root" ]; then
@@ -37,6 +6,29 @@ if [ "${WHOAMI}" != "root" ]; then
   echo "sudo ./install.sh"
   exit 0
 fi
+
+BASEDIR=$(dirname $(readlink -nf $0))
+SCRIPT_USER=`stat -c "%U" "${BASEDIR}"`
+if [ "" == "${SCRIPT_USER}" ]; then
+  SCRIPT_USER="pi"
+fi
+
+SCRIPT_GROUP=`id -gn ${SCRIPT_USER}`
+
+VERSION=`grep ^__version__ "${BASEDIR}/terrariumPI.py" | cut -d' ' -f 3`
+VERSION="${VERSION//\'/}"
+INSTALLER_TITLE="TerrariumPI v. ${VERSION} (Python 3)"
+
+CLEANUP_PACKAGES="wolfram sonic-pi openbox nodered java openjdk chromium-browser desktop-base gnome-desktop3-data libgnome-desktop epiphany-browser-data epiphany-browser nuscratch scratch wiringpi libreoffice"
+PYTHON_LIBS="python3-pip python3-dev python3-venv"
+OPENCV_PACKAGES="libopenexr23 libilmbase23 liblapack3 libatlas3-base"
+APT_PACKAGES="screen git watchdog i2c-tools pigpio owserver sqlite3 ffmpeg sispmctl ntp ${OPENCV_PACKAGES} ${PYTHON_LIBS}"
+
+PIP_MODULES=""
+while IFS= read -r line; do
+  [[ $line =~ ^#.* ]] && continue
+  PIP_MODULES="${PIP_MODULES} ${line}"
+done < requirements.txt
 
 #set -e
 
@@ -51,7 +43,7 @@ whiptail --backtitle "${INSTALLER_TITLE}" --title " TerrariumPI Installer " --ye
 
 case $? in
   1|255) whiptail --backtitle "${INSTALLER_TITLE}"  --title " TerrariumPI Installer " --msgbox "TerrariumPI installation is aborted" 0 60
-         exit 0
+    exit 0
   ;;
 esac
 
@@ -67,39 +59,17 @@ case $? in
       CLEANUP="${CLEANUP} \"*${PACKAGE}*\""
     done
 
-    debconf-apt-progress -- apt-get -y remove ${CLEANUP} && apt-get -y autoremove
-#    debconf-apt-progress -- apt-get -y autoremove
+    debconf-apt-progress -- apt-get -y remove ${CLEANUP}
   ;;
 esac
 
-# Remove previous python 2.X packages to make sure pip installed libraries are used
-debconf-apt-progress -- apt-get -y remove owhttpd owftpd
-
-# OWServer geeft problemen met install??? Of omdat config al aangepast is... maar als deez uit is, wil de apt install niet verder... Dus killen en manueel starten. dan verder install
-
 # Install required packages to get the terrarium software running
-PYTHON_LIBS="python-pip python-dev python-mediainfodll python-smbus python-pil python-opencv python-numpy python-lxml"
-if [ $PYTHON -eq 3 ]; then
-  PYTHON_LIBS="python3-pip python3-dev python3-mediainfodll python3-smbus python3-pil python3-opencv python3-numpy python3-lxml python3-venv"
-fi
 
 debconf-apt-progress -- apt-get -y autoremove
 debconf-apt-progress -- apt-get -y update
 debconf-apt-progress -- apt-get -y full-upgrade
 
-
-APT_PACKAGES="libftdi1 screen git subversion watchdog build-essential i2c-tools pigpio owserver sqlite3 vlc-bin ffmpeg libfreetype6-dev libjpeg-dev \
-  libasound2-dev sispmctl lshw libffi-dev ntp libglib2.0-dev rng-tools libcblas3 libatlas3-base libgstreamer0.10-0 libgstreamer1.0-0 libilmbase12 \
-  libopenexr22 libgtk-3-0 libxml2-dev libxslt1-dev python-twisted python-zope.interface libgpiod2 $PYTHON_LIBS"
-
-# libjasper1 -> Is alleen op Raspbarry ARM....
-
-if [ `grep -ic " buster " /etc/apt/sources.list` -eq 2 ]; then
-  # Remove not existing packages in Debian buster
-  APT_PACKAGES="${APT_PACKAGES/libcblas3/}"
-  APT_PACKAGES="${APT_PACKAGES/libilmbase12/}"
-  APT_PACKAGES="${APT_PACKAGES/libopenexr22/}"
-fi
+#NOT_NEEDED="libftdi1-dev build-essential subversion libfreetype6-dev libjpeg-dev libasound2-dev libffi-dev libglib2.0-dev rng-tools libcblas3 libatlas3-base libgstreamer0.10-0 libgstreamer1.0-0 libilmbase12 libopenexr22 libgtk-3-0 libxml2-dev libxslt1-dev libgpiod2"
 
 debconf-apt-progress -- apt-get -y install $APT_PACKAGES
 
@@ -113,6 +83,12 @@ if [ -f /boot/config.txt ]; then
   # Enable I2C
   if [ `grep -ic "^dtparam=i2c_arm=on" /boot/config.txt` -eq 0 ]; then
     echo "dtparam=i2c_arm=on" >> /boot/config.txt
+  fi
+
+  if [ -f /etc/modules ]; then
+    if [ `grep -ic "i2c-dev" /etc/modules` -eq 0 ]; then
+      echo "i2c-dev" >> /etc/modules
+    fi
   fi
 
   # Enable 1-Wire
@@ -133,9 +109,9 @@ if [ -f /boot/config.txt ]; then
   if [ `grep -ic "^enable_uart=1" /boot/config.txt` -eq 0 ]; then
     echo "enable_uart=1" >> /boot/config.txt
   fi
-
 fi
 
+# Disable serial debug to enable CO2 sensors
 if [ -f /boot/cmdline.txt ]; then
   sed -i "/boot/cmdline.txt" -e "s@console=ttyAMA0,[0-9]\+ @@"
   sed -i "/boot/cmdline.txt" -e "s@console=serial0,[0-9]\+ @@"
@@ -164,54 +140,34 @@ echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="04b4", ATTR{idProduct}=="fd15", GROUP="
 udevadm control --reload-rules
 
 # Install 1 Wire I2C stuff
-if [ -f /etc/owfs.conf ]; then
-  sed -i.bak 's/^server: FAKE = DS18S20,DS2405/#server: FAKE = DS18S20,DS2405/' /etc/owfs.conf
+# if [ -f /etc/owfs.conf ]; then
+#   sed -i.bak 's/^server: FAKE = DS18S20,DS2405/#server: FAKE = DS18S20,DS2405/' /etc/owfs.conf
 
-  if [ `grep -ic "server: device=/dev/i2c-1" /etc/owfs.conf` -eq 0 ]; then
-    echo "server: device=/dev/i2c-1" >> /etc/owfs.conf
-  fi
-fi
+#   if [ `grep -ic "server: device=/dev/i2c-1" /etc/owfs.conf` -eq 0 ]; then
+#     echo "server: device=/dev/i2c-1" >> /etc/owfs.conf
+#   fi
+# fi
 
-if [ -f /etc/modprobe.d/raspi-blacklist.conf ]; then
-  sed -i.bak 's/^blacklist i2c-bcm2708/#blacklist i2c-bcm2708/' /etc/modprobe.d/raspi-blacklist.conf
-fi
-
-if [ -f /etc/modules ]; then
-  if [ `grep -ic "i2c-dev" /etc/modules` -eq 0 ]; then
-    echo "i2c-dev" >> /etc/modules
-  fi
-fi
+# if [ -f /etc/modprobe.d/raspi-blacklist.conf ]; then
+#   sed -i.bak 's/^blacklist i2c-bcm2708/#blacklist i2c-bcm2708/' /etc/modprobe.d/raspi-blacklist.conf
+# fi
 
 # Increase swap file size
 if [ -f /etc/dphys-swapfile ]; then
-  sed -i.bak 's/^CONF_SWAPSIZE=100/CONF_SWAPSIZE=512/' /etc/dphys-swapfile
+  sed -i 's/^CONF_SWAPSIZE=100/CONF_SWAPSIZE=512/' /etc/dphys-swapfile
 fi
-
 
 # Make sure pigpiod is started at boot, and that user PI can restart it with sudo command
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/sbin/service pigpiod restart" > /etc/sudoers.d/terrariumpi
 # Make rebooting from webinterface possible
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /sbin/reboot" >> /etc/sudoers.d/terrariumpi
 echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /sbin/shutdown" >> /etc/sudoers.d/terrariumpi
-# https://github.com/UedaTakeyuki/mh-z19/blob/master/pypi/mh_z19/__init__.py#L18
-echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl stop serial-getty@ttyS0.service" >> /etc/sudoers.d/terrariumpi
-echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl start serial-getty@ttyS0.service" >> /etc/sudoers.d/terrariumpi
-echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl stop serial-getty@ttyAMA0.service" >> /etc/sudoers.d/terrariumpi
-echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /bin/systemctl start serial-getty@ttyAMA0.service" >> /etc/sudoers.d/terrariumpi
 # http://denkovi.com/denkovi-relay-command-line-tool
-echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/bin/java -jar DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar *" >> /etc/sudoers.d/terrariumpi
-# mh-z19 sensor
-echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/bin/python -m mh_z19 --all" >> /etc/sudoers.d/terrariumpi
-echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/bin/python2 -m mh_z19 --all" >> /etc/sudoers.d/terrariumpi
-echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/bin/python3 -m mh_z19 --all" >> /etc/sudoers.d/terrariumpi
+echo "${SCRIPT_USER} ALL=(ALL) NOPASSWD: /usr/bin/java -jar 3rdparty/DenkoviRelayCommandLineTool/DenkoviRelayCommandLineTool.jar *" >> /etc/sudoers.d/terrariumpi
 
 systemctl enable pigpiod
 
-# Remove unneeded OWS services
-update-rc.d -f owftpd remove
-update-rc.d -f owfhttpd remove
-
-PROGRESS=20
+PROGRESS=0
 # Update submodules if downloaded through tar or zip
 (
 cd "${BASEDIR}/"
@@ -223,7 +179,7 @@ XXX
 EOF
 
 
-PROGRESS=$((PROGRESS + 2))
+PROGRESS=$((PROGRESS + 1))
 cat <<EOF
 XXX
 $PROGRESS
@@ -233,7 +189,7 @@ EOF
 git submodule init > /dev/null
 
 
-PROGRESS=$((PROGRESS + 2))
+PROGRESS=$((PROGRESS + 1))
 cat <<EOF
 XXX
 $PROGRESS
@@ -241,19 +197,21 @@ Install required software\n\nInstalling base software ...
 XXX
 EOF
 git submodule update > /dev/null
-cd "${BASEDIR}/.."
 
-PROGRESS=$((PROGRESS + 2))
+PROGRESS=$((PROGRESS + 1))
 cat <<EOF
 XXX
 $PROGRESS
 Install required software\n\nInstalling base software ...
 XXX
 EOF
-cd "${BASEDIR}/gentelella"
-git checkout 1.4.0 > /dev/null 2> /dev/null
-cd "${BASEDIR}/.."
 
+# Create Python environment
+cd "${BASEDIR}/"
+python3 -m venv venv
+source venv/bin/activate
+
+# Install python modules inside the virtual env of Python
 NUMBER_OF_MODULES=($PIP_MODULES)
 NUMBER_OF_MODULES=${#NUMBER_OF_MODULES[@]}
 MODULE_COUNTER=1
@@ -268,18 +226,13 @@ do
     cat <<EOF
 XXX
 $PROGRESS
-Install required software (some modules will take 5-10 min.)
+Install required software
 
 Installing python${PYTHON} module ${MODULE_COUNTER} out of ${NUMBER_OF_MODULES}: ${PIP_MODULE} (attempt ${ATTEMPT}) ...
 XXX
 EOF
-    if [ $PYTHON -eq 2 ]; then
-      pip2 install -q --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
-
-    elif [ $PYTHON -eq 3 ]; then
-      pip3 install -q --upgrade ${PIP_MODULE} > /dev/null 2>/dev/null
-
-    fi
+    pip install --upgrade ${PIP_MODULE}
+    # > /dev/null 2>/dev/null
 
     if [ $? -eq 0 ]; then
       # PIP install succeeded normally
@@ -295,94 +248,6 @@ EOF
 
 done
 
-PROGRESS=92
-# Update submodules if downloaded through tar or zip
-cd "${BASEDIR}/"
-
-if [ $PYTHON -eq 3 ]; then
-  # Remove pip numpy install that comes with an upgrade of another module. Does not work
-  # Removing this will fallback to OS default
-  pip3 uninstall -y -q numpy
-fi
-
-cd "${BASEDIR}/Bright-Pi"
-if [ $PYTHON -eq 2 ]; then
-  sudo python2 setup.py install
-elif [ $PYTHON -eq 3 ]; then
-  sudo python3 setup.py install
-fi
-
-
-cat <<EOF
-XXX
-$PROGRESS
-Install required software (some modules will take 5-10 min.)
-
-Installing python${PYTHON} module: Bright-Pi ...
-XXX
-EOF
-
-
-PROGRESS=94
-# Update submodules if downloaded through tar or zip
-cd "${BASEDIR}/Adafruit_Python_DHT"
-if [ $PYTHON -eq 2 ]; then
-  sudo pip2 uninstall -y -q Adafruit_DHT 2> /dev/null
-  sudo python2 setup.py install
-elif [ $PYTHON -eq 3 ]; then
-  sudo pip3 uninstall -y -q Adafruit_DHT 2> /dev/null
-  sudo python3 setup.py install
-fi
-
-
-cat <<EOF
-XXX
-$PROGRESS
-Install required software (some modules will take 5-10 min.)
-
-Installing python${PYTHON} module: Adafruit_Python_DHT ...
-XXX
-EOF
-
-
-PROGRESS=96
-# Update submodules if downloaded through tar or zip
-if [ $PYTHON -eq 3 ]; then
-  cd "${BASEDIR}/python-kasa"
-  poetry build
-  sudo pip3 install -U dist/python_kasa-*.whl
-fi
-
-
-cat <<EOF
-XXX
-$PROGRESS
-Install required software (some modules will take 5-10 min.)
-
-Installing python${PYTHON} module: TP Link Kasa ...
-XXX
-EOF
-
-
-PROGRESS=98
-# Update submodules if downloaded through tar or zip
-cd "${BASEDIR}/8relay-rpi/python/8relay"
-if [ $PYTHON -eq 2 ]; then
-  sudo python2 setup.py install
-elif [ $PYTHON -eq 3 ]; then
-  sudo python3 setup.py install
-fi
-
-cat <<EOF
-XXX
-$PROGRESS
-Install required software (some modules will take 5-10 min.)
-
-Installing python${PYTHON} module: TP Link Kasa ...
-XXX
-EOF
-
-
 PROGRESS=99
 cat <<EOF
 XXX
@@ -390,7 +255,12 @@ $PROGRESS
 Setting file rights ...
 XXX
 EOF
-# Update submodules if downloaded through tar or zip
+
+sed -e "s@^User=.*@User=${SCRIPT_USER}@" -e "s@^Group=.*@Group=${SCRIPT_GROUP}@" -e "s@^WorkingDirectory=.*@WorkingDirectory=${BASEDIR}@" -e "s@^ExecStart=.*@ExecStart=/home/pi/TerrariumPI/venv/bin/python /home/pi/TerrariumPI/terrariumPI.py@" "${BASEDIR}/contrib/terrariumpi.service.example" > /etc/systemd/system/terrariumpi.service
+systemctl daemon-reload
+systemctl enable terrariumpi
+
+# Change the rights to the Pi user
 cd "${BASEDIR}/"
 chown ${SCRIPT_USER}. .
 chown ${SCRIPT_USER}. * -Rf
@@ -408,42 +278,11 @@ sleep 1
 
 
 # To run this as non-root run the following, https://github.com/marcelrv/miflora, https://github.com/IanHarvey/bluepy/issues/218
-for BLUETOOTH_HELPER in `ls /usr/local/lib/python*/dist-packages/bluepy/bluepy-helper`; do
+for BLUETOOTH_HELPER in `ls venv/lib/python*/*-packages/bluepy/bluepy-helper`; do
   setcap 'cap_net_raw,cap_net_admin+eip' "${BLUETOOTH_HELPER}"
 done
 
-# Move log file to temprorary mount
-if grep -qs "${TMPFS} " /proc/mounts; then
-  # TMPFS user dir is available....
-  if ! [ -h "${LOGFILE}" ]; then
-    # There is not a symlink to tmpfs partition
-    if [ -f "${LOGFILE}" ]; then
-      # There is an existing logfile already. Move it
-      mv ${LOGFILE} ${TMPFS}
-    fi
-    su -c "ln -s ${TMPFS}/terrariumpi.log ${LOGFILE}" -s /bin/bash ${SCRIPT_USER}
-  fi
-
-  if ! [ -h "${ACCESSLOGFILE}" ]; then
-    # There is not a symlink to tmpfs partition
-    if [ -f "${ACCESSLOGFILE}" ]; then
-      # There is an existing logfile already. Move it
-      mv ${ACCESSLOGFILE} ${TMPFS}
-    fi
-    su -c "ln -s ${TMPFS}/terrariumpi.access.log ${ACCESSLOGFILE}" -s /bin/bash ${SCRIPT_USER}
-  fi
-fi
-
-# Make TerrariumPI start during boot
-if [ `grep -ic "start.sh" /etc/rc.local` -eq 0 ]; then
-  sed -i.bak "s@^exit 0@# Starting TerrariumPI server\n${BASEDIR}/start.sh ${PYTHON}\n\nexit 0@" /etc/rc.local
-fi
-
-# Add a nice MOTD when you login
-if [ -f /etc/motd ]; then
-  mv /etc/motd /etc/motd.old
-fi
-
+# Enable MOTD
 if [ ! -h /etc/update-motd.d/05-terrariumpi ]; then
   ln -s /home/pi/TerrariumPI/motd.sh /etc/update-motd.d/05-terrariumpi
 fi
@@ -464,4 +303,3 @@ case $? in
   reboot
   ;;
 esac
-

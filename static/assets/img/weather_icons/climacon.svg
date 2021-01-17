@@ -1,0 +1,22 @@
+<svg
+    version="1.1"
+    id="cloud"
+    class="climacon climacon_cloud"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    x="0px"
+    y="0px"
+    viewBox="15 15 70 70"
+    enable-background="new 15 15 70 70"
+    xml:space="preserve">
+    <clipPath id="cloudFillClip">
+        <path d="M15,15v70h70V15H15z M59.943,61.639c-3.02,0-12.381,0-15.999,0c-6.626,0-11.998-5.371-11.998-11.998c0-6.627,5.372-11.999,11.998-11.999c5.691,0,10.434,3.974,11.665,9.29c1.252-0.81,2.733-1.291,4.334-1.291c4.418,0,8,3.582,8,8C67.943,58.057,64.361,61.639,59.943,61.639z"/>
+    </clipPath>
+    <g class="climacon_iconWrap climacon_iconWrap-cloud">
+        <g class="climacon_componentWrap climacon_componentWrap_cloud" clip-path="url(#cloudFillClip)">
+            <path
+            class="climacon_component climacon_component-stroke climacon_component-stroke_cloud"
+            d="M43.945,65.639c-8.835,0-15.998-7.162-15.998-15.998c0-8.836,7.163-15.998,15.998-15.998c6.004,0,11.229,3.312,13.965,8.203c0.664-0.113,1.338-0.205,2.033-0.205c6.627,0,11.998,5.373,11.998,12c0,6.625-5.371,11.998-11.998,11.998C57.168,65.639,47.143,65.639,43.945,65.639z"/>
+        </g>
+    </g>
+</svg><!-- cloud -->

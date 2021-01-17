@@ -1,0 +1,61 @@
+setuptools
+wheel
+
+# Webserver packages
+gevent
+bottle
+bottle_websocket
+jinja2
+retry
+bcrypt
+
+# Hardware / sensors packages
+gpiozero
+smbus2
+smbus
+bluepy
+requests
+melopero_amg8833
+RPi.bme280
+RPi.GPIO
+pyserial
+pigpio_dht
+mitemp_bt
+PyMLX90614
+pyownet
+veml6075
+lib8relay
+pylibftdi
+asyncio
+python-kasa
+meross-iot
+PCA9685-driver
+zeroconf
+pywemo
+
+# Webcam packages
+Pillow
+opencv-python-headless
+piexif
+picamera
+
+# Calendar and utils
+icalendar
+icalevents
+psutil
+packaging
+
+# MOTD packages
+pyfancy
+pyfiglet
+
+# Notification packages
+emails
+twitter
+pushover
+luma.oled
+
+# API
+pony
+tinytag
+apispec-webframeworks

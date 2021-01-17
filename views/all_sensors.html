@@ -1,0 +1,108 @@
+{% extends "layouts/base-content.html" %}
+{% set sensor_type = template|lower|replace("sensors_", "") %}
+{% block title %} {{ page_title }} {% endblock %}
+{% block page_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Main row -->
+        <div class="row" id="sensor_list">
+          <!-- Left col -->
+          <script type="text/html" id="sensor_template">
+            <div class="col-3">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title mr-1"><i class="fas fa-fw" data-class="icon"></i> <span data-content="title">...</span> <small class="last_update" data-content="last_update">...</small></h3>
+                  <small class="badge badge-danger"  data-message="error"></small>
+                  <small class="badge badge-warning" data-message="warning"></small>
+                  <small class="badge badge-primary" data-content-text="badge_message"></small>
+                  <div class="card-tools">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                        <i class="fas fa-wrench"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right" role="menu">
+                        {% if authenticated %}
+                        <a data-href="sensor_edit_link" class="dropdown-item" data-title="settings_title" data-id="senor_id" data-toggle="modal" data-target="#modal-sensor-setup">
+                          <i class="fas fa-wrench mr-1"></i> Settings
+                        </a>
+                        <a data-href="sensor_ignore_link" class="dropdown-item" data-title="ignore_title" data-action="PUT" data-id="senor_id" data-field="value" data-toggle="modal" data-target="#modal-confirm">
+                          <i class="fas fa-ban mr-1"></i> Ignore
+                        </a>
+                        <a data-href="sensor_delete_link" class="dropdown-item" data-title="delete_title" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm">
+                          <i class="fas fa-trash-alt mr-1"></i> Delete
+                        </a>
+                        {% else %}
+                          <a href="{{ url_for('login') }}" class="dropdown-item">Please login to make changes</a>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                  <div class="d-md-flex">
+                    <div class="text-center" style="width:100%">
+                      <canvas data-id="gauge" class="gauge"></canvas>
+                    </div><!-- /.card-pane-right -->
+                  </div> <!-- /.d-md-flex -->
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+          </script>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+<script>
+jQuery(function () {
+  jQuery.get('{{ url_for("api:sensor_list") }}',function(data) {
+    data = data.data;
+    // Sort the sensors based on the given sensor name
+    data.sort((a, b) => a.name.localeCompare(b.name));
+
+    jQuery.each(data,function(counter, sensor) {
+      $('#sensor_list').loadTemplate($('#sensor_template'),{
+
+        icon: template_sensor_type_icon(sensor.type),
+        title: sensor.name,
+        last_update: moment().format('LLLL'),
+        badge_message: (sensor.exclude_avg ? 'Excl. avg' : ''),
+
+        sensor_edit_link:   '{{ url_for('api:sensor_detail', sensor='_id_') }}'.replace('_id_',sensor.id),
+        sensor_ignore_link: '{{ url_for('api:setting_update', setting='exclude_ids') }}',
+        sensor_delete_link: '{{ url_for('api:sensor_delete', sensor='_id_') }}'.replace('_id_',sensor.id),
+
+        settings_title: 'Edit sensor: ' + sensor.name,
+        ignore_title: 'Ignore sensor: ' + sensor.name,
+        delete_title: 'Delete sensor: ' + sensor.name,
+
+        senor_id: sensor.id,
+        gauge: 'gauge_' + sensor.id,
+        graph: 'graph_' + sensor.id
+      },{ append: true});
+
+      new sensor_gauge('gauge_' + sensor.id,
+                       sensor.type,
+                       sensor.value,
+                       sensor.limit_min,
+                       sensor.limit_max,
+                       sensor.alarm_min,
+                       sensor.alarm_max);
+    });
+  });
+});
+</script>
+
+{% endblock page_content %}

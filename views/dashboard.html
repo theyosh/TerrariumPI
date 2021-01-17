@@ -1,0 +1,459 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+<!-- Element injected in the BODY element -->
+{% block body_class %}  {% endblock body_class %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+{% endblock stylesheets %}
+
+{% block content %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Info boxes -->
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-4">
+            <div class="info-box">
+              <span class="info-box-icon bg-secondary elevation-1">
+                <i class="fas fa-hourglass-end" data-fa-transform="rotate-90"></i>
+              </span>
+              <div class="info-box-content">
+                <span class="info-box-text">Uptime</span>
+                <span class="info-box-number">...</span>
+              </div>
+              <div class="progress vertical progress-sm" style="height: 55px;">
+                <div class="progress-bar bg-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="height: 0%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+              <div class="progress vertical progress-sm" style="height: 55px;">
+                <div class="progress-bar bg-warning progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="height: 0%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+              <div class="progress vertical progress-sm" style="height: 55px;">
+                <div class="progress-bar bg-danger progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="height: 0%">
+                  <span class="sr-only">0%</span>
+                </div>
+              </div>
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-2">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-danger elevation-1">
+                <i class="fas fa-bolt"></i>
+              </span>
+              <div class="info-box-content" id="power_usage">
+                <span class="info-box-text">Power usage in Watt</span>
+                <span class="info-box-number">0 / 0</span>
+                <div class="progress">
+                  <div class="progress-bar bg-danger" style="width: 0%"></div>
+                </div>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
+          <div class="col-12 col-sm-6 col-md-2">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-info elevation-1">
+                <i class="fas fa-tint"></i>
+              </span>
+              <div class="info-box-content" id="flow_usage">
+                <span class="info-box-text">Water flow in L/m</span>
+                <span class="info-box-number">0 / 0</span>
+                <div class="progress">
+                  <div class="progress-bar bg-info" style="width: 0%"></div>
+                </div>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-2">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-danger elevation-1">
+                <i class="fas fa-bolt"></i>
+              </span>
+              <div class="info-box-content"  id="total_power">
+                <span class="info-box-text">Total power in kWh</span>
+                <span class="info-box-number">0</span>
+                <span class="description-percentage">
+                  <span class="text-success">&euro; 0</span>
+                  <small>
+                    in <span>month</span>
+                </small>
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
+          <div class="col-12 col-sm-6 col-md-2">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-info elevation-1">
+                <i class="fas fa-tint"></i>
+              </span>
+              <div class="info-box-content" id="total_flow">
+                <span class="info-box-text">Total water in L</span>
+                <span class="info-box-number">0</span>
+                <span class="description-percentage">
+                  <span class="text-success">&euro; 0</span>
+                  <small>
+                    in <span>month</span>
+                 </small>
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="row">
+          <!-- Left col -->
+          <div class="col-md" id="sensor_list">
+            <!-- MAP & BOX PANE -->
+            <script type="text/html" id="sensor_template">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title mr-1"><i class="fas fa-fw" data-class="icon"></i> <span data-content="title">...</span> <small class="ml-2 text-muted">Last update: <span class="last_update" data-content="last_update"></span></small></h3>
+                  <small class="badge badge-danger"  data-message="error"></small>
+                  <small class="badge badge-warning" data-message="warning"></small>
+                  <div class="card-tools">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                        <i class="fas fa-calendar-alt"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right" role="menu">
+                      </div>
+                    </div>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                  <div class="d-md-flex">
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 text-center">
+                      <canvas data-id="gauge" class="gauge"></canvas>
+                    </div><!-- /.card-pane-right -->
+                    <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+                      <div class="overlay">
+                        <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                      </div>
+                      <canvas data-id="graph" class="graph"></canvas>
+                    </div>
+                  </div> <!-- /.d-md-flex -->
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </script>
+          </div>
+          <!-- /.col -->
+          {% if show_environment %}
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-globe"></i> Enclosures</h3>
+                <div class="card-tools">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                      <i class="fas fa-wrench"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                      {% if authenticated %}
+                      <a href="#" class="dropdown-item" title="Edit enclosures" onclick="load_page('{{ url_for('page', page='enclosures') }}')">
+                        <i class="fas fa-wrench mr-1"></i> Settings
+                      </a>
+                      {% else %}
+                        <a href="{{ url_for('login') }}" class="dropdown-item">Please login to make changes</a>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove" onclick="jQuery(this).parents('div.col-md-4').remove();">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+
+                <!-- we are adding the accordion ID so Bootstrap's collapse plugin detects it -->
+                <div id="accordion">
+
+                </div>
+                <script type="text/html" id="area_table_row">
+                  <tr>
+                    <td colspan="2">
+                      <i data-class="icon" data-title="type"> </i>
+                      <span data-content="name"></span>
+                      <small class="text-muted ml-2 mr-2" data-template-bind='[
+                      {"attribute": "content", "value": "mode", "formatter": "prefixer", "formatOptions": "mode: "} ]'></small>
+                    </td>
+                    <td style="width: 10px">
+                      <small class="badge badge-light" title="Current status" data-template-bind='[
+                      {"attribute": "class", "value": "status", "formatter": "prefixer", "formatOptions": "badge "},
+                      {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_relay_state_"}
+                       ]'>&nbsp;&nbsp;</small>
+                    </td>
+                  </tr>
+
+                  <tr data-class="state.day" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
+                    <td >Day:</td>
+                    <td>
+                      <span data-template-bind='[
+                      {"attribute": "content", "value": "state.day.begin", "formatter": "datetimeformatter", "formatOptions": "LTS"},
+                      {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_day_start_"} ]'></span>
+                      -
+                      <span data-template-bind='[
+                      {"attribute": "content", "value": "state.day.end", "formatter": "datetimeformatter", "formatOptions": "LTS"},
+                      {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_day_end__"} ]'></span>
+
+                      (<span data-template-bind='[
+                      {"attribute": "content", "value": "state.day.duration", "formatter": "durationformatter", "formatOptions": "LTS"},
+                      {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_day_duration_"} ]'></span>)
+                    </td>
+                    <td>
+                    </td>
+                  </tr>
+
+                  <tr data-class="state.night" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
+                    <td >Night:</td>
+                    <td>
+                      <span data-template-bind='[
+                      {"attribute": "content", "value": "state.night.begin", "formatter": "datetimeformatter", "formatOptions": "LTS"},
+                      {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_night_start_"} ]'></span>
+                      -
+                      <span data-template-bind='[
+                      {"attribute": "content", "value": "state.night.end", "formatter": "datetimeformatter", "formatOptions": "LTS"},
+                      {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_night_end_"} ]'></span>
+
+                      (<span data-template-bind='[
+                      {"attribute": "content", "value": "state.night.duration", "formatter": "durationformatter"},
+                      {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_night_duration_"} ]'></span>)
+                    </td>
+                    <td>
+                    </td>
+                  </tr>
+
+                  <tr data-class="state.low.begin" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
+                    <td >Low:</td>
+                    <td>
+                      <span data-template-bind='[
+                      {"attribute": "content", "value": "state.low.begin", "formatter": "datetimeformatter", "formatOptions": "LTS"},
+                      {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_low_start_"} ]'></span>
+                      -
+                      <span data-template-bind='[
+                      {"attribute": "content", "value": "state.low.end", "formatter": "datetimeformatter", "formatOptions": "LTS"},
+                      {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_low_end_"} ]'></span>
+
+                      (<span data-template-bind='[
+                      {"attribute": "content", "value": "state.low.duration", "formatter": "durationformatter", "formatOptions": "LTS"},
+                      {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_low_duration_"} ]'></span>)
+                    </td>
+                    <td>
+                    </td>
+                  </tr>
+
+                  <tr data-class="state.high.begin" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
+                    <td >High:</td>
+                    <td>
+                      <span data-template-bind='[
+                      {"attribute": "content", "value": "state.high.begin", "formatter": "datetimeformatter", "formatOptions": "LTS"},
+                      {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_high_start_"} ]'></span>
+                      -
+                      <span data-template-bind='[
+                      {"attribute": "content", "value": "state.high.end", "formatter": "datetimeformatter", "formatOptions": "LTS"},
+                      {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_high_end_"} ]'></span>
+
+                      (<span data-template-bind='[
+                      {"attribute": "content", "value": "state.high.duration", "formatter": "durationformatter"},
+                      {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_high_duration_"} ]'></span>)
+                    </td>
+                    <td>
+                    </td>
+                  </tr>
+
+                  <tr data-class="state.sensors" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
+                    <td >Current:</td>
+                    <td>
+                      <span data-template-bind='[
+                      {"attribute": "content", "value": "state.sensors.current", "formatter" : "numberformatter", "formatOptions" : "2"},
+                      {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_current_"} ]'></span><span data-template-bind='[
+                      {"attribute": "content", "value": "type", "formatter" : "unitformatter" }]'></span>
+
+                      (<span data-template-bind='[
+                      {"attribute": "content", "value": "state.sensors.alarm_min", "formatter" : "numberformatter", "formatOptions" : "2" },
+                      {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_alarm_min_"}  ]'></span><span data-template-bind='[
+                      {"attribute": "content", "value": "type", "formatter" : "unitformatter" } ]'></span>
+                        -
+                      <span data-template-bind='[
+                      {"attribute": "content", "value": "state.sensors.alarm_max", "formatter" : "numberformatter", "formatOptions" : "2"},
+                      {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_alarm_max_"}  ]'></span><span data-template-bind='[
+                      {"attribute": "content", "value": "type", "formatter" : "unitformatter" } ]'></span>)
+                    </td>
+                    <td>
+                      <i data-template-bind='[
+                      {"attribute": "class", "value": "warning"},
+                      {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_warning_"} ]'> </i>
+                    </td>
+                  </tr>
+
+
+                </script>
+
+                <script type="text/html" id="enclosure_template">
+
+                  <div class="card card-secondary">
+                    <div class="card-header">
+                      <h4 class="card-title w-100">
+                        <a class="" data-toggle="collapse" data-href="collapse_link" data-content="name"></a>
+                        <i class="fas fa-lock float-right" data-template-bind='[
+                        {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_door_"}
+                        ]'></i>
+                      </h4>
+                    </div>
+                    <div data-id="collapse_id" class="collapse" data-parent="#accordion" data-css="enclosure_image">
+                      <div class="card-body" style="background-image: url('static/assets/img/dot.png' )">
+
+                        <table class="table table-sm">
+                          <tbody
+                          data-template-bind='[
+                            {"attribute": "content", "value": "areas", "formatter": "nestedTemplateFormatter", "formatOptions": "#area_table_row "} ]'
+                          >
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                </script>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
+          {% endif %}
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div><!--/. container-fluid -->
+    </section>
+
+    <!-- /.content -->
+    <script>
+      jQuery(function () {
+        websocket_message({ 'type' : 'load_dashboard'});
+
+        setTimeout(function(){
+          jQuery.get('{{ url_for("api:enclosure_list") }}',function(data){
+            jQuery.each(data.data,function(counter,enclosure) {
+              // Accordion toggle + link
+              enclosure.collapse_link = '#enclosure_' + enclosure.id;
+              enclosure.collapse_id   = 'enclosure_'  + enclosure.id;
+
+              enclosure.enclosure_image = { 'background' : 'url(' + enclosure.image + ') no-repeat 100% 0%', 'background-size' : 'auto 100%' };
+
+              // Sort areas based on name
+              enclosure.areas.sort((a, b) => a.name.localeCompare(b.name));
+              jQuery.each(enclosure.areas,function(counter, area){
+                area.icon    = 'mr-1 fas ' + template_sensor_type_icon(area.type) + ' ' + template_sensor_type_color(area.type);
+                area.status  = (area.state.powered === true ? 'badge-success' : (area.state.powered === false ? 'badge-secondary' : 'badge-light'));
+                if (area.state.sensors != undefined) {
+                  area.warning = (area.state.sensors.alarm ? 'fas fa-exclamation-triangle text-danger' : 'd-none');
+                }
+              });
+              jQuery('#accordion').loadTemplate(jQuery('#enclosure_template'),enclosure,{ append: true, });
+            });
+
+            jQuery('#accordion .card-title a:first').trigger('click');
+          });
+
+          jQuery.get('{{ url_for("api:sensor_list") }}',function(data){
+            data = data.data;
+            loaded_sensor_type = {};
+            // Sort the sensors based on the given sensor type
+            data.sort((a, b) => a.type.localeCompare(b.type));
+
+            // Preprocess the data
+            jQuery.each(data,function(counter,sensor) {
+              // Create new sensor type based average
+              if (!loaded_sensor_type[sensor.type]) {
+                loaded_sensor_type[sensor.type] = {
+                  value : [],
+                  limit_min: [],
+                  limit_max : [],
+                  alarm_min: [],
+                  alarm_max : []
+                }
+              }
+
+              // Store the individual values per sensor type
+              loaded_sensor_type[sensor.type].value.push(sensor.value);
+              loaded_sensor_type[sensor.type].limit_min.push(sensor.limit_min);
+              loaded_sensor_type[sensor.type].limit_max.push(sensor.limit_max);
+              loaded_sensor_type[sensor.type].alarm_min.push(sensor.alarm_min);
+              loaded_sensor_type[sensor.type].alarm_max.push(sensor.alarm_max);
+            });
+
+            // Show the data...
+            jQuery.each(loaded_sensor_type, function(sensor_type, sensor) {
+              sensor.id   = 'avg_' + sensor_type;
+              sensor.name = 'Average ' + sensor_type;
+
+              jQuery('#sensor_list').loadTemplate(jQuery('#sensor_template'),{
+                  icon: template_sensor_type_icon(sensor_type),
+                  title: sensor.name,
+                  last_update: moment().format('LLL'),
+                  gauge: 'gauge_' + sensor.id,
+                  graph: 'graph_' + sensor.id
+                },{ append: true});
+
+              new sensor_gauge('gauge_' + sensor.id,
+                                sensor_type,
+                                sensor.value.avg(),
+                                sensor.limit_min.avg(),
+                                sensor.limit_max.avg(),
+                                sensor.alarm_min.avg(),
+                                sensor.alarm_max.avg());
+
+              new graph('graph_' + sensor.id, '{{ url_for("api:sensor_type_history", action="history", filter="_id_") }}'.replace('_id_',sensor_type), sensor_type);
+            });
+          });
+        },500);
+      });
+    </script>
+  </div>
+  <!-- /.content-wrapper -->
+{% endblock content %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+{% endblock javascripts %}
