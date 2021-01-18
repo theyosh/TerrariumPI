@@ -3,7 +3,6 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 import gettext
-gettext.install('terrariumpi', 'locales/')
 
 try:
   import thread as _thread
