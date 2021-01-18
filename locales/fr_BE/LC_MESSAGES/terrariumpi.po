@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2020-12-28 10:57+CET\n"
+"POT-Creation-Date: 2021-01-18 22:35+CET\n"
 "PO-Revision-Date: 2020-05-21 19:44+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: French (Belgium) <https://weblate.theyosh.nl/projects/"
@@ -50,6 +50,174 @@ msgstr "Charge du processeur"
 #: terrariumEngine.py:811 views/system_status.tpl:62
 msgid "CPU Temperature"
 msgstr "Température du CPU"
+
+#: terrariumNotification.py:210
+#, fuzzy
+#| msgid "Environment"
+msgid "Environment light day on"
+msgstr "Environnement"
+
+#: terrariumNotification.py:211
+#, fuzzy
+#| msgid "Enabled when lights are off"
+msgid "Environment light day off"
+msgstr "Activé lorsque les lumières sont éteintes"
+
+#: terrariumNotification.py:212
+msgid "Environment light night on"
+msgstr ""
+
+#: terrariumNotification.py:213
+msgid "Environment light night off"
+msgstr ""
+
+#: terrariumNotification.py:215
+msgid "Environment temperature alarm low on"
+msgstr ""
+
+#: terrariumNotification.py:216
+msgid "Environment temperature alarm low off"
+msgstr ""
+
+#: terrariumNotification.py:217
+msgid "Environment temperature alarm high on"
+msgstr ""
+
+#: terrariumNotification.py:218
+msgid "Environment temperature alarm high off"
+msgstr ""
+
+#: terrariumNotification.py:220
+msgid "Environment humidity alarm low on"
+msgstr ""
+
+#: terrariumNotification.py:221
+msgid "Environment humidity alarm low off"
+msgstr ""
+
+#: terrariumNotification.py:222
+msgid "Environment humidity alarm high on"
+msgstr ""
+
+#: terrariumNotification.py:223
+msgid "Environment humidity alarm high off"
+msgstr ""
+
+#: terrariumNotification.py:225
+msgid "Environment moisture alarm low on"
+msgstr ""
+
+#: terrariumNotification.py:226
+msgid "Environment moisture alarm low off"
+msgstr ""
+
+#: terrariumNotification.py:227
+msgid "Environment moisture alarm high on"
+msgstr ""
+
+#: terrariumNotification.py:228
+msgid "Environment moisture alarm high off"
+msgstr ""
+
+#: terrariumNotification.py:230
+msgid "Environment conductivity alarm low on"
+msgstr ""
+
+#: terrariumNotification.py:231
+msgid "Environment conductivity alarm low off"
+msgstr ""
+
+#: terrariumNotification.py:232
+msgid "Environment conductivity alarm high on"
+msgstr ""
+
+#: terrariumNotification.py:233
+msgid "Environment conductivity alarm high off"
+msgstr ""
+
+#: terrariumNotification.py:235
+msgid "Environment pH alarm low on"
+msgstr ""
+
+#: terrariumNotification.py:236
+msgid "Environment pH alarm low off"
+msgstr ""
+
+#: terrariumNotification.py:237
+msgid "Environment pH alarm high on"
+msgstr ""
+
+#: terrariumNotification.py:238
+msgid "Environment pH alarm high off"
+msgstr ""
+
+#: terrariumNotification.py:240
+msgid "Environment watertank alarm low on"
+msgstr ""
+
+#: terrariumNotification.py:241
+msgid "Environment watertank alarm low off"
+msgstr ""
+
+#: terrariumNotification.py:242
+msgid "Environment watertank alarm high on"
+msgstr ""
+
+#: terrariumNotification.py:243
+msgid "Environment watertank alarm high off"
+msgstr ""
+
+#: terrariumNotification.py:245
+#, fuzzy
+#| msgid "Authentication"
+msgid "Authentication warning"
+msgstr "Authentication"
+
+#: terrariumNotification.py:247
+#, fuzzy
+#| msgid "No warning messages"
+msgid "System warning message"
+msgstr "Aucun message d'avertissement"
+
+#: terrariumNotification.py:248
+#, fuzzy
+#| msgid "No error messages"
+msgid "System error message"
+msgstr "Aucun message d'erreur"
+
+#: terrariumNotification.py:250 terrariumNotification.py:251
+msgid "Sensor low alarm"
+msgstr ""
+
+#: terrariumNotification.py:253
+#, fuzzy
+#| msgid "Power switches"
+msgid "Powerswitch on"
+msgstr "Interrupteurs d'alimentation"
+
+#: terrariumNotification.py:254
+#, fuzzy
+#| msgid "Power switches"
+msgid "Powerswitch off"
+msgstr "Interrupteurs d'alimentation"
+
+#: terrariumNotification.py:256
+#, fuzzy
+#| msgid "Door is open"
+msgid "Door opened"
+msgstr "Accès ouvert"
+
+#: terrariumNotification.py:257
+#, fuzzy
+#| msgid "Door is closed"
+msgid "Door closed"
+msgstr "Accès fermé"
+
+#: terrariumNotification.py:259
+#, fuzzy
+#| msgid "Webcam settings"
+msgid "Webcam motion"
+msgstr "Paramètres de la webcam"
 
 #: terrariumTranslations.py:22
 msgid "Holds the external source URL. Supported sources are: %s."
@@ -918,102 +1086,102 @@ msgstr "Contient un lien vers plus d'informations."
 msgid "Offline since"
 msgstr "Hors ligne depuis"
 
-#: terrariumWebserver.py:93 terrariumWebserver.py:202
+#: terrariumWebserver.py:92 terrariumWebserver.py:201
 msgid "Authenticate to make any changes"
 msgstr "Authentifiez-vous pour apporter des modifications"
 
-#: terrariumWebserver.py:93 terrariumWebserver.py:202
+#: terrariumWebserver.py:92 terrariumWebserver.py:201
 #: views/system_settings.tpl:57
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:93 terrariumWebserver.py:202
+#: terrariumWebserver.py:92 terrariumWebserver.py:201
 #: views/system_settings.tpl:146
 msgid "Authentication"
 msgstr "Authentication"
 
-#: terrariumWebserver.py:266
+#: terrariumWebserver.py:265
 msgid "Player command could ot be executed!"
 msgstr "La commande du lecteur n'a pas pu être exécutée!"
 
-#: terrariumWebserver.py:266 terrariumWebserver.py:286
-#: terrariumWebserver.py:298 terrariumWebserver.py:306
+#: terrariumWebserver.py:265 terrariumWebserver.py:285
+#: terrariumWebserver.py:297 terrariumWebserver.py:305
 msgid "Error!"
 msgstr "Erreur!"
 
-#: terrariumWebserver.py:274 terrariumWebserver.py:277
+#: terrariumWebserver.py:273 terrariumWebserver.py:276
 msgid "OK!"
 msgstr "OK!"
 
-#: terrariumWebserver.py:274 terrariumWebserver.py:277
+#: terrariumWebserver.py:273 terrariumWebserver.py:276
 msgid "Player command executed!"
 msgstr "Commande du lecteur exécutée!"
 
-#: terrariumWebserver.py:286
+#: terrariumWebserver.py:285
 msgid "File is not uploaded!"
 msgstr "Le fichier n'a pas été téléchargé !"
 
-#: terrariumWebserver.py:291
+#: terrariumWebserver.py:290
 #, fuzzy
 #| msgid "File is not uploaded!"
 msgid "File '%s' is uploaded"
 msgstr "Le fichier n'a pas été téléchargé !"
 
-#: terrariumWebserver.py:291 terrariumWebserver.py:301
+#: terrariumWebserver.py:290 terrariumWebserver.py:300
 msgid "Success!"
 msgstr "Réussite!"
 
-#: terrariumWebserver.py:293
+#: terrariumWebserver.py:292
 #, fuzzy
 #| msgid "Delete file"
 msgid "Duplicate file '%s'"
 msgstr "Supprimer le fichier"
 
-#: terrariumWebserver.py:298
+#: terrariumWebserver.py:297
 msgid "Action could not be satisfied"
 msgstr "L'action n'a pas pu être satisfaite"
 
-#: terrariumWebserver.py:301
+#: terrariumWebserver.py:300
 msgid "Audio file is deleted"
 msgstr "Le fichier audio est supprimé"
 
-#: terrariumWebserver.py:306
+#: terrariumWebserver.py:305
 msgid "Data could not be saved"
 msgstr "Les données n'ont pas pu être sauvegardées"
 
-#: terrariumWebserver.py:314
+#: terrariumWebserver.py:313
 msgid "Data saved"
 msgstr "Données enregistrées"
 
-#: terrariumWebserver.py:315
+#: terrariumWebserver.py:314
 msgid "Your changes are saved"
 msgstr "Vos modifications sont enregistrées"
 
-#: terrariumWebserver.py:334
+#: terrariumWebserver.py:333
 msgid "Hardware is replaced"
 msgstr ""
 
-#: terrariumWebserver.py:335
+#: terrariumWebserver.py:334
 msgid "Hardware replacement is logged in the calendar"
 msgstr ""
 
-#: terrariumWebserver.py:338
+#: terrariumWebserver.py:337
 msgid "A new replacement reminder is created"
 msgstr ""
 
-#: terrariumWebserver.py:360
+#: terrariumWebserver.py:359
 msgid "Calender event created"
 msgstr ""
 
-#: terrariumWebserver.py:361
+#: terrariumWebserver.py:360
 msgid "The calender event is created"
 msgstr ""
 
-#: terrariumWebserver.py:500 views/inc/menu.tpl:177
+#: terrariumWebserver.py:499 views/inc/menu.tpl:177
 msgid "Log out"
 msgstr "Quitter"
 
-#: terrariumWebserver.py:501
+#: terrariumWebserver.py:500
 msgid "You are now logged out"
 msgstr "Vous êtes maintenant déconnecté"
 
