@@ -232,7 +232,7 @@
                   % for message in notifications.get_messages():
                   <div class="row">
                     <div class="col-md-3 col-sm-3 col-xs-12 form-group">
-                      {{message['id'].replace('_',' ').capitalize()}}
+                      {{message['name']}}
                     </div>
                     <div class="col-md-3 col-sm-2 col-xs-12 form-group">
                       <input class="form-control" name="{{message['id']}}_title"  value="{{message['title']}}" placeholder="{{_('Title')}}" type="text">
