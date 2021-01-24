@@ -1,3 +1,7 @@
+.fuckbs-d-none {
+  display: none;
+}
+
 div.card-tools .dropdown-menu {
   min-width: auto !important;
 }
@@ -188,6 +192,33 @@ top: 0px;
 }
 .was-validated select.select2:valid + .select2.select2-container.select2-container--default .select2-selection__arrow, select.select2.is-valid + .select2.select2-container.select2-container--default .select2-selection__arrow {
     right: 2.2rem !important;
+}
+
+.disabled-select {
+  background-color: #d5d5d5;
+  opacity: 0.5;
+  border-radius: 3px;
+  cursor: not-allowed;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+select[readonly].select2-hidden-accessible + .select2-container {
+  pointer-events: none;
+  touch-action: none;
+}
+
+select[readonly].select2-hidden-accessible + .select2-container .select2-selection {
+  background: #eee;
+  box-shadow: none;
+}
+
+select[readonly].select2-hidden-accessible + .select2-container .select2-selection__arrow,
+select[readonly].select2-hidden-accessible + .select2-container .select2-selection__clear {
+  display: none;
 }
 
 canvas.relay {
@@ -384,4 +415,7 @@ video.leaflet-image-layer {
 }
 .switch + .switch {
   margin-left: 1rem;
+}
+.slider-selection {
+  background: #BABABA;
 }

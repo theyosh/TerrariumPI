@@ -104,8 +104,14 @@ class terrariumAPI(object):
 
 
     # Relays API
-    bottle_app.route('/api/relays/<relay:path>/history/<period:re:(day|week|month|year)>/', 'GET', self.relay_history, apply=self.authentication(False), name='api:relay_history_period')
-    bottle_app.route('/api/relays/<relay:path>/history/', 'GET',    self.relay_history,  apply=self.authentication(False), name='api:relay_history')
+
+    bottle_app.route('/api/relays/<relay:path>/<action:re:(history)>/<period:re:(day|week|month|year)>/', 'GET', self.relay_history, apply=self.authentication(False), name='api:relay_history_period')
+    bottle_app.route('/api/relays/<relay:path>/<action:re:(history)>/', 'GET',    self.relay_history,  apply=self.authentication(False), name='api:relay_history')
+
+    bottle_app.route('/api/relays/<relay:path>/<action:re:(export)>/<period:re:(day|week|month|year)>/',  'GET', self.relay_history, apply=self.authentication(),      name='api:relay_export_period')
+    bottle_app.route('/api/relays/<relay:path>/<action:re:(export)>/',  'GET',    self.relay_history,  apply=self.authentication(),      name='api:relay_export')
+
+
     bottle_app.route('/api/relays/<relay:path>/<action:re:(toggle|on|off|\d+)>/', 'POST',    self.relay_action,  apply=self.authentication(), name='api:relay_action')
 
     bottle_app.route('/api/relays/<relay:path>/manual/', 'POST',    self.relay_manual,  apply=self.authentication(), name='api:relay_manual')
@@ -714,29 +720,50 @@ class terrariumAPI(object):
     pass
 
   @orm.db_session
-  def relay_history(self, relay, period = 'day'):
-    data = []
+  def relay_history(self, relay, action = 'history', period = 'day'):
+    try:
+      relay = Relay[relay]
 
-    if 'day' == period:
-      period = 1
-    elif 'week' == period:
-      period = 7
-    elif 'month' == period:
-      period = 31
-    elif 'year' == period:
-      period = 365
-    else:
-      period = 1
+      data = []
 
-    for item in Relay[relay].history.filter(lambda h: h.timestamp >= datetime.now() - timedelta(days=period)):
-      data.append({
-        'timestamp' : item.timestamp.timestamp(),
-        'value'     : item.value,
-        'wattage'   : item.wattage,
-        'flow'      : item.flow
-      })
+      if 'day' == period:
+        period = 1
+      elif 'week' == period:
+        period = 7
+      elif 'month' == period:
+        period = 31
+      elif 'year' == period:
+        period = 365
+      else:
+        period = 1
 
-    return { 'data' : data }
+      for item in relay.history.filter(lambda h: h.timestamp >= datetime.now() - timedelta(days=period)):
+        data.append({
+          'timestamp' : item.timestamp.timestamp(),
+          'value'     : item.value,
+          'wattage'   : item.wattage,
+          'flow'      : item.flow
+        })
+
+      if 'export' == action:
+        response.headers['Content-Type'] = 'application/csv'
+        response.headers['Content-Disposition'] = f'attachment; filename={relay.name}_{period}.csv'
+
+        # CSV Headers
+        csv_data = ';'.join(data[0].keys()) + '\n'
+        # Data
+        for data_point in data:
+          data_point['timestamp'] = datetime.fromtimestamp(data_point['timestamp'])
+          csv_data += ';'.join([str(value) for value in data_point.values()]) + '\n'
+
+        return csv_data
+
+      return { 'data' : data }
+
+    except orm.core.ObjectNotFound as ex:
+      raise HTTPError(status=404, body=f'Relay with id {relay} does not exists.')
+    except Exception as ex:
+      raise HTTPError(status=500, body=f'{ex}')
 
   def relay_hardware(self):
     return { 'data' : terrariumRelay.available_relays }

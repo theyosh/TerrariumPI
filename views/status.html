@@ -1,5 +1,5 @@
 {% extends "layouts/base.html" %}
-{% block title %} Status {% endblock %}
+{% block title %}{{ _('Status') }}{% endblock %}
 {% block content %}
 
   <!-- Content Wrapper. Contains page content -->
@@ -32,30 +32,8 @@
           <div class="col-12 col-md-6 col-sm-6 col-lg-3" >
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"><i class="fas fa-microchip"></i> CPU Load</h3>
+                <h3 class="card-title"><i class="fas fa-microchip"></i> {{ _('CPU Load') }}</h3>
                 <div class="card-tools">
-
-                  <!-- <div class="btn-group">
-                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-                      <i class="fas fa-wrench"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" role="menu">
-                      {% if authenticated %}
-                      <a data-href="webcam_edit_link" class="dropdown-item" data-title="settings_title" data-id="webcam_id" data-toggle="modal" data-target="#modal-webcam-setup">
-                        <i class="fas fa-wrench mr-1"></i> Settings
-                      </a>
-                      <a data-href="webcam_ignore_link" class="dropdown-item" data-title="ignore_title" data-action="PUT" data-id="webcam_id" data-field="value" data-toggle="modal" data-target="#modal-confirm">
-                        <i class="fas fa-ban mr-1"></i> Ignore
-                      </a>
-                      <a data-href="webcam_delete_link" class="dropdown-item" data-title="delete_title" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm">
-                        <i class="fas fa-trash-alt mr-1"></i> Delete
-                      </a>
-                      {% else %}
-                        <a href="{{ url_for('login') }}" class="dropdown-item">Please login to make changes</a>
-                      {% endif %}
-                    </div>
-                  </div> -->
-
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
                   </button>
@@ -79,32 +57,8 @@
           <div class="col-12 col-md-6 col-sm-6 col-lg-3" >
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"><i class="fas fa-microchip"></i> CPU Temperature</h3>
+                <h3 class="card-title"><i class="fas fa-microchip"></i> {{ _('CPU Temperature') }}</h3>
                 <div class="card-tools">
-
-<!--
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-                      <i class="fas fa-wrench"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" role="menu">
-                      {% if authenticated %}
-                      <a data-href="webcam_edit_link" class="dropdown-item" data-title="settings_title" data-id="webcam_id" data-toggle="modal" data-target="#modal-webcam-setup">
-                        <i class="fas fa-wrench mr-1"></i> Settings
-                      </a>
-                      <a data-href="webcam_ignore_link" class="dropdown-item" data-title="ignore_title" data-action="PUT" data-id="webcam_id" data-field="value" data-toggle="modal" data-target="#modal-confirm">
-                        <i class="fas fa-ban mr-1"></i> Ignore
-                      </a>
-                      <a data-href="webcam_delete_link" class="dropdown-item" data-title="delete_title" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm">
-                        <i class="fas fa-trash-alt mr-1"></i> Delete
-                      </a>
-                      {% else %}
-                        <a href="{{ url_for('login') }}" class="dropdown-item">Please login to make changes</a>
-                      {% endif %}
-                    </div>
-                  </div> -->
-
-
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
                   </button>
@@ -128,32 +82,8 @@
           <div class="col-12 col-md-6 col-sm-6 col-lg-3" >
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"><i class="fas fa-microchip"></i> Memory usage</h3>
+                <h3 class="card-title"><i class="fas fa-microchip"></i> {{ _('Memory usage') }}</h3>
                 <div class="card-tools">
-
-<!--
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-                      <i class="fas fa-wrench"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" role="menu">
-                      {% if authenticated %}
-                      <a data-href="webcam_edit_link" class="dropdown-item" data-title="settings_title" data-id="webcam_id" data-toggle="modal" data-target="#modal-webcam-setup">
-                        <i class="fas fa-wrench mr-1"></i> Settings
-                      </a>
-                      <a data-href="webcam_ignore_link" class="dropdown-item" data-title="ignore_title" data-action="PUT" data-id="webcam_id" data-field="value" data-toggle="modal" data-target="#modal-confirm">
-                        <i class="fas fa-ban mr-1"></i> Ignore
-                      </a>
-                      <a data-href="webcam_delete_link" class="dropdown-item" data-title="delete_title" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm">
-                        <i class="fas fa-trash-alt mr-1"></i> Delete
-                      </a>
-                      {% else %}
-                        <a href="{{ url_for('login') }}" class="dropdown-item">Please login to make changes</a>
-                      {% endif %}
-                    </div>
-                  </div> -->
-
-
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
                   </button>
@@ -179,32 +109,8 @@
           <div class="col-12 col-md-6 col-sm-6 col-lg-3" >
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"><i class="fas fa-microchip"></i> Disk usage</h3>
+                <h3 class="card-title"><i class="fas fa-microchip"></i> {{ _('Disk usage') }}</h3>
                 <div class="card-tools">
-
-<!--
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-                      <i class="fas fa-wrench"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" role="menu">
-                      {% if authenticated %}
-                      <a data-href="webcam_edit_link" class="dropdown-item" data-title="settings_title" data-id="webcam_id" data-toggle="modal" data-target="#modal-webcam-setup">
-                        <i class="fas fa-wrench mr-1"></i> Settings
-                      </a>
-                      <a data-href="webcam_ignore_link" class="dropdown-item" data-title="ignore_title" data-action="PUT" data-id="webcam_id" data-field="value" data-toggle="modal" data-target="#modal-confirm">
-                        <i class="fas fa-ban mr-1"></i> Ignore
-                      </a>
-                      <a data-href="webcam_delete_link" class="dropdown-item" data-title="delete_title" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm">
-                        <i class="fas fa-trash-alt mr-1"></i> Delete
-                      </a>
-                      {% else %}
-                        <a href="{{ url_for('login') }}" class="dropdown-item">Please login to make changes</a>
-                      {% endif %}
-                    </div>
-                  </div> -->
-
-
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
                   </button>
@@ -234,31 +140,8 @@
           <div class="col" >
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"><i class="fas fa-microchip"></i> Uptime</h3>
+                <h3 class="card-title"><i class="fas fa-microchip"></i> {{ _('Uptime') }}</h3>
                 <div class="card-tools">
-
-<!--
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-                      <i class="fas fa-wrench"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" role="menu">
-                      {% if authenticated %}
-                      <a data-href="webcam_edit_link" class="dropdown-item" data-title="settings_title" data-id="webcam_id" data-toggle="modal" data-target="#modal-webcam-setup">
-                        <i class="fas fa-wrench mr-1"></i> Settings
-                      </a>
-                      <a data-href="webcam_ignore_link" class="dropdown-item" data-title="ignore_title" data-action="PUT" data-id="webcam_id" data-field="value" data-toggle="modal" data-target="#modal-confirm">
-                        <i class="fas fa-ban mr-1"></i> Ignore
-                      </a>
-                      <a data-href="webcam_delete_link" class="dropdown-item" data-title="delete_title" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm">
-                        <i class="fas fa-trash-alt mr-1"></i> Delete
-                      </a>
-                      {% else %}
-                        <a href="{{ url_for('login') }}" class="dropdown-item">Please login to make changes</a>
-                      {% endif %}
-                    </div>
-                  </div> -->
-
 
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
@@ -280,6 +163,7 @@
       </div>
       <!--/. container-fluid -->
     </section>
+    </div>
     <!-- /.content -->
     <script>
     jQuery(function () {
@@ -324,6 +208,4 @@
       });
     });
     </script>
-  </div>
-  <!-- /.content-wrapper -->
 {% endblock content %}

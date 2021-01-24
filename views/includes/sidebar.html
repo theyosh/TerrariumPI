@@ -15,12 +15,12 @@
         </div>
         <div class="info">
           {% if authenticated %}
-            <a href="{{ url_for('page', page='settings')}}" >Hello {{ username }}.</a>
+            <a href="{{ url_for('page', page='settings')}}" >{{ _('Hello') }} {{ username }}.</a>
             <br />
-            <a href="{{ url_for('logout') }}" title="Logout" data-action="POST" data-toggle="modal" data-target="#modal-confirm">Logout</a>
+            <a href="{{ url_for('logout') }}" title="Logout" data-action="POST" data-toggle="modal" data-target="#modal-confirm">{{ _('Logout') }}</a>
           {% else %}
             <a href="{{ url_for('login') }}">
-              Read only mode. <br />Login to make changes.
+              {{ _('Read only mode') }} <br />{{ _('Login to make changes') }}
             </a>
           {% endif %}
         </div>
@@ -45,7 +45,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
-                Home
+                {{ _(' Home') }}
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -53,27 +53,27 @@
               <li class="nav-item">
                 <a href="{{ url_for('page', page='dashboard')}}" class="nav-link">
                   <i class="fas fa-th-list nav-icon"></i>
-                  <p>Dashboard</p>
+                  <p>{{ _('Dashboard') }}</p>
                 </a>
               </li>
               {% if show_gauge_overview %}
               <li class="nav-item">
                 <a href="{{ url_for('page', page='all_sensors')}}" class="nav-link">
                   <i class="fas fa-tint nav-icon"></i>
-                  <p>All sensors</p>
+                  <p>{{ _('All sensors') }}</p>
                 </a>
               </li>
               {% endif %}
               <li class="nav-item">
                 <a href="{{ url_for('page',page='weather')}}" class="nav-link">
                   <i class="fas fa-cloud-sun nav-icon"></i>
-                  <p>Weather</p>
+                  <p>{{ _('Weather') }}</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ url_for('page',page='calendar')}}" class="nav-link">
                   <i class="fas fa-calendar-alt nav-icon"></i>
-                  <p>Calendar</p>
+                  <p>{{ _('Calendar') }}</p>
                 </a>
               </li>
             </ul>
@@ -82,7 +82,7 @@
             <a href="#" class="nav-link">
               <i class="fas fa-tint nav-icon"></i>
               <p>
-                Sensors
+                {{ _('Sensors') }}
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -98,10 +98,10 @@
                   </a>
                 </li>
               </script>
-              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
-                <a href="{{ url_for('api:sensor_add') }}" class="nav-link" title="Add a new sensor" data-toggle="modal" data-target="#modal-sensor-setup">
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
+                <a href="{{ url_for('api:sensor_add') }}" class="nav-link" title="{{ _('Add new sensor') }}" data-toggle="modal" data-target="#modal-sensor-setup">
                   <i class="fas fa-plus nav-icon"></i>
-                  <p>Add new sensor</p>
+                  <p>{{ _('Add new sensor') }}</p>
                 </a>
               </li>
             </ul>
@@ -110,7 +110,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-bolt"></i>
               <p>
-                Relays
+                {{ _('Relays') }}
                 <i class="fas fa-angle-left right"></i>
                 <!-- <span class="badge badge-info right">6</span> -->
               </p>
@@ -119,13 +119,13 @@
               <li class="nav-item">
                 <a href="{{ url_for('page', page='relays')}}" class="nav-link">
                   <i class="fas fa-power-off nav-icon"></i>
-                  <p>Status</p>
+                  <p>{{ _('Status') }}</p>
                 </a>
               </li>
-              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
-                <a href="#" class="nav-link" title="Add a new relay" data-toggle="modal" data-target="#modal-relay-setup">
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
+                <a href="#" class="nav-link" title="{{ _('Add new relay') }}" data-toggle="modal" data-target="#modal-relay-setup">
                   <i class="fas fa-plus nav-icon"></i>
-                  <p>Add new relay</p>
+                  <p>{{ _('Add new relay') }}</p>
                 </a>
               </li>
             </ul>
@@ -134,7 +134,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-thumbtack"></i>
               <p>
-                Buttons
+                {{ _('Buttons') }}
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -142,13 +142,13 @@
               <li class="nav-item">
                 <a href="{{ url_for('page', page='buttons')}}" class="nav-link">
                   <i class="fas fa-list nav-icon"></i>
-                  <p>Status</p>
+                  <p>{{ _('Status') }}</p>
                 </a>
               </li>
-              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
-                <a href="#" class="nav-link" title="Add a new button" data-toggle="modal" data-target="#modal-button-setup">
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
+                <a href="#" class="nav-link" title="{{ _('Add new button') }}" data-toggle="modal" data-target="#modal-button-setup">
                   <i class="fas fa-plus nav-icon"></i>
-                  <p>Add new button</p>
+                  <p>{{ _('Add new button') }}</p>
                 </a>
               </li>
             </ul>
@@ -157,7 +157,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-video"></i>
               <p>
-                Webcams
+                {{ _('Webcams') }}
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -165,13 +165,13 @@
               <li class="nav-item">
                 <a href="{{ url_for('page', page='webcams')}}" class="nav-link">
                   <i class="fas fa-tv nav-icon"></i>
-                  <p>Show</p>
+                  <p>{{ _('Show') }}</p>
                 </a>
               </li>
-              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
-                <a href="{{ url_for('webcam_list') }}" class="nav-link" title="Add a new webcam" data-toggle="modal" data-target="#modal-webcam-setup">
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
+                <a href="{{ url_for('webcam_list') }}" class="nav-link" title="{{ _('Add new webcam') }}" data-toggle="modal" data-target="#modal-webcam-setup">
                   <i class="fas fa-plus nav-icon"></i>
-                  <p>Add new webcam</p>
+                  <p>{{ _('Add new webcam') }}</p>
                 </a>
               </li>
             </ul>
@@ -180,7 +180,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-music"></i>
               <p>
-                Audio
+                {{ _('Audio') }}
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -188,13 +188,13 @@
               <li class="nav-item">
                 <a href="/forms-general.html" class="nav-link">
                   <i class="fas fa-play nav-icon"></i>
-                  <p>Players</p>
+                  <p>{{ _('Players') }}</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ url_for('page', page='audio_files')}}" class="nav-link">
                   <i class="fas fa-file-audio nav-icon"></i>
-                  <p>Files / Playlists</p>
+                  <p>{{ _('Files / Playlists') }}</p>
                 </a>
               </li>
             </ul>
@@ -203,7 +203,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-globe"></i>
               <p>
-                Enclosures
+                {{ _('Enclosures') }}
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -211,20 +211,20 @@
               <li class="nav-item">
                 <a href="{{ url_for('page', page='enclosures')}}" class="nav-link">
                   <i class="fas fa-building nav-icon"></i>
-                  <p>List</p>
+                  <p>{{ _('List') }}</p>
                 </a>
               </li>
 
-              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
-                <a href="#" class="nav-link" title="Add a new enclosure" data-toggle="modal" data-target="#modal-enclosure-setup">
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
+                <a href="#" class="nav-link" title="{{ _('Add new enclosure') }}" data-toggle="modal" data-target="#modal-enclosure-setup">
                   <i class="fas fa-plus nav-icon"></i>
-                  <p>Add new enclosure</p>
+                  <p>{{ _('Add new enclosure') }}</p>
                 </a>
               </li>
-              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
-                <a href="#" class="nav-link" title="Add a new area" data-toggle="modal" data-target="#modal-area-setup">
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
+                <a href="#" class="nav-link" title="{{ _('Add new area') }}" data-toggle="modal" data-target="#modal-area-setup">
                   <i class="fas fa-plus nav-icon"></i>
-                  <p>Add new area</p>
+                  <p>{{ _('Add new area') }}</p>
                 </a>
               </li>
             </ul>
@@ -233,7 +233,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
               <p>
-                System
+                {{ _('System') }}
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -241,46 +241,46 @@
               <li class="nav-item">
                 <a href="{{ url_for('page', page='status')}}" class="nav-link">
                   <i class="fas fa-exclamation-triangle nav-icon"></i>
-                  <p>Status</p>
+                  <p>{{ _('Status') }}</p>
                 </a>
               </li>
-              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
                 <a href="{{ url_for('page', page='log')}}" class="nav-link" >
                   <i class="fas fa-file-alt nav-icon"></i>
-                  <p>Log</p>
+                  <p>{{ _('Log') }}</p>
                 </a>
               </li>
-              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
                 <a href="{{ url_for('page', page='settings')}}" class="nav-link">
                   <i class="fas fa-cogs nav-icon"></i>
-                  <p>Settings</p>
+                  <p>{{ _('Settings') }}</p>
                 </a>
               </li>
-              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
-                <a href="{{ url_for('api:server_action', action='restart')}}" class="nav-link text-info" title="Restart TerrariumPI" data-action="POST" data-toggle="modal" data-target="#modal-confirm">
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
+                <a href="{{ url_for('api:server_action', action='restart')}}" class="nav-link text-info" title="{{ _('Restart TerrariumPI') }}" data-action="POST" data-toggle="modal" data-target="#modal-confirm">
                   <i class="fas fa-sync-alt nav-icon"></i>
-                  <p>Restart</p>
+                  <p>{{ _('Restart') }}</p>
                 </a>
               </li>
-              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
-                <a href="{{ url_for('api:server_action', action='reboot')}}" class="nav-link text-warning" title="Reboot TerrariumPI" data-action="POST" data-toggle="modal" data-target="#modal-confirm">
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
+                <a href="{{ url_for('api:server_action', action='reboot')}}" class="nav-link text-warning" title="{{ _('Reboot TerrariumPI') }}" data-action="POST" data-toggle="modal" data-target="#modal-confirm">
                   <i class="fas fa-sync-alt nav-icon"></i>
-                  <p>Reboot</p>
+                  <p>{{ _('Reboot') }}</p>
                 </a>
               </li>
-              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
-                <a href="{{ url_for('api:server_action', action='restart')}}" class="nav-link text-danger" title="Shutdown TerrariumPI" data-action="POST" data-toggle="modal" data-target="#modal-confirm">
+              <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
+                <a href="{{ url_for('api:server_action', action='restart')}}" class="nav-link text-danger" title="{{ _('Shutdown TerrariumPI') }}" data-action="POST" data-toggle="modal" data-target="#modal-confirm">
                   <i class="fas fa-power-off nav-icon"></i>
-                  <p>Shutdown</p>
+                  <p>{{ _('Shutdown') }}</p>
                 </a>
             </ul>
           </li>
-          <li class="nav-header">About</li>
+          <li class="nav-header">{{ _('About') }}</li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-info"></i>
               <p>
-                Help
+                {{ _('Help') }}
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -288,19 +288,19 @@
               <li class="nav-item">
                 <a href="/mailbox.html" class="nav-link">
                   <i class="fas fa-info nav-icon"></i>
-                  <p>About</p>
+                  <p>{{ _('About') }}</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/mailbox-compose.html" class="nav-link">
                   <i class="fas fa-book nav-icon"></i>
-                  <p>Usage</p>
+                  <p>{{ _('Usage') }}</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/mailbox-read-mail.html" class="nav-link">
                   <i class="fas fa-microchip nav-icon"></i>
-                  <p>Hardware</p>
+                  <p>{{ _('Hardware') }}</p>
                 </a>
               </li>
             </ul>

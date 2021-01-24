@@ -502,8 +502,15 @@ function sensor_gauge(canvas, type, current, limit_min, limit_max, alarm_min, al
         this._indicator.text(formatNumber(this.current) + ' ' + sensor_type_indicator(this._type));
       }
 
-      this._warning_badge.text(( this.alarm_max >= this.current && this.current >= this.alarm_min  ? '' : this._warning_badge.data('message')));
+
+//      console.log(this)
+
+      this._warning_badge.toggle(!(this.alarm_max >= this.current && this.current >= this.alarm_min));
+
+//      this._warning_badge.text(( this.alarm_max >= this.current && this.current >= this.alarm_min  ? '' : this._warning_badge.data('message')));
       this._error_badge.text(value !== null ? '' : this._error_badge.data('message'));
+
+
       this._last_update.text(moment().format('LLL'))
     },
 
@@ -2020,6 +2027,7 @@ jQuery(function () {
 
   jQuery.addTemplateFormatter('datetimeformatter',
     function(value, format) {
+      value = value || moment().format('X');
       return moment(value * 1000).format(format);
   });
 

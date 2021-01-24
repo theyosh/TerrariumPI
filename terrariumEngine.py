@@ -663,15 +663,9 @@ class terrariumEngine(object):
 
     # Toggle the switch, will return ok = true when succeeded
     ok = self.relays[relay.id].set_state(action)
-    # if ok:
-    #   # Changed the state of the switch, so store it in the database
-    #   relay.update(action)
-    #   # And send a websocket update
-    #   self.webserver.websocket_message('relay' , {'id' : relay.id, 'value' : action})
-    #   self.webserver.websocket_message('power_usage_water_flow', self.get_power_usage_water_flow)
-
     return ok
 
+  # -= NEW =-
   def callback_relay(self, relay, state):
     with orm.db_session():
       relay = Relay[relay]
@@ -733,24 +727,13 @@ class terrariumEngine(object):
 
   # -= NEW =-
   def button_action(self, button, state):
+    if '3043a0de64fb36a944326b3c9cf379b0' == button:
+      print(f'Button action: {button} == {state}')
+
     with orm.db_session():
       button = Button[button]
       button.update(state,True)
       self.webserver.websocket_message('button' , {'id' : button.id, 'hardware' : button.hardware, 'value' : button.value})
-
-  # def _button_pressed_callback(self,button_device,dummy=None):
-  #   start = time.time()
-  #   try:
-  #     # First run when loading the buttons, we have already an app_context
-  #     button = Button.query.get(button_device.id)
-  #     button.update(button_device.state)
-  #   except Exception:
-  #     with self.app.app_context():
-  #       # After startup, we need to open manually a new app_context when callback is fired
-  #       button = Button.query.get(button_device.id)
-  #       button.update(button_device.state)
-
-  #   logger.info('Button {} with value: {} in {} seconds'.format(button_device.name, button_device.state, time.time()-start))
 
   # -= NEW =-
   def __load_existing_webcams(self):

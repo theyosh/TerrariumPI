@@ -1,13 +1,10 @@
 {% extends "layouts/base.html" %}
-
-{% block title %} Dashboard {% endblock %}
+{% block title %}{{ _('Dashboard') }}{% endblock %}
 <!-- Element injected in the BODY element -->
 {% block body_class %}  {% endblock body_class %}
-
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
 {% endblock stylesheets %}
-
 {% block content %}
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -27,7 +24,7 @@
                 <i class="fas fa-hourglass-end" data-fa-transform="rotate-90"></i>
               </span>
               <div class="info-box-content">
-                <span class="info-box-text">Uptime</span>
+                <span class="info-box-text">{{ _('Uptime') }}</span>
                 <span class="info-box-number">...</span>
               </div>
               <div class="progress vertical progress-sm" style="height: 55px;">
@@ -55,7 +52,7 @@
                 <i class="fas fa-bolt"></i>
               </span>
               <div class="info-box-content" id="power_usage">
-                <span class="info-box-text">Power usage in Watt</span>
+                <span class="info-box-text">{{ _('Power usage in Watt') }}</span>
                 <span class="info-box-number">0 / 0</span>
                 <div class="progress">
                   <div class="progress-bar bg-danger" style="width: 0%"></div>
@@ -74,7 +71,7 @@
                 <i class="fas fa-tint"></i>
               </span>
               <div class="info-box-content" id="flow_usage">
-                <span class="info-box-text">Water flow in L/m</span>
+                <span class="info-box-text">{{ _('Water flow in L/m') }}</span>
                 <span class="info-box-number">0 / 0</span>
                 <div class="progress">
                   <div class="progress-bar bg-info" style="width: 0%"></div>
@@ -90,14 +87,14 @@
               <span class="info-box-icon bg-danger elevation-1">
                 <i class="fas fa-bolt"></i>
               </span>
-              <div class="info-box-content"  id="total_power">
-                <span class="info-box-text">Total power in kWh</span>
+              <div class="info-box-content" id="total_power">
+                <span class="info-box-text">{{ _('Total power in kWh') }}</span>
                 <span class="info-box-number">0</span>
                 <span class="description-percentage">
                   <span class="text-success">&euro; 0</span>
                   <small>
-                    in <span>month</span>
-                </small>
+                    {{ _('in') }} <span>{{ _('month') }}</span>
+                  </small>
                 </span>
               </div>
               <!-- /.info-box-content -->
@@ -113,13 +110,13 @@
                 <i class="fas fa-tint"></i>
               </span>
               <div class="info-box-content" id="total_flow">
-                <span class="info-box-text">Total water in L</span>
+                <span class="info-box-text">{{ _('Total water in L') }}</span>
                 <span class="info-box-number">0</span>
                 <span class="description-percentage">
                   <span class="text-success">&euro; 0</span>
                   <small>
-                    in <span>month</span>
-                 </small>
+                    {{ _('in') }} <span>{{ _('month') }}</span>
+                  </small>
                 </span>
               </div>
               <!-- /.info-box-content -->
@@ -137,9 +134,15 @@
             <script type="text/html" id="sensor_template">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title mr-1"><i class="fas fa-fw" data-class="icon"></i> <span data-content="title">...</span> <small class="ml-2 text-muted">Last update: <span class="last_update" data-content="last_update"></span></small></h3>
-                  <small class="badge badge-danger"  data-message="error"></small>
-                  <small class="badge badge-warning" data-message="warning"></small>
+                  <h3 class="card-title mr-1">
+                    <i class="fas fa-fw" data-class="icon"></i>
+                    <span data-content="title">...</span>
+                    <small class="ml-2 text-muted">{{ _('Last update') }}: <span class="last_update" data-content="last_update"></span></small>
+                  </h3>
+                  <small data-template-bind='[
+                  {"attribute": "class", "value": "error", "formatter": "prefixer", "formatOptions": "badge badge-danger "} ]'
+                  >{{ _('error') }}</small>
+                  <small class="badge badge-warning fuckbs-d-none">{{ _('warning') }}</small>
                   <div class="card-tools">
                     <div class="btn-group">
                       <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
@@ -180,7 +183,7 @@
           <div class="col-md-4">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"><i class="fas fa-globe"></i> Enclosures</h3>
+                <h3 class="card-title"><i class="fas fa-globe"></i> {{ _('Enclosures') }}</h3>
                 <div class="card-tools">
                   <div class="btn-group">
                     <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
@@ -189,10 +192,10 @@
                     <div class="dropdown-menu dropdown-menu-right" role="menu">
                       {% if authenticated %}
                       <a href="#" class="dropdown-item" title="Edit enclosures" onclick="load_page('{{ url_for('page', page='enclosures') }}')">
-                        <i class="fas fa-wrench mr-1"></i> Settings
+                        <i class="fas fa-wrench mr-1"></i> {{ _('Settings') }}
                       </a>
                       {% else %}
-                        <a href="{{ url_for('login') }}" class="dropdown-item">Please login to make changes</a>
+                        <a href="{{ url_for('login') }}" class="dropdown-item">{{ _('Please login to make changes') }}</a>
                       {% endif %}
                     </div>
                   </div>
@@ -228,7 +231,7 @@
                   </tr>
 
                   <tr data-class="state.day" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
-                    <td >Day:</td>
+                    <td >{{ _('Day') }}:</td>
                     <td>
                       <span data-template-bind='[
                       {"attribute": "content", "value": "state.day.begin", "formatter": "datetimeformatter", "formatOptions": "LTS"},
@@ -247,7 +250,7 @@
                   </tr>
 
                   <tr data-class="state.night" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
-                    <td >Night:</td>
+                    <td >{{ _('Night') }}:</td>
                     <td>
                       <span data-template-bind='[
                       {"attribute": "content", "value": "state.night.begin", "formatter": "datetimeformatter", "formatOptions": "LTS"},
@@ -266,7 +269,7 @@
                   </tr>
 
                   <tr data-class="state.low.begin" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
-                    <td >Low:</td>
+                    <td >{{ _('Low') }}:</td>
                     <td>
                       <span data-template-bind='[
                       {"attribute": "content", "value": "state.low.begin", "formatter": "datetimeformatter", "formatOptions": "LTS"},
@@ -285,7 +288,7 @@
                   </tr>
 
                   <tr data-class="state.high.begin" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
-                    <td >High:</td>
+                    <td >{{ _('High') }}:</td>
                     <td>
                       <span data-template-bind='[
                       {"attribute": "content", "value": "state.high.begin", "formatter": "datetimeformatter", "formatOptions": "LTS"},
@@ -304,7 +307,7 @@
                   </tr>
 
                   <tr data-class="state.sensors" data-binding-options='{"ignoreUndefined": true, "ignoreNull": true}'>
-                    <td >Current:</td>
+                    <td >{{ _('Current') }}:</td>
                     <td>
                       <span data-template-bind='[
                       {"attribute": "content", "value": "state.sensors.current", "formatter" : "numberformatter", "formatOptions" : "2"},
@@ -375,6 +378,8 @@
 
         setTimeout(function(){
           jQuery.get('{{ url_for("api:enclosure_list") }}',function(data){
+
+
             jQuery.each(data.data,function(counter,enclosure) {
               // Accordion toggle + link
               enclosure.collapse_link = '#enclosure_' + enclosure.id;
@@ -427,7 +432,7 @@
             // Show the data...
             jQuery.each(loaded_sensor_type, function(sensor_type, sensor) {
               sensor.id   = 'avg_' + sensor_type;
-              sensor.name = 'Average ' + sensor_type;
+              sensor.name = '{{ _('Average') }} ' + sensor_type;
 
               jQuery('#sensor_list').loadTemplate(jQuery('#sensor_template'),{
                   icon: template_sensor_type_icon(sensor_type),
@@ -452,8 +457,6 @@
       });
     </script>
   </div>
-  <!-- /.content-wrapper -->
 {% endblock content %}
-<!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
 {% endblock javascripts %}

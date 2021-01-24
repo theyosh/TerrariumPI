@@ -1,64 +1,62 @@
 {% extends "layouts/base-content.html" %}
-{% block title %} Log {% endblock %}
+{% block title %}{{ _('Log') }}{% endblock %}
 {% block options %}
 <ol class="breadcrumb float-sm-right ">
   {% if authenticated %}
-  <li class="breadcrumb-item"><a href="{{ url_for('api:logfile_download') }}"><i class="fas fa-download pt-1 mr-1"></i> Download logfile</a></li>
+  <li class="breadcrumb-item"><a href="{{ url_for('api:logfile_download') }}"><i class="fas fa-download pt-1 mr-1"></i> {{ _('Download logfile') }}</a></li>
   <!-- <li class="breadcrumb-item "><i class="fas fa-wrench pt-1 mr-1"></i> Settings</li> -->
   {% else %}
-    <a href="{{ url_for('login') }}" class="dropdown-item">Please login to make changes</a>
+    <a href="{{ url_for('login') }}" class="dropdown-item">{{ _('Please login to make changes') }}</a>
   {% endif %}
 </ol>
 {% endblock options %}
 
 {% block page_content %}
-     <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row" style="height: 80vh !important;">
-          <div class="col-md-12">
-            <div class="card" style="height: 95%;">
-              <div class="card-header">
-                <h3 class="card-title"><i class="fas fa-file-alt"></i> System logging
-                  <small class="mr-2 lines_count">...</small>
-                  <small class="mr-2 last_update">...</small>
-                </h3>
-                <div class="card-tools form-inline">
-                  <label class="form-check-label mr-4">
-                    Filters:
-                  </label>
-                  <div class="input-group mr-3">
-                    <div class="form-group">
-                      <input type="text" class="form-control form-control-sm" id="text_filter" placeholder="Enter text here">
-                      <i class="form-control-clear fas fa-times" id="clear_text_filter" style="display: none;"></i>
-                    </div>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="error_filter" value="error">
-                    <label class="form-check-label" for="error_filter">errors</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="warning_filter" value="warning">
-                    <label class="form-check-label" for="warning_filter">warnings</label>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row" style="height: 80vh !important;">
+        <div class="col-md-12">
+          <div class="card" style="height: 95%;">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-file-alt"></i> {{ _('System logging') }}
+                <small class="mr-2 lines_count">...</small>
+                <small class="mr-2 last_update">...</small>
+              </h3>
+              <div class="card-tools form-inline">
+                <label class="form-check-label mr-4">
+                  {{ _('Filters') }}:
+                </label>
+                <div class="input-group mr-3">
+                  <div class="form-group">
+                    <input type="text" class="form-control form-control-sm" id="text_filter" placeholder="Enter text here">
+                    <i class="form-control-clear fas fa-times" id="clear_text_filter" style="display: none;"></i>
                   </div>
                 </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="error_filter" value="error">
+                  <label class="form-check-label" for="error_filter">{{ _('errors') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="warning_filter" value="warning">
+                  <label class="form-check-label" for="warning_filter">{{ _('warnings') }}</label>
+                </div>
               </div>
-              <div class="card-body">
-                <textarea class="form-control text-monospace" style="height: 99%; font-size: 0.8rem" readonly="readonly"></textarea>
-                <textarea class="d-none" id="logdata"></textarea>
-              </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
+            <div class="card-body">
+              <textarea class="form-control text-monospace" style="height: 99%; font-size: 0.8rem" readonly="readonly"></textarea>
+              <textarea class="d-none" id="logdata"></textarea>
+            </div>
+            <!-- /.card-body -->
           </div>
-          <!-- /.col -->
+          <!-- /.card -->
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  <!-- </div> -->
-  <!-- /.content-wrapper -->
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
   <style>
     ::-ms-clear {
       display: none;

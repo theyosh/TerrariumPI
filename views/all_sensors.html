@@ -1,6 +1,5 @@
 {% extends "layouts/base-content.html" %}
-{% set sensor_type = template|lower|replace("sensors_", "") %}
-{% block title %} {{ page_title }} {% endblock %}
+{% block title %}{{ _('All sensors') }}{% endblock %}
 {% block page_content %}
     <!-- Main content -->
     <section class="content">
@@ -12,10 +11,18 @@
             <div class="col-3">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title mr-1"><i class="fas fa-fw" data-class="icon"></i> <span data-content="title">...</span> <small class="last_update" data-content="last_update">...</small></h3>
-                  <small class="badge badge-danger"  data-message="error"></small>
-                  <small class="badge badge-warning" data-message="warning"></small>
-                  <small class="badge badge-primary" data-content-text="badge_message"></small>
+                  <h3 class="card-title mr-1">
+                    <i class="fas fa-fw" data-class="icon"></i>
+                    <span data-content="name">...</span>
+                    <small class="last_update" data-template-bind='[
+                      {"attribute": "content", "value": "last_update", "formatter": "datetimeformatter", "formatOptions": "LLLL"} ]'
+                    >...</small>
+                  </h3>
+                  <small class="badge badge-danger"  data-message="{{ _('error') }}"></small>
+                  <small class="badge badge-warning" data-message="{{ _('warning') }}"></small>
+                  <small class="badge badge-primary" data-message="{{ _('Exclude_avg') }}"></small>
+
+                  <!-- <small class="badge badge-primary" data-content-text="badge_message"></small> -->
                   <div class="card-tools">
                     <div class="btn-group">
                       <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
@@ -23,17 +30,33 @@
                       </button>
                       <div class="dropdown-menu dropdown-menu-right" role="menu">
                         {% if authenticated %}
-                        <a data-href="sensor_edit_link" class="dropdown-item" data-title="settings_title" data-id="senor_id" data-toggle="modal" data-target="#modal-sensor-setup">
-                          <i class="fas fa-wrench mr-1"></i> Settings
+<!--
+                        <i class="fas fa-wrench mr-1 edit_area" data-template-bind='[
+                        {"attribute": "id", "value": "id" },
+                        {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Edit area') }} "} ]'
+                       ></i>
+ -->
+
+
+                        <a data-href="sensor_edit_link" class="dropdown-item" data-toggle="modal" data-target="#modal-sensor-setup" data-template-bind='[
+                        {"attribute": "id", "value": "id" },
+                        {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Edit sensor') }} "} ]'>
+
+
+
+
+
+
+                          <i class="fas fa-wrench mr-1"></i> {{ _('Settings') }}
                         </a>
                         <a data-href="sensor_ignore_link" class="dropdown-item" data-title="ignore_title" data-action="PUT" data-id="senor_id" data-field="value" data-toggle="modal" data-target="#modal-confirm">
-                          <i class="fas fa-ban mr-1"></i> Ignore
+                          <i class="fas fa-ban mr-1"></i> {{ _('Ignore') }}
                         </a>
                         <a data-href="sensor_delete_link" class="dropdown-item" data-title="delete_title" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm">
-                          <i class="fas fa-trash-alt mr-1"></i> Delete
+                          <i class="fas fa-trash-alt mr-1"></i> {{ _('Delete') }}
                         </a>
                         {% else %}
-                          <a href="{{ url_for('login') }}" class="dropdown-item">Please login to make changes</a>
+                          <a href="{{ url_for('login') }}" class="dropdown-item">{{ _('Login to make changes') }}</a>
                         {% endif %}
                       </div>
                     </div>
@@ -73,25 +96,34 @@ jQuery(function () {
     data.sort((a, b) => a.name.localeCompare(b.name));
 
     jQuery.each(data,function(counter, sensor) {
-      $('#sensor_list').loadTemplate($('#sensor_template'),{
+      console.log(sensor);
 
-        icon: template_sensor_type_icon(sensor.type),
-        title: sensor.name,
-        last_update: moment().format('LLLL'),
-        badge_message: (sensor.exclude_avg ? 'Excl. avg' : ''),
+      sensor.icon  = template_sensor_type_icon(sensor.type);
+      sensor.gauge = 'gauge_' + sensor.id;
 
-        sensor_edit_link:   '{{ url_for('api:sensor_detail', sensor='_id_') }}'.replace('_id_',sensor.id),
-        sensor_ignore_link: '{{ url_for('api:setting_update', setting='exclude_ids') }}',
-        sensor_delete_link: '{{ url_for('api:sensor_delete', sensor='_id_') }}'.replace('_id_',sensor.id),
+      $('#sensor_list').loadTemplate($('#sensor_template'), sensor, {append: true});
 
-        settings_title: 'Edit sensor: ' + sensor.name,
-        ignore_title: 'Ignore sensor: ' + sensor.name,
-        delete_title: 'Delete sensor: ' + sensor.name,
 
-        senor_id: sensor.id,
-        gauge: 'gauge_' + sensor.id,
-        graph: 'graph_' + sensor.id
-      },{ append: true});
+
+      // {
+
+      //   icon: template_sensor_type_icon(sensor.type),
+      //   //title: sensor.name,
+      //   //last_update: moment().format('LLLL'),
+      //   //badge_message: (sensor.exclude_avg ? '{{ _('Excl. avg') }}' : ''),
+
+      //   sensor_edit_link:   '{{ url_for('api:sensor_detail', sensor='_id_') }}'.replace('_id_',sensor.id),
+      //   sensor_ignore_link: '{{ url_for('api:setting_update', setting='exclude_ids') }}',
+      //   sensor_delete_link: '{{ url_for('api:sensor_delete', sensor='_id_') }}'.replace('_id_',sensor.id),
+
+      //   //settings_title: '{{ _('Edit sensor') }} ' + sensor.name,
+      //   //ignore_title: '{{ _('Ignore sensor') }} ' + sensor.name,
+      //   //delete_title: '{{ _('Delete sensor') }} ' + sensor.name,
+
+      //   //senor_id: sensor.id,
+      //   gauge: 'gauge_' + sensor.id,
+      //   graph: 'graph_' + sensor.id
+      // },{ append: true});
 
       new sensor_gauge('gauge_' + sensor.id,
                        sensor.type,

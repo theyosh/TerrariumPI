@@ -4,6 +4,9 @@ __version__ = '4.0.0'
 from gevent import monkey
 monkey.patch_all()
 
+import gettext
+gettext.install('terrariumpi', 'locales/')
+
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 

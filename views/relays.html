@@ -1,5 +1,5 @@
 {% extends "layouts/base-content.html" %}
-{% block title %} Relays {% endblock %}
+{% block title %}{{ _('Relays') }}{% endblock %}
 {% block page_content %}
     <!-- Main content -->
     <section class="content">
@@ -11,10 +11,20 @@
             <script type="text/html" id="relay_template">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title mr-1"><i class="fas fa-fw" data-class="icon"></i> <span data-content="title">...</span> <small class="ml-2 text-muted">Last update: <span class="last_update" data-content="last_update"></span></small></h3>
-                  <small class="badge badge-danger"  data-message="error"></small>
-                  <small class="badge badge-warning" data-message="warning"></small>
-                  <small class="badge badge-primary" data-content="badge_message"></small>
+                  <h3 class="card-title mr-1">
+                    <i class="fas fa-fw fa-bolt"></i>
+                    <span data-content="name">...</span>
+                    <small class="ml-2 text-muted">{{ _('Last update') }}: <span class="last_update"  data-template-bind='[
+                      {"attribute": "content", "value": "last_update", "formatter": "datetimeformatter", "formatOptions": "LLLL"} ]'
+                    ></span></small>
+                  </h3>
+                  <small data-template-bind='[
+                      {"attribute": "class", "value": "error", "formatter": "prefixer", "formatOptions": "badge badge-danger "} ]'
+                  >{{ _('error') }}</small>
+                  <small class="badge badge-warning fuckbs-d-none">{{ _('warning') }}</small>
+                  <small class="badge badge-primary" data-template-bind='[
+                  {"attribute": "class", "value": "manual", "formatter": "prefixer", "formatOptions": "badge badge-primary "} ]'
+                  >{{ _('Manual mode') }}</small>
                   <div class="card-tools">
                     <div class="btn-group">
                       <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
@@ -29,23 +39,32 @@
                       </button>
                       <div class="dropdown-menu dropdown-menu-right" role="menu">
                         {% if authenticated %}
-                        <a data-href="relay_edit_link" class="dropdown-item" data-title="settings_title" data-id="relay_id" data-toggle="modal" data-target="#modal-relay-setup">
-                          <i class="fas fa-wrench mr-1"></i> Settings
+                        <a data-href="export_link" data-id="id" class="dropdown-item export_link" data-template-bind='[
+                        {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Export relay') }} "} ]'>
+                        <i class="fas fa-file-export mr-1"></i> {{ _('Export') }}
                         </a>
-                        <a data-href="relay_replace_hardware_link" class="dropdown-item" data-title="replace_title" data-id="relay_id">
-                          <i class="fas fa-tools mr-1"></i> Replace hardware
+                        <a data-href="edit_link" data-id="id" class="dropdown-item" data-toggle="modal" data-target="#modal-relay-setup" data-template-bind='[
+                        {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Edit relay') }} "} ]'>
+                          <i class="fas fa-wrench mr-1"></i> {{ _('Settings') }}
                         </a>
-                        <a data-href="relay_manual_mode_link" class="dropdown-item" data-title="manual_title" data-action="POST" data-id="relay_id" data-field="value" data-toggle="modal" data-target="#modal-confirm">
-                          <i class="fas fa-hand-paper mr-1"></i> Manual mode
+                        <a href="#replace_hardware" data-id="id" class="dropdown-item" data-template-bind='[
+                        {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Replace hardware') }} "} ]'>
+                          <i class="fas fa-tools mr-1"></i> {{ _('Replace hardware') }}
                         </a>
-                        <a data-href="relay_ignore_link" class="dropdown-item" data-title="ignore_title" data-action="PUT" data-id="relay_id" data-field="value" data-toggle="modal" data-target="#modal-confirm">
-                          <i class="fas fa-ban mr-1"></i> Ignore
+                        <a data-href="manual_mode_link" data-id="id" class="dropdown-item" data-action="POST" data-field="value" data-toggle="modal" data-target="#modal-confirm" data-template-bind='[
+                        {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Manual mode relay') }} "} ]'>
+                          <i class="fas fa-hand-paper mr-1"></i> {{ _('Manual mode') }}
                         </a>
-                        <a data-href="relay_delete_link" class="dropdown-item" data-title="delete_title" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm">
-                          <i class="fas fa-trash-alt mr-1"></i> Delete
+                        <a data-href="ignore_link" data-id="id" class="dropdown-item" data-action="PUT" data-field="value" data-toggle="modal" data-target="#modal-confirm" data-template-bind='[
+                        {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Ingore relay') }} "} ]'>
+                          <i class="fas fa-ban mr-1"></i> {{ _('Ignore') }}
+                        </a>
+                        <a data-href="delete_link" data-id="id" class="dropdown-item" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm" data-template-bind='[
+                        {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Delete relay') }} "} ]'>
+                          <i class="fas fa-trash-alt mr-1"></i> {{ _('Delete') }}
                         </a>
                         {% else %}
-                          <a href="{{ url_for('login') }}" class="dropdown-item">Please login to make changes</a>
+                          <a href="{{ url_for('login') }}" class="dropdown-item">{{ _('Login to make changes') }}</a>
                         {% endif %}
                       </div>
                     </div>
@@ -62,9 +81,9 @@
                   <div class="d-md-flex">
                     <div class="col-12 col-sm-12 col-md-3 col-lg-2 text-center">
                       <button type="button" data-title="toggle_title" class="btn btn-default mt-2 mb-2 text-secondary" data-id="relay" disabled="disabled">
-                        <i class="fas fa-power-off" data-class="power" style="font-size: 9rem;"></i>
+                        <i class="fas fa-power-off" data-class="powered" style="font-size: 9rem;"></i>
                       </button>
-                      <input type="text" class="dial" value="0" data-width="170" data-height="170" data-value="current" data-id="dimmer" data-min="0" data-max="100" data-angleArc="290" data-angleOffset="35">
+                      <input type="text" class="dial" value="0" data-width="170" data-height="170" data-value="value" data-id="dimmer" data-min="0" data-max="100" data-angleArc="290" data-angleOffset="35">
                     </div>
                     <div class="col-12 col-sm-12 col-md-9 col-lg-10">
                       <div class="overlay">
@@ -94,38 +113,62 @@
       data.sort((a, b) => a.name.localeCompare(b.name));
 
       jQuery.each(data,function(counter, relay) {
-        $('#relay_list').loadTemplate($('#relay_template'),{
+        relay.export_link      = '{{ url_for('api:relay_history',  relay='_id_', action="export") }}'.replace('_id_',relay.id);
+        relay.edit_link        = '{{ url_for('api:relay_detail',   relay='_id_') }}'.replace('_id_',relay.id);
+        relay.manual_mode_link = '{{ url_for('api:relay_manual',   relay='_id_') }}'.replace('_id_',relay.id);
+        relay.delete_link      = '{{ url_for('api:relay_delete',   relay='_id_') }}'.replace('_id_',relay.id);
+        relay.ignore_link      = '{{ url_for('api:setting_update', setting='exclude_ids') }}';
 
-          icon: 'fa-bolt',
-          title: relay.name,
-          last_update: moment().format('LLL'),
+        relay.toggle_title     = {% if authenticated %}'{{ _('Toggle relay') }} ' + relay.name{% else %}'{{ _('Please login to make changes') }}'{% endif %};
 
-          //error_message : (relay.error ? 'error' : ''),
-          badge_message: (relay.exclude_avg ? 'Excl. avg' : (relay.manual_mode ? 'Manual mode' : '')),
-          power: (relay.value > 0 ? 'text-success' : ''),
-          current: relay.value,
+        relay.powered = (relay.value > 0 ? 'text-success' : '');
 
-          relay_edit_link:        '{{ url_for('api:relay_detail', relay='_id_') }}'.replace('_id_',relay.id),
-          relay_ignore_link:      '{{ url_for('api:setting_update', setting='exclude_ids') }}',
-          relay_delete_link:      '{{ url_for('api:relay_delete', relay='_id_') }}'.replace('_id_',relay.id),
-          relay_manual_mode_link: '{{ url_for('api:relay_manual', relay='_id_') }}'.replace('_id_',relay.id),
-          relay_replace_hardware_link : '#replace_hardware',
+        relay.error  = (relay.value != null ? 'fuckbs-d-none' : '');
+        relay.manual = (!relay.manual_mode  ? 'fuckbs-d-none' : '');
 
-          settings_title: 'Edit relay: ' + relay.name,
-          ignore_title: 'Ignore relay: ' + relay.name,
-          delete_title: 'Delete relay: ' + relay.name,
-          toggle_title: {% if authenticated %}'Toggle relay ' + relay.name{% else %}'Please login to make changes'{% endif %},
-          manual_title: 'Toggle manual mode',
-          replace_title: 'Replace hardware',
+        relay.relay  = (!relay.dimmer ? 'relay_' + relay.id : null);
+        relay.dimmer = (relay.dimmer  ? 'relay_' + relay.id : null);
+        relay.graph  = 'graph_' + relay.id;
 
-          relay_id: relay.id,
-          relay:  (!relay.dimmer ? 'relay_' + relay.id : null),
-          dimmer: (relay.dimmer  ? 'relay_' + relay.id : null),
+        $('#relay_list').loadTemplate($('#relay_template'), relay, {append: true, bindingOptions: {ignoreNull : true}});
 
-          graph: 'graph_' + relay.id
-        },{ append: true, bindingOptions: {ignoreNull : true}});
 
-        new graph('graph_' + relay.id, '{{ url_for("api:relay_history", relay="_id_") }}'.replace('_id_',relay.id), relay.hardware);
+
+
+
+
+        // $('#relay_list').loadTemplate($('#relay_template'),{
+
+        //   icon: 'fa-bolt',
+        //   title: relay.name,
+        //   last_update: moment().format('LLL'),
+
+        //   //error_message : (relay.error ? 'error' : ''),
+        //   badge_message: (relay.exclude_avg ? 'Excl. avg' : (relay.manual_mode ? 'Manual mode' : '')),
+        //   power: (relay.value > 0 ? 'text-success' : ''),
+        //   current: relay.value,
+
+        //   relay_edit_link:        '{{ url_for('api:relay_detail', relay='_id_') }}'.replace('_id_',relay.id),
+        //   relay_ignore_link:      '{{ url_for('api:setting_update', setting='exclude_ids') }}',
+        //   relay_delete_link:      '{{ url_for('api:relay_delete', relay='_id_') }}'.replace('_id_',relay.id),
+        //   relay_manual_mode_link: '{{ url_for('api:relay_manual', relay='_id_') }}'.replace('_id_',relay.id),
+        //   relay_replace_hardware_link : '#replace_hardware',
+
+        //   settings_title: 'Edit relay: ' + relay.name,
+        //   ignore_title: 'Ignore relay: ' + relay.name,
+        //   delete_title: 'Delete relay: ' + relay.name,
+        //   toggle_title: {% if authenticated %}'Toggle relay ' + relay.name{% else %}'Please login to make changes'{% endif %},
+        //   manual_title: 'Toggle manual mode',
+        //   replace_title: 'Replace hardware',
+
+        //   relay_id: relay.id,
+        //   relay:  (!relay.dimmer ? 'relay_' + relay.id : null),
+        //   dimmer: (relay.dimmer  ? 'relay_' + relay.id : null),
+
+        //   graph: 'graph_' + relay.id
+        // },{ append: true, bindingOptions: {ignoreNull : true}});
+
+        new graph('graph_' + relay.id, '{{ url_for("api:relay_history", action="history", relay="_id_") }}'.replace('_id_',relay.id), relay.hardware);
       });
 
       jQuery(".dial").knob({
@@ -141,9 +184,9 @@
 
           if (old_value != value) {
             jQuery.post(toggle_url,function(data){
-            //console.log('Toggle relay',data)
+              toastr.success('{{ _('Changed state of relay') }}: ' + data.name, '{{ _('OK') }}')
             }).fail(function(response) {
-              toastr['error']('Could not change the relay state: ' + response.message, 'Change error');
+              toastr.error('{{ _('Could not change the relay state of') }}: ' + response.message, '{{ _('Change error') }}')
             });
           }
         },
@@ -156,9 +199,9 @@
       jQuery('button[id^="relay_"]').off('click').on('click',function() {
         let toggle_url = '{{ url_for("api:relay_action", relay="_id_", action="toggle") }}'.replace('_id_',this.id.replace('relay_',''));
         jQuery.post(toggle_url,function(data){
-
+          toastr.success('{{ _('Changed state of relay') }}: ' + data.name, '{{ _('OK') }}')
         }).fail(function(response) {
-          toastr['error']('Could not change the relay state: ' + response.message, 'Change error');
+          toastr.error('{{ _('Could not change the relay state of') }}: ' + response.message, '{{ _('Change error') }}')
         });
       }).prop('disabled','');
       {% endif %}
