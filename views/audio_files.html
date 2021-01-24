@@ -1,5 +1,5 @@
 {% extends "layouts/base-content.html" %}
-{% block title %} Audio files {% endblock %}
+{% block title %}{{ _('Audio files') }}{% endblock %}
 {% block page_content %}
   <!-- Main content -->
   <section class="content">
@@ -8,7 +8,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title"><i class="fas fa-file-audio" data-class="icon"></i> Audio files</h3>
+              <h3 class="card-title"><i class="fas fa-file-audio" data-class="icon"></i> {{ _('Audio files') }}</h3>
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                   <i class="fas fa-minus"></i>
@@ -23,33 +23,33 @@
               <table id="audio_files" class="table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Duration</th>
-                  <th>Filename</th>
-                  <th>Size</th>
-                  <th>Action</th>
+                  <th>{{ _('Name') }}</th>
+                  <th>{{ _('Duration') }}</th>
+                  <th>{{ _('Filename') }}</th>
+                  <th>{{ _('Size') }}</th>
+                  <th>{{ _('Action') }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>Name</th>
-                    <th>Duration</th>
-                    <th>Filename</th>
-                    <th>Size</th>
-                    <th>Action</th>
+                    <th>{{ _('Name') }}</th>
+                    <th>{{ _('Duration') }}</th>
+                    <th>{{ _('Filename') }}</th>
+                    <th>{{ _('Size') }}</th>
+                    <th>{{ _('Action') }}</th>
                   </tr>
                   </tfoot>
               </table>
-              <div class="input-group mt-3 {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="Please login to make changes"{% endif %}>
+              <div class="input-group mt-3 {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Please login to make changes') }}"{% endif %}>
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="upload_new_file_label">Upload new audio file</span>
+                  <span class="input-group-text" id="upload_new_file_label">{{ _('Upload new audio file') }}</span>
                 </div>
                 <div class="custom-file">
                   <form id="audio_upload" method="post" action="{{ url_for('api:audiofile_add') }}" enctype="multipart/form-data" >
                     <input type="file" name="audiofiles" multiple="true" class="custom-file-input" id="upload_new_file" aria-describedby="upload_new_file_label" {% if not authenticated %}disabled="disabled"{% endif %}>
-                    <label class="custom-file-label" for="upload_new_file">Choose file</label>
+                    <label class="custom-file-label" for="upload_new_file">{{ _('Choose file') }}</label>
                   </form>
                 </div>
               </div>
@@ -85,7 +85,7 @@
               let audio_player = jQuery('<audio>').prop({'controls':true, 'preload' : 'none'}).addClass('d-none').append(jQuery('<source>').attr('src','/media/' + data[i].filename));
 
               {% if authenticated %}
-              let delete_icon = jQuery('<a>').attr({'href':'{{ url_for("api:audiofile_delete", audiofile="_id_") }}'.replace('_id_',data[i].id) , 'title' : 'Delete audio file ' + data[i].name, 'data-action':'DELETE','data-toggle':'modal','data-target':'#modal-confirm'}).append(jQuery('<i>').addClass('fas fa-trash-alt'));
+              let delete_icon = jQuery('<a>').attr({'href':'{{ url_for("api:audiofile_delete", audiofile="_id_") }}'.replace('_id_',data[i].id) , 'title' : '{{ _('Delete audio file') }} ' + data[i].name, 'data-action':'DELETE','data-toggle':'modal','data-target':'#modal-confirm'}).append(jQuery('<i>').addClass('fas fa-trash-alt'));
               {% endif %}
 
               return_data.push({
@@ -140,7 +140,7 @@
           processData: false,
           contentType: false,
           success: function (result) {
-            toastr['success']('Audio files are uploaded.', 'OK');
+            toastr['success']('{{ _('Audio files are uploaded.') }}', '{{ _('OK') }}');
 
             //  toastr['succes']('Audio files are uploaded.','OK')
               load_page();

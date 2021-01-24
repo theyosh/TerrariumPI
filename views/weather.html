@@ -1,12 +1,12 @@
 {% extends "layouts/base-content.html" %}
-{% block title %} Weather {% endblock %}
+{% block title %}{{ _('Weather') }}{% endblock %}
 {% block options %}
 <ol class="breadcrumb float-sm-right ">
-  <li class="breadcrumb-item" id="weather_credits">Weather source credits</li>
+  <li class="breadcrumb-item" id="weather_credits">{{ _('Weather source credits') }}</li>
   {% if authenticated %}
-  <li class="breadcrumb-item "><a href="{{ url_for('api:setting_detail', setting='weather_source') }}" data-toggle="modal" data-target="#modal-weather-setup"><i class="fas fa-wrench pt-1 mr-1"></i> Settings</a></li>
+  <li class="breadcrumb-item "><a href="{{ url_for('api:setting_detail', setting='weather_source') }}" data-toggle="modal" data-target="#modal-weather-setup"><i class="fas fa-wrench pt-1 mr-1"></i> {{ _('Settings') }}</a></li>
   {% else %}
-  <li class="breadcrumb-item "><a href="{{ url_for('login') }}"><i class="fas fa-wrench pt-1 mr-1"></i> Please login to make changes</a></li>
+  <li class="breadcrumb-item "><a href="{{ url_for('login') }}"><i class="fas fa-wrench pt-1 mr-1"></i> {{ _('Please login to make changes') }}</a></li>
   {% endif %}
 </ol>
 {% endblock options %}
@@ -19,7 +19,7 @@
           <div class="col-4 col-md-4 col-sm-12" >
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Current</h3>
+                <h3 class="card-title">{{ _('Current') }}</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
@@ -33,20 +33,20 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-12">
-                    <strong id="weather_today">Today</strong> in <strong id="weather_temperature_indicator">°C</strong>
+                    <strong id="weather_today">{{ _('Today') }}</strong> {{ _('in') }} <strong id="weather_temperature_indicator">°C</strong>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-3" id="weather_image" style="background-image: url('/static/assets/img/weather_icons/climacon.svg');">
                   </div>
                   <div class="col-7">
-                    <h3 id="weather_location">Location</h3>
-                    <h4 id="weather_type">Weather type</h4>
+                    <h3 id="weather_location">{{ _('Location') }}</h3>
+                    <h4 id="weather_type">{{ _('Weather type') }}</h4>
                   </div>
                   <div class="col-2 text-right text-nowrap">
-                    <i class="fas fa-sun"></i> <span id="weather_sunrise">Rise</span><br />
-                    <i class="fas fa-moon"></i> <span id="weather_sunset">Set</span><br />
-                    <h5 class="mt-4" id="weather_temp">Temp.</h5>
+                    <i class="fas fa-sun"></i> <span id="weather_sunrise">{{ _('Rise') }}</span><br />
+                    <i class="fas fa-moon"></i> <span id="weather_sunset">{{ _('Set') }}</span><br />
+                    <h5 class="mt-4" id="weather_temp">{{ _('Temp.') }}</h5>
                   </div>
                 </div>
                 <div class="row" id="weather_days">
@@ -71,7 +71,7 @@
           <div class="col-8 col-md-8 col-sm-12" >
             <div class="card" style="position: absolute;height: 96%;width: 97%">
               <div class="card-header">
-                <h3 class="card-title">Forecast</h3>
+                <h3 class="card-title">{{ _('Forecast') }}</h3>
                 <div class="card-tools">
                   <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-wrench"></i>
@@ -106,25 +106,25 @@
         <div class="modal-content">
           <form class="form-horizontal" action="{{ url_for('api:setting_add') }}" method="post">
             <div class="modal-header">
-              <h4 class="modal-title"><i class="fas fa-cloud-sun" ></i> Weather settings</h4>
+              <h4 class="modal-title"><i class="fas fa-cloud-sun" ></i> {{ _('Weather settings') }}</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
               <input type="hidden" name="id" id="setting_name" value="weather_source">
-              <p>Enter the online source url for your weather information. Valid urls are shown below.</p>
+              <p>{{ _('Enter the online source url for your weather information. Valid urls are shown below.') }}</p>
               <p id="weather_setup_info"></p>
               <div class="form-group row">
-                <label for="weahter_source_url" class="col-sm-2 col-form-label">Source url</label>
+                <label for="weahter_source_url" class="col-sm-2 col-form-label">{{ _('Source url') }}</label>
                 <div class="col-sm-10">
-                  <input type="url" class="form-control" id="weahter_source_url" name="value" placeholder="Weather data source url">
+                  <input type="url" class="form-control" id="weahter_source_url" name="value" placeholder="{{ _('Weather data source url') }}">
                 </div>
               </div>
             </div>
             <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">{{ _('Close') }}</button>
+              <button type="submit" class="btn btn-primary">{{ _('Save') }}</button>
             </div>
           </form>
         </div>
@@ -205,11 +205,11 @@
               jQuery('#modal-weather-setup').on('hidden.bs.modal',function(){
                 load_page();
               });
-              toastr["success"]("Settings are saved", "Save ok");
+              toastr["success"]("{{ _('Settings are saved') }}", "{{ _('Save ok') }}");
               jQuery('#modal-weather-setup').modal('hide');
             },
             error: function (e) {
-              toastr["error"]("Settings could not be saved<br />" + e, "Save Error")
+              toastr["error"]("{{ _('Settings could not be saved') }}<br />" + e, "{{ _('Save Error') }}")
             }
           });
         });

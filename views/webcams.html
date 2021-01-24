@@ -1,5 +1,5 @@
 {% extends "layouts/base-content.html" %}
-{% block title %} Webcams {% endblock %}
+{% block title %}{{ _('Webcams') }}{% endblock %}
 {% block page_content %}
     <!-- Main content -->
     <section class="content">
@@ -9,7 +9,7 @@
             <div class="col-12 col-md-6 col-sm-6 col-lg-4" >
               <div class="card" data-id="player_id">
                 <div class="card-header">
-                  <h3 class="card-title mr-1"><i class="fas fa-fw" data-class="icon"></i> <span data-content="title">...</span> <small class="ml-2 text-muted">Last update: <span class="last_update" data-content="last_update"></span></small></h3>
+                  <h3 class="card-title mr-1"><i class="fas fa-fw" data-class="icon"></i> <span data-content="title">...</span> <small class="ml-2 text-muted">{{ _('Last update') }}: <span class="last_update" data-content="last_update"></span></small></h3>
                   <div class="card-tools">
                     <div class="btn-group">
                       <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
@@ -18,16 +18,16 @@
                       <div class="dropdown-menu dropdown-menu-right" role="menu">
                         {% if authenticated %}
                         <a data-href="webcam_edit_link" class="dropdown-item" data-title="settings_title" data-id="webcam_id" data-toggle="modal" data-target="#modal-webcam-setup">
-                          <i class="fas fa-wrench mr-1"></i> Settings
+                          <i class="fas fa-wrench mr-1"></i> {{ _('Settings') }}
                         </a>
                         <a data-href="webcam_ignore_link" class="dropdown-item" data-title="ignore_title" data-action="PUT" data-id="webcam_id" data-field="value" data-toggle="modal" data-target="#modal-confirm">
-                          <i class="fas fa-ban mr-1"></i> Ignore
+                          <i class="fas fa-ban mr-1"></i> {{ _('Ignore') }}
                         </a>
                         <a data-href="webcam_delete_link" class="dropdown-item" data-title="delete_title" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm">
-                          <i class="fas fa-trash-alt mr-1"></i> Delete
+                          <i class="fas fa-trash-alt mr-1"></i> {{ _('Delete') }}
                         </a>
                         {% else %}
-                          <a href="{{ url_for('login') }}" class="dropdown-item">Please login to make changes</a>
+                          <a href="{{ url_for('login') }}" class="dropdown-item">{{ _('Please login to make changes') }}</a>
                         {% endif %}
                       </div>
                     </div>
@@ -71,9 +71,9 @@
               webcam_ignore_link: '{{ url_for('api:setting_update', setting='exclude_ids') }}',
               webcam_delete_link: '{{ url_for('api:webcam_delete', webcam='_id_') }}'.replace('_id_',webcam.id),
 
-              settings_title: 'Edit webcam: ' + webcam.name,
-              ignore_title: 'Ignore webcam: ' + webcam.name,
-              delete_title: 'Delete webcam: ' + webcam.name,
+              settings_title: '{{ _('Edit webcam') }} ' + webcam.name,
+              ignore_title: '{{ _('Ignore webcam') }} ' + webcam.name,
+              delete_title: '{{ _('Delete webcam') }} ' + webcam.name,
 
               webcam_id: webcam.id,
               player_id: 'webcam_' +  webcam.id,

@@ -16,11 +16,11 @@
           <span class="badge badge-primary navbar-badge"></span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header"><span>0</span> Upcoming events</span>
+          <span class="dropdown-item dropdown-header"><span>0</span> {{ _('Upcoming events') }}</span>
           <div class="dropdown-divider"></div>
           <div class="events"></div>
           <div class="dropdown-divider"></div>
-          <a href="{{ url_for('page', page='calendar')}}" class="dropdown-item dropdown-footer" title="Open calender page">See All Events</a>
+          <a href="{{ url_for('page', page='calendar')}}" class="dropdown-item dropdown-footer" title="{{ _('Open calender page') }}">{{ _('See All Events') }}</a>
         </div>
       </li>
 

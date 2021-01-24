@@ -1,82 +1,99 @@
 {% extends "layouts/base-content.html" %}
-{% block title %} Buttons {% endblock %}
+{% block title %}{{ _('Buttons') }}{% endblock %}
 {% block page_content %}
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <!-- Main row -->
-        <div class="row">
-          <!-- Left col -->
-          <div class="col" id="button_list">
-            <script type="text/html" id="button_template">
-              <div class="card">
-                <div class="card-header">
-                  <h3 class="card-title mr-1"><i class="fas fa-fw" data-class="icon"></i> <span data-content="title">...</span> <small class="ml-2 text-muted">Last update: <span class="last_update" data-content="last_update"></span></small></h3>
-                  <small class="badge badge-danger"></small>
-                  <small class="badge badge-warning"></small>
-                  <small class="badge badge-primary"></small>
-                  <div class="card-tools">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-                        <i class="fas fa-calendar-alt"></i>
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-right" role="menu">
-                      </div>
-                    </div>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-                        <i class="fas fa-wrench"></i>
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-right" role="menu">
-                        {% if authenticated %}
-                        <a data-href="button_edit_link" class="dropdown-item" data-title="settings_title" data-id="button_id" data-toggle="modal" data-target="#modal-button-setup">
-                          <i class="fas fa-wrench mr-1"></i> Settings
-                        </a>
-                        <a data-href="button_ignore_link" class="dropdown-item" data-title="ignore_title" data-action="PUT" data-id="button_id" data-field="value" data-toggle="modal" data-target="#modal-confirm">
-                          <i class="fas fa-ban mr-1"></i> Ignore
-                        </a>
-                        <a data-href="button_delete_link" class="dropdown-item" data-title="delete_title" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm">
-                          <i class="fas fa-trash-alt mr-1"></i> Delete
-                        </a>
-                        {% else %}
-                          <a href="{{ url_for('login') }}" class="dropdown-item">Please login to make changes</a>
-                        {% endif %}
-                      </div>
-                    </div>
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                      <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                      <i class="fas fa-times"></i>
-                    </button>
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <!-- Main row -->
+    <div class="row">
+      <!-- Left col -->
+      <div class="col" id="button_list">
+        <script type="text/html" id="button_template">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title mr-1">
+                <i class="fas fa-fw fa-thumbtack" ></i>
+                <span data-content="name">...</span>
+                <small class="ml-2 text-muted">{{ _('Last update') }}: <span class="last_update"  data-template-bind='[
+                  {"attribute": "content", "value": "last_update", "formatter": "datetimeformatter", "formatOptions": "LLLL"} ]'
+                ></span></small>
+              </h3>
+              <small data-template-bind='[
+                {"attribute": "class", "value": "error", "formatter": "prefixer", "formatOptions": "badge badge-danger "} ]'
+              >{{ _('error') }}</small>
+              <small class="badge badge-warning fuckbs-d-none">{{ _('warning') }}</small>
+              <div class="card-tools">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-calendar-alt"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right" role="menu">
                   </div>
                 </div>
-                <!-- /.card-header -->
-                <div class="card-body p-0">
-                  <div class="d-md-flex">
-                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 text-center">
-                      <h1 class="display-1 pt-3" style="font-size: 8rem;"><i class="fas" data-id="button"></i></h1>
-                    </div><!-- /.card-pane-right -->
-                    <div class="col-12 col-sm-12 col-md-9 col-lg-10 pt-2">
-                      <div class="overlay">
-                        <i class="fas fa-3x fa-sync-alt fa-spin"></i>
-                      </div>
-                      <canvas data-id="graph" class="graph"></canvas>
-                    </div>
-                  </div> <!-- /.d-md-flex -->
+                <div class="btn-group">
+                  <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-wrench"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right" role="menu">
+                    {% if authenticated %}
+                    <a data-href="export_link" data-id="id" class="dropdown-item export_link" data-template-bind='[
+                    {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Export button') }} "} ]'>
+                    <i class="fas fa-file-export mr-1"></i> {{ _('Export') }}
+                    </a>
+                    <a data-href="edit_link" class="dropdown-item" data-toggle="modal" data-target="#modal-button-setup" data-template-bind='[
+                    {"attribute": "id", "value": "id" },
+                    {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Edit button') }} "} ]'>
+                      <i class="fas fa-wrench mr-1"></i> {{ _('Settings') }}
+                    </a>
+                    <a data-href="ignore_link" class="dropdown-item" data-action="PUT" data-field="value" data-toggle="modal" data-target="#modal-confirm" data-template-bind='[
+                    {"attribute": "id", "value": "id" },
+                    {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Ingore button') }} "} ]'>
+                      <i class="fas fa-ban mr-1"></i> {{ _('Ignore') }}
+                    </a>
+                    <a data-href="delete_link" class="dropdown-item" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm" data-template-bind='[
+                    {"attribute": "id", "value": "id" },
+                    {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Delete button') }} "} ]'>
+                      <i class="fas fa-trash-alt mr-1"></i> {{ _('Delete') }}
+                    </a>
+                    {% else %}
+                      <a href="{{ url_for('login') }}" class="dropdown-item">{{ _('Login to make changes') }}</a>
+                    {% endif %}
+                  </div>
                 </div>
-                <!-- /.card-body -->
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
               </div>
-              <!-- /.card -->
-          </script>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+              <div class="d-md-flex">
+                <div class="col-12 col-sm-12 col-md-3 col-lg-2 text-center">
+                  <h1 class="display-1 pt-3" style="font-size: 8rem;"><i class="fas" data-id="button"></i></h1>
+                </div><!-- /.card-pane-right -->
+                <div class="col-12 col-sm-12 col-md-9 col-lg-10 pt-2">
+                  <div class="overlay">
+                    <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                  </div>
+                  <canvas data-id="graph" class="graph"></canvas>
+                </div>
+              </div> <!-- /.d-md-flex -->
+            </div>
+            <!-- /.card-body -->
           </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
+          <!-- /.card -->
+      </script>
       </div>
-      <!--/. container-fluid -->
-    </section>
-    <!-- /.content -->
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!--/. container-fluid -->
+</section>
+<!-- /.content -->
 <script>
   jQuery(function () {
     jQuery.get('{{ url_for("api:button_list") }}',function(data) {
@@ -85,31 +102,49 @@
       data.sort((a, b) => a.name.localeCompare(b.name));
 
       jQuery.each(data,function(counter, button) {
-        $('#button_list').loadTemplate($('#button_template'),{
 
-          icon: 'fa-thumbtack',
-          title: button.name,
-          last_update: moment().format('LLL'),
+        //button.icon = template_button_type_icon(button.type);
 
-          //error_message : (button.error ? 'error' : ''),
-          badge_message: (button.exclude_avg ? 'Excl. avg' : (button.manual_mode ? 'Manual mode' : '')),
-          power: (button.value > 0 ? 'text-success' : ''),
-          current: button.value,
+        button.export_link      = '{{ url_for('api:button_history', filter='_id_', action="export") }}'.replace('_id_',button.id);
+        button.edit_link        = '{{ url_for('api:button_detail',  button='_id_') }}'.replace('_id_',button.id);
+        button.delete_link      = '{{ url_for('api:button_delete',  button='_id_') }}'.replace('_id_',button.id);
+        button.ignore_link      = '{{ url_for('api:setting_update', setting='exclude_ids') }}';
 
-          button_edit_link:   '{{ url_for('api:button_detail', button='_id_') }}'.replace('_id_',button.id),
-          button_ignore_link: '{{ url_for('api:setting_update', setting='exclude_ids') }}',
-          button_delete_link: '{{ url_for('api:button_delete', button='_id_') }}'.replace('_id_',button.id),
+        button.error   = (button.value != null ? 'fuckbs-d-none' : '');
+        button.button  = 'button_' + button.id;
+        //button.exclude = (!button.exclude_avg  ? 'fuckbs-d-none' : '');
 
-          settings_title: 'Edit button: ' + button.name,
-          ignore_title: 'Ignore button: ' + button.name,
-          delete_title: 'Delete button: ' + button.name,
+        button.graph  = 'graph_' + button.id;
+//        button.gauge  = 'gauge_' + button.id;
 
-          button_id: button.id,
-          button:  (!button.dimmer ? 'button_' + button.id : null),
-          dimmer: (button.dimmer  ? 'button_' + button.id : null),
+        $('#button_list').loadTemplate($('#button_template'),button ,{ append: true, bindingOptions: {ignoreNull : true}});
 
-          graph: 'graph_' + button.id
-        },{ append: true, bindingOptions: {ignoreNull : true}});
+
+        // $('#button_list').loadTemplate($('#button_template'),{
+
+        //   icon: 'fa-thumbtack',
+        //   title: button.name,
+        //   last_update: moment().format('LLL'),
+
+        //   //error_message : (button.error ? 'error' : ''),
+        //   badge_message: (button.exclude_avg ? '{{ _('Excl. avg') }}' : (button.manual_mode ? '{{ _('Manual mode') }}' : '')),
+        //   power: (button.value > 0 ? 'text-success' : ''),
+        //   current: button.value,
+
+        //   button_edit_link:   '{{ url_for('api:button_detail', button='_id_') }}'.replace('_id_',button.id),
+        //   button_ignore_link: '{{ url_for('api:setting_update', setting='exclude_ids') }}',
+        //   button_delete_link: '{{ url_for('api:button_delete', button='_id_') }}'.replace('_id_',button.id),
+
+        //   settings_title: '{{ _('Edit button') }} ' + button.name,
+        //   ignore_title: '{{ _('Ignore button') }} ' + button.name,
+        //   delete_title: '{{ _('Delete button') }} ' + button.name,
+
+        //   button_id: button.id,
+        //   button:  (!button.dimmer ? 'button_' + button.id : null),
+        //   dimmer: (button.dimmer  ? 'button_' + button.id : null),
+
+        //   graph: 'graph_' + button.id
+        // },{ append: true, bindingOptions: {ignoreNull : true}});
 
         button_state(button);
 
@@ -117,36 +152,5 @@
       });
     });
   });
-
-
-// jQuery(function () {
-//   jQuery.get('{{ url_for("button_list") }}',function(data){
-//     jQuery.each(data,function(counter,button) {
-//       $('#button_list').loadTemplate($('#button_template'),{
-//         icon: 'fa-thumbtack',
-//         title: button.name,
-
-//         settings_title: 'Edit button: '  + button.name,
-//         ignore_title: 'Ignore button: '  + button.name,
-// //        exclude_title: 'Exclude button ' + button.name + ' from average calculation',
-//         delete_title: 'Delete button: '  + button.name,
-
-//   //      badge_message : '',
-//    //     badge_pressed : (button.value > 0 ? 'pressed' : ''),
-
-//    //     button_type: button_icon(button.hardware, button.value) + ' ' + (button.value > 0 ? 'text-danger' : 'text-success'),
-
-//         setup_id: button.id,
-//         button_id: 'button_' + button.id,
-//         graph: 'graph_' + button.id
-
-//       },{ append: true, bindingOptions: {ignoreNull : true}});
-
-//       button_state(button);
-
-//       new graph('graph_' + button.id, button.url + '/history',button.hardware);
-//     });
-//   });
-// });
 </script>
 {% endblock page_content %}

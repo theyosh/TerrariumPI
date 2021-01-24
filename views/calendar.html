@@ -1,102 +1,88 @@
 {% extends "layouts/base-content.html" %}
-{% block title %} Calendar {% endblock %}
+{% block title %}{{ _('Calendar') }}{% endblock %}
 {% block options %}
 <ol class="breadcrumb float-sm-right ">
   {% if authenticated %}
-  <li class="breadcrumb-item"><a href="{{ url_for('api:calendar_download') }}" target="_blank"><i class="fas fa-download pt-1 mr-1"></i> Download iCal</a></li>
-  <li class="breadcrumb-item "><i class="fas fa-wrench pt-1 mr-1"></i> Settings</li>
+  <li class="breadcrumb-item"><a href="{{ url_for('api:calendar_download') }}" target="_blank"><i class="fas fa-download pt-1 mr-1"></i> {{ _('Download iCal') }}</a></li>
+  <li class="breadcrumb-item "><i class="fas fa-wrench pt-1 mr-1"></i> {{ _('Settings') }}</li>
   {% else %}
-  <li class="breadcrumb-item "><a href="{{ url_for('login') }}"><i class="fas fa-wrench pt-1 mr-1"></i> Please login to make changes</a></li>
+  <li class="breadcrumb-item "><a href="{{ url_for('login') }}"><i class="fas fa-wrench pt-1 mr-1"></i> {{ _('Login to make changes') }}</a></li>
   {% endif %}
 </ol>
 {% endblock options %}
 
 {% block page_content %}
-     <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card card-primary">
-              <div class="card-body p-0">
-                <!-- THE CALENDAR -->
-                <div id="calendar"></div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-primary">
+          <div class="card-body p-0">
+            <!-- THE CALENDAR -->
+            <div id="calendar"></div>
           </div>
-          <!-- /.col -->
+          <!-- /.card-body -->
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  <!-- </div> -->
-  <!-- /.content-wrapper -->
-
-<!-- Specific Page JS goes HERE  -->
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="modal-calendar-event">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title"><i class="fas fa-calendar-alt"></i> Event</h4>
+        <h4 class="modal-title"><i class="fas fa-calendar-alt"></i> {{ _('Event') }}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-
         <div class="form-group row">
           <div class="col-12 col-sm-9 col-md-9 col-lg-9">
-
             <div class="form-group">
-              <label for="title">Title</label>
+              <label for="title">{{ _('Title') }}</label>
               <input type="text" class="form-control" id="summary" name="summary" placeholder="Event title">
               <input type="hidden" id="uid" name="uid">
             </div>
-
             <div class="form-group">
-              <label for="description">Event</label>
+              <label for="description">{{ _('Event') }}</label>
                 <textarea class="textarea-disabled" placeholder="Place some text here"
                 style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
             </div>
           </div>
-
           <div class="col-12 col-sm-3 col-md-3 col-lg-3">
             <div class="form-group">
-              <label for="title">Date</label>
+              <label for="title">{{ _('Date') }}</label>
               <p class="p-2 event_date"></p>
               <input type="hidden" class="form-control" id="date" name="date">
             </div>
-
             <div class="form-group">
-              <label for="amount">Repeat every</label>
-
+              <label for="amount">{{ _('Repeat every') }}</label>
               <input type="number" class="form-control" id="interval" name="interval" placeholder="Select amount">
-
               <div class="select2-primary mt-2">
                 <select class="select2 " id="freq" name="freq" data-placeholder="Select period" style="width: 100%;">
-                  <option value="_">No repeat</option>
-                  <option value="daily">Days</option>
-                  <option value="weekly">Weeks</option>
-                  <option value="monthly">Months</option>
-                  <option value="yearly">Years</option>
+                  <option value="_">{{ _('No repeat') }}</option>
+                  <option value="daily">{{ _('Days') }}</option>
+                  <option value="weekly">{{ _('Weeks') }}</option>
+                  <option value="monthly">{{ _('Months') }}</option>
+                  <option value="yearly">{{ _('Years') }}</option>
                 </select>
               </div>
-
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ _('Close') }}</button>
         <span>
-          <button type="button" class="btn btn-danger" disabled="disabled">Delete</button>
-          <button type="button" class="btn btn-primary">Confirm</button>
+          <button type="button" class="btn btn-danger" disabled="disabled">{{ _('Delete') }}</button>
+          <button type="button" class="btn btn-primary">{{ _('Confirm') }}</button>
         </span>
-
       </div>
     </div>
   </div>
@@ -107,41 +93,40 @@
     function save_calender_event(uid, summary, description, location, dtstart, dtend, freq, interval, event_modal) {
 
       let event_data = {
-//          uid: uid || null,
-          summary: summary,
-          description: description || null,
-          location: location || null,
-          dtstart : dtstart,
-          dtend: dtend || null,
-          freq : freq || null,
-          interval :  interval || null
+        summary: summary,
+        description: description || null,
+        location: location || null,
+        dtstart : dtstart,
+        dtend: dtend || null,
+        freq : freq || null,
+        interval :  interval || null
       }
 
       jQuery.ajax({
-          type: (event_data.uid == null ? 'post' : 'put'),
-          url: (event_data.uid == null ? '{{ url_for("api:calendar_add") }}' : '{{ url_for("api:calendar_detail", calendar="_id_") }}'.replace('_id_',event_data.uid)),
-          data: JSON.stringify(event_data),
-          processData: false,
-          contentType: 'application/json;charset=UTF-8',
-          dataType:'json',
-          cache: false,
-          success: function (data) {
-            toastr['success']('Calendar event <strong>' + event_data.summary + '</strong> ' + (event_data.uid == null ? 'created' : 'updated') , 'OK');
-            try {
-              event_modal.modal('hide');
-              setTimeout(function(){
-                load_page();
-              }, 1100)
-            } catch (e) {
-              setTimeout(function(){
-                load_page();
-              }, 100)
-            }
-          },
-          error: function (error) {
-            toastr['error']('Error:<br />' + error.message , 'ERROR');
+        type: (event_data.uid == null ? 'post' : 'put'),
+        url: (event_data.uid == null ? '{{ url_for("api:calendar_add") }}' : '{{ url_for("api:calendar_detail", calendar="_id_") }}'.replace('_id_',event_data.uid)),
+        data: JSON.stringify(event_data),
+        processData: false,
+        contentType: 'application/json;charset=UTF-8',
+        dataType:'json',
+        cache: false,
+        success: function (data) {
+          toastr.success('Calendar event <strong>' + event_data.summary + '</strong> ' + (event_data.uid == null ? '{{ _('created') }}' : '{{ _('updated') }}') , '{{ _('OK') }}');
+          try {
+            event_modal.modal('hide');
+            setTimeout(function(){
+              load_page();
+            }, 1100)
+          } catch (e) {
+            setTimeout(function(){
+              load_page();
+            }, 100)
           }
-        });
+        },
+        error: function (error) {
+          toastr.error('{{ _('Error') }}:<br />' + error.message , '{{ _('ERROR') }}');
+        }
+      });
     }
 
     jQuery(function () {
@@ -199,7 +184,7 @@
           dataType:'json',
           cache: false,
           success: function (data) {
-            toastr['success'](data.message, 'OK');
+            toastr['success'](data.message, '{{ _('OK') }}');
             try {
               event_modal.modal('hide');
               setTimeout(function(){
@@ -212,7 +197,7 @@
           error: function (error) {
             error = error.responseJSON;
             console.log(error);
-            toastr['error'](error.message , 'ERROR');
+            toastr['error'](error.message , '{{ _('ERROR') }}');
           }
         });
       });
@@ -325,16 +310,12 @@
             allowHTML: true,
             followCursor: 'horizontal',
             content: '<strong>' + info.event.title + '</strong><br />' +
-                      info.event.extendedProps.description + '<br /><strong>Duration:</strong> ' +
+                      info.event.extendedProps.description + '<br /><strong>' + '{{ _('Duration') }}:' + '</strong> ' +
                       moment.duration(end - info.event.start).humanize(),
           });
         },
-
-
       });
-
       calendar.render();
-
     });
   </script>
 {% endblock page_content %}

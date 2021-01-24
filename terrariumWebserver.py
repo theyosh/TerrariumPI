@@ -3,8 +3,6 @@ import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
 import gettext
-gettext.install('terrariumpi', 'locales/')
-
 import threading
 import json
 import os
@@ -135,6 +133,7 @@ class terrariumWebserver(object):
 
     # Template functions
     variables['url_for'] = self.url_for
+    variables['_'] = _
 
     return variables
 

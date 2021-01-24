@@ -200,8 +200,9 @@ class terrariumArea(object):
       'powered' : None
     }
 
-    # Clean up parts that do not have relays configured
+    # Clean up parts that do not have relays configured)
     for period in ['day','night','low','high']:
+
       if period in self.setup and len(self.setup[period]['relays']) == 0:
         del(self.setup[period])
 
