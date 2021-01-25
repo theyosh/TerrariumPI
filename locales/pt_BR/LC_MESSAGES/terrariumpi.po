@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-01-18 22:35+CET\n"
-"PO-Revision-Date: 2020-12-30 18:07+0000\n"
+"PO-Revision-Date: 2021-01-26 22:24+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/pt_BR/>\n"
@@ -17,11 +17,11 @@ msgstr ""
 #: terrariumEngine.py:679 terrariumEngine.py:791 views/dashboard.tpl:7
 #: views/inc/usage_dashboard.tpl:87 views/system_status.tpl:230
 msgid "Uptime"
-msgstr "Tempo Lig"
+msgstr "Tempo em atividade"
 
 #: terrariumEngine.py:680
 msgid "Load"
-msgstr "Carga"
+msgstr "Atividade atual"
 
 #: terrariumEngine.py:681
 msgid "CPU Temp."
@@ -41,179 +41,159 @@ msgstr "Uso de memória"
 
 #: terrariumEngine.py:805 views/system_status.tpl:6
 msgid "CPU Load"
-msgstr "Carga da CPU"
+msgstr "Atividade da CPU"
 
 #: terrariumEngine.py:811 views/system_status.tpl:62
 msgid "CPU Temperature"
 msgstr "Temperatura da CPU"
 
 #: terrariumNotification.py:210
-#, fuzzy
-#| msgid "Environment"
 msgid "Environment light day on"
-msgstr "Ambiente"
+msgstr "Luz do Ambiente ligada"
 
 #: terrariumNotification.py:211
-#, fuzzy
-#| msgid "Enabled when lights are off"
 msgid "Environment light day off"
-msgstr "Ativado quando as luzes estão apagadas"
+msgstr "Luz do Ambiente desligada"
 
 #: terrariumNotification.py:212
 msgid "Environment light night on"
-msgstr ""
+msgstr "Luz Noturna do Ambiente ligada"
 
 #: terrariumNotification.py:213
 msgid "Environment light night off"
-msgstr ""
+msgstr "Luz Noturna do Ambiente desligada"
 
 #: terrariumNotification.py:215
 msgid "Environment temperature alarm low on"
-msgstr ""
+msgstr "Alarme de temperatura baixa no Ambiente foi armado"
 
 #: terrariumNotification.py:216
 msgid "Environment temperature alarm low off"
-msgstr ""
+msgstr "Alarme de temperatura baixa no Ambiente foi desarmado"
 
 #: terrariumNotification.py:217
 msgid "Environment temperature alarm high on"
-msgstr ""
+msgstr "Alarme de temperatura alta no Ambiente foi armado"
 
 #: terrariumNotification.py:218
 msgid "Environment temperature alarm high off"
-msgstr ""
+msgstr "Alarme de temperatura alta no Ambiente foi desarmado"
 
 #: terrariumNotification.py:220
 msgid "Environment humidity alarm low on"
-msgstr ""
+msgstr "Alarme de umidade baixa no Ambiente foi armado"
 
 #: terrariumNotification.py:221
 msgid "Environment humidity alarm low off"
-msgstr ""
+msgstr "Alarme de umidade relativa baixa no Ambiente foi desarmado"
 
 #: terrariumNotification.py:222
 msgid "Environment humidity alarm high on"
-msgstr ""
+msgstr "Alarme de alta umidade relativa no Ambiente foi armado"
 
 #: terrariumNotification.py:223
 msgid "Environment humidity alarm high off"
-msgstr ""
+msgstr "Alarme de alta umidade relativa no Ambiente foi desarmado"
 
 #: terrariumNotification.py:225
 msgid "Environment moisture alarm low on"
-msgstr ""
+msgstr "Alarme de baixa umidade absoluta no Ambiente foi armado"
 
 #: terrariumNotification.py:226
 msgid "Environment moisture alarm low off"
-msgstr ""
+msgstr "Alarme de baixa umidade absoluta no Ambiente foi desarmado"
 
 #: terrariumNotification.py:227
 msgid "Environment moisture alarm high on"
-msgstr ""
+msgstr "Alarme de alta umidade absoluta no Ambiente foi armado"
 
 #: terrariumNotification.py:228
 msgid "Environment moisture alarm high off"
-msgstr ""
+msgstr "Alarme de alta umidade absoluta no Ambiente foi desarmado"
 
 #: terrariumNotification.py:230
 msgid "Environment conductivity alarm low on"
-msgstr ""
+msgstr "Alarme de baixa condutividade no Ambiente foi armado"
 
 #: terrariumNotification.py:231
 msgid "Environment conductivity alarm low off"
-msgstr ""
+msgstr "Alarme de baixa condutividade no Ambiente foi desarmado"
 
 #: terrariumNotification.py:232
 msgid "Environment conductivity alarm high on"
-msgstr ""
+msgstr "Alarme de alta condutividade no Ambiente foi armado"
 
 #: terrariumNotification.py:233
 msgid "Environment conductivity alarm high off"
-msgstr ""
+msgstr "Alarme de alta condutividade no Ambiente foi desarmado"
 
 #: terrariumNotification.py:235
 msgid "Environment pH alarm low on"
-msgstr ""
+msgstr "Alarme de pH baixo no Ambiente foi armado"
 
 #: terrariumNotification.py:236
 msgid "Environment pH alarm low off"
-msgstr ""
+msgstr "Alarme de pH baixo no Ambiente foi desarmado"
 
 #: terrariumNotification.py:237
 msgid "Environment pH alarm high on"
-msgstr ""
+msgstr "Alarme de pH alto no Ambiente foi armado"
 
 #: terrariumNotification.py:238
 msgid "Environment pH alarm high off"
-msgstr ""
+msgstr "Alarme de pH alto no Ambiente foi desarmado"
 
 #: terrariumNotification.py:240
 msgid "Environment watertank alarm low on"
-msgstr ""
+msgstr "Alarme de nível baixo de água no Ambiente foi armado"
 
 #: terrariumNotification.py:241
 msgid "Environment watertank alarm low off"
-msgstr ""
+msgstr "Alarme de nível baixo de água no Ambiente foi desarmado"
 
 #: terrariumNotification.py:242
 msgid "Environment watertank alarm high on"
-msgstr ""
+msgstr "Alarme de nível alto de água no Ambiente foi armado"
 
 #: terrariumNotification.py:243
 msgid "Environment watertank alarm high off"
-msgstr ""
+msgstr "Alarme de nível alto de água no Ambiente foi desarmado"
 
 #: terrariumNotification.py:245
-#, fuzzy
-#| msgid "Authentication"
 msgid "Authentication warning"
-msgstr "Autenticação"
+msgstr "Aviso de Autenticação"
 
 #: terrariumNotification.py:247
-#, fuzzy
-#| msgid "No warning messages"
 msgid "System warning message"
-msgstr "Nenhuma mensagem de aviso"
+msgstr "Mensagem de aviso do sistema"
 
 #: terrariumNotification.py:248
-#, fuzzy
-#| msgid "No error messages"
 msgid "System error message"
-msgstr "Nenhuma mensagem de erro"
+msgstr "Mensagem de erro do sistema"
 
 #: terrariumNotification.py:250 terrariumNotification.py:251
 msgid "Sensor low alarm"
-msgstr ""
+msgstr "Alarme de sensor baixo"
 
 #: terrariumNotification.py:253
-#, fuzzy
-#| msgid "Power switches"
 msgid "Powerswitch on"
-msgstr "Interruptores"
+msgstr "Interruptor ligado"
 
 #: terrariumNotification.py:254
-#, fuzzy
-#| msgid "Power switches"
 msgid "Powerswitch off"
-msgstr "Interruptores"
+msgstr "Interruptor desligado"
 
 #: terrariumNotification.py:256
-#, fuzzy
-#| msgid "Door is open"
 msgid "Door opened"
-msgstr "A porta está aberta"
+msgstr "Porta aberta"
 
 #: terrariumNotification.py:257
-#, fuzzy
-#| msgid "Door is closed"
 msgid "Door closed"
-msgstr "Porta está fechada"
+msgstr "Porta fechada"
 
 #: terrariumNotification.py:259
-#, fuzzy
-#| msgid "Webcam settings"
 msgid "Webcam motion"
-msgstr "Configurações da webcam"
+msgstr "Movimento na webcam"
 
 #: terrariumTranslations.py:22
 msgid "Holds the external source URL. Supported sources are: %s."
@@ -293,11 +273,13 @@ msgstr "Contém o valor máximo do sensor que pode ser usado nos gráficos."
 #: terrariumTranslations.py:46
 msgid "Shows the sensor current value in temperature or humidity (read only)."
 msgstr ""
-"Mostra o valor atual do sensor em temperatura ou umidade (somente leitura)."
+"Mostra o valor atual do sensor em temperatura ou umidade relativa (somente "
+"leitura)."
 
 #: terrariumTranslations.py:47
 msgid "Holds the sensor lowest moisture value measured in dry air. %s"
-msgstr "Contém o menor valor de umidade do sensor medido em ar seco. %s"
+msgstr ""
+"Contém o menor valor de umidade absoluta do sensor medido em ar seco. %s"
 
 #: terrariumTranslations.py:47 terrariumTranslations.py:48
 msgid "More calibration information"
@@ -305,7 +287,7 @@ msgstr "Mais informações sobre calibração"
 
 #: terrariumTranslations.py:48
 msgid "Holds the sensor highest moisture value measured in full water. %s"
-msgstr "Contém o maior valor de umidade do sensor medido em água. %s"
+msgstr "Contém o maior valor de umidade absoluta do sensor medido em água. %s"
 
 #: terrariumTranslations.py:49
 msgid "Holds the temperature offset value."
@@ -1699,7 +1681,7 @@ msgstr "Exportar dados"
 
 #: views/dashboard.tpl:655
 msgid "Average Humidity"
-msgstr "Umidade Média"
+msgstr "Umidade relativa Média"
 
 #: views/dashboard.tpl:710
 msgid "Average Moisture"
@@ -2177,7 +2159,7 @@ msgstr "Sensor de temperatura"
 #: views/inc/sensor_list.tpl:12 views/inc/usage_sensors.tpl:67
 #: views/sensor_settings.tpl:78
 msgid "Humidity sensor"
-msgstr "Sensor de umidade"
+msgstr "Sensor de umidade relativa"
 
 #: views/inc/sensor_list.tpl:13 views/sensor_settings.tpl:79
 msgid "Moisture sensor"
@@ -2320,9 +2302,10 @@ msgid ""
 "indicates the load off the hardware. First bar is actual load, second is "
 "load during 5 minutes and last is load during 15 minutes."
 msgstr ""
-"O primeiro bloco mostra o tempo de atividade do hardware. E mostra três "
-"barras que indicam a carga do hardware. A primeira barra é a carga real, a "
-"segunda é a carga durante 5 minutos e a última é a carga durante 15 minutos."
+"O primeiro bloco mostra o tempo em atividade do hardware. E mostra três "
+"barras que indicam a atividade do hardware. A primeira barra é a atividade "
+"no momento, a segunda é a atividade média dos últimos 5 minutos e a terceira "
+"barra mostra a atividade média dos últimos 15 minutos."
 
 #: views/inc/usage_dashboard.tpl:95
 msgid ""
@@ -2442,8 +2425,8 @@ msgid ""
 "updated once every 5 minutes."
 msgstr ""
 "Os gráficos no Início são combinados entre todos os sensores de temperatura "
-"e umidade. Os medidores são em tempo real e mostram o valor atual. Os "
-"gráficos históricos mostram também o valor mínimo e máximo e serão "
+"e umidade relativa. Os medidores são em tempo real e mostram o valor atual. "
+"Os gráficos históricos mostram também o valor mínimo e máximo e serão "
 "atualizados a cada 5 minutos."
 
 #: views/inc/usage_dashboard.tpl:150
@@ -2462,7 +2445,7 @@ msgid ""
 "temperature graph shown."
 msgstr ""
 "Existem vários tempos de gráfico. No Início é exibido um gráfico de umidade "
-"e temperatura."
+"relativa e temperatura."
 
 #: views/inc/usage_dashboard.tpl:163 views/system_log.tpl:6
 msgid "Last update"
@@ -2688,9 +2671,9 @@ msgid ""
 "current values are used."
 msgstr ""
 "O pulverizador está funcionando apenas no modo sensor. Isso significa que "
-"ele precisa ter pelo menos um sensor de umidade e um interruptor para ativar "
-"um sistema de pulverização. Quando vários sensores de umidade são usados, as "
-"médias dos valores mínimo, máximo e atual são usadas."
+"ele precisa ter pelo menos um sensor de umidade relativa e um interruptor "
+"para ativar um sistema de pulverização. Quando vários sensores de umidade "
+"são usados, as médias dos valores mínimo, máximo e atual são usadas."
 
 #: views/inc/usage_environment.tpl:112
 msgid "The sprayer will not operate when a door is open."
@@ -2715,7 +2698,7 @@ msgstr "Duração do spray (segundos)"
 
 #: views/inc/usage_environment.tpl:165 views/inc/usage_environment.tpl:196
 msgid "Humidity sensors"
-msgstr "Sensores de umidade"
+msgstr "Sensores de umidade relativa"
 
 #: views/inc/usage_environment.tpl:202
 msgid ""
@@ -2816,7 +2799,7 @@ msgstr ""
 "Na página de sensores, você pode encontrar todas as páginas de sensores "
 "disponíveis, agrupadas por tipo. Selecione temperatura no menu para obter "
 "todos os sensores de temperatura. Selecione a umidade para todos os sensores "
-"de umidade."
+"de umidade relativa."
 
 #: views/inc/usage_sensors.tpl:14
 msgid "Per graph you have the following options and indicators."
@@ -2853,9 +2836,10 @@ msgid ""
 "value gets more to the minimum or maximum value, it will gets more red/"
 "orange."
 msgstr ""
-"O gráfico do medidor mostra o valor atual da temperatura ou umidade. A cor "
-"do gráfico depende do valor atual e dos valores de alarme. Quando o valor "
-"chegar ao valor mínimo ou máximo, ele ficará mais vermelho / laranja."
+"O gráfico do medidor mostra o valor atual da temperatura ou umidade "
+"relativa. A cor do gráfico depende do valor atual e dos valores de alarme. "
+"Quando o valor chegar ao valor mínimo ou máximo, ele ficará mais vermelho / "
+"laranja."
 
 #: views/inc/usage_sensors.tpl:93
 msgid ""
@@ -3963,7 +3947,7 @@ msgstr "Indicador de distância"
 
 #: views/system_settings.tpl:109
 msgid "Centimetre"
-msgstr "Centímetro"
+msgstr "Centímetros"
 
 #: views/system_settings.tpl:110
 msgid "Inches"
@@ -4361,7 +4345,7 @@ msgstr "Esquema de fiação DHT22 GPIO"
 
 #: Missing text string
 msgid "DHT22 temperature and humidity sensor"
-msgstr "Sensor de temperatura e umidade DHT22"
+msgstr "Sensor de temperatura e umidade relativa DHT22"
 
 #: Missing text string
 msgid "Dimmer environment step in %"
@@ -4471,7 +4455,7 @@ msgstr "Carregar 15"
 
 #: Missing text string
 msgid "Load 5"
-msgstr "Carregar 5"
+msgstr "Média 5 min"
 
 #: Missing text string
 msgid "Loading"
@@ -4667,7 +4651,7 @@ msgstr "Sensor temperatura"
 
 #: Missing text string
 msgid "Sensor humidity"
-msgstr "Sensor umidade"
+msgstr "Sensor de umidade relativa"
 
 #: Missing text string
 msgid "Sensor distance"
