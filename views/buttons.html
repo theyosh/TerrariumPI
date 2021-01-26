@@ -102,9 +102,6 @@
       data.sort((a, b) => a.name.localeCompare(b.name));
 
       jQuery.each(data,function(counter, button) {
-
-        //button.icon = template_button_type_icon(button.type);
-
         button.export_link      = '{{ url_for('api:button_history', filter='_id_', action="export") }}'.replace('_id_',button.id);
         button.edit_link        = '{{ url_for('api:button_detail',  button='_id_') }}'.replace('_id_',button.id);
         button.delete_link      = '{{ url_for('api:button_delete',  button='_id_') }}'.replace('_id_',button.id);
@@ -112,42 +109,11 @@
 
         button.error   = (button.value != null ? 'fuckbs-d-none' : '');
         button.button  = 'button_' + button.id;
-        //button.exclude = (!button.exclude_avg  ? 'fuckbs-d-none' : '');
 
         button.graph  = 'graph_' + button.id;
-//        button.gauge  = 'gauge_' + button.id;
 
-        $('#button_list').loadTemplate($('#button_template'),button ,{ append: true, bindingOptions: {ignoreNull : true}});
-
-
-        // $('#button_list').loadTemplate($('#button_template'),{
-
-        //   icon: 'fa-thumbtack',
-        //   title: button.name,
-        //   last_update: moment().format('LLL'),
-
-        //   //error_message : (button.error ? 'error' : ''),
-        //   badge_message: (button.exclude_avg ? '{{ _('Excl. avg') }}' : (button.manual_mode ? '{{ _('Manual mode') }}' : '')),
-        //   power: (button.value > 0 ? 'text-success' : ''),
-        //   current: button.value,
-
-        //   button_edit_link:   '{{ url_for('api:button_detail', button='_id_') }}'.replace('_id_',button.id),
-        //   button_ignore_link: '{{ url_for('api:setting_update', setting='exclude_ids') }}',
-        //   button_delete_link: '{{ url_for('api:button_delete', button='_id_') }}'.replace('_id_',button.id),
-
-        //   settings_title: '{{ _('Edit button') }} ' + button.name,
-        //   ignore_title: '{{ _('Ignore button') }} ' + button.name,
-        //   delete_title: '{{ _('Delete button') }} ' + button.name,
-
-        //   button_id: button.id,
-        //   button:  (!button.dimmer ? 'button_' + button.id : null),
-        //   dimmer: (button.dimmer  ? 'button_' + button.id : null),
-
-        //   graph: 'graph_' + button.id
-        // },{ append: true, bindingOptions: {ignoreNull : true}});
-
+        $('#button_list').loadTemplate($('#button_template'), button, { append: true, bindingOptions: {ignoreNull : true}});
         button_state(button);
-
         new graph('graph_' + button.id, '{{ url_for("api:button_history", button="_id_") }}'.replace('_id_',button.id), button.hardware);
       });
     });

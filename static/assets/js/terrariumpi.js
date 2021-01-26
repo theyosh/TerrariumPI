@@ -1769,7 +1769,7 @@ function websocket_init(reconnect) {
           let sensor_type = data.id;
           let sensor_name = data.value;
           let submenu = false;
-          let link = '/sensors_' + sensor_type + '.html';
+          let link = '/' + sensor_type + '_sensors.html';
           let tree = null;
           let skip = false;
 
@@ -1830,7 +1830,7 @@ function websocket_init(reconnect) {
         break;
 
       case 'relay':
-        jQuery('button#relay_' + message.data.id + ' i').toggleClass('text-success',message.data.value == 100);
+        jQuery('button#relay_' + message.data.id + ' i').toggleClass('text-success', message.data.value == 100);
         break;
 
 
@@ -1904,11 +1904,6 @@ function websocket_init(reconnect) {
             if (area.state.powered !== undefined) {
               jQuery('#area_relay_state_' + area.id).removeClass('badge-success badge-secondary').addClass(( area.state.powered ? 'badge-success' : 'badge-secondary'));
             }
-            // if (area.state.sensor !== undefined) {
-            //   jQuery('#area_current_' + area.id).text(formatNumber(area.state.sensor.current,0,2));
-            //   jQuery('#area_alarm_min_' + area.id).text(formatNumber(area.state.sensor.alarm_min,0,2));
-            //   jQuery('#area_alarm_max_' + area.id).text(formatNumber(area.state.sensor.alarm_max,0,2));
-            // }
             if (area.state.sensors !== undefined) {
               jQuery('#area_current_' + area.id).text(formatNumber(area.state.sensors.current,0,2));
               jQuery('#area_alarm_min_' + area.id).text(formatNumber(area.state.sensors.alarm_min,0,2));
@@ -1926,16 +1921,42 @@ function websocket_init(reconnect) {
           break;
 
       case 'door_status':
-        update_door_indicator(data.data);
+        if ('closed' == message.data.status) {
+          toastr.success(message.data.message, 'OK');
+        } else {
+          toastr.warning(message.data.message, 'WARN');
+        }
         break;
-      case 'doors':
-        $.each(data.data, function(index, door_data) {
-          update_door(door_data);
+
+        case 'doors':
+        let error_counter = 0;
+        let error_content = '';
+        jQuery.each(message.data, function(index, door_data) {
+          // Update the Enclosure doors
+          jQuery('#area_door_' + door_data.enclosure_id).removeClass('fa-lock fa-lock-open text-danger').addClass('closed' == door_data.status ? 'fa-lock' : 'fa-lock-open text-danger');
+
+          if ('open' == door_data.status) {
+            error_counter += 1;
+            error_content += '<div class="dropdown-item text-warning"> <i class="fas fa-lock mr-2"></i> ' + door_data.message + '</div>';
+            //<!-- <span class="float-right text-muted text-sm">3 mins</span> -->
+          }
         });
+
+        let messages = jQuery('#door_indicator div.dropdown-menu')
+        messages.find('div.dropdown-item:not(.all_door_closed)').remove();
+        messages.append(jQuery(error_content));
+        messages.find('div.dropdown-item.all_door_closed').toggle('' == error_content);
+
+        let indicator = jQuery('#door_indicator a.nav-link');
+        indicator.find('i.fas').removeClass('fa-lock fa-lock-open text-danger').addClass('' == error_content ? 'fa-lock' : 'fa-lock-open text-danger');
+        indicator.find('.badge').text(0 == error_counter ? '' : error_counter);
+
         break;
+        /*
       case 'player_indicator':
         update_player_indicator(data.data);
         break;
+        */
     }
   };
   window.terrariumPI.websocket.onclose = function(evt) {

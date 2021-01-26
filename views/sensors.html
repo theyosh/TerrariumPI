@@ -1,15 +1,15 @@
 {% extends "layouts/base-content.html" %}
-{% set sensor_type = template|lower|replace("sensors_", "") %}
+{% set sensor_type = template|lower|replace("sensors", "")|replace("_","")|replace(".html","") %}
 {% block title %}{{ _(page_title) }}{% endblock %}
 {% block page_content %}
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid">
     <!-- Main row -->
-    <div class="row">
+    <div class="row" id="sensor_list">
       <!-- Left col -->
-      <div class="col" id="sensor_list">
-        <script type="text/html" id="sensor_template">
+      <script type="text/html" id="sensor_template">
+         <div class="col-{% if sensor_type %}12{%else%}3{%endif%}" >
           <div class="card">
             <div class="card-header">
               <h3 class="card-title mr-1">
@@ -75,22 +75,27 @@
             <!-- /.card-header -->
             <div class="card-body p-0">
               <div class="d-md-flex">
-                <div class="col-12 col-sm-12 col-md-4 col-lg-3 text-center">
+
+                <div class="col text-center">
                   <canvas data-id="gauge" class="gauge"></canvas>
                 </div><!-- /.card-pane-right -->
+
+                {% if sensor_type %}
                 <div class="col-12 col-sm-12 col-md-8 col-lg-9">
                   <div class="overlay">
                     <i class="fas fa-3x fa-sync-alt fa-spin"></i>
                   </div>
                   <canvas data-id="graph" class="graph"></canvas>
                 </div>
+                {% endif %}
+
               </div> <!-- /.d-md-flex -->
             </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-        </script>
-      </div>
+        </div>
+      </script>
       <!-- /.col -->
     </div>
     <!-- /.row -->
@@ -100,7 +105,11 @@
 <!-- /.content -->
 <script>
 jQuery(function () {
+  {% if sensor_type %}
   jQuery.get('{{ url_for("api:sensor_list_filtered", filter=sensor_type) }}',function(data) {
+  {% else %}
+  jQuery.get('{{ url_for("api:sensor_list") }}',function(data) {
+  {% endif %}
     data = data.data;
     // Sort the sensors based on the given sensor name
     data.sort((a, b) => a.name.localeCompare(b.name));
@@ -122,28 +131,6 @@ jQuery(function () {
 
       $('#sensor_list').loadTemplate($('#sensor_template'), sensor,{ append: true});
 
-
-      // $('#sensor_list').loadTemplate($('#sensor_template'),{
-
-      //   icon: template_sensor_type_icon(sensor.type),
-      //   title: sensor.name,
-      //   last_update: moment().format('LLL'),
-      //   badge_message: (sensor.exclude_avg ? '{{ _('Excl. avg') }}' : ''),
-      //   badge_error: (sensor.error ? '{{ _('error') }}' : ''),
-
-      //   sensor_edit_link:   '{{ url_for('api:sensor_detail', sensor='_id_') }}'.replace('_id_',sensor.id),
-      //   sensor_ignore_link: '{{ url_for('api:setting_update', setting='exclude_ids') }}',
-      //   sensor_delete_link: '{{ url_for('api:sensor_delete', sensor='_id_') }}'.replace('_id_',sensor.id),
-
-      //   settings_title: '{{ _('Edit sensor') }} ' + sensor.name,
-      //   ignore_title: '{{ _('Ignore sensor') }} ' + sensor.name,
-      //   delete_title: '{{ _('Delete sensor') }} ' + sensor.name,
-
-      //   senor_id: sensor.id,
-      //   gauge: 'gauge_' + sensor.id,
-      //   graph: 'graph_' + sensor.id
-      // },{ append: true});
-
       new sensor_gauge('gauge_' + sensor.id,
                        sensor.type,
                        sensor.value,
@@ -152,7 +139,9 @@ jQuery(function () {
                        sensor.alarm_min,
                        sensor.alarm_max);
 
+      {% if sensor_type %}
       new graph('graph_' + sensor.id, '{{ url_for("api:sensor_history", action="history", filter="_id_") }}'.replace('_id_',sensor.id), '{{sensor_type}}');
+      {% endif %}
     })
   });
 });
