@@ -8,24 +8,24 @@
 {% set modal_form_edit_action = url_for('api:enclosure_update',enclosure='_id_') %}
 {% set modal_reload_url = url_for('page', page='enclosures') %}
 
-{% block modal_title %} <i class="fas fa-globe" ></i> Enclosure settings {% endblock %}
+{% block modal_title %}<i class="fas fa-globe mr-2" ></i>{{ _('Enclosure settings') }}{% endblock %}
 {% block modal_body %}
 <input type="hidden" name="id" id="enclosure_id" value="" disabled="disabled">
 <div class="row">
   <div class="col-12 col-sm-6 col-md-6 col-lg-6">
     <div class="form-group">
-      <label for="enclosure_name">Naam</label>
-      <input type="text" class="form-control" id="enclosure_name" name="name" required="required" placeholder="Enter name">
+      <label for="enclosure_name">{{ _('Naam') }}</label>
+      <input type="text" class="form-control" id="enclosure_name" name="name" required="required" placeholder="{{ _('Enter name') }}">
     </div>
   </div>
 
   <div class="col-12 col-sm-6 col-md-6 col-lg-6">
     <div class="form-group">
-      <label for="image">Image</label>
+      <label for="image">{{ _('Image') }}</label>
       <div class="custom-file">
         <input type="hidden" name="image" id="image" value="">
         <input type="file" id="image_upload">
-        <label class="custom-file-label" for="image_upload">Choose file</label>
+        <label class="custom-file-label" for="image_upload">{{ _('Choose file') }}</label>
       </div>
     </div>
   </div>
@@ -34,22 +34,36 @@
 <div class="row">
   <div class="col-12 col-sm-12 col-md-10 col-lg-10">
     <div class="form-group">
-      <label for="enclosure_description">Description</label>
-      <textarea class="textarea" id="enclosure_description" name="description" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+      <label for="enclosure_description">{{ _('Description') }}</label>
+      <textarea class="textarea" id="enclosure_description" name="description" placeholder="{{ _('Place some text here') }}" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
     </div>
   </div>
 
   <div class="col-12 col-sm-2 col-md-2 col-lg-2">
-    <div class="form-group">
-      <label for="enclosure_doors">Doors</label>
-      <div class="select2-primary">
-        <select class="select2" id="enclosure_doors" name="doors" size="5" multiple="multiple" data-placeholder="Select available doors" style="width: 100%; height: 100%">
-        </select>
+    <div class="row">
+      <div class="form-group col">
+        <label for="enclosure_doors">{{ _('Doors') }}</label>
+        <div class="select2-primary">
+          <select class="select2" id="enclosure_doors" name="doors" size="5" multiple="multiple" data-placeholder="{{ _('Select available doors') }}" style="width: 100%; height: 100%">
+          </select>
+        </div>
+      </div>
+    </div>
+    
+  
+
+    <div class="row">
+      <div class="form-group col">
+        <label for="enclosure_doors">{{ _('Webcams') }}</label>
+        <div class="select2-primary">
+          <select class="select2" id="enclosure_webcams" name="webcams" size="5" multiple="multiple" data-placeholder="{{ _('Select available webcams') }}" style="width: 100%; height: 100%">
+          </select>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
+</div>
 {% endblock %}
 
 {% block modal_form_javascript_functions %}
@@ -57,55 +71,68 @@
 
 
 {% block modal_form_javascript_load %}
-  jQuery.get('{{ url_for("api:button_list") }}', function(data) {
-    let {{modal_type}}_door_select = {{modal_type}}_form.find('select#enclosure_doors');
-    {{modal_type}}_door_select.prop('disabled', false).find('option').remove();
 
-    jQuery.each(data.data,function(counter,item){
-      {{modal_type}}_door_select.append(jQuery('<option>').attr('value',item.id).text(item.name));
-    });
+jQuery.when(
 
-    // Check if we are in edit mode.... and need to load more data....
-    if ('#' != jQuery(event.relatedTarget).attr('href')) {
-      // Load the button data
-      let url = jQuery(event.relatedTarget).attr('href');
+  jQuery.get('{{ url_for("api:button_list") }}'),
+  jQuery.get('{{ url_for("api:webcam_list") }}'),
 
-      jQuery.get(url, function(data){
-        // Enable the hidden id field
-        {{modal_type}}_form.find('input[name="id"]').prop('disabled',false)
-        // Change the form url to an PUT (update)
-        {{modal_type}}_form.attr({'method' : 'PUT', 'action' : url});
+).done(function(buttons, webcams) {
+  console.log(buttons);
+  console.log(webcams);
 
-        // Load the button values in the form
-        jQuery.each(data,function(key,value) {
-          let field = {{modal_type}}_form.find('[name="' + key + '"]');
-          if (field.attr('type') == 'checkbox') {
-            field.prop('checked',(1 != value)).trigger('change');
-            field.prop('checked',(1 == value)).trigger('change');
-          } else {
-            if ('doors' == key) {
-              // Create a new array from the doors array with only the door ids
-              value = Array.from(value, door => door.id);
-            }
-            field.val(value).trigger('change');
-          }
-        });
-        {{modal_type}}_modal.find('div.loading').removeClass('d-flex').hide();
-      });
-    } else {
-      //console.log('Closeing loading div',{{modal_type}}_modal.find('div.loading'));
-      {{modal_type}}_modal.find('div.loading').removeClass('d-flex').hide();
-    }
+  let {{modal_type}}_door_select = {{modal_type}}_form.find('select#enclosure_doors');
+  {{modal_type}}_door_select.prop('disabled', false).find('option').remove();
+
+  jQuery.each(buttons[0].data,function(counter,item){
+    {{modal_type}}_door_select.append(jQuery('<option>').attr('value',item.id).text(item.name));
   });
+
+  let {{modal_type}}_webcam_select = {{modal_type}}_form.find('select#enclosure_webcams');
+  {{modal_type}}_webcam_select.prop('disabled', false).find('option').remove();
+
+  jQuery.each(webcams[0].data,function(counter,item){
+    {{modal_type}}_webcam_select.append(jQuery('<option>').attr('value',item.id).text(item.name));
+  });
+
+  // Check if we are in edit mode.... and need to load more data....
+  if ('#' != jQuery(event.relatedTarget).attr('href')) {
+    // Load the button data
+    let url = jQuery(event.relatedTarget).attr('href');
+
+    jQuery.get(url, function(data){
+      // Enable the hidden id field
+      {{modal_type}}_form.find('input[name="id"]').prop('disabled',false)
+      // Change the form url to an PUT (update)
+      {{modal_type}}_form.attr({'method' : 'PUT', 'action' : url});
+
+      // Load the button values in the form
+      jQuery.each(data,function(key,value) {
+        let field = {{modal_type}}_form.find('[name="' + key + '"]');
+        if (field.attr('type') == 'checkbox') {
+          field.prop('checked',(1 != value)).trigger('change');
+          field.prop('checked',(1 == value)).trigger('change');
+        } else {
+          if ('doors' == key) {
+            // Create a new array from the doors array with only the door ids
+            value = Array.from(value, door => door.id);
+          }
+          field.val(value).trigger('change');
+        }
+      });
+      {{modal_type}}_modal.find('div.loading').removeClass('d-flex').hide();
+    });
+  } else {
+    {{modal_type}}_modal.find('div.loading').removeClass('d-flex').hide();
+  }
+});
 {% endblock %}
 
 {% block modal_form_javascript_pre_submit %}
-
   if (this.elements['image_upload'].files.length >= 1) {
     // Upload a new profile image
     let form_data = new FormData();
     jQuery.each(this.elements['image_upload'].files,function(index,file){
-//      let file_extension = file.name.split('.').pop()
       form_data.append('file', file);
     });
 
@@ -126,5 +153,4 @@
       }
     });
   }
-
 {% endblock %}

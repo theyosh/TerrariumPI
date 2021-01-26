@@ -129,26 +129,59 @@
         <!-- Main row -->
         <div class="row">
           <!-- Left col -->
-          <div class="col-md" id="sensor_list">
+          <div class="col" id="sensor_list">
             <!-- MAP & BOX PANE -->
             <script type="text/html" id="sensor_template">
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title mr-1">
                     <i class="fas fa-fw" data-class="icon"></i>
-                    <span data-content="title">...</span>
-                    <small class="ml-2 text-muted">{{ _('Last update') }}: <span class="last_update" data-content="last_update"></span></small>
+                    <span data-content="name">...</span>
+                    <small class="ml-2 text-muted">{{ _('Last update') }}: <span class="last_update"  data-template-bind='[
+                      {"attribute": "content", "value": "last_update", "formatter": "datetimeformatter", "formatOptions": "LLLL"} ]'
+                    ></span></small>
                   </h3>
                   <small data-template-bind='[
-                  {"attribute": "class", "value": "error", "formatter": "prefixer", "formatOptions": "badge badge-danger "} ]'
+                      {"attribute": "class", "value": "error", "formatter": "prefixer", "formatOptions": "badge badge-danger "} ]'
                   >{{ _('error') }}</small>
                   <small class="badge badge-warning fuckbs-d-none">{{ _('warning') }}</small>
+
                   <div class="card-tools">
                     <div class="btn-group">
                       <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
                         <i class="fas fa-calendar-alt"></i>
                       </button>
                       <div class="dropdown-menu dropdown-menu-right" role="menu">
+                      </div>
+                    </div>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                        <i class="fas fa-wrench"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right" role="menu">
+                        {% if authenticated %}
+                        <a data-href="export_link" data-id="id" class="dropdown-item export_link" data-template-bind='[
+                        {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Export sensor') }} "} ]'>
+                        <i class="fas fa-file-export mr-1"></i> {{ _('Export') }}
+                        </a>
+                        <a data-href="edit_link" class="dropdown-item" data-toggle="modal" data-target="#modal-sensor-setup" data-template-bind='[
+                        {"attribute": "id", "value": "id" },
+                        {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Edit sensor') }} "} ]'>
+                          <i class="fas fa-wrench mr-1"></i> {{ _('Settings') }}
+                        </a>
+                        <a data-href="ignore_link" class="dropdown-item" data-action="PUT" data-field="value" data-toggle="modal" data-target="#modal-confirm" data-template-bind='[
+                        {"attribute": "id", "value": "id" },
+                        {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Ingore sensor') }} "} ]'>
+                          <i class="fas fa-ban mr-1"></i> {{ _('Ignore') }}
+                        </a>
+                        <a data-href="delete_link" class="dropdown-item" data-action="DELETE" data-toggle="modal" data-target="#modal-confirm" data-template-bind='[
+                        {"attribute": "id", "value": "id" },
+                        {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Delete sensor') }} "} ]'>
+                          <i class="fas fa-trash-alt mr-1"></i> {{ _('Delete') }}
+                        </a>
+                        {% else %}
+                          <a href="{{ url_for('login') }}" class="dropdown-item">{{ _('Login to make changes') }}</a>
+                        {% endif %}
                       </div>
                     </div>
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -162,15 +195,18 @@
                 <!-- /.card-header -->
                 <div class="card-body p-0">
                   <div class="d-md-flex">
-                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 text-center">
+
+                    <div class="col text-center">
                       <canvas data-id="gauge" class="gauge"></canvas>
                     </div><!-- /.card-pane-right -->
+
                     <div class="col-12 col-sm-12 col-md-8 col-lg-8">
                       <div class="overlay">
                         <i class="fas fa-3x fa-sync-alt fa-spin"></i>
                       </div>
                       <canvas data-id="graph" class="graph"></canvas>
                     </div>
+
                   </div> <!-- /.d-md-flex -->
                 </div>
                 <!-- /.card-body -->
@@ -180,7 +216,7 @@
           </div>
           <!-- /.col -->
           {% if show_environment %}
-          <div class="col-md-4">
+          <div class="col-4">
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title"><i class="fas fa-globe"></i> {{ _('Enclosures') }}</h3>
@@ -431,18 +467,25 @@
 
             // Show the data...
             jQuery.each(loaded_sensor_type, function(sensor_type, sensor) {
-              sensor.id   = 'avg_' + sensor_type;
+
               sensor.name = '{{ _('Average') }} ' + sensor_type;
 
-              jQuery('#sensor_list').loadTemplate(jQuery('#sensor_template'),{
-                  icon: template_sensor_type_icon(sensor_type),
-                  title: sensor.name,
-                  last_update: moment().format('LLL'),
-                  gauge: 'gauge_' + sensor.id,
-                  graph: 'graph_' + sensor.id
-                },{ append: true});
+              sensor.icon = template_sensor_type_icon(sensor_type);
 
-              new sensor_gauge('gauge_' + sensor.id,
+              sensor.export_link      = '{{ url_for('api:sensor_history', filter='_id_', action="export") }}'.replace('_id_',sensor_type);
+              sensor.edit_link        = '{{ url_for('api:sensor_detail',  sensor='_id_') }}'.replace('_id_',sensor_type);
+              sensor.delete_link      = '{{ url_for('api:sensor_delete',  sensor='_id_') }}'.replace('_id_',sensor_type);
+              sensor.ignore_link      = '{{ url_for('api:setting_update', setting='exclude_ids') }}';
+
+              sensor.error   = (sensor.value != null ? 'fuckbs-d-none' : '');
+              sensor.exclude = (!sensor.exclude_avg  ? 'fuckbs-d-none' : '');
+
+              sensor.graph  = 'graph_avg_' + sensor_type;
+              sensor.gauge  = 'gauge_avg_' + sensor_type;
+
+              $('#sensor_list').loadTemplate($('#sensor_template'), sensor,{ append: true});
+
+              new sensor_gauge('gauge_avg_' + sensor_type,
                                 sensor_type,
                                 sensor.value.avg(),
                                 sensor.limit_min.avg(),
@@ -450,7 +493,7 @@
                                 sensor.alarm_min.avg(),
                                 sensor.alarm_max.avg());
 
-              new graph('graph_' + sensor.id, '{{ url_for("api:sensor_type_history", action="history", filter="_id_") }}'.replace('_id_',sensor_type), sensor_type);
+              new graph('graph_avg_' + sensor_type, '{{ url_for("api:sensor_type_history", action="history", filter="_id_") }}'.replace('_id_',sensor_type), sensor_type);
             });
           });
         },500);

@@ -7,6 +7,7 @@
   <title>
     {% block title %}{% endblock %} - {{ title }} - {{ version }}
   </title>
+  {% if not ajax %}
   <!-- jQuery -->
   <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
   <!-- Google Font: Source Sans Pro -->
@@ -40,12 +41,7 @@
   <link rel="stylesheet" href="/static/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <!-- Country flags -->
   <link rel="stylesheet" href="/static/assets/plugins/flag-icon-css/css/flag-icon.min.css">
-
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.min.css">
-
-
-
   <!-- adminlte-->
   <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
   <!-- TerrariumPI CSS -->
@@ -70,23 +66,35 @@
       moment.locale(window.terrariumPI.language);
     });
   </script>
+  {% endif %}
+
   {% block stylesheets %}{% endblock stylesheets %}
 </head>
 <body class="hold-transition layout-fixed layout-navbar-fixed sidebar-mini pace-primary {% block body_class %}{% endblock body_class %}">
 <div class="wrapper">
+  {% if not ajax %}
     {% include 'includes/navigation.html' %}
     {% include 'includes/sidebar.html' %}
-    {% block content %}{% endblock content %}
-    <!-- Control Sidebar -->
+  {% endif %}
+
+  {% block content %}{% endblock content %}
+
+  {% if not ajax %}
     <aside class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->
     </aside>
-    <!-- /.control-sidebar -->
     {% include 'includes/footer.html' %}
+  {% endif %}
 </div>
-{% include 'includes/scripts.html' %}
-{% include 'includes/modals.html' %}
-<!-- ./wrapper -->
+
+{% if not ajax %}
+  {% include 'includes/scripts.html' %}
+
+  {% if authenticated %}
+    {% include 'includes/modals.html' %}
+  {% endif %}
+{% endif %}
+
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}{% endblock javascripts %}
 </body>
