@@ -284,8 +284,12 @@ done
 
 # Enable MOTD
 if [ ! -h /etc/update-motd.d/05-terrariumpi ]; then
-  ln -s /home/pi/TerrariumPI/motd.sh /etc/update-motd.d/05-terrariumpi
+  ln -s "${BASEDIR}/motd.sh" /etc/update-motd.d/05-terrariumpi
 fi
+
+# Setup logging symlinks
+ln -s "${BASEDIR}/log/terrariumpi.log" /dev/shm/terrariumpi.log
+ln -s "${BASEDIR}/log/terrariumpi.access.log" /dev/shm/terrariumpi.access.log
 
 # We are done!
 sync
