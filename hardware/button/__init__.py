@@ -147,6 +147,9 @@ class terrariumButton(object):
   def pressed(self):
     return self._device['state'] == self.PRESSED
 
+  def calibrate(self):
+    pass
+
   @abstractmethod
   def load_hardware(self):
     pass
@@ -156,30 +159,3 @@ class terrariumButton(object):
 
   def stop(self):
     self._device['device'].close()
-
-  # # Return a list with type and names of supported buttons
-  # @staticmethod
-  # def get_available_types():
-  #   known_buttons = terrariumButton.__search_buttons()
-
-  #   data = []
-  #   all_types = []
-  #   for (hardware_type,button) in known_buttons.items():
-  #     if button.NAME is not None:
-  #       data.append({'hardware' : hardware_type, 'name' : button.NAME})
-
-  #   return data
-
-  # Auto discovery of running/connected buttons
-  @staticmethod
-  def scan_power_switches(callback=None, **kwargs):
-#    logger.debug('Start scanning for power switches. We have {} devices'.format(len(POWER_SWITCHES)))
-    known_buttons = terrariumButton.available_hardware
-    for (hardware_type,button_device) in known_buttons.items():
-      try:
-        for button in button_device.scan_buttons(callback, **kwargs):
-          yield button
-      except AttributeError as ex:
-        #print(ex)
-        pass
-#        logger.debug('Device \'{}\' does not support hardware scanning'.format(power_switch_device.TYPE))

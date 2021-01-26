@@ -12,7 +12,14 @@ class terrariumLDRSensor(terrariumButton):
   HARDWARE = 'ldr'
   NAME     = 'Light sensor'
 
-  __CAPACITOR = 100 # in uF TODO: Make it variable a la calibration setting
+  __CAPACITOR = 1 # in uF
+
+  def calibrate(self,calibration_data):
+    # Only (re)calibrate when the values are different
+    if self.__CAPACITOR != int(calibration_data['ldr_capacitor']):
+      self.stop()
+      self.__CAPACITOR = int(calibration_data['ldr_capacitor'])
+      self.load_hardware()
 
   def load_hardware(self):
     address = self._address
