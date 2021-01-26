@@ -2,7 +2,8 @@ setuptools
 wheel
 
 # Webserver packages
-gevent
+# Gevent has strange issues with higher versions
+gevent==20.9.0
 bottle
 bottle_websocket
 jinja2
