@@ -73,7 +73,7 @@ class terrariumSensor(object):
   @classproperty
   def available_sensors(__cls__):
     data = []
-    all_types = []
+    all_types = ['conductivity'] # For now 'conductivity' is only available through script or remote
     for (hardware_type, sensor) in __cls__.available_hardware.items():
       if sensor.NAME is not None:
         data.append({'hardware' : hardware_type, 'name' : sensor.NAME, 'types' : sensor.TYPES})

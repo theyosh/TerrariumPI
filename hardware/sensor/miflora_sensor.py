@@ -12,7 +12,7 @@ from bluepy.btle import Peripheral, BTLEDisconnectError
 
 class terrariumMiFloraSensor(terrariumBluetoothSensor):
   HARDWARE = 'miflora'
-  TYPES    = ['temperature','light','moisture','conductivity']
+  TYPES    = ['temperature','light','moisture','fertility']
   NAME     = 'MiFlora bluetooth sensor'
 
   __MIFLORA_FIRMWARE_AND_BATTERY = 56
