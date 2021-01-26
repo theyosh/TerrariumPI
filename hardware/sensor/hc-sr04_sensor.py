@@ -9,7 +9,7 @@ from gevent import sleep
 from time import time
 
 # pip install gpiozero
-from gpiozero import OutputDevice, InputDevice # DistanceSensor is broken in Gevent...... :(
+#from gpiozero import OutputDevice, InputDevice # DistanceSensor is broken in Gevent...... :(
 # pip install RPi.GPIO
 import RPi.GPIO as GPIO
 
