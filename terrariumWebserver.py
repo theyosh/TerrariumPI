@@ -139,7 +139,7 @@ class terrariumWebserver(object):
 
   def render_page(self, page = 'index'):
     page_name = None
-    if page.startswith('sensors_'):
+    if page.endswith('_sensors'):
       page_name = page
       page = 'sensors'
 
@@ -150,7 +150,10 @@ class terrariumWebserver(object):
     if page_name is None:
       page_name = page.name
 
-    return jinja2_template(f'{page}',**self.__template_variables(page_name))
+    variables = self.__template_variables(page_name)
+    variables['ajax'] = request.is_ajax
+
+    return jinja2_template(f'{page}',**variables)
 
   def __static_file(self, filename, root = 'static'):
     # TODO: This javascript file should not be templated parsed..... not correct
@@ -581,7 +584,7 @@ class terrariumWebsocket(object):
             messages.task_done()
           except Exception as ex:
             # Socket connection is lost/closed, stop looping....
-            logger.debug(f'Disconnected {socket}. Stop listening and remove queue... {ex}')
+            logger.warning(f'Disconnected {socket}. Stop listening and remove queue... {ex}')
             try:
               self.clients.remove(messages)
             except Exception as ex:
@@ -594,7 +597,7 @@ class terrariumWebsocket(object):
           message = socket.receive()
         except Exception as ex:
           # Closed websocket connection.
-          logger.debug(f'Websocket error receiving messages: {ex}')
+          logger.warning(f'Websocket error receiving messages: {ex}')
           try:
             self.clients.remove(messages)
           except Exception as ex:
@@ -633,7 +636,7 @@ class terrariumWebsocket(object):
     for client in clients:
       if queue is None or queue == client:
         client.put(message)
-      # If more then 20 messages in queue, looks like connection is gone and remove the queue from the list
+      # If more then 50 messages in queue, looks like connection is gone and remove the queue from the list
       if client.qsize() > 50:
         logger.warning(f'Lost connection.... should not happen anymore. {len(self.clients)} - {client.qsize()} - {client}')
         try:

@@ -88,13 +88,16 @@ class Button(db.Entity):
 
   __MAX_VALUE_AGE = 65 * 60  # Max age of the last measurement in minutes
 
-  id        = orm.PrimaryKey(str)
-  hardware  = orm.Required(str)
-  name      = orm.Required(str)
-  address   = orm.Required(str)
-  enclosure = orm.Optional(lambda: Enclosure)
+  id          = orm.PrimaryKey(str)
+  hardware    = orm.Required(str)
+  name        = orm.Required(str)
+  address     = orm.Required(str)
+  
+  calibration = orm.Optional(orm.Json)
+  
+  history     = orm.Set('ButtonHistory')
 
-  history   = orm.Set('ButtonHistory')
+  enclosure   = orm.Optional(lambda: Enclosure)
 
   @property
   def value(self):
@@ -143,8 +146,9 @@ class Enclosure(db.Entity):
   image       = orm.Optional(str)
   description = orm.Optional(str)
 
-  doors       = orm.Set(Button)
-  areas       = orm.Set(Area)
+  areas       = orm.Set(lambda: Area)
+  doors       = orm.Set(lambda: Button)
+  webcams     = orm.Set(lambda: Webcam)
 
   def __rename_image(self):
     regex = re.compile(f'{self.id}\.(jpg|jpeg|gif|png)$',re.IGNORECASE)
@@ -400,6 +404,8 @@ class Webcam(db.Entity):
   motion_frame     = orm.Optional(str)
 
   markers          = orm.Optional(orm.Json, default=[])
+
+  enclosure        = orm.Optional(lambda: Enclosure)
 
   @property
   def is_live(self):
