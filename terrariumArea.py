@@ -280,7 +280,7 @@ class terrariumArea(object):
           continue
 
         time_elapsed = int(datetime.datetime.now().timestamp()) - self.state[period]['last_powered_on']
-        print(f'Time pased since last switch: {time_elapsed} -> Left to wait {self.setup[period]["settle_time"]-time_elapsed} , total: {self.setup[period]["settle_time"]}')
+        #print(f'Time pased since last switch: {time_elapsed} -> Left to wait {self.setup[period]["settle_time"]-time_elapsed} , total: {self.setup[period]["settle_time"]}')
         if time_elapsed <= self.setup[period]['settle_time']:
           logger.info(f'Relays for {self} are not switched because we have to wait for {self.setup[period]["settle_time"]-time_elapsed} more seconds of the total settle time of {self.setup[period]["settle_time"]} seconds.')
           continue

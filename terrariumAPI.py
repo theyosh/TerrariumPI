@@ -597,6 +597,15 @@ class terrariumAPI(object):
 
         enclosure_data['doors'].append(door_data)
 
+
+      for webcam in list(enclosure_data['webcams']):
+        enclosure_data['webcams'].remove(webcam)
+
+        webcam_data = webcam.to_dict(exclude='enclosure')
+#        webcam_data['value'] = webcam.value
+
+        enclosure_data['webcams'].append(webcam_data)
+
       return enclosure_data
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Enclosure with id {enclosure} does not exists.')
@@ -605,28 +614,20 @@ class terrariumAPI(object):
 
   @orm.db_session
   def enclosure_add(self):
-#    try:
+    try:
       doors_set = Button.select(lambda b: b.id in request.json['doors'])
-#      print(doors_set)
-#      print(dir(doors_set))
       request.json['doors'] = doors_set
-#      new_enclosure = self.webserver.engine.add(terrariumEnclosure(None, request.json['hardware'], request.json['address'], request.json['name']))
-#      request.json['id']      = new_enclosure.id
-#      request.json['address'] = new_enclosure.address
 
+      webcams_set = Webcam.select(lambda w: w.id in request.json['webcams'])
+      request.json['webcams'] = webcams_set
       enclosure = Enclosure(**request.json)
 
-#      new_value = new_enclosure.update()
-#      enclosure.update(new_value)
-
-      #enclosure_data = enclosure.to_dict(with_collections=True)
-      #enclosure_data['id']  = str(enclosure.id)
-#      enclosure_data['value']  = enclosure.value
       return self.enclosure_detail(enclosure.id)
-#    except orm.core.ObjectNotFound as ex:
-#      raise HTTPError(status=404, body=f'Door with id {request.json["doors"]} does not exists.')
-#    except Exception as ex:
-#      raise HTTPError(status=500, body=f'Enclosure could not be added. {ex}')
+
+    except orm.core.ObjectNotFound as ex:
+      raise HTTPError(status=404, body=f'Door with id {request.json["doors"]} does not exists.')
+    except Exception as ex:
+      raise HTTPError(status=500, body=f'Enclosure could not be added. {ex}')
 
   @orm.db_session
   def enclosure_update(self, enclosure):
@@ -634,12 +635,13 @@ class terrariumAPI(object):
       enclosure = Enclosure[enclosure]
 
       doors_set = Button.select(lambda b: b.id in request.json['doors'])
-#      print(doors_set)
-#      print(dir(doors_set))
       request.json['doors'] = doors_set
 
+      webcams_set = Webcam.select(lambda w: w.id in request.json['webcams'])
+      request.json['webcams'] = webcams_set
 
       enclosure.set(**request.json)
+
  #     self.webserver.engine.update(terrariumEnclosure,**request.json)
 
    #   enclosure_data = enclosure.to_dict(with_collections=True)
@@ -1157,7 +1159,7 @@ class terrariumAPI(object):
   def webcam_archive(self, webcam, period = None):
     try:
       webcam = Webcam[webcam]
-      webcam_data = webcam.to_dict()
+      webcam_data = webcam.to_dict(exclude='enclosure')
       webcam_data['is_live'] = webcam.is_live
 
       if period is None:
@@ -1176,7 +1178,7 @@ class terrariumAPI(object):
   def webcam_list(self):
     data = []
     for webcam in Webcam.select(lambda w: not w.id in self.webserver.engine.settings['exclude_ids']):
-      webcam_data = webcam.to_dict()
+      webcam_data = webcam.to_dict(exclude='enclosure')
       webcam_data['is_live'] = webcam.is_live
       data.append(webcam_data)
 
@@ -1186,7 +1188,7 @@ class terrariumAPI(object):
   def webcam_detail(self, webcam):
     try:
       webcam = Webcam[webcam]
-      webcam_data = webcam.to_dict()
+      webcam_data = webcam.to_dict(exclude='enclosure')
       webcam_data['is_live'] = webcam.is_live
       return webcam_data
     except orm.core.ObjectNotFound as ex:
@@ -1216,7 +1218,7 @@ class terrariumAPI(object):
       # TODO: Fix updating or not. For now, disabled, as it can take up to 12 sec for RPICam
       #new_value = new_webcam.update()
 
-      webcam_data = webcam.to_dict()
+      webcam_data = webcam.to_dict(exclude='enclosure')
       webcam_data['is_live'] = webcam.is_live
       return webcam_data
     except Exception as ex:
@@ -1233,7 +1235,7 @@ class terrariumAPI(object):
 
       self.webserver.engine.update(terrariumWebcam,**request.json)
 
-      webcam_data = webcam.to_dict()
+      webcam_data = webcam.to_dict(exclude='enclosure')
       webcam_data['is_live'] = webcam.is_live
       return webcam_data
     except orm.core.ObjectNotFound as ex:

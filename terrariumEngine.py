@@ -339,6 +339,9 @@ class terrariumEngine(object):
     if issubclass(item, terrariumButton):
       self.buttons[data['id']].address = data['address']
       self.buttons[data['id']].name    = data['name']
+      if 'calibration' in data:
+        self.buttons[data['id']].calibrate(data['calibration'])
+
       update_ok = True
 
     elif issubclass(item, terrariumRelay):
@@ -684,9 +687,10 @@ class terrariumEngine(object):
         if button.id not in self.buttons:
           logger.debug(f'Loading {button}.')
           try:
-            self.add(terrariumButton(button.id, button.hardware, button.address, button.name, self.button_action))
-            # Set the button back to the old state
-            #self.buttons[button.id].set_state(button.value, True)
+            new_button = self.add(terrariumButton(button.id, button.hardware, button.address, button.name, self.button_action))
+            if button.calibration is not None:
+              new_button.calibrate(button.calibration)
+
           except terrariumButtonLoadingException as ex:
             logger.error(f'Error loading {button} with error: {ex.message}.')
             continue
@@ -727,13 +731,37 @@ class terrariumEngine(object):
 
   # -= NEW =-
   def button_action(self, button, state):
-    if '3043a0de64fb36a944326b3c9cf379b0' == button:
-      print(f'Button action: {button} == {state}')
+    # if '3043a0de64fb36a944326b3c9cf379b0' == button:
+    #   print(f'Button action: {button} == {state}')
 
     with orm.db_session():
       button = Button[button]
       button.update(state,True)
+
+      # Update the button state on the button page
       self.webserver.websocket_message('button' , {'id' : button.id, 'hardware' : button.hardware, 'value' : button.value})
+
+      if button.enclosure:
+        # This is called a door, because has a link with an enclosure
+        # But not sure if this is handy, because of inverse use of open/closed
+        status = 'closed' if button.value else 'open'
+        self.webserver.websocket_message('door_status' , {'message' : f'Door {button.name} at enclosure {button.enclosure.name} is {status}', 'status' : status})
+
+        # Get a list of all the used doors and their status
+        door_status = []
+        for door in Button.select(lambda d: d.enclosure):
+          status = 'closed' if door.value else 'open'
+          door_status.append({
+            'id' : door.id,
+            'name' : door.name,
+            'enclosure' : door.enclosure.name,
+            'enclosure_id' : str(door.enclosure.id),
+            'status' : status,
+            'message' : f'Door {door.name} is {status}'
+          })
+
+        self.webserver.websocket_message('doors' , door_status)
+
 
   # -= NEW =-
   def __load_existing_webcams(self):
@@ -853,6 +881,13 @@ class terrariumEngine(object):
           door_data['value'] = door.value
 
           enclosure_data['doors'].append(door_data)
+
+        for webcam in list(enclosure_data['webcams']):
+          enclosure_data['webcams'].remove(webcam)
+
+          webcam_data = webcam.to_dict(exclude='enclosure')
+
+          enclosure_data['webcams'].append(webcam_data)
 
         self.webserver.websocket_message('enclosure' , enclosure_data)
 
