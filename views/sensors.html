@@ -10,7 +10,7 @@
       <!-- Left col -->
       <script type="text/html" id="sensor_template">
          <div class="col-{% if sensor_type %}12{%else%}3{%endif%}" >
-          <div class="card">
+          <div class="card" {% if not sensor_type %}style="min-height: 270px"{%endif%}>
             <div class="card-header">
               <h3 class="card-title mr-1">
                 <i class="fas fa-fw" data-class="icon"></i>
@@ -27,6 +27,7 @@
               {"attribute": "class", "value": "exclude", "formatter": "prefixer", "formatOptions": "badge badge-primary "} ]'
               >{{ _('Excl. avg') }}</small>
               <div class="card-tools">
+                {% if sensor_type %}
                 <div class="btn-group">
                   <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
                     <i class="fas fa-calendar-alt"></i>
@@ -34,6 +35,7 @@
                   <div class="dropdown-menu dropdown-menu-right" role="menu">
                   </div>
                 </div>
+                {% endif %}
                 <div class="btn-group">
                   <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
                     <i class="fas fa-wrench"></i>
@@ -105,11 +107,8 @@
 <!-- /.content -->
 <script>
 jQuery(function () {
-  {% if sensor_type %}
-  jQuery.get('{{ url_for("api:sensor_list_filtered", filter=sensor_type) }}',function(data) {
-  {% else %}
-  jQuery.get('{{ url_for("api:sensor_list") }}',function(data) {
-  {% endif %}
+  let sensor_url = '{% if sensor_type %}{{ url_for("api:sensor_list_filtered", filter=sensor_type) }}{% else %}{{ url_for("api:sensor_list") }}{% endif %}';
+  jQuery.get(sensor_url,function(data) {
     data = data.data;
     // Sort the sensors based on the given sensor name
     data.sort((a, b) => a.name.localeCompare(b.name));

@@ -144,6 +144,11 @@ height: 100%;
 top: 0px;
 }
 
+.card-header .badge {
+  position: relative;
+  top: -2px;
+}
+
 .animate{
     transition        : 1s linear;
     /**
