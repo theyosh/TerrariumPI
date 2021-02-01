@@ -11,21 +11,23 @@ import copy
 
 class terrariumEnclosure(object):
 
-  def __init__(self, id, name, engine, sensors = None, relays = None, doors = None, weather = None, setup = None):
+  def __init__(self, id, name, engine, doors = [], areas = []):
     self.id          = id
     self.name        = name
     self.engine      = engine
+    self.doors       = doors
 
-    self.all_sensors = sensors
-    self.all_relays  = relays
-    self.all_doors   = doors
+    self.areas = {}
 
-    self.weather     = weather
+    self.load_areas(areas)
 
-    self.areas       = {}
+  @property
+  def weather(self):
+    return self.engine.weather
 
-    if setup is not None:
-      self.load_setup(setup)
+  @property
+  def relays(self):
+    return self.engine.relays
 
   def __repr__(self):
     return f'Enclosure {self.name} with {len(self.areas)} areas'
@@ -33,27 +35,20 @@ class terrariumEnclosure(object):
   def __door_status(self):
     # By default, when zero doors are configured, we have to asume the doors are CLOSED
     for door in self.doors:
-      if self.all_doors[door].is_open:
+      if self.engine.buttons[door].is_open:
         return False
 
     return True
 
   def __light_status(self):
     for area_id in self.areas:
-      if 'lights' == self.areas[area_id].type and self.areas[area_id].setup.get('main_lights',None):
+      if 'lights' == self.areas[area_id].type and self.areas[area_id].setup.get('main_lights', False):
         return self.areas[area_id].state['powered']
 
     return False
 
-  def load_setup(self, setup):
-    # Create the areas from the setup
-    if setup is None:
-      return
-
-    self.doors   = setup['doors']
-
-    for area in setup['areas']:
-      # We need a deepcopy here, else changes to the area object will trigger an database update....
+  def load_areas(self, data):
+    for area in data:
       area_setup = copy.deepcopy(area.setup)
 
       self.add(terrariumArea(
@@ -77,7 +72,7 @@ class terrariumEnclosure(object):
     # First we update the main lights area, as they can change the power state for heaters and other areas
     light_areas = []
     for area_id in self.areas:
-      if 'lights' == self.areas[area_id].type and self.areas[area_id].setup.get('main_lights',False):
+      if 'lights' == self.areas[area_id].type and self.areas[area_id].setup.get('main_lights', False):
         area_states[area_id] = self.areas[area_id].update()
         light_areas.append(area_id)
 

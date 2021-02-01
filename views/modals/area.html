@@ -175,13 +175,18 @@
             </div>
           </div>
         </div>
-
         <!-- TODO: Fix nice schema's for timing and dimming values -->
-        <div class="area_lights_day_dimmer_schema">
-
+        
+        <div class="row area_alarm_day_dimmer_settings fuckbs-d-none">
+          <div class="col">
+            <ul class="nav nav-tabs mb-2" id="area_dimmer_settings_day_relays" role="tablist">
+            </ul>
+          </div>
+          <div class="tab-content" id="area_dimmer_settings_day_relays_content"></div>
         </div>
 
       </div>
+
       <div class="tab-pane fade" id="area_lights_night" role="tabpanel" aria-labelledby="night-tab">
         <div class="row">
           <div class="col-12 col-sm-12 col-md-3 col-lg-3">
@@ -216,6 +221,16 @@
             </div>
           </div>
         </div>
+        <!-- TODO: Fix nice schema's for timing and dimming values -->
+        
+        <div class="row area_alarm_night_dimmer_settings fuckbs-d-none">
+          <div class="col">
+            <ul class="nav nav-tabs mb-2" id="area_dimmer_settings_night_relays" role="tablist">
+            </ul>
+          </div>
+          <div class="tab-content" id="area_dimmer_settings_night_relays_content"></div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -361,9 +376,11 @@
         </div>
 
         <div class="row area_alarm_low_dimmer_settings fuckbs-d-none">
-          <ul class="nav nav-tabs mb-2" id="area_dimmer_settings_low_relays" role="tablist">
-          </ul>
-          <div class="tab-content" id="area_dimmer_settings_low_relays_content">
+          <div class="col">
+            <ul class="nav nav-tabs mb-2" id="area_dimmer_settings_low_relays" role="tablist">
+            </ul>
+            <div class="tab-content" id="area_dimmer_settings_low_relays_content">
+            </div>
           </div>
         </div>
       </div>
@@ -449,18 +466,86 @@
   </div>
 </div>
 
+<script type="text/html" id="area_dimmer_setting_duration">
+  <div class="row">
+    <label class="col-sm-2 col-form-label">{{ _('Dimmer on duration') }}</label>
+
+    <div class="col pt-2">
+      <input class="range_slider" data-id="dimmer_field_on"
+      data-slider-min="0"
+	    data-slider-max="100"
+      data-slider-step="1"
+      type="text">      
+    </div>
+
+    <label class="col-sm-2 col-form-label">{{ _('Dimmer of duration') }}</label>
+    <div class="col">
+      <div class="col pt-2">
+        <input class="range_slider" data-id="dimmer_field_off"
+        data-slider-min="0"
+        data-slider-max="100"
+        data-slider-step="1"
+        type="text">  
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <small class="text-muted">
+        {{ _('Set the dimmer times for going on and off. Max duration is 100 mimutes.') }}
+      </small>
+    </div>
+  </div>
+</script>
+
+<script type="text/html" id="area_relay_setting_duration">
+  <div class="row">
+    <label class="col-sm-2 col-form-label">{{ _('Relay delay on') }}</label>
+    <div class="col pt-2">
+      <input class="range_slider" data-id="dimmer_field_on"
+      data-slider-min="0"
+	    data-slider-max="100"
+      data-slider-step="1"
+      type="text">      
+    </div>
+    
+    <label class="col-sm-2 col-form-label">{{ _('Relay delay off') }}</label>
+    <div class="col pt-2">
+      <input class="range_slider" data-id="dimmer_field_off"
+      data-slider-min="0"
+	    data-slider-max="100"
+      data-slider-step="1"
+      type="text">  
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col">
+      <small class="text-muted">
+        {{ _('Select the percentage when the light should go on/off based on the dimmer timer.') }}
+      </small>
+    </div>
+  </div>
+</script>
+
 <script type="text/html" id="area_dimmer_setting_step">
   <div class="row">
     <label class="col-sm-2 col-form-label">{{ _('Step change') }}</label>
     <div class="col">
-      <input type="number" step="0.1" min="0" max="100" class="form-control" placeholder="{{ _('Enter the amount to change per step') }}" data-id="dimmer_field">
+      <input class="range_slider" data-id="dimmer_field"
+      data-slider-min="0"
+	    data-slider-max="100"
+      data-slider-step="1"
+      type="text">  
     </div>
   </div>
 </script>
+
 {% endblock %}
 
 {% block modal_form_javascript_functions %}
-function show_dimmer_step(form, part, relay_id, relay_name) {
+function show_relay_tab(form, part, relay_id, relay_name, dimmer) {
   form.find('div.row.area_alarm_' + part + '_dimmer_settings').show();
 
   let tabbs  = form.find('#area_dimmer_settings_' + part + '_relays');
@@ -475,12 +560,34 @@ function show_dimmer_step(form, part, relay_id, relay_name) {
   let panel = jQuery('<div>').addClass('tab-pane fade').attr({'id' : 'dimmer_' + part + '_setting_' + relay_id, 'role':'tabpanel', 'aria-labelledby':'dimmer_' + part + '_setting_' + relay_id + '-tab'})
 
   let dimmer_field = jQuery('<div>').addClass('col');
-  jQuery(dimmer_field).loadTemplate($('#area_dimmer_setting_step'), {
-      dimmer_field: part + '_dimmer_step_' + relay_id
-    },{ append: true, bindingOptions: {ignoreNull : true}});
 
-  dimmer_field.find('label').attr('for',part + '_dimmer_step_' + relay_id);
-  dimmer_field.find('input').attr('name',part + '_dimmer_step_' + relay_id);
+  let dimmer_field_id = part + '_dimmer_step_' + relay_id;
+  let template = '#area_dimmer_setting_step';
+
+  if (['day','night'].indexOf(part) != -1) {
+    if (dimmer) {
+      dimmer_field_id = part + '_dimmer_duration_' + relay_id;
+      template = '#area_dimmer_setting_duration'
+    } else {
+      dimmer_field_id = part + '_relay_step_' + relay_id;
+      template = '#area_relay_setting_duration'
+    }
+  }
+
+  jQuery(dimmer_field).loadTemplate($(template), {
+    dimmer_field:     dimmer_field_id,
+    dimmer_field_on:  dimmer_field_id.replace(relay_id,'on_'+relay_id),
+    dimmer_field_off: dimmer_field_id.replace(relay_id,'off_'+relay_id),
+  },{ append: true, bindingOptions: {ignoreNull : true}});
+
+  dimmer_field.find('input').each(function(counter,element){
+    element.name = element.id;
+//    console.log(element);
+  });
+
+
+  //dimmer_field.find('label').attr('for',  dimmer_field.attr('id'));
+  //dimmer_field.find('input').attr('name', dimmer_field.attr('id'));
 
   panel.append(dimmer_field);
 
@@ -488,6 +595,8 @@ function show_dimmer_step(form, part, relay_id, relay_name) {
   panels.append(panel);
 
   tab.find('a').tab('show');
+
+  panel.find('.range_slider').bootstrapSlider();
 }
 {% endblock %}
 
@@ -624,6 +733,7 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
   }
 });
 
+/*
 
 // Day and night dimmer schemas
 {{modal_type}}_form.find('.row.area_type.area_light select[id$="relays"]').on('select2:select',function(event) {
@@ -665,14 +775,43 @@ $(".slider_power").bootstrapSlider({
 });
 
 });
+*/
+
 
 // Dimmer step settings for heating, humidity, etc
-{{modal_type}}_form.find('.row.area_type:not(.area_lights) select[id$="relays"]').on('change',function(event) {
-  let relays = jQuery(event.target).val();
-  let part = (jQuery(event.target).attr('name').indexOf('low') != -1 ?'low' : 'high');
+// {{modal_type}}_form.find('.row.area_type:not(.area_lights) select[id$="relays"]').on('change',function(event) {
+{{modal_type}}_form.find('.row.area_type select[id$="relays"]').on('change',function(event) {
+  let target = jQuery(event.target);
+  console.log('Relay change', target);
+  let relays = target.val();
+  let part =  target.attr('name').split('_')[0];
+
+  let light_modus = ['day','night'].indexOf(part) != -1;
+  let dimmer_active = false;
+
+  if (light_modus) {
+    // Check if there is at least one dimmer already selected...
+    jQuery.each(relays, function(counter, relay_id) {
+      if (relay_data[relay_id] !== undefined && relay_data[relay_id].dimmer) {
+        dimmer_active = true;
+      }
+    });
+
+//    console.log(relays);
+//    console.log('At least 1 dimmer??',dimmer_active)
+  }
+
+
+
+  //   (target.attr('name').indexOf('low') != -1 ?'low' : 'high');
   jQuery.each(relays,function(counter,relay_id) {
-    if (relay_data[relay_id] !== undefined && relay_data[relay_id].dimmer) {
-      show_dimmer_step({{modal_type}}_form, part,relay_id, relay_data[relay_id].name);
+
+
+    if (relay_data[relay_id] !== undefined && (relay_data[relay_id].dimmer || (light_modus && dimmer_active))) {
+      console.log('dimmer actie');
+
+
+      show_relay_tab({{modal_type}}_form, part, relay_id, relay_data[relay_id].name, relay_data[relay_id].dimmer);
     }
   });
 });
@@ -681,7 +820,7 @@ $(".slider_power").bootstrapSlider({
   let data = event.params.data;
   if (relay_data[data.id] !== undefined && relay_data[data.id].dimmer) {
     let part = (event.target.name.indexOf('low') != -1 ? 'low' : 'high');
-    show_dimmer_step({{modal_type}}_form, part, data.id, relay_data[data.id].name);
+    show_relay_tab({{modal_type}}_form, part, data.id, relay_data[data.id].name, relay_data[relay_id].dimmer);
   }
 });
 
@@ -715,7 +854,7 @@ jQuery.when(
   });
 
   let {{modal_type}}_area_select = {{modal_type}}_form.find('select#area_type');
-  {{modal_type}}_area_select.prop('disabled', false).find('option').remove();
+  {{modal_type}}_area_select.prop('disabled', false).attr('readonly', false).find('option').remove();
 
   jQuery.each(area_types,function(counter,item){
     {{modal_type}}_area_select.append(jQuery('<option>').attr('value',item.type).text(item.name));
@@ -723,7 +862,7 @@ jQuery.when(
   {{modal_type}}_area_select.trigger('change');
 
   let {{modal_type}}_enclosure_select = {{modal_type}}_form.find('select#area_enclosure');
-  {{modal_type}}_enclosure_select.prop('disabled', false).find('option').remove();
+  {{modal_type}}_enclosure_select.prop('disabled', false).attr('readonly', false).find('option').remove();
 
   jQuery.each(enclosures[0].data,function(counter,item){
     {{modal_type}}_enclosure_select.append(jQuery('<option>').attr('value',item.id).text(item.name));
@@ -744,17 +883,24 @@ jQuery.when(
   weather_data = weather[0];
 
   // Clear dimmer step settings
+  {{modal_type}}_form.find('.area_alarm_day_dimmer_settings ul.nav').html('');
+  {{modal_type}}_form.find('.area_alarm_day_dimmer_settings div.tab-content').html('');
+
+  {{modal_type}}_form.find('.area_alarm_night_dimmer_settings ul.nav').html('');
+  {{modal_type}}_form.find('.area_alarm_night_dimmer_settings div.tab-content').html('');
+
+
   {{modal_type}}_form.find('.area_alarm_low_dimmer_settings ul.nav').html('');
   {{modal_type}}_form.find('.area_alarm_low_dimmer_settings div.tab-content').html('');
 
   {{modal_type}}_form.find('.area_alarm_high_dimmer_settings ul.nav').html('');
   {{modal_type}}_form.find('.area_alarm_high_dimmer_settings div.tab-content').html('');
 
+
   // Check if we are in edit mode.... and need to load more data....
   if ('#' != jQuery(event.relatedTarget).attr('href')) {
     // Load the button data
     let url = jQuery(event.relatedTarget).attr('href');
-
     jQuery.get(url, function(data){
       // Enable the hidden id field
       {{modal_type}}_form.find('input[name="id"]').prop('disabled',false)
@@ -793,20 +939,55 @@ jQuery.when(
           }
           field.val(value).trigger('change');
 
+          //console.log(key);
+
+          if (key.indexOf('_relays') != -1 && value != '') {
+            // The relays are set/changed, so fill the extra tweaks fields
+            console.log(key);
+
+            jQuery.each(parsed_data, function(key2,value2) {
+              if (key2.indexOf('dimmer_duration') != -1 || key2.indexOf('relay_step') != -1) {
+                //let field2 = {{modal_type}}_form.find('[name="' + key2 + '"]');
+                //field2.val(value2).trigger('change');
+
+                //console.log(field2, value2);
+
+                dimmer_steps.push({
+                  id : key2,
+                  value: value2
+                });
+
+              }
+
+            });
+
+
+          }
+/*
+          
           if (key.indexOf('dimmer_step') != -1) {
             dimmer_steps.push({
               id : key,
               value: value
             });
           }
+*/
+
         }
       });
 
       setTimeout(function(){
         jQuery.each(dimmer_steps,function(counter,data) {
-          let field = {{modal_type}}_form.find('[name="' + data['id'] + '"]');
+          let field = {{modal_type}}_form.find('[name="' + data['id'] + '"]').slider()
 
-          field.val(data['value'])
+//          console.log(field, data['value']);
+
+          field.bootstrapSlider('setValue', data['value'])
+
+
+          //{'value': data['value']}
+
+          //field.val(data['value']).trigger('change');
         });
       },100);
 

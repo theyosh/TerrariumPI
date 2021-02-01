@@ -17,10 +17,10 @@
     <div class="container-fluid">
       <div class="row" style="height: 80vh !important;">
         <div class="col-md-12">
-          <div class="card" style="height: 95%;">
+          <div class="card logging" style="height: 95%;">
             <div class="card-header">
-              <h3 class="card-title"><i class="fas fa-file-alt"></i> {{ _('System logging') }}
-                <small class="mr-2 lines_count">...</small>
+              <h3 class="card-title mr-1"><i class="fas fa-file-alt mr-2"></i>{{ _('System logging') }}
+                <small class="ml-1 mr-2 lines_count">...</small>
                 <small class="mr-2 last_update">...</small>
               </h3>
               <div class="card-tools form-inline">
@@ -73,6 +73,14 @@
   </style>
     <script>
       function update_log() {
+        let logscreen = jQuery('textarea.form-control');
+        if (!logscreen.is(':visible')) {
+          console.log(
+            'Log screen is not on page... return'
+          );
+          return
+        }
+
         let filter = jQuery('input#text_filter').val();
         let filters = [];
 
@@ -95,7 +103,6 @@
           filter = false;
         }
 
-        let logscreen = jQuery('textarea.form-control');
         let lines = jQuery('textarea#logdata').val().split('\n');
         let log = '';
         let line_counter = 0;
@@ -116,21 +123,21 @@
       }
 
       jQuery(function () {
-        jQuery('textarea#logdata').on('change',function(){
+        jQuery('div.logging textarea#logdata').off('change').on('change',function(){
           jQuery('.last_update').text(moment().format('LLLL'));
           update_log();
         });
-        jQuery('input[type="checkbox"]').on('change',function(){
+        jQuery('div.logging  input[type="checkbox"]').off('change').on('change',function(){
           update_log();
         });
-        jQuery('input#text_filter').on('keyup',function() {
+        jQuery('div.logging input#text_filter').off('keyup').on('keyup',function() {
           jQuery('i#clear_text_filter').toggle(this.value != '');
           update_log();
         });
 
-        jQuery('i#clear_text_filter').on('click',function(){
-          jQuery('input#text_filter').val('');
-          jQuery('i#clear_text_filter').toggle(false);
+        jQuery('div.logging i#clear_text_filter').off('click').on('click',function(){
+          jQuery('div.logging input#text_filter').val('');
+          jQuery('div.logging i#clear_text_filter').toggle(false);
           update_log();
         });
 
@@ -147,7 +154,7 @@
                 log = line + '\n' + log;
               }
             });
-            jQuery('textarea#logdata').val(log.trim()).trigger('change');
+            jQuery('div.logging textarea#logdata').val(log.trim()).trigger('change');
           }
         });
       });

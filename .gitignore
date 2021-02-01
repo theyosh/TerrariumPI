@@ -13,3 +13,6 @@ logging.custom.cfg
 notifications.cfg
 motd.sh
 .cache
+screenlog.*
+.vscode*
+.Trash*

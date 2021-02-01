@@ -8,6 +8,7 @@ import datetime
 
 import statistics
 import threading
+import uuid
 
 from pony import orm
 from terrariumDatabase import Sensor
@@ -83,18 +84,24 @@ class terrariumArea(object):
     return super(terrariumArea, cls).__new__(terrariumArea.__TYPES[type]['class']())
 
   def __init__(self, id, enclosure, type, name, mode, setup):
+    if id is None:
+      id = str(uuid.uuid4())
+
     self.id   = id
     self.type = type
     self.name = name
     self.mode = mode
 
     self.enclosure = enclosure
-    self.setup = setup
+
+    self.load_setup(setup)
+
+    #self.setup = setup
 
     # self.light_status = lights_callback
     # self.door_status = door_callback
 
-    self._setup()
+    #self._setup()
 
 
   def __repr__(self):
@@ -194,7 +201,9 @@ class terrariumArea(object):
 
     return True
 
-  def _setup(self):
+  def load_setup(self, data):
+    self.setup = copy.deepcopy(data)
+
     self.state = {
       'last_update' : int(datetime.datetime(1970,1,1).timestamp()),
       'powered' : None
@@ -225,6 +234,57 @@ class terrariumArea(object):
           self.state[period] = {}
 
         self._time_table()
+
+
+      ## Add the dimmer / relay extra tweaks...
+
+      print('TWEAKS')
+      print(self)
+      print(self.setup[period])
+
+      self.setup[period]['tweaks'] = {}
+      
+      dimmer_found = False
+      average_dimmer_durations = {'on' : [], 'off' : []}
+      for relay_id in self.setup[period]['relays']:
+        relay = self.enclosure.relays[relay_id]
+        if not dimmer_found:
+          dimmer_found = relay.is_dimmer
+
+        field = ('dimmer_duration_' if relay.is_dimmer else 'relay_step_') + 'on_' + relay.id
+        extra_tweaks = self.setup[period].get(field, False)
+
+        print(f'Looking for field {field} -> {extra_tweaks}')
+
+#        extra_tweaks = self.setup[period].get(field, False)
+
+
+        if extra_tweaks != False:
+
+          # Durations are in minutes for dimmers, in percentage for relays
+          self.setup[period]['tweaks'][relay.id] = {
+            'on'  : float(self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_step_') + 'on_' + relay.id]),
+            'off' : float(self.setup[period][('dimmer_duration_' if relay.is_dimmer else 'relay_step_') + 'off_' + relay.id]),
+          }
+
+          print('tweaks added')
+          print(self.setup[period]['tweaks'])
+
+          if relay.is_dimmer:
+            average_dimmer_durations['on'].append(self.setup[period]['tweaks'][relay.id]['on'])
+            average_dimmer_durations['off'].append(self.setup[period]['tweaks'][relay.id]['off'])
+
+      if not dimmer_found:
+        # There was no dimmer in the relay list. So all normal on/off.
+        self.setup[period]['tweaks'] = {}
+      elif len(average_dimmer_durations['on']) > 0:
+        # Add the average dimmer duration, so that the normal relays can use for their percentage delay toggle
+        self.setup[period]['tweaks']['on']  = {'dimmer_duration' : statistics.mean(average_dimmer_durations['on'])}
+        self.setup[period]['tweaks']['off'] = {'dimmer_duration' : statistics.mean(average_dimmer_durations['off'])}
+
+      print('Extra tweaks')
+      print(self.setup[period]['tweaks'])
+
 
   def _is_timer_time(self, period):
     now = int(datetime.datetime.now().timestamp())
@@ -332,24 +392,57 @@ class terrariumArea(object):
 
   def relays_state(self, part):
     for relay in self.setup[part]['relays']:
-      if self.enclosure.all_relays[relay].is_off():
+      if self.enclosure.relays[relay].is_off():
         return False
 
     return True
 
   def relays_toggle(self, part, on):
+    logger.info(f'Toggle the relays for area {self} to state {("on" if on else "off")}.')
+
     for relay in self.setup[part]['relays']:
+      relay = self.enclosure.relays[relay]
+      tweaks = self.setup[part]['tweaks']
+
+      duration_or_delay_value = tweaks.get(str(relay.id), None)
+      duration_or_delay_value = 0 if duration_or_delay_value is None else float(duration_or_delay_value['on' if on else 'off'])
+
+      if relay.is_dimmer:
+        duration_or_delay_value *= 60.0
+      else:
+        duration_or_delay_value = (float(duration_or_delay_value)/100) * (tweaks['on' if on else 'off']['dimmer_duration'] * 60.0)
+
       if on:
-        logger.info(f'Toggle on the relays for area {self}.')
-        self.enclosure.all_relays[relay].on()
-        self.state['powered'] = True
+        
+        if relay.is_dimmer:
+#          duration_or_delay_value *= 60.0
+          logger.info(f'Start the dimmer {relay.name} from 0 to {relay.ON}% in {duration_or_delay_value} seconds')
+          # TODO: In the future we will also be able to set the ON value...
+        else:
+#          duration_or_delay_value = (float(duration_or_delay_value)/100) * (tweaks['on']['dimmer_duration'] * 60.0)
+          logger.info(f'Set the relay {relay.name} to on with {duration_or_delay_value} seconds delay')
+
+        self.enclosure.relays[relay.id].on(relay.ON,duration_or_delay_value)        
+       # self.state['powered'] = True
         self.state[part]['last_powered_on'] = int(datetime.datetime.now().timestamp())
 
       else:
-        logger.info(f'Toggle off the relays for area {self}.')
-        self.enclosure.all_relays[relay].off()
-        self.state['powered'] = False
+
+        if relay.is_dimmer:
+ #         duration_or_delay_value *= 60.0
+          logger.info(f'Stopping the dimmer {relay.name} from {relay.OFF}% to 0 in {duration_or_delay_value} seconds')
+          # TODO: In the future we will also be able to set the ON value...
+        else:
+#          duration_or_delay_value = (float(duration_or_delay_value)/100) * (tweaks['off']['dimmer_duration'] * 60.0)
+          logger.info(f'Set the relay {relay.name} to off with {duration_or_delay_value} seconds delay')
+
+        self.enclosure.relays[relay.id].on(relay.OFF,duration_or_delay_value)
+
+ #       self.state['powered'] = False
         self.state[part]['timer_on'] = False
+
+    self.state['powered'] = on
+    
 
   def _time_schema(self):
     return {

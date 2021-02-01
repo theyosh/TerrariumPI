@@ -22,7 +22,7 @@ INSTALLER_TITLE="TerrariumPI v. ${VERSION} (Python 3)"
 CLEANUP_PACKAGES="wolfram sonic-pi openbox nodered java openjdk chromium-browser desktop-base gnome-desktop3-data libgnome-desktop epiphany-browser-data epiphany-browser nuscratch scratch wiringpi libreoffice"
 PYTHON_LIBS="python3-pip python3-dev python3-venv"
 OPENCV_PACKAGES="libopenexr23 libilmbase23 liblapack3 libatlas3-base"
-APT_PACKAGES="screen git watchdog i2c-tools pigpio owserver sqlite3 ffmpeg sispmctl ntp ${OPENCV_PACKAGES} ${PYTHON_LIBS}"
+APT_PACKAGES="screen git watchdog i2c-tools pigpio owserver sqlite3 ffmpeg sispmctl ntp libxslt1.1 ${OPENCV_PACKAGES} ${PYTHON_LIBS}"
 
 PIP_MODULES=""
 while IFS= read -r line; do

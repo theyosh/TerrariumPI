@@ -264,11 +264,23 @@ class terrariumRelay(object):
 
     return new_data
 
-  def on(self, force = False):
-    return self.set_state(self.ON, force)
+#  def on(self, force = False):
+  def on(self, value = 100, delay = 0.0):      
+    threading.Timer(delay, lambda: self.set_state(value)).start()
+    # Not great, but the set_state has a callback for updates
+    return True
 
-  def off(self, force = False):
-    return self.set_state(self.OFF, force)
+    #return self.set_state(self.ON, force)
+
+  def off(self, value = 0, delay = 0.0):      
+    threading.Timer(delay, lambda: self.set_state(value)).start()
+    # Not great, but the set_state has a callback for updates
+    return True
+
+
+
+  # def off(self, force = False):
+  #   return self.set_state(self.OFF, force)
 
   def is_on(self):
     return self.state == self.ON
@@ -316,7 +328,7 @@ class terrariumRelayDimmer(terrariumRelay):
 
     print(f'Starting from {current_state} to {to} in {steps} steps. Per step we wait {pause_time} seconds for total {duration} seconds')
 
-    for counter in range(steps):
+    for counter in range(int(steps)):
       current_state += direction
       print(f'Set to state: {current_state}')
       self.set_state(current_state)
@@ -339,10 +351,10 @@ class terrariumRelayDimmer(terrariumRelay):
         # Current power is higher then the new limit. So lower down the power now!
         self.on(self.ON,0)
 
-  def on(self, value = 100, duration = 30 * 60):
-    print(f'Putting {self} on to {value} in {duration} seconds')
+  def on(self, value = 100, duration = 0):
+#    print(f'Putting {self} on to {value} in {duration} seconds')
     value = max(self.OFF,min(self.ON,value))
-    print(f'Putting {self} on to corrected {value} in {duration} seconds')
+#    print(f'Putting {self} on to corrected {value} in {duration} seconds')
 
     if value == self.state:
       return True
@@ -354,7 +366,7 @@ class terrariumRelayDimmer(terrariumRelay):
     if not self.__dimmer_active:
       self.__dimmer_active = True
       threading.Thread(target=self.__running,args=(value, duration)).start()
-      print('Thread started....')
+#      print('Thread started....')
       return True
 
     return False

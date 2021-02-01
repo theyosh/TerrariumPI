@@ -70,11 +70,15 @@ class terrariumEngine(object):
                   'wattage'     : 'W',
                  }
 
-    self.__engine = {'exit' : threading.Event(), 'thread' : None, 'logtail' : None}
+    #self.__engine = {'exit' : threading.Event(), 'thread' : None, 'logtail' : None}
+
+    self.__engine = {'thread' : None, 'logtail' : None}
 
     self.version = version
     self.latest_version = None
     init_db()
+
+    self.running = True
 
     # Make the first round of logging visible to the console, as this is the startup
     old_log_level = terrariumLogging.logging.getLogger().handlers[0].level
@@ -101,7 +105,7 @@ class terrariumEngine(object):
     self.__load_existing_sensors()
 
     logger.info('Scanning for new sensors ...')
-    #self.__scan_new_sensors()
+    self.__scan_new_sensors()
     logger.info(f'Loaded {len(self.sensors)} sensors in {time.time()-start:.2f} seconds.')
 
     # Loading relays
@@ -110,7 +114,7 @@ class terrariumEngine(object):
     self.__load_existing_relays()
 
     logger.info('Scanning for new relays ...')
-    #self.__scan_new_relays()
+    self.__scan_new_relays()
     logger.info(f'Loaded {len(self.relays)} relays in {time.time()-start:.2f} seconds.')
 
     # Loading buttons....
@@ -243,7 +247,7 @@ class terrariumEngine(object):
 
     # Load device information
     try:
-      settings['device'] = re.search('Model\s+:\s+(?P<device>.*)', Path('/proc/cpuinfo').read_text()).group('device')
+      settings['device'] = re.search(r'Model\s+:\s+(?P<device>.*)', Path('/proc/cpuinfo').read_text()).group('device')
     except Exception as ex:
       logger.debug(f'Error getting Pi info: {ex}')
       settings['device'] = 'Unknown'
@@ -260,7 +264,7 @@ class terrariumEngine(object):
       if 'cm' == settings['distance_indicator']:
         self.units['windspeed'] = 'km/h'
       elif 'inch' == settings['distance_indicator']:
-        self.settings['windspeed'] = 'm/h'
+        self.units['windspeed'] = 'm/h'
 
     elif 'm/s' == settings['wind_speed_indicator']:
       if 'cm' == settings['distance_indicator']:
@@ -299,8 +303,6 @@ class terrariumEngine(object):
 
     if datetime.datetime.now() - self.__last_update_check > datetime.timedelta(days=terrariumEngine.__VERSION_UPDATE_CHECK_TIMEOUT):
       version_data = terrariumUtils.get_remote_data('https://api.github.com/repos/theyosh/TerrariumPI/releases/latest',json=True)
-#      print('Version data')
-#      print(version_data)
       if version_data is None:
         logger.warning('Unable to get the latest version information from Github. Will check next round.')
         return False
@@ -329,6 +331,9 @@ class terrariumEngine(object):
 
     elif isinstance(item,terrariumEnclosure):
       self.enclosures[item.id] = item
+
+    elif isinstance(item,terrariumArea):
+      self.enclosures[item.enclosure.id].add(item)
 
     return item
 
@@ -370,6 +375,14 @@ class terrariumEngine(object):
       self.webcams[data['id']].awb        = data['awb']
 
       update_ok = True
+
+    elif issubclass(item, terrariumEnclosure):
+      print('Update enclosure with data')
+      print(data)
+      #self.enclosures[data['id']].setup = data['setup']
+
+      update_ok = True
+
 
     return update_ok
 
@@ -517,6 +530,7 @@ class terrariumEngine(object):
     for sensor_type, avg_data in self.sensor_averages.items():
       self.webserver.websocket_message('gauge_update', { 'id' : f'avg_{sensor_type}', 'value' : avg_data['value']})
 
+  # TODO: Use db avg functions
   @property
   def sensor_averages(self):
     start = time.time()
@@ -827,20 +841,23 @@ class terrariumEngine(object):
           logger.debug(f'Loading {enclosure}.')
 
           #try:
-          setup = {
-            'doors' : [door.id for door in enclosure.doors],
-            'areas' : list(enclosure.areas)
-          }
+          # setup = {
+          #   'doors' : [door.id for door in enclosure.doors],
+          #   'areas' : list(enclosure.areas)
+          # }
           # TODO: Sensors should be database entities... so query them when needed in the area itselfs
           new_enclosure = self.add(terrariumEnclosure(
                                       str(enclosure.id),
                                       enclosure.name,
                                       self,
-                                      sensors = self.sensors,
-                                      relays  = self.relays,
-                                      doors   = self.buttons,
-                                      weather = self.weather,
-                                      setup   = setup))
+                                      [door.id for door in enclosure.doors],
+                                      list(enclosure.areas)))
+
+                                      # sensors = self.sensors,
+                                      # relays  = self.relays,
+                                      # doors   = self.buttons,
+                                      # weather = self.weather,
+                                      # setup   = setup))
 
         else:
           logger.debug(f'Updated already loaded {enclosure}.')
@@ -1039,7 +1056,9 @@ class terrariumEngine(object):
     # A small sleep here, will make the webinterface start directly. Else we have to wait till the first update run is done :(
     sleep(0.25)
     prev_delay = 0
-    while not self.__engine['exit'].is_set():
+
+#    while not self.__engine['exit'].is_set():
+    while self.running:
       logger.info(f'Starting a new update round with {len(self.sensors)} sensors, {len(self.relays)} relays, {len(self.buttons)} buttons and {len(self.webcams)} webcams.')
       start = time.time()
       update_threads = []
@@ -1077,13 +1096,22 @@ class terrariumEngine(object):
       duration = time.time() - start
       time_left = terrariumEngine.__ENGINE_LOOP_TIMEOUT - duration
 
-      if time_left > 0:
+      print(f'[{datetime.datetime.now()}] Wait {time_left} seconds for next round')
+      print(f'[{datetime.datetime.now()}] Time left form last round: {prev_delay}')
+      print(f'[{datetime.datetime.now()}] Finale timeout: {max(0,time_left-prev_delay)}')
+
+      if time_left > 0.0:
         logger.info(f'Engine update done in {duration:.2f} seconds. Waiting for {time_left:.2f} seconds for the next round.')
-        self.__engine['exit'].wait(max(0,time_left-prev_delay))
+        sleep(max(0,time_left-prev_delay))
+#        self.__engine['exit'].wait(max(0,time_left-prev_delay))
+        print(f'[{datetime.datetime.now()}] Done waiting....')
       else:
         prev_delay = abs(time_left)
         logger.warning(f'Engine update took {duration:.2f} seconds. That is {prev_delay:.2f} seconds short.')
 
+    # print(f'Exit state:')
+    # print(self.__engine['exit'])
+    # print(dir(self.__engine['exit']))
     logger.info('Engine stopped')
 
 
@@ -1406,12 +1434,32 @@ class terrariumEngine(object):
     terrariumLogging.logging.getLogger().handlers[0].setLevel(terrariumLogging.logging.INFO)
     logger.info(f'Stopping TerrariumPI {self.version} ...')
 
+    self.running = False
+
     # Stop engine processing first....
-    self.__engine['exit'].set()
+    #print('Trigger exit event')
+    #print(self.__engine['exit'])
+    #print(dir(self.__engine['exit']))
+
+    #self.__engine['exit'].set()
+    #print('Exit event done')
 
     # Wait till the engine is done, when it was updating the sensors
+    print('Stop logtail process')
+    self.__logtail_process.terminate()
+    print('Logtail process is done')
+
+    print('Wait on the engine to stop...')
+    print(self.__engine['thread'])
+    print(f' Thread alive: {self.__engine["thread"].is_alive()}')
+    print(f' Thread daemon: {self.__engine["thread"].isDaemon()}')
+    print(dir(self.__engine['thread']))
+
     self.__engine['thread'].join()
+    print('Engine stopped...')
+    print('Wait on logtail to stop....')
     self.__engine['logtail'].join()
+    print('Logtail thread is stopped')
 
     #self.environment.stop()
 
@@ -1433,8 +1481,9 @@ class terrariumEngine(object):
         logger.info(f'Stopped {webcam}')
 
     self.notification.stop()
+    print('Totally stopped TerrariumPI')
 
-    self.__logtail_process.terminate()
+    
 
 
 
