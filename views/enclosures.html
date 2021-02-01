@@ -14,7 +14,7 @@
                 <td data-content="type"></td>
                 <td data-content="mode"></td>
                 <td> .. </td>
-                <td>
+                <td class="actions">
                   <i class="fas fa-wrench mr-1 edit_area" data-template-bind='[
                     {"attribute": "id", "value": "id" },
                     {"attribute": "title", "value": "name", "formatter": "prefixer", "formatOptions": "{{ _('Edit area') }} "} ]'
@@ -32,7 +32,7 @@
             <script type="text/html" id="enclosure_template">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title"><i class="fas fa-globe"></i> <span data-content="name">...</span></h3>
+                  <h3 class="card-title mr-1"><i class="fas fa-globe mr-2"></i><span data-content="name">...</span></h3>
                   <small class="badge badge-danger"></small>
                   <small class="badge badge-warning"></small>
                   <small class="badge badge-primary"></small>
@@ -101,7 +101,7 @@
                                 <th>{{ _('Type') }}</th>
                                 <th>{{ _('Mode') }}</th>
                                 <th>{{ _('Status') }}</th>
-                                <th style="width: 40px">{{ _('Actions') }}</th>
+                                <th style="width: 40px" class="actions">{{ _('Actions') }}</th>
                               </tr>
                             </thead>
                             <tbody
@@ -134,9 +134,16 @@
 
         enclosure.edit_link   = '{{ url_for('api:enclosure_update', enclosure='_id_') }}'.replace('_id_',enclosure.id);
         enclosure.delete_link = '{{ url_for('api:enclosure_delete', enclosure='_id_') }}'.replace('_id_',enclosure.id);
+        
         jQuery('#enclosure_list').loadTemplate(jQuery('#enclosure_template'), enclosure, {
           append: true,
         });
+        
+        {% if authenticated %}
+          jQuery('table .action').show();
+        {% else %}
+          jQuery('table .action').hide();
+        {% endif %}
       });
 
       jQuery('i.edit_area').each(function(counter, element){

@@ -1857,7 +1857,7 @@ function websocket_init(reconnect) {
           badge.removeClass('opacity-' + (current_val+1)).text(current_val+1).addClass('opacity-' + (current_val+2));
         }
 
-        let logging = jQuery('textarea#logdata');
+        let logging = jQuery('div.logging textarea#logdata');
         if (logging.length == 1) {
           logging.val(message.data + '\n' + logging.val()).trigger('change');
         }

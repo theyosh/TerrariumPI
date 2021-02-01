@@ -49,8 +49,8 @@
         </div>
       </div>
     </div>
-    
-  
+
+
 
     <div class="row">
       <div class="form-group col">
@@ -116,6 +116,9 @@ jQuery.when(
           if ('doors' == key) {
             // Create a new array from the doors array with only the door ids
             value = Array.from(value, door => door.id);
+          } else if ('webcams' == key) {
+            // Create a new array from the doors array with only the door ids
+            value = Array.from(value, webcam => webcam.id);
           }
           field.val(value).trigger('change');
         }

@@ -16,13 +16,14 @@ from hashlib import md5
 from apispec import APISpec
 from apispec_webframeworks.bottle import BottlePlugin
 
-from terrariumArea     import terrariumArea
-from terrariumDatabase import Area, Audiofile, Button, ButtonHistory, Enclosure, Relay, RelayHistory, Sensor, SensorHistory, Setting, Webcam
-from terrariumCalendar import terrariumCalendar
-from hardware.sensor   import terrariumSensor
-from hardware.relay    import terrariumRelay
-from hardware.button   import terrariumButton
-from hardware.webcam   import terrariumWebcam
+from terrariumArea      import terrariumArea
+from terrariumEnclosure import terrariumEnclosure
+from terrariumDatabase  import Area, Audiofile, Button, ButtonHistory, Enclosure, Relay, RelayHistory, Sensor, SensorHistory, Setting, Webcam
+from terrariumCalendar  import terrariumCalendar
+from hardware.sensor    import terrariumSensor
+from hardware.relay     import terrariumRelay
+from hardware.button    import terrariumButton
+from hardware.webcam    import terrariumWebcam
 
 from terrariumUtils import terrariumUtils
 
@@ -214,7 +215,8 @@ class terrariumAPI(object):
 
 
 
-
+  def _return_data(self, message, data):
+    return {'message':message, 'data':data}
 
   # Areas
   def area_types(self):
@@ -237,7 +239,6 @@ class terrariumAPI(object):
       area = Area[area]
       area_data = area.to_dict(exclude='enclosure')
       area_data['id']  = str(area.id)
-      #area_data['value']  = area.value
       return area_data
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Area with id {area} does not exists.')
@@ -248,18 +249,20 @@ class terrariumAPI(object):
   def area_add(self):
     try:
 
-      #new_area = self.webserver.engine.add(terrariumArea(None, request.json['hardware'], request.json['address'], request.json['name']))
-      #request.json['id']      = new_area.id
+      new_area = self.webserver.engine.add(terrariumArea(None, request.json['enclosure'], request.json['type'], request.json['name'], request.json['mode'], request.json['setup']))
+      request.json['id']      = new_area.id
       #request.json['address'] = new_area.address
 
       area = Area(**request.json)
+
+      return self.area_detail(str(area.pk))
       #new_value = new_area.update()
       #area.update(new_value)
 
-      area_data = area.to_dict(exclude='enclosure')
-      area_data['id']  = str(area.id)
-      #area_data['value']  = area.value
-      return area_data
+      # area_data = area.to_dict(exclude='enclosure')
+      # area_data['id']  = str(area.id)
+      # #area_data['value']  = area.value
+      # return area_data
     except Exception as ex:
       raise HTTPError(status=500, body=f'Area could not be added. {ex}')
 
@@ -267,13 +270,16 @@ class terrariumAPI(object):
   def area_update(self, area):
     try:
       area = Area[area]
+
       area.set(**request.json)
       #self.webserver.engine.update(terrariumArea,**request.json)
 
-      area_data = area.to_dict(exclude='enclosure')
-      area_data['id']  = str(area.id)
+      #area_data = area.to_dict(exclude='enclosure')
+      #area_data['id']  = str(area.id)
       #area_data['value']  = area.value
-      return area_data
+      return self.area_detail(str(area.id))
+
+      #return self._return_data(f'Update for \'{area}\' succeeded.',self.area_detail(str(area.pk))))
     except orm.core.ObjectNotFound as ex:
       raise HTTPError(status=404, body=f'Area with id {area} does not exists.')
     except Exception as ex:
@@ -602,7 +608,6 @@ class terrariumAPI(object):
         enclosure_data['webcams'].remove(webcam)
 
         webcam_data = webcam.to_dict(exclude='enclosure')
-#        webcam_data['value'] = webcam.value
 
         enclosure_data['webcams'].append(webcam_data)
 
@@ -622,6 +627,9 @@ class terrariumAPI(object):
       request.json['webcams'] = webcams_set
       enclosure = Enclosure(**request.json)
 
+      # TODO: Fix this? We can't new enclosures without a restart .... :(
+      #self.webserver.engine.add(terrariumEnclosure)
+
       return self.enclosure_detail(enclosure.id)
 
     except orm.core.ObjectNotFound as ex:
@@ -634,6 +642,10 @@ class terrariumAPI(object):
     try:
       enclosure = Enclosure[enclosure]
 
+      print('Update enclosure data to the engine')
+      # TODO: Will this work... not sure....
+      self.webserver.engine.update(terrariumEnclosure,**request.json)
+
       doors_set = Button.select(lambda b: b.id in request.json['doors'])
       request.json['doors'] = doors_set
 
@@ -642,7 +654,9 @@ class terrariumAPI(object):
 
       enclosure.set(**request.json)
 
- #     self.webserver.engine.update(terrariumEnclosure,**request.json)
+      # print('Update enclosure data to the engine')
+      # # TODO: Will this work... not sure....
+      # self.webserver.engine.update(terrariumEnclosure,**request.json)
 
    #   enclosure_data = enclosure.to_dict(with_collections=True)
     #  enclosure_data['id']  = str(enclosure.id)
