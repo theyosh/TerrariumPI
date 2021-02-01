@@ -70,9 +70,9 @@ class terrariumEngine(object):
                   'wattage'     : 'W',
                  }
 
-    #self.__engine = {'exit' : threading.Event(), 'thread' : None, 'logtail' : None}
+    self.__engine = {'exit' : threading.Event(), 'thread' : None, 'logtail' : None}
 
-    self.__engine = {'thread' : None, 'logtail' : None}
+    #self.__engine = {'thread' : None, 'logtail' : None}
 
     self.version = version
     self.latest_version = None
@@ -1057,8 +1057,8 @@ class terrariumEngine(object):
     sleep(0.25)
     prev_delay = 0
 
-#    while not self.__engine['exit'].is_set():
-    while self.running:
+    while not self.__engine['exit'].is_set():
+#    while self.running:
       logger.info(f'Starting a new update round with {len(self.sensors)} sensors, {len(self.relays)} relays, {len(self.buttons)} buttons and {len(self.webcams)} webcams.')
       start = time.time()
       update_threads = []
@@ -1102,8 +1102,8 @@ class terrariumEngine(object):
 
       if time_left > 0.0:
         logger.info(f'Engine update done in {duration:.2f} seconds. Waiting for {time_left:.2f} seconds for the next round.')
-        sleep(max(0,time_left-prev_delay))
-#        self.__engine['exit'].wait(max(0,time_left-prev_delay))
+#        sleep(max(0,time_left-prev_delay))
+        self.__engine['exit'].wait(max(0,time_left-prev_delay))
         print(f'[{datetime.datetime.now()}] Done waiting....')
       else:
         prev_delay = abs(time_left)
@@ -1437,12 +1437,12 @@ class terrariumEngine(object):
     self.running = False
 
     # Stop engine processing first....
-    #print('Trigger exit event')
-    #print(self.__engine['exit'])
-    #print(dir(self.__engine['exit']))
+    print('Trigger exit event')
+    print(self.__engine['exit'])
+    print(dir(self.__engine['exit']))
 
-    #self.__engine['exit'].set()
-    #print('Exit event done')
+    self.__engine['exit'].set()
+    print('Exit event done')
 
     # Wait till the engine is done, when it was updating the sensors
     print('Stop logtail process')
