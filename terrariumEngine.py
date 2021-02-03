@@ -1704,13 +1704,14 @@ class terrariumEngine(object):
   # -= NEW =-
   @property
   def total_power_and_water_usage(self):
+    # We are using total() vs sum() as total() will always return a number. https://sqlite.org/lang_aggfunc.html#sumunc
     with orm.db_session():
       data = RelayHistory.get_by_sql(
         """SELECT
              DISTINCT relay,
-             SUM(total_wattage) AS wattage,
-             SUM(total_flow)    AS flow,
-             (JulianDay(MAX(timestamp2)) - JulianDay(MIN(timestamp))) * 24 * 60 * 60 AS timestamp
+             TOTAL(total_wattage) AS wattage,
+             TOTAL(total_flow)    AS flow,
+             IFNULL((JulianDay(MAX(timestamp2)) - JulianDay(MIN(timestamp))) * 24 * 60 * 60,0) AS timestamp
            FROM (
              SELECT
                RH1.relay     as relay,
