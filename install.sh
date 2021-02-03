@@ -288,8 +288,8 @@ if [ ! -h /etc/update-motd.d/05-terrariumpi ]; then
 fi
 
 # Setup logging symlinks
-ln -s "${BASEDIR}/log/terrariumpi.log" /dev/shm/terrariumpi.log
-ln -s "${BASEDIR}/log/terrariumpi.access.log" /dev/shm/terrariumpi.access.log
+su -c 'ln -s /dev/shm/terrariumpi.log "${BASEDIR}/log/terrariumpi.log"' -s /bin/bash ${SCRIPT_USER}
+su -c 'ln -s /dev/shm/terrariumpi.access.log "${BASEDIR}/log/terrariumpi.access.log"' -s /bin/bash ${SCRIPT_USER}
 
 # We are done!
 sync
