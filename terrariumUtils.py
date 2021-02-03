@@ -184,6 +184,9 @@ class terrariumUtils():
 
   @staticmethod
   def check_password(password, hash):
+    if password is None or has is None:
+      return False
+      
     return bcrypt.checkpw(password.encode(), hash.encode())
 
   @staticmethod
