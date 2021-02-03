@@ -1483,7 +1483,7 @@ class terrariumEngine(object):
     self.notification.stop()
     print('Totally stopped TerrariumPI')
 
-    
+
 
 
 
@@ -1647,7 +1647,7 @@ class terrariumEngine(object):
   # System functions part
   # -= NEW =-
   def authenticate(self, username, password):
-    return username == self.settings.get('user', None) and terrariumUtils.check_password(password, self.settings.get('password', None))
+    return username == self.settings.get('username', None) and terrariumUtils.check_password(password, self.settings.get('password', None))
     #   password == self.settings.get('password', None)
 
   # -= NEW =-
