@@ -1695,7 +1695,7 @@ function calendar_indicator() {
   jQuery.get('/api/calendar/', function(data) {
     let calender_bar = jQuery('nav.main-header li.calendar');
 
-    calender_bar.find('span.navbar-badge').text(data.length);
+    calender_bar.find('span.navbar-badge').text((data.length > 0 ? data.length : ''));
     calender_bar.find('span.dropdown-header span').text(data.length);
     calender_bar.find('div.events').html('');
 
