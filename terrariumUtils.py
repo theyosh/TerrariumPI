@@ -183,11 +183,11 @@ class terrariumUtils():
     return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode('utf8')
 
   @staticmethod
-  def check_password(password, hash):
-    if password is None or has is None:
+  def check_password(password, passwordhash):
+    if password is None or passwordhash is None:
       return False
-      
-    return bcrypt.checkpw(password.encode(), hash.encode())
+
+    return bcrypt.checkpw(password.encode(), passwordhash.encode())
 
   @staticmethod
   def to_fahrenheit(value):
