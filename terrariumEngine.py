@@ -1423,12 +1423,6 @@ class terrariumEngine(object):
 
     logger.info('Stopped log tailing.')
 
-  # def __unit_type(self,unittype):
-  #   if unittype in self.units:
-  #     return self.units[unittype]
-
-  #   return None
-
   # -= NEW =-
   def stop(self):
     terrariumLogging.logging.getLogger().handlers[0].setLevel(terrariumLogging.logging.INFO)
@@ -1595,7 +1589,6 @@ class terrariumEngine(object):
   # End Environment part
 
 
-
   # Profile part
   def get_profile_config(self):
     data = self.config.get_profile()
@@ -1648,7 +1641,6 @@ class terrariumEngine(object):
   # -= NEW =-
   def authenticate(self, username, password):
     return username == self.settings.get('username', None) and terrariumUtils.check_password(password, self.settings.get('password', None))
-    #   password == self.settings.get('password', None)
 
   # -= NEW =-
   def system_stats(self):

@@ -314,15 +314,6 @@ class terrariumWebserver(object):
   def authenticate(self, required = False):
     return self.__auth_basic(self.engine.authenticate,required,_('TerrariumPI') + ' ' + _('Authentication'),_('Authenticate to make any changes'))
 
-  # def __reboot(self):
-  #   terrariumUtils.get_script_data('sudo reboot')
-
-  # def __shutdown(self):
-  #   terrariumUtils.get_script_data('sudo shutdown')
-
-
-
-
   def __player_commands(self,action):
     result = {'ok' : False, 'title' : _('Error!'), 'message' : _('Player command could ot be executed!')}
 
