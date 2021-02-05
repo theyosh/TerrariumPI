@@ -99,7 +99,7 @@
                 </li>
               </script>
               <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
-                <a href="{{ url_for('api:sensor_add') }}" class="nav-link" title="{{ _('Add new sensor') }}" data-toggle="modal" data-target="#modal-sensor-setup">
+                <a href="#" class="nav-link" title="{{ _('Add new sensor') }}" data-toggle="modal" data-target="#modal-sensor-setup">
                   <i class="fas fa-plus nav-icon"></i>
                   <p>{{ _('Add new sensor') }}</p>
                 </a>
