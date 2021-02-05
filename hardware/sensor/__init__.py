@@ -166,6 +166,10 @@ class terrariumSensor(object):
       self._device['id'] = value.strip()
 
   @property
+  def hardware(self):
+    return self.HARDWARE
+
+  @property
   def name(self):
     return self._device['name']
 
