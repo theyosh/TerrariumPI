@@ -6,6 +6,18 @@
       <div class="container-fluid">
         <!-- Main row -->
         <div class="row">
+          <div style="width: 80%; text-align: center; margin: 5% 30%" class="zero_message fuckbs-d-none">
+            <div class="callout callout-info">
+              <h5>{{ _('No relays') }}</h5>
+              <p class="pt-3">
+                {% if authenticated %}
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-relay-setup" >{{ _('Add new relay') }}</button>
+                {% else %}
+                <a href="{{ url_for('login') }}" class="dropdown-item">{{ _('Please login to make changes') }}</a>
+                {% endif %}
+              </p>
+            </div>
+          </div>
           <!-- Left col -->
           <div class="col" id="relay_list">
             <script type="text/html" id="relay_template">
@@ -110,6 +122,12 @@
       data = data.data;
       // Sort the relays based on the given relay name
       data.sort((a, b) => a.name.localeCompare(b.name));
+
+      if (data.length > 0) {
+        jQuery('.zero_message').remove();
+      } else {
+        jQuery('.zero_message').show();
+      }
 
       jQuery.each(data,function(counter, relay) {
         relay.export_link      = '{{ url_for('api:relay_history',  relay='_id_', action="export") }}'.replace('_id_',relay.id);

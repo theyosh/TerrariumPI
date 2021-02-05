@@ -7,6 +7,20 @@
   <div class="container-fluid">
     <!-- Main row -->
     <div class="row" id="sensor_list">
+
+      <div style="width: 80%; text-align: center; margin: 5% 30%" class="zero_message fuckbs-d-none">
+        <div class="callout callout-info">
+          <h5>{{ _('No sensors') }}</h5>
+          <p class="pt-3">
+            {% if authenticated %}
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-sensor-setup" >{{ _('Add new sensor') }}</button>
+            {% else %}
+            <a href="{{ url_for('login') }}" class="dropdown-item">{{ _('Please login to make changes') }}</a>
+            {% endif %}
+          </p>
+        </div>
+      </div>
+
       <!-- Left col -->
       <script type="text/html" id="sensor_template">
          <div class="col-{% if sensor_type %}12{%else%}3{%endif%}" >
@@ -105,43 +119,49 @@
 </section>
 <!-- /.content -->
 <script>
-jQuery(function () {
-  let sensor_url = '{% if sensor_type %}{{ url_for("api:sensor_list_filtered", filter=sensor_type) }}{% else %}{{ url_for("api:sensor_list") }}{% endif %}';
-  jQuery.get(sensor_url,function(data) {
-    data = data.data;
-    // Sort the sensors based on the given sensor name
-    data.sort((a, b) => a.name.localeCompare(b.name));
+  jQuery(function () {
+    let sensor_url = '{% if sensor_type %}{{ url_for("api:sensor_list_filtered", filter=sensor_type) }}{% else %}{{ url_for("api:sensor_list") }}{% endif %}';
+    jQuery.get(sensor_url,function(data) {
+      data = data.data;
+      // Sort the sensors based on the given sensor name
+      data.sort((a, b) => a.name.localeCompare(b.name));
 
-    jQuery.each(data,function(counter, sensor) {
+      if (data.length > 0) {
+        jQuery('.zero_message').remove();
+      } else {
+        jQuery('.zero_message').show();
+      }
 
-      sensor.icon = template_sensor_type_icon(sensor.type);
+      jQuery.each(data,function(counter, sensor) {
 
-      sensor.export_link      = '{{ url_for('api:sensor_history', filter='_id_', action="export") }}'.replace('_id_',sensor.id);
-      sensor.edit_link        = '{{ url_for('api:sensor_detail',  sensor='_id_') }}'.replace('_id_',sensor.id);
-      sensor.delete_link      = '{{ url_for('api:sensor_delete',  sensor='_id_') }}'.replace('_id_',sensor.id);
-      sensor.ignore_link      = '{{ url_for('api:setting_update', setting='exclude_ids') }}';
+        sensor.icon = template_sensor_type_icon(sensor.type);
 
-      sensor.error   = (sensor.value != null ? 'fuckbs-d-none' : '');
-      sensor.exclude = (!sensor.exclude_avg  ? 'fuckbs-d-none' : '');
+        sensor.export_link      = '{{ url_for('api:sensor_history', filter='_id_', action="export") }}'.replace('_id_',sensor.id);
+        sensor.edit_link        = '{{ url_for('api:sensor_detail',  sensor='_id_') }}'.replace('_id_',sensor.id);
+        sensor.delete_link      = '{{ url_for('api:sensor_delete',  sensor='_id_') }}'.replace('_id_',sensor.id);
+        sensor.ignore_link      = '{{ url_for('api:setting_update', setting='exclude_ids') }}';
 
-      sensor.graph  = 'graph_' + sensor.id;
-      sensor.gauge  = 'gauge_' + sensor.id;
+        sensor.error   = (sensor.value != null ? 'fuckbs-d-none' : '');
+        sensor.exclude = (!sensor.exclude_avg  ? 'fuckbs-d-none' : '');
 
-      $('#sensor_list').loadTemplate($('#sensor_template'), sensor,{ append: true});
+        sensor.graph  = 'graph_' + sensor.id;
+        sensor.gauge  = 'gauge_' + sensor.id;
 
-      new sensor_gauge('gauge_' + sensor.id,
-                       sensor.type,
-                       sensor.value,
-                       sensor.limit_min,
-                       sensor.limit_max,
-                       sensor.alarm_min,
-                       sensor.alarm_max);
+        $('#sensor_list').loadTemplate($('#sensor_template'), sensor,{ append: true});
 
-      {% if sensor_type %}
-      new graph('graph_' + sensor.id, '{{ url_for("api:sensor_history", action="history", filter="_id_") }}'.replace('_id_',sensor.id), '{{sensor_type}}');
-      {% endif %}
-    })
+        new sensor_gauge('gauge_' + sensor.id,
+                        sensor.type,
+                        sensor.value,
+                        sensor.limit_min,
+                        sensor.limit_max,
+                        sensor.alarm_min,
+                        sensor.alarm_max);
+
+        {% if sensor_type %}
+        new graph('graph_' + sensor.id, '{{ url_for("api:sensor_history", action="history", filter="_id_") }}'.replace('_id_',sensor.id), '{{sensor_type}}');
+        {% endif %}
+      })
+    });
   });
-});
 </script>
 {% endblock page_content %}
