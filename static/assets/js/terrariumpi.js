@@ -1893,7 +1893,7 @@ function websocket_init(reconnect) {
           usage.find('div.progress-bar').css({'width': ((message.data[part].current/message.data[part].max) * 100) + '%'});
 
           let total = jQuery('#total_' + part);
-          total.find('span.info-box-number').text( formatNumber(message.data[part].total) );
+          total.find('span.info-box-number span').text( formatNumber(message.data[part].total) );
           total.find('span.description-percentage span.text-success').text( formatCurrency(message.data[part].costs) );
           total.find('span.description-percentage span:not(.text-success)').text( moment.duration(message.data[part].duration * 1000).humanize() );
         }
