@@ -6,6 +6,18 @@
       <div class="container-fluid">
         <!-- Main row -->
         <div class="row">
+          <div style="width: 80%; text-align: center; margin: 5% 30%" class="zero_message fuckbs-d-none">
+            <div class="callout callout-info">
+              <h5>{{ _('No enclosures') }}</h5>
+              <p class="pt-3">
+                {% if authenticated %}
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-enclosure-setup" >{{ _('Add new enclosure') }}</button>
+                {% else %}
+                <a href="{{ url_for('login') }}" class="dropdown-item">{{ _('Please login to make changes') }}</a>
+                {% endif %}
+              </p>
+            </div>
+          </div>
           <!-- Left col -->
           <div class="col" id="enclosure_list">
             <script type="text/html" id="area_table_row">
@@ -130,15 +142,22 @@
 <script>
   jQuery(function () {
     jQuery.get('{{ url_for("api:enclosure_list") }}',function(data){
+
+      if (data.length > 0) {
+        jQuery('.zero_message').remove();
+      } else {
+        jQuery('.zero_message').show();
+      }
+
       jQuery.each(data.data,function(counter,enclosure) {
 
         enclosure.edit_link   = '{{ url_for('api:enclosure_update', enclosure='_id_') }}'.replace('_id_',enclosure.id);
         enclosure.delete_link = '{{ url_for('api:enclosure_delete', enclosure='_id_') }}'.replace('_id_',enclosure.id);
-        
+
         jQuery('#enclosure_list').loadTemplate(jQuery('#enclosure_template'), enclosure, {
           append: true,
         });
-        
+
         {% if authenticated %}
           jQuery('table .action').show();
         {% else %}
