@@ -1277,7 +1277,7 @@ class terrariumEngine(object):
       motd_averages += avg_unit_length  * ' ' if empty_avg else (averages[line_counter]['unit'] if not averages[line_counter]['alarm'] else pyfancy().yellow(averages[line_counter]['unit']).get()) + ((avg_unit_length - len(averages[line_counter]['unit'])) * ' ')
 
       # Add system stats
-      motd_averages += ' '
+      motd_averages += '  '
       motd_averages += '' if empty_stats else system_stats[line_counter]['title'].ljust(system_title_length,' ')
       # Add the system value with or without alarm color
       motd_averages += ' '
@@ -1362,7 +1362,7 @@ class terrariumEngine(object):
         if relay.is_dimmer:
           relay_title += f' ({relay.value:.0f}%)'
 
-        relay_lines[0].append(relay_title)
+        relay_lines[0].append(f'{relay_title} -')
         relay_lines[1].append(f'{relay.current_wattage:.2f} Watt')
         relay_lines[2].append(f'{relay.current_flow:.2f} L/m')
 
