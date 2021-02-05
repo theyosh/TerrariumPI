@@ -13,7 +13,7 @@
             {% if authenticated %}
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-button-setup" >{{ _('Add new button') }}</button>
             {% else %}
-            <a href="{{ url_for('login') }}" class="dropdown-item">{{ _('Please login to make changes') }}</a>
+            <a href="{{ url_for('login') }}" class="text-primary">{{ _('Please login to make changes') }}</a>
             {% endif %}
           </p>
         </div>
@@ -96,7 +96,7 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-      </script>
+        </script>
       </div>
       <!-- /.col -->
     </div>
