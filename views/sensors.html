@@ -7,7 +7,6 @@
   <div class="container-fluid">
     <!-- Main row -->
     <div class="row" id="sensor_list">
-
       <div style="width: 80%; text-align: center; margin: 5% 30%" class="zero_message fuckbs-d-none">
         <div class="callout callout-info">
           <h5>{{ _('No sensors') }}</h5>
@@ -15,12 +14,11 @@
             {% if authenticated %}
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-sensor-setup" >{{ _('Add new sensor') }}</button>
             {% else %}
-            <a href="{{ url_for('login') }}" class="dropdown-item">{{ _('Please login to make changes') }}</a>
+            <a href="{{ url_for('login') }}" class="text-primary">{{ _('Please login to make changes') }}</a>
             {% endif %}
           </p>
         </div>
       </div>
-
       <!-- Left col -->
       <script type="text/html" id="sensor_template">
          <div class="col-{% if sensor_type %}12{%else%}3{%endif%}" >
@@ -90,11 +88,9 @@
             <!-- /.card-header -->
             <div class="card-body p-0">
               <div class="d-md-flex">
-
                 <div class="col text-center">
                   <canvas data-id="gauge" class="gauge"></canvas>
                 </div><!-- /.card-pane-right -->
-
                 {% if sensor_type %}
                 <div class="col-12 col-sm-12 col-md-8 col-lg-9">
                   <div class="overlay">
@@ -103,13 +99,11 @@
                   <canvas data-id="graph" class="graph"></canvas>
                 </div>
                 {% endif %}
-
               </div> <!-- /.d-md-flex -->
             </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-
       </script>
       <!-- /.col -->
     </div>

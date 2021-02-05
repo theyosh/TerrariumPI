@@ -1362,7 +1362,7 @@ class terrariumEngine(object):
         if relay.is_dimmer:
           relay_title += f' ({relay.value:.0f}%)'
 
-        relay_lines[0].append(f'{relay_title} -')
+        relay_lines[0].append(f'{relay_title}  ')
         relay_lines[1].append(f'{relay.current_wattage:.2f} Watt')
         relay_lines[2].append(f'{relay.current_flow:.2f} L/m')
 
