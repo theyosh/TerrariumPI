@@ -24,106 +24,9 @@
 
 {% include 'modals/enclosure.html' %}
 
+{% include 'modals/relay.html' %}
+
 {% include 'modals/sensor.html' %}
-
-
-
-<div class="modal fade" id="modal-relay-setup">
-  <div class="modal-dialog modal-xl d-flex justify-content-center">
-    <div class="modal-content">
-      <div class="overlay d-flex justify-content-center align-items-center loading">
-        <i class="fas fa-3x fa-sync-alt fa-spin"></i>
-      </div>
-      <form class="form-horizontal needs-validation" action="{{ url_for('relay_list') }}" method="post" novalidate>
-        <div class="modal-header">
-          <h4 class="modal-title"><i class="fas fa-bolt" ></i> Relay settings</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <input type="hidden" name="id" id="relay_id" value="" disabled="disabled">
-          <div class="row">
-            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-              <div class="form-group">
-                <label for="relay_hardware">Hardware</label>
-                <div class="select2-primary">
-                  <select class="select2" id="relay_hardware" name="hardware" required="required" data-placeholder="Select hardware" style="width: 100%;">
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-4 col-lg-3">
-              <div class="form-group">
-                <label for="relay_address">Address</label>
-                <input type="text" class="form-control" id="relay_address" name="address" required="required" placeholder="Enter address">
-              </div>
-            </div>
-            <div class="col-10 col-sm-10 col-md-8 col-lg-3">
-              <div class="form-group">
-                <label for="relay_name">Naam</label>
-                <input type="text" class="form-control" id="relay_name" name="name" required="required" placeholder="Enter name">
-              </div>
-            </div>
-            <div class="col-6 col-sm-6 col-md-6 col-lg-1">
-              <div class="form-group">
-                <label for="wattage">Wattage</label>
-                <input type="number" step="0.01" min=0 class="form-control" id="wattage" name="wattage" required="required" placeholder="Wattage when powered on">
-              </div>
-            </div>
-            <div class="col-6 col-sm-6 col-md-6 col-lg-1">
-              <div class="form-group">
-                <label for="flow" class="text-nowrap">Water flow</label>
-                <input type="number" step="0.01" min=0 class="form-control" id="flow" name="flow" required="required" placeholder="Water flow in liters per minute when powered on">
-              </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-1">
-              <div class="form-group">
-                <span class="switch">
-                  <label for="manual_mode">Manual m.</label>
-                  <input type="checkbox" class="switch" id="manual_mode" name="manual_mode">
-                  <label for="manual_mode" class="mt-1"></label>
-                </span>
-              </div>
-            </div>
-            <div class="col-2 col-sm-2 col-md-4 col-lg-1">
-              <div class="form-group">
-                <label for="relay_current">Current</label>
-                <input type="text" readonly="readonly" class="form-control" name="value" id="relay_current" placeholder="Current value">
-              </div>
-            </div>
-          </div>
-          <div class="row dimmer_callibration" style="display:block">
-            <a data-toggle="collapse" href="#dimmer_callibration" role="button" aria-expanded="false" aria-controls="dimmer_callibration"><hr class="hr-text" data-content="calibration"></a>
-          </div>
-          <div class="collapse row pt-3" id="dimmer_callibration">
-            <div class="col-6 col-sm-6 col-md-6 col-lg-2">
-              <div class="form-group">
-                <label for="dimmer_frequency">Dimmer frequency in Hz</label>
-                <input type="number" step="1" min="100" max="10000" class="form-control" id="dimmer_frequency" name="dimmer_frequency" placeholder="Dimmer frequency in Hz" value="10000">
-              </div>
-            </div>
-            <div class="col-6 col-sm-6 col-md-6 col-lg-2">
-              <div class="form-group">
-                <label for="dimmer_max_power">Max power in %</label>
-                <input type="number" step="1" min="1" max="100" class="form-control" id="dimmer_max_power" name="dimmer_max_power" placeholder="Max power in percentage" value="100">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            Save changes
-          </button>
-        </div>
-      </form>
-    </div>
-  <!-- /.modal-content -->
-  </div>
-<!-- /.modal-dialog -->
-</div>
 
 <div class="modal fade" id="modal-webcam-setup">
   <div class="modal-dialog modal-xl">
@@ -401,8 +304,9 @@
         });
       });
     });
-
+/*
     // Some globals....?
+
     let relay_modal = jQuery('#modal-relay-setup');
     let relay_form  = relay_modal.find('form');
 
@@ -540,6 +444,7 @@
         });
       }
     });
+*/
 
     jQuery.get('/api/sensors/',function(data) {
       let pull_down = $('select[name="webcam_realtime_sensors_list"]');

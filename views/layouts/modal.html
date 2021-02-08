@@ -4,28 +4,25 @@
       <div class="overlay d-flex justify-content-center align-items-center loading">
         <i class="fas fa-3x fa-sync-alt fa-spin"></i>
       </div>
-
       <form class="form-horizontal needs-validation" action="#" method="post" novalidate>
         <div class="modal-header">
-          <h4 class="modal-title">{% block modal_title %} <i class="fas fa-heading" ></i> Modal title{% endblock %}</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <h4 class="modal-title">{% block modal_title %} <i class="fas fa-heading" ></i> {% endblock %}</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="{{ _('Close') }}">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           {% block modal_body %}
-            Modal body
           {% endblock %}
         </div>
         <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">{{ _('Close') }}</button>
           <button type="submit" class="btn btn-primary">
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            Save changes
+            {{ _('Save changes') }}
           </button>
         </div>
       </form>
-
     </div>
   </div>
 </div>
@@ -54,7 +51,7 @@
         jQuery.each({{modal_type}}_form.find(':invalid'),function(counter,field){
           error_fields.push(jQuery(field).prev().text());
         });
-        toastr.error('Not all required fields are entered.<br/>' + error_fields.join('<br/>'), 'Form error');
+        toastr.error('{{ _('Not all required fields are entered correctly.')}}:<br/>' + error_fields.join('<br/>'), '{{ _('Form error') }}');
       } else {
         {{modal_type}}_form.find('span.spinner-border').show();
 
@@ -78,14 +75,15 @@
           cache: false,
           success: function (data) {
             // TODO: Make a better message system from the API backend
-            toastr.success("Button data is saved", "Save ok");
+            let message = '{{ _('{type} {name} is {action}') }}'.replace('{type}','{{ modal_type }}').replace('{name}',data.name).replace('{action}',(form_data['id'] != '' ? '{{ _('updated') }}' : '{{ _('added') }}')).capitalize()
+            toastr.success(message, '{{ _('Save OK') }}');
             {{modal_type}}_modal.reload = true
             {{modal_type}}_modal.modal('hide');
           },
           error: function (error) {
             error = error.responseJSON;
             console.log(error);
-            toastr.error(error.message , 'Save Error');
+            toastr.error(error.message , '{{ _('Save Error') }}');
           }
         });
       }

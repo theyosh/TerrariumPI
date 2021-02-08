@@ -136,7 +136,7 @@
                 <div class="card-header">
                   <h3 class="card-title mr-1">
                     <i class="fas fa-fw mr-2" data-class="icon"></i><span data-content="name">...</span>
-                    <small class="ml-2 text-muted">{{ _('Last update') }}: <span class="last_update"  data-template-bind='[
+                    <small class="ml-2 text-muted">{{ _('last update') }}: <span class="last_update"  data-template-bind='[
                       {"attribute": "content", "value": "last_update", "formatter": "datetimeformatter", "formatOptions": "LLLL"} ]'
                     ></span></small>
                   </h3>
@@ -258,7 +258,7 @@
                       {"attribute": "content", "value": "mode", "formatter": "prefixer", "formatOptions": "mode: "} ]'></small>
                     </td>
                     <td style="width: 10px">
-                      <small class="badge badge-light" title="Current status" data-template-bind='[
+                      <small class="badge" title="Current status" data-template-bind='[
                       {"attribute": "class", "value": "status", "formatter": "prefixer", "formatOptions": "badge "},
                       {"attribute": "id", "value": "id", "formatter": "prefixer", "formatOptions": "area_relay_state_"}
                        ]'>&nbsp;&nbsp;</small>
@@ -426,7 +426,7 @@
               enclosure.areas.sort((a, b) => a.name.localeCompare(b.name));
               jQuery.each(enclosure.areas,function(counter, area){
                 area.icon    = 'mr-1 fas ' + template_sensor_type_icon(area.type) + ' ' + template_sensor_type_color(area.type);
-                area.status  = (area.state.powered === true ? 'badge-success' : (area.state.powered === false ? 'badge-secondary' : 'badge-light'));
+                area.status  = (area.state.powered === true ? 'badge-success' : (area.state.powered === false ? 'badge-secondary' : ''));
                 if (area.state.sensors != undefined) {
                   area.warning = (area.state.sensors.alarm ? 'fas fa-exclamation-triangle text-danger' : 'd-none');
                 }
@@ -467,7 +467,7 @@
             // Show the data...
             jQuery.each(loaded_sensor_type, function(sensor_type, sensor) {
 
-              sensor.name = '{{ _('Average') }} ' + sensor_type;
+              sensor.name = ('{{ _('average {sensor_type}') }} '.replace('{sensor_type}',window.terrariumPI.units[sensor_type]['name'])).capitalize();
 
               sensor.icon = template_sensor_type_icon(sensor_type);
 

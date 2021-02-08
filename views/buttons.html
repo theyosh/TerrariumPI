@@ -11,7 +11,7 @@
           <h5>{{ _('No buttons') }}</h5>
           <p class="pt-3">
             {% if authenticated %}
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-button-setup" >{{ _('Add new button') }}</button>
+            <a href="#" class="btn btn-primary active" style="text-decoration: none;" role="button" aria-pressed="true" data-toggle="modal" data-target="#modal-button-setup" >{{ _('Add new button') }}</a>
             {% else %}
             <a href="{{ url_for('login') }}" class="text-primary">{{ _('Please login to make changes') }}</a>
             {% endif %}

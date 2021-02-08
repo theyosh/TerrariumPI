@@ -16,8 +16,7 @@
     <div class="form-group">
       <label for="area_enclosure">{{ _('Enclosure') }}</label>
       <div class="select2-primary">
-        <select class="select2" id="area_enclosure" name="enclosure" required="required" data-placeholder="{{ _('Select from available enclosure') }}" style="width: 100%;">
-        </select>
+        <select class="select2" id="area_enclosure" name="enclosure" required="required" data-placeholder="{{ _('Select from available enclosure') }}" style="width: 100%;"> </select>
       </div>
     </div>
   </div>
@@ -25,8 +24,7 @@
     <div class="form-group">
       <label for="area_type">{{ _('Type') }}</label>
       <div class="select2-primary">
-        <select class="select2" id="area_type" name="type" required="required" data-placeholder="{{ _('Select area type') }}" style="width: 100%;">
-        </select>
+        <select class="select2" id="area_type" name="type" required="required" data-placeholder="{{ _('Select area type') }}" style="width: 100%;"> </select>
       </div>
     </div>
   </div>
@@ -37,58 +35,49 @@
     </div>
   </div>
 </div>
-
 <div class="row area_type area_lights">
-
   <script type="text/html" id="dimmer_schema_template">
-
     <div class="row">
       <div class="col-4">
         <div class="form-group">
           <label for="area_name">{{ _('Relay') }}</label>
-          <input type="text" class="form-control" id="area_lights_day_relay" name="day_relay" required="required" readonly="readonly" placeholder="{{ _('Select relays') }}" data-value="relay_name" >
+          <input type="text" class="form-control" id="area_lights_day_relay" name="day_relay" required="required" readonly="readonly" placeholder="{{ _('Select relays') }}" data-value="relay_name">
         </div>
       </div>
-
       <div class="col-2">
         <div class="form-group">
           <label for="area_name">{{ _('Duration on') }}</label>
           <div class="pl-2 pr-2 pt-1">
-            <input type="text" class="slider_duration" id="area_lights_day_duration_on" value="0" >
+            <input type="text" class="slider_duration" id="area_lights_day_duration_on" value="0">
           </div>
         </div>
       </div>
-
       <div class="col-2">
         <div class="form-group">
           <label for="area_name">{{ _('Power on') }}</label>
           <div class="pl-2 pr-2 pt-1">
-            <input type="text" class="slider_power" id="area_lights_day_power_on" value="0" >
+            <input type="text" class="slider_power" id="area_lights_day_power_on" value="0">
           </div>
         </div>
       </div>
-
       <div class="col-2">
         <div class="form-group">
           <label for="area_name">{{ _('Duration off') }}</label>
           <div class="pl-2 pr-2 pt-1">
-            <input type="text" class="slider_duration" id="area_lights_day_duration_off" value="0" >
+            <input type="text" class="slider_duration" id="area_lights_day_duration_off" value="0">
           </div>
         </div>
       </div>
-
       <div class="col-2">
         <div class="form-group">
           <label for="area_name">{{ _('Power off') }}</label>
           <div class="pl-2 pr-2 pt-1">
-            <input type="text" class="slider_power" id="area_lights_day_power_off" value="0" >
+            <input type="text" class="slider_power" id="area_lights_day_power_off" value="0">
           </div>
         </div>
       </div>
     </div>
   </script>
-
-
   <div class="col-12 col-sm-6 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="area_lights_mode">{{ _('Mode') }}</label>
@@ -118,29 +107,20 @@
       <input type="number" step="0.01" min="-12.0" max="12.0" class="form-control" id="area_lights_day_shift_hours" name="day_shift_hours" placeholder="{{ _('Enter the amount of hours to shift') }}">
     </div>
   </div>
-
   <div class="col-12 col-sm-6 col-md-3 col-lg-1">
-    <div class="form-group">
-      <span class="switch">
+    <div class="form-group"> <span class="switch">
         <label for="area_lights_main_lights">{{ _('Main lights') }}</label>
         <input type="checkbox" class="switch" id="area_lights_main_lights" name="main_lights">
         <label for="area_lights_main_lights" class="mt-1"></label>
-      </span>
-    </div>
+      </span> </div>
   </div>
-
-
 </div>
 <div class="row area_type area_lights">
   <div class="col">
     <nav class="mb-2">
-      <div class="nav nav-tabs" role="tablist">
-        <a class="nav-item nav-link active" id="home-tab" data-toggle="tab" href="#area_lights_day" role="tab" aria-controls="day" aria-selected="true"><i class="fas fa-sun" ></i> {{ _('Day settings') }}</a>
-        <a class="nav-item nav-link" id="profile-tab" data-toggle="tab" href="#area_lights_night" role="tab" aria-controls="night" aria-selected="false"><i class="fas fa-moon" ></i> {{ _('Night settings') }}</a>
-      </div>
+      <div class="nav nav-tabs" role="tablist"> <a class="nav-item nav-link active" id="home-tab" data-toggle="tab" href="#area_lights_day" role="tab" aria-controls="day" aria-selected="true"><i class="fas fa-sun" ></i> {{ _('Day settings') }}</a> <a class="nav-item nav-link" id="profile-tab" data-toggle="tab" href="#area_lights_night" role="tab" aria-controls="night" aria-selected="false"><i class="fas fa-moon" ></i> {{ _('Night settings') }}</a> </div>
     </nav>
     <div class="tab-content">
-
       <div class="tab-pane fade show active" id="area_lights_day" role="tabpanel" aria-labelledby="day-tab">
         <div class="row">
           <div class="col-12 col-sm-12 col-md-3 col-lg-3">
@@ -170,23 +150,18 @@
           <div class="col-12 col-sm-12 col-md-12 col-lg-12">
             <div class="form-group">
               <label for="area_lights_day_relays">{{ _('Relays') }}</label>
-              <select class="select2" id="area_lights_day_relays" name="day_relays" multiple="multiple" data-placeholder="{{ _('Select relays') }}" style="width: 100%;">
-              </select>
+              <select class="select2" id="area_lights_day_relays" name="day_relays" multiple="multiple" data-placeholder="{{ _('Select relays') }}" style="width: 100%;"> </select>
             </div>
           </div>
         </div>
         <!-- TODO: Fix nice schema's for timing and dimming values -->
-        
         <div class="row area_alarm_day_dimmer_settings fuckbs-d-none">
           <div class="col">
-            <ul class="nav nav-tabs mb-2" id="area_dimmer_settings_day_relays" role="tablist">
-            </ul>
+            <ul class="nav nav-tabs mb-2" id="area_dimmer_settings_day_relays" role="tablist"> </ul>
           </div>
           <div class="tab-content" id="area_dimmer_settings_day_relays_content"></div>
         </div>
-
       </div>
-
       <div class="tab-pane fade" id="area_lights_night" role="tabpanel" aria-labelledby="night-tab">
         <div class="row">
           <div class="col-12 col-sm-12 col-md-3 col-lg-3">
@@ -216,28 +191,22 @@
           <div class="col-12 col-sm-12 col-md-12 col-lg-12">
             <div class="form-group">
               <label for="area_lights_night_relays">{{ _('Relays') }}</label>
-              <select class="select2" id="area_lights_night_relays" name="night_relays" multiple="multiple" data-placeholder="{{ _('Select relays') }}" style="width: 100%;">
-              </select>
+              <select class="select2" id="area_lights_night_relays" name="night_relays" multiple="multiple" data-placeholder="{{ _('Select relays') }}" style="width: 100%;"> </select>
             </div>
           </div>
         </div>
         <!-- TODO: Fix nice schema's for timing and dimming values -->
-        
         <div class="row area_alarm_night_dimmer_settings fuckbs-d-none">
           <div class="col">
-            <ul class="nav nav-tabs mb-2" id="area_dimmer_settings_night_relays" role="tablist">
-            </ul>
+            <ul class="nav nav-tabs mb-2" id="area_dimmer_settings_night_relays" role="tablist"> </ul>
           </div>
           <div class="tab-content" id="area_dimmer_settings_night_relays_content"></div>
         </div>
-
       </div>
     </div>
   </div>
 </div>
-
 <div class="row area_type area_watertank area_temperature area_humidity area_co2 area_conductivity area_moisture area_ph">
-
   <div class="col-12 col-sm-6 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="area_watertank_mode">{{ _('Mode') }}</label>
@@ -253,8 +222,7 @@
   <div class="col-12 col-sm-6 col-md-3 col-lg-3">
     <div class="form-group">
       <label for="area_watertank_sensors">{{ _('Sensors') }}</label>
-      <select class="select2" id="area_watertank_sensors" name="sensors" required="required" multiple="multiple" data-placeholder="{{ _('Select sensors') }}" style="width: 100%;">
-      </select>
+      <select class="select2" id="area_watertank_sensors" name="sensors" required="required" multiple="multiple" data-placeholder="{{ _('Select sensors') }}" style="width: 100%;"> </select>
     </div>
   </div>
   <div class="col col-12 col-sm-6 col-md-2 col-lg-2 area_watertank">
@@ -269,21 +237,18 @@
       <input type="number" step="0.01" min="0" class="form-control" id="area_watertank_height" name="watertank_height" required="required" placeholder="{{ _('Enter the height') }}">
     </div>
   </div>
-
   <div class="col col-12 col-sm-6 col-md-2 col-lg-2 area_watertank">
     <div class="form-group">
       <label for="area_watertank_offset">{{ _('Offset') }}</label>
       <input type="number" step="0.01" min="0" class="form-control" id="area_watertank_offset" name="watertank_offset" required="required" placeholder="{{ _('Enter the offset') }}">
     </div>
   </div>
-
   <div class="col col-12 col-sm-6 col-md-3 col-lg-3 area_all">
     <div class="form-group">
       <label for="area_day_night_difference">{{ _('Day/night difference') }}</label>
       <input type="number" step="0.01" class="form-control" id="area_day_night_difference" name="day_night_difference" placeholder="{{ _('Day/night difference') }}">
     </div>
   </div>
-
   <div class="col col-12 col-sm-6 col-md-3 col-lg-3 area_all">
     <div class="form-group">
       <label for="area_day_night_source">{{ _('Day/night source') }}</label>
@@ -294,17 +259,12 @@
     </div>
   </div>
 </div>
-
 <div class="row area_type area_watertank area_temperature area_humidity area_co2 area_conductivity area_moisture area_ph">
   <div class="col">
     <nav class="mb-2">
-      <div class="nav nav-tabs" role="tablist">
-        <a class="nav-item nav-link active" id="home-tab" data-toggle="tab" href="#area_alarm_low" role="tab" aria-controls="low" aria-selected="true"><i class="fas fa-battery-empty" ></i> {{ _('Low alarm') }}</a>
-        <a class="nav-item nav-link" id="profile-tab" data-toggle="tab" href="#area_alarm_high" role="tab" aria-controls="high" aria-selected="false"><i class="fas fa-battery-full" ></i> {{ _('High alarm') }}</a>
-      </div>
+      <div class="nav nav-tabs" role="tablist"> <a class="nav-item nav-link active" id="home-tab" data-toggle="tab" href="#area_alarm_low" role="tab" aria-controls="low" aria-selected="true"><i class="fas fa-battery-empty" ></i> {{ _('Low alarm') }}</a> <a class="nav-item nav-link" id="profile-tab" data-toggle="tab" href="#area_alarm_high" role="tab" aria-controls="high" aria-selected="false"><i class="fas fa-battery-full" ></i> {{ _('High alarm') }}</a> </div>
     </nav>
     <div class="tab-content">
-
       <div class="tab-pane fade show active" id="area_alarm_low" role="tabpanel" aria-labelledby="low-tab">
         <div class="row">
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
@@ -343,7 +303,6 @@
               <input type="number" step="0.1" min="0" class="form-control" id="area_alarm_low_settle_time" name="low_settle_time" placeholder="{{ _('Settle time') }}">
             </div>
           </div>
-
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
             <div class="form-group">
               <label for="area_alarm_low_light_status">{{ _('Light status') }}</label>
@@ -354,7 +313,6 @@
               </select>
             </div>
           </div>
-
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
             <div class="form-group">
               <label for="area_alarm_low_door_status">{{ _('Door status') }}</label>
@@ -365,26 +323,20 @@
               </select>
             </div>
           </div>
-
           <div class="col">
             <div class="form-group">
               <label for="area_alarm_low_relays">{{ _('Relays') }}</label>
-              <select class="select2" id="area_alarm_low_relays" name="low_relays" multiple="multiple" data-placeholder="{{ _('Select relays') }}" style="width: 100%;">
-              </select>
+              <select class="select2" id="area_alarm_low_relays" name="low_relays" multiple="multiple" data-placeholder="{{ _('Select relays') }}" style="width: 100%;"> </select>
             </div>
           </div>
         </div>
-
         <div class="row area_alarm_low_dimmer_settings fuckbs-d-none">
           <div class="col">
-            <ul class="nav nav-tabs mb-2" id="area_dimmer_settings_low_relays" role="tablist">
-            </ul>
-            <div class="tab-content" id="area_dimmer_settings_low_relays_content">
-            </div>
+            <ul class="nav nav-tabs mb-2" id="area_dimmer_settings_low_relays" role="tablist"> </ul>
+            <div class="tab-content" id="area_dimmer_settings_low_relays_content"> </div>
           </div>
         </div>
       </div>
-
       <div class="tab-pane fade" id="area_alarm_high" role="tabpanel" aria-labelledby="low-tab">
         <div class="row">
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
@@ -423,7 +375,6 @@
               <input type="number" step="0.1" min="0" class="form-control" id="area_alarm_high_settle_time" name="high_settle_time" placeholder="{{ _('Settle time') }}">
             </div>
           </div>
-
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
             <div class="form-group">
               <label for="area_alarm_high_light_status">{{ _('Light status') }}</label>
@@ -434,7 +385,6 @@
               </select>
             </div>
           </div>
-
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
             <div class="form-group">
               <label for="area_alarm_high_door_status">{{ _('Door status') }}</label>
@@ -445,49 +395,32 @@
               </select>
             </div>
           </div>
-
           <div class="col">
             <div class="form-group">
               <label for="area_alarm_high_relays">{{ _('Relays') }}</label>
-              <select class="select2" id="area_alarm_high_relays" name="high_relays" multiple="multiple" data-placeholder="{{ _('Select relays') }}" style="width: 100%;">
-              </select>
+              <select class="select2" id="area_alarm_high_relays" name="high_relays" multiple="multiple" data-placeholder="{{ _('Select relays') }}" style="width: 100%;"> </select>
             </div>
           </div>
         </div>
-
         <div class="row area_alarm_high_dimmer_settings fuckbs-d-none">
-          <ul class="nav nav-tabs mb-2" id="area_dimmer_settings_high_relays" role="tablist">
-          </ul>
-          <div class="tab-content" id="area_dimmer_settings_high_relays_content">
-          </div>
+          <ul class="nav nav-tabs mb-2" id="area_dimmer_settings_high_relays" role="tablist"> </ul>
+          <div class="tab-content" id="area_dimmer_settings_high_relays_content"> </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 <script type="text/html" id="area_dimmer_setting_duration">
   <div class="row">
     <label class="col-sm-2 col-form-label">{{ _('Dimmer on duration') }}</label>
-
     <div class="col pt-2">
-      <input class="range_slider" data-id="dimmer_field_on"
-      data-slider-min="0"
-	    data-slider-max="100"
-      data-slider-step="1"
-      type="text">      
+      <input class="range_slider" data-id="dimmer_field_on" data-slider-min="0" data-slider-max="100" data-slider-step="1" type="text">
     </div>
-
     <label class="col-sm-2 col-form-label">{{ _('Dimmer of duration') }}</label>
     <div class="col">
       <div class="col pt-2">
-        <input class="range_slider" data-id="dimmer_field_off"
-        data-slider-min="0"
-        data-slider-max="100"
-        data-slider-step="1"
-        type="text">  
+        <input class="range_slider" data-id="dimmer_field_off" data-slider-min="0" data-slider-max="100" data-slider-step="1" type="text">
       </div>
-
     </div>
   </div>
   <div class="row">
@@ -498,27 +431,16 @@
     </div>
   </div>
 </script>
-
 <script type="text/html" id="area_relay_setting_duration">
   <div class="row">
     <label class="col-sm-2 col-form-label">{{ _('Relay delay on') }}</label>
     <div class="col pt-2">
-      <input class="range_slider" data-id="dimmer_field_on"
-      data-slider-min="0"
-	    data-slider-max="100"
-      data-slider-step="1"
-      type="text">      
+      <input class="range_slider" data-id="dimmer_field_on" data-slider-min="0" data-slider-max="100" data-slider-step="1" type="text">
     </div>
-    
     <label class="col-sm-2 col-form-label">{{ _('Relay delay off') }}</label>
     <div class="col pt-2">
-      <input class="range_slider" data-id="dimmer_field_off"
-      data-slider-min="0"
-	    data-slider-max="100"
-      data-slider-step="1"
-      type="text">  
+      <input class="range_slider" data-id="dimmer_field_off" data-slider-min="0" data-slider-max="100" data-slider-step="1" type="text">
     </div>
-
   </div>
   <div class="row">
     <div class="col">
@@ -528,20 +450,14 @@
     </div>
   </div>
 </script>
-
 <script type="text/html" id="area_dimmer_setting_step">
   <div class="row">
     <label class="col-sm-2 col-form-label">{{ _('Step change') }}</label>
     <div class="col">
-      <input class="range_slider" data-id="dimmer_field"
-      data-slider-min="0"
-	    data-slider-max="100"
-      data-slider-step="1"
-      type="text">  
+      <input class="range_slider" data-id="dimmer_field" data-slider-min="0" data-slider-max="100" data-slider-step="1" type="text">
     </div>
   </div>
 </script>
-
 {% endblock %}
 
 {% block modal_form_javascript_functions %}
@@ -558,9 +474,7 @@ function show_relay_tab(form, part, relay_id, relay_name, dimmer) {
   );
 
   let panel = jQuery('<div>').addClass('tab-pane fade').attr({'id' : 'dimmer_' + part + '_setting_' + relay_id, 'role':'tabpanel', 'aria-labelledby':'dimmer_' + part + '_setting_' + relay_id + '-tab'})
-
   let dimmer_field = jQuery('<div>').addClass('col');
-
   let dimmer_field_id = part + '_dimmer_step_' + relay_id;
   let template = '#area_dimmer_setting_step';
 
@@ -582,7 +496,6 @@ function show_relay_tab(form, part, relay_id, relay_name, dimmer) {
 
   dimmer_field.find('input').each(function(counter,element){
     element.name = element.id;
-//    console.log(element);
   });
 
 
@@ -590,16 +503,12 @@ function show_relay_tab(form, part, relay_id, relay_name, dimmer) {
   //dimmer_field.find('input').attr('name', dimmer_field.attr('id'));
 
   panel.append(dimmer_field);
-
   tabbs.append(tab);
   panels.append(panel);
-
   tab.find('a').tab('show');
-
   panel.find('.range_slider').bootstrapSlider();
 }
 {% endblock %}
-
 
 {% block modal_form_javascript_pre %}
 let area_types = {};
@@ -733,51 +642,6 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
   }
 });
 
-/*
-
-// Day and night dimmer schemas
-{{modal_type}}_form.find('.row.area_type.area_light select[id$="relays"]').on('select2:select',function(event) {
-  let data = event.params.data;
-  if (relay_data[data.id] !== undefined && relay_data[data.id].dimmer) {
-    let test = jQuery('<div>')
-
-    jQuery(test).loadTemplate($('#dimmer_schema_template'), {
-      relay_name: relay_data[data.id].name,
-    },{ append: true, bindingOptions: {ignoreNull : true}});
-
-//    console.log(test);
-
-    $('.area_lights_day_dimmer_schema').loadTemplate($('#dimmer_schema_template'), {
-      relay_name: relay_data[data.id].name,
-    },{ append: true, bindingOptions: {ignoreNull : true}});
-  }
-
-  $(".slider_duration").bootstrapSlider({
-    min: 0,
-    max: 120,
-    value: 0,
-    formatter: function(value) {
-      return value + ' minute(s)';
-    }
-//      range: true,
-//      ticks: [0,30,60,90,120],
-});
-
-$(".slider_power").bootstrapSlider({
-  min: 0,
-  max: 100,
-  value: 0,
-  formatter: function(value) {
-    return value + ' %';
-  }
-//      range: true,
-//      ticks: [0,30,60,90,120],
-});
-
-});
-*/
-
-
 // Dimmer step settings for heating, humidity, etc
 // {{modal_type}}_form.find('.row.area_type:not(.area_lights) select[id$="relays"]').on('change',function(event) {
 {{modal_type}}_form.find('.row.area_type select[id$="relays"]').on('change',function(event) {
@@ -796,21 +660,11 @@ $(".slider_power").bootstrapSlider({
         dimmer_active = true;
       }
     });
-
-//    console.log(relays);
-//    console.log('At least 1 dimmer??',dimmer_active)
   }
 
-
-
-  //   (target.attr('name').indexOf('low') != -1 ?'low' : 'high');
   jQuery.each(relays,function(counter,relay_id) {
-
-
     if (relay_data[relay_id] !== undefined && (relay_data[relay_id].dimmer || (light_modus && dimmer_active))) {
-      console.log('dimmer actie');
-
-
+//      console.log('dimmer actie');
       show_relay_tab({{modal_type}}_form, part, relay_id, relay_data[relay_id].name, relay_data[relay_id].dimmer);
     }
   });
@@ -964,7 +818,7 @@ jQuery.when(
 
           }
 /*
-          
+
           if (key.indexOf('dimmer_step') != -1) {
             dimmer_steps.push({
               id : key,

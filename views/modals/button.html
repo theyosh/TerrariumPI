@@ -80,7 +80,7 @@ jQuery.get('{{ url_for("api:button_hardware") }}', function(data) {
     });
 
     button_hardware_select.trigger('change');
-    
+
     // Check if we are in edit mode.... and need to load more data....
     if ('#' != jQuery(event.relatedTarget).attr('href')) {
       // Load the button data
