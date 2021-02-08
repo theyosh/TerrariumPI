@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
-"POT-Creation-Date: 2021-02-07 23:04+CET\n"
+"POT-Creation-Date: 2021-02-08 13:32+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -127,28 +127,32 @@ msgstr ""
 msgid "wattage"
 msgstr ""
 
-#: terrariumEngine.py:1221 views/dashboard.html:27 views/status.html:143
+#: terrariumEngine.py:1223 views/dashboard.html:27 views/status.html:143
 msgid "Uptime"
 msgstr ""
 
-#: terrariumEngine.py:1227
+#: terrariumEngine.py:1229
 msgid "System load"
 msgstr ""
 
-#: terrariumEngine.py:1233 views/status.html:60
+#: terrariumEngine.py:1235 views/status.html:60
 msgid "CPU Temperature"
 msgstr ""
 
-#: terrariumEngine.py:1239
+#: terrariumEngine.py:1241
 msgid "Storage"
 msgstr ""
 
-#: terrariumEngine.py:1245
+#: terrariumEngine.py:1247
 msgid "Memory"
 msgstr ""
 
-#: terrariumEngine.py:1255
+#: terrariumEngine.py:1257
 msgid "average {sensor_type}"
+msgstr ""
+
+#: terrariumEngine.py:1410 views/dashboard.html:139
+msgid "last update"
 msgstr ""
 
 #: terrariumWebserver.py:227 terrariumWebserver.py:330
@@ -269,8 +273,8 @@ msgstr ""
 msgid "Please login to make changes"
 msgstr ""
 
-#: views/buttons.html:28 views/dashboard.html:139 views/relays.html:28
-#: views/sensors.html:34 views/webcams.html:24
+#: views/buttons.html:28 views/relays.html:28 views/sensors.html:34
+#: views/webcams.html:24
 msgid "Last update"
 msgstr ""
 
