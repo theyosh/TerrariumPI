@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2021-02-09 00:03+CET\n"
-"PO-Revision-Date: 2021-02-08 14:39+0000\n"
+"PO-Revision-Date: 2021-02-08 23:12+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
-"z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -498,7 +498,7 @@ msgstr "Uitloggen"
 
 #: views/includes/sidebar.html:19
 msgid "Login"
-msgstr ""
+msgstr "Inloggen"
 
 #: views/includes/sidebar.html:19
 msgid "Read only mode"
@@ -524,10 +524,8 @@ msgstr "Sensoren"
 
 #: views/includes/sidebar.html:98 views/includes/sidebar.html:121
 #: views/includes/sidebar.html:144 views/includes/sidebar.html:167
-#, fuzzy
-#| msgid "Add new area"
 msgid "Add new"
-msgstr "Voeg een nieuw gebied toe"
+msgstr "Voeg nieuw toe"
 
 #: views/includes/sidebar.html:107 views/modals/area.html:152
 #: views/modals/area.html:193 views/modals/area.html:328
@@ -889,44 +887,32 @@ msgid "Maximum moist value"
 msgstr "Minimale vochtwaarde"
 
 #: views/modals/webcam.html:11
-#, fuzzy
-#| msgid "Area settings"
 msgid "Webcam settings"
-msgstr "Gebiedsinstellingen"
+msgstr "Webcam instellingen"
 
 #: views/modals/webcam.html:42
 msgid "Resolution (width x height)"
-msgstr ""
+msgstr "Resolutie (breedte x hoogte)"
 
 #: views/modals/webcam.html:52
-#, fuzzy
-#| msgid "Location"
 msgid "Rotation"
-msgstr "Locatie"
+msgstr "Rotatie"
 
 #: views/modals/webcam.html:55
-#, fuzzy
-#| msgid "degrees"
 msgid "0 degrees"
-msgstr "graden"
+msgstr "0 graden"
 
 #: views/modals/webcam.html:56
-#, fuzzy
-#| msgid "degrees"
 msgid "90 degrees"
-msgstr "graden"
+msgstr "90 graden"
 
 #: views/modals/webcam.html:57
-#, fuzzy
-#| msgid "degrees"
 msgid "180 degrees"
-msgstr "graden"
+msgstr "180 graden"
 
 #: views/modals/webcam.html:58
-#, fuzzy
-#| msgid "degrees"
 msgid "270 degrees"
-msgstr "graden"
+msgstr "270 graden"
 
 #: views/modals/webcam.html:59
 msgid "Flip Horizontal"
@@ -953,10 +939,8 @@ msgid "sunlight"
 msgstr "zonlicht"
 
 #: views/modals/webcam.html:73
-#, fuzzy
-#| msgid "Cloud"
 msgid "cloudy"
-msgstr "Cloud"
+msgstr "bewolkt"
 
 #: views/modals/webcam.html:74
 msgid "shade"
@@ -987,10 +971,8 @@ msgid "greyworld"
 msgstr "grijze wereld"
 
 #: views/modals/webcam.html:87
-#, fuzzy
-#| msgid "Archive"
 msgid "Archiving"
-msgstr "Archief"
+msgstr "Archivering"
 
 #: views/modals/webcam.html:91
 msgid "Motion"
@@ -1054,25 +1036,21 @@ msgstr "Bewegingsvakken weergeven"
 
 #: views/modals/webcam.html:136
 msgid "None"
-msgstr ""
+msgstr "Geen"
 
 #: views/modals/webcam.html:137
-#, fuzzy
-#| msgid "Wed"
 msgid "Red"
-msgstr "wo."
+msgstr "Rood"
 
 #: views/modals/webcam.html:138
 msgid "Green"
-msgstr ""
+msgstr "Groen"
 
 #: views/modals/webcam.html:139
 msgid "Blue"
-msgstr ""
+msgstr "Blauw"
 
 #: views/modals/webcam.html:146
-#, fuzzy
-#| msgid "Motion delta threshold"
 msgid "Motion delta thresshold"
 msgstr "Drempel bewegingsdelta"
 
@@ -1358,10 +1336,8 @@ msgid "Add new webcam"
 msgstr "Voeg nieuwe webcam toe"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Actions"
 msgid "Action succeeded"
-msgstr "Acties"
+msgstr "Actie geslaagd"
 
 #: Missing text string
 msgid "added"
@@ -1476,20 +1452,16 @@ msgid "Enter end time"
 msgstr "Voer de eindtijd in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter the height"
 msgid "Enter height"
-msgstr "Voer de hoogte in"
+msgstr "Voer hoogte in"
 
 #: Missing text string
 msgid "Enter name"
 msgstr "Naam invoeren"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter name"
 msgid "Enter number"
-msgstr "Naam invoeren"
+msgstr "Voer nummer in"
 
 #: Missing text string
 msgid "Enter the amount"
@@ -1516,10 +1488,8 @@ msgid "Enter the offset"
 msgstr "Voer de offset in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter end time"
 msgid "Enter width"
-msgstr "Voer de eindtijd in"
+msgstr "Breedte invoeren"
 
 #: Missing text string
 msgid "Error"
@@ -1622,22 +1592,16 @@ msgid "Select a mode"
 msgstr "Selecteer een modus"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Archive door state"
 msgid "Select archive door state"
 msgstr "Archief deur status"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Archive light state"
 msgid "Select archive light state"
 msgstr "Archief licht status"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select language"
 msgid "Select archiving"
-msgstr "Selecteer taal"
+msgstr "Archiveren selecteren"
 
 #: Missing text string
 msgid "Select area type"
@@ -1672,10 +1636,8 @@ msgid "Select relays"
 msgstr "Selecteer schakelaars"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Picture rotation"
 msgid "Select rotation"
-msgstr "Afbeelding rotatie"
+msgstr "Rotatie selecteren"
 
 #: Missing text string
 msgid "Select sensors"
@@ -1687,11 +1649,9 @@ msgstr "Selecteer type"
 
 #: Missing text string
 msgid "Select which frame to comparison"
-msgstr ""
+msgstr "Selecteer welke frame voor vergelijking"
 
 #: Missing text string
-#, fuzzy
-#| msgid "White balance"
 msgid "Select white balance"
 msgstr "Witbalans"
 
@@ -1708,8 +1668,6 @@ msgid "Settings could not be saved"
 msgstr "Instellingen konden niet worden opgeslagen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Show motion boxes"
 msgid "Show the motion boxes"
 msgstr "Bewegingsvakken weergeven"
 
