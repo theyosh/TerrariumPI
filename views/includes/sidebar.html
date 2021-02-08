@@ -16,7 +16,7 @@
         <a href="{{ url_for('logout') }}" title="Logout" data-action="POST" data-toggle="modal" data-target="#modal-confirm">{{ _('Logout') }}</a>
       {% else %}
         <a href="{{ url_for('login') }}">
-          {{ _('Read only mode') }} <br />{{ _('Login to make changes') }}
+          {{ _('Read only mode') }} <br />{{ _('Login') }}
         </a>
       {% endif %}
       </div>
@@ -95,7 +95,7 @@
             <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
               <a href="#" class="nav-link" title="{{ _('Add new sensor') }}" data-toggle="modal" data-target="#modal-sensor-setup">
                 <i class="fas fa-plus nav-icon"></i>
-                <p>{{ _('Add new sensor') }}</p>
+                <p>{{ _('Add new') }}</p>
               </a>
             </li>
           </ul>
@@ -118,7 +118,7 @@
             <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
               <a href="#" class="nav-link" title="{{ _('Add new relay') }}" data-toggle="modal" data-target="#modal-relay-setup">
                 <i class="fas fa-plus nav-icon"></i>
-                <p>{{ _('Add new relay') }}</p>
+                <p>{{ _('Add new') }}</p>
               </a>
             </li>
           </ul>
@@ -141,7 +141,7 @@
             <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
               <a href="#" class="nav-link" title="{{ _('Add new button') }}" data-toggle="modal" data-target="#modal-button-setup">
                 <i class="fas fa-plus nav-icon"></i>
-                <p>{{ _('Add new button') }}</p>
+                <p>{{ _('Add new') }}</p>
               </a>
             </li>
           </ul>
@@ -164,7 +164,7 @@
             <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
               <a href="{{ url_for('webcam_list') }}" class="nav-link" title="{{ _('Add new webcam') }}" data-toggle="modal" data-target="#modal-webcam-setup">
                 <i class="fas fa-plus nav-icon"></i>
-                <p>{{ _('Add new webcam') }}</p>
+                <p>{{ _('Add new') }}</p>
               </a>
             </li>
           </ul>
@@ -179,7 +179,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="/forms-general.html" class="nav-link">
+              <a href="{{ url_for('page', page='players')}}" class="nav-link">
                 <i class="fas fa-play nav-icon"></i>
                 <p>{{ _('Players') }}</p>
               </a>

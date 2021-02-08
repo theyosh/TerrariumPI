@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 4.0.0\n"
-"POT-Creation-Date: 2021-02-08 14:38+CET\n"
+"POT-Creation-Date: 2021-02-09 00:03+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,176 +47,172 @@ msgstr ""
 msgid "PH"
 msgstr ""
 
-#: terrariumEngine.py:53
-msgid "test"
-msgstr ""
-
-#: terrariumEngine.py:56
+#: terrariumEngine.py:55
 msgid "temperature"
 msgstr ""
 
-#: terrariumEngine.py:57
+#: terrariumEngine.py:56
 msgid "distance"
 msgstr ""
 
-#: terrariumEngine.py:58
+#: terrariumEngine.py:57
 msgid "altitude"
 msgstr ""
 
-#: terrariumEngine.py:59
+#: terrariumEngine.py:58
 msgid "pressure"
 msgstr ""
 
-#: terrariumEngine.py:60
+#: terrariumEngine.py:59
 msgid "humidity"
 msgstr ""
 
-#: terrariumEngine.py:61
+#: terrariumEngine.py:60
 msgid "moisture"
 msgstr ""
 
-#: terrariumEngine.py:62
+#: terrariumEngine.py:61
 msgid "conductivity"
 msgstr ""
 
-#: terrariumEngine.py:63
+#: terrariumEngine.py:62
 msgid "ph"
 msgstr ""
 
-#: terrariumEngine.py:64
+#: terrariumEngine.py:63
 msgid "light"
 msgstr ""
 
-#: terrariumEngine.py:65
+#: terrariumEngine.py:64
 msgid "uva"
 msgstr ""
 
-#: terrariumEngine.py:66
+#: terrariumEngine.py:65
 msgid "uvb"
 msgstr ""
 
-#: terrariumEngine.py:67
+#: terrariumEngine.py:66
 msgid "uvi"
 msgstr ""
 
-#: terrariumEngine.py:68
+#: terrariumEngine.py:67
 msgid "fertility"
 msgstr ""
 
-#: terrariumEngine.py:69
+#: terrariumEngine.py:68
 msgid "co2"
 msgstr ""
 
-#: terrariumEngine.py:70
+#: terrariumEngine.py:69
 msgid "volume"
 msgstr ""
 
-#: terrariumEngine.py:71
+#: terrariumEngine.py:70
 msgid "watertank"
 msgstr ""
 
-#: terrariumEngine.py:72
+#: terrariumEngine.py:71
 msgid "windspeed"
 msgstr ""
 
-#: terrariumEngine.py:73
+#: terrariumEngine.py:72
 msgid "water_flow"
 msgstr ""
 
-#: terrariumEngine.py:74
+#: terrariumEngine.py:73
 msgid "wattage"
 msgstr ""
 
-#: terrariumEngine.py:1223 views/dashboard.html:27 views/status.html:143
+#: terrariumEngine.py:1201 views/dashboard.html:27 views/status.html:143
 msgid "Uptime"
 msgstr ""
 
-#: terrariumEngine.py:1229
+#: terrariumEngine.py:1207
 msgid "System load"
 msgstr ""
 
-#: terrariumEngine.py:1235 views/status.html:60
+#: terrariumEngine.py:1213 views/status.html:60
 msgid "CPU Temperature"
 msgstr ""
 
-#: terrariumEngine.py:1241
+#: terrariumEngine.py:1219
 msgid "Storage"
 msgstr ""
 
-#: terrariumEngine.py:1247
+#: terrariumEngine.py:1225
 msgid "Memory"
 msgstr ""
 
-#: terrariumEngine.py:1257
+#: terrariumEngine.py:1235
 msgid "average {sensor_type}"
 msgstr ""
 
-#: terrariumEngine.py:1410 views/dashboard.html:139
+#: terrariumEngine.py:1388 views/dashboard.html:139
 msgid "last update"
 msgstr ""
 
-#: terrariumWebserver.py:227 terrariumWebserver.py:330
+#: terrariumWebserver.py:228 terrariumWebserver.py:331
 msgid "Authenticate to make any changes"
 msgstr ""
 
-#: terrariumWebserver.py:227 terrariumWebserver.py:330
+#: terrariumWebserver.py:228 terrariumWebserver.py:331
 msgid "Authentication"
 msgstr ""
 
-#: terrariumWebserver.py:227 terrariumWebserver.py:330 views/index.html:2
+#: terrariumWebserver.py:228 terrariumWebserver.py:331 views/index.html:2
 msgid "TerrariumPI"
 msgstr ""
 
-#: terrariumWebserver.py:333
+#: terrariumWebserver.py:334
 msgid "Player command could ot be executed!"
 msgstr ""
 
-#: terrariumWebserver.py:333 terrariumWebserver.py:353
-#: terrariumWebserver.py:365
+#: terrariumWebserver.py:334 terrariumWebserver.py:354
+#: terrariumWebserver.py:366
 msgid "Error!"
 msgstr ""
 
-#: terrariumWebserver.py:341 terrariumWebserver.py:344
+#: terrariumWebserver.py:342 terrariumWebserver.py:345
 msgid "OK!"
 msgstr ""
 
-#: terrariumWebserver.py:341 terrariumWebserver.py:344
+#: terrariumWebserver.py:342 terrariumWebserver.py:345
 msgid "Player command executed!"
 msgstr ""
 
-#: terrariumWebserver.py:353
+#: terrariumWebserver.py:354
 msgid "File is not uploaded!"
 msgstr ""
 
-#: terrariumWebserver.py:358
+#: terrariumWebserver.py:359
 msgid "File '%s' is uploaded"
 msgstr ""
 
-#: terrariumWebserver.py:358 terrariumWebserver.py:368
+#: terrariumWebserver.py:359 terrariumWebserver.py:369
 msgid "Success!"
 msgstr ""
 
-#: terrariumWebserver.py:360
+#: terrariumWebserver.py:361
 msgid "Duplicate file '%s'"
 msgstr ""
 
-#: terrariumWebserver.py:365
+#: terrariumWebserver.py:366
 msgid "Action could not be satisfied"
 msgstr ""
 
-#: terrariumWebserver.py:368
+#: terrariumWebserver.py:369
 msgid "Audio file is deleted"
 msgstr ""
 
-#: terrariumWebserver.py:401
+#: terrariumWebserver.py:402
 msgid "Hardware is replaced"
 msgstr ""
 
-#: terrariumWebserver.py:402
+#: terrariumWebserver.py:403
 msgid "Hardware replacement is logged in the calendar"
 msgstr ""
 
-#: terrariumWebserver.py:405
+#: terrariumWebserver.py:406
 msgid "A new replacement reminder is created"
 msgstr ""
 
@@ -227,7 +223,8 @@ msgstr ""
 #: views/audio_files.html:26 views/audio_files.html:37
 #: views/enclosures.html:74 views/modals/area.html:33
 #: views/modals/button.html:32 views/modals/enclosure.html:17
-#: views/modals/sensor.html:41
+#: views/modals/sensor.html:41 views/modals/webcam.html:36
+#: views/modals/webcam.html:199
 msgid "Name"
 msgstr ""
 
@@ -264,15 +261,16 @@ msgstr ""
 msgid "No buttons"
 msgstr ""
 
-#: views/buttons.html:14 views/includes/sidebar.html:144
+#: views/buttons.html:14
 msgid "Add new button"
 msgstr ""
 
-#: views/buttons.html:16 views/dashboard.html:233 views/enclosures.html:14
+#: views/buttons.html:16 views/buttons.html:70 views/calendar.html:9
+#: views/dashboard.html:182 views/dashboard.html:233 views/enclosures.html:14
 #: views/enclosures.html:49 views/log.html:9 views/relays.html:16
-#: views/sensors.html:22 views/weather.html:9 views/webcams.html:15
-#: views/webcams.html:42
-msgid "Please login to make changes"
+#: views/relays.html:78 views/sensors.html:22 views/sensors.html:81
+#: views/weather.html:9 views/webcams.html:15 views/webcams.html:42
+msgid "Login to make changes"
 msgstr ""
 
 #: views/buttons.html:28 views/relays.html:28 views/sensors.html:34
@@ -308,13 +306,9 @@ msgid "Ignore"
 msgstr ""
 
 #: views/buttons.html:67 views/calendar.html:83 views/dashboard.html:179
-#: views/relays.html:75 views/sensors.html:78 views/webcams.html:39
+#: views/modals/webcam.html:375 views/relays.html:75 views/sensors.html:78
+#: views/webcams.html:39
 msgid "Delete"
-msgstr ""
-
-#: views/buttons.html:70 views/calendar.html:9 views/dashboard.html:182
-#: views/includes/sidebar.html:19 views/relays.html:78 views/sensors.html:81
-msgid "Login to make changes"
 msgstr ""
 
 #: views/calendar.html:2 views/includes/sidebar.html:70
@@ -362,12 +356,13 @@ msgid "Years"
 msgstr ""
 
 #: views/calendar.html:81 views/includes/modals.html:14
-#: views/layouts/modal.html:19 views/weather.html:126
+#: views/layouts/modal.html:19 views/modals/webcam.html:373
+#: views/weather.html:126
 msgid "Close"
 msgstr ""
 
 #: views/calendar.html:84 views/includes/modals.html:5
-#: views/includes/modals.html:15
+#: views/includes/modals.html:15 views/modals/webcam.html:374
 msgid "Confirm"
 msgstr ""
 
@@ -421,7 +416,8 @@ msgid "High"
 msgstr ""
 
 #: views/dashboard.html:345 views/modals/button.html:38
-#: views/modals/sensor.html:47 views/weather.html:22
+#: views/modals/sensor.html:47 views/modals/webcam.html:205
+#: views/weather.html:22
 msgid "Current"
 msgstr ""
 
@@ -498,6 +494,10 @@ msgid "Logout"
 msgstr ""
 
 #: views/includes/sidebar.html:19
+msgid "Login"
+msgstr ""
+
+#: views/includes/sidebar.html:19
 msgid "Read only mode"
 msgstr ""
 
@@ -515,22 +515,19 @@ msgid "Weather"
 msgstr ""
 
 #: views/includes/sidebar.html:79 views/modals/area.html:216
-#: views/modals/area.html:224
+#: views/modals/area.html:224 views/modals/webcam.html:359
 msgid "Sensors"
 msgstr ""
 
-#: views/includes/sidebar.html:98 views/sensors.html:20
-msgid "Add new sensor"
+#: views/includes/sidebar.html:98 views/includes/sidebar.html:121
+#: views/includes/sidebar.html:144 views/includes/sidebar.html:167
+msgid "Add new"
 msgstr ""
 
 #: views/includes/sidebar.html:107 views/modals/area.html:152
 #: views/modals/area.html:193 views/modals/area.html:328
 #: views/modals/area.html:400 views/relays.html:2
 msgid "Relays"
-msgstr ""
-
-#: views/includes/sidebar.html:121 views/relays.html:14
-msgid "Add new relay"
 msgstr ""
 
 #: views/includes/sidebar.html:153 views/modals/enclosure.html:50
@@ -540,10 +537,6 @@ msgstr ""
 
 #: views/includes/sidebar.html:161
 msgid "Show"
-msgstr ""
-
-#: views/includes/sidebar.html:167 views/webcams.html:13
-msgid "Add new webcam"
 msgstr ""
 
 #: views/includes/sidebar.html:176
@@ -599,7 +592,8 @@ msgid "Usage"
 msgstr ""
 
 #: views/includes/sidebar.html:295 views/modals/button.html:17
-#: views/modals/sensor.html:17
+#: views/modals/sensor.html:17 views/modals/webcam.html:21
+#: views/modals/webcam.html:184
 msgid "Hardware"
 msgstr ""
 
@@ -656,6 +650,7 @@ msgid "Power off"
 msgstr ""
 
 #: views/modals/area.html:85 views/modals/area.html:214
+#: views/modals/webcam.html:90
 msgid "Disabled"
 msgstr ""
 
@@ -757,6 +752,7 @@ msgstr ""
 
 #: views/modals/area.html:310 views/modals/area.html:320
 #: views/modals/area.html:382 views/modals/area.html:392
+#: views/modals/webcam.html:110 views/modals/webcam.html:122
 msgid "Ignored"
 msgstr ""
 
@@ -813,14 +809,15 @@ msgid "Button settings"
 msgstr ""
 
 #: views/modals/button.html:26 views/modals/sensor.html:35
+#: views/modals/webcam.html:30 views/modals/webcam.html:193
 msgid "Address"
 msgstr ""
 
-#: views/modals/button.html:50
+#: views/modals/button.html:50 views/modals/webcam.html:217
 msgid "Capacitor value in &micro;F"
 msgstr ""
 
-#: views/modals/button.html:53
+#: views/modals/button.html:53 views/modals/webcam.html:220
 msgid "Please enter a number value between 1 and 100"
 msgstr ""
 
@@ -880,8 +877,200 @@ msgstr ""
 msgid "Maximum moist value"
 msgstr ""
 
+#: views/modals/webcam.html:11
+msgid "Webcam settings"
+msgstr ""
+
+#: views/modals/webcam.html:42
+msgid "Resolution (width x height)"
+msgstr ""
+
+#: views/modals/webcam.html:52
+msgid "Rotation"
+msgstr ""
+
+#: views/modals/webcam.html:55
+msgid "0 degrees"
+msgstr ""
+
+#: views/modals/webcam.html:56
+msgid "90 degrees"
+msgstr ""
+
+#: views/modals/webcam.html:57
+msgid "180 degrees"
+msgstr ""
+
+#: views/modals/webcam.html:58
+msgid "270 degrees"
+msgstr ""
+
+#: views/modals/webcam.html:59
+msgid "Flip Horizontal"
+msgstr ""
+
+#: views/modals/webcam.html:60
+msgid "Flip Vertical"
+msgstr ""
+
+#: views/modals/webcam.html:67
+msgid "White balance"
+msgstr ""
+
+#: views/modals/webcam.html:70
+msgid "off"
+msgstr ""
+
+#: views/modals/webcam.html:71
+msgid "auto"
+msgstr ""
+
+#: views/modals/webcam.html:72
+msgid "sunlight"
+msgstr ""
+
+#: views/modals/webcam.html:73
+msgid "cloudy"
+msgstr ""
+
+#: views/modals/webcam.html:74
+msgid "shade"
+msgstr ""
+
+#: views/modals/webcam.html:75
+msgid "tungsten"
+msgstr ""
+
+#: views/modals/webcam.html:76
+msgid "fluorescent"
+msgstr ""
+
+#: views/modals/webcam.html:77
+msgid "incandescent"
+msgstr ""
+
+#: views/modals/webcam.html:78
+msgid "flash"
+msgstr ""
+
+#: views/modals/webcam.html:79
+msgid "horizon"
+msgstr ""
+
+#: views/modals/webcam.html:80
+msgid "greyworld"
+msgstr ""
+
+#: views/modals/webcam.html:87
+msgid "Archiving"
+msgstr ""
+
+#: views/modals/webcam.html:91
+msgid "Motion"
+msgstr ""
+
+#: views/modals/webcam.html:92
+msgid "1 minute"
+msgstr ""
+
+#: views/modals/webcam.html:93
+msgid "5 minutes"
+msgstr ""
+
+#: views/modals/webcam.html:94
+msgid "15 minutes"
+msgstr ""
+
+#: views/modals/webcam.html:95
+msgid "30 minutes"
+msgstr ""
+
+#: views/modals/webcam.html:96
+msgid "1 hour"
+msgstr ""
+
+#: views/modals/webcam.html:97
+msgid "3 hours"
+msgstr ""
+
+#: views/modals/webcam.html:98
+msgid "6 hours"
+msgstr ""
+
+#: views/modals/webcam.html:99
+msgid "12 hours"
+msgstr ""
+
+#: views/modals/webcam.html:100
+msgid "1 day"
+msgstr ""
+
+#: views/modals/webcam.html:107
+msgid "Archive light state"
+msgstr ""
+
+#: views/modals/webcam.html:111 views/modals/webcam.html:123
+msgid "When on"
+msgstr ""
+
+#: views/modals/webcam.html:112 views/modals/webcam.html:124
+msgid "When off"
+msgstr ""
+
+#: views/modals/webcam.html:119
+msgid "Archive door state"
+msgstr ""
+
+#: views/modals/webcam.html:133
+msgid "Show motion boxes"
+msgstr ""
+
+#: views/modals/webcam.html:136
+msgid "None"
+msgstr ""
+
+#: views/modals/webcam.html:137
+msgid "Red"
+msgstr ""
+
+#: views/modals/webcam.html:138
+msgid "Green"
+msgstr ""
+
+#: views/modals/webcam.html:139
+msgid "Blue"
+msgstr ""
+
+#: views/modals/webcam.html:146
+msgid "Motion delta thresshold"
+msgstr ""
+
+#: views/modals/webcam.html:152
+msgid "Motion minimum area"
+msgstr ""
+
+#: views/modals/webcam.html:158
+msgid "Motion comparison frame"
+msgstr ""
+
+#: views/modals/webcam.html:161
+msgid "Last frame"
+msgstr ""
+
+#: views/modals/webcam.html:162
+msgid "Last archived frame"
+msgstr ""
+
+#: views/modals/webcam.html:171
+msgid "Preview"
+msgstr ""
+
 #: views/relays.html:11
 msgid "No relays"
+msgstr ""
+
+#: views/relays.html:14
+msgid "Add new relay"
 msgstr ""
 
 #: views/relays.html:38 views/relays.html:67
@@ -898,6 +1087,10 @@ msgstr ""
 
 #: views/sensors.html:17
 msgid "No sensors"
+msgstr ""
+
+#: views/sensors.html:20
+msgid "Add new sensor"
 msgstr ""
 
 #: views/settings.html:27
@@ -1124,6 +1317,14 @@ msgstr ""
 msgid "No webcams"
 msgstr ""
 
+#: views/webcams.html:13
+msgid "Add new webcam"
+msgstr ""
+
+#: Missing text string
+msgid "Action succeeded"
+msgstr ""
+
 #: Missing text string
 msgid "added"
 msgstr ""
@@ -1237,7 +1438,15 @@ msgid "Enter end time"
 msgstr ""
 
 #: Missing text string
+msgid "Enter height"
+msgstr ""
+
+#: Missing text string
 msgid "Enter name"
+msgstr ""
+
+#: Missing text string
+msgid "Enter number"
 msgstr ""
 
 #: Missing text string
@@ -1262,6 +1471,10 @@ msgstr ""
 
 #: Missing text string
 msgid "Enter the offset"
+msgstr ""
+
+#: Missing text string
+msgid "Enter width"
 msgstr ""
 
 #: Missing text string
@@ -1365,6 +1578,18 @@ msgid "Select a mode"
 msgstr ""
 
 #: Missing text string
+msgid "Select archive door state"
+msgstr ""
+
+#: Missing text string
+msgid "Select archive light state"
+msgstr ""
+
+#: Missing text string
+msgid "Select archiving"
+msgstr ""
+
+#: Missing text string
 msgid "Select area type"
 msgstr ""
 
@@ -1397,11 +1622,23 @@ msgid "Select relays"
 msgstr ""
 
 #: Missing text string
+msgid "Select rotation"
+msgstr ""
+
+#: Missing text string
 msgid "Select sensors"
 msgstr ""
 
 #: Missing text string
 msgid "Select type"
+msgstr ""
+
+#: Missing text string
+msgid "Select which frame to comparison"
+msgstr ""
+
+#: Missing text string
+msgid "Select white balance"
 msgstr ""
 
 #: Missing text string
@@ -1414,6 +1651,10 @@ msgstr ""
 
 #: Missing text string
 msgid "Settings could not be saved"
+msgstr ""
+
+#: Missing text string
+msgid "Show the motion boxes"
 msgstr ""
 
 #: Missing text string
