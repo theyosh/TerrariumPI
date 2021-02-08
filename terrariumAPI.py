@@ -248,14 +248,16 @@ class terrariumAPI(object):
   @orm.db_session
   def area_add(self):
     try:
+      # Make sure the enclosure does exists
+      enclosure = Enclosure[request.json['enclosure']]
 
-      new_area = self.webserver.engine.add(terrariumArea(None, request.json['enclosure'], request.json['type'], request.json['name'], request.json['mode'], request.json['setup']))
+      new_area = self.webserver.engine.add(terrariumArea(None, self.webserver.engine.enclosures[request.json['enclosure']], request.json['type'], request.json['name'], request.json['mode'], request.json['setup']))
       request.json['id']      = new_area.id
       #request.json['address'] = new_area.address
 
       area = Area(**request.json)
 
-      return self.area_detail(str(area.pk))
+      return self.area_detail(str(area.id))
       #new_value = new_area.update()
       #area.update(new_value)
 
@@ -263,6 +265,8 @@ class terrariumAPI(object):
       # area_data['id']  = str(area.id)
       # #area_data['value']  = area.value
       # return area_data
+    except orm.core.ObjectNotFound as ex:
+      raise HTTPError(status=404, body=f'Enclosure with id {request.json["enclosure"]} does not exists.')
     except Exception as ex:
       raise HTTPError(status=500, body=f'Area could not be added. {ex}')
 
