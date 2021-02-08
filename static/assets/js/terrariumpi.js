@@ -459,13 +459,15 @@ function get_template_color(classname, transparantcy, hexformat) {
     color = regex.exec(color);
     color = '#' + hex(color[1]) + hex(color[2]) + hex(color[3])
   }
-
   return color;
 }
 
 function sensor_type_indicator(sensor_type) {
-  //console.log('sensor_type_indicator', sensor_type, window.terrariumPI.units[sensor_type])
-  return window.terrariumPI.units[sensor_type];
+  try {
+    return window.terrariumPI.units[sensor_type]['value'];
+  } catch {
+    return '';
+  }
 }
 
 function sensor_gauge(canvas, type, current, limit_min, limit_max, alarm_min, alarm_max) {
@@ -488,8 +490,6 @@ function sensor_gauge(canvas, type, current, limit_min, limit_max, alarm_min, al
 
     set current(value) {
       if (!this._canvas.is(':visible')) {
-        //console.log('Gauge is hidden: ',this._canvas.attr('id'));
-
         this.stop();
         return
       }
@@ -501,16 +501,8 @@ function sensor_gauge(canvas, type, current, limit_min, limit_max, alarm_min, al
       } else {
         this._indicator.text(formatNumber(this.current) + ' ' + sensor_type_indicator(this._type));
       }
-
-
-//      console.log(this)
-
       this._warning_badge.toggle(!(this.alarm_max >= this.current && this.current >= this.alarm_min));
-
-//      this._warning_badge.text(( this.alarm_max >= this.current && this.current >= this.alarm_min  ? '' : this._warning_badge.data('message')));
       this._error_badge.text(value !== null ? '' : this._error_badge.data('message'));
-
-
       this._last_update.text(moment().format('LLL'))
     },
 
@@ -597,7 +589,6 @@ function sensor_gauge(canvas, type, current, limit_min, limit_max, alarm_min, al
       }
     }
   }
-
 
   sensor_gauge_obj.limit_min = limit_min;// || 0;
   sensor_gauge_obj.limit_max = limit_max;// || 100;
@@ -751,8 +742,6 @@ function movingAvg(array, count, qualifier){
           datasets : [],
         }
 
-        //let mode = (data.wattage !== undefined ? 'relay' : 'sensor')
-
         if (data.alarm_max) {
           graph_data.datasets.push({
             label: 'Alarm max',
@@ -892,11 +881,8 @@ function movingAvg(array, count, qualifier){
           self._graph.options.scales.xAxes[0].time.stepSize = 12;
         }
 
-        //console.log(data,graph_data);
         self._graph.data = graph_data;
-
         self._graph.options.legend.display = graph_data.datasets.length >= 2;
-
         self._graph.update();
         // Set the duration to zero so it stops animating when new data is loaded every X minutes.
         self._graph.options.animation.duration = 0;
@@ -1029,15 +1015,12 @@ function movingAvg(array, count, qualifier){
 
                     case 'motion':
                       label += (tooltipItem.yLabel == 0 ? 'still' : 'motion');
-
                       break;
 
                     default:
-                      //return formatNumber(value) + ' ' + sensor_type_indicator(self.__type);
                       label += formatNumber(tooltipItem.yLabel) + ' ' + (data.datasets[tooltipItem.datasetIndex].indicator || sensor_type_indicator(self.__type));
                     break;
                   }
-
 
                   return label;
               }
@@ -1134,10 +1117,6 @@ function movingAvg(array, count, qualifier){
     return window.terrariumPI.graphs[canvas];
   }
 }
-
-
-
-
 
 
 let realtime_sensor_data = {};
@@ -1714,7 +1693,6 @@ function calendar_indicator() {
 
 
 function button_state(button_data) {
-//  console.log('button data:',button_data)
   let button = jQuery('i#button_' + button_data.id);
   let classes = 'fas';
 
@@ -1767,7 +1745,7 @@ function websocket_init(reconnect) {
 
         jQuery.each(message.data,function(counter,data){
           let sensor_type = data.id;
-          let sensor_name = data.value;
+          let sensor_name = window.terrariumPI.units[data.value]['name'];
           let submenu = false;
           let link = '/' + sensor_type + '_sensors.html';
           let tree = null;
@@ -1786,7 +1764,7 @@ function websocket_init(reconnect) {
             if (light_sensors_list.length == 1) {
               submenu = true;
               sensor_type = 'light';
-              sensor_name = 'light';
+              sensor_name = window.terrariumPI.units['light']['name'];
               link = '#';
               tree = 'has-treeview'
 
@@ -1901,19 +1879,19 @@ function websocket_init(reconnect) {
 
         case 'enclosure':
           jQuery.each(message.data.areas, function(counter, area){
-            if (area.state.powered !== undefined) {
+            if (area.state.powered !== null) {
               jQuery('#area_relay_state_' + area.id).removeClass('badge-success badge-secondary').addClass(( area.state.powered ? 'badge-success' : 'badge-secondary'));
             }
             if (area.state.sensors !== undefined) {
-              jQuery('#area_current_' + area.id).text(formatNumber(area.state.sensors.current,0,2));
+              jQuery('#area_current_'   + area.id).text(formatNumber(area.state.sensors.current,0,2));
               jQuery('#area_alarm_min_' + area.id).text(formatNumber(area.state.sensors.alarm_min,0,2));
               jQuery('#area_alarm_max_' + area.id).text(formatNumber(area.state.sensors.alarm_max,0,2));
-              jQuery('#area_warning_' + area.id).toggle(area.state.sensors.alarm);
+              jQuery('#area_warning_'   + area.id).toggle(area.state.sensors.alarm);
             }
             jQuery.each(['day','night','low','high'],function(counter,type){
               if (area.state[type] !== undefined) {
-                jQuery('#area_' + type + '_start_' + area.id).text(moment(area.state[type].begin * 1000).format('LTS'));
-                jQuery('#area_' + type + '_end_' + area.id).text(moment(area.state[type].end * 1000).format('LTS'));
+                jQuery('#area_' + type + '_start_'    + area.id).text(moment(area.state[type].begin * 1000).format('LTS'));
+                jQuery('#area_' + type + '_end_'      + area.id).text(moment(area.state[type].end * 1000).format('LTS'));
                 jQuery('#area_' + type + '_duration_' + area.id).text(moment.duration(area.state[type].duration * 1000).humanize());
               }
             });
@@ -1928,7 +1906,7 @@ function websocket_init(reconnect) {
         }
         break;
 
-        case 'doors':
+      case 'doors':
         let error_counter = 0;
         let error_content = '';
         jQuery.each(message.data, function(index, door_data) {
@@ -2059,7 +2037,7 @@ jQuery(function () {
 
   jQuery.addTemplateFormatter('unitformatter',
     function(value, option) {
-      return window.terrariumPI.units[value];
+      return window.terrariumPI.units[value]['value'];
   });
 
   jQuery.addTemplateFormatter('numberformatter',
@@ -2073,112 +2051,4 @@ jQuery(function () {
   }, 60 * 1000);
 
   websocket_init(false);
-
-  // window.terrariumPI.websocket = io({
-  //   transports: ['websocket']
-  // });
-//  window.terrariumPI.websocket.on('event',function(){console.log('event',this)});
-
-    // socket.on('connect', function() {
-    //     socket.emit('message', { data: 'I\'m connected!'});
-    // });
-
-  //   window.terrariumPI.websocket.on('message', function(message) {
-  //     online_status(true);
-  //     animate_socketio_messages();
-
-  //     switch(message.action) {
-  //       case 'sensortypes':
-
-  //         light_sensors_list = []
-  //         sensor_menu_list = [];
-
-  //         jQuery.each(message.data,function(counter,data){
-  //           let submenu = false;
-  //           let link = '/sensors_' + data[0] + '.html';
-  //           let tree = null;
-  //           let skip = false;
-
-  //           if (data[0] == 'uva' || data[0] == 'uvb' || data[0] == 'uvi' || data[0] == 'light') {
-
-  //             light_sensors_list.push({
-  //               icon: template_sensor_type_icon(data[0]),
-  //               title: data[1].capitalize(),
-  //               link: '/sensors_' + data[0] + '.html',
-  //               tree: null,
-  //               submenu: null
-  //             })
-
-  //             if (light_sensors_list.length == 1) {
-  //               submenu = true;
-  //               data[0] = 'light';
-  //               data[1] = 'light';
-  //               link = '#';
-  //               tree = 'has-treeview'
-
-  //             } else {
-  //               skip = true;
-  //             }
-  //           }
-
-  //           if (!skip) {
-  //             sensor_menu_list.push({
-  //               icon: template_sensor_type_icon(data[0]),
-  //               title: data[1].capitalize(),
-  //               link: link,
-  //               tree: tree,
-  //               submenu: (submenu ? 'fa-angle-left' : null)
-  //             });
-  //           }
-  //         });
-
-  //         if (sensor_menu_list.length + light_sensors_list.length + 1 != jQuery('#available_sensor_types li.nav-item').length) {
-  //           sensor_menu_list.sort((a, b) => a.title.localeCompare(b.title));
-
-  //           console.log('sensortypes Update menu....',jQuery('#available_sensor_types li.nav-item').length,sensor_menu_list.length,light_sensors_list.length);
-
-  //           jQuery('#available_sensor_types li.nav-item:not(:last)').remove();
-  //           jQuery('#available_sensor_types').loadTemplate(jQuery('#sensor_type_menu'),sensor_menu_list,{prepend: true});
-
-  //           if (light_sensors_list.length > 0) {
-  //             light_sensors_list.sort((a, b) => a.title.localeCompare(b.title));
-  //             let light_submenu = jQuery('#available_sensor_types li i.' + template_sensor_type_icon('light')).parentsUntil('li').parent();
-  //             light_submenu.append(jQuery('<ul>').addClass('nav nav-treeview').attr('id','available_light_sensor_types'));
-  //             jQuery('#available_light_sensor_types').loadTemplate(jQuery('#sensor_type_menu'),light_sensors_list,{prepend: true});
-  //           }
-
-  //           fix_menu_links();
-  //         }
-  //       break;
-  //
-  //       case 'relay_update':
-  //         console.log(message.data);
-  //         if (message.data.dimmer) {
-  //           jQuery('#relay_' + message.data.id).val(message.data.value).trigger('change');
-  //         } else {
-  //           jQuery('button#relay_' + message.data.id + ' i').removeClass('text-success').addClass(message.data.value !== null && message.data.value > 0 ? 'text-success' : '');
-  //         }
-  //         jQuery('#relay_' + message.data.id + ' .card-header .badge-danger').text(message.data.value === null ? 'error' : '');
-  //       break;
-
-  //       case 'button_update':
-  //         //console.log(message.data);
-  //         button_state(message.data);
-  //       break;
-
-
-
-
-
-  //       case 'power_usage':
-  //       case 'water_usage':
-  //         let usage = jQuery('#' + ('power_usage' == message.action ? 'power' : 'water') + '_usage');
-  //         usage.find('span.info-box-number').text( formatNumber(message.data.used) + ' / ' + formatNumber(message.data.total) );
-  //         usage.find('div.progress-bar').css({'width': ((message.data.used/message.data.total) * 100) + '%'});
-
-  //         //formatCurrency
-  //       break;
-  //
-  //     }
-  // });
 });

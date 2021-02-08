@@ -18,7 +18,6 @@
       <input type="text" class="form-control" id="enclosure_name" name="name" required="required" placeholder="{{ _('Enter name') }}">
     </div>
   </div>
-
   <div class="col-12 col-sm-6 col-md-6 col-lg-6">
     <div class="form-group">
       <label for="image">{{ _('Image') }}</label>
@@ -30,7 +29,6 @@
     </div>
   </div>
 </div>
-
 <div class="row">
   <div class="col-12 col-sm-12 col-md-10 col-lg-10">
     <div class="form-group">
@@ -38,31 +36,24 @@
       <textarea class="textarea" id="enclosure_description" name="description" placeholder="{{ _('Place some text here') }}" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
     </div>
   </div>
-
   <div class="col-12 col-sm-2 col-md-2 col-lg-2">
     <div class="row">
       <div class="form-group col">
         <label for="enclosure_doors">{{ _('Doors') }}</label>
         <div class="select2-primary">
-          <select class="select2" id="enclosure_doors" name="doors" size="5" multiple="multiple" data-placeholder="{{ _('Select available doors') }}" style="width: 100%; height: 100%">
-          </select>
+          <select class="select2" id="enclosure_doors" name="doors" size="5" multiple="multiple" data-placeholder="{{ _('Select available doors') }}" style="width: 100%; height: 100%"> </select>
         </div>
       </div>
     </div>
-
-
-
     <div class="row">
       <div class="form-group col">
         <label for="enclosure_doors">{{ _('Webcams') }}</label>
         <div class="select2-primary">
-          <select class="select2" id="enclosure_webcams" name="webcams" size="5" multiple="multiple" data-placeholder="{{ _('Select available webcams') }}" style="width: 100%; height: 100%">
-          </select>
+          <select class="select2" id="enclosure_webcams" name="webcams" size="5" multiple="multiple" data-placeholder="{{ _('Select available webcams') }}" style="width: 100%; height: 100%"> </select>
         </div>
       </div>
     </div>
   </div>
-
 </div>
 {% endblock %}
 
@@ -78,9 +69,6 @@ jQuery.when(
   jQuery.get('{{ url_for("api:webcam_list") }}'),
 
 ).done(function(buttons, webcams) {
-  console.log(buttons);
-  console.log(webcams);
-
   let {{modal_type}}_door_select = {{modal_type}}_form.find('select#enclosure_doors');
   {{modal_type}}_door_select.prop('disabled', false).find('option').remove();
 
@@ -148,11 +136,11 @@ jQuery.when(
       async: false,
       success: function (result) {
         {{modal_type}}_modal.find('input[name="image"]').val(result.file);
-        toastr.success('Profile image is uploaded.', 'Upload ok');
+        toastr.success('{{ _('Profile image is uploaded.')}}', '{{ _('Upload ok')}}');
       },
       error: function (error) {
         error = error.responseJSON;
-        toastr.error(error.message , 'Upload error');
+        toastr.error(error.message , '{{ _('Upload error')}}');
       }
     });
   }

@@ -103,18 +103,28 @@ class terrariumWebserver(object):
           response.set_header('Etag', md5(response.body.encode()).hexdigest())
 
   def __template_variables(self, template):
+    def unit_variables():
+      units = {}
+      for unit in self.engine.units:
+        units[unit] = {
+          'name': _(unit),
+          'value' : self.engine.units[unit]
+        }
+
+      return units
+
     # Variables
     variables = { 'lang'          : self.engine.settings['language'],
                   'title'         : self.engine.settings['title'],
                   'version'       : self.engine.settings['version'],
-                  'page_title'    : _(template.replace('_',' ').replace('.html','').capitalize()),
+#                  'page_title'    : _(template.replace('_',' ').replace('.html','').capitalize()),
                   'template'      : template,
                   'device'        : self.engine.settings['device'],
                   'username'      : self.engine.settings['username'],
                   'profile_image' : self.engine.settings['profile_image'],
 
                   'languages' : self.engine.settings['languages'],
-                  'units'     : self.engine.units,
+                  'units'     : unit_variables(),
 
 #                  'translations': self.__translations,
 #                  'notifications' : self.engine.notification,
@@ -131,9 +141,14 @@ class terrariumWebserver(object):
       False if request.get_cookie('auth', secret=self.cookie_secret) is None else self.engine.authenticate(request.get_cookie('auth', secret=self.cookie_secret)[0],request.get_cookie('auth', secret=self.cookie_secret)[1])
     )
 
+    # # Dummy: https://docs.python.org/3/library/gettext.html
+    # def N_(message): return message
+
     # Template functions
     variables['url_for'] = self.url_for
-    variables['_'] = _
+    variables['_']  = _
+    #variables['N_'] = N_
+
 
     return variables
 

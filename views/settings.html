@@ -310,7 +310,11 @@
 
       if (jQuery('form#settings_form')[0].checkValidity() === false) {
         jQuery('form#settings_form').addClass('was-validated');
-        toastr.error('{{ _('Not all required fields are filled.') }}', '{{ _('Update error') }}');
+        let error_fields = [];
+        jQuery.each({{modal_type}}_form.find(':invalid'),function(counter,field){
+          error_fields.push(jQuery(field).prev().text());
+        });
+        toastr.error('{{ _('Not all required fields are entered correctly.') }}:<br/>' + error_fields.join('<br/>'), '{{ _('Form error') }}');
       } else {
         jQuery(this).find('span.spinner-border').removeClass('d-none');
         // Check if there is a new profile image selected...

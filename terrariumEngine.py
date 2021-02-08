@@ -42,32 +42,36 @@ from terrariumEnvironment import terrariumEnvironment
 # REMOVE????
 from terrariumNotification import terrariumNotification
 
+def N_(message):
+  return message
+
 class terrariumEngine(object):
   __ENGINE_LOOP_TIMEOUT          = 30.0 # in seconds
   __VERSION_UPDATE_CHECK_TIMEOUT = 1    # in days
 
   def __init__(self, version):
+    print(_('test'))
     starttime = time.time()
     # Default system units
-    self.units = {'temperature' : 'C',
-                  'distance'    : 'cm',
-                  'altitude'    : 'cm',
-                  'pressure'    : 'hPa',
-                  'humidity'    : '%',
-                  'moisture'    : '%',
-                  'conductivity': 'mS',
-                  'ph'          : 'pH',
-                  'light'       : 'lux',
-                  'uva'         : 'µW/cm²',
-                  'uvb'         : 'µW/cm²',
-                  'uvi'         : '',
-                  'fertility'   : 'µS/cm',
-                  'co2'         : 'ppm',
-                  'volume'      : 'L',
-                  'watertank'   : 'L',
-                  'windspeed'   : 'kmh',
-                  'water_flow'  : 'L/m',
-                  'wattage'     : 'W',
+    self.units = {N_('temperature') : 'C',
+                  N_('distance')    : 'cm',
+                  N_('altitude')    : 'cm',
+                  N_('pressure')    : 'hPa',
+                  N_('humidity')    : '%',
+                  N_('moisture')    : '%',
+                  N_('conductivity'): 'mS',
+                  N_('ph')          : 'pH',
+                  N_('light')       : 'lux',
+                  N_('uva')         : 'µW/cm²',
+                  N_('uvb')         : 'µW/cm²',
+                  N_('uvi')         : '',
+                  N_('fertility')   : 'µS/cm',
+                  N_('co2')         : 'ppm',
+                  N_('volume')      : 'L',
+                  N_('watertank')   : 'L',
+                  N_('windspeed')   : 'kmh',
+                  N_('water_flow')  : 'L/m',
+                  N_('wattage')     : 'W',
                  }
 
     self.__engine = {'exit' : threading.Event(), 'thread' : None, 'logtail' : None}
@@ -253,7 +257,7 @@ class terrariumEngine(object):
       settings['device'] = 'Unknown'
 
     # Set unit values
-    self.units['temperate']  = ('C' if 'celcius' == settings['temperature_indicator'] else ( 'F' if 'fahrenheit' == settings['temperature_indicator'] else 'K' ))
+    self.units['temperature']= ('C' if 'celsius' == settings['temperature_indicator'] else ( 'F' if 'fahrenheit' == settings['temperature_indicator'] else 'K' ))
     self.units['distance']   = ('cm' if 'cm' == settings['distance_indicator'] else 'inch')
     self.units['altitude']   = self.units['distance']
     self.units['volume']     = ('L' if 'l' == settings['water_volume_indicator'] else ( 'UKGall' if 'ukgall' == settings['water_volume_indicator'] else 'USGall' ))
@@ -1104,6 +1108,7 @@ class terrariumEngine(object):
         logger.info(f'Engine update done in {duration:.2f} seconds. Waiting for {time_left:.2f} seconds for the next round.')
 #        sleep(max(0,time_left-prev_delay))
         self.__engine['exit'].wait(max(0,time_left-prev_delay))
+        prev_delay = 0
         print(f'[{datetime.datetime.now()}] Done waiting....')
       else:
         prev_delay = abs(time_left)
@@ -1206,37 +1211,40 @@ class terrariumEngine(object):
 
 
   def motd(self):
+    # Enable translations
+    _ = terrariumUtils.get_translator(self.settings['language'])
+
     # Default left padding
     padding = 2 * ' '
     # Longest text lines first...
     tmp = self.system_stats()
     system_stats = []
     system_stats.append({
-      'title' : 'Uptime:',
+      'title' : _('Uptime') + ':',
       'value' : terrariumUtils.format_uptime(tmp['uptime']),
       'alarm' : False
     })
 
     system_stats.append({
-      'title' : 'System load:',
+      'title' : _('System load') + ':',
       'value' : str(tmp['load']['absolute'])[1:-1],
       'alarm' : tmp['load']['absolute'][0] > 1.0
     })
 
     system_stats.append({
-      'title' : 'CPU Temperature:',
+      'title' : _('CPU Temperature') + ':',
       'value' : f'{tmp["cpu_temperature"]} {self.units["temperature"]}',
       'alarm' : tmp["cpu_temperature"] > 50
     })
 
     system_stats.append({
-      'title' : 'Storage:',
+      'title' : _('Storage') + ':',
       'value' : f'{terrariumUtils.format_filesize(tmp["storage"]["used"])}({ tmp["storage"]["used"] / tmp["storage"]["total"] * 100:.2f}%) used of total {terrariumUtils.format_filesize(tmp["storage"]["total"])}',
       'alarm' : False
     })
 
     system_stats.append({
-      'title' : 'Memory:',
+      'title' : _('Memory') + ':',
       'value' : f'{terrariumUtils.format_filesize(tmp["memory"]["used"])}({ tmp["memory"]["used"] / tmp["memory"]["total"] * 100:.2f}%) used of total {terrariumUtils.format_filesize(tmp["memory"]["total"])}',
       'alarm' : False
     })
@@ -1246,7 +1254,7 @@ class terrariumEngine(object):
     averages = []
     for avg_type in sorted(tmp.keys()):
       averages.append({
-        'title' : f'Average {avg_type}:',
+        'title' : _('average {sensor_type}').format(sensor_type=avg_type).capitalize() + ':',
         'value' : f'{tmp[avg_type]["value"]:.2f}',
         'unit'  : self.units[avg_type],
         'alarm' : not tmp[avg_type]['alarm_min'] <= tmp[avg_type]['value'] <= tmp[avg_type]['alarm_max']
@@ -1319,7 +1327,7 @@ class terrariumEngine(object):
     title_padding = int((max_line_length - max_title_length) / 3) * ' '
 
     motd_title = ''
-    for counter, _ in enumerate(title_part2):
+    for counter, __dummy in enumerate(title_part2):
       if '' == title_part1[counter].strip() and '' == title_part2[counter].strip() and '' == title_part3[counter].strip():
         continue
 
@@ -1398,7 +1406,9 @@ class terrariumEngine(object):
     # TODO: Add a warning line when updating is taking to much time....
 
     # Last update line
-    motd_last_update = (3 * padding) + pyfancy().blue(f'Last update: {datetime.datetime.now():%A, %d-%m-%Y %H:%M:%S}').get()
+    #print(_('last update'))
+    last_update = _('last update').capitalize()
+    motd_last_update = (3 * padding) + pyfancy().blue(f'{last_update}: {datetime.datetime.now():%A, %d-%m-%Y %H:%M:%S}').get()
 
     motd_file = Path('motd.sh')
     with motd_file.open('w') as motdfile:
