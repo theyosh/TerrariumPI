@@ -3,12 +3,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">{{ _('Confirm') }}</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="{{ _('Close') }}">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>...</p>
+        <p></p>
       </div>
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ _('Close') }}</button>
@@ -28,6 +28,9 @@
 
 {% include 'modals/sensor.html' %}
 
+{% include 'modals/webcam.html' %}
+
+<!--
 <div class="modal fade" id="modal-webcam-setup">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
@@ -39,171 +42,7 @@
           </button>
         </div>
         <div class="modal-body ">
-          <input type="hidden" name="id" id="webcam_id" value="" disabled="disabled">
-          <input type="hidden" name="markers" id="markers" readonly="readonly" >
-          <div class="row">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-8">
-              <div class="row">
-                <div class="col-12 col-sm-12 col-md-3 col-lg-4">
-                  <div class="form-group">
-                    <label for="webcam_hardware">Hardware</label>
-                    <div class="select2-primary">
-                      <select class="select2" id="webcam_hardware" name="hardware" required="required" data-placeholder="Select hardware" style="width: 100%;">
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-5 col-lg-4">
-                  <div class="form-group">
-                    <label for="webcam_address">Address</label>
-                    <input type="text" class="form-control" id="webcam_address" required="required" name="address" placeholder="Enter address">
-                  </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-                  <div class="form-group">
-                    <label for="webcam_name">Naam</label>
-                    <input type="text" class="form-control" id="webcam_name" required="required" name="name" placeholder="Enter name">
-                  </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                  <div class="form-group">
-                    <label for="webcam_width" class="d-block">Resolution (width x height)</label>
-                    <div class="d-flex justify-content-between">
-                      <input type="text" class="form-control col-5 d-inline" id="webcam_width" required="required" name="width" placeholder="Enter width">
-                      <i class="fas fa-times mt-3" ></i>
-                      <input type="text" class="form-control col-5 d-inline" id="webcam_height" required="required" name="height" placeholder="Enter height">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                  <div class="form-group">
-                    <label for="webcam_rotation">Rotation</label>
-                    <div class="select2-primary">
-                      <select class="select2" id="webcam_rotation" name="rotation" required="required" data-placeholder="Select rotation" style="width: 100%;">
-                        <option value="0">0 degrees</option>
-                        <option value="90">90 degrees</option>
-                        <option value="180">180 degrees</option>
-                        <option value="270">270 degrees</option>
-                        <option value="H">Flip Horizontal</option>
-                        <option value="V">Flip Vertical</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                  <div class="form-group">
-                    <label for="webcam_awb">White balance</label>
-                    <div class="select2-primary">
-                      <select class="select2" id="webcam_awb" name="awb" required="required" data-placeholder="Select white balance" style="width: 100%;">
-                        <!-- <option value="">Select an option</option> -->
-                        <option value="off">off</option>
-                        <option value="auto">auto</option>
-                        <option value="sunlight">sunlight</option>
-                        <option value="cloudy">cloudy</option>
-                        <option value="shade">shade</option>
-                        <option value="tungsten">tungsten</option>
-                        <option value="fluorescent">fluorescent</option>
-                        <option value="incandescent">incandescent</option>
-                        <option value="flash">flash</option>
-                        <option value="horizon">horizon</option>
-                        <option value="greyworld">greyworld</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4 col-sm-4 col-md-4 col-lg-4">
-                  <div class="form-group">
-                    <label for="webcam_archive">Archiving</label>
-                    <div class="select2-primary">
-                      <select class="select2" id="webcam_archive" name="archive" data-placeholder="Select archiving" style="width: 100%;">
-                        <option value="disabled">Disabled</option>
-                        <option value="motion">Motion</option>
-                        <option value="60">1 minute</option>
-                        <option value="300">5 minutes</option>
-                        <option value="900">15 minutes</option>
-                        <option value="1800">30 minutes</option>
-                        <option value="3600">1 hour</option>
-                        <option value="10800">3 hours</option>
-                        <option value="21600">6 hours</option>
-                        <option value="43200">12 hours</option>
-                        <option value="86400">1 day</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4 col-sm-4 col-md-4 col-lg-4">
-                  <div class="form-group">
-                    <label for="webcam_rotation">Archive light state</label>
-                    <div class="select2-primary">
-                      <select class="select2" id="webcam_archivelight" name="archive_light" data-placeholder="Select archive light state" style="width: 100%;">
-                        <option value="ignore">Ignore</option>
-                        <option value="on">When on</option>
-                        <option value="off">When off</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4 col-sm-4 col-md-4 col-lg-4">
-                  <div class="form-group">
-                    <label for="webcam_archivedoor">Archive door state</label>
-                    <div class="select2-primary">
-                      <select class="select2" id="webcam_archivedoor" name="archive_door" data-placeholder="Select archive door state" style="width: 100%;">
-                        <option value="ignore">Ignore</option>
-                        <option value="on">When on</option>
-                        <option value="off">When off</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group row motion d-none">
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                  <div class="form-group">
-                    <label for="webcam_motionboxes" class="text-truncate">Show motion boxes</label>
-                    <div class="select2-primary">
-                      <select class="select2" id="webcam_motionboxes" name="motion_boxes" data-placeholder="Show the motion boxes" style="width: 100%;">
-                        <option value="-1">None</option>
-                        <option value="red">Red</option>
-                        <option value="green">Green</option>
-                        <option value="blue">Blue</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                  <div class="form-group">
-                    <label for="webcam_motion_threshold" class="text-truncate">Motion delta thresshold</label>
-                    <input type="text" class="form-control" id="webcam_motion_threshold" name="motion_threshold" placeholder="Enter number">
-                  </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                  <div class="form-group">
-                    <label for="webcam_motion_area" class="text-truncate">Motion minimum area</label>
-                    <input type="text" class="form-control" id="webcam_motion_area" name="motion_area" placeholder="Enter number">
-                  </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                  <div class="form-group">
-                    <label for="webcam_motion_frame" class="text-truncate">Motion comparison frame</label>
-                    <div class="select2-primary">
-                      <select class="select2" id="webcam_motion_frame" name="motion_frame" data-placeholder="Select which frame to comparison" style="width: 100%;">
-                        <option value="last">Last frame</option>
-                        <option value="archived">Last archived frame</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-4">
-              <div class="form-group">
-                <label for="button_address">Preview</label>
-                <div class="webcam_player_preview" style="height:100%">
-                  <img src="/static/assets/img/webcam_offline.png" class="img-fluid">
-                </div>
-              </div>
-            </div>
-          </div>
+
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -214,48 +53,9 @@
         </div>
       </form>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
-
-
-<div class="modal fade realtime-data-form">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <form class="form-horizontal" action="" method="post">
-        <div class="modal-header">
-          <h4 class="modal-title"><i class="fas fa-tint" ></i> Sensors</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col">
-              <select class="form-control select2" multiple="multiple" name="webcam_realtime_sensors_list" tabindex="-1" style="width: 100%">
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer d-block">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-            <button type="button" class="btn btn-primary float-right" data-dismiss="modal" id="add_sensors">
-              Save changes
-            </button>
-            <button type="button" class="btn btn-danger float-right" data-dismiss="modal" id="del_marker">DELETE</button>
-
-
-        </div>
-
-      </form>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-
+ -->
 
 <script type="text/javascript">
   jQuery(function(){
@@ -283,7 +83,7 @@
           cache: false,
           success: function (data) {
             let reload_url = data.location || false;
-            let message = data.message || 'Action succeeded';
+            let message = data.message || '{{ _('Action succeeded') }}';
 
             modal.modal('hide');
 
@@ -304,161 +104,16 @@
         });
       });
     });
+
+    // jQuery.get('/api/sensors/',function(data) {
+    //   let pull_down = $('select[name="webcam_realtime_sensors_list"]');
+    //   jQuery.each(data.data,function (index,sensor){
+    //     pull_down.append($('<option>').attr({'value':sensor.id}).text(sensor.type + ' ' + sensor.name + ' ' + (Math.round((sensor.value + Number.EPSILON) * 1000) / 1000) + ' ' ));
+    //   });
+    //   pull_down.trigger('change');
+    // });
+
 /*
-    // Some globals....?
-
-    let relay_modal = jQuery('#modal-relay-setup');
-    let relay_form  = relay_modal.find('form');
-
-    let relay_hardware_select = relay_form.find('select#relay_hardware');
-
-    relay_modal.on('hidden.bs.modal',function(){
-      if (relay_modal.reload) {
-        load_page('{{ url_for("page", page="relays") }}');
-      }
-    });
-
-    // Load form data when modal is opened
-    relay_modal.on('show.bs.modal',function(event){
-      relay_form.find('div.row.dimmer_callibration').hide();
-      relay_form.find('#dimmer_callibration').removeClass('show');
-      relay_form.find('button span.spinner-border').hide();
-      relay_modal.find('div.loading').addClass('d-flex').show();
-      // Clear old cached form data, and set action to POST (new)
-      relay_form[0].reset();
-      relay_form.attr({'method' : 'POST', 'action' : '{{ url_for("api:relay_add") }}'});
-      relay_modal.reload = false;
-
-      jQuery.get('{{ url_for("api:relay_hardware") }}',function(data){
-        relay_hardware_select.on('select2:select', function (event) {
-          relay_form.find('#dimmer_callibration').removeClass('show');
-          if (event.params.data.id.indexOf('-dimmer') != -1) {
-            relay_form.find('.dimmer_callibration').show();
-          } else {
-            relay_form.find('.dimmer_callibration').hide();
-          }
-        });
-
-        relay_hardware_select.prop('disabled', false).find('option').remove();
-
-        jQuery.each(data.data,function(counter,item){
-          //relay_types[item.hardware] = item.types;
-          relay_hardware_select.append(jQuery('<option>').attr('value',item.hardware).text(item.name));
-        });
-        // Update the select2 view
-        relay_hardware_select.trigger({
-          type: 'select2:select',
-          params: {
-            data: {id : data.data[0].hardware}
-          }
-        }).trigger('change');
-
-        // Check if we are in edit mode.... and need to load more data....
-        if (jQuery(event.relatedTarget).attr('id')) {
-          // Load the relay data
-          let url = jQuery(event.relatedTarget).attr('href');
-
-          jQuery.get(url, function(data){
-            // Enable the hidden id field
-            relay_form.find('input[name="id"]').prop('disabled',false)
-            // Change the form url to an PUT (update)
-            relay_form.attr({'method' : 'PUT', 'action' : url});
-            // Set the hardware to the correct value and trigger the relay type options and make this select disabled (not allowed to change afterwards)
-            relay_hardware_select.trigger({
-              type: 'select2:select',
-              params: {
-                data: { id : data.hardware }
-              }
-            }).select2({disabled:true});
-            // Load the relay values in the form
-            jQuery.each(data,function(key,value) {
-              if ('calibration' == key && value != null) {
-                for (const [ calibration_key, calibration_value ] of Object.entries(value)) {
-                  let field = relay_form.find('[name="' + calibration_key + '"]');
-                  field.val(calibration_value).trigger('change');
-                }
-              }
-
-              let field = relay_form.find('[name="' + key + '"]');
-              if (field.attr('type') == 'checkbox') {
-                field.prop('checked',(1 != value)).trigger('change');
-                field.prop('checked',(1 == value)).trigger('change');
-              } else {
-                field.val(value).trigger('change');
-              }
-            });
-            relay_modal.find('div.loading').removeClass('d-flex').hide();
-          });
-        } else {
-          //console.log('Closeing loading div',relay_modal.find('div.loading'));
-          relay_modal.find('div.loading').removeClass('d-flex').hide();
-        }
-      });
-    });
-
-    relay_form.on('submit',function(event){
-      event.preventDefault();
-      event.stopPropagation();
-
-      if (relay_form[0].checkValidity() === false) {
-        relay_form.addClass('was-validated');
-        toastr.error('Not all required fields are filled.', 'Update error');
-      } else {
-        relay_form.find('span.spinner-border').show();
-        let form_data = formToJSON(relay_form);
-        console.log(form_data);
-        // Set the calibration JSON
-        form_data['calibration'] = {}
-        try {
-          form_data['calibration']['dimmer_frequency'] = form_data['dimmer_frequency'];
-          delete(form_data['dimmer_frequency']);
-        } catch (error) { }
-
-        try {
-          form_data['calibration']['dimmer_max_power'] = form_data['dimmer_max_power'];
-          delete(form_data['dimmer_max_power']);
-        } catch (error) { }
-
-
-        // Delete the value field.
-        delete(form_data['value']);
-
-        jQuery.ajax({
-          type: relay_form.attr('method'),
-          url: relay_form.attr('action'),
-          data: JSON.stringify(form_data),
-          processData: false,
-          contentType: 'application/json;charset=UTF-8',
-          dataType:'json',
-          cache: false,
-          success: function (data) {
-            toastr.success("Relay data is saved", "Save ok");
-            relay_modal.reload = true
-            relay_modal.modal('hide');
-          },
-          error: function (error) {
-            error = error.responseJSON;
-            console.log(error);
-            toastr.error(error.message , 'Save Error');
-          }
-        });
-      }
-    });
-*/
-
-    jQuery.get('/api/sensors/',function(data) {
-      let pull_down = $('select[name="webcam_realtime_sensors_list"]');
-      jQuery.each(data.data,function (index,sensor){
-        pull_down.append($('<option>').attr({'value':sensor.id}).text(sensor.type + ' ' + sensor.name + ' ' + (Math.round((sensor.value + Number.EPSILON) * 1000) / 1000) + ' ' ));
-      });
-      pull_down.trigger('change');
-    });
-
-
-
-
-
-
 
 //  jQuery(function(){
     // Some globals....?
@@ -492,6 +147,7 @@
       webcam_modal.reload = false;
 
       jQuery.get('{{ url_for("api:webcam_hardware") }}', function(data) {
+
         webcam_hardware_select.on('select2:select', function (event) {
           if ('rpicam' == event.params.data.id) {
             // Raspberry PI camera defaults
@@ -576,6 +232,8 @@
                 field.val(value).trigger('change');
               }
             });
+
+
             jQuery('.webcam_player_preview').parent('.form-group').attr('id','webcam_' + data.id);
             data.edit = true;
             preview_player = load_webcam(data);
@@ -621,5 +279,6 @@
         });
       }
     });
+    */
   });
 </script>
