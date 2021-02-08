@@ -113,42 +113,43 @@ class terrariumWebserver(object):
 
       return units
 
-    # Variables
-    variables = { 'lang'          : self.engine.settings['language'],
-                  'title'         : self.engine.settings['title'],
-                  'version'       : self.engine.settings['version'],
-#                  'page_title'    : _(template.replace('_',' ').replace('.html','').capitalize()),
-                  'template'      : template,
-                  'device'        : self.engine.settings['device'],
-                  'username'      : self.engine.settings['username'],
-                  'profile_image' : self.engine.settings['profile_image'],
+    def authenticated_cookie(cookie_data):
+      if cookie_data is None:
+        return False
 
-                  'languages' : self.engine.settings['languages'],
-                  'units'     : unit_variables(),
+      if len(cookie_data) != 2:
+        return False
+
+      return self.engine.authenticate(cookie_data[0],cookie_data[1])
+
+    # Variables
+    variables = {
+      'authenticated' : authenticated_cookie(request.get_cookie('auth', secret=self.cookie_secret)),
+      'lang'          : self.engine.settings['language'],
+      'title'         : self.engine.settings['title'],
+      'version'       : self.engine.settings['version'],
+#                  'page_title'    : _(template.replace('_',' ').replace('.html','').capitalize()),
+      'template'      : template,
+      'device'        : self.engine.settings['device'],
+      'username'      : self.engine.settings['username'],
+      'profile_image' : self.engine.settings['profile_image'],
+
+      'languages'     : self.engine.settings['languages'],
+      'units'         : unit_variables(),
 
 #                  'translations': self.__translations,
 #                  'notifications' : self.engine.notification,
 #                  'horizontal_graph_legend' : 1 if self.engine.get_horizontal_graph_legend() else 0,
 
-                  'show_gauge_overview'      : self.engine.settings['all_gauges_on_single_page'],
-                  'show_environment'         : not self.engine.settings['hide_environment_dashboard'],
-                  'graph_smooth_value'       : self.engine.settings['graph_smooth_value'],
-                  'graph_show_min_max_gauge' : 1 if self.engine.settings['show_min_max_gauge'] else 0
-                }
-
-    # TODO: Better cookie support
-    variables['authenticated'] = (
-      False if request.get_cookie('auth', secret=self.cookie_secret) is None else self.engine.authenticate(request.get_cookie('auth', secret=self.cookie_secret)[0],request.get_cookie('auth', secret=self.cookie_secret)[1])
-    )
-
-    # # Dummy: https://docs.python.org/3/library/gettext.html
-    # def N_(message): return message
+      'show_gauge_overview'      : self.engine.settings['all_gauges_on_single_page'],
+      'show_environment'         : not self.engine.settings['hide_environment_dashboard'],
+      'graph_smooth_value'       : self.engine.settings['graph_smooth_value'],
+      'graph_show_min_max_gauge' : 1 if self.engine.settings['show_min_max_gauge'] else 0
+    }
 
     # Template functions
     variables['url_for'] = self.url_for
     variables['_']  = _
-    #variables['N_'] = N_
-
 
     return variables
 
