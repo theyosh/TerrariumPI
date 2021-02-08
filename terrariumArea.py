@@ -10,6 +10,10 @@ import statistics
 import threading
 import uuid
 
+# http://brettbeauregard.com/blog/2011/04/improving-the-beginners-pid-introduction/
+# https://github.com/m-lundberg/simple-pid
+from simple_pid import PID
+
 from pony import orm
 from terrariumDatabase import Sensor
 from terrariumUtils import terrariumUtils, classproperty
@@ -22,46 +26,46 @@ class terrariumArea(object):
 
   __TYPES = {
     'lights' : {
-      'name'    : 'Lights',
+      'name'    : _('Lights'),
       'sensors' : [],
       'class' : lambda: terrariumAreaLights
     },
 
     'temperature' : {
-      'name'    : 'Heating / cooling',
+      'name'    : _('Heating / cooling'),
       'sensors' : ['temperature'],
       'class' : lambda: terrariumAreaTemperature
     },
 
     'humidity' : {
-      'name'    : 'Humidity',
+      'name'    : _('Humidity'),
       'sensors' : ['humidity','moisture'],
       'class' : lambda: terrariumAreaHumidity
     },
 
     'co2' : {
-      'name'    : 'CO2',
+      'name'    : _('CO2'),
       'sensors' : ['co2']
     },
 
     'conductivity' : {
-      'name'    : 'Conductivity',
+      'name'    : _('Conductivity'),
       'sensors' : ['conductivity']
     },
 
     'watertank' : {
-      'name'    : 'Watertank',
+      'name'    : _('Watertank'),
       'sensors' : ['distance'],
       'class' : lambda: terrariumAreaWatertank
     },
 
     'moisture' : {
-      'name'    : 'Moisture',
+      'name'    : _('Moisture'),
       'sensors' : ['moisture','humidity']
     },
 
     'ph' : {
-      'name'    : 'PH',
+      'name'    : _('PH'),
       'sensors' : ['ph']
     },
   }
@@ -243,7 +247,7 @@ class terrariumArea(object):
       print(self.setup[period])
 
       self.setup[period]['tweaks'] = {}
-      
+
       dimmer_found = False
       average_dimmer_durations = {'on' : [], 'off' : []}
       for relay_id in self.setup[period]['relays']:
@@ -346,6 +350,7 @@ class terrariumArea(object):
           continue
 
         self.relays_toggle(period,True)
+        #self.state['powered'] = True
         if self.setup[period]['power_on_time'] > 0:
           self.state[period]['timer_on'] = True
           threading.Timer(self.setup[period]['power_on_time'], self.relays_toggle, [period, False]).start()
@@ -353,12 +358,13 @@ class terrariumArea(object):
       elif False == toggle[period] and self.state['powered'] and not self.state[period].get('timer_on',False):
         logger.info(f'Toggle off the relays for area {self}.')
         self.relays_toggle(period,False)
-        self.state['powered'] = False
+       # self.state['powered'] = False
 
       elif 'sensors' != self.mode and None == toggle[period]:
         print(f'Recalc time table for {self}')
         self._time_table()
 
+#    self.state['powered'] = self.state > 0
     self.state['last_update'] = int(datetime.datetime.now().timestamp())
     return self.state
 
@@ -413,36 +419,30 @@ class terrariumArea(object):
         duration_or_delay_value = (float(duration_or_delay_value)/100) * (tweaks['on' if on else 'off']['dimmer_duration'] * 60.0)
 
       if on:
-        
+
         if relay.is_dimmer:
-#          duration_or_delay_value *= 60.0
           logger.info(f'Start the dimmer {relay.name} from 0 to {relay.ON}% in {duration_or_delay_value} seconds')
           # TODO: In the future we will also be able to set the ON value...
         else:
-#          duration_or_delay_value = (float(duration_or_delay_value)/100) * (tweaks['on']['dimmer_duration'] * 60.0)
           logger.info(f'Set the relay {relay.name} to on with {duration_or_delay_value} seconds delay')
 
-        self.enclosure.relays[relay.id].on(relay.ON,duration_or_delay_value)        
-       # self.state['powered'] = True
+        self.enclosure.relays[relay.id].on(relay.ON,duration_or_delay_value)
         self.state[part]['last_powered_on'] = int(datetime.datetime.now().timestamp())
 
       else:
 
         if relay.is_dimmer:
- #         duration_or_delay_value *= 60.0
           logger.info(f'Stopping the dimmer {relay.name} from {relay.OFF}% to 0 in {duration_or_delay_value} seconds')
           # TODO: In the future we will also be able to set the ON value...
         else:
-#          duration_or_delay_value = (float(duration_or_delay_value)/100) * (tweaks['off']['dimmer_duration'] * 60.0)
           logger.info(f'Set the relay {relay.name} to off with {duration_or_delay_value} seconds delay')
 
         self.enclosure.relays[relay.id].on(relay.OFF,duration_or_delay_value)
 
- #       self.state['powered'] = False
         self.state[part]['timer_on'] = False
 
     self.state['powered'] = on
-    
+
 
   def _time_schema(self):
     return {
@@ -455,7 +455,91 @@ class terrariumAreaLights(terrariumArea):
   pass
 
 class terrariumAreaTemperature(terrariumArea):
-  pass
+
+  def __init__(self, id, enclosure, type, name, mode, setup):
+    # https://onion.io/2bt-pid-control-python/
+    self.__pid = None
+
+    #PID(10, 1, 1, sample_time=30)
+
+  def update(self):
+    super().update()
+    if self.__pid is not None:
+      # Update the heater/cooler dimmer values
+
+      current_values = self.current_value(self.setup['sensors'])
+      self.__pid.setpoint = (current_values['alarm_min'] + current_values['alarm_max']) / 2.0
+      dimmer_value = self.__pid(current_values['current'])
+
+      for relay in self.setup[part]['relays']:
+        relay = self.enclosure.relays[relay]
+        if relay.is_dimmer:
+          print(f'Put dimmer {self} to state: {dimmer_value}%')
+          self.enclosure.relays[relay.id].on(dimmer_value)
+
+  def relays_toggle(self, part, on):
+    logger.info(f'Toggle the relays for area {self} to state {("on" if on else "off")}.')
+
+    for relay in self.setup[part]['relays']:
+      relay = self.enclosure.relays[relay]
+      # tweaks = self.setup[part]['tweaks']
+
+      # duration_or_delay_value = tweaks.get(str(relay.id), None)
+      # duration_or_delay_value = 0 if duration_or_delay_value is None else float(duration_or_delay_value['on' if on else 'off'])
+
+      # if relay.is_dimmer:
+      #   duration_or_delay_value *= 60.0
+      # else:
+      #   duration_or_delay_value = (float(duration_or_delay_value)/100) * (tweaks['on' if on else 'off']['dimmer_duration'] * 60.0)
+
+      if on:
+
+        if relay.is_dimmer:
+          logger.info(f'Start the dimmer {relay.name} from 0 to {relay.ON}% in {duration_or_delay_value} seconds')
+          # TODO: In the future we will also be able to set the ON value...
+
+          if 'sensors' in self.setup:
+
+            current_values = self.current_value(self.setup['sensors'])
+            pid_target = (current_values['alarm_min'] + current_values['alarm_max']) / 2.0
+            if self.__pid is None:
+              self.__pid = PID(10, 1, 1,
+                                setpoint=pid_target,
+                                sample_time=30,
+                                output_limits=(0,100))
+
+              print(f'Starting dimmer {self} with PID setup. Target temp {pid_target}')
+
+
+            print(f'Put dimmer {self} to state: {dimmer_value}%')
+            dimmer_value = self.__pid(current_values['current'])
+            self.enclosure.relays[relay.id].on(dimmer_value)
+
+          else:
+            self.enclosure.relays[relay.id].on(relay.ON,duration_or_delay_value)
+
+
+        else:
+          logger.info(f'Set the relay {relay.name} to on with {duration_or_delay_value} seconds delay')
+          self.enclosure.relays[relay.id].on(relay.ON,duration_or_delay_value)
+
+        self.state[part]['last_powered_on'] = int(datetime.datetime.now().timestamp())
+
+      else:
+
+        if relay.is_dimmer:
+          logger.info(f'Stopping the dimmer {relay.name} from {relay.OFF}% to 0 in {duration_or_delay_value} seconds')
+          # TODO: In the future we will also be able to set the ON value...
+          self.__pid = None
+        else:
+          logger.info(f'Set the relay {relay.name} to off with {duration_or_delay_value} seconds delay')
+
+        self.enclosure.relays[relay.id].on(relay.OFF,duration_or_delay_value)
+
+        self.state[part]['timer_on'] = False
+
+
+    self.state['powered'] = on
 
 class terrariumAreaHumidity(terrariumArea):
   pass

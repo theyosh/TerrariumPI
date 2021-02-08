@@ -34,6 +34,7 @@ meross-iot
 PCA9685-driver
 zeroconf
 pywemo
+simple-pid
 
 # Webcam packages
 Pillow
