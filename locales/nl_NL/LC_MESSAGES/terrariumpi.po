@@ -5,11 +5,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2021-02-08 14:38+CET\n"
+"POT-Creation-Date: 2021-02-09 00:03+CET\n"
 "PO-Revision-Date: 2021-02-08 14:39+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
-"4-x-y-z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
+"z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,176 +51,172 @@ msgstr "Vochtigheid"
 msgid "PH"
 msgstr "PH"
 
-#: terrariumEngine.py:53
-msgid "test"
-msgstr "test"
-
-#: terrariumEngine.py:56
+#: terrariumEngine.py:55
 msgid "temperature"
 msgstr "temperatuur"
 
-#: terrariumEngine.py:57
+#: terrariumEngine.py:56
 msgid "distance"
 msgstr "afstand"
 
-#: terrariumEngine.py:58
+#: terrariumEngine.py:57
 msgid "altitude"
 msgstr "hoogte"
 
-#: terrariumEngine.py:59
+#: terrariumEngine.py:58
 msgid "pressure"
 msgstr "luchtdruk"
 
-#: terrariumEngine.py:60
+#: terrariumEngine.py:59
 msgid "humidity"
 msgstr "luchtvochtigheid"
 
-#: terrariumEngine.py:61
+#: terrariumEngine.py:60
 msgid "moisture"
 msgstr "vochtigheid"
 
-#: terrariumEngine.py:62
+#: terrariumEngine.py:61
 msgid "conductivity"
 msgstr "geleidbaarheid"
 
-#: terrariumEngine.py:63
+#: terrariumEngine.py:62
 msgid "ph"
 msgstr "ph"
 
-#: terrariumEngine.py:64
+#: terrariumEngine.py:63
 msgid "light"
 msgstr "licht"
 
-#: terrariumEngine.py:65
+#: terrariumEngine.py:64
 msgid "uva"
 msgstr "uva"
 
-#: terrariumEngine.py:66
+#: terrariumEngine.py:65
 msgid "uvb"
 msgstr "uvb"
 
-#: terrariumEngine.py:67
+#: terrariumEngine.py:66
 msgid "uvi"
 msgstr "uvi"
 
-#: terrariumEngine.py:68
+#: terrariumEngine.py:67
 msgid "fertility"
 msgstr "vruchtbaarheid"
 
-#: terrariumEngine.py:69
+#: terrariumEngine.py:68
 msgid "co2"
 msgstr "co2"
 
-#: terrariumEngine.py:70
+#: terrariumEngine.py:69
 msgid "volume"
 msgstr "volume"
 
-#: terrariumEngine.py:71
+#: terrariumEngine.py:70
 msgid "watertank"
 msgstr "watertank"
 
-#: terrariumEngine.py:72
+#: terrariumEngine.py:71
 msgid "windspeed"
 msgstr "windsnelheid"
 
-#: terrariumEngine.py:73
+#: terrariumEngine.py:72
 msgid "water_flow"
 msgstr "waterstroom"
 
-#: terrariumEngine.py:74
+#: terrariumEngine.py:73
 msgid "wattage"
 msgstr "wattage"
 
-#: terrariumEngine.py:1223 views/dashboard.html:27 views/status.html:143
+#: terrariumEngine.py:1201 views/dashboard.html:27 views/status.html:143
 msgid "Uptime"
 msgstr "Actief"
 
-#: terrariumEngine.py:1229
+#: terrariumEngine.py:1207
 msgid "System load"
 msgstr "Systeembelasting"
 
-#: terrariumEngine.py:1235 views/status.html:60
+#: terrariumEngine.py:1213 views/status.html:60
 msgid "CPU Temperature"
 msgstr "Processor temperatuur"
 
-#: terrariumEngine.py:1241
+#: terrariumEngine.py:1219
 msgid "Storage"
 msgstr "Opslag"
 
-#: terrariumEngine.py:1247
+#: terrariumEngine.py:1225
 msgid "Memory"
 msgstr "Geheugen"
 
-#: terrariumEngine.py:1257
+#: terrariumEngine.py:1235
 msgid "average {sensor_type}"
 msgstr "gemiddelde {sensor_type}"
 
-#: terrariumEngine.py:1410 views/dashboard.html:139
+#: terrariumEngine.py:1388 views/dashboard.html:139
 msgid "last update"
 msgstr "laatste wijziging"
 
-#: terrariumWebserver.py:227 terrariumWebserver.py:330
+#: terrariumWebserver.py:228 terrariumWebserver.py:331
 msgid "Authenticate to make any changes"
 msgstr "Login om wijzigingen te kunnen maken"
 
-#: terrariumWebserver.py:227 terrariumWebserver.py:330
+#: terrariumWebserver.py:228 terrariumWebserver.py:331
 msgid "Authentication"
 msgstr "Authenticatie"
 
-#: terrariumWebserver.py:227 terrariumWebserver.py:330 views/index.html:2
+#: terrariumWebserver.py:228 terrariumWebserver.py:331 views/index.html:2
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:333
+#: terrariumWebserver.py:334
 msgid "Player command could ot be executed!"
 msgstr "De audio speler commando kon niet worden uitgevoerd!"
 
-#: terrariumWebserver.py:333 terrariumWebserver.py:353
-#: terrariumWebserver.py:365
+#: terrariumWebserver.py:334 terrariumWebserver.py:354
+#: terrariumWebserver.py:366
 msgid "Error!"
 msgstr "Fout!"
 
-#: terrariumWebserver.py:341 terrariumWebserver.py:344
+#: terrariumWebserver.py:342 terrariumWebserver.py:345
 msgid "OK!"
 msgstr "OK!"
 
-#: terrariumWebserver.py:341 terrariumWebserver.py:344
+#: terrariumWebserver.py:342 terrariumWebserver.py:345
 msgid "Player command executed!"
 msgstr "De audio speler commando is uitgevoerd!"
 
-#: terrariumWebserver.py:353
+#: terrariumWebserver.py:354
 msgid "File is not uploaded!"
 msgstr "Bestand is niet geüpload!"
 
-#: terrariumWebserver.py:358
+#: terrariumWebserver.py:359
 msgid "File '%s' is uploaded"
 msgstr "Bestand '%s' is geüpload"
 
-#: terrariumWebserver.py:358 terrariumWebserver.py:368
+#: terrariumWebserver.py:359 terrariumWebserver.py:369
 msgid "Success!"
 msgstr "Gelukt!"
 
-#: terrariumWebserver.py:360
+#: terrariumWebserver.py:361
 msgid "Duplicate file '%s'"
 msgstr "Duplicaat bestand '%s'"
 
-#: terrariumWebserver.py:365
+#: terrariumWebserver.py:366
 msgid "Action could not be satisfied"
 msgstr "Actie kon niet worden uitgevoerd"
 
-#: terrariumWebserver.py:368
+#: terrariumWebserver.py:369
 msgid "Audio file is deleted"
 msgstr "Audio bestand is verwijderd"
 
-#: terrariumWebserver.py:401
+#: terrariumWebserver.py:402
 msgid "Hardware is replaced"
 msgstr "Hardware is vervangen"
 
-#: terrariumWebserver.py:402
+#: terrariumWebserver.py:403
 msgid "Hardware replacement is logged in the calendar"
 msgstr "Vervanging van hardware wordt vastgelegd in de kalender"
 
-#: terrariumWebserver.py:405
+#: terrariumWebserver.py:406
 msgid "A new replacement reminder is created"
 msgstr "Er wordt een nieuwe vervangingsherinnering gemaakt"
 
@@ -231,6 +227,7 @@ msgstr "Audio bestanden"
 #: views/audio_files.html:26 views/audio_files.html:37 views/enclosures.html:74
 #: views/modals/area.html:33 views/modals/button.html:32
 #: views/modals/enclosure.html:17 views/modals/sensor.html:41
+#: views/modals/webcam.html:36 views/modals/webcam.html:199
 msgid "Name"
 msgstr "Naam"
 
@@ -267,15 +264,16 @@ msgstr "Knoppen"
 msgid "No buttons"
 msgstr "Geen knoppen"
 
-#: views/buttons.html:14 views/includes/sidebar.html:144
+#: views/buttons.html:14
 msgid "Add new button"
 msgstr "Voeg nieuwe knop toe"
 
-#: views/buttons.html:16 views/dashboard.html:233 views/enclosures.html:14
+#: views/buttons.html:16 views/buttons.html:70 views/calendar.html:9
+#: views/dashboard.html:182 views/dashboard.html:233 views/enclosures.html:14
 #: views/enclosures.html:49 views/log.html:9 views/relays.html:16
-#: views/sensors.html:22 views/weather.html:9 views/webcams.html:15
-#: views/webcams.html:42
-msgid "Please login to make changes"
+#: views/relays.html:78 views/sensors.html:22 views/sensors.html:81
+#: views/weather.html:9 views/webcams.html:15 views/webcams.html:42
+msgid "Login to make changes"
 msgstr "Log in om wijzigingen aan te brengen"
 
 #: views/buttons.html:28 views/relays.html:28 views/sensors.html:34
@@ -311,14 +309,10 @@ msgid "Ignore"
 msgstr "Negeer"
 
 #: views/buttons.html:67 views/calendar.html:83 views/dashboard.html:179
-#: views/relays.html:75 views/sensors.html:78 views/webcams.html:39
+#: views/modals/webcam.html:375 views/relays.html:75 views/sensors.html:78
+#: views/webcams.html:39
 msgid "Delete"
 msgstr "Verwijder"
-
-#: views/buttons.html:70 views/calendar.html:9 views/dashboard.html:182
-#: views/includes/sidebar.html:19 views/relays.html:78 views/sensors.html:81
-msgid "Login to make changes"
-msgstr "Log in om wijzigingen aan te brengen"
 
 #: views/calendar.html:2 views/includes/sidebar.html:70
 msgid "Calendar"
@@ -365,12 +359,13 @@ msgid "Years"
 msgstr "Jaren"
 
 #: views/calendar.html:81 views/includes/modals.html:14
-#: views/layouts/modal.html:19 views/weather.html:126
+#: views/layouts/modal.html:19 views/modals/webcam.html:373
+#: views/weather.html:126
 msgid "Close"
 msgstr "Sluiten"
 
 #: views/calendar.html:84 views/includes/modals.html:5
-#: views/includes/modals.html:15
+#: views/includes/modals.html:15 views/modals/webcam.html:374
 msgid "Confirm"
 msgstr "Bevestigen"
 
@@ -424,7 +419,8 @@ msgid "High"
 msgstr "Hoog"
 
 #: views/dashboard.html:345 views/modals/button.html:38
-#: views/modals/sensor.html:47 views/weather.html:22
+#: views/modals/sensor.html:47 views/modals/webcam.html:205
+#: views/weather.html:22
 msgid "Current"
 msgstr "Huidig"
 
@@ -501,6 +497,10 @@ msgid "Logout"
 msgstr "Uitloggen"
 
 #: views/includes/sidebar.html:19
+msgid "Login"
+msgstr ""
+
+#: views/includes/sidebar.html:19
 msgid "Read only mode"
 msgstr "Alleen-lezen modus"
 
@@ -518,23 +518,22 @@ msgid "Weather"
 msgstr "Weer"
 
 #: views/includes/sidebar.html:79 views/modals/area.html:216
-#: views/modals/area.html:224
+#: views/modals/area.html:224 views/modals/webcam.html:359
 msgid "Sensors"
 msgstr "Sensoren"
 
-#: views/includes/sidebar.html:98 views/sensors.html:20
-msgid "Add new sensor"
-msgstr "Voeg nieuwe sensor toe"
+#: views/includes/sidebar.html:98 views/includes/sidebar.html:121
+#: views/includes/sidebar.html:144 views/includes/sidebar.html:167
+#, fuzzy
+#| msgid "Add new area"
+msgid "Add new"
+msgstr "Voeg een nieuw gebied toe"
 
 #: views/includes/sidebar.html:107 views/modals/area.html:152
 #: views/modals/area.html:193 views/modals/area.html:328
 #: views/modals/area.html:400 views/relays.html:2
 msgid "Relays"
 msgstr "Schakelaars"
-
-#: views/includes/sidebar.html:121 views/relays.html:14
-msgid "Add new relay"
-msgstr "Voeg een nieuwe schakelaar toe"
 
 #: views/includes/sidebar.html:153 views/modals/enclosure.html:50
 #: views/webcams.html:2
@@ -544,10 +543,6 @@ msgstr "Webcams"
 #: views/includes/sidebar.html:161
 msgid "Show"
 msgstr "Toon"
-
-#: views/includes/sidebar.html:167 views/webcams.html:13
-msgid "Add new webcam"
-msgstr "Voeg nieuwe webcam toe"
 
 #: views/includes/sidebar.html:176
 msgid "Audio"
@@ -602,7 +597,8 @@ msgid "Usage"
 msgstr "Gebruik"
 
 #: views/includes/sidebar.html:295 views/modals/button.html:17
-#: views/modals/sensor.html:17
+#: views/modals/sensor.html:17 views/modals/webcam.html:21
+#: views/modals/webcam.html:184
 msgid "Hardware"
 msgstr "Hardware"
 
@@ -659,6 +655,7 @@ msgid "Power off"
 msgstr "Uitschakelen"
 
 #: views/modals/area.html:85 views/modals/area.html:214
+#: views/modals/webcam.html:90
 msgid "Disabled"
 msgstr "Gedeactiveerd"
 
@@ -760,6 +757,7 @@ msgstr "Status van het licht"
 
 #: views/modals/area.html:310 views/modals/area.html:320
 #: views/modals/area.html:382 views/modals/area.html:392
+#: views/modals/webcam.html:110 views/modals/webcam.html:122
 msgid "Ignored"
 msgstr "Genegeerd"
 
@@ -822,14 +820,15 @@ msgid "Button settings"
 msgstr "Knop instellingen"
 
 #: views/modals/button.html:26 views/modals/sensor.html:35
+#: views/modals/webcam.html:30 views/modals/webcam.html:193
 msgid "Address"
 msgstr "Adres"
 
-#: views/modals/button.html:50
+#: views/modals/button.html:50 views/modals/webcam.html:217
 msgid "Capacitor value in &micro;F"
 msgstr "Condensatorwaarde in µF"
 
-#: views/modals/button.html:53
+#: views/modals/button.html:53 views/modals/webcam.html:220
 msgid "Please enter a number value between 1 and 100"
 msgstr "Voer een getal in tussen 0 en 100"
 
@@ -889,9 +888,221 @@ msgstr "Minimale vochtwaarde"
 msgid "Maximum moist value"
 msgstr "Minimale vochtwaarde"
 
+#: views/modals/webcam.html:11
+#, fuzzy
+#| msgid "Area settings"
+msgid "Webcam settings"
+msgstr "Gebiedsinstellingen"
+
+#: views/modals/webcam.html:42
+msgid "Resolution (width x height)"
+msgstr ""
+
+#: views/modals/webcam.html:52
+#, fuzzy
+#| msgid "Location"
+msgid "Rotation"
+msgstr "Locatie"
+
+#: views/modals/webcam.html:55
+#, fuzzy
+#| msgid "degrees"
+msgid "0 degrees"
+msgstr "graden"
+
+#: views/modals/webcam.html:56
+#, fuzzy
+#| msgid "degrees"
+msgid "90 degrees"
+msgstr "graden"
+
+#: views/modals/webcam.html:57
+#, fuzzy
+#| msgid "degrees"
+msgid "180 degrees"
+msgstr "graden"
+
+#: views/modals/webcam.html:58
+#, fuzzy
+#| msgid "degrees"
+msgid "270 degrees"
+msgstr "graden"
+
+#: views/modals/webcam.html:59
+msgid "Flip Horizontal"
+msgstr "Spiegel horizontaal"
+
+#: views/modals/webcam.html:60
+msgid "Flip Vertical"
+msgstr "Spiegel verticaal"
+
+#: views/modals/webcam.html:67
+msgid "White balance"
+msgstr "Witbalans"
+
+#: views/modals/webcam.html:70
+msgid "off"
+msgstr "uit"
+
+#: views/modals/webcam.html:71
+msgid "auto"
+msgstr "auto"
+
+#: views/modals/webcam.html:72
+msgid "sunlight"
+msgstr "zonlicht"
+
+#: views/modals/webcam.html:73
+#, fuzzy
+#| msgid "Cloud"
+msgid "cloudy"
+msgstr "Cloud"
+
+#: views/modals/webcam.html:74
+msgid "shade"
+msgstr "schaduw"
+
+#: views/modals/webcam.html:75
+msgid "tungsten"
+msgstr "wolfraam"
+
+#: views/modals/webcam.html:76
+msgid "fluorescent"
+msgstr "fluorescerend"
+
+#: views/modals/webcam.html:77
+msgid "incandescent"
+msgstr "gloeiend"
+
+#: views/modals/webcam.html:78
+msgid "flash"
+msgstr "flits"
+
+#: views/modals/webcam.html:79
+msgid "horizon"
+msgstr "horizon"
+
+#: views/modals/webcam.html:80
+msgid "greyworld"
+msgstr "grijze wereld"
+
+#: views/modals/webcam.html:87
+#, fuzzy
+#| msgid "Archive"
+msgid "Archiving"
+msgstr "Archief"
+
+#: views/modals/webcam.html:91
+msgid "Motion"
+msgstr "Beweging"
+
+#: views/modals/webcam.html:92
+msgid "1 minute"
+msgstr "1 minuut"
+
+#: views/modals/webcam.html:93
+msgid "5 minutes"
+msgstr "5 minuten"
+
+#: views/modals/webcam.html:94
+msgid "15 minutes"
+msgstr "15 minuten"
+
+#: views/modals/webcam.html:95
+msgid "30 minutes"
+msgstr "30 minuten"
+
+#: views/modals/webcam.html:96
+msgid "1 hour"
+msgstr "1 uur"
+
+#: views/modals/webcam.html:97
+msgid "3 hours"
+msgstr "3 uren"
+
+#: views/modals/webcam.html:98
+msgid "6 hours"
+msgstr "6 uren"
+
+#: views/modals/webcam.html:99
+msgid "12 hours"
+msgstr "12 uren"
+
+#: views/modals/webcam.html:100
+msgid "1 day"
+msgstr "1 dag"
+
+#: views/modals/webcam.html:107
+msgid "Archive light state"
+msgstr "Archief licht status"
+
+#: views/modals/webcam.html:111 views/modals/webcam.html:123
+msgid "When on"
+msgstr "Wanneer aan"
+
+#: views/modals/webcam.html:112 views/modals/webcam.html:124
+msgid "When off"
+msgstr "Wanneer uitgeschakeld"
+
+#: views/modals/webcam.html:119
+msgid "Archive door state"
+msgstr "Archief deur status"
+
+#: views/modals/webcam.html:133
+msgid "Show motion boxes"
+msgstr "Bewegingsvakken weergeven"
+
+#: views/modals/webcam.html:136
+msgid "None"
+msgstr ""
+
+#: views/modals/webcam.html:137
+#, fuzzy
+#| msgid "Wed"
+msgid "Red"
+msgstr "wo."
+
+#: views/modals/webcam.html:138
+msgid "Green"
+msgstr ""
+
+#: views/modals/webcam.html:139
+msgid "Blue"
+msgstr ""
+
+#: views/modals/webcam.html:146
+#, fuzzy
+#| msgid "Motion delta threshold"
+msgid "Motion delta thresshold"
+msgstr "Drempel bewegingsdelta"
+
+#: views/modals/webcam.html:152
+msgid "Motion minimum area"
+msgstr "Beweging minimaal oppervlakte"
+
+#: views/modals/webcam.html:158
+msgid "Motion comparison frame"
+msgstr "Afbeelding voor bewegingsvergelijking"
+
+#: views/modals/webcam.html:161
+msgid "Last frame"
+msgstr "Laatste beeld"
+
+#: views/modals/webcam.html:162
+msgid "Last archived frame"
+msgstr "Laatst gearchiveerde afbeelding"
+
+#: views/modals/webcam.html:171
+msgid "Preview"
+msgstr "Voorbeeld"
+
 #: views/relays.html:11
 msgid "No relays"
 msgstr "Geen schakelaars"
+
+#: views/relays.html:14
+msgid "Add new relay"
+msgstr "Voeg een nieuwe schakelaar toe"
 
 #: views/relays.html:38 views/relays.html:67
 msgid "Manual mode"
@@ -908,6 +1119,10 @@ msgstr "{sensor_type} sensoren"
 #: views/sensors.html:17
 msgid "No sensors"
 msgstr "Geen sensoren"
+
+#: views/sensors.html:20
+msgid "Add new sensor"
+msgstr "Voeg nieuwe sensor toe"
 
 #: views/settings.html:27
 msgid "Pi power usage"
@@ -1138,6 +1353,16 @@ msgstr "Bron url"
 msgid "No webcams"
 msgstr "Geen webcams"
 
+#: views/webcams.html:13
+msgid "Add new webcam"
+msgstr "Voeg nieuwe webcam toe"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Actions"
+msgid "Action succeeded"
+msgstr "Acties"
+
 #: Missing text string
 msgid "added"
 msgstr "toegevoegd"
@@ -1251,7 +1476,19 @@ msgid "Enter end time"
 msgstr "Voer de eindtijd in"
 
 #: Missing text string
+#, fuzzy
+#| msgid "Enter the height"
+msgid "Enter height"
+msgstr "Voer de hoogte in"
+
+#: Missing text string
 msgid "Enter name"
+msgstr "Naam invoeren"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Enter name"
+msgid "Enter number"
 msgstr "Naam invoeren"
 
 #: Missing text string
@@ -1277,6 +1514,12 @@ msgstr "Voer het minimum aantal uren in"
 #: Missing text string
 msgid "Enter the offset"
 msgstr "Voer de offset in"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Enter end time"
+msgid "Enter width"
+msgstr "Voer de eindtijd in"
 
 #: Missing text string
 msgid "Error"
@@ -1379,6 +1622,24 @@ msgid "Select a mode"
 msgstr "Selecteer een modus"
 
 #: Missing text string
+#, fuzzy
+#| msgid "Archive door state"
+msgid "Select archive door state"
+msgstr "Archief deur status"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Archive light state"
+msgid "Select archive light state"
+msgstr "Archief licht status"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Select language"
+msgid "Select archiving"
+msgstr "Selecteer taal"
+
+#: Missing text string
 msgid "Select area type"
 msgstr "Selecteer gebiedstype"
 
@@ -1411,12 +1672,28 @@ msgid "Select relays"
 msgstr "Selecteer schakelaars"
 
 #: Missing text string
+#, fuzzy
+#| msgid "Picture rotation"
+msgid "Select rotation"
+msgstr "Afbeelding rotatie"
+
+#: Missing text string
 msgid "Select sensors"
 msgstr "Selecteer sensoren"
 
 #: Missing text string
 msgid "Select type"
 msgstr "Selecteer type"
+
+#: Missing text string
+msgid "Select which frame to comparison"
+msgstr ""
+
+#: Missing text string
+#, fuzzy
+#| msgid "White balance"
+msgid "Select white balance"
+msgstr "Witbalans"
 
 #: Missing text string
 msgid "Settings are saved"
@@ -1429,6 +1706,12 @@ msgstr "De instellingen zijn bijgewerkt."
 #: Missing text string
 msgid "Settings could not be saved"
 msgstr "Instellingen konden niet worden opgeslagen"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Show motion boxes"
+msgid "Show the motion boxes"
+msgstr "Bewegingsvakken weergeven"
 
 #: Missing text string
 msgid "Shutdown TerrariumPI"
@@ -1469,6 +1752,12 @@ msgstr "URL van bron voor weergegevens"
 #: Missing text string
 msgid "Your changes are saved"
 msgstr "Je wijzigingen zijn opgeslagen"
+
+#~ msgid "test"
+#~ msgstr "test"
+
+#~ msgid "Please login to make changes"
+#~ msgstr "Log in om wijzigingen aan te brengen"
 
 #~ msgid "Version"
 #~ msgstr "Versie"
@@ -3281,21 +3570,6 @@ msgstr "Je wijzigingen zijn opgeslagen"
 #~ "Zorg ervoor dat de juiste waarden zijn ingevuld. Alle velden met een %s "
 #~ "zijn verplicht."
 
-#~ msgid "Preview"
-#~ msgstr "Voorbeeld"
-
-#~ msgid "Picture rotation"
-#~ msgstr "Afbeelding rotatie"
-
-#~ msgid "degrees"
-#~ msgstr "graden"
-
-#~ msgid "Flip Horizontal"
-#~ msgstr "Spiegel horizontaal"
-
-#~ msgid "Flip Vertical"
-#~ msgstr "Spiegel verticaal"
-
 #~ msgid "V4L"
 #~ msgstr "V4L"
 
@@ -3774,9 +4048,6 @@ msgstr "Je wijzigingen zijn opgeslagen"
 #~ msgid "Tue"
 #~ msgstr "di."
 
-#~ msgid "Wed"
-#~ msgstr "wo."
-
 #~ msgid "Thu"
 #~ msgstr "do."
 
@@ -3792,104 +4063,8 @@ msgstr "Je wijzigingen zijn opgeslagen"
 #~ msgid "Resolution"
 #~ msgstr "Resolutie"
 
-#~ msgid "White balance"
-#~ msgstr "Witbalans"
-
-#~ msgid "off"
-#~ msgstr "uit"
-
-#~ msgid "auto"
-#~ msgstr "auto"
-
-#~ msgid "sunlight"
-#~ msgstr "zonlicht"
-
-#~ msgid "shade"
-#~ msgstr "schaduw"
-
-#~ msgid "tungsten"
-#~ msgstr "wolfraam"
-
-#~ msgid "fluorescent"
-#~ msgstr "fluorescerend"
-
-#~ msgid "incandescent"
-#~ msgstr "gloeiend"
-
-#~ msgid "flash"
-#~ msgstr "flits"
-
-#~ msgid "horizon"
-#~ msgstr "horizon"
-
-#~ msgid "greyworld"
-#~ msgstr "grijze wereld"
-
-#~ msgid "Archive"
-#~ msgstr "Archief"
-
-#~ msgid "Motion"
-#~ msgstr "Beweging"
-
-#~ msgid "1 minute"
-#~ msgstr "1 minuut"
-
-#~ msgid "5 minutes"
-#~ msgstr "5 minuten"
-
-#~ msgid "15 minutes"
-#~ msgstr "15 minuten"
-
-#~ msgid "30 minutes"
-#~ msgstr "30 minuten"
-
-#~ msgid "1 hour"
-#~ msgstr "1 uur"
-
-#~ msgid "3 hours"
-#~ msgstr "3 uren"
-
-#~ msgid "6 hours"
-#~ msgstr "6 uren"
-
-#~ msgid "12 hours"
-#~ msgstr "12 uren"
-
-#~ msgid "1 day"
-#~ msgstr "1 dag"
-
-#~ msgid "Archive light state"
-#~ msgstr "Archief licht status"
-
-#~ msgid "When on"
-#~ msgstr "Wanneer aan"
-
-#~ msgid "When off"
-#~ msgstr "Wanneer uitgeschakeld"
-
-#~ msgid "Archive door state"
-#~ msgstr "Archief deur status"
-
 #~ msgid "When open"
 #~ msgstr "Wanneer open"
-
-#~ msgid "Show motion boxes"
-#~ msgstr "Bewegingsvakken weergeven"
-
-#~ msgid "Motion delta threshold"
-#~ msgstr "Drempel bewegingsdelta"
-
-#~ msgid "Motion minimum area"
-#~ msgstr "Beweging minimaal oppervlakte"
-
-#~ msgid "Motion comparison frame"
-#~ msgstr "Afbeelding voor bewegingsvergelijking"
-
-#~ msgid "Last frame"
-#~ msgstr "Laatste beeld"
-
-#~ msgid "Last archived frame"
-#~ msgstr "Laatst gearchiveerde afbeelding"
 
 #~ msgid "DELETE"
 #~ msgstr "VERWIJDER"
