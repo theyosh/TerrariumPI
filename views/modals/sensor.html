@@ -133,7 +133,7 @@ let sensor_types = {}
   // Add the new support sensor types based on selected hardware
   if (data !== undefined) {
     jQuery.each(sensor_types[data].sort(),function(counter,item){
-      sensor_type_select.append(jQuery('<option>').attr('value',item).text(item));
+      sensor_type_select.append(jQuery('<option>').attr('value',item).text(window.terrariumPI.units[item]['name']));
     });
     // Update the select2 view and enable the select
     sensor_type_select.trigger('change');

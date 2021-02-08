@@ -2,6 +2,7 @@
 import terrariumLogging
 logger = terrariumLogging.logging.getLogger(__name__)
 
+import gettext
 import re
 import datetime
 import requests
@@ -551,3 +552,9 @@ class terrariumUtils():
 
     strip_regex = r'[ ,]+$'
     return re.sub(strip_regex, '', str(address), 0, re.MULTILINE)
+
+  @staticmethod
+  def get_translator(lang = 'en'):
+    # Load language
+    trans = gettext.translation('terrariumpi', 'locales/', languages=(lang,))
+    return trans.gettext
