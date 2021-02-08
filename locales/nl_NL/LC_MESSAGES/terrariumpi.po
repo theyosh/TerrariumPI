@@ -5,11 +5,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2021-02-08 13:32+CET\n"
-"PO-Revision-Date: 2021-02-08 12:30+0000\n"
+"POT-Creation-Date: 2021-02-08 13:51+CET\n"
+"PO-Revision-Date: 2021-02-08 13:36+0000\n"
 "Last-Translator: Weblate Admin <weblate@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
-"z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgstr "Lampen"
 
 #: terrariumArea.py:35
 msgid "Heating / cooling"
-msgstr ""
+msgstr "Verwarming / koeling"
 
 #: terrariumArea.py:41
 msgid "Humidity"
@@ -55,113 +55,91 @@ msgstr "PH"
 
 #: terrariumEngine.py:53
 msgid "test"
-msgstr ""
+msgstr "test"
 
 #: terrariumEngine.py:56
-#, fuzzy
-#| msgid "Temperature"
 msgid "temperature"
-msgstr "Temperatuur"
+msgstr "temperatuur"
 
 #: terrariumEngine.py:57
-#, fuzzy
-#| msgid "Distance"
 msgid "distance"
-msgstr "Afstand"
+msgstr "afstand"
 
 #: terrariumEngine.py:58
 msgid "altitude"
-msgstr ""
+msgstr "hoogte"
 
 #: terrariumEngine.py:59
 msgid "pressure"
-msgstr ""
+msgstr "luchtdruk"
 
 #: terrariumEngine.py:60
-#, fuzzy
-#| msgid "Humidity"
 msgid "humidity"
-msgstr "Luchtvochtigheid"
+msgstr "luchtvochtigheid"
 
 #: terrariumEngine.py:61
-#, fuzzy
-#| msgid "Moisture"
 msgid "moisture"
-msgstr "Vochtigheid"
+msgstr "vochtigheid"
 
 #: terrariumEngine.py:62
-#, fuzzy
-#| msgid "Conductivity"
 msgid "conductivity"
-msgstr "Geleidingsvermogen"
+msgstr "geleidbaarheid"
 
 #: terrariumEngine.py:63
 msgid "ph"
-msgstr ""
+msgstr "ph"
 
 #: terrariumEngine.py:64
-#, fuzzy
-#| msgid "Night"
 msgid "light"
-msgstr "Nacht"
+msgstr "licht"
 
 #: terrariumEngine.py:65
 msgid "uva"
-msgstr ""
+msgstr "uva"
 
 #: terrariumEngine.py:66
 msgid "uvb"
-msgstr ""
+msgstr "uvb"
 
 #: terrariumEngine.py:67
 msgid "uvi"
-msgstr ""
+msgstr "uvi"
 
 #: terrariumEngine.py:68
-#, fuzzy
-#| msgid "Fertility"
 msgid "fertility"
-msgstr "Vruchtbaarheid"
+msgstr "vruchtbaarheid"
 
 #: terrariumEngine.py:69
 msgid "co2"
-msgstr ""
+msgstr "co2"
 
 #: terrariumEngine.py:70
-#, fuzzy
-#| msgid "Volume"
 msgid "volume"
-msgstr "Volume"
+msgstr "volume"
 
 #: terrariumEngine.py:71
-#, fuzzy
-#| msgid "Water tank"
 msgid "watertank"
-msgstr "Watertank"
+msgstr "watertank"
 
 #: terrariumEngine.py:72
-#, fuzzy
-#| msgid "Wind speed"
 msgid "windspeed"
-msgstr "Windsnelheid"
+msgstr "windsnelheid"
 
 #: terrariumEngine.py:73
 msgid "water_flow"
-msgstr ""
+msgstr "waterstroom"
 
 #: terrariumEngine.py:74
 msgid "wattage"
-msgstr ""
+msgstr "wattage"
 
 #: terrariumEngine.py:1223 views/dashboard.html:27 views/status.html:143
 msgid "Uptime"
 msgstr "Actief"
 
 #: terrariumEngine.py:1229
-#, fuzzy
-#| msgid "System log"
 msgid "System load"
-msgstr "Systeem log"
+msgstr "Systeembelasting"
 
 #: terrariumEngine.py:1235 views/status.html:60
 msgid "CPU Temperature"
@@ -169,25 +147,19 @@ msgstr "Processor temperatuur"
 
 #: terrariumEngine.py:1241
 msgid "Storage"
-msgstr ""
+msgstr "Opslag"
 
 #: terrariumEngine.py:1247
-#, fuzzy
-#| msgid "Memory usage"
 msgid "Memory"
-msgstr "Geheugen verbruik"
+msgstr "Geheugen"
 
 #: terrariumEngine.py:1257
-#, fuzzy
-#| msgid "The sensor type"
 msgid "average {sensor_type}"
-msgstr "Het type sensor"
+msgstr "gemiddelde {sensor_type}"
 
 #: terrariumEngine.py:1410 views/dashboard.html:139
-#, fuzzy
-#| msgid "Last update"
 msgid "last update"
-msgstr "Laatste wijziging"
+msgstr "laatste wijziging"
 
 #: terrariumWebserver.py:227 terrariumWebserver.py:330
 msgid "Authenticate to make any changes"
@@ -280,38 +252,32 @@ msgid "Action"
 msgstr "Actie"
 
 #: views/audio_files.html:47
-#, fuzzy
-#| msgid "Add new audio playlist"
 msgid "Upload new audio file"
-msgstr "Voeg een nieuwe audio afspeellijst toe"
+msgstr "Upload een nieuw audiobestand"
 
 #: views/audio_files.html:52 views/modals/enclosure.html:27
 #: views/settings.html:206
 msgid "Choose file"
-msgstr ""
+msgstr "Kies bestand"
 
 #: views/buttons.html:2 views/includes/sidebar.html:130
 msgid "Buttons"
-msgstr ""
+msgstr "Knoppen"
 
 #: views/buttons.html:11
 msgid "No buttons"
-msgstr ""
+msgstr "Geen knoppen"
 
 #: views/buttons.html:14 views/includes/sidebar.html:144
-#, fuzzy
-#| msgid "Add new sensor"
 msgid "Add new button"
-msgstr "Voeg nieuwe sensor toe"
+msgstr "Voeg nieuwe knop toe"
 
 #: views/buttons.html:16 views/dashboard.html:233 views/enclosures.html:14
 #: views/enclosures.html:49 views/log.html:9 views/relays.html:16
 #: views/sensors.html:22 views/weather.html:9 views/webcams.html:15
 #: views/webcams.html:42
-#, fuzzy
-#| msgid "Authenticate to make any changes"
 msgid "Please login to make changes"
-msgstr "Login om wijzigingen te kunnen maken"
+msgstr "Log in om wijzigingen aan te brengen"
 
 #: views/buttons.html:28 views/relays.html:28 views/sensors.html:34
 #: views/webcams.html:24
@@ -330,10 +296,8 @@ msgstr "waarschuwing"
 
 #: views/buttons.html:52 views/dashboard.html:164 views/relays.html:55
 #: views/sensors.html:63
-#, fuzzy
-#| msgid "Export data"
 msgid "Export"
-msgstr "Exporteer data"
+msgstr "Exporteren"
 
 #: views/buttons.html:57 views/calendar.html:7 views/dashboard.html:169
 #: views/dashboard.html:230 views/includes/sidebar.html:248
@@ -349,31 +313,25 @@ msgstr "Negeer"
 
 #: views/buttons.html:67 views/calendar.html:83 views/dashboard.html:179
 #: views/relays.html:75 views/sensors.html:78 views/webcams.html:39
-#, fuzzy
-#| msgid "Delete file"
 msgid "Delete"
-msgstr "Verwijder bestand"
+msgstr "Verwijder"
 
 #: views/buttons.html:70 views/calendar.html:9 views/dashboard.html:182
 #: views/includes/sidebar.html:19 views/relays.html:78 views/sensors.html:81
-#, fuzzy
-#| msgid "Authenticate to make any changes"
 msgid "Login to make changes"
-msgstr "Login om wijzigingen te kunnen maken"
+msgstr "Log in om wijzigingen aan te brengen"
 
 #: views/calendar.html:2 views/includes/sidebar.html:70
 msgid "Calendar"
 msgstr "Kalender"
 
 #: views/calendar.html:6
-#, fuzzy
-#| msgid "Download"
 msgid "Download iCal"
-msgstr "Download"
+msgstr "Download iCal"
 
 #: views/calendar.html:39 views/calendar.html:53
 msgid "Event"
-msgstr ""
+msgstr "Evenement"
 
 #: views/calendar.html:48 views/settings.html:194
 msgid "Title"
@@ -384,16 +342,12 @@ msgid "Date"
 msgstr "Datum"
 
 #: views/calendar.html:65
-#, fuzzy
-#| msgid "Repeat"
 msgid "Repeat every"
-msgstr "Herhaal"
+msgstr "Herhaal elke"
 
 #: views/calendar.html:69
-#, fuzzy
-#| msgid "Repeat"
 msgid "No repeat"
-msgstr "Herhaal"
+msgstr "Niet herhalen"
 
 #: views/calendar.html:70
 msgid "Days"
@@ -419,7 +373,7 @@ msgstr "Sluiten"
 #: views/calendar.html:84 views/includes/modals.html:5
 #: views/includes/modals.html:15
 msgid "Confirm"
-msgstr ""
+msgstr "Bevestigen"
 
 #: views/dashboard.html:2 views/includes/sidebar.html:50
 msgid "Dashboard"
@@ -434,31 +388,25 @@ msgid "Water flow in L/m"
 msgstr "Waterverbruik in L/m"
 
 #: views/dashboard.html:91
-#, fuzzy
-#| msgid "Total power in kWh"
 msgid "Total power"
-msgstr "Totaal stroomverbruik in kWh"
+msgstr "Totaal vermogen"
 
 #: views/dashboard.html:96 views/dashboard.html:118
-#, fuzzy
-#| msgid "Month"
 msgid "month"
-msgstr "Maand"
+msgstr "maand"
 
 #: views/dashboard.html:96 views/dashboard.html:118 views/weather.html:36
 msgid "in"
 msgstr "in"
 
 #: views/dashboard.html:113
-#, fuzzy
-#| msgid "Total water in L"
 msgid "Total water"
-msgstr "Totaal waterverbruik in L"
+msgstr "Totaal water"
 
 #: views/dashboard.html:221 views/enclosures.html:2
 #: views/includes/sidebar.html:199
 msgid "Enclosures"
-msgstr ""
+msgstr "Verblijven"
 
 #: views/dashboard.html:269
 msgid "Day"
@@ -469,14 +417,12 @@ msgid "Night"
 msgstr "Nacht"
 
 #: views/dashboard.html:307
-#, fuzzy
-#| msgid "Log"
 msgid "Low"
-msgstr "Log"
+msgstr "Laag"
 
 #: views/dashboard.html:326
 msgid "High"
-msgstr ""
+msgstr "Hoog"
 
 #: views/dashboard.html:345 views/modals/button.html:38
 #: views/modals/sensor.html:47 views/weather.html:22
@@ -485,23 +431,19 @@ msgstr "Huidig"
 
 #: views/enclosures.html:9
 msgid "No enclosures"
-msgstr ""
+msgstr "Geen verblijven"
 
 #: views/enclosures.html:12 views/includes/sidebar.html:213
-#, fuzzy
-#| msgid "Add new sensor"
 msgid "Add new enclosure"
-msgstr "Voeg nieuwe sensor toe"
+msgstr "Voeg een nieuwe verblijf toe"
 
 #: views/enclosures.html:41
-#, fuzzy
-#| msgid "Add marker"
 msgid "Add area"
-msgstr "Voeg marker toe"
+msgstr "Gebied toevoegen"
 
 #: views/enclosures.html:70
 msgid "Areas"
-msgstr ""
+msgstr "Gebieden"
 
 #: views/enclosures.html:75 views/modals/area.html:25
 #: views/modals/sensor.html:26
@@ -520,68 +462,56 @@ msgid "Status"
 msgstr "Status"
 
 #: views/enclosures.html:78
-#, fuzzy
-#| msgid "Action"
 msgid "Actions"
-msgstr "Actie"
+msgstr "Acties"
 
 #: views/includes/footer.html:5
 msgid "using"
-msgstr ""
+msgstr "gebruik"
 
 #: views/includes/footer.html:6
 msgid "build with"
-msgstr ""
+msgstr "gemaakt met"
 
 #: views/includes/footer.html:15
 msgid "Terrarium home automation"
-msgstr ""
+msgstr "Terraria domotica"
 
 #: views/includes/navigation.html:17
-#, fuzzy
-#| msgid "No events"
 msgid "Upcoming events"
-msgstr "Geen evenementen"
+msgstr "Aankomende evenementen"
 
 #: views/includes/navigation.html:22
 msgid "See All Events"
-msgstr ""
+msgstr "Alle evenementen bekijken"
 
 #: views/includes/navigation.html:31
-#, fuzzy
-#| msgid "Door status"
 msgid "All doors status"
-msgstr "Deur status"
+msgstr "Status van de deuren"
 
 #: views/includes/navigation.html:34
-#, fuzzy
-#| msgid "Door is closed"
 msgid "All doors are closed"
-msgstr "Deur is gesloten"
+msgstr "Alle deuren zijn gesloten"
 
 #: views/includes/sidebar.html:14
 msgid "Hello"
-msgstr ""
+msgstr "Hallo"
 
 #: views/includes/sidebar.html:16
 msgid "Logout"
-msgstr ""
+msgstr "Uitloggen"
 
 #: views/includes/sidebar.html:19
-#, fuzzy
-#| msgid "Manual mode"
 msgid "Read only mode"
-msgstr "Handmatige bediening"
+msgstr "Alleen-lezen modus"
 
 #: views/includes/sidebar.html:42
 msgid "Home"
 msgstr "Thuis"
 
 #: views/includes/sidebar.html:57 views/sensors.html:6
-#, fuzzy
-#| msgid "Select sensors"
 msgid "All sensors"
-msgstr "Selecteer sensoren"
+msgstr "Alle sensoren"
 
 #: views/includes/sidebar.html:64 views/modals/area.html:257
 #: views/weather.html:2
@@ -601,13 +531,11 @@ msgstr "Voeg nieuwe sensor toe"
 #: views/modals/area.html:193 views/modals/area.html:328
 #: views/modals/area.html:400 views/relays.html:2
 msgid "Relays"
-msgstr ""
+msgstr "Schakelaars"
 
 #: views/includes/sidebar.html:121 views/relays.html:14
-#, fuzzy
-#| msgid "Add new webcam"
 msgid "Add new relay"
-msgstr "Voeg nieuwe webcam toe"
+msgstr "Voeg een nieuwe schakelaar toe"
 
 #: views/includes/sidebar.html:153 views/modals/enclosure.html:50
 #: views/webcams.html:2
@@ -627,26 +555,20 @@ msgid "Audio"
 msgstr "Audio"
 
 #: views/includes/sidebar.html:184
-#, fuzzy
-#| msgid "Playlist"
 msgid "Players"
-msgstr "Afspeellijst"
+msgstr "Spelers"
 
 #: views/includes/sidebar.html:190
-#, fuzzy
-#| msgid "Playlist"
 msgid "Files / Playlists"
-msgstr "Afspeellijst"
+msgstr "Bestanden / afspeellijsten"
 
 #: views/includes/sidebar.html:207
 msgid "List"
-msgstr ""
+msgstr "Lijst"
 
 #: views/includes/sidebar.html:219
-#, fuzzy
-#| msgid "Add new webcam"
 msgid "Add new area"
-msgstr "Voeg nieuwe webcam toe"
+msgstr "Voeg een nieuw gebied toe"
 
 #: views/includes/sidebar.html:228 views/settings.html:14
 msgid "System"
@@ -657,10 +579,8 @@ msgid "Log"
 msgstr "Log"
 
 #: views/includes/sidebar.html:254
-#, fuzzy
-#| msgid "Start"
 msgid "Restart"
-msgstr "Start"
+msgstr "Opnieuw starten"
 
 #: views/includes/sidebar.html:260
 msgid "Reboot"
@@ -689,73 +609,55 @@ msgstr "Hardware"
 
 #: views/layouts/modal.html:22
 msgid "Save changes"
-msgstr ""
+msgstr "Wijzigingen opslaan"
 
 #: views/log.html:6
-#, fuzzy
-#| msgid "Download"
 msgid "Download logfile"
-msgstr "Download"
+msgstr "Download logfile"
 
 #: views/log.html:22
-#, fuzzy
-#| msgid "System log"
 msgid "System logging"
-msgstr "Systeem log"
+msgstr "Systeemregistratie"
 
 #: views/log.html:28
 msgid "Filters"
-msgstr ""
+msgstr "Filters"
 
 #: views/log.html:38
-#, fuzzy
-#| msgid "error"
 msgid "errors"
-msgstr "error"
+msgstr "fouten"
 
 #: views/log.html:42
-#, fuzzy
-#| msgid "warning"
 msgid "warnings"
-msgstr "waarschuwing"
+msgstr "waarschuwingen"
 
 #: views/modals/area.html:11
-#, fuzzy
-#| msgid "Webcam settings"
 msgid "Area settings"
-msgstr "Webcam instellingen"
+msgstr "Gebiedsinstellingen"
 
 #: views/modals/area.html:17
-#, fuzzy
-#| msgid "When closed"
 msgid "Enclosure"
-msgstr "Wanneer gesloten"
+msgstr "Verblijf"
 
 #: views/modals/area.html:43
 msgid "Relay"
-msgstr ""
+msgstr "Schakelaar"
 
 #: views/modals/area.html:49
-#, fuzzy
-#| msgid "Duration"
 msgid "Duration on"
-msgstr "Tijdsduur"
+msgstr "Duur aan"
 
 #: views/modals/area.html:57
 msgid "Power on"
 msgstr "Schakel in"
 
 #: views/modals/area.html:65
-#, fuzzy
-#| msgid "Duration"
 msgid "Duration off"
-msgstr "Tijdsduur"
+msgstr "Duur uit"
 
 #: views/modals/area.html:73
-#, fuzzy
-#| msgid "Power on"
 msgid "Power off"
-msgstr "Schakel in"
+msgstr "Uitschakelen"
 
 #: views/modals/area.html:85 views/modals/area.html:214
 msgid "Disabled"
@@ -786,50 +688,36 @@ msgid "Hours shift"
 msgstr "Uren opschuiven"
 
 #: views/modals/area.html:112
-#, fuzzy
-#| msgid "Minimum light hours"
 msgid "Main lights"
-msgstr "Minimum licht uren"
+msgstr "Hoofd verlichting"
 
 #: views/modals/area.html:121
-#, fuzzy
-#| msgid "Door settings"
 msgid "Day settings"
-msgstr "Deur instellingen"
+msgstr "Daginstellingen"
 
 #: views/modals/area.html:121
-#, fuzzy
-#| msgid "Switch settings"
 msgid "Night settings"
-msgstr "Schakelaar instellingen"
+msgstr "Nachtinstellingen"
 
 #: views/modals/area.html:128 views/modals/area.html:169
 #: views/modals/area.html:272 views/modals/area.html:344
-#, fuzzy
-#| msgid "Date and time"
 msgid "Begin time"
-msgstr "Datum en tijd"
+msgstr "Begintijd"
 
 #: views/modals/area.html:134 views/modals/area.html:175
 #: views/modals/area.html:278 views/modals/area.html:350
-#, fuzzy
-#| msgid "Date and time"
 msgid "End time"
-msgstr "Datum en tijd"
+msgstr "Eindtijd"
 
 #: views/modals/area.html:140 views/modals/area.html:181
 #: views/modals/area.html:284 views/modals/area.html:356
-#, fuzzy
-#| msgid "Duration"
 msgid "On duration"
-msgstr "Tijdsduur"
+msgstr "Tijdsduur aan"
 
 #: views/modals/area.html:146 views/modals/area.html:187
 #: views/modals/area.html:290 views/modals/area.html:362
-#, fuzzy
-#| msgid "Timer off duration"
 msgid "Off duration"
-msgstr "Timer uit tijdsduur"
+msgstr "Tijdsduur uit"
 
 #: views/modals/area.html:230
 msgid "Volume"
@@ -853,36 +741,28 @@ msgstr "Dag/nacht bron"
 
 #: views/modals/area.html:265
 msgid "High alarm"
-msgstr ""
+msgstr "Hoog alarm"
 
 #: views/modals/area.html:265
 msgid "Low alarm"
-msgstr ""
+msgstr "Laag alarm"
 
 #: views/modals/area.html:296 views/modals/area.html:368
-#, fuzzy
-#| msgid "Power on"
 msgid "Power on time"
-msgstr "Schakel in"
+msgstr "Ingeschakeld"
 
 #: views/modals/area.html:302 views/modals/area.html:374
-#, fuzzy
-#| msgid "Settle timeout"
 msgid "Settle time"
-msgstr "Wen periode"
+msgstr "Stabilisatietijd"
 
 #: views/modals/area.html:308 views/modals/area.html:380
-#, fuzzy
-#| msgid "Light state"
 msgid "Light status"
-msgstr "Licht status"
+msgstr "Status van het licht"
 
 #: views/modals/area.html:310 views/modals/area.html:320
 #: views/modals/area.html:382 views/modals/area.html:392
-#, fuzzy
-#| msgid "Ignore"
 msgid "Ignored"
-msgstr "Negeer"
+msgstr "Genegeerd"
 
 #: views/modals/area.html:311 views/modals/area.html:383
 msgid "On"
@@ -909,10 +789,8 @@ msgid "Dimmer on duration"
 msgstr "Dimmer aan tijd in seconden"
 
 #: views/modals/area.html:419
-#, fuzzy
-#| msgid "Dimmer off duration"
 msgid "Dimmer of duration"
-msgstr "Dimmer uit in seconden"
+msgstr "Dimmer uit tijdsduur"
 
 #: views/modals/area.html:429
 msgid "Set the dimmer times for going on and off. Max duration is 100 mimutes."
@@ -920,27 +798,27 @@ msgstr ""
 
 #: views/modals/area.html:436
 msgid "Relay delay on"
-msgstr ""
+msgstr "Schakelaar vertraging aan"
 
 #: views/modals/area.html:440
 msgid "Relay delay off"
-msgstr ""
+msgstr "Schakelaar vertraging uit"
 
 #: views/modals/area.html:448
 msgid ""
 "Select the percentage when the light should go on/off based on the dimmer "
 "timer."
 msgstr ""
+"Selecteer het percentage wanneer het licht aan / uit moet gaan op basis van "
+"de dimmertimer."
 
 #: views/modals/area.html:455
 msgid "Step change"
-msgstr ""
+msgstr "Stapverandering"
 
 #: views/modals/button.html:11
-#, fuzzy
-#| msgid "Door settings"
 msgid "Button settings"
-msgstr "Deur instellingen"
+msgstr "Knop instellingen"
 
 #: views/modals/button.html:26 views/modals/sensor.html:35
 msgid "Address"
@@ -953,21 +831,19 @@ msgstr ""
 
 #: views/modals/button.html:50
 msgid "Capacitor value in &micro;F"
-msgstr ""
+msgstr "Condensatorwaarde in µF"
 
 #: views/modals/button.html:53
 msgid "Please enter a number value between 1 and 100"
-msgstr ""
+msgstr "Voer een getal in tussen 0 en 100"
 
 #: views/modals/enclosure.html:11
-#, fuzzy
-#| msgid "Sensor settings"
 msgid "Enclosure settings"
-msgstr "Sensor instellingen"
+msgstr "Verblijf instellingen"
 
 #: views/modals/enclosure.html:23
 msgid "Image"
-msgstr ""
+msgstr "Afbeelding"
 
 #: views/modals/enclosure.html:35
 msgid "Description"
@@ -978,10 +854,8 @@ msgid "Doors"
 msgstr "Deuren"
 
 #: views/modals/relay.html:11
-#, fuzzy
-#| msgid "Webcam settings"
 msgid "Relay settings"
-msgstr "Webcam instellingen"
+msgstr "Schakelaar instellingen"
 
 #: views/modals/sensor.html:11
 msgid "Sensor settings"
@@ -1008,26 +882,20 @@ msgid "Max diff"
 msgstr "Max verschil"
 
 #: views/modals/sensor.html:86 views/sensors.html:44
-#, fuzzy
-#| msgid "excl. avg"
 msgid "Excl. avg"
-msgstr "excl. gem"
+msgstr "Excl. gem"
 
 #: views/modals/sensor.html:105
-#, fuzzy
-#| msgid "Min moist value"
 msgid "Minimal moist value"
 msgstr "Minimale vochtwaarde"
 
 #: views/modals/sensor.html:111
-#, fuzzy
-#| msgid "Max moist value"
 msgid "Maximum moist value"
-msgstr "Maximale vochtwaarde"
+msgstr "Minimale vochtwaarde"
 
 #: views/relays.html:11
 msgid "No relays"
-msgstr ""
+msgstr "Geen schakelaars"
 
 #: views/relays.html:38 views/relays.html:67
 msgid "Manual mode"
@@ -1038,51 +906,43 @@ msgid "Replace hardware"
 msgstr "Vervang hardware"
 
 #: views/sensors.html:4
-#, fuzzy
-#| msgid "Temperature sensors"
 msgid "{sensor_type} sensors"
-msgstr "Temperatuur sensoren"
+msgstr "{sensor_type} sensoren"
 
 #: views/sensors.html:17
-#, fuzzy
-#| msgid "pH sensor"
 msgid "No sensors"
-msgstr "pH sensor"
+msgstr "Geen sensoren"
 
 #: views/settings.html:27
-#, fuzzy
-#| msgid "Pi power usage in W"
 msgid "Pi power usage"
-msgstr "Stroomverbruik Pi in W"
+msgstr "Pi stroomverbruik"
 
 #: views/settings.html:31
 msgid ""
 "Enter the total power usage of the Pi with all its USB devices connected."
 msgstr ""
+"Voer het totale stroomverbruik van de Pi in met al zijn USB-apparaten "
+"aangesloten."
 
 #: views/settings.html:34
 msgid "Please enter a number value of 0.00 or higher"
-msgstr ""
+msgstr "Voer een getalwaarde van 0,00 of hoger in"
 
 #: views/settings.html:39
 msgid "IP or hostname"
 msgstr "IP of hostnaam"
 
 #: views/settings.html:43
-#, fuzzy
-#| msgid "Holds the mail server hostname or IP."
 msgid "Please enter a valid hostname or IP"
-msgstr "Bevat de hostnaam of IP van de mailserver."
+msgstr "Voer een geldige hostnaam of IP in"
 
 #: views/settings.html:48
 msgid "Port number"
 msgstr "Poort nummer"
 
 #: views/settings.html:54
-#, fuzzy
-#| msgid "Authentication"
 msgid "Authentication type"
-msgstr "Authenticatie"
+msgstr "Type aanmeldingscontrole"
 
 #: views/settings.html:57
 msgid "Full authentication"
@@ -1090,45 +950,35 @@ msgstr "Volledige authenticatie"
 
 #: views/settings.html:58
 msgid "Only changes"
-msgstr ""
+msgstr "Alleen veranderingen"
 
 #: views/settings.html:63
-#, fuzzy
-#| msgid "Username"
 msgid "User name"
 msgstr "Gebruikersnaam"
 
 #: views/settings.html:69
-#, fuzzy
-#| msgid "New admin password"
 msgid "New password"
-msgstr "Nieuw beheerswachtwoord"
+msgstr "Nieuw wachtwoord"
 
 #: views/settings.html:75
-#, fuzzy
-#| msgid "Current admin password"
 msgid "Confirm new password"
-msgstr "Huidige beheerswachtwoord"
+msgstr "Bevestig het nieuwe wachtwoord"
 
 #: views/settings.html:81
 msgid "Exclude ids"
-msgstr ""
+msgstr "Uitgesloten ID's"
 
 #: views/settings.html:95
-#, fuzzy
-#| msgid "Local source"
 msgid "Locale"
-msgstr "Lokale bron"
+msgstr "Land/taal"
 
 #: views/settings.html:108
 msgid "Language"
 msgstr "Taal"
 
 #: views/settings.html:118
-#, fuzzy
-#| msgid "Temperature"
 msgid "Temperature type"
-msgstr "Temperatuur"
+msgstr "Temperatuur type"
 
 #: views/settings.html:121
 msgid "Celsius"
@@ -1143,10 +993,8 @@ msgid "Kelvin"
 msgstr "Kelvin"
 
 #: views/settings.html:128
-#, fuzzy
-#| msgid "Distance"
 msgid "Distance type"
-msgstr "Afstand"
+msgstr "Afstandstype"
 
 #: views/settings.html:131
 #, fuzzy
@@ -1160,13 +1008,11 @@ msgstr "Inches"
 
 #: views/settings.html:137
 msgid "Liquid volume type"
-msgstr ""
+msgstr "Type vloeistofvolume"
 
 #: views/settings.html:140
-#, fuzzy
-#| msgid "Litres"
 msgid "Litre"
-msgstr "Liters"
+msgstr "Liter"
 
 #: views/settings.html:141
 msgid "UK Gallons"
@@ -1177,22 +1023,20 @@ msgid "US Gallons"
 msgstr "Amerikaanse gallons"
 
 #: views/settings.html:147
-#, fuzzy
-#| msgid "Wind speed"
 msgid "Windspeed type"
-msgstr "Windsnelheid"
+msgstr "Type windsnelheid"
 
 #: views/settings.html:150
 msgid "Meter per second"
-msgstr ""
+msgstr "Meter per seconde"
 
 #: views/settings.html:151
 msgid "Kilometer per hour"
-msgstr ""
+msgstr "Kilometer per uur"
 
 #: views/settings.html:152
 msgid "Beaufort"
-msgstr ""
+msgstr "Beaufort"
 
 #: views/settings.html:157
 msgid "Power price"
@@ -1204,47 +1048,35 @@ msgstr "Water prijs"
 
 #: views/settings.html:181
 msgid "GUI"
-msgstr ""
+msgstr "GUI"
 
 #: views/settings.html:200
-#, fuzzy
-#| msgid "Profile"
 msgid "Profile image"
-msgstr "Profiel"
+msgstr "Profielafbeelding"
 
 #: views/settings.html:211
 msgid "Show min and max values in gauge graphs"
 msgstr "Toon min- en max- waarden in meter grafieken"
 
 #: views/settings.html:224
-#, fuzzy
-#| msgid "Hide environment summary on the dashboard"
 msgid "Hide environment on dashboard"
-msgstr "Verberg omgevingssamenvatting op het dashboard"
+msgstr "Verberg omgeving op dashboard"
 
 #: views/settings.html:237
-#, fuzzy
-#| msgid "Show all sensors gauges on 1 page"
 msgid "All gauges on a single page"
-msgstr "Toon alle sensoren op 1 pagina"
+msgstr "Alle meters op één pagina"
 
 #: views/settings.html:258
-#, fuzzy
-#| msgid "cloudy"
 msgid "Cloud"
-msgstr "bewolkt"
+msgstr "Cloud"
 
 #: views/settings.html:271
-#, fuzzy
-#| msgid "Meross Cloud username"
 msgid "Meross username"
-msgstr "Meross Cloud-gebruikersnaam"
+msgstr "Meross gebruikersnaam"
 
 #: views/settings.html:277
-#, fuzzy
-#| msgid "Meross Cloud password"
 msgid "Meross password"
-msgstr "Meross Cloud-wachtwoord"
+msgstr "Meross wachtwoord"
 
 #: views/settings.html:293 views/weather.html:127
 msgid "Save"
@@ -1263,118 +1095,90 @@ msgid "Disk usage"
 msgstr "Harde schijf gebruik"
 
 #: views/weather.html:5
-#, fuzzy
-#| msgid "Weather forecast"
 msgid "Weather source credits"
-msgstr "Weer voorspelling"
+msgstr "Weer broncredits"
 
 #: views/weather.html:36
 msgid "Today"
-msgstr ""
+msgstr "Vandaag"
 
 #: views/weather.html:43
 msgid "Location"
 msgstr "Locatie"
 
 #: views/weather.html:44
-#, fuzzy
-#| msgid "Weather"
 msgid "Weather type"
-msgstr "Weer"
+msgstr "Weertype"
 
 #: views/weather.html:47
 msgid "Rise"
-msgstr ""
+msgstr "Opkomst"
 
 #: views/weather.html:48
-#, fuzzy
-#| msgid "Sat"
 msgid "Set"
-msgstr "za."
+msgstr "Ondergaan"
 
 #: views/weather.html:49
-#, fuzzy
-#| msgid "CPU Temp."
 msgid "Temp."
-msgstr "CPU Temp."
+msgstr "Temp."
 
 #: views/weather.html:74
-#, fuzzy
-#| msgid "Day forecast"
 msgid "Forecast"
-msgstr "Dagvoorspelling"
+msgstr "Voorspelling"
 
 #: views/weather.html:109
-#, fuzzy
-#| msgid "Webcam settings"
 msgid "Weather settings"
-msgstr "Webcam instellingen"
+msgstr "Weer instellingen"
 
 #: views/weather.html:116
 msgid ""
 "Enter the online source url for your weather information. Valid urls are "
 "shown below."
-msgstr ""
+msgstr "Voer de online bron-URL in voor uw weersinformatie."
 
 #: views/weather.html:119
-#, fuzzy
-#| msgid "Source"
 msgid "Source url"
-msgstr "Bron"
+msgstr "Bron url"
 
 #: views/webcams.html:10
-#, fuzzy
-#| msgid "Webcams"
 msgid "No webcams"
-msgstr "Webcams"
+msgstr "Geen webcams"
 
 #: Missing text string
 msgid "added"
-msgstr ""
+msgstr "toegevoegd"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Audio file is deleted"
 msgid "Audio files are uploaded."
-msgstr "Audio bestand is verwijderd"
+msgstr "Audiobestanden zijn geüpload."
 
 #: Missing text string
-#, fuzzy
-#| msgid "Duration"
 msgid "calibration"
-msgstr "Tijdsduur"
+msgstr "kalibratie"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Changes only"
 msgid "Changed state of relay"
-msgstr "Alleen wijzigingen"
+msgstr "Veranderde status van schakelaar"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Changes only"
 msgid "Change error"
-msgstr "Alleen wijzigingen"
+msgstr "Wijzigingsfout"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Current admin password"
 msgid "Confirm password"
-msgstr "Huidige beheerswachtwoord"
+msgstr "Bevestig het wachtwoord"
 
 #: Missing text string
 msgid "Could not change the relay state of"
-msgstr ""
+msgstr "Kan de schakelaar niet wijzigen van"
 
 #: Missing text string
 msgid "CPU Temp."
 msgstr "CPU Temp."
 
 #: Missing text string
-#, fuzzy
-#| msgid "Heater"
 msgid "created"
-msgstr "Verwarming"
+msgstr "gemaakt"
 
 #: Missing text string
 msgid "Current value"
@@ -1389,130 +1193,96 @@ msgid "Data saved"
 msgstr "Data is opgeslagen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete file"
 msgid "Delete area"
-msgstr "Verwijder bestand"
+msgstr "Gebied verwijderen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete file"
 msgid "Delete audio file"
-msgstr "Verwijder bestand"
+msgstr "Audio-bestand verwijderen"
 
 #: Missing text string
 msgid "Delete button"
-msgstr ""
+msgstr "Knop verwijderen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete file"
 msgid "Delete enclosure"
-msgstr "Verwijder bestand"
+msgstr "Verwijder verblijf"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete file"
 msgid "Delete relay"
-msgstr "Verwijder bestand"
+msgstr "Verwijder schakelaar"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Delete sensor"
-msgstr "Selecteer sensoren"
+msgstr "Sensor verwijderen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Delete file"
 msgid "Delete webcam"
-msgstr "Verwijder bestand"
+msgstr "Verwijder webcam"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Edit"
 msgid "Edit area"
-msgstr "Wijzig"
+msgstr "Gebied bewerken"
 
 #: Missing text string
 msgid "Edit button"
-msgstr ""
+msgstr "Knop bewerken"
 
 #: Missing text string
 msgid "Edit enclosure"
-msgstr ""
+msgstr "Bewerk verblijf"
 
 #: Missing text string
 msgid "Edit relay"
-msgstr ""
+msgstr "Bewerk schakelaar"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Light sensor"
 msgid "Edit sensor"
-msgstr "Licht sesnor"
+msgstr "Bewerk sensor"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new webcam"
 msgid "Edit webcam"
-msgstr "Voeg nieuwe webcam toe"
+msgstr "Bewerk webcam"
 
 #: Missing text string
-#, fuzzy
-#| msgid "I2C address"
 msgid "Enter address"
-msgstr "I2C adres"
+msgstr "Vul het adres in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Date and time"
 msgid "Enter begin time"
-msgstr "Datum en tijd"
+msgstr "Voer de begintijd in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Date and time"
 msgid "Enter end time"
-msgstr "Datum en tijd"
+msgstr "Voer de eindtijd in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Username"
 msgid "Enter name"
-msgstr "Gebruikersnaam"
+msgstr "Naam invoeren"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter the period type."
 msgid "Enter the amount"
-msgstr "Vul de periode type in."
+msgstr "Voer het aantal in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Enter the amount of days/weeks/months/years to reminder."
 msgid "Enter the amount of hours to shift"
-msgstr "Vul het aantal dagen/weken/maanden/jaren in voor de herinnering."
+msgstr "Voer het aantal te verschuiven uren in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Water tank height"
 msgid "Enter the height"
-msgstr "Watertank hoogte"
+msgstr "Voer de hoogte in"
 
 #: Missing text string
 msgid "Enter the maximum amount of hours"
-msgstr ""
+msgstr "Voer het maximale aantal uren in"
 
 #: Missing text string
 msgid "Enter the minimum amount of hours"
-msgstr ""
+msgstr "Voer het minimum aantal uren in"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Temperature offset"
 msgid "Enter the offset"
-msgstr "Temperatuur compensatie"
+msgstr "Voer de offset in"
 
 #: Missing text string
 msgid "Error"
@@ -1520,37 +1290,27 @@ msgstr "Error"
 
 #: Missing text string
 msgid "ERROR"
-msgstr ""
+msgstr "Fout"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Export data"
 msgid "Export button"
-msgstr "Exporteer data"
+msgstr "Exporteren knop"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Export data"
 msgid "Export relay"
-msgstr "Exporteer data"
+msgstr "Exporteer schakelaar"
 
 #: Missing text string
-#, fuzzy
-#| msgid "pH sensor"
 msgid "Export sensor"
-msgstr "pH sensor"
+msgstr "Exporteer sensor"
 
 #: Missing text string
-#, fuzzy
-#| msgid "error"
 msgid "Form error"
-msgstr "error"
+msgstr "Formulierfout"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Add new webcam"
 msgid "Ignore webcam"
-msgstr "Voeg nieuwe webcam toe"
+msgstr "Negeer de webcam"
 
 #: Missing text string
 msgid "Ingore button"
@@ -1571,204 +1331,148 @@ msgid "Load"
 msgstr "Belasting"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Manual mode"
 msgid "Manual mode relay"
-msgstr "Handmatige bediening"
+msgstr "Handmatige modus schakelaar"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Max diff"
 msgid "Max difference"
 msgstr "Max verschil"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Required fields are marked with '%s'."
 msgid "Not all required fields are entered correctly."
-msgstr "Verplichte velden zijn gemarkeerd met '% s'."
+msgstr "Niet alle verplichte velden zijn correct ingevuld."
 
 #: Missing text string
-#, fuzzy
-#| msgid "OK!"
 msgid "OK"
-msgstr "OK!"
+msgstr "Oké"
 
 #: Missing text string
-#, fuzzy
-#| msgid "New calendar item"
 msgid "Open calender page"
-msgstr "Nieuwe kalender item"
+msgstr "Open de kalenderpagina"
 
 #: Missing text string
-#, fuzzy
-#| msgid "SMTP password"
 msgid "Password"
-msgstr "SMTP-wachtwoord"
+msgstr "Wachtwoord"
 
 #: Missing text string
 msgid "Place some text here"
-msgstr ""
+msgstr "Plaats hier wat tekst"
 
 #: Missing text string
-#, fuzzy
-#| msgid "File '%s' is uploaded"
 msgid "Profile image is uploaded."
-msgstr "Bestand '%s' is geüpload"
+msgstr "Profiel afbeelding succesvol geüpload."
 
 #: Missing text string
-#, fuzzy
-#| msgid "TerrariumPI"
 msgid "Reboot TerrariumPI"
-msgstr "TerrariumPI"
+msgstr "Start TerrariumPI opnieuw op"
 
 #: Missing text string
-#, fuzzy
-#| msgid "TerrariumPI"
 msgid "Restart TerrariumPI"
-msgstr "TerrariumPI"
+msgstr "Start TerrariumPI opnieuw"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Error"
 msgid "Save Error"
-msgstr "Error"
+msgstr "Fout bij opslaan"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Save"
 msgid "Save ok"
-msgstr "Bewaar"
+msgstr "Opslaan ok"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Save"
 msgid "Save OK"
-msgstr "Bewaar"
+msgstr "Opslaan OK"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select an option"
 msgid "Select a mode"
-msgstr "Maak een keuze"
+msgstr "Selecteer een modus"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select an option"
 msgid "Select area type"
-msgstr "Maak een keuze"
+msgstr "Selecteer gebiedstype"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select an option"
 msgid "Select a state"
-msgstr "Maak een keuze"
+msgstr "Kies een status"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Select available doors"
-msgstr "Selecteer sensoren"
+msgstr "Selecteer beschikbare deuren"
 
 #: Missing text string
 msgid "Select available webcams"
-msgstr ""
+msgstr "Selecteer beschikbare webcams"
 
 #: Missing text string
 msgid "Select from available enclosure"
-msgstr ""
+msgstr "Kies uit beschikbare verblijven"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Replace hardware"
 msgid "Select hardware"
-msgstr "Vervang hardware"
+msgstr "Selecteer hardware"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Language"
 msgid "Select language"
-msgstr "Taal"
+msgstr "Selecteer taal"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Select relays"
-msgstr "Selecteer sensoren"
+msgstr "Selecteer schakelaars"
 
 #: Missing text string
 msgid "Select sensors"
 msgstr "Selecteer sensoren"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Select sensors"
 msgid "Select type"
-msgstr "Selecteer sensoren"
+msgstr "Selecteer type"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Your changes are saved"
 msgid "Settings are saved"
-msgstr "Je wijzigingen zijn opgeslagen"
+msgstr "Instellingen zijn opgeslagen"
 
 #: Missing text string
 msgid "Settings are updated."
-msgstr ""
+msgstr "De instellingen zijn bijgewerkt."
 
 #: Missing text string
-#, fuzzy
-#| msgid "Data could not be saved"
 msgid "Settings could not be saved"
-msgstr "Data kon niet worden opgeslagen"
+msgstr "Instellingen konden niet worden opgeslagen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "TerrariumPI"
 msgid "Shutdown TerrariumPI"
-msgstr "TerrariumPI"
+msgstr "TerrariumPI uitschakelen"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Toggle audio"
 msgid "Toggle relay"
-msgstr "Schakel audio"
+msgstr "Schakel"
 
 #: Missing text string
 msgid "{type} {name} is {action}"
-msgstr ""
+msgstr "{type} {name} is {action}"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Last update"
 msgid "updated"
-msgstr "Laatste wijziging"
+msgstr "bijgewerkt"
 
 #: Missing text string
 msgid "Update error"
-msgstr ""
+msgstr "Update Fout"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Upload date"
 msgid "Update ok"
-msgstr "Upload datum"
+msgstr "Update ok"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Upload date"
 msgid "Upload error"
-msgstr "Upload datum"
+msgstr "Uploadfout"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Upload date"
 msgid "Upload ok"
-msgstr "Upload datum"
+msgstr "Upload ok"
 
 #: Missing text string
 msgid "Weather data source url"
-msgstr ""
+msgstr "URL van bron voor weergegevens"
 
 #: Missing text string
 msgid "Your changes are saved"
