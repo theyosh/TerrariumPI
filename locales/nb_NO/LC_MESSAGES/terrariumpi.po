@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.8.3\n"
-"POT-Creation-Date: 2021-02-08 14:38+CET\n"
+"POT-Creation-Date: 2021-02-09 00:03+CET\n"
 "PO-Revision-Date: 2020-04-29 16:03+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: Norwegian Bokmål <https://weblate.theyosh.nl/projects/"
@@ -52,204 +52,200 @@ msgstr "Fuktighet"
 msgid "PH"
 msgstr ""
 
-#: terrariumEngine.py:53
-msgid "test"
-msgstr ""
-
-#: terrariumEngine.py:56
+#: terrariumEngine.py:55
 #, fuzzy
 #| msgid "Temperature"
 msgid "temperature"
 msgstr "Temperatur"
 
-#: terrariumEngine.py:57
+#: terrariumEngine.py:56
 #, fuzzy
 #| msgid "Distance"
 msgid "distance"
 msgstr "Avstand"
 
-#: terrariumEngine.py:58
+#: terrariumEngine.py:57
 msgid "altitude"
 msgstr ""
 
-#: terrariumEngine.py:59
+#: terrariumEngine.py:58
 msgid "pressure"
 msgstr ""
 
-#: terrariumEngine.py:60
+#: terrariumEngine.py:59
 #, fuzzy
 #| msgid "Humidity"
 msgid "humidity"
 msgstr "Luftfuktighet"
 
-#: terrariumEngine.py:61
+#: terrariumEngine.py:60
 #, fuzzy
 #| msgid "Moisture"
 msgid "moisture"
 msgstr "Fuktighet"
 
-#: terrariumEngine.py:62
+#: terrariumEngine.py:61
 #, fuzzy
 #| msgid "Conductivity"
 msgid "conductivity"
 msgstr "Ledningsevne"
 
-#: terrariumEngine.py:63
+#: terrariumEngine.py:62
 msgid "ph"
 msgstr ""
 
-#: terrariumEngine.py:64
+#: terrariumEngine.py:63
 #, fuzzy
 #| msgid "Night"
 msgid "light"
 msgstr "Natt"
 
-#: terrariumEngine.py:65
+#: terrariumEngine.py:64
 msgid "uva"
 msgstr ""
 
-#: terrariumEngine.py:66
+#: terrariumEngine.py:65
 msgid "uvb"
 msgstr ""
 
-#: terrariumEngine.py:67
+#: terrariumEngine.py:66
 msgid "uvi"
 msgstr ""
 
-#: terrariumEngine.py:68
+#: terrariumEngine.py:67
 #, fuzzy
 #| msgid "Fertility"
 msgid "fertility"
 msgstr "Fruktbarhet"
 
-#: terrariumEngine.py:69
+#: terrariumEngine.py:68
 msgid "co2"
 msgstr ""
 
-#: terrariumEngine.py:70
+#: terrariumEngine.py:69
 #, fuzzy
 #| msgid "Volume"
 msgid "volume"
 msgstr "Volum"
 
-#: terrariumEngine.py:71
+#: terrariumEngine.py:70
 #, fuzzy
 #| msgid "Water tank"
 msgid "watertank"
 msgstr "Vanntank"
 
-#: terrariumEngine.py:72
+#: terrariumEngine.py:71
 #, fuzzy
 #| msgid "Wind speed"
 msgid "windspeed"
 msgstr "Vindhastighet"
 
-#: terrariumEngine.py:73
+#: terrariumEngine.py:72
 msgid "water_flow"
 msgstr ""
 
-#: terrariumEngine.py:74
+#: terrariumEngine.py:73
 msgid "wattage"
 msgstr ""
 
-#: terrariumEngine.py:1223 views/dashboard.html:27 views/status.html:143
+#: terrariumEngine.py:1201 views/dashboard.html:27 views/status.html:143
 msgid "Uptime"
 msgstr "Oppetid"
 
-#: terrariumEngine.py:1229
+#: terrariumEngine.py:1207
 #, fuzzy
 #| msgid "System log"
 msgid "System load"
 msgstr "Systemlogg"
 
-#: terrariumEngine.py:1235 views/status.html:60
+#: terrariumEngine.py:1213 views/status.html:60
 msgid "CPU Temperature"
 msgstr "CPU Temperatur"
 
-#: terrariumEngine.py:1241
+#: terrariumEngine.py:1219
 msgid "Storage"
 msgstr ""
 
-#: terrariumEngine.py:1247
+#: terrariumEngine.py:1225
 #, fuzzy
 #| msgid "Memory usage"
 msgid "Memory"
 msgstr "Minnebruk"
 
-#: terrariumEngine.py:1257
+#: terrariumEngine.py:1235
 #, fuzzy
 #| msgid "The sensor type"
 msgid "average {sensor_type}"
 msgstr "Sensor typen"
 
-#: terrariumEngine.py:1410 views/dashboard.html:139
+#: terrariumEngine.py:1388 views/dashboard.html:139
 #, fuzzy
 #| msgid "Last update"
 msgid "last update"
 msgstr "Siste oppdatering"
 
-#: terrariumWebserver.py:227 terrariumWebserver.py:330
+#: terrariumWebserver.py:228 terrariumWebserver.py:331
 msgid "Authenticate to make any changes"
 msgstr "Godkjenn for å gjøre endringer"
 
-#: terrariumWebserver.py:227 terrariumWebserver.py:330
+#: terrariumWebserver.py:228 terrariumWebserver.py:331
 msgid "Authentication"
 msgstr "Autentisering"
 
-#: terrariumWebserver.py:227 terrariumWebserver.py:330 views/index.html:2
+#: terrariumWebserver.py:228 terrariumWebserver.py:331 views/index.html:2
 msgid "TerrariumPI"
 msgstr "TerrariumPI"
 
-#: terrariumWebserver.py:333
+#: terrariumWebserver.py:334
 msgid "Player command could ot be executed!"
 msgstr "Spiller kommandoen kan ikke utføres!"
 
-#: terrariumWebserver.py:333 terrariumWebserver.py:353
-#: terrariumWebserver.py:365
+#: terrariumWebserver.py:334 terrariumWebserver.py:354
+#: terrariumWebserver.py:366
 msgid "Error!"
 msgstr "Feil!"
 
-#: terrariumWebserver.py:341 terrariumWebserver.py:344
+#: terrariumWebserver.py:342 terrariumWebserver.py:345
 msgid "OK!"
 msgstr "OK!"
 
-#: terrariumWebserver.py:341 terrariumWebserver.py:344
+#: terrariumWebserver.py:342 terrariumWebserver.py:345
 msgid "Player command executed!"
 msgstr "Spiller kommandoen utført!"
 
-#: terrariumWebserver.py:353
+#: terrariumWebserver.py:354
 msgid "File is not uploaded!"
 msgstr "Filen ble ikke lastet opp!"
 
-#: terrariumWebserver.py:358
+#: terrariumWebserver.py:359
 msgid "File '%s' is uploaded"
 msgstr "Filen ‘%s’ er lastet opp"
 
-#: terrariumWebserver.py:358 terrariumWebserver.py:368
+#: terrariumWebserver.py:359 terrariumWebserver.py:369
 msgid "Success!"
 msgstr "Suksess!"
 
-#: terrariumWebserver.py:360
+#: terrariumWebserver.py:361
 msgid "Duplicate file '%s'"
 msgstr "Dupliser fil ' %s'"
 
-#: terrariumWebserver.py:365
+#: terrariumWebserver.py:366
 msgid "Action could not be satisfied"
 msgstr "Handlingen kunne ikke gjennomføres"
 
-#: terrariumWebserver.py:368
+#: terrariumWebserver.py:369
 msgid "Audio file is deleted"
 msgstr "Lydfilen er slettet"
 
-#: terrariumWebserver.py:401
+#: terrariumWebserver.py:402
 msgid "Hardware is replaced"
 msgstr "Maskinvare er endret"
 
-#: terrariumWebserver.py:402
+#: terrariumWebserver.py:403
 msgid "Hardware replacement is logged in the calendar"
 msgstr "Maskinvareendring er logget i kalenderen"
 
-#: terrariumWebserver.py:405
+#: terrariumWebserver.py:406
 msgid "A new replacement reminder is created"
 msgstr "En ny bytte påminnelse er opprettet"
 
@@ -260,6 +256,7 @@ msgstr "Lydfiler"
 #: views/audio_files.html:26 views/audio_files.html:37 views/enclosures.html:74
 #: views/modals/area.html:33 views/modals/button.html:32
 #: views/modals/enclosure.html:17 views/modals/sensor.html:41
+#: views/modals/webcam.html:36 views/modals/webcam.html:199
 msgid "Name"
 msgstr "Navn"
 
@@ -298,19 +295,20 @@ msgstr ""
 msgid "No buttons"
 msgstr ""
 
-#: views/buttons.html:14 views/includes/sidebar.html:144
+#: views/buttons.html:14
 #, fuzzy
 #| msgid "Add new sensor"
 msgid "Add new button"
 msgstr "Legg til ny sensor"
 
-#: views/buttons.html:16 views/dashboard.html:233 views/enclosures.html:14
+#: views/buttons.html:16 views/buttons.html:70 views/calendar.html:9
+#: views/dashboard.html:182 views/dashboard.html:233 views/enclosures.html:14
 #: views/enclosures.html:49 views/log.html:9 views/relays.html:16
-#: views/sensors.html:22 views/weather.html:9 views/webcams.html:15
-#: views/webcams.html:42
+#: views/relays.html:78 views/sensors.html:22 views/sensors.html:81
+#: views/weather.html:9 views/webcams.html:15 views/webcams.html:42
 #, fuzzy
 #| msgid "Authenticate to make any changes"
-msgid "Please login to make changes"
+msgid "Login to make changes"
 msgstr "Godkjenn for å gjøre endringer"
 
 #: views/buttons.html:28 views/relays.html:28 views/sensors.html:34
@@ -348,18 +346,12 @@ msgid "Ignore"
 msgstr "Ignorer"
 
 #: views/buttons.html:67 views/calendar.html:83 views/dashboard.html:179
-#: views/relays.html:75 views/sensors.html:78 views/webcams.html:39
+#: views/modals/webcam.html:375 views/relays.html:75 views/sensors.html:78
+#: views/webcams.html:39
 #, fuzzy
 #| msgid "Delete file"
 msgid "Delete"
 msgstr "Slett fil"
-
-#: views/buttons.html:70 views/calendar.html:9 views/dashboard.html:182
-#: views/includes/sidebar.html:19 views/relays.html:78 views/sensors.html:81
-#, fuzzy
-#| msgid "Authenticate to make any changes"
-msgid "Login to make changes"
-msgstr "Godkjenn for å gjøre endringer"
 
 #: views/calendar.html:2 views/includes/sidebar.html:70
 msgid "Calendar"
@@ -412,12 +404,13 @@ msgid "Years"
 msgstr "År"
 
 #: views/calendar.html:81 views/includes/modals.html:14
-#: views/layouts/modal.html:19 views/weather.html:126
+#: views/layouts/modal.html:19 views/modals/webcam.html:373
+#: views/weather.html:126
 msgid "Close"
 msgstr "Lukk"
 
 #: views/calendar.html:84 views/includes/modals.html:5
-#: views/includes/modals.html:15
+#: views/includes/modals.html:15 views/modals/webcam.html:374
 msgid "Confirm"
 msgstr ""
 
@@ -479,7 +472,8 @@ msgid "High"
 msgstr ""
 
 #: views/dashboard.html:345 views/modals/button.html:38
-#: views/modals/sensor.html:47 views/weather.html:22
+#: views/modals/sensor.html:47 views/modals/webcam.html:205
+#: views/weather.html:22
 msgid "Current"
 msgstr "Nåværende"
 
@@ -566,6 +560,10 @@ msgid "Logout"
 msgstr ""
 
 #: views/includes/sidebar.html:19
+msgid "Login"
+msgstr ""
+
+#: views/includes/sidebar.html:19
 #, fuzzy
 #| msgid "Manual mode"
 msgid "Read only mode"
@@ -587,25 +585,22 @@ msgid "Weather"
 msgstr "Vær"
 
 #: views/includes/sidebar.html:79 views/modals/area.html:216
-#: views/modals/area.html:224
+#: views/modals/area.html:224 views/modals/webcam.html:359
 msgid "Sensors"
 msgstr "Sensorer"
 
-#: views/includes/sidebar.html:98 views/sensors.html:20
-msgid "Add new sensor"
-msgstr "Legg til ny sensor"
+#: views/includes/sidebar.html:98 views/includes/sidebar.html:121
+#: views/includes/sidebar.html:144 views/includes/sidebar.html:167
+#, fuzzy
+#| msgid "Add new webcam"
+msgid "Add new"
+msgstr "Legg til nytt webkamera"
 
 #: views/includes/sidebar.html:107 views/modals/area.html:152
 #: views/modals/area.html:193 views/modals/area.html:328
 #: views/modals/area.html:400 views/relays.html:2
 msgid "Relays"
 msgstr ""
-
-#: views/includes/sidebar.html:121 views/relays.html:14
-#, fuzzy
-#| msgid "Add new webcam"
-msgid "Add new relay"
-msgstr "Legg til nytt webkamera"
 
 #: views/includes/sidebar.html:153 views/modals/enclosure.html:50
 #: views/webcams.html:2
@@ -615,10 +610,6 @@ msgstr "Nettkamera"
 #: views/includes/sidebar.html:161
 msgid "Show"
 msgstr "Vis"
-
-#: views/includes/sidebar.html:167 views/webcams.html:13
-msgid "Add new webcam"
-msgstr "Legg til nytt webkamera"
 
 #: views/includes/sidebar.html:176
 msgid "Audio"
@@ -681,7 +672,8 @@ msgid "Usage"
 msgstr "Forbruk"
 
 #: views/includes/sidebar.html:295 views/modals/button.html:17
-#: views/modals/sensor.html:17
+#: views/modals/sensor.html:17 views/modals/webcam.html:21
+#: views/modals/webcam.html:184
 msgid "Hardware"
 msgstr "Maskinvare"
 
@@ -756,6 +748,7 @@ msgid "Power off"
 msgstr "Slå på"
 
 #: views/modals/area.html:85 views/modals/area.html:214
+#: views/modals/webcam.html:90
 msgid "Disabled"
 msgstr "Deaktivert"
 
@@ -877,6 +870,7 @@ msgstr "Lys tilstand"
 
 #: views/modals/area.html:310 views/modals/area.html:320
 #: views/modals/area.html:382 views/modals/area.html:392
+#: views/modals/webcam.html:110 views/modals/webcam.html:122
 #, fuzzy
 #| msgid "Ignore"
 msgid "Ignored"
@@ -941,14 +935,15 @@ msgid "Button settings"
 msgstr "Dør innstillinger"
 
 #: views/modals/button.html:26 views/modals/sensor.html:35
+#: views/modals/webcam.html:30 views/modals/webcam.html:193
 msgid "Address"
 msgstr "Adresse"
 
-#: views/modals/button.html:50
+#: views/modals/button.html:50 views/modals/webcam.html:217
 msgid "Capacitor value in &micro;F"
 msgstr ""
 
-#: views/modals/button.html:53
+#: views/modals/button.html:53 views/modals/webcam.html:220
 msgid "Please enter a number value between 1 and 100"
 msgstr ""
 
@@ -1018,9 +1013,227 @@ msgstr "Min fukt verdi"
 msgid "Maximum moist value"
 msgstr "Maksimal fukt verdi"
 
+#: views/modals/webcam.html:11
+#, fuzzy
+#| msgid "Webcam settings"
+msgid "Webcam settings"
+msgstr "Innstillinger for webkamera"
+
+#: views/modals/webcam.html:42
+msgid "Resolution (width x height)"
+msgstr ""
+
+#: views/modals/webcam.html:52
+#, fuzzy
+#| msgid "Location"
+msgid "Rotation"
+msgstr "Sted"
+
+#: views/modals/webcam.html:55
+#, fuzzy
+#| msgid "degrees"
+msgid "0 degrees"
+msgstr "grader"
+
+#: views/modals/webcam.html:56
+#, fuzzy
+#| msgid "degrees"
+msgid "90 degrees"
+msgstr "grader"
+
+#: views/modals/webcam.html:57
+#, fuzzy
+#| msgid "degrees"
+msgid "180 degrees"
+msgstr "grader"
+
+#: views/modals/webcam.html:58
+#, fuzzy
+#| msgid "degrees"
+msgid "270 degrees"
+msgstr "grader"
+
+#: views/modals/webcam.html:59
+msgid "Flip Horizontal"
+msgstr "Speilvend vannrett"
+
+#: views/modals/webcam.html:60
+msgid "Flip Vertical"
+msgstr "Speilvend loddrett"
+
+#: views/modals/webcam.html:67
+msgid "White balance"
+msgstr ""
+
+#: views/modals/webcam.html:70
+#, fuzzy
+#| msgid "Off"
+msgid "off"
+msgstr "Av"
+
+#: views/modals/webcam.html:71
+msgid "auto"
+msgstr ""
+
+#: views/modals/webcam.html:72
+#, fuzzy
+#| msgid "Night"
+msgid "sunlight"
+msgstr "Natt"
+
+#: views/modals/webcam.html:73
+msgid "cloudy"
+msgstr ""
+
+#: views/modals/webcam.html:74
+msgid "shade"
+msgstr ""
+
+#: views/modals/webcam.html:75
+msgid "tungsten"
+msgstr ""
+
+#: views/modals/webcam.html:76
+msgid "fluorescent"
+msgstr ""
+
+#: views/modals/webcam.html:77
+msgid "incandescent"
+msgstr ""
+
+#: views/modals/webcam.html:78
+msgid "flash"
+msgstr ""
+
+#: views/modals/webcam.html:79
+#, fuzzy
+#| msgid "Horizontal"
+msgid "horizon"
+msgstr "Horisontal"
+
+#: views/modals/webcam.html:80
+msgid "greyworld"
+msgstr ""
+
+#: views/modals/webcam.html:87
+#, fuzzy
+#| msgid "Archive"
+msgid "Archiving"
+msgstr "Arkiv"
+
+#: views/modals/webcam.html:91
+msgid "Motion"
+msgstr "Bevegelse"
+
+#: views/modals/webcam.html:92
+msgid "1 minute"
+msgstr "1 minutt"
+
+#: views/modals/webcam.html:93
+msgid "5 minutes"
+msgstr "5 minutter"
+
+#: views/modals/webcam.html:94
+msgid "15 minutes"
+msgstr "15 minutter"
+
+#: views/modals/webcam.html:95
+msgid "30 minutes"
+msgstr "30 minutter"
+
+#: views/modals/webcam.html:96
+msgid "1 hour"
+msgstr "1 time"
+
+#: views/modals/webcam.html:97
+msgid "3 hours"
+msgstr "3 timer"
+
+#: views/modals/webcam.html:98
+msgid "6 hours"
+msgstr "6 timer"
+
+#: views/modals/webcam.html:99
+msgid "12 hours"
+msgstr "12 timer"
+
+#: views/modals/webcam.html:100
+msgid "1 day"
+msgstr "1 dag"
+
+#: views/modals/webcam.html:107
+msgid "Archive light state"
+msgstr "Arkiver lys status"
+
+#: views/modals/webcam.html:111 views/modals/webcam.html:123
+msgid "When on"
+msgstr "Når på"
+
+#: views/modals/webcam.html:112 views/modals/webcam.html:124
+msgid "When off"
+msgstr "Når av"
+
+#: views/modals/webcam.html:119
+msgid "Archive door state"
+msgstr "Arkiver dør status"
+
+#: views/modals/webcam.html:133
+msgid "Show motion boxes"
+msgstr "Vis bevegelses bokser"
+
+#: views/modals/webcam.html:136
+msgid "None"
+msgstr ""
+
+#: views/modals/webcam.html:137
+#, fuzzy
+#| msgid "Wed"
+msgid "Red"
+msgstr "Ons"
+
+#: views/modals/webcam.html:138
+msgid "Green"
+msgstr ""
+
+#: views/modals/webcam.html:139
+msgid "Blue"
+msgstr ""
+
+#: views/modals/webcam.html:146
+#, fuzzy
+#| msgid "Motion delta threshold"
+msgid "Motion delta thresshold"
+msgstr "Bevegelses delta grense"
+
+#: views/modals/webcam.html:152
+msgid "Motion minimum area"
+msgstr "Bevegelse minimum område"
+
+#: views/modals/webcam.html:158
+msgid "Motion comparison frame"
+msgstr "Bevegelse sammenlignings bilde"
+
+#: views/modals/webcam.html:161
+msgid "Last frame"
+msgstr "Siste bilde"
+
+#: views/modals/webcam.html:162
+msgid "Last archived frame"
+msgstr "Siste arkiverte bilde"
+
+#: views/modals/webcam.html:171
+msgid "Preview"
+msgstr "Forhåndsvisning"
+
 #: views/relays.html:11
 msgid "No relays"
 msgstr ""
+
+#: views/relays.html:14
+#, fuzzy
+#| msgid "Add new webcam"
+msgid "Add new relay"
+msgstr "Legg til nytt webkamera"
 
 #: views/relays.html:38 views/relays.html:67
 msgid "Manual mode"
@@ -1041,6 +1254,10 @@ msgstr "Temperatur sensorer"
 #| msgid "pH sensor"
 msgid "No sensors"
 msgstr "pH sensor"
+
+#: views/sensors.html:20
+msgid "Add new sensor"
+msgstr "Legg til ny sensor"
 
 #: views/settings.html:27
 #, fuzzy
@@ -1319,6 +1536,16 @@ msgstr "Kilde"
 msgid "No webcams"
 msgstr "Nettkamera"
 
+#: views/webcams.html:13
+msgid "Add new webcam"
+msgstr "Legg til nytt webkamera"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Action"
+msgid "Action succeeded"
+msgstr "Handling"
+
 #: Missing text string
 msgid "added"
 msgstr ""
@@ -1469,8 +1696,20 @@ msgstr "Dato og tid"
 
 #: Missing text string
 #, fuzzy
+#| msgid "Date and time"
+msgid "Enter height"
+msgstr "Dato og tid"
+
+#: Missing text string
+#, fuzzy
 #| msgid "Username"
 msgid "Enter name"
+msgstr "Brukernavn"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Username"
+msgid "Enter number"
 msgstr "Brukernavn"
 
 #: Missing text string
@@ -1498,6 +1737,12 @@ msgstr ""
 #| msgid "Temperature offset"
 msgid "Enter the offset"
 msgstr "Temperatur forskyvning"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Date and time"
+msgid "Enter width"
+msgstr "Dato og tid"
 
 #: Missing text string
 msgid "Error"
@@ -1635,6 +1880,24 @@ msgstr "Merk et valg"
 
 #: Missing text string
 #, fuzzy
+#| msgid "Archive door state"
+msgid "Select archive door state"
+msgstr "Arkiver dør status"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Archive light state"
+msgid "Select archive light state"
+msgstr "Arkiver lys status"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Language"
+msgid "Select archiving"
+msgstr "Språk"
+
+#: Missing text string
+#, fuzzy
 #| msgid "Select an option"
 msgid "Select area type"
 msgstr "Merk et valg"
@@ -1679,6 +1942,12 @@ msgstr "Temperatur sensorer"
 
 #: Missing text string
 #, fuzzy
+#| msgid "Picture rotation"
+msgid "Select rotation"
+msgstr "Bilderotasjon"
+
+#: Missing text string
+#, fuzzy
 #| msgid "Temperature sensors"
 msgid "Select sensors"
 msgstr "Temperatur sensorer"
@@ -1688,6 +1957,16 @@ msgstr "Temperatur sensorer"
 #| msgid "Temperature sensors"
 msgid "Select type"
 msgstr "Temperatur sensorer"
+
+#: Missing text string
+msgid "Select which frame to comparison"
+msgstr ""
+
+#: Missing text string
+#, fuzzy
+#| msgid "Replace hardware"
+msgid "Select white balance"
+msgstr "Skift maskinvare"
 
 #: Missing text string
 #, fuzzy
@@ -1704,6 +1983,12 @@ msgstr ""
 #| msgid "Data could not be saved"
 msgid "Settings could not be saved"
 msgstr "Data ble ikke lagret"
+
+#: Missing text string
+#, fuzzy
+#| msgid "Show motion boxes"
+msgid "Show the motion boxes"
+msgstr "Vis bevegelses bokser"
 
 #: Missing text string
 #, fuzzy
@@ -1756,6 +2041,11 @@ msgstr ""
 #: Missing text string
 msgid "Your changes are saved"
 msgstr "Dine endringer er lagret"
+
+#, fuzzy
+#~| msgid "Authenticate to make any changes"
+#~ msgid "Please login to make changes"
+#~ msgstr "Godkjenn for å gjøre endringer"
 
 #~ msgid "Version"
 #~ msgstr "Versjon"
@@ -3487,21 +3777,6 @@ msgstr "Dine endringer er lagret"
 #~ "skjema som nedenfor vises og må fylles ut. Kontroller at de riktige "
 #~ "verdiene er fylt ut. Alle felt med %s kreves."
 
-#~ msgid "Preview"
-#~ msgstr "Forhåndsvisning"
-
-#~ msgid "Picture rotation"
-#~ msgstr "Bilderotasjon"
-
-#~ msgid "degrees"
-#~ msgstr "grader"
-
-#~ msgid "Flip Horizontal"
-#~ msgstr "Speilvend vannrett"
-
-#~ msgid "Flip Vertical"
-#~ msgstr "Speilvend loddrett"
-
 #~ msgid "V4L"
 #~ msgstr "V4l"
 
@@ -3972,9 +4247,6 @@ msgstr "Dine endringer er lagret"
 #~ msgid "Tue"
 #~ msgstr "Tir"
 
-#~ msgid "Wed"
-#~ msgstr "Ons"
-
 #~ msgid "Thu"
 #~ msgstr "Tors"
 
@@ -3990,86 +4262,8 @@ msgstr "Dine endringer er lagret"
 #~ msgid "Resolution"
 #~ msgstr "Oppløsning"
 
-#, fuzzy
-#~| msgid "Off"
-#~ msgid "off"
-#~ msgstr "Av"
-
-#, fuzzy
-#~| msgid "Night"
-#~ msgid "sunlight"
-#~ msgstr "Natt"
-
-#, fuzzy
-#~| msgid "Horizontal"
-#~ msgid "horizon"
-#~ msgstr "Horisontal"
-
-#~ msgid "Archive"
-#~ msgstr "Arkiv"
-
-#~ msgid "Motion"
-#~ msgstr "Bevegelse"
-
-#~ msgid "1 minute"
-#~ msgstr "1 minutt"
-
-#~ msgid "5 minutes"
-#~ msgstr "5 minutter"
-
-#~ msgid "15 minutes"
-#~ msgstr "15 minutter"
-
-#~ msgid "30 minutes"
-#~ msgstr "30 minutter"
-
-#~ msgid "1 hour"
-#~ msgstr "1 time"
-
-#~ msgid "3 hours"
-#~ msgstr "3 timer"
-
-#~ msgid "6 hours"
-#~ msgstr "6 timer"
-
-#~ msgid "12 hours"
-#~ msgstr "12 timer"
-
-#~ msgid "1 day"
-#~ msgstr "1 dag"
-
-#~ msgid "Archive light state"
-#~ msgstr "Arkiver lys status"
-
-#~ msgid "When on"
-#~ msgstr "Når på"
-
-#~ msgid "When off"
-#~ msgstr "Når av"
-
-#~ msgid "Archive door state"
-#~ msgstr "Arkiver dør status"
-
 #~ msgid "When open"
 #~ msgstr "Når åpen"
-
-#~ msgid "Show motion boxes"
-#~ msgstr "Vis bevegelses bokser"
-
-#~ msgid "Motion delta threshold"
-#~ msgstr "Bevegelses delta grense"
-
-#~ msgid "Motion minimum area"
-#~ msgstr "Bevegelse minimum område"
-
-#~ msgid "Motion comparison frame"
-#~ msgstr "Bevegelse sammenlignings bilde"
-
-#~ msgid "Last frame"
-#~ msgstr "Siste bilde"
-
-#~ msgid "Last archived frame"
-#~ msgstr "Siste arkiverte bilde"
 
 #~ msgid "1Wire bus"
 #~ msgstr "1Wire Bus"
