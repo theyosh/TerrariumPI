@@ -129,7 +129,7 @@
         let formData = new FormData();
         console.log(this,event);
         jQuery.each(this.files,function(index,file){
-          console.log(index,file)
+          //console.log(index,file)
           formData.append('audiofiles', file);
         });
 
@@ -141,9 +141,7 @@
           contentType: false,
           success: function (result) {
             toastr['success']('{{ _('Audio files are uploaded.') }}', '{{ _('OK') }}');
-
-            //  toastr['succes']('Audio files are uploaded.','OK')
-              load_page();
+            load_page();
           },
           error: function (error) {
             console.log(error);

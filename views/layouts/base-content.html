@@ -1,9 +1,6 @@
 {% extends "layouts/base.html" %}
-
 {% block content %}
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
@@ -14,9 +11,8 @@
           {% block options %}{% endblock %}
         </div>
       </div>
-    </div><!-- /.container-fluid -->
+    </div>
   </section>
-  <!-- /.content-header -->
   {% block page_content %}{% endblock page_content %}
 </div>
 {% endblock content %}

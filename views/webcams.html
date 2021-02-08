@@ -10,7 +10,7 @@
               <h5>{{ _('No webcams') }}</h5>
               <p class="pt-3">
                 {% if authenticated %}
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-webcam-setup" >{{ _('Add new webcam') }}</button>
+                <a href="#" class="btn btn-primary active" style="text-decoration: none;" role="button" aria-pressed="true" data-toggle="modal" data-target="#modal-webcam-setup" >{{ _('Add new webcam') }}</a>
                 {% else %}
                 <a href="{{ url_for('login') }}" class="text-primary">{{ _('Please login to make changes') }}</a>
                 {% endif %}
