@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
 "POT-Creation-Date: 2021-02-08 14:38+CET\n"
-"PO-Revision-Date: 2021-02-08 13:36+0000\n"
-"Last-Translator: Weblate Admin <weblate@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
-"z/nl/>\n"
+"PO-Revision-Date: 2021-02-08 14:39+0000\n"
+"Last-Translator: theyosh <github.com@theyosh.nl>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
+"4-x-y-z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,8 +40,6 @@ msgid "Conductivity"
 msgstr "Geleidingsvermogen"
 
 #: terrariumArea.py:57
-#, fuzzy
-#| msgid "Water tank"
 msgid "Watertank"
 msgstr "Watertank"
 
@@ -796,6 +794,8 @@ msgstr "Dimmer uit tijdsduur"
 #: views/modals/area.html:429
 msgid "Set the dimmer times for going on and off. Max duration is 100 mimutes."
 msgstr ""
+"Stel de dimmertijden in voor in- en uitschakelen. Maximale duur is 100 "
+"minuten."
 
 #: views/modals/area.html:436
 msgid "Relay delay on"
@@ -961,8 +961,6 @@ msgid "Confirm new password"
 msgstr "Bevestig het nieuwe wachtwoord"
 
 #: views/settings.html:81
-#, fuzzy
-#| msgid "Exclude ids"
 msgid "Excluded ids"
 msgstr "Uitgesloten ID's"
 
@@ -995,8 +993,6 @@ msgid "Distance type"
 msgstr "Afstandstype"
 
 #: views/settings.html:131
-#, fuzzy
-#| msgid "Centimetre"
 msgid "Centimeter"
 msgstr "Centimeter"
 
@@ -1312,17 +1308,15 @@ msgstr "Negeer de webcam"
 
 #: Missing text string
 msgid "Ingore button"
-msgstr ""
+msgstr "Negeer knop"
 
 #: Missing text string
 msgid "Ingore relay"
-msgstr ""
+msgstr "Negeer schakelaar"
 
 #: Missing text string
-#, fuzzy
-#| msgid "Moisture sensor"
 msgid "Ingore sensor"
-msgstr "Vochtigheid sensor"
+msgstr "Negeer sensor"
 
 #: Missing text string
 msgid "Load"
