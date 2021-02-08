@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
-"POT-Creation-Date: 2021-02-08 13:51+CET\n"
+"POT-Creation-Date: 2021-02-08 14:38+CET\n"
 "PO-Revision-Date: 2020-08-08 11:48+0200\n"
 "Last-Translator: Joshua (TheYOSH) Rubingh <terrariumpi@theyosh.nl>\n"
 "Language-Team: \n"
@@ -255,7 +255,8 @@ msgid "Audio files"
 msgstr "Audio files"
 
 #: views/audio_files.html:26 views/audio_files.html:37 views/enclosures.html:74
-#: views/modals/area.html:33
+#: views/modals/area.html:33 views/modals/button.html:32
+#: views/modals/enclosure.html:17 views/modals/sensor.html:41
 msgid "Name"
 msgstr "Name"
 
@@ -942,11 +943,6 @@ msgstr "Door settings"
 msgid "Address"
 msgstr "Address"
 
-#: views/modals/button.html:32 views/modals/enclosure.html:17
-#: views/modals/sensor.html:41
-msgid "Naam"
-msgstr ""
-
 #: views/modals/button.html:50
 msgid "Capacitor value in &micro;F"
 msgstr ""
@@ -1107,7 +1103,7 @@ msgid "Confirm new password"
 msgstr "Current admin password"
 
 #: views/settings.html:81
-msgid "Exclude ids"
+msgid "Excluded ids"
 msgstr ""
 
 #: views/settings.html:95

@@ -5,11 +5,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.4.0\n"
-"POT-Creation-Date: 2021-02-08 13:51+CET\n"
+"POT-Creation-Date: 2021-02-08 14:38+CET\n"
 "PO-Revision-Date: 2021-02-08 13:36+0000\n"
 "Last-Translator: Weblate Admin <weblate@theyosh.nl>\n"
-"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/"
-"4-x-y-z/nl/>\n"
+"Language-Team: Dutch <https://weblate.theyosh.nl/projects/terrariumpi/4-x-y-"
+"z/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -231,7 +231,8 @@ msgid "Audio files"
 msgstr "Audio bestanden"
 
 #: views/audio_files.html:26 views/audio_files.html:37 views/enclosures.html:74
-#: views/modals/area.html:33
+#: views/modals/area.html:33 views/modals/button.html:32
+#: views/modals/enclosure.html:17 views/modals/sensor.html:41
 msgid "Name"
 msgstr "Naam"
 
@@ -824,11 +825,6 @@ msgstr "Knop instellingen"
 msgid "Address"
 msgstr "Adres"
 
-#: views/modals/button.html:32 views/modals/enclosure.html:17
-#: views/modals/sensor.html:41
-msgid "Naam"
-msgstr ""
-
 #: views/modals/button.html:50
 msgid "Capacitor value in &micro;F"
 msgstr "Condensatorwaarde in µF"
@@ -965,7 +961,9 @@ msgid "Confirm new password"
 msgstr "Bevestig het nieuwe wachtwoord"
 
 #: views/settings.html:81
-msgid "Exclude ids"
+#, fuzzy
+#| msgid "Exclude ids"
+msgid "Excluded ids"
 msgstr "Uitgesloten ID's"
 
 #: views/settings.html:95

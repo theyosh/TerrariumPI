@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-02-08 13:51+CET\n"
+"POT-Creation-Date: 2021-02-08 14:38+CET\n"
 "PO-Revision-Date: 2020-07-30 21:15+0000\n"
 "Last-Translator: theyosh <github.com@theyosh.nl>\n"
 "Language-Team: German (Austria) <https://weblate.theyosh.nl/projects/"
@@ -256,7 +256,8 @@ msgid "Audio files"
 msgstr "Audiodateien"
 
 #: views/audio_files.html:26 views/audio_files.html:37 views/enclosures.html:74
-#: views/modals/area.html:33
+#: views/modals/area.html:33 views/modals/button.html:32
+#: views/modals/enclosure.html:17 views/modals/sensor.html:41
 msgid "Name"
 msgstr "Name"
 
@@ -943,11 +944,6 @@ msgstr "Türeinstellungen"
 msgid "Address"
 msgstr "Adresse"
 
-#: views/modals/button.html:32 views/modals/enclosure.html:17
-#: views/modals/sensor.html:41
-msgid "Naam"
-msgstr ""
-
 #: views/modals/button.html:50
 msgid "Capacitor value in &micro;F"
 msgstr ""
@@ -1108,7 +1104,7 @@ msgid "Confirm new password"
 msgstr "Aktuelles Administratorkennwort"
 
 #: views/settings.html:81
-msgid "Exclude ids"
+msgid "Excluded ids"
 msgstr ""
 
 #: views/settings.html:95
