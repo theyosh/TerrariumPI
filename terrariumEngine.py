@@ -50,7 +50,6 @@ class terrariumEngine(object):
   __VERSION_UPDATE_CHECK_TIMEOUT = 1    # in days
 
   def __init__(self, version):
-    print(_('test'))
     starttime = time.time()
     # Default system units
     self.units = {N_('temperature') : 'C',
@@ -139,33 +138,12 @@ class terrariumEngine(object):
     self.__load_existing_enclosures()
     logger.info(f'Loaded {len(self.enclosures)} enclosures in {time.time()-start:.2f} seconds.')
 
-
-
     self.environment = None
 
-    # Load config
-    # logger.info('Loading terrariumPI config')
-    #self.config = terrariumConfig()
-    # logger.info('Done Loading terrariumPI config')
-
     # Notification engine
+    # TODO: NEEDS REWRITE... OLD CODE
     self.notification = terrariumNotification()
 #    self.notification.set_profile_image(self.get_profile_image())
-
-    # # Load the environment system. This will controll the lights, sprayer and heaters
-    # logger.debug('Loading terrariumPI environment system')
-    # self.environment = terrariumEnvironment(self.sensors, self.relays, self.weather, self.is_door_open, self.config.get_environment,self.notification)
-    # logger.debug('Done loading terrariumPI environment system')
-
-    # Load audio system
-    # self.__audio_player = terrariumAudioPlayer(self.config.get_audio_playlists(),
-    #                                            self.config.get_active_soundcard(),
-    #                                            any(self.relays[switchid].is_dimmer for switchid in self.relays),
-    #                                            self.get_audio_playing)
-
-
-
-
 
     logger.info(f'TerrariumPI is up and running at address: http://{self.settings["host"]}:{self.settings["port"]} in {time.time()-starttime:.2f} seconds.')
     # Return console logging back to 'normal'
