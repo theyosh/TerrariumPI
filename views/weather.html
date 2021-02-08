@@ -6,7 +6,7 @@
   {% if authenticated %}
   <li class="breadcrumb-item "><a href="{{ url_for('api:setting_detail', setting='weather_source') }}" data-toggle="modal" data-target="#modal-weather-setup"><i class="fas fa-wrench pt-1 mr-1"></i> {{ _('Settings') }}</a></li>
   {% else %}
-  <li class="breadcrumb-item "><a href="{{ url_for('login') }}"><i class="fas fa-wrench pt-1 mr-1"></i> {{ _('Please login to make changes') }}</a></li>
+  <li class="breadcrumb-item "><a href="{{ url_for('login') }}"><i class="fas fa-wrench pt-1 mr-1"></i> {{ _('Login to make changes') }}</a></li>
   {% endif %}
 </ol>
 {% endblock options %}

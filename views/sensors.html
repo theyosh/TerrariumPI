@@ -1,7 +1,7 @@
 {% extends "layouts/base-content.html" %}
 {% set sensor_type = template|lower|replace("sensors", "")|replace("_","")|replace(".html","") %}
 {% if sensor_type %}
-  {% set page_title = _('{sensor_type} sensors')|replace('{sensor_type}',sensor_type)|capitalize %}
+  {% set page_title = _('{sensor_type} sensors')|replace('{sensor_type}',_(sensor_type))|capitalize %}
 {% else %}
   {% set page_title = _('All sensors') %}
 {% endif %}
@@ -19,7 +19,7 @@
             {% if authenticated %}
             <a href="#" class="btn btn-primary active" style="text-decoration: none;" role="button" aria-pressed="true" data-toggle="modal" data-target="#modal-sensor-setup" >{{ _('Add new sensor') }}</a>
             {% else %}
-            <a href="{{ url_for('login') }}" class="text-primary">{{ _('Please login to make changes') }}</a>
+            <a href="{{ url_for('login') }}" class="text-primary">{{ _('Login to make changes') }}</a>
             {% endif %}
           </p>
         </div>

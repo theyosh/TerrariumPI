@@ -13,7 +13,7 @@
             {% if authenticated %}
             <a href="#" class="btn btn-primary active" style="text-decoration: none;" role="button" aria-pressed="true" data-toggle="modal" data-target="#modal-relay-setup" >{{ _('Add new relay') }}</a>
             {% else %}
-            <a href="{{ url_for('login') }}" class="text-primary">{{ _('Please login to make changes') }}</a>
+            <a href="{{ url_for('login') }}" class="text-primary">{{ _('Login to make changes') }}</a>
             {% endif %}
           </p>
         </div>
@@ -136,7 +136,7 @@
         relay.delete_link      = '{{ url_for('api:relay_delete',   relay='_id_') }}'.replace('_id_',relay.id);
         relay.ignore_link      = '{{ url_for('api:setting_update', setting='exclude_ids') }}';
 
-        relay.toggle_title     = {% if authenticated %}'{{ _('Toggle relay') }} ' + relay.name{% else %}'{{ _('Please login to make changes') }}'{% endif %};
+        relay.toggle_title     = {% if authenticated %}'{{ _('Toggle relay') }} ' + relay.name{% else %}'{{ _('Login to make changes') }}'{% endif %};
 
         relay.powered = (relay.value > 0 ? 'text-success' : '');
 
@@ -174,7 +174,7 @@
         //   settings_title: 'Edit relay: ' + relay.name,
         //   ignore_title: 'Ignore relay: ' + relay.name,
         //   delete_title: 'Delete relay: ' + relay.name,
-        //   toggle_title: {% if authenticated %}'Toggle relay ' + relay.name{% else %}'Please login to make changes'{% endif %},
+        //   toggle_title: {% if authenticated %}'Toggle relay ' + relay.name{% else %}'Login to make changes'{% endif %},
         //   manual_title: 'Toggle manual mode',
         //   replace_title: 'Replace hardware',
 

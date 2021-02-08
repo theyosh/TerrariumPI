@@ -6,7 +6,7 @@
   <li class="breadcrumb-item"><a href="{{ url_for('api:logfile_download') }}"><i class="fas fa-download pt-1 mr-1"></i> {{ _('Download logfile') }}</a></li>
   <!-- <li class="breadcrumb-item "><i class="fas fa-wrench pt-1 mr-1"></i> Settings</li> -->
   {% else %}
-    <a href="{{ url_for('login') }}" class="dropdown-item">{{ _('Please login to make changes') }}</a>
+    <a href="{{ url_for('login') }}" class="dropdown-item">{{ _('Login to make changes') }}</a>
   {% endif %}
 </ol>
 {% endblock options %}
