@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.8\n"
-"POT-Creation-Date: 2021-02-09 00:03+CET\n"
+"POT-Creation-Date: 2021-02-09 22:02+CET\n"
 "PO-Revision-Date: 2020-09-14 14:14+0000\n"
 "Last-Translator: Marcnr1984 <marcnruiz@gmail.com>\n"
 "Language-Team: Spanish (Argentina) <https://weblate.theyosh.nl/projects/"
@@ -334,7 +334,7 @@ msgid "Export"
 msgstr "Exportar datos"
 
 #: views/buttons.html:57 views/calendar.html:7 views/dashboard.html:169
-#: views/dashboard.html:230 views/includes/sidebar.html:248
+#: views/dashboard.html:230 views/includes/sidebar.html:242
 #: views/relays.html:59 views/sensors.html:68 views/settings.html:2
 #: views/weather.html:7 views/webcams.html:33
 msgid "Settings"
@@ -643,7 +643,7 @@ msgstr "Añadir nueva webcam"
 msgid "System"
 msgstr "Sistema"
 
-#: views/includes/sidebar.html:242 views/log.html:2
+#: views/includes/sidebar.html:248 views/log.html:2
 msgid "Log"
 msgstr "Registro"
 
