@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TerrariumPI 3.9.7\n"
 "POT-Creation-Date: 2021-02-08 14:46+CET\n"
-"PO-Revision-Date: 2021-01-26 22:24+0000\n"
+"PO-Revision-Date: 2021-02-10 07:04+0000\n"
 "Last-Translator: Cleber Tavano <cleber@tavano.net>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.theyosh.nl/projects/"
 "terrariumpi/webinterface/pt_BR/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.4\n"
+"X-Generator: Weblate 4.4.2\n"
 "Generated-By: pygettext.py 1.5\n"
 
 #: terrariumEngine.py:679 terrariumEngine.py:791 views/dashboard.tpl:7
@@ -4133,7 +4133,7 @@ msgstr "Luz do sol"
 
 #: views/webcam_settings.tpl:129
 msgid "cloudy"
-msgstr "Entre nuvens"
+msgstr "entre nuvens"
 
 #: views/webcam_settings.tpl:130
 msgid "shade"
