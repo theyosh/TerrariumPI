@@ -100,13 +100,6 @@ class terrariumArea(object):
 
     self.load_setup(setup)
 
-    #self.setup = setup
-
-    # self.light_status = lights_callback
-    # self.door_status = door_callback
-
-    #self._setup()
-
 
   def __repr__(self):
     return f'{terrariumArea.__TYPES[self.type]["name"]} area {self.name}'
@@ -223,7 +216,8 @@ class terrariumArea(object):
       if period not in self.setup:
         continue
 
-      self.state['powered'] = False
+#      self.state['powered'] = False
+      self.state['powered'] = self.relays_state(period)
 
       if period not in self.state:
         self.state[period] = {}
@@ -348,17 +342,24 @@ class terrariumArea(object):
             logger.info(f'Relays for area {self} at period {period} are not switched because the additional sensors are at value: {self.state["sensors"]["current"]:.2f}{self.enclosure.engine.units[self.state["sensors"]["unit"]]}.')
             continue
       else:
-        # Sensor mode
+        # Sensor mode only toggle ON when alarms are triggered (True).
         toggle_relay = self.state['sensors'][f'alarm_{period}']
+        print(f'Toggle on/off {period} based on sensors -> {toggle_relay}')
+        if toggle_relay is False:
+          other_alarm = self.state['sensors'][f'alarm_{("low" if period == "high" else "high")}']
+          print(f'Inverse alarm: {other_alarm}')
+          toggle_relay = False if other_alarm else None
+          print(f'Final toggle state for relay based on sensors: {toggle_relay}')
 
       if toggle_relay is True and not self.state['powered']:
 
         if not light_state_ok:
-          logger.info(f'Relays for {self} are not switched because the ligts are {light_state} while {self.setup[period]["light_status"]} is requested.')
+          logger.debug(f'Relays for {self} are not switched because the ligts are {light_state} while {self.setup[period]["light_status"]} is requested.')
+          print(f'Relays for {self} are not switched because the ligts are {light_state} while {self.setup[period]["light_status"]} is requested.')
           continue
 
         if not door_state_ok:
-          logger.info(f'Relays for {self} are not switched because the door is {door_state} while {self.setup[period]["door_status"]} is requested.')
+          logger.debug(f'Relays for {self} are not switched because the door is {door_state} while {self.setup[period]["door_status"]} is requested.')
           continue
 
         time_elapsed = int(datetime.datetime.now().timestamp()) - self.state[period]['last_powered_on']
@@ -501,8 +502,11 @@ class terrariumAreaTemperature(terrariumArea):
       # Update the heater/cooler dimmer values
 
       current_values = self.current_value(self.setup['sensors'])
+
       self.__pid.setpoint = (current_values['alarm_min'] + current_values['alarm_max']) / 2.0
-      dimmer_value = self.__pid(current_values['current'])
+      self.__pid.sample_time = max(1,self.setup[period]["settle_time"])
+
+      dimmer_value = round(self.__pid(current_values['current']))
 
       for period in ['day','night','low','high']:
         if period not in self.setup:
@@ -536,14 +540,15 @@ class terrariumAreaTemperature(terrariumArea):
 
           logger.info(f'Start the dimmer {relay.name} in PID modus to go to average value {pid_target}')
           print(f'Start the dimmer {relay.name} in PID modus to go to average value {pid_target}')
+          print(f'Min max values: (0,{relay.ON}), sample_time {self.setup[period]["settle_time"]}')
           if self.__pid is None:
             self.__pid = PID(1, 0.1, 0.05,
                               setpoint=pid_target,
-                              sample_time=20,
+                              sample_time=max(1,self.setup[period]["settle_time"]),
                               output_limits=(0,100))
 
             print(f'Starting dimmer {self} with PID setup. Target temp {self.__pid}')
-            dimmer_value = self.__pid(current_values['current'])
+            dimmer_value = round(self.__pid(current_values['current']))
             print(f'Put dimmer {self} to state: {dimmer_value}%')
             self.enclosure.relays[relay.id].on(dimmer_value)
 
