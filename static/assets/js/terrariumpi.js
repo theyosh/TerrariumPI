@@ -1560,7 +1560,8 @@ function active_menu_trail(url) {
   let menu =  jQuery('nav ul.nav');
   menu.find('a').removeClass('active');
   menu_item.addClass('active').parent().addClass('menu-open');
-  menu_item.parents('li.nav-item.has-treeview').addClass('menu-open').find('a:first').addClass('active')
+  menu_item.parents('li.nav-item.has-treeview').addClass('menu-open').find('a:first').addClass('active');
+  menu.find('li.nav-item.has-treeview.menu-is-opening li.nav-item.has-treeview.menu-is-opening a:first:not(.active)').click();
 }
 
 function animate_socketio_messages() {
@@ -1637,7 +1638,7 @@ function uptime_format(duration) {
 function formToJSON( form ) {
   let output = {};
   jQuery.each(form.find('input,select,textarea'),function(counter,item) {
-    console.log(item);
+  //  console.log(item);
     if (!item.disabled && '' != item.name) {
       let key   = item.name;
       let value = item.value;

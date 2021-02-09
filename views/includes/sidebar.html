@@ -237,15 +237,15 @@
               </a>
             </li>
             <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
-              <a href="{{ url_for('page', page='log')}}" class="nav-link" >
-                <i class="fas fa-file-alt nav-icon"></i>
-                <p>{{ _('Log') }}</p>
-              </a>
-            </li>
-            <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
               <a href="{{ url_for('page', page='settings')}}" class="nav-link">
                 <i class="fas fa-cogs nav-icon"></i>
                 <p>{{ _('Settings') }}</p>
+              </a>
+            </li>
+            <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>
+              <a href="{{ url_for('page', page='log')}}" class="nav-link" >
+                <i class="fas fa-file-alt nav-icon"></i>
+                <p>{{ _('Log') }}</p>
               </a>
             </li>
             <li class="nav-item {% if not authenticated %}disabled{% endif %}" {% if not authenticated %}title="{{ _('Login to make changes') }}"{% endif %}>

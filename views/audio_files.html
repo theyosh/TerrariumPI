@@ -127,7 +127,7 @@
       {% if authenticated %}
       jQuery('form#audio_upload input').on('change',function(event){
         let formData = new FormData();
-        console.log(this,event);
+        //console.log(this,event);
         jQuery.each(this.files,function(index,file){
           //console.log(index,file)
           formData.append('audiofiles', file);

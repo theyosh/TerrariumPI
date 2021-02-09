@@ -180,10 +180,13 @@
             update_form.find('input#weahter_source_url').val(data.value);
           }).fail(function(data){
             console.log('Weather setting data not existing:', data);
+
+           /*
             if (404 == data.status) {
               // Setting does not exists, so create a post command for creating a new weather source setting
               update_form.attr({'method' : 'POST', 'action' : '{{ url_for('api:setting_add') }}'});
             }
+            */
           });
         });
 
