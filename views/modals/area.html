@@ -646,7 +646,7 @@ let {{modal_type}}_sensor_select = {{modal_type}}_form.find('select[id$="sensors
 // {{modal_type}}_form.find('.row.area_type:not(.area_lights) select[id$="relays"]').on('change',function(event) {
 {{modal_type}}_form.find('.row.area_type select[id$="relays"]').on('change',function(event) {
   let target = jQuery(event.target);
-  console.log('Relay change', target);
+  //console.log('Relay change', target);
   let relays = target.val();
   let part =  target.attr('name').split('_')[0];
 
@@ -797,7 +797,7 @@ jQuery.when(
 
           if (key.indexOf('_relays') != -1 && value != '') {
             // The relays are set/changed, so fill the extra tweaks fields
-            console.log(key);
+            //console.log(key);
 
             jQuery.each(parsed_data, function(key2,value2) {
               if (key2.indexOf('dimmer_duration') != -1 || key2.indexOf('relay_step') != -1) {
