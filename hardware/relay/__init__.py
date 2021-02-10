@@ -287,8 +287,6 @@ class terrariumRelay(object):
     # Not great, but the set_state has a callback for updates
     return True
 
-
-
   # def off(self, force = False):
   #   return self.set_state(self.OFF, force)
 
@@ -327,42 +325,39 @@ class terrariumRelayDimmer(terrariumRelay):
   TYPE = None
 
   def __init__(self, id, _, address, name = '', prev_state = None, callback = None):
-    print('STart dimmer calling super')
     super().__init__(id, _, address, name, prev_state, callback)
-    print('Back from dimmer super')
     self.running = False
     self.__running = threading.Event()
     self.__thread = None
-    print(f'Added event: {self.__running}')
 
   def __run(self, to, duration):
-    print('Start running the dimmer clear ')
+#    print('Start running the dimmer clear ')
     self.running = True
     self.__running.clear()
-    print('Start again....')
+#    print('Start again....')
 
     current_state = self.state
     steps = abs(to - current_state)
     direction = 1 if current_state < to else -1
     pause_time = duration / steps
 
-    print(f'Starting from {current_state} to {to} in {steps} steps. Per step we wait {pause_time} seconds for total {duration} seconds')
+#    print(f'Starting from {current_state} to {to} in {steps} steps. Per step we wait {pause_time} seconds for total {duration} seconds')
 
     for counter in range(int(steps)):
       if not self.running:
         break
 
       current_state += direction
-      print(f'Set to state: {current_state}')
+#      print(f'Set to state: {current_state}')
       self.set_state(current_state)
       self.__running.wait(timeout=pause_time)
 #      sleep(pause_time)
 
 
-    print('Dimmer is done, resettin the event')
+#    print('Dimmer is done, resettin the event')
     self.__running.set()
     self.running = False
-    print('Complete done with dimmer')
+#    print('Complete done with dimmer')
 #    self.__dimmer_active = False
 
   def calibrate(self, data):
@@ -380,14 +375,15 @@ class terrariumRelayDimmer(terrariumRelay):
         self.on(self.ON,0)
 
   def on(self, value = 100, duration = 0):
-    print(f'Is dimmer currently running: {self.running}')
+ #   print(f'Is dimmer currently running: {self.running}')
     if self.running:
       # For now, we cannot change the value when a dim action is going on... (Maybe we change this later)
       return False
 
-    print(f'Putting {self} on to {value} in {duration} seconds')
+    value = round(value)
+  #  print(f'Putting {self} on to {value} in {duration} seconds')
     value = max(self.OFF,min(self.ON,value))
-    print(f'Putting {self} on to corrected {value} in {duration} seconds')
+  #  print(f'Putting {self} on to corrected {value} in {duration} seconds')
 
     if value == self.state:
       return True
@@ -408,12 +404,12 @@ class terrariumRelayDimmer(terrariumRelay):
 
   def stop(self):
     # Stop the dimmer event (if running..)
-    print('Stop dimmer running event and wait for thread...')
+ #   print('Stop dimmer running event and wait for thread...')
     self.running = False
     self.__running.set()
     self.__thread.join()
 
-    print('Should be done...')
-    print('Call super stop')
+ #   print('Should be done...')
+ #   print('Call super stop')
     super().stop()
-    print('Done calling super... and totally done... no threads/timers left')
+ #   print('Done calling super... and totally done... no threads/timers left')
